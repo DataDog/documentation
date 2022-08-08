@@ -5,7 +5,7 @@ further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
       text: 'Learn more about distributions'
-    - link: 'tracing/setup_overview/open_standards/'
+    - link: 'tracing/trace_collection/open_standards/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
 ---
@@ -121,14 +121,13 @@ You may add all resource attributes as tags by using the `resource_attributes_as
 OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog honors these conventions and tries to use its value as a hostname. The semantic conventions are considered in the following order:
 
 1. `datadog.host.name`, a Datadog-specific hostname convention
-2. `k8s.node.name`, the Kubernetes node name
-3. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
-4. `host.id`, the unique host ID
-5. `host.name`, the system hostname
-6. `container.id`, the container ID
+1. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
+1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions
+1. `host.id`, the unique host ID
+1. `host.name`, the system hostname
 
 If none are present, Datadog assigns a system-level hostname to payloads.
-On the OpenTelemetry Collector, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
+If sending data from a remote host, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
 
 ### Example
 

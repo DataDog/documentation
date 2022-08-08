@@ -1,41 +1,60 @@
 ---
+app_id: cloud-foundry-api
+app_uuid: a0c8e3e8-f3de-4405-88d3-0856e6c0948f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cloud_foundry_api.events.count
+      metadata_path: metadata.csv
+      prefix: cloud_foundry_api.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cloud Foundry API
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - orchestration
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md
-display_name: Cloud Foundry API
+display_on_public_website: true
 draft: false
 git_integration_title: cloud_foundry_api
-guid: 82e5b924-c8c3-4467-bfde-5838857b6447
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
 integration_version: 2.1.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cloud_foundry_api.
-metric_to_check: cloud_foundry_api.events.count
+manifest_version: 2.0.0
 name: cloud_foundry_api
-public_title: Datadog-Cloud Foundry API インテグレーション
+oauth: {}
+public_title: Cloud Foundry API
 short_description: Cloud Foundry 監査イベントの収集。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Orchestration
+  configuration: README.md#Setup
+  description: Cloud Foundry 監査イベントの収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cloud Foundry API
 ---
 
 

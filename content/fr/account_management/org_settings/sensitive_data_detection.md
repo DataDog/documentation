@@ -1,53 +1,58 @@
 ---
-title: Scanner de données sensibles
-kind: documentation
-beta: true
 aliases:
-  - /fr/logs/log_configuration/sensitive_data_detection
+- /fr/logs/log_configuration/sensitive_data_detection
+beta: true
 further_reading:
-  - link: /security/logs/
-    tag: Documentation
-    text: Sécurité
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Log Explorer
-  - link: https://www.datadoghq.com/blog/sensitive-data-scanner/
-    tag: Blog
-    text: Créer une stratégie de conformité des données moderne avec la solution scanner de données sensibles de Datadog
+- link: /security/logs/
+  tag: Documentation
+  text: Sécurité
+- link: /logs/explorer/
+  tag: Documentation
+  text: Log Explorer
+- link: https://www.datadoghq.com/blog/sensitive-data-scanner/
+  tag: Blog
+  text: Créer une stratégie de conformité des données moderne avec la solution scanner
+    de données sensibles de Datadog
+- link: https://www.datadoghq.com/blog/sensitive-data-management-best-practices/
+  tag: Blog
+  text: Meilleures pratiques en matière de gestion des données sensibles
+kind: documentation
+title: Scanner de données sensibles
 ---
+
 ## Présentation
 
-Les données sensibles, telles que les numéros de carte bancaire, les codes bancaires, les clés d'API ou encore les tokens OAuth, sont souvent exposées accidentellement dans les logs d'application et les événements de trace. Cela peut engendrer des risques financiers pour votre organisation et nuire à sa confidentialité.
+Les données sensibles, telles que les numéros de carte bancaire, les codes bancaires et les clés d'API, sont souvent exposées accidentellement dans les logs d'application et les événements de trace. Cela peut engendrer des risques financiers pour votre organisation et nuire à sa confidentialité.
 
-Les entreprises sont souvent tenues d'identifier, de corriger et d'empêcher toute exposition de ces données au sein de leurs logs afin de respecter les stratégies organisationnelles, les exigences de conformité et les réglementations sectorielles en place et de protéger leur confidentialité. C'est notamment le cas des sociétés évoluant dans le secteur banquier, les services financiers, la santé ou encore le domaine des assurances.
+Les entreprises sont souvent tenues d'identifier, de corriger et d'empêcher toute exposition de ces données au sein de leurs logs afin de respecter les stratégies organisationnelles, les exigences de conformité et les réglementations sectorielles en place, et de protéger leur confidentialité. C'est notamment le cas des sociétés évoluant dans le secteur banquier, dans les services financiers, dans la santé ou encore dans les assurances.
 
 ## Scanner de données sensibles
 
-Le scanner de données sensibles est un service de détection d'expressions en temps réel que vous pouvez utiliser pour identifier, taguer et éventuellement censurer ou hacher des données sensibles. Cette implémentation permet à vos équipes de conformité et de sécurité de mettre en place une ligne de défense contre les fuites de données sensibles en dehors de votre organisation.
+Le scanner de données sensibles est un service de détection de patterns en temps réel que vous pouvez utiliser pour identifier, taguer et éventuellement censurer ou hacher des données sensibles. Les équipes Sécurité et Conformité peuvent implémenter le scanner de données sensibles pour mettre en place une ligne de défense afin d'empêcher les fuites de données et de limiter les risques de non-conformité.
 
-Le scanner de données sensibles est disponible dans les [paramètres d'organisation][1]. La bibliothèque du scanner comprend un large éventail de règles pour les expressions couramment détectées, comme les adresses e-mail, les numéros de carte bancaire, les clés d'API, les tokens d'autorisation, etc.
+Le scanner de données sensibles est accessible depuis les [paramètres d'organisation][1].
 
-{{< img src="logs/sensitive_data_scanner/sensitive_data_scanner3.png" alt="Scanner de données sensibles dans les paramètres d'organisation" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_main_apr_22.png" alt="Scanner de données sensibles dans les paramètres d'organisation" style="width:90%;">}}
 
-### Configurer des groupes d'analyse
+### Configuration
 
-- **Définissez des groupes d'analyse :** personnalisez les critères de détection des données à l'aide de pipelines. Définissez une requête pour déterminer les logs à inclure dans le contexte de la règle. Consultez la section [Syntaxe de recherche de logs][2] pour découvrir la syntaxe à utiliser pour effectuer des recherches.
-- **Définissez une règle d'analyse :** créez une règle à l'aide d'expressions régulières prédéfinies provenant de la bibliothèque du scanner Datadog ou créez une règle personnalisée.
+- **Définissez des groupes d'analyse** : un groupe d'analyse est composé d'une requête de filtre définissant les types de logs à analyser, ainsi que d'un ensemble de règles d'analyse indiquant les types de données sensibles à analyser au sein de ces logs. Consultez la section [Syntaxe de recherche de logs][2] pour en savoir plus sur les requêtes de filtre.
+- **Définissez des règles d'analyse** : ajoutez à un groupe d'analyse des règles d'analyse prédéfinies depuis la bibliothèque de règles d'analyse Datadog. Vous avez également la possibilité de créer de toutes pièces vos propres règles afin de baser votre analyse sur des patterns d'expressions régulières.
 
-### Règles personnalisées
+### Règles d'analyse personnalisées
 
-- **Définissez une règle :** indiquez l'expression régulière à détecter dans les événements de log. Utilisez des échantillons de données pour vérifier que votre expression régulière est valide.
-- **Définissez un contexte :** indiquez si vous souhaitez analyser l'ensemble de l'événement de log, ou simplement certains attributs de log. Vous pouvez également choisir d'exclure des attributs spécifiques de l'analyse.
-- **Ajoutez des tags :** spécifiez les tags à associer aux événements de log qui contiennent des valeurs correspondant à l'expression régulière définie. Datadog vous conseille d'utiliser le tag `sensitive_data`. Ces tags peuvent ensuite être utilisés dans les recherches, dashboards et monitors.
-- **Effectuez des opérations sur les valeurs correspondantes :** (facultatif) vous pouvez censurer ou hacher les valeurs correspondantes. Si vous choisissez de les censurer, indiquez le texte fictif à insérer à la place des valeurs. Ces dernières peuvent ainsi être censurées ou hachées avant leur stockage dans Datadog ou leur envoi à votre archive.
+- **Définissez un pattern :** indiquez le pattern d'expression régulière à détecter dans les événements de log. Utilisez des échantillons de données pour vérifier que votre pattern d'expression régulière est valide.
+- **Définissez une portée** : indiquez si vous souhaitez analyser l'ensemble de l'événement de log, ou simplement certains attributs de log. Vous pouvez également choisir d'exclure des attributs spécifiques de l'analyse.
+- **Ajoutez des tags** : spécifiez les tags à associer aux événements de log qui contiennent des valeurs correspondant au pattern d'expression régulière défini. Datadog vous conseille d'utiliser les tags `sensitive_data` et `sensitive_data_category`. Ces tags peuvent ensuite être utilisés dans les recherches, dashboards et monitors.
+- **Traitez les valeurs correspondantes** : vous avez la possibilité de censurer l'intégralité ou une partie des valeurs correspondantes, ou encore de les hacher.  Pour censurer les valeurs, indiquez le texte à afficher à la place des valeurs. Si vous optez pour une censure partielle, spécifiez la position (début/fin) et la longueur (nombre de caractères) de la censure des valeurs correspondantes. Les opérations de censure, de censure partielle et de hachage sont toutes les trois irréversibles.
 - **Attribuez un nom à la règle :** fournissez un nom lisible pour la règle.
 
-{{< img src="logs/sensitive_data_scanner/scanner_custom_rule2.png" alt="Une règle personnalisée du scanner de données sensibles" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_rule_apr_22.png" alt="Une règle personnalisée du scanner de données sensibles" style="width:90%;">}}
 
-### Bibliothèque du scanner
+### Règles d'analyse prêtes à l'emploi
 
-Sélectionnez la règle de votre choix dans la bibliothèque du scanner et cliquez sur **Add** pour commencer à la personnaliser.
-{{< img src="logs/sensitive_data_scanner/scanner_library.png" alt="Bibliothèque du scanner"  style="width:90%;">}}
+La bibliothèque de règles d'analyse rassemble un nombre croissant de règles prédéfinies gérées par Datadog. Celles-ci permettent de détecter des patterns courants, comme des adresses e-mails, des numéros de carte bancaire, des clés d'API, des tokens d'autorisation, et plus encore.
+{{< img src="logs/sensitive_data_scanner/sds_library_apr_22.png" alt="Bibliothèque de règles d'analyse" style="width:90%;">}}
 
 ### Autorisations
 
@@ -59,10 +64,17 @@ Par défaut, les utilisateurs disposant du rôle Admin Datadog sont autorisés �
 
 Contrôlez les utilisateurs pouvant accéder aux événements de log contenant des données sensibles. Utilisez les tags ajoutés par le scanner de données sensibles pour créer des requêtes appliquant une logique RBAC et restreindre l'accès de certaines personnes ou équipes, jusqu'à ce que les données dépassent leur période de rétention.
 
+### Dashboard prêt à l'emploi
+
+Lorsque le scanner de données sensibles est activé, un [dashboard][4] prêt à l'emploi est automatiquement ajouté à votre compte. Il synthétise les découvertes sur les données sensibles.
+
+{{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Dashboard de synthèse sur le scanner de données sensibles" style="width:70%;">}}
+
+Pour consulter ce dashboard, accédez à **Dashboards > Dashboards List** et cherchez `Sensitive Data Scanner Overview`.
+
 **Remarques :**
 - Les règles que vous ajoutez ou modifiez affectent uniquement les données envoyées à Datadog après l'application des règles.
 - Le scanner de données sensibles ne modifie en aucun cas les règles que vous définissez directement sur l'Agent Datadog.
-- Le nettoyage et le hachage d'attributs dans les événements de log sont irréversibles. Testez vos règles sur un échantillon de données avant de les activer sur des données de production.
 - Pour désactiver complètement le scanner de données sensibles, désactivez chaque groupe d'analyse et règle d'analyse en désactivant l'interrupteur en regard de chaque élément.
 
 ## Pour aller plus loin
@@ -73,3 +85,4 @@ Contrôlez les utilisateurs pouvant accéder aux événements de log contenant d
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [2]: /fr/logs/explorer/search_syntax/
 [3]: /fr/logs/guide/logs-rbac-permissions/?tab=ui#overview
+[4]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner

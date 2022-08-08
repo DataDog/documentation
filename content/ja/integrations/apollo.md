@@ -1,18 +1,17 @@
 ---
 aliases:
-  - /ja/integrations/apollo_engine
+- /ja/integrations/apollo_engine
 assets:
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - モニター
-  - キャッシュ
+- モニター
+- キャッシュ
 creates_events: false
-ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
 display_name: Apollo Engine
 draft: false
 git_integration_title: apollo
@@ -26,17 +25,20 @@ maintainer: sachin@apollographql.com
 manifest_version: 1.0.0
 metric_prefix: apollo.
 metric_to_check:
-  - apollo.operations.count
-  - apollo.engine.operations.count
+- apollo.operations.count
+- apollo.engine.operations.count
 name: apollo
-public_title: Datadog-Apollo インテグレーション
+public_title: Apollo
 short_description: GraphQL インフラストラクチャーのパフォーマンスを監視
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Apollo と Datadog のインテグレーションにより、Studio のパフォーマンスメトリクスを Datadog アカウントに転送できます。Datadog は高度な機能 API をサポートしているため、GraphQL メトリクスのグラフとアラートを作成することもできます。

@@ -11,19 +11,19 @@ assets:
     nagios_processes: assets/saved_views/nagios_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
-  - notification
-  - log collection
+- monitoring
+- notification
+- log collection
 creates_events: true
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_name: Nagios
 draft: false
 git_integration_title: nagios
 guid: f7629918-751c-4a05-87e7-0e3de34e51e7
 integration_id: nagios
 integration_title: Nagios
+integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -32,20 +32,30 @@ metric_prefix: nagios.
 metric_to_check: nagios.host.rta
 name: nagios
 process_signatures:
-  - nagios
-public_title: Datadog-Nagios インテグレーション
+- nagios
+public_title: Nagios インテグレーション
 short_description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Nagios が監視するインフラストラクチャーから Datadog にイベントを送信してアラートを強化すると共に、Datadog が監視するインフラストラクチャーから取得されたメトリクスを Nagios のイベントと関連付けることができます。
 
-このチェックは、Nagios サーバーのログを監視し、Datadog イベントストリームにイベントを送信します。また、サービスのフラップ、ホスト状態の変化、パッシブサービスチェック、ホストとサービスのダウンタイムなどを追跡します。このチェックは、Nagios パフォーマンスデータをメトリクスとして Datadog に送信することもできます。
+このチェックは、Nagios サーバーのログを監視し、以下のイベントを Datadog に送信します。
+
+- サービスフラップ
+- ホストの状態変化
+- パッシブサービスチェック
+- ホストとサービスのダウンタイム
+
+このチェックは、Nagios のパフォーマンスデータを Datadog にメトリクスとして送信することもできます。
 
 ## セットアップ
 
@@ -73,7 +83,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 {{% /tab %}}
 {{% tab "Containerized" %}}

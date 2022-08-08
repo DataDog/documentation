@@ -32,10 +32,10 @@ Datadog に送信したくないトレースのセットをプログラムで特
 環境変数を使って、必要とするスパンタグや拒否するスパンタグを指定することができます。
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。
+: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT=key:value` です。
 
 `DD_APM_FILTER_TAGS_REJECT`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。
+: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT=key:value` です。
 
 または、Agent のコンフィギュレーションファイルでこれらを設定することもできます。
 
@@ -121,6 +121,7 @@ Datadog Agent をスピンアップするための docker run コマンドに、
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -236,13 +237,13 @@ Ruby トレーサーには、特定の条件を満たすトレースを削除す
 たとえば、リソース名が `Api::HealthchecksController#index` である場合、そのリソース名を含むトレースを削除するために `trace.delete_if` メソッドを使用します。このフィルターは、[スパンオブジェクト][2]で利用可能な他のメタデータを照合するためにも使用できます。
 
 ```
-Datadog::Tracing::Pipeline.before_flush do |trace|
+Datadog::Tracing.before_flush do |trace|
   trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
 end
 ```
 
-[1]: /ja/tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /ja/tracing/setup_overview/setup/ruby/#manual-instrumentation-2
+[1]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -312,7 +313,7 @@ public class GreetingController {
 }
 ```
 
-[1]: /ja/tracing/setup_overview/custom_instrumentation/java/#extending-tracers
+[1]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -320,5 +321,5 @@ public class GreetingController {
 
 [1]: /ja/help/
 [2]: /ja/tracing/guide/add_span_md_and_graph_it/
-[3]: /ja/tracing/setup_overview/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[3]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
 [4]: https://golang.org/pkg/regexp/

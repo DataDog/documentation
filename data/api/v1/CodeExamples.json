@@ -51,6 +51,21 @@
   "CreateDashboard": [
     {
       "group": "dashboards",
+      "suffix": "_1442588603",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3882428227",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions events query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_252716965",
+      "description": "Create a distribution widget using a histogram request containing a formulas and functions metrics query"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
     },
@@ -409,6 +424,18 @@
       "description": "Query timeseries points returns \"OK\" response"
     }
   ],
+  "SubmitDistributionPoints": [
+    {
+      "group": "metrics",
+      "suffix": "_3109558960",
+      "description": "Submit deflate distribution points returns \"Payload accepted\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "Submit distribution points returns \"Payload accepted\" response"
+    }
+  ],
   "SubmitMetrics": [
     {
       "group": "metrics",
@@ -664,6 +691,13 @@
       "description": "Get an SLO's history returns \"OK\" response"
     }
   ],
+  "SearchSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "",
+      "description": "Search for SLOs returns \"OK\" response"
+    }
+  ],
   "UpdateSLO": [
     {
       "group": "service_level_objectives",
@@ -743,11 +777,37 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
+  "GetBrowserTestResult": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get a browser test result returns \"OK\" response"
+    }
+  ],
+  "GetBrowserTestLatestResults": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get a browser test's latest results summaries returns \"OK\" response"
+    }
+  ],
   "GetAPITestResult": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get an API test result returns \"OK\" response"
+    },
     {
       "group": "synthetics",
       "suffix": "_1321866518",
       "description": "Get an API test result returns result with failure object"
+    }
+  ],
+  "GetAPITestLatestResults": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Get an API test's latest results summaries returns \"OK\" response"
     }
   ],
   "TriggerTests": [
@@ -781,7 +841,7 @@
   "GetUsageCIApp": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1064440884",
       "description": "Get hourly usage for CI Visibility returns \"OK\" response"
     }
   ],
@@ -795,14 +855,14 @@
   "GetUsageCWS": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_736958514",
       "description": "Get hourly usage for Cloud Workload Security returns \"OK\" response"
     }
   ],
   "GetUsageDBM": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_3446806203",
       "description": "Get hourly usage for Database Monitoring returns \"OK\" response"
     }
   ],
@@ -823,49 +883,49 @@
   "GetUsageLambda": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_3132428705",
       "description": "Get hourly usage for Lambda returns \"OK\" response"
     }
   ],
   "GetUsageLogsByIndex": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1025184776",
       "description": "Get hourly usage for Logs by Index returns \"OK\" response"
     }
   ],
   "GetUsageLogs": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_2562396405",
       "description": "Get hourly usage for Logs returns \"OK\" response"
     }
   ],
   "GetUsageNetworkFlows": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1239422069",
       "description": "Get hourly usage for Network Flows returns \"OK\" response"
     }
   ],
   "GetUsageNetworkHosts": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1249907835",
       "description": "Get hourly usage for Network Hosts returns \"OK\" response"
     }
   ],
   "GetUsageOnlineArchive": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1501172903",
       "description": "Get hourly usage for Online Archive returns \"OK\" response"
     }
   ],
   "GetUsageRumSessions": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_714937291",
       "description": "Get hourly usage for RUM Sessions returns \"OK\" response"
     },
     {
@@ -877,7 +937,7 @@
   "GetUsageRumUnits": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_3959755399",
       "description": "Get hourly usage for RUM Units returns \"OK\" response"
     }
   ],
@@ -891,21 +951,21 @@
   "GetUsageSDS": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_271128478",
       "description": "Get hourly usage for Sensitive Data Scanner returns \"OK\" response"
     }
   ],
   "GetUsageSyntheticsAPI": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_4048033529",
       "description": "Get hourly usage for Synthetics API Checks returns \"OK\" response"
     }
   ],
   "GetUsageSyntheticsBrowser": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1704663299",
       "description": "Get hourly usage for Synthetics Browser Checks returns \"OK\" response"
     }
   ],

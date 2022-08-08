@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /integrations/supervisor
+- /ja/integrations/supervisor
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -13,19 +13,19 @@ assets:
     supervisord_processes: assets/saved_views/supervisord_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - os & system
-  - autodiscovery
-  - log collection
+- os & system
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
+- https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
 display_name: Supervisord
 draft: false
 git_integration_title: supervisord
 guid: 2b81259b-723e-47be-8612-87e1f64152e9
 integration_id: supervisord
 integration_title: Supervisord
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -34,16 +34,19 @@ metric_prefix: supervisord.
 metric_to_check: supervisord.process.count
 name: supervisord
 process_signatures:
-  - python supervisord
-  - supervisord
-public_title: Datadog-Supervisord インテグレーション
+- python supervisord
+- supervisord
+public_title: Supervisord インテグレーション
 short_description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Supervisor イベント][1]
 
 ## 概要
@@ -64,7 +67,7 @@ Agent は、HTTP サーバーまたは UNIX ソケットを介して、Superviso
 
 ##### HTTP サーバー
 
-以下のブロックを Supervisor のメインコンフィギュレーションファイル (`/etc/supervisor.conf` など) に追加します。
+以下のブロックを Supervisor のメインコンフィギュレーションファイル (`/etc/supervisor.conf`) に追加します。
 
 ```ini
 [inet_http_server]
@@ -89,7 +92,7 @@ chown=nobody:nogroup
 ;password=pass  # 任意
 ```
 
-Supervisor がルートとして実行されている場合は、非ルートユーザー (dd-agent など) がソケットを読み取れるように、必ず `chmod` または `chown` を設定します。
+Supervisor がルートとして実行されている場合は、非ルートユーザー (`dd-agent` など) がソケットを読み取れるように、必ず `chmod` または `chown` を設定します。
 
 ---
 
@@ -117,7 +120,7 @@ instances:
   #   socket: unix:///var/run/supervisor.sock
 ```
 
-`proc_names` オプションや `proc_regex` オプションを使用して、Agent がメトリクスを収集してサービスチェックを作成する対象プロセスのリストを作成します。どちらのオプションも指定しなかった場合、Agent は Supervisor の _すべて_ の子プロセスを追跡します。両方のオプションを指定した場合、Agent は両方のリストのプロセスを追跡します (2 つのオプションは相互排他ではありません) 。
+`proc_names` オプションや `proc_regex` オプションを使用して、Agent がメトリクスを収集してサービスチェックを作成する対象プロセスのリストを作成します。どちらのオプションも指定しなかった場合、Agent は Supervisor の _すべて_ の子プロセスを追跡します。両方のオプションを指定した場合、Agent は両方のリストのプロセスを追跡します。つまり 2 つのオプションは相互排他ではありません。
 
 他のチェックオプションの詳細については、[チェック構成の例][2]を参照してください。
 
@@ -145,6 +148,8 @@ instances:
 
 #### ログの収集
 
+
+
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
@@ -167,7 +172,7 @@ instances:
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `supervisord` を探します。
+[Agent の status サブコマンド][5]を実行し、Checks セクションで `supervisord` を探します。
 
 ## 収集データ
 

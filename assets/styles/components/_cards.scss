@@ -111,12 +111,15 @@
 
 .network-layers {
   .cards-dd {
-    @include media-breakpoint-only(xs) {
-      .card {   
-        .img-fluid {
-          max-height: 150px;
-          width: auto;
-        }
+    @include media-breakpoint-up(lg) {
+      .card img {
+        max-width: 80%;
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      .card img {
+        max-width: 50%;
       }
     }
   }

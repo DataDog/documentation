@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awssqs/
+- /ja/integrations/awssqs/
 categories:
-  - cloud
-  - processing
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- processing
+- aws
+- log collection
 dependencies: []
 description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_sqs/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_sqs/
 draft: false
 git_integration_title: amazon_sqs
 has_logo: true
 integration_id: amazon-sqs
 integration_title: Amazon SQS
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon SQS インテグレーション
 short_description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS ダッシュボード" popup="true">}}
 
 ## 概要
@@ -45,7 +46,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
     - `sqs:ListQueues`: 有効なキューを一覧表示するために使用されます。
     - `tag:GetResources`: SQS のキューに適用されているカスタムタグを取得します。
 
-    SQS ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+    詳細については、AWS ウェブサイト上の [SQS ポリシー][4]を参照してください。
 
 3. [Datadog - AWS SQS インテグレーション][5]をインストールします。
 
@@ -73,7 +74,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 {{< get-metrics-from-git "amazon_sqs" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -90,10 +91,10 @@ AWS SQS インテグレーションには、サービスのチェック機能は
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sqs.html
+[4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_sqs
 [6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [8]: https://app.datadoghq.com/logs
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
 [10]: https://docs.datadoghq.com/ja/help/

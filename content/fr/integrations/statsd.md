@@ -9,19 +9,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - monitoring
-  - autodiscovery
-  - log collection
+- monitoring
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/statsd/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
 display_name: StatsD
 draft: false
 git_integration_title: statsd
 guid: 4830acf3-626b-42ff-a1db-3f37babd0ae6
 integration_id: statsd
 integration_title: StatsD
+integration_version: 1.10.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,13 +31,17 @@ metric_prefix: statsd.
 metric_to_check: statsd.counters.count
 name: statsd
 public_title: Intégration Datadog/StatsD
-short_description: Surveillez la disponibilité des serveurs StatsD et suivez le nombre de métriques.
+short_description: Surveillez la disponibilité des serveurs StatsD et suivez le nombre
+  de métriques.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check surveille la disponibilité et l'uptime des serveurs StatsD hors Datadog. Il permet également de suivre le nombre de métriques, par type de métrique, reçues par StatsD.
@@ -114,7 +119,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `statsd` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][4] et cherchez `statsd` dans la section Checks.
 
 ## Données collectées
 
@@ -127,12 +132,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check StatsD n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "statsd" >}}
 
-**statsd.is_up** :<br>
-Renvoie `CRITICAL` si le serveur StatsD ne répond à la requête de statut de santé de l'Agent. Si ce n'est pas le cas, renvoie `OK`.
-
-**statsd.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir de métriques à propos de StatsD. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -140,9 +141,11 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
-Si vous ne connaissez pas StatsD et que vous ne savez pas comment il fonctionne, consultez [notre article de blog à ce sujet][6]
+Documentation, liens et articles supplémentaires utiles :
 
-Pour mieux comprendre comment (ou pourquoi) visualiser les métriques StatsD avec les graphiques de nombres sur Datadog, lisez notre [série d'articles de blog][7] à ce sujet.
+- [StatsD : fonctionnement et utilité][6]
+- [Visualiser des métriques StatsD en représentant des counts dans des graphiques][7]
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

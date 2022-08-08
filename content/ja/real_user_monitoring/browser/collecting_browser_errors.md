@@ -154,13 +154,14 @@ try {
 - ウェブサイトに、プロバイダーのサーバー上でホストされるサードパーティの JavaScript ライブラリが含まれている。
 
 以下の 2 つのステップに従ってクロスオリジンスクリプトを可視化します。
-1. `crossorigin="anonymous"` で JavaScript ライブラリをコールします。
+1. [`crossorigin="anonymous"`][7] で JavaScript ライブラリをコールします。
 
    `crossorigin="anonymous"` で、スクリプトをフェッチするリクエストが安全に実行されます。Cookie や HTTP 認証を介して機密データが転送されることはありません。
 
-2. `Access-Control-Allow-Origin` HTTP ヘッダーを構成します。　
+2. [`Access-Control-Allow-Origin`][8] HTTP レスポンスヘッダーを構成します。
 
-   このヘッダーで最も一般的な値は `Access-Control-Allow-Origin: *` で、すべてのオリジンとリソースのフェッチを許可します。代わりに、設定 (例: `Access-Control-Allow-Origin: www.example.com`) でリソースにアクセスできるオリジンの種類を制限することもできます。
+    - すべてのオリジンがリソースを取得できるようになる `Access-Control-Allow-Origin: *` 
+    - 許可された 1 つのオリジンを指定する `Access-Control-Allow-Origin: example.com`。サーバーが複数のオリジンのクライアントをサポートする場合、リクエストを行う特定のクライアントのオリジンを返さなければなりません。
 
 ## その他の参考資料
 
@@ -173,3 +174,5 @@ try {
 [4]: /ja/real_user_monitoring/error_tracking
 [5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
+[7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+[8]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin

@@ -309,7 +309,7 @@ To define your HTTP request:
      * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
      * Allow insecure certificates: Toggle to have your HTTP test continue the connection even if there is an error when validating the certificate.
      * Headers: Defined headers override the default browser headers.
-     * Authentication: HTTP basic authentication with username and password
+     * Authentication: HTTP Basic Auth, Digest Auth, NTLM, AWS SigV4, and client certificates.
      * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
      * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 3. Click **Test URL** to test your request configuration. This results in a preview showing response data.

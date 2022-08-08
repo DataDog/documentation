@@ -4,7 +4,6 @@ aliases:
 categories:
 - cloud
 - aws
-ddtype: crawler
 dependencies: []
 description: AWS サービス間で交わされるリクエストをトレース
 doc_link: https://docs.datadoghq.com/integrations/amazon_xray/

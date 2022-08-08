@@ -10,19 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - autodiscovery
-  - log collection
+- processing
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
 display_name: MapReduce
 draft: false
 git_integration_title: mapreduce
 guid: 1c143492-84ac-42d2-89d5-a45c718092b0
 integration_id: mapreduce
 integration_title: Map Reduce
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,14 +30,17 @@ manifest_version: 1.0.0
 metric_prefix: mapreduce.
 metric_to_check: mapreduce.job.elapsed_time.max
 name: mapreduce
-public_title: Datadog-Map Reduce インテグレーション
+public_title: Map Reduce インテグレーション
 short_description: マップのステータスと期間を監視し、タスクを削減。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![MapReduce ダッシュボード][1]
 
 ## 概要
@@ -66,22 +69,6 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 2. [Agent を再起動します][3]。
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
-
-#### コンテナ化
-
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
-
-| パラメーター            | 値                                                                                         |
-| -------------------- | --------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `mapreduce`                                                                                   |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                 |
-| `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
-
 ##### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
@@ -107,18 +94,41 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 3. [Agent を再起動します][3]。
 
-Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][4]を参照してください。
-
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/docker/log/
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
+#### コンテナ化
+
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+
+| パラメーター            | 値                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------- |
+| `<インテグレーション名>` | `mapreduce`                                                                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                 |
+| `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
+
+##### ログの収集
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
+
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source": "mapreduce", "service": "<SERVICE_NAME>"}]'
+```
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `mapreduce` を検索します。
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `mapreduce` を検索します。
 
 ## 収集データ
 

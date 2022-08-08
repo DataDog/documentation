@@ -30,7 +30,7 @@ further_reading:
 
 The RUM Browser SDK generates events that have associated metrics and attributes. Every RUM event has all of the [default attributes](#default-attributes), for example, the URL of the page (`view.url`) and user information such as their device type (`device.type`) and their country (`geo.country`).
 
-There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.loading_time` is associated with "view" events and the attribute `resource.method` is associated with "resource" events.
+There are additional [metrics and attributes specific to a given event type](#event-specific-metrics-and-attributes). For example, the `view.loading_time` metric is associated with view events, and the `resource.method` attribute is associated with resource events.
 
 | Event Type     | Retention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -55,7 +55,8 @@ Each of these event types has the following attributes attached by default, so y
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
 | `type`     | string | The type of the event (for example, `view` or `resource`).             |
-| `application.id` | string | The Datadog application ID. |
+| `application.id` | string | The Datadog application ID generated when you create a RUM application. |
+| `service`     | string | A service denotes a set of pages built by a team or offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking][1].             |
 
 ### View attributes
 
@@ -64,7 +65,7 @@ RUM action, error, resource, and long task events contain information about the 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
-| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][1].|
+| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][2].|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
 | `view.url`                     | string | The view URL.                                                                                                  |
 | `view.url_hash`                     | string | The hash part of the URL.|
@@ -102,17 +103,17 @@ The following attributes are related to the geo-location of IP addresses:
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`         | string | Name of the country.                                                                                                                  |
-| `geo.country_iso_code`     | string | [ISO Code][2] of the country (for example, `US` for the United States or `FR` for France).                                                  |
+| `geo.country_iso_code`     | string | [ISO Code][3] of the country (for example, `US` for the United States or `FR` for France).                                                  |
 | `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
 | `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
 | `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).                    |
 | `geo.city`            | string | The name of the city (for example, `Paris` or `New York`).                                                                                   |
 
-**Note**: By default, Datadog stores the client IP address. If you want to stop collecting IP addresses, [contact Support][3]. This does not impact the collection of geo-location attributes listed above.
+**Note**: By default, Datadog stores the client IP address. If you want to stop collecting IP addresses, [contact Support][4]. This does not impact the collection of geo-location attributes listed above.
 
 ### User attributes
 
-In addition to default attributes, you can add user-related data to all RUM event types by [identifying user sessions][4]. This lets you follow the journey of a given user, figure out which users are the most impacted by errors, and monitor performance for your most important users.
+In addition to default attributes, you can add user-related data to all RUM event types by [identifying user sessions][5]. This lets you follow the journey of a given user, figure out which users are the most impacted by errors, and monitor performance for your most important users.
 
 ## Event-specific metrics and attributes
 
@@ -132,9 +133,9 @@ In addition to default attributes, you can add user-related data to all RUM even
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `session.id`                      | string | Randomly generated ID for each session.                                                                      |
-| `session.ip`                      | string | Client ip address. If you want to stop collecting this attribute, [contact Support][3].                                                                       |
+| `session.ip`                      | string | Client ip address. If you want to stop collecting this attribute, [contact Support][4].                                                                       |
 | `session.is_active`                      | boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.                                                                     |
-| `session.type`                     | string | The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests][5] are excluded from billing. |
+| `session.type`                     | string | The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests][6] are excluded from billing. |
 | `session.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed. |
 | `session.initial_view.id`        | string | The id of the first RUM view generated by the user. |
 | `session.initial_view.url_host`        | string | The host part of the URL. |
@@ -158,12 +159,12 @@ In addition to default attributes, you can add user-related data to all RUM even
 | `view.largest_contentful_paint` | number (ns) | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered.                                                                                                |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where `0` means that no shifts are happening.                                                                               |
-| `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][6].                                                                             |
-| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][7].                               |
-| `view.dom_interactive`          | number (ns) | Time until the parser finishes its work on the main document. [More info from the MDN documentation][8].                                                                                                         |
-| `view.dom_content_loaded`       | number (ns) | Time until the load event is fired and the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][9]. |
-| `view.dom_complete`             | number (ns) | Time until the page and all of the subresources are ready. The loading spinner has stopped spinning for the user. [More info from the MDN documentation][10].                                                                       |
-| `view.load_event`               | number (ns) | Time until the load event is fired, indicating the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][11].                                                                             |
+| `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][7].                                                                             |
+| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][8].                               |
+| `view.dom_interactive`          | number (ns) | Time until the parser finishes its work on the main document. [More info from the MDN documentation][9].                                                                                                         |
+| `view.dom_content_loaded`       | number (ns) | Time until the load event is fired and the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][10]. |
+| `view.dom_complete`             | number (ns) | Time until the page and all of the subresources are ready. The loading spinner has stopped spinning for the user. [More info from the MDN documentation][11].                                                                       |
+| `view.load_event`               | number (ns) | Time until the load event is fired, indicating the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][12].                                                                             |
 | `view.error.count`              | number      | Count of all errors collected for this view.                                                                                                                                                                          |
 | `view.long_task.count`          | number      | Count of all long tasks collected for this view.                                                                                                                                                                      |
 | `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                       |
@@ -171,7 +172,7 @@ In addition to default attributes, you can add user-related data to all RUM even
 
 ### Resource timing metrics
 
-Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][12].
+Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][13].
 
 | Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -220,7 +221,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 #### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][13].
+Source errors include code-level information about the error. For more information about different error types, see the [MDN documentation][13].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -246,23 +247,32 @@ Source errors include code-level information about the error. More information a
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 | `action.name` | string | User-friendly name created (for example, `Click on #checkout`). For [Custom User Actions][15], the action name given in the API call. |
 
+### Frustration signals fields
+
+| Field                | Type   | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `session.frustration.count`     | number | Count of all frustration signals associated with one session. |
+| `view.frustration.count`        | number | Count of all frustration signals associated with one view.    |
+| `action.frustration.type:dead_click`  | string | The dead clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:rage_click`  | string | The rage clicks detected by the RUM Browser SDK.              |
+| `action.frustration.type:error_click` | string | The error clicks detected by the RUM Browser SDK.             |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
-[2]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[3]: /help/
-[4]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
-[5]: /synthetics/browser_tests/
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
-[7]: https://www.w3.org/TR/paint-timing/#sec-terminology
-[8]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
-[9]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-[10]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-[11]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[3]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[4]: /help/
+[5]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
+[6]: /synthetics/browser_tests/
+[7]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[8]: https://www.w3.org/TR/paint-timing/#sec-terminology
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [14]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
 [15]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions

@@ -1,43 +1,64 @@
 ---
+app_id: airflow
+app_uuid: ed426432-3df4-4ab8-ab2f-a5a85900c59b
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Airflow Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: airflow.dagbag_size
+      metadata_path: metadata.csv
+      prefix: airflow。
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Airflow
   logs:
     source: airflow
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - 処理
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/airflow/README.md
-display_name: Airflow
+display_on_public_website: true
 draft: false
 git_integration_title: airflow
-guid: f55d88b1-1c0a-4a23-a2df-9516b50050dd
 integration_id: airflow
 integration_title: Airflow
-integration_version: 3.1.0
+integration_version: 3.1.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: airflow。
-metric_to_check: airflow.dagbag_size
+manifest_version: 2.0.0
 name: airflow
-public_title: Datadog-Airflow インテグレーション
+oauth: {}
+public_title: Airflow
 short_description: DAG、タスク、プール、エグゼキューターなどに関するメトリクスを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: DAG、タスク、プール、エグゼキューターなどに関するメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Airflow
 ---
 
 
@@ -81,7 +102,7 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
 - [Airflow メトリクス][4]
 - [Airflow メトリクス構成][5]
 
-**注**: Airflow により報告される StatsD メトリクスの有無は、使用される Airflow エグゼキューターにより異なる場合があります。たとえば、`airflow.ti_failures/successes、airflow.operator_failures/successes、airflow.dag.task.duration` は [`KubernetesExecutor` に報告されません][6]。
+**注**: Airflow により報告される StatsD メトリクスの有無は、使用される Airflow エグゼキューターにより異なる場合があります。たとえば、`airflow.ti_failures/successes`、`airflow.operator_failures/successes`、`airflow.dag.task.duration` は [`KubernetesExecutor` に報告されません][6]。
 
 1. [Airflow StatsD プラグイン][7]をインストールします。
 
@@ -150,11 +171,11 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
            name: "airflow.pool.open_slots"
            tags:
              pool_name: "$1"
-         - match: "pool.queued_slots.*"
+         - match: "airflow.pool.queued_slots.*"
            name: "airflow.pool.queued_slots"
            tags:
              pool_name: "$1"
-         - match: "pool.running_slots.*"
+         - match: "airflow.pool.running_slots.*"
            name: "airflow.pool.running_slots"
            tags:
              pool_name: "$1"
@@ -197,11 +218,11 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
            name: "airflow.dagrun.schedule_delay"
            tags:
              dag_id: "$1"
-         - match: 'scheduler.tasks.running'
+         - match: 'airflow.scheduler.tasks.running'
            name: "airflow.scheduler.tasks.running"
-         - match: 'scheduler.tasks.starving'
+         - match: 'airflow.scheduler.tasks.starving'
            name: "airflow.scheduler.tasks.starving"
-         - match: sla_email_notification_failure
+         - match: 'airflow.sla_email_notification_failure'
            name: 'airflow.sla_email_notification_failure'
          - match: 'airflow\.task_removed_from_dag\.(.*)'
            match_type: "regex"
@@ -217,16 +238,16 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
            name: "airflow.task.instance_created"
            tags:
              task_class: "$1"
-         - match: "ti.start.*.*"
+         - match: "airflow.ti.start.*.*"
            name: "airflow.ti.start"
            tags:
-             dagid: "$1"
-             taskid: "$2"
-         - match: "ti.finish.*.*.*"
+             dag_id: "$1"
+             task_id: "$2"
+         - match: "airflow.ti.finish.*.*.*"
            name: "airflow.ti.finish"
            tags:
-             dagid: "$1"
-             taskid: "$2"
+             dag_id: "$1"
+             task_id: "$2"
              state: "$3"
    ```
 
@@ -362,7 +383,7 @@ Airflow StatsD コンフィギュレーションは、Kubernetes デプロイメ
   env: 
     - name: DD_DOGSTATSD_MAPPER_PROFILES
       value: >
-        [{"prefix":"airflow.","name":"airflow","mappings":[{"name":"airflow.job.start","match":"airflow.*_start","tags":{"job_name":"$1"}},{"name":"airflow.job.end","match":"airflow.*_end","tags":{"job_name":"$1"}},{"name":"airflow.job.heartbeat.failure","match":"airflow.*_heartbeat_failure","tags":{"job_name":"$1"}},{"name":"airflow.operator_failures","match":"airflow.operator_failures_*","tags":{"operator_name":"$1"}},{"name":"airflow.operator_successes","match":"airflow.operator_successes_*","tags":{"operator_name":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_runtime","match":"airflow\\.dag_processing\\.last_runtime\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_run.seconds_ago","match":"airflow\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag.loading_duration","match":"airflow\\.dag\\.loading-duration\\.(.*)","tags":{"dag_file":"$1"}},{"name":"airflow.dagrun.first_task_scheduling_delay","match":"airflow.dagrun.*.first_task_scheduling_delay","tags":{"dag_id":"$1"}},{"name":"airflow.pool.open_slots","match":"airflow.pool.open_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.queued_slots","match":"pool.queued_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.running_slots","match":"pool.running_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.used_slots","match":"airflow.pool.used_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.starving_tasks","match":"airflow.pool.starving_tasks.*","tags":{"pool_name":"$1"}},{"match_type":"regex","name":"airflow.dagrun.dependency_check","match":"airflow\\.dagrun\\.dependency-check\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task.duration","match":"airflow\\.dag\\.(.*)\\.([^.]*)\\.duration","tags":{"dag_id":"$1","task_id":"$2"}},{"match_type":"regex","name":"airflow.dag_processing.last_duration","match":"airflow\\.dag_processing\\.last_duration\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.success","match":"airflow\\.dagrun\\.duration\\.success\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.failed","match":"airflow\\.dagrun\\.duration\\.failed\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.schedule_delay","match":"airflow\\.dagrun\\.schedule_delay\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.scheduler.tasks.running","match":"scheduler.tasks.running"},{"name":"airflow.scheduler.tasks.starving","match":"scheduler.tasks.starving"},{"name":"airflow.sla_email_notification_failure","match":"sla_email_notification_failure"},{"match_type":"regex","name":"airflow.dag.task_removed","match":"airflow\\.task_removed_from_dag\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task_restored","match":"airflow\\.task_restored_to_dag\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.task.instance_created","match":"airflow.task_instance_created-*","tags":{"task_class":"$1"}},{"name":"airflow.ti.start","match":"ti.start.*.*","tags":{"dagid":"$1","taskid":"$2"}},{"name":"airflow.ti.finish","match":"ti.finish.*.*.*","tags":{"dagid":"$1","state":"$3","taskid":"$2"}}]}]
+        [{"prefix":"airflow.","name":"airflow","mappings":[{"name":"airflow.job.start","match":"airflow.*_start","tags":{"job_name":"$1"}},{"name":"airflow.job.end","match":"airflow.*_end","tags":{"job_name":"$1"}},{"name":"airflow.job.heartbeat.failure","match":"airflow.*_heartbeat_failure","tags":{"job_name":"$1"}},{"name":"airflow.operator_failures","match":"airflow.operator_failures_*","tags":{"operator_name":"$1"}},{"name":"airflow.operator_successes","match":"airflow.operator_successes_*","tags":{"operator_name":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_runtime","match":"airflow\\.dag_processing\\.last_runtime\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag_processing.last_run.seconds_ago","match":"airflow\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dag.loading_duration","match":"airflow\\.dag\\.loading-duration\\.(.*)","tags":{"dag_file":"$1"}},{"name":"airflow.dagrun.first_task_scheduling_delay","match":"airflow.dagrun.*.first_task_scheduling_delay","tags":{"dag_id":"$1"}},{"name":"airflow.pool.open_slots","match":"airflow.pool.open_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.queued_slots","match":"airflow.pool.queued_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.running_slots","match":"airflow.pool.running_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.used_slots","match":"airflow.pool.used_slots.*","tags":{"pool_name":"$1"}},{"name":"airflow.pool.starving_tasks","match":"airflow.pool.starving_tasks.*","tags":{"pool_name":"$1"}},{"match_type":"regex","name":"airflow.dagrun.dependency_check","match":"airflow\\.dagrun\\.dependency-check\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task.duration","match":"airflow\\.dag\\.(.*)\\.([^.]*)\\.duration","tags":{"dag_id":"$1","task_id":"$2"}},{"match_type":"regex","name":"airflow.dag_processing.last_duration","match":"airflow\\.dag_processing\\.last_duration\\.(.*)","tags":{"dag_file":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.success","match":"airflow\\.dagrun\\.duration\\.success\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.duration.failed","match":"airflow\\.dagrun\\.duration\\.failed\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dagrun.schedule_delay","match":"airflow\\.dagrun\\.schedule_delay\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.scheduler.tasks.running","match":"airflow.scheduler.tasks.running"},{"name":"airflow.scheduler.tasks.starving","match":"airflow.scheduler.tasks.starving"},{"name":"airflow.sla_email_notification_failure","match":"airflow.sla_email_notification_failure"},{"match_type":"regex","name":"airflow.dag.task_removed","match":"airflow\\.task_removed_from_dag\\.(.*)","tags":{"dag_id":"$1"}},{"match_type":"regex","name":"airflow.dag.task_restored","match":"airflow\\.task_restored_to_dag\\.(.*)","tags":{"dag_id":"$1"}},{"name":"airflow.task.instance_created","match":"airflow.task_instance_created-*","tags":{"task_class":"$1"}},{"name":"airflow.ti.start","match":"airflow.ti.start.*.*","tags":{"dag_id":"$1","task_id":"$2"}},{"name":"airflow.ti.finish","match":"airflow.ti.finish.*.*.*","tags":{"dag_id":"$1","state":"$3","task_id":"$2"}}]}]
   ```
 
 [設定の例][7]については、Datadog `integrations-core` レポジトリを参照してください。

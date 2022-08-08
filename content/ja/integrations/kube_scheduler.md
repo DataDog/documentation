@@ -14,7 +14,6 @@ categories:
 - コンテナ
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
 display_name: Kube_scheduler
@@ -23,7 +22,7 @@ git_integration_title: kube_scheduler
 guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
-integration_version: 4.2.0
+integration_version: 4.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: kube_scheduler.
 metric_to_check: kube_scheduler.threads
 name: kube_scheduler
-public_title: Datadog-Kubernetes Scheduler インテグレーション
+public_title: Kubernetes Scheduler インテグレーション
 short_description: Kubernetes Scheduler の監視
 support: コア
 supported_os:
@@ -67,7 +66,7 @@ Kubernetes Scheduler チェックは [Datadog Agent][2] パッケージに含ま
 
 #### ログの収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][6].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][6]を参照してください。
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|

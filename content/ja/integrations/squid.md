@@ -9,20 +9,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - caching
-  - log collection
-  - autodiscovery
+- web
+- caching
+- log collection
+- autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/squid/README.md
+- https://github.com/DataDog/integrations-core/blob/master/squid/README.md
 display_name: Squid
 draft: false
 git_integration_title: squid
 guid: e7d4b233-b32a-46f9-8cb2-c582ee8fd251
 integration_id: squid
 integration_title: Squid
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,14 +30,17 @@ manifest_version: 1.0.0
 metric_prefix: squid.
 metric_to_check: squid.cachemgr.cpu_time
 name: squid
-public_title: Datadog-Squid インテグレーション
+public_title: Squid インテグレーション
 short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通してキャッシュマネージャーから取得された [Squid][1] メトリクスを監視します。
@@ -113,7 +116,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |

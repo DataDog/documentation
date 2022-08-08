@@ -63,11 +63,11 @@ Datadog APM seamlessly integrates with the other Datadog metrics and information
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: https://app.datadoghq.com/apm/services
-[3]: /tracing/visualization/#services
-[4]: /tracing/visualization/#resources
-[5]: /tracing/visualization/#spans
-[6]: /tracing/visualization/trace/?tab=spanmetadata
+[3]: /tracing/glossary/#services
+[4]: /tracing/glossary/#resources
+[5]: /tracing/glossary/#spans
+[6]: /tracing/trace_explorer/trace_view/?tab=spanmetadata
 [7]: /tracing/guide/adding_metadata_to_spans/
-[8]: /tracing/connect_logs_and_traces/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/

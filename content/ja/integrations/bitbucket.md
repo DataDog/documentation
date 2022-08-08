@@ -1,29 +1,31 @@
 ---
 categories:
-  - Source Control
-  - Collaboration
-  - issue tracking
-ddtype: crawler
+- Source Control
+- Collaboration
+- issue tracking
 dependencies: []
 description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
-doc_link: 'https://docs.datadoghq.com/integrations/bitbucket/'
+doc_link: https://docs.datadoghq.com/integrations/bitbucket/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/'
-    tag: ブログ
-    text: 'Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法'
+- link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
+  tag: ブログ
+  text: 'Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法'
 git_integration_title: bitbucket
 has_logo: true
 integration_id: bitbucket
 integration_title: Bitbucket
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: bitbucket
 public_title: Datadog-Bitbucket インテグレーション
 short_description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/bitbucket/integrations-bitbucket.gif" alt="integrations bitbucket" popup="true">}}
 
 ## 概要
@@ -46,7 +48,7 @@ Bitbucket Cloud または Bitbucket Server からコミットイベントとプ�
 
 ### インストール
 
-[Bitbucket のドキュメント][1]を参照して、Datadog で追跡する Bitbucket の挙動に対応する Webhook をセットアップします。Webhook の URL は、以下のように設定してください。
+Bitbucket のドキュメントを参照して、Datadog で追跡する Bitbucket の挙動に対応する [Webhook を管理][1]します。Webhook の URL は、以下のように設定してください。
 
 ```text
 https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY>
@@ -80,7 +82,7 @@ Bitbucket インテグレーションには、メトリクスは含まれませ�
 
 ### イベント
 
-Bitbucket Cloud と Bitbucket Server の両方からのコミットとプルリクエストを含む Bitbucket イベントは、Datadog アプリケーションに転送されます。
+Bitbucket Cloud と Bitbucket Server の両方からのコミットとプルリクエストを含む Bitbucket イベントは、Datadog に転送されます。
 
 ### サービスのチェック
 

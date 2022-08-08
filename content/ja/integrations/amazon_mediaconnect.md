@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Elemental MediaConnect のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediaconnect/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Elemental MediaConnect インテグレーション
 short_description: Amazon Elemental MediaConnect のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Elemental MediaConnect は、ライブビデオのトランスポートサービスです。

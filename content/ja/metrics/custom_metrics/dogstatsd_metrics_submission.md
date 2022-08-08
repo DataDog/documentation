@@ -82,12 +82,13 @@ while(1):
 ```ruby
 require 'datadog/statsd'
 
-statsd = Datadog::Statsd.new('localhost', 8125)
+statsd = Datadog::Statsd.new('localhost', 8125, tags: ['environment:dev'])
 
 while true do
-    statsd.increment('example_metric.increment', tags: ['environment:dev'])
-    statsd.decrement('example_metric.decrement', tags: ['environment:dev'])
-    statsd.count('example_metric.count', 2, tags: ['environment:dev'])
+    statsd.increment('example_metric.increment')
+    statsd.increment('example_metric.increment', tags: ['another:tag'])
+    statsd.decrement('example_metric.decrement')
+    statsd.count('example_metric.count', 2)
     sleep 10
 end
 ```

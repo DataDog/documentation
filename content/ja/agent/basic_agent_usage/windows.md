@@ -1,21 +1,22 @@
 ---
-title: Windows 用 Agent の基本的な使用方法
-kind: documentation
-description: Windows プラットフォーム上の Datadog Agent の基本機能
-platform: Windows
 aliases:
-  - /ja/guides/basic_agent_usage/windows/
+- /ja/guides/basic_agent_usage/windows/
+description: Windows プラットフォーム上の Datadog Agent の基本機能
 further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+kind: documentation
+platform: Windows
+title: Windows 用 Agent の基本的な使用方法
 ---
+
 ## セットアップ
 
 Datadog Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][1]を参照してください。[サポートされる OS バージョン][2]については、Agent のドキュメントを参照してください。
@@ -28,7 +29,7 @@ Datadog EU サイトへのインストールと構成には、`SITE=` パラメ�
 
 Datadog Agent をドメイン環境にインストールするには、[Agent のインストール要件][4]を参照してください。
 
-**注**: [ドメインコントローラー][4]について特別な考慮事項があります。
+**注**: [ドメインコントローラー][12]について特別な考慮事項があります。
 
 {{< tabs >}}
 {{% tab "GUI" %}}
@@ -425,7 +426,7 @@ process_config:
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-[2]: /ja/agent/basic_agent_usage/#supported-os-versions
+[2]: /ja/agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
 [3]: /ja/agent/faq/windows-agent-ddagent-user/
 [4]: /ja/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /ja/agent/guide/datadog-agent-manager-windows/
@@ -435,3 +436,4 @@ process_config:
 [9]: /ja/infrastructure/process/?tab=linuxwindows#installation
 [10]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /ja/agent/guide/agent-commands/#restart-the-agent
+[12]: /ja/agent/faq/windows-agent-ddagent-user/#domain-controllers

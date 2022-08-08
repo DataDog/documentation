@@ -12,19 +12,19 @@ assets:
     solr_processes: assets/saved_views/solr_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - autodiscovery
-  - log collection
+- data store
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/solr/README.md
+- https://github.com/DataDog/integrations-core/blob/master/solr/README.md
 display_name: Solr
 draft: false
 git_integration_title: solr
 guid: 0235124a-0207-44dd-aede-f578a6d46b26
 integration_id: solr
 integration_title: Solr
+integration_version: 1.11.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,15 +33,18 @@ metric_prefix: solr.
 metric_to_check: solr.searcher.numdocs
 name: solr
 process_signatures:
-  - solr start
-public_title: Datadog-Solr インテグレーション
+- solr start
+public_title: Solr インテグレーション
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Solr グラフ][1]
 
 ## 概要
@@ -213,7 +216,7 @@ mydomain:attr0=val0,attr1=val1
 
 4. [Agent を再起動します][6]。
 
-Docker環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][7]を参照してください。
+Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://lucene.apache.org/solr/guide/configuring-logging.html#permanent-logging-settings

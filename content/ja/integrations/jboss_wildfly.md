@@ -10,19 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - ログの収集
-  - オートディスカバリー
+- web
+- ログの収集
+- オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_name: JBoss/WildFly
 draft: false
 git_integration_title: jboss_wildfly
 guid: ff99b3d2-9c14-4cdf-b869-7b8b1cbf0716
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
+integration_version: 2.0.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,14 +30,17 @@ manifest_version: 1.0.0
 metric_prefix: jboss.
 metric_to_check: jboss.jdbc_connections.count
 name: jboss_wildfly
-public_title: Datadog-JBoss/WildFly インテグレーション
+public_title: JBoss/WildFly インテグレーション
 short_description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは [JBoss][1] および [WildFly][2] アプリケーションを監視します。
@@ -112,7 +115,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                      |
 | -------------- | ---------------------------------------------------------- |
@@ -138,13 +141,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 JBoss/WildFly インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "jboss_wildfly" >}}
 
-**jboss.can_connect**:<br>
-Agent が監視対象の JBoss/WildFly インスタンスに接続できず、メトリクスを収集できない場合は、`CRITICAL` が返されます。そうでない場合は `OK` が返されます。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 
 [1]: https://developers.redhat.com/products/eap/overview

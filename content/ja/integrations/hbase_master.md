@@ -12,7 +12,6 @@ categories:
 - data store
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md
 display_name: HBase master
@@ -29,7 +28,7 @@ manifest_version: 1.0.0
 metric_prefix: hbase.
 metric_to_check: hbase.master.assignmentmanager.rit_oldest_age
 name: hbase_master
-public_title: Datadog-Hbase Master インテグレーション
+public_title: Hbase Master
 short_description: HBase master インテグレーション。
 support: contrib
 supported_os:

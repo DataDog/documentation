@@ -90,7 +90,7 @@ docker run -d --cgroupns host \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
+              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
               gcr.io/datadoghq/agent:latest
 ```
@@ -552,4 +552,4 @@ DogStatsD が使用するデータグラム形式についてさらに理解を�
 [6]: /ja/events/guides/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /ja/getting_started/tagging/unified_service_tagging
-[9]: /ja/metrics/
+[9]: /ja/developers/dogstatsd/datagram_shell/

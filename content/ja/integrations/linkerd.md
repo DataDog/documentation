@@ -13,7 +13,6 @@ categories:
 - autodiscovery
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md
 display_name: Linkerd
@@ -22,7 +21,7 @@ git_integration_title: linkerd
 guid: 9aa60dff-4baf-4112-9177-f9c3814dd513
 integration_id: linkerd
 integration_title: Linkerd
-integration_version: 3.2.0
+integration_version: 3.2.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,7 +29,7 @@ manifest_version: 1.0.0
 metric_prefix: linkerd.
 metric_to_check: linkerd.prometheus.health
 name: linkerd
-public_title: Datadog-Linkerd インテグレーション
+public_title: Linkerd インテグレーション
 short_description: linkerd からメトリクスを取得してサービス健全性を監視
 support: コア
 supported_os:

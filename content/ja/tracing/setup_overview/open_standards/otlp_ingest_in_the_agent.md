@@ -14,12 +14,11 @@ OTLP Ingest in the Agent は、[OpenTelemetry SDK][1] でインスツルメン�
 
 OTLP Ingest in the Agent では、Datadog Agent でトレース観測可能性機能を利用することができます。アプリケーションは OpenTelemetry SDK でインスツルメントされているため、アプリケーションセキュリティモニタリング、Continuous Profiler、ランタイムメトリクス、取り込みルールなどの Datadog トレーシングライブラリ固有の機能は、取り込まれたデータでは利用できません。
 
-<div class="alert alert-warning">OTLP メトリクスの取り込みはベータ版であり、その動作や構成は変更される可能性があります。</div>
-
 まず、OpenTelemetry SDK を使って、[アプリケーションをインスツルメントします][3]。次に、テレメトリーデータを OTLP フォーマットで Datadog Agent にエクスポートします。この構成は、以下のページで説明されているように、サービスがデプロイされているインフラストラクチャーの種類によって異なります。
 
 OpenTelemetry のインスツルメンテーションのドキュメントを読んで、インスツルメンテーションを Agent に向ける方法を理解してください。以下に説明する `receiver` セクションは [OpenTelemetry Collector OTLP レシーバー構成スキーマ][4]に従っています。
 
+## Datadog Agent で OTLP の取り込みを有効にする
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -73,17 +72,7 @@ experimental:
    - gPRC の場合: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` とポート `4317`
    - HTTP の場合: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` とポート `4318`
 
-3. アプリケーションコンテナでは、環境変数 `OTEL_EXPORTER_OTLP_ENDPOINT` に、Datadog Agent コンテナを指すように設定します。例:
-
-   ```
-   OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318.
-   ```
-
-4. 両方のコンテナが同じブリッジネットワークに定義されている必要がありますが、これは Docker Compose を使用している場合に自動的に処理されます。そうでない場合は、[Docker アプリケーションのトレース][2]の Docker の例に従って、正しいポートでブリッジネットワークをセットアップしてください。
-
-
 [1]: /ja/agent/docker/
-[2]: /ja/agent/docker/apm/#docker-network
 {{% /tab %}}
 {{% tab "Kubernetes (Daemonset)" %}}
 
@@ -122,125 +111,106 @@ experimental:
        protocol: TCP
    ```
 
-4. アプリケーションデプロイファイルで、`OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を使って、OpenTelemetry クライアントがトレースを送信するエンドポイントを構成します。
-
-   gPRC の場合:
-   ```
-   env:
-    - name: <DD_AGENT_HOST>
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4317" # sends to gRPC receiver on port 4317
-   ```
-
-   HTTP の場合:
-   ```
-   env:
-    - name: <DD_AGENT_HOST>
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4318" # sends to HTTP receiver on port 4318
-   ```
-
-
 [1]: /ja/agent/kubernetes/?tab=daemonset
 {{% /tab %}}
-{{% tab "Kubernetes (Helm)" %}}
+
+{{% tab "Kubernetes (Helm) - values.yaml" %}}
 
 1. [Kubernetes Agent のセットアップ][1]に従ってください。
 
-2. Agent の環境変数を設定します。`set` コマンドを使用することができます。
+2. `values.yaml` ファイルの `datadog.otlp` セクションを編集して、Agent で OTLP エンドポイントを有効にします。
 
    gRPC の場合:
    ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT,datadog.env[0].value=0.0.0.0:4317"
-   ```
-   HTTP の場合:
-   ```
-   --set "datadog.env[0].name=DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT,datadog.env[0].value=0.0.0.0:4318"
+   otlp:
+    receiver:
+      protocols:
+        grpc:
+          enabled: true
    ```
 
-   または、`values.yaml` ファイルの `datadog.env` パラメーターにこのコマンドを設定できます。
+   HTTP の場合:
+   ```
+   otlp:
+    receiver:
+      protocols:
+        http:
+          enabled: true
+   ```
+
+これは、各プロトコルをデフォルトのポート (OTLP/gRPC は `4317`、OTLP/HTTP は `4318`) で有効にするものです。
+
+
+[1]: /ja/agent/kubernetes/?tab=helm
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm) - set" %}}
+
+1. [Kubernetes Agent のセットアップ][1]に従ってください。
+
+2. 優先プロトコルを有効にします。
 
    gRPC の場合:
    ```
-   env
-     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT
-       value: "0.0.0.0:4317"
-   ```
-
-   HTTP の場合:
-   ```
-   env: 
-     - name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT
-       value: "0.0.0.0:4318"
-   ```
-
-3. コンテナポート (gRPC の場合は `4317`、HTTP の場合は `4318`) を、コア Agent コンテナのホストポートにマッピングします。`set` コマンドを使用することもできます。
-
-   gRPC の場合:
-   ```
-   --set 'agents.containers.agent.ports[0].containerPort=4317,agents.containers.agent.ports[0].hostPort=4317,agents.containers.agent.ports[0].name=traceportgrpc,agents.containers.agent.ports[0].protocol=TCP' 
+   --set "datadog.otlp.receiver.protocols.grpc.enabled=true"
    ```
    HTTP の場合:
    ```
-   --set 'agents.containers.agent.ports[0].containerPort=4318,agents.containers.agent.ports[0].hostPort=4318,agents.containers.agent.ports[0].name=traceporthttp,agents.containers.agent.ports[0].protocol=TCP'
+   --set "datadog.otlp.receiver.protocols.http.enabled=true"
    ```
 
-   または、`values.yaml` ファイルの `agents.containers.agent.ports` パラメーターにこのコマンドを設定できます。
-
-   gRPC の場合:
-   ```
-     ports: 
-       - containerPort: 4317
-         hostPort: 4317
-         name: traceportgrpc
-         protocol: TCP
-   ```
-
-   HTTP の場合:
-   ```
-     ports: 
-       - containerPort: 4318
-         hostPort: 4318
-         name: traceporthttp
-         protocol: TCP
-   ```
-
-4. アプリケーションデプロイファイルで、`OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を使って、OpenTelemetry クライアントがトレースを送信するエンドポイントを構成します。
-
-   gPRC の場合:
-   ```
-   env:
-    - name: <DD_AGENT_HOST>
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4317" # sends to gRPC receiver on port 4317
-   ```
-
-   HTTP の場合:
-   ```
-   env:
-    - name: <DD_AGENT_HOST>
-      valueFrom:
-        fieldRef:
-          fieldPath: status.hostIP
-    - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$<DD_AGENT_HOST>:4318" # sends to HTTP receiver on port 4318
-   ```
-
+これは、各プロトコルをデフォルトのポート (OTLP/gRPC は `4317`、OTLP/HTTP は `4318`) で有効にするものです。
 
 [1]: /ja/agent/kubernetes/?tab=helm
 {{% /tab %}}
 {{< /tabs >}}
 
 Datadog Agent でサポートされている環境変数や設定は、他にも多数あります。それらすべての概要を知るには、[構成テンプレート][5]を参照してください。
+
+## アプリケーションから Datadog Agent に OTLP トレースを送信する
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+1. アプリケーションコンテナでは、環境変数 `OTEL_EXPORTER_OTLP_ENDPOINT` に、Datadog Agent コンテナを指すように設定します。例:
+
+   ```
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318.
+   ```
+
+2. 両方のコンテナが同じブリッジネットワークに定義されている必要がありますが、これは Docker Compose を使用している場合に自動的に処理されます。そうでない場合は、[Docker アプリケーションのトレース][1]の Docker の例に従って、正しいポートでブリッジネットワークをセットアップしてください。
+
+[1]: /ja/agent/docker/apm/#docker-network
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+1. アプリケーションデプロイファイルで、`OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を使って、OpenTelemetry クライアントがトレースを送信するエンドポイントを構成します。
+
+   gPRC の場合:
+   ```
+   env:
+    - name: DD_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$(DD_AGENT_HOST):4317" # sends to gRPC receiver on port 4317
+   ```
+
+   HTTP の場合:
+   ```
+   env:
+    - name: DD_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: "http://$(DD_AGENT_HOST):4318" # sends to HTTP receiver on port 4318
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">OTLP ライブラリのドキュメントを確認してください。それらのいくつかは、トレースを `/` ルートパスの代わりに `/v1/traces` に送らなければなりません。</div>
+
 
 ## その他の参考資料
 

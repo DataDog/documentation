@@ -1,40 +1,60 @@
 ---
+app_id: kube-apiserver-metrics
+app_uuid: c5caf884-25c1-4a35-a72e-fa75e7cc10fc
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Kubernetes API Server - Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kube_apiserver.go_goroutines
+      metadata_path: metadata.csv
+      prefix: kube_apiserver.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kubernetes API サーバーメトリクス
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - コンテナ
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
-display_name: Kubernetes API サーバーメトリクス
+display_on_public_website: true
 draft: false
 git_integration_title: kube_apiserver_metrics
-guid: 406b274b-c44d-4499-a329-efd053b3f538
 integration_id: kube-apiserver-metrics
 integration_title: Kubernetes API サーバーメトリクス
 integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kube_apiserver.
-metric_to_check: kube_apiserver.go_goroutines
+manifest_version: 2.0.0
 name: kube_apiserver_metrics
-public_title: Datadog-Kubernetes API サーバーメトリクスインテグレーション
+oauth: {}
+public_title: Kubernetes API サーバーメトリクス
 short_description: Kubernetes APIServer からメトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Kubernetes APIServer からメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubernetes API サーバーメトリクス
 ---
 
 

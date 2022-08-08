@@ -6,7 +6,6 @@ categories:
 - cloud
 - azure
 - log collection
-ddtype: crawler
 dependencies: []
 description: インスタンスや多数の Azure サービスからメトリクスを収集
 doc_link: https://docs.datadoghq.com/integrations/azure/
@@ -67,7 +66,7 @@ Microsoft Azure に接続すると、以下のことができます。
 - ログ、メトリクス、APM トレーシング、ユーザーアクティビティなどの間および Datadog 組織内の Azure アプリケーションからのデータを関連付け。
 
 <div class="alert alert-warning">
-Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。詳細は、<a href="https://docs.datadoghq.com/integrations/faq/azure-status-metric">Azure の状態およびカウントメトリクス</a>をご参照ください。
+Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。詳細は、<a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Azure の状態およびカウントメトリクス</a>をご参照ください。
 </div>
 
 | インテグレーション                     | 説明                                                                                               |
@@ -345,7 +344,11 @@ Azure から Datadog へログを送信する最適な方法は、Agent また�
 
 {{% tab "自動インストール" %}}
 
-Datadog が提供する、使用できる自動スクリプトは 2 つあります。
+開始するには、以下のボタンをクリックし、Azure Portal のフォームに入力します。Datadog アカウントにアクティビティログをストリーミングするために必要な Azure リソースが、自動的にデプロイされます。
+
+[![Azure にデプロイ][1]](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
+
+または、Datadog が提供する、使用できる自動スクリプトが 2 つあります。
 
 最初のスクリプトは、アクティビティログを Datadog アカウントにストリーミングするために必要な Azure リソースを作成、構成します。これらのリソースには、アクティビティログの診断設定、Azure Functions、Event Hub ネームスペース、Event Hub が含まれます。
 
@@ -373,9 +376,9 @@ Datadog が提供する、使用できる自動スクリプトは 2 つありま
 
 {{< /code-block >}}
 
-[スクリプトの内容を表示][1]することもできます。
+[スクリプトの内容を表示][2]することもできます。
 
-**ステップ 3:** 以下のコマンドを実行してスクリプトを呼び出します。**`<api_key>`** を [Datadog API トークン][2]に置き換え、**`<subscription_id>`** を Azure サブスクリプション ID に置き換えます。他のオプションのパラメーターを追加して、デプロイを構成することもできます。[オプションのパラメーター](#optional-parameters)を参照してください。
+**ステップ 3:** 以下のコマンドを実行してスクリプトを呼び出します。**`<api_key>`** を [Datadog API トークン][3]に置き換え、**`<subscription_id>`** を Azure サブスクリプション ID に置き換えます。他のオプションのパラメーターを追加して、デプロイを構成することもできます。[オプションのパラメーター](#optional-parameters)を参照してください。
 
 {{< code-block lang="powershell" filename="アクティビティログステップ 2" >}}
 
@@ -398,9 +401,9 @@ Azure プラットフォームログ (リソースログを含む) を送信す�
 
 {{< /code-block >}}
 
-[スクリプトの内容を表示][3]することもできます。
+[スクリプトの内容を表示][4]することもできます。
 
-**ステップ 3:** 以下のコマンドを実行してスクリプトを呼び出します。**`<api_key>`** を [Datadog API トークン][2]に置き換え、**`<subscription_id>`** を Azure サブスクリプション ID に置き換えます。他のオプションのパラメーターを追加して、デプロイを構成することもできます。[オプションのパラメーター](#optional-parameters)を参照してください。
+**ステップ 3:** 以下のコマンドを実行してスクリプトを呼び出します。**`<api_key>`** を [Datadog API トークン][3]に置き換え、**`<subscription_id>`** を Azure サブスクリプション ID に置き換えます。他のオプションのパラメーターを追加して、デプロイを構成することもできます。[オプションのパラメーター](#optional-parameters)を参照してください。
 
 {{< code-block lang="powershell" filename="プラットフォームログステップ 2" >}}
 
@@ -432,9 +435,10 @@ Azure プラットフォームログ (リソースログを含む) を送信す�
 
 インストールエラーが発生した場合は、[トラブルシューティングセクション](#troubleshooting)を参照すると、一般的なエラーケースをすばやく解決できます。
 
-[1]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1
+[1]: https://aka.ms/deploytoazurebutton
+[2]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1
 {{% /tab %}}
 
 {{% tab "手動インストール" %}}
@@ -577,7 +581,7 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 {{< /tabs >}}
 
 [44]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
-[45]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/#enable-diagnostics
+[45]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/#enable-diagnostics
 [46]: https://app.datadoghq.com/account/settings#integrations/azure
 [47]: https://portal.azure.com
 [48]: https://app.datadoghq.com/organization-settings/api-keys
@@ -914,5 +918,5 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 [46]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
 [47]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
 [48]: https://app.datadoghq.com/event/explorer
-[49]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/
+[49]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/
 [50]: https://docs.datadoghq.com/ja/help/

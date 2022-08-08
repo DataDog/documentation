@@ -16,18 +16,18 @@ assets:
     status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - ログの収集
+- data store
+- ログの収集
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/presto/README.md
+- https://github.com/DataDog/integrations-core/blob/master/presto/README.md
 display_name: Presto
 draft: false
 git_integration_title: presto
 guid: a05766fc-8760-464b-9e5d-a784500b7b90
 integration_id: presto
 integration_title: Presto
+integration_version: 2.6.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -35,14 +35,17 @@ manifest_version: 1.0.0
 metric_prefix: presto.
 metric_to_check: presto.failure_detector.active_count
 name: presto
-public_title: Datadog-Presto インテグレーション
+public_title: Presto インテグレーション
 short_description: PrestoSQL クラスターのパフォーマンスや使用状況の統計などを収集
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、次のような [Presto][1] メトリクスを収集します。
@@ -97,7 +100,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `presto` を探します。
+[Agent の status サブコマンド][8]を実行し、Checks セクションで `presto` を探します。
 
 ## 収集データ
 

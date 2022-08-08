@@ -19,6 +19,8 @@ title: Agent チェックのステータス
 
 **注**: 以下の例の `<CHECK_NAME>` を Agent チェックに置き換えます。例: `activemq`、`ceph`、または `elastic`。[インテグレーションのドキュメント][1]を確認して、Agent チェック名を確認します。
 
+**注**: トラブルシューティング中に一時的にサービスチェックを無効にするには、`/conf.d/<CHECK_NAME>.d/conf.yaml` の名前を `.yaml` または `.yml` ファイル拡張子以外のもの、例えば `conf.yaml.disable` に変更します。
+
 ## Linux
 
 Agent チェックをテストするには、次を実行します。
@@ -142,7 +144,7 @@ sudo journalctl -u dd-agent.service
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
+[1]: /ja/integrations/
 [2]: /ja/agent/troubleshooting/send_a_flare/
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 [4]: /ja/integrations/

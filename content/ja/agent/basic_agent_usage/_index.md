@@ -1,21 +1,22 @@
 ---
-title: 基本的な Agent の利用方法
-kind: documentation
 aliases:
-  - /ja/guides/basic_agent_usage/
-  - /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
-  - /ja/agent/faq/log-location
+- /ja/guides/basic_agent_usage/
+- /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
+- /ja/agent/faq/log-location
 further_reading:
-  - link: /agent/faq/how-datadog-agent-determines-the-hostname/
-    tag: よくあるご質問
-    text: Datadog が Agent ホスト名を決定する方法
-  - link: /agent/guide/agent-commands/
-    tag: よくあるご質問
-    text: すべての Agent コマンド
-  - link: /agent/guide/agent-configuration-files/
-    tag: よくあるご質問
-    text: すべての Agent 構成ファイルの場所
+- link: /agent/faq/how-datadog-agent-determines-the-hostname/
+  tag: よくあるご質問
+  text: Datadog が Agent ホスト名を決定する方法
+- link: /agent/guide/agent-commands/
+  tag: よくあるご質問
+  text: すべての Agent コマンド
+- link: /agent/guide/agent-configuration-files/
+  tag: よくあるご質問
+  text: すべての Agent 構成ファイルの場所
+kind: documentation
+title: 基本的な Agent の利用方法
 ---
+
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
 ## Agent アーキテクチャ
@@ -62,12 +63,12 @@ Agent フォワーダーは、メトリクスを HTTPS 経由で Datadog に送�
 
 v6 の DogStatsD は、[Etsy の StatsD][5] メトリクス集計デーモンの Go 言語実装です。UDP または Unix ソケット経由で任意のメトリクスを受信してロールアップするために使用され、構成要素の一部としてカスタムコードを組み込んでもレイテンシーが発生しません。DogStatsD についての詳細は[こちら][6]でご確認いただけます。
 
-[1]: /ja/metrics/dogstatsd_metrics_submission/#metrics
+[1]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /ja/tracing/guide/terminology/
 [3]: /ja/agent/guide/network/#open-ports
 [4]: /ja/developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /ja/metrics/dogstatsd_metrics_submission/
+[6]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -136,17 +137,18 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | プラットフォーム                                 | サポートされるバージョン                                        |
 |------------------------------------------|-----------------------------------------------------------|
 | [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] (systemd を使用)                 | Debian 7 (wheezy) 以上                                        |
-| [Debian][2] (SysVinit を使用)                | Agent 6.6.0 以上では Debian 7 (wheezy) 以上                        |
+| [Debian][2] (systemd を使用)                 | Agent < 6.36.0/7.36.0 は Debian 7 (wheezy)+、Agent 6.36.0+/7.36.0+ は Debian 8 (jessie)+ |
+| [Debian][2] (SysVinit を使用)                | Agent 6.6.0 - 6.36.0/7.36.0 は Debian 7 (wheezy)+、Agent 6.36.0+/7.36.0+ は Debian 8 (jessie)+ |
 | [Ubuntu][3]                              | Ubuntu 14.04 以上                                             |
-| [RedHat/CentOS][4]                       | RedHat/CentOS 6 以上                                          |
+| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6+、Agent 6.33.0+/7.33.0+ の AlmaLinux/Rocky 8+ |
 | [Docker][5]                              | バージョン 1.12 以上                                             |
 | [Kubernetes][6]                          | バージョン 1.3 以上                                              |
-| [SUSE Enterprise Linux][7] (systemd を使用)  | SUSE 11 SP4 以上                                              |
-| [SUSE Enterprise Linux][7] (SysVinit を使用) | Agent 7.16.0 以上では SUSE 11 SP4                              |
+| [SUSE Enterprise Linux][7] (systemd を使用)  | Agent < 6.33.0/7.33.0 の SUSE 11 SP4+、Agent 6.33.0+/7.33.0+ の SUSE 12+                     |
+| [SUSE Enterprise Linux][7] (SysVinit を使用) | Agent 6.16.0/7.16.0 - 6.33.0/7.33.0 の SUSE 11 SP4        |
+| [OpenSUSE][7] (systemd を使用)               | Agent 6.33.0+/7.33.0+ の OpenSUSE 15+                     |
 | [Fedora][8]                              | Fedora 26 以上                                                |
 | [macOS][9]                               | macOS 10.12 以上                                              |
-| [Windows Server][10]                     | Windows Server 2008 R2+ および Server Core (Nano Server 以外) |
+| [Windows Server][10]                     | Windows Server 2008 R2+ (Server Core を含む)           |
 | [Windows][10]                            | Windows 7 以上                                                |
 | [Windows Azure Stack HCI OS][10]         | すべてのバージョン                                              |
 
@@ -181,7 +183,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [SUSE Enterprise Linux][7] | SUSE 11 SP4 以上           |
 | [Fedora][8]                | Fedora 26 以上             |
 | [MacOS][9]                 | macOS 10.10 以上           |
-| [Windows Server][10]       | Windows Server 2008r2 以上 |
+| [Windows Server][10]       | Windows Server 2008 以上   |
 | [Windows][10]              | Windows 7 以上             |
 
 **注**:
@@ -237,6 +239,7 @@ Agent v6 以上のコマンドラインインターフェイスはサブコマ�
 | `start`           | [Agent を起動します][3]。                                                       |
 | `start-service`   | サービスコントロールマネージャー内で Agent を起動します。                         |
 | `status`          | [現在の Agent のステータスを出力します][4]。                                        |
+| `stream-logs`     | 実行中の Agent が処理するログをストリーミング表示します。                         |
 | `stop`            | [Agentを 停止します][5]。                                                        |
 | `stopservice`     | サービスコントロールマネージャー内で Agent を停止します。                          |
 | `version`         | バージョン情報を出力します。                                                         |
@@ -252,32 +255,13 @@ Agent v6 以上のコマンドラインインターフェイスはサブコマ�
 以下は、Datadog Agent リソース消費の例です。テストは、AWS EC2 マシンの `c5.xlarge` インスタンス (4 VCPU/ 8 GB RAM) で行われ、同様のリソースを持つ ARM64 ベースのインスタンスで同等のパフォーマンスが見られました。Agent 自体を監視するために、vanilla `datadog-agent` がプロセスチェックとともに実行されました。さらにインテグレーションを有効にすると、Agent リソースの消費が増えます。
 JMX チェックを有効にすると、監視対象の JVM によって公開される Bean の数に応じて、Agent が使用するメモリの量が増えます。トレースとプロセスを有効にしても、Agents のリソース消費が増えます。
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
-* Agent テストのバージョン: 6.7.0
-* CPU: 平均で CPU の約 0.12 % を使用
-* メモリ: 約 60 MB の RAM を使用 (RSS メモリ)
-* ネットワーク帯域幅: 約 86 B/秒 ▼ | 260 B/秒 ▲
+* Agent テストのバージョン: 7.34.0
+* CPU: 平均で CPU の約 0.08 % を使用
+* メモリ: 約 130 MB の RAM を使用 (RSS メモリ)
+* ネットワーク帯域幅: 約 140 B/秒 ▼ | 800 B/秒 ▲
 * ディスク:
-  * Linux: ディストリビューションによって 350 MB ～ 400 MB
-  * Windows: 260 MB
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-* Agent テストのバージョン: 5.24.0
-* CPU: 平均で CPU の約 0.35% を使用
-* メモリ: 約 115 MB の RAM 使用。
-* ネットワーク帯域幅: 約 1900 B/秒 ▼ | 800 B/秒 ▲
-* ディスク:
-  * Linux 312MB
-  * Windows: 295MB
-
-<mrk mid="212" mtype="seg">**注**: コンテナ Agent v5.15 以降では、メモリキャッシュが増えているためコンテナリソースを 256 MB 以上に設定することをお勧めします。この制限を大きくすることは、ベースラインの使用量に対応するためではなく、一時的なスパイクに対応するためです。</mrk><mrk mid="213" mtype="seg">Agent 6 では、メモリのフットプリント制限が非常に厳しくなっています。</mrk>
-
-{{% /tab %}}
-{{< /tabs >}}
+  * Linux: ディストリビューションによって 830 MB ～ 880 MB
+  * Windows: 870 MB
 
 **ログ収集**:
 
@@ -290,9 +274,6 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 * CPU: 平均で CPU の約 1.5% を使用
 * メモリ: 約 95 MB の RAM 使用。
 * ネットワーク帯域幅: 約 14KB/秒 ▲
-* ディスク:
-  * Linux: ディストリビューションによって 350 MB ～ 400 MB
-  * Windows: 260 MB
 
 {{% /tab %}}
 {{% tab "HTTP compression level 1" %}}
@@ -301,9 +282,6 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 * CPU: 平均で CPU の約 1% を使用
 * メモリ: 約 95 MB の RAM 使用。
 * ネットワーク帯域幅: 約 20KB/秒 ▲
-* ディスク:
-  * Linux: ディストリビューションによって 350 MB ～ 400 MB
-  * Windows: 260 MB
 
 {{% /tab %}}
 {{% tab "HTTP Uncompressed" %}}
@@ -312,9 +290,6 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 * CPU: 平均で CPU の約 0.7 % を使用
 * メモリ: 約 90 MB の RAM を使用 (RSS メモリ)
 * ネットワーク帯域幅: 約 200KB/秒 ▲
-* ディスク:
-  * Linux: ディストリビューションによって 350 MB ～ 400 MB
-  * Windows: 260 MB
 
 {{% /tab %}}
 {{< /tabs >}}

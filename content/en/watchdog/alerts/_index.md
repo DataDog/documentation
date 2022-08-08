@@ -81,8 +81,8 @@ To see archived alerts, select the checkbox option to "Show N archived alerts" i
 
 [1]: https://app.datadoghq.com/watchdog
 [2]: https://app.datadoghq.com/apm/home
-[3]: /tracing/visualization/service/
+[3]: /tracing/services/service_page/
 [4]: /watchdog/impact_analysis/
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [6]: /tracing/guide/setting_primary_tags_to_scope/
-[7]: /tracing/visualization/#services
+[7]: /tracing/glossary/#services

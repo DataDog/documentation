@@ -4,10 +4,6 @@ kind: documentation
 description: "Use Monitors to alert off of the error budget consumption of an SLO"
 ---
 
-<div class="alert alert-warning">
-This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
-</div>
-
 ## Overview
 
 SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO’s error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
@@ -59,34 +55,9 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-**For provider version v3+**
-
-```
-resource "datadog_monitor" "metric-based-slo" {
-    name = "SLO Error Budget Alert Example"
-    type  = "slo alert"
-    
-    query = <<EOT
-    error_budget("slo_id").over("time_window") > 75 
-    EOT
-
-    message = "Example monitor message"
-    monitor_thresholds {
-      critical = 75
-    }
-    tags = ["foo:bar", "baz"]
-}
-```
-
-## Beta restrictions
-
-- Alerting is available only for metric-based SLOs or for monitor-based SLOs that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
-- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][7] page.
-
 [1]: /monitors/service_level_objectives/metric/
 [2]: /monitors/service_level_objectives/monitor/
 [3]: https://app.datadoghq.com/slo
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
-[7]: https://app.datadoghq.com/monitors/manage

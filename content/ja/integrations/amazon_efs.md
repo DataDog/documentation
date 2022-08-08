@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awsefs/
+- /ja/integrations/awsefs/
 categories:
-  - cloud
-  - os & system
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- os & system
+- aws
+- log collection
 dependencies: []
-description: Amazon Elastic Filesystem のキーメトリクスを追跡します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_efs/'
+description: Amazon Elastic Filesystem のキーメトリクスを追跡。
+doc_link: https://docs.datadoghq.com/integrations/amazon_efs/
 draft: false
 git_integration_title: amazon_efs
 has_logo: true
 integration_id: amazon-efs
 integration_title: Amazon Elastic File System
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,11 +23,12 @@ public_title: Datadog-Amazon Elastic File System インテグレーション
 short_description: Amazon Elastic Filesystem のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon EFS は、AWS Lambda 関数または Amazon EC2 インスタンスと共に使用されるシンプルでスケーラブルなファイルストレージです。
 
-Datadog アプリのすべての EFS メトリクスを収集するには、このインテグレーションを有効にします。
+Datadog のすべての EFS メトリクスを収集するには、このインテグレーションを有効にします。
 
 ## セットアップ
 
@@ -43,7 +44,7 @@ Datadog アプリのすべての EFS メトリクスを収集するには、こ�
     - `elasticfilesystem:DescribeTags`: ファイルシステムに適用されたカスタムタグを取得します。
     - `elasticfilesystem:DescribeFileSystems`: アクティブなファイルシステムをリストします。
 
-    EFS ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+    詳細については、AWS ウェブサイト上の [EFS ポリシー][4]を参照してください。
 
 3. [Datadog - AWS EFS インテグレーション][5]をインストールします。
 
@@ -78,7 +79,7 @@ Amazon EFS から S3 バケットまたは CloudWatch のいずれかにログ�
 {{< get-metrics-from-git "amazon_efs" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -95,7 +96,7 @@ AWS Elastic File System インテグレーションには、サービスのチ�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticfilesystem.html
+[4]: https://docs.aws.amazon.com/efs/latest/ug/auth-and-access-control.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_efs
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

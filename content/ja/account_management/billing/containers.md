@@ -1,12 +1,15 @@
 ---
-title: コンテナの請求
 kind: documentation
+title: コンテナの請求
 ---
+
 ## 概要
 
 コンテナはプロおよびエンタープライズプランでサポートされています。ご契約のプランに応じて、各ホストライセンスで 10 または 20 のコンテナを無料で監視することができます。コンテナ数はお使いのインフラストラクチャー全体の平均値となります。
 
 コンテナを追加した場合は、コンテナごとに 1 時間単位の[追加コスト][1]が課金されます。コンテナは事前に購入することも可能です。コンテナの詳細については、[営業担当者][2]または[カスタマーサクセス][3]マネージャーまでお問い合わせください。
+
+**注**: Agent はデフォルトで監視されています。
 
 ### Kubernetes
 
@@ -16,9 +19,13 @@ Kubernetes は、ポッドの IP アドレスを取得し、そのポッドに�
 
 Fargate は同時に発生するタスクの数に基づいて課金されます。料金の詳細は、料金ページの[インフラストラクチャー][4]セクションを参照してください。
 
+### GKE Autopilot
+
+[GKE Autopilot][5] 環境の課金は、[GKE Standard][6] と同じです。
+
 ## トラブルシューティング
 
-技術的な質問については、[Datadog のサポートチーム][5]にお問い合わせください。
+技術的な質問については、[Datadog サポートチーム][7]にお問い合わせください。
 
 課金に関するご質問は、[カスタマーサクセス][3]マネージャーにお問い合わせください。
 
@@ -26,4 +33,6 @@ Fargate は同時に発生するタスクの数に基づいて課金されます
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
 [4]: https://www.datadoghq.com/pricing/#section-infra
-[5]: /ja/help/
+[5]: /ja/agent/kubernetes/distributions/?tab=helm#autopilot
+[6]: /ja/integrations/google_kubernetes_engine/
+[7]: /ja/help/

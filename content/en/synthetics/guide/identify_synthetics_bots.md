@@ -10,7 +10,7 @@ further_reading:
   text: "Introducing Datadog Synthetic Monitoring"
 - link: "/synthetics/"
   tag: "Documentation"
-  text: "Manage your checks"
+  text: "Learn about Synthetic Monitoring"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
@@ -97,13 +97,13 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 }
 ```
 
-If you use the browser variable to identify Synthetic bots on Firefox and Internet Explorer 11, Datadog cannot guarantee that the browser variable is set before your code executes. 
+If you use the browser variable to identify Synthetic bots on Firefox, Datadog cannot guarantee that the browser variable is set before your code executes. 
 
 ## Cookies
 
 Cookies that are applied in your browser include `datadog-synthetics-public-id` and `datadog-synthetics-result-id`.
 
-These cookies are available for all steps in Firefox and Internet Explorer 11. For Edge and Google Chrome, these cookies are set only for the start URL.
+These cookies are available for all steps in Firefox. For Microsoft Edge and Google Chrome, these cookies are set only for the start URL.
 
 ## Further Reading
 

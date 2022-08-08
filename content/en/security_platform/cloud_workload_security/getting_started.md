@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
   tag: "Blog"
   text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
+- link: "https://www.datadoghq.com/blog/dns-based-threat-detection/"
+  tag: "Blog"
+  text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
 ## Overview
@@ -78,6 +81,7 @@ The following command can be used to start the Runtime Security Agent and `syste
 
 docker run -d --name dd-agent \
   --cgroupns host \
+  --pid host \
   --security-opt apparmor:unconfined \
   --cap-add SYS_ADMIN \
   --cap-add SYS_RESOURCE \

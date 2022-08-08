@@ -97,7 +97,9 @@ def security_rules(content, content_dir):
             if message_file_name.exists():
                 # delete file or skip if staged
                 # any() will return True when at least one of the elements is Truthy
-                if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isDeleted', False) or not data.get('isEnabled', True):
+                # TODO: remove isStaged check after upstream removal
+                if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isShadowDeployed', False) \
+                    or data.get('isDeleted', False) or not data.get('isEnabled', True) or data.get('isDeprecated', False):
                     if p.exists():
                         logger.info(f"removing file {p.name}")
                         global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
@@ -140,7 +142,7 @@ def security_rules(content, content_dir):
                                 page_data['rule_category'].append('Workload Security')
 
                         # new categorization
-                        if 'security-monitoring' in relative_path:
+                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
                             page_data['rule_category'].append('Cloud SIEM')
 
                         if 'posture-management' in relative_path:
@@ -174,7 +176,7 @@ def security_rules(content, content_dir):
                             page_data["scope"] = tech
 
                         # Hardcoded rules in cloud siem which can span several different log sources do not include a source tag
-                        if 'security-monitoring' in relative_path:
+                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
                             is_hardcoded = not page_data.get("source", None)
                             if is_hardcoded:
                                 page_data["source"] = "multi Log Sources"

@@ -1,6 +1,7 @@
 ---
 title: Assigning Tags
 kind: documentation
+description: 'Learn how to assign tags in Datadog.'
 aliases:
     - /agent/tagging
     - /getting_started/tagging/assigning_tags
@@ -44,7 +45,7 @@ If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#
 {{% /tab %}}
 {{< /tabs >}}
 
-## Methods for assigning tags
+## Methods to assign tags
 
 ### Configuration file
 

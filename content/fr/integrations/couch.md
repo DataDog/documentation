@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/integrations/couchdb
+- /fr/integrations/couchdb
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,39 +14,45 @@ assets:
     couchdb_processes: assets/saved_views/couchdb_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/couch/README.md'
-description: "Apache\_CouchDB est une base de données orientée documents qui peut être interrogée et indexée à l'aide de JavaScript tout comme MapReduce."
+- https://github.com/DataDog/integrations-core/blob/master/couch/README.md
+description: Apache CouchDB est une base de données orientée documents qui peut être
+  interrogée et indexée à l'aide de JavaScript tout comme MapReduce.
 display_name: CouchDB
 draft: false
 git_integration_title: couch
 guid: 9e7ed68c-669a-40f0-8564-548d49aa8098
 integration_id: couchdb
 integration_title: CouchDB
+integration_version: 5.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: couch.
 metric_to_check:
-  - couchdb.couchdb.request_time.n
-  - couchdb.couchdb.request_time
+- couchdb.couchdb.request_time.n
+- couchdb.couchdb.request_time
 name: couch
 process_signatures:
-  - couchjs
+- couchjs
 public_title: Intégration Datadog/CouchDB
-short_description: Surveillez et représentez graphiquement vos métriques de performance et d'activité CouchDB.
+short_description: Surveillez et représentez graphiquement vos métriques de performance
+  et d'activité CouchDB.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard CouchDB][1]
 
 ## Présentation
@@ -137,7 +143,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                                |
 | -------------- | ---------------------------------------------------- |
@@ -163,9 +169,8 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check CouchDB n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "couch" >}}
 
-**couchdb.can_connect** :<br>
-Renvoie `Critical` si l'Agent ne parvient pas à se connecter à CouchDB pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

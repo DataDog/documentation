@@ -7,15 +7,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
   text: Datadog Synthetic モニタリングの紹介
+- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
+  tag: ブログ
+  text: Datadog による DNS モニタリング
 - link: /getting_started/synthetics/api_test
   tag: Documentation
   text: API テストの概要
 - link: /synthetics/private_locations
-  tag: Documentation
+  tag: ドキュメント
   text: 内部エンドポイントの DNS 解決をテストする
-- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
-  tag: ブログ
-  text: Datadog による DNS モニタリング
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
 title: DNS テスト
 ---
@@ -57,6 +60,8 @@ DNS テストは、ネットワークの外部または内部からのテスト�
 
 {{< img src="synthetics/api_tests/assertions_dns.png" alt="DNS テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
 
+アサーションで `OR` ロジックを実行するには、`matches regex` コンパレータを使用して、`(0|100)` のように同じアサーションタイプに対して複数の期待値を持つ正規表現を定義します。利用可能なすべてのレコード、あるいは少なくともひとつのレコードのアサーションの値が 0 あるいは 100 であれば、テスト結果は成功です。
+
 テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
 
 テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
@@ -90,7 +95,7 @@ DNS テストは次の頻度で実行できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
@@ -102,12 +107,18 @@ DNS テストは次の頻度で実行できます。
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
     | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         |テストがアラートから回復したときに表示します。                             |
-    | `{{^is_recovery}}`         |テストがアラートから回復しない限り表示します。                           |
+    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
+    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
+    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
+    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
+    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
+    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックしてテストを保存し、Datadog にテストの実行を開始させます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
+
+詳しくは、[Synthetic テストモニターの使用][9]をご覧ください。
 
 ## 変数
 
@@ -132,7 +143,7 @@ DNS テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、およびアサーションで、[`Settings` で定義されたグローバル変数][9]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+HTTP テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][10]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
@@ -161,13 +172,13 @@ HTTP テストの URL、高度なオプション、およびアサーション�
 
 ## アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][10]を持つユーザーのみが、Synthetic DNS テストを作成、編集、削除できます。Synthetic DNS テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][10]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが、Synthetic DNS テストを作成、編集、削除できます。Synthetic DNS テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
 
-[カスタムロール機能][11]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][12]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][13]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、DNS テストへのアクセスを制限することができます。DNS テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -185,7 +196,8 @@ HTTP テストの URL、高度なオプション、およびアサーション�
 [6]: /ja/monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /ja/synthetics/settings/#global-variables
-[10]: /ja/account_management/rbac/
-[11]: /ja/account_management/rbac#custom-roles
-[12]: /ja/account_management/rbac/#create-a-custom-role
+[9]: /ja/synthetics/guide/synthetic-test-monitors
+[10]: /ja/synthetics/settings/#global-variables
+[11]: /ja/account_management/rbac/
+[12]: /ja/account_management/rbac#custom-roles
+[13]: /ja/account_management/rbac/#create-a-custom-role

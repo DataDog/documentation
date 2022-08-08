@@ -4,6 +4,7 @@ description: "Call commands and generate events from their results with Dogwrap"
 kind: guide
 aliases:
 - /developers/faq/can-i-call-scripts-and-generate-events-from-their-results
+- /dashboards/faq/how-do-i-track-cron-jobs
 ---
 
 The Dogwrap command line tool allows you to call commands and generate events from their results. In order to use Dogwrap, install the [Datadog Python Library][1]:

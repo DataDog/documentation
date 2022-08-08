@@ -1,18 +1,19 @@
 ---
-title: Autorisations des rôles Datadog
-kind: documentation
 aliases:
-  - /fr/account_management/faq/managing-global-role-permissions
+- /fr/account_management/faq/managing-global-role-permissions
 disable_toc: true
 further_reading:
-  - link: /account_management/rbac/
-    tag: Documentation
-    text: Découvrir comment créer, mettre à jour et supprimer un rôle
-  - link: /api/v2/roles/#enumerer-les-autorisations
-    tag: Documentation
-    text: Gérer vos autorisations avec l'API Permission
+- link: /account_management/rbac/
+  tag: Documentation
+  text: Découvrir comment créer, mettre à jour et supprimer un rôle
+- link: /api/v2/roles/#enumerer-les-autorisations
+  tag: Documentation
+  text: Gérer vos autorisations avec l'API Permission
+kind: documentation
+title: Autorisations des rôles Datadog
 ---
-Une fois votre rôle créé, attribuez ou retirez des autorisations pour ce rôle directement en [le mettant à jour dans Datadog][1] ou via [l'API Permission de Datadog][2]. Vous trouverez ci-dessous la liste des autorisations disponibles.
+
+Une fois votre rôle créé, attribuez-lui ou retirez-lui directement des autorisations en [le modifiant dans Datadog][1] ou via [l'API Permission de Datadog][2]. Vous trouverez ci-dessous la liste des autorisations disponibles.
 
 ## Présentation
 
@@ -22,15 +23,21 @@ Les autorisations générales définissent les niveaux d'accès minimum pour vot
 
 {{< permissions group="Géneral" >}}
 
-**Remarque** : il n'existe pas d'autorisation `read-only` étant donné qu'elle est définie par l'absence des autorisations `admin` et `standard` pour un rôle.
+**Remarque** : il n'existe pas d'autorisation `read-only`. Pour obtenir un accès en lecture seule, il suffit de ne pas accorder l'autorisation `standard`.
 
 ### Autorisations avancées
 
-Par défaut, les utilisateurs existants sont déjà associés à l'un des trois rôles Datadog par défaut : Admin, Standard ou Read-Only. Tous les utilisateurs sont donc déjà autorisés à lire l'ensemble des types de données. Les utilisateurs avec le rôle Admin ou Standard disposent quant à eux d'un droit d'écriture sur ces ressources.
+Par défaut, les utilisateurs existants sont associés à l'un des trois rôles prêts à l'emploi :
+
+- Admin Datadog
+- Standard Datadog
+- Read-Only Datadog
+
+Tous les utilisateurs peuvent lire l'ensemble des types de données. Les utilisateurs Admin et Standard sont autorisés à écrire des données sur des ressources.
 
 **Remarque** : lorsque vous attribuez un nouveau rôle personnalisé à un utilisateur, assurez-vous de supprimer le rôle Datadog par défaut attribué à cet utilisateur afin d'appliquer les nouvelles autorisations de rôle.
 
-En plus des autorisations générales, il est possible de définir des autorisations plus granulaires pour des ressources ou des types de données spécifiques. Les autorisations peuvent être globales ou limitées à un sous-ensemble d'éléments. Vous trouverez ci-dessous les détails de ces options et leur impact sur chacune des autorisations disponibles.
+En plus des autorisations générales, vous pouvez définir des autorisations plus granulaires pour des ressources ou des types de données spécifiques. Les autorisations peuvent être globales ou limitées à un sous-ensemble d'éléments. Vous trouverez ci-dessous les détails de ces options et leur impact sur chacune des autorisations disponibles.
 
 {{% permissions %}}
 {{< permissions group="Logs" >}}
@@ -43,4 +50,4 @@ En plus des autorisations générales, il est possible de définir des autorisat
 *Log Rehydration est une marque déposée de Datadog, Inc.
 
 [1]: /fr/account_management/users/#edit-a-user-s-roles
-[2]: /fr/api/v2/roles/#list-permissions
+[2]: /fr/api/latest/roles/#list-permissions

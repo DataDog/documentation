@@ -35,7 +35,10 @@ Under **Define the source**, select **Monitor Based**.
 
 ### Define queries
 
-In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list.
+In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list. 
+
+If you’re only using a single multi-alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors. 
+
 
 ### Set your SLO targets
 
@@ -70,7 +73,7 @@ Select **Save & Exit** to save your new SLO.
 
 {{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated"  >}}
 
-Datadog calculates the overall status as the percentage of the time where **all** monitors or **all** the calculated groups in a single multi-alert monitor are NOT in the `ALERT` state. Datadog does not calculate the average of the aggregated monitors or the aggregated groups. 
+Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected. If specific groups have been selected, the SLO status is calculated with only those groups. If no specific groups are selected, the UI displays the five groups with the worst statuses.
 
 Monitor-based SLOs treat the `WARN` state as `OK`. The definition of an SLO requires a binary distinction between good and bad behavior. SLO calculations treat `WARN` as good behavior since `WARN` is not severe enough to indicate bad behavior.
 

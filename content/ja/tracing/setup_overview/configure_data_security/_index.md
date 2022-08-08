@@ -1,14 +1,15 @@
 ---
-title: Datadog Agent またはデータセキュリティ向けトレーサーを構成する
-kind: documentation
-description: セキュリティおよび微調整のため、Datadog トレーサーまたは Agent を構成してスパンを修正、破棄します。
 aliases:
-  - /ja/security/tracing
-  - /ja/tracing/security
-  - /ja/tracing/guide/security
-  - /ja/tracing/guide/agent_obfuscation
-  - /ja/tracing/guide/agent-obfuscation
-  - /ja/tracing/custom_instrumentation/agent_customization
+- /ja/security/tracing
+- /ja/tracing/security
+- /ja/tracing/guide/security
+- /ja/tracing/guide/agent_obfuscation
+- /ja/tracing/guide/agent-obfuscation
+- /ja/tracing/custom_instrumentation/agent_customization
+- /ja/tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
+description: セキュリティおよび微調整のため、Datadog トレーサーまたは Agent を構成してスパンを修正、破棄します。
+kind: documentation
+title: Datadog Agent またはデータセキュリティ向けトレーサーを構成する
 ---
 ## 概要
 
@@ -18,9 +19,9 @@ Datadog Agent および一部のトレーシングライブラリには、この
 
 ご希望の調整ニーズが記載されていない場合は、[Datadog サポートチーム][1]までお問い合わせください。
 
-## 基本的フィルター
+## リソース名の一般化とベースラインのフィルタリング
 
-Datadog では、基本的なセキュリティを提供するデフォルトとして、スパンに対し標準的なフィルターメカニズムが適用されます。
+Datadog では、スパンに標準としてのフィルターメカニズムを実行し、基本的なセキュリティに対する正当なデフォルトと、分析中のグループ化のためのリソース名の生成を提供します。具体的には:
 
 * **環境変数は Agent によって収集されません。**
 * **プリペアドステートメントを使用しない場合でも、SQL 変数は難読化されます**。たとえば、`SELECT data FROM table WHERE key=123 LIMIT 10` という `sql.query` 属性は、変数が難読化されて、`SELECT data FROM table WHERE key = ? LIMIT ?` というリソース名になります。
@@ -48,8 +49,7 @@ Agent [トレース][2]の難読化は、デフォルトで無効になってい
 * `http`
 * `remove_stack_traces`
 
-**注:** 複数のタイプのサービスに、同時に自動スクラビングを使用することができます。`datadog.yaml` ファイルの `obfuscation` セクションでそれぞれを構成します。
-
+**注:** 複数のタイプのサービスに、同時に自動スクラビングを使用することができます。`datadog.yaml` ファイルの `obfuscation` セクションでそれぞれを構成します。.
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
@@ -172,7 +172,47 @@ apm_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグのフィルタリングの置換規則
+## 収集した HTTP データ
+
+Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、以下のタグが各サーバー側の Web スパンに対して収集されます。
+
+*  `http.status_code` - リクエストのレスポンスステータスコード。
+*  `http.method` - メソッドまたは HTTP 動詞。
+*  `http.version` - プロトコルのバージョン。
+*  `http.url` - 難読化されたクエリ文字列を含む完全な URL。難読化の詳細については、以下を参照してください。
+*  `http.useragent` - ブラウザのユーザー Agent フィールド (利用可能な場合)。
+*  `http.server_name` - マッチしたホストまたはバーチャルホストのプライマリサーバー名。
+*  `http.route` - マッチしたルート (パステンプレート)。
+*  `http.client_ip` - すべてのプロキシの背後にある元のクライアントの IP アドレス (既知の場合)。`X-Forwarded-For` のようなヘッダーから発見される。
+*  `http.request.content_length` - リクエストペイロード本文のサイズ (バイト単位)。
+*  `http.request.content_length_uncompressed` - トランスポートデコード後の圧縮されていないリクエストペイロード本文のサイズ。
+*  `http.request.headers.*` - リクエストの HTTP ヘッダー。デフォルトでは何も収集されませんが、オプションで構成することができます。
+*  `http.response.content_length` - レスポンスペイロード本文のサイズ (バイト単位)。
+*  `http.response.content_length_uncompressed` - トランスポートデコード後の圧縮されていないレスポンスペイロード本文のサイズ。
+*  `http.response.headers.*` - レスポンスの HTTP ヘッダー。デフォルトでは何も収集されませんが、オプションで構成することができます。
+
+
+### クライアント IP ヘッダーの構成
+
+Datadog は自動的に、`X-Forwarded-For` のようなよく知られたヘッダーから、`http.client_ip` を解決しようとします。もし、このフィールドにカスタムヘッダーを使用したり、解決アルゴリズムをバイパスしたい場合は、`DD_TRACE_CLIENT_IP_HEADER` 環境変数を設定すると、ライブラリはクライアント IP の指定されたヘッダーのみを検索します。
+
+クライアントの IP 値を収集したくない場合は、`DD_TRACE_CLIENT_IP_HEADER_DISABLED` 環境変数を `true` に設定します。デフォルトでは `false` になっています。
+
+### URL のクエリを編集する
+
+`http.url` タグには、クエリ文字列を含む完全な URL 値が割り当てられます。クエリ文字列は機密データを含む可能性があるため、デフォルトで Datadog はこれをパースし、疑わしい値を削除します。この編集プロセスは構成可能です。編集に使われる正規表現を変更するには、`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` 環境変数に有効な正規表現を設定します。有効な正規表現はプラットフォームに依存します。この正規表現は疑わしいキーと値のペアを見つけると、それを `<redacted>` に置き換えます。
+
+クエリ文字列を収集したくない場合は、環境変数 `DD_HTTP_SERVER_TAG_QUERY_STRING` を `false` に設定します。デフォルトは `true` です。
+
+### ルートスパンにヘッダータグを適用する
+
+トレースヘッダータグを収集するには、 `DD_TRACE_HEADER_TAGS` 環境変数に、大文字小文字を区別しないヘッダーキーとタグ名のマップを設定します。ライブラリは、マッチするヘッダー値をルートスパンのタグとして適用します。この設定は、例えば、指定されたタグ名のないエントリーを受け入れることもできます。
+
+```
+DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
+```
+
+## ログの機密スパンのスクラビング
 
 [スパン][3]のタグから機密データをスクラブするには、[datadog.yaml コンフィギュレーションファイル][4]の `replace_tags` 設定、または `DD_APM_REPLACE_TAGS` 環境変数を使用します。設定または環境変数の値は、タグ内で機密データの置換方法を指定するパラメーターグループの一覧です。パラメーターは以下のとおりです。
 
@@ -261,11 +301,13 @@ DD_APM_REPLACE_TAGS=[
 
 ## リソースを収集から除外
 
+特定のリソースをトレースしないオプションに関する詳しい概要については、[不要なリソースを無視する][5]をご参照ください。
+
 サービスに、ヘルスチェックなどシミュレーショントラフィックが含まれる場合、このようなトレースの収集を除外して、サービスのメトリクスが本番トラフィックと一致するようにすることが望ましい場合があります。
 
 そこで、Agent により Datadog に送信されるトレースから、特定のリソースを除外するように Agent を設定できます。特定のリソースが送信されないようにするには、`datadog.yaml` ファイルの `ignore_resources` 設定を使用します。そして、1 つ以上の正規表現のリストを作成し、リソース名に基づき Agent で除外するリソースを指定します。
 
-コンテナ化された環境で実行している場合は、代わりに Datadog Agent を使用してコンテナに `DD_APM_IGNORE_RESOURCES` を設定します。詳細については、[Docker APM Agent 環境変数][5]をご参照ください。
+コンテナ化された環境で実行している場合は、代わりに Datadog Agent を使用してコンテナに `DD_APM_IGNORE_RESOURCES` を設定します。詳細については、[Docker APM Agent 環境変数][6]をご参照ください。
 
 ```text
 ## @param ignore_resources - 文字列のリスト - オプション
@@ -273,8 +315,6 @@ DD_APM_REPLACE_TAGS=[
 ## すべてのエントリは二重引用符で囲み、カンマで区切る必要があります。
 # ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 ```
-
-**注:** NodeJS トレーサーには、ノードトレーサー API の一部としてフィルタリングリクエストのオプションがあります。詳しくは、[こちら][6]をご覧ください。
 
 ## トレースを Agent API に直接送信
 
@@ -289,13 +329,13 @@ DD_APM_REPLACE_TAGS=[
 * Python: [トレースフィルター][10]
 
 
-[1]: /ja/help
+[1]: /ja/help/
 [2]: /ja/tracing/visualization/#trace
 [3]: /ja/tracing/visualization/#spans
 [4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /ja/agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[6]: /ja/tracing/custom_instrumentation/nodejs/#request-filtering
-[7]: /ja/api/v1/tracing/
+[5]: /ja/tracing/guide/ignoring_apm_resources/
+[6]: /ja/agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[7]: /ja/tracing/guide/send_traces_to_agent_by_api/
 [8]: /ja/tracing/setup_overview/custom_instrumentation/java/#extending-tracers
 [9]: /ja/tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

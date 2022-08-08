@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Cognito のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Cognito インテグレーション
 short_description: Amazon Cognito のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダーによるユーザー ID の認証、AWS Cloud へのモバイルユーザーデータの保存を行うことができるサービスです。

@@ -9,7 +9,6 @@ categories:
 - cloud
 - aws
 - log collection
-ddtype: crawler
 dependencies: []
 description: AWS サービスを Datadog と統合。
 doc_link: https://docs.datadoghq.com/integrations/amazon_web_services/
@@ -129,94 +128,23 @@ Datadog の Amazon Web Services インテグレーションは、<a href="https:
 <div class="alert alert-warning">AWS のロール委任は、Datadog for Government site でサポートされていません。<a href="?tab=accesskeysgovcloudorchinaonly#setup">アクセスキー</a>を使用する必要があります。</div>
 {{< /site-region >}}
 
-以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、トレース、ログを収集します。
+以下のいずれかの方法を使用して AWS アカウントを Datadog に統合し、メトリクス、イベント、タグ、ログを収集します。
 
-- [ロールの委任 (自動)](?tab=roledelegation#automatic---cloudformation): CloudFormation テンプレートを使用して、必要な AWS ロールを自動的に設定します (推奨)。
-- [ロールの委任 (手動)](?tab=roledelegation#manual): 必要なロールを手動で作成し、必要な資格情報を該当フォームにコピーします。
-- [アクセスキー](?tab=accesskeysgovcloudorchinaonly#setup): GovCloud または中国のみで使用
+### 自動
 
-{{< tabs >}}
-{{% tab "Role delegation" %}}
+  * **CloudFormation (手早く始めるには最適)**  
+    CloudFormation で AWS インテグレーションを設定するには、[AWS スタートガイド][1]を参照してください。
 
-必要となる AWS ロールのセットアップ方法を選択してください。CloudFormation を推奨します。
-
-### 自動 - CloudFormation
-
-CloudFormation で AWS を設定するには、[AWS スタートガイド][1]を参照してください。
+  * **Terraform**  
+    AWS と Terraform のインテグレーションを設定するには、[AWS と Terraform のインテグレーション][73]を参照してください。
 
 ### 手動
 
-#### AWS
+   * **ロールの委任**  
+     AWS インテグレーションをロールの委任で手動設定する場合は、[手動設定ガイド][74]を参照してください。
 
-1. AWS [IAM コンソール][2]で新しいロールを作成します。 
-2. ロールタイプで、`Another AWS account` を選択します。
-3. アカウント ID で、`464622532012` (Datadog のアカウント ID) を入力します。これは、Datadog に AWS データへの読み取り専用アクセスを許可することを意味します。
-4. `Require external ID` を選択して、[AWS インテグレーションタイル][3]で生成したものを入力します。**Require MFA** は無効のままにしてください。_外部 ID についての詳細は、[IAM ユーザーガイド][4]を参照してください_。
-5. `Next: Permissions` をクリックします。
-6. 既にポリシーを作成してある場合は、このページで検索して選択し、ステップ 12 に進んでください。そうでない場合は、`Create Policy` をクリックします。新しいウィンドウが開きます。
-7. `JSON` タブを選択します。Datadog が提供する各 AWS インテグレーションを利用するには、テキストボックスの下にある[ポリシー スニペット](#datadog-aws-iam-policy)を使用します。これらのアクセス許可は、他のコンポーネントがインテグレーションに追加されると変更される場合があります。
-8. `Next: Tags` と `Review policy` をクリックします。
-9. ポリシーに `DatadogAWSIntegrationPolicy`、または自分が選択した名前を付け、適切な説明を入力します。
-10. `Create policy` をクリックし、このウィンドウを閉じます。
-11. "Create role" ウィンドウに戻り、ポリシーのリストを更新し、作成したポリシーを選択します。
-12. (オプション): [AWS SecurityAudit Policy][6] をロールに追加して、Datadog の [Cloud Security Posture Management 製品][5]を使用するために必要なアクセス許可を追加します。
-13. `Next: Tags` と `Next: Review` をクリックします。
-14. ロールに `DatadogAWSIntegrationRole` などの名前を付け、適切な説明を入力します。
-15. `Create Role` をクリックします。
-
-**補足**: Terraform を使用する場合は、[Terraform との AWS インテグレーション][7]を利用して Datadog IAM ポリシーをセットアップします。
-
-#### Datadog
-
-1. Datadog AWS インテグレーションタイルに戻ります。
-2. **Role Delegation** タブを選択して **Manually** を選択します。
-3. AWS アカウント ID を**ダッシュなしで**入力します（例、`123456789012`）。アカウント ID は、[AWS インテグレーションのインストール](#aws)中に作成されるロールの ARN にあります。
-4. 作成されたロールの名前を入力します。**注:** インテグレーションタイルに入力する名前は大文字と小文字が区別され、AWS 側で作成されるロール名と完全に一致する必要があります。
-5. [Datadog is not authorized to perform sts:AssumeRole][8] (Datadog は sts:AssumeRole を実行する権限がありません) エラーが発生した場合、AWS 信頼ポリシーの `sts:ExternalId:` が Datadog AWS インテグレーションタイルで生成した `AWS External ID` と一致しているか確認してください。
-6. ダイアログの左側で、メトリクスを収集する AWS サービスを選択します。
-7. オプションで、[Resource Collection][9] (一部の製品または機能で必要となります) を有効化したい場合は  `Enable resource configuration collection` ボックスをオンにします。
-8. オプションで、すべてのホストやメトリクスにタグを追加します。
-9. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
-10. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
-11. **Install Integration** をクリックします。
-
-
-
-[1]: https://docs.datadoghq.com/ja/getting_started/integrations/aws/
-[2]: https://console.aws.amazon.com/iam/home#/roles
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[5]: /ja/security_platform/cspm
-[6]: https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit
-[7]: /ja/integrations/faq/aws-integration-with-terraform
-[8]: /ja/integrations/faq/error-datadog-not-authorized-sts-assume-role/#pagetitle
-[9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#resource-collection
-{{% /tab %}}
-
-{{% tab "アクセスキー (GovCloud または中国のみ)" %}}
-
-#### AWS
-
-1. AWS コンソールで、Datadog インテグレーションで使用される IAM ユーザーをセットアップします。
-2. Datadog インテグレーション IAM ユーザー用のアクセスキーとシークレットキーを生成します。
-
-詳しくは、AWS のドキュメント、[第三者にお客様の AWS リソースへのアクセスを許可する際の外部 ID の使用方法][1]をご覧ください。
-
-#### Datadog
-
-1. [AWS インテグレーション タイル][2]を開きます。
-2. **Access Keys (GovCloud or China Only)** タブを選択します。
-3. `AWS アクセスキー` と `AWS シークレットキー` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
-4. ダイアログの左側で、メトリクスを収集するサービスを選択します。
-5. オプションで、すべてのホストやメトリクスにタグを追加します。
-6. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
-7. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
-8. **Install Integration** をクリックします。
-
-[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-{{% /tab %}}
-{{< /tabs >}}
+   * **アクセスキー (GovCloud または中国のみ)**  
+     アクセスキーによる AWS インテグレーションを設定する場合は、[手動設定ガイド][75]を参照してください。
 
 {{% aws-permissions %}}
 
@@ -224,15 +152,15 @@ CloudFormation で AWS を設定するには、[AWS スタートガイド][1]を
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][73]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
-- [Forwarder Lambda 関数][74]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
+- [Kinesis Firehose destination][76]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
+- [Forwarder Lambda 関数][77]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
 
 ## メトリクスの収集
 
 メトリクスを Datadog に送信する方法は 2 つあります。
 
-- [メトリクスのポーリング][75]: AWS インテグレーションで利用できる API ポーリングです。CloudWatch API をメトリクス別にクロールしてデータを取得し、Datadog に送信します。新しいメトリクスの取得は平均 10 分毎に行われます。
-- [Kinesis Firehose でのメトリクスストリーム][76]: Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose を使用してメトリクスを確認します。**注**: このメソッドには 2 - 3 分のレイテンシーがあり、別途設定が必要となります。
+- [メトリクスのポーリング][78]: AWS インテグレーションで利用できる API ポーリングです。CloudWatch API をメトリクス別にクロールしてデータを取得し、Datadog に送信します。新しいメトリクスの取得は平均 10 分毎に行われます。
+- [Kinesis Firehose でのメトリクスストリーム][79]: Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose を使用してメトリクスを確認します。**注**: このメソッドには 2 - 3 分のレイテンシーがあり、別途設定が必要となります。
 
 ## リソース収集
 
@@ -242,29 +170,35 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 #### セットアップ
 
-お使いの AWS アカウントで AWS インテグレーションの設定をまだ行っていない場合は、上記の[設定プロセス][77]を完了させ、リソース収集が有効化されていることを適宜ご確認ください。
+お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][80]を完了させます。リソース収集が有効化されていることを適宜ご確認ください。
 
-その他の Datadog 製品で AWS インテグレーション設定を既に行っているがリソース収集をまだ有効化していない場合は、次のいずれかの操作を行ってください。
+**注:** この機能を使用するには、AWS インテグレーションに**ロールの委任**を設定する必要があります。
 
-1. 自動 - CloudFormation テンプレートを更新します
-    1. CloudFormation コンソールで Datadog インテグレーションのインストールに使用した主要なスタックを探し、`Update` を選択します
-    2. `Replace current template` を選択します
-    3. `Amazon S3 URL` を選択して `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml` を入力し、`next` をクリックします
-    4. `CloudSecurityPostureManagementPermissions` を true に設定し、`next` をクリックします。`Review` ページに到達するまでその他の既存のパラメーターは変更しないでください。ここで変更点をプレビューおよび確認します。
-    5. 下部にある 2 つの確認ボックスをオンにし、`Update stack` をクリックします。
-2. 手動
-    1. AWS が管理する `SecurityAudit` ポリシーを Datadog AWS IAM ロールにアタッチします。このポリシーは [AWS コンソール][78]にあります。
-2. [Datadog AWS インテグレーション タイル][79]を開いて次の操作を行います。
-    1. リソース収集を有効化したい AWS アカウントをクリックします。
-    2. そのアカウントの **Resource collection** セクションに移動し、`Route resource data to the Cloud Security Posture Management product` (リソースデータを Cloud Security Posture Management 製品にルーティングする) チェックボックスをオンにします
-    3. タイルの下部で `Update Configuration` をクリックします
+既存の AWS インテグレーションに Cloud Security Posture Management を追加するには、以下の手順でリソース収集を有効にしてください。
+
+1. 自動**または**手動手順で Datadog IAM ロールに必要な権限を提供します。
+
+   **自動** - CloudFormation テンプレートを更新します。
+   a. CloudFormation コンソールで Datadog インテグレーションのインストールに使用した主要なスタックを探し、`Update` を選択します。
+   b. `Replace current template` を選択します。
+   c. `Amazon S3 URL` を選択して `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml` を入力し、`Next` をクリックします。
+   d. `CloudSecurityPostureManagementPermissions` を `true` に設定し、`Next` をクリックします。`Review` ページに到達するまでその他の既存のパラメーターは変更しないでください。ここで変更点をプレビューおよび確認します。
+   e. 下部にある 2 つの確認ボックスをオンにし、`Update stack` をクリックします。
+
+   **手動** - [AWS が管理する `SecurityAudit` ポリシー][81]を Datadog AWS IAM ロールにアタッチします。このポリシーは [AWS コンソール][81]にあります。
+
+2. [Datadog AWS インテグレーションタイル][82]で、以下の手順で設定を完了させます。または、[Update an AWS Integration][74] API エンドポイントを利用することも可能です。
+
+   1. リソース収集を有効化したい AWS アカウントをクリックします。
+   2. そのアカウントの **Resource collection** セクションに移動し、`Expanded collection required for Cloud Security Posture Management` チェックボックスをオンにします。
+   3. タイルの下部で `Update Configuration` をクリックします。
 
 ## アラームの収集
 
 AWS CloudWatch アラームを Datadog イベントストリームに送信する方法は 2 つあります。
 
-- アラームポーリング: アラームポーリングは AWS インテグレーションですぐに使用でき、[DescribeAlarmHistory][80] API を介してメトリクスアラームをフェッチします。この方法に従うと、イベントソース `Amazon Web Services` の下にアラームが分類されます。**注**: クローラーは複合アラームを収集しません。
-- SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントストリーム内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][81]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
+- アラームポーリング: アラームポーリングは AWS インテグレーションですぐに使用でき、[DescribeAlarmHistory][83] API を介してメトリクスアラームをフェッチします。この方法に従うと、イベントソース `Amazon Web Services` の下にアラームが分類されます。**注**: クローラーは複合アラームを収集しません。
+- SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントストリーム内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][84]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
 
 ## 収集データ
 
@@ -274,7 +208,7 @@ AWS CloudWatch アラームを Datadog イベントストリームに送信す�
 
 ### イベント
 
-AWS からのイベントは、AWS サービス単位で収集されます。収集されるイベントの詳細については、[お使いの AWS サービスのドキュメント][83]を参照してください。
+AWS からのイベントは、AWS サービス単位で収集されます。収集されるイベントの詳細については、[お使いの AWS サービスのドキュメント][86]を参照してください。
 
 ### タグ
 
@@ -313,7 +247,7 @@ AWS インテグレーションにより以下のタグが収集されます。*
 | [OpsWorks][56]         | `stackid`、`layerid`、`instanceid`                                                                                                                                                                            |
 | [Polly][57]            | `operation`                                                                                                                                                                                                   |
 | [RDS][58]              | `auto_minor_version_upgrade`、`dbinstanceclass`、`dbclusteridentifier`、`dbinstanceidentifier`、`dbname`、`engine`、`engineversion`、`hostname`、`name`、`publicly_accessible`、`secondary_availability-zone` |
-| [RDS Proxy][84]       | `proxyname`、`target`、`targetgroup`、`targetrole`                                                                                                                                                                                                  |
+| [RDS Proxy][87]       | `proxyname`、`target`、`targetgroup`、`targetrole`                                                                                                                                                                                                  |
 | [Redshift][59]       | `clusteridentifier`、`latency`、`nodeid`、`service_class`、`stage`、`wlmid`                                                                                                                                   |
 | [Route 53][61]        | `healthcheckid`                                                                                                                                                                                               |
 | [S3][62]             | `bucketname`、`filterid`、`storagetype`                                                                                                                                                                       |
@@ -329,7 +263,7 @@ AWS インテグレーションにより以下のタグが収集されます。*
 
 ## トラブルシューティング
 
-AWS インテグレーションに関する問題解決は、[AWS インテグレーションのトラブルシューティングガイド][86]をご参照ください。
+AWS インテグレーションに関する問題解決は、[AWS インテグレーションのトラブルシューティングガイド][89]をご参照ください。
 
 ## その他の参考資料
 
@@ -407,17 +341,20 @@ AWS インテグレーションに関する問題解決は、[AWS インテグ�
 [70]: https://docs.datadoghq.com/ja/integrations/amazon_waf/
 [71]: https://docs.datadoghq.com/ja/integrations/amazon_workspaces/
 [72]: https://docs.datadoghq.com/ja/integrations/amazon_xray/
-[73]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[74]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[75]: /ja/integrations/faq/cloud-metric-delay/#aws
-[76]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?
-[77]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
-[78]: https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit
-[79]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[80]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html#API_DescribeAlarmHistory_RequestParameters
-[81]: https://docs.datadoghq.com/ja/integrations/amazon_sns/#receive-sns-messages
-[82]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
-[83]: https://docs.datadoghq.com/ja/integrations/#cat-aws
-[84]: https://docs.datadoghq.com/ja/integrations/amazon_rds_proxy/
-[85]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/service_checks.json
-[86]: https://docs.datadoghq.com/ja/integrations/guide/aws-integration-troubleshooting/
+[73]: https://docs.datadoghq.com/ja/integrations/guide/aws-terraform-setup
+[74]: https://docs.datadoghq.com/ja/integrations/guide/aws-manual-setup/
+[75]: https://docs.datadoghq.com/ja/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly
+[76]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[77]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[78]: /ja/integrations/faq/cloud-metric-delay/#aws
+[79]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?
+[80]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
+[81]: https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit
+[82]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[83]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html#API_DescribeAlarmHistory_RequestParameters
+[84]: https://docs.datadoghq.com/ja/integrations/amazon_sns/#receive-sns-messages
+[85]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
+[86]: https://docs.datadoghq.com/ja/integrations/#cat-aws
+[87]: https://docs.datadoghq.com/ja/integrations/amazon_rds_proxy/
+[88]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/service_checks.json
+[89]: https://docs.datadoghq.com/ja/integrations/guide/aws-integration-troubleshooting/

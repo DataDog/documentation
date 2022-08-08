@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/memcached
+- /ja/integrations/memcached
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -15,20 +15,20 @@ assets:
     memcached_processes: assets/saved_views/memcached_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - caching
-  - autodiscovery
-  - log collection
+- web
+- caching
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/mcache/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_name: Memcached
 draft: false
 git_integration_title: mcache
 guid: b1c4033c-bf96-4456-be63-e74ff171f991
 integration_id: memcached
 integration_title: Memcache
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -37,14 +37,17 @@ metric_prefix: memcache.
 metric_to_check: memcache.uptime
 name: mcache
 process_signatures:
-  - memcached
-public_title: Datadog-Memcache インテグレーション
+- memcached
+public_title: Memcache インテグレーション
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## 概要
 
 Agent の Memcache チェックを使用して、Memcache のメモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡します。
@@ -151,7 +154,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `mcache` を探します。
+[Agent の `status` サブコマンド][2]を実行し、Checks セクションで `mcache` を探します。
 
 ## 収集データ
 
@@ -166,9 +169,8 @@ _Agent バージョン 6.0 以降で利用可能_
 Mcache チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "mcache" >}}
 
-**memcache.can_connect**:<br>
-Agent が memcache に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

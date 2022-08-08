@@ -10,17 +10,17 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - ログの収集
+- ログの収集
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tenable/README.md
+- https://github.com/DataDog/integrations-core/blob/master/tenable/README.md
 display_name: Tenable
 draft: false
 git_integration_title: tenable
 guid: 303a1ba9-5136-4d23-9785-e36ea0d6caab
 integration_id: tenable
 integration_title: Tenable Nessus
+integration_version: 1.4.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -28,14 +28,15 @@ manifest_version: 1.0.0
 metric_prefix: tenable.
 metric_to_check: ''
 name: tenable
-public_title: Datadog-Tenable Nessus インテグレーション
+public_title: Tenable Nessus インテグレーション
 short_description: Nessus のバックエンドと Web サーバーのログを追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
 ## 概要
 
 このインテグレーションは、Datadog Agent を通じて [Tenable Nessus][1] のログを監視します。
@@ -90,7 +91,7 @@ _Agent バージョン 6.0 以降で利用可能_
 #### 収集されるログデータ
 
 1. Nessus のバックエンドログには、スキャン名、開始時間、停止時間、期間、ターゲットに関するデータが収集されます。
-2. Nessus Web サーバーログには、クライアント IP、ユーザーエージェント、ログインの試行、成功、失敗など、Nessus Web サーバーに対するアクセスログのデータが収集されます。
+2. Nessus Web サーバーログには、クライアント IP、ユーザー Agent、ログインの試行、成功、失敗など、Nessus Web サーバーに対するアクセスログのデータが収集されます。
 
 ### メトリクス
 

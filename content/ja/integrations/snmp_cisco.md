@@ -8,15 +8,14 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - モニタリング
-  - notification
-  - ネットワーク
-  - オートディスカバリー
-  - snmp
+- モニタリング
+- notification
+- ネットワーク
+- オートディスカバリー
+- snmp
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
+- https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
 display_name: Cisco
 draft: false
 git_integration_title: snmp_cisco
@@ -29,17 +28,20 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_to_check:
-  - snmp.cefcFRUPowerAdminStatus
-  - snmp.devClientCount
+- snmp.cefcFRUPowerAdminStatus
+- snmp.devClientCount
 name: snmp_cisco
-public_title: Datadog-Cisco インテグレーション
+public_title: Cisco インテグレーション
 short_description: Cisco ネットワークデバイスから SNMP メトリクスを収集
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Cisco は、IT、ネットワーク、そしてサイバーセキュリティのソリューションを世界的にけん引する企業です。インテグレーションをインストールすると、ルーター、スイッチ、ボイスギア、セキュリティ アプライアンスなど、すべての Cisco アプライアンスを監視できます。

@@ -16,12 +16,6 @@ title: Datadog ソースコードインテグレーション
 
 GitHub アプリのインテグレーションと組み合わせることで、エラーにインラインコードスニペットを表示することができます。詳しくは、[インラインソースコード](#inline-source-code)をご覧ください。
 
-| インテグレーション名            | スタックトレースリンク | 課題・PR プレビュー | インラインコードスニペット |
-|-----------------------------|-------------------|-----------------------|----------------------|
-| ソースコード                 | {{< X >}}         | X                     | X                    |
-| GitHub アプリ                 | X                 | {{< X >}}             | X                    |
-| ソースコードと GitHub アプリ | {{< X >}}         | {{< X >}}             | {{< X >}}            |
-
 ## コンフィギュレーション
 
 <div class="alert alert-info">
@@ -32,13 +26,26 @@ Datadog Agent 7.35.0 以降が必要です。
 
 テレメトリーデータとソースコードのマッピングを行うには
 
+{{< tabs >}}
+{{% tab "GitHub" %}}
+
+1. `git.commit.sha` と `git.repository_url` タグをコンテナに追加したり、テレメトリに直接追加したりします。
+2. Datadog の [GitHub Apps インテグレーション][1]をインストールして、ソースコードのスニペットをインラインで表示します。
+
+[1]: https://app.datadoghq.com/account/settings#integrations/github-apps
+{{% /tab %}}
+{{% tab "その他の Git プロバイダー" %}}
+
 1. `git.commit.sha` と `git.repository_url` タグをコンテナに追加したり、テレメトリに直接追加したりします。
 2. CI パイプラインで [`datadog-ci git-metadata upload`][1] を実行し、git リポジトリのメタデータをアップロードします。
-3. オプションで、[GitHub アプリをインストール][2]すると、インラインでソースコードのスニペットを表示することができます。
+
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+{{% /tab %}}
+{{< /tabs >}}
 
 ### テレメトリーのタグ付け
 
-データを特定のコミットにリンクさせるには、テレメトリーに `git.commit.sha` タグを付けます。
+データを特定のコミットにリンクさせるには、テレメトリーに `git.commit.sha` と `git.repository_url` タグを付けます。
 
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}
@@ -84,7 +91,18 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_U
 {{% /tab %}}
 {{< /tabs >}}
 
-### git メタデータをアップロードする
+### リポジトリの構成
+
+{{< tabs >}}
+{{% tab "GitHub" %}}
+
+GitHub SaaS ユーザーの場合、テレメトリーをソースコードにリンクさせるために、Datadog の [GitHub Apps インテグレーション][1]を [GitHub Apps インテグレーションタイル][2]にインストールします。
+インテグレーションタイルで権限を指定する際、Contents に対して Datadog の読み取り権限を有効にしてください。
+
+[1]: https://docs.datadoghq.com/ja/integrations/github_apps/
+[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
+{{% /tab %}}
+{{% tab "その他の Git プロバイダー" %}}
 
 テレメトリーをソースコードにリンクさせるために、Datadog は [`datadog-ci git-metadata upload`][1] コマンドで git リポジトリから全てのコミット SHA について情報を収集します。
 
@@ -97,10 +115,14 @@ git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、
 以下のような出力が期待できます。
 
 ```
-Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:DataDog/datadog-ci.git.
+Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@github.com:my-org/my-repository.git.
 180 tracked file paths will be reported.
 ✅  Handled in 0.077 seconds.
 ```
+
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Git へのリンク
 
@@ -131,7 +153,7 @@ GitHub SaaS をご利用の方は、Datadog の [GitHub アプリインテグレ
 
 #### Continuous Profiler
 
-[Continuous Profiler][2] では、GitHub 上のソースリポジトリにあるトレースに直接アクセスすることができます。
+[Continuous Profiler][5] では、GitHub 上のソースリポジトリにあるトレースに直接アクセスすることができます。
 
 1. **APM** > **Profile Search** の順に移動します。
 2. プロファイルをクリックし、フレームグラフのメソッドにカーソルを合わせます。右側に **More actions** というラベルの付いたケバブアイコンが表示されます。
@@ -147,3 +169,4 @@ GitHub SaaS をご利用の方は、Datadog の [GitHub アプリインテグレ
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 [3]: https://app.datadoghq.com/apm/error-tracking
 [4]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
+[5]: https://docs.datadoghq.com/ja/tracing/profiler/search_profiles/

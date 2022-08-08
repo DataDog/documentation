@@ -60,13 +60,13 @@ The **Public Sharing** tab contains lists of shared dashboards and shared graphs
 
 The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
 
-#### Audit Logs
+#### Audit Trail
 
-The **Audit Logs** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
+The **Audit Trail** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
 
-#### Audit Log Settings
+#### Audit Trail Settings
 
-The **Audit Log Settings** tab allows you to set the retention period of audit logs and enable archiving to other cloud storage services.
+The **Audit Trail Settings** tab allows you to set the retention period of audit trails and enable archiving to other cloud storage services.
 
 #### OAuth Apps
 
@@ -76,7 +76,7 @@ The [**OAuth Apps**][9] page allows you to view or manage OAuth applications in 
 
 #### Rename organization
 
-To rename your organization, click the **Rename organization** tab, enter the new name, then click **Save**.
+To rename your organization, click the **Edit** button in the **Preferences** tab of **Organization Settings**, enter the new name, then click the **Save** button.
 
 **Note: Your organization name may not exceed 32 characters.**
 

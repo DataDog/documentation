@@ -88,6 +88,18 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 
 Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
 
+#### Missing event statements consumer {#events-statements-consumer-missing}
+To capture explain plans, you must enable an event statements consumer. You can do this by adding the following option to your configuration files (for example, `mysql.conf`):
+```
+performance-schema-consumer-events-statements-current=ON
+```
+
+Datadog additionally recommends enabling the following:
+```
+performance-schema-consumer-events-statements-history-long=ON
+```
+This option enables the tracking of a larger number of recent queries across all threads. Turning it on increases the likelihood of capturing execution details from infrequent queries.
+
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
 The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
 
@@ -126,7 +138,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 
 #### Agent is running an unsupported version
 
-Ensure that the Agent is running version 7.36.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+Ensure that the Agent is running version 7.36.1 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
 #### Queries are truncated
 
@@ -173,7 +185,28 @@ performance_schema_max_digest_length=4096
 performance_schema_max_sql_text_length=4096
 ```
 
-Most workloads are able to capture most queries by raising this value to 4096, but you may need to set a higher value for particularly long and complex queries.
+### Query activity is missing
+
+Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
+
+#### `performance-schema-consumer-events-waits-current` is not enabled {#events-waits-current-not-enabled}
+The Agent requires the `performance-schema-consumer-events-waits-current` option to be enabled. It is disabled by default by MySQL, but may be enabled by your cloud provider. Follow the [setup instructions][1] for enabling it. Alternatively, to avoid bouncing your database, consider setting up a runtime setup consumer. Create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
+
+
+```SQL
+DELIMITER $$
+CREATE PROCEDURE datadog.enable_events_statements_consumers()
+    SQL SECURITY DEFINER
+BEGIN
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
+END $$
+DELIMITER ;
+GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
+```
+
+**Note:** This option additionally requires `performance_schema` to be enabled.
+
 
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 

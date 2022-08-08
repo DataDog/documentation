@@ -1,16 +1,16 @@
 ---
 categories:
-  - cloud
-  - AWS
-ddtype: crawler
+- cloud
+- AWS
 dependencies: []
 description: Amazon Network Firewall を監視します。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_network_firewall/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_network_firewall/
 draft: false
 git_integration_title: amazon_network_firewall
 has_logo: true
 integration_id: amazon-network-firewall
 integration_title: Amazon Network Firewall
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -19,6 +19,7 @@ public_title: Amazon Network Firewall
 short_description: Amazon Network Firewall を監視します。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS Network Firewall は、VPC の境界でトラフィックを絞り込むことができるステートフルなサービスです。
@@ -59,7 +60,7 @@ Amazon Network Firewall から S3 バケットまたは CloudWatch のいずれ�
 {{< get-metrics-from-git "amazon_network_firewall" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 

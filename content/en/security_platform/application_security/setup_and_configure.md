@@ -14,14 +14,14 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"
-- link: "/security_platform/guide/how-appsec-works/"
+- link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Monitoring Works in Datadog"
 ---
 
 ## Compatibility
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -198,6 +198,34 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+### Supported Python versions
+
+The Datadog Python library supports the following Python versions:
+
+- Python 2.7, 3.5 and higher
+
+These are supported on the following architectures:
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+- macOS (Darwin) x86-64
+- Windows (msvc) x86, x86-64
+
+You can monitor application security for Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
+### Supported frameworks
+
+| Framework Web Server | Minimum Framework Version |
+|----------------------|---------------------------|
+| Django               | 1.8                       |
+| Flask                | 0.10                      |
+
+Support for query strings is not available for Flask.
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Add user information to traces
@@ -237,7 +265,7 @@ if ((span instanceof MutableSpan)) {
 ```
 
 
-[1]: /tracing/setup_overview/open_standards/java/#setup
+[1]: /tracing/trace_collection/open_standards/java/#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -436,7 +464,7 @@ To protect users' data, sensitive data scanning is activated by default in ASM. 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
 
-<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong> 
+<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong>
 
 <p>You can also configure scanning patterns in code:</p>
 
@@ -492,9 +520,9 @@ If you need additional help, contact [Datadog support][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/custom_instrumentation/
+[1]: /tracing/trace_collection/custom_instrumentation/
 [2]: https://github.com/google/re2/wiki/Syntax
-[3]: /tracing/setup_overview/configure_data_security/
+[3]: /tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/appsec/exclusions
 [6]: /help/

@@ -11,7 +11,6 @@ dependencies:
 categories:
     - cloud
     - configuration & deployment
-ddtype: crawler
 integration_id: "cloudcheckr"
 ---
 

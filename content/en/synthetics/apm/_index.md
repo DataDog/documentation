@@ -96,18 +96,19 @@ These traces are retained [just like your classical APM traces][20].
 [3]: /synthetics/browser_tests/
 [4]: /tracing/
 [5]: https://app.datadoghq.com/synthetics/settings/default
-[6]: /tracing/setup_overview/setup/python/
+[6]: /tracing/trace_collection/dd_libraries/python/
 [7]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
-[8]: /tracing/setup_overview/setup/go/
+[8]: /tracing/trace_collection/dd_libraries/go/
 [9]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[10]: /tracing/setup_overview/setup/java/
+[10]: /tracing/trace_collection/dd_libraries/java/
 [11]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[12]: /tracing/setup_overview/setup/ruby/
+[12]: /tracing/trace_collection/dd_libraries/ruby/
 [13]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[14]: /tracing/setup_overview/setup/nodejs/
+[14]: /tracing/trace_collection/dd_libraries/nodejs/
 [15]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[16]: /tracing/setup_overview/setup/php/
+[16]: /tracing/trace_collection/dd_libraries/php/
 [17]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[18]: /tracing/setup_overview/setup/dotnet-core/
+[18]: /tracing/trace_collection/dd_libraries/dotnet-core/
 [19]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[20]: /tracing/trace_retention/
+[20]: /tracing/trace_pipeline/trace_retention/
+

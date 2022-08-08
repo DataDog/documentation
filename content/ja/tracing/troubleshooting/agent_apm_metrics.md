@@ -1,10 +1,11 @@
 ---
-title: Datadog Agent によって送信された APM メトリクス
-kind: ドキュメント
 aliases:
-  - /ja/agent/faq/agent-apm-metrics/
-  - /ja/tracing/send_traces/agent-apm-metrics/
+- /ja/agent/faq/agent-apm-metrics/
+- /ja/tracing/send_traces/agent-apm-metrics/
+kind: ドキュメント
+title: Datadog Agent によって送信された APM メトリクス
 ---
+
 以下で、[APM が有効化された際に][1] Datadog Agent により送信され、すぐに使えるトレーシングメトリクスの一覧をご覧いただけます。お使いの Datadog アカウントに [APM モニタリングダッシュボード][2]をインポートすれば、ダッシュボードでこれらのメトリクスの大半を利用できるようになります。
 
 
@@ -50,6 +51,10 @@ SQL の難読化が発生するたびに 1 増加。
 `datadog.trace_agent.panic`
 : **タイプ**: ゲージ<br>
 コードパニックごとに 1 増加。
+
+`datadog.trace_agent.profile`
+: **タイプ**: カウント<br>
+プロファイルエンドポイントのリバースプロキシが作成されるたびに 1 つずつ増加する。
 
 `datadog.trace_agent.ratelimit`
 : **タイプ**: ゲージ<br>
@@ -106,10 +111,6 @@ Agent に対して接続された TCP 接続の数。
 `datadog.trace_agent.receiver.traces_bytes`
 : **タイプ**: カウント<br>
 Agent が承認したペイロードの合計バイト数。
-
-`datadog.trace_agent.receiver.traces_dropped`
-: **タイプ**: カウント<br>
-正規化エラーが原因で削除されたトレース。
 
 `datadog.trace_agent.receiver.traces_filtered`
 : **タイプ**: カウント<br>

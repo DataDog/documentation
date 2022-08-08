@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/phpfpm
+- /ja/integrations/phpfpm
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -13,18 +13,18 @@ assets:
     php-fpm_processes: assets/saved_views/php-fpm_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - autodiscovery
+- web
+- autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_name: PHP-FPM
 draft: false
 git_integration_title: php_fpm
 guid: 47f2c337-83ac-4767-b460-1927d8343764
 integration_id: php-fpm
 integration_title: PHP FPM
+integration_version: 2.1.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,22 +33,26 @@ metric_prefix: php_fpm.
 metric_to_check: php_fpm.processes.total
 name: php_fpm
 process_signatures:
-  - php-fpm
-  - php7.0-fpm
-  - php7.0-fpm start
-  - service php-fpm
-  - php7.0-fpm restart
-  - restart php-fpm
-  - systemctl restart php-fpm.service
-  - php7.0-fpm.service
-public_title: Datadog-PHP FPM インテグレーション
+- php-fpm
+- 'php-fpm:'
+- php7.0-fpm
+- php7.0-fpm start
+- service php-fpm
+- php7.0-fpm restart
+- restart php-fpm
+- systemctl restart php-fpm.service
+- php7.0-fpm.service
+public_title: PHP FPM インテグレーション
 short_description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![PHP 概要][1]
 
 ## 概要
@@ -59,7 +63,7 @@ PHP-FPM チェックは、FPM プールの状態を監視し、リクエスト�
 
 ### インストール
 
-PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。PHP-FPM を使用するサーバーに追加でインストールする必要はありません。
+PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -190,13 +194,13 @@ PHP-FPM インストールが Unix ソケットを使用する場合、`status_u
 PHP-FPM チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "php_fpm" >}}
 
-**php_fpm.can_ping**:<br>
-構成された `ping_url` で Agent が PHP-FPM を ping できない場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/php_fpm/images/phpfpmoverview.png

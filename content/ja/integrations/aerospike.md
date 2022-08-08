@@ -1,41 +1,62 @@
 ---
+app_id: aerospike
+app_uuid: 68799442-b764-489c-8bbd-44cb11a15f4e
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Aerospike Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: aerospike.uptime
+      metadata_path: metadata.csv
+      prefix: aerospike.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Aerospike
   logs:
     source: aerospike
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - autodiscovery
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
-display_name: Aerospike
+display_on_public_website: true
 draft: false
 git_integration_title: aerospike
-guid: 582de9e7-0c99-4037-9cc5-bc34612ce039
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.16.0
+integration_version: 1.16.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: aerospike.
-metric_to_check: aerospike.uptime
+manifest_version: 2.0.0
 name: aerospike
-public_title: Datadog-Aerospike インテグレーション
+oauth: {}
+public_title: Aerospike
 short_description: Aerospike データベースからクラスターやネームスペースの統計を収集
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::データストア
+  - Category::オートディスカバリー
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Aerospike データベースからクラスターやネームスペースの統計を収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Aerospike
 ---
 
 

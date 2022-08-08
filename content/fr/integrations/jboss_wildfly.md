@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - log collection
-  - autodiscovery
+- web
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_name: JBoss/WildFly
 draft: false
 git_integration_title: jboss_wildfly
 guid: ff99b3d2-9c14-4cdf-b869-7b8b1cbf0716
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
+integration_version: 2.0.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -31,13 +32,17 @@ metric_prefix: jboss.
 metric_to_check: jboss.jdbc_connections.count
 name: jboss_wildfly
 public_title: Intégration Datadog/JBoss/WildFly
-short_description: Recueille diverses métriques JMX fournies par des applications JBoss et WildFly
+short_description: Recueille diverses métriques JMX fournies par des applications
+  JBoss et WildFly
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller les applications [JBoss][1] et [WildFly][2].
@@ -50,7 +55,7 @@ Le check JBoss/WildFly est inclus avec le package de l'[Agent Datadog][3] : vou
 
 ### Configuration
 
-Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques recueillies, consultez la [documentation relative aux checks JMX][4] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][5].
+Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué sur la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques recueillies, consultez la [documentation relative aux checks JMX][4] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][5].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -70,7 +75,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
    - Wildfly 9 et versions antérieures : `service:jmx:http-remoting-jmx://<HOST>:<PORT>`
    - Wildfly 10+ : `service:jmx:remote+http://<HOST>:<PORT>`
 
-    Référez-vous à la [page de configuration du sous-système JMX pour WildFly][2] pour en savoir plus.
+    Consultez la [page de configuration du sous-système JMX pour WildFly][2] pour en savoir plus.
 
 2. [Redémarrez l'Agent][3].
 
@@ -138,14 +143,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 L'intégration JBoss/WildFly n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "jboss_wildfly" >}}
 
-**jboss.can_connect** :
-
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance JBoss/Wildfly qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
+
 
 
 [1]: https://developers.redhat.com/products/eap/overview

@@ -1,11 +1,10 @@
 ---
 aliases:
-  - /ja/integrations/azure_containerservice
+- /ja/integrations/azure_containerservice
 categories:
-  - cloud
-  - コンテナ
-  - azure
-ddtype: crawler
+- cloud
+- コンテナ
+- azure
 dependencies: []
 description: Azure Kubernetes Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_container_service/
@@ -23,6 +22,7 @@ public_title: Datadog-Microsoft Azure Kubernetes Service インテグレーシ�
 short_description: Azure Kubernetes Services のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Kubernetes Service を使用すると、実稼働準備が整った Kubernetes クラスターを迅速にデプロイできます。

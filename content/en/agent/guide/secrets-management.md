@@ -234,10 +234,27 @@ The script `readsecret_multiple_providers.sh` can be used to read from both file
 | Read from files        | `ENC[file@/path/to/file]`                        |
 | Kubernetes Secrets     | `ENC[k8s_secret@some_namespace/some_name/a_key]` |
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+To use this executable with the Helm chart, set it as the following:
+```yaml
+datadog:
+  [...]
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
 To use this executable, set the environment variable `DD_SECRET_BACKEND_COMMAND` as follows:
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Read from file example
 The Agent can read a specified file relative to the path provided. This file can be brought in from [Kubernetes Secrets](#kubernetes-secrets), [Docker Swarm Secrets](#docker-swarm-secrets), or any other custom method.
@@ -302,6 +319,8 @@ roleRef:
   apiGroup: ""
 ```
 This `Role` gives access to the `Secret: database-secret` in the `Namespace: database`. The `RoleBinding` links up this permission to the `ServiceAccount: datadog-agent` in the `Namespace: default`. This needs to be manually added to your cluster with respect to your resources deployed.
+
+In addition to these permissions, you need to enable the script to read from multiple providers `"/readsecret_multiple_providers.sh"` when using the Kubernetes Secrets provider.
 
 ### (Legacy) Scripts for reading from files
 Datadog Agent v7.32 introduces the `readsecret_multiple_providers.sh` script. Datadog recommends that you use this script instead of `/readsecret.py` and `/readsecret.sh` from Agent v6.12. Note that `/readsecret.py` and `/readsecret.sh` are still included and supported in the Agent to read files.
@@ -412,7 +431,7 @@ Source: File Configuration Provider
 Instance 1:
 host: <decrypted_host>
 port: <decrypted_port>
-password: <decrypted_password>
+password: <obfuscated_password>
 ~
 ===
 
@@ -421,7 +440,7 @@ Source: File Configuration Provider
 Instance 1:
 host: <decrypted_host2>
 port: <decrypted_port2>
-password: <decrypted_password2>
+password: <obfuscated_password2>
 ~
 ===
 ```

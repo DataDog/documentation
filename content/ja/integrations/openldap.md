@@ -11,19 +11,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - ログの収集
-  - オートディスカバリー
+- data store
+- ログの収集
+- オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openldap/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
 display_name: OpenLDAP
 draft: false
 git_integration_title: openldap
 guid: ec61c06d-a870-4183-8a27-c66db1fc47cc
 integration_id: openldap
 integration_title: OpenLDAP
+integration_version: 1.10.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,14 +31,17 @@ manifest_version: 1.0.0
 metric_prefix: openldap.
 metric_to_check: openldap.connections.current
 name: openldap
-public_title: Datadog-OpenLDAP インテグレーション
+public_title: OpenLDAP インテグレーション
 short_description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 OpenLDAP インテグレーションを使用すると、OpenLDAP サーバーの `cn=Monitor` バックエンドからメトリクスを取得できます。
@@ -184,7 +187,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                 |
 | -------------- | ----------------------------------------------------- |
@@ -214,13 +217,13 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 openldap チェックには、イベントは含まれません。
 
 ### サービスのチェック
+{{< get-service-checks-from-git "openldap" >}}
 
-**openldap.can_connect**:<br>
-インテグレーションが監視対象の OpenLDAP サーバーにバインドできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

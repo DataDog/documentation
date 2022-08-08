@@ -197,7 +197,7 @@ Datadog サーバーレスプラグインをインストールして構成する
     import { Datadog } from "datadog-cdk-constructs-v2";
 
     const datadog = new Datadog(this, "Datadog", {
-        nodeLayerVersion: {{< latest-lambda-layer-version layer="python" >}},
+        nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
         extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
         site: "<DATADOG_SITE>",
         apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
@@ -246,7 +246,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 4. Datadog サイトと API キーの構成
 
-    - 環境変数 `DD_SITE` に、テレメトリー送信先の [Datadog サイト][3]を設定します。
+    - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 
@@ -275,7 +275,7 @@ Datadog サーバーレスプラグインをインストールして構成する
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
       ```
 
-      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。` RUNTIME` オプションは、`Node12-x` または `Node14-x` が利用可能です。
+      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Node12-x`、`Node14-x` または `Node16-x` が利用可能です。
 
     - オプション B: もし、ビルド済みの Datadog Lambda レイヤーを使用できない場合は、お気に入りのパッケージマネージャーを使用して、パッケージ `datadog-lambda-js` と `dd-trace` をインストールすることができます。
 
@@ -312,7 +312,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 4. Datadog サイトと API キーの構成
 
-    - 環境変数 `DD_SITE` に、テレメトリー送信先の [Datadog サイト][3]を設定します。
+    - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html

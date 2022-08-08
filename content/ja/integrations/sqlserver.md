@@ -19,7 +19,6 @@ categories:
 - data store
 - log collection
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
 display_name: SQL Server
@@ -28,7 +27,7 @@ git_integration_title: sqlserver
 guid: 635cb962-ee9f-4788-aa55-a7ffb9661498
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 8.0.0
+integration_version: 8.0.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -36,7 +35,7 @@ manifest_version: 1.0.0
 metric_prefix: sqlserver.
 metric_to_check: sqlserver.stats.connections
 name: sqlserver
-public_title: Datadog-SQL Server インテグレーション
+public_title: SQL Server インテグレーション
 short_description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
 support: コア
 supported_os:
@@ -56,6 +55,8 @@ SQL Server チェックを使用して、SQL Server インスタンスのパフ�
 チェックでカスタムクエリを実行することで、独自のメトリクスを作成することもできます。
 
 ## セットアップ
+
+<div class="alert alert-info">このページでは、SQL Server Agent のインテグレーションについて説明します。SQL Server のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
 ### インストール
 

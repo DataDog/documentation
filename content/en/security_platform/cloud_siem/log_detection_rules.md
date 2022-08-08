@@ -25,7 +25,7 @@ aliases:
 
 ## Overview
 
-To create a new log detection rule in Datadog, hover over **Security**, select **Security Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a new log detection rule in Datadog, hover over **Security**, select **Detection Rules**, and select the **New Rule** button in the top right corner of the page.
 
 ## Rule Type
 
@@ -50,10 +50,6 @@ Anomaly detection is currently in <a href="https://app.datadoghq.com/security/co
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
 ### Impossible Travel
-
-<div class="alert alert-warning">
-Impossible travel is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
-</div>
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
@@ -93,8 +89,6 @@ The Detection Rule cases join these queries together based on their group by val
 {{< img src="security_platform/security_monitoring/detection_rules/set_rule_cases2.png" alt="Set rule cases"  >}}
 
 In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
-
-{{< img src="security_platform/security_monitoring/detection_rules/gbv2.png" alt="Set rule cases" >}}
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -162,9 +156,9 @@ Do not click the checkbox if you want Datadog to detect all impossible travel be
 
 Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
 
+
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -269,6 +263,19 @@ A signal closes regardless of the query being matched once the time exceeds the 
 [1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 {{< /tabs >}}
+
+### Decreasing non-production severity
+
+One way to decrease signal noise is to prioritize production environment signals over non-production environment signals. Select the `Decrease severity for non-production environments` checkbox to decrease the severity of signals in non-production environments by one level from what is defined by the rule case.
+
+| Signal Severity in Production Environment| Signal Severity in Non-production Environment|
+| ---------------------------------------- | -------------------------------------------- |
+| Critical                                 | High                                         |
+| High                                     | Medium                                       |
+| Medium                                   | Info                                         |
+| Info                                     | Info                                         |
+
+The severity decrement is applied to signals with an environment tag starting with `staging`, `test`, or `dev`.
 
 ## Say what's happening
 

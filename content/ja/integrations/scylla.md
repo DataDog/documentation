@@ -15,7 +15,6 @@ categories:
 - data store
 - ログの収集
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
 display_name: Scylla
@@ -32,7 +31,7 @@ manifest_version: 1.0.0
 metric_prefix: Scylla.
 metric_to_check: scylla.node.operation_mode
 name: Scylla
-public_title: Datadog-Scylla インテグレーション
+public_title: Scylla インテグレーション
 short_description: クラスターのリソース、レイテンシー、健全性などを追跡
 support: コア
 supported_os:

@@ -8,9 +8,8 @@ categories:
 - data store
 - aws
 - log collection
-ddtype: crawler
 dependencies: []
-description: Amazon RDS 関連の大量のメトリクスを追跡する。
+description: Amazon RDS に関連する大量のメトリクスを追跡する。
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
 draft: false
 further_reading:
@@ -322,7 +321,7 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 [2]: https://docs.datadoghq.com/ja/dashboards/
 [3]: https://docs.datadoghq.com/ja/monitors/
 [4]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
 [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring

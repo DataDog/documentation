@@ -140,28 +140,30 @@ Datadog は、特定のサービスに対して[すぐに使用できるグラ�
 サービス詳細画面のデプロイメントについてご覧ください。
 
 ### エラー トラッキング
-類似のエラーを集約して表示することで、ノイズの多いエラーの流れを管理しやすい問題に変え、サービスのエラーの影響を評価するのに役立ちます。[エラー追跡][4]で問題の詳細をお読みください)
+類似のエラーを集約して表示することで、ノイズの多いエラーの流れを管理しやすい問題に変え、サービスのエラーの影響を評価するのに役立ちます。[エラー追跡][4]で問題の詳細をお読みください。
 
 このタブには、どのリソースに最も多くの問題があるかを示す概要グラフと、サービスで発生する最も一般的な問題のリストがあります。リスト内の問題をクリックすると、サイドパネルにそのスタックトレース、関連するコードのバージョン、開始以来のエラーの総発生数などの詳細が表示されます。
 
 {{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking タブ"  style="width:90%;">}}
 
 ### インフラストラクチャー
-サービスが Kubernetes 上で実行されている場合、サービス詳細画面に Infrastructure タブが表示されます。ライブ Kubernetes ポッドテーブルには、メモリ使用量が限界に近づいているかどうかなど、ポッドの詳細情報が表示されます。これにより、プロビジョニングされたコンピュートリソースが最適なアプリケーションパフォーマンスに必要なものを超えているかを明確に確認することによって、リソース割り当てを改善することが可能です。
+サービスが Kubernetes 上で実行されている場合、サービス詳細画面に Infrastructure タブが表示されます。ライブ Kubernetes Pods テーブルには、メモリ使用量が限界に近づいているかどうかなど、ポッドの詳細情報が表示されます。これにより、プロビジョニングされたコンピュートリソースが最適なアプリケーションパフォーマンスに必要なものを超えているかを明確に確認することによって、リソース割り当てを改善することが可能です。
 
 {{< img src="tracing/visualization/service/infra_pods.png" alt="Kubernetes ポッド"  style="width:90%;">}}
 
-以下の Kubernetes メトリクスは、CPU、メモリ、ネットワーク、およびディスクメトリクスを含む、選択した期間のインフラストラクチャーの健全性の要約を示します。
+Kubernetes Metrics セクションは、選択した期間のインフラストラクチャーの健全性の要約を示し、CPU、メモリ、ネットワーク、およびディスクメトリクスを含みます。
 
 {{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes メトリクス"  style="width:90%;">}}
 
+Kubernetes 以外の環境 (ホストベースのインストールなど) については、[統合サービスタグ付けのドキュメント][13]をご覧ください。
+
 ### ランタイムメトリクス
-トレースクライアントでランタイムメトリクスが有効になっている場合、サービスのランタイム言語に対応する Runtime metrics タブが表示されます。詳しくは、[ランタイムメトリクス][13]をご覧ください。
+トレースクライアントでランタイムメトリクスが有効になっている場合、サービスのランタイム言語に対応する Runtime metrics タブが表示されます。詳しくは、[ランタイムメトリクス][14]をご覧ください。
 
 {{< img src="tracing/visualization/service/runtime_metrics.png" alt="ランタイムメトリクス"  style="width:90%;">}}
 
 ### Profiling
-サービスに [Continuous Profiler][14] が設定されている場合、Profiling タブが表示されます。利用可能なバージョンやランタイム言語などの概要が上部に表示されます。以下は、バージョン、エンドポイント、メソッド別のすぐに使えるプロファイリングメトリクスで、リソースを大量に消費するメソッドの特定とデバッグを支援します。グラフをクリックすると、関連するトレース、ログ、およびその他のデータが表示されます。[APM と Continuous Profiler の詳細についてご確認ください][14]。
+サービスに [Continuous Profiler][15] が設定されている場合、Profiling タブが表示されます。利用可能なバージョンやランタイム言語などの概要が上部に表示されます。以下は、バージョン、エンドポイント、メソッド別のすぐに使えるプロファイリングメトリクスで、リソースを大量に消費するメソッドの特定とデバッグを支援します。グラフをクリックすると、関連するトレース、ログ、およびその他のデータが表示されます。[APM と Continuous Profiler の詳細についてご確認ください][15]。
 
 {{< img src="tracing/visualization/service/profiler.jpg" alt="プロファイリング"  style="width:90%;">}}
 
@@ -191,8 +193,8 @@ Datadog は、特定のサービスに対して[すぐに使用できるグラ�
 [10]: /ja/dashboards/
 [11]: /ja/tracing/visualization/#resources
 [12]: /ja/tracing/deployment_tracking/#versions-deployed
-[13]: /ja/tracing/runtime_metrics/
-[14]: /ja/tracing/profiler/
-[15]: /ja/tracing/
+[13]: /ja/getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
+[14]: /ja/tracing/runtime_metrics/
+[15]: /ja/tracing/profiler/
 [16]: /ja/tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/

@@ -8,13 +8,13 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/services_map/"
+- link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
 ---
@@ -30,7 +30,8 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 ### Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.32.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.37.<br />
+: **Note:** The USM beta has been available since Agent version 7.32, but Datadog strongly suggests running a newer version to get the latest improvements.
 
 Supported platforms
 : Linux kernel 4.4 and greater<br/>
@@ -46,7 +47,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Datadog Agent 7.32 or higher is installed alongside your service. Installing a tracing library is _not_ required.
+- Datadog Agent 7.37 or higher is installed alongside your service. Installing a tracing library is _not_ required.
 - [Unified Service Tagging][1] tags for `env` and `service` have been applied to your deployment. The `version` tag is optional.
 
 **Note**: For non-container single-tenant setups where one service runs on a host, you must apply Unified Service Tags to the host itself. USM does not support monitoring multiple services on a single host without containers, nor on a single host where Unified Service Tags are applied using environment variables.
@@ -274,6 +275,14 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
+## Automatic service tagging
+
+Universal Service Monitoring automatically detects services running in your infrastructure. If it does not find [unified service tags][1], it assigns them a name based on one of the tags: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
+
+To update the service's name, use [unified service tagging][1].
+
+{{< img src="tracing/universal_service_monitoring/automatic-service-tagging.png" alt="When Datadog automatically detects your services, the tag used for this is shown on the top of the service page" style="width:80%;" >}}
+
 ## Exploring your services
 
 After you configure the Agent, wait about five minutes for your service to appear in the APM Services List. Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
@@ -298,8 +307,8 @@ After enabling Universal Service Monitoring, you can:
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: https://docs.datadoghq.com/tracing/deployment_tracking/
-[3]: /tracing/visualization/services_map/
-[4]: /tracing/deployment_tracking/
+[3]: /tracing/services/services_map/
+[4]: /tracing/services/deployment_tracking/
 [5]: /monitors/create/types/apm/?tab=apmmetrics
 [6]: /dashboards/
 [7]: /monitors/service_level_objectives/metric/

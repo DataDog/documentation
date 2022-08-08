@@ -163,24 +163,25 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1,                       // <-- incremented every time this information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
-    "agents": {                         // <-- the IPs used by the Agent to submit metrics to Datadog
-        "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
+    "version": 1,                          // <-- この情報が変更される場合に毎回インクリメント
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- 最終更新時のタイムスタンプ
+    "agents": {                            // <-- Agent から Datadog へのメトリクス送信に用いる IP
+        "prefixes_ipv4": [                 // <-- IPv4 CIDR ブロックのリスト
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- list of IPv6 CIDR blocks
+        "prefixes_ipv6": [                 // <-- IPv6 CIDR ブロックのリスト
             ...
         ]
     },
-    "api": {...},                       // <-- same for non-critical Agent functionality (querying information from API)
-    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
-    "logs": {...},                      // <-- same for the logs Agent data
-    "process": {...},                   // <-- same for the process Agent data
-    "orchestrator": {...},              // <-- same for the process Agent data
-    "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
-    "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
+    "api": {...},                          // <-- 重要でない Agent 機能と同様 (API からの情報のクエリ)
+    "apm": {...},                          // <-- APM Agent データに使用される IP ("agents" と同構造)
+    "logs": {...},                         // <-- Agent データのログと同様
+    "process": {...},                      // <-- Agent データのプロセスと同様
+    "orchestrator": {...},                 // <-- Agent データのプロセスと同様
+    "synthetics": {...},                   // <-- Agent のトラフィックでは不使用 (Synthetic テストのためのボットの Datadog ソース IP)
+    "synthetics-private-locations": {...}, // <-- Agent のトラフィックでは不使用 (Synthetics プライベートロケーションのための Datadog 取り込み IP)
+    "webhooks": {...}                      // <-- Agent のトラフィックでは不使用 (webhook を送信する Datadog のソース IP)
 }
 {{< /code-block >}}
 
@@ -214,6 +215,12 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 123/udp
 : NTP 用のポート (詳細は、[NTP の重要性に関するドキュメント][1]を参照してください)。<br>
 [デフォルトの NTP ターゲット][2]を参照してください。
+
+6062/tcp
+: Process Agent のデバッグエンドポイント用のポート。
+
+6162/tcp
+: Process Agent のランタイム設定を構成するためのポート。
 
 10516/tcp
 :TCP 経由のログ収集用ポート。<br>

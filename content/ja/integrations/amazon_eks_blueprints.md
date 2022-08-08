@@ -1,38 +1,57 @@
 ---
+app_id: amazon-eks-blueprints
+app_uuid: 4c0828d6-0c41-47d0-aa20-c174773e2bda
 assets:
-  dashboards: {}
-  logs: {}
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: amazon_eks_blueprints
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - AWS
 - コンテナ
 - orchestration
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md
-display_name: amazon_eks_blueprints
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_eks_blueprints
-guid: 8d904f9b-718b-4f43-aef9-6bf7dcc465b9
 integration_id: amazon-eks-blueprints
 integration_title: Datadog Blueprints アドオン
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: amazon_eks_blueprints.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: amazon_eks_blueprints
+oauth: {}
 public_title: Datadog Blueprints アドオン
 short_description: Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::AWS
+  - Category::Containers
+  - Category::Orchestration
+  configuration: README.md#Setup
+  description: Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Datadog Blueprints アドオン
 ---
 
 

@@ -545,6 +545,17 @@ Error writing to server
 1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
 2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
 
+#### HTTP 504
+
+If the HTTP 504 error message appears, make sure that the Jenkins proxy configuration is correct.
+
+{{< code-block lang="text" >}}
+Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
+{{< /code-block >}}
+
+1. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+  1. Check that `localhost` has been configured in the `No Proxy Hosts` section.
+
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 
 If the Datadog Plugin section does not appear in Jenkins configuration section, make sure that the plugin is enabled. To do so:

@@ -1,24 +1,34 @@
 ---
 categories:
-  - web
-  - log collection
+- web
+- log collection
 ddtype: crawler
 dependencies: []
-description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore.'
-doc_link: 'https://docs.datadoghq.com/integrations/fastly/'
+description: Surveillez des métriques liées au cache, les requêtes d'origine, les
+  codes de réponse, et plus encore.
+doc_link: https://docs.datadoghq.com/integrations/fastly/
 draft: false
 git_integration_title: fastly
 has_logo: true
 integration_id: fastly
 integration_title: Fastly
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
+monitors:
+  '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json
+  '[Fastly] Abnormal bandwidth being sent for service: {{service.name}}': assets/monitors/rec_monitor_bandwidth.json
+  '[Fastly] High volume of requests triggering a Web Application Firewall rule on service: {{service.name}}': assets/monitors/waf_rules.json
+  '[Fastly] Low Hit Ratio for service: {{service.name}}': assets/monitors/rec_monitor_hit_ratio.json
 name: fastly
 public_title: Intégration Datadog/Fastly
-short_description: 'Surveillez des métriques liées au cache, les requêtes d''origine, les codes de réponse, et plus encore.'
+short_description: Surveillez des métriques liées au cache, les requêtes d'origine,
+  les codes de réponse, et plus encore.
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/fastly/fastlygraph.png" alt="Graphique Fastly" popup="true">}}
 
 ## Présentation
@@ -38,14 +48,22 @@ Aucune étape d'installation requise.
 Créez un token d'API avec un accès en lecture seule sur la page de gestion des tokens de Fastly. Obtenez votre Service ID depuis le dashboard et saisissez-le dans le [carré d'intégration Fastly][1].
 
 <div class="alert alert-info">
-Le Service ID est un code alphanumérique, comme <code>5VqE6MOOy1QFJbgmCK41pY</code> (cet exemple provient de la <a href="https://docs.fastly.com/api/auth">documentation Fastly</a>, disponible en anglais).
+Le Service ID est un code alphanumérique, comme <code>5VqE6MOOy1QFJbgmCK41pY</code> (cet exemple provient de la <a href="https://docs.fastly.com/api/auth">documentation sur l'API Fastly</a>, disponible en anglais).
 </div>
 
 Si vous utilisez plusieurs Service ID provenant d'un compte unique, saisissez un token d'API sur chaque ligne.
 
 #### Collecte de logs
 
-Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à votre application Datadog. Vous pouvez choisir l'endpoint `Datadog` ou `Datadog (via Syslog)`. Il est conseillé d'utiliser l'endpoint `Datadog` pour une transmission plus fiable des logs via Syslog.
+{{< site-region region="us3" >}}
+
+La collecte de logs n'est plus prise en charge pour ce site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
+Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à Datadog. Vous pouvez choisir l'endpoint `Datadog` ou `Datadog (via Syslog)`. Il est conseillé d'utiliser l'endpoint `Datadog` pour une transmission plus fiable des logs via Syslog.
 
 ##### Sélectionner l'endpoint de journalisation
 
@@ -72,7 +90,7 @@ Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à votre 
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
     ```
 
-    **Remarque** : votre clé d'API Datadog DOIT être placée avant le format de log Datadog/Fastly, sans quoi vos logs ne s'afficheront pas dans Datadog. Pour en savoir plus sur les variables de log, consultez la [documentation Fastly][4] (en anglais).
+    **Remarque** : votre clé d'API Datadog DOIT être placée avant le format de log Datadog/Fastly, sans quoi vos logs ne s'afficheront pas dans Datadog. Consultez la section [Variables utiles à enregistrer][4] (en anglais) pour en savoir plus.
 
 3. Définissez **Syslog Address** sur {{< region-param key="web_integrations_endpoint" code="true" >}}.
 4. Définissez **Port** sur {{< region-param key="web_integrations_port" code="true" >}}.
@@ -80,6 +98,13 @@ Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à votre 
 6. Définissez **TLS Hostname** sur {{< region-param key="web_integrations_endpoint" code="true" >}}.
 7. Dans la section des options avancées, sélectionnez le **log line format** `Blank`.
 8. Enfin, enregistrez l'endpoint et déployez le service. Consultez ensuite les logs dans le [Log Explorer Datadog][5].
+
+[2]: https://docs.datadoghq.com/resources/json/fastly_format.json
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
+[5]: https://app.datadoghq.com/logs
+
+{{< /site-region >}}
 
 ## Données collectées
 
@@ -97,12 +122,8 @@ L'intégration Fastly n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/fastly
-[2]: https://docs.datadoghq.com/resources/json/fastly_format.json
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
-[5]: https://app.datadoghq.com/logs
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
+[3]: https://docs.datadoghq.com/fr/help/

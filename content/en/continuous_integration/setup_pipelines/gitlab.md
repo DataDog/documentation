@@ -139,6 +139,31 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+### Infrastructure metric correlation
+
+If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
+[registering a new runner][6]. For existing runners, add tags by updating the runner's `config.toml`. Or add tags
+through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+
+After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
+view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
+
+## Enable job log collection (beta)
+
+The following GitLab versions support collecting job logs:
+* GitLab.com (SaaS)
+* GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][7]
+
+To enable collection of job logs:
+
+1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
+2. Enable the `Enable logs collection` option and save the changes.
+
+Job logs are collected in the [Logs][9] product and automatically correlated with the GitLab pipeline within CI Visibility.
+
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -148,3 +173,7 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://docs.gitlab.com/runner/register/
+[7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[8]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[9]: /logs/

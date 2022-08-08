@@ -1,12 +1,12 @@
 ---
-title: Authentification unique avec SAML
-kind: documentation
 aliases:
-  - /fr/guides/saml
+- /fr/guides/saml
 further_reading:
-  - link: /account_management/multi_organization/
-    tag: Documentation
-    text: Configurer des équipes et organisations avec plusieurs comptes
+- link: /account_management/multi_organization/
+  tag: Documentation
+  text: Configurer des équipes et organisations avec plusieurs comptes
+kind: documentation
+title: Authentification unique avec SAML
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
@@ -51,7 +51,7 @@ Voici une présentation vidéo de deux minutes à ce sujet :
 
 6. Une fois le SAML configuré dans Datadog et votre fournisseur d'identité prêt à accepter des requêtes de la part de Datadog, les utilisateurs peuvent se connecter comme suit :
 
-   - **Avec une connexion initiée par un prestataire de services** (ou depuis Datadog) : les utilisateurs doivent cliquer accéder à la **Single Sign-on URL** figurant dans la section Status en haut de la [page SAML Configuration][19]. La **Single Sign-on URL** est également fournie sur la [page Team][20]. L'accès à cette URL permet d'initier l'authentification SAML auprès de votre fournisseur d'identité. **Remarque**:  cette URL ne s'affiche que si le SAML a été activé pour votre compte et si vous utilisez une connexion initiée par le prestataire de services.
+   - **Avec une connexion initiée par un prestataire de services** (ou depuis Datadog) : les utilisateurs doivent cliquer accéder à la **Single Sign-on URL** figurant dans la section Status en haut de la [page SAML Configuration][19]. La **Single Sign-on URL** est également fournie sur la [page Team][20]. L'accès à cette URL permet d'initier l'authentification SAML auprès de votre fournisseur d'identité. **Remarque** : cette URL ne s'affiche que si le SAML a été activé pour votre compte et si vous utilisez une connexion initiée par le prestataire de services.
     {{< img src="account_management/saml/saml_enabled.png" alt="SAML activé"  >}}
 
    - **Avec une connexion initiée par le fournisseur d'identité** (ou depuis le portail de votre application) : les utilisateurs doivent cliquer sur l'icône de l'application dans le portail de votre application (par exemple, dans le panneau de l'application Google ou dans le portail de l'application Okta). Dans certains scénarios, les utilisateurs qui se connectent via l'URL de connexion initiée par le prestataire de services peuvent également bénéficier de la connexion initiée par le fournisseur d'identité. Cela dépend toutefois de la configuration et de la prise en charge de votre fournisseur d'identité.
@@ -103,7 +103,7 @@ Il est important de comprendre les éléments envoyés dans une assertion avant 
 
 1. [Comparez][23] et [validez][24] votre assertion SAML afin de bien identifier les attributs de votre fournisseur d'identité.
 
-2. Accédez à Teams et cliquez sur l'onglet **Mappings**.
+2. Accédez à **Organization Settings** et cliquez sur l'onglet **SAML Group Mappings**.
 
 3. Cliquez sur **New Mapping**.
 
@@ -113,7 +113,7 @@ Il est important de comprendre les éléments envoyés dans une assertion avant 
 
     {{< img src="account_management/saml/create_mapping.png" alt="Créer un mappage SAML avec un rôle Datadog"  >}}
 
-   **Remarque** : chaque fournisseur d'identité fonctionne différemment. Certains vous permettent de définir la clé ou l'étiquette de votre attribut, tandis que d'autres en fournissent une par défaut. Datadog vous recommande d'utiliser un inspecteur d'assertion sur votre connexion afin d'afficher les détails de votre assertion et de comprendre comment votre fournisseur d'identité vous transmet votre appartenance au groupe.
+   **Remarque** : chaque fournisseur d'identité fonctionne différemment. Certains vous permettent de définir la clé ou l'étiquette de votre attribut, tandis que d'autres en fournissent une par défaut. Datadog vous recommande d'utiliser un inspecteur d'assertion sur votre connexion afin d'afficher les détails de votre assertion et de comprendre comment votre fournisseur d'identité transmet votre appartenance au groupe.
 
 5. Si vous ne l'avez pas déjà fait, activez les mappages en cliquant sur **Enable Mappings**.
 

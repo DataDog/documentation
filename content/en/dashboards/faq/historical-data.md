@@ -20,9 +20,7 @@ If you stop reporting data to Datadog, after a certain period of time metrics, t
 | Tags in other drop-downs             | 12 hours |
 | APM `env` tags                       | 60 days  |
 
-Even though the data is not listed, you can still query the data with the [JSON editor][1]. A simple solution is to query for the host name or tags:
-
-{{< img src="dashboards/faq/query_post_deletion.png" alt="Querying with JSON Editor" style="width:90%;" >}}
+Even though the data is not listed, you can still query the data with the [JSON editor][1]. A simple solution is to query for the host name or tags.
 
 If you're planning to frequently churn hosts, add a tag to the [Agent][2] in `datadog.yaml` or use the [Infrastructure list][3] (user tags).
 

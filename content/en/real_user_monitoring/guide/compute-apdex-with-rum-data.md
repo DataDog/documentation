@@ -1,5 +1,5 @@
 ---
-title: Compute Apdex and custom performance indicators with RUM data
+title: Compute Apdex And Custom Performance Indicators With RUM Data
 kind: guide
 description: Guide for computing your Apdex score and custom performance indicators with RUM data
 further_reading:

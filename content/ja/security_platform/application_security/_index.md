@@ -20,7 +20,7 @@ title: アプリケーションセキュリティモニタリング
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="攻撃のフローおよびフレームグラフを表示する、Datadog のセキュリティシグナルパネル" width="75%">}}
 
-Datadog アプリケーションセキュリティモニタリング (ASM) は、Server-Side-Request-Forgery (SSRF)、SQL インジェクション、Log4Shell、Reflected Cross-Site-Scripting (XSS) などのコードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する観測可能性を提供します。Docker、Kubernetes、AWS ECS、(対応言語の場合) AWS Fargate で動作するアプリのアプリケーションセキュリティを監視することができます。
+Datadog アプリケーションセキュリティモニタリング (ASM) は、Server-Side-Request-Forgery (SSRF)、SQL インジェクション、Log4Shell、Reflected Cross-Site-Scripting (XSS) などのコードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する観測可能性を提供します。サーバー、Docker、Kubernetes、AWS ECS、(対応言語の場合) AWS Fargate で直接ホストされたアプリのアプリケーションセキュリティを監視することができます。
 
 ASM では、Datadog の[トレーシングライブラリ][1]、[Datadog Agent][2]、そしてアプリ内検出ルールを利用してアプリケーション環境の脅威を検出し、実稼働システムを対象とした攻撃やコードによる脆弱性が発生した場合にシグナルをトリガーします。
 

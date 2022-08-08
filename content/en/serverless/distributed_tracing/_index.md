@@ -136,17 +136,17 @@ The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support 
 
 [1]: /serverless/distributed_tracing#distributed-tracing-with-datadog-apm
 [2]: /integrations/amazon_xray/#overview
-[3]: /tracing/setup_overview/compatibility_requirements/python
-[4]: /tracing/setup_overview/compatibility_requirements/nodejs
+[3]: /tracing/trace_collection/compatibility/python
+[4]: /tracing/trace_collection/compatibility/nodejs
 [5]: /serverless/installation/
 [6]: /serverless/distributed_tracing/serverless_trace_merging
 [7]: https://docs.datadoghq.com/help/
-[8]: /tracing/setup_overview/compatibility_requirements/ruby
-[9]: /tracing/setup_overview/compatibility_requirements/go
-[10]: /tracing/connect_logs_and_traces/java/
-[11]: /tracing/setup_overview/compatibility_requirements/java
+[8]: /tracing/trace_collection/compatibility/ruby
+[9]: /tracing/trace_collection/compatibility/go
+[10]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[11]: /tracing/trace_collection/compatibility/java
 [12]: https://datadoghq.slack.com/archives/CFDPB83M4
 [13]: https://chat.datadoghq.com/
-[14]: /tracing/setup_overview/compatibility_requirements/dotnet-core
+[14]: /tracing/trace_collection/compatibility/dotnet-core
 [15]: /serverless/azure_app_services
-[16]: /tracing/setup_overview/
+[16]: /tracing/trace_collection/

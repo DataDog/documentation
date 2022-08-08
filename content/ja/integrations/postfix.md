@@ -12,18 +12,18 @@ assets:
     postfix_processes: assets/saved_views/postfix_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - Collaboration
-  - log collection
+- Collaboration
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
+- https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
 display_name: Postfix
 draft: false
 git_integration_title: postfix
 guid: 7f03c5b7-ee54-466e-8854-5896d62c82b4
 integration_id: postfix
 integration_title: Postfix
+integration_version: 1.12.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -32,15 +32,18 @@ metric_prefix: postfix.
 metric_to_check: postfix.queue.size
 name: postfix
 process_signatures:
-  - postfix start
-  - sendmail -bd
-public_title: Datadog-Postfix インテグレーション
+- postfix start
+- sendmail -bd
+public_title: Postfix インテグレーション
 short_description: すべての Postfix キューのサイズを監視する。
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ![Postfix Graph][1]
 
 ## 概要
@@ -148,7 +151,7 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
          - deferred
    ```
 
-2. `instances` 内の各 `config_directory` について、Agent は、Postfix コンフィギュレーションディレクトリに対して `postqueue -c` をフォークします。Postfix は、メールキューに対するアクティビティを内部アクセス制御によって制限しています。デフォルトでは、Postfix は `anyone` にキューの表示を許可します。実稼働システムの Postfix インストレーションで、より厳密にアクセス制御が構成されている場合は、`dd-agent` ユーザーにメールキューの表示アクセスを許可することが必要な場合があります（[postqueue Postfix のドキュメント][6]を参照してください）。
+2. `instances` 内の各 `config_directory` について、Agent は、Postfix コンフィギュレーションディレクトリに対して `postqueue -c` をフォークします。Postfix は、メールキューに対するアクティビティを内部アクセス制御によって制限しています。デフォルトでは、Postfix は `anyone` にキューの表示を許可します。実稼働システムの Postfix インストレーションで、より厳密にアクセス制御が構成されている場合は、`dd-agent` ユーザーにメールキューの表示アクセスを許可することが必要な場合があります。詳しくは、[postqueue Postfix のドキュメント][6]を参照してください。
 
    ```shell
    postconf -e "authorized_mailq_users = dd-agent"

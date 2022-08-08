@@ -10,17 +10,18 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - ''
+- ''
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_name: PHP OPcache
 draft: false
 git_integration_title: php_opcache
 guid: 323518fd-be8d-4b5e-b35d-829107a1c416
 integration_id: php-opcache
 integration_title: PHP OPcache
+integration_version: 0.0.1
 is_public: true
 kind: integration
 maintainer: noname@withgod.jp
@@ -32,10 +33,13 @@ public_title: Datadog-PHP OPcache インテグレーション
 short_description: PHP OPcache バイトコードキャッシュシステムを監視します。
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [PHP OPcache][1] を監視します。
@@ -67,9 +71,9 @@ OPcache はデフォルトでメトリクスを公開しないため、このイ
 ```
 /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php
 ```
-エクスポーターは[こちら][5]からダウンロードできます。
+Datadog [integrations-extras][5] リポジトリからエクスポーターをダウンロードできます。
 
-Agent を構成するとき (次に説明する `instances` 設定)、このファイル名でエクスポーターを直接参照するか、Web サーバーで Agent のエイリアスを構成できます。たとえば、Apache を使用している場合、Web サーバーコンフィギュレーションファイルのエイリアスは次のようになります。
+Agent を[構成する](#configuration) とき、このファイル名でエクスポーターを直接参照するか、Web サーバーで Agent のエイリアスを構成できます。たとえば、Apache を使用している場合、Web サーバーコンフィギュレーションファイルのエイリアスは次のようになります。
 
 ```
 Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php

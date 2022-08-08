@@ -22,7 +22,7 @@ from os.path import (
     normpath
 )
 
-from format_link import format_link_file
+from actions.format_link import format_link_file
 
 
 class Integrations:
@@ -402,7 +402,7 @@ class Integrations:
                 else:
                     self.datafile_json.append(data)
             except JSONDecodeError:
-                if getenv("LOCAL") == 'True':
+                if not getenv("CI_COMMIT_REF_NAME"):
                     print(
                         "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(file_name))
                 else:
@@ -537,7 +537,7 @@ class Integrations:
                 h2_h3_regex_matches = re.finditer(h2_h3_regex, markdown_string)
                 end_index = -1
 
-                # Find the string index of the next h2 or h3 header in markdown 
+                # Find the string index of the next h2 or h3 header in markdown
                 # so we can strip out all of the unwanted content
                 for match in h2_h3_regex_matches:
                     if match.start() > start_index + 3:
@@ -551,7 +551,7 @@ class Integrations:
                     if horiz_line != -1:
                         end_index = horiz_line
                     else:
-                        # If there isn't another h2, h3, or horizontal line break 
+                        # If there isn't another h2, h3, or horizontal line break
                         end_index = len(markdown_string)
 
                 content_to_remove = markdown_string[start_index:end_index]
@@ -614,8 +614,9 @@ class Integrations:
         2. add tabs if they exist
         3. inject metrics after ### Metrics header if metrics exists for file
         4. inject service checks after ### Service Checks if file exists
-        5. inject hugo front matter params at top of file
-        6. write out file to content/integrations with filename changed to integrationname.md
+        5. inject where to purchase integration if it's a marketplace integration
+        6. inject hugo front matter params at top of file
+        7. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
         no_integration_issue = True
@@ -649,7 +650,7 @@ class Integrations:
             except JSONDecodeError:
                 no_integration_issue = False
                 manifest_json = {}
-                if getenv("LOCAL") == 'True':
+                if not getenv("CI_COMMIT_REF_NAME"):
                     print(
                         "\x1b[33mWARNING\x1b[0m: manifest could not be parsed {}".format(manifest))
                 else:
@@ -677,7 +678,7 @@ class Integrations:
         regex_skip_sections_start = r"(```|\{\{< code-block |\{\{< site-region)"
 
         ## Formating all link as reference to avoid any corner cases
-        ## Replace image filenames in markdown for marketplace interations
+        ## Replace image filenames in markdown for marketplace iterations
         result = ''
         if not marketplace:
             try:
@@ -687,6 +688,11 @@ class Integrations:
         else:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
+                # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
+                purchase_copy = f"---\nThis application is made available through the Marketplace and is supported by a Datadog Technology Partner." \
+                                f" <a href=\"https://app.datadoghq.com/marketplace/app/{manifest_json['integration_id']}\" target=\"_blank\">Click Here</a> to purchase this application."
+
+                markdown_string = f"{markdown_string}\n{purchase_copy}"
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
                 markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
                 updated_markdown = self.remove_h3_markdown_section(markdown_setup_removed, '### Pricing')
@@ -776,11 +782,11 @@ class Integrations:
                     integration_version = matches.group(1)
 
         if not exist_already and no_integration_issue:
-            # lets only write out file.md if its going to be public
+            # let's only write out file.md if it's going to be public
             if manifest_json.get("is_public", False):
                 out_name = self.content_integrations_dir + new_file_name
 
-                # lets make relative app links to integrations tile absolute
+                # let's make relative app links to integrations tile absolute
                 regex = r"(?<!https://app.datadoghq.com)(/account/settings#integrations[^.)\s]*)"
                 regex_result = re.sub(regex, "https://app.datadoghq.com\\1", result, 0, re.MULTILINE)
                 if regex_result:
@@ -846,7 +852,6 @@ class Integrations:
                     item.get("name", "").lower()
                 )
                 if item.get("type", None):
-                    item["ddtype"] = item.get("type")
                     del item["type"]
                 item["dependencies"] = dependencies
                 item["draft"] = not item.get("is_public", False)
@@ -911,8 +916,7 @@ class Integrations:
             manifest_json["integration_id"] = manifest_json.get("app_id", "")
             categories = []
             supported_os = []
-            # Classifier tags key is migrating to be under the `tile` key in the manifest
-            classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", []) or manifest_json.get("classifier_tags", [])
+            classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", [])
             for tag in classifier_tags:
                 # in some cases tag was null/None
                 if tag:

@@ -10,19 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
-  - autodiscovery
+- data store
+- log collection
+- autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/riak/README.md
+- https://github.com/DataDog/integrations-core/blob/master/riak/README.md
 display_name: Riak
 draft: false
 git_integration_title: riak
 guid: e1ed642c-8a15-420c-954b-6fb894905956
 integration_id: riak
 integration_title: Riak
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,14 +30,17 @@ manifest_version: 1.0.0
 metric_prefix: riak.
 metric_to_check: riak.memory_processes
 name: riak
-public_title: Datadog-Riak インテグレーション
+public_title: Riak インテグレーション
 short_description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Riak Graph][1]
 
 ## 概要
@@ -137,7 +140,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

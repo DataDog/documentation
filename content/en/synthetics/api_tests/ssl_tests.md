@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run SSL tests on internal hosts"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 
 ## Overview
@@ -37,16 +40,16 @@ After choosing to create a `SSL` test, define your test's request.
     * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
     * **Client certificate**: Authenticates through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
-  ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-  ```
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
 3. **Name** your SSL test.
 
 4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
-{{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
@@ -65,6 +68,8 @@ Assertions define what an expected test result is. After you click **Test URL**,
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_ssl.png" alt="Define assertions for your SSL test to succeed or fail on" style="width:90%;" >}}
+
+To perform `OR` logic in an assertion, use the `matches regex` or `does not match regex` comparators to define a regex with multiple expected values for the same assertion type like `(0|100)`. The test result is successful if the property assertion's value is 0 or 100.
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -99,9 +104,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -111,12 +116,18 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            | Show when the test alerts.                                          |
     | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
+    | `{{#is_recovery}}`         | Show when the test recovers from an alert.                          |
+    | `{{^is_recovery}}`         | Show unless the test recovers from an alert.                        |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save your test and have Datadog start executing it.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][9].
 
 ## Variables
 
@@ -141,7 +152,7 @@ You can create local variables by clicking **Create Local Variable** at the top 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][9] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your SSL tests.
+You can use the [global variables defined in the `Settings`][10] in the URL, Advanced Options, and assertions of your SSL tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -163,7 +174,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][10].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][11].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -173,13 +184,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic SSL tests. To get create, edit, and delete access to Synthetic SSL tests, upgrade your user to one of those two [default roles][11].
+By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic SSL tests. To get create, edit, and delete access to Synthetic SSL tests, upgrade your user to one of those two [default roles][12].
 
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][13] on their accounts.
+Access restriction is available for customers using [custom roles][14] on their accounts.
 
 You can restrict access to an SSL test based on the roles in your organization. When creating an SSL test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -197,8 +208,9 @@ You can restrict access to an SSL test based on the roles in your organization. 
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /synthetics/settings/#global-variables
-[10]: /synthetics/api_tests/errors/#ssl-errors
-[11]: /account_management/rbac/
-[12]: /account_management/rbac#custom-roles
-[13]: /account_management/rbac/#create-a-custom-role
+[9]: /synthetics/guide/synthetic-test-monitors
+[10]: /synthetics/settings/#global-variables
+[11]: /synthetics/api_tests/errors/#ssl-errors
+[12]: /account_management/rbac/
+[13]: /account_management/rbac#custom-roles
+[14]: /account_management/rbac/#create-a-custom-role

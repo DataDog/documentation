@@ -12,19 +12,19 @@ assets:
     lighttpd_processes: assets/saved_views/lighttpd_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - autodiscovery
-  - log collection
+- web
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
 display_name: Lighttpd
 draft: false
 git_integration_title: lighttpd
 guid: 01dcfe7a-7a56-4388-a388-799ee6daaaab
 integration_id: lighttpd
 integration_title: Lighttpd
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,15 +33,18 @@ metric_prefix: lighttpd.
 metric_to_check: lighttpd.performance.uptime
 name: lighttpd
 process_signatures:
-  - lighttpd
-public_title: Datadog-Lighttpd インテグレーション
+- lighttpd
+public_title: Lighttpd インテグレーション
 short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Lighttpd ダッシュボード][1]
 
 ## 概要
@@ -145,7 +148,8 @@ Lighttpd チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-Lighttpd Web サーバーのメトリクスを監視する方法 (または理由) について理解するには、Datadog の[ブログ記事][7]を参照してください。
+- [Datadog で Lighttpd の Web サーバーメトリクスを監視します][7]。
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard.png

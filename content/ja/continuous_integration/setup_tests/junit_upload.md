@@ -12,28 +12,29 @@ title: JUnit テストレポートファイルを Datadog にアップロード�
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
- 選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) はサポートされていません。
+選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) はサポートされていません。
 </div>
 {{< /site-region >}}
 
+<div class="alert alert-warning"><strong>注</strong>: Datadog では、JUnit XML ファイルのアップロードよりもネイティブインスツルメンテーションを推奨しています。ネイティブインスツルメンテーションは、より正確な時間結果を提供し、インテグレーションテストでの分散型トレーシングをサポートし、構造化スタックトレースをサポートするからです。</div>
+
 JUnit テストレポートファイルは、テスト名とスイート名、合格/不合格ステータス、期間、場合によってはエラーログなどのテスト実行情報を含む XML ファイルです。[JUnit][1] テストフレームワークによって導入されましたが、他の多くの一般的なフレームワークは、この形式を使用して結果を出力できます。
 
-最も包括的なテスト結果を提供するため推奨されるオプションである Datadog トレーサーを使用してネイティブにテストをインスツルメントする代わりに、JUnit XML テストレポートをアップロードすることもできます。
-
-JUnit XML レポートからインポートされたテスト結果は、トレーサーによってレポートされたテストデータと一緒に表示されます。ただし、この方法を使用する場合は、インテグレーションテストや構造化スタックトレースに分散型トレースがないなど、いくつかの制限があります。このため、この方法は、使用されている言語またはテストフレームワークのネイティブサポートがない場合にのみ使用してください。
+テストフレームワークで JUnit XML のテストレポートを生成できる場合、Datadog トレーサーを使用した[ネイティブのテストインスツルメンテーション][2]に代わる軽量な方法として、これらを使用することができます。JUnit XML レポートからインポートされたテスト結果は、トレーサーからレポートされたテストデータと一緒に表示されます。
 
 ## Datadog CI CLI のインストール
 
-`npm` を使用して [`datadog-ci`][2] CLI をグローバルにインストールします。
+`npm` を使用して [`datadog-ci`][3] CLI をグローバルにインストールします。
+
 {{< code-block lang="bash" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
-### スタンドアロンバイナリ (ベータ)
+### スタンドアロンバイナリ  (ベータ版)
 
-<div class="alert alert-warning"><strong>注</strong>: スタンドアロンバイナリは<strong>ベータ</strong>版で、暗転性は保証されていません。</div>
+<div class="alert alert-warning"><strong>注</strong>: スタンドアロンバイナリは<strong>ベータ版</strong>であり、その安定性は保証されていません。</div>
 
-CI で NodeJS をインストールすることに問題がある場合は、スタンドアロンバイナリが [Datadog CI リリース][3]で提供されています。_linux-x64_、_darwin-x64_ (MacOS)、_win-x64_ (Windows) のみがサポートされています。インストールするには、ターミナルで以下を実行します。
+CI で NodeJS をインストールすることに問題がある場合は、スタンドアロンバイナリが [Datadog CI リリース][4]で提供されています。_linux-x64_、_darwin-x64_ (MacOS)、_win-x64_ (Windows) のみがサポートされています。インストールするには、ターミナルで以下を実行します。
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -84,7 +85,7 @@ JUnit XML テストレポートを Datadog にアップロードするには、�
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
-`DATADOG_API_KEY` 環境変数に有効な [Datadog API キー][4]を指定し、`DD_ENV` 環境変数にテストが実行された環境を指定します (たとえば、開発者ワークステーションから結果をアップロードする場合は `local`、CI プロバイダーから結果をアップロードする場合は `ci`)。例:
+`DATADOG_API_KEY` 環境変数に有効な [Datadog API キー][5]を指定し、`DD_ENV` 環境変数にテストが実行された環境を指定します (たとえば、開発者ワークステーションから結果をアップロードする場合は `local`、CI プロバイダーから結果をアップロードする場合は `ci`)。例:
 
 <pre>
 <code>
@@ -118,7 +119,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 **注**: `--tags` と `DD_TAGS` 環境変数を使用して指定されたタグがマージされます。`--tags` と `DD_TAGS` の両方に同じキーが表示される場合、環境変数 `DD_TAGS` の値が優先されます。
 
 `--logs` **(ベータ版)**
-: XML レポートの内容を [Logs][5] として転送できるようにします。`<system-out>`、`<system-err>`、`<failure>` 内のコンテンツはログとして収集されます。`<testcase>` 内の要素からのログは自動的にテストに接続されます。<br/>
+: XML レポートの内容を [Logs][6] として転送できるようにします。`<system-out>`、`<system-err>`、`<failure>` 内のコンテンツはログとして収集されます。`<testcase>` 内の要素からのログは自動的にテストに接続されます。<br/>
 **環境変数**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **デフォルト**: `false`<br/>
 **注**: Logs は CI Visibility とは別請求となります。
@@ -137,19 +138,19 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 次の環境変数がサポートされています。
 
 `DATADOG_API_KEY` (必須)
-: リクエストの認証に使用される [Datadog API キー][4]。<br/>
+: リクエストの認証に使用される [Datadog API キー][5]。<br/>
 **デフォルト**: (なし)
 
 さらに、選択したサイトを使用するように Datadog サイトを構成します ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][6]。<br/>
+: 結果をアップロードする [Datadog サイト][7]。<br/>
 **デフォルト**: `datadoghq.com`<br/>
 **選択したサイト**: {{< region-param key="dd_site" code="true" >}}
 
 ## リポジトリの収集とメタデータのコミット
 
-Datadog は、テスト結果を可視化し、リポジトリやコミットごとにグループ化するために Git 情報を使用します。Git のメタデータは、Datadog の CI CLI が CI プロバイダーの環境変数やプロジェクトパスのローカルな `.git` フォルダ (あれば) から収集します。このディレクトリを読み込むには、[`git`][7] バイナリが必要です。
+Datadog は、テスト結果を可視化し、リポジトリやコミットごとにグループ化するために Git 情報を使用します。Git のメタデータは、Datadog の CI CLI が CI プロバイダーの環境変数やプロジェクトパスのローカルな `.git` フォルダ (あれば) から収集します。このディレクトリを読み込むには、[`git`][8] バイナリが必要です。
 
 サポートされていない CI プロバイダーでテストを実行する場合や、`.git` フォルダがない場合は、環境変数を使って Git の情報を手動で設定することができます。これらの環境変数は、自動検出された情報よりも優先されます。Git の情報を提供するために、以下の環境変数を設定します。
 
@@ -205,6 +206,10 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 
 これらのタグはすべて任意であり、指定したものだけが環境構成の区別に使用されます。
 
+`test.bundle`
+: テストスイートのグループを個別に実行するために使用します。<br/>
+**例**: `ApplicationUITests`、`ModelTests`
+
 `os.platform`
 : オペレーティングシステムの名称。<br/>
 **例**: `windows`、`linux`、`darwin`
@@ -243,10 +248,6 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 : テストするデバイスの名前。<br/>
 **例**: `iPhone 12 Pro Simulator`、`iPhone 13 (QA team)`
 
-<!-- TODO: バックエンドに追加された後、コメント解除する
-`test.bundle`
-: テストスイートのグループを個別に実行するために使用します。<br/>
-**例**: `ApplicationUITests`、`ModelTests` -->
 
 ## `<property>` 要素によるメタデータの提供
 
@@ -290,9 +291,10 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://junit.org/junit5/
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://github.com/DataDog/datadog-ci/releases
-[4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /ja/logs/
-[6]: /ja/getting_started/site/
-[7]: https://git-scm.com/downloads
+[2]: https://docs.datadoghq.com/ja/continuous_integration/setup_tests/
+[3]: https://www.npmjs.com/package/@datadog/datadog-ci
+[4]: https://github.com/DataDog/datadog-ci/releases
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /ja/logs/
+[7]: /ja/getting_started/site/
+[8]: https://git-scm.com/downloads

@@ -28,7 +28,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 5.6 または 5.7
 
 サポートされている Agent バージョン
-: 7.36.0+
+: 7.36.1+
 
 パフォーマンスへの影響
 : データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
@@ -131,7 +131,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### ランタイムセットアップコンシューマー
-Datadog では、ランタイムで  `performance_schema.events_statements_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めしています。
+Datadog では、ランタイムで  `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めしています。
 
 ```SQL
 DELIMITER $$
@@ -139,6 +139,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
@@ -191,7 +192,7 @@ ECS や Fargate などの Docker コンテナで動作するデータベース�
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -212,7 +213,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 `Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.0
+FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

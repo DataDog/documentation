@@ -163,24 +163,25 @@ The information is structured as JSON following this schema:
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1,                       // <-- incremented every time this information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
-    "agents": {                         // <-- the IPs used by the Agent to submit metrics to Datadog
-        "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
+    "version": 1,                          // <-- incremented every time this information is changed
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- timestamp of the last modification
+    "agents": {                            // <-- the IPs used by the Agent to submit metrics to Datadog
+        "prefixes_ipv4": [                 // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- list of IPv6 CIDR blocks
+        "prefixes_ipv6": [                 // <-- list of IPv6 CIDR blocks
             ...
         ]
     },
-    "api": {...},                       // <-- same for non-critical Agent functionality (querying information from API)
-    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
-    "logs": {...},                      // <-- same for the logs Agent data
-    "process": {...},                   // <-- same for the process Agent data
-    "orchestrator": {...},              // <-- same for the process Agent data
-    "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
-    "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
+    "api": {...},                          // <-- same for non-critical Agent functionality (querying information from API)
+    "apm": {...},                          // <-- same structure as "agents" but IPs used for the APM Agent data
+    "logs": {...},                         // <-- same for the logs Agent data
+    "process": {...},                      // <-- same for the process Agent data
+    "orchestrator": {...},                 // <-- same for the process Agent data
+    "synthetics": {...},                   // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
+    "synthetics-private-locations": {...}, // <-- not used for Agent traffic (Datadog intake IPs for synthetics private locations)
+    "webhooks": {...}                      // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 {{< /code-block >}}
 
@@ -214,6 +215,12 @@ Open the following ports to benefit from all the **Agent** functionalities:
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
 
 10516/tcp
 : Port for log collection over TCP.<br>
@@ -358,7 +365,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [4]: /infrastructure/process/
 [5]: /infrastructure/livecontainers/#kubernetes-resources-1
 [6]: /real_user_monitoring/
-[7]: /tracing/profiler/
+[7]: /profiler/
 [8]: /synthetics/private_locations
 [9]: /agent/proxy/
 [10]: /network_monitoring/devices

@@ -2,12 +2,12 @@
 title: Getting Started with Logs
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=40'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
       tag: 'Learning Center'
       text: 'Introduction to Log Management'
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=36'
+    - link: 'https://learn.datadoghq.com/courses/going-deeper-with-logs-processing'
       tag: 'Learning Center'
-      text: 'Going Deeper with Logs: Processing'
+      text: 'Going Deeper with Logs Processing'
     - link: '/logs/log_collection/'
       tag: 'Documentation'
       text: 'Log Collection & Integrations'
@@ -129,7 +129,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://www.datadoghq.com
-[2]: /tracing/connect_logs_and_traces/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/
 [3]: /logs/guide/correlate-logs-with-metrics/
 [4]: /security_platform/cloud_siem/
 [5]: /getting_started/integrations/

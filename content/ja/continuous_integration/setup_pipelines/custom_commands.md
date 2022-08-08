@@ -1,100 +1,132 @@
 ---
-title: パイプライントレースへのカスタムコマンドの追加
-kind: documentation
 further_reading:
-  - link: /continuous_integration/setup_pipelines/custom_commands/
-    tag: ドキュメント
-    text: トラブルシューティング CI
+- link: /continuous_integration/troubleshooting/
+  tag: ドキュメント
+  text: トラブルシューティング CI
+kind: documentation
+title: パイプライントレースへのタグとメトリクスの追加
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-カスタムコマンドは、CI パイプラインの個々のコマンドをトレースする方法を提供し、ジョブが持つかもしれないセットアップやティアダウンアクション (例えば、Docker イメージのダウンロードや Kubernetes ベースのインフラで利用できるノードの待機) を考慮せずにコマンドにかかる時間を測定することを可能にします。これらのスパンは、パイプラインのトレースの一部として表示されます。
+<div class="alert alert-info">カスタムタグとメトリクスはベータ版機能であり、API はまだ変更可能です。</div>
 
-{{< img src="ci/ci-custom-spans.png" alt="カスタムコマンドを使用した単一パイプラインの詳細" style="width:100%;">}}
+カスタムタグとメトリクスコマンドは、CI Visibility パイプラインのトレースにユーザー定義のテキストや数値のタグを追加する方法を提供します。
+これらのタグを使用して、ファセット (文字列値タグ) またはメジャー (数値タグ) を作成することができます。ファセットやメジャーは、パイプラインの検索、グラフ化、監視に使用することができます。
 
 ## 互換性
 
-カスタムコマンドは、以下の CI プロバイダーで動作します。
+カスタムタグとメトリクスは、以下の CI プロバイダーで動作します。
 
-- Jenkins と Datadog プラグイン >= v3.2.0
+- Buildkite
 - CircleCI
+- GitLab (SaaS またはセルフホスト >= 14.1)
+- GitHub.com (SaaS) **注:** GitHub の場合、タグとメトリクスはパイプラインスパンにのみ追加可能です。
 
 ## Datadog CI CLI のインストール
 
-`npm` を使用して [`datadog-ci`][1] (>=v0.17.0) CLI をグローバルにインストールします。
+`npm` を使用して [`datadog-ci`][1] (>=v1.15.0) CLI をグローバルにインストールします。
 
 {{< code-block lang="bash" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
-## コマンドのトレース
+また、`npm` を使いたくない場合は、ベータ版の[スタンドアロンバイナリ][2]を使ってみることもできます。
 
-コマンドをトレースするには、以下を実行します。
+{{< tabs >}}
+{{% tab "Linux" %}}
+Linux でスタンドアロンバイナリをインストールするには、以下を実行します。
 
 {{< code-block lang="bash" >}}
-datadog-ci trace [--name <name>] -- <command>
+curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "MacOS" %}}
+MacOS でスタンドアロンバイナリをインストールするには、以下を実行します。
+
+{{< code-block lang="bash" >}}
+curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Windows" %}}
+Windows でスタンドアロンバイナリをインストールするには、以下を実行します。
+
+{{< code-block lang="bash" >}}
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+## パイプライントレースへのタグの追加
+
+タグは、パイプラインスパンまたはジョブスパンに追加することができます。これを行うには、以下を実行します。
+
+{{< code-block lang="bash" >}}
+datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
-環境変数 `DATADOG_API_KEY` に有効な [Datadog API キー][2]を指定します。例:
+環境変数 `DATADOG_API_KEY` を使用して、有効な [Datadog API キー][3]を指定する必要があります。
 
-{{< site-region region="us,us3,eu" >}}
-<pre>
-<code>
-DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace \
---name "Greet" \
--- \
-echo "Hello World"
-</code>
-</pre>
-{{< /site-region >}}
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
+{{< site-region region="us5,us3,eu" >}}
+環境変数 `DATADOG_SITE` を使って [Datadog サイト][1]を指定する必要があります。
+
+[1]: /ja/getting_started/site/
 {{< /site-region >}}
 
-## コンフィギュレーション設定
+次の例では、パイプラインスパンに `team` というタグを追加しています。
 
-これらのオプションは `datadog-ci trace` コマンドで利用可能です。
+{{< code-block lang="bash" >}}
+datadog-ci tag --level pipeline --tags team:backend
+{{< /code-block >}}
 
-`--name`
-: カスタムコマンドの表示名。<br/>
-**デフォルト**: `<command>` と同じ値<br/>
-**例**: `Wait for DB to be reachable`
+次の例では、現在のジョブのスパンに `go.version` というタグを追加しています。
 
-`--tags`
-: カスタムコマンドにアタッチされる `key:value` 形式のキーと値のペア (`--tags` パラメーターは複数回指定できます)。`DD_TAGS` を使用してタグを指定する場合は、カンマを使用してタグを区切ります (例: `team:backend,priority:high`)。<br/>
-**環境変数**: `DD_TAGS`<br/>
-**デフォルト**: (none)<br/>
-**例**: `team:backend`<br/>
-**注**: `--tags` と `DD_TAGS` 環境変数を使用して指定されたタグがマージされます。`--tags` と `DD_TAGS` の両方に同じキーが表示される場合、環境変数 `DD_TAGS` の値が優先されます。
+{{< code-block lang="bash" >}}
+datadog-ci tag --level job --tags "go.version:`go version`"
+{{< /code-block >}}
 
-`--no-fail`
-: サポートされていない CI プロバイダーで実行しても、datadog-ci が失敗しないようにします。この場合、コマンドは実行されますが、Datadog には何も報告されません。<br/>
-**デフォルト**: `false`
+タグからファセットを作成するには、[パイプライン実行ページ][4]でタグ名の横にある歯車アイコンをクリックし、**create facet** (ファセットを作成する) オプションをクリックします。
 
-位置引数
-: 起動され、トレースされるコマンド。
+{{< img src="ci/custom-tags-create-facet.mp4" alt="カスタムタグのファセット作成" style="width:100%;" video="true">}}
 
-次の環境変数がサポートされています。
+## パイプライントレースへのメトリクスの追加
 
-`DATADOG_API_KEY` (必須)
-: リクエストの認証に使用される [Datadog API キー][2]。<br/>
-**デフォルト**: (なし)
+パイプラインスパンやジョブスパンに数値タグを追加する場合は、以下を実行します。
 
-{{< site-region region="us3,us5,eu" >}}
-さらに、選択したサイトを使用するように Datadog サイトを構成します ({{< region-param key="dd_site_name" >}}):
+{{< code-block lang="bash" >}}
+datadog-ci metric [--level <pipeline|job>] [--metrics <metrics>]
+{{< /code-block >}}
 
-`DATADOG_SITE`
-: 結果をアップロードする Datadog サイト。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
+環境変数 `DATADOG_API_KEY` を使用して、有効な [Datadog API キー][3]を指定する必要があります。
+{{< site-region region="us5,us3,eu" >}}
+環境変数 `DATADOG_SITE` を使用して [Datadog サイト][1]を指定する必要があります。
+
+[1]: /ja/getting_started/site/
 {{< /site-region >}}
+
+次の例では、パイプラインスパンに `error_rate` というメトリクスを追加しています。
+
+{{< code-block lang="bash" >}}
+datadog-ci metric --level pipeline --metrics "error_rate:0.56"
+{{< /code-block >}}
+
+次の例では、現在実行中のジョブのスパンに `binary.size` というメトリクスを追加しています。
+
+{{< code-block lang="bash" >}}
+datadog-ci metric --level job --metric "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
+{{< /code-block >}}
+
+メジャーを作成するには、[ パイプライン実行ページ ][4]でメトリクス名の横にある歯車アイコンをクリックし、**create measure** (メジャーを作成する) オプションをクリックします。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://github.com/datadog/datadog-ci#standalone-binary-beta
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/ci/pipeline-executions

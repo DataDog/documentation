@@ -12,6 +12,9 @@ further_reading:
 - link: "/getting_started/synthetics/api_test/"
   tag: "Documentation"
   text: "Get started with API tests"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 ## Overview
 
@@ -29,7 +32,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `53`.
 2. Enter the string you want to send in your test. 
 3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.
@@ -51,6 +54,8 @@ Assertions define what an expected test result is. When you click **Test URL**, 
 Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per UDP test.
 
 {{< img src="synthetics/api_tests/udp_assertions.png" alt="Define assertions for your UDP test to succeed or fail on" style="width:90%;" >}}
+
+To perform `OR` logic in an assertion, use the `matches regex` or `does not match regex` comparators to define a regex with multiple expected values for the same assertion type like `(0|100)`. The test result is successful if the string response assertion's value is 0 or 100.
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -85,9 +90,9 @@ When you set the alert conditions to `An alert is triggered if your test fails f
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes;
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][6], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -97,12 +102,18 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            | Show when the test alerts.                                          |
     | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
+    | `{{#is_recovery}}`         | Show when the test recovers from an alert.                          |
+    | `{{^is_recovery}}`         | Show unless the test recovers from an alert.                        |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save and start your test.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][9].
 
 ## Variables
 
@@ -129,7 +140,7 @@ When you have entered a name and a value, click **Add Variable**.
 
 ### Use variables
 
-You can use the [global variables defined in `Settings`][8] and [locally defined variables](#create-local-variables) in the URL and assertions of your UDP tests.
+You can use the [global variables defined in `Settings`][8] in the URL and assertions of your UDP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -158,13 +169,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][9].
+By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic UDP tests. To get create, edit, and delete access to Synthetic UDP tests, upgrade your user to one of those two [default roles][10].
 
-If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][11] on their accounts.
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
 You can restrict access to a UDP test based on the roles in your organization. When creating a UDP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -182,6 +193,7 @@ You can restrict access to a UDP test based on the roles in your organization. W
 [6]: /monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /synthetics/settings/#global-variables
-[9]: /account_management/rbac/
-[10]: /account_management/rbac#custom-roles
-[11]: /account_management/rbac/#create-a-custom-role
+[9]: /synthetics/guide/synthetic-test-monitors
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

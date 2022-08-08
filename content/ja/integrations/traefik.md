@@ -6,18 +6,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - ログの収集
+- web
+- ログの収集
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
 display_name: Traefik
 draft: false
 git_integration_title: traefik
 guid: 322c0b9d-3ec6-434e-918c-5740f2a114bf
 integration_id: traefik
 integration_title: Traefik
+integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
 maintainer: '@renaudhager'
@@ -29,84 +30,67 @@ public_title: Datadog-Traefik インテグレーション
 short_description: traefik のメトリクスを収集
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
-このインテグレーションは [Traefik][1] からデータを収集して、Traefik の健全性をチェックすると共に、以下を監視します。
-
-- エラーログ (4xx コード、5xx コード)
-- リクエスト数
-- 送受信されたバイト数
+[Traefik][1] のメトリクス、ログ、トレースを Datadog に送信し、Traefik サービスを監視します。
 
 ## セットアップ
 
+Traefik チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+
 ### インストール
 
-Agent v6.8 以降を使用している場合は、以下の手順に従って、ホストに Traefik チェックをインストールしてください。[バージョン 6.8 以前の Agent][3] または [Docker Agent][4] でチェックをインストールする場合は、[コミュニティインテグレーションのインストール][2]に関する Agent のガイドを参照してください。
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Traefik チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
-1. [Datadog Agent をダウンロードして起動][4]します。
-2. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-traefik==<INTEGRATION_VERSION>
    ```
 
-3. [他のパッケージ化されたインテグレーション][5]と同様にインテグレーションを構成します。
+2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
-1. Traefik の[メトリクス](#metric-collection)または[ログ](#log-collection)を収集するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `traefik.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル traefik.d/conf.yaml][7] を参照してください。
+{{< tabs >}}
+{{% tab "v2" %}}
 
-2. [Agent を再起動します][8]。
+#### v2 について
+v1 から v2 への変更点については、[Traefik 移行ガイド][1]を参照してください。最新バージョンについては、[Traefik のドキュメント][2]を参照してください。
 
 #### メトリクスの収集
 
-[メトリクス][9]の収集を開始するには、`traefik.yaml` ファイルに次のコンフィギュレーションセットアップを追加します。
-
-```yaml
-init_config:
-
-instances:
-  - host: 10.1.2.3
-    port: "8080"
-    path: "/health"
-    scheme: "http"
-```
-
-構成オプション
-
-- host: クエリする Traefik エンドポイント。**必須**
-- port: Traefik エンドポイントの API リスナー。デフォルト値は `8080`。オプション
-- path: Traefik の健全性チェックエンドポイントのパス。デフォルトは `/health`。オプション
-- scheme: Traefik の健全性チェックエンドポイントのスキーム。デフォルトは `http`。_オプション_
-
-[Agent を再起動][8]すると、Datadog への Traefik メトリクスの送信が開始されます。
+[Traefik のドキュメント][3]に従って、[Traefik メトリクス][4]を Datadog に送信してください。
 
 #### ログの収集
 
 **Agent 6.0 以上で使用可能**
 
-[Traefik のログ][10]は、デフォルトで stdout に送信されます。Datadog Agent は、コンテナ `stdout`/`stderr` から直接ログを収集できるため、コンテナバージョンではこれを変更しないでください。
+[Traefik のログ][5]は、デフォルトで stdout に送信されます。Datadog Agent は、コンテナ `stdout`/`stderr` から直接ログを収集できるため、コンテナバージョンではこれを変更しないでください。
 
-Traefik がログをファイルに記録するように構成する場合は、Traefik 構成ファイルに以下を追加します。
+1. [Traefik がログをファイルに記録する][5]ように構成する場合は、Traefik 構成ファイルに以下を追加します。
 
-```conf
-[traefikLog]
-  filePath = "/path/to/traefik.log"
-```
+   ```conf
+    log:
+      filePath: "/path/to/traefik.log"
+    ```
 
-[一般的な Apache Access 形式][11]がデフォルトで使用され、このインテグレーションでサポートされています。
+   [一般的な Apache Access 形式][6]がデフォルトで使用され、このインテグレーションでサポートされています。
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Traefik ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][6]のルートにある `traefik.d/conf.yaml` ファイルに次のコンフィギュレーションブロックを追加します。
+3. Traefik ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `traefik.d/conf.yaml` ファイルに次のコンフィギュレーションブロックを追加します。
 
     ```yaml
     logs:
@@ -118,15 +102,125 @@ Traefik がログをファイルに記録するように構成する場合は、
 
       `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
 
-3. [Agent を再起動します][8]。
+4. [Agent を再起動します][8]。
+
+#### トレースの収集
+
+1. 必要に応じて、Datadog の [APM の有効化][9]を行います。
+2. [Traefik のドキュメント][10]に従って、[トレース][11]を Datadog に送信してください。
+
+[1]: https://doc.traefik.io/traefik/v2.0/migration/v1-to-v2/
+[2]: https://doc.traefik.io/traefik/
+[3]: https://doc.traefik.io/traefik/observability/metrics/datadog/
+[4]: https://doc.traefik.io/traefik/observability/metrics/overview/
+[5]: https://doc.traefik.io/traefik/observability/logs/#filepath
+[6]: https://doc.traefik.io/traefik/observability/logs/#format
+[7]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
+[8]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
+[9]: https://docs.datadoghq.com/ja/getting_started/tracing/#enable-apm
+[10]: https://doc.traefik.io/traefik/observability/tracing/datadog/
+[11]: https://doc.traefik.io/traefik/observability/tracing/overview/
+{{% /tab %}}
+{{% tab "v1" %}}
+
+#### v1 について
+
+v1 については [Traefik のドキュメント][1]を、v1 から v2 への変更点については [Traefik 移行ガイド][2]をご覧ください。
+
+#### メトリクスの収集
+
+1. Traefik の[メトリクス][2]を収集するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダ内の `traefik.d/conf.yaml` ファイルを開きます。
+
+2. [メトリクス][2]の収集を開始するには、`traefik.d/conf.yaml` ファイルに次のコンフィギュレーションセットアップを追加します。
+
+    ```yaml
+    init_config:
+
+    instances:
+    - host: 10.1.2.3
+        port: "8080"
+        path: "/health"
+        scheme: "http"
+    ```
+
+   構成オプション
+
+    - host: クエリする Traefik エンドポイント。**必須**
+    - port: Traefik エンドポイントの API リスナー。デフォルト値は `8080`。オプション
+    - path: Traefik の健全性チェックエンドポイントのパス。デフォルトは `/health`。オプション
+    - scheme: Traefik の健全性チェックエンドポイントのスキーム。デフォルトは `http`。_オプション_
+
+3. [Agent を再起動][4]すると、Datadog への Traefik メトリクスの送信が開始されます。
+
+使用可能なすべての構成オプションの詳細については、[サンプル traefik.d/conf.yaml][5] を参照してください。
+
+#### ログの収集
+
+**Agent 6.0 以上で使用可能**
+
+[Traefik のログ][6]は、デフォルトで stdout に送信されます。Datadog Agent は、コンテナ `stdout`/`stderr` から直接ログを収集できるため、コンテナバージョンではこれを変更しないでください。
+
+1. [Traefik がログをファイルに記録する][6]ように構成する場合は、Traefik 構成ファイルに以下を追加します。
+
+    ```conf
+    [traefikLog]
+    filePath = "/path/to/traefik.log"
+    ```
+
+   [一般的な Apache Access 形式][7]がデフォルトで使用され、このインテグレーションでサポートされています。
+
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+3. Traefik ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `traefik.d/conf.yaml` ファイルに次のコンフィギュレーションブロックを追加します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: /path/to/traefik.log
+        source: traefik
+        service: traefik
+    ```
+
+      `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+
+4. [Agent を再起動します][4]。
+
+#### トレースの収集
+
+**Traefik v1.7+ で使用可能**
+
+1. 必要に応じて、Datadog の [APM の有効化][8]を行います。
+2. [Traefik のドキュメント][9]に従って、トレースを Datadog に送信してください。
+
+[1]: https://doc.traefik.io/traefik/v1.7/
+[2]: https://github.com/DataDog/integrations-extras/blob/master/traefik/metadata.csv
+[3]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
+[5]: https://github.com/DataDog/integrations-extras/blob/master/traefik/datadog_checks/traefik/data/conf.yaml.example
+[6]: https://doc.traefik.io/traefik/v1.7/configuration/logs/#traefik-logs
+[7]: https://doc.traefik.io/traefik/v1.7/configuration/logs/#clf-common-log-format
+[8]: https://docs.datadoghq.com/ja/getting_started/tracing/#enable-apm
+[9]: https://doc.traefik.io/traefik/v1.7/configuration/tracing/#datadog
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][12]し、Checks セクションで `traefik` を探します。
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `traefik` を探します。
 
 ## 互換性
 
 このチェックは、すべての主要プラットフォームと互換性があります。
+
+**メトリクス**
+
+v2 については、Datadog に送られる [Traefik メトリクス][6]のリストをご覧ください。
+
+v1 については、インテグレーションによって提供される[メトリクス][7]のリストを参照してください。
 
 ## 収集データ
 
@@ -144,20 +238,14 @@ Traefik チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://traefik.io
-[2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-extras/blob/master/traefik/datadog_checks/traefik/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
-[9]: https://github.com/DataDog/integrations-extras/blob/master/traefik/metadata.csv
-[10]: https://docs.traefik.io/configuration/logs/#traefik-logs
-[11]: https://docs.traefik.io/configuration/logs/#clf-common-log-format
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[13]: https://github.com/DataDog/integrations-extras/blob/master/traefik/assets/service_checks.json
-[14]: https://docs.datadoghq.com/ja/help
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[6]: https://doc.traefik.io/traefik/observability/metrics/overview/
+[7]: https://docs.datadoghq.com/ja/integrations/traefik/#metrics
+[8]: https://docs.datadoghq.com/ja/help

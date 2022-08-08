@@ -1,23 +1,24 @@
 ---
-title: 属性とエイリアス設定
-kind: documentation
-description: 属性と命名規則の遵守について
 aliases:
-  - /ja/logs/processing/attributes_naming_convention/
+- /ja/logs/processing/attributes_naming_convention/
+description: 属性と命名規則の遵守について
 further_reading:
-  - link: logs/log_configuration/pipelines
-    tag: ドキュメント
-    text: Datadog のパイプライン
-  - link: logs/log_configuration/processors
-    tag: ドキュメント
-    text: 使用可能なプロセッサーのリスト
-  - link: logs/logging_without_limits
-    tag: ドキュメント
-    text: 無制限のログ
-  - link: logs/explorer
-    tag: ドキュメント
-    text: ログの調査方法
+- link: logs/log_configuration/pipelines
+  tag: ドキュメント
+  text: Datadog のパイプライン
+- link: logs/log_configuration/processors
+  tag: ドキュメント
+  text: 使用可能なプロセッサーのリスト
+- link: logs/logging_without_limits
+  tag: ドキュメント
+  text: 無制限のログ
+- link: logs/explorer
+  tag: ドキュメント
+  text: ログの調査方法
+kind: documentation
+title: 属性とエイリアス設定
 ---
+
 ## 概要
 
 さまざまなテクノロジーやアプリケーションから取得されるログを一元化すると、ログ管理環境に数十個から数百個の属性が生成されます。特に多数のチームのユーザーが同じ環境内で作業している場合は、その傾向が顕著です。
@@ -90,7 +91,7 @@ further_reading:
 - [Syslog およびログシッパー](#syslog-and-log-shippers)
 - [DNS](#dns)
 
-#### ネットワーク
+#### Web アクセス
 
 以下は、ネットワーク通信で使用されるデータに関連する属性です。すべてのフィールドとメトリクスに `network` というプレフィックスが付きます。
 

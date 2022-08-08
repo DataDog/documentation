@@ -2,7 +2,7 @@
 title: Alert on No Change in value
 kind: guide
 aliases:
-  - monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
+  - /monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value
 further_reading:
 - link: "/monitors/create/"
   tag: "Documentation"

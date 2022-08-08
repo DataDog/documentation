@@ -2,6 +2,7 @@
 aliases:
 - /ja/synthetics/http_test
 - /ja/synthetics/http_check
+- /ja/synthetics/guide/or-logic-api-tests-assertions
 description: HTTP リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
@@ -117,16 +118,18 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][5]、[`xpath`][6] | _String_ <br> _[Regex][7]_ <br> _String_, _[Regex][7]_ |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][5]、[`xpath`][6] | 文字列 <br> [Regex][7] |
 | ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | 文字列 <br> [Regex][7]                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
-| ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
+| ステータスコード   | `is`、`is not`、<br> `matches`、`does not match`                                                                                         | _文字列_ <br> _[正規表現][7]_                                                     |
 
 HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文を解凍することが可能です。
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="HTTP テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+
+アサーションで `OR` ロジックを実行するには、`matches regex` コンパレータを使って `(200|302)` のように複数の期待値を持つ正規表現を定義します。たとえば、サーバーが `200` あるいは `302` というステータスコードで応答したときに HTTP テストを成功させたいことがあるでしょう。ステータスコードが 200 あるいは 302 であれば、 `status code` アサーションは成功します。`body` や `header` アサーションに `OR` ロジックを追加することもできます。
 
 テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
 
@@ -173,8 +176,12 @@ HTTP テストは次の頻度で実行できます。
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
     | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         |テストがアラートから回復したときに表示します。                             |
-    | `{{^is_recovery}}`         |テストがアラートから回復しない限り表示します。                           |
+    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
+    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
+    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
+    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
+    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
+    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
@@ -203,7 +210,7 @@ HTTP テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、およびアサーションで、[`Settings` で定義されたグローバル変数][11]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+HTTP テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][11]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 

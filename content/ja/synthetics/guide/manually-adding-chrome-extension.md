@@ -15,7 +15,7 @@ title: ブラウザテスト Chrome 拡張機能を内部アプリケーショ�
 セキュリティ上の理由で Chrome Web Store から直接アプリケーションをダウンロードできない場合は、Datadog Synthetics Chrome Extension v3.1.6+ で利用できる Datadog の拡張機能検出システムを活用して、Synthetic ブラウザテストを記録してください。
 
 1. Datadog テストレコーダー拡張機能の[最新の CRX ファイル][5]をダウンロードします。
-2. この CRX ファイルを内部のアプリケーションストアにアップロードし、再パッケージ化します。Chrome ブラウザの拡張機能の横に、新しい拡張機能のアイコンが表示されます。
+2. この CRX ファイルを内部のアプリケーションストアにアップロードし、拡張機能を再パッケージ化します。Chrome ブラウザの拡張機能の横に、新しい拡張機能のアイコンが表示されます。
 
    {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="ブラウザに表示されるアイコン" style="width:100%;" >}}
 

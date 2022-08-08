@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/integrations/phpfpm
+- /fr/integrations/phpfpm
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -13,18 +13,19 @@ assets:
     php-fpm_processes: assets/saved_views/php-fpm_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - autodiscovery
+- web
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_name: PHP-FPM
 draft: false
 git_integration_title: php_fpm
 guid: 47f2c337-83ac-4767-b460-1927d8343764
 integration_id: php-fpm
 integration_title: PHP FPM
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,22 +34,27 @@ metric_prefix: php_fpm.
 metric_to_check: php_fpm.processes.total
 name: php_fpm
 process_signatures:
-  - php-fpm
-  - php7.0-fpm
-  - php7.0-fpm start
-  - service php-fpm
-  - php7.0-fpm restart
-  - restart php-fpm
-  - systemctl restart php-fpm.service
-  - php7.0-fpm.service
-public_title: "Intégration Datadog/PHP\_FPM"
-short_description: 'Surveillez les états de processus, les requêtes lentes et les requêtes acceptées.'
+- php-fpm
+- 'php-fpm:'
+- php7.0-fpm
+- php7.0-fpm start
+- service php-fpm
+- php7.0-fpm restart
+- restart php-fpm
+- systemctl restart php-fpm.service
+- php7.0-fpm.service
+public_title: Intégration Datadog/PHP FPM
+short_description: Surveillez les états de processus, les requêtes lentes et les requêtes
+  acceptées.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Présentation de PHP][1]
 
 ## Présentation
@@ -59,11 +65,11 @@ Le check PHP-FPM permet de surveiller l'état de votre pool FPM ainsi que les pe
 
 ### Installation
 
-Le check PHP-FPM est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs utilisant PHP-FPM.
+Le check PHP-FPM est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien à installer sur votre serveur.
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -190,13 +196,13 @@ Si votre installation PHP-FPM utilise des sockets Unix, vous devez activer `use_
 Le check PHP-FPM n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "php_fpm" >}}
 
-**php_fpm.can_ping** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à ping PHP-FPM sur la `ping_url` configurée. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/php_fpm/images/phpfpmoverview.png

@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awssns/
+- /ja/integrations/awssns/
 categories:
-  - cloud
-  - notification
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- notification
+- aws
+- log collection
 dependencies: []
 description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_sns/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_sns/
 draft: false
 git_integration_title: amazon_sns
 has_logo: true
 integration_id: amazon-sns
 integration_title: Amazon SNS
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon SNS インテグレーション
 short_description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
 version: '1.0'
 ---
+
 {{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS ダッシュボード" popup="true">}}
 
 ## 概要
@@ -42,7 +43,7 @@ SNS を Datadog に接続すると、以下のことができます。
 
 1. [AWS インテグレーションタイル][2]のメトリクス収集で、`SNS` をオンにします。
 
-2. Amazon SNS のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。SNS ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+2. Amazon SNS のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [SNS ポリシー][4]を参照してください。
 
     | AWS アクセス許可   | 説明                                             |
     | ---------------- | ------------------------------------------------------- |
@@ -76,7 +77,7 @@ Datadog から SNS 通知を送信するには
 
 1. AWS インテグレーションタイルで、SNS サービスと関連付けられている AWS アカウントを構成します。
 2. [SNS インテグレーションをインストール][5]します。
-3. これで、Datadog は構成された SNS トピックを検出し、@notifications (例: "@sns-topic-name") を表示します。
+3. これで、Datadog は構成された SNS トピックを検出し、@notifications (例: `@sns-topic-name`) を有効にします。
 
 ### ログの収集
 
@@ -84,13 +85,10 @@ SNS はログを提供しません。SNS に送信されるログとイベント
 
 #### ログを Datadog に送信する方法
 
-1. 新しい SNS サブスクリプションを構成します
-2. メッセージの送信元のトピックを選択します
-3. プロトコルとして "Lambda" を選択し、Datadog Forwarder Lambda 関数の arn を選択します
-
-{{< img src="integrations/amazon_sns/aws_sns_log_collection_1.png" alt="AWS SNS ログの収集" popup="true" style="width:70%;">}}
-
-{{< img src="integrations/amazon_sns/aws_sns_log_collection_2.png" alt="AWS SNS ログの収集 2" popup="true" style="width:70%;">}}
+1. 新しい SNS サブスクリプションを構成します。
+2. メッセージの送信元のトピックを選択します。
+3. Protocol には、**AWS Lambda** を選択します。
+4. Endpoint には、Datadog Forwarder Lambda 関数の ARN を入力します。
 
 ## 収集データ
 
@@ -119,7 +117,7 @@ Datadog では、Datadog から GovCloud または 中国のトピックへの S
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sns.html
+[4]: https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_sns
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sns/amazon_sns_metadata.csv
 [7]: https://docs.datadoghq.com/ja/help/

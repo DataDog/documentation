@@ -68,7 +68,7 @@ Datadog は、サーバーレスアプリケーションのインスツルメン
     - `JAVA_TOOL_OPTIONS` を `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1` に設定します
     - `DD_JMXFETCH_ENABLED` を `false` に設定します
     - `DD_TRACE_ENABLED` を `true` に設定します。
-    - `DD_SITE` を、テレメトリーの送信先となる [Datadog サイト][3]に設定します。
+    - `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
@@ -115,7 +115,7 @@ Datadog は、サーバーレスアプリケーションのインスツルメン
     - `JAVA_TOOL_OPTIONS` を `-javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1` に設定します
     - `DD_JMXFETCH_ENABLED` を `false` に設定します
     - `DD_TRACE_ENABLED` を `true` に設定します。
-    - `DD_SITE` を、テレメトリーの送信先となる [Datadog サイト][3]に設定します。
+    - `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html

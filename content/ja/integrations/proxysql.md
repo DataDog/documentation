@@ -15,7 +15,6 @@ categories:
 - ログの収集
 - キャッシュ
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md
 display_name: ProxySQL
@@ -32,7 +31,7 @@ manifest_version: 1.0.0
 metric_prefix: proxysql.
 metric_to_check: proxysql.active_transactions
 name: proxysql
-public_title: Datadog-ProxySQL インテグレーション
+public_title: ProxySQL インテグレーション
 short_description: ProxySQLメトリクスとログを収集。
 support: コア
 supported_os:

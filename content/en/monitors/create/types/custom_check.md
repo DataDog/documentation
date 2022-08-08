@@ -1,7 +1,7 @@
 ---
-title: Custom Check Monitor
+title: Service Check Monitor
 kind: documentation
-description: "Monitor status of arbitrary custom checks."
+description: "Monitor status of arbitrary service checks."
 aliases :
     - /monitors/monitor_types/custom_check
 further_reading:
@@ -18,15 +18,15 @@ further_reading:
 
 ## Overview
 
-Custom check monitors include any service check not reported by one of the [more than {{< translate key="integration_count" >}} integrations][1] included with the Agent. Custom service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4].
+Service check monitors include any service check not reported by one of the [more than {{< translate key="integration_count" >}} integrations][1] included with the Agent. Service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4].
 
 ## Monitor creation
 
-To create a [custom check monitor][5] in Datadog, use the main navigation: *Monitors --> New Monitor --> Custom Check*.
+To create a [service check monitor][5] in Datadog, use the main navigation: *Monitors --> New Monitor --> Service Check*.
 
-### Pick a custom check
+### Pick a service check
 
-Choose a custom check from the drop-down box.
+Choose a service check from the drop-down menu.
 
 ### Pick monitor scope
 
@@ -48,7 +48,7 @@ Set up the check alert:
 
 1. Trigger a separate alert for each `<GROUP>` reporting your check.
 
-    Check grouping is specified either from a list of known groupings or by you. For custom check monitors, the per-check grouping is unknown, so you must specify it.
+    Check grouping is specified either from a list of known groupings or by you. For service check monitors, the per-check grouping is unknown, so you must specify it.
 
 2. Trigger the alert after selected consecutive failures: `<NUMBER>`
 

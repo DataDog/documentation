@@ -268,7 +268,15 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive (Glacier Instant Retrieval and S3 Intelligent-Tiering are exceptions). If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+[Rehydration][2] only supports the following storage classes:
+
+* S3 Standard
+* S3 Intelligent-Tiering
+* S3 Standard-IA
+* S3 One Zone-IA
+* S3 Glacier Instant Retrieval
+
+If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/
@@ -360,7 +368,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all logs ingested into Datadog. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][11].
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][11].
 
 If Datadog detects a broken configuration, the corresponding archive is highlighted in the configuration page. Click on the error icon to see the actions to take to resolve the issue.
 

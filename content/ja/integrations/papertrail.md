@@ -1,7 +1,6 @@
 ---
 categories:
-  - monitoring
-ddtype: crawler
+- monitoring
 dependencies: []
 description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論。
 doc_link: https://docs.datadoghq.com/integrations/papertrail/
@@ -10,14 +9,17 @@ git_integration_title: papertrail
 has_logo: true
 integration_id: papertrail
 integration_title: PaperTrail
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: papertrail
 public_title: Datadog-PaperTrail インテグレーション
 short_description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論。
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail 例" popup="true">}}
 
 ## 概要

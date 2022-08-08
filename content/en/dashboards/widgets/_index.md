@@ -25,9 +25,11 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/pie_chart" >}}Pie Chart{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value" >}}Query Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table" >}}Table{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/treemap" >}}Treemap{{< /nextlink >}}    
     {{< nextlink href="/dashboards/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list" >}}Top List{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -110,5 +112,5 @@ To download data from a timeseries, table, or top list widget in CSV format, cli
 [2]: /dashboards/guide/context-links/
 [3]: /dashboards/
 [4]: /notebooks/
-[5]: /tracing/visualization/service/
-[6]: /tracing/visualization/resource/
+[5]: /tracing/services/service_page/
+[6]: /tracing/services/resource_page/

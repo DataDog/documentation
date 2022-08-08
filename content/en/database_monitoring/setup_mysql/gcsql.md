@@ -29,7 +29,7 @@ Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
 Supported Agent versions
-: 7.36.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -143,7 +143,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
 ### Runtime setup consumers
-Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_statements_*` consumers at runtime.
+Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -151,6 +151,7 @@ CREATE PROCEDURE datadog.enable_events_statements_consumers()
     SQL SECURITY DEFINER
 BEGIN
     UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name LIKE 'events_statements_%';
+    UPDATE performance_schema.setup_consumers SET enabled='YES' WHERE name = 'events_waits_current';
 END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
@@ -199,10 +200,12 @@ instances:
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_NAME>'
+      instance_id: '<INSTANCE_ID>'
 ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.
+
+See the [MySQL integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -223,7 +226,7 @@ Get up and running quickly by executing the following command to run the agent f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -237,7 +240,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "password": "<UNIQUEPASSWORD>",
     "gcp": {
       "project_id": "<PROJECT_ID>",
-      "instance_id": "<INSTANCE_NAME>"
+      "instance_id": "<INSTANCE_ID>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -248,19 +251,21 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.0
+FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_NAME>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+See the [MySQL integration spec][2] for additional information on setting `project_id` and `instance_id` fields.
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][2] on how to pass in the password as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
-[3]: /agent/faq/template_variables/
+[2]: /agent/faq/template_variables/
+[3]: /agent/guide/secrets-management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -289,7 +294,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     gcp:
       project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_NAME>" \
+      instance_id: "<INSTANCE_ID>" \
   datadog/datadog
 ```
 
@@ -309,7 +314,7 @@ instances:
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_NAME>'
+      instance_id: '<INSTANCE_ID>'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -337,7 +342,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "gcp": {
             "project_id": "<PROJECT_ID>",
-            "instance_id": "<INSTANCE_NAME>"
+            "instance_id": "<INSTANCE_ID>"
           }
         }
       ]
@@ -348,6 +353,9 @@ spec:
     targetPort: 3306
     name: mysql
 ```
+
+See the [MySQL integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
+
 The Cluster Agent automatically registers this configuration and begin running the MySQL check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.

@@ -66,10 +66,6 @@ In addition to the official Ansible integration, the [monitoring section][23] of
 
 Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][25].
 
-### Auth0
-
-The [Auth0 extension][26] takes your Auth0 logs and ships them to Datadog.
-
 ### CLI management
 
 A [set of tools][27] to backup/restore dashboards and monitors, and configure users through a command line interface.
@@ -194,7 +190,6 @@ If you've written a Datadog library and would like to add it to this page, send 
 [23]: https://docs.ansible.com/ansible/2.9/modules/list_of_monitoring_modules.html
 [24]: https://github.com/ansible/ansible-modules-extras
 [25]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
-[26]: https://github.com/BetaProjectWave/auth0-logs-to-datadog
 [27]: https://github.com/keirans/datadog-management
 [28]: https://github.com/zendesk/consul2dogstats
 [29]: https://github.com/cvent/dogscaler

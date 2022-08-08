@@ -1,17 +1,18 @@
 ---
-title: Agent v6 ステータスページ
-kind: ガイド
 further_reading:
-  - link: /agent/troubleshooting/
-    tag: ドキュメント
-    text: Agent のトラブルシューティング
-  - link: /agent/guide/agent-configuration-files/
-    tag: ガイド
-    text: Agent 構成ファイル
-  - link: /agent/guide/agent-commands/
-    tag: ガイド
-    text: Agent のコマンド
+- link: /agent/troubleshooting/
+  tag: ドキュメント
+  text: Agent のトラブルシューティング
+- link: /agent/guide/agent-configuration-files/
+  tag: ガイド
+  text: Agent 構成ファイル
+- link: /agent/guide/agent-commands/
+  tag: ガイド
+  text: Agent のコマンド
+kind: ガイド
+title: Agent v6 ステータスページ
 ---
+
 Agent v6 ステータスページでは、実行中の Agent に関する情報が表示されます。[Agent のコマンド][1] で、使用中の環境のステータスコマンドを探すことができます。次のセクションでは、ステータスページの詳細を説明します。
 
 **注**: ステータスページは Agent のバージョンにより若干異なる場合があります。
@@ -91,6 +92,7 @@ Agent の一般情報は Agent バージョンで見つけることができま�
       Metric Samples: Last Run: 6, Total: 24
       Events: Last Run: 0, Total: 0
       Service Checks: Last Run: 0, Total: 0
+      Histogram Buckets: Last Run: 12, Total: 36
       Average Execution Time : 6ms
 ```
 
@@ -103,6 +105,7 @@ Agent の一般情報は Agent バージョンで見つけることができま�
 | Metric Samples         | 取得されたメトリクスの数。                                   |
 | イベント                 | トリガーされたイベントの数。                                  |
 | Service Checks         | 報告されたサービスチェックの数。                           |
+| Histogram Buckets      | 送信されたヒストグラムバケットの数。                            |
 | Average Execution Time | インスタンスの実行にかかる平均時間。                      |
 | Last Run               | 最後のチェック実行中の番号。                            |
 | 合計                  | Agent が最後に起動または再起動してからの合計数。 |
@@ -182,7 +185,7 @@ Forwarder はいくつかのワーカーを使用して Datadog にペイロー�
 | 用語           | 説明                                                                  |
 |----------------|------------------------------------------------------------------------------|
 | Success        | 正常に送信されたトランザクションの数。                                |
-| Errors         | トランザクションの送信に失敗し再試行した回数。         |
+| エラー         | トランザクションの送信に失敗し再試行した回数。         |
 | RetryQueueSize | 現在再試行を待つトランザクションの数。                    |
 | Retried        | トランザクションを再試行した回数。                               |
 | DroppedOnInput | ワーカーがビジー状態であるためにドロップされたトランザクションの数。  |

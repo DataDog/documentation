@@ -34,7 +34,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md
 description: HAProxy インテグレーションは、HAProxy インスタンスからパフォーマンスメトリクスと可用性メトリクスを収集するのに役立ちます。
@@ -44,7 +43,7 @@ git_integration_title: haproxy
 guid: cd935030-131f-4545-8b6a-a4ca21b8565b
 integration_id: haproxy
 integration_title: HAProxy
-integration_version: 4.3.0
+integration_version: 4.3.1
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -59,7 +58,7 @@ process_signatures:
 - haproxy
 - haproxy-master
 - haproxy-controller
-public_title: Datadog-HAProxy インテグレーション
+public_title: HAProxy インテグレーション
 short_description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
 support: コア
 supported_os:
@@ -150,11 +149,39 @@ Haproxy チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ##### メトリクスの収集
 
-| パラメーター            | 値                                                                                 |
-|----------------------|---------------------------------------------------------------------------------------|
-| `<インテグレーション名>` | `haproxy`                                                                             |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                         |
-| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:<PORT>/metrics", "use_openmetrics": True}` |
+| パラメーター            | 値                                                                                   |
+|----------------------|-----------------------------------------------------------------------------------------|
+| `<インテグレーション名>` | `haproxy`                                                                               |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                           |
+| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:<PORT>/metrics", "use_openmetrics": "true"}` |
+
+##### Kubernetes のデプロイメント例
+
+デプロイメントの `.spec.template.metadata` の下にポッドアノテーションを追加します。
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy
+spec:
+  template:
+    metadata:
+      labels:
+        name: haproxy
+      annotations:
+        ad.datadoghq.com/haproxy.check_names: '["haproxy"]'
+        ad.datadoghq.com/haproxy.init_configs: '[{}]'
+        ad.datadoghq.com/haproxy.instances: |
+          [
+            {
+              "openmetrics_endpoint": "http://%%host%%:<PORT>/metrics", "use_openmetrics": "true"
+            }
+          ]
+    spec:
+      containers:
+        - name: haproxy
+```
 
 [1]: https://app.datadoghq.com/account/settings#agent
 {{% /tab %}}

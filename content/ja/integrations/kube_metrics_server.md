@@ -12,7 +12,6 @@ categories:
 - orchestration
 - コンテナ
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_name: Kube メトリクスサーバー
@@ -29,7 +28,7 @@ manifest_version: 1.0.0
 metric_prefix: kube_metrics_server.
 metric_to_check: kube_metrics_server.process.open_fds
 name: kube_metrics_server
-public_title: Datadog-Kubernetes Metrics Server インテグレーション
+public_title: Kubernetes Metrics Server インテグレーション
 short_description: Kubernetes Metrics Server の監視
 support: コア
 supported_os:

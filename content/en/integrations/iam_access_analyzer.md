@@ -4,7 +4,6 @@ categories:
     - aws
     - log collection
     - security
-ddtype: crawler
 description:
 short_description:
 doc_link: https://docs.datadoghq.com/integrations/iam_access_analyser/

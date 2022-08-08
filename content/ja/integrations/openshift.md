@@ -6,38 +6,40 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - コンテナ
-  - オーケストレーション
+- コンテナ
+- オーケストレーション
+- ログの収集
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/openshift/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/openshift/README.md
 display_name: OpenShift
 draft: false
 git_integration_title: OpenShift
 guid: ea7f642f-263f-4ed1-8da0-9bb96c7df1f0
 integration_id: OpenShift
 integration_title: OpenShift
+integration_version: ''
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: openshift.
 metric_to_check:
-  - openshift.clusterquota.cpu.requests.used
-  - openshift.clusterquota.cpu.used
+- openshift.clusterquota.cpu.requests.used
+- openshift.clusterquota.cpu.used
 name: OpenShift
-public_title: Datadog-OpenShift インテグレーション
+public_title: OpenShift インテグレーション
 short_description: ビッグアイデア用の Kubernetes プラットフォーム
 support: コア
 supported_os:
-  - linux
+- linux
 ---
+
 ## 概要
 
 Red Hat OpenShift は、企業向けアプリケーションの開発とデプロイのための Kubernetes コンテナオーケストレーターに基づくオープンソースのコンテナアプリケーションプラットフォームです。
 
-> 現状で `openshift` チェックは存在しません。この README では、OpenShift 固有のメトリクスを Agent で収集するために必要なコンフィギュレーションについて説明します。以下に記載するデータは [`kubernetes_apiserver` チェック][1]によって収集されます。このチェックを、`openshift.*` メトリクスを収集するためにセットアップする必要があります。
+> `openshift` チェックは存在しません。この README では、OpenShift 固有のメトリクスを Agent で収集するために必要なコンフィギュレーションについて説明します。以下に記載するデータは [`kubernetes_apiserver` チェック][1]によって収集されます。このチェックを、`openshift.*` メトリクスを収集するためにセットアップする必要があります。
 
 ## セットアップ
 
@@ -99,7 +101,7 @@ agents:
 
 #### ログの収集
 
-詳細については、[Kubernetes のログ収集][3]に関するドキュメントを参照してください。
+詳しくは、[Kubernetes のログ収集][3]を参照してください。
 
 #### 制限付き SCC オペレーション
 
@@ -111,7 +113,7 @@ Agent を `sidecar` モードで実行できます。Agent をアプリケーシ
 
 #### ホスト
 
-`allowHostPorts` のアクセス許可をポッドに（標準の `hostnetwork`、`hostaccess`、あるいは自作の SCC を使用して）追加します。その場合、関連するポートバインディングを、ポッドの仕様に追加してください。
+標準の `hostnetwork`、`hostaccess`、あるいは自作の SCC を使用して `allowHostPorts` のアクセス許可をポッドに追加します。その場合、関連するポートバインディングを、ポッドの仕様に追加してください。
 
 ```yaml
 ports:
@@ -131,7 +133,7 @@ SELinux が enforcing モードの場合は、datadog-agent ポッドに [`spc_t
 - `allowHostPorts: true`: Dogstatsd / APM / ログインテークの、ノード IP へのバインドを許可します。
 - `allowHostPID: true`: UNIX ソケットによって送信された DogStatsD メトリクスに対する発信点検出を許可します。
 - `volumes: hostPath`: メトリクス収集に必要な、Docker ソケット、およびホストの `proc` と `cgroup` フォルダーへのアクセスを許可します。
-- `SELinux type: spc_t`: メトリクス収集に必要な Docker ソケット、およびすべてのプロセスの `proc` と `cgroup` フォルダーへのアクセスを許可します。このタイプについて詳しくは、[Red Hat による記事][7]を参照してください。
+- `SELinux type: spc_t`: Docker ソケットと全プロセスの `proc` と `cgroup` フォルダにアクセスし、メトリクスを収集します。詳しくは [超特権コンテナのコンセプトの紹介][7] を参照してください。
 
 <div class="alert alert-info">
 新しく作成した <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">datadog-agent SCC</a> に、<a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">datadog-agent サービスアカウント</a>を追加することを忘れないでください。それには、<code>system:serviceaccount:<datadog-agent namespace>:<datadog-agent service account name></code> を <code>users</code> セクションに追加する必要があります。

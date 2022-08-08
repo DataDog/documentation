@@ -4,19 +4,19 @@ kind: guide
 aliases:
 - /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
-- link: "/tracing/setup/"
+- link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/visualization/services_list/"
+- link: "/tracing/services/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "/tracing/visualization/service/"
+- link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "/tracing/visualization/resource/"
+- link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "/tracing/visualization/trace/"
+- link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -90,7 +90,7 @@ try (Scope scope = tracer.activateSpan(span)) {
 For more information, see [Setting up Java and OpenTracing][1].
 
 
-[1]: /tracing/setup_overview/open_standards/java/#opentracing
+[1]: /tracing/trace_collection/open_standards/java/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -109,7 +109,7 @@ span.finish()
 For more information, see [Setting up Python and OpenTracing][1].
 
 
-[1]: /tracing/setup_overview/open_standards/python/#opentracing
+[1]: /tracing/trace_collection/open_standards/python/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -123,7 +123,7 @@ end
 For more information, see [Setting up Ruby and OpenTracing][1].
 
 
-[1]: /tracing/setup_overview/open_standards/ruby/#opentracing
+[1]: /tracing/trace_collection/open_standards/ruby/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -135,7 +135,7 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 For more information, see [Setting up Go and OpenTracing][1].
 
 
-[1]: /tracing/setup_overview/open_standards/go/#opentracing
+[1]: /tracing/trace_collection/open_standards/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -151,7 +151,7 @@ span.finish();
 For more information, see [Setting up NodeJS and OpenTracing][1].
 
 
-[1]: /tracing/setup_overview/open_standards/nodejs/#opentracing
+[1]: /tracing/trace_collection/open_standards/nodejs/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -171,7 +171,7 @@ using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(f
 For more information, see [Setting up .NET and OpenTracing][1].
 
 
-[1]: /tracing/setup_overview/open_standards/dotnet/#opentracing
+[1]: /tracing/trace_collection/open_standards/dotnet/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -199,7 +199,7 @@ $scope->close();
 For more information, see [Setting up PHP and OpenTracing][1].
 
 
-[1]: /tracing/setup_overview/open_standards/php/#opentracing
+[1]: /tracing/trace_collection/open_standards/php/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
@@ -214,7 +214,7 @@ root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 For more information, see [Setting up CPP and Custom Instrumentation][1].
 
 
-[1]: /tracing/setup_overview/custom_instrumentation/cpp/#manually-instrument-a-method
+[1]: /tracing/trace_collection/custom_instrumentation/cpp/#manually-instrument-a-method
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -224,6 +224,6 @@ For more information, see [Setting up CPP and Custom Instrumentation][1].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/guide/metrics_namespace/
+[1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings
-[3]: /tracing/setup_overview/custom_instrumentation/
+[3]: /tracing/trace_collection/custom_instrumentation/

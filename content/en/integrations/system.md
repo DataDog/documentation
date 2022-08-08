@@ -12,7 +12,6 @@ short_description: 'Track system resource usage: CPU, memory, disk, filesystem, 
 categories:
     - os & system
     - configuration & deployment
-ddtype: check
 aliases:
     - /integrations/system_swap/
     - /integrations/system_core/

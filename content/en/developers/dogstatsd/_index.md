@@ -86,6 +86,7 @@ By default, DogStatsD listens on UDP port **8125**, so you need to bind this por
 
 ```shell
 docker run -d --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -553,4 +554,4 @@ If you're interested in learning more about the datagram format used by DogStats
 [6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
-[9]: /metrics/
+[9]: /developers/dogstatsd/datagram_shell/

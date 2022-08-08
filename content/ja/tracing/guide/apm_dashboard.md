@@ -1,23 +1,24 @@
 ---
-title: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-kind: ガイド
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: 3 分
-    text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: 2 分
-    text: サービスのレイテンシーを前週と比較する
-  - link: /tracing/guide/slowest_request_daily/
-    tag: 3 分
-    text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-  - link: /tracing/guide/add_span_md_and_graph_it/
-    tag: 7 分
-    text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
-  - link: /tracing/guide/
-    tag: ''
-    text: すべてのガイド
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 分
+  text: データベースサービスの異常な p99 レイテンシーに関するアラート
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 分
+  text: サービスのレイテンシーを前週と比較する
+- link: /tracing/guide/slowest_request_daily/
+  tag: 3 分
+  text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
+- link: /tracing/guide/add_span_md_and_graph_it/
+  tag: 7 分
+  text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
+- link: /tracing/guide/
+  tag: ''
+  text: すべてのガイド
+kind: ガイド
+title: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
 ---
+
 _4 分で読了_
 
 {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="ダッシュボード 7" video="true"  style="width:90%;">}}
@@ -96,7 +97,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 
    ダッシュボードを使用すれば、関連するイベントを調べることもできます。
 
-9. **`Search Events or Logs` ボタンをクリック**して、関連するイベントストリームの検索を追加します。**注**: この例では Ansible が使用されていますが、[イベントストリーム][5]は異なる場合があります。
+9. **`Search Events or Logs` ボタンをクリック**して、関連するイベントエクスプローラーの検索を追加します。**注**: この例では Ansible が使用されていますが、[イベントエクスプローラー][5]は異なる場合があります。
 
     {{< img src="tracing/guide/apm_dashboard/dashboard_1.png" alt="ダッシュボード 1"  style="width:90%;">}}
 

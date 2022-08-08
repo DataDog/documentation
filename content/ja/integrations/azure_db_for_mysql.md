@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_dbformysql
+- /ja/integrations/azure_dbformysql
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure DB for MySQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure DB for MySQL インテグレーション
 short_description: Azure DB for MySQL のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Database for MySQL は、サービスとしてエンタープライズ対応のフルマネージド型コミュニティ MySQL データベースを提供します。

@@ -25,7 +25,7 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
     echo "test" > testfile.txt
     aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
     ```
-4. Once events and logs are sending, after about five minutes, the data is available in the Datadog [logs console][11] or [events stream][12], depending on which endpoint you are sending them to.
+4. Once events and logs are sending, after about five minutes, the data is available in the Datadog [logs console][11] or [events explorer][12], depending on which endpoint you are sending them to.
 
 ## Further Reading
 
@@ -43,4 +43,4 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 [9]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
 [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
 [11]: https://app.datadoghq.com/logs
-[12]: https://app.datadoghq.com/event/stream
+[12]: https://app.datadoghq.com/event/explorer

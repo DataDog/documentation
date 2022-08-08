@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Machine Learning の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_machine_learning_services/
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure Machine Learning インテグレーショ�
 short_description: Azure Machine Learning の主要メトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Machine Learning サービスでは、開発者やデータサイエンティストに向けに、機械学習モデルをより速く構築、トレーニング、展開するための生産的な機能を数多く提供しています。Datadog を使用して、他のアプリケーションやインフラストラクチャーに応じて Azure Machine Learning のパフォーマンスと使用状況を監視します。
@@ -43,7 +43,7 @@ Azure Machine Learning からメトリクスを取得すると、以下のこと
 ### イベント
 Azure Machine Learning インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 Azure Machine Learning インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング

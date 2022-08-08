@@ -66,7 +66,7 @@ For an IIS application, you can get more thorough diagnostics by using the follo
 dd-trace check iis "<FULL SITE NAME>"
 ```
 
-Because application pools are started lazily in IIS, make sure that the site has received at least one request before you the command.
+Because application pools are started lazily in IIS, make sure that the site has received at least one request before you run the command.
 
 **Remember to enclose the name in quotation marks if it has spaces in it.**
 

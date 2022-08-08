@@ -1,14 +1,15 @@
 ---
-title: Facturation des métriques custom
-kind: documentation
 aliases:
-  - /fr/integrations/faq/what-standard-integrations-emit-custom-metrics/
+- /fr/integrations/faq/what-standard-integrations-emit-custom-metrics/
+kind: documentation
+title: Facturation des métriques custom
 ---
+
 Si une métrique n'est pas envoyée depuis l'une des [plus de {{< translate key="integration_count" >}} intégrations Datadog][1], elle est considérée comme une [métrique custom][2]<sup>[(1)](#integrations-standard)</sup>.
 
 **Les métrique custom se distinguent par une combinaison unique de nom de métrique et de valeurs de tag (tag host inclus)**.
 
-Votre volume mensuel facturable pour les métriques custom (indiqué sur la page Usage) est calculé à partir du nombre moyen de métriques custom distinctes pour toutes les heures du mois actuel.
+Le nombre de métriques custom mensuelles facturables (qui est indiqué sur la page Usage) est calculé à partir de la formule suivante : Total de métriques custom distinctes pour chaque heure d'un mois donné / nombre d'heures du mois. Cette formule permet d'obtenir une moyenne mensuelle.
 
 Les utilisateurs de Metrics without Limits™ peuvent consulter les volumes mensuels facturables pour les métriques custom _ingérées_ et _indexées_ sur leur page Usage. En savoir plus sur les métriques custom ingérées et indexées et sur la solution [Metrics without Limits™][3]. 
 

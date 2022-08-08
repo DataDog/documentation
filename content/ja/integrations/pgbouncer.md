@@ -19,7 +19,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
 display_name: PGBouncer
@@ -38,7 +37,7 @@ metric_to_check: pgbouncer.pools.sv_idle
 name: pgbouncer
 process_signatures:
 - pgbouncer
-public_title: Datadog-PGBouncer インテグレーション
+public_title: PGBouncer インテグレーション
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
 support: コア
 supported_os:

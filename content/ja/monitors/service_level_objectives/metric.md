@@ -12,7 +12,7 @@ title: メトリクスベース SLO
 
 ## 概要
 
-メトリクスベースの SLO は、計数ベースのデータストリームでイベントの良し悪しを判断する場合に有用です。メトリクスクエリは良質なイベントの合計を同様の時間軸におけるイベント総数で割り、サービスレベル指標 (SLI) を算出します。
+メトリクスベースの SLO は、計数ベースのデータストリームでイベントの良し悪しを判断する場合に有用です。メトリクスクエリは良質なイベントの合計を同様の時間軸におけるイベント総数で割り、サービスレベル指標 (SLI) を算出します。SLO の作成には、[APM スパン][5]、[RUM イベント][6]、[ログ][7]から生成されるカスタムメトリクスを含め、あらゆるメトリクスを使用することができます。
 
 {{< img src="monitors/service_level_objectives/metric-based-slo-example.png" alt="メトリクスベース SLO の例"  >}}
 
@@ -68,3 +68,6 @@ SLO がターゲットパーセンテージを上回っている間、SLO のス
 [2]: https://app.datadoghq.com/slo/new/metric
 [3]: /ja/metrics/distributions/#threshold-queries
 [4]: /ja/monitors/service_level_objectives/monitor/
+[5]: https://docs.datadoghq.com/ja/tracing/generate_metrics/
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[7]: https://docs.datadoghq.com/ja/logs/log_configuration/logs_to_metrics/#overview

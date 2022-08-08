@@ -11,19 +11,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - autodiscovery
-  - log collection
+- processing
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
+- https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
 display_name: Yarn
 draft: false
 git_integration_title: yarn
 guid: 3223c2e3-29dd-4cfb-82a2-51b951c648eb
 integration_id: yarn
 integration_title: Yarn
+integration_version: 4.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -31,14 +31,17 @@ manifest_version: 1.0.0
 metric_prefix: yarn.
 metric_to_check: yarn.metrics.total_mb
 name: yarn
-public_title: Datadog-Yarn インテグレーション
+public_title: Yarn インテグレーション
 short_description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Hadoop Yarn][1]
 
 ## 概要
@@ -138,18 +141,18 @@ YARN チェックは [Datadog Agent][2] パッケージに含まれています�
 
 3. [Agent を再起動します][3]。
 
-Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][4]を参照してください。
+Docker 環境のログを有効にするには、[Docker ログ収集][4]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: 
+[4]: https://docs.datadoghq.com/ja/agent/docker/log/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `yarn` を探します。
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `yarn` を探します。
 
 ## 収集データ
 

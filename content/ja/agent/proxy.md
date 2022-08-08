@@ -76,7 +76,7 @@ proxy:
       - host2
 ```
 
-**注**: HTTP リクエストを行うすべてのインテグレーションは、インテグレーションレベルでの指定がない場合、`datadog.yaml` コンフィギュレーションファイルに定義されたデフォルトのプロキシ設定に戻ります。これを回避したい場合は、各インスタンスの設定、もしくはインテグレーションの `init_config` フォールバックで `skip_proxy` を True に設定してください。
+**注**: HTTP リクエストを行うすべてのインテグレーションは、インテグレーションレベルでの指定がない場合、`datadog.yaml` コンフィギュレーションファイルに定義されたデフォルトのプロキシ設定に戻ります。これを回避したい場合は、各インスタンスの設定、もしくはインテグレーションの `init_config` フォールバックで `skip_proxy` を True に、または `use_agent_proxy` を False に設定してください。
 
 ##### NO_PROXY 許容値
 
@@ -270,13 +270,21 @@ frontend network_devices_metadata_frontend
     option tcplog
     default_backend datadog-network-devices-metadata
 
-# これは、Agent が Instrumentations Telemetry データを
-# 送信するために接続するエンドポイントを宣言します (例えば、"apm_config.telemetry.dd_url" の値です)
-frontend instrumentation_telemetry_data_frontend
-    bind *:3843
+#これは、Agent がネットワークデバイスの SNMP トラップデータを
+# 送信するために接続するエンドポイントを宣言します (例えば、"network_devices.snmp_traps.forwarder.dd_url" の値です)
+frontend network_devices_snmp_traps_frontend
+bind *:3842
+mode http
+option tcplog
+default_backend datadog-network-devices-snmp-traps
+
+# これは、Agent が appsec イベントを
+# 送信するために接続するエンドポイントを宣言します (非推奨)
+frontend appsec-events-frontend
+    bind *:3842
     mode tcp
     option tcplog
-    default_backend datadog-instrumentations-telemetry
+    default_backend datadog-appsec-events
 
 # これは Datadog のサーバーです。事実上、上記で定義した
 # フォワーダーフロントエンドに来る全ての TCP リクエストは、
@@ -359,16 +367,41 @@ backend datadog-network-devices-metadata
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
     # server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 
+backend datadog-network-devices-metadata
+balance roundrobin
+mode http
+# 以下の構成は、HAProxy 1.8 以降の場合です
+server-template mothership 5 ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+# 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+# server mothership ndm-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-network-devices-snmp-traps
+balance roundrobin
+mode http
+# 以下の構成は、HAProxy 1.8 以降の場合です
+server-template mothership 5 snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+# 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+# server mothership snmp-traps-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
 backend datadog-instrumentations-telemetry
+balance roundrobin
+mode tcp
+# 以下の構成は、HAProxy 1.8 以降の場合です
+server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+# 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+# server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+
+backend datadog-appsec-events # 非推奨
     balance roundrobin
     mode tcp
     # 以下の構成は、HAProxy 1.8 以降の場合です
-    server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
-    # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
+    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify none
 ```
 
-**注**: 次のコマンドで証明書をダウンロードしてください:
+
+次のコマンドで証明書をダウンロードしてください:
 
 ```shell
 sudo apt-get install ca-certificates # (Debian, Ubuntu)
@@ -408,15 +441,23 @@ logs_config:
 
 database_monitoring:
     metrics:
-        dd_url: haproxy.example.com:3839
+        logs_dd_url: haproxy.example.com:3839
+        logs_no_ssl: true
     activity:
-        dd_url: haproxy.example.com:3839
+        logs_dd_url: haproxy.example.com:3839
+        logs_no_ssl: true
     samples:
-        dd_url: haproxy.example.com:3840
+        logs_dd_url: haproxy.example.com:3840
+        logs_no_ssl: true
 
 network_devices:
     metadata:
-        dd_url: haproxy.example.com:3841
+        logs_dd_url: haproxy.example.com:3841
+        logs_no_ssl: true
+    snmp_traps:
+        forwarder:
+            logs_dd_url: haproxy.example.com:3842
+            logs_no_ssl: true
 ```
 
 次に、`datadog.yaml` Agent コンフィギュレーションファイルを編集して、`skip_ssl_validation` を `true` に設定します。これは、SSL 証明書のホスト名 ({{< region-param key="dd_full_site" code="true" >}}) と HAProxy のホスト名との間の不一致を Agent が無視できるようにするために必要な設定です。
@@ -501,7 +542,7 @@ events {
 # Datadog Agent の HTTP プロキシ
 http {
     server {
-        listen 3834; #listen for metrics
+        listen 3834; #メトリクスのリッスン
         access_log off;
 
         location /api/v1/validate {
@@ -518,44 +559,54 @@ http {
 # Datadog Agent の TCP プロキシ
 stream {
     server {
-        listen 3835; #listen for traces
+        listen 3835; #トレースのリッスン
         proxy_ssl on;
         proxy_pass trace.agent.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3836; #listen for profiles
+        listen 3836; #プロファイルのリッスン
         proxy_ssl on;
-        proxy_pass profile.agent.{{< region-param key="dd_site" >}}:443;
+        proxy_pass intake.profile.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3837; #listen for processes
+        listen 3837; #プロセスのリッスン
         proxy_ssl on;
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3838; #listen for logs with use_http: true
+        listen 3838; #use_http: true でログのリッスン
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3839; #listen for database monitoring metrics
+        listen 3839; #データベースモニタリングメトリクスのリッスン
         proxy_ssl on;
         proxy_pass dbm-metrics-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3840; #listen for database monitoring samples
+        listen 3840; #データベースモニタリングサンプルのリッスン
         proxy_ssl on;
         proxy_pass dbquery-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3841; #listen for network devices metadata
+        listen 3841; #ネットワークデバイスメタデータのリッスン
         proxy_ssl on;
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3843; #listen for instrumentations telemetry data
+        listen 3842; #ネットワークデバイストラップのリッスン
+        proxy_ssl on;
+        proxy_pass snmp-traps-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3843; #インスツルメンテーションテレメトリーデータのリッスン
         proxy_ssl on;
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {    
+        listen 3844; #appsec イベントのリッスン (非推奨)
+        proxy_ssl on;
+        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -586,15 +637,27 @@ logs_config:
 
 database_monitoring:
     metrics:
-        dd_url: nginx.example.com:3839
+        logs_dd_url: nginx.example.com:3839
+        logs_no_ssl: true
     activity:
-        dd_url: nginx.example.com:3839
+        logs_dd_url: nginx.example.com:3839
+        logs_no_ssl: true
     samples:
-        dd_url: nginx.example.com:3840
+        logs_dd_url: nginx.example.com:3840
+        logs_no_ssl: true
 
 network_devices:
     metadata:
-        dd_url: nginx.example.com:3841
+        logs_dd_url: nginx.example.com:3841
+        logs_no_ssl: true
+    snmp_traps:
+        forwarder:
+            logs_dd_url: nginx.example.com:3842
+            logs_no_ssl: true
+
+appsec_config (deprecated):
+    appsec_dd_url: "<PROXY_SERVER_DOMAIN>:3842"
+
 ```
 
 TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>を参照してください。

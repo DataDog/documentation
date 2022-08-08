@@ -27,7 +27,8 @@ const updateMenu = (specData, specs, languages) => {
     // now add back in all the auto generated menu items from specs
     apiYaml.tags.forEach((tag) => {
 
-      const existingMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === getTagSlug(tag.name));
+      const tagSlug = getTagSlug(tag.name);
+      const existingMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === tagSlug);
       if(existingMenuItemIndex > -1) {
         // already exists
         // newMenuArray[existingMenuItemIndex].params["versions"].push()
@@ -35,8 +36,8 @@ const updateMenu = (specData, specs, languages) => {
         // doesn't exist lets add it
         newMenuArray.push({
           name: tag.name,
-          url: (language === 'en' ? `/api/latest/${getTagSlug(tag.name)}/` : `/${language}/api/latest/${getTagSlug(tag.name)}/` ),
-          identifier: getTagSlug(tag.name),
+          url: (language === 'en' ? `/api/latest/${tagSlug}/` : `/${language}/api/latest/${tagSlug}/` ),
+          identifier: tagSlug,
           generated: true
         });
       }
@@ -48,7 +49,9 @@ const updateMenu = (specData, specs, languages) => {
         .reduce((obj, item) => ([...obj, ...item]), [])
         .forEach((action) => {
 
-          const existingSubMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === getTagSlug(action.summary));
+          const actionSlug = getTagSlug(action.summary);
+          const itemIdentifier = `${tagSlug}-${actionSlug}`;
+          const existingSubMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === itemIdentifier);
           if(existingSubMenuItemIndex > -1) {
             // already exists
             const existingParams = newMenuArray[existingSubMenuItemIndex].params;
@@ -63,12 +66,12 @@ const updateMenu = (specData, specs, languages) => {
             }
           } else {
             // instead of push we need to insert after last parent: tag.name
-            const indx = newMenuArray.findIndex((i) => i.identifier === getTagSlug(tag.name));
+            const indx = newMenuArray.findIndex((i) => i.identifier === tagSlug);
             const item = {
               name: action.summary,
-              url: `#` + getTagSlug(action.summary),
-              identifier: `${getTagSlug(action.summary)}`,
-              parent: getTagSlug(tag.name),
+              url: `#` + actionSlug,
+              identifier: itemIdentifier,
+              parent: tagSlug,
               generated: true,
               params: {
                 "versions": [apiVersion],

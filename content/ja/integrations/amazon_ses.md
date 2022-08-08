@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awsses/
+- /ja/integrations/awsses/
 categories:
-  - cloud
-  - Collaboration
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- Collaboration
+- aws
+- log collection
 dependencies: []
 description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_ses/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_ses/
 draft: false
 git_integration_title: amazon_ses
 has_logo: true
 integration_id: amazon-ses
 integration_title: Amazon SES
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon SES インテグレーション
 short_description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Simple Email Service (SES) は、費用効率の高いアウトバウンド専用のメール送信サービスです。
@@ -43,7 +44,7 @@ Amazon Simple Email Service (SES) は、費用効率の高いアウトバウン�
     - `ses:GetSendQuota`: 送信クオータに関するメトリクスを追加します。
     - `ses:GetSendStatistics`: 送信統計に関するメトリクスを追加します。
 
-    SES ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
+    詳細については、AWS ウェブサイト上の [SES ポリシー][4]を参照してください。
 
 3. [Datadog - AWS SES インテグレーション][5]をインストールします。
 
@@ -69,7 +70,7 @@ Amazon SES から S3 バケットまたは CloudWatch のいずれかにログ�
 {{< get-metrics-from-git "amazon_ses" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -86,7 +87,7 @@ AWS SES インテグレーションには、サービスのチェック機能は
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ses.html
+[4]: https://docs.aws.amazon.com/ses/latest/dg/control-user-access.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_ses
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

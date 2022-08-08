@@ -17,19 +17,19 @@ assets:
     rabbitmq_processes: assets/saved_views/rabbitmq_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - log collection
-  - autodiscovery
+- processing
+- log collection
+- autodiscovery
 creates_events: true
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
+- https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
 display_name: RabbitMQ
 draft: false
 git_integration_title: rabbitmq
 guid: a790a556-fbaa-4208-9d39-c42c3d57084b
 integration_id: rabbitmq
 integration_title: RabbitMQ
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -38,16 +38,19 @@ metric_prefix: rabbitmq.
 metric_to_check: rabbitmq.queue.messages
 name: rabbitmq
 process_signatures:
-  - rabbitmq
-  - rabbitmq-server
-public_title: Datadog-RabbitMQ インテグレーション
+- rabbitmq
+- rabbitmq-server
+public_title: RabbitMQ インテグレーション
 short_description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![RabbitMQ ダッシュボード][1]
 
 ## 概要
@@ -70,7 +73,7 @@ RabbitMQ チェックは [Datadog Agent][3] パッケージに含まれていま
 
 #### RabbitMQ の準備
 
-RabbitMQ 管理プラグインを有効にします。詳細については、[RabbitMQ のドキュメント][4]を参照してください。さらに、Agent ユーザーには、少なくとも `monitoring` タグと以下のアクセス許可が必要です。
+[RabbitMQ Management Plugin][4] を有効化します。Agent ユーザーは、少なくとも`monitoring`タグとこれらの必要な権限が必要です。
 
 | アクセス許可 | コマンド            |
 | ---------- | ------------------ |
@@ -158,7 +161,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |

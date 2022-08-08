@@ -1,35 +1,59 @@
 ---
+app_id: pivotal-pks
+app_uuid: e8a08b96-bbca-4907-8cc8-b7c3abf2f443
 assets:
-  dashboards: {}
-  logs: {}
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Pivotal PKS
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - コンテナ
-  - オーケストレーション
-  - ログの収集
-creates_events: false
-ddtype: check
+- コンテナ
+- オーケストレーション
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
-display_name: Pivotal PKS
+- https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: pivotal_pks
-guid: b0090603-01c8-4ad9-8f9a-4f3700bf065b
 integration_id: pivotal-pks
 integration_title: Pivotal Container Service
+integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: pivotal_pks
-public_title: Datadog-Pivotal Container Service インテグレーション
+oauth: {}
+public_title: Pivotal Container Service
 short_description: Pivotal のエンタープライズレベル Kubernetes 製品
-support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Containers
+  - Category::Orchestration
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Pivotal のエンタープライズレベル Kubernetes 製品
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pivotal Container Service
 ---
+
+
+
 ## 概要
 
 このインテグレーションは、[Pivotal Container Service][1] クラスターを監視します。

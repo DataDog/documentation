@@ -1,12 +1,16 @@
 ---
-title: AWS インテグレーションの請求
-kind: documentation
 aliases:
-  - /ja/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
+- /ja/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
+kind: documentation
+title: AWS インテグレーションの請求
 ---
+
 ## 概要
 
 Datadog では、Datadog Agent を実行している AWS ホスト、および Datadog-AWS インテグレーションによって使用されるすべての EC2 インスタンスに対して課金が発生します。AWS インテグレーションによって使用される EC2 インスタンスで Agent を実行している場合に、**二重に課金されることはありません**。
+
+**重要**: Datadog は EC2 インスタンスのメタデータを使用して、Agent を実行しているホストと AWS インテグレーションによってクロールされているホストの両方に対して二重請求が行われないようにします。EC2 インスタンスが [Instance Metadata Service Version 2 (IMDSv2)][6] の使用を必要とするように構成されている場合、二重請求を避けるために、[Agent 構成][7]でパラメーター `ec2_prefer_imdsv2` を `true` に設定しなければなりません。
+
 
 Fargate と Lambda のインテグレーションタイル、およびカスタムメトリクスを設定すると、Datadog の請求に影響します。
 
@@ -37,3 +41,5 @@ Agent が実行されているホストは引き続き表示され、課金対�
 [3]: /ja/infrastructure/
 [4]: /ja/help/
 [5]: mailto:success@datadoghq.com
+[6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml

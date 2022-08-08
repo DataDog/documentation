@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/logs/log_collection/fluentd
+- /ja/logs/log_collection/fluentd
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -13,18 +13,18 @@ assets:
     fluentd_processes: assets/saved_views/fluentd_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - log collection
-  - autodiscovery
+- log collection
+- autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_name: fluentd
 draft: false
 git_integration_title: fluentd
 guid: 68100352-b993-43e6-9dc8-5ecd498e160b
 integration_id: fluentd
 integration_title: FluentD
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -33,17 +33,20 @@ metric_prefix: fluentd.
 metric_to_check: fluentd.buffer_queue_length
 name: fluentd
 process_signatures:
-  - td-agent
-  - fluentd
-  - ruby td-agent
-public_title: Datadog-FluentD インテグレーション
+- td-agent
+- fluentd
+- ruby td-agent
+public_title: FluentD インテグレーション
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Fluentd ダッシュボード][1]
 
 ## 概要
@@ -176,7 +179,7 @@ Datadog で[インテグレーションの自動セットアップ][7]をトリ�
 - `kubernetes.pod_name`
 - `docker.container_id`
 
-Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集しますが、FluentD では、そのためのプラグインが必要です。このメタデータの収集には、[fluent-plugin-kubernetes_metadata_filter][10] を使用することをお勧めします。
+Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集しますが、FluentD では、そのためのプラグインが必要です。このメタデータの収集には、[fluent-plugin-kubernetes_metadata_filter][10] を使用することを Datadog はお勧めします。
 
 構成例:
 

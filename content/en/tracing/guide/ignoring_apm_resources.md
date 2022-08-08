@@ -35,7 +35,7 @@ You can specify span tags to require or reject by using environment variables:
 : Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rejects traces that have root spans with and exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
+: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
 
 Or you can set them in the Agent configuration file:
 
@@ -121,6 +121,7 @@ In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESO
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -236,13 +237,13 @@ The Ruby tracer has a post-processing pipeline that deletes traces that meet cer
 For example, if the resource name is `Api::HealthchecksController#index`, use the `trace.delete_if` method to delete traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
 ```
-Datadog::Tracing::Pipeline.before_flush do |trace|
+Datadog::Tracing.before_flush do |trace|
   trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
 end
 ```
 
-[1]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation-2
+[1]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[2]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -312,7 +313,7 @@ public class GreetingController {
 }
 ```
 
-[1]: /tracing/setup_overview/custom_instrumentation/java/#extending-tracers
+[1]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -320,5 +321,5 @@ public class GreetingController {
 
 [1]: /help/
 [2]: /tracing/guide/add_span_md_and_graph_it/
-[3]: /tracing/setup_overview/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[3]: /tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
 [4]: https://golang.org/pkg/regexp/

@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/integrations/goexpvar
+- /fr/integrations/goexpvar
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -10,18 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - languages
-  - autodiscovery
+- languages
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
 display_name: Go-Expvar
 draft: false
 git_integration_title: go_expvar
 guid: 33557f7a-5f24-43f3-9551-78432894e539
 integration_id: go-expvar
 integration_title: Go-Expvar
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,13 +31,17 @@ metric_prefix: go_expvar.
 metric_to_check: go_expvar.memstats.alloc
 name: go_expvar
 public_title: Intégration Datadog/Go-Expvar
-short_description: Recueillez les statistiques de mémoire et les métriques instrumentés par Expvar depuis votre service Go.
+short_description: Recueillez les statistiques de mémoire et les métriques instrumentés
+  par Expvar depuis votre service Go.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Graphique Go][1]
 
 ## Présentation
@@ -53,9 +58,9 @@ Le check Go-Expvar est fourni avec l'Agent. [Installez l'Agent][3] sur les hosts
 
 ### Configuration
 
-#### Préparer votre service Go
+#### Préparer le service
 
-Si votre service Go n'utilise pas déjà le [package Expvar][4], importez-le (`import "expvar"`). Si vous ne souhaitez pas instrumenter vos propres métriques avec Expvar (p. ex., si vous souhaitez seulement recueillir des métriques sur la mémoire de votre service), importez le paquet en spécifiant un identifiant vide (`import _ "expvar"`). Si votre service n'écoute pas déjà les requêtes HTTP (avec le package http), [configurez une écoute][5] en local uniquement pour l'Agent Datadog.
+Si votre service Go n'utilise pas déjà le [package Expvar][4], importez-le (`import "expvar"`). Si vous ne souhaitez pas instrumenter vos propres métriques avec Expvar (par exemple, si vous souhaitez seulement recueillir des métriques sur la mémoire de votre service), importez le package en spécifiant un identifiant vide (`import _ "expvar"`). Si votre service n'écoute pas déjà les requêtes HTTP (avec le package http), [configurez une écoute][5] en local uniquement pour l'Agent Datadog.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -77,7 +82,7 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 [6]: https://docs.datadoghq.com/fr/help/
 {{% /tab %}}

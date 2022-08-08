@@ -5,10 +5,6 @@ description: "Use Monitors to alert off of the burn rate of an SLO"
 ---
 {{< jqmath-vanilla >}}
 
-<div class="alert alert-warning">
-This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
-</div>
-
 ## Overview
 
 SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO’s 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
@@ -88,10 +84,10 @@ For example, for a 7-day SLO, to be alerted if the theoretical error budget cons
 2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
 3. Select the **Burn Rate** tab in **Step 1: Setting alerting conditions**
 4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
-   * The burn rate value must be in the range
+   * The burn rate value must be in the range of
      {{< img src="monitors/service_level_objectives/burn-rate-range.jpeg" alt="Burn rate range">}}
-   * The long window value is limited to: `1 hour <= long window <= 48 hours`.
-   * In the UI the short window is automatically calculated as: `short window = 1/12 * long window`.
+   * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
+   * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
 5. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
 6. Click the **Save and Exit** button on the SLO configuration page.
@@ -151,21 +147,16 @@ resource "datadog_monitor" "metric-based-slo" {
     EOT
 
     message = "Example monitor message"
-    monitor_thresholds = {
+    monitor_thresholds {
       critical = 14.4
     }
     tags = ["foo:bar", "baz"]
 }
 ```
 
-## Beta restrictions
-
-- Alerting is available only for metric-based SLOs or for monitor-based SLOs that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
-- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel or the [Manage Monitors][6] page.
 
 [1]: /monitors/service_level_objectives/metric/
 [2]: /monitors/service_level_objectives/monitor/
 [3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
 [5]: /api/v1/monitors/#create-a-monitor
-[6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html

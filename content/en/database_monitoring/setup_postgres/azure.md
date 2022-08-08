@@ -2,7 +2,6 @@
 title: Setting Up Database Monitoring for Azure Database for PostgreSQL
 kind: documentation
 description: Install and configure Database Monitoring for PostgreSQL managed on Azure.
-beta: true
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
@@ -28,10 +27,10 @@ Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13
 
 Supported Azure PostgreSQL deployment types
-: Single Server, Flexible Server
+: PostgreSQL on Azure VMs, Single Server, Flexible Server
 
 Supported Agent versions
-: 7.36.0+
+: 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -55,6 +54,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
 {{% /tab %}}
 {{% tab "Flexible Server" %}}
@@ -65,6 +65,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
 [1]: https://www.postgresql.org/docs/current/pgstatstatements.html
 {{% /tab %}}
@@ -133,14 +134,21 @@ SECURITY DEFINER;
 Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -222,9 +230,11 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ```
 2. [Restart the Agent][2].
 
+See the [Postgres integration spec][3] for additional information on setting `deployment_type` and `name` fields.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -238,7 +248,7 @@ Execute the following command to run the Agent from your command line. Replace t
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.0
+export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -270,7 +280,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom Agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:7.36.0
+FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
@@ -284,12 +294,15 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+See the [Postgres integration spec][2] for additional information on setting `deployment_type` and `name` fields.
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][4] on how to pass the password in as an environment variable.
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
-[3]: /agent/faq/template_variables/
+[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[3]: /agent/guide/secrets-management
+[4]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -397,14 +410,17 @@ pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
+See the [Postgres integration spec][4] for additional information on setting `deployment_type` and `name` fields.
+
 The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
+[5]: /agent/guide/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

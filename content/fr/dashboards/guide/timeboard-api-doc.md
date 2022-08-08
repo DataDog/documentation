@@ -1,15 +1,16 @@
 ---
-title: API Timeboard
-kind: guide
 aliases:
-  - /fr/graphing/faq/timeboard-api-doc
-  - /fr/graphing/guide/timeboard-api-doc
+- /fr/graphing/faq/timeboard-api-doc
+- /fr/graphing/guide/timeboard-api-doc
+kind: guide
+title: API Timeboard
 ---
+
 <div class="alert alert-danger">
 Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/v1/dashboards/">nouvel endpoint Dashboards</a>.
 </div>
 
-L'endpoint `Timeboard` vous permet de programmer la création, la mise à jour, la suppression et la récupération de timeboards. [En savoir plus sur les timeboards][1].
+L'endpoint `Timeboard` vous permet de programmer la création, la mise à jour, la suppression et la récupération de timeboards.
 
 ## Créer un timeboard
 
@@ -172,7 +173,7 @@ curl  -X POST -H "Content-type: application/json" \
     * **`title`** [*obligatoire*] :
        le nom du graphique.
     * **`definition`** [*obligatoire*] :
-    la définition du graphique. Lisez le [guide sur les graphiques][1] pour en savoir plus sur les graphiques. Exemple :
+    la définition du graphique. Exemple :
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
 * **`template_variables`** [*facultatif*, *valeur par défaut*=**Aucune**] :
@@ -313,7 +314,7 @@ curl  -X PUT -H "Content-type: application/json" \
 
 ## Supprimer un timeboard
 
-Supprimez un [timeboard][1] existant.
+Supprimer un timeboard existant.
 *Cet endpoint ne prend aucun argument JSON.*
 
 ### Signature
@@ -504,7 +505,7 @@ curl "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&applic
 
 ## Récupérer tous les timeboards
 
-Récupérez toutes les définitions de [timeboard][1].
+Récupérer toutes les définitions de vos timeboards.
 
 ### Signature
 
@@ -559,5 +560,3 @@ curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=$
 
 {{% /tab %}}
 {{< /tabs >}}
-
-[1]: /fr/dashboards/timeboard/

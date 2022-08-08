@@ -5,11 +5,10 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
+- data store
 creates_events: false
-ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md
 display_name: Bonsai
 draft: false
 git_integration_title: bonsai
@@ -24,13 +23,16 @@ manifest_version: 1.0.0
 metric_prefix: bonsai.
 metric_to_check: bonsai.req.total
 name: bonsai
-public_title: Datadog-Bonsai インテグレーション
+public_title: Bonsai
 short_description: 'Bonsai: マネージド型 Elasticsearch'
 support: contrib
 supported_os:
-  - linux
-  - windows
+- linux
+- windows
 ---
+
+
+
 ## 概要
 
 Bonsai クラスターのリクエストレベルのメトリクスを追跡すると、以下のことができます。

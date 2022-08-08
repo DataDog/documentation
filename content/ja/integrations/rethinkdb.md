@@ -12,18 +12,18 @@ assets:
     rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - ログの収集
+- data store
+- ログの収集
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
+- https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
 display_name: RethinkDB
 draft: false
 git_integration_title: rethinkdb
 guid: a09f3ed3-c947-413c-a9c6-0dcb641ea890
 integration_id: rethinkdb
 integration_title: RethinkDB
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -32,15 +32,18 @@ metric_prefix: rethinkdb.
 metric_to_check: rethinkdb.config.servers
 name: rethinkdb
 process_signatures:
-  - rethinkdb
-public_title: Datadog-RethinkDB インテグレーション
+- rethinkdb
+public_title: RethinkDB インテグレーション
 short_description: ステータスやパフォーマンスなどのメトリクスを RethinkDB クラスターから収集します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 [RethinkDB][1] は分散型のドキュメント指向 NoSQL データベースです。リアルタイムな変更フィードに対してファーストクラスのサポートを提供します。
@@ -113,7 +116,7 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 3. [Agent を再起動します][8]。
 
-Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
+Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][9]を参照してください。
 
 ### 検証
 
@@ -140,7 +143,7 @@ RethinkDB には、イベントは含まれません。
 
 [1]: https://rethinkdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://rethinkdb.com/docs/permissions-and-accounts/
 [5]: https://rethinkdb.com/docs/security/#the-admin-account
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

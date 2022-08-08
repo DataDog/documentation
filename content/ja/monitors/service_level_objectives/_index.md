@@ -13,6 +13,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-page/
   tag: ブログ
   text: サービステレメトリー、エラー追跡、SLO など
+- link: https://www.datadoghq.com/blog/monitor-service-performance-with-slo-alerts/
+  tag: ブログ
+  text: SLO アラートによるサービスパフォーマンスのプロアクティブな監視
 kind: documentation
 title: サービスレベル目標
 ---
@@ -89,13 +92,13 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 
 個々の SLO を編集するには、SLO の上にカーソルを置き、その行の右側に表示される **Edit**、**Clone**、**Delete** ボタンを使用します。SLO の内容を詳しく確認するには、その行をクリックしてサイドパネルを開きます。
 
-**注**: [Apple App Store][10] および [Google Play Store][17] で入手できる [Datadog モバイルアプリ][9]をダウンロードすれば、モバイルデバイスのホーム画面から SLO を表示することが可能です。
+**注**: [Apple App Store][10] および [Google Play Store][11] で入手できる [Datadog モバイルアプリ][9]をダウンロードすれば、モバイルデバイスのホーム画面から SLO を表示することが可能です。
 
 {{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android 上の SLO">}}
 
 ### SLO タグ
 
-SLO の作成時や変更時に、[SLO ステータスページ][1]でフィルタリングに必要なタグや[SLO の保存済みビュー][11]の作成に必要なタグを追加することができます。
+SLO の作成時や変更時に、[SLO ステータスページ][1]でフィルタリングに必要なタグや[SLO の保存済みビュー][12]の作成に必要なタグを追加することができます。
 
 ### SLO のデフォルトビュー
 
@@ -138,7 +141,7 @@ SLO のリストビューに移動すると、デフォルトの SLO ビュー�
 
 ## SLO 監査イベント
 
-SLO 監査イベントでは、イベントストリームを使用して SLO コンフィギュレーション履歴を追跡することができます。監査イベントは、SLO を作成、修正、または削除するたびにイベントストリームに追加されます。各イベントには SLO のコンフィギュレーション情報が含まれ、ストリームによりこれまでの SLO コンフィギュレーションの変更履歴が提供されます。
+SLO 監査イベントでは、イベントエクスプローラーを使用して SLO コンフィギュレーション履歴を追跡することができます。監査イベントは、SLO を作成、修正、または削除するたびにイベントエクスプローラーに追加されます。各イベントには SLO のコンフィギュレーション情報が含まれ、ストリームによりこれまでの SLO コンフィギュレーションの変更履歴が提供されます。
 
 各イベントには、以下の SLO コンフィギュレーション情報が含まれます。
 
@@ -147,21 +150,19 @@ SLO 監査イベントでは、イベントストリームを使用して SLO �
 - ターゲットパーセンテージおよび時間枠
 - データソース (モニター ID またはメトリクスクエリ)
 
-イベントストリームに表示される 3 種類の SLO 監査イベント:
+イベントエクスプローラーに表示される 3 種類の SLO 監査イベント:
 
 1. `SLO Created` イベントには、作成時刻における SLO コンフィギュレーションのすべて (4 つ) の情報が表示されます。
 2. `SLO Modified` イベントには、更新中に変更されたコンフィギュレーション情報が表示されます。
 3. `SLO Deleted` イベントには、削除前に SLO が持っていたコンフィギュレーション情報のすべて (4 つ) が表示されます。
 
-SLO 監査イベントの全リストを取得するには、イベントストリームに検索クエリ `tags:audit,slo` を入力します。特定の SLO に関する監査イベントのリストを表示するには、`tags:audit,slo_id:<SLO ID>` (対象とする SLO の ID を使用) を入力します。
+SLO 監査イベントの全リストを取得するには、イベントエクスプローラーに検索クエリ `tags:audit,slo` を入力します。特定の SLO に関する監査イベントのリストを表示するには、`tags:audit,slo_id:<SLO ID>` (対象とする SLO の ID を使用) を入力します。
 
-また、[Datadog イベント API][12] を使って、プログラムでイベントストリームのクエリを作成することもできます。
+また、[Datadog イベント API][13] を使って、プログラムでイベントエクスプローラーのクエリを作成することもできます。
 
-**注:** UI にイベントが表示されない場合は、イベントストリームの時間枠を長くしてみてください（過去 7 日間など）。
+**注:** UI にイベントが表示されない場合は、イベントエクスプローラーの時間枠を長くしてみてください（過去 7 日間など）。
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO 監査イベント"  >}}
-
-SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][13]を設定します。
 
 たとえば、特定の SLO コンフィギュレーションが変更されたときに通知を受信するには、タグ `audit,slo_id:<SLO ID>` に対して `[SLO Modified]` テキストを追跡するようイベントモニターをセットします。
 
@@ -169,17 +170,22 @@ SLO のコンフィギュレーションをプロアクティブに管理する�
 
 ## SLO ウィジェット
 
+SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][14]を設定します。
+
 SLO を作成した後に、SLO サマリーダッシュボードウィジェットを使用して、SLO のステータスをダッシュボードメトリクス、ログ、APM データと合わせて表示することが可能です。SLO ウィジェットについて詳しくは、[SLO ウィジェットのドキュメント][2]ページを参照してください。
 
 ## SLO ステータスの修正
 
-ステータス修正により、SLO がステータスおよびエラーバジェットの計算から除外する計画保守などの期間を指定できます。
+ステータス修正により、SLO ステータスとエラーバジェットの計算から特定の期間を除外することができます。こうすることで、以下のことが可能になります。
+- 定期メンテナンスなど、想定されるダウンタイムによるエラー予算の枯渇を防ぐ
+- SLO に準拠することを期待されていない非営業時間は無視する
+- デプロイメントによる一時的な問題が、SLO に悪影響を与えないようにする
 
-SLO の修正ウィンドウを作成すると、指定した期間が SLO の計算から削除されます。
-- モニターベースの SLO の場合、修正ウィンドウの時間はカウントされません。
+修正を適用すると、指定した期間が SLO の計算から外れます。
+- モニターベースの SLO の場合、修正時間ウィンドウはカウントされません。
 - メトリクスベースの SLO の場合、修正ウィンドウ内のすべての良好イベントと不良イベントはカウントされません。
 
-臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalender RFC 5545 の RRULE 仕様][14]に基づいています。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
+臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalendar RFC 5545 の RRULE 仕様][15]に基づいています。サポートされているルールは `FREQ`、`INTERVAL`、`COUNT` および `UNTIL` です。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
 
 どちらのタイプの修正でも、修正を行う理由を示す修正カテゴリーを選択する必要があります。選択可能なカテゴリーは、`Scheduled Maintenance` (定期メンテナンス)、`Outside Business Hours` (営業時間外)、`Deployment` (デプロイ)、`Other`(その他)です。必要であれば、説明文を追加することができます。
 
@@ -196,7 +202,7 @@ SLO ごとの 90 日制限は、以下の通りです。
 | 毎週繰り返し  | 3             |
 | 毎月繰り返し | 5             |
 
-SLO のサイドパネルで `Correct Status` を選択するか、[SLO ステータス修正 API][15] または [Terraform リソース][16]を使用して、UI からステータス修正を構成することができます。
+SLO のサイドパネルで `Correct Status` を選択するか、[SLO ステータス修正 API][16] または [Terraform リソース][17]を使用して、UI からステータス修正を構成することができます。
 
 {{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO 修正 UI"  >}}
 
@@ -228,9 +234,10 @@ UI で SLO ステータス修正にアクセスするには
 [8]: /ja/monitors/service_level_objectives/metric/#set-your-slo-targets
 [9]: /ja/mobile
 [10]: https://apps.apple.com/app/datadog/id1391380318
-[11]: /ja/monitors/service_level_objectives/#saved-views
-[12]: /ja/api/v1/events/#query-the-event-stream
-[13]: /ja/monitors/create/types/event/
-[14]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[15]: /ja/api/latest/service-level-objective-corrections/
-[16]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[11]: https://play.google.com/store/apps/details?id=com.datadog.app
+[12]: /ja/monitors/service_level_objectives/#saved-views
+[13]: /ja/api/v1/events/#query-the-event-stream
+[14]: /ja/monitors/create/types/event/
+[15]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[16]: /ja/api/latest/service-level-objective-corrections/
+[17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

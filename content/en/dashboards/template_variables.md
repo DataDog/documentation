@@ -91,7 +91,7 @@ To query based on just a prefix or suffix, use a wildcard character (`*`) at the
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
-To include just the value in the query, use the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `env`, use `environment:$env.value`.
+To include just the value in the query, append it with the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `service`, use `env:staging-$service.value`.
 
 #### Associated template variables
 When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated from the other template variable values selected on the page, and seamlessly identify the related values without any configuration.

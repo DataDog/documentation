@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon EC2 スポットのキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_ec2_spot/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon EC2 スポットインテグレーション
 short_description: Amazon EC2 スポットのキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon EC2 スポットインスタンスを使用すると、AWS クラウド内の使用されていない EC2 容量を活用できます。

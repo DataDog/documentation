@@ -161,6 +161,12 @@
     "request_description": "ダッシュボードのリクエスト本文を更新します。",
     "request_schema_description": "ダッシュボードは Datadog で利用可能なツールのひとつで、主要なパフォーマンスメトリクスを\n視覚的に追跡、分析、表示することでインフラストラクチャーの健全性の監視をサポートします。"
   },
+  "SubmitDistributionPoints": {
+    "description": "ディストリビューションポイントのエンドポイントでは、Datadog のダッシュボードでグラフ化できるディストリビューションデータを投稿することができます。",
+    "summary": "ディストリビューションポイントの送信",
+    "request_description": "",
+    "request_schema_description": "ディストリビューションポイントのペイロード。"
+  },
   "ListDowntimes": {
     "description": "すべてのスケジュール済みダウンタイムを取得します。",
     "summary": "すべてのダウンタイムを取得する"
@@ -193,7 +199,7 @@
   },
   "ListEvents": {
     "description": "イベントストリームにクエリを発行して、時間、優先度、ソース、タグなどで絞り込むことができます。\n\n**注**:\n- クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、出力に `%`、`\\`、`n` などの文字が表示される場合があります。\n\n- このエンドポイントは最新の結果を最大 `1000` 件返します。さらに多くの結果を返すには、最新の結果の最新のタイムスタンプを特定し、それを `end` クエリに設定して結果をページ区切りします。また、ページパラメーターを使って、どのセットの `1000` の結果を返すかを指定することもできます。",
-    "summary": "イベントストリームのクエリ"
+    "summary": "イベントのリストを取得する"
   },
   "CreateEvent": {
     "description": "このエンドポイントを使用して、イベントをストリームにポストできます。\nイベントにタグ付けし、優先度を設定し、他のイベントと統合します。",
@@ -578,7 +584,7 @@
     "summary": "全モニターの詳細を取得"
   },
   "CreateMonitor": {
-    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニタータイプ\n\n次から選択したモニターのタイプ:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `query alert`\n- ネットワーク: `service check`\n-外れ値: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event alert`\n- event-v2: `event-v2 alert`\n- 監査: `audit alert`\n- エラー追跡: `error-tracking alert`\n\n#### クエリタイプ\n\n**メトリクスアラートクエリ**\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、または pct_change\n- `time_window`: `last_#m` (モニタータイプに応じて、1〜10080 の `#`) または `last_#h`(モニタータイプに応じて、1〜168 の `#`) または `last_1d`、または `last_1w`\n- `space_aggr`: avg、sum、min、または max\n- `tags`: 1 つまたは複数のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文における 'key'、グループ内の各タグに対して個別のアラートを定義します (マルチアラート)\n- `operator`: <、<=、>、>=、==、または !=\n- `#`: しきい値の設定に用いる整数または 10 進数\n\n `_change_` または `_pct_change_` の時間アグリゲータを使用している場合は、代わりに以下を使用\n`change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #`:\n\n- `change_aggr` change、pct_change\n- `time_aggr` avg、sum、max、min [詳細](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (モニタータイプに応じて、1〜2880)、last\\_#h (モニタータイプに応じて、1〜48)、または last_#d (1 or 2)\n- `timeshift` #m_ago (5、10、15、または 30)、#h_ago (1、2、または 4)、または 1d_ago\n\nこれを利用して、以下のクエリで異常値モニタを作成します。\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**サービスチェッククエリ**\n\n例: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- **`check`** チェックの名前。例: `datadog.agent.up`\n- **`tags`** 1 つ以上の引用符付きタグ (カンマ区切り)、または \"*\"。 例: `.over(\"env:prod\", \"role:db\")`、**`over`** を空白にすることはできません。\n- **`count`** 最大しきい値 (`options` で定義) 以上でなければなりません。最大値は 100 です。\n例えば、1 つの critical、3 つの ok、2 つの warn のステータスに対して通知するように指定した場合、`count` は最低でも 3 でなければなりません。\n- **`group`** チェックモニターに指定する必要があります。一部のサービスチェックでは、チェックごとのグループ化がすでに明示的に知られています。\n例えば、Postgres インテグレーションモニターは `db`、`host`、`port` でタグ付けされ、ネットワークモニターは `host`、`instance`、`url` でタグ付けされます。詳しくは [サービスチェック](https://docs.datadoghq.com/api/latest/service-checks/)のドキュメントを参照してください。\n\n**イベントアラートクエリ**\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- **`event`**、イベントのクエリ文字列:\n- **`string_query`** イベントのタイトルとテキストにマッチするフリーテキストクエリ。\n- **`sources`** イベントソース (カンマ区切り)。\n- **`status`** イベントステータス (カンマ区切り)。有効なオプション: error、warn、info\n- **`priority`**イベントの優先順位 (カンマ区切り)。有効なオプション: low、normal、all\n- **`host`** イベント報告ホスト (カンマ区切り)。\n- **`tags`** イベントタグ (カンマ区切り)。\n- **`excluded_tags`** 除外されたイベントタグ (カンマ区切り)。\n- **`rollup`** 統計のロールアップの方法。現在では `count` が唯一のサポート方法です。\n- **`last`** カウントをロールアップする時間枠。例: 45m、4h。サポートされるタイムフレーム: m、h、d。この値は 48 時間を超えてはなりません。\n\n**注** イベントアラートクエリは非推奨になり、イベント V2 アラートクエリに置き換わります。詳細については、[イベント移行ガイド](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/)を参照してください。\n\n**イベント V2 アラートクエリ**\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48).\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に使用する整数または 10 進数。\n\n**プロセスアラートクエリ**\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- **`search`** プロセスをクエリするためのフリーテキスト検索文字列。\n一致したプロセスは、[Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- **`tags`** 1 つ以上のタグ (カンマ区切り)\n- **`timeframe`** カウントをロールアップする時間枠。例: 10m、4h。サポートされているタイムフレーム: S、M、H、D\n- **`operator`** <、<=、>、>=、==、または !=\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**ログアラートクエリ**\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`index_name`** 複数インデックスの組織の場合、リクエストが実行されるログインデックス。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**複合条件クエリ**\n\n例: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* **`name`** [*必須*、*デフォルト* = **動的、クエリに基づく**]: アラートの名前。\n* **`message`** [*必須*、*デフォルト* = **動的、クエリに基づく**]: このモニターに対する通知に含めるメッセージ。\nイベントと同じ「@ユーザー名」表記で、特定のユーザーに対してメール通知を行うことができます。\n* **`tags`** [*オプション*、*デフォルト* = **空リスト**]: モニターに関連付けるタグの一覧。\nAPI 経由ですべてのモニターの詳細を取得する場合、`monitor_tags` 引数を使用して、これらのタグで結果をフィルタリングします。\nこれは、API 経由でのみ利用可能で、Datadog UI では表示も編集もできません。\n\n**SLO アラートクエリ**\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- **`slo_id`**: 警告を構成する SLO の英数字の SLO ID。\n- **`time_window`**: 警告したい SLO ターゲットのタイムウィンドウ。有効なオプション: 7d`、`30d`、`90d`。\n- **`operator`**: `>=` または `>`\n\n**監査アラートクエリ**\n\n例: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**注** US1-FED でのみ利用可能で、US1、EU、US3、US5 ではクローズドベータ版となります。\n\n**CI パイプラインのアラートクエリ**\n\n例: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。\n\n**注** CI Pipeline のモニターは、US1、EU、US3、US5 ではアルファ版です。\n\n**エラー追跡アラートクエリ**\n\n例(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n例(APM トレース): `error-tracking-traces(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- **`query`** 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- **`rollup_method`** 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- **`measure`** `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- **`time_window`** #m (1〜2880)、#h (1〜48)。\n- **`operator`** `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- **`#`** しきい値の設定に用いる整数または 10 進数。",
+    "description": "指定されたオプションを使用してモニターを作成します。\n\n#### モニタータイプ\n\n次から選択したモニターのタイプ:\n\n- 異常検知: `query alert`\n- APM: `query alert` または `trace-analytics alert`\n- 複合条件: `composite`\n- カスタム: `service check`\n- イベント: `event alert`\n- 予測: `query alert`\n- ホスト: `service check`\n- インテグレーション: `query alert` または `service check`\n- ライブプロセス: `process alert`\n- ログ: `log alert`\n- メトリクス: `query alert`\n- ネットワーク: `service check`\n-外れ値: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event alert`\n- event-v2: `event-v2 alert`\n- 監査: `audit alert`\n- エラー追跡: `error-tracking alert`\n\n#### クエリタイプ\n\n**メトリクスアラートクエリ**\n\n例: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg、sum、max、min、change、または pct_change\n- `time_window`: `last_#m` (モニタータイプに応じて、1〜10080 の `#`) または `last_#h`(モニタータイプに応じて、1〜168 の `#`) または `last_1d`、または `last_1w`\n- `space_aggr`: avg、sum、min、または max\n- `tags`: 1 つまたは複数のタグ (カンマ区切り)、または *\n- `key`: key:value タグ構文における 'key'、グループ内の各タグに対して個別のアラートを定義します (マルチアラート)\n- `operator`: <、<=、>、>=、==、または !=\n- `#`: しきい値の設定に用いる整数または 10 進数\n\n`_change_` または `_pct_change_` の時間アグリゲータを使用している場合は、代わりに以下を使用\n`change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #`:\n\n- `change_aggr` change、pct_change\n- `time_aggr` avg、sum、max、min [詳細](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (モニタータイプに応じて、1〜2880)、last\\_#h (モニタータイプに応じて、1〜48)、または last_#d (1 or 2)\n- `timeshift` #m_ago (5、10、15、または 30)、#h_ago (1、2、または 4)、または 1d_ago\n\nこれを利用して、以下のクエリで異常値モニタを作成します。\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n**サービスチェッククエリ**\n\n例: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- `check` チェックの名前。例: `datadog.agent.up`\n- `tags` 1 つ以上の引用符付きタグ (カンマ区切り)、または \"*\"。 例: `.over(\"env:prod\", \"role:db\")`、`over` を空白にすることはできません。\n- `count` 最大しきい値 (`options` で定義) 以上でなければなりません。最大値は 100 です。\n例えば、1 つの critical、3 つの ok、2 つの warn のステータスに対して通知するように指定した場合、`count` は最低でも 3 でなければなりません。\n- `group` チェックモニターに指定する必要があります。一部のサービスチェックでは、チェックごとのグループ化がすでに明示的に知られています。\n例えば、Postgres インテグレーションモニターは `db`、`host`、`port` でタグ付けされ、ネットワークモニターは `host`、`instance`、`url` でタグ付けされます。詳しくは [サービスチェック](https://docs.datadoghq.com/api/latest/service-checks/)のドキュメントを参照してください。\n\n**イベントアラートクエリ**\n\n例: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- `event`、イベントのクエリ文字列:\n- `string_query` イベントのタイトルとテキストにマッチするフリーテキストクエリ。\n- `sources` イベントソース (カンマ区切り)。\n- `status` イベントステータス (カンマ区切り)。有効なオプション: error、warn、info\n- `priority`イベントの優先順位 (カンマ区切り)。有効なオプション: low、normal、all\n- `host` イベント報告ホスト (カンマ区切り)。\n- `tags` イベントタグ (カンマ区切り)。\n- `excluded_tags` 除外されたイベントタグ (カンマ区切り)。\n- `rollup` 統計のロールアップの方法。現在では `count` が唯一のサポート方法です。\n- `last` カウントをロールアップする時間枠。例: 45m、4h。サポートされるタイムフレーム: m、h、d。この値は 48 時間を超えてはなりません。\n\n**注** イベントアラートクエリは非推奨になり、イベント V2 アラートクエリに置き換わります。詳細については、[イベント移行ガイド](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/)を参照してください。\n\n**イベント V2 アラートクエリ**\n\n例: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48).\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に使用する整数または 10 進数。\n\n**プロセスアラートクエリ**\n\n例: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- `search` プロセスをクエリするためのフリーテキスト検索文字列。\n一致したプロセスは、[Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) ページの結果と一致します。\n- `tags` 1 つ以上のタグ (カンマ区切り)\n- `timeframe` カウントをロールアップする時間枠。例: 10m、4h。サポートされているタイムフレーム: S、M、H、D\n- `operator` <、<=、>、>=、==、または !=\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**ログアラートクエリ**\n\n例: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `index_name` 複数インデックスの組織の場合、リクエストが実行されるログインデックス。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**複合条件クエリ**\n\n例: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* `name` [*必須*、*デフォルト* = **動的、クエリに基づく**]: アラートの名前。\n* `message` [*必須*、*デフォルト* = **動的、クエリに基づく**]: このモニターに対する通知に含めるメッセージ。\nイベントと同じ「@ユーザー名」表記で、特定のユーザーに対してメール通知を行うことができます。\n* `tags` [*オプション*、*デフォルト* = **空リスト**]: モニターに関連付けるタグの一覧。\nAPI 経由ですべてのモニターの詳細を取得する場合、`monitor_tags` 引数を使用して、これらのタグで結果をフィルタリングします。\nこれは、API 経由でのみ利用可能で、Datadog UI では表示も編集もできません。\n\n**SLO アラートクエリ**\n\n例: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- `slo_id`: 警告を構成する SLO の英数字の SLO ID。\n- `time_window`: 警告したい SLO ターゲットのタイムウィンドウ。有効なオプション: 7d`、`30d`、`90d`。\n- `operator`: `>=` または `>`\n\n**監査アラートクエリ**\n\n例: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**注** US1-FED でのみ利用可能で、US1、EU、US3、US5 ではクローズドベータ版となります。\n\n**CI パイプラインのアラートクエリ**\n\n例: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n**注** CI Pipeline のモニターは、US1、EU、US3、US5 ではアルファ版です。\n\n** CI テストアラートクエリ**\n\n例: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップメソッド - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に使用する整数または 10 進数。\n\n**注** CI テストモニターは、US1、EU、US3、US5 のクローズドベータ版でのみ利用可能です。\n\n**エラー追跡アラートクエリ**\n\n例(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n例(APM トレース): `error-tracking-traces(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 検索クエリ - [ログ検索構文](https://docs.datadoghq.com/logs/search_syntax/)に従います。\n- `rollup_method` 統計情報のロールアップの方法 - `count`、`avg`、`cardinality` をサポートします。\n- `measure` `avg` とカーディナリティ `rollup_method` の場合 - 使用するメジャーまたはファセット名を指定します。\n- `time_window` #m (1〜2880)、#h (1〜48)。\n- `operator` `<`、`<=`、`>`、`>=`、`==`、または `!=`\n- `#` しきい値の設定に用いる整数または 10 進数。\n\n",
     "summary": "モニターの作成",
     "request_description": "モニターのリクエスト本文を作成します。",
     "request_schema_description": "モニターを記述するオブジェクト。"
@@ -666,7 +672,7 @@
     "request_schema_description": "ノートブック更新リクエストの説明です。"
   },
   "ListOrgs": {
-    "description": "管理している組織を一覧表示します。",
+    "description": "このエンドポイントは、トップレベルの組織に関するデータを返します。",
     "summary": "管理している組織を一覧表示する"
   },
   "CreateChildOrg": {
@@ -685,6 +691,10 @@
     "request_description": "",
     "request_schema_description": "オーガニゼーションを作成、編集、管理します。"
   },
+  "DowngradeOrg": {
+    "description": "MSP のお客様のみ利用可能です。マスター組織の階層から子組織を削除し、30 日間の試用期間中に子組織を配置します。",
+    "summary": "子組織のスピンオフ"
+  },
   "UploadIdPForOrg": {
     "description": "SAML IdP に含まれる ID プロバイダー (IdP) のメタデータを\n更新するオプションはいくつかあります。\n\n* **マルチパートフォームデータ**: フォームポストを使用して IdP のメタデータファイルをポストします。\n\n* **XML 本文**: IdP のメタデータファイルをリクエスト本文としてポストします。",
     "summary": "IdP メタデータをアップロード",
@@ -698,8 +708,26 @@
     "description": "Datadog にある過去 24 時間のメトリクスを検索します。",
     "summary": "メトリクスの検索"
   },
+  "AddSecurityMonitoringSignalToIncident": {
+    "description": "インシデントにセキュリティシグナルを追加します。これにより、シグナルエクスプローラー内でインシデント別にシグナルを検索したり、インシデントタイムライン上でシグナルを表示したりすることが可能になります。",
+    "summary": "インシデントにセキュリティシグナルを追加する",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "どのインシデントにシグナルを追加するかを記述する属性。"
+  },
+  "EditSecurityMonitoringSignalAssignee": {
+    "description": "セキュリティシグナルのトリアージアサインメントを変更します。",
+    "summary": "セキュリティシグナルのトリアージアサインメントを変更します",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "セキュリティシグナルに対するアサインメント更新操作を記述する属性。"
+  },
+  "EditSecurityMonitoringSignalState": {
+    "description": "セキュリティシグナルのトリアージ状態を変更します。",
+    "summary": "セキュリティシグナルのトリアージ状態を変更します",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "指定された状態の変化を記述する属性。"
+  },
   "SubmitMetrics": {
-    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 3.2 メガバイト (3200000 バイト) です。非圧縮ペイロードの場合、サイズは 62 メガバイト (62914560 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 32 ビット\n- メトリクス名: 40 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでですが、DogStatsD API を使用する場合は\n圧縮が適用されるためペイロードのサイズも小さくなります。",
+    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 3.2 メガバイト (3200000 バイト) です。非圧縮ペイロードの場合、サイズは 62 メガバイト (62914560 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 40 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでですが、DogStatsD API を使用する場合は\n圧縮が適用されるためペイロードのサイズも小さくなります。",
     "summary": "メトリクスを送信する",
     "request_description": "",
     "request_schema_description": "メトリクスのペイロード。"
@@ -755,6 +783,10 @@
     "summary": "Update an SLO correction",
     "request_description": "編集済みの SLO 補正オブジェクト",
     "request_schema_description": "SLO に適用される補正を定義するオブジェクト。"
+  },
+  "SearchSLO": {
+    "description": "オーガニゼーションのサービスレベル目標オブジェクトのリストを取得します。",
+    "summary": "SLO の検索"
   },
   "DeleteSLO": {
     "description": "指定のサービスレベル目標オブジェクトを完全に削除します。\n\nSLO を使用するダッシュボードの場合はダッシュボード内で SLO が参照されているため、\n`DELETE /v1/slo/` エンドポイントは 409 競合エラーを返します。",
@@ -947,47 +979,47 @@
     "request_schema_description": "ホストに関連付けられているタグセット。"
   },
   "GetUsageAnalyzedLogs": {
-    "description": "分析されたログの 1 時間あたり使用量を取得します (セキュリティモニタリング) 。",
+    "description": "解析済みログ (セキュリティモニタリング) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "分析されたログの 1 時間あたり使用量の取得"
   },
   "GetUsageAttribution": {
     "description": "使用属性を取得します。",
-    "summary": "使用属性を取得する"
+    "summary": "使用属性を取得します"
   },
   "GetUsageAuditLogs": {
-    "description": "監査ログの 1 時間あたり使用量を取得します。",
+    "description": "監査ログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "監査ログの 1 時間あたり使用量の取得"
   },
   "GetUsageLambda": {
-    "description": "Lambda の 1 時間あたり使用量を取得します。",
-    "summary": "Lambda の 1 時間あたり使用量の取得"
+    "description": "Lambda の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "Lambda の 1 時間ごとの使用量を取得する"
   },
   "GetUsageBillableSummary": {
     "description": "アカウント全体の請求対象使用量を取得します。",
     "summary": "アカウント全体の請求対象使用量を取得します"
   },
   "GetUsageCIApp": {
-    "description": "CI Visibility (Tests、Pipeline、Spans) の 1 時間ごとの使用量を取得します。",
+    "description": "CI Visibility (テスト、パイプライン、スパン) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "CI Visibility の 1 時間ごとの使用量を取得する"
   },
   "GetUsageCloudSecurityPostureManagement": {
-    "description": "クラウドセキュリティポスチャ管理 (CSPM) の 1 時間あたり使用量を取得します。",
+    "description": "クラウドセキュリティポスチャ管理 (CSPM) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "CSPM の 1 時間あたり使用量の取得"
   },
   "GetUsageCWS": {
-    "description": "クラウドワークロードセキュリティの 1 時間あたり使用量を取得します。",
-    "summary": "クラウドワークロードセキュリティの 1 時間あたり使用量の取得"
+    "description": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得する"
   },
   "GetUsageDBM": {
-    "description": "データベースモニタリングの 1 時間あたり使用量を取得",
-    "summary": "データベースモニタリングの 1 時間あたり使用量を取得"
+    "description": "データベースモニタリングの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "データベースモニタリングの 1 時間ごとの使用量を取得する"
   },
   "GetUsageFargate": {
-    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間あたり使用量を取得します。",
+    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "Fargate の 1 時間あたり使用量の取得"
   },
   "GetUsageHosts": {
-    "description": "ホストとコンテナの 1 時間あたり使用量を取得します。",
+    "description": "ホストとコンテナの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "ホストとコンテナの 1 時間あたり使用量の取得"
   },
   "GetHourlyUsageAttribution": {
@@ -995,67 +1027,67 @@
     "summary": "1 時間ごとの使用量属性を取得する"
   },
   "GetIncidentManagement": {
-    "description": "インシデント管理の 1 時間あたり使用量を取得します。",
+    "description": "インシデント管理の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "インシデント管理の 1 時間あたり使用量を取得する"
   },
   "GetUsageIndexedSpans": {
-    "description": "Indexed span の 1 時間あたり使用量を取得します。",
+    "description": "インデックス化されたスパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "インデックス化されたスパンの 1 時間あたり使用量を取得"
   },
   "GetIngestedSpans": {
-    "description": "取り込まれたスパンの 1 時間あたり使用量を取得します。",
+    "description": "取り込まれたスパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "取り込まれたスパンの 1 時間あたり使用量を取得"
   },
   "GetUsageInternetOfThings": {
-    "description": "IoT の 1 時間あたり使用量を取得します。",
+    "description": "IoT の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "IoT の 1 時間あたりの使用量を取得する"
   },
   "GetUsageLogs": {
-    "description": "ログの 1 時間あたり使用量を取得します。",
+    "description": "ログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "ログの 1 時間あたり使用量の取得"
   },
   "GetUsageLogsByRetention": {
-    "description": "インデックスされたログの保持期間別の 1 時間あたり使用量を取得します。",
+    "description": "保持期間別のインデックス化されたログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "保持によるログの 1 時間あたり使用量の取得"
   },
   "GetUsageLogsByIndex": {
     "description": "インデックスごとにログの 1 時間あたり使用量を取得します。",
-    "summary": "インデックスごとにログの 1 時間あたり使用量を取得"
+    "summary": "インデックスごとにログの 1 時間ごとの使用量を取得する"
   },
   "GetMonthlyUsageAttribution": {
     "description": "月単位の使用量属性を取得します。\n\nこの API エンドポイントはページ処理されます。すべてのレコードを受信するためには、レスポンスに `next_record_id` の値が設定されているかどうかを確認します。もし設定されている場合は、再度リクエストして `next_record_id` をパラメーターとして渡してください。\n擬似的なコード例\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
     "summary": "1 か月ごとの使用量属性を取得する"
   },
   "GetUsageNetworkFlows": {
-    "description": "ネットワークフローの 1 時間あたり使用量を取得します。",
-    "summary": "ネットワークフローの 1 時間あたり使用量の取得"
+    "description": "ネットワークフローの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "ネットワークフローの 1 時間ごとの使用量を取得する"
   },
   "GetUsageNetworkHosts": {
-    "description": "ネットワークホストの 1 時間あたり使用量を取得します。",
-    "summary": "ネットワークホストの 1 時間あたり使用量の取得"
+    "description": "ネットワークホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "ネットワークホストの 1 時間ごとの使用量を取得する"
   },
   "GetUsageOnlineArchive": {
-    "description": "Online Archive の 1 時間ごとの使用量を取得します。",
-    "summary": "Online Archive の 1 時間ごとの使用量を取得する"
+    "description": "オンラインアーカイブの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "オンラインアーカイブの 1 時間ごとの使用量を取得する"
   },
   "GetUsageProfiling": {
-    "description": "プロファイルされたホストの 1 時間あたり使用量を取得します。",
+    "description": "プロファイルされたホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "プロファイルされたホストの 1 時間あたり使用量の取得"
   },
   "GetUsageRumUnits": {
-    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) ユニットの 1 時間あたり使用量を取得します。",
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) ユニットの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "RUM ユニットの 1 時間ごとの使用量を取得する"
   },
   "GetUsageRumSessions": {
-    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) セッションの 1 時間あたり使用量を取得します。",
-    "summary": "RUM セッションの 1 時間あたり使用量の取得"
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) セッションの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "RUM セッションの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSDS": {
-    "description": "Sensitive Data Scanner の 1 時間ごとの使用量を取得します。",
-    "summary": "Sensitive Data Scanner の 1 時間ごとの使用量を取得する"
+    "description": "機密データスキャナーの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "機密データスキャナーの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSNMP": {
-    "description": "SNMP デバイスの 1 時間あたり使用量を取得します。",
+    "description": "SNMP デバイスの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "SNMP デバイスの 1 時間あたり使用量の取得"
   },
   "GetUsageSummary": {
@@ -1063,19 +1095,19 @@
     "summary": "マルチオーガニゼーションのアカウント全体の使用量の取得"
   },
   "GetUsageSynthetics": {
-    "description": "[Synthetics チェック](https://docs.datadoghq.com/synthetics/)の 1 時間あたり使用量を取得します。",
-    "summary": "Synthetics チェックの 1 時間あたり使用量の取得"
+    "description": "[Synthetics チェック](https://docs.datadoghq.com/synthetics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "Synthetics チェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSyntheticsAPI": {
-    "description": "[Synthetics API チェック](https://docs.datadoghq.com/synthetics/)の 1 時間あたり使用量を取得します。",
-    "summary": "Synthetics API チェックの 1 時間あたり使用量の取得"
+    "description": "[Synthetics API チェック](https://docs.datadoghq.com/synthetics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "Synthetics API チェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSyntheticsBrowser": {
-    "description": "Synthetics ブラウザチェックの 1 時間あたり使用量を取得します。",
-    "summary": "Synthetics Browser チェックの 1 時間あたり使用量の取得"
+    "description": "Synthetics ブラウザチェックの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "Synthetics ブラウザチェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageTimeseries": {
-    "description": "[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)の 1 時間あたり使用量を取得します。",
+    "description": "[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
     "summary": "カスタムメトリクスの 1 時間あたり使用量の取得"
   },
   "GetUsageTopAvgMetrics": {

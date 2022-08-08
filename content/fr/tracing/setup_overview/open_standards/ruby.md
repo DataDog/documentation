@@ -1,11 +1,12 @@
 ---
-title: Standards ouverts Ruby
-kind: documentation
-description: Standards ouverts pour Ruby
 code_lang: ruby
-type: multi-code-lang
 code_lang_weight: 20
+description: Standards ouverts pour Ruby
+kind: documentation
+title: Standards ouverts Ruby
+type: multi-code-lang
 ---
+
 ## OpenTracing
 
 Pour en savoir plus sur la configuration de Datadog avec OpenTracing, consultez la section [Démarrage rapide pour OpenTracing][1] de la documentation dédiée à Ruby.
@@ -37,11 +38,11 @@ Cependant, des instrumentations supplémentaires fournies par Datadog peuvent ê
 
 ## OpenTelemetry
 
-La prise en charge d'OpenTelemetry est disponible via le gem `opentelemetry-exporters-datadog` pour exporter les traces d'OpenTelemetry vers Datadog.
-
 <div class="alert alert-warning">
-Cette fonctionnalité est actuellement en version bêta. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> si elle ne fonctionne pas correctement.
+Cet exportateur est obsolète. Pour exporter vos traces OTLP du SDK OpenTelemetry directement vers l'Agent Datadog, consultez <a href="/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent">Ingestion OTLP dans l'Agent Datadog</a>. <a href="/help/">Contactez l'assistance</a> si vous avez des questions.
 </div>
+
+La prise en charge d'OpenTelemetry est disponible via le gem `opentelemetry-exporters-datadog` pour exporter les traces d'OpenTelemetry vers Datadog.
 
 ### Installation
 

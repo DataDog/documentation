@@ -66,8 +66,8 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 For detailed instructions on the advanced alert options (no data, evaluation delay, etc.), see the [Monitor configuration][4] page. For the metric-specific option full data window, see the [Metric monitor][5] page.
 
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[2]: /tracing/visualization/service/
-[3]: /tracing/visualization/resource/
+[2]: /tracing/services/service_page/
+[3]: /tracing/services/resource_page/
 [4]: /monitors/create/configuration/#advanced-alert-conditions
 [5]: /monitors/create/types/metric/#data-window
 {{% /tab %}}
@@ -110,7 +110,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [1]: /tracing/trace_explorer/query_syntax/#search-bar
 [2]: /tracing/trace_explorer/query_syntax/#facet-search
 [3]: /tracing/trace_explorer/query_syntax/#numerical-values
-[4]: /tracing/visualization/#indexed-span
+[4]: /tracing/glossary/#indexed-span
 [5]: /monitors/create/configuration/#advanced-alert-conditions
 {{% /tab %}}
 {{< /tabs >}}

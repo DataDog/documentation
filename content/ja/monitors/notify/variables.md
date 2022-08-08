@@ -293,16 +293,17 @@ This alert was triggered on {{ @machine_id.name }}
 
 ### 一致する属性/タグ変数
 
-_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI Pipeline モニター][5]で使用できます。_
+_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI モニター][5]で使用できます。_
 
-モニタークエリに一致するログ、トレーススパン、RUM イベントまたは CI Pipeline イベントから**任意の**属性またはタグを含めるには、次の変数を使用します。
+モニタークエリに一致するログ、トレーススパン、RUM イベント、CI パイプラインまたは CI テストイベントから**任意の**属性またはタグを含めるには、次の変数を使用します。
 
-| モニターの種類    | 変数構文                                         |
-|-----------------|---------------------------------------------------------|
-| ログ             |  `{{log.attributes.key}}` または `{{log.tags.key}}`          |
-| トレース分析 |  `{{span.attributes.key}}` または `{{span.tags.key}}`        |
-| RUM             |  `{{rum.attributes.key}}` または `{{rum.tags.key}}`          |
-| CI Pipeline     | `{{cipipeline.attributes.key}}`                          |
+| モニターの種類    | 変数構文                                  |
+|-----------------|--------------------------------------------------|
+| ログ             | `{{log.attributes.key}}` または `{{log.tags.key}}`   |
+| トレース分析 | `{{span.attributes.key}}` または `{{span.tags.key}}` |
+| RUM             | `{{rum.attributes.key}}` または `{{rum.tags.key}}`   |
+| CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
+| CI Test         | `{{citest.attributes.key}}`                      |
 
 `key:value` ペアの場合、変数 `{{log.tags.key}}` はアラートメッセージに `value` をレンダリングします。
 
@@ -470,7 +471,7 @@ https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 
 
 
-[1]: /ja/monitors/create/types/
+[1]: /ja/monitors/create/#monitor-types
 {{% /tab %}}
 {{% tab "Logs" %}}
 
@@ -534,6 +535,6 @@ https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*10
 [2]: /ja/monitors/create/types/log/
 [3]: /ja/monitors/create/types/apm/?tab=analytics
 [4]: /ja/monitors/create/types/real_user_monitoring/
-[5]: /ja/monitors/create/types/ci_pipelines/
+[5]: /ja/monitors/create/types/ci/
 [6]: /ja/monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

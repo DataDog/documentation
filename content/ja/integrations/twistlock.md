@@ -10,19 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - security
-  - ログの収集
-  - オートディスカバリー
+- security
+- ログの収集
+- オートディスカバリー
 creates_events: true
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
+- https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_name: Twistlock
 draft: false
 git_integration_title: twistlock
 guid: 59082b73-62f4-48d4-83f8-af3d5576eae1
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,14 +30,17 @@ manifest_version: 1.0.0
 metric_prefix: twistlock.
 metric_to_check: twistlock.images.cve.details
 name: twistlock
-public_title: Datadog-Prisma Cloud Compute Edition インテグレーション
+public_title: Prisma Cloud Compute Edition インテグレーション
 short_description: Twistlock はコンテナセキュリティスキャナ
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 [Prisma Cloud Compute Edition][1] はセキュリティスキャナです。コンテナ、ホスト、パッケージをスキャンして、脆弱性やコンプライアンス問題を発見します。
@@ -110,9 +113,15 @@ spec:
 
 ##### ログの収集
 
+
+{{< site-region region="us3" >}}
+**ログ収集は、Datadog {{< region-param key="dd_site_name" >}} サイトでサポートされていません**。
+{{< /site-region >}}
+
+
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                             |
 | -------------- | ------------------------------------------------- |
@@ -133,7 +142,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
      #(...)
    ```
 
-2. [こちらのマニフェスト][4]のように、Docker ソケットを Datadog Agent にマウントします。
+2. Docker ソケットを Datadog Agent にマウントします。Datadog Kubernetes の[マニフェストの例][4]を参照してください。
 
 3. ディフェンダーのポッドアノテーションにログセクションを追加します。コンテナ名は、ポッド仕様の直下にあります。
 
@@ -157,14 +166,14 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
    ad.datadoghq.com/<container-name>.logs: '[{"source": "twistlock", "service": "twistlock"}]'
    ```
 
-3. Docker ソケットを Datadog Agent にマウントします。Datadog Agent を使用してログを収集するための構成については、[Docker のドキュメント][6]を参照してください。
+3. Docker ソケットを Datadog Agent にマウントします。Datadog Agent を使用してログを収集するための構成については、[Docker ログの収集][6]を参照してください。
 
 4. [Agent を再起動します][5]。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#create-manifest
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation
 {{% /tab %}}
@@ -172,7 +181,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `twistlock` を探します。
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `twistlock` を探します。
 
 ## 収集データ
 
@@ -195,6 +204,6 @@ Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベン�
 
 
 [1]: https://www.paloaltonetworks.com/prisma/cloud
-[2]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

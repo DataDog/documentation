@@ -14,9 +14,9 @@ To use Cloud Cost Management, you must have an AWS account with access to Cost a
  
 ## Setup
 
-To setup Cloud Cost Management in Datadog, you need to generate a Cost 
+To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
  
-### Prerequisite: Generate a Cost and Usage Report
+### Prerequisite: generate a Cost and Usage Report
  
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
  
@@ -32,7 +32,13 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Select your AWS billing account from the dropdown. Once your account is selected, Datadog displays tags associated with that account. If you have multiple similarly-named billing accounts, viewing the tags associated with a selected account can help ensure that you've selected the specific one you want.
+Select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
+
+**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][6] for cost visibility into related **member accounts**. If you decide to send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][7] to allow Datadog to have full visibility into the member account:
+
+* **Linked Account Access**
+* **Linked Account Refunds and Credits**
+* **Linked Account Discounts**
 
 ### Locate the Cost and Usage Report
 
@@ -142,3 +148,5 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
+[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings

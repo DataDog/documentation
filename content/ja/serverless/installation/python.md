@@ -239,7 +239,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 4. Datadog サイト、API キー、トレーシングの構成
 
-    - 環境変数 `DD_SITE` に、テレメトリー送信先の [Datadog サイト][3]を設定します。
+    - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
     - 環境変数 `DD_TRACE_ENABLED` を `true` に設定します。
 
@@ -316,7 +316,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 4. Datadog サイト、API キー、トレーシングの構成
 
-    - 環境変数 `DD_SITE` に、テレメトリー送信先の [Datadog サイト][7]を設定します。
+    - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][8]が安全に保存されている AWS シークレットの ARN で設定します。キーは json blob の中ではなく、プレーンテキスト文字列として保存する必要があります。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
     - 環境変数 `DD_TRACE_ENABLED` を `true` に設定します。
 

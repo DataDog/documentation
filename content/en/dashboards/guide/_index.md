@@ -2,8 +2,10 @@
 title: Graphing Guides
 kind: guide
 private: true
+disable_toc: true
 aliases:
     - /graphing/guide/
+    - /faq/treemap-graph-visualization-can-i-use-this-elsewhere/
 ---
 
 {{< whatsnext desc="General Guides:" >}}
@@ -13,6 +15,9 @@ aliases:
     {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Using Terraform to restrict the editing of a dashboard{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Embeddable graphs with template variables{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Why am I unable to iFrame certain HTTPS URLs?{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks best practices{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}

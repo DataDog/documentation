@@ -1,20 +1,21 @@
 ---
-title: Page Ressource
-kind: documentation
 further_reading:
-  - link: /tracing/setup/
-    tag: Documentation
-    text: Configurer le tracing d'APM avec votre application
-  - link: /tracing/visualization/services_list/
-    tag: Documentation
-    text: Découvrir la liste des services transmettant des données à Datadog
-  - link: /tracing/visualization/service/
-    tag: Documentation
-    text: En savoir plus sur les services dans Datadog
-  - link: /tracing/visualization/trace/
-    tag: Documentation
-    text: Comprendre comment lire une trace Datadog
+- link: /tracing/setup/
+  tag: Documentation
+  text: Configurer le tracing d'APM avec votre application
+- link: /tracing/visualization/services_list/
+  tag: Documentation
+  text: Découvrir la liste des services transmettant des données à Datadog
+- link: /tracing/visualization/service/
+  tag: Documentation
+  text: En savoir plus sur les services dans Datadog
+- link: /tracing/visualization/trace/
+  tag: Documentation
+  text: Comprendre comment lire une trace Datadog
+kind: documentation
+title: Page Ressource
 ---
+
 {{< img src="tracing/visualization/resource/ressource.png" alt="Ressource"  >}}
 
 Une ressource est une action particulière pour un [service][1] donné (généralement, un endpoint ou une requête). Découvrez davantage d'informations sur les ressources sur la page [Débuter avec l'APM][2]. Pour chaque ressource, l'APM génère automatiquement une page de dashboard avec les éléments suivants :
@@ -44,9 +45,9 @@ Datadog fournit des graphiques prêts à l'emploi pour chaque ressource :
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Graphiques par défaut des ressources" style="width:90%;">}}
 
-### Exporter un graphique dans un timeboard
+### Exporter un graphique dans un dashboard
 
-En haut à droite de chaque graphique, cliquez sur la flèche vers le haut pour exporter votre graphique dans un [timeboard][4] existant :
+En haut à droite de chaque graphique, cliquez sur la flèche vers le haut pour exporter votre graphique dans un [dashboard][4] existant :
 
 ### Distribution de la latence
 
@@ -57,6 +58,20 @@ La page ressource affiche également un graphique représentant la distribution 
 Utilisez les sélecteurs en haut à droite pour zoomer sur un centile donné, ou passez votre curseur sur la barre latérale pour voir les marqueurs de centile.
 
 {{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="Sélecteur de distribution de la latence"  style="width:50%;">}}
+
+## Carte des dépendances
+
+Vous pouvez également consulter une carte représentant l'ensemble des dépendances de service en amont et en aval d'une ressource. Cette carte vous permet de visualiser en quelques secondes le flux de services dont les spans passent par une ressource précise (comme des endpoints ou des requêtes de base de données), avec une vue de bout en bout.
+
+{{<img alt="resource dependency map" src="tracing/visualization/resource/resource_dependency_map.png" style="width:100%;">}}
+
+Passez le curseur sur un nœud pour afficher les métriques de chaque service, notamment le nombre de métriques par seconde, le taux d'erreur et la latence moyenne.
+
+La couleur en regard de chaque nœud représente le [statut du monitor][8] du service. Si plusieurs monitors ont été configurés pour un service, le statut du monitor avec la gravité la plus forte est indiqué.
+
+{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="Utilisateur passant son curseur sur un nœud de la carte des dépendances d'une ressource et cliquant dessus" style="width:100%;">}}
+
+Cliquez sur un nœud pour ouvrir un menu contextuel. Celui-ci vous permet de consulter la page Service, les traces associées, et plus encore.
 
 ## Résumé des spans
 
@@ -93,7 +108,8 @@ Consultez la liste des [traces][6] associées à cette ressource dans la fenêtr
 [1]: /fr/tracing/visualization/#services
 [2]: /fr/tracing/visualization/
 [3]: /fr/tracing/visualization/#trace
-[4]: /fr/dashboards/timeboard/
+[4]: /fr/dashboards/
 [5]: /fr/tracing/visualization/#spans
 [6]: /fr/tracing/visualization/trace/
 [7]: /fr/tracing/search/
+[8]: /fr/monitors/manage/status/

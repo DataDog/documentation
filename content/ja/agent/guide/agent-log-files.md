@@ -25,7 +25,7 @@ Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバ
 | プラットフォーム                              | コマンド                       |
 |---------------------------------------|-------------------------------|
 | Linux                                 | `/var/log/datadog/`           |
-| macOS、Agent v7.28+ および v6.28+        | `/opt/datadog-agent/log`      |
+| macOS、Agent v7.28+ および v6.28+        | `/opt/datadog-agent/logs`      |
 | macOS、6.28.0/7.28.0 以前の Agent | `/var/log/datadog`            |
 | Windows Server 2008/Vista 以降  | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003/XP 以前      | サポートされないプラットフォーム        |

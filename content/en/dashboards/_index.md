@@ -56,7 +56,7 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 ### Dashboards
-Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, which update in real-time and can represent fixed points in the past. They also work well for debugging.
 
 ### Timeboards
 Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
@@ -104,11 +104,11 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event stream][12]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [event explorer][12]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
-Change events for dashboards with notifications enabled are seen in the event stream by searching:
+Change events for dashboards with notifications enabled are seen in the event explorer by searching:
 
 ```text
 tags:audit,dash
@@ -165,9 +165,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][15] page. By default, this is the landing page after you login to Datadog. To change the default landing page for your organization, contact [Datadog support][16].
-
-{{< img src="dashboards/dashboard_list.png" alt="Dashboard List page"  >}}
+Search, view, or create dashboards and lists on the [Dashboard List][15] page. 
 
 ### New list
 
@@ -234,7 +232,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][17]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][16]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -260,12 +258,11 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [6]: https://app.datadoghq.com/infrastructure/map
 [7]: https://app.datadoghq.com/logs
 [8]: /tracing/
-[9]: /tracing/profiler/
+[9]: /profiler/
 [10]: /dashboards/guide/custom_time_frames/
 [11]: /dashboards/sharing/#dashboards
 [12]: /events/
 [13]: /account_management/rbac/
 [14]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
 [15]: https://app.datadoghq.com/dashboard/lists
-[16]: /help/
-[17]: /dashboards/template_variables/#saved-views
+[16]: /dashboards/template_variables/#saved-views

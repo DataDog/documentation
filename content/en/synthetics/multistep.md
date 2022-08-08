@@ -1,12 +1,12 @@
 ---
 title: Multistep API Tests
 kind: documentation
-description: Chain requests to monitor sophisticated transactions on your key services
+description: Chain requests to monitor sophisticated transactions on your key services.
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"
   tag: "Blog"
   text: "Monitor your workflows with Datadog multistep API tests"
-- link: 'https://learn.datadoghq.com/course/view.php?id=39'
+- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
 - link: "/getting_started/synthetics/api_test"
@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run Multistep API tests on internal endpoints"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
   tag: "Terraform"
   text: "Create and manage Synthetic Multistep API Tests with Terraform"
@@ -24,15 +27,15 @@ further_reading:
 
 Multistep API tests allow you to chain several [HTTP requests][1] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, leverage [API tests][2].
 
-You can:
+You can do the following actions:
 
 * Execute HTTP requests on API endpoints requiring authentication (for example, through a token)
 * Monitor key business transactions at the API level
 * Simulate end-to-end mobile application journeys
 
-{{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Multiple test requests as steps in a multistep API test" style="width:90%;" >}}
 
-If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body, status code, etc.), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
+If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body or status code), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
 
 Multistep API tests can run from Datadog [managed locations][5] and [private locations][6], allowing **full coverage of your systems**, both external and internal.
 
@@ -51,9 +54,9 @@ Select the **Locations** for your Multistep API test. Multistep API tests can ru
 
 To create an HTTP request step, click **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
-**Note:** By default, a maximum of 10 steps can be created. Reach out to <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to increase the limit.
+By default, a maximum of 10 steps can be created. To increase this limit, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
 
 #### Define the request
 
@@ -76,7 +79,8 @@ To create an HTTP request step, click **Create Your First Step**.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.
+   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header.
 
    {{% /tab %}}
 
@@ -118,7 +122,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
 Click **Test URL** to try out the request configuration. A response preview appears.
 
-{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
@@ -135,7 +139,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_multi.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -165,7 +169,9 @@ To parse your variable:
     * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
 
-{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+
+You can extract up to ten variables per test step.
 
 Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 
@@ -197,9 +203,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
 
 1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -213,8 +219,9 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+4. Click **Create** to save your test configuration and monitor.
 
-Click on **Save** to save your test and have Datadog start executing it.
+For more information, see [Using Synthetic Test Monitors][14].
 
 ## Variables
 
@@ -245,7 +252,7 @@ You can create local variables by clicking **Create Local Variable** at the top 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field.
 
@@ -268,7 +275,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][15].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][16].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -281,13 +288,13 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][16].
+By default, only users with the [Datadog Admin and Datadog Standard roles][17] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][17].
 
-If you are using the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you are using the [custom role feature][18], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
-## Restrict access
+### Restrict access
 
-Access restriction is available for customers using [custom roles][18] on their accounts.
+Access restriction is available for customers using [custom roles][19] on their accounts.
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -310,8 +317,9 @@ You can restrict access to a multistep API test based on the roles in your organ
 [11]: /monitors/notify/?tab=is_alert#notification
 [12]: http://daringfireball.net/projects/markdown/syntax
 [13]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[14]: /synthetics/settings/#global-variables
-[15]: /synthetics/api_tests/errors/#ssl-errors
-[16]: /account_management/rbac/
-[17]: /account_management/rbac#custom-roles
-[18]: /account_management/rbac/#create-a-custom-role
+[14]: /synthetics/guide/synthetic-test-monitors
+[15]: /synthetics/settings/#global-variables
+[16]: /synthetics/api_tests/errors/#ssl-errors
+[17]: /account_management/rbac/
+[18]: /account_management/rbac#custom-roles
+[19]: /account_management/rbac/#create-a-custom-role

@@ -23,7 +23,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_name: MongoDB
@@ -32,7 +31,7 @@ git_integration_title: mongo
 guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 3.2.2
+integration_version: 3.2.3
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -42,7 +41,7 @@ metric_to_check: mongodb.connections.available
 name: mongo
 process_signatures:
 - mongod
-public_title: Datadog-MongoDB インテグレーション
+public_title: MongoDB インテグレーション
 short_description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
 support: コア
 supported_os:
@@ -137,7 +136,7 @@ db.createUser({
 ```
 
 ##### Agent の構成
-メンバーごとに 1 つの Agent を構成する必要があります。コンフィギュレーションオプションについては、以下を参照してください。
+メンバーごとに 1 つのチェックインスタンスを構成する必要があります。コンフィギュレーションオプションについては、以下を参照してください。
 **注**: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication

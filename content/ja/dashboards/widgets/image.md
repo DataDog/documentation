@@ -1,24 +1,22 @@
 ---
-title: イメージウィジェット
-kind: documentation
-description: Datadog のダッシュボードにイメージまたは gif 画像を含める
 aliases:
-  - /ja/graphing/widgets/image/
+- /ja/graphing/widgets/image/
+description: Datadog のダッシュボードにイメージまたは gif 画像を含める
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: イメージウィジェット
 ---
+
 イメージウィジェットを使用すると、ダッシュボードにイメージを埋め込むことができます。イメージには、URLでアクセスできる場所でホストされている PNG、JPG、またはアニメーション GIF を使用できます。
 
-{{< img src="dashboards/widgets/image/image.mp4" alt="イメージ" video="true"  width="80%" >}}
+{{< img src="dashboards/widgets/image/image.mp4" alt="イメージ" video="true" style="width:80%;" >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/image/image_setup.png" alt="イメージのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/image/image_setup.png" alt="イメージのセットアップ" style="width:80%;">}}
 
 1. イメージの URL を入力します。
 2. 外観を選択します。

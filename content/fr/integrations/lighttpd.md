@@ -12,19 +12,20 @@ assets:
     lighttpd_processes: assets/saved_views/lighttpd_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - autodiscovery
-  - log collection
+- web
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
 display_name: Lighttpd
 draft: false
 git_integration_title: lighttpd
 guid: 01dcfe7a-7a56-4388-a388-799ee6daaaab
 integration_id: lighttpd
 integration_title: Lighttpd
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -33,15 +34,19 @@ metric_prefix: lighttpd.
 metric_to_check: lighttpd.performance.uptime
 name: lighttpd
 process_signatures:
-  - lighttpd
+- lighttpd
 public_title: Intégration Datadog/lighttpd
-short_description: 'Surveillez la disponibilité, les octets traités, les requêtes par seconde, les codes de réponse et plus encore.'
+short_description: Surveillez la disponibilité, les octets traités, les requêtes par
+  seconde, les codes de réponse et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard lighttpd][1]
 
 ## Présentation
@@ -121,7 +126,6 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 3. [Redémarrez l'Agent][4].
 
-
 ### Validation
 
 [Lancez la sous-commande `status` de l'Agent][5] et cherchez `lighttpd` dans la section Checks.
@@ -137,9 +141,8 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check lighttpd n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "lighttpd" >}}
 
-**lighttpd.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à lighttpd pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -147,7 +150,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-Pour mieux comprendre comment (ou pourquoi) surveiller les métriques de serveur web lighttpd avec Datadog, lisez nos [articles de blog][7] à ce sujet.
+- [Surveiller les métriques sur le serveur Web Lighttpd avec Datadog][6]
+
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard.png

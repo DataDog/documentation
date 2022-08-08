@@ -3,12 +3,11 @@ categories:
     - cloud
     - aws
     - log collection
-ddtype: crawler
 description: Gather your HSM audit logs in your Datadog organization.
 has_logo: true
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md']
-integration_title: AWS Cloudhsm
+integration_title: AWS CloudHSM
 is_public: true
 kind: integration
 name: amazon_cloudhsm
@@ -33,18 +32,22 @@ Audit logs are enabled by default for CloudHSM.
 
 #### Send your logs to Datadog
 
-1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
-2. Once the lambda function is installed, manually add a trigger on the Cloudwatch Log group that contains your CloudHSM logs in the AWS console:
-   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" popup="true" style="width:70%;">}}
-   Select the corresponding CloudWatch Log group, add a filter name (but feel free to leave the filter empty) and add the trigger.
-   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" popup="true" style="width:70%;">}}
+1. If you haven't already, set up the [Datadog Forwarder Lambda function][1] in your AWS account.
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
+3. Select the **CloudWatch Logs** trigger for the Trigger Configuration.
+4. Select the CloudWatch log group that contains your CloudHSM logs.
+5. Enter a name for the filter.
+6. Click **Add** to add the trigger to your Lambda.
 
-Once done, go in your [Datadog Log section][2] to start exploring your logs!
+Go to the [Log Explorer][2] to start exploring your logs.
+
+For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][3].
 
 ## Troubleshooting
 
-Need help? Contact [Datadog Support][3].
+Need help? Contact [Datadog Support][4].
 
-[1]: /integrations/amazon_web_services/#create-a-new-lambda-function
+[1]: /logs/guide/forwarder/
 [2]: https://app.datadoghq.com/logs
-[3]: /help/
+[3]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[4]: /help/

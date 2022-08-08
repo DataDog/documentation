@@ -10,19 +10,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - autodiscovery
-  - log collection
+- web
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
+- https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
 display_name: Twemproxy
 draft: false
 git_integration_title: twemproxy
 guid: a5cca58a-9984-4226-ad1c-8dff73c9d6ac
 integration_id: twemproxy
 integration_title: Twemproxy
+integration_version: 1.13.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -30,14 +30,17 @@ manifest_version: 1.0.0
 metric_prefix: twemproxy.
 metric_to_check: twemproxy.total_connections
 name: twemproxy
-public_title: Datadog-Twemproxy インテグレーション
+public_title: Twemproxy インテグレーション
 short_description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 各 Twemproxy サーバーで、全体の統計とプールごとの統計を追跡します。この Agent チェックは、クライアントとサーバーの接続とエラー、リクエスト率と応答率、プロキシの受送信バイト数などのメトリクスを収集します。
@@ -122,7 +125,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `twemproxy` を探します。
+[Agent の status サブコマンド][2]を実行し、Checks セクションで `twemproxy` を探します。
 
 ## 収集データ
 

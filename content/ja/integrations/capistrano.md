@@ -1,15 +1,15 @@
 ---
 categories:
-  - orchestration
-ddtype: crawler
+- orchestration
 dependencies: []
 description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
-doc_link: 'https://docs.datadoghq.com/integrations/capistrano/'
+doc_link: https://docs.datadoghq.com/integrations/capistrano/
 draft: false
 git_integration_title: capistrano
 has_logo: true
 integration_id: capistrano
 integration_title: Capistrano
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -18,6 +18,7 @@ public_title: Datadog-Capistrano インテグレーション
 short_description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
 version: '1.0'
 ---
+
 ## 概要
 
 [Capistrano][1] は、Ruby で記述されたリモートサーバー自動化およびデプロイツールです。
@@ -54,7 +55,7 @@ set :datadog_api_key, "${独自の_API_キー}"
 
 1. [イベントストリーム][2]に移動します。
 2. 検索バーに `sources:capistrano` を入力するか、左側のインテグレーションの FROM リストで 'Capistrano' をクリックします。
-3. 検索バーに `priority:all` を入力するか、左側の PRIORITY リストで 'All' をクリックします。Capistrano タスクは、デフォルトでは Low 優先度で送信されます。そのため、Normal 優先度のイベントのみを表示している場合 (デフォルトの設定)、Capistrano タスクはイベントストリームに表示されません。
+3. 検索バーに `priority:all` を入力するか、左側の PRIORITY リストで 'All' をクリックします。Capistrano タスクは、デフォルトでは Low 優先度で送信されます。そのため、デフォルトのイベントストリームビュー（Normal 優先度）を使用すると表示されません。
 
 {{< img src="integrations/capistrano/capistranoevents.gif" >}}
 

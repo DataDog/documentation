@@ -19,7 +19,6 @@ categories:
 - log collection
 - autodiscovery
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/zk/README.md
 display_name: ZooKeeper
@@ -39,7 +38,7 @@ name: zk
 process_signatures:
 - zkServer.sh start
 - java zoo.cfg
-public_title: Datadog-ZooKeeper インテグレーション
+public_title: ZooKeeper インテグレーション
 short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
 support: コア
 supported_os:

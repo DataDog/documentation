@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon Athena のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_athena/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Athena インテグレーション
 short_description: Amazon Athena のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Athena は、標準 SQL を使用して Amazon Simple Storage Service (Amazon S3) でデータを直接、簡単に分析できるようにするインタラクティブなクエリサービスです。

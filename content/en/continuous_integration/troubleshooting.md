@@ -17,7 +17,7 @@ kind: documentation
 
 1. Go to the [Setup Tracing on CI Tests][2] page for the language you're instrumenting and check the _Compatibility_ section. Make sure the testing framework you are using is supported.
 2. Check if you see any test results in the [Test Runs][3] section. If you do see results there, but not in the [Tests][4] section, Git information is missing. See [Data appears in Test Runs but not Tests](#data-appears-in-test-runs-but-not-tests) to troubleshoot it.
-3. For languages other than Swift, make sure the Datadog Agent is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][5] in the tracer to check if it's able to connect to the Agent.
+3. If you are reporting the data through the Datadog Agent, make sure it is running on the host where tests are run (accessible at `localhost:8126`), or if accessible on another hostname or port, make sure you run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][5] in the tracer to check if it's able to connect to the Agent.
 4. If you still don't see any results, [contact Support][1] for troubleshooting help.
 
 ### Pipeline not found
@@ -94,17 +94,63 @@ The wall time is defined as the time difference between the start time of the fi
 This is done using the following algorithm:
 
 1. Compute a hash based on CI information to group the tests.
-  a. If the tests include `ci.job.url`, use this tag to calculate the hash.
-  b. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
+    1. If the tests include `ci.job.url`, use this tag to calculate the hash.
+    2. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
 2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is calculated for each job, and the maximum from all calculated wall times is shown.
 
 #### Possible issues with wall time calculation
 If you're using a library for testing time-dependent code, like [timecop][7] for Ruby or [FreezeGun][8] for Python, it is possible that test timestamps are wrong, and therefore calculated wall times. If this is the case, make sure that modifications to time are rolled back before finishing your tests.
 
+### The test status numbers are not what is expected
+
+The test status numbers are calculated based on the unique tests that were collected. The uniqueness of a test is defined not only by its suite and name, but by its test parameters and test configurations as well.
+
+#### The numbers are lower than expected
+
+If the numbers are lower than expected, it is likely that either the library or the tool you are using to collect test data cannot collect test parameters and/or some test configurations.
+
+1. If you are uploading JUnit test report files:
+    1. If you are running the same tests in different environment configurations, [make sure you are setting those configuration tags during the upload][9].
+    2. If you are running parameterized tests, it's very likely that the JUnit report does not have that information. [Try using a native library to report test data][10].
+2. If you still don't see the expected results, [contact Datadog support][1] for troubleshooting help.
+
+#### The passed/failed/skipped numbers are different than expected
+
+If the same test is collected several times for the same commit but with different status, the aggregated result follows the algorithm in the table below:
+
+| **Test Status - First Try** | **Test Status - Retry #1** | **Result** |
+|-----------------------------|----------------------------|------------|
+| `Passed`                    | `Passed`                   | `Passed`   |
+| `Passed`                    | `Failed`                   | `Passed`   |
+| `Passed`                    | `Skipped`                  | `Passed`   |
+| `Failed`                    | `Passed`                   | `Passed`   |
+| `Failed`                    | `Failed`                   | `Failed`   |
+| `Failed`                    | `Skipped`                  | `Failed`   |
+| `Skipped`                   | `Passed`                   | `Passed`   |
+| `Skipped`                   | `Failed`                   | `Failed`   |
+| `Skipped`                   | `Skipped`                  | `Skipped`  |
+
+### The default branch is not correct
+
+#### How it impacts the product
+
+The default branch is used to power some features of the products, namely:
+
+- Default branches list on the Tests page: This list only displays default branches. Setting the wrong default branch can result in missing or incorrect data in the default branches list.
+
+- Wall time comparison for non-default branches: On the Tests page, in the Branches view, the **VS Default** column is calculated by comparing wall time for the current branch against wall time for the default branch.
+
+- New flaky tests: Tests that are not currently classified as flaky in the default branch. If the default branch is not properly set, this could lead to a wrong number of detected new flaky tests.
+
+- Pipelines list: The pipelines list only displays default branches. Setting the wrong default branch can result in missing or incorrect data in the pipelines list.
+
+#### How to fix the default branch
+
+If you have admin access, you can update it from the [Repository Settings Page][11].
+
 ### Need further help?
 
 Still need help? Contact [Datadog support][1].
-
 
 [1]: /help/
 [2]: /continuous_integration/setup_tests/
@@ -114,3 +160,6 @@ Still need help? Contact [Datadog support][1].
 [6]: /continuous_integration/setup_tests/containers/
 [7]: https://github.com/travisjeffery/timecop
 [8]: https://github.com/spulec/freezegun
+[9]: https://docs.datadoghq.com/continuous_integration/setup_tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
+[10]: https://docs.datadoghq.com/continuous_integration/setup_tests/
+[11]: https://app.datadoghq.com/ci/settings/repository

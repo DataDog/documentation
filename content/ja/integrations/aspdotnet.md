@@ -1,41 +1,62 @@
 ---
+app_id: aspdotnet
+app_uuid: 7d801e88-1fad-433e-81d9-07449fd45e13
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     ASP.NET - Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: aspdotnet.request.wait_time
+      metadata_path: metadata.csv
+      prefix: aspdotnet.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: ASP.NET
   logs:
     source: iis
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - languages
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md
-display_name: ASP.NET
+display_on_public_website: true
 draft: false
 git_integration_title: aspdotnet
-guid: 475b0c6c-02e5-49ef-806b-9fab377f0839
 integration_id: aspdotnet
 integration_title: ASP.NET
-integration_version: 1.11.1
+integration_version: 1.12.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: aspdotnet.
-metric_to_check: aspdotnet.request.wait_time
+manifest_version: 2.0.0
 name: aspdotnet
-public_title: Datadog-ASP.NET インテグレーション
+oauth: {}
+public_title: ASP.NET
 short_description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::Web
+  - Category::言語
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ASP.NET
 ---
 
 

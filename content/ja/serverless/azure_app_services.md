@@ -165,9 +165,92 @@ DogStatsd.Increment("sample.startup");
 [10]: /ja/developers/dogstatsd/?tab=net#code
 [11]: /ja/metrics/
 {{% /tab %}}
+{{% tab "Java" %}}
+### 要件
+
+1. [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+
+2. 拡張機能では、Azure App Service Web Apps がサポートされます。Function Apps はサポートされません。
+    <div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. There are no billing implications for tracing Java Web Apps during this period.<br/><br/>
+    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+
+3.  Datadog Java APM 拡張機能は、Windows OS 上のすべての Java ランタイムをサポートします。Azure App Service は、Linux 上の拡張機能をサポートしていません。自動インスツルメンテーションされたライブラリの詳細については、[トレーサードキュメント][2]を参照してください。
+
+4. Datadog では、機能の最適なパフォーマンス、安定性、そして可用性を確保するため、拡張機能の最新バージョンへの定期的な更新を推奨しています。初期インストールおよびその後の更新を正常に完了するには、ウェブアプリを一度完全に停止する必要があります。
+
+### インストール
+
+1. Web アプリや関数を監視するために [Azure インテグレーション][1]を構成します。Datadog で対応する `azure.app_service.count` または `azure.functions.count` メトリクスが表示されることを確認し、正しく設定されていることを確認します。**注**: このステップは、メトリクス/トレースの相関関係、機能的なトレース・パネル表示、Datadog サイトでの様々な壊れたユーザー体験の回避のために重要です。
+
+2. [Azure Portal][3] を開き、Datadog でインスツルメントする Azure Web App のダッシュボードに移動します。
+
+3. 'Configuration' ページで 'Application settings' タブを開きます。
+    {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="Configuration ページ" >}}
+4. Datadog API キーに対応するアプリケーション設定 `DD_API_KEY` を追加し、[Datadog API キー][4]の値を設定します。
+    {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="API キーページ" >}}
+5. 任意のアプリケーション設定を構成します。
+    - `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定（デフォルトは `datadoghq.com`）。
+    - トレースとカスタム統計をグループ化するには `DD_ENV` を設定します。
+    - `DD_SERVICE` を設定してサービス名を指定します（デフォルトはウェブアプリ名）。
+    - [任意のコンフィギュレーション変数][5]の全リストをご参照ください。
+6. **Save** をクリック（アプリケーションが再起動します）。
+7. <div class="alert alert-warning">[必須] <u>Stop</u> をクリックしてアプリケーションを停止します。</div>
+8. Azure 拡張機能ページで Datadog APM 拡張機能を選択します。
+9. 法的事項を承諾し、**OK** をクリックしてインストールの完了を待機します。**注**: このステップを正常に完了するには、ウェブアプリが停止した状態である必要があります。
+10. **Start** をクリックして、メインアプリケーションを起動します。
+    {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="起動" >}}
+
+### Azure Web Apps からのアプリケーションロギング
+
+Azure App Service のアプリケーションから Datadog にログを送信するには、アプリから Datadog に直接ログをストリーミングする必要があります。この方法でログを送信すると、トレース ID の挿入が可能になり、Datadog でログとトレースの紐付けができるようになります。
+
+**注**: トレース ID の挿入は、アプリケーションの内部で行われます。Azure Resource ログは、管理プレーンの Azure によって生成されるため、トレース ID は含まれません。
+
+Azure App Service で Java のアプリケーションログを構成するには、[Java によるエージェントレスログ][6]の説明を参照してください。
+
+### DogStatsD を使用したカスタムメトリクス
+
+Azure App Service の拡張機能には、[DogStatsD][7] (Datadog のメトリクス集計サービス) のインスタンスが含まれます。拡張機能を利用して、Azure Web Apps から Datadog へ直接カスタムメトリクス、サービスチェック、イベントを送信できます。
+
+この環境でカスタムメトリクスおよびチェックを書き込むことは、Datadog Agent が実行されている標準ホスト上のアプリケーションでそれを実行するプロセスと同様です。拡張機能を使用して Azure App Service から Datadog へカスタムメトリクスを送信するには、以下を実行します。
+
+1. [DogStatsD クライアント][8]をプロジェクトに追加します。
+2. アプリケーション内で DogStatdD を初期化し、カスタムメトリクスを作成します。
+3. サポートされている Azure ウェブアプリにコードをデプロイします。
+4. Datadog App Service 拡張機能をインストールします。
+
+**注**: [標準的な DogStatsD コンフィグプロセス][9]とは異なり、DogStatsD のコンフィギュレーションを開始するのにポートやサーバー名の設定は必要ありません。Azure App Service にはアンビエント環境変数があり、メトリクスの送信条件を決定します（DogStatsD クライアントには v6.0.0 以上が必要）。
+
+メトリクスを送信するには、以下のコードを使用します。
+
+```java
+// DogStatsd クライアントの構成と、任意のタグの構成
+StatsDClient client = new NonBlockingStatsDClientBuilder()
+                            .constantTags(“app:sample.service”)
+                            .build();
+// メトリクスを送信する
+client.Increment("sample.startup");
+```
+
+[カスタムメトリクス][10]に関する詳細を参照してください。
+
+[1]: /ja/integrations/azure
+[2]: /ja/tracing/setup/dotnet/
+[3]: https://portal.azure.com/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /ja/tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
+[6]: /ja/logs/log_collection/csharp/?tab=serilog#agentless-logging
+[7]: /ja/developers/dogstatsd
+[8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
+[9]: /ja/developers/dogstatsd/?tab=java#code
+[10]: /ja/metrics/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## プログラムマネジメント
+
+{{< tabs >}}
+{{% tab ".NET" %}}
 
 Datadog では、Powershell を使用して Azure App Service Extension をアップデートまたはインストールするためのスクリプトを提供しています。スクリプトによる拡張機能管理では、[リソースグループによる拡張機能の一括更新](#powershell-resource-group)や[サイト拡張機能の特定バージョンのインストールを指定する](#powershell-specific-version)ことができます。また、スクリプトを使って CI/CD パイプラインにプログラム的に拡張機能を追加したり、すでにインストールされている拡張機能を発見して更新したりすることもできます。
 
@@ -178,8 +261,7 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
 
 ### 初めて拡張機能をインストールする{#powershell-first-time}
 
-{{< tabs >}}
-{{% tab ".NET" %}}
+
 
 インストールスクリプトは、Azure Web App または Azure Function App に最新バージョンの拡張機能を追加します。これは、リソース グループ レベルではなく、アプリ単位で発生します。
 
@@ -211,13 +293,10 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
 [1]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /ja/getting_started/site/
-{{% /tab %}}
-{{< /tabs >}}
+
 
 ### リソースグループの拡張機能を更新する{#powershell-resource-group}
 
-{{< tabs >}}
-{{% tab ".NET" %}}
 
 更新スクリプトは、リソースグループ全体に適用されます。このスクリプトは、拡張機能がインストールされているすべての Web App または Function App を更新します。Datadog 拡張機能がインストールされていない App Service アプリは、影響を受けません。
 
@@ -234,16 +313,11 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
     .\update-all-site-extensions.ps1 -SubscriptionId <SUBSCRIPTION_ID> -ResourceGroup <RESOURCE_GROUP_NAME> -Username <USERNAME> -Password <PASSWORD>
     ```
 
-{{% /tab %}}
-{{< /tabs >}}
+
 
 ### 特定のバージョンの拡張機能をインストールする{#powershell-specific-version}
 
-{{< tabs >}}
-{{% tab ".NET" %}}
 Azure App Service UI は、拡張機能の特定のバージョンをインストールする機能をサポートしていません。インストールまたは更新スクリプトを使用して、これを行うことができます。
-{{% /tab %}}
-{{< /tabs >}}
 
 
 #### 特定のバージョンを単一のリソースにインストールする
@@ -268,14 +342,23 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 
 ### ARM テンプレート
 
-{{< tabs >}}
-{{% tab ".NET" %}}
+多くの組織では、[Azure Resource Management (ARM) テンプレート][4]を使用して infrastructure-as-code の実践を実施しています。これらのテンプレートに App Service Extension を構築するには、デプロイメントに [Datadog の App Service Extension ARM テンプレート][5]を組み込み、App Service リソースと一緒に拡張機能を追加して構成します。
 
-多くの組織では、[Azure Resource Management (ARM) テンプレート][1]を使用して infrastructure-as-code の実践を実施しています。これらのテンプレートに App Service Extension を構築するには、デプロイメントに [Datadog の App Service Extension ARM テンプレート][2]を組み込み、App Service リソースと一緒に拡張機能を追加して構成します。
+[1]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /ja/getting_started/site/
+[4]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
+[5]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
+[8]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+[9]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
+[10]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
+[11]: https://portal.azure.com/
+{{% /tab %}}
+{{% tab "Java" %}}
 
+<div class="alert alert-warning">Java Web Apps のサポートは、拡張機能 v2.4+ のベータ版です。プログラムによる管理は、Java Web Apps では利用できません。<br/><br/>
+   他の App Service リソースタイプやランタイムのサポートに興味がありますか？ベータ版が利用可能になったら、<a href="https://forms.gle/n4nQcxEyLqDBMCDA7">サインアップ</a>してお知らせを受け取りましょう。</div>
 
-[1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
-[2]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
 {{% /tab %}}
 {{< /tabs >}}
 

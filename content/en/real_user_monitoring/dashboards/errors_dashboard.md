@@ -2,12 +2,14 @@
 title: RUM Error Dashboard
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/explorer'
-      tag: 'Documentation'
-      text: 'Explore your views within Datadog'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
 ---
 
-The errors dashboard provides insights about your applications’ errors. It is separated in two sections:
+## Overview
+
+The errors dashboard provides insights about your applications’ errors. It shows:
 
 - **General errors**:
     Visualize which pages, browser, and countries are the most affected by frontend errors.
@@ -16,7 +18,7 @@ The errors dashboard provides insights about your applications’ errors. It is 
 
 {{< img src="real_user_monitoring/dashboards/errors_dashboard.png" alt="Error Dashboard" >}}
 
-For more information about the information displayed, check the [RUM Data Collected documentation][1]
+For more information about the data displayed, see [RUM Browser Data Collected][1].
 
 ## Further Reading
 

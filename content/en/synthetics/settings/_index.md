@@ -159,7 +159,7 @@ When you are done selecting locations, click **Save Default Locations**.
 
 Choose the default browser and device types for your [browser test][5] details.
 
-Your options for browsers include Google Chrome, Firefox, Microsoft Edge, and Internet Explorer 11. Your options for devices include a large laptop, a tablet, and a small mobile device.
+Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
 
 When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
 

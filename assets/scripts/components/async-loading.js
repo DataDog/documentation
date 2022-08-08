@@ -1,5 +1,5 @@
 import { updateTOC, buildTOCMap } from './table-of-contents';
-import codeTabs from './codetabs';
+import initCodeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
@@ -185,7 +185,7 @@ function loadPage(newUrl) {
 
             // sets query params if code tabs are present
 
-            codeTabs();
+            initCodeTabs();
 
             const regionSelector = document.querySelector('.js-region-select');
 

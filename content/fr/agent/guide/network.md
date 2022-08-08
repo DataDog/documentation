@@ -76,24 +76,25 @@ Les informations sont structurées au format JSON selon le schéma suivant :
 
 {{< code-block lang="text" disable_copy="true" >}}
 {
-    "version": 1,                       // <-- valeur incrémentée chaque fois que cette information est modifiée
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp de la dernière modification
-    "agents": {                         // <-- adresses IP utilisées par l'Agent pour envoyer des métriques à Datadog
-        "prefixes_ipv4": [              // <-- liste des blocs CIDR IPv4
+    "version": 1,                          // <-- valeur incrémentée chaque fois que cette information est modifiée
+    "modified": "YYYY-MM-DD-HH-MM-SS",     // <-- timestamp de la dernière modification
+    "agents": {                            // <-- adresses IP utilisées par l'Agent pour envoyer des métriques à Datadog
+        "prefixes_ipv4": [                 // <-- liste des blocs CIDR IPv4
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- liste des blocs CIDR IPv6
+        "prefixes_ipv6": [                 // <-- liste des blocs CIDR IPv6
             ...
         ]
     },
-    "api": {...},                       // <-- même chose, mais pour une fonctionnalité non essentielle de l'Agent (demande d'informations à partir de l'API)
-    "apm": {...},                       // <-- même structure que « agents », mais il s'agit des adresses IP utilisées pour les données de l'Agent APM
-    "logs": {...},                      // <-- même chose, mais pour les données de l'Agent de log
-    "process": {...},                   // <-- même chose, mais pour les données de l'Agent de processus
-    "orchestrator": {...},              // <-- même chose, mais pour les données de l'Agent de processus
-    "synthetics": {...},                // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les bots utilisés pour les tests Synthetic)
-    "webhooks": {...}                   // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les webhooks)
+    "api": {...},                          // <-- même chose, mais pour une fonctionnalité non essentielle de l'Agent (demande d'informations à partir de l'API)
+    "apm": {...},                          // <-- même structure que « agents », mais il s'agit des adresses IP utilisées pour les données de l'Agent APM
+    "logs": {...},                         // <-- même chose, mais pour les données de l'Agent de log
+    "process": {...},                      // <-- même chose, mais pour les données de l'Agent de processus
+    "orchestrator": {...},                 // <-- même chose, mais pour les données de l'Agent de processus
+    "synthetics": {...},                   // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les bots utilisés pour les tests Synthetic)
+    "synthetics-private-locations": {...}, // <-- non utilisé pour le trafic de l'Agent (adresses IP destinations pour l'ingestion des résultats Synthetics des emplacements privés)
+    "webhooks": {...}                      // <-- non utilisé pour le trafic de l'Agent (adresses IP sources de Datadog pour les webhooks)
 }
 {{< /code-block >}}
 

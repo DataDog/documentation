@@ -19,6 +19,8 @@ If you are experiencing issues with a given Agent Check, use these commands for 
 
 **Note**: Replace `<CHECK_NAME>` in the examples below with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][1] to confirm the Agent check name.
 
+**Note**: To temporarily disable a service check while troubleshooting, rename `/conf.d/<CHECK_NAME>.d/conf.yaml` to something other than the `.yaml` or `.yml` file extension, such as `conf.yaml.disable`.
+
 ## Linux
 
 To test an Agent check, run:
@@ -142,7 +144,7 @@ sudo journalctl -u dd-agent.service
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /integrations/
 [2]: /agent/troubleshooting/send_a_flare/
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 [4]: /integrations/

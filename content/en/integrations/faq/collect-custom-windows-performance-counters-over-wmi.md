@@ -3,7 +3,7 @@ title: Collect Custom Windows Performance Counters over WMI
 kind: faq
 ---
 
-Datadog's WMI integration is a versatile approach to collecting relevant metrics from your Windows environments. As long as you're able to query a WMI object for a numerical value, you can configure your dd-agent's WMI check to run the same query and collect its results as a metric. See the [how to retrieve WMI metrics][1] guide.
+Datadog's WMI integration is a versatile approach to collecting relevant metrics from your Windows environments. As long as you're able to query a WMI object for a numerical value, you can configure your dd-agent's WMI check to run the same query and collect its results as a metric. See the [retrieving WMI metrics][1] guide.
 
 But sometimes the default WMI counters aren't sufficient for specific use-cases --in those cases, you can create your own custom WMI counters for the `dd-agent` to query. Here's a simple example of a powershell script that would create a custom WMI counter:
 
@@ -56,4 +56,4 @@ instances:
 **Note**: If you are submitting performance counters in languages other than English, set up the ddagentuser account with the en-US language pack.
 
 
-[1]: /integrations/faq/how-to-retrieve-wmi-metrics/
+[1]: /integrations/guide/retrieving-wmi-metrics/

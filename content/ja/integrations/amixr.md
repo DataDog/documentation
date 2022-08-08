@@ -1,36 +1,35 @@
 ---
-"assets":
-  "dashboards": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "saved_views": {}
-  "service_checks": assets/service_checks.json
-"categories":
+assets:
+  dashboards: {}
+  metrics_metadata: metadata.csv
+  monitors: {}
+  saved_views: {}
+  service_checks: assets/service_checks.json
+categories:
 - 監視
 - コラボレーション
 - notification
-"creates_events": false
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md"
-"display_name": "Amixr"
-"draft": false
-"git_integration_title": "amixr"
-"guid": "56e3b585-27b4-4a04-b528-9c1adfecf387"
-"integration_id": "amixr"
-"integration_title": "Amixr"
-"integration_version": ""
-"is_public": true
-"kind": "インテグレーション"
-"maintainer": "ildar@amixr.io"
-"manifest_version": "1.0.0"
-"metric_prefix": "amixr."
-"metric_to_check": ""
-"name": "amixr"
-"public_title": "Datadog-Amixr インテグレーション"
-"short_description": "Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現"
-"support": "contrib"
-"supported_os":
+creates_events: false
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md
+display_name: Amixr
+draft: false
+git_integration_title: amixr
+guid: 56e3b585-27b4-4a04-b528-9c1adfecf387
+integration_id: amixr
+integration_title: Amixr
+integration_version: ''
+is_public: true
+kind: インテグレーション
+maintainer: ildar@amixr.io
+manifest_version: 1.0.0
+metric_prefix: amixr.
+metric_to_check: ''
+name: amixr
+public_title: Amixr
+short_description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
+support: contrib
+supported_os:
 - linux
 - mac_os
 - windows
@@ -103,4 +102,3 @@ Amixr インテグレーションには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/amixr/images/amixr-interface.png
 [2]: https://amixr.io/support/
-

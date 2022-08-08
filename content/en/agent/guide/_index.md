@@ -2,6 +2,7 @@
 title: Agent Guides
 kind: guide
 private: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="General guides:" >}}
@@ -39,6 +40,7 @@ private: true
     {{< nextlink href="agent/guide/ad_identifiers" >}}Apply an Autodiscovery configuration file template to a given container with the ad_identifers parameter{{< /nextlink >}}
     {{< nextlink href="agent/guide/operator-advanced" >}}Advanced setup for Datadog Operator{{< /nextlink >}}
     {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Container Images for Docker Environments{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/compose-and-the-datadog-agent" >}}Compose and the Datadog Agent{{< /nextlink >}}
     {{< nextlink href="/agent/guide/docker-deprecation" >}}Deprecating Docker in Kubernetes{{< /nextlink >}}
     {{< nextlink href="/agent/guide/podman-support-with-docker-integration" >}}Using the Docker integration with Podman container runtime{{< /nextlink >}}
     {{< nextlink href="/agent/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}

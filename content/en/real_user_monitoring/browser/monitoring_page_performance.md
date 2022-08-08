@@ -29,7 +29,7 @@ RUM view events collect extensive performance metrics for every single page view
 
 ### Core web vitals
 <div class="alert alert-warning">
-  <strong>Note:</strong>The core web vitals metrics are available in Datadog from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.0.0+.
+  The core web vitals metrics are available in Datadog from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
 [Google's Core Web Vitals][4] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
@@ -138,6 +138,22 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 
 **Note**: For single page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
+You can also provide your own timing as a second parameter. It should be the number of milliseconds relative to the start of the current RUM view or the UNIX epoch (timestamp). It is particularly useful when using an asynchronous setup. Example:
+
+```javascript
+document.addEventListener("scroll", function handler() {
+    //Remove the event listener so that it only triggers once
+    document.removeEventListener("scroll", handler);
+
+    const timing = Date.now()
+    DD_RUM.onReady(function() {
+      DD_RUM.addTiming('first_scroll', timing);
+    });
+});
+
+```
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -158,4 +174,4 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [16]: https://en.wikipedia.org/wiki/Comet_(programming
-[17]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[17]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

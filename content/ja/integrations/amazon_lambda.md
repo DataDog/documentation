@@ -6,7 +6,6 @@ categories:
 - cloud
 - aws
 - log collection
-ddtype: crawler
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/

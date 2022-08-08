@@ -1,7 +1,8 @@
 baseURL: "http://localhost:1313/"
 timeout: 100000
 enableGitInfo: true
-security:
-  exec:
-    osEnv:
-      - ['(?i)^(Path|USERPROFILE)$']
+
+# default to just building english on local dev for a faster build
+disableLanguages:
+  - fr
+  - ja

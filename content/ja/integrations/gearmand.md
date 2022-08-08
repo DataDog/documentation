@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /ja/integrations/gearman
+- /ja/integrations/gearman
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -14,19 +14,19 @@ assets:
     gearman_processes: assets/saved_views/gearman_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - autodiscovery
-  - log collection
+- processing
+- autodiscovery
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
 display_name: Gearman
 draft: false
 git_integration_title: gearmand
 guid: bdd65394-92ff-4d51-bbe3-ba732663fdb2
 integration_id: gearman
 integration_title: Gearman
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -35,15 +35,18 @@ metric_prefix: gearman.
 metric_to_check: gearman.unique_tasks
 name: gearmand
 process_signatures:
-  - gearmand
-  - gearman
-public_title: Datadog-Gearman インテグレーション
+- gearmand
+- gearman
+public_title: Gearman インテグレーション
 short_description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
 support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## 概要
 
 Gearman のメトリクスを収集して、以下のことができます。
@@ -120,7 +123,7 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 3. [Agent を再起動します][3]。
 
-Kubernetes 環境でログを収集する Agent を構成するためのその他の情報については、[Datadog ドキュメント][4]を参照してください。
+Kubernetes 環境でのログ収集のための Agent の構成については、[Kubernetes のログ収集][4]を参照してください。
 
 ### 検証
 
@@ -134,7 +137,7 @@ Kubernetes 環境でログを収集する Agent を構成するためのその�
 
 ### イベント
 
-Gearmand チェックには、イベントは含まれません。
+Gearman チェックには、イベントは含まれません。
 
 ### サービスのチェック
 {{< get-service-checks-from-git "gearmand" >}}

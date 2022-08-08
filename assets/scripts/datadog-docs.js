@@ -1,7 +1,7 @@
 import { initializeIntegrations } from './components/integrations';
 import { initializeSecurityRules } from './components/security-rules';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
-import codeTabs from './components/codetabs';
+import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
@@ -91,7 +91,7 @@ $(document).ready(function () {
     }
 
     if (document.querySelector('.code-tabs')) {
-        codeTabs();
+        initCodeTabs();
     }
 });
 
@@ -161,14 +161,8 @@ function getPathElement(event = null) {
         );
     }
 
-    // if url is domain + /integrations/**
-    if (
-        `${replaceURL(domain)}/${replacePath(path)}`.includes(
-            `${replaceURL(domain)}/integrations`
-        ) && !`${replaceURL(domain)}/${replacePath(path)}`.includes(
-            `${replaceURL(domain)}/integrations/guide`
-        )
-    ) {
+    // if on a detailed integration page then make sure integrations is highlighted in nav
+    if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
             '.side .nav-top-level > [data-path*="integrations"]'
         );

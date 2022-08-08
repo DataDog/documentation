@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awskms/
+- /ja/integrations/awskms/
 categories:
-  - cloud
-  - security
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- security
+- aws
+- log collection
 dependencies: []
 description: Amazon KMS のキー有効期限を追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_kms/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_kms/
 draft: false
 git_integration_title: amazon_kms
 has_logo: true
 integration_id: amazon-kms
 integration_title: Amazon Key Management Service
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon Key Management Service インテグレーション
 short_description: Amazon KMS のキー有効期限を追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS Key Management Service (KMS) は、データの暗号化に使用される暗号化キーの作成や制御を容易にするマネージド型サービスです。
@@ -63,7 +64,7 @@ Amazon KMS から S3 バケットまたは CloudWatch のいずれかにログ�
 {{< get-metrics-from-git "amazon_kms" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 

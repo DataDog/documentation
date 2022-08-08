@@ -1,47 +1,72 @@
 ---
+app_id: gitlab
+app_uuid: 3d165411-7734-4f72-b39a-f222add296b2
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Gitlab Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - gitlab.process_max_fds
+      - gitlab.ruby.process_start_time_seconds
+      metadata_path: metadata.csv
+      prefix: gitlab.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gitlab
   logs:
     source: gitlab
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - collaboration
 - source control
 - issue tracking
 - log collection
 - autodiscovery
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md
-display_name: Gitlab
+display_on_public_website: true
 draft: false
 git_integration_title: gitlab
-guid: 1cab328c-5560-4737-ad06-92ebc54af901
 integration_id: gitlab
 integration_title: Gitlab
-integration_version: 5.2.0
+integration_version: 5.2.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: gitlab.
-metric_to_check:
-- gitlab.process_max_fds
-- gitlab.ruby.process_start_time_seconds
+manifest_version: 2.0.0
 name: gitlab
-public_title: Datadog-Gitlab インテグレーション
+oauth: {}
+public_title: Gitlab
 short_description: Datadog ですべての Gitlab メトリクスを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::コラボレーション
+  - Category::ソースコントロール
+  - Category::問題の追跡
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: Datadog ですべての Gitlab メトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gitlab
 ---
 
 

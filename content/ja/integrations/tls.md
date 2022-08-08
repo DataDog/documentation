@@ -9,19 +9,19 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - ネットワーク
-  - web
-  - オートディスカバリー
+- ネットワーク
+- web
+- オートディスカバリー
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
+- https://github.com/DataDog/integrations-core/blob/master/tls/README.md
 display_name: TLS
 draft: false
 git_integration_title: tls
 guid: 4e27a211-a034-42dd-9939-9ef967b1da50
 integration_id: tls
 integration_title: TLS
+integration_version: 2.8.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -29,14 +29,17 @@ manifest_version: 1.0.0
 metric_prefix: tls.
 metric_to_check: tls.seconds_left
 name: tls
-public_title: Datadog-TLS インテグレーション
+public_title: TLS インテグレーション
 short_description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
 support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 このチェックは、[TLS][1] プロトコルバージョン、証明書の有効期限と有効性などを監視します。

@@ -76,7 +76,19 @@ The new query search allows you to use complex queries in event monitors with ne
 
 ### Pipelines
 
-With pipelines, events are parsed and enriched by chaining them sequentially through processors. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
+Datadog automatically parses JSON-formatted events. When events are not JSON-formatted, they are parsed and enriched by chaining them sequentially through a processing pipeline. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
+
+## Reserved attributes
+
+This list describes automatically ingested reserved attributes with events.
+
+| Attribute | Description                                                                                                                                                                                                                                |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your events. The Agent sets this value automatically.                          |
+| `source`  | This corresponds to the integration name, or the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, and more. |
+| `status`  | This corresponds to the level or severity of an event.      |
+| `service` | The name of the application or service generating the events. |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. |                     
 
 ## What Changed?
 
@@ -93,10 +105,10 @@ Some status values have changed:
 
 | Legacy status | New status |
 |---------------|------------|
-| success       | OK         |
-| warning       | WARN       |
-| info          | INFO       |
-| error         | ERROR      |
+| success       | ok         |
+| warning       | warn       |
+| info          | info       |
+| error         | error      |
 
 ### Source remapping in queries
 Many Event source names have changed. See the full list of affected [source names][5].
@@ -105,11 +117,11 @@ Many Event source names have changed. See the full list of affected [source name
 Your monitors are not evaluated beyond a 48 hour window. If you need to use a longer evaluation window, you can [generate custom metrics][3] from events and use a metrics monitor, where the evaluation window can be up to one month.
 
 ### You can group by only up to 4 facets.
-(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example N = 30 resulting hosts if 3 facets and one facet is `host`.
+(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example, N = 30 resulting hosts if grouping by two facets and one facet is `host`.
   * One facet results in a limit of 1000 top values.
   * Two facets results in a limit of 30 top values per facet (at most 900 groups)
   * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
-  * Four facets results in a limit of five top values per group (at most 625 groups)
+  * Four facets results in a limit of 5 top values per group (at most 625 groups)
 
 ### Recovery thresholds in monitors are no longer supported
 Event monitor thresholds no longer support the `warning_recovery` and `critical_recovery` threshold types. Recovery thresholds need to be removed in new Event monitors.

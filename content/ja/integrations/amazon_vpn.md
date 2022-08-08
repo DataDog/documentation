@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon VPN のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon VPN インテグレーション
 short_description: Amazon VPN のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Virtual Private Network (VPN) を使用すると、ユーザーネットワークまたはデバイスから AWS グローバルネットワークへの安全なプライベートトンネルを確立できます。

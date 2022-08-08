@@ -7,12 +7,11 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - インシデント
-  - モニタリング
+- インシデント
+- モニタリング
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
 display_name: cortex
 draft: false
 git_integration_title: cortex
@@ -31,10 +30,13 @@ public_title: Cortex
 short_description: Cortex ダッシュボードから直接 Datadog インシデントを作成
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 [Cortex][1] インテグレーションにより、Cortex ダッシュボードから直接 Datadog インシデントをトリガーできます。

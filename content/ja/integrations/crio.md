@@ -1,40 +1,60 @@
 ---
+app_id: cri-o
+app_uuid: a5f9ace1-19b5-4928-b98b-21f15d62cce2
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     crio: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: crio.operations.count
+      metadata_path: metadata.csv
+      prefix: crio.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: CRI-O
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - コンテナ
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
-display_name: CRI-O
+display_on_public_website: true
 draft: false
 git_integration_title: crio
-guid: 40fd8230-d178-4e8e-9e6a-6ce4acc19a85
 integration_id: cri-o
 integration_title: CRI-O
 integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: crio.
-metric_to_check: crio.operations.count
+manifest_version: 2.0.0
 name: crio
-public_title: Datadog-CRI-O インテグレーション
+oauth: {}
+public_title: CRI-O
 short_description: CRI-O のすべてのメトリクスを Datadog で追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  configuration: README.md#Setup
+  description: CRI-O のすべてのメトリクスを Datadog で追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CRI-O
 ---
 
 

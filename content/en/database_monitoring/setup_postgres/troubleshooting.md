@@ -142,14 +142,21 @@ Solution: The Agent requires the `datadog.explain_statement(...)` function to ex
 Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -157,7 +164,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 #### Agent is running an unsupported version
-Ensure that the Agent is running version 7.36.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+Ensure that the Agent is running version 7.36.1 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
 #### Queries are truncated
 See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.

@@ -100,7 +100,7 @@ spec:
 | 非推奨タグ        | 公式タグ                |
 |-----------------------|-----------------------------|
 | cluster_name          | kube_cluster_name           |
-| コンテナ             | kube_container_name         |
+| container             | kube_container_name         |
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
@@ -109,7 +109,7 @@ spec:
 | job_name              | kube_job                    |
 | namespace             | kube_namespace              |
 | phase                 | pod_phase                   |
-| ポッド                   | pod_name                    |
+| pod                   | pod_name                    |
 | replicaset            | kube_replica_set            |
 | replicationcontroller | kube_replication_controller |
 | statefulset           | kube_stateful_set           |
@@ -519,6 +519,9 @@ datadog:
 Kubernetes State Metrics Core チェックには、イベントは含まれません。
 
 ### サービスのチェック
+
+`kubernetes_state.cronjob.complete`
+: cronjob の最後のジョブが失敗したかどうか。タグ:`kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.cronjob.on_schedule_check`
 : cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。

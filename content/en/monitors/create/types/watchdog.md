@@ -37,8 +37,8 @@ Choose your [primary tags][1], [service][2], and [resource][3] from the drop-dow
 After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time, along with a list of events.
 
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[2]: /tracing/visualization/service/
-[3]: /tracing/visualization/resource/
+[2]: /tracing/services/service_page/
+[3]: /tracing/services/resource_page/
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 

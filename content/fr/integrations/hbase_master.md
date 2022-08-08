@@ -9,34 +9,36 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
+- data store
+- log collection
 creates_events: false
-ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md
 display_name: HBase master
 draft: false
 git_integration_title: hbase_master
 guid: b45e0f05-8ece-4d5c-946b-ce0ee8057e68
 integration_id: hbase-master
-integration_title: "Hbase\_Master"
+integration_title: Hbase Master
 integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: everpeace
+maintainer: everpeace@gmail.com
 manifest_version: 1.0.0
 metric_prefix: hbase.
 metric_to_check: hbase.master.assignmentmanager.rit_oldest_age
 name: hbase_master
-public_title: "Intégration Datadog/Hbase\_Master"
-short_description: "Intégration de HBase\_Master."
+public_title: Hbase Master
+short_description: Intégration de HBase Master.
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Recueillez des métriques du service Hbase_master en temps réel pour :
