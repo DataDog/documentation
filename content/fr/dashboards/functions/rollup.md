@@ -1,9 +1,10 @@
 ---
-title: Rollup
-kind: documentation
 aliases:
-  - /fr/graphing/functions/rollup/
+- /fr/graphing/functions/rollup/
+kind: documentation
+title: Rollup
 ---
+
 `.rollup()`
 La fonction `.rollup()` (cumul) est utilisée pour agréger les données de vos métriques automatiquement dans toutes les requêtes de métriques. Cependant, l'ajout d'une fonction `.rollup()` à la fin d'une requête vous permet d'effectuer une [agrégation temporelle][1] personnalisée qui remplace la valeur par défaut. Cette fonction vous permet de définir les éléments suivants :
 
@@ -16,7 +17,7 @@ La fonction accepte deux paramètres, `<AGRÉGATEUR>` et éventuellement `<INTER
 
 | Paramètre  | Description                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
-| `<AGRÉGATEUR>` | Ce paramètre détermine la façon dont les points de données sont agrégés dans un intervalle de temps donné. Il peut être défini sur `sum`, `min`, `max`, `count` ou `avg`. |
+| `<AGRÉGATEUR>` | Ce paramètre peut être défini sur `avg`, `sum`, `min`, `max` ou `count`. Il détermine la façon dont les points de données sont agrégés au sein d'un intervalle donné. [Valeur par défaut imposée](#intervalle-de-cumul-impose-ou-personnalise) : `avg`. |
 | `<INTERVALLE>`   | Intervalle (en secondes) entre deux points de données affichés. Paramètre facultatif.                                            |
 
 Ces paramètres peuvent être utilisés séparément ou ensemble, par exemple `.rollup(sum,120)`. Le graphique à barres suivant affiche l'évolution de la charge CPU sur une semaine pour un host **sans** utiliser la fonction `.rollup()` :
@@ -56,7 +57,7 @@ Une fonction `.rollup()` personnalisée peut être utilisée pour obliger Datado
 
   {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count" style="width:50%;">}}
 
-Pour en savoir plus sur l'utilisation des modificateurs `.as_count()` et `.as_rate()`, consultez cet [article de blog][3] (en anglais) ou lisez la documentation sur les [modificateurs intégrés à l'application][4] pour mieux comprendre les effets de ces fonctions.
+Pour en savoir plus sur l'utilisation des modificateurs `.as_count()` et `.as_rate()`, consultez l'article de blog [Visualiser des métriques StatsD][3] (en anglais) ou lisez la documentation sur les [modificateurs intégrés à l'application][4] pour mieux comprendre les effets de ces fonctions.
 
 ## Cumuls dans les monitors
 
@@ -80,5 +81,5 @@ L'utilisation d'un cumul dans une requête de [monitor][5] est généralement à
 [1]: /fr/dashboards/functions/#proceed-to-time-aggregation
 [2]: /fr/metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[4]: /fr/metrics/type_modifiers/
+[4]: /fr/metrics/custom_metrics/type_modifiers/
 [5]: /fr/monitors/create/types/metric/
