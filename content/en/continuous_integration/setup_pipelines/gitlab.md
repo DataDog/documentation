@@ -142,9 +142,9 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 ### Infrastructure metric correlation
 
 If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
-For this feature to work the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added whilst
-[registering a new runner][6]. For existing runners tags can be added by updating the runner's `config.toml` or
-through the UI by going to **Settings > CI/CD > Runners** and editing the appropiate runner.
+For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
+[registering a new runner][6]. For existing runners, add tags by updating the runner's `config.toml`. Or add tags
+through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
 
 After this steps, CI Visibility adds the hostname to each job. To see the metrics click on a job span in the trace
 view and in the drawer a new tab named **Infrastructure** will show which contains the host metrics.
