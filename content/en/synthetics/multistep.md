@@ -33,7 +33,7 @@ You can accomplish the following:
 * Monitor key business transactions at the API level
 * Simulate end-to-end mobile application journeys
 
-{{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Multiple test steps in a multistep API test" style="width:90%;" >}}
 
 If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body or status code), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
 
@@ -54,7 +54,7 @@ Select the **Locations** for your Multistep API test. Multistep API tests can ru
 
 To create an HTTP request step, click **Create Your First Step**.
 
-{{< img src="synthetics/api_tests/create_request2.png" alt="Create your Multistep API test requests" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
 By default, you can create up to 10 test steps. To increase this limit, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 
@@ -117,7 +117,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
 Click **Test URL** to try out the request configuration. A response preview appears.
 
-{{< img src="synthetics/api_tests/ms_define_request2.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 #### Add assertions
 
@@ -134,7 +134,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions2.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_assertions.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -161,7 +161,7 @@ To start parsing a variable, click **Extract a variable from response content**:
     * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
      * Extract the value using the **full response body**.
 
-{{< img src="synthetics/api_tests/ms_extract_variable3.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 You can extract up to ten variables per test step. Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
 

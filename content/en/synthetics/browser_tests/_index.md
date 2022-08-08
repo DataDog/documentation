@@ -207,7 +207,7 @@ You can restrict access to a browser test based on the roles in your organizatio
 [4]: /help/
 [5]: /synthetics/settings/#global-variables
 [6]: /synthetics/browser_tests/actions#variables
-[7]: /api/v1/synthetics/#create-or-clone-a-test
+[7]: /api/latest/synthetics/#create-or-clone-a-test
 [8]: http://daringfireball.net/projects/markdown/syntax
 [9]: /synthetics/guide/synthetic-test-monitors
 [10]: https://www.google.com/chrome
