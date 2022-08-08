@@ -138,7 +138,7 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 
 **Note**: For single page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
-You can also provide your own timing as a second parameter. It should be a number of milliseconds relative to the start of the current RUM view or the UNIX epoch (timestamp). It is particularly useful when using an asynchronous setup. Example:
+You can also provide your own timing as a second parameter. It should be the number of milliseconds relative to the start of the current RUM view or the UNIX epoch (timestamp). It is particularly useful when using an asynchronous setup. Example:
 
 ```javascript
 document.addEventListener("scroll", function handler() {
