@@ -260,16 +260,90 @@ In Agent version 7.33 and forward, you can disable the rare sampler in the Agent
 
 The head-based sampling mechanism can be overridden at the tracing library level. For example, if you need to monitor a critical transaction, you can force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, you can force the trace to be dropped.
 
-- Set `ManualKeep` on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+- Set Manual Keep on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+
+- Set Manual Drop on a span to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
+
+  {{< tabs >}}
+{{% tab "Java" %}}
+
+```java
+// keep
+span.setTag(DDTags.MANUAL_KEEP, true);
+// drop
+span.setTag(DDTags.MANUAL_DROP, true);
 ```
-// in dd-trace-go
+
+{{% /tab %}}
+{{% tab "Python" %}}
+```python
+# keep
+span.set_tag(MANUAL_KEEP_KEY)
+# drop
+span.set_tag(MANUAL_DROP_KEY)
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+```ruby
+# keep
+span.keep!
+# drop
+span.reject!
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+// keep
 span.SetTag(ext.ManualKeep, true)
-```
-- Set ManualDrop to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
-```
+
+// drop
 span.SetTag(ext.ManualDrop, true)
 ```
 
+{{% /tab %}}
+{{% tab "NodeJS" %}}
+```javascript
+// keep
+span.setTag(MANUAL_KEEP, true)
+// drop
+span.setTag(MANUAL_DROP, true)
+
+```
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+```php
+// keep
+$span->setTag(Tag::MANUAL_KEEP, true);
+//drop
+$span->setTag(Tag::MANUAL_DROP, true);
+```
+
+{{% /tab %}}
+{{% tab "C++" %}}
+```cpp
+// keep
+span->SetTag(datadog::tags::manual_keep, true);
+//drop
+span->SetTag(datadog::tags::manual_drop, true);
+
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+```cs
+// keep
+span.SetTag(ManualKeep, true);
+// drop
+span.SetTag(ManualDrop, true);
+
+```
+
+{{% /tab %}}
+  {{< /tabs >}}
 ## Single spans (App Analytics)
 `ingestion_reason: analytic`
 
