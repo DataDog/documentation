@@ -173,20 +173,18 @@ You can search for profiles that correspond to a particular version. You can als
 
 {{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version"  style="width:100%;">}}
 
-## Deployment Metric
+## The time between deployments metric
 
-### Overview
+Every time a new deployment of a service is detected, Deployment Tracking calculates a value for the `time_between_deployments` metric, calculated as the duration in seconds between the new deployment and the deployment of the most recent version prior to that. 
 
-This deployment metric is collected through APM’s Deployment Tracking functionality. With Deployment Tracking, we emit a value every time a new deployment for a service is detected. The deployment metric is then calculated as the duration in seconds between the new deployment and the most recent one prior to that. 
+This metric exists for any APM service with version tagging enabled through [Unified Service Tagging][1]
 
-### Metric Definition
+### Metric definition
 
-`datadog.service.time_between_deployments{env, service, second_primary_tag}`
-
-**Prerequisite:** This metric exists for any APM service with version tagging enabled through [Unified Service Tagging][1]<br> 
-**Description:** Measure the total time elapsed between a new deployment and the most recent one prior to that
-**Metric Type:** [DISTRIBUTION][2]<br>
-**Tags:** `env` and `service` and the [second primary tag][3]<br> 
+`datadog.service.time_between_deployments{env, service, second_primary_tag}`<br>
+: The time in seconds elapsed between a deployment of a service and the deployment of the most recent version prior to that.
+**Metric type:** [DISTRIBUTION][2]<br>
+**Tags:** The metric is tagged with the service's `env`, `service`, and [second primary tag][3].
 
 ### Examples
 
