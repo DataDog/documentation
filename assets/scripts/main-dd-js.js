@@ -1,11 +1,9 @@
 import 'jquery';
 import 'bootstrap';
 
-import './jqmath-vanilla';
 import './datadog-docs';
 import './utms';
 
-import './components/search';
 import './components/copy-code';
 import './components/global-modals';
 // import './components/header';
