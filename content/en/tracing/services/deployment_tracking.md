@@ -173,9 +173,32 @@ You can search for profiles that correspond to a particular version. You can als
 
 {{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version"  style="width:100%;">}}
 
+## Deployment Metric
+
+### Overview
+
+This deployment metric is collected through APM’s Deployment Tracking functionality. With Deployment Tracking, we emit a value every time a new deployment for a service is detected. The deployment metric is then calculated as the duration in seconds between the new deployment and the most recent one prior to that. 
+
+### Metric Definition
+
+`datadog.service.time_between_deployments{env, service, second_primary_tag}`
+
+**Prerequisite:** This metric exists for any APM service with version tagging enabled through [Unified Service Tagging][1]<br> 
+**Description:** Measure the total time elapsed between a new deployment and the most recent one prior to that
+**Metric Type:** [DISTRIBUTION][2]<br>
+**Tags:** `env` and `service` and the [second primary tag][3]<br> 
+
+### Examples
+
+If you have a service that deploys version A at time = 0 and version B at time = 10, then the value of the metric `datadog.service.time_between_deployments` is 10.
+
+If you deploy version X at time = 20, version Y at time = 30, and version Y again at time = 45, the value of the metric `datadog.service.time_between_deployments` is 25 (the time of the most recent Y minus the last X). 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /getting_started/tagging/unified_service_tagging/
+[2]: /metrics/types/?tab=distribution#metric-types
+[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
