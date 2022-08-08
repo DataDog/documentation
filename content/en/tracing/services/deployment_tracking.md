@@ -181,7 +181,7 @@ This metric exists for any APM service with version tagging enabled through [Uni
 
 ### Metric definition
 
-`datadog.service.time_between_deployments{env, service, second_primary_tag}`<br>
+`datadog.service.time_between_deployments{env, service, second_primary_tag}`
 : The time in seconds elapsed between a deployment of a service and the deployment of the most recent version prior to that.
 **Metric type:** [DISTRIBUTION][2]<br>
 **Tags:** The metric is tagged with the service's `env`, `service`, and [second primary tag][3].
