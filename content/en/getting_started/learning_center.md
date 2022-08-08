@@ -33,9 +33,12 @@ aliases:
   - /videos/weekly_monitor_report/
 ---
 
+## Overview
+
 Datadog is an extensive platform for understanding your infrastructure. [The Datadog Learning Center][1] ensures you are able to leverage everything the platform has to offer.
 
-For a list of available courses, see [Courses][2].
+For a list of available courses and labs, see [Courses][2] and [Labs][3].
 
 [1]: https://learn.datadoghq.com
-[2]: https://learn.datadoghq.com/course/index.php
+[2]: https://learn.datadoghq.com/collections
+[3]: https://learn.datadoghq.com/pages/labs
