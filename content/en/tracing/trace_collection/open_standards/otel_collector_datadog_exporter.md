@@ -80,9 +80,9 @@ The host name that OpenTelemetry signals are tagged with is obtained based on th
 
 To get better metadata for traces and for smooth integration with Datadog:
 
-- **Use resource detectors**: If they are provided by the language SDK, attach container information as resource attributes. For example, in Go, use the [`WithContainer()`][29] resource option.
+- **Use resource detectors**: If they are provided by the language SDK, attach container information as resource attributes. For example, in Go, use the [`WithContainer()`][8] resource option.
 
-- **Apply [Unified Service Tagging][30]**: This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
+- **Apply [Unified Service Tagging][9]**: This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
 
 
 ## Using Docker
@@ -106,13 +106,13 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
 
 4. Run the container and expose the necessary port, using the previously defined `collector.yaml` file. For example, considering you are using port 4317:
 
-      ```
-      $ docker run \
-          -p 4317:4317 \
-          --hostname $(hostname) \
-          -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
-          otel/opentelemetry-collector-contrib:<VERSION>
-      ```
+   ```
+   $ docker run \
+       -p 4317:4317 \
+       --hostname $(hostname) \
+       -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
+       otel/opentelemetry-collector-contrib:<VERSION>
+   ```
 
 5. Make sure you've configured your application with the appropriate resource attributes for [unified service tagging](#unified-service-tagging).
 
@@ -132,25 +132,25 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
 
 4. Run the OpenTelemetry Collector and application containers as part of the same network.
 
-    ```
-    # Run the OpenTelemetry Collector
-    docker run -d --name opentelemetry-collector \
-              --network <NETWORK_NAME> \
-              --hostname $(hostname) \
-              -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
-              otel/opentelemetry-collector-contrib:<VERSION>
-    ```
+   ```
+   # Run the OpenTelemetry Collector
+   docker run -d --name opentelemetry-collector \
+       --network <NETWORK_NAME> \
+       --hostname $(hostname) \
+       -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
+       otel/opentelemetry-collector-contrib:<VERSION>
+   ```
 
     When running the application container, ensure that the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` is configured to use the appropriate hostname for the OpenTelemetry Collector. In the example below, this is `opentelemetry-collector`.
 
-    ```
-    # Run the application container
-    docker run -d --name app \
-              --network <NETWORK_NAME> \
-              --hostname $(hostname) \
-              -e OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemetry-collector:4317 \
-              company/app:latest
-    ```
+   ```
+   # Run the application container
+   docker run -d --name app \
+       --network <NETWORK_NAME> \
+       --hostname $(hostname) \
+       -e OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemetry-collector:4317 \
+       company/app:latest
+   ```
 
 ## Using Kubernetes
 
@@ -204,30 +204,30 @@ For Gateway deployments:
 
 2. Change the DaemonSet to include an [OTLP exporter][19] instead of the Datadog Exporter [currently in place][20]:
 
-```yaml
-# ...
-exporters:
-  otlp:
-    endpoint: "<GATEWAY_HOSTNAME>:4317"
-# ...
-```
+   ```yaml
+   # ...
+   exporters:
+     otlp:
+       endpoint: "<GATEWAY_HOSTNAME>:4317"
+   # ...
+   ```
 
 3. Make sure that the service pipelines use this exporter, instead of the Datadog one that [is in place in the example][21]:
 
-```yaml
-# ...
-    service:
-      pipelines:
-        metrics:
-          receivers: [otlp]
-          processors: [resourcedetection, k8sattributes, batch]
-          exporters: [otlp]
-        traces:
-          receivers: [otlp]
-          processors: [resourcedetection, k8sattributes, batch]
-          exporters: [otlp]
-# ...
-```
+   ```yaml
+   # ...
+       service:
+         pipelines:
+           metrics:
+             receivers: [otlp]
+             processors: [resourcedetection, k8sattributes, batch]
+             exporters: [otlp]
+           traces:
+             receivers: [otlp]
+             processors: [resourcedetection, k8sattributes, batch]
+             exporters: [otlp]
+   # ...
+   ```
 
    This ensures that each agent forwards its data via the OTLP protocol to the Collector Gateway. 
 
@@ -235,12 +235,12 @@ exporters:
 
 5. To ensure that Kubernetes metadata continues to be applied to traces, tell the [`k8sattributes` processor][22] to forward the Pod IP to the Gateway Collector so that it can obtain the metadata:
 
-```yaml
-# ...
-k8sattributes:
-  passthrough: true
-# ...
-```
+   ```yaml
+   # ...
+   k8sattributes:
+     passthrough: true
+   # ...
+   ```
 
   For more information about the `passthrough` option, read [its documentation][23].
 
@@ -256,42 +256,42 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
 
 3. Now that the Datadog Agent is ready to receive OTLP traces and metrics, change your [OpenTelemetry Collector Daemonset](#daemonset-deployment) to use the [OTLP exporter][19] instead of the Datadog Exporter. To do so, add it to [your config map][26]:
 
-```yaml
-# ...
-exporters:
-  otlp:
-    endpoint: "${HOST_IP}:4317"
-# ...
-```
+   ```yaml
+   # ...
+   exporters:
+     otlp:
+       endpoint: "${HOST_IP}:4317"
+   # ...
+   ```
 
 4. Make sure that the `HOST_IP` environment variable is provided [in the DaemonSet][27]:
 
-```yaml
-# ...
-        env:
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-# ...
-```
+   ```yaml
+   # ...
+           env:
+           - name: HOST_IP
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.hostIP
+   # ...
+   ```
 
 5. Make sure that the [service pipelines][21] are using OTLP:
 
-```yaml
-# ...
-    service:
-      pipelines:
-        metrics:
-          receivers: [otlp]
-          processors: [resourcedetection, k8sattributes, batch]
-          exporters: [otlp]
-        traces:
-          receivers: [otlp]
-          processors: [resourcedetection, k8sattributes, batch]
-          exporters: [otlp]
-# ...
-```
+   ```yaml
+   # ...
+       service:
+         pipelines:
+           metrics:
+             receivers: [otlp]
+             processors: [resourcedetection, k8sattributes, batch]
+             exporters: [otlp]
+           traces:
+             receivers: [otlp]
+             processors: [resourcedetection, k8sattributes, batch]
+             exporters: [otlp]
+   # ...
+   ```
 
 ### Application Configuration
 
@@ -299,19 +299,19 @@ To configure your application container:
 
  1. Ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet in both [agent](#daemonset-deployment) and [gateway](#gateway-collector-service) deployments, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][28]:
 
-```yaml
-# ...
-        env:
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-          # The application SDK must use this environment variable in order to successfully
-          # connect to the DaemonSet's collector.
-        - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: "http://$(HOST_IP):4318"
-# ...
-```
+   ```yaml
+   # ...
+           env:
+           - name: HOST_IP
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.hostIP
+             # The application SDK must use this environment variable in order to successfully
+             # connect to the DaemonSet's collector.
+           - name: OTEL_EXPORTER_OTLP_ENDPOINT
+             value: "http://$(HOST_IP):4318"
+   # ...
+   ```
 
 2. Ensure your OpenTelemetry Instrumentation Library SDK is configured correctly, following the instructions in [Configuring your application](#configuring-your-application).
 
@@ -326,8 +326,8 @@ To configure your application container:
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
 [7]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
-[8]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#detecting-resource-information-from-the-environment
-[9]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/detectors
+[8]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
+[9]: /getting_started/tagging/unified_service_tagging/
 [10]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L41-L46
@@ -347,5 +347,3 @@ To configure your application container:
 [26]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L15
 [27]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33
 [28]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L24-L32
-[29]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
-[30]: /getting_started/tagging/unified_service_tagging/
