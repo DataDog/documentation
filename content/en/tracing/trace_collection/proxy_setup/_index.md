@@ -565,15 +565,21 @@ of the higher-level `CronJob`.
 
 ## Istio Sampling
 
-To control the volume of Istio traces that are sent to Datadog, specify a sampling rate by setting the parameter `DD_TRACE_SAMPLING_RULES` to a value between `0.0` (0%) and `1.0` (100%). If no value is specified, 100% of traces starting from Istio are sent.
+To control the volume of Istio traces that are sent to Datadog, configure a
+sampling rule whose `"sample_rate"` is a value between `0.0` (0%) and `1.0`
+(100%). Configure sampling rules with the `DD_TRACE_SAMPLING_RULES`
+environment variable. If `DD_TRACE_SAMPLING_RULES` is not specified, then 100%
+of Istio traces are sent to Datadog.
 
 **Note**: These environment variables apply only to the subset of traces indicated by the `values.pilot.traceSampling` setting, hence the required `--set values.pilot.traceSampling=100.0` during Istio configuration.
 
 To use the [Datadog Agent calculated sampling rates][9] (10 traces per second per Agent) and ignore the default sampling rule set to 100%, set the parameter `DD_TRACE_SAMPLING_RULES` to an empty array:
 
+```bash
+DD_TRACE_SAMPLING_RULES='[]'
 ```
-DD_TRACE_SAMPLING_RULES=[]
-```
+
+Explicitly specifying an empty array of rules is different from not specifying rules.
 
 To configure `DD_TRACE_SAMPLING_RULES`, in each deployment whose namespace is labeled `istio-injection=enabled`, set the environment variable as part of the `apm.datadoghq.com/env` annotation of the deployment spec template:
 ```
@@ -587,6 +593,10 @@ spec:
       annotations:
         apm.datadoghq.com/env: '{"DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1", "DD_TRACE_SAMPLING_RULES": "[]"}'
 ```
+`apm.datadoghq.com/env` is a string whose content is a JSON object mapping
+environment variable names to values.  The environment variable values are
+themselves strings, and in the case of `DD_TRACE_SAMPLING_RULES`, the string
+value is a JSON array of objects.
 
 ## Environment variables
 
@@ -655,9 +665,6 @@ spec:
 Automatic Protocol Selection may determine that traffic between the sidecar and Agent is HTTP, and enable tracing.
 This can be disabled using [manual protocol selection][12] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
 If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specification.
-
-
-
 
 [1]: /integrations/istio/
 [2]: /network_monitoring/performance/setup/#istio
