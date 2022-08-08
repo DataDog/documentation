@@ -45,7 +45,7 @@ If job log collection is supported and enabled for the CI provider, related log 
 
 **Note**: Job log collection is supported for a limited set of providers:
 - [GitHub Actions][2]
-- [Gitlab][3] (beta)
+- [GitLab][3] (beta)
 - [Jenkins][4]
 
 ## Pipeline executions details and traces
@@ -54,7 +54,7 @@ On the [Pipeline Executions][5] page, you can see aggregated data about pipeline
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
-Alternatively, click the [Analytics][6] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
+Alternatively, click the [**Analytics**][6] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and share on dashboards.
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
