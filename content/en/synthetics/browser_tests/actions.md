@@ -35,7 +35,7 @@ Choose from:
 
 ### Type text
 
-[Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (such as forms or text areas):
+[Datadog browser test recorder extension][3] automatically records text input in any fields of your website (such as forms or text areas):
 
 {{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="100%">}}
 
@@ -268,7 +268,7 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
-Because browser tests load external JavaScript is by adding it to the page, it only works if your website accepts it.
+Because browser tests load external JavaScript by adding the script to the page, they only work if your website accepts external JavaScript.
 
 #### Global variable
 
@@ -364,7 +364,7 @@ If you want to use a variable on automatically recorded steps, click the **Injec
 
 At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
 
-Some variables are only computed at runtime (for example, a variable from HTTP request or from JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
+Some variables are only computed at runtime (for example, a variable from an HTTP request or from a JavaScript step). To record a step using one of these variables, record a step with the actual variable value, then replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step definition before saving your test. 
 
 If a variable is assigned different values along your browser test steps (for example, across subtests), the variable systematically uses the value that was first assigned to it.
 
