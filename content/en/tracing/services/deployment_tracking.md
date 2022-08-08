@@ -177,12 +177,11 @@ You can search for profiles that correspond to a particular version. You can als
 
 Every time a new deployment of a service is detected, Deployment Tracking calculates a value for the `time_between_deployments` metric, calculated as the duration in seconds between the new deployment and the deployment of the most recent version prior to that. 
 
-This metric exists for any APM service with version tagging enabled through [Unified Service Tagging][1]
-
 ### Metric definition
 
 `datadog.service.time_between_deployments{env, service, second_primary_tag}`
-: The time in seconds elapsed between a deployment of a service and the deployment of the most recent version prior to that.
+: **Prerequisite:** This metric exists for any APM service with version tagging enabled through [Unified Service Tagging][1].<br>
+**Description:** The time in seconds elapsed between a deployment of a service and the deployment of the most recent version prior to that.<br>
 **Metric type:** [DISTRIBUTION][2]<br>
 **Tags:** The metric is tagged with the service's `env`, `service`, and [second primary tag][3].
 
