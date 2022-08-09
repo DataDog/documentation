@@ -34,33 +34,44 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 - [Datadog Cluster Monitoring for Pivotal Platform][1]
 - [Datadog Application Monitoring for Pivotal Platform][2]
 
-## PKS
-
-PKS environments can use the Datadog [Cluster Monitoring tile][1] and the [pivotal_pks][3] integration together to monitor your cluster.
-
-For kubelet cluster based workloads, use the [pivotal_pks integration][3] to install the Datadog Agent with your workers.
-
-Use the [Cluster Monitoring Tile][1] to install the Datadog Agent on each non worker VM in your PKS environment. In environments without PAS installed, select the `Resource Config` section of the tile and set `instances` of the `datadog-firehose-nozzle` to `0`.
-
 ## Monitor your applications
 
 Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][4] for Pivotal Platform that installs a [Datadog DogStatsD binary][5] and Datadog Agent in the container your app is running on.
 
-### Setup
+## Setup
+
+Use the VMware Tanzu setup options for the most straightforward approach.
+
+{{< tabs >}}
+{{% tab "Cluster Monitoring through VMware Tanzu" %}}
+
+Read the [VMware Tanzu documentation][1] for installation and configuration steps.
+
+[1]: https://docs.pivotal.io/partners/datadog/installing.html
+
+{{% /tab %}}
+{{% tab "Application Monitoring through VMware Tanzu" %}}
+
+Read the [VMware Tanzu documentation][1] for installation and configuration steps.
+
+[1]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+
+{{% /tab %}}
+{{% tab "Manual" %}}
 
 #### Pivotal Platform < 1.12
 
-The Datadog buildpack uses the Pivotal Platform [multi-buildpack][6] feature that was introduced in version `1.12`.
+The Datadog buildpack uses the Pivotal Platform [multi-buildpack][1] feature that was introduced in version `1.12`.
 
-For older versions, Pivotal Platform provides a back-port of this feature in the form of a [buildpack][7]. You must install and configure this backport in order to use Datadog's buildpack:
+For older versions, Pivotal Platform provides a back-port of this feature in the form of a [buildpack][2]. You must install and configure this backport in order to use Datadog's buildpack:
 
-1. **Upload the multi-buildpack back-port.** Download the latest [multi-build pack release][7] and upload it to your Pivotal Platform environment.
+1. **Upload the multi-buildpack back-port.** Download the latest [multi-build pack release][2] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. **Add a multi-buildpack manifest to your application.** As detailed [on the multi-buildpack back-port repo][8], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
+2. **Add a multi-buildpack manifest to your application.** As detailed [on the multi-buildpack back-port repo][3], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
 
     ```yaml
     buildpacks:
@@ -75,7 +86,7 @@ For older versions, Pivotal Platform provides a back-port of this feature in the
 
       Do not use the `latest` version here (replace `x.y.z` by the specific version you want to use).
 
-      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][9].
+      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][4].
 
 3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
@@ -85,26 +96,36 @@ For older versions, Pivotal Platform provides a back-port of this feature in the
 
 #### Pivotal Platform >= 1.12
 
-1. **Upload the Datadog Pivotal Platform Buildpack.** Download the latest Datadog [build pack release][10] and upload it to your Pivotal Platform environment.
+1. **Upload the Datadog Pivotal Platform Buildpack.** Download the latest Datadog [build pack release][5] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
-2. **Push your application with the Datadog buildpack and your buildpacks.** The process to push your application with multiple buildpacks is described in the [Pivotal Platform documentation][9].
+2. **Push your application with the Datadog buildpack and your buildpacks.** The process to push your application with multiple buildpacks is described in the [Pivotal Platform documentation][4].
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][9].
+      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][4].
 
 #### Meta-Buildpack **(deprecated)**
 
-If you are a [meta-buildpack][11] user, Datadog's buildpack can be used as a decorator out of the box.
+If you are a [meta-buildpack][6] user, Datadog's buildpack can be used as a decorator out of the box.
 
-**Note**: The [meta-buildpack][11] has been deprecated by pivotal in favor of the [multi-buildpack][7] and Datadog might drop support for it in a future release.
+**Note**: The [meta-buildpack][6] has been deprecated by pivotal in favor of the [multi-buildpack][2] and Datadog might drop support for it in a future release.
+
+[1]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
+[2]: https://github.com/cloudfoundry/multi-buildpack
+[3]: https://github.com/cloudfoundry/multi-buildpack#usage
+[4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
+[5]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
+[6]: https://github.com/cf-platform-eng/meta-buildpack
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Configuration
 
@@ -177,6 +198,10 @@ For Agent v6.12+, when using a [proxy configuration][1] with the Buildpack, a ve
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event explorer. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="cloud-foundry-log-misconfigured_proxy"  >}}
+
+#### Tags
+
+You can use tags to correlate data across infrastructure hosts and APM through [Unified Service Tagging][31].
 
 [1]: /agent/logs/proxy/
 
@@ -442,15 +467,8 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 
 [1]: https://network.pivotal.io/products/datadog
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
-[3]: /integrations/pivotal_pks/
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[6]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
-[7]: https://github.com/cloudfoundry/multi-buildpack
-[8]: https://github.com/cloudfoundry/multi-buildpack#usage
-[9]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
-[10]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
-[11]: https://github.com/cf-platform-eng/meta-buildpack
 [12]: /tracing/setup/
 [14]: /libraries/
 [15]: https://bosh.io/docs/bosh-cli.html
@@ -469,3 +487,4 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [28]: https://github.com/cloudfoundry/loggregator-api
 [29]: https://docs.cloudfoundry.org/running/all_metrics.html
 [30]: /profiler/enabling/
+[31]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#containerized-environment
