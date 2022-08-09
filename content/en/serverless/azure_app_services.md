@@ -52,7 +52,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 2. The extension supports the following resource types:
     - Azure App Service Web Apps
-    - Function Apps hosted on Basic, Standard and Premium plans. 
+    - Function Apps hosted on Basic, Standard, and Premium plans. 
 
     <div class="alert alert-warning">Function Apps on consumption plans and out-of-process (isolated) functions are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
