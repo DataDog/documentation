@@ -451,6 +451,31 @@ For information and options, read [the NodeJS tracer documentation][1].
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+The Python tracer package provides the `tracer.set_user` function, which allows you to monitor authenticated requests by adding user information to the trace.
+
+This example shows how to set user monitoring tags:
+
+```python
+from ddtrace import tracer
+
+@app.route("/")
+def view():
+    # Record user information in the trace the span belongs to
+    tracer.set_user(
+        user_id="usr.id",
+        email="usr.email",
+        name="usr.name",
+        session_id="usr.session_id",
+        role="usr.role",
+        scope="usr.scope"
+    )
+    return "OK"
+```
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Data security considerations
