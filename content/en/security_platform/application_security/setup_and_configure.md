@@ -236,7 +236,7 @@ This way, you can identify bad actors that are generating suspicious security ac
 
 You can [add custom tags to your root span][1], or use the instrumentation functions described below.
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
