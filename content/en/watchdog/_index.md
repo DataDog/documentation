@@ -71,7 +71,7 @@ Need help? Contact [Datadog support][15].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/system/
-[2]: /integrations/redis/
+[2]: /integrations/redisdb/
 [3]: /integrations/postgres/
 [4]: /integrations/nginx/
 [5]: /integrations/amazon_web_services/
