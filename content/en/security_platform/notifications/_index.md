@@ -17,16 +17,16 @@ further_reading:
 
 A security signal is generated when a threat is detected in the Datadog Security Platform. You can send notifications to keep your team informed when these signals are generated. Notifications can be set up for specific [Detection Rules](#detection-rules-notifications) and also more broadly with [Notification Rules](#notification-rules). See [Notification Variables][1] on how to customize the notifications based on the signal's severity and specific context on the threat. 
 
-### Notification channels
+## Notification channels
 
 Send notifications through email, Slack, Jira, PagerDuty, or a webhook. 
 
-#### Email
+### Email
 
 * Notify an active Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. An email address associated with a pending Datadog user invitation or a disabled user is considered inactive and does not receive notifications.
 * Notify any non-Datadog user by email with `@<EMAIL>`.
 
-#### Integrations
+### Integrations
 
 Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. 
 
@@ -47,7 +47,7 @@ When you [create or modify a new detection rule][10], you can use the **Set rule
 
 ### Set rule case
 
-In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the selected recipient(s). 
+In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the [selected recipient(s)](#notification-channels). 
 
 ### Say what's happening
 
