@@ -98,15 +98,15 @@ If there is a Lookup Processor using a Reference Table for Log enrichment, then 
 
 ## Monitoring Reference Table Activity
 
-Reference table activity can be monitored via [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select a table and click the cog dropdown in the top right next to **Update Config** (you will need org management permissions to view audit trail). 
+Reference table activity can be monitored with [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select a table and click the cog dropdown in the top right next to **Update Config** (you will need org management permissions to view audit trail).
 
 ### Audit Trail
 
-Audit trail for reference tables is used for tracking user triggered actions. Audit trail events are sent when a user initially uploads or imports a csv file, or creates, modifies, or deletes a reference table. The `reference_table_file` Asset Type will show events for imports and/or uploads, and the `reference_table` Asset Type will show events for creation, modification, or deletion of a reference table. The purpose of the audit trail is to provide observability into the content of a reference table.
+Audit trail for reference tables is used for tracking user triggered actions. Audit trail events are sent when a user initially uploads or imports a csv file, or creates, modifies, or deletes a reference table. The `reference_table_file` Asset Type will show import/upload events, and the `reference_table` Asset Type will show reference table events. The purpose of the audit trail is to provide observability into the content of a reference table.
 
 ### Change Events
 
-Change events for reference tables are used for tracking either automated or user triggered actions, and are sent when a cloud file is imported either via a user or automatic refresh. While events track user triggered actions as well, they are mainly used for tracking imports triggered when Reference Tables automatically pulls the corresponding file from your cloud storage when a change is detected. Events contain information for the success status, path, and table name of the import. If an error is encountered, information on the type of error is also provided.
+Change events for reference tables are used for tracking either automated or user triggered actions. They are sent when a cloud file is imported either from a user or automatic refresh. While events track user triggered actions as well, they are mainly used for tracking imports triggered when Reference Tables automatically pull a new csv file. Events contain information for the success status, path, and table name of the import. If an error is encountered, information on the type of error is also provided.
 
 ### Alerting
 
