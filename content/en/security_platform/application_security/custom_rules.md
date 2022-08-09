@@ -176,13 +176,7 @@ Use the Tag Resulting Signals dropdown to tag your signals with different tags. 
 
 [1]: /security_platform/default_rules/#cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
-<<<<<<< HEAD
-[3]: /monitors/notify/?tab=is_alert#integrations
-[4]: /security_platform/notifications/rules/
-[5]: /security_platform/notifications/variables/
-[6]: /security_platform/notifications/variables/#template-variables
-=======
 [3]: /tracing/trace_explorer/query_syntax/
 [4]: /monitors/notify/?tab=is_alert#integrations
-[5]: /security_platform/notification_rules/
->>>>>>> master
+[5]: /security_platform/notifications/variables/
+[6]: /security_platform/notifications/variables/#template-variables
