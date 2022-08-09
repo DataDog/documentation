@@ -1,0 +1,42 @@
+{{ /* Creates an algolia record for individual sections (split by h2) of a page. */ }}
+
+{{ $hugo_context := .context }}
+{{ $page := .page }}
+{{ $content := .content }}
+{{ $tags := .tags }}
+{{ $rank := .rank }}
+{{ $section_header := "" }}
+{{ $section_content := "" }}
+{{ $content_array := split $page.Content "<h2" }}
+
+{{ range $content_array }}
+    {{ if in . "h2" }}
+        {{ $context := print "%s" . | printf "%s%s" "<h2" }}
+        {{ $section_header = index (split (index (split $context "</h2>") 0) ">") 1 }}
+        {{ $section_content = $context | plainify | truncate 1500 }}
+
+        {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
+            {{ /* todo: make sure url_with_anchor is unique when translated pages are introduced */ }}
+            {{ $url_with_anchor := print $page.Permalink "#" ($section_header | anchorize) }}
+            {{ $object_id := md5 $url_with_anchor }}
+            {{
+                $hugo_context.Scratch.Add "algoliaindex" (
+                    dict "objectID" $object_id
+                    "title" $title
+                    "section_header" $section_header
+                    "description"
+                    "content"
+                    "type"
+                    "permalink"
+                    "rel_permalink"
+                    "url_with_anchor"
+                    "language"
+                    "tags"
+                    "rank"
+                )
+            }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+
