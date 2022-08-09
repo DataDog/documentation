@@ -38,6 +38,15 @@ AWS Elastic Kubernetes Service (EKS)、Azure Kubernetes Service (AKS)、Google K
 
 Kubernetes のコントロールプレーンを監視するための専用のドキュメントと例については、[Kubernetes のコントロールプレーン監視][2]を参照してください。
 
+### Agent と Cluster Agent の最小バージョン
+
+Kubernetes の後期バージョンに関連する一部の機能では、Datadog Agent の最低バージョンが必要です。
+
+| Kubernetes バージョン | Agent バージョン  | Cluster Agent バージョン | 理由                              |
+|--------------------|----------------|-----------------------|---------------------------------------|
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet メトリクスの非推奨化       |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes リソースの非推奨化    |
+
 {{< tabs >}}
 {{% tab "Operator" %}}
 

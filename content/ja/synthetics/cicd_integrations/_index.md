@@ -10,18 +10,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
   tag: ブログ
   text: シフトレフトテストのベストプラクティス
-- link: https://learn.datadoghq.com/enrol/index.php?id=37
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: ラーニングセンター
   text: CI/CD パイプラインで Synthetic テストを実行する方法を学ぶ
 - link: /synthetics/api_tests/
   tag: ドキュメント
-  text: APIテストの設定
+  text: API テストを構成する方法を学ぶ
 - link: /synthetics/multistep
   tag: ドキュメント
-  text: マルチステップ API テストの構成
+  text: マルチステップ API テストを構成する方法を学ぶ
 - link: /synthetics/browser_tests/
   tag: ドキュメント
-  text: ブラウザテストの設定
+  text: ブラウザテストを構成する方法を学ぶ
 kind: documentation
 title: Synthetics と CI/CD
 ---

@@ -60,7 +60,7 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
 1. Follow the sample code or instructions below to submit your custom metric. 
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
@@ -128,6 +128,39 @@ def handler(event:, context:)
         )
     end
 end
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+```java
+package com.datadog.lambda.sample.java;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
+
+// import the statsd client builder
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
+public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
+
+    // instantiate the statsd client
+    private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
+
+    @Override
+    public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
+
+        // submit a distribution metric
+        Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
+
+        APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
+        response.setStatusCode(200);
+        return response;
+    }
+}
 ```
 
 {{< /programming-lang >}}

@@ -119,7 +119,7 @@ For more information, see [Using Synthetic Test Monitors][9].
 
 ### Create local variables
 
-To create a local variable, click **Create Local Variable** at the top right hand corner. You can define the value from one of the following available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -131,12 +131,12 @@ To create a local variable, click **Create Local Variable** at the top right han
 : Generates an alphanumeric string with `n` characters.
 
 `{{ date(n unit, format) }}`
-: Generates a date in one of our accepted formats with a value corresponding to the date the test is initiated at +/- `n` chosen unit.
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value corresponding to the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at +/- `n` units.
 
-When you have entered a name and a value, click **Add Variable**.
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 

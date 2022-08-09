@@ -8,13 +8,13 @@ aliases:
 - /ja/tracing/trace_ingestion/ingestion_controls
 description: APM で取り込み率を制御する方法。
 further_reading:
-- link: /tracing/trace_ingestion/mechanisms/
+- link: /tracing/trace_pipeline/ingestion_mechanisms/
   tag: ドキュメント
   text: 取り込みのメカニズム
-- link: /tracing/trace_retention/
+- link: /tracing/trace_pipeline/trace_retention/
   tag: ドキュメント
   text: トレースの保持
-- link: /tracing/trace_retention/usage_metrics/
+- link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
 kind: documentation
@@ -66,7 +66,7 @@ Infrastructure
 : サービスが実行しているホスト、コンテナ、および関数。
 
 Service status
-: Datadog Agent が CPU や RAM の限界に達したために一部のスパンがドロップされた場合は `Limited Resource`、一部のスパンがレガシーの[App Analytics メカニズム][6]を通じて取り込まれた場合は `Legacy Setup`、残りの時間は `OK` と表示されます。
+: Datadog Agent が [その構成で][12]設定された CPU や RAM の限界に達したために一部のスパンがドロップされた場合は `Limited Resource`、一部のスパンがレガシーの[App Analytics メカニズム][6]を通じて取り込まれた場合は `Legacy Setup`、残りの時間は `OK` と表示されます。
 
 環境、構成、ステータスでページを絞り込み、対策が必要なサービスを表示します。グローバルな取り込み量を減らすために、テーブルを`Downstream Bytes/s` 列でソートして、取り込み量の最も大きな割合を占めるサービスを表示します。
 
@@ -121,14 +121,15 @@ Traffic Breakdown の列は、サービスを起点とするすべてのトレ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/guide/metrics_namespace/
+[1]: /ja/tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
 [3]: https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler
-[4]: /ja/tracing/trace_ingestion/mechanisms#error-traces
-[5]: /ja/tracing/trace_ingestion/mechanisms#rare-traces
-[6]: /ja/tracing/trace_ingestion/mechanisms#single-spans-app-analytics
-[7]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
-[8]: /ja/tracing/trace_ingestion/mechanisms#in-tracing-libraries-user-defined-rules
-[9]: /ja/tracing/trace_retention_and_ingestion/usage_metrics
-[10]: /ja/tracing/trace_ingestion/mechanisms
+[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[9]: /ja/tracing/trace_pipeline/metrics
+[10]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [11]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[12]: /ja/tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
