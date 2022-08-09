@@ -189,21 +189,21 @@ Every time a new deployment of a service is detected, Deployment Tracking calcul
 
 If you have a service that deploys version A at time = 0 and version B at time = 10, then the value of the metric `datadog.service.time_between_deployments` is 10.
 
-   Time = 0 `{service: foo, env: prod, cluster-name: dev-shopist, version: A}`
+     Time = 0 `{service: foo, env: prod, cluster-name: dev-shopist, version: A}`
 
-   Time = 10 `{service: foo, env: prod, cluster_name: dev-shopist, version: B}` 
+     Time = 10 `{service: foo, env: prod, cluster_name: dev-shopist, version: B}` 
 
-   `datadog.service.time_between_deployments{env: prod, cluster_name: dev-shopist}` = 10 
+     `datadog.service.time_between_deployments{env: prod, cluster_name: dev-shopist}` = 10 
 
-If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for an ambiguous cluster is 25 (the time of the most recent Y minus the last X). 
+If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for any cluster is 25 (the time of the most recent Y minus the last X). 
 
-   Time = 20 `{service: foo, env: staging, cluster-name: dev-shopist, version: X}`
+     Time = 20 `{service: foo, env: staging, cluster-name: dev-shopist, version: X}`
 
-   Time = 30 `{service: foo, env: staging, cluster-name: us-staging, version: Y}`
+     Time = 30 `{service: foo, env: staging, cluster-name: us-staging, version: Y}`
 
-   Time = 45 `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
+     Time = 45 `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
 
-   `datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`
+     `datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`
 
 ## Further Reading
 
