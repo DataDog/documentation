@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-OpenTelemetry (OTel) is an open standard for the generation, collection, and export of telemetry data, such as metrics, traces, and logs. OTel is vendor-agnostic: by using this standard, you can switch to a different vendor (such as Datadog) with no code-level changes.
+[OpenTelemetry][1] (OTel) is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OTel provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
 ## Choose a workflow
 
@@ -26,6 +26,9 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
 ## Setup
 
 ### OTLP ingestion in the Datadog Agent {#otlp-ingest}
+
+{{< img src="metrics/otel/oltp_ingest.jpeg" alt="A flow chart showing a path from OTel SDKs/Libraries to the Datadog Agent to the Datadog backend." >}}
+
 **OTel SDKs/Libraries** -> **Datadog Agent** -> **Datadog**
 
 #### Use case
@@ -35,9 +38,9 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
 
 #### Configuration
 
-1. [Instrument your system with OpenTelemetry][1].
-2. [Enable OTLP ingestion][2] on the Datadog Agent.
-3. [Send OTLP telemetry][3] from your system to Datadog.
+1. [Instrument your system with OpenTelemetry][3].
+2. [Enable OTLP ingestion][4] on the Datadog Agent.
+3. [Send OTLP telemetry][5] from your system to Datadog.
 
 ### OTLP Exporter {#otlp-exporter}
 **OTel SDKs/Libraries** -> **OTel Collector** with the OTLP Exporter -> **Datadog Agent** -> **Datadog**
@@ -50,9 +53,9 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
 
 #### Configuration
 
-1. [Instrument your system with OpenTelemetry][1].
-2. [Enable OTLP ingestion through gRPC][2] on the Datadog Agent.
-3. Add an OTLP exporter to your [OTel configuration YAML file][4]. Point the exporter to the Datadog Agent endpoint. For example, if your Datadog Agent is listening on port 4317 and you are running the OTel Collector on the same host, you may define the exporter as:
+1. [Instrument your system with OpenTelemetry][3].
+2. [Enable OTLP ingestion through gRPC][4] on the Datadog Agent.
+3. Add an OTLP exporter to your [OTel configuration YAML file][6]. Point the exporter to the Datadog Agent endpoint. For example, if your Datadog Agent is listening on port 4317 and you are running the OTel Collector on the same host, you may define the exporter as:
    ```yaml
    receivers:
      otlp:
@@ -98,7 +101,10 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
    If you are using a containerized environment, ensure the `endpoint` setting is configured to use the approprate hostname for the Datadog Agent
 
 ### Datadog Exporter {#datadog-exporter}
-**OTel SDKs/Libraries** -> **OTel Collector** with the Datadog Exporter -> **Datadog**
+
+{{< img src="metrics/otel/datadog_exporter.jpeg" alt="A flow chart showing a path from numerous sources (application instrumented library, cloud integrations, and other monitoring solutions like Prometheus) to the OTel Collector with the Datadog Exporter to the Datadog backend." >}}
+
+**OTel SDKs/Libraries** and other sources -> **OTel Collector** with the Datadog Exporter -> **Datadog**
 
 #### Use case
 - You are collecting telemetry data from sources besides OTel SDKs and the Datadog Agent. For example: Prometheus metrics.
@@ -106,9 +112,9 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
 
 #### Configuration
 
-1. [Instrument your system with OpenTelemetry][1].
-2. Follow the [OTel Collector documentation][5] to install the `opentelemetry-collector-contrib` distribution, or any other distribution that includes the Datadog Exporter.
-3. Add a `datadog` exporter to your [OTel configuration YAML file][4]. The following is a minimum configuration file to retrieve system metrics:
+1. [Instrument your system with OpenTelemetry][3].
+2. Follow the [OTel Collector documentation][7] to install the `opentelemetry-collector-contrib` distribution, or any other distribution that includes the Datadog Exporter.
+3. Add a `datadog` exporter to your [OTel configuration YAML file][6]. The following is a minimum configuration file to retrieve system metrics:
    ```yaml
    receivers:
      hostmetrics:
@@ -139,8 +145,8 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
          processors: [batch]
          exporters: [datadog]
    ```
-   Add your [Datadog API key][6] and [site][7] (defaults to `datadoghq.com`).
-   See the [sample configuration file][8] for other available options.
+   Add your [Datadog API key][8] and [site][9] (defaults to `datadoghq.com`).
+   See the [sample configuration file][10] for other available options.
 
 #### 
 
@@ -148,11 +154,13 @@ There are three available workflows for sending OTel metrics to Datadog. Choose 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/concepts/instrumenting/
-[2]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-[3]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#sending-otlp-traces-from-the-application-to-datadog-agent
-[4]: https://opentelemetry.io/docs/collector/configuration/
-[5]: https://opentelemetry.io/docs/collector/getting-started/#deployment
-[6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /getting_started/site/
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
+[1]: https://opentelemetry.io/
+[2]: https://www.cncf.io/
+[3]: https://opentelemetry.io/docs/concepts/instrumenting/
+[4]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
+[5]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#sending-otlp-traces-from-the-application-to-datadog-agent
+[6]: https://opentelemetry.io/docs/collector/configuration/
+[7]: https://opentelemetry.io/docs/collector/getting-started/#deployment
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /getting_started/site/
+[10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
