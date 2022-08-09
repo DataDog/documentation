@@ -21,9 +21,9 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Java Tracer supports all JVMs on all platforms version 7 and higher.
+The latest Java Tracer supports all JVMs version 7 and higher on all platforms.
 
-For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), please read the [Compatibility Requirements][2] page.
+For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][2].
 
 ## Installation and getting started
 
@@ -104,7 +104,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Instrument Your Application
 
-Once the agent is installed, follow the instructions below to begin tracing your applications:
+After the agent is installed, to begin tracing your applications:
 
 1. Download `dd-java-agent.jar` that contains the latest Agent class files:
 
@@ -113,7 +113,7 @@ Once the agent is installed, follow the instructions below to begin tracing your
    ```
    To access a specific tracer version, visit Datadog's [Maven repository][4].
 
-2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, logs injection (if you are sending logs to Datadog), and trace volume control, add the `-javaagent` JVM argument and the following configuration options, as applicable:
+2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
     ```text
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
@@ -133,7 +133,6 @@ Once the agent is installed, follow the instructions below to begin tracing your
 
 Additional [configuration options](#configuration) are described below.
 
-3. Ensure the Datadog Agent is configured for APM and reachable from your application from the environment specific instructions [below](#configure-the-datadog-agent-for-apm).
 
 ### Add the Java Tracer to the JVM
 
