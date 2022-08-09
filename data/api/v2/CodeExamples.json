@@ -579,6 +579,27 @@
       "description": "Aggregate RUM events returns \"OK\" response"
     }
   ],
+  "CreateRUMApplication": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Create a new RUM application returns \"OK\" response"
+    }
+  ],
+  "DeleteRUMApplication": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Delete a RUM application returns \"No Content\" response"
+    }
+  ],
+  "GetRUMApplication": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get a RUM application returns \"OK\" response"
+    }
+  ],
   "ListRUMEvents": [
     {
       "group": "rum",

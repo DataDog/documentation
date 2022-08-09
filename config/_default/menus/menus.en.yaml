@@ -7830,6 +7830,66 @@ api:
         - ListRUMEvents
       unstable: []
       order: 2
+  - name: Update a RUM application
+    url: '#update-a-rum-application'
+    identifier: rum-update-a-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRUMApplication
+      unstable: []
+      order: 0
+  - name: Get a RUM application
+    url: '#get-a-rum-application'
+    identifier: rum-get-a-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRUMApplication
+      unstable: []
+      order: 0
+  - name: Delete a RUM application
+    url: '#delete-a-rum-application'
+    identifier: rum-delete-a-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRUMApplication
+      unstable: []
+      order: 0
+  - name: Create a new RUM application
+    url: '#create-a-new-rum-application'
+    identifier: rum-create-a-new-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRUMApplication
+      unstable: []
+      order: 0
+  - name: List all the RUM applications
+    url: '#list-all-the-rum-applications'
+    identifier: rum-list-all-the-rum-applications
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRUMApplications
+      unstable: []
+      order: 0
   - name: Aggregate RUM events
     url: '#aggregate-rum-events'
     identifier: rum-aggregate-rum-events
