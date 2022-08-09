@@ -134,7 +134,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
     ```dockerfile
     RUN yum -y install tar wget gzip
-    RUN wget -O /opt/dd-java-agent.jar https://dtdg.co/latest-java-tracer
+    RUN wget -O /opt/java/lib/dd-java-agent.jar https://dtdg.co/latest-java-tracer
     ```
 
 3. Set the required environment variables
