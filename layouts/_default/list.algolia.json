@@ -7,8 +7,8 @@
         {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
         {{ $object_id := md5 $rel_path -}}
         {{ $title := $page.Params.integration_title | default $page.Title }}
-        {{ $sectionHeader := "" }}
-        {{ $sectionContent := "" }}
+        {{ $section_header := "" }}
+        {{ $section_content := "" }}
         {{ $content := htmlUnescape $page.Plain | truncate 1500 }}
         {{ $tags := slice }}
         {{ $rank := 0 }}
@@ -20,18 +20,18 @@
         {{ else if in $page.RelPermalink "/guide/" }}
             {{ $tags = $tags | append "guide" }}
             {{ $rank = 20 }}
-        {{ else if in $page.RelPermalink "/account_management/rbac/permissions" }}
-            {{ $tags = $tags | append "rbac_permissions" }}
-            {{ $rank = 60 }}
-        {{ else if in $page.RelPermalink "/getting_started/" }}
-            {{ $tags = $tags | append "getting_started" }}
-            {{ $rank = 70 }}
         {{ else if in $page.RelPermalink "/security_platform/default_rules" }}
             {{ $tags = $tags | append "default_rules" }}
             {{ $rank = 30 }}
         {{ else if in $page.RelPermalink "/integrations/" }}
             {{ $tags = $tags | append "integrations" }}
             {{ $rank = 40 }}
+        {{ else if in $page.RelPermalink "/account_management/rbac/permissions" }}
+            {{ $tags = $tags | append "rbac_permissions" }}
+            {{ $rank = 60 }}
+        {{ else if in $page.RelPermalink "/getting_started/" }}
+            {{ $tags = $tags | append "getting_started" }}
+            {{ $rank = 70 }}
         {{ else }}
             {{ $tags = $tags | append "docs" }}
             {{ $rank = 50 }}
@@ -40,50 +40,52 @@
         {{ $contentArray := split $page.Content "<h2" }}
 
         {{ range $contentArray }}
-        {{ if in . "h2" }}
-            {{ $context := print "%s" . | printf "%s%s" "<h2" }}
-            {{ $sectionHeader = index (split (index (split $context "</h2>") 0) ">") 1 }}
-            {{ $sectionContent = $context | plainify | truncate 1500 }}
+            {{ if in . "h2" }}
+                {{ $context := print "%s" . | printf "%s%s" "<h2" }}
+                {{ $section_header = index (split (index (split $context "</h2>") 0) ">") 1 }}
+                {{ $section_content = $context | plainify | truncate 1500 }}
 
-            {{ if eq $sectionHeader "Further Reading" }}
-                {{ $sectionHeader = "" }}
-                {{ $sectionContent = "" }}
-            {{ end }}
+                {{ if eq $section_header "Further Reading" }}
+                    {{ $section_header = "" }}
+                    {{ $section_content = "" }}
+                {{ end }}
 
-            {{ if ne $sectionHeader "" }}
-                {{- /* Each section on a page gets indexed with own "sectionHeader" and  "content" */ -}}
-                {{ $object_id_section := md5 (print $object_id $sectionHeader) }}
-                {{- $.Scratch.Add "algoliaindex" (
-                dict "objectID" $object_id_section 
-                "title" $title
-                "sectionHeader" $sectionHeader
-                "description" $page.Description
-                "content" $sectionContent
-                "type" $page.Type
-                "permalink" $page.Permalink
-                "relpermalink" $page.RelPermalink
-                "language" $page.Language.Lang
-                "tags" $tags
-                "rank" $rank
-                ) -}}
+                {{ if ne $section_header "" }}
+                    {{- /* Each section on a page gets indexed with own "section_header" and "content" */ -}}
+                    {{ $url_with_anchor := print $page.Permalink "#" ($section_header | anchorize) }}
+
+                    {{ $object_id_section := md5 (print $object_id $section_header) }}
+                    {{- $.Scratch.Add "algoliaindex" (
+                        dict "objectID" $object_id_section 
+                        "title" $title
+                        "section_header" $section_header
+                        "description" $page.Description
+                        "content" $section_content
+                        "type" $page.Type
+                        "permalink" $page.Permalink
+                        "relpermalink" $page.RelPermalink
+                        "url_with_anchor" $url_with_anchor
+                        "language" $page.Language.Lang
+                        "tags" $tags
+                        "rank" $rank
+                    ) -}}
+                {{ end }}
             {{ end }}
         {{ end }}
-        {{ end }}
 
-        {{- /* Each page gets indexed without "sectionHeader" and with truncated "content" */ -}}
+        {{- /* Each page gets indexed without "section_header" and with truncated "content" */ -}}
         {{- $.Scratch.Add "algoliaindex" (
-        dict "objectID" $object_id 
-        "title" $title
-        "description" $page.Description
-        "content" $content
-        "type" $page.Type
-        "permalink" $page.Permalink
-        "relpermalink" $page.RelPermalink
-        "language" $page.Language.Lang
-        "tags" $tags
-        "rank" $rank
+            dict "objectID" $object_id 
+            "title" $title
+            "description" $page.Description
+            "content" $content
+            "type" $page.Type
+            "permalink" $page.Permalink
+            "relpermalink" $page.RelPermalink
+            "language" $page.Language.Lang
+            "tags" $tags
+            "rank" $rank
         ) -}}
-
     {{- end -}}
 {{- end -}}
 
