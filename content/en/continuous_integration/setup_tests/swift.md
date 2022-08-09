@@ -88,11 +88,11 @@ end
 
 ### Configuring Datadog
 
-To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
+To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if you are using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
-<div class="alert alert-warning"><strong>Remember</strong>: You should have your main target in the variables expansion of the environment variables as indicated in previous paragraph; if not selected, variables are not valid </div>
+<div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
