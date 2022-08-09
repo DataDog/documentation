@@ -23,12 +23,14 @@ Send notifications through email, Slack, Jira, PagerDuty, or a webhook.
 
 #### Email
 
-* Notify an active Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. **Note**: An email address associated with a pending Datadog user invitation or a disabled user is considered inactive and does not receive notifications.
+* Notify an active Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. An email address associated with a pending Datadog user invitation or a disabled user is considered inactive and does not receive notifications.
 * Notify any non-Datadog user by email with `@<EMAIL>`.
 
 #### Integrations
 
-Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. Below is a list of prefixes and example links:
+Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. 
+
+This table lists prefixes and example links:
 
 | Integration    | Prefix       | Examples       |
 |----------------|--------------|----------------|
@@ -37,35 +39,35 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 | [Slack][6]     | `@slack`     | [Examples][7]  |
 | [Webhooks][8]  | `@webhook`   | [Examples][9] |
 
-**Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
+Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
 
 ## Detection Rule notifications
 
-When you [create or modify a new Detection Rule][10], you can use the Set Rule Case or Say What’s Happening section to define the notifications that are sent. 
+When you [create or modify a new detection rule][10], you can use the **Set Rule Case** or **Say What’s Happening** section to define the notifications that are sent. 
 
 ### Set rule case
 
-In the Set Rule Case section, add rule cases to determine when a Detection Rule triggers a security signal and the severity of the signal. Use the Notify dropdown to send signal notifications generated from that case to the selected recipient(s). 
+In the **Set Rule Case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the selected recipient(s). 
 
 ### Say what's happening
 
-Use the Say What's Happening section to determine the content that is sent when a signal is generated. 
+Use the **Say What's Happening** section to determine the content that is sent when a signal is generated. 
 
 #### Rule name
 
-Add a rule name for your detection rule. The rule name appears in the Detection Rules list view, as well as the title of the signal. 
+Add a rule name for your detection rule. The rule name appears in the **Detection Rules** list view, as well as the title of the signal. 
 
 #### Message
 
-Use standard Markdown and [Notification Variables][1] to provide specific details about the signal by referencing its tags and event attributes.
+Use standard Markdown and [notification variables][1] to provide specific details about the signal by referencing its tags and event attributes.
 
 #### Tags
 
-Use the Tag Resulting Signals dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`. 
+Use the **Tag Resulting Signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`. 
 
 ## Notification rules
 
-Notification Rules allow you to set general alerting preferences so that you don’t have to set up notification preferences for individual Detection Rules. For example, you can set up a Notification Rule to send you a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][11] for more information on setup and configuration.
+Notification rules allow you to set general alerting preferences so that you don’t have to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][11] for more information on setup and configuration.
 
 ## Further reading
 
