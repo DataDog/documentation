@@ -39,7 +39,7 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 2. Filter the table to see branches, services, or commits of interest to you.
 
-3. Look at the **New Flaky** column to see the number of new flaky tests that were introduced by the latest commit. These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table for the current branch or the default branch of the repository.
+3. Look at the **New Flaky** column to see the number of new flaky tests introduced by the latest commit. These are tests that exhibit flaky behavior and didn’t previously exist in the **Flaky Tests** table for the current branch or default branch of the repository.
 
 ### Ignore new flaky tests detected by mistake
 
