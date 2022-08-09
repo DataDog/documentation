@@ -201,7 +201,7 @@ Time between deployments
 : `datadog.service.time_between_deployments{env: prod, cluster_name: dev-shopist} = 10`
 
 
-If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for an ambiguous cluster is 25 (the time of the most recent Y minus the last X): 
+If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for any cluster is 25 (the time of the most recent Y minus the last X): 
 
 Time = 20
 : `{service: foo, env: staging, cluster-name: dev-shopist, version: X}`
