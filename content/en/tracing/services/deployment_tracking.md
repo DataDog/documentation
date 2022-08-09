@@ -216,7 +216,6 @@ Max time between deployments:
 : `max:datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`
 
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
