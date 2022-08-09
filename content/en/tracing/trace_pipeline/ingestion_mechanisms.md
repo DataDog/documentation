@@ -336,9 +336,9 @@ span->SetTag(datadog::tags::manual_drop, true);
 {{% tab ".NET" %}}
 ```cs
 // keep
-span.SetTag(ManualKeep, true);
+span.SetTag(Datadog.Trace.Tags.ManualKeep, "true");
 // drop
-span.SetTag(ManualDrop, true);
+span.SetTag(Datadog.Trace.Tags.ManualDrop, "true");
 
 ```
 
