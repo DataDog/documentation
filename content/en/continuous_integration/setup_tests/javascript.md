@@ -126,7 +126,7 @@ You can add custom tags to your tests by using the current active span:
   })
 ```
 
-To create filters or group bys for these tags, you need to create facets for them. For more information about custom instrumentation read the [NodeJS Custom Instrumentation][1] documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -146,7 +146,7 @@ If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error
  Error: Cannot find module 'dd-trace/ci/init'
 ```
 
-You can fix it by setting `NODE_OPTIONS` to the following:
+You can fix this by setting `NODE_OPTIONS` to the following:
 
 {{< code-block lang="bash" >}}
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
@@ -166,7 +166,7 @@ You can add custom tags to your test by grabbing the current active span:
   });
 ```
 
-To create filters or group bys for these tags, you must create facets for them. For more information about custom instrumentation, read the [NodeJS Custom Instrumentation][1] documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -268,7 +268,7 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or group bys for these tags, you must create facets for them. For more information about custom instrumentation, read the [NodeJS Custom Instrumentation][1] documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
 
 ### Cypress - RUM integration
 
