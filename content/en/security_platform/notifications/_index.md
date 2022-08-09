@@ -43,15 +43,15 @@ Handles that include parentheses (`(`, `)`) are not supported. When a handle wit
 
 ## Detection Rule notifications
 
-When you [create or modify a new detection rule][10], you can use the **Set Rule Case** or **Say What’s Happening** section to define the notifications that are sent. 
+When you [create or modify a new detection rule][10], you can use the **Set rule case** or **Say what’s happening** section to define the notifications that are sent. 
 
 ### Set rule case
 
-In the **Set Rule Case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the selected recipient(s). 
+In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the selected recipient(s). 
 
 ### Say what's happening
 
-Use the **Say What's Happening** section to determine the content that is sent when a signal is generated. 
+Use the **Say what's happening** section to determine the content that is sent when a signal is generated. 
 
 #### Rule name
 
@@ -63,7 +63,7 @@ Use standard Markdown and [notification variables][1] to provide specific detail
 
 #### Tags
 
-Use the **Tag Resulting Signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`. 
+Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`. 
 
 ## Notification rules
 
