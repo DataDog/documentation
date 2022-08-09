@@ -1,8 +1,8 @@
-{{ /* Creates an algolia record for individual sections (split by h2) of a page. */ }}
+{{- /* Creates an algolia json record for each individual section (split by h2 header) of the given page. */ -}}
 
 {{ $hugo_context := .context }}
 {{ $page := .page }}
-{{ $content := .content }}
+{{ $title := .title }}
 {{ $tags := .tags }}
 {{ $rank := .rank }}
 {{ $section_header := "" }}
@@ -16,7 +16,7 @@
         {{ $section_content = $context | plainify | truncate 1500 }}
 
         {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
-            {{ /* todo: make sure url_with_anchor is unique when translated pages are introduced */ }}
+            {{- /* todo: make sure url_with_anchor is unique when translated pages are introduced */ -}}
             {{ $url_with_anchor := print $page.Permalink "#" ($section_header | anchorize) }}
             {{ $object_id := md5 $url_with_anchor }}
             {{
@@ -24,15 +24,15 @@
                     dict "objectID" $object_id
                     "title" $title
                     "section_header" $section_header
-                    "description"
-                    "content"
-                    "type"
-                    "permalink"
-                    "rel_permalink"
-                    "url_with_anchor"
-                    "language"
-                    "tags"
-                    "rank"
+                    "description" $page.Description
+                    "content" $section_content
+                    "type" $page.Type
+                    "permalink" $page.Permalink
+                    "rel_permalink" $page.RelPermalink
+                    "url_with_anchor" $url_with_anchor
+                    "language" $page.Language.Lang
+                    "tags" $tags
+                    "rank" $rank
                 )
             }}
         {{ end }}
