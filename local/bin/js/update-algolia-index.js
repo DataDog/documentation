@@ -8,7 +8,7 @@ const cb = (error, result) => {
         throw error
     }
 
-    console.log(result) // todo: use DD
+    console.log(result)
 }
 
 atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb)
