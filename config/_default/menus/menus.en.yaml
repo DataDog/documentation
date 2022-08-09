@@ -2624,11 +2624,11 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 3
-  - name: Steps
+  - name: Recording Steps
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results & Performance
+  - name: Test Results and Performance
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302
