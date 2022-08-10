@@ -35,6 +35,8 @@ Facets also allow you to manipulate your logs in your [log monitors][4], log wid
 
 **Note**: You do not need facets to support [log processing][1], [livetail search][2], [archive][3] forwarding, rehydration, or [metric generation][4] from logs. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
 
+**Note**: You can't create facets for the attributes that are within the Array object.
+
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
 [1]: /logs/log_configuration/processors
