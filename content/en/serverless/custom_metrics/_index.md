@@ -169,7 +169,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Install the latest version of [dogstatsd-csharp-client][1] and then follow the sample code below to submit your custom metrics as [**distribution**](#understanding-distribution-metrics).
+Install the latest version of [dogstatsd-csharp-client][1] and then follow the sample code below to submit your custom metrics as [**distribution metrics**](#understanding-distribution-metrics).
 
 ```csharp
 using System.IO;

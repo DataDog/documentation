@@ -370,7 +370,7 @@ For high throughput services, there’s usually no need for you to collect every
 
 The default sampling mechanism for ingestion is called [head-based sampling][19]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header. Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, you must configure the sampling rate on the root service to take effect.
 
-After spans have been ingested by Datadog, the Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. You can also define custom [retention filters][38] to index trace data you want to keep for longer to support your organization’s goals.
+After spans have been ingested by Datadog, the Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. You can also define custom [retention filters][38] to index trace data you want to keep for longer to support your organization's goals.
 
 Learn more about the [Datadog Trace Pipeline][39].
 
