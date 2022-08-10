@@ -17,7 +17,7 @@ module.exports = {
         ddApplicationId: 'c4e83ad8-4eda-4d2e-aae1-d943abce0463',
         loggingHandler: 'http',
         algoliaConfig: {
-            index: 'docs_test_preview_2',
+            index: 'docs_test_preview',
             api_index: 'docsearch_docs_preview_api',
             appId: 'K8XL4ROVCR',
             apiKey: 'c00312a19630387f86998847cca3b65c'
@@ -29,7 +29,7 @@ module.exports = {
         ddClientToken: 'pub36877d3864fab670b5ae7e1d5d26cb0',
         loggingHandler: 'console',
         algoliaConfig: {
-            index: 'docs_test_preview_2',
+            index: 'docs_test_preview',
             api_index: 'docsearch_docs_preview_api',
             appId: 'K8XL4ROVCR',
             apiKey: 'c00312a19630387f86998847cca3b65c'

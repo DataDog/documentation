@@ -5,7 +5,9 @@
     "private": true,
     "scripts": {
         "algolia:config": "node ./local/bin/js/algolia-config.js",
-        "algolia:atomic": "node ./local/bin/js/algolia-index-test.js",
+        "algolia:atomic": "node ./local/bin/js/update-algolia-index.js",
+        "algolia:atomic:config": "node ./local/bin/js/update-algolia-config.js",
+        "algolia:sync": "yarn run algolia:atomic && yarn run algolia:atomic:config",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public && npx hugo mod clean",
         "docker:start": "/usr/local/bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --bind 0.0.0.0",

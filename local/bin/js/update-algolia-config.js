@@ -1,4 +1,3 @@
-/* eslint-disable */
 const algoliasearch = require('algoliasearch');
 
 const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID || '';
@@ -36,11 +35,11 @@ replicas[`${ALGOLIA_INDEX_NAME}_API`] = {
 };
 
 const settings = {
-    searchableAttributes: ['title', 'relpermalink', 'sectionHeader', 'type, tags', 'unordered(description, content)'],
+    searchableAttributes: ['title', 'relpermalink', 'section_header', 'type, tags', 'unordered(description, content)'],
     ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
     customRanking: ['desc(rank)'],
     replicas: Object.keys(replicas),
-    attributesToHighlight: ['title', 'sectionHeader', 'description', 'content', 'type', 'tags'],
+    attributesToHighlight: ['title', 'section_header', 'description', 'content', 'type', 'tags'],
     indexLanguages: ['ja', 'en', 'fr'],
     queryLanguages: ['ja', 'en', 'fr'],
     attributeForDistinct: 'relpermalink',
@@ -92,12 +91,8 @@ const rule = {
         params: {
             filters: 'relevant filter here'
         },
-        promote: {
-
-        },
-        hide: {
-
-        }
+        promote: {},
+        hide: {}
     },
     enabled: false
 };
