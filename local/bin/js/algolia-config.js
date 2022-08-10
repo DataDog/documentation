@@ -7,6 +7,7 @@ let ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME || '';
 
 if (process.env.CI_ENVIRONMENT_NAME && !ALGOLIA_INDEX_NAME) {
     const configDocs = require('../../../assets/scripts/config/config-docs');
+
     switch (process.env.CI_ENVIRONMENT_NAME) {
         case 'live':
             ALGOLIA_INDEX_NAME = configDocs['live'].algoliaConfig.index;
@@ -21,9 +22,12 @@ if (process.env.CI_ENVIRONMENT_NAME && !ALGOLIA_INDEX_NAME) {
 }
 
 if (ALGOLIA_APP_ID === '' || ALGOLIA_INDEX_NAME === '' || ALGOLIA_ADMIN_KEY === '') {
-    console.log('Missing App Id, Api Key or Index Name');
+    console.log('Missing App Id, API Key, or Index Name');
     process.exit(1);
 }
+
+const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY);
+const index = client.initIndex(ALGOLIA_INDEX_NAME);
 
 const replicas = {};
 replicas[`${ALGOLIA_INDEX_NAME}_API`] = {
@@ -32,13 +36,7 @@ replicas[`${ALGOLIA_INDEX_NAME}_API`] = {
 };
 
 const settings = {
-    searchableAttributes: [
-        'title',
-        'relpermalink',
-        'sectionHeader',
-        'type, tags',
-        'unordered(description, content)'
-    ],
+    searchableAttributes: ['title', 'relpermalink', 'sectionHeader', 'type, tags', 'unordered(description, content)'],
     ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
     customRanking: ['desc(rank)'],
     replicas: Object.keys(replicas),
@@ -82,14 +80,35 @@ const synonyms = [
     }
 ];
 
-const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY);
-console.log(`Updating primary index configuration on ${ALGOLIA_INDEX_NAME}..`);
+const rule = {
+    objectID: 'a-rule-id',
+    conditions: [
+        {
+            pattern: 'search query',
+            anchoring: 'one of: is, contains, starts with, or ends with'
+        }
+    ],
+    consequence: {
+        params: {
+            filters: 'relevant filter here'
+        },
+        promote: {
 
-const index = client.initIndex(ALGOLIA_INDEX_NAME);
+        },
+        hide: {
 
-index.setSettings(settings, { forwardToReplicas: true }).then((response) => {
-    console.log(`Index ${ALGOLIA_INDEX_NAME} configuration update complete..`);
+        }
+    },
+    enabled: false
+};
+
+console.log(`Updating primary index settings on ${ALGOLIA_INDEX_NAME} (fwd to replicas)...`);
+
+index.setSettings(settings, { forwardToReplicas: true }).then(() => {
+    console.log(`Index ${ALGOLIA_INDEX_NAME} settings update complete...`);
 });
+
+console.log(`Updating primary index synonyms on ${ALGOLIA_INDEX_NAME} (fwd to replicas)...`);
 
 index
     .saveSynonyms(synonyms, {
@@ -97,8 +116,14 @@ index
         replaceExistingSynonyms: true
     })
     .then(() => {
-        console.log(`Index ${ALGOLIA_INDEX_NAME} synonyms update complete..`);
+        console.log(`Index ${ALGOLIA_INDEX_NAME} synonyms update complete...`);
     });
+
+console.log(`Updating primary index rule on ${ALGOLIA_INDEX_NAME} (fwd to replicas)...`);
+
+index.saveRule(rule, { forwardToReplicas: true }).then(() => {
+    console.log(`Index ${ALGOLIA_INDEX_NAME} rule update complete...`);
+});
 
 console.log('Updating replicas..');
 
@@ -106,6 +131,6 @@ Object.entries(replicas).forEach(([replicaIndexName, replicaSettings]) => {
     console.log(`Updating replica ${replicaIndexName}..`);
     const index = client.initIndex(replicaIndexName);
     index.setSettings(replicaSettings).then((response) => {
-        console.log(`Index ${replicaIndexName} configuration update complete..`);
+        console.log(`Index ${replicaIndexName} configuration update complete...`);
     });
 });
