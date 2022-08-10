@@ -98,7 +98,7 @@ If there is a Lookup Processor using a Reference Table for Log enrichment, then 
 
 ## Monitor Reference Table Activity
 
-You can monitor reference table activity with [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select the table and click the Settings icon next to **Update Config**.  You need org management permissions to view the audit trail.
+You can monitor reference table activity with [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select the table and click the Settings icon next to **Update Config**. You need org management permissions to view the audit trail.
 
 ### Audit Trail
 
