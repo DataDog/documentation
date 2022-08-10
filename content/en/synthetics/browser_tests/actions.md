@@ -17,7 +17,17 @@ further_reading:
 
 Steps are a series of actions that you can record for a browser test and edit or build on. To define the steps you want your browser test to execute, either directly record them with the Datadog test recorder extension or add them manually. Every step includes a set of configurable [advanced options][1].
 
-The default timeout for each step is approximately 60 seconds. You can override this default timeout through the dedicated [timeout option][2].
+The default timeout for each step is approximately 60 seconds. You can override this default timeout through the dedicated [timeout option][2]. 
+
+## Manage step order
+
+Instead of having to reorder new steps manually by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps before the step. 
+
+1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step. 
+2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
+3. When you are done adding additional steps above your tests step, click **Clear Cursor** to exit.
+
+{{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
 
 ## Automatically recorded steps
 
@@ -204,6 +214,13 @@ await promise
 return jQuery().jquery.startsWith('3.5.1')
 ```
 
+To handle login security questions with custom JavaScript, you can either:
+
+- Manage everything in the JavaScript assertion by reading the security question and inputting the variable
+- Create a [JavaScript variable](#javascript) and a regular browser [`type text` step](#type-text)
+
+You can also check that the value returned by a JavaScript step is the one you are expecting by running the test or executing JavaScript in the console. 
+
 #### Test a downloaded file
 
 Create this assertion step to have your browser test verify that files have been downloaded in previous steps. You can check that a file was correctly downloaded and assert on the file name, size, and MD5 value.
@@ -213,7 +230,6 @@ Create this assertion step to have your browser test verify that files have been
 - If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 For more information about how to test downloads, see [Test File Upload and Download][2].
-
 
 [1]: /synthetics/browser_tests/actions#use-variables
 [2]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
@@ -379,7 +395,7 @@ To avoid conflicts between test runs, a unique mailbox generates at each test ex
 
 You can run browser tests within other browser tests to reuse existing workflows up to two levels of nesting.
 
-Variables from subtests may be overridden in parent tests. Ensure the variables created at the parent test level have the same names as the variables present in the subtest.
+Variables from subtests may be overridden in parent tests. Ensure the variables created at the parent test level have the same names as the variables present in the subtest. The variable always uses the value that was first assigned to it.
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:60%;" >}}
 
@@ -499,7 +515,7 @@ To see all available variables on manually added steps, type `{{` in the input f
 
 To use a variable on automatically recorded steps, click the **Inject this variable** icon to input the variable value in the recorder page while recording. 
 
-{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Click on the test step to inject the value in your recorder page" video="true" width="100%" >}}
 
 If a variable is assigned different values along your browser test steps (for example, across subtests), the variable systematically uses the value that was first assigned to it.
 
