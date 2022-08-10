@@ -76,6 +76,8 @@ ddtrace-run python app.py
 | `DD_LOGS_INJECTION`                | `false`     | [ログとトレースの挿入を接続する][11]を有効にします。                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | [Web インテグレーション][12]用 App Analytics をグローバルに有効にします。                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | 特定のインテグレーション用の App Analytics を有効化します。例:  ``DD_BOTO_ANALYTICS_ENABLED=true` 。                                                                                                                                                                                |
+| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | トレースのサンプリングレート (デフォルトは `0.0` および `1.0`)。 バージョン < `0.36.0` の場合、このパラメーターは `DD_SAMPLING_RATE` となります。           |
+| `DD_TRACE_SAMPLING_RULES`                 | `[]`      | JSON でエンコードされた文字列で、サンプリングレートを構成します。例: サンプルレートを 20% に設定する場合は `[{"sample_rate": 0.2}]` となります。'a' ではじまる、スパン名が 'b' のサービスのサンプルレートを 10% に、その他のサービスのサンプルレートを 20% に設定する場合は `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` のようになります ([インテグレーション名](#integration-names) を参照してください) 。 |
 
 ## Agent ホスト名の変更
 

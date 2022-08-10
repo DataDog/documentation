@@ -181,6 +181,16 @@ Remplace le port utilisé par le traceur par défaut pour l'envoi des métriques
 : **Valeur par défaut** : `false`<br>
 Active la [mise en relation des logs et des traces injectées][8].
 
+`DD_TRACE_SAMPLE_RATE`
+: Active le contrôle du taux d'ingestion.
+
+`DD_TRACE_RATE_LIMIT`
+: Le nombre maximal de spans à échantillonner par processus Python et par seconde. Par défaut, sa valeur correspond à 100 lorsque DD_TRACE_SAMPLE_RATE est défini. Si ce n'est pas le cas, c'est l'Agent Datadog qui doit définir les limites de taux.
+
+`DD_TRACE_SAMPLING_RULES`
+**Valeur par défaut** : `[]` <br>
+Un tableau JSON d'objets. Chaque objet doit avoir un « sample_rate ». Les champs « name » et « service » sont facultatifs. La valeur de « sample_rate » doit être comprise entre 0.0 et 1.0 (inclus). Pour déterminer le taux d'échantillonnage de la trace, les règles sont appliquées dans l'ordre configuré.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
