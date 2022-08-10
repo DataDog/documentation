@@ -32,5 +32,5 @@ Execution rule
 
 [1]: /help/
 [2]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
-[3]: synthetics/cicd_integrations/configuration/?tab=npm#additional-configuration
+[3]: /synthetics/cicd_integrations/configuration/?tab=npm#additional-configuration
 [4]: /synthetics/cicd_integrations/configuration/?tab=npm#execution-rule
