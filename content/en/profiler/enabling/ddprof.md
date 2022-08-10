@@ -45,10 +45,10 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 ### Standalone
 
-1. Download the appropriate [`ddprof` release][2] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` (aka `x86_64`) platform:
+1. Download the latest [`ddprof` release][2] for your Linux distribution. For example, here is one way to pull the `v0.9.3` release for an `amd64` (aka `x86_64`) platform:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.3/ddprof-0.9.3-amd64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
@@ -112,7 +112,7 @@ The library exposes a C API.
 1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.3/ddprof-0.9.3-amd64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz --directory /tmp
    ```
 

@@ -22,19 +22,19 @@ Each row is a profile of a process for a short amount of time. By default, profi
 
 You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][1]. By default the following facets are available:
 
-| Facet    | Definition                                                                                             |
-| -------- | ------------------------------------------------------------------------------------------------------ |
-| Env      | The environment your application is running on (`production`, `staging`).                                    |
-| Service  | The name of the [service][2] your code is running.                                                     |
-| Version  | The version of your code.                                                                              |
-| Host     | The hostname your profiled process is running on. |
-| Runtime  | The type of runtime the profiled process is running (`JVM`, `CPython`).                                |
+| Facet   | Definition                                                                |
+| ------- | ------------------------------------------------------------------------- |
+| Env     | The environment your application is running on (`production`, `staging`). |
+| Service | The name of the [service][2] your code is running.                        |
+| Version | The version of your code.                                                 |
+| Host    | The hostname your profiled process is running on.                         |
+| Runtime | The type of runtime the profiled process is running (`JVM`, `CPython`).   |
 
 The following measures are available:
 
-| Measure           | Definition                                                                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| CPU              | CPU usage, measured in cores. |
+| Measure                | Definition                                                                                                                                                                               |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU                    | CPU usage, measured in cores.                                                                                                                                                            |
 | Memory&nbsp;Allocation | Memory allocation rate over the course of the profile. This value can be above the amount of memory on your system because allocated memory can be garbage collected during the profile. |
 
 
@@ -49,12 +49,12 @@ The header contains information associated with your profile, like the service t
 
 Four tabs are below the profile header:
 
-| Tab          | Definition                                                                                                                                  |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Profiles     | A flame graph and summary table of the profile you are looking at. You can switch between profile types (`CPU`, `Memory allocation`). |
-| Analysis     | A set of heuristics that suggest potential issues or areas of improvement in your code. Currently only available for Java.                   |
-| Metrics      | Profiler metrics coming from all profiles of the same service.                                                                              |
-| Runtime&nbsp;Info | Runtime properties in supported languages, and profile tags.                                                                                                     |
+| Tab               | Definition                                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Profiles          | A flame graph and summary table of the profile you are looking at. You can switch between profile types (`CPU`, `Memory allocation`). |
+| Analysis          | A set of heuristics that suggest potential issues or areas of improvement in your code. Currently only available for Java.            |
+| Metrics           | Profiler metrics coming from all profiles of the same service.                                                                        |
+| Runtime&nbsp;Info | Runtime properties in supported languages, and profile tags.                                                                          |
 
 **Note**: In the upper right corner of each profile, there are options to:
 
@@ -219,6 +219,12 @@ Once enabled, the following profile types are collected:
 
 CPU
 : Shows the time each function spent running on the CPU.
+
+Allocations
+: Shows the number of allocations by each method, including allocations which were subsequently freed.
+
+Allocated memory
+: Shows the amount of heap memory allocated by each method, including allocations which were subsequently freed.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
