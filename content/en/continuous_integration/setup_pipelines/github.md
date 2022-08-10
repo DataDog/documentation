@@ -11,6 +11,9 @@ further_reading:
     - link: "/continuous_integration/setup_pipelines/custom_tags_and_metrics/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and metrics"
+    - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
+      tag: "blog"
+      text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
