@@ -356,13 +356,21 @@ For check monitor variables (custom check and integration check), the variable `
 
 ### Composite monitor variables
 
-Composite monitors can access the value associated with the sub-monitors at the time the alert triggers.
+Composite monitors can access the value and status associated with the sub-monitors at the time the alert triggers.
 
 For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
 
 ```text
 {{ a.value }}
 ```
+
+To retriev the status of the sub-monitor `a` use:
+
+```text
+{{ a.status }}
+```
+
+Possible values for the status are: `ALERT`, `OK`, `WARN`, and `NO DATA`.
 
 Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag/facet.
 
