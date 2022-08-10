@@ -31,7 +31,7 @@ further_reading:
 This page provides instructions on installing the Datadog Agent in a Kubernetes environment through three different methods. Choose the method that best suits your use case:
 
 - [Datadog Operator](?tab=operator)
-- [Helm](?tab=helm)
+- [Helm chart](?tab=helm)
 - [DaemonSet](?tab=daemonset)
 
 For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
