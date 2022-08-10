@@ -41,7 +41,7 @@ title: ログの収集とインテグレーション
 {{% tab "Host" %}}
 
 1. [Datadog Agent][1] をインストールします。
-2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled:false` を `logs_enabled:true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][5]を参照してください。
+2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][5]を参照してください。
 3. Datadog Agent を有効にすると、[ログファイルの尾行または UDP/TCP 経由で送信されるログのリスニング][2]、[ログのフィルタリングまたは機密データのスクラビング][3]、[複数行ログの集約][4]を構成することができるようになります。
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -54,7 +54,7 @@ title: ログの収集とインテグレーション
 {{% tab "アプリケーション" %}}
 
 1. [Datadog Agent][1] をインストールします。
-2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled:false` を `logs_enabled:true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][2]を参照してください。
+2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][2]を参照してください。
 3. アプリケーション言語のインストール手順に従い、ロガーを構成し、ログの生成を開始します。
 
 {{< partial name="logs/logs-languages.html" >}}

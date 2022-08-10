@@ -21,15 +21,15 @@
 
 <!-- Lambda Extension -->
 {{- if eq (.Get "layer") "extension" -}}
-    25
+    27
 {{- end -}}
 
 <!-- dd-trace-java Layer -->
 {{- if eq (.Get "layer") "dd-trace-java" -}}
-    4
+    6
 {{- end -}}
 
 <!-- dd-trace-dotnet Layer -->
 {{- if eq (.Get "layer") "dd-trace-dotnet" -}}
-    4
+    5
 {{- end -}}

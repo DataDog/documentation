@@ -1,31 +1,35 @@
 ---
-title: Configurer le tracing sur un pipeline Jenkins
-kind: documentation
 further_reading:
-  - link: /continuous_integration/explore_pipelines
-    tag: Documentation
-    text: Explorer les résultats et les performances de l'exécution du pipeline
-  - link: /continuous_integration/setup_pipelines/custom_commands/
-    tag: Documentation
-    text: Étendre la visibilité du pipeline en traçant des commandes individuelles
-  - link: /continuous_integration/troubleshooting/
-    tag: Documentation
-    text: Dépannage de l'intégration continue
+- link: /continuous_integration/explore_pipelines
+  tag: Documentation
+  text: Explorer les résultats et les performances de l'exécution du pipeline
+- link: /continuous_integration/setup_pipelines/custom_commands/
+  tag: Documentation
+  text: Étendre la visibilité du pipeline en traçant des commandes individuelles
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Dépannage de l'intégration continue
+kind: documentation
+title: Configurer le tracing sur un pipeline Jenkins
 ---
+
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">À l'heure actuelle, la solution CI Visibility n'est pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">La solution CI Visibility n'est actuellement pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Compatibilité
 
 Versions de Jenkins prises en charge :
-* Jenkins >= 2.164.1
+* Pour les versions 3.x du plug-in : Jenkins 2.164.1+
+* Pour les versions 4.x du plug-in : Jenkins 2.303.3+
 
 ## Prérequis
 
-Installez l'[Agent Datadog][1] sur l'instance de contrôleur Jenkins.
+Installez l'[Agent Datadog][1] sur l'instance du contrôleur Jenkins.
 
-Si le contrôleur Jenkins et l'Agent Datadog ont été déployés sur un cluster Kubernetes, Datadog recommande l'utilisation du [contrôleur d'admission][2], qui définit automatiquement la variable d'environnement `DD_AGENT_HOST` dans le pod du contrôleur Jenkins de façon à communiquer avec l'Agent Datadog local.
+Si le contrôleur Jenkins et l’Agent Datadog ont été déployés sur un cluster Kubernetes, Datadog recommande d'utiliser le [contrôleur d'admission][2], qui définit automatiquement la variable d'environnement `DD_AGENT_HOST` dans le pod du contrôleur Jenkins de façon à communiquer avec l'Agent Datadog local.
+
+<div class="alert alert-info"><strong>Remarque</strong> : il n'est pas encore possible d'envoyer des traces CI Visibility avec des sockets de domaine Unix.</div>
 
 ## Installer le plug-in Jenkins Datadog
 
@@ -43,7 +47,7 @@ Installez et activez le [plug-in Jenkins Datadog][3] v3.3.0 ou une version ulté
 
 1. Dans l'interface Web de votre instance Jenkins, accédez à **Manage Jenkins > Configure System**.
 2. Accédez à la section `Datadog Plugin` en faisant dérouler l'écran de configuration vers le bas.
-3. Sélectionnez le mode `Datadog Agent`.
+3. Sélectionnez le mode `Datadog Agent`. Il n'est **pas possible** d'utiliser une URL d'API et une clé d'API Datadog avec CI Visibility.
 4. Configurez le host `Agent`.
 5. Configurez le port `Traces Collection` (valeur par défaut : `8126`).
 6. Cochez la case `Enable CI Visibility` pour activer cette option.
@@ -267,6 +271,72 @@ pipeline {
 }
 {{< /code-block >}}
 
+## Propager des informations Git dans les pipelines sans Jenkinsfile depuis SCM
+
+Le plug-in Jenkins a recours à des variables d'environnement pour récupérer les informations Git. Cependant, si vous n'utilisez pas de `Jenkinsfile` dans votre référentiel et que vous avez configuré le pipeline directement dans Jenkins à l'aide de l'étape `checkout`, ces variables d'environnement ne sont pas disponibles.
+
+Dans ce cas, vous pouvez propager les informations Git vers les variables d'environnement de votre build. Pour ce faire, utilisez la fonction `.each {k,v -> env.setProperty(k, v)}` après avoir exécuté les étapes `checkout` ou `git`. Exemple :
+
+{{< tabs >}}
+{{% tab "Avec des pipelines déclaratifs" %}}
+Si vous configurez votre pipeline à l'aide d'un pipeline déclaratif, propagez les informations Git à l'aide d'un bloc `script` comme indiqué ci-dessous :
+
+Avec l'étape `checkout` :
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+        script {
+          checkout(...).each {k,v -> env.setProperty(k,v)}
+        }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+Avec l'étape `git` :
+{{< code-block lang="groovy" >}}
+pipeline {
+  stages {
+    stage('Checkout') {
+      script {
+        git(...).each {k,v -> env.setProperty(k,v)}
+      }
+    }
+    ...
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Avec des pipelines scriptés" %}}
+Si vous configurez votre pipeline à l'aide d'un pipeline scripté, vous pouvez propager directement les informations Git vers des variables d'environnement :
+
+Avec l'étape `checkout` :
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    checkout(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+Avec l'étape `git` :
+{{< code-block lang="groovy" >}}
+node {
+  stage('Checkout') {
+    git(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Définir les informations Git manuellement
 
 Le plug-in Jenkins utilise des variables d'environnement pour déterminer les informations Git. Toutefois, il arrive que ces variables d'environnement ne soient pas définies automatiquement en raison de dépendances sur le plug-in Git utilisé dans le pipeline.
@@ -473,6 +543,17 @@ Error writing to server
 
 1. Si vous utilisez `localhost` comme hostname, essayez de remplacer cette valeur par le hostname du serveur.
 2. Si votre instance Jenkins est derrière un proxy HTTP, accédez à **Manage Jenkins** > **Manage Plugins** > **onglet Advanced** et vérifiez que la configuration du proxy est correcte.
+
+#### HTTP 504
+
+SI un message d'erreur « HTTP 504 » s'affiche, vérifiez que la configuration du proxy Jenkins ne contient aucune erreur.
+
+{{< code-block lang="text" >}}
+Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
+{{< /code-block >}}
+
+1. Si votre instance Jenkins est derrière un proxy HTTP, accédez à **Manage Jenkins** > **Manage Plugins** > **onglet Advanced** et vérifiez que la configuration du proxy est correcte.
+  1. Assurez-vous que `localhost` a bien été configuré à la section `No Proxy Hosts`.
 
 ### La section Datadog Plugin n'apparaît pas dans la configuration Jenkins
 

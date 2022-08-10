@@ -16,7 +16,7 @@ further_reading:
       text: "Troubleshooting Application Security Monitoring"
 ---
 
-You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS. 
+You can monitor application security for PHP apps running in host-based or container-based environments such as Docker, Kubernetes, AWS ECS, and AWS EKS.
 
 {{% appsec-getstarted %}}
 

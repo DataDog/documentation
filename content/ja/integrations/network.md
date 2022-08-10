@@ -1,40 +1,60 @@
 ---
+app_id: システム
+app_uuid: 114d71e8-0128-4dca-aee8-297178732d31
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: system.net.bytes_rcvd
+      metadata_path: metadata.csv
+      prefix: system.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Network
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - network
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/network/README.md
-display_name: Network
+display_on_public_website: true
 draft: false
 git_integration_title: ネットワーク
-guid: 43631795-8a1f-404d-83ae-397639a84050
 integration_id: システム
 integration_title: Network
 integration_version: 2.7.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: system.
-metric_to_check: system.net.bytes_rcvd
+manifest_version: 2.0.0
 name: ネットワーク
-public_title: Datadog-Network インテグレーション
+oauth: {}
+public_title: Network
 short_description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Network
+  configuration: README.md#Setup
+  description: 送受信バイト数およびパケット数、接続状態、ラウンドトリップ回数などを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Network
 ---
 
 

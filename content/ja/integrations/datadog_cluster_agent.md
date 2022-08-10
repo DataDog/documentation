@@ -1,41 +1,60 @@
 ---
+app_id: datadog-cluster-agent
+app_uuid: b6c2b71b-38c9-4769-86ad-516953849236
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Datadog Cluster Agent - Overview: assets/dashboards/datadog_cluster_agent_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: datadog.cluster_agent.admission_webhooks.certificate_expiry
+      metadata_path: metadata.csv
+      prefix: datadog_cluster_agent.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Datadog Cluster Agent
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - containers
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/datadog_cluster_agent/README.md
-display_name: Datadog Cluster Agent
+display_on_public_website: true
 draft: false
 git_integration_title: datadog_cluster_agent
-guid: 275fd66d-2440-44e5-ac30-461062cd2825
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
 integration_version: 2.2.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: datadog_cluster_agent.
-metric_to_check: datadog.cluster_agent.admission_webhooks.certificate_expiry
+manifest_version: 2.0.0
 name: datadog_cluster_agent
-public_title: Datadog Cluster Agent インテグレーション
+oauth: {}
+public_title: Datadog Cluster Agent
 short_description: Datadog Cluster Agent のメトリクスを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Datadog Cluster Agent のメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Datadog Cluster Agent
 ---
 
 

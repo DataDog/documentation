@@ -1,44 +1,68 @@
 ---
+app_id: ibm-mq
+app_uuid: d29a1df9-6038-41f5-b017-82bf45f58767
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     IBM MQ: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ibm_mq.queue.usage
+      metadata_path: metadata.csv
+      prefix: ibm_mq.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IBM MQ
   logs:
     source: ibm_mq
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - 処理
 - メッセージング
 - ログの収集
 - オートディスカバリー
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md
-display_name: IBM MQ
+display_on_public_website: true
 draft: false
 git_integration_title: ibm_mq
-guid: 873153b6-5184-438a-8a32-1e2d2e490dde
 integration_id: ibm-mq
 integration_title: IBM MQ
 integration_version: 3.22.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ibm_mq.
-metric_to_check: ibm_mq.queue.usage
+manifest_version: 2.0.0
 name: ibm_mq
-public_title: Datadog-IBM MQ インテグレーション
+oauth: {}
+public_title: IBM MQ
 short_description: IBM MQ はメッセージキューです
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Messaging
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: IBM MQ はメッセージキューです
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM MQ
 ---
 
 
@@ -183,7 +207,7 @@ IBM MQ のデータディレクトリに `mqclient.ini` というファイルが
 
 IBM MQ で権限を設定する方法はたくさんあります。セットアップの方法にもよりますが、MQ 内に `datadog` ユーザーを作成して、読み取り専用権限と、オプションで `+chg` 権限を設定します。`chg` 権限は、[リセットキュー統計][5] (`MQCMD_RESET_Q_STATS`) のメトリクスを収集するために必要です。これらのメトリクスを収集したくない場合は、構成で `collect_reset_queue_metrics` を無効にできます。リセットキュー統計のパフォーマンスデータを収集すると、パフォーマンスデータもリセットされます。
 
-**注**: "Queue Monitoring" を有効にして、少なくとも "Medium" に設定する必要があります。これは、MQ UI または mqsc コマンドを使用して実行できます。
+**注**: MQ サーバーで "Queue Monitoring" を有効にして、少なくとも "Medium" に設定する必要があります。これは、サーバーのホストで MQ UI または `mqsc` コマンドを使用して実行できます。
 
 ```text
 > /opt/mqm/bin/runmqsc
@@ -219,6 +243,7 @@ All valid MQSC commands were processed.
    - `queue_manager`: 指定されたキューマネージャー
    - `host`: IBM MQ が実行されているホスト
    - `port`: IBM MQ が公開しているポート
+   - `convert_endianness`: MQ サーバーが AIX または IBM i で動作している場合、これを有効にする必要があります
 
     ユーザー名とパスワードのセットアップを使用している場合、`username` と `password` を設定できます。ユーザー名が設定されていない場合、Agent プロセスの所有者 (`dd-agent`) が使用されます。
 
@@ -332,6 +357,10 @@ IBM MQ チェックはサーバー上でクエリを実行しますが、これ�
 * チャンネル数が多すぎる場合は `auto_discover_channels` を無効にしてください。
 * `collect_statistics_metrics` を無効にします。
 
+### ログのエラー
+* `Unpack for type ((67108864,)) not implemented`: このようなエラーが発生し、MQ サーバーが IBM OS で動作している場合は、`convert_endianness` を有効にして Agent を再起動します。
+
+
 ### その他
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
@@ -346,7 +375,7 @@ IBM MQ チェックはサーバー上でクエリを実行しますが、これ�
 
 [1]: https://www.ibm.com/products/mq
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://developer.ibm.com/messaging/mq-downloads
+[3]: https://www.ibm.com/support/pages/mqc9-ibm-mq-9-clients
 [4]: https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html#//apple_ref/doc/uid/TP40016462-CH3-SW1
 [5]: https://www.ibm.com/docs/en/ibm-mq/9.1?topic=formats-reset-queue-statistics
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

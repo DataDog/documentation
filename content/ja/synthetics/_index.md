@@ -10,15 +10,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
   text: Datadog Synthetic モニタリングの紹介
+- link: https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/
+  tag: ブログ
+  text: Synthetic テスト内の CDN パフォーマンスの監視
 - link: https://learn.datadoghq.com/course/view.php?id=39
   tag: ラーニングセンター
   text: Synthetic テストの紹介
 - link: /synthetics/guide/
   tag: ドキュメント
   text: Synthetic モニタリングガイド
-- link: https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/
-  tag: ブログ
-  text: Synthetic テスト内の CDN パフォーマンスの監視
 kind: documentation
 title: Synthetic の監視
 ---

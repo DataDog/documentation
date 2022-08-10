@@ -13,6 +13,9 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: 内部ホストで TCP テストを実行する
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
 title: TCP テスト
 ---
@@ -86,7 +89,7 @@ TCP テストは次の頻度で実行できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
@@ -107,7 +110,9 @@ TCP テストは次の頻度で実行できます。
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックしてテストを保存し、Datadog にテストの実行を開始させます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
+
+詳しくは、[Synthetic テストモニターの使用][8]をご覧ください。
 
 ## 変数
 
@@ -132,7 +137,7 @@ TCP テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-TCP テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][8]を使用することができます。
+TCP テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][9]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
@@ -161,13 +166,13 @@ TCP テストの URL、高度なオプション、アサーションで、[`Sett
 
 ## アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][9]を持つユーザーのみが、Synthetic TCP テストを作成、編集、削除できます。Synthetic TCP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][10]を持つユーザーのみが、Synthetic TCP テストを作成、編集、削除できます。Synthetic TCP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][10]のいずれかにアップグレードします。
 
-[カスタムロール機能][10]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][11]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][11]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、TCP テストへのアクセスを制限することができます。TCP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -184,7 +189,8 @@ TCP テストの URL、高度なオプション、アサーションで、[`Sett
 [5]: /ja/monitors/notify/#notify-your-team
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[8]: /ja/synthetics/settings/#global-variables
-[9]: /ja/account_management/rbac/
-[10]: /ja/account_management/rbac#custom-roles
-[11]: /ja/account_management/rbac/#create-a-custom-role
+[8]: /ja/synthetics/guide/synthetic-test-monitors
+[9]: /ja/synthetics/settings/#global-variables
+[10]: /ja/account_management/rbac/
+[11]: /ja/account_management/rbac#custom-roles
+[12]: /ja/account_management/rbac/#create-a-custom-role

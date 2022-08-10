@@ -2,7 +2,7 @@
 title: CI Visibility Guides
 kind: guide
 private: true
-disable_sidebar: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="CI Visibility Guides:" >}}

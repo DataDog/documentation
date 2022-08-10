@@ -45,14 +45,21 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 Créez la fonction suivante dans la base de données :
 
 ```
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -105,7 +112,7 @@ fi
 Effectuez le déploiement sur Heroku :
 
 ```shell
-# Déployer sur Heroku 
+# Déployer sur Heroku
 git add .
 git commit -m "Activation de l'intégration postgres"
 git push heroku main

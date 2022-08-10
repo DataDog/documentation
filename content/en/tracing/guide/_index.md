@@ -2,6 +2,7 @@
 title: Tracing Guides
 kind: guide
 private: true
+disable_toc: true
 aliases:
 - /tracing/getting_further/
 - /tracing/guide/ecommerce_and_retail_use_cases/

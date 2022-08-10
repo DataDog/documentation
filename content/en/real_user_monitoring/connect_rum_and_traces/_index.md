@@ -135,7 +135,7 @@ To connect RUM to Traces, you need to specify your browser application in the `s
 
 **Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-4.  _(Optional)_ Set the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
+4.  _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
     ```swift
     Datadog.initialize(
     appContext: .init(),
@@ -182,9 +182,6 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
-
-`x-datadog-sampled: 1`
-: Generated from the Real User Monitoring SDK. Indicates this request is selected for sampling.
 
 **Note**: These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][17] (OPTIONS requests), which are made by the SDK prior to every request.
 

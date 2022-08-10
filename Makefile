@@ -36,8 +36,11 @@ CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.y
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean-all: clean clean-examples ## Clean everything (environment, sourced repos, generated files)
-	rm -rf ./node_modules ./hugpython ./public ./integrations_data
+clean-all: clean clean-examples clean-dependent-repos ## Clean everything (environment, sourced repos, generated files)
+	rm -rf ./node_modules ./hugpython ./public
+
+clean-dependent-repos:
+	rm -rf ./integrations_data
 
 # remove build generated content
 # removing only git ignored files
