@@ -5633,184 +5633,6 @@ components:
         meta:
           $ref: '#/components/schemas/RUMResponseMetadata'
       type: object
-    RUMApplication:
-      description: RUM application.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/RUMApplicationAttributes'
-        id:
-          description: RUM application ID.
-          example: abcd1234-0000-0000-abcd-1234abcd5678
-          type: string
-        type:
-          $ref: '#/components/schemas/RUMApplicationType'
-      required:
-      - attributes
-      - id
-      - type
-      type: object
-    RUMApplicationAttributes:
-      description: RUM application attributes.
-      properties:
-        application_id:
-          description: ID of the RUM application.
-          example: abcd1234-0000-0000-abcd-1234abcd5678
-          type: string
-        created_at:
-          description: Timestamp in ms of the creation date.
-          example: 1659479836169
-          format: int64
-          type: integer
-        created_by_handle:
-          description: Handle of the creator user.
-          example: john.doe
-          type: string
-        hash:
-          description: Client token of the RUM application.
-          example: abcd1234efgh5678ijkl90abcd1234efgh0
-          type: string
-        name:
-          description: Name of the RUM application.
-          example: my_rum_application
-          type: string
-        org_id:
-          description: Org ID of the RUM application.
-          example: 999
-          format: int32
-          type: integer
-        type:
-          description: Type of the RUM application.
-          example: browser|ios|android|react-native|flutter
-          type: string
-        updated_at:
-          description: Timestamp in ms of the last update date.
-          example: 1659479836169
-          format: int64
-          type: integer
-        updated_by_handle:
-          description: Handle of the updater user.
-          example: jane.doe
-          type: string
-      required:
-      - application_id
-      - created_at
-      - created_by_handle
-      - name
-      - org_id
-      - type
-      - updated_at
-      - updated_by_handle
-      type: object
-    RUMApplicationCreate:
-      description: RUM application creation.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/RUMApplicationCreateAttributes'
-        type:
-          $ref: '#/components/schemas/RUMApplicationCreateType'
-      required:
-      - attributes
-      - type
-      type: object
-    RUMApplicationCreateAttributes:
-      description: RUM application creation attributes.
-      properties:
-        name:
-          description: Name of the RUM application.
-          example: my_new_rum_application
-          type: string
-        type:
-          description: Type of the RUM application.
-          example: browser|ios|android|react-native|flutter
-          type: string
-      required:
-      - name
-      type: object
-    RUMApplicationCreateRequest:
-      description: RUM application creation request attributes.
-      properties:
-        data:
-          $ref: '#/components/schemas/RUMApplicationCreate'
-      required:
-      - data
-      type: object
-    RUMApplicationCreateType:
-      default: rum_application_create
-      description: RUM application creation type.
-      enum:
-      - rum_application_create
-      example: rum_application_create
-      type: string
-      x-enum-varnames:
-      - RUM_APPLICATION_CREATE
-    RUMApplicationResponse:
-      description: RUM application response.
-      properties:
-        data:
-          $ref: '#/components/schemas/RUMApplication'
-      type: object
-    RUMApplicationType:
-      default: rum_application
-      description: RUM application response type.
-      enum:
-      - rum_application
-      example: rum_application
-      type: string
-      x-enum-varnames:
-      - RUM_APPLICATION
-    RUMApplicationUpdate:
-      description: RUM application update.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/RUMApplicationUpdateAttributes'
-        id:
-          description: RUM application ID.
-          example: abcd1234-0000-0000-abcd-1234abcd5678
-          type: string
-        type:
-          $ref: '#/components/schemas/RUMApplicationUpdateType'
-      required:
-      - id
-      - type
-      type: object
-    RUMApplicationUpdateAttributes:
-      description: RUM application update attributes.
-      properties:
-        name:
-          description: Name of the RUM application.
-          example: updated_name_for_my_existing_rum_application
-          type: string
-        type:
-          description: Type of the RUM application.
-          example: browser|ios|android|react-native|flutter
-          type: string
-      type: object
-    RUMApplicationUpdateRequest:
-      description: RUM application update request.
-      properties:
-        data:
-          $ref: '#/components/schemas/RUMApplicationUpdate'
-      required:
-      - data
-      type: object
-    RUMApplicationUpdateType:
-      default: rum_application_update
-      description: RUM application update type.
-      enum:
-      - rum_application_update
-      example: rum_application_update
-      type: string
-      x-enum-varnames:
-      - RUM_APPLICATION_UPDATE
-    RUMApplicationsResponse:
-      description: RUM applications response.
-      properties:
-        data:
-          description: RUM applications array response.
-          items:
-            $ref: '#/components/schemas/RUMApplication'
-          type: array
-      type: object
     RUMBucketResponse:
       description: Bucket values.
       properties:
@@ -12892,169 +12714,6 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
-  /api/v2/rum/applications:
-    get:
-      description: List all the RUM applications in your organization.
-      operationId: GetRUMApplications
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RUMApplicationsResponse'
-          description: OK
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: List all the RUM applications
-      tags:
-      - RUM
-      x-undo:
-        type: safe
-    post:
-      description: Create a new RUM application in your organization.
-      operationId: CreateRUMApplication
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RUMApplicationCreateRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RUMApplicationResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Create a new RUM application
-      tags:
-      - RUM
-      x-codegen-request-body-name: body
-      x-given:
-        rum_application:
-          parameters:
-          - name: body
-            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
-              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
-              \   }\n  }\n}"
-          step: there is a valid "rum_application" in the system
-      x-undo:
-        operationId: DeleteRUMApplication
-        parameters:
-        - name: id
-          source: data.id
-        type: unsafe
-  /api/v2/rum/applications/{id}:
-    delete:
-      description: Delete an existing RUM application in your organization.
-      operationId: DeleteRUMApplication
-      parameters:
-      - description: RUM application ID.
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: No Content
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Delete a RUM application
-      tags:
-      - RUM
-      x-undo:
-        type: idempotent
-    get:
-      description: Get the RUM application with given ID in your organization.
-      operationId: GetRUMApplication
-      parameters:
-      - description: RUM application ID.
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RUMApplicationResponse'
-          description: OK
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Get a RUM application
-      tags:
-      - RUM
-      x-undo:
-        type: safe
-    patch:
-      description: Update the RUM application with given ID in your organization.
-      operationId: UpdateRUMApplication
-      parameters:
-      - description: RUM application ID.
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RUMApplicationUpdateRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RUMApplicationResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unprocessable Entity.
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Update a RUM application
-      tags:
-      - RUM
-      x-codegen-request-body-name: body
-      x-undo:
-        type: idempotent
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -14852,7 +14511,7 @@ paths:
       summary: Get hourly usage for application security
       tags:
       - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 37
       x-undo:
         type: safe
   /api/v2/usage/cost_by_org:
@@ -14997,7 +14656,7 @@ paths:
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
-      x-menu-order: 6
+      x-menu-order: 39
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15177,7 +14836,7 @@ paths:
       summary: Get hourly usage for lambda traced invocations
       tags:
       - Usage Metering
-      x-menu-order: 37
+      x-menu-order: 36
       x-undo:
         type: safe
   /api/v2/usage/observability_pipelines:
@@ -15239,7 +14898,7 @@ paths:
       summary: Get hourly usage for observability pipelines
       tags:
       - Usage Metering
-      x-menu-order: 39
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v2/user_invitations:
