@@ -1,7 +1,7 @@
 ---
 title: Watchdog Insights
 kind: documentation
-description: View anomalies and outliers in context with Watchdog Insights
+description: View anomalies and outliers that match your search query with Watchdog Insights
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/"
   tag: "Blog"
@@ -13,26 +13,41 @@ further_reading:
 
 ## Overview
 
-Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. As you navigate the Datadog UI, Watchdog Insights show you the information most relevant to your current context. Using your active product and your active query, Watchdog Insights displays a filtered and sorted list of anomalies.
+Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. As you navigate the Datadog UI, Watchdog Insights displays a filtered and sorted list of anomalies matching your active search query.
 
+### Usage
 Investigating an incident requires trial and error. Drawing from their experience, engineers familiar with a particular area know where to first look for potential problems. Using Watchdog Insights allows all engineers, including less experienced ones, to pay attention to the most important data and accelerate their incident investigations.
 
 Each insight highlights one outlier or anomaly affecting a subset of users. Depending on the product area, Watchdog Insights displays different types of anomalies. Examples include, but are not limited to, the following:
-- Error outliers
-- Latency outliers
-- Log anomalies
-- Lock pressure
+- Error and latency outliers in logs, traces, and RUM views
+- Spike in error logs
+- New error logs
 - Deadlocked threads
+- High percentage of unready Kubernetes pods
+
+### Prioritization
+
+Watchdog sorts insights based on a combination of factors to place the most important insight at the beginning of the list. The factors that Watchdog takes into account can include the following:
+- State (ongoing versus resolved)
+- Status (warning, error, or critical)
+- Start time
+- Anomaly type
 
 ## Navigation
 
 {{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights banner on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" >}}
 
-The Watchdog Insights banner sits near the top of each page. Expand the banner for an overview. The highest priority insights appear on the left. 
+The Watchdog Insights banner sits near the top of each page. Expand the banner for an overview. The highest priority insights appear on the left. If Watchdog cannot find any issues, the banner is gray.
 
-Click **View all** to expand the panel.
+### Filter on Insight
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+
+### Side panel
+
+Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
+
+### Detailed view
 
 For a detailed view of an insight, click on the individual card. The full side panel opens from the right.
 
@@ -64,31 +79,23 @@ Watchdog Insights appear on several pages within APM:
 
 ### Log Management
 
-In the Log Explorer, Watchdog Insights finds two types of insights:
-- [Log Anomaly Detection][6]
-- [Error Outliers][7]
-
 To locate Watchdog Insights in the Log Management UI, take the following steps:
 1. In the left navigation, hover over **Logs**
 2. Click **Search**
 
-The pink Watchdog Insights banner appears in the middle of your screen, above your logs. If Watchdog cannot find any issues, the banner is gray.
+The pink Watchdog Insights banner appears in the middle of your screen, above your logs.
 
-For more information, see [Watchdog Insights for Logs][8].
+For more information, see [Watchdog Insights for Logs][6].
 
 ### RUM
-
-In the RUM explorer, Watchdog Insights finds two types of insights:
-- [Error Outliers][9]
-- [Latency Outliers][10]
 
 To locate Watchdog Insights in the RUM UI, take the following steps:
 1. In the left navigation, hover over **UX Monitoring**
 2. Click **Sessions & Replays**
 
-The pink Watchdog Insights banner appears in the middle of your screen, above your sessions. If Watchdog cannot find any issues, the banner is gray.
+The pink Watchdog Insights banner appears in the middle of your screen, above your sessions.
 
-For more information, see [Watchdog Insights for RUM][11].
+For more information, see [Watchdog Insights for RUM][7].
 
 ## Further reading
 
@@ -99,9 +106,5 @@ For more information, see [Watchdog Insights for RUM][11].
 [3]: /tracing/profiler/
 [4]: /tracing/services/service_page/
 [5]: /tracing/services/resource_page/
-[6]: /logs/explorer/watchdog_insights/#log-anomaly-detection
-[7]: /logs/explorer/watchdog_insights/#error-outliers
-[8]: /logs/explorer/watchdog_insights/
-[9]: /real_user_monitoring/explorer/watchdog_insights/#error-outliers
-[10]: /real_user_monitoring/explorer/watchdog_insights/#latency-outliers
-[11]: /real_user_monitoring/explorer/watchdog_insights/
+[6]: /logs/explorer/watchdog_insights/
+[7]: /real_user_monitoring/explorer/watchdog_insights/
