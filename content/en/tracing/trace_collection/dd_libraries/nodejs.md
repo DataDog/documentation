@@ -29,7 +29,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest NodeJS Tracer supports versions `>=12`. For a full list of Datadog’s Node version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The latest Node.js Tracer supports versions `>=12`. For a full list of Datadog’s Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -43,7 +43,7 @@ Follow the [Quickstart instructions][3] within the Datadog app for the best expe
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -55,15 +55,13 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
-
-    `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables by running:
 
     ```sh
     DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
     ```
 
-    To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
+   To use Unix domain sockets, specify the entire URL as a single environment variable, `DD_TRACE_AGENT_URL`.
 
     ```sh
     DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
@@ -86,9 +84,9 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
-For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
@@ -100,11 +98,11 @@ For other environments, please refer to the [Integrations][5] documentation for 
 {{< /tabs >}}
 
 
-See the [tracer settings][3] for the list of initialization options.
+Read [tracer settings][3] for a list of initialization options.
 
-### Instrument Your Application
+### Instrument your application
 
-After the agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
+After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
 1. Install the Datadog Tracing library using npm for Node.js 12+:
 
@@ -129,7 +127,7 @@ After the agent is installed, follow these steps to add the Datadog tracing libr
 
 ### Adding the tracer in code
 
-##### JavaScript
+#### JavaScript
 
 ```js
 // This line must come before importing any instrumented module.
