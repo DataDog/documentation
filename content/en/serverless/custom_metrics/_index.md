@@ -60,7 +60,7 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
 1. Follow the sample code or instructions below to submit your custom metric. 
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
@@ -133,6 +133,8 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
+Install the latest version of [java-dogstatsd-client][1] and then follow the sample code below to submit your custom metrics as [**distribution**](#understanding-distribution-metrics).
+
 ```java
 package com.datadog.lambda.sample.java;
 
@@ -163,6 +165,44 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
+[1]: https://github.com/DataDog/java-dogstatsd-client
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+Install the latest version of [dogstatsd-csharp-client][1] and then follow the sample code below to submit your custom metrics as [**distribution**](#understanding-distribution-metrics).
+
+```csharp
+using System.IO;
+
+// import the statsd client
+using StatsdClient;
+
+namespace Example
+{            
+  public class Function
+  {
+    static Function()
+    {
+        // instantiate the statsd client 
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+        DogStatsd.Configure(dogstatsdConfig);
+    }
+
+    public Stream MyHandler(Stream stream)
+    {
+        // submit a distribution metric
+        DogStatsd.Distribution("my.custom.dotnet.metric", 1, tags: new[] { "tag:value" });
+        // your function logic
+    }
+  }
+}
+```
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
 {{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
