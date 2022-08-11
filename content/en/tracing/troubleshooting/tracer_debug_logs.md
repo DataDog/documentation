@@ -30,7 +30,7 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 {{< programming-lang lang="python" >}}
 
-The steps for enabling debug mode Datadog Python Tracer, depends on which version of the tracer your application is using. Choose the scenario that applies:
+The steps for enabling debug mode in the Datadog Python Tracer depends on the version of the tracer your application is using. Choose the scenario that applies:
 
 ### Scenario 1: ddtrace version 1.3.2 or higher
 
