@@ -125,7 +125,7 @@ examples/$(1):
 		git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
 	else \
 		echo "Cloning $(1) at $(BRANCH)"; \
-		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1); || git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
 	fi
 
 .PHONY: examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)) examples/$(patsubst datadog-api-client-%,%,$(1))
