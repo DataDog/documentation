@@ -13,7 +13,7 @@
   },
   {
     "client": "datadog-api-client-ruby",
-    "version": "v2.0.0"
+    "version": "v2.0.2"
   },
   {
     "client": "datadog-api-client-typescript",

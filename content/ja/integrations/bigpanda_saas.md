@@ -113,3 +113,6 @@ Datadog マーケットプレイスでのご提供には、BigPanda プラット
 
 ## サポート
 BigPanda では、お客様の成功に必要なツールと情報の提供をお約束します。そのため、必要なときに必要なサポートを受けられるよう、以下のとおり複数の方法をご用意しています。BigPanda アプリケーション内（右下のヘルプボタン）からメッセージを送信、ドキュメントで必要な情報を見つける、または FAQ でコミュニティに質問をする、あるいは [support@bigpanda.io](mailto:support@bigpanda.io) までメールを送信しサポートチケットを作成してください。
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">こちらをクリック</a>してください。

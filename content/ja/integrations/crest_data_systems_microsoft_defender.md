@@ -129,3 +129,6 @@ tile:
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
  - メール: datadog.integrations@crestdatasys.com
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-microsoft-defender" target="_blank">こちらをクリック</a>してください。

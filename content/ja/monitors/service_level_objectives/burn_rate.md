@@ -87,8 +87,8 @@ SLO 目標値が低いほど、可能な最大バーンレート値も低くな�
 4. 特定の長さのウィンドウで、特定のバーンレートが測定されたときに、アラートがトリガーされるように設定します。
    * バーンレートの値は、以下の範囲でなければなりません。
      {{< img src="monitors/service_level_objectives/burn-rate-range.jpeg" alt="バーンレート範囲">}}
-   * 長いウィンドウの値は、`1 hour <= long window <= 48 hours` に制限されます。
-   * UI では、短いウィンドウは自動的に `short window = 1/12 * long window` として計算されます。
+   * Datadog は、長いウィンドウの最大値として 48 時間をサポートしています。長いウィンドウは、`1 hour <= long window <= 48 hours` の範囲である必要があります。
+   * 短いウィンドウは、UI 上で `short window = 1/12 * long window` として自動的に計算されます。
    * [API または Terraform](#api-and-terraform) を使用して別の短いウィンドウ値を指定できますが、常に長いウィンドウより小さい値である必要があります。
 5. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][4]を追加します。
 6. SLO コンフィギュレーションページで **Save and Exit** ボタンをクリックします。

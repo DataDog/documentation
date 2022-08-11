@@ -6,10 +6,11 @@ disable_toc: true
 ---
 
 {{< whatsnext desc="General RUM:" >}}
-{{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Compute Apdex and custom performance indicators with RUM data{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Compute Apdex and custom performance indicators with RUM data{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Use RUM & Session Replay for Product Analytics{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}

@@ -368,9 +368,11 @@ Metrics are calculated based on 100% of the application’s traffic, and remain 
 
 For high throughput services, there’s usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
-The default sampling mechanism is called [head-based sampling][19]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header.
+The default sampling mechanism for ingestion is called [head-based sampling][19]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header. Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, you must configure the sampling rate on the root service to take effect.
 
-Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, the trace is guaranteed to be kept or dropped as a whole.
+After spans have been ingested by Datadog, the Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. You can also define custom [retention filters][38] to index trace data you want to keep for longer to support your organization's goals.
+
+Learn more about the [Datadog Trace Pipeline][39].
 
 ## Filter or scrub sensitive information from traces
 
@@ -663,7 +665,7 @@ If you have trouble configuring your installations, set the environment variable
 [16]: /tracing/trace_collection/custom_instrumentation/
 [17]: /tracing/trace_pipeline/ingestion_controls/#configure-the-service-ingestion-rate
 [18]: /tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
-[19]: /tracing/trace_pipeline/ingestion_mechanisms//?tabs=environmentvariables#head-based-sampling
+[19]: /tracing/trace_pipeline/ingestion_mechanisms/?tabs=environmentvariables#head-based-sampling
 [20]: /tracing/guide/ignoring_apm_resources/
 [21]: /tracing/configure_data_security/
 [22]: /tracing/other_telemetry/connect_logs_and_traces/
@@ -682,3 +684,5 @@ If you have trouble configuring your installations, set the environment variable
 [35]: /serverless/guide/extension_motivation/
 [36]: /serverless/guide#install-using-the-datadog-forwarder
 [37]: /serverless/guide/troubleshoot_serverless_monitoring/
+[38]: /tracing/trace_pipeline/trace_retention/
+[39]: /tracing/trace_pipeline/

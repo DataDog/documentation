@@ -51,7 +51,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 
 ### Managing your payment method
 
-The **Payment Method** section contains details on your payment options. 
+The [**Payment Method**][12] section contains details on your payment options. 
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:80%;" >}}
 
@@ -61,7 +61,7 @@ The **Payment Method** section contains details on your payment options.
 
 ### Managing your billing contact details
 
-You can view your billing contact details on the **Billing Contact Details** section. 
+You can view your billing contact details on the [**Billing Contact Details**][12] section. 
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:80%;" >}}
 
@@ -113,3 +113,4 @@ Through **Edit Details**, you can add, edit or remove your billing address. You 
 [9]: https://app.datadoghq.com/account/billing_history
 [10]: mailto:billing@datadoghq.com
 [11]: /account_management/billing/credit_card/
+[12]: https://app.datadoghq.com/billing/plan

@@ -111,7 +111,6 @@ Both of these should return the same image.
 <!--{{/* if fallback settings */}}-->
 {{- if not $imageExists -}}
   {{- if eq ($fallback | lower) "cloud" -}}
-    {{ warnf "fallback %q %q %q" $basename (or (hasPrefix $basename "gcp") (hasPrefix $basename "google")) (or (hasPrefix $basename "aws") (hasPrefix $basename "amazon")) }}
     {{- if (or (hasPrefix $basename "gcp") (hasPrefix $basename "google")) -}}
       {{- $basename = "google-cloud-platform" -}}
       {{- $imageExists = true -}}

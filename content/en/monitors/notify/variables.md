@@ -159,6 +159,15 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{/is_exact_match}}
 ```
 
+The `is_exact_match` condition also supports matching multiple strings:
+
+```text
+{{#is_exact_match "host.name" "production" "staging"}}
+  This displays if the host that triggered the alert is exactly
+  named production or staging. @dev-team@company.com
+{{/is_exact_match}}
+```
+
 The `is_exact_match` conditional variable also supports [`{{value}}` template variables](#template-variables):
 
 ```text
@@ -537,7 +546,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) add `{{ urlencode "<variable>"}}` syntax in the URL:
+**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}

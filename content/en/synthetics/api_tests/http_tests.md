@@ -57,7 +57,8 @@ After choosing to create an `HTTP` test, define your test's request.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.
+   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header.
 
   </br>You can optionally specify the domain and work station in the **Additional configuration** section.  
 
@@ -71,7 +72,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`) you want to add to your HTTP request.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
 
    {{% /tab %}}
@@ -196,7 +197,7 @@ For more information, see [Using Synthetic Test Monitors][11].
 
 ### Create local variables
 
-You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -207,11 +208,13 @@ You can create local variables by clicking **Create Local Variable** at the top 
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+`{{ date(n unit, format) }}`
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
+
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 

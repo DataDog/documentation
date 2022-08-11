@@ -14,7 +14,7 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"
-- link: "/security_platform/guide/how-appsec-works/"
+- link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Monitoring Works in Datadog"
 ---
