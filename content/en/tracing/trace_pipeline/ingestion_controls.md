@@ -40,22 +40,22 @@ Get an overview of the total ingested data over the past hour, and an estimation
 
 If the monthly usage is under `100%`, the projected ingested data fits in your [monthly allotment][3]. A quota over `100%` means that the monthly ingestion volume is projected to be over your monthly allocation.
 
-## Manage Ingestion for All Services - Agent level
+## Managing ingestion for all services at the Agent level
 
 Before going into your services' ingestion configuration in tracing libraries, a share of the ingested volume is controllable from the Datadog Agent.
 
-Click on **Manage Agent Ingestion** to get recommendations on how to configure the Agent sampling controls.
+Click **Manage Agent Ingestion** to get instructions for configuring the Agent sampling controls.
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent Level Configuration Modal" >}}
 
 Three ingestion mechanisms can be controlled from the Datadog Agent:
-- **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied in libraries, targeting 10 traces-per-second per Agent. The setting `DD_APM_MAX_TPS` allows you to change the target number of traces-per-second.
+- **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied in libraries, targeting 10 traces per second per Agent. The setting `DD_APM_MAX_TPS` allows you to change the target number of traces per second.
 -  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces up to 10 traces-per-second per Agent.  The setting `DD_APM_ERROR_TPS` allows you to change the target number of traces-per-second.
--  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces-per-second per Agent.  The setting `DD_APM_DISABLE_RARE_SAMPLER` allows you to disable the collection of rare traces.
+-  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces per second per Agent. The setting `DD_APM_DISABLE_RARE_SAMPLER` allows you to disable the collection of rare traces.
 
 **Note**: The `Other Ingestion Reasons` greyed section of the pie chart refers to other ingestion reasons that **are not configurable** in the Datadog Agent configuration.
 
-## Manage Ingestion Per-Service - Library level
+## Managing ingestion for an individual service at the library level
 
 The service table contains information about the ingested volumes and ingestion configuration, broken down by service:
 
@@ -72,10 +72,10 @@ Ingested Bytes/s
 : Average number of bytes per second ingested into Datadog for the service over the past one hour.
 
 Downstream Bytes/s
-: Average number of bytes per second ingested for which the service **takes the sampling decision**. This includes the bytes of all downstream child spans that listen to the decision taken at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism.
+: Average number of bytes per second ingested for which the service *makes the sampling decision*. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism.
 
 Traffic Breakdown
-: A detailed breakdown of traffic sampled vs. unsampled for traces starting from the service.. See [Traffic breakdown](#traffic-breakdown) for more information.
+: A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
 
 Ingestion Configuration
 : Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured in the tracing libraries with [trace sampling rules][8], the service is marked as `Configured`. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
@@ -84,7 +84,7 @@ Infrastructure
 : Hosts, containers, and functions on which the service is running.
 
 Service status
-: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits set [in its configuration][9], `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][7], `OK` otherwise.
+: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits set [in its configuration][9], `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][7], or `OK` otherwise.
 
 Filter the page by environment, configuration, and status to view services for which you need to take an action. To reduce the global ingestion volume, sort the table by the `Downstream Bytes/s` column to view services responsible for the largest share of your ingestion.
 
@@ -122,7 +122,7 @@ For further investigations, use the [APM Trace - Estimated Usage Dashboard][12],
 
 ### Configure the service ingestion rate
 
-Click **Manage Ingestion Rate** to get recommendations on how to configure your service ingestion rate.
+Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Change the Service Ingestion Rate" >}}
 
@@ -132,7 +132,7 @@ To specify that a specific percentage of a service's traffic should be sent, add
 2. Choose the service language.
 3. Choose the desired ingestion percentage.
 4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service.
-5. Confirm on the Ingestion Control Page that your new percentage has been applied: the Traffic Breakdown column should surface the sampling rate applied. The ingestion reason for the service should also be `ingestion_reason:rule`.
+5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
 
 
 ## Further Reading
