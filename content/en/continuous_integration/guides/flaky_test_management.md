@@ -57,4 +57,4 @@ Click on the **New Flaky** number and then click **Ignore flaky tests**.
 
 3. The **Failed** column contains the number of failed tests and known flaky failed tests in the latest commit. Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository.
 
-{{< img src="ci/known-flaky-failed-tests.png" alt="Commits tab expanded with a commit selected and a text box in the Failed column displaying 2 tests failed and 2 known flaky" style="width:100%;">}}
+{{< img src="ci/known-flaky-failed-tests.png" alt="CI Tests Branches view with a branch selected and a text box in the Failed column displaying 1 tests failed and 1 known flaky" style="width:100%;">}}
