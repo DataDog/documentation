@@ -18,7 +18,7 @@ CI batch
 : The group of Synthetic tests triggered through a continuous integration and continuous delivery (CI/CD) pipeline or the [Synthetic Monitoring API][2].
 
 Test run
-: A single run of a Synthetic test. If you have configure retries, they count as individual test runs. For example, a test with two retries can have up to three associated test runs.
+: A single run of a Synthetic test. If you have configured retries, they count as individual test runs. For example, a test with two retries can have up to three associated test runs.
 
 Batch timeout
 : A batch timeout occurs when your batch does not complete within a reasonable time based on the [polling timeout][3] set in your configuration file. 
