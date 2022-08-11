@@ -147,32 +147,32 @@ missing_tms_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
 
-index_algolia_preview:
-  image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
-    entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["runner:main"]
-  stage: post-deploy
-  cache:
-    - *yarn_cache
-  environment: "preview"
-  timeout: 1h 30m
-  script:
-    - yarn install --immutable
-    - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
-        export DISPLAY=:99
-        Xvfb :99 -ac &
-        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
-  dependencies:
-    - build_preview
-  when: manual
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-  interruptible: true
+# index_algolia_preview:
+#   image:
+#     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+#     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
+#   tags: ["runner:main"]
+#   stage: post-deploy
+#   cache:
+#     - *yarn_cache
+#   environment: "preview"
+#   timeout: 1h 30m
+#   script:
+#     - yarn install --immutable
+#     - |-
+#         echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+#         echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
+#         export DISPLAY=:99
+#         Xvfb :99 -ac &
+#         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
+#   dependencies:
+#     - build_preview
+#   when: manual
+#   only:
+#     - /.+?\/[a-zA-Z0-9_-]+/
+#   interruptible: true
 
-atomic_algolia_preview:manual:
+algolia_sync_preview:
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
@@ -189,7 +189,7 @@ atomic_algolia_preview:manual:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
     - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"' 
-      when: manual
+      when: on_success
 
 replica_algolia_preview:
   <<: *base_template
