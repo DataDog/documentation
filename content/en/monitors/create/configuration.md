@@ -52,7 +52,7 @@ The query returns a series of points, but a single value is needed to compare to
 
 | Option                  | Description                                            |
 |-------------------------|--------------------------------------------------------|
-| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
+| average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
 | max | If any single value in the generated series crosses the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `max()` |
 | min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` |
 | sum | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
