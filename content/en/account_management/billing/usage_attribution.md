@@ -27,10 +27,6 @@ The following usage types are not supported in this tool:
 
 - Analyzed Logs (Security)
 - Incident Management
-- Indexed Log Events
-- Ingested Logs
-- Indexed Spans
-- Ingested Spans
 - Network Flows
 - Real User Monitoring
 
@@ -60,10 +56,10 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 
 {{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
-- Data is shown by all tag keys selected e.g. by app and service. 
-- Data can be shown by specific organization or tag keys by querying on the left-side dropdown. 
-- Value and Percentage options are available for table display. 
-- Data shown on the table can be edited to include select products. 
+- Data is shown by all tag keys selected e.g. by app and service.
+- Data can be shown by specific organization or tag keys by querying on the left-side dropdown.
+- Value and Percentage options are available for table display.
+- Data shown on the table can be edited to include select products.
 
 {{< img src="account_management/billing/usage_attribution/usage-attribution-options.png" alt="Usage Attribution options dropdown menu" style="width:100%;" >}}
 
@@ -87,7 +83,6 @@ This section provides daily reports at an hourly granularity to dig into time fr
 
 Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
 
-[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
 {{< /site-region >}}
 
 ### Interpreting the data
@@ -111,14 +106,14 @@ When using multiple tags, both the Daily and Monthly Usage Attribution reports c
 
 ## Tracking usage
 
-- Data can be shown by specific product(s), organization, or tag keys by editing the search queries below **Usage Attribution Trends**. 
-- Data can be shown at a daily, weekly, or monthly level. 
+- Data can be shown by specific product(s), organization, or tag keys by editing the search queries below **Usage Attribution Trends**.
+- Data can be shown at a daily, weekly, or monthly level.
 
 {{< img src="account_management/billing/usage_attribution/graph-by-tags.png" alt="Infra Hosts graphs separated by tags" style="width:100%;" >}}
 
 ### Interpreting the data
 
-For each product, graphs are displayed by tags. 
+For each product, graphs are displayed by tags.
 
 {{< img src="account_management/billing/usage_attribution/multiple-graphs-by-tags.png" alt="Infra Hosts and Custom Metrics graphs separated by tags" style="width:100%;" >}}
 
@@ -131,4 +126,5 @@ Each color block represents a unique tag value for each tag.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
+[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
