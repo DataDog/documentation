@@ -38,7 +38,7 @@ All metrics used in the page are based on live traffic data of the **past 1 hour
 
 Get an overview of the total ingested data over the past hour, and an estimation of your monthly usage against your monthly allocation, calculated with the active APM intrastructure (hosts, Fargate tasks, and serverless functions).
 
-If the monthly usage is under `100%`, the projected ingested data fits in your [monthly allotment][3]. A quota over `100%` means that the monthly ingestion volume is projected to be over your monthly allocation.
+If the monthly usage is under `100%`, the projected ingested data fits in your [monthly allotment][3]. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
 
 ## Managing ingestion for all services at the Agent level
 
