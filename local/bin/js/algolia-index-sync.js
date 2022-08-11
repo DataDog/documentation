@@ -21,8 +21,6 @@ const getIndexName = () => {
 }
 
 const updateSettings = index => {
-    console.log(index)
-
     const settings = {
         searchableAttributes: ['title', 'relpermalink', 'section_header', 'type, tags', 'unordered(description, content)'],
         ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
@@ -117,7 +115,7 @@ const updateRules = index => {
     return index.saveRule(rule)
 }
 
-const updateReplicas = (indexName) => {
+const updateReplicas = (client, indexName) => {
     const replicas = {};
     
     replicas[`${indexName}_api`] = {
@@ -174,7 +172,7 @@ const sync = () => {
         console.log(`${indexName} rules update complete`)
     })
 
-    updateReplicas(indexName);
+    updateReplicas(client, indexName);
 
     updateIndex(indexName);
 }
