@@ -53,8 +53,8 @@ Click on the **New Flaky** number and then click **Ignore flaky tests**.
 
 1. On the Tests page, select the **Branches** view.
 
-2. Filter the table to see branches, services, or commits of interest to you.
+2. Filter the table to see any branches, services, or commits of interest.
 
-3. Look at the **Failed** column to see the number of failed tests and known flaky failed tests in the latest commit. Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository.
+3. The **Failed** column contains the number of failed tests and known flaky failed tests in the latest commit. Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository.
 
-{{< img src="ci/known-flaky-failed-tests.png" alt="Known flaky failed tests" style="width:100%;">}}
+{{< img src="ci/known-flaky-failed-tests.png" alt="Commits tab expanded with a commit selected and a text box in the Failed column displaying 2 tests failed and 2 known flaky" style="width:100%;">}}
