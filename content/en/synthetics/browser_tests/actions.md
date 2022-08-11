@@ -262,7 +262,7 @@ To save this navigation step, click **Save Navigation Step**.
 
 You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait** are not recorded automatically. 
 
-Create this assertion step manually by clicking on **Special Actions** and selecting an action.
+Create this assertion step manually by clicking **Special Actions** and selecting an action type.
 
 #### Hover
 
