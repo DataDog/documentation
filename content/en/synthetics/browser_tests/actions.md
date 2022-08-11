@@ -115,7 +115,7 @@ Create this assertion step to have your browser test confirm that the text you s
 
 #### Test the content of the URL of the active page
 
-Create this assertion step to have your browser test take the URL of the last page that a user interacted with and verify whether a value you specified is present in the URL.
+Create this assertion step to have your browser test verify that the URL of the last page that was interacted with contains a value you specified.
 
 You can test for a value in the URL such as `string`, `number`, or `regex`.
 
