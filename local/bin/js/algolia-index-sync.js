@@ -168,9 +168,9 @@ const sync = () => {
         .then(() => console.log(`${indexName} synonyms update complete`))
         .catch(err => console.error(err))
 
-    updateRules(index)
-        .then(() => console.log(`${indexName} rules update complete`))
-        .catch(err => console.error(err))
+    // updateRules(index)
+    //     .then(() => console.log(`${indexName} rules update complete`))
+    //     .catch(err => console.error(err))
 
     updateReplicas(client, indexName);
     updateIndex(indexName);
