@@ -82,7 +82,7 @@ synthetic-tests:
 
 ### Test output
 
-This example output demonstrates the pipeline has identified the configuration file and is running the test:
+This example demonstrates the pipeline has identified the configuration file and is running the test:
 
 {{< img src="synthetics/cicd_integrations/gitlab/synthetic_test_run.png" alt="A Synthetic test running in GitLab" style="width:100%;" >}}
 
