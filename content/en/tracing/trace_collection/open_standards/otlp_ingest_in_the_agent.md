@@ -70,7 +70,7 @@ experimental:
 1. Follow the [Datadog Docker Agent setup][1]. 
   
 2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port: 
-   - For gPRC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`
+   - For gPRC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
    - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
 
 [1]: /agent/docker/
