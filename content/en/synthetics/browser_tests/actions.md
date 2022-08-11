@@ -2,8 +2,6 @@
 title: Browser Test Steps
 kind: documentation
 description: Learn how to automatically record and manually set steps in a browser test recording.
-aliases:
-- /synthetics/guide/email-validation
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
@@ -47,24 +45,24 @@ Click on the step and select a click type you want the browser test to perform a
 
 ### Type text
 
-Typing or inputting text into fields on your website such as forms or text areas records a step on the left hand corner.
+Steps that you perform on your application such as typing or inputting text into forms and fields on your website are recorded by Datadog and a recap appears as a step on the left hand corner. 
 
 {{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
 
 ### Select option
 
-Selecting an option from a `select` dropdown menu records a step on the left hand corner.
+Steps that you perform on your application such as selecting an option from a `select` dropdown menu are recorded by Datadog and a recap appears as a step on the left hand corner. 
 
 {{< img src="synthetics/browser_tests/select_options.png" alt="Select options step" style="width:70%;" >}}
 
 ### Upload file
 
-Uploading a file records a step on the left hand corner. You can upload up to 10 files with a limit of 5MB each.
-
 To record an **Upload** step, either:
 
 * Open your desktop from the browser
 * Drag and drop your file in the recording iframe
+
+Steps that you perform on your application such as uploading are recorded by Datadog and a recap appears as a step on the left hand corner. You can upload up to 10 files with a limit of 5MB each.
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:70%;" >}}
 
@@ -76,13 +74,13 @@ You can manually add and arrange steps on the left hand corner of the browser te
 
 Assertions allow you to validate that your browser test is in the state you expect it to be in at any point of a simulated user journey. 
 
-To confirm your test ends in an expected state, you must end your browser tests with an **Assertion**.
+To confirm your test ends in an expected state, you must end your browser tests with an **assertion**.
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
 
-Some assertions are performed on the active page, which refers to the page that the user last interacted with such as a **Click** or an **Assertion** on a page element.
+Some assertions are performed on the active page, which refers to the page that the user last interacted with such as a **click** or an **assertion** on a page element.
 
-To create an assertion step, select an assertion type:
+To create a step, select an assertion type:
 
 {{< tabs >}}
 {{% tab "Test An Element On The Active Page" %}}
@@ -91,17 +89,9 @@ To create an assertion step, select an assertion type:
 
 Create this assertion step to have your browser test select a page element and check if it contains a specific value. 
 
-You can specify that the content `should equal`, `should not equal`, `should contain`, `should not contain`, `should start with`, `should not start with`, `should match regex`, `should be empty`, `should not be empty`, `should be greater than`, `should be greater than or equal`, `should be less than`, or `should be less than or equal` a given value.
-
-To save the assertion, click **Apply**. You can select a `div` that `should contain` the word `hello` as a given value.
-
 #### Test an element's attribute
 
 Create this assertion step to have your browser test select a page element and check if one of its attributes matches the expected content. 
-
-Enter a name for the page attribute. You can specify that the content `should equal`, `should not equal`, `should contain`, `should not contain`, `should start with`, `should not start with`, `should match regex`, `should be empty`, `should not be empty`, `should be greater than`, `should be greater than or equal`, `should be less than`, or `should be less than or equal` a given value.
-
-To save the assertion, click **Apply**. You can test that a `src` attribute value matches the path of the expected image.
 
 #### Test that an element is present
 
@@ -109,8 +99,7 @@ Create this assertion step to have your browser test select a page element such 
 
 Set the user locator to ensure the browser test targets the correct element by selecting `CSS` or `XPath 1.0` from the dropdown menu and adding a selector. Click **Test**. 
 
-To save the assertion, click **Apply**. For more information, see [Advanced Options][1].
-
+Datadog recommends using the two assertions listed above for better accuracy. For more information, see [Advanced Options][1].
 
 [1]: /synthetics/browser_tests/advanced_options#user-specified-locator
 {{% /tab %}}
@@ -120,21 +109,15 @@ To save the assertion, click **Apply**. For more information, see [Advanced Opti
 
 Create this assertion step to have your browser test confirm that the text you specified in the `Value` field is **not** present on the current page being recorded.
 
-To save the assertion, click **Apply**.
-
 #### Test that some text is present on the active page
 
 Create this assertion step to have your browser test confirm that the text you specified in the `Value` field is present on the current page being recorded.
-
-To save the assertion, click **Apply**.
 
 #### Test the content of the URL of the active page
 
 Create this assertion step to have your browser test take the URL of the last page that a user interacted with and verify whether a value you specified is present in the URL.
 
-Enter a name for the step. You can specify that the content `should equal`, `should not equal`, `should contain`, `should not contain`, `should start with`, `should not start with`, `should match regex`, `should be empty`, `should not be empty`, `should be greater than`, `should be greater than or equal`, `should be less than`, or `should be less than or equal` a given value.
-
-To save the assertion, click **Apply**. You can test for a value in the URL such as `string`, `number`, or `regex`.
+You can test for a value in the URL such as `string`, `number`, or `regex`.
 
 {{% /tab %}}
 
@@ -142,45 +125,9 @@ To save the assertion, click **Apply**. You can test for a value in the URL such
 
 #### Test that an email was received
 
-Web application journeys often involve emails being triggered and sent to users' mailboxes, such as an email verification after account creation, email sent to reset forgotten passwords, email sent to notify order confirmation, or email confirmation after contact form submission.
-
 Create this assertion step to have your browser test confirm that your application's email mechanisms are working and verify that the values you specified such as `string`, `number`, or `regex` are present in the email subject or body. 
 
-To add an email variable called `EMAIL`:
-
-1. Click **Variables** and select **Email** from the dropdown menu. 
-2. Click **Add Variable** to make the variable available for you to use when you start recording. 
-
-{{< img src="synthetics/guide/email-validation/adding-variable.mp4" alt="Create an email variable" video="true"  width="100%">}}
-
-The email variable generates a unique mailbox maintained by Datadog at every test execution, which enables your browser tests to run without conflicts.
-
-After creating an email variable, you can confirm an email was sent correctly after an in-app trigger, check an email's content, and click on links located in sent emails in order to navigate to other URLs and validate your entire user flows, including web and email steps. 
-
-Click **Start Recording** and record all of the steps leading up to the email being triggered with your email variable. Hover over a variable and click the hand icon to inject a variable value in the text inputs of a form or field.
-
-{{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="Record your steps" video="true"  width="100%">}}
-
-Once you have recorded the steps to complete the form, click the **Sign Up** button to triggers an email notification. An email tailored to this recording session is sent to the Datadog mailbox, such as `838-n3q-q2y.6238933596@synthetics.dtdg.co`.
-
-In order to confirm that an email was sent, click **Assertion** and select **Test that an email was received**. To ensure your email follows specific guidelines for content, you can add additional verifications on the subject and body.
-
-{{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="Add an assertion" video="true"  width="100%">}}
-
-In this example, the assertion is considered successful if the email subject is `Welcome to Shopist!`, the body contains the sentence `Your verification code is`, and the verification code matches the `\d{1,6}` regex pattern.
-
-You can also have your browser test navigate through links inside sent emails.
-
-1. Click **Navigation** and select **Go to email and click link**. Click **Next**.
-2. The email containing the links you want to test appears in the inbox. Click **Next**.  
-3. Select the link you want your browser test to navigate to. The iframe’s or pop up’s URL immediately updates to the specified link. Click **Save Navigation Step**.
-4. The iframe redirects to the associated page URL. Continue recording your steps.
-
-In this example, the browser test looks into the `Welcome to Shopist` email, clicks the `Verify your email by clicking here` link, and confirms the user registration mechanism is working as expected. 
-
-{{< img src="synthetics/guide/email-validation/navigation-step.mp4" alt="Add a navigation step" video="true"  width="100%">}} 
-
-As the final step to your browser test, create an assertion to confirm that the `div` content triggers the proper account verification, for example: the page contains `Your account is now verified`.
+For more information, see [Email Validation with Browser Tests][1].
 
 #### Test your UI with custom JavaScript
 
@@ -190,7 +137,7 @@ The JavaScript assertion function contains the following parameters and requires
 
 * The `return` (mandatory) statement reflects the condition the assertion needs to meet in order for your test step to succeed. Any type can be returned, but the value is automatically casted as a boolean.
 
-* `vars` (optional): A string containing your browser test's [variables][1]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
+* `vars` (optional): A string containing your browser test's [variables][2]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
 * `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
@@ -229,10 +176,11 @@ Create this assertion step to have your browser test verify that files have been
 
 - If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
-For more information about how to test downloads, see [Test File Upload and Download][2].
+For more information about how to test downloads, see [Test File Upload and Download][3].
 
-[1]: /synthetics/browser_tests/actions#use-variables
-[2]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+[1]: /synthetics/guide/email-validation
+[2]: /synthetics/browser_tests/actions#use-variables
+[3]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -244,8 +192,6 @@ For more information about how to test downloads, see [Test File Upload and Down
 
 Create this navigation step to have your browser test refresh the current page of the recording.
 
-To save this navigation step, click **Save Navigation Step**.
-
 #### Go to an email and click on a link
 
 Once you have [created an email variable](#test-that-an-email-was-received), create this navigation step to have your browser test access unique Synthetic mail inboxes.
@@ -255,8 +201,6 @@ Select the email and links you want the browser test to click on. This step brin
 #### Follow a specific link
 
 Create this navigation step to have your browser test go to a specific page. You must prepend your URLs with `http` or `https` in the **Enter link URL** box.
-
-To save this navigation step, click **Save Navigation Step**.
 
 ### Special actions
 
@@ -284,8 +228,6 @@ To press keys that are not automatically recorded, specify the values that need 
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Press Key step in a browser test recording" style="width:50%;" >}}
 
-To save your test step, click **Apply**.
-
 #### Scroll
 
 Browser tests automatically scroll to the elements that need to be interacted with. In most cases, you do not need to manually add a scroll step. Use the scroll step when you need to trigger an additional interaction such as an infinite scroll.
@@ -295,8 +237,6 @@ Specify the number of pixels you want the browser test to scroll vertically and 
 {{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Scroll step in a browser test recording Test Scroll Step" style="width:50%;" >}}
 
 By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Target Element** and select an element you want the browser test to scroll on.
-
-To save your test step, click **Apply**.
 
 #### Wait
 
@@ -310,7 +250,7 @@ This additional time is systematically added to **every run** of your browser te
 
 ### Variables
 
-To create a variable, click **Variables** and select a type from the dropdown menu. 
+Click **Variables** and select a variable creation type from the dropdown menu. 
 
 {{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;" >}}
 
