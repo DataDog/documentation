@@ -364,7 +364,7 @@ For example, if your composite monitor has sub-monitor `a`, you can include the 
 {{ a.value }}
 ```
 
-To retriev the status of the sub-monitor `a` use:
+To retrieve the status of the sub-monitor `a` use:
 
 ```text
 {{ a.status }}
