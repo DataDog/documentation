@@ -281,7 +281,6 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 Create a variable from content such as a `span` or `div` by extracting the text of the element.
 
-Add a variable name and click **Select Element**. Selecting an element on the recorder page records a test step. 
 
 #### JavaScript
 
