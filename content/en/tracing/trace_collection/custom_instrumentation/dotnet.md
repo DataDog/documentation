@@ -180,7 +180,8 @@ using (var parentScope =
 
 The Datadog APM Tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. For more information, see the [setup documentation][7].
 
-In most cases, headers extraction and injection are transparent. Though, there are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. In that case, you can add a custom trace using the following code:
+In most cases, headers extraction and injection are transparent. In the case of distributed queues though, we don't know how the receiving end will be handled (consumed and processed, or consumed in a loop and stored for processing).
+In those cases (RabbitMQ, Kafka...), the tracer creates a short lived span when the message is consumed. We create this span mainly for tracking tags that would be relevant to you. Nevertheless, this span being immedialtely closed, any further work would not be attached to the current trace. If you need further work to be traced, you can do the following:
 
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
@@ -224,7 +225,12 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
 }
 ```
 
-When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
+Note that, spans created using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
+For Kafka specifically, the behaviour described above is true if `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` is set to `false`.
+
+<div class="alert alert-info">
+You can find an example of a rabbitmq integration if <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/RabbitMQ.DistributedTracing">dd-trace-dotnet repository</a>
+</div>
 
 ### Resource filtering
 
