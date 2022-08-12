@@ -127,6 +127,9 @@ content/en/serverless/libraries_integrations/cli.md
 content/en/serverless/libraries_integrations/cdk.md
 content/en/serverless/libraries_integrations/extension.md
 
+# catalog
+content/en/catalog/
+
 # Runtime data
 pids
 *.pid

@@ -1122,3 +1122,16 @@
       options:
         dest_dir: '/security_platform/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
+
+  - repo_name: dd-source
+    contents:
+    - action: catalog
+      branch: main
+      globs:
+        - "domains/workflow/actionplatform/apps/manifest_generator/manifest.schema.json"
+        - "domains/workflow/actionplatform/runner/bundles/com.datadoghq.*/manifest.json"
+      options:
+        dest_path: '/catalog/'
+        bundle_excludes:
+          - "com.datadoghq.test"
+          - "com.datadoghq.sample"
