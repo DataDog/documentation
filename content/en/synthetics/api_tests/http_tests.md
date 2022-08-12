@@ -46,6 +46,7 @@ After choosing to create an `HTTP` test, define your test's request.
    {{% tab "Request Options" %}}
 
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
@@ -59,9 +60,16 @@ After choosing to create an `HTTP` test, define your test's request.
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
    * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.
    For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header.
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
 
-  </br>You can optionally specify the domain and work station in the **Additional configuration** section.  
+     <br/> 
+   
+     You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
    {{% /tab %}}
 
    {{% tab "Query Parameters" %}}
@@ -77,18 +85,6 @@ After choosing to create an `HTTP` test, define your test's request.
 
    {{% /tab %}}
 
-   {{% tab "Certificate" %}}
-
-   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
-
-     ```
-     openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-     openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-     ```
-
-   {{% /tab %}}
-
    {{% tab "Proxy" %}}
 
    * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
@@ -101,7 +97,7 @@ After choosing to create an `HTTP` test, define your test's request.
    * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
 
 
-[1]: /security/synthetics
+[1]: /data_security/synthetics
    {{% /tab %}}
 
    {{< /tabs >}}
