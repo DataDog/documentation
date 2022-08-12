@@ -447,6 +447,30 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
   },
+  "GetRUMApplications": {
+    "description": "List all the RUM applications in your organization.",
+    "summary": "List all the RUM applications"
+  },
+  "CreateRUMApplication": {
+    "description": "Create a new RUM application in your organization.",
+    "summary": "Create a new RUM application",
+    "request_description": "",
+    "request_schema_description": "RUM application creation request attributes."
+  },
+  "DeleteRUMApplication": {
+    "description": "Delete an existing RUM application in your organization.",
+    "summary": "Delete a RUM application"
+  },
+  "GetRUMApplication": {
+    "description": "Get the RUM application with given ID in your organization.",
+    "summary": "Get a RUM application"
+  },
+  "UpdateRUMApplication": {
+    "description": "Update the RUM application with given ID in your organization.",
+    "summary": "Update a RUM application",
+    "request_description": "",
+    "request_schema_description": "RUM application update request."
+  },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "Get a list of RUM events"
@@ -657,6 +681,10 @@
   "GetCostByOrg": {
     "description": "Get cost across multi-org account. Cost by org data for a given month becomes available no later than the 16th of the following month.",
     "summary": "Get cost across multi-org account"
+  },
+  "GetEstimatedCostByOrg": {
+    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month. To access historical costs prior to this, use the /cost_by_org endpoint.",
+    "summary": "Get estimated cost across your account"
   },
   "GetHourlyUsage": {
     "description": "Get hourly usage by product family",

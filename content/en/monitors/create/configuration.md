@@ -42,8 +42,8 @@ The alert conditions vary based on the [monitor type][1]. Configure monitors to 
 {{< tabs >}}
 {{% tab "Threshold alert" %}}
 
-* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
-* the threshold `on average`, `at least once`, `at all times`, or `in total`
+* Trigger when the `average`, `max`, `min`, or `sum` of the metric is
+* `above`, `above or equal to`, `below`, or `below or equal to` the threshold
 * during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
 
 ### Aggregation method
@@ -52,10 +52,10 @@ The query returns a series of points, but a single value is needed to compare to
 
 | Option                  | Description                                            |
 |-------------------------|--------------------------------------------------------|
-| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
-| at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above. |
-| at&nbsp;all&nbsp;times  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below. |
-| in&nbsp;total           | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
+| average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query. |
+| max | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the `max()` function to your monitor query. |
+| min  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the `min()` function to your monitor query. |
+| sum | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query. |
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 

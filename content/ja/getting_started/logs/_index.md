@@ -1,26 +1,30 @@
 ---
-title: ログの使用を開始する
-kind: documentation
 further_reading:
-  - link: 'https://learn.datadoghq.com/enrol/index.php?id=15'
-    tag: ラーニングセンター
-    text: Datadog でのログ収集
-  - link: /logs/log_collection/
-    tag: ドキュメント
-    text: ログの収集とインテグレーション
-  - link: /getting_started/tagging/unified_service_tagging
-    tag: Documentation
-    text: 統合サービスタグ付けの構成方法を学ぶ
+- link: https://learn.datadoghq.com/courses/intro-to-log-management
+  tag: ラーニングセンター
+  text: ログ管理の紹介
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
+  tag: ラーニングセンター
+  text: ログ処理を極める
+- link: /logs/log_collection/
+  tag: Documentation
+  text: ログの収集とインテグレーション
+- link: /getting_started/tagging/unified_service_tagging
+  tag: ドキュメント
+  text: 統合サービスタグ付けの構成方法を学ぶ
+kind: documentation
+title: ログの使用を開始する
 ---
+
 ## 概要
 
-Datadog のログ管理を使用して、サーバー、コンテナ、クラウド環境、アプリケーション、既存のログプロセッサやフォワーダーなど、複数のロギングソースにまたがるログを収集します。従来のロギングでは、コスト効率を維持するために分析・保持するログを選択する必要がありました。Datadog Logging without Limits* では、ログの収集、処理、アーカイブ、探索、監視をログの制限なく行うことができます。
+Datadog のログ管理 (ログとも呼ばれます) を使用して、サーバー、コンテナ、クラウド環境、アプリケーション、既存のログプロセッサやフォワーダーなど、複数のロギングソースにまたがるログを収集します。従来のロギングでは、コスト効率を維持するために分析・保持するログを選択する必要がありました。Datadog Logging without Limits* では、ログの収集、処理、アーカイブ、探索、監視をログの制限なく行うことができます。
 
 このページでは、Datadog でログ管理を始めるための方法を説明します。まだお持ちでない方は、[Datadog アカウント][1]を作成してください。
 
 ## ロギングソースを構成する
 
-ログ管理では、ログエクスプローラーでデータを分析・探索したり、[トレーシング][2]や[メトリクス][3]を接続して Datadog 全体で有益なデータを関連付けたり、取り込んだログを Datadog の[セキュリティモニタリング][4]で使用したりすることができます。Datadog 内でのログのライフサイクルは、ログソースからログを取り込むところから始まります。
+ログ管理では、ログエクスプローラーでデータを分析・探索したり、[トレーシング][2]や[メトリクス][3]を接続して Datadog 全体で有益なデータを関連付けたり、取り込んだログを Datadog [Cloud SIEM][4] で使用したりすることができます。Datadog 内でのログのライフサイクルは、ログソースからログを取り込むところから始まります。
 
 {{< img src="/getting_started/logs/getting-started-overview.png" alt="様々なタイプのログコンフィギュレーション">}}
 
@@ -43,13 +47,15 @@ logs:
 
     **注意**: ログ収集には Datadog Agent v6 以降が必要です。
 
-2. Datadog Agent では、ログの収集はデフォルトで無効になっています。ログ収集を有効にするには、`datadog.yaml` ファイルで `logs_enabled` を `true` に設定してください。
+2. Datadog Agent では、ログの収集はデフォルトで**有効になっていません**。ログ収集を有効にするには、`datadog.yaml` ファイルで `logs_enabled` を `true` に設定してください。
+
+    {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 
 3. [Datadog Agent を再起動][7]します。
 
-4. Datadog アプリのインテグレーション[起動手順][8]またはカスタムファイルのログ収集手順に従ってください。
+4. Datadog サイトのインテグレーション[起動手順][8]またはカスタムファイルのログ収集手順に従ってください。
 
-    **注**: カスタムファイルからログを収集していて、テールファイル、TCP/UDP、journald、Windows Events の例が必要な場合は、[カスタムログ収集のドキュメント][9]を参照してください。
+    **注**: カスタムファイルからログを収集していて、テールファイル、TCP/UDP、journald、Windows Events の例が必要な場合は、[カスタムログ収集][9]を参照してください。
 
 ### コンテナ
 
@@ -77,7 +83,7 @@ Datadog では、SDK やライブラリを使ってクライアントからロ�
 
 ### その他
 
-rsyslog、flutend、logstash などの既存のログサービスやユーティリティを使用している場合は、Datadog のプラグインやログ転送オプションをご利用いただけます。
+rsyslog、FluentD、Logstash などの既存のログサービスやユーティリティを使用している場合は、Datadog のプラグインやログ転送オプションをご利用いただけます。
 
 インテグレーションが表示されない場合は、*other integrations* ボックスに入力すると、そのインテグレーションが利用可能になったときに通知を受け取ることができます。
 
@@ -87,7 +93,7 @@ rsyslog、flutend、logstash などの既存のログサービスやユーティ
 
 ロギングソースを構成すると、ログを[ログエクスプローラー][16]で確認できます。ここでログをフィルタリング・集約・可視化することができます。
 
-例えば、あるサービスから流れてくるログをドリルダウンしたい場合は、`Service:your-service-name` でフィルタリングします。さらに、`ERROR` などの `status` などでフィルタリングし、[パターン別集計][17]を選択すると、サービスのどの部分で最も多くのエラーが記録されているかを確認することができます。
+例えば、あるサービスから流れてくるログをさらに調査するには、`service` でフィルタリングします。さらに、`ERROR` などの `status` などでフィルタリングし、[パターン別集計][17]を選択すると、サービスのどの部分で最も多くのエラーが記録されているかを確認することができます。
 
 {{< img src="/getting_started/logs/error-pattern.png" alt="ログエクスプローラーでのエラーパターンによるフィルタリング">}}
 
@@ -123,9 +129,9 @@ rsyslog、flutend、logstash などの既存のログサービスやユーティ
 *Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: https://www.datadoghq.com
-[2]: /ja/tracing/connect_logs_and_traces/
+[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [3]: /ja/logs/guide/correlate-logs-with-metrics/
-[4]: /ja/security_platform/security_monitoring/
+[4]: /ja/security_platform/cloud_siem/
 [5]: /ja/getting_started/integrations/
 [6]: /ja/agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli

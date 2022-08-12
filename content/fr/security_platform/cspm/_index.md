@@ -5,7 +5,7 @@ title: Cloud Security Posture Management
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-warning">À l'heure actuelle, la solution Cloud Security Posture Management n'est pas disponible pour ce site.
+<div class="alert alert-warning">À l'heure actuelle, la solution Cloud Security Posture Management n'est pas disponible pour ce site.</div>
 
 {{< /site-region >}}
 

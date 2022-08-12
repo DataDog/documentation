@@ -28975,6 +28975,619 @@
         },
         "type": "object"
       },
+      "RUMApplication": {
+        "description": "RUM application.",
+        "properties": {
+          "attributes": {
+            "description": "RUM application attributes.",
+            "properties": {
+              "application_id": {
+                "description": "ID of the RUM application.",
+                "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Timestamp in ms of the creation date.",
+                "example": 1659479836169,
+                "format": "int64",
+                "type": "integer"
+              },
+              "created_by_handle": {
+                "description": "Handle of the creator user.",
+                "example": "john.doe",
+                "type": "string"
+              },
+              "hash": {
+                "description": "Client token of the RUM application.",
+                "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+                "type": "string"
+              },
+              "name": {
+                "description": "Name of the RUM application.",
+                "example": "my_rum_application",
+                "type": "string"
+              },
+              "org_id": {
+                "description": "Org ID of the RUM application.",
+                "example": 999,
+                "format": "int32",
+                "type": "integer"
+              },
+              "type": {
+                "description": "Type of the RUM application.",
+                "example": "browser|ios|android|react-native|flutter",
+                "type": "string"
+              },
+              "updated_at": {
+                "description": "Timestamp in ms of the last update date.",
+                "example": 1659479836169,
+                "format": "int64",
+                "type": "integer"
+              },
+              "updated_by_handle": {
+                "description": "Handle of the updater user.",
+                "example": "jane.doe",
+                "type": "string"
+              }
+            },
+            "required": [
+              "application_id",
+              "created_at",
+              "created_by_handle",
+              "name",
+              "org_id",
+              "type",
+              "updated_at",
+              "updated_by_handle"
+            ],
+            "type": "object"
+          },
+          "id": {
+            "description": "RUM application ID.",
+            "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+            "type": "string"
+          },
+          "type": {
+            "default": "rum_application",
+            "description": "RUM application response type.",
+            "enum": [
+              "rum_application"
+            ],
+            "example": "rum_application",
+            "type": "string",
+            "x-enum-varnames": [
+              "RUM_APPLICATION"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "RUMApplicationAttributes": {
+        "description": "RUM application attributes.",
+        "properties": {
+          "application_id": {
+            "description": "ID of the RUM application.",
+            "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "Timestamp in ms of the creation date.",
+            "example": 1659479836169,
+            "format": "int64",
+            "type": "integer"
+          },
+          "created_by_handle": {
+            "description": "Handle of the creator user.",
+            "example": "john.doe",
+            "type": "string"
+          },
+          "hash": {
+            "description": "Client token of the RUM application.",
+            "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the RUM application.",
+            "example": "my_rum_application",
+            "type": "string"
+          },
+          "org_id": {
+            "description": "Org ID of the RUM application.",
+            "example": 999,
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": {
+            "description": "Type of the RUM application.",
+            "example": "browser|ios|android|react-native|flutter",
+            "type": "string"
+          },
+          "updated_at": {
+            "description": "Timestamp in ms of the last update date.",
+            "example": 1659479836169,
+            "format": "int64",
+            "type": "integer"
+          },
+          "updated_by_handle": {
+            "description": "Handle of the updater user.",
+            "example": "jane.doe",
+            "type": "string"
+          }
+        },
+        "required": [
+          "application_id",
+          "created_at",
+          "created_by_handle",
+          "name",
+          "org_id",
+          "type",
+          "updated_at",
+          "updated_by_handle"
+        ],
+        "type": "object"
+      },
+      "RUMApplicationCreate": {
+        "description": "RUM application creation.",
+        "properties": {
+          "attributes": {
+            "description": "RUM application creation attributes.",
+            "properties": {
+              "name": {
+                "description": "Name of the RUM application.",
+                "example": "my_new_rum_application",
+                "type": "string"
+              },
+              "type": {
+                "description": "Type of the RUM application.",
+                "example": "browser|ios|android|react-native|flutter",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "rum_application_create",
+            "description": "RUM application creation type.",
+            "enum": [
+              "rum_application_create"
+            ],
+            "example": "rum_application_create",
+            "type": "string",
+            "x-enum-varnames": [
+              "RUM_APPLICATION_CREATE"
+            ]
+          }
+        },
+        "required": [
+          "attributes",
+          "type"
+        ],
+        "type": "object"
+      },
+      "RUMApplicationCreateAttributes": {
+        "description": "RUM application creation attributes.",
+        "properties": {
+          "name": {
+            "description": "Name of the RUM application.",
+            "example": "my_new_rum_application",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of the RUM application.",
+            "example": "browser|ios|android|react-native|flutter",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "RUMApplicationCreateRequest": {
+        "description": "RUM application creation request attributes.",
+        "properties": {
+          "data": {
+            "description": "RUM application creation.",
+            "properties": {
+              "attributes": {
+                "description": "RUM application creation attributes.",
+                "properties": {
+                  "name": {
+                    "description": "Name of the RUM application.",
+                    "example": "my_new_rum_application",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of the RUM application.",
+                    "example": "browser|ios|android|react-native|flutter",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "rum_application_create",
+                "description": "RUM application creation type.",
+                "enum": [
+                  "rum_application_create"
+                ],
+                "example": "rum_application_create",
+                "type": "string",
+                "x-enum-varnames": [
+                  "RUM_APPLICATION_CREATE"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "RUMApplicationCreateType": {
+        "default": "rum_application_create",
+        "description": "RUM application creation type.",
+        "enum": [
+          "rum_application_create"
+        ],
+        "example": "rum_application_create",
+        "type": "string",
+        "x-enum-varnames": [
+          "RUM_APPLICATION_CREATE"
+        ]
+      },
+      "RUMApplicationResponse": {
+        "description": "RUM application response.",
+        "properties": {
+          "data": {
+            "description": "RUM application.",
+            "properties": {
+              "attributes": {
+                "description": "RUM application attributes.",
+                "properties": {
+                  "application_id": {
+                    "description": "ID of the RUM application.",
+                    "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "description": "Timestamp in ms of the creation date.",
+                    "example": 1659479836169,
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "created_by_handle": {
+                    "description": "Handle of the creator user.",
+                    "example": "john.doe",
+                    "type": "string"
+                  },
+                  "hash": {
+                    "description": "Client token of the RUM application.",
+                    "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the RUM application.",
+                    "example": "my_rum_application",
+                    "type": "string"
+                  },
+                  "org_id": {
+                    "description": "Org ID of the RUM application.",
+                    "example": 999,
+                    "format": "int32",
+                    "type": "integer"
+                  },
+                  "type": {
+                    "description": "Type of the RUM application.",
+                    "example": "browser|ios|android|react-native|flutter",
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "description": "Timestamp in ms of the last update date.",
+                    "example": 1659479836169,
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "updated_by_handle": {
+                    "description": "Handle of the updater user.",
+                    "example": "jane.doe",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "application_id",
+                  "created_at",
+                  "created_by_handle",
+                  "name",
+                  "org_id",
+                  "type",
+                  "updated_at",
+                  "updated_by_handle"
+                ],
+                "type": "object"
+              },
+              "id": {
+                "description": "RUM application ID.",
+                "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                "type": "string"
+              },
+              "type": {
+                "default": "rum_application",
+                "description": "RUM application response type.",
+                "enum": [
+                  "rum_application"
+                ],
+                "example": "rum_application",
+                "type": "string",
+                "x-enum-varnames": [
+                  "RUM_APPLICATION"
+                ]
+              }
+            },
+            "required": [
+              "attributes",
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "RUMApplicationType": {
+        "default": "rum_application",
+        "description": "RUM application response type.",
+        "enum": [
+          "rum_application"
+        ],
+        "example": "rum_application",
+        "type": "string",
+        "x-enum-varnames": [
+          "RUM_APPLICATION"
+        ]
+      },
+      "RUMApplicationUpdate": {
+        "description": "RUM application update.",
+        "properties": {
+          "attributes": {
+            "description": "RUM application update attributes.",
+            "properties": {
+              "name": {
+                "description": "Name of the RUM application.",
+                "example": "updated_name_for_my_existing_rum_application",
+                "type": "string"
+              },
+              "type": {
+                "description": "Type of the RUM application.",
+                "example": "browser|ios|android|react-native|flutter",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "RUM application ID.",
+            "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+            "type": "string"
+          },
+          "type": {
+            "default": "rum_application_update",
+            "description": "RUM application update type.",
+            "enum": [
+              "rum_application_update"
+            ],
+            "example": "rum_application_update",
+            "type": "string",
+            "x-enum-varnames": [
+              "RUM_APPLICATION_UPDATE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "RUMApplicationUpdateAttributes": {
+        "description": "RUM application update attributes.",
+        "properties": {
+          "name": {
+            "description": "Name of the RUM application.",
+            "example": "updated_name_for_my_existing_rum_application",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type of the RUM application.",
+            "example": "browser|ios|android|react-native|flutter",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "RUMApplicationUpdateRequest": {
+        "description": "RUM application update request.",
+        "properties": {
+          "data": {
+            "description": "RUM application update.",
+            "properties": {
+              "attributes": {
+                "description": "RUM application update attributes.",
+                "properties": {
+                  "name": {
+                    "description": "Name of the RUM application.",
+                    "example": "updated_name_for_my_existing_rum_application",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Type of the RUM application.",
+                    "example": "browser|ios|android|react-native|flutter",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "RUM application ID.",
+                "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                "type": "string"
+              },
+              "type": {
+                "default": "rum_application_update",
+                "description": "RUM application update type.",
+                "enum": [
+                  "rum_application_update"
+                ],
+                "example": "rum_application_update",
+                "type": "string",
+                "x-enum-varnames": [
+                  "RUM_APPLICATION_UPDATE"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "type"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "RUMApplicationUpdateType": {
+        "default": "rum_application_update",
+        "description": "RUM application update type.",
+        "enum": [
+          "rum_application_update"
+        ],
+        "example": "rum_application_update",
+        "type": "string",
+        "x-enum-varnames": [
+          "RUM_APPLICATION_UPDATE"
+        ]
+      },
+      "RUMApplicationsResponse": {
+        "description": "RUM applications response.",
+        "properties": {
+          "data": {
+            "description": "RUM applications array response.",
+            "items": {
+              "description": "RUM application.",
+              "properties": {
+                "attributes": {
+                  "description": "RUM application attributes.",
+                  "properties": {
+                    "application_id": {
+                      "description": "ID of the RUM application.",
+                      "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Timestamp in ms of the creation date.",
+                      "example": 1659479836169,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "created_by_handle": {
+                      "description": "Handle of the creator user.",
+                      "example": "john.doe",
+                      "type": "string"
+                    },
+                    "hash": {
+                      "description": "Client token of the RUM application.",
+                      "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Name of the RUM application.",
+                      "example": "my_rum_application",
+                      "type": "string"
+                    },
+                    "org_id": {
+                      "description": "Org ID of the RUM application.",
+                      "example": 999,
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "type": {
+                      "description": "Type of the RUM application.",
+                      "example": "browser|ios|android|react-native|flutter",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "description": "Timestamp in ms of the last update date.",
+                      "example": 1659479836169,
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "updated_by_handle": {
+                      "description": "Handle of the updater user.",
+                      "example": "jane.doe",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "application_id",
+                    "created_at",
+                    "created_by_handle",
+                    "name",
+                    "org_id",
+                    "type",
+                    "updated_at",
+                    "updated_by_handle"
+                  ],
+                  "type": "object"
+                },
+                "id": {
+                  "description": "RUM application ID.",
+                  "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                  "type": "string"
+                },
+                "type": {
+                  "default": "rum_application",
+                  "description": "RUM application response type.",
+                  "enum": [
+                    "rum_application"
+                  ],
+                  "example": "rum_application",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "RUM_APPLICATION"
+                  ]
+                }
+              },
+              "required": [
+                "attributes",
+                "id",
+                "type"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "RUMBucketResponse": {
         "description": "Bucket values.",
         "properties": {
@@ -74132,6 +74745,1001 @@
         }
       }
     },
+    "/api/v2/rum/applications": {
+      "get": {
+        "description": "List all the RUM applications in your organization.",
+        "operationId": "GetRUMApplications",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "RUM applications response.",
+                  "properties": {
+                    "data": {
+                      "description": "RUM applications array response.",
+                      "items": {
+                        "description": "RUM application.",
+                        "properties": {
+                          "attributes": {
+                            "description": "RUM application attributes.",
+                            "properties": {
+                              "application_id": {
+                                "description": "ID of the RUM application.",
+                                "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                                "type": "string"
+                              },
+                              "created_at": {
+                                "description": "Timestamp in ms of the creation date.",
+                                "example": 1659479836169,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "created_by_handle": {
+                                "description": "Handle of the creator user.",
+                                "example": "john.doe",
+                                "type": "string"
+                              },
+                              "hash": {
+                                "description": "Client token of the RUM application.",
+                                "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Name of the RUM application.",
+                                "example": "my_rum_application",
+                                "type": "string"
+                              },
+                              "org_id": {
+                                "description": "Org ID of the RUM application.",
+                                "example": 999,
+                                "format": "int32",
+                                "type": "integer"
+                              },
+                              "type": {
+                                "description": "Type of the RUM application.",
+                                "example": "browser|ios|android|react-native|flutter",
+                                "type": "string"
+                              },
+                              "updated_at": {
+                                "description": "Timestamp in ms of the last update date.",
+                                "example": 1659479836169,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "updated_by_handle": {
+                                "description": "Handle of the updater user.",
+                                "example": "jane.doe",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "application_id",
+                              "created_at",
+                              "created_by_handle",
+                              "name",
+                              "org_id",
+                              "type",
+                              "updated_at",
+                              "updated_by_handle"
+                            ],
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "RUM application ID.",
+                            "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "rum_application",
+                            "description": "RUM application response type.",
+                            "enum": [
+                              "rum_application"
+                            ],
+                            "example": "rum_application",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "RUM_APPLICATION"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "attributes",
+                          "id",
+                          "type"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          }
+        ],
+        "summary": "List all the RUM applications",
+        "tags": [
+          "RUM"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "post": {
+        "description": "Create a new RUM application in your organization.",
+        "operationId": "CreateRUMApplication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "RUM application creation request attributes.",
+                "properties": {
+                  "data": {
+                    "description": "RUM application creation.",
+                    "properties": {
+                      "attributes": {
+                        "description": "RUM application creation attributes.",
+                        "properties": {
+                          "name": {
+                            "description": "Name of the RUM application.",
+                            "example": "my_new_rum_application",
+                            "type": "string"
+                          },
+                          "type": {
+                            "description": "Type of the RUM application.",
+                            "example": "browser|ios|android|react-native|flutter",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "rum_application_create",
+                        "description": "RUM application creation type.",
+                        "enum": [
+                          "rum_application_create"
+                        ],
+                        "example": "rum_application_create",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "RUM_APPLICATION_CREATE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "attributes",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "RUM application response.",
+                  "properties": {
+                    "data": {
+                      "description": "RUM application.",
+                      "properties": {
+                        "attributes": {
+                          "description": "RUM application attributes.",
+                          "properties": {
+                            "application_id": {
+                              "description": "ID of the RUM application.",
+                              "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "description": "Timestamp in ms of the creation date.",
+                              "example": 1659479836169,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "created_by_handle": {
+                              "description": "Handle of the creator user.",
+                              "example": "john.doe",
+                              "type": "string"
+                            },
+                            "hash": {
+                              "description": "Client token of the RUM application.",
+                              "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the RUM application.",
+                              "example": "my_rum_application",
+                              "type": "string"
+                            },
+                            "org_id": {
+                              "description": "Org ID of the RUM application.",
+                              "example": 999,
+                              "format": "int32",
+                              "type": "integer"
+                            },
+                            "type": {
+                              "description": "Type of the RUM application.",
+                              "example": "browser|ios|android|react-native|flutter",
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "description": "Timestamp in ms of the last update date.",
+                              "example": 1659479836169,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "updated_by_handle": {
+                              "description": "Handle of the updater user.",
+                              "example": "jane.doe",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "application_id",
+                            "created_at",
+                            "created_by_handle",
+                            "name",
+                            "org_id",
+                            "type",
+                            "updated_at",
+                            "updated_by_handle"
+                          ],
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "RUM application ID.",
+                          "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "rum_application",
+                          "description": "RUM application response type.",
+                          "enum": [
+                            "rum_application"
+                          ],
+                          "example": "rum_application",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "RUM_APPLICATION"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "attributes",
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          }
+        ],
+        "summary": "Create a new RUM application",
+        "tags": [
+          "RUM"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-given": {
+          "rum_application": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\": {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n    }\n  }\n}"
+              }
+            ],
+            "step": "there is a valid \"rum_application\" in the system"
+          }
+        },
+        "x-undo": {
+          "operationId": "DeleteRUMApplication",
+          "parameters": [
+            {
+              "name": "id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/rum/applications/{id}": {
+      "delete": {
+        "description": "Delete an existing RUM application in your organization.",
+        "operationId": "DeleteRUMApplication",
+        "parameters": [
+          {
+            "description": "RUM application ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          }
+        ],
+        "summary": "Delete a RUM application",
+        "tags": [
+          "RUM"
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        }
+      },
+      "get": {
+        "description": "Get the RUM application with given ID in your organization.",
+        "operationId": "GetRUMApplication",
+        "parameters": [
+          {
+            "description": "RUM application ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "RUM application response.",
+                  "properties": {
+                    "data": {
+                      "description": "RUM application.",
+                      "properties": {
+                        "attributes": {
+                          "description": "RUM application attributes.",
+                          "properties": {
+                            "application_id": {
+                              "description": "ID of the RUM application.",
+                              "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "description": "Timestamp in ms of the creation date.",
+                              "example": 1659479836169,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "created_by_handle": {
+                              "description": "Handle of the creator user.",
+                              "example": "john.doe",
+                              "type": "string"
+                            },
+                            "hash": {
+                              "description": "Client token of the RUM application.",
+                              "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the RUM application.",
+                              "example": "my_rum_application",
+                              "type": "string"
+                            },
+                            "org_id": {
+                              "description": "Org ID of the RUM application.",
+                              "example": 999,
+                              "format": "int32",
+                              "type": "integer"
+                            },
+                            "type": {
+                              "description": "Type of the RUM application.",
+                              "example": "browser|ios|android|react-native|flutter",
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "description": "Timestamp in ms of the last update date.",
+                              "example": 1659479836169,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "updated_by_handle": {
+                              "description": "Handle of the updater user.",
+                              "example": "jane.doe",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "application_id",
+                            "created_at",
+                            "created_by_handle",
+                            "name",
+                            "org_id",
+                            "type",
+                            "updated_at",
+                            "updated_by_handle"
+                          ],
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "RUM application ID.",
+                          "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "rum_application",
+                          "description": "RUM application response type.",
+                          "enum": [
+                            "rum_application"
+                          ],
+                          "example": "rum_application",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "RUM_APPLICATION"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "attributes",
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          }
+        ],
+        "summary": "Get a RUM application",
+        "tags": [
+          "RUM"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      },
+      "patch": {
+        "description": "Update the RUM application with given ID in your organization.",
+        "operationId": "UpdateRUMApplication",
+        "parameters": [
+          {
+            "description": "RUM application ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "RUM application update request.",
+                "properties": {
+                  "data": {
+                    "description": "RUM application update.",
+                    "properties": {
+                      "attributes": {
+                        "description": "RUM application update attributes.",
+                        "properties": {
+                          "name": {
+                            "description": "Name of the RUM application.",
+                            "example": "updated_name_for_my_existing_rum_application",
+                            "type": "string"
+                          },
+                          "type": {
+                            "description": "Type of the RUM application.",
+                            "example": "browser|ios|android|react-native|flutter",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "id": {
+                        "description": "RUM application ID.",
+                        "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "rum_application_update",
+                        "description": "RUM application update type.",
+                        "enum": [
+                          "rum_application_update"
+                        ],
+                        "example": "rum_application_update",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "RUM_APPLICATION_UPDATE"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "RUM application response.",
+                  "properties": {
+                    "data": {
+                      "description": "RUM application.",
+                      "properties": {
+                        "attributes": {
+                          "description": "RUM application attributes.",
+                          "properties": {
+                            "application_id": {
+                              "description": "ID of the RUM application.",
+                              "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                              "type": "string"
+                            },
+                            "created_at": {
+                              "description": "Timestamp in ms of the creation date.",
+                              "example": 1659479836169,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "created_by_handle": {
+                              "description": "Handle of the creator user.",
+                              "example": "john.doe",
+                              "type": "string"
+                            },
+                            "hash": {
+                              "description": "Client token of the RUM application.",
+                              "example": "abcd1234efgh5678ijkl90abcd1234efgh0",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the RUM application.",
+                              "example": "my_rum_application",
+                              "type": "string"
+                            },
+                            "org_id": {
+                              "description": "Org ID of the RUM application.",
+                              "example": 999,
+                              "format": "int32",
+                              "type": "integer"
+                            },
+                            "type": {
+                              "description": "Type of the RUM application.",
+                              "example": "browser|ios|android|react-native|flutter",
+                              "type": "string"
+                            },
+                            "updated_at": {
+                              "description": "Timestamp in ms of the last update date.",
+                              "example": 1659479836169,
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "updated_by_handle": {
+                              "description": "Handle of the updater user.",
+                              "example": "jane.doe",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "application_id",
+                            "created_at",
+                            "created_by_handle",
+                            "name",
+                            "org_id",
+                            "type",
+                            "updated_at",
+                            "updated_by_handle"
+                          ],
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "RUM application ID.",
+                          "example": "abcd1234-0000-0000-abcd-1234abcd5678",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "rum_application",
+                          "description": "RUM application response type.",
+                          "enum": [
+                            "rum_application"
+                          ],
+                          "example": "rum_application",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "RUM_APPLICATION"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "attributes",
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          }
+        ],
+        "summary": "Update a RUM application",
+        "tags": [
+          "RUM"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
+      }
+    },
     "/api/v2/rum/events": {
       "get": {
         "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
@@ -91677,7 +93285,7 @@
         "tags": [
           "Usage Metering"
         ],
-        "x-menu-order": 37,
+        "x-menu-order": 38,
         "x-undo": {
           "type": "safe"
         }
@@ -91895,6 +93503,248 @@
         }
       }
     },
+    "/api/v2/usage/estimated_cost": {
+      "get": {
+        "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month. To access historical costs prior to this, use the /cost_by_org endpoint.",
+        "operationId": "GetEstimatedCostByOrg",
+        "parameters": [
+          {
+            "description": "String to specify whether cost is broken down at a parent-org level or at the sub-org level. Currently, only the 'sub-org' view is supported.",
+            "in": "query",
+            "name": "view",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost beginning this month. Either start_month or start_date should be specified, but not both. (start_month cannot go beyond two months in the past)",
+            "in": "query",
+            "name": "start_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost ending this month.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost beginning this day. Either start_month or start_date should be specified, but not both. (start_date cannot go beyond two months in the past)",
+            "in": "query",
+            "name": "start_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]` for cost ending this day.",
+            "in": "query",
+            "name": "end_date",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Chargeback Summary response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing Chargeback Summary.",
+                      "items": {
+                        "description": "Cost data.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Cost attributes data.",
+                            "properties": {
+                              "charges": {
+                                "description": "List of charges data reported for the requested month.",
+                                "items": {
+                                  "description": "Charges breakdown.",
+                                  "properties": {
+                                    "charge_type": {
+                                      "description": "The type of charge for a particular product.",
+                                      "example": "on_demand",
+                                      "type": "string"
+                                    },
+                                    "cost": {
+                                      "description": "The cost for a particular product and charge type during a given month.",
+                                      "format": "double",
+                                      "type": "number"
+                                    },
+                                    "product_name": {
+                                      "description": "The product for which cost is being reported.",
+                                      "example": "infra_host",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "date": {
+                                "description": "The month requested.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "total_cost": {
+                                "description": "The total cost of products for the month.",
+                                "format": "double",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "cost_by_org",
+                            "description": "Type of cost data.",
+                            "enum": [
+                              "cost_by_org"
+                            ],
+                            "example": "cost_by_org",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COST_BY_ORG"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get estimated cost across your account",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 6,
+        "x-undo": {
+          "type": "safe"
+        },
+        "x-unstable": "**Note**: This endpoint is in public beta.\nOnly the sub-org view is available currently, the summary view will be released at a later date."
+      }
+    },
     "/api/v2/usage/hourly_usage": {
       "get": {
         "description": "Get hourly usage by product family",
@@ -91921,7 +93771,7 @@
             }
           },
           {
-            "description": "Comma separated list of product families to retrieve. Available families are `all`, `analyzed_logs`,\n`application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `cws`, `dbm`, `fargate`,\n`infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`, `iot`,\n`lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,\n`online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`, `sds`, `snmp`,\n`synthetics_api`, `synthetics_browser`, and `timeseries`.",
+            "description": "Comma separated list of product families to retrieve. Available families are `all`, `analyzed_logs`,\n`application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,\n`infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`, `iot`,\n`lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,\n`online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`, `sds`, `snmp`,\n`synthetics_api`, `synthetics_browser`, and `timeseries`.",
             "in": "query",
             "name": "filter[product_families]",
             "required": true,
@@ -92383,7 +94233,7 @@
         "tags": [
           "Usage Metering"
         ],
-        "x-menu-order": 36,
+        "x-menu-order": 37,
         "x-undo": {
           "type": "safe"
         }
@@ -92600,7 +94450,7 @@
         "tags": [
           "Usage Metering"
         ],
-        "x-menu-order": 38,
+        "x-menu-order": 39,
         "x-undo": {
           "type": "safe"
         }

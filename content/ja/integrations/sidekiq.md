@@ -110,6 +110,8 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
              worker: "$1"
     ```
 
+   これらのパラメーターは、Datadog Agent に `DD_DOGSTATSD_MAPPER_PROFILES` 環境変数を追加することで設定することも可能です。
+
 4. [Agent を再起動します][8]。
 
 ## 収集データ

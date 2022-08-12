@@ -1,41 +1,58 @@
 ---
+app_id: ibm-i
+app_uuid: 30045928-4be2-4efd-9a08-160e904494a1
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     IBM i Overview: assets/dashboards/ibm_i_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ibm_i.system.cpu_usage
+      metadata_path: metadata.csv
+      prefix: ibm_i.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IBM i
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - OS & システム
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md
-display_name: IBM i
+display_on_public_website: true
 draft: false
 git_integration_title: ibm_i
-guid: da389374-7541-47e5-bcd1-87cf3b88a469
 integration_id: ibm-i
 integration_title: IBM i
 integration_version: 1.4.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ibm_i.
-metric_to_check: ibm_i.system.cpu_usage
+manifest_version: 2.0.0
 name: ibm_i
+oauth: {}
 public_title: IBM i
 short_description: ジョブ、ジョブキュー、ASP などを含む IBM i システムをリモートで監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
-- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: ジョブ、ジョブキュー、ASP などを含む IBM i システムをリモートで監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM i
 ---
 
 

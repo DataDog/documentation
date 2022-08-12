@@ -2,6 +2,7 @@
 title: Graphing Guides
 kind: guide
 private: true
+disable_toc: true
 aliases:
     - /graphing/guide/
     - /faq/treemap-graph-visualization-can-i-use-this-elsewhere/

@@ -111,8 +111,8 @@ Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Pr
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: Not available<br>
-**Default**: `0`<br>
-Enable the experimental CPU profile type. Added in version `0.69.0`.
+**Default**: `1`<br>
+Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: Not available<br>
@@ -389,6 +389,6 @@ When the application runs in a docker container, the path `/proc/self` should al
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
-[4]: /tracing/profiler/enabling/php/
+[4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

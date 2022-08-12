@@ -93,7 +93,7 @@ Rehydrate from Archives ページで進行中のリハイドレートを直接�
 
 ### 削除された履歴ビューを表示する
 
-削除された過去 90 日分の履歴を、`View` ドロップダウンメニューで表示することができます。
+削除された過去 1 年分の履歴を、`View` ドロップダウンメニューで表示することができます。
 
 {{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="履歴ビューの削除" width="75%" >}}
 

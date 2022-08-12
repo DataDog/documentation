@@ -11435,7 +11435,34 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthWeb'
       - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
       - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
       type: object
+    SyntheticsBasicAuthDigest:
+      description: Object to handle digest authentication when performing the test.
+      properties:
+        password:
+          description: Password to use for the digest authentication.
+          example: PaSSw0RD!
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthDigestType'
+        username:
+          description: Username to use for the digest authentication.
+          example: my_username
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    SyntheticsBasicAuthDigestType:
+      default: digest
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - digest
+      example: digest
+      type: string
+      x-enum-varnames:
+      - DIGEST
     SyntheticsBasicAuthNTLM:
       description: Object to handle `NTLM` authentication when performing the test.
       properties:
@@ -17885,15 +17912,15 @@ components:
               downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
-            synthetics_global_variable_read: View, search, and use in tests the list
-              of global variables available for Synthetics.
+            synthetics_global_variable_read: View, search, and use Synthetics global
+              variables.
             synthetics_global_variable_write: Create, edit, and delete global variables
               for Synthetics.
-            synthetics_private_location_read: View, search, and use in tests the list
-              of available private locations.
+            synthetics_private_location_read: View, search, and use Synthetics private
+              locations.
             synthetics_private_location_write: Create and delete private locations
-              as well as seeing the associated installation guidelines.
-            synthetics_read: List and view configured Synthetic tests.
+              in addition to having access to the associated installation guidelines.
+            synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
@@ -18506,7 +18533,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
-      x-menu-order: 40
+      x-menu-order: 41
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -18557,7 +18584,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
-      x-menu-order: 41
+      x-menu-order: 42
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -21792,8 +21819,8 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
+        '204':
+          description: No Content
         '403':
           content:
             application/json:
@@ -24636,7 +24663,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
-      x-menu-order: 42
+      x-menu-order: 43
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -24693,7 +24720,7 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
-      x-menu-order: 43
+      x-menu-order: 44
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28429,7 +28456,9 @@ paths:
       description: 'Get hourly usage for analyzed logs (Security Monitoring).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageAnalyzedLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28483,7 +28512,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: safe
   /api/v1/usage/attribution:
@@ -28575,7 +28604,7 @@ paths:
       summary: Get usage attribution
       tags:
       - Usage Metering
-      x-menu-order: 39
+      x-menu-order: 40
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -28586,7 +28615,9 @@ paths:
       description: 'Get hourly usage for audit logs.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageAuditLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28640,7 +28671,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 28
+      x-menu-order: 29
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -28648,7 +28679,9 @@ paths:
       description: 'Get hourly usage for lambda.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageLambda
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -28700,7 +28733,7 @@ paths:
       summary: Get hourly usage for lambda
       tags:
       - Usage Metering
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -28757,7 +28790,9 @@ paths:
       description: 'Get hourly usage for CI visibility (tests, pipeline, and spans).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageCIApp
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28811,7 +28846,7 @@ paths:
       summary: Get hourly usage for CI visibility
       tags:
       - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 35
       x-undo:
         type: safe
   /api/v1/usage/cspm:
@@ -28819,7 +28854,9 @@ paths:
       description: 'Get hourly usage for cloud security posture management (CSPM).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageCloudSecurityPostureManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28873,7 +28910,7 @@ paths:
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
-      x-menu-order: 27
+      x-menu-order: 28
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -28881,7 +28918,9 @@ paths:
       description: 'Get hourly usage for cloud workload security.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageCWS
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28935,7 +28974,7 @@ paths:
       summary: Get hourly usage for cloud workload security
       tags:
       - Usage Metering
-      x-menu-order: 29
+      x-menu-order: 30
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -28943,7 +28982,9 @@ paths:
       description: 'Get hourly usage for database monitoring
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageDBM
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28997,7 +29038,7 @@ paths:
       summary: Get hourly usage for database monitoring
       tags:
       - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 31
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -29005,7 +29046,9 @@ paths:
       description: 'Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageFargate
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29057,7 +29100,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -29065,7 +29108,9 @@ paths:
       description: 'Get hourly usage for hosts and containers.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29117,7 +29162,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
-      x-menu-order: 10
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/usage/hourly-attribution:
@@ -29215,7 +29260,9 @@ paths:
       description: 'Get hourly usage for incident management.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetIncidentManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29269,7 +29316,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
       - Usage Metering
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -29277,7 +29324,9 @@ paths:
       description: 'Get hourly usage for indexed spans.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageIndexedSpans
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29329,7 +29378,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
       - Usage Metering
-      x-menu-order: 13
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -29337,7 +29386,9 @@ paths:
       description: 'Get hourly usage for ingested spans.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetIngestedSpans
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29391,7 +29442,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
       - Usage Metering
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -29399,7 +29450,9 @@ paths:
       description: 'Get hourly usage for IoT.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageInternetOfThings
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29453,7 +29506,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
       - Usage Metering
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -29461,7 +29514,9 @@ paths:
       description: 'Get hourly usage for logs.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29513,7 +29568,7 @@ paths:
       summary: Get hourly usage for logs
       tags:
       - Usage Metering
-      x-menu-order: 11
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/usage/logs-by-retention:
@@ -29521,7 +29576,9 @@ paths:
       description: 'Get hourly usage for indexed logs by retention period.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageLogsByRetention
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29575,7 +29632,7 @@ paths:
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -29640,7 +29697,7 @@ paths:
       summary: Get hourly usage for logs by index
       tags:
       - Usage Metering
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/usage/monthly-attribution:
@@ -29759,7 +29816,9 @@ paths:
       description: 'Get hourly usage for network flows.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageNetworkFlows
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29813,7 +29872,7 @@ paths:
       summary: get hourly usage for network flows
       tags:
       - Usage Metering
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -29821,7 +29880,9 @@ paths:
       description: 'Get hourly usage for network hosts.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageNetworkHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29873,7 +29934,7 @@ paths:
       summary: Get hourly usage for network hosts
       tags:
       - Usage Metering
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         type: safe
   /api/v1/usage/online-archive:
@@ -29881,7 +29942,9 @@ paths:
       description: 'Get hourly usage for online archive.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageOnlineArchive
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29935,7 +29998,7 @@ paths:
       summary: Get hourly usage for online archive
       tags:
       - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 36
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -29943,7 +30006,9 @@ paths:
       description: 'Get hourly usage for profiled hosts.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageProfiling
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29997,7 +30062,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/rum:
@@ -30006,7 +30071,9 @@ paths:
         Units.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageRumUnits
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30058,7 +30125,7 @@ paths:
       summary: Get hourly usage for RUM units
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -30067,7 +30134,9 @@ paths:
         Sessions.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageRumSessions
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30125,7 +30194,7 @@ paths:
       summary: Get hourly usage for RUM sessions
       tags:
       - Usage Metering
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         type: safe
   /api/v1/usage/sds:
@@ -30133,7 +30202,9 @@ paths:
       description: 'Get hourly usage for sensitive data scanner.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSDS
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30187,7 +30258,7 @@ paths:
       summary: Get hourly usage for sensitive data scanner
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -30195,7 +30266,9 @@ paths:
       description: 'Get hourly usage for SNMP devices.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSNMP
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30249,7 +30322,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -30315,7 +30388,7 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -30324,7 +30397,9 @@ paths:
       description: 'Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSynthetics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30376,7 +30451,7 @@ paths:
       summary: Get hourly usage for synthetics checks
       tags:
       - Usage Metering
-      x-menu-order: 14
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -30384,7 +30459,9 @@ paths:
       description: 'Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSyntheticsAPI
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30436,7 +30513,7 @@ paths:
       summary: Get hourly usage for synthetics API checks
       tags:
       - Usage Metering
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -30444,7 +30521,9 @@ paths:
       description: 'Get hourly usage for synthetics browser checks.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSyntheticsBrowser
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30496,7 +30575,7 @@ paths:
       summary: Get hourly usage for synthetics browser checks
       tags:
       - Usage Metering
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -30504,7 +30583,9 @@ paths:
       description: 'Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageTimeseries
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30556,7 +30637,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
-      x-menu-order: 12
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -30642,7 +30723,7 @@ paths:
       summary: Get all custom metrics by hourly average
       tags:
       - Usage Metering
-      x-menu-order: 6
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/user:

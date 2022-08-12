@@ -2,7 +2,7 @@
 aliases:
 - /ja/synthetics/icmp_test
 - /ja/synthetics/icmp_check
-description: ホストの可用性を監視し、ネットワークの問題を診断します
+description: ホストの可用性を監視し、ネットワークの問題を診断します。
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
@@ -13,6 +13,9 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: 内部エンドポイントで ICMP Ping を実行する
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
 title: ICMP テスト
 ---
@@ -87,9 +90,9 @@ ICMP テストは次の頻度で実行できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
-テストにより、以前に定義された[アラート条件](#define-alert-conditions)に基づき通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
+以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストが通知を送信します。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
 1. [モニターの構成方法と同様][5]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
@@ -108,7 +111,9 @@ ICMP テストは次の頻度で実行できます。
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。失敗したテストを再通知しないよう、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックしてテストを保存し、Datadog にテストの実行を開始させます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
+
+詳しくは、[Synthetic テストモニターの使用][8]をご覧ください。
 
 ## 変数
 
@@ -133,7 +138,7 @@ ICMP テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-ICMP テストの URL およびアサーションで、[`Settings` で定義されたグローバル変数][8]を使用できます。
+ICMP テストの URL およびアサーションで、[`Settings` で定義されたグローバル変数][9]を使用できます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
@@ -150,13 +155,13 @@ ICMP テストの URL およびアサーションで、[`Settings` で定義さ�
 
 ## アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][9]を持つユーザーのみが、Synthetic ICMP テストを作成、編集、削除できます。Synthetic ICMP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][10]を持つユーザーのみが、Synthetic ICMP テストを作成、編集、削除できます。Synthetic ICMP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][10]のいずれかにアップグレードします。
 
-[カスタムロール機能][10]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][11]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][11]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、ICMP テストへのアクセスを制限することができます。ICMP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -173,7 +178,8 @@ ICMP テストの URL およびアサーションで、[`Settings` で定義さ�
 [5]: /ja/monitors/notify/#notify-your-team
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[8]: /ja/synthetics/settings/#global-variables
-[9]: /ja/account_management/rbac/
-[10]: /ja/account_management/rbac#custom-roles
-[11]: /ja/account_management/rbac/#create-a-custom-role
+[8]: /ja/synthetics/guide/synthetic-test-monitors
+[9]: /ja/synthetics/settings/#global-variables
+[10]: /ja/account_management/rbac/
+[11]: /ja/account_management/rbac#custom-roles
+[12]: /ja/account_management/rbac/#create-a-custom-role

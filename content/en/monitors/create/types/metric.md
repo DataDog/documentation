@@ -80,17 +80,16 @@ For more detailed information, see the [Forecast Monitor][1] page.
 ## Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. Use the editor and these steps to define the metric:
-{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope"  >}}
+
 
 | Step                | Required | Default    | Example           |
 |---------------------|----------|------------|-------------------|
 | Select a metric     | Yes      | None       | `system.cpu.user` |
 | Define the from     | No       | Everywhere | `env:prod`        |
-| Exclude [tags][2]        | No       | None       | `role:testing`    |
 | Specify aggregation | Yes      | `avg by`   | `sum by`          |
 | Group by            | No       | Everything | `host`            |
 
-**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][3].
+**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
 
 ### Alert grouping
 
@@ -99,7 +98,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
 Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][3] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
 ## Set alert conditions
 
@@ -109,7 +108,7 @@ The alert conditions vary slightly based on the chosen detection method.
 {{% tab "Threshold" %}}
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
-* the threshold `on average`, `at least once`, `at all times`, `in total`, or `percentile` (`percentile` is only offered on distribution metrics with percentiles enabled).
+* the threshold `average`, `max`, `min`, `sum`, or `percentile` (`percentile` is only offered on distribution metrics with percentiles enabled).
 
     _Note that if you've chosen a distribution metric with a percentile aggregator in Step 2: Define the Metric, a matching percentile threshold is automatically specified._
 
@@ -158,7 +157,7 @@ The evaluation frequency changes based on the evaluation time frame you select:
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5].
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][4].
 
 | Option                     | Description                                                                     |
 |----------------------------|---------------------------------------------------------------------------------|
@@ -210,20 +209,19 @@ For example, a monitor that evaluates over the last `2h` is split in 12 buckets 
 
 #### Other options
 
-For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][6] page.
+For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][5] page.
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /getting_started/tagging/using_tags/?tab=assignment
-[3]: /dashboards/querying/#advanced-graphing
-[4]: /monitors/notify/?tab=is_alert#tag-variables
-[5]: /monitors/guide/recovery-thresholds/
-[6]: /monitors/create/configuration/#advanced-alert-conditions
-[7]: /monitors/notify/
+[2]: /dashboards/querying/#advanced-graphing
+[3]: /monitors/notify/?tab=is_alert#tag-variables
+[4]: /monitors/guide/recovery-thresholds/
+[5]: /monitors/create/configuration/#advanced-alert-conditions
+[6]: /monitors/notify/

@@ -1,43 +1,60 @@
 ---
-aliases:
-- /ja/guides/network_checks
-- /ja/integrations/tcpcheck
+app_id: システム
+app_uuid: a675760c-00f7-4bf3-bd0e-c7edfb0e7e82
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: network.tcp.can_connect
+      metadata_path: metadata.csv
+      prefix: network.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TCP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - network
 - web
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md
-display_name: TCP
+display_on_public_website: true
 draft: false
 git_integration_title: tcp_check
-guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
 integration_id: システム
 integration_title: TCP チェック
-integration_version: 4.5.0
+integration_version: 4.5.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: network.
-metric_to_check: network.tcp.can_connect
+manifest_version: 2.0.0
 name: tcp_check
-public_title: Datadog-TCP チェックインテグレーション
+oauth: {}
+public_title: TCP チェック
 short_description: リモートホストへの TCP 接続を監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Web
+  configuration: README.md#Setup
+  description: リモートホストへの TCP 接続を監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TCP チェック
 ---
 
 

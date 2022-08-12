@@ -119,9 +119,9 @@ cf set-env <YOUR_APP> DD_API_KEY <DATADOG_API_KEY>
 cf restage <YOUR_APP>
 ```
 
-#### Trace collection
+#### Trace and profile collection
 
-The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM Setup][12].
+The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM setup][12] and [Profiling setup][30].
 
 #### Log collection
 
@@ -468,3 +468,4 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [27]: /integrations/ntp/#metrics
 [28]: https://github.com/cloudfoundry/loggregator-api
 [29]: https://docs.cloudfoundry.org/running/all_metrics.html
+[30]: /profiler/enabling/

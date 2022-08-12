@@ -1,41 +1,62 @@
 ---
+app_id: hyper-v
+app_uuid: 6024e97b-c3c6-45e3-ba71-a48adeebc191
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     hyper-v: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hyperv.hypervisor_logical_processor.total_run_time
+      metadata_path: metadata.csv
+      prefix: hyperv.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: HyperV
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - モニター
 - OS & システム
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md
-display_name: HyperV
+display_on_public_website: true
 draft: false
 git_integration_title: hyperv
-guid: 412a75c1-b752-4b20-b046-4195dfaaf6ec
 integration_id: hyper-v
 integration_title: HyperV
-integration_version: 1.7.0
+integration_version: 1.8.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: hyperv.
-metric_to_check: hyperv.hypervisor_logical_processor.total_run_time
+manifest_version: 2.0.0
 name: hyperv
-public_title: Datadog-HyperV インテグレーション
+oauth: {}
+public_title: HyperV
 short_description: Microsoft の Hyper-V 仮想化テクノロジーを監視
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::Azure
+  - Category::Cloud
+  - Category::Monitoring
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Microsoft の Hyper-V 仮想化テクノロジーを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HyperV
 ---
 
 
