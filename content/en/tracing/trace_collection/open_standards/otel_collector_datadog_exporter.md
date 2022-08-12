@@ -242,7 +242,7 @@ For Gateway deployments:
    # ...
    ```
 
-  For more information about the `passthrough` option, read [its documentation][23].
+   For more information about the `passthrough` option, read [its documentation][23].
 
 6. Make sure that the Gateway Collector's configuration uses the Datadog Exporter settings that have been removed from the agents.
 
@@ -252,19 +252,19 @@ To configure your application container:
 
  1. Ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet in both [agent](#daemonset-deployment) and [gateway](#gateway-collector-service) deployments, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][24]:
 
-   ```yaml
-   # ...
-           env:
-           - name: HOST_IP
-             valueFrom:
-               fieldRef:
-                 fieldPath: status.hostIP
-             # The application SDK must use this environment variable in order to successfully
-             # connect to the DaemonSet's collector.
-           - name: OTEL_EXPORTER_OTLP_ENDPOINT
-             value: "http://$(HOST_IP):4318"
-   # ...
-   ```
+    ```yaml
+    # ...
+            env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+              # The application SDK must use this environment variable in order to successfully
+              # connect to the DaemonSet's collector.
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://$(HOST_IP):4318"
+    # ...
+    ```
 
 2. Ensure your OpenTelemetry Instrumentation Library SDK is configured correctly, following the instructions in [Configuring your application](#configuring-your-application).
 
