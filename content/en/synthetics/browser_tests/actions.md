@@ -172,10 +172,6 @@ You can also check that the value returned by a JavaScript step is the one you a
 
 Create this assertion step to have your browser test verify that files have been downloaded in previous steps. You can check that a file was correctly downloaded and assert on the file name, size, and MD5 value.
 
-- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
-
-- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
-
 For more information about how to test downloads, see [Test File Upload and Download][3].
 
 [1]: /synthetics/guide/email-validation
@@ -458,9 +454,7 @@ To use a variable on automatically recorded steps, click the **Inject this varia
 
 If a variable is assigned different values along your browser test steps (for example, across subtests), the variable systematically uses the value that was first assigned to it.
 
-Some variables only compute at runtime, such as a variable from an HTTP request or a JavaScript step. For example, assume you have a `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
-
-To record a step using one of these variables, record a step with the actual variable value, and replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` in the step's definition before saving your test. 
+Some variables only compute at runtime, such as a variable from an HTTP request or a JavaScript step. For example, assume you have a `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value. To record a step using one of these variables, record a step with the actual variable value, and replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` in the step's definition before saving your test. 
 
 ## Further Reading
 
