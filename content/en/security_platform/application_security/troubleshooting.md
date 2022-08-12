@@ -233,6 +233,14 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 [4]: /tracing/trace_collection/dd_libraries/ruby/#rails
 [5]: /tracing/trace_collection/dd_libraries/ruby/#sinatra
 {{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+For [Python][1], the WSGI integration is required along with the one for the
+framework you're using (like the Django or Flask integrations).
+
+[1]: /security_platform/application_security/setup_and_configure/
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 ### Check Datadog Agent configuration
