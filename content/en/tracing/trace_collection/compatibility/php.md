@@ -30,7 +30,7 @@ When these versions are no longer supported by their maintainers, Datadog APM fo
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug, and security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                                              |
 | <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact the support team][2] for special requests. |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support. The version can still be used but no bugfixes will be provided.                                                                                                  |
 
 
 PHP APM supports the following PHP versions:
