@@ -208,7 +208,7 @@ Create this assertion step manually by clicking **Special Actions** and selectin
 
 To avoid generating a step for every time a user hovers over an element during recording, this step uses a dedicated step with a click, not a hovering mechanism.
 
-Select **Hover** and click on an element on the recorder page to add a step.
+Select **Hover** and click on an element to add a step.
 
 #### Press key
 
@@ -220,7 +220,9 @@ Add a **Press Key** step to simulate users entering keystrokes. The [Datadog bro
 * Escape
 * Backspace
 
-To press keys that are not automatically recorded, specify the values that need to be pressed in the **Value** field. Select `Alt`, `Control`, `Meta`, and `Shift` modifiers to add to the inputted value.
+To press keys that are not automatically recorded, specify the values that need to be pressed in the **Value** field. 
+ 
+ Select `Alt`, `Control`, `Meta`, and `Shift` modifiers to add to the inputted value.
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Press Key step in a browser test recording" style="width:50%;" >}}
 
@@ -312,11 +314,11 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### Global variable
 
-Select any global variables defined in [Synthetic Monitoring Settings][4] to add to your browser test's recording and click **Ok**. The local variable(s) defined from global variables appear above your test steps.
+Select any global variables defined in [Synthetic Monitoring Settings][4].
 
 #### Global variable - MFA
 
-Select any MFA global variables defined in [Synthetic Monitoring Settings][4] to add to your browser test's recording and click **Ok**. The local variable(s) defined from MFA global variables appear above your test steps.
+Select any MFA global variables defined in [Synthetic Monitoring Settings][4].
 
 This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][5].
 
@@ -324,17 +326,17 @@ This type of global variable stores time-based one time password (TOTP) secret k
 
 Create a Datadog Synthetics email address that you can use in test steps to [assert if an email sent correctly](#test-that-an-email-was-received) or [navigate to a link in the email](#go-to-an-email-and-click-on-a-link), for example, to click on a confirmation link. 
 
-To avoid conflicts between test runs, a unique mailbox generates at each test execution.
+To avoid conflicts between test runs, a unique mailbox is generated at each test execution.
 
 ### Subtests
 
 You can run browser tests within other browser tests to reuse existing workflows up to two levels of nesting.
 
-Variables from subtests may be overridden in parent tests. Ensure the variables created at the parent test level have the same names as the variables present in the subtest. The variable always uses the value that was first assigned to it.
+To override variables from subtests in parent tests, ensure the variables created at the parent test level have the same names as the variables present in the subtest. The variable always uses the value that was first assigned to it.
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:60%;" >}}
 
-To convert steps from your current browser test into a subtest, select your recorded steps and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select  to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][6].
+To convert steps from your current browser test into a subtest, select your recorded steps and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][6].
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][7].
 
@@ -448,7 +450,7 @@ You can extract up to ten variables per test step. Once created, this variable c
 
 To see all available variables on manually added steps, type `{{` in the input field.
 
-To use a variable on automatically recorded steps, click the **Inject this variable** icon to input the variable value in the recorder page while recording. 
+To use a variable on automatically recorded steps, click the **Inject this variable** icon to input the variable value while recording. 
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Click on the test step to inject the value in your recorder page" video="true" width="100%" >}}
 
