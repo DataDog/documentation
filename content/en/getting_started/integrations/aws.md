@@ -23,9 +23,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/'
       tag: 'Blog'
       text: 'Monitor Amazon ECS Anywhere with Datadog'
-    - link: 'integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation'
-      tag: 'Documentation'
-      text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
       tag: 'Blog'
       text: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
@@ -79,31 +76,32 @@ Before getting started, ensure you have the following prerequisites:
 
 ## Setup
 
+2. Go to the the [AWS tile][8] in the Datadog application and click **Add AWS Account**.
 
-2. From the AWS tile on the [Integrations page][8] in your Datadog account, select the Datadog products you wish to integrate with this AWS Account. This selects the correct default settings for integrating data from this AWS account for those products. These settings can be changed in the future if needed.
-{{< img src="getting_started/integrations/cloudformation-setup.png" alt="The Datadog AWS integration tile showing the options for establishing the integration. The Role Delegation tab is highlighted.">}}
+3. Configure the integration's settings under the **Automatically using CloudFormation** tab.  
+    **a.** Select the AWS regions to integrate with.  
+    **b.** Add your Datadog [API key][58].  
+    **c.** Optionally, send logs and other other data to Datadog with the [Datadog Forwarder Lambda][1].  
+    **d.** Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
-3. Select the AWS Region where the CloudFormation stack will be launched. This also sets where to create the Datadog Lambda Forwarder for sending AWS logs to Datadog (if you selected Log Management).
 
-    **Note**: CloudWatch metrics are collected from ALL AWS regions you are using regardless of the region you select.
-
-4. Select or create the Datadog API Key used to send data from your AWS account to Datadog.
-
-5. Click "Launch CloudFormation Template". This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.
+5. Click "Launch CloudFormation Template". This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
-{{< img src="getting_started/integrations/params.png" alt="The AWS CloudFormation create-stack page showing the Stack name as datadog, IAMRoleName as DatadogIntegrationRole, ExternalId as an obfuscated value ending in be46, DdApiKey as an obfuscated value.">}}
 
-6. Check the required boxes from AWS and click `Create stack`: 
-    {{< img src="getting_started/integrations/cloudformation-complete.png" alt="The AWS CloudFormation Stacks page showing the four completed stacks under the 'Stacks' column along the left hand side of the page. The stacks are datadog-DatadogIntegrationRoleStack, datadog-DatadogPolicyMacroStack, datadog-ForwarderStack, and datadog. Each stack shows the timestamp of creation and a green checkmark with CREATE_COMPLETE. The 'datadog' stack and is highlighted and displaying the 'Events' tab. There are 9 events listed with their Timestamp, Logical ID, Status, and Status reason. These events reference the different stages of creation for each of the stacks.">}}
-This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
+6. Check the required boxes from AWS and click `Create stack`. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
 
-7. After the Stack is created, go back to the AWS integration tile in Datadog and find the box for the new account you created. Click "Refresh to Check Status" to see a success message at the top of the page, along with the new account visible on the page with the relevant details.
+7. After the stack is created, go back to the AWS integration tile in Datadog and click the **Ready!** button.
 
-    {{< img src="getting_started/integrations/new-account.png" alt="The AWS integration tile in the Datadog account showing the Account: New Account section and a message that the integration setup with CloudFormation is pending completion. There is a button for refreshing to check the status, and a warning to check the CloudFormation stack generation before checking the status.">}}
+8. Use the tabs under the Account Number to configure the integration and data collected.
+{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="">}}
+  - **Account Details:** Configure tags and other details.
+  - **General:** Enable [EC2 Automuting][9], CloudWatch [alarm collection][10], and select the regions to integrate with.
+  - **Metric Collection:** Collect metrics from [AWS services][13], custom metrics, and [CloudWatch Metric Streams][59].
+  - **Log Collection:** Collect AWS service logs with the [Datadog Forwarder Lambda][14] function or send them to the [Datadog Kinesis Firehose Destination][60].
+  - **Resource Collection:** Configure resource collection settings, if using CSPM.
+  - **X-Ray Traces:** Trace distributed applications built using AWS services with [AWS X-Ray][61].
 
-    Depending on which AWS services you use and your use case for monitoring, there are multiple options within the integration tile to specify the data to be collected. For example, you can limit data collection based on AWS service, namespace, or tags. Additionally, you can choose to mute monitor notifications. For example, terminations triggered manually or by autoscaling with [EC2 automuting][9] enabled. If needed, enable [Alarm Collection][10] to send your CloudWatch alarms to the Datadog [Event Explorer][11] and choose whether to collect custom metrics.
-
-8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
+9. Wait up to 10 minutes for data to arrive in Datadog, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
 
 ## Enable integrations for individual AWS service
@@ -235,7 +233,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [43]: /serverless/libraries_integrations
 [44]: /serverless/distributed_tracing
 [45]: /serverless/troubleshooting
-[46]: /integrations/amazon_xray/?tab=nodejs
+[46]: /integrations/amazon_xray/
 [47]: /tracing/trace_collection/
 [48]: /tracing/#explore-datadog-apm
 [49]: /watchdog/
@@ -247,3 +245,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [55]: /security_platform/default_rules/#cat-posture-management-cloud
 [56]: /security_platform/default_rules/#cat-posture-management-infra
 [57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
+[58]: https://app.datadoghq.com/organization-settings/api-keys
+[59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
+[60]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[61]: /integrations/amazon_xray/
