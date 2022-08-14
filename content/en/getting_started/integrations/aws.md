@@ -92,7 +92,7 @@ Before getting started, ensure you have the following prerequisites:
 
 7. After the stack is created, go back to the AWS integration tile in Datadog and click the **Ready!** button.
 
-8. Use the tabs under the Account Number to configure the integration and data collected.
+8. Use the tabs under the account number to configure the integration and data collected.
 {{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="">}}
   - **Account Details:** Configure tags and other details.
   - **General:** Enable [EC2 Automuting][9], CloudWatch [alarm collection][10], and select the regions to integrate with.
