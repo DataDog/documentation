@@ -207,18 +207,18 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 ### 1. Remove programs
   Uninstall the Agent using Add/Remove Programs.
 
-### 2. Powershell
-  Alternatively, use one of the following Powershell commands. 
+### 2. PowerShell
+  Alternatively, use one of the following PowerShell commands. 
   > **Note**: Some Agent versions may cause a forced reboot. To prevent this, add a no restart parameter using `REBOOT=ReallySuppress`:
 
 ```powershell
-start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
 ```
 
 Using `/norestart`:
 
 ```powershell
-start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 ---
 **Agent v5**
@@ -230,11 +230,11 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 ### 1. Remove programs
   Uninstall the Agent using Add/Remove Programs.
 
-### 2. Powershell
-  Alternatively, use the Powershell command below.
+### 2. PowerShell
+  Alternatively, use the PowerShell command below.
 
 ```powershell
-start-process msiexec -Wait -ArgumentList ('/log', 'C:\\uninst.log', '/norestart', '/q', '/x', (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
 ---
