@@ -8,7 +8,7 @@ main:
   - name: Infrastructure
     identifier: infrastructure_heading
     weight: 3000000
-  - name: APM
+  - name: Application Performance
     identifier: apm_heading
     weight: 4000000
   - name: Log Management
@@ -1296,7 +1296,7 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
-  - name: APM & Continuous Profiler
+  - name: APM
     url: tracing/
     pre: apm
     identifier: tracing
@@ -1765,76 +1765,6 @@ main:
     parent: tracing_services
     identifier: tracing_apm_monitors
     weight: 607
-  - name: Continuous Profiler
-    url: tracing/profiler/
-    parent: tracing
-    identifier: profiler
-    weight: 8
-  - name: Enabling the Profiler
-    url: tracing/profiler/enabling/java/
-    parent: profiler
-    identifier: profiler_enabling
-    weight: 701
-  - name: Enabling the Java Profiler
-    url: tracing/profiler/enabling/java/
-    parent: profiler_enabling
-    identifier: profiler_enabling_java
-    weight: 101
-  - name: Enabling the Python Profiler
-    url: tracing/profiler/enabling/python/
-    parent: profiler_enabling
-    identifier: profiler_enabling_python
-    weight: 102
-  - name: Enabling the Go Profiler
-    url: tracing/profiler/enabling/go/
-    parent: profiler_enabling
-    identifier: profiler_enabling_go
-    weight: 103
-  - name: Enabling the Ruby Profiler
-    url: tracing/profiler/enabling/ruby/
-    parent: profiler_enabling
-    identifier: profiler_enabling_ruby
-    weight: 104
-  - name: Enabling the Node.js Profiler
-    url: tracing/profiler/enabling/nodejs/
-    parent: profiler_enabling
-    identifier: profiler_enabling_nodejs
-    weight: 105
-  - name: Enabling the .NET Profiler
-    url: tracing/profiler/enabling/dotnet/
-    parent: profiler_enabling
-    identifier: profiler_enabling_dotnet
-    weight: 106
-  - name: Enabling the PHP Profiler
-    url: tracing/profiler/enabling/php/
-    parent: profiler_enabling
-    identifier: profiler_enabling_php
-    weight: 107
-  - name: Enabling the Linux Profiler
-    url: tracing/profiler/enabling/linux/
-    parent: profiler_enabling
-    identifier: profiler_enabling_linux
-    weight: 108
-  - name: Search Profiles
-    url: tracing/profiler/search_profiles/
-    parent: profiler
-    identifier: profiler_search_profiles
-    weight: 702
-  - name: Investigate Slow Traces or Endpoints
-    url: tracing/profiler/connect_traces_and_profiles/
-    parent: profiler
-    identifier: profiler_traces_profiles
-    weight: 703
-  - name: Compare Profiles
-    url: tracing/profiler/compare_profiles
-    parent: profiler
-    identifier: profiler_compare
-    weight: 704
-  - name: Profiler Troubleshooting
-    url: tracing/profiler/profiler_troubleshooting/
-    parent: profiler
-    identifier: profiler_profiler_troubleshooting
-    weight: 705
   - name: Service Catalog
     url: tracing/service_catalog/
     parent: tracing
@@ -1930,6 +1860,77 @@ main:
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
     weight: 1208
+  - name: Continuous Profiler
+    url: profiler/
+    pre: profiling-1
+    identifier: profiler
+    parent: apm_heading
+    weight: 145000
+  - name: Enabling the Profiler
+    url: profiler/enabling/java/
+    parent: profiler
+    identifier: profiler_enabling
+    weight: 1
+  - name: Java
+    url: profiler/enabling/java/
+    parent: profiler_enabling
+    identifier: profiler_enabling_java
+    weight: 101
+  - name: Python
+    url: profiler/enabling/python/
+    parent: profiler_enabling
+    identifier: profiler_enabling_python
+    weight: 102
+  - name: Go
+    url: profiler/enabling/go/
+    parent: profiler_enabling
+    identifier: profiler_enabling_go
+    weight: 103
+  - name: Ruby
+    url: profiler/enabling/ruby/
+    parent: profiler_enabling
+    identifier: profiler_enabling_ruby
+    weight: 104
+  - name: Node.js
+    url: profiler/enabling/nodejs/
+    parent: profiler_enabling
+    identifier: profiler_enabling_nodejs
+    weight: 105
+  - name: .NET
+    url: profiler/enabling/dotnet/
+    parent: profiler_enabling
+    identifier: profiler_enabling_dotnet
+    weight: 106
+  - name: PHP
+    url: profiler/enabling/php/
+    parent: profiler_enabling
+    identifier: profiler_enabling_php
+    weight: 107
+  - name: C/C++/Rust
+    url: profiler/enabling/ddprof/
+    parent: profiler_enabling
+    identifier: profiler_enabling_linux
+    weight: 108
+  - name: Search Profiles
+    url: profiler/search_profiles/
+    parent: profiler
+    identifier: profiler_search_profiles
+    weight: 2
+  - name: Investigate Slow Traces or Endpoints
+    url: profiler/connect_traces_and_profiles/
+    parent: profiler
+    identifier: profiler_traces_profiles
+    weight: 3
+  - name: Compare Profiles
+    url: profiler/compare_profiles
+    parent: profiler
+    identifier: profiler_compare
+    weight: 4
+  - name: Profiler Troubleshooting
+    url: profiler/profiler_troubleshooting/
+    parent: profiler
+    identifier: profiler_profiler_troubleshooting
+    weight: 5
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
@@ -2511,31 +2512,36 @@ main:
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 106
+  - name: How It Works
+    url: security_platform/application_security/how-appsec-works/
+    parent: application_security
+    identifier: appsec_howitworks
+    weight: 402
   - name: OOTB Rules
     url: security_platform/default_rules/#cat-application-security
     parent: application_security
     identifier: appsec_default_rules
-    weight: 402
+    weight: 403
   - name: Setup and Configure
     url: security_platform/application_security/setup_and_configure/
     parent: application_security
     identifier: appsec_configuration
-    weight: 403
+    weight: 404
   - name: Custom Detection Rules
     url: security_platform/application_security/custom_rules/
     parent: application_security
     identifier: appsec_custom_rules
-    weight: 404
+    weight: 405
   - name: Event Rules
     url: security_platform/application_security/event_rules/
     parent: application_security
     identifier: appsec_event_rules
-    weight: 405
+    weight: 406
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 406
+    weight: 407
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
@@ -2604,7 +2610,7 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 107
-  - name: GRPC Health Checks
+  - name: GRPC
     url: synthetics/api_tests/grpc_tests
     parent: api_tests
     weight: 108
@@ -6267,7 +6273,7 @@ api:
       operationids:
         - GetUsageObservabilityPipelines
       unstable: []
-      order: 38
+      order: 39
   - name: Get hourly usage for lambda traced invocations
     url: '#get-hourly-usage-for-lambda-traced-invocations'
     identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
@@ -6279,7 +6285,7 @@ api:
       operationids:
         - GetUsageLambdaTracedInvocations
       unstable: []
-      order: 36
+      order: 37
   - name: Get hourly usage by product family
     url: '#get-hourly-usage-by-product-family'
     identifier: usage-metering-get-hourly-usage-by-product-family
@@ -6304,7 +6310,7 @@ api:
         - GetEstimatedCostByOrg
       unstable:
         - v2
-      order: 39
+      order: 6
   - name: Get cost across multi-org account
     url: '#get-cost-across-multi-org-account'
     identifier: usage-metering-get-cost-across-multi-org-account
@@ -6328,7 +6334,7 @@ api:
       operationids:
         - GetUsageApplicationSecurityMonitoring
       unstable: []
-      order: 37
+      order: 38
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: usage-metering-get-all-custom-metrics-by-hourly-average
@@ -6340,7 +6346,7 @@ api:
       operationids:
         - GetUsageTopAvgMetrics
       unstable: []
-      order: 6
+      order: 7
   - name: Get hourly usage for custom metrics
     url: '#get-hourly-usage-for-custom-metrics'
     identifier: usage-metering-get-hourly-usage-for-custom-metrics
@@ -6352,7 +6358,7 @@ api:
       operationids:
         - GetUsageTimeseries
       unstable: []
-      order: 12
+      order: 13
   - name: Get hourly usage for synthetics browser checks
     url: '#get-hourly-usage-for-synthetics-browser-checks'
     identifier: usage-metering-get-hourly-usage-for-synthetics-browser-checks
@@ -6364,7 +6370,7 @@ api:
       operationids:
         - GetUsageSyntheticsBrowser
       unstable: []
-      order: 16
+      order: 17
   - name: Get hourly usage for synthetics API checks
     url: '#get-hourly-usage-for-synthetics-api-checks'
     identifier: usage-metering-get-hourly-usage-for-synthetics-api-checks
@@ -6376,7 +6382,7 @@ api:
       operationids:
         - GetUsageSyntheticsAPI
       unstable: []
-      order: 15
+      order: 16
   - name: Get hourly usage for synthetics checks
     url: '#get-hourly-usage-for-synthetics-checks'
     identifier: usage-metering-get-hourly-usage-for-synthetics-checks
@@ -6388,7 +6394,7 @@ api:
       operationids:
         - GetUsageSynthetics
       unstable: []
-      order: 14
+      order: 15
   - name: Get usage across your multi-org account
     url: '#get-usage-across-your-multi-org-account'
     identifier: usage-metering-get-usage-across-your-multi-org-account
@@ -6400,7 +6406,7 @@ api:
       operationids:
         - GetUsageSummary
       unstable: []
-      order: 7
+      order: 8
   - name: Get hourly usage for SNMP devices
     url: '#get-hourly-usage-for-snmp-devices'
     identifier: usage-metering-get-hourly-usage-for-snmp-devices
@@ -6412,7 +6418,7 @@ api:
       operationids:
         - GetUsageSNMP
       unstable: []
-      order: 23
+      order: 24
   - name: Get hourly usage for sensitive data scanner
     url: '#get-hourly-usage-for-sensitive-data-scanner'
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
@@ -6424,7 +6430,7 @@ api:
       operationids:
         - GetUsageSDS
       unstable: []
-      order: 31
+      order: 32
   - name: Get hourly usage for RUM sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: usage-metering-get-hourly-usage-for-rum-sessions
@@ -6436,7 +6442,7 @@ api:
       operationids:
         - GetUsageRumSessions
       unstable: []
-      order: 19
+      order: 20
   - name: Get hourly usage for RUM units
     url: '#get-hourly-usage-for-rum-units'
     identifier: usage-metering-get-hourly-usage-for-rum-units
@@ -6448,7 +6454,7 @@ api:
       operationids:
         - GetUsageRumUnits
       unstable: []
-      order: 32
+      order: 33
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: usage-metering-get-hourly-usage-for-profiled-hosts
@@ -6460,7 +6466,7 @@ api:
       operationids:
         - GetUsageProfiling
       unstable: []
-      order: 33
+      order: 34
   - name: Get hourly usage for online archive
     url: '#get-hourly-usage-for-online-archive'
     identifier: usage-metering-get-hourly-usage-for-online-archive
@@ -6472,7 +6478,7 @@ api:
       operationids:
         - GetUsageOnlineArchive
       unstable: []
-      order: 35
+      order: 36
   - name: Get hourly usage for network hosts
     url: '#get-hourly-usage-for-network-hosts'
     identifier: usage-metering-get-hourly-usage-for-network-hosts
@@ -6484,7 +6490,7 @@ api:
       operationids:
         - GetUsageNetworkHosts
       unstable: []
-      order: 20
+      order: 21
   - name: get hourly usage for network flows
     url: '#get-hourly-usage-for-network-flows'
     identifier: usage-metering-get-hourly-usage-for-network-flows
@@ -6496,7 +6502,7 @@ api:
       operationids:
         - GetUsageNetworkFlows
       unstable: []
-      order: 21
+      order: 22
   - name: Get monthly usage attribution
     url: '#get-monthly-usage-attribution'
     identifier: usage-metering-get-monthly-usage-attribution
@@ -6520,7 +6526,7 @@ api:
       operationids:
         - GetUsageLogsByIndex
       unstable: []
-      order: 8
+      order: 9
   - name: Get hourly logs usage by retention
     url: '#get-hourly-logs-usage-by-retention'
     identifier: usage-metering-get-hourly-logs-usage-by-retention
@@ -6532,7 +6538,7 @@ api:
       operationids:
         - GetUsageLogsByRetention
       unstable: []
-      order: 9
+      order: 10
   - name: Get hourly usage for logs
     url: '#get-hourly-usage-for-logs'
     identifier: usage-metering-get-hourly-usage-for-logs
@@ -6544,7 +6550,7 @@ api:
       operationids:
         - GetUsageLogs
       unstable: []
-      order: 11
+      order: 12
   - name: Get hourly usage for IoT
     url: '#get-hourly-usage-for-iot'
     identifier: usage-metering-get-hourly-usage-for-iot
@@ -6556,7 +6562,7 @@ api:
       operationids:
         - GetUsageInternetOfThings
       unstable: []
-      order: 26
+      order: 27
   - name: Get hourly usage for ingested spans
     url: '#get-hourly-usage-for-ingested-spans'
     identifier: usage-metering-get-hourly-usage-for-ingested-spans
@@ -6568,7 +6574,7 @@ api:
       operationids:
         - GetIngestedSpans
       unstable: []
-      order: 24
+      order: 25
   - name: Get hourly usage for indexed spans
     url: '#get-hourly-usage-for-indexed-spans'
     identifier: usage-metering-get-hourly-usage-for-indexed-spans
@@ -6580,7 +6586,7 @@ api:
       operationids:
         - GetUsageIndexedSpans
       unstable: []
-      order: 13
+      order: 14
   - name: Get hourly usage for incident management
     url: '#get-hourly-usage-for-incident-management'
     identifier: usage-metering-get-hourly-usage-for-incident-management
@@ -6592,7 +6598,7 @@ api:
       operationids:
         - GetIncidentManagement
       unstable: []
-      order: 25
+      order: 26
   - name: Get hourly usage attribution
     url: '#get-hourly-usage-attribution'
     identifier: usage-metering-get-hourly-usage-attribution
@@ -6616,7 +6622,7 @@ api:
       operationids:
         - GetUsageHosts
       unstable: []
-      order: 10
+      order: 11
   - name: Get hourly usage for Fargate
     url: '#get-hourly-usage-for-fargate'
     identifier: usage-metering-get-hourly-usage-for-fargate
@@ -6628,7 +6634,7 @@ api:
       operationids:
         - GetUsageFargate
       unstable: []
-      order: 17
+      order: 18
   - name: Get hourly usage for database monitoring
     url: '#get-hourly-usage-for-database-monitoring'
     identifier: usage-metering-get-hourly-usage-for-database-monitoring
@@ -6640,7 +6646,7 @@ api:
       operationids:
         - GetUsageDBM
       unstable: []
-      order: 30
+      order: 31
   - name: Get hourly usage for cloud workload security
     url: '#get-hourly-usage-for-cloud-workload-security'
     identifier: usage-metering-get-hourly-usage-for-cloud-workload-security
@@ -6652,7 +6658,7 @@ api:
       operationids:
         - GetUsageCWS
       unstable: []
-      order: 29
+      order: 30
   - name: Get hourly usage for CSPM
     url: '#get-hourly-usage-for-cspm'
     identifier: usage-metering-get-hourly-usage-for-cspm
@@ -6664,7 +6670,7 @@ api:
       operationids:
         - GetUsageCloudSecurityPostureManagement
       unstable: []
-      order: 27
+      order: 28
   - name: Get hourly usage for CI visibility
     url: '#get-hourly-usage-for-ci-visibility'
     identifier: usage-metering-get-hourly-usage-for-ci-visibility
@@ -6676,7 +6682,7 @@ api:
       operationids:
         - GetUsageCIApp
       unstable: []
-      order: 34
+      order: 35
   - name: Get billable usage across your account
     url: '#get-billable-usage-across-your-account'
     identifier: usage-metering-get-billable-usage-across-your-account
@@ -6700,7 +6706,7 @@ api:
       operationids:
         - GetUsageLambda
       unstable: []
-      order: 18
+      order: 19
   - name: Get hourly usage for audit logs
     url: '#get-hourly-usage-for-audit-logs'
     identifier: usage-metering-get-hourly-usage-for-audit-logs
@@ -6712,7 +6718,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 28
+      order: 29
   - name: Get usage attribution
     url: '#get-usage-attribution'
     identifier: usage-metering-get-usage-attribution
@@ -6725,7 +6731,7 @@ api:
         - GetUsageAttribution
       unstable:
         - v1
-      order: 39
+      order: 40
   - name: Get hourly usage for analyzed logs
     url: '#get-hourly-usage-for-analyzed-logs'
     identifier: usage-metering-get-hourly-usage-for-analyzed-logs
@@ -6737,7 +6743,7 @@ api:
       operationids:
         - GetUsageAnalyzedLogs
       unstable: []
-      order: 22
+      order: 23
   - name: Get specified monthly custom reports
     url: '#get-specified-monthly-custom-reports'
     identifier: usage-metering-get-specified-monthly-custom-reports
@@ -6750,7 +6756,7 @@ api:
         - GetSpecifiedMonthlyCustomReports
       unstable:
         - v1
-      order: 43
+      order: 44
   - name: Get the list of available monthly custom reports
     url: '#get-the-list-of-available-monthly-custom-reports'
     identifier: usage-metering-get-the-list-of-available-monthly-custom-reports
@@ -6763,7 +6769,7 @@ api:
         - GetMonthlyCustomReports
       unstable:
         - v1
-      order: 42
+      order: 43
   - name: Get specified daily custom reports
     url: '#get-specified-daily-custom-reports'
     identifier: usage-metering-get-specified-daily-custom-reports
@@ -6776,7 +6782,7 @@ api:
         - GetSpecifiedDailyCustomReports
       unstable:
         - v1
-      order: 41
+      order: 42
   - name: Get the list of available daily custom reports
     url: '#get-the-list-of-available-daily-custom-reports'
     identifier: usage-metering-get-the-list-of-available-daily-custom-reports
@@ -6789,7 +6795,7 @@ api:
         - GetDailyCustomReports
       unstable:
         - v1
-      order: 40
+      order: 41
   - name: Users
     url: /api/latest/users/
     identifier: users
@@ -7824,6 +7830,66 @@ api:
         - ListRUMEvents
       unstable: []
       order: 2
+  - name: Update a RUM application
+    url: '#update-a-rum-application'
+    identifier: rum-update-a-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateRUMApplication
+      unstable: []
+      order: 0
+  - name: Get a RUM application
+    url: '#get-a-rum-application'
+    identifier: rum-get-a-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRUMApplication
+      unstable: []
+      order: 0
+  - name: Delete a RUM application
+    url: '#delete-a-rum-application'
+    identifier: rum-delete-a-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteRUMApplication
+      unstable: []
+      order: 0
+  - name: Create a new RUM application
+    url: '#create-a-new-rum-application'
+    identifier: rum-create-a-new-rum-application
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateRUMApplication
+      unstable: []
+      order: 0
+  - name: List all the RUM applications
+    url: '#list-all-the-rum-applications'
+    identifier: rum-list-all-the-rum-applications
+    parent: rum
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetRUMApplications
+      unstable: []
+      order: 0
   - name: Aggregate RUM events
     url: '#aggregate-rum-events'
     identifier: rum-aggregate-rum-events

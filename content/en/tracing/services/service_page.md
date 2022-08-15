@@ -198,6 +198,6 @@ View common patterns in your service’s logs, and use facets like status in the
 [12]: /tracing/services/deployment_tracking/#versions-deployed
 [13]: /getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
 [14]: /tracing/metrics/runtime_metrics/
-[15]: /tracing/profiler/
+[15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/

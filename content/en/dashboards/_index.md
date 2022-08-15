@@ -258,7 +258,7 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [6]: https://app.datadoghq.com/infrastructure/map
 [7]: https://app.datadoghq.com/logs
 [8]: /tracing/
-[9]: /tracing/profiler/
+[9]: /profiler/
 [10]: /dashboards/guide/custom_time_frames/
 [11]: /dashboards/sharing/#dashboards
 [12]: /events/

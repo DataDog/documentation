@@ -49,4 +49,5 @@ def pull_rbac():
         with open('data/permissions.json', 'w+') as outfile:
             outfile.write(formatted_permissions_json)
 
+
 pull_rbac()

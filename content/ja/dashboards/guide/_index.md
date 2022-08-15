@@ -1,6 +1,8 @@
 ---
 aliases:
 - /ja/graphing/guide/
+- /ja/faq/treemap-graph-visualization-can-i-use-this-elsewhere/
+disable_toc: true
 kind: ガイド
 private: true
 title: グラフ作成ガイド

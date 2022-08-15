@@ -31,7 +31,7 @@ further_reading:
 This page provides instructions on installing the Datadog Agent in a Kubernetes environment through three different methods. Choose the method that best suits your use case:
 
 - [Datadog Operator](?tab=operator)
-- [Helm](?tab=helm)
+- [Helm chart](?tab=helm)
 - [DaemonSet](?tab=daemonset)
 
 For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
@@ -204,6 +204,21 @@ The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` param
 
 If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][11] to map your previous settings with the new fields.
 
+### Kube state metrics core in chart v2.x
+
+In new deployments, Datadog recommends using the newer `kube-state-metrics` core with the following values:
+
+```yaml
+...
+datadog:
+...
+  kubeStateMetricsCore:
+    enabled: true
+...
+```
+
+For details about `kube-state-metrics` core, read the [Kubernetes State Metrics Core documentation][12].
+
 ### Unprivileged
 
 (Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
@@ -229,6 +244,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [9]: https://gallery.ecr.aws/datadog/
 [10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
+[12]: /integrations/kubernetes_state_core
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 

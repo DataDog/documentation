@@ -3,9 +3,15 @@ further_reading:
 - link: /security_platform/application_security/
   tag: ドキュメント
   text: Datadog アプリケーションセキュリティモニタリングによる脅威の監視
+- link: /security_platform/application_security/event_rules/
+  tag: ドキュメント
+  text: イベントルールの作成
 - link: /security_platform/application_security/troubleshooting
   tag: ドキュメント
   text: Datadog アプリケーションセキュリティモニタリングの一般的な問題のトラブルシューティング
+- link: /tracing/trace_explorer/query_syntax/
+  tag: ドキュメント
+  text: ASM クエリを定義するための構文
 kind: documentation
 title: カスタム検出ルール
 ---
@@ -26,7 +32,7 @@ OOTB 検出ルールをカスタマイズするには、まず既存のルール
 
 ### ASM クエリの定義
 
-ASM のクエリを作成します。例えば、SQL インジェクションの試行をエンドポイントで監視するクエリを作成します: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`。
+[APM トレースエクスプローラーと同じクエリ構文][5]を使用して、ASM クエリを構築します。例えば、SQL インジェクションの試行についてエンドポイントを監視するクエリを作成します: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`
 
 オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。 通常、グループ化はエンティティ (ユーザーや IP など) です。グループ化は、[クエリを結合する](#joining-queries)ためにも使用されます。
 
@@ -167,3 +173,4 @@ Real routes targeted for `your_service_name`.
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
 [3]: /ja/monitors/notify/?tab=is_alert#integrations
 [4]: /ja/security_platform/notification_rules/
+[5]: /ja/tracing/trace_explorer/query_syntax/

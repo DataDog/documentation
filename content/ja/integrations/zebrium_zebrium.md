@@ -89,3 +89,6 @@ Zebrium のお客様になると、Zebrium と Datadog の 2 点のインテグ�
 [2]: mailto:support@zebrium.com
 [3]: https://cloud.zebrium.com
 [4]: https://app.datadoghq.com/account/settings
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/zebrium-zebrium" target="_blank">こちらをクリック</a>してください。
