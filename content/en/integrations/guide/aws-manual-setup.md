@@ -51,7 +51,7 @@ Setting up the AWS integration manually involves creating an IAM policy and IAM 
 
 ### Generate an external ID
 
-1. In the [AWS integration tile][6], click **Manually**.
+1. In the [AWS integration tile][6], click **Add AWS Account**, and then select **Manually**.
 2. Select `Role Delegation` for the access type and copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][1].
   **Note: Do not close the integration tile or the Datadog site**, as this causes the external ID value to reset.
 
@@ -59,7 +59,7 @@ Setting up the AWS integration manually involves creating an IAM policy and IAM 
 Create an IAM policy for the Datadog role in your AWS account with the [necessary permissions](#aws-integration-iam-policy) to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change. 
 
 3. Create a new policy in the AWS [IAM Console][2].
-4. Select the `JSON` tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox. 
+4. Select the **JSON** tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox. 
 5. Click **Next: Tags** and **Next: Review**.
 6. Name the policy `DatadogIntegrationPolicy` or one of your own choosing, and provide an apt description.
 7. Click **Create policy**.
@@ -68,9 +68,9 @@ Create an IAM policy for the Datadog role in your AWS account with the [necessar
 Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 
 8. Create a new role in the AWS [IAM Console][3].
-9. Select `AWS account` for the trusted entity type, and `Another AWS account`.
+9. Select **AWS account** for the trusted entity type, and **Another AWS account**.
 10. Enter `464622532012` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
-11. Select `Require external ID` and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section. 
+11. Select **Require external ID** and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section. 
 Ensure to leave `Require MFA` disabled. 
 12. Click **Next**.
 13. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section. 
@@ -124,14 +124,20 @@ For more details, see the [How to use an external ID when granting access to you
 
 ### Datadog
 
-3. Open the [AWS integration tile][2].
+3. In the [AWS integration tile][6], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys (GovCloud or China Only)** tab.
-5. Enter your `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
-6. Choose the services to collect metrics from on the left side of the dialog.
-7. Optionally, add tags to all hosts and metrics.
-8. Optionally, monitor a subset of EC2 instances by entering the AWS tags in the textbox `to hosts with tag`. **Note:** This also applies to an instance's attached EBS volumes.
-9. Optionally, monitor a subset of Lambdas by entering the AWS tags in the textbox `to Lambdas with tag`.
-10. Click **Install Integration**.
+5. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
+6. Click **Save**.
+7. Use the tabs under the account number to configure the integration and data collected.  
+{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="">}}  
+  - **Account Details:** Configure tags and other details.  
+  - **General:** Enable [EC2 Automuting][7], CloudWatch [alarm collection][8], and select the regions to integrate with.  
+  - **Metric Collection:** Collect metrics from [AWS services][9], custom metrics, and [CloudWatch Metric Streams][11].  
+  - **Log Collection:** Collect AWS service logs with the [Datadog Forwarder Lambda][10] function or send them to the [Datadog Kinesis Firehose Destination][12].  
+  - **Resource Collection:** Configure resource collection settings, if using CSPM.  
+  - **X-Ray Traces:** Trace distributed applications built using AWS services with [AWS X-Ray][13].  
+8. Click **Install integration**.
+9. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
