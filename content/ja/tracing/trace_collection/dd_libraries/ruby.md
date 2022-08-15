@@ -1070,7 +1070,7 @@ GraphQL インテグレーションでは、GraphQL クエリのインスツル�
 ```ruby
 # Rails ニシャライザまたは同等の内部
 Datadog.configure do |c|
-  c.tracing.instrument :graphql, schemas: [YourSchema], options
+  c.tracing.instrument :graphql, schemas: [YourSchema], **options
 end
 
 # 次に、GraphQL クエリを実行します
@@ -1082,6 +1082,9 @@ YourSchema.execute(query, variables: {}, context: {}, operation_name: nil)
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `schemas` | 必須。トレースする `GraphQL::Schema` オブジェクトの配列。このコンフィギュレーションに指定されるオプションを使用して、リストされているすべてのスキーマにトレースが追加されます。何も指定しない場合、トレースはアクティブ化されません。 | `[]` |
+| `service_name` | graphql インスツルメンテーションに使用されるサービス名 | `'ruby-graphql'` |
+| `analytics_enabled` | スパンの分析を有効にします。オンの場合は `true`、Datadog グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
+| `analytics_sample_rate` | Datadog の分析用にトレースデータをサンプリングするレート。`0` から `1.0` の間の浮動小数点数である必要があります。 | `1.0` |
 
 **GraphQL スキーマを手動で構成する**
 

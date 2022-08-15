@@ -1,46 +1,70 @@
 ---
+app_id: couchbase
+app_uuid: e7fac1cd-65ba-4a58-af73-ee5f160cc6f9
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     couchbase: assets/dashboards/couchbase_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: couchbase.ram.used
+      metadata_path: metadata.csv
+      prefix: couchbase.
+    process_signatures:
+    - beam.smp couchbase
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Couchbase
   logs:
     source: couchdb
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     couchbase_processes: assets/saved_views/couchbase_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
-display_name: Couchbase
+display_on_public_website: true
 draft: false
 git_integration_title: couchbase
-guid: ba7ce7de-4fcb-4418-8c90-329baa6a5d59
 integration_id: couchbase
 integration_title: CouchBase
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: couchbase.
-metric_to_check: couchbase.ram.used
+manifest_version: 2.0.0
 name: couchbase
-process_signatures:
-- beam.smp couchbase
-public_title: CouchBase インテグレーション
+oauth: {}
+public_title: CouchBase
 short_description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CouchBase
 ---
 
 

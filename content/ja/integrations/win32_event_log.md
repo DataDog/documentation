@@ -169,30 +169,41 @@ Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -Fir
     いくつかのフィルターの例を示します。
 
     ```yaml
-      - type: windows_event
-        channel_path: Security
-        source: windows.events
-        service: Windows       
-        log_processing_rules:
-        - type: include_at_match
-          name: relevant_security_events
-          pattern: .*(?i)eventid.+(1102|4624|4625|4634|4648|4728|4732|4735|4737|4740|4755|4756)
-      - type: windows_event
-        channel_path: System
-        source: windows.events
-        service: Windows       
-        log_processing_rules:
-        - type: include_at_match
-          name: system_errors_and_warnings
-          pattern: .*(?i)level.+((?i)(warning|error))
-      - type: windows_event
-        channel_path: Application
-        source: windows.events
-        service: Windows       
-        log_processing_rules:
-        - type: include_at_match
-          name: application_errors_and_warnings
-          pattern: .*(?i)level.+((?i)(warning|error))
+    - type: windows_event
+      channel_path: Security
+      source: windows.events
+      service: Windows       
+      log_processing_rules:
+      - type: include_at_match
+        name: relevant_security_events
+        pattern: .*(?i)eventid.+(1102|4624|4625|4634|4648|4728|4732|4735|4737|4740|4755|4756)
+
+    - type: windows_event
+      channel_path: Security
+      source: windows.events
+      service: Windows       
+      log_processing_rules:
+      - type: exclude_at_match
+        name: relevant_security_events
+        pattern: \"EventID\":\"1102\"|\"4624\"t\"
+
+    - type: windows_event
+      channel_path: System
+      source: windows.events
+      service: Windows       
+      log_processing_rules:
+      - type: include_at_match
+        name: system_errors_and_warnings
+        pattern: .*(?i)level.+((?i)(warning|error))
+
+    - type: windows_event
+      channel_path: Application
+      source: windows.events
+      service: Windows       
+      log_processing_rules:
+      - type: include_at_match
+        name: application_errors_and_warnings
+        pattern: .*(?i)level.+((?i)(warning|error))
     ```
 
     ```yaml
@@ -202,8 +213,8 @@ Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -Fir
       - tags:
           - sqlserver
         type:
-          - 警告
-          - エラー
+          - Warning
+          - Error
         log_file:
           - Application
         source_name:
@@ -213,9 +224,9 @@ Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -Fir
       - tags:
           - system
         type:
-          - エラー
+          - Error
         log_file:
-          - システム
+          - System
     ```
 
 2. Agent Manager を使用して [Agent を再起動][4]します (またはサービスを再起動します)。
@@ -278,7 +289,7 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 
 ### ドキュメント
 
-- [イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する方法][10]
+- [イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する][10]
 
 ### ブログ
 
@@ -295,7 +306,7 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 [7]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.datadoghq.com/ja/help/
-[10]: https://docs.datadoghq.com/ja/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class/
+[10]: https://docs.datadoghq.com/ja/integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class/
 [11]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
 [12]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
 [13]: https://www.datadoghq.com/blog/windows-server-monitoring
