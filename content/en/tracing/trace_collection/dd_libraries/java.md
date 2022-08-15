@@ -247,6 +247,8 @@ For additional details and options, see the [WebSphere docs][1].
 
 Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][9]. When a `java-agent` is registered, it can modify class files at load time.
 
+**Note:** Classes loaded with remote ClassLoader are not instrumented automatically.
+
 Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mixture of both. Instrumentation generally captures the following info:
 
 - Timing duration is captured using the JVM's NanoTime clock unless a timestamp is provided from the OpenTracing API
