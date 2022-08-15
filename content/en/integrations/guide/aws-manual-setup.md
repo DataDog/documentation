@@ -36,6 +36,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/announcing-cloud-siem/"
   tag: "Blog"
   text: "Announcing Datadog Security Monitoring"
+- link: "https://www.datadoghq.com/blog/tagging-best-practices/#aws"
+  tag: "Blog"
+  text: "Best practices for tagging your infrastructure and applications"
+
 ---
 
 ## Overview
@@ -74,27 +78,19 @@ Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 Ensure to leave `Require MFA` disabled. 
 12. Click **Next**.
 13. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section. 
-14. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role if you would like to use Datadog's [Cloud Security Posture Management product][4].
+14. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to use Datadog's [Cloud Security Posture Management product][4] (CSPM).
 15. Click **Next**.
 16. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description. 
 17. Click **Create Role**.
 
 ### Complete the setup in Datadog
 
-18. Return to the AWS integration tile page in your Datadog account that you had open in another tab, and enter your AWS Account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
-19. Enter the name of the role created in the previous section, and click **Save**.
+18. Return to the AWS integration tile page in your Datadog account that you had open in another tab, and click the checkbox to confirm the Datadog IAM role was added to the AWS account.
+19. Enter the account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
+20. Enter the name of the role created in the previous section, and click **Save**.
 **Note:** The role name you enter in the integration tile is case sensitive and must exactly match the role name in AWS.
-20. If there is a [Datadog is not authorized to perform sts:AssumeRole][5] error, follow the troubleshooting steps recommended in the UI, or read the [troubleshooting guide][5].
-21. Use the tabs under the account number to configure the integration and data collected.  
-{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="">}}  
-  - **Account Details:** Configure tags and other details.  
-  - **General:** Enable [EC2 Automuting][7], CloudWatch [alarm collection][8], and select the regions to integrate with.  
-  - **Metric Collection:** Collect metrics from [AWS services][9], custom metrics, and [CloudWatch Metric Streams][11].  
-  - **Log Collection:** Collect AWS service logs with the [Datadog Forwarder Lambda][10] function or send them to the [Datadog Kinesis Firehose Destination][12].  
-  - **Resource Collection:** Configure resource collection settings, if using CSPM.  
-  - **X-Ray Traces:** Trace distributed applications built using AWS services with [AWS X-Ray][13].  
-22. Click **Install integration**.
-23. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+21. If there is a [Datadog is not authorized to perform sts:AssumeRole][5] error, follow the troubleshooting steps recommended in the UI, or read the [troubleshooting guide][5].
+22. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [2]: https://console.aws.amazon.com/iam/home#/policies
@@ -102,13 +98,6 @@ Ensure to leave `Require MFA` disabled.
 [4]: /security_platform/cspm
 [5]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [6]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[7]: /integrations/amazon_ec2/#ec2-automuting
-[8]: /integrations/amazon_web_services/?tab=roledelegation#alarm-collection
-[9]: /integrations/#cat-aws
-[10]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
-[11]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
-[12]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
-[13]: /integrations/amazon_xray/
 
 {{% /tab %}}
 {{% tab "Access keys (GovCloud or China Only)" %}}
@@ -124,28 +113,45 @@ For more details, see the [How to use an external ID when granting access to you
 
 ### Datadog
 
-3. In the [AWS integration tile][6], click **Add AWS Account**, and then select **Manually**.
+3. In the [AWS integration tile][2], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys (GovCloud or China Only)** tab.
 5. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
 6. Click **Save**.
-7. Use the tabs under the account number to configure the integration and data collected.  
-{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="">}}  
-  - **Account Details:** Configure tags and other details.  
-  - **General:** Enable [EC2 Automuting][7], CloudWatch [alarm collection][8], and select the regions to integrate with.  
-  - **Metric Collection:** Collect metrics from [AWS services][9], custom metrics, and [CloudWatch Metric Streams][11].  
-  - **Log Collection:** Collect AWS service logs with the [Datadog Forwarder Lambda][10] function or send them to the [Datadog Kinesis Firehose Destination][12].  
-  - **Resource Collection:** Configure resource collection settings, if using CSPM.  
-  - **X-Ray Traces:** Trace distributed applications built using AWS services with [AWS X-Ray][13].  
-8. Click **Install integration**.
-9. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+7. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{< /tabs >}}
+
+## Configuration tabs
+
+Use the tabs under the account number to configure the integration and data collected. 
+
+{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="The AWS integration tile in the Datadog application with installation completed for an account, with tabs for Account Details, General, Metric Collection, Log Collection, Resource Collection, X-Ray Traces">}}  
+
+See the table below for a description of the options under each tab.
+
+| Tab           | Description |
+| ------------------------ | ------------------------------------------------ |
+| **Account Details:**     | Configure [tags][9] and other details.
+| **General:**             | Enable [EC2 Automuting][3], CloudWatch [alarm collection][4], and select the regions to integrate with.
+| **Metric Collection:**   | Collect metrics from [AWS services][5], custom metrics, and [CloudWatch Metric Streams][6]. 
+| **Log Collection:**      | Collect AWS service logs with the [Datadog Forwarder Lambda][10] function or send them to the [Datadog Kinesis Firehose Destination][7].
+| **Resource Collection:** | Configure resource collection settings, if using [CSPM][2].
+| **X-Ray Traces:**        | Trace distributed applications built using AWS services with [AWS X-Ray][8]. 
 
 {{% aws-permissions %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
+[2]: /security_platform/cspm
+[3]: /integrations/amazon_ec2/#ec2-automuting
+[4]: /integrations/amazon_web_services/?tab=roledelegation#alarm-collection
+[5]: /integrations/#cat-aws
+[6]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
+[7]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[8]: /integrations/amazon_xray/
+[9]: /getting_started/tagging/using_tags?tab=aws#integrations
+[10]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
