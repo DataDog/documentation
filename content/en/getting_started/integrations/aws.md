@@ -73,7 +73,6 @@ Before getting started, ensure you have the following prerequisites:
     * secretsmanager:PutSecretValue
     * serverless:CreateCloudFormationTemplate
 
-
 ## Setup
 
 2. Go to the the [AWS tile][8] in the Datadog application and click **Add AWS Account**.
@@ -84,7 +83,6 @@ Before getting started, ensure you have the following prerequisites:
     **c.** Optionally, send logs and other other data to Datadog with the [Datadog Forwarder Lambda][1].  
     **d.** Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
-
 5. Click "Launch CloudFormation Template". This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
 
@@ -92,19 +90,27 @@ Before getting started, ensure you have the following prerequisites:
 
 7. After the stack is created, go back to the AWS integration tile in Datadog and click the **Ready!** button.
 
-8. Use the tabs under the account number to configure the integration and data collected.
-{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="">}}
-  - **Account Details:** Configure tags and other details.
-  - **General:** Enable [EC2 Automuting][9], CloudWatch [alarm collection][10], and select the regions to integrate with.
-  - **Metric Collection:** Collect metrics from [AWS services][13], custom metrics, and [CloudWatch Metric Streams][59].
-  - **Log Collection:** Collect AWS service logs with the [Datadog Forwarder Lambda][14] function or send them to the [Datadog Kinesis Firehose Destination][60].
-  - **Resource Collection:** Configure resource collection settings, if using CSPM.
-  - **X-Ray Traces:** Trace distributed applications built using AWS services with [AWS X-Ray][61].
-
-9. Wait up to 10 minutes for data to arrive in Datadog, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
+8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
 
-## Enable integrations for individual AWS service
+## Configuration tabs
+
+Use the tabs under the account number to configure the integration and data collected. 
+
+{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="The AWS integration tile in the Datadog application with installation completed for an account, with tabs for Account Details, General, Metric Collection, Log Collection, Resource Collection, X-Ray Traces">}}  
+
+See the table below for a description of the options under each tab.
+
+| Tab           | Description |
+| ------------------------ | ------------------------------------------------ |
+| **Account Details:**     | Configure [tags][62] and other details.
+| **General:**             | Enable [EC2 Automuting][9], CloudWatch [alarm collection][10], and select the regions to integrate with.
+| **Metric Collection:**   | Collect metrics from [AWS sub-integrations][13], custom metrics, and [CloudWatch Metric Streams][59]. 
+| **Log Collection:**      | Collect AWS service logs with the [Datadog Forwarder Lambda][1] function or send them to the [Datadog Kinesis Firehose Destination][60].
+| **Resource Collection:** | Configure resource collection settings, if using [CSPM][54].
+| **X-Ray Traces:**        | Trace distributed applications built using AWS services with [AWS X-Ray][61]. 
+
+## Enable integrations for individual AWS services
 
 See the [Integrations page][13] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your AWS account.
 
@@ -249,3 +255,4 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
 [60]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
 [61]: /integrations/amazon_xray/
+[62]: /getting_started/tagging/using_tags?tab=aws#integrations
