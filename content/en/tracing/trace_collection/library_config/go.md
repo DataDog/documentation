@@ -60,6 +60,10 @@ See all available options in the [configuration documentation][2].
 : **Default**: `localhost` <br>
 Override the default trace Agent host address for trace submission.
 
+`DD_TRACE_AGENT_PORT`
+: **Default**: `8126` <br>
+Override the default trace Agent port for Datadog trace submission.
+
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
 Override the default trace Agent port for DogStatsD metric submission.
@@ -70,7 +74,7 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` a
 For more information, see [Ingestion Mechanisms][3].<br>
 **Examples:**<br>
   - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
 
 `DD_TRACE_SAMPLE_RATE`
 : Enable ingestion rate control.
@@ -80,7 +84,7 @@ For more information, see [Ingestion Mechanisms][3].<br>
 
 `DD_TAGS`
 : **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`.
 
 `DD_TRACE_STARTUP_LOGS`
 : **Default**: `true` <br>
@@ -112,21 +116,18 @@ Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
 supported: `Datadog` and `B3`.
 
-Configure injection styles using the environment variable
-`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+- Configure injection styles using the `DD_PROPAGATION_STYLE_INJECT=Datadog,B3` environment variable
+- Configure extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3` environment variable
 
-Configure extraction styles using the environment variable
-`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The values of these environment variables are comma separated lists of
-header styles that are enabled for injection or extraction. By default only
+The values of these environment variables are comma-separated lists of
+header styles enabled for injection or extraction. By default, only
 the `Datadog` extraction style is enabled.
 
 If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
