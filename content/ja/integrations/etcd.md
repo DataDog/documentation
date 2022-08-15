@@ -1,52 +1,78 @@
 ---
+app_id: etcd
+app_uuid: 7f16875b-4aa8-44e3-adff-63622c234253
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
     etcd-Screenboard: assets/dashboards/etcd_2_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - etcd.store.watchers
+      - etcd.server.has_leader
+      metadata_path: metadata.csv
+      prefix: etcd.
+    process_signatures:
+    - etcd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: etcd
   logs:
     source: etcd
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     etcd_overview: assets/saved_views/etcd_overview.json
     etcd_processes: assets/saved_views/etcd_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - orchestration
 - containers
 - configuration & deployment
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
-display_name: etcd
+display_on_public_website: true
 draft: false
 git_integration_title: etcd
-guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd
 integration_title: etcd
 integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: etcd.
-metric_to_check:
-- etcd.store.watchers
-- etcd.server.has_leader
+manifest_version: 2.0.0
 name: etcd
-process_signatures:
-- etcd
-public_title: etcd インテグレーション
+oauth: {}
+public_title: etcd
 short_description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::オーケストレーション
+  - Category::コンテナ
+  - Category::構成 & デプロイ
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: etcd
 ---
 
 
