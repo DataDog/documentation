@@ -135,7 +135,6 @@ Les événements RUM de type Action, Erreur, Ressource et Tâche longue contienn
 | Métrique                              | Type        | Description                                                                                          |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`                             | nombre (ns) | Le temps passé sur la vue.                                    |
-| `view.loading_time`                             | nombre (ns) | La durée de chargement de la vue.                                   |
 | `view.long_task.count`        | nombre      | Nombre total de tâches longues recueillies pour cette vue.                                |
 | `view.error.count`            | nombre      | Nombre total d'erreurs recueillies pour cette vue.                                    |
 | `view.resource.count`         | nombre      | Nombre total de ressources recueillies pour cette vue.                                 |
@@ -221,7 +220,7 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 | `action.name` | chaîne | Nom de l'action utilisateur. |
 | `action.target.name` | chaîne | Élément avec lequel l'utilisateur a interagi. Uniquement pour les actions recueillies automatiquement. |
 
-## Stockage de données
+## Stockage des données
 
 Avant que les données ne soient importées dans Datadog, elles sont stockées en clair dans le répertoire cache de votre application. Ce répertoire est protégé par le [bac à sable d'applications Android][6]. Ainsi, sur la plupart des appareils, ces données ne peuvent pas être lues par d'autres applications. Toutefois, si l'appareil mobile est en mode root, ou si l'intégrité du kernel Linux a été compromise, il est possible que les données stockées soient lisibles.
 
