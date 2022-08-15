@@ -116,7 +116,12 @@ See the [Integrations page][13] for a full listing of the available sub-integrat
 
 ## Send logs
 
-For a full list of ways you can send your AWS logs to Datadog, see [Enable logging for your AWS service][14].
+There are two ways of sending AWS service logs to Datadog:
+
+- [Kinesis Firehose destination][63]: Use the Datadog destination in your Kinesis Firehose delivery stream to forward logs to Datadog. It is recommended to use this approach when sending logs from CloudWatch in a very high volume.
+- [Forwarder Lambda function][64]: Deploy the Datadog Forwarder Lambda function, which subscribes to S3 buckets or your CloudWatch log groups and forwards logs to Datadog. You **must** use this approach to send traces, enhanced metrics, or custom metrics from Lambda functions asynchronously through logs. Datadog also recommends you use this approach to sending logs from S3 or other resources that cannot directly stream data to Kinesis.
+
+Read the [Enable logging for your AWS service][14] section to get logs flowing for the most-used AWS services.
 
 ### Validation
 
@@ -256,3 +261,5 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [60]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
 [61]: /integrations/amazon_xray/
 [62]: /getting_started/tagging/using_tags?tab=aws#integrations
+[63]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[64]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/

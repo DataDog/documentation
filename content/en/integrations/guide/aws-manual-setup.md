@@ -49,7 +49,7 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 {{< tabs >}}
 {{% tab "Role delegation" %}}
 
-Setting up the AWS integration manually involves creating an IAM policy and IAM role in your AWS account, and configuring the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
+To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
 ## Setup
 
@@ -132,14 +132,14 @@ Use the tabs under the account number to configure the integration and data coll
 
 See the table below for a description of the options under each tab.
 
-| Tab           | Description |
-| ------------------------ | ------------------------------------------------ |
-| **Account Details:**     | Configure [tags][9] and other details.
-| **General:**             | Enable [EC2 Automuting][3], CloudWatch [alarm collection][4], and select the regions to integrate with.
-| **Metric Collection:**   | Collect metrics from [AWS services][5], custom metrics, and [CloudWatch Metric Streams][6]. 
-| **Log Collection:**      | Collect AWS service logs with the [Datadog Forwarder Lambda][10] function or send them to the [Datadog Kinesis Firehose Destination][7].
-| **Resource Collection:** | Configure resource collection settings, if using [CSPM][2].
-| **X-Ray Traces:**        | Trace distributed applications built using AWS services with [AWS X-Ray][8]. 
+| Tab                        | Description
+| ---------------------------| ------------------------------------------------ |
+| **Account Details:**       | Configure [tags][9] and other details.
+| **General:**               | Enable [EC2 Automuting][3], CloudWatch [alarm collection][4], and select the regions to integrate with.
+| **Metric Collection:**     | Collect metrics from [AWS services][5], custom metrics, and [CloudWatch Metric Streams][6], or limit metric collection by service or tag.
+| **Log Collection:**        | Collect AWS service logs with the [Datadog Forwarder Lambda][10] function or send them to the [Datadog Kinesis Firehose Destination][7].
+| **Resource Collection:**   | Configure resource collection settings, if using [CSPM][2].
+| **X-Ray Traces:**          | Trace distributed applications built using AWS services with [AWS X-Ray][8]. 
 
 {{% aws-permissions %}}
 
