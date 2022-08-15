@@ -282,7 +282,7 @@ Create a variable from content such as a `span` or `div` by extracting the eleme
 
 #### JavaScript
 
-Write the custom JavaScript code that returns the value you want your variable to be assigned to. JavaScript steps support both synchronous and asynchronous code. Because browser tests load external JavaScript by adding the script to the page, they only work if your website accepts external JavaScript.
+JavaScript steps support both synchronous and asynchronous code. Because browser tests load external JavaScript by adding the script to the page, they only work if your website accepts external JavaScript.
 
 The JavaScript function comes with the following parameters and requires a return statement.
 
