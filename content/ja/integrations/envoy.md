@@ -35,7 +35,7 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 2.3.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

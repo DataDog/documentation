@@ -14,7 +14,7 @@ title: JavaScript ソースマップのアップロード
 
 フロントエンドの JavaScript ソースコードが縮小化されている場合、Datadog にソースマップをアップロードして、異なるスタックトレースの難読化を解除します。任意のエラーについて、関連するスタックトレースの各フレームのファイルパス、行番号、コードスニペットにアクセスすることができます。また、Datadog はスタックフレームをリポジトリ内のソースコードにリンクすることができます。
 
-<div class="alert alert-info">Real User Monitoring (RUM) で収集されたエラーのみ、縮小化解除が可能です。</div>
+<div class="alert alert-info"><a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> で収集されたエラー、および<a href="/logs/log_collection/javascript/">ブラウザログ収集</a>のログのみ、縮小化解除が可能です。</div>
 
 ## コードのインスツルメンテーション
 
@@ -81,9 +81,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 
 ソースマップをアップロードする最良の方法は、CI パイプラインに追加のステップを追加し、[Datadog CLI][1] から専用コマンドを実行することです。`dist` ディレクトリとそのサブディレクトリをスキャンして、関連する縮小ファイルを含むソースマップを自動的にアップロードします。
 
-{{< tabs >}}
-{{% tab "US" %}}
-
+{{< site-region region="us" >}}
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
 3. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
@@ -97,12 +95,12 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
 
+{{< site-region region="eu,us3,us5,gov" >}}
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
-3. 2 つの環境変数 `export DATADOG_SITE="datadoghq.eu"` および `export DATADOG_API_HOST="api.datadoghq.eu"` をエクスポートして、EU リージョンにファイルをアップロードするために CLI を構成します。
+3. 以下の 2 つの環境変数をエクスポートして、{{<region-param key="dd_site_name">}} サイトにファイルをアップロードするように CLI を構成します: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} と `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}
 4. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -113,24 +111,23 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 CI のパフォーマンスに対するオーバーヘッドを最小限に抑えるため、CLI は短時間 (通常数秒) で必要なだけのソースマップをアップロードできるように最適化されています。
 
-パラメーター `--service` と `--release-version` は、RUM イベントの `service` タグと `version` タグに一致させる必要があります。これらのタグの設定方法の詳細については、[Browser SDK 初期化ドキュメント][2]を参照してください。アップロードされたソースマップは、RUM Browser SDK によって収集されたエラーの難読化を解除するために使用されます。
+`service` と `--release-version` パラメーターは、RUM イベントとブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
 
 <div class="alert alert-info">RUM アプリケーションで複数のサービスを定義している場合、RUM アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
 
 サンプルの `dist` ディレクトリに対してコマンドを実行すると、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` と `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` に JavaScript ファイルを配信することを期待します。
 
-エラー追跡でスタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
+スタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
 
 <div class="alert alert-info">異なるサブドメインから同じ JavaScript ソースファイルを提供する場合、関連するソースマップを一度アップロードし、完全な URL の代わりに絶対プレフィックスパスを使用することで複数のサブドメインで動作するようにしてください。例えば、<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定します。</div>
 
 ### スタックフレームをソースコードにリンクする
 
-Git の作業ディレクトリ内で `datadog-ci sourcemaps upload` を実行すると、Datadog はリポジトリのメタデータを収集します。`datadog-ci` コマンドは、リポジトリの URL、現在のコミットハッシュ、そしてソースマップに関連するリポジトリ内のファイルパスのリストを収集します。Git のメタデータ収集の詳細については、[datadog-ci のドキュメント][3]を参照してください。
+Git の作業ディレクトリ内で `datadog-ci sourcemaps upload` を実行すると、Datadog はリポジトリのメタデータを収集します。`datadog-ci` コマンドは、リポジトリの URL、現在のコミットハッシュ、そしてソースマップに関連するリポジトリ内のファイルパスのリストを収集します。Git のメタデータ収集の詳細については、[datadog-ci のドキュメント][4]を参照してください。
 
 Datadog は、縮小化を解除されたスタックフレームにソースコードへのリンクを表示します。
 
@@ -152,4 +149,5 @@ Datadog は、縮小化を解除されたスタックフレームにソースコ
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/#initialization-parameters
-[3]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/#initialization-parameters
+[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

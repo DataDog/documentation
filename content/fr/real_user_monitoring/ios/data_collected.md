@@ -117,7 +117,7 @@ Vous pouvez activer la [surveillance des informations utilisateur][2] de façon 
 |------------------------------|--------|----------------------------------------------------------------------------|
 | `session.id`                 | chaîne | L'identifiant unique de la session.                                                  |
 | `session.type`               | chaîne | Le type de la session (`user`).                                              |
-| `session.is_active`          | booléen | Indique si la session est actuellement active. Une session prend fin lorsqu'un utilisateur quitte l'application ou ferme la fenêtre du navigateur. Elle expire après 4 heures ou 15 minutes d'inactivité.                               |
+| `session.is_active`          | booléen | Indique si la session est actuellement active. Une session prend fin lorsqu'un utilisateur quitte l'application ou ferme la fenêtre du navigateur. Elle expire après 4 heures d'activité ou 15 minutes d'inactivité.                               |
 | `session.initial_view.url`   | chaîne | L'URL de la vue initiale de la session.                                     |
 | `ssession.initial_view.name` | chaîne | Le nom de la vue initiale de la session.                                    |
 | `session.last_view.url`      | chaîne | L'URL de la dernière vue de la session.                                        |
@@ -133,7 +133,6 @@ Les événements RUM de type Action, Erreur, Ressource et Tâche longue contienn
 | Métrique                | Type        | Description                                                                  |
 |-----------------------|-------------|------------------------------------------------------------------------------|
 | `view.time_spent`     | nombre (ns) | Le temps passé sur la vue.                                                     |
-| `view.loading_time`                             | nombre (ns) | La durée de chargement de la vue.                        |
 | `view.long_task.count`        | nombre      | Nombre total de tâches longues recueillies pour cette vue.                     |
 | `view.error.count`    | nombre      | Nombre total d'erreurs recueillies pour cette vue.                                 |
 | `view.resource.count` | nombre      | Nombre total de ressources recueillies pour cette vue.                              |
@@ -222,7 +221,7 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 
 ## Stockage des données
 
-Avant que les données ne soient importées dans Datadog, elles sont stockées en clair dans le répertoire cache (`Library/Caches`) du [sandbox de votre application][3]. Aucune autre application installée sur l'appareil ne peut lire ces données.
+Avant que les données ne soient importées dans Datadog, elles sont stockées en clair dans le répertoire cache (`Library/Caches`) du [bac à sable de votre application][3]. Aucune autre application installée sur l'appareil ne peut lire ces données.
 
 ## Pour aller plus loin
 
