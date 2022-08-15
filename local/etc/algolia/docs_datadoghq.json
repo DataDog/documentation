@@ -26,7 +26,8 @@
                     "developers",
                     "account_management",
                     "synthetics",
-                    "database_monitoring"
+                    "database_monitoring",
+                    "profiler"
                 ]
             },
             "tags": ["faq"],
@@ -117,7 +118,8 @@
                     "tracing",
                     "serverless",
                     "watchdog",
-                    "database_monitoring"
+                    "database_monitoring",
+                    "profiler"
                 ]
             },
             "tags": ["docs"],
