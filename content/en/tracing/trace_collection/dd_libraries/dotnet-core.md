@@ -88,7 +88,7 @@ For containerized, serverless, and cloud environments:
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. After instrumenting your application, the tracing client attempts to send traces to the following:
+3. The tracing client attempts to send traces to the following:
 
     - The `/var/run/datadog/apm.socket` Unix domain socket by default.
     - If the socket does not exist, then traces are sent to `localhost:8126`.
@@ -121,9 +121,9 @@ To set up Datadog APM in Azure App Service, see [Tracing Azure App Service Exten
 
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of environments including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
-For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you are encountering setup issues.
+For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you encounter setup issues.
 
 
 [1]: /agent/basic_agent_usage/heroku/#installation
