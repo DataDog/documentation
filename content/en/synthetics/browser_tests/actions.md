@@ -19,11 +19,11 @@ The default timeout for each step is approximately 60 seconds. You can override 
 
 ## Manage step order
 
-Instead of having to reorder new steps manually by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps before the step. 
+Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
 
 1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step. 
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
-3. When you are done adding additional steps above your tests step, click **Clear Cursor** to exit.
+3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
 
 {{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
 
@@ -33,7 +33,7 @@ Once you click **Start Recording**, the [Datadog browser test recorder extension
 
 ### Click
 
-Interacting with elements on your page records a step on the left hand corner. 
+Interacting with elements on your page records a step on the left corner. 
 
 {{< img src="synthetics/browser_tests/click_step.mp4" alt="Click type dropdown menu in the Click step type" video="true" width="60%" >}}
 
@@ -45,13 +45,13 @@ Click on the step and select a click type you want the browser test to perform a
 
 ### Type text
 
-Steps that you perform on your application such as typing or inputting text into forms and fields on your website are recorded by Datadog and a recap appears as a step on the left hand corner. 
+Datadog records steps you perform on your application, such as selecting an option from a `select` dropdown menu, and a recap appears as a step on the left corner.
 
 {{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
 
 ### Select option
 
-Steps that you perform on your application such as selecting an option from a `select` dropdown menu are recorded by Datadog and a recap appears as a step on the left hand corner. 
+Datadog records steps you perform on your application, such as selecting an option from a `select` dropdown menu, and a recap appears as a step on the left corner. 
 
 {{< img src="synthetics/browser_tests/select_options.png" alt="Select options step" style="width:70%;" >}}
 
@@ -62,13 +62,13 @@ To record an **Upload** step, either:
 * Open your desktop from the browser
 * Drag and drop your file in the recording iframe
 
-Steps that you perform on your application such as uploading are recorded by Datadog and a recap appears as a step on the left hand corner. You can upload up to 10 files with a limit of 5MB each.
+Datadog records steps you perform on your application, such as uploading, and a recap appears as a step in the left corner. You can upload up to 10 files with a limit of 5MB each.
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:70%;" >}}
 
 ## Manually added steps
 
-You can manually add and arrange steps on the left hand corner of the browser test recording.
+You can manually add and arrange steps on the left corner of the browser test recording.
 
 ### Assertion
 
@@ -78,7 +78,7 @@ To confirm your test ends in an expected state, you must end your browser tests 
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
 
-Some assertions are performed on the active page, which refers to the page that the user last interacted with such as a **click** or an **assertion** on a page element.
+Some assertions validate the active page, the page the user last interacted with, such as a **click** or an **assertion** on a page element.
 
 To create a step, select an assertion type:
 
@@ -125,7 +125,7 @@ You can test for a value in the URL such as `string`, `number`, or `regex`.
 
 #### Test that an email was received
 
-Create this assertion step to have your browser test confirm that your application's email mechanisms are working and verify that the values you specified such as `string`, `number`, or `regex` are present in the email subject or body. 
+Create this assertion step to have your browser test confirm that your application's email mechanisms are working and verify that the values you specified, such as `string`, `number`, or `regex`, are present in the email subject or body. 
 
 For more information, see [Email Validation with Browser Tests][1].
 
@@ -135,7 +135,7 @@ Create this assertion step to test a custom assertion on the active page using y
 
 The JavaScript assertion function contains the following parameters and requires a return statement.
 
-* The `return` (mandatory) statement reflects the condition the assertion needs to meet in order for your test step to succeed. Any type can be returned, but the value is automatically casted as a boolean.
+* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean.
 
 * `vars` (optional): A string containing your browser test's [variables][2]. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
@@ -170,7 +170,7 @@ You can also check that the value returned by a JavaScript step is the one you a
 
 #### Test a downloaded file
 
-Create this assertion step to have your browser test verify that files have been downloaded in previous steps. You can check that a file was correctly downloaded and assert on the file name, size, and MD5 value.
+Create this assertion step to have your browser test verify the downloaded files from the previous steps. You can check that a file was correctly downloaded and assert the file name, size, and MD5 value.
 
 For more information about how to test downloads, see [Test File Upload and Download][3].
 
@@ -200,7 +200,7 @@ Create this navigation step to have your browser test go to a specific page. You
 
 ### Special actions
 
-You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait** are not recorded automatically. 
+You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, the extension does not automatically record some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait**.
 
 Create this assertion step manually by clicking **Special Actions** and selecting an action type.
 
@@ -228,7 +228,7 @@ To press keys that are not automatically recorded, specify the values that need 
 
 #### Scroll
 
-Browser tests automatically scroll to the elements that need to be interacted with. In most cases, you do not need to manually add a scroll step. Use the scroll step when you need to trigger an additional interaction such as an infinite scroll.
+Browser tests automatically scroll to the elements that need to be interacted with. In most cases, you do not need to add a scroll step manually. Use the scroll step when you need to trigger an additional interaction, such as an infinite scroll.
 
 Specify the number of pixels you want the browser test to scroll vertically and horizontally.
 
@@ -238,9 +238,9 @@ By default, the **Scroll** step scrolls through the entire page. If you need to 
 
 #### Wait
 
-By default, browser tests wait for a page to fully loaded before performing a step or the next step with a timeout of 60 seconds. 
+By default, browser tests wait for a page to be fully loaded before performing a step or the next step with a timeout of 60 seconds. 
 
-If you know that a page or page element takes more than 60 seconds to load, you can customize the timeout in the your step's [advanced options][2] or add a hardcoded wait step with a max value of 300 seconds.
+If you know that a page or page element takes more than 60 seconds to load, you can customize the timeout in the step's [advanced options][2] or add a hardcoded wait step with a max value of 300 seconds.
 
 {{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Wait step in a browser test recording" style="width:50%;" >}}
 
@@ -277,7 +277,7 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 #### Element
 
-Create a variable from content such as a `span` or `div` by extracting the text of the element.
+Create a variable from content such as a `span` or `div` by extracting the element's text.
 
 
 #### JavaScript
@@ -286,7 +286,7 @@ Write the custom JavaScript code that returns the value you want your variable t
 
 The JavaScript function comes with the following parameters and requires a return statement.
 
-* The `return` (mandatory) statement returns the value you want to associate to your JavaScript variable. Any type can be returned, but the value is automatically casted as a string.
+* The `return` (mandatory) statement returns the value you want to associate with your JavaScript variable. The statement can return any type but automatically casts the value as a string.
 
 * `vars` (optional): A string containing your browser test's [variables](#use-variables) that you can use inside your code. Use `vars.<YOUR_VARIABLE>` to reference a browser test variable in your JavaScript snippet. For example, if your browser test already features a `PRICE` variable, call it in your JavaScript snippet using `vars.PRICE`.
 
@@ -324,9 +324,9 @@ This type of global variable stores time-based one time password (TOTP) secret k
 
 #### Email
 
-Create a Datadog Synthetics email address that you can use in test steps to [assert if an email sent correctly](#test-that-an-email-was-received) or [navigate to a link in the email](#go-to-an-email-and-click-on-a-link), for example, to click on a confirmation link. 
+Create a Datadog Synthetics email address that you can use in test steps to [assert if an email was sent correctly](#test-that-an-email-was-received) or [navigate to a link in the email](#go-to-an-email-and-click-on-a-link), for example, to click on a confirmation link.
 
-To avoid conflicts between test runs, a unique mailbox is generated at each test execution.
+A unique mailbox is generated at each test execution to avoid conflicts between test runs.
 
 ### Subtests
 
@@ -370,7 +370,7 @@ To define your HTTP request:
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the-box.
    For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header.
 
    {{% /tab %}}
@@ -397,7 +397,7 @@ To define your HTTP request:
   
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Data Security][1].
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
 
 [1]: /data_security/synthetics
    {{% /tab %}}
@@ -410,7 +410,7 @@ To define your HTTP request:
 
 #### Add assertions
 
-Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the response that was obtained. Assumptions are optional in browser tests.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assumptions are optional in browser tests.
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|

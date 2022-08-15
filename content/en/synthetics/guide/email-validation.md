@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Web application journeys often involve emails being triggered and sent to users' mailboxes, such as an email verification after account creation, email sent to reset forgotten passwords, email sent to notify order confirmation, or email confirmation after contact form submission.
+Web application journeys often involve emails being triggered and sent to users' mailboxes, such as an email verification after account creation, an email sent to reset forgotten passwords, an email sent to notify order confirmation, or an email confirmation after contact form submission.
 
 Maintaining a great user experience on your website includes ensuring that your application's email mechanisms are working properly. 
 
@@ -30,21 +30,21 @@ The email variable generates a unique mailbox maintained by Datadog at every tes
 
 ## Record steps
 
-Once you have created an email variable, you can [confirm an email was sent correctly](#confirm-the-email-was-sent) after an in-app trigger, check an email's content, and click on links located in sent emails to [navigate to other URLs](#navigate-through-links-in-an-email) and validate entire user flows including web and email steps. 
+Once you have created an email variable, you can [confirm the email was sent correctly](#confirm-the-email-was-sent) after an in-app trigger. First, check the email's content, click on links located in sent emails to [navigate to other URLs](#navigate-through-links-in-an-email), and then validate the entire user flows, including web and email steps. 
 
 Click **Start Recording** and record all of the steps leading up to the email being triggered with your email variable. Click the hand icon in a variable to inject its value into the text input of a form or field.
 
 {{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="Record your steps" video="true"  width="100%">}}
 
-After recording your steps to complete the form, click the **Sign Up** button to trigger an email notification. An email tailored to this recording session is sent to the Datadog mailbox, for example: `838-n3q-q2y.6238933596@synthetics.dtdg.co`.
+After recording your steps to complete the form, click the **Sign Up** button to trigger an email notification. An email tailored to this recording session is sent to the Datadog mailbox, for example, `838-n3q-q2y.6238933596@synthetics.dtdg.co`.
 
 ### Confirm the email was sent
 
-In order to confirm that an email was sent, click **Assertion** and select **Test that an email was received**. To ensure your email follows specific guidelines for content, you can add additional verifications on the subject and body.
+To confirm that the email was sent, click **Assertion** and select **Test that an email was received**. To ensure your email follows specific guidelines for content, you can add additional verifications on the subject and body.
 
 {{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="Add an assertion" video="true"  width="100%">}}
 
-In this example, the assertion is considered successful if the email subject is `Welcome to Shopist!`, the body contains the sentence `Your verification code is`, and the verification code matches the `\d{1,6}` regex pattern.
+In this example, the assertion is successful if the email subject is `Welcome to Shopist!`, the body contains the sentence `Your verification code is...`, and the verification code matches the `\d{1,6}` regex pattern.
 
 ### Navigate through links in an email
 
@@ -59,7 +59,7 @@ In this example, the browser test looks into the `Welcome to Shopist` email, cli
 
 {{< img src="synthetics/guide/email-validation/navigation-step.mp4" alt="Add a navigation step" video="true"  width="100%">}} 
 
-As the final step to your browser test, create an assertion to confirm that the `div` content triggers the proper account verification, for example: the page contains `Your account is now verified`.
+As the final step to your browser test, create an assertion to confirm that the `div` content triggers the proper account verification. For example, the page contains `Your account is now verified`.
 
 
 ## Further reading
