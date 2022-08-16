@@ -7,7 +7,7 @@
 {{ $rank := .rank }}
 {{ $section_header := "" }}
 {{ $section_content := "" }}
-{{ $content_array := split $page.Content "<h2" }}
+{{ $content_array := split $page.RawContent "<h2" }}
 
 {{ range $content_array }}
     {{ if in . "h2" }}
