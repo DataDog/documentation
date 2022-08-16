@@ -493,11 +493,11 @@ The following configuration defines the integration template for Redis container
 
 ### Examples - Log collection from file configured in an annotation
 
-Datadog recommends to utilize the `stdout` and `stderr` output streams for containerized applications in order to more automatically setup log collection. However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection. However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
 
-These file paths are **relative** to the Agent. So the directory containing the log file needs to be mounted into both the Application and Agent container so the Agent can have proper visiblity.
+These file paths are **relative** to the Agent. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 
-For example, this can be done with a shared `hostPath` volume. The Pod below is emitting logs into the file `/var/log/example/app.log`. This is done in the `/var/log/example` directory where a volume and volumeMount have set this as a `hostPath`.
+For example, you can do this with a shared `hostPath` volume. The Pod below is emitting logs into the file `/var/log/example/app.log`. This is done in the `/var/log/example` directory, where a volume and volumeMount have set this as a `hostPath`.
 
 ```yaml
 apiVersion: v1
@@ -527,7 +527,7 @@ spec:
          path: /var/log/example
 ```
 
-The equivalent volume and volumeMount path would need to be set in the Agent container so it can read that same log file.
+The equivalent volume and volumeMount path need to be set in the Agent container so it can read that same log file.
 
 ```yaml
   containers:
