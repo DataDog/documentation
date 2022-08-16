@@ -244,7 +244,17 @@ For Gateway deployments:
 
    For more information about the `passthrough` option, read [its documentation][23].
 
-6. Make sure that the Gateway Collector's configuration uses the Datadog Exporter settings that have been removed from the agents.
+6. Make sure that the Gateway Collector's configuration uses the same Datadog Exporter settings that have been replaced by the OTLP exporter in the agents. For example:
+
+   ```yaml
+   # ...
+   exporters:
+     datadog:
+       api:
+         site: {{< region-param key="dd_site" code="true" >}}
+         key: ${DD_API_KEY}
+   # ...
+   ```yaml
 
 ### Application Configuration
 
