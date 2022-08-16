@@ -298,10 +298,24 @@ The available [environment variables][3] depend on the version of the C++ tracer
 {{% /tab %}}
 {{% tab "Nginx" %}}
 
-Support for Datadog APM is available for Nginx using a combination of plugins and configurations.
-The instructions below use Nginx from the official [Linux repositories][1] and pre-built binaries for the plugins.
+Datadog APM supports Nginx in multiple configurations:
+- Nginx operated as a proxy with tracing provided by the Datadog module.
+- Nginx operated as a proxy with tracing provided by the OpenTracing module.
+- Nginx as an Ingress Controller for Kubernetes.
 
-## Nginx open source
+## Nginx with Datadog module
+Datadog provides an nginx module for distributed tracing.  Use of this module
+is the preferred way to add Datadog distributed tracing to nginx.
+
+### Module installation
+TODO
+
+### Nginx configuration with Datadog module
+TODO
+
+## Nginx with OpenTracing module
+The OpenTracing project provides an nginx module for distributed tracing.  The
+module loads any OpenTracing-compatible plugin, such as the Datadog plugin.
 
 ### Plugin installation
 
@@ -333,7 +347,7 @@ wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTR
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
-### Nginx configuration
+### Nginx configuration with OpenTracing module
 
 The Nginx configuration must load the OpenTracing module.
 
