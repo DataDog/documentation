@@ -45,7 +45,7 @@ After choosing to create a `gRPC` test, define your test's request.
 2. Upload a [`.proto` file][1] that defines your gRPC server.
 
    - Select the service and method you want to send a gRPC message to from the dropdown menu.  
-   We currently do not support streaming methods. These methods are greyed out in-app.
+     Datadog does not support streaming methods, which are greyed out in-app.
    - Add a request message.  
 
 
