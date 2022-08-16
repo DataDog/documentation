@@ -119,7 +119,7 @@ To set up Datadog APM in Azure App Service, see [Tracing Azure App Service Exten
 
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of environments including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for other environments including, [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you are encountering setup issues.
 
