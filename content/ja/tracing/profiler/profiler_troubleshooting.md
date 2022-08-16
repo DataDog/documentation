@@ -7,7 +7,7 @@ kind: ドキュメント
 title: プロファイラのトラブルシューティング
 ---
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,linux" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
 ## プロファイル検索ページにないプロファイル
@@ -115,14 +115,14 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 
 次の OpenJDK 8 ベンダーでは、最新バージョンに JDK Flight Recorder が含まれているため、Continuous Profiling がサポートされます。
 
-| ベンダー                      | Flight Recorder を含む JDK バージョン                      |
-| --------------------------- | -------------------------------------------------------------- |
-| Azul                        | u212 (u262 推奨)                                     |
-| AdoptOpenJDK                | u262                                                           |
-| RedHat                      | u262                                                           |
-| Amazon (Corretto)           | u262                                                           |
-| Bell-Soft (Liberica)        | u262                                                           |
-| すべてのベンダーのアップストリームビルド | u272                                                           |
+| ベンダー                      | Flight Recorder を含む JDK バージョン |
+| --------------------------- | ----------------------------------------- |
+| Azul                        | u212 (u262 推奨)                |
+| AdoptOpenJDK                | u262                                      |
+| RedHat                      | u262                                      |
+| Amazon (Corretto)           | u262                                      |
+| Bell-Soft (Liberica)        | u262                                      |
+| すべてのベンダーのアップストリームビルド | u272                                      |
 
 ベンダーがリストにない場合は、他のベンダーが開発中またはベータ版サポートに対応している可能性があるため、[サポートチケットを開いてください][2]。
 
@@ -206,12 +206,22 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 
 このフラグがないと、短期間の Resque ジョブのプロファイルは使用できなくなります。
 
+## Ruby VM のジャストインタイムヘッダーのコンパイルに失敗したため、プロファイリングがオンにならない
+
+Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロファイラに影響を与える非互換性があることが知られています ([アップストリーム Ruby レポート][6]、[`dd-trace-rb` バグレポート][7])。その結果、次のようなエラーメッセージが表示されることがあります: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken.” (Ruby VM ジャストインタイムヘッダーのコンパイルに失敗したため、あなたの ddtrace インストールには Continuous Profiler のサポートが欠けています。C コンパイラまたは Ruby VM ジャストインタイムコンパイラが壊れているようです。)
+
+
+これを解決するには、オペレーティングシステムまたは Docker イメージを更新して、GCC のバージョンが v4.8 よりも新しいものになるようにしてください。
+
+この問題についての更なるヘルプは、[サポートにお問い合わせ][2]の上、`DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` と結果の `mkmf.log` ファイルを実行したときの出力を含めてお送りください。
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
 [3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+[6]: https://bugs.ruby-lang.org/issues/18073
+[7]: https://github.com/DataDog/dd-trace-rb/issues/1799
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -252,6 +262,16 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 - アプリケーションのタイプ (例: IIS で動作する Web アプリケーション)。
 
 
+## プロファイラを有効にすると CPU 使用率が高くなる
+
+プロファイラには、固定オーバーヘッドがあります。正確な値は変動する可能性がありますが、だいたいの値は予想されます。
+ -  Linux の場合、1 秒あたりの CPU 時間の 200ms (0.2 CPU)
+ -  Windows の場合、1 秒あたりの CPU 時間の 20ms (0.02 CPU)
+
+この固定コストは、非常に小さなコンテナでは、プロファイラの相対的なオーバーヘッドが大きくなる可能性があることを意味します。たとえば、0.4 CPU を割り当てた Linux コンテナでプロファイラを実行する場合、0.2 CPU の固定コストは相対的なオーバーヘッドが 50% になることを意味します。それに応じて、コンテナの制限を調整してください。
+
+
+
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
 {{< /programming-lang >}}
@@ -270,7 +290,7 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 [1]: /ja/help/
 {{< /programming-lang >}}
 
-{{< programming-lang lang="linux" >}}
+{{< programming-lang lang="ddprof" >}}
 
 ## プロファイル検索ページにないプロファイル
 
@@ -294,11 +314,11 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 ```
 
-**注**: これは `/proc/sys/kernel/perf_event_paranoid` オブジェクトが存在し、書き込み可能なマウントネームスペースから実行する必要があります。典型的には、これはルートマウントのネームスペース、言い換えれば、通常のコンテナではなく、ホストとなります。
+**注**: これは `/proc/sys/kernel/perf_event_paranoid` オブジェクトが存在し、書き込み可能なマウントネームスペースから実行する必要があります。コンテナ内では、この設定はホストから継承されます。
 
 `perf_event_paranoid` の値をオーバーライドするために使用できる機能は 2 つあります。
-- `CAP_SYS_ADMIN` (多くの権限を追加するので、組織によっては推奨されない場合があります)
-- `CAP_PERFMON` (Linux v5.8 以降で使用可能)
+- `CAP_SYS_ADMIN`: 多くの権限を追加するので、推奨されない場合があります
+- `CAP_PERFMON`: BPF と `perf_event_open` 機能を追加します (Linux v5.8 以降で使用可能)
 
 あまり一般的ではない権限の問題がいくつかあります。
 - プロファイラーは、起動時に UID が変更されるプロセスをインスツルメントできないことがあります。これは多くの Web サーバーやデータベースでよくあることです。
@@ -325,7 +345,7 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 ## 共有ライブラリのロード中のエラー
 
-Continuous Profiler for Linux を動的ライブラリとして使用している場合、以下のエラーでアプリケーションが起動しないことがあります。
+コンパイル済み言語用の Continuous Profiler を動的ライブラリとして使用している場合、以下のエラーでアプリケーションが起動しないことがあります。
 
 ```
 error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
@@ -338,8 +358,8 @@ error while loading shared libraries: libdd_profiling.so: cannot open shared obj
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
-[3]: /ja/tracing/profiler/enabling/linux/?tab=environmentvariables#configuration
-[4]: /ja/tracing/profiler/enabling/linux/
+[3]: /ja/tracing/profiler/enabling/ddprof/?tab=environmentvariables#configuration
+[4]: /ja/tracing/profiler/enabling/ddprof/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

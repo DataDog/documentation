@@ -6756,6 +6756,10 @@ components:
           description: Whether to show the time that has elapsed since the monitor/group
             triggered.
           type: boolean
+        show_priority:
+          default: false
+          description: Whether to show the priorities column.
+          type: boolean
         sort:
           $ref: '#/components/schemas/WidgetMonitorSummarySort'
         start:
@@ -17666,6 +17670,8 @@ components:
       - tags,desc
       - triggered,asc
       - triggered,desc
+      - priority,asc
+      - priority,desc
       example: name,asc
       type: string
       x-enum-varnames:
@@ -17684,6 +17690,8 @@ components:
       - TAGS_DESCENDING
       - TRIGGERED_ASCENDING
       - TRIGGERED_DESCENDING
+      - PRIORITY_ASCENDING
+      - PRIORITY_DESCENDING
     WidgetNodeType:
       description: Which type of node to use in the map.
       enum:
