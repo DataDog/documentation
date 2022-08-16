@@ -304,14 +304,56 @@ Datadog APM supports Nginx in multiple configurations:
 - Nginx as an Ingress Controller for Kubernetes.
 
 ## Nginx with Datadog module
-Datadog provides an nginx module for distributed tracing. Use of this module
-is the preferred way to add Datadog distributed tracing to nginx.
+Datadog provides an nginx module for distributed tracing. This module is the
+preferred way to add Datadog distributed tracing to nginx.
 
 ### Module installation
-TODO
+There is one version of the Datadog nginx module for each [nginx Docker image
+tag][13]. Install the module by downloading the appropriate file from the
+[latest nginx-datadog GitHub release][14] and extracting it into Nginx's
+modules directory.
+
+For example, if nginx version 1.23.1 is running on a Debian-based system, then
+the appropriate nginx image tag is [1.23.1][15]. The corresponding Alpine-based
+image is tagged [1.23.1-alpine][16].
+
+```bash
+get_latest_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
+}
+NGINX_IMAGE_TAG=1.23.1
+RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
+tarball="$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
+wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
+tar -xzf "$tarball" -C /usr/lib/nginx/modules
+rm "$tarball"
+```
 
 ### Nginx configuration with Datadog module
-TODO
+In the topmost section of the nginx configuration, load the Datadog module.
+
+```nginx
+load_module modules/ngx_http_datadog_module.so;
+```
+
+The default configuration connects to a local Datadog Agent and produces traces
+for all Nginx locations. Specify custom configuration in a `datadog` JSON block
+within the `http` section of the nginx configuration.
+
+```nginx
+load_module modules/ngx_http_datadog_module.so;
+
+http {
+  datadog {
+    "service": "usage-internal-nginx",
+    "sample_rate": 0.1
+  }
+}
+```
+
+For information about fields supported by the `datadog` directive and about
+other configuration directives supported by the module, see the [API
+documentation][17].
 
 ## Nginx with OpenTracing module
 The OpenTracing project provides an nginx module for distributed tracing. The
@@ -330,7 +372,7 @@ The following plugins must be installed:
 Commands to download and install these modules:
 
 ```bash
-# Gets the latest release version number from GitHub.
+# Gets the latest release version tag from GitHub.
 get_latest_release() {
   wget -qO- "https://api.github.com/repos/$1/releases/latest" |
     grep '"tag_name":' |
@@ -400,7 +442,14 @@ After completing this configuration, HTTP requests to Nginx will initiate and pr
 
 ### Nginx Sampling
 
-To control the volume of Nginx traces that are sent to Datadog, specify a sampling rate in the config file `dd-config.json` by setting the `sample_rate` parameter to a value between `0.0` (0%) and `1.0` (100%):
+To control the volume of Nginx traces that are sent to Datadog, specify a
+sampling rate in the configuration JSON by setting the `sample_rate` property
+to a value between `0.0` (0%) and `1.0` (100%).
+- If you are using the Datadog module, the JSON configuration is in the
+  [datadog][18] directive.
+- If you are using the OpenTracing module, the JSON configuration is the file
+  passed as an argument to `opentracing_load_tracer`
+  (`/etc/nginx/dd-config.json` in the example above).
 
 ```json
 {
@@ -412,7 +461,7 @@ To control the volume of Nginx traces that are sent to Datadog, specify a sampli
 }
 ```
 
-If no value is specified, the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent) are applied.
+If no sample rate is specified, the [Datadog Agent calculated sampling rates][7] (10 traces per second per Agent) are applied.
 
 Set **by-service** sampling rates with the `sampling_rules` configuration parameter. Configure a rate limit by setting the parameter `sampling_limit_per_second` to a number of traces per second per service instance. If no `sampling_limit_per_second` value is set, a limit of 100 traces per second is applied.
 
@@ -692,6 +741,12 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[13]: https://hub.docker.com/_/nginx/tags
+[14]: https://github.com/DataDog/nginx-datadog/releases/latest
+[15]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1/images/sha256-f26fbadb0acab4a21ecb4e337a326907e61fbec36c9a9b52e725669d99ed1261?context=explore
+[16]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1-alpine/images/sha256-2959a35e1b1e61e2419c01e0e457f75497e02d039360a658b66ff2d4caab19c4?context=explore
+[17]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
+[18]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog
 {{% /tab %}}
 {{< /tabs >}}
 
