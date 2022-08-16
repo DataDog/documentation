@@ -349,7 +349,7 @@ When making changes to the user session object, all RUM events collected afterwa
 
 ## User session APIs
 
-`datadogRum.setUser(config)`
+`datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -394,6 +394,8 @@ window.DD_RUM && window.DD_RUM.setUser({
 
 `datadogRum.getUser()`
 
+Get the current RUM Session User object.
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```
@@ -417,7 +419,9 @@ window.DD_RUM && window.DD_RUM.getUser()
 {{% /tab %}}
 {{< /tabs >}}
 
-`datadogRum.setUserProperty(key, property)`
+`datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
+
+Add/Override a property on the RUM Session User Object. 
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -442,7 +446,7 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 {{% /tab %}}
 {{< /tabs >}}
 
-`datadogRum.removeUserProperty(key)`
+`datadogRum.removeUserProperty('<USER_KEY>')`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
