@@ -119,7 +119,7 @@ DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.
 
 {{% tab "CI Visibility" %}}
 
-Requires Agent v6.38+ or v7.38+.
+<div class="alert alert-info">Requires Agent v6.38+ or v7.38+.</div>
 
 ### YAML configuration
 In `datadog.yaml`: 
