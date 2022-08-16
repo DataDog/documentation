@@ -304,7 +304,7 @@ Datadog APM supports Nginx in multiple configurations:
 - Nginx as an Ingress Controller for Kubernetes.
 
 ## Nginx with Datadog module
-Datadog provides an nginx module for distributed tracing.  Use of this module
+Datadog provides an nginx module for distributed tracing. Use of this module
 is the preferred way to add Datadog distributed tracing to nginx.
 
 ### Module installation
@@ -314,7 +314,7 @@ TODO
 TODO
 
 ## Nginx with OpenTracing module
-The OpenTracing project provides an nginx module for distributed tracing.  The
+The OpenTracing project provides an nginx module for distributed tracing. The
 module loads any OpenTracing-compatible plugin, such as the Datadog plugin.
 
 ### Plugin installation
@@ -498,7 +498,7 @@ variable. To define sampling rules in the Ingress Controller:
      main-snippet: "env DD_TRACE_SAMPLING_RULES;"
    ```
 
-2. Specify a value for the environment variable in the `env` section of the Ingress Controller's `Deployment`.  For example, to keep 10% of traces originating from the Ingress Controller:
+2. Specify a value for the environment variable in the `env` section of the Ingress Controller's `Deployment`. For example, to keep 10% of traces originating from the Ingress Controller:
    ```yaml
    env:
    - name: DD_TRACE_SAMPLING_RULES
@@ -608,7 +608,7 @@ spec:
         apm.datadoghq.com/env: '{"DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1", "DD_TRACE_SAMPLING_RULES": "[]"}'
 ```
 `apm.datadoghq.com/env` is a string whose content is a JSON object mapping
-environment variable names to values.  The environment variable values are
+environment variable names to values. The environment variable values are
 themselves strings, and in the case of `DD_TRACE_SAMPLING_RULES`, the string
 value is a JSON array of objects.
 
