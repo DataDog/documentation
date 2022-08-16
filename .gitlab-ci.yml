@@ -155,7 +155,7 @@ index_algolia_preview:
   stage: post-deploy
   cache: []
   environment: "preview"
-  timeout: 1h 45m
+  timeout: 2h
   before_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   script:
@@ -287,7 +287,7 @@ index_algolia:
   tags: ["runner:main"]
   stage: post-deploy
   environment: "live"
-  timeout: 1h 45m
+  timeout: 2h
   script:
     - |-
       echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
