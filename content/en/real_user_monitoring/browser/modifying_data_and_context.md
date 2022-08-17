@@ -760,7 +760,7 @@ Follow the [Datadog naming convention][16] for a better correlation of your data
 
 Once RUM is initialized, read the global context with the `getGlobalContext()` API:
 
-> The RUM Browser SDK v4.17.0 introduced `getGlobalContext` and deprecating `getRumGlobalContext`
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `getGlobalContext` and deprecated `getRumGlobalContext`</div>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
