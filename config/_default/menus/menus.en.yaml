@@ -6734,8 +6734,7 @@ api:
         - v1
       operationids:
         - GetUsageAttribution
-      unstable:
-        - v1
+      unstable: []
       order: 40
   - name: Get hourly usage for analyzed logs
     url: '#get-hourly-usage-for-analyzed-logs'
@@ -6759,8 +6758,7 @@ api:
         - v1
       operationids:
         - GetSpecifiedMonthlyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 44
   - name: Get the list of available monthly custom reports
     url: '#get-the-list-of-available-monthly-custom-reports'
@@ -6772,8 +6770,7 @@ api:
         - v1
       operationids:
         - GetMonthlyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 43
   - name: Get specified daily custom reports
     url: '#get-specified-daily-custom-reports'
@@ -6785,8 +6782,7 @@ api:
         - v1
       operationids:
         - GetSpecifiedDailyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 42
   - name: Get the list of available daily custom reports
     url: '#get-the-list-of-available-daily-custom-reports'
@@ -6798,8 +6794,7 @@ api:
         - v1
       operationids:
         - GetDailyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 41
   - name: Users
     url: /api/latest/users/
