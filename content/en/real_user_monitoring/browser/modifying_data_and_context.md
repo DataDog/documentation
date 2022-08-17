@@ -617,7 +617,7 @@ Follow the [Datadog naming convention][16] for a better correlation of your data
 
 You can remove a previously defined global context property.
 
-> The RUM Browser SDK v4.17.0 introduced `removeGlobalContextProperty` and deprecating `removeRumGlobalContext`
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `removeGlobalContextProperty` and deprecated `removeRumGlobalContext`</div>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
