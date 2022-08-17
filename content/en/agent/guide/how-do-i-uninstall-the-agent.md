@@ -53,7 +53,7 @@ sudo apt-get --purge remove datadog-agent -y
 
 ## CentOS, RHEL, Fedora, and Amazon Linux
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{% tab "Agent v6 and v7" %}}
 
 
 ```shell
@@ -101,7 +101,7 @@ sudo userdel dd-agent \
 
 ## openSUSE and SLES
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{% tab "Agent v6 and v7" %}}
 ```shell
 sudo zypper remove datadog-agent
 ```
@@ -146,7 +146,7 @@ sudo userdel dd-agent \
 {{< /tabs >}}
 ## macOS
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{% tab "Agent v6 and v7" %}}
 **Single user installation**
 
 To remove the Agent and all Agent configuration files:
@@ -203,7 +203,7 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ## Windows
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{% tab "Agent v6 and v7" %}}
 
 There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
 
@@ -215,7 +215,7 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 
 ### PowerShell
 
-**Note:** You might need to enable WinRM to use the commands below.
+**Note:** Enable WinRM to use the commands below.
 
 Use one of the following PowerShell commands to uninstall the Agent without rebooting:
 ```powershell
@@ -244,7 +244,7 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 
 ### PowerShell
 
-**Note:** You might need to enable WinRM to use the commands below.
+**Note:** Enable WinRM to use the commands below.
 
 Use the following PowerShell command to uninstall the Agent without rebooting:
 
