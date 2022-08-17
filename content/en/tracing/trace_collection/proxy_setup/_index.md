@@ -340,6 +340,9 @@ The default configuration connects to a local Datadog Agent and produces traces
 for all Nginx locations. Specify custom configuration in a `datadog` JSON block
 within the `http` section of the nginx configuration.
 
+For example, the following Nginx configuration sets the service name to
+`usage-internal-nginx` and the sampling rate to 10%. 
+
 ```nginx
 load_module modules/ngx_http_datadog_module.so;
 
