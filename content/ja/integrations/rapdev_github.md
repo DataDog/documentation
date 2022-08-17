@@ -31,7 +31,7 @@ display_on_public_website: true
 draft: false
 git_integration_title: rapdev_github
 integration_id: rapdev-github
-integration_title: Rapdev GitHub
+integration_title: GitHub
 integration_version: ''
 is_public: true
 kind: integration
@@ -49,7 +49,7 @@ pricing:
   tag: repo_name
   unit_label: GitHub リポジトリ
   unit_price: 1
-public_title: Rapdev GitHub インテグレーション
+public_title: GitHub インテグレーション
 short_description: GitHub の組織やエンタープライズを監視する
 supported_os:
 - linux
@@ -79,7 +79,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Rapdev GitHub インテグレーション
+  title: GitHub インテグレーション
 ---
 
 
