@@ -345,7 +345,7 @@ The following attributes are optional but Datadog recommends providing at least 
 
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
-When making changes to the user session object, all RUM events collected afterwards the change contain the updated information.
+When making changes to the user session object, all RUM events collected after the change contain the updated information.
 
 ## User session APIs
 
