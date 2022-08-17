@@ -662,7 +662,7 @@ Follow the [Datadog naming convention][16] for a better correlation of your data
 
 Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API:
 
-> The RUM Browser SDK v4.17.0 introduced `setGlobalContext` and deprecating `setRumGlobalContext`
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContext` and deprecated `setRumGlobalContext`</div>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
