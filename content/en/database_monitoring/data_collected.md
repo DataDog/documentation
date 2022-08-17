@@ -25,7 +25,7 @@ The metrics used for Database Monitoring views are, primarily:
 
 ## Normalized queries
 
-In order to eliminate redundant information and keep track of performance trends, Database Monitoring groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
+In order to eliminate redundant information and keep track of performance trends, Database Monitoring groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 500 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
 
 For example, you may see many queries retrieving data from the same table by id:
 
@@ -73,13 +73,13 @@ SQL query comments may be collected by the Agent and sent to Datadog without pas
 
 ## Which queries are tracked
 
-Datadog Database Monitoring collects per-query metrics for the top 200 normalized queries measured by their total time spent executing on the host. This limit is applied only to each collection interval (10 seconds by default), so the total number of tracked queries can exceed the configured limit over longer periods of time.
+Datadog Database Monitoring collects per-query metrics for the top 500 normalized queries measured by their total time spent executing on the host. This limit is applied only to each collection interval (10 seconds by default), so the total number of tracked queries can exceed the configured limit over longer periods of time.
 
 Query samples have no limits on the number of unique normalized queries tracked, but the sampling is biased towards queries which are slow or frequent. It is possible for a query sample to be selected, but have no associated query metrics. This is the case when the query was slow or frequent for a brief period of time, but was not sustained enough to become a top query.
 
 ## Other queries
 
-_Other Queries_ represent the metrics of all queries which do not appear in the top 200. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in Other Queries.
+_Other Queries_ represent the metrics of all queries which do not appear in the top 500. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in Other Queries.
 
 
 [1]: /dashboards/
