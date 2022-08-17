@@ -660,7 +660,7 @@ Follow the [Datadog naming convention][16] for a better correlation of your data
 
 ### Replace global context
 
-Once RUM is initialized, replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API:
+Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API:
 
 > The RUM Browser SDK v4.17.0 introduced `setGlobalContext` and deprecating `setRumGlobalContext`
 
