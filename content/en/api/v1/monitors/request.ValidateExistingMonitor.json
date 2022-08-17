@@ -19,6 +19,7 @@
     "no_data_timeframe": null,
     "notify_audit": false,
     "notify_no_data": false,
+    "on_missing_data": "show_and_notify_no_data",
     "renotify_interval": 60,
     "require_full_window": true,
     "timeout_h": 24,
