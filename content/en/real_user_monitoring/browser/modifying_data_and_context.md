@@ -754,7 +754,6 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
 ### Read global context
 
