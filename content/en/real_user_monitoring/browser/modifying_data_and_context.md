@@ -398,8 +398,6 @@ window.DD_RUM && window.DD_RUM.setUser({
 
 `datadogRum.getUser()`
 
-Get the current RUM Session User object.
-
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```
