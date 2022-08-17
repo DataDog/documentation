@@ -349,6 +349,8 @@ When making changes to the user session object, all RUM events collected after t
 
 ## User session APIs
 
+### Identify user session
+
 `datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
 {{< tabs >}}
@@ -392,6 +394,8 @@ window.DD_RUM && window.DD_RUM.setUser({
 {{% /tab %}}
 {{< /tabs >}}
 
+### Access user session
+
 `datadogRum.getUser()`
 
 Get the current RUM Session User object.
@@ -419,9 +423,9 @@ window.DD_RUM && window.DD_RUM.getUser()
 {{% /tab %}}
 {{< /tabs >}}
 
-`datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
+### Add/Override user session property
 
-Add/Override a property on the RUM Session User Object. 
+`datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -445,6 +449,8 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Remove user session property
 
 `datadogRum.removeUserProperty('<USER_KEY>')`
 
@@ -471,9 +477,9 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 {{% /tab %}}
 {{< /tabs >}}
 
-`datadogRum.clearUser()`
+### Clear user session property
 
-Clear all properties from the RUM Session User object.
+`datadogRum.clearUser()`
 
 <div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `clearUser` and deprecated `removeUser`</div>
 
@@ -619,43 +625,6 @@ You can remove a previously defined global context property.
 
 <div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `removeGlobalContextProperty` and deprecated `removeRumGlobalContext`</div>
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.removeGlobalContextProperty('<CONTEXT_KEY>');
-
-// Code example
-datadogRum.removeGlobalContextProperty('activity');
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-    DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
-})
-
-// Code example
-DD_RUM.onReady(function() {
-    DD_RUM.removeGlobalContextProperty('activity');
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-window.DD_RUM && window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
-
-// Code example
-window.DD_RUM && window.DD_RUM.removeGlobalContextProperty('activity');
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
 ### Replace global context
@@ -664,128 +633,17 @@ Replace the default context for all your RUM events with the `setGlobalContext(c
 
 <div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContext` and deprecated `setRumGlobalContext`</div>
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-
-// Code example
-datadogRum.setGlobalContext({
-    codeVersion: 34,
-});
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-    DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-})
-
-// Code example
-DD_RUM.onReady(function() {
-    DD_RUM.setGlobalContext({
-        codeVersion: 34,
-    })
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-window.DD_RUM &&
-    DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-
-// Code example
-window.DD_RUM &&
-    DD_RUM.setGlobalContext({
-        codeVersion: 34,
-    });
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
 ### Clear global context
 
 You can clear the global context by using `clearGlobalContext`.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.clearGlobalContext();
-
-// Code example
-datadogRum.clearGlobalContext();
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-    DD_RUM.clearGlobalContext();
-})
-
-// Code example
-DD_RUM.onReady(function() {
-    DD_RUM.clearGlobalContext()
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-window.DD_RUM &&
-    DD_RUM.clearGlobalContext();
-
-// Code example
-window.DD_RUM &&
-    DD_RUM.clearGlobalContext();
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
 ### Read global context
 
 Once RUM is initialized, read the global context with the `getGlobalContext()` API:
 
 <div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `getGlobalContext` and deprecated `getRumGlobalContext`</div>
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-const context = datadogRum.getGlobalContext();
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-  var context = DD_RUM.getGlobalContext();
-});
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-var context = window.DD_RUM && DD_RUM.getGlobalContext();
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 
