@@ -561,7 +561,7 @@ For a sampled out session, all page views and associated telemetry for that sess
 
 ### Add global context property
 
-Once RUM is initialized, add extra context to all RUM events collected from your application with the `setGlobalContextProperty(key: string, value: any)` API:
+After RUM is initialized, add extra context to all RUM events collected from your application with the `setGlobalContextProperty(key: string, value: any)` API:
 
 > The RUM Browser SDK v4.17.0 introduced `setGlobalContextProperty` and deprecating `addRumGlobalContext`
 
