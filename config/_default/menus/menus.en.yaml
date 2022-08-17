@@ -3240,6 +3240,7 @@ main:
     url: glossary/
     pre: books
     identifier: glossary
+    parent: essentials_heading
     weight: 230000
   - name: Account Management
     url: account_management/
