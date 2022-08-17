@@ -299,13 +299,13 @@ The available [environment variables][3] depend on the version of the C++ tracer
 {{% tab "Nginx" %}}
 
 Datadog APM supports Nginx in multiple configurations:
-- Nginx operated as a proxy with tracing provided by the Datadog module.
+- Nginx operated as a proxy with tracing provided by the new Datadog module.
 - Nginx operated as a proxy with tracing provided by the OpenTracing module.
 - Nginx as an Ingress Controller for Kubernetes.
 
 ## Nginx with Datadog module
-Datadog provides an Nginx module for distributed tracing. This module is the
-preferred way to add Datadog distributed tracing to Nginx.
+Datadog provides an Nginx module for distributed tracing. This module is 
+currently in beta.
 
 ### Module installation
 There is one version of the Datadog Nginx module for each [Nginx Docker image
@@ -440,13 +440,13 @@ Complete examples:
 
 After completing this configuration, HTTP requests to Nginx will initiate and propagate Datadog traces, and will appear in the APM UI.
 
-### Nginx Sampling
+## Nginx Sampling
 
 To control the volume of Nginx traces that are sent to Datadog, specify a
 sampling rate in the configuration JSON by setting the `sample_rate` property
 to a value between `0.0` (0%) and `1.0` (100%).
 - If you are using the Datadog module, the JSON configuration is in the
-  [datadog][18] directive.
+  [datadog][17] directive.
 - If you are using the OpenTracing module, the JSON configuration is the file
   passed as an argument to `opentracing_load_tracer`
   (`/etc/nginx/dd-config.json` in the example above).
