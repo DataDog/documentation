@@ -713,7 +713,7 @@ Follow the [Datadog naming convention][16] for a better correlation of your data
 
 ### Clear global context
 
-You can reset the global context by using `clearGlobalContext`.
+You can clear the global context by using `clearGlobalContext`.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
