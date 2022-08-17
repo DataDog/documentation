@@ -326,7 +326,9 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-## Identify user sessions
+## User session
+
+### Identify user session
 
 Adding user information to your RUM sessions can help you:
 * Follow the journey of a given user
@@ -347,9 +349,7 @@ Increase your filtering capabilities by adding extra attributes on top of the re
 
 When making changes to the user session object, all RUM events collected after the change contain the updated information.
 
-## User session APIs
-
-### Identify user session
+### User session APIs
 
 `datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
