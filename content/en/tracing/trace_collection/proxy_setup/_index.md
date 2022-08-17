@@ -309,13 +309,13 @@ preferred way to add Datadog distributed tracing to Nginx.
 
 ### Module installation
 There is one version of the Datadog Nginx module for each [Nginx Docker image
-tag][13]. Install the module by downloading the appropriate file from the
-[latest nginx-datadog GitHub release][14] and extracting it into Nginx's
+tag][12]. Install the module by downloading the appropriate file from the
+[latest nginx-datadog GitHub release][13] and extracting it into Nginx's
 modules directory.
 
 For example, if Nginx version 1.23.1 is running on a Debian-based system, then
-the appropriate Nginx image tag is [1.23.1][15]. The corresponding Alpine-based
-image is tagged [1.23.1-alpine][16].
+the appropriate Nginx image tag is [1.23.1][14]. The corresponding Alpine-based
+image is tagged [1.23.1-alpine][15].
 
 ```bash
 get_latest_release() {
@@ -353,7 +353,7 @@ http {
 
 For information about fields supported by the `datadog` directive and about
 other configuration directives supported by the module, see the [API
-documentation][17].
+documentation][16].
 
 ## Nginx with OpenTracing module
 The OpenTracing project provides an Nginx module for distributed tracing. The
@@ -571,6 +571,12 @@ variable. To define sampling rules in the Ingress Controller:
 [9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [10]: https://github.com/kubernetes/ingress-nginx
 [11]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
+[12]: https://hub.docker.com/_/nginx/tags
+[13]: https://github.com/DataDog/nginx-datadog/releases/latest
+[14]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1/images/sha256-f26fbadb0acab4a21ecb4e337a326907e61fbec36c9a9b52e725669d99ed1261?context=explore
+[15]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1-alpine/images/sha256-2959a35e1b1e61e2419c01e0e457f75497e02d039360a658b66ff2d4caab19c4?context=explore
+[16]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
+[17]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -741,12 +747,6 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
-[13]: https://hub.docker.com/_/nginx/tags
-[14]: https://github.com/DataDog/nginx-datadog/releases/latest
-[15]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1/images/sha256-f26fbadb0acab4a21ecb4e337a326907e61fbec36c9a9b52e725669d99ed1261?context=explore
-[16]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1-alpine/images/sha256-2959a35e1b1e61e2419c01e0e457f75497e02d039360a658b66ff2d4caab19c4?context=explore
-[17]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
-[18]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog
 {{% /tab %}}
 {{< /tabs >}}
 
