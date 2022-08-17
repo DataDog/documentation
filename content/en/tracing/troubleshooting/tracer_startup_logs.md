@@ -202,7 +202,7 @@ If there is no logging configuration, only Diagnostics will be output to `Stderr
 
 To see tracer startup logs, either add a logger, or set `DD_TRACE_DEBUG=true` in your configuration and run your application with `ddtrace-run`. This adds a logger, and exposes both debug and startup tracer logs.
 
-To see options for logging to a file with `DD_TRACE_LOG_FILE`, refer to [Tracer Debug Logs][1].
+To see options for logging to a file with `DD_TRACE_LOG_FILE`, read [Tracer Debug Logs][1].
 
 **Configuration:**
 
