@@ -480,10 +480,6 @@ For example, to send 50% of the traces for the service named `nginx`, up to `50`
 
 Read more about sampling configuration options of the [dd-opentracing-cpp][8] library in the [respository documentation][9].
 
-### Nginx and FastCGI
-
-When the location is serving a FastCGI backend instead of HTTP, the `location` block should use `opentracing_fastcgi_propagate_context` instead of `opentracing_propagate_context`.
-
 ## Nginx Ingress Controller for Kubernetes
 
 The [Kubernetes ingress-nginx][10] controller versions 0.23.0+ include the Nginx plugin for OpenTracing.
