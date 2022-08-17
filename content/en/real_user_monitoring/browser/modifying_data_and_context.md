@@ -475,7 +475,7 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 
 Clear all properties from the RUM Session User object.
 
-> The RUM Browser SDK v4.17.0 introduced `clearUser` and deprecating `removeUser`
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `clearUser` and deprecated `removeUser`</div>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
