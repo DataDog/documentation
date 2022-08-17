@@ -4,16 +4,12 @@ title: {{ replace .Name "-" " " | title }}
 
 # (optional) Array of synonyms
 synonyms:
-    - synonym here
+    - synonym1
+    - synonym2
 
-# (optional) Array of related terms
+# (optional) Array of related terms.
 related_terms:
-    - related terms here
-
-# (optional) - Short description of glossary term.  If included this will be used on the list page.
-description: 1-2 sentence description of the glossary term
-
-# If true, glossary term header links to term's single page from the list page.
-linked: true
+    - related_term1
+    - related_term2
 ---
-Full Glossary definition here!  This will be used on the glossary term single page.  If description is not provided, this will also be used on the list page.
+Add glossary term definition and markdown here.
