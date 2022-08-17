@@ -209,7 +209,7 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 
 ### Add or remove programs
 
-1. Press **CTRL** + **Esc** or use the Windows key to run Windows Search.
+1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
 1. Search for `add` and click **Add or remove programs**.
 1. Search for `Datadog Agent` and click **Uninstall**.
 
