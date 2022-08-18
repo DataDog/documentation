@@ -45,7 +45,7 @@ Handles that include parentheses (`(`, `)`) are not supported. When a handle wit
 
 ## Detection Rule notifications
 
-When you [create or modify a new detection rule][10], you can use the **Set rule case** or **Say what’s happening** section to define the notifications that are sent. 
+When you [create or modify a new detection rule][10], you can use the **Set rule case** and **Say what’s happening** section to define the notifications that are sent. 
 
 ### Set rule case
 
