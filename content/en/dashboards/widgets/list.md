@@ -28,7 +28,7 @@ The list widget enables you to display a list of top issues.
 
 ### Options
 
-### Sorting by
+#### Sorting by
 
 For top issues, you can sort by:
 
