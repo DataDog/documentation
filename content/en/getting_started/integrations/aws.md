@@ -23,9 +23,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/'
       tag: 'Blog'
       text: 'Monitor Amazon ECS Anywhere with Datadog'
+    - link: 'integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation'
+      tag: 'Documentation'
+      text: 'AWS CloudWatch Metric Streams with Kinesis Data Firehose'
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
       tag: 'Blog'
-      text: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
+      text: 'Monitor your Graviton3-powered EC2 instances with Datadog'
 ---
 
 ## Overview
@@ -34,7 +37,7 @@ This guide provides an overview of the process for integrating an Amazon Web Ser
 
 At a high level, this involves creating an IAM role and associated policy to enable Datadog's AWS account to make API calls into your AWS account for collecting or pushing data. The template also deploys the [Datadog Forwarder][1] Lambda function for sending logs to Datadog. Using the CloudFormation template provides all the tools needed to send this data to your Datadog account, and Datadog maintains the CloudFormation template to provide the latest functionality.
 
-After the initial connection is established, you can enable individual AWS service integrations relevant to your AWS environment. With a single click, Datadog provisions the necessary resources in your AWS account and begins querying metrics and events for the services you use. For popular AWS services you are using, Datadog provisions out-of-the-box dashboards, providing immediate and customizable visibility. This guide demonstrates setting up the integration, sending logs from [CloudTrail][2] and the Forwarder Lambda function, and installing the Datadog Agent on an Amazon Linux EC2 instance. See the [Enable integrations for individual AWS service](#enable-integrations-for-individual-aws-service) section for a list of the available sub-integrations.
+After the initial connection is established, you can enable individual AWS service integrations relevant to your AWS environment. With a single click, Datadog provisions the necessary resources in your AWS account and begins querying metrics and events for the services you use. For popular AWS services you are using, Datadog provisions out-of-the-box dashboards, providing immediate and customizable visibility. This guide demonstrates setting up the integration and installing the Datadog Agent on an Amazon Linux EC2 instance, as well as providing a broad overview of the integration's capabilities. See the [Enable integrations for individual AWS service](#enable-integrations-for-individual-aws-service) section for a list of the available sub-integrations.
 
 This process can be repeated for as many AWS accounts as necessary, or you can also use the [API][3], [AWS CLI][4], or [Terraform][5] to set up multiple accounts at once. For more information, read the [Datadog-Amazon CloudFormation guide][6].
 
@@ -75,9 +78,9 @@ Before getting started, ensure you have the following prerequisites:
 
 ## Setup
 
-2. Go to the the [AWS tile][8] in the Datadog application and click **Add AWS Account**.
+2. Go to the the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
 
-3. Configure the integration's settings under the **Automatically using CloudFormation** tab.  
+3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
     **a.** Select the AWS regions to integrate with.  
     **b.** Add your Datadog [API key][58].  
     **c.** Optionally, send logs and other other data to Datadog with the [Datadog Forwarder Lambda][1].  
@@ -92,23 +95,6 @@ Before getting started, ensure you have the following prerequisites:
 
 8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
-
-## Configuration tabs
-
-Use the tabs under the account number to configure the integration and data collected. 
-
-{{< img src="getting_started/integrations/aws/aws-integration-tile-configuration-tabs.png" alt="The AWS integration tile in the Datadog application with installation completed for an account, with tabs for Account Details, General, Metric Collection, Log Collection, Resource Collection, X-Ray Traces">}}  
-
-See the table below for a description of the options under each tab.
-
-| Tab           | Description |
-| ------------------------ | ------------------------------------------------ |
-| **Account Details:**     | Configure [tags][62] and other details.
-| **General:**             | Enable [EC2 Automuting][9], CloudWatch [alarm collection][10], and select the regions to integrate with.
-| **Metric Collection:**   | Collect metrics from [AWS sub-integrations][13], custom metrics, and [CloudWatch Metric Streams][59]. 
-| **Log Collection:**      | Collect AWS service logs with the [Datadog Forwarder Lambda][1] function or send them to the [Datadog Kinesis Firehose Destination][60].
-| **Resource Collection:** | Configure resource collection settings, if using [CSPM][54].
-| **X-Ray Traces:**        | Trace distributed applications built using AWS services with [AWS X-Ray][61]. 
 
 ## Enable integrations for individual AWS services
 
@@ -206,7 +192,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [6]: /integrations/guide/amazon_cloudformation/
 [7]: https://aws.amazon.com/getting-started/?nc1=f_cc
-[8]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[8]: https://app.datadoghq.com/integrations/amazon-web-services
 [9]: /integrations/amazon_ec2/#ec2-automuting
 [10]: /integrations/amazon_web_services/?tab=roledelegation#alarm-collection
 [11]: /events/explorer
