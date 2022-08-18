@@ -1,7 +1,6 @@
 ---
 title: List Widget
 kind: documentation
-widget_type: "issue_stream"
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -43,13 +42,8 @@ Changing the "Sorting by" selection does not change the columns displayed. If yo
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the list widget is:
-
-{{< dashboards-widgets-api >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/v1/dashboards/
-[2]: /dashboards/graphing_json/widget_json/
