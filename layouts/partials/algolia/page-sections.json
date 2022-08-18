@@ -7,18 +7,18 @@
 {{ $rank := .rank }}
 {{ $section_header := "" }}
 {{ $section_content := "" }}
-{{ $content_array := split $page.RawContent "<h2" }}
+{{ $content_array := split $page.Content "<h2" }}
 
 {{ range $content_array }}
     {{ if in . "h2" }}
         {{ $context := print "%s" . | printf "%s%s" "<h2" }}
         {{ $section_header = index (split (index (split $context "</h2>") 0) ">") 1 }}
-        {{ $section_content = $context | plainify | truncate 3000 }}
+        {{ $section_content = $context | plainify | truncate 10000 }}
 
         {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
             {{- /* todo: make sure url_with_anchor is unique when translated pages are introduced */ -}}
-            {{ $url_with_anchor := print $page.Permalink "#" ($section_header | anchorize) }}
-            {{ $object_id := md5 $url_with_anchor }}
+            {{ $full_url := print $page.Permalink "#" ($section_header | anchorize) }}
+            {{ $object_id := md5 $full_url }}
             {{
                 $hugo_context.Scratch.Add "algoliaindex" (
                     dict "objectID" $object_id
@@ -27,9 +27,8 @@
                     "description" $page.Description
                     "content" $section_content
                     "type" $page.Type
-                    "permalink" $page.Permalink
                     "rel_permalink" $page.RelPermalink
-                    "full_url" $url_with_anchor
+                    "full_url" $full_url
                     "language" $page.Language.Lang
                     "tags" $tags
                     "rank" $rank
@@ -38,5 +37,3 @@
         {{ end }}
     {{ end }}
 {{ end }}
-
-
