@@ -12,7 +12,7 @@ further_reading:
 
 The list widget enables you to display a list of top issues.
 
-{{< img src="dashboards/widgets/list/list_overview.png" alt="List widget displaying a list of errors, their error count and volume." style="width:70%;">}}
+{{< img src="dashboards/widgets/list/list_overview.png" alt="List widget displaying a list of errors, their error count and volume." style="width:50%;">}}
 
 ## Setup
 
