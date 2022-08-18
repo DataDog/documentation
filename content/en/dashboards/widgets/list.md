@@ -1,7 +1,7 @@
 ---
 title: List Widget
 kind: documentation
-widget_type: "list"
+widget_type: "issue_stream"
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
