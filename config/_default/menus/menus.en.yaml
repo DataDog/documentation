@@ -2552,10 +2552,21 @@ main:
     parent: security_rules
     identifier: ootb_rules
     weight: 501
-  - name: Notification Rules
-    url: security_platform/notification_rules/
+  - name: Notifications
+    url: security_platform/notifications/
     parent: security_platform
+    identifier: security_notifications
     weight: 6
+  - name: Rules
+    url: security_platform/notifications/rules/
+    parent: security_notifications
+    identifier: security_notification_rules
+    weight: 601
+  - name: Variables
+    url: security_platform/notifications/variables/
+    parent: security_notifications
+    identifier: security_notification_variables
+    weight: 602    
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
