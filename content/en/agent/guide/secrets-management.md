@@ -385,10 +385,9 @@ Secrets handle decrypted:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Example on Windows (from an Administrator Powershell):
-
+Example on Windows (from an Administrator PowerShell):
 ```powershell
-PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights
@@ -496,12 +495,12 @@ To test your executable in the same conditions as the Agent, update the password
 To do so, follow those steps:
 
 1. Remove `ddagentuser` from the `Local Policies/User Rights Assignement/Deny Log on locally` list in the `Local Security Policy`.
-2. Set a new password for `ddagentuser` (since the one generated at install time is never saved anywhere). In Powershell, run:
+2. Set a new password for `ddagentuser` (since the one generated at install time is never saved anywhere). In PowerShell, run:
     ```powershell
     $user = [ADSI]"WinNT://./ddagentuser";
     $user.SetPassword("a_new_password")
     ```
-3. Update the password to be used by `DatadogAgent` service in the Service Control Manager. In Powershell, run:
+3. Update the password to be used by `DatadogAgent` service in the Service Control Manager. In PowerShell, run:
     ```powershell
     sc.exe config DatadogAgent password= "a_new_password"
     ```
@@ -544,7 +543,7 @@ When reading Secrets directly from Kubernetes you can double check your permissi
 kubectl auth can-i get secret/<SECRET_NAME> -n <SECRET_NAMESPACE> --as system:serviceaccount:<AGENT_NAMESPACE>:<AGENT_SERVICE_ACCOUNT>
 ```
 
-Consider the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`. 
+Consider the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`.
 
 In this case, use the following command:
 
