@@ -13,29 +13,37 @@ further_reading:
 
 The list widget enables you to display a list of top issues.
 
-{{< img src="dashboards/widgets/list/list_overview.png" alt="List widget displaying a list of Java errors and their error count." >}}
+{{< img src="dashboards/widgets/list/list_overview.png" alt="List widget displaying a list of errors, their error count and volume." style="width:70%;">}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/list/list_setup.png" alt="List widget configuration modal" style="width:80%;">}}
+{{< img src="dashboards/widgets/list/list_setup.png" alt="List widget configuration modal" style="width:100%;">}}
 
 ### Configuration
 
 1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, or Events.
 
-2. Optional: Give your graph a title (or leave blank for suggested title)
+2. Set display preferences. On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
+
+3. Optional: Give your graph a title (or leave blank for suggested title).
 
 ### Options
 
-#### Global time
+### Sorting by
 
-On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
+For top issues, you can sort by:
+
+* Number of errors (default)
+* First seen
+* Impacted sessions
+
+Changing the "Sorting by" selection does not change the columns displayed. If you change your list to sort by impacted sessions, and want to see this on your widget, you must also select or add "Impacted Sessions" to the graph editor.
 
 ## API
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the top list widget is:
+The dedicated [widget JSON schema definition][2] for the list widget is:
 
 {{< dashboards-widgets-api >}}
 
