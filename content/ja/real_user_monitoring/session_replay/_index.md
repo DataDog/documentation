@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/real_user_monitoring/guide/session-replay-getting-started/
 description: セッションリプレイでユーザーの Web 閲覧体験をキャプチャし、視覚化する方法について説明します。
 further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/

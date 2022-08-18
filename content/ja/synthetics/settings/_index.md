@@ -159,7 +159,7 @@ Datadog で管理されるすべての場所と、ご使用のアカウントで
 
 [ブラウザテスト][5]の詳細で、デフォルトのブラウザとデバイスの種類を選択します。
 
-ブラウザは、Google Chrome、Firefox、Microsoft Edge、Internet Explorer 11 から選択できます。デバイスは、大型のノートパソコン、タブレット、小型のモバイルデバイスから選択できます。
+ブラウザは、Google Chrome、Firefox、Microsoft Edge から選択できます。デバイスは、大型のノートパソコン、タブレット、小型のモバイルデバイスから選択できます。
 
 ブラウザとデバイスの選択が完了したら、**Save Default Browsers &amp; Devices** をクリックします。
 
@@ -209,7 +209,7 @@ Datadog がテスト実行から RUM データを収集することを許可す�
 [7]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#use-variables
 [8]: /ja/synthetics/multistep?tab=requestoptions#use-variables
 [9]: /ja/synthetics/browser_tests/?tab=requestoptions#use-global-variables
-[10]: /ja/synthetics/browser_tests/actions#using-variables
+[10]: /ja/synthetics/browser_tests/actions#use-variables
 [11]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /ja/account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /ja/account_management/rbac/#create-a-custom-role
