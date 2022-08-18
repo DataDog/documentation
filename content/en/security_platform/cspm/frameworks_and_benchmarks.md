@@ -57,7 +57,7 @@ From the [Rules][12] page, you can add notification targets. The complete list o
 - [Webhooks][18]
 - Email
 
-In the “Notify” section, configure zero or more [notification targets][9] for each rule case. You cannot edit the preset severity.
+In the “Notify” section, configure zero or more notification targets for each rule case. You cannot edit the preset severity.
 
 {{< img src="security_platform/cspm/frameworks_and_benchmarks/notification.png" alt="Select a severity and notification target" >}}
 

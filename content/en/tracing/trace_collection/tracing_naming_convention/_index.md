@@ -33,7 +33,7 @@ The following span tags are the core concepts for describing the instrumentation
 ### Network communications
 The following span tags can be used to describe work units corresponding to network communications:
 
-| **Fullname**                    | **Type** | **Description**                                                           |
+| **Name**                    | **Type** | **Description**                                                           |
 |---------------------------------|----------|---------------------------------------------------------------------------|
 | `network.client.ip`             | `string` | The IP address of the client that initiated the inbound connection.        |
 | `network.destination.ip`        | `string` | The IP address to where the outbound connection is being made.             |
@@ -49,27 +49,26 @@ The following span tags can be used to describe work units corresponding to netw
 ### HTTP requests
 The following span tags can be used to describe the HTTP client and server spans:
 
-| **Fullname**                                | **Type** | **Description**                                                                                                                                                                                                              |
-|---------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `http.status_code`                          | `string` | The HTTP response status code.                                                                                                                                                                                                |
-| `http.url`                                  | `string` | The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see [Configure Data Security][4].                                                         |
-| `http.version`                              | `string` | The version of HTTP used for the request.                                                                                                                                                                                     |
-| `http.method`                               | `string` | The port of the client that initiated the connection.                                                                                                                                                                         |
-| `http.route`                                | `string` | The matched route (path template).<br>Example: `/users/:userID`                                                                                                                                                              |
-| `http.client_ip`                            | `string` | The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.                                                                                                        |
-| `http.useragent`                            | `string` | The user agent header received with the request.                                                                                                                                                                              |
-| `http.request.content_length`               | `number` | The size of the request payload body in bytes.                                                                                                                                                                                |
-| `http.response.content_length`              | `number` | The size of the request payload body in bytes.                                                                                                                                                                                |
-| `http.request.`<br>`content_length_uncompressed`  | `number` | The size of the uncompressed request payload body after transport decoding.                                                                                                                                                   |
-| `http.response.`<br>`content_length_uncompressed` | `number` | The size of the uncompressed response payload body after transport decoding.                                                                                                                                                  |
-| `http.request.headers.*`                    | `string` | The request HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, refer to the corresponding [Library configuration][5].  |
-| `http.response.headers.*`                   | `string` | The response HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, refer to the corresponding [Library configuration][5]. |
-
+| **Name**                                | **Description**                                                                                                                                                                                                              |
+|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `http.status_code`                          | Type: `string` <br> The HTTP response status code.                                                                                                                                                                                                |
+| `http.url`                                  | Type: `string` <br>  The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see [Configure Data Security][4].                                                         |
+| `http.version`                              | Type: `string` <br>  The version of HTTP used for the request.                                                                                                                                                                                     |
+| `http.method`                               | Type: `string` <br>  The port of the client that initiated the connection.                                                                                                                                                                         |
+| `http.route`                                | Type: `string` <br>  The matched route (path template).<br>Example: `/users/:userID`                                                                                                                                                              |
+| `http.client_ip`                            | Type: `string` <br>  The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.                                                                                                        |
+| `http.useragent`                            | Type: `string` <br>  The user agent header received with the request.                                                                                                                                                                              |
+| `http.request.content_length`               | Type: `number` <br>  The size of the request payload body in bytes.                                                                                                                                                                                |
+| `http.response.content_length`              | Type: `number` <br> The size of the request payload body in bytes.                                                                                                                                                                                |
+| `http.request.content_length_uncompressed`  | Type: `number` <br> The size of the uncompressed request payload body after transport decoding.                                                                                                                                                   |
+| `http.response.content_length_uncompressed` | Type: `number` <br> The size of the uncompressed response payload body after transport decoding.                                                                                                                                                  |
+| `http.request.headers.*`                    | Type: `string` <br> The request HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, see the corresponding [Library configuration][5].  |
+| `http.response.headers.*`                   | Type: `string` <br> The response HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, see the corresponding [Library configuration][5]. |
 
 ### Database
 The following span tags can be used to describe database spans:
 
-| **Fullname**           | **Type** | **Description**                                                                                              |
+| **Name**           | **Type** | **Description**                                                                                              |
 |------------------------|----------|--------------------------------------------------------------------------------------------------------------|
 | `db.system`            | `string` | Identifier for the database management system (DBMS product being used).                                       |
 | `db.connection_string` | `string` | The connection string used to connect to the database.                                                        |
@@ -85,7 +84,7 @@ Additional attributes for specific database technologies will use the prefix `db
 ### Message Queue
 The following span tags can be used to describe spans corresponding to messaging systems:
 
-| **Fullname**                     | **Type** | **Description**                                                                                                                                                                                                                  |
+| **Name**                     | **Type** | **Description**                                                                                                                                                                                                                  |
 |----------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `messaging.system`               | `string` | The identifier of the messaging system.                                                                                                                                                                                               |
 | `messaging.destination`          | `string` | The message destination name.                                                                                                                                                                                                     |
@@ -104,7 +103,7 @@ Additional attributes for specific database technologies will use the prefix `me
 ### Remote procedure calls
 The following span tags can be used to describe spans corresponding to remote procedure calls such as RMI or gRPC:
 
-| **Fullname**  | **Type** | **Description**                      |
+| **Name**  | **Type** | **Description**                      |
 |---------------|----------|--------------------------------------|
 | `rpc.system`  | `string` | The identifier of the remote system.    |
 | `rpc.service` | `string` | The name of the service being called. |
@@ -113,7 +112,7 @@ The following span tags can be used to describe spans corresponding to remote pr
 ### Errors
 The following span tags can be used to describe errors associated with spans:
 
-| **Fullname**    | **Type** | **Description**                                                  |
+| **Name**    | **Type** | **Description**                                                  |
 |-----------------|----------|------------------------------------------------------------------|
 | `error.message` | `string` | The error type or kind (or code in some cases).                  |
 | `error.type`    | `string` | A concise, human-readable, one-line message explaining the event. |

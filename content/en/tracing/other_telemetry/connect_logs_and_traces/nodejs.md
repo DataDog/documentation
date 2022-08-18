@@ -27,6 +27,7 @@ further_reading:
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
 
 ```javascript
+// This line must come before importing the logger.
 const tracer = require('dd-trace').init({
     logInjection: true
 });

@@ -15,7 +15,7 @@ On the Service Catalog page, if the **Registered** column has a green check mark
 
 Any service that sends tracing data to Datadog APM is automatically listed in the Service Catalog. Until you register it, it shows a gray check mark when you hover over it.
 
-To register the service and add ownership information, related links such as runbooks, and links to source code repositories by [update the service definition][1].
+To register the service and add ownership information, related links such as runbooks, and links to source code repositories, [update the service definition][1].
 
 Go to [Service Catalog > Get Started][2] to get help forming valid JSON to post with the API.
 
@@ -25,7 +25,7 @@ If the service, API, or custom library you are interested in is not listed on th
 
 1. Go to [Get Started][2].
 
-2. The **Register Services*** form helps you generate JSON that you can post to Service Catalog API endpoint. Provide a service name in the `dd-service` field. Fill in ownership, source, and other service information in the Service Definition schema presented. Refer to the [full JSON schema on GitHub][3] for complete details.
+2. The **Register Services** form helps you generate JSON that you can post to Service Catalog API endpoint. Provide a service name in the `dd-service` field. Fill in ownership, source, and other service information in the Service Definition schema presented. Refer to the [full JSON schema on GitHub][3] for complete details.
 
 3. Click the **Copy** button to copy the generated JSON. Send this as the `body` of a `POST` API call with the [Service Definition API][1].
 

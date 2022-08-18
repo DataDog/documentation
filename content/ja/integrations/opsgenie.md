@@ -35,16 +35,14 @@ version: '1.0'
 #### Opsgenie で Datadog インテグレーションを作成する
 
 1. Opsgenie アカウントにログインし、[Opsgenie のインテグレーション][1]ページに移動します。
-2. 下に示すように、Datadog を検索して見つけ、タイルをクリックします。
-   {{< img src="integrations/opsgenie/opsgenie-int-index.png" alt="opsgenie インテグレーションインデックス" popup="true">}}
-
-3. [Integrations > APIs ページ][2]にある Datadog API キーを専用のフィールドに入力します。
-4. Opsgenie で受信者を選択し、フィルターをセットアップします。
-5. 必要に応じて、インテグレーションの名前を変更します。
-6. 構成を保存します。
-7. 後で Datadog で使用するため、キーと名前をコピーします。
-   {{< img src="integrations/opsgenie/opsgenie-add-api-key.png" alt="Opsgenie 用の API キーを追加" popup="true">}}
-8. Opsgenie で DataDog インテグレーションをさらに追加するには、[Opsgenie インテグレーション][1]ページに移動し、上の手順を繰り返します。
+2. Datadog を検索し、タイルをクリックします。
+3. Choose the recipients of Datadog alerts in Opsgenie using the **Responders** field.
+4. [Integrations > APIs ページ][2]にある Datadog API キーを入力します。
+5. Datadog EU サイトを使用している場合は、`Send to Datadog EU` にチェックを入れてください。
+6. 必要に応じて、インテグレーションの名前を変更します。
+7. 構成を保存します。
+8. 後で Datadog で使用するため、キーと名前をコピーします。
+9. Opsgenie で Datadog インテグレーションをさらに追加するには、[Opsgenie インテグレーション][1]ページに移動し、上の手順を繰り返します。
 
 #### Opsgenie で作成したインテグレーションを Datadog でリストする
 

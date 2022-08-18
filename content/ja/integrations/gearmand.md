@@ -1,48 +1,69 @@
 ---
-aliases:
-- /ja/integrations/gearman
+app_id: gearman
+app_uuid: 7e1b6c42-8f40-4f4c-8d58-a3f7f39cb3e5
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     gearman: assets/dashboards/gearman_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: gearman.unique_tasks
+      metadata_path: metadata.csv
+      prefix: gearman.
+    process_signatures:
+    - gearmand
+    - gearman
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gearman
   logs:
     source: gearman
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     gearman_processes: assets/saved_views/gearman_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
-display_name: Gearman
+display_on_public_website: true
 draft: false
 git_integration_title: gearmand
-guid: bdd65394-92ff-4d51-bbe3-ba732663fdb2
 integration_id: gearman
 integration_title: Gearman
 integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: gearman.
-metric_to_check: gearman.unique_tasks
+manifest_version: 2.0.0
 name: gearmand
-process_signatures:
-- gearmand
-- gearman
-public_title: Gearman インテグレーション
+oauth: {}
+public_title: Gearman
 short_description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::処理
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gearman
 ---
 
 

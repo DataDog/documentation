@@ -13,6 +13,9 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: 内部ホストで SSL テストを実行する
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
 title: SSL テスト
 ---
@@ -37,16 +40,16 @@ SSL テストは、ネットワークの外部または内部からのテスト�
     * **Server Name**: TLS ハンドシェイクを開始するサーバーを指定し、サーバーが同じ IP アドレスと TCP ポート番号上の複数の可能な証明書のうちの 1 つを提示することを可能にします。デフォルトでは、このパラメータは **Host** の値で埋められています。
     * **Client certificate**: クライアント証明書 (`.crt`) と関連する秘密キー (`.key`) を `PEM` 形式でアップロードして、mTLS を介して認証します。**注**: `openssl` ライブラリを使用して証明書を変換することができます。たとえば、`PKCS12` 証明書を `PEM` 形式の秘密キーと証明書に変換します。
 
-  ```
-  openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-  openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-  ```
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
 3. SSL テストに**名前**を付けます。
 
 4. SSL テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][4]で Synthetic テストをすばやくフィルタリングできます。
 
-{{< img src="synthetics/api_tests/ssl_test_config.png" alt="SSL リクエストを定義する" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/ssl_test_config.png" alt="SSL リクエストを定義する" style="width:90%;" >}}
 
 **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
 
@@ -101,7 +104,7 @@ SSL テストは次の頻度で実行できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
@@ -122,7 +125,9 @@ SSL テストは次の頻度で実行できます。
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックしてテストを保存し、Datadog にテストの実行を開始させます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
+
+詳しくは、[Synthetic テストモニターの使用][9]をご覧ください。
 
 ## 変数
 
@@ -147,7 +152,7 @@ SSL テストは次の頻度で実行できます。
 
 ### 変数を使用する
 
-SSL テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][9]を使用することができます。
+SSL テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][10]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
@@ -169,7 +174,7 @@ SSL テストの URL、高度なオプション、アサーションで、[`Sett
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][10]。
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][11]。
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
@@ -179,13 +184,13 @@ SSL テストの URL、高度なオプション、アサーションで、[`Sett
 
 ## アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが、Synthetic SSL テストを作成、編集、削除できます。Synthetic SSL テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][12]を持つユーザーのみが、Synthetic SSL テストを作成、編集、削除できます。Synthetic SSL テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][12]のいずれかにアップグレードします。
 
-[カスタムロール機能][12]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][13]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][13]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][14]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、SSL テストへのアクセスを制限することができます。SSL テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -203,8 +208,9 @@ SSL テストの URL、高度なオプション、アサーションで、[`Sett
 [6]: /ja/monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /ja/synthetics/settings/#global-variables
-[10]: /ja/synthetics/api_tests/errors/#ssl-errors
-[11]: /ja/account_management/rbac/
-[12]: /ja/account_management/rbac#custom-roles
-[13]: /ja/account_management/rbac/#create-a-custom-role
+[9]: /ja/synthetics/guide/synthetic-test-monitors
+[10]: /ja/synthetics/settings/#global-variables
+[11]: /ja/synthetics/api_tests/errors/#ssl-errors
+[12]: /ja/account_management/rbac/
+[13]: /ja/account_management/rbac#custom-roles
+[14]: /ja/account_management/rbac/#create-a-custom-role

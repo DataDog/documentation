@@ -80,7 +80,7 @@ This Reference Table can be used to add additional attributes to logs with the [
 
 ## Modify a Reference Table
 
-To modify an existing Reference Table with new data, select a table then click **Update Data +** in the top right corner.
+To modify an existing Reference Table with new data, select a table and click **Update Config** on the top right corner.
 The selected CSV is upserted into the table, meaning that:
 
 * All existing rows with the same primary key are updated
@@ -89,8 +89,40 @@ The selected CSV is upserted into the table, meaning that:
  
 Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete. 
 
+## Delete a Reference Table
+
+To delete a Reference Table, select a table, click the gear icon in the top right corner, and then click **Delete Table**.
+The table and all associated rows is deleted.
+
+If there is a Lookup Processor using a Reference Table for Log enrichment, then the enrichment stops. It may take up to 10 minutes for the enrichment to stop.
+
+## Monitor Reference Table Activity
+
+You can monitor reference table activity with [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select the table and click the Settings icon next to **Update Config**. You need org management permissions to view the audit trail.
+
+### Audit Trail
+
+Use the audit trail for reference tables to track user-triggered actions. Audit trail events are sent when a user initially uploads or imports a CSV file, or when a user creates, modifies, or deletes a reference table. 
+
+The `reference_table_file` Asset Type displays import/upload events and the `reference_table` Asset Type displays reference table events. The audit trail provides observability into the content of a reference table.
+
+### Change Events
+
+Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file. 
+
+Events contain information about the success status, path, and table name of the import. If an error occurs, information about the error type is provided.
+
+### Alerting
+
+To be alerted on errors encountered during imports, use [Event Monitors][4] for reference table change events. Reference table change events are sent from the `reference_tables` source. 
+
+You can create monitors from the **Monitors** tab, or click on the Settings icon next to **New Reference Table +** to generate a pre-filled monitor.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/processors/#lookup-processor
+[2]: /account_management/audit_trail/
+[3]: /events/
+[4]: /monitors/create/types/event/

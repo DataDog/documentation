@@ -10,6 +10,9 @@ further_reading:
 - link: /getting_started/synthetics/api_test/
   tag: ドキュメント
   text: API テストの概要
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
 title: UDP テスト
 ---
@@ -87,7 +90,7 @@ UDP テストは次の頻度で実行できます。
 * 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)、
 * 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
@@ -108,7 +111,9 @@ UDP テストは次の頻度で実行できます。
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックすると、保存され、テストが開始されます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
+
+詳しくは、[Synthetic テストモニターの使用][9]をご覧ください。
 
 ## 変数
 
@@ -164,13 +169,13 @@ UDP テストの URL およびアサーションで、[`Settings` で定義さ�
 
 ## アクセス許可
 
-デフォルトでは、Datadog 管理者および Datadog 標準ロールを持つユーザーのみが、Synthetic UDP テストを作成、編集、削除できます。Synthetic UDP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードします。
+デフォルトでは、Datadog 管理者および Datadog 標準ロールを持つユーザーのみが、Synthetic UDP テストを作成、編集、削除できます。Synthetic UDP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][10]のいずれかにアップグレードします。
 
-[カスタムロール機能][10]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][11]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][11]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、UDP テストへのアクセスを制限することができます。UDP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -188,6 +193,7 @@ UDP テストの URL およびアサーションで、[`Settings` で定義さ�
 [6]: /ja/monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /ja/synthetics/settings/#global-variables
-[9]: /ja/account_management/rbac/
-[10]: /ja/account_management/rbac#custom-roles
-[11]: /ja/account_management/rbac/#create-a-custom-role
+[9]: /ja/synthetics/guide/synthetic-test-monitors
+[10]: /ja/account_management/rbac/
+[11]: /ja/account_management/rbac#custom-roles
+[12]: /ja/account_management/rbac/#create-a-custom-role

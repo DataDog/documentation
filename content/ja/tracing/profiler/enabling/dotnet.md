@@ -16,15 +16,7 @@ title: .NET プロファイラーの有効化
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
-Datadog .NET Profiler は公開ベータ版です。Datadog では、本番環境にデプロイする前に重要でない環境でプロファイラを評価することを推奨しています。
-</div>
-
-以下のプロファイリング機能が利用できます。
-- **メソッドの実行時間**は、コードの各メソッドが実行された全体の時間を示します。
-- **CPU** は、CPU タスクの実行時間を表示します (有効にするには構成セクションを参照してください)。
-- **Exceptions** は、スローされた例外のタイプとメッセージを表示します (有効にするには構成セクションを参照してください)。
-
+プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
 
 ## 要件
 
@@ -33,7 +25,7 @@ Datadog .NET Profiler は公開ベータ版です。Datadog では、本番環�
 Windows Server バージョン 2012 以降
 
 .NET Core および .NET 5+ の対応オペレーティングシステム
-: glibc 2.18 以上の Linux (例: CentOS 7 はサポート外)<br/>
+: glibc 2.17 以上の Linux (例: CentOS 7 以上) と musl-based (Alpine)<br/>
 Windows 10<br/>
 Windows Server バージョン 2012 以降
 
@@ -57,6 +49,8 @@ Windows Server バージョン 2012 以降
 
 すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][1]+ または [6.20.2][2]+ にアップグレードしてください。プロファイラーはトレーサーと一緒に出荷されますので、OS に応じて以下の手順でインストーラーをインストールしてください。
 
+**注:** プロファイラーは、バージョン 2.8.0 以降のトレーサーに同梱されています。もし、古いバージョンのトレーサーを使用している場合は、まず、アップグレードする必要があります。
+
 {{< tabs >}}
 
 {{% tab "Linux" %}}
@@ -69,7 +63,7 @@ Windows Server バージョン 2012 以降
    Debian または Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
 
-   CentOS 8+ または Fedora
+   CentOS 7+ または Fedora
    : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
 
    Alpine などの musl ベースの分布
@@ -119,10 +113,12 @@ Windows Server バージョン 2012 以降
 
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
-{{< /tabs >}}
+[1]: https://app.datadoghq.com/profiling
+{{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
-3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。IIS アプリケーションのプロファイラーを有効にするには、レジストリの `HKLM\System\CurrentControlSet\Services\WAS` と `HKLM\System\CurrentControlSet\Services\W3SVC` ノードで環境変数 `DD_PROFILING_ENABLED`、`DD_ENV`、`DD_SERVICE` および `DD_VERSION` を設定する必要があります。
+3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。
+ IIS アプリケーションのプロファイラーを有効にするには、レジストリの `HKLM\System\CurrentControlSet\Services\WAS` と `HKLM\System\CurrentControlSet\Services\W3SVC` ノードで環境変数 `DD_PROFILING_ENABLED` を設定する必要があります。
 
    **レジストリエディターを使用:**
 
@@ -168,7 +164,7 @@ Windows Server バージョン 2012 以降
 {{% /tab %}}
 
 {{% tab "Windows サービス" %}}
-3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。サービスのプロファイラーを有効にするには、サービスに関連付けられたレジストリキーで環境変数 `DD_PROFILING_ENABLED`、`DD_ENV`、`DD_SERVICE` および `DD_VERSION` を設定する必要があります。
+3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。サービスのプロファイラーを有効にするには、サービスに関連付けられたレジストリキーに `DD_PROFILING_ENABLED` 環境変数を設定することが必要です。プロファイラーが単独で動作している場合 (トレーサーは非アクティブ)、オプションで `DD_SERVICE`、`DD_ENV`、`DD_VERSION` 環境変数を追加することができます。
 
    **レジストリエディターを使用:**
 
@@ -230,7 +226,7 @@ Windows Server バージョン 2012 以降
 {{% /tab %}}
 
 {{% tab "Windows スタンドアロンアプリケーション" %}}
-3. コンソール、ASP.NET (Core)、Windows Forms、WPF などの非サービスアプリケーションでプロファイラーを構成して有効にするために、必要な環境変数を設定します。スタンドアロンアプリケーションのプロファイラーを有効にするには、`DD_PROFILING_ENABLED`、`DD_ENV`、`DD_SERVICE` および `DD_VERSION` 環境変数を設定する必要があります。推奨される方法は、これらを設定しアプリケーションを起動するバッチファイルを作成し、そのバッチファイルを使用してアプリケーションを実行することです。
+3. コンソール、ASP.NET (Core)、Windows Forms、WPF などの非サービスアプリケーションでプロファイラーを構成して有効にするために、必要な環境変数を設定します。スタンドアロンアプリケーションのプロファイラーを有効にするには、`DD_PROFILING_ENABLED` 環境変数を設定する必要があります。プロファイラーが単独で動作している場合 (トレーサーは無効)、オプションで環境変数 `DD_SERVICE`、`DD_ENV`、`DD_VERSION` を設定することが可能です。推奨される方法は、これらを設定しアプリケーションを起動するバッチファイルを作成し、そのバッチファイルを使用してアプリケーションを実行することです。
 
    .NET Core と .NET 5+ の場合:
    ```cmd

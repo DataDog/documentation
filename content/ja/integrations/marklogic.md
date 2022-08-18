@@ -1,48 +1,72 @@
 ---
+app_id: marklogic
+app_uuid: 92342b09-db9a-4542-b442-76bb9b7f716e
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     MarkLogic - Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: marklogic.hosts.total_hosts
+      metadata_path: metadata.csv
+      prefix: marklogic.
+    process_signatures:
+    - MarkLogic
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: MarkLogic
   logs:
     source: marklogic
-  metrics_metadata: metadata.csv
   monitors:
     Marklogic high load: assets/recommended_monitors/marklogic_high_load.json
     Marklogic long requests: assets/recommended_monitors/marklogic_long_requests.json
     Marklogic low cache: assets/recommended_monitors/marklogic_low_cache.json
   saved_views:
     marklogic_processes: assets/saved_views/marklogic_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
-display_name: MarkLogic
+display_on_public_website: true
 draft: false
 git_integration_title: marklogic
-guid: 0c200415-731f-4b67-9b2c-d6bd1225eee1
 integration_id: marklogic
 integration_title: MarkLogic
 integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: marklogic.
-metric_to_check: marklogic.hosts.total_hosts
+manifest_version: 2.0.0
 name: marklogic
-process_signatures:
-- MarkLogic
-public_title: MarkLogic インテグレーション
+oauth: {}
+public_title: MarkLogic
 short_description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MarkLogic
 ---
 
 

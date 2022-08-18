@@ -35,6 +35,7 @@ title: Kubernetes ディストリビューション
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
+* [vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -47,7 +48,7 @@ title: Kubernetes ディストリビューション
 
 カスタム `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -62,7 +63,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -97,7 +98,7 @@ AKS では、AKS 証明書の設定のため、`Kubelet` インテグレーシ�
 
 カスタム `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -115,7 +116,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -151,7 +152,7 @@ spec:
 
 - 一部の設定では、ポッド内における `spec.nodeName` のDNS 解決が AKS で動作しない場合があります。これはすべての AKS Windows ノード、および Linux ノードでカスタム DNS を使用してクラスターを Virtual Network で設定した場合に報告されています。この場合、`agent.config.kubelet.host` フィールド (デフォルトで `status.hostIP`) を削除し、`tlsVerify: false` を使用することが**必要です**。`DD_KUBELET_TLS_VERIFY=false` の環境変数を使用することでも、この問題を解決できます。これらのオプションは両方とも、サーバー証明書の検証を無効にします。
 
-  ```
+  ```yaml
   env:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
@@ -252,7 +253,7 @@ OpenShift にはデフォルトで強化されたセキュリティ (SELinux、S
 
 カスタム `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -288,7 +289,7 @@ kube-state-metrics:
 OpenShift で Datadog Operator を使用する場合、OperatorHub または RedHat Marketplace からインストールすることが推奨されています。
 以下のコンフィギュレーションは、(SCC/ServiceAccountの設定のため)、この設定と合わせて、Agent が Datadog Operator と同じネームスペースにインストールされている場合を前提として動作します。
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -355,7 +356,7 @@ Rancher のインストールは vanilla Kubernetes に近く、わずかなコ�
 
 カスタム `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -377,7 +378,7 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -438,7 +439,7 @@ spec:
 
 カスタム `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -453,7 +454,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -481,6 +482,75 @@ spec:
 
 その他の `values.yaml` のサンプルは [Helm チャートリポジトリ][1]を、
 その他の `DatadogAgent` サンプルは [Datadog Operator リポジトリ][2]をご覧ください。
+
+## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
+
+TKG では、以下に示すような小さな構成変更が必要です。例えば、コントローラが `master` ノード上の Node Agent をスケジュールするために、許容量を設定することが必要です。
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+カスタム `values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    # Kubelet の証明書は自己署名なので、tlsVerify を false に設定します
+    tlsVerify: false
+  # `kube-state-metrics` 依存性チャートのインストールを無効化します。
+  kubeStateMetricsEnabled: false
+  # 新しい `kubernetes_state_core` のチェックを有効にします。
+  kubeStateMetricsCore:
+    enabled: true
+# コントロールプレーンノードで Agent をスケジュールできるように許容範囲を追加します。
+agents:
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      effect: NoSchedule
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiSecret:
+      secretName: datadog-secret
+      keyName: api-key
+    appSecret:
+      secretName: datadog-secret
+      keyName: app-key
+  features:
+    # 新しい `kubernetes_state_core` のチェックを有効にします。
+    kubeStateMetricsCore:
+      enabled: true
+  agent:
+    config:
+      kubelet:
+        # Kubelet の証明書は自己署名なので、tlsVerify を false に設定します
+        tlsVerify: false
+      # コントロールプレーンノードで Agent をスケジュールできるように許容範囲を追加します。
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+  clusterAgent:
+    config:
+      collectEvents: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -49,9 +49,10 @@ further_reading:
 ## Compatibility requirements
 
 ### Supported .NET Framework runtimes
-The .NET Tracer supports instrumentation on .NET Framework 4.6.1 and above.
 
-For a complete list of supported libraries and processor architectures (including older versions of .NET Framework), see [Compatibility Requirements][1].
+The .NET Tracer supports instrumentation on .NET Framework >= 4.6.1.
+
+For a full list of Datadog’s .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
@@ -69,10 +70,68 @@ For a complete list of supported libraries and processor architectures (includin
 
 ### Installation
 
-1. [Install the tracer.](#install-the-tracer)
-2. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
-3. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
+1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
+2. [Install the tracer.](#install-the-tracer)
+3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [View your live data.](#view-your-live-data)
+
+### Configure the Datadog Agent for APM
+
+[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic on `http://localhost:8126`.
+
+For containerized, serverless, and cloud environments:
+
+{{< tabs >}}
+
+{{% tab "Containers" %}}
+
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
+
+2. See the specific setup instructions to configure the Agent to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on configuring these settings, see [Configuration](#configuration).
+
+{{< site-region region="us3,us5,eu,gov" >}}
+
+4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
+
+{{< /site-region >}}
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+
+{{% tab "AWS Lambda" %}}
+
+To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][1].
+
+[1]: /tracing/serverless_functions/
+{{% /tab %}}
+
+{{% tab "Azure App Service" %}}
+
+To set up Datadog APM in Azure App Service, see [Tracing Azure App Service Extension][1].
+
+[1]: /serverless/azure_app_services/
+{{% /tab %}}
+
+{{% tab "Other Environments" %}}
+
+Tracing is available for other environments including, [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+
+For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you are encountering setup issues.
+
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[4]: /integrations/
+[5]: /help/
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Install the tracer
 
@@ -166,64 +225,6 @@ For information about the different methods for setting environment variables, s
 2. For standalone applications, manually restart the application.
 
 
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### Configure the Datadog Agent for APM
-
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic on `http://localhost:8126`.
-
-For containerized, serverless, and cloud environments:
-
-{{< tabs >}}
-
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to configure the Agent to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on configuring these settings, see [Configuration](#configuration).
-
-{{< site-region region="us3,us5,eu,gov" >}}
-
-4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
-
-{{< /site-region >}}
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][1].
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-
-{{% tab "Azure App Service" %}}
-
-To set up Datadog APM in Azure App Service, see [Tracing Azure App Service Extension][1].
-
-[1]: /serverless/azure_app_services/
-{{% /tab %}}
-
-{{% tab "Other Environments" %}}
-
-Tracing is available for a number of environments including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
-
-For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you are encountering setup issues.
-
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /integrations/
-[5]: /help/
 {{% /tab %}}
 
 {{< /tabs >}}

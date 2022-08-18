@@ -1,37 +1,57 @@
 ---
+app_id: コンテナ
+app_uuid: ac3cc203-5b28-457d-8737-bbe32fa7c3b9
 assets:
   dashboards:
     Containers: assets/dashboards/containers.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: container.uptime
+      metadata_path: metadata.csv
+      prefix: container.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: コンテナ
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - containers
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
-display_name: コンテナ
+display_on_public_website: true
 draft: false
 git_integration_title: コンテナ
-guid: 39d40858-0d56-4623-bd1d-864790d0c894
 integration_id: コンテナ
 integration_title: コンテナ
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: container.
-metric_to_check: container.uptime
+manifest_version: 2.0.0
 name: コンテナ
-public_title: Datadog-Container インテグレーション
+oauth: {}
+public_title: コンテナ
 short_description: コンテナのメトリクスを Datadog で追跡
-support: コア
 supported_os:
 - linux
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Containers
+  configuration: README.md#Setup
+  description: コンテナのメトリクスを Datadog で追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: コンテナ
 ---
 
 

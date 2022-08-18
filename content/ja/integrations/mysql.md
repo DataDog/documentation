@@ -1,13 +1,26 @@
 ---
+app_id: mysql
+app_uuid: f6177896-da1e-4bc4-ab19-fd32e8868647
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     mysql: assets/dashboards/overview.json
     mysql-screenboard: assets/dashboards/overview-screenboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: mysql.net.connections
+      metadata_path: metadata.csv
+      prefix: mysql.
+    process_signatures:
+    - mysqld
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: MySQL
   logs:
     source: mysql
-  metrics_metadata: metadata.csv
   monitors:
     replica running: assets/monitors/replica_running.json
     select query rate: assets/monitors/select_query_rate.json
@@ -16,37 +29,47 @@ assets:
     operations: assets/saved_views/operations.json
     operations_overview: assets/saved_views/operations_overview.json
     slow_operations: assets/saved_views/slow_operations.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mysql/README.md
-description: MySQL インテグレーションは、MySQL サーバーインスタンスからパフォーマンスメトリクスと可用性メトリクスを収集するのに役立ちます。
-display_name: MySQL
+display_on_public_website: true
 draft: false
 git_integration_title: mysql
-guid: 056bfc7f-4775-4581-9442-502078593d10
 integration_id: mysql
 integration_title: MySQL
-integration_version: 8.4.1
+integration_version: 8.5.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: mysql.
-metric_to_check: mysql.net.connections
-name: MySQL
-process_signatures:
-- mysqld
-public_title: MySQL インテグレーション
+manifest_version: 2.0.0
+name: mysql
+oauth: {}
+public_title: MySQL
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MySQL
 ---
 
 
@@ -609,7 +632,7 @@ MySQL チェックには、イベントは含まれません。
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/integrations/faq/connection-issues-with-the-sql-server-integration/
+[7]: https://docs.datadoghq.com/ja/integrations/guide/connection-issues-with-the-sql-server-integration/
 [8]: https://docs.datadoghq.com/ja/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
 [9]: https://docs.datadoghq.com/ja/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
 [10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/

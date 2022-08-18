@@ -420,7 +420,7 @@ process_config:
 
 After configuration is complete, [restart the Agent][11].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -431,7 +431,7 @@ After configuration is complete, [restart the Agent][11].
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers
 [6]: /agent/guide/datadog-agent-manager-windows/
-[7]: /integrations/wmi/
+[7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

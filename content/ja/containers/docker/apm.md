@@ -42,6 +42,7 @@ _任意のホスト_ からトレースを利用するには、`-p 8126:8126/tcp
 
 ```shell
 docker run -d --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -113,6 +114,7 @@ docker network create <NETWORK_NAME>
 docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -137,6 +139,7 @@ docker run -d --name app \
 # Datadog Agent
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               --network "<NETWORK_NAME>" \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
