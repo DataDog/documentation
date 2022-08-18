@@ -12,7 +12,7 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the following configurations.
 
 
-## Metrics, APM, Live Processes, Orchestrator
+## Metrics, APM, Live Processes, Orchestrator, CI Visibility
 
 You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
 
@@ -113,6 +113,31 @@ orchestrator_explorer:
 
 ```bash
 DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+```
+
+{{% /tab %}}
+
+{{% tab "CI Visibility" %}}
+
+<div class="alert alert-info">Requires Agent v6.38+ or v7.38+.</div>
+
+### YAML configuration
+In `datadog.yaml`: 
+```yaml
+evp_proxy_config:
+  [...]
+  additional_endpoints:
+    "https://mydomain.datadoghq.com":
+    - apikey2
+    - apikey3
+    "https://mydomain.datadoghq.eu":
+    - apikey4
+```
+
+### Environment variable configuration
+
+```bash
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}

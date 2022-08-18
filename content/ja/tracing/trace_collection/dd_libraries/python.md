@@ -15,7 +15,7 @@ further_reading:
 - link: https://ddtrace.readthedocs.io/en/stable/
   tag: Pypi
   text: API ドキュメント
-- link: tracing/visualization/
+- link: tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
 - link: tracing/
@@ -26,8 +26,9 @@ title: Python アプリケーションのトレース
 type: multi-code-lang
 ---
 ## 互換性要件
+最新の Python トレーサーは、CPython バージョン 2.7 と 3.5-3.10 に対応しています。
 
-Python ライブラリは、Linux、MacOS、Windows の CPython バージョン 2.7 および 3.5-3.10 をサポートしています。Datadog の Python バージョンサポートの詳細については、[互換性要件][1]のページを参照してください。
+Datadog の Python バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
 
 ## インストールと利用開始
 
@@ -38,30 +39,6 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
 - セットアップ中に Continuous Profiler、トレースの 100% の取り込み、およびトレース ID 挿入を有効にします。
-
-それ以外の場合、Python で記述されたアプリケーションのトレースを開始するには、Datadog トレーシングライブラリ `ddtrace` を、pip を使用してインストールします。
-
-```python
-pip install ddtrace
-```
-
-**注:** このコマンドは pip バージョン `18.0.0` 以上が必要です。Ubuntu、Debian、またはその他のパッケージマネージャーをお使いの場合は、以下のコマンドで pip バージョンを更新してください。
-
-```python
-pip install --upgrade pip
-```
-
-Python アプリケーションをインスツルメントするには、記載されている `ddtrace-run` コマンドを使用します。これを使用するには、Python エントリーポイントコマンドを `ddtrace-run` でプレフィックスします。
-
-たとえば、アプリケーションが `python app.py` で始まる場合、次のようになります。
-
-```shell
-ddtrace-run python app.py
-```
-
-### v1 へのアップグレード
-
-ddtrace v1 にアップグレードする場合は、ライブラリドキュメントの[アップグレードガイド][3]と[リリースノート][4]で詳細を確認してください。
 
 ### APM に Datadog Agent を構成する
 
@@ -156,12 +133,37 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{< /tabs >}}
 
+### アプリケーションのインスツルメンテーション
+
+Agent をインストールしたら、Python で記述されたアプリケーションのトレースを開始するには、Datadog トレーシングライブラリ `ddtrace` を、pip を使用してインストールします。
+
+```python
+pip install ddtrace
+```
+
+**注:** このコマンドは pip バージョン `18.0.0` 以上が必要です。Ubuntu、Debian、またはその他のパッケージマネージャーをお使いの場合は、以下のコマンドで pip バージョンを更新してください。
+
+```python
+pip install --upgrade pip
+```
+
+Python アプリケーションをインスツルメントするには、記載されている `ddtrace-run` コマンドを使用します。これを使用するには、Python エントリーポイントコマンドを `ddtrace-run` でプレフィックスします。
+
+たとえば、アプリケーションが `python app.py` で始まる場合、次のようになります。
+
+```shell
+ddtrace-run python app.py
+```
+
 セットアップが完了し、アプリケーションでトレーサーを実行したら、`ddtrace-run --info` を実行して、構成が期待通りに動作しているかどうかを確認することができます。このコマンドの出力は、実行中にコード内で行われた構成の変更を反映しないことに注意してください。
 
 ## コンフィギュレーション
 
 必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][5]を参照してください。
 
+### v1 へのアップグレード
+
+ddtrace v1 にアップグレードする場合は、ライブラリドキュメントの[アップグレードガイド][3]と[リリースノート][4]で詳細を確認してください。
 
 ## その他の参考資料
 

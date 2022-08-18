@@ -1,6 +1,6 @@
 import { stringToTitleCase } from '../helpers/string';
 
-export function initializeSecurityRules() {
+export function initializeGroupedListings() {
     const inputSearch = document.querySelector('[data-ref="search"]');
     const controls = document.querySelector('[data-ref="controls"]');
     const allGroupHeaders = Array.prototype.slice.call(document.getElementsByClassName('js-group-header') || []);

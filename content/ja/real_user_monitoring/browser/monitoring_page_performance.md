@@ -138,6 +138,22 @@ document.addEventListener("scroll", function handler() {
 
 **注**: シングルページアプリケーションの場合、`addTiming` API により現在の RUM ビューの開始の相対的なタイミングが発行されます。たとえば、ユーザーがアプリケーションを表示し（初期ロード）、次に別のページを 5 秒間表示して（ルート変更）、8 秒後に `addTiming` をトリガーした場合、タイミングは `8-5 = 3` 秒となります。
 
+また、2 番目のパラメーターとして、独自のタイミングを指定することもできます。これは、現在の RUM ビューの開始点または UNIX エポック (タイムスタンプ) からの相対的なミリ秒数である必要があります。これは、非同期セットアップを使用する場合に特に便利です。例:
+
+```javascript
+document.addEventListener("scroll", function handler() {
+    //1 度だけトリガーするよう、イベントリスナーを削除
+    document.removeEventListener("scroll", handler);
+
+    const timing = Date.now()
+    DD_RUM.onReady(function() {
+      DD_RUM.addTiming('first_scroll', timing);
+    });
+});
+
+```
+
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

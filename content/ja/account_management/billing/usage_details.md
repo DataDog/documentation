@@ -1,7 +1,8 @@
 ---
-title: 使用量の詳細
 kind: documentation
+title: 使用量の詳細
 ---
+
 ## 概要
 
 管理者は、左下に表示される自分のユーザー名にカーソルを置き、`Plan & Usage`--> `Usage` の順に移動すると[使用量][1]ページにアクセスできます。
@@ -44,7 +45,8 @@ API ユーザーの場合、エンドポイントを使用して ["All"][2] (す
 | Ingested Custom Metrics  | 当月全時間の個別収集済みカスタムメトリクスの平均数を表示します。                           |
 | 収集されたログ            | 当月全時間のすべての収集ログバイト数の合計を表示します。                                                |
 | インデックス化されたログ             | 当月全時間のすべてのインデックス化ログイベント数の合計を表示します。                                                |
-| Ingested Span           | 当月全時間のすべての取り込みスパン数の合計を表示します。                                           |
+| スキャンしたログ             | Sensitive Data Scanner によってスキャンされたすべてのログバイトの合計を、当月の全時間にわたって表示します。                       |
+| Ingested Span           | 当月全時間のすべての取り込みスパン数の合計を表示します。                                                    |
 | Indexed Span            | 当月全時間のインデックス化されたすべての Indexed Spans の合計を表示します。                                             |
 | Analyzed Logs (Security) | 当月全時間のすべての分析済みログバイト数の合計を表示します。                                       |
 | サーバーレス関数     | 当月各時間に 1 回以上実行された関数の平均数を表示します。              |
@@ -59,19 +61,34 @@ API ユーザーの場合、エンドポイントを使用して ["All"][2] (す
 | インシデント管理      | インシデントのライフサイクルとタイムラインを操作した、選択した月のこれまでの一意のアクティブユーザーの数を表示します。     |
 | IoT デバイス              | 当月全時間のすべての個別 IoT デバイスの 99 パーセンタイル値を表示します。                                  |
 
-## 全体使用量
 
-このセクションには、時、日、月、年ごとの使用量が表示されます。
+## 使用量の傾向
 
-{{< img src="account_management/billing/usage-details-v2-03.png" alt="1 時間あたりの使用量 - すべて" >}}
+[Usage Trends][10] セクションには、アカウント内の全組織の使用量の合計を表示する製品使用量グラフが含まれています。使用量レポートは、**Download as CSV** ボタンでダウンロードできます。これらのレポートには、各組織の製品別使用量の 1 時間ごとの内訳が含まれています。
 
-製品固有のタブで、その製品カテゴリの製品の 1 時間ごと、1 日ごと、1 か月ごと、および 1 年ごとの使用量を表示します。一部の製品では、使用量の詳しい内訳も表示されます。たとえば、Infrastructure タブには、ホストタイプごとの内訳が用意されています。
+{{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Datadog アプリケーションの使用量傾向グラフのページで、CSV としてダウンロードするオプションが強調表示された状態" style="width:100%; align:left" >}}
 
-{{< img src="account_management/billing/usage-details-v2-04.png" alt="1 時間あたりの使用量 - インフラホスト" >}}
+サブタイプのある製品については、各カテゴリーがその製品のグラフ上で区別されます。
 
-ほとんどのアカウントは、Included Lines 機能にアクセスできます。これにより、1 か月間の使用量の追跡状況を確認できます。Usage ページのグラフには、製品ごとのコミットメントと許容値 (カスタムメトリクス、コンテナなど) を示す "Included" 線が含まれています。
+{{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="インフラストラクチャータブを選択した使用量サマリーと、インフラストラクチャー使用量のサブタイプ (インフラホスト、Agent ホスト、コンテナなど) の複数のグラフ" style="width:100%; align:left" >}}
 
-{{< img src="account_management/billing/usage-details-v3-01.png" alt="Included 線のある Usage グラフ" >}}
+より詳細な製品のサブタイプのグラフは、各製品のタブで見ることができます。 例えば、Infrastructure タブでは、ホストタイプ別の内訳を見ることができます。
+
+{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Agent ホストと AWS ホストを含む Infra Hosts グラフ、Daily Indexed Live Logs と Cumulative Indexed Live Logs を含む Indexed Logs グラフが表示された Infrastructure タブの使用量傾向セクション" style="width:100%; align:left" >}}
+
+和算ベースの製品では、経時的な累積使用量を確認することができます。
+
+{{< img src="account_management/billing/CumulativeUsageLine.png" alt="取り込みスパンとインデックス化スパンについて、それぞれのスパンの日別・累計のデータをプロットしたグラフ" style="width:100%; align:left" >}}
+
+時間選択では、日、週、月、年単位で使用量グラフを表示するオプションがあります。
+
+{{< img src="account_management/billing/TimeGranularity.png" alt="使用量グラフの時間間隔" style="width:100%; align:left" >}}
+
+破線の `Committed` ラインは、製品ごとのコミットメントを示し、許容範囲 (カスタムメトリクスやコンテナなど) を除いたものです。
+
+{{< img src="account_management/billing/CommittedLine.png" alt="APM Hosts のグラフに値 10 で構成されたコミットされた使用量ライン" style="width:100%; align:left" >}}
+
+
 
 ## 上位カスタムメトリクス
 
@@ -126,3 +143,4 @@ Log Management タブにあるこの表には、インデックス名および�
 [7]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
 [8]: /ja/help/
 [9]: mailto:success@datadoghq.com
+[10]: https://app.datadoghq.com/billing/usage

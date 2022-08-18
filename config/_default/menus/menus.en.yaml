@@ -2552,10 +2552,21 @@ main:
     parent: security_rules
     identifier: ootb_rules
     weight: 501
-  - name: Notification Rules
-    url: security_platform/notification_rules/
+  - name: Notifications
+    url: security_platform/notifications/
     parent: security_platform
+    identifier: security_notifications
     weight: 6
+  - name: Rules
+    url: security_platform/notifications/rules/
+    parent: security_notifications
+    identifier: security_notification_rules
+    weight: 601
+  - name: Variables
+    url: security_platform/notifications/variables/
+    parent: security_notifications
+    identifier: security_notification_variables
+    weight: 602    
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
@@ -2610,7 +2621,7 @@ main:
     url: synthetics/api_tests/icmp_tests
     parent: api_tests
     weight: 107
-  - name: GRPC Health Checks
+  - name: GRPC
     url: synthetics/api_tests/grpc_tests
     parent: api_tests
     weight: 108
@@ -2695,6 +2706,11 @@ main:
     parent: synthetics_cicd_integrations
     identifier: synthetics_testing_tunnel
     weight: 606
+  - name: Troubleshooting
+    url: /synthetics/cicd_integrations/troubleshooting
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_troubleshooting
+    weight: 607
   - name: CI Results Explorer
     url: /synthetics/explorer
     parent: synthetics
@@ -6734,8 +6750,7 @@ api:
         - v1
       operationids:
         - GetUsageAttribution
-      unstable:
-        - v1
+      unstable: []
       order: 40
   - name: Get hourly usage for analyzed logs
     url: '#get-hourly-usage-for-analyzed-logs'
@@ -6759,8 +6774,7 @@ api:
         - v1
       operationids:
         - GetSpecifiedMonthlyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 44
   - name: Get the list of available monthly custom reports
     url: '#get-the-list-of-available-monthly-custom-reports'
@@ -6772,8 +6786,7 @@ api:
         - v1
       operationids:
         - GetMonthlyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 43
   - name: Get specified daily custom reports
     url: '#get-specified-daily-custom-reports'
@@ -6785,8 +6798,7 @@ api:
         - v1
       operationids:
         - GetSpecifiedDailyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 42
   - name: Get the list of available daily custom reports
     url: '#get-the-list-of-available-daily-custom-reports'
@@ -6798,8 +6810,7 @@ api:
         - v1
       operationids:
         - GetDailyCustomReports
-      unstable:
-        - v1
+      unstable: []
       order: 41
   - name: Users
     url: /api/latest/users/

@@ -1,19 +1,19 @@
 ---
-title: AIX 用 Agent の基本的な使用方法
-kind: documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
+- link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
   tag: ブログ
   text: Datadog Unix Agent を使用した AIX の監視
+kind: documentation
+title: AIX 用 Agent の基本的な使用方法
 ---
 
 <div class="alert alert-info">
-Datadog Unix Agent は特定のシステムアーキテクチャ向けに開発されており、Agents 5 および 6 とは異なります。
+Datadog Unix Agent は特定のシステムアーキテクチャ向けに開発されており、Windows、Linux、MacOS Agent とは異なります。
 </div>
 
 このページでは、AIX 用 Datadog UNIX Agent のインストールと構成について説明します。
 
-**注**: Datadog Unix Agent は、現在、以下のバージョンの AIX をサポートしています。
+**注**: Datadog Unix Agent は、PowerPC 8 以降および以下のバージョンの AIX をサポートしています。
 
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
@@ -37,14 +37,14 @@ Datadog の [Agent ダウンロードページ][1]に、ワンステップの ks
 インストーラは次のように実行できます (ルートとして実行)。
 
 {{< code-block lang="bash" wrap="true" >}}
-installp -aXYgd ./datadog-unix-agent-<バージョン>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
+installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
 これで、Agent が `/opt/datadog-agent` にインストールされます。
 
 ### インストールログファイル
 
-Agent のインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、インストールコマンドの `-e` パラメーターを削除します。
+Agent のインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、インストールコマンドの `-e dd-aix-install.log` パラメーターを削除します。
 
 ## コマンド
 
@@ -59,19 +59,11 @@ Agent のインストールログは、`dd-aix-install.log` ファイルに記�
 
 ## 構成
 
-Agent の構成ファイルおよびフォルダーは、
-`/etc/datadog-agent/datadog.yaml` にあります。
-したがって、構成ファイルは次の順番で検索されます (最初に一致したものが使用されます)。
+Agent のコンフィギュレーションファイルおよびフォルダーは `/etc/datadog-agent/datadog.yaml` にあります
 
-* `/etc/datadog-agent/datadog.yaml`
-* `./etc/datadog-agent/datadog.yaml`
-* `./datadog.yaml`
+コンフィギュレーションファイルのサンプルが `/etc/datadog-agent/datadog.yaml.example` にあります。
 
-コンフィギュレーションファイルのサンプルが `/etc/datadog-agent` にあります。
-
-基本的な構成では、通常、Datadog API キーが必要です。メトリクスを EU インスタンスに送信するために、`site` 構成オプションを使用できます。
-
-`dd_url` を手動で上書きすることもできますが、通常は必要ありません。
+基本的なコンフィギュレーションでは、通常、Datadog API キーが必要です。メトリクスを別のサイト (たとえば、EU インスタンス) に送信するために、`site` コンフィギュレーションオプションを使用できます。
 
 ネットワーク設定によっては、プロキシ構成を指定する必要があります。
 
@@ -80,14 +72,28 @@ Agent の構成ファイルおよびフォルダーは、
 
 ## インテグレーション
 
-以下のインテグレーションが追加されています。
+Unix Agent は、次のシステムメトリクスを収集します。
 
-* process
-* lparstats
+* cpu
+* ファイルシステム
+* iostat
+* load
+* memory
+* uptime
 * disk
 * ネットワーク
 
-上記のインテグレーションを有効にするには、提供されている構成ファイルサンプルをコピーして編集します。サンプルは、`/etc/datadog-agent/conf.d` にあります。YAML 構成ファイルの名前は、インテグレーションの名前と一致させる必要があります。`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` はインテグレーション `<INTEGRATION_NAME>` を有効にし、その構成を設定します。
+さらに、次のインテグレーションを有効にして、さらにメトリクスを収集できます。
+
+* process
+* lparstats
+* [ibm_was (Websphere Application Server)][3]
+
+提供されているコンフィギュレーションファイルサンプルをコピーして編集し、上記のインテグレーションを有効にします。サンプルは、`/etc/datadog-agent/conf.d` にあります。YAML コンフィギュレーションファイルの名前は、インテグレーションの名前と一致させる必要があります。`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` はインテグレーション `<INTEGRATION_NAME>` を有効にし、そのコンフィギュレーションを設定します。コンフィギュレーションファイルの例は、`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example` にあります。
+
+**注**: 使用可能なメトリクスの一部は、Unix Agent のインテグレーションと、Linux、Windows、MacOS のインテグレーションとで異なります。Unix Agent を使用してプロセスとネットワークメトリクスを監視することは可能ですが、ライブプロセスモニタリングとネットワークパフォーマンスモニタリング機能は利用できません。
+
+<div class="alert alert-info">Unix Agent には trace-agent コンポーネントがないため、APM のトレースやプロファイリングはサポートされていません。</div>
 
 ## DogStatsD の実行
 
@@ -107,7 +113,7 @@ dogstatsd:                        # DogStatsD 構成オプション
 
 **注**: DogStatsD はデーモン化されずに、フォアグラウンドで実行されます。
 
-既存の Python スーパーバイザーから Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
+既存の Python スーパーバイザーで Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
 
 ## アンインストール
 
@@ -125,3 +131,4 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 
 [1]: https://app.datadoghq.com/account/settings#agent/aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
+[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

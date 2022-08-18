@@ -16,6 +16,8 @@ The table visualization is available on dashboards. It displays columns of aggre
 
 {{< img src="dashboards/widgets/table/table_widget_1.png" alt="Table widget" style="width:80%;">}}
 
+**Note:** Only numerical data is supported for the table widget.
+
 ## Setup
 
 ### Configuration

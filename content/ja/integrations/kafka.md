@@ -1,12 +1,25 @@
 ---
+app_id: kafka
+app_uuid: 39640d5e-54be-48ff-abf1-8871499e2fd3
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     kafka: assets/dashboards/kafka_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kafka.net.bytes_out.rate
+      metadata_path: metadata.csv
+      prefix: kafka.
+    process_signatures:
+    - java kafka.kafka
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kafka
   logs:
     source: kafka
-  metrics_metadata: metadata.csv
   monitors:
     '[Kafka] High produce latency on broker': assets/monitors/broker_produce_latency.json
     '[Kafka] High producer request rate': assets/recommended_monitors/kafka_high_producer_request_rate.json
@@ -16,38 +29,51 @@ assets:
     kafka_patterns: assets/saved_views/kafka_patterns.json
     kafka_processes: assets/saved_views/kafka_processes.json
     logger_overview: assets/saved_views/logger_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
 - messaging
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kafka/README.md
-display_name: Kafka
+display_on_public_website: true
 draft: false
 git_integration_title: kafka
-guid: f201c0b7-4b31-4528-9955-ae756a4580b8
 integration_id: kafka
 integration_title: Kafka
 integration_version: 2.13.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kafka.
-metric_to_check: kafka.net.bytes_out.rate
+manifest_version: 2.0.0
 name: kafka
-process_signatures:
-- java kafka.kafka
-public_title: Kafka インテグレーション
+oauth: {}
+public_title: Kafka
 short_description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::メッセージング
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kafka
 ---
 
 

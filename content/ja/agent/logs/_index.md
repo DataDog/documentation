@@ -25,7 +25,7 @@ further_reading:
 
 Datadog Agent では、ログの収集はデフォルトで**有効になっていません**。Agent を Kubernetes または Docker 環境で実行している場合は、専用の [Kubernetes ログ収集][2]または [Docker ログ収集][3]のドキュメントを参照してください。
 
-ホストで実行されている Agent でログ収集を有効にするには、Agent の[メインコンフィギュレーションファイル][4] (`datadog.yaml`) で `logs_enabled:false` を `logs_enabled:true` に変更します。
+ホストで実行されている Agent でログ収集を有効にするには、Agent の[メインコンフィギュレーションファイル][4] (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。
 
 {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 

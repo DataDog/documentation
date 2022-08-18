@@ -24,17 +24,62 @@ further_reading:
 ---
 **Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
 
-## Getting started
+## Installation and getting started
 
-If you already have a Datadog account you can find [step-by-step instructions][4] in our in-app guides for either host-based or container-based set ups.
+### Follow the in-app documentation (recommended)
 
-Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][5].
+Follow the [Quickstart instructions][4] within the Datadog app for the best experience, including:
 
-Compile against [OpenTracing-cpp][6].
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable features such as ingesting 100% of traces, and Trace ID injection into logs during setup.
 
-## Installation
+## Configure the Datadog Agent for APM
 
-Datadog tracing can be enabled in one of two ways:
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+
+{{< tabs >}}
+{{% tab "Containers" %}}
+
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
+
+2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables.
+
+To connect to the Agent using Unix Domain Sockets, use `DD_TRACE_AGENT_URL` instead. Set it to the same value as the Agent's value for `DD_APM_RECEIVER_SOCKET`.
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
+
+
+[1]: /tracing/serverless_functions/
+{{% /tab %}}
+{{% tab "Other Environments" %}}
+
+Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+
+For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[4]: /infrastructure/serverless/azure_app_services/#overview
+[5]: /integrations/
+[6]: /help/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Instrument your application
+
+After the Agent is installed, follow these steps to add the Datadog tracing library to your C++ applications in one of two ways:
 
 * Compile against dd-opentracing-cpp, where the Datadog lib is compiled in and configured in code
 * Dynamic loading, where the Datadog OpenTracing library is loaded at runtime and configured via JSON
@@ -171,51 +216,6 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 ```
 
 **Note**: OpenTracing requires C++ 11 or higher.
-
-## Configure the Datadog Agent for APM
-
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
-
-{{< tabs >}}
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
-
-`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
-
-To connect to the agent using Unix Domain Sockets, `DD_TRACE_AGENT_URL` can be used instead. The value should match the Agent's value for `DD_APM_RECEIVER_SOCKET`.
-
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
-
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
-
-For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
-[5]: /integrations/
-[6]: /help/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Configuration
 
