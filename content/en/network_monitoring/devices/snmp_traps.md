@@ -57,7 +57,7 @@ An SNMP Trap consists of:
 - An OID that defines the type of trap
 - "Variables"—that is, a list of pairs (`OID:value`) that provides additional context for the trap.
 
-Decoding is performed on the Agent side, using a mapping stored on disk under `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/dd_traps_db.json.gz`. Datadog supports more than 11k different management information bases (MIBs).
+Decoding is performed on the Agent side, using a mapping stored on disk at `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/dd_traps_db.json.gz`. Datadog supports more than 11,000 different management information bases (MIBs).
 
 ### Mapping format
 
@@ -103,7 +103,7 @@ vars:
 
 ### Extend the Agent
 
-To extend the capabilities of the Agent, create your own mappings and drop them into the `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/` directory.
+To extend the capabilities of the Agent, create your own mappings and place them in the `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/` directory.
 
 You can write these mappings by hand, or generate mappings from a list of MIBs using Datadog's developer toolkit, [`ddev`][4].
 
