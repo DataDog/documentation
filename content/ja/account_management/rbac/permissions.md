@@ -21,7 +21,7 @@ title: Datadog ロールのアクセス許可
 
 一般許可は、各ロールのユーザーに対して基本的なアクセス権を許可するものです。[高度な許可](#advanced-permissions)は、一般許可に加えて付与される特定目的の許可を指します。
 
-{{< permissions group="一般" >}}
+{{< permissions group="General" >}}
 
 **注**: ロールに `standard` アクセス許可の両方がないことにより定義されるため、`read-only` アクセス許可はありません。
 
