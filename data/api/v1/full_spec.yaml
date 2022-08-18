@@ -4174,6 +4174,7 @@ components:
       - audit_stream
       - rum_issue_stream
       - apm_issue_stream
+      - logs_pattern_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4181,6 +4182,7 @@ components:
       - AUDIT_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - LOGS_PATTERN_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -6294,6 +6296,17 @@ components:
           format: int64
           nullable: true
           type: integer
+        group_retention_duration:
+          description: 'The time span after which groups with missing data are dropped
+            from the monitor state.
+
+            The minimum value is one hour, and the maximum value is 72 hours.
+
+            Example values are: "60m", "1h", and "2d".
+
+            This option is only available for APM Trace Analytics, Audit Trail, CI,
+            Error Tracking, Event, Logs, and RUM monitors.'
+          type: string
         groupby_simple_monitor:
           description: Whether the log alert monitor triggers a single alert or multiple
             alerts when any group breaches a threshold.
@@ -6384,6 +6397,8 @@ components:
           description: A Boolean indicating whether this monitor notifies when data
             stops reporting.
           type: boolean
+        on_missing_data:
+          $ref: '#/components/schemas/OnMissingDataOption'
         renotify_interval:
           default: null
           description: "The number of minutes after the last notification before a
@@ -8089,6 +8104,32 @@ components:
           format: int64
           type: integer
       type: object
+    OnMissingDataOption:
+      description: 'Controls how groups or monitors are treated if an evaluation does
+        not return any data points.
+
+        The default option results in different behavior depending on the monitor
+        query type.
+
+        For monitors using Count queries, an empty monitor evaluation is treated as
+        0 and is compared to the threshold conditions.
+
+        For monitor using any query type other than Count, for example Gauge or Rate,
+        the monitor shows the last known status.
+
+        This option is only available for APM Trace Analytics, Audit Trail, CI, Error
+        Tracking, Event, Logs, and RUM monitors.'
+      enum:
+      - default
+      - show_no_data
+      - show_and_notify_no_data
+      - resolve
+      type: string
+      x-enum-varnames:
+      - DEFAULT
+      - SHOW_NO_DATA
+      - SHOW_AND_NOTIFY_NO_DATA
+      - RESOLVE
     OrgDowngradedResponse:
       description: Status of downgrade
       properties:
@@ -18484,7 +18525,12 @@ paths:
   /api/v1/daily_custom_reports:
     get:
       deprecated: true
-      description: Get daily custom reports.
+      description: 'Get daily custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetDailyCustomReports
       parameters:
       - description: The number of files to return in the response. `[default=60]`.
@@ -18544,13 +18590,15 @@ paths:
       x-menu-order: 41
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/daily_custom_reports/{report_id}:
     get:
       deprecated: true
-      description: Get specified daily custom reports.
+      description: 'Get specified daily custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetSpecifiedDailyCustomReports
       parameters:
       - description: Date of the report in the format `YYYY-MM-DD`.
@@ -18595,9 +18643,6 @@ paths:
       x-menu-order: 42
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/dashboard:
     delete:
       description: Delete dashboards using the specified IDs. If there are any failures,
@@ -24614,7 +24659,12 @@ paths:
   /api/v1/monthly_custom_reports:
     get:
       deprecated: true
-      description: Get monthly custom reports.
+      description: 'Get monthly custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetMonthlyCustomReports
       parameters:
       - description: The number of files to return in the response `[default=60].`
@@ -24674,13 +24724,15 @@ paths:
       x-menu-order: 43
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/monthly_custom_reports/{report_id}:
     get:
       deprecated: true
-      description: Get specified monthly custom reports.
+      description: 'Get specified monthly custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetSpecifiedMonthlyCustomReports
       parameters:
       - description: Date of the report in the format `YYYY-MM-DD`.
@@ -24731,9 +24783,6 @@ paths:
       x-menu-order: 44
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/notebooks:
     get:
       description: 'Get all notebooks. This can also be used to search for notebooks
@@ -28526,7 +28575,12 @@ paths:
   /api/v1/usage/attribution:
     get:
       deprecated: true
-      description: Get usage attribution.
+      description: 'Get usage attribution.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -28615,9 +28669,6 @@ paths:
       x-menu-order: 40
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/audit_logs:
     get:
       description: 'Get hourly usage for audit logs.

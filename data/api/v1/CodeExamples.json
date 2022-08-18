@@ -549,6 +549,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Validate a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_4247196452",
+      "description": "Validate a multi-alert monitor returns \"OK\" response"
     }
   ],
   "ValidateExistingMonitor": [
