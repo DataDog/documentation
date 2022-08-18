@@ -36,7 +36,7 @@ For top issues, you can sort by:
 * First seen
 * Impacted sessions
 
-Changing the "Sorting by" selection does not change the columns displayed. If you change your list to sort by impacted sessions, and want to see this on your widget, you must also select or add "Impacted Sessions" to the graph editor.
+**Note:** Changing the "Sorting by" selection does not change the columns displayed. If you change your list to sort by impacted sessions, and want to see this on your widget, you must also select or add "Impacted Sessions" to the graph editor.
 
 ## API
 
