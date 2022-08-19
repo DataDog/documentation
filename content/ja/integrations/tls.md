@@ -1,41 +1,64 @@
 ---
+app_id: tls
+app_uuid: 347d6721-fe59-4215-a4f6-415feb4dda0c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     TLS Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: tls.seconds_left
+      metadata_path: metadata.csv
+      prefix: tls.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TLS
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - ネットワーク
 - web
 - オートディスカバリー
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
-display_name: TLS
+display_on_public_website: true
 draft: false
 git_integration_title: tls
-guid: 4e27a211-a034-42dd-9939-9ef967b1da50
 integration_id: tls
 integration_title: TLS
-integration_version: 2.8.0
+integration_version: 2.9.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: tls.
-metric_to_check: tls.seconds_left
+manifest_version: 2.0.0
 name: tls
-public_title: TLS インテグレーション
+oauth: {}
+public_title: TLS
 short_description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Web
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TLS
 ---
 
 

@@ -40,6 +40,9 @@ Datadog は、低レイテンシー、数秒単位の粒度、コールドスタ
 `aws.lambda.enhanced.runtime_duration`
 : 関数のコードが実行を開始してから、クライアントにレスポンスを返すまでの経過ミリ秒を測定します。ただし、Lambda 拡張機能の実行によって追加されるランタイム後の時間は除きます。
 
+`aws.lambda.enhanced.post_runtime_duration`
+: 関数コードがクライアントに応答を返してから、関数の実行が停止するまでの経過ミリ秒を測定し、Lambda 拡張機能の実行によって追加される時間を表します。
+
 `aws.lambda.enhanced.estimated_cost`  
 : 関数呼び出しの推定総コスト (米ドル) を測定します。
 

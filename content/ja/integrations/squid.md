@@ -1,42 +1,66 @@
 ---
+app_id: squid
+app_uuid: de18c581-69ee-48cf-ba23-7794bfb7a4bd
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: squid.cachemgr.cpu_time
+      metadata_path: metadata.csv
+      prefix: squid.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Squid
   logs:
     source: squid
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - caching
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/squid/README.md
-display_name: Squid
+display_on_public_website: true
 draft: false
 git_integration_title: squid
-guid: e7d4b233-b32a-46f9-8cb2-c582ee8fd251
 integration_id: squid
 integration_title: Squid
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: squid.
-metric_to_check: squid.cachemgr.cpu_time
+manifest_version: 2.0.0
 name: squid
-public_title: Squid インテグレーション
+oauth: {}
+public_title: Squid
 short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::キャッシュ
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Squid
 ---
 
 
