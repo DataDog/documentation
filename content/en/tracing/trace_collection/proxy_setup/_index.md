@@ -304,8 +304,13 @@ Datadog APM supports Nginx in multiple configurations:
 - Nginx as an Ingress Controller for Kubernetes.
 
 ## Nginx with Datadog module
-Datadog provides an Nginx module for distributed tracing. This module is 
-currently in beta.
+Datadog provides an Nginx module for distributed tracing.
+
+<div class="alert alert-warning">
+Datadog Nginx module is in beta. Send feedback to
+<a href="https://docs.datadoghq.com/help/">support</a>.
+We'd love to hear about your experience with the new module.
+</div>
 
 ### Module installation
 There is one version of the Datadog Nginx module for each [Nginx Docker image
