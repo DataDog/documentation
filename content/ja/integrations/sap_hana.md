@@ -1,39 +1,60 @@
 ---
+app_id: sap-hana
+app_uuid: 53d66afa-de92-4f09-9514-778324f38f5c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     SAP HANA Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sap_hana.uptime
+      metadata_path: metadata.csv
+      prefix: sap_hana.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SAP HANA
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
-display_name: SAP HANA
+display_on_public_website: true
 draft: false
 git_integration_title: sap_hana
-guid: 85dace7c-baf5-4bcc-9fbb-4d3a6b841359
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sap_hana.
-metric_to_check: sap_hana.uptime
+manifest_version: 2.0.0
 name: sap_hana
-public_title: SAP HANA インテグレーション
+oauth: {}
+public_title: SAP HANA
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SAP HANA
 ---
 
 
@@ -52,7 +73,7 @@ SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれて�
 Unix: の場合:
 
 ```text
-/opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
 ```
 
 Windows の場合:
