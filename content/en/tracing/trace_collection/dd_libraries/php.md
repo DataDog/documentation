@@ -122,7 +122,7 @@ This command installs the extension to all the PHP binaries found in the host or
 
 Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
 
-Note that even when not specifying `--enable-appsec`, the appsec extension will be shortly loaded at startup, but not enabled by default. It will immediately be short-circuited out, causing negligible performance overhead.
+When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
 
 <div class="alert alert-info">
 <strong>Note:</strong>
