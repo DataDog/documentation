@@ -24,17 +24,17 @@ You can add the YAML configuration to your `datadog.yaml` or launch the Agent wi
 In `datadog.yaml`:
 ```yaml
 additional_endpoints:
-  "mydomain.datadoghq.com":
+  "https://mydomain.datadoghq.com":
   - apikey2
   - apikey3
-  "mydomain.datadoghq.eu":
+  "https://mydomain.datadoghq.eu":
   - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_ADDITIONAL_ENDPOINTS='{\"mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -47,26 +47,26 @@ In `datadog.yaml`:
 apm_config:
   [...]
   additional_endpoints:
-    "mydomain.datadoghq.com":
+    "https://mydomain.datadoghq.com":
     - apikey2
     - apikey3
-    "mydomain.datadoghq.eu":
+    "https://mydomain.datadoghq.eu":
     - apikey4
 
   profiling_additional_endpoints:
-    "mydomain.datadoghq.com":
+    "https://mydomain.datadoghq.com":
     - apikey2
     - apikey3
-    "mydomain.datadoghq.eu":
+    "https://mydomain.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_APM_ADDITIONAL_ENDPOINTS='{\"mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -79,17 +79,17 @@ In `datadog.yaml`:
 process_config:
   [...]
   additional_endpoints:
-    "mydomain.datadoghq.com":
+    "https://mydomain.datadoghq.com":
     - apikey2
     - apikey3
-    "mydomain.datadoghq.eu":
+    "https://mydomain.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -102,17 +102,17 @@ In `datadog.yaml`:
 orchestrator_explorer:
   [...]
   orchestrator_additional_endpoints:
-    "mydomain.datadoghq.com":
+    "https://mydomain.datadoghq.com":
     - apikey2
     - apikey3
-    "mydomain.datadoghq.eu":
+    "https://mydomain.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -127,17 +127,17 @@ In `datadog.yaml`:
 evp_proxy_config:
   [...]
   additional_endpoints:
-    "mydomain.datadoghq.com":
+    "https://mydomain.datadoghq.com":
     - apikey2
     - apikey3
-    "mydomain.datadoghq.eu":
+    "https://mydomain.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -320,10 +320,10 @@ and add the relevant settings to `customAgentConfig`.
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
     additional_endpoints:
-      "mydomain.datadoghq.com":
+      "https://mydomain.datadoghq.com":
       - apikey2
       - apikey3
-      "mydomain.datadoghq.eu":
+      "https://mydomain.datadoghq.eu":
       - apikey4 
 
     logs_config:
