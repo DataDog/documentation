@@ -1,48 +1,70 @@
 ---
+app_id: singlestore
+app_uuid: 5e8c3b5f-278f-4423-90d9-969c06a478eb
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Singlestore Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: singlestore.bytes_received
+      metadata_path: metadata.csv
+      prefix: singlestore.
+    process_signatures:
+    - memsqld
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SingleStore
   logs:
     source: singlestore
-  metrics_metadata: metadata.csv
   monitors:
     '[SingleStore] License expiration': assets/monitors/license_expiration.json
     '[SingleStore] Read failures rate': assets/monitors/read_failures.json
     '[SingleStore] Write failures rate': assets/monitors/write_failures.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md
-display_name: SingleStore
+display_on_public_website: true
 draft: false
 git_integration_title: singlestore
-guid: d40f153d-d02d-4bcc-9a7d-04bf5ba46e7a
 integration_id: singlestore
 integration_title: SingleStore
-integration_version: 1.3.0
+integration_version: 1.3.1
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: singlestore.
-metric_to_check: singlestore.bytes_received
+manifest_version: 2.0.0
 name: singlestore
-process_signatures:
-- memsqld
+oauth: {}
 public_title: SingleStore
 short_description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SingleStore
 ---
 
 
