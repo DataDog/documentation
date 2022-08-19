@@ -1,39 +1,52 @@
 ---
+app_id: windows-performance-counters
+app_uuid: ec86de4d-a080-4160-8b0a-b937bbea08e9
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Windows パフォーマンスカウンター
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - iot
 - OS & システム
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_performance_counters/README.md
-display_name: Windows パフォーマンスカウンター
+display_on_public_website: true
 draft: false
 git_integration_title: windows_performance_counters
-guid: 18cca521-450e-477c-8334-e0d29aebc150
 integration_id: windows-performance-counters
 integration_title: Windows パフォーマンスカウンター
-integration_version: 1.2.0
+integration_version: 1.3.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ''
-metric_to_check: ''
+manifest_version: 2.0.0
 name: windows_performance_counters
+oauth: {}
 public_title: Windows パフォーマンスカウンター
 short_description: Windows OS のパフォーマンスカウンターを監視します。
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::IOT
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Windows OS のパフォーマンスカウンターを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Windows パフォーマンスカウンター
 ---
 
 
