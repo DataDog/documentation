@@ -21,7 +21,7 @@ To start collecting logs from your AWS services:
 2. [Enable logging](#enable-logging-for-your-aws-service) for your AWS service (most AWS services can log to a S3 bucket or CloudWatch Log Group).
 3. [Set up the triggers](#set-up-triggers) that cause the Forwarder Lambda to execute when there are new logs to be forwarded. There are two ways to configure the triggers.
 
-**Note**: If you are in AWS us-east-1 region, leverage [Datadog-AWS Private Link][2].
+**Note**: If you are in AWS `us-east-1` region, leverage [Datadog-AWS Private Link][2].
 
 **Note**: Cloudformation creates an IAM policy which includes KMS:Decrypt for all resources. It is known that this does not align with Security hub best practice. The reason this permission is used is to decrypt objects from KMS encrypted S3 buckets to set up Lambda function, and which KMS key is used to encrypt the S3 buckets cannot be predicted. You can safely delete this permission after the installation successfully finished.
 
@@ -88,14 +88,14 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | Lists the subscription filters for the specified log group.                  |
 
-3. Navigate to the _Collect Logs_ tab in the [AWS Integration tile][4].
-4. Select the AWS Account from where you want to collect logs, and enter the ARN of the Lambda created in the previous section.
-   {{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda" popup="true" style="width:80%;" >}}
-5. Select the services from which you'd like to collect logs and click save. To stop collecting logs from a particular service, uncheck it.
-   {{< img src="logs/aws/AWSLogStep2.png" alt="Select services" popup="true" style="width:80%;" >}}
-6. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
-7. To stop collecting all AWS logs, press the _x_ next to each Lambda ARN. All triggers for that function are removed.
-8. Within a few minutes of this initial setup, your AWS Logs appear in your Datadog [log explorer page][5] in near real time.
+3. In the [AWS Integration page][4], select the AWS Account to collect logs from, and select the **Log Collection** tab.  
+   {{< img src="logs/aws/aws_log_setup_step1.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with instructions to send AWS Services logs and a textbox to autosubscribe the Forwarder Lambda function by entering the ARN of the Forwarder Lambda function" popup="true" style="width:80%;" >}}
+4. Enter the ARN of the Lambda created in the previous section, and click **Add**.
+5. Select the services from which you'd like to collect logs, and click **Save**. To stop collecting logs from a particular service, uncheck it.
+   {{< img src="logs/aws/aws_log_setup_step2.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with one Lambda function successfully entered under Included ARNs and some of the services enabled under Log Sources" popup="true" style="width:80%;" >}}
+6. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this page.
+7. To stop collecting all AWS logs, click the trash bin icon which appears when hovering over each Lambda. All triggers for that function are removed.
+8. Within a few minutes of this initial setup, your AWS Logs arrive in your Datadog [log explorer page][5] in near real time.
 
 ### Manually set up triggers
 
@@ -243,7 +243,7 @@ You can also exclude or send only those logs that match a specific pattern by us
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support
 [3]: /integrations/amazon_web_services/
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://app.datadoghq.com/logs
 [6]: /integrations/amazon_api_gateway/
 [7]: /integrations/amazon_api_gateway/#log-collection
