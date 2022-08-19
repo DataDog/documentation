@@ -13201,14 +13201,12 @@ components:
       enum:
       - not_scheduled
       - scheduled
-      - started
       - finished
       - finished_with_error
       type: string
       x-enum-varnames:
       - NOT_SCHEDULED
       - SCHEDULED
-      - STARTED
       - FINISHED
       - FINISHED_WITH_ERROR
     SyntheticsTestRequest:
