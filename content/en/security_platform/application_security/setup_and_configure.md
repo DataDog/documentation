@@ -178,8 +178,7 @@ It supports the use of all PHP frameworks, and also the use no framework.
 
 The Datadog NodeJS library supports the following NodeJS versions:
 
-- NodeJS 13.10.0 and higher
-- NodeJS 12.17.0 and higher
+- NodeJS 14 and higher
 
 These are supported on the following architectures:
 
