@@ -122,6 +122,8 @@ This command installs the extension to all the PHP binaries found in the host or
 
 Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
 
+Note that even when not specifying `--enable-appsec`, the appsec extension will be shortly loaded at startup, but not enabled by default. It will immediately be short-circuited out, causing negligible performance overhead. To disable the modules anyway, the best practice is to set `datadog.appsec.enabled=Off` in the `98-ddtrace.ini` file.
+
 <div class="alert alert-info">
 <strong>Note:</strong>
 It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
@@ -131,6 +133,8 @@ It may take a few minutes before traces appear in the UI. If traces still do not
 <strong>Apache ZTS:</strong>
 If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
+
+
 
 
 ## Automatic instrumentation
