@@ -25,17 +25,17 @@ Billing of [GKE Autopilot][5] environments is the same as that of [GKE Standard]
 
 ## Frequently asked questions
 
-**How does Datadog measure on-demand usage?**
+**How does Datadog measure hourly on-demand usage?**
 
-Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (10/host for Pro and 20/host for Enterprise) and any container commitment. The containers exceeding the allotment are averaged out over the hour to calculate the hourly on-demand usage. This method normalizes the on-demand usage for short term spikes and variations between hosts.
+Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (10/host for Pro and 20/host for Enterprisei by default) and any contracted container commitment. The number containers exceeding the allotment are averaged out over the hour to calculate the hourly on-demand usage. This method normalizes the on-demand usage for short term spikes and variations between hosts.
 
-**What if I run many containers for a short period of time?**
+**What if a user runs a particularly high number of containers for a short period of time?**
 
-As stated above, on-demand container usage is calculated in five minute intervals, and the usage is measured by the fractional hours of monitored containers. If you have 1200 on-demand containers during a single five-minute interval (1/12 of an hour), these containers are metered as 100 container-hours (1200/12).
+Using the hourly on-demand usage calculation above, if there are 1200 on-demand containers during a single five-minute interval (1/12 of an hour), these containers are metered as 100 container hours (1200/12).
 
-**What if some of my hosts run very few containers and other hosts run many?**
+**What if containers are unevenly distributed across hosts?**
 
-As long as the number of total running containers does not exceed the total allotment for the account, these are included in your infrastructure plan.
+As long as the number of total running containers does not exceed the total allotment for the account, these are included in the account's infrastructure plan.
 
 **I am using autoscaling groups, and I have peak and off-peak hours. How does this affect my on-demand container usage?**
 
@@ -45,9 +45,9 @@ The on-demand calculations are performed using the allotment that is based on th
 
 Yes.
 
-**I have a pod in CrashLoopBackoff. Are those containers counted?**
+**Are containers belonging to pods in constant `CrashLoopBackoff` counted?**
 
-If a container in the pod is running for over ten seconds, it is be counted against the allotment during the metering interval. Since the pod is unhealthy, the data collected in these situations is valuable for troubleshooting. Also, the data is tagged by the pod name, so as underlying containers attempt to re-run (each time as a new `container_id`) all of the context (such as relevant events and log entries) is kept together in the pod view.
+If a container in the pod is running for over ten seconds, it is counted against the allotment during the metering interval. Since the pod is unhealthy, the data collected in these situations is valuable for troubleshooting. Also, the data is tagged by the pod name, so as underlying containers attempt to re-run (each time as a new `container_id`) all of the context (such as relevant events and log entries) is kept together in the pod view.
 
 
 ## Troubleshooting
