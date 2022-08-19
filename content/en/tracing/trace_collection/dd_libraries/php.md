@@ -135,8 +135,6 @@ If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS
 </div>
 
 
-
-
 ## Automatic instrumentation
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
