@@ -1,43 +1,67 @@
 ---
+app_id: snowflake
+app_uuid: 23e9084d-5801-4a71-88fe-f62b7c1bb289
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Snowflake: assets/dashboards/snowflake.json
     Snowflake Organization Metrics: assets/dashboards/organization_metrics.json
-  metrics_metadata: metadata.csv
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: snowflake.storage.storage_bytes.total
+      metadata_path: metadata.csv
+      prefix: snowflake.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Snowflake
   monitors:
     Snowflake failed logins: assets/recommended_monitors/snowflake_failed_logins.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - data store
 - コスト管理
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
-display_name: Snowflake
+display_on_public_website: true
 draft: false
 git_integration_title: snowflake
-guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake
 integration_title: Snowflake
-integration_version: 4.4.2
+integration_version: 4.4.3
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: snowflake.
-metric_to_check: snowflake.storage.storage_bytes.total
+manifest_version: 2.0.0
 name: snowflake
-public_title: Snowflake インテグレーション
+oauth: {}
+public_title: Snowflake
 short_description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Data Store
+  - Category::Cost Management
+  configuration: README.md#Setup
+  description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Snowflake
 ---
 
 

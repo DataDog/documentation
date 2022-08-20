@@ -91,7 +91,7 @@ For more information, see the [JavaScript tracer installation docs][5].
 ## Instrument your tests
 
 {{< tabs >}}
-{{% tab "Jest/Mocha/Cucumber" %}}
+{{% tab "Jest/Mocha" %}}
 Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 {{< code-block lang="bash" >}}
@@ -112,6 +112,63 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
+### Adding custom tags to tests
+
+You can add custom tags to your tests by using the current active span:
+
+```javascript
+  it('sum function can sum', () => {
+    const testSpan = require('dd-trace').scope().active()
+    testSpan.setTag('team.owner', 'calculator')
+    testSpan.setTag('test.importance', 2)
+    // test continues normally
+    // ...
+  })
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+{{% /tab %}}
+
+{{% tab "Cucumber" %}}
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+{{< /code-block >}}
+
+### Using Yarn >=2
+
+If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix this by setting `NODE_OPTIONS` to the following:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+{{< /code-block >}}
+
+### Adding custom tags to tests
+
+You can add custom tags to your test by grabbing the current active span:
+
+```javascript
+  When('the function is called', function () {
+    const stepSpan = require('dd-trace').scope().active()
+    stepSpan.setTag('team.owner', 'calculator')
+    stepSpan.setTag('test.importance', 2)
+    // test continues normally
+    // ...
+  });
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -188,24 +245,32 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 
-#### Add extra tags to your Cypress test
+### Adding custom tags to tests
 
 To add additional information to your tests, such as the team owner, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
 For example:
 
-{{< code-block lang="javascript">}}
+```javascript
 beforeEach(() => {
-  cy.task('dd:addTags', { 'before.each': 'certain.information' })
+  cy.task('dd:addTags', {
+    'before.each':
+    'certain.information'
+  })
 })
 it('renders a hello world', () => {
-  cy.task('dd:addTags', { 'team.owner': 'ui' })
+  cy.task('dd:addTags', {
+    'team.owner': 'ui',
+    'test.importance': 3
+  })
   cy.get('.hello-world')
     .should('have.text', 'Hello World')
 })
-{{< /code-block >}}
+```
 
-#### Cypress - RUM integration
+To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
+
+### Cypress - RUM integration
 
 If the browser application being tested is instrumented using [RUM][5], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][6] guide.
 

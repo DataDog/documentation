@@ -51,9 +51,9 @@ Datadog の Azure App Service 向け拡張機能は、追加モニタリング�
 
 2. この拡張機能は、以下のリソースタイプに対応しています。
     - Azure App Service Web Apps
-    - Basic、Standard、Premium、または Isolated App Service プランでホストされている Function App。
+    - Basic、Standard、Premium プランでホストされている Function App。
 
-    <div class="alert alert-warning">他の App Service リソースタイプやランタイムのサポートに興味がありますか？<a href="https://forms.gle/n4nQcxEyLqDBMCDA7">サインアップ</a>して、ベータ版が利用可能になったらお知らせを受け取りましょう。</div>
+    <div class="alert alert-warning">消費プランの Function App、プロセス外 (分離) 関数には対応していません。他の App Service リソースタイプやランタイムのサポートに興味がありますか？ベータ版が利用可能になったら、<a href="https://forms.gle/n4nQcxEyLqDBMCDA7">サインアップ</a>してお知らせを受け取りましょう。</div>
 
 3. Datadog .NET APM 拡張機能は、Windows OS 上で稼働する x64 と x86 アーキテクチャの双方で以下の .NET ランタイムをサポートします (AAS は Linux での拡張機能をサポートしていません) 。自動的にインスツルメントされたライブラリの詳細については、[トレーサーのドキュメント][2]を参照してください。
 
@@ -157,7 +157,7 @@ DogStatsd.Increment("sample.startup");
 [2]: /ja/tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /ja/tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
+[5]: /ja/tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [6]: /ja/logs/log_collection/csharp/#agentless-logging-with-apm
 [7]: /ja/logs/log_collection/csharp/#agentless-logging-with-serilog-sink
 [8]: /ja/developers/dogstatsd
@@ -238,7 +238,7 @@ client.Increment("sample.startup");
 [2]: /ja/tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /ja/tracing/setup_overview/setup/dotnet-framework/#additional-optional-configuration
+[5]: /ja/tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [6]: /ja/logs/log_collection/csharp/?tab=serilog#agentless-logging
 [7]: /ja/developers/dogstatsd
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
@@ -256,8 +256,8 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
 
 ### 前提条件
 
-- [Azure CLI][8] または [Azure Cloud Shell][9]。
-- Azure App Service の[ユーザースコープの資格情報][10]を使用します。資格情報をお持ちでない場合は、[Azure ポータル][11]から Web App または Function App にアクセスしてください。**Deployment** > **Deployment Center** に移動して、ユーザースコープの資格情報を作成または取得します。
+- [Azure CLI][1] または [Azure Cloud Shell][2]。
+- Azure App Service の[ユーザースコープの資格情報][3]を使用します。資格情報をお持ちでない場合は、[Azure ポータル][4]から Web App または Function App にアクセスしてください。**Deployment** > **Deployment Center** に移動して、ユーザースコープの資格情報を作成または取得します。
 
 ### 初めて拡張機能をインストールする{#powershell-first-time}
 
@@ -282,17 +282,14 @@ Datadog では、Powershell を使用して Azure App Service Extension をア�
 
 - `<USERNAME>`: Azure ユーザースコープのユーザー名です。
 - `<PASSWORD>`: Azure ユーザースコープのパスワードです。
-- `<SUBSCRIPTION_ID>`: Azure [サブスクリプション ID][1] です。
+- `<SUBSCRIPTION_ID>`: Azure [サブスクリプション ID][5] です。
 - `<RESOURCE_GROUP_NAME>`: Azure のリソースグループ名です。
 - `<SITE_NAME>`: アプリの名前です。
-- `<DATADOG_API_KEY>`: [Datadog API キー][2]です。
+- `<DATADOG_API_KEY>`: [Datadog API キー][6]です。
 
-また、`DATADOG_SITE` を [Datadog サイト][3]に設定します。`DATADOG_SITE` のデフォルトは ` datadoghq.com` です。あなたのサイトは次のとおりです: {{< region-param key="dd_site" code="true" >}}
+また、`DATADOG_SITE` を [Datadog サイト][7]に設定します。`DATADOG_SITE` のデフォルトは ` datadoghq.com` です。あなたのサイトは次のとおりです: {{< region-param key="dd_site" code="true" >}}
 
 
-[1]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /ja/getting_started/site/
 
 
 ### リソースグループの拡張機能を更新する{#powershell-resource-group}
@@ -342,17 +339,17 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 
 ### ARM テンプレート
 
-多くの組織では、[Azure Resource Management (ARM) テンプレート][4]を使用して infrastructure-as-code の実践を実施しています。これらのテンプレートに App Service Extension を構築するには、デプロイメントに [Datadog の App Service Extension ARM テンプレート][5]を組み込み、App Service リソースと一緒に拡張機能を追加して構成します。
+多くの組織では、[Azure Resource Management (ARM) テンプレート][8]を使用して infrastructure-as-code の実践を実施しています。これらのテンプレートに App Service Extension を構築するには、デプロイメントに [Datadog の App Service Extension ARM テンプレート][9]を組み込み、App Service リソースと一緒に拡張機能を追加して構成します。
 
-[1]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /ja/getting_started/site/
-[4]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
-[5]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
-[8]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[9]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
-[10]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
-[11]: https://portal.azure.com/
+[1]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+[2]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
+[3]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
+[4]: https://portal.azure.com/
+[5]: https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /ja/getting_started/site/
+[8]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
+[9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -370,7 +367,7 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 
 1. Azure インテグレーションタイルに移動します。
 
-2. アプリケーションが動作している Azure サブスクリプションの [Azureインテグレーション][12]がインストールされていることを確認します。
+2. アプリケーションが動作している Azure サブスクリプションの [Azureインテグレーション][8]がインストールされていることを確認します。
 
 3. 適用した App Service プランのフィルタリングルールが、アプリが実行されている App Service プランを含んでいることを確認してください。App Service プランが含まれていない場合、そのプランでホストされているすべてのアプリと機能も含まれません。アプリ自体のタグは、Datadog によるフィルタリングに使用されません。
 
@@ -385,7 +382,7 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 
 **注**: サポートチームによるアプリケーションのエラー調査を迅速に進めるには、`DD_TRACE_DEBUG:true` を設定し、Datadog ログディレクトリのコンテンツ(`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) をメールに追加します。
 
-さらにヘルプが必要な場合は、[Datadog サポート][13]までお問い合わせください。
+さらにヘルプが必要な場合は、[Datadog サポート][9]までお問い合わせください。
 
 ### その他の参考資料
 
@@ -399,9 +396,5 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
 [6]: /ja/integrations/azure/?tab=eventhub#log-collection
 [7]: /ja/developers/dogstatsd
-[8]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[9]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
-[10]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
-[11]: https://portal.azure.com/
-[12]: /ja/integrations/azure
-[13]: /ja/help
+[8]: /ja/integrations/azure
+[9]: /ja/help

@@ -13,6 +13,9 @@ further_reading:
 - link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
+- link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
+  tag: "Blog"
+  text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 ---
 
 

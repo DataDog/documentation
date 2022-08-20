@@ -3,7 +3,8 @@ app_id: couchdb
 app_uuid: 0a7006e2-c76d-4ef0-8af7-347bad2db768
 assets:
   dashboards:
-    couchdb: assets/dashboards/overview.json
+    couchdb: assets/dashboards/CouchDB-overview_dashboard.json
+    couchdb-v1: assets/dashboards/CouchDBv1-overview_dashboard.json
   integration:
     configuration:
       spec: assets/configuration/spec.yaml
@@ -40,7 +41,7 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 5.1.0
+integration_version: 5.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

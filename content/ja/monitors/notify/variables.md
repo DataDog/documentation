@@ -157,6 +157,15 @@ title: 変数
 {{/is_exact_match}}
 ```
 
+`is_exact_match` 条件は、複数の文字列の一致にも対応しています。
+
+```text
+{{#is_exact_match "host.name" "production" "staging"}}
+  これは、アラートをトリガーするホストの名前が
+  正確に production または staging である場合に表示されます。
+{{/is_exact_match}}
+```
+
 条件変数 `is_exact_match` は [`{{value}}` テンプレート変数](#template-variables)もサポートします。
 
 ```text
@@ -345,13 +354,21 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 
 ### 複合条件モニター変数
 
-複合条件モニターは、アラートがトリガーされたときにサブモニターに関連付けられた値にアクセスできます。
+複合条件モニターは、アラートがトリガーされたときにサブモニターに関連付けられた値とステータスにアクセスできます。
 
 たとえば、複合条件モニターにサブモニター `a` がある場合、`a` の値を次で含めることができます。
 
 ```text
 {{ a.value }}
 ```
+
+サブモニター `a` のステータスを取得するには、以下を使用します。
+
+```text
+{{ a.status }}
+```
+
+ステータスに指定できる値は、`ALERT`、`OK`、`WARN`、および `NO DATA` です。
 
 複合条件モニターは、基底のモニターと同様の方法でタグ変数もサポートします。基底のモニターが同じタグ/ファセットでグループ化されていることを条件に、複合条件モニターは他のモニターと同様の形式に従います。
 
@@ -529,6 +546,16 @@ https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*10
 
 ```text
 {{ .matched }} ホスト名
+```
+
+### URL エンコード
+
+アラートメッセージに URL でエンコードする必要がある情報が含まれている場合 (例えば、リダイレクトの場合)、`{{ urlencode "<variable>"}}` 構文を使います。
+
+**例**: モニターメッセージに特定のサービスにフィルタリングされた APM サービスページへの URL が含まれている場合、`service` [タグ変数](#attribute-and-tag-variables)を使い、URL に `{{ urlencode "<variable>"}}` 構文を追加します。
+
+```
+https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
 
 [1]: /ja/monitors/create/configuration/#alert-grouping

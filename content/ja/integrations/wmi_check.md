@@ -1,37 +1,50 @@
 ---
-aliases:
-- /ja/integrations/wmi
+app_id: wmi
+app_uuid: ddd1578f-d511-4d57-b5dd-33c0ea7c391e
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: WMI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - monitoring
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
-display_name: WMI
+display_on_public_website: true
 draft: false
 git_integration_title: wmi_check
-guid: d70f5c68-873d-436e-bddb-dbb3e107e3b5
 integration_id: wmi
 integration_title: WMI チェック
 integration_version: 1.15.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: wmi.
+manifest_version: 2.0.0
 name: wmi_check
-public_title: WMI Check インテグレーション
+oauth: {}
+public_title: WMI チェック
 short_description: WMI メトリクスを収集してグラフを作成。
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::モニタリング
+  configuration: README.md#Setup
+  description: WMI メトリクスを収集してグラフを作成。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: WMI チェック
 ---
 
 
@@ -56,7 +69,7 @@ Microsoft Windows および他のパッケージアプリケーションから�
 1. .NET の System.Diagnostics を使用してパフォーマンスカウンターを送信し、次に WMI でそれらにアクセスします。
 2. アプリケーションで COM ベースの WMI プロバイダーを実装します。通常、これは、.NET 以外の言語を使用している場合にのみ行います。
 
-System.Diagnostics の使い方については、[PerformanceCounter クラス][3]を参照してください。メトリクスを追加した後、WMI でそれを見つけることができるはずです。WMI ネームスペースを参照するには、[WMI エクスプローラー][4]が便利でしょう。Powershell で [Get-WmiObject][5] を使用すると、同じ情報を見つけることができます。また、[WMI メトリクスの取得方法][6]の情報も確認してください。
+System.Diagnostics の使い方については、[PerformanceCounter クラス][3]を参照してください。メトリクスを追加した後、WMI でそれを見つけることができるはずです。WMI ネームスペースを参照するには、[WMI エクスプローラー][4]が便利でしょう。Powershell で [Get-WmiObject][5] を使用すると、同じ情報を見つけることができます。また、[WMI メトリクスの取得][6]の情報も確認してください。
 
 新しいメトリクスに My_New_Metric というカテゴリを割り当てる場合、WMI パスは 
 `\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_My_New_Metric` になります
@@ -232,9 +245,9 @@ WMI チェックには、サービスのチェック機能は含まれません�
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/wmi_check/images/wmimetric.png
 [2]: https://docs.datadoghq.com/ja/integrations/windows_performance_counters/
 [3]: https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.performancecounter
-[4]: https://wmie.codeplex.com
+[4]: https://github.com/vinaypamnani/wmie2/releases
 [5]: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-wmiobject
-[6]: https://docs.datadoghq.com/ja/integrations/faq/how-to-retrieve-wmi-metrics/
+[6]: https://docs.datadoghq.com/ja/integrations/guide/retrieving-wmi-metrics/
 [7]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx
 [8]: https://technet.microsoft.com/en-us/library/Hh921475.aspx
 [9]: https://msdn.microsoft.com/en-us/library/aa393067.aspx

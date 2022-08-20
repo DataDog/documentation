@@ -121,6 +121,16 @@
     "request_description": "ダッシュボードリストの新しいダッシュボード。",
     "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
   },
+  "ListEvents": {
+    "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のイベントを確認するために使用します。",
+    "summary": "イベントのリストを取得する"
+  },
+  "SearchEvents": {
+    "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントを使用して、複雑なイベントのフィルタリングと検索を構築します。",
+    "summary": "イベントの検索",
+    "request_description": "",
+    "request_schema_description": "オーガニゼーションからイベントのリストを取得するリクエストと共に送信されたオブジェクト。"
+  },
   "ListIncidents": {
     "description": "ユーザーの組織のすべてのインシデントを取得します。",
     "summary": "インシデントリストを取得"
@@ -437,6 +447,30 @@
     "request_description": "",
     "request_schema_description": "オーガニゼーションから RUM イベントの集約バケットを取得するリクエストと共に送信されたオブジェクト。"
   },
+  "GetRUMApplications": {
+    "description": "組織内のすべての RUM アプリケーションをリストアップします。",
+    "summary": "すべての RUM アプリケーションをリストアップする"
+  },
+  "CreateRUMApplication": {
+    "description": "組織内で新しい RUM アプリケーションを作成します。",
+    "summary": "新しい RUM アプリケーションを作成する",
+    "request_description": "",
+    "request_schema_description": "RUM アプリケーション作成リクエスト属性。"
+  },
+  "DeleteRUMApplication": {
+    "description": "組織内の既存の RUM アプリケーションを削除します。",
+    "summary": "RUM アプリケーションを削除する"
+  },
+  "GetRUMApplication": {
+    "description": "組織内で指定された ID の RUM アプリケーションを取得します。",
+    "summary": "RUM アプリケーションを取得する"
+  },
+  "UpdateRUMApplication": {
+    "description": "組織内で指定された ID の RUM アプリケーションを更新します。",
+    "summary": "RUM アプリケーションを更新する",
+    "request_description": "",
+    "request_schema_description": "RUM アプリケーション更新リクエスト。"
+  },
   "ListRUMEvents": {
     "description": "リストエンドポイントは、RUM 検索クエリと一致するイベントを返します。\n[結果はページ区切りされます][1]。\n\nこのエンドポイントを使用して、最新の RUM イベントを確認します。\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",
     "summary": "RUM イベントのリストを取得"
@@ -538,8 +572,26 @@
     "request_description": "",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
   },
+  "EditSecurityMonitoringSignalAssignee": {
+    "description": "セキュリティシグナルのトリアージアサインメントを変更します。",
+    "summary": "セキュリティシグナルのトリアージアサインメントを変更します",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "所定のセキュリティモニタリングシグナルの割当先を変更するためのリクエスト本文。"
+  },
+  "EditSecurityMonitoringSignalIncidents": {
+    "description": "セキュリティシグナルの関連インシデントを変更します。",
+    "summary": "セキュリティシグナルの関連インシデントを変更する",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "所定のセキュリティモニタリングシグナルの関連インシデントを変更するためのリクエスト本文。"
+  },
+  "EditSecurityMonitoringSignalState": {
+    "description": "セキュリティシグナルのトリアージ状態を変更します。",
+    "summary": "セキュリティシグナルのトリアージ状態を変更します",
+    "request_description": "シグナルの更新を記述する属性。",
+    "request_schema_description": "所定のセキュリティモニタリングシグナルの状態を変更するためのリクエスト本文。"
+  },
   "SubmitMetrics": {
-    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 500 キロバイト (512000 バイト) です。非圧縮ペイロードの場合、サイズは 5 メガバイト (5242880 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでです。",
+    "description": "メトリクスエンドポイントを使用して、Datadog のダッシュボードでグラフ化できる時系列データをポストできます。\nペイロードの上限は 500 キロバイト (512000 バイト) です。非圧縮ペイロードの場合、サイズは 5 メガバイト (5242880 バイト) までとなります。\n\nDogStatsD を使用せず、Datadog API に直接メトリクスを送信する場合は以下の仕様に従ってください。\n\n- タイムスタンプ: 64 ビット\n- 値: 64 ビット\n- メトリクス名: 20 バイト\n- 時系列: 50 バイト\n- 最大ペイロードは約 100 バイトまでです。\n\nホスト名は、Resources フィールドのリソースの 1 つです。",
     "summary": "メトリクスを送信する",
     "request_description": "",
     "request_schema_description": "メトリクスのペイロード。"
@@ -623,20 +675,28 @@
     "request_schema_description": "インシデントチームペイロードを使用してリクエストを更新します。"
   },
   "GetUsageApplicationSecurityMonitoring": {
-    "description": "アプリケーションセキュリティの 1 時間あたり使用量を取得します。",
-    "summary": "アプリケーションセキュリティの 1 時間あたり使用量の取得"
+    "description": "アプリケーションセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "アプリケーションセキュリティの時間単位使用量の取得"
   },
   "GetCostByOrg": {
     "description": "マルチオーガニゼーションのアカウントでコストを取得します。ある月の組織別コストデータは、翌月 16 日までに利用可能になります。",
     "summary": "マルチオーガニゼーションのアカウントのコストを取得"
   },
+  "GetEstimatedCostByOrg": {
+    "description": "複数組織および単一ルート組織のアカウントにまたがる推定コストを取得します。\n推定コストデータは、当月と前月分のみ利用可能です。それ以前の過去のコストにアクセスするには、/cost_by_org エンドポイントを使用します。",
+    "summary": "アカウントの推定コストを取得"
+  },
+  "GetHourlyUsage": {
+    "description": "製品ファミリーの時間単位使用量の取得",
+    "summary": "製品ファミリーの時間単位使用量の取得"
+  },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Lambda Traced Invocations の 1 時間あたり使用量を取得します。",
-    "summary": "Lambda Traced Invocations の 1 時間あたり使用量を取得"
+    "description": "Lambda のトレースされた起動の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリーの時間単位使用量の取得 API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "Lambda のトレースされた起動の 1 時間単位使用量の取得"
   },
   "GetUsageObservabilityPipelines": {
-    "description": "観測可能性パイプラインの 1 時間あたりの使用量を取得します。",
-    "summary": "Get hourly usage for Observability Pipelines"
+    "description": "観測可能性パイプラインの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリーの時間単位使用量の取得 API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "summary": "観測可能性パイプラインの 1 時間単位使用量の取得"
   },
   "SendInvitations": {
     "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",

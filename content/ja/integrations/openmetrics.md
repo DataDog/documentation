@@ -1,37 +1,56 @@
 ---
+app_id: openmetrics
+app_uuid: 302b841e-8270-4ecd-948e-f16317a316bc
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OpenMetrics
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - モニター
 - オートディスカバリー
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
-display_name: OpenMetrics
+display_on_public_website: true
 draft: false
 git_integration_title: openmetrics
-guid: 3f67af75-6987-468c-99b3-5001ba5ab414
 integration_id: openmetrics
 integration_title: OpenMetrics
-integration_version: 2.2.1
+integration_version: 2.2.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: openmetrics
-public_title: OpenMetrics インテグレーション
+oauth: {}
+public_title: OpenMetrics
 short_description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenMetrics
 ---
 
 

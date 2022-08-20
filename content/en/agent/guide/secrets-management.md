@@ -456,7 +456,7 @@ To test or debug outside of the Agent, you can mimic how the Agent runs it:
 #### Linux
 
 ```bash
-sudo su dd-agent - bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
+sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
 ```
 
 The `dd-agent` user is created when you install the Datadog Agent.

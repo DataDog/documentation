@@ -1,42 +1,66 @@
 ---
+app_id: jboss-wildfly
+app_uuid: 4ad5a2e9-106b-43a2-820a-f146c7effffe
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     JBoss WildFly: assets/dashboards/jboss_wildfly.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: jboss.jdbc_connections.count
+      metadata_path: metadata.csv
+      prefix: jboss.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: JBoss/WildFly
   logs:
     source: jboss_wildfly
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - web
 - ログの収集
 - オートディスカバリー
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
-display_name: JBoss/WildFly
+display_on_public_website: true
 draft: false
 git_integration_title: jboss_wildfly
-guid: ff99b3d2-9c14-4cdf-b869-7b8b1cbf0716
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
 integration_version: 2.0.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: jboss.
-metric_to_check: jboss.jdbc_connections.count
+manifest_version: 2.0.0
 name: jboss_wildfly
-public_title: JBoss/WildFly インテグレーション
+oauth: {}
+public_title: JBoss/WildFly
 short_description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JBoss/WildFly
 ---
 
 

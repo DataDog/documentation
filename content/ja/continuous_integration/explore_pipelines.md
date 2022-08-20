@@ -1,11 +1,15 @@
 ---
-title: パイプラインの確認
-kind: documentation
 further_reading:
-    - link: /continuous_integration/troubleshooting/
-      tag: ドキュメント
-      text: トラブルシューティング CI
+- link: /continuous_integration/troubleshooting/
+  tag: ドキュメント
+  text: トラブルシューティング CI
+kind: documentation
+title: パイプラインの確認
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+{{< /site-region >}}
 
 パイプラインは、CI メニューの [Pipelines][1] ページに表示されます。
 
@@ -27,34 +31,46 @@ Pipelines ページには、選択した時間枠での各パイプラインの�
 
 下部のパイプライン実行リストには、選択したブランチについて、選択した時間枠内にパイプライン (またはそのステージまたはジョブ) が実行されたすべての時間が表示されます。左側のファセットを使用して、表示するパイプライン、ステージ、またはジョブにリストを正確にフィルタリングします。
 
-### サービス、リソース、ログ、ネットワークイベントへの接続を確認する
+### サービス、リソース、ネットワークイベントへの接続を確認する
 
 実行の 1 つをクリックしてパイプライン実行ビューを開き、パイプラインとそのステージのフレームグラフまたはスパンリストを表示します。左側の _Executions (n)_ リストを使用すると、同じコミットでパイプラインを再試行するたびにデータにすばやくアクセスできます。
 
-CI プロバイダーリンク (次の画像の `gitlab-ci gitlab.pipeline > documentation`) をクリックして、パイプライン、ステージ、またはジョブの Resource、Service、または Analytics ページにドリルダウンします。また、完全なタグ情報と、関連するログイベントおよびネットワーク監視イベントへのリンクもあります。
+CI プロバイダーリンク (次の画像の `gitlab-ci gitlab.pipeline > documentation`) をクリックして、パイプライン、ステージ、またはジョブの Resource、Service、または Analytics ページを具体的に調べます。また、完全なタグ情報と、ネットワーク監視イベントへのリンクもあります。
 
 {{< img src="ci/ci-pipeline-execution.png" alt="パイプライン実行のトレース情報" style="width:100%;">}}
 
+### ログへの接続を確認する
+
+CI プロバイダーでジョブログ収集がサポートされ、有効になっている場合、関連するログイベントはパイプライン実行ビューの _Logs_ タブで確認できます。
+
+**注**: ジョブログの収集は、限られたプロバイダーのみでサポートされています。
+- [GitHub Actions][2]
+- [GitLab][3] (ベータ版)
+- [Jenkins][4]
+
 ## パイプライン実行の詳細とトレース
 
-[Pipeline Executions][2] ページで、選択した時間枠でのパイプラインの実行に関する集計データを確認できます。検索フィールドとファセットを使用して、調査したい実行までリストをスコープします。上部のボタンを使用して、リストを変更してパイプライン、ステージ、またはジョブを表示します。
+[Pipeline Executions][5] ページで、選択した時間枠でのパイプラインの実行に関する集計データを確認できます。検索フィールドとファセットを使用して、調査したい実行までリストをスコープします。上部のボタンを使用して、リストを変更してパイプライン、ステージ、またはジョブを表示します。
 
 各パイプラインの実行は、ステージとジョブの情報を含むトレースとして報告されます。リスト内の実行をクリックして、個々のパイプライン、ステージ、ジョブ実行トレースにアクセスします (Pipeline Details ページからパイプラインの実行をクリックするのと同様)。
 
-または、[Analytics][3] ボタンをクリックして、パイプライン実行データをインタラクティブに分類すれば、質問への回答やダッシュボードでの共有に使用することができます。
+または、[**Analytics**][6] ボタンをクリックして、パイプライン実行データをインタラクティブにフィルタリング、グループ化すれば、質問への回答やダッシュボードでの共有に使用することができます。
 
 {{< img src="ci/ci-pipelines-execution.png" alt="パイプライン実行の分析" style="width:100%;">}}
 
 ## CI パイプラインデータについて伝達する
 
-[ダッシュボード][4]と[ノートブック][5]でウィジェットを作成すると、CI パイプラインデータを利用できます。
+[ダッシュボード][7]と[ノートブック][8]でウィジェットを作成すると、CI パイプラインデータを利用できます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: https://app.datadoghq.com/ci/pipeline-executions
-[3]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[4]: https://app.datadoghq.com/dashboard/lists
-[5]: https://app.datadoghq.com/notebook/list
+[2]: /ja/continuous_integration/setup_pipelines/github/#enable-log-collection
+[3]: /ja/continuous_integration/setup_pipelines/gitlab/#enable-job-log-collection-beta
+[4]: /ja/continuous_integration/setup_pipelines/jenkins#enable-job-log-collection
+[5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
+[7]: https://app.datadoghq.com/dashboard/lists
+[8]: https://app.datadoghq.com/notebook/list

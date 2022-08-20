@@ -65,7 +65,7 @@ Month-to-date usage of each product is calculated as follows:
 
 ## Usage trends
 
-The [Usage Trends][10] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
+The [Usage Trends][5] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
 
 {{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs page in the Datadog application with Download as CSV option highlighted" style="width:100%; align:left" >}}
 
@@ -108,16 +108,16 @@ The "All" view provides the following information about all your custom metrics:
 * Average custom metrics per hour
 * Max custom metrics per hour
 * Search for a metric within all your custom metrics
-* This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][5].
+* This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][6].
 
 
-For more details on your metrics, navigate to the [Metrics Summary][6] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
+For more details on your metrics, navigate to the [Metrics Summary][7] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Overview of Top Custom Metrics table" >}}
 
 ## Logs usage by index
 
-In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][7]. The following information is provided:
+In the Log Management tab, this table displays your hourly, daily, monthly, and annual indexed log usage by index name and retention period. It also shows the breakdown between live logs and [rehydrated logs][8]. The following information is provided:
 
 * Index name
 * Retention period in days
@@ -130,18 +130,18 @@ This data can be downloaded as a CSV file.
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][8].
+For technical questions, contact [Datadog support][9].
 
-For billing questions, contact your [Customer Success][9] Manager.
+For billing questions, contact your [Customer Success][10] Manager.
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-across-your-multi-org-account
 [3]: https://docs.datadoghq.com/api/latest/usage-metering/#get-billable-usage-across-your-account
 [4]: /metrics/custom_metrics/
-[5]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[6]: https://docs.datadoghq.com/metrics/summary/#overview
-[7]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
-[8]: /help/
-[9]: mailto:success@datadoghq.com
-[10]: https://app.datadoghq.com/billing/usage
+[5]: https://app.datadoghq.com/billing/usage
+[6]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[7]: https://docs.datadoghq.com/metrics/summary/#overview
+[8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
+[9]: /help/
+[10]: mailto:success@datadoghq.com
