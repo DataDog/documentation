@@ -39,7 +39,7 @@ Datadog のデータ収集、解決、保持の概要は以下のとおりです
 |インフラストラクチャー      |ネットワークパフォーマンスモニタリング                |システムプローブ                                                                                  |30 秒           |1 分                |14 日                                                                                     |
 |インフラストラクチャー      |システムメトリクス                                 |Datadog Agent                                                                                 |15 秒           |1 秒             |15 か月                                                                                   |
 |ログ管理                |ログ管理                                          |Datadog Agent + Logs、サードパーティログコレクタ、または API                                        |リアルタイム            |1 ミリ秒        |プラン                                                                                        |
-|リアルユーザーモニタリング (RUM)|エラー トラッキング                                |RUM SDK                                                                                       |2 分            |60 秒           |15 日                                                                                     |
+|リアルユーザーモニタリング (RUM)|エラー トラッキング                                |RUM SDK                                                                                       |2 分            |60 秒           |30 日                                                                                     |
 |リアルユーザーモニタリング (RUM)|リアルユーザーモニタリング (RUM)                          |RUM SDK                                                                                       |リアルタイム            |1 ミリ秒        |セッション、ビュー、アクション、エラーイベントは 30 日間 <br/>リソースイベント、ロングタスクイベントは 15 日間|
 |リアルユーザーモニタリング (RUM)|セッションリプレイ                               |RUM SDK                                                                                       |リアルタイム            |1 ミリ秒        |30 日                                                                                     |
 |Cloud SIEM          |セキュリティシグナル                              |Datadog Cloud SIEM                                                                            |リアルタイム            |1 ミリ秒        |15 か月                                                                                   |
@@ -51,6 +51,6 @@ Datadog のデータ収集、解決、保持の概要は以下のとおりです
 
 
 [1]: /ja/tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
-[2]: /ja/integrations/faq/cloud-metric-delay/#faster-metrics
+[2]: /ja/integrations/guide/cloud-metric-delay/#faster-metrics
 [3]: /ja/synthetics/cicd_integrations#use-the-api
 [4]: /ja/synthetics/cicd_integrations#use-the-cli

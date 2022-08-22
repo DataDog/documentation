@@ -39,7 +39,7 @@ Le tableau ci-dessous synthétise la collecte, la résolution et la rétention d
 |Infrastructure      |Network Performance Monitoring                |System Probe                                                                                  |30 secondes           |1 minute                |14 jours                                                                                     |
 |Infrastructure      |Métriques système                                |Agent Datadog                                                                                 |15 secondes           |1 seconde             |15 mois                                                                                   |
 |Logs                |Logs                                          |Agent Datadog et logs, collecteurs de logs tiers ou API                                        |En temps réel            |1 milliseconde        |En fonction de l'offre                                                                                        |
-|Real User Monitoring|Suivi des erreurs                                |SDK RUM                                                                                       |2 minutes            |60 secondes           |15 jours                                                                                     |
+|Real User Monitoring|Suivi des erreurs                                |SDK RUM                                                                                       |2 minutes            |60 secondes           |30 jours                                                                                     |
 |Real User Monitoring|Real User Monitoring                          |SDK RUM                                                                                       |En temps réel            |1 milliseconde        |30 jours pour les événements de session, de vue, d'action et d'erreur <br/>15 jours pour les événements de ressource et de tâche longue.|
 |Real User Monitoring|Session Replays                               |SDK RUM                                                                                       |En temps réel            |1 milliseconde        |30 jours                                                                                     |
 |Cloud SIEM          |Signaux de sécurité                              |Cloud SIEM Datadog                                                                            |En temps réel            |1 milliseconde        |15 mois                                                                                   |
@@ -51,6 +51,6 @@ Le tableau ci-dessous synthétise la collecte, la résolution et la rétention d
 
 
 [1]: /fr/tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
-[2]: /fr/integrations/faq/cloud-metric-delay/#faster-metrics
+[2]: /fr/integrations/guide/cloud-metric-delay/#faster-metrics
 [3]: /fr/synthetics/cicd_integrations#use-the-api
 [4]: /fr/synthetics/cicd_integrations#use-the-cli

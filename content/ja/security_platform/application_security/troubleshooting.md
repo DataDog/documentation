@@ -9,7 +9,7 @@ further_reading:
 - link: /security_platform/application_security/setup_and_configure/#compatibility
   tag: ドキュメント
   text: プログラミング言語とフレームワークの互換性
-- link: /security_platform/guide/how-appsec-works/
+- link: /security_platform/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog におけるアプリケーションセキュリティモニタリングの仕組み
 kind: documentation
@@ -45,11 +45,11 @@ ASM のデータは、APM トレースと一緒に送信されます。[APM の�
 
 ASM の設定をテストするには、次の curl スクリプトを含むファイルを実行して、[Security Scanner Detected][7] ルールをトリガーします。
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
 {{< programming-lang lang="java" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -64,7 +64,7 @@ done
 {{< programming-lang lang=".NET" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -79,7 +79,7 @@ done
 {{< programming-lang lang="go" >}}
 
  ```bash
- for ((i=1;i<=200;i++)); 
+ for ((i=1;i<=200;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -92,7 +92,7 @@ done
 {{< programming-lang lang="ruby" >}}
 
  ```bash
- for ((i=1;i<=200;i++)); 
+ for ((i=1;i<=200;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -105,7 +105,7 @@ done
 {{< programming-lang lang="PHP" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -120,7 +120,7 @@ done
 {{< programming-lang lang="NodeJS" >}}
 
 ```bash
-for ((i=1;i<=200;i++)); 
+for ((i=1;i<=200;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -129,6 +129,19 @@ curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
 done
 ```
 **注:** `dd-test-scanner-log` の値は、最新のリリースでサポートされています。
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```bash
+for ((i=1;i<=200;i++));
+do
+# 既存サービスのルートが対象
+curl https://your-application-url/existing-route -A dd-test-scanner-log;
+# 既存サービス以外のルートが対象
+curl https://your-application-url/non-existing-route -A dd-test-scanner-log;
+done
+```
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -215,10 +228,10 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 
 [1]: /ja/security_platform/application_security/setup_and_configure/
-[2]: /ja/tracing/setup_overview/setup/ruby/#rack
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
-[4]: /ja/tracing/setup_overview/setup/ruby/#rails
-[5]: /ja/tracing/setup_overview/setup/ruby/#sinatra
+[4]: /ja/tracing/trace_collection/dd_libraries/ruby/#rails
+[5]: /ja/tracing/trace_collection/dd_libraries/ruby/#sinatra
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -248,7 +261,7 @@ ASM のデータは、[スパン][9]を介して送信されます。スパン�
 
 以下は、特定の言語に対するトラブルシューティングの追加手順です。
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
 {{< programming-lang lang="java" >}}
 Java ライブラリはロギングに [SLF4J][1] を使用します。トレーサーがファイルにログを記録するように、以下のランタイムフラグを追加してください。
 
@@ -389,6 +402,33 @@ NodeJS アプリケーションの[トレースとシグナルエクスプロー
 [4]: /ja/security_platform/application_security/getting_started/nodejs/?tab=dockercli
 [5]: /ja/tracing/troubleshooting/
 {{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+Python アプリケーションの[トレースとシグナルエクスプローラー][1]に ASM の脅威情報が表示されない場合は、ASM が実行されているか、トレーサーが動作しているかを確認してください。
+
+1. アプリケーションのログレベルを `DEBUG` に設定し、ASM が動作していることを確認します。
+
+   ```python
+   import logging
+   logging.basicConfig(level=logging.DEBUG)
+   ```
+
+   次に、アプリケーションに対して任意の HTTP コールを実行します。以下のようなログが表示されるはずです。
+
+   ```
+   DEBUG:ddtrace.appsec.processor:[DDAS-001-00] Executing AppSec In-App WAF with parameters:
+   ```
+
+   このログがない場合は、ASM が起動していないことになります。
+
+2. トレーサーは動作していますか？APM ダッシュボードで関連するトレースを見ることができますか？
+
+   ASM はトレーサーに依存しています。もしトレースが表示されない場合は、トレーサーが機能していない可能性があります。[APM トラブルシューティング][2]を参照してください。
+
+
+[1]: https://app.datadoghq.com/security/appsec/
+[2]: /ja/tracing/troubleshooting/
+{{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
 Ruby の場合、数分経っても[トレースとシグナルエクスプローラー][1]に ASM の脅威情報が表示されない場合は、[デバッグログ][2]のトレーサ診断を有効にしてください。例えば、以下のようになります。
@@ -508,5 +548,5 @@ ASM で問題が解決しない場合は、以下の情報を添えて [Datadog 
 [6]: /ja/tracing/troubleshooting/connection_errors/
 [7]: /ja/security_platform/default_rules/security-scan-detected/
 [8]: /ja/tracing/troubleshooting/tracer_startup_logs/
-[9]: /ja/tracing/visualization/#spans
+[9]: /ja/tracing/glossary/#spans
 [10]: /ja/tracing/troubleshooting/#tracer-debug-logs

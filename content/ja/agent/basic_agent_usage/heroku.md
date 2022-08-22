@@ -44,7 +44,7 @@ heroku config:add DD_API_KEY=$DD_API_KEY
 
 # 強制的に再構築して Heroku をデプロイ
 git commit --allow-empty -m "Rebuild slug"
-git push heroku master
+git push heroku main
 ```
 
 完了すると、各 dyno の起動時に Datadog Agent が自動的に起動します。
@@ -94,7 +94,7 @@ heroku config:set DD_AGENT_VERSION=<NEW_AGENT_VERSION> -a <YOUR_APP_NAME>
 
 # Agent の新バージョンでスラグを再構築:
 git commit --allow-empty -m "Rebuild slug"
-git push heroku master
+git push heroku main
 ```
 
 ## コンフィギュレーション

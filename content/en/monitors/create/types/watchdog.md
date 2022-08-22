@@ -58,7 +58,7 @@ No selection is necessary. You are notified when Watchdog detects issues across 
 
 
 [1]: /integrations/system/
-[2]: /integrations/redis/
+[2]: /integrations/redisdb/
 [3]: /integrations/postgres/
 [4]: /integrations/nginx/
 [5]: /integrations/amazon_web_services/

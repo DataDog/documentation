@@ -14,7 +14,6 @@ categories:
 - ログの収集
 - オートディスカバリー
 creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_name: Twistlock
@@ -31,7 +30,7 @@ manifest_version: 1.0.0
 metric_prefix: twistlock.
 metric_to_check: twistlock.images.cve.details
 name: twistlock
-public_title: Datadog-Prisma Cloud Compute Edition インテグレーション
+public_title: Prisma Cloud Compute Edition インテグレーション
 short_description: Twistlock はコンテナセキュリティスキャナ
 support: コア
 supported_os:

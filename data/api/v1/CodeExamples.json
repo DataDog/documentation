@@ -196,6 +196,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1094917386",
+      "description": "Create a new dashboard with manage_status widget and show_priority parameter"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_417992286",
       "description": "Create a new dashboard with note widget"
     },
@@ -544,6 +549,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Validate a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_4247196452",
+      "description": "Validate a multi-alert monitor returns \"OK\" response"
     }
   ],
   "ValidateExistingMonitor": [
@@ -841,7 +851,7 @@
   "GetUsageCIApp": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1064440884",
       "description": "Get hourly usage for CI Visibility returns \"OK\" response"
     }
   ],
@@ -855,14 +865,14 @@
   "GetUsageCWS": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_736958514",
       "description": "Get hourly usage for Cloud Workload Security returns \"OK\" response"
     }
   ],
   "GetUsageDBM": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_3446806203",
       "description": "Get hourly usage for Database Monitoring returns \"OK\" response"
     }
   ],
@@ -883,49 +893,49 @@
   "GetUsageLambda": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_3132428705",
       "description": "Get hourly usage for Lambda returns \"OK\" response"
     }
   ],
   "GetUsageLogsByIndex": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1025184776",
       "description": "Get hourly usage for Logs by Index returns \"OK\" response"
     }
   ],
   "GetUsageLogs": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_2562396405",
       "description": "Get hourly usage for Logs returns \"OK\" response"
     }
   ],
   "GetUsageNetworkFlows": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1239422069",
       "description": "Get hourly usage for Network Flows returns \"OK\" response"
     }
   ],
   "GetUsageNetworkHosts": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1249907835",
       "description": "Get hourly usage for Network Hosts returns \"OK\" response"
     }
   ],
   "GetUsageOnlineArchive": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1501172903",
       "description": "Get hourly usage for Online Archive returns \"OK\" response"
     }
   ],
   "GetUsageRumSessions": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_714937291",
       "description": "Get hourly usage for RUM Sessions returns \"OK\" response"
     },
     {
@@ -937,7 +947,7 @@
   "GetUsageRumUnits": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_3959755399",
       "description": "Get hourly usage for RUM Units returns \"OK\" response"
     }
   ],
@@ -951,21 +961,21 @@
   "GetUsageSDS": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_271128478",
       "description": "Get hourly usage for Sensitive Data Scanner returns \"OK\" response"
     }
   ],
   "GetUsageSyntheticsAPI": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_4048033529",
       "description": "Get hourly usage for Synthetics API Checks returns \"OK\" response"
     }
   ],
   "GetUsageSyntheticsBrowser": [
     {
       "group": "usage_metering",
-      "suffix": "",
+      "suffix": "_1704663299",
       "description": "Get hourly usage for Synthetics Browser Checks returns \"OK\" response"
     }
   ],

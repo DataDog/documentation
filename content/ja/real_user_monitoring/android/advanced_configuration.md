@@ -1,13 +1,13 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
+- https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-android
-    tag: Github
-    text: dd-sdk-android ソースコード
-  - link: /real_user_monitoring
-    tag: ホームページ
-    text: Datadog RUM を探索する
+- link: https://github.com/DataDog/dd-sdk-android
+  tag: Github
+  text: dd-sdk-android ソースコード
+- link: /real_user_monitoring
+  tag: ホームページ
+  text: Datadog RUM を探索する
 kind: documentation
 title: RUM Android の高度なコンフィギュレーション
 ---
@@ -23,25 +23,50 @@ Android RUM は、ユーザーアクティビティ、画面、エラー、ネ�
 [ビューを自動追跡する][4]ほかに、特定のさまざまなビュー（アクティビティ、フラグメントなど）が `onResume()` ライフサイクルでインタラクティブに確認できるようになったら自動追跡することも可能です。ビューが確認できなくなったら追跡を停止します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` で呼び出す必要があります。
 
 
+{{< tabs >}}
+{{% tab "Kotlin" %}}
    ```kotlin
-      fun onResume() {
-        GlobalRum.get().startView(viewKey, viewName, viewAttributes)        
-      }
+       fun onResume() {
+         GlobalRum.get().startView(viewKey, viewName, viewAttributes)
+       }
 
-      fun onPause() {
-        GlobalRum.get().stopView(viewKey, viewAttributes)        
-      }
+       fun onPause() {
+         GlobalRum.get().stopView(viewKey, viewAttributes)
+       }
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void onResume() {
+            GlobalRum.get().startView(viewKey, viewName, viewAttributes);
+       }
+
+       public void onPause() {
+            GlobalRum.get().stopView(viewKey, viewAttributes);
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 独自のパフォーマンスタイミングを追加
 
 RUM のデフォルト属性に加えて、`addTiming` API を使用して、アプリケーションが時間を費やしている場所を測定できます。タイミング測定は、現在の RUM ビューの開始を基準にしています。たとえば、ヒーロー画像が表示されるまでにかかる時間を計ることができます。
-
+{{< tabs >}}
+{{% tab "Kotlin" %}}
    ```kotlin
-       fun onHeroImageLoaded() {
-           GlobalRum.get().addTiming("hero_image")
-       } 
+      fun onHeroImageLoaded() {
+            GlobalRum.get().addTiming("hero_image")
+      } 
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void onHeroImageLoaded() {
+            GlobalRum.get().addTiming("hero_image");
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 タイミングが送信されると、タイミングには `@view.custom_timings.<timing_name>` としてアクセスできるようになります (例: `@view.custom_timings.hero_image`)。RUM 分析またはダッシュボードでグラフ化する前に、[メジャーを作成](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures)する必要があります。
 
@@ -49,28 +74,55 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 
 [アクションを自動追跡する][5]ほかに、`RumMonitor#addUserAction` で特定のカスタムユーザーアクション（タップ、クリック、スクロールなど）を追跡することも可能です。継続的なアクションの追跡（リストをスクロールするユーザーの追跡）には、`RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を使用します。
 
+{{< tabs >}}
+{{% tab "Kotlin" %}}
    ```kotlin
-      fun onUserInteraction() {
-        GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
-      }
+       fun onUserInteraction() { 
+            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
+       }
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void onUserInteraction() {
+            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes);
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### カスタムリソース
 
 [リソースを自動追跡する][6]ほかに、メソッド（`GET`、`POST` など）を使用して、`RumMonitor#startResource` でリソースを読み込みながら特定のカスタムリソース（ネットワークリクエスト、サードパーティプロバイダ API など）を追跡することも可能です。完全に読み込まれたら `RumMonitor#stopResource` で追跡を停止し、リソースの読み込み中にエラーが発生した場合は `RumMonitor#stopResourceWithError` で停止します。
 
-
+{{< tabs >}} 
+{{% tab "Kotlin" %}}
    ```kotlin
-      fun loadResource() {
-        GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
-        try {
-          // リソースをロードします
-          GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes)
-        } catch (e: Exception) {
-          GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e)
-        }
-      }
+       fun loadResource() {
+            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
+            try {
+              // リソースをロードします
+              GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes)
+            } catch (e: Exception) {
+              GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e)
+            } 
+       }
    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       public void loadResource() {
+            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes);
+            try {
+                // リソースをロードします
+                GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes);
+            } catch (Exception e) {
+                GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e);
+            }
+       }
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### カスタムエラー
 
@@ -183,11 +235,23 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 たとえば、各フラグメントを個別のビューとして設定するには、[セットアップ][1]で以下のコンフィギュレーションを使用します。
 
-```kotlin
-val configuration = Configuration.Builder(rumEnabled = true, ...)
-                 .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
-                 .build()
-```
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val configuration = Configuration.Builder(true, true, true, true)
+        .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       final Configuration configuration = new Configuration.Builder(true, true, true, true)
+        .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
+        .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 **ヒント**: `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
 
@@ -198,38 +262,97 @@ val configuration = Configuration.Builder(rumEnabled = true, ...)
 
 リソース（サードパーティプロバイダー、ネットワークリクエスト）で、最初の 1 バイトまで、またはDNS 解決などのタイミング情報を取得するには、`okHttpClient` をカスタマイズして[EventListener][8] ファクトリを追加します。
 
-```kotlin
-val okHttpClient = OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor())
-    .eventListenerFactory(DatadogEventListener.Factory())
-    .build()
-```
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(DatadogInterceptor())
+        .eventListenerFactory(DatadogEventListener.Factory())
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+       final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        .addInterceptor(new DatadogInterceptor())
+        .eventListenerFactory(new DatadogEventListener.Factory())
+        .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### ロングタスクの自動追跡
 
 メインスレッドで長時間実行されるオペレーションは、アプリケーションの視覚的パフォーマンスとリアクティビティに影響を与えることがあります。このようなオペレーションを追跡するには、タスクを長すぎるとみなすための閾値を定義します。
 
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val config = Configuration.Builder(true, true, true, true)
+        .trackLongTasks(durationThreshold)
+        .build()
+   ```
 
-```kotlin
-val config = Configuration.Builder(rumEnabled = true, ...)
-                    .trackLongTasks(durationThreshold)
-                    .build()
-```
+たとえば、デフォルトの `100 ms` の実行時間を置換するため、コンフィギュレーションでカスタム閾値を設定します。
+
+   ```kotlin
+      val configuration = Configuration.Builder(...)
+        // ...
+        .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+  ```java
+      Configuration configuration = new Configuration.Builder(true, true, true, true)
+        .trackLongTasks(durationThreshold)
+        .build();
+   ```
+
+たとえば、デフォルトの `100 ms` の実行時間を置換するため、コンフィギュレーションでカスタム閾値を設定します。
+
+   ```java
+      Configuration configuration = new Configuration.Builder(...)
+        // ...
+        .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
+        .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## RUM イベントの変更または削除
 
 一括処理前に、RUM イベントの一部の属性を変更または一部のイベント全体を削除したりするには、SDK を初期化する際に `EventMapper<T>` を実装します。
 
-```kotlin
-val config = Configuration.Builder(rumEnabled = true, ...)
-              ...
-              .setRumErrorEventMapper(rumErrorEventMapper)
-              .setRumActionEventMapper(rumActionEventMapper)
-              .setRumResourceEventMapper(rumResourceEventMapper)
-              .setRumViewEventMapper(rumViewEventMapper)
-              .setRumLongTaskEventMapper(rumLongTaskEventMapper)
-              .build()
-```
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val config = Configuration.Builder(true, true, true, true)
+        ...
+        .setRumErrorEventMapper(rumErrorEventMapper)
+        .setRumActionEventMapper(rumActionEventMapper)
+        .setRumResourceEventMapper(rumResourceEventMapper)
+        .setRumViewEventMapper(rumViewEventMapper)
+        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+        .build()
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+  ```java
+      Configuration config = new Configuration.Builder(true, true, true, true)
+        ...
+        .setRumErrorEventMapper(rumErrorEventMapper)
+        .setRumActionEventMapper(rumActionEventMapper)
+        .setRumResourceEventMapper(rumResourceEventMapper)
+        .setRumViewEventMapper(rumViewEventMapper)
+        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+        .build();
+
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
    `EventMapper<T>` インターフェースを実装する場合、各イベントタイプの属性は以下のように一部のみしか変更することができません。
 
    | イベントタイプ    | 属性キー      | 説明                                     |
@@ -261,16 +384,28 @@ val config = Configuration.Builder(rumEnabled = true, ...)
 
    **注**: `EventMapper<T>` の実装から null が返された場合、イベントは削除されます。
 
+## RUM セッションのサンプリング
+
+アプリケーションが Datadog RUM に送信するデータを制御するには、[RumMonitor を初期化][2]し、RUM セッションのサンプリングレートを 0～100 の間に指定します。
+
+```kotlin
+val monitor = RumMonitor.Builder()
+        // ここでは RUM セッションの 75% を Datadog へ送信
+        .sampleRumSessions(75.0f)
+        .build()
+GlobalRum.registerIfAbsent(monitor)
+```
+
    ## その他の参照先
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /ja/real_user_monitoring/android
-[3]: /ja/real_user_monitoring/android/data_collected
-[4]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: /ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/android
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/events/
-[9]: /ja/real_user_monitoring/android/data_collected/?tab=error#event-specific-attributes
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/?tab=error#event-specific-attributes

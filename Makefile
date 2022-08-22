@@ -36,8 +36,11 @@ CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.y
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
 
-clean-all: clean clean-examples ## Clean everything (environment, sourced repos, generated files)
-	rm -rf ./node_modules ./hugpython ./public ./integrations_data
+clean-all: clean clean-examples clean-dependent-repos ## Clean everything (environment, sourced repos, generated files)
+	rm -rf ./node_modules ./hugpython ./public
+
+clean-dependent-repos:
+	rm -rf ./integrations_data
 
 # remove build generated content
 # removing only git ignored files
@@ -112,9 +115,18 @@ config:
 #######################################################################################################################
 
 # template for extracting example repos
+# master = always use tag from sdk version
+# branches = attempt to use an associated branch name on failure fallback to sdk version
 define EXAMPLES_template
 examples/$(1):
-	git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '"') https://github.com/DataDog/$(1).git examples/$(1);
+	$(eval TAG := $(or $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '" '),$(BRANCH)))
+	@if [[ "$(BRANCH)" = "master" ]]; then \
+		echo "Cloning $(1) at $(TAG)"; \
+		git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+	else \
+		echo "Cloning $(1) at $(BRANCH)"; \
+		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+	fi
 
 .PHONY: examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)) examples/$(patsubst datadog-api-client-%,%,$(1))
 

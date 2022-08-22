@@ -1,43 +1,66 @@
 ---
+app_id: ignite
+app_uuid: 0e1f1ef2-ea62-4ae4-a99f-8c40171b729c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Ignite Overview: assets/dashboards/ignite_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ignite.received_messages
+      metadata_path: metadata.csv
+      prefix: ignite.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Ignite
   logs:
     source: ignite
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - キャッシュ
 - data store
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
-display_name: Ignite
+display_on_public_website: true
 draft: false
 git_integration_title: ignite
-guid: fd5a21d5-ddfe-4d04-855f-28492b4d270e
 integration_id: ignite
 integration_title: ignite
 integration_version: 2.2.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ignite.
-metric_to_check: ignite.received_messages
+manifest_version: 2.0.0
 name: ignite
-public_title: ignite インテグレーション
+oauth: {}
+public_title: ignite
 short_description: Ignite サーバーからメトリクスを収集します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Caching
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Ignite サーバーからメトリクスを収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ignite
 ---
 
 

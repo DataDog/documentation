@@ -24,7 +24,7 @@ RUM データが表示されない場合、または一部のユーザーのデ�
 
 [コンテンツセキュリティポリシーのガイドライン][6]を読み、ウェブサイトが RUM ブラウザ SDK CDN とインテークエンドポイントへのアクセスを許可していることを確認します。
 
-### RUM ブラウザ SDK の初期化
+### RUM ブラウザ SDK を初期化します
 
 ブラウザコンソールで `window.DD_RUM.getInternalContext()` を実行して RUM ブラウザ SDK が初期化されているかどうかを確認し、`application_id`、`session_id`、およびビューオブジェクトが返されることを確認します。
 
@@ -113,7 +113,7 @@ Chromium ベースのブラウザで、RUM ブラウザ SDK が Datadog イン�
 [1]: /ja/help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /ja/real_user_monitoring/browser/#npm
-[4]: /ja/real_user_monitoring/faq/proxy_rum_data/?tab=npm
+[4]: /ja/real_user_monitoring/guide/proxy-rum-data/
 [5]: /ja/real_user_monitoring/faq/content_security_policy/
 [6]: /ja/real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707

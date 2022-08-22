@@ -192,7 +192,7 @@ logs:
 
   - type: file
     path: "/path/to/your/php/application-json.log"
-    service: php
+    service: "<SERVICE_NAME>"
     source: php
     sourcecategory: sourcecode
 ```

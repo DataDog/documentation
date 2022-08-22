@@ -1,4 +1,6 @@
 ---
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/setup.md
 further_reading:
 - link: /integrations/observability_pipelines/vector_configurations/
   tag: ドキュメント
@@ -154,4 +156,4 @@ Vector の 3 大構成要素であるソース、トランスフォーム、シ�
 [21]: https://vector.dev/docs/setup/installation/
 [22]: /ja/integrations/observability_pipelines/vector_configurations
 [23]: https://app.datadoghq.com/organization-settings/service-accounts/new
-[24]: https://app.datadoghq.com/pipelines
+[24]: https://app.datadoghq.com/observability-pipelines

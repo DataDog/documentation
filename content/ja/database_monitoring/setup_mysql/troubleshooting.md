@@ -88,6 +88,18 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 
 一部またはすべてのクエリで計画が利用できない場合があります。これは、サポートされていないクエリコマンドである、クエリがサポートされていないクライアントアプリケーションせ生成された、Agent のバージョンが古い、データベースのセットアップが不完全であることなどが原因です。以下は、説明計画の欠落の原因として考えられるものです。
 
+#### イベントステートメントコンシューマーの欠落 {#events-statements-consumer-missing}
+実行計画をキャプチャするには、イベントステートメントのコンシューマーを有効にする必要があります。これを行うには、コンフィグレーションファイル (例: `mysql.conf`) に以下のオプションを追加します。
+```
+performance-schema-consumer-events-statements-current=ON
+```
+
+Datadog では、さらに以下を有効にすることを推奨しています。
+```
+performance-schema-consumer-events-statements-history-long=ON
+```
+このオプションは、すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。これをオンにすると、頻度の低いクエリの実行内容をキャプチャできる可能性が高くなります。
+
 #### 実行計画プロシージャの欠落 {#explain-plan-procedure-missing}
 Agent は `datadog.explain_statement(...)` というプロシージャが `datadog` スキーマに存在することを必要とします。`datadog` スキーマの作成の詳細については、[セットアップ手順][1]を参照してください。 
 

@@ -100,7 +100,7 @@ spec:
 | 非推奨タグ        | 公式タグ                |
 |-----------------------|-----------------------------|
 | cluster_name          | kube_cluster_name           |
-| コンテナ             | kube_container_name         |
+| container             | kube_container_name         |
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
@@ -109,7 +109,7 @@ spec:
 | job_name              | kube_job                    |
 | namespace             | kube_namespace              |
 | phase                 | pod_phase                   |
-| ポッド                   | pod_name                    |
+| pod                   | pod_name                    |
 | replicaset            | kube_replica_set            |
 | replicationcontroller | kube_replication_controller |
 | statefulset           | kube_stateful_set           |

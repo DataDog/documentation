@@ -1,46 +1,62 @@
 ---
+app_id: teamcity
+app_uuid: 8dd65d36-9cb4-4295-bb0c-68d67c0cdd4b
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Teamcity
   logs:
     source: teamcity
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     teamcity_processes: assets/saved_views/teamcity_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - configuration & deployment
 - autodiscovery
 - log collection
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
-display_name: Teamcity
+display_on_public_website: true
 draft: false
 git_integration_title: teamcity
-guid: b390dd3f-47d5-4555-976a-36722833f000
 integration_id: teamcity
 integration_title: Teamcity
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: teamcity.
+manifest_version: 2.0.0
 name: teamcity
-process_signatures:
-- teamcity-server.sh
-- teamcity-server
-public_title: Datadog-Teamcity インテグレーション
+oauth: {}
+public_title: Teamcity インテグレーション
 short_description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::構成 & デプロイ
+  - Category::Autodiscovery
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Teamcity インテグレーション
 ---
 
 

@@ -44,7 +44,9 @@ Watchdog is an algorithmic feature for APM performance and infrastructure metric
   * [Amazon Web Services][5], for the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
   * [Alerting][10]
 
-Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][11] displays a Watchdog alert. Each alert includes a graph of the detected metric irregularity and gives more information about the relevant time frame and endpoint or endpoints. Watchdog automatically monitors data sent by the Datadog Agent or by integrations. 
+Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][11] displays a Watchdog alert. Each alert includes a graph of the detected metric irregularity and gives more information about the relevant time frame and endpoint or endpoints. Watchdog automatically monitors data sent by the Datadog Agent or by integrations.
+
+For any new source of metrics, logs, or other data, Watchdog requires two weeks of data to establish a baseline of expected behavior. Anomalies detected by Watchdog based on less than two weeks of data may contain inaccuracies.
 
 ## Watchdog in the services list
 
@@ -69,7 +71,7 @@ Need help? Contact [Datadog support][15].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/system/
-[2]: /integrations/redis/
+[2]: /integrations/redisdb/
 [3]: /integrations/postgres/
 [4]: /integrations/nginx/
 [5]: /integrations/amazon_web_services/

@@ -12,18 +12,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
   tag: "Blog"
   text: "Best practices for shift-left testing"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=37"
+- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
   tag: "Learning Center"
-  text: "Learn how to run Synthetic tests in CI/CD pipelines"
+  text: "Learn how to run Synthetic tests in a CI/CD pipeline"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
-  text: "Configure an API Test"
+  text: "Learn how to configure an API test"
 - link: "/synthetics/multistep"
   tag: "Documentation"
-  text: "Configure a Multistep API Test"
+  text: "Learn how to configure a multistep API test"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
-  text: "Configure a Browser Test"
+  text: "Learn how to configure a browser test"
 
 ---
 

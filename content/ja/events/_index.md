@@ -6,6 +6,9 @@ further_reading:
 - link: /api/v1/events/
   tag: ドキュメント
   text: Datadog イベント API
+- link: /events/guides/recommended_event_tags/
+  tag: ドキュメント
+  text: イベントへのタグ付けのベストプラクティス
 kind: documentation
 title: イベント
 ---

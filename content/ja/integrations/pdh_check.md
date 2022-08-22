@@ -1,36 +1,50 @@
 ---
+app_id: pdh
+app_uuid: 75f6813c-934c-4f1a-b8f4-71f9f1911165
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PDH
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md
-display_name: PDH
+display_on_public_website: true
 draft: false
 git_integration_title: pdh_check
-guid: D09B3410-00A0-4789-ABD7-7740C3FE211F
 integration_id: pdh
 integration_title: PDH Check
 integration_version: 1.16.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: pdh.
+manifest_version: 2.0.0
 name: pdh_check
-public_title: Datadog-PDH Check インテグレーション
+oauth: {}
+public_title: PDH Check
 short_description: Windows のパフォーマンスカウンターを収集およびグラフ化。
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::OS & System
+  configuration: README.md#Setup
+  description: Windows のパフォーマンスカウンターを収集およびグラフ化。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PDH Check
 ---
 
 
@@ -73,6 +87,10 @@ PDH チェックには、イベントは含まれません。
 
 PDH チェックには、サービスのチェック機能は含まれません。
 
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 [1]: https://docs.datadoghq.com/ja/integrations/windows_performance_counters/
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -81,3 +99,4 @@ PDH チェックには、サービスのチェック機能は含まれません�
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [8]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
+[9]: https://docs.datadoghq.com/ja/help/

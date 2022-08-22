@@ -1,43 +1,64 @@
 ---
+app_id: flink
+app_uuid: 39d70c50-017c-407a-9117-2055d8e03427
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Flink Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: flink.taskmanager.Status.JVM.CPU.Load
+      metadata_path: metadata.csv
+      prefix: flink.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: flink
   logs:
     source: flink
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - 処理
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/flink/README.md
-display_name: flink
+display_on_public_website: true
 draft: false
 git_integration_title: flink
-guid: 8b3e5591-533e-4504-aabb-e697f07461ca
 integration_id: flink
 integration_title: Flink
 integration_version: 1.4.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: flink.
-metric_to_check: flink.taskmanager.Status.JVM.CPU.Load
+manifest_version: 2.0.0
 name: flink
-public_title: Datadog-Flink インテグレーション
+oauth: {}
+public_title: Flink
 short_description: Flink ジョブのメトリクスを追跡する。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Flink ジョブのメトリクスを追跡する。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Flink
 ---
 
 

@@ -493,36 +493,68 @@ The following configuration defines the integration template for Redis container
 
 ### Examples - Log collection from file configured in an annotation
 
-The Agent v7.26.0+/6.26.0+ can directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a file type configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection. However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
 
-For example, to collect logs from `/logs/app/prod.log` from a container named `webapp` inside a Kubernetes pod, the pod definition would be:
+These file paths are **relative** to the Agent. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
+
+For example, you can do this with a shared `hostPath` volume. The Pod below is emitting logs into the file `/var/log/example/app.log`. This is done in the `/var/log/example` directory, where a volume and volumeMount have set this as a `hostPath`.
 
 ```yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: webapp
+  name: logger
   annotations:
-    ad.datadoghq.com/webapp.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}]'
-  labels:
-    name: webapp
+    ad.datadoghq.com/busybox.logs: |
+      [{
+          "type": "file",
+          "path": "/var/log/example/app.log",
+          "source": "example-source",
+          "service": "example-service"
+      }]
 spec:
   containers:
-    - name: webapp
-      image: webapp:latest
+   - name: busybox
+     image: busybox
+     command: [ "/bin/sh", "-c", "--" ]
+     args: [ "while true; do sleep 1; echo `date` example file log >> /var/log/example/app.log; done;" ]
+     volumeMounts:
+     - name: applogs
+       mountPath: /var/log/example
+  volumes:
+     - name: applogs
+       hostPath:
+         path: /var/log/example
 ```
 
-**Notes**:
+The equivalent volume and volumeMount path need to be set in the Agent container so it can read that same log file.
 
-- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to a file may mount a volume such as `/logs/app`, where the log file is written. Please check Kubernetes documentation for further detail on sharing volumes between pods/containers.
-
-- When using this kind of annotation with a container, output logs are not collected automatically. If collection from both the container and a file are needed it should be explicitly enabled in the annotation, for example:
 ```yaml
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}, {"source": "container", "service": "app"}]'
+  containers:
+  - name: agent
+    #(...)
+    volumeMounts:
+    - mountPath: /var/log/example
+      name: applogs
+    #(...)
+  volumes:
+  - name: applogs
+    hostPath:
+      path: /var/log/example
+    #(...)
 ```
 
-- When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
+**Note:** When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container and a file are needed it should be explicitly enabled in the annotation. For example:
 
+```yaml
+ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
+  [
+    {"type":"file","path":"/var/log/example/app.log","source":"file","service":"example-service"},
+    {"source":"container","service":"example-service"}
+  ]
+```
+
+When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
 
 ## Advanced log collection
 

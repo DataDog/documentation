@@ -1,14 +1,25 @@
 ---
-aliases:
-- /ja/integrations/redis/
+app_id: redis
+app_uuid: 15f0ff37-2b36-4165-9606-758271d4a16d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     redis: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: redis.net.clients
+      metadata_path: metadata.csv
+      prefix: redis.
+    process_signatures:
+    - redis-server
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Redis
   logs:
     source: redis
-  metrics_metadata: metadata.csv
   monitors:
     '[Redis] High memory consumption': assets/monitors/high_mem.json
   saved_views:
@@ -16,38 +27,49 @@ assets:
     pid_overview: assets/saved_views/pid_overview.json
     redis_pattern: assets/saved_views/redis_pattern.json
     redis_processes: assets/saved_views/redis_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - caching
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
-display_name: Redis
+display_on_public_website: true
 draft: false
 git_integration_title: redisdb
-guid: 0e2f3ed1-d36b-47a4-b69c-fedb50adf240
 integration_id: redis
 integration_title: Redis
-integration_version: 4.5.1
+integration_version: 4.5.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: redis.
-metric_to_check: redis.net.clients
+manifest_version: 2.0.0
 name: redisdb
-process_signatures:
-- redis-server
-public_title: Datadog-Redis インテグレーション
+oauth: {}
+public_title: Redis
 short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::キャッシュ
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Redis
 ---
 
 
@@ -385,8 +407,6 @@ Redis チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-- [Redis インテグレーションエラー: "unknown command 'CONFIG'"][3]
-
 ### Agent が接続できない
 
 ```shell
@@ -413,10 +433,9 @@ Redis チェックには、イベントは含まれません。
 
 お役に立つドキュメント、リンクや記事:
 
-- [Redis パフォーマンスメトリクスの監視方法][4]
+- [Redis パフォーマンスメトリクスの監視方法][3]
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/integrations/faq/redis-integration-error-unknown-command-config/
-[4]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics
+[3]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

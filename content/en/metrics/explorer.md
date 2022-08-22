@@ -19,27 +19,23 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 ## Graphing
 
-Click on the **Graph** text box to see a list of metrics you have submitted to Datadog within the last 24 hours. Begin by typing in the text box to filter the metrics, then click a metric to select it. Each metric you select creates a real-time graph visualization on the right side of the page.
+Use the query editor to customize the graph displayed on the Metrics Explorer page.
 
-Above your graphs, you can specify the timeframe and graph size.
+You can specify the time frame in the top right corner of the page. The default is **Past 1 Hour**.
 
-{{< img src="metrics/explorer/graphs.png" alt="Metrics Explorer" style="width:80%;" >}}
+{{< img src="metrics/explorer/metrics_explorer.png" alt="Metrics Explorer displaying two queries on a bar graph" style="width:80%;" >}}
 
-**Note**: The **Calculate as count where applicable** check box appears for metrics with the `RATE` type.
-
-Metrics that are not reported in the last 24 hours do not appear in the drop down menu. You can add these metrics to your graphs manually by entering the metric name or full query. 
+Metrics that are not reported in the last 24 hours do not appear in the query editor. You can add these metrics to your graphs manually by entering the metric name or full query.
 
 ### Scope
 
-Define a filtering scope with the **Over** text box by selecting or searching for tag values. For example, you can use the **Over** text box to filter metric values from a specific host, cluster, environment, region, etc.
-
-### Grouping
-
-Define the grouping with the **One graph per** text box by selecting or searching for tag keys. For example, you can split a single metric into multiple graphs by host, container, region, environment, etc. Metrics tagged with the `<KEY>:<VALUE>` format can be grouped.
+Define a filtering scope with the **from** text box by selecting or searching for tag values. For example, you can use the **from** text box to filter metric values from a specific host, cluster, environment, or region.
 
 ### Space aggregation
 
-Define the [space aggregation][5] used to combine a metric's values with the **On each graph, aggregate with the** text box. The possible options are:
+Define the [space aggregation][5] used to combine a metric's values.
+
+The possible options are:
 
 * Average of reported values (default)
 * Max of reported values
@@ -48,20 +44,13 @@ Define the [space aggregation][5] used to combine a metric's values with the **O
 
 **Note**: The options may differ based on the metric type selected.
 
-### Options
+### Functions
 
-You can update the following options for the metrics explorer:
-
-* Prefix graph titles with `<VALUE>`: The default is blank.
-* Show up to `<NUMBER>` graphs at a time: The default is 20.
+You can optionally add functions to your query using the function button. Not all functions are available for all metric types.
 
 ### Export
 
-Export all graphs to a new or existing timeboard with the buttons at the bottom left. Individual graphs can be exported by clicking the export icon on the top right of each graph.
-
-### Snapshot
-
-Create a snapshot of an individual graph by using the share icon in the upper right. Clicking on the icon displays a dropdown menu with the **Send snapshot...** option.
+Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
 
 ## Further reading
 
