@@ -77,7 +77,14 @@ Datazoom には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [ブログ: Datadog で Datazoom のテレメトリーを監視する][5]
+
 [1]: https://help.datazoom.io/hc/en-us/articles/360042494512-Datadog
 [2]: https://app.datadoghq.com/logs
 [3]: https://app.datadoghq.com/dashboard/lists/preset/3?q=datazoom
 [4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-datazoom/

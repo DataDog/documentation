@@ -130,6 +130,8 @@ Les transactions prennent en charge les visualisations sous forme de [liste de g
 
 {{< img src="logs/explorer/transactions_side_panel.png" alt="Le volet des logs de transaction avec des logs pour la transaction sélectionnée" style="width:80%;" >}}
 
+## Pour aller plus loin
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/dashboards/guide/custom_time_frames

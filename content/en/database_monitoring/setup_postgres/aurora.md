@@ -298,6 +298,7 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
+  --set 'clusterChecksRunner.enabled=true' \
   --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
@@ -305,7 +306,7 @@ instances:
     host: <INSTANCE_ADDRESS>
     port: 5432
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: <UNIQUEPASSWORD>" \
   datadog/datadog
 ```
 

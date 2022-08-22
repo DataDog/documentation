@@ -1,24 +1,25 @@
 ---
-title: ホスト Agent ログの収集
-kind: documentation
 description: '[Datadog Agent][60] を使用してログを Datadog に送信します'
 further_reading:
-  - link: agent/logs/advanced_log_collection/#filter-logs
-    tag: ドキュメント
-    text: Datadog に送信されるログの絞り込み
-  - link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-    tag: ドキュメント
-    text: ログの機密データのスクラビング
-  - link: agent/logs/advanced_log_collection/#multi-line-aggregation
-    tag: ドキュメント
-    text: 複数行のログの集約
-  - link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
-    tag: ドキュメント
-    text: ワイルドカードを使用したディレクトリの追跡
-  - link: agent/logs/advanced_log_collection/#global-processing-rules
-    tag: ドキュメント
-    text: グローバルな処理ルール
+- link: agent/logs/advanced_log_collection/#filter-logs
+  tag: ドキュメント
+  text: Datadog に送信されるログの絞り込み
+- link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
+  tag: ドキュメント
+  text: ログの機密データのスクラビング
+- link: agent/logs/advanced_log_collection/#multi-line-aggregation
+  tag: ドキュメント
+  text: 複数行のログの集約
+- link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
+  tag: ドキュメント
+  text: ワイルドカードを使用したディレクトリの追跡
+- link: agent/logs/advanced_log_collection/#global-processing-rules
+  tag: ドキュメント
+  text: グローバルな処理ルール
+kind: documentation
+title: ホスト Agent ログの収集
 ---
+
 ログの収集には、Datadog Agent v6.0 以上が必要です。古いバージョンの Agent には、`log collection` インターフェイスが含まれていません。まだ Agent を使用していない場合は、[Agent のインストール手順][1]に従ってください。
 
 ## ログ収集を有効にする
@@ -37,14 +38,6 @@ Agent v6.19+/v7.19+ 以降、使用されるデフォルトのトランスポー
 
 ログ収集を有効にすると、Agent から Datadog にログを転送できるようになります。次に、Agent でログの収集元を設定します。
 
-## インテグレーションからのログ収集を有効にする
-
-特定のインテグレーションのログを収集するには、そのインテグレーションの `conf.yaml` ファイルのログセクションのコメントを外して、環境に合わせて構成します。Agent を Kubernetes または Docker 環境で実行している場合は、専用の [Kubernetes ログ収集][6]または [Docker ログ収集][7]のドキュメントを参照してください。
-
-<div class="alert alert-warning">
-そのまま使用できるログ構成が含まれている<a href="/integrations/#cat-log-collection">サポートされているインテグレーションのリスト</a>を参照してください。
-</div>
-
 ## カスタムログ収集
 
 Datadog Agent v6 は、収集したログをファイル、ネットワーク (TCP または UDP)、journald、Windows チャンネルから Datadog に転送できます。
@@ -52,8 +45,8 @@ Datadog Agent v6 は、収集したログをファイル、ネットワーク (T
 1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` ディレクトリに、`<CUSTOM_LOG_SOURCE>.d/` フォルダーを新規作成します。
 2. この新しいフォルダーに新しい `conf.yaml` ファイルを作成します。
 3. 下記のパラメーターを指定して、カスタムログ収集構成グループを追加します。
-4. [Agent を再起動][8]してこの新しい設定を適用します。
-5. [Agent の status サブコマンドを実行][9]し、Checks セクションで `<カスタムログソース>` を検索します。
+4. [Agent を再起動][6]してこの新しい設定を適用します。
+5. [Agent の status サブコマンドを実行][7]し、Checks セクションで `<CUSTOM_LOG_SOURCE>` を検索します。
 
 以下に、カスタムログ収集設定の例を示します。
 
@@ -159,14 +152,14 @@ logs:
 | `port`           | 〇      | `type` が **tcp** または **udp** の場合、ログをリスニングするポートを設定します。                                                                                                                                                                                                                                                                                     |
 | `path`           | 〇      | `type` が **file** または **journald** の場合、ログを収集するファイルパスを設定します。                                                                                                                                                                                                                                                                             |
 | `channel_path`   | 〇      | `type` が **windows_event** の場合、ログを収集する Windows イベントチャンネルをリストします。                                                                                                                                                                                                                                                                     |
-| `service`        | 〇      | ログを所有しているサービスの名前。ご使用のサービスを [Datadog APM][9] でインスツルメントしている場合、これは同じサービス名にする必要があります。複数のデータタイプにわたって `service` を構成する場合は、[統合サービスタグ付け][10]の手順を確認してください。                                                                                                          |
-| `source`         | 〇      | ログを送信しているインテグレーションを定義する属性。既存のインテグレーションに由来するログでない場合、このフィールドはカスタムソース名にすることができます。ただし、関連して収集している[カスタムメトリクス][11]がある場合は、そのネームスペースと一致させることをお勧めします。たとえば、`myapp.request.count` の `myapp` を使用します。 |
+| `service`        | 〇      | ログを所有しているサービスの名前。ご使用のサービスを [Datadog APM][8] でインスツルメントしている場合、これは同じサービス名にする必要があります。複数のデータタイプにわたって `service` を構成する場合は、[統合サービスタグ付け][9]の手順を確認してください。                                                                                                          |
+| `source`         | 〇      | ログを送信しているインテグレーションを定義する属性。既存のインテグレーションに由来するログでない場合、このフィールドはカスタムソース名にすることができます。ただし、関連して収集している[カスタムメトリクス][10]がある場合は、そのネームスペースと一致させることをお勧めします。たとえば、`myapp.request.count` の `myapp` を使用します。 |
 | `include_units`  | ✕       | `type` が **journald** の場合、対象とする journald ユニットのリスト。                                                                                                                                                                                                                                                                               |
 | `exclude_paths`  | ✕       | `type` が **file** で、`path` にワイルドカード文字が含まれている場合、ログ収集から除外する必要がある一致するファイルをリストします。6.18 以降の Agent バージョンで使用できます。                                                                                                                                                                            |
 | `exclude_units`  | ✕       | `type` が **journald** の場合、対象としない journald ユニットのリスト。                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | ✕       | ソース属性が属するカテゴリーの定義に使用される属性。たとえば、source:postgres、sourcecategory:database`、`source: apache, sourcecategory: http_web_access` です。                                                                                                                                                                                                                              |
 | `start_position` | ✕       | `type` が **file** の場合、Agent がファイルの読み取りを開始する位置を設定します。有効な値は `beginning` と `end` です (デフォルト: `end`)。`path` にワイルドカード文字が含まれている場合、`beginning` はサポートされません。_Agent v6.19/v7.19 に追加されました_                                                                                                            |
-| `encoding`       | ✕       | `type` が **file** の場合、Agent がファイルを読み込む際のエンコーディングを設定します。UTF16 リトルエンディアン の場合は `utf-16-le` に、UTF16 ビッグエンディアンの場合は `utf-16-be` に設定します。その他の値は無視され、Agent はファイルを UTF-8 形式で読み込みます。_Agent v6.23/v7.23 での追加機能です。_                                                                                      |
+| `encoding`       | ✕       | `type` が **file** の場合、Agent がファイルを読み込む際のエンコーディングを設定します。UTF-16 リトルエンディアン の場合は `utf-16-le` に、UTF-16 ビッグエンディアンの場合は `utf-16-be` に、Shift JIS の場合は `shift-jis` に設定します。その他の値に設定すると、Agent はファイルを UTF-8 形式で読み込みます。_`utf-16-le` および `utf-16be` は Agent v6.23/v7.23 の、`shift-jis` は Agent v6.34/v7.34 の追加機能です_                                                                                      |
 | `tags`           | ✕       | 収集される各ログに追加するタグのリスト ([タグ付けの詳細はこちら][11])。                                                                                                                                                                                                                                                                             |
 
 ## その他の参考資料
@@ -178,9 +171,9 @@ logs:
 [3]: /ja/agent/docker/log/
 [4]: /ja/agent/guide/agent-configuration-files/
 [5]: /ja/agent/logs/log_transport/
-[6]: /ja/agent/kubernetes/log/#autodiscovery
-[7]: /ja/agent/docker/log/#log-integrations
-[8]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: /ja/tracing/
-[10]: /ja/getting_started/tagging/unified_service_tagging
+[6]: /ja/agent/guide/agent-commands/#restart-the-agent
+[7]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: /ja/tracing/
+[9]: /ja/getting_started/tagging/unified_service_tagging
+[10]: /ja/metrics/custom_metrics/#overview
 [11]: /ja/getting_started/tagging/

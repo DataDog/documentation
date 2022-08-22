@@ -29,7 +29,7 @@ Datadog EU サイトへのインストールと構成には、`SITE=` パラメ�
 
 Datadog Agent をドメイン環境にインストールするには、[Agent のインストール要件][4]を参照してください。
 
-**注**: [ドメインコントローラー][12]について特別な考慮事項があります。
+**注**: [ドメインコントローラー][5]について特別な考慮事項があります。
 
 {{< tabs >}}
 {{% tab "GUI" %}}
@@ -188,7 +188,7 @@ Windows Powershell で、次のコマンドを使用することもできます�
 
 ## コンフィギュレーション
 
-[Datadog Agent Manager][5] を使ってチェックを有効化、無効化、および構成します。Agent を再起動して変更内容を適用します。
+[Datadog Agent Manager][6] を使ってチェックを有効化、無効化、および構成します。Agent を再起動して変更内容を適用します。
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -399,7 +399,7 @@ print tempfile.gettempdir()
 
 また、インテグレーションを変更するたびに、Datadog サービスを再起動する必要があります。これは、services.msc または UI のサイドバーから行うことができます。
 
-サービスの場合、Datadog が追跡するのはアベイラビリティのみで、メトリクスは追跡されません (メトリクスについては、[プロセス][6]または [WMI][7] インテグレーションを使います)。モニターをセットアップするには、[インテグレーションモニタータイプ][8]を選択し、続いて **Windows Service** を検索します。*Integration Status -> Pick Monitor Scope* から、モニターしたいサービスを選びます。
+サービスの場合、Datadog が追跡するのはアベイラビリティのみで、メトリクスは追跡されません (メトリクスについては、[プロセス](#monitoring-windows-processes)または [WMI][7] インテグレーションを使います)。モニターをセットアップするには、[インテグレーションモニタータイプ][8]を選択し、続いて **Windows Service** を検索します。*Integration Status -> Pick Monitor Scope* から、モニターしたいサービスを選びます。
 
 ### Windows のシステム負荷の監視
 
@@ -429,11 +429,10 @@ process_config:
 [2]: /ja/agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
 [3]: /ja/agent/faq/windows-agent-ddagent-user/
 [4]: /ja/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: /ja/agent/guide/datadog-agent-manager-windows/
-[6]: /ja/#monitoring-windows-processes
-[7]: /ja/integrations/wmi/
+[5]: /ja/agent/faq/windows-agent-ddagent-user/#domain-controllers
+[6]: /ja/agent/guide/datadog-agent-manager-windows/
+[7]: /ja/integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /ja/infrastructure/process/?tab=linuxwindows#installation
 [10]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /ja/agent/guide/agent-commands/#restart-the-agent
-[12]: /ja/agent/faq/windows-agent-ddagent-user/#domain-controllers

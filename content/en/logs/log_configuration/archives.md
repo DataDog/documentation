@@ -271,7 +271,6 @@ You can [set a lifecycle configuration on your S3 bucket][1] to automatically tr
 [Rehydration][2] only supports the following storage classes:
 
 * S3 Standard
-* S3 Intelligent-Tiering
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval

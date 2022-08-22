@@ -1,48 +1,69 @@
 ---
-aliases:
-- /ja/integrations/supervisor
+app_id: supervisord
+app_uuid: c4ee3618-f4b4-48b8-9515-a4a2f4091c0d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: supervisord.process.count
+      metadata_path: metadata.csv
+      prefix: supervisord.
+    process_signatures:
+    - python supervisord
+    - supervisord
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Supervisord
   logs:
     source: supervisord
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     supervisord_processes: assets/saved_views/supervisord_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md
-display_name: Supervisord
+display_on_public_website: true
 draft: false
 git_integration_title: supervisord
-guid: 2b81259b-723e-47be-8612-87e1f64152e9
 integration_id: supervisord
 integration_title: Supervisord
 integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: supervisord.
-metric_to_check: supervisord.process.count
+manifest_version: 2.0.0
 name: supervisord
-process_signatures:
-- python supervisord
-- supervisord
-public_title: Supervisord インテグレーション
+oauth: {}
+public_title: Supervisord
 short_description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS とシステム
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Supervisor 管理プロセスのステータス、アップタイム、数を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Supervisord
 ---
 
 

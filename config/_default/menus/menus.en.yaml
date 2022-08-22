@@ -811,16 +811,16 @@ main:
     url: dashboards/correlations/
     parent: dashboards
     weight: 7
+  - name: Scheduled Reports
+    url: dashboards/scheduled_reports/
+    parent: dashboards
+    weight: 8
+    identifier: dashboards_reporting
   - name: Template Variables
     url: dashboards/template_variables/
     parent: dashboards
-    weight: 8
-    identifier: dashboards_temp_variables
-  - name: Reporting
-    url: dashboards/reporting/
-    parent: dashboards
     weight: 9
-    identifier: dashboards_reporting
+    identifier: dashboards_temp_variables
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
@@ -2552,10 +2552,21 @@ main:
     parent: security_rules
     identifier: ootb_rules
     weight: 501
-  - name: Notification Rules
-    url: security_platform/notification_rules/
+  - name: Notifications
+    url: security_platform/notifications/
     parent: security_platform
+    identifier: security_notifications
     weight: 6
+  - name: Rules
+    url: security_platform/notifications/rules/
+    parent: security_notifications
+    identifier: security_notification_rules
+    weight: 601
+  - name: Variables
+    url: security_platform/notifications/variables/
+    parent: security_notifications
+    identifier: security_notification_variables
+    weight: 602    
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform

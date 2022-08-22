@@ -1,46 +1,65 @@
 ---
-aliases:
-- /ja/integrations/ssh
+app_id: ssh
+app_uuid: 66833cbe-1bfc-4104-9d77-7b828219470b
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sftp.response_time
+      metadata_path: metadata.csv
+      prefix: ssh.
+    process_signatures:
+    - ssh
+    - sftp
+    - sshd
+    - 'sshd:'
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SSH
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - network
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
-display_name: SSH
+display_on_public_website: true
 draft: false
 git_integration_title: ssh_check
-guid: 4eb195ef-554f-4cc2-80af-8f286c631fa8
 integration_id: ssh
 integration_title: SSH
-integration_version: 2.3.1
+integration_version: 2.3.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ssh.
-metric_to_check: sftp.response_time
+manifest_version: 2.0.0
 name: ssh_check
-process_signatures:
-- ssh
-- sftp
-- sshd
-- 'sshd:'
-public_title: SSH インテグレーション
+oauth: {}
+public_title: SSH
 short_description: SSH 接続と SFTP レイテンシーを監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::ネットワーク
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: SSH 接続と SFTP レイテンシーを監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SSH
 ---
 
 

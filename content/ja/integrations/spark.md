@@ -1,42 +1,66 @@
 ---
+app_id: spark
+app_uuid: 5cb22455-9ae2-44ee-ae05-ec21c27b3292
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     spark: assets/dashboards/spark_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: spark.job.count
+      metadata_path: metadata.csv
+      prefix: spark.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Spark
   logs:
     source: spark
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/spark/README.md
-display_name: Spark
+display_on_public_website: true
 draft: false
 git_integration_title: spark
-guid: f7a5a40f-f73c-465a-be8f-b2b371c706a2
 integration_id: spark
 integration_title: Spark
 integration_version: 3.1.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: spark.
-metric_to_check: spark.job.count
+manifest_version: 2.0.0
 name: spark
-public_title: Spark インテグレーション
+oauth: {}
+public_title: Spark
 short_description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: タスクの失敗率、シャッフルされたバイト数などを追跡します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Spark
 ---
 
 

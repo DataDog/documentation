@@ -119,7 +119,8 @@
                     "serverless",
                     "watchdog",
                     "database_monitoring",
-                    "profiler"
+                    "profiler",
+                    "containers"
                 ]
             },
             "tags": ["docs"],

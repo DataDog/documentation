@@ -79,10 +79,14 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 When a logs monitor is triggered, samples or values can be added to the notification message.
 
-| Monitor over     | Can be added to notification message                                                                     |
-|------------------|----------------------------------------------------------------------------------------------------------|
-| Log count        | Grouped: The top 10 breaching values and their corresponding counts.<br>Ungrouped: Up to 10 log samples. |
-| Facet or measure | Grouped: The top 10 facet or measure values.<br>Ungrouped: The top 10 facet or measure values.           |
+| Monitor Setup                    | Can be added to notification message |
+|----------------------------------|--------------------------------------|
+| Ungrouped Simple-Alert Log count | Up to 10 log samples.                |
+| Grouped Simple-Alert Log count   | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert Log count    | Up to 10 log samples.                |
+| Ungrouped Simple-Alert measure   | Up to 10 log samples.                |
+| Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert Log count    | Up to 10 facet or measure values.    |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 

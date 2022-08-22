@@ -1,46 +1,70 @@
 ---
+app_id: lighttpd
+app_uuid: 3d7ace6a-9efd-4d21-b4e6-a9956512a875
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     lighttpd: assets/dashboards/lighttpd_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: lighttpd.performance.uptime
+      metadata_path: metadata.csv
+      prefix: lighttpd.
+    process_signatures:
+    - lighttpd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Lighttpd
   logs:
     source: lighttpd
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     lighttpd_processes: assets/saved_views/lighttpd_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
-display_name: Lighttpd
+display_on_public_website: true
 draft: false
 git_integration_title: lighttpd
-guid: 01dcfe7a-7a56-4388-a388-799ee6daaaab
 integration_id: lighttpd
 integration_title: Lighttpd
 integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: lighttpd.
-metric_to_check: lighttpd.performance.uptime
+manifest_version: 2.0.0
 name: lighttpd
-process_signatures:
-- lighttpd
-public_title: Lighttpd インテグレーション
+oauth: {}
+public_title: Lighttpd
 short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Lighttpd
 ---
 
 
