@@ -27,7 +27,7 @@ Billing of [GKE Autopilot][5] environments is the same as that of [GKE Standard]
 
 **How does Datadog measure hourly on-demand usage?**
 
-Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (10/host for Pro and 20/host for Enterprisei by default) and any contracted container commitment. The number containers exceeding the allotment are averaged out over the hour to calculate the hourly on-demand usage. This method normalizes the on-demand usage for short term spikes and variations between hosts.
+Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (10/host for Pro and 20/host for Enterprise by default) and any contracted container commitment. The number containers exceeding the allotment are averaged out over the hour to calculate the hourly on-demand usage. This method normalizes the on-demand usage for short term spikes and variations between hosts.
 
 **What if a user runs a particularly high number of containers for a short period of time?**
 
@@ -37,11 +37,11 @@ Using the hourly on-demand usage calculation above, if there are 1200 on-demand 
 
 As long as the number of total running containers does not exceed the total allotment for the account, these are included in the account's infrastructure plan.
 
-**I am using autoscaling groups, and I have peak and off-peak hours. How does this affect my on-demand container usage?**
+**When using autoscaling groups, there are have peak and off-peak hours. How does this affect the on-demand container usage?**
 
 The on-demand calculations are performed using the allotment that is based on the number of infrastructure hosts. Since the autoscaling groups increase the number of hosts during peak hours, the total container allotment also increases during those periods.
 
-**Are Datadog Agent containers counted against my allocation?**
+**Are Datadog Agent containers counted against the allocation?**
 
 Yes.
 
