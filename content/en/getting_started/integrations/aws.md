@@ -81,17 +81,17 @@ Before getting started, ensure you have the following prerequisites:
 2. Go to the the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
 
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
-    **a.** Select the AWS regions to integrate with.  
-    **b.** Add your Datadog [API key][58].  
-    **c.** Optionally, send logs and other other data to Datadog with the [Datadog Forwarder Lambda][1].  
-    **d.** Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
+    a. Select the AWS regions to integrate with.  
+    b. Add your Datadog [API key][58].  
+    c. Optionally, send logs and other other data to Datadog with the [Datadog Forwarder Lambda][1].  
+    d. Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
-5. Click "Launch CloudFormation Template". This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
+5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
 
-6. Check the required boxes from AWS and click `Create stack`. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
+6. Check the required boxes from AWS and click **Create stack**. This launches the creation process for the Datadog stack along with three nested stacks. This could take several minutes. Ensure that the stack is successfully created before proceeding.
 
-7. After the stack is created, go back to the AWS integration tile in Datadog and click the **Ready!** button.
+7. After the stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
 
 8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
