@@ -493,36 +493,68 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 ### 例 - アノテーションで構成されたファイルからのログ収集
 
-Agent v7.26.0+/6.26.0+ は、アノテーションに基づいてファイルからログを直接収集できます。これらのログを収集するには、ファイルタイプを設定して `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` を使用します。このようなアノテーションが付いたファイルから収集されたログには、コンテナ自体からのログと同じタグのセットが自動的にタグ付けされます。
+Datadog では、より自動的にログ収集を設定できるように、コンテナ化されたアプリケーションには `stdout` と `stderr` の出力ストリームを使用することを推奨しています。しかし、Agent は、アノテーションに基づいてファイルから直接ログを収集することもできます。これらのログを収集するには、`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` を `type: file` と `path` の構成で使用します。このようなアノテーションを持つファイルから収集されたログは、コンテナ自体から来るログと同じタグのセットで自動的にタグ付けされます。
 
-たとえば、Kubernetes ポッド内の `webapp` という名前のコンテナから `/logs/app/prod.log` からログを収集するには、ポッドの定義は次のようになります。
+これらのファイルパスは、Agent に対して **相対的** なものです。したがって、ログファイルを含むディレクトリをアプリケーションと Agent コンテナの両方にマウントして、Agent が適切に可視化できるようにする必要があります。
+
+例えば、共有の `hostPath` ボリュームを使用してこれを行うことができます。下記の Pod は `/var/log/example/app.log` というファイルにログを出力しています。これは `/var/log/example` ディレクトリで行われ、ボリュームと volumeMount がこれを `hostPath` として設定しています。
 
 ```yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: webapp
+  name: logger
   annotations:
-    ad.datadoghq.com/webapp.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}]'
-  labels:
-    name: webapp
+    ad.datadoghq.com/busybox.logs: |
+      [{
+          "type": "file",
+          "path": "/var/log/example/app.log",
+          "source": "example-source",
+          "service": "example-service"
+      }]
 spec:
   containers:
-    - name: webapp
-      image: webapp:latest
+   - name: busybox
+     image: busybox
+     command: [ "/bin/sh", "-c", "--" ]
+     args: [ "while true; do sleep 1; echo `date` example file log >> /var/log/example/app.log; done;" ]
+     volumeMounts:
+     - name: applogs
+       mountPath: /var/log/example
+  volumes:
+     - name: applogs
+       hostPath:
+         path: /var/log/example
 ```
 
-**注**:
+Agent コンテナに同等のボリュームと VolumeMount パスを設定し、同じログファイルを読み込むことができるようにする必要があります。
 
-- ファイルパスは Agent に**相対的**であるため、ファイルを含むディレクトリは、アプリケーションを実行しているコンテナと Agent コンテナの間で共有される必要があります。たとえば、コンテナが `/logs` をマウントする場合、ファイルにログを作成する各コンテナはログファイルが書き込まれる場所に `/logs/app` のようなボリュームをマウントすることがあります。ポッド/コンテナ間でボリュームを共有する方法の詳細については、Kubernetes のドキュメントを確認してください。
-
-- この種のアノテーションをコンテナで使用する場合、出力ログは自動的に収集されません。コンテナとファイルの両方からの収集が必要な場合は、アノテーションで明示的に有効にする必要があります。次に例を示します。
 ```yaml
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"type":"file", "source": "webapp", "service": "backend-prod", "path": "/logs/app/prod.log"}, {"source": "container", "service": "app"}]'
+  containers:
+  - name: agent
+    #(...)
+    volumeMounts:
+    - mountPath: /var/log/example
+      name: applogs
+    #(...)
+  volumes:
+  - name: applogs
+    hostPath:
+      path: /var/log/example
+    #(...)
 ```
 
-- この種の組み合わせを使用する場合、`source` と `service` にはファイルから収集されたログのデフォルト値がないため、アノテーションで明示的に設定する必要があります。
+**注:** この種のアノテーションをコンテナで使用する場合、`stdout` と `stderr` ログはコンテナから自動的に収集されません。コンテナとファイルの両方からの収集が必要な場合は、アノテーションで明示的に有効にする必要があります。次に例を示します。
 
+```yaml
+ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
+  [
+    {"type":"file","path":"/var/log/example/app.log","source":"file","service":"example-service"},
+    {"source":"container","service":"example-service"}
+  ]
+```
+
+この種の組み合わせを使用する場合、`source` と `service` にはファイルから収集されたログのデフォルト値がないため、アノテーションで明示的に設定する必要があります。
 
 ## 高度なログの収集
 
