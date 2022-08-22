@@ -811,16 +811,16 @@ main:
     url: dashboards/correlations/
     parent: dashboards
     weight: 7
+  - name: Scheduled Reports
+    url: dashboards/scheduled_reports/
+    parent: dashboards
+    weight: 8
+    identifier: dashboards_reporting
   - name: Template Variables
     url: dashboards/template_variables/
     parent: dashboards
-    weight: 8
-    identifier: dashboards_temp_variables
-  - name: Reporting
-    url: dashboards/reporting/
-    parent: dashboards
     weight: 9
-    identifier: dashboards_reporting
+    identifier: dashboards_temp_variables
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards

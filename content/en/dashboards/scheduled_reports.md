@@ -1,5 +1,5 @@
 ---
-title: Reporting
+title: Scheduled Reports
 kind: documentation
 disable_toc: false
 is_public: true
@@ -17,9 +17,9 @@ further_reading:
 
 ## Overview
 
-Reporting automatically sends a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a linear HTML format.
+Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a linear HTML format.
 
-{{< img src="dashboards/reporting/report_example.png" alt="An example report titled Checkout KPI Report showing a date, a description, a dashboard link, the name of the Datadog organization, and 3 images of dashboard widgets" style="width:70%;" >}}
+{{< img src="dashboards/scheduled_reports/report_example.png" alt="An example report titled Checkout KPI Report showing a date, a description, a dashboard link, the name of the Datadog organization, and 3 images of dashboard widgets" style="width:70%;" >}}
 
 ## Schedule a report
 
@@ -50,7 +50,7 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 **Note:** Enterprise and Pro accounts can send reports to recipients outside of their organizations. 
 
-{{< img src="dashboards/reporting/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:100%;" >}}
+{{< img src="dashboards/scheduled_reports/report_configuration_modal.png" alt="The configuration modal for an individual dashboard report, with sections to set a schedule, add recipients, and customize email. At the bottom of the modal are buttons to edit template variables, delete report, send preview, cancel, and save" style="width:100%;" >}}
 
 ### Customize the report
 
@@ -63,11 +63,11 @@ To see the report before saving the schedule, click **Send Preview**. You can pa
 ## Managing reports
 A single dashboard can have multiple scheduled reports with different settings, for example, to support different groups of stakeholders interested in the same dashboard. To see the reports on an existing dashboard, open the dashboard cog menu and select **Configure Reports**. 
 
-{{< img src="dashboards/reporting/dashboard_cog_menu.png" alt="A view of the menu displayed when hovering over the cog icon in a dashboard, showing the option to configure reports" style="width:50%;" >}}
+{{< img src="dashboards/scheduled_reports/dashboard_cog_menu.png" alt="A view of the menu displayed when hovering over the cog icon in a dashboard, showing the option to configure reports" style="width:50%;" >}}
 
 From the configuration modal that opens, you can pause an existing report or create a new report. To see and edit the details of an existing report, or delete the report, click **Edit**.
 
-{{< img src="dashboards/reporting/reporting_configuration_modal.png" alt="The configuration modal for reporting, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a done button" style="width:100%;" >}}
+{{< img src="dashboards/scheduled_reports/scheduled_reports_configuration_modal.png" alt="The configuration modal for scheduled reports, with two reports displayed, each showing their titles, tags, recipients, frequency, an option to toggle the report on or off, and a button to edit the report. At the bottom is a button to add a new report and a done button" style="width:100%;" >}}
 
 ## Permissions
 
@@ -75,7 +75,7 @@ Only users with the **Dashboard Report Write** permission can generate a report.
 
 Images generated in reports show all data regardless of granular read restrictions. We recommend limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn more about managing roles and permissions, read our [account management documentation][13]. 
 
-{{< img src="dashboards/reporting/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
+{{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
 
 ## Further Reading
 
