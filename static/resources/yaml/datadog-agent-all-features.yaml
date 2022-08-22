@@ -5,7 +5,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: "datadog"
-    chart: "datadog-2.33.6"
+    chart: "datadog-2.37.4"
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
@@ -83,11 +83,16 @@ data:
       enabled: false
     runtime_security_config:
       enabled: true
+      fim_enabled: false
       socket: /var/run/sysprobe/runtime-security.sock
       policies:
         dir: /etc/datadog-agent/runtime-security.d
       syscall_monitor:
         enabled: false
+      network:
+        enabled: false
+      activity_dump:
+        traced_cgroups_count: 0
 ---
 # Source: datadog/templates/system-probe-configmap.yaml
 apiVersion: v1
@@ -190,6 +195,7 @@ data:
             "newfstatat",
             "open",
             "openat",
+            "openat2",
             "pause",
             "perf_event_open",
             "pipe",
@@ -445,6 +451,17 @@ rules:
       - get
       - watch
   - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+    verbs: ["get", "list", "watch", "update", "create"]
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get"]
+  - apiGroups: ["apps"]
+    resources: ["statefulsets", "replicasets", "deployments", "daemonsets"]
+    verbs: ["get"]
+  - apiGroups:
       - ""
     resources:
       - serviceaccounts
@@ -505,6 +522,34 @@ subjects:
     name: datadog-cluster-agent
     namespace: default
 ---
+# Source: datadog/templates/cluster-agent-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: Role
+metadata:
+  labels: {}
+  name: datadog-cluster-agent-main
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "update", "create"]
+---
+# Source: datadog/templates/cluster-agent-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: RoleBinding
+metadata:
+  labels: {}
+  name: "datadog-cluster-agent-main"
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: datadog-cluster-agent-main
+subjects:
+  - kind: ServiceAccount
+    name: datadog-cluster-agent
+    namespace: default
+---
 # Source: datadog/templates/agent-services.yaml
 apiVersion: v1
 kind: Service
@@ -520,6 +565,24 @@ spec:
     - port: 5005
       name: agentport
       protocol: TCP
+---
+# Source: datadog/templates/agent-services.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: datadog-cluster-agent-admission-controller
+  namespace: default
+  labels:
+    app: "datadog"
+    chart: "datadog-2.37.4"
+    release: "datadog"
+    heritage: "Helm"
+spec:
+  selector:
+    app: datadog-cluster-agent
+  ports:
+    - port: 443
+      targetPort: 8000
 ---
 # Source: datadog/templates/daemonset.yaml
 apiVersion: apps/v1
@@ -547,7 +610,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -671,7 +734,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -737,9 +800,9 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
-          command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
+          command: ["process-agent", "--cfgpath=/etc/datadog-agent/datadog.yaml"]
           resources: {}
           env:
             # Needs to be removed when Agent N-2 is built with Golang 1.17
@@ -812,7 +875,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -882,7 +945,7 @@ spec:
               mountPropagation: None
               readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -927,8 +990,6 @@ spec:
               value: "/etc/datadog-agent/runtime-security.d"
             - name: DD_RUNTIME_SECURITY_CONFIG_SOCKET
               value: /var/run/sysprobe/runtime-security.sock
-            - name: DD_RUNTIME_SECURITY_CONFIG_SYSCALL_MONITOR_ENABLED
-              value: "false"
             - name: DD_DOGSTATSD_SOCKET
               value: "/var/run/datadog/dsd.socket"
           volumeMounts:
@@ -969,7 +1030,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -979,7 +1040,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -1017,7 +1078,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -1143,7 +1204,7 @@ spec:
       serviceAccountName: datadog-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:1.19.0"
+          image: "gcr.io/datadoghq/cluster-agent:1.22.0"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:
@@ -1162,6 +1223,14 @@ spec:
                   name: "datadog"
                   key: api-key
                   optional: true
+            - name: DD_ADMISSION_CONTROLLER_ENABLED
+              value: "true"
+            - name: DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED
+              value: "false"
+            - name: DD_ADMISSION_CONTROLLER_SERVICE_NAME
+              value: datadog-cluster-agent-admission-controller
+            - name: DD_ADMISSION_CONTROLLER_FAILURE_POLICY
+              value: "Ignore"
             - name: DD_CLUSTER_CHECKS_ENABLED
               value: "true"
             - name: DD_EXTRA_CONFIG_PROVIDERS
