@@ -63,7 +63,7 @@ Read the [VMware Tanzu documentation][2] for installation and configuration step
 
 The Datadog buildpack uses the Pivotal Platform [multi-buildpack][1] feature that was introduced in version `1.12`.
 
-For older versions, Pivotal Platform provides a back-port of this feature in the form of a [buildpack][2]. You must install and configure this backport in order to use Datadog's buildpack:
+For older versions, Pivotal Platform provides a backwards compatible version of this feature in the form of a [buildpack][2]. You must install and configure this version in order to use Datadog's buildpack:
 
 1. **Upload the multi-buildpack back-port.** Download the latest [multi-build pack release][2] and upload it to your Pivotal Platform environment.
 
