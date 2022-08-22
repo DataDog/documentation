@@ -1,50 +1,70 @@
 ---
+app_id: sonarqube
+app_uuid: c6033e2f-8b3d-4b82-8d35-7c61ce7d0908
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Sonarqube Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sonarqube.server.database.pool_active_connections
+      metadata_path: metadata.csv
+      prefix: sonarqube.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SonarQube
   logs:
     source: sonarqube
-  metrics_metadata: metadata.csv
   monitors:
     SonarQube vulnerabilities: assets/recommended_monitors/vulnerabilities.json
   saved_views:
     status_overview: assets/saved_views/status_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - セキュリティ
 - 問題追跡
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
-display_name: SonarQube
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/datadog-sonarqube-integration/
-  tag: ブログ
-  text: SonarQube で Datadog のコード品質を監視
 git_integration_title: sonarqube
-guid: ce089575-93bf-47f0-80b6-ffaf6e34722c
 integration_id: sonarqube
 integration_title: SonarQube
-integration_version: 2.0.1
+integration_version: 2.0.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sonarqube.
-metric_to_check: sonarqube.server.database.pool_active_connections
+manifest_version: 2.0.0
 name: sonarqube
+oauth: {}
 public_title: SonarQube
 short_description: SonarQube のサーバーとプロジェクトを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Issue Tracking
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: SonarQube のサーバーとプロジェクトを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SonarQube
 ---
 
 
@@ -138,6 +158,8 @@ instances:
 このインテグレーションで収集される.メトリクスは、デフォルトで `component` タグが付けられます。タグ名をコンポーネント別に変更するには、コンポーネントの定義で `tag` プロパティを指定します。すべてのプロジェクトに設定するには、インスタンスのコンフィグで `default_tag` プロパティを設定します。
 
 **注**: SonarQube のプロジェクトには、よく複数のソース管理ブランチが含まれています。このインテグレーションでは、SonarQube 内のデフォルトブランチ (通常は `main`) からのメトリクスのみが収集されます。
+
+#### サーバーメトリクスの検索
 
 SonarQube はこのインテグレーションの追加インスタンスおよび JMX メトリクスのコンフィギュレーションを使用して監視される検索サーバーを公開します。収集するメトリクスのカスタマイズ方法については、[JMX チェックのドキュメント][6]で詳細をご確認ください。例については、以下のコンフィグや、 [sonarqube.d/metrics.yaml][3] 内のデフォルトの JMX メトリクスコンフィグなどもご活用いただけます。
 
