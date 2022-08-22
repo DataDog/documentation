@@ -50,10 +50,10 @@ Click **Manage Agent Ingestion** to get instructions for configuring the Agent s
 
 You can control three ingestion mechanisms by configuring sampling in the Datadog Agent:
 - **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied in libraries, targeting 10 traces per second per Agent. The setting `DD_APM_MAX_TPS` allows you to change the target number of traces per second.
--  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces up to 10 traces-per-second per Agent.  The setting `DD_APM_ERROR_TPS` allows you to change the target number of traces-per-second.
+-  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces up to 10 traces per second per Agent. The setting `DD_APM_ERROR_TPS` allows you to change the target number of traces per second.
 -  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces per second per Agent. The setting `DD_APM_DISABLE_RARE_SAMPLER` allows you to disable the collection of rare traces.
 
-**Note**: The `Other Ingestion Reasons` greyed section of the pie chart refers to other ingestion reasons that **are not configurable** in the Datadog Agent configuration.
+**Note**: The `Other Ingestion Reasons` (gray) section of the pie chart represents other ingestion reasons which _are not configurable_ at the Datadog Agent level.
 
 ## Managing ingestion for an individual service at the library level
 
