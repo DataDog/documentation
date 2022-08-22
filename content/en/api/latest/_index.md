@@ -157,13 +157,16 @@ require 'datadog_api_client'
 {{< programming-lang lang="go" >}}
 #### Installation
 ```sh
-go get github.com/DataDog/datadog-api-client-go
+go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
 #### Usage
 ```go
-import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
+import (
+        "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
+        "github.com/DataDog/datadog-api-client-go/v2/api/datadog<VERSION>"
+)
 ```
- **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
+ **Note**: Replace `<VERSION>` with `V1` or `V2`, depending on which endpoints you want to use.
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}
