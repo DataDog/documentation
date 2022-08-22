@@ -76,7 +76,7 @@ To successfully proxy request to Datadog:
 
 **IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
 
-| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][1])| 
+| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][3])| 
 |---------|------------------------------------------------|---------------------|
 | US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
 | US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
@@ -90,3 +90,4 @@ To successfully proxy request to Datadog:
 
 [1]: /real_user_monitoring/browser/#initialization-parameters
 [2]: /getting_started/site/
+[3]: /real_user_monitoring/browser/#initialization-parameters
