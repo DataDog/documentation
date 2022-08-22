@@ -40,7 +40,7 @@ Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform 
 
 ## Setup
 
-Use the VMware Tanzu setup options for the most straightforward approach.
+Use the VMware Tanzu setup options for the simplest approach.
 
 {{< tabs >}}
 {{% tab "Configuration through Tanzu Ops Manager" %}}
