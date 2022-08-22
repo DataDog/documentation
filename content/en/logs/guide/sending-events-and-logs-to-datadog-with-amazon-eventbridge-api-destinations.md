@@ -30,7 +30,7 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 
 ## Troubleshooting
 
-To view the response of the API endpoints you can setup AWS SQS for more details regarding the payloads sent to Datadog. 
+To view the response of the API endpoints you can setup Amazon SQS for more details regarding the payloads sent to Datadog. 
 1. Create a new queue in AWS SQS.
 2. In the target section for your EventBridge rule, expand the additional details section. 
 3. Select the AWS SQS created.
