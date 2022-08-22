@@ -74,7 +74,7 @@ To successfully proxy request to Datadog:
 2. Forward the request to the URL set in the `ddforward` query parameter using the POST method.
 4. The request body must remain unchanged.
 
-**IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog Site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
+**IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
 
 | Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][1])| 
 |---------|------------------------------------------------|---------------------|
