@@ -72,11 +72,22 @@ To successfully proxy request to Datadog:
 
 1. Add a `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
 2. Forward the request to the URL set in the `ddforward` query parameter using the POST method.
+4. The request body must remain unchanged.
 
-**Note:** The request body must remain unchanged.
+**IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
+
+| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][3])| 
+|---------|------------------------------------------------|---------------------|
+| US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
+| US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
+| US5     | `https://*.browser-intake-us5-datadoghq.com/*` | `us5.datadoghq.com` |
+| EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
+| US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/#initialization-parameters
+[2]: /getting_started/site/
+[3]: /real_user_monitoring/browser/#initialization-parameters
