@@ -1,42 +1,66 @@
 ---
+app_id: riak
+app_uuid: 9f45bc5b-ef21-4336-a44d-7891a7a35cec
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     riak: assets/dashboards/riak_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: riak.memory_processes
+      metadata_path: metadata.csv
+      prefix: riak.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Riak
   logs:
     source: riak
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riak/README.md
-display_name: Riak
+display_on_public_website: true
 draft: false
 git_integration_title: riak
-guid: e1ed642c-8a15-420c-954b-6fb894905956
 integration_id: riak
 integration_title: Riak
 integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: riak.
-metric_to_check: riak.memory_processes
+manifest_version: 2.0.0
 name: riak
-public_title: Riak インテグレーション
+oauth: {}
+public_title: Riak
 short_description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Riak
 ---
 
 

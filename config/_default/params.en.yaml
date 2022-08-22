@@ -4,8 +4,8 @@ meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "This page is not yet available in English, we are working on its translation. <br> May you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: "Announcing general availability for Observability Pipelines"
-  mobile_message: "Announcing general availability for Observability Pipelines"
-  external_link: 'https://www.datadoghq.com/product/observability-pipelines/'
+  desktop_message: "Join us for Dash 2022 on October 18-19 in NYC! Register here"
+  mobile_message: "Join us for Dash 2022 on October 18-19 in NYC! Register here"
+  external_link: 'https://www.dashcon.io/?utm_source=organic&utm_medium=display&utm_campaign=dg-organic-websites-ww-docs-announcement-announcement-registration-202210dash'
 exclude: []
 translate_status_banner: "This translation isn't up to date, for the latest english version click here"

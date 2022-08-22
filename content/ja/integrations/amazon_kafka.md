@@ -1,43 +1,64 @@
 ---
+app_id: amazon-kafka
+app_uuid: e6dc171a-911d-4440-a409-7951eaadf69f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Amazon MSK Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: aws.msk.go.threads
+      metadata_path: metadata.csv
+      prefix: aws.msk.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Amazon Kafka
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - AWS
 - メッセージング
 - 処理
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md
-display_name: Amazon Kafka
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_kafka
-guid: a572ad85-f431-4ed1-a1f3-cba9e1d4712f
 integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
-integration_version: 3.1.1
+integration_version: 3.1.3
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: aws.msk.
-metric_to_check: aws.msk.go.threads
+manifest_version: 2.0.0
 name: amazon_kafka
+oauth: {}
 public_title: Amazon MSK (Agent)
 short_description: Amazon MSK クラスターの健全性とパフォーマンスを監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::AWS
+  - Category::Messaging
+  - Category::Processing
+  configuration: README.md#Setup
+  description: Amazon MSK クラスターの健全性とパフォーマンスを監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon MSK (Agent)
 ---
 
 

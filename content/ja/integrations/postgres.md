@@ -1,15 +1,30 @@
 ---
-aliases:
-- /ja/integrations/postgresql
+app_id: postgres
+app_uuid: e6b3c5ec-b293-4a22-9145-277a12a9abd4
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     postgresql: assets/dashboards/postgresql_dashboard.json
     postgresql_screenboard: assets/dashboards/postgresql_screenboard_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - postgresql.connections
+      - postgresql.max_connections
+      metadata_path: metadata.csv
+      prefix: postgresql.
+    process_signatures:
+    - postgres -D
+    - pg_ctl start -l logfile
+    - postgres -c 'pg_ctl start -D -l
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Postgres
   logs:
     source: postgresql
-  metrics_metadata: metadata.csv
   monitors:
     percent_usage_connections: assets/monitors/percent_usage_connections.json
     replication_delay: assets/monitors/replication_delay.json
@@ -19,41 +34,49 @@ assets:
     postgres_processes: assets/saved_views/postgres_processes.json
     sessions_by_host: assets/saved_views/sessions_by_host.json
     slow_operations: assets/saved_views/slow_operations.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
-display_name: Postgres
+display_on_public_website: true
 draft: false
 git_integration_title: postgres
-guid: e9ca29d5-5b4f-4478-8989-20d89afda0c9
 integration_id: postgres
 integration_title: Postgres
-integration_version: 12.5.0
+integration_version: 12.5.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: postgresql.
-metric_to_check:
-- postgresql.connections
-- postgresql.max_connections
+manifest_version: 2.0.0
 name: postgres
-process_signatures:
-- postgres -D
-- pg_ctl start -l logfile
-- postgres -c 'pg_ctl start -D -l
-public_title: Postgres インテグレーション
+oauth: {}
+public_title: Postgres
 short_description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Postgres
 ---
 
 

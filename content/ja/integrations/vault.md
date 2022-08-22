@@ -1,49 +1,75 @@
 ---
+app_id: vault
+app_uuid: 450e17a2-3ca0-4dc5-800c-99c5db736073
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Vault - Overview: assets/dashboards/vault_overview_legacy.json
     Vault - Overview (OpenMetricsV2): assets/dashboards/vault_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: vault.is_leader
+      metadata_path: metadata.csv
+      prefix: vault.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Vault
   logs:
     source: vault
-  metrics_metadata: metadata.csv
   monitors:
     '[Vault] S3 time to access secrets is high': assets/monitors/vault_S3_time_high.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     service_name_overview: assets/saved_views/service_name_overview.json
     vault_patern: assets/saved_views/vault_patern.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - security
 - 構成 & デプロイ
 - ログの収集
 - オートディスカバリー
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
-display_name: Vault
+display_on_public_website: true
 draft: false
 git_integration_title: vault
-guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
 integration_title: Vault
-integration_version: 3.3.0
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vault.
-metric_to_check: vault.is_leader
+manifest_version: 2.0.0
 name: vault
-public_title: Vault インテグレーション
+oauth: {}
+public_title: Vault
 short_description: Vault は機密情報管理サービスアプリケーション
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Vault は機密情報管理サービスアプリケーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vault
 ---
 
 
@@ -245,7 +271,10 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "vault" >}}
 
 
-**注**: このチェックのバージョン3.4.0+ では、メトリクスの収集に [OpenMetrics][7] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、構成で `use_openmetrics` の値を `false` に設定します。
+**注:** 
+
+* `vault.replication.fetchRemoteKeys`、`vault.replication.merkleDiff`、`vault.replication.merkleSync` で始まるメトリクスは、レプリケーションが不健全状態でなければ報告されません。
+* このチェックのバージョン3.4.0 以降では、メトリクスの収集に [OpenMetrics][7] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、構成で `use_openmetrics` の値を `false` に設定します。
 
 ### イベント
 

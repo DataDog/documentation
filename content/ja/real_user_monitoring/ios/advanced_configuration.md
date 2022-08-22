@@ -253,6 +253,9 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 `set(uploadFrequency: UploadFrequency)`
 : Datadog へのデータアップロードの希望頻度を設定します。利用できる値は `.frequent`、`.average`、`.rare` などです。
 
+`set(mobileVitalsFrequency: VitalsFrequency)`
+: モバイルバイタルを収集する好ましい頻度を設定します。設定可能な値は以下の通りです: `.frequent` (100ms 毎)、`.average` (500ms 毎)、`.rare` (1s 毎)、`.never` (バイタル監視を無効にする)
+
 ### RUM コンフィギュレーション
 
 `enableRUM(_ enabled: Bool)`

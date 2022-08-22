@@ -979,7 +979,7 @@
     "request_schema_description": "ホストに関連付けられているタグセット。"
   },
   "GetUsageAnalyzedLogs": {
-    "description": "解析済みログ (セキュリティモニタリング) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "解析済みログ (セキュリティモニタリング) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "分析されたログの 1 時間あたり使用量の取得"
   },
   "GetUsageAttribution": {
@@ -987,11 +987,11 @@
     "summary": "使用属性を取得します"
   },
   "GetUsageAuditLogs": {
-    "description": "監査ログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "監査ログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "監査ログの 1 時間あたり使用量の取得"
   },
   "GetUsageLambda": {
-    "description": "Lambda の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "lambda の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Lambda の 1 時間ごとの使用量を取得する"
   },
   "GetUsageBillableSummary": {
@@ -999,27 +999,27 @@
     "summary": "アカウント全体の請求対象使用量を取得します"
   },
   "GetUsageCIApp": {
-    "description": "CI Visibility (テスト、パイプライン、スパン) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "CI visibility (テスト、パイプライン、スパン) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "CI Visibility の 1 時間ごとの使用量を取得する"
   },
   "GetUsageCloudSecurityPostureManagement": {
-    "description": "クラウドセキュリティポスチャ管理 (CSPM) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "クラウドセキュリティポスチャ管理 (CSPM) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "CSPM の 1 時間あたり使用量の取得"
   },
   "GetUsageCWS": {
-    "description": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得する"
   },
   "GetUsageDBM": {
-    "description": "データベースモニタリングの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "データベースモニタリングの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "データベースモニタリングの 1 時間ごとの使用量を取得する"
   },
   "GetUsageFargate": {
-    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Fargate の 1 時間あたり使用量の取得"
   },
   "GetUsageHosts": {
-    "description": "ホストとコンテナの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "ホストとコンテナの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ホストとコンテナの 1 時間あたり使用量の取得"
   },
   "GetHourlyUsageAttribution": {
@@ -1027,27 +1027,27 @@
     "summary": "1 時間ごとの使用量属性を取得する"
   },
   "GetIncidentManagement": {
-    "description": "インシデント管理の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "インシデント管理の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "インシデント管理の 1 時間あたり使用量を取得する"
   },
   "GetUsageIndexedSpans": {
-    "description": "インデックス化されたスパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "インデックス化スパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "インデックス化されたスパンの 1 時間あたり使用量を取得"
   },
   "GetIngestedSpans": {
-    "description": "取り込まれたスパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "取り込みスパンの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "取り込まれたスパンの 1 時間あたり使用量を取得"
   },
   "GetUsageInternetOfThings": {
-    "description": "IoT の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "IoT の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "IoT の 1 時間あたりの使用量を取得する"
   },
   "GetUsageLogs": {
-    "description": "ログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "ログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ログの 1 時間あたり使用量の取得"
   },
   "GetUsageLogsByRetention": {
-    "description": "保持期間別のインデックス化されたログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "保持期間別のインデックス化されたログの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "保持によるログの 1 時間あたり使用量の取得"
   },
   "GetUsageLogsByIndex": {
@@ -1056,38 +1056,38 @@
   },
   "GetMonthlyUsageAttribution": {
     "description": "月単位の使用量属性を取得します。\n\nこの API エンドポイントはページ処理されます。すべてのレコードを受信するためには、レスポンスに `next_record_id` の値が設定されているかどうかを確認します。もし設定されている場合は、再度リクエストして `next_record_id` をパラメーターとして渡してください。\n擬似的なコード例\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
-    "summary": "1 か月ごとの使用量属性を取得する"
+    "summary": "月次使用量属性を取得する"
   },
   "GetUsageNetworkFlows": {
-    "description": "ネットワークフローの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "ネットワークフローの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ネットワークフローの 1 時間ごとの使用量を取得する"
   },
   "GetUsageNetworkHosts": {
-    "description": "ネットワークホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "ネットワークホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "ネットワークホストの 1 時間ごとの使用量を取得する"
   },
   "GetUsageOnlineArchive": {
-    "description": "オンラインアーカイブの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "オンラインアーカイブの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "オンラインアーカイブの 1 時間ごとの使用量を取得する"
   },
   "GetUsageProfiling": {
-    "description": "プロファイルされたホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "プロファイルされたホストの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "プロファイルされたホストの 1 時間あたり使用量の取得"
   },
   "GetUsageRumUnits": {
-    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) ユニットの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) ユニットの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "RUM ユニットの 1 時間ごとの使用量を取得する"
   },
   "GetUsageRumSessions": {
-    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) セッションの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) セッションの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "RUM セッションの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSDS": {
-    "description": "機密データスキャナーの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "機密データスキャナーの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "機密データスキャナーの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSNMP": {
-    "description": "SNMP デバイスの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "SNMP デバイスの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "SNMP デバイスの 1 時間あたり使用量の取得"
   },
   "GetUsageSummary": {
@@ -1095,19 +1095,19 @@
     "summary": "マルチオーガニゼーションのアカウント全体の使用量の取得"
   },
   "GetUsageSynthetics": {
-    "description": "[Synthetics チェック](https://docs.datadoghq.com/synthetics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "[synthetics チェック](https://docs.datadoghq.com/synthetics/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Synthetics チェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSyntheticsAPI": {
-    "description": "[Synthetics API チェック](https://docs.datadoghq.com/synthetics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "[synthetics API チェック](https://docs.datadoghq.com/synthetics/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Synthetics API チェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageSyntheticsBrowser": {
-    "description": "Synthetics ブラウザチェックの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "synthetics ブラウザチェックの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "Synthetics ブラウザチェックの 1 時間ごとの使用量を取得する"
   },
   "GetUsageTimeseries": {
-    "description": "[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。",
+    "description": "[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
     "summary": "カスタムメトリクスの 1 時間あたり使用量の取得"
   },
   "GetUsageTopAvgMetrics": {

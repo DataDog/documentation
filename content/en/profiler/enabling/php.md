@@ -18,10 +18,6 @@ aliases:
   - /tracing/profiler/enabling/php/
 ---
 
-<div class="alert alert-warning">
-The Datadog PHP Profiler is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
-</div>
-
 ## Requirements
 
 The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.

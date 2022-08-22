@@ -5679,8 +5679,9 @@ components:
           format: int32
           type: integer
         type:
-          description: Type of the RUM application.
-          example: browser|ios|android|react-native|flutter
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
           type: string
         updated_at:
           description: Timestamp in ms of the last update date.
@@ -5720,8 +5721,9 @@ components:
           example: my_new_rum_application
           type: string
         type:
-          description: Type of the RUM application.
-          example: browser|ios|android|react-native|flutter
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
           type: string
       required:
       - name
@@ -5781,8 +5783,9 @@ components:
           example: updated_name_for_my_existing_rum_application
           type: string
         type:
-          description: Type of the RUM application.
-          example: browser|ios|android|react-native|flutter
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
           type: string
       type: object
     RUMApplicationUpdateRequest:

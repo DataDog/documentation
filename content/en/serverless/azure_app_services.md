@@ -52,7 +52,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 2. The extension supports the following resource types:
     - Azure App Service Web Apps
-    - Function Apps hosted on Basic, Standard, and Premium plans. 
+    - Function Apps hosted on Basic, Standard, and Premium plans.
 
     <div class="alert alert-warning">Function Apps on consumption plans and out-of-process (isolated) functions are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
@@ -68,9 +68,9 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
-**Note**: Datadog automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution within your application environment.
+**Note**: Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution within your application environment.
 
-Starting with v2.3.0, the .NET extension no longer relies on semantic versioning. The extension uses the following scheme: `x.y.zAA` where `x.y.z` is the .Net Tracer version and `AA` is dedicated only to the extension. Any leading zeroes in `zAA` is trimmed by NuGet packaging so the version becomes `x.y.A`. 
+Starting with v2.3.0, the .NET extension no longer relies on semantic versioning. The extension uses the following scheme: `x.y.zAA` where `x.y.z` is the .Net Tracer version and `AA` is dedicated only to the extension. Any leading zeroes in `zAA` is trimmed by NuGet packaging so the version becomes `x.y.A`.
 
 For example:
 

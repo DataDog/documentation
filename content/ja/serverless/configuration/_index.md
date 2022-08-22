@@ -362,21 +362,23 @@ Datadog APM クライアントによって自動的にインスツルメント�
 
 ## APM スパンを取り込む際のサンプリングレートの選択
 
-サーバーレス関数の [APM トレース呼び出しのサンプリングレート][35]を管理するには、関数上で `DD_TRACE_SAMPLE_RATE` 環境変数を 0.000 (Lambda 関数呼び出しのトレースなし) と 1.000 (Lambda 関数呼び出しのすべてトレース) の間の値に設定します。
+サーバーレス関数の [APM トレース呼び出しのサンプリングレート][17]を管理するには、関数上で `DD_TRACE_SAMPLE_RATE` 環境変数を 0.000 (Lambda 関数呼び出しのトレースなし) と 1.000 (Lambda 関数呼び出しのすべてトレース) の間の値に設定します。
 
 メトリクスは、アプリケーションの 100% のトラフィックに基づいて計算され、どのようなサンプリング構成であっても正確な値を維持します。
 
-トレースデータは非常に反復性が高いため、高スループットのサービスでは、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。[取り込み制御][36]は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
+トレースデータは非常に反復性が高いため、高スループットのサービスでは、通常、すべてのリクエストを収集する必要はありません。十分重要な問題は、常に複数のトレースで症状を示すはずです。[取り込み制御][18]は、予算の範囲内で、問題のトラブルシューティングに必要な可視性を確保するのに役立ちます。
 
-デフォルトのサンプリングメカニズムは[ヘッドベースサンプリング][37]と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、ルートスパンの開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
+取り込みのためのデフォルトのサンプリングメカニズムは[ヘッドベースサンプリング][19]と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、ルートスパンの開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。この判断はトレースの最初に行われ、その後トレースのすべての部分に伝えられるため、ルートサービスのサンプリングレートを構成しないと有効になりません。
 
-この判断はトレースの最初に行われ、その後トレースのすべての部分に伝えられるため、トレースは全体として保持または削除されることが保証されます。
+Datadog がスパンを取り込んだ後、Datadog インテリジェント保持フィルターはトレースの一定割合をインデックス化し、アプリケーションの健全性を監視するのに役立てることができます。また、カスタムの[保持フィルター][38]を定義して、組織の目標をサポートするために長く保存しておきたいトレースデータのインデックスを作成することも可能です。
+
+[Datadog Trace Pipeline][39] の詳細についてはこちらをご覧ください。
 
 ## トレースから機密情報をフィルタリングまたはスクラブする
 
-Datadog に送信する前にトレースをフィルタリングするには、[APM で不要なリソースを無視する][17]を参照してください。
+Datadog に送信する前にトレースをフィルタリングするには、[APM で不要なリソースを無視する][20]を参照してください。
 
-データセキュリティのためにトレース属性をスクラブするには、[データセキュリティのための Datadog Agent またはトレーサーの構成][18]を参照してください。
+データセキュリティのためにトレース属性をスクラブするには、[データセキュリティのための Datadog Agent またはトレーサーの構成][21]を参照してください。
 
 ## トレース収集の無効化
 
@@ -435,7 +437,7 @@ Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します�
 
 [Lambda 拡張機能][2]を使ってトレースやログを収集している場合、Datadog は自動的に AWS Lambda のリクエスト ID を `aws.lambda` スパンの `request_id` タグの下に追加します。さらに、同じリクエストの Lambda ログは、`lambda.request_id` 属性の下に追加されます。Datadog のトレースビューとログビューは、AWS Lambda のリクエスト ID を使用して接続されます。
 
-[Forwarder Lambda 関数][4]を使用してトレースとログを収集している場合、`dd.trace_id` は自動的にログに挿入されます (環境変数 `DD_LOGS_INJECTION` で有効になります)。Datadog のトレースとログのビューは、Datadog のトレース ID を使用して接続されています。この機能は一般的なランタイムとロガーを使用しているほとんどのアプリケーションでサポートされています ([ランタイムによるサポート][19]を参照)。
+[Forwarder Lambda 関数][4]を使用してトレースとログを収集している場合、`dd.trace_id` は自動的にログに挿入されます (環境変数 `DD_LOGS_INJECTION` で有効になります)。Datadog のトレースとログのビューは、Datadog のトレース ID を使用して接続されています。この機能は一般的なランタイムとロガーを使用しているほとんどのアプリケーションでサポートされています ([ランタイムによるサポート][22]を参照)。
 
 サポートされていないランタイムまたはカスタムロガーを使用している場合は、以下の手順に従ってください。
 - JSON でログを記録する場合、`dd-trace` を使用して Datadog のトレース ID を取得し、それをログの `dd.trace_id` フィールドに追加する必要があります。
@@ -452,13 +454,13 @@ Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します�
     1. `dd-trace` を使用して Datadog のトレース ID を取得し、ログに追加します。
     2. デフォルトの Lambda ログパイプラインを複製します (読み取り専用)。
     3. 複製したパイプラインを有効にし、デフォルトのパイプラインを無効にします。
-    4. 複製したパイプラインの [Grok パーサー][20]ルールを更新して、Datadog トレース ID を `dd.trace_id` 属性にパースするようにします。例えば、`[INFO] dd.trace_id=4887065908816661012 My log message`のようなログには、ルール `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` が使用されます。
+    4. 複製したパイプラインの [Grok パーサー][23]ルールを更新して、Datadog トレース ID を `dd.trace_id` 属性にパースするようにします。例えば、`[INFO] dd.trace_id=4887065908816661012 My log message`のようなログには、ルール `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` が使用されます。
 
 ## ソースコードにエラーをリンクする
 
 <div class="alert alert-info">この機能は、Go と Java でサポートされています。</div>
 
-[Datadog ソースコードインテグレーション][21]では、GitHub で Lambda 関数のソースコードにテレメトリー (スタックトレースなど) をリンクさせることができます。以下の手順で機能を有効化してください。**注**: ダーティでもリモートより先でもない、ローカルの Git リポジトリからデプロイする必要があります。
+[Datadog ソースコードインテグレーション][24]では、GitHub で Lambda 関数のソースコードにテレメトリー (スタックトレースなど) をリンクさせることができます。以下の手順で機能を有効化してください。**注**: ダーティでもリモートより先でもない、ローカルの Git リポジトリからデプロイする必要があります。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -540,29 +542,29 @@ export class ExampleStack extends cdk.Stack {
 
 ## カスタムメトリクスの送信
 
-[カスタムメトリクスの送信][22]により、カスタムビジネスロジックを監視することができます。
+[カスタムメトリクスの送信][25]により、カスタムビジネスロジックを監視することができます。
 
 ## PrivateLink またはプロキシ経由でテレメトリーを送信する
 
-Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][24] には [AWS PrivateLink 経由でデータを送信][23]し、それ以外のサイトには[プロキシ経由でデータを送信][25]することができます。
+Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][27] には [AWS PrivateLink 経由でデータを送信][26]し、それ以外のサイトには[プロキシ経由でデータを送信][28]することができます。
 
-Datadog Forwarder を使用している場合は、こちらの[手順][26]に従ってください。
+Datadog Forwarder を使用している場合は、こちらの[手順][29]に従ってください。
 
 ## 複数の Datadog 組織にテレメトリーを送信する
 
-複数の Datadog 組織にデータを送信したい場合は、[デュアルシッピング][27]の手順に従って、プロジェクトのルートディレクトリに `datadog.yaml` ファイルを含めます。
+複数の Datadog 組織にデータを送信したい場合は、[デュアルシッピング][30]の手順に従って、プロジェクトのルートディレクトリに `datadog.yaml` ファイルを含めます。
 
 ## AWS リソース上でトレースコンテキストを伝播させる
 
-Datadog は、発信する AWS SDK のリクエストにトレースコンテキストを自動的に挿入し、Lambda イベントからトレースコンテキストを抽出します。これにより、Datadog は分散サービス上でリクエストやトランザクションをトレースすることができます。[サーバーレスのトレース伝播][28]を参照してください。
+Datadog は、発信する AWS SDK のリクエストにトレースコンテキストを自動的に挿入し、Lambda イベントからトレースコンテキストを抽出します。これにより、Datadog は分散サービス上でリクエストやトランザクションをトレースすることができます。[サーバーレスのトレース伝播][31]を参照してください。
 
 ## X-Ray と Datadog のトレースをマージする
 
-AWS X-Ray は、AppSync や Step Functions などの特定の AWS マネージドサービスを通じたトレースをサポートしていますが、Datadog APM ではネイティブにサポートされていません。[Datadog X-Ray インテグレーション][29]を有効にし、X-Ray トレースを Datadog ネイティブトレースとマージすることが可能です。[追加詳細][30]を参照してください。
+AWS X-Ray は、AppSync や Step Functions などの特定の AWS マネージドサービスを通じたトレースをサポートしていますが、Datadog APM ではネイティブにサポートされていません。[Datadog X-Ray インテグレーション][32]を有効にし、X-Ray トレースを Datadog ネイティブトレースとマージすることが可能です。[追加詳細][33]を参照してください。
 
 ## AWS Lambda のコード署名を有効にする
 
-[AWS Lambda のコード署名][31]により、信頼できるコードのみを Lambda 関数から AWS へデプロイすることができます。関数でコード署名を有効にすると、デプロイメントのすべてのコードが信頼できるソースにより署名されていることが AWS で検証されます。このソースは、コード署名コンフィギュレーションで定義します。
+[AWS Lambda のコード署名][34]により、信頼できるコードのみを Lambda 関数から AWS へデプロイすることができます。関数でコード署名を有効にすると、デプロイメントのすべてのコードが信頼できるソースにより署名されていることが AWS で検証されます。このソースは、コード署名コンフィギュレーションで定義します。
 
 Lambda 関数がコード署名を使用するように構成されている場合、Datadog が公開する Lambda レイヤーを使用して Lambda 関数をデプロイする前に、関数のコード署名構成に Datadog の Signing Profile ARN を追加する必要があります。
 
@@ -574,9 +576,9 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 
 ## Datadog Lambda 拡張機能に移行する
 
-Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を使用して、Lambda 関数から監視データを収集することができます。Datadog は、新規インストールには Lambda 拡張機能を推奨しています。迷っている場合は、[Datadog Lambda 拡張機能への移行を決定する][32]を参照してください。
+Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を使用して、Lambda 関数から監視データを収集することができます。Datadog は、新規インストールには Lambda 拡張機能を推奨しています。迷っている場合は、[Datadog Lambda 拡張機能への移行を決定する][35]を参照してください。
 
-移行するには、[Datadog Lambda 拡張機能を使ったインストール手順][1]と [Datadog Forwarder を使った手順][33]を比較してみてください。ご参考までに、主な相違点を以下にまとめます。
+移行するには、[Datadog Lambda 拡張機能を使ったインストール手順][1]と [Datadog Forwarder を使った手順][36]を比較してみてください。ご参考までに、主な相違点を以下にまとめます。
 
 **注**: Datadog では、まず開発用とステージング用のアプリケーションを移行し、本番用のアプリケーションを 1 つずつ移行していくことを推奨しています。
 
@@ -637,7 +639,7 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 
 ## トラブルシューティング
 
-インストール時の構成に問題がある場合は、環境変数 `DD_LOG_LEVEL` を `debug` に設定すると、デバッグ用のログが出力されます。その他のトラブルシューティングのヒントについては、[サーバーレスモニタリングのトラブルシューティングガイド][34]を参照してください。
+インストール時の構成に問題がある場合は、環境変数 `DD_LOG_LEVEL` を `debug` に設定すると、デバッグ用のログが出力されます。その他のトラブルシューティングのヒントについては、[サーバーレスモニタリングのトラブルシューティングガイド][37]を参照してください。
 
 ## その他の参考資料
 
@@ -650,7 +652,7 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 [3]: /ja/integrations/amazon_web_services/
 [4]: /ja/serverless/libraries_integrations/forwarder/
 [5]: https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads/
-[6]: /ja/tracing/setup_overview/configure_data_security/#scrub-sensitive-data-from-your-spans
+[6]: /ja/tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
 [7]: /ja/serverless/enhanced_lambda_metrics
 [8]: /ja/integrations/amazon_api_gateway/#data-collected
 [9]: /ja/integrations/amazon_appsync/#data-collected
@@ -659,26 +661,28 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 [12]: https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/
 [13]: /ja/agent/logs/advanced_log_collection/
 [14]: /ja/logs/log_configuration/pipelines/
-[15]: /ja/tracing/setup_overview/compatibility_requirements/
-[16]: /ja/tracing/setup_overview/custom_instrumentation/
-[17]: /ja/tracing/guide/ignoring_apm_resources/
-[18]: /ja/tracing/setup_overview/configure_data_security/
-[19]: /ja/tracing/connect_logs_and_traces/
-[20]: /ja/logs/log_configuration/parsing/
-[21]: /ja/integrations/guide/source-code-integration
-[22]: /ja/serverless/custom_metrics
-[23]: /ja/agent/guide/private-link/
-[24]: /ja/getting_started/site/
-[25]: /ja/agent/proxy/
-[26]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
-[27]: /ja/agent/guide/dual-shipping/
-[28]: /ja/serverless/distributed_tracing/serverless_trace_propagation/
-[29]: /ja/integrations/amazon_xray/
-[30]: /ja/serverless/distributed_tracing/serverless_trace_merging
-[31]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
-[32]: /ja/serverless/guide/extension_motivation/
-[33]: /ja/serverless/guide#install-using-the-datadog-forwarder
-[34]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
-[35]: /ja/tracing/trace_ingestion/ingestion_controls/#configure-the-service-ingestion-rate
-[36]: /ja/tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
-[37]: /ja/tracing/trace_ingestion/mechanisms/?tabs=environmentvariables#head-based-sampling
+[15]: /ja/tracing/trace_collection/compatibility/
+[16]: /ja/tracing/trace_collection/custom_instrumentation/
+[17]: /ja/tracing/trace_pipeline/ingestion_controls/#configure-the-service-ingestion-rate
+[18]: /ja/tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
+[19]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tabs=environmentvariables#head-based-sampling
+[20]: /ja/tracing/guide/ignoring_apm_resources/
+[21]: /ja/tracing/configure_data_security/
+[22]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[23]: /ja/logs/log_configuration/parsing/
+[24]: /ja/integrations/guide/source-code-integration
+[25]: /ja/serverless/custom_metrics
+[26]: /ja/agent/guide/private-link/
+[27]: /ja/getting_started/site/
+[28]: /ja/agent/proxy/
+[29]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
+[30]: /ja/agent/guide/dual-shipping/
+[31]: /ja/serverless/distributed_tracing/serverless_trace_propagation/
+[32]: /ja/integrations/amazon_xray/
+[33]: /ja/serverless/distributed_tracing/serverless_trace_merging
+[34]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
+[35]: /ja/serverless/guide/extension_motivation/
+[36]: /ja/serverless/guide#install-using-the-datadog-forwarder
+[37]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[38]: /ja/tracing/trace_pipeline/trace_retention/
+[39]: /ja/tracing/trace_pipeline/
