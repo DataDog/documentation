@@ -74,9 +74,9 @@ To successfully proxy request to Datadog:
 2. Forward the request to the URL set in the `ddforward` query parameter using the POST method.
 4. The request body must remain unchanged.
 
-**IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog Site](https://docs.datadoghq.com/getting_started/site/). Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
+**IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog Site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
 
-| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter](https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters))| 
+| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][1])| 
 |---------|------------------------------------------------|---------------------|
 | US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
 | US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
@@ -89,3 +89,4 @@ To successfully proxy request to Datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/#initialization-parameters
+[2]: /getting_started/site/
