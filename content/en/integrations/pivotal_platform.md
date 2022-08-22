@@ -27,7 +27,7 @@ integration_id: "pivotal-platform"
 
 Any Pivotal Platform (formerly known as Cloud Foundry) deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your application on Pivotal Platform and your Pivotal Platform cluster.
 
-There are three main components for the Pivotal Platform integration with Datadog. First, use the buildpack to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure.
+There are three main components for the Pivotal Platform integration with Datadog. First, use the buildpack to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure. Read the [Pivotal architecture][32] guide for more information.
 
 For Pivotal Platform, you have the option to install the Datadog integration tiles with Ops Manager:
 
@@ -43,18 +43,18 @@ Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform 
 Use the VMware Tanzu setup options for the most straightforward approach.
 
 {{< tabs >}}
-{{% tab "Cluster Monitoring through VMware Tanzu" %}}
+{{% tab "Configuration through Tanzu Ops Manager" %}}
+
+### Cluster monitoring
 
 Read the [VMware Tanzu documentation][1] for installation and configuration steps.
+
+### Application monitoring
+
+Read the [VMware Tanzu documentation][2] for installation and configuration steps.
 
 [1]: https://docs.pivotal.io/partners/datadog/installing.html
-
-{{% /tab %}}
-{{% tab "Application Monitoring through VMware Tanzu" %}}
-
-Read the [VMware Tanzu documentation][1] for installation and configuration steps.
-
-[1]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+[2]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -173,10 +173,13 @@ cf restage <YOUR_APP_NAME>
 
 ##### Configure
 
-The following parameters can be used to configure log collection:
+The following table describes the parameters above, and how they can be used to configure log collection:
 
 | Parameter                 | Description                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `RUN_AGENT`               | Set to `true` to start the Datadog Agent.                                                                                                  |
+| `DD_LOGS_ENABLED`         | Set to `true` to enable Datadog Agent log collection.                                                                                      |
+| `DD_ENABLE_CHECKS`        | Set to `false` to disable the Agent's system metrics collection through core checks.                                                       |
 | `STD_LOG_COLLECTION_PORT` | Must be used when collecting logs from `stdout`/`stderr`. It redirects the `stdout`/`stderr` stream to the corresponding local port value. |
 | `LOGS_CONFIG`             | Use this option to configure the Agent to listen to a local TCP port and set the value for the `service` and `source` parameters.          |
 
@@ -488,3 +491,4 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [29]: https://docs.cloudfoundry.org/running/all_metrics.html
 [30]: /profiler/enabling/
 [31]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#containerized-environment
+[32]: /integrations/faq/pivotal_architecture
