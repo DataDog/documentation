@@ -64,7 +64,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-## Proxy setup
+## Proxy Setup
 
 When your proxy receives data from the RUM Browser SDK, it must be forwarded to Datadog. The RUM Browser SDK adds the `ddforward` query parameter to all POST requests to your proxy. This query parameter contains the URL where all data must be forwarded to.
 
@@ -72,8 +72,17 @@ To successfully proxy request to Datadog:
 
 1. Add a `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
 2. Forward the request to the URL set in the `ddforward` query parameter using the POST method.
+4. The request body must remain unchanged.
 
-**Note:** The request body must remain unchanged.
+**IMPORTANT**: Please ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog Site](https://docs.datadoghq.com/getting_started/site/). Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
+
+| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter](https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters))| 
+|---------|------------------------------------------------|---------------------|
+| US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
+| US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
+| US5     | `https://*.browser-intake-us5-datadoghq.com/*` | `us5.datadoghq.com` |
+| EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
+| US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
 
 ## Further Reading
 
