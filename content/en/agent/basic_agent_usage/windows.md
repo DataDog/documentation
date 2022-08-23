@@ -55,7 +55,7 @@ To install the Agent with the command line:
 start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
-**Powershell**
+**PowerShell**
 
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
@@ -88,7 +88,7 @@ Each configuration item is added as a property to the command line. The followin
 | `DDAGENTUSER_NAME`                          | String  | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                      |
 | `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
 | `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
-| `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
+| `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
 | `ADDLOCAL`                                  | String  | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed.                                                                          |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
 
@@ -164,9 +164,9 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
   - Command Prompt (`cmd.exe`)
 
     ```cmd
-    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
-    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
-    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
+    "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
+    "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+    "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
 
 {{% /tab %}}
@@ -180,7 +180,7 @@ Use the `start`, `stop`, and `restart` commands in the Datadog Agent Manager:
 
 {{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" style="width:75%;">}}
 
-You can also use Windows Powershell, where available:
+You can also use Windows PowerShell, where available:
 `[start|stop|restart]-service datadogagent`
 
 {{% /tab %}}
@@ -227,7 +227,7 @@ To receive more information about the Agent's state, start the Datadog Agent Man
 Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
 
-The status command is available for Powershell:
+The status command is available for PowerShell:
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
@@ -236,7 +236,7 @@ The status command is available for Powershell:
 or cmd.exe:
 
 ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 {{% /tab %}}
@@ -251,7 +251,7 @@ Information about the Agent's state for Agent v5.2+ is available in the
 
 For the status of Agent v3.9.1 to v5.1, navigate to `http://localhost:17125/status`.
 
-The info command is available for Powershell:
+The info command is available for PowerShell:
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" info
@@ -260,10 +260,10 @@ The info command is available for Powershell:
 or cmd.exe:
 
 ```
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
+"%ProgramFiles%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%ProgramFiles%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
-**Note**: For Agent versions <= 6.11 the path should be `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe` instead.
+**Note**: For Agent versions <= 6.11 the path should be `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe` instead.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -308,7 +308,7 @@ Need help? Contact [Datadog support][1].
 
 * Press Submit.
 
-The flare command is available for Powershell:
+The flare command is available for PowerShell:
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
@@ -317,7 +317,7 @@ The flare command is available for Powershell:
 or cmd.exe:
 
 ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
 ```
 
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" style="width:75%;">}}
@@ -340,16 +340,16 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 
 {{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" style="width:70%;">}}
 
-The flare command is available for Powershell:
+The flare command is available for PowerShell:
 
 ```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 or cmd.exe:
 
 ```
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+"%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe" "%ProgramFiles%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 #### Flare fails to upload
@@ -364,10 +364,10 @@ For older Agent versions on Windows, you can find the location of this file by r
 **Step 1**:
 
 * Agent v5.12+:
-    `"%PROGRAMFILES%\Datadog\Datadog Agent\dist\shell.exe" since`
+    `"%ProgramFiles%\Datadog\Datadog Agent\dist\shell.exe" since`
 
 * Older Agent versions:
-    `"%PROGRAMFILES%\Datadog\Datadog Agent\files\shell.exe"`
+    `"%ProgramFiles%\Datadog\Datadog Agent\files\shell.exe"`
 
 **Step 2**:
 

@@ -23,7 +23,14 @@ This page outlines the basic features of the Datadog Agent for macOS. If you hav
 
 By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`. You can move this folder anywhere; however, this documentation assumes a default installation location.
 
-**Note**: macOS 10.12 and above are supported by the Agent v6, macOS 10.10 and above by the Agent v5.
+## Supported macOS versions
+
+| macOS version       | Supported Agent versions                                            |
+|---------------------|---------------------------------------------------------------------|
+| macOS 10.10 & 10.11 | Agent v5                                                            |
+| macOS 10.12         | Agent v5, Agent v6 until v6.34.0, Agent v7 until v7.34.0            |
+| macOS 10.13         | Agent v5, Agent v6 until v6.38.2, Agent v7 until v7.38.2            |
+| macOS 10.14+        | Agent v5, Agent v6, Agent v7                                        |
 
 ## Commands
 
