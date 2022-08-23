@@ -23,15 +23,15 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 ### Out-of-the-box tagging
 
-The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
+The Agent can Autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
 
 | Tag                 | Cardinality  | Requirement                                 |
 |----------------------|--------------|---------------------------------------------|
-| `container_name`     | High         | N/A                                         |
+| `container_name`     | High         | N/A<br/> **Note**: not included for the containerd runtime.                                         |
 | `container_id`       | High         | N/A                                         |
 | `rancher_container`  | High         | Rancher environment                         |
 | `mesos_task`         | Orchestrator | Mesos environment                           |
-| `docker_image`       | Low          | N/A                                         |
+| `docker_image`       | Low          | N/A<br/> **Note**: not included for the containerd runtime.                                         |
 | `image_name`         | Low          | N/A                                         |
 | `short_image`        | Low          | N/A                                         |
 | `image_tag`          | Low          | N/A                                         |
