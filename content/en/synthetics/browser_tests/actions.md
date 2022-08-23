@@ -17,16 +17,6 @@ Steps are a series of actions that you can record for a browser test and edit or
 
 The default timeout for each step is 60 seconds. You can override this default timeout through the dedicated [timeout option][2]. 
 
-## Manage step order
-
-Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
-
-1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step. 
-2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
-3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
-
-{{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
-
 ## Automatically recorded steps
 
 Once you click **Start Recording**, the [Datadog browser test recorder extension][3] automatically detects and records steps on your website.
@@ -160,13 +150,6 @@ await promise
 
 return jQuery().jquery.startsWith('3.5.1')
 ```
-
-To handle login security questions with custom JavaScript, you can either:
-
-- Manage everything in the JavaScript assertion by reading the security question and inputting the variable
-- Create a [JavaScript variable](#javascript) and a regular browser [`type text` step](#type-text)
-
-You can also check that the value returned by a JavaScript step is what you expect by running the test or executing JavaScript in the console. 
 
 #### Test a downloaded file
 
@@ -444,6 +427,16 @@ To start parsing a variable, click **Extract a variable from response content**:
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
 You can extract up to ten variables per test step. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
+
+## Manage step order
+
+Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
+
+1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step. 
+2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
+3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
+
+{{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
 
 ## Use variables
 
