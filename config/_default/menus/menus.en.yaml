@@ -2566,7 +2566,7 @@ main:
     url: security_platform/notifications/variables/
     parent: security_notifications
     identifier: security_notification_variables
-    weight: 602    
+    weight: 602
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
