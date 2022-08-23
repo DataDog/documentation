@@ -155,11 +155,10 @@ Optionally, extract variables from the response of your HTTP request by parsing 
 To start parsing a variable, click **Extract a variable from response content**:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
-2. Decide whether to extract your variable from the response headers, from the response body, or using the full response body.
+2. Decide whether to extract your variable from the response headers or from the response body.
 
    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
-   * Extract the value using the **full response body**.
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][10], a [`JSONPath`][8], or a [`XPath`][9].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 

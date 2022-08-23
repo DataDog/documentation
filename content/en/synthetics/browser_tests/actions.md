@@ -15,7 +15,7 @@ further_reading:
 
 Steps are a series of actions that you can record for a browser test and edit or build on. To define the steps you want your browser test to execute, either directly record them with the Datadog test recorder extension or add them manually. Every step includes a set of configurable [advanced options][1].
 
-The default timeout for each step is approximately 60 seconds. You can override this default timeout through the dedicated [timeout option][2]. 
+The default timeout for each step is 60 seconds. You can override this default timeout through the dedicated [timeout option][2]. 
 
 ## Manage step order
 
@@ -33,7 +33,7 @@ Once you click **Start Recording**, the [Datadog browser test recorder extension
 
 ### Click
 
-Interacting with elements on your page records a step on the left corner. 
+Interacting with elements on your page records a step. 
 
 {{< img src="synthetics/browser_tests/click_step.mp4" alt="Click type dropdown menu in the Click step type" video="true" width="60%" >}}
 
@@ -45,7 +45,7 @@ Click on the step and select a click type you want the browser test to perform a
 
 ### Type text
 
-Datadog records steps you perform on your application, such as selecting an option from a `select` dropdown menu, and a recap appears as a step on the left corner.
+Datadog records steps you perform on your application, such as selecting an option from a `select` dropdown menu, and a recap appears as a step.
 
 {{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
 
@@ -166,7 +166,7 @@ To handle login security questions with custom JavaScript, you can either:
 - Manage everything in the JavaScript assertion by reading the security question and inputting the variable
 - Create a [JavaScript variable](#javascript) and a regular browser [`type text` step](#type-text)
 
-You can also check that the value returned by a JavaScript step is the one you are expecting by running the test or executing JavaScript in the console. 
+You can also check that the value returned by a JavaScript step is what you expect by running the test or executing JavaScript in the console. 
 
 #### Test a downloaded file
 
@@ -206,7 +206,7 @@ Create this assertion step manually by clicking **Special Actions** and selectin
 
 #### Hover
 
-To avoid generating a step for every time a user hovers over an element during recording, this step uses a dedicated step with a click, not a hovering mechanism.
+This step uses a dedicated click, not a hovering mechanism, to avoid generating a separate step every time a user hovers over an element during recording.
 
 Select **Hover** and click on an element to add a step.
 
@@ -336,7 +336,7 @@ To override variables from subtests in parent tests, ensure the variables create
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:60%;" >}}
 
-To convert steps from your current browser test into a subtest, select your recorded steps and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][6].
+To convert steps from your current browser test into a subtest, select your recorded steps from the **Extract From Steps** tab and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][6].
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][7].
 
@@ -410,7 +410,7 @@ To define your HTTP request:
 
 #### Add assertions
 
-Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assumptions are optional in browser tests.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -436,11 +436,10 @@ Optionally, extract a variable from the response of your HTTP request by parsing
 To start parsing a variable, click **Extract a variable from response content**:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
-2. Decide whether to extract your variable from the response headers, from the response body, or using the full response body.
+2. Decide whether to extract your variable from the response headers or the response body.
 
    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][10].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], a [`JSONPath`][8], or a [`XPath`][9].
-   * Extract the value using the **full response body**.
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][10], a [`JSONPath`][8], or a [`XPath`][9].
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 

@@ -30,7 +30,7 @@ The email variable generates a unique mailbox maintained by Datadog at every tes
 
 ## Record steps
 
-Once you have created an email variable, you can [confirm the email was sent correctly](#confirm-the-email-was-sent) after an in-app trigger. First, check the email's content, click on links located in sent emails to [navigate to other URLs](#navigate-through-links-in-an-email), and then validate the entire user flows, including web and email steps. 
+Once you have created an email variable, you can [confirm the email was sent correctly](#confirm-the-email-was-sent) after an in-app trigger.
 
 Click **Start Recording** and record all of the steps leading up to the email being triggered with your email variable. Click the hand icon in a variable to inject its value into the text input of a form or field.
 
