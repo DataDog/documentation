@@ -36,28 +36,21 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 
 ## Monitor your applications
 
-Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][4] for Pivotal Platform that installs a [Datadog DogStatsD binary][5] and Datadog Agent in the container your app is running on.
-
-## Setup
-
-Use the VMware Tanzu setup options for the simplest approach.
-
 {{< tabs >}}
 {{% tab "Configuration through Tanzu Ops Manager" %}}
 
-### Cluster monitoring
+## Setup
 
 Read the [VMware Tanzu documentation][1] for installation and configuration steps.
 
-### Application monitoring
-
-Read the [VMware Tanzu documentation][2] for installation and configuration steps.
-
-[1]: https://docs.pivotal.io/partners/datadog/installing.html
-[2]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+[1]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
 
 {{% /tab %}}
 {{% tab "Manual" %}}
+
+## Setup
+
+Use the **Datadog Cloud Foundry Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][4] for Pivotal Platform that installs a [Datadog DogStatsD binary][5] and Datadog Agent in the container your app is running on.
 
 #### Pivotal Platform < 1.12
 
@@ -158,7 +151,7 @@ Log collection is not supported for this site.
 
 To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
-```text
+```shell
 cf set-env <YOUR_APP_NAME> RUN_AGENT true
 cf set-env <YOUR_APP_NAME> DD_LOGS_ENABLED true
 # Disable the Agent core checks to disable system metrics collection
@@ -187,7 +180,7 @@ The following table describes the parameters above, and how they can be used to 
 
 A Java application named `app01` is running in Pivotal Platform. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
-```text
+```shell
 # Redirect Stdout/Stderr to port 10514
 cf set-env app01 STD_LOG_COLLECTION_PORT 10514
 # Configure the Agent to listen to port 10514
@@ -206,19 +199,40 @@ If the connection fails to be established and the log collection is not started,
 
 You can use tags to correlate data across infrastructure hosts and APM through [Unified Service Tagging][31].
 
+In order to add custom tags to your application, set the `DD_TAGS` environment variable either via the `manifest.yml` or via the CF CLI command:
+
+```shell
+# set the environment variable
+cf set-env <YOUR_APP> DD_TAGS key1=value1,key2=value2
+# restage the application to make it pick up the new environment variable and use the new tags
+cf restage <YOUR_APP>
+```
+
 [1]: /agent/logs/proxy/
 
 {{< /site-region >}}
-
-### Build
-
-To build this buildpack, edit the relevant files and run the `./build` script. To upload it, run `./upload`.
-
 ### DogStatsD
 
 See [Metric Submission: DogStatsD][5] for more information. There is a list of [DogStatsD libraries][14] compatible with a wide range of applications.
 
 ## Monitor your Pivotal Platform cluster
+
+
+{{< tabs >}}
+
+{{% tab "Configuration through Tanzu Ops Manager" %}}
+
+## Setup
+
+Read the [VMware Tanzu documentation][1] for installation and configuration steps.
+
+[1]: https://docs.pivotal.io/partners/datadog/installing.html
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+## Setup
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
@@ -455,6 +469,10 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 On the [Metrics explorer][23] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics"  >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Data Collected
 
