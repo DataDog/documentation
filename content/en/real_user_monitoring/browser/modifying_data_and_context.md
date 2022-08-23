@@ -349,7 +349,7 @@ Increase your filtering capabilities by adding extra attributes on top of the re
 
 When making changes to the user session object, all RUM events collected after the change contain the updated information.
 
-### User session APIs
+### Identify user session
 
 `datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
