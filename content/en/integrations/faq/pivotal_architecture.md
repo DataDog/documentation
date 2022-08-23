@@ -23,9 +23,11 @@ You can deploy and configure the components of the Datadog solution for PCF from
 - **Datadog Cluster Monitoring Tile** - Platform Engineers use this to collect, visualize, and alert on metrics and logs from PCF Platform Components. From this tile, users can deploy the Datadog Node Agent, Datadog Cluster Agent (DCA), and the Firehose Nozzle.
 - **Datadog Application Monitoring Tile** - Application developers use this to collect custom metrics, traces, and logs from their applications. From this tile, users can deploy the Datadog Buildpack which contains the Container Agent, Trace Agent, and DogStatsD.
 
+## Datadog Cluster Monitoring Tile Components:
+
 ### Node Agent
 
-The Node Agent exists on the BOSH VM and reports hosts (VMs), containers, and processes to Datadog. The Node Agent is deployed and configured from the **Cluster Monitoring** Tile in Tanzu Ops Manager. You can also use the Node Agent to retrieve logs from supported integrations.
+The Node Agent exists on every BOSH VM and reports hosts (VMs), containers, and processes to Datadog. The Node Agent is deployed and configured from the **Cluster Monitoring** Tile in Tanzu Ops Manager. You can also use the Node Agent to retrieve logs from supported integrations.
 
 #### Tags Collected
 
@@ -41,9 +43,9 @@ The [DCA][4] provides a streamlined, centralized approach to collecting cluster 
 
 #### Metadata Collected
 
-   - Cluster-level metadata.
+   - Cluster-level metadata (for example, `org_id`, `org_name`, `space_id`, `space_name`).
    - Labels and annotations exposed from the application metadata following the autodiscovery tags format `tags.datadoghq.com/k=v`.
-   - List of actual long-running processes (LRP) by VM (Diego Cell ID).  
+   - List of apps running on each host VM.
 
 Autodiscovery tags are added at the CAPI level as metadata for the application. You can add custom tags through the CAPI, and the DCA picks up these tags periodically. You can also configure the DCA to act as a cache for the Firehose Nozzle with config option within the cluster monitoring tile. This enables the nozzle to query data from the DCA instead of the CAPI, further reducing the load on the CAPI. The metadata collected by the DCA can be seen in the containers page, with PCF containers assigned the following tags: `cloudfoundry`, `app_name`, `app_id`, and `bosh_deployment`.
 
@@ -55,12 +57,16 @@ The Datadog Firehose Nozzle consumes information from your deployment’s Loggre
 
    - Tags exposed from the application metadata following the autodiscovery tags format `tags.datadoghq.com/k=v`. These are the tags a user can add to the application metadata from the CAPI.
 
+
+## Datadog Application Monitoring Tile Components:
+
 ### Buildpack
 
-The Datadog Buildpack installs the [Docker Agent][7] (containerized version of the Datadog Agent) inside the container alongside the application. The Agent is only launched or started if logs collection is enabled through setting `DD_LOGS_ENABLED=TRUE`, used to send application-level logs to Datadog. Otherwise, DogStatsD is launched to send metrics. When the application is running with the Datadog Buildpack, you can pass multiple configuration options using environment variables for the application. The variables can come from the application manifest (`manifest.yml`) or the Cloud Foundry(CF) CLI pipeline when the application is pushed to CF. 
+The Datadog Buildpack installs the lightweight IOT Agent inside the container alongside the application. The Agent is only launched or started if logs collection is enabled through setting `DD_LOGS_ENABLED=TRUE`, used to send application-level logs to Datadog. Otherwise, DogStatsD is launched to send metrics. When the application is running with the Datadog Buildpack, you can pass multiple configuration options using environment variables for the application. The variables can come from the application manifest (`manifest.yml`) or the Cloud Foundry(CF) CLI using `cf set-env` command.
 
 #### Metadata Collected
 
+   - Tags extracted from the env var `VCAP_APPLICATION` (example, `application_id`, `name`, `instance_index`, `space_name`, `uris`), and the env var`CF_INSTANCE_IP` for the `cf_instance_ip` tag.
    - Tags added using the environment variable `DD_TAGS`.
 
 These tags are present in the metrics, traces, and logs collected by the Datadog Agent. Depending on the data collected, view it in the [Metrics Explorer][5] or [Metrics Summary][6], the [Trace Explorer][8], or the [Log Explorer][9].
