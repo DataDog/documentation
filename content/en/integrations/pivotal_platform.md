@@ -41,10 +41,9 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 
 ## Setup
 
-Read the [VMware Tanzu documentation][2] for installation and configuration steps.
+Read the [VMware Tanzu documentation][1] for installation and configuration steps.
 
-[1]: https://docs.pivotal.io/partners/datadog/installing.html
-[2]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+[1]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -216,15 +215,19 @@ See [Metric Submission: DogStatsD][5] for more information. There is a list of [
 
 
 {{< tabs >}}
+
 {{% tab "Configuration through Tanzu Ops Manager" %}}
 
 ### Cluster monitoring
 
 Read the [VMware Tanzu documentation][1] for installation and configuration steps.
 
-{{% tab %}}
+[1]: https://docs.pivotal.io/partners/datadog/installing.html
+
+{{% /tab %}}
 
 {{% tab "Manual" %}}
+
 There are two points of integration with Datadog, each of which achieves a different goal:
 
 - **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
@@ -461,7 +464,8 @@ On the [Metrics explorer][23] page in Datadog, search for metrics beginning `clo
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics"  >}}
 
-{{% tab %}}
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Data Collected
