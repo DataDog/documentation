@@ -42,7 +42,7 @@ sudo /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 
 {{% tab "Windows" %}}
 
-Custom Python packages can be installed using the Agent's embedded Python using the following command in an **elevated(run as Admin)** PowerShell command line:
+Custom Python packages can be installed using the Agent's embedded Python using the following command in an **elevated** (run as admin) PowerShell command line:
 
 For Agent versions >= 6.12:
 

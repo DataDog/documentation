@@ -63,7 +63,7 @@ If your issue continues, [reach out to the Datadog support team][1] with a [flar
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-Run the following script from an *elevated(run as Admin)* PowerShell command line, with the proper `<CHECK_NAME>`:
+Run the following script from an **elevated** (run as admin) PowerShell command line, with the proper `<CHECK_NAME>`:
 
 For Agent versions >= 6.12:
 
@@ -91,7 +91,7 @@ This outputs any metrics or events that the check returns.
 {{% /tab %}}
 {{% tab "Agent v>=5.12" %}}
 
-Run the following script from an *elevated(run as Admin)* PowerShell command line, with the proper `<CHECK_NAME>`:
+Run the following script from an **elevated** (run as admin) PowerShell command line, with the proper `<CHECK_NAME>`:
 
 `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
 
