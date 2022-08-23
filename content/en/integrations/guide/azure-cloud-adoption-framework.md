@@ -183,5 +183,5 @@ For more information about how to configure SLOs and exposing them to stakeholde
 [25]: /monitors/
 [26]: /resources/json/azure_caf_service_errors_15_min.json
 [27]: /synthetics/
-[28]: /synthetics/cicd_integrations/configuration?tab=npm
+[28]: /continuous_testing/cicd_integrations/configuration?tab=npm
 [29]: /monitors/service_level_objectives/

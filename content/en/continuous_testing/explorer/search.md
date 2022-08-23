@@ -2,8 +2,10 @@
 title: Search Test Batches
 kind: documentation
 description: Examine batches of executed CI jobs and troubleshoot failing test results.
+aliases:
+- /synthetics/cicd_integrations/explorer/search
 further_reading:
-- link: '/synthetics/explorer'
+- link: '/continuous_testing/explorer'
   tag: 'Documentation'
   text: 'Learn about the CI Results Explorer'
 ---
@@ -74,4 +76,4 @@ For more information about searching for CI batches, see [Search Syntax][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /synthetics/explorer/search_syntax
+[2]: /continuous_testing/explorer/search_syntax

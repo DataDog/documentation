@@ -135,7 +135,7 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 [2]: https://app.datadoghq.com/synthetics/list
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /getting_started/synthetics/private_location
-[5]: /synthetics/cicd_integrations
+[5]: /continuous_testing/cicd_integrations
 [6]: /integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
 [8]: /synthetics/guide/synthetic-test-monitors

@@ -695,7 +695,7 @@ If you are using the [custom role feature][21], add your user to a custom role t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_integrations
+[1]: /continuous_testing/cicd_integrations
 [2]: /synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/

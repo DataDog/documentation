@@ -297,7 +297,7 @@ You can restrict access to a multistep API test based on the roles in your organ
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/
 [3]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[4]: /synthetics/cicd_integrations
+[4]: /continuous_testing/cicd_integrations
 [5]: /api/v1/synthetics/#get-all-locations-public-and-private
 [6]: /synthetics/private_locations
 [7]: /synthetics/search/#search

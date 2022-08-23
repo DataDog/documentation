@@ -2,6 +2,8 @@
 title: Jenkins
 kind: documentation
 description: Configure your Jenkins instance to run Synthetic tests in your CI/CD pipelines.
+aliases:
+- /synthetics/cicd_integrations/jenkins
 further_reading:
 - link: "/continuous_integration/setup_pipelines/jenkins/"
   tag: "Documentation"
@@ -93,12 +95,12 @@ You can expect the following output:
 
 {{< img src="synthetics/cicd_integrations/jenkins/example-test-run.png" alt="Example Test Run in Jenkins" style="width:80%;">}}
 
-## Further Reading
+## Further reading
  
 {{< partial name="whats-next/whats-next.html" >}}
  
 [1]: https://www.jenkins.io/doc/book/pipeline/docker/#using-docker-with-pipeline
 [2]: https://plugins.jenkins.io/config-file-provider/
 [3]: https://www.jenkins.io/doc/book/using/using-credentials/#adding-new-global-credentials
-[4]: /synthetics/cicd_integrations/configuration#configure-tests
+[4]: /continuous_testing/cicd_integrations/configuration#configure-tests
 [5]: /continuous_integration/setup_pipelines/jenkins/

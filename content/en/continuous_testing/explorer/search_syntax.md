@@ -2,8 +2,10 @@
 title: Search Syntax
 kind: documentation
 description: Learn how to create a search query in the CI Results Explorer.
+aliases:
+- /synthetics/cicd_integrations/explorer/search_syntax
 further_reading:
-- link: '/synthetics/explorer'
+- link: '/continuous_testing/explorer'
   tag: 'Documentation'
   text: 'Learn about the CI Results Explorer'
 ---

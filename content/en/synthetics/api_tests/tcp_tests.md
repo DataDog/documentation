@@ -186,7 +186,7 @@ You can restrict access to a TCP test based on the roles in your organization. W
 
 [1]: /api/v1/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
-[3]: /synthetics/cicd_integrations
+[3]: /continuous_testing/cicd_integrations
 [4]: /synthetics/search/#search
 [5]: /monitors/notify/#notify-your-team
 [6]: https://www.markdownguide.org/basic-syntax/

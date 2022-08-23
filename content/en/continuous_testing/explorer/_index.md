@@ -5,6 +5,7 @@ description: Examine CI jobs executing Synthetic tests.
 aliases: 
   - /synthetics/cicd_testing/ci_results_explorer
   - /synthetics/ci_results_explorer
+  - /synthetics/cicd_integrations/explorer
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -12,7 +13,7 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
   tag: "Learning Center"
   text: "Learn how to run Synthetic tests in a CI/CD pipeline"
-- link: "/synthetics/search/"
+- link: "/continuous_testing/explorer/search/"
   tag: "Documentation"
   text: "Learn how to search through your Synthetic objects"
   
@@ -50,7 +51,7 @@ To start querying the CI Results Explorer data, see [Search Syntax][5].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /synthetics/cicd_integrations
+[2]: /continuous_testing/cicd_integrations
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
-[4]: /synthetics/explorer/search/
-[5]: /synthetics/explorer/search_syntax/
+[4]: /continuous_testing/explorer/search/
+[5]: /continuous_testing/explorer/search_syntax/
