@@ -82,7 +82,7 @@ POST /api/v2/services/definitions
 {{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
 {
   "schema-version": "v2",
-  "dd-version": "shopping-service"
+  "dd-service": "shopping-service"
 }
 {{< /code-block >}}
 
