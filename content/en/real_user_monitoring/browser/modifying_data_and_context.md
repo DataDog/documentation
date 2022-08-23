@@ -328,7 +328,6 @@ window.DD_RUM &&
 
 ## User session
 
-### Identify user session
 
 Adding user information to your RUM sessions can help you:
 * Follow the journey of a given user
