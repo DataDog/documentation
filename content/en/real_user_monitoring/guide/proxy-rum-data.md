@@ -76,7 +76,8 @@ To successfully proxy request to Datadog:
 
 **IMPORTANT**: Ensure the `ddforward` attribute points to a valid Datadog endpoint for your [Datadog site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
 
-For latest SDK version:
+{{< tabs >}}
+{{% tab "latest version" %}}
 
 | Site    | Valid intake URL Pattern                       | Site Parameter (SDK [initialization parameter][3])|
 |---------|------------------------------------------------|---------------------|
@@ -86,7 +87,8 @@ For latest SDK version:
 | EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
 
-Before SDK v4:
+{{% /tab %}}
+{{% tab "before v4" %}}
 
 | Site    | Valid intake URL Pattern             | Site Parameter (SDK [initialization parameter][3])|
 |---------|--------------------------------------|---------------------|
@@ -95,7 +97,8 @@ Before SDK v4:
 | EU1     | `https://*.logs.datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.logs.ddog-gov.com/*`      | `ddog-gov.com`      |
 
-
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
