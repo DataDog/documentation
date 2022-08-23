@@ -76,13 +76,26 @@ To successfully proxy request to Datadog:
 
 **IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
 
-| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][3])| 
+For latest SDK version:
+
+| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][3])|
 |---------|------------------------------------------------|---------------------|
 | US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
 | US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
 | US5     | `https://*.browser-intake-us5-datadoghq.com/*` | `us5.datadoghq.com` |
 | EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
+
+Before SDK v4:
+
+| Site    | Valid RUM URL Pattern                 | Site Parameter (SDK [initialization parameter][3])|
+|---------|---------------------------------------|---------------------|
+| US1     | `https://*.logs.datadoghq.com/*`      | `datadoghq.com`     |
+| US3     | `https://*.logs.us3-datadoghq.com/*`  | `us3.datadoghq.com` |
+| EU1     | `https://*.logs.datadoghq.eu/*`       | `datadoghq.eu`      |
+| US1-FED | `https://*.logs.ddog-gov.com/*`       | `ddog-gov.com`      |
+
+
 
 ## Further Reading
 
