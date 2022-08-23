@@ -146,7 +146,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 6.16.0/7.16.0 - 6.33.0/7.33.0        |
 | [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26+                                                |
-| [macOS][9]                               | macOS 10.12+                                              |
+| [macOS][9]                               | macOS 10.12+ in Agent < 6.35.0/7.35.0, macOS 10.13+ in Agent < 7.39.0, macOS 10.14+ in Agent 7.39.0+ |
 | [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
 | [Windows][10]                            | Windows 7+                                                |
 | [Windows Azure Stack HCI OS][10]         | All Versions                                              |
@@ -181,7 +181,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Kubernetes][6]            | Version 1.3 to 1.8     |
 | [SUSE Enterprise Linux][7] | SUSE 11 SP4+           |
 | [Fedora][8]                | Fedora 26+             |
-| [MacOS][9]                 | macOS 10.10+           |
+| [macOS][9]                 | macOS 10.10+           |
 | [Windows Server][10]       | Windows Server 2008+   |
 | [Windows][10]              | Windows 7+             |
 
