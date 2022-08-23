@@ -12,7 +12,7 @@ further_reading:
 
 ## Short-running CLI scripts
 
-A short-running script typically runs for a few seconds or minutes and the expected behavior is to receive one trace each time the script is executed.
+A short-running script typically runs for a few seconds or minutes. The expected behavior is to receive one trace each time the script is executed.
 
 By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
 
@@ -23,7 +23,7 @@ $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
 ```
 
-For example, assume the following `script.php` runs a Curl request:
+For example, assume the following `script.php` runs a cURL request:
 
 ```php
 <?php
@@ -39,7 +39,7 @@ Run the script:
 $ php script.php
 ```
 
-Once run, the trace is generated and sent to the Datadog backend when the script terminates.
+Once the script is run, the trace is generated and sent to the Datadog backend when the script terminates.
 
 {{< img src="tracing/guide/trace_php_cli_scripts/short-running-cli.jpg" alt="Trace for a short running PHP CLI script" >}}
 
@@ -146,7 +146,7 @@ Run the script:
 $ php long_running.php
 ```
 
-Once run, one trace is generated and sent to the Datadog backend every time a new message is processed.
+Once the script is run, one trace is generated and sent to the Datadog backend every time a new message is processed.
 
 {{< img src="tracing/guide/trace_php_cli_scripts/long-running-cli.jpg" alt="Trace for a long running PHP CLI script" >}}
 
