@@ -151,7 +151,7 @@ Log collection is not supported for this site.
 
 To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
-```text
+```shell
 cf set-env <YOUR_APP_NAME> RUN_AGENT true
 cf set-env <YOUR_APP_NAME> DD_LOGS_ENABLED true
 # Disable the Agent core checks to disable system metrics collection
@@ -180,7 +180,7 @@ The following table describes the parameters above, and how they can be used to 
 
 A Java application named `app01` is running in Pivotal Platform. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
-```text
+```shell
 # Redirect Stdout/Stderr to port 10514
 cf set-env app01 STD_LOG_COLLECTION_PORT 10514
 # Configure the Agent to listen to port 10514
@@ -199,14 +199,18 @@ If the connection fails to be established and the log collection is not started,
 
 You can use tags to correlate data across infrastructure hosts and APM through [Unified Service Tagging][31].
 
+In order to add custom tags to your application, set the `DD_TAGS` environment variable either via the `manifest.yml` or via the CF CLI command:
+
+```shell
+# set the environment variable
+cf set-env <YOUR_APP> DD_TAGS key1=value1,key2=value2
+# restage the application to make it pick up the new environment variable and use the new tags
+cf restage <YOUR_APP>
+```
+
 [1]: /agent/logs/proxy/
 
 {{< /site-region >}}
-
-### Build
-
-To build this buildpack, edit the relevant files and run the `./build` script. To upload it, run `./upload`.
-
 ### DogStatsD
 
 See [Metric Submission: DogStatsD][5] for more information. There is a list of [DogStatsD libraries][14] compatible with a wide range of applications.
@@ -218,7 +222,7 @@ See [Metric Submission: DogStatsD][5] for more information. There is a list of [
 
 {{% tab "Configuration through Tanzu Ops Manager" %}}
 
-### Cluster monitoring
+## Setup
 
 Read the [VMware Tanzu documentation][1] for installation and configuration steps.
 
@@ -227,6 +231,8 @@ Read the [VMware Tanzu documentation][1] for installation and configuration step
 {{% /tab %}}
 
 {{% tab "Manual" %}}
+
+## Setup
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
