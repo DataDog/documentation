@@ -232,38 +232,125 @@ For further help with this issue, [contact support][2] and include the output of
 
 ## Missing profiles in the profile search page
 
-If you've configured the profiler and don't see profiles in the profile search page, here are a few settings to check:
+If you've configured the profiler and don't see profiles in the profile search page, here are a few settings to check depending on the Operating System.
+
+{{< tabs >}}
+
+{{% tab "Linux" %}}
+
+1. Check that the Agent is installed and running.
+
+2. Check the profiler has been loaded from the loader log:
+
+   1. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
+
+   2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end.
+
+   3. If not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
+
+   4. Restart the application.
+
+   5. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
+
+   6. Look for the `#Profiler` entry.
+
+   7. Check the following lines to ensure that the profiler library has been loaded:
+      ```
+      [...] #Profiler
+      [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x64;.\Datadog.Profiler.Native.dll
+      [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x86;.\Datadog.Profiler.Native.dll
+      [...] DynamicDispatcherImpl::LoadConfiguration: [PROFILER] Loading: .\Datadog.Profiler.Native.dll [AbsolutePath=/opt/datadog/linux-x64/./Datadog.Tracer.Native.so]
+      [...] [PROFILER] Creating a new DynamicInstance object
+      [...] Load: /opt/datadog/linux-x64/./Datadog.Tracer.Native.so
+      [...] GetFunction: DllGetClassObject
+      [...] GetFunction: DllCanUnloadNow
+      ```
+
+3. Check the result of profiles export:
+
+   1. If not set already, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application and restart it.
+
+   2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
+
+   3. Look for `libddprof error: Failed to send profile.` entries: it means that it is not possible to contact the agent.
+
+   4. If not present, look for `The profile was sent. Success?` entries.
+
+   5. The following means the profile has been sent successfully:
+      ```
+      true, Http code: 200
+      ```
+
+   6. Check the following other Http codes for error possible reasons:
+      ```
+      false, Http code: XXX
+      ```
+        1. 403:  // TODO
+
+        2. 500:  // TODO
+
+{{% /tab %}}
+
+{{% tab "Windows" %}}
 
 1. Check that the Agent is installed and running and is visible in the Windows Services panel.
 
-2. Check the result of profiles export:
+2. Check the profiler has been loaded from the loader log:
 
-   1. Enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
+   1. Open the `dotnet-native-loader-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
 
-   2. Restart the application.
+   2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end.
 
-   3. Open the `DD-Dotnet-Profiler.<Application Name>` log file in the `%ProgramData%\Datadog-APM\logs\` folder.
+   2. If not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
 
-   4. Look for `Profile data was NOT successfully exported via HTTP POST` entries.
+   3. Restart the application.
 
-   5. Check the following fields for errors:
+   4. Open the `dotnet-native-loader-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+
+   5. Look for the `#Profiler` entry.
+
+   6. Check the following lines to ensure that the profiler library has been loaded:
       ```
-      ["response.StatusCode"]=...,
-      ["response.Error"]="...",
+      [...] #Profiler
+      [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x64;.\Datadog.Profiler.Native.dll
+      [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x86;.\Datadog.Profiler.Native.dll
+      [...] DynamicDispatcherImpl::LoadConfiguration: [PROFILER] Loading: .\Datadog.Profiler.Native.dll [AbsolutePath=C:\Program Files\Datadog\.NET Tracer\win-x64\Datadog.Profiler.Native.dll]
+      [...] [PROFILER] Creating a new DynamicInstance object
+      [...] Load: C:\Program Files\Datadog\.NET Tracer\win-x64\Datadog.Profiler.Native.dll
+      [...] GetFunction: DllGetClassObject
+      [...] GetFunction: DllCanUnloadNow
       ```
 
-   6. Check the following field to ensure that the right URL is used. If you use default configuration settings:
+3. Check the result of profiles export:
+
+   1. If not set already, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application and restart it.
+
+   2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
+
+   3. Look for `libddprof error: Failed to send profile.` entries: it means that it is not possible to contact the agent.
+
+   4. If not present, look for `The profile was sent. Success?` entries.
+
+   5. The following means the profile has been sent successfully:
       ```
-      ["_profilesIngestionEndpoint_url"]="http://127.0.0.1:8126/profiling/v1/input",
+      true, Http code: 200
       ```
-      If your configuration specifies a different trace Agent URL using `DD_TRACE_AGENT_URL` or `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables, then this field must match those values. For example:
+
+   6. Check the following other Http codes for error possible reasons:
       ```
-      ["_profilesIngestionEndpoint_url"]="http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>/profiling/v1/input",
+      false, Http code: XXX
       ```
+        1. 403:  // TODO
+
+        2. 500:  // TODO
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug files and the following information:
-- Operating system type and version (for example, Windows Server 2019).
-- Runtime type and version (for example, .NET Core 6.0).
+- Operating system type and version (for example, Windows Server 2019 or Ubuntu 20.04).
+- Runtime type and version (for example, .NET Framework 4.8 or .NET Core 6.0).
 - Application type (for example, Web application running in IIS).
 
 
@@ -284,7 +371,7 @@ This fixed cost means that the relative overhead of the profiler can be signific
 
 ## Missing profiles in the profile search page
 
-If you've configured the profiler and don't see profiles in the profile search page, run the `phpinfo()` function. The profiler hooks into `phpinfo()` to run diagnostics. If the webserver is having problems, run `phpinfo()` from the webserver and not from the command line as each Server API (SAPI) can be configured indepenently.
+If you've configured the profiler and don't see profiles in the profile search page, run the `phpinfo()` function. The profiler hooks into `phpinfo()` to run diagnostics. If the webserver is having problems, run `phpinfo()` from the webserver and not from the command line as each Server API (SAPI) can be configured independently.
 
 [Open a support ticket][1] with the following information:
 
