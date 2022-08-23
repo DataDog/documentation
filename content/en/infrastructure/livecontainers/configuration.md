@@ -23,9 +23,8 @@ Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][2] a
 
 If you are using the official [Datadog Helm Chart][1]:
 
-- Use chart version 2.10.0 or above
-  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][2] file.
-- Make sure the Process Agent is enabled. You can do this by modifying your `datadog-values.yaml` file to include:
+- Use chart version >= 2.10.0. Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required (or above) in your Helm chart [values.yaml][2] file.
+- Enable the Process Agent. You can do this by modifying your `datadog-values.yaml` file to include:
 
     ```yaml
     datadog:
@@ -35,7 +34,7 @@ If you are using the official [Datadog Helm Chart][1]:
     ```
 - Deploy a new release.
 
-In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
@@ -117,7 +116,7 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
       value: "true"
     ```
 
-In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must add the following options in the `env` section of both the Cluster Agent and the Process Agent:
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, add the following options in the `env` section of both the Cluster Agent and the Process Agent:
 
   ```yaml
   - name: DD_CLUSTER_NAME
@@ -131,7 +130,7 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
 ### Resource collection compatibility matrix
 
-The following table presents the list of collected resources and the minimal Agent, Cluster Agent and Helm chart versions for each.
+The following table presents the list of collected resources and the minimal Agent, Cluster Agent, and Helm chart versions for each.
 
 | Resource | Minimal Agent version | Minimal Cluster Agent version | Minimal Helm chart version |
 |---|---|---|---|
@@ -166,7 +165,7 @@ Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` envi
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-If you are using the official Helm chart, add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` respectively in [values.yaml][1].
+If you are using the official Helm chart, add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` in [values.yaml][1].
 
 ```yaml
   agents:
@@ -182,7 +181,7 @@ If you are using the official Helm chart, add the environment variable on both t
 ```
 
 
-Then deploy a new release.
+Then, deploy a new release.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
@@ -205,7 +204,7 @@ It is possible to include and/or exclude containers from real-time collection:
 * Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
 * Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
 
-Both arguments take an **image name** as value; regular expressions are also supported.
+Both arguments take an **image name** as value. Regular expressions are also supported.
 
 For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
 
@@ -256,7 +255,7 @@ password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
 ```
 
-However it does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
+However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
 
 ## Further reading
 
