@@ -83,7 +83,7 @@ Before getting started, ensure you have the following prerequisites:
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
     a. Select the AWS regions to integrate with.  
     b. Add your Datadog [API key][58].  
-    c. Optionally, send logs and other other data to Datadog with the [Datadog Forwarder Lambda][1].  
+    c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
     d. Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
 5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
