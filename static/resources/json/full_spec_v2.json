@@ -6850,7 +6850,7 @@
             "type": "string"
           },
           "source_type_name": {
-            "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).",
+            "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/events/guides/new_events_sources/).",
             "type": "string"
           },
           "sourcecategory": {
@@ -7083,7 +7083,7 @@
                     "type": "string"
                   },
                   "source_type_name": {
-                    "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).",
+                    "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/events/guides/new_events_sources/).",
                     "type": "string"
                   },
                   "sourcecategory": {
@@ -7339,7 +7339,7 @@
                 "type": "string"
               },
               "source_type_name": {
-                "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).",
+                "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/events/guides/new_events_sources/).",
                 "type": "string"
               },
               "sourcecategory": {
@@ -7698,7 +7698,7 @@
                           "type": "string"
                         },
                         "source_type_name": {
-                          "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).",
+                          "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/events/guides/new_events_sources/).",
                           "type": "string"
                         },
                         "sourcecategory": {
@@ -51987,7 +51987,7 @@
                                     "type": "string"
                                   },
                                   "source_type_name": {
-                                    "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).",
+                                    "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/events/guides/new_events_sources/).",
                                     "type": "string"
                                   },
                                   "sourcecategory": {
@@ -52521,7 +52521,7 @@
                                     "type": "string"
                                   },
                                   "source_type_name": {
-                                    "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).",
+                                    "description": "The type of event being posted.\nFor example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`, `git` or `bitbucket`.\nThe list of standard source attribute values is [available here](https://docs.datadoghq.com/events/guides/new_events_sources/).",
                                     "type": "string"
                                   },
                                   "sourcecategory": {
