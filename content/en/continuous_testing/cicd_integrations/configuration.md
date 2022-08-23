@@ -14,7 +14,7 @@ further_reading:
 - link: "/continuous_testing/explorer"
   tag: "Documentation"
   text: "Learn about the CI Results Explorer"
-- link: "/continuous_testing/testing_tunnel"
+- link: "/continuous_testing/cicd_integrations/testing_tunnel"
   tag: "Documentation"
   text: "Learn about the testing tunnel"
 ---
@@ -396,6 +396,6 @@ You can also see your CI test results listed in the [CI Results Explorer][5] and
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://github.com/TooTallNate/node-proxy-agent
-[3]: /continuous_testing/testing_tunnel/
+[3]: /continuous_testing/cicd_integrations/testing_tunnel/
 [4]: /api/latest/synthetics/#get-a-test-configuration
 [5]: /continuous_testing/explorer/
