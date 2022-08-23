@@ -22733,7 +22733,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
