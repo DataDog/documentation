@@ -198,7 +198,6 @@ For information about the different methods for setting environment variables, s
 
    ```
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. For standalone applications and Windows services, manually restart the application.
 
@@ -292,7 +291,6 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -302,7 +300,7 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+[string[]] $v = @("COR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
@@ -316,7 +314,6 @@ To automatically instrument a console application, set the environment variables
 ```bat
 rem Set environment variables
 SET COR_ENABLE_PROFILING=1
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
 dotnet.exe example.dll
