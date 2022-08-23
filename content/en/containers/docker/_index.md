@@ -43,7 +43,7 @@ Images are available for 64-bit x86 and Arm v8 architectures.
 | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
 
 
-**Note**: The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
 ## Setup
 

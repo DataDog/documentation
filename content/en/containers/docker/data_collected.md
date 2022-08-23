@@ -45,7 +45,7 @@ The Docker Agent produces the following events:
 
 ### Events
 
-The containerd check can collect events. Use `filters` to select the relevant events. See the sample [`containerd.d/conf.yaml`][1] to have more details.
+The containerd check can collect events. Use `filters` to select the relevant events. See the sample [`containerd.d/conf.yaml`][1] for more details.
 
 ### Service checks
 
