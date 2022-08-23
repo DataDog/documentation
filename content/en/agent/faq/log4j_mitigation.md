@@ -152,7 +152,7 @@ $stream.Close()
 $stream.Dispose()
 ```
 
-From an **elevated(run as Admin)** PowerShell, stop the Datadog Agent service before applying the patch:
+From an **elevated** (run as admin) PowerShell, stop the Datadog Agent service before applying the patch:
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" stopservice
