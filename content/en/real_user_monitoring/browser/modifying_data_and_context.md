@@ -328,7 +328,6 @@ window.DD_RUM &&
 
 ## User session
 
-
 Adding user information to your RUM sessions can help you:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
