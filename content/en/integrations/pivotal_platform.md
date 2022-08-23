@@ -36,20 +36,10 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 
 ## Monitor your applications
 
-Use the **Datadog Pivotal Platform Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][4] for Pivotal Platform that installs a [Datadog DogStatsD binary][5] and Datadog Agent in the container your app is running on.
-
-## Setup
-
-Use the VMware Tanzu setup options for the simplest approach.
-
 {{< tabs >}}
 {{% tab "Configuration through Tanzu Ops Manager" %}}
 
-### Cluster monitoring
-
-Read the [VMware Tanzu documentation][1] for installation and configuration steps.
-
-### Application monitoring
+## Setup
 
 Read the [VMware Tanzu documentation][2] for installation and configuration steps.
 
@@ -58,6 +48,10 @@ Read the [VMware Tanzu documentation][2] for installation and configuration step
 
 {{% /tab %}}
 {{% tab "Manual" %}}
+
+## Setup
+
+Use the **Datadog Cloud Foundry Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][4] for Pivotal Platform that installs a [Datadog DogStatsD binary][5] and Datadog Agent in the container your app is running on.
 
 #### Pivotal Platform < 1.12
 
@@ -220,6 +214,17 @@ See [Metric Submission: DogStatsD][5] for more information. There is a list of [
 
 ## Monitor your Pivotal Platform cluster
 
+
+{{< tabs >}}
+{{% tab "Configuration through Tanzu Ops Manager" %}}
+
+### Cluster monitoring
+
+Read the [VMware Tanzu documentation][1] for installation and configuration steps.
+
+{{% tab %}}
+
+{{% tab "Manual" %}}
 There are two points of integration with Datadog, each of which achieves a different goal:
 
 - **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
@@ -455,6 +460,9 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 On the [Metrics explorer][23] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloudfoundry.nozzle.metrics"  >}}
+
+{{% tab %}}
+{{< /tabs >}}
 
 ## Data Collected
 
