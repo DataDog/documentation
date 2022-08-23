@@ -79,7 +79,7 @@ To successfully proxy request to Datadog:
 {{< tabs >}}
 {{% tab "latest version" %}}
 
-| Site    | Valid intake URL Pattern                       | Site Parameter (SDK [initialization parameter][3])|
+| Site    | Valid intake URL Pattern                       | Site Parameter      |
 |---------|------------------------------------------------|---------------------|
 | US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
 | US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
@@ -90,7 +90,7 @@ To successfully proxy request to Datadog:
 {{% /tab %}}
 {{% tab "before v4" %}}
 
-| Site    | Valid intake URL Pattern             | Site Parameter (SDK [initialization parameter][3])|
+| Site    | Valid intake URL Pattern             | Site Parameter      |
 |---------|--------------------------------------|---------------------|
 | US1     | `https://*.logs.datadoghq.com/*`     | `datadoghq.com`     |
 | US3     | `https://*.logs.us3-datadoghq.com/*` | `us3.datadoghq.com` |
@@ -99,6 +99,8 @@ To successfully proxy request to Datadog:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note:** Site parameter is an SDK [initialization parameter][3].
 
 ## Further Reading
 
