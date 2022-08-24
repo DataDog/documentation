@@ -232,7 +232,7 @@ For further help with this issue, [contact support][2] and include the output of
 
 ## Missing profiles in the profile search page
 
-If you've configured the profiler and don't see profiles in the profile search page, here are things to check, depending on the Operating System.
+If you've configured the profiler and don't see profiles in the profile search page, here are things to check, depending on the operating system.
 
 {{< tabs >}}
 
@@ -240,7 +240,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 1. Check that the Agent is installed and running.
 
-2. Check the profiler has been loaded from the loader log:
+2. Check that the profiler has been loaded from the loader log:
 
    1. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
 
@@ -274,7 +274,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
-   The following message means the profile has been sent successfully:
+      The following message means the profile has been sent successfully:
       ```
       true, Http code: 200
       ```
@@ -321,7 +321,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
-   The following message means the profile has been sent successfully:
+      The following message means the profile has been sent successfully:
       ```
       true, Http code: 200
       ```
