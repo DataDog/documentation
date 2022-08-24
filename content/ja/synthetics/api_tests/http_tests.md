@@ -3,12 +3,12 @@ aliases:
 - /ja/synthetics/http_test
 - /ja/synthetics/http_check
 - /ja/synthetics/guide/or-logic-api-tests-assertions
-description: HTTP リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します
+description: HTTP リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します。
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
   text: Datadog Synthetic モニタリングの紹介
-- link: https://learn.datadoghq.com/course/view.php?id=39
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: ラーニングセンター
   text: Synthetic テストの紹介
 - link: /getting_started/synthetics/api_test
@@ -20,6 +20,9 @@ further_reading:
 - link: /synthetics/multistep
   tag: ドキュメント
   text: マルチステップ HTTP テスト
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
 title: HTTP テスト
 ---
@@ -43,6 +46,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    {{% tab "リクエストオプション" %}}
 
    * **Follow redirects**: 選択すると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
+   * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
    * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
    * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
    * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
@@ -54,10 +58,18 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
-   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名は実装されていません。
+   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
+   AWS S3 バケットへの "Single Chunk” 転送リクエストでは、ヘッダーとして sha256 エンコードされたリクエストの本文を含む `x-amz-content-sha256` を追加します。
+   * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
 
-  </br>オプションで、**Additional configuration** のセクションにドメインとワークステーションを指定することができます。 
+     <br/> 
 
+     `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
+
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
    {{% /tab %}}
 
    {{% tab "クエリパラメーター" %}}
@@ -68,20 +80,8 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    {{% tab "リクエスト本文" %}}
 
-   * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、または `None`) を選択します。
+   * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
-
-   {{% /tab %}}
-
-   {{% tab "証明書" %}}
-
-   * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
-   * **クライアント証明書**: クライアント証明書 (`.crt`) と関連する秘密キー (`.key`) を `PEM` 形式でアップロードして、mTLS を介して認証します。`openssl` ライブラリを使用して証明書を変換することができます。たとえば、`PKCS12` 証明書を `PEM` 形式の秘密キーと証明書に変換できます。
-
-     ```
-     openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-     openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-     ```
 
    {{% /tab %}}
 
@@ -97,7 +97,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    * **Do not save response body**: 応答の本文が実行時に保存されないようにするには、このオプションを選択します。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。セキュリティに関する推奨の詳細は、[Synthetic Monitoring Security][1] をご確認ください。
 
 
-[1]: /ja/security/synthetics
+[1]: /ja/data_security/synthetics
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -108,7 +108,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
 4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][4]で Synthetic テストをすばやくフィルタリングできます。
 
-{{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
 
 **Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
 
@@ -164,7 +164,7 @@ HTTP テストは次の頻度で実行できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
@@ -185,13 +185,15 @@ HTTP テストは次の頻度で実行できます。
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックすると、保存され、テストが開始されます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
+
+詳しくは、[Synthetic テストモニターの使用][11]をご覧ください。
 
 ## 変数
 
 ### ローカル変数を作成する
 
-テストコンフィギュレーションフォームの右上隅にある **Create Local Variable** をクリックすると、ローカル変数を作成できます。以下の利用可能なビルトインのいずれかから値を定義できます。
+ローカル変数を作成するには、右上の **Create Local Variable** をクリックします。以下の利用可能なビルトインのいずれかから選択することができます。
 
 `{{ numeric(n) }}`
 : `n` 桁の数字列を生成します。
@@ -202,15 +204,17 @@ HTTP テストは次の頻度で実行できます。
 `{{ alphanumeric(n) }}`
 : `n` 文字の英数字文字列を生成します。
 
-`{{ date(n, format) }}`
-: テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。
+`{{ date(n unit, format) }}` 
+: テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 
 `{{ timestamp(n, unit) }}` 
-: テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。
+: テストが + または - `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
+
+テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][11]を使用することができます。
+HTTP テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][12]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
@@ -235,7 +239,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][12]。
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][13]。
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
@@ -248,13 +252,13 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 
 ## アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][13]を持つユーザーのみが、Synthetic HTTP テストを作成、編集、削除できます。Synthetic HTTP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][13]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][14]を持つユーザーのみが、Synthetic HTTP テストを作成、編集、削除できます。Synthetic HTTP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][14]のいずれかにアップグレードします。
 
-[カスタムロール機能][14]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][15]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][15]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][16]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、HTTP テストへのアクセスを制限することができます。HTTP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -274,8 +278,9 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 [8]: /ja/monitors/notify/#notify-your-team
 [9]: https://www.markdownguide.org/basic-syntax/
 [10]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[11]: /ja/synthetics/settings/#global-variables
-[12]: /ja/synthetics/api_tests/errors/#ssl-errors
-[13]: /ja/account_management/rbac/
-[14]: /ja/account_management/rbac#custom-roles
-[15]: /ja/account_management/rbac/#create-a-custom-role
+[11]: /ja/synthetics/guide/synthetic-test-monitors
+[12]: /ja/synthetics/settings/#global-variables
+[13]: /ja/synthetics/api_tests/errors/#ssl-errors
+[14]: /ja/account_management/rbac/
+[15]: /ja/account_management/rbac#custom-roles
+[16]: /ja/account_management/rbac/#create-a-custom-role

@@ -1,37 +1,50 @@
 ---
-aliases:
-- /ja/integrations/winservices
+app_id: windows-service
+app_uuid: 1d895e93-d6f1-49f9-82bc-a03df7ff215c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Windows Service
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md
-display_name: Windows Service
+display_on_public_website: true
 draft: false
 git_integration_title: windows_service
-guid: 2289acf0-e413-4384-83f7-88157b430805
 integration_id: windows-service
 integration_title: Windows Services
 integration_version: 4.2.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: windows_service.
+manifest_version: 2.0.0
 name: windows_service
-public_title: Windows Services インテグレーション
+oauth: {}
+public_title: Windows Services
 short_description: Windows Service の状態を監視。
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::OS とシステム
+  configuration: README.md#Setup
+  description: Windows Service の状態を監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Windows Services
 ---
 
 

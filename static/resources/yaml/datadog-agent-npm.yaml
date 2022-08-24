@@ -60,11 +60,16 @@ data:
       enabled: false
     runtime_security_config:
       enabled: false
+      fim_enabled: false
       socket: /var/run/sysprobe/runtime-security.sock
       policies:
         dir: /etc/datadog-agent/runtime-security.d
       syscall_monitor:
         enabled: false
+      network:
+        enabled: false
+      activity_dump:
+        traced_cgroups_count: 0
 ---
 # Source: datadog/templates/system-probe-configmap.yaml
 apiVersion: v1
@@ -167,6 +172,7 @@ data:
             "newfstatat",
             "open",
             "openat",
+            "openat2",
             "pause",
             "perf_event_open",
             "pipe",
@@ -305,7 +311,7 @@ spec:
         runAsUser: 0
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -407,9 +413,9 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
-          command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
+          command: ["process-agent", "--cfgpath=/etc/datadog-agent/datadog.yaml"]
           resources: {}
           env:
             # Needs to be removed when Agent N-2 is built with Golang 1.17
@@ -473,7 +479,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -544,7 +550,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -554,7 +560,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -594,7 +600,7 @@ spec:
               value: "true"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json

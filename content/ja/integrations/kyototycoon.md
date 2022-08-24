@@ -1,45 +1,68 @@
 ---
+app_id: kyoto-tycoon
+app_uuid: 5cc7578e-8f8e-43c3-890a-4360581634e7
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     kyototycoon: assets/dashboards/kyototycoon_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kyototycoon.records
+      metadata_path: metadata.csv
+      prefix: kyototycoon.
+    process_signatures:
+    - ktserver
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kyoto Tycoon
   logs:
     source: kyototycoon
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     kyoto-tycoon_processes: assets/saved_views/kyoto-tycoon_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md
-display_name: Kyoto Tycoon
+display_on_public_website: true
 draft: false
 git_integration_title: kyototycoon
-guid: 2661668b-d804-4c8d-96a7-8019525add8c
 integration_id: kyoto-tycoon
 integration_title: Kyoto Tycoon
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kyototycoon.
-metric_to_check: kyototycoon.records
+manifest_version: 2.0.0
 name: kyototycoon
-process_signatures:
-- ktserver
-public_title: Kyoto Tycoon インテグレーション
+oauth: {}
+public_title: Kyoto Tycoon
 short_description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kyoto Tycoon
 ---
 
 

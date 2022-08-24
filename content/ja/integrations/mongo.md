@@ -1,14 +1,25 @@
 ---
-aliases:
-- /ja/integrations/mongodb
+app_id: mongodb
+app_uuid: 54cca53a-3c87-4b53-beb4-fce95d1fcfb5
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     mongodb: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: mongodb.connections.available
+      metadata_path: metadata.csv
+      prefix: mongodb.
+    process_signatures:
+    - mongod
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: MongoDB
   logs:
     source: mongodb
-  metrics_metadata: metadata.csv
   monitors:
     '[MongoDB] High incoming connections': assets/monitors/high_connections.json
   saved_views:
@@ -17,37 +28,49 @@ assets:
     queries: assets/saved_views/queries.json
     queries_by_type_overview: assets/saved_views/queries_by_type_overview.json
     slow_queries: assets/saved_views/slow_queries.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
 - autodiscovery
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
-display_name: MongoDB
+display_on_public_website: true
 draft: false
 git_integration_title: mongo
-guid: d51c342e-7a02-4611-a47f-1e8eade5735c
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 3.2.3
+integration_version: 4.0.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: mongodb.
-metric_to_check: mongodb.connections.available
+manifest_version: 2.0.0
 name: mongo
-process_signatures:
-- mongod
-public_title: MongoDB インテグレーション
+oauth: {}
+public_title: MongoDB
 short_description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MongoDB
 ---
 
 

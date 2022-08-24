@@ -1,49 +1,71 @@
 ---
-aliases:
-- /ja/integrations/memcached
+app_id: memcached
+app_uuid: 711c00b1-c62c-4a50-867b-be1929950b2c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     memcached: assets/dashboards/memcached_dashboard.json
     memcached_screenboard: assets/dashboards/memcached_screenboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: memcache.uptime
+      metadata_path: metadata.csv
+      prefix: memcache.
+    process_signatures:
+    - memcached
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Memcached
   logs:
     source: memcached
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     memcached_processes: assets/saved_views/memcached_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - caching
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
-display_name: Memcached
+display_on_public_website: true
 draft: false
 git_integration_title: mcache
-guid: b1c4033c-bf96-4456-be63-e74ff171f991
 integration_id: memcached
 integration_title: Memcache
 integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: memcache.
-metric_to_check: memcache.uptime
+manifest_version: 2.0.0
 name: mcache
-process_signatures:
-- memcached
-public_title: Memcache インテグレーション
+oauth: {}
+public_title: Memcache
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Web
+  - Category::キャッシュ
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Memcache
 ---
 
 

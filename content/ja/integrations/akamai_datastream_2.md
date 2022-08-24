@@ -1,36 +1,57 @@
 ---
+app_id: akamai-datastream-2
+app_uuid: 9a772881-d31a-4ffb-92bb-7beef1088a55
 assets:
   dashboards:
     Akamai DataStream 2: assets/dashboards/akamai_datastream_2_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: akamai_datastream.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Akamai DataStream 2
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories: []
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md
-display_name: Akamai DataStream 2
+display_on_public_website: true
 draft: false
 git_integration_title: akamai_datastream_2
-guid: 864804b8-5a2a-4fd2-be08-ca23219c48ef
 integration_id: akamai-datastream-2
 integration_title: Akamai DataStream 2
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: akamai_datastream.
+manifest_version: 2.0.0
 name: akamai_datastream_2
+oauth: {}
 public_title: Akamai DataStream 2
 short_description: Akamai DataStream のログを Datadog に送信
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Akamai DataStream のログを Datadog に送信
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Akamai DataStream 2
 ---
 
 

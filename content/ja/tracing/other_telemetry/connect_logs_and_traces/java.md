@@ -1,9 +1,9 @@
 ---
 aliases:
-- /ja/tracing/connect_logs_and_traces/php
-code_lang: php
-code_lang_weight: 70
-description: PHP ログとトレースを接続して Datadog で関連付けます。
+- /ja/tracing/connect_logs_and_traces/nodejs
+code_lang: nodejs
+code_lang_weight: 50
+description: Nodejs ログとトレースを接続して Datadog で関連付けます。
 further_reading:
 - link: tracing/trace_collection/custom_instrumentation
   tag: ドキュメント
@@ -18,76 +18,57 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: PHP ログとトレースの接続
+title: Nodejs ログとトレースの接続
 type: multi-code-lang
 ---
 
 ## 自動挿入
 
-PHP にロギングを実装するさまざまな方法があり<span class="x x-first x-last">、</span>PHP の組み込みエラーロギング API が完全に回避されている場合、Datadog PHP トレースライブラリは、トレースとスパン <span class="x x-first x-last">ID</span> をログに自動的に挿入できることが確実ではありません。
-PHP ログとトレースを手動で接続する方法については、以下のセクションをご覧ください。
+環境変数 `DD_LOGS_INJECTION=true` か、直接トレーサーを構成することで挿入を有効にします:
+
+```javascript
+// この行は、ロガーをインポートする前に記述する必要があります。
+const tracer = require('dd-trace').init({
+    logInjection: true
+});
+```
+
+これにより、`bunyan`、`paperplane`、`pino`、`winston` の自動トレース ID 挿入が有効になります。
+
+まだの場合は、NodeJS トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成します。これは、
+`env`、`service`、`version` を追加する際のベストプラクティスです (詳細は、[統合サービスタグ付け][1]を参照)。
+
+**注**: 自動挿入が機能するのは JSON 形式のログのみです。
 
 ## 手動挿入
 
-<div class="alert alert-warning">
-注: 関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入されています。
-</div>
+自動挿入に対応していないロギングライブラリを使っているが、JSON 形式を使っている場合は、コード内で直接手動挿入を実行することができます。
 
-ログとトレースを一緒に接続するには、ログに、それぞれトレース ID とスパン ID を含む `dd.trace_id` 属性と `dd.span_id` 属性が含まれている必要があります。
+`console` を基底のロガーとして使う例:
 
-[Datadog ログインテグレーション][1]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされ、[トレースリマッパー][2]のおかげで再マップされていることを確実にする必要があります。詳細については、[関連するログがトレースIDパネルに表示されない][3]を参照してください。
+```javascript
+const tracer = require('dd-trace');
+const formats = require('dd-trace/ext/formats');
 
-たとえば、次でこの 2 つの属性をログに追加します。
+class Logger {
+    log(level, message) {
+        const span = tracer.scope().active();
+        const time = new Date().toISOString();
+        const record = { time, level, message };
 
-```php
-  <?php
-  $context = \DDTrace\current_context();
-  $append = sprintf(
-      ' [dd.trace_id=%d dd.span_id=%d]',
-      $context['trace_id'],
-      $context['span_id']
-  );
-  my_error_logger('Error message.' . $append);
-?>
-```
+        if (span) {
+            tracer.inject(span.context(), formats.LOG, record);
+        }
 
-ロガーが [**monolog/monolog** ライブラリ][4]を実装する場合、`Logger::pushProcessor()` を使ってすべてのログメッセージに識別子を自動的に付加します:
+        console.log(JSON.stringify(record));
+    }
+}
 
-```php
-<?php
-  $logger->pushProcessor(function ($record) {
-      $context = \DDTrace\current_context();
-      $record['message'] .= sprintf(
-          ' [dd.trace_id=%d dd.span_id=%d]',
-          $context['trace_id'],
-          $context['span_id']
-      );
-      return $record;
-  });
-?>
-```
-
-アプリケーションで、ログメッセージに trace_id および span_id を付加するのではなく json ログフォーマットを使用している場合は、以下の ID を含む一時レベルキー "dd" を追加できます。
-
-```php
-<?php
-  $context = \DDTrace\current_context();
-  $logger->pushProcessor(function ($record) use ($context) {
-      $record['dd'] = [
-          'trace_id' => $context['trace_id'],
-          'span_id'  => $context['span_id'],
-      ];
-
-      return $record;
-  });
-?>
+module.exports = Logger;
 ```
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_collection/php/
-[2]: /ja/logs/log_configuration/processors/#trace-remapper
-[3]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
-[4]: https://github.com/Seldaek/monolog
+[1]: /ja/getting_started/tagging/unified_service_tagging

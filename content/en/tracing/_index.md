@@ -1,6 +1,6 @@
 ---
 
-title: APM & Continuous Profiler
+title: APM
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:

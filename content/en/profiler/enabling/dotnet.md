@@ -46,7 +46,7 @@ Supported languages
 ## Installation
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's .NET Tracer and Profiler rely on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation rely on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+. The profiler ships together with the tracer, so install it using the following steps, depending on your operating system.
@@ -129,7 +129,6 @@ To install the .NET Profiler machine-wide:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -140,7 +139,6 @@ To install the .NET Profiler machine-wide:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -175,7 +173,6 @@ To install the .NET Profiler machine-wide:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -186,7 +183,6 @@ To install the .NET Profiler machine-wide:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -200,7 +196,6 @@ To install the .NET Profiler machine-wide:
    ```powershell
    [string[]] $v = @(
        "CORECLR_ENABLE_PROFILING=1",
-       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -213,7 +208,6 @@ To install the .NET Profiler machine-wide:
    ```powershell
    [string[]] $v = @(
        "COR_ENABLE_PROFILING=1",
-       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -233,7 +227,6 @@ To install the .NET Profiler machine-wide:
    For .NET Core and .NET 5+:
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
-   SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
@@ -245,7 +238,6 @@ To install the .NET Profiler machine-wide:
    For .NET Framework:
    ```cmd
    SET COR_ENABLE_PROFILING=1
-   SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production

@@ -1,50 +1,73 @@
 ---
-aliases:
-- /ja/integrations/powerdns
+app_id: powerdns
+app_uuid: 44e491e1-f7c3-447a-b597-e740196479e0
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     powerdns: assets/dashboards/powerdns_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: powerdns.recursor.questions
+      metadata_path: metadata.csv
+      prefix: powerdns.
+    process_signatures:
+    - pdns_server
+    - systemctl start pdns@
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PowerDNS Recursor
   logs:
     source: powerdns
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     powerdns_processes: assets/saved_views/powerdns_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - network
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
-display_name: PowerDNS Recursor
+display_on_public_website: true
 draft: false
 git_integration_title: powerdns_recursor
-guid: ae533b67-a2af-45ce-8e23-235acb3a3893
 integration_id: powerdns
 integration_title: Power DNS Recursor
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: powerdns.
-metric_to_check: powerdns.recursor.questions
+manifest_version: 2.0.0
 name: powerdns_recursor
-process_signatures:
-- pdns_server
-- systemctl start pdns@
-public_title: Power DNS Recursor インテグレーション
+oauth: {}
+public_title: Power DNS Recursor
 short_description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ネットワーク
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Power DNS Recursor
 ---
 
 

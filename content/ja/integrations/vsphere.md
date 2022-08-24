@@ -1,42 +1,60 @@
 ---
-aliases:
-- /ja/integrations/vmware/
-- /ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
+app_id: vsphere
+app_uuid: d9b9104f-ffd1-42be-8e18-d8a3aa289b98
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     vsphere-overview: assets/dashboards/vsphere_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: vsphere.vm.count
+      metadata_path: metadata.csv
+      prefix: vsphere.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: vSphere
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
-display_name: vSphere
+display_on_public_website: true
 draft: false
 git_integration_title: vsphere
-guid: 930b1839-cc1f-4e7a-b706-0e8cf3218464
 integration_id: vsphere
 integration_title: vSphere
 integration_version: 6.1.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vsphere.
-metric_to_check: vsphere.vm.count
+manifest_version: 2.0.0
 name: vsphere
-public_title: vSphere インテグレーション
+oauth: {}
+public_title: vSphere
 short_description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::クラウド
+  configuration: README.md#Setup
+  description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: vSphere
 ---
 
 
@@ -130,9 +148,13 @@ collect_per_instance_filters:
 
 VMWare インテグレーションで取り込む VM の数は、`vsphere.d/conf.yaml` ファイルを使用して制限することができます。[サンプル vsphere.d/conf.yaml][4] の `resource_filters` パラメーターのセクションを参照してください。
 
+### vSphere Tanzu Kubernetes Grid (TKG) の監視
+
+Datadog vSphere インテグレーションは、[TKG][12] VM とコントロールプレーン VM からメトリクスとイベントを自動的に収集します。コンテナ、ポッド、ノードレベルのメトリクスを含む、TKG クラスターのより詳細な情報を収集するには、クラスターに [Datadog Agent][13] をインストールすることができます。TKG に特化したコンフィギュレーションファイルの例については、[ディストリビューションドキュメント][14]を参照してください。
+
 ## その他の参考資料
 
-- [Datadog で vSphere を監視する][12]
+- [Datadog で vSphere を監視する][15]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/vsphere/images/vsphere_graph.png
@@ -146,4 +168,7 @@ VMWare インテグレーションで取り込む VM の数は、`vsphere.d/conf
 [9]: https://www.vmware.com/pdf/vi_architecture_wp.pdf
 [10]: https://github.com/DataDog/integrations-core/blob/master/vsphere/assets/service_checks.json
 [11]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[12]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers
+[12]: https://tanzu.vmware.com/kubernetes-grid
+[13]: https://docs.datadoghq.com/ja/containers/kubernetes/installation/?tab=operator
+[14]: https://docs.datadoghq.com/ja/containers/kubernetes/distributions/?tab=operator#TKG
+[15]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers

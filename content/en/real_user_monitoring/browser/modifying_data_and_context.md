@@ -326,7 +326,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-## Identify user sessions
+## User session
 
 Adding user information to your RUM sessions can help you:
 * Follow the journey of a given user
@@ -345,7 +345,11 @@ The following attributes are optional but Datadog recommends providing at least 
 
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
-To identify user sessions, use the `setUser` API:
+When making changes to the user session object, all RUM events collected after the change contain the updated information.
+
+### Identify user session
+
+`datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -388,28 +392,111 @@ window.DD_RUM && window.DD_RUM.setUser({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Remove the user identification
+### Access user session
 
-Clear a previously set user with the `removeUser` API. All RUM events collected afterwards do not contain user information.
+`datadogRum.getUser()`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```
-datadogRum.removeUser()
+datadogRum.getUser()
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```
 DD_RUM.onReady(function() {
-    DD_RUM.removeUser()
+    DD_RUM.getUser()
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```
-window.DD_RUM && window.DD_RUM.removeUser()
+window.DD_RUM && window.DD_RUM.getUser()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add/Override user session property
+
+`datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```
+datadogRum.setUserProperty('name', 'John Doe')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+    DD_RUM.setUserProperty('name', 'John Doe')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Remove user session property
+
+`datadogRum.removeUserProperty('<USER_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```
+datadogRum.removeUserProperty('name')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+    DD_RUM.removeUserProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+window.DD_RUM && window.DD_RUM.removeUserProperty('name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Clear user session property
+
+`datadogRum.clearUser()`
+
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `clearUser` and deprecated `removeUser`</div>
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```
+datadogRum.clearUser()
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+    DD_RUM.clearUser()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+window.DD_RUM && window.DD_RUM.clearUser()
 ```
 
 {{% /tab %}}
@@ -474,9 +561,11 @@ For a sampled out session, all page views and associated telemetry for that sess
 
 ## Global context
 
-### Add global context
+### Add global context property
 
-Once RUM is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
+After RUM is initialized, add extra context to all RUM events collected from your application with the `setGlobalContextProperty(key: string, value: any)` API:
+
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContextProperty` and deprecated `addRumGlobalContext`</div>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -484,10 +573,10 @@ Once RUM is initialized, add extra context to all RUM events collected from your
 ```
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+datadogRum.setGlobalContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
 // Code example
-datadogRum.addRumGlobalContext('activity', {
+datadogRum.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
@@ -497,12 +586,12 @@ datadogRum.addRumGlobalContext('activity', {
 {{% tab "CDN async" %}}
 ```
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+    DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
 // Code example
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('activity', {
+    DD_RUM.setGlobalContextProperty('activity', {
         hasPaid: true,
         amount: 23.42
     });
@@ -512,10 +601,10 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // Code example
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
+window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
@@ -526,86 +615,31 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 
 Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
-### Replace global context
+### Remove global context property
 
-Once RUM is initialized, replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
+You can remove a previously defined global context property.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-
-// Code example
-datadogRum.setRumGlobalContext({
-    codeVersion: 34,
-});
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-})
-
-// Code example
-DD_RUM.onReady(function() {
-    DD_RUM.setRumGlobalContext({
-        codeVersion: 34,
-    })
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-window.DD_RUM &&
-    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-
-// Code example
-window.DD_RUM &&
-    DD_RUM.setRumGlobalContext({
-        codeVersion: 34,
-    });
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `removeGlobalContextProperty` and deprecated `removeRumGlobalContext`</div>
 
 Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
+### Replace global context
+
+Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API:
+
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContext` and deprecated `setRumGlobalContext`</div>
+
+Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
+
+### Clear global context
+
+You can clear the global context by using `clearGlobalContext`.
+
 ### Read global context
 
-Once RUM is initialized, read the global context with the `getRumGlobalContext()` API:
+Once RUM is initialized, read the global context with the `getGlobalContext()` API:
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-const context = datadogRum.getRumGlobalContext();
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-  var context = DD_RUM.getRumGlobalContext();
-});
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `getGlobalContext` and deprecated `getRumGlobalContext`</div>
 
 ## Further Reading
 
