@@ -291,7 +291,7 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
 **Default**: `Datadog`<br>
-Propagation styles to use when injecting tracing headers. Currently supported styles are:
+Propagation styles to use when injecting tracing headers. The supported styles are:
 
   - [B3][7]
   - [B3 single header][8]
