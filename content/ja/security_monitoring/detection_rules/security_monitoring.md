@@ -29,7 +29,7 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 ## 検索クエリを定義する
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{< tab "Threshold" >}}
 
 ### 検索クエリ
 
@@ -62,9 +62,9 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 {{< img src="security_platform/security_monitoring/detection_rules/gbv2.png" alt="ルールケースを設定" >}}
 
 [1]: /ja/logs/search_syntax/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "新しい条件" %}}
+{{< tab "新しい条件" >}}
 
 ### 検索クエリ
 
@@ -83,13 +83,13 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 たとえば、ユーザー認証を成功させるためのクエリを作成し、**detect new value** を `country` に設定し、グループ化を `user` に設定します。学習期間を `7 days` に設定します。構成が完了すると、今後 7 日間に受信されるログは、設定された値で評価されます。学習期間の後にログに新しい値が入力されると、シグナルが生成され、新しい値が学習されて、この値で将来のシグナルが発生するのを防ぎます。
 
 [1]: /ja/logs/search_syntax/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ルールケースを設定する
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{< tab "Threshold" >}}
 
 ### トリガー
 
@@ -122,9 +122,9 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 **注**: この `evaluation window` は、`keep alive` および `maximum signal duration` 以下でなければなりません。
 
 [1]: /ja/monitors/notifications/?tab=is_alert#integrations
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "新しい条件" %}}
+{{< tab "新しい条件" >}}
 
 {{< img src="security_platform/security_monitoring/detection_rules/new_term_rule_case.png" alt="ルールケースを定義する" >}}
 
@@ -145,7 +145,7 @@ Datadog で新しいセキュリティ監視検出ルールを作成するには
 **注**: 新しい値ごとに一意のシグナルが必要な場合は、この値を `0 minutes` に構成してください。
 
 [1]: /ja/monitors/notifications/?tab=is_alert#integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Say What's Happening

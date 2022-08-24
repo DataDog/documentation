@@ -296,7 +296,7 @@ if span, ok := tracer.SpanFromContext(request.Context()); ok {
 
 {{< tabs >}}
 
-{{% tab "set_user" %}}
+{{< tab "set_user" >}}
 
 `ddtrace` 1.1.0 からは、`Datadog::Kit::Identity.set_user` メソッドが使用できるようになりました。これは、トレースにユーザ情報を追加するための推奨 API です。
 
@@ -326,9 +326,9 @@ Datadog::Kit::Identity.set_user(
 )
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "set_tag" %}}
+{{< tab "set_tag" >}}
 
 `Datadog::Kit::Identity.set_user` がニーズに合わない場合は、代わりに `set_tag` を使用することができます。
 
@@ -358,7 +358,7 @@ trace.set_tag('usr.scope', 'read:message, write:files')
 trace.set_tag('usr.another_tag', 'another_value')
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

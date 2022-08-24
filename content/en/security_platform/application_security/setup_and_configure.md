@@ -324,7 +324,7 @@ Use one of the following APIs to add user information to a trace so that you can
 
 {{< tabs >}}
 
-{{% tab "set_user" %}}
+{{< tab "set_user" >}}
 
 Starting with `ddtrace` 1.1.0, the `Datadog::Kit::Identity.set_user` method is available. This is the recommended API for adding user information to traces:
 
@@ -354,9 +354,9 @@ Datadog::Kit::Identity.set_user(
 )
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "set_tag" %}}
+{{< tab "set_tag" >}}
 
 If `Datadog::Kit::Identity.set_user` does not meet your needs, you can use `set_tag` instead.
 
@@ -386,7 +386,7 @@ trace.set_tag('usr.scope', 'read:message, write:files')
 trace.set_tag('usr.another_tag', 'another_value')
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -40,7 +40,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 1. Set `trackViewsManually` to true when initializing the RUM Browser SDK.
 
     {{< tabs >}}
-    {{% tab "NPM" %}}
+    {{< tab "NPM" >}}
 
     ```
     import { datadogRum } from '@datadog/browser-rum';
@@ -51,8 +51,8 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
         ...
     });
     ```
-    {{% /tab %}}
-    {{% tab "CDN async" %}}
+    {{< /tab >}}
+    {{< tab "CDN async" >}}
     ```
     DD_RUM.onReady(function() {
         DD_RUM.init({
@@ -62,8 +62,8 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
         })
     })
     ```
-    {{% /tab %}}
-    {{% tab "CDN sync" %}}
+    {{< /tab >}}
+    {{< tab "CDN sync" >}}
     ```
     window.DD_RUM &&
         window.DD_RUM.init({
@@ -72,7 +72,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
             ...
         });
     ```
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version. 
@@ -86,25 +86,25 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 The following example manually tracks the page views on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`. 
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 ```
 datadogRum.startView('checkout', 'purchase', '1.2.3')
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.startView('checkout', 'purchase', '1.2.3')
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.startView('checkout', 'purchase', '1.2.3')
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
@@ -144,7 +144,7 @@ For more information, see the [Enrich and control RUM data guide][14].
 Along with attributes added with the [Global Context API](#global-context), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -160,8 +160,8 @@ datadogRum.init({
     ...
 });
 ```
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -176,8 +176,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 ```
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -191,7 +191,7 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
@@ -206,7 +206,7 @@ The RUM Browser SDK ignores:
 For example, to redact email addresses from your web application URLs:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -221,8 +221,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -235,8 +235,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -250,7 +250,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 You can update the following event properties:
@@ -273,7 +273,7 @@ The RUM Browser SDK ignores modifications made to event properties not listed ab
 With the `beforeSend` API, discard a RUM event by returning `false`:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -290,8 +290,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -306,8 +306,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -323,7 +323,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Identify user sessions
@@ -348,7 +348,7 @@ Increase your filtering capabilities by adding extra attributes on top of the re
 To identify user sessions, use the `setUser` API:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 ```
 datadogRum.setUser({
     id: '1234',
@@ -359,8 +359,8 @@ datadogRum.setUser({
 })
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.setUser({
@@ -372,8 +372,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.setUser({
@@ -385,7 +385,7 @@ window.DD_RUM && window.DD_RUM.setUser({
 })
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Remove the user identification
@@ -393,26 +393,26 @@ window.DD_RUM && window.DD_RUM.setUser({
 Clear a previously set user with the `removeUser` API. All RUM events collected afterwards do not contain user information.
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 ```
 datadogRum.removeUser()
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.removeUser()
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.removeUser()
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Sampling
@@ -422,7 +422,7 @@ By default, no sampling is applied on the number of collected sessions. To apply
 The following example collects only 90% of all sessions on a given RUM application:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -435,8 +435,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 <script>
  (function(h,o,u,n,d) {
@@ -454,8 +454,8 @@ datadogRum.init({
   })
 </script>
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -467,7 +467,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 For a sampled out session, all page views and associated telemetry for that session are not collected.
@@ -479,7 +479,7 @@ For a sampled out session, all page views and associated telemetry for that sess
 Once RUM is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -493,8 +493,8 @@ datadogRum.addRumGlobalContext('activity', {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -508,8 +508,8 @@ DD_RUM.onReady(function() {
     });
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -521,7 +521,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
@@ -531,7 +531,7 @@ Follow the [Datadog naming convention][16] for a better correlation of your data
 Once RUM is initialized, replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -544,8 +544,8 @@ datadogRum.setRumGlobalContext({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
@@ -558,8 +558,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -572,7 +572,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
@@ -582,7 +582,7 @@ Follow the [Datadog naming convention][16] for a better correlation of your data
 Once RUM is initialized, read the global context with the `getRumGlobalContext()` API:
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -590,21 +590,21 @@ import { datadogRum } from '@datadog/browser-rum';
 const context = datadogRum.getRumGlobalContext();
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
   var context = DD_RUM.getRumGlobalContext();
 });
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

@@ -34,7 +34,7 @@ Supported platforms:
 There are three ways you can install the testing framework:
 
 {{< tabs >}}
-{{% tab "Swift Package Manager" %}}
+{{< tab "Swift Package Manager" >}}
 
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
@@ -49,8 +49,8 @@ There are three ways you can install the testing framework:
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
-{{% /tab %}}
-{{% tab "Cocoapods" %}}
+{{< /tab >}}
+{{< tab "Cocoapods" >}}
 
 1. Add the `DatadogSDKTesting` dependency to the test targets of your `Podfile`:
 
@@ -67,8 +67,8 @@ end
 
 2. If you run UITests, also add the dependency to the app running the tests.
 
-{{% /tab %}}
-{{% tab "Framework linking" %}}
+{{< /tab >}}
+{{< tab "Framework linking" >}}
 
 1. Download and decompress `DatadogSDKTesting.zip` from the [release][1] page.
 
@@ -79,7 +79,7 @@ end
 3. If you run UITests, also link the app running the tests with this library.
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 <div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
@@ -308,7 +308,7 @@ Alternatively to setting environment variables, all configuration values can be 
 ## CI provider environment variables
 
 {{< tabs >}}
-{{% tab "Jenkins" %}}
+{{< tab "Jenkins" >}}
 
 | Environment variable | Value                  |
 | -------------------- | ---------------------- |
@@ -329,8 +329,8 @@ Additional Git configuration for physical device testing:
 | `GIT_URL_1`          | `$(GIT_URL_1)`  |
 | `GIT_BRANCH`         | `$(GIT_BRANCH)` |
 
-{{% /tab %}}
-{{% tab "CircleCI" %}}
+{{< /tab >}}
+{{< tab "CircleCI" >}}
 
 | Environment variable       | Value                         |
 | -------------------------- | ----------------------------- |
@@ -350,8 +350,8 @@ Additional Git configuration for physical device testing:
 | `CIRCLE_BRANCH`         | `$(CIRCLE_BRANCH)`         |
 | `CIRCLE_TAG`            | `$(CIRCLE_TAG)`            |
 
-{{% /tab %}}
-{{% tab "GitLab CI" %}}
+{{< /tab >}}
+{{< tab "GitLab CI" >}}
 
 | Environment variable | Value                |
 | -------------------- | -------------------- |
@@ -379,8 +379,8 @@ Additional Git configuration for physical device testing:
 | `CI_COMMIT_AUTHOR`  | `$(CI_COMMIT_AUTHOR)` |
 | `CI_COMMIT_TIMESTAMP`  | `$(CI_COMMIT_TIMESTAMP)` |
 
-{{% /tab %}}
-{{% tab "Travis" %}}
+{{< /tab >}}
+{{< tab "Travis" >}}
 
 | Environment variable       | Value                         |
 | -------------------------- | ----------------------------- |
@@ -403,8 +403,8 @@ Additional Git configuration for physical device testing:
 | `TRAVIS_TAG`                 | `$(TRAVIS_TAG)`                 |
 | `TRAVIS_COMMIT_MESSAGE`      | `$(TRAVIS_COMMIT_MESSAGE)`      |
 
-{{% /tab %}}
-{{% tab "GitHub Actions" %}}
+{{< /tab >}}
+{{< tab "GitHub Actions" >}}
 
 | Environment variable | Value                   |
 | -------------------- | ----------------------- |
@@ -425,8 +425,8 @@ Additional Git configuration for physical device testing:
 | `GITHUB_HEAD_REF`    | `$(GITHUB_HEAD_REF)`   |
 | `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
 
-{{% /tab %}}
-{{% tab "Buildkite" %}}
+{{< /tab >}}
+{{< tab "Buildkite" >}}
 
 | Environment variable            | Value                              |
 | ------------------------------- | ---------------------------------- |
@@ -450,8 +450,8 @@ Additional Git configuration for physical device testing:
 | `BUILDKITE_BUILD_AUTHOR`       | `$(BUILDKITE_BUILD_AUTHOR)`       |
 | `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
-{{% /tab %}}
-{{% tab "Bitbucket Pipelines" %}}
+{{< /tab >}}
+{{< tab "Bitbucket Pipelines" >}}
 
 | Environment variable       | Value                         |
 | -------------------------- | ----------------------------- |
@@ -469,8 +469,8 @@ Additional Git configuration for physical device testing:
 | `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`         |
 | `BITBUCKET_TAG`            | `$(BITBUCKET_TAG)`            |
 
-{{% /tab %}}
-{{% tab "AppVeyor" %}}
+{{< /tab >}}
+{{< tab "AppVeyor" >}}
 
 | Environment variable     | Value                       |
 | ------------------------ | --------------------------- |
@@ -492,8 +492,8 @@ Additional Git configuration for physical device testing:
 | `APPVEYOR_REPO_COMMIT_AUTHOR`            | `$(APPVEYOR_REPO_COMMIT_AUTHOR)`            |
 | `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`      | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`      |
 
-{{% /tab %}}
-{{% tab "Azure Pipelines" %}}
+{{< /tab >}}
+{{< tab "Azure Pipelines" >}}
 
 | Environment variable             | Value                               |
 | -------------------------------- | ----------------------------------- |
@@ -522,8 +522,8 @@ Additional Git configuration for physical device testing:
 | `BUILD_REQUESTEDFORID`                   | `$(BUILD_REQUESTEDFORID)`                   |
 | `BUILD_REQUESTEDFOREMAIL`                | `$(BUILD_REQUESTEDFOREMAIL)`                |
 
-{{% /tab %}}
-{{% tab "Bitrise" %}}
+{{< /tab >}}
+{{< tab "Bitrise" >}}
 
 | Environment variable   | Value                     |
 | ---------------------- | ------------------------- |
@@ -550,8 +550,8 @@ Additional Git configuration for physical device testing:
 | `GIT_CLONE_COMMIT_COMMITER_NAME`   | `$(GIT_CLONE_COMMIT_COMMITER_NAME)`   |
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
-{{% /tab %}}
-{{% tab "Xcode Cloud" %}}
+{{< /tab >}}
+{{< tab "Xcode Cloud" >}}
 
 | Environment variable    | Value                   |
 | ----------------------- | ----------------------- |
@@ -565,7 +565,7 @@ Additional Git configuration for physical device testing:
 | `CI_BRANCH`             | `$(CI_BRANCH)`          |
 | `CI_GIT_REF`            | `$(CI_GIT_REF)`         |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Manual testing API

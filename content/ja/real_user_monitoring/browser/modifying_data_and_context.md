@@ -40,7 +40,7 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
 1. RUM ブラウザ SDK を初期化する際に、`trackViewsManually` を true に設定します。
 
     {{< tabs >}}
-    {{% tab "NPM" %}}
+    {{< tab "NPM" >}}
 
     ```
     import { datadogRum } from '@datadog/browser-rum';
@@ -51,8 +51,8 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
         ...
     });
     ```
-    {{% /tab %}}
-    {{% tab "CDN 非同期" %}}
+    {{< /tab >}}
+    {{< tab "CDN 非同期" >}}
     ```
     DD_RUM.onReady(function() {
         DD_RUM.init({
@@ -62,8 +62,8 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
         })
     })
     ```
-    {{% /tab %}}
-    {{% tab "CDN 同期" %}}
+    {{< /tab >}}
+    {{< tab "CDN 同期" >}}
     ```
     window.DD_RUM &&
         window.DD_RUM.init({
@@ -72,7 +72,7 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
             ...
         });
     ```
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. 新しいページまたはルート変更 (単一ページアプリケーションの場合) ごとにビューを開始する必要があります。RUM データは、ビューの開始時に収集されます。オプションで、関連するビュー名、サービス名、およびバージョンを定義します。
@@ -86,25 +86,25 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
 次の例は、RUM アプリケーションの `checkout` ページにおけるページビューを手動で追跡するものです。ビュー名には `checkout` を使用し、`purchase` サービスとバージョン `1.2.3` を関連付けます。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 ```
 datadogRum.startView('checkout', 'purchase', '1.2.3')
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.startView('checkout', 'purchase', '1.2.3')
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.startView('checkout', 'purchase', '1.2.3')
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 React、Angular、Vue、またはその他のフロントエンドフレームワークを使用している場合、Datadog はフレームワークルーターレベルで `startView` ロジックを実装することをお勧めします。
@@ -144,7 +144,7 @@ function beforeSend(event, context)
 [グローバルコンテキスト API](#global-context) で追加された属性に加えて、イベントにコンテキスト属性を追加できます。たとえば、フェッチ応答オブジェクトから抽出されたデータで RUM リソースイベントにタグを付けます。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -160,8 +160,8 @@ datadogRum.init({
     ...
 });
 ```
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -176,8 +176,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 ```
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -191,7 +191,7 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ユーザーが複数のチームに所属している場合は、グローバルコンテキスト API を呼び出す際に、Key-Value ペアを追加してください。
@@ -206,7 +206,7 @@ RUM ブラウザ SDK は以下を無視します。
 たとえば、Web アプリケーションの URL からメールアドレスを編集するには
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -221,8 +221,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -235,8 +235,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -250,7 +250,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 次のイベントプロパティを更新できます。
@@ -273,7 +273,7 @@ RUM ブラウザ SDK は、上記にリストされていないイベントプ�
 `beforeSend` API で、`false` を返し RUM イベントを破棄します。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -290,8 +290,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -306,8 +306,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -323,7 +323,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ユーザーセッションを特定する
@@ -348,7 +348,7 @@ RUM セッションにユーザー情報を追加すると、次の役に立ち�
 ユーザーセッションを識別するには、`setUser` API を使用します。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 ```
 datadogRum.setUser({
     id: '1234',
@@ -359,8 +359,8 @@ datadogRum.setUser({
 })
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.setUser({
@@ -372,8 +372,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.setUser({
@@ -385,7 +385,7 @@ window.DD_RUM && window.DD_RUM.setUser({
 })
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ユーザー ID を削除
@@ -393,26 +393,26 @@ window.DD_RUM && window.DD_RUM.setUser({
 `removeUser` API で、以前に設定されたユーザーを消去します。この後に収集されたすべての RUM イベントにユーザー情報は含まれません。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 ```
 datadogRum.removeUser()
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.removeUser()
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.removeUser()
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## サンプリング
@@ -422,7 +422,7 @@ window.DD_RUM && window.DD_RUM.removeUser()
 下記の例では、RUM アプリケーションの全セッションの 90% のみを収集します。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -435,8 +435,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 <script>
  (function(h,o,u,n,d) {
@@ -454,8 +454,8 @@ datadogRum.init({
   })
 </script>
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -467,7 +467,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 サンプルとして抽出したセッションでは、すべてのページビューとそのセッションに紐付くテレメトリーは収集されません。
@@ -479,7 +479,7 @@ window.DD_RUM &&
 RUM を初期化したら、`addRumGlobalContext(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにコンテキストを追加します。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -493,8 +493,8 @@ datadogRum.addRumGlobalContext('activity', {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -508,8 +508,8 @@ DD_RUM.onReady(function() {
     });
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
@@ -521,7 +521,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 製品全体でデータの相関を高めるには [Datadog の命名規則][16]に従ってください。
@@ -531,7 +531,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 RUM を初期化したら、`setRumGlobalContext(context: Context)` API を使用してすべての RUM イベントのデフォルトコンテキストを置換します。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -544,8 +544,8 @@ datadogRum.setRumGlobalContext({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
     DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
@@ -558,8 +558,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 window.DD_RUM &&
@@ -572,7 +572,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 製品全体でデータの相関を高めるには [Datadog の命名規則][16]に従ってください。
@@ -582,7 +582,7 @@ window.DD_RUM &&
 RUM を初期化したら、`getRumGlobalContext()` API を使用してグローバルコンテキストを読み取ります。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```
 import { datadogRum } from '@datadog/browser-rum';
@@ -590,21 +590,21 @@ import { datadogRum } from '@datadog/browser-rum';
 const context = datadogRum.getRumGlobalContext();
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```
 DD_RUM.onReady(function() {
   var context = DD_RUM.getRumGlobalContext();
 });
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```
 var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

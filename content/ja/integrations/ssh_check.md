@@ -58,7 +58,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -85,8 +85,8 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -99,7 +99,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
 | `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

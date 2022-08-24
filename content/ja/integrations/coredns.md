@@ -82,7 +82,7 @@ CoreDNS チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 ### コンフィギュレーション
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 #### Docker
 
 コンテナで実行中の Agent に対してこのチェックを構成するには:
@@ -122,8 +122,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 [1]: http://docs.datadoghq.com/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -195,8 +195,8 @@ metadata:
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=kubernetes#examples---datadog-redis-integration
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=file
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -252,7 +252,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [1]: https://docs.datadoghq.com/ja/agent/amazon_ecs/?tab=awscli#process-collection
 [2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
 [3]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux#activate-log-integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

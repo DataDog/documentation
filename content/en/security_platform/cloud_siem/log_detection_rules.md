@@ -56,7 +56,7 @@ Impossible travel detects access from different locations whose distance is grea
 ## Define a search query
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{< tab "Threshold" >}}
 
 ### Search query
 
@@ -91,9 +91,9 @@ The Detection Rule cases join these queries together based on their group by val
 In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
 
 [1]: /logs/search_syntax/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "New Value" %}}
+{{< tab "New Value" >}}
 
 ### Search query
 
@@ -116,9 +116,9 @@ For example, create a query for successful user authentication and set **detect 
 Click the **Advanced** option to add queries that will **Only trigger a signal when** a value is met, or **Never trigger a signal** when a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under `Never Trigger A Signal`.
 
 [1]: /logs/search_syntax/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Anomaly" %}}
+{{< tab "Anomaly" >}}
 
 Construct a search query using the same logic as a log explorer search.
 
@@ -128,9 +128,9 @@ Anomaly detection inspects how the `group by` attribute has behaved in the past.
 
 **Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Impossible Travel" %}}
+{{< tab "Impossible Travel" >}}
 
 ### Search query
 
@@ -159,13 +159,13 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Set a rule case
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{< tab "Threshold" >}}
 
 ### Trigger
 
@@ -198,9 +198,9 @@ Additional cases can be added by clicking the **Add Case** button.
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 [1]: /monitors/notify/?tab=is_alert#integrations
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "New Value" %}}
+{{< tab "New Value" >}}
 
 {{< img src="security_platform/security_monitoring/detection_rules/new_term_rule_case.png" alt="Define the rule case" >}}
 
@@ -221,9 +221,9 @@ Set a maximum duration to keep updating a signal if new values are detected with
 **Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
 
 [1]: /monitors/notify/?tab=is_alert#integrations
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Anomaly" %}}
+{{< tab "Anomaly" >}}
 
 ### Severity and notification
 
@@ -240,9 +240,9 @@ Once a signal is generated, the signal will remain "open" if the data remains an
 A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
 
 [1]: /monitors/notify/?tab=is_alert#integrations
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Impossible Travel" %}}
+{{< tab "Impossible Travel" >}}
 
 The impossible travel detection method does not require setting a rule case.
 
@@ -261,7 +261,7 @@ Once a signal is generated, the signal remains “open” if a case is matched a
 A signal closes regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
 
 [1]: /monitors/notify/?tab=is_alert#integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Decreasing non-production severity

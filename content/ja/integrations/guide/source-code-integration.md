@@ -27,20 +27,20 @@ Datadog Agent 7.35.0 以降が必要です。
 テレメトリーデータとソースコードのマッピングを行うには
 
 {{< tabs >}}
-{{% tab "GitHub" %}}
+{{< tab "GitHub" >}}
 
 1. `git.commit.sha` と `git.repository_url` タグをコンテナに追加したり、テレメトリに直接追加したりします。
 2. Datadog の [GitHub Apps インテグレーション][1]をインストールして、ソースコードのスニペットをインラインで表示します。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/github-apps
-{{% /tab %}}
-{{% tab "その他の Git プロバイダー" %}}
+{{< /tab >}}
+{{< tab "その他の Git プロバイダー" >}}
 
 1. `git.commit.sha` と `git.repository_url` タグをコンテナに追加したり、テレメトリに直接追加したりします。
 2. CI パイプラインで [`datadog-ci git-metadata upload`][1] を実行し、git リポジトリのメタデータをアップロードします。
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### テレメトリーのタグ付け
@@ -48,7 +48,7 @@ Datadog Agent 7.35.0 以降が必要です。
 データを特定のコミットにリンクさせるには、テレメトリーに `git.commit.sha` と `git.repository_url` タグを付けます。
 
 {{< tabs >}}
-{{% tab "Docker Runtime" %}}
+{{< tab "Docker Runtime" >}}
 
 <div class="alert alert-warning">
 この方法は、Docker、または containerd >= 1.5.6 が必要です。その他のコンテナのセットアップについては、「その他」のセクションを参照してください。
@@ -64,8 +64,8 @@ docker build . \
 ```
 
 [1]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Kubernetes を使用している場合は、[Datadog のタグオートディスカバリー][1]を使用してデプロイされたポッドにポッドアノテーションを付けます。
 
@@ -76,8 +76,8 @@ ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.reposit
 git commit SHA とリポジトリ URL がテレメトリーに追加されます。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
-{{% /tab %}}
-{{% tab "その他" %}}
+{{< /tab >}}
+{{< tab "その他" >}}
 
 コンテナ化されていない環境やサポートされていない環境では、トレース、スパン、プロファイルに git commit SHA とリポジトリ URL を手動でタグ付けします。
 
@@ -88,21 +88,21 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_U
 ./my-application start
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### リポジトリの構成
 
 {{< tabs >}}
-{{% tab "GitHub" %}}
+{{< tab "GitHub" >}}
 
 GitHub SaaS ユーザーの場合、テレメトリーをソースコードにリンクさせるために、Datadog の [GitHub Apps インテグレーション][1]を [GitHub Apps インテグレーションタイル][2]にインストールします。
 インテグレーションタイルで権限を指定する際、Contents に対して Datadog の読み取り権限を有効にしてください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/github_apps/
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
-{{% /tab %}}
-{{% tab "その他の Git プロバイダー" %}}
+{{< /tab >}}
+{{< tab "その他の Git プロバイダー" >}}
 
 テレメトリーをソースコードにリンクさせるために、Datadog は [`datadog-ci git-metadata upload`][1] コマンドで git リポジトリから全てのコミット SHA について情報を収集します。
 
@@ -121,7 +121,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Git へのリンク

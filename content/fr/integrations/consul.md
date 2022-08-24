@@ -73,7 +73,7 @@ Le check Consul de l'Agent Datadog est inclus avec le package de l'[Agent Datado
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -127,8 +127,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -236,7 +236,7 @@ Au lieu d'utiliser DogStatsD, vous pouvez activer l'option de configuration `use
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

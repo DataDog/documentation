@@ -26,7 +26,7 @@ title: Java サーバーレスアプリケーションのインスツルメン�
 Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。
 
 {{< tabs >}}
-{{% tab "コンテナイメージ" %}}
+{{< tab "コンテナイメージ" >}}
 
 1. Datadog Lambda 拡張機能のインストール
 
@@ -75,8 +75,8 @@ Datadog は、サーバーレスアプリケーションのインスツルメン
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
 [3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 
 1. Datadog Lambda 拡張機能のインストール
 
@@ -122,7 +122,7 @@ Datadog は、サーバーレスアプリケーションのインスツルメン
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
 [3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 次のステップ

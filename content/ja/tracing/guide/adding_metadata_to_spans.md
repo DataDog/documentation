@@ -24,7 +24,7 @@ further_reading:
 ## スパンにタグを追加する
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 Datadog UI は、[タグ][1]を使用して[スパン][2]レベルのメタデータを設定します。これらのタグの完全なリストは、[Datadog][3] および [OpenTracing][4] API にあります。
 
@@ -56,8 +56,8 @@ class ServletImpl extends AbstractHttpServlet {
 [2]: /ja/tracing/visualization/#spans
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
 [4]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 `set_tag` を呼び出すことにより、[タグ][1]を[スパン][2]に直接追加します。たとえば、次のルートハンドラの場合:
 
@@ -88,8 +88,8 @@ def handle_customer(customer_id):
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 `#set_tag` を呼び出して、`Datadog::Span` オブジェクトに[タグ][1]を直接追加します。
 
@@ -115,8 +115,8 @@ current_span.set_tag('<タグキー>', '<タグ値>') unless current_span.nil?
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 `SetTag` を呼び出して、`Span` インターフェイスに[タグ][1]を直接追加します。
 
@@ -171,8 +171,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 `setTag` または `addTags` を呼び出して、スパンオブジェクトに[タグ][1]を直接追加します。
 
@@ -200,8 +200,8 @@ span.setTag('<タグキー>', '<タグ値>')
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 `Span.SetTag()` を呼び出して、`Datadog.Trace.Span` オブジェクトに[タグ][1]を直接追加します。例:
 
@@ -219,8 +219,8 @@ scope.Span.SetTag("<タグキー>", "<タグ値>");
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 `Span::setTag()` を呼び出して、`DDTrace\Span` オブジェクトに[タグ][1]を直接追加します。例:
 
@@ -239,13 +239,13 @@ scope.Span.SetTag("<タグキー>", "<タグ値>");
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## すべてのスパンにグローバルにタグを追加する
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 システムプロパティ `Ddd.trace.global.tags` でトレーサーを構成して、すべての[スパン][2]に[タグ][1]を追加します。
 
@@ -257,8 +257,8 @@ java -javaagent:<DD-JAVA-エージェントパス>.jar \
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 `tracer.set_tags` メソッドでトレーサーを構成して、すべての[スパン]スパンに[タグ][1]を追加します。
 
@@ -269,8 +269,8 @@ tracer.set_tags({ 'env': 'dev' })
 ```
 
 [1]: /ja/tracing/visualization/#span-tags
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 `tags` オプションでトレーサーを構成して、すべての[スパン][2]に[タグ][1]を追加します。
 
@@ -285,8 +285,8 @@ end
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 `tags` オプションでトレーサーを構成して、すべての[スパン][2]に[タグ][1]を追加します。
 
@@ -306,8 +306,8 @@ func main() {
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 `tags` パラメーターでトレーサーを構成して、すべての[スパン][2]に[タグ][1]を追加します。
 
@@ -322,8 +322,8 @@ const tracer = require('dd-trace').init({
 
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 トレーサーを構成して、生成されたすべての[スパン][2]に[タグ][1]を追加します。[.NET 構成][3]セクションに示すように、構成を設定するにはいくつかの方法があります。
 
@@ -336,8 +336,8 @@ DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
 [3]: /ja/tracing/setup/dotnet/#configuration
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 環境変数 `DD_TRACE_GLOBAL_TAGS` を使用して、生成されたすべての[スパン][2]に[タグ][1]を追加します。環境変数の設定方法の詳細については、[PHP 構成][3]セクションを参照してください。
 
@@ -348,8 +348,8 @@ DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
 [3]: /ja/tracing/setup/php/#configuration
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /tab >}}
+{{< tab "C++" >}}
 
 `Span::SetTag` を呼び出して、[スパン][2]に[タグ][1]を直接追加します。例:
 
@@ -365,7 +365,7 @@ span->SetTag("キーは文字列でなければなりません", 1234);
 [1]: /ja/tracing/visualization/#span-tags
 [2]: /ja/tracing/visualization/#spans
 [3]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

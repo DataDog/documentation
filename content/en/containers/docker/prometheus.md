@@ -36,7 +36,7 @@ This page explains the basic usage of these checks, enabling you to import all y
 Launch the Docker Agent next to your other containers by replacing `<DATADOG_API_KEY>` with the API key for your organization in the command below:
 
 {{< tabs >}}
-{{% tab "Standard" %}}
+{{< tab "Standard" >}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -49,8 +49,8 @@ docker run -d --cgroupns host \
     gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
-{{% tab "Amazon Linux version < 2" %}}
+{{< /tab >}}
+{{< tab "Amazon Linux version < 2" >}}
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -61,8 +61,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
     gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
@@ -70,7 +70,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note**: Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
@@ -80,7 +80,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 The Agent detects if it's running on Docker and automatically searches all container labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
 
 {{< tabs >}}
-{{% tab "Dockerfile" %}}
+{{< tab "Dockerfile" >}}
 
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
@@ -88,8 +88,8 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
-{{% /tab %}}
-{{% tab "docker-compose.yaml" %}}
+{{< /tab >}}
+{{< tab "docker-compose.yaml" >}}
 
 ```yaml
 labels:
@@ -107,14 +107,14 @@ labels:
     ]
 ```
 
-{{% /tab %}}
-{{% tab "Docker run command" %}}
+{{< /tab >}}
+{{< tab "Docker run command" >}}
 
 ```shell
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 With the following configuration placeholder values:
@@ -140,7 +140,7 @@ To get started with collecting metrics exposed by Prometheus running within a co
 
 1. Launch the Datadog Agent:
     {{< tabs >}}
-    {{% tab "Standard" %}}
+    {{< tab "Standard" >}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -151,15 +151,15 @@ docker run -d --cgroupns host \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     gcr.io/datadoghq/agent:latest
 ```
-    {{% /tab %}}
-    {{% tab "Windows" %}}
+    {{< /tab >}}
+    {{< tab "Windows" >}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     gcr.io/datadoghq/agent:latest \
     -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. Launch a Prometheus container exposing example metrics for the Agent to collect, with the Autodiscovery Labels for the OpenMetrics Check.

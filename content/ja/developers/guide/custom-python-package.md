@@ -16,7 +16,7 @@ further_reading:
     text: トレースの収集
 ---
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に含まれています。`python`、`pip` などの共通バイナリは `/opt/datadog-agent/embedded/bin/` に含まれています。
 
@@ -26,8 +26,8 @@ Python パッケージは、埋め込み `pip` でインストールできます
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
-{{% /tab %}}
-{{% tab "macOS" %}}
+{{< /tab >}}
+{{< tab "macOS" >}}
 
 Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に含まれています。`python`、`pip` などの共通バイナリは `/opt/datadog-agent/embedded/bin/` に含まれています。
 
@@ -37,9 +37,9 @@ Python パッケージは、埋め込み `pip` でインストールできます
 sudo dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 カスタム Python パッケージは、Agent の埋め込み Python を使用して、以下のコマンドにより PowerShell でインストールできます。
 
@@ -66,7 +66,7 @@ Agent バージョン >= 6.12 の場合
 {{< img src="agent/windows_python_package.png" alt="Windows Python パッケージ"  >}}
 
 [1]: /ja/agent/basic_agent_usage/windows/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

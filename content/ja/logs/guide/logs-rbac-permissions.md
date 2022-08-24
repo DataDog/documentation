@@ -14,20 +14,20 @@ further_reading:
 [ログの RBAC ロール][1]を作成したら、そのロールに[アクセス許可][2]を割り当てたり削除したりできます。
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{< tab "UI" >}}
 
 [Datadog アプリケーションでロールを更新][1]して、ロールへアクセス許可を直接割り当てたり削除したりできます。
 
 {{< img src="account_management/rbac/logs_permissions.png" alt="ログアクセス許可"  style="width:75%;" >}}
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [Datadog Permission API][1] を使用して、ロールへアクセス許可を直接割り当てたり削除したりできます。
 
 [1]: /ja/api/v2/roles/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 個々のアクセス許可に関する詳細は、以下をご覧ください。
@@ -68,7 +68,7 @@ further_reading:
 **インデックスのサブセット**:
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{< tab "UI" >}}
 
 1. ロールのグローバルなアクセス許可を削除。
 2. インデックスを編集し、"Grant editing Exclusion Filters of this index to" フィールドにロールを追加することで、[Datadog アプリのインデックスページ][1]でロールにこのアクセス許可を付与できます（下のスクリーンショット）。
@@ -77,12 +77,12 @@ further_reading:
 
 
 [1]: /ja/logs/log_configuration/indexes/
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 このコンフィギュレーションは、UI を通じてのみサポートされます。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_write_pipelines`
@@ -105,14 +105,14 @@ further_reading:
 このアクセス許可は、グローバルに割り当てることも、パイプラインのサブセットに制限することもできます。
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{< tab "UI" >}}
 
 特定のパイプラインのモーダルでロールを割り当てます。
 
 {{< img src="account_management/rbac/logs_write_processors.png" alt="ログ書き込みプロセッサ"  style="width:75%;" >}}
 
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 1. 特定のパイプラインに割り当てるロールの[ロール ID を取得][1]します。
 2. 地域の `logs_write_processors` アクセス許可 API の[アクセス許可 ID を取得][2]します。
@@ -135,7 +135,7 @@ curl -X POST \
 [1]: /ja/api/v2/roles/#list-roles
 [2]: /ja/api/v2/roles/#list-permissions
 [3]: /ja/api/v1/logs-pipelines/#get-all-pipelines
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_write_archives`
@@ -164,21 +164,21 @@ curl -X POST \
 {{< img src="account_management/rbac/logs_archives_list.png" alt="カスタムロールを作成"  style="width:90%;">}}
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{< tab "UI" >}}
 
 アーカイブの作成に進むことも、アーカイブの編集中にいつでも更新することもできます。
 
 {{< img src="account_management/rbac/logs_archive_restriction.png" alt="カスタムロールを作成"  style="width:90%;">}}
 
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 ログアーカイブ API を使用して、特定のアーカイブからロールを[割り当て][1]または[取り消し][2]します。
 
 
 [1]: /ja/api/v2/logs-archives/#grant-role-to-an-archive
 [2]: /ja/api/v2/logs-archives/#revoke-role-from-an-archive
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_write_historical_views`
@@ -238,7 +238,7 @@ Datadog API でログコンフィギュレーションを表示、作成また�
 
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{< tab "UI" >}}
 
 制限クエリに一致するログ以外は見られないようユーザーを制限するには、Datadog アプリの [Data Access ページ][1]を使用して以下を実行します。
 
@@ -288,15 +288,15 @@ Datadog API でログコンフィギュレーションを表示、作成また�
 {{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="ロールビュー"  style="width:70%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/data-access
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [Roles API][1] を使用して、ロールからこのアクセス許可を取り消すか付与します。
 [制限クエリ][2]を使用して、ログデータのサブセットにアクセス許可をスコープします。
 
 [1]: /ja/api/#roles
 [2]: /ja/api/?lang=bash#roles-restriction-queries-for-logs
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## レガシーアクセス許可
@@ -316,7 +316,7 @@ Datadog API でログコンフィギュレーションを表示、作成また�
 このアクセス許可の範囲をインデックスのサブセットに設定するには、まずロールの `logs_read_index_data` および `logs_modify_indexes` アクセス許可を削除します。その後、
 
 {{< tabs >}}
-{{% tab "UI" %}}
+{{< tab "UI" >}}
 
 このロールに[コンフィギュレーションページ][1]のインデックスへのアクセスを許可します。
 
@@ -324,8 +324,8 @@ Datadog API でログコンフィギュレーションを表示、作成また�
 
 
 [1]: https://app.datadoghq.com/logs/indexes
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 * 特定のパイプラインに割り当てるロールの[ロール ID を取得][1]します。
 * 地域の `logs_write_processors` アクセス許可 API の[アクセス許可 ID を取得][2]します。
@@ -349,7 +349,7 @@ curl -X POST \
 [1]: /ja/api/v2/roles/#list-roles
 [2]: /ja/api/v2/roles/#list-permissions
 [3]: /ja/api/v1/logs-indexes/#get-all-indexes
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_live_tail`

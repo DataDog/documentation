@@ -41,7 +41,7 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
  The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X POST \
@@ -72,8 +72,8 @@ curl -X POST \
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -138,7 +138,7 @@ curl -X POST \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Get all AuthN mappings
@@ -161,7 +161,7 @@ Returns a list of AuthN Mappings
   Filter by tags as strings. For example, `Billing Users`.
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
@@ -173,8 +173,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -243,7 +243,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Get a specific AuthN mapping
@@ -260,7 +260,7 @@ Returns a specific AuthN Mapping by UUID.
   Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to view.
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}" \
@@ -272,8 +272,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -339,7 +339,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Update mapping
@@ -363,7 +363,7 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
  The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X PATCH \
@@ -395,8 +395,8 @@ curl -X PATCH \
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -459,7 +459,7 @@ curl -X PATCH \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Delete mapping
@@ -476,7 +476,7 @@ Deletes a specific AuthN Mapping.
   Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to delete.
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X DELETE "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
@@ -489,14 +489,14 @@ curl -X DELETE "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```sh
 HTTP/2 204
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Get AuthN mapping enablement
@@ -508,7 +508,7 @@ Check whether AuthN Mappings are enabled or disabled.
 | `GET`    | `/v1/org_preferences`      | None             |
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X GET \
@@ -522,8 +522,8 @@ curl -X GET \
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -538,7 +538,7 @@ curl -X GET \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Enable or disable all mappings
@@ -561,7 +561,7 @@ Enables/disables the enforcement of all AuthN Mappings.
   Data to update preference with, must be true or false: true to enable all mappings, false to disable
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X POST \
@@ -585,8 +585,8 @@ curl -X POST \
 - Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -601,7 +601,7 @@ curl -X POST \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

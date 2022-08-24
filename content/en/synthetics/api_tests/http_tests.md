@@ -43,7 +43,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
    {{< tabs >}}
 
-   {{% tab "Request Options" %}}
+   {{< tab "Request Options" >}}
 
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
    * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
@@ -51,9 +51,9 @@ After choosing to create an `HTTP` test, define your test's request.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Authentication" %}}
+   {{< tab "Authentication" >}}
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
@@ -70,35 +70,35 @@ After choosing to create an `HTTP` test, define your test's request.
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Query Parameters" %}}
+   {{< tab "Query Parameters" >}}
 
    * **Encode parameters**: Add the name and value of query parameters that require encoding. 
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Request Body" %}}
+   {{< tab "Request Body" >}}
 
    * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Proxy" %}}
+   {{< tab "Proxy" >}}
 
    * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
    * **Proxy header**: Add headers to include in the HTTP request to the proxy.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Privacy" %}}
+   {{< tab "Privacy" >}}
 
    * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
 
 
 [1]: /data_security/synthetics
-   {{% /tab %}}
+   {{< /tab >}}
 
    {{< /tabs >}}
 

@@ -43,7 +43,7 @@ Datadog の Azure App Service 向け拡張機能は、追加モニタリング�
 ## セットアップ
 
 {{< tabs >}}
-{{% tab ".NET" %}}
+{{< tab ".NET" >}}
 
 ### 要件
 
@@ -164,8 +164,8 @@ DogStatsd.Increment("sample.startup");
 [9]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 [10]: /ja/developers/dogstatsd/?tab=net#code
 [11]: /ja/metrics/
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ### 要件
 
 1. [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
@@ -244,13 +244,13 @@ client.Increment("sample.startup");
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
 [9]: /ja/developers/dogstatsd/?tab=java#code
 [10]: /ja/metrics/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## プログラムマネジメント
 
 {{< tabs >}}
-{{% tab ".NET" %}}
+{{< tab ".NET" >}}
 
 Datadog では、Powershell を使用して Azure App Service Extension をアップデートまたはインストールするためのスクリプトを提供しています。スクリプトによる拡張機能管理では、[リソースグループによる拡張機能の一括更新](#powershell-resource-group)や[サイト拡張機能の特定バージョンのインストールを指定する](#powershell-specific-version)ことができます。また、スクリプトを使って CI/CD パイプラインにプログラム的に拡張機能を追加したり、すでにインストールされている拡張機能を発見して更新したりすることもできます。
 
@@ -353,13 +353,13 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 [9]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
 [10]: https://docs.microsoft.com/en-us/azure/app-service/deploy-configure-credentials
 [11]: https://portal.azure.com/
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
 <div class="alert alert-warning">Java Web Apps のサポートは、拡張機能 v2.4+ のベータ版です。プログラムによる管理は、Java Web Apps では利用できません。<br/><br/>
    他の App Service リソースタイプやランタイムのサポートに興味がありますか？ベータ版が利用可能になったら、<a href="https://forms.gle/n4nQcxEyLqDBMCDA7">サインアップ</a>してお知らせを受け取りましょう。</div>
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## トラブルシューティング

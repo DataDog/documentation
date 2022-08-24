@@ -25,7 +25,7 @@ For new users, download and install the latest version of the [Datadog Agent][2]
 Choose your version of the Agent:
 
 {{< tabs >}}
-{{% tab "Agent v7.21+ / v6.21+" %}}
+{{< tab "Agent v7.21+ / v6.21+" >}}
 
 For Agent v7.21+ / v6.21+:
 
@@ -42,8 +42,8 @@ For Agent v7.21+ / v6.21+:
 
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 The recommended way to use a community integration with the Docker Agent is to build the Agent with the integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` from integrations-extras.
 
@@ -57,9 +57,9 @@ The `agent integration install` command run inside Docker issues the following h
 Use this new Agent image in combination with [Autodiscovery][1] to enable the `<INTEGRATION_NAME>`.
 
 [1]: /agent/autodiscovery/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Agent earlier versions" %}}
+{{< tab "Agent earlier versions" >}}
 
 For Agent < v7.21 / v6.21:
 
@@ -76,7 +76,7 @@ For Agent < v7.21 / v6.21:
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /getting_started/integrations/
 [4]: /agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 <br>

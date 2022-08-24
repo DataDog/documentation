@@ -20,7 +20,7 @@ Les logs de service AWS sont généralement stockés dans des compartiments S3 o
 Vous pouvez configurer un flux de diffusion Kinesis Firehose dans la console AWS Firehose ou configurer automatiquement la destination à l'aide d'un modèle CloudFormation :
 ​
 {{< tabs >}}
-{{% tab "Flux de diffusion Kinesis Firehose" %}}
+{{< tab "Flux de diffusion Kinesis Firehose" >}}
 
 ​Nous vous conseillons d'utiliser un flux Kinesis en tant qu'entrée lorsque vous utilisez la destination Datadog Kinesis. Cela vous permet de transmettre vos logs à plusieurs destinations si Datadog n'est pas le seul service à utiliser ces logs. ​
 
@@ -46,16 +46,16 @@ Pour veiller à ce que les logs qui ont échoué par le biais du flux de diffusi
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Modèle CloudFormation" %}}
+{{< tab "Modèle CloudFormation" >}}
 ​
 Vous pouvez également personnaliser ce modèle CloudFormation et l'installer à partir de la console AWS​ :
 
 Consultez le [modèle Kinesis CloudFormation dans son intégralité ici][1].
 
 [1]: /resources/json/kinesis-logs-cloudformation-template.json
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Envoyer des logs AWS à votre flux Kinesis

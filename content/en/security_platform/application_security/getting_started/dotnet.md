@@ -18,7 +18,7 @@ further_reading:
 
 You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
 
-{{% appsec-getstarted %}}
+{{< appsec-getstarted >}}
 
 ## Get started
 
@@ -35,7 +35,7 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
    **Or** one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
-{{% tab "Windows self-hosted" %}}
+{{< tab "Windows self-hosted" >}}
 
 In a Windows console: 
 
@@ -49,8 +49,8 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-{{% /tab %}}
-{{% tab "IIS" %}}
+{{< /tab >}}
+{{< tab "IIS" >}}
 
 Run the following PowerShell command as administrator to configure the necessary environment variables in the registry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment` and restart IIS.
 ```
@@ -108,15 +108,15 @@ This can also be done at the IIS application pools level in the `applicationHost
             (...)
 ```
 
-{{% /tab %}}
-{{% tab "Linux" %}}
+{{< /tab >}}
+{{< tab "Linux" >}}
 
 Add the following to your application configuration: 
 ```shell
 DD_APPSEC_ENABLED=true
 ```
-{{% /tab %}}
-{{% tab "Docker CLI" %}}
+{{< /tab >}}
+{{< tab "Docker CLI" >}}
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
@@ -124,8 +124,8 @@ Update your configuration container for APM by adding the following argument in 
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
+{{< /tab >}}
+{{< tab "Dockerfile" >}}
 
 Add the following environment variable value to your container Dockerfile:
 
@@ -133,8 +133,8 @@ Add the following environment variable value to your container Dockerfile:
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Update your deployment configuration file for APM and add the ASM environment variable:
 
@@ -150,8 +150,8 @@ spec:
               value: "true"
 ```
 
-{{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{< /tab >}}
+{{< tab "AWS ECS" >}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -165,21 +165,21 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
-{{% /tab %}}
-{{% tab "AWS Fargate" %}}
+{{< /tab >}}
+{{< tab "AWS Fargate" >}}
 
 Add the following line to your container Dockerfile:
 ```shell
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
 3. **Restart the application** using a full stop and start.
 
-{{% appsec-getstarted-2-canary %}}
+{{< appsec-getstarted-2-canary >}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 

@@ -125,7 +125,7 @@ If you need to pass a more complex configuration for your Datadog-JMX integratio
 Choose whether your Agent is running as a container in your cluster, or on your host directly:
 
 {{< tabs >}}
-{{% tab "Container Agent" %}}
+{{< tab "Container Agent" >}}
 
 If your Agent is running in your cluster and you want to autodiscover your container to collect JMX metrics:
 
@@ -228,8 +228,8 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 [27]: /agent/faq/template_variables/
 [28]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 [29]: /integrations/kafka/
-{{% /tab %}}
-{{% tab "Host Agent" %}}
+{{< /tab >}}
+{{< tab "Host Agent" >}}
 
 If your Agent is running on a host and you want to autodiscover your container to collect JMX metrics:
 
@@ -283,7 +283,7 @@ If your Agent is running on a host and you want to autodiscover your container t
 [3]: /agent/faq/template_variables/
 [4]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 [5]: /agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Container preparation

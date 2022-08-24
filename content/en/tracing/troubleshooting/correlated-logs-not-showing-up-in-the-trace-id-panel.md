@@ -43,7 +43,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 2. Remap this attribute to the reserved `trace_id` attribute.
 
    {{< tabs >}}
-   {{% tab "JSON logs" %}}
+   {{< tab "JSON logs" >}}
 
    For JSON logs, Step 1 and 2 are automatic. The tracer injects the [trace][1] and [span][2] IDs into the logs, which are automatically remapped by the    [reserved attribute remappers][3].
 
@@ -55,8 +55,8 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
    [2]: /tracing/glossary/#spans
    [3]: /logs/log_configuration/processors/#remapper
    [4]: https://app.datadoghq.com/logs/pipelines/remapping
-   {{% /tab %}}
-   {{% tab "With Log integration" %}}
+   {{< /tab >}}
+   {{< tab "With Log integration" >}}
 
    For raw logs (where you are collecting the logs using a [log integration][1] for a specific language), set the `source` attribute to the language, such as `java`, `python`, `ruby`, and more. The integration automatically correlates traces and logs.
 
@@ -68,8 +68,8 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    [1]: /logs/log_collection/?tab=application#setup
    [2]: /logs/faq/how-to-investigate-a-log-parsing-issue/
-   {{% /tab %}}
-   {{% tab "Custom" %}}
+   {{< /tab >}}
+   {{< tab "Custom" >}}
 
    For raw logs where you aren't using an integration to collect the logs:
 
@@ -82,7 +82,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
    [1]: /tracing/glossary/#trace
    [2]: /tracing/glossary/#spans
    [3]: /logs/log_configuration/processors/#trace-remapper
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
 Once the IDs are properly injected and remapped to your logs, you can see the logs correlated to the trace in the trace panel.

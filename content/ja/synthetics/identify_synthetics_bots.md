@@ -28,7 +28,7 @@ further_reading:
 Datadog ロボットのヘッダーから、API およびブラウザテストに紐付くロボットを検出します。
 
 {{< tabs >}}
-{{% tab "API Tests" %}}
+{{< tab "API Tests" >}}
 
 Datadog API テストロボットには以下のヘッダーが付加されています。
 
@@ -36,14 +36,14 @@ Datadog API テストロボットには以下のヘッダーが付加されて�
 
 Datadog API テスト向けに発動されたすべてのリクエストには、`x-datadog-origin: synthetics` ヘッダーが付加されます。
 
-{{% /tab %}}
-{{% tab "Browser tests" %}}
+{{< /tab >}}
+{{< tab "Browser tests" >}}
 
 Datadog ブラウザテストロボットには以下のヘッダーが付加されています。
 
 `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ##### APM ヘッダー

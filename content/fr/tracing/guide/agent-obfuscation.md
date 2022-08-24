@@ -15,7 +15,7 @@ Ces options ne fonctionnent actuellement qu'avec les services suivants :
 * `remove_stack_traces`
 
 {{< tabs >}}
-{{% tab "MongoDB" %}}
+{{< tab "MongoDB" >}}
 
 S'applique aux [spans][1] de type `mongodb`, plus précisément aux spans de tag `mongodb.query` : 
 
@@ -35,8 +35,8 @@ apm_config:
 
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
+{{< /tab >}}
+{{< tab "Elasticsearch" >}}
 
 S'applique aux [spans][1] de type `elasticsearch`, plus précisément aux tags de span `elasticsearch.body` :
 
@@ -56,8 +56,8 @@ apm_config:
 
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Redis" %}}
+{{< /tab >}}
+{{< tab "Redis" >}}
 
 S'applique aux [spans][1] de type `redis`, plus précisément aux tags de span `redis.raw_command` :
 
@@ -73,8 +73,8 @@ apm_config:
 ```
 
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "MemCached" %}}
+{{< /tab >}}
+{{< tab "MemCached" >}}
 
 S'applique aux [spans][1] de type `memcached`, plus précisément aux tags de span `memcached.command` :
 
@@ -90,8 +90,8 @@ apm_config:
 ```
 
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "HTTP" %}}
+{{< /tab >}}
+{{< tab "HTTP" >}}
 
 Règles d'obfuscation HTTP pour les métadonnées `http.url` dans les [spans][1] de type `http` :
 
@@ -110,8 +110,8 @@ apm_config:
 * `remove_query_string` : définir ce paramètre sur true pour obfusquer les chaînes de requête dans les URL.
 * `remove_paths_with_digits` : si ce paramètre est défini sur true, les segments de chemin des URL contenant des chiffres sont remplacés par le caractère « ? ».
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Traces de pile" %}}
+{{< /tab >}}
+{{< tab "Traces de pile" >}}
 
 Définissez le paramètre `remove_stack_traces` sur true afin de supprimer les traces de pile et de les remplacer par le caractère « ? ».
 
@@ -125,7 +125,7 @@ apm_config:
     remove_stack_traces: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: /fr/tracing/visualization/#trace

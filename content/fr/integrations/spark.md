@@ -59,7 +59,7 @@ Le check Spark est inclus avec le package de l'[Agent Datadog][3]. Vous n'avez d
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -91,8 +91,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -105,7 +105,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INSTANCE>`  | `{"spark_url": "%%host%%:8080", "cluster_name":"<NOM_CLUSTER>"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Collecte de logs

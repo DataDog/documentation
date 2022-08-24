@@ -60,7 +60,7 @@ Datadog では、コンテナ化環境のベストプラクティスとして、
 Agent v6.0 以降、Agent は特定のコンテナのラベルを収集し、それらをタグとして使用して、このコンテナが発行するすべてのデータにアタッチできます。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{< tab "Containerized Agent" >}}
 
 特定のコンテナラベル `<LABEL_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
@@ -78,8 +78,8 @@ DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 **注**: `DD_CONTAINER_LABELS_AS_TAGS` は古い `DD_DOCKER_LABELS_AS_TAGS` と同等で、`DD_CONTAINER_ENV_AS_TAGS` は `DD_DOCKER_ENV_AS_TAGS` と同等です。
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 特定のコンテナラベル `<LABEL_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
 
@@ -97,7 +97,7 @@ container_labels_as_tags:
 
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 環境変数をタグとして抽出
@@ -123,7 +123,7 @@ com.datadoghq.ad.tags: '["<TAG_KEY_1>:<TAG_VALUE_1>", "<TAG_KEY_2>:<TAG_VALUE_2>
 Agent v6.0 以降、Agent は特定のコンテナの環境変数を収集し、それらをタグとして使用して、このコンテナが発行するすべてのデータにアタッチできます。
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{< tab "Containerized Agent" >}}
 
 特定のコンテナ環境変数 `<ENVVAR_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
@@ -137,8 +137,8 @@ DD_CONTAINER_ENV_AS_TAGS='{"<ENVVAR_NAME>": "<TAG_KEY>"}'
 DD_CONTAINER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 ```
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 特定のコンテナ環境変数 `<ENVVAR_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、[Agent `datadog.yaml` 構成ファイル][1]に次の構成ブロックを追加します。
 
@@ -155,7 +155,7 @@ container_env_as_tags:
 ```
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

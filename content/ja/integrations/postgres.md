@@ -119,7 +119,7 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 **注**: その他の表へのクエリを必要とするカスタムメトリクスを生成する際は、`datadog` ユーザーにそれらの表への `SELECT` 権限を付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳しくは、[よくあるご質問セクション](#faq)をご確認ください。
 
@@ -242,8 +242,8 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
 [4]: https://docs.datadoghq.com/ja/tracing/setup/
 [5]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [6]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 #### Docker
 
@@ -291,8 +291,8 @@ Agent コンテナで必要な環境変数
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [4]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -366,8 +366,8 @@ Agent コンテナで必要な環境変数
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
 [6]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 [7]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/service_checks.json
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -431,7 +431,7 @@ Agent コンテナで必要な環境変数
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [4]: https://docs.datadoghq.com/ja/agent/docker/apm/
 [5]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

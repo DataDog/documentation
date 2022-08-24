@@ -36,7 +36,7 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 
 {{< tabs >}}
 
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+{{< tab "On-Premises CI provider (Datadog Agent)" >}}
 
 If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
 
@@ -47,9 +47,9 @@ If you are using a Kubernetes executor, Datadog recommends using the [Datadog Ad
 
 [1]: /agent
 [2]: /agent/cluster_agent/admission_controller/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{< tab "Cloud CI provider (Agentless)" >}}
 
 <div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
 
@@ -73,7 +73,7 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -91,7 +91,7 @@ For more information, see the [JavaScript tracer installation docs][5].
 ## Instrument your tests
 
 {{< tabs >}}
-{{% tab "Jest/Mocha" %}}
+{{< tab "Jest/Mocha" >}}
 Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 {{< code-block lang="bash" >}}
@@ -129,9 +129,9 @@ You can add custom tags to your tests by using the current active span:
 To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cucumber" %}}
+{{< tab "Cucumber" >}}
 Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 {{< code-block lang="bash" >}}
@@ -169,9 +169,9 @@ You can add custom tags to your test by grabbing the current active span:
 To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cypress" %}}
+{{< tab "Cypress" >}}
 
 ### Cypress<10
 
@@ -280,7 +280,7 @@ If the browser application being tested is instrumented using [RUM][5], your Cyp
 [4]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
 [5]: /real_user_monitoring/browser/#setup
 [6]: /continuous_integration/guides/rum_integration/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -19,7 +19,7 @@ The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes res
 Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][2] and [Cluster Agent version >= 1.11.0][3] prior to the configurations below.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 If you are using the official [Datadog Helm Chart][1]:
 
@@ -39,8 +39,8 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 [Cluster Agent][1] version >= 1.11.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup][2] for configuration.
 
@@ -117,7 +117,7 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
 [1]: /agent/cluster_agent/
 [2]: /agent/cluster_agent/setup/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Resource collection compatibility matrix
@@ -150,7 +150,7 @@ The following table presents the list of collected resources and the minimal Age
 The Kubernetes resources view for Live Containers used to require [Agent version >= 7.21.1][2] and [Cluster Agent version >= 1.9.0][3] before minimal versions were updated. For those older versions, the DaemonSet configuration was slightly different and full instructions are retained here for reference.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 If you are using the official [Datadog Helm Chart][1]:
 
@@ -164,8 +164,8 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 [1]: https://github.com/DataDog/helm-charts
 [2]: /infrastructure/livecontainers/#configuration
 [3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup][1] for configuration.
 
@@ -244,7 +244,7 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
   ```
 
 [1]: /agent/cluster_agent/setup/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Add custom tags to resources
@@ -257,7 +257,7 @@ Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` envi
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 If you are using the official Helm chart, add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` respectively in [values.yaml][1].
 
@@ -278,8 +278,8 @@ If you are using the official Helm chart, add the environment variable on both t
 Then deploy a new release.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 Set the environment variable on both the Process Agent and Cluster Agent containers:
 
@@ -288,7 +288,7 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
   value: "tag1:value1 tag2:value2"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Include or exclude containers

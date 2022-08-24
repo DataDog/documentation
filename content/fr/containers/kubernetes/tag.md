@@ -109,7 +109,7 @@ com.datadoghq.ad.tags: '["<CLÉ_TAG>:VALEUR_TAG", "<CLÉ_TAG_1>:<VALEUR_TAG_1>"]
 À partir de la version 6.0+ de l'Agent, l'Agent peut recueillir les étiquettes d'un nœud donné sous la forme de tags et les appliquer à l'ensemble des métriques envoyées par l'ensemble des pods sur ce nœud :
 
 {{< tabs >}}
-{{% tab "Agent conteneurisé" %}}
+{{< tab "Agent conteneurisé" >}}
 
 Pour extraire une étiquette de nœud `<ÉTIQUETTE_NŒUD>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
@@ -132,8 +132,8 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PRÉFIXE>_%%label%%"}'
 **Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][1] pour en savoir plus.
 
 [1]: /fr/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 Pour extraire une étiquette de nœud `<ÉTIQUETTE_NŒUD>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
@@ -150,7 +150,7 @@ kubernetes_node_labels_as_tags:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Étiquettes de pod comme tags
@@ -158,7 +158,7 @@ kubernetes_node_labels_as_tags:
 À partir de la version 6.0+ de l'Agent, l'Agent peut recueillir les étiquettes d'un pod donné sous la forme de tags et les appliquer à l'ensemble des métriques envoyées par ce pod :
 
 {{< tabs >}}
-{{% tab "Agent conteneurisé" %}}
+{{< tab "Agent conteneurisé" >}}
 
 Pour extraire une étiquette de nœud `<ÉTIQUETTE_POD>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
@@ -181,8 +181,8 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PRÉFIXE>_%%label%%"}'
 **Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][1] pour en savoir plus.
 
 [1]: /fr/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 Pour extraire une étiquette de pod `<ÉTIQUETTE_POD>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
@@ -208,7 +208,7 @@ kubernetes_pod_labels_as_tags:
 **Remarque** : les métriques custom peuvent avoir une incidence sur vos coûts. Consultez la section [Facturation des métriques custom][3] pour en savoir plus.
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Annotations de pod comme tags
@@ -216,7 +216,7 @@ kubernetes_pod_labels_as_tags:
 À partir de la version 6.0+ de l'Agent, l'Agent peut recueillir les annotations d'un pod donné sous la forme de tags et les appliquer à l'ensemble des métriques envoyées par ce pod :
 
 {{< tabs >}}
-{{% tab "Agent conteneurisé" %}}
+{{< tab "Agent conteneurisé" >}}
 
 Pour extraire une étiquette de pod `<ANNOTATION_POD>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
@@ -239,8 +239,8 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PRÉFIXE>_%%annotation%%"}'
 **Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][1] pour en savoir plus.
 
 [1]: /fr/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 Pour extraire une annotation de pod `<ANNOTATION_POD>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
@@ -257,7 +257,7 @@ kubernetes_pod_annotations_as_tags:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Étiquettes d'espace de nommage en tant que tags
@@ -265,7 +265,7 @@ kubernetes_pod_annotations_as_tags:
 À partir de la version 7.27+ de l'Agent, l'Agent peut recueillir les étiquettes d'un espace de nommage donné sous la forme de tags et les appliquer à l'ensemble des métriques envoyées par tous les pods sur cet espace de nommage :
 
 {{< tabs >}}
-{{% tab "Agent conteneurisé" %}}
+{{< tab "Agent conteneurisé" >}}
 
 Pour extraire une étiquette d'espace de nommage `<ÉTIQUETTE_ESPACE_DE_NOMMAGE>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
@@ -288,8 +288,8 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PRÉFIXE>_%%label%%"}'
 **Remarque** : les métriques custom peuvent avoir une incidence sur votre facturation. Consultez la [page de facturation des métriques custom][1] pour en savoir plus.
 
 [1]: /fr/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 Pour extraire une étiquette d'espace de nommage `<ÉTIQUETTE_ESPACE_DE_NOMMAGE>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
@@ -306,7 +306,7 @@ kubernetes_namespace_labels_as_tags:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Variables d'environnement de conteneur en tant que tags
@@ -314,7 +314,7 @@ kubernetes_namespace_labels_as_tags:
 À partir de la version 7.32+ de l'Agent, l'Agent peut recueillir des variables d'environnement de conteneur sous la forme de tags et les appliquer à l'ensemble des métriques correspondant au conteneur. Les conteneurs `docker` et `containerd` sont pris en charge :
 
 {{< tabs >}}
-{{% tab "Agent conteneurisé" %}}
+{{< tab "Agent conteneurisé" >}}
 
 Pour extraire une variable d'environnement `<VARIABLE_ENVIRONNEMENT>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
@@ -331,8 +331,8 @@ DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 **Remarque** : les métriques custom peuvent avoir une incidence sur vos coûts. Consultez la section [Facturation des métriques custom][1] pour en savoir plus.
 
 [1]: /fr/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 Pour extraire une variable d'environnement `<VARIABLE_ENVIRONNEMENT>` donnée et la transformer en clé de tag `<CLÉ_TAG>` dans Datadog, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
@@ -349,7 +349,7 @@ container_env_as_tags:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Étiquettes de conteneur en tant que tags
@@ -357,7 +357,7 @@ container_env_as_tags:
 À partir de la version 7.33+ de l'Agent, l'Agent peut recueillir des étiquettes de conteneur sous la forme de tags et les appliquer à l'ensemble des métriques associées au conteneur. L'Agent peut générer des tags à partir des étiquettes des conteneurs `docker` et `containerd`. Pour les conteneurs `containerd`, vous devez utiliser au minimum la version 1.5.6, car les versions antérieures ne propagent pas correctement les étiquettes.
 
 {{< tabs >}}
-{{% tab "Agent conteneurisé" %}}
+{{< tab "Agent conteneurisé" >}}
 
 Pour extraire une étiquette de conteneur `<ÉTIQUETTE_CONTENEUR>` donnée et la transformer en clé de tag `<CLÉ_TAG>`, ajoutez la variable d'environnement suivante à l'Agent Datadog :
 
@@ -374,8 +374,8 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 **Remarque** : les métriques custom peuvent avoir une incidence sur vos coûts. Consultez la section [Facturation des métriques custom][1] pour en savoir plus.
 
 [1]: /fr/account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 Pour extraire une étiquette de conteneur `<ÉTIQUETTE_CONTENEUR>` donnée et la transformer en clé de tag `<CLÉ_TAG>`, ajoutez le bloc de configuration suivant dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
@@ -392,7 +392,7 @@ container_labels_as_tags:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

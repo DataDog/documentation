@@ -28,7 +28,7 @@ Nous vous conseillons de ne pas utiliser plus de 20 processeurs par pipeline.
 Créez des règles Grok personnalisées pour parser l'intégralité du message ou [un attribut spécifique de votre événement brut][1]. Pour en savoir plus, consultez la [section sur le parsing][3]. Nous vous conseillons de ne pas utiliser plus de 10 règles de parsing par processeur Grok.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur Grok depuis la [page de configuration des logs Datadog][1] :
 
@@ -39,8 +39,8 @@ Jusqu'à cinq échantillons peuvent être enregistrés avec le processeur, chacu
 Cliquez sur **Parse my logs** pour appliquer un ensemble de trois règles de parsing aux logs qui transitent par le pipeline sous-jacent. De là, vous pouvez ajuster le nommage des attributs et ajouter d'autres règles pour les autres types de logs si vous le souhaitez. Cette fonctionnalité nécessite que les logs correspondants soient indexés et transitent réellement par le pipeline : vous pouvez désactiver ou ajuster vos filtres d'exclusion temporairement pour répondre à ces exigences.
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le parser Grok :
 
@@ -67,7 +67,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Remappeur de dates de log
@@ -95,15 +95,15 @@ Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-
 * Si plusieurs processeurs de remappage de dates de log peuvent être appliqués à un log donné, seul le premier (selon la séquence des pipelines) est pris en compte.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de remappage de dates de log depuis la [page de configuration des logs Datadog][1] :
 
 {{< img src="logs/processing/processors/log_date_remapper.png" alt="Remappeur de dates de log" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur de dates de log :
 
@@ -124,7 +124,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Remappeur de statuts de log
@@ -154,15 +154,15 @@ Chaque valeur de statut entrant est mappée comme suit :
 **Remarque** : si plusieurs processeurs de remappage du statut de log peuvent être appliqués à un log donné, seul le premier (selon la séquence des pipelines) est pris en compte.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de remappage de statut de log depuis la [page de configuration des logs Datadog][1] :
 
 {{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Carré du processeur de remappage de la gravité" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur de statuts de log :
 
@@ -183,7 +183,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Remappeur de services
@@ -193,15 +193,15 @@ Utilisez ce processeur si vous souhaitez définir au moins un attribut en tant q
 **Remarque** : si plusieurs processeurs de remappage de services peuvent être appliqués à un log donné, seul le premier (selon la séquence des pipelines) est pris en compte.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de remappage de services de log depuis la [page de configuration des logs Datadog][1] :
 
 {{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="Carré du processeur de remappage de services" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur de statut de log :
 
@@ -222,7 +222,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Remappeur de messages de log
@@ -232,15 +232,15 @@ Le message est un attribut clé dans Datadog. Il est affiché dans la colonne de
 **Remarque** : si plusieurs processeurs de remappage de messages de log peuvent être appliqués à un log donné, seul le premier (selon la séquence des pipelines) est pris en compte.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de remappage de messages de log depuis la [page de configuration des logs Datadog][1] :
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Processeur de remappage de messages" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint de l'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur de messages de log :
 
@@ -261,7 +261,7 @@ Utilisez l'[endpoint de l'API de pipeline de logs Datadog][1] avec la charge uti
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources. Valeur par défaut : `msg`            |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Remappeur
@@ -279,15 +279,15 @@ Les contraintes de nom du tag ou de l'attribut sont expliquées dans les [recomm
 Si la cible du remappeur est un attribut, le remappeur peut également tenter de convertir l'attribut en un attribut d'un autre type (`String`, `Integer` ou `Double`). Si la conversion est impossible, le type d'attribut reste le même (remarque : le séparateur décimal pour `Double` doit être un `.`) 
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de remappage depuis la [page de configuration des logs Datadog][1]. Dans l'exemple ci-dessous, il effectue un remappage de `user` vers `user.firstname`.
 
 {{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Carré du processeur de remappage d'attribut" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur :
 
@@ -320,7 +320,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `override_on_conflict` | Booléen          | non       | Indique si l'élément cible est remplacé ou non si celui-ci est déjà défini. Valeur par défaut : `false`.            |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Parser d'URL
@@ -330,15 +330,15 @@ Ce processeur extrait les paramètres de requête et d'autres paramètres import
 {{< img src="logs/processing/processors/url_processor.png" alt="Processeur d'URL" style="width:80%;" >}}
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de parsing d'URL depuis la [page de configuration des logs Datadog][1] :
 
 {{< img src="logs/processing/processors/url_processor_tile.png" alt="Carré du processeur d'URL" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 ```json
 {
@@ -358,7 +358,7 @@ Définissez le processeur de parsing d'URL depuis la [page de configuration des 
 | `sources`    | Tableau de chaînes | non       | Tableau des attributs sources. Valeur par défaut : `http.url`.                                                                      |
 | `target`     | Chaîne           | oui      | Le nom de l'attribut parent qui contient tous les détails extraits des `sources`. Valeur par défaut : `http.url_details`. |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Parser de user-agent
@@ -370,15 +370,15 @@ Le parser de user-agent reçoit un attribut user-agent et extrait le système d'
 **Remarque** : si vos logs comprennent des user-agents encodés (c'est par exemple le cas des logs IIS), configurez ce processeur de façon à ce qu'il **décode l'URL** avant son parsing.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de user-agent depuis la [page de configuration des logs Datadog][1] :
 
 {{< img src="logs/processing/processors/useragent_processor_tile.png" alt="Carré du processeur de user-agent"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le parser de user-agent :
 
@@ -403,7 +403,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `is_encoded` | Booléen          | non       | Définit si l'attribut source est encodé dans une URL ou non. Valeur par défaut : `false`.                                                     |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Processeur de catégories
@@ -419,7 +419,7 @@ Utilisez les catégories pour créer des groupes à des fins d'analyse (tels que
 * Une fois le processeur de catégories défini, vous pouvez mapper des catégories à des statuts de log à l'aide du [remappeur de statuts de log][9].
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de catégories depuis la [page de configuration des logs Datadog][1]. Par exemple, pour catégoriser vos logs d'accès Web en fonction de la plage de valeurs du code de statut (« OK » pour un code de réponse entre 200 et 299, « Notice » pour un code de réponse entre 300 et 399, etc.), ajoutez ce processeur :
 
@@ -430,8 +430,8 @@ Cela génère le résultat suivant :
 {{< img src="logs/processing/processors/category_processor_result.png" alt="Résultat du processeur de catégories" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le processeur de catégories :
 
@@ -457,7 +457,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `target`     | Chaîne          | oui      | Le nom de l'attribut cible dont la valeur est définie par la catégorie correspondante.                              |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Processeur arithmétique
@@ -478,15 +478,15 @@ Un attribut est considéré comme manquant s'il est introuvable dans les attribu
 * Si vous devez mettre à l'échelle une unité de mesure, consultez la section [Filtre][10].
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur arithmétique depuis la [page de configuration des logs Datadog][1] :
 
 {{< img src="logs/processing/processors/arithmetic_processor.png" alt="Processeur arithmétique" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le processeur arithmétique :
 
@@ -511,7 +511,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `is_replace_missing` | Booléen | non       | Définir sur `true` pour remplacer tous les attributs manquants dans `expression` par 0. Définir sur `false` pour annuler l'opération si un attribut est manquant. Valeur par défaut : `false`. |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Processeur de générateur de chaînes
@@ -529,7 +529,7 @@ Le modèle est défini par du texte brut et des blocs, avec la syntaxe `%{chemin
 * Les résultats du modèle ne peuvent pas comporter plus de 256 caractères.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 Définissez le processeur de générateur de chaînes sur la [page de configuration des logs Datadog][1] :
 
@@ -580,8 +580,8 @@ Marie,Arnaud
 ```
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le processeur de générateur de chaînes :
 
@@ -606,7 +606,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `is_replace_missing` | Booléen | Non       | Si ce paramètre est défini sur `true`, il remplace tous les attributs manquants dans `template` par une chaîne vide. S'il est défini sur `false` (valeur par défaut), l'opération est annulée en cas d'attribut manquant. |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Parser GeoIP
@@ -614,7 +614,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 Le parser GeoIP reçoit un attribut adresse IP et extrait le continent, le pays, la sous-division ainsi que la ville (si ces informations sont disponibles) dans le chemin de l'attribut cible.
 
 {{< tabs >}}
-{{% tab "IU" %}}
+{{< tab "IU" >}}
 
 {{< img src="logs/processing/processors/geoip_processor.png" alt="Processeur GeoIP" style="width:80%;">}}
 
@@ -624,8 +624,8 @@ Un exemple de parser GeoIP se trouve ci-dessous. Il extrait la géolocalisation 
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="Exemple de GeoIP" style="width:60%;">}}
 
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le parser Geo-IP :
 
@@ -648,7 +648,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `target`     | Chaîne           | oui      | Le nom de l'attribut parent qui contient tous les détails extraits des `sources`. Valeur par défaut : `network.client.geoip`.  |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Processeur de correspondances
@@ -658,7 +658,7 @@ Ce processeur peut par exemple servir à mapper un ID de service interne à un n
 Il peut également vérifier si une adresse MAC qui vient d'essayer de se connecter à votre environnement de production fait partie d'une liste de machines volées.
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 {{< img src="logs/processing/processors/lookup_processor.png" alt="Processeur de correspondances"  style="width:80%;">}}
 
@@ -673,8 +673,8 @@ Vous pouvez renseigner la table de mappage en sélectionnant une table d'enrichi
 
 La limite de poids pour la table de mappage est de 100 Ko. Cette limite s'applique à l'ensemble des processeurs de correspondances sur la plateforme. Toutefois, les tables d'enrichissement prennent en charge les fichiers plus volumineux.
 
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le processeur de correspondances :
 
@@ -701,7 +701,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `default_lookup` | Chaîne           | non       | Valeur à définir pour l'attribut cible si la valeur source ne figure pas dans la liste.                                                                                          |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Remappeur de traces
@@ -713,15 +713,15 @@ Il existe deux façons d'améliorer la corrélation entre les traces et les logs
 2. Utilisez le processeur de remappage de traces pour définir un attribut de log comme son ID de trace associé.
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Définissez le processeur de remappage de traces depuis la [page de configuration des logs Datadog][1]. Entrez le chemin de l'attribut ID de trace dans le carré du processeur, comme suit :
 
 {{< img src="logs/processing/processors/trace_processor.png" alt="Processeur d'ID de trace" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile JSON suivante pour le remappeur de traces :
 
@@ -742,7 +742,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `sources`    | Tableau de chaînes | non       | Tableau des attributs sources. Valeur par défaut : `dd.trace_id`.    |
 
 [1]: /fr/api/v1/logs-pipelines/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

@@ -130,7 +130,7 @@ Azure CLI ツールまたは Azure ポータルを使用して、Microsoft Azure
 Azure CLI を使用して Datadog を Azure と統合するには、[Azure CLI をインストール][44]しておく必要があります。
 
 {{< tabs >}}
-{{% tab "Azure CLI v2.0" %}}
+{{< tab "Azure CLI v2.0" >}}
 
 最初に、Datadog と統合する Azure アカウントにログインします。
 
@@ -159,8 +159,8 @@ az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{sub
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{% /tab %}}
-{{% tab "Azure CLI v1.0" %}}
+{{< /tab >}}
+{{< tab "Azure CLI v1.0" >}}
 
 最初に、Datadog と統合する Azure アカウントにログインします。
 
@@ -198,8 +198,8 @@ azure role assignment create --objectId <オブジェクト_ID> -o "Monitoring R
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{% /tab %}}
-{{% tab "Azure CLI inferiors to v1.0" %}}
+{{< /tab >}}
+{{< tab "Azure CLI inferiors to v1.0" >}}
 
 最初に、Datadog と統合する Azure アカウントにログインします。
 
@@ -252,7 +252,7 @@ azure role assignment create --objectId <オブジェクト_ID> --roleName "Moni
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Azure ポータルを使用して統合する
@@ -342,7 +342,7 @@ Azure から Datadog へログを送信する最適な方法は、Agent また�
 
 {{< tabs >}}
 
-{{% tab "自動インストール" %}}
+{{< tab "自動インストール" >}}
 
 開始するには、以下のボタンをクリックし、Azure Portal のフォームに入力します。Datadog アカウントにアクティビティログをストリーミングするために必要な Azure リソースが、自動的にデプロイされます。
 
@@ -439,9 +439,9 @@ Azure プラットフォームログ (リソースログを含む) を送信す�
 [2]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "手動インストール" %}}
+{{< tab "手動インストール" >}}
 
 Azure から Datadog にログを送信するには、以下の手順に従ってください。
 
@@ -538,9 +538,9 @@ Datadog-Azure [関数を Event Hub トリガー][2]でセットアップし、Da
 [3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
 [5]: https://app.datadoghq.com/logs
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Blob Storage" %}}
+{{< tab "Blob Storage" >}}
 
 すべての Azure App Service からログを収集するには、主に以下の手順に従います。
 
@@ -577,7 +577,7 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 [8]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://app.datadoghq.com/logs
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [44]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
@@ -631,7 +631,7 @@ Azure サブスクリプションのモニタリングを開始するには、[A
 **注**: 以下の手順は、Azure Portal を使用したインテグレーションの構成プロセスの概要です。[Azure CLI for Datadog][5] を使用すると、この手順を完了できます。 
 
 {{< tabs >}}
-{{% tab "Link" %}}
+{{< tab "Link" >}}
 
 #### ベーシック {#basics-link}
 
@@ -661,8 +661,8 @@ oauth フローが完了したら、Datadog オーガニゼーション名が正
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
 [2]: https://docs.datadoghq.com/ja/getting_started/site/
-{{% /tab %}}
-{{% tab "Create" %}}
+{{< /tab >}}
+{{< tab "Create" >}}
 
 #### ベーシック {#basics-create}
 
@@ -683,7 +683,7 @@ oauth フローが完了したら、Datadog オーガニゼーション名が正
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
 [2]: https://docs.datadoghq.com/ja/getting_started/site/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -769,7 +769,7 @@ Azure ポータルが、Azure Active Directory から適切な Datadog アプリ
 Datadog リソースを作成したら、関連付けられた Datadog オーガニゼーションにアクセスします。オーガニゼーションを新規作成したか、既存のオーガニゼーションにリンクしたかによって、アクセス方法が異なります。
 
 {{< tabs >}}
-{{% tab "作成" %}}
+{{< tab "作成" >}}
 
 #### SSO 
 
@@ -783,12 +783,12 @@ Datadog リソースを作成したら、関連付けられた Datadog オーガ
 
 
 [1]: http://us3.datadoghq.com
-{{% /tab %}}
-{{% tab "リンク" %}}
+{{< /tab >}}
+{{< tab "リンク" >}}
 
 既存の Datadog オーガニゼーションにリンクした場合は、これまでと同様の方法で Datadog オーガニゼーションにアクセスします。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### SAML SSO コンフィギュレーション

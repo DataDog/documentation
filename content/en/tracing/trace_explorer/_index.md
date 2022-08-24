@@ -52,7 +52,7 @@ After you instrument your services and ingest traces, set tag-based [retention f
 When you use Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window), displayed without any sampling.
 
 {{< tabs >}}
-{{% tab "List view" %}}
+{{< tab "List view" >}}
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search List view" video="true" >}}
 
@@ -71,8 +71,8 @@ The number of received spans per second is displayed at the top of the traces ta
 
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
 
-{{% /tab %}}
-{{% tab "Timeseries View" %}}
+{{< /tab >}}
+{{< tab "Timeseries View" >}}
 
 {{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search Timeseries view" video="true" >}}
 
@@ -88,7 +88,7 @@ In addition to showing timeseries for requests that match your queries, you can 
 
 **Note:** Exporting to dashboards and monitors is only possible using retained spans.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Filtering
@@ -116,12 +116,12 @@ You can search retained traces in the same way as you do a Live Search. To switc
 {{< img src="tracing/live_search/searching-retained-traces.mp4" alt="Searching retained traces" video="true" >}}
 
 {{< tabs >}}
-{{% tab "List view" %}}
+{{< tab "List view" >}}
 
 All spans indexed by custom retention filters *and* the intelligent retention filter are available to be searched in the List view. However, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search does not return any results, unlike when using [Live Search](#live-search-for-15-minutes).
 
-{{% /tab %}}
-{{% tab "Timeseries View" %}}
+{{< /tab >}}
+{{< tab "Timeseries View" >}}
 
 All spans indexed by custom retention filters (*not* the intelligent retention filter) are available to be searched when using trace analytics.
 
@@ -130,7 +130,7 @@ From the timeseries view, export your query to a [dashboard][1], a [monitor][2] 
 [1]: /dashboards/widgets/timeseries/
 [2]: /monitors/create/types/apm/?tab=analytics
 [3]: /notebooks
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Retention configuration

@@ -29,7 +29,7 @@ Par défaut, l'Agent est installé dans une sandbox à l'emplacement `/opt/datad
 Avec les Agents v6 et v7, le gestionnaire de service `launchctl` fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement par le biais du binaire de l'Agent. Les commandes de cycle de vie peuvent également être gérées via la barre des menus, et les autres commandes peuvent être exécutées via l'interface Web.
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 | Description                        | Commande                                              |
 |------------------------------------|------------------------------------------------------|
@@ -42,8 +42,8 @@ Avec les Agents v6 et v7, le gestionnaire de service `launchctl` fourni par le 
 | Afficher l'utilisation des commandes              | `datadog-agent --help`                               |
 | Exécuter un check                        | `datadog-agent check <NOM_CHECK>`                   |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Description                        | Commande                            |
 |------------------------------------|------------------------------------|
@@ -56,13 +56,13 @@ Avec les Agents v6 et v7, le gestionnaire de service `launchctl` fourni par le 
 | Afficher l'utilisation des commandes              | _pas implémenté_                  |
 | Exécuter un check                        | `datadog-agent check <NOM_CHECK>` |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
 * `~/.datadog-agent/datadog.yaml`
@@ -72,8 +72,8 @@ Fichiers de configuration pour les [intégrations][1] :
 * `~/.datadog-agent/conf.d/`
 
 [1]: /fr/integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
@@ -84,7 +84,7 @@ Fichiers de configuration pour les [intégrations][1] :
 * `~/.datadog-agent/conf.d/`
 
 [1]: /fr/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Dépannage

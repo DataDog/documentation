@@ -18,7 +18,7 @@ further_reading:
 
 You can monitor application security for PHP apps running in host-based or container-based environments such as Docker, Kubernetes, AWS ECS, and AWS EKS.
 
-{{% appsec-getstarted %}}
+{{< appsec-getstarted >}}
 
 ## Get started
 
@@ -31,7 +31,7 @@ You can monitor application security for PHP apps running in host-based or conta
 
 2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}
-{{% tab "Docker CLI" %}}
+{{< tab "Docker CLI" >}}
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
@@ -39,8 +39,8 @@ Update your configuration container for APM by adding the following argument in 
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
+{{< /tab >}}
+{{< tab "Dockerfile" >}}
 
 Add the following environment variable value to your container Dockerfile:
 
@@ -48,8 +48,8 @@ Add the following environment variable value to your container Dockerfile:
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
@@ -65,8 +65,8 @@ spec:
               value: "true"
 ```
 
-{{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{< /tab >}}
+{{< tab "AWS ECS" >}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -80,11 +80,11 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
-{{% appsec-getstarted-2-canary %}}
+{{< appsec-getstarted-2-canary >}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 

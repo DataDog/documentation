@@ -31,7 +31,7 @@ The following Agent v5 features are **not available** in Agent v6:
 Prior versions of the Agent stored configuration files in `/etc/dd-agent`. For Agent v6.0+, configuration files are stored in `/etc/datadog-agent`.
 
 {{< tabs >}}
-{{% tab "Agent" %}}
+{{< tab "Agent" >}}
 
 The [Agent's main configuration file][1] has transitioned from **INI** to **YAML** format to support complex configurations and provide a consistent experience across the Agent and checks.
 
@@ -96,8 +96,8 @@ The following Agent configuration options were changed or removed in Agent v6. C
 [4]: /integrations/disk/
 [5]: /logs/
 [6]: /integrations/amazon_web_services/
-{{% /tab %}}
-{{% tab "Checks" %}}
+{{< /tab >}}
+{{< tab "Checks" >}}
 
 Agent v6 loads any valid YAML file in: `<AGENT_DIRECTORY>/conf.d/<CHECK_NAME>.d/`. This enables complex configurations to be broken down into multiple files.
 
@@ -137,8 +137,8 @@ Agent v6 supports the following options in a check's `instance` section:
 
 
 [1]: /getting_started/agent/autodiscovery/
-{{% /tab %}}
-{{% tab "Environment variables" %}}
+{{< /tab >}}
+{{< tab "Environment variables" >}}
 
 Most of the environment variables used in Agent v6 are **different** from previous versions. See the list of [environment variables for Agent v6][1].
 
@@ -162,13 +162,13 @@ The precedence order of Agent v6 proxy options is different from previous versio
 * Agent v6 overrides the values from the configuration file with the ones in the environment. For example, if both `proxy.http` and `proxy.https` are set in the configuration file but only `DD_PROXY_HTTPS` is set in the environment, the Agent uses the `https` value from the environment and the `http` value from the configuration file.
 
 [1]: /agent/docker/#environment-variables
-{{% /tab %}}
-{{% tab "Hostname" %}}
+{{< /tab >}}
+{{< tab "Hostname" >}}
 
 There are differences in hostname resolution between Agent v5 and Agent v6. For details, see [How the Datadog Agent determines the hostname][1].
 
 [1]: /agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Logs
@@ -199,7 +199,7 @@ For a full list of available commands, see [Agent Commands][6].
 ### Operating system changes
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 The major changes for Agent v6 on Linux are:
 
@@ -251,8 +251,8 @@ With Agent v6+, other functionalities are provided by the Agent binary itself as
 | `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display Agent usage            |
 | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` | Run a check                    |
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 The major changes for Agent v6 on Windows are:
 
@@ -263,8 +263,8 @@ The major changes for Agent v6 on Windows are:
 * The Windows GUI and Windows system tray icon are implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
 
 [1]: /agent/guide/datadog-agent-manager-windows/
-{{% /tab %}}
-{{% tab "MacOS" %}}
+{{< /tab >}}
+{{< tab "MacOS" >}}
 
 The major changes for Agent v6 on MacOS are:
 
@@ -286,13 +286,13 @@ The major changes for Agent v6 on MacOS are:
 | _not implemented_                  | `datadog-agent --help`                               | Display command usage          |
 | `datadog-agent check <CHECK_NAME>` | `datadog-agent check <CHECK_NAME>`                   | Run a check (unchanged)        |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Collection Agents
 
 {{< tabs >}}
-{{% tab "APM Agent" %}}
+{{< tab "APM Agent" >}}
 
 The APM Agent is shipped by default with Agent v6 for Linux, MacOS, and Windows packages.
 
@@ -305,8 +305,8 @@ apm_config:
 For the Docker image, the APM Agent is disabled by default. Enable it by setting `DD_APM_ENABLED` to `true`. It listens to all interfaces by default. If you want to listen to non-local traffic on any other platform, set `DD_APM_NON_LOCAL_TRAFFIC` to `true`. For more details, see [Tracing Docker Applications][1].
 
 [1]: /agent/docker/apm/
-{{% /tab %}}
-{{% tab "Process Agent" %}}
+{{< /tab >}}
+{{< tab "Process Agent" >}}
 
 The Process Agent is shipped by default with Agent v6 for the Linux packages only.
 
@@ -322,13 +322,13 @@ The `enabled` value is a string with the following options:
 * `"false"`: Only collect containers if available (the default).
 * `"disabled"`: Don't run the Process Agent.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Checks
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 For Agent v6, Docker versions 1.12.1+ are supported.
 
@@ -350,8 +350,8 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 [2]: /agent/docker/tag/
 [3]: /agent/guide/autodiscovery-management/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 For Agent v6, Kubernetes versions 1.3+ are supported.
 
@@ -385,8 +385,8 @@ The following options and tags are deprecated:
 [3]: /help/
 [4]: /agent/kubernetes/
 [5]: /agent/kubernetes/tag/#extract-node-labels-as-tags
-{{% /tab %}}
-{{% tab "JMX" %}}
+{{< /tab >}}
+{{< tab "JMX" >}}
 
 Agent v6 ships JMXFetch, with the following changes:
 
@@ -412,8 +412,8 @@ Troubleshooting command syntax has changed. These commands are available for v6.
 
 [1]: https://github.com/jiaqi/jmxterm
 [2]: /integrations/faq/troubleshooting-jmx-integrations/#agent-troubleshooting
-{{% /tab %}}
-{{% tab "System" %}}
+{{< /tab >}}
+{{< tab "System" >}}
 
 _Only affects Windows Agents_
 
@@ -421,7 +421,7 @@ For the Windows Agent v5, `system.mem.pagefile.*` metrics display inconsistent u
 
 This problem is fixed on the Windows Agent v6. However, the Agent v5 discrepancy remains for backwards compatibility. Therefore, reported values (and associated monitors) are different when upgrading from Agent v5 to Agent v6.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Autodiscovery
@@ -429,22 +429,22 @@ This problem is fixed on the Windows Agent v6. However, the Agent v5 discrepancy
 The [Autodiscovery][7] system was reworked for Agent v6. Also, container runtimes and orchestrators were decoupled to be more flexible. This includes the move from `docker_images` to `ad_identifiers` in templates.
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 When using Kubernetes, Autodiscovery sources information from the kubelet instead of Docker daemon. This allows Autodiscovery to work without access to the Docker socket. Also, the default behavior is to source Autodiscovery templates from pod annotations. You can enable the `docker` config-provider to use container labels, and replace the `kubelet` listener with the Docker one if you need Autodiscovery on containers running out of pods.
 
 When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support is set to be removed in future versions.
 
 [1]: /agent/kubernetes/integrations/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 [Autodiscovery templates][1] in Docker labels work with the same name prefix `com.datadoghq.ad.*`.
 
 The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support is set to be removed in future versions.
 
 [1]: /agent/docker/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Python modules
@@ -459,7 +459,7 @@ For Agent v6, all check-related Python code is imported from the `datadog_checks
 A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is uncommon to have been used by anyone in a custom check. For more details, read the [custom checks developer guide][9].
 
 {{< tabs >}}
-{{% tab "Integrations" %}}
+{{< tab "Integrations" >}}
 
 Even though Agent v6 fully supports Python checks, some of the official Agent v5 integrations were removed or superseded:
 
@@ -467,8 +467,8 @@ Even though Agent v6 fully supports Python checks, some of the official Agent v5
 * docker_daemon - superseded by the [docker check](?tab=docker#checks)
 * kubernetes - superseded by [kubernetes checks](?tab=kubernetes#checks)
 
-{{% /tab %}}
-{{% tab "Check API" %}}
+{{< /tab >}}
+{{< tab "Check API" >}}
 
 The base class for Python checks (`AgentCheck`) is imported from `datadog_checks.base.checks`. There are several things that have been removed or changed in the class API. In addition, each check instance is its own instance of the class. So you cannot share state between them.
 
@@ -513,8 +513,8 @@ The following methods have been permanently removed from `AgentCheck`:
 
 **Note**: All official integrations were updated to remove obsolete methods, so these changes only affect custom checks.
 
-{{% /tab %}}
-{{% tab "Custom Checks" %}}
+{{< /tab >}}
+{{< tab "Custom Checks" >}}
 
 #### Precedence
 
@@ -554,7 +554,7 @@ sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 Similarly, you may have added a PIP package to meet a requirement for a custom check while on Agent v5. If the added PIP package had inner dependencies with packages already bundled with Agent v5 (see list above), those dependencies are missing after upgrading to Agent v6. Install the missing dependencies as described above.
 
 [1]: https://github.com/DataDog/integrations-core
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

@@ -42,7 +42,7 @@ Considérations relatives à la sécurité des données
 Pour recueillir des métriques de requête, des échantillons et des plans d'exécution, activez le [schéma de performance MySQL][3] et configurez les [options connexes][4] suivantes, que ce soit dans l'interface de ligne de commande ou dans les fichiers de configuration (comme `mysql.conf`) :
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
+{{< tab "MySQL 5.6" >}}
 | Paramètre | Valeur | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Requis. Active le schéma de performance. |
@@ -51,9 +51,9 @@ Pour recueillir des métriques de requête, des échantillons et des plans d'ex�
 | `performance-schema-consumer-events-statements-current` | `ON` | Requis. Active la surveillance des requêtes en cours d'exécution. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un grand nombre de requêtes récentes sur l'ensemble des threads. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi des requêtes récentes pour un thread spécifique. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "MySQL ≥ 5.7" %}}
+{{< tab "MySQL ≥ 5.7" >}}
 | Paramètre | Valeiur | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Requis. Active le schéma de performance. |
@@ -63,7 +63,7 @@ Pour recueillir des métriques de requête, des échantillons et des plans d'ex�
 | `performance-schema-consumer-events-statements-current` | `ON` | Requis. Active la surveillance des requêtes en cours d'exécution. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un grand nombre de requêtes récentes sur l'ensemble des threads. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi des requêtes récentes pour un thread spécifique. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -76,7 +76,7 @@ L'Agent Datadog requiert un accès en lecture seule pour la base de données, af
 Les instructions suivantes autorisent l'Agent à se connecter depuis n'importe quel host à l'aide de `datadog@'%'`. Vous pouvez restreindre l'utilisateur `datadog` avec `datadog@'localhost'`, de façon à ce qu'il soit uniquement autorisé à se connecter depuis localhost. Consultez la [documentation MYSQL][5] (en anglais) pour en savoir plus.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{< tab "MySQL ≥ 8.0" >}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
@@ -88,8 +88,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
-{{% tab "MySQL 5.6 et 5.7" %}}
+{{< /tab >}}
+{{< tab "MySQL 5.6 et 5.7" >}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
@@ -100,7 +100,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Créez le schéma suivant :

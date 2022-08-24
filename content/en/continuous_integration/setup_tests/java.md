@@ -30,7 +30,7 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 
 {{< tabs >}}
 
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+{{< tab "On-Premises CI provider (Datadog Agent)" >}}
 
 If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
 
@@ -41,9 +41,9 @@ If you are using a Kubernetes executor, Datadog recommends using the [Datadog Ad
 
 [1]: /agent/
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cloud CI provider (Agentless)" %}}
+{{< tab "Cloud CI provider (Agentless)" >}}
 
 <div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
 
@@ -67,7 +67,7 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -76,7 +76,7 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 Install and enable the Java tracer v0.101.0 or newer.
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 Add a new Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
@@ -103,8 +103,8 @@ Add a new Maven profile in your root `pom.xml` configuring the Datadog Java trac
 
 [1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`): ![Maven Central][2]
 
@@ -120,13 +120,13 @@ dependencies {
 
 [1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Instrumenting your tests
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use Datadog Java agent, specifying the name of the service or library under test with the `-Ddd.service` property:
 
@@ -171,8 +171,8 @@ DD_ENV=ci mvn clean verify -Pdd-civisibility
 
 [1]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifying the name of the service or library under test with the `-Ddd.service` property:
 
@@ -192,7 +192,7 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 
 **Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Configuration settings

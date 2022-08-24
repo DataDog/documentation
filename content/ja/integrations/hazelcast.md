@@ -81,7 +81,7 @@ Hazelcast チェックは [Datadog Agent][2] パッケージに含まれてい�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -176,8 +176,8 @@ Hazelcast チェックは [Datadog Agent][2] パッケージに含まれてい�
 [5]: https://docs.hazelcast.org/docs/latest/manual/html-single/index.html#logging-configuration
 [6]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 [7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -195,7 +195,7 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

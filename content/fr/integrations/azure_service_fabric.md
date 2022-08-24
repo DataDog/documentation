@@ -41,20 +41,20 @@ Avant d'exécuter la commande d'installation, notez les éléments suivants :
 Modifiez la commande suivante en fonction des informations ci-dessus :
 
 {{< tabs >}}
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 ```shell
 az vmss extension set --name DatadogWindowsAgent --publisher Datadog.Agent --resource-group <NOM_GROUPE_RESSOURCES> --vmss-name <NOM_GROUPE_MACHINES_VIRTUELLES_IDENTIQUES> --protected-settings "{'api_key':'<VOTRE_CLÉ_API>'}"
 ```
 
-{{% /tab %}}
-{{% tab "Linux" %}}
+{{< /tab >}}
+{{< tab "Linux" >}}
 
 ```shell
 az vmss extension set --name DatadogLinuxAgent --publisher Datadog.Agent --resource-group <NOM_GROUPE_RESSOURCES> --vmss-name <NOM_GROUPE_MACHINES_VIRTUELLES_IDENTIQUES> --protected-settings "{'api_key':'<VOTRE_CLÉ_API>'}"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Connectez-vous à l'interface de ligne de commande d'Azure et exécutez la commande ci-dessus en tenant compte de vos informations pour déployer l'Agent Datadog sur les nœuds de votre cluster.

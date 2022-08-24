@@ -36,7 +36,7 @@ Datadog にテスト結果を報告するには、Datadog の JavaScript ライ�
 
 {{< tabs >}}
 
-{{% tab "オンプレミス CI プロバイダー (Datadog Agent)" %}}
+{{< tab "オンプレミス CI プロバイダー (Datadog Agent)" >}}
 
 Jenkins や自己管理型の GitLab CI などのオンプレミス CI プロバイダーでテストを実行する場合、[Agent インストール手順][1]に従って各ワーカノードに Datadog Agent をインストールします。これは、テスト結果が自動的に基礎となるホストメトリクスにリンクされるため、推奨されるオプションです。
 
@@ -47,9 +47,9 @@ Kubernetes のエグゼキューターを使用している場合、Datadog は 
 
 [1]: /ja/agent
 [2]: /ja/agent/cluster_agent/admission_controller/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "クラウド CI プロバイダー (Agentless)" %}}
+{{< tab "クラウド CI プロバイダー (Agentless)" >}}
 
 <div class="alert alert-info">Agentless モードは、Datadog JavaScript ライブラリのバージョン >= 2.5.0 で使用できます</div>
 
@@ -73,7 +73,7 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /ja/getting_started/site/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -91,7 +91,7 @@ yarn add --dev dd-trace
 ## テストのインスツルメント
 
 {{< tabs >}}
-{{% tab "Jest/Mocha/Cucumber" %}}
+{{< tab "Jest/Mocha/Cucumber" >}}
 `NODE_OPTIONS` 環境変数を `-r dd-trace/ci/init` に設定します。環境変数 `DD_ENV` にテストを実行する環境を指定し、通常通りテストを実行してください。例えば、開発者のワークステーションでテストを実行する場合は `DD_ENV` を `local` に設定し、CI プロバイダでテストを実行する場合は `ci` に設定します。
 
 {{< code-block lang="bash" >}}
@@ -112,9 +112,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cypress" %}}
+{{< tab "Cypress" >}}
 
 ### Cypress<10
 
@@ -215,7 +215,7 @@ it('renders a hello world', () => {
 [4]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
 [5]: /ja/real_user_monitoring/browser/#setup
 [6]: /ja/continuous_integration/guides/rum_integration/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -37,7 +37,7 @@ Les exemples suivants sont abordés dans ce guide :
 ### Obtenir des nombres
 
 {{< tabs >}}
-{{% tab "Tableau" %}}
+{{< tab "Tableau" >}}
 
 L'appel d'API suivant vous permet de créer un tableau `table` avec le nombre `count` d'événements de log regroupés selon le champ `status` et affichant les trois premiers éléments. Le `type` doit correspondre à `total`.
 
@@ -115,8 +115,8 @@ L'ensemble de données généré comprend les objets `buckets` comme illustré d
 }
 
 ```
-{{% /tab %}}
-{{% tab "Série temporelle" %}}
+{{< /tab >}}
+{{< tab "Série temporelle" >}}
 L'appel d'API suivant vous permet de créer une série temporelle `timeseries` avec le nombre `count` d'événements de log regroupés selon le champ `status` et cumulés chaque minute `1m`. Le `type` doit correspondre à `timeseries`.
 
 **Appel d'API :**
@@ -200,13 +200,13 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Obtenir des statistiques
 
 {{< tabs >}}
-{{% tab "Moyenne" %}}
+{{< tab "Moyenne" >}}
 
 L'appel d'API suivant permet de créer un tableau `table` affichant les moyennes `avg` des valeurs d'une métrique `metric` comme `@http.response_time` regroupées selon le champ `status`. Le `type` doit correspondre à `total`.
 
@@ -282,8 +282,8 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 De la même façon, vous pouvez créer une série temporelle `avg` en définissant le `type` sur `timeseries`.
 
-{{% /tab %}}
-{{% tab "Somme" %}}
+{{< /tab >}}
+{{< tab "Somme" >}}
 
 L'appel d'API suivant permet de créer un tableau `table` affichant les sommes `sum` des valeurs d'une métrique `metric` comme `@http.response_time` regroupées selon le champ `service`. Le `type` doit correspondre à `total`.
 
@@ -350,8 +350,8 @@ De la même façon, vous pouvez créer une série temporelle `sum` en définissa
 }
 ```
 
-{{% /tab %}}
-{{% tab "Minimum" %}}
+{{< /tab >}}
+{{< tab "Minimum" >}}
 
 L'appel d'API suivant permet de créer un tableau `table` affichant les valeurs minimales `min` d'une métrique `metric` comme `@http.response_time` regroupées selon le champ `service`. Le `type` doit correspondre à `total`.
 
@@ -418,8 +418,8 @@ De la même façon, vous pouvez créer une série temporelle `min` en définissa
 }
 ```
 
-{{% /tab %}}
-{{% tab "Maximum" %}}
+{{< /tab >}}
+{{< tab "Maximum" >}}
 
 L'appel d'API suivant permet de créer un tableau `table` affichant les valeurs maximales `max` d'une métrique `metric` comme `@http.response_time` regroupées selon le champ `service`. Le `type` doit correspondre à `total`.
 
@@ -486,7 +486,7 @@ De la même façon, vous pouvez créer une série temporelle `max` en définissa
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Obtenir des centiles

@@ -45,7 +45,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 ## Installation
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 1. If you have not already, install the [Datadog Agent][1] (version 7.27+).
 
@@ -71,9 +71,9 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 The following command can be used to start the Runtime Security Agent and `system-probe` in a Docker environment:
 
@@ -107,9 +107,9 @@ docker run -d --name dd-agent \
 
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Debian" %}}
+{{< tab "Debian" >}}
 
 For a package-based deployment, the Datadog package has to be deployed: run `dkpg -i datadog-agent_7….deb`
 
@@ -129,9 +129,9 @@ systemctl restart datadog-agent
 
 Once you apply the changes, restart both the Security Agent and the system-probe.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Fedora/CentOS" %}}
+{{< tab "Fedora/CentOS" >}}
 
 For a package-based deployment, the Datadog package has to be deployed: run `yum/dnf install datadog-agent_7….rpm`
 
@@ -147,9 +147,9 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Amazon Elastic Beanstalk" %}}
+{{< tab "Amazon Elastic Beanstalk" >}}
 
 The following deployment can be used to start the Runtime Security Agent and `system-probe` in an Amazon Elastic Beanstalk environment with multiple Docker containers:
 
@@ -278,7 +278,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

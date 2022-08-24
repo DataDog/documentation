@@ -41,7 +41,7 @@ Pour les hosts utilisant des versions trop anciennes des méthodes d'installatio
 ## Conséquences de la rotation en l'absence d'approbation de la nouvelle clé
 
 {{< tabs >}}
-{{% tab "Debian/Ubuntu" %}}
+{{< tab "Debian/Ubuntu" >}}
 
 Si vous essayez d'installer ou de mettre à jour les packages d'Agent avec `apt` depuis `apt.datadoghq.com` sans avoir au préalable approuvé la nouvelle clé, vous obtenez des erreurs `NO_PUBKEY`. Ce comportement se vérifier à la fois pour les nouvelles versions et pour les versions existantes de l'Agent.
 
@@ -52,8 +52,8 @@ The following signatures couldn't be verified because the public key is not avai
 
 Cette rotation des clés n'a aucune incidence sur les installations qui ont été effectuées depuis des sources autres que `apt.datadoghq.com` ou via un téléchargement manuel du package depuis `apt.datadoghq.com`.
 
-{{% /tab %}}
-{{% tab "RedHat/CentOS/SUSE" %}}
+{{< /tab >}}
+{{< tab "RedHat/CentOS/SUSE" >}}
 
 L'installation des nouvelles versions de l'Agent publiées depuis avril 2022 entraîne des erreurs `NOKEY`. Vous pouvez néanmoins toujours installer les versions antérieures de l'Agent.
 
@@ -62,7 +62,7 @@ The GPG keys listed for the "Datadog, Inc." repository are already installed but
 Check that the correct key URLs are configured for this repository.
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Modification manuelle
@@ -70,7 +70,7 @@ Check that the correct key URLs are configured for this repository.
 Datadog vous conseille d'utiliser l'une des [méthodes d'installation](#methodes-d-installation-avec-approbation-automatique-de-la-nouvelle-clé-GPG) ci-dessus, afin d'approuver automatiquement la nouvelle clé GPG ainsi que les prochaines clés. Si vous n'avez pas la possibilité de procéder ainsi, référez-vous aux instructions suivantes pour télécharger et approuver manuellement la nouvelle clé.
 
 {{< tabs >}}
-{{% tab "Debian/Ubuntu" %}}
+{{< tab "Debian/Ubuntu" >}}
 
 Exécutez les commandes suivantes sur le host :
 
@@ -82,8 +82,8 @@ $ cat /tmp/DATADOG_APT_KEY_F14F620E | sudo gpg --import --batch --no-default-key
 $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 ```
 
-{{% /tab %}}
-{{% tab "RedHat/CentOS/SUSE" %}}
+{{< /tab >}}
+{{< tab "RedHat/CentOS/SUSE" >}}
 
 Exécutez les commandes suivantes sur le host :
 
@@ -92,13 +92,13 @@ $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915 https://keys.datadoghq.com/DATADOG_RPM_K
 $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Vérifier si un host a approuvé la nouvelle clé GPG
 
 {{< tabs >}}
-{{% tab "Debian/Ubuntu" %}}
+{{< tab "Debian/Ubuntu" >}}
 
 Un host a approuvé la nouvelle clé si l'une des deux conditions suivantes se vérifie :
 
@@ -107,8 +107,8 @@ Un host a approuvé la nouvelle clé si l'une des deux conditions suivantes se v
 
 Les fichiers `/usr/share/keyrings/datadog-archive-keyring.gpg` et `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` (ce dernier étant facultatif) sont créés avec l'une des [méthodes d'installation](#methodes-d-installation-avec-approbation-automatique-de-la-nouvelle-clé-GPG) prises en charge ou avec l'installation du [package `datadog-signing-keys`](#package-datadog-signing-keys). Vérifiez que vous avez installé la [version 1.1.0](#version-110-de-datadog-signing-keys) ou une version ultérieure de `datadog-signing-keys`, sauf si vous utilisez l'une des [versions des méthodes d'installation décrites plus haut dans ce guide](#methodes-d-installation-avec-approbation-automatique-de-la-nouvelle-clé-GPG).
 
-{{% /tab %}}
-{{% tab "RedHat/CentOS/SUSE" %}}
+{{< /tab >}}
+{{< tab "RedHat/CentOS/SUSE" >}}
 
 Exécutez la commande suivante sur le host :
 
@@ -126,7 +126,7 @@ Si la clé n'a pas été approuvée, la commande génère un autre code de sorti
 
 Vous avez également la possibilité de vérifier si votre fichier `datadog.repo` contient l'entrée `gpgkey` suivante : `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public`. La nouvelle clé est ajoutée à ce fichier dès qu'elle est utilisée.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Package `datadog-signing-keys`

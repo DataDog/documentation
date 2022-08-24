@@ -96,7 +96,7 @@ secret_backend_command: <CHEMIN_EXÉCUTABLE>
 L'Agent lance l'exécutable `secret_backend_command` en tant que sous-processus. Les modèles d'exécution Linux et Windows diffèrent.
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Sur Linux, l'exécutable défini en tant que `secret_backend_command` doit respecter les règles suivantes :
 
@@ -104,8 +104,8 @@ Sur Linux, l'exécutable défini en tant que `secret_backend_command` doit respe
 * Il ne doit avoir aucun droit pour un groupe ou un autre élément.
 * Il doit prévoir au moins des droits d'exécution pour le propriétaire.
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Sur Windows, l'exécutable défini en tant que `secret_backend_command` doit respecter les règles suivantes :
 
@@ -113,7 +113,7 @@ Sur Windows, l'exécutable défini en tant que `secret_backend_command` doit res
 * Il ne doit avoir aucun droit pour un utilisateur ou un groupe, à l'exception du groupe `Administrator`, du compte Local System intégré ou du contexte de l'utilisateur de l'Agent (par défaut, `ddagentuser`).
 * Il doit être une application Win32 valide exécutable par l'Agent (un script PowerShell ou Python ne fonctionnera pas, par exemple).
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque** : l'exécutable partage les mêmes variables d'environnement que l'Agent.
@@ -338,7 +338,7 @@ La commande `secret` dans l'interface de ligne de commande de l'Agent indique le
 Sous Linux, la commande affiche le mode de fichier, le propriétaire et le groupe de l'exécutable. Sous Windows, les droits ACL sont énumérés.
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Exemple sous Linux :
 
@@ -361,8 +361,8 @@ Secrets handle decrypted:
 - db_prod_password: from postgres.yaml
 ```
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Exemple sous Windows (en tant qu'administrateur Powershell)  :
 
@@ -394,7 +394,7 @@ Secrets handle decrypted:
 - db_prod_password: from sqlserver.yaml
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -431,7 +431,7 @@ password: <déchiffré_motdepasse2>
 Pour tester une commande ou la déboguer en dehors de l'Agent, vous pouvez reproduire la façon dont l'Agent l'exécute :
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 #### Linux
 
 ```bash
@@ -441,8 +441,8 @@ sudo su dd-agent - bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1
 L'utilisateur `dd-agent` est créé lors de l'installation de l'Agent Datadog,
 
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 #### Windows
 
 ##### Erreurs associées aux droits
@@ -502,7 +502,7 @@ exit code:
 0
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

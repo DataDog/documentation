@@ -104,7 +104,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 If you are collecting logs from a CloudWatch log group, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following methods:
 
 {{< tabs >}}
-{{% tab "AWS console" %}}
+{{< tab "AWS console" >}}
 
 1. In the AWS console, go to **Lambda**. 
 2. Click **Functions** and select the Datadog Forwarder.
@@ -115,8 +115,8 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 7. Go to the [Datadog Log section][1] to explore any new log events sent to your log group.
 
 [1]: https://app.datadoghq.com/logs
-{{% /tab %}}
-{{% tab "Terraform" %}}
+{{< /tab >}}
+{{< tab "Terraform" >}}
 
 For Terraform users, you can provision and manage your triggers using the [aws_cloudwatch_log_subscription_filter][1] resource. See sample code below.
 
@@ -130,8 +130,8 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 ```
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
-{{% /tab %}}
-{{% tab "CloudFormation" %}}
+{{< /tab >}}
+{{< tab "CloudFormation" >}}
 
 For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below.
 
@@ -151,7 +151,7 @@ Resources:
 [2]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
 [3]: https://www.serverless.com/
 [4]: https://www.serverless.com/framework/docs/providers/aws/guide/resources/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Collecting logs from S3 buckets
@@ -159,7 +159,7 @@ Resources:
 If you are collecting logs from an S3 bucket, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following methods:
 
 {{< tabs >}}
-{{% tab "AWS Console" %}}
+{{< tab "AWS Console" >}}
 
 1. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
   {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
@@ -173,8 +173,8 @@ If you are collecting logs from an S3 bucket, configure the trigger to the [Data
 Once done, go into your [Datadog Log section][1] to start exploring your logs!
 
 [1]: https://app.datadoghq.com/logs
-{{% /tab %}}
-{{% tab "Terraform" %}}
+{{< /tab >}}
+{{< tab "Terraform" >}}
 
 For Terraform users, you can provision and manage your triggers using the [aws_s3_bucket_notification][1] resource. See the sample code below.
 
@@ -192,8 +192,8 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
 
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification
-{{% /tab %}}
-{{% tab "CloudFormation" %}}
+{{< /tab >}}
+{{< tab "CloudFormation" >}}
 
 For CloudFormation users, you can configure triggers using the CloudFormation [NotificationConfiguration][1] for your S3 bucket. See the sample code below.
 
@@ -211,7 +211,7 @@ Resources:
 
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Enable logging for your AWS service

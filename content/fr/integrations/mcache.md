@@ -67,7 +67,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 #### Collecte de métriques
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -99,8 +99,8 @@ L'APM Datadog s'intègre à Memcache pour vous permettre de visualiser les trace
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/tracing/send_traces/
 [5]: https://docs.datadoghq.com/fr/tracing/setup/
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -151,7 +151,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [4]: https://docs.datadoghq.com/fr/tracing/setup/
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

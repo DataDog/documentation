@@ -61,7 +61,7 @@ EC2 or Lambda metrics in the stream could increase the number of billable hosts 
 ### Installation
  
 {{< tabs >}}
-{{% tab "CloudFormation" %}}
+{{< tab "CloudFormation" >}}
  
 Datadog recommends using CloudFormation because it's automatic and easier if you are using multiple AWS regions.
  
@@ -91,8 +91,8 @@ Once the stack has been successfully created, wait five minutes for Datadog to r
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /getting_started/site/
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
-{{% /tab %}}
-{{% tab "AWS Console" %}}
+{{< /tab >}}
+{{< tab "AWS Console" >}}
  
 If you want to set up metric streams using the AWS Console, follow these steps for each AWS region.
  
@@ -134,7 +134,7 @@ Once you see the Metric Stream resource has been successfully created, wait five
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Disable metric streaming

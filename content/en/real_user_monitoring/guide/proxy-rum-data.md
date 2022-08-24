@@ -18,7 +18,7 @@ The RUM Browser SDK can be configured to send requests through a proxy. Requests
 When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified URL using the POST method (for example, `https://www.proxy.com/foo`).
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
@@ -31,8 +31,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```html
 <script>
  (function(h,o,u,n,d) {
@@ -49,8 +49,8 @@ datadogRum.init({
   })
 </script>
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```javascript
 window.DD_RUM &&
@@ -61,7 +61,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Proxy setup

@@ -63,56 +63,56 @@ HTTP リクエストのステップを作成するには、**Create Your First S
 
    {{< tabs >}}
 
-   {{% tab "リクエストオプション" %}}
+   {{< tab "リクエストオプション" >}}
 
    * **Follow redirects**: チェックマークを付けると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
    * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
    * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "認証" %}}
+   {{< tab "認証" >}}
 
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
    * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名は実装されていません。
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "クエリパラメーター" %}}
+   {{< tab "クエリパラメーター" >}}
 
    * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "リクエスト本文" %}}
+   {{< tab "リクエスト本文" >}}
 
    * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "証明書" %}}
+   {{< tab "証明書" >}}
 
    * **Ignore server certificate error**: チェックマークを付けると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
    * **Client certificate**: クライアント証明書と関連する秘密キーをアップロードして、mTLS を介して認証します。
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "プロキシ" %}}
+   {{< tab "プロキシ" >}}
 
    * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
    * **Proxy Header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Privacy" %}}
+   {{< tab "Privacy" >}}
 
    * **Do not save response body**: レスポンスの本文が実行時に保存されないようにするには、このオプションを選択します。これは、テスト結果に機密データが表示されないようにするために役立ちますが、障害のトラブルシューティングが困難になる可能性があります。セキュリティに関する推奨事項については、[Synthetic Monitoring Security][1] を参照してください。
 
 [1]: /ja/security/synthetics
-   {{% /tab %}}
+   {{< /tab >}}
 
    {{< /tabs >}}
 

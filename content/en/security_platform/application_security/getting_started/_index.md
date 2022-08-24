@@ -22,7 +22,7 @@ further_reading:
 
 Set up your application to [detect threats][1] targeting your production systems, using the Datadog library for your application language. You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
-{{% appsec-getstarted %}}
+{{< appsec-getstarted >}}
 
 Select your application language for details on how to do these steps for your language and infrastructure types.
 

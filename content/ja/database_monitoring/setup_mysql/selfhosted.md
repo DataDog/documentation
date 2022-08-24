@@ -43,7 +43,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 クエリのメトリクス、サンプル、および実行計画を収集するには、[MySQL パフォーマンススキーマ][3]を有効にし、以下の[パフォーマンススキーマオプション][4]をコマンドラインまたはコンフィギュレーションファイル (例: `mysql.conf`) で構成します。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
+{{< tab "MySQL 5.6" >}}
 | パラメーター | 値 | 説明|
 | --- | --- | --- |
 | `performance_schema` | `ON` | 必須。パフォーマンススキーマを有効にします。|
@@ -53,9 +53,9 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `performance-schema-consumer-events-waits-current` | `ON` | 必須。待機イベントの収集を有効にします。 |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | 推奨。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
 | `performance-schema-consumer-events-statements-history` | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "MySQL ≥ 5.7" %}}
+{{< tab "MySQL ≥ 5.7" >}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `performance_schema` | `ON` | 必須。パフォーマンススキーマを有効にします。|
@@ -66,7 +66,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `performance-schema-consumer-events-waits-current` | `ON` | 必須。待機イベントの収集を有効にします。 |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | 推奨。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
 | `performance-schema-consumer-events-statements-history` | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -79,7 +79,7 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][5]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{< tab "MySQL ≥ 8.0" >}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
@@ -91,8 +91,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
-{{% tab "MySQL 5.6 & 5.7" %}}
+{{< /tab >}}
+{{< tab "MySQL 5.6 & 5.7" >}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
@@ -103,7 +103,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 次のスキーマを作成します。

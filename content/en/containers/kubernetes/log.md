@@ -33,7 +33,7 @@ The Docker API is optimized to get logs from one container at a time; when there
 In order to start collecting your application logs you must be [running the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
 
 {{< tabs >}}
-{{% tab "DaemonSet" %}}
+{{< tab "DaemonSet" >}}
 
 **Note**: This option is not supported on Windows. Use the Helm option instead.
 
@@ -110,8 +110,8 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 When the agent is running with a non-root user, it cannot directly read the log files contained in `/var/lib/docker/containers`. In this case, it is necessary to mount the docker socket in the agent container so that it can fetch the container logs from the docker daemon.
 
 [1]: /agent/docker/?tab=standard#ignore-containers
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 To enable log collection with Helm, update your [datadog-values.yaml][1] file with the following log collection configuration, then upgrade your Datadog Helm chart:
 
@@ -147,8 +147,8 @@ datadog:
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 Update your `datadog-agent.yaml` manifest with:
 
@@ -184,7 +184,7 @@ agent:
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Warning**: When running an unprivileged installation, the agent needs to be able to read the log files in `/var/log/pods`.
@@ -217,7 +217,7 @@ Each tab in sections below shows a different way to apply integration templates 
 **Note**: When configuring the `service` value through pod annotations, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][4] documentation.
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 Integration templates can be stored in your Kubernetes pod annotations. With Autodiscovery, the Agent detects if it's running on Kubernetes and automatically searches all pod annotations for integration templates.
 
@@ -260,8 +260,8 @@ spec:
 
 **Note**: If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
 
-{{% /tab %}}
-{{% tab "File" %}}
+{{< /tab >}}
+{{< tab "File" >}}
 
 Storing templates as local files and mounting them inside the containerized Agent doesn't require an external service or a specific orchestration platform. The downside is that you need to restart your Agent containers each time you change, add, or remove templates. The Agent looks for Autodiscovery templates in the mounted `/conf.d` directory.
 
@@ -289,8 +289,8 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
 [1]: /agent/guide/ad_identifiers/
-{{% /tab %}}
-{{% tab "ConfigMap" %}}
+{{< /tab >}}
+{{< tab "ConfigMap" >}}
 
 On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
 
@@ -315,8 +315,8 @@ See the [Autodiscovery Container Identifiers][3] documentation for information o
 [1]: /agent/kubernetes/integrations/#configmap
 [2]: /agent/kubernetes/integrations/
 [3]: /agent/guide/ad_identifiers/
-{{% /tab %}}
-{{% tab "Key-value store" %}}
+{{< /tab >}}
+{{< tab "Key-value store" >}}
 
 Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources. To use a key-value store, configure it in the Agent `datadog.yaml` configuration file and mount this file inside the containerized Agent. Alternatively, pass your key-value store as environment variables to the containerized Agent.
 
@@ -371,8 +371,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 [1]: /integrations/consul/
 [2]: /agent/guide/agent-commands/
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 You can customize logs collection per integration within `confd`. This method mounts the desired configuration onto the Agent container.
 
@@ -390,13 +390,13 @@ You can customize logs collection per integration within `confd`. This method mo
         <LOGS_CONFIG>
   ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Examples - Datadog Redis integration
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
 
@@ -417,8 +417,8 @@ spec:
         - containerPort: 6379
 ```
 
-{{% /tab %}}
-{{% tab "ConfigMap" %}}
+{{< /tab >}}
+{{< tab "ConfigMap" >}}
 
 The following ConfigMap defines the integration template for `redis` containers with the `source` and `service` attributes for collecting logs:
 
@@ -458,8 +458,8 @@ In the manifest, define the `volumeMounts` and `volumes`:
 # [...]
 ```
 
-{{% /tab %}}
-{{% tab "Key-value store" %}}
+{{< /tab >}}
+{{< tab "Key-value store" >}}
 
 The following etcd commands create a Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
 
@@ -472,8 +472,8 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example, `redis` OR `redis:latest`.
 
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 The following configuration defines the integration template for Redis containers with the `source` and `service` attributes for collecting logs:
   ```yaml
@@ -488,7 +488,7 @@ The following configuration defines the integration template for Redis container
 
 **Note**: The above configuration collects only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Examples - Log collection from file configured in an annotation

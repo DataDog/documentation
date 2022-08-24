@@ -30,7 +30,7 @@ By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`.
 In Agent v6 and v7, the `launchctl` service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. Alternatively, lifecycle commands can also be managed through the systray app, and other commands can be executed with the web GUI.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Description                        | Command                                              |
 |------------------------------------|------------------------------------------------------|
@@ -43,8 +43,8 @@ In Agent v6 and v7, the `launchctl` service manager provided by the operating sy
 | Display command usage              | `datadog-agent --help`                               |
 | Run a check                        | `datadog-agent check <CHECK_NAME>`                   |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Description                        | Command                            |
 |------------------------------------|------------------------------------|
@@ -57,13 +57,13 @@ In Agent v6 and v7, the `launchctl` service manager provided by the operating sy
 | Display command usage              | _not implemented_                  |
 | Run a check                        | `datadog-agent check <CHECK_NAME>` |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 The configuration files and folders for the Agent are located in:
 
 * `~/.datadog-agent/datadog.yaml`
@@ -73,8 +73,8 @@ Configuration files for [Integrations][1]:
 * `~/.datadog-agent/conf.d/`
 
 [1]: /integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 The configuration files and folders for the Agent are located in:
 
@@ -85,7 +85,7 @@ Configuration files for [Integrations][1]:
 * `~/.datadog-agent/conf.d/`
 
 [1]: /integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Troubleshooting

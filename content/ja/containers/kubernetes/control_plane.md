@@ -51,7 +51,7 @@ API サーバーインテグレーションは自動的に構成されます。D
 ホストにある Etcd 証明書への読み取りアクセスを提供することにより、Datadog Agent チェックは Etcd と通信し、Etcd メトリクスの収集を開始できます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -88,8 +88,8 @@ agents:
     operator: Exists
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -147,7 +147,7 @@ data:
         tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Controller Manager と Scheduler
@@ -161,7 +161,7 @@ Controller Manager インスタンスと Scheduler インスタンスの安全�
 安全なポートにより、認証と承認が可能になり、Control Plane コンポーネントを保護できます。Datadog Agent は、安全なポートをターゲットにすることで、Controller Manager と Scheduler のメトリクスを収集できます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -214,8 +214,8 @@ agents:
     operator: Exists
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -295,7 +295,7 @@ data:
         bearer_token_auth: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注:**
@@ -374,7 +374,7 @@ oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/na
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 ```yaml
 ...
@@ -393,8 +393,8 @@ clusterChecksRunner:
       mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -418,7 +418,7 @@ spec:
           mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -506,7 +506,7 @@ Etcd サービスと通信するには証明書が必要で、これはホスト
 **注**: またマウントは、Agent にパッケージ化されている Etcd チェックの自動コンフィギュレーションファイルを無効化するために含まれています。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 ```yaml
 ...
@@ -525,8 +525,8 @@ clusterChecksRunner:
       mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -550,7 +550,7 @@ spec:
             mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 このサービスに直接行った編集は永続的ではないため、Etcd サービスのコピーを作成します。
@@ -699,7 +699,7 @@ spec:
 以下のコンフィギュレーションに基づき、マニフェストで Datadog Agent をデプロイします。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -728,8 +728,8 @@ agents:
     operator: Exists
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -767,7 +767,7 @@ spec:
       clusterChecksEnabled: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -816,7 +816,7 @@ Etcd は Kubernetes 外の Docker で実行され、Etcd サービスとの通�
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -845,8 +845,8 @@ agents:
     operator: Exists
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -884,7 +884,7 @@ spec:
       clusterChecksEnabled: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

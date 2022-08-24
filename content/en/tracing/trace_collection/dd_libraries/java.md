@@ -40,7 +40,7 @@ Follow the [Quickstart instructions][3] within the Datadog app for the best expe
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
-{{% tab "Containers" %}}
+{{< tab "Containers" >}}
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
@@ -79,15 +79,15 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 {{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
+{{< /tab >}}
+{{< tab "AWS Lambda" >}}
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 
 
 [1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
+{{< /tab >}}
+{{< tab "Other Environments" >}}
 
 Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
@@ -99,7 +99,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 [4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Instrument Your Application
@@ -139,7 +139,7 @@ Additional [configuration options](#configuration) are described below.
 Use the documentation for your application server to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
 {{< tabs >}}
-{{% tab "Spring Boot" %}}
+{{< tab "Spring Boot" >}}
 
 If your app is called `my_app.jar`, create a `my_app.conf`, containing:
 
@@ -151,8 +151,8 @@ For more information, see the [Spring Boot documentation][1].
 
 
 [1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
-{{% /tab %}}
-{{% tab "Tomcat" %}}
+{{< /tab >}}
+{{< tab "Tomcat" >}}
 
 Open your Tomcat startup script file, for example `setenv.sh` on Linux, and add:
 
@@ -167,8 +167,8 @@ set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
 If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
-{{% /tab %}}
-{{% tab "JBoss" %}}
+{{< /tab >}}
+{{< tab "JBoss" >}}
 
 - In standalone mode:
 
@@ -196,8 +196,8 @@ For more details, see the [JBoss documentation][1].
 
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
-{{% /tab %}}
-{{% tab "Jetty" %}}
+{{< /tab >}}
+{{< tab "Jetty" >}}
 
 If you use `jetty.sh` to start Jetty as a service, edit it to add:
 
@@ -211,8 +211,8 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-{{% /tab %}}
-{{% tab "WebSphere" %}}
+{{< /tab >}}
+{{< tab "WebSphere" >}}
 
 In the administrative console:
 
@@ -228,7 +228,7 @@ In the administrative console:
 For additional details and options, see the [WebSphere docs][1].
 
 [1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note**

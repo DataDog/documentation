@@ -29,7 +29,7 @@ Pour configurer la solution Real User Monitoring (RUM) de Datadog :
 Après avoir ajouté [`@datadog/browser-rum`][4] à votre fichier `package.json`, lancez la bibliothèque avec :
 
 {{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< tab "Site américain de Datadog" >}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -42,8 +42,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /tab >}}
+{{< tab "Site européen de Datadog" >}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -56,7 +56,7 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Configuration via bundle
@@ -64,7 +64,7 @@ datadogRum.init({
 Collez l'extrait de code généré dans le tag head (avant tous les autres tags du script) de toutes les pages HTML que vous souhaitez surveiller dans votre application. Lorsque le tag de script de niveau plus élevé est intégré et synchronisé, la solution RUM de Datadog peut recueillir toutes les données de performance et les erreurs.
 
 {{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< tab "Site américain de Datadog" >}}
 
 ```html
 <script
@@ -81,8 +81,8 @@ Collez l'extrait de code généré dans le tag head (avant tous les autres tags 
 </script>
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /tab >}}
+{{< tab "Site européen de Datadog" >}}
 
 ```html
 <script
@@ -99,7 +99,7 @@ Collez l'extrait de code généré dans le tag head (avant tous les autres tags 
 </script>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque** : le check `window.DD_RUM` est utilisé pour éviter tout problème si le chargement du SDK RUM échoue.

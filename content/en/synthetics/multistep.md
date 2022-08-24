@@ -66,16 +66,16 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    {{< tabs >}}
 
-   {{% tab "Request Options" %}}
+   {{< tab "Request Options" >}}
 
    * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
    * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Authentication" %}}
+   {{< tab "Authentication" >}}
 
    * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
@@ -84,34 +84,34 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
    * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.
    For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Query Parameters" %}}
+   {{< tab "Query Parameters" >}}
 
    * **Encode parameters**: Add the name and value of query parameters that require encoding. 
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Request Body" %}}
+   {{< tab "Request Body" >}}
 
    * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Proxy" %}}
+   {{< tab "Proxy" >}}
 
    * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
    * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
 
-   {{% /tab %}}
+   {{< /tab >}}
   
-   {{% tab "Privacy" %}}
+   {{< tab "Privacy" >}}
 
    * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Data Security][1].
 
 [1]: /data_security/synthetics
-   {{% /tab %}}
+   {{< /tab >}}
 
    {{< /tabs >}}
 

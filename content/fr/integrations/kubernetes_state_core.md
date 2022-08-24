@@ -52,7 +52,7 @@ Le check Kubernetes State Metrics Core est inclus dans l'image de l'[Agent de cl
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Ajoutez ce qui suit dans votre fichier `values.yaml` Helm :
 
@@ -65,8 +65,8 @@ datadog:
 ...
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 Pour activer le check `kubernetes_state_core`, le paramètre `spec.features.kubeStateMetricsCore.enabled` doit être défini sur `true` dans la ressource DatadogAgent :
 
@@ -87,7 +87,7 @@ spec:
 
 Remarque : l'Operator Datadog 0.7.0 ou ultérieur est requis.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Migration de kubernetes_state à kubernetes_state_core
@@ -140,7 +140,7 @@ Le check Kubernetes State Metrics Core n'est pas rétrocompatible. Veillez à li
 : Dans `kubernetes_state`, la valeur du tag `kube_job` correspond au nom de `CronJob` si le `Job` appartenait à `CronJob`. Si ce n'est pas le cas, la valeur du tag correspond au nom de `Job`. Dans `kubernetes_state_core`, la valeur du tag `kube_job` correspond toujours au nom de `Job`, et une nouvelle clé de tag `kube_cronjob` est ajoutée au nom de `CronJob` en tant que valeur de tag. En cas de migration vers `kubernetes_state_core`, il est recommandé d'utiliser le nouveau tag ou `kube_job:foo*`, en remplaçant `foo` par le nom de `CronJob`, pour les filtres de requête.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Activez `kubeStateMetricsCore` dans votre fichier Helm `values.yaml` pour faire en sorte que l'Agent ignore le fichier de configuration automatique de l'ancien check `kubernetes_state`. L'objectif est d'éviter que les deux checks soient exécutés simultanément.
 
@@ -158,7 +158,7 @@ datadog:
 ...
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque importante :** le check Kubernetes State Metrics Core est une alternative à l'ancien check `kubernetes_state`. Datadog vous conseille de ne pas activer les deux checks simultanément pour garantir la cohérence des métriques.

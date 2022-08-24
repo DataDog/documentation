@@ -23,7 +23,7 @@ Datadog で [Watchdog モニター][2]を作成するには、メインナビゲ
 このセクションでは、**APM** または **Infrastructure** ストーリーから選択します。
 
 {{< tabs >}}
-{{% tab "APM" %}}
+{{< tab "APM" >}}
 
 Watchdog がシステムのサービスまたはその子リソースの異常な動作を検出すると、APM ストーリーが作成されます。
 
@@ -36,8 +36,8 @@ Watchdog がシステムのサービスまたはその子リソースの異常�
 [1]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /ja/tracing/visualization/service/
 [3]: /ja/tracing/visualization/resource/
-{{% /tab %}}
-{{% tab "Infrastructure" %}}
+{{< /tab >}}
+{{< tab "Infrastructure" >}}
 
 インフラストラクチャー全体のストーリーには、次のインテグレーションに関する問題が含まれる場合があります。
 
@@ -63,7 +63,7 @@ Watchdog がシステムのサービスまたはその子リソースの異常�
 [7]: /ja/integrations/amazon_elb/
 [8]: /ja/integrations/amazon_cloudfront/
 [9]: /ja/integrations/amazon_dynamodb/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Notifications

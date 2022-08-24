@@ -68,7 +68,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -85,8 +85,8 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -101,7 +101,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 **注**: コンテナ化された Agent から `/etc/nagios3/nagios.cfg` ファイルにアクセスして Datadog-Nagios インテグレーションを有効化できます。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

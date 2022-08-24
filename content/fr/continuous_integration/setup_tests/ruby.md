@@ -49,7 +49,7 @@ Consultez la [documentation relative à l'installation du traceur Ruby][2] pour 
 ## Instrumenter vos tests
 
 {{< tabs >}}
-{{% tab "Cucumber" %}}
+{{< tab "Cucumber" >}}
 
 L'intégration Cucumber trace les exécutions de scénarios et d'étapes à l'aide du framework `cucumber`.
 
@@ -80,8 +80,8 @@ Exécutez normalement vos tests, en spécifiant l'environnement concerné (par e
 DD_ENV=ci bundle exec rake cucumber
 ```
 
-{{% /tab %}}
-{{% tab "RSpec" %}}
+{{< /tab >}}
+{{< tab "RSpec" >}}
 
 L'intégration RSpec trace toutes les exécutions d'exemples et de groupes d'exemples lors de l'utilisation du framework de test `rspec`.
 
@@ -112,7 +112,7 @@ Exécutez normalement vos tests, en spécifiant l'environnement concerné (par e
 DD_ENV=ci bundle exec rake spec
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Paramètres de configuration

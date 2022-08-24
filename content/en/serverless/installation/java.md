@@ -28,7 +28,7 @@ aliases:
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{< tab "Datadog CLI" >}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
@@ -88,8 +88,8 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
@@ -119,8 +119,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Container image" %}}
+{{< /tab >}}
+{{< tab "Container image" >}}
 
 1. Install the Datadog Lambda Extension
 
@@ -145,8 +145,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 
 1. Install the Datadog Tracer
 
@@ -190,7 +190,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## What's next?

@@ -35,7 +35,7 @@ title: クラスターチェックランナー
 次に、[Datadog Operator][4] または [Helm][5] を使用してクラスターチェックランナーをデプロイします。
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{< tab "Operator" >}}
 
 Operator を使用することで、[この例][1]にあるような単一のマニフェストでこれらのリソースすべてをローンチおよび管理することができます。
 
@@ -56,8 +56,8 @@ Datadog Operator についての詳細は [Datadog Operator リポジトリ][2] 
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-dca-clusterchecksrunner.yaml
 [2]: https://github.com/DataDog/datadog-operator
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 以下のように、チャートの関連するセクションを更新してクラスターチェック、Cluster Agent, クラスターチェックランナーを同時に有効化することができます。
 
@@ -75,7 +75,7 @@ Datadog Operator についての詳細は [Datadog Operator リポジトリ][2] 
 ```
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 同じノードに複数のクラスターチェックランナーが適用されないよう、`podAntiAffinity` を使用します。

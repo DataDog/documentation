@@ -51,7 +51,7 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 次の手順でカスタムロールを作成します。
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 カスタムロールを作成するには
 
@@ -68,20 +68,20 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 [1]: https://app.datadoghq.com/access/roles
 [2]: /ja/account_management/rbac/permissions/
 [3]: /ja/account_management/users/#edit-a-user-roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [Datadog ロール作成 API のドキュメント][1]で、ロールの作成方法の例をご紹介しています。
 
 
 [1]: /ja/api/v2/roles/#create-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロールを更新する
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 カスタムロールを編集するには
 
@@ -97,20 +97,20 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 
 [1]: https://app.datadoghq.com/access/roles
 [2]: /ja/account_management/rbac/permissions/
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [Datadog ロール作成 API のドキュメント][1]で、ロールの更新方法の例をご紹介しています。
 
 
 [1]: /ja/api/v2/roles/#update-a-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロールを削除する
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 カスタムロールを削除するには
 
@@ -126,14 +126,14 @@ Datadog アプリケーション、[Datadog ロール API][6]、または SAML �
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [Datadog ロール作成 API のドキュメント][1]で、ロールの削除方法の例をご紹介しています。
 
 
 [1]: /ja/api/v2/roles/#delete-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ダッシュボードおよびモニターへのアクセスを制限

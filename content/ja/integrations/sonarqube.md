@@ -164,7 +164,7 @@ instances:
 ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -237,8 +237,8 @@ instances:
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.sonarqube.org/latest/instance-administration/system-info/
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -256,7 +256,7 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

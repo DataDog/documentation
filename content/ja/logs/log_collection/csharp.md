@@ -41,7 +41,7 @@ Datadog は、[カスタムパース規則][1]の使用を避け、ログを JSO
 ### ロガーの構成
 
 {{< tabs >}}
-{{% tab "Serilog" %}}
+{{< tab "Serilog" >}}
 
 他の多くの .NET のライブラリと同様に、Serilog は、ファイル、コンソールなどに診断ログを提供します。洗練された API を備えています。また、最近の .NET プラットフォーム間で移植可能です。
 
@@ -104,8 +104,8 @@ log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedM
 これで、[Agent を使用してログファイルを監視][1]し、ログを Datadog アプリケーションに送信できます
 
 [1]: /ja/agent/logs/?tab=tailfiles
-{{% /tab %}}
-{{% tab "NLog" %}}
+{{< /tab >}}
+{{< tab "NLog" >}}
 
 NLog は、.NET 用ログプラットフォームで、ログルーティング機能とログ管理機能に優れています。アプリケーションのサイズや複雑さに関係なく、高品質なアプリケーションログを生成して管理できます。
 
@@ -171,8 +171,8 @@ namespace Datadog
 これで、[Agent を使用してログファイルを監視][1]し、ログを Datadog アプリケーションに送信できます。
 
 [1]: /ja/agent/logs/?tab=tailfiles
-{{% /tab %}}
-{{% tab "Log4Net" %}}
+{{< /tab >}}
+{{< tab "Log4Net" >}}
 Log4Net は、Log4j から派生した .NET 用ログプラットフォームで、ログルーティング機能とログ管理機能に優れています。アプリケーションのサイズや複雑さに関係なく、高品質なアプリケーションログを生成して管理できます。
 
 インストールするには、パッケージマネージャーコンソールで、次のコマンドを実行します。
@@ -264,7 +264,7 @@ JSON でログを記録する方がメリットが多いですが、未加工の
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ログとトレースにおけるサービスを接続

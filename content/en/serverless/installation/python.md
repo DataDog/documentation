@@ -25,7 +25,7 @@ aliases:
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{< tab "Datadog CLI" >}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
@@ -86,8 +86,8 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
@@ -117,8 +117,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
@@ -162,8 +162,8 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
@@ -203,8 +203,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Container Image" %}}
+{{< /tab >}}
+{{< tab "Container Image" >}}
 
 1. Install the Datadog Lambda Library
 
@@ -243,8 +243,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
 
@@ -342,7 +342,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://aws.github.io/chalice/
 [9]: https://aws.github.io/chalice/topics/middleware.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## What's next?

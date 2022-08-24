@@ -27,20 +27,20 @@ Datadog Agent 7.35.0 or higher is required.
 To map telemetry data with your source code:
 
 {{< tabs >}}
-{{% tab "GitHub" %}}
+{{< tab "GitHub" >}}
 
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
 2. Install Datadog's [GitHub Apps integration][1] to display inline source code snippets.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/github-apps
-{{% /tab %}}
-{{% tab "Other Git Providers" %}}
+{{< /tab >}}
+{{< tab "Other Git Providers" >}}
 
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
 2. Upload metadata about your git repository by running [`datadog-ci git-metadata upload`][1] in your CI pipeline.
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Tag your telemetry
@@ -48,7 +48,7 @@ To map telemetry data with your source code:
 To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags.
 
 {{< tabs >}}
-{{% tab "Docker Runtime" %}}
+{{< tab "Docker Runtime" >}}
 
 <div class="alert alert-warning">
 This approach requires Docker, or containerd >= 1.5.6. For other container setups, see the "Other" section.
@@ -64,8 +64,8 @@ docker build . \
 ```
 
 [1]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 If you use Kubernetes, tag your deployed pod with a pod annotation using [Datadog's Tag Autodiscovery][1]:
 
@@ -76,8 +76,8 @@ ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.reposit
 The git commit SHA and repository URL are added to your telemetry.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
-{{% /tab %}}
-{{% tab "Other" %}}
+{{< /tab >}}
+{{< tab "Other" >}}
 
 For non-containerized or unsupported environments, manually tag your traces, spans, and profiles with the git commit SHA and repository URL.
 
@@ -88,21 +88,21 @@ export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_U
 ./my-application start
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Configure repositories
 
 {{< tabs >}}
-{{% tab "GitHub" %}}
+{{< tab "GitHub" >}}
 
 If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][1] in the [GitHub Apps integration tile][2] in order to link your telemetry to your source code.
 When specifying your permissions in the integration tile, enable Datadog read permissions to Contents.
 
 [1]: https://docs.datadoghq.com/integrations/github_apps/
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
-{{% /tab %}}
-{{% tab "Other Git Providers" %}}
+{{< /tab >}}
+{{< tab "Other Git Providers" >}}
 
 To link telemetry to your source code, Datadog collects information for every commit SHA from your git repository with the [`datadog-ci git-metadata upload`][1] command.
 
@@ -121,7 +121,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ```
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Links to Git

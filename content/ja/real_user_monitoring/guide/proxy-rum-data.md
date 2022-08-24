@@ -18,7 +18,7 @@ RUM ブラウザ SDK は、プロキシ経由でリクエストを送信する�
 `proxyUrl` [初期化パラメーター][1]を設定すると、すべての RUM データは指定した URL に POST メソッド (例: `https://www.proxy.com/foo`) で送信されます。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
@@ -31,8 +31,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```html
 <script>
  (function(h,o,u,n,d) {
@@ -49,8 +49,8 @@ datadogRum.init({
   })
 </script>
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```javascript
 window.DD_RUM &&
@@ -61,7 +61,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## プロキシ設定

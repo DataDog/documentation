@@ -99,7 +99,7 @@ Starting with [version 2.16.0][4], with the `actionNameAttribute` initialization
 Custom actions are user actions declared and sent manually by using the `addAction` API. They are used to send information relative to an event occurring during a user journey. In the following example, the RUM Browser SDK collects a visitor's cart data when they click the checkout button. The number of items within the cart, the list of items, and how much the cart is worth overall are collected.
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -117,8 +117,8 @@ datadogRum.addAction('checkout', {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
@@ -136,8 +136,8 @@ DD_RUM.onReady(function() {
     });
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```javascript
 window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
@@ -154,7 +154,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

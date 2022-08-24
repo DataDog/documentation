@@ -53,7 +53,7 @@ title: Configurer la surveillance sans serveur
 Associez entre elles les données de télémétrie Datadog à l'aide de tags réservés (`env`, `service` et `version`) et personnalisés. Ces tags vous permettent d'explorer facilement vos métriques, traces et logs. Ajoutez les paramètres supplémentaires ci-dessous en fonction de la méthode d'installation que vous avez suivie.
 
 {{< tabs >}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+{{< tab "Interface de ligne de commande Datadog" >}}
 
 Vérifiez que vous utilisez la dernière version de l'[interface de ligne de commande Datadog][1] et exécutez la commande `datadog-ci lambda instrument` en spécifiant les arguments supplémentaires pertinents. Exemple :
 
@@ -67,8 +67,8 @@ datadog-ci lambda instrument \
 ```
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 Vérifiez que vous utilisez la dernière version du [plug-in Serverless Datadog][1] et appliquez les tags à l'aide des paramètres `env`, `service`, `version` et `tags`. Exemple :
 
@@ -85,8 +85,8 @@ custom:
 Par défaut, si vous ne définissez pas `env` et `service`, le plug-in utilise automatiquement les valeurs `stage` et `service` de la définition de l'application sans serveur. Pour désactiver cette fonctionnalité, définissez `enableTags` sur `false`.
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 Vérifiez que vous utilisez la dernière version de la [macro Serverless Datadog][1] et appliquez les tags à l'aide des paramètres `env`, `service`, `version` et `tags`. Exemple :
 
@@ -103,8 +103,8 @@ Transform:
 ```
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/macro
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 Vérifiez que vous utilisez la dernière version du [CDK Construct sans serveur Datadog][1] et appliquez les tags à l'aide des paramètres `env`, `service`, `version` et `tags`. Exemple :
 
@@ -120,8 +120,8 @@ datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
 ```
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
-{{% /tab %}}
-{{% tab "Autres" %}}
+{{< /tab >}}
+{{< tab "Autres" >}}
 
 Si vous recueillez des données de télémétrie à partir de vos fonctions Lambda à l'aide de l'[extension Lambda Datadog][1], définissez les variables d'environnement suivantes sur vos fonctions Lambda. Exemple :
 - DD_ENV : dev
@@ -133,7 +133,7 @@ Si vous recueillez des données de télémétrie à partir de vos fonctions Lamb
 
 [1]: /fr/serverless/libraries_integrations/extension/
 [2]: /fr/serverless/libraries_integrations/forwarder/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Datadog peut également enrichir les données de télémétrie recueillies à l'aide de tags de ressource AWS existants définis sur vos fonctions Lambda, avec un retard de quelques minutes.
@@ -151,7 +151,7 @@ Datadog peut [recueillir et visualiser les charges utiles des requêtes et répo
 Cette fonctionnalité est désactivée par défaut. Suivez les instructions ci-dessous pour la méthode d'installation que vous avez suivie.
 
 {{< tabs >}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+{{< tab "Interface de ligne de commande Datadog" >}}
 
 Vérifiez que vous utilisez la dernière version de l'[interface de ligne de commande Datadog][1] et exécutez la commande `datadog-ci lambda instrument` en spécifiant l'argument supplémentaire `--capture-lambda-payload`. Exemple :
 
@@ -162,8 +162,8 @@ datadog-ci lambda instrument \
 ```
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 Vérifiez que vous utilisez la dernière version du [plug-in Serverless Datadog][1] et définissez `captureLambdaPayload` sur `true`. Exemple :
 
@@ -175,8 +175,8 @@ custom:
 ```
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 Vérifiez que vous utilisez la dernière version de la [macro Serverless Datadog][1] et définissez le paramètre `captureLambdaPayload` sur `true`. Exemple :
 
@@ -190,8 +190,8 @@ Transform:
 ```
 
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/macro
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 Vérifiez que vous utilisez la dernière version du [CDK Construct sans serveur Datadog][1] et définissez le paramètre `captureLambdaPayload` sur `true`. Exemple :
 
@@ -204,12 +204,12 @@ datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
 ```
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
-{{% /tab %}}
-{{% tab "Autres" %}}
+{{< /tab >}}
+{{< tab "Autres" >}}
 
 Définissez la variable d'environnement `DD_CAPTURE_LAMBDA_PAYLOAD` sur `true` sur vos fonctions Lambda.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Pour éviter d'envoyer à Datadog des données sensibles dans les objets JSON des requêtes ou réponses, vous pouvez nettoyer certains paramètres.
@@ -312,7 +312,7 @@ Si vous ne souhaitez plus recueillir de logs à l'aide de la fonction Lambda du 
 Si vous ne souhaitez plus recueillir de logs à l'aide de l'extension Lambda Datadog, suivez les instructions ci-dessous pour la méthode d'installation que vous avez suivie :
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{< tab "Framework Serverless" >}}
 
 ```yaml
 custom:
@@ -321,8 +321,8 @@ custom:
     enableDDLogs: false
 ```
 
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 ```yaml
 Transform:
@@ -333,8 +333,8 @@ Transform:
       enableDDLogs: false
 ```
 
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -344,12 +344,12 @@ const datadog = new Datadog(this, "Datadog", {
 datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
 ```
 
-{{% /tab %}}
-{{% tab "Autres" %}}
+{{< /tab >}}
+{{< tab "Autres" >}}
 
 Définissez la variable d'environnement `DD_SERVERLESS_LOGS_ENABLED` sur `false` sur vos fonctions Lambda.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Parser et transformer des logs
@@ -383,15 +383,15 @@ Si vous avez besoin de nettoyer les attributs de vos traces pour des raisons de 
 La collecte de traces via l'extension Lambda Datadog est activée par défaut. Si vous ne souhaitez pas recueillir de traces à partir de vos fonctions Lambda, suivez les instructions ci-dessous :
 
 {{< tabs >}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+{{< tab "Interface de ligne de commande Datadog" >}}
 
 ```sh
 datadog-ci lambda instrument \
     --tracing false
     # … autres arguments requis, comme le nom des fonctions
 ```
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 ```yaml
 custom:
@@ -400,8 +400,8 @@ custom:
     enableDDTracing: false
 ```
 
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 ```yaml
 Transform:
@@ -412,8 +412,8 @@ Transform:
       enableDDTracing: false
 ```
 
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -423,12 +423,12 @@ const datadog = new Datadog(this, "Datadog", {
 datadog.addLambdaFunctions([<FONCTIONS_LAMBDA>]);
 ```
 
-{{% /tab %}}
-{{% tab "Autres" %}}
+{{< /tab >}}
+{{< tab "Autres" >}}
 
 Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `false` sur vos fonctions Lambda.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Associer vos logs à vos traces
@@ -461,7 +461,7 @@ Si vous utilisez un runtime ou un logger personnalisé qui n'est pas pris en cha
 Grâce à l'[intégration du code source Datadog][21], vous pouvez associer vos données de télémétrie (comme vos stack traces) au code source de vos fonctions Lambda dans GitHub. Suivez les instructions ci-dessous pour activer cette fonctionnalité. **Remarque** : vous devez procéder au déploiement depuis un référentiel Git local qui n'est ni « dirty » ni en avance par rapport à un référentiel distant.
 
 {{< tabs >}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+{{< tab "Interface de ligne de commande Datadog" >}}
 
 Exécutez `datadog-ci lambda instrument` avec `--source-code-integration true` pour envoyer automatiquement des métadonnées Git au répertoire local actuel et ajouter les tags requis à vos fonctions Lambda.
 
@@ -481,8 +481,8 @@ datadog-ci lambda instrument \
     --source-code-integration true
     # … autres arguments requis, comme le nom des fonctions
 ```
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 Lorsque `enableSourceCodeIntegration` est défini sur `true`, le plug-in Serverless Datadog envoie automatiquement les métadonnées Git au répertoire local actuel et ajoute les tags requis à vos fonctions Lambda.
 
@@ -497,8 +497,8 @@ custom:
     enableSourceCodeIntegration: true # valeur par défaut : true
 ```
 
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 Remplacez votre fonction d'initialisation par ce qui suit pour passer la valeur gitHash à la pile CDK :
 
@@ -526,8 +526,8 @@ export class ExampleStack extends cdk.Stack {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Autres" %}}
+{{< /tab >}}
+{{< tab "Autres" >}}
 
 1. Définissez la variable d'environnement `DD_TAGS="git.commit.sha:<HASH_COMMIT_GIT>,git.repository_url=<URL_RÉFÉRENTIEL>"` sur vos fonctions Lambda.
 2. Exécutez [datadog-ci git-metadata upload][1] dans votre pipeline de CI pour importer les métadonnées Git.
@@ -535,7 +535,7 @@ export class ExampleStack extends cdk.Stack {
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Envoyer des métriques custom
@@ -581,7 +581,7 @@ Pour procéder à la migration, comparez les [instructions d'installation via l'
 **Remarque** : Datadog vous conseille de migrer en premier vos applications dev et staging, puis de migrer vos applications de production une par une.
 
 {{< tabs >}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+{{< tab "Interface de ligne de commande Datadog" >}}
 
 1. Installez la dernière version de `@datadog/datadog-ci`.
 2. Mettez à jour l'argument `--layer-version` en le définissant sur la dernière version de votre runtime.
@@ -590,8 +590,8 @@ Pour procéder à la migration, comparez les [instructions d'installation via l'
 5. Supprimez l'argument `--forwarder`.
 6. Si vous avez configuré l'intégration Datadog/AWS afin d'abonner automatiquement le Forwarder aux groupes de logs Lambda, désactivez ce comportement après avoir migré l'_ensemble_ de vos fonctions Lambda dans la région en question.
 
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 1. Installez la dernière version de `serverless-plugin-datadog`. L'extension Lambda Datadog est alors automatiquement installée, sauf si vous définissez `addExtension` sur `false`.
 2. Définissez les paramètres requis `site` et `apiKeySecretArn`.
@@ -599,8 +599,8 @@ Pour procéder à la migration, comparez les [instructions d'installation via l'
 4. Supprimez le paramètre `forwarderArn`, sauf si vous souhaitez continuer à utiliser le Forwarder pour recueillir des logs à partir de ressources non Lambda et si vous avez défini `subscribeToApiGatewayLogs`, `subscribeToHttpApiLogs` ou `subscribeToWebsocketLogs` sur `true`.
 5. Si vous avez configuré l'intégration Datadog/AWS afin d'abonner automatiquement le Forwarder aux groupes de logs Lambda, désactivez ce comportement après avoir migré l'_ensemble_ de vos fonctions Lambda dans la région en question.
 
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 1. Mettez à jour la pile CloudFormation de `datadog-serverless-macro` pour récupérer la dernière version.
 2. Définissez le paramètre `extensionLayerVersion` sur la dernière version de l'extension, à savoir `{{< latest-lambda-layer-version layer="extension" >}}`.
@@ -608,8 +608,8 @@ Pour procéder à la migration, comparez les [instructions d'installation via l'
 4. Supprimez le paramètre `forwarderArn`.
 5. Si vous avez configuré l'intégration Datadog/AWS afin d'abonner automatiquement le Forwarder aux groupes de logs Lambda, désactivez ce comportement après avoir migré l'_ensemble_ de vos fonctions Lambda dans la région en question.
 
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 1. Installez la dernière version de `datadog-cdk-constructs` ou `datadog-cdk-constructs-v2`.
 2. Définissez le paramètre `extensionLayerVersion` sur la dernière version de l'extension, à savoir `{{< latest-lambda-layer-version layer="extension" >}}`.
@@ -618,8 +618,8 @@ Pour procéder à la migration, comparez les [instructions d'installation via l'
 5. Supprimez le paramètre `forwarderArn`.
 6. Si vous avez configuré l'intégration Datadog/AWS afin d'abonner automatiquement le Forwarder aux groupes de logs Lambda, désactivez ce comportement après avoir migré l'_ensemble_ de vos fonctions Lambda dans la région en question.
 
-{{% /tab %}}
-{{% tab "Autres" %}}
+{{< /tab >}}
+{{< tab "Autres" >}}
 
 1. Installez la dernière version de la couche de la bibliothèque Lambda Datadog pour votre runtime.
 2. Installez la dernière version de l'extension Lambda Datadog.
@@ -628,7 +628,7 @@ Pour procéder à la migration, comparez les [instructions d'installation via l'
 4. Supprimez le filtre d'abonnement qui transmet des logs au Forwarder Datadog à partir du groupe de logs de votre fonction Lambda.
 5. Si vous avez configuré l'intégration Datadog/AWS afin d'abonner automatiquement le Forwarder aux groupes de logs Lambda, désactivez ce comportement après avoir migré l'_ensemble_ de vos fonctions Lambda dans la région en question.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Configurer l'extension Lambda Datadog pour effectuer des tests locaux

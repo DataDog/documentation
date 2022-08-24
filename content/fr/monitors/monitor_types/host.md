@@ -40,7 +40,7 @@ Sélectionnez les hosts à surveiller en spécifiant les hostnames ou des tags, 
 Dans cette section, utilisez les options **Check Alert** et **Cluster Alert** pour choisir entre une alerte de check ou une alerte de cluster :
 
 {{< tabs >}}
-{{% tab "Alerte de check" %}}
+{{< tab "Alerte de check" >}}
 
 Une alerte de check surveille si un host cesse de transmettre des données pendant une période donnée. Lorsque trop de temps s'écoule après l'exécution d'un check, cela peut signifier que le host ne parvient pas à transmettre de données.
 
@@ -48,8 +48,8 @@ Saisissez le nombre de minutes pendant lequel l'absence de données doit être v
 
 Si `datadog.agent.up` cesse d'envoyer un statut `OK` pendant une durée supérieure au nombre de minutes indiqué, une alerte se déclenche.
 
-{{% /tab %}}
-{{% tab "Alerte de cluster" %}}
+{{< /tab >}}
+{{< tab "Alerte de cluster" >}}
 
 Une alerte de cluster surveille si un certain pourcentage de hosts ont cessé de transmettre des données pendant une période donnée.
 
@@ -61,7 +61,7 @@ Pour configurer une alerte de cluster :
 
 Si `datadog.agent.up` cesse d'envoyer un statut `OK` pendant une durée supérieure au nombre de minutes indiqué, une alerte se déclenche.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Notifications

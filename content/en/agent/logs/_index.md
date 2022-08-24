@@ -51,7 +51,7 @@ Datadog Agent v6 can collect logs and forward them to Datadog from files, the ne
 Below are examples of custom log collection setup:
 
 {{< tabs >}}
-{{% tab "Tail files" %}}
+{{< tab "Tail files" >}}
 
 To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
@@ -64,9 +64,9 @@ logs:
 ```
 
 [1]: /agent/guide/agent-configuration-files/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "TCP/UDP" %}}
+{{< tab "TCP/UDP" >}}
 
 To gather logs from your `<APP_NAME>` application that forwards its logs to TCP port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
@@ -85,8 +85,8 @@ In the Agent version 7.31.0+, the TCP connection stays open indefinitely even wh
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 
 [1]: /agent/guide/agent-configuration-files/
-{{% /tab %}}
-{{% tab "journald" %}}
+{{< /tab >}}
+{{< tab "journald" >}}
 
 To gather logs from journald, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
@@ -100,8 +100,8 @@ Refer to the [journald integration][2] documentation for more details regarding 
 
 [1]: /agent/guide/agent-configuration-files/
 [2]: /integrations/journald/
-{{% /tab %}}
-{{% tab "Windows Events" %}}
+{{< /tab >}}
+{{< tab "Windows Events" >}}
 
 To send Windows events as logs to Datadog, add the channels to `conf.d/win32_event_log.d/conf.yaml` manually or use the Datadog Agent Manager.
 
@@ -141,7 +141,7 @@ Finally, [restart the Agent][2].
 
 [1]: /logs/log_configuration/pipelines/#integration-pipelines
 [2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 List of all available parameters for log collection:

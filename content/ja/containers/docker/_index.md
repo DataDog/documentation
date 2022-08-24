@@ -47,7 +47,7 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<ご使用の_DATADOG_API_キー>` を [Datadog API キー][10]と置き換えてください。
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{< tab "標準" >}}
 
 ```shell
 docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
@@ -63,8 +63,8 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 
 **注**: ネットワークモニタリング、セキュリティエージェント、oom_kill チェックなど system-probe が提供するいくつかの機能では、 `/etc/os-release` ファイルを `-v /etc/os-release:/host/etc/os-release:ro` でマウントする必要があります。Linux ディストリビューションに `/etc/os-release` ファイルがない場合は、 `/etc/redhat-release` や `/etc/fedora-release` などの同等のファイルをマウントしてください。
 
-{{% /tab %}}
-{{% tab "Amazon Linux" %}}
+{{< /tab >}}
+{{< tab "Amazon Linux" >}}
 
 Amazon Linux < v2 の場合:
 
@@ -88,8 +88,8 @@ ECR-Public の場合:
 docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Datadog Agent は、Windows Server 2019 (LTSC) とバージョン 1909 (SAC) でサポートされています。
 
@@ -103,8 +103,8 @@ ECR-Public の場合:
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
 ```
 
-{{% /tab %}}
-{{% tab "非特権" %}}
+{{< /tab >}}
+{{< tab "非特権" >}}
 
 (オプション) 非特権インストールを実行するには、インストールコマンドに `--group-add=<DOCKER_GROUP_ID>` を追加します。次に例を示します。
 
@@ -118,7 +118,7 @@ ECR-Public の場合:
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: Docker Compose については、[Compose と Datadog Agent][11] を参照してください。

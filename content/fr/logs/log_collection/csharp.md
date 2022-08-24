@@ -30,7 +30,7 @@ Datadog vous recommande fortement de configurer votre bibliothèque de journalis
 ## Configurer votre logger
 
 {{< tabs >}}
-{{% tab "Serilog" %}}
+{{< tab "Serilog" >}}
 
 Comme bien d'autres bibliothèques pour .NET, Serilog vous permet d'effectuer une journalisation de diagnostic dans des fichiers, la console ou d'autres emplacements. Cette approche repose sur une API épurée et est compatible avec les plateformes .NET récentes.
 
@@ -93,8 +93,8 @@ Consultez ensuite le fichier `log.json` pour voir l'événement suivant :
 [Surveillez maintenant votre fichier de log avec l'Agent][1] pour envoyer vos logs à votre application Datadog.
 
 [1]: /fr/logs/#tail-existing-files
-{{% /tab %}}
-{{% tab "NLog" %}}
+{{< /tab >}}
+{{< tab "NLog" >}}
 
 NLog est une plateforme de journalisation pour .NET dotée d'un acheminement de log riche et de fonctionnalités de gestion. Elle vous aide à générer et à gérer des logs de haute qualité pour votre application, peu importe sa taille ou sa complexité.
 
@@ -164,8 +164,8 @@ namespace Datadog
 [Surveillez maintenant votre fichier de log avec l'Agent][1] pour envoyer vos logs à votre application Datadog.
 
 [1]: /fr/logs/#tail-existing-files
-{{% /tab %}}
-{{% tab "Log4Net" %}}
+{{< /tab >}}
+{{< tab "Log4Net" >}}
 Log4Net est une plateforme de journalisation pour .NET inspirée de Log4j. Elle est dotée d'un acheminement de log riche et de fonctionnalités de gestion. Elle vous aide à générer et à gérer des logs de haute qualité pour votre application, peu importe sa taille ou sa complexité.
 
 Pour l'installer, exécutez la commande suivante dans la console de gestion de paquet :
@@ -256,7 +256,7 @@ Si, malgré les avantages de la journalisation en JSON, vous souhaitez activer l
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Associer les logs et les traces de votre service
@@ -295,7 +295,7 @@ Et voilà ! Désormais, tous vos logs seront automatiquement au format JSON com
 
 Il est possible de transmettre des logs depuis votre application vers Datadog ou directement vers l'Agent Datadog. Il ne s'agit pas de la configuration recommandée, car la gestion des problèmes de connexion ne doit pas se faire directement dans votre application, mais il peut arriver qu'il soit impossible d'enregistrer un log dans un fichier lorsque votre application est utilisée sur une machine hors d'accès.
 {{< tabs >}}
-{{% tab "Serilog" %}}
+{{< tab "Serilog" >}}
 
 Installez le [récepteur Serilog][1] de Datadog, qui envoie les événements et les logs à Datadog. Par défaut, le récepteur transfère les logs via HTTPS sur le port 443.
 Exécutez la commande suivante dans la console de gestion de paquet :
@@ -410,7 +410,7 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

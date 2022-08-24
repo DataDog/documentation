@@ -24,7 +24,7 @@ Android RUM は、ユーザーアクティビティ、画面、エラー、ネ�
 
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
        fun onResume() {
          GlobalRum.get().startView(viewKey, viewName, viewAttributes)
@@ -34,8 +34,8 @@ Android RUM は、ユーザーアクティビティ、画面、エラー、ネ�
          GlobalRum.get().stopView(viewKey, viewAttributes)
        }
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
    ```java
        public void onResume() {
             GlobalRum.get().startView(viewKey, viewName, viewAttributes);
@@ -45,27 +45,27 @@ Android RUM は、ユーザーアクティビティ、画面、エラー、ネ�
             GlobalRum.get().stopView(viewKey, viewAttributes);
        }
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 独自のパフォーマンスタイミングを追加
 
 RUM のデフォルト属性に加えて、`addTiming` API を使用して、アプリケーションが時間を費やしている場所を測定できます。タイミング測定は、現在の RUM ビューの開始を基準にしています。たとえば、ヒーロー画像が表示されるまでにかかる時間を計ることができます。
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
       fun onHeroImageLoaded() {
             GlobalRum.get().addTiming("hero_image")
       } 
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
    ```java
        public void onHeroImageLoaded() {
             GlobalRum.get().addTiming("hero_image");
        }
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 タイミングが送信されると、タイミングには `@view.custom_timings.<timing_name>` としてアクセスできるようになります (例: `@view.custom_timings.hero_image`)。RUM 分析またはダッシュボードでグラフ化する前に、[メジャーを作成](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures)する必要があります。
@@ -75,20 +75,20 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 [アクションを自動追跡する][5]ほかに、`RumMonitor#addUserAction` で特定のカスタムユーザーアクション（タップ、クリック、スクロールなど）を追跡することも可能です。継続的なアクションの追跡（リストをスクロールするユーザーの追跡）には、`RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を使用します。
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
        fun onUserInteraction() { 
             GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
        }
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
    ```java
        public void onUserInteraction() {
             GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes);
        }
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### カスタムリソース
@@ -96,7 +96,7 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 [リソースを自動追跡する][6]ほかに、メソッド（`GET`、`POST` など）を使用して、`RumMonitor#startResource` でリソースを読み込みながら特定のカスタムリソース（ネットワークリクエスト、サードパーティプロバイダ API など）を追跡することも可能です。完全に読み込まれたら `RumMonitor#stopResource` で追跡を停止し、リソースの読み込み中にエラーが発生した場合は `RumMonitor#stopResourceWithError` で停止します。
 
 {{< tabs >}} 
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
        fun loadResource() {
             GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
@@ -108,8 +108,8 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
             } 
        }
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
    ```java
        public void loadResource() {
             GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes);
@@ -121,7 +121,7 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
             }
        }
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### カスタムエラー
@@ -236,20 +236,20 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 たとえば、各フラグメントを個別のビューとして設定するには、[セットアップ][1]で以下のコンフィギュレーションを使用します。
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
        val configuration = Configuration.Builder(true, true, true, true)
         .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
         .build()
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
    ```java
        final Configuration configuration = new Configuration.Builder(true, true, true, true)
         .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
         .build();
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -263,22 +263,22 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 リソース（サードパーティプロバイダー、ネットワークリクエスト）で、最初の 1 バイトまで、またはDNS 解決などのタイミング情報を取得するには、`okHttpClient` をカスタマイズして[EventListener][8] ファクトリを追加します。
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
        val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(DatadogInterceptor())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
    ```java
        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(new DatadogInterceptor())
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロングタスクの自動追跡
@@ -286,7 +286,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 メインスレッドで長時間実行されるオペレーションは、アプリケーションの視覚的パフォーマンスとリアクティビティに影響を与えることがあります。このようなオペレーションを追跡するには、タスクを長すぎるとみなすための閾値を定義します。
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
        val config = Configuration.Builder(true, true, true, true)
         .trackLongTasks(durationThreshold)
@@ -301,8 +301,8 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build()
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
   ```java
       Configuration configuration = new Configuration.Builder(true, true, true, true)
         .trackLongTasks(durationThreshold)
@@ -317,7 +317,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build();
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## RUM イベントの変更または削除
@@ -326,7 +326,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
    ```kotlin
        val config = Configuration.Builder(true, true, true, true)
         ...
@@ -337,8 +337,8 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
         .setRumLongTaskEventMapper(rumLongTaskEventMapper)
         .build()
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
   ```java
       Configuration config = new Configuration.Builder(true, true, true, true)
         ...
@@ -350,7 +350,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
         .build();
 
    ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
    `EventMapper<T>` インターフェースを実装する場合、各イベントタイプの属性は以下のように一部のみしか変更することができません。

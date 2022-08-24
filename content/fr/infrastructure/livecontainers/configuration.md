@@ -19,7 +19,7 @@ L'Agent Datadog et l'Agent de cluster peuvent être configurés afin de récupé
 Avant d'effectuer les configurations ci-dessous pour les ressources Kubernetes des live containers, il est nécessaire d'installer au minimum la [version 7.27.0 de l'Agent][2] ainsi que la [version 1.11.0 de l'Agent de cluster][3].
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Si vous utilisez le [chart Helm Datadog][1] officiel :
 
@@ -39,8 +39,8 @@ Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de 
 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 La version 1.11.0 ou une version ultérieure de l'[Agent de cluster][1] est requise pour commencer la configuration du DaemonSet. L'Agent de cluster doit être en cours d'exécution et l'Agent doit pouvoir communiquer avec celui-ci. Consultez la section [Configuration de l'Agent de cluster][2] pour en savoir plus.
 
@@ -117,7 +117,7 @@ Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de 
 
 [1]: /fr/agent/cluster_agent/
 [2]: /fr/agent/cluster_agent/setup/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Matrice de compatibilité de la collecte de ressources
@@ -149,7 +149,7 @@ Le tableau suivant présente la liste des ressources recueillies et des versions
 La vue des ressources Kubernetes pour les live containers nécessitait auparavant au minimum la [version 7.21.1 de l'Agent][2] et la [version 1.9.0 de l'Agent de cluster][3]. Les versions minimales ont cependant été mises à jour. Pour ces anciennes versions, la configuration de DaemonSet impliquait un processus légèrement différent. Par souci de commodité, les instructions sur ce processus sont indiquées ci-dessous.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Si vous utilisez le [chart Helm Datadog][1] officiel :
 
@@ -163,8 +163,8 @@ Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de 
 [1]: https://github.com/DataDog/helm-charts
 [2]: /fr/infrastructure/livecontainers/#configuration
 [3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 L'Agent de cluster doit être en cours d'exécution et l'Agent doit pouvoir communiquer avec celui-ci. Consultez la section [Configuration de l'Agent de cluster][1] pour en savoir plus.
 
@@ -236,7 +236,7 @@ Dans certaines configurations, il arrive que l'Agent de processus et l'Agent de 
   ```
 
 [1]: /fr/agent/cluster_agent/setup/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Ajouter des tags personnalisés aux ressources
@@ -249,7 +249,7 @@ Des tags supplémentaires sont ajoutés via la variable d'environnement `DD_ORCH
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 SI vous utilisez le chart Helm officiel, ajoutez la variable d'environnement à l'Agent de processus et à l'Agent de cluster en définissant respectivement `agents.containers.processAgent.env` et `clusterAgent.env` dans [values.yaml][1].
 
@@ -270,8 +270,8 @@ SI vous utilisez le chart Helm officiel, ajoutez la variable d'environnement à 
 Déployez ensuite une nouvelle version.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 Définissez la variable d'environnement sur les conteneurs de l'Agent de processus et de l'Agent de cluster :
 
@@ -280,7 +280,7 @@ Définissez la variable d'environnement sur les conteneurs de l'Agent de process
   value: "tag1:value1 tag2:value2"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Inclure ou exclure des conteneurs

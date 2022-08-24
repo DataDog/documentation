@@ -26,7 +26,7 @@ title: Agent チェックのステータス
 Agent チェックをテストするには、次を実行します。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 ```shell
 sudo -u dd-agent datadog-agent check <チェック名>
@@ -38,8 +38,8 @@ sudo -u dd-agent datadog-agent check <チェック名>
 sudo -u dd-agent datadog-agent check <チェック名> --check-rate
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 ```shell
 sudo -u dd-agent dd-agent check <チェック名>
@@ -53,7 +53,7 @@ sudo -u dd-agent dd-agent check <チェック名>
 sudo -u dd-agent dd-agent check <チェック名> --check-rate
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 問題が続く場合は、[フレア][2]で [Datadog のサポートチーム][1]にご連絡ください。
@@ -61,7 +61,7 @@ sudo -u dd-agent dd-agent check <チェック名> --check-rate
 ## Windows
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 適切な `<CHECK_NAME>` で次のスクリプトを実行します。
 
@@ -77,8 +77,8 @@ Agent バージョン < 6.11 の場合
 %PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <チェック名>
 ```
 
-{{% /tab %}}
-{{% tab "Agent v<=5.11" %}}
+{{< /tab >}}
+{{< tab "Agent v<=5.11" >}}
 
 <mrk mid="160" mtype="seg">Datadog Agent エージェントをインストールすると、`Program Files` ディレクトリに `shell.exe` ファイルが生成されます</mrk><mrk mid="161" mtype="seg">このファイルを使用して、Agent 環境内で Python を実行できます。</mrk><mrk mid="162" mtype="seg">チェック (名前 `&lt;CHECK_NAME&gt;`) が書き込まれ、正しい場所に `.py` ファイルと `.yaml` ファイルがある場合は、shell.exe で以下を実行します。</mrk>
 
@@ -89,8 +89,8 @@ run_check('<チェック名>')
 
 これで、このチェックが返したすべてのメトリクスまたはイベントが出力されます。
 
-{{% /tab %}}
-{{% tab "Agent v>=5.12" %}}
+{{< /tab >}}
+{{< tab "Agent v>=5.12" >}}
 
 適切な `<CHECK_NAME>` で次のスクリプトを実行します。
 
@@ -102,7 +102,7 @@ run_check('<チェック名>')
 C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Systemd
@@ -110,7 +110,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 [systemd を使用するシステム][3]では、`journalctl` を使用してデバッグをサポートできます。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 次のコマンドは、Datadog Agent のステータスを表示します。
 
 ```shell
@@ -123,8 +123,8 @@ sudo systemctl status datadog-agent
 sudo journalctl -u datadog-agent.service
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 次のコマンドは、Datadog Agent のステータスを表示します。
 
 ```shell
@@ -137,7 +137,7 @@ sudo systemctl status dd-agent
 sudo journalctl -u dd-agent.service
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

@@ -45,7 +45,7 @@ Datadog Agent がクラウドワークロードセキュリティに使用する
 ## インストール
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 1. まだインストールしていない場合は、[Datadog Agent][1] (バージョン 7.27+) をインストールします。
 
@@ -71,9 +71,9 @@ Datadog Agent がクラウドワークロードセキュリティに使用する
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://docs.datadoghq.com/ja/integrations/kubernetes_audit_logs/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 Docker 環境でランタイムセキュリティ Agent と `system-probe` を起動するには、次のコマンドを使用します。
 
@@ -106,9 +106,9 @@ docker run -d --name dd-agent \
 
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Debian" %}}
+{{< tab "Debian" >}}
 
 パッケージベースのデプロイメントでは、Datadog パッケージをデプロイする必要があります。`dkpg -i datadog-agent_7....deb` を実行します。
 
@@ -128,9 +128,9 @@ systemctl restart datadog-agent
 
 変更を適用したら、セキュリティ Agent と system-probe の両方を再起動します。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Fedora/CentOS" %}}
+{{< tab "Fedora/CentOS" >}}
 
 パッケージベースのデプロイメントでは、Datadog パッケージをデプロイする必要があります。`yum/dnf install datadog-agent_7....rpm` を実行します。
 
@@ -146,7 +146,7 @@ systemctl restart datadog-agent
 
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

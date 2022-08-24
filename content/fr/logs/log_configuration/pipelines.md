@@ -42,7 +42,7 @@ Le prétraitement des logs JSON inclut une configuration par défaut qui prend e
 2. Modifiez le mapping par défaut en fonction de l'attribut réservé :
 
 {{< tabs >}}
-{{% tab "Source" %}}
+{{< tab "Source" >}}
 
 #### Attribut source
 
@@ -53,8 +53,8 @@ Si un fichier de log au format JSON comprend l'attribut `ddsource`, Datadog inte
 
 [1]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [2]: /fr/agent/docker/log/?tab=containerinstallation#examples
-{{% /tab %}}
-{{% tab "Host" %}}
+{{< /tab >}}
+{{< tab "Host" >}}
 
 #### Attribut host
 
@@ -64,8 +64,8 @@ Utilisez l'Agent Datadog ou le format RFC 5424 pour définir automatiquement la
 * `hostname`
 * `syslog.hostname`
 
-{{% /tab %}}
-{{% tab "Date" %}}
+{{< /tab >}}
+{{< tab "Date" >}}
 
 #### Attribut date
 
@@ -90,8 +90,8 @@ Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-
 
 
 [1]: /fr/logs/log_configuration/processors/#log-date-remapper
-{{% /tab %}}
-{{% tab "Message" %}}
+{{< /tab >}}
+{{< tab "Message" >}}
 
 #### Attribut message
 
@@ -103,8 +103,8 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le
 [1]: /fr/logs/explorer/
 [2]: /fr/logs/explorer/#filters-logs
 [3]: /fr/logs/log_configuration/processors/#log-message-remapper
-{{% /tab %}}
-{{% tab "Status" %}}
+{{< /tab >}}
+{{< tab "Status" >}}
 
 #### Attribut status
 
@@ -118,8 +118,8 @@ Chaque entrée de log peut spécifier un niveau de statut. Celui-ci peut est dis
 Pour remapper un statut existant dans l'attribut `status`, utilisez le [remappeur de statuts de log][1].
 
 [1]: /fr/logs/log_configuration/processors/#log-status-remapper
-{{% /tab %}}
-{{% tab "Service" %}}
+{{< /tab >}}
+{{< tab "Service" >}}
 
 #### Attribut service
 
@@ -132,8 +132,8 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le
 
 
 [1]: /fr/logs/log_configuration/processors/#service-remapper
-{{% /tab %}}
-{{% tab "Trace ID" %}}
+{{< /tab >}}
+{{< tab "Trace ID" >}}
 
 #### Attribut Trace ID
 
@@ -147,7 +147,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'
 
 [1]: /fr/tracing/connect_logs_and_traces/
 [2]: /fr/logs/log_configuration/processors/#trace-remapper
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Créer un pipeline

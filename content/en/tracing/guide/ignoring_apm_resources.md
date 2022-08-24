@@ -94,15 +94,15 @@ To use the ignore resource option correctly, the regex rule written must match w
 Depending on how you deploy, the syntax looks a little different:
 
 {{< tabs >}}
-{{% tab "datadog.yaml" %}}
+{{< tab "datadog.yaml" >}}
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Docker compose" %}}
+{{< /tab >}}
+{{< tab "Docker compose" >}}
 
 In the Datadog Agent container’s list of environment variables, add `DD_APM_IGNORE_RESOURCES` with a pattern like the example below. Docker Compose has its own [variable substitution][1] to consider when you use special characters like `$`.
 
@@ -113,8 +113,8 @@ In the Datadog Agent container’s list of environment variables, add `DD_APM_IG
 {{< /code-block >}}
 
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
-{{% /tab %}}
-{{% tab "Docker run" %}}
+{{< /tab >}}
+{{< tab "Docker run" >}}
 
 In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESOURCES`:
 
@@ -132,8 +132,8 @@ docker run -d --name datadog-agent \
               gcr.io/datadoghq/agent:latest
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Kubernetes daemonset" %}}
+{{< /tab >}}
+{{< tab "Kubernetes daemonset" >}}
 
 In the dedicated trace-agent container, add the environment variable `DD_APM_IGNORE_RESOURCES`:
 
@@ -176,8 +176,8 @@ In the dedicated trace-agent container, add the environment variable `DD_APM_IGN
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
+{{< /tab >}}
+{{< tab "Kubernetes Helm" >}}
 
 In the `traceAgent` section of the `values.yaml` file, add `DD_APM_IGNORE_RESOURCES` in the `env` section, then [spin up helm as usual][1].
 
@@ -201,8 +201,8 @@ helm install dd-agent -f values.yaml \
 {{< /code-block >}}
 
 [1]: /agent/kubernetes/?tab=helm#installation
-{{% /tab %}}
-{{% tab "AWS ECS Task Definition" %}}
+{{< /tab >}}
+{{< tab "AWS ECS Task Definition" >}}
 
 If you use AWS ECS (such as on EC2), in your Datadog Agent container definition, add the environment variable `DD_APM_IGNORE_RESOURCES` with the values such that the JSON evaluates to something like this:
 
@@ -216,7 +216,7 @@ If you use AWS ECS (such as on EC2), in your Datadog Agent container definition,
      ]
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 <div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>

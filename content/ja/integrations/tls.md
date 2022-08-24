@@ -59,7 +59,7 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -71,8 +71,8 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/tls/datadog_checks/tls/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -87,7 +87,7 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 **注**: よく知られた信頼できる CA からのものではない内部証明書を使用している場合、特定のメトリクスが Datadog にレポートされない場合があります。インテグレーションテンプレートで `tls_verify: false` を使用して、このインスタンスのすべてのメトリクスをレポートします。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

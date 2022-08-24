@@ -38,7 +38,7 @@ To make it available from _any host_, use `-p 8126:8126/tcp` instead.
 For example, the following command allows the Agent to receive traces from your host only:
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -54,8 +54,8 @@ docker run -d --cgroupns host \
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
@@ -66,7 +66,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Docker APM Agent environment variables
@@ -107,7 +107,7 @@ docker network create <NETWORK_NAME>
 Then start the Agent and the application container, connected to the network previously created:
 
 {{< tabs >}}
-{{% tab "Standard" %}}
+{{< tab "Standard" >}}
 
 ```bash
 # Datadog Agent
@@ -132,8 +132,8 @@ docker run -d --name app \
 
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 ```bash
 # Datadog Agent
@@ -154,7 +154,7 @@ docker run -d --name app \
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 This exposes the hostname `datadog-agent` in your `app` container.

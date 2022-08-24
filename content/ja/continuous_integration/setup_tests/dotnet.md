@@ -54,7 +54,7 @@ Agentless モードはベータ版です。この機能を試すには、この�
 
 {{< tabs >}}
 
-{{% tab "dotnet テスト" %}}
+{{< tab "dotnet テスト" >}}
 
 <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a> の使用によって
 
@@ -62,9 +62,9 @@ Agentless モードはベータ版です。この機能を試すには、この�
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "VSTest.Console" %}}
+{{< tab "VSTest.Console" >}}
 
 <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a> の使用によって
 
@@ -72,7 +72,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

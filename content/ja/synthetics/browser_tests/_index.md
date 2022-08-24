@@ -41,7 +41,7 @@ title: ブラウザテスト
 
   {{< tabs >}}
 
-  {{% tab "リクエストオプション" %}}
+  {{< tab "リクエストオプション" >}}
 
   クロスオリジンリソース共有 (CORS) ポリシーでテストがブロックされないようにするには、**Disable CORS** を選択します。
 
@@ -55,9 +55,9 @@ title: ブラウザテスト
 
 [1]: /ja/synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
-  {{% /tab %}}
+  {{< /tab >}}
 
-  {{% tab "証明書" %}}
+  {{< tab "証明書" >}}
 
 **Ignore server certificate error** を選択すると、サーバー証明書のエラーをスキップするようにテストが指示されます。
 
@@ -66,17 +66,17 @@ title: ブラウザテスト
 
   URL にワイルドカードを含めることができます。
 
-  {{% /tab %}}
+  {{< /tab >}}
 
-  {{% tab "プロキシ" %}}
+  {{< tab "プロキシ" >}}
 
   **Proxy URL** フィールドに、リクエストを送信するプロキシの URL を `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` として入力します。
 
   URL に[グローバル変数](#use-global-variables)を含めることができます。
 
-  {{% /tab %}}
+  {{< /tab >}}
 
-  {{% tab "Privacy" %}}
+  {{< tab "Privacy" >}}
 
   **Do not capture any screenshots for this test** を選択して、テストステップでスクリーンショットが撮影されないようにします。
 
@@ -86,7 +86,7 @@ title: ブラウザテスト
 
 [1]: /ja/synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /ja/security/synthetics
-  {{% /tab %}}
+  {{< /tab >}}
 
   {{< /tabs >}}
 

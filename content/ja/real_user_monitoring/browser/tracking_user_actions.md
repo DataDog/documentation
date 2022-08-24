@@ -99,7 +99,7 @@ RUM ライブラリは、クリックアクションの命名にさまざまな�
 カスタムアクションは、`addAction` API を使用して手動で宣言および送信されるユーザーアクションです。ユーザージャー中に発生するイベントに関連する情報の送信に使用されます。以下の例では、訪問者がチェックアウトボタンをクリックしたすると、RUM ブラウザ SDK がユーザーのカートデータを収集します。ここでは、カート内のアイテム数、アイテムリスト、カート内のアイテム総額が収集されます。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -117,8 +117,8 @@ datadogRum.addAction('checkout', {
 });
 ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
@@ -136,8 +136,8 @@ DD_RUM.onReady(function() {
     });
 })
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```javascript
 window.DD_RUM && DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
@@ -154,7 +154,7 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

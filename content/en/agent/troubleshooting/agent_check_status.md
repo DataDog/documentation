@@ -26,7 +26,7 @@ If you are experiencing issues with a given Agent Check, use these commands for 
 To test an Agent check, run:
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 ```shell
 sudo -u dd-agent datadog-agent check <CHECK_NAME>
@@ -38,8 +38,8 @@ If you want to include rate metrics, add `--check-rate` to your command, for ins
 sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 ```shell
 sudo -u dd-agent dd-agent check <CHECK_NAME>
@@ -53,7 +53,7 @@ If you want to include rate metrics, add `--check-rate` to your command, for ins
 sudo -u dd-agent dd-agent check <CHECK_NAME> --check-rate
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 If your issue continues, [reach out to the Datadog support team][1] with a [flare][2].
@@ -61,7 +61,7 @@ If your issue continues, [reach out to the Datadog support team][1] with a [flar
 ## Windows
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 Run the following script, with the proper `<CHECK_NAME>`:
 
@@ -77,8 +77,8 @@ For Agent versions <= 6.11:
 %PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
 ```
 
-{{% /tab %}}
-{{% tab "Agent v<=5.11" %}}
+{{< /tab >}}
+{{< tab "Agent v<=5.11" >}}
 
 The Agent install includes a file called `shell.exe` in your `Program Files` directory for the Datadog Agent. This file can be used to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, run the following in shell.exe:
 
@@ -89,8 +89,8 @@ run_check('<CHECK_NAME>')
 
 This outputs any metrics or events that the check returns.
 
-{{% /tab %}}
-{{% tab "Agent v>=5.12" %}}
+{{< /tab >}}
+{{< tab "Agent v>=5.12" >}}
 
 Run the following script, with the proper `<CHECK_NAME>`:
 
@@ -102,7 +102,7 @@ For example, to run the disk check:
 C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Systemd
@@ -110,7 +110,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 For [systems using systemd][3], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 The following command shows the status of the Datadog Agent.
 
 ```shell
@@ -123,8 +123,8 @@ If the Agent failed to start, and no further information is provided, use the fo
 sudo journalctl -u datadog-agent.service
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 The following command shows the status of the Datadog Agent.
 
 ```shell
@@ -137,7 +137,7 @@ If the Agent failed to start, and no further information is provided, use the fo
 sudo journalctl -u dd-agent.service
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

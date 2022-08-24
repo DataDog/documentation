@@ -727,13 +727,13 @@ class Integrations:
                 self.regex_tabs_close, "{{< /tabs >}}", result, 0
             )
             result = re.sub(
-                self.regex_tab_open, "{{% tab", result, 0
+                self.regex_tab_open, "{{< tab", result, 0
             )
             result = re.sub(
-                self.regex_tab_close, "{{% /tab %}}", result, 0
+                self.regex_tab_close, "{{< /tab >}}", result, 0
             )
             result = re.sub(
-                self.regex_tab_end, " %}}", result, 0
+                self.regex_tab_end, " >}}", result, 0
             )
             result = re.sub(
                 self.regex_partial_open, "", result, 0

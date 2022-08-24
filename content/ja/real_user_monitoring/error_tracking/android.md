@@ -20,7 +20,7 @@ title: Android のクラッシュレポートとエラー追跡
 ## マッピングファイルのアップロード
 
 {{< tabs >}}
-{{% tab "US" %}}
+{{< tab "US" >}}
 
 1. 以下のスニペットを使用して、[Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
@@ -42,8 +42,8 @@ plugins {
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /tab >}}
+{{< tab "EU" >}}
 1. 以下のスニペットを使用して、[Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
 ```groovy
@@ -69,7 +69,7 @@ datadog {
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### プラグインコンフィギュレーションオプション

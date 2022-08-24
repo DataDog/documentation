@@ -22,7 +22,7 @@ For Linux based systems where the <code>service</code> wrapper command is not av
 List of commands to start the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Platform   | Command                                                            |
 |------------|--------------------------------------------------------------------|
@@ -37,8 +37,8 @@ List of commands to start the Datadog Agent:
 [1]: /agent/
 [2]: /agent/docker/
 [3]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Platform | Command                                   |
 |----------|-------------------------------------------|
@@ -50,7 +50,7 @@ List of commands to start the Datadog Agent:
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Stop the Agent
@@ -58,7 +58,7 @@ List of commands to start the Datadog Agent:
 List of commands to stop the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
@@ -72,8 +72,8 @@ List of commands to stop the Datadog Agent:
 
 [1]: /agent/
 [2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Platform | Command                                   |
 |----------|-------------------------------------------|
@@ -85,7 +85,7 @@ List of commands to stop the Datadog Agent:
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Restart the Agent
@@ -93,7 +93,7 @@ List of commands to stop the Datadog Agent:
 List of commands to restart the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
@@ -107,8 +107,8 @@ List of commands to restart the Datadog Agent:
 [1]: /agent/
 [2]: /agent/docker/?tab=standard#setup
 [3]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Platform | Command                                   |
 |----------|-------------------------------------------|
@@ -120,7 +120,7 @@ List of commands to restart the Datadog Agent:
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /agent/basic_agent_usage/windows/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Agent status and information
@@ -130,7 +130,7 @@ List of commands to restart the Datadog Agent:
 List of commands to display the status of the Datadog Agent:
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Platform        | Command                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
@@ -143,8 +143,8 @@ List of commands to display the status of the Datadog Agent:
 
 
 [1]: /agent/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Platform        | Command                                                                  |
 |-----------------|--------------------------------------------------------------------------|
@@ -156,14 +156,14 @@ List of commands to display the status of the Datadog Agent:
 | Windows         | See the [Windows Agent documentation][1].                                |
 
 [1]: /agent/basic_agent_usage/windows/#status-and-information
-{{% /tab %}}
-{{% tab "Cluster Agent" %}}
+{{< /tab >}}
+{{< tab "Cluster Agent" >}}
 
 | Platform   | Command                        |
 |------------|--------------------------------|
 | Kubernetes | `datadog-cluster-agent status` |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Agent information
@@ -171,7 +171,7 @@ List of commands to display the status of the Datadog Agent:
 List of commands to display the status of your Datadog Agent and enabled integrations.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Platform   | Command                                              |
 |------------|------------------------------------------------------|
@@ -199,8 +199,8 @@ Running Checks
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#status-and-information
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Platform   | Command                                                                |
 |------------|------------------------------------------------------------------------|
@@ -223,20 +223,20 @@ Checks
 ```
 
 [1]: /agent/basic_agent_usage/windows/#status-and-information
-{{% /tab %}}
-{{% tab "Cluster Agent" %}}
+{{< /tab >}}
+{{< tab "Cluster Agent" >}}
 
 | Platform   | Command                        |
 |------------|--------------------------------|
 | Kubernetes | `datadog-cluster-agent status` |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Other commands
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 The Agent v6 command line interface is sub-command based. To see the list of available sub-commands, run:
 ```shell
@@ -277,7 +277,7 @@ Some options have flags and options detailed under `--help`. For example, use he
 
 [1]: /agent/troubleshooting/config/
 [2]: /agent/troubleshooting/send_a_flare/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

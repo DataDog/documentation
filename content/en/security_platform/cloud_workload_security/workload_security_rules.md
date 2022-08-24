@@ -127,15 +127,15 @@ Once your new default policy file is downloaded, navigate to the [**Rules** page
 Complete the next steps based on your environment:
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runtime-security.d` folder. Ensure the file minimally has `read` and `write` access for the `dd-agent` user on the host.
 
   **Note:** This may require use of a utility such as SCP or FTP.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 1. Create a ConfigMap containing `default.policy`. For example, `kubectl create configmap jdefaultpol --from-file=default.policy`.
 
@@ -164,7 +164,7 @@ Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runti
     **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with  `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 To finalize your setup, restart the [Datadog Agent][5].

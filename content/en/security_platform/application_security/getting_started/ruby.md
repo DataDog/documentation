@@ -18,7 +18,7 @@ further_reading:
 
 You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
-{{% appsec-getstarted %}}
+{{< appsec-getstarted >}}
 
 ## Get started
 
@@ -38,7 +38,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    {{< tabs >}}
 
-{{% tab "Rails" %}}
+{{< tab "Rails" >}}
    Enable the APM tracer by adding an initializer in your application code:
 
    ```ruby
@@ -78,9 +78,9 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    end
    ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Sinatra" %}}
+{{< tab "Sinatra" >}}
    Enable the APM tracer by adding the following to your application's startup:
 
    ```ruby
@@ -112,9 +112,9 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
      c.appsec.instrument :sinatra
    end
    ```
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Rack" %}}
+{{< tab "Rack" >}}
    Enable the APM tracer by adding the following to your `config.ru` file:
 
    ```ruby
@@ -133,14 +133,14 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    use Datadog::Tracing::Contrib::Rack::TraceMiddleware
    use Datadog::AppSec::Contrib::Rack::RequestMiddleware
    ```
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
    Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
-{{% tab "Docker CLI" %}}
+{{< tab "Docker CLI" >}}
 
 Update your configuration container for APM by adding the following argument in your `docker run` command:
 
@@ -148,8 +148,8 @@ Update your configuration container for APM by adding the following argument in 
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
+{{< /tab >}}
+{{< tab "Dockerfile" >}}
 
 Add the following environment variable value to your container Dockerfile:
 
@@ -157,8 +157,8 @@ Add the following environment variable value to your container Dockerfile:
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
@@ -174,8 +174,8 @@ spec:
               value: "true"
 ```
 
-{{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{< /tab >}}
+{{< tab "AWS ECS" >}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -189,19 +189,19 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
-{{% /tab %}}
-{{% tab "AWS Fargate" %}}
+{{< /tab >}}
+{{< tab "AWS Fargate" >}}
 
 Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
 ```shell
 env DD_APPSEC_ENABLED=true rails server
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
-{{% appsec-getstarted-2-canary %}}
+{{< appsec-getstarted-2-canary >}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 

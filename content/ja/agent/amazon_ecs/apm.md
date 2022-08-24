@@ -70,7 +70,7 @@ containerDefinitions": [
 2. アプリケーションコンテナでコンテナが実行されている基底の各インスタンスのプライベート IP アドレスを `DD_AGENT_HOST` 環境変数に割り当てます。これにより、アプリケーショントレースを Agent に送信できます。
 
 {{< tabs >}}
-{{% tab "EC2 メタデータエンドポイント" %}}
+{{< tab "EC2 メタデータエンドポイント" >}}
 
 [Amazon の EC2 メタデータエンドポイント][1]を使用すると、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次の URL をカールします。
 
@@ -80,8 +80,8 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4
 
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-{{% /tab %}}
-{{% tab "ECS コンテナメタデータファイル" %}}
+{{< /tab >}}
+{{< tab "ECS コンテナメタデータファイル" >}}
 
 [Amazon の ECS コンテナメタデータファイル][1]を使用すると、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次のコマンドを実行します。
 
@@ -91,7 +91,7 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-metadata.html#metadata-file-format
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
  APM に渡される各アプリケーションコンテナのトレースエージェントのホスト名の環境変数として結果を設定します。

@@ -55,7 +55,7 @@ The following conditional variables are available:
 Conditional variable must have an opening and closing pair with the text and **@-notifications** in-between.
 
 {{< tabs >}}
-{{% tab "is_alert" %}}
+{{< tab "is_alert" >}}
 
 To send a notification message when a monitor alerts, use the format:
 
@@ -65,8 +65,8 @@ To send a notification message when a monitor alerts, use the format:
 {{/is_alert}}
 ```
 
-{{% /tab %}}
-{{% tab "is_warning" %}}
+{{< /tab >}}
+{{< tab "is_warning" >}}
 
 To send a notification message when a monitor warns, use the format:
 
@@ -76,8 +76,8 @@ To send a notification message when a monitor warns, use the format:
 {{/is_warning}}
 ```
 
-{{% /tab %}}
-{{% tab "is_recovery" %}}
+{{< /tab >}}
+{{< tab "is_recovery" >}}
 
 To send a notification message when a monitor recovers, use the format:
 
@@ -87,8 +87,8 @@ To send a notification message when a monitor recovers, use the format:
 {{/is_recovery}}
 ```
 
-{{% /tab %}}
-{{% tab "is_match" %}}
+{{< /tab >}}
+{{< tab "is_match" >}}
 
 Search for a substring in a [tag variable](#attribute-and-tag-variables) with the format:
 
@@ -139,8 +139,8 @@ Or use the `{{else}}` parameter in the first example:
 
 **Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
 
-{{% /tab %}}
-{{% tab "is_exact_match" %}}
+{{< /tab >}}
+{{< tab "is_exact_match" >}}
 
 Search for an exact string in a [tag variable](#attribute-and-tag-variables) with the format:
 
@@ -184,8 +184,8 @@ To notify your dev team if the value that breached the threshold of your monitor
 {{/is_exact_match}}
 ```
 
-{{% /tab %}}
-{{% tab "is_renotify" %}}
+{{< /tab >}}
+{{< tab "is_renotify" >}}
 
 To send an escalation message to a different destination just for the `production` environment:
 
@@ -224,7 +224,7 @@ This part is generic and sent both for the first trigger and the escalation mess
 This is the escalation message @dev-team@company.com
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -237,7 +237,7 @@ Use attribute and tag variables to render alert messages that are customized, in
 Configure multi-alert variables in [multi-alert monitors][1] based on the dimension selected in the multi-alert group box. Enrich the notification to dynamically include the value associated with the group by dimension in each alert.
 
 {{< tabs >}}
-{{% tab "Group by tag" %}}
+{{< tab "Group by tag" >}}
 
 If a metric is tagged with any tag following the `key:value` syntax and the monitor query is grouped by this tag, use the variable:
 
@@ -277,9 +277,9 @@ If the tag is on an event and you're using an event monitor, use:
 {{ event.tags.[dot.key.test] }}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Group by facet" %}}
+{{< tab "Group by facet" >}}
 
 Log monitors, Trace Analytics monitors, RUM monitors and Event monitors can use facets as variables if the monitor is grouped by facet. If a log monitor is grouped by `@facet_key`, use the variable:
 
@@ -299,7 +299,7 @@ If your facet has periods, use brackets around the facet, for example:
 {{ [@network.client.ip].name }}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Matching attribute/tag variables
@@ -434,7 +434,7 @@ If your monitor starts failing on the `service:ad-server` group, the notificatio
 Use [tag variables](#attribute-and-tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can provide links to pages within Datadog such as dashboards, the host map, and monitors.
 
 {{< tabs >}}
-{{% tab "Dashboards" %}}
+{{< tab "Dashboards" >}}
 
 Use the `{{host.name}}` [tag variable](#attribute-and-tag-variables) to provide a link to a system dashboard:
 
@@ -454,8 +454,8 @@ Use the `{{last_triggered_at_epoch}}` [template variable](#template-variables) a
 https://app.datadoghq.com/dashboard/<DASHBOARD_ID>/<DASHBOARD_NAME>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
-{{% /tab %}}
-{{% tab "Host map" %}}
+{{< /tab >}}
+{{< tab "Host map" >}}
 
 Use a [tag variable](#attribute-and-tag-variables) such as `{{service.name}}` to provide a link to the host map:
 
@@ -471,8 +471,8 @@ The host map link is customizable with additional parameters. The most common ar
 | `groupby` | `groupby=<TAG_KEY>`        | The groups for host hexagons.        |
 | `sizeby`  | `sizeby=avg:<METRIC_NAME>` | The size of the host hexagons.       |
 
-{{% /tab %}}
-{{% tab "Monitors" %}}
+{{< /tab >}}
+{{< tab "Monitors" >}}
 
 Use the `{{host.name}}` [tag variable](#attribute-and-tag-variables) to provide a link to all monitors related to a specific host:
 
@@ -491,8 +491,8 @@ The monitors link is customizable with additional parameters. The most common ar
 
 
 [1]: /monitors/create/#monitor-types
-{{% /tab %}}
-{{% tab "Logs" %}}
+{{< /tab >}}
+{{< tab "Logs" >}}
 
 Use the `{{last_triggered_at_epoch}}` [template variable](#template-variables) to provide a link to all logs happening in the moment of the alert.
 
@@ -509,7 +509,7 @@ The logs link is customizable with additional parameters. The most common are:
 | `status`  | `status=<STATUS>`          | Status of logs: Error, Warn, Info etc. |
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Comments

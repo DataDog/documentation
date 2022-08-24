@@ -53,7 +53,7 @@ When the updated **Task** displays a **RUNNING** status, use these pages to veri
 ## Examples
 
 {{< tabs >}}
-{{% tab "Redis - Web UI" %}}
+{{< tab "Redis - Web UI" >}}
 Use the following table to enter the Docker labels via the [AWS Web Console][1] for a Redis container:
 
 | Key                           | Value                                  |
@@ -63,8 +63,8 @@ Use the following table to enter the Docker labels via the [AWS Web Console][1] 
 | com.datadoghq.ad.init_configs | `[{}]`                                 |
 
 [1]: https://aws.amazon.com/console
-{{% /tab %}}
-{{% tab "Redis - AWS CLI" %}}
+{{< /tab >}}
+{{< tab "Redis - AWS CLI" >}}
 Use the following JSON under `containerDefinitions` to create a Redis container via the [AWS CLI tools][1].
 
 ```json
@@ -81,7 +81,7 @@ Use the following JSON under `containerDefinitions` to create a Redis container 
 ```
 
 [1]: https://aws.amazon.com/cli
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

@@ -77,7 +77,7 @@ You can install the Datadog .NET Tracer machine-wide so that all services on the
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 To install the .NET Tracer machine-wide:
 
@@ -87,9 +87,9 @@ To install the .NET Tracer machine-wide:
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 To install the .NET Tracer machine-wide:
 
@@ -111,9 +111,9 @@ To install the .NET Tracer machine-wide:
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 <div class="alert alert-warning">
   <strong>Note:</strong> This installation does not instrument applications running in IIS. For applications running in IIS, follow the Windows machine-wide installation process.
@@ -124,7 +124,7 @@ To install the .NET Tracer per-application:
 1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
 
 [1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -136,7 +136,7 @@ For information about the different methods for setting environment variables, s
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 #### Internet Information Services (IIS)
 
@@ -164,9 +164,9 @@ For information about the different methods for setting environment variables, s
    ```
 2. For standalone applications and Windows services, manually restart the application.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
@@ -179,9 +179,9 @@ For information about the different methods for setting environment variables, s
 
 2. For standalone applications, manually restart the application as you normally would.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
@@ -214,7 +214,7 @@ For information about the different methods for setting environment variables, s
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -226,7 +226,7 @@ For containerized, serverless, and cloud environments:
 
 {{< tabs >}}
 
-{{% tab "Containers" %}}
+{{< tab "Containers" >}}
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
@@ -250,23 +250,23 @@ For more information on how to configure these settings, see [Configuration](#co
 {{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "AWS Lambda" %}}
+{{< tab "AWS Lambda" >}}
 
 To set up Datadog APM in AWS Lambda, see [Tracing Serverless Functions][1].
 
 [1]: /tracing/serverless_functions/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Azure App Service" %}}
+{{< tab "Azure App Service" >}}
 
 To set up Datadog APM in Azure App Service, see [Tracing Azure App Service Extension][1].
 
 [1]: /serverless/azure_app_services/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Other Environments" %}}
+{{< tab "Other Environments" >}}
 
 Tracing is available for a number of environments including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
@@ -278,7 +278,7 @@ For all other environments, see the [Integrations documentation][4] for that env
 [3]: /integrations/amazon_elasticbeanstalk/
 [4]: /integrations/
 [5]: /help/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -302,7 +302,7 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 <div class="alert alert-warning">
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, you must keep the package versions (for example: MSI and NuGet) in sync.
@@ -315,9 +315,9 @@ To use custom instrumentation in your .NET application:
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 <div class="alert alert-warning">
   <strong>Note:</strong> If you are using both automatic and custom instrumentation, you must keep the package versions (for example, MSI and NuGet) in sync.
@@ -329,15 +329,15 @@ To use custom instrumentation in your .NET application:
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 To use custom instrumentation in your .NET application:
 
 1. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -353,7 +353,7 @@ To attach automatic instrumentation to your service, you must set the required e
 
 {{< tabs >}}
 
-{{% tab "Registry Editor" %}}
+{{< tab "Registry Editor" >}}
 
 In the Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key and set the value data to:
 
@@ -364,15 +364,15 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "PowerShell" %}}
+{{< tab "PowerShell" >}}
 
 ```powershell
 [string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -52,7 +52,7 @@ Sinon, pour commencer le tracing d'applications écrites dans n'importe quel lan
 Consultez la documentation de votre IDE pour savoir comment passer `-javaagent` et d'autres arguments JVM. Voici des instructions pour certains frameworks couramment utilisés :
 
 {{< tabs >}}
-{{% tab "Spring Boot" %}}
+{{< tab "Spring Boot" >}}
 
 Si votre application s'appelle `my_app.jar`, créez un fichier `my_app.conf`, contenant :
 
@@ -64,8 +64,8 @@ Pour en savoir plus, consultez la [documentation de Spring Boot][1].
 
 
 [1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
-{{% /tab %}}
-{{% tab "Tomcat" %}}
+{{< /tab >}}
+{{< tab "Tomcat" >}}
 
 Ouvrez votre fichier de script de démarrage Tomcat, par exemple `catalina.sh`, et ajoutez :
 
@@ -79,8 +79,8 @@ Ou sur Windows, `catalina.bat` :
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\chemin\vers\dd-java-agent.jar"
 ```
 
-{{% /tab %}}
-{{% tab "JBoss" %}}
+{{< /tab >}}
+{{< tab "JBoss" >}}
 
 Ajoutez la ligne suivante à la fin de `standalone.sh` :
 
@@ -98,8 +98,8 @@ Pour en savoir plus, consultez la [documentation de JBoss][1].
 
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
-{{% /tab %}}
-{{% tab "Jetty" %}}
+{{< /tab >}}
+{{< tab "Jetty" >}}
 
 Si vous utilisez `jetty.sh` pour démarrer Jetty en tant que service, ajoutez ce qui suit :
 
@@ -113,8 +113,8 @@ Si vous utilisez `start.ini` pour démarrer Jetty, ajoutez la ligne suivante (so
 -javaagent:/chemin/vers/dd-java-agent.jar
 ```
 
-{{% /tab %}}
-{{% tab "WebSphere" %}}
+{{< /tab >}}
+{{< tab "WebSphere" >}}
 
 Dans la console d'administration :
 
@@ -130,7 +130,7 @@ Dans la console d'administration :
 Pour plus d'informations et d'options, consultez la [documentation relative à WebSphere][1].
 
 [1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

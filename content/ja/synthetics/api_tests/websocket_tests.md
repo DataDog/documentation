@@ -32,18 +32,18 @@ WebSocket テストは、ネットワークの外部または内部からのテ�
 
   {{< tabs >}}
 
-  {{% tab "リクエストオプション" %}}
+  {{< tab "リクエストオプション" >}}
   * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
   * **Request headers**: WebSocket 接続を開始する HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
   * **Cookies**: クッキーを定義して WebSocket 接続を開始する HTTP リクエストに追加します。複数のクッキーを設定するには、次の書式を使用します `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`。
 
-  {{% /tab %}}
+  {{< /tab >}}
 
-  {{% tab "認証" %}}
+  {{< tab "認証" >}}
 
   * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
 
-  {{% /tab %}}
+  {{< /tab >}}
 
   {{< /tabs >}}
 

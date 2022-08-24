@@ -50,7 +50,7 @@ Each tab in sections below shows a different way to apply integration templates 
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent. On Windows, mount `\\.\pipe\docker_engine`.
 
@@ -100,8 +100,8 @@ services:
 
 
 [1]: /getting_started/tagging/unified_service_tagging/?tab=docker
-{{% /tab %}}
-{{% tab "File" %}}
+{{< /tab >}}
+{{< tab "File" >}}
 
 Storing templates as local files and mounting them inside the containerized Agent doesn't require an external service or a specific orchestration platform. The downside is that you need to restart your Agent containers each time you change, add, or remove templates. The Agent looks for Autodiscovery templates in the mounted `/conf.d` directory.
 
@@ -130,8 +130,8 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
 [1]: /agent/guide/ad_identifiers/
-{{% /tab %}}
-{{% tab "Key-value store" %}}
+{{< /tab >}}
+{{< tab "Key-value store" >}}
 
 Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources. To use a key-value store, configure it in the Agent `datadog.yaml` configuration file and mount this file inside the containerized Agent. Alternatively, pass your key-value store as environment variables to the containerized Agent.
 
@@ -188,7 +188,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 [1]: /integrations/consul/
 [2]: /agent/guide/agent-commands/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Examples
@@ -196,7 +196,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 ### Datadog Redis integration
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 The following `docker-compose.yml` file applies the correct Redis integration template with a custom `password` parameter:
 
@@ -207,8 +207,8 @@ labels:
   com.datadoghq.ad.instances: '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
 ```
 
-{{% /tab %}}
-{{% tab "File" %}}
+{{< /tab >}}
+{{< tab "File" >}}
 
 Redis is one of the default Autodiscovery templates packaged with the Agent, so you don't need to mount this file. The following Redis template is packaged with the Agent:
 
@@ -250,8 +250,8 @@ instances:
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
 [2]: /agent/guide/ad_identifiers/
 [3]: /agent/faq/template_variables/
-{{% /tab %}}
-{{% tab "Key-value store" %}}
+{{< /tab >}}
+{{< tab "Key-value store" >}}
 
 The following etcd commands create a Redis integration template with a custom `password` parameter:
 
@@ -269,7 +269,7 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example: `redis` OR `redis:latest`.
 
 [1]: /agent/faq/template_variables/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Datadog Apache and HTTP check integrations
@@ -279,7 +279,7 @@ Configurations below apply to an Apache container image with the `<CONTAINER_IDE
 Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][9], [Datadog-HTTP check integration][10].
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 ```yaml
 labels:
@@ -288,8 +288,8 @@ labels:
   com.datadoghq.ad.instances: '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name":"<WEBSITE_1>","url":"http://%%host%%/website_1","timeout":1},{"name":"<WEBSITE_2>","url":"http://%%host%%/website_2","timeout":1}]]'
 ```
 
-{{% /tab %}}
-{{% tab "File" %}}
+{{< /tab >}}
+{{< tab "File" >}}
 
 * Create the folders `conf.d/` and `conf.d/apache.d` on your host.
 * Add the custom auto-configuration below to `conf.d/apache.d/conf.yaml` on your host.
@@ -329,8 +329,8 @@ instances:
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [2]: /agent/guide/ad_identifiers/
-{{% /tab %}}
-{{% tab "Key-value store" %}}
+{{< /tab >}}
+{{< tab "Key-value store" >}}
 
 ```conf
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
@@ -340,7 +340,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 **Note**: The order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

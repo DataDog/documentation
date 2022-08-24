@@ -43,7 +43,7 @@ Jenkins コントローラーと Datadog Agent が Kubernetes クラスターに
 ## プラグインで CI 表示を有効化する
 
 {{< tabs >}}
-{{% tab "UI の使用" %}}
+{{< tab "UI の使用" >}}
 
 1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configure System** にアクセスします。
 2. コンフィギュレーション画面を下にスクロールして、`Datadog Plugin` セクションに移動します。
@@ -56,8 +56,8 @@ Jenkins コントローラーと Datadog Agent が Kubernetes クラスターに
 9. 構成を保存します。
 
 {{< img src="ci/ci-jenkins-plugin-config.png" alt="Jenkins の Datadog プラグインコンフィギュレーション" style="width:100%;">}}
-{{% /tab %}}
-{{% tab "configuration-as-code の使用" %}}
+{{< /tab >}}
+{{< tab "configuration-as-code の使用" >}}
 Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグインを使用する場合:
 
 1. `datadogGlobalConfiguration` のエントリを追加して、コンフィギュレーション YAML を作成または変更します。
@@ -80,8 +80,8 @@ Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグイ�
 4. `View Configuration` ボタンを使用してコンフィギュレーションを確認します。
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-{{% tab "Groovy の使用" %}}
+{{< /tab >}}
+{{< tab "Groovy の使用" >}}
 
 1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Script Console** にアクセスします。
 2. コンフィギュレーションスクリプトを実行します。
@@ -110,8 +110,8 @@ Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグイ�
     // Save config
     d.save()
     ```
-{{% /tab %}}
-{{% tab "環境変数の使用" %}}
+{{< /tab >}}
+{{< tab "環境変数の使用" >}}
 
 1. Jenkins インスタンスマシンで次の環境変数を設定します。
     ```bash
@@ -132,7 +132,7 @@ Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグイ�
     ```
 2. Jenkins インスタンスを再起動します。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 CI Visibility が有効になっていることを確認するには、`Jenkins Log` に移動して次を検索します。
@@ -171,7 +171,7 @@ logs:
 次に、Datadog プラグインでジョブログ収集を有効にします。
 
 {{< tabs >}}
-{{% tab "UI の使用" %}}
+{{< tab "UI の使用" >}}
 
 1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configure System** に移動します。
 2. コンフィギュレーション画面を下にスクロールして、`Datadog Plugin` セクションに移動します。
@@ -181,8 +181,8 @@ logs:
 6. `Enable Log Collection` チェックボックスをクリックしてアクティブにします。
 7. Datadog Agent との接続を確認します。
 8. 構成を保存します。
-{{% /tab %}}
-{{% tab "configuration-as-code の使用" %}}
+{{< /tab >}}
+{{< tab "configuration-as-code の使用" >}}
 Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグインを使用する場合:
 
 1. エントリ `datadogGlobalConfiguration` のコンフィギュレーション YAML を作成または変更します。
@@ -203,8 +203,8 @@ Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグイ�
 4. `View Configuration` ボタンを使用してコンフィギュレーションを確認します。
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-{{% tab "Groovy の使用" %}}
+{{< /tab >}}
+{{< tab "Groovy の使用" >}}
 
 1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Script Console** にアクセスします。
 2. コンフィギュレーションスクリプトを実行します。
@@ -230,8 +230,8 @@ Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグイ�
     // Save config
     d.save()
     ```
-{{% /tab %}}
-{{% tab "環境変数の使用" %}}
+{{< /tab >}}
+{{< tab "環境変数の使用" >}}
 
 1. Jenkins インスタンスマシンで次の環境変数を設定します。
     ```bash
@@ -249,7 +249,7 @@ Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグイ�
     ```
 2. Jenkins インスタンスを再起動します。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## デフォルトのブランチ名を設定する
@@ -278,7 +278,7 @@ Jenkins プラグインは、Git の情報を環境変数で判断していま�
 この場合、Git の情報をビルドの環境変数に伝搬させることができます。`checkout` や `git` のステップを実行した後に、 `.each {k,v -> env.setProperty(k, v)}` という関数を使用します。例:
 
 {{< tabs >}}
-{{% tab "宣言型パイプラインの使用" %}}
+{{< tab "宣言型パイプラインの使用" >}}
 宣言型パイプラインを使ってパイプラインの構成を行う場合は、以下のように `script` ブロックを使って Git の情報を伝搬させます。
 
 `checkout` ステップを使用する:
@@ -309,8 +309,8 @@ pipeline {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "スクリプトパイプラインの使用" %}}
+{{< /tab >}}
+{{< tab "スクリプトパイプラインの使用" >}}
 スクリプトパイプラインを使ってパイプラインの構成を行う場合は、git の情報を直接環境変数に伝搬させることができます。
 
 `checkout` ステップを使用する:
@@ -333,7 +333,7 @@ node {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

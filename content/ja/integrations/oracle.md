@@ -57,7 +57,7 @@ Oracle インテグレーションを使用するには、Oracle Instant Client 
 ##### Oracle Instant Client
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 ###### Linux
 
 1. [Linux 用の Oracle Instant Client のインストール][1]に従ってください。
@@ -87,8 +87,8 @@ Oracle インテグレーションを使用するには、Oracle Instant Client 
 
 [1]: https://docs.oracle.com/en/database/oracle/oracle-database/21/lacli/install-instant-client-using-zip.html
 [2]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 ###### Windows
 
 1. [Oracle Windows インストールガイド][1]に従って、Oracle Instant Client を構成します。
@@ -104,7 +104,7 @@ Oracle インテグレーションを使用するには、Oracle Instant Client 
 [1]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
 [2]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
 [3]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ##### JDBC Driver
@@ -121,7 +121,7 @@ Java 8 以降は、JDBC Driver を使用するときに Agent が使用するラ
 #### Datadog ユーザーの作成
 
 {{< tabs >}}
-{{% tab "スタンドアロン" %}}
+{{< tab "スタンドアロン" >}}
 
 Oracle Database サーバーへの適切なアクセス権を持つ、読み取り専用の `datadog` ユーザーを作成します。`SYSDBA` や `SYSOPER` などの管理者ユーザーで Oracle Database に接続し、以下を実行します。
 
@@ -147,8 +147,8 @@ GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 ```
 
-{{% /tab %}}
-{{% tab "マルチテナント" %}}
+{{< /tab >}}
+{{< tab "マルチテナント" >}}
 
 ##### Oracle 12c または 19c
 
@@ -163,13 +163,13 @@ GRANT SELECT ON GV_$PROCESS TO c##datadog CONTAINER=ALL;
 GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -326,8 +326,8 @@ TCPS on JDBC による Oracle Database への接続の詳細については、�
 [2]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -341,7 +341,7 @@ TCPS on JDBC による Oracle Database への接続の詳細については、�
 
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

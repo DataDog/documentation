@@ -15,19 +15,19 @@ title: Autorisations RBAC pour les logs
 Après avoir créé des [rôles RBAC pour les logs][1], attribuez des [autorisations][2] à un rôle ou supprimez-les de ce rôle.
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Attribuez directement des autorisations à un rôle ou supprimez-les de ce rôle en [modifiant le rôle depuis le site Datadog][1].
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Attribuez directement des autorisations à un rôle ou supprimez-les de ce rôle via l'[API Permission Datadog][1].
 
 [1]: /fr/api/v2/roles/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Vous trouverez plus de détails sur chaque autorisation ci-dessous.
@@ -65,7 +65,7 @@ Cette autorisation peut être globale ou limitée à un sous-ensemble d'index.
 **Sous-ensemble d'index** :
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 1. Supprimez l'autorisation globale accordée au rôle.
 2. Accordez cette autorisation au rôle depuis [la page Index du site Datadog][1] en modifiant un index et en ajoutant le rôle dans le champ « Grant editing Exclusion Filters of this index to » (voir la capture d'écran ci-dessous).
@@ -74,12 +74,12 @@ Cette autorisation peut être globale ou limitée à un sous-ensemble d'index.
 
 
 [1]: /fr/logs/log_configuration/indexes/
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Cette configuration est uniquement prise en charge via l'interface utilisateur.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_write_pipelines`
@@ -99,14 +99,14 @@ Permet à un rôle de créer, modifier ou supprimer des processeurs et des pipel
 Cette autorisation peut être globale ou limitée à un sous-ensemble de pipelines.
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Accordez l'autorisation à un ou plusieurs rôles dans la fenêtre d'un pipeline spécifique.
 
 {{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors" style="width:75%;" >}}
 
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 1. [Récupérez l'ID de rôle][1] du rôle que vous souhaitez attribuer à des pipelines spécifiques.
 2. [Récupérez l'ID d'autorisation][2] pour l'API `logs_write_processors` de votre région.
@@ -129,7 +129,7 @@ curl -X POST \
 [1]: /fr/api/v2/roles/#list-roles
 [2]: /fr/api/v2/roles/#list-permissions
 [3]: /fr/api/v1/logs-pipelines/#get-all-pipelines
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_write_archives`
@@ -158,21 +158,21 @@ Dans l'exemple suivant, en supposant que tous les rôles à l'exception de `Gues
 {{< img src="account_management/rbac/logs_archives_list.png" alt="Créer un rôle personnalisé" style="width:90%;">}}
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Créez une archive ou mettez une archive existante à jour en la modifiant.
 
 {{< img src="account_management/rbac/logs_archive_restriction.png" alt="Créer un rôle personnalisé" style="width:90%;">}}
 
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'API Logs Archives pour [attribuer][1] ou [révoquer][2] un rôle pour une archive donnée.
 
 
 [1]: /fr/api/v2/logs-archives/#grant-role-to-an-archive
 [2]: /fr/api/v2/logs-archives/#revoke-role-from-an-archive
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_write_historical_views`
@@ -230,7 +230,7 @@ Les rôles sont cumulatifs : si un utilisateur dispose de plusieurs rôles, tou
 
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Pour limiter les utilisateurs de manière à ce qu'ils puissent voir uniquement les logs correspondant à une requête de restriction, accédez à la [page Data Access][1] :
 
@@ -277,14 +277,14 @@ La page Data Access affiche jusqu'à 50 requêtes de restriction et 50 rôles 
 {{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="Affichage par rôle" style="width:70%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/data-access
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Révoquez ou accordez cette autorisation avec [l'API Rôles][1]. Utilisez des [requêtes de restriction][2] pour restreindre l'autorisation à un sous-ensemble de données de log.
 
 [1]: /fr/api/#roles
 [2]: /fr/api/?lang=bash#roles-restriction-queries-for-logs
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Autorisations héritées
@@ -304,7 +304,7 @@ Permet à un rôle de lire des index de logs. L'accès peut être accordé globa
 Pour limiter cette autorisation à un sous-ensemble d'index, supprimez d'abord les autorisations `logs_read_index_data` et `logs_modify_indexes` du rôle. Suivez ensuite les étapes suivantes :
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Accordez à ce rôle l'accès à l'index depuis la [page de configuration][1].
 
@@ -312,8 +312,8 @@ Accordez à ce rôle l'accès à l'index depuis la [page de configuration][1].
 
 
 [1]: https://app.datadoghq.com/logs/indexes
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 * [Récupérez l'ID de rôle][1] du rôle que vous souhaitez attribuer à des pipelines spécifiques.
 * [Récupérez l'ID d'autorisation][2] pour l'API `logs_write_processors` de votre région.
@@ -337,7 +337,7 @@ curl -X POST \
 [1]: /fr/api/v2/roles/#list-roles
 [2]: /fr/api/v2/roles/#list-permissions
 [3]: /fr/api/v1/logs-indexes/#get-all-indexes
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### `logs_live_tail`

@@ -50,7 +50,7 @@ npm install --save winston
 Dans votre fichier Bootstrap ou dans votre code, déclarez le logger comme suit :
 
 {{< tabs >}}
-{{% tab "Winston 3.0" %}}
+{{< tab "Winston 3.0" >}}
 
 ```js
 
@@ -72,8 +72,8 @@ logger.log('info', 'Voici un log simple');
 logger.info('Voici un log avec des métadonnées',{color: 'blue' });
 ```
 
-{{% /tab %}}
-{{% tab "Winston 2.0" %}}
+{{< /tab >}}
+{{< tab "Winston 2.0" >}}
 
 ```js
 var winston = require('winston');
@@ -94,7 +94,7 @@ logger.log('info', 'Voici un log simple');
 logger.info('Voici un log avec des métadonnées',{color: 'blue' });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Vérifiez le contenu du fichier `<NOM_FICHIER>.log` pour vous assurer que Winston prend déjà en charge la journalisation de tous les éléments en JSON :

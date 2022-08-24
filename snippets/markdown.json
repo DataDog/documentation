@@ -75,13 +75,13 @@
 		"prefix": "tab",
 		"body": [
 			"{{< tabs >}}",
-			"{{% tab \"${1}\" %}}",
+			"{{< tab \"${1}\" >}}",
 			"",
-			"{{% /tab %}}",
+			"{{< /tab >}}",
 			"",
-			"{{% tab \"${2}\" %}}",
+			"{{< tab \"${2}\" >}}",
 			"",
-			"{{% /tab %}}",
+			"{{< /tab >}}",
 			"{{< /tabs >}}"
 		],
 		"description": "Tabs"
@@ -159,7 +159,7 @@
 	"Reuse":{
 		"prefix": "reuse",
 		"body": [
-			"{{% reuse/prodname/reuse_filename %}}"
+			"{{< reuse/prodname/reuse_filename >}}"
 		],
 		"description": "General reuse shortcode"
 	},

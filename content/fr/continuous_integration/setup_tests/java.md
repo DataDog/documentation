@@ -30,7 +30,7 @@ Frameworks de test pris en charge :
 Installez et activez le traceur Java v0.91.0 ou une version ultérieure.
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 Ajoutez un nouveau profil Maven dans votre `pom.xml` racine en configurant la dépendance du traceur Java Datadog et la propriété de l'argument `javaagent`. Remplacez également `$VERSION` par la dernière version du traceur accessible dans le [référentiel Maven][1] (sans le `v` au début du numéro de version) : ![Maven Central][2]
 
@@ -57,8 +57,8 @@ Ajoutez un nouveau profil Maven dans votre `pom.xml` racine en configurant la d�
 
 [1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 Ajoutez l'entrée `ddTracerAgent` au bloc de tâche `configurations`. Ajoutez ensuite la dépendance du traceur Java Datadog en remplaçant `$VERSION` par la dernière version du traceur disponible dans le [référentiel Maven][1] (sans le `v` au début du numéro de version) : ![Maven Central][2]
 
@@ -74,13 +74,13 @@ dependencies {
 
 [1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Instrumenter vos tests
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 Configurez le [plug-in Maven Surefire][1] ou le [plug-in Maven Failsafe][2] (ou les deux) pour utiliser l'Agent Java Datadog. Prenez soin de spécifier le nom du service ou de la bibliothèque testé(e) avec la propriété `-Ddd.service` :
 
@@ -125,8 +125,8 @@ DD_ENV=ci mvn clean verify -Pdd-civisibility
 
 [1]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 Configurez la tâche Gradle `test` en ajoutant à l'attribut `jvmArgs` l'argument `-javaagent` ciblant le traceur Java Datadog en fonction de la propriété `configurations.ddTracerAgent`. Spécifiez également le nom du service ou de la bibliothèque testé(e) avec la propriété `-Ddd.service` :
 
@@ -146,7 +146,7 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 
 **Remarque** : les builds Gradle peuvent être automatiquement personnalisés. Selon votre configuration de build spécifique, vous devrez donc peut-être adapter ces étapes.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Paramètres de configuration

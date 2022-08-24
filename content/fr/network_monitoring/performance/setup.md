@@ -91,7 +91,7 @@ Pour activer la solution Network Performance Monitoring, configurez-la dans le [
 Cet outil a été conçu dans l'optique d'analyser le trafic _entre_ des endpoints réseau et de mapper des dépendances réseau. Il est donc conseillé de l'installer sur un sous-ensemble pertinent de votre infrastructure ainsi que sur **_deux hosts au minimum_** pour en tirer pleinement profit.
 
 {{< tabs >}}
-{{% tab "Agent" %}}
+{{< tab "Agent" >}}
 
 Pour activer la solution Network Performance Monitoring avec l'Agent Datadog, utilisez les configurations suivantes :
 
@@ -208,8 +208,8 @@ Pour configurer la solution Network Performance Monitoring pour les hosts Window
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 [4]: https://s3.amazonaws.com/ddagent-windows-unstable/datadog-agent-7.23.2-beta1-1-x86_64.msi
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Pour activer le Network Performance Monitoring avec Kubernetes via Helm, ajoutez :
 
@@ -352,8 +352,8 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: /fr/agent/kubernetes/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Pour configurer la fonctionnalité Network Performance Monitoring dans Docker, utilisez la configuration suivante lorsque vous lancez l'Agent de conteneur :
 
@@ -407,13 +407,13 @@ services:
 ```
 
 [1]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 Pour une configuration sur AWS ECS, consultez la section relative à [AWS ECS][1].
 
 
 [1]: /fr/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

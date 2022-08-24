@@ -62,7 +62,7 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -85,8 +85,8 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -99,7 +99,7 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 | `<インスタンスコンフィギュレーション>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### ログの収集

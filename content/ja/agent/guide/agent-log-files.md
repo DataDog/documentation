@@ -20,7 +20,7 @@ Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバ
 ## Agent のログディレクトリ
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | プラットフォーム                              | コマンド                       |
 |---------------------------------------|-------------------------------|
@@ -30,8 +30,8 @@ Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバ
 | Windows Server 2008/Vista 以降  | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003/XP 以前      | サポートされないプラットフォーム        |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | プラットフォーム                             | コマンド                                                              |
 |--------------------------------------|----------------------------------------------------------------------|
@@ -42,13 +42,13 @@ Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバ
 | SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
 | ソースビルド                         | `~/.datadog-agent/supervisord/logs/`                                 |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Agent のログファイル
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 * `agent.log`
 * `process-agent.log`
@@ -56,15 +56,15 @@ Datadog Agent は、デフォルトで 10MB ごとにログのロールオーバ
 * `system-probe.log`
 * `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 * `collector.log`
 * `dogstatsd.log`
 * `forwarder.log`
 * `supervisord.log`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Agent インストールログファイル

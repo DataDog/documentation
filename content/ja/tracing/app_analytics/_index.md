@@ -17,23 +17,23 @@ aliases:
 ## 自動コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 App Analytics は、Java トレースクライアントのバージョン 0.25.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web サーバー**インテグレーションに対してグローバルに有効にすることができます。
 
 * システムプロパティ: `-Ddd.trace.analytics.enabled=true`
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 App Analytics は、Python トレースクライアントのバージョン 0.19.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web** インテグレーションに対して App Analytics をグローバルに有効にできます。
 
 * トレーサー構成: `ddtrace.config.analytics_enabled = True`
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 App Analyticsは、Ruby トレースクライアントのバージョン 0.19.0 以降で使用できます。グローバルフラグを使用することで、すべての **web** インテグレーションに対して有効にできます。
 
@@ -46,8 +46,8 @@ Datadog.configure { |c| c.analytics_enabled = true }
 * `true` は、すべての Web フレームワークで分析を有効にします。
 * `false` または `nil` は、明示的に有効にされているインテグレーションを除いて分析を無効にします。(デフォルト)
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 App Analyticsは、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。以下を使用することで、すべての **web** インテグレーションにグローバルに有効化できます:
 
@@ -60,8 +60,8 @@ App Analyticsは、Go トレースクライアントのバージョン 1.11.0 �
 * バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 App Analytics は、Node.js トレースクライアントのバージョン 0.10.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての web インテグレーションに対してグローバルに有効できます。
 
@@ -75,8 +75,8 @@ tracer.init({
 
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 App Analytics は、.NET トレースクライアントのバージョン 1.1.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web** インテグレーションに対してグローバルに有効にできます。
 
@@ -88,15 +88,15 @@ App Analytics は、.NET トレースクライアントのバージョン 1.1.0 
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 App Analytics は、PHP トレースクライアントのバージョン 0.17.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web** インテグレーションに対してグローバルに有効にできます。
 
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /tab >}}
+{{< tab "C++" >}}
 
 App Analytics は、C++ トレースクライアントのバージョン 1.0.0 以降で使用できます。環境変数 `DD_TRACE_ANALYTICS_ENABLED` を `true` に設定することで、すべてのトップレベルスパンに対してグローバルに有効にすることができます。なお、この設定は、コードで直接設定することもできます。
 
@@ -108,8 +108,8 @@ datadog::opentracing::TracerOptions tracer_options;
   auto tracer = datadog::opentracing::makeTracer(tracer_options);
 ```
 
-{{% /tab %}}
-{{% tab "Nginx" %}}
+{{< /tab >}}
+{{< tab "Nginx" >}}
 
 Nginx で App Analytics を有効にするには
 
@@ -117,7 +117,7 @@ Nginx で App Analytics を有効にするには
 
 2. `nginx.conf` ファイルの先頭に `env DD_TRACE_ANALYTICS_ENABLED;` を追加します。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 有効にすると、App Analytics UI に結果が表示されます。[App Analytics ページ][1]にアクセスして使用を開始します。
@@ -127,7 +127,7 @@ Nginx で App Analytics を有効にするには
 ### インテグレーションごとの構成
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
 
@@ -142,8 +142,8 @@ Nginx で App Analytics を有効にするには
 インテグレーション名は、[インテグレーションテーブル][1]にあります。
 
 [1]: /ja/tracing/setup/java/#integrations
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
 
@@ -158,8 +158,8 @@ Nginx で App Analytics を有効にするには
 **注**: インテグレーションによっては、そのインテグレーション固有のトレーサーが実装されているため非標準の方法で設定する必要があります。詳細については、[App Analytics][1] のライブラリドキュメントを参照してください。
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 特定のインテグレーションに対して App Analytics を有効にすることできます。
 
@@ -176,8 +176,8 @@ Datadog.configure { |c| c.use :integration, analytics_enabled: true }
 * `nil` は、グローバルな分析設定を優先させます。
 
 [1]: /ja/tracing/setup/ruby/#library-compatibility
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 グローバル設定に加えて、各インテグレーションで App Analytics を個別に有効または無効にできます。たとえば、標準ライブラリの `net/http` パッケージを構成する場合は、以下のようにします。
 
@@ -198,8 +198,8 @@ func main() {
 <mrk mid="88" mtype="seg">}
 ```</mrk>
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 グローバル設定に加えて、個別のインテグレーションで App Analytics を有効または無効にできます。
 
@@ -214,8 +214,8 @@ tracer.use('express', {
 インテグレーション名は、[インテグレーションテーブル][1]にあります。
 
 [1]: /ja/tracing/setup/nodejs/#integrations
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 グローバル設定に加えて、個別のインテグレーションで App Analytics を有効または無効にできます。
 
@@ -240,8 +240,8 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 インテグレーション名は、[インテグレーションテーブル][1]にあります。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
 
 [1]: /ja/tracing/setup/dotnet/#integrations
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
 
@@ -254,29 +254,29 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 インテグレーション名は、[インテグレーションテーブル][1]にあります。
 
 [1]: /ja/tracing/setup/php/#integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### データベースサービス
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
 * システムプロパティ: `-Ddd.jdbc.analytics.enabled=true`
 * 環境変数: `DD_JDBC_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
 * トレーサー構成: `ddtrace.config.psycopg.analytics_enabled = True`
 * 環境変数: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
@@ -284,8 +284,8 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 デフォルトでは、データベーストレースは App Analytics によりキャプチャされません。各インテグレーションに対し手動で収集を有効にする必要があります。例:
 
@@ -293,8 +293,8 @@ Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
 // Analytics が有効になっているデータベースドライバーを登録します。sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
@@ -304,8 +304,8 @@ tracer.use('mysql', {
 })
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例えば、ADO.NET に対して App Analytics を有効にするには以下のようにします。
 
@@ -320,8 +320,8 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 インテグレーション名は、[インテグレーションテーブル][1]にあります。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
 
 [1]: /ja/tracing/setup/dotnet/#integrations
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしません。次の設定を使用して、個々のインテグレーションに対し App Analytics を有効または無効にすることができます。
 
@@ -334,13 +334,13 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 インテグレーション名は、[インテグレーションテーブル][1]にあります。
 
 [1]: /ja/tracing/setup/php/#integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### カスタムインスツルメンテーション
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_SAMPLE_RATE` タグを設定することで App Analytics を有効にできます。
 
@@ -363,8 +363,8 @@ class MyClass {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` タグを設定することで App Analytics を有効にできます。
 
@@ -378,8 +378,8 @@ def my_method():
     span.set_tag(ANALYTICS_SAMPLE_RATE_KEY, True)
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にできます。
 
@@ -390,8 +390,8 @@ Datadog.tracer.trace('my.task') do |span|
 end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 カスタムインスツルメンテーションの場合、以下に示すように、スパンで App Analytics を有効にするための特別なタグが追加されています。
 
@@ -401,8 +401,8 @@ span.SetTag(ext.AnalyticsEvent, true)
 
 これにより、スパンが App Analytics イベントとしてマークされます。
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS` タグを設定することで App Analytics を有効にできます。
 
@@ -412,8 +412,8 @@ const { ANALYTICS } = require('dd-trace/ext/tags')
 span.setTag(ANALYTICS, true)
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `Tags.Analytics` タグを設定することで App Analytics を有効にできます。
 
@@ -428,8 +428,8 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にできます。
 
@@ -440,8 +440,8 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ?>
 ```
 
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /tab >}}
+{{< tab "C++" >}}
 
 カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `analytics_event` タグを設定することで App Analytics を有効にできます。
 
@@ -459,7 +459,7 @@ span->SetTag(datadog::tags::analytics_event, true);
 span->SetTag(datadog::tags::analytics_event, 0.5);
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## スパンのフィルタリング

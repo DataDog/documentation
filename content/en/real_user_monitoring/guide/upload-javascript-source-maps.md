@@ -23,7 +23,7 @@ Configure your JavaScript bundler such that when minifying your source code, it 
 See the following configurations for popular JavaScript bundlers.
 
 {{< tabs >}}
-{{% tab "WebpackJS" %}}
+{{< tab "WebpackJS" >}}
 
 You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin][1].
 
@@ -54,12 +54,12 @@ module.exports = {
 **Note**: If you are using TypeScript, set `compilerOptions.sourceMap` to `true` in your `tsconfig.json` file.
 
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
-{{% /tab %}}
-{{% tab "ParcelJS" %}}
+{{< /tab >}}
+{{< tab "ParcelJS" >}}
 
 Parcel generates source maps by default when you run the build command: `parcel build <entry file>`.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 After building your application, bundlers generate a directory (typically named `dist`) with minified JavaScript files co-located with their corresponding source maps.

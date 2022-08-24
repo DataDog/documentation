@@ -54,7 +54,7 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -68,8 +68,8 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -176,7 +176,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

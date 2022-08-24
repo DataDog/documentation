@@ -41,7 +41,7 @@ AWS X-Ray と Datadog APM の両クライアントライブラリは、コード
 
 
 {{< tabs >}}
-{{% tab "Node.js" %}}
+{{< tab "Node.js" >}}
 ```javascript
 module.exports.hello = datadog(
     (event, context, callback) => {
@@ -55,19 +55,19 @@ module.exports.hello = datadog(
     { mergeDatadogXrayTraces: true }
 );
 ```
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 Lambda 関数で `DD_MERGE_XRAY_TRACES` 環境変数を `True` に設定します。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Ruby" %}}
+{{< tab "Ruby" >}}
 
 Lambda 関数で `DD_MERGE_DATADOG_XRAY_TRACES` 環境変数を `True` に設定します。
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -33,7 +33,7 @@ Pour surveiller des périphériques individuels :
 - Ajoutez l'adresse IP et les métadonnées de périphériques supplémentaires (en tant que tags) dans le fichier `snmp.d/conf.yaml` du dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple snmp.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 {{< tabs >}}
-{{% tab "SNMPv2" %}}
+{{< tab "SNMPv2" >}}
 
 - Pour SNMPv2, configurez une instance en spécifiant l'adresse IP et la _chaîne community_ du périphérique :
 
@@ -48,8 +48,8 @@ Pour surveiller des périphériques individuels :
         - "key2:val2"
     ```
 
-{{% /tab %}}
-{{% tab "SNMPv3" %}}
+{{< /tab >}}
+{{< tab "SNMPv3" >}}
 
 - Pour SNMPv3, configurez une instance en spécifiant l'adresse IP et les identifiants SNMPv3 appropriés du périphérique, par exemple : `user`, `authProtocol`, `authKey`, `privProtocol` et `privKey`.
 
@@ -69,7 +69,7 @@ Pour surveiller des périphériques individuels :
         - "key2:val2"
     ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 - [Redémarrez l'Agent][5].
@@ -94,7 +94,7 @@ Pour utiliser Autodiscovery avec la fonction Network Device Monitoring :
 2. Modifiez le fichier de configuration [`datadog.yaml`][8] de l'Agent afin d'inclure tous les sous-réseaux à analyser par Datadog. L'exemple de configuration suivant fournit les paramètres requis, les valeurs par défaut ainsi que des exemples pour Autodiscovery.
 
 {{< tabs >}}
-{{% tab "SNMPv2" %}}
+{{< tab "SNMPv2" >}}
 
 ```yaml
 listeners:
@@ -121,9 +121,9 @@ snmp_listener:
       loader: core
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "SNMPv3" %}}
+{{< tab "SNMPv3" >}}
 
 ```yaml
 listeners:
@@ -157,7 +157,7 @@ snmp_listener:
       loader: core
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque** : l'Agent Datadog configure automatiquement le check SNMP avec les adresses IP qui ont été découvertes. Un périphérique découvert correspond à une adresse IP qui parvient à être récupérée lors du processus de récupération via SNMP.

@@ -18,7 +18,7 @@ further_reading:
 ここでは、DogStatsD が受け付けるメトリクス、イベント、サービスチェックの生のデータグラム形式を規定します。[DogStatsD クライアントライブラリ][1]を使用する場合は、これをお読みになる必要はありません。独自のライブラリを記述する場合、あるいはシェルを使用してメトリクスを送信する場合は、以下を参照してください。
 
 {{< tabs >}}
-{{% tab "Metrics" %}}
+{{< tab "Metrics" >}}
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
@@ -43,8 +43,8 @@ further_reading:
 [1]: /ja/metrics/#naming-metrics
 [2]: /ja/metrics/types/
 [3]: /ja/getting_started/tagging/
-{{% /tab %}}
-{{% tab "Events" %}}
+{{< /tab >}}
+{{< tab "Events" >}}
 
 `_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
@@ -71,8 +71,8 @@ _e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#
 _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 ```
 
-{{% /tab %}}
-{{% tab "Service Checks" %}}
+{{< /tab >}}
+{{< tab "Service Checks" >}}
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
@@ -93,7 +93,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## DogStatsD とシェルを使用したメトリクスの送信
@@ -103,7 +103,7 @@ Linux などの Unix 系 OS では、Bash を使用してください。Windows 
 DogStatsD は、メトリクス、イベント、またはサービスチェックに関する情報を含むメッセージを作成し、ローカルにインストールされた Agent にコレクターとして送信します。宛先 IP アドレスは `127.0.0.1` で、UDP 上のコレクターポートは `8125` です。Agent の構成方法については、[メインの DogStatsD のドキュメント][3]を参照してください。
 
 {{< tabs >}}
-{{% tab "Metrics" %}}
+{{< tab "Metrics" >}}
 
 メトリクスの送信に使用される形式は以下のとおりです。
 
@@ -151,8 +151,8 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-{{% /tab %}}
-{{% tab "Events" %}}
+{{< /tab >}}
+{{< tab "Events" >}}
 
 イベントの送信に使用される形式は以下のとおりです。
 
@@ -180,8 +180,8 @@ PS C:> $text = "これは PowerShell から送信されました！"
 PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
 ```
 
-{{% /tab %}}
-{{% tab "Service Checks" %}}
+{{< /tab >}}
+{{< tab "Service Checks" >}}
 
 サービスチェックの送信に使用される形式は以下のとおりです。
 
@@ -201,7 +201,7 @@ Windows の場合
 PS C:\> .\send-statsd.ps1 "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒後にタイムアウトしました"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 コンテナ環境でメトリクス、イベント、またはサービスチェックを送信する方法については、[Kubernetes 上の DogStatsD に関するドキュメント][3]を参照してください。また、環境に応じて [Kubernetes で APM を構成][4]する手順も併せて参照してください。[Docker APM][5] のドキュメントも参考になります。

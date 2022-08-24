@@ -52,7 +52,7 @@ Après avoir instrumenté vos services et ingéré des traces, définissez des [
 En mode Live Search, Datadog affiche les spans dès qu'elles ont été envoyées par l'Agent Datadog et avant qu'elles aient été indexées par vos filtres de rétention. Toutes les spans ingérées sont affichées pour les 15 dernières minutes (période mobile) sans aucun échantillonnage.
 
 {{< tabs >}}
-{{% tab "Vue sous forme de Liste" %}}
+{{< tab "Vue sous forme de Liste" >}}
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search avec vue sous forme de liste" video="true" >}}
 
@@ -71,8 +71,8 @@ Le nombre de spans reçues par seconde est affiché en haut du tableau des trace
 
 **Remarque** : lorsque vous sélectionnez une span, le flux s'interrompt et les détails de la span sélectionnée s'affichent dans le volet latéral de la trace.
 
-{{% /tab %}}
-{{% tab "Vue sous forme de Série temporelle" %}}
+{{< /tab >}}
+{{< tab "Vue sous forme de Série temporelle" >}}
 
 {{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search avec vue sous forme de série temporelle" video="true" >}}
 
@@ -88,7 +88,7 @@ En plus de visualiser les requêtes qui correspondent à vos recherches sous for
 
 **Remarque :** l'exportation vers un dashboard ou un monitor est uniquement possible avec les spans conservées.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Filtrage
@@ -116,12 +116,12 @@ La recherche de traces conservées se fait de la même façon qu'en mode Live Se
 {{< img src="tracing/live_search/searching-retained-traces.mp4" alt="Effectuer une recherche parmi les traces conservées" video="true" >}}
 
 {{< tabs >}}
-{{% tab "Vue sous forme de Liste" %}}
+{{< tab "Vue sous forme de Liste" >}}
 
 Toutes les spans indexées par des filtres de rétention personnalisés *et* le filtre de rétention intelligent peuvent être recherchées lorsque la vue sous forme de Liste est activée. Toutefois, si vous filtrez vos spans en fonction d'un tag qui figure uniquement dans des spans non indexées par un filtre de rétention, votre recherche n'affichera aucun résultat, ce qui n'est pas le cas en mode [Live Search](#live-search-pendant-15-minutes).
 
-{{% /tab %}}
-{{% tab "Vue sous forme de Série temporelle" %}}
+{{< /tab >}}
+{{< tab "Vue sous forme de Série temporelle" >}}
 
 Toutes les spans indexées par des filtres de rétention personnalisés (et *non* par un filtre de rétention intelligent) peuvent être recherchées via l'analyse de traces.
 
@@ -130,7 +130,7 @@ Lorsque la vue sous forme de Série temporelle est activée, exportez votre requ
 [1]: /fr/dashboards/widgets/timeseries/
 [2]: /fr/monitors/create/types/apm/?tab=analytics
 [3]: /fr/notebooks
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Configuration de la rétention

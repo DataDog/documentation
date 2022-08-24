@@ -23,7 +23,7 @@ further_reading:
 ## Java トレーサーのインストール
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 ルートの `pom.xml` に新しい Maven プロファイルを追加し、Datadog Java トレーサーの依存関係と `javaagent` arg のプロパティを構成します。その際に、`$VERSION` を [Maven リポジトリ][1]からアクセス可能なトレーサーの最新のバージョンで置き換えます (先行する `v` なし): ![Maven Central][2]
 
@@ -50,8 +50,8 @@ further_reading:
 
 [1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 `ddTracerAgent` エントリを `configurations` タスクブロックに追加し、Datadog Java トレーサーの依存関係を追加します。その際に、`$VERSION` を [Maven リポジトリ][2]で利用可能なトレーサーの最新のバージョンで置き換えます (先行する `v` なし): ![Maven Central][2]
 
@@ -67,13 +67,13 @@ dependencies {
 
 [1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
 [2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## テストのインスツルメンテーション
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 [Maven Surefire プラグイン][1]または [Maven Failsafe プラグイン][2] (または両方を使用する場合は両方) を構成して、Datadog Java Agent を使用し、テスト対象のサービスまたはライブラリの名前を `-Ddd.service` プロパティで指定します。
 
@@ -118,8 +118,8 @@ DD_ENV=ci mvn clean verify -Pdd-civisibility
 
 [1]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 `configurations.ddTracerAgent` プロパティに基づいて Datadog Java トレーサーをターゲットとする `-javaagent` 引数を `jvmArgs` 属性に追加し、`-Ddd.service` プロパティでテスト対象のサービスまたはライブラリの名前を指定して、`test` Gradle タスクを構成します。
 
@@ -139,7 +139,7 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 
 **注:** Gradle でのビルドはプログラムを通じてカスタマイズできるため、これらのステップを特定のビルドコンフィギュレーションに適応させなければならない場合があります。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## コンフィギュレーション設定

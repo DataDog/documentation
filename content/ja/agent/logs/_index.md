@@ -58,7 +58,7 @@ Datadog Agent v6 は、収集したログをファイル、ネットワーク (T
 以下に、カスタムログ収集設定の例を示します。
 
 {{< tabs >}}
-{{% tab "Tail files" %}}
+{{< tab "Tail files" >}}
 
 `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` に保存されているログを `<APP_NAME>` アプリケーションから収集するには、[Agent の構成ディレクトリ][1]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
 
@@ -71,9 +71,9 @@ logs:
 ```
 
 [1]: /ja/agent/guide/agent-configuration-files/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "TCP/UDP" %}}
+{{< tab "TCP/UDP" >}}
 
 TCP ポート **10518** にログを転送する `<APP_NAME>` アプリケーションからログを収集するには、[Agent の構成ディレクトリ][1]のルートに以下の内容の `<APP_NAME>.d/conf.yaml` ファイルを作成します。
 
@@ -92,8 +92,8 @@ Agent バージョン 7.31.0 以降では、TCP 接続はアイドル状態で�
 **注**: Agent は、単純文字列、JSON、および Syslog 形式のログをサポートします。複数のログを一度に送信する場合は、改行文字を使用してログを区切ってください。
 
 [1]: /ja/agent/guide/agent-configuration-files/
-{{% /tab %}}
-{{% tab "journald" %}}
+{{< /tab >}}
+{{< tab "journald" >}}
 
 journald からログを収集するには、[Agent の構成ディレクトリ][1]のルートに以下の内容の `journald.d/conf.yaml` ファイルを作成します。
 
@@ -107,8 +107,8 @@ logs:
 
 [1]: /ja/agent/guide/agent-configuration-files/
 [2]: /ja/integrations/journald/
-{{% /tab %}}
-{{% tab "Windows Events" %}}
+{{< /tab >}}
+{{< tab "Windows Events" >}}
 
 Windows のイベントをログとして Datadog に送信するには、`conf.d/win32_event_log.d/conf.yaml` にチャンネルを手動で追加するか、Datadog Agent Manager を使用します。
 
@@ -148,7 +148,7 @@ logs:
 
 [1]: /ja/logs/log_configuration/pipelines/#integration-pipelines
 [2]: /ja/agent/basic_agent_usage/windows/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ログの収集に使用可能なパラメーターのリスト

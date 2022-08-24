@@ -44,7 +44,7 @@ title: Kubernetes ディストリビューション
 ノードで AWS Bottlerocket OS を使用している場合、コンテナモニタリング (`containerd` チェック) を有効化するために以下を追加してください:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -58,8 +58,8 @@ datadog:
     value: "containerd"
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -86,7 +86,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Azure Kubernetes Service (AKS) {#AKS}
@@ -94,7 +94,7 @@ spec:
 AKS では、AKS 証明書の設定のため、`Kubelet` インテグレーション向けの特殊なコンフィギュレーションが必要となります。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -111,8 +111,8 @@ datadog:
     tlsVerify: false # Agent 7.35 で必須となりました。注意事項参照。
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -143,7 +143,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**:
@@ -180,7 +180,7 @@ GKE Autopilot にはコンフィギュレーションが必要です（以下を
 Datadog では、Agent コンテナにリソースの上限を指定することをおすすめします。Autopilot は、比較的低いデフォルトの上限 (50m CPU、100Mi メモリ) を設定するため、ご使用の環境によってはすぐに Agent コンテナが OOMKill に達する可能性があります。該当する場合は、トレースエージェントおよびプロセスエージェントのコンテナにもリソース上限を指定することをおすすめします。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -233,7 +233,7 @@ providers:
     autopilot: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -249,7 +249,7 @@ OpenShift にはデフォルトで強化されたセキュリティ (SELinux、S
 このコンフィギュレーションは OpenShift 3.11 および OpenShift 4をサポートしていますが、OpenShift 4 で最も良い状態で動作します。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -283,8 +283,8 @@ kube-state-metrics:
     enabled: false
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 OpenShift で Datadog Operator を使用する場合、OperatorHub または RedHat Marketplace からインストールすることが推奨されています。
 以下のコンフィギュレーションは、(SCC/ServiceAccountの設定のため)、この設定と合わせて、Agent が Datadog Operator と同じネームスペースにインストールされている場合を前提として動作します。
@@ -342,7 +342,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Rancher {#Rancher}
@@ -352,7 +352,7 @@ Rancher のインストールは vanilla Kubernetes に近く、わずかなコ�
 - クラスター名には、クラウドプロバイダーが自動で取得されない値を設定
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -373,8 +373,8 @@ agents:
     operator: Exists
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -425,7 +425,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Oracle Container Engine for Kubernetes (OKE) {#OKE}
@@ -435,7 +435,7 @@ spec:
 コンテナのモニタリングを有効にするには、以下を追加します (`containerd` check):
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -449,8 +449,8 @@ datadog:
     value: "containerd"
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -477,7 +477,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 その他の `values.yaml` のサンプルは [Helm チャートリポジトリ][1]を、
@@ -489,7 +489,7 @@ TKG では、以下に示すような小さな構成変更が必要です。例�
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 カスタム `values.yaml`:
 
@@ -512,8 +512,8 @@ agents:
       effect: NoSchedule
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -548,7 +548,7 @@ spec:
       collectEvents: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
