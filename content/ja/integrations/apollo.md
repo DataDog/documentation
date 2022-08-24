@@ -1,40 +1,61 @@
 ---
-aliases:
-- /ja/integrations/apollo_engine
+app_id: apollo
+app_uuid: b39f1239-b97f-4b3b-ab5a-7a888915eedd
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - apollo.operations.count
+      - apollo.engine.operations.count
+      metadata_path: metadata.csv
+      prefix: apollo.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Apollo Engine
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: sachin@apollographql.com
+  support_email: sachin@apollographql.com
 categories:
 - モニター
 - キャッシュ
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
-display_name: Apollo Engine
+display_on_public_website: true
 draft: false
 git_integration_title: apollo
-guid: a0b142ff-0637-4c2f-814c-0f1a012bc65c
 integration_id: apollo
 integration_title: Apollo
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: sachin@apollographql.com
-manifest_version: 1.0.0
-metric_prefix: apollo.
-metric_to_check:
-- apollo.operations.count
-- apollo.engine.operations.count
+manifest_version: 2.0.0
 name: apollo
+oauth: {}
 public_title: Apollo
 short_description: GraphQL インフラストラクチャーのパフォーマンスを監視
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Caching
+  configuration: README.md#Setup
+  description: GraphQL インフラストラクチャーのパフォーマンスを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Apollo
 ---
 
 

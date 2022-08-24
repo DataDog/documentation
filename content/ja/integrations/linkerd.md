@@ -1,41 +1,64 @@
 ---
+app_id: linkerd
+app_uuid: 971384a8-4745-4b31-89b5-b112507543e6
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Linkerd - Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: linkerd.prometheus.health
+      metadata_path: metadata.csv
+      prefix: linkerd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Linkerd
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md
-display_name: Linkerd
+display_on_public_website: true
 draft: false
 git_integration_title: linkerd
-guid: 9aa60dff-4baf-4112-9177-f9c3814dd513
 integration_id: linkerd
 integration_title: Linkerd
 integration_version: 3.2.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: linkerd.
-metric_to_check: linkerd.prometheus.health
+manifest_version: 2.0.0
 name: linkerd
-public_title: Linkerd インテグレーション
+oauth: {}
+public_title: Linkerd
 short_description: linkerd からメトリクスを取得してサービス健全性を監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: linkerd からメトリクスを取得してサービス健全性を監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Linkerd
 ---
 
 

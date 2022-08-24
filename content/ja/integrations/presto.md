@@ -1,47 +1,70 @@
 ---
+app_id: presto
+app_uuid: b725cadc-d041-4199-8b86-c714ee9a318f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Presto Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: presto.failure_detector.active_count
+      metadata_path: metadata.csv
+      prefix: presto.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Presto
   logs:
     source: presto
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     error_patterns: assets/saved_views/error_patterns.json
     response_time_overview: assets/saved_views/response_time.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/presto/README.md
-display_name: Presto
+display_on_public_website: true
 draft: false
 git_integration_title: presto
-guid: a05766fc-8760-464b-9e5d-a784500b7b90
 integration_id: presto
 integration_title: Presto
 integration_version: 2.6.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: presto.
-metric_to_check: presto.failure_detector.active_count
+manifest_version: 2.0.0
 name: presto
-public_title: Presto インテグレーション
+oauth: {}
+public_title: Presto
 short_description: PrestoSQL クラスターのパフォーマンスや使用状況の統計などを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: PrestoSQL クラスターのパフォーマンスや使用状況の統計などを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Presto
 ---
 
 

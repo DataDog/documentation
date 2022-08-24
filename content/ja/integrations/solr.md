@@ -1,46 +1,70 @@
 ---
+app_id: solr
+app_uuid: 3733c24e-8466-4f3b-8411-59ef85c28302
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     solr: assets/dashboards/solr_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: solr.searcher.numdocs
+      metadata_path: metadata.csv
+      prefix: solr.
+    process_signatures:
+    - solr start
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Solr
   logs:
     source: solr
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     solr_processes: assets/saved_views/solr_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/solr/README.md
-display_name: Solr
+display_on_public_website: true
 draft: false
 git_integration_title: solr
-guid: 0235124a-0207-44dd-aede-f578a6d46b26
 integration_id: solr
 integration_title: Solr
 integration_version: 1.11.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: solr.
-metric_to_check: solr.searcher.numdocs
+manifest_version: 2.0.0
 name: solr
-process_signatures:
-- solr start
-public_title: Solr インテグレーション
+oauth: {}
+public_title: Solr
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Solr
 ---
 
 

@@ -153,12 +153,12 @@ index_algolia_preview:
     entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
   tags: ["runner:main"]
   stage: post-deploy
-  cache:
-    - *yarn_cache
+  cache: []
   environment: "preview"
-  timeout: 1h 30m
+  timeout: 2h
+  before_script:
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   script:
-    - yarn install --immutable
     - |-
         echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
         echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
@@ -287,7 +287,7 @@ index_algolia:
   tags: ["runner:main"]
   stage: post-deploy
   environment: "live"
-  timeout: 1h 45m
+  timeout: 2h
   script:
     - |-
       echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env

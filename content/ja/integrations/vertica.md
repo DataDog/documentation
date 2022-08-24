@@ -1,41 +1,64 @@
 ---
+app_id: vertica
+app_uuid: c5946789-de76-4ec6-9485-db83dd66fd28
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Vertica Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: vertica.connection.active
+      metadata_path: metadata.csv
+      prefix: vertica.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Vertica
   logs:
     source: vertica
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
-display_name: Vertica
+display_on_public_website: true
 draft: false
 git_integration_title: vertica
-guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
 integration_id: vertica
 integration_title: Vertica
-integration_version: 3.3.2
+integration_version: 3.4.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vertica.
-metric_to_check: vertica.connection.active
+manifest_version: 2.0.0
 name: vertica
-public_title: Vertica インテグレーション
+oauth: {}
+public_title: Vertica
 short_description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vertica
 ---
 
 

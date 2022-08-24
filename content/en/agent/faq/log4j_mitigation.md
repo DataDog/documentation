@@ -108,7 +108,7 @@ Finally, restart the Datadog Agent service with `sudo systemctl restart datadog-
 
 ### Windows
 
-Save the following powershell code as `jndi_cleanup.ps1`.
+Save the following PowerShell code as `jndi_cleanup.ps1`.
 
 ```powershell
 Param(
@@ -152,10 +152,10 @@ $stream.Close()
 $stream.Dispose()
 ```
 
-Stop the Datadog Agent service before applying the patch:
+From an **elevated** (run as admin) PowerShell, stop the Datadog Agent service before applying the patch:
 
 ```powershell
-"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" stopservice
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" stopservice
 ```
 
 Apply the patch to remove the JndiLogger.class from the jmxfetch.jar:
@@ -179,7 +179,7 @@ The C:\Program Files\Datadog\Datadog Agent\embedded\agent\dist\jmx\jmxfetch.jar 
 Finally, start the Datadog Agent service to apply the changes.
 
 ```powershell
-"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" start-service
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" start-service
 ```
 
 ### AIX

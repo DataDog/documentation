@@ -55,6 +55,10 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 `DD_TRACE_SAMPLE_RATE`
 : Enable trace volume control
 
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `[]`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Python process. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 

@@ -370,7 +370,7 @@ To retrieve the status of the sub-monitor `a` use:
 {{ a.status }}
 ```
 
-Possible values for the status are: `ALERT`, `OK`, `WARN`, and `NO DATA`.
+Possible values for the status are: `OK`, `Alert`, `Warn`, and `No Data`.
 
 Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag/facet.
 

@@ -1,49 +1,75 @@
 ---
+app_id: nginx-ingress-controller
+app_uuid: f84e3ebf-848b-4894-a5b0-9abbd21d4189
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     nginx_ingress_controller: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: nginx_ingress.nginx.process.count
+      metadata_path: metadata.csv
+      prefix: nginx_ingress.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: nginx-ingress-controller
   logs:
-    source: nginx-ingress-controller
-  metrics_metadata: metadata.csv
-  monitors: {}
+    source: nginx_ingress_controller
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - オーケストレーション
 - コンテナ
 - ログの収集
 - web
 - ネットワーク
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
-display_name: nginx-ingress-controller
+display_on_public_website: true
 draft: false
 git_integration_title: nginx_ingress_controller
-guid: 27f6a498-6b3e-41b0-bec4-68db4d3322c3
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
 integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: nginx_ingress.
-metric_to_check: nginx_ingress.nginx.process.count
+manifest_version: 2.0.0
 name: nginx_ingress_controller
-public_title: nginx-ingress-controller インテグレーション
+oauth: {}
+public_title: nginx-ingress-controller
 short_description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Orchestration
+  - Category::Containers
+  - Category::Log Collection
+  - Category::Web
+  - Category::Network
+  configuration: README.md#Setup
+  description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: nginx-ingress-controller
 ---
 
 

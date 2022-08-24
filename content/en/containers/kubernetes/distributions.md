@@ -197,6 +197,7 @@ datadog:
   # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
   kubeStateMetricsEnabled: false
 
+agents:
   containers:
     agent:
       # resources for the Agent container

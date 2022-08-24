@@ -50,7 +50,7 @@ draft: false
 git_integration_title: foundationdb
 integration_id: foundationdb
 integration_title: FoundationDB
-integration_version: 1.1.1
+integration_version: 1.1.2
 is_public: true
 kind: integration
 manifest_version: 2.0.0

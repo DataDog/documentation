@@ -29,7 +29,7 @@ draft: false
 git_integration_title: ネットワーク
 integration_id: システム
 integration_title: Network
-integration_version: 2.7.0
+integration_version: 2.8.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -123,7 +123,7 @@ Kubernetes: Conntrack メトリクスは、Kubernetes v1.11 未満の場合は�
 
 ## トラブルシューティング
 
-- [Datadog API による TCP/UDP ホストメトリクスの送信][9]
+- [Datadog API への TCP/UDP ホストメトリクスの送信][9]
 
 ## その他の参考資料
 
@@ -137,5 +137,5 @@ Kubernetes: Conntrack メトリクスは、Kubernetes v1.11 未満の場合は�
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/network/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/network/CHANGELOG.md#1110--2019-05-14
-[9]: https://docs.datadoghq.com/ja/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
+[9]: https://docs.datadoghq.com/ja/integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/
 [10]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/

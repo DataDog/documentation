@@ -6,10 +6,11 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
 ---
 
 {{< whatsnext desc="一般 RUM:" >}}
-{{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}RUM データによる Apdex とカスタムパフォーマンス指標の算出{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}RUM データでアラートを作成{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}コンバージョン率に応じたアラートを作成{{< /nextlink >}}
-{{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}RUM 使用量の監視{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}RUM データによる Apdex とカスタムパフォーマンス指標の算出{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}RUM データでアラートを作成{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}コンバージョン率に応じたアラートを作成{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}RUM 使用量の監視{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}RUM とセッションリプレイを製品分析に活用する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ブラウザ RUM:" >}}

@@ -242,7 +242,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [50]: /security_platform/cloud_siem/getting_started/
 [51]: /security_platform/default_rules/#cat-log-detection
 [52]: /security_platform/explorer/
-[53]: /security_platform/notification_rules/
+[53]: /security_platform/notifications/rules/
 [54]: /security_platform/cspm/getting_started/
 [55]: /security_platform/default_rules/#cat-posture-management-cloud
 [56]: /security_platform/default_rules/#cat-posture-management-infra

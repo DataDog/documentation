@@ -84,7 +84,7 @@ For non-containerized or unsupported environments, manually tag your traces, spa
 To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
-export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_URL>"
+export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url:<REPOSITORY_URL>"
 ./my-application start
 ```
 
