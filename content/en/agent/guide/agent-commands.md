@@ -132,28 +132,28 @@ List of commands to display the status of the Datadog Agent:
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| Platform        | Command                                                                       |
-|-----------------|-------------------------------------------------------------------------------|
-| AIX             | `lssrc -s datadog-agent`                                                      |
-| Linux           | See the [Agent documentation][1] for your OS.                                 |
-| Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
-| Kubernetes      | `kubectl exec -it <POD_NAME> s6-svstat /var/run/s6/services/agent/`           |
-| macOS           | `launchctl list com.datadoghq.agent` *or* through the systray app             |
-| Source          | `sudo service datadog-agent status`                                           |
+| Platform        | Command                                                                         |
+|-----------------|---------------------------------------------------------------------------------|
+| AIX             | `lssrc -s datadog-agent`                                                        |
+| Linux           | See the [Agent documentation][1] for your OS.                                   |
+| Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/`   |
+| Kubernetes      | `kubectl exec -it <POD_NAME> -c agent -- s6-svstat /var/run/s6/services/agent/` |
+| macOS           | `launchctl list com.datadoghq.agent` *or* through the systray app               |
+| Source          | `sudo service datadog-agent status`                                             |
 
 
 [1]: /agent/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| Platform        | Command                                                                  |
-|-----------------|--------------------------------------------------------------------------|
-| Linux           | `sudo service datadog-agent status`                                      |
-| Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent status` |
-| Kubernetes      | `kubectl exec -it <POD_NAME> /etc/init.d/datadog-agent status`           |
-| macOS           | `datadog-agent status`                                                   |
-| Source          | `sudo ~/.datadog-agent/bin/agent status`                                 |
-| Windows         | See the [Windows Agent documentation][1].                                |
+| Platform        | Command                                                                    |
+|-----------------|----------------------------------------------------------------------------|
+| Linux           | `sudo service datadog-agent status`                                        |
+| Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent status`   |
+| Kubernetes      | `kubectl exec -it <POD_NAME> -c agent -- /etc/init.d/datadog-agent status` |
+| macOS           | `datadog-agent status`                                                     |
+| Source          | `sudo ~/.datadog-agent/bin/agent status`                                   |
+| Windows         | See the [Windows Agent documentation][1].                                  |
 
 [1]: /agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
@@ -173,15 +173,15 @@ List of commands to display the status of your Datadog Agent and enabled integra
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| Platform   | Command                                              |
-|------------|------------------------------------------------------|
-| AIX        | `datadog-agent status`                               |
-| Linux      | `sudo datadog-agent status`                          |
-| Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
-| Kubernetes | `kubectl exec -it <POD_NAME> agent status`           |
-| macOS      | `datadog-agent status` or through the [web GUI][1]   |
-| Source     | `sudo datadog-agent status`                          |
-| Windows    | See the [Windows Agent documentation][2].            |
+| Platform   | Command                                                |
+|------------|--------------------------------------------------------|
+| AIX        | `datadog-agent status`                                 |
+| Linux      | `sudo datadog-agent status`                            |
+| Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status`   |
+| Kubernetes | `kubectl exec -it <POD_NAME> -c agent -- agent status` |
+| macOS      | `datadog-agent status` or through the [web GUI][1]     |
+| Source     | `sudo datadog-agent status`                            |
+| Windows    | See the [Windows Agent documentation][2].              |
 
 A properly configured integration is displayed under **Running Checks** with no warnings or errors, as seen below:
 
@@ -202,14 +202,14 @@ Running Checks
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| Platform   | Command                                                                |
-|------------|------------------------------------------------------------------------|
-| Linux      | `sudo service datadog-agent info`                                      |
-| Docker     | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent info` |
-| Kubernetes | `kubectl exec -it <POD_NAME> /etc/init.d/datadog-agent info`           |
-| macOS      | `datadog-agent info`                                                   |
-| Source     | `sudo ~/.datadog-agent/bin/info`                                       |
-| Windows    | See the [Windows Agent documentation][1].                              |
+| Platform   | Command                                                                  |
+|------------|--------------------------------------------------------------------------|
+| Linux      | `sudo service datadog-agent info`                                        |
+| Docker     | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent info`   |
+| Kubernetes | `kubectl exec -it <POD_NAME> -c agent -- /etc/init.d/datadog-agent info` |
+| macOS      | `datadog-agent info`                                                     |
+| Source     | `sudo ~/.datadog-agent/bin/info`                                         |
+| Windows    | See the [Windows Agent documentation][1].                                |
 
 A properly configured integration is displayed under **Checks** with no warnings or errors, as seen below:
 
