@@ -5850,13 +5850,11 @@
       "ContentEncoding": {
         "description": "HTTP header used to compress the media-type.",
         "enum": [
-          "identity",
           "gzip",
           "deflate"
         ],
         "type": "string",
         "x-enum-varnames": [
-          "IDENTITY",
           "GZIP",
           "DEFLATE"
         ]
@@ -58476,13 +58474,11 @@
             "schema": {
               "description": "HTTP header used to compress the media-type.",
               "enum": [
-                "identity",
                 "gzip",
                 "deflate"
               ],
               "type": "string",
               "x-enum-varnames": [
-                "IDENTITY",
                 "GZIP",
                 "DEFLATE"
               ]
@@ -58508,18 +58504,10 @@
                   "summary": "Multi JSON Messages",
                   "value": [
                     {
-                      "ddsource": "nginx",
-                      "ddtags": "env:staging,version:5.1",
-                      "hostname": "i-012345678",
-                      "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello",
-                      "service": "payment"
+                      "message": "hello"
                     },
                     {
-                      "ddsource": "nginx",
-                      "ddtags": "env:staging,version:5.1",
-                      "hostname": "i-012345679",
-                      "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] World",
-                      "service": "payment"
+                      "message": "world"
                     }
                   ]
                 },
@@ -58527,11 +58515,10 @@
                   "description": "Log attributes can be passed as `key:value` pairs in valid JSON messages.",
                   "summary": "Simple JSON Message",
                   "value": {
-                    "ddsource": "nginx",
-                    "ddtags": "env:staging,version:5.1",
-                    "hostname": "i-012345678",
-                    "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
-                    "service": "payment"
+                    "ddsource": "agent",
+                    "ddtags": "env:prod,user:joe.doe",
+                    "hostname": "fa1e1e739d95",
+                    "message": "hello world"
                   }
                 }
               },
@@ -58583,12 +58570,12 @@
                 "multi-raw-message": {
                   "description": "Submit log messages.",
                   "summary": "Multi Logplex Messages",
-                  "value": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello\n2019-11-19T14:37:58,995 INFO [process.name][20081] World"
+                  "value": "hello\nworld"
                 },
                 "simple-logplex-message": {
                   "description": "Submit log string.",
                   "summary": "Simple Logplex Message",
-                  "value": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+                  "value": "hello world"
                 }
               },
               "schema": {
@@ -58600,12 +58587,12 @@
                 "multi-raw-message": {
                   "description": "Submit log string.",
                   "summary": "Multi Raw Messages",
-                  "value": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello\n2019-11-19T14:37:58,995 INFO [process.name][20081] World\n"
+                  "value": "hello\nworld\n"
                 },
                 "simple-raw-message": {
                   "description": "Submit log string. Log attributes can be passed as query parameters in the URL. This enables the addition of tags or the source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.",
                   "summary": "Simple Raw Message",
-                  "value": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+                  "value": "hello world"
                 }
               },
               "schema": {
@@ -59538,7 +59525,7 @@
           "Logs"
         ],
         "x-codegen-request-body-name": "body",
-        "x-menu-order": 2,
+        "x-menu-order": 1,
         "x-undo": {
           "type": "safe"
         }
@@ -66081,7 +66068,7 @@
         "tags": [
           "Logs"
         ],
-        "x-menu-order": 4,
+        "x-menu-order": 3,
         "x-pagination": {
           "cursorParam": "page[cursor]",
           "cursorPath": "meta.page.after",
@@ -66448,7 +66435,7 @@
           "Logs"
         ],
         "x-codegen-request-body-name": "body",
-        "x-menu-order": 3,
+        "x-menu-order": 2,
         "x-pagination": {
           "cursorParam": "body.page.cursor",
           "cursorPath": "meta.page.after",

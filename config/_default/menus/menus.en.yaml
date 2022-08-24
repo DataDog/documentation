@@ -4531,7 +4531,7 @@ api:
       operationids:
         - ListLogsGet
       unstable: []
-      order: 4
+      order: 3
   - name: Aggregate events
     url: '#aggregate-events'
     identifier: logs-aggregate-events
@@ -4543,7 +4543,7 @@ api:
       operationids:
         - AggregateLogs
       unstable: []
-      order: 2
+      order: 1
   - name: Send logs
     url: '#send-logs'
     identifier: logs-send-logs
@@ -4569,7 +4569,7 @@ api:
       operationids:
         - ListLogs
       unstable: []
-      order: 3
+      order: 1
   - name: Logs Indexes
     url: /api/latest/logs-indexes/
     identifier: logs-indexes
