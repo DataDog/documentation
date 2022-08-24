@@ -75,6 +75,7 @@ To access this dashboard, go to **Dashboards > Dashboards List** and search for 
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
 - To turn off Sensitive Data Scanner entirely, disable each Scanning Group and Scanning Rule by setting the toggle to the **off** state.
+- The supported regex flavor is Golang.
 
 ## Further Reading
 
