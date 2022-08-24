@@ -59,9 +59,16 @@ When installing the Agent on an AWS host, you might see duplicated hosts on the 
 
 ### EC2 metadata with IMDS v2
 
-In your [Agent configuration][5], if the parameter `ec2_prefer_imdsv2`, is set to `true` (defaults to `false`), the Agent requests EC2 metadata using Instance Metadata Service Version 2 (IMDSv2), which offers additional security for accessing metadata. In some situations, additional configuration may be required in AWS, for example: using a containerized Agent on a plain EC2 instance. See the [Transition to using Instance Metadata Service Version 2][6] documentation for details.
+EC2's [IMDSv2][8] can sometimes lead to problems gathering EC2 instance hostnames, where the Agent uses the `os` hostname provider instead of `aws`, as seen in the output of `agent status`.
 
 In containerized environments the problem might be that you have locked down the EC2 metadata endpoint, by way of assigning IAM roles/credentials to pods running in the Kubernetes cluster. `Kube2IAM` and `kiam` are common tools used to do this. To solve this, update your `Kube2IAM` or `kiam` configuration to allow access to this endpoint.
+
+The AWS API supports disabling IMDSv1, which the Agent uses by default.  If this is the case, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][5]. See the [Transition to using Instance Metadata Service Version 2][6] documentation for details.
+
+IMDSv2 will, in its default configuration, refuse connections with an IP hop count greater than one, i.e., that have passed through an IP gateway.
+This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime will forward the container's traffic through a virtual IP gateway.
+This is common in ECS deployments.
+To remedy this, increase the maximum hop count to at least 2.
 
 ## Tags
 
@@ -82,3 +89,4 @@ If you want to permanently remove AWS host tags from a host, you can do this by 
 [5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
 [7]: /api/latest/tags/#remove-host-tags
+[8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
