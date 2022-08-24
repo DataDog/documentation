@@ -305,7 +305,7 @@ Multiple styles may be used, comma separated.
 Propagation styles to use when extracting tracing headers. The supported styles are:
 
   - [B3][7]
-  - B3 single header[8]
+  - [B3 single header][8]
   - Datadog
 
 If using multiple styles, comma separate them.
