@@ -176,23 +176,7 @@ apm_config:
 
 ## 収集した HTTP データ
 
-Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、以下のタグが各サーバー側の Web スパンに対して収集されます。
-
-*  `http.status_code` - リクエストのレスポンスステータスコード。
-*  `http.method` - メソッドまたは HTTP 動詞。
-*  `http.version` - プロトコルのバージョン。
-*  `http.url` - 難読化されたクエリ文字列を含む完全な URL。難読化の詳細については、以下を参照してください。
-*  `http.useragent` - ブラウザのユーザー Agent フィールド (利用可能な場合)。
-*  `http.server_name` - マッチしたホストまたはバーチャルホストのプライマリサーバー名。
-*  `http.route` - マッチしたルート (パステンプレート)。
-*  `http.client_ip` - すべてのプロキシの背後にある元のクライアントの IP アドレス (既知の場合)。`X-Forwarded-For` のようなヘッダーから発見される。
-*  `http.request.content_length` - リクエストペイロード本文のサイズ (バイト単位)。
-*  `http.request.content_length_uncompressed` - トランスポートデコード後の圧縮されていないリクエストペイロード本文のサイズ。
-*  `http.request.headers.*` - リクエストの HTTP ヘッダー。デフォルトでは何も収集されませんが、オプションで構成することができます。
-*  `http.response.content_length` - レスポンスペイロード本文のサイズ (バイト単位)。
-*  `http.response.content_length_uncompressed` - トランスポートデコード後の圧縮されていないレスポンスペイロード本文のサイズ。
-*  `http.response.headers.*` - レスポンスの HTTP ヘッダー。デフォルトでは何も収集されませんが、オプションで構成することができます。
-
+Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、[スパンタグのセマンティクス][11]を参照してください。
 
 ### クライアント IP ヘッダーの構成
 
@@ -330,6 +314,11 @@ DD_APM_REPLACE_TAGS=[
 * Ruby: [処理パイプライン][9]
 * Python: [トレースフィルター][10]
 
+## テレメトリーの収集
+
+Datadog は、お客様のトレーシングライブラリに関する環境情報や診断情報を収集して処理することがあります。これには、アプリケーションを実行しているホスト、オペレーティングシステム、プログラミング言語とランタイム、使用する APM インテグレーション、およびアプリケーションの依存関係に関する情報が含まれる場合があります。さらに、Datadog は、診断ログ、難読化されたスタックトレースを含むクラッシュダンプ、および様々なシステムパフォーマンスメトリクスなどの情報を収集する場合があります。
+
+このテレメトリー収集を無効にするには、インスツルメンテーションを行うアプリケーションで `DD_INSTRUMENTATION_TELEMETRY_ENABLED` 環境変数を `false` に設定してください。
 
 [1]: /ja/help/
 [2]: /ja/tracing/glossary/#trace
@@ -341,3 +330,4 @@ DD_APM_REPLACE_TAGS=[
 [8]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 [9]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
+[11]: /ja/tracing/trace_collection/tracing_naming_convention/#http-requests
