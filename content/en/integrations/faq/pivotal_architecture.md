@@ -1,7 +1,7 @@
 ---
-title: Datadog Pivotal Platform Architecture
+title: Datadog Pivotal Platform Integration Architecture
 kind: faq
-description: "Overview of the Datadog integration with Pivotal"
+description: "Overview of the Datadog integration with Pivotal Platform"
 further_reading:
 - link: "https://www.datadoghq.com/blog/pivotal-cloud-foundry-architecture/"
   tag: "Blog"
@@ -19,20 +19,20 @@ The following diagram provides an overview of the components of the Datadog inte
 
 ## Datadog components for Pivotal Cloud Foundry/PAS
 
-You can deploy and configure the components of the Datadog solution for PCF from the Tanzu Ops Manager with the Application Monitoring and Cluster Monitoring tiles.
+You can deploy and configure the components of the Datadog integration with PCF from the Tanzu Ops Manager, with the Application Monitoring and Cluster Monitoring tiles.
 - **Datadog Cluster Monitoring Tile** - Platform Engineers use this to collect, visualize, and alert on metrics and logs from PCF Platform Components. From this tile, users can deploy the Datadog Node Agent, Datadog Cluster Agent (DCA), and the Firehose Nozzle.
 - **Datadog Application Monitoring Tile** - Application developers use this to collect custom metrics, traces, and logs from their applications. From this tile, users can deploy the Datadog Buildpack which contains the Container Agent, Trace Agent, and DogStatsD.
 
-## Datadog Cluster Monitoring Tile Components:
+## Datadog cluster monitoring tile components:
 
 ### Node Agent
 
-The Node Agent exists on every BOSH VM and reports hosts (VMs), containers, and processes to Datadog. The Node Agent is deployed and configured from the **Cluster Monitoring** Tile in Tanzu Ops Manager. You can also use the Node Agent to retrieve logs from supported integrations.
+The Node Agent exists on every BOSH VM and reports hosts (VMs), containers, and processes to Datadog. The Node Agent is deployed and configured from the **Cluster Monitoring** tile in Tanzu Ops Manager. You can also use the Node Agent to retrieve logs from supported integrations.
 
-#### Tags Collected
+#### Tags collected
 
    - Metadata pertaining to the underlying BOSH VMs (for example, `bosh_job`, `bosh_name`).
-   - Corresponding container and application tags from the Cluster Agent (DCA).
+   - Corresponding container and application tags from the Datadog Cluster Agent (DCA).
    - Custom tags added from the tile during configuration.
 
 All metadata collected appears as host VM and container tags. The host VM monitored by the Node Agent can be seen in the [Infrastructure List][1] page, and the underlying containers within the host can be seen in the [Container Map][2] and [Live Containers][3] page.
@@ -47,7 +47,7 @@ The [DCA][4] provides a streamlined, centralized approach to collecting cluster 
    - Labels and annotations exposed from the application metadata following the autodiscovery tags format `tags.datadoghq.com/k=v`.
    - List of apps running on each host VM.
 
-Autodiscovery tags are added at the CAPI level as metadata for the application. You can add custom tags through the CAPI, and the DCA picks up these tags periodically. You can also configure the DCA to act as a cache for the Firehose Nozzle with config option within the cluster monitoring tile. This enables the nozzle to query data from the DCA instead of the CAPI, further reducing the load on the CAPI. The metadata collected by the DCA can be seen in the containers page, with PCF containers assigned the following tags: `cloudfoundry`, `app_name`, `app_id`, and `bosh_deployment`.
+Autodiscovery tags are added at the CAPI level as metadata for the application. You can add custom tags through the CAPI, and the DCA picks up these tags periodically. You can also configure the DCA to act as a cache for the Firehose Nozzle with a configuration option within the cluster monitoring tile. This enables the nozzle to query data from the DCA instead of the CAPI, further reducing the load on the CAPI. The metadata collected by the DCA can be seen in the containers page, with PCF containers assigned the following tags: `cloudfoundry`, `app_name`, `app_id`, and `bosh_deployment`.
 
 ### Firehose Nozzle
 
@@ -57,12 +57,11 @@ The Datadog Firehose Nozzle consumes information from your deployment’s Loggre
 
    - Tags exposed from the application metadata following the autodiscovery tags format `tags.datadoghq.com/k=v`. These are the tags a user can add to the application metadata from the CAPI.
 
-
 ## Datadog Application Monitoring Tile Components:
 
 ### Buildpack
 
-The Datadog Buildpack installs the lightweight IOT Agent inside the container alongside the application. The Agent is only launched or started if logs collection is enabled through setting `DD_LOGS_ENABLED=TRUE`, used to send application-level logs to Datadog. Otherwise, DogStatsD is launched to send metrics. When the application is running with the Datadog Buildpack, you can pass multiple configuration options using environment variables for the application. The variables can come from the application manifest (`manifest.yml`) or the Cloud Foundry(CF) CLI using `cf set-env` command.
+The Datadog Buildpack installs the lightweight IOT Agent inside the container alongside the application. The Agent is only launched or started if logs collection is enabled through setting `DD_LOGS_ENABLED=TRUE`, used to send application-level logs to Datadog. Otherwise, DogStatsD is launched to send metrics. When the application is running with the Datadog buildpack, you can pass multiple configuration options using environment variables for the application. The variables can come from the application manifest (`manifest.yml`) or the Cloud Foundry(CF) CLI using `cf set-env` command.
 
 #### Metadata Collected
 
