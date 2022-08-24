@@ -304,7 +304,7 @@ Multiple styles may be used, comma separated.
 **Default**: `Datadog,B3,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. Currently supported styles are:
 
-  - B3[7]
+  - [B3][7]
   - B3 single header[8]
   - Datadog
 
