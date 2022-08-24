@@ -232,7 +232,7 @@ For further help with this issue, [contact support][2] and include the output of
 
 ## Missing profiles in the profile search page
 
-If you've configured the profiler and don't see profiles in the profile search page, here are a few settings to check depending on the Operating System.
+If you've configured the profiler and don't see profiles in the profile search page, here are things to check, depending on the Operating System.
 
 {{< tabs >}}
 
@@ -244,17 +244,15 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    1. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
 
-   2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end.
+   2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end. If that message is not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
 
-   3. If not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
+   3. Restart the application.
 
-   4. Restart the application.
+   4. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
 
-   5. Open the `dotnet-native-loader-dotnet-<pid>` log file in the `/var/log/datadog` folder.
+   5. Look for the `#Profiler` entry.
 
-   6. Look for the `#Profiler` entry.
-
-   7. Check the following lines to ensure that the profiler library has been loaded:
+   6. Check the following lines to ensure that the profiler library has been loaded:
       ```
       [...] #Profiler
       [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x64;.\Datadog.Profiler.Native.dll
@@ -268,26 +266,20 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 3. Check the result of profiles export:
 
-   1. If not set already, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application and restart it.
+   1. If debug logs were not enabled in step 2.2, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: it means that it is not possible to contact the agent.
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent.
 
-   4. If not present, look for `The profile was sent. Success?` entries.
+   4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
-   5. The following means the profile has been sent successfully:
+   The following message means the profile has been sent successfully:
       ```
       true, Http code: 200
       ```
 
-   6. Check the following other Http codes for error possible reasons:
-      ```
-      false, Http code: XXX
-      ```
-        1. 403:  // TODO
-
-        2. 500:  // TODO
+   5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
 {{% /tab %}}
 
@@ -295,13 +287,11 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 1. Check that the Agent is installed and running and is visible in the Windows Services panel.
 
-2. Check the profiler has been loaded from the loader log:
+2. Check that the profiler has been loaded from the loader log:
 
    1. Open the `dotnet-native-loader-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
 
-   2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end.
-
-   2. If not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
+   2. Look for `CorProfiler::Initialize: Continuous Profiler initialized successfully.` near the end. If the `initialized successfully` message is not present, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application.
 
    3. Restart the application.
 
@@ -323,26 +313,20 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 3. Check the result of profiles export:
 
-   1. If not set already, enable debug logs by setting the `DD_TRACE_DEBUG` environment variable for the application and restart it.
+   1. If debug logs were not enabled in step 2.2, set the `DD_TRACE_DEBUG` environment variable to `true` for the application and restart it.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `%ProgramData%\Datadog-APM\logs\DotNet` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: it means that it is not possible to contact the agent.
+   3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent.
 
-   4. If not present, look for `The profile was sent. Success?` entries.
+   4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
-   5. The following means the profile has been sent successfully:
+   The following message means the profile has been sent successfully:
       ```
       true, Http code: 200
       ```
 
-   6. Check the following other Http codes for error possible reasons:
-      ```
-      false, Http code: XXX
-      ```
-        1. 403:  // TODO
-
-        2. 500:  // TODO
+   5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
 {{% /tab %}}
 
@@ -356,13 +340,8 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 ## High CPU usage when enabling the profiler
 
-The profiler has a fixed overhead. The exact value can vary but should be expected to be about:
- -  200ms of CPU time per second on Linux (0.2 CPU)
- -  20ms of CPU time per second on Windows (0.02 CPU)
-
-This fixed cost means that the relative overhead of the profiler can be significant in very small containers. For example, if you run the profiler in a Linux container with 0.4 CPU assigned, the fixed cost of 0.2 CPU means that the relative overhead is 50%. Adjust the container limits accordingly.
-
-
+The profiler has a fixed overhead. The exact value can vary but this fixed cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than 1 core.
+You can override the 1 core threshold by setting `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value smaller than 1. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
