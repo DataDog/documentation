@@ -14,7 +14,7 @@ further_reading:
     tag: "Learning Center"
     text: "Building Better Dashboards"
 aliases:
-    - /dashboards/reporting
+    - /dashboards/reporting/
 ---
 
 ## Overview
