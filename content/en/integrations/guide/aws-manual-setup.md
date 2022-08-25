@@ -75,7 +75,7 @@ Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 9. Select **AWS account** for the trusted entity type, and **Another AWS account**.
 10. Enter `464622532012` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 11. Select **Require external ID** and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section. 
-Ensure to leave `Require MFA` disabled. 
+Ensure to leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][1] AWS documentation.
 12. Click **Next**.
 13. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section. 
 14. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to use Datadog's [Cloud Security Posture Management product][4] (CSPM).
@@ -85,7 +85,7 @@ Ensure to leave `Require MFA` disabled.
 
 ### Complete the setup in Datadog
 
-18. Return to the AWS integration tile page in your Datadog account that you had open in another tab, and click the checkbox to confirm the Datadog IAM role was added to the AWS account.
+18. Return to the AWS integration configuration page for manually adding an account in Datadog that you had open in another tab. Click the checkbox to confirm the Datadog IAM role was added to the AWS account.
 19. Enter the account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
 20. Enter the name of the role created in the previous section, and click **Save**.  
   **Note:** The role name you enter in the integration tile is case sensitive and must exactly match the role name in AWS.
@@ -108,8 +108,6 @@ Ensure to leave `Require MFA` disabled.
 
 1. In your AWS console, create an IAM user to be used by the Datadog integration with the [necessary permissions](#aws-integration-iam-policy).
 2. Generate an access key and secret key for the Datadog integration IAM user.
-
-For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][1] AWS documentation.
 
 ### Datadog
 
