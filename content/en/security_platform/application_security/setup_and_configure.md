@@ -452,7 +452,7 @@ For information and options, read [the NodeJS tracer documentation][1].
 
 {{< programming-lang lang="python" >}}
 
-The Python tracer package provides the `set_user` function, which allows you to monitor authenticated requests by adding user information to the trace.
+Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
 
 This example shows how to set user monitoring tags:
 
