@@ -297,7 +297,6 @@ Propagation styles to use when injecting tracing headers. The supported styles a
   - [B3 single header][8]
   - Datadog
 
-
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
 **Default**: `Datadog,B3,B3 single header`<br>
