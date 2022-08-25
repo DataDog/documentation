@@ -2984,7 +2984,7 @@ main:
     parent: rum
     identifier: rum_explorer
     weight: 9
-  - name: Search
+  - name: Search RUM Events
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
