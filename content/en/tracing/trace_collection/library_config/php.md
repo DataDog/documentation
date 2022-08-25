@@ -306,7 +306,6 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
   - [B3 single header][8]
   - Datadog
 
-If using multiple styles, comma separate them.
 #### Integration names
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
