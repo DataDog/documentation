@@ -1,45 +1,68 @@
 ---
+app_id: jfrog-platform
+app_uuid: b2748652-b976-461c-91dd-5abd4467f361
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Artifactory Metrics: assets/dashboards/artifactory_metrics.json
     Jfrog Artifactory Dashboard: assets/dashboards/jfrog_artifactory_dashboard.json
     Xray Logs: assets/dashboards/xray_logs.json
     Xray Metrics: assets/dashboards/xray_metrics.json
     Xray Violations: assets/dashboards/xray_violations.json
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: jfrog.artifactory.app_disk_free_bytes
+      metadata_path: metadata.csv
+      prefix: jfrog.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: JFrog Platform
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: integrations@jfrog.com
+  support_email: integrations@jfrog.com
 categories:
 - ログの収集
 - セキュリティ
 - メトリクス
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md
-display_name: JFrog Platform
+display_on_public_website: true
 draft: false
 git_integration_title: jfrog_platform
-guid: 2c70552e-b77a-4349-9955-8799b9b57d56
 integration_id: jfrog-platform
 integration_title: JFrog Platform
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: integrations@jfrog.com
-manifest_version: 1.0.0
-metric_prefix: jfrog.
-metric_to_check: jfrog.artifactory.app_disk_free_bytes
+manifest_version: 2.0.0
 name: jfrog_platform
+oauth: {}
 public_title: JFrog Platform
 short_description: JFrog Artifactory と Xray のメトリクスおよびイベントを表示、分析します。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Security
+  - Category::Metrics
+  configuration: README.md#Setup
+  description: JFrog Artifactory と Xray のメトリクスおよびイベントを表示、分析します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JFrog Platform
 ---
 
 ## 概要

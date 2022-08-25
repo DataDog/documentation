@@ -1,38 +1,61 @@
 ---
+app_id: neutrona
+app_uuid: f44f84d4-1436-4ab1-8023-b952850b64c8
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: neutrona.azure.expressroute.egress_bps
+      metadata_path: metadata.csv
+      prefix: neutrona.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Neutrona
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: david@neutrona.com
+  support_email: david@neutrona.com
 categories:
-- AZURE
-- CLOUD
+- azure
+- クラウド
 - ネットワーク
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neutrona/README.md
-display_name: Neutrona
+display_on_public_website: true
 draft: false
 git_integration_title: neutrona
-guid: ced5a4ae-6623-49f0-b45b-dbb678a5baa2
 integration_id: neutrona
 integration_title: Neutrona
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: david@neutrona.com
-manifest_version: 1.0.0
-metric_prefix: neutrona.
-metric_to_check: neutrona.azure.expressroute.egress_bps
+manifest_version: 2.0.0
 name: neutrona
-public_title: Datadog-Neutrona インテグレーション
+oauth: {}
+public_title: Neutrona
 short_description: Neutrona Telemetry
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Azure
+  - Category::Cloud
+  - Category::Network
+  configuration: README.md#Setup
+  description: Neutrona Telemetry
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Neutrona
 ---
 
 
@@ -96,5 +119,5 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 [6]: https://github.com/DataDog/integrations-extras/blob/master/neutrona/datadog_checks/neutrona/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[9]: https://github.com/DataDog/integrations-core/blob/master/neutrona/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/neutrona/metadata.csv
 [10]: https://docs.datadoghq.com/ja/help/

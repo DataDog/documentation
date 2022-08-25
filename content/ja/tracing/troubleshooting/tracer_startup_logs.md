@@ -1,14 +1,22 @@
 ---
-title: Tracer Startup Logs
+further_reading:
+- link: /tracing/troubleshooting/connection_errors/
+  tag: ドキュメント
+  text: APM 接続エラーのトラブルシューティング
 kind: Documentation
+title: Tracer Startup Logs
 ---
 ## 起動ログ
 
-トレーサー起動ログは、起動時に取得可能なすべての情報をキャプチャし、ログ内を簡単に検索できるようにこれを `DATADOG TRACER CONFIGURATION` または `DATADOG TRACER DIAGNOSTICS` として記録します。一部の言語は、言語の慣習と `Stdout` または同等のものへのアクセスの安全性に応じて、別のファイルにログを記録する場合があります。この場合、ログの場所は下の言語タブに表示されます。
+トレーサー起動ログは、起動時に取得可能なすべての情報を取得し、`DATADOG TRACER CONFIGURATION` または `DATADOG TRACER DIAGNOSTICS` として記録し、ログ内の検索を簡素化することができます。
 
-`DIAGNOSTICS` ログの入力は、アプリケーションの起動中にトレーサーでエラーが発生したときに発生します。一方、`CONFIGURATION` ログは、トレーサーに適用された設定の JSON 形式の表現です。Agent の接続性チェックが実行される言語では、コンフィギュレーション JSON には、Agent に到達できるかどうかを示す 'agent_error' キーも含まれます。
+言語によっては、言語の慣習や `Stdout` やそれに相当するものにアクセスする安全性に応じて、別のファイルにログを記録するものもあります。そのような場合、ログの場所は以下の言語タブに記されています。いくつかの言語では、診断エントリをログに残しません。
 
-`DIAGNOSTICS` ログ行が表示された場合は、示されたログから、設定とコンフィギュレーションが正しく適用されていることを確認します。ログがまったく表示されない場合は、アプリケーションログがサイレントになっていないこと、および該当する場合はログレベルが少なくとも `INFO` であることを確認します。
+`CONFIGURATION` ログは、トレーサーに適用された設定の JSON 形式の表現です。Agent の接続性チェックが実行される言語では、コンフィギュレーション JSON には、Agent に到達できるかどうかを示す `agent_error` キーも含まれます。
+
+`DIAGNOSTICS` ログエントリは、それを生成する言語では、アプリケーションの起動中にトレーサーがエラーに遭遇したときに発生します。もし `DIAGNOSTICS` のログが表示された場合は、表示されたログから設定や構成が正しく適用されていることを確認してください。
+
+ログが全く表示されない場合は、アプリケーションのログが消されていないか、またログレベルが少なくとも `INFO` であることを確認してください (該当する場合)。
 
 {{< programming-lang-wrapper langs="java,.NET,php,go,nodejs,python,ruby,cpp" >}}
 {{< programming-lang lang="java" >}}
@@ -68,7 +76,6 @@ DATADOG TRACER DIAGNOSTICS - Profiler disabled: {process_name} found in DD_PROFI
 DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: interface ICorProfilerInfo3 not found
 DATADOG TRACER DIAGNOSTICS - Profiler disabled: {application_pool} is recognized as an Azure App Services infrastructure process
 DATADOG TRACER DIAGNOSTICS - Profiler disabled: {application_pool} is recognized as Kudu, an Azure App Services reserved process
-DATADOG TRACER DIAGNOSTICS - Profiler disabled: DD_INTEGRATIONS environment variable not set
 DATADOG TRACER DIAGNOSTICS - Profiler disabled: no enabled integrations found
 DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
@@ -162,6 +169,8 @@ Go トレーサーは、2 つの可能性のある診断行の 1 つを出力し
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
+起動ログは、トレーサーのバージョン 2.x からデフォルトで無効になっています。環境変数 `DD_TRACE_STARTUP_LOGS=true` を使用することで有効にすることができます。
+
 **コンフィギュレーション:**
 
 ```text
@@ -189,7 +198,11 @@ DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent
 
 Python トレーサーは、コンフィギュレーション情報を INFO レベルで記録します。診断情報が見つかった場合は、ERROR としてログに記録します。
 
-ログコンフィギュレーションがない場合、診断のみが `Stderr` に出力されます。トレーサーの起動ログを表示するには、ロガーを追加するか、コンフィギュレーションに `DD_TRACE_DEBUG=true` を設定して、`ddtrace-run` でアプリケーションを実行します。これにより、ロガーが追加され、デバッグと起動の両方のトレーサーログが公開されます。
+ログコンフィギュレーションがない場合、診断のみが `Stderr` に出力されます。
+
+トレーサーの起動ログを表示するには、ロガーを追加するか、コンフィギュレーションに `DD_TRACE_DEBUG=true` を設定して、`ddtrace-run` でアプリケーションを実行します。これにより、ロガーが追加され、デバッグと起動の両方のトレーサーログが公開されます。
+
+`DD_TRACE_LOG_FILE` でファイルにログを記録するためのオプションについては、 [トレーサーデバッグログ][1]を参照してください。
 
 **コンフィギュレーション:**
 
@@ -204,6 +217,7 @@ Python トレーサーは、Agent に到達できない場合に診断行を出�
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Connection refused
 ```
+[1]: /ja/tracing/troubleshooting/tracer_debug_logs/?code-lang=python#enable-debug-mode
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
@@ -225,10 +239,6 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**ファイルの場所:**
-
-C++ の場合、起動ログファイルは `/var/tmp/dd-opentracing-cpp` に作成されます (例: `/var/tmp/dd-opentracing-cpp/startup_options-1593737077369521386.json`)。
-
 **コンフィギュレーション:**
 
 ```text
@@ -239,31 +249,38 @@ C++ の場合、起動ログファイルは `/var/tmp/dd-opentracing-cpp` に作
 
 **診断:**
 
-C++ の場合、トレーサーログに出力される `DATADOG TRACER DIAGNOSTICS` 行はありません。ただし、Agent に到達できない場合は、アプリケーションログにエラーが表示されます。または、Envoy では、メトリクスの `tracing.datadog.reports_failed` と `tracing.datadog.reports_dropped` が増加します。
+C++ の場合、トレーサーログに出力される `DATADOG TRACER DIAGNOSTICS` 行はありません。ただし、Agent に到達できない場合は、アプリケーションログにエラーが表示されます。Envoy では、メトリクスの `tracing.datadog.reports_failed` と `tracing.datadog.reports_dropped` が増加します。
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## 診断エラー
+## 接続エラー
 
-トレーサーがトレースを Datadog Agent に送信できないことを示す `DIAGNOSTICS` エラー出力を探します。
+アプリケーションや起動ログに `DIAGNOSTICS` エラーや Agent に到達できない、接続できないというメッセージ (言語によって異なる) がある場合、トレーサーが Datadog Agent にトレースを送ることができないことを意味します。
 
-これらのエラーがある場合は、トレーサーが [ECS][1]、[Kubernetes][2]、[Docker][3] または[その他のオプション][4]のトレースを受信するように設定されていることを確認するか、または[サポートチームまでお問い合わせ][5]の上、トレーサーと Agent のコンフィギュレーションを確認してください。
+これらのエラーがある場合は、Agent が [ECS][1]、[Kubernetes][2]、[Docker][3] または[その他のオプション][4]のトレースを受信するように設定されていることを確認するか、または[サポートチームまでお問い合わせ][5]の上、トレーサーと Agent のコンフィギュレーションを確認してください。
+
+インスツルメントされたアプリケーションが Datadog Agent と通信できないことを示すエラーについては、[接続エラー][6]を参照してください。
 
 ## コンフィギュレーション設定
 
-ログに `CONFIGURATION` 行のみが含まれている場合にトラブルシューティングするには、トレーサーによって出力された設定が、Datadog トレーサーのデプロイとコンフィギュレーションの設定と一致することを確認すると良いでしょう。さらに、Datadog に特定のトレースが表示されない場合は、ドキュメントの[互換性要件][6]セクションを確認して、これらのインテグレーションがサポートされていることを確認してください。
+ログに `CONFIGURATION` 行のみが含まれている場合にトラブルシューティングするには、トレーサーによって出力された設定が、Datadog トレーサーのデプロイとコンフィギュレーションの設定と一致することを確認すると良いでしょう。さらに、Datadog に特定のトレースが表示されない場合は、ドキュメントの[互換性要件][7]セクションを確認して、これらのインテグレーションがサポートされていることを確認してください。
 
 使用しているインテグレーションがサポートされていない場合、またはトレースが Datadog で期待どおりに表示されない理由を理解するためにコンフィギュレーションの出力を別の人にも確認してもらいたい場合は、[サポートチームにお問い合わせ][5]ください。診断と、新しいインテグレーションの機能リクエストの作成をお手伝いします。
 
 ## 起動ログの無効化
 
-言語ごとに、環境変数 `DD_TRACE_STARTUP_LOGS=false` を設定して起動ログを無効にできますが、これは、発行されたログが問題を引き起こしている場合にのみ行ってください。後で[デバッグ][7]ログを送信する場合は、サポートケースのトリアージを迅速化するために、起動ログを有効にし、関連するすべてのログをまとめて送信してください。
+言語ごとに、環境変数 `DD_TRACE_STARTUP_LOGS=false` を設定して起動ログを無効にできますが、これは、発行されたログが問題を引き起こしている場合にのみ行ってください。後で[デバッグ][8]ログを送信する場合は、サポートケースのトリアージを迅速化するために、起動ログを有効にし、関連するすべてのログをまとめて送信してください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/amazon_ecs/?tab=java#trace-collection
 [2]: /ja/agent/kubernetes/?tab=helm
 [3]: /ja/agent/docker/apm/?tab=java
 [4]: /ja/tracing/send_traces/
 [5]: /ja/help/
-[6]: /ja/tracing/compatibility_requirements/
-[7]: /ja/tracing/troubleshooting/tracer_debug_logs/
+[6]: /ja/tracing/troubleshooting/connection_errors/
+[7]: /ja/tracing/compatibility_requirements/
+[8]: /ja/tracing/troubleshooting/tracer_debug_logs/

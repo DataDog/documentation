@@ -38,13 +38,13 @@ type: multi-code-lang
 `DD_SERVICE`
 : このアプリケーションで使用するサービス名。値は、Web フレームワークのインテグレーション (例: Pylons、Flask、Django) 用のミドルウェアを設定する際にパススルーされます。Web インテグレーションを行わずにトレースする場合は、コード内でサービス名を設定する ([Django ドキュメントで例をご確認ください][4]) ことをお勧めします。バージョン 0.38 以降で利用可能。
 
-`DD_PROPAGATION_STYLE_INJECT`
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **デフォルト**: `Datadog`<br>
-トレーシングヘッダを注入するときに使用する伝搬スタイル。例えば、`DD_PROPAGATION_STYLE_INJECT=Datadog,B3` を使用すると、 Datadog と B3 形式のヘッダを注入することができます。
+トレーシングヘッダを注入するときに使用する伝搬スタイル。例えば、`DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` を使用すると、 Datadog と B3 形式のヘッダを注入することができます。
 
-`DD_PROPAGATION_STYLE_EXTRACT`
-: **デフォルト**: `DD_PROPAGATION_STYLE_INJECT` の値 (`Datadog`)<br>
-トレーシングヘッダを抽出する際に使用する伝搬スタイル。複数の値が与えられた場合、最初に見つかったヘッダのマッチングを使用します。マッチングの順番は静的なもので、与えられた値の順番とは関係ありません。例えば、 `DD_PROPAGATION_STYLE_EXTRACT=B3,Datadog` は `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3` と同じ挙動となります。
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **デフォルト**: `DD_TRACE_PROPAGATION_STYLE_INJECT` の値 (`Datadog`)<br>
+トレーシングヘッダを抽出する際に使用する伝搬スタイル。複数の値が与えられた場合、最初に見つかったヘッダのマッチングを使用します。マッチングの順番は静的なもので、与えられた値の順番とは関係ありません。例えば、`DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` は `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,B3` と同じ挙動となります。
 
 `DD_SERVICE_MAPPING`
 : サービス名のマッピングを定義し、トレース内におけるサービスの名前変更を許可します (例: `postgres:postgresql,defaultdb:postgresql`)。バージョン 0.47 以降で利用可能。
@@ -54,6 +54,10 @@ type: multi-code-lang
 
 `DD_TRACE_SAMPLE_RATE`
 : トレースボリュームコントロールを有効にします
+
+`DD_TRACE_SAMPLING_RULES`
+: **デフォルト**: `[]`<br>
+オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
 
 `DD_TRACE_RATE_LIMIT`
 : 1 秒あたり、Python プロセスごとにサンプリングするスパンの最大数。`DD_TRACE_SAMPLE_RATE` が設定されている場合、デフォルトは `100` です。それ以外の場合は、Datadog Agent にレート制限を委ねます。

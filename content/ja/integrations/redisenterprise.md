@@ -1,45 +1,65 @@
 ---
+app_id: redisenterprise
+app_uuid: a353f8c5-240c-48f9-b2a1-c86d2da0c07e
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Redis Enterprise Active/Active Statistics: assets/dashboards/redis_enterprise_active_active.json
     Redis Enterprise Cluster Overview: assets/dashboards/redisenterprise_cluster_top_view.json
     Redis Enterprise Database Overview: assets/dashboards/redisenterprise_overview.json
     Redis Enterprise Redis on Flash: assets/dashboards/redisenterprise_rof.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: redisenterprise.total_node_count
+      metadata_path: metadata.csv
+      prefix: redisenterprise.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Redis Enterprise
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: github@mague.com
+  support_email: github@mague.com
 categories:
 - data store
 - キャッシュ
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md
-display_name: Redis Enterprise
+display_on_public_website: true
 draft: false
 git_integration_title: redisenterprise
-guid: 727dcbe6-9ed6-409f-ad72-265939b90da8
 integration_id: redisenterprise
 integration_title: RedisEnterprise
 integration_version: 1.1.1
 is_public: true
 kind: integration
-maintainer: github@mague.com
-manifest_version: 1.0.0
-metric_prefix: redisenterprise.
-metric_to_check: redisenterprise.total_node_count
+manifest_version: 2.0.0
 name: redisenterprise
-public_title: RedisEnterprise Integration
+oauth: {}
+public_title: RedisEnterprise
 short_description: Redis Enterprise 可視性
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Caching
+  configuration: README.md#Setup
+  description: Redis Enterprise 可視性
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RedisEnterprise
 ---
 
 

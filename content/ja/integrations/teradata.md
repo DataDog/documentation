@@ -1,41 +1,61 @@
 ---
+app_id: teradata
+app_uuid: 8cac0599-64ca-4a46-8c68-1c5db6cc65ca
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Teradata Overview: assets/dashboards/teradata_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: teradata.disk_space.curr_perm.total
+      metadata_path: metadata.csv
+      prefix: teradata.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Teradata
   monitors:
     High disk space: assets/recommended_monitors/high_disk_space.json
     Low ready threads: assets/recommended_monitors/low_ready_threads.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/teradata/README.md
-display_name: Teradata
+display_on_public_website: true
 draft: false
 git_integration_title: teradata
-guid: 8205988e-888a-4d31-abf0-753720d772a7
 integration_id: teradata
 integration_title: Teradata
 integration_version: 1.0.1
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: teradata.
-metric_to_check: teradata.disk_space.curr_perm.total
+manifest_version: 2.0.0
 name: teradata
+oauth: {}
 public_title: Teradata
 short_description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
-support: コア
 supported_os:
 - linux
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Teradata
 ---
 
 
@@ -165,9 +185,9 @@ Teradata インテグレーションには、イベントは含まれません�
 [6]: https://docs.teradata.com/r/Teradata-VantageTM-Resource-Usage-Macros-and-Tables/July-2021/ResUsageSpma-Table
 [7]: https://docs.teradata.com/r/Teradata-VantageTM-Database-Utilities/July-2021/Control-GDO-Editor-ctl/Ctl-Commands/SCREEN
 [8]: https://docs.teradata.com/r/Teradata-VantageTM-Resource-Usage-Macros-and-Tables/July-2021/Planning-Your-Resource-Usage-Data/Resource-Usage-Logging
-[9]: https://github.com/DataDog/integrations-core/blob/master/check/datadog_checks/teradata/data/conf.yaml.example
+[9]: https://github.com/DataDog/integrations-core/blob/master/teradata/datadog_checks/teradata/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/check/metadata.csv
-[13]: https://github.com/DataDog/integrations-core/blob/master/check/assets/service_checks.json
+[12]: https://github.com/DataDog/integrations-core/blob/master/teradata/metadata.csv
+[13]: https://github.com/DataDog/integrations-core/blob/master/teradata/assets/service_checks.json
 [14]: https://docs.datadoghq.com/ja/help/
