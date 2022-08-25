@@ -63,12 +63,9 @@ EC2's [IMDSv2][8] can sometimes lead to problems gathering EC2 instance hostname
 
 In containerized environments the problem might be that you have locked down the EC2 metadata endpoint, by way of assigning IAM roles/credentials to pods running in the Kubernetes cluster. `Kube2IAM` and `kiam` are common tools used to do this. To solve this, update your `Kube2IAM` or `kiam` configuration to allow access to this endpoint.
 
-The AWS API supports disabling IMDSv1, which the Agent uses by default.  If this is the case, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][5]. See the [Transition to using Instance Metadata Service Version 2][6] documentation for details.
+The AWS API supports disabling IMDSv1, which the Agent uses by default. If this is the case, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][5]. See the [Transition to using Instance Metadata Service Version 2][6] documentation for details.
 
-IMDSv2 will, in its default configuration, refuse connections with an IP hop count greater than one, i.e., that have passed through an IP gateway.
-This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime will forward the container's traffic through a virtual IP gateway.
-This is common in ECS deployments.
-To remedy this, increase the maximum hop count to at least 2.
+IMDSv2, in its default configuration, refuses connections with an IP hop count greater than one, that is, connections that have passed through an IP gateway. This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime forwards the container's traffic through a virtual IP gateway. This is common in ECS deployments. To remedy this, increase the maximum hop count to at least `2`.
 
 ## Tags
 
