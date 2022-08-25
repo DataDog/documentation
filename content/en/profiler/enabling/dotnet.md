@@ -63,16 +63,16 @@ To install the .NET Profiler machine-wide:
 2. Run one of the following commands to install the package and create the .NET log directory `/var/log/datadog/dotnet` with the appropriate permissions:
 
    Debian or Ubuntu
-   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
+   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && sudo /opt/datadog/createLogPath.sh`
 
    CentOS 7+ or Fedora
-   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
+   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && sudo /opt/datadog/createLogPath.sh`
 
    Alpine or other musl-based distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
@@ -129,7 +129,6 @@ To install the .NET Profiler machine-wide:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -140,7 +139,6 @@ To install the .NET Profiler machine-wide:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -175,7 +173,6 @@ To install the .NET Profiler machine-wide:
    For .NET Core and .NET 5+:
    ```text
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -186,7 +183,6 @@ To install the .NET Profiler machine-wide:
    For .NET Framework:
    ```text
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -200,7 +196,6 @@ To install the .NET Profiler machine-wide:
    ```powershell
    [string[]] $v = @(
        "CORECLR_ENABLE_PROFILING=1",
-       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -213,7 +208,6 @@ To install the .NET Profiler machine-wide:
    ```powershell
    [string[]] $v = @(
        "COR_ENABLE_PROFILING=1",
-       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -233,7 +227,6 @@ To install the .NET Profiler machine-wide:
    For .NET Core and .NET 5+:
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
-   SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
@@ -245,7 +238,6 @@ To install the .NET Profiler machine-wide:
    For .NET Framework:
    ```cmd
    SET COR_ENABLE_PROFILING=1
-   SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production

@@ -58,11 +58,11 @@
     "request_schema_description": "サービスチェック。"
   },
   "GetDailyCustomReports": {
-    "description": "日刊カスタムレポートを取得します。",
+    "description": "デイリーカスタムレポートを取得します。\n**注:** このエンドポイントは、2022 年 12 月 1 日に完全に非推奨となります。\n関連する移行ガイドについては、[Usage Attribution API の v1 から v2 への移行](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)を参照してください。",
     "summary": "利用可能な日刊カスタムレポートのリストを取得"
   },
   "GetSpecifiedDailyCustomReports": {
-    "description": "指定された日刊カスタムレポートを取得します。",
+    "description": "指定したデイリーカスタムレポートを取得します。\n**注:** このエンドポイントは、2022 年 12 月 1 日に完全に非推奨となります。\n関連する移行ガイドについては、[Usage Attribution API の v1 から v2 への移行](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)を参照してください。",
     "summary": "指定された日刊カスタムレポートを取得"
   },
   "DeleteDashboards": {
@@ -640,11 +640,11 @@
     "request_schema_description": "モニターを記述するオブジェクト。"
   },
   "GetMonthlyCustomReports": {
-    "description": "月刊カスタムレポートを取得します。",
+    "description": "マンスリーカスタムレポートを取得します。\n**注:** このエンドポイントは、2022 年 12 月 1 日に完全に非推奨となります。\n関連する移行ガイドについては、[Usage Attribution API の v1 から v2 への移行](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)を参照してください。",
     "summary": "利用可能な月刊カスタムレポートのリストを取得します"
   },
   "GetSpecifiedMonthlyCustomReports": {
-    "description": "指定された月刊カスタムレポートを取得します。",
+    "description": "指定したマンスリーカスタムレポートを取得します。\n**注:** このエンドポイントは、2022 年 12 月 1 日に完全に非推奨となります。\n関連する移行ガイドについては、[Usage Attribution API の v1 から v2 への移行](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)を参照してください。",
     "summary": "特定の月刊カスタムレポートを取得します"
   },
   "ListNotebooks": {
@@ -983,7 +983,7 @@
     "summary": "分析されたログの 1 時間あたり使用量の取得"
   },
   "GetUsageAttribution": {
-    "description": "使用属性を取得します。",
+    "description": "使用量属性を取得します。\n**注:** このエンドポイントは、2022 年 12 月 1 日に完全に非推奨となります。\n関連する移行ガイドについては、[Usage Attribution API の v1 から v2 への移行](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)を参照してください。",
     "summary": "使用属性を取得します"
   },
   "GetUsageAuditLogs": {

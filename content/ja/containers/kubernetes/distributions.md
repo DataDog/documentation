@@ -197,6 +197,7 @@ datadog:
   # 新しい `kubernetes_state_core` における kube-state-metrics のデプロイは不要。
   kubeStateMetricsEnabled: false
 
+agents:
   containers:
     agent:
       # Agent コンテナのリソース

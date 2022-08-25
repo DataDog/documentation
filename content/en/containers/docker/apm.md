@@ -29,6 +29,8 @@ further_reading:
 
 As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+
 ## Tracing from the host
 
 Tracing is available on port `8126/tcp` from _your host only_ by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
@@ -103,6 +105,8 @@ As a first step, create a user-defined bridge network:
 ```bash
 docker network create <NETWORK_NAME>
 ```
+
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
 Then start the Agent and the application container, connected to the network previously created:
 

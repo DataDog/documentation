@@ -235,7 +235,7 @@ This way, you can identify bad actors that are generating suspicious security ac
 
 You can [add custom tags to your root span][1], or use the instrumentation functions described below.
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -448,6 +448,33 @@ For information and options, read [the NodeJS tracer documentation][1].
 
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+
+This example shows how to set user monitoring tags:
+
+```python
+from ddtrace import tracer
+from ddtrace.contrib.trace_utils import set_user
+
+@app.route("/")
+def view():
+    # Record user information in the trace the span belongs to
+    set_user(
+        tracer,
+        user_id="usr.id",
+        email="usr.email",
+        name="usr.name",
+        session_id="usr.session_id",
+        role="usr.role",
+        scope="usr.scope"
+    )
+    return "OK"
+```
+
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}

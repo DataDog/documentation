@@ -352,7 +352,7 @@ main:
     parent: infrastructure_heading
     weight: 40000
     pre: container
-  - name: Docker
+  - name: Docker and other runtimes
     url: containers/docker/
     parent: containers
     identifier: containers_docker
@@ -534,6 +534,16 @@ main:
     parent: containers
     identifier: ecs_fargate
     weight: 6
+  - name: Troubleshooting
+    url: containers/troubleshooting/
+    parent: containers
+    identifier: containers_troubleshooting
+    weight: 7
+  - name: Duplicate hosts
+    url: containers/troubleshooting/duplicate_hosts
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_duplicate_hosts
+    weight: 701
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -2566,7 +2576,7 @@ main:
     url: security_platform/notifications/variables/
     parent: security_notifications
     identifier: security_notification_variables
-    weight: 602    
+    weight: 602
   - name: Signals Explorer
     url: security_platform/explorer
     parent: security_platform
@@ -2635,11 +2645,11 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 3
-  - name: Steps
+  - name: Recording Steps
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
-  - name: Test Results & Performance
+  - name: Test Results and Performance
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302
@@ -2974,7 +2984,7 @@ main:
     parent: rum
     identifier: rum_explorer
     weight: 9
-  - name: Search
+  - name: Search RUM Events
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
@@ -4521,7 +4531,7 @@ api:
       operationids:
         - ListLogsGet
       unstable: []
-      order: 3
+      order: 4
   - name: Aggregate events
     url: '#aggregate-events'
     identifier: logs-aggregate-events
@@ -4533,7 +4543,7 @@ api:
       operationids:
         - AggregateLogs
       unstable: []
-      order: 1
+      order: 2
   - name: Send logs
     url: '#send-logs'
     identifier: logs-send-logs
@@ -4559,7 +4569,7 @@ api:
       operationids:
         - ListLogs
       unstable: []
-      order: 1
+      order: 3
   - name: Logs Indexes
     url: /api/latest/logs-indexes/
     identifier: logs-indexes

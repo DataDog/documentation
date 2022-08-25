@@ -121,7 +121,7 @@ Click **Test URL** to try out the request configuration. A response preview appe
 
 #### Add assertions
 
-Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. In Multistep API tests, assertions are optional.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. Assertions are optional in multistep API tests.
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -130,15 +130,15 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
-**Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
 {{< img src="synthetics/api_tests/ms_assertions.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
 
-If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
-
-If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
 #### Add execution parameters
 
@@ -150,20 +150,19 @@ The test generates an alert if an endpoint does not answer as expected. Your tes
 
 #### Extract variables from the response
 
-You can also optionally extract variables from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.
+Optionally, extract variables from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs.
 
 To start parsing a variable, click **Extract a variable from response content**:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
-2. Decide whether to extract your variable from the response headers, from the response body, or using the full response body.
+2. Decide whether to extract your variable from the response headers or from the response body.
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
-     * Extract the value using the **full response body**.
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][10], a [`JSONPath`][8], or a [`XPath`][9].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
-You can extract up to ten variables per test step. Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
+You can extract up to ten variables per test step. Once created, this variable can be used in the following steps of your multistep API test. For more information, see [Use variables](#use-variables).
 
 ### Specify test frequency
 

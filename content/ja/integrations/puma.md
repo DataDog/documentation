@@ -1,39 +1,58 @@
 ---
+app_id: puma
+app_uuid: c517e801-0fa5-4f5e-8175-a7d5d48a8131
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: puma.workers
+      metadata_path: metadata.csv
+      prefix: puma.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Puma
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: justin.morris@ferocia.com.au
+  support_email: justin.morris@ferocia.com.au
 categories:
 - web
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/puma/README.md
-display_name: Puma
+display_on_public_website: true
 draft: false
 git_integration_title: puma
-guid: 93264c0f-a4d1-447d-81b6-bee3eb891df3
 integration_id: puma
 integration_title: Puma
 integration_version: 1.2.0
 is_public: true
 kind: integration
-maintainer: justin.morris@ferocia.com.au
-manifest_version: 1.0.0
-metric_prefix: puma.
-metric_to_check: puma.workers
+manifest_version: 2.0.0
 name: puma
-public_title: Datadog-Puma インテグレーション
+oauth: {}
+public_title: Puma
 short_description: Ruby および Rack のための高速コンカレントウェブサーバー
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  configuration: README.md#Setup
+  description: Ruby および Rack のための高速コンカレントウェブサーバー
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Puma
 ---
 
 

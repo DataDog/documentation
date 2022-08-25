@@ -74,15 +74,34 @@ To successfully proxy request to Datadog:
 2. Forward the request to the URL set in the `ddforward` query parameter using the POST method.
 4. The request body must remain unchanged.
 
-**IMPORTANT**: Ensure the `ddforward` attribute points to a valid RUM endpoint for your [Datadog site][2]. Failing to do so may expose your systems to SSRF/XSS attacks. The list of valid intake URL patterns per sites are:
+Ensure the `ddforward` attribute points to a valid Datadog endpoint for your [Datadog site][2]. Failure to do so may result in an insecure configuration. 
 
-| Site    | Valid RUM URL Pattern                          | Site Parameter (SDK [initialization parameter][3])| 
+The site parameter is an SDK [initialization parameter][3]. Valid intake URL patterns for each site are listed below:
+
+{{< tabs >}}
+{{% tab "Latest version" %}}
+
+| Site    | Valid intake URL Pattern                       | Site Parameter      |
 |---------|------------------------------------------------|---------------------|
 | US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
 | US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
 | US5     | `https://*.browser-intake-us5-datadoghq.com/*` | `us5.datadoghq.com` |
 | EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
+
+{{% /tab %}}
+{{% tab "Before `v4`" %}}
+
+| Site    | Valid intake URL Pattern             | Site Parameter      |
+|---------|--------------------------------------|---------------------|
+| US1     | `https://*.logs.datadoghq.com/*`     | `datadoghq.com`     |
+| US3     | `https://*.logs.us3-datadoghq.com/*` | `us3.datadoghq.com` |
+| EU1     | `https://*.logs.datadoghq.eu/*`      | `datadoghq.eu`      |
+| US1-FED | `https://*.logs.ddog-gov.com/*`      | `ddog-gov.com`      |
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Further Reading
 
