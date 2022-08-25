@@ -142,14 +142,16 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 ## HAProxy
 
-[HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
+[HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
 
 `agent -> haproxy -> Datadog`
 
-This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network as each proxy can accommodate upwards connections of 1000 Agents. **Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy so you should keep an eye on your proxy deployment both before and after being put into service. See the [HAProxy documentation][2] for additional information.
+This is the best option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents. 
 
-The communication between HAProxy and Datadog will always be encrypted by TLS. The communication between the Agent host and the HAProxy host is not encrypted by default as the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if they are not located on the same isolated local network.
-In order to encrypt data between the Agent and HAProxy, you need to create a x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][3] for more information.
+**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][2] for additional information.
+
+The communication between HAProxy and Datadog is always encrypted with TLS. The communication between the Agent host and the HAProxy host is not encrypted by default, because the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if the HAproxy host and Agent host are not located on the same isolated local network.
+To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][3] for more information.
 
 ### Proxy forwarding with HAProxy
 
@@ -302,7 +304,7 @@ frontend appsec-events-frontend
     option tcplog
     default_backend datadog-appsec-events
 
-# This is the Datadog server. In effect any TCP request coming
+# This is the Datadog server. In effect, any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
 backend datadog-metrics
@@ -452,7 +454,7 @@ resolvers my-dns
     hold valid 10s
     hold obsolete 60s
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending metrics (for example, the value of "dd_url").
 frontend metrics-forwarder
     bind *:3834 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
@@ -463,7 +465,7 @@ frontend metrics-forwarder
     use_backend datadog-api if { path_beg -i  /api/v1/validate }
     use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending traces (for example, the value of "endpoint" in the APM
 # configuration section).
 frontend traces-forwarder
@@ -472,7 +474,7 @@ frontend traces-forwarder
     option tcplog
     default_backend datadog-traces
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending profiles (for example, the value of "apm_config.profiling_dd_url").
 frontend profiles-forwarder
     bind *:3836 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
@@ -480,7 +482,7 @@ frontend profiles-forwarder
     option tcplog
     default_backend datadog-profiles
 
-# This declares the endpoint where your agents connects for
+# This declares the endpoint where your Agents connect for
 # sending processes (for example, the value of "url" in the process
 # configuration section).
 frontend processes-forwarder
@@ -489,7 +491,7 @@ frontend processes-forwarder
     option tcplog
     default_backend datadog-processes
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 # If sending logs with use_http: true
 frontend logs_http_frontend
@@ -505,7 +507,7 @@ frontend logs_http_frontend
 #    option tcplog
 #    default_backend datadog-logs
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending database monitoring metrics and activity (e.g the value of "database_monitoring.metrics.dd_url" and "database_monitoring.activity.dd_url")
 frontend database_monitoring_metrics_frontend
     bind *:3839 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
@@ -513,7 +515,7 @@ frontend database_monitoring_metrics_frontend
     option tcplog
     default_backend datadog-database-monitoring-metrics
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending database monitoring samples (e.g the value of "database_monitoring.samples.dd_url")
 frontend database_monitoring_samples_frontend
     bind *:3840 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
@@ -521,7 +523,7 @@ frontend database_monitoring_samples_frontend
     option tcplog
     default_backend datadog-database-monitoring-samples
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending Network Devices Monitoring metadata (e.g the value of "network_devices.metadata.dd_url")
 frontend network_devices_metadata_frontend
     bind *:3841 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
@@ -529,7 +531,7 @@ frontend network_devices_metadata_frontend
     option tcplog
     default_backend datadog-network-devices-metadata
 
-# This declares the endpoint where your Agents connects for
+# This declares the endpoint where your Agents connect for
 # sending Network Devices SNMP Traps data (e.g the value of "network_devices.snmp_traps.forwarder.dd_url")
 frontend network_devices_snmp_traps_frontend
     bind *:3842 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
@@ -687,7 +689,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: <SCHEME>://haproxy.example.com:3834`
 
-Replace `<SCHEME>` by `https` if you previously chose the HAProxy `HTTPS` configuration, or by `http` otherwise.
+Replace `<SCHEME>` with `https` if you previously chose the HAProxy HTTPS configuration, or with `http` if you did not choose HTTPS.
 
 To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
@@ -737,7 +739,7 @@ appsec_config (deprecated):
 ```
 
 When using encryption between the Agent and HAProxy, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
-With this option set to `true`, the Agent will skip the certificate validation step so it will not verify the identity of the proxy but the communication will still be encrypted with SSL/TLS.
+With this option set to `true`, the Agent skips the certificate validation step and does not verify the identity of the proxy, but the communication is still encrypted with SSL/TLS.
 
 ```yaml
 skip_ssl_validation: true
@@ -802,8 +804,8 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 `agent ---> nginx ---> Datadog`
 
-The communication between NGINX and Datadog will always be encrypted by TLS. The communication between the Agent host and the NGINX host is not encrypted by default as the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if they are not located on the same isolated local network.
-In order to encrypt data between the Agent and NGINX, you need to create a x509 certificate with the Subject Alternative Name (SAN) extension for the NGINX host.
+The communication between NGINX and Datadog is always encrypted with TLS. The communication between the Agent host and the NGINX host is not encrypted by default, because the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if they are not located on the same isolated local network.
+In order to encrypt data between the Agent and NGINX, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the NGINX host.
 
 ### Proxy forwarding with NGINX
 
@@ -920,7 +922,7 @@ stream {
 {{% tab "HTTPS" %}}
 
 
-This configuration adds SSL/TLS encryption on communication between the Agent and NGINX. The variable `<PATH_TO_PROXY_CERTIFICATE>` should be replaced by the path to the proxy public certificate and `<PATH_TO_PROXY_CERTIFICATE_KEY>` by the path to the private key.
+This configuration adds SSL/TLS encryption on communication between the Agent and NGINX. Replace `<PATH_TO_PROXY_CERTIFICATE>` with the path to the proxy public certificate and `<PATH_TO_PROXY_CERTIFICATE_KEY>` with the path to the private key.
 
 ```conf
 user nginx;
@@ -1048,7 +1050,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: "<SCHEME>://nginx.example.com:3834"`
 
-Replace `<SCHEME>` by `https` if you previously chose the NGINX `HTTPS` configuration, or by `http` otherwise.
+Replace `<SCHEME>` with `https` if you previously chose the HAProxy HTTPS configuration, or with `http` if you did not choose HTTPS.
 
 To send traces, profiles, processes, and logs through the proxy, setup the following in the `datadog.yaml` file:
 
@@ -1099,13 +1101,13 @@ appsec_config (deprecated):
 ```
 
 When using encryption between the Agent and NGINX, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
-With this option set to `true`, the Agent will skip the certificate validation step so it will not verify the identity of the proxy but the communication will still be encrypted with SSL/TLS.
+With this option set to `true`, the Agent skips the certificate validation step and does not verify the identity of the proxy, but the communication is still encrypted with SSL/TLS.
 
 ```yaml
 skip_ssl_validation: true
 ```
 
-When sending logs over TCP, see <a href="/agent/logs/proxy">TCP Proxy for Logs</a>.
+When sending logs over TCP, see [TCP Proxy for Logs][5].
 
 ## Datadog Agent
 
@@ -1157,3 +1159,4 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 [2]: http://www.haproxy.org/#perf
 [3]: https://www.haproxy.com/blog/haproxy-ssl-termination/
 [4]: https://www.nginx.com
+[5]: /agent/logs/proxy
