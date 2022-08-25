@@ -53,6 +53,8 @@ If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or 
 
 **Note:** The profiler ships with the tracer starting with version 2.8.0. If you're using an older version of the tracer, you need to upgrade first.
 
+You can install the Datadog .NET Profiler machine-wide so that all services on the machine can be instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
+
 {{< tabs >}}
 
 {{% tab "Linux" %}}
@@ -84,8 +86,20 @@ To install the .NET Profiler machine-wide:
 
 2. Run the installer with administrator privileges.
 
-
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
+
+{{% tab "NuGet" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> This installation does not instrument applications running in IIS. For applications running in IIS, follow the Windows machine-wide installation process.
+</div>
+
+To install the .NET Profiler per-application:
+
+1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
+
+[1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -250,6 +264,45 @@ To install the .NET Profiler machine-wide:
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
+
+{{% tab "NuGet" %}}
+
+1. Set the following required environment variables for profiling to attach to your application:
+
+   ```
+   CORECLR_ENABLE_PROFILING=1
+   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   CORECLR_PROFILER_PATH=<System-dependent path>
+   DD_PROFILING_ENABLED=1
+   DD_SERVICE=MyService
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
+  ```
+
+    The value for the `<APP_DIRECTORY>` placeholder is the path to the directory containing the application's `.dll` files. The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+
+   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
+   ------------------------------------------|----------------------------
+   Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
+   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
+   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
+
+2. For Docker images running on Linux, configure the image to run the `createLogPath.sh` script:
+
+   ```
+   RUN /<APP_DIRECTORY>/datadog/createLogPath.sh
+   ```
+
+   Docker examples are available in the [`dd-trace-dotnet` repository][1].
+
+3. For standalone applications, manually restart the application.
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -269,7 +322,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_TRACE_DEBUG`           | Boolean        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `true`, enables the .NET Profiler. Defaults to `false`.  |
-| `DD_PROFILING_CPU_ENABLED` | Boolean        | If set to `true`, enables the CPU profiling. Defaults to `false`.  |
+| `DD_PROFILING_CPU_ENABLED` | Boolean        | If set to `false`, disables the CPU profiling. Defaults to `true`.  |
 | `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables the Exceptions profiling. Defaults to `false`.  |
 
 <div class="alert alert-warning">
