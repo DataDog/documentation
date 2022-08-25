@@ -53,7 +53,7 @@ Explore other important resources to stay up to date with Datadog:
     {{< nextlink href="https://www.facebook.com/datadoghq/" >}}Facebook{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Youtube" >}}
+{{< whatsnext desc="YouTube" >}}
     {{< nextlink href="https://www.youtube.com/user/DatadogHQ" >}}Official YouTube channel{{< /nextlink >}}
     {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE" >}}Tips and Tricks playlist{{< /nextlink >}}
 {{< /whatsnext >}}
