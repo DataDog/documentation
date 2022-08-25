@@ -391,7 +391,7 @@ Datadog::Tracing.active_span&.set_tag('test_owner', 'my_team')
 # ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [Ruby Custom Instrumentation documentation][5].
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Ruby custom instrumentation documentation.
   
 ## Configuration settings
 
