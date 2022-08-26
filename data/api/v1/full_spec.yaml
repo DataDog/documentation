@@ -14832,6 +14832,12 @@ components:
           format: double
           nullable: true
           type: number
+        aws_host_count:
+          description: The number of Cloud Security Posture Management AWS hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
         azure_host_count:
           description: The number of Cloud Security Posture Management Azure hosts
             during a given hour.
@@ -15866,6 +15872,11 @@ components:
             Azure app services hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cspm_azure_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Posture Management
             Azure hosts over all hours in the current date for all organizations.
@@ -16190,6 +16201,11 @@ components:
           description: Shows the 99th percentile of all Cloud Security Posture Management
             Azure app services hosts over all hours in the current date for the given
             org.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_azure_host_top99p:
@@ -16521,6 +16537,11 @@ components:
           description: Shows the 99th percentile of all Cloud Security Posture Management
             Azure app services hosts over all hours in the current months for all
             organizations.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p_sum:
