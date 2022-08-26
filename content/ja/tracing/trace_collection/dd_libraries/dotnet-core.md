@@ -150,6 +150,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
+{{% tab "NuGet" %}}
 
 Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
 
@@ -262,6 +263,7 @@ Linux 上で動作する Docker イメージの場合、`createLogPath.sh` ス�
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
 {{% /tab %}}
+
 
 Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
 
