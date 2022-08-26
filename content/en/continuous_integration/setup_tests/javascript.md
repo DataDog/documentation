@@ -119,14 +119,13 @@ You can add custom tags to your tests by using the current active span:
 ```javascript
   it('sum function can sum', () => {
     const testSpan = require('dd-trace').scope().active()
-    testSpan.setTag('team.owner', 'calculator')
-    testSpan.setTag('test.importance', 2)
+    testSpan.setTag('team_owner', 'my_team')
     // test continues normally
     // ...
   })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the NodeJS custom instrumentation documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -159,14 +158,13 @@ You can add custom tags to your test by grabbing the current active span:
 ```javascript
   When('the function is called', function () {
     const stepSpan = require('dd-trace').scope().active()
-    stepSpan.setTag('team.owner', 'calculator')
-    stepSpan.setTag('test.importance', 2)
+    testSpan.setTag('team_owner', 'my_team')
     // test continues normally
     // ...
-  });
+  })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the NodeJS custom instrumentation documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
