@@ -20,7 +20,10 @@
 
 {{ $branchPath := trim ($.Scratch.Get "branch_path") "/" }}
 {{ $url_without_anchor := "" }}
-
+<h2>{{$path}}</h2>
+<h2>{{$branchPath}}</h2>
+<h2>{{.Site.Params.signupclass}}</h2>
+<h2>{{.Site.Params.environment}}</h2>
 {{ $currentPage := . }}
 {{ range $menu }}
     {{ if .HasChildren }}
