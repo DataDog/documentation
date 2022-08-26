@@ -7,10 +7,10 @@ aliases:
 git_integration_title: pivotal_platform
 newhlevel: true
 updated_for_agent: 6.0
-description: 'Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run.'
+description: 'Track the health of your VMware Tanzu Application Service (formerly Pivotal Cloud Foundry) VMs and the jobs they run.'
 is_public: true
 public_title: Datadog-Pivotal Platform Integration
-short_description: 'Track the health of Pivotal Platform VMs and the jobs they run.'
+short_description: 'Track the health of VMware Tanzu Application Service VMs and the jobs they run.'
 categories:
     - provisioning
     - configuration & deployment
@@ -25,14 +25,14 @@ integration_id: "pivotal-platform"
 
 ## Overview
 
-Any Pivotal Platform (formerly known as Cloud Foundry) deployment can send metrics and events to Datadog. This data helps track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your application on Pivotal Platform and your Pivotal Platform cluster.
+Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry) deployment can send metrics and events to Datadog. This data helps track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster.
 
-There are three main components for the Pivotal Platform integration with Datadog. First, use the buildpack to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure. Read the [Pivotal architecture][32] guide for more information.
+There are three main components for the VMware Tanzu Application Service integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Then, the BOSH Release collects metrics from the platform. Finally, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
-For Pivotal Platform, you have the option to install the Datadog integration tiles with Ops Manager:
+For VMware Tanzu Application Service, you have the option to install the Datadog integration tiles with Ops Manager:
 
-- [Datadog Cluster Monitoring for Pivotal Platform][1]
-- [Datadog Application Monitoring for Pivotal Platform][2]
+- [Datadog Cluster Monitoring for VMware Tanzu Application Service][1]
+- [Datadog Application Monitoring for VMware Tanzu Application Service][2]
 
 ## Monitor your applications
 
@@ -41,7 +41,7 @@ For Pivotal Platform, you have the option to install the Datadog integration til
 
 ## Setup
 
-Read the [VMware Tanzu documentation][1] for installation and configuration steps.
+Read the [VMware Tanzu installation and configuration][1] guide.
 
 [1]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
 
@@ -50,21 +50,21 @@ Read the [VMware Tanzu documentation][1] for installation and configuration step
 
 ## Setup
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your Pivotal Platform application. This is a [supply buildpack][4] for Pivotal Platform that installs a [Datadog DogStatsD binary][5] and Datadog Agent in the container your app is running on.
+Use the **Datadog Cloud Foundry Buildpack** to monitor your VMware Tanzu Application Service application. This is a [supply buildpack][4] for VMware Tanzu Application Service that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
 
 ### Pivotal Platform < 1.12
 
-The Datadog buildpack uses the Pivotal Platform [multi-buildpack][1] feature that was introduced in version `1.12`.
+The Datadog buildpack uses the Pivotal Platform [Pushing an App with Multiple Buildpacks][1] feature that was introduced in version `1.12`.
 
-For older versions, Pivotal Platform provides a backwards compatible version of this feature in the form of a [buildpack][2]. You must install and configure this version in order to use Datadog's buildpack.
+For older versions, Pivotal Platform provides a backwards compatible version of this feature in the form of a [multi-buildpack][2]. You must install and configure this version in order to use Datadog's buildpack.
 
-1. **Upload the multi-buildpack back-port.** Download the latest [multi-build pack release][2] and upload it to your Pivotal Platform environment.
+1. **Upload the multi-buildpack back-port.** Download the latest [multi-buildpack release][2] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. **Add a multi-buildpack manifest to your application.** As detailed [on the multi-buildpack back-port repo][3], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
+2. **Add a multi-buildpack manifest to your application.** As detailed [usage section][3] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
 
     ```yaml
     buildpacks:
@@ -89,7 +89,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
 
 ### Pivotal Platform >= 1.12
 
-1. **Upload the Datadog Pivotal Platform Buildpack.** Download the latest Datadog [build pack release][5] and upload it to your Pivotal Platform environment.
+1. **Upload the Datadog Pivotal Platform Buildpack.** [Download the latest Datadog build pack release][5] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
@@ -108,7 +108,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
 
 If you are a [meta-buildpack][6] user, Datadog's buildpack can be used as a decorator out of the box.
 
-**Note**: Pivotal has deprecated the [meta-buildpack][6] in favor of the [multi-buildpack][2].
+**Note**: Pivotal has deprecated the meta-buildpack in favor of the multi-buildpack.
 
 [1]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [2]: https://github.com/cloudfoundry/multi-buildpack
@@ -149,7 +149,7 @@ Log collection is not supported for this site.
 
 ##### Enable log collection
 
-To start collecting logs from your application in Pivotal Platform, the Agent contained in the buildpack needs to be activated and log collection enabled.
+To start collecting logs from your application in VMware Tanzu Application Service, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
 ```shell
 cf set-env <YOUR_APP_NAME> RUN_AGENT true
@@ -178,7 +178,7 @@ The following table describes the parameters above, and how they can be used to 
 
 **Example:**
 
-A Java application named `app01` is running in Pivotal Platform. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
+A Java application named `app01` is running in VMware Tanzu Application Service. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
 ```shell
 # Redirect Stdout/Stderr to port 10514
@@ -213,7 +213,7 @@ cf restage <YOUR_APP>
 
 See [Metric Submission: DogStatsD][5] for more information. There is a list of [DogStatsD libraries][14] compatible with a wide range of applications.
 
-## Monitor your Pivotal Platform cluster
+## Monitor your VMware Tanzu Application Service cluster
 
 {{< tabs >}}
 
@@ -221,7 +221,7 @@ See [Metric Submission: DogStatsD][5] for more information. There is a list of [
 
 ## Setup
 
-Read the [VMware Tanzu documentation][1] for installation and configuration steps.
+Read the [VMware Tanzu installation and configuration][1] guide.
 
 [1]: https://docs.pivotal.io/partners/datadog/installing.html
 
@@ -237,7 +237,7 @@ There are two points of integration with Datadog, each of which achieves a diffe
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
-These integrations are meant for Pivotal Platform deployment administrators, not end users.
+These integrations are meant for VMware Tanzu Application Service deployment administrators, not end users.
 </div>
 
 ### Prerequisites
@@ -333,7 +333,7 @@ bosh update runtime-config runtime.yml
 bosh update-runtime-config -e <BOSH_ENV> runtime.yml
 ```
 
-#### Redeploy your Pivotal Platform deployment
+#### Redeploy your VMware Tanzu Application Service deployment
 
 ```text
 # BOSH CLI v1
@@ -358,7 +358,7 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 
 ### Deploy the Datadog Firehose Nozzle
 
-Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing Pivotal Platform deployment that has a working Loggregator Firehose.
+Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing VMware Tanzu Application Service deployment that has a working Loggregator Firehose.
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -392,7 +392,7 @@ Redeploy the deployment to add the user.
 
 #### Add Firehose Nozzle jobs
 
-Configure one or more Nozzle jobs in your main Pivotal Platform deployment manifest (`cf-manifest.yml`):
+Configure one or more Nozzle jobs in your main VMware Tanzu Application Service deployment manifest (`cf-manifest.yml`):
 
 ```yaml
 jobs:

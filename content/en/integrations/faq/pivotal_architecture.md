@@ -1,11 +1,11 @@
 ---
-title: Datadog Pivotal Platform Integration Architecture
+title: Datadog VMware Tanzu Application Service Integration Architecture
 kind: faq
-description: "Overview of the Datadog integration with Pivotal Platform"
+description: "Overview of the Datadog integration with VMware Tanzu Application Service"
 further_reading:
 - link: "https://www.datadoghq.com/blog/pivotal-cloud-foundry-architecture/"
   tag: "Blog"
-  text: "Pivotal Platform architecture"
+  text: "VMware Tanzu Application Service architecture"
 - link: "https://docs.datadoghq.com/integrations/pivotal_pks/"
   tag: "Documentation"
   text: Pivotal Container Service
@@ -13,13 +13,13 @@ further_reading:
 
 ## Overview
 
-The following diagram provides an overview of the components of the Datadog integration with Pivotal Cloud Foundry(PCF)/PAS and the flow of data between them. The sections following provide further detail about the individual components and their interrelationships.
+The following diagram provides an overview of the components of the Datadog integration with VMware Tanzu Application Service and the flow of data between them. The sections following provide further detail about the individual components and their interrelationships.
 
 {{< img src="integrations/pivotal/pivotal_datadog_diagram.png" alt=""  >}}
 
 ## Datadog components for Pivotal Cloud Foundry/PAS
 
-You can deploy and configure the components of the Datadog integration with PCF from the Tanzu Ops Manager, with the Application Monitoring and Cluster Monitoring tiles.
+You can deploy and configure the components of the Datadog integration with VMware Tanzu Application Service from the Tanzu Ops Manager, with the Application Monitoring and Cluster Monitoring tiles.
 - **Datadog Cluster Monitoring Tile** - Platform Engineers use this to collect, visualize, and alert on metrics and logs from PCF Platform Components. From this tile, users can deploy the Datadog Node Agent, Datadog Cluster Agent (DCA), and the Firehose Nozzle.
 - **Datadog Application Monitoring Tile** - Application developers use this to collect custom metrics, traces, and logs from their applications. From this tile, users can deploy the Datadog Buildpack which contains the Container Agent, Trace Agent, and DogStatsD.
 
