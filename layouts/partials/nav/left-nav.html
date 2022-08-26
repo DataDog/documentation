@@ -22,6 +22,7 @@
 {{ $url_without_anchor := "" }}
 <h2>{{$path}}</h2>
 <h2>{{$branchPath}}</h2>
+<h2>{{trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/"}}</h2>
 <h2>{{.Site.Params.signupclass}}</h2>
 <h2>{{.Site.Params.environment}}</h2>
 {{ $currentPage := . }}
@@ -33,6 +34,7 @@
                 <li class="nav-top-level {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
                 {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
+                    <h1>{{$url_without_anchor}}</h1>
                     <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
                         {{ if .Pre }}
                         {{ partial "icon" (dict "name" .Pre "size" "18px" )}}
