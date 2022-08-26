@@ -25,7 +25,7 @@ integration_id: "pivotal-platform"
 
 ## Overview
 
-Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry) deployment can send metrics and events to Datadog. This data helps track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster.
+Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, read the [VMware announcement][3] for more information) deployment can send metrics and events to Datadog. This data helps track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster.
 
 There are three main components for the VMware Tanzu Application Service integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Then, the BOSH Release collects metrics from the platform. Finally, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
@@ -494,6 +494,7 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 
 [1]: https://network.pivotal.io/products/datadog
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
+[3]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20(PCF)%20is%20now%20VMware%20Tanzu%20Application%20Service.
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [12]: /tracing/setup/
