@@ -37,7 +37,10 @@
                     <h2>branchPath: {{$branchPath}}</h2>
                     <h1>url w/out anchor: {{$url_without_anchor}}</h1>
                     <h1>concatted: {{ (print $branchPath (print $url_without_anchor)) }}</h1>
+                    <h1>concatted2: {{ trim ("stefon.simmons/test-env-and-branchgetting_started/" | absLangURL) "/" }}</h1>
                     <h1>relLangUrl: {{ (print $branchPath ((print $url_without_anchor) | relLangURL)) }}</h1>
+                    <h1>URL: {{ cond (eq (substr .URL -1 1) "/") (substr .URL 0 -1) .URL }}</h1>
+                
                     <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}">
                         {{ if .Pre }}
                         {{ partial "icon" (dict "name" .Pre "size" "18px" )}}
