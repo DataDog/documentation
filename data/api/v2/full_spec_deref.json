@@ -18336,7 +18336,7 @@
                   "description": "A warning message indicating something that went wrong with the query",
                   "properties": {
                     "code": {
-                      "description": "A unique code for this type of warning",
+                      "description": "A unique code for this type of warning updated",
                       "example": "unknown_index",
                       "type": "string"
                     },
@@ -21633,7 +21633,7 @@
                   "description": "A warning message indicating something that went wrong with the query",
                   "properties": {
                     "code": {
-                      "description": "A unique code for this type of warning",
+                      "description": "A unique code for this type of warning updated",
                       "example": "unknown_index",
                       "type": "string"
                     },
@@ -22704,7 +22704,7 @@
               "description": "A warning message indicating something that went wrong with the query",
               "properties": {
                 "code": {
-                  "description": "A unique code for this type of warning",
+                  "description": "A unique code for this type of warning updated",
                   "example": "unknown_index",
                   "type": "string"
                 },
@@ -22778,7 +22778,7 @@
         "description": "A warning message indicating something that went wrong with the query",
         "properties": {
           "code": {
-            "description": "A unique code for this type of warning",
+            "description": "A unique code for this type of warning updated",
             "example": "unknown_index",
             "type": "string"
           },
@@ -59428,7 +59428,7 @@
                             "description": "A warning message indicating something that went wrong with the query",
                             "properties": {
                               "code": {
-                                "description": "A unique code for this type of warning",
+                                "description": "A unique code for this type of warning updated",
                                 "example": "unknown_index",
                                 "type": "string"
                               },
@@ -65972,7 +65972,7 @@
                             "description": "A warning message indicating something that went wrong with the query",
                             "properties": {
                               "code": {
-                                "description": "A unique code for this type of warning",
+                                "description": "A unique code for this type of warning updated",
                                 "example": "unknown_index",
                                 "type": "string"
                               },
@@ -66338,7 +66338,7 @@
                             "description": "A warning message indicating something that went wrong with the query",
                             "properties": {
                               "code": {
-                                "description": "A unique code for this type of warning",
+                                "description": "A unique code for this type of warning updated",
                                 "example": "unknown_index",
                                 "type": "string"
                               },

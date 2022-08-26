@@ -4166,7 +4166,7 @@ components:
         query
       properties:
         code:
-          description: A unique code for this type of warning
+          description: A unique code for this type of warning updated
           example: unknown_index
           type: string
         detail:
