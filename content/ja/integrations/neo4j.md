@@ -1,40 +1,58 @@
 ---
+app_id: neo4j
+app_uuid: f2657bb8-ded4-48f3-8095-f703cc203149
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: neo4j.page_cache_hits_total
+      metadata_path: metadata.csv
+      prefix: neo4j.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Neo4j
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: neo4j-cloud@neotechnology.com
+  support_email: neo4j-cloud@neotechnology.com
 categories:
 - data store
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md
-display_name: Neo4j
+display_on_public_website: true
 draft: false
 git_integration_title: neo4j
-guid: a85ec8bb-e677-4089-ae8f-d1705c340131
 integration_id: neo4j
 integration_title: Neo4j
 integration_version: 2.0.0
-is_beta: false
 is_public: true
 kind: integration
-maintainer: neo4j-cloud@neotechnology.com
-manifest_version: 1.0.0
-metric_prefix: neo4j.
-metric_to_check: neo4j.page_cache_hits_total
+manifest_version: 2.0.0
 name: neo4j
-public_title: Datadog-Neo4j インテグレーション
+oauth: {}
+public_title: Neo4j
 short_description: Neo4j のメトリクスを収集する
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: Neo4j のメトリクスを収集する
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Neo4j
 ---
 
 

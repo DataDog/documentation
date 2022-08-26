@@ -1,5 +1,5 @@
 ---
-title: Docker Agent
+title: Docker Agent for Docker, containerd, and Podman
 kind: documentation
 aliases:
   - /guides/basic_agent_usage/docker/
@@ -33,7 +33,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Docker Agent is the containerized version of the host [Agent][1]. The official [Docker image][2] is available on Docker Hub, GCR, and ECR-Public.
+The Datadog Docker Agent is the containerized version of the host [Agent][1]. The Docker Agent supports Docker, containerd, and Podman runtimes. The official [Docker image][2] is available on Docker Hub, GCR, and ECR-Public.
 
 Images are available for 64-bit x86 and Arm v8 architectures.
 
@@ -41,6 +41,9 @@ Images are available for 64-bit x86 and Arm v8 architectures.
 |----------------|--------------|-----------|
 | [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
 | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
+
+
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
 ## Setup
 
@@ -242,16 +245,17 @@ By default, the Docker Agent collects metrics with the following core checks. To
 
 | Check       | Metrics       |
 |-------------|---------------|
-| CPU         | [System][27]  |
-| Disk        | [Disk][28]    |
-| Docker      | [Docker][29]  |
-| File Handle | [System][27]  |
-| IO          | [System][27]  |
-| Load        | [System][27]  |
-| Memory      | [System][27]  |
-| Network     | [Network][30] |
-| NTP         | [NTP][31]     |
-| Uptime      | [System][27]  |
+| Container   | [Metrics][27]
+| CPU         | [System][28]  |
+| Disk        | [Disk][29]    |
+| Docker      | [Docker][30]  |
+| File Handle | [System][28]  |
+| IO          | [System][28]  |
+| Load        | [System][28]  |
+| Memory      | [System][28]  |
+| Network     | [Network][31] |
+| NTP         | [NTP][32]     |
+| Uptime      | [System][28]  |
 
 ### Events
 
@@ -295,8 +299,9 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [24]: /agent/guide/secrets-management/?tab=linux
 [25]: /agent/guide/autodiscovery-management/
 [26]: /agent/guide/agent-commands/
-[27]: /integrations/system/#metrics
-[28]: /integrations/disk/#metrics
-[29]: /agent/docker/data_collected/#metrics
-[30]: /integrations/network/#metrics
-[31]: /integrations/ntp/#metrics
+[27]: /integrations/container/
+[28]: /integrations/system/#metrics
+[29]: /integrations/disk/#metrics
+[30]: /agent/docker/data_collected/#metrics
+[31]: /integrations/network/#metrics
+[32]: /integrations/ntp/#metrics

@@ -1,39 +1,60 @@
 ---
+app_id: resin
+app_uuid: ff99886d-87b7-407a-aa90-7bea5ca27564
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: resin.thread_pool.thread_count
+      metadata_path: metadata.csv
+      prefix: resin.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Resin
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: brent@bmontague.com
+  support_email: brent@bmontague.com
 categories:
 - web
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
-display_name: Resin
+display_on_public_website: true
 draft: false
 git_integration_title: resin
-guid: f7b4c3db-5e56-4ab7-bef7-9d4a347daaee
 integration_id: resin
 integration_title: Resin
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: brent@bmontague.com
-manifest_version: 1.0.0
-metric_prefix: resin.
-metric_to_check: resin.thread_pool.thread_count
+manifest_version: 2.0.0
 name: resin
-public_title: Datadog-Resin インテグレーション
+oauth: {}
+public_title: Resin
 short_description: Resin 内のスレッドプールと接続プールの設定を追跡
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Resin 内のスレッドプールと接続プールの設定を追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Resin
 ---
 
 

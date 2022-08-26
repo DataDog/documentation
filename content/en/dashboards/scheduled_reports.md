@@ -13,6 +13,8 @@ further_reading:
   - link: "https://learn.datadoghq.com/courses/building-better-dashboards"
     tag: "Learning Center"
     text: "Building Better Dashboards"
+aliases:
+    - /dashboards/reporting/
 ---
 
 ## Overview
