@@ -949,8 +949,8 @@ http {
 
     proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
 
-    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE> 
-    ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>
+    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE>; 
+    ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>;
 
     server {
         listen 3834 ssl; #listen for metrics
@@ -975,8 +975,8 @@ stream {
 
     proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
 
-    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE> 
-    ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>
+    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE>;
+    ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>;
 
     server {
         listen 3835 ssl; #listen for traces
