@@ -15,66 +15,115 @@ further_reading:
   text: "How to investigate a log parsing issue?"
 ---
 
-By default, Datadog generates a timestamp and appends it in a date attribute when logs are received on the intake API.
+By default, when logs are received by the Datadog intake API, a timestamp is generated and appended as a date attribute. However, this default timestamp does not always reflect the actual timestamp that might be contained in the log itself. This guides walks you through how to override the default timestamp with the actual timestamp.
 
-However, this default timestamp does not always reflect the actual value that might be contained in the log itself. This article describes how to override the default timestamp.
+{{< img src="logs/guide/log_timestamp_1.png" alt="Log panel showing the log timestamp that is different from the timestamp in the message" style="width:70%;">}}
 
-{{< img src="logs/guide/log_timestamp_1.png" alt="Example of log with timestamp" style="width:75%;">}}
+## Displayed timestamp
 
-1. **Displayed timestamp**.
-    The first thing to understand is how the log timestamp (visible from the Log Explorer and at the top section of the contextual panel) is generated.
+The log timestamp is located at the top section of the log panel. Timestamps are stored in UTC and displayed in the user's local timezone. In the above screenshot, the local profile is set to `UTC+1`, therefore the time the log was received is `11:06:16.807 UTC`.
 
-    Timestamps are stored in UTC and displayed in the user local timezone.
-    On the above screenshot, the local profile is set to `UTC+1`, therefore the reception time of the log is `11:06:16.807 UTC`.
+The timestamp may not show the expected value because the timezone is incorrectly set. To check if this is the case, go to [Personal Settings > Preferences][1] and look at the **Time zone** section.
 
-    Check your [user settings][1] to understand if this could be linked to a bad timezone on your profile:
-    {{< img src="logs/guide/log_timestamp_2.png" alt="User setting" style="width:75%;">}}
-    But you can extract the timestamp from the message to override the actual log date for both raw and JSON logs.
+If the timezone is correct, extract the timestamp from the message to override the log timestamp being shown.
 
-2. **Raw logs**.
+## Raw logs
 
-    2.1 **Extract the timestamp value with a parser**.
-        While writing a parsing rule for your logs, you need to extract the timestamp in a specific attribute. [See specific date parsing examples][2].
-        For the above log, you would use the following rule with the `date()` [matcher][3] to extract the date and pass it into a custom date attribute:
-        {{< img src="logs/guide/log_timestamp_3.png" alt="Parsing date" style="width:75%;">}}
+If your raw logs are not showing the expected timestamp in Datadog, [extract](#extract-the-timestamp-value-with-a-parser) the correct log timestamp from the raw logs and then [remap](#define-a-log-date-remapper) it.
 
-    2.2 **Define a Log Date Remapper**.
-        A `date` attribute stores the timestamp value. [Add a Log Date remapper][4] to make sure the value in the `date` attribute overrides the official log timestamp.
-        {{< img src="logs/guide/log_timestamp_4.png" alt="Log date remapper" style="width:75%;" >}}
-        **Note**: Any modification on a Pipeline only impacts new logs as all the processing is done at ingestion.
-        The following log generated at `06:01:03 EST`, which correspond to `11:01:03 UTC`, is correctly displayed as 12:01:03 (display timezone is UTC+1 in this case).
-        {{< img src="logs/guide/log_timestamp_5.png" alt="Log post processing with new timestamp" style="width:70%;" >}}
+#### Extract the timestamp value with a parser
 
-3. **JSON logs**.
+1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
+2. Click **Add Processor**. 
+3. Select **Grok Parser** for the processor type. 
+4. Use the [date() matcher][3] to extract the date and pass it into a custom date attribute. See the below example, as well as [parsing dates examples][4], for details.
 
-    3.1 **Supported Date formats**.
-        JSON logs are automatically parsed in Datadog.
-        The log `date` attribute is one of the [reserved attributes][5] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's date. Change the default remapping for these attributes at the top of your [Pipeline][6].
-        Imagine that the actual timestamp of the log is contained in the attribute mytimestamp.
-        {{< img src="logs/guide/log_timestamp_6.png" alt="log with mytimestamp attribute" style="width:75%;">}}
-        To make sure this attribute value is taken to override the log date, you must add it in the list of Date attributes.
-        The date remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping. To ensure the date comes from the `mytimestamp` attribute, place it first in the list.
-        **Note**: Any modification on the Pipeline only impacts new logs as all the processing is done at ingestion.
-        There are specific date formats to respect for the remapping to work. The recognized date formats are: [ISO8601][7], [UNIX (the milliseconds EPOCH format)][8] and [RFC3164][9].
-        If the format is different from one of the above (so if your logs still do not have the right timestamp), there is a solution.
+For a log example like this:
 
-    3.2 **Custom Date format**.
-        If the format is not supported by the remapper by default, parse this format and convert it to a supported format. To do this use a [parser Processor][4] that applies only on the attribute.
-        If you do not have a Pipeline filtered on those logs yet, create a new one and add a Processor.
-        **Note**: Set this Processor only to apply to the custom `mytimestamp` attribute under the **advanced** settings.
-        {{< img src="logs/guide/log_timestamp_7.png" alt="Advanced settings date Processor" style="width:75%;">}}
-        Then define the right parsing rule depending on your date format. See the [parsing dates examples][2].
-        Add a Log Date Remapper and to have the correct timestamp on new logs.
-        {{< img src="logs/guide/log_timestamp_8.png" alt="Pipeline example" style="width:75%;">}}
-        {{< img src="logs/guide/log_timestamp_9.png" alt="Log post processing after previous pipeline" style="width:75%;">}}
+```
+2017-12-13 11:01:03 EST | INFO | (tagger.go:80 in Init) | starting the tagging system
+```
+
+Add a parsing rule like:
+
+```
+MyParsingRule %{date("yyyy-MM-dd HH:mm:ss z"):date} \| %{word:severity} \| \(%{notSpace:logger.name}:%{integer:logger.line}[^)]*\) \|.*
+``` 
+
+The output for `MyParsingRule`'s extraction:
+
+```
+{
+  "date": 1513180863000,
+  "logger": {
+    "line": 80,
+    "name": "tagger.go"
+  },
+  "severity": "INFO"
+}
+```
+
+The `date` attribute stores the `mytimestamp` value.
+
+#### Define a Log Date Remapper
+
+Add a [Log Date Remapper][5] to make sure that the value of the `date` attribute overrides the current log timestamp.
+
+1. Navigate to [Logs Pipelines][2] and click on the pipeline processing the logs.
+2. Click **Add Processor**. 
+3. Select **Date remapper** as the processor type.
+4. Enter a name for the processor.
+5. Add **date** to the Set date attribute(s) section.
+6. Click **Create**.
+
+The following log generated at `06:01:03 EST`, which correspond to `11:01:03 UTC`, is correctly displayed as 12:01:03 (the display timezone is UTC+1 in this case).
+
+{{< img src="logs/guide/log_timestamp_5.png" alt="Log panel showing the correct timestamp" style="width:70%;" >}}
+
+**Note**: Any modification on a Pipeline only impacts new logs as all the processing is done at ingestion.
+
+## JSON logs
+
+JSON logs are automatically parsed in Datadog. The log `date` attribute is a [reserved attribute][6], so it goes through preprocessing operations for JSON logs. 
+
+In the below example, the actual timestamp of the log is the value of the `mytimestamp` attribute and not the log timestamp `Dec 13, 2017 at 14:16:45.158`.
+
+{{< img src="logs/guide/log_timestamp_6.png" alt="Log panel showing the log timestamp which is different from the mytimestamp attribute value in the message" style="width:50%;">}}
+
+### Supported date formats
+        
+To make sure the `mytimestamp` attribute value overrides the current log timestamp being shown, you must add it as a date attribute.
+        
+1. Go to your [Logs Pipeline][2]. 
+2. Hover over Preprocessing for JSON Logs, and click the pencil icon. 
+3. Add `mytimestamp` to the list of date attributes. The date remapper looks for each of the reserved attributes in the order they are listed. To ensure the date comes from the `mytimestamp` attribute, place it first in the list.
+4. Click **Save**.
+
+There are specific date formats to follow for the remapping to work. The recognized date formats are: [ISO8601][7], [UNIX (the milliseconds EPOCH format)][8], and [RFC3164][9].
+
+If a different date format is being used, see [Custom date format](#custom-date-format).
+
+**Note**: Any modification on the Pipeline only impacts new logs as all the processing is done at ingestion.
+
+### Custom date format
+
+If the date format is not supported by the remapper by default, you can parse the date using a [Grok parser][5] and then convert it to a supported format. 
+
+1. Go to the [Pipeline][2] that is processing the logs. If you do not have a Pipeline configured for those logs yet, create a new Pipeline for it.
+2. Click **Add Processor**. 
+3. Select **Grok Parser** for the processor type. 
+4. Define the parsing rule based on your date format. See these [parsing dates examples][4] for details.
+5. In the Advanced Settings section, add `mytimestamp` to the `Extract from` section so that this parser is applied only to the custom `mytimestamp` attribute.
+6. Click **Create**.
+7. Add a [Log Date Remapper][5] to map the correct timestamp to the new logs.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/preferences
-[2]: /logs/log_configuration/parsing/#parsing-dates
+[2]: https://app.datadoghq.com/logs/pipelines/
 [3]: /logs/log_configuration/parsing
-[4]: /logs/log_configuration/processors/#log-date-remapper
-[5]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[4]: /logs/log_configuration/parsing/#parsing-dates
+[5]: /logs/log_configuration/processors/?tabs=ui#log-date-remapper
 [6]: /logs/log_configuration/pipelines/?tab=date#preprocessing
 [7]: https://www.iso.org/iso-8601-date-and-time-format.html
 [8]: https://en.wikipedia.org/wiki/Unix_time

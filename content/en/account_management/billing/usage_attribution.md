@@ -19,9 +19,9 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 Administrators can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
 - Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
-- Generates daily `.tsv` (tab separated values) files for most usage types.
+- Generates daily tab separated values (TSV) files for most usage types.
 - Summarizes usage at the end of each month.
-- Surfaces the data both in the UI and as a `.tsv` download.
+- Surfaces the data both in the UI and as a TSV download.
 
 The following usage types are not supported in this tool:
 
@@ -70,20 +70,25 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 - If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 - Previous months' reports are accessible through the time selector.
 - Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month.
-- Reports are downloadable with the **Download as CSV** button. These `.tsv` reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks.
+- Reports are downloadable in TSV format. These TSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks.
 
 Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
 
+
+{{< site-region region="us,eu" >}}
 ### Daily usage attribution
 
 This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
 
-- Clicking on a specific time period expands a view on the right where reports can be downloaded as a `.tsv`.
+- Clicking on a specific time period expands a view on the right where reports can be downloaded as a TSV file.
 - Data can be downloaded daily or at the end of the month.
 
 {{< img src="account_management/billing/usage_attribution/daily-usage-attribution.png" alt="Daily Usage Attribution data" style="width:100%;" >}}
 
 Daily data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
+
+[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
+{{< /site-region >}}
 
 ### Interpreting the data
 
@@ -126,5 +131,4 @@ Each color block represents a unique tag value for each tag.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
-[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags

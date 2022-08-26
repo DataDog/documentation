@@ -97,7 +97,8 @@ def security_rules(content, content_dir):
             if message_file_name.exists():
                 # delete file or skip if staged
                 # any() will return True when at least one of the elements is Truthy
-                if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) \
+                # TODO: remove isStaged check after upstream removal
+                if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isShadowDeployed', False) \
                     or data.get('isDeleted', False) or not data.get('isEnabled', True) or data.get('isDeprecated', False):
                     if p.exists():
                         logger.info(f"removing file {p.name}")

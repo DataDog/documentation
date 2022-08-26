@@ -377,7 +377,22 @@ DD_ENV=ci bundle exec rake spec
 
 {{% /tab %}}
 {{< /tabs >}}
+  
+### Adding custom tags to tests
 
+You can add custom tags to your tests by using the current active span:
+
+```ruby
+require 'ddtrace'
+
+# inside your test
+Datadog::Tracing.active_span&.set_tag('test_owner', 'my_team')
+# test continues normally
+# ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Ruby custom instrumentation documentation.
+  
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog.configure` block, or using environment variables:
@@ -400,7 +415,7 @@ The following environment variable can be used to configure the location of the 
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][5] options can also be used.
+All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Collecting Git metadata
 
@@ -460,4 +475,6 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /tracing/trace_collection/dd_libraries/ruby/#installation
-[5]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
+[5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
+[6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
+

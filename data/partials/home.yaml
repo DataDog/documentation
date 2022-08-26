@@ -48,10 +48,14 @@ nav_sections:
         link: monitors/
         icon: monitor
         desc: Create, edit, and manage your monitors and notifications
-      - title: APM & Continuous Profiler
+      - title: APM
         link: tracing/
         icon: apm
         desc: Explore out-of-the-box performance dashboards and distributed traces
+      - title: Continuous Profiler
+        link: profiler/
+        icon: profiling-1
+        desc: Compare performance snapshots and investigate bottlenecks
       - title: Log Management
         link: logs/
         icon: log

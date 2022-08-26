@@ -1,4 +1,6 @@
 ---
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/vector_configurations.md
 further_reading:
 - link: /integrations/observability_pipelines/working_with_data/
   tag: ドキュメント

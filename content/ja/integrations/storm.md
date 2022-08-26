@@ -1,35 +1,57 @@
 ---
+app_id: storm
+app_uuid: a3c93ee5-077d-467d-87d7-a2325bdcf782
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: storm.bolt.last_60.acked
+      metadata_path: metadata.csv
+      prefix: storm.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: storm
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/storm/README.md
-display_name: storm
+display_on_public_website: true
 draft: false
 git_integration_title: storm
-guid: 5a9ec2c3-8ea0-4337-8c45-a6b8a36b8721
 integration_id: storm
 integration_title: Storm
 integration_version: 1.0.1
 is_public: true
 kind: インテグレーション
-maintainer: '@platinummonkey'
-manifest_version: 1.0.0
-metric_prefix: storm.
-metric_to_check: storm.bolt.last_60.acked
+manifest_version: 2.0.0
 name: storm
+oauth: {}
 public_title: Storm
 short_description: Apache Storm 1.x.x トポロジー実行統計
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  configuration: README.md#Setup
+  description: Apache Storm 1.x.x トポロジー実行統計
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Storm
 ---
 
 

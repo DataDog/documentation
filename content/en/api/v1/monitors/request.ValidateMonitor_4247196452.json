@@ -1,0 +1,32 @@
+{
+  "name": "Example-Validate_a_multi_alert_monitor_returns_OK_response",
+  "type": "log alert",
+  "query": "logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2",
+  "message": "some message Notify: @hipchat-channel",
+  "tags": [
+    "test:examplevalidateamultialertmonitorreturnsokresponse",
+    "env:ci"
+  ],
+  "priority": 3,
+  "options": {
+    "enable_logs_sample": true,
+    "escalation_message": "the situation has escalated",
+    "evaluation_delay": 700,
+    "group_retention_duration": "2d",
+    "groupby_simple_monitor": false,
+    "include_tags": true,
+    "locked": false,
+    "new_host_delay": 600,
+    "no_data_timeframe": null,
+    "notify_audit": false,
+    "notify_no_data": false,
+    "on_missing_data": "show_and_notify_no_data",
+    "renotify_interval": 60,
+    "require_full_window": true,
+    "timeout_h": 24,
+    "thresholds": {
+      "critical": 2,
+      "warning": 1
+    }
+  }
+}

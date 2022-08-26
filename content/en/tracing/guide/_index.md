@@ -2,6 +2,7 @@
 title: Tracing Guides
 kind: guide
 private: true
+disable_toc: true
 aliases:
 - /tracing/getting_further/
 - /tracing/guide/ecommerce_and_retail_use_cases/
@@ -30,5 +31,5 @@ aliases:
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
-
+    {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}Tracing PHP CLI Scripts{{< /nextlink >}}
 {{< /whatsnext >}}

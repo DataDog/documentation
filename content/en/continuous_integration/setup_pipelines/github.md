@@ -11,6 +11,9 @@ further_reading:
     - link: "/continuous_integration/setup_pipelines/custom_tags_and_metrics/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and metrics"
+    - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
+      tag: "blog"
+      text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -21,8 +24,8 @@ further_reading:
 
 Supported GitHub versions:
 * GitHub.com (SaaS)
+* GitHub Enterprise Server (GHES) 3.5.0 or above
 
-GitHub Enterprise Server is not supported.
 
 ## Configuring the Datadog integration
 
@@ -61,6 +64,13 @@ To enable logs, follow these steps:
 4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
+
+### Infrastructure metric correlation
+
+If you are using self-hosted GitHub runners, you can correlate jobs to the host that is running them. To do this, make sure the GitHub runner name
+matches the hostname of the machine it is running on. CI Visibility uses this to link to
+infrastructure metrics. To see the metrics, click on a job span in the trace view and in the window a new tab named **Infrastructure** is
+shown which contains the host metrics.
 
 ## Visualize pipeline data in Datadog
 

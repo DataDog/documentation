@@ -132,7 +132,8 @@ The following table presents the list of collected resources and the minimal Age
 | CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
 | Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
-| Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
+| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
+| Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
 | Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
 | PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
 | PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
@@ -210,6 +211,13 @@ The Cluster Agent must be running, and the Agent must be able to communicate wit
         - list
         - get
         - watch
+     - apiGroups:
+       - networking.k8s.io
+       resources:
+       - ingresses
+       verbs:
+       - list
+       - watch
     ```
 
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.

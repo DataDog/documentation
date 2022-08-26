@@ -84,7 +84,7 @@ git commit SHA とリポジトリ URL がテレメトリーに追加されます
 トレース、スパン、プロファイルに `git.commit.sha` と `git.repository_url` というタグを付けるには、環境変数 `DD_TAGS` でトレーサーを構成します。
 
 ```
-export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_URL>"
+export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url:<REPOSITORY_URL>"
 ./my-application start
 ```
 
@@ -128,7 +128,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 #### スタックトレース
 
-[エラー追跡][3]と APM のエラースパンでは、スタックトレースからリポジトリへのリンクに直接アクセスできます。
+[エラー追跡][1]と APM のエラースパンでは、スタックトレースからリポジトリへのリンクに直接アクセスできます。
 
 1. **APM** > **Error Tracking** の順に移動します。
 2. 課題をクリックします。右側に **Issue Details** パネルが表示されます。
@@ -144,7 +144,7 @@ GitHub SaaS をご利用の方は、Datadog の [GitHub アプリインテグレ
 
 組織用の GitHub アプリをインストールするには、組織のオーナーであるか、リポジトリの管理者権限が必要です。また、個人の GitHub アカウントに GitHub アプリをインストールすることも可能です。
 
-詳しくは、[GitHub アプリと OAuth アプリ][4]をご覧ください。
+詳しくは、[GitHub アプリと OAuth アプリ][3]をご覧ください。
 
 1. フレームをクリックすると、ソースコードの行を含むコードスニペットが展開されます。
 2. **Connect to Preview** と **Authorize** をクリックして、エラーを含むソースコードスニペットにアクセスします。
@@ -153,7 +153,7 @@ GitHub SaaS をご利用の方は、Datadog の [GitHub アプリインテグレ
 
 #### Continuous Profiler
 
-[Continuous Profiler][5] では、GitHub 上のソースリポジトリにあるトレースに直接アクセスすることができます。
+[Continuous Profiler][4] では、GitHub 上のソースリポジトリにあるトレースに直接アクセスすることができます。
 
 1. **APM** > **Profile Search** の順に移動します。
 2. プロファイルをクリックし、フレームグラフのメソッドにカーソルを合わせます。右側に **More actions** というラベルの付いたケバブアイコンが表示されます。
@@ -165,8 +165,7 @@ GitHub SaaS をご利用の方は、Datadog の [GitHub アプリインテグレ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://app.datadoghq.com/apm/error-tracking
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
-[3]: https://app.datadoghq.com/apm/error-tracking
-[4]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
-[5]: https://docs.datadoghq.com/ja/tracing/profiler/search_profiles/
+[3]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
+[4]: /ja/profiler/search_profiles/

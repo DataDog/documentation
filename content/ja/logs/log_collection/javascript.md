@@ -126,7 +126,7 @@ window.DD_LOGS.init({
 | パラメーター             | タイプ                                                                      | 必須 | デフォルト         | 説明                                                                                                                                     |
 | --------------------- | ------------------------------------------------------------------------- | -------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clientToken`         | 文字列                                                                    | はい      |                 | [Datadog クライアントトークン][2]。                                                                                                                    |
-| `site`                | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`                                                                  |
+| `site`                | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイトパラメーター][9]。                                                                  |
 | `service`             | 文字列                                                                    | いいえ       |                 | アプリケーションのサービス名。[タグの構文要件][7]に従っている必要があります。                                                       |
 | `env`                 | 文字列                                                                    | いいえ       |                 | アプリケーションの環境 (例: prod、pre-prod、staging など)。[タグの構文要件][7]に従っている必要があります。                    |
 | `version`             | 文字列                                                                    | いいえ       |                 | アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13 など。[タグの構文要件][7]に従っている必要があります。                    |
@@ -673,6 +673,44 @@ window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 
 **注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
+### 内部コンテキストにアクセスする
+
+Datadog ブラウザログ SDK が初期化された後、SDK の内部コンテキストにアクセスすることができます。これにより、`session_id` にアクセスすることができます。
+
+```
+getInternalContext (startTime?: 'number' | undefined)
+```
+
+オプションで `startTime` パラメーターを使用すると、特定の時刻のコンテキストを取得することができます。このパラメーターが省略された場合は、現在のコンテキストが返されます。
+
+##### NPM
+
+NPM の場合は、以下を使用します。
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+```
+
+#### CDN 非同期
+
+CDN 非同期の場合は、以下を使用します。
+
+```javascript
+DD_LOGS.onReady(function () {
+DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+})
+```
+
+##### CDN 同期
+
+CDN 同期の場合は、以下を使用します。
+
+```javascript
+window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+```
+
 <!-- 注: URL はすべて絶対値でなければなりません -->
 
 [1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
@@ -683,3 +721,4 @@ window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/faq/proxy_rum_data/
 [7]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
+[9]: https://docs.datadoghq.com/ja/getting_started/site/

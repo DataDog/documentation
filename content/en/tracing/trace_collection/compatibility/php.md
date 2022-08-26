@@ -30,7 +30,7 @@ When these versions are no longer supported by their maintainers, Datadog APM fo
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug, and security fixes.                                                                                    |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                                              |
 | <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact the support team][2] for special requests. |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support. The version can still be used but no bug fixes are provided.                                                                                                  |
 
 
 PHP APM supports the following PHP versions:
@@ -66,6 +66,16 @@ PHP APM supports the following SAPI's:
 | fpm-fcgi       | Fully Supported |
 | cgi-fcgi       | Fully Supported |
 
+## Supported processor architectures
+
+PHP APM supports the following architectures:
+
+| Processor architectures                   | Support level         | Package version                        |
+| ------------------------------------------|-----------------------|----------------------------------------|
+| Linux GNU amd64 (`x86-64-linux-gnu`)      | [GA](#support-ga)     | All                                    |
+| Linux MUSL amd64 (`x86-64-linux-musl`)    | [GA](#support-ga)     | All                                    |
+| Linux GNU arm64 (`aarch64-linux-gnu`)     | [GA](#support-ga)     | > `0.78.0`                             |
+| Linux MUSL arm64 (`aarch64-linux-musl`)   | [GA](#support-ga)     | > `0.78.0`                             |
 
 ### Integrations
 

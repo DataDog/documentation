@@ -1,13 +1,13 @@
 ---
 title: Why should I install the Datadog Agent on my cloud instances?
-kind: faq
+kind: guide
 aliases:
     - /agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
     - /integrations/faq/why-is-my-aws-error-count-metric-orders-of-magnitude-lower-in-datadog-than-cloudwatch/
     - /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 further_reading:
-- link: "/integrations/faq/cloud-metric-delay/"
-  tag: "FAQ"
+- link: "/integrations/guide/cloud-metric-delay/"
+  tag: "Guide"
   text: "Cloud Metric Delay"
 ---
 

@@ -32,7 +32,7 @@ RUM は、モバイル Flutter の Android および iOS アプリケーショ�
 
 | iOS SDK | Android SDK | Browser SDK |
 | :-----: | :---------: | :---------: |
-| 1.11.0-beta2 | 1.12.0-alpha2 | ❌ |
+| 1.11.0-rc1 | 1.12.0-alpha2 | v4.11.2 |
 
 [//]: # (End SDK Table)
 
@@ -43,6 +43,19 @@ iOS の Podfile は `use_frameworks!` (Flutter のデフォルトでは true) �
 ### Android
 
 Android では、`minSdkVersion` が >= 19 である必要があり、Kotlin を使用している場合は、バージョン >= 1.5.31 である必要があります。
+
+### Web
+
+`⚠️ Flutter Web の Datadog サポートはまだ初期開発中です`
+
+Web の場合、`index.html` の `head` タグの下に以下を追加します。
+
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
+```
+
+これは、CDN 配信された Datadog Logging および RUM Browser SDK をロードします。Browser SDK の同期 CDN 配信バージョンは、Flutter プラグインでサポートされる唯一のバージョンであることに注意してください。
 
 ## セットアップ
 
@@ -118,6 +131,31 @@ RUM の初期化は、`main.dart` ファイル内の 2 つのメソッドのう�
    });
    ```
 
+### ログを送信する
+
+Datadog を `LoggingConfiguration` で初期化した後、`logs` のデフォルトインスタンスを使用して Datadog にログを送信することができます。
+
+```dart
+DatadogSdk.instance.logs?.debug("A debug message.");
+DatadogSdk.instance.logs?.info("Some relevant information?");
+DatadogSdk.instance.logs?.warn("An important warning...");
+DatadogSdk.instance.logs?.error("An error was met!");
+```
+
+また、`createLogger` メソッドを使用して、追加のロガーを作成することも可能です。
+
+```dart
+final myLogger = DatadogSdk.instance.createLogger(
+  LoggingConfiguration({
+    loggerName: 'Additional logger'
+  })
+);
+
+myLogger.info('Info from my additional logger.');
+```
+
+ロガーに設定されたタグおよび属性は、各ロガーにローカルです。
+
 ### RUM ビューの追跡
 
 Datadog Flutter Plugin は、MaterialApp 上の `DatadogNavigationObserver` を使用して、自動的に名前付きルートを追跡することができます。
@@ -126,7 +164,7 @@ Datadog Flutter Plugin は、MaterialApp 上の `DatadogNavigationObserver` を�
 MaterialApp(
   home: HomeScreen(),
   navigatorObservers: [
-    DatadogNavigationObserver(),
+    DatadogNavigationObserver(DatadogSdk.instance),
   ],
 );
 ```
@@ -146,7 +184,39 @@ final configuration = DdSdkConfiguration(
 )..enableHttpTracking()
 ```
 
-Datadog 分散型トレーシングを有効にするには、コンフィギュレーションオブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを分散型トレーシングをサポートしているドメインに設定する必要があります。
+Datadog 分散型トレーシングを有効にするには、構成オブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを、分散型トレーシングをサポートするドメインに設定する必要があります。また、`RumConfiguration` で `tracingSamplingRate` を設定することで、Datadog 分散型トレーシングのサンプリングレートを変更することができます。
+
+## トラブルシューティング
+
+### Cocoapods 問題
+
+Datadog SDK を追加した後、Cocoapods から投げられるエラーのために iOS アプリケーションのビルドに問題がある場合、エラーを確認してください。最も一般的なエラーは、Cocoapods から最新のネイティブライブラリを取得する問題で、これは `ios` ディレクトリで以下を実行することで解決できます。
+
+```bash
+pod install --repo-update
+```
+
+もう一つのよくあるエラーは、Apple Silicon Mac での FFI ライブラリの読み込みの問題です。 以下のようなエラーが表示された場合:
+
+```bash
+LoadError - dlsym(0x7fbbeb6837d0, Init_ffi_c): symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:6:in `rescue in <top (required)>'
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:3:in `<top (required)>'
+```
+
+[Flutter のドキュメント][8]にある、Apple Silicon で Flutter を使うための手順に従います。
+
+### sdkVerbosity の設定
+
+アプリは実行できるのに、Datadog サイトで期待するデータが表示されない場合は、`DatadogSdk.initialize` を呼び出す前に、コードに以下を追加してみてください。
+
+```dart
+DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
+```
+
+これにより、SDK が何をしているか、どのようなエラーに遭遇しているかについての追加情報が出力され、お客様と Datadog サポートが問題を絞り込むのに役立つ場合があります。
 
 ## データストレージ
 
@@ -179,3 +249,4 @@ Datadog 分散型トレーシングを有効にするには、コンフィギュ
 [5]: https://github.com/DataDog/dd-sdk-flutter/blob/main/LICENSE
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://pub.dev/packages/datadog_tracking_http_client
+[8]: https://github.com/flutter/flutter/wiki/Developing-with-Flutter-on-Apple-Silicon

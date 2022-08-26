@@ -1,46 +1,68 @@
 ---
+app_id: hazelcast
+app_uuid: 00434289-3c74-4c25-8841-9e0c826510c2
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Hazelcast Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - hazelcast.mc.license_expiration_time
+      - hazelcast.instance.running
+      metadata_path: metadata.csv
+      prefix: hazelcast.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Hazelcast
   logs:
     source: hazelcast
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - キャッシュ
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md
-display_name: Hazelcast
+display_on_public_website: true
 draft: false
 git_integration_title: hazelcast
-guid: b2c63c99-f955-4494-a171-494f9dcf7d1f
 integration_id: hazelcast
 integration_title: Hazelcast
 integration_version: 2.0.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: hazelcast.
-metric_to_check:
-- hazelcast.mc.license_expiration_time
-- hazelcast.instance.running
+manifest_version: 2.0.0
 name: hazelcast
-public_title: Datadog-Hazelcast インテグレーション
+oauth: {}
+public_title: Hazelcast
 short_description: Hazelcast メンバーと管理センターを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Caching
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Hazelcast メンバーと管理センターを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hazelcast
 ---
 
 

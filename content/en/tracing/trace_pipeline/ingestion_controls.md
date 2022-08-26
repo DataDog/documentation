@@ -66,7 +66,7 @@ Infrastructure
 : Hosts, containers, and functions on which the service is running.
 
 Service status
-: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits, `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][6], and `OK` the rest of the time.
+: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits set [in its configuration][12], `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][6], and `OK` the rest of the time.
 
 Filter the page by environment, configuration, and status to view services for which you need to take an action. To reduce the global ingestion volume, sort the table by the `Downstream Bytes/s` column to view services responsible for the largest share of your ingestion.
 
@@ -132,3 +132,4 @@ To specify that a specific percentage of a service's traffic should be sent, add
 [9]: /tracing/trace_pipeline/metrics
 [10]: /tracing/trace_pipeline/ingestion_mechanisms/
 [11]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[12]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage

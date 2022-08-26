@@ -1,36 +1,57 @@
 ---
+app_id: unbound
+app_uuid: 33cd72ba-822b-4a74-92eb-f1240ea71975
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: unbound.time.up
+      metadata_path: metadata.csv
+      prefix: unbound.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Unbound
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: david.byron@avast.com
+  support_email: david.byron@avast.com
 categories:
 - network
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md
-display_name: Unbound
+display_on_public_website: true
 draft: false
 git_integration_title: unbound
-guid: 2b31e667-1fd9-440f-9e96-c72bea3cf3ca
 integration_id: unbound
 integration_title: Unbound
 integration_version: 1.0.1
 is_public: true
 kind: インテグレーション
-maintainer: david.byron@avast.com
-manifest_version: 1.0.0
-metric_prefix: unbound.
-metric_to_check: unbound.time.up
+manifest_version: 2.0.0
 name: unbound
-public_title: Datadog-Unbound インテグレーション
+oauth: {}
+public_title: Unbound
 short_description: unbound メトリクスを収集する Datadog インテグレーション
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  configuration: README.md#Setup
+  description: unbound メトリクスを収集する Datadog インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Unbound
 ---
 
 

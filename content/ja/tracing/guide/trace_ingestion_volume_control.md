@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /tracing/trace_ingestion/ingestion_controls/
+- link: /tracing/trace_pipeline/ingestion_controls/
   tag: ドキュメント
   text: 取り込み制御ページ
 kind: ガイド
@@ -125,14 +125,14 @@ _どの取り込みメカニズムが取り込み量の大部分を担ってい�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_ingestion/ingestion_controls
-[2]: /ja/tracing/trace_ingestion/mechanisms
-[3]: /ja/tracing/guide/metrics_namespace/
-[4]: /ja/tracing/generate_metrics/
+[1]: /ja/tracing/trace_pipeline/ingestion_controls
+[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /ja/tracing/metrics/metrics_namespace/
+[4]: /ja/tracing/trace_pipeline/generate_metrics/
 [5]: /ja/monitors/create/types/apm/?tab=analytics
-[6]: /ja/tracing/trace_ingestion/mechanisms/#head-based-default-mechanism
-[7]: /ja/tracing/trace_retention/usage_metrics/
-[8]: /ja/tracing/trace_ingestion/mechanisms#error-traces
-[9]: /ja/tracing/trace_ingestion/mechanisms#rare-traces
-[10]: /ja/tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[7]: /ja/tracing/trace_pipeline/metrics/
+[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[9]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[10]: /ja/tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#in-tracing-libraries-user-defined-rules
 [11]: /ja/tracing/legacy_app_analytics

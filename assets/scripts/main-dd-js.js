@@ -1,7 +1,6 @@
 import 'jquery';
 import 'bootstrap';
 
-
 import './datadog-docs';
 import './utms';
 

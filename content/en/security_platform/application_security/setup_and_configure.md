@@ -14,14 +14,14 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"
-- link: "/security_platform/guide/how-appsec-works/"
+- link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Monitoring Works in Datadog"
 ---
 
 ## Compatibility
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -178,8 +178,7 @@ It supports the use of all PHP frameworks, and also the use no framework.
 
 The Datadog NodeJS library supports the following NodeJS versions:
 
-- NodeJS 13.10.0 and higher
-- NodeJS 12.17.0 and higher
+- NodeJS 14 and higher
 
 These are supported on the following architectures:
 
@@ -198,6 +197,34 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+### Supported Python versions
+
+The Datadog Python library supports the following Python versions:
+
+- Python 2.7, 3.5 and higher
+
+These are supported on the following architectures:
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+- macOS (Darwin) x86-64
+- Windows (msvc) x86, x86-64
+
+You can monitor application security for Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
+### Supported frameworks
+
+| Framework Web Server | Minimum Framework Version |
+|----------------------|---------------------------|
+| Django               | 1.8                       |
+| Flask                | 0.10                      |
+
+Support for query strings is not available for Flask.
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Add user information to traces
@@ -208,7 +235,7 @@ This way, you can identify bad actors that are generating suspicious security ac
 
 You can [add custom tags to your root span][1], or use the instrumentation functions described below.
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -423,6 +450,33 @@ For information and options, read [the NodeJS tracer documentation][1].
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+
+This example shows how to set user monitoring tags:
+
+```python
+from ddtrace import tracer
+from ddtrace.contrib.trace_utils import set_user
+
+@app.route("/")
+def view():
+    # Record user information in the trace the span belongs to
+    set_user(
+        tracer,
+        user_id="usr.id",
+        email="usr.email",
+        name="usr.name",
+        session_id="usr.session_id",
+        role="usr.role",
+        scope="usr.scope"
+    )
+    return "OK"
+```
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Data security considerations
@@ -436,7 +490,7 @@ To protect users' data, sensitive data scanning is activated by default in ASM. 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
 
-<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong> 
+<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong>
 
 <p>You can also configure scanning patterns in code:</p>
 

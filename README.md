@@ -26,13 +26,20 @@ If you are a Datadog employee, add your [GitHub personal token][6]
 
 To run the documentation site locally, execute:
 
-| Command                   | Description                                                                                                                                                                                                                                                                                                                                                 |
-|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                                                                                                                                    |
-| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a GitHub personal token setup in your `Makefile.config` or the extra content is available locally. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
-| `make start-docker`       | Build the documentation using the docker image. For more information see [Docker Development][15].                                                                                                                                                                                                                                                          |
+| Command                   | Description                                                                                                                                                                                                                                |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                   |
+| `make start`*             | Build the full documentation with all extra content (integrations, extra pulled files, localized content, etc). Only useful if you have a GitHub personal token setup in your `Makefile.config` or the extra content is available locally. |
+| `make start-docker`       | Build the documentation using the docker image. For more information see [Docker Development][15].                                                                                                                                         |
 
 **Documentation is then available at `http://localhost:1313`**
+
+**NOTE**: `make start` attempts to pull all dependent repos from their origins or a local cache. The order it attempts to retrieve is:
+  * One directory above where this repo is cloned.
+  * `integrations_data`: A local pull of all dependent repos from the last successful build
+  * If neither of the above exist, an attempt is made to pull dependent repos from upstream.
+
+If you'd like to re-pull dependencies, run `make clean-all` and then try your `make` command again.
 
 To learn more about how the documentation is built, refer to the [Documentation Build Wiki][7].
 

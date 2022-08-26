@@ -6,13 +6,13 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging/
   tag: ドキュメント
   text: 統合サービスタグ付け
-- link: /tracing/visualization/services_list/
+- link: /tracing/services/services_list/
   tag: ドキュメント
   text: Datadog に報告するサービスの一覧
-- link: /tracing/visualization/service/
+- link: /tracing/services/service_page/
   tag: ドキュメント
   text: Datadog のサービスについて
-- link: /tracing/visualization/services_map/
+- link: /tracing/services/services_map/
   tag: ドキュメント
   text: サービスマップについて読む
 kind: documentation
@@ -30,8 +30,7 @@ title: ユニバーサル サービス モニタリング
 ### 対応バージョンと互換性
 
 必要な Agent のバージョン
-: ユニバーサルサービスモニタリングでは、サービスに付随してインストールされる Datadog Agent のバージョンが 7.37 以上であることが必要です。<br />
-: **注:** USM ベータ版は、Agent バージョン 7.32 から利用可能ですが、Datadog は、最新の改善を得るために新しいバージョンを実行することを強くお勧めします。
+: ユニバーサルサービスモニタリングでは、サービスと共にインストールされる Datadog Agent のバージョンが 7.38 以上であることが必要です。
 
 対応プラットフォーム
 : Linux kernel 4.4 以上<br/>
@@ -48,7 +47,7 @@ HTTPS (OpenSSL)
 
 ### 前提条件
 
-- Datadog Agent 7.37 以降がサービスと共にインストールされていること。トレースライブラリのインストールは必要_ありません_。
+- Datadog Agent 7.38 以降がサービスと共にインストールされていること。トレースライブラリのインストールは必要_ありません_。
 - [統合サービスタグ付け][1] の `env` と `service` のタグがデプロイに適用されていること。`version` タグはオプションです。
 
 **注**: コンテナを使用しないシングルテナントのセットアップで、1 つのサービスがホスト上で実行される場合、ホスト自体に統合サービスタグを適用する必要があります。USM は、コンテナを使用しない単一ホスト上の複数のサービスの監視や、環境変数を使用して統合サービスタグが適用されている単一ホスト上の監視をサポートしていません。
@@ -276,6 +275,14 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
+## 自動サービスタグ付け
+
+ユニバーサルサービスモニタリングは、インフラストラクチャーで稼働しているサービスを自動的に検出します。[統合サービスタグ付け][1]が見つからない場合、タグの 1 つ (`app`、`short_image`、`kube_container_name`、`container_name`、`kube_deployment`、`kube_service`) に基づいて名前を付けます。
+
+サービス名を更新するには、[統合サービスタグ付け][1]を使用します。
+
+{{< img src="tracing/universal_service_monitoring/automatic-service-tagging.png" alt="Datadog がサービスを自動検出すると、その際に使用されるタグがサービスページの上部に表示されます" style="width:80%;" >}}
+
 ## サービスの確認
 
 Agent を構成した後、APM サービスリストにサービスが表示されるまで約 5 分間待ちます。サービスをクリックすると、APM サービスの詳細ページが表示されます。左上の操作名 `universal.http.server` または `universal.http.client` は、サービスのテレメトリーがユニバーサルサービスモニタリングから来ることを示します。
@@ -300,8 +307,8 @@ Agent を構成した後、APM サービスリストにサービスが表示さ�
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
 [2]: https://docs.datadoghq.com/ja/tracing/deployment_tracking/
-[3]: /ja/tracing/visualization/services_map/
-[4]: /ja/tracing/deployment_tracking/
+[3]: /ja/tracing/services/services_map/
+[4]: /ja/tracing/services/deployment_tracking/
 [5]: /ja/monitors/create/types/apm/?tab=apmmetrics
 [6]: /ja/dashboards/
 [7]: /ja/monitors/service_level_objectives/metric/

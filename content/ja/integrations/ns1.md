@@ -1,41 +1,60 @@
 ---
+app_id: ns1
+app_uuid: 8bc08030-a931-42a0-b9c0-9ca87f3e0e12
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     NS1: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ns1.qps
+      metadata_path: metadata.csv
+      prefix: ns1.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: NS1
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: zjohnson@ns1.com
+  support_email: zjohnson@ns1.com
 categories:
 - モニタリング
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md
-display_name: NS1
+display_on_public_website: true
 draft: false
 git_integration_title: ns1
-guid: 7c7c7d80-d307-4ffd-ac60-1a7180d932e3
 integration_id: ns1
 integration_title: ns1
 integration_version: 0.0.6
 is_public: true
 kind: integration
-maintainer: zjohnson@ns1.com
-manifest_version: 1.0.0
-metric_prefix: ns1.
-metric_to_check: ns1.qps
+manifest_version: 2.0.0
 name: ns1
+oauth: {}
 public_title: ns1
 short_description: NS1 メトリクスを収集する Datadog インテグレーション
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: NS1 メトリクスを収集する Datadog インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: ns1
 ---
 
 

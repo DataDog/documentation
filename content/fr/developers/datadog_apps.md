@@ -1,13 +1,13 @@
 ---
-title: Apps Datadog
-kind: documentation
 further_reading:
-  - link: "https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md"
-    tag: Github
-    text: Guide de conception
-  - link: "https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md"
-    tag: Github
-    text: Modèle de programmation
+- link: https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md
+  tag: Github
+  text: Guide de conception
+- link: https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md
+  tag: Github
+  text: Modèle de programmation
+kind: documentation
+title: Apps Datadog
 ---
 
 ## Rejoignez la bêta !
@@ -55,14 +55,14 @@ Consultez le [Guide d'utilisation de la plateforme de développement][3] (en ang
 
 6. Vous accédez alors au dashboard de votre nouvelle App. De là, vous avez la possibilité de modifier le nom choisi, de saisir une description plus détaillée, ou de modifier l'icône de l'App.
 
-<img style="max-width:80%" alt="Dashboard des paramètres de l'App" src="https://user-images.githubusercontent.com/228230/137548724-0487c169-9b65-4b31-bfa6-f8da3bbd2785.png">
+<img style="max-width:80%" alt="Informations de base de l'interface de modification d'App" src="https://user-images.githubusercontent.com/17037651/163401812-d21a9d3a-e73f-49b0-bda4-e7c447295784.png">
 
 
 ### Ajouter votre App à un dashboard
 
 1. Pour pouvoir ajouter votre App à un dashboard, vous devez d'abord l'activer en cliquant sur **UI Extensions** à gauche.
 
-<img style="max-width:80%" alt="Activer l'option UI Extensions" src="https://user-images.githubusercontent.com/228230/137548823-0ad7f1ae-512f-44a4-93ca-c2aa3c47b992.png">
+<img style="max-width:80%" alt="Bouton Enable UI Extensions de l'interface de modification d'App" src="https://user-images.githubusercontent.com/17037651/163401958-153f6c80-d7ba-4b47-a40d-1cf08913602d.png">
 
 Une fois cette vue chargée, cliquez sur le bouton **Enable UI Extensions**. 
 
@@ -71,9 +71,9 @@ Une fois cette vue chargée, cliquez sur le bouton **Enable UI Extensions**.
 Assurez-vous de modifier l'URL racine et l'URL racine du mode debugging en fonction de la version localhost du widget que vous utilisez. Le chemin vers le contrôleur principal est `/widget`. Ces URL changeront au cours du développement de votre App et lorsque vous commencerez à l'héberger sur votre propre infrastructure.
 
 3. Activez l'option
-« Dashboard Custom Widget ». Le JSON du widget est alors généré sur la droite.
+Dashboard Custom Widget. Vous devrez peut-être faire défiler le volet du milieu vers le bas pour afficher cette option. Le JSON du widget est alors géré sur la droite.
 
-<img style="max-width:80%" alt="Dashboard Custom Widget" src="https://user-images.githubusercontent.com/228230/137549275-f901e4c1-16ad-4c82-95f3-9ba7f346c9ba.png">
+<img style="max-width:80%" alt="Écran UI Extensions de l'interface de modification d'App" src="https://user-images.githubusercontent.com/17037651/163402086-a3afbecd-c9c0-4608-bb91-6cb5391fec93.png">
 
 
 Notez que ce JSON contient une valeur intitulée `Your first widget`. Il s'agit du nom de votre widget, qui apparaît dans le menu pour l'ajouter à vos dashboards.

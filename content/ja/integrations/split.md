@@ -1,33 +1,57 @@
 ---
+app_id: split
+app_uuid: 690989fe-dca5-4394-b38a-86f9770dd470
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: split.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Split
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - notification
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/split/README.md
-display_name: Split
+display_on_public_website: true
 draft: false
 git_integration_title: split
-guid: 2c48dd0b-418f-4ca7-9b8d-54c857587db4
 integration_id: split
 integration_title: Split
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: jeremy-lq
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: split
+oauth: {}
 public_title: Split
 short_description: エンジニアリングチームや製品チームに実験用プラットフォームを提供。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::通知
+  configuration: README.md#Setup
+  description: エンジニアリングチームや製品チームに実験用プラットフォームを提供。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Split
 ---
 
 

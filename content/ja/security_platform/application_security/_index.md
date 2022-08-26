@@ -8,9 +8,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-application-security/
   tag: ブログ
   text: Datadog アプリケーションセキュリティのご紹介
-- link: /security_platform/guide/how-appsec-works/
+- link: /security_platform/application_security/how-appsec-works/
   tag: ドキュメント
-  text: Datadog におけるアプリケーションセキュリティモニタリングの仕組み
+  text: アプリケーションセキュリティ モニタリングの仕組み
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: 製品ページ
   text: Datadog Application Security Monitoring
@@ -30,15 +30,19 @@ ASM では、Datadog の[トレーシングライブラリ][1]、[Datadog Agent]
 
 ASM を使用すると、継続的なトレースデータからノイズを取り除き、環境の安全と保護のみに集中できます。
 
+## Datadog に実装されたアプリケーションセキュリティの仕組みの理解
+
+アプリケーションセキュリティモニタリングがどのように構成され、どのようにトレースデータを使用してセキュリティ問題を特定するのかに興味がある方は、[アプリケーションセキュリティモニタリングの仕組み][3]をご覧ください。
+
 ## 環境を構成する
 
-[独自の規則][3]を利用する ASM なら、手動でコンフィギュレーションをせずに脅威を検出できます。すでに Datadog [APM][1] をご使用の場合は、環境変数を 1 つ設定するだけですぐに開始できます。
+[独自の規則][4]を利用する ASM なら、手動でコンフィギュレーションをせずに脅威を検出できます。すでに Datadog [APM][1] を物理ホストまたは仮想ホストにすでに構成している場合、環境変数を 1 つ設定するだけですぐに開始できます。
 
-環境を構成し、ASM で脅威の検出を開始するには、『[はじめに][4]』のドキュメントの手順に従います。ASM の構成が完了すると、[セキュリティシグナルエクスプローラー][5]でセキュリティシグナルの調査およびその修復を開始できます。
+環境を構成し、ASM で脅威の検出を開始するには、『[はじめに][5]』のドキュメントの手順に従います。ASM の構成が完了すると、[セキュリティシグナルエクスプローラー][6]でセキュリティシグナルの調査およびその修復を開始できます。
 
 ## セキュリティシグナルの調査と修復
 
-[セキュリティシグナルエクスプローラー][5]でセキュリティシグナルをクリックすると、その概要と問題修復の推奨手順を確認できます。同じパネル内で、その関連する攻撃フローが分かるトレースの表示や、さらにコンテキストを取得するための情報をリクエストすることができます。
+[セキュリティシグナルエクスプローラー][6]でセキュリティシグナルをクリックすると、その概要と問題修復の推奨手順を確認できます。同じパネル内で、その関連する攻撃フローが分かるトレースの表示や、さらにコンテキストを取得するための情報をリクエストすることができます。
 
 ## 次のステップ
 
@@ -46,6 +50,7 @@ ASM を使用すると、継続的なトレースデータからノイズを取�
 
 [1]: /ja/tracing/
 [2]: /ja/agent/
-[3]: /ja/security_platform/default_rules/#cat-application-security
-[4]: /ja/security_platform/application_security/getting_started/
-[5]: /ja/security_platform/explorer/
+[3]: /ja/security_platform/application_security/how-appsec-works/
+[4]: /ja/security_platform/default_rules/#cat-application-security
+[5]: /ja/security_platform/application_security/getting_started/
+[6]: /ja/security_platform/explorer/

@@ -1,42 +1,60 @@
 ---
-aliases:
-- /ja/integrations/goexpvar
+app_id: go-expvar
+app_uuid: cac5ebe3-fa36-49f7-93c5-22116c745e80
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: go_expvar.memstats.alloc
+      metadata_path: metadata.csv
+      prefix: go_expvar.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Go-Expvar
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - languages
 - autodiscovery
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
-display_name: Go-Expvar
+display_on_public_website: true
 draft: false
 git_integration_title: go_expvar
-guid: 33557f7a-5f24-43f3-9551-78432894e539
 integration_id: go-expvar
 integration_title: Go-Expvar
 integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: go_expvar.
-metric_to_check: go_expvar.memstats.alloc
+manifest_version: 2.0.0
 name: go_expvar
-public_title: Datadog-Go-Expvar インテグレーション
+oauth: {}
+public_title: Go-Expvar
 short_description: Go サービスから expvar で計測されたメトリクスとメモリ統計を収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::言語
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Go サービスから expvar で計測されたメトリクスとメモリ統計を収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Go-Expvar
 ---
 
 

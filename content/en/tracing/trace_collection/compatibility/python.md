@@ -113,6 +113,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Mako][56]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][57]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
 | [urllib3][58]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
+| [graphql-core][59]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 
 ## Further Reading
 
@@ -177,3 +178,4 @@ The `ddtrace` library includes support for the following libraries:
 [56]: https://www.makotemplates.org
 [57]: https://requests.readthedocs.io/en/master/
 [58]: https://urllib3.readthedocs.io/en/stable/
+[59]: https://graphql-core-3.readthedocs.io/en/latest/intro.html

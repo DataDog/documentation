@@ -1,5 +1,5 @@
 import { initializeIntegrations } from './components/integrations';
-import { initializeSecurityRules } from './components/security-rules';
+import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
@@ -82,8 +82,8 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform')) {
-        initializeSecurityRules();
+    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('catalog')) {
+        initializeGroupedListings();
     }
 
     if (document.body.classList.value.includes('integrations')) {

@@ -1,16 +1,16 @@
 ---
 categories:
-  - monitoring
-  - notification
-ddtype: crawler
+- monitoring
+- notification
 dependencies: []
 description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
 doc_link: https://docs.datadoghq.com/integrations/pagerduty/
 draft: false
 git_integration_title: pagerduty
 has_logo: true
-integration_id: pagerduty
+integration_id: ''
 integration_title: PagerDuty
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -19,6 +19,7 @@ public_title: Datadog-PagerDuty インテグレーション
 short_description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
 version: '1.0'
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog PagerDuty インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。<b>注</b>: 監視通知を PagerDuty に送信することは可能です。</div>
 {{< /site-region >}}
@@ -37,7 +38,7 @@ PagerDuty を Datadog に接続して、以下のことができます。
 
 ## セットアップ
 
-Pagerduty の[こちらのドキュメント][1]を参照してください。
+Pagerduty の [Datadog インテグレーションガイド][1]を参照してください。
 
 {{< site-region region="us" >}}
 PagerDuty を統合したら、Datadog のカスタム PagerDuty インシデントトレンドを確認できます。
@@ -59,26 +60,30 @@ PagerDuty インテグレーションには、サービスのチェック機能�
 
 ## トラブルシューティング
 
-### モニターがリカバリしたときに、PagerDuty サービスを自動的に解決するにはどうすればよいですか
+### 特定の PagerDuty サービスに通知を送信する
 
-以下のように、モニターの **Say what's happening** セクションの `{{#is_recovery}}` コンテキストに、PagerDuty 通知を含める必要があります。
-
-```text
-{{#is_recovery}}
-
-    この通知は、モニターが解決したときのみ発生します。
-    @pagerduty-trigger がトリガーされアラートが発動すると、同様に解決します。
-
-{{/is_recovery}}
-```
-
-### 複数の PagerDuty サービスが統合されている場合に、特定のサービスにメッセージ/通知を送信するにはどうすればよいですか
-
-モニターメッセージで `@pagerduty-[serviceName]` を使用します。モニターの **Say what's happening** セクションで入力を開始すると、オートコンプリートされます。
+複数のサービスが統合されている場合に、特定の PagerDuty サービスにメッセージや通知を送るには、モニターメッセージに `@pagerduty-[serviceName]` を使用します。これをモニターの **Say what's happening** セクションに入力し始めると、オートコンプリートされるのがわかるはずです。
 
 {{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="pagerduty faq 1" popup="true">}}
 
-### PagerDuty でアラートの説明が途切れているのはなぜですか
+モニターが回復するとき、通知ハンドルをモニター回復メッセージに含めると、自動的に Pagerduty サービスを解決しますが、`{{#is_alert}}` コンテキストにのみ含まれている場合は解決しません。
+
+### PagerDuty のインシデント重大度のマッピング
+
+PagerDuty インシデントの重大度は、アラートの原因となっているモニターのステータスによって決定されます。次の表は、アラートステータスが PagerDuty インシデントの重大度にどのようにマッピングされるかを示しています。
+
+| モニターステータス     | PagerDuty インシデント重大度             |
+|--------------------|-----------------------------------------|
+| `ALERT`            | `error`                                 |
+| `NODATA`           | `error`                                 |
+| `WARNING`          | `warning`                               |
+| `OK` またはその他     | `info`                                  |
+
+例えば、モニターが `OK` から `WARNING` に遷移し、`@pagerduty-[serviceName]` に通知した場合、作成される PagerDuty インシデントの重大度は `warning` となります。
+
+**注**: このマッピングは自動的に行われ、変更することはできません。
+
+### アラートの説明文の切り捨て
 
 Datadog では、PagerDuty に送信されるモニター通知の長さに上限を設けています。上限は **1024 文字**です。
 

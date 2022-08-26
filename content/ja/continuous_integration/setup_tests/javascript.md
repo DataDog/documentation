@@ -91,7 +91,7 @@ yarn add --dev dd-trace
 ## テストのインスツルメント
 
 {{< tabs >}}
-{{% tab "Jest/Mocha/Cucumber" %}}
+{{% tab "Jest/Mocha" %}}
 `NODE_OPTIONS` 環境変数を `-r dd-trace/ci/init` に設定します。環境変数 `DD_ENV` にテストを実行する環境を指定し、通常通りテストを実行してください。例えば、開発者のワークステーションでテストを実行する場合は `DD_ENV` を `local` に設定し、CI プロバイダでテストを実行する場合は `ci` に設定します。
 
 {{< code-block lang="bash" >}}
@@ -112,6 +112,63 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 {{< /code-block >}}
 
+### テストにカスタムタグを追加する
+
+現在アクティブなスパンを使用して、テストにカスタムタグを追加することができます。
+
+```javascript
+  it('sum function can sum', () => {
+    const testSpan = require('dd-trace').scope().active()
+    testSpan.setTag('team.owner', 'calculator')
+    testSpan.setTag('test.importance', 2)
+    // テストは正常に続きます
+    // ...
+  })
+```
+
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。カスタムインスツルメンテーションの詳細については、[NodeJS カスタムインスツルメンテーションのドキュメント][1]を参照してください。
+
+[1]: /ja/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+{{% /tab %}}
+
+{{% tab "Cucumber" %}}
+`NODE_OPTIONS` 環境変数を `-r dd-trace/ci/init` に設定します。環境変数 `DD_ENV` にテストを実行する環境を指定し、通常通りテストを実行してください。例えば、開発者のワークステーションでテストを実行する場合は `DD_ENV` を `local` に設定し、CI プロバイダでテストを実行する場合は `ci` に設定します。
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+{{< /code-block >}}
+
+### Yarn >=2 を使用する場合
+
+`yarn>=2` と `.pnp.cjs` ファイルを使用していて、`NODE_OPTIONS` を使用したときに次のようなエラーメッセージが表示された場合
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+`NODE_OPTIONS` を以下のように設定することで修正できます。
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+{{< /code-block >}}
+
+### テストにカスタムタグを追加する
+
+現在アクティブなスパンをつかんで、テストにカスタムタグを追加することができます。
+
+```javascript
+  When('the function is called', function () {
+    const stepSpan = require('dd-trace').scope().active()
+    stepSpan.setTag('team.owner', 'calculator')
+    stepSpan.setTag('test.importance', 2)
+    // テストは正常に続きます
+    // ...
+  });
+```
+
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。カスタムインスツルメンテーションの詳細については、[NodeJS カスタムインスツルメンテーションのドキュメント][1]を参照してください。
+
+[1]: /ja/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -188,24 +245,32 @@ module.exports = defineConfig({
 {{< /code-block >}}
 
 
-#### Cypress テストに追加のタグを追加する
+### テストにカスタムタグを追加する
 
 テストに、チームオーナーなどの情報を追加するには、テストまたはフックで `cy.task('dd:addTags', { yourTags: 'here' })` を使用します。
 
 例:
 
-{{< code-block lang="javascript">}}
+```javascript
 beforeEach(() => {
-  cy.task('dd:addTags', { 'before.each': 'certain.information' })
+  cy.task('dd:addTags', {
+    'before.each':
+    'certain.information'
+  })
 })
 it('renders a hello world', () => {
-  cy.task('dd:addTags', { 'team.owner': 'ui' })
+  cy.task('dd:addTags', {
+    'team.owner': 'ui',
+    'test.importance': 3
+  })
   cy.get('.hello-world')
     .should('have.text', 'Hello World')
 })
-{{< /code-block >}}
+```
 
-#### Cypress - RUM インテグレーション
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。カスタムインスツルメンテーションの詳細については、[NodeJS カスタムインスツルメンテーションのドキュメント][1]を参照してください。
+
+### Cypress - RUM インテグレーション
 
 テスト対象のブラウザアプリケーションが [RUM][5] を使用してインスツルメントされている場合、Cypress テストの結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。詳しくは、[RUM インテグレーション][6]ガイドをご参照ください。
 
@@ -353,8 +418,8 @@ forEach([
 [2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
 [4]: https://github.com/DataDog/dd-trace-js
-[5]: /ja/tracing/setup_overview/setup/nodejs
-[6]: /ja/tracing/setup_overview/setup/nodejs/?tab=containers#configuration
+[5]: /ja/tracing/trace_collection/dd_libraries/nodejs
+[6]: /ja/tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [7]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
 [8]: https://nodejs.org/api/packages.html#packages_determining_module_system
 [9]: /ja/real_user_monitoring/browser/

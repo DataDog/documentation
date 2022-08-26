@@ -24,13 +24,6 @@ author:
 categories:
 - os system
 - data store
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::OS System
-- Category::Data Store
-- Offering::Integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md
 display_on_public_website: true
@@ -38,7 +31,7 @@ draft: false
 git_integration_title: purefa
 integration_id: purefa
 integration_title: Pure Storage FlashArray
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -52,6 +45,13 @@ supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::OS System
+  - Category::Data Store
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pure Storage FlashArrays のパフォーマンスと利用状況を監視
   media:
@@ -100,7 +100,7 @@ tile:
 ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefa==<INTEGRATION_VERSION>` を実行します。
 
 注: `<INTEGRATION_VERSION>` は、Datadog Integration Extras の [CHANGELOG.md][5] 内に記載されています。
-  * 例: `datadog-agent integration install -t datadog-purefa==1.0.0`
+  * 例: `datadog-agent integration install -t datadog-purefa==1.0.1`
 
 ### コンフィギュレーション
 
@@ -205,7 +205,7 @@ PureFA インテグレーションには、イベントは含まれません。
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/purefa/CHANGELOG.md
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/purefa/images/API.png
-[7]: https://github.com/DataDog/integrations-extras/blob/master/purefa/data/conf.yaml.example
+[7]: https://github.com/datadog/integrations-extras/blob/master/purefa/datadog_checks/purefa/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-extras/blob/master/purefa/metadata.csv

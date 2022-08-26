@@ -1,46 +1,67 @@
 ---
+app_id: glusterfs
+app_uuid: 3c3562fb-8dce-4265-a8de-eacaa30974e1
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Red Hat Gluster Storage: assets/dashboards/red_hat_gluster_storage.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: glusterfs.cluster.nodes.count
+      metadata_path: metadata.csv
+      prefix: glusterfs.
+    process_signatures:
+    - glusterd
+    - gluster
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: GlusterFS
   logs:
     source: glusterfs
-  metrics_metadata: metadata.csv
   monitors:
     brick status: assets/monitors/brick_status.json
   saved_views:
     glusterfs_processes: assets/saved_views/glusterfs_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md
-display_name: GlusterFS
+display_on_public_website: true
 draft: false
 git_integration_title: glusterfs
-guid: 1cb9a21c-8cc4-4727-a4b1-ab7015c7ae24
 integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
 integration_version: 1.5.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: glusterfs.
-metric_to_check: glusterfs.cluster.nodes.count
-name: GlusterFS
-process_signatures:
-- glusterd
-- gluster
+manifest_version: 2.0.0
+name: glusterfs
+oauth: {}
 public_title: Red Hat Gluster Storage
 short_description: GlusterFS クラスターノード、ボリューム、ブリックステータスのメトリクスを監視します。
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: GlusterFS クラスターノード、ボリューム、ブリックステータスのメトリクスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Red Hat Gluster Storage
 ---
 
 
