@@ -144,11 +144,11 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 [HAProxy][1] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
 
-`agent -> haproxy -> Datadog`
+`agent ---> haproxy ---> Datadog`
 
 This is the best option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents. 
 
-**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][2] for additional information.
+**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][2] for additional information.
 
 The communication between HAProxy and Datadog is always encrypted with TLS. The communication between the Agent host and the HAProxy host is not encrypted by default, because the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if the HAproxy host and Agent host are not located on the same isolated local network.
 To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][3] for more information.
@@ -161,7 +161,7 @@ sudo apt-get install ca-certificates # (Debian, Ubuntu)
 yum install ca-certificates # (CentOS, Red Hat)
 ```
 
-The file might be located at `/etc/ssl/certs/ca-certificates.crt` for Debian, Ubuntu or `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
+The path to the certificate is `/etc/ssl/certs/ca-certificates.crt` for Debian and Ubuntu, or `/etc/ssl/certs/ca-bundle.crt` for CentOS and Red Hat.
 
 ### Proxy forwarding with HAProxy
 
@@ -423,7 +423,7 @@ backend datadog-appsec-events # deprecated
 {{% /tab %}}
 {{% tab "HTTPS" %}}
 
-This configuration adds SSL/TLS encryption on communication between the Agent and HAProxy. The variable `<PATH_TO_PROXY_CERTIFICATE_PEM>` should be replaced by the path to the proxy certificate bundle (*.pem).
+This configuration adds SSL/TLS encryption on communication between the Agent and HAProxy. Replace the variable `<PATH_TO_PROXY_CERTIFICATE_PEM>` with the path to the proxy certificate bundle (*.pem).
 
 ```conf
 # Basic configuration
@@ -816,7 +816,7 @@ sudo apt-get install ca-certificates # (Debian, Ubuntu)
 yum install ca-certificates # (CentOS, Red Hat)
 ```
 
-The file might be located at `/etc/ssl/certs/ca-certificates.crt` for Debian, Ubuntu or `/etc/ssl/certs/ca-bundle.crt` for CentOS, Red Hat.
+The path to the certificate is `/etc/ssl/certs/ca-certificates.crt` for Debian and Ubuntu or `/etc/ssl/certs/ca-bundle.crt` for CentOS and Red Hat.
 
 ### Proxy forwarding with NGINX
 
