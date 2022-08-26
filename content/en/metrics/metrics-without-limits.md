@@ -22,7 +22,9 @@ This page identifies key components of Metrics without Limits™ that can help y
 
 Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Custom”** to configure the tags you’d like to remain as queryable on dashboards and monitors. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
 
-{{< img src="metrics/mwl_tags.mp4" alt="Configuration of Tags" video=true >}}
+{{< img src="metrics/mwl_tag_config.mp4" alt="Configuration of Tags" video=true >}}
+
+As a beta feature of Metrics without Limits, you can pre-populate the tag configuration modal by default with an allowlist of tags that have been actively queried on dashboards, notebooks, or monitors in the past 30 days (colored in blue with an icon). You may include additional tags as well. 
 
 There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
 
@@ -36,6 +38,8 @@ You can further adjust your custom metrics filters by opting in to more [metrics
 - Configured gauges are queryable in time/space with AVG
 
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
+
+As a beta feature of Metrics without Limits, you can pre-populate the tag configuration modal with an allowlist of aggregations that have been actively queried on dashboards, notebooks, or monitors in the past 30 days (colored in blue with an icon). 
 
 
 
