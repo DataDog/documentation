@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. As you navigate the Datadog UI, Watchdog Insights displays a filtered and sorted list of anomalies matching your active search query.
+Datadog Watchdog constantly runs in the background, scanning for anomalies in your organization's entire data set. As you navigate the Datadog UI, Watchdog Insights displays a filtered and sorted-by-priority list of anomalies matching your active search query.
 
 ### Usage
 Investigating an incident requires trial and error. Drawing from their experience, engineers familiar with a particular area know where to first look for potential problems. Using Watchdog Insights allows all engineers, including less experienced ones, to pay attention to the most important data and accelerate their incident investigations.
@@ -47,13 +47,15 @@ To refine your current view to match a Watchdog Insight, hover over the top righ
 
 Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
 
+{{< img src="watchdog/log_explorer_watchdog_insights_panel.png" alt="The Watchdog Insights side panel view within Logs Explorer. The top area shows a bar graph of error statuses over time. One Log Anomaly card is visible with the title 'New error logs were detected on service:web-store'" >}}
+
 ### Detailed view
 
 For a detailed view of an insight, click on the individual card. The full side panel opens from the right.
 
 {{< img src="watchdog/profiler_watchdog_insight.png" alt="A Watchdog Insights full side panel view, with the title 'Lock Pressure is high in service:product-recommendation'" >}}
 
-To share an insight in one click, click the **Copy Link** button on the full side panel. Your clipboard populates with the query that produced the Insight.
+To share an insight in one click, click the **Copy Link** button on the full side panel. Your clipboard populates with the query that produced the insight.
 
 ## Locations within Datadog
 
@@ -92,6 +94,7 @@ For more information, see [Watchdog Insights for Logs][6].
 To locate Watchdog Insights in the RUM UI, take the following steps:
 1. In the left navigation, hover over **UX Monitoring**
 2. Click **Sessions & Replays**
+3. At the top of the page, the **In** drop-down shows that you are in the **Sessions** level. Change the drop-down to **Views**.
 
 The pink Watchdog Insights banner appears in the middle of your screen, above your sessions.
 
