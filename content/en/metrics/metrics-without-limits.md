@@ -24,7 +24,7 @@ Click on any metric name to open its details sidepanel. Then click **Manage Tags
 
 {{< img src="metrics/mwl_tag_config.mp4" alt="Configuration of Tags" video=true >}}
 
-As a beta feature of Metrics without Limits, we can prepopulate the tag configuration modal by default with an allowlist of tags that are actively queried on dashboards/notebooks/monitors for the past 30 days (colored in blue with an icon). You may include additional tags as well. 
+As a beta feature of Metrics without Limits, you can pre-populate the tag configuration modal by default with an allowlist of tags that have been actively queried on dashboards, notebooks, or monitors in the past 30 days (colored in blue with an icon). You may include additional tags as well. 
 
 There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
 
@@ -39,7 +39,7 @@ You can further adjust your custom metrics filters by opting in to more [metrics
 
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
 
-As a beta feature of Metrics without Limits, we can prepopulate the tag configuration modal with an allowlist of aggregations that are actively queried on dashboards/notebooks/monitors for the past 30 days (colored in blue with an icon). 
+As a beta feature of Metrics without Limits, you can pre-populate the tag configuration modal with an allowlist of aggregations that have been actively queried on dashboards, notebooks, or monitors in the past 30 days (colored in blue with an icon). 
 
 
 
