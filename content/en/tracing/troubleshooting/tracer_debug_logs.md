@@ -39,7 +39,12 @@ The steps for enabling debug mode in the Datadog Python Tracer depends on the ve
 2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` with a filename that tracer logs should be written to, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`. 
    By default, the file size is 15728640 bytes (about 15MB) and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
 
-3. To route logs to the console, for **Python 2** applications, configure `logging.basicConfig()` or similar. Logs are automatically sent to the console for **Python 3** applications. 
+3. To route logs to the console, for **Python 2** applications, configure `logging.basicConfig()` or similar. Logs are automatically sent to the console for **Python 3** applications. If the logs are not routing in **Python 3** run the command `--log-cli-level=DEBUG` to enable logging.
+
+4. If the problem `a failure to connect to http://datadog-agent:8126` occurs, update the CI config file to include `alias`, for example:
+`services:`
+`- name: gcr.io/datadoghq/agent:latest`
+`alias: datadog-agent`
 
 
 ### Scenario 2: ddtrace version 1.0.x to 1.2.x
