@@ -952,7 +952,7 @@
     - action: pull-and-push-file
       branch: jward/ga-docs
       globs:
-      - 'packages/datadog_flutter_plugin/doc/rum/troubleshooting.md'
+      - 'packages/datadog_flutter_plugin/doc/troubleshooting.md'
       options:
         dest_path: '/real_user_monitoring/flutter/'
         file_name: 'troubleshooting.md'
@@ -961,7 +961,7 @@
           kind: documentation
           beta: true
           description: "Learn how to troubleshoot issues with Flutter Monitoring."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/rum/troubleshooting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/troubleshooting.md"]
           further_reading:
             - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
               tag: "Blog"
