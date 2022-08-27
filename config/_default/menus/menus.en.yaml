@@ -2924,15 +2924,15 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_setup
     weight: 501
-  - name: Advanced Configuration
-    url: real_user_monitoring/flutter/advanced_configuration/
-    parent: rum_flutter
-    identifier: rum_flutter_advanced_configuration
-    weight: 502
   - name: Data Collected
     url: real_user_monitoring/flutter/data_collected/
     parent: rum_flutter
     identifier: rum_flutter_data_collected
+    weight: 502
+  - name: Advanced Configuration
+    url: real_user_monitoring/flutter/advanced_configuration/
+    parent: rum_flutter
+    identifier: rum_flutter_advanced_configuration
     weight: 503
   - name: Mobile Vitals
     url: real_user_monitoring/flutter/mobile_vitals/
@@ -3094,6 +3094,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_reactnative
     weight: 1205
+  - name: Track Flutter Errors
+    url: real_user_monitoring/error_tracking/flutter/
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_flutter
+    weight: 1206
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
