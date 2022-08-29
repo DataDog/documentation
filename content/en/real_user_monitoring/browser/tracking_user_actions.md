@@ -66,7 +66,7 @@ For more information about configuring for sampling or global context, see [Modi
 
 ## Declare a name for click actions
 
-The RUM library uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action. 
+The Datadog Browser SDK for RUM uses various strategies to get a name for click actions. If you want more control, you can define a `data-dd-action-name` attribute on clickable elements (or any of their parents) that is used to name the action. 
 
 For example:
 
