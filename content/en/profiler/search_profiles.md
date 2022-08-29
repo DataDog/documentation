@@ -148,7 +148,7 @@ Allocated Memory
 : The amount of heap memory allocated by each function during the profiling period (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Heap Live Objects
-: The number of objects allocated by each function in heap memory that have not been garbage collected (yet). Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The number of objects allocated by each function in heap memory that have not yet been garbage collected. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Heap Live Size
 : The amount of heap memory allocated by each function that has not been garbage collected (yet). Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
