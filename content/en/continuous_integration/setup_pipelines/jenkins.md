@@ -142,6 +142,25 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
+### Infrastructure metric correlation
+
+If you are using Jenkins workers, you can corralate pipelines with the infrastructure that is running them. For this feature to work:
+
+1. Install the [Datadog Agent][1] in every Jenkins worker.
+2. Set and export a new environment variable called `DD_CI_HOSTNAME` in every Jenkins worker with the worker hostname. 
+    1. It must be the same hostname that the Datadog Agent is reporting in the infrastructure metrics for that worker.
+    2. You can use either fixed values or another environment variables as valid values.
+
+```bash
+# Using fixed value
+export DD_CI_HOSTNAME=my-hostname
+
+# Using other environment variable
+export DD_CI_HOSTNAME=$HOSTNAME
+```
+
+Notice this is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not required additional actions.
+
 ## Enable job log collection
 
 This is an optional step that enables the collection of job logs. It involves two steps: enabling the job collection port on the Datadog Agent, and enabling job collection on the Datadog Plugin.
