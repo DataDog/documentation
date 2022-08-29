@@ -9,7 +9,7 @@ As a quick refresher on Metrics without Limits (more details [here](https://docs
 
 By using MWL, your original raw metric’s data must now be recombined/reaggregated and stored against that smaller volume of indexed custom metrics in order to preserve mathematically accurate query results. Therefore for each of the remaining indexed custom metrics, we store your specified number of time/space aggregations. 
 
-The resulting number of indexed custom metrics for your MWL configuration is (`the # of remaining tag value combinations`–specified by your tag configuration) x ( `the # of time/space aggregations`—specified by the Customize Aggregations section)
+The resulting number of indexed custom metrics for your MWL configuration is (`the # of remaining tag value combinations`–specified by your tag configuration) x (`the # of time/space aggregations`–specified by the Customize Aggregations section)
 
 **Example**
 Suppose we want to use Metrics without Limits to reduce the cardinality of the `shopist.basket.size` metric. 
