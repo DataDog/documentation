@@ -542,6 +542,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Submit metrics returns \"Payload accepted\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1762007427",
+      "description": "Submit metrics with compression returns \"Payload accepted\" response"
     }
   ],
   "EstimateMetricsOutputSeries": [
