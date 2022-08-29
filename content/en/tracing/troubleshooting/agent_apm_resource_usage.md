@@ -22,7 +22,7 @@ See the full list of [APM Agent metrics][2].
 **Note:** If you disabled the [maximum CPU percentage for APM][1] in containerized environments, you can use the following metrics: `container.cpu.usage`, `container.cpu.limit` and `container.cpu.throttled`.
 
 
-[1]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
+[1]: /tracing/troubleshooting/agent_rate_limits/#maximum-memory-limit
 [2]: /tracing/send_traces/agent-apm-metrics/
 
 ## Resource requirements
