@@ -321,7 +321,7 @@
         file_name: 'github_actions.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
-          title: Synthetics CI GitHub Actions
+          title: Synthetics and CI GitHub Actions
           kind: documentation
 
   - repo_name: synthetics-ci-orb
@@ -815,7 +815,7 @@
   - repo_name: dd-sdk-flutter
     contents:
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/rum/rum_collection.md'
       options:
@@ -826,7 +826,7 @@
           kind: documentation
           beta: true
           description: "Collect RUM data from your Flutter projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/rum/rum_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/rum_collection.md"]
           further_reading:
             - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
               tag: "Blog"
@@ -838,7 +838,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/log_collection.md'
       options:
@@ -849,7 +849,7 @@
           kind: documentation
           beta: true
           description: "Collect Logs data from your Flutter projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/log_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/log_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-flutter"
               tag: "GitHub"
@@ -858,7 +858,7 @@
               tag: "Documentation"
               text: "Learn how to explore your logs"
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/common_setup.md'
       options:
@@ -869,7 +869,7 @@
           kind: documentation
           beta: true
           description: "Setup Flutter Monitoring for RUM & Session Replay or Log Management."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/common_setup.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/common_setup.md"]
           further_reading:
             - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
               tag: "Blog"
@@ -881,7 +881,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/rum/advanced_configuration.md'
       options:
@@ -892,7 +892,7 @@
           kind: documentation
           beta: true
           description: "Learn how to configure Flutter Monitoring."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/rum/advanced_configuration.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/advanced_configuration.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-flutter"
               tag: "GitHub"
@@ -901,7 +901,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/rum/data_collected.md'
       options:
@@ -912,7 +912,7 @@
           kind: documentation
           beta: true
           description: "Learn about the data collected by Flutter Monitoring."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/rum/data_collected.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/data_collected.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-flutter"
               tag: "GitHub"
@@ -921,7 +921,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/rum/mobile_vitals.md'
       options:
@@ -932,7 +932,7 @@
           kind: documentation
           beta: true
           description: "Learn about mobile vitals collected by Flutter Monitoring."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/rum/mobile_vitals.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/mobile_vitals.md"]
           further_reading:
             - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
               tag: "Blog"
@@ -944,7 +944,7 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/troubleshooting.md'
       options:
@@ -955,7 +955,7 @@
           kind: documentation
           beta: true
           description: "Learn how to troubleshoot issues with Flutter Monitoring."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/troubleshooting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/troubleshooting.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-flutter"
               tag: "GitHub"
@@ -964,7 +964,7 @@
               tag: "Documentation"
               text: "Learn about Flutter Monitoring"
     - action: pull-and-push-file
-      branch: jward/ga-docs
+      branch: main
       globs:
       - 'packages/datadog_flutter_plugin/doc/rum/error_tracking.md'
       options:
@@ -975,7 +975,7 @@
           kind: documentation
           beta: true
           description: "Learn how to track Flutter errors with Error Tracking."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/jward/ga-docs/packages/datadog_flutter_plugin/doc/rum/error_tracking.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/error_tracking.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-flutter"
               tag: "GitHub"
