@@ -109,7 +109,7 @@ Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that has not been garbage collected (yet). This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Allocated Memory
 : The amount of heap memory allocated by each function, including allocations which were subsequently freed - only supported with Python 3.
