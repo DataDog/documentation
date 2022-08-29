@@ -6733,6 +6733,8 @@ components:
           description: The unique identifier of the role.
           example: 00000000-0000-1111-0000-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/RoleRelationships'
         type:
           $ref: '#/components/schemas/RolesType'
       required:
