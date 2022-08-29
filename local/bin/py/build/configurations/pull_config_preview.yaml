@@ -772,7 +772,7 @@
               tag: "Blog"
               text: "Monitor your React Native applications"
     - action: pull-and-push-file
-      branch: louiszawadzki/rumm-2326/add-expo-plugin-for-mapping-files
+      branch: develop
       globs:
       - 'docs/expo_development.md'
       options:
@@ -783,7 +783,7 @@
           kind: documentation
           beta: true
           description: "Monitor your React Native projects using Expo and Expo Go with Datadog."
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/louiszawadzki/rumm-2326/add-expo-plugin-for-mapping-files/docs/expo_development.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/expo_development.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
@@ -792,14 +792,14 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: louiszawadzki/rumm-2326/add-expo-plugin-for-mapping-files
+      branch: develop
       globs:
       - 'docs/expo_crash_reporting.md'
       options:
         dest_path: '/real_user_monitoring/error_tracking/'
         file_name: 'expo.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/louiszawadzki/rumm-2326/add-expo-plugin-for-mapping-files/docs/expo_crash_reporting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/expo_crash_reporting.md"]
           title: Expo Crash Reporting and Error Tracking
           kind: documentation
           beta: true
@@ -818,7 +818,7 @@
             tag: 'Documentation'
             text: 'Visualize Error Tracking data in the RUM Explorer'
     - action: pull-and-push-file
-      branch: main
+      branch: develop
       globs:
       - 'docs/crash_reporting.md'
       options:
@@ -829,7 +829,7 @@
           kind: documentation
           beta: true
           description: Set up Error Tracking for your React Native projects.
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/crash_reporting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/crash_reporting.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
