@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/synthetics/faq/uptime-check-internal-website/
-disable_sidebar: true
+disable_toc: true
 kind: ガイド
 private: true
 title: Synthetic モニタリングガイド
@@ -26,7 +26,7 @@ title: Synthetic モニタリングガイド
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Synthetic テストにおけるキャッシュ問題の回避{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-https-redirection" >}}HTTP リクエストの HTTPS へのリダイレクトを監視する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}ブラウザテストジャーニーのテストスイート全体の再利用{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/email-validation" >}}ブラウザテストによる電子メールの検証{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/email-validation/" >}}ブラウザテストによる電子メールの検証{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}テストファイルのアップロードとダウンロード{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/popup/" >}}ブラウザテストでのポップアップの処理{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}カスタム User-Agent を使用したステップの記録{{< /nextlink >}}

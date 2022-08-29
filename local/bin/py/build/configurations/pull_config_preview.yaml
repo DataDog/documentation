@@ -477,7 +477,7 @@
               text: 'Learn about the RUM Explorer'
             - link: '/logs/log_collection/javascript/'
               tag: 'Documentation'
-              text: 'Learn about the Browser Logs SDK'
+              text: 'Learn about the Datadog Browser SDK for Logs'
     - action: pull-and-push-file
       branch: main
       globs:
