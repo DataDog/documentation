@@ -14608,6 +14608,9 @@ components:
           description: Shows usage aggregation for a billing period.
           format: double
           type: number
+        region:
+          description: The region of the organization.
+          type: string
         start_date:
           description: Shows the first date of usage.
           format: date-time
@@ -16405,6 +16408,9 @@ components:
           type: integer
         public_id:
           description: The organization public id.
+          type: string
+        region:
+          description: The region of the organization.
           type: string
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
