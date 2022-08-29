@@ -9,15 +9,14 @@ As a quick refresher on Metrics without Limits (more details [here](https://docs
 
 By using MWL, your original raw metric’s data must now be recombined/re-aggregated and stored against that smaller volume of indexed custom metrics in order to preserve mathematically accurate query results. Therefore for each of the remaining indexed custom metrics, we store your specified number of time/space aggregations. 
 
-The resulting number of indexed custom metrics for your MWL configuration is (`the # of remaining tag value combinations` - specified by your tag configuration) x ( `the # of time/space aggregations` - specified by the Customize Aggregations section)
+The resulting number of indexed custom metrics for your MWL configuration is (`the # of remaining tag value combinations`—specified by your tag configuration) x ( `the # of time/space aggregations`–specified by the Customize Aggregations section)
 
 **Example**
-
 Suppose we want to use Metrics without Limits to reduce the cardinality of the `shopist.basket.size` metric. 
 
 {{< img src="metrics/faq/all-tags.jpg" alt="All Tags Configuration">}}
 
-Let’s assume `shopist.basket.size` reports values against 4 tag value combinations,like {host:a, region:us, env:prod} – that is, `shopist.basket.size` originally emits **4 custom metrics** as shown in the diagram below.
+Let’s assume `shopist.basket.size` reports values against 4 tag value combinations, like {host: a, region: us, env: prod}–that is, `shopist.basket.size` originally emits **4 custom metrics** as shown in the diagram below.
 
 {{< img src="metrics/faq/all-tags-diagram.jpg" alt="Custom Metric Breakdown of All Tags Configuration">}}
 
@@ -28,7 +27,7 @@ If we use MWL to tag configure only the {region, env} tags, only three tag value
 
 {{< img src="metrics/faq/disabled-save.png" alt="Disabled Save Configuration">}}
 
-The resulting number of custom metrics from this proposed configuration is as follows: (`the # of remaining tag value combinations`) x (`the # of time/space aggregations`) = (3) x (2) = **6 custom metrics**.` 
+The resulting number of custom metrics from this proposed configuration is as follows: (`the # of remaining tag value combinations`) x (`the # of time/space aggregations`) = (3) x (2) = **6 custom metrics**.
 
 {{< img src="metrics/faq/mwl-diagram.jpg" alt="Custom Metric Breakdown of MWL Configuration">}}
 
