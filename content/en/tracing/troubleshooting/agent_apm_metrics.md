@@ -12,7 +12,7 @@ Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent 
 
 `datadog.trace_agent.cpu_percent`
 : **Type**: Gauge<br>
-CPU usage (in decicores), for example, 50 (half a core), 200 (two cores), 250 (2.5 cores)
+CPU usage (in percentage of a core), for example, 50 (half a core), 200 (two cores), 250 (2.5 cores)
 
 `datadog.trace_agent.events.max_eps.current_rate`
 : **Type**: Gauge<br>
