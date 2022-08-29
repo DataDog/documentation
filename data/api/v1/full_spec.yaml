@@ -3800,6 +3800,7 @@ components:
       - dbm_hosts_usage
       - dbm_queries_usage
       - estimated_indexed_logs_usage
+      - estimated_ingested_logs_usage
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
@@ -3826,6 +3827,7 @@ components:
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
@@ -7051,6 +7053,8 @@ components:
       - dbm_queries_usage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -7102,6 +7106,8 @@ components:
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -7195,6 +7201,16 @@ components:
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). This field is
             in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_percentage:
+          description: The percentage of estimated live ingested logs usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_usage:
+          description: The estimated live ingested logs usage by tag(s). This field
+            is in private beta.
           format: double
           type: number
         estimated_ingested_spans_percentage:
@@ -14153,6 +14169,8 @@ components:
       - lambda_invocations_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -14183,6 +14201,8 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -14223,6 +14243,8 @@ components:
       - dbm_queries_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - appsec_usage
       - appsec_percentage
       - estimated_indexed_spans_usage
@@ -14264,6 +14286,8 @@ components:
       - DBM_QUERIES_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
@@ -14421,6 +14445,16 @@ components:
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). Note this field
             is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_percentage:
+          description: The percentage of estimated live ingested logs usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_usage:
+          description: The estimated live ingested logs usage by tag(s). Note this
+            field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_percentage:
