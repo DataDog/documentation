@@ -14,7 +14,7 @@ The APM Agent is designed to buffer unprocessed payloads in memory to avoid data
 ## Detect out-of-CPU
 
 The following metrics emitted by APM Agent can help detect out-of-CPU:
-- `datadog.trace_agent.cpu_percent`: CPU usage (in cores), for example, 50 (half a core), 200 (two cores). It can be compared to the [maximum CPU percentage][1] configured for the APM Agent.
+- `datadog.trace_agent.cpu_percent`: CPU usage (in decicores), for example, 50 (half a core), 200 (two cores). It can be compared to the [maximum CPU percentage][1] configured for the APM Agent.
 - `datadog.trace_agent.ratelimit`: If lower than 1, it means payloads are being refused due to high resource usage (cpu or memory).
 
 See the full list of [APM Agent metrics][2].
