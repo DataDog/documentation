@@ -130,4 +130,4 @@ For more information about tagging and exploring attributes, see [Browser Monito
 
 [1]: /real_user_monitoring/browser#setup
 [2]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[3]: /real_user_monitoring/browser#browser-and-browser-premium-sampling-configuration
+[3]: /real_user_monitoring/browser#tagging
