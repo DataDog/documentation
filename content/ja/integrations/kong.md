@@ -4,7 +4,7 @@ app_uuid: 41e7a8cb-07b6-46cc-a087-53e87736b5c7
 assets:
   dashboards:
     Kong Overview: assets/dashboards/kong_overview.json
-    kong: assets/dashboards/kong_dashboard.json
+    Kong Overview OpenMetrics: assets/dashboards/kong_overview_openmetrics.json
   integration:
     configuration:
       spec: assets/configuration/spec.yaml
@@ -62,8 +62,8 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Web
-  - Category::Log Collection
-  - Category::Autodiscovery
+  - Category::ログの収集
+  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
   media: []
