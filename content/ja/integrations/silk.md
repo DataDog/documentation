@@ -1,44 +1,66 @@
 ---
+app_id: silk
+app_uuid: 1f436ae6-e063-408f-ad35-37ee37fa2183
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Silk - Overview: assets/dashboards/silk_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: silk.system.capacity.free
+      metadata_path: metadata.csv
+      prefix: silk.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Silk
   monitors:
     Latency high: assets/recommended_monitors/latency_high.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - data store
 - プロビジョニング
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/silk/README.md
-display_name: Silk
+display_on_public_website: true
 draft: false
 git_integration_title: silk
-guid: 75648ebe-8ce3-4b08-bba2-2f957a7e94fa
 integration_id: silk
 integration_title: Silk
 integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: silk.
-metric_to_check: silk.system.capacity.free
+manifest_version: 2.0.0
 name: silk
+oauth: {}
 public_title: Silk
 short_description: Silk のパフォーマンスとシステム統計情報を監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Data Store
+  - Category::Provisioning
+  configuration: README.md#Setup
+  description: Silk のパフォーマンスとシステム統計情報を監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Silk
 ---
 
 

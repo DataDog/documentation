@@ -52,36 +52,7 @@ ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-Datadog Agent を構成する場合、特定の 1 つの Azure SQL DB サーバーにあるアプリケーションデータベースごとに 1 つのチェックインスタンスを指定します。`master` やその他の[システムデータベース][2]は含めないでください。各データベースは分離された計算環境で実行されているため、Datadog Agent は Azure SQL DB の各アプリケーションデータベースに直接接続する必要があります。これは、`database_autodiscovery` が Azure SQL DB では機能しないことも意味するので、有効化してはいけません。
-
-```yaml
-init_config:
-instances:
-  # database_1
-  - host: '<SERVER_NAME>.database.windows.net,1433'
-    database: '<DATABASE_1>'
-    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_1>'
-    username: datadog
-    password: '<PASSWORD>'
-    azure:
-      deployment_type: 'sql_database'
-      name: '<SERVER_NAME>'
-
-  # database_2
-  - host: '<SERVER_NAME>.database.windows.net,1433'
-    database: '<DATABASE_2>'
-    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_2>'
-    username: datadog
-    password: '<PASSWORD>'
-    azure:
-      deployment_type: 'sql_database'
-      name: '<SERVER_NAME>'
-```
-
-Datadog Agent のインストールと構成の詳細については、[Agent のインストール](#install-the-agent)を参照してください。
-
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
-[2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
 {{% /tab %}}
 
 {{% tab "Azure SQL Managed Instance" %}}

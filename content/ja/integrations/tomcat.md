@@ -1,13 +1,26 @@
 ---
+app_id: tomcat
+app_uuid: 9497c2d8-63cb-4d90-b73c-f32065349fe1
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     tomcat: assets/dashboards/metrics.json
     tomcat--overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: tomcat.threads.count
+      metadata_path: metadata.csv
+      prefix: tomcat.
+    process_signatures:
+    - java tomcat
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Tomcat
   logs:
     source: tomcat
-  metrics_metadata: metadata.csv
   monitors:
     '[Tomcat] % of busy threads is high for host: {{host.name}}': assets/monitors/thread_busy.json
     '[Tomcat] % of thread count managed by the thread pool is high for host: {{host.name}}': assets/monitors/thread_count_max.json
@@ -17,37 +30,49 @@ assets:
     '[Tomcat] Increase of the errors/second rate for host: {{host.name}}': assets/monitors/error_count.json
   saved_views:
     tomcat_processes: assets/saved_views/tomcat_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md
-display_name: Tomcat
+display_on_public_website: true
 draft: false
 git_integration_title: tomcat
-guid: 60f37d34-3bb7-43c9-9b52-2659b8898997
 integration_id: tomcat
 integration_title: Tomcat
 integration_version: 1.11.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: tomcat.
-metric_to_check: tomcat.threads.count
+manifest_version: 2.0.0
 name: tomcat
-process_signatures:
-- java tomcat
-public_title: Tomcat インテグレーション
+oauth: {}
+public_title: Tomcat
 short_description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: 毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Tomcat
 ---
 
 

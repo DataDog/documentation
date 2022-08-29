@@ -108,7 +108,7 @@ The alert conditions vary slightly based on the chosen detection method.
 {{% tab "Threshold" %}}
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
-* the threshold `on average`, `at least once`, `at all times`, `in total`, or `percentile` (`percentile` is only offered on distribution metrics with percentiles enabled).
+* the threshold `average`, `max`, `min`, `sum`, or `percentile` (`percentile` is only offered on distribution metrics with percentiles enabled).
 
     _Note that if you've chosen a distribution metric with a percentile aggregator in Step 2: Define the Metric, a matching percentile threshold is automatically specified._
 

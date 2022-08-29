@@ -1,43 +1,66 @@
 ---
-aliases: []
+app_id: openldap
+app_uuid: ea3487c9-2c55-417c-bed5-17a42bdf71cf
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     OpenLDAP Overview: assets/dashboards/openldap_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: openldap.connections.current
+      metadata_path: metadata.csv
+      prefix: openldap.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OpenLDAP
   logs:
     source: openldap
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
 - オートディスカバリー
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
-display_name: OpenLDAP
+display_on_public_website: true
 draft: false
 git_integration_title: openldap
-guid: ec61c06d-a870-4183-8a27-c66db1fc47cc
 integration_id: openldap
 integration_title: OpenLDAP
 integration_version: 1.10.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: openldap.
-metric_to_check: openldap.connections.current
+manifest_version: 2.0.0
 name: openldap
-public_title: OpenLDAP インテグレーション
+oauth: {}
+public_title: OpenLDAP
 short_description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenLDAP
 ---
 
 

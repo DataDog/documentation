@@ -30,7 +30,7 @@ draft: false
 git_integration_title: ibm_i
 integration_id: ibm-i
 integration_title: IBM i
-integration_version: 1.4.0
+integration_version: 1.4.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0

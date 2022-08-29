@@ -1,42 +1,66 @@
 ---
+app_id: kube-scheduler
+app_uuid: 1cf58691-ac6b-4f1d-b410-0132a4590378
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     kube_scheduler: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kube_scheduler.threads
+      metadata_path: metadata.csv
+      prefix: kube_scheduler.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kube_scheduler
   logs:
     source: kube_scheduler
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - オーケストレーション
 - コンテナ
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
-display_name: Kube_scheduler
+display_on_public_website: true
 draft: false
 git_integration_title: kube_scheduler
-guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
-integration_version: 4.3.0
+integration_version: 4.4.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kube_scheduler.
-metric_to_check: kube_scheduler.threads
+manifest_version: 2.0.0
 name: kube_scheduler
-public_title: Kubernetes Scheduler インテグレーション
+oauth: {}
+public_title: Kubernetes Scheduler
 short_description: Kubernetes Scheduler の監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Orchestration
+  - Category::Containers
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Kubernetes Scheduler の監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubernetes Scheduler
 ---
 
 

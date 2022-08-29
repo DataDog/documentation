@@ -28,7 +28,7 @@ draft: false
 git_integration_title: kubelet
 integration_id: kubelet
 integration_title: Kubelet
-integration_version: 7.4.0
+integration_version: 7.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

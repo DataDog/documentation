@@ -1,34 +1,53 @@
 ---
+app_id: prometheus
+app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Prometheus
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - monitoring
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
-display_name: Prometheus
+display_on_public_website: true
 draft: false
 git_integration_title: prometheus
-guid: 58e75868-0933-407b-aaa5-469c252bdb2b
 integration_id: prometheus
 integration_title: Prometheus (レガシー)
 integration_version: 3.4.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: prometheus
-public_title: Prometheus (レガシー) インテグレーション
+oauth: {}
+public_title: Prometheus (レガシー)
 short_description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::モニタリング
+  configuration: README.md#Setup
+  description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Prometheus (レガシー)
 ---
 
 

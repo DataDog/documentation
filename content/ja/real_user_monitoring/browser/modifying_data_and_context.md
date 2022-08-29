@@ -326,7 +326,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-## ユーザーセッションを特定する
+## ユーザーセッション
 
 RUM セッションにユーザー情報を追加すると、次の役に立ちます。
 * 特定のユーザーのジャーニーをたどる
@@ -345,7 +345,11 @@ RUM セッションにユーザー情報を追加すると、次の役に立ち�
 
 推奨される属性に加えてさらに属性を追加することで、フィルタリング機能を向上できます。たとえば、ユーザープランに関する情報や、所属するユーザーグループなどを追加します。
 
-ユーザーセッションを識別するには、`setUser` API を使用します。
+ユーザーセッションオブジェクトに変更を加えた場合、変更後に収集されるすべての RUM イベントには、更新された情報が含まれます。
+
+### ユーザーセッションを特定する
+
+`datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -388,28 +392,111 @@ window.DD_RUM && window.DD_RUM.setUser({
 {{% /tab %}}
 {{< /tabs >}}
 
-### ユーザー ID を削除
+### ユーザーセッションにアクセスする
 
-`removeUser` API で、以前に設定されたユーザーを消去します。この後に収集されたすべての RUM イベントにユーザー情報は含まれません。
+`datadogRum.getUser()`
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```
-datadogRum.removeUser()
+datadogRum.getUser()
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```
 DD_RUM.onReady(function() {
-    DD_RUM.removeUser()
+    DD_RUM.getUser()
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```
-window.DD_RUM && window.DD_RUM.removeUser()
+window.DD_RUM && window.DD_RUM.getUser()
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ユーザーセッションプロパティの追加/オーバーライド
+
+`datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```
+datadogRum.setUserProperty('name', 'John Doe')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+    DD_RUM.setUserProperty('name', 'John Doe')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ユーザーセッションプロパティを削除する
+
+`datadogRum.removeUserProperty('<USER_KEY>')`
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```
+datadogRum.removeUserProperty('name')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+    DD_RUM.removeUserProperty('name')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+window.DD_RUM && window.DD_RUM.removeUserProperty('name')
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ユーザーセッションプロパティをクリアする
+
+`datadogRum.clearUser()`
+
+<div class="alert alert-info">RUM ブラウザ SDK v4.17.0 で `clearUser` が導入され、`removeUser` が廃止されました。</div>
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```
+datadogRum.clearUser()
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+    DD_RUM.clearUser()
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+window.DD_RUM && window.DD_RUM.clearUser()
 ```
 
 {{% /tab %}}
@@ -474,9 +561,11 @@ window.DD_RUM &&
 
 ## グローバルコンテキスト
 
-### グローバルコンテキストを追加
+### グローバルコンテキストプロパティを追加する
 
-RUM を初期化したら、`addRumGlobalContext(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにコンテキストを追加します。
+RUM を初期化した後、`setGlobalContextProperty(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにコンテキストを追加します。
+
+<div class="alert alert-info">RUM ブラウザ SDK v4.17.0 で `setGlobalContextProperty` が導入され、`addRumGlobalContext` が廃止されました。</div>
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -484,10 +573,10 @@ RUM を初期化したら、`addRumGlobalContext(key: string, value: any)` API �
 ```
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+datadogRum.setGlobalContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
 // コード例
-datadogRum.addRumGlobalContext('activity', {
+datadogRum.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
@@ -497,12 +586,12 @@ datadogRum.addRumGlobalContext('activity', {
 {{% tab "CDN async" %}}
 ```
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+    DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
 // コード例
 DD_RUM.onReady(function() {
-    DD_RUM.addRumGlobalContext('activity', {
+    DD_RUM.setGlobalContextProperty('activity', {
         hasPaid: true,
         amount: 23.42
     });
@@ -512,10 +601,10 @@ DD_RUM.onReady(function() {
 {{% tab "CDN sync" %}}
 
 ```
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // コード例
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
+window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     hasPaid: true,
     amount: 23.42
 });
@@ -526,86 +615,31 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 
 製品全体でデータの相関を高めるには [Datadog の命名規則][16]に従ってください。
 
-### グローバルコンテキストを置換
+### グローバルコンテキストプロパティを削除する
 
-RUM を初期化したら、`setRumGlobalContext(context: Context)` API を使用してすべての RUM イベントのデフォルトコンテキストを置換します。
+以前に定義したグローバルコンテキストプロパティを削除することができます。
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-
-// コード例
-datadogRum.setRumGlobalContext({
-    codeVersion: 34,
-});
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-})
-
-// コード例
-DD_RUM.onReady(function() {
-    DD_RUM.setRumGlobalContext({
-        codeVersion: 34,
-    })
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-window.DD_RUM &&
-    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
-
-// コード例
-window.DD_RUM &&
-    DD_RUM.setRumGlobalContext({
-        codeVersion: 34,
-    });
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+<div class="alert alert-info">RUM ブラウザ SDK v4.17.0 で `removeGlobalContextProperty` が導入され、`removeRumGlobalContext` が廃止されました。</div>
 
 製品全体でデータの相関を高めるには [Datadog の命名規則][16]に従ってください。
 
+### グローバルコンテキストを置換
+
+`setGlobalContext(context: Context)` API を使用してすべての RUM イベントのデフォルトコンテキストを置換します。
+
+<div class="alert alert-info">RUM ブラウザ SDK v4.17.0 で `setGlobalContext` が導入され、`setRumGlobalContext` が廃止されました。</div>
+
+製品全体でデータの相関を高めるには [Datadog の命名規則][16]に従ってください。
+
+### グローバルコンテキストをクリアする
+
+グローバルコンテキストをクリアするには、`clearGlobalContext` を使用します。
+
 ### グローバルコンテキストを読み取る
 
-RUM を初期化したら、`getRumGlobalContext()` API を使用してグローバルコンテキストを読み取ります。
+RUM を初期化したら、`getGlobalContext()` API を使用してグローバルコンテキストを読み取ります。
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```
-import { datadogRum } from '@datadog/browser-rum';
-
-const context = datadogRum.getRumGlobalContext();
-```
-
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```
-DD_RUM.onReady(function() {
-  var context = DD_RUM.getRumGlobalContext();
-});
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-```
-var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+<div class="alert alert-info">RUM ブラウザ SDK v4.17.0 で `getGlobalContext` が導入され、`getRumGlobalContext` が廃止されました。</div>
 
 ## その他の参考資料
 

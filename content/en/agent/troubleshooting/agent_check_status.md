@@ -63,18 +63,17 @@ If your issue continues, [reach out to the Datadog support team][1] with a [flar
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-Run the following script, with the proper `<CHECK_NAME>`:
+Run the following script from an **elevated** (run as admin) PowerShell command line, with the proper `<CHECK_NAME>`:
 
 For Agent versions >= 6.12:
 
 ```powershell
-%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe check <CHECK_NAME>
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" check <CHECK_NAME>
 ```
 
 For Agent versions <= 6.11:
-
 ```powershell
-%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe check <CHECK_NAME>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" check <CHECK_NAME>
 ```
 
 {{% /tab %}}
@@ -92,14 +91,14 @@ This outputs any metrics or events that the check returns.
 {{% /tab %}}
 {{% tab "Agent v>=5.12" %}}
 
-Run the following script, with the proper `<CHECK_NAME>`:
+Run the following script from an **elevated** (run as admin) PowerShell command line, with the proper `<CHECK_NAME>`:
 
 `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
 
 For example, to run the disk check:
 
 ```powershell
-C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" check disk
 ```
 
 {{% /tab %}}

@@ -67,8 +67,9 @@ $ALERT_SCOPE
 **例**: `availability-zone:us-east-1a, role:computing-node`
 
 $ALERT_STATUS
-: アラートステータスのサマリー。<br />
+: アラートステータスの概要です。<br />
 **例**: `system.load.1 over host:my-host was > 0 at least once during the last 1m`
+**注**: Logs Monitor アラートからの Webhook ペイロードでこの変数を入力するには、Webhook インテグレーションタイルで `$ALERT_STATUS` を手動で追加する必要があります。
 
 $ALERT_TITLE
 : アラートのタイトル<br />

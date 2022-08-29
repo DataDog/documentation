@@ -1,37 +1,58 @@
 ---
+app_id: filebeat
+app_uuid: 50405147-1148-405a-9d81-ea48be4f613b
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: filebeat.registry.unprocessed_bytes
+      metadata_path: metadata.csv
+      prefix: filebeat.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Filebeat
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: jean@tripping.com
+  support_email: jean@tripping.com
 categories:
-- os & system
-creates_events: false
+- os system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md
-display_name: Filebeat
+display_on_public_website: true
 draft: false
 git_integration_title: filebeat
-guid: 3bb6a789-d1e3-465c-9bff-ea2a43ae2f59
 integration_id: filebeat
 integration_title: Filebeat
 integration_version: 1.2.0
 is_public: true
 kind: インテグレーション
-maintainer: jean@tripping.com
-manifest_version: 1.0.0
-metric_prefix: filebeat.
-metric_to_check: filebeat.registry.unprocessed_bytes
+manifest_version: 2.0.0
 name: filebeat
+oauth: {}
 public_title: Filebeat
 short_description: 軽量ログシッパー
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS システム
+  configuration: README.md#Setup
+  description: 軽量ログシッパー
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Filebeat
 ---
 
 

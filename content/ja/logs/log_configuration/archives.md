@@ -271,7 +271,6 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 [リハイドレート][2]は、以下のストレージクラスのみをサポートします。
 
 * S3 Standard
-* S3 Intelligent-Tiering
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval

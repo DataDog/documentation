@@ -1,13 +1,27 @@
 ---
+app_id: rabbitmq
+app_uuid: a10b582b-71ef-4773-b7b8-b7751c724620
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     rabbitmq: assets/dashboards/rabbitmq_dashboard.json
     rabbitmq_screenboard: assets/dashboards/rabbitmq_screenboard_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: rabbitmq.queue.messages
+      metadata_path: metadata.csv
+      prefix: rabbitmq.
+    process_signatures:
+    - rabbitmq
+    - rabbitmq-server
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RabbitMQ
   logs:
     source: rabbitmq
-  metrics_metadata: metadata.csv
   monitors:
     disk_usage: assets/monitors/disk_usage.json
     message_unacknowledge_rate_anomaly: assets/monitors/message_unacknowledge_rate_anomaly.json
@@ -15,38 +29,49 @@ assets:
     pid_overview: assets/saved_views/status_overview.json
     rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
     rabbitmq_processes: assets/saved_views/rabbitmq_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
 - log collection
 - autodiscovery
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
-display_name: RabbitMQ
+display_on_public_website: true
 draft: false
 git_integration_title: rabbitmq
-guid: a790a556-fbaa-4208-9d39-c42c3d57084b
 integration_id: rabbitmq
 integration_title: RabbitMQ
 integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: rabbitmq.
-metric_to_check: rabbitmq.queue.messages
+manifest_version: 2.0.0
 name: rabbitmq
-process_signatures:
-- rabbitmq
-- rabbitmq-server
-public_title: RabbitMQ インテグレーション
+oauth: {}
+public_title: RabbitMQ
 short_description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RabbitMQ
 ---
 
 

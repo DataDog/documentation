@@ -137,7 +137,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
 2. Instrument your Lambda functions
 
-    Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your for SAM `template.yml`.
+    Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your `template.yml` file for SAM.
 
     ```yaml
     Transform:

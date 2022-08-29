@@ -18,6 +18,7 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 1. Follow the steps in the [Amazon Create an API destination docs][5] to add Datadog as an API destination.
     - Use API key authorization, with `DD-API-KEY` as your key name and your [Datadog API key][3] as the value.
     - For your destination endpoint, use `https://http-intake.logs.datadoghq.com/v1/input` for logs or `https://api.datadoghq.com/api/v1/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see the [logs section][6], and the [events section][7] of the [Categories of Data docs page][8].
+    - If you are utilizing the events endpoint, you will need to include a `title` and `text` as `body.field` parameters in the API Destination connection. These are required values to `POST` to the events endpoint, see [Post an event API documentation][13]
 2. Once you've set up the destination, you can now follow the Amazon instructions to [create an EventBridge rule][9], where you set Datadog as your destination.
 3. Once you've set up the rule with Datadog as the destination, trigger an event by posting an event to EventBridge. For more information about pushing events to EventBridge from Datadog, see the [EventBridge integration docs][1]. For example, to trigger a test event by [uploading the objects to an S3 bucket][10] in your account, use this AWS CloudShell command:
 
@@ -26,6 +27,15 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
     aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
     ```
 4. Once events and logs are sending, after about five minutes, the data is available in the Datadog [logs console][11] or [events explorer][12], depending on which endpoint you are sending them to.
+
+## Troubleshooting
+
+To view the response of the API endpoints you can setup Amazon SQS for more details regarding the payloads sent to Datadog. 
+1. Create a new queue in Amazon SQS.
+2. In the **Target** section for your EventBridge rule, expand the **Additional settings** section. 
+3. In the **Dead-letter queue** section, choose **Select an Amazon SQS queue in the current AWS account to use as the dead-letter queue**.
+4. Select the AWS SQS created.
+5. Update the rule.
 
 ## Further Reading
 
@@ -44,3 +54,4 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
 [11]: https://app.datadoghq.com/logs
 [12]: https://app.datadoghq.com/event/explorer
+[13]: https://docs.datadoghq.com/api/latest/events/#post-an-event
