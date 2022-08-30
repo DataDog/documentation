@@ -2869,31 +2869,36 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
+  - name: Swift
+    url: real_user_monitoring/ios/swift/
+    parent: rum_ios
+    identifier: rum_ios_swift
+    weight: 301
   - name: Data Collected
     url: real_user_monitoring/ios/data_collected/
     parent: rum_ios
     identifier: rum_ios_data_collected
-    weight: 301
+    weight: 302
   - name: Advanced Configuration
     url: real_user_monitoring/ios/advanced_configuration/
     parent: rum_ios
     identifier: rum_ios_advanced
-    weight: 302
+    weight: 303
   - name: Mobile Vitals
     url: real_user_monitoring/ios/mobile_vitals/
     parent: rum_ios
     identifier: rum_ios_mobile_vitals
-    weight: 303
+    weight: 304
   - name: Web View Tracking
     url: real_user_monitoring/ios/web_view_tracking/
     parent: rum_ios
     identifier: rum_ios_web_view_tracking
-    weight: 304
+    weight: 305
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 305
+    weight: 306
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
