@@ -139,7 +139,7 @@ tags.datadoghq.com/<container-name>.version
 
 To configure [Kubernetes State Metrics][3]:
 
-1. Set `join_standard_tags` to `true` in your [configuration file][4].
+1. Set `join_standard_tags` to `true` in your configuration file. See this [example configuration file][4] for the setting location.
 
 2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
 
@@ -186,7 +186,7 @@ containers:
 [1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
 [3]: /agent/kubernetes/data_collected/#kube-state-metrics
-[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L63
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
 {{% /tab %}}
