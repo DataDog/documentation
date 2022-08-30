@@ -39,40 +39,40 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
 1. Set `trackViewsManually` to true when initializing the RUM Browser SDK.
 
-    {{< tabs >}}
-    {{% tab "NPM" %}}
-    ```javascript
-    import { datadogRum } from '@datadog/browser-rum';
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
 
-    datadogRum.init({
+datadogRum.init({
+    ...,
+    trackViewsManually: true,
+    ...
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
         ...,
         trackViewsManually: true,
         ...
     });
-    ```
-    {{% /tab %}}
-    {{% tab "CDN async" %}}
-    ```javascript
-    DD_RUM.onReady(function() {
-        DD_RUM.init({
-            ...,
-            trackViewsManually: true,
-            ...
-        })
-    })
-    ```
-    {{% /tab %}}
-    {{% tab "CDN sync" %}}
-    ```javascript
-    window.DD_RUM &&
-        window.DD_RUM.init({
-            ...,
-            trackViewsManually: true,
-            ...
-        });
-    ```
-    {{% /tab %}}
-    {{< /tabs >}}
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version. 
 
