@@ -2648,6 +2648,7 @@ components:
       - profiles
       - audit
       - events
+      - ci_tests
       example: logs
       type: string
       x-enum-varnames:
@@ -2659,6 +2660,7 @@ components:
       - PROFILES
       - AUDIT
       - EVENTS
+      - CI_TESTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
