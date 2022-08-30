@@ -13132,9 +13132,20 @@ components:
         disableCors:
           description: Whether or not to disable CORS mechanism.
           type: boolean
+        disableCsp:
+          description: Disable Content Security Policy for browser tests.
+          type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
+        ignoreServerCertificateError:
+          description: Ignore server certificate error.
+          type: boolean
+        initialNavigationTimeout:
+          description: Timeout before declaring the initial step as failed (in seconds)
+            for browser tests.
+          format: int64
+          type: integer
         min_failure_duration:
           description: Minimum amount of time in failure required to trigger an alert.
           format: int64
@@ -13245,6 +13256,16 @@ components:
           type: string
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
+        certificateDomains:
+          default: []
+          description: By default, the client certificate is applied on the domain
+            of the starting URL for browser tests. If you want your client certificate
+            to be applied on other domains instead, add them in `certificateDomains`.
+          items:
+            description: Domain to apply the client certificate.
+            example: ''
+            type: string
+          type: array
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
