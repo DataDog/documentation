@@ -173,7 +173,7 @@ Create this navigation step to have your browser test refresh the current page o
 
 #### Go to an email and click on a link
 
-Once you have [created an email variable](#test-that-an-email-was-received), create this navigation step to have your browser test access unique Synthetic mail inboxes.
+Once you have [created an email variable](/synthetics/guide/email-validation/#create-an-email-variable), create this navigation step to have your browser test access unique Synthetic mail inboxes.
 
 Select the email and links you want the browser test to click on. This step brings you to the corresponding page and allows you to move on with the rest of your journey from that specific page.
 
@@ -307,7 +307,7 @@ This type of global variable stores time-based one time password (TOTP) secret k
 
 #### Email
 
-Create a Datadog Synthetics email address that you can use in test steps to [assert if an email was sent correctly](#test-that-an-email-was-received) or [navigate to a link in the email](#go-to-an-email-and-click-on-a-link), for example, to click on a confirmation link.
+Create a Datadog Synthetics email address that you can use in test steps to [assert if an email was sent correctly](/synthetics/guide/email-validation/#confirm-the-email-was-sent) or [navigate to a link in the email](/synthetics/guide/email-validation/#navigate-through-links-in-an-email), for example, to click on a confirmation link.
 
 A unique mailbox is generated at each test execution to avoid conflicts between test runs.
 
