@@ -92,7 +92,7 @@ The criteria of 100ms since last request or DOM mutation might not be an accurat
 
 - The application collects analytics by sending requests to an API periodically or after every click.
 
-- The application uses "[comet][16]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
+- The application uses "[comet][16])" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
