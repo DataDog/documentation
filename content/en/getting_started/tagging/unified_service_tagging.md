@@ -186,7 +186,7 @@ containers:
 [1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
 [3]: /agent/kubernetes/data_collected/#kube-state-metrics
-[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L63
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
 {{% /tab %}}
