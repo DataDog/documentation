@@ -93,8 +93,7 @@ Whenever a navigation or a click occurs, the RUM Browser SDK tracks the page act
 The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 
 - The application collects analytics by sending requests to an API periodically or after every click.
-
-- The application uses "[comet][17])" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
+- The application uses "[comet][16]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
@@ -180,5 +179,5 @@ document.addEventListener("scroll", function handler() {
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[17]: https://en.wikipedia.org/wiki/Comet_(programming
+[17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
 [18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

@@ -154,8 +154,6 @@ title: タグの使用方法
 
 * モニターを各タグ値で複数警告モニターに変換する **avg by** テキストボックス。
 
-{{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ" style="width:80%;">}}
-
 [1]: /ja/monitors/create/#monitor-types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}

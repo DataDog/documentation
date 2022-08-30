@@ -9,6 +9,9 @@ further_reading:
 - link: /security_platform/application_security/troubleshooting
   tag: ドキュメント
   text: Datadog アプリケーションセキュリティモニタリングの一般的な問題のトラブルシューティング
+- link: /security_platform/notifications/variables/
+  tag: ドキュメント
+  text: Security Platform の通知変数について
 - link: /tracing/trace_explorer/query_syntax/
   tag: ドキュメント
   text: ASM クエリを定義するための構文
@@ -32,7 +35,7 @@ OOTB 検出ルールをカスタマイズするには、まず既存のルール
 
 ### ASM クエリの定義
 
-[APM トレースエクスプローラーと同じクエリ構文][5]を使用して、ASM クエリを構築します。例えば、SQL インジェクションの試行についてエンドポイントを監視するクエリを作成します: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`
+[APM トレースエクスプローラーと同じクエリ構文][3]を使用して、ASM クエリを構築します。例えば、SQL インジェクションの試行についてエンドポイントを監視するクエリを作成します: `@appsec.type:sql_injection -@http.url_details.path:"/debug-endpoint-executing-sql" env:production`
 
 オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。 通常、グループ化はエンティティ (ユーザーや IP など) です。グループ化は、[クエリを結合する](#joining-queries)ためにも使用されます。
 
@@ -72,9 +75,9 @@ Add Query ボタンで、クエリを追加することができます。
 
 シグナルの重大度を設定します。ドロップダウンから適切な重大度レベル (`INFO`、`LOW`、`MEDIUM`、`HIGH`、`CRITICAL`) を選択してください。
 
-"Notify" セクションで、各ルールケースに対する [通知ターゲット][3]  (0 以上) を構成します。
+"Notify" セクションで、各ルールケースに対する [通知ターゲット][4]  (0 以上) を構成します。
 
-また、[通知ルール][4]を作成することで、個々の検出ルールに対する通知設定の手動編集を軽減することができます。
+また、[通知ルール][5]を作成することで、個々の検出ルールに対する通知設定の手動編集を軽減することができます。
 
 ### タイムウィンドウ
 
@@ -92,11 +95,11 @@ Add Query ボタンで、クエリを追加することができます。
 
 **ルール名**セクションで、ルールリストビューに表示されるルール名や、シグナルのタイトルを構成することができます。
 
-通知ボックスには、同じようにマークダウンとプレビューの機能があります。
+[通知変数][5]を使用して、そのタグとイベント属性を参照することによって、シグナルに関する特定の詳細を提供します。
 
 #### テンプレート変数
 
-検出ルールは、マークダウン通知ボックス内のテンプレート変数をサポートします。テンプレート変数は、トレースからセキュリティシグナルおよび関連する通知への動的なコンテキストの直接注入を可能にします。
+[テンプレート変数][6]を使用して、トレースから動的なコンテキストをセキュリティシグナルと関連する通知に直接注入することができます。
 
 テンプレート変数は、Datadog やパートナーポータルに深くリンクし、調査のための次のステップに素早くアクセスすることもできます。例:
 
@@ -161,7 +164,9 @@ Real routes targeted for `your_service_name`.
 {{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
 ```
 
-例えば、`attack:sql-injection-attempt` のように、異なるタグでシグナルをタグ付けします。
+詳しくは、[テンプレート変数][6]をご覧ください。
+
+シグナルに異なるタグを付けるには、Tag Resulting Signals ドロップダウンを使用します。例えば、`attack:sql-injection-attempt` のようになります。
 
 **注**: `security` タグはセキュリティシグナルの分類に用いられる特殊なタグです。`attack`、`threat-intel`、`compliance`、`anomaly`、`data-leak` など他のタグの使用を推奨します。
 
@@ -171,6 +176,7 @@ Real routes targeted for `your_service_name`.
 
 [1]: /ja/security_platform/default_rules/#cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
-[3]: /ja/monitors/notify/?tab=is_alert#integrations
-[4]: /ja/security_platform/notification_rules/
-[5]: /ja/tracing/trace_explorer/query_syntax/
+[3]: /ja/tracing/trace_explorer/query_syntax/
+[4]: /ja/monitors/notify/?tab=is_alert#integrations
+[5]: /ja/security_platform/notifications/variables/
+[6]: /ja/security_platform/notifications/variables/#template-variables
