@@ -51,8 +51,8 @@ Four tabs are below the profile header:
 
 | Tab               | Definition                                                                                                                            |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Profiles          | A flame graph and summary table of the profile you are looking at. You can switch between profile types (`CPU`, `Memory allocation`). |
-| Analysis          | A set of heuristics that suggest potential issues or areas of improvement in your code. Currently only available for Java.            |
+| Profiles          | A flame graph and summary table of the profile you are looking at. You can switch between profile types (for example, `CPU`, `Memory allocation`). |
+| Analysis          | A set of heuristics that suggest potential issues or areas of improvement in your code. Only available for Java.            |
 | Metrics           | Profiler metrics coming from all profiles of the same service.                                                                        |
 | Runtime&nbsp;Info | Runtime properties in supported languages, and profile tags.                                                                          |
 
@@ -73,7 +73,7 @@ Once enabled, the following profile types are collected:
 
 
 CPU
-: The time each method spent running on the CPU. It includes your code that runs in the JVM (Java, Kotlin, etc), but not JVM operations or native code called from within the JVM.
+: The time each method spent running on the CPU. It includes your code that runs in the JVM (for example, Java, Kotlin), but not JVM operations or native code called from within the JVM.
 
 Allocations
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.
@@ -109,7 +109,7 @@ Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that has not been garbage collected (yet). This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Allocated Memory
 : The amount of heap memory allocated by each function, including allocations which were subsequently freed - only supported with Python 3.
@@ -139,7 +139,7 @@ Once enabled, the following profile types are collected:
 
 
 CPU Time
-: The time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes and Sleep are not captured in this profile. See Mutex and Block profiles.
+: The time each function spent running on the CPU. Off-CPU time such as waiting for Networking, Channels, Mutexes, and Sleep are not captured in this profile. See Mutex and Block profiles.
 
 Allocations
 : The number of objects allocated by each function in heap memory during the profiling period (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_objects`. Stack allocations are not tracked. This is useful for investigating garbage collection load. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
@@ -148,19 +148,19 @@ Allocated Memory
 : The amount of heap memory allocated by each function during the profiling period (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Heap Live Objects
-: The number of objects allocated by each function in heap memory that have not been garbage collected (yet). Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The number of objects allocated by each function in heap memory that have not yet been garbage collected. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that has not been garbage collected (yet). Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The amount of heap memory allocated by each function that has not yet been garbage collected. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Mutex
 : The time functions have been waiting on mutexes during the profiling period (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Block
-: The time functions have been waiting on mutexes and channel operations during the profiling period (default: 60s). Sleep, GC, Network and Syscall operations are not captured by this profile. Blocking operations are only captured after they become unblocked, so this profile cannot be used to debug applications that appear to be stuck. For mutex contentions, the stack traces in this profile point to blocked `Lock()` operations. This will tell you where your program is getting blocked, while the mutex profile tells you what part of your program is causing the contention. See our [Block Profiling in Go][1] research for more in-depth information. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles). **Note:** The block profiler can cause noticeable overhead for production workloads. If enabling it in production, prefer high rates (such as `100000000`, that is 100 milliseconds) and look for signs of increased latency or CPU utilization.
+: The time functions have been waiting on mutexes and channel operations during the profiling period (default: 60s). Sleep, GC, Network, and Syscall operations are not captured by this profile. Blocking operations are only captured after they become unblocked, so this profile cannot be used to debug applications that appear to be stuck. For mutex contentions, the stack traces in this profile point to blocked `Lock()` operations. This tells you where your program is getting blocked, while the mutex profile tells you what part of your program is causing the contention. See our [Block Profiling in Go][1] research for more in-depth information. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles). **Note:** The block profiler can cause noticeable overhead for production workloads. If enabling it in production, prefer high rates (such as `100000000`, which is 100 milliseconds) and look for signs of increased latency or CPU utilization.
 
 Goroutines
-: A snapshot of the number of goroutines currently executing the same functions (On CPU as well as waiting Off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and the number of goroutines they use. Applications that are extremely latency sensitive and use a large number of goroutines (> 10.000) should be aware that enabling this profile requires stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for `~1µsec` per goroutine. Typical applications with a p99 latency SLO of `~100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][2] research for more in-depth information.
+: A snapshot of the number of goroutines currently executing the same functions (both on-CPU and waiting off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and the number of goroutines they use. Applications that are extremely latency-sensitive and use a large number of goroutines (> 10.000) should be aware that enabling this profile requires stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for around `1µsec` per goroutine. Typical applications with a p99 latency SLO of around `100ms` can generally ignore this warning. See our [Goroutine Profiling in Go][2] research for more in-depth information.
 
 #### Delta profiles
 <div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>accumulated since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. Delta profiling is on by default. Profiler version <code>1.35.0</code> allows you to disable delta profiles using the <code>WithDeltaProfiles</code> option. <br/><br/>As of profiler version <code>1.37.0</code>, accumulated profiles are no longer uploaded when delta profiling is enabled to reduce upload bandwidth usage. <a href="/help/">Contact Support</a> to discuss your use case if you rely on the full accumulated profiles.</div>
@@ -188,7 +188,7 @@ Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that has not been garbage collected (yet). This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}

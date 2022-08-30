@@ -201,7 +201,7 @@ The `environment`, `service`, and `service_version` settings are recommended, as
 
 **Note**: Parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
 
-The full list of parameters is available [here](https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md) or using command line.
+See the [full list of parameters](https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md) or use the command line.
 
 ```bash
 ddprof --help
