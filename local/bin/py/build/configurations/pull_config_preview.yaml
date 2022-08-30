@@ -772,7 +772,7 @@
               tag: "Blog"
               text: "Monitor your React Native applications"
     - action: pull-and-push-file
-      branch: develop
+      branch: main
       globs:
       - 'docs/expo_development.md'
       options:
@@ -783,7 +783,7 @@
           kind: documentation
           beta: true
           description: "Monitor your React Native projects using Expo and Expo Go with Datadog."
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/expo_development.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_development.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
@@ -792,14 +792,14 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: develop
+      branch: main
       globs:
       - 'docs/expo_crash_reporting.md'
       options:
         dest_path: '/real_user_monitoring/error_tracking/'
         file_name: 'expo.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/expo_crash_reporting.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_crash_reporting.md"]
           title: Expo Crash Reporting and Error Tracking
           kind: documentation
           beta: true
