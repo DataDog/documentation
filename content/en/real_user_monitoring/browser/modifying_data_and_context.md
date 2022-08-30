@@ -88,21 +88,33 @@ The following example manually tracks the page views on the `checkout` page in a
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```
-datadogRum.startView('checkout', 'purchase', '1.2.3')
+datadogRum.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```
 DD_RUM.onReady(function() {
-    DD_RUM.startView('checkout', 'purchase', '1.2.3')
+    DD_RUM.startView({
+      name: 'checkout',
+      service: 'purchase',
+      version: '1.2.3'
+    })
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```
-window.DD_RUM && window.DD_RUM.startView('checkout', 'purchase', '1.2.3')
+window.DD_RUM && window.DD_RUM.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
 ```
 {{% /tab %}}
 {{< /tabs >}}
