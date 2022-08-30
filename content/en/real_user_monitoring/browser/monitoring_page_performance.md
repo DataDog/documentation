@@ -173,5 +173,5 @@ document.addEventListener("scroll", function handler() {
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[16]: https://en.wikipedia.org/wiki/Comet_(programming
+[16]: https://en.wikipedia.org/wiki/Comet_(programming\
 [17]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
