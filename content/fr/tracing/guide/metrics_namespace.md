@@ -1,25 +1,26 @@
 ---
-title: Métriques d'application de tracing
-kind: guide
-further_reading:
-  - link: tracing/setup/
-    tag: Documentation
-    text: Configurer le tracing d'APM avec votre application
-  - link: tracing/visualization/services_list/
-    tag: Documentation
-    text: Découvrir la liste des services transmettant des données à Datadog
-  - link: tracing/visualization/service
-    tag: Documentation
-    text: En savoir plus sur les services dans Datadog
-  - link: tracing/visualization/resource
-    tag: Documentation
-    text: Plonger au cœur des traces et des performances de vos ressources
-  - link: tracing/visualization/trace
-    tag: Documentation
-    text: Comprendre comment lire une trace Datadog
 aliases:
-  - /fr/tracing/getting_further/metrics_namespace
+- /fr/tracing/getting_further/metrics_namespace
+further_reading:
+- link: tracing/setup/
+  tag: Documentation
+  text: Configurer le tracing d'APM avec votre application
+- link: tracing/visualization/services_list/
+  tag: Documentation
+  text: Découvrir la liste des services transmettant des données à Datadog
+- link: tracing/visualization/service
+  tag: Documentation
+  text: En savoir plus sur les services dans Datadog
+- link: tracing/visualization/resource
+  tag: Documentation
+  text: Plonger au cœur des traces et des performances de vos ressources
+- link: tracing/visualization/trace
+  tag: Documentation
+  text: Comprendre comment lire une trace Datadog
+kind: guide
+title: Métriques d'application de tracing
 ---
+
 ## Présentation
 
 Les métriques d'application de tracing sont collectées après l'[activation de la collecte de traces][1] et l'[instrumentation de votre application][2]. Ces métriques sont disponibles pour les dashboards et les monitors. Le format de l'espace de nommage des [métriques de traces][3] est le suivant :
@@ -98,15 +99,19 @@ Les paramètres sont définis comme suit :
 **Tags :** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
 
 
-### Duration
+### Durée
+
+<div class="alert alert-warning">Cette méthode d'utilisation des métriques de trace est obsolète. À la place, nous vous conseillons de <a href="/tracing/guide/ddsketch_trace_metrics/">tracer les métriques de distribution avec DDSketch</a>.</div>
 
 `trace.<NOM_SPAN>.duration`
-: **Prérequis :** cette métrique est disponible pour tous les services APM.<br>
-**Description :** elle correspond à la durée totale mesurée pour un groupe de spans. Plus précisément, il s'agit du temps de traitement total mesuré par toutes les spans dans un intervalle donné, y compris le temps passé à attendre les processus enfant.<br>
+: **Prérequis :** cette métrique existe pour tous les services APM.<br>
+**Description :** [OBSOLÈTE] Correspond à la durée totale mesurée pour un groupe de spans dans un intervalle de temps, y compris les spans enfants détectées par le service de collecte. Cette métrique est utilisée pour générer le graphique « % exec time for downstream services » (% de temps d'exécution pour les services en aval). Le fait de diviser `trace.<NOM_SPAN>.duration` par `trace.<NOM_SPAN>.hits`, peut donner une latence moyenne, mais cette méthode de calcul de la latence moyenne n'est pas recommandée. Consultez plutôt la section [Distribution de la latence](#distribution-de-la-latence) pour effectuer ce calcul. <br>
 **Type de métrique :** [GAUGE][7].<br>
-**Tags :** `env`, `service`, `resource`, `http.status_code`, tous les tags de host de l'Agent de host Datadog et le [deuxième tag primaire][4].
+**Tags :** `env`, `service`, `resource`, `http.status_code`, tous les tags de host de l'Agent pour host Datadog et le [deuxième tag primaire][4].
 
 ### Duration by
+
+<div class="alert alert-warning">Cette méthode d'utilisation des métriques de trace est obsolète. À la place, nous vous conseillons de <a href="/tracing/guide/ddsketch_trace_metrics/">tracer les métriques de distribution avec DDSketch</a>.</div>
 
 `trace.<NOM_SPAN>.duration.by_http_status`
 : **Prérequis :** cette métrique est disponible pour les services APM HTTP/WEB tant que des métadonnées HTTP sont fournies.<br>
