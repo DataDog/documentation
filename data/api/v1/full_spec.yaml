@@ -2648,6 +2648,7 @@ components:
       - profiles
       - audit
       - events
+      - ci_tests
       example: logs
       type: string
       x-enum-varnames:
@@ -2659,6 +2660,7 @@ components:
       - PROFILES
       - AUDIT
       - EVENTS
+      - CI_TESTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -3800,6 +3802,7 @@ components:
       - dbm_hosts_usage
       - dbm_queries_usage
       - estimated_indexed_logs_usage
+      - estimated_ingested_logs_usage
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
@@ -3826,6 +3829,7 @@ components:
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
@@ -5676,12 +5680,16 @@ components:
       x-enum-varnames:
       - USER_AGENT_PARSER
     MetricContentEncoding:
+      default: deflate
       description: HTTP header used to compress the media-type.
       enum:
       - deflate
+      - gzip
+      example: deflate
       type: string
       x-enum-varnames:
       - DEFLATE
+      - GZIP
     MetricMetadata:
       description: Object with all metric related metadata.
       properties:
@@ -7051,6 +7059,8 @@ components:
       - dbm_queries_usage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -7102,6 +7112,8 @@ components:
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -7195,6 +7207,16 @@ components:
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). This field is
             in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_percentage:
+          description: The percentage of estimated live ingested logs usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_usage:
+          description: The estimated live ingested logs usage by tag(s). This field
+            is in private beta.
           format: double
           type: number
         estimated_ingested_spans_percentage:
@@ -13110,9 +13132,20 @@ components:
         disableCors:
           description: Whether or not to disable CORS mechanism.
           type: boolean
+        disableCsp:
+          description: Disable Content Security Policy for browser tests.
+          type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
+        ignoreServerCertificateError:
+          description: Ignore server certificate error.
+          type: boolean
+        initialNavigationTimeout:
+          description: Timeout before declaring the initial step as failed (in seconds)
+            for browser tests.
+          format: int64
+          type: integer
         min_failure_duration:
           description: Minimum amount of time in failure required to trigger an alert.
           format: int64
@@ -13223,6 +13256,16 @@ components:
           type: string
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
+        certificateDomains:
+          default: []
+          description: By default, the client certificate is applied on the domain
+            of the starting URL for browser tests. If you want your client certificate
+            to be applied on other domains instead, add them in `certificateDomains`.
+          items:
+            description: Domain to apply the client certificate.
+            example: ''
+            type: string
+          type: array
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
@@ -14153,6 +14196,8 @@ components:
       - lambda_invocations_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -14183,6 +14228,8 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -14223,6 +14270,8 @@ components:
       - dbm_queries_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - appsec_usage
       - appsec_percentage
       - estimated_indexed_spans_usage
@@ -14264,6 +14313,8 @@ components:
       - DBM_QUERIES_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
@@ -14423,6 +14474,16 @@ components:
             is in private beta.
           format: double
           type: number
+        estimated_ingested_logs_percentage:
+          description: The percentage of estimated live ingested logs usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_usage:
+          description: The estimated live ingested logs usage by tag(s). Note this
+            field is in private beta.
+          format: double
+          type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
             Note this field is in private beta.
@@ -14574,6 +14635,9 @@ components:
           description: Shows usage aggregation for a billing period.
           format: double
           type: number
+        region:
+          description: The region of the organization.
+          type: string
         start_date:
           description: Shows the first date of usage.
           format: date-time
@@ -16371,6 +16435,9 @@ components:
           type: integer
         public_id:
           description: The organization public id.
+          type: string
+        region:
+          description: The region of the organization.
           type: string
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and

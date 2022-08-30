@@ -12,7 +12,7 @@ title: デュアルシッピング
 2 つ目の Datadog 組織や他の内部インフラストラクチャーなど、複数の宛先にデータを送信したい場合、追加のエンドポイントにデータを送信するように Agent を構成することができます。複数のエンドポイントまたは API キーに異なる種類のデータを送信するように Agent を設定するには、次の構成を使用します。
 
 
-## メトリクス、APM、ライブプロセス、オーケストレーター
+## メトリクス、APM、ライブプロセス、オーケストレーター、CI Visibility
 
 YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agent を起動します。
 
@@ -116,6 +116,31 @@ DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.
 ```
 
 {{% /tab %}}
+
+{{% tab "CI Visibility" %}}
+
+<div class="alert alert-info">Agent v6.38+ または v7.38+ が必要です。</div>
+
+### YAML 構成
+`datadog.yaml` で:
+```yaml
+evp_proxy_config:
+  [...]
+  additional_endpoints:
+    "https://mydomain.datadoghq.com":
+    - apikey2
+    - apikey3
+    "https://mydomain.datadoghq.eu":
+    - apikey4
+```
+
+### 環境変数コンフィギュレーション
+
+```bash
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+```
+
+{{% /tab %}}
 {{% /tabs %}} 
 
 ## ログ、データベースモニタリング、ネットワークデバイス、CSPM、ランタイムセキュリティ
@@ -131,7 +156,7 @@ logs_config:
   use_http: true
   additional_endpoints:
   - api_key: "apiKey2"
-    Host: "https://mydomain.datadoghq.com"
+    Host: "mydomain.datadoghq.com"
     Port: 443
     is_reliable: true
 ```
@@ -140,7 +165,7 @@ logs_config:
 
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
-DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -155,21 +180,21 @@ database_monitoring:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://mydomain.datadoghq.com"
+      Host: "mydomain.datadoghq.com"
       Port: 443
       is_reliable: true
   activity:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://mydomain.datadoghq.com"
+      Host: "mydomain.datadoghq.com"
       Port: 443
       is_reliable: true
   metrics:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://mydomain.datadoghq.com"
+      Host: "mydomain.datadoghq.com"
       Port: 443
       is_reliable: true
 ```
@@ -178,11 +203,11 @@ database_monitoring:
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
-DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
-DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
-DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -198,7 +223,7 @@ network_devices:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://mydomain.datadoghq.com"
+      Host: "mydomain.datadoghq.com"
       Port: 443
       is_reliable: true
   snmp_traps:
@@ -206,7 +231,7 @@ network_devices:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "https://mydomain.datadoghq.com"
+        Host: "mydomain.datadoghq.com"
         Port: 443
         is_reliable: true
 ```
@@ -215,7 +240,7 @@ network_devices:
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
-DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -230,7 +255,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://mydomain.datadoghq.com"
+      Host: "mydomain.datadoghq.com"
       Port: 443
       is_reliable: true
 ```
@@ -239,7 +264,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 ```bash
 DD_​​COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -254,7 +279,7 @@ runtime_security_config:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://mydomain.datadoghq.com"
+      Host: "mydomain.datadoghq.com"
       Port: 443
       is_reliable: true
 ```
@@ -263,7 +288,7 @@ runtime_security_config:
 
 ```bash
 DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -304,7 +329,7 @@ YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agen
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "https://mydomain.datadoghq.com"
+        Host: "mydomain.datadoghq.com"
         Port: 443
         is_reliable: true
 ```

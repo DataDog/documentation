@@ -153,7 +153,7 @@ require 'ddtrace'
 require 'net/http'
 
 Datadog.configure do |c|
-  c.tracer hostname: Net::HTTP.get(URI('http://169.254.169.254/latest/meta-data/local-ipv4'))
+  c.agent.host = Net::HTTP.get(URI('http://169.254.169.254/latest/meta-data/local-ipv4'))
 end
 ```
 

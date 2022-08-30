@@ -60,24 +60,13 @@ PagerDuty インテグレーションには、サービスのチェック機能�
 
 ## トラブルシューティング
 
-### PagerDuty のサービスを自動で解決する
-
-モニターが回復したときに自動的に PagerDuty サービスを解決するには、以下のようにモニターの **Say what's happening** セクションの `{{#is_recovery}}` コンテキストに PagerDuty 通知を含めます。
-
-```text
-{{#is_recovery}}
-
-    この通知は、モニターが解決したときのみ発生します。
-    @pagerduty-trigger がトリガーされアラートが発動すると、同様に解決します。
-
-{{/is_recovery}}
-```
-
 ### 特定の PagerDuty サービスに通知を送信する
 
 複数のサービスが統合されている場合に、特定の PagerDuty サービスにメッセージや通知を送るには、モニターメッセージに `@pagerduty-[serviceName]` を使用します。これをモニターの **Say what's happening** セクションに入力し始めると、オートコンプリートされるのがわかるはずです。
 
 {{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="pagerduty faq 1" popup="true">}}
+
+モニターが回復するとき、通知ハンドルをモニター回復メッセージに含めると、自動的に Pagerduty サービスを解決しますが、`{{#is_alert}}` コンテキストにのみ含まれている場合は解決しません。
 
 ### PagerDuty のインシデント重大度のマッピング
 

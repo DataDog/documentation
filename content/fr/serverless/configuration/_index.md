@@ -277,7 +277,7 @@ Datadog peut déduire des spans APM en fonction des événements Lambda reçus p
 Les ressources suivantes sont actuellement prises en charge :
 
 - API Gateway (API REST, API HTTP et WebSocket)
-- URL de fonction
+- URL de fonction Lambda
 - SQS
 - SNS (les messages SNS distribués via SQS sont également pris en charge)
 - Flux Kinesis (si les données correspondent  une chaîne JSON ou à une chaîne JSON codée en base64)
@@ -362,21 +362,23 @@ Pour découvrir quelles bibliothèques et quels frameworks sont automatiquement 
 
 ## Choisir les taux d'échantillonnage pour l'ingestion des spans APM
 
-Pour gérer le [taux d'échantillonnage des invocations tracées par APM][35] pour des fonctions sans serveur, définissez la variable d'environnement `DD_TRACE_SAMPLE_RATE` de la fonction sur une valeur comprise entre 0.000 (aucun tracing des invocations de fonction Lambda) et 1.000 (tracing de toutes les invocations de fonction Lambda).
+Pour gérer le [taux d'échantillonnage des invocations tracées par APM][17] pour des fonctions sans serveur, définissez la variable d'environnement `DD_TRACE_SAMPLE_RATE` de la fonction sur une valeur comprise entre 0.000 (aucun tracing des invocations de fonction Lambda) et 1.000 (tracing de toutes les invocations de fonction Lambda).
 
 Les métriques sont calculées en tenant compte de l'intégralité du trafic de l'application. Votre configuration d'échantillonnage ne nuit donc aucunement à leur justesse.
 
-Pour les services à haut débit, puisque les données des traces sont très répétitives, vous n'avez généralement pas besoin de recueillir chaque requête : les problèmes suffisamment graves sont systématiquement détectables dans plusieurs traces. Les [contrôles d'ingestion][36] vous permettent de visualiser les données dont vous avez besoin pour diagnostiquer des problèmes tout en respectant votre marge d'erreur.
+Pour les services à haut débit, puisque les données des traces sont très répétitives, vous n'avez généralement pas besoin de recueillir chaque requête : les problèmes suffisamment graves sont systématiquement détectables dans plusieurs traces. Les [contrôles d'ingestion][18] vous permettent de visualiser les données dont vous avez besoin pour diagnostiquer des problèmes tout en respectant votre marge d'erreur.
 
-L'[échantillonnage en amont][37] constitue le mécanisme par défaut. La décision de conserver ou d'ignorer la trace est prise au tout début du cycle de vie de la trace, à la création de la span racine. Cette décision est ensuite propagée vers les autres services par l'intermédiaire du contexte de la requête (par exemple, sous la forme d'un en-tête de requête HTTP).
+L'[échantillonnage en amont][19] constitue le mécanisme d'ingestion par défaut. La décision de conserver ou d'ignorer la trace est prise au tout début du cycle de vie de la trace, à la création de la span racine. Cette décision est ensuite propagée vers les autres services par l'intermédiaire du contexte de la requête (par exemple, sous la forme d'un en-tête de requête HTTP). La décision est prise au début de la trace, puis transmise durant toutes les étapes de la trace. Ainsi, vous devez configurer le taux d'échantillonnage sur le service root afin de l'appliquer.
 
-La décision est prise au début de la trace, puis transmise durant toutes les étapes de la trace. Ainsi, vous êtes certains de conserver ou d'ignorer l'ensemble de la trace.
+Lorsque Datadog ingère les spans, le filtre de rétention intelligent Datadog indexe une proportion de vos traces pour vous aider à surveiller la santé de vos applications. Vous pouvez également définir des [filtres de rétention][38] personnalisés qui vous permettront d'indexer les données des traces que vous voulez conserver plus longtemps en accord avec les objectifs de votre organisation.
+
+En savoir plus sur le [pipeline de tracing Datadog][39].
 
 ## Filtrer ou nettoyer des informations sensibles des traces
 
-Pour filtrer des traces avant de les envoyer à Datadog, consultez la section [Ignorer les ressources non désirées dans l'APM][17].
+Pour filtrer des traces avant de les envoyer à Datadog, consultez la section [Ignorer les ressources non désirées dans l'APM][20].
 
-Si vous avez besoin de nettoyer les attributs de vos traces pour des raisons de sécurité, consultez la section [Configurer l'Agent Datadog ou le traceur pour assurer la sécurité des données][18].
+Si vous avez besoin de nettoyer les attributs de vos traces pour des raisons de sécurité, consultez la section [Configurer l'Agent Datadog ou le traceur pour assurer la sécurité des données][21].
 
 ## Désactiver la collecte de logs
 
@@ -435,7 +437,7 @@ Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `false` sur vos f
 
 Si vous utilisez l'[extension Lambda][2] pour recueillir des traces et des logs, Datadog ajoute automatiquement l'ID de la requête AWS Lambda à la span `aws.lambda` via le tag `request_id`. En outre, les logs Lambda d'une même requête partagent le même attribut `lambda.request_id`. L'ID de requête AWS Lambda permet d'associer les vues des traces et des logs Datadog.
 
-Si vous utilisez la [fonction Lambda du Forwarder][4] pour recueillir des traces et des logs, `dd.trace_id` est automatiquement injecté dans les logs (grâce à la variable d'environnement `DD_LOGS_INJECTION`). L'ID de trace Datadog permet d'associer les vues des traces et des logs Datadog. Cette fonctionnalité est compatible avec la majorité des applications utilisant un runtime et un logger connus (voir la [prise en charge pour chaque runtime][19]).
+Si vous utilisez la [fonction Lambda du Forwarder][4] pour recueillir des traces et des logs, `dd.trace_id` est automatiquement injecté dans les logs (grâce à la variable d'environnement `DD_LOGS_INJECTION`). L'ID de trace Datadog permet d'associer les vues des traces et des logs Datadog. Cette fonctionnalité est compatible avec la majorité des applications utilisant un runtime et un logger connus (voir la [prise en charge pour chaque runtime][22]).
 
 Si vous utilisez un runtime ou un logger personnalisé qui n'est pas pris en charge, procédez comme suit :
 - Si vos logs sont au format JSON, vous devez récupérer l'ID de trace Datadog à l'aide de `dd-trace`, puis l'ajouter à vos logs via le champ `dd.trace_id` :
@@ -452,13 +454,13 @@ Si vous utilisez un runtime ou un logger personnalisé qui n'est pas pris en cha
     1. Récupérez l'ID de trace Datadog à l'aide de `dd-trace`, puis ajoutez-le à votre log.
     2. Dupliquez le pipeline de logs Lambda par défaut, qui est en lecture seule uniquement.
     3. Activez le pipeline dupliqué et désactivez le pipeline par défaut.
-    4. Modifiez les règles du [parser Grok][20] du pipeline dupliqué afin de parser l'ID de trace Datadog dans l'attribut `dd.trace_id`. Vous pouvez par exemple utiliser la règle `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` pour les logs dont le format est `[INFO] dd.trace_id=4887065908816661012 Mon message de log`.
+    4. Modifiez les règles du [parser Grok][23] du pipeline dupliqué afin de parser l'ID de trace Datadog dans l'attribut `dd.trace_id`. Vous pouvez par exemple utiliser la règle `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` pour les logs dont le format est `[INFO] dd.trace_id=4887065908816661012 Mon message de log`.
 
 ## Associer des erreurs à votre code source
 
 <div class="alert alert-info">Cette fonctionnalité est actuellement prise en charge pour les langages Go et Java.</div>
 
-Grâce à l'[intégration du code source Datadog][21], vous pouvez associer vos données de télémétrie (comme vos stack traces) au code source de vos fonctions Lambda dans GitHub. Suivez les instructions ci-dessous pour activer cette fonctionnalité. **Remarque** : vous devez procéder au déploiement depuis un référentiel Git local qui n'est ni « dirty » ni en avance par rapport à un référentiel distant.
+Grâce à l'[intégration du code source Datadog][24], vous pouvez associer vos données de télémétrie (comme vos stack traces) au code source de vos fonctions Lambda dans GitHub. Suivez les instructions ci-dessous pour activer cette fonctionnalité. **Remarque** : vous devez procéder au déploiement depuis un référentiel Git local qui n'est ni « dirty » ni en avance par rapport à un référentiel distant.
 
 {{< tabs >}}
 {{% tab "Interface de ligne de commande Datadog" %}}
@@ -540,29 +542,29 @@ export class ExampleStack extends cdk.Stack {
 
 ## Envoyer des métriques custom
 
-Vous pouvez [envoyer des métriques custom][22] pour surveiller une logique opérationnelle personnalisée.
+Vous pouvez [envoyer des métriques custom][25] pour surveiller une logique opérationnelle personnalisée.
 
 ## Envoyer des données de télémétrie via AWS PrivateLink ou un proxy
 
-L'extension Lambda Datadog doit pouvoir accéder à Internet pour envoyer des données à Datadog. Si vos fonctions Lambda sont déployées dans un VPC sans accès à Internet, vous pouvez [envoyer vos données via AWS PrivateLink][23] pour le [site Datadog][24] `datadoghq.com` ou [via un proxy][25] pour tous les autres sites.
+L'extension Lambda Datadog doit pouvoir accéder à Internet pour envoyer des données à Datadog. Si vos fonctions Lambda sont déployées dans un VPC sans accès à Internet, vous pouvez [envoyer vos données via AWS PrivateLink][26] pour le [site Datadog][27] `datadoghq.com` ou [via un proxy][28] pour tous les autres sites.
 
-Si vous utilisez le Forwarder Datadog, suivez [ces instructions][26].
+Si vous utilisez le Forwarder Datadog, suivez [ces instructions][29].
 
 ## Envoyer des données de télémétrie à plusieurs organisations Datadog
 
-Pour envoyer des données à plusieurs organisations Datadog, suivez les instructions relatives à la [transmission multiple][27] et ajoutez le fichier `datadog.yaml` dans le répertoire racine de votre projet.
+Pour envoyer des données à plusieurs organisations Datadog, suivez les instructions relatives à la [transmission multiple][30] et ajoutez le fichier `datadog.yaml` dans le répertoire racine de votre projet.
 
 ## Propager le contexte de traces vers des ressources AWS
 
-Datadog injecte automatiquement le contexte des traces dans les requêtes AWS SDK sortantes et extrait le contexte des traces à partir des événements Lambda. Cela permet de tracer une requête ou une transaction sur des services distribués. Pour en savoir plus, consultez la section [Propagation des traces sans serveur][28].
+Datadog injecte automatiquement le contexte des traces dans les requêtes AWS SDK sortantes et extrait le contexte des traces à partir des événements Lambda. Cela permet de tracer une requête ou une transaction sur des services distribués. Pour en savoir plus, consultez la section [Propagation des traces sans serveur][31].
 
 ## Fusionner des traces X-Ray et Datadog
 
-AWS X-Ray prend en charge le tracing par l'intermédiaire de certains services gérés par AWS, comme AppSync et Step Functions, qui ne sont pas nativement pris en charge par la solution APM Datadog. Vous pouvez néanmoins activer l'[intégration Datadog/X-Ray][29] et fusionner les traces X-Ray avec les traces natives Datadog. Pour obtenir plus d'informations à ce sujet, consultez [cette section][30].
+AWS X-Ray prend en charge le tracing par l'intermédiaire de certains services gérés par AWS, comme AppSync et Step Functions, qui ne sont pas nativement pris en charge par la solution APM Datadog. Vous pouvez néanmoins activer l'[intégration Datadog/X-Ray][32] et fusionner les traces X-Ray avec les traces natives Datadog. Pour obtenir plus d'informations à ce sujet, consultez [cette section][33].
 
 ## Activer la signature de code pour AWS Lambda
 
-Grâce à la [signature de code pour AWS Lambda][31], vous êtes certain de ne déployer que du code fiable depuis vos fonctions Lambda vers AWS. Lorsque vous activez la signature de code sur vos fonctions, AWS vérifie que tout le code de vos déploiements est signé par une source fiable. Vous pouvez définir les sources auxquelles vous faites confiance depuis la configuration de la signature de code.
+Grâce à la [signature de code pour AWS Lambda][34], vous êtes certain de ne déployer que du code fiable depuis vos fonctions Lambda vers AWS. Lorsque vous activez la signature de code sur vos fonctions, AWS vérifie que tout le code de vos déploiements est signé par une source fiable. Vous pouvez définir les sources auxquelles vous faites confiance depuis la configuration de la signature de code.
 
 Si vos fonctions Lambda ont été configurées de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog à la configuration de signature de code de votre fonction avant de déployer les fonctions Lambda à l'aide des couches Lambda publiées par Datadog.
 
@@ -574,9 +576,9 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 
 ## Migrer vers l'extension Lambda Datadog
 
-Datadog peut recueillir les données de surveillance de vos fonctions Lambda via la [fonction Lambda du Forwarder][4] ou l'[extension Lambda][2]. Il est conseillé de privilégier l'extension Lambda pour les nouvelles installations. Si vous ne savez pas quelle approche adopter, consultez la section [Choisir s'il est pertinent de migrer vers l'extension Lambda Datadog][32].
+Datadog peut recueillir les données de surveillance de vos fonctions Lambda via la [fonction Lambda du Forwarder][4] ou l'[extension Lambda][2]. Il est conseillé de privilégier l'extension Lambda pour les nouvelles installations. Si vous ne savez pas quelle approche adopter, consultez la section [Choisir s'il est pertinent de migrer vers l'extension Lambda Datadog][35].
 
-Pour procéder à la migration, comparez les [instructions d'installation via l'extension Lambda Datadog][1] avec [celles via le Forwarder Datadog][33]. Pour vous faciliter la tâche, les principales différences sont répertoriées ci-dessous.
+Pour procéder à la migration, comparez les [instructions d'installation via l'extension Lambda Datadog][1] avec [celles via le Forwarder Datadog][36]. Pour vous faciliter la tâche, les principales différences sont répertoriées ci-dessous.
 
 **Remarque** : Datadog vous conseille de migrer en premier vos applications dev et staging, puis de migrer vos applications de production une par une.
 
@@ -637,7 +639,7 @@ Pour tester l'image du conteneur de votre fonction Lambda en local lorsque l'ext
 
 ## Dépannage
 
-Si vous ne parvenez pas à configurer vos installations, définissez la variable d'environnement `DD_LOG_LEVEL` sur `debug` pour activer les logs de debugging. Si vous avez besoin d'aide supplémentaire pour le dépannage, consultez le guide [Dépannage de la surveillance sans serveur][34].
+Si vous ne parvenez pas à configurer vos installations, définissez la variable d'environnement `DD_LOG_LEVEL` sur `debug` pour activer les logs de debugging. Si vous avez besoin d'aide supplémentaire pour le dépannage, consultez le guide [Dépannage de la surveillance sans serveur][37].
 
 ## Pour aller plus loin
 
@@ -650,7 +652,7 @@ Si vous ne parvenez pas à configurer vos installations, définissez la variable
 [3]: /fr/integrations/amazon_web_services/
 [4]: /fr/serverless/libraries_integrations/forwarder/
 [5]: https://www.datadoghq.com/blog/troubleshoot-lambda-function-request-response-payloads/
-[6]: /fr/tracing/setup_overview/configure_data_security/#scrub-sensitive-data-from-your-spans
+[6]: /fr/tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
 [7]: /fr/serverless/enhanced_lambda_metrics
 [8]: /fr/integrations/amazon_api_gateway/#data-collected
 [9]: /fr/integrations/amazon_appsync/#data-collected
@@ -659,26 +661,28 @@ Si vous ne parvenez pas à configurer vos installations, définissez la variable
 [12]: https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/
 [13]: /fr/agent/logs/advanced_log_collection/
 [14]: /fr/logs/log_configuration/pipelines/
-[15]: /fr/tracing/setup_overview/compatibility_requirements/
-[16]: /fr/tracing/setup_overview/custom_instrumentation/
-[17]: /fr/tracing/guide/ignoring_apm_resources/
-[18]: /fr/tracing/setup_overview/configure_data_security/
-[19]: /fr/tracing/connect_logs_and_traces/
-[20]: /fr/logs/log_configuration/parsing/
-[21]: /fr/integrations/guide/source-code-integration
-[22]: /fr/serverless/custom_metrics
-[23]: /fr/agent/guide/private-link/
-[24]: /fr/getting_started/site/
-[25]: /fr/agent/proxy/
-[26]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
-[27]: /fr/agent/guide/dual-shipping/
-[28]: /fr/serverless/distributed_tracing/serverless_trace_propagation/
-[29]: /fr/integrations/amazon_xray/
-[30]: /fr/serverless/distributed_tracing/serverless_trace_merging
-[31]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
-[32]: /fr/serverless/guide/extension_motivation/
-[33]: /fr/serverless/guide#install-using-the-datadog-forwarder
-[34]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
-[35]: /fr/tracing/trace_ingestion/ingestion_controls/#configure-the-service-ingestion-rate
-[36]: /fr/tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
-[37]: /fr/tracing/trace_ingestion/mechanisms/?tabs=environmentvariables#head-based-sampling
+[15]: /fr/tracing/trace_collection/compatibility/
+[16]: /fr/tracing/trace_collection/custom_instrumentation/
+[17]: /fr/tracing/trace_pipeline/ingestion_controls/#configure-the-service-ingestion-rate
+[18]: /fr/tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
+[19]: /fr/tracing/trace_pipeline/ingestion_mechanisms/?tabs=environmentvariables#head-based-sampling
+[20]: /fr/tracing/guide/ignoring_apm_resources/
+[21]: /fr/tracing/configure_data_security/
+[22]: /fr/tracing/other_telemetry/connect_logs_and_traces/
+[23]: /fr/logs/log_configuration/parsing/
+[24]: /fr/integrations/guide/source-code-integration
+[25]: /fr/serverless/custom_metrics
+[26]: /fr/agent/guide/private-link/
+[27]: /fr/getting_started/site/
+[28]: /fr/agent/proxy/
+[29]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
+[30]: /fr/agent/guide/dual-shipping/
+[31]: /fr/serverless/distributed_tracing/serverless_trace_propagation/
+[32]: /fr/integrations/amazon_xray/
+[33]: /fr/serverless/distributed_tracing/serverless_trace_merging
+[34]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
+[35]: /fr/serverless/guide/extension_motivation/
+[36]: /fr/serverless/guide#install-using-the-datadog-forwarder
+[37]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
+[38]: /fr/tracing/trace_pipeline/trace_retention/
+[39]: /fr/tracing/trace_pipeline/

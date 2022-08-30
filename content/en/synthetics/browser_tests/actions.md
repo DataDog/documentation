@@ -173,7 +173,7 @@ Create this navigation step to have your browser test refresh the current page o
 
 #### Go to an email and click on a link
 
-Once you have [created an email variable](#test-that-an-email-was-received), create this navigation step to have your browser test access unique Synthetic mail inboxes.
+Once you have [created an email variable][4], create this navigation step to have your browser test access unique Synthetic mail inboxes.
 
 Select the email and links you want the browser test to click on. This step brings you to the corresponding page and allows you to move on with the rest of your journey from that specific page.
 
@@ -297,17 +297,17 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### Global variable
 
-Select any global variables defined in [Synthetic Monitoring Settings][4].
+Select any global variables defined in [Synthetic Monitoring Settings][5].
 
 #### Global variable - MFA
 
-Select any MFA global variables defined in [Synthetic Monitoring Settings][4].
+Select any MFA global variables defined in [Synthetic Monitoring Settings][5].
 
-This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][5].
+This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][6].
 
 #### Email
 
-Create a Datadog Synthetics email address that you can use in test steps to [assert if an email was sent correctly](#test-that-an-email-was-received) or [navigate to a link in the email](#go-to-an-email-and-click-on-a-link), for example, to click on a confirmation link.
+Create a Datadog Synthetics email address that you can use in test steps to [assert if an email was sent correctly][7] or [navigate to a link in the email][8], for example, to click on a confirmation link.
 
 A unique mailbox is generated at each test execution to avoid conflicts between test runs.
 
@@ -319,9 +319,9 @@ To override variables from subtests in parent tests, ensure the variables create
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:60%;" >}}
 
-To convert steps from your current browser test into a subtest, select your recorded steps from the **Extract From Steps** tab and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][6].
+To convert steps from your current browser test into a subtest, select your recorded steps from the **Extract From Steps** tab and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][9].
 
-If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][7].
+If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][10].
 
 ### HTTP requests
 
@@ -397,8 +397,8 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -421,8 +421,8 @@ To start parsing a variable, click **Extract a variable from response content**:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or the response body.
 
-   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][10].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][10], a [`JSONPath`][8], or a [`XPath`][9].
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][13].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][13], a [`JSONPath`][11], or a [`XPath`][12].
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
@@ -457,10 +457,13 @@ Some variables only compute at runtime, such as a variable from an HTTP request 
 [1]: /synthetics/browser_tests/advanced_options/
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /synthetics/settings/
-[5]: /synthetics/guide/browser-tests-totp
-[6]: /synthetics/browser_tests/advanced_options/#subtests
-[7]: /synthetics/guide/reusing-browser-test-journeys
-[8]: https://restfulapi.net/json-jsonpath/
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[4]: /synthetics/guide/email-validation/#create-an-email-variable
+[5]: /synthetics/settings/
+[6]: /synthetics/guide/browser-tests-totp
+[7]: /synthetics/guide/email-validation/#confirm-the-email-was-sent
+[8]: /synthetics/guide/email-validation/#navigate-through-links-in-an-email
+[9]: /synthetics/browser_tests/advanced_options/#subtests
+[10]: /synthetics/guide/reusing-browser-test-journeys
+[11]: https://restfulapi.net/json-jsonpath/
+[12]: https://www.w3schools.com/xml/xpath_syntax.asp
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

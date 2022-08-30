@@ -3089,16 +3089,21 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_ios
     weight: 1204
+  - name: Track Expo Errors
+    url: real_user_monitoring/error_tracking/expo/
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_expo
+    weight: 1205
   - name: Track React Native Errors
     url: real_user_monitoring/error_tracking/reactnative/
     parent: rum_error_tracking
     identifier: rum_error_tracking_reactnative
-    weight: 1205
+    weight: 1206
   - name: Track Flutter Errors
     url: real_user_monitoring/error_tracking/flutter/
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
-    weight: 1206
+    weight: 1207
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum

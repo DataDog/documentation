@@ -209,6 +209,9 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 `setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
 : Datadog エンドポイントに対し作成されたリクエストの頻度を定義します（リクエストがある場合）。
 
+`setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
+: モバイルバイタルを収集するための好ましい頻度を設定します。
+
 `sampleRumSessions(<samplingRate>)` 
 : RUM セッションのサンプリングレートを設定します（0 の値は RUM イベントの送信がなかったことを示し、100 の値はすべてのセッションが維持されたことを示します）。
 
@@ -255,7 +258,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 **ヒント**: `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
 
-**注**: デフォルトで、ライブラリはいずれのビューも追跡しません。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
+**注**: デフォルトで、ライブラリは `ActivityViewTrackingStrategy` を使用しています。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
 
 
 ### ネットワークリクエストの自動追跡
