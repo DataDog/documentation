@@ -111,10 +111,10 @@ DD_RUM.onReady(function() {
 
 ```
 window.DD_RUM && window.DD_RUM.startView({
-                                name: 'checkout',
-                                service: 'purchase',
-                                version: '1.2.3'
-                              })
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
 ```
 {{% /tab %}}
 {{< /tabs >}}
