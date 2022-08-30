@@ -187,7 +187,7 @@ $SECURITY_SIGNAL_MSG
 
 $SECURITY_SIGNAL_ATTRIBUTES
 : セキュリティシグナルの属性。<br />
-**例**: `{"network":{"client":{"ip":"1.2.3.4"}}}`
+**例**: `{"network":{"client":{"ip":"1.2.3.4"}}, "service": ["agent"]}`
 
 $SECURITY_RULE_ID
 : セキュリティルール ID。<br />
