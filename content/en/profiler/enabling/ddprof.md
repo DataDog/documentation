@@ -25,7 +25,7 @@ The Datadog Continuous Profiler for compiled languages (`ddprof`) uses OS level 
 ## Requirements
 
 Supported operating systems
-: Linux kernel v4.17+, libc 2.18+ or musl libc
+: Linux kernel v4.17+, glibc 2.18+ or musl libc
 
 Supported architecture
 : `amd64` or `arm64` processors
