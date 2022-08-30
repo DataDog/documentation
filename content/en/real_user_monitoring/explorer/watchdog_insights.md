@@ -9,7 +9,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
   tag: "Blog"
   text: "Improve mobile user experience with Datadog Mobile RUM"
-- link: "/watchdog/"
+- link: "/watchdog/insights"
   tag: "Documentation"
   text: "Learn about Watchdog Insights"
 - link: "/real_user_monitoring/explorer/search/"
