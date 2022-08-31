@@ -12466,13 +12466,17 @@ components:
             the value.
           example: content-type
           type: string
+        localVariableName:
+          description: When type is `local_variable`, name of the local variable to
+            use to extract the value.
+          example: LOCAL_VARIABLE
+          type: string
         parser:
           $ref: '#/components/schemas/SyntheticsVariableParser'
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       required:
       - type
-      - parser
       type: object
     SyntheticsGlobalVariableParseTestOptionsType:
       description: Property of the Synthetics Test Response to use for a Synthetics
@@ -12480,11 +12484,13 @@ components:
       enum:
       - http_body
       - http_header
+      - local_variable
       example: http_body
       type: string
       x-enum-varnames:
       - HTTP_BODY
       - HTTP_HEADER
+      - LOCAL_VARIABLE
     SyntheticsGlobalVariableParserType:
       description: Type of parser for a Synthetics global variable from a synthetics
         test.
@@ -27291,6 +27297,11 @@ paths:
           - file: synthetics_api_http_test_payload.json
             name: body
           step: there is a valid "synthetics_api_test" in the system
+        synthetics_api_test_multi_step:
+          parameters:
+          - file: synthetics_api_test_multi_step_payload.json
+            name: body
+          step: there is a valid "synthetics_api_test_multi_step" in the system
         synthetics_api_test_with_wrong_dns:
           parameters:
           - file: synthetics_api_test_with_wrong_dns.json
@@ -28199,6 +28210,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-given:
+        synthetics_global_variable:
+          parameters:
+          - file: synthetics_global_variable_payload.json
+            name: body
+          step: there is a valid "synthetics_global_variable" in the system
       x-menu-order: 18
       x-undo:
         operationId: DeleteGlobalVariable
