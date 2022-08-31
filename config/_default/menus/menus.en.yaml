@@ -2869,10 +2869,10 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
-  - name: Swift
-    url: real_user_monitoring/ios/swift/
+  - name: SwiftUI
+    url: real_user_monitoring/ios/swiftui/
     parent: rum_ios
-    identifier: rum_ios_swift
+    identifier: rum_ios_swiftui
     weight: 301
   - name: Data Collected
     url: real_user_monitoring/ios/data_collected/
