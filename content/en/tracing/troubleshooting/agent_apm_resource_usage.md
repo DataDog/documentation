@@ -9,7 +9,7 @@ aliases:
 
 The APM Agent is CPU-bound and its CPU usage is correlated with the number of spans received per second.
 
-The APM Agent is designed to buffer unprocessed payloads in memory to avoid data loss. Consequently, throttling the Agent process because of an insufficient CPU limit can lead to out of memory.
+The APM Agent is designed to buffer unprocessed payloads in memory to avoid data loss. Consequently, throttling the Agent process because of an insufficient CPU limit can lead to an out of memory issue.
 
 ## Detect out-of-CPU
 
