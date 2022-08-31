@@ -746,6 +746,13 @@
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
     }
   ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
+    }
+  ],
   "CreatePrivateLocation": [
     {
       "group": "synthetics",

@@ -88,9 +88,11 @@ end
 
 ### Configuration de Datadog
 
-Pour activer l'instrumentation de tests, ajoutez les variables d'environnement suivantes à votre cible de test (ou dans le fichier `Info.plist` comme [décrit ci-dessous](#utiliser-le-fichier-infoplist-pour-la-configuration)). Vous devrez également sélectionner votre cible principale dans `Expand variables based on` ou `Target for Variable Expansion` si vous utilisez des plans de test :
+Pour activer l'instrumentation de tests, ajoutez les variables d'environnement suivantes à votre cible de test (ou dans le fichier `Info.plist` comme [décrit ci-dessous](#utiliser-le-fichier-infoplist-pour-la-configuration). Vous **devez** sélectionner votre cible principale dans `Expand variables based on` ou `Target for Variable Expansion` si vous utilisez des plans de test :
 
 {{< img src="continuous_integration/swift_env.png" alt="Environnements Swift" >}}
+
+<div class="alert alert-warning">Votre cible principale doit figurer dans l'expansion des variables d'environnement ; si elle n'est pas sélectionnée, les variables ne sont pas valides. </div>
 
 Pour les tests d'interface utilisateur, les variables d'environnement doivent être configurées uniquement dans la cible de test, car le framework injecte automatiquement ces valeurs dans l'application.
 
@@ -135,18 +137,18 @@ Datadog tire profit des données Git pour vous présenter les résultats de vos 
 
 Lorsque les tests sont exécutés dans un simulateur, les métadonnées Git complètes sont collectées en utilisant le dossier local `.git`. Dans ce cas, les variables d'environnement relatives à Git n'ont pas besoin d'être transférées.
 
-Si vous exécutez des tests pour des fournisseurs de CI non pris en charge, ou sans dossier `.git`, vous pouvez configurer manuellement les données Git à l'aide de variables d'environnement. Ces dernières sont prioritaires et remplacent les informations détectées automatiquement. Configurez les variables d'environnement suivantes pour obtenir des données Git :
+Si vous exécutez des tests dans des fournisseurs de CI non pris en charge, ou sans dossier `.git`, vous pouvez configurer manuellement les données Git à l'aide de variables d'environnement. Ces dernières sont prioritaires et remplacent les informations détectées automatiquement. Configurez les variables d'environnement suivantes pour obtenir des données Git :
 
 `DD_GIT_REPOSITORY_URL`
 : URL du référentiel dans lequel le code est stocké. Les URL HTTP et SSH sont prises en charge.<br/>
 **Exemple** : `git@github.com:MyCompany/MyApp.git`
 
 `DD_GIT_BRANCH`
-: Branche Git concernée par les tests. Ne renseignez pas cette variable si vous fournissez à la place des informations sur les tags.<br/>
+: Branche Git testée. Ne renseignez pas cette variable si vous fournissez à la place des informations sur les tags.<br/>
 **Exemple** : `develop`
 
 `DD_GIT_TAG`
-: Tag Git concerné par les tests (le cas échéant). Ne renseignez pas cette variable si vous fournissez à la place des informations sur la branche.<br/>
+: Tag Git testé (le cas échéant). Ne renseignez pas cette variable si vous fournissez à la place des informations sur la branche.<br/>
 **Exemple** : `1.0.1`
 
 `DD_GIT_COMMIT_SHA`
@@ -308,14 +310,15 @@ Au lieu de définir des variables d'environnement, il est possible de spécifier
 {{< tabs >}}
 {{% tab "Jenkins" %}}
 
-| Variable d'environnement | Valeur             |
-| -------------------- | ----------------- |
-| `JENKINS_URL`        | `$(JENKINS_URL)`  |
-| `WORKSPACE`          | `$(WORKSPACE)`    |
-| `BUILD_TAG`          | `$(BUILD_TAG)`    |
-| `BUILD_NUMBER`       | `$(BUILD_NUMBER)` |
-| `BUILD_URL`          | `$(BUILD_URL)`    |
-| `JOB_NAME`           | `$(JOB_NAME)`     |
+| Variable d'environnement | Valeur                  |
+| -------------------- | ---------------------- |
+| `JENKINS_URL`        | `$(JENKINS_URL)`       |
+| `WORKSPACE`          | `$(WORKSPACE)`         |
+| `BUILD_TAG`          | `$(BUILD_TAG)`         |
+| `BUILD_NUMBER`       | `$(BUILD_NUMBER)`      |
+| `BUILD_URL`          | `$(BUILD_URL)`         |
+| `JOB_NAME`           | `$(JOB_NAME)`          |
+| `DD_CUSTOM_TRACE_ID` | `$(DD_CUSTOM_TRACE_ID)`|
 
 Configuration Git supplémentaire pour le test d'appareils physiques :
 
@@ -361,6 +364,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `CI_PIPELINE_IID`    | `$(CI_PIPELINE_IID)` |
 | `CI_PIPELINE_URL`    | `$(CI_PIPELINE_URL)` |
 | `CI_PROJECT_PATH`    | `$(CI_PROJECT_PATH)` |
+| `CI_PROJECT_URL`     | `$(CI_PROJECT_URL)`  |
+
 
 Configuration Git supplémentaire pour le test d'appareils physiques :
 
@@ -546,27 +551,42 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
 {{% /tab %}}
+{{% tab "Xcode Cloud" %}}
+
+| Variable d'environnement    | Valeur                   |
+| ----------------------- | ----------------------- |
+| `DD_GIT_REPOSITORY_URL` | URL du dépôt      |
+| `CI_WORKSPACE`          | `$(CI_WORKSPACE)`       |
+| `CI_COMMIT`             | `$(CI_COMMIT)`          |
+| `CI_BUILD_ID`           | `$(CI_BUILD_ID)`        |
+| `CI_BUILD_NUMBER`       | `$(CI_BUILD_NUMBER)`    |
+| `CI_WORKFLOW`           | `$(CI_WORKFLOW)`        |
+| `CI_TAG`                | `$(CI_TAG)`             |
+| `CI_BRANCH`             | `$(CI_BRANCH)`          |
+| `CI_GIT_REF`            | `$(CI_GIT_REF)`         |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## API de test manuel
 
 Si vous utilisez des XCTests pour vos projets Swift, le framework `DatadogSDKTesting` les instrumente automatiquement et envoie les résultats au backend Datadog. Si vous n'utilisez pas de XCTest, vous pouvez utiliser à la place l'API de test manuel Swift/Objective-C, qui transmet les résultats de test au backend.
 
-L'API repose sur trois concepts, à savoir les *sessions de test*, les *collections de tests* et les *tests*.
+L'API repose sur trois concepts, à savoir le *module de test*, les *collections de tests* et les *tests*.
 
-### Sessions de test
+### Module de test
 
-Une session de test englobe tout le processus d'exécution des tests, du lancement des tests par l'utilisateur à la transmission des résultats du dernier test. Les sessions comprennent également le lancement de l'environnement et du processus dans lesquels s'exécutent les tests.
+Un module de test représente le chargement d'une bibliothèque ou d'un bundle qui comprend les tests.
 
-Pour commencer une session de test, appelez `DDTestSession.start()` et passez le nom du module ou du bundle à tester.
+Pour lancer un module de test, appelez `DDTestModule.start()` et passez le nom du module ou du bundle à tester.
 
-Une fois tous vos tests terminés, appelez `session.end()` afin de forcer la bibliothèque à envoyer tous les résultats de test restants au backend.
+Une fois tous vos tests terminés, appelez `module.end()` afin de forcer la bibliothèque à envoyer tous les résultats de test restants au backend.
 
 ### Collections de tests
 
 Une collection de tests correspond à un ensemble de tests qui partagent des caractéristiques communes, comme le processus d'initialisation et de nettoyage. Certaines variables peuvent également être utilisées par plusieurs tests d'une collection.
 
-Pour créer des collections de tests lors d'une session de test, appelez `session.suiteStart()` et passez le nom de la collection de tests.
+Pour créer des collections de tests dans le module de test, appelez `module.suiteStart()` et passez le nom de la collection de tests.
 
 Appelez `suite.end()` lorsque l'exécution de tous les tests d'une collection est terminée.
 
@@ -579,25 +599,25 @@ Pour créer des tests dans une collection, appelez `suite.testStart()` et passez
 ### Interface de l'API
 
 {{< code-block lang="swift" >}}
-class DDTestSession {
-    // Début de la session.
+class DDTestModule {
+    // Début du module.
     // - Paramètres :
     //   - bundleName : nom du module ou du bundle à tester.
-    //   - startTime : facultatif. L'heure de début de la session.
-    static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
+    //   - startTime : facultatif. L'heure de début du module.
+    static func start(bundleName: String, startTime: Date? = nil) -> DDTestModule
     //
-    // Fin de la session.
+    // Fin du module.
     // - Paramètres :
-    //   - endTime : facultatif. L'heure de fin de la session.
+    //   - endTime : facultatif. L'heure de fin du module.
     func end(endTime: Date? = nil)
-    // Ajoute un tag/attribut à la session de test. La session peut inclure autant de tags que nécessaire.
+    // Ajoute un tag/attribut au module de test. Le module peut inclure autant de tags que nécessaire.
     // - Paramètres :
     //   - key : le nom du tag. Si un tag existant possède le même nom,
     //     sa valeur est remplacée par la nouvelle valeur.
     //   - value : la valeur du tag. Il peut s'agir d'un nombre comme d'une chaîne.
     func setTag(key: String, value: Any)
     //
-    // Début d'une collection lors de cette session.
+    // Début d'une collection dans ce module.
     // - Paramètres :
     //   - name : le nom de la collection.
     //   - startTime : facultatif. L'heure de début de la collection.
@@ -664,8 +684,8 @@ Le code suivant permet d'utiliser les fonctionnalités de base de l'API :
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
-let session = DDTestSession.start(bundleName: "ManualSession")
-let suite1 = session.suiteStart(name: "ManualSuite 1")
+let module = DDTestModule.start(bundleName: "ManualModule")
+let suite1 = module.suiteStart(name: "ManualSuite 1")
 let test1 = suite1.testStart(name: "Test 1")
 test1.setTag(key: "key", value: "value")
 test1.end(status: .pass)
@@ -673,13 +693,13 @@ let test2 = suite1.testStart(name: "Test 2")
 test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
 test2.end(test: test2, status: .fail)
 suite1.end()
-let suite2 = session.suiteStart(name: "ManualSuite 2")
+let suite2 = module.suiteStart(name: "ManualSuite 2")
 ..
 ..
-session.end()
+module.end()
 {{< /code-block >}}
 
-Appelez toujours `session.end()` à la fin de votre code, afin que toutes les informations sur les tests soient transmises à Datadog.
+Appelez toujours `module.end()` à la fin de votre code, afin que toutes les informations sur les tests soient transmises à Datadog.
 
 ## Pour aller plus loin
 
