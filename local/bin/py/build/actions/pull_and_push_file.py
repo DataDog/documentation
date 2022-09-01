@@ -55,9 +55,6 @@ def pull_and_push_file(content, content_dir):
         # Test replacing tab logic
         file_content = file_content.replace("{{%", "{{<").replace("%}}", ">}}")
 
-        if destination_path == '/real_user_monitoring/error_tracking/' and content["options"]["file_name"] == 'ios.md':
-            print(file_content)
-
         with open(
             "{}{}{}".format(
                 content_dir,
