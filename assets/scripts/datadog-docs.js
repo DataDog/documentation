@@ -83,7 +83,7 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('catalog')) {
+    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('workflows')) {
         initializeGroupedListings();
     }
 
@@ -171,7 +171,7 @@ function getPathElement(event = null) {
     }
 
     // if on a detailed integration page then make sure integrations is highlighted in nav
-    if (document.getElementsByClassName('integration-labels').length) {
+    if (document.getElementsByClassName('integration-labels').length || document.documentElement.getAttribute('data-current-section') === "integrations/workflows/") {
         sideNavPathElement = document.querySelector(
             '.side .nav-top-level > [data-path*="integrations"]'
         );

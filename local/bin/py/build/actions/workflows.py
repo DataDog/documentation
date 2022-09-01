@@ -18,12 +18,12 @@ TEMPLATE = """\
 {content}
 """
 
-def catalog(content, content_dir):
-    logger.info("Starting Catalog action...")
+def workflows(content, content_dir):
+    logger.info("Starting Workflow action...")
     print(content)
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         # print(file_name)
-        bundle_excludes = content["options"].get('bundle_excludes', [])
+        bundle_excludes = content.get("options", {}).get('bundle_excludes', [])
         if any(substring in file_name for substring in bundle_excludes) or file_name.endswith('manifest.schema.json'):
             logging.info(f"skipping {file_name}")
         else:
@@ -48,7 +48,7 @@ def catalog(content, content_dir):
                     if not action_data['source'] and 'datadog' in action_data['bundle_title'].lower():
                         action_data['source'] = '_datadog'
                     output_content = TEMPLATE.format(front_matter=yaml.dump(action_data, default_flow_style=False).strip(), content=action_data.get('description'))
-                    dest_dir = Path(f"{content_dir}/catalog/")
+                    dest_dir = Path(f"{content_dir}/integrations/workflows/")
                     dest_dir.mkdir(exist_ok=True)
                     name = f"{output_file_name}_{action_name}"
                     dest_file = dest_dir.joinpath(name).with_suffix('.md')

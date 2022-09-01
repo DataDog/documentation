@@ -1,8 +1,8 @@
 ---
-title: Catalog
+title: Workflows
 kind: documentation
-type: catalog
-description: "Datadog Catalog"
+type: workflows
+description: "Datadog Workflows"
 disable_sidebar: true
 ---
 
