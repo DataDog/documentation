@@ -130,10 +130,17 @@ Finally, run the following commands:
 
 ### APM and DogStatsD
 
-To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
-
+To configure and inject APM tracers libraries and DogstatsD clients automatically
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
+
+To opt-in your container for library injection, use Pod annotations inside your applcation's YAML file to specify which language tracers should be injected, along with their versions.
+
+The annotations follow a Key: datadoghq.com/<language>-tracer.version Value: <tracer-version> format. Adding a datadoghq.com/<language>-tracer.version annotation enables tracer lib injection for that language, using the selected version, and adding several datadoghq.com/<language>-tracer.version annotations is allowed to inject multiple language tracers into one container.
+
+An example annotation could in the YAML file could be:
+annotations:
+    admission.datadoghq.com/java-tracer.version: "latest"
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
