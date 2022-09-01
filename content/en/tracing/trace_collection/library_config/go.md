@@ -140,4 +140,4 @@ extracted value is used.
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
 [5]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [6]: /getting_started/tracing/#environment-name
-[7]: /tracing/configure_data_security/?tab=mongodb#telemetry-collection
+[7]: /tracing/configure_data_security#telemetry-collection
