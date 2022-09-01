@@ -3,6 +3,7 @@ import glob
 import json
 import os
 import yaml
+import jsonschema
 from itertools import chain
 import logging
 from pathlib import Path
@@ -18,9 +19,27 @@ TEMPLATE = """\
 {content}
 """
 
+def build_content(action_data, data):
+    desc = action_data.get('description')
+    input = action_data.get('input', '').replace('#/$defs/', '')
+    output = action_data.get('output', '').replace('#/$defs/', '')
+    content = f'{desc}\n\n'
+    if input:
+        content += """
+### Inputs
+coming soon
+
+"""
+    if output:
+        content += """
+### Outputs
+coming soon
+
+"""
+    return content
+
 def workflows(content, content_dir):
     logger.info("Starting Workflow action...")
-    print(content)
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         # print(file_name)
         bundle_excludes = content.get("options", {}).get('bundle_excludes', [])
@@ -47,11 +66,11 @@ def workflows(content, content_dir):
                     # if this is a dd. bundle then lets use the datadog integration id
                     if not action_data['source'] and 'datadog' in action_data['bundle_title'].lower():
                         action_data['source'] = '_datadog'
-                    output_content = TEMPLATE.format(front_matter=yaml.dump(action_data, default_flow_style=False).strip(), content=action_data.get('description'))
+                    content = build_content(action_data, data)
+                    output_content = TEMPLATE.format(front_matter=yaml.dump(action_data, default_flow_style=False).strip(), content=content)
                     dest_dir = Path(f"{content_dir}/integrations/workflows/")
                     dest_dir.mkdir(exist_ok=True)
                     name = f"{output_file_name}_{action_name}"
                     dest_file = dest_dir.joinpath(name).with_suffix('.md')
-                    print(dest_file)
                     with open(dest_file, mode='w', encoding='utf-8') as out_file:
                         out_file.write(output_content)
