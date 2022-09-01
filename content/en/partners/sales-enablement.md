@@ -16,11 +16,11 @@ private: true
 
 First head over to the <a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>, log in and click to Training. From there, click to Get Started with the Sales Certification.
 
-{{<img src="partners/portal_sales_go.png" alt="Partner Portal Sales Certification" style="width:100%;">}}
+{{<img src="partners/portal_sales_go.png" alt="Partner Portal Sales Certification" style="">}}
 
 This course walks you through the basics you need to work with your opportunity.
 
-This course will 
+This course 
 
 - Help you understand what Datadog is and how to think about it with these modules:
     -  Intro to Monitoring
@@ -37,13 +37,13 @@ This course will
 
 Once you have the idea of the Datadog basics, you should get your Demo Certification.
 
-{{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="width:100%;">}}
+{{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="">}}
 
 Not only will this course help you deliver a technical demo, it will further help you understand Datadog's approach to observability and its unified collaborative platform.
 
 You are now ready for the Datadog Technical Certification.
 
-{{<img src="partners/portal_tech_go.png" alt="Partner Portal Demo Certification" style="width:100%;">}}
+{{<img src="partners/portal_tech_go.png" alt="Partner Portal Demo Certification" style="">}}
 
 This course
 - explains the basics behind Datadog core products
