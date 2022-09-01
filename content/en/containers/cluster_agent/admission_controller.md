@@ -130,17 +130,28 @@ Finally, run the following commands:
 
 ### APM and DogStatsD
 
-To configure and inject APM tracers libraries and DogstatsD clients automatically
+To configure and inject APM tracers libraries and DogstatsD clients automatically:
+
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
-To opt-in your container for library injection, use Pod annotations inside your applcation's YAML file to specify which language tracers should be injected, along with their versions.
+To opt-in your container for library injection, use Pod annotations inside your application's YAML file to specify which language tracers and should be injected, along with their versions.
 
-The annotations follow a Key: datadoghq.com/<language>-tracer.version Value: <tracer-version> format. Adding a datadoghq.com/<language>-tracer.version annotation enables tracer lib injection for that language, using the selected version, and adding several datadoghq.com/<language>-tracer.version annotations is allowed to inject multiple language tracers into one container.
+The annotations are a `key: value` pair in the following format:
 
-An example annotation could in the YAML file could be:
+```yaml
+admission.datadoghq.com/<language>-tracer.version: <tracer-version>
+```
+
+Adding a this annotation means the tracer library for that language and version is injected into the containerized application. You can add several `<language>-tracer.version` annotations to inject multiple language tracers into one container.
+
+For example to inject the latest Java tracer and Ruby tracer version 1.4.0:
+
+```yaml
 annotations:
     admission.datadoghq.com/java-tracer.version: "latest"
+    admission.datadoghq.com/ruby-tracer.version: "1.4.0"
+```
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
