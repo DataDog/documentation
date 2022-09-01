@@ -1855,21 +1855,26 @@ main:
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
     weight: 1205
+  - name: Agent Resource Usage
+    url: tracing/troubleshooting/agent_apm_resource_usage
+    identifier: tracing_troubleshooting_agent_usage
+    parent: tracing_troubleshooting
+    weight: 1206
   - name: Correlated Logs
     url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
-    weight: 1206
+    weight: 1207
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1207
+    weight: 1208
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1208
+    weight: 1209
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
