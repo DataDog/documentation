@@ -59,12 +59,6 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 
 Note: The span value is the number of data points. So `ewma_7()` uses the last 7 data points to calculate the average.
 
-Example:
-
-If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma7(10 + x%10 {*})` has the following shape:
-
-{{< img src="dashboards/functions/smoothing/ewma7.png" alt="EWMA7" style="width:80%;">}}
-
 ### Ewma 10
 
 | Function    | Description                                                          | Example                     |
