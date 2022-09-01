@@ -37,7 +37,7 @@ Not only does this course teach you to deliver a technical demo, it further help
 
 ## Proof of value
 
-After giving a technical demo, you will be working with the customer to develop an initial proof of value solution.  To prepare for this, obtain the Datadog Technical Certification.
+After giving a technical demo, you will be working with the customer to develop an initial proof of value solution. To prepare for this, obtain the Datadog Technical Certification.
 
 {{<img src="partners/portal_tech_go.png" alt="Partner Portal Technical Certification" style="max-width:257px">}}
 
