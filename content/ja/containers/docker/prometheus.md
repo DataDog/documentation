@@ -29,6 +29,8 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
 
 このページでは、これらのチェックの基本的な使用方法について説明します。これにより、Datadog 内のすべての Prometheus 公開メトリクスをインポートできるようになります。
 
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
+
 ## セットアップ
 
 ### インストール

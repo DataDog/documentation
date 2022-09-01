@@ -65,6 +65,16 @@ PHP APM は以下の SAPI に対応しています。
 | fpm-fcgi       | 完全対応 |
 | cgi-fcgi       | 完全対応 |
 
+## 対応プロセッサアーキテクチャー
+
+PHP APM は以下のアーキテクチャに対応しています。
+
+| プロセッサアーキテクチャー                   | サポートレベル         | パッケージバージョン                        |
+| ------------------------------------------|-----------------------|----------------------------------------|
+| Linux GNU amd64 (`x86-64-linux-gnu`)      | [GA](#support-ga)     | すべて                                    |
+| Linux MUSL amd64 (`x86-64-linux-musl`)    | [GA](#support-ga)     | すべて                                    |
+| Linux GNU arm64 (`aarch64-linux-gnu`)     | [GA](#support-ga)     | > `0.78.0`                             |
+| Linux MUSL arm64 (`aarch64-linux-musl`)   | [GA](#support-ga)     | > `0.78.0`                             |
 
 ### インテグレーション
 

@@ -23443,11 +23443,16 @@
         "default": "deflate",
         "description": "HTTP header used to compress the media-type.",
         "enum": [
-          "deflate"
+          "deflate",
+          "zstd1",
+          "gzip"
         ],
+        "example": "deflate",
         "type": "string",
         "x-enum-varnames": [
-          "DEFLATE"
+          "DEFLATE",
+          "ZSTD1",
+          "GZIP"
         ]
       },
       "MetricCustomAggregation": {
@@ -32797,6 +32802,85 @@
             "example": "00000000-0000-1111-0000-000000000000",
             "type": "string"
           },
+          "relationships": {
+            "description": "Relationships of the role object.",
+            "properties": {
+              "permissions": {
+                "description": "Relationship to multiple permissions objects.",
+                "properties": {
+                  "data": {
+                    "description": "Relationships to permission objects.",
+                    "items": {
+                      "description": "Relationship to permission object.",
+                      "properties": {
+                        "id": {
+                          "description": "ID of the permission.",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "permissions",
+                          "description": "Permissions resource type.",
+                          "enum": [
+                            "permissions"
+                          ],
+                          "example": "permissions",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "PERMISSIONS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "users": {
+                "description": "Relationship to users.",
+                "properties": {
+                  "data": {
+                    "description": "Relationships to user objects.",
+                    "example": [],
+                    "items": {
+                      "description": "Relationship to user object.",
+                      "properties": {
+                        "id": {
+                          "description": "A unique identifier that represents the user.",
+                          "example": "00000000-0000-0000-2345-000000000000",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "users",
+                          "description": "Users resource type.",
+                          "enum": [
+                            "users"
+                          ],
+                          "example": "users",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "USERS"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
           "type": {
             "default": "roles",
             "description": "Roles type.",
@@ -32849,6 +32933,85 @@
                 "description": "The unique identifier of the role.",
                 "example": "00000000-0000-1111-0000-000000000000",
                 "type": "string"
+              },
+              "relationships": {
+                "description": "Relationships of the role object.",
+                "properties": {
+                  "permissions": {
+                    "description": "Relationship to multiple permissions objects.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to permission objects.",
+                        "items": {
+                          "description": "Relationship to permission object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the permission.",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "permissions",
+                              "description": "Permissions resource type.",
+                              "enum": [
+                                "permissions"
+                              ],
+                              "example": "permissions",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "PERMISSIONS"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "users": {
+                    "description": "Relationship to users.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to user objects.",
+                        "example": [],
+                        "items": {
+                          "description": "Relationship to user object.",
+                          "properties": {
+                            "id": {
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-2345-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "users",
+                              "description": "Users resource type.",
+                              "enum": [
+                                "users"
+                              ],
+                              "example": "users",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "USERS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
               },
               "type": {
                 "default": "roles",
@@ -70874,6 +71037,85 @@
                         "example": "00000000-0000-1111-0000-000000000000",
                         "type": "string"
                       },
+                      "relationships": {
+                        "description": "Relationships of the role object.",
+                        "properties": {
+                          "permissions": {
+                            "description": "Relationship to multiple permissions objects.",
+                            "properties": {
+                              "data": {
+                                "description": "Relationships to permission objects.",
+                                "items": {
+                                  "description": "Relationship to permission object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the permission.",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "permissions",
+                                      "description": "Permissions resource type.",
+                                      "enum": [
+                                        "permissions"
+                                      ],
+                                      "example": "permissions",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "PERMISSIONS"
+                                      ]
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "users": {
+                            "description": "Relationship to users.",
+                            "properties": {
+                              "data": {
+                                "description": "Relationships to user objects.",
+                                "example": [],
+                                "items": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-2345-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "required": [
+                              "data"
+                            ],
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
                       "type": {
                         "default": "roles",
                         "description": "Roles type.",
@@ -83875,11 +84117,16 @@
               "default": "deflate",
               "description": "HTTP header used to compress the media-type.",
               "enum": [
-                "deflate"
+                "deflate",
+                "zstd1",
+                "gzip"
               ],
+              "example": "deflate",
               "type": "string",
               "x-enum-varnames": [
-                "DEFLATE"
+                "DEFLATE",
+                "ZSTD1",
+                "GZIP"
               ]
             }
           }

@@ -4,7 +4,7 @@ aliases:
 - /ja/tracing/languages/dotnet
 - /ja/tracing/setup/dotnet
 - /ja/tracing/setup_overview/dotnet
-- /ja/agent/apm/dotnet/
+- /ja/tracing/setup/dotnet-core
 - /ja/tracing/dotnet-framework
 - /ja/tracing/languages/dotnet-framework
 - /ja/tracing/setup/dotnet-framework
@@ -65,14 +65,14 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 </div>
 
 <div class="alert alert-warning">
-<strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば APM）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
+<strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば Datadog の .NET トレーサーでプロファイラーを有効にした状態）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
 </div>
 
 ### インストール
 
 1. [APM に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
 2. [トレーサーをインストールします。](#install-the-tracer)
-3. [サービスのトレーサーを有効にします。](#enable-the-tracer-for-your-service)
+3. {{< tabs >}}
 4. [ライブデータを表示します。](#view-your-live-data)
 
 ### APM に Datadog Agent を構成する
@@ -92,7 +92,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. アプリケーションをインスツルメントした後、トレースクライアントはデフォルトで `localhost:8126` にトレースを送信します。もし、これが正しいホストとポートでない場合には、環境変数 `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` を設定して変更してください。これらの設定の構成については、[構成](#configuration)を参照してください。
+3. {{< site-region region="us3,us5,eu,gov" >}}
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -150,8 +150,9 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
-
 {{% tab "NuGet" %}}
+
+Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
 
 <div class="alert alert-warning">
   <strong>注:</strong> このインストールは、IIS で動作するアプリケーションをインスツルメントするものではありません。IIS で実行されるアプリケーションについては、Windows マシン全体のインストールプロセスに従ってください。
@@ -198,13 +199,12 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
    ```
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. スタンドアロンアプリケーションや Windows サービスの場合は、手動でアプリケーションを再起動します。
 
 {{% /tab %}}
 
-{{% tab "NuGet" %}}
+Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
 
 1. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
@@ -264,7 +264,8 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 [1]: https://www.nuget.org/packages/Datadog.Trace
 {{% /tab %}}
 
-{{% tab "NuGet" %}}
+
+Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
 
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
 
@@ -292,7 +293,6 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 ```text
 COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディタを使用して Windows サービスに環境変数を作成" >}}
@@ -302,7 +302,7 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+[string[]] $v = @("COR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
@@ -316,7 +316,6 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 ```bat
 rem Set environment variables
 SET COR_ENABLE_PROFILING=1
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
 dotnet.exe example.dll

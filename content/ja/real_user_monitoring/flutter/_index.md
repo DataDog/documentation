@@ -32,7 +32,7 @@ RUM は、モバイル Flutter の Android および iOS アプリケーショ�
 
 | iOS SDK | Android SDK | Browser SDK |
 | :-----: | :---------: | :---------: |
-| 1.11.0-rc1 | 1.12.0-alpha2 | v4.11.2 |
+| 1.12.0-beta2 | 1.14.0-beta1 | v4.11.2 |
 
 [//]: # (End SDK Table)
 
@@ -94,6 +94,8 @@ final configuration = DdSdkConfiguration(
   )
 );
 ```
+
+利用可能な構成オプションの詳細については、[DdSdkConfiguration オブジェクト][9]のドキュメントを参照してください。
 
 ### ライブラリの初期化
 
@@ -250,3 +252,4 @@ DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://pub.dev/packages/datadog_tracking_http_client
 [8]: https://github.com/flutter/flutter/wiki/Developing-with-Flutter-on-Apple-Silicon
+[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html

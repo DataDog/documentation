@@ -1,0 +1,14 @@
+{
+  "description": "",
+  "name": "GLOBAL_VARIABLE_PAYLOAD",
+  "tags": [],
+  "value": {
+    "secure": false,
+    "value": ""
+  },
+  "parse_test_public_id": "123-abc-456",
+  "parse_test_options": {
+    "type": "local_variable",
+    "localVariableName": "EXTRACTED_VALUE"
+  }
+}

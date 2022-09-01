@@ -80,7 +80,6 @@ tile:
 ### インストール
 
 Snowflake チェックは [Datadog Agent][2] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
 
 **注**: Python 2 を使用する Datadog Agent v6 では、Snowflake チェックは利用できません。Agent v6 で Snowflake を使用するには、[Datadog Agent v6 で Python 3 を使用する][3]を参照するか、Agent v7 にアップグレードしてください。
 
