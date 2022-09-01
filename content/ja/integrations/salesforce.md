@@ -53,27 +53,27 @@ Datadog にデータを送信するよう Salesforce を構成するには、[Sa
 
 1. (Lightning インターフェースを使用して) Salesforce のアカウントに[ログイン][8]します。
 2. **Event Manager** を検索します。
-3. Event Manager ページで、クロールしたい各イベントについて右矢印をクリックして **Enable Storage** を選択します。
+3. Event Manager ページで、クロールしたい各イベントについて右矢印をクリックして **Enable Storage** を選択します。**ストリーミングを有効にする**必要はありません。
 
 | 名前                                     | サブスクリプションチャンネル             | タイプ             | 説明                                                                                          | データのストリーミング | データの保存   |
 |------------------------------------------|----------------------------------|------------------|------------------------------------------------------------------------------------------------------|----------------|----------------|
-| API Anomaly Event                        | /event/ApiAnomalyEvent           | イベントモニタリング | ユーザーが API コールを行う際の異常を追跡                                                          | {{< X >}}            | {{< X >}}            |
-| API Event                                | /event/ApiEventStream            | イベントモニタリング | 組織内のユーザー API クエリを追跡                                                                   | {{< X >}}            | {{< X >}}            |
-| Bulk API Result Event                    | /event/BulkApiResultEvent        | イベントモニタリング | ユーザーが Bulk API リクエストの結果をいつダウンロードしたかを追跡                                        | {{< X >}}            | {{< X >}}            |
-| Concurrent Long Running Apex Error Event | /event/ConcurLongRunApexErrEvent | イベントモニタリング | Apex の並列長時間実行エラーの発生状況を追跡                                         | {{< X >}}            | 該当なし |
-| Credential Stuffing Event                | /event/CredentialStuffingEvent   | イベントモニタリング | クレデンシャルスタッフィング攻撃が確認された際に、ユーザーが Salesforce へのログインに成功した際の追跡 | {{< X >}}            | {{< X >}}            |
-| Identify Provider Event                  | 該当なし                   | イベントモニタリング | ID プロバイダーの活動を追跡                                                                   | 該当なし | {{< X >}}            |
-| Identify Verification Event              | 該当なし                   | イベントモニタリング | ユーザーが本人確認を行った際の追跡                                                               | 該当なし | {{< X >}}            |
-| Lightning URI Event                      | /event/LightningUriEventStream   | イベントモニタリング | ユーザーが Salesforce Lightning でレコードを作成、アクセス、更新、削除したときの追跡            | {{< X >}}            | {{< X >}}            |
-| List View Event                          | /event/ListViewEventStream       | イベントモニタリング | リストビューでユーザーがデータにアクセスした際の追跡                                                      | {{< X >}}            | {{< X >}}            |
-| Login Event                              | /event/LoginEventStream          | イベントモニタリング | ユーザーが組織にログインしたときの追跡                                                                | {{< X >}}            | {{< X >}}            |
-| LoginAs Event                            | /event/LoginAsEventStream        | イベントモニタリング | 管理者が別のユーザーとして組織にログインしたときの追跡                                              | {{< X >}}            | {{< X >}}            |
-| Logout Event                             | /event/LogoutEventStream         | イベントモニタリング | Salesforce UI でユーザーがログアウトをクリックしたときの追跡                                                | {{< X >}}            | {{< X >}}            |
-| Permission Set Event (ベータ版)              | /event/PermissionSetEvent        | イベントモニタリング | 全データの変更または全データの閲覧の権限がユーザーに割り当てられた際の追跡                        | {{< X >}}            | {{< X >}}            |
-| Report Anomaly Event                     | /event/ReportAnomalyEvent        | イベントモニタリング | ユーザーがレポートを実行したり、エクスポートしたりする際の異常の追跡                                                   | {{< X >}}            | {{< X >}}            |
-| Report Event                             | /event/ReportEventStream         | イベントモニタリング | ユーザーがレポートでデータにアクセス、またはデータをエクスポートした際の追跡                                              | {{< X >}}            | {{< X >}}            |
-| Session Hijacking Event                  | /event/SessionHijackingEvent     | イベントモニタリング | 盗難セッションを使用して、不正ユーザーが Salesforce ユーザーのセッションの所有権を獲得した際の追跡 | {{< X >}}            | {{< X >}}            |
-| URI Event                                | /event/UriEventStream            | イベントモニタリング | ユーザーが Salesforce Classic でレコードを作成、アクセス、更新、削除したときの追跡              | {{< X >}}            | {{< X >}}            |
+| API Anomaly Event                        | /event/ApiAnomalyEvent           | イベントモニタリング | ユーザーが API コールを行う際の異常を追跡                                                          |                | {{< X >}}            |
+| API Event                                | /event/ApiEventStream            | イベントモニタリング | 組織内のユーザー API クエリを追跡                                                                   |                | {{< X >}}            |
+| Bulk API Result Event                    | /event/BulkApiResultEvent        | イベントモニタリング | ユーザーが Bulk API リクエストの結果をいつダウンロードしたかを追跡                                        |                | {{< X >}}            |
+| Concurrent Long Running Apex Error Event | /event/ConcurLongRunApexErrEvent | イベントモニタリング | Apex の並列長時間実行エラーの発生状況を追跡                                         |                |  {{< X >}} |
+| Credential Stuffing Event                | /event/CredentialStuffingEvent   | イベントモニタリング | クレデンシャルスタッフィング攻撃が確認された際に、ユーザーが Salesforce へのログインに成功した際の追跡 |                | {{< X >}}            |
+| Identify Provider Event                  | /event/IdentityProviderEvent     | イベントモニタリング | ID プロバイダーの活動を追跡                                                                   |                | {{< X >}}            |
+| Identify Verification Event              | /event/IdentityVerificationEvent | イベントモニタリング | ユーザーが本人確認を行った際の追跡                                                               |                | {{< X >}}            |
+| Lightning URI Event                      | /event/LightningUriEventStream   | イベントモニタリング | ユーザーが Salesforce Lightning でレコードを作成、アクセス、更新、削除したときの追跡            |                | {{< X >}}            |
+| List View Event                          | /event/ListViewEventStream       | イベントモニタリング | リストビューでユーザーがデータにアクセスした際の追跡                                                      |                | {{< X >}}            |
+| Login Event                              | /event/LoginEventStream          | イベントモニタリング | ユーザーが組織にログインしたときの追跡                                                                |                | {{< X >}}            |
+| LoginAs Event                            | /event/LoginAsEventStream        | イベントモニタリング | 管理者が別のユーザーとして組織にログインしたときの追跡                                              |                | {{< X >}}            |
+| Logout Event                             | /event/LogoutEventStream         | イベントモニタリング | Salesforce UI でユーザーがログアウトをクリックしたときの追跡                                                |                | {{< X >}}            |
+| Permission Set Event (ベータ版)              | /event/PermissionSetEvent        | イベントモニタリング | 全データの変更または全データの閲覧の権限がユーザーに割り当てられた際の追跡                        |                | {{< X >}}            |
+| Report Anomaly Event                     | /event/ReportAnomalyEvent        | イベントモニタリング | ユーザーがレポートを実行したり、エクスポートしたりする際の異常の追跡                                                   |                | {{< X >}}            |
+| Report Event                             | /event/ReportEventStream         | イベントモニタリング | ユーザーがレポートでデータにアクセス、またはデータをエクスポートした際の追跡                                              |                | {{< X >}}            |
+| Session Hijacking Event                  | /event/SessionHijackingEvent     | イベントモニタリング | 盗難セッションを使用して、不正ユーザーが Salesforce ユーザーのセッションの所有権を獲得した際の追跡 |                | {{< X >}}            |
+| URI Event                                | /event/UriEventStream            | イベントモニタリング | ユーザーが Salesforce Classic でレコードを作成、アクセス、更新、削除したときの追跡              |                | {{< X >}}            |
 
 #### 組織を接続する
 

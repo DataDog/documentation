@@ -1,39 +1,58 @@
 ---
+app_id: nvml
+app_uuid: 2c7a8b1e-9343-4b4a-bada-5091e37c4806
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: nvml.device_count
+      metadata_path: metadata.csv
+      prefix: nvml.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: nvml
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- OS & システム
-creates_events: false
-ddtype: check
+- os system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md
-display_name: nvml
+display_on_public_website: true
 draft: false
 git_integration_title: nvml
-guid: 5e997a76-f6a3-48e8-875f-6fbb2559f9e9
 integration_id: nvml
 integration_title: Nvidia NVML
-integration_version: 1.0.1
+integration_version: 1.0.5
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: nvml.
-metric_to_check: nvml.device_count
+manifest_version: 2.0.0
 name: nvml
+oauth: {}
 public_title: Nvidia NVML
 short_description: k8s で Nvidia GPU メトリクスをサポート
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::OS System
+  configuration: README.md#Setup
+  description: k8s で Nvidia GPU メトリクスをサポート
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nvidia NVML
 ---
 
 
@@ -111,7 +130,7 @@ NVML には、イベントは含まれません。
 [7]: https://github.com/DataDog/integrations-extras/blob/master/nvml/datadog_checks/nvml/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/nvml/metadata.csv
+[10]: https://github.com/DataDog/integrations-extras/blob/master/nvml/metadata.csv
 [11]: https://docs.nvidia.com/deploy/nvml-api/group__nvmlDeviceQueries.html
 [12]: https://github.com/DataDog/integrations-extras/blob/master/nvml/assets/service_checks.json
 [13]: https://docs.datadoghq.com/ja/help

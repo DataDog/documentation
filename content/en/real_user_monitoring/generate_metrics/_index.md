@@ -1,5 +1,5 @@
 ---
-title: Generate Metrics From RUM Events
+title: Generate Custom Metrics From RUM Events
 kind: documentation
 description: "Create custom metrics from your RUM events."
 further_reading:
@@ -18,76 +18,87 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Generating metrics from RUM events is in beta. Access to this feature is provisioned to customers using Real User Monitoring. Contact <a href="/help">Datadog Support</a> to provide feedback.
+Generating custom metrics from RUM events is in beta. Access to this feature is provisioned to customers using Real User Monitoring. Contact <a href="/help">Datadog Support</a> to provide feedback.
 </div>
 
 ## Overview
 
-Real User Monitoring (RUM) allows you to capture events that occur in your browser and mobile applications using the RUM SDKs and collect data from events at a [sample rate][1]. Datadog retains this event data in the [RUM Explorer][2], where you can create search queries and visualizations.
+Real User Monitoring (RUM) allows you to capture events that occur in your browser and mobile applications using the Datadog RUM SDKs and collect data from events at a [sample rate][1]. Datadog retains this event data in the [RUM Explorer][2], where you can create search queries and visualizations.
 
-RUM-based metrics are a cost-efficient option to summarize the data from your set of RUM events. With RUM-based metrics, you can visualize trends and anomalies across your RUM data at a granular level for up to 15 months.
+RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months.
 
-You can also generate a count metric of RUM events that match a query or a [distribution metric][3] of a numeric value contained in RUM events, such as the request duration.
+## Create a RUM-based custom metric
 
-## Create and manage RUM-based metrics
+To create a custom metric from RUM event data, navigate to [**UX Monitoring** > **Generate Metrics**][3] and click **+ New Metric**.
 
-### Add a RUM-based metric
+{{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
 
-To create a metric from RUM event data, navigate to [**UX Monitoring** > **Generate Metrics**][4] and click **+ New Metric**.
+To create a custom metric from a search query in the [RUM Explorer][4], click the **Export** button and select **Generate new metric** from the dropdown menu.
 
-{{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="Click + New Metric to create a RUM-based metric" width="80%" >}}
+{{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generate a RUM-based custom metric" width="80%" >}}
 
-To create a metric from a search query in the [RUM Explorer][5], click the **Export** button and select **Generate new metric** from the dropdown menu.
+1. Give your [custom metric][5] a name that does not start with `datadog.estimated_usage`, such as `rum.sessions.count_by_geography`. For more information, see the [naming convention][6].
+2. Select an event type you want to create a custom metric for, such as `Sessions`. Your options include **Sessions**, **Views**, **Actions**, **Errors**, **Resources**, and **Long Tasks**. For more information, see [Search RUM Events][7].
+3. Create a search query that filters your RUM events using the RUM Explorer's [search syntax][8] such as `@session.type:user`. 
+4. Choose a field to track from the dropdown menu next to **Count**. 
 
-{{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generate a RUM-based metric" width="80%" >}}
-
-1. Select an event type you want to create a metric for, such as `Actions`. Your options include **Actions**, **Errors**, **Resources**, and **Long Tasks**. For more information, see [Search RUM Events][6].
-2. Create a search query that filters your RUM events using the RUM Explorer's [search syntax][7]. 
-3. Choose a field to track from the dropdown menu next to **Count**. 
-
-    - Select `*` to generate a count of all RUM events that match your search query. 
-    - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create corresponding, aggregated metrics such as `count`, `min`, `max`, `sum`, and `avg`. 
+   - Select `*` to generate a count of all RUM events that match your search query. 
+   - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create a corresponding `count` or `distribution` metric. 
 
    If the RUM attribute facet is a measure, the metric value is the RUM attribute value.
 
-4. Select a path to group by from the dropdown menu next to **group by**. The metric tag name is the original attribute or tag name without the `@`. By default, metrics generated from RUM events do not contain tags unless they are explicitly added. You can use an attribute or tag dimension that exists in your RUM events such as `@error.source` or `env` to create metric tags. 
+5. Select a path to group by from the dropdown menu next to **group by**. The metric tag name is the original attribute or tag name without the `@`. By default, custom metrics generated from RUM events do not contain tags unless they are explicitly added. You can use an attribute or tag dimension that exists in your RUM events such as `@error.source` or `env` to create metric tags. 
    
-   <div class="alert alert-warning">RUM-based metrics are considered to be <a href="/metrics/custom_metrics/">custom metrics</a>. Datadog recommends avoiding grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs. For more information, see <a href="/data_security/logs/">Log Management Data Security</a>.
+   <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a>. Datadog recommends avoiding grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs. For more information, see <a href="/data_security/logs/">Log Management Data Security</a>.
    </div>
 
-5. Add percentile aggregations for distribution metrics. You can generate P50, P75, P90, P95, and P99 percentiles. 
+6. For custom metrics created on sessions and views, select **The active session/view starts matching the query** or **The session/view becomes inactive or is completed** to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).
 
-   <div class="alert alert-warning">Percentile metrics are also considered <a href="/metrics/custom_metrics/">custom metrics</a>.
+7. Add percentile aggregations for distribution metrics. You can opt-in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99). 
 
-6. Give your [metric][8] a name.
-7. Click **Create Metric**.
+   <div class="alert alert-warning">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.
 
-Your RUM-based metric appears in the list below **Custom RUM Metrics**, and there may be a short delay for your metric to become available in [dashboards][9] and [monitors][10]. 
+8. Click **Create Metric**.
 
-Data points are not created for metrics with historical data. Data points for your RUM-based metric generate on a ten second interval, and metrics data is retained for 15 months. 
+Your RUM-based custom metric appears in the list below **Custom RUM Metrics**, and there may be a short delay for your metric to become available in [dashboards][9] and [monitors][10]. 
 
-### Update a RUM-based metric
+Data points are not created for metrics with historical data. Data points for your RUM-based custom metric generate on a ten second interval. Metrics data is retained for 15 months. 
+
+### Add a RUM-based metric on sessions and views
+
+Sessions and views are considered active when there is ongoing application or user activity in a RUM application. For example, as a user opens new pages, these page views are collected in the user session. As a user interacts with buttons on a page, these actions are collected in the page views.
+
+   Let's assume you have a RUM-based custom metric that counts the number of user sessions containing more than five errors, and a session ID `123` that reaches five errors at 11 AM and closes at 12 PM.
+
+   - By accounting for the session or view as soon as it matches the query, you increment the count metric's value by one at the 11 AM timestamp.
+   - By accounting for the session or view that is inactive, you increment the count metric's value by one at the 12 PM timestamp.
+
+## Manage RUM-based custom metrics
+
+You can generate a count metric of RUM events that match a query or a [distribution metric][11] of a numeric value contained in RUM events, such as the request duration.
+
+### Update a RUM-based custom metric
 
 To update a metric, hover over a metric and click the **Edit** icon to the right hand corner.
 
 - Filter query: Change the set of matching RUM events that are aggregated into metrics.
-- Aggregation groups: Update tags or manage the cardinality of generated metrics.
+- Aggregation groups: Update tags to manage the cardinality of generated metrics.
 - Percentile selection: Click the **Calculate percentiles** toggle to remove or generate percentile metrics.
 
 Because you cannot rename an existing metric, Datadog recommends creating another metric.
 
-### Delete a RUM-based metric
+### Delete a RUM-based custom metric
 
-In order to stop the computing of data points from your metric (and billing), hover over a metric and click the **Delete** icon to the right hand corner. 
+In order to stop the computing of data points from your custom metric and billing, hover over a metric and click the **Delete** icon to the right hand corner. 
 
 ## Usage
 
-You can use RUM-based metrics to do the following:
+You can use RUM-based custom metrics for the following actions:
 
-- Visualize trends over a set period of time in a [dashboard][11].
-- Trigger an alert when a metric behaves differently than it has in the past in an [anomaly monitor][12].
-- Trigger an alert when a metric is predicted to cross a threshold in the future in a [forecast monitor][13].
-- Create [metric-based SLOs][14] to track user-centric performance objectives for your teams and organizations. 
+- Visualize trends over a set period of time in a [dashboard][12]
+- Trigger an alert when a metric behaves differently than it has in the past in an [anomaly monitor][13]
+- Trigger an alert when a metric is predicted to cross a threshold in the future in a [forecast monitor][14]
+- Create [metric-based SLOs][15] to track user-centric performance objectives for your teams and organizations 
 
 ## Further Reading
 
@@ -95,15 +106,16 @@ You can use RUM-based metrics to do the following:
 
 [1]: /real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration
 [2]: https://app.datadoghq.com/rum/explorer
-[3]: /metrics/distributions/
-[4]: https://app.datadoghq.com/rum/generate-metrics
-[5]: /real_user_monitoring/explorer/
-[6]: /real_user_monitoring/explorer/search/#event-types
-[7]: /real_user_monitoring/explorer/search_syntax/
-[8]: /metrics/
+[3]: https://app.datadoghq.com/rum/generate-metrics
+[4]: /real_user_monitoring/explorer/
+[5]: /metrics/custom_metrics/
+[6]: /metrics/custom_metrics/#naming-custom-metrics
+[7]: /real_user_monitoring/explorer/search/#event-types
+[8]: /real_user_monitoring/explorer/search_syntax/
 [9]: /dashboards/
 [10]: /monitors/
-[11]: /dashboards/querying/#configuring-a-graph
-[12]: /monitors/create/types/anomaly/
-[13]: /monitors/create/types/forecasts/
-[14]: /monitors/service_level_objectives/metric/
+[11]: /metrics/distributions/
+[12]: /dashboards/querying/#configuring-a-graph
+[13]: /monitors/create/types/anomaly/
+[14]: /monitors/create/types/forecasts/
+[15]: /monitors/service_level_objectives/metric/

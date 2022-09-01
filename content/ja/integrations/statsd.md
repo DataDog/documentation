@@ -1,41 +1,64 @@
 ---
+app_id: statsd
+app_uuid: 847f92f2-77e2-4429-844f-50f4d9c8097f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: statsd.counters.count
+      metadata_path: metadata.csv
+      prefix: statsd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: StatsD
   logs:
     source: statsd
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - monitoring
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
-display_name: StatsD
+display_on_public_website: true
 draft: false
 git_integration_title: statsd
-guid: 4830acf3-626b-42ff-a1db-3f37babd0ae6
 integration_id: statsd
 integration_title: StatsD
 integration_version: 1.10.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: statsd.
-metric_to_check: statsd.counters.count
+manifest_version: 2.0.0
 name: statsd
-public_title: StatsD インテグレーション
+oauth: {}
+public_title: StatsD
 short_description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::モニタリング
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: StatsD
 ---
 
 

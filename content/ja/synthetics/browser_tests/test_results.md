@@ -1,15 +1,21 @@
 ---
-title: ブラウザテストの結果
-kind: ドキュメント
-description: Synthetic ブラウザテストの結果
 aliases:
-  - /ja/synthetics/apm/browser_tests
+- /ja/synthetics/apm/browser_tests
+description: Synthetic ブラウザテストの結果
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals'
-    tag: ブログ
-    text: Synthetic モニタリングでウェブに関する主な指標を監視
+- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
+  tag: ブログ
+  text: Synthetic モニタリングでウェブに関する主な指標を監視
+- link: /synthetics/guide/explore-rum-through-synthetics/
+  tag: ドキュメント
+  text: Synthetics で RUM とセッションリプレイを確認する
+kind: ドキュメント
+title: ブラウザテストの結果
 ---
-テスト結果は、Datadog Synthetic テストの実行後に表示されます。ブラウザテストの結果は、ある特定の場所と時点で 1 つのブラウザおよびデバイスタイプで実行されたテストデータが反映されます。
+
+## 概要
+
+テスト結果は、Synthetic テストの実行後に表示されます。ブラウザテストの結果は、ある時点に特定の場所、ブラウザ、デバイスタイプで実行されたテストデータが反映されます。
 
 最新の失敗したテストを確認し、**Sample Results** セクションで最近成功したテストと比較します。**Test Results** セクションにスクロールダウンしてテスト結果をクリックすると、結果を詳細比較することができます。
 
@@ -56,17 +62,15 @@ Run type
 
 #### ユーザーエクスペリエンス
 
-[Google のコアウェブバイタル][2]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。
+[Google のコアウェブバイタル][1]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。
 
-Synthetic モニタリングには、[Largest Contentful Paint][3] と [Cumulative Layout Shift][4] の 2 つの利用可能なラボメトリクスが含まれています。
+Synthetic モニタリングには、[Largest Contentful Paint][2] と [Cumulative Layout Shift][3] の 2 つの利用可能なラボメトリクスが含まれています。
 
-[First Input Delay][5] は、実際のユーザーまたはフィールドデータが利用可能な実際のユーザーモニタリングを使用する場合に利用できます。
+{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="コアウェブバイタルの概要の視覚化" style="width=80%" >}}
 
-[リアルユーザーモニタリングとコアウェブバイタル][6]の詳細をご覧ください。
+[初回入力遅延][4]は、[リアルユーザーモニタリング][5]を使用して、リアルユーザーとフィールドのデータを収集している場合に利用できます。詳しくは、[ページパフォーマンスの監視][6]をご覧ください。
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="コアウェブバイタルの概要の視覚化"  >}}
-
-### Errors
+### エラー
 
 **Error** パネルには、エラー、種類 (`js`/`network`)、状況（ネットワークステータスコード）が表示されます。
 
@@ -78,13 +82,26 @@ Synthetic モニタリングには、[Largest Contentful Paint][3] と [Cumulati
 
 リソースは、リクエストとアセットの組み合わせです。
 
-**Resources** パネルには次の値が表示されます。
+{{< img src="synthetics/browser_tests/resources_panel.png" alt="リソースパネル"  >}}
+
+リソースタブの上に、以下のように表示されます。
+- 総ステップ持続時間
+- リソースを提供している CDN プロバイダーと、それぞれのキャッシュステータスの概要
+
+**Resources** タブには次が表示されます。
 
 Resource
 : リソースの URL。
 
+CDN
+: リソースを提供した CDN プロバイダー。カーソルを合わせると、生のキャッシュの状態が表示されます。  
+Datadog は、Akamai、Cloudflare、Fastly、Amazon Cloudfront、Netlify、Google Cloud CDN、Imperva、および Sucuri を検出します。
+
 Type
 : リソースの種類 (HTML、CSS、画像、Javascript、XHR など)。
+
+Status
+: HTTP 応答ステータスコード。
 
 Duration
 : リクエストの実行に必要な時間。
@@ -95,7 +112,7 @@ Duration
 Size
 : リクエスト応答のサイズ。
 
-表示できるリソースの数は最大で 50 です。開始時間順に、最初の 50 件のリソースが Datadog に表示されます。
+表示できるリソースの数は最大で 100 です。開始時間順に、最初の 100 件のリソースが Datadog に表示されます。
 
 #### フィルタリングおよび検索
 
@@ -127,21 +144,22 @@ Size
 : 指定されたオプションがドロップダウンメニューにない。
 
 `Forbidden URL`
-: テストでサポートされていないプロトコルが発生した可能性があります。詳細は、[Datadog のサポートチーム][1]までお問い合わせください。
+: テストでサポートされていないプロトコルが発生した可能性があります。詳細は、[サポート][10]までお問い合わせください。
 
 `General test failure`
-: 一般的なエラーメッセージ。詳細は、[サポートチームまでお問い合わせください][1]。
+: 一般的なエラーメッセージ。詳細は、[サポートチームまでお問い合わせください][10]。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
-[2]: https://web.dev/vitals/
-[3]: https://web.dev/lcp/
-[4]: https://web.dev/cls/
-[5]: https://web.dev/fid/
+[1]: https://web.dev/vitals/
+[2]: https://web.dev/lcp/
+[3]: https://web.dev/cls/
+[4]: https://web.dev/fid/
+[5]: /ja/real_user_monitoring/
 [6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[7]: /ja/tracing/visualization/trace/
+[7]: /ja/tracing/trace_explorer/trace_view/
 [8]: /ja/synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
-[9]: /ja/synthetics/guide/browser-test-self-maintenance/
+[9]: /ja/synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
+[10]: /ja/help/

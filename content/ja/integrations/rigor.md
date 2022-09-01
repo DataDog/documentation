@@ -1,36 +1,57 @@
 ---
-"assets":
-  "dashboards": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "service_checks": assets/service_checks.json
-"categories":
+app_id: rigor
+app_uuid: f9ab0c97-235c-4f88-8b92-89eb563e18ba
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: rigor.http.dns_time
+      metadata_path: metadata.csv
+      prefix: rigor.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Rigor
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@rigor.com
+  support_email: support@rigor.com
+categories:
 - モニター
-"creates_events": true
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
-"display_name": "Rigor"
-"draft": false
-"git_integration_title": "rigor"
-"guid": "f51704ed-a327-4132-9f04-a25a47791693"
-"integration_id": "rigor"
-"integration_title": "Rigor"
-"integration_version": ""
-"is_public": true
-"kind": "インテグレーション"
-"maintainer": "support@rigor.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "rigor."
-"metric_to_check": "rigor.http.dns_time"
-"name": "rigor"
-"public_title": "Datadog-Rigor インテグレーション"
-"short_description": "Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供"
-"support": "contrib"
-"supported_os":
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: rigor
+integration_id: rigor
+integration_title: Rigor
+integration_version: ''
+is_public: true
+kind: インテグレーション
+manifest_version: 2.0.0
+name: rigor
+oauth: {}
+public_title: Rigor
+short_description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
+supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rigor
 ---
 
 ## 概要
@@ -52,20 +73,19 @@ Rigor と Datadog とのインテグレーションには、メトリクスイ�
 
 ![admin-menu][2]
 
-"New" ボタンをクリックして、新しいインテグレーションを追加します。これで、インテグレーションを構成できます。
+"New" ボタンをクリックして新しいインテグレーションを追加すると、インテグレーションのコンフィギュレーションができるようになります。
 
 ![push-configuration][3]
 
 このインテグレーションに一意の名前と Datadog の API キーを追加します。次に、送信するタグとメトリクスを選択します。以下の点に注意してください。
 
-- デフォルトのタグとして、正規化されたチェック名を含めます。
-- 複数手順のチェック (Real Browser チェックと API チェック) には、
-  メトリクスの送信元になるリクエストの場所を含めます。
+- デフォルトのタグとして、正規化されたチェック名が含まれています。
+- マルチステップチェック (Real Browser および API チェック) には、メトリクスの送信元になるリクエストの場所が含まれます。
 - アップタイムチェックには、HTTP、ポート、および API のチェックが含まれます。
 - ポートチェックは、「応答時間」メトリクスのみを報告します。
 - すべてのブラウザがすべてのメトリクスをサポートするわけではありません。
 
-Real Browser チェックで [User Timings API][4] からタイミングを報告する場合は、必ず "Send All User Timings?" を選択します。マークは `rigor.real_browser.marks` ネームスペース配下に、メジャーは `rigor.real_browser.measures` ネームスペース配下に報告されます。このオプションを選択しており、特にテスト中のサイトでマークとメジャーが動的に生成される場合は、新しい系列が Datadog に多数送信されることがあることにご留意ください。
+Real Browser チェックで [User Timings API][4] からタイミングを報告する場合は、必ず "Send All User Timings?" を選択します。マークは `rigor.real_browser.marks` ネームスペース配下に、メジャーは `rigor.real_browser.measures` ネームスペース配下に報告されます。**注**: このオプションを選択しており、特にテスト中のサイトでマークとメジャーが動的に生成される場合は、新しい系列が Datadog に多数送信されることがあります。
 
 インテグレーションを構成したら、Real Browser、HTTP、ポート、または API チェックに追加できます。チェックを編集し、"Notifications" タブに移動します。ここで、今作成したインテグレーションを追加できます。
 
@@ -97,7 +117,7 @@ Real Browser チェックで [User Timings API][4] からタイミングを報�
 
 ### イベント
 
-Datadog イベントを介してアラートするようにチェックが構成されている場合は、次の 2 種類のイベントが Datadog にプッシュされます。
+Datadog イベントを介してアラートを発生するようチェックが構成されている場合は、次の 2 種類のイベントタイプが Datadog にプッシュされます。
 
 - **Failed** - しきい値を超えるほどチェックが失敗すると、アラートが送信された場合
 - **Back online** - アラート中にチェックが正しく実行された場合
@@ -106,15 +126,12 @@ Datadog イベントを介してアラートするようにチェックが構成
 
 ### サービスのチェック
 
-このインテグレーションには、サービスのチェック機能は含まれません。
+Rigor インテグレーションには、サービスのチェック機能は含まれません。
 
-### トラブルシューティング
+## トラブルシューティング
 
-ご不明な点は、[Rigor のサポートチーム][12]までお問合せください。
+ご不明な点は、[Rigor サポート][12]までお問合せください。
 
-### その他の参考資料
-
-Rigor の詳細および Datadog を活用して Web サイトを高速化する方法については、[rigor][13] を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_timeboard_with_metrics.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_admin_menu.png
@@ -125,8 +142,6 @@ Rigor の詳細および Datadog を活用して Web サイトを高速化する
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_webhooks_chooser.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_webhooks_configuration.png
 [9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_add_webhook_to_check.png
-[10]: https://github.com/DataDog/integrations-core/blob/master/rigor/metadata.csv
+[10]: https://github.com/DataDog/integrations-extras/blob/master/rigor/metadata.csv
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_events_example.png
 [12]: mailto:support@rigor.com
-[13]: https://rigor.com
-

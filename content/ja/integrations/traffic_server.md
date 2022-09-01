@@ -1,12 +1,28 @@
 ---
+app_id: traffic-server
+app_uuid: aaf78f60-10de-453c-b2d8-dc44818720c9
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Traffic Server - Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: traffic_server.node.restarts.proxy.restart_count
+      metadata_path: metadata.csv
+      prefix: traffic_server.
+    process_signatures:
+    - traffic_cop
+    - traffic_manager
+    - traffic_server
+    - trafficserver start
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Traffic Server
   logs:
     source: traffic_server
-  metrics_metadata: metadata.csv
   monitors:
     '[Traffic Server] 4xx Errors higher than usual': assets/monitors/4xx.json
     '[Traffic Server] 5xx Errors higher than usual': assets/monitors/5xx.json
@@ -14,40 +30,49 @@ assets:
     traffic_server_error_logs: assets/saved_views/traffic_server_error_logs.json
     traffic_server_overview: assets/saved_views/traffic_server_overview.json
     traffic_server_patterns: assets/saved_views/traffic_server_error_patterns.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - web
 - キャッシュ
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/traffic_server/README.md
-display_name: Traffic Server
+display_on_public_website: true
 draft: false
 git_integration_title: traffic_server
-guid: c3fa3678-1166-4973-b340-b9120561e67b
 integration_id: traffic-server
 integration_title: Traffic Server
 integration_version: 1.0.2
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: traffic_server.
-metric_to_check: traffic_server.node.restarts.proxy.restart_count
+manifest_version: 2.0.0
 name: traffic_server
-process_signatures:
-- traffic_cop
-- traffic_manager
-- traffic_server
-- trafficserver start
+oauth: {}
 public_title: Traffic Server
 short_description: 接続、キャッシュ、DNS のメトリクスの監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Caching
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: 接続、キャッシュ、DNS のメトリクスの監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Traffic Server
 ---
 
 

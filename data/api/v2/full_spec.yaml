@@ -1291,10 +1291,12 @@ components:
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
+      - identity
       - gzip
       - deflate
       type: string
       x-enum-varnames:
+      - IDENTITY
       - GZIP
       - DEFLATE
     CostByOrg:
@@ -1531,6 +1533,340 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    Event:
+      description: The metadata associated with a request.
+      properties:
+        id:
+          description: Event ID.
+          example: '6509751066204996294'
+          type: string
+        name:
+          description: The event name.
+          type: string
+        source_id:
+          description: Event source ID.
+          example: 36
+          type: integer
+        type:
+          description: Event type.
+          example: error_tracking_alert
+          type: string
+      type: object
+    EventAttributes:
+      description: Object description of attributes from your event.
+      properties:
+        aggregation_key:
+          description: Aggregation key of the event.
+          type: string
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (no
+            quotation marks).
+
+            Limited to events no older than 18 hours.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        duration:
+          description: The duration between the triggering of the event and its recovery
+            in nanoseconds.
+          format: int64
+          type: integer
+        event_object:
+          description: The event title.
+          example: Did you hear the news today?
+          type: string
+        evt:
+          $ref: '#/components/schemas/Event'
+        hostname:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        monitor:
+          $ref: '#/components/schemas/MonitorType'
+        monitor_groups:
+          description: List of groups referred to in the event.
+          items:
+            description: Group referred to in the event.
+            type: string
+          nullable: true
+          type: array
+        monitor_id:
+          description: ID of the monitor that triggered the event. When an event isn't
+            related to a monitor, this field is empty.
+          nullable: true
+          type: integer
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        related_event_id:
+          description: Related event ID.
+          type: integer
+        service:
+          description: Service that triggered the event.
+          example: datadog-api
+          type: string
+        source_type_name:
+          description: 'The type of event being posted.
+
+            For example, `nagios`, `hudson`, `jenkins`, `my_apps`, `chef`, `puppet`,
+            `git` or `bitbucket`.
+
+            The list of standard source attribute values is [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        sourcecategory:
+          description: Identifier for the source of the event, such as a monitor alert,
+            an externally-submitted event, or an integration.
+          type: string
+        status:
+          $ref: '#/components/schemas/EventStatusType'
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        timestamp:
+          description: POSIX timestamp of your event in milliseconds.
+          example: 1652274265000
+          format: int64
+          type: integer
+        title:
+          description: The event title.
+          example: Oh boy!
+          type: string
+      type: object
+    EventPriority:
+      description: The priority of the event's monitor. For example, `normal` or `low`.
+      enum:
+      - normal
+      - low
+      example: normal
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - NORMAL
+      - LOW
+    EventResponse:
+      description: The object description of an event after being processed and stored
+        by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventResponseAttributes'
+        id:
+          description: the unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/EventType'
+      type: object
+    EventResponseAttributes:
+      description: The object description of an event response attribute.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventAttributes'
+        tags:
+          description: An array of tags associated with the event.
+          example:
+          - team:A
+          items:
+            description: The tag associated with the event.
+            type: string
+          type: array
+        timestamp:
+          description: The timestamp of the event.
+          example: '2019-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+      type: object
+    EventStatusType:
+      description: 'If an alert event is enabled, its status is one of the following:
+
+        `failure`, `error`, `warning`, `info`, `success`, `user_update`,
+
+        `recommendation`, or `snapshot`.'
+      enum:
+      - failure
+      - error
+      - warning
+      - info
+      - success
+      - user_update
+      - recommendation
+      - snapshot
+      example: info
+      type: string
+      x-enum-varnames:
+      - FAILURE
+      - ERROR
+      - WARNING
+      - INFO
+      - SUCCESS
+      - USER_UPDATE
+      - RECOMMENDATION
+      - SNAPSHOT
+    EventType:
+      default: event
+      description: Type of the event.
+      enum:
+      - event
+      example: event
+      type: string
+      x-enum-varnames:
+      - EVENT
+    EventsListRequest:
+      description: The object sent with the request to retrieve a list of events from
+        your organization.
+      properties:
+        filter:
+          $ref: '#/components/schemas/EventsQueryFilter'
+        options:
+          $ref: '#/components/schemas/EventsQueryOptions'
+        page:
+          $ref: '#/components/schemas/EventsRequestPage'
+        sort:
+          $ref: '#/components/schemas/EventsSort'
+      type: object
+    EventsListResponse:
+      description: The response object with all events matching the request and pagination
+        information.
+      properties:
+        data:
+          description: An array of events matching the request.
+          items:
+            $ref: '#/components/schemas/EventResponse'
+          type: array
+        links:
+          $ref: '#/components/schemas/EventsListResponseLinks'
+        meta:
+          $ref: '#/components/schemas/EventsResponseMetadata'
+      type: object
+    EventsListResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/events?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    EventsQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested events. Supports date math
+            and regular timestamps in milliseconds.
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query following the event search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested events. Supports date math
+            and regular timestamps in milliseconds.
+          example: now
+          type: string
+      type: object
+    EventsQueryOptions:
+      description: 'The global query options that are used. Either provide a timezone
+        or a time offset but not both,
+
+        otherwise the query fails.'
+      properties:
+        timeOffset:
+          description: The time offset to apply to the query in seconds.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: 'The timezone can be specified as an offset, for example: `UTC+03:00`.'
+          example: GMT
+          type: string
+      type: object
+    EventsRequestPage:
+      description: Pagination settings.
+      properties:
+        cursor:
+          description: The returned paging point to use to get the next results.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: The maximum number of logs in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    EventsResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/EventsResponseMetadataPage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results might be returned if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/EventsWarning'
+          type: array
+      type: object
+    EventsResponseMetadataPage:
+      description: Pagination attributes.
+      properties:
+        after:
+          description: 'The cursor to use to get the next results, if any. To make
+            the next request, use the same
+
+            parameters with the addition of the `page[cursor]`.'
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    EventsSort:
+      description: The sort parameters when querying events.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    EventsWarning:
+      description: A warning message indicating something is wrong with the query.
+      properties:
+        code:
+          description: A unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: A detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: A short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid. Results hold data
+            from the other indexes.
+          type: string
+      type: object
     FullAPIKey:
       description: Datadog API key.
       properties:
@@ -4017,9 +4353,14 @@ components:
       description: HTTP header used to compress the media-type.
       enum:
       - deflate
+      - zstd1
+      - gzip
+      example: deflate
       type: string
       x-enum-varnames:
       - DEFLATE
+      - ZSTD1
+      - GZIP
     MetricCustomAggregation:
       description: A time and space aggregation combination for use in query.
       example:
@@ -4614,6 +4955,54 @@ components:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
           type: array
       readOnly: true
+      type: object
+    MonitorType:
+      description: Attributes from the monitor that triggered the event.
+      nullable: true
+      properties:
+        created_at:
+          description: The POSIX timestamp of the monitor's creation in nanoseconds.
+          example: 1646318692000
+          type: integer
+        group_status:
+          description: Monitor group status used when there is no `result_groups`.
+          type: integer
+        groups:
+          description: Groups to which the monitor belongs.
+          items:
+            description: A group.
+            type: string
+          type: array
+        id:
+          description: The monitor ID.
+          type: integer
+        message:
+          description: The monitor message.
+          type: string
+        modified:
+          description: The monitor's last-modified timestamp.
+          type: integer
+        name:
+          description: The monitor name.
+          type: string
+        query:
+          description: The query that triggers the alert.
+          type: string
+        tags:
+          description: A list of tags attached to the monitor.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        templated_name:
+          description: The templated name of the monitor before resolving any template
+            variables.
+          type: string
+        type:
+          description: The monitor type.
+          type: string
       type: object
     NullableRelationshipToUser:
       description: Relationship to user.
@@ -5250,6 +5639,187 @@ components:
           $ref: '#/components/schemas/RUMResponseLinks'
         meta:
           $ref: '#/components/schemas/RUMResponseMetadata'
+      type: object
+    RUMApplication:
+      description: RUM application.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationAttributes'
+        id:
+          description: RUM application ID.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        type:
+          $ref: '#/components/schemas/RUMApplicationType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    RUMApplicationAttributes:
+      description: RUM application attributes.
+      properties:
+        application_id:
+          description: ID of the RUM application.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        created_at:
+          description: Timestamp in ms of the creation date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        created_by_handle:
+          description: Handle of the creator user.
+          example: john.doe
+          type: string
+        hash:
+          description: Client token of the RUM application.
+          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          type: string
+        name:
+          description: Name of the RUM application.
+          example: my_rum_application
+          type: string
+        org_id:
+          description: Org ID of the RUM application.
+          example: 999
+          format: int32
+          type: integer
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+        updated_at:
+          description: Timestamp in ms of the last update date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: Handle of the updater user.
+          example: jane.doe
+          type: string
+      required:
+      - application_id
+      - created_at
+      - created_by_handle
+      - name
+      - org_id
+      - type
+      - updated_at
+      - updated_by_handle
+      type: object
+    RUMApplicationCreate:
+      description: RUM application creation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationCreateAttributes'
+        type:
+          $ref: '#/components/schemas/RUMApplicationCreateType'
+      required:
+      - attributes
+      - type
+      type: object
+    RUMApplicationCreateAttributes:
+      description: RUM application creation attributes.
+      properties:
+        name:
+          description: Name of the RUM application.
+          example: my_new_rum_application
+          type: string
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+      required:
+      - name
+      type: object
+    RUMApplicationCreateRequest:
+      description: RUM application creation request attributes.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMApplicationCreate'
+      required:
+      - data
+      type: object
+    RUMApplicationCreateType:
+      default: rum_application_create
+      description: RUM application creation type.
+      enum:
+      - rum_application_create
+      example: rum_application_create
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION_CREATE
+    RUMApplicationResponse:
+      description: RUM application response.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMApplication'
+      type: object
+    RUMApplicationType:
+      default: rum_application
+      description: RUM application response type.
+      enum:
+      - rum_application
+      example: rum_application
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION
+    RUMApplicationUpdate:
+      description: RUM application update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationUpdateAttributes'
+        id:
+          description: RUM application ID.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        type:
+          $ref: '#/components/schemas/RUMApplicationUpdateType'
+      required:
+      - id
+      - type
+      type: object
+    RUMApplicationUpdateAttributes:
+      description: RUM application update attributes.
+      properties:
+        name:
+          description: Name of the RUM application.
+          example: updated_name_for_my_existing_rum_application
+          type: string
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+      type: object
+    RUMApplicationUpdateRequest:
+      description: RUM application update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMApplicationUpdate'
+      required:
+      - data
+      type: object
+    RUMApplicationUpdateType:
+      default: rum_application_update
+      description: RUM application update type.
+      enum:
+      - rum_application_update
+      example: rum_application_update
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION_UPDATE
+    RUMApplicationsResponse:
+      description: RUM applications response.
+      properties:
+        data:
+          description: RUM applications array response.
+          items:
+            $ref: '#/components/schemas/RUMApplication'
+          type: array
       type: object
     RUMBucketResponse:
       description: Bucket values.
@@ -6163,6 +6733,8 @@ components:
           description: The unique identifier of the role.
           example: 00000000-0000-1111-0000-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/RoleRelationships'
         type:
           $ref: '#/components/schemas/RolesType'
       required:
@@ -9020,6 +9592,138 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/events:
+    get:
+      description: 'List endpoint returns events that match an events search query.
+
+        [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
+
+
+        Use this endpoint to see your latest events.'
+      operationId: ListEvents
+      parameters:
+      - description: Search query following events syntax.
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          type: string
+      - description: Maximum timestamp for requested events.
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/EventsSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - events_read
+      summary: Get a list of events
+      tags:
+      - Events
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/events/search:
+    post:
+      description: 'List endpoint returns events that match an events search query.
+
+        [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
+
+
+        Use this endpoint to build complex events filtering and search.'
+      operationId: SearchEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventsListRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - events_read
+      summary: Search events
+      tags:
+      - Events
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -9455,17 +10159,27 @@ paths:
                 description: Pass multiple log objects at once.
                 summary: Multi JSON Messages
                 value:
-                - message: hello
-                - message: world
+                - ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345678
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+                  service: payment
+                - ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345679
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] World
+                  service: payment
               simple-json-message:
                 description: Log attributes can be passed as `key:value` pairs in
                   valid JSON messages.
                 summary: Simple JSON Message
                 value:
-                  ddsource: agent
-                  ddtags: env:prod,user:joe.doe
-                  hostname: fa1e1e739d95
-                  message: hello world
+                  ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345678
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+                    World
+                  service: payment
             schema:
               $ref: '#/components/schemas/HTTPLog'
           application/logplex-1:
@@ -9473,13 +10187,13 @@ paths:
               multi-raw-message:
                 description: Submit log messages.
                 summary: Multi Logplex Messages
-                value: 'hello
+                value: '2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
 
-                  world'
+                  2019-11-19T14:37:58,995 INFO [process.name][20081] World'
               simple-logplex-message:
                 description: Submit log string.
                 summary: Simple Logplex Message
-                value: hello world
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
             schema:
               type: string
           text/plain:
@@ -9487,9 +10201,9 @@ paths:
               multi-raw-message:
                 description: Submit log string.
                 summary: Multi Raw Messages
-                value: 'hello
+                value: '2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
 
-                  world
+                  2019-11-19T14:37:58,995 INFO [process.name][20081] World
 
                   '
               simple-raw-message:
@@ -9497,7 +10211,7 @@ paths:
                   parameters in the URL. This enables the addition of tags or the
                   source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.'
                 summary: Simple Raw Message
-                value: hello world
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
             schema:
               type: string
         description: Log to send (JSON format).
@@ -9625,7 +10339,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v2/logs/config/archive-order:
@@ -10745,7 +11459,7 @@ paths:
       summary: Get a list of logs
       tags:
       - Logs
-      x-menu-order: 3
+      x-menu-order: 4
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -10797,7 +11511,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -12205,6 +12919,154 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/rum/applications:
+    get:
+      description: List all the RUM applications in your organization.
+      operationId: GetRUMApplications
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationsResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all the RUM applications
+      tags:
+      - RUM
+      x-undo:
+        type: safe
+    post:
+      description: Create a new RUM application in your organization.
+      operationId: CreateRUMApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMApplicationCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new RUM application
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-given:
+        rum_application:
+          parameters:
+          - name: body
+            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
+              \   }\n  }\n}"
+          step: there is a valid "rum_application" in the system
+      x-undo:
+        operationId: DeleteRUMApplication
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/rum/applications/{id}:
+    delete:
+      description: Delete an existing RUM application in your organization.
+      operationId: DeleteRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a RUM application
+      tags:
+      - RUM
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the RUM application with given ID in your organization.
+      operationId: GetRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a RUM application
+      tags:
+      - RUM
+      x-undo:
+        type: safe
+    patch:
+      description: Update the RUM application with given ID in your organization.
+      operationId: UpdateRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMApplicationUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a RUM application
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -13084,11 +13946,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Modify the triage assignee of a security signal
       tags:
       - Security Monitoring
@@ -13135,11 +13992,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Change the related incidents of a security signal
       tags:
       - Security Monitoring
@@ -13186,11 +14038,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Change the triage state of a security signal
       tags:
       - Security Monitoring
@@ -14002,7 +14849,7 @@ paths:
       summary: Get hourly usage for application security
       tags:
       - Usage Metering
-      x-menu-order: 37
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v2/usage/cost_by_org:
@@ -14063,6 +14910,97 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
+  /api/v2/usage/estimated_cost:
+    get:
+      description: 'Get estimated cost across multi-org and single root-org accounts.
+
+        Estimated cost data is only available for the current month and previous month.
+        To access historical costs prior to this, use the /cost_by_org endpoint.'
+      operationId: GetEstimatedCostByOrg
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Currently, only the 'sub-org' view is supported.
+        in: query
+        name: view
+        required: true
+        schema:
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning this month. Either start_month or start_date should be
+          specified, but not both. (start_month cannot go beyond two months in the
+          past)'
+        in: query
+        name: start_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
+          for cost beginning this day. Either start_month or start_date should be
+          specified, but not both. (start_date cannot go beyond two months in the
+          past)'
+        in: query
+        name: start_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
+          for cost ending this day.'
+        in: query
+        name: end_date
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/CostByOrgResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get estimated cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 6
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        Only the sub-org view is available currently, the summary view will be released
+        at a later date.'
   /api/v2/usage/hourly_usage:
     get:
       description: Get hourly usage by product family
@@ -14087,8 +15025,8 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `cws`,
-          `dbm`, `fargate`,
+          `application_security`, `audit_logs`, `serverless`, `ci_app`, `cspm`, `custom_events`,
+          `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
@@ -14236,7 +15174,7 @@ paths:
       summary: Get hourly usage for lambda traced invocations
       tags:
       - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 37
       x-undo:
         type: safe
   /api/v2/usage/observability_pipelines:
@@ -14298,7 +15236,7 @@ paths:
       summary: Get hourly usage for observability pipelines
       tags:
       - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 39
       x-undo:
         type: safe
   /api/v2/user_invitations:
@@ -14795,6 +15733,16 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: 'The events service allows you to programmatically post events to the
+    event stream
+
+    and fetch events from the event stream. Events are limited to 4000 characters.
+
+    If an event is sent out with a message containing more than 4000 characters, only
+    the
+
+    first 4000 characters are displayed.'
+  name: Events
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services

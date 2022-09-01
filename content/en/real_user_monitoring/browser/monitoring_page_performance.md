@@ -92,7 +92,7 @@ The criteria of 100ms since last request or DOM mutation might not be an accurat
 
 - The application collects analytics by sending requests to an API periodically or after every click.
 
-- The application uses "[comet][16])" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
+- The application uses "[comet][16]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
@@ -138,6 +138,22 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 
 **Note**: For single page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
+You can also provide your own timing as a second parameter. It should be the number of milliseconds relative to the start of the current RUM view or the UNIX epoch (timestamp). It is particularly useful when using an asynchronous setup. Example:
+
+```javascript
+document.addEventListener("scroll", function handler() {
+    //Remove the event listener so that it only triggers once
+    document.removeEventListener("scroll", handler);
+
+    const timing = Date.now()
+    DD_RUM.onReady(function() {
+      DD_RUM.addTiming('first_scroll', timing);
+    });
+});
+
+```
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -157,5 +173,5 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[16]: https://en.wikipedia.org/wiki/Comet_(programming
+[16]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
 [17]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

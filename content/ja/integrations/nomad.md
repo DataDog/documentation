@@ -1,41 +1,65 @@
 ---
+app_id: nomad
+app_uuid: 245bf496-4185-4407-a0fd-d6ef6fc125bb
 assets:
   dashboards:
     Nomad Overview: assets/dashboards/overview.json
-  metrics_metadata: metadata.csv
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: nomad.client.host.cpu.user
+      metadata_path: metadata.csv
+      prefix: nomad
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Nomad
   monitors:
     Nomad Excessive Leadership Losses: assets/monitors/nomad_excessive_leadership_losses.json
     Nomad Heartbeats Received: assets/monitors/nomad_heartbeats_received.json
     Nomad Job Is Failing: assets/monitors/nomad_job_is_failing.json
     Nomad No Jobs Running: assets/monitors/nomad_no_jobs_running.json
     Nomad Pending Jobs: assets/monitors/nomad_pending_jobs.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - provisioning
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md
-display_name: Nomad
+display_on_public_website: true
 draft: false
 git_integration_title: nomad
-guid: 09fec09d-69ef-435f-bb0d-f586652b9bc7
 integration_id: nomad
 integration_title: Nomad
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: irabinovitch
-manifest_version: 1.0.0
-metric_prefix: nomad
-metric_to_check: nomad.client.host.cpu.user
+manifest_version: 2.0.0
 name: nomad
+oauth: {}
 public_title: Nomad
 short_description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::プロビジョニング
+  configuration: README.md#Setup
+  description: アプリケーションをあらゆる規模で簡単にスケジュール、デプロイ
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nomad
 ---
 
 

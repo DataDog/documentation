@@ -1,43 +1,63 @@
 ---
+app_id: snmp-f5
+app_uuid: 07050d86-968b-49e2-970e-599f535eece2
 assets:
   dashboards:
     F5-Networks: assets/dashboards/f5-networks.json
-  logs: {}
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: F5 Networks
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - モニタリング
 - notification
 - ネットワーク
 - autodiscovery
 - snmp
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_f5/README.md
-display_name: F5 Networks
+display_on_public_website: true
 draft: false
 git_integration_title: snmp_f5
-guid: e3ce21b2-a360-47ea-b7b2-1f746f98c1f3
 integration_id: snmp-f5
 integration_title: F5 Networks
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_to_check:
-- snmp.sysStatMemoryUsed
-- snmp.sysMultiHostCpuUser
-- snmp.sysTcpStatConnects
+manifest_version: 2.0.0
 name: snmp_f5
+oauth: {}
 public_title: F5 Networks
 short_description: F5 ネットワークデバイスから SNMP メトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Notification
+  - Category::Network
+  - Category::Autodiscovery
+  - Category::SNMP
+  configuration: README.md#Setup
+  description: F5 ネットワークデバイスから SNMP メトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: F5 Networks
 ---
 
 
@@ -71,7 +91,12 @@ F5 プラットフォームのどのコンポーネントからも、Datadog に
 * [Datadog でデータセンターおよびネットワークデバイスを監視][3]
 * [Datadog による SNMP モニタリング][4]
 
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 [1]: https://docs.datadoghq.com/ja/network_monitoring/devices/setup
 [2]: https://docs.datadoghq.com/ja/network_monitoring/devices/data
 [3]: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
 [4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[5]: https://docs.datadoghq.com/ja/help/

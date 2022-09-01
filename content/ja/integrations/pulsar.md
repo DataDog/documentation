@@ -1,40 +1,64 @@
 ---
+app_id: pulsar
+app_uuid: 2a3a1555-3c19-42a9-b954-ce16c4aa6308
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: pulsar.active_connections
+      metadata_path: metadata.csv
+      prefix: pulsar.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: pulsar
+  logs:
+    source: pulsar
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-- モニタリング
-creates_events: false
-ddtype: check
+- 処理
+- メッセージング
+- ログの収集
 dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/pulsar/README.md
-display_name: pulsar
+- https://github.com/DataDog/integrations-core/blob/master/pulsar/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: pulsar
-guid: 799b35dd-d481-4d71-825e-83c92a5227c4
 integration_id: pulsar
 integration_title: Pulsar
-integration_version: 0.0.1
+integration_version: 1.1.1
 is_public: true
 kind: インテグレーション
-maintainer: ming.luo@kesque.com
-manifest_version: 1.0.0
-metric_prefix: kesque.pulsar.
-metric_to_check: kesque.pulsar.consumer.available_permits
+manifest_version: 2.0.0
 name: pulsar
+oauth: {}
 public_title: Pulsar
-short_description: Apache Pulsar メトリクス
-support: contrib
+short_description: Pulsar クラスターを監視します。
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Messaging
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Pulsar クラスターを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pulsar
 ---
 
 
@@ -49,41 +73,18 @@ supported_os:
 
 ### インストール
 
-Pulsar チェックをホストにインストールするには
-
-1. マシンに[開発ツールキット][3]をインストールします。
-2. integrations-extras リポジトリを複製します。
-
-   ```shell
-   git clone https://github.com/DataDog/integrations-extras.git.
-   ```
-
-3. `ddev` 構成を `integrations-extras/` パスで更新します。
-
-   ```shell
-   ddev config set extras ./integrations-extras
-   ```
-
-4. `Pulsar` パッケージをビルドします。
-
-   ```shell
-   ddev -e release build pulsar
-   ```
-5. [Datadog Agent をダウンロードします][4]。
-6. ビルドの成果物を Agent をインストール済みのホストにアップロードし、実行します。
-   ```shell
-   datadog-agent integration install -w path/to/pulsar/dist/<ARTIFACT_NAME>.whl
-   ```
+Pulsar チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
-1. Pulsar のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `pulsar.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[pulsar.d/conf.yaml のサンプル][5]を参照してください。
+1. pulsar のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `pulsar.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[pulsar.d/conf.yaml のサンプル][4]を参照してください。
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][5]。
 
 ### 検証
 
-[Agent の status サブコマンド][7]を実行し、Checks セクションで `pulsar` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `pulsar` を探します。
 
 ## 収集データ
 
@@ -91,24 +92,46 @@ Pulsar チェックをホストにインストールするには
 {{< get-metrics-from-git "pulsar" >}}
 
 
-### サービスのチェック
 
-pulsar には、サービスのチェック機能は含まれません。
+### ログの収集
+
+1. Pulsar ログインテグレーションは、Pulsar の[デフォルトログフォーマット][8]をサポートします。異なるフォーマットがある場合は、[インテグレーションパイプライン][9]を複製し、編集してください。
+
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+   ```yaml
+   logs_enabled: true
+   ```
+
+3. `pulsar.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、パスパラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[pulsar.d/conf.yaml のサンプル][4]を参照してください。
+   ```yaml
+    logs:
+      - type: file
+        path: /pulsar/logs/pulsar.log
+        source: pulsar
+   ```
+4. [Agent を再起動します][5]。
 
 ### イベント
 
-pulsar には、イベントは含まれません。
+Pulsar インテグレーションには、イベントは含まれません。
+
+### サービスのチェック
+{{< get-service-checks-from-git "pulsar" >}}
+
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
-[1]: https://pulsar.apache.org/
+
+[1]: https://pulsar.apache.org
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-extras/blob/master/pulsar/datadog_checks/pulsar/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/pulsar/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/pulsar/datadog_checks/pulsar/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/pulsar/metadata.csv
+[8]: https://pulsar.apache.org/docs/en/reference-configuration/#log4j
+[9]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
+[10]: https://github.com/DataDog/integrations-core/blob/master/pulsar/assets/service_checks.json
+[11]: https://docs.datadoghq.com/ja/help/

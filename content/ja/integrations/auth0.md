@@ -1,39 +1,63 @@
 ---
+app_id: auth0
+app_uuid: 0c91d12e-f01e-47d9-8a07-4dba1cde4b67
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: auth0.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Auth0
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - ログの収集
-  - セキュリティ
-creates_events: false
-ddtype: crawler
+- ログの収集
+- セキュリティ
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
-display_name: Auth0
+- https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: auth0
-guid: 9308a35c-219e-4d24-ac11-af2511e5041a
 integration_id: auth0
 integration_title: Auth0
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: auth0.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: auth0
-public_title: Datadog-Auth0 インテグレーション
+oauth: {}
+public_title: Auth0
 short_description: Auth0 イベントを表示し、分析します。
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Security
+  configuration: README.md#Setup
+  description: Auth0 イベントを表示し、分析します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Auth0
 ---
+
+
+
 ## 概要
 
 Auth0 は、開発者や企業がアプリケーションを安全に保つために必要なビルディングブロックを提供する、開発チーム向けの認証プラットフォームです。

@@ -1,40 +1,62 @@
 ---
+app_id: oracle
+app_uuid: 34835d2b-a812-4aac-8cc2-d298db851b80
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     oracle: assets/dashboards/oracle_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: oracle.session_count
+      metadata_path: metadata.csv
+      prefix: oracle.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Oracle Database
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
-display_name: Oracle Database
+display_on_public_website: true
 draft: false
 git_integration_title: oracle
-guid: 6c4ddc46-2763-4c56-8b71-c838b7f82d7b
 integration_id: oracle
 integration_title: Oracle
-integration_version: 3.9.4
+integration_version: 3.9.5
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: oracle.
-metric_to_check: oracle.session_count
-name: Oracle
-public_title: Oracle インテグレーション
+manifest_version: 2.0.0
+name: oracle
+oauth: {}
+public_title: Oracle
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Oracle
 ---
 
 

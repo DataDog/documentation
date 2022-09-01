@@ -1,7 +1,6 @@
 ---
 categories:
 - notification
-ddtype: crawler
 dependencies: []
 description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
 doc_link: https://docs.datadoghq.com/integrations/webhooks/
@@ -68,11 +67,13 @@ $ALERT_SCOPE
 **例**: `availability-zone:us-east-1a, role:computing-node`
 
 $ALERT_STATUS
-: アラートステータスのサマリー。<br />
+: アラートステータスの概要です。<br />
 **例**: `system.load.1 over host:my-host was > 0 at least once during the last 1m`
+**注**: Logs Monitor アラートからの Webhook ペイロードでこの変数を入力するには、Webhook インテグレーションタイルで `$ALERT_STATUS` を手動で追加する必要があります。
 
 $ALERT_TITLE
-: アラートのタイトル。
+: アラートのタイトル<br />
+**例**: `error`、`warning`、`success`、`info`
 
 $ALERT_TRANSITION
 : アラート通知のタイプ。<br />
@@ -186,7 +187,7 @@ $SECURITY_SIGNAL_MSG
 
 $SECURITY_SIGNAL_ATTRIBUTES
 : セキュリティシグナルの属性。<br />
-**例**: `{"network":{"client":{"ip":"1.2.3.4"}}}`
+**例**: `{"network":{"client":{"ip":"1.2.3.4"}}, "service": ["agent"]}`
 
 $SECURITY_RULE_ID
 : セキュリティルール ID。<br />
@@ -242,6 +243,10 @@ $SYNTHETICS_SUMMARY
 $TAGS
 : イベントタグのカンマ区切りリスト。<br />
 **例**: `monitor, name:myService, role:computing-node`
+
+$TAGS[key]
+: `key` タグの値。もし `key` タグがない場合、あるいは `key` タグに値がない場合、この式は空の文字列に評価されます。
+**例**: もし `$TAGS` が `role:computing-node` を含むなら、`$TAGS[role]` は `computing-node` と評価されます。
 
 $TEXT_ONLY_MSG
 : マークダウン書式設定なしのイベントのテキスト。

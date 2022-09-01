@@ -1,39 +1,58 @@
 ---
+app_id: cyral
+app_uuid: da6e2ea6-1611-4d37-9cc6-efce73bc4f31
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Cyral Overview: assets/dashboards/cyral_overview.json
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: cyral.analysis_time
+      metadata_path: metadata.csv
+      prefix: cyral.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cyral
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: product@cyral.com
+  support_email: product@cyral.com
 categories:
 - モニタリング
 - security
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md
-display_name: Cyral
+display_on_public_website: true
 draft: false
 git_integration_title: cyral
-guid: 2a854a73-b0da-4954-b34e-fc1cd05ba8e8
 integration_id: cyral
 integration_title: Cyral
 integration_version: 0.0.1
 is_public: true
 kind: integration
-maintainer: product@cyral.com
-manifest_version: 1.0.0
-metric_prefix: cyral.
-metric_to_check: cyral.analysis_time
+manifest_version: 2.0.0
 name: cyral
+oauth: {}
 public_title: Cyral
 short_description: Cyral インスタンスモニタリング MySQL からランタイムメトリクスを収集。
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Monitoring
+  - Category::Security
+  configuration: README.md#Setup
+  description: Cyral インスタンスモニタリング MySQL からランタイムメトリクスを収集。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cyral
 ---
 
 

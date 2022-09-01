@@ -84,7 +84,7 @@ For non-containerized or unsupported environments, manually tag your traces, spa
 To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
-export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_URL>"
+export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url:<REPOSITORY_URL>"
 ./my-application start
 ```
 
@@ -168,4 +168,4 @@ In the [Continuous Profiler][4], you can directly access traces in the source re
 [1]: https://app.datadoghq.com/apm/error-tracking
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
 [3]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
-[4]: https://docs.datadoghq.com/tracing/profiler/search_profiles/
+[4]: /profiler/search_profiles/

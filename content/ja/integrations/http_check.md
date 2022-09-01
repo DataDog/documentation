@@ -1,42 +1,60 @@
 ---
-aliases:
-- /ja/integrations/httpcheck
+app_id: ネットワーク
+app_uuid: 3773283a-494f-497a-98cc-804520634a7a
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: network.http.response_time
+      metadata_path: metadata.csv
+      prefix: network.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: HTTP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - network
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/http_check/README.md
-display_name: HTTP
+display_on_public_website: true
 draft: false
 git_integration_title: http_check
-guid: eb133a1f-697c-4143-bad3-10e72541fa9c
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 8.0.0
+integration_version: 8.0.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: network.
-metric_to_check: network.http.response_time
+manifest_version: 2.0.0
 name: http_check
-public_title: Datadog-HTTP チェックインテグレーション
+oauth: {}
+public_title: HTTP チェック
 short_description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Network
+  configuration: README.md#Setup
+  description: レスポンス状況が悪い HTTP サービスや、SSL 証明書の期限切れが近い HTTP サービスを監視します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HTTP チェック
 ---
 
 

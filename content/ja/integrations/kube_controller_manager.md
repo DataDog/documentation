@@ -1,40 +1,62 @@
 ---
+app_id: kube-controller-manager
+app_uuid: 25d4ccd6-de50-4ef0-849f-b7ab1aea203e
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     kube_controller_manager: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kube_controller_manager.threads
+      metadata_path: metadata.csv
+      prefix: kube_controller_manager.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kubernetes Controller Manager
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - オーケストレーション
 - コンテナ
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
-display_name: Kubernetes Controller Manager
+display_on_public_website: true
 draft: false
 git_integration_title: kube_controller_manager
-guid: 34156dda-9288-4968-962b-6b29e1753d33
 integration_id: kube-controller-manager
 integration_title: Kubernetes Controller Manager
 integration_version: 4.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kube_controller_manager.
-metric_to_check: kube_controller_manager.threads
+manifest_version: 2.0.0
 name: kube_controller_manager
-public_title: Kubernetes Controller Manager インテグレーション
+oauth: {}
+public_title: Kubernetes Controller Manager
 short_description: Kubernetes Controller Manager の監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Orchestration
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Kubernetes Controller Manager の監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kubernetes Controller Manager
 ---
 
 

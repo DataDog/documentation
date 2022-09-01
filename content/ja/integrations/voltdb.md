@@ -1,50 +1,70 @@
 ---
+app_id: voltdb
+app_uuid: 4ea56824-28da-4beb-8937-c45ef32fdb7f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     VoltDB - Overview: assets/dashboards/voltdb_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: voltdb.cpu.percent_used
+      metadata_path: metadata.csv
+      prefix: voltdb.
+    process_signatures:
+    - voltdb
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: VoltDB
   logs:
     source: voltdb
-  metrics_metadata: metadata.csv
   monitors:
     CPU load: assets/monitors/cpu_load.json
   saved_views:
     voltdb_processes: assets/saved_views/voltdb_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md
-display_name: VoltDB
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-voltdb-with-datadog/
-  tag: ブログ
-  text: Datadog を使用した VoltDB の監視
 git_integration_title: voltdb
-guid: 15abd7c6-1845-405a-8627-f83be1e48b11
 integration_id: voltdb
 integration_title: VoltDB
 integration_version: 2.1.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: voltdb.
-metric_to_check: voltdb.cpu.percent_used
+manifest_version: 2.0.0
 name: voltdb
-process_signatures:
-- voltdb
+oauth: {}
 public_title: VoltDB
 short_description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: VoltDB
 ---
 
 

@@ -38,7 +38,10 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 : Measures the initialization time (second) of a function during a cold start.
 
 `aws.lambda.enhanced.runtime_duration`
-: Measures the elapsed millisecond from when the function code starts executing to when it returns the response back to the client, excluding the post-runtime duration added by Lambda extension executions.
+: Measures the elapsed milliseconds from when the function code starts executing to when it returns the response back to the client, excluding the post-runtime duration added by Lambda extension executions.
+
+`aws.lambda.enhanced.post_runtime_duration`
+: Measures the elapsed milliseconds from when the function code returns the response back to the client to when the function stops executing, representing the duration added by Lambda extension executions.
 
 `aws.lambda.enhanced.estimated_cost`  
 : Measures the total estimated cost of the function invocation (US dollars).

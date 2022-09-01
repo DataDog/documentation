@@ -60,7 +60,7 @@ RUM アプリケーションによって生成されたセッション数を追�
 
 ## 予期せぬスパイクにアラートを生成
 
-RUM メトリクスは、[異常検知モニター][3]で確認できます。
+RUM メトリクスは、[異常検知モニター][3]で使用できます。
 
 {{< img src="real_user_monitoring/guide/monitor-your-rum-usage/anomaly-monitor-notification.png" alt="異常検知モニターでの通知メッセージの例" style="width:90%" >}}
 

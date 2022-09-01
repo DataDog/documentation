@@ -104,3 +104,7 @@ SAP BusinessObjects インテグレーションは、SAP **BusinessObjects** シ
 
 ---
 この製品は、スイスのジュネーブで設計・開発されています。
+
+
+---
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-businessobjects" target="_blank">こちらをクリック</a>してください。

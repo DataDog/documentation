@@ -32,7 +32,7 @@ RUM は、モバイル Flutter の Android および iOS アプリケーショ�
 
 | iOS SDK | Android SDK | Browser SDK |
 | :-----: | :---------: | :---------: |
-| 1.11.0-rc1 | 1.12.0-alpha2 | v4.11.2 |
+| 1.12.0-beta2 | 1.14.0-beta1 | v4.11.2 |
 
 [//]: # (End SDK Table)
 
@@ -94,6 +94,8 @@ final configuration = DdSdkConfiguration(
   )
 );
 ```
+
+利用可能な構成オプションの詳細については、[DdSdkConfiguration オブジェクト][9]のドキュメントを参照してください。
 
 ### ライブラリの初期化
 
@@ -186,6 +188,38 @@ final configuration = DdSdkConfiguration(
 
 Datadog 分散型トレーシングを有効にするには、構成オブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを、分散型トレーシングをサポートするドメインに設定する必要があります。また、`RumConfiguration` で `tracingSamplingRate` を設定することで、Datadog 分散型トレーシングのサンプリングレートを変更することができます。
 
+## トラブルシューティング
+
+### Cocoapods 問題
+
+Datadog SDK を追加した後、Cocoapods から投げられるエラーのために iOS アプリケーションのビルドに問題がある場合、エラーを確認してください。最も一般的なエラーは、Cocoapods から最新のネイティブライブラリを取得する問題で、これは `ios` ディレクトリで以下を実行することで解決できます。
+
+```bash
+pod install --repo-update
+```
+
+もう一つのよくあるエラーは、Apple Silicon Mac での FFI ライブラリの読み込みの問題です。 以下のようなエラーが表示された場合:
+
+```bash
+LoadError - dlsym(0x7fbbeb6837d0, Init_ffi_c): symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:6:in `rescue in <top (required)>'
+/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:3:in `<top (required)>'
+```
+
+[Flutter のドキュメント][8]にある、Apple Silicon で Flutter を使うための手順に従います。
+
+### sdkVerbosity の設定
+
+アプリは実行できるのに、Datadog サイトで期待するデータが表示されない場合は、`DatadogSdk.initialize` を呼び出す前に、コードに以下を追加してみてください。
+
+```dart
+DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
+```
+
+これにより、SDK が何をしているか、どのようなエラーに遭遇しているかについての追加情報が出力され、お客様と Datadog サポートが問題を絞り込むのに役立つ場合があります。
+
 ## データストレージ
 
 ### Android
@@ -217,3 +251,5 @@ Datadog 分散型トレーシングを有効にするには、構成オブジェ
 [5]: https://github.com/DataDog/dd-sdk-flutter/blob/main/LICENSE
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://pub.dev/packages/datadog_tracking_http_client
+[8]: https://github.com/flutter/flutter/wiki/Developing-with-Flutter-on-Apple-Silicon
+[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html

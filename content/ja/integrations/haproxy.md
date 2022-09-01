@@ -1,14 +1,32 @@
 ---
+app_id: haproxy
+app_uuid: 804dd2ae-d0a9-4063-a2bc-bd949ac7bb62
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     HAProxy - Overview (OpenMetrics): assets/dashboards/openmetrics_overview.json
     HAProxy - Overview (Prometheus): assets/dashboards/prometheus_overview.json
     haproxy: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - haproxy.frontend.bytes.in.count
+      - haproxy.frontend.bytes.in_rate
+      - haproxy.frontend.bytes.in.total
+      metadata_path: metadata.csv
+      prefix: haproxy.
+    process_signatures:
+    - haproxy
+    - haproxy-master
+    - haproxy-controller
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: HAProxy
   logs:
     source: haproxy
-  metrics_metadata: metadata.csv
   monitors:
     '[HAProxy] Anomalous frontend request rate for host {{host.name}}': assets/monitors/request_rate.json
     '[HAProxy] Anomalous number of frontend 4xx HTTP responses for host: {{host.name}}': assets/monitors/frontend_5xx.json
@@ -28,43 +46,49 @@ assets:
     haproxy_processes: assets/saved_views/haproxy_processes.json
     response_time_overview: assets/saved_views/response_time.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - log collection
 - autodiscovery
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md
-description: HAProxy インテグレーションは、HAProxy インスタンスからパフォーマンスメトリクスと可用性メトリクスを収集するのに役立ちます。
-display_name: HAProxy
+display_on_public_website: true
 draft: false
 git_integration_title: haproxy
-guid: cd935030-131f-4545-8b6a-a4ca21b8565b
 integration_id: haproxy
 integration_title: HAProxy
 integration_version: 4.3.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: haproxy.
-metric_to_check:
-- haproxy.frontend.bytes.in.count
-- haproxy.frontend.bytes.in_rate
-- haproxy.frontend.bytes.in.total
+manifest_version: 2.0.0
 name: haproxy
-process_signatures:
-- haproxy
-- haproxy-master
-- haproxy-controller
-public_title: HAProxy インテグレーション
+oauth: {}
+public_title: HAProxy
 short_description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: HAProxy
 ---
 
 

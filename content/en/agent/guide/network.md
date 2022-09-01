@@ -365,7 +365,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [4]: /infrastructure/process/
 [5]: /infrastructure/livecontainers/#kubernetes-resources-1
 [6]: /real_user_monitoring/
-[7]: /tracing/profiler/
+[7]: /profiler/
 [8]: /synthetics/private_locations
 [9]: /agent/proxy/
 [10]: /network_monitoring/devices

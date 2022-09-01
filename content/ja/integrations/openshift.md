@@ -1,38 +1,59 @@
 ---
+app_id: OpenShift
+app_uuid: e92e309f-7bdc-4ff4-91d4-975497526325
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - openshift.clusterquota.cpu.requests.used
+      - openshift.clusterquota.cpu.used
+      metadata_path: metadata.csv
+      prefix: openshift.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: OpenShift
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - コンテナ
 - オーケストレーション
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openshift/README.md
-display_name: OpenShift
+display_on_public_website: true
 draft: false
 git_integration_title: OpenShift
-guid: ea7f642f-263f-4ed1-8da0-9bb96c7df1f0
 integration_id: OpenShift
 integration_title: OpenShift
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: openshift.
-metric_to_check:
-- openshift.clusterquota.cpu.requests.used
-- openshift.clusterquota.cpu.used
+manifest_version: 2.0.0
 name: OpenShift
-public_title: OpenShift インテグレーション
+oauth: {}
+public_title: OpenShift
 short_description: ビッグアイデア用の Kubernetes プラットフォーム
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Containers
+  - Category::Orchestration
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ビッグアイデア用の Kubernetes プラットフォーム
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: OpenShift
 ---
 
 ## 概要
