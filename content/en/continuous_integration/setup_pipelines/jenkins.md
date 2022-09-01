@@ -20,8 +20,7 @@ further_reading:
 ## Compatibility
 
 Supported Jenkins versions:
-* For 3.x versions of the plugin: Jenkins >= 2.164.1
-* For 4.x versions of the plugin: Jenkins >= 2.303.3
+* Jenkins >= 2.346.1
 
 ## Prerequisite
 
@@ -160,6 +159,8 @@ export DD_CI_HOSTNAME=$HOSTNAME
 ```
 
 Notice this is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not required additional actions.
+
+**Note**: Infrastructure metric correlation is supported since Jenkins Plugin v5.0.0+
 
 ## Enable job log collection
 
