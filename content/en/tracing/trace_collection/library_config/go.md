@@ -104,7 +104,8 @@ Dynamically rename services through configuration. Services can be separated by 
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Default**: `false` <br>
-Datadog may collect [some telemetry][7]. This variable may be changed to default `true` in the future. To disable this telemetry collection, explicitly set this variable to `false`.
+Datadog may collect [environmental and diagnostic information about your system][7] to improve the product. 
+When false, this telemetry data will not be collected.
 
 
 ## Configure APM environment name
