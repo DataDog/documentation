@@ -129,28 +129,39 @@ Finally, run the following commands:
 - `kubectl apply -f cluster-agent-deployment.yaml`
 
 ### APM and DogStatsD
+To configure and inject APM tracers libraries automatically, it requires the Datadog Agent v7.39+
 
-To configure and inject APM tracers libraries and DogstatsD clients automatically:
-
+Once the Cluster Agent is successfully installed, please do one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
-To opt-in your container for library injection, use Pod annotations inside your application's YAML file to specify which language tracers and should be injected, along with their versions.
+To opt-in your container for library injection, use Pod annotations inside your application's YAML file to specify language tracers and versions.
+
 
 The annotations are a `key: value` pair in the following format:
 
 ```yaml
-admission.datadoghq.com/<language>-tracer.version: <tracer-version>
+datadoghq.com/<language>-lib.version: <lib-version>
 ```
 
-Adding a this annotation means the tracer library for that language and version is injected into the containerized application. You can add several `<language>-tracer.version` annotations to inject multiple language tracers into one container.
+Adding a this annotation means the tracer library for that language and version is injected into the containerized application.
+Currently, the list of possible lib values include `java`, `node` and `python` respectively.
 
-For example to inject the latest Java tracer and Ruby tracer version 1.4.0:
+For example to inject the latest Java tracer:
 
 ```yaml
 annotations:
-    admission.datadoghq.com/java-tracer.version: "latest"
-    admission.datadoghq.com/ruby-tracer.version: "1.4.0"
+    datadoghq.com/java-lib.version: "latest"
+    datadoghq.com/node-lib.version: "3.0.0"
+```
+
+If needed, you can add several `<language>-lib.version` annotations to inject multiple language tracers into one container.
+
+For example to inject the latest Java tracer and Node tracer v3.0.0:
+```yaml
+annotations:
+    datadoghq.com/java-lib.version: "latest"
+    datadoghq.com/node-lib.version: "3.0.0"
 ```
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
