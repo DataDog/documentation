@@ -3,7 +3,6 @@ import glob
 import json
 import os
 import yaml
-import jsonschema
 from itertools import chain
 import logging
 from pathlib import Path
@@ -19,24 +18,6 @@ TEMPLATE = """\
 {content}
 """
 
-def build_content(action_data, data):
-    desc = action_data.get('description')
-    input = action_data.get('input', '').replace('#/$defs/', '')
-    output = action_data.get('output', '').replace('#/$defs/', '')
-    content = f'{desc}\n\n'
-    if input:
-        content += """
-### Inputs
-coming soon
-
-"""
-    if output:
-        content += """
-### Outputs
-coming soon
-
-"""
-    return content
 
 def workflows(content, content_dir):
     logger.info("Starting Workflow action...")
@@ -66,7 +47,7 @@ def workflows(content, content_dir):
                     # if this is a dd. bundle then lets use the datadog integration id
                     if not action_data['source'] and 'datadog' in action_data['bundle_title'].lower():
                         action_data['source'] = '_datadog'
-                    content = build_content(action_data, data)
+                    content = action_data.get('description', '') + "\n\n{{< workflows >}}"
                     output_content = TEMPLATE.format(front_matter=yaml.dump(action_data, default_flow_style=False).strip(), content=content)
                     dest_dir = Path(f"{content_dir}/integrations/workflows/")
                     dest_dir.mkdir(exist_ok=True)

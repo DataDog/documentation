@@ -1,6 +1,6 @@
 # make
 SHELL = /bin/bash
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -23,6 +23,9 @@ include $(CONFIG_FILE)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
+
+#DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/\(.*\)\/manifest.json/\1\/manifest.deref.json/')
+DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/.*\/\(.*\)\/manifest.json/data\/workflows\/\1.json/')
 
 # Set defaults when no makefile.config or missing entries
 # Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
@@ -86,6 +89,18 @@ node_modules: package.json yarn.lock
 # All the requirements for a full build
 dependencies: clean hugpython all-examples data/permissions.json update_pre_build node_modules
 	@make placeholders
+	@make derefs
+
+# make directories
+data/workflows/:
+	mkdir -p $@
+
+# dereference any source jsonschema files
+derefs: $(DEREFS)
+
+.SECONDEXPANSION:
+$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
+	node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
