@@ -29,7 +29,7 @@ The course helps you to:
 
 ## Technical demo
 
-Once you're familiar with the Datadog basics, you should get your Demo Certification.
+Once you have completed the Datadog Sales Certification and are familiar with the Datadog basics, you should get your Demo Certification.
 
 {{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="max-width: 367px">}}
 
@@ -43,7 +43,7 @@ After giving a technical demo, you'll work with the customer to develop an initi
 
 This course:
 - Explains the basics behind Datadog core products
-- Addresses the market positioning of each
+- Addresses the market positioning of each product
 - Describes customer success 
 - Helps you position individual product offerings
 
@@ -73,5 +73,5 @@ If you have gone through the recommended training outlined above, you're ready t
 Should you have any questions during your journey, contact partner-support@datadoghq.com 
 
 [1]: https://learn.datadoghq.com/bundles/dd-fundamentals
-[2]: https://docs.datadoghq.com/account_management/billing/pricing/
+[2]: /account_management/billing/pricing/
 [3]: https://www.datadoghq.com/pricing/
