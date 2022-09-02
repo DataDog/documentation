@@ -22,7 +22,7 @@ main:
     weight: 7000000
   - name: Administration
     identifier: administration_heading
-    weight: 9000000
+    weight: 8000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -1094,7 +1094,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 120000  
+    weight: 120000
   - name: Alerting
     url: monitors/
     pre: monitor
