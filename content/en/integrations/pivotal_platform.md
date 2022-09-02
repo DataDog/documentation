@@ -31,7 +31,7 @@ There are three main components for the VMware Tanzu Application Service integra
 
 ## Monitor your applications
 
-Use the [VMware Tanzu installation and configuration][7] guide to install the integration through the Tanzu Ops Manager.
+Use the [VMware Tanzu installation and configuration][7] guide to install the integration through the Tanzu Ops Manager. For manual setup steps, read the [Monitor your applications][11] section in the manual setup guide.
 
 ### Configuration
 
@@ -127,7 +127,7 @@ See [Metric Submission: DogStatsD][5] for more information. There is a list of [
 
 ## Monitor your VMware Tanzu Application Service cluster
 
-Use the [VMware Tanzu installation and configuration][9] guide to install the integration through the Tanzu Ops Manager.
+Use the [VMware Tanzu installation and configuration][9] guide to install the integration through the Tanzu Ops Manager. For manual setup steps, read the [Monitor your VMware Tanzu Application Service cluster][13] section in the manual setup guide.
 
 ## Data Collected
 
@@ -150,7 +150,9 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [7]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
 [9]: https://docs.pivotal.io/partners/datadog/installing.html
 [10]: /agent/logs/proxy/
+[11]: /integrations/guide/vmware-tanzu-application-service-manual-setup#monitor-your-applications
 [12]: /tracing/setup/
+[13]: /integrations/guide/vmware-tanzu-application-service-manual-setup#monitor-your-vmware-tanzu-application-service-cluster
 [14]: /libraries/
 [24]: /integrations/system/#metrics
 [25]: /integrations/network/#metrics
