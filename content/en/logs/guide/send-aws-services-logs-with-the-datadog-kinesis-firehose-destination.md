@@ -81,7 +81,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
 3. Check the `Subscriptions` column in the [log groups index page][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
 
 If you want to push logs directly to the delivery stream without going through a Kinesis data stream, you can subscribe the CloudWatch log groups directly to the Kinesis Firehose Destination by adding the Kinesis Firehose ARN in the `destination-arn` parameter of the subscription filter, as shown in [the AWS Subscription Filters documentation][4] (step 12).
-  * **Note**: As logs that are sent to a receiving service through a subscription filter are base64 encoded and compressed with the gzip format. So you need to do transformation with lambda within a Kinesis Firehose delivery stream.
+  * **Note**: As logs that are sent to a receiving service through a subscription filter are base64 encoded and compressed with the gzip format. So you need to do transformation with lambda within a Kinesis Firehose delivery stream to be able to see logs content in Datadog.
 
 ## Search for AWS Kinesis logs in Datadog
 
