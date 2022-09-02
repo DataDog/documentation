@@ -63,7 +63,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
   * **Note**: If you have more than two sources you want to subscribe to, you can subscribe to the new Kinesis stream after completing this setup.
 2. Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. Refer to [this CloudWatch Logs documentation section][2] (step 3 to 6) to:  
    - Use the `aws iam create-role` command to create the IAM role that gives CloudWatch Logs permission to put logs data into the Kinesis stream.
-   - Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecordBatch` actions.
+   - Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions.
    - Attach the permissions policy to your newly created IAM role using the `aws iam put-role-policy` command.
    - Use the `aws logs put-subscription-filter` command to subscribe your Kinesis stream to each CloudWatch log group you want to ingest into Datadog.  
 
@@ -81,6 +81,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
 3. Check the `Subscriptions` column in the [log groups index page][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
 
 If you want to push logs directly to the delivery stream without going through a Kinesis data stream, you can subscribe the CloudWatch log groups directly to the Kinesis Firehose Destination by adding the Kinesis Firehose ARN in the `destination-arn` parameter of the subscription filter, as shown in [the AWS Subscription Filters documentation][4] (step 12).
+  * **Note**: As logs that are sent to a receiving service through a subscription filter are base64 encoded and compressed with the gzip format. So you need to do transformation with lambda within a Kinesis Firehose delivery stream.
 
 ## Search for AWS Kinesis logs in Datadog
 
