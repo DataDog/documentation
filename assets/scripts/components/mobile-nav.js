@@ -62,24 +62,30 @@ function openMenu(menuItem, direction) {
 export function closeMobileNav(){
     const activeDropdowns = document.querySelectorAll('#mobile-nav .dropdown-menu.show, #mobile-nav .dropdown.show')
     const activeSubNav = document.querySelector('#mobile-nav .sub-nav:not(.d-none)')
-    const activeMobileSelection = document.querySelector('#mobile-nav a[data-path].active')
+    const activeMobileSelection = document.querySelector('#mobile-nav a[data-path].active') || false
     if(activeSubNav){
         activeSubNav.classList.add('d-none')
     }
     activeDropdowns.forEach(dd => dd.classList.remove('show'))
-    activeMobileSelection.classList.remove('active')
+
+    if(activeMobileSelection) {
+      activeMobileSelection.classList.remove('active')
+    }
 }
 
 export function setMobileNav () {
     const dataPath = window.location.pathname.slice(1,-1)
-    const mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`)
+    const mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
-    const parentMenu = mobileSelection.parentElement
+
+    if (mobileSelection) {
+        const parentMenu = mobileSelection.parentElement || false
     
-    mobileSelection.classList.add('active')
-    if(subMenu){
-        openMenu(subMenu, 'submenu')
-    }else if (parentMenu){
-        openMenu(parentMenu, 'parentMenu')
+        mobileSelection.classList.add('active')
+        if(subMenu){
+            openMenu(subMenu, 'submenu')
+        }else if (parentMenu){
+            openMenu(parentMenu, 'parentMenu')
+        }   
     }
 }
