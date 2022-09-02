@@ -128,10 +128,10 @@ Finally, run the following commands:
 - `kubectl apply -f agent-services.yaml`
 - `kubectl apply -f cluster-agent-deployment.yaml`
 
-### APM and DogStatsD
-To configure and inject APM tracers libraries automatically, it requires the Datadog Agent v7.39+
+### APM
+You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracers libraries automatically.
 
-Once the Cluster Agent is successfully installed, please do one of the following:
+After you install the Cluster Agent, do one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
@@ -144,7 +144,7 @@ The annotations are a `key: value` pair in the following format:
 datadoghq.com/<language>-lib.version: <lib-version>
 ```
 
-Adding a this annotation means the tracer library for that language and version is injected into the containerized application.
+Adding a this annotation results in the injection of the tracer library for that language and version into the containerized application.
 Currently, the list of possible lib values include `java`, `js` and `python` respectively.
 
 For example to inject the latest Java tracer:
@@ -155,7 +155,9 @@ annotations:
     datadoghq.com/js-lib.version: "3.0.0"
 ```
 
-If needed, you can add several `<language>-lib.version` annotations to inject multiple language tracers into one container.
+**Note**: Use caution specifying `latest` as major library releases can introduce breaking changes.
+
+Although it's an uncommon scenario, you can add multiple `<language>-lib.version` annotations to inject multiple language tracers into one container.
 
 For example to inject the latest Java tracer and Node tracer v3.0.0:
 ```yaml
