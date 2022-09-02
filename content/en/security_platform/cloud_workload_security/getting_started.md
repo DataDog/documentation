@@ -29,6 +29,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
 
 1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
 2. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
+3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 
 ## Requirements
 
