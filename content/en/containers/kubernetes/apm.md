@@ -273,7 +273,7 @@ List of all environment variables available for tracing within the Agent running
 
 
 [1]: /agent/kubernetes/
-[2]: /containers/cluster_agent/admission_controller/apm
+[2]: /containers/cluster_agent/admission_controller/#apm
 [3]: /tracing/setup/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /tracing/guide/security/#replace-rules
