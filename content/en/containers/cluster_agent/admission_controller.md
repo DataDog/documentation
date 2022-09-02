@@ -153,7 +153,6 @@ For example to inject the latest Java tracer:
 ```yaml
 annotations:
     datadoghq.com/java-lib.version: "latest"
-    datadoghq.com/js-lib.version: "3.0.0"
 ```
 
 **Note**: Use caution specifying `latest` as major library releases can introduce breaking changes.
@@ -181,7 +180,7 @@ Possible options:
 | `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
 ### DogStatsD
-To configure DogstatsD clients, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
+To configure DogstatsD clients or other APM libraries that does not support library injection at this time, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
