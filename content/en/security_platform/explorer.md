@@ -18,15 +18,6 @@ further_reading:
 
 From the [Security Signals Explorer][1], correlate and triage security signals. You can also access [Cloud SIEM][2], [Posture Management][3], [Workload Security][4], and [Application Security Monitoring][5] dashboards from this page.
 
-In this view, you can:
-
-- [Explore your Security Signals](#explore-your-security-signals)
-- [Inspect a Security Signal](#inspect-a-security-signal)
-  - [Threat intelligence](#threat-intelligence)
-  - [Anomaly detection](#anomaly-detection)
-- [Visualize your security signals analytics](#visualize-your-security-signals-analytics)
-- [Further Reading](#further-reading)
-
 ## Explore your Security Signals
 
 The Security Signals search results are displayed in the Security Signals Table.
