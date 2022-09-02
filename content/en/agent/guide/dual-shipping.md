@@ -330,7 +330,7 @@ and add the relevant settings to `customAgentConfig`.
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "agent-http-intake.logs.datadoghq.com"
         Port: 443
         is_reliable: true
 ```
