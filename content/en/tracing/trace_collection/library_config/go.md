@@ -102,6 +102,9 @@ Enable web framework and library instrumentation. When false, the application co
 : **Default**: `null` <br>
 Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
 
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **Default**: `false` <br>
+Datadog may collect [environmental and diagnostic information about your system][8] to improve the product. When false, this telemetry data will not be collected.
 
 
 ## Configure APM environment name
@@ -138,3 +141,4 @@ extracted value is used.
 [5]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [6]: /getting_started/tracing/#environment-name
 [7]: /tracing/trace_collection/dd_libraries/go
+[8]: /tracing/configure_data_security#telemetry-collection
