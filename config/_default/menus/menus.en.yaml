@@ -22,7 +22,7 @@ main:
     weight: 7000000
   - name: Administration
     identifier: administration_heading
-    weight: 8000000
+    weight: 9000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -1094,7 +1094,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 120000
+    weight: 120000  
   - name: Alerting
     url: monitors/
     pre: monitor
@@ -1306,6 +1306,31 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Set up Workflows 
+    url: workflows/setup/
+    parent: workflows
+    identifier: workflows_setup
+    weight: 1
+  - name: Build Workflows
+    url: workflows/build/
+    parent: workflows
+    identifier: workflows_build
+    weight: 2
+  - name: Actions Catalog
+    url: workflows/actions_catalog/
+    parent: workflows
+    identifier: workflows_actions_catalog
+    weight: 3
+  - name: Generic Actions
+    url: workflows/actions_catalog/generic_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_generic_actions
+    weight: 101
+  - name: Debug Workflows
+    url: workflows/debug_workflows/
+    parent: workflows
+    identifier: workflows_debug
+    weight: 4
   - name: APM
     url: tracing/
     pre: apm
