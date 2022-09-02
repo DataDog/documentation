@@ -96,8 +96,8 @@ Datadog Cloud Workload Security signals come equipped with a process ancestry tr
   
 The waterfall structure shows the consecutive executions of child processes associated with contextual information. The metadata for each process helps you gain more visibility into the system activity and spot security breaches.
 Key types of information:
-* `command line` to identify what Unix utility the process has spawned. 
-* `environment variables` to determine if any sensitive information were inherited to processes. 
+* `command line` to identify which Unix utility the process spawned. 
+* `environment variables` to determine if the process inherited any sensitive information. 
 * `command line arguments` to collect any identifying data used by an attacker while the process was running.
   
 
