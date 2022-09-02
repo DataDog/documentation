@@ -1332,7 +1332,7 @@ main:
     identifier: workflows_generic_actions
     weight: 101
   - name: Debug Workflows
-    url: workflows/debug_workflows/
+    url: workflows/debug/
     parent: workflows
     identifier: workflows_debug
     weight: 4
