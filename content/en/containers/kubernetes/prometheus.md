@@ -128,10 +128,10 @@ For a full list of available parameters for instances, including `namespace` and
 1. [Launch the Datadog Agent][10].
 
 2. Use the [Prometheus `prometheus.yaml`][11] to launch an example Prometheus Deployment with the Autodiscovery configuration on the pod:
-{{< tabs >}}
-{{% tab "Kubernetes (AD v2)" %}}
+   {{< tabs >}}
+   {{% tab "Kubernetes (AD v2)" %}}
 
-    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+   **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
 
     ```yaml
      # (...)
@@ -159,8 +159,8 @@ For a full list of available parameters for instances, including `namespace` and
           - name: prometheus-example
           # (...)
     ```
-{{% /tab %}}
-{{% tab "Kubernetes (AD v1)" %}}
+   {{% /tab %}}
+   {{% tab "Kubernetes (AD v1)" %}}
 
     ```yaml
      # (...)
@@ -190,8 +190,8 @@ For a full list of available parameters for instances, including `namespace` and
           # (...)
     ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
      Command to create the Prometheus Deployment:
 
