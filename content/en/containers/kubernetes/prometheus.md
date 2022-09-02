@@ -133,7 +133,7 @@ For a full list of available parameters for instances, including `namespace` and
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
 
-    ```yaml
+   ```yaml
      # (...)
     spec:
       template:
@@ -144,10 +144,10 @@ For a full list of available parameters for instances, including `namespace` and
                 "openmetrics": {
                   "init_config": {},
                   "instances": [
-                    "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
-                    "namespace": "documentation_example_kubernetes",
-                    "metrics": [
-                      {"promhttp_metric_handler_requests": "handler.requests"},
+                   "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+                   "namespace": "documentation_example_kubernetes",
+                   "metrics": [
+                     {"promhttp_metric_handler_requests": "handler.requests"},
                       {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
                       "go_memory.*"
                     ]
@@ -158,11 +158,11 @@ For a full list of available parameters for instances, including `namespace` and
           containers:
           - name: prometheus-example
           # (...)
-    ```
+   ```
    {{% /tab %}}
    {{% tab "Kubernetes (AD v1)" %}}
 
-    ```yaml
+   ```yaml
      # (...)
     spec:
       template:
@@ -188,7 +188,7 @@ For a full list of available parameters for instances, including `namespace` and
           containers:
           - name: prometheus-example
           # (...)
-    ```
+   ```
 
    {{% /tab %}}
    {{< /tabs >}}
