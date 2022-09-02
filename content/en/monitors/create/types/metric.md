@@ -94,7 +94,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | Specify monitor query aggregation | No       | `average`      | `sum`             |
 | Evaluation window                 | No       | `5 minutes`    | `1 day`           |
 
-**Definitions**:
+**Definitions**
 
 | Option           | Description                                                                                                                                                                   |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -121,7 +121,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | Evaluation window                 | No       | `5 minutes`    | `1 day`           |
 | Comparison window                 | No       | `5 minutes`    | `1 month`         |
 
-**Definitions**:
+**Definitions**
 
 | Option           | Description                                                                                                                                                                   |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
