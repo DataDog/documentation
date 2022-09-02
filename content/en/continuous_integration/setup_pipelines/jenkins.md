@@ -147,8 +147,8 @@ If you are using Jenkins workers, you can corralate pipelines with the infrastru
 
 1. Install the [Datadog Agent][1] in every Jenkins worker.
 2. Set and export a new environment variable called `DD_CI_HOSTNAME` in every Jenkins worker with the worker hostname. 
-    1. It must be the same hostname that the Datadog Agent is reporting in the infrastructure metrics for that worker.
-    2. You can use either fixed values or another environment variables as valid values.
+  * It must be the same hostname that the Datadog Agent is reporting in the infrastructure metrics for that worker.
+  * You can use fixed values or other environment variables as valid values.
 
 ```bash
 # Using fixed value
@@ -158,7 +158,7 @@ export DD_CI_HOSTNAME=my-hostname
 export DD_CI_HOSTNAME=$HOSTNAME
 ```
 
-Notice this is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not required additional actions.
+This is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not require additional actions.
 
 **Note**: Infrastructure metric correlation is supported since Jenkins Plugin v5.0.0+
 
