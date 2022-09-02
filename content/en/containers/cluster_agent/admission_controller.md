@@ -129,7 +129,7 @@ Finally, run the following commands:
 - `kubectl apply -f cluster-agent-deployment.yaml`
 
 ### APM
-You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracers libraries automatically.
+You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracing libraries automatically.
 
 After you install the Cluster Agent, do one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
