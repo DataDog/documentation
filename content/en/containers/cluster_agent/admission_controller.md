@@ -128,6 +128,7 @@ Finally, run the following commands:
 - `kubectl apply -f agent-services.yaml`
 - `kubectl apply -f cluster-agent-deployment.yaml`
 
+
 ### APM
 You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracing libraries automatically.
 
@@ -178,6 +179,11 @@ Possible options:
 | `false`          | No label                                | No        |
 | `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
 | `false`          | `admission.datadoghq.com/enabled=false` | No        |
+
+### DogStatsD
+To configure DogstatsD clients, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
+- Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
+- Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
 
 #### Order of priority
