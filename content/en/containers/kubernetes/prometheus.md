@@ -48,6 +48,39 @@ For an explanation of how Prometheus and OpenMetrics metrics map to Datadog metr
 
 Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying the following `annotations` to your **pod** exposing the OpenMetrics/Prometheus metrics:
 
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+```yaml
+# (...)
+metadata:
+  #(...)
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+      {
+        "openmetrics": {
+          "init_config": {},
+          "instances": [
+            {
+              "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
+              "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
+              "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
+
+            }
+          ]
+        }
+      }
+    
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER>'
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes (AD v1)" %}}
+
 ```yaml
 # (...)
 metadata:
@@ -69,6 +102,9 @@ spec:
   containers:
     - name: '<CONTAINER_IDENTIFIER>'
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 With the following configuration placeholder values:
 
@@ -92,6 +128,39 @@ For a full list of available parameters for instances, including `namespace` and
 1. [Launch the Datadog Agent][10].
 
 2. Use the [Prometheus `prometheus.yaml`][11] to launch an example Prometheus Deployment with the Autodiscovery configuration on the pod:
+    {{< tabs >}}
+    {{% tab "Kubernetes (AD v2)" %}}
+
+    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+    ```yaml
+     # (...)
+    spec:
+      template:
+        metadata:
+          annotations:
+            ad.datadoghq.com/prometheus-example.checks: |
+              {
+                "openmetrics": {
+                  "init_config": {},
+                  "instances": [
+                    "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+                    "namespace": "documentation_example_kubernetes",
+                    "metrics": [
+                      {"promhttp_metric_handler_requests": "handler.requests"},
+                      {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+                      "go_memory.*"
+                    ]
+                  ]
+                }
+              }
+        spec:
+          containers:
+          - name: prometheus-example
+          # (...)
+    ```
+    {{% /tab %}}
+    {{% tab "Kubernetes (AD v1)" %}}
 
     ```yaml
      # (...)
@@ -120,6 +189,9 @@ For a full list of available parameters for instances, including `namespace` and
           - name: prometheus-example
           # (...)
     ```
+
+    {{% /tab %}}
+    {{< /tabs >}}
 
      Command to create the Prometheus Deployment:
 
