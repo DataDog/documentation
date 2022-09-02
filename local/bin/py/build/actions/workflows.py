@@ -21,9 +21,10 @@ TEMPLATE = """\
 
 def workflows(content, content_dir):
     logger.info("Starting Workflow action...")
+    options = content.get("options", {})
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         # print(file_name)
-        bundle_excludes = content.get("options", {}).get('bundle_excludes', [])
+        bundle_excludes = options.get('bundle_excludes', [])
         if any(substring in file_name for substring in bundle_excludes) or file_name.endswith('manifest.schema.json'):
             logging.info(f"skipping {file_name}")
         else:

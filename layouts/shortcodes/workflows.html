@@ -1,8 +1,12 @@
 {{ $input := (replace (.Page.Params.input | default "") "#/$defs/" "") }}
 {{ $output := (replace (.Page.Params.output | default "") "#/$defs/" "") }}
 {{ $jsonDataFile := (index .Site.Data.workflows .Page.Params.bundle) }}
-{{ $inputshtml := (index $jsonDataFile $input) }}
-{{ $outputshtml := (index $jsonDataFile $output) }}
+{{ $inputshtml := "" }}
+{{ $outputshtml := "" }}
+{{ with $jsonDataFile }}
+  {{ $inputshtml = (index . $input) }}
+  {{ $outputshtml = (index . $output) }}
+{{ end }}
 
 {{ with $inputshtml }}
 <h3>Inputs</h3>
