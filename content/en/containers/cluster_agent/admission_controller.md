@@ -145,14 +145,14 @@ datadoghq.com/<language>-lib.version: <lib-version>
 ```
 
 Adding a this annotation means the tracer library for that language and version is injected into the containerized application.
-Currently, the list of possible lib values include `java`, `node` and `python` respectively.
+Currently, the list of possible lib values include `java`, `js` and `python` respectively.
 
 For example to inject the latest Java tracer:
 
 ```yaml
 annotations:
     datadoghq.com/java-lib.version: "latest"
-    datadoghq.com/node-lib.version: "3.0.0"
+    datadoghq.com/js-lib.version: "3.0.0"
 ```
 
 If needed, you can add several `<language>-lib.version` annotations to inject multiple language tracers into one container.
@@ -161,7 +161,7 @@ For example to inject the latest Java tracer and Node tracer v3.0.0:
 ```yaml
 annotations:
     datadoghq.com/java-lib.version: "latest"
-    datadoghq.com/node-lib.version: "3.0.0"
+    datadoghq.com/js-lib.version: "3.0.0"
 ```
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
