@@ -31,11 +31,7 @@ There are three main components for the VMware Tanzu Application Service integra
 
 ## Monitor your applications
 
-## Setup
-
-Read the [VMware Tanzu installation and configuration][1] guide.
-
-[1]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+Use the [VMware Tanzu installation and configuration][7] guide to install the integration through the Tanzu Ops Manager.
 
 ### Configuration
 
@@ -106,7 +102,7 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 ##### Notification in case of misconfigured proxy
 
-For Agent version 6.12 or greater, when using a [proxy configuration][1] with the buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
+For Agent version 6.12 or greater, when using a [proxy configuration](/agent/logs/proxy/) with the buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
 If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event explorer. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
@@ -123,8 +119,6 @@ cf set-env <YOUR_APP> DD_TAGS key1=value1,key2=value2
 cf restage <YOUR_APP>
 ```
 
-[1]: /agent/logs/proxy/
-
 {{< /site-region >}}
 
 ### DogStatsD
@@ -133,11 +127,7 @@ See [Metric Submission: DogStatsD][5] for more information. There is a list of [
 
 ## Monitor your VMware Tanzu Application Service cluster
 
-## Setup
-
-Read the [VMware Tanzu installation and configuration][1] guide.
-
-[1]: https://docs.pivotal.io/partners/datadog/installing.html
+Use the [VMware Tanzu installation and configuration][9] guide to install the integration through the Tanzu Ops Manager.
 
 ## Data Collected
 
@@ -157,6 +147,9 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [6]: /integrations/guide/vmware-tanzu-application-service-manual-setup
+[7]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+[9]: https://docs.pivotal.io/partners/datadog/installing.html
+[10]: /agent/logs/proxy/
 [12]: /tracing/setup/
 [14]: /libraries/
 [24]: /integrations/system/#metrics

@@ -14,21 +14,21 @@ There are three main components for the VMware Tanzu Application Service integra
 
 ## Monitor your applications
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your VMware Tanzu Application Service application. This is a [supply buildpack][4] for VMware Tanzu Application Service that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
+Use the **Datadog Cloud Foundry Buildpack** to monitor your VMware Tanzu Application Service application. This is a [supply buildpack][2] for VMware Tanzu Application Service that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
 
 ### Pivotal Platform < 1.12
 
-The Datadog buildpack uses the Pivotal Platform [Pushing an App with Multiple Buildpacks][1] feature that was introduced in version `1.12`.
+The Datadog buildpack uses the Pivotal Platform [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
 
-For older versions, Pivotal Platform provides a backwards compatible version of this feature in the form of a [multi-buildpack][2]. You must install and configure this version in order to use Datadog's buildpack.
+For older versions, Pivotal Platform provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version in order to use Datadog's buildpack.
 
-1. **Upload the multi-buildpack back-port.** Download the latest [multi-buildpack release][2] and upload it to your Pivotal Platform environment.
+1. **Upload the multi-buildpack back-port.** Download the latest multi-buildpack release and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. **Add a multi-buildpack manifest to your application.** As detailed [usage section][3] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
+2. **Add a multi-buildpack manifest to your application.** As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
 
     ```yaml
     buildpacks:
@@ -43,7 +43,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
 
       Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
 
-      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][4].
+      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
 
 3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
@@ -53,34 +53,26 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
 
 ### Pivotal Platform >= 1.12
 
-1. **Upload the Datadog Pivotal Platform Buildpack.** [Download the latest Datadog build pack release][5] and upload it to your Pivotal Platform environment.
+1. **Upload the Datadog Pivotal Platform Buildpack.** [Download the latest Datadog build pack release][7] and upload it to your Pivotal Platform environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
-2. **Push your application with the Datadog buildpack and your buildpacks.** The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][1].
+2. **Push your application with the Datadog buildpack and your buildpacks.** The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][4].
+      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
 
 ### Meta-Buildpack **(deprecated)**
 
-If you are a [meta-buildpack][6] user, Datadog's buildpack can be used as a decorator out of the box.
+If you are a [meta-buildpack][8] user, Datadog's buildpack can be used as a decorator out of the box.
 
 **Note**: Pivotal has deprecated the meta-buildpack in favor of the multi-buildpack.
-
-[1]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
-[2]: https://github.com/cloudfoundry/multi-buildpack
-[3]: https://github.com/cloudfoundry/multi-buildpack#usage
-[4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
-[5]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
-[6]: https://github.com/cf-platform-eng/meta-buildpack
-
 
 ## Monitor your VMware Tanzu Application Service cluster
 
@@ -196,7 +188,7 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 #### Verify the Agent is installed everywhere
 
-To check if the Agent installations were successful, filter by `cloudfoundry` on the [Host map page][20] in Datadog. The Datadog Agent BOSH release tags each host with `cloudfoundry`. Optionally, group hosts by any tag, such as `bosh_job`, as in the following screenshot:
+To check if the Agent installations were successful, filter by `cloudfoundry` on the [Host map][20] in Datadog. The Datadog Agent BOSH release tags each host with `cloudfoundry`. Optionally, group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="The host map in Datadog with cloudfoundry entered in the Filter section and bosh_job in the Group section"  >}}
 
@@ -314,6 +306,13 @@ On the [Metrics explorer][23] page in Datadog, search for metrics beginning with
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="The Metrics Explorer in Datadog with cloudfoundry.nozzle entered in the search bar"  >}}
 
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20(PCF)%20is%20now%20VMware%20Tanzu%20Application%20Service
+[2]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
+[3]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
+[4]: https://github.com/cloudfoundry/multi-buildpack
+[5]: https://github.com/cloudfoundry/multi-buildpack#usage
+[6]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
+[7]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
+[8]: https://github.com/cf-platform-eng/meta-buildpack
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install
 [17]: https://bosh.io/docs/runtime-config.html#addons
@@ -323,15 +322,6 @@ On the [Metrics explorer][23] page in Datadog, search for metrics beginning with
 [21]: https://github.com/DataDog/datadog-firehose-nozzle-release
 [22]: https://github.com/DataDog/datadog-firehose-nozzle-release/blob/master/jobs/datadog-firehose-nozzle/spec
 [23]: https://app.datadoghq.com/metric/explorer
-
-
-
-[2]: https://network.pivotal.io/products/datadog-application-monitoring
-[3]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20(PCF)%20is%20now%20VMware%20Tanzu%20Application%20Service.
-[4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[12]: /tracing/setup/
-[14]: /libraries/
 [24]: /integrations/system/#metrics
 [25]: /integrations/network/#metrics
 [26]: /integrations/disk/#metrics
