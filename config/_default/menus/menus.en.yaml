@@ -1306,6 +1306,11 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Workflows
+    url: workflows/
+    identifier: workflows
+    parent: platform_heading
+    weight: 140000  
   - name: Set up Workflows 
     url: workflows/setup/
     parent: workflows
