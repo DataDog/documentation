@@ -72,14 +72,17 @@ export function closeMobileNav(){
 
 export function setMobileNav () {
     const dataPath = window.location.pathname.slice(1,-1)
-    const mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`)
+    const mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
-    const parentMenu = mobileSelection.parentElement
+
+    if (mobileSelection) {
+        const parentMenu = mobileSelection.parentElement || false
     
-    mobileSelection.classList.add('active')
-    if(subMenu){
-        openMenu(subMenu, 'submenu')
-    }else if (parentMenu){
-        openMenu(parentMenu, 'parentMenu')
+        mobileSelection.classList.add('active')
+        if(subMenu){
+            openMenu(subMenu, 'submenu')
+        }else if (parentMenu){
+            openMenu(parentMenu, 'parentMenu')
+        }   
     }
 }
