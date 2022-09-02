@@ -146,7 +146,10 @@ datadoghq.com/<language>-lib.version: <lib-version>
 ```
 
 Adding a this annotation results in the injection of the tracer library for that language and version into the containerized application.
-Currently, the list of possible lib values include `java`, `js` and `python` respectively.
+Valid `<language>` values are:
+- `java`
+- `js`
+- `python`
 
 For example to inject the latest Java tracer:
 
