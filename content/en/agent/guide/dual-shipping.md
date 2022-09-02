@@ -24,17 +24,17 @@ You can add the YAML configuration to your `datadog.yaml` or launch the Agent wi
 In `datadog.yaml`:
 ```yaml
 additional_endpoints:
-  "https://mydomain.datadoghq.com":
+  "https://app.datadoghq.com":
   - apikey2
   - apikey3
-  "https://mydomain.datadoghq.eu":
+  "https://app.datadoghq.eu":
   - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -47,26 +47,26 @@ In `datadog.yaml`:
 apm_config:
   [...]
   additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://trace.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://trace.agent.datadoghq.eu":
     - apikey4
 
   profiling_additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://trace.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://trace.agent.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_APM_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -156,7 +156,7 @@ logs_config:
   use_http: true
   additional_endpoints:
   - api_key: "apiKey2"
-    Host: "mydomain.datadoghq.com"
+    Host: "agent-http-intake.logs.datadoghq.com"
     Port: 443
     is_reliable: true
 ```
@@ -165,7 +165,7 @@ logs_config:
 
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
-DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -320,10 +320,10 @@ and add the relevant settings to `customAgentConfig`.
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
     additional_endpoints:
-      "https://mydomain.datadoghq.com":
+      "https://app.datadoghq.com":
       - apikey2
       - apikey3
-      "https://mydomain.datadoghq.eu":
+      "https://app.datadoghq.eu":
       - apikey4 
 
     logs_config:
