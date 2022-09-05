@@ -93,7 +93,7 @@ For containerized, serverless, and cloud environments:
     - The `/var/run/datadog/apm.socket` Unix domain socket by default.
     - If the socket does not exist, then traces are sent to `localhost:8126`.
     - If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` or `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
-    - Using Unix Domain Sockets for trace transport is only supported on .NET Core 3.1 and greater.
+    - Using Unix Domain Sockets for trace transport is only supported on .NET Core 3.1 and later.
 
 For more information on how to configure these settings, see [Configuration](#configuration).
 
