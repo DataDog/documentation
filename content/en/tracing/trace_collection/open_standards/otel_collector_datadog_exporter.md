@@ -200,6 +200,10 @@ To learn more about configuring your application, read the [Application Configur
 
 For Gateway deployments: 
 
+<div class="alert alert-warning">
+Datadog is incompatible with Gateway deployments which do not have a Collector agent deployed running on each application host. Such a set up will result in a broken product exprience.
+</div>
+
 1. Set up each [OpenTelemetry Collector agent][18], just like in the [DaemonSet deployment](#daemonset-deployment). 
 
 2. Change the DaemonSet to include an [OTLP exporter][19] instead of the Datadog Exporter [currently in place][20]:
