@@ -60,7 +60,7 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
   "Version": "2012-10-17",
   "Statement": [
       {
-          "Sid": "DDCCMListBucket",
+          "Sid": "DDCloudCostReadBucket",
           "Effect": "Allow",
           "Action": [
               "s3:ListBucket"
@@ -68,7 +68,7 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
           "Resource": "arn:aws:s3:::BUCKETNAME"
       },
       {
-          "Sid": "DDCCMGetObject",
+          "Sid": "DDCloudCostGetBill",
           "Effect": "Allow",
           "Action": [
               "s3:GetObject"
@@ -76,7 +76,7 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
           "Resource": "arn:aws:s3:::BUCKETNAME/REPORT_PREFIX/REPORT_NAME/*"
       },
       {
-          "Sid": "CostExplorerAccuracyCheck",
+          "Sid": "DDCloudCostCheckAccuracy",
           "Effect": "Allow",
           "Action": [
               "ce:Get*"
@@ -84,7 +84,7 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
           "Resource": "*"
       },
       {
-          "Sid": "CURReportDefinition",
+          "Sid": "DDCloudCostListCURs",
           "Action": [
             "cur:DescribeReportDefinitions"
           ],
