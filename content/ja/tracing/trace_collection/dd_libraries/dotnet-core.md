@@ -245,7 +245,7 @@ Linux 上で動作する Docker イメージの場合、`createLogPath.sh` ス�
 
 {{% /tab %}}
 
-Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
+{{% tab "NuGet" %}}
 
 1. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
