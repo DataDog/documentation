@@ -687,6 +687,16 @@
               tag: "Documentation"
               text: "Learn about the Error Tracking Explorer"
 
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_collection/swiftui.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: 'swiftui.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/swiftui.md"]
+
     - action: pull-and-push-folder
       branch: master
       globs:
