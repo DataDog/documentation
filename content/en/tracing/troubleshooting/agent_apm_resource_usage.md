@@ -10,7 +10,7 @@ The Agent buffers unprocessed payloads in memory, so throttling the Agent proces
 
 ## Detect out-of-CPU
 
-To monitor CPU usage and detect oncoming out-of-CPU issues, compare the [maximum CPU percentage][1] configured for the Agent to the `datadog.trace_agent.cpu_percent` metric. The `datadog.trace_agent.cpu_percent` metric is CPU usage in percentage of a core. For example, a value of `50` is half a core, or `200` is two cores. 
+To monitor CPU usage and detect oncoming out-of-CPU issues, compare the [maximum CPU percentage][1] configured for the Agent to the `datadog.trace_agent.cpu_percent` metric. The `datadog.trace_agent.cpu_percent` metric is CPU usage in terms of percentage of a core. For example, a value of `50` is half a core, or `200` is two cores. 
 
 See the full list of [Agent APM metrics][2].
 
@@ -18,7 +18,7 @@ See the full list of [Agent APM metrics][2].
 
 ## Resource requirements
 
-A good indicator to calculate adequate resource limits for the Agent isthe number of spans received per second, reported in the `datadog.trace_agent.receiver.spans_received` metric.
+A good indicator to calculate adequate resource limits for the Agent is the number of spans received per second, reported in the `datadog.trace_agent.receiver.spans_received` metric.
 Based on that metric's value, follow the table below to choose adequate CPU and memory limits:
 
 | Spans per second  | CPU (core)   | Memory (MB)  |
