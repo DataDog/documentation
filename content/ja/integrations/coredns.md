@@ -133,6 +133,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -155,7 +157,36 @@ spec:
     - name: coredns
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: coredns
+  annotations:
+    ad.datadoghq.com/coredns.checks: |
+      {
+        "coredns": {
+          "init_config": {},
+          "instances": [
+            {
+              "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
+              "tags": ["dns-pod:%%host%%"]
+            }
+          ]
+        }
+      }
+  labels:
+    name: coredns
+spec:
+  containers:
+    - name: coredns
+```
+
 レガシーの OpenMetricsBaseCheckV1 バージョンのチェックを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えてください。
+
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
     ad.datadoghq.com/coredns.instances: |
@@ -165,6 +196,17 @@ spec:
           "tags": ["dns-pod:%%host%%"]
         }
       ]
+```
+
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+          "instances": [
+            {
+              "prometheus_url": "http://%%host%%:9153/metrics", 
+              "tags": ["dns-pod:%%host%%"]
+            }
+          ]
 ```
 
 **注**:
@@ -178,6 +220,8 @@ spec:
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1
