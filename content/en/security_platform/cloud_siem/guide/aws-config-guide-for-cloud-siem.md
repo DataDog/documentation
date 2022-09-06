@@ -20,6 +20,8 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
+aliases:
+  - /security_platform/guide/aws-config-guide-for-cloud-siem
 ---
 
 ## Overview
