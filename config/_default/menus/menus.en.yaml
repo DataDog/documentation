@@ -2418,11 +2418,6 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
-  - name: Guides
-    url: security_platform/guide/
-    parent: security_platform
-    identifier: security_platform_guides
-    weight: 9
   - name: Cloud SIEM
     url: security_platform/cloud_siem/
     pre: siem
@@ -2454,6 +2449,11 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
     weight: 5
+  - name: Guides
+    url: security_platform/guide/
+    parent: cloud_siem
+    identifier: siem_guides
+    weight: 6
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform_heading
