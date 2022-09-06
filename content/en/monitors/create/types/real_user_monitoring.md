@@ -20,13 +20,13 @@ further_reading:
 
 ## Overview
 
-Once [Real User Monitoring is enabled][1] for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
+Once [Real User Monitoring (RUM) is enabled][1] for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
 ## Create a RUM monitor
 
-To create a Real User Monitoring monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Real User Monitoring**][2].
+To create a RUM monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Real User Monitoring**][2].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1,000 RUM monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 RUM monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
