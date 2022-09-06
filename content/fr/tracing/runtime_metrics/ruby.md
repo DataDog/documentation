@@ -1,21 +1,23 @@
 ---
-title: Métriques de runtime Ruby
-kind: documentation
-description: Consultez des statistiques supplémentaires sur les performances de votre application Ruby grâce aux métriques runtime associées à vos traces.
+description: Consultez des statistiques supplémentaires sur les performances de votre
+  application Ruby grâce aux métriques runtime associées à vos traces.
 further_reading:
-  - link: tracing/connect_logs_and_traces
-    tag: Documentation
-    text: Associer vos logs à vos traces
-  - link: tracing/manual_instrumentation
-    tag: Documentation
-    text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/opentracing
-    tag: Documentation
-    text: Implémenter Opentracing dans vos applications
-  - link: tracing/visualization/
-    tag: Documentation
-    text: Explorer vos services, ressources et traces
+- link: tracing/connect_logs_and_traces
+  tag: Documentation
+  text: Associer vos logs à vos traces
+- link: tracing/manual_instrumentation
+  tag: Documentation
+  text: Instrumenter vos applications manuellement pour créer des traces
+- link: tracing/opentracing
+  tag: Documentation
+  text: Implémenter Opentracing dans vos applications
+- link: tracing/visualization/
+  tag: Documentation
+  text: Explorer vos services, ressources et traces
+kind: documentation
+title: Métriques de runtime Ruby
 ---
+
 <div class="alert alert-warning">
 Cette fonctionnalité est actuellement en version bêta privée. <a href="https://docs.datadoghq.com/help/">Contactez l'assistance</a> afin de demander son activation pour votre compte.
 </div>
@@ -39,7 +41,7 @@ Datadog.configure do |c|
   # Facultatif : vous pouvez configurer l'instance DogStatsD instance utilisée pour envoyer les métriques runtime.
   # DogStatsD est automatiquement configuré avec les paramètres par défaut si `dogstatsd-ruby` est disponible.
   # Vous pouvez utiliser le host et le port de l'Azgent Datadog pour la configuration. Valeur par défaut : 'localhost:8125'.
-  c.runtime_metrics statsd: Datadog::Statsd.new
+  c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
 
@@ -55,16 +57,16 @@ Les métriques suivantes sont recueillies par défaut après l'activation des m�
 
 {{< get-metrics-from-git "ruby" >}}
 
-Datadog fournit non seulement ces métriques sur votre page Service de l'APM, mais également un [dashboard de runtime Ruby par défaut][7] comportant les tags `service` et `runtime-id` appliqués à ces métriques.
+Datadog fournit non seulement ces métriques sur votre page Service APM, mais également un [dashboard pour le runtime Ruby par défaut][7].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://rubygems.org/gems/dogstatsd-ruby
-[2]: /fr/metrics/dogstatsd_metrics_submission/#setup
+[2]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
 [4]: /fr/agent/docker/#dogstatsd-custom-metrics
 [5]: /fr/developers/dogstatsd/?tab=kubernetes#agent
-[6]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[6]: /fr/agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics

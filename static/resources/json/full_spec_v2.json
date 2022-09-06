@@ -22822,6 +22822,18 @@
         },
         "type": "object"
       },
+      "MetricActiveConfigurationType": {
+        "default": "actively_queried_configurations",
+        "description": "The metric actively queried configuration resource type.",
+        "enum": [
+          "actively_queried_configurations"
+        ],
+        "example": "actively_queried_configurations",
+        "type": "string",
+        "x-enum-varnames": [
+          "ACTIVELY_QUERIED_CONFIGURATIONS"
+        ]
+      },
       "MetricAllTags": {
         "description": "Object for a single metric's indexed tags.",
         "properties": {
@@ -23443,11 +23455,16 @@
         "default": "deflate",
         "description": "HTTP header used to compress the media-type.",
         "enum": [
-          "deflate"
+          "deflate",
+          "zstd1",
+          "gzip"
         ],
+        "example": "deflate",
         "type": "string",
         "x-enum-varnames": [
-          "DEFLATE"
+          "DEFLATE",
+          "ZSTD1",
+          "GZIP"
         ]
       },
       "MetricCustomAggregation": {
@@ -24336,6 +24353,369 @@
           "metric",
           "points"
         ],
+        "type": "object"
+      },
+      "MetricSuggestedAggregations": {
+        "description": "List of aggregation combinations that have been actively queried.",
+        "example": [
+          {
+            "space": "sum",
+            "time": "sum"
+          },
+          {
+            "space": "sum",
+            "time": "count"
+          }
+        ],
+        "items": {
+          "description": "A time and space aggregation combination for use in query.",
+          "example": {
+            "space": "sum",
+            "time": "sum"
+          },
+          "properties": {
+            "space": {
+              "description": "A space aggregation for use in query.",
+              "enum": [
+                "avg",
+                "max",
+                "min",
+                "sum"
+              ],
+              "example": "sum",
+              "type": "string",
+              "x-enum-varnames": [
+                "AVG",
+                "MAX",
+                "MIN",
+                "SUM"
+              ]
+            },
+            "time": {
+              "description": "A time aggregation for use in query.",
+              "enum": [
+                "avg",
+                "count",
+                "max",
+                "min",
+                "sum"
+              ],
+              "example": "sum",
+              "type": "string",
+              "x-enum-varnames": [
+                "AVG",
+                "COUNT",
+                "MAX",
+                "MIN",
+                "SUM"
+              ]
+            }
+          },
+          "required": [
+            "time",
+            "space"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "MetricSuggestedTagsAndAggregations": {
+        "description": "Object for a single metric's actively queried tags and aggregations.",
+        "properties": {
+          "attributes": {
+            "description": "Object containing the definition of a metric's actively queried tags and aggregations.",
+            "properties": {
+              "active_aggregations": {
+                "description": "List of aggregation combinations that have been actively queried.",
+                "example": [
+                  {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  {
+                    "space": "sum",
+                    "time": "count"
+                  }
+                ],
+                "items": {
+                  "description": "A time and space aggregation combination for use in query.",
+                  "example": {
+                    "space": "sum",
+                    "time": "sum"
+                  },
+                  "properties": {
+                    "space": {
+                      "description": "A space aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    },
+                    "time": {
+                      "description": "A time aggregation for use in query.",
+                      "enum": [
+                        "avg",
+                        "count",
+                        "max",
+                        "min",
+                        "sum"
+                      ],
+                      "example": "sum",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "AVG",
+                        "COUNT",
+                        "MAX",
+                        "MIN",
+                        "SUM"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "time",
+                    "space"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "active_tags": {
+                "description": "List of tag keys that have been actively queried.",
+                "example": [
+                  "app",
+                  "datacenter"
+                ],
+                "items": {
+                  "description": "Actively queried tag keys.",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "description": "The metric name for this resource.",
+            "example": "test.metric.latency",
+            "type": "string"
+          },
+          "type": {
+            "default": "actively_queried_configurations",
+            "description": "The metric actively queried configuration resource type.",
+            "enum": [
+              "actively_queried_configurations"
+            ],
+            "example": "actively_queried_configurations",
+            "type": "string",
+            "x-enum-varnames": [
+              "ACTIVELY_QUERIED_CONFIGURATIONS"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "MetricSuggestedTagsAndAggregationsResponse": {
+        "description": "Response object that includes a single metric's actively queried tags and aggregations.",
+        "properties": {
+          "data": {
+            "description": "Object for a single metric's actively queried tags and aggregations.",
+            "properties": {
+              "attributes": {
+                "description": "Object containing the definition of a metric's actively queried tags and aggregations.",
+                "properties": {
+                  "active_aggregations": {
+                    "description": "List of aggregation combinations that have been actively queried.",
+                    "example": [
+                      {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      {
+                        "space": "sum",
+                        "time": "count"
+                      }
+                    ],
+                    "items": {
+                      "description": "A time and space aggregation combination for use in query.",
+                      "example": {
+                        "space": "sum",
+                        "time": "sum"
+                      },
+                      "properties": {
+                        "space": {
+                          "description": "A space aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        },
+                        "time": {
+                          "description": "A time aggregation for use in query.",
+                          "enum": [
+                            "avg",
+                            "count",
+                            "max",
+                            "min",
+                            "sum"
+                          ],
+                          "example": "sum",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "AVG",
+                            "COUNT",
+                            "MAX",
+                            "MIN",
+                            "SUM"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "time",
+                        "space"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "active_tags": {
+                    "description": "List of tag keys that have been actively queried.",
+                    "example": [
+                      "app",
+                      "datacenter"
+                    ],
+                    "items": {
+                      "description": "Actively queried tag keys.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "The metric name for this resource.",
+                "example": "test.metric.latency",
+                "type": "string"
+              },
+              "type": {
+                "default": "actively_queried_configurations",
+                "description": "The metric actively queried configuration resource type.",
+                "enum": [
+                  "actively_queried_configurations"
+                ],
+                "example": "actively_queried_configurations",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ACTIVELY_QUERIED_CONFIGURATIONS"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        },
+        "readOnly": true,
+        "type": "object"
+      },
+      "MetricSuggestedTagsAttributes": {
+        "description": "Object containing the definition of a metric's actively queried tags and aggregations.",
+        "properties": {
+          "active_aggregations": {
+            "description": "List of aggregation combinations that have been actively queried.",
+            "example": [
+              {
+                "space": "sum",
+                "time": "sum"
+              },
+              {
+                "space": "sum",
+                "time": "count"
+              }
+            ],
+            "items": {
+              "description": "A time and space aggregation combination for use in query.",
+              "example": {
+                "space": "sum",
+                "time": "sum"
+              },
+              "properties": {
+                "space": {
+                  "description": "A space aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                },
+                "time": {
+                  "description": "A time aggregation for use in query.",
+                  "enum": [
+                    "avg",
+                    "count",
+                    "max",
+                    "min",
+                    "sum"
+                  ],
+                  "example": "sum",
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AVG",
+                    "COUNT",
+                    "MAX",
+                    "MIN",
+                    "SUM"
+                  ]
+                }
+              },
+              "required": [
+                "time",
+                "space"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "active_tags": {
+            "description": "List of tag keys that have been actively queried.",
+            "example": [
+              "app",
+              "datacenter"
+            ],
+            "items": {
+              "description": "Actively queried tag keys.",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
         "type": "object"
       },
       "MetricTagConfiguration": {
@@ -32797,6 +33177,85 @@
             "example": "00000000-0000-1111-0000-000000000000",
             "type": "string"
           },
+          "relationships": {
+            "description": "Relationships of the role object.",
+            "properties": {
+              "permissions": {
+                "description": "Relationship to multiple permissions objects.",
+                "properties": {
+                  "data": {
+                    "description": "Relationships to permission objects.",
+                    "items": {
+                      "description": "Relationship to permission object.",
+                      "properties": {
+                        "id": {
+                          "description": "ID of the permission.",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "permissions",
+                          "description": "Permissions resource type.",
+                          "enum": [
+                            "permissions"
+                          ],
+                          "example": "permissions",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "PERMISSIONS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "users": {
+                "description": "Relationship to users.",
+                "properties": {
+                  "data": {
+                    "description": "Relationships to user objects.",
+                    "example": [],
+                    "items": {
+                      "description": "Relationship to user object.",
+                      "properties": {
+                        "id": {
+                          "description": "A unique identifier that represents the user.",
+                          "example": "00000000-0000-0000-2345-000000000000",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "users",
+                          "description": "Users resource type.",
+                          "enum": [
+                            "users"
+                          ],
+                          "example": "users",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "USERS"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "type"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
           "type": {
             "default": "roles",
             "description": "Roles type.",
@@ -32849,6 +33308,85 @@
                 "description": "The unique identifier of the role.",
                 "example": "00000000-0000-1111-0000-000000000000",
                 "type": "string"
+              },
+              "relationships": {
+                "description": "Relationships of the role object.",
+                "properties": {
+                  "permissions": {
+                    "description": "Relationship to multiple permissions objects.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to permission objects.",
+                        "items": {
+                          "description": "Relationship to permission object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the permission.",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "permissions",
+                              "description": "Permissions resource type.",
+                              "enum": [
+                                "permissions"
+                              ],
+                              "example": "permissions",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "PERMISSIONS"
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "users": {
+                    "description": "Relationship to users.",
+                    "properties": {
+                      "data": {
+                        "description": "Relationships to user objects.",
+                        "example": [],
+                        "items": {
+                          "description": "Relationship to user object.",
+                          "properties": {
+                            "id": {
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-2345-000000000000",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "users",
+                              "description": "Users resource type.",
+                              "enum": [
+                                "users"
+                              ],
+                              "example": "users",
+                              "type": "string",
+                              "x-enum-varnames": [
+                                "USERS"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "data"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
               },
               "type": {
                 "default": "roles",
@@ -66462,11 +67000,11 @@
     },
     "/api/v2/metrics": {
       "get": {
-        "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
+        "description": "Returns all metrics (matching additional filters if specified).",
         "operationId": "ListTagConfigurations",
         "parameters": [
           {
-            "description": "Filter metrics that have configured tags.",
+            "description": "Filter custom metrics that have configured tags.",
             "example": true,
             "in": "query",
             "name": "filter[configured]",
@@ -66487,7 +67025,7 @@
             }
           },
           {
-            "description": "Filter tag configurations by metric type.",
+            "description": "Filter metrics by metric type.",
             "in": "query",
             "name": "filter[metric_type]",
             "required": false,
@@ -66521,7 +67059,17 @@
             }
           },
           {
-            "description": "Filter metrics that have been submitted with the given tags. Supports boolean and wildcard expressions.\nCannot be combined with other filters.",
+            "description": "Filter custom metrics that have or have not been queried in the specified window[seconds].\nIf no window is provided or the window is less than 2 hours, a default of 2 hours will be applied.",
+            "example": true,
+            "in": "query",
+            "name": "filter[queried]",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Filter metrics that have been submitted with the given tags. Supports boolean and wildcard expressions.\nCan only be combined with the filter[queried] filter.",
             "example": "env IN (staging,test) AND service:web",
             "in": "query",
             "name": "filter[tags]",
@@ -66531,7 +67079,7 @@
             }
           },
           {
-            "description": "The number of seconds of look back (from now) to apply to a filter[tag] query.\nDefaults value is 3600 (1 hour), maximum value is 172,800 (2 days).",
+            "description": "The number of seconds of look back (from now) to apply to a filter[tag] or filter[queried] query.\nDefaults value is 3600 (1 hour), maximum value is 1,209,600 (2 weeks).",
             "example": 3600,
             "in": "query",
             "name": "window[seconds]",
@@ -66840,7 +67388,7 @@
             ]
           }
         ],
-        "summary": "List tag configurations",
+        "summary": "Get a list of metrics",
         "tags": [
           "Metrics"
         ],
@@ -67102,7 +67650,7 @@
           "Metrics"
         ],
         "x-codegen-request-body-name": "body",
-        "x-menu-order": 9,
+        "x-menu-order": 10,
         "x-undo": {
           "type": "idempotent"
         }
@@ -67373,7 +67921,7 @@
           "Metrics"
         ],
         "x-codegen-request-body-name": "body",
-        "x-menu-order": 8,
+        "x-menu-order": 9,
         "x-undo": {
           "operationId": "DeleteBulkTagsMetricsConfiguration",
           "parameters": [
@@ -67383,6 +67931,273 @@
             }
           ],
           "type": "unsafe"
+        }
+      }
+    },
+    "/api/v2/metrics/{metric_name}/active-configurations": {
+      "get": {
+        "description": "List tags and aggregations that are actively queried on dashboards and monitors for a given metric name.",
+        "operationId": "ListActiveMetricConfigurations",
+        "parameters": [
+          {
+            "description": "The name of the metric.",
+            "example": "dist.http.endpoint.request",
+            "in": "path",
+            "name": "metric_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of seconds of look back (from now).\nDefault value is 604,800 (1 week), minimum value is 7200 (2 hours), maximum value is 2,630,000 (1 month).",
+            "example": 7200,
+            "in": "query",
+            "name": "window[seconds]",
+            "required": false,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response object that includes a single metric's actively queried tags and aggregations.",
+                  "properties": {
+                    "data": {
+                      "description": "Object for a single metric's actively queried tags and aggregations.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Object containing the definition of a metric's actively queried tags and aggregations.",
+                          "properties": {
+                            "active_aggregations": {
+                              "description": "List of aggregation combinations that have been actively queried.",
+                              "example": [
+                                {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                {
+                                  "space": "sum",
+                                  "time": "count"
+                                }
+                              ],
+                              "items": {
+                                "description": "A time and space aggregation combination for use in query.",
+                                "example": {
+                                  "space": "sum",
+                                  "time": "sum"
+                                },
+                                "properties": {
+                                  "space": {
+                                    "description": "A space aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  },
+                                  "time": {
+                                    "description": "A time aggregation for use in query.",
+                                    "enum": [
+                                      "avg",
+                                      "count",
+                                      "max",
+                                      "min",
+                                      "sum"
+                                    ],
+                                    "example": "sum",
+                                    "type": "string",
+                                    "x-enum-varnames": [
+                                      "AVG",
+                                      "COUNT",
+                                      "MAX",
+                                      "MIN",
+                                      "SUM"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "time",
+                                  "space"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "active_tags": {
+                              "description": "List of tag keys that have been actively queried.",
+                              "example": [
+                                "app",
+                                "datacenter"
+                              ],
+                              "items": {
+                                "description": "Actively queried tag keys.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "The metric name for this resource.",
+                          "example": "test.metric.latency",
+                          "type": "string"
+                        },
+                        "type": {
+                          "default": "actively_queried_configurations",
+                          "description": "The metric actively queried configuration resource type.",
+                          "enum": [
+                            "actively_queried_configurations"
+                          ],
+                          "example": "actively_queried_configurations",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ACTIVELY_QUERIED_CONFIGURATIONS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "readOnly": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": []
+          }
+        ],
+        "summary": "List active tags and aggregations",
+        "tags": [
+          "Metrics"
+        ],
+        "x-menu-order": 7,
+        "x-undo": {
+          "type": "safe"
         }
       }
     },
@@ -67842,7 +68657,7 @@
           "team": "points-aggregation",
           "team_escalation": "[Points Aggregation] Primary"
         },
-        "x-menu-order": 10,
+        "x-menu-order": 11,
         "x-permission": {
           "operator": "OPEN",
           "permissions": []
@@ -69399,7 +70214,7 @@
         "tags": [
           "Metrics"
         ],
-        "x-menu-order": 7,
+        "x-menu-order": 8,
         "x-undo": {
           "type": "safe"
         }
@@ -70873,6 +71688,85 @@
                         "description": "The unique identifier of the role.",
                         "example": "00000000-0000-1111-0000-000000000000",
                         "type": "string"
+                      },
+                      "relationships": {
+                        "description": "Relationships of the role object.",
+                        "properties": {
+                          "permissions": {
+                            "description": "Relationship to multiple permissions objects.",
+                            "properties": {
+                              "data": {
+                                "description": "Relationships to permission objects.",
+                                "items": {
+                                  "description": "Relationship to permission object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the permission.",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "permissions",
+                                      "description": "Permissions resource type.",
+                                      "enum": [
+                                        "permissions"
+                                      ],
+                                      "example": "permissions",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "PERMISSIONS"
+                                      ]
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "users": {
+                            "description": "Relationship to users.",
+                            "properties": {
+                              "data": {
+                                "description": "Relationships to user objects.",
+                                "example": [],
+                                "items": {
+                                  "description": "Relationship to user object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-2345-000000000000",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "users",
+                                      "description": "Users resource type.",
+                                      "enum": [
+                                        "users"
+                                      ],
+                                      "example": "users",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "USERS"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              }
+                            },
+                            "required": [
+                              "data"
+                            ],
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
                       },
                       "type": {
                         "default": "roles",
@@ -83875,11 +84769,16 @@
               "default": "deflate",
               "description": "HTTP header used to compress the media-type.",
               "enum": [
-                "deflate"
+                "deflate",
+                "zstd1",
+                "gzip"
               ],
+              "example": "deflate",
               "type": "string",
               "x-enum-varnames": [
-                "DEFLATE"
+                "DEFLATE",
+                "ZSTD1",
+                "GZIP"
               ]
             }
           }

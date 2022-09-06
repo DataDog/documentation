@@ -53,12 +53,11 @@ compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-ja
 #### 使用方法
 
 ```java
-import com.datadog.api.<VERSION>.client.ApiClient;
-import com.datadog.api.<VERSION>.client.ApiException;
-import com.datadog.api.<VERSION>.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
-import com.datadog.api.v2.client.model.*;
+import com.datadog.api.client.ApiClient;
+import com.datadog.api.client.ApiException;
+import com.datadog.api.client.Configuration;
 import com.datadog.api.<VERSION>.client.api.*;
+import com.datadog.api.<VERSION>.client.model.*;
 ```
 **注**: 使用するエンドポイントに応じて、`<VERSION>` を v1 または v2 に置き換えてください。
 

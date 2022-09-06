@@ -1,18 +1,20 @@
 ---
 title: Send RUM Custom Actions
 kind: guide
+beta: true
+description: Learn how to send custom actions to extend your collection of user interactions.
+aliases:
+- /real_user_monitoring/guide/send-custom-user-actions/
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
-aliases:
-  - /real_user_monitoring/guide/send-custom-user-actions/
 ---
 ## Overview
 
 Real User Monitoring [automatically collects actions][1] on your web application. You can collect additional events and timings such as form completions and business transactions. 
 
-Custom RUM actions allow you to monitor interesting events with all the relevant context attached. For example, collecting a user's checkout information on an e-commerce website.
+Custom RUM actions allow you to monitor interesting events with all the relevant context attached. For example, the Datadog Browser SDK can collect a user's checkout information (such as the number of items within the cart, the list of items, and how much value the cart items are worth) when they click the checkout button on an e-commerce website.
 
 ## Instrument your code
 

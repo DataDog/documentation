@@ -92,5 +92,12 @@ Akamai DataStream 2 には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog で Akamai Datastream 2 を監視する][3]
+
 [1]: https://app.datadoghq.com/logs?query=source%3Aakamai.datastream
 [2]: https://docs.datadoghq.com/ja/help/
+[3]: https://www.datadoghq.com/blog/monitor-akamai-datastream2/

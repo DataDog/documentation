@@ -189,7 +189,7 @@ $SECURITY_SIGNAL_MSG
 
 $SECURITY_SIGNAL_ATTRIBUTES
 : Attributs du signal de sécurité.<br />
-**Exemple** : `{"network":{"client":{"ip":"1.2.3.4"}}}`
+**Exemple** : `{"network":{"client":{"ip":"1.2.3.4"}}, "service": ["agent"]}`
 
 $SECURITY_RULE_ID
 : ID de la règle de sécurité.<br />

@@ -4190,6 +4190,15 @@ components:
         type:
           $ref: '#/components/schemas/MetricType'
       type: object
+    MetricActiveConfigurationType:
+      default: actively_queried_configurations
+      description: The metric actively queried configuration resource type.
+      enum:
+      - actively_queried_configurations
+      example: actively_queried_configurations
+      type: string
+      x-enum-varnames:
+      - ACTIVELY_QUERIED_CONFIGURATIONS
     MetricAllTags:
       description: Object for a single metric's indexed tags.
       properties:
@@ -4353,9 +4362,14 @@ components:
       description: HTTP header used to compress the media-type.
       enum:
       - deflate
+      - zstd1
+      - gzip
+      example: deflate
       type: string
       x-enum-varnames:
       - DEFLATE
+      - ZSTD1
+      - GZIP
     MetricCustomAggregation:
       description: A time and space aggregation combination for use in query.
       example:
@@ -4709,6 +4723,50 @@ components:
       required:
       - metric
       - points
+      type: object
+    MetricSuggestedAggregations:
+      description: List of aggregation combinations that have been actively queried.
+      example:
+      - space: sum
+        time: sum
+      - space: sum
+        time: count
+      items:
+        $ref: '#/components/schemas/MetricCustomAggregation'
+      type: array
+    MetricSuggestedTagsAndAggregations:
+      description: Object for a single metric's actively queried tags and aggregations.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricSuggestedTagsAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricActiveConfigurationType'
+      type: object
+    MetricSuggestedTagsAndAggregationsResponse:
+      description: Response object that includes a single metric's actively queried
+        tags and aggregations.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricSuggestedTagsAndAggregations'
+      readOnly: true
+      type: object
+    MetricSuggestedTagsAttributes:
+      description: Object containing the definition of a metric's actively queried
+        tags and aggregations.
+      properties:
+        active_aggregations:
+          $ref: '#/components/schemas/MetricSuggestedAggregations'
+        active_tags:
+          description: List of tag keys that have been actively queried.
+          example:
+          - app
+          - datacenter
+          items:
+            description: Actively queried tag keys.
+            type: string
+          type: array
       type: object
     MetricTagConfiguration:
       description: Object for a single metric tag configuration.
@@ -6728,6 +6786,8 @@ components:
           description: The unique identifier of the role.
           example: 00000000-0000-1111-0000-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/RoleRelationships'
         type:
           $ref: '#/components/schemas/RolesType'
       required:
@@ -11514,12 +11574,10 @@ paths:
         type: safe
   /api/v2/metrics:
     get:
-      description: 'Returns all configured count/gauge/rate/distribution metric names
-
-        (with additional filters if specified).'
+      description: Returns all metrics (matching additional filters if specified).
       operationId: ListTagConfigurations
       parameters:
-      - description: Filter metrics that have configured tags.
+      - description: Filter custom metrics that have configured tags.
         example: true
         in: query
         name: filter[configured]
@@ -11534,7 +11592,7 @@ paths:
         schema:
           description: Tag keys to filter by.
           type: string
-      - description: Filter tag configurations by metric type.
+      - description: Filter metrics by metric type.
         in: query
         name: filter[metric_type]
         required: false
@@ -11549,10 +11607,21 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'Filter custom metrics that have or have not been queried in
+          the specified window[seconds].
+
+          If no window is provided or the window is less than 2 hours, a default of
+          2 hours will be applied.'
+        example: true
+        in: query
+        name: filter[queried]
+        required: false
+        schema:
+          type: boolean
       - description: 'Filter metrics that have been submitted with the given tags.
           Supports boolean and wildcard expressions.
 
-          Cannot be combined with other filters.'
+          Can only be combined with the filter[queried] filter.'
         example: env IN (staging,test) AND service:web
         in: query
         name: filter[tags]
@@ -11560,9 +11629,9 @@ paths:
         schema:
           type: string
       - description: 'The number of seconds of look back (from now) to apply to a
-          filter[tag] query.
+          filter[tag] or filter[queried] query.
 
-          Defaults value is 3600 (1 hour), maximum value is 172,800 (2 days).'
+          Defaults value is 3600 (1 hour), maximum value is 1,209,600 (2 weeks).'
         example: 3600
         in: query
         name: window[seconds]
@@ -11600,7 +11669,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - metrics_read
-      summary: List tag configurations
+      summary: Get a list of metrics
       tags:
       - Metrics
       x-menu-order: 5
@@ -11660,7 +11729,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: idempotent
     post:
@@ -11722,13 +11791,72 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         operationId: DeleteBulkTagsMetricsConfiguration
         parameters:
         - name: body
           source: ''
         type: unsafe
+  /api/v2/metrics/{metric_name}/active-configurations:
+    get:
+      description: List tags and aggregations that are actively queried on dashboards
+        and monitors for a given metric name.
+      operationId: ListActiveMetricConfigurations
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      - description: 'The number of seconds of look back (from now).
+
+          Default value is 604,800 (1 week), minimum value is 7200 (2 hours), maximum
+          value is 2,630,000 (1 month).'
+        example: 7200
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSuggestedTagsAndAggregationsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List active tags and aggregations
+      tags:
+      - Metrics
+      x-menu-order: 7
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/all-tags:
     get:
       description: View indexed tag key-value pairs for a given metric name.
@@ -11871,7 +11999,7 @@ paths:
           staging_low_urgency: '@slack-points-aggr-stg-ops'
         team: points-aggregation
         team_escalation: '[Points Aggregation] Primary'
-      x-menu-order: 10
+      x-menu-order: 11
       x-permission:
         operator: OPEN
         permissions: []
@@ -12129,7 +12257,7 @@ paths:
       summary: List distinct metric volumes by metric name
       tags:
       - Metrics
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v2/permissions:

@@ -156,7 +156,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 必要なインテグレーションは言語によって異なります。
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
 {{< programming-lang lang="java" >}}
 
 [Java][1] の場合、以下のいずれかの技術を使用している場合は、それぞれのインテグレーションが必要です。
@@ -189,13 +189,13 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< programming-lang lang="PHP" >}}
 
 [PHP][1] については、必須のインテグレーションはありません。
-
+<p></p>
 
 [1]: /ja/security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-以下の [Go][1] フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメントする必要があります。
+以下の [Go][1] フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメンテーションを行う必要があります。
 
 - [gRPC][2]
 - [net/http][3]
@@ -203,7 +203,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 - [Echo][5]
 - [Chi][6]
 
-お使いのフレームワークがサポートされていない場合は、Go リポジトリで [新しい問題を作成][7] してください。
+お使いのフレームワークがサポートされていない場合は、Go リポジトリで[新しい課題を作成][7]してください。
 
 [1]: /ja/security_platform/application_security/setup_and_configure/
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
@@ -215,8 +215,8 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< /programming-lang >}}
 {{< programming-lang lang="NodeJS" >}}
 
-[NodeJS][1] の場合、HTTP とのインテグレーションが必要です。
-
+[NodeJS][1] の場合、HTTP インテグレーションが必要です。
+<p></p>
 
 [1]: /ja/security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
@@ -232,6 +232,14 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /ja/tracing/trace_collection/dd_libraries/ruby/#rails
 [5]: /ja/tracing/trace_collection/dd_libraries/ruby/#sinatra
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+[Python][1] の場合、WSGI インテグレーションと、Django や Flask のような使用中のフレームワークのインテグレーションが必要です。
+<p></p>
+
+[1]: /ja/security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
