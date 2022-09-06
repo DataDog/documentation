@@ -24,17 +24,17 @@ YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agen
 `datadog.yaml` で:
 ```yaml
 additional_endpoints:
-  "https://mydomain.datadoghq.com":
+  "https://app.datadoghq.com":
   - apikey2
   - apikey3
-  "https://mydomain.datadoghq.eu":
+  "https://app.datadoghq.eu":
   - apikey4
 ```
 
 ### 環境変数コンフィギュレーション
 
 ```bash
-DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -47,26 +47,26 @@ DD_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"ap
 apm_config:
   [...]
   additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://trace.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://trace.agent.datadoghq.eu":
     - apikey4
 
   profiling_additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://trace.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://trace.agent.datadoghq.eu":
     - apikey4
 ```
 
 ### 環境変数コンフィギュレーション
 
 ```bash
-DD_APM_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -156,7 +156,7 @@ logs_config:
   use_http: true
   additional_endpoints:
   - api_key: "apiKey2"
-    Host: "mydomain.datadoghq.com"
+    Host: "agent-http-intake.logs.datadoghq.com"
     Port: 443
     is_reliable: true
 ```
@@ -165,7 +165,7 @@ logs_config:
 
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
-DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -319,17 +319,17 @@ YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agen
   ## このパラメーターを考慮するには `agents.useConfigMap` が `true` に設定されている必要があることに注意してください。
   customAgentConfig:
     additional_endpoints:
-      "https://mydomain.datadoghq.com":
+      "https://app.datadoghq.com":
       - apikey2
       - apikey3
-      "https://mydomain.datadoghq.eu":
+      "https://app.datadoghq.eu":
       - apikey4 
 
     logs_config:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "agent-http-intake.logs.datadoghq.com"
         Port: 443
         is_reliable: true
 ```

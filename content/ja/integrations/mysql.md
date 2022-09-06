@@ -344,6 +344,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -367,6 +369,34 @@ spec:
     - name: mysql
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  annotations:
+    ad.datadoghq.com/mysql.checks: |
+      {
+        "mysql": {
+          "init_config": {},
+          "instances": [
+            {
+              "server": "%%host%%", 
+              "user": "datadog",
+              "password": "<UNIQUEPASSWORD>"
+            }
+          ]
+        }
+      }
+  labels:
+    name: mysql
+spec:
+  containers:
+    - name: mysql
+```
+
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][3]を参照してください。
 
 #### ログの収集
@@ -375,6 +405,8 @@ spec:
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][4]を参照してください。
 
 次に、[ログインテグレーション][5]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][6]を使用してこれを構成することもできます。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1

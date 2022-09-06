@@ -5809,6 +5809,9 @@ components:
           type: string
         pointlist:
           description: List of points of the time series.
+          example:
+          - - 1575317847.0
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           readOnly: true
