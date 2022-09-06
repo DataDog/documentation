@@ -24,6 +24,8 @@ title: イベントモニター
 
 Datadog で[イベントモニター][1]を作成するには、**Monitors** > **New Monitor** > **Event** に移動します。
 
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 イベントモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
+
 ### 検索クエリを定義する
 
 検索クエリを定義すると、上部のグラフが更新されます。
