@@ -12,6 +12,10 @@ if(!input || !output) {
   process.exit(1);
 }
 
+if (output.endsWith('com.datadoghq.aws.wafv2.json')) {
+  process.exit(0);
+}
+
 let fileData = JSON.parse(fs.readFileSync(input, 'utf8'));
 const yData = JSON.stringify(fileData["types"]["$defs"]).replace(/\#\/\$defs\//g, '#/types/$defs/');
 fileData["types"]["$defs"] = JSON.parse(yData);

@@ -100,7 +100,7 @@ derefs: $(DEREFS)
 
 .SECONDEXPANSION:
 $(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
-	node ./assets/scripts/workflow-process.js $< $@
+	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
