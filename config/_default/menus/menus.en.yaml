@@ -2899,11 +2899,16 @@ main:
     parent: rum_ios
     identifier: rum_ios_web_view_tracking
     weight: 304
+  - name: SwiftUI
+    url: real_user_monitoring/ios/swiftui/
+    parent: rum_ios
+    identifier: rum_ios_swiftui
+    weight: 305
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 305
+    weight: 306
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
