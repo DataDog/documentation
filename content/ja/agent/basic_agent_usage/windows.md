@@ -55,7 +55,7 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
-**Powershell**
+**PowerShell**
 
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<DATADOG_API_キー>"'
@@ -88,7 +88,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 | `DDAGENTUSER_NAME`                          | 文字列  | Agent インストール時に使用されるデフォルトの `ddagentuser` ユーザー名を上書きします _(v6.11.0 以降)_。[Datadog Windows Agent ユーザーについては、こちらを参照してください][3]。                                                                                      |
 | `DDAGENTUSER_PASSWORD`                      | 文字列  | Agent インストール時に `ddagentuser` ユーザー用に生成された暗号論的に安全なパスワードを上書きします _(v6.11.0 以降)_。ドメインサーバー上のインストールにはこれを提供する必要があります。[Datadog Windows Agent ユーザーについては、こちらを参照してください][3]。  |
 | `APPLICATIONDATADIRECTORY`                  | パス    | 構成ファイルのディレクトリツリーに使用するディレクトリを上書きします。初期インストール時にのみ提供でき、アップグレードでは無効です。デフォルト: `C:\ProgramData\Datadog` _(v6.11.0 以降)_                                           |
-| `PROJECTLOCATION`                           | パス    | バイナリファイルのディレクトリツリーに使用するディレクトリを上書きします。初期インストール時にのみ提供でき、アップグレードでは無効です。デフォルト: `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
+| `PROJECTLOCATION`                           | パス    | バイナリファイルのディレクトリツリーに使用するディレクトリを上書きします。初期インストール時にのみ提供でき、アップグレードでは無効です。デフォルト: `%ProgramFiles%\Datadog\Datadog Agent` _(v6.11.0 以降)_                                    |
 | `ADDLOCAL`                                  | 文字列  | 追加の Agent コンポーネントを有効にします。`"MainApplication,NPM"` に設定すると、[ネットワークパフォーマンスモニタリング][4]のドライバーコンポーネントがインストールされます。                                                                          |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | EC2 上の Windows ホストの EC2 インスタンス ID を使用します。_(v7.28.0+)_                                                                                                                                                                      |
 
@@ -164,9 +164,9 @@ Agent の実行は、Windows サービスコントロールマネージャーに
   - コマンドプロンプト (`cmd.exe`)
 
     ```cmd
-    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
-    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
-    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
+    "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
+    "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+    "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
 
 {{% /tab %}}
@@ -180,7 +180,7 @@ Datadog Agent Manager で `start`、`stop`、および `restart` コマンドを
 
 {{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager のスナップショット" style="width:75%;">}}
 
-Windows Powershell で、次のコマンドを使用することもできます。
+Windows PowerShell で、次のコマンドを使用することもできます。
 `[start|stop|restart]-service datadogagent`
 
 {{% /tab %}}
@@ -227,7 +227,7 @@ Agent の状態に関する詳細な情報が必要な場合は、次のよう�
 次に、Status -> General と移動して、ステータスページを開きます。
 Status -> Collector および Checks -> Summary で、チェックの実行に関する詳細な情報を取得します。
 
-Powershell では、次の status コマンドを使用できます。
+PowerShell では、次の status コマンドを使用できます。
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
@@ -236,7 +236,7 @@ Powershell では、次の status コマンドを使用できます。
 cmd.exe では、次のようにします。
 
 ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 {{% /tab %}}
@@ -251,7 +251,7 @@ Datadog Agent Manager -> Settings -> Agent Status で確認できます。
 
 Agent v3.9.1 ～ v5.1 のステータスを確認する場合は、`http://localhost:17125/status` に移動します。
 
-Powershell では、次の info コマンドを使用できます。
+PowerShell では、次の info コマンドを使用できます。
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" info
@@ -260,10 +260,10 @@ Powershell では、次の info コマンドを使用できます。
 cmd.exe では、次のようにします。
 
 ```
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON メジャーバージョン>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
+"%ProgramFiles%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%ProgramFiles%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
-**注**: Agent バージョンが <= 6.11 の場合、パスは上記ではなく `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe` にする必要があります。
+**注**: Agent バージョンが <= 6.11 の場合、パスは上記ではなく `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe` にする必要があります。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -308,7 +308,7 @@ Windows Server 2008/Vista 以降のシステムでは、Agent のログは `C:\P
 
 * Submit を押します。
 
-Powershell では、次の flare コマンドを使用できます。
+PowerShell では、次の flare コマンドを使用できます。
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
@@ -317,7 +317,7 @@ Powershell では、次の flare コマンドを使用できます。
 cmd.exe では、次のようにします。
 
 ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
 ```
 
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Agent 6 を使用した Windows フレア" style="width:75%;">}}
@@ -340,16 +340,16 @@ Datadog のサポートチームに Windows のログと構成のコピーを送
 
 {{< img src="agent/faq/windows_flare.jpg" alt="Windows フレア" style="width:70%;">}}
 
-Powershell では、次の flare コマンドを使用できます。
+PowerShell では、次の flare コマンドを使用できます。
 
 ```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 cmd.exe では、次のようにします。
 
 ```
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <ケース ID>
+"%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe" "%ProgramFiles%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 #### フレアのアップロードの失敗
@@ -364,10 +364,10 @@ Windows で古いバージョンの Agent を使用している場合、この�
 **ステップ 1**:
 
 * Agent v5.12+ の場合:
-    `"%PROGRAMFILES%\Datadog\Datadog Agent\dist\shell.exe" since`
+    `"%ProgramFiles%\Datadog\Datadog Agent\dist\shell.exe" since`
 
 * 古いバージョンの Agent の場合:
-    `"%PROGRAMFILES%\Datadog\Datadog Agent\files\shell.exe"`
+    `"%ProgramFiles%\Datadog\Datadog Agent\files\shell.exe"`
 
 **ステップ 2**:
 

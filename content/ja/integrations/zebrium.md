@@ -22,13 +22,6 @@ author:
   support_email: support@zebrium.com
 categories:
 - notification
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::Notification
-- Offering::UI Extension
-- Offering::Integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md
 display_on_public_website: true
@@ -50,6 +43,13 @@ supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::Notification
+  - Offering::UI Extension
+  - Offering::Integration
   configuration: README.md#Setup
   description: 問題の根本原因をダッシュボード上で直接発見します
   media:
@@ -114,9 +114,15 @@ Zebrium のイベントメトリクスインテグレーションは、[Datadog 
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog と Zebrium で根本原因を迅速に発見][6]
 
 [1]: https://www.zebrium.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.zebrium.com/docs/monitoring/datadog_autodetect/
 [4]: https://cloud.zebrium.com
 [5]: http://docs.datadoghq.com/help
+[6]: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/

@@ -53,13 +53,11 @@ The Kubernetes State Metrics Core check is included in the [Datadog Cluster Agen
 
 In your Helm `values.yaml`, add the following:
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsCore:
     enabled: true
-...
 ```
 
 {{% /tab %}}
@@ -67,7 +65,7 @@ datadog:
 
 To enable the `kubernetes_state_core` check, the setting `spec.features.kubeStateMetricsCore.enabled` must be set to `true` in the DatadogAgent resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -79,7 +77,7 @@ spec:
   features:
     kubeStateMetricsCore:
       enabled: true
-  # ...
+  # (...)
 ```
 
 Note: Datadog Operator v0.7.0 or greater is required.
@@ -147,12 +145,10 @@ If you still want to enable both checks simultaneously for the migration phase, 
 
 The Kubernetes State Metrics Core check does not require deploying `kube-state-metrics` in your cluster anymore, you can disable deploying `kube-state-metrics` as part of the Datadog Helm Chart. To do this, add the following in your Helm `values.yaml`:
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsEnabled: false
-...
 ```
 
 {{% /tab %}}

@@ -72,11 +72,41 @@ Datadog へのプロキシリクエストを成功させるには
 
 1. 正確な geoIP のために、リクエストクライアント IP アドレスを含む `X-Forwarded-For` ヘッダーを追加します。
 2. クエリパラメーター `ddforward` で指定した URL に、POST メソッドでリクエストを転送します。
+4. リクエスト本文は変更されないままでなければなりません。
 
-**注:** リクエスト本文は変更されないままでなければなりません。
+`ddforward` 属性が [Datadog サイト][2]の有効な Datadog エンドポイントを指していることを確認してください。これを行わないと、安全でない構成になる可能性があります。
+
+サイトパラメータは、SDK の[初期化パラメータ][3]です。各サイトで有効な取り込み URL のパターンは以下の通りです。
+
+{{< tabs >}}
+{{% tab "最新バージョン" %}}
+
+| サイト    | 有効な取り込み URL パターン                       | サイトパラメーター      |
+|---------|------------------------------------------------|---------------------|
+| US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
+| US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
+| US5     | `https://*.browser-intake-us5-datadoghq.com/*` | `us5.datadoghq.com` |
+| EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
+| US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
+
+{{% /tab %}}
+{{% tab "`v4` より前" %}}
+
+| サイト    | 有効な取り込み URL パターン             | サイトパラメーター      |
+|---------|--------------------------------------|---------------------|
+| US1     | `https://*.logs.datadoghq.com/*`     | `datadoghq.com`     |
+| US3     | `https://*.logs.us3-datadoghq.com/*` | `us3.datadoghq.com` |
+| EU1     | `https://*.logs.datadoghq.eu/*`      | `datadoghq.eu`      |
+| US1-FED | `https://*.logs.ddog-gov.com/*`      | `ddog-gov.com`      |
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/browser/#initialization-parameters
+[2]: /ja/getting_started/site/
+[3]: /ja/real_user_monitoring/browser/#initialization-parameters

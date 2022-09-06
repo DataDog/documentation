@@ -15,7 +15,7 @@ kind: ドキュメント
 title: Java サーバーレスアプリケーションのインスツルメンテーション
 ---
 
-<div class="alert alert-warning">分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (<code>java8.al2</code>) または Java 11 (<code>java11</code>) ランタイムを使用している必要があります。</div>
+<div class="alert alert-warning">分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (<code>java8.al2</code>) または Java 11 (<code>java11</code>) ランタイム (1024 MB 以上のメモリ) を使用している必要があります。</div>
 
 <div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 

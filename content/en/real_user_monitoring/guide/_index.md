@@ -17,6 +17,7 @@ disable_toc: true
     {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Send custom user actions{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identify bots in the RUM Explorer{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Upload JavaScript source maps{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/sampling-browser-and-browser-premium" >}}Control session volume using sampling configuration for Browser and Browser Premium{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Enrich and control your browser RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Upgrade the RUM Browser SDK{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Proxy your browser RUM data {{< /nextlink >}}

@@ -29,6 +29,8 @@ title: Docker アプリケーションのトレース
 
 Agent 6.0.0 では、Trace Agent はデフォルトで有効になっています。オフにした場合は、`gcr.io/datadoghq/agent` コンテナで環境変数として `DD_APM_ENABLED=true` を渡すことで再び有効にすることができます。
 
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
+
 ## ホストからのトレース
 
 `docker run` コマンドにオプション `-p 127.0.0.1:8126:8126/tcp` を追加すると、ポート `8126/tcp` で _自分のホストからのみ_ トレースを利用できます。
@@ -103,6 +105,8 @@ DogStatsD と同様に、[Docker ネットワーク](#docker-network)または [
 ```bash
 docker network create <NETWORK_NAME>
 ```
+
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
 次に、先ほど作成したネットワークに接続されている Agent とアプリケーションコンテナを起動します。
 

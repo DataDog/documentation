@@ -53,12 +53,11 @@ compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-ja
 #### Usage
 
 ```java
-import com.datadog.api.<VERSION>.client.ApiClient;
-import com.datadog.api.<VERSION>.client.ApiException;
-import com.datadog.api.<VERSION>.client.Configuration;
-import com.datadog.api.v2.client.auth.*;
-import com.datadog.api.v2.client.model.*;
+import com.datadog.api.client.ApiClient;
+import com.datadog.api.client.ApiException;
+import com.datadog.api.client.Configuration;
 import com.datadog.api.<VERSION>.client.api.*;
+import com.datadog.api.<VERSION>.client.model.*;
 ```
 **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
 

@@ -195,6 +195,22 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{% /tab %}}
 {{< /tabs >}}
 
+### Adding custom tags to tests
+
+You can add custom tags to your tests by using the current active span:
+
+```java
+// inside your test
+final Span span = GlobalTracer.get().activeSpan();
+if (span != null) {
+  span.setTag("test_owner", "my_team");
+}
+// test continues normally
+// ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][3] section of the Java custom instrumentation documentation.
+
 ## Configuration settings
 
 The following system properties set configuration options and have environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
@@ -290,3 +306,4 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 [1]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
 [2]: /tracing/trace_collection/compatibility/java
+[3]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags

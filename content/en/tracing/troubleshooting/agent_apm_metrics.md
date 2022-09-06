@@ -88,15 +88,15 @@ Number of payloads rejected by the receiver because of the sampling.
 
 `datadog.trace_agent.receiver.spans_dropped`
 : **Type**: Count<br>
-Total bytes of payloads dropped by the Agent.
+Number of spans dropped by the Agent.
 
 `datadog.trace_agent.receiver.spans_filtered`
 : **Type**: Count<br>
-Total bytes of payloads filtered by the Agent
+Number of spans filtered by the Agent.
 
 `datadog.trace_agent.receiver.spans_received`
 : **Type**: Count<br>
-Total bytes of payloads received by the Agent.
+Total number of spans received by the Agent.
 
 `datadog.trace_agent.receiver.tcp_connections`
 : **Type**: Count<br>

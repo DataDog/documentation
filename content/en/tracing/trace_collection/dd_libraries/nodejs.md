@@ -35,7 +35,7 @@ The latest Node.js Tracer supports versions `>=14`. For a full list of Datadogâ€
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
+Follow the [Quick start instructions][5] in Datadog for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.

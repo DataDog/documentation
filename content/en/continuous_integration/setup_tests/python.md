@@ -311,6 +311,22 @@ If you also want to enable the rest of the APM integrations to get more informat
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
+### Adding custom tags to tests
+
+You can add custom tags to your tests by using the current active span:
+
+```python
+from ddtrace import tracer
+
+// inside your test
+span = tracer.current_span()
+span.set_tag("test_owner", "my_team")
+// test continues normally
+// ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
@@ -333,7 +349,7 @@ The following environment variable can be used to configure the location of the 
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][5] options can also be used.
+All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Collecting Git metadata
 
@@ -393,4 +409,5 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /tracing/trace_collection/dd_libraries/python/
-[5]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
+[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
+[6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
