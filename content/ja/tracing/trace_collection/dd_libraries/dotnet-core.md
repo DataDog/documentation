@@ -178,7 +178,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
-{{% tab "NuGet" %}}
+Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
 
 <div class="alert alert-warning">
   <strong>注:</strong> このインストールは、IIS で動作するアプリケーションをインスツルメントするものではありません。IIS で実行されるアプリケーションについては、Windows マシン全体のインストールプロセスに従ってください。
