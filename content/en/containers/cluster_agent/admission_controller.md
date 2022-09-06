@@ -128,46 +128,12 @@ Finally, run the following commands:
 - `kubectl apply -f agent-services.yaml`
 - `kubectl apply -f cluster-agent-deployment.yaml`
 
+### APM and DogStatsD
 
-### APM
-You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracing libraries automatically.
+To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
 
-After you install the Cluster Agent, do one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
-
-To opt-in your container for library injection, use Pod annotations inside your application's YAML file to specify language tracers and versions.
-
-
-The annotations are a `key: value` pair in the following format:
-
-```yaml
-datadoghq.com/<language>-lib.version: <lib-version>
-```
-
-Adding a this annotation results in the injection of the tracer library for that language and version into the containerized application.
-Valid `<language>` values are:
-- `java`
-- `js`
-- `python`
-
-For example to inject the latest Java tracer:
-
-```yaml
-annotations:
-    datadoghq.com/java-lib.version: "latest"
-```
-
-**Note**: Use caution specifying `latest` as major library releases can introduce breaking changes.
-
-Although it's an uncommon scenario, you can add multiple `<language>-lib.version` annotations to inject multiple language tracers into one container.
-
-For example to inject the latest Java tracer and Node tracer v3.0.0:
-```yaml
-annotations:
-    datadoghq.com/java-lib.version: "latest"
-    datadoghq.com/js-lib.version: "3.0.0"
-```
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
@@ -181,12 +147,6 @@ Possible options:
 | `false`          | No label                                | No        |
 | `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
 | `false`          | `admission.datadoghq.com/enabled=false` | No        |
-
-### DogStatsD
-
-To configure DogStatsD clients or other APM libraries that do not support library injection, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by doing one of the following:
-- Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
-- Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
 
 #### Order of priority
