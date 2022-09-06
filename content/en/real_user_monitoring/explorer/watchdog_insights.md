@@ -33,7 +33,7 @@ Click on an [error](#error-outliers) or [latency outlier](#latency-outliers) to 
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card.png" alt="Error Outlier banner card and side panel card view in the RUM Explorer" style="width:100%;" >}}
 
-Hover over a card in the banner and click **Filter on Insight** to add the anomalous insight behavior in your search query. For example, you can hone in on a particular view path or a specific continent like `North America`. 
+Hover over a card in the banner and click **Filter on Insight** to add the anomalous insight behavior to your search query. For example, you can hone in on a particular view path or a specific continent like `North America`. 
 
 Click **View in Analytics** to automatically set the `Group into fields` formulas and select the `Visualize as` type under the search query to reflect the card's outlier behavior. For example, you can create a timeseries graph about an unusually high error rate on a Synthetic test by using the `synthetics.test_id` in a search formula and export it into a monitor or dashboard.
 
