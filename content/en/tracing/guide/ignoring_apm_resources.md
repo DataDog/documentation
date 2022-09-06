@@ -43,7 +43,7 @@ Or you can set them in the Agent configuration file:
 apm_config:
   filter_tags:
     require: ["db:sql", "db.instance:mysql"]
-    reject: ["outcome:success", "env:sandbox"]
+    reject: ["outcome:success", "key2:value2"]
 {{< /code-block >}}
 
 For example, to ignore health checks where the `http.url` matches this endpoint:
@@ -101,6 +101,13 @@ apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+apm_config:
+  ignore_resources: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
@@ -110,6 +117,14 @@ In the Datadog Agent container’s list of environment variables, add `DD_APM_IG
     environment:
       // other Datadog Agent environment variables
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
+{{< /code-block >}}
+
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+    environment:
+      // other Datadog Agent environment variables
+      - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
 {{< /code-block >}}
 
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
@@ -130,6 +145,12 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
+{{< /code-block >}}
+
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+              -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -176,6 +197,13 @@ In the dedicated trace-agent container, add the environment variable `DD_APM_IGN
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Kubernetes Helm" %}}
 
@@ -188,6 +216,13 @@ In the `traceAgent` section of the `values.yaml` file, add `DD_APM_IGNORE_RESOUR
         - name: DD_APM_IGNORE_RESOURCES
           value: Api::HealthchecksController#index$
 
+{{< /code-block >}}
+
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
 Alternatively, you can set `agents.containers.traceAgent.env` in the `helm install` command:
