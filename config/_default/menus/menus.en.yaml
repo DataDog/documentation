@@ -2874,30 +2874,30 @@ main:
     parent: rum
     identifier: rum_ios
     weight: 3
-  - name: SwiftUI
-    url: real_user_monitoring/ios/swiftui/
-    parent: rum_ios
-    identifier: rum_ios_swiftui
-    weight: 301
   - name: Data Collected
     url: real_user_monitoring/ios/data_collected/
     parent: rum_ios
     identifier: rum_ios_data_collected
-    weight: 302
+    weight: 301
   - name: Advanced Configuration
     url: real_user_monitoring/ios/advanced_configuration/
     parent: rum_ios
     identifier: rum_ios_advanced
-    weight: 303
+    weight: 302
   - name: Mobile Vitals
     url: real_user_monitoring/ios/mobile_vitals/
     parent: rum_ios
     identifier: rum_ios_mobile_vitals
-    weight: 304
+    weight: 303
   - name: Web View Tracking
     url: real_user_monitoring/ios/web_view_tracking/
     parent: rum_ios
     identifier: rum_ios_web_view_tracking
+    weight: 304
+  - name: SwiftUI
+    url: real_user_monitoring/ios/swiftui/
+    parent: rum_ios
+    identifier: rum_ios_swiftui
     weight: 305
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
