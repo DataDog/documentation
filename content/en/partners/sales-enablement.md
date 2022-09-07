@@ -4,6 +4,8 @@ kind: documentation
 description: "A training roadmap for a new MSP to be ready to lead a Datadog sales engineering process"
 private: true
 ---
+The Datadog Partner Network provides many resources for our partners.  This is a guide to training intended for Sales Engineers, Solution Architects, Technical Account Managers and anyone who is involved in the technical aspects of Datadog sales at a partner organization.
+
 ## Datadog basics
 
 First, head over to the <a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>. Log in and click **Training**. Under Sales Certification, click **Get started today**.
