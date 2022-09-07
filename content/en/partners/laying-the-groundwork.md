@@ -5,14 +5,14 @@ description: "How to get started and which key decisions you should make at the 
 private: true
 ---
 
-Welcome to getting started for managed service providers. The first part of the guide covers key decisions you should make at the very beginning of your Datadog journey.
+This part of the guide covers the key decisions you should make at the very beginning of your journey as a Datadog Managed Service Provider.
 
 ## Key considerations for managed service providers
 
 The way you as a service provider get started with Datadog depends on your business model and your operational model:
 - **Business model**: A key question to answer is whether you are planning on giving your clients their own access to Datadog or not. If you do choose to give clients access to Datadog, set up a multi-organization account to keep client data separate and private.
 - **Operational model**: Another key consideration is whether your client base consists of many homogeneous clients, where programmatic management of many similar-looking Datadog organizations is more important, or whether your clients are fewer or more heterogeneous.
-
+Having considered the above, you are ready to lay the groundwork for your MSP setup with Datadog.
 ## Prerequisites
 
 Before working on implementing Datadog as a Service Provider, it is recommended that you complete the
