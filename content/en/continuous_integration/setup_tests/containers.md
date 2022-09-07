@@ -24,6 +24,10 @@ Additionally, you need to pass in the environment variables required to configur
 - `APPVEYOR_REPO_COMMIT`
 - `APPVEYOR_REPO_TAG_NAME`
 - `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH`
+- `APPVEYOR_REPO_COMMIT_MESSAGE`
+- `APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED`
+- `APPVEYOR_REPO_COMMIT_AUTHOR`
+- `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`
 
 [Full list of build environment variables provided by AppVeyor][1]
 
@@ -39,8 +43,9 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILD_REPOSITORY_URI`
 - `BUILD_SOURCEBRANCH`
 - `BUILD_SOURCEVERSION`
-- `BUILD_SOURCEBRANCH`
-- `BUILD_SOURCEVERSION`
+- `BUILD_SOURCEVERSIONMESSAGE`
+- `BUILD_REQUESTEDFORID`
+- `BUILD_REQUESTEDFOREMAIL`
 - `SYSTEM_TEAMFOUNDATIONSERVERURI`
 - `SYSTEM_TEAMPROJECT`
 - `SYSTEM_JOBID`
@@ -48,6 +53,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI`
 - `SYSTEM_PULLREQUEST_SOURCEBRANCH`
 - `SYSTEM_PULLREQUEST_SOURCECOMMITID`
+- `SYSTEM_STAGEDISPLAYNAME`
+- `SYSTEM_JOBDISPLAYNAME`
 
 [Full list of build environment variables provided by Azure Pipelines][1]
 
@@ -83,6 +90,11 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILDKITE_COMMIT`
 - `BUILDKITE_BRANCH`
 - `BUILDKITE_TAG`
+- `BUILDKITE_MESSAGE`
+- `BUILDKITE_BUILD_AUTHOR`
+- `BUILDKITE_BUILD_AUTHOR_EMAIL`
+- `BUILDKITE_BUILD_CREATOR`
+- `BUILDKITE_BUILD_CREATOR_EMAIL`
 
 [Full list of build environment variables provided by Buildkite][1]
 
@@ -101,6 +113,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `CIRCLE_SHA1`
 - `CIRCLE_BRANCH`
 - `CIRCLE_TAG`
+- `CIRCLE_JOB`
 
 [Full list of build environment variables provided by CircleCI][1]
 
@@ -110,8 +123,10 @@ Additionally, you need to pass in the environment variables required to configur
 {{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
+- `GITHUB_SERVER_URL`
 - `GITHUB_RUN_ID`
 - `GITHUB_RUN_NUMBER`
+- `GITHUB_RUN_ATTEMPT`
 - `GITHUB_WORKFLOW`
 - `GITHUB_WORKSPACE`
 - `GITHUB_REPOSITORY`
@@ -132,11 +147,17 @@ Additionally, you need to pass in the environment variables required to configur
 - `CI_PIPELINE_IID`
 - `CI_PROJECT_PATH`
 - `CI_PROJECT_DIR`
+- `CI_JOB_STAGE`
+- `CI_JOB_NAME`
 - `CI_JOB_URL`
 - `CI_REPOSITORY_URL`
 - `CI_COMMIT_SHA`
+- `CI_COMMIT_REF_NAME`
 - `CI_COMMIT_BRANCH`
 - `CI_COMMIT_TAG`
+- `CI_COMMIT_AUTHOR`
+- `CI_COMMIT_MESSAGE`
+- `CI_COMMIT_TIMESTAMP`
 
 [Full list of build environment variables provided by GitLab CI][1]
 
@@ -161,6 +182,23 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
 {{% /tab %}}
+
+{{% tab "TeamCity" %}}
+
+- `TEAMCITY_VERSION`
+- `BUILD_VCS_NUMBER`
+- `BUILD_VCS_URL`
+- `BUILD_ID`
+- `BUILD_NUMBER`
+- `SERVER_URL`
+- `BUILD_ID`
+- `BUILD_CHECKOUTDIR`
+
+[Full list of build environment variables provided by TeamCity][1]
+
+
+[1]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
+{{% /tab %}}
 {{% tab "Travis CI" %}}
 
 - `TRAVIS`
@@ -175,11 +213,37 @@ Additionally, you need to pass in the environment variables required to configur
 - `TRAVIS_TAG`
 - `TRAVIS_PULL_REQUEST_SLUG`
 - `TRAVIS_PULL_REQUEST_BRANCH`
+- `TRAVIS_COMMIT_MESSAGE`
 
 [Full list of build environment variables provided by Travis CI][1]
 
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+{{% /tab %}}
+{{% tab "Bitrise" %}}
+
+- `BITRISE_BUILD_SLUG`
+- `BITRISE_TRIGGERED_WORKFLOW_ID`
+- `BITRISE_BUILD_NUMBER`
+- `BITRISE_BUILD_URL`
+- `BITRISE_SOURCE_DIR`
+- `GIT_REPOSITORY_URL`
+- `BITRISE_GIT_COMMIT`
+- `GIT_CLONE_COMMIT_HASH`
+- `BITRISEIO_GIT_BRANCH_DEST`
+- `BITRISE_GIT_BRANCH`
+- `BITRISE_GIT_TAG`
+- `BITRISE_GIT_MESSAGE`
+- `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
+- `GIT_CLONE_COMMIT_MESSAGE_BODY`
+- `GIT_CLONE_COMMIT_AUTHOR_NAME`
+- `GIT_CLONE_COMMIT_AUTHOR_EMAIL`
+- `GIT_CLONE_COMMIT_COMMITER_NAME`
+
+[Full list of build environment variables provided by Bitrise][1]
+
+
+[1]: https://devcenter.bitrise.io/en/references/available-environment-variables.html
 {{% /tab %}}
 {{< /tabs >}}
 
