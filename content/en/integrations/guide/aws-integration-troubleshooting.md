@@ -69,7 +69,7 @@ IMDSv2, in its default configuration, refuses connections with an IP hop count g
 
  * [Increase the maximum hop count to at least `2`][9]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well. 
  * Use the hostname discovered by cloud-init, by [setting `providers.eks.ec2.useHostnameFromFile` to true][10].
- * Run the agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][11].
+ * Run the Agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][11].
 
 ## Tags
 
