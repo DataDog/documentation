@@ -30,11 +30,11 @@ This guide provides an overview of some foundational concepts that can help you 
 
 While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes:
 
-1. **Metrics are too sparse within a metric monitor's evaluation window**
+#### Metrics are too sparse within a metric monitor's evaluation window
 
-If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in `OK` state remains `OK`, and likewise with a monitor in `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
+If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in the `OK` state remains `OK`, and likewise with a monitor in the `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
 
-2. **Monitor state updates due to external conditions**
+#### Monitor state updates due to external conditions
 
 The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4]. 
 
@@ -52,7 +52,7 @@ For a multi-alert monitor, a group is a set of tags with one value for each grou
 
 By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][9] for more information.
 
-If you anticipate new monitor groups to be created within the scope of your multi-alert monitors, you may want to configure a delay for the evaluation of these new groups. This can help you to avoid alerts from expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
+If you anticipate creating new monitor groups within the scope of your multi-alert monitors, you may want to configure a delay for the evaluation of these new groups. This can help you avoid alerts from the expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
 
 If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
@@ -73,7 +73,7 @@ If you suspect that notifications are not being properly delivered, check the it
 
 #### Opsgenie multi-notification
 
-If you are using multiple @opsgenie-[...] notifications in your monitor, we send those notifications with the same alias to opsgenie.
+If you are using multiple `@opsgenie-[...]` notifications in your monitor, we send those notifications with the same alias to Opsgenie.
 Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
 
 {{< partial name="whats-next/whats-next.html" >}}
