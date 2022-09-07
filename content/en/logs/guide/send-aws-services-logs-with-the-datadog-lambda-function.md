@@ -21,7 +21,7 @@ To start collecting logs from your AWS services:
 2. [Enable logging](#enable-logging-for-your-aws-service) for your AWS service (most AWS services can log to a S3 bucket or CloudWatch Log Group).
 3. [Set up the triggers](#set-up-triggers) that cause the Forwarder Lambda to execute when there are new logs to be forwarded. There are two ways to configure the triggers.
 
-**Note**: If you are in AWS `us-east-1` region, leverage [Datadog-AWS Private Link][2].
+**Note**: If you are in the AWS `us-east-1` region, leverage [Datadog-AWS Private Link][2].
 
 **Note**: Cloudformation creates an IAM policy which includes KMS:Decrypt for all resources, and does not align with AWS Security Hub's best practice. This permission is used is to decrypt objects from KMS-encrypted S3 buckets to set up Lambda function, and which KMS key is used to encrypt the S3 buckets cannot be predicted. You can safely delete this permission after the installation successfully finished.
 
