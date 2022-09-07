@@ -20,8 +20,7 @@ title: Jenkins パイプラインでトレースを設定する
 ## 互換性
 
 対応する Jenkins のバージョン:
-* 3.x バージョンのプラグインの場合: Jenkins >= 2.164.1
-* 4.x バージョンのプラグインの場合: Jenkins >= 2.303.3
+* Jenkins >= 2.346.1
 
 ## 前提条件
 
@@ -141,6 +140,27 @@ CI Visibility が有効になっていることを確認するには、`Jenkins 
 Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
+
+### インフラストラクチャーメトリクスの相関
+
+Jenkins のワーカーを使用している場合、パイプラインを実行しているインフラストラクチャーでパイプラインを集約することができます。この機能を動作させるには
+
+1. 各 Jenkins Worker に [Datadog Agent][1] をインストールします。
+2. 各 Jenkins ワーカーに `DD_CI_HOSTNAME` という新しい環境変数をワーカーのホスト名で設定し、エクスポートします。
+  * Datadog Agent がそのワーカーのインフラストラクチャーメトリクスで報告しているホスト名と同じである必要があります。
+  * 有効な値として、固定値や他の環境変数が使用できます。
+
+```bash
+# 固定値を使用する
+export DD_CI_HOSTNAME=my-hostname
+
+# 他の環境変数を使用する
+export DD_CI_HOSTNAME=$HOSTNAME
+```
+
+これは、Jenkins ワーカーにのみ必要です。Jenkins コントローラの場合、インフラストラクチャーメトリクスの相関は追加アクションを必要としません。
+
+**注**: インフラストラクチャーメトリクスの相関は、Jenkins Plugin v5.0.0+ 以降でサポートされています。
 
 ## ジョブログ収集を有効にする
 

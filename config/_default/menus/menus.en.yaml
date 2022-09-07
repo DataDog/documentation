@@ -611,11 +611,15 @@ main:
     identifier: watchdog_rca
     parent: watchdog_top_level
     weight: 3
+  - name: Insights
+    url: watchdog/insights
+    parent: watchdog_top_level
+    weight: 4
   - name: Faulty Deployment Detection
     url: watchdog/faulty_deployment_detection/
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
-    weight: 4
+    weight: 5
   - name: Events
     url: events/
     identifier: events_top_level
@@ -1855,21 +1859,26 @@ main:
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
     weight: 1205
+  - name: Agent Resource Usage
+    url: tracing/troubleshooting/agent_apm_resource_usage
+    identifier: tracing_troubleshooting_agent_usage
+    parent: tracing_troubleshooting
+    weight: 1206
   - name: Correlated Logs
     url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
-    weight: 1206
+    weight: 1207
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1207
+    weight: 1208
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1208
+    weight: 1209
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
@@ -2224,44 +2233,49 @@ main:
     url: logs/log_collection/ios/
     parent: log_collection
     weight: 103
+  - name: Flutter
+    identifier: log_flutter
+    url: logs/log_collection/flutter/
+    parent: log_collection
+    weight: 104
   - name: C#
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 104
+    weight: 105
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 105
+    weight: 106
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 106
+    weight: 107
   - name: NodeJS
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 107
+    weight: 108
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 108
+    weight: 109
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 109
+    weight: 110
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 110
+    weight: 111
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 111
+    weight: 112
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
@@ -2372,186 +2386,12 @@ main:
     parent: log_management
     identifier: log_troubleshooting
     weight: 8
-  - name: Security Platform
+  - name: Security Platform Overview
     url: security_platform/
     pre: security-platform
     identifier: security_platform
     parent: security_platform_heading
     weight: 180000
-  - name: Cloud SIEM
-    url: security_platform/cloud_siem/
-    parent: security_platform
-    identifier: cloud_siem
-    weight: 1
-  - name: Getting Started
-    url: security_platform/cloud_siem/getting_started
-    parent: cloud_siem
-    identifier: cloud_siem_getting_started
-    weight: 101
-  - name: Security Home
-    url: security_platform/cloud_siem/security_home
-    parent: cloud_siem
-    identifier: cloud_siem_security_home
-    weight: 102
-  - name: Log Detection Rules
-    url: security_platform/cloud_siem/log_detection_rules
-    parent: cloud_siem
-    identifier: cloud_siem_log_detection_rules
-    weight: 103
-  - name: OOTB Rules
-    url: /security_platform/default_rules#cat-cloud-siem
-    parent: cloud_siem
-    identifier: cloud_siem_default_rules
-    weight: 104
-  - name: Signals Explorer
-    url: /security_platform/explorer
-    parent: cloud_siem
-    identifier: cloud_siem_signals_explorer
-    weight: 105
-  - name: Cloud Security Posture Management
-    url: security_platform/cspm/
-    parent: security_platform
-    identifier: cspm
-    weight: 2
-  - name: Getting Started
-    url: security_platform/cspm/getting_started
-    parent: cspm
-    identifier: cspm_getting_started
-    weight: 201
-  - name: Frameworks and Benchmarks
-    url: security_platform/cspm/frameworks_and_benchmarks
-    parent: cspm
-    weight: 202
-  - name: OOTB Cloud Rules
-    url: security_platform/default_rules/#cat-posture-management-cloud
-    parent: cspm
-    identifier: ootb_cloud_rules
-    weight: 203
-  - name: OOTB Infrastructure Rules
-    url: security_platform/default_rules/#cat-posture-management-infra
-    parent: cspm
-    identifier: ootb_infrastructure_rules
-    weight: 204
-  - name: Posture Findings
-    url: /security_platform/cspm/findings
-    parent: cspm
-    identifier: cspm_findings_explorer
-    weight: 204
-  - name: Signals Explorer
-    url: /security_platform/cspm/signals_explorer/
-    parent: cspm
-    identifier: signals
-    weight: 205
-  - name: Cloud Workload Security
-    url: security_platform/cloud_workload_security/
-    parent: security_platform
-    identifier: cloud_workload_security
-    weight: 3
-  - name: Getting Started
-    url: security_platform/cloud_workload_security/getting_started
-    parent: cloud_workload_security
-    identifier: cws_getting_started
-    weight: 301
-  - name: Agent Expressions
-    url: security_platform/cloud_workload_security/agent_expressions
-    parent: cloud_workload_security
-    identifier: cws_agent_expressions
-    weight: 302
-  - name: Workload Security Detection Rules
-    url: security_platform/cloud_workload_security/workload_security_rules
-    parent: cloud_workload_security
-    identifier: cws_workload_security_rules
-    weight: 303
-  - name: Workload Security Events
-    url: security_platform/cloud_workload_security/backend
-    parent: cloud_workload_security
-    identifier: cws_backend_event_schema_documentation
-    weight: 304
-  - name: OOTB Rules
-    url: security_platform/default_rules#cat-workload-security
-    parent: cloud_workload_security
-    identifier: cws_workload_default_rules
-    weight: 305
-  - name: Signals Explorer
-    url: security_platform/explorer
-    parent: cloud_workload_security
-    identifier: cws_workload_signals_explorer
-    weight: 306
-  - name: Troubleshooting
-    url: security_platform/cloud_workload_security/troubleshooting
-    parent: cloud_workload_security
-    identifier: cws_troubleshooting
-    weight: 307
-  - name: Application Security Monitoring
-    url: security_platform/application_security/
-    parent: security_platform
-    identifier: application_security
-    weight: 4
-  - name: Getting Started
-    url: security_platform/application_security/getting_started/
-    parent: application_security
-    identifier: appsec_getting_started
-    weight: 401
-  - name: Java
-    url: security_platform/application_security/getting_started/java/
-    parent: appsec_getting_started
-    identifier: appsec_java
-    weight: 101
-  - name: .NET
-    url: security_platform/application_security/getting_started/dotnet/
-    parent: appsec_getting_started
-    identifier: appsec_dotnet
-    weight: 102
-  - name: Go
-    url: security_platform/application_security/getting_started/go/
-    parent: appsec_getting_started
-    identifier: appsec_go
-    weight: 103
-  - name: Ruby
-    url: security_platform/application_security/getting_started/ruby/
-    parent: appsec_getting_started
-    identifier: appsec_ruby
-    weight: 104
-  - name: PHP
-    url: security_platform/application_security/getting_started/php/
-    parent: appsec_getting_started
-    identifier: appsec_php
-    weight: 105
-  - name: NodeJS
-    url: security_platform/application_security/getting_started/nodejs/
-    parent: appsec_getting_started
-    identifier: appsec_nodejs
-    weight: 106
-  - name: How It Works
-    url: security_platform/application_security/how-appsec-works/
-    parent: application_security
-    identifier: appsec_howitworks
-    weight: 402
-  - name: OOTB Rules
-    url: security_platform/default_rules/#cat-application-security
-    parent: application_security
-    identifier: appsec_default_rules
-    weight: 403
-  - name: Setup and Configure
-    url: security_platform/application_security/setup_and_configure/
-    parent: application_security
-    identifier: appsec_configuration
-    weight: 404
-  - name: Custom Detection Rules
-    url: security_platform/application_security/custom_rules/
-    parent: application_security
-    identifier: appsec_custom_rules
-    weight: 405
-  - name: Event Rules
-    url: security_platform/application_security/event_rules/
-    parent: application_security
-    identifier: appsec_event_rules
-    weight: 406
-  - name: Troubleshooting
-    url: security_platform/application_security/troubleshooting
-    parent: application_security
-    identifier: appsec_troubleshooting
-    weight: 407
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
@@ -2587,11 +2427,189 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
+  - name: Cloud SIEM
+    url: security_platform/cloud_siem/
+    pre: siem
+    parent: security_platform_heading
+    identifier: cloud_siem
+    weight: 181000
+  - name: Getting Started
+    url: security_platform/cloud_siem/getting_started
+    parent: cloud_siem
+    identifier: cloud_siem_getting_started
+    weight: 1
+  - name: Security Home
+    url: security_platform/cloud_siem/security_home
+    parent: cloud_siem
+    identifier: cloud_siem_security_home
+    weight: 2
+  - name: Log Detection Rules
+    url: security_platform/cloud_siem/log_detection_rules
+    parent: cloud_siem
+    identifier: cloud_siem_log_detection_rules
+    weight: 3
+  - name: OOTB Rules
+    url: /security_platform/default_rules#cat-cloud-siem
+    parent: cloud_siem
+    identifier: cloud_siem_default_rules
+    weight: 4
+  - name: Signals Explorer
+    url: /security_platform/explorer
+    parent: cloud_siem
+    identifier: cloud_siem_signals_explorer
+    weight: 5
   - name: Guides
-    url: security_platform/guide/
-    parent: security_platform
-    identifier: security_platform_guides
-    weight: 9
+    url: security_platform/cloud_siem/guide/
+    parent: cloud_siem
+    identifier: siem_guides
+    weight: 6
+  - name: Cloud Security Posture Management
+    url: security_platform/cspm/
+    parent: security_platform_heading
+    pre: cspm
+    identifier: cspm
+    weight: 182000
+  - name: Getting Started
+    url: security_platform/cspm/getting_started
+    parent: cspm
+    identifier: cspm_getting_started
+    weight: 1
+  - name: Frameworks and Benchmarks
+    url: security_platform/cspm/frameworks_and_benchmarks
+    parent: cspm
+    weight: 2
+  - name: OOTB Cloud Rules
+    url: security_platform/default_rules/#cat-posture-management-cloud
+    parent: cspm
+    identifier: ootb_cloud_rules
+    weight: 3
+  - name: OOTB Infrastructure Rules
+    url: security_platform/default_rules/#cat-posture-management-infra
+    parent: cspm
+    identifier: ootb_infrastructure_rules
+    weight: 4
+  - name: Posture Findings
+    url: /security_platform/cspm/findings
+    parent: cspm
+    identifier: cspm_findings_explorer
+    weight: 4
+  - name: Signals Explorer
+    url: /security_platform/cspm/signals_explorer/
+    parent: cspm
+    identifier: signals
+    weight: 5
+  - name: Cloud Workload Security
+    url: security_platform/cloud_workload_security/
+    parent: security_platform_heading
+    pre: cws
+    identifier: cloud_workload_security
+    weight: 183000
+  - name: Getting Started
+    url: security_platform/cloud_workload_security/getting_started
+    parent: cloud_workload_security
+    identifier: cws_getting_started
+    weight: 1
+  - name: Agent Expressions
+    url: security_platform/cloud_workload_security/agent_expressions
+    parent: cloud_workload_security
+    identifier: cws_agent_expressions
+    weight: 2
+  - name: Workload Security Detection Rules
+    url: security_platform/cloud_workload_security/workload_security_rules
+    parent: cloud_workload_security
+    identifier: cws_workload_security_rules
+    weight: 3
+  - name: Workload Security Events
+    url: security_platform/cloud_workload_security/backend
+    parent: cloud_workload_security
+    identifier: cws_backend_event_schema_documentation
+    weight: 4
+  - name: OOTB Rules
+    url: security_platform/default_rules#cat-workload-security
+    parent: cloud_workload_security
+    identifier: cws_workload_default_rules
+    weight: 5
+  - name: Signals Explorer
+    url: security_platform/explorer
+    parent: cloud_workload_security
+    identifier: cws_workload_signals_explorer
+    weight: 6
+  - name: Troubleshooting
+    url: security_platform/cloud_workload_security/troubleshooting
+    parent: cloud_workload_security
+    identifier: cws_troubleshooting
+    weight: 7
+  - name: Application Security Monitoring
+    url: security_platform/application_security/
+    parent: security_platform_heading
+    pre: app-sec
+    identifier: application_security
+    weight: 184000
+  - name: Getting Started
+    url: security_platform/application_security/getting_started/
+    parent: application_security
+    identifier: appsec_getting_started
+    weight: 1
+  - name: Java
+    url: security_platform/application_security/getting_started/java/
+    parent: appsec_getting_started
+    identifier: appsec_java
+    weight: 101
+  - name: .NET
+    url: security_platform/application_security/getting_started/dotnet/
+    parent: appsec_getting_started
+    identifier: appsec_dotnet
+    weight: 102
+  - name: Go
+    url: security_platform/application_security/getting_started/go/
+    parent: appsec_getting_started
+    identifier: appsec_go
+    weight: 103
+  - name: Ruby
+    url: security_platform/application_security/getting_started/ruby/
+    parent: appsec_getting_started
+    identifier: appsec_ruby
+    weight: 104
+  - name: PHP
+    url: security_platform/application_security/getting_started/php/
+    parent: appsec_getting_started
+    identifier: appsec_php
+    weight: 105
+  - name: NodeJS
+    url: security_platform/application_security/getting_started/nodejs/
+    parent: appsec_getting_started
+    identifier: appsec_nodejs
+    weight: 106
+  - name: How It Works
+    url: security_platform/application_security/how-appsec-works/
+    parent: application_security
+    identifier: appsec_howitworks
+    weight: 2
+  - name: OOTB Rules
+    url: security_platform/default_rules/#cat-application-security
+    parent: application_security
+    identifier: appsec_default_rules
+    weight: 3
+  - name: Setup and Configure
+    url: security_platform/application_security/setup_and_configure/
+    parent: application_security
+    identifier: appsec_configuration
+    weight: 4
+  - name: Custom Detection Rules
+    url: security_platform/application_security/custom_rules/
+    parent: application_security
+    identifier: appsec_custom_rules
+    weight: 5
+  - name: Event Rules
+    url: security_platform/application_security/event_rules/
+    parent: application_security
+    identifier: appsec_event_rules
+    weight: 6
+  - name: Troubleshooting
+    url: security_platform/application_security/troubleshooting
+    parent: application_security
+    identifier: appsec_troubleshooting
+    weight: 7
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -2889,11 +2907,16 @@ main:
     parent: rum_ios
     identifier: rum_ios_web_view_tracking
     weight: 304
+  - name: SwiftUI
+    url: real_user_monitoring/ios/swiftui/
+    parent: rum_ios
+    identifier: rum_ios_swiftui
+    weight: 305
   - name: Troubleshooting
     url: real_user_monitoring/ios/troubleshooting/
     parent: rum_ios
     identifier: rum_troubleshooting_ios
-    weight: 305
+    weight: 306
   - name: React Native Monitoring
     url: real_user_monitoring/reactnative/
     parent: rum
@@ -2914,6 +2937,31 @@ main:
     parent: rum
     identifier: rum_flutter
     weight: 5
+  - name: Setup
+    url: real_user_monitoring/flutter/setup/
+    parent: rum_flutter
+    identifier: rum_flutter_setup
+    weight: 501
+  - name: Data Collected
+    url: real_user_monitoring/flutter/data_collected/
+    parent: rum_flutter
+    identifier: rum_flutter_data_collected
+    weight: 502
+  - name: Advanced Configuration
+    url: real_user_monitoring/flutter/advanced_configuration/
+    parent: rum_flutter
+    identifier: rum_flutter_advanced_configuration
+    weight: 503
+  - name: Mobile Vitals
+    url: real_user_monitoring/flutter/mobile_vitals/
+    parent: rum_flutter
+    identifier: rum_flutter_mobile_vitals
+    weight: 504
+  - name: Troubleshooting
+    url: real_user_monitoring/flutter/troubleshooting/
+    parent: rum_flutter
+    identifier: rum_flutter_troubleshooting
+    weight: 505
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
@@ -3069,6 +3117,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_reactnative
     weight: 1206
+  - name: Track Flutter Errors
+    url: real_user_monitoring/error_tracking/flutter/
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_flutter
+    weight: 1207
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -4754,7 +4807,7 @@ api:
       operationids:
         - ListVolumesByMetricName
       unstable: []
-      order: 7
+      order: 8
   - name: Create a tag configuration
     url: '#create-a-tag-configuration'
     identifier: metrics-create-a-tag-configuration
@@ -4814,7 +4867,7 @@ api:
       operationids:
         - EstimateMetricsOutputSeries
       unstable: []
-      order: 10
+      order: 11
   - name: List tags by metric name
     url: '#list-tags-by-metric-name'
     identifier: metrics-list-tags-by-metric-name
@@ -4827,6 +4880,18 @@ api:
         - ListTagsByMetricName
       unstable: []
       order: 6
+  - name: List active tags and aggregations
+    url: '#list-active-tags-and-aggregations'
+    identifier: metrics-list-active-tags-and-aggregations
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListActiveMetricConfigurations
+      unstable: []
+      order: 7
   - name: Configure tags for multiple metrics
     url: '#configure-tags-for-multiple-metrics'
     identifier: metrics-configure-tags-for-multiple-metrics
@@ -4839,10 +4904,10 @@ api:
         - DeleteBulkTagsMetricsConfiguration
         - CreateBulkTagsMetricsConfiguration
       unstable: []
-      order: 9
-  - name: List tag configurations
-    url: '#list-tag-configurations'
-    identifier: metrics-list-tag-configurations
+      order: 10
+  - name: Get a list of metrics
+    url: '#get-a-list-of-metrics'
+    identifier: metrics-get-a-list-of-metrics
     parent: metrics
     generated: true
     params:

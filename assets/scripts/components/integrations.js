@@ -188,13 +188,14 @@ export function initializeIntegrations() {
         for (let i = 0; i < window.integrations.length; i++) {
             const item = window.integrations[i];
             const domitem = document.getElementById(`mixid_${item.id}`);
+            const int = domitem.querySelector('.integration');
             if (
                 filter === 'all' ||
                 filter === '#all' ||
                 (isSearch && !filter)
             ) {
                 if (!isSafari) {
-                    domitem.classList.remove('grayscale');
+                    int.classList.remove('dimmer');
                 }
                 show.push(item);
             } else {
@@ -211,12 +212,12 @@ export function initializeIntegrations() {
                     (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
                 ) {
                     if (!isSafari) {
-                        domitem.classList.remove('grayscale');
+                        int.classList.remove('dimmer');
                     }
                     show.push(item);
                 } else {
                     if (!isSafari) {
-                        domitem.classList.add('grayscale');
+                        int.classList.add('dimmer');
                     }
                     hide.push(item);
                 }
@@ -229,12 +230,13 @@ export function initializeIntegrations() {
                 for (let i = 0; i < window.integrations.length; i++) {
                     const item = window.integrations[i];
                     const domitem = document.getElementById(`mixid_${item.id}`);
+                    const int = domitem.querySelector('.integration');
                     if (
                         filter === 'all' ||
                         filter === '#all' ||
                         (isSearch && !filter)
                     ) {
-                        domitem.classList.remove('grayscale');
+                        int.classList.remove('dimmer');
                     } else {
                         const name = item.name ? item.name.toLowerCase() : '';
                         const publicTitle = item.public_title
@@ -249,9 +251,9 @@ export function initializeIntegrations() {
                             (!isSearch &&
                                 item.tags.indexOf(filter.substr(1)) !== -1)
                         ) {
-                            domitem.classList.remove('grayscale');
+                            int.classList.remove('dimmer');
                         } else {
-                            domitem.classList.add('grayscale');
+                            int.classList.add('dimmer');
                         }
                     }
                 }
@@ -335,4 +337,15 @@ export function initializeIntegrations() {
     if (window.location.href.indexOf('#') > -1) {
         $(window).trigger('hashchange');
     }
+    $('.integration-row').on('mouseover', '.integration', {}, function () {
+        $('.integration-row .integration').removeClass('hover');
+
+        if (window.innerWidth >= 576) {
+            $(this).addClass('hover');
+        }
+    });
+
+    $('.integration-row').on('mouseout', '.integration', {}, function () {
+        $(this).removeClass('hover');
+    });
 }
