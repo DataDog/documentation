@@ -1050,7 +1050,7 @@
         dest_path: "/developers/"
         file_name: "datadog_apps.md"
         front_matters:
-          dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/gettiing-started.md"]
+          dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
 
   - repo_name: datadog-agent
     contents:
