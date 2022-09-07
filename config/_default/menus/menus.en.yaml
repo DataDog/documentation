@@ -2450,7 +2450,7 @@ main:
     identifier: cloud_siem_signals_explorer
     weight: 5
   - name: Guides
-    url: security_platform/guide/
+    url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
     weight: 6
