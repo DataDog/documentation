@@ -269,7 +269,7 @@ Some of the language-specific tracers have an option to modify spans before they
 
 The Ruby tracer has a post-processing pipeline that removes traces that meet certain criteria. More information and examples can be found in [Post-processing traces][1].
 
-For example, if the resource name is `Api::HealthchecksController#index`, use the `Datadog::Tracing::Pipeline::SpanFilter` class to removes traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
+For example, if the resource name is `Api::HealthchecksController#index`, use the `Datadog::Tracing::Pipeline::SpanFilter` class to remove traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
 ```
 Datadog::Tracing.before_flush(
