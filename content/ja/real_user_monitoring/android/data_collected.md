@@ -3,10 +3,10 @@ dependencies:
 - https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: dd-sdk-android ソースコード
 - link: /real_user_monitoring
-  tag: ホームページ
+  tag: ドキュメント
   text: Datadog RUM を探索する
 kind: documentation
 title: 収集された RUM Android データ

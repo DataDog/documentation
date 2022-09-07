@@ -23,7 +23,7 @@ Once [log management is enabled][1] for your organization, you can create a logs
 
 To create a [logs monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -79,10 +79,14 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 When a logs monitor is triggered, samples or values can be added to the notification message.
 
-| Monitor over     | Can be added to notification message                                                                     |
-|------------------|----------------------------------------------------------------------------------------------------------|
-| Log count        | Grouped: The top 10 breaching values and their corresponding counts.<br>Ungrouped: Up to 10 log samples. |
-| Facet or measure | Grouped: The top 10 facet or measure values.<br>Ungrouped: The top 10 facet or measure values.           |
+| Monitor Setup                    | Can be added to notification message |
+|----------------------------------|--------------------------------------|
+| Ungrouped Simple-Alert Log count | Up to 10 log samples.                |
+| Grouped Simple-Alert Log count   | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert Log count    | Up to 10 log samples.                |
+| Ungrouped Simple-Alert measure   | Up to 10 log samples.                |
+| Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
+| Grouped Multi-Alert Log count    | Up to 10 facet or measure values.    |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 

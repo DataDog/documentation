@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -130,7 +130,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -178,9 +178,9 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
-          command: ["process-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
+          command: ["process-agent", "-foreground", "--cfgpath=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
           env:
             # Needs to be removed when Agent N-2 is built with Golang 1.17
@@ -220,7 +220,7 @@ spec:
               mountPath: \\.\pipe\containerd-containerd
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -234,7 +234,7 @@ spec:
               mountPath: C:/Temp/install_info
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.35.2"
+          image: "gcr.io/datadoghq/agent:7.38.2"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:

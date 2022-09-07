@@ -1,43 +1,62 @@
 ---
+app_id: z-scaler
+app_uuid: 102476f5-1e00-452f-b841-9e32bb66d4bc
 assets:
   dashboards:
     Zscaler Overview: assets/dashboards/zscaler_overview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: zscaler.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Zscaler
   logs:
     source: zscaler
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
-categories:
-- ''
-creates_events: false
-ddtype: check
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md
 description: TODO
-display_name: Zscaler
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/zscaler/
 draft: false
 git_integration_title: zscaler
-guid: 595d2046-a122-4355-bfde-f4b42ece4a41
 has_logo: true
 integration_id: z-scaler
 integration_title: Zscaler
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: zscaler.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: zscaler
-public_title: Datadog-Zscaler インテグレーション
+oauth: {}
+public_title: Zscaler
 short_description: Zscaler とのインテグレーションにより、クラウドセキュリティログを提供
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Zscaler とのインテグレーションにより、クラウドセキュリティログを提供
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Zscaler
 version: '1.0'
 ---
 

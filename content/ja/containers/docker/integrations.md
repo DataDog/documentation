@@ -73,7 +73,7 @@ labels:
   com.datadoghq.ad.instances: '[<インスタンスコンフィギュレーション>]'
 ```
 
-**docker run command**:
+**`docker run`、`nerdctl run`、または `podman run` コマンド**:
 
 ```shell
 -l com.datadoghq.ad.check_names='[<インテグレーション名>]' -l com.datadoghq.ad.init_configs='[<初期コンフィギュレーション>]' -l com.datadoghq.ad.instances='[<インスタンスコンフィギュレーション>]'

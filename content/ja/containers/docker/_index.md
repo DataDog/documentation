@@ -28,12 +28,12 @@ further_reading:
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
 kind: documentation
-title: Docker Agent
+title: Docker、containerd、Podman に対応した Docker Agent
 ---
 
 ## 概要
 
-Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバージョンです。公式の [Docker イメージ][2]は Docker Hub、GCR 、および ECR-Public からご利用いただけます。
+Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバージョンです。Docker Agent は、Docker、containerd、Podman のランタイムをサポートしています。公式の [Docker イメージ][2]は Docker Hub、GCR 、および ECR-Public からご利用いただけます。
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
@@ -41,6 +41,9 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 |----------------|--------------|-----------|
 | [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
 | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
+
+
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
 ## セットアップ
 
@@ -221,6 +224,8 @@ Datadog は Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher から�
 
 **注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。なお、これらはコンテナの課金に影響しません。
 
+**注**: containerd を使用する場合、`DD_CONTAINERD_NAMESPACES` と `DD_CONTAINERD_EXCLUDE_NAMESPACES` を使用すると、ネームスペースでコンテナを無視することが可能です。どちらもスペースで区切られたネームスペースのリストです。`DD_CONTAINERD_NAMESPACES` が設定されている場合、Agent はリストに存在するネームスペースに属するコンテナのデータを報告します。`DD_CONTAINERD_EXCLUDE_NAMESPACES` が設定されている場合、Agent はリストのネームスペースに属するものを除く、すべてのコンテナのデータをレポートします。
+
 ### その他
 
 | 環境変数                        | 説明                                                                                                                                                     |
@@ -242,16 +247,17 @@ Datadog は Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher から�
 
 | チェック       | メトリクス       |
 |-------------|---------------|
-| CPU         | [System][27]  |
-| ディスク        | [Disk][28]    |
-| Docker      | [Docker][29]  |
-| ファイル処理 | [System][27]  |
-| IO          | [System][27]  |
-| ロード        | [System][27]  |
-| メモリ      | [System][27]  |
-| ネットワーク     | [Network][30] |
-| NTP         | [NTP][31]     |
-| アップタイム      | [System][27]  |
+| コンテナ   | [Metrics][27]
+| CPU         | [System][28]  |
+| ディスク        | [Disk][29]    |
+| Docker      | [Docker][30]  |
+| ファイル処理 | [System][28]  |
+| IO          | [System][28]  |
+| ロード        | [System][28]  |
+| メモリ      | [System][28]  |
+| ネットワーク     | [Network][31] |
+| NTP         | [NTP][32]     |
+| アップタイム      | [System][28]  |
 
 ### イベント
 
@@ -295,8 +301,9 @@ Agent チェックが Datadog にメトリクスを送信できない場合は�
 [24]: /ja/agent/guide/secrets-management/?tab=linux
 [25]: /ja/agent/guide/autodiscovery-management/
 [26]: /ja/agent/guide/agent-commands/
-[27]: /ja/integrations/system/#metrics
-[28]: /ja/integrations/disk/#metrics
-[29]: /ja/agent/docker/data_collected/#metrics
-[30]: /ja/integrations/network/#metrics
-[31]: /ja/integrations/ntp/#metrics
+[27]: /ja/integrations/container/
+[28]: /ja/integrations/system/#metrics
+[29]: /ja/integrations/disk/#metrics
+[30]: /ja/agent/docker/data_collected/#metrics
+[31]: /ja/integrations/network/#metrics
+[32]: /ja/integrations/ntp/#metrics

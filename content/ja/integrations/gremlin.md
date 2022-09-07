@@ -1,34 +1,59 @@
 ---
+app_id: gremlin
+app_uuid: 451a4863-1767-4c11-8831-d196ae4643d0
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: gremlin.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gremlin
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@gremlin.com
+  support_email: support@gremlin.com
 categories:
 - コラボレーション
 - 問題追跡
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
-display_name: Gremlin
+display_on_public_website: true
 draft: false
 git_integration_title: gremlin
-guid: 087cb38a-d119-4db6-8c54-30700fc1f355
 integration_id: gremlin
 integration_title: Gremlin
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@gremlin.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: gremlin
+oauth: {}
 public_title: Gremlin
 short_description: Gremlin で発生したイベントを Datadog に送信
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Collaboration
+  - Category::Issue Tracking
+  configuration: README.md#Setup
+  description: Gremlin で発生したイベントを Datadog に送信
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gremlin
 ---
 
 

@@ -1,11 +1,13 @@
 ---
-title: 新しいインテグレーションの設定
-kind: documentation
 aliases:
-  - /ja/developers/integrations/integration_sdk/
-  - /ja/developers/integrations/testing/
-  - /ja/integrations/datadog_checks_dev/
-  - /ja/guides/new_integration/
+- /ja/developers/integrations/integration_sdk/
+- /ja/developers/integrations/testing/
+- /ja/integrations/datadog_checks_dev/
+- /ja/guides/new_integration/
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/new_check_howto.md
+kind: documentation
+title: 新しいインテグレーションの設定
 ---
 Agent ベースのインテグレーションが用意され、コアリポジトリに組み込んで Agent パッケージにバンドルできる状態だと見なされるには、いくつかの前提条件を満たす必要があります。
 
@@ -22,16 +24,18 @@ Agent ベースのインテグレーションが用意され、コアリポジ�
 - システムで Python 3.8 以上を使用できる必要があります。Python 2.7 は任意ですが、推奨されます。
 - フルテストスイートを実行するための Docker。
 
-一般に、[Python 仮想環境][1]を作成して有効化することで、開発環境を独立させることが推奨されますが、これは必須ではありません。詳細については、[Python 環境のドキュメント][2]を参照してください。
+[Python 仮想環境][1]を作成して有効化することで、開発環境を独立させることが推奨されますが、これは必須ではありません。詳細については、[Agent インテグレーション開発のための Python][2] を参照してください。
 
 ## セットアップ
 
-[integrations-extras リポジトリ][3]を複製します。デフォルトでは、このツールは `$HOME/dd/` ディレクトリで作業することを想定しています。ただし、これは任意で、後で構成によって調整できます。
+[integrations-extras リポジトリ][3]を**フォーク**および複製します。デフォルトでは、ツールは `$HOME/dd/` ディレクトリで作業することを想定しています。ただし、これは任意で、後でコンフィギュレーションによって調整できます。
 
 ```shell
 mkdir $HOME/dd && cd $HOME/dd       # 任意
 git clone https://github.com/DataDog/integrations-extras.git
 ```
+
+もし、チェックを公開したり、[インテグレーション-エクストラリポジトリ][3]に貢献するつもりであれば、フォークを作成する必要があります。
 
 ### 開発ツールキット
 
@@ -41,7 +45,7 @@ git clone https://github.com/DataDog/integrations-extras.git
 pip3 install "datadog-checks-dev[cli]"
 ```
 
-このリポジトリを `$HOME/dd/` 以外の場所に複製する場合は、構成ファイルの調整が必要になります。
+このリポジトリを `$HOME/dd/` 以外の場所に複製する場合は、構成ファイルの調整が必要です。
 
 ```bash
 ddev config set extras "/path/to/integrations-extras"
@@ -53,7 +57,7 @@ ddev config set extras "/path/to/integrations-extras"
 ddev config set repo extras
 ```
 
-**注**: このステップを行わない場合は、コンテキストが正しく `integrations-extras` になるように、すべての呼び出しで `-e` を使用する必要があります。
+**注**: このステップを行わない場合は、コンテキストが正しく `integrations-extras` になるように、すべての呼び出しで `-e` を使用します。
 
 ```bash
 ddev -e COMMAND [OPTIONS]
@@ -71,7 +75,7 @@ ddev -e COMMAND [OPTIONS]
 ddev create -n Awesome
 ```
 
-これで、ファイルが書き込まれるパスと、パス構造自体が表示されます。ここで確認が必要なのは、出力の _1 行目_のパスが Extras リポジトリと一致していることのみです。
+これで、ファイルが書き込まれるパスと、パス構造自体が表示されます。出力の _1 行目_のパスが Extras リポジトリと一致していることを確認します。
 
 ### インタラクティブモード
 
@@ -89,7 +93,7 @@ ddev create Awesome
 
 チェックは、次の要件を満たす Python クラスです。
 
-- Agent v7 以降を介して実行されるインテグレーションは、Python 3 互換でなければなりません。ただし、Agent v5 および v6 は引き続き Python 2.7 を使用します。
+- Agent v7 以降で実行されるインテグレーションは、Python 3 互換でなければなりません。ただし、Agent v5 および v6 は引き続き Python 2.7 を使用します。
 - `AgentCheck` から派生されます。
 - `check(self, instance)` というシグニチャを持つメソッドを提供する必要があります。
 
@@ -136,7 +140,7 @@ class AwesomeCheck(AgentCheck):
                 self.service_check('awesome.search', self.WARNING)
 ```
 
-基本 Python クラスの詳細は、[Python API のドキュメント][6]を参照してください。
+基本 Python クラスの詳細は、[Python チェックの構造][6]を参照してください。
 
 ### テストの書き方
 
@@ -145,9 +149,9 @@ class AwesomeCheck(AgentCheck):
 - 特定の機能のユニットテスト。
 - `check` メソッドを実行し、適切なメトリクス収集を検証するインテグレーションテスト。
 
-`integrations-extras` にインテグレーションを追加する場合、テストは_必須_です。テストは [pytest][7] と [tox][8] を使用して実行されます。
+`integrations-extras` にインテグレーションを追加する場合、テストは_必須_です。**注**: テストは [pytest][7] と [tox][8] を使用して実行されます。
 
-詳細については、[Datadog Checks Dev のドキュメント][9]を参照してください。
+詳細については、[ddev インストールガイド][9]を参照してください。
 
 #### ユニットテスト
 
@@ -192,7 +196,7 @@ ddev test awesome
 
 #### インテグレーションテストの構築
 
-ユニットテストでは収集_ロジック_がチェックされないため、インテグレーションテストを追加しましょう。`docker` を使用して Nginx コンテナをスピンアップし、チェックで Welcome ページを取得します。次のような内容の Compose ファイルを `awesome/tests/docker-compose.yml` として作成します。
+ユニットテストでは収集_ロジック_がチェックされないため、インテグレーションテストを追加します。`docker` を使用して Nginx コンテナをスピンアップし、チェックで Welcome ページを取得します。次のような内容の Compose ファイルを `awesome/tests/docker-compose.yml` として作成します。
 
 ```yaml
 version: "3"
@@ -204,7 +208,7 @@ services:
       - "8000:80"
 ```
 
-ここで、`awesome/tests/conftest.py` ファイルを開き、内容を次のように書き換えます。
+次に、`awesome/tests/conftest.py` ファイルを開き、内容を次のように書き換えます。
 
 ```python
 import os
@@ -272,19 +276,19 @@ ddev test -m integration awesome
 : これには、チェックのドキュメント、その設定方法、収集するデータなどが含まれます。
 
 `spec.yaml`
-: これは、`ddev` ツールを使用して `conf.yaml.example` を生成するのに使用されます（下記 "コンフィギュレーションテンプレート" タブ参照）。[詳細はコンフィギュレーション仕様書をご覧ください。][16]
+: これは、`ddev` ツールを使用して `conf.yaml.example` を生成するのに使用されます（下記 "コンフィギュレーションテンプレート" タブ参照）。詳細については、[コンフィギュレーション仕様][16]を参照してください。
 
 `conf.yaml.example`
-: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。このファイルを手動で編集しないでください！これは `spec.yaml` のコンテンツから生成されます。[そのロジックについては、コンフィギュレーションファイルのリファレンスドキュメントを参照してください。][10]
+: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。このファイルを手動で編集しないでください！これは `spec.yaml` のコンテンツから生成されます。そのロジックについては、[コンフィギュレーションファイルのリファレンス][10]を参照してください。
 
 `manifest.json`
-: これには、タイトルやカテゴリなどの Agent チェックのメタデータが含まれます。[詳細については、マニフェストのリファレンスドキュメントを参照してください。][11]
+: これには、タイトルやカテゴリなどの Agent チェックのメタデータが含まれます。[詳細については、詳細については、[マニフェストファイルのリファレンス][11]を参照してください。
 
 `metadata.csv`
-: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。[詳細については、メトリクスメタデータのリファレンスドキュメントを参照してください。][12]
+: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。詳細については、[メトリクスメタデータファイルのリファレンス][12]を参照してください。
 
 `service_check.json`
-: これには、Agent チェックによって収集されたすべてのサービスチェックのリストが含まれます。[詳細については、サービスチェックのリファレンスドキュメントを参照してください。][13]
+: これには、Agent チェックによって収集されたすべてのサービスチェックのリストが含まれます。詳細については、[サービスチェックファイルのリファレンス][13]を参照してください。
 
 この例では、これらのファイルは次の形式になります。
 
@@ -336,7 +340,7 @@ ddev validate config --sync awesome
 {{% /tab %}}
 {{% tab "マニフェスト" %}}
 
-Awesome サービスチェックの `awesome/manifest.json`。`guid` は一意 (かつ有効) でなければならないことに注意してください。したがって、この例のものを使用_しない_でください (いずれにしても、ツールによって自動的に生成されます)。
+Awesome サービスチェックの `awesome/manifest.json`。**注**: `guid` は一意 (かつ有効) でなければなりません。したがって、この例のものを使用_しない_でください (ツールによって自動的に生成されます)。
 
 ```json
 {
@@ -396,12 +400,12 @@ Awesome サービスチェックの `awesome/manifest.json`。`guid` は一意 (
 
 ## ビルド
 
-`setup.py` は、Wheel のパッケージ化とビルドを支援する setuptools セットアップスクリプトを提供します。Python パッケージの詳細については、[Python の公式ドキュメント][14]を参照してください。
+`pyproject.toml` ファイルは、Wheel のパッケージ化とビルドに使用されるメタデータを提供します。Python パッケージの詳細については、[Python プロジェクトのパッケージ][14]を参照してください。
 
-`setup.py` が準備できたら、Wheel を作成します。
+`pyproject.toml` が準備できたら、Wheel を作成します。
 
 - `ddev` ツールを使用する (推奨): `ddev release build <INTEGRATION_NAME>`
-- `ddev` ツールを使用しない: `cd <INTEGRATION_DIR> && python setup.py bdist_wheel`
+- `ddev` ツールを使用しない: `cd <INTEGRATION_DIR> && pip wheel . --no-deps --wheel-dir dist`
 
 ### Wheel の内容
 
@@ -409,7 +413,7 @@ Wheel には、チェック、コンフィギュレーションのサンプル�
 
 ## インストール
 
-Wheel は、[Agent v6.10.0 以上][15]で提供されている Agent の `integration` コマンドによってインストールされます。このコマンドは、環境に応じて、特定のユーザーとして、または特定の権限で実行する必要があります。
+Wheel は、[Agent v6.10.0 以上][15]で提供されている Agent の `integration` コマンドを使ってインストールされます。このコマンドは、環境に応じて、特定のユーザーとして、または特定の権限で実行する必要があります。
 
 **Linux** (`dd-agent` として)
 
@@ -441,15 +445,15 @@ Agent バージョン >= 6.12 の場合
 [2]: /ja/developers/integrations/python
 [3]: https://github.com/DataDog/integrations-extras
 [4]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[5]: https://docs.datadoghq.com/ja/metrics/agent_metrics_submission/
+[5]: https://docs.datadoghq.com/ja/developers/metrics/agent_metrics_submission/
 [6]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
 [7]: https://docs.pytest.org/en/latest
 [8]: https://tox.readthedocs.io/en/latest
-[9]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev#development
-[10]: /ja/developers/integrations/check_references#configuration-file
-[11]: /ja/developers/integrations/check_references#manifest-file
-[12]: /ja/developers/integrations/check_references#metrics-metadata-file
-[13]: /ja/developers/integrations/check_references#service-check-file
-[14]: https://packaging.python.org/tutorials/distributing-packages
+[9]: https://datadoghq.dev/integrations-core/setup/#ddev
+[10]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#configuration-file
+[11]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#manifest-file
+[12]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#metrics-metadata-file
+[13]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#service-check-file
+[14]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [15]: https://docs.datadoghq.com/ja/agent/
 [16]: https://datadoghq.dev/integrations-core/meta/config-specs/
