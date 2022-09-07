@@ -106,7 +106,7 @@ prof.start()
 
 You can configure the profiler using the [environment variables][5].
 
-### Code Provenance
+### Code provenance
 
 The Python profiler supports code provenance reporting, which gives you access
 to insight about library the running code is coming from. While this is
