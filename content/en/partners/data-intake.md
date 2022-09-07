@@ -5,12 +5,7 @@ description: "How data can be fed into Datadog and which prerequisites need to b
 private: true
 ---
 
-You've laid the groundwork and it's time to start getting data into Datadog. 
-
-Datadog offers several different ways to collect data:
-- Cloud service integrations (out of the box)
-- The Datadog Agent & Agent-based Integrations (out of the box)
-- APIs / Library Integrations & Custom Checks
+You've laid the groundwork and it's time to start getting data into Datadog.
 
 Initially, the objective of this phase should be to gather data to provide immediate value to you or your clients. However, in the long run, you should consider this an ongoing process where you constantly assess changes to your environment by asking the following questions:
 - Have you or your clients employed a new technology?
@@ -21,13 +16,43 @@ Consider these questions regularly to ensure that all necessary telemetry is bei
 
 ## Integrations
 
-You can provide immediate value to your clients through integrations. Datadog offers {{< translate key="integration_count" >}} integrations, which collect metrics and logs from a wide array of technologies. Some integrations come packaged with the Datadog Agent, others are authentication-based and rely on the Datadog API, and some collect data based on the language that an application is written in.
+You can provide immediate value to your clients through integrations. Datadog offers {{< translate key="integration_count" >}} integrations, which collect metrics and logs from a wide array of technologies.
+
+There are three main categories of integrations:
+- Cloud service integrations
+- The Datadog Agent & Agent-based Integrations
+- APIs / Library Integrations & Custom Checks
+
+For more information on the different types of integrations, see [Introduction to Integrations][1].
+
+## Cloud service integrations
+
+Cloud service or "crawler" based integrations use an authenticated connection to gather infrastructure information, metrics, logs, and events from a cloud service using an API.
+
+Setting up a cloud service integration usually only takes a few minutes and delivers immediate value with metrics and events flowing into Datadog.
+
+**Note**: Cloud service integrations can generate large volumes of data which can have billing effects from both Datadog and the cloud provider.
+
+Be aware that in most scenarios, using a cloud service integration will not be sufficient to get a full understanding of the infrastructure and especially the applications that are running in these environments. We recommend leveraging all means of data collection in addition to cloud service integrations.
+
+To learn more about monitoring cloud environments, see:
+- [Monitoring the Cloud][2] (eBook)
+- [Introduction to AWS Cloud Monitoring][3] (Blog)
+- [Introduction to Google Cloud Monitoring][4] (Blog)
+- [Introduction to Azure Cloud Monitoring][5] (Blog)
+
+## The Datadog Agent and Agent-based Integrations
+
+The Datadog Agent is software that runs on hosts and collects events and metrics to send to Datadog. The Agent is available for all commonly used platforms. While the agent itself can collect a number of metrics about the host it is running on, such as CPU, memory, disk, and network metrics, the real strength of the Agent is its integrations.
+
+Agent-based integrations allow the Agent to collect metrics, logs, traces,
+and events from applications and technologies running either directly on
+the host or in containers running on the host.
 
 For more information on integrations and the Datadog Agent, see:
-- [Introduction to Integrations][1]
-- [List of Datadog Integrations][2]
-- [The Datadog Agent][3]
-- [Getting Started with the Agent][4]
+- [List of Datadog Integrations][6]
+- [The Datadog Agent][7]
+- [Getting Started with the Agent][8]
 
 ## APIs / library integrations and custom checks
 
@@ -46,16 +71,16 @@ There are three key API areas that would be of most interest to you as a service
 
 In cases where using cloud service integrations or the Agent is not possible or desired, the following APIs can be helpful for data intake:
 
-- Logs can be forwarded directly to Datadog's [log ingestion endpoint][5].
-- Metrics can be forwarded directly to Datadog's [metrics API][6].
-- Events can be forwarded directly to Datadog's [events API][7].
-- Traces can be forwarded directly to Datadog's [trace/span API][8].
+- Logs can be forwarded directly to Datadog's [log ingestion endpoint][9].
+- Metrics can be forwarded directly to Datadog's [metrics API][10].
+- Events can be forwarded directly to Datadog's [events API][11].
+- Traces can be forwarded directly to Datadog's [trace/span API][12].
 
 ### Custom checks
 
 While Datadog offers {{< translate key="integration_count" >}} integrations, your client might run a custom application that cannot be covered with any of the existing integrations. To monitor these applications, your clients can use the Agent to execute custom checks.
 
-For more information, see [Custom Checks][9].
+For more information, see [Custom Checks][13].
 
 ### Local APIs for data ingestion on the Agent
 
@@ -64,10 +89,10 @@ The Datadog Agent comes bundled with DogStatsD, a metrics aggregation service, w
 You can either use the DogStatsD endpoints, or use a Datadog client library to facilitate the submission of metrics and events to DogStatsD.
 
 For more information, see:
-- [Submit Events][10]
-- [Submit Custom Metrics][11]
-- [Libraries][12]
-- [API Reference][13]
+- [Submit Events][14]
+- [Submit Custom Metrics][15]
+- [Libraries][16]
+- [API Reference][17]
 
 ## Tagging strategy
 
@@ -86,14 +111,14 @@ When thinking about tagging, take into consideration the following factors:
 - **Responsibility**: Allows the responsible team to filter all of their resources and enables other users and teams to identify which team is responsible for a certain service.
 
 For more information on tagging and tagging strategy, see:
-- [Getting Started with Tags][14]
-- [Best practices for tagging your infrastructure and applications][15] (Blog)
-- [Tagging Best Practices][16] (Training)
-- [Unified Service Tagging][17]
-- [Kubernetes Tag Extraction][18]
-- [AWS Tagging][19] (AWS Documentation)
-- [Serverless Tagging][20]
-- [Live Container Tagging][21]
+- [Getting Started with Tags][18]
+- [Best practices for tagging your infrastructure and applications][19] (Blog)
+- [Tagging Best Practices][20] (Training)
+- [Unified Service Tagging][21]
+- [Kubernetes Tag Extraction][22]
+- [AWS Tagging][23] (AWS Documentation)
+- [Serverless Tagging][24]
+- [Live Container Tagging][25]
 
 ## Agent rollout
 
@@ -105,11 +130,11 @@ Here are the key phases for rolling out the Agent:
 
 ### Prerequisites for Agent deployment
 
-Depending on the platform and operating system, there might be different prerequisites for the Agent. See [the official Agent documentation][3] to familiarize yourself with those requirements.
+Depending on the platform and operating system, there might be different prerequisites for the Agent. See [the official Agent documentation][7] to familiarize yourself with those requirements.
 
 The main prerequisite for the Agent on any platform is network connectivity. Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent. Except in rare cases, inbound connectivity (limited through local firewalls) is not a factor for Agent deployments.
 
-To work properly, the Agent requires the ability to send traffic to the Datadog service over SSL over 443/tcp. For a full list of ports used by the agent, see [Network Traffic][22].
+To work properly, the Agent requires the ability to send traffic to the Datadog service over SSL over 443/tcp. For a full list of ports used by the agent, see [Network Traffic][26].
 
 In some circumstances, Agent version-specific endpoints can cause maintenance problems, in which case Datadog can provide a version-agnostic endpoint. If you need a version-agnostic endpoint, contact Datadog support.
 
@@ -117,60 +142,65 @@ In some circumstances, Agent version-specific endpoints can cause maintenance pr
 
 In many client environments, opening direct connectivity from the Agent to Datadog is not possible or desired. To enable connectivity, Datadog offers a few different options to proxy the Agent traffic.
 
-For more information, see [Agent Proxy Configuration][23].
+For more information, see [Agent Proxy Configuration][27].
 
 ### Agent deployment, upgrade, and configuration
 
 There are various ways to deploy the Datadog Agent to your own and your client's infrastructure. As most service providers already have some configuration management tool in place, it is good practice to use the existing tool for Agent rollout.
 
 Here are some examples of how to manage your Datadog Agent estate with configuration management tools:
-- [Deploying Datadog Agents with Chef][24] (Blog)
-- [Puppet + Datadog: Automate + monitor your systems][3] (Blog)
-- [Deploying and Configuring Datadog with CloudFormation][25] (Blog)
-- [How to Use Ansible to Automate Datadog Configuration][26] (Video)
-- [How to deploy the Datadog agent on AWS hosts with Ansible dynamic inventories][27] (Blog)
+- [Deploying Datadog Agents with Chef][28] (Blog)
+- [Puppet + Datadog: Automate + monitor your systems][7] (Blog)
+- [Deploying and Configuring Datadog with CloudFormation][29] (Blog)
+- [How to Use Ansible to Automate Datadog Configuration][30] (Video)
+- [How to deploy the Datadog agent on AWS hosts with Ansible dynamic inventories][31] (Blog)
 
-If you don't plan on using Datadog's repositories, you can always find the latest Agent releases in the [public Github repository][28]. It is recommended that you [verify the distribution channel][29] of Agent packages before deployment.
+If you don't plan on using Datadog's repositories, you can always find the latest Agent releases in the [public Github repository][32]. It is recommended that you [verify the distribution channel][33] of Agent packages before deployment.
 
 ### Monitoring the continuous provisioning processes
 
 While it is good practice to use configuration management tools for deploying Datadog, you can also leverage Datadog to monitor proper operation of these tools. Here are some examples:
-- [Ask your systems what's going on: monitor Chef with Datadog][30] (Blog)
-- [Ansible + Datadog: Monitor your automation, automate your monitoring][31] (Blog)
+- [Ask your systems what's going on: monitor Chef with Datadog][34] (Blog)
+- [Ansible + Datadog: Monitor your automation, automate your monitoring][35] (Blog)
 
 ## What's next?
 
-Now that you have data flowing into Datadog, it's time to focus on [Delivering value][32] to your clients.
+Now that you have data flowing into Datadog, it's time to focus on [Delivering value][36] to your clients.
+
 
 [1]: /getting_started/integrations/
-[2]: /integrations/
-[3]: /agent/
-[4]: /getting_started/agent/
-[5]: /getting_started/logs
-[6]: /api/latest/metrics
-[7]: /api/latest/events
-[8]: /api/latest/tracing/
-[9]: /developers/custom_checks/
-[10]: /events/guides/dogstatsd/
-[11]: /metrics/custom_metrics/
-[12]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
-[13]: /api/latest/
-[14]: /getting_started/tagging/
-[15]: https://www.datadoghq.com/blog/tagging-best-practices/
-[16]: https://learn.datadoghq.com/courses/tagging-best-practices
-[17]: /getting_started/tagging/unified_service_tagging?tab=kubernetes
-[18]: /agent/kubernetes/tag/
-[19]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[20]: /serverless/serverless_tagging/?tab=serverlessframework#overview
-[21]: /infrastructure/livecontainers
-[22]: /agent/guide/network/
-[23]: /agent/proxy/
-[24]: https://www.datadoghq.com/blog/deploying-datadog-with-chef-roles/
-[25]: https://www.datadoghq.com/blog/monitor-puppet-datadog/
-[26]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/
-[27]: https://www.youtube.com/watch?v=EYoqwiXFrlQ
-[28]: https://github.com/DataDog/datadog-agent/releases
-[29]: /data_security/agent/#agent-distribution
-[30]: https://www.datadoghq.com/blog/monitor-chef-with-datadog/
-[31]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring/
-[32]: /partners/delivering-value/
+[2]: https://www.datadoghq.com/pdf/monitoring-in-the-cloud-ebook.pdf
+[3]: https://www.datadoghq.com/solutions/aws/
+[4]: https://www.datadoghq.com/solutions/gcp/
+[5]: https://www.datadoghq.com/solutions/azure/
+[6]: /integrations/
+[7]: /agent/
+[8]: /getting_started/agent/
+[9]: /getting_started/logs
+[10]: /api/latest/metrics
+[11]: /api/latest/events
+[12]: /api/latest/tracing/
+[13]: /developers/custom_checks/
+[14]: /events/guides/dogstatsd/
+[15]: /metrics/custom_metrics/
+[16]: /developers/community/libraries/#api-and-dogstatsd-client-libraries
+[17]: /api/latest/
+[18]: /getting_started/tagging/
+[19]: https://www.datadoghq.com/blog/tagging-best-practices/
+[20]: https://learn.datadoghq.com/courses/tagging-best-practices
+[21]: /getting_started/tagging/unified_service_tagging?tab=kubernetes
+[22]: /agent/kubernetes/tag/
+[23]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+[24]: /serverless/serverless_tagging/?tab=serverlessframework#overview
+[25]: /infrastructure/livecontainers
+[26]: /agent/guide/network/
+[27]: /agent/proxy/
+[28]: https://www.datadoghq.com/blog/deploying-datadog-with-chef-roles/
+[29]: https://www.datadoghq.com/blog/monitor-puppet-datadog/
+[30]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/
+[31]: https://www.youtube.com/watch?v=EYoqwiXFrlQ
+[32]: https://github.com/DataDog/datadog-agent/releases
+[33]: /data_security/agent/#agent-distribution
+[34]: https://www.datadoghq.com/blog/monitor-chef-with-datadog/
+[35]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring/
+[36]: /partners/delivering-value/
