@@ -108,7 +108,7 @@ You can configure the profiler using the [environment variables][5].
 
 ### Code provenance
 
-The Python profiler supports code provenance reporting, which gives you access
+The Python profiler supports code provenance reporting, which gives you
 to insight about library the running code is coming from. While this is
 disabled by default, you can turn it on by setting
 `DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
