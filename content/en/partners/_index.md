@@ -16,24 +16,27 @@ Learn about best practices and get started monitoring your clients' environments
 - [Delivering Value][3]: Walks through recommended steps after you have data flowing into Datadog.
 - [Billing and Usage Reporting][4]: Covers monitoring individual client and aggregate usage of the Datadog platform in multi-organization account setups.
 
+## Partner Sales Enablement guide
+
+Consult the [Partner Sales Enablement guide][5] for a training roadmap that prepares you for the Datadog sales engineering process.
 ## Staying up to date with Datadog
 
 There are multiple ways you can stay up to date with Datadog and learn about new features:
-- You can [view the release notes][5] on the Datadog site
+- You can [view the release notes][6] on the Datadog site
 - As a Datadog Partner Network member, you have exclusive access to:
-  - Collateral and training material in the [Datadog Partner Network portal][6].
-  - The Quarterly DPN Live Briefing Webinar: watch for the invite in your inbox or [watch the recorded sessions][7].
-- Datadog shares the many lessons learned about scalable, distributed systems in the cloud at [Datadog on...][8].
+  - Collateral and training material in the [Datadog Partner Network portal][7].
+  - The Quarterly DPN Live Briefing Webinar: watch for the invite in your inbox or [watch the recorded sessions][8].
+- Datadog shares the many lessons learned about scalable, distributed systems in the cloud at [Datadog on...][9].
 
 ### Status information
 
 Datadog provides the following resources for you to get up-to-date service status information:
-- US region: [https://status.datadoghq.com][9]
-- EU region: [https://status.datadoghq.eu][10]
+- US region: [https://status.datadoghq.com][10]
+- EU region: [https://status.datadoghq.eu][11]
 
 Subscribe to this page to receive notifications about status changes.
 
-If you would like to see the status of third party integrations you might have enabled with Datadog, see: [https://datadogintegrations.statuspage.io][11].
+If you would like to see the status of third party integrations you might have enabled with Datadog, see: [https://datadogintegrations.statuspage.io][12].
 
 ### Other resources
 
@@ -67,10 +70,11 @@ Explore other important resources to stay up to date with Datadog:
 [2]: /partners/data-intake/
 [3]: /partners/delivering-value/
 [4]: /partners/billing-and-usage-reporting/
-[5]: https://app.datadoghq.com/release-notes
-[6]: https://partners.datadoghq.com/
-[7]: https://partners.datadoghq.com/prm/English/s/assets?collectionId=17632
-[8]: https://datadogon.datadoghq.com/
-[9]: https://status.datadoghq.com
-[10]: https://status.datadoghq.eu
-[11]: https://datadogintegrations.statuspage.io
+[5]: /partners/sales-enablement/
+[6]: https://app.datadoghq.com/release-notes
+[7]: https://partners.datadoghq.com/
+[8]: https://partners.datadoghq.com/prm/English/s/assets?collectionId=17632
+[9]: https://datadogon.datadoghq.com/
+[10]: https://status.datadoghq.com
+[11]: https://status.datadoghq.eu
+[12]: https://datadogintegrations.statuspage.io
