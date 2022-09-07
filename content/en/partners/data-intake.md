@@ -110,8 +110,9 @@ When thinking about tagging, take into consideration the following factors:
 - **Role**: Allows you to understand which role an entity plays in a business service.
 - **Responsibility**: Allows the responsible team to filter all of their resources and enables other users and teams to identify which team is responsible for a certain service.
 
+To set yourself upo for success, make sure you read [Getting Started with Tags][18].
+
 For more information on tagging and tagging strategy, see:
-- [Getting Started with Tags][18]
 - [Best practices for tagging your infrastructure and applications][19] (Blog)
 - [Tagging Best Practices][20] (Training)
 - [Unified Service Tagging][21]
