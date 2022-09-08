@@ -74,9 +74,9 @@ For example, to access information about the Datadog for Government site, select
 
 The Datadog for Government site (US1-FED) is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about the Datadog for Government site's security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
 
-
 {{< /site-region >}}
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: https://www.datadoghq.com/security/
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: https://www.datadoghq.com/security/
