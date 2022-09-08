@@ -23,7 +23,7 @@ Consult the [Partner Sales Enablement guide][5] for a training roadmap that prep
 
 There are multiple ways you can stay up to date with Datadog and learn about new features:
 - You can [view the release notes][6] on the Datadog site
-- As a Datadog Partner Network member, you have exclusive access to the [Datadog Partner Network portal][7].  There you will find:
+- As a Datadog Partner Network member, you have exclusive access to the [Datadog Partner Network portal][7]. There you will find:
   - Collateral and training materials
   - The Quarterly DPN Live Briefing Webinar: view the recorded sessions in the Asset library or watch for the invite in your inbox.
 - Datadog shares the many lessons learned about scalable, distributed systems in the cloud with the [Datadog on...][8] series.
