@@ -33,7 +33,7 @@ The course helps you to:
 
 Once you have completed the Datadog Sales Certification and are familiar with the Datadog basics, you should get your Demo Certification.
 
-When you are ready, contact partner-support@datadoghq.com to receive an invitation to the DPN Demo org used for delivering the Datadog demo. After that proceed to the 
+When you are ready, contact partner-support@datadoghq.com to receive an invitation to the DPN Demo org used for delivering the Datadog demo. After you've received your invitation, proceed to the 
 <a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>.
 
 {{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="max-width: 367px">}}
