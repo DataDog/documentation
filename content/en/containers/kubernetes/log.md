@@ -61,20 +61,20 @@ To enable log collection with your DaemonSet:
     ```yaml
       # (...)
         volumeMounts:
-        #  (...)
+          # (...)
           - name: pointerdir
             mountPath: /opt/datadog-agent/run
-         - name: logpodpath
+          - name: logpodpath
            mountPath: /var/log/pods
-         # Docker runtime directory, replace this path
-         # with your container runtime logs directory,
-         # or remove this configuration if `/var/log/pods`
-         # is not a symlink to any other directory.
-         - name: logcontainerpath
+          # Docker runtime directory, replace this path
+          # with your container runtime logs directory,
+          # or remove this configuration if `/var/log/pods`
+          # is not a symlink to any other directory.
+          - name: logcontainerpath
            mountPath: /var/lib/docker/containers
       # (...)
       volumes:
-       # (...)
+        # (...)
         - hostPath:
             path: /opt/datadog-agent/run
           name: pointerdir
@@ -441,21 +441,21 @@ data:
 In the manifest, define the `volumeMounts` and `volumes`:
 
 ```yaml
-# [...]
+# (...)
         volumeMounts:
-        # [...]
+        # (...)
           - name: redisdb-config-map
             mountPath: /conf.d/redisdb.d
-        # [...]
+        # (...)
       volumes:
-      # [...]
+      # (...)
         - name: redisdb-config-map
           configMap:
             name: redisdb-config-map
             items:
               - key: redisdb-config
                 path: conf.yaml
-# [...]
+# (...)
 ```
 
 {{% /tab %}}
@@ -532,16 +532,16 @@ The equivalent volume and volumeMount path need to be set in the Agent container
 ```yaml
   containers:
   - name: agent
-    #(...)
+    # (...)
     volumeMounts:
     - mountPath: /var/log/example
       name: applogs
-    #(...)
+    # (...)
   volumes:
   - name: applogs
     hostPath:
       path: /var/log/example
-    #(...)
+    # (...)
 ```
 
 **Note:** When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container and a file are needed it should be explicitly enabled in the annotation. For example:
