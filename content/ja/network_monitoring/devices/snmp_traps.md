@@ -66,7 +66,7 @@ SNMP トラップは、以下の要素から構成されます。
 #### 例
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 ```yaml
 mibs:
 - NET-SNMP-EXAMPLES-MIB
@@ -78,8 +78,8 @@ vars:
   1.3.6.1.4.1.8072.2.3.2.1:
     name: netSnmpExampleHeartbeatRate
 ```
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 ```json
 {
   "mibs": [
@@ -98,7 +98,7 @@ vars:
   }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Agent を拡張する

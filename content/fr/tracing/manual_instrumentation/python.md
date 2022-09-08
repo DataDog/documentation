@@ -33,7 +33,7 @@ def make_sandwich_request(request):
 ```
 
 {{< tabs >}}
-{{% tab "Décorateur" %}}
+{{< tab "Décorateur" >}}
 
 `ddtrace` fournit un décorateur `tracer.wrap()`. Il sert à décorer les fonctions pertinentes. Cette approche vous permet de tracer une fonction, peu importe l'origine de son appel.
 
@@ -58,8 +58,8 @@ Cliquez [ici][1] pour consulter les détails sur l'API concernant le décorateur
 
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
-{{% /tab %}}
-{{% tab "Gestionnaire de contextes" %}}
+{{< /tab >}}
+{{< tab "Gestionnaire de contextes" >}}
 
 Pour tracer un bloc arbitraire de code, utilisez le gestionnaire de contextes `ddtrace.Span` comme ci-dessous. Vous pouvez également consulter la [documentation sur l'utilisation avancée de ddtrace][1] (en anglais).
 
@@ -86,8 +86,8 @@ Cliquez [ici][2] pour consulter tous les détails sur l'API pour `ddtrace.Tracer
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
-{{% /tab %}}
-{{% tab "Méthode manuelle" %}}
+{{< /tab >}}
+{{< tab "Méthode manuelle" >}}
 
 Si l'utilisation du décorateur et du gestionnaire de contextes ne vous permet pas de répondre à vos besoins en tracing, vous pouvez utiliser l'API manuelle fournie afin d'initialiser des [spans][1] et d'y mettre fin comme bon vous semble :
 
@@ -107,7 +107,7 @@ Pour obtenir plus de détails sur l'API pour le décorateur, consultez la docume
 [1]: /fr/tracing/visualization/#spans
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
 [3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -126,7 +126,7 @@ def make_sandwich_request(request):
 ```
 
 {{< tabs >}}
-{{% tab "Span active" %}}
+{{< tab "Span active" >}}
 
 ```python
 def get_ingredients():
@@ -135,9 +135,9 @@ def get_ingredients():
     # Cette span correspond à my_span pour l'option make_sandwich_request précédente
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Span racine" %}}
+{{< tab "Span racine" >}}
 
 ```python
 def assemble_sandwich(ingredients):
@@ -146,14 +146,14 @@ def assemble_sandwich(ingredients):
         span = tracer.current_root_span()
         # Cette span correspond à my_span pour l'option make_sandwich_request précédente
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
 ## Ajout de tags
 
 {{< tabs >}}
-{{% tab "Ajout local" %}}
+{{< tab "Ajout local" >}}
 
 Vous pouvez ajouter des tags à une span en utilisant la méthode `set_tag` sur cette span :
 
@@ -165,8 +165,8 @@ def make_sandwich_request(request):
         ingredients = get_ingredients()
         span.set_tag("num_ingredients", len(ingredients))
 ```
-{{% /tab %}}
-{{% tab "Ajout global" %}}
+{{< /tab >}}
+{{< tab "Ajout global" >}}
 
 Vous pouvez définir de façon globale des tags sur le traceur. Ces tags seront appliqués à chaque span créée.
 
@@ -177,8 +177,8 @@ from myapp import __version__
 # Cela sera appliqué à chaque span
 tracer.set_tag("version", __version__)
 ```
-{{% /tab %}}
-{{% tab "Erreurs" %}}
+{{< /tab >}}
+{{< tab "Erreurs" >}}
 
 Les informations sur les exceptions sont capturées et ajoutées à une span lorsque celle-ci est active au moment du déclenchement de l'exception.
 
@@ -201,7 +201,7 @@ span = tracer.trace("operation")
 span.error = 1
 span.finish()
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

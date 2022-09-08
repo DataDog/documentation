@@ -52,7 +52,7 @@ Ces options fonctionnent avec les services suivants :
 
 **Remarque :** vous pouvez nettoyer automatiquement plusieurs types de services à la fois. Configurez chaque type de service dans la section `obfuscation` de votre fichier `datadog.yaml`.
 {{< tabs >}}
-{{% tab "MongoDB" %}}
+{{< tab "MongoDB" >}}
 
 S'applique aux [spans][1] de type `mongodb`, plus précisément aux tags de span `mongodb.query` : 
 
@@ -76,8 +76,8 @@ apm_config:
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
 
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Elasticsearch" %}}
+{{< /tab >}}
+{{< tab "Elasticsearch" >}}
 
 S'applique aux [spans][1] de type `elasticsearch`, plus précisément aux tags de span `elasticsearch.body` :
 
@@ -99,8 +99,8 @@ apm_config:
 ```
 
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Redis" %}}
+{{< /tab >}}
+{{< tab "Redis" >}}
 
 S'applique aux [spans][1] de type `redis`, plus précisément aux tags de span `redis.raw_command` :
 
@@ -116,8 +116,8 @@ apm_config:
 ```
 
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "MemCached" %}}
+{{< /tab >}}
+{{< tab "MemCached" >}}
 
 S'applique aux [spans][1] de type `memcached`, plus précisément aux tags de span `memcached.command` :
 
@@ -133,8 +133,8 @@ apm_config:
 ```
 
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "HTTP" %}}
+{{< /tab >}}
+{{< tab "HTTP" >}}
 
 Règles d'obfuscation HTTP pour les métadonnées `http.url` dans les [spans][1] de type `http` :
 
@@ -155,8 +155,8 @@ apm_config:
 
 
 [1]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Stack traces" %}}
+{{< /tab >}}
+{{< tab "Stack traces" >}}
 
 Définissez le paramètre `remove_stack_traces` sur true afin de supprimer les stack traces et de les remplacer par le caractère `?`.
 
@@ -170,7 +170,7 @@ apm_config:
     remove_stack_traces: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Nettoyer les données sensibles de vos spans
@@ -184,7 +184,7 @@ Pour nettoyer les données sensibles des tags de votre [span][3], utilisez l'opt
 Par exemple :
 
 {{< tabs >}}
-{{% tab "datadog.yaml" %}}
+{{< tab "datadog.yaml" >}}
 
 ```yaml
 apm_config:
@@ -202,8 +202,8 @@ apm_config:
       pattern: "(?s).*"
 ```
 
-{{% /tab %}}
-{{% tab "Variable d'environnement" %}}
+{{< /tab >}}
+{{< tab "Variable d'environnement" >}}
 
 ```shell
 DD_APM_REPLACE_TAGS=[
@@ -224,8 +224,8 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 **Remarque** : placez cette variable d'environnement dans le conteneur de l'Agent de trace si vous utilisez la [configuration DaemonSet][1] recommandée.
 
@@ -250,14 +250,14 @@ DD_APM_REPLACE_TAGS=[
 ```
 
 [1]: /fr/agent/kubernetes/?tab=daemonset
-{{% /tab %}}
-{{% tab "docker-compose" %}}
+{{< /tab >}}
+{{< tab "docker-compose" >}}
 
 ```docker-compose.yaml
 - DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Empêcher la collecte de certaines ressources

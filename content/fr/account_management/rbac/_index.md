@@ -58,7 +58,7 @@ Vous pouvez également effectuer un appel POST sur l'[endpoint d'API Create Role
 ### Créer un rôle personnalisé
 
 {{< tabs >}}
-{{% tab "Application Datadog" %}}
+{{< tab "Application Datadog" >}}
 
 Pour créer un rôle personnalisé :
 
@@ -73,20 +73,20 @@ Une fois votre rôle créé, vous pouvez l'[ajouter à des utilisateurs existant
 [1]: https://app.datadoghq.com/access/roles
 [2]: /fr/account_management/rbac/permissions/
 [3]: /fr/account_management/users/#edit-a-user-roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Pour découvrir un exemple de création de rôle avec l'API, consultez la [documentation à ce sujet][1].
 
 
 [1]: /fr/api/latest/roles/#create-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Mettre à jour un rôle
 
 {{< tabs >}}
-{{% tab "Application Datadog" %}}
+{{< tab "Application Datadog" >}}
 
 Pour modifier un rôle personnalisé :
 
@@ -101,20 +101,20 @@ Une fois votre rôle modifié, les autorisations sont mises à jour pour l'ensem
 
 [1]: https://app.datadoghq.com/access/roles
 [2]: /fr/account_management/rbac/permissions/
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Pour découvrir un exemple de mise à jour de rôle avec l'API, consultez la [documentation à ce sujet][1].
 
 
 [1]: /fr/api/latest/roles/#update-a-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Dupliquer un rôle
 
 {{< tabs >}}
-{{% tab "Application Datadog" %}}
+{{< tab "Application Datadog" >}}
 
 Pour dupliquer un rôle existant :
 
@@ -128,19 +128,19 @@ Pour dupliquer un rôle existant :
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Pour découvrir un exemple de duplication de rôle avec l'API, consultez la [documentation à ce sujet][1].
 
 [1]: /fr/api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Supprimer un rôle
 
 {{< tabs >}}
-{{% tab "Application Datadog" %}}
+{{< tab "Application Datadog" >}}
 
 Pour supprimer un rôle personnalisé :
 
@@ -154,14 +154,14 @@ Une fois votre rôle supprimé, les autorisations sont mises à jour pour tous l
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Pour découvrir un exemple de suppression de rôle avec l'API, consultez la [documentation à ce sujet][1].
 
 
 [1]: /fr/api/latest/roles/#delete-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Appliquer un modèle de rôle

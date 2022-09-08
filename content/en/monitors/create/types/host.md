@@ -43,7 +43,7 @@ Select the hosts to monitor by choosing host names, tags, or choose `All Monitor
 In this section, choose between a **Check Alert** or **Cluster Alert**:
 
 {{< tabs >}}
-{{% tab "Check Alert" %}}
+{{< tab "Check Alert" >}}
 
 A check alert tracks if a host stops reporting for a given amount of time. Too much time following a check run can be a sign of problems with data submission from the host.
 
@@ -51,8 +51,8 @@ Enter the number of minutes to check for missing data. The default value is 2 mi
 
 If `datadog.agent.up` stops reporting an `OK` status for more than the minutes specified, an alert is triggered.
 
-{{% /tab %}}
-{{% tab "Cluster Alert" %}}
+{{< /tab >}}
+{{< tab "Cluster Alert" >}}
 
 A cluster alert tracks if some percentage of hosts have stopped reporting for a given amount of time.
 
@@ -64,7 +64,7 @@ To set up a cluster alert:
 
 If `datadog.agent.up` stops reporting an `OK` status for more than the minutes specified and the percentage threshold is reached, an alert is triggered.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Advanced alert conditions

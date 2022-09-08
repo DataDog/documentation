@@ -39,7 +39,7 @@ If you monitor services used only during the week, such as your company's ERP or
 With the following API call, you can mute alert during the weekend for all monitors over the `env:prod` tag.
 
 {{< tabs >}}
-{{% tab "API " %}}
+{{< tab "API " >}}
 
 ```bash
 curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
@@ -87,15 +87,15 @@ And then in the cURL command, use: `"start": '"${start}"'`.
 }
 ```
 
-{{% /tab %}}
-{{% tab "UI" %}}
+{{< /tab >}}
+{{< tab "UI" >}}
 
 Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
 {{< img src="monitors/guide/downtimes_weekend.jpg" alt="Downtimes over the week end" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Downtime outside of business hours
@@ -105,7 +105,7 @@ Using the same example, you may want to also mute this service during the weekda
 With the following API call, you can mute alerts every weekday from 8pm to 6am:
 
 {{< tabs >}}
-{{% tab "API " %}}
+{{< tab "API " >}}
 
 ```bash
 curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
@@ -147,15 +147,15 @@ Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_sit
 }
 ```
 
-{{% /tab %}}
-{{% tab "UI" %}}
+{{< /tab >}}
+{{< tab "UI" >}}
 
 Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
 {{< img src="monitors/guide/downtime_businesshour.jpg" alt="Downtimes outside of business hours" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Recurring downtime on the nth weekday of the month
@@ -169,7 +169,7 @@ Attributes specifying the duration in `RRULE` are not supported (for example, `D
 **Example**: The ERP app is updated every 2nd Tuesday of the month to apply patches and fixes between 8AM and 10AM. Monitors for this are scoped with `app:erp`, so this is used in the downtime scope.
 
 {{< tabs >}}
-{{% tab "API " %}}
+{{< tab "API " >}}
 
 The `type` parameter must be set to `rrule`.
 The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, March 9th, the start date has to be March 9th 08:00 AM and end date March 9th at 10:00AM:
@@ -214,15 +214,15 @@ Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_sit
 }
 ```
 
-{{% /tab %}}
-{{% tab "UI" %}}
+{{< /tab >}}
+{{< tab "UI" >}}
 
 Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
 {{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule downtime"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Further Reading

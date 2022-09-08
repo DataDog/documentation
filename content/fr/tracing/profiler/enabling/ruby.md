@@ -49,7 +49,7 @@ Pour commencer le profiling d'applications, procédez comme suit :
 3. Activez le profileur :
 
    {{< tabs >}}
-{{% tab "Variables d'environnement" %}}
+{{< tab "Variables d'environnement" >}}
 
 ```shell
 export DD_PROFILING_ENABLED=true
@@ -58,8 +58,8 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-{{% /tab %}}
-{{% tab "Dans le code" %}}
+{{< /tab >}}
+{{< tab "Dans le code" >}}
 
 ```ruby
 Datadog.configure do |c|
@@ -72,7 +72,7 @@ end
 
 **Remarque** : pour les applications Rails, créez un fichier `config/initializers/datadog.rb` comprenant le code de la configuration ci-dessus.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 4. Ajoutez `ddtracerb exec` à la commande de lancement de votre application Ruby :

@@ -30,7 +30,7 @@ Do the following steps to enable Database Monitoring with your database:
 Supported SQL Server versions
 : 2014, 2016, 2017, 2019
 
-{{% dbm-sqlserver-before-you-begin %}}
+{{< dbm-sqlserver-before-you-begin >}}
 
 ## Grant the Agent access
 
@@ -66,18 +66,18 @@ This is required because RDS does not permit granting `CONNECT ANY DATABASE`. Th
 Since AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
-{{% tab "Windows Host" %}}
-{{% dbm-sqlserver-agent-setup-windows %}}
-{{% /tab %}}
-{{% tab "Linux Host" %}}
-{{% dbm-sqlserver-agent-setup-linux %}}
-{{% /tab %}}
-{{% tab "Docker" %}}
-{{% dbm-sqlserver-agent-setup-docker %}}
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-{{% dbm-sqlserver-agent-setup-kubernetes %}}
-{{% /tab %}}
+{{< tab "Windows Host" >}}
+{{< dbm-sqlserver-agent-setup-windows >}}
+{{< /tab >}}
+{{< tab "Linux Host" >}}
+{{< dbm-sqlserver-agent-setup-linux >}}
+{{< /tab >}}
+{{< tab "Docker" >}}
+{{< dbm-sqlserver-agent-setup-docker >}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
+{{< dbm-sqlserver-agent-setup-kubernetes >}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Install the RDS integration

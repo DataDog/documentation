@@ -30,7 +30,7 @@ title: Agent プロキシのコンフィギュレーション
 Agent は従来の Web プロキシをネイティブにサポートします。プロキシ経由でインターネットに接続する必要がある場合は、Agent 構成ファイルを編集します。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 Agent `datadog.yaml` コンフィギュレーションファイルで、`https` リクエスト用と `http` リクエスト用にそれぞれプロキシサーバーを設定します。Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたいずれのリクエストでも、プロキシサーバーで SSL を有効化することができます。`datadog.yaml` ファイルのコンフィギュレーション例は以下の通りです。
 
@@ -117,8 +117,8 @@ Agent は、これらの値を以下の優先順で使用します。
 2. 環境変数 `HTTPS_PROXY`、`HTTP_PROXY`、`NO_PROXY`
 3. `datadog.yaml` 内の値
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 <div class="alert alert-warning">
 メトリクスのプロキシで使われる <code>&ltHOST&gt;:&ltPORT&gt;</code> はログのプロキシで使うことは**できません**。<a href="/agent/logs/proxy">ログ用プロキシ</a>ページを参照してください。
@@ -137,7 +137,7 @@ proxy_password: my_password
 新しい設定を有効にするために、[Agent を再起動する][1]ことを忘れないでください。
 
 [1]: /ja/agent/guide/agent-commands/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## HAProxy
@@ -172,7 +172,7 @@ Datadog への接続があるホストに HAProxy をインストールする必
 **注**: Agent と HAProxy が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` 構成ファイルを使用することが推奨されます。
 
 {{< tabs >}}
-{{% tab "HTTP" %}}
+{{< tab "HTTP" >}}
 
 ```conf
 # 基本構成
@@ -421,8 +421,8 @@ backend datadog-appsec-events # 非推奨
 ```
 
 
-{{% /tab %}}
-{{% tab "HTTPS" %}}
+{{< /tab >}}
+{{< tab "HTTPS" >}}
 
 この構成では、Agent と HAProxy 間の通信に SSL/TLS の暗号化を追加します。変数 `<PATH_TO_PROXY_CERTIFICATE_PEM>` をプロキシ証明書バンドルへのパス (*.pem) に置き換えてください。
 
@@ -673,7 +673,7 @@ backend datadog-appsec-events # 非推奨
 ```
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -685,7 +685,7 @@ HAProxy 1.8 以降では、DNS サービスの検出によりサーバーの変�
 #### Datadog Agent 構成
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 `haproxy.example.com` などの `dd_url` を HAProxy のアドレスに設定して、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
 
@@ -753,8 +753,8 @@ skip_ssl_validation: true
 
 [1]: /ja/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 `haproxy.example.com` などの `dd_url` を HAProxy のアドレスに設定して、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.conf` ファイルにあります。
 
@@ -796,7 +796,7 @@ skip_ssl_validation: yes
 
 [1]: /ja/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## NGINX
@@ -826,7 +826,7 @@ Datadog への接続があるホストに NGINX をインストールする必�
 **注**: Agent と NGINX が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` 構成ファイルを使用することが推奨されます。
 
 {{< tabs >}}
-{{% tab "HTTP" %}}
+{{< tab "HTTP" >}}
 
 ```conf
 user nginx;
@@ -928,8 +928,8 @@ stream {
 }
 ```
 
-{{% /tab %}}
-{{% tab "HTTPS" %}}
+{{< /tab >}}
+{{< tab "HTTPS" >}}
 
 
 この構成では、Agent と NGINX 間の通信に SSL/TLS の暗号化を追加します。`<PATH_TO_PROXY_CERTIFICATE>` をプロキシ公開証明書へのパスに、`<PATH_TO_PROXY_CERTIFICATE_KEY>` を秘密鍵へのパスに置き換えてください。
@@ -1039,7 +1039,7 @@ stream {
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: プロキシホストで証明書を取得できない場合、`proxy_ssl_verify on` を削除できますが、その場合 NGINX は Datadog のインテーク証明書を確認できないので注意が必要です。
@@ -1113,12 +1113,12 @@ TCP 経由でログを送信する場合は、[ログの TCP プロキシ][5]を
 ## Datadog Agent
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 **この機能は、Agent v5 でのみ使用できます**。
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 トラフィックを Datadog に転送するには、実際のプロキシ (Web プロキシまたは HAProxy) を使用することをお勧めしますが、これらのオプションを使用できない場合は、**Agent v5** のインスタンスをプロキシとして機能するように構成できます。
 
@@ -1148,7 +1148,7 @@ TCP 経由でログを送信する場合は、[ログの TCP プロキシ][5]を
 
 
 [1]: https://app.datadoghq.com/infrastructure#overview
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

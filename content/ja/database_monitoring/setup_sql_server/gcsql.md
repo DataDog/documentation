@@ -25,7 +25,7 @@ title: Google Cloud SQL マネージド SQL Server のデータベースモニ�
 サポートされている SQL Server バージョン
 : 2012、2014、2016、2017、2019
 
-{{% dbm-sqlserver-before-you-begin %}}
+{{< dbm-sqlserver-before-you-begin >}}
 
 ## Agent にアクセスを付与する
 
@@ -54,7 +54,7 @@ CREATE USER datadog FOR LOGIN datadog;
 GCP はホストへの直接アクセスを許可しません。つまり、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
 {{< tabs >}}
-{{% tab "Windows ホスト" %}}
+{{< tab "Windows ホスト" >}}
 SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
 SQL Server Agent のコンフィギュレーションファイル `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][2]を参照してください。
@@ -122,8 +122,8 @@ driver: '{ODBC Driver 17 for SQL Server}'
 [9]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Linux ホスト" %}}
+{{< /tab >}}
+{{< tab "Linux ホスト" >}}
 SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
 Linux では、Datadog Agent の他に、ODBC SQL Server ドライバー (例えば、[Microsoft ODBC ドライバー][2]) がインストールされていることが必須となります。ODBC SQL Server がインストールされたら、`odbc.ini` と `odbcinst.ini` ファイルを `/opt/datadog-agent/embedded/etc` フォルダーにコピーします。
@@ -170,8 +170,8 @@ instances:
 [6]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
 **注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
@@ -220,8 +220,8 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 [4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
 Kubernetes クラスターでクラスターチェックがまだ有効になっていない場合は、指示に従って[クラスターチェックを有効化][2]します。Cluster Agent の構成は、Cluster Agent コンテナにマウントされた静的ファイル、または Kubernetes サービスアノテーションのいずれかを使用することができます。
@@ -322,7 +322,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [5]: /ja/agent/guide/secrets-management
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Google Cloud SQL インテグレーションをインストールする

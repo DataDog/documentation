@@ -37,7 +37,7 @@ npm install -g @datadog/datadog-ci
 CI で NodeJS をインストールすることに問題がある場合は、スタンドアロンバイナリが [Datadog CI リリース][4]で提供されています。_linux-x64_、_darwin-x64_ (MacOS)、_win-x64_ (Windows) のみがサポートされています。インストールするには、ターミナルで以下を実行します。
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
@@ -47,9 +47,9 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 datadog-ci version
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "MacOS" %}}
+{{< tab "MacOS" >}}
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
@@ -59,11 +59,11 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 datadog-ci version
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
 
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 {{< code-block lang="powershell" >}}
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
@@ -73,7 +73,7 @@ Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/do
 Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

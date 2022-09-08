@@ -23,7 +23,7 @@ Configurez votre bundler JavaScript de façon à ce qu'il génère des source ma
 Consultez les configurations suivantes qui reposent sur des bundlers JavaScript populaires.
 
 {{< tabs >}}
-{{% tab "WebpackJS" %}}
+{{< tab "WebpackJS" >}}
 
 Vous pouvez générer des source maps à l'aide du plug-in webpack intégré [SourceMapDevToolPlugin][1].
 
@@ -54,12 +54,12 @@ module.exports = {
 **Remarque** : si vous utilisez le langage TypeScript, définissez `compilerOptions.sourceMap` sur `true` dans votre fichier `tsconfig.json`.
 
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
-{{% /tab %}}
-{{% tab "ParcelJS" %}}
+{{< /tab >}}
+{{< tab "ParcelJS" >}}
 
 Parcel génère des source maps par défaut lorsque vous exécutez la commande build `parcel build <fichier d'entrée>`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Une fois le build de votre application créé, les bundlers génèrent un répertoire (généralement intitulé `dist`) contenant les fichiers JavaScript minifiés avec leurs source maps correspondantes.
@@ -82,7 +82,7 @@ Vous trouverez un exemple ci-dessous :
 Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémentaire dans votre pipeline de CI et d'exécuter la commande dédiée depuis l'[interface de ligne de commande Datadog][1]. Cette commande analyse le répertoire `dist` et ses sous-répertoires pour importer automatiquement les source maps avec leurs fichiers minifiés associés.
 
 {{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< tab "Site américain de Datadog" >}}
 
 1. Ajoutez `@datadog/datadog-ci` à votre fichier `package.json` (assurez-vous d'utiliser la dernière version).
 2. [Créez une clé d'API Datadog dédiée][1] et exportez-la en tant que variable d'environnement `DATADOG_API_KEY`.
@@ -96,8 +96,8 @@ Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémen
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /tab >}}
+{{< tab "Site européen de Datadog" >}}
 
 1. Ajoutez `@datadog/datadog-ci` à votre fichier `package.json` (assurez-vous d'utiliser la dernière version).
 2. [Créez une clé d'API Datadog dédiée][1] et exportez-la en tant que variable d'environnement `DATADOG_API_KEY`.
@@ -112,7 +112,7 @@ Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémen
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Pour minimiser l'impact sur les performances de votre intégration continue, l'interface de ligne de commande est optimisée pour permettre l'importation d'autant de source maps que nécessaires en peu de temps (généralement quelques secondes).

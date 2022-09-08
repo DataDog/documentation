@@ -29,7 +29,7 @@ In Observability Pipelines, a **transform** performs an action that modifies eve
 Use the [dedupe transform][3] to remove copies of data passing through your pipeline by adding the following component in your configuration. 
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -41,8 +41,8 @@ transforms:
     fields: null
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -50,8 +50,8 @@ type = "dedupe"
 inputs = [ "my-source-or-transform-id" ]
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -68,7 +68,7 @@ inputs = [ "my-source-or-transform-id" ]
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Vector assigns every event a unique identifier to track deduplicated events. The `cache` option enables you to cache recent events to be used to check for duplicated data in the future, and defaults to 5,000 events. The `fields` option lists which fields are used to determine if an event is a duplicate.
@@ -85,7 +85,7 @@ In those cases, insert a component that contains a [filter transform][4] to filt
 The example below uses the filter transform and Vector Remap Language to send only logs with a `status` of `500`.
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -98,8 +98,8 @@ transforms:
       source: ".status == 500"
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -111,8 +111,8 @@ inputs = [ "my-source-or-transform-id" ]
   source = ".status == 500"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -131,7 +131,7 @@ inputs = [ "my-source-or-transform-id" ]
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Sample logs
@@ -141,7 +141,7 @@ When analyzing data that comes in large volumes or contains a lot of noise, such
 The `exclude` field excludes events from being sampled, and also supports VRL or Datadog Log Search syntax. The example below shows a configuration that samples every 10 events, which is set by the `rate`.
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -155,8 +155,8 @@ transforms:
     rate: 10
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -169,8 +169,8 @@ rate = 10
   source = "*stack"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -190,7 +190,7 @@ rate = 10
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Convert logs to metrics
@@ -207,7 +207,7 @@ You can generate four types of metrics:
 The example below illustrates a configuration for generating a `counter` metric , where `metrics` defines the key/value pairs to be added to the event.
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -225,8 +225,8 @@ transforms:
           host: "{{host}}"
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -244,8 +244,8 @@ inputs = [ "my-source-or-transform-id" ]
     host = "{{host}}"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -272,7 +272,7 @@ inputs = [ "my-source-or-transform-id" ]
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 If the following log is passed through the configuration above:
@@ -301,7 +301,7 @@ In some cases, multiple logs can be consolidated into a single log. Thus, anothe
 The example below uses a reduce transform configuration to merge multiple Ruby log exceptions events.
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -318,8 +318,8 @@ transforms:
     starts_when: match(string!(.message), r'^[^\\s]')
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -332,8 +332,8 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
   message = "concat_newline"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -357,7 +357,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 In the reduce transform, `group_by` is an ordered list of fields used to group events. In this example, the events are grouped by `host`, `pid`, and `tid` fields. 
@@ -442,7 +442,7 @@ Logs can contain fields that are unnecessary. When processing terabytes of data 
 To remove unnecessary fields, use the [Vector Remap Language][5] to remap your log data. The following example removes unnecessary tags using `del`. 
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -456,8 +456,8 @@ transforms:
       del(.unecessary_tag_field)
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -469,8 +469,8 @@ del(.unecessary_service_field)
 del(.unecessary_tag_field)"""
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -486,7 +486,7 @@ del(.unecessary_tag_field)"""
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

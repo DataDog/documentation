@@ -29,7 +29,7 @@ Datadog exposes AWS PrivateLink endpoints in **us-east-1**.
 However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. For more details, see [Amazon VPC peering][2].
 
 {{< tabs >}}
-{{% tab "us-east-1" %}}
+{{< tab "us-east-1" >}}
 
 1. Connect the AWS Console to region **us-east-1** and create a VPC endpoint.
 
@@ -96,9 +96,9 @@ However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from 
 [3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 [5]: /agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "VPC peering" %}}
+{{< tab "VPC peering" >}}
 
 ### Amazon VPC peering
 
@@ -230,7 +230,7 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [7]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [8]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

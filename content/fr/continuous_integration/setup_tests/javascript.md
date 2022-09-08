@@ -48,7 +48,7 @@ Pour en savoir plus, consultez la section relative à l'[installation du traceur
 ## Instrumenter vos tests
 
 {{< tabs >}}
-{{% tab "Jest" %}}
+{{< tab "Jest" >}}
 
 1. Configurez un [`testEnvironment`][1] personnalisé dans votre `jest.config.js` ou à l'emplacement où vous configurez `jest` :
 
@@ -99,9 +99,9 @@ DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 
 
 [1]: https://jestjs.io/docs/en/configuration#testenvironment-string
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Mocha" %}}
+{{< tab "Mocha" >}}
 
 Ajoutez `--require dd-trace/ci/init` à la commande d'exécution de vos tests `mocha`. Par exemple, dans votre `package.json` :
 
@@ -117,8 +117,8 @@ Exécutez normalement vos tests, en spécifiant l'environnement concerné (par e
 DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 ```
 
-{{% /tab %}}
-{{% tab "Cucumber" %}}
+{{< /tab >}}
+{{< tab "Cucumber" >}}
 
 Ajoutez `--require-module dd-trace/ci/init` à l'emplacement où vous exécutez normalement vos tests `cucumber-js`. Par exemple, dans votre `package.json` :
 
@@ -134,9 +134,9 @@ Exécutez normalement vos tests, en spécifiant l'environnement concerné (par e
 DD_ENV=ci DD_SERVICE=my-javascript-app npm test
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cypress" %}}
+{{< tab "Cypress" >}}
 
 1. Définissez [`pluginsFile`][1] sur `"dd-trace/ci/cypress/plugin"`, par exemple avec [`cypress.json`][2] :
 {{< code-block lang="json" filename="cypress.json" >}}
@@ -194,7 +194,7 @@ Si l'application Browser testée est instrumentée avec [RUM][4], les résultats
 [3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [4]: /fr/real_user_monitoring/browser/#setup
 [5]: /fr/continuous_integration/guides/rum_integration/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Paramètres de configuration

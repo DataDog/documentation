@@ -56,7 +56,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 Enable Universal Service Monitoring in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Using the Datadog chart version >= 2.26.2, add the following to your values file:
 
@@ -67,8 +67,8 @@ datadog:
     enabled: true
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes without Helm" %}}
+{{< /tab >}}
+{{< tab "Kubernetes without Helm" >}}
 
 1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
 
@@ -187,8 +187,8 @@ datadog:
        path: /
    ```
 
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Add the following to your `docker run` command:
 
@@ -212,8 +212,8 @@ For optional HTTPS support, also add:
 -v /:/host/root:ro
 ```
 
-{{% /tab %}}
-{{% tab "Docker Compose" %}}
+{{< /tab >}}
+{{< tab "Docker Compose" >}}
 
 Add the following to your `docker-compose.yml` file:
 
@@ -252,8 +252,8 @@ services:
      - /:/host/root:ro
 ```
 
-{{% /tab %}}
-{{% tab "Configuration files" %}}
+{{< /tab >}}
+{{< tab "Configuration files" >}}
 
 If you are not using Helm Charts or environment variables, set the following in your `system-probe.yaml` file:
 
@@ -262,8 +262,8 @@ service_monitoring_config:
   enabled: true
 ```
 
-{{% /tab %}}
-{{% tab "Environment variables" %}}
+{{< /tab >}}
+{{< tab "Environment variables" >}}
 
 If you configure the `system-probe` with environment variables, as is common with Docker and ECS installations, pass the following environment variable to **both** the `process-agent` and `system-probe`:
 
@@ -271,7 +271,7 @@ If you configure the `system-probe` with environment variables, as is common wit
 DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Automatic service tagging

@@ -35,7 +35,7 @@ First, [deploy the Cluster Agent][3].
 Then, deploy the Cluster Checks Runner using either [Datadog Operator][4] or [Helm][5].
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{< tab "Operator" >}}
 
 Using the Operator, you can launch and manage all of these resources with a single manifest like the one shown in [this example][1].
 
@@ -56,8 +56,8 @@ See the [Datadog Operator repo][2] for more information about the Datadog Operat
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-dca-clusterchecksrunner.yaml
 [2]: https://github.com/DataDog/datadog-operator
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 You can update the relevant sections of the chart, as shown below, to enable cluster checks, the Cluster Agent, and the Cluster Checks Runners at the same time:
 
@@ -75,7 +75,7 @@ You can update the relevant sections of the chart, as shown below, to enable clu
 ```
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Use `podAntiAffinity` to avoid having multiple Cluster Checks Runners on the same node.

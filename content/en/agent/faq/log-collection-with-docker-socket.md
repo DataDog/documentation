@@ -23,7 +23,7 @@ The Agent has then two ways to collect logs: from the Docker socket, and from th
 The Docker API is optimized to get logs from one container at a time. When there are many containers on the same node, collecting logs through the Docker socket might be consuming much more resources than going through the files:
 
 {{< tabs >}}
-{{% tab "DaemonSet" %}}
+{{< tab "DaemonSet" >}}
 
 Mount the Docker socket into the Datadog Agent:
 
@@ -48,7 +48,7 @@ Mount the Docker socket into the Datadog Agent:
 
 **Note**: Mounting only the `docker.sock` socket instead of the whole directory containing it prevents the Agent from recovering after a Docker daemon restart.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Short lived containers {#short-lived-container-socket}

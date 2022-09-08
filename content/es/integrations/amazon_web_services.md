@@ -146,7 +146,7 @@ Usa uno de los siguientes métodos para integrar tus cuentas de AWS en Datadog c
    * **Claves de acceso (solo para GovCloud o China)**  
       Para configurar la integración de AWS con claves de acceso, consulta la [guía de configuración manual][75].
 
-{{% aws-permissions %}}
+{{< aws-permissions >}}
 
 ## Recopilación de logs
 

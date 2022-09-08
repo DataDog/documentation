@@ -56,7 +56,7 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 ### ファイルへのログの記録
 
 {{< tabs >}}
-{{% tab "JSON-log-formatter" %}}
+{{< tab "JSON-log-formatter" >}}
 
 [JSON-log-formatter][1] の使用例
 
@@ -88,8 +88,8 @@ logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
-{{% /tab %}}
-{{% tab "Python-json-logger" %}}
+{{< /tab >}}
+{{< tab "Python-json-logger" >}}
 
 [Python-json-logger][1] の使用例
 
@@ -121,7 +121,7 @@ logger.info('Sign up', extra={'referral_code': '52d6ce'})
 
 [1]: https://github.com/madzak/python-json-logger
 [2]: https://github.com/madzak/python-json-logger#customizing-fields
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Datadog Agent の構成

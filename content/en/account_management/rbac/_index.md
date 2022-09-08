@@ -60,7 +60,7 @@ Alternatively, making a POST call to the [Create Role API endpoint][9] automatic
 ### Create a custom role
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 To create a custom role:
 
@@ -75,20 +75,20 @@ Once a role is created, you can [add the role to existing users][3].
 [1]: https://app.datadoghq.com/access/roles
 [2]: /account_management/rbac/permissions/
 [3]: /account_management/users/#edit-a-user-roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Find an example of how to create a role in [Create Role API Reference][1].
 
 
 [1]: /api/latest/roles/#create-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Update a role
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 To edit a custom role:
 
@@ -103,20 +103,20 @@ Once a role is modified, permissions are updated for all users with the role.
 
 [1]: https://app.datadoghq.com/access/roles
 [2]: /account_management/rbac/permissions/
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Find an example of how to update a role in [Update Role API Reference][1].
 
 
 [1]: /api/latest/roles/#update-a-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Clone a role
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 To clone an existing role:
 
@@ -130,19 +130,19 @@ To clone an existing role:
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Find an example of how to clone a role in the [Cloning A Role API reference][1].
 
 [1]: /api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Delete a role
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 To delete a custom role:
 
@@ -156,14 +156,14 @@ Once a role is deleted, permissions are updated for all users with the role. Use
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Find an example of how to delete a role in the [Delete Role API reference][1].
 
 
 [1]: /api/latest/roles/#delete-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Apply a role template

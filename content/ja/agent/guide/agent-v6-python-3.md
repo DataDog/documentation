@@ -11,7 +11,7 @@ v6.14.0 以降、Agent v6 は Python 2 および Python 3 ランタイムと互�
 デフォルトでは、Agent v6 は Python 2 ランタイムを使用します。Python 3 ランタイムに変更するには:
 
 {{< tabs >}}
-{{% tab "Host Agent" %}}
+{{< tab "Host Agent" >}}
 
 1. [`datadog.yaml` コンフィギュレーションファイルで][1] `python_version` コンフィギュレーションオプションを設定します。
 
@@ -27,8 +27,8 @@ v6.14.0 以降、Agent v6 は Python 2 および Python 3 ランタイムと互�
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized Agent" %}}
+{{< /tab >}}
+{{< tab "Containerized Agent" >}}
 
 Agent v6.x と Agent v7.x の違いは、Agent v7.x には Python 3 ランタイムが含まれ、Agent v6.x には Python 2 ランタイムのみが含まれるという点だけなので、Agent のバージョンを変更するだけで Python ランタイムを変更することができます。一方の Python ランタイムから他方へ変更するには、該当する Agent イメージを選択します。
 
@@ -36,7 +36,7 @@ Agent v6.x と Agent v7.x の違いは、Agent v7.x には Python 3 ランタイ
 
 * **Python 3** ランタイム: Agent v7 イメージは、`gcr.io/datadoghq/agent:7.<AGENT_MINOR_VERSION>` のフォーマット。JMX チェックをサポートするイメージの場合は `gcr.io/datadoghq/agent:7.<AGENT_MINOR_VERSION>-jmx`。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

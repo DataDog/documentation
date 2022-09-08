@@ -74,7 +74,7 @@ datadogRum.init({
 The following tabs show the information contained in the `beforeSend` event and context objects for this example:
 
 {{< tabs >}}
-{{% tab "Event" %}}
+{{< tab "Event" >}}
 
 ```json
 {
@@ -118,8 +118,8 @@ The following tabs show the information contained in the `beforeSend` event and 
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Context" %}}
+{{< /tab >}}
+{{< tab "Context" >}}
 ```json
 {
     "performanceEntry": {
@@ -191,7 +191,7 @@ The following tabs show the information contained in the `beforeSend` event and 
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Discard a frontend error
@@ -216,7 +216,7 @@ datadogRum.init({
 The following tabs show the information contained in the `beforeSend` event and context objects for this example:
 
 {{< tabs >}}
-{{% tab "Event" %}}
+{{< tab "Event" >}}
 
 ```json
 {
@@ -254,8 +254,8 @@ The following tabs show the information contained in the `beforeSend` event and 
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Context" %}}
+{{< /tab >}}
+{{< tab "Context" >}}
 ```json
 {
     "error": {
@@ -264,7 +264,7 @@ The following tabs show the information contained in the `beforeSend` event and 
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

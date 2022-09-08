@@ -72,7 +72,7 @@ Le check recueille des métriques par l'intermédiaire de JMX. Une JVM est donc 
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -127,8 +127,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -154,7 +154,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

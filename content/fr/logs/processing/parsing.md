@@ -63,7 +63,7 @@ Une fois le traitement terminé, le log structuré suivant est généré :
 Voici la liste de tous les matchers et de tous les filtres implémentés en natif par Datadog :
 
 {{< tabs >}}
-{{% tab "Matcher" %}}
+{{< tab "Matcher" >}}
 
 |                                                 |                                                                                                                                    |
 |:------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|
@@ -94,8 +94,8 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 | `ipOrHost`                                      | Renvoie un hostname ou une IP.                                                                                                          |
 | `port`                                          | Renvoie un numéro de port.                                                                                                             |
 
-{{% /tab %}}
-{{% tab "Filtre" %}}
+{{< /tab >}}
+{{< tab "Filtre" >}}
 
 |                                                                |                                                                                                                                                            |
 |:---------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -120,7 +120,7 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 
 [1]: /fr/logs/processing/processors/#user-agent-parser
 [2]: /fr/logs/processing/processors/#url-parser
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Paramètres avancés

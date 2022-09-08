@@ -20,7 +20,7 @@ title: .NET サーバーレスアプリケーションのインスツルメン�
 Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{< tab "Datadog CLI" >}}
 
 Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを修正し、新しいデプロイを必要とせずにインスツルメンテーションを可能にします。Datadog のサーバーレスモニタリングをすばやく開始するための最適な方法です。
 
@@ -80,8 +80,8 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [3]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 [Datadog Serverless Plugin][1] は、[Datadog Lambda 拡張機能][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を自動的に構成します。
 
@@ -111,8 +111,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "コンテナイメージ" %}}
+{{< /tab >}}
+{{< tab "コンテナイメージ" >}}
 
 1. Datadog Lambda 拡張機能のインストール
 
@@ -142,8 +142,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://github.com/DataDog/dd-trace-dotnet/releases
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 
 1. Datadog トレーサーのインストール
 
@@ -193,7 +193,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 次のステップ

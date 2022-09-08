@@ -55,7 +55,7 @@ DogStatsD est activé par défaut sur le port UDP `8125` à partir de la version
 ### Agent
 
 {{< tabs >}}
-{{% tab "Agent de host" %}}
+{{< tab "Agent de host" >}}
 
 Par défaut, DogStatsD effectue une écoute sur le port UDP **8125**. Pour modifier ce réglage, configurez l'option `dogstatsd_port` dans le [fichier de configuration principal de l'Agent][1] et redémarrez l'Agent. Vous pouvez également configurer DogStatsD afin d'utiliser [un socket de domaine Unix][2]. Pour activer un port UDP personnalisé pour le serveur DogStatsD de l'Agent :
 
@@ -80,8 +80,8 @@ Par défaut, DogStatsD effectue une écoute sur le port UDP **8125**. Pour modif
 [1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /fr/developers/dogstatsd/unix_socket/
 [3]: /fr/agent/guide/agent-commands/
-{{% /tab %}}
-{{% tab "Agent de conteneur" %}}
+{{< /tab >}}
+{{< tab "Agent de conteneur" >}}
 
 Par défaut, DogStatsD effectue une écoute sur le port UDP **8125**. Vous devez donc associer ce port au port de votre host lorsque l'Agent est exécuté dans un conteneur. Si vos métriques StatsD proviennent d'une source en dehors de `localhost`, vous devez définir `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` sur `true` pour autoriser la collecte de métriques. Pour exécuter l'Agent avec le serveur DogStatsd activé, exécutez la commande suivante :
 
@@ -100,8 +100,8 @@ docker run -d --cgroupns host \
 Si vous devez modifier le port utilisé pour recueillir des métriques StatsD, utilisez la variable d'environnement `DD_DOGSTATSD_PORT="<NOUVEAU_PORT_DOGSTATSD>`. Vous pouvez également configurer DogStatsD de façon à utiliser un [socket de domaine Unix][1] :
 
 [1]: /fr/developers/dogstatsd/unix_socket/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Pour commencer à recueillir vos métriques StatsD, vous devez lier le port DogStatsD au port d'un host. Vous pouvez également configurer DogStatsD de façon à utiliser un [socket de domaine Unix][1].
 
@@ -181,8 +181,8 @@ Pour définir la [cardinalité des tags][5] pour les métriques recueillies avec
 [4]: /fr/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /fr/getting_started/tagging/assigning_tags/#environment-variables
 [6]: /fr/metrics/custom_metrics/
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
 
@@ -221,7 +221,7 @@ Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Code

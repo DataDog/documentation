@@ -79,7 +79,7 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 
 {{< tabs >}}
 
-{{% tab "Containers" %}}
+{{< tab "Containers" >}}
 
 1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
@@ -104,23 +104,23 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 {{< /site-region >}}
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "AWS Lambda" %}}
+{{< tab "AWS Lambda" >}}
 
 AWS Lambda で Datadog APM を設定するには、[サーバーレス関数のトレース][1]を参照してください。
 
 [1]: /ja/tracing/serverless_functions/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Azure App Service" %}}
+{{< tab "Azure App Service" >}}
 
 Azure App Service で Datadog APM を設定するには、[Azure App Service 拡張のトレース][1]を参照してください。
 
 [1]: /ja/serverless/azure_app_services/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Other Environments" %}}
+{{< tab "Other Environments" >}}
 
 トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、他の環境で利用できます。
 
@@ -132,7 +132,7 @@ Azure App Service で Datadog APM を設定するには、[Azure App Service 拡
 [3]: /ja/integrations/amazon_elasticbeanstalk/
 [4]: /ja/integrations/
 [5]: /ja/help/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -142,7 +142,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 .NET Tracer をマシン全体にインストールするには
 
@@ -152,9 +152,9 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 .NET Tracer をマシン全体にインストールするには
 
@@ -176,9 +176,9 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 <div class="alert alert-warning">
   <strong>注:</strong> このインストールは、IIS で動作するアプリケーションをインスツルメントするものではありません。IIS で実行されるアプリケーションについては、Windows マシン全体のインストールプロセスに従ってください。
@@ -189,7 +189,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 1. アプリケーションに `Datadog.Monitoring.Distribution` [NuGet パッケージ][1]を追加します。
 
 [1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -201,7 +201,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 #### Internet Information Services (IIS)
 
@@ -228,9 +228,9 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
    ```
 2. スタンドアロンアプリケーションや Windows サービスの場合は、手動でアプリケーションを再起動します。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 1. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
@@ -243,9 +243,9 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 2. スタンドアロンアプリケーションの場合は、通常通り手動でアプリケーションを再起動します。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 1. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
@@ -278,7 +278,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -302,7 +302,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 <div class="alert alert-warning">
   <strong>注:</strong> 自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持する必要があります。
@@ -315,9 +315,9 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 <div class="alert alert-warning">
   <strong>注:</strong> 自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持する必要があります。
@@ -329,15 +329,15 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
 
 1. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -353,7 +353,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 {{< tabs >}}
 
-{{% tab "Registry Editor" %}}
+{{< tab "Registry Editor" >}}
 
 レジストリエディターで、`HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` キーに `Environment` 複数の文字列値を作成します。
 
@@ -363,15 +363,15 @@ CORECLR_ENABLE_PROFILING=1
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディタを使用して Windows サービスに環境変数を作成" >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "PowerShell" %}}
+{{< tab "PowerShell" >}}
 
 ```powershell
 [string[]] $v = @("CORECLR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

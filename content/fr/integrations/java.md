@@ -67,7 +67,7 @@ Vérifiez que vous pouvez ouvrir une [connexion JMX distante][4]. L'Agent Datado
 Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre check JMX comme n'importe quelle [intégration de l'Agent][5]. Si vous exécutez l'Agent en tant que DaemonSet dans Kubernetes, configurez votre check JMX avec [Autodiscovery](?tab=docker#configuration).
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 - Configurez l'Agent pour le connecter à JMX. Modifiez le fichier `jmx.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez les [options de configuration](#options-de-configuration) ci-dessous ou les modèles de [init_config][2] et d'[instance][3] pour découvrir toutes les options de configuration disponibles.
 
@@ -95,8 +95,8 @@ Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre chec
 [2]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/init_config/jmx.yaml
 [3]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/instances/jmx.yaml
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 JMX n'est pas installé sur l'image standard `gcr.io/datadoghq/agent:latest` servant à exécuter le [conteneur de l'Agent Datadog][1]. **Utilisez plutôt l'image `gcr.io/datadoghq/agent:latest-jmx`Agent** : celle-ci est basée sur `gcr.io/datadoghq/agent:latest` mais comprend une JVM, dont l'Agent a besoin pour exécuter [jmxfetch][2].
 
@@ -122,7 +122,7 @@ Pour lancer un check JMX sur l'un de vos conteneurs :
 [5]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [6]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=file#configuration
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ##### Options de configuration

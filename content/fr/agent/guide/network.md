@@ -116,7 +116,7 @@ L'intégralité du trafic sortant est protégé par SSL et envoyé via TCP/UDP.
 Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'**Agent** :
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 #### Trafic sortant
 
@@ -163,8 +163,8 @@ Ports utilisés pour les services de l'Agent qui communiquent entre eux en local
 [5]: /fr/integrations/go_expvar/
 [6]: /fr/agent/basic_agent_usage/#gui
 [7]: /fr/tracing/
-{{% /tab %}}
-{{% tab "Agent v5 et v4" %}}
+{{< /tab >}}
+{{< tab "Agent v5 et v4" >}}
 
 #### Trafic sortant
 
@@ -191,7 +191,7 @@ Voir les [cibles NTP par défaut][2].
 [1]: /fr/agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /fr/integrations/ntp/#overview
 [3]: /fr/tracing/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Utilisation d'un proxy

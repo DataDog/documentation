@@ -28,7 +28,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#get-i
 #### Example request
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ```python
 from datadog import initialize, api
@@ -44,8 +44,8 @@ api.DashboardList.get_items(4741)
 
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ```ruby
 require 'rubygems'
@@ -59,8 +59,8 @@ dog = Dogapi::Client.new(api_key, app_key)
 result = dog.get_items_of_dashboard_list(4741)
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 api_key=<DATADOG_API_KEY>
@@ -72,13 +72,13 @@ curl -X GET \
 "https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Example response
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ```python
 {
@@ -173,8 +173,8 @@ curl -X GET \
 }
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ```ruby
 [
@@ -273,8 +273,8 @@ curl -X GET \
 
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 {
@@ -370,7 +370,7 @@ curl -X GET \
 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Add items to a dashboard list
@@ -405,7 +405,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#add-i
 #### Example request
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ```python
 from datadog import initialize, api
@@ -445,8 +445,8 @@ api.DashboardList.add_items(list_id, dashboards=dashboards)
 
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ```ruby
 require 'rubygems'
@@ -484,8 +484,8 @@ dashboards = [
 result = dog.add_items_of_dashboard_list(list_id, dashboards)
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 api_key=<DATADOG_API_KEY>
@@ -521,13 +521,13 @@ curl -X ADD -H "Content-type: application/json" \
 "https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Example response
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ```python
 {
@@ -556,8 +556,8 @@ curl -X ADD -H "Content-type: application/json" \
 }
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ```ruby
 [
@@ -590,8 +590,8 @@ curl -X ADD -H "Content-type: application/json" \
 
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 {
@@ -621,7 +621,7 @@ curl -X ADD -H "Content-type: application/json" \
 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Update items of a dashboard list
@@ -656,7 +656,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#updat
 #### Example request
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ``` python
 from datadog import initialize, api
@@ -696,8 +696,8 @@ api.DashboardList.update_items(list_id, dashboards=dashboards)
 
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ``` ruby
 require 'rubygems'
@@ -736,8 +736,8 @@ result = dog.update_items_of_dashboard_list(list_id, dashboards)
 
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 
@@ -775,13 +775,13 @@ curl -X UPDATE -H "Content-type: application/json" \
 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ##### Example response
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ```python
 {
@@ -811,8 +811,8 @@ curl -X UPDATE -H "Content-type: application/json" \
 
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ```ruby
 [
@@ -844,8 +844,8 @@ curl -X UPDATE -H "Content-type: application/json" \
 ]
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 {
@@ -874,7 +874,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Delete items from a dashboard list
@@ -909,7 +909,7 @@ This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api#delet
 #### Example request
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ``` python
 from datadog import initialize, api
@@ -949,8 +949,8 @@ api.DashboardList.delete_items(list_id, dashboards=dashboards)
 
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ``` ruby
 require 'rubygems'
@@ -989,8 +989,8 @@ result = dog.delete_items_from_dashboard_list(list_id, dashboards)
 
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 
@@ -1028,13 +1028,13 @@ curl -X DELETE -H "Content-type: application/json" \
 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Example response
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 ```python
 {
@@ -1064,8 +1064,8 @@ curl -X DELETE -H "Content-type: application/json" \
 
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ```ruby
 [
@@ -1097,8 +1097,8 @@ curl -X DELETE -H "Content-type: application/json" \
 ]
 ```
 
-{{% /tab %}}
-{{% tab "Curl" %}}
+{{< /tab >}}
+{{< tab "Curl" >}}
 
 ```sh
 {
@@ -1127,5 +1127,5 @@ curl -X DELETE -H "Content-type: application/json" \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}

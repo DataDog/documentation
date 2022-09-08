@@ -22,7 +22,7 @@ title: Instrumenter des applications Go sans serveur
 ## Installation
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{< tab "Framework Serverless" >}}
 
 Le [plug-in Serverless Datadog][1] configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
 
@@ -53,8 +53,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [2]: https://docs.datadoghq.com/fr/serverless/libraries_integrations/extension
 [3]: https://docs.datadoghq.com/fr/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Configuration personnalisée" %}}
+{{< /tab >}}
+{{< tab "Configuration personnalisée" >}}
 ### Installer l'extension Lambda Datadog
 
 [Ajoutez la couche Lambda][1] de l'extension Lambda Datadog à vos fonctions Lambda, en utilisant le format d'ARN adapté à votre architecture et région AWS :
@@ -83,7 +83,7 @@ Remplacez `<RÉGION_AWS>` par une région AWS valide, telle que `us-east-1`.
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/fr/getting_started/site/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Installer la bibliothèque Lambda Datadog

@@ -23,7 +23,7 @@ Pour créer un [monitor Watchdog][2] dans Datadog, utilisez la navigation princi
 Dans cette section, choisissez entre une story **APM** ou **Infrastructure** :
 
 {{< tabs >}}
-{{% tab "APM" %}}
+{{< tab "APM" >}}
 
 Une story APM est créée lorsque Watchdog détecte un comportement anormal au niveau des services de votre système ou de leur ressources enfant.
 
@@ -36,8 +36,8 @@ Une fois les options de votre choix sélectionnées, le graphique en haut de la 
 [1]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /fr/tracing/visualization/service/
 [3]: /fr/tracing/visualization/resource/
-{{% /tab %}}
-{{% tab "Infrastructure" %}}
+{{< /tab >}}
+{{< tab "Infrastructure" >}}
 
 Les stories de type Infrastructure peuvent englober des problèmes liés aux intégrations suivantes :
 
@@ -63,7 +63,7 @@ Aucune sélection n'est nécessaire. Vous recevez une notification dès que Watc
 [7]: /fr/integrations/amazon_elb/
 [8]: /fr/integrations/amazon_cloudfront/
 [9]: /fr/integrations/amazon_dynamodb/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Notifications

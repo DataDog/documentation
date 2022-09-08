@@ -93,7 +93,7 @@ Datadog を使用した Istio 環境の監視について、詳しくは [Istio 
 このツールの狙いと強みが、ネットワークエンドポイント間のトラフィック分析とネットワークの依存関係のマッピングであるため、価値を最大化するために、インフラストラクチャーの重要なサブセット、そして**_少なくとも 2 つのホスト_**にインストールすることが推奨されます。
 
 {{< tabs >}}
-{{% tab "Agent (Linux)" %}}
+{{< tab "Agent (Linux)" >}}
 
 Datadog Agent を使用してネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
 
@@ -173,8 +173,8 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
 [1]: /ja/infrastructure/process/?tab=linuxwindows#installation
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
-{{% /tab %}}
-{{% tab "Agent (Windows)" %}}
+{{< /tab >}}
+{{< tab "Agent (Windows)" >}}
 
 Windows のデータ収集は、ネットワークデータ収集用のフィルタードライバに依存します。
 
@@ -205,8 +205,8 @@ Windows ホストのネットワークパフォーマンスモニタリングを
 
 [1]: /ja/agent/basic_agent_usage/windows/?tab=commandline
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Kubernetes で Helm を使用してネットワークパフォーマンスのモニタリングを新規で有効化するには、
 
@@ -350,8 +350,8 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /ja/agent/kubernetes/
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 <div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
 
 [Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
@@ -372,8 +372,8 @@ spec:
 ```
 
 [1]: https://github.com/DataDog/datadog-operator
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次のコンフィギュレーションを使用します。
 
@@ -432,13 +432,13 @@ services:
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 AWS ECS での設定については、[AWS ECS][1] ドキュメントページを参照してください。
 
 
 [1]: /ja/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

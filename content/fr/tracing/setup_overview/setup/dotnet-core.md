@@ -65,7 +65,7 @@ Vous pouvez installer le traceur .NET Datadog à l'échelle d'une machine afin d
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 Pour installer le traceur .NET à l'échelle d'une machine, procédez comme suit :
 
@@ -75,9 +75,9 @@ Pour installer le traceur .NET à l'échelle d'une machine, procédez comme suit
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Pour installer le traceur .NET à l'échelle d'une machine, procédez comme suit :
 
@@ -99,9 +99,9 @@ Pour installer le traceur .NET à l'échelle d'une machine, procédez comme suit
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 <div class="alert alert-warning">
   <strong>Remarque :</strong> cette installation n'instrumente pas les applications s'exécutant dans IIS. Pour ces applications, suivez le processus d'installation Windows à l'échelle d'une machine.
@@ -112,7 +112,7 @@ Pour installer le traceur .NET pour certaines applications, procédez comme suit
 1. Ajoutez le [package NuGet][1] `Datadog.Monitoring.Distribution` à votre application.
 
 [1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -124,7 +124,7 @@ Pour en savoir plus sur les différentes options disponibles pour définir les v
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 #### Internet Information Services (IIS)
 
@@ -152,9 +152,9 @@ Pour en savoir plus sur les différentes options disponibles pour définir les v
    ```
 2. Pour les applications autonomes et les services Windows, redémarrez manuellement l'application.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 1. Définissez les variables d'environnement requises suivantes pour activer l'instrumentation automatique de votre application :
 
@@ -167,9 +167,9 @@ Pour en savoir plus sur les différentes options disponibles pour définir les v
 
 2. Pour les applications autonomes, redémarrez manuellement l'application, comme vous le feriez en temps normal.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 1. Définissez les variables d'environnement requises suivantes pour activer l'instrumentation automatique de votre application :
 
@@ -202,7 +202,7 @@ Pour en savoir plus sur les différentes options disponibles pour définir les v
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -214,7 +214,7 @@ Pour les environnements conteneurisés, sans serveur et cloud, référez-vous au
 
 {{< tabs >}}
 
-{{% tab "Conteneurs" %}}
+{{< tab "Conteneurs" >}}
 
 1. Définissez `apm_non_local_traffic: true` dans la section `apm_config` de votre [fichier de configuration principal `datadog.yaml`][1].
 
@@ -232,23 +232,23 @@ Pour les environnements conteneurisés, sans serveur et cloud, référez-vous au
 {{< /site-region >}}
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "AWS Lambda" %}}
+{{< tab "AWS Lambda" >}}
 
 Pour configurer l'APM Datadog dans AWS Lambda, consultez la section relative au [tracing des fonctions sans serveur][1].
 
 [1]: /fr/tracing/serverless_functions/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Azure App Service" %}}
+{{< tab "Azure App Service" >}}
 
 Pour configurer l'APM Datadog dans Azure App Service, consultez la section relative au [tracing de l'extension Azure App Service][1].
 
 [1]: /fr/serverless/azure_app_services/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Autres environnements" %}}
+{{< tab "Autres environnements" >}}
 
 Le tracing est disponible pour un certain nombre d'environnements, tels que [Heroku][1], [Cloud Foundry][2] et [AWS Elastic Beanstalk][3].
 
@@ -260,7 +260,7 @@ Pour tous les autres environnements, consultez la documentation relative aux [in
 [3]: /fr/integrations/amazon_elasticbeanstalk/
 [4]: /fr/integrations/
 [5]: /fr/help/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -283,14 +283,14 @@ Pour définir les paramètres de configuration du traceur .NET, vous pouvez adop
 
 {{< tabs >}}
 
-{{% tab "Variables d'environnement" %}}
+{{< tab "Variables d'environnement" >}}
 
 Pour configurer le traceur à l'aide de variables d'environnement, définissez les variables avant de lancer l'application instrumentée. Pour découvrir comment définir les variables d'environnement dans différents environnements, consultez la rubrique [Configurer des variables d'environnement de processus](#configurer-des-variables-d-environnement).
 
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Code" %}}
+{{< tab "Code" >}}
 
 Pour configurer le traceur dans le code de l'application, créez une instance `TracerSettings` à partir des sources de configuration par défaut. Définissez les propriétés de cette instance `TracerSettings` avant d'appeler `Tracer.Configure()`. Exemple :
 
@@ -315,9 +315,9 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 Tracer.Configure(settings);
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Fichier JSON" %}}
+{{< tab "Fichier JSON" >}}
 
 Pour configurer le traceur à l'aide d'un fichier JSON, créez le fichier `datadog.json` dans le répertoire de l'application instrumentée. L'objet JSON racine doit être un objet avec une paire key/value pour chaque paramètre. Exemple :
 
@@ -330,7 +330,7 @@ Pour configurer le traceur à l'aide d'un fichier JSON, créez le fichier `datad
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -515,7 +515,7 @@ La configuration de l'instrumentation personnalisée varie selon votre instrumen
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 <div class="alert alert-warning">
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, vous devez faire en sorte que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
@@ -528,9 +528,9 @@ Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 <div class="alert alert-warning">
   <strong>Remarque :</strong> si vous utilisez à la fois l'instrumentation automatique et l'instrumentation personnalisée, vous devez faire en sorte que les versions des packages (par exemple, MSI et NuGet) soient synchronisées.
@@ -542,15 +542,15 @@ Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NuGet" %}}
+{{< tab "NuGet" >}}
 
 Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 
 1. Dans le code de votre application, accédez au traceur global via la propriété `Datadog.Trace.Tracer.Instance` pour créer de nouvelles spans.
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -566,7 +566,7 @@ Pour intégrer une instrumentation automatique à votre service, vous devez déf
 
 {{< tabs >}}
 
-{{% tab "Éditeur de registre" %}}
+{{< tab "Éditeur de registre" >}}
 
 Dans l'éditeur du registre, créez une valeur multi-chaînes `Environment` dans la clé `HKLM\System\CurrentControlSet\Services\<NOM_SERVICE>` et définissez les données de la valeur sur :
 
@@ -577,15 +577,15 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Utiliser l'éditeur de registre pour créer des variables d'environnement pour un service Windows" >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "PowerShell" %}}
+{{< tab "PowerShell" >}}
 
 ```powershell
 [string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NOM_SERVICE> -Name Environment -Value $v
 ```
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

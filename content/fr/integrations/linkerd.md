@@ -54,7 +54,7 @@ Le check Linkerd est inclus avec le package de l'[Agent Datadog][2] : vous n'av
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -70,8 +70,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [2]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -112,7 +112,7 @@ Pour augmenter le niveau de détail des logs de plan de données, consultez la s
 [2]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [4]: https://linkerd.io/2/tasks/modifying-proxy-log-level/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

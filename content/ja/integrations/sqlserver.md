@@ -118,7 +118,7 @@ _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -186,8 +186,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
 [6]: http://www.freetds.org/
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -216,7 +216,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

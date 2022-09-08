@@ -49,7 +49,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 
 {{< tabs >}}
-{{% tab "Logs standard" %}}
+{{< tab "Logs standard" >}}
 
 #### Activer le logging
 
@@ -74,8 +74,8 @@ Accédez ensuite à la [section Log de Datadog][3] pour commencer à explorer vo
 [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [3]: https://app.datadoghq.com/logs
-{{% /tab %}}
-{{% tab "Logs en temps réel" %}}
+{{< /tab >}}
+{{< tab "Logs en temps réel" >}}
 
 #### Activer le logging
 
@@ -102,7 +102,7 @@ Vous pouvez également configurer un consommateur, tel qu'Amazon Kinesis Data Fi
 [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_kinesis/
 [3]: https://docs.datadoghq.com/fr/serverless/forwarder/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Données collectées

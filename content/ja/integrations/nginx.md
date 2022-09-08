@@ -122,7 +122,7 @@ http_stub_status_module
 #### NGINX の準備
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 各 NGINX サーバーで、他の NGINX 構成ファイルが含まれているディレクトリ (`/etc/nginx/conf.d/` など) に `status.conf` ファイルを作成します。
 
@@ -184,8 +184,8 @@ NGINX をリロードして、status または API エンドポイントを有�
 sudo nginx -t && sudo nginx -s reload
 ```
 [1]: https://nginx.org/en/docs/http/ngx_http_api_module.html
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 以下のスニペットを構成 ConfigMaps に追加し、別のポートでメトリクスエンドポイントを公開します。
 
@@ -243,13 +243,13 @@ spec:
     name: status
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -319,8 +319,8 @@ http {
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx/datadog_checks/nginx/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 #### Docker
 
@@ -352,8 +352,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 [1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -433,8 +433,8 @@ metadata:
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
 [4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -482,7 +482,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

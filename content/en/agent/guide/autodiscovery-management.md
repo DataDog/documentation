@@ -25,7 +25,7 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 **Note**: To exclude every container, you can use `name:.*`, `image:.*`, or `kube_namespace:.*`. Configuring `.*` without a `name:`, `image:`, or `kube_namespace:` prefix does not work.
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{< tab "Containerized Agent" >}}
 
 In **Agent v7.20+**, to remove a given Docker container with the **image** `<IMAGE_NAME>` from Autodiscovery, and thus exclude the **logs and metrics**, add the following environment variable to the Datadog Agent:
 
@@ -97,8 +97,8 @@ On Kubernetes, to remove all containers of pods inside namespace `<NAMESPACE>` f
 DD_CONTAINER_EXCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
@@ -131,7 +131,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
@@ -143,7 +143,7 @@ Include containers from the Agent Autodiscovery perimeter with an include rule b
 **Note**: Include rules support regexes, and are defined as a list of space-separated strings.
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{< tab "Containerized Agent" >}}
 
 In **Agent v7.20+**, to include a given Docker container with the **image** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
@@ -203,8 +203,8 @@ On Kubernetes, to include all containers of pods inside namespace <NAMESPACE> fr
 DD_CONTAINER_INCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
@@ -237,7 +237,7 @@ container_include: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
@@ -249,7 +249,7 @@ Inclusion always takes precedence, whether the rule is global or only applies to
 You cannot mix cross-category include/exclude rules. For instance, if you want to include a container with the image name `<IMAGE_NAME_1>` and exclude only metrics from a container with the image name `<IMAGE_NAME_2>`, use the following:
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{< tab "Containerized Agent" >}}
 ```shell
 DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME_1>"
 DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME_1>"
@@ -258,8 +258,8 @@ DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME_2>"
 
 That is, setting `DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME_1>"` is not sufficient.
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 ```yaml
 container_include_metrics: [image:<IMAGE_NAME_1>]
 container_include_logs: [image:<IMAGE_NAME_1>]
@@ -267,7 +267,7 @@ container_exclude_metrics: [image:<IMAGE_NAME_2>]
 ```
 
 That is, setting `container_include: [image:<IMAGE_NAME_1>]` is not sufficient.
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 There is no interaction between the global lists and the selective (logs and metrics) lists. In other words, you cannot exclude a container globally and then include it with `container_include_logs` and `container_include_metrics`.

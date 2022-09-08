@@ -25,7 +25,7 @@ Agent를 호스트 상의 바이너리로 실행할 때는 [Agent](?tab=agent) �
 **참조**: 모든 컨테이너를 제외하려면 `name:.*`, `image:.*` 또는 `kube_namespace:.*`를 사용할 수 있습니다. `name:`, `image:` 또는`kube_namespace:`의 프리픽스(접두어) 없이 `.*`를 구성하면 제대로 작동하지 않습니다.
 
 {{< tabs >}}
-{{% tab "컨테이너화 Agent" %}}
+{{< tab "컨테이너화 Agent" >}}
 
 **Agent v7.20 이상**의 자동탐지에서 **이미지** `<IMAGE_NAME>`를 가진 임의의 도커(Docker) 컨테이너를 삭제하고 **로그와 메트릭**를 제외하려면 Datadog Agent에 아래의 환경 변수를 추가하세요.
 
@@ -97,8 +97,8 @@ DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME>"
 DD_CONTAINER_EXCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 자동탐지에서 이미지 `<IMAGE_NAME>`를 가지는 특정 도커 컨테이너를 제외하려면, [Agent `datadog.yaml` 설정 파일][1]에 다음의 설정 블록을 추가하세요.
 
@@ -131,7 +131,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /kr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **참조**: 쿠버네티스를 사용 중이라면 컨테이너 `<NAME>`은 매니페스트 `.spec.containers[0].name`에서 찾을 수 있습니다.
@@ -143,7 +143,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 **참조**: 포함 조건은 정규식 표현을 지원하며, 공백(스페이스)를 구분자로 사용하는 스트링의 목록으로 정의됩니다.
 
 {{< tabs >}}
-{{% tab "컨테이너화 Agent" %}}
+{{< tab "컨테이너화 Agent" >}}
 
 **Agent v7.20 이상**의 자동탐지에서 **이미지** `<IMAGE_NAME>`를 가진 특정 도커 컨테이너를 포함하려면 다음 환경 변수를 Datadog Agent에 추가하세요.
 
@@ -203,8 +203,8 @@ DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME>"
 DD_CONTAINER_INCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 
 자동탐지에서 이미지 `<IMAGE_NAME>`를 가지는 특정 도커 컨테이너를 포함하려면, [Agent `datadog.yaml` 설정 파일][1]에 다음의 설정 블록을 추가하세요.
 
@@ -237,7 +237,7 @@ container_include: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /kr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **참조**: 쿠버네티스를 사용 중이라면 컨테이너 `<NAME>`은 매니페스트 `.spec.containers[0].name`에서 찾을 수 있습니다.
@@ -249,7 +249,7 @@ container_include: [kube_namespace:<NAMESPACE>]
 여러 카테고리에 걸쳐 포함/제외 규칙을 병용할 수는 없습니다. 예를 들면, 이미지 이름 `<IMAGE_NAME_1>`의 컨테이너를 포함하되 이미지 이름 `<IMAGE_NAME_2>`의 컨테이너 메트릭은 제외하고자 할 때 다음과 같이 설정해야 합니다.
 
 {{< tabs >}}
-{{% tab "컨테이너화 Agent" %}}
+{{< tab "컨테이너화 Agent" >}}
 ```shell
 DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME_1>"
 DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME_1>"
@@ -258,8 +258,8 @@ DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME_2>"
 
 즉, `DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME_1>"` 설정이 충분하지 않다는 뜻입니다.
 
-{{% /tab %}}
-{{% tab "Agent" %}}
+{{< /tab >}}
+{{< tab "Agent" >}}
 ```yaml
 container_include_metrics: [image:<IMAGE_NAME_1>]
 container_include_logs: [image:<IMAGE_NAME_1>]
@@ -267,7 +267,7 @@ container_exclude_metrics: [image:<IMAGE_NAME_2>]
 ```
 
 즉, `container_include: [image:<IMAGE_NAME_1>]` 설정이 충분하지 않다는 뜻입니다.
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 글로벌 리스트와 선택 사항(로그와 메트릭) 목록 사이에는 상호 관계가 없습니다. 따라서 컨테이너를 글로벌 범위에서 제외한 후, `container_include_logs`와 `container_include_metrics`로 포함할 수는 없습니다.

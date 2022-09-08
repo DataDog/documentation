@@ -38,7 +38,7 @@ Select the hosts to monitor by choosing host names, tags, or choose `All Monitor
 ### Set alert conditions
 
 {{< tabs >}}
-{{% tab "Check Alert" %}}
+{{< tab "Check Alert" >}}
 
 A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds. For process check monitors, the groups are static: `host` and `process`.
 
@@ -52,8 +52,8 @@ Set up the check alert:
 
     Choose how many consecutive runs with the `OK` status resolves the alert.
 
-{{% /tab %}}
-{{% tab "Cluster Alert" %}}
+{{< /tab >}}
+{{< tab "Cluster Alert" >}}
 
 A cluster alert calculates the percent of process checks in a given status and compares it to your thresholds.
 
@@ -68,7 +68,7 @@ Each check tagged with a distinct combination of tags is considered to be a dist
 {{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
 
 For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Advanced alert conditions

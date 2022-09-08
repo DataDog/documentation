@@ -70,6 +70,7 @@ def pull_and_push_folder(content, content_dir):
                 count=0,
             )
             file_content = TEMPLATE.format(front_matter=front_matter, content=txt.strip())
+            file_content = file_content.replace("{{<", "{{<").replace(">}}", ">}}")
             # Replacing the master README.md by _index.md to follow Hugo logic
             if file_name.endswith("README.md"):
                 file_name = "_index.md"

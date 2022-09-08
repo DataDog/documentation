@@ -40,7 +40,7 @@ Datadog で[サービスチェックモニター][5]を作成するには、メ�
 このセクションで、**Check Alert** または **Cluster Alert** を選択します。
 
 {{< tabs >}}
-{{% tab "Check Alert" %}}
+{{< tab "Check Alert" >}}
 
 チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。
 
@@ -64,8 +64,8 @@ Datadog で[サービスチェックモニター][5]を作成するには、メ�
 
 
 [1]: /ja/monitors/manage/status
-{{% /tab %}}
-{{% tab "Cluster Alert" %}}
+{{< /tab >}}
+{{< tab "Cluster Alert" >}}
 
 クラスターアラートは、既定のステータスでチェックの割合を計算し、しきい値と比較します。
 
@@ -80,7 +80,7 @@ Datadog で[サービスチェックモニター][5]を作成するには、メ�
 {{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="クラスターチェックのしきい値" style="width:90%;">}}
 
 たとえば、環境ごとにグループ化されたクラスターチェックモニターは、いずれかの環境のチェックの 70% 以上が `CRITICAL` ステータスを送信した場合にアラートし、いずれかの環境のチェックの70% 以上が `WARN` ステータスを送信した場合に警告できます。
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### 高度なアラート条件

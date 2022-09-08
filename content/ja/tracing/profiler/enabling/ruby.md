@@ -49,7 +49,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 3. プロファイラーを有効にします。
 
    {{< tabs >}}
-{{% tab "環境変数" %}}
+{{< tab "環境変数" >}}
 
 ```shell
 export DD_PROFILING_ENABLED=true
@@ -58,8 +58,8 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-{{% /tab %}}
-{{% tab "In code" %}}
+{{< /tab >}}
+{{< tab "In code" >}}
 
 ```ruby
 Datadog.configure do |c|
@@ -72,7 +72,7 @@ end
 
  **注**: Rails アプリケーションの場合は、上記のコードコンフィギュレーションで `config/initializers/datadog.rb` ファイルを作成します。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 4. Ruby アプリケーションの起動コマンドに `ddtracerb exec` コマンドを追加します。

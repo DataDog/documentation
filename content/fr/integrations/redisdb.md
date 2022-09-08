@@ -61,7 +61,7 @@ Le check Redis est inclus avec le package de l'[Agent Datadog][1] : vous n'avez
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -134,8 +134,8 @@ L'APM Datadog s'intègre à Redis pour vous permettre de visualiser les traces s
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/tracing/send_traces/
 [6]: https://docs.datadoghq.com/fr/tracing/setup/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 #### Docker
 
@@ -189,8 +189,8 @@ Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à
 [5]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 [6]: https://docs.datadoghq.com/fr/agent/docker/apm/?tab=linux
 [7]: https://docs.datadoghq.com/fr/tracing/setup/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -279,8 +279,8 @@ Ensuite, [instrumentez l'application qui envoie des requêtes à Redis][10].
 [8]: https://docs.datadoghq.com/fr/agent/kubernetes/apm/?tab=java
 [9]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [10]: https://docs.datadoghq.com/fr/tracing/setup/
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -350,7 +350,7 @@ Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à
 [6]: https://docs.datadoghq.com/fr/agent/docker/apm/?tab=linux
 [7]: https://docs.datadoghq.com/fr/tracing/setup/
 [8]: https://docs.datadoghq.com/fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

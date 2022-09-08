@@ -90,7 +90,7 @@ Si vous utilisez pdns_recursor >= 4.1, définissez simplement le paramètre `a
 Redémarrez votre recursor pour activer l'API de statistiques.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -163,8 +163,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -186,7 +186,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

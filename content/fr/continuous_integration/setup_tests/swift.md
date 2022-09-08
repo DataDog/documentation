@@ -34,7 +34,7 @@ Plateformes prises en charge :
 Vous pouvez installer le framework de trois façons différentes :
 
 {{< tabs >}}
-{{% tab "Swift Package Manager" %}}
+{{< tab "Swift Package Manager" >}}
 
 1. Ajoutez le package `dd-sdk-swift-testing` à votre projet, disponible sur le site [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
@@ -49,8 +49,8 @@ Vous pouvez installer le framework de trois façons différentes :
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
-{{% /tab %}}
-{{% tab "Cocoapods" %}}
+{{< /tab >}}
+{{< tab "Cocoapods" >}}
 
 1. Ajoutez la dépendance `DatadogSDKTesting` aux cibles de test de votre `Podfile` :
 
@@ -67,8 +67,8 @@ end
 
 2. Si vous exécutez des tests d'interface utilisateur, ajoutez également la dépendance à l'application exécutant les tests.
 
-{{% /tab %}}
-{{% tab "Liaison de framework" %}}
+{{< /tab >}}
+{{< tab "Liaison de framework" >}}
 
 1. Téléchargez le fichier `DatadogSDKTesting.zip` depuis la page [Releases][1] et décompressez-le.
 
@@ -79,7 +79,7 @@ end
 3. Si vous exécutez des tests d'interface utilisateur, liez également l'application exécutant les tests à cette bibliothèque.
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 <div class="alert alert-warning"><strong>Remarque</strong> : ce framework sert uniquement à effectuer des tests, et doit uniquement être lié à l'application lors de l'exécution de tests. Ne transmettez pas ce framework à vos utilisateurs. </div>
 
@@ -308,7 +308,7 @@ Au lieu de définir des variables d'environnement, il est possible de spécifier
 ## Variables d'environnement du fournisseur de CI
 
 {{< tabs >}}
-{{% tab "Jenkins" %}}
+{{< tab "Jenkins" >}}
 
 | Variable d'environnement | Valeur                  |
 | -------------------- | ---------------------- |
@@ -329,8 +329,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `GIT_URL_1`          | `$(GIT_URL_1)`  |
 | `GIT_BRANCH`         | `$(GIT_BRANCH)` |
 
-{{% /tab %}}
-{{% tab "CircleCI" %}}
+{{< /tab >}}
+{{< tab "CircleCI" >}}
 
 | Variable d'environnement       | Valeur                         |
 | -------------------------- | ----------------------------- |
@@ -350,8 +350,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `CIRCLE_BRANCH`         | `$(CIRCLE_BRANCH)`         |
 | `CIRCLE_TAG`            | `$(CIRCLE_TAG)`            |
 
-{{% /tab %}}
-{{% tab "GitLab CI" %}}
+{{< /tab >}}
+{{< tab "GitLab CI" >}}
 
 | Variable d'environnement | Valeur                |
 | -------------------- | -------------------- |
@@ -379,8 +379,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `CI_COMMIT_AUTHOR`  | `$(CI_COMMIT_AUTHOR)` |
 | `CI_COMMIT_TIMESTAMP`  | `$(CI_COMMIT_TIMESTAMP)` |
 
-{{% /tab %}}
-{{% tab "Travis" %}}
+{{< /tab >}}
+{{< tab "Travis" >}}
 
 | Variable d'environnement       | Valeur                         |
 | -------------------------- | ----------------------------- |
@@ -403,8 +403,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `TRAVIS_TAG`                 | `$(TRAVIS_TAG)`                 |
 | `TRAVIS_COMMIT_MESSAGE`      | `$(TRAVIS_COMMIT_MESSAGE)`      |
 
-{{% /tab %}}
-{{% tab "GitHub Actions" %}}
+{{< /tab >}}
+{{< tab "GitHub Actions" >}}
 
 | Variable d'environnement | Valeur                   |
 | -------------------- | ----------------------- |
@@ -425,8 +425,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `GITHUB_HEAD_REF`    | `$(GITHUB_HEAD_REF)`   |
 | `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
 
-{{% /tab %}}
-{{% tab "Buildkite" %}}
+{{< /tab >}}
+{{< tab "Buildkite" >}}
 
 | Variable d'environnement            | Valeur                              |
 | ------------------------------- | ---------------------------------- |
@@ -450,8 +450,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `BUILDKITE_BUILD_AUTHOR`       | `$(BUILDKITE_BUILD_AUTHOR)`       |
 | `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
-{{% /tab %}}
-{{% tab "Bitbucket Pipelines" %}}
+{{< /tab >}}
+{{< tab "Bitbucket Pipelines" >}}
 
 | Variable d'environnement       | Valeur                         |
 | -------------------------- | ----------------------------- |
@@ -469,8 +469,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`         |
 | `BITBUCKET_TAG`            | `$(BITBUCKET_TAG)`            |
 
-{{% /tab %}}
-{{% tab "AppVeyor" %}}
+{{< /tab >}}
+{{< tab "AppVeyor" >}}
 
 | Variable d'environnement     | Valeur                       |
 | ------------------------ | --------------------------- |
@@ -492,8 +492,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `APPVEYOR_REPO_COMMIT_AUTHOR`            | `$(APPVEYOR_REPO_COMMIT_AUTHOR)`            |
 | `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`      | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`      |
 
-{{% /tab %}}
-{{% tab "Azure Pipelines" %}}
+{{< /tab >}}
+{{< tab "Azure Pipelines" >}}
 
 | Variable d'environnement             | Valeur                               |
 | -------------------------------- | ----------------------------------- |
@@ -522,8 +522,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `BUILD_REQUESTEDFORID`                   | `$(BUILD_REQUESTEDFORID)`                   |
 | `BUILD_REQUESTEDFOREMAIL`                | `$(BUILD_REQUESTEDFOREMAIL)`                |
 
-{{% /tab %}}
-{{% tab "Bitrise" %}}
+{{< /tab >}}
+{{< tab "Bitrise" >}}
 
 | Variable d'environnement   | Valeur                     |
 | ---------------------- | ------------------------- |
@@ -550,8 +550,8 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `GIT_CLONE_COMMIT_COMMITER_NAME`   | `$(GIT_CLONE_COMMIT_COMMITER_NAME)`   |
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
-{{% /tab %}}
-{{% tab "Xcode Cloud" %}}
+{{< /tab >}}
+{{< tab "Xcode Cloud" >}}
 
 | Variable d'environnement    | Valeur                   |
 | ----------------------- | ----------------------- |
@@ -565,7 +565,7 @@ Configuration Git supplémentaire pour le test d'appareils physiques :
 | `CI_BRANCH`             | `$(CI_BRANCH)`          |
 | `CI_GIT_REF`            | `$(CI_GIT_REF)`         |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## API de test manuel

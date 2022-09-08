@@ -41,7 +41,7 @@ v1.0.0 の時点で、Datadog Cluster Agent のカスタムメトリクスサー
 ### インストール
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Helm の Cluster Agent で外部メトリクスサーバーを有効にするには、以下の Cluster Agent コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新します。`clusterAgent.metricsProvider.enabled` を `true` に設定した後、Datadog Helm チャートを再デプロイします。
 
@@ -58,8 +58,8 @@ Helm の Cluster Agent で外部メトリクスサーバーを有効にするに
 これにより必要な RBAC コンフィギュレーションが自動的に更新され、Kubernetes が利用可能な `Service` と `APIService` がそれぞれ設定されます。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 Datadog Operator で管理する Cluster Agent で外部メトリクスサーバーを有効にするには、[Datadog Operator をセットアップします][1]。次に、`DatadogAgent` カスタムリソースで `clusterAgent.config.externalMetrics.enabled` を `true` に設定します。
 
@@ -81,8 +81,8 @@ Datadog Operator で管理する Cluster Agent で外部メトリクスサーバ
 Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Kubernetes が利用可能な `Service` と `APIService` がそれぞれ設定されます。
 
 [1]: /ja/agent/guide/operator-advanced
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 
 #### カスタムメトリクスサーバー
 
@@ -122,7 +122,7 @@ Datadog Cluster Agent が稼働したらいくつかの追加 RBAC ポリシー�
 
 [1]: /ja/agent/cluster_agent/setup/?tab=daemonset
 [2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 使用方法
@@ -195,7 +195,7 @@ spec:
 Helm、Datadog Operator または Daemonset を使用して `DatadogMetric` を使用するように Datadog Cluster Agent を設定します。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 `DatadogMetric` CRD の使用を有効にするには、[datadog-values.yaml][1] Helm のコンフィギュレーションを更新して、`clusterAgent.metricsProvider.useDatadogMetrics` を `true` に設定します。 その後、Datadog Helm チャートを再デプロイします:
 
@@ -214,8 +214,8 @@ Helm、Datadog Operator または Daemonset を使用して `DatadogMetric` を�
 これにより必要な RBAC ファイルが自動的に更新され、Cluster Agent に `DatadogMetric` リソースを介してこれらの HPA クエリを管理するよう指示します。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 `DatadogMetric` CRD の使用をアクティブにするには、`DatadogAgent` カスタムリソースを更新し、`clusterAgent.config.externalMetrics.useDatadogMetrics` を ` true` に設定します。
 
@@ -237,8 +237,8 @@ Helm、Datadog Operator または Daemonset を使用して `DatadogMetric` を�
 
 Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Cluster Agent に `DatadogMetric` リソースを介してこれらの HPA クエリを管理するよう指示します。
 
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 `DatadogMetric` CRD の使用をアクティベートするには、次の手順に従ってください:
 
 1. `DatadogMetric` CRD をクラスターにインストールします。
@@ -254,7 +254,7 @@ Operator により必要な RBAC コンフィギュレーションが自動的�
     ```
 
 3. Datadog Cluster Agent のデプロイで、`DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` を `true` に設定します。
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### HPA

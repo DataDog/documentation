@@ -71,7 +71,7 @@ datadogRum.init({
 Les onglets ci-dessous présentent les informations contenues dans l'événement `beforeSend` et les objets de contexte pour cet exemple :
 
 {{< tabs >}}
-{{% tab "Événement" %}}
+{{< tab "Événement" >}}
 
 ```json
 {
@@ -115,8 +115,8 @@ Les onglets ci-dessous présentent les informations contenues dans l'événement
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Contexte" %}}
+{{< /tab >}}
+{{< tab "Contexte" >}}
 ```json
 {
     "performanceEntry": {
@@ -188,7 +188,7 @@ Les onglets ci-dessous présentent les informations contenues dans l'événement
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Ignorer une erreur frontend
@@ -213,7 +213,7 @@ datadogRum.init({
 Les onglets ci-dessous présentent les informations contenues dans l'événement `beforeSend` et les objets de contexte pour cet exemple :
 
 {{< tabs >}}
-{{% tab "Événement" %}}
+{{< tab "Événement" >}}
 
 ```json
 {
@@ -251,8 +251,8 @@ Les onglets ci-dessous présentent les informations contenues dans l'événement
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Contexte" %}}
+{{< /tab >}}
+{{< tab "Contexte" >}}
 ```json
 {
     "error": {
@@ -261,7 +261,7 @@ Les onglets ci-dessous présentent les informations contenues dans l'événement
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

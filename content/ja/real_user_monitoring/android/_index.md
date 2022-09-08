@@ -68,7 +68,7 @@ dependencies {
 
 {{< site-region region="us" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -89,8 +89,8 @@ class SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 public class SampleApplication extends Application { 
     @Override 
@@ -108,13 +108,13 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -135,8 +135,8 @@ class SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 public class SampleApplication extends Application { 
     @Override 
@@ -154,13 +154,13 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -181,8 +181,8 @@ class SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 public class SampleApplication extends Application { 
     @Override 
@@ -200,13 +200,13 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -227,8 +227,8 @@ class SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 public class SampleApplication extends Application { 
     @Override 
@@ -246,13 +246,13 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -273,8 +273,8 @@ class SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 public class SampleApplication extends Application { 
     @Override 
@@ -292,7 +292,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
@@ -305,37 +305,37 @@ Gradle プラグインは、ビルド時に適切な ProGuard `mapping.txt` フ�
 RUM Monitor を構成して登録します。アプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val monitor = RumMonitor.Builder().build()
 GlobalRum.registerIfAbsent(monitor)
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final RumMonitor monitor = new RumMonitor.Builder().build();
 GlobalRum.registerIfAbsent(monitor);
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 OkHttp リクエストをリソースとして追跡するには、提供された[インターセプター][9]を追加します。
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val okHttpClient =  OkHttpClient.Builder()
     .addInterceptor(DatadogInterceptor())
     .build()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
     .addInterceptor(new DatadogInterceptor())
     .build();
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 これにより、`OkHttpClient` によって処理された各リクエストが RUM でリソースとして記録され、関連するすべての情報 (URL、メソッド、ステータスコード、エラー) が自動的に入力されます。ビューがアクティブな時に開始したネットワークリクエストのみが追跡されます。アプリケーションがバックグラウンドの時にリクエストを追跡するには、[手動でビューを作成][10]します。
@@ -351,16 +351,16 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
 Datadog の構成で、初期化時に以下のスニペットを追加します。
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 .trackBackgroundRumEvents(true)
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 .trackBackgroundRumEvents(true)
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 <div class="alert alert-info"><p>バックグラウンドイベントを追跡すると、セッションが追加され、課金に影響を与える可能性があります。ご質問は、<a href="https://docs.datadoghq.com/help/">Datadog サポートまでお問い合わせ</a>ください。</p>
 </div>

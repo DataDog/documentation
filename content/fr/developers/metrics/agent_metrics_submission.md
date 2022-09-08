@@ -11,7 +11,7 @@ L'envoi de métriques avec un [check custom d'Agent][1] repose sur l'utilisation
 ## Fonctions
 
 {{< tabs >}}
-{{% tab "Count" %}}
+{{< tab "Count" >}}
 
 ### `monotonic_count()`
 
@@ -55,8 +55,8 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
 | `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
 
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 
 ### `gauge()`
 
@@ -78,8 +78,8 @@ self.gauge(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
 | `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
 
-{{% /tab %}}
-{{% tab "Rate" %}}
+{{< /tab >}}
+{{< tab "Rate" >}}
 
 ### `rate()`
 
@@ -101,9 +101,9 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
 | `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Histogram" %}}
+{{< tab "Histogram" >}}
 
 ### `histogram()`
 
@@ -125,7 +125,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | Chaîne          | Non       | Host actuel  | Hostname à associer à cette métrique.                                           |
 | `device_name` | Chaîne          | Non       | -             | Obsolète. Ajoute un tag au format `device:<NOM_APPAREIL>` à la liste de tags. |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Tutoriel

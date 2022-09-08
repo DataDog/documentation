@@ -94,7 +94,7 @@ NPM prend en charge les systèmes de provisionnement suivants :
 Cet outil a été conçu dans l'optique d'analyser le trafic _entre_ des endpoints réseau et de mapper des dépendances réseau. Il est donc conseillé de l'installer sur un sous-ensemble pertinent de votre infrastructure ainsi que sur **_deux hosts au minimum_** pour en tirer pleinement profit.
 
 {{< tabs >}}
-{{% tab "Agent (Linux)" %}}
+{{< tab "Agent (Linux)" >}}
 
 Pour activer la solution Network Performance Monitoring avec l'Agent Datadog, utilisez les configurations suivantes :
 
@@ -174,8 +174,8 @@ Si ces utilitaires ne sont pas disponibles pour votre distribution, suivez les m
 [1]: /fr/infrastructure/process/?tab=linuxwindows#installation
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
-{{% /tab %}}
-{{% tab "Agent (Windows)" %}}
+{{< /tab >}}
+{{< tab "Agent (Windows)" >}}
 
 La collecte de logs réseau pour Windows repose sur un pilote de filtre.
 
@@ -206,8 +206,8 @@ Pour activer NPM pour des hosts Windows, procédez comme suit 
 
 [1]: /fr/agent/basic_agent_usage/windows/?tab=commandline
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Pour activer Network Performance Monitoring avec Kubernetes via Helm, ajoutez ce qui suit à votre fichier values.yaml !
 
@@ -351,8 +351,8 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /fr/agent/kubernetes/
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 <div class="alert alert-warning">L'Operator Datadog est en bêta publique. Si vous souhaitez nous faire part de vos remarques ou de vos questions, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
 [L'Operator Datadog][1] est une fonctionnalité permettant de déployer l'Agent Datadog sur Kubernetes et OpenShift. L'Operator transmet des données sur le statut, la santé et les erreurs du déploiement dans le statut de sa ressource personnalisée. Ses paramètres de niveau supérieur permettent également de réduire les erreurs de configuration.
@@ -373,8 +373,8 @@ spec:
 ```
 
 [1]: https://github.com/DataDog/datadog-operator
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Pour configurer la fonctionnalité Network Performance Monitoring dans Docker, utilisez la configuration suivante lorsque vous lancez l'Agent de conteneur :
 
@@ -433,13 +433,13 @@ services:
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 Pour une configuration sur AWS ECS, consultez la section relative à [AWS ECS][1].
 
 
 [1]: /fr/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

@@ -26,7 +26,7 @@ title: iOS ログ収集
 1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。
 
     {{< tabs >}}
-    {{% tab "CocoaPods" %}}
+    {{< tab "CocoaPods" >}}
 
 [CocoaPods][6] を使用して、 `dd-sdk-ios`をインストールできます。
 ```
@@ -35,16 +35,16 @@ pod 'DatadogSDK'
 
 [6]: https://cocoapods.org/
 
-    {{% /tab %}}
-    {{% tab "Swift Package Manager (SPM)" %}}
+    {{< /tab >}}
+    {{< tab "Swift Package Manager (SPM)" >}}
 
 Apple の Swift Package Manager を使用して統合するには、`Package.swift` に以下を依存関係として追加します。
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
-    {{% /tab %}}
-    {{% tab "Carthage" %}}
+    {{< /tab >}}
+    {{< tab "Carthage" >}}
 
 [Carthage][7] を使用して、 `dd-sdk-ios`をインストールできます。
 ```
@@ -53,14 +53,14 @@ github "DataDog/dd-sdk-ios"
 
 [7]: https://github.com/Carthage/Carthage
 
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. アプリケーションコンテキストと [Datadog クライアントトークン][2]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-ios` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
 {{< site-region region="us" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -72,8 +72,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -84,13 +84,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 
 ```swift
 Datadog.initialize(
@@ -103,8 +103,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -115,13 +115,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 
 ```swift
 Datadog.initialize(
@@ -134,8 +134,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -146,13 +146,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 
 ```swift
 Datadog.initialize(
@@ -165,8 +165,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -177,13 +177,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 
 ```swift
 Datadog.initialize(
@@ -196,8 +196,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -208,7 +208,7 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
@@ -231,22 +231,22 @@ SDK は、新しい値に応じて動作を変更します。たとえば、現�
 アプリケーションを作成する際、開発ログを有効にし、提供されたレベルと同等以上の優先度を持つ SDK のすべての内部メッセージをコンソールにログ出力するようにしてください。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.verbosityLevel = .debug
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 3. `Logger` の構成：
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 let logger = Logger.builder
     .sendNetworkInfo(true)
@@ -254,8 +254,8 @@ let logger = Logger.builder
     .set(datadogReportingThreshold: .info)
     .build()
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDLoggerBuilder *builder = [DDLogger builder];
 [builder sendNetworkInfo:YES];
@@ -264,13 +264,13 @@ DDLoggerBuilder *builder = [DDLogger builder];
 
 DDLogger *logger = [builder build];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 4. 次のいずれかのメソッドで、カスタムログエントリを Datadog に直接送信します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 logger.debug("A debug message.")
 logger.info("Some relevant information?")
@@ -279,8 +279,8 @@ logger.warn("An important warning...")
 logger.error("An error was met!")
 logger.critical("Something critical happened!")
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [logger debug:@"A debug message."];
 [logger info:@"Some relevant information?"];
@@ -289,22 +289,22 @@ logger.critical("Something critical happened!")
 [logger error:@"An error was met!"];
 [logger critical:@"Something critical happened!"];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 5. (任意) - ログメッセージと一緒に `attributes` のマップを提供し、発行されたログに属性を追加します。マップの各エントリーは属性として追加されます。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 logger.info("Clicked OK", attributes: ["context": "onboarding flow"])
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [logger info:@"Clicked OK" attributes:@{@"context": @"onboarding flow"}];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 高度なロギング
@@ -333,17 +333,17 @@ logger.info("Clicked OK", attributes: ["context": "onboarding flow"])
 `addTag(withKey:value:)` メソッドを使い、指定されたロガーから送信されるすべてのログにタグを追加します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 // これにより、"build_configuration:debug" タグが追加されます
 logger.addTag(withKey: "build_configuration", value: "debug")
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [logger addTagWithKey:@"build_configuration" value:@"debug"];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注意**: `<タグの値>` は `文字列` でなければなりません。
@@ -353,17 +353,17 @@ logger.addTag(withKey: "build_configuration", value: "debug")
 `removeTag(withKey:)` メソッドを使い、指定されたロガーから送信されるすべてのログからタグを削除します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 // これにより "build_configuration" で始まるすべてのタグが削除されます
 logger.removeTag(withKey: "build_configuration")
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [logger removeTagWithKey:@"build_configuration"];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [Datadog タグに関する詳細][5]。
@@ -384,17 +384,17 @@ logger.removeTag(withKey: "build_configuration")
 `addAttribute(forKey:value:)` メソッドを使い、指定されたロガーから送信されるすべてのログにカスタム属性を追加します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 // これにより、文字列値を持つ "device-model" 属性が追加されます
 logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [logger addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: `<属性の値>` は `Encodable` (`文字列`、`日付`、カスタム `Codable` データモデルなど) に適合する限り任意です。
@@ -404,17 +404,17 @@ logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 `removeAttribute(forKey:)` メソッドを使い、指定されたロガーから送信されるすべてのログからカスタム属性を削除します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 // これにより、"device-model" 属性は今後送信されるすべてのログから削除されます。
 logger.removeAttribute(forKey: "device-model")
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [logger removeAttributeForKey:@"device-model"];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

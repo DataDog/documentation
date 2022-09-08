@@ -28,7 +28,7 @@ title: Amazon RDS 上の SQL Server のデータベースモニタリングの�
 サポートされている SQL Server バージョン
 : 2014、2016、2017、2019
 
-{{% dbm-sqlserver-before-you-begin %}}
+{{< dbm-sqlserver-before-you-begin >}}
 
 ## Agent にアクセスを付与する
 
@@ -64,18 +64,18 @@ CREATE USER datadog FOR LOGIN datadog;
 AWS はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
 {{< tabs >}}
-{{% tab "Windows Host" %}}
-{{% dbm-sqlserver-agent-setup-windows %}}
-{{% /tab %}}
-{{% tab "Linux Host" %}}
-{{% dbm-sqlserver-agent-setup-linux %}}
-{{% /tab %}}
-{{% tab "Docker" %}}
-{{% dbm-sqlserver-agent-setup-docker %}}
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-{{% dbm-sqlserver-agent-setup-kubernetes %}}
-{{% /tab %}}
+{{< tab "Windows Host" >}}
+{{< dbm-sqlserver-agent-setup-windows >}}
+{{< /tab >}}
+{{< tab "Linux Host" >}}
+{{< dbm-sqlserver-agent-setup-linux >}}
+{{< /tab >}}
+{{< tab "Docker" >}}
+{{< dbm-sqlserver-agent-setup-docker >}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
+{{< dbm-sqlserver-agent-setup-kubernetes >}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## RDS インテグレーションをインストールする

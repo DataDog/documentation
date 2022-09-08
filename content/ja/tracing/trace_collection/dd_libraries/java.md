@@ -40,7 +40,7 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
-{{% tab "コンテナ" %}}
+{{< tab "コンテナ" >}}
 
 1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
@@ -79,15 +79,15 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 {{< /site-region >}}
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
+{{< /tab >}}
+{{< tab "AWS Lambda" >}}
 
 AWS Lambda で Datadog APM を設定するには、[サーバーレス関数のトレース][1]ドキュメントを参照してください。
 
 
 [1]: /ja/tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "その他の環境" %}}
+{{< /tab >}}
+{{< tab "その他の環境" >}}
 
 トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の多くの環境で利用できます。
 
@@ -99,7 +99,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 [4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### アプリケーションのインスツルメンテーション
@@ -139,7 +139,7 @@ Agent のインストール後、アプリケーションをトレースする�
 アプリケーションサーバーのドキュメントを使用して、`-javaagent` およびその他の JVM 引数を渡す正しい方法を確認してください。一般的に使用されるフレームワークの手順は次のとおりです。
 
 {{< tabs >}}
-{{% tab "Spring Boot" %}}
+{{< tab "Spring Boot" >}}
 
 アプリの名前が `my_app.jar` の場合は、以下を含む `my_app.conf` を作成します。
 
@@ -151,8 +151,8 @@ JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 
 
 [1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
-{{% /tab %}}
-{{% tab "Tomcat" %}}
+{{< /tab >}}
+{{< tab "Tomcat" >}}
 
 Tomcat 起動スクリプトファイル (たとえば、Linux では `setenv.sh`) を開き、次を追加します。
 
@@ -167,8 +167,8 @@ set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
 `setenv` ファイルが存在しない場合は、Tomcat プロジェクトフォルダーの `./bin` ディレクトリで作成します。
 
-{{% /tab %}}
-{{% tab "JBoss" %}}
+{{< /tab >}}
+{{< tab "JBoss" >}}
 
 - スタンドアロンモードの場合:
 
@@ -196,8 +196,8 @@ set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
 
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
-{{% /tab %}}
-{{% tab "Jetty" %}}
+{{< /tab >}}
+{{< tab "Jetty" >}}
 
 `jetty.sh` を使用して Jetty をサービスとして開始する場合は、編集して次を追加します。
 
@@ -211,8 +211,8 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-{{% /tab %}}
-{{% tab "WebSphere" %}}
+{{< /tab >}}
+{{< tab "WebSphere" >}}
 
 管理コンソールで:
 
@@ -228,7 +228,7 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
 詳細とオプションについては、[WebSphere のドキュメント][1]を参照してください。
 
 [1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**

@@ -43,7 +43,7 @@ title: AWS マニュアルセットアップガイド
 このガイドを使用して、Datadog [AWS インテグレーション][1]を手動でセットアップします。
 
 {{< tabs >}}
-{{% tab "Role delegation" %}}
+{{< tab "Role delegation" >}}
 
 AWS インテグレーションを手動で設定するには、AWS アカウントで IAM ポリシーと IAM ロールを作成し、Datadog アカウントで生成された AWS External ID でそのロールを構成します。これにより、Datadog の AWS アカウントは、自動的に AWS API をクエリし、Datadog アカウントにデータをプルすることができます。以下のセクションでは、これらの各コンポーネントを作成し、Datadog アカウントでセットアップを完了するための手順を詳しく説明します。
 
@@ -94,9 +94,9 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 [3]: https://console.aws.amazon.com/iam/home#/roles
 [4]: /ja/security_platform/cspm
 [5]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "アクセスキー (GovCloud または中国のみ)" %}}
+{{< tab "アクセスキー (GovCloud または中国のみ)" >}}
 
 ## セットアップ
 
@@ -120,10 +120,10 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
-{{% aws-permissions %}}
+{{< aws-permissions >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

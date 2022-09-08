@@ -54,7 +54,7 @@ Pour installer le Forwarder Datadog sans la pile CloudFormation, ou pour mettre 
 #### Installation de la couche Lambda Datadog
 
 {{< tabs >}}
-{{% tab "Serverless Framework" %}}
+{{< tab "Serverless Framework" >}}
 
 Le [framework Serverless][1] vous permet de développer et de déployer vos fonctions Lambda AWS, ainsi que les ressources d'infrastructure AWS dont elles ont besoin. Il est très couramment utilisé pour grouper et déployer des applications sans serveur. Datadog dispose d'un plug-in spécialement conçu pour faciliter la surveillance des applications sans serveur créées à l'aide du framework Serverless.
 
@@ -92,8 +92,8 @@ La couche Lambda devrait désormais être installée automatiquement sur toutes 
 [2]: https://github.com/DataDog/datadog-lambda-layer-python
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/?tab=serverlessframework#installing-and-using-the-datadog-lambda-layer
 
-{{% /tab %}}
-{{% tab "Console AWS" %}}
+{{< /tab >}}
+{{< tab "Console AWS" >}}
 
 L'ARN de la couche Lambda Datadog comprend une région, le runtime du langage et la version. Pour créer votre propre ARN, utilisez le format suivant :
 
@@ -127,8 +127,8 @@ La couche Lambda devrait désormais être installée sur cette fonction. Vous de
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/?tab=serverlessframework#installing-and-using-the-datadog-lambda-layer
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 
 ### Représentation graphique des démarrages à froid Lambda
@@ -148,7 +148,7 @@ Vous pouvez facilement reconnaître les métriques Lambda optimisées, car elles
 Dans la section précédente, vous avez configuré le Forwarder Datadog pour activer les métriques optimisées. Le Forwarder Datadog est également nécessaire pour envoyer des logs de votre fonction Lambda à Datadog.
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{< tab "Framework Serverless" >}}
 
 Si vous avez suivi les étapes précédentes, le Forwarder Datadog est déjà activé, et les logs Lambda devraient déjà être automatiquement transmis à Datadog. Si vous avez suivi toute la procédure ci-dessus, mais que les logs ne s'affichent pas dans Datadog, [consultez les étapes de dépannage des logs Lambda][1].
 
@@ -167,8 +167,8 @@ custom:
 
 [1]: https://docs.datadoghq.com/fr/logs/guide/lambda-logs-collection-troubleshooting-guide/
 
-{{% /tab %}}
-{{% tab "Console AWS" %}}
+{{< /tab >}}
+{{< tab "Console AWS" >}}
 
 Si vous avez suivi la procédure, le Forwarder Datadog est déjà activé, et les logs Lambda devraient déjà être automatiquement transmis à Datadog. Si vous avez suivi la procédure étape par étape mais que les logs ne s'affichent pas dans Datadog, [consultez les étapes de dépannage des logs Lambda][1].
 
@@ -179,8 +179,8 @@ Si une ressource est déjà abonnée à un groupe de logs que vous souhaitez sur
 
 [1]: https://docs.datadoghq.com/fr/logs/guide/lambda-logs-collection-troubleshooting-guide/
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 Si vos logs ne s'affichent toujours pas dans Datadog, vous pouvez [suivre ces étapes de dépannage][9].
 
@@ -201,12 +201,12 @@ Vous souhaitez peut-être savoir quelles sont les erreurs que rencontrent le plu
 Dans la première section, vous avez configuré le Forwarder Datadog et la couche Lambda pour activer les métriques optimisées. Le Forwarder Datadog et la couche Lambda sont également nécessaires pour afficher les traces distribuées à partir de vos fonctions dans Datadog.
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{< tab "Framework Serverless" >}}
 
 Si vous avez suivi la procédure, le Forwarder Datadog et la couche Lambda sont déjà activés. Avec le framework Serverless, les traces sont automatiquement transmises à Datadog sans instrumentation de code supplémentaire.
 
-{{% /tab %}}
-{{% tab "Instrumentation de code" %}}
+{{< /tab >}}
+{{< tab "Instrumentation de code" >}}
 
 Si vous avez suivi la procédure, le Forwarder Datadog est activé et la couche Lambda a été installée sur votre fonction. Suivez les étapes ci-dessous pour configurer l'APM en Python :
 
@@ -240,8 +240,8 @@ Pour instrumenter vos bibliothèques Python et personnaliser vos traces, consult
 
 [1]: https://docs.datadoghq.com/fr/tracing/setup/python/
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Analyse des causes d’origine à l'aide de traces, de métriques et de logs
 
@@ -278,7 +278,7 @@ Dans la première section, vous avez configuré la couche Lambda Datadog pour ac
 Si vous avez suivi la procédure, la couche Lambda Datadog est déjà activée. Les métriques custom envoyées à partir de la couche Lambda Datadog sont automatiquement créées sous la forme de distributions, vous permettant ainsi de représenter graphiquement les valeurs avg, sum, max, min et count par défaut. Vous pouvez également activer vos propres centiles dans la page Distribution Metrics.
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{< tab "Framework Serverless" >}}
 
 Pour ingérer une métrique custom à partir de votre fonction :
 
@@ -296,8 +296,8 @@ def lambda_handler(event, context):
         )
 ```
 
-{{% /tab %}}
-{{% tab "Console AWS" %}}
+{{< /tab >}}
+{{< tab "Console AWS" >}}
 
 Pour ingérer une métrique custom à partir de votre fonction : 
 
@@ -318,8 +318,8 @@ def lambda_handler(event, context):
     )
 ```
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 La création d'un monitor pour une métrique vous permet d'être informé des problèmes clés de vos applications sans serveur. Vous pouvez alors déterminer la cause d'origine, comme illustré plus haut dans ce guide, en combinant les métriques, les traces et les logs pour l'ensemble de vos fonctions Lambda, data stores et files d'attente de messages.
 

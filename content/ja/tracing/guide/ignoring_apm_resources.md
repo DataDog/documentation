@@ -94,15 +94,15 @@ ignore resource オプションを正しく使用するためには、記述さ�
 デプロイ方法に応じて、構文は少しずつ異なります。
 
 {{< tabs >}}
-{{% tab "datadog.yaml" %}}
+{{< tab "datadog.yaml" >}}
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Docker compose" %}}
+{{< /tab >}}
+{{< tab "Docker compose" >}}
 
 Datadog Agent コンテナの環境変数のリストに、以下の例のようなパターンで `DD_APM_IGNORE_RESOURCES` を追加します。Docker Compose には、独自の[変数の置換][1]機能があり、`{TX-PL-LABEL}#x60; などの特殊文字を使用する場合に考慮する必要があります。 
 
@@ -113,8 +113,8 @@ Datadog Agent コンテナの環境変数のリストに、以下の例のよう
 {{< /code-block >}}
 
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
-{{% /tab %}}
-{{% tab "Docker run" %}}
+{{< /tab >}}
+{{< tab "Docker run" >}}
 
 Datadog Agent をスピンアップするための docker run コマンドに、`DD_APM_IGNORE_RESOURCES` を追加します。
 
@@ -132,8 +132,8 @@ docker run -d --name datadog-agent \
               gcr.io/datadoghq/agent:latest
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Kubernetes daemonset" %}}
+{{< /tab >}}
+{{< tab "Kubernetes daemonset" >}}
 
 trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を追加します。
 
@@ -176,8 +176,8 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
+{{< /tab >}}
+{{< tab "Kubernetes Helm" >}}
 
 `values.yaml` ファイルの `traceAgent` セクションで、`env` セクションに `DD_APM_IGNORE_RESOURCES` を追加し、[通常通りに Helm をスピンアップ][1]します。
 
@@ -201,8 +201,8 @@ helm install dd-agent -f values.yaml \
 {{< /code-block >}}
 
 [1]: /ja/agent/kubernetes/?tab=helm#installation
-{{% /tab %}}
-{{% tab "AWS ECS タスク定義" %}}
+{{< /tab >}}
+{{< tab "AWS ECS タスク定義" >}}
 
 AWS ECS を使用している場合 (EC2など) は、Datadog Agent のコンテナ定義で、環境変数 `DD_APM_IGNORE_RESOURCES` および JSON が以下のように評価されるような値を追加します。
 
@@ -216,7 +216,7 @@ AWS ECS を使用している場合 (EC2など) は、Datadog Agent のコンテ
      ]
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 <div class="alert alert-warning"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>

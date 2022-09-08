@@ -38,7 +38,7 @@ further_reading:
 ### 詳細
 
 {{< tabs >}}
-{{% tab "Span tags" %}}
+{{< tab "Span tags" >}}
 
 フレームグラフのスパンをクリックして、グラフの下にメタデータを表示します。エラーが出る場合、スタックトレースが提供されます。
 
@@ -58,15 +58,15 @@ further_reading:
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="フォーマットエラー"  >}}
 
 [1]: /ja/tracing/visualization/#trace
-{{% /tab %}}
-{{% tab "Host Info" %}}
+{{< /tab >}}
+{{< tab "Host Info" >}}
 
 トレース時間にまつわるホストタグやグラフなど、トレースに関連するホスト情報を表示します。
 
 {{< img src="tracing/visualization/trace/trace_host_info.png" alt="トレースホスト情報" style="width:90%;">}}
 
-{{% /tab %}}
-{{% tab "Logs" %}}
+{{< /tab >}}
+{{< tab "Logs" >}}
 
 トレース時にサービスに関連するログを参照します。ログにカーソルを合わせると、そのタイムスタンプを示すラインがトレースフレームグラフに表示されます。ログをクリックすると、[ログエクスプローラー検索][1]が表示されます。
 
@@ -74,8 +74,8 @@ further_reading:
 
 
 [1]: /ja/logs/explorer/search/
-{{% /tab %}}
-{{% tab "Processes" %}}
+{{< /tab >}}
+{{< tab "Processes" >}}
 
 サービスのスパンをクリックすると、基礎インフラストラクチャーで実行中のプロセスを確認できます。サービスのスパンプロセスは、リクエスト時にサービスが実行されているホストまたはポッドと相関関係にあります。CPU および RSS メモリなどのプロセスメトリクスをコードレベルのエラーとともに分析することで、アプリケーション特有の問題かインフラストラクチャーの問題かを見分けることができます。プロセスをクリックすると、[ライブプロセス ページ][1]が開きます。スパン固有のプロセスを表示するには、[プロセスの収集][2]を有効にします。現在、関連するプロセスはサーバーレスおよびブラウザのトレースでサポートされていません。
 
@@ -83,9 +83,9 @@ further_reading:
 
 [1]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows
 [2]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows#installation
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "ネットワーク" %}}
+{{< tab "ネットワーク" >}}
 
 サービスのスパンをクリックして、リクエストを行っているサービスネットワークの依存関係を確認します。特に、コードエラーが生成されない場合には、ボリューム、エラー (TCP 再送)、ネットワークレイテンシー (TCP ラウンドトリップ時間) などの主要なネットワークパフォーマンスのメトリクスを使用して、アプリケーション固有の問題とネットワーク広域の問題の切り分けを行います。たとえば、ネットワークのテレメトリーを使用して、リクエストのレイテンシーが高い理由 (関連するアプリケーションのトラフィックがオーバーロードした、下流のポッドやセキュリティグループ、その他のタグ付けされたエンドポイントの依存関係に問題があったなど）を特定することができます。プロセスをクリックすると[ネットワークの概要][1]が開きます。スパン固有のプロセスを閲覧するには、[ネットワークパフォーマンスモニタリング][2]を有効にしてください。
 
@@ -95,7 +95,7 @@ further_reading:
 
 [1]: /ja/network_monitoring/performance/network_page
 [2]: /ja/network_monitoring/performance/setup
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

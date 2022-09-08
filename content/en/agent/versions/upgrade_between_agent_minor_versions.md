@@ -9,7 +9,7 @@ aliases:
 ## Upgrade between minor versions of Agent 6 and 7
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 The recommended way to upgrade between minor versions of Agent 6 and 7 is to use the `install_script.sh` script. The following commands work on all supported Linux distributions.
 
@@ -29,8 +29,8 @@ Upgrading to the latest Agent 7 minor version:
 
 : `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script.sh)"`
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Download and install the specific version's installation package.
 
@@ -42,8 +42,8 @@ URL to download a specific Agent 7 minor version
 
 : `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
 
-{{% /tab %}}
-{{% tab "MacOS" %}}
+{{< /tab >}}
+{{< tab "MacOS" >}}
 
 **Note**: It is not possible to upgrade to a specific minor version.
 
@@ -55,5 +55,5 @@ Command to upgrade to the latest Agent 7 minor version:
 
 : `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}

@@ -15,7 +15,7 @@ further_reading:
 Les intégrations développées par la communauté pour l'Agent Datadog sont stockées dans le référentiel GitHub [Integrations-extra][1]. Elles ne sont pas ajoutées au paquet ni intégrées à l'Agent Datadog, mais elles peuvent être installées comme extensions en suivant ces instructions :
 
 {{< tabs >}}
-{{% tab "Agent > v6.8" %}}
+{{< tab "Agent > v6.8" >}}
 
 Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 
@@ -32,8 +32,8 @@ Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /fr/getting_started/integrations/
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Le meilleur moyen d'utiliser une intégration provenant du référentiel integrations-extra avec l'Agent Docker est de générer une image de l'Agent avec cette intégration installée. Utilisez le Dockerfile suivant pour créer une version mise à jour de l'Agent comprenant l'intégration `<NOM_INTÉGRATION>` issue de integrations-extras.
 
@@ -47,8 +47,8 @@ La commande `agent integration install` exécutée au sein de Docker génère l'
 Utilisez ensuite la nouvelle image de l'Agent conjointement avec [Autodiscovery][1] pour activer le check `<NOM_INTÉGRATION>`.
 
 [1]: /fr/agent/autodiscovery/
-{{% /tab %}}
-{{% tab "Agent < v6.8" %}}
+{{< /tab >}}
+{{< tab "Agent < v6.8" >}}
 
 Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 
@@ -67,7 +67,7 @@ Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 [3]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /fr/getting_started/integrations/
 [5]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

@@ -17,7 +17,7 @@ If you have Agent v5 already installed, a script is available to automatically i
 ## One-step upgrade
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 
@@ -26,13 +26,13 @@ The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ub
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box.
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 There is no one step install for Windows platforms, refer to the [Manual Upgrade](#manual-upgrade).
 
-{{% /tab %}}
-{{% tab "MacOS" %}}
+{{< /tab >}}
+{{< tab "MacOS" >}}
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 
@@ -42,13 +42,13 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Manual upgrade
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Find below the manual upgrade instructions for:
 
@@ -376,8 +376,8 @@ Find below the manual upgrade instructions for:
   ```
 
 [1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Download the [latest version available][1] and run the installation package.
 
@@ -393,8 +393,8 @@ With:
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
-{{% /tab %}}
-{{% tab "MacOS" %}}
+{{< /tab >}}
+{{< tab "MacOS" >}}
 
 1. Download the DMG package of the latest Agent version. Use the latest macOS release listed on the [release page][9] of the repository.
 2. Install the DMG package.
@@ -406,5 +406,5 @@ Then start the Datadog Agent application (once started, you should see it in the
 
 https://github.com/DataDog/datadog-agent/releases
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}

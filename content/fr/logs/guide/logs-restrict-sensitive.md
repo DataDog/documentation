@@ -120,7 +120,7 @@ Cette section explique comment créer deux rôles, `ACME Admin` et `ACME User`, 
 ### Créer un rôle
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Depuis la [section Team][1] de Datadog, utilisez le bouton Add Role dans l'onglet Role pour créer les rôles `ACME Admin` et `ACME User`.
 
@@ -139,8 +139,8 @@ Vous trouverez de plus amples informations sur la création de rôles dans la se
 [1]: https://app.datadoghq.com/access/roles
 [2]: /fr/account_management/rbac/permissions?tab=ui#legacy-permissions
 [3]: /fr/account_management/rbac/?tab=datadogapplication#create-a-custom-role
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Répétez les étapes suivantes pour les rôles `ACME Admin` et `ACME User` :
 
@@ -198,7 +198,7 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ID_RÔLE>/permissions" -
 [2]: /fr/api/v2/roles/#list-roles
 [3]: /fr/api/v2/roles/#grant-permission-to-a-role
 [4]: /fr/api/v2/roles/#revoke-permission
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -207,7 +207,7 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ID_RÔLE>/permissions" -
 Maintenant que vos rôles sont configurés avec leurs autorisations, attribuez-les à vos utilisateurs.
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Depuis la [section Team][1] de Datadog, accédez à l'onglet User. Choisissez un utilisateur et attribuez-lui le rôle `ACME Admin` ou `ACME User`, en plus des rôles qui lui sont peut-être déjà attribués. Vous trouverez de plus amples informations sur la gestion des utilisateurs dans la section [Gestion de compte][2].
 
@@ -217,8 +217,8 @@ Depuis la [section Team][1] de Datadog, accédez à l'onglet User. Choisissez un
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /fr/account_management/users/
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 À l'aide de l'[API List Users][1], récupérez l'ID de l'utilisateur auquel vous souhaitez attribuer le rôle `ACME Admin` ou `ACME User`. Puisque cette API est paginée, vous devrez peut-être filtrer les résultats, en utilisant, par exemple, le nom de l'utilisateur comme paramètre de requête. Dans l'exemple suivant, l'ID de l'utilisateur est `1581e993-eba0-11e9-a77a-7b9b056a262c`.
 
@@ -258,7 +258,7 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ID_RÔLE>/users" -H "Con
 
 [1]: /fr/api/v2/users/#list-all-users
 [2]: /fr/api/v2/roles/#add-a-user-to-a-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -277,7 +277,7 @@ Cette section explique comment :
 
 
 {{< tabs >}}
-{{% tab "Interface utilisateur" %}}
+{{< tab "Interface utilisateur" >}}
 
 Utilisez la [page Data Access][1] dans l'application Datadog pour :
 
@@ -289,8 +289,8 @@ Utilisez la [page Data Access][1] dans l'application Datadog pour :
 Référez-vous à la [section sur l'autorisation `logs_read_data`][1] pour en savoir plus.
 
 [1]: /fr/account_management/rbac/permissions?tab=ui#logs_read_data
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 Utilisez l'[API Create Restriction Query][1] pour créer une requête de restriction. Notez l'ID de la requête de restriction (`76b2c0e6-98fa-11ea-93e6-775bd9258d59` dans l'exemple suivant).
 
@@ -337,7 +337,7 @@ Si vous le souhaitez, vérifiez que la configuration est correcte :
 [3]: /fr/api/v2/roles/#grant-permission-to-a-role
 [4]: /fr/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
 [5]: /fr/api/v2/logs-restriction-queries/#get-restriction-query-for-a-given-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

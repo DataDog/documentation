@@ -86,7 +86,7 @@ Solr チェックは [Datadog Agent][2] パッケージに含まれています�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -200,8 +200,8 @@ mydomain:attr0=val0,attr1=val1
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -249,7 +249,7 @@ Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7
 [5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/ja/agent/docker/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

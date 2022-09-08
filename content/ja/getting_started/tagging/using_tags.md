@@ -34,7 +34,7 @@ title: タグの使用方法
 ## ダッシュボード  
 
 {{< tabs >}}
-{{% tab "Assignment" %}}
+{{< tab "Assignment" >}}
 
 タグを使用し、メトリクスを絞り込んで[ダッシュボード グラフ][1]に表示するか、表示するメトリクスのグループを作成します。表示するメトリクスを絞り込むには、**from** テキストボックスにタグを入力します。こうすることで、選択したメトリクスに、この特定のタグ (この例では `service:coffee-house`) が割り当てられたすべてのソースが表示されます。
 
@@ -72,8 +72,8 @@ title: タグの使用方法
 [1]: /ja/dashboards/
 [2]: /ja/events/
 [3]: /ja/dashboards/template_variables/
-{{% /tab %}}
-{{% tab "Examples" %}}
+{{< /tab >}}
+{{< tab "Examples" >}}
 
 以下は、時系列チャートエディターを使用したタグの例です。最初のスクリーンショットでは、タグは適用されていません。すべてのホストでの平均 CPU 使用率が表示されます。
 
@@ -89,7 +89,7 @@ title: タグの使用方法
 
 必要に応じて、タグを追加して範囲をさらに絞り込みます。たとえば、`region:eastus` や `env:production` のホストなどです。タグは Datadog 全体で使用でき、すべてのコア要素 (メトリクス、トレース、ログ) に適用されます。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## インフラストラクチャー
@@ -97,7 +97,7 @@ title: タグの使用方法
 [ホストマップ][4]、[インフラストラクチャーリスト][5]、[コンテナ][6]、[処理][7]を絞り込むには、ページ上部にある **Filter by** テキストボックスにタグを入力します。ホストとコンテナは **Group by** テキストボックスを使い、タグキーでグループ化できます。グループボックスに `service` と入力すると、各サービスがグループの見出しとして表示されます。
 
 {{< tabs >}}
-{{% tab "Host Map" %}}
+{{< tab "Host Map" >}}
 
 このセクションでは、タグを使用してホストを絞り込みまたはグループ化します。
 
@@ -106,34 +106,34 @@ title: タグの使用方法
 または、コンテナを絞り込みまたはグループ化することもできます。
 
 {{< img src="tagging/using_tags/containermaptags.png" alt="コンテナマップタグ" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Infrastructure List" %}}
+{{< tab "Infrastructure List" >}}
 
 以下は、インフラストラクチャーリストページのテキストボックスによる絞り込みまたはグループ化です。
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="インフラストラクチャーリストにあるタグ" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Containers" %}}
+{{< tab "Containers" >}}
 
 以下は、ライブコンテナページのテキストボックスによる絞り込みまたはグループ化です。
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="ライブコンテナタグ" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Processes" %}}
+{{< tab "Processes" >}}
 
 以下は、ライブプロセスページのテキストボックスによる絞り込みまたはグループ化です。
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="ライブプロセスタグ" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## アラート設定
 
 {{< tabs >}}
-{{% tab "Manage Monitors" %}}
+{{< tab "Manage Monitors" >}}
 
 [割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
 
@@ -142,9 +142,9 @@ title: タグの使用方法
 モニタータグは、メトリクスタグとは異なる別のものです。
 
 [1]: /ja/getting_started/tagging/assigning_tags/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "New Monitor" %}}
+{{< tab "New Monitor" >}}
 
 [モニター][1]を作成する場合は、以下の場所でメトリクス タグを使用します。
 
@@ -155,15 +155,15 @@ title: タグの使用方法
 * モニターを各タグ値で複数警告モニターに変換する **avg by** テキストボックス。
 
 [1]: /ja/monitors/create/#monitor-types
-{{% /tab %}}
-{{% tab "Manage Downtime" %}}
+{{< /tab >}}
+{{< tab "Manage Downtime" >}}
 
 モニター タグ別に[ダウンタイム][1]を絞り込むには、検索バーに `service:coffee-house` などのタグ名を入力します。
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理タグ" style="width:80%;">}}
 
 [1]: /ja/monitors/notify/downtimes/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## メトリクス
@@ -177,7 +177,7 @@ title: タグの使用方法
 一部のインテグレーションでは、オプションでタグを使用してメトリクスを制限できます。
 
 {{< tabs >}}
-{{% tab "AWS" %}}
+{{< tab "AWS" >}}
 
 The [AWS インテグレーションタイル][1] には、`to hosts with tag` と `to Lambdas with tag` という 2 つのタグフィルターがあります。
 
@@ -200,8 +200,8 @@ AWS のタグ付けに関する詳細は、[EC2][2] および [Lambda][3] ドキ
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
-{{% /tab %}}
-{{% tab "Azure" %}}
+{{< /tab >}}
+{{< tab "Azure" >}}
 
 [Azure インテグレーションタイル][1] には、`Optionally filter to VMs with tag` というタグフィルターがあります。
 
@@ -214,8 +214,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{% /tab %}}
-{{% tab "Google Cloud" %}}
+{{< /tab >}}
+{{< tab "Google Cloud" >}}
 
 [Google Cloud インテグレーションタイル][1] には、タグフィルター `to hosts with tag` があります。
 
@@ -231,13 +231,13 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{< tab "Analytics" >}}
 
 [トレース検索][1]では、検索バーまたはファセットのチェックボックスを使用して、タグでトレースを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[トレース検索][2]のページを参照してください。
 
@@ -245,8 +245,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [1]: /ja/tracing/app_analytics/search/
 [2]: /ja/tracing/app_analytics/search/#search-bar
-{{% /tab %}}
-{{% tab "Service Map" %}}
+{{< /tab >}}
+{{< tab "Service Map" >}}
 
 [タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域に移動できます。以下の例では、タグ `service:coffee-house` で絞り込んで、[分析][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
 
@@ -257,7 +257,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 [3]: /ja/monitors/manage/
 [4]: /ja/logs/explorer/search/
 [5]: /ja/infrastructure/hostmap/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -276,26 +276,26 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ログ[検索][10]、[分析][11]、[パターン][12]、[Live Tail][13]は、検索バーまたはファセットのチェックボックスを使用して、タグでログを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[ログ検索][10]を参照してください。
 
 {{< tabs >}}
-{{% tab "Search" %}}
+{{< tab "Search" >}}
 
 {{< img src="tagging/using_tags/logsearchtags.png" alt="ログ検索タグ" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Analytics" %}}
+{{< /tab >}}
+{{< tab "Analytics" >}}
 
 {{< img src="tagging/using_tags/loganalyticstags.png" alt="ログ分析タグ" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Patterns" %}}
+{{< /tab >}}
+{{< tab "Patterns" >}}
 
 {{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns タグ" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Live Tail" %}}
+{{< /tab >}}
+{{< tab "Live Tail" >}}
 
 {{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail タグ" video="true" width="80%">}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 さらに、タグを使用してログ [パイプライン][14]を絞り込みます。以下の例では、パイプラインはタグ `service:coffee-house` でログを絞り込みます。
@@ -313,7 +313,7 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 ## Synthetics
 
 {{< tabs >}}
-{{% tab "Synthetic テスト" %}}
+{{< tab "Synthetic テスト" >}}
 
 [Synthetic Tests][1] ページでは、Synthetic テストの一覧が表示されます。
 
@@ -324,8 +324,8 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /ja/synthetics/search/
-{{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{< /tab >}}
+{{< tab "CI Results Explorer" >}}
 
 [CI Results Explorer][1] は、[CI パイプライン][2]で実行されているブラウザテスト結果を表示します。
 
@@ -337,13 +337,13 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 [1]: https://app.datadoghq.com/synthetics/explorer/ci
 [2]: /ja/synthetics/cicd_integrations
 [3]: /ja/synthetics/search/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## サービスレベル目標
 
 {{< tabs >}}
-{{% tab "Manage SLOs" %}}
+{{< tab "Manage SLOs" >}}
 
 [割り当てられたタグ][1]によって SLO を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は、`<KEY>:<VALUE>`です (例: `journey:add_item`)。特定のタグを持つ SLO を検索から除外するには、`-` を使用します (例: `-journey:add_item`)。
 
@@ -352,9 +352,9 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 SLO タグは、SLO の基礎となるメトリクスまたはモニターで使用されるメトリクスまたはモニタータグとは異なる別のものです。
 
 [1]: /ja/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Metric-based SLOs" %}}
+{{< tab "Metric-based SLOs" >}}
 
 [メトリクスベースの SLO][1] を作成する場合、SLO の成功率メトリクスクエリでメトリクスタグを使用します（すべてのメトリクスは同じセットのメトリクスタグを使用する必要があります）。
 
@@ -364,8 +364,8 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="メトリクスベースの SLO タグ" style="width:80%;">}}
 
 [1]: /ja/monitors/service_level_objectives/metric/
-{{% /tab %}}
-{{% tab "Monitor-based SLOs" %}}
+{{< /tab >}}
+{{< tab "Monitor-based SLOs" >}}
 
 単一の[グループ化されたモニター][2]を使用して[モニターベースの SLO][1] を作成する場合、**選択されたグループで計算** トグルを使用して、基底のモニターから最大 20 個のタグ値を選択し、SLO 全体および各タグ値のステータス割合および残りのエラーバジェットを表示します。
 
@@ -373,7 +373,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 [1]: /ja/monitors/service_level_objectives/monitor/
 [2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 開発者

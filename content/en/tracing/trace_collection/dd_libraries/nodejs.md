@@ -35,7 +35,7 @@ The latest Node.js Tracer supports versions `>=14`. For a full list of Datadogâ€
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quick start instructions][5] in Datadog for the best experience, including:
+Follow the [Quick start instructions][2] in Datadog for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -46,7 +46,7 @@ Follow the [Quick start instructions][5] in Datadog for the best experience, inc
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
-{{% tab "Containers" %}}
+{{< tab "Containers" >}}
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
@@ -74,15 +74,15 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 {{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
+{{< /tab >}}
+{{< tab "AWS Lambda" >}}
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 
 
 [1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
+{{< /tab >}}
+{{< tab "Other Environments" >}}
 
 Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
@@ -94,7 +94,7 @@ For other environments, see the [Integrations][5] documentation for that environ
 [4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -174,7 +174,6 @@ If needed, configure the tracing library to send application performance telemet
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: /getting_started/tagging/unified_service_tagging/
+[2]: https://app.datadoghq.com/apm/docs
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
-[5]: https://app.datadoghq.com/apm/docs

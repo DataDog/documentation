@@ -114,7 +114,7 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 #### Open Incidents 위젯 만들기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 1. 화면 상단 왼쪽의 **+** 버튼을 누르세요.
 2. "Datadog" 위젯을 찾으세요.
@@ -122,8 +122,8 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 4. 화면에서 원하는 위치로 위젯을 드래그하세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 1. 홈 화면을 길게 누르세요.
 2. 홈 화면 편집기의 **Widgets** 버튼을 누르세요. 앱 바로가기가 있는 경우, 버블 상단 오른쪽에 아이콘으로만 표시되기도 합니다.
@@ -131,13 +131,13 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 4. 취향에 맞추어 위젯 크기를 조정하세요.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Open Incidents 위젯 수정하기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 1. 설정할 위젯을 길게 누르세요.
 2. **Edit Widget**을 누르세요.
@@ -149,8 +149,8 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 7. 위젯 바깥을 눌러 선택 사항을 저장한 다음 설정 화면을 종료하세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 1. 설정할 위젯 타이틀을 누르세요.
 2. **Organzation**을 눌러 선택한 조직에서 오픈 인시던트를 가져오세요.
@@ -162,7 +162,7 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 8. 위젯을 길게 누르고, 선호 사항에 맞추어 크기를 조절하세요.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### 여러 조직의 Open Incidents 표시하기
@@ -170,13 +170,13 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 여러 조직의 오픈 인시던트를 모바일 홈 화면에 표시할 수 있습니다.
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 - Organization 라벨 옆에 있는 **Choose**를 눌러 선택한 조직에서 오픈 인시던트를 가져오세요.
 
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 1. 설정할 위젯 타이틀을 누르세요.
 2. 설정 화면에서 **Organization**을 누르세요.
@@ -185,24 +185,24 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 5. **Save** 또는 **Apply**를 누르세요. 
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Open Incidents 위젯 삭제하기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 홈 화면 편집 시 위젯 상단 왼쪽의 **-** 버튼을 눌러 위젯을 삭제하세요. 또는, 위젯을 길게 누른 다음 **Remove Widget**을 선택해도 위젯이 삭제됩니다.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 위젯을 오래 누르고 드래그한 다음 **Remove** 버튼에 드롭해 위젯을 삭제하세요.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### SLO 위젯
@@ -227,7 +227,7 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 #### SLO 위젯 만들기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - 홈 화면을 길게 누르세요.
 - 화면 상단 왼쪽의 “+” 버튼을 누르세요.
@@ -236,8 +236,8 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 화면에서 원하는 위치로 위젯을 드래그하세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - 홈 화면을 길게 누르세요.
 - 홈 화면 편집기의 "Widgets" 버튼을 누르세요. 앱 바로가기가 있는 경우, 버블 상단 오른쪽에 아이콘으로만 표시되기도 합니다.
@@ -245,13 +245,13 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 원하는 크기에 맞추어 위젯 크기를 조절하세요. 항상 하나의 SLO가 표시됩니다. 모바일 홈 화면 너비에 맞게 위젯 크기를 변경하면 선택한 SLO가 건전성 타임프레임과 함께 표시됩니다.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### SLO 위젯 수정하기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - 설정할 위젯을 길게 누르세요.
 - "Edit Widget"을 누르세요.
@@ -261,8 +261,8 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 위젯 바깥을 눌러 선택 사항을 확정한 다음 설정 화면을 종료하세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - 설정할 위젯 타이틀을 누르세요.
 - "Selected SLO"를 눌러 추적할 SLO를 선택하세요.
@@ -272,7 +272,7 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 위젯을 길게 누르고, 취향에 맞추어 크기를 조절하세요.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### 여러 조직의 SLO 표시하기
@@ -280,13 +280,13 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 여러 조직의 SLO를 모바일 홈 화면에 표시할 수 있습니다.
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 로그인한 모든 조직이 설정 화면에 표시됩니다. 원하는 조직을 찾을 수 없다면 다시 로그인해주세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - 설정할 위젯 타이틀을 누르세요.
 - 설정 화면에서 "Organization"을 누르세요.
@@ -295,24 +295,24 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - "Save" 또는 "Apply"를 누르세요. 
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### SLO 위젯 삭제하기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 홈 화면 편집 시 위젯 상단 왼쪽의 "-" 버튼을 눌러 위젯을 삭제하세요. 또는, 위젯을 길게 누른 다음 "Remove Widget"을 선택해도 위젯이 삭제됩니다.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 위젯을 오래 누르고 드래그한 다음 "Remove" 버튼에 드롭해 위젯을 삭제하세요.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Monitors 위젯
@@ -326,7 +326,7 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 #### Monitors 위젯 만들기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - 홈 화면을 길게 누르세요.
 - 화면 상단 왼쪽의 “+” 버튼을 누르세요.
@@ -335,8 +335,8 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 화면에서 원하는 위치로 위젯을 드래그하세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - 홈 화면을 길게 누르세요.
 - 홈 화면 편집기의 "Widgets"을 누르세요. 앱 바로가기가 있는 경우, 버블 상단 오른쪽에 아이콘으로만 표시되기도 합니다.
@@ -344,13 +344,13 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 취향에 맞게 위젯 크기를 변경하세요. 저장된 뷰를 더 표시하려면 모바일 홈 화면의 위젯 길이를 늘립니다.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Monitors 위젯 수정하기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - 설정할 위젯을 길게 누르세요.
 - "Edit Widget"을 누르세요.
@@ -359,8 +359,8 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 위젯 바깥을 눌러 선택 사항을 확정한 다음 설정 화면을 종료하세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - 설정할 위젯 타이틀을 누르세요.
 - "Saved Views"를 누르세요.
@@ -370,7 +370,7 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - 위젯 내부에서 스크롤하면 저장된 뷰를 더 볼 수 있습니다. 위젯을 길게 눌러, 취향에 맞게 크기를 변경하세요.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### 여러 조직의 Monitors 표시하기
@@ -378,13 +378,13 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 여러 조직의 Monitors를 모바일 홈 화면에 표시할 수 있습니다.
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 로그인한 모든 조직이 설정 화면에 표시됩니다. 소속 조직을 찾을 수 없다면 다시 로그인해주세요.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - 설정할 위젯 타이틀을 누르세요.
 - 설정 화면에서 "Organization"을 누르세요.
@@ -393,24 +393,24 @@ Incidents(인시던트) 페이지에서는 Datadog 모바일 앱으로 Datadog �
 - "Save" 또는 "Apply"를 누르세요. 
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Monitors 위젯 삭제하기
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 홈 화면 편집 시 위젯 상단 왼쪽의 "-" 버튼을 눌러 위젯을 삭제하세요. 또는, 위젯을 길게 누른 다음 "Remove Widget"을 선택해도 위젯이 삭제됩니다.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 위젯을 오래 누르고 드래그한 다음 "Remove" 버튼에 드롭해 위젯을 삭제하세요.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 빠른 작업

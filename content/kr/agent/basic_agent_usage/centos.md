@@ -29,7 +29,7 @@ title: CentOS Agent의 기본 사용법
 Agent v6과 v7에서 운영 체제에서 지원하는 서비스 관리자가 Agent의 작동 라이프사이클을 주관합니다. 한편, 다른 명령어는 Agent 바이너리를 통해 바로 실행해야 합니다. Agent v5에서는 거의 모든 작업을 서비스 관리자에서 수행했습니다.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 ### CentOS 7 이상
 
@@ -57,8 +57,8 @@ Agent v6과 v7에서 운영 체제에서 지원하는 서비스 관리자가 Age
 | 명령어 사용법 표시              | `sudo datadog-agent --help`                            |
 | 점검 실행                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | 설명                        | 명령어                                           |
 |------------------------------------|---------------------------------------------------|
@@ -78,14 +78,14 @@ Agent v6과 v7에서 운영 체제에서 지원하는 서비스 관리자가 Age
 
 [서비스 라이프사이클 명령어에 대해 더 자세히 알아보세요][2].
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
 ## 설정
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 Agent 설정 파일과 폴더 위치는 다음과 같습니다.
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -95,8 +95,8 @@ Agent 설정 파일과 폴더 위치는 다음과 같습니다.
 * `/etc/datadog-agent/conf.d/`
 
 [1]: /kr/integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Agent 설정 파일과 폴더 위치는 다음과 같습니다.
 
@@ -107,7 +107,7 @@ Agent 설정 파일과 폴더 위치는 다음과 같습니다.
 * `/etc/dd-agent/conf.d/`
 
 [1]: /kr/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 트러블슈팅

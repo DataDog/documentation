@@ -146,7 +146,7 @@ Datadog の Amazon Web Services インテグレーションは、<a href="https:
    * **アクセスキー (GovCloud または中国のみ)**  
      アクセスキーによる AWS インテグレーションを設定する場合は、[手動設定ガイド][75]を参照してください。
 
-{{% aws-permissions %}}
+{{< aws-permissions >}}
 
 ## ログの収集
 

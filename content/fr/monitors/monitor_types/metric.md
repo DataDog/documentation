@@ -24,14 +24,14 @@ Pour créer un [monitor de métrique][1] dans Datadog, utilisez la navigation pr
 ### Choisir la méthode de détection
 
 {{< tabs >}}
-{{% tab "Seuil" %}}
+{{< tab "Seuil" >}}
 
 Une alerte de seuil compare les valeurs de la métrique à un seuil fixe.
 
 À chaque évaluation de l'alerte, Datadog calcule la moyenne, le minimum, le maximum et la somme sur l'intervalle sélectionné et vérifie si la valeur est supérieure ou inférieure au seuil. Ce type d'alerte est utilisé dans les cas standards, lorsque vous connaissez les valeurs attendues.
 
-{{% /tab %}}
-{{% tab "Changement" %}}
+{{< /tab >}}
+{{< tab "Changement" >}}
 
 Une alerte de changement compare l'écart absolu (%) entre les valeurs actuelles et les valeurs mesurées `N` minutes plus tôt par rapport à un seuil donné. Les points de données comparés ne sont pas des points uniques : ils sont calculés en fonction des *conditions d'alerte* définies.
 
@@ -39,8 +39,8 @@ Une alerte de changement compare l'écart absolu (%) entre les valeurs actuelles
 
 Ce type d'alerte est idéal pour être informé des pics, des chutes ou des évolutions progressives d'une métrique lorsque vous ne connaissez pas le seuil de valeurs inattendues.
 
-{{% /tab %}}
-{{% tab "Anomalie" %}}
+{{< /tab >}}
+{{< tab "Anomalie" >}}
 
 Une alerte d'anomalie analyse le comportement passé d'une métrique pour détecter les comportements anormaux.
 
@@ -51,8 +51,8 @@ Les alertes d'anomalie calculent la plage de valeurs attendues pour une série e
 Pour en savoir plus, consultez la page [Monitor d'anomalies][1].
 
 [1]: /fr/monitors/monitor_types/anomaly/
-{{% /tab %}}
-{{% tab "Singularités" %}}
+{{< /tab >}}
+{{< tab "Singularités" >}}
 
 Les monitors de singularité envoient une alerte lorsqu'un membre d'un groupe (hosts, zones de disponibilité, partitions, etc.) affiche un comportement anormal par rapport aux autres membres.
 
@@ -61,8 +61,8 @@ Les monitors de singularité envoient une alerte lorsqu'un membre d'un groupe (h
 Pour en savoir plus, consultez la page [Monitor de singularité][1].
 
 [1]: /fr/monitors/monitor_types/outlier/
-{{% /tab %}}
-{{% tab "Prévision" %}}
+{{< /tab >}}
+{{< tab "Prévision" >}}
 
 Une alerte de prévision prédit le comportement futur d'une métrique et le compare à un seuil fixe. Ce type d'alerte est particulièrement utile pour les métriques qui affichent des tendances marquées ou des patterns récurrents.
 
@@ -71,7 +71,7 @@ Une alerte de prévision prédit le comportement futur d'une métrique et le com
 Pour en savoir plus, consultez la page [Monitor de prévisions][1].
 
 [1]: /fr/monitors/monitor_types/forecasts/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Définir la métrique
@@ -103,7 +103,7 @@ Notez que si votre métrique transmet uniquement des données en fonction de `ho
 Les conditions d'alerte varient légèrement en fonction de la méthode de détection choisie.
 
 {{< tabs >}}
-{{% tab "Seuil" %}}
+{{< tab "Seuil" >}}
 
 * Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieure ou égale à, inférieure ou égale à)
 * la valeur seuil `on average`, `at least once`, `at all times` ou `in total` (en moyenne, au moins une fois, en permanence ou au total)
@@ -121,8 +121,8 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 **Remarque** : trois comportements différents peuvent être appliqués lorsque vous utilisez `as_count()`. Consultez [as_count() dans les évaluations de monitors][1] pour en savoir plus.
 
 [1]: /fr/monitors/guide/as-count-in-monitor-evaluations/
-{{% /tab %}}
-{{% tab "Changement" %}}
+{{< /tab >}}
+{{< tab "Changement" >}}
 
 * La valeur `average`, `maximum`, `minimum` ou `in total` (moyenne, maximale, minimale ou totale)
 * du `change` ou `% change` (changement ou changement relatif)
@@ -137,7 +137,7 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 | change        | Le changement exprimé en valeur absolue.                                                                                                                                  |
 | %&nbsp;change | Le changement exprimé en pourcentage par rapport à la valeur précédente. Par exemple, si la valeur actuelle est de 4 et que la valeur précédente est de 2, cela correspond à un changement de 100 %. |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Seuils

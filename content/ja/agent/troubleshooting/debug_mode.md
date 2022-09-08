@@ -17,7 +17,7 @@ further_reading:
 Agent のフルデバッグモードを有効にするには
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 1. ローカル `datadog.yaml` ファイルを変更します。各 OS 固有の詳細については、[Agent の主な構成ファイル][8]をご参照ください。
 
@@ -30,8 +30,8 @@ Agent のフルデバッグモードを有効にするには
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
 [3]: /ja/agent/guide/agent-log-files/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 1. ローカル `datadog.conf` ファイルを変更します。各 OS 固有の詳細については、[Agent の主な構成ファイル][1]をご参照ください。
 
@@ -44,13 +44,13 @@ Agent のフルデバッグモードを有効にするには
 [1]: /ja/agent/guide/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
 [2]: /ja/agent/guide/agent-commands/?tab=agentv5#restart-the-agent
 [3]: /ja/agent/guide/agent-log-files/?tab=agentv5
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## コンテナ化された Agent
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 コンテナ Agent でデバッグモードを有効にする場合は、Agent の起動時に `DD_LOG_LEVEL=debug` を使用してください。
 
@@ -62,8 +62,8 @@ agent config set log_level debug
 
 トレースエージェントが専用コンテナにある場合は、エージェントコンテナでのようにランタイムにトレースエージェントコンテナのログレベルを変更することは **できません**。g `dd_log_level` 変数を `debug` に設定した後に、専用のトレースエージェントコンテナへの再デプロイメントが依然として必要です。
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 <mrk mid="68" mtype="seg">Agent がコンテナ内で実行されている場合、`service datadog-agent restart` (または同様のコマンド) では、Docker によってコンテナが強制終了されるため、Agent を再起動できません。</mrk><mrk mid="69" mtype="seg">コンテナ化 Agent を再起動するには、スーパーバイザーを使用します。</mrk>
 
@@ -89,7 +89,7 @@ sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 
 または、コンテナを再起動します。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Agent のログレベル

@@ -39,7 +39,7 @@ title: モニターの構成
 アラート条件は、[モニタータイプ][1]によって異なります。クエリ値がしきい値を超えた場合、または特定の数の連続したチェックが失敗した場合にトリガーするようにモニターを構成します。
 
 {{< tabs >}}
-{{% tab "しきい値アラート" %}}
+{{< tab "しきい値アラート" >}}
 
 * メトリクスの `average`、`max`、`min`、`sum` が
 * しきい値に対して `above`、`above or equal to`、`below`、`below or equal to` になったらトリガーします
@@ -88,8 +88,8 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 
 [1]: /ja/monitors/guide/as-count-in-monitor-evaluations/
 [2]: /ja/monitors/guide/recovery-thresholds/
-{{% /tab %}}
-{{% tab "チェックアラート" %}}
+{{< /tab >}}
+{{< tab "チェックアラート" >}}
 
 チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。チェックアラートを次のように設定します。
 
@@ -112,7 +112,7 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 [1]: /ja/monitors/create/types/process_check/
 [2]: /ja/monitors/create/types/integration/?tab=checkalert#integration-status
 [3]: /ja/monitors/create/types/custom_check/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 高度なアラート条件
@@ -128,7 +128,7 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 - `On missing data` オプションは、APM Trace Analytics、Audit Log、CI Pipelines、Error Tracking、Events、Logs、および RUM モニターでサポートされています
 
 {{< tabs >}}
-{{% tab "メトリクスベースのモニター" %}}
+{{< tab "メトリクスベースのモニター" >}}
 
 データなしを通知しない場合は `Do not notify` を、データなしが `N` 分以上続いた時に通知する場合は `Notify` を設定します。
 
@@ -144,9 +144,9 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 
 「データなし」を通知しないモニターの場合、グループがデータを報告しないとモニターは評価をスキップし、最終的にグループをドロップします。この期間、結果ページのバーは緑のままです。データがありグループが報告を再開すると、グリーンバーには OK ステータスとバックフィルが表示され、中断がなかったかのように見せます。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "その他のモニタータイプ" %}}
+{{< tab "その他のモニタータイプ" >}}
 
 `N` 分のデータがない場合、ドロップダウンメニューからオプションを選択します。
 
@@ -172,7 +172,7 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 - **Evaluate as zero:** このオプションは `Count` クエリを使用するモニターに使用できます。
 - **Show last known status:** このオプションは `Count` 以外のクエリタイプ、例えば `Gauge`、`Rate`、`Distribution` を使用しているモニターで利用できます。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Auto resolve

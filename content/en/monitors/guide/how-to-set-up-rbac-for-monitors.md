@@ -27,7 +27,7 @@ For more information about default and custom roles, how to create custom roles,
 
 {{< tabs >}}
 
-{{% tab "UI" %}}
+{{< tab "UI" >}}
 
 1. Navigate to the monitor editing page by creating a new monitor or editing an existing one.
 2. At the bottom of the form, specify which roles, in addition to the creator, are allowed to edit the monitor.
@@ -37,9 +37,9 @@ For more information about default and custom roles, how to create custom roles,
 For more information, see [Monitors Permissions][1].
 
 [1]: /monitors/notify/#permissions
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "API" %}}
+{{< tab "API" >}}
 
 Use the [List Roles API endpoint][1] to get the list of roles and their ids.
 
@@ -119,7 +119,7 @@ For more information, see [Roles][5] and [Monitors API Reference][6] .
 [4]: /account_management/rbac/permissions/#monitors
 [5]: /api/latest/roles/
 [6]: /api/latest/monitors/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Migrate monitors from locked to restricted roles

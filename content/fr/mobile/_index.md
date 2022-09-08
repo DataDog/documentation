@@ -92,7 +92,7 @@ Accédez à vos [vues enregistrées de monitors][18] depuis l'écran d'accueil g
 #### Créer un widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - Appuyez longuement sur l'écran d'accueil.
 - Touchez le bouton « + » dans le coin supérieur gauche de l'écran.
@@ -101,20 +101,20 @@ Accédez à vos [vues enregistrées de monitors][18] depuis l'écran d'accueil g
 - Placez le widget à l'emplacement de votre choix.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Ouvrez l'outil de sélection de widgets Android.
 - Appuyez longuement sur l'écran d'accueil ou sur l'icône de l'app Datadog.
 - Touchez Widgets. Si vous avez des raccourcis d'application, cette option peut être remplacée par une simple icône, en haut à droite de la bulle.
 - Faites glisser le widget de vos vues enregistrées de monitors sur votre écran d'accueil.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 #### Modifier un widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - Appuyez longuement sur le widget pour le configurer.
 - Touchez Edit Widget.
@@ -122,8 +122,8 @@ Accédez à vos [vues enregistrées de monitors][18] depuis l'écran d'accueil g
 - Pour modifier l'ordre des vues, faites glisser et déposez chaque cellule.
 - Touchez un emplacement en dehors du widget pour valider votre sélection et quitter l'écran de configuration.
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Touchez le titre d'un widget pour le configurer.
 - Touchez Saved Views.
@@ -132,40 +132,40 @@ Accédez à vos [vues enregistrées de monitors][18] depuis l'écran d'accueil g
 - Touchez Save pour valider votre sélection et quitter l'écran de configuration.
 - Faites défiler le widget pour afficher d'autres vues enregistrées. Appuyez longuement sur le widget pour modifier sa taille selon vos besoins.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 #### Plusieurs organisations
 
 Vous pouvez afficher les vues enregistrées de plusieurs organisations au sein d'un même widget.
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 Toutes les organisations auxquelles vous êtes connecté s'affichent dans l'écran de configuration. Si vous ne trouvez pas une certaine organisation, vous devrez peut-être vous reconnecter.
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Depuis l'écran de configuration, touchez Organization.
 - Sélectionnez une nouvelle organisation (vous devrez peut-être vous connecter).
 - Touchez Saved Views. Sélectionnez les vues enregistrées à afficher, ou ne modifiez pas la disposition.
 - Touchez Save. Le widget est désormais configuré avec les vues enregistrées d'une nouvelle organisation.
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 #### Supprimer un widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 Pour supprimer un widget, appuyez sur le bouton « - » dans le coin supérieur gauche du widget lorsque vous modifiez votre écran d'accueil. Vous pouvez également appuyer longuement sur le widget, puis sélectionner l'option Remove Widget.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 Appuyez longuement sur un widget pour le supprimer. Vous pouvez également le faire glisser et le déposer sur le bouton de suppression.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Actions rapides

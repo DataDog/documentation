@@ -17,7 +17,7 @@ Si l'Agent v5 est déjà installé, un script est disponible pour installer ou 
 ## Upgrade en une étape
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Le programme d'installation de l'Agent v6 peut automatiquement convertir les configurations v5 lors de l'upgrade :
 
@@ -26,13 +26,13 @@ La commande suivante fonctionne sous Amazon Linux, CentOS, Debian, Fedora, Red�
 
 **Remarque** : le processus d'importation n'importe pas automatiquement les checks **custom** de l'Agent. Ce comportement est délibéré : nous ne pouvons par garantir la compatibilité totale et immédiate de ces checks.
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 L'installation en une étape n'est pas disponible pour Windows. Référez-vous à la section [Upgrade manuel](#upgrade-manuel).
 
-{{% /tab %}}
-{{% tab "macOS" %}}
+{{< /tab >}}
+{{< tab "macOS" >}}
 
 Le programme d'installation de l'Agent v6 peut automatiquement convertir les configurations v5 lors de l'upgrade :
 
@@ -42,13 +42,13 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 **Remarque** : le processus d'importation n'importe pas automatiquement les checks **custom** de l'Agent. Ce comportement est délibéré : nous ne pouvons par garantir la compatibilité totale et immédiate de ces checks.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Upgrade manuel
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Vous trouverez ci-dessous les instructions d'installation manuelle pour :
 
@@ -376,8 +376,8 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
   ```
 
 [1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Téléchargez la [dernière version disponible][1] et exécutez le paquet d'installation.
 
@@ -393,8 +393,8 @@ Où :
 **Remarque** : `datadog.conf` est automatiquement converti en `datadog.yaml` lors de l'upgrade.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
-{{% /tab %}}
-{{% tab "macOS" %}}
+{{< /tab >}}
+{{< tab "macOS" >}}
 
 1. Téléchargez le paquet DMG de la version la plus récente de l'Agent. Choisissez la version macOS la plus récente sur la [page Releases][9] du référentiel.
 2. Installez le paquet DMG.
@@ -406,5 +406,5 @@ Démarrez ensuite l'application Agent Datadog (une fois celle-ci démarrée, ell
 
 https://github.com/DataDog/datadog-agent/releases
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}

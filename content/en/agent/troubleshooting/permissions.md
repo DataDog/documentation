@@ -85,7 +85,7 @@ If you enabled the [process check][7] in the Agent running on a Linux OS you may
 This occurs when processes being monitored by the process check runs under a different user than the Agent user: `dd-agent`. In fact, `dd-agent` user doesn't have full access to all files in `/proc`, which is where the Agent looks to collect data for this metric.
 
 {{< tabs >}}
-{{% tab "Agent v6.3+" %}}
+{{< tab "Agent v6.3+" >}}
 
 Enable the `try_sudo` option in the process check configuration and add the appropriate `sudoers` rules:
 
@@ -97,8 +97,8 @@ This allows the process check to use `sudo` to execute the `ls` command but only
 
 If you see this line in the Datadog `error.log` file: `sudo: sorry, you must have a tty to run sudo`, you should `visudo` and comment out the line `Default requiretty`.
 
-{{% /tab %}}
-{{% tab "Agent v6 & v7" %}}
+{{< /tab >}}
+{{< tab "Agent v6 & v7" >}}
 
 If you are running Agent v6 less than v6.3, try updating the Agent and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
@@ -113,8 +113,8 @@ If you are running Agent v6 less than v6.3, try updating the Agent and using the
 [1]: https://github.com/DataDog/datadog-agent
 [2]: /agent/guide/agent-commands/#stop-the-agent
 [3]: /agent/guide/agent-commands/#start-the-agent
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 If you are running Agent v5, try updating to the [latest version of Agent 6][1] and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
@@ -132,7 +132,7 @@ If you are running Agent v5, try updating to the [latest version of Agent 6][1] 
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
 [6]: /agent/guide/agent-commands/?tab=agentv5#start-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 See the following GitHub issues for more information and other potential methods of capturing this metric on Linux machines.

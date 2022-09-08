@@ -33,7 +33,7 @@ Monolog、Zend-Log、Symfony の各ロギングライブラリから選択して
 ### インストール
 
 {{< tabs >}}
-{{% tab "PHP Monolog" %}}
+{{< tab "PHP Monolog" >}}
 
 Composer を使用して Monolog を依存関係として追加します。
 
@@ -56,8 +56,8 @@ composer require "monolog/monolog"
       use Monolog\Formatter\JsonFormatter;
     ```
 
-{{% /tab %}}
-{{% tab "PHP Zend-Log" %}}
+{{< /tab >}}
+{{< tab "PHP Zend-Log" >}}
 
 Zend-log は Zend フレームワークに含まれます。[Composer][1] を使用して Zend-Log を追加します。
 
@@ -80,8 +80,8 @@ composer require "zendframework/zend-log"
 ```
 
 [1]: https://getcomposer.org
-{{% /tab %}}
-{{% tab "PHP Symfony" %}}
+{{< /tab >}}
+{{< tab "PHP Symfony" >}}
 
 Monolog JSON フォーマッタをサービスとして宣言します。
 
@@ -91,13 +91,13 @@ services:
         class: Monolog\Formatter\JsonFormatter
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロガーコンフィギュレーション
 
 {{< tabs >}}
-{{% tab "PHP Monolog" %}}
+{{< tab "PHP Monolog" >}}
 
 次の構成は JSON フォーマッタを有効にし、ログとイベントを `application-json.log` ファイルに書き込みます。Monolog インスタンスの初期化直後に新しいハンドラーを追加するように、コードを編集してください。
 
@@ -130,8 +130,8 @@ services:
 
  
 
-{{% /tab %}}
-{{% tab "PHP Zend-Log" %}}
+{{< /tab >}}
+{{< tab "PHP Zend-Log" >}}
 
 次の構成は JSON フォーマッタを有効にし、ログとイベントを `application-json.log` ファイルに書き込みます。Zend-Log インスタンスの初期化直後に新しいハンドラーを追加するように、コードを編集してください。
 
@@ -157,8 +157,8 @@ services:
 次に、[ログファイルを Datadog にストリーミングします][1]。
 
 [1]: /ja/logs/log_collection/
-{{% /tab %}}
-{{% tab "PHP Symfony" %}}
+{{< /tab >}}
+{{< tab "PHP Symfony" >}}
 
 Monolog 構成でフォーマッタを構成します。以下のフォーマッタフィールドを宣言します。
 
@@ -172,7 +172,7 @@ Monolog 構成でフォーマッタを構成します。以下のフォーマッ
             formatter: monolog.json_formatter
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **ログとトレースの接続**
@@ -201,7 +201,7 @@ logs:
 ## コンテキストをさらに追加する
 
 {{< tabs >}}
-{{% tab "PHP Monolog" %}}
+{{< tab "PHP Monolog" >}}
 
 コンテキストデータをログやイベントに追加すると便利です。Monolog では、これを簡単に行えるよう、スレッドローカルなコンテキストデータを設定すると、すべてのイベントと一緒に自動的に送信されるメソッドが提供されています。いつでもコンテキストデータを含むイベントを記録できます。
 
@@ -232,8 +232,8 @@ Monolog にはプリプロセッサー機能が付属しています。これは
 
       return $record; });```
 
-{{% /tab %}}
-{{% tab "PHP Zend-Log" %}}
+{{< /tab >}}
+{{< tab "PHP Zend-Log" >}}
 
 有益なログ情報は、ログやイベントに追加できるコンテキストデータから得られます。Zend-Log では、これを簡単に行えるよう、スレッドローカルなコンテキストデータを設定すると、すべてのイベントと一緒に自動的に送信されるメソッドが提供されています。コンテキストデータを含むイベントをいつでも記録できます。
 
@@ -263,8 +263,8 @@ Monolog にはプリプロセッサー機能が付属しています。これは
 独自にコードを開発される場合は、[Zend ドキュメントをご参照ください][1]。
 
 [1]: https://docs.zendframework.com/zend-log/processors
-{{% /tab %}}
-{{% tab "PHP Symfony" %}}
+{{< /tab >}}
+{{< tab "PHP Symfony" >}}
 
 セッションプロセッサーを追加してさまざまなコンテキストをログに追加します。
 
@@ -354,7 +354,7 @@ Monolog にはプリプロセッサー機能が付属しています。これは
 3. [生成された JSON ファイルを Datadog にストリーミングします][1]。
 
 [1]: /ja/logs/log_collection/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Monolog フレームワークのインテグレーション

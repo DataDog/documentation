@@ -27,7 +27,7 @@ Assume that in your data, `endpoint:X` is supported by both hosts, but fails onl
 {{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" style="width:80%;">}}
 
 {{< tabs >}}
-{{% tab "Count, Rate"%}}
+{{< tab "Count, Rate">}}
 
 The number of custom metrics from [COUNT][1] and [RATE][2] is calculated with the same logic.
 
@@ -114,8 +114,8 @@ Learn more about [Metrics without Limits™][3].
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=rate#metric-types
 [3]: /metrics/metrics-without-limits
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 The number of unique tag value combinations submitted for a GAUGE metric with this tagging scheme is **four**:
 
 - `host:A`, `endpoint:X`, `status:200`
@@ -189,8 +189,8 @@ You can opt-in to more aggregations should they be valuable for your queries - y
 Learn more about [Metrics without Limits™][1].
 
 [1]: /metrics/metrics-without-limits
-{{% /tab %}}
-{{% tab "Histogram" %}}
+{{< /tab >}}
+{{< tab "Histogram" >}}
 
 **A HISTOGRAM metric generates by default five custom metrics for each unique combination of metric name and tag values** to support the Agent-side aggregations `max`, `median`, `avg`, `95pc`, and `count`. [Learn more about HISTOGRAM metric type][1].
 
@@ -212,8 +212,8 @@ By default, the Agent generates five custom metrics for each of the original fou
 [1]: /metrics/types/?tab=histogram#metric-types
 [2]: /metrics/types/?tab=histogram#definition
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "Distribution" %}}
+{{< /tab >}}
+{{< tab "Distribution" >}}
 
 **A DISTRIBUTION metric generates by default five custom metrics for each unique combination of metric name and tag values** to represent the global statistical distribution of values. These five custom metrics represent server-side aggregations of `count`, `sum`, `min`, `max`, and `avg`. [Learn more about DISTRIBUTION metric type][1].
 
@@ -274,7 +274,7 @@ Learn more about [Metrics without Limits™][2].
 
 [1]: /metrics/types/?tab=distribution#definition
 [2]: /metrics/metrics-without-limits
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Tracking custom metrics

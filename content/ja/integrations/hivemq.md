@@ -79,7 +79,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -126,8 +126,8 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 [2]: https://docs.datadoghq.com/ja/integrations/java
 [3]: https://docs.datadoghq.com/ja/help
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -164,7 +164,7 @@ JMXFetch
 [1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 収集データ

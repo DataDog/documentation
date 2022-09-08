@@ -61,7 +61,7 @@ addError(
 **注**: [エラー追跡][4]機能では、`custom` または `source` に設定されたソースに送信され、スタックトレースを含むエラーが処理します。その他のソース（`console` など）で送信されたエラーは、エラー追跡で処理されません。
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -85,8 +85,8 @@ try {
     datadogRum.addError(error);
 }
 ```
-{{% /tab %}}
-{{% tab "CDN async" %}}
+{{< /tab >}}
+{{< tab "CDN async" >}}
 
 ```javascript
 // コンテキスト付きでカスタムエラーを送信
@@ -114,8 +114,8 @@ try {
     })
 }
 ```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
+{{< /tab >}}
+{{< tab "CDN sync" >}}
 
 ```javascript
 // コンテキスト付きでカスタムエラーを送信
@@ -137,7 +137,7 @@ try {
     window.DD_RUM && DD_RUM.addError(error);
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## トラブルシューティング

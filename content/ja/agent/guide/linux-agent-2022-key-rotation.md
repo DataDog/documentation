@@ -73,7 +73,7 @@ Error: GPG check FAILED
 Datadog では、上記の[インストール方法](#install-methods-that-automatically-trust-the-new-gpg-key)のいずれかを使用して、新しい GPG キーと将来のすべてのキーを自動的に信頼することを推奨しています。この方法が使えない場合は、以下の手順で新しいキーを手動でダウンロードし、信頼するようにしてください。
 
 {{< tabs >}}
-{{% tab "Debian/Ubuntu" %}}
+{{< tab "Debian/Ubuntu" >}}
 
 ホスト上で以下のコマンドを実行します。
 
@@ -85,8 +85,8 @@ $ cat /tmp/DATADOG_APT_KEY_F14F620E | sudo gpg --import --batch --no-default-key
 $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 ```
 
-{{% /tab %}}
-{{% tab "RedHat/CentOS/SUSE" %}}
+{{< /tab >}}
+{{< tab "RedHat/CentOS/SUSE" >}}
 
 ホスト上で以下のコマンドを実行します。
 
@@ -95,13 +95,13 @@ $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915 https://keys.datadoghq.com/DATADOG_RPM_K
 $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ホストが新しい GPG キーを信頼しているかどうかを確認する
 
 {{< tabs >}}
-{{% tab "Debian/Ubuntu" %}}
+{{< tab "Debian/Ubuntu" >}}
 
 以下の条件のいずれかが真である場合、ホストは新しいキーを正しく信頼します。
 
@@ -110,8 +110,8 @@ $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 
 ファイル `/usr/share/keyrings/datadog-archive-keyring.gpg` と、オプションとして `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` が、サポートされる[インストール方法](#install-methods-that-automatically-trust-the-new-gpg-key)または [`datadog-signing-keys` パッケージ](#the-datadog-signingkeys-package)をインストールすることで作成されている場合。[上記のインストール方法のバージョン](#install-methods-that-automatically-trust-the-new-gpg-key)のひとつを使用しない限り、 `datadog-signing-keys` [バージョン 1.1.0](#datadog-signing-keys-version-110) またはそれ以上がインストールされていることを確認してください。
 
-{{% /tab %}}
-{{% tab "RedHat/CentOS/SUSE" %}}
+{{< /tab >}}
+{{< tab "RedHat/CentOS/SUSE" >}}
 
 ホスト上で以下のコマンドを実行します。
 
@@ -129,7 +129,7 @@ gpg-pubkey-fd4bf915-5f573efe
 
 あるいは、`datadog.repo` ファイルに `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public` が `gpgkey` のエントリの 1 つとして含まれているかどうか確認してみてください。このキーファイルは、使用されるとすぐに新しいキーで更新されます。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## `datadog-signing-keys` パッケージ

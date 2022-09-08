@@ -48,7 +48,7 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 | 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation    |
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{< tab "Operator" >}}
 
 <div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
@@ -142,8 +142,8 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 To install the chart with a custom release name, `<RELEASE_NAME>` (for example, `datadog-agent`):
 
@@ -245,8 +245,8 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 [12]: /integrations/kubernetes_state_core
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
 
@@ -358,7 +358,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [20]: /getting_started/site/
 [21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [22]: /agent/kubernetes/data_collected/#kube-state-metrics
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Next steps

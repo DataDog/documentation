@@ -30,7 +30,7 @@ title: Node.js サーバーレスアプリケーションのインスツルメ�
 Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{< tab "Datadog CLI" >}}
 
 Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを修正し、新しいデプロイを必要とせずにインスツルメンテーションを可能にします。Datadog のサーバーレスモニタリングをすばやく開始するための最適な方法です。
 
@@ -91,8 +91,8 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [3]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 <div class="alert alert-info">代わりに、<a href="https://www.serverless.com/framework/docs/providers/aws/guide/intro">JavaScript ファイルから JSON オブジェクトをネイティブにエクスポート</a>して (たとえば <code>serverless.ts</code> ファイルを使用して) Serverless Framework アプリをデプロイする場合は、<a href="./?tab=custom">カスタムインストール手順</a>に従います。</div>
 
@@ -124,8 +124,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 [Datadog CloudFormation マクロ][1]は、SAM アプリケーションのテンプレートを自動的に変換して Lambda レイヤーを使用して関数に Datadog をインストールし、[Datadog Lambda 拡張機能][2]を通じて Datadog にメトリクス、トレース、ログを送信するように関数を構成します。
 
@@ -169,8 +169,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 [2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 [Datadog CDK コンストラクト][1] は、Lambda レイヤーを使用して Datadog を関数に自動的にインストールし、Datadog Lambda 拡張機能を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
@@ -210,8 +210,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Container Image" %}}
+{{< /tab >}}
+{{< tab "Container Image" >}}
 
 1. Datadog Lambda ライブラリのインストール
 
@@ -254,8 +254,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 
 <div class="alert alert-info">Serverless Framework や AWS CDK といった Datadog をサポートするサーバーレス開発ツールを使用していない場合は、Datadog はお使いのサーバーレスアプリケーションを <a href="./?tab=datadogcli">Datadog CLI</a> でインスツルメントすることを強く推奨します。</div>
 
@@ -318,7 +318,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 次のステップ

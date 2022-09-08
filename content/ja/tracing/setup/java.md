@@ -52,7 +52,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 - IDE のドキュメントを使用して、`-javaagent` およびその他の JVM 引数を渡す正しい方法を確認してください。一般的に使用されるフレームワークの手順は次のとおりです。
 
     {{< tabs >}}
-    {{% tab "Spring Boot" %}}
+    {{< tab "Spring Boot" >}}
 
 アプリの名前が `my_app.jar` の場合は、以下を含む `my_app.conf` を作成します。
 
@@ -64,8 +64,8 @@ JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 
 
 [1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
-    {{% /tab %}}
-    {{% tab "Tomcat" %}}
+    {{< /tab >}}
+    {{< tab "Tomcat" >}}
 
 Tomcat 起動スクリプトファイル (たとえば、`catalina.sh`) を開き、次を追加します。
 
@@ -79,8 +79,8 @@ CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
 
-    {{% /tab %}}
-    {{% tab "JBoss" %}}
+    {{< /tab >}}
+    {{< tab "JBoss" >}}
 
 `standalone.sh` の末尾に次の行を追加します。
 
@@ -98,8 +98,8 @@ set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
 
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
-    {{% /tab %}}
-    {{% tab "Jetty" %}}
+    {{< /tab >}}
+    {{< tab "Jetty" >}}
 
 `jetty.sh` を使用して Jetty をサービスとして開始する場合は、編集して次を追加します。
 
@@ -113,8 +113,8 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-    {{% /tab %}}
-    {{% tab "WebSphere" %}}
+    {{< /tab >}}
+    {{< tab "WebSphere" >}}
 
 管理コンソールで:
 
@@ -130,7 +130,7 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
 詳細とオプションについては、[WebSphere のドキュメント][1]を参照してください。
 
 [1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 

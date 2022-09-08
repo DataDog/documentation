@@ -58,7 +58,7 @@ Le check Elasticsearch est inclus avec le package de l'[Agent Datadog][2]. Vous 
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -189,8 +189,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [7]: https://docs.datadoghq.com/fr/tracing/send_traces/
 [8]: https://docs.datadoghq.com/fr/tracing/setup/
 [9]: https://docs.datadoghq.com/fr/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -235,7 +235,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [4]: https://docs.datadoghq.com/fr/tracing/setup/
 [5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

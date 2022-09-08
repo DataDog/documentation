@@ -63,26 +63,26 @@ Read the [Submission types and Datadog in-app types](#submission-types-and-datad
 ### Definition
 
 {{< tabs >}}
-{{% tab "COUNT" %}}
+{{< tab "COUNT" >}}
 
 The COUNT metric submission type represents the total number of event occurrences in one time interval. A COUNT can be used to track the total number of connections made to a database or the total number of requests to an endpoint. This number of events can accumulate or decrease over time—it is not monotonically increasing.
 
 **Note**: A COUNT is different from the RATE metric type, which represents the number of event occurrences normalized per second given the defined time interval.
 
-{{% /tab %}}
-{{% tab "RATE" %}}
+{{< /tab >}}
+{{< tab "RATE" >}}
 
 The RATE metric submission type represents the total number of event occurrences per second in one time interval. A RATE can be used to track how often something is happening—like the frequency of connections made to a database or the flow of requests made to an endpoint.
 
 **Note**: A RATE is different from the COUNT metric submission type, which represents the total number of event occurrences in the given time interval.
 
-{{% /tab %}}
-{{% tab "GAUGE" %}}
+{{< /tab >}}
+{{< tab "GAUGE" >}}
 
 The GAUGE metric submission type represents a snapshot of events in one time interval. This representative snapshot value is the last value submitted to the Agent during a time interval. A GAUGE can be used to take a measure of something reporting continuously—like the available disk space or memory used.
 
-{{% /tab %}}
-{{% tab "HISTOGRAM" %}}
+{{< /tab >}}
+{{< tab "HISTOGRAM" >}}
 
 The HISTOGRAM metric submission type represents the statistical distribution of a set of values calculated Agent-side in one time interval. Datadog’s HISTOGRAM metric type is an extension of the StatsD timing metric type. The Agent aggregates the values that are sent in a defined time interval and produces different metrics which represent the set of values.
 
@@ -116,8 +116,8 @@ If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time in
 
 [1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
 [2]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L116-L121
-{{% /tab %}}
-{{% tab "DISTRIBUTION" %}}
+{{< /tab >}}
+{{< tab "DISTRIBUTION" >}}
 
 The DISTRIBUTION metric submission type represents the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. A DISTRIBUTION can be used to instrument logical objects, like services, independently from the underlying hosts.
 
@@ -148,34 +148,34 @@ If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time
 : Represents the sum of all `X` values sent in the time interval.<br>
 **Datadog In-App Type**: COUNT
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Example
 
 {{< tabs >}}
-{{% tab "COUNT" %}}
+{{< tab "COUNT" >}}
 
 Suppose you are submitting a COUNT metric, `activeusers.basket_size`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
 The Agent adds all of the values received in one time interval. Then, it submits the total number, in this case `15`, as the COUNT metric’s value.
 
-{{% /tab %}}
-{{% tab "RATE" %}}
+{{< /tab >}}
+{{< tab "RATE" >}}
 
 Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
 The Agent adds all of the values received in one time interval. Then, it submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
 
-{{% /tab %}}
-{{% tab "GAUGE" %}}
+{{< /tab >}}
+{{< tab "GAUGE" >}}
 
 Suppose you are submitting a GAUGE metric, `temperature`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[71,71,71,71,71,71,71.5]`.
 
 The Agent submits the last reported number, in this case `71.5`, as the GAUGE metric’s value.
 
-{{% /tab %}}
-{{% tab "HISTOGRAM" %}}
+{{< /tab >}}
+{{< tab "HISTOGRAM" >}}
 
 For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from a web server that reports the values `[1,1,1,2,2,2,3,3]` in a flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
 
@@ -187,8 +187,8 @@ For example, suppose you are submitting a HISTOGRAM metric, `request.response_ti
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
 
-{{% /tab %}}
-{{% tab "DISTRIBUTION" %}}
+{{< /tab >}}
+{{< tab "DISTRIBUTION" >}}
 
 Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distribution`, from two webservers: `webserver:web_1` and `webserver:web_2`. Suppose in a given flush time interval, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this time interval, the following five aggregations will represent the global statistical distribution of all values collected from both webservers:
 
@@ -224,13 +224,13 @@ This functionality allows you to control tagging for metrics where host-level gr
 
 
 [1]: /metrics/metrics-without-limits/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Submission
 
 {{< tabs >}}
-{{% tab "COUNT" %}}
+{{< tab "COUNT" >}}
 
 Submit your COUNT type metrics from one of the following sources:
 
@@ -250,8 +250,8 @@ Submit your COUNT type metrics from one of the following sources:
 [2]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
 [3]: /api/v1/metrics/#submit-metrics
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#count
-{{% /tab %}}
-{{% tab "RATE" %}}
+{{< /tab >}}
+{{< tab "RATE" >}}
 
 Submit your RATE type metrics from one of the following sources:
 
@@ -265,8 +265,8 @@ Submit your RATE type metrics from one of the following sources:
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=rate
 [2]: /api/v1/metrics/#submit-metrics
-{{% /tab %}}
-{{% tab "GAUGE" %}}
+{{< /tab >}}
+{{< tab "GAUGE" >}}
 
 Submit your GAUGE type metrics from one of the following sources:
 
@@ -280,8 +280,8 @@ Submit your GAUGE type metrics from one of the following sources:
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=gauge
 [2]: /api/v1/metrics/#submit-metrics
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/#gauge
-{{% /tab %}}
-{{% tab "HISTOGRAM" %}}
+{{< /tab >}}
+{{< tab "HISTOGRAM" >}}
 
 Submit your HISTOGRAM type metrics from one of the following sources:
 
@@ -296,8 +296,8 @@ Submitting a TIMER metric to the Datadog Agent is equivalent to submitting a HIS
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=histogram
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/#timer
-{{% /tab %}}
-{{% tab "DISTRIBUTION" %}}
+{{< /tab >}}
+{{< tab "DISTRIBUTION" >}}
 
 Submit your DISTRIBUTION type metrics from the following source:
 
@@ -307,7 +307,7 @@ Submit your DISTRIBUTION type metrics from the following source:
 
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Submission types and Datadog in-app types

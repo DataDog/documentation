@@ -56,7 +56,7 @@ Agent 메인 설정 파일(`datadog.yaml`)에서, 또는 환경 변수로서 Age
 설정을 환경 변수로 세팅하거나, 코드에 직접 작성할 수도 있습니다.
 
 {{< tabs >}}
-{{% tab "환경 변수" %}}
+{{< tab "환경 변수" >}}
 
 ```
 @env  DD_TRACE_SAMPLE_RATE - integer - optional null (defaults to Agent default feedback loop)
@@ -64,8 +64,8 @@ Agent 메인 설정 파일(`datadog.yaml`)에서, 또는 환경 변수로서 Age
 @env  DD_TRACE_RATE_LIMIT - integer - optional 100 (if using the Agent default mechanism, the rate limiter is ignored)
 ```
 
-{{% /tab %}}
-{{% tab "Code API" %}}
+{{< /tab >}}
+{{< tab "Code API" >}}
 
 다음으로는 전체 트레이스의 10%를 샘플링해, 매초 100 트레이스의 레이트 상한을 걸고, 특정 서비스의 샘플링 레이트를 오버라이드하는 파이썬(Python) 사례를 보여줍니다.
 ```
@@ -80,7 +80,7 @@ tracer.configure(sampler=DatadogSampler(
 )
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 수집 설정에 대해 더 자세히 알아보려면 [트레이싱 라이브러리][1] 설명서를 참조하세요.
@@ -116,13 +116,13 @@ span.SetTag(ext.ManualDrop, true)
 애널리틱스(분석) 메커니즘을 사용하려면 환경 변수 또는 코드로 활성화해야 합니다. 또한, 모든 `analytics_enabled` 스팬에 적용되는 샘플링 레이트를 정의해야 합니다.
 
 {{< tabs >}}
-{{% tab "환경 변수" %}}
+{{< tab "환경 변수" >}}
 
 ```
 @env  DD_TRACE_ANALYTICS_ENABLED - boolean - optional false
 ```
-{{% /tab %}}
-{{% tab "Code API" %}}
+{{< /tab >}}
+{{< tab "Code API" >}}
 
 ```
 // in dd-trace-go
@@ -132,7 +132,7 @@ tracerconfig.WithAnalytics(on bool)
 tracerconfig.SetAnalyticsRate(0.4)
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 싱글 스팬에 `analytics_enabled:true` 태그를 붙이세요. 그리고 스팬과 관련된 샘플링 레이트를 지정합니다.
