@@ -123,7 +123,7 @@ For more details, see the [How to use an external ID when granting access to you
 {{< /tab >}}
 {{< /tabs >}}
 
-{{< aws-permissions >}}
+{{% aws-permissions %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

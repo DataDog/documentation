@@ -18,7 +18,7 @@ further_reading:
 
 You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 
 
-{{< appsec-getstarted >}}
+{{% appsec-getstarted %}}
 
 ## Get started
 
@@ -179,7 +179,7 @@ ENV DD_APPSEC_ENABLED=true
 
 3. **Restart the application** using a full stop and start.
 
-{{< appsec-getstarted-2-canary >}}
+{{% appsec-getstarted-2-canary %}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
