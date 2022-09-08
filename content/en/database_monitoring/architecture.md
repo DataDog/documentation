@@ -81,7 +81,7 @@ If an Agent stops reporting, the Cluster Agent removes it from the active pool a
 
 If you are using [Aurora][13], the Agent must be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
 
-For monitoring Aurora databases, the Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. Each Datadog Agent must have knowledge of the underlying hostname and should be a single host for its lifetime, even in cases of failover. Otherwise, the values of metrics become incorrect.
+For monitoring Aurora databases, the Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. Each Datadog Agent must have knowledge of the underlying hostname and should run on a single host for its lifetime, even in cases of failover. Otherwise, the values of metrics become incorrect.
 
 
 
