@@ -149,7 +149,7 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="python,go,ruby" >}}
+{{< programming-lang-wrapper langs="python,go,php,ruby" >}}
 {{< programming-lang lang="python" >}}
 
 Endpoint profiling is enabled by default when you turn on profiling for your [Python][1] service. It requires `dd-trace-py` version 0.54.0 or greater.
@@ -173,6 +173,13 @@ Endpoint profiling is disabled by default when you turn on profiling for your [G
 [6]: https://github.com/golang/go/issues/48577
 [7]: https://go-review.googlesource.com/c/go/+/369741/
 [8]: https://go-review.googlesource.com/c/go/+/369983/
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+Endpoint profiling is enabled by default when you turn on profiling for your [PHP][1] service. It requires ddtrace version 0.79.0 or greater. To disable it, set the environment variable `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED` to `0`, `no`, `off`, or `false`.
+<p></p>
+
+[1]: /profiler/enabling/php
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
