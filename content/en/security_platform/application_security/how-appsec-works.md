@@ -76,7 +76,7 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [1]: /tracing/trace_collection/
 [2]: /security_platform/application_security/getting_started/#prerequisites
 [3]: /tracing/configure_data_security/?tab=http
-[4]: /security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[4]: /security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 [5]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [6]: /security_platform/default_rules/#cat-application-security
 [7]: https://app.datadoghq.com/security/appsec/event-rules

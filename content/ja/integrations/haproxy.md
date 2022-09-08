@@ -348,6 +348,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -367,6 +369,30 @@ spec:
     - name: haproxy
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: haproxy
+  annotations:
+    ad.datadoghq.com/haproxy.checks: |
+      {
+        "haproxy": {
+          "init_config": {},
+          "instances": [
+            {
+              "url": "https://%%host%%/admin?stats"
+            }
+          ]
+        }
+      }
+spec:
+  containers:
+    - name: haproxy
+```
+
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
@@ -374,6 +400,8 @@ _Agent バージョン 6.0 以降で利用可能_
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1
