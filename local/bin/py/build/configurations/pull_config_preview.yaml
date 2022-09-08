@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: cswatt/azure-container-apps-docs
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
