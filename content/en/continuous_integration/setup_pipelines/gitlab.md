@@ -153,7 +153,7 @@ view. In the drawer, a new tab named **Infrastructure** appears which contains t
 
 For failed GitLab pipeline executions (on the [Pipeline Executions][5] page), each error under the `Errors` tab within a specific execution displays a message associated with the error type from GitLab.
 
-See the table below for the message and domain correlated with each error type. Any unlisted error type will lead to the error message of: `Job failed` and error domain: `unknown`.
+See the table below for the message and domain correlated with each error type. Any unlisted error type will lead to the error message of `Job failed` and error domain of `unknown`.
 
 | Error Type | Error Message | Error Domain |
 | :---  |    :----:   |  ---: |
