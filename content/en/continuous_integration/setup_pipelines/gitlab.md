@@ -149,6 +149,48 @@ through the UI by going to **Settings > CI/CD > Runners** and editing the approp
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
 view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
+### Error messages for pipeline failures
+
+For failed GitLab pipeline executions (on the [Pipeline Executions][5] page), each error under the `Errors` tab within a specific execution displays a message associated with the error type from GitLab.
+
+See the table below for the message and domain correlated with each error type. Any unlisted error type will lead to the error message of: `Job failed` and error domain: `unknown`.
+
+| Error Type | Error Message | Error Domain |
+| :---  |    :----:   |  ---: |
+|  unknown_failure  |  Failed due to unknown reason  |  unknown
+|  config_error  |  Failed due to error on CI/CD configuration file |  user
+|  external_validation_failure  |  Failed due to external pipeline validation  |  unknown
+|  user_not_verified  |  The pipeline failed due to the user not being verified  |  user
+|  activity_limit_exceeded  |  The pipeline activity limit was exceeded  |  provider
+|  size_limit_exceeded  |  The pipeline size limit was exceeded  |  provider
+|  job_activity_limit_exceeded  |  The pipeline job activity limit was exceeded  |  provider
+|  deployments_limit_exceeded  |  The pipeline deployments limit was exceeded  |  provider
+|  project_deleted  |  The project associated with this pipeline was deleted  |  provider
+|  api_failure  |  API Failure  |  provider
+|  stuck_or_timeout_failure  |  Pipeline is stuck or timed out  |  unknown
+|  runner_system_failure  |  Failed due to runner system failure  |  provider
+|  missing_dependency_failure  |  Failed due to missing dependency  |  unknown
+|  runner_unsupported  |  Failed due to unsupported runner  |  provider
+|  stale_schedule  |  Failed due to stale schedule  |  provider
+|  job_execution_timeout  |  Failed due to job timeout  |  unknown
+|  archived_failure  |  Archived failure  |  provider
+|  unmet_prerequisites  |  Failed due to unmet prerequisite  |  unknown
+|  scheduler_failure  |  Failed due to schedule failure  |  provider
+|  data_integrity_failure  |  Failed due to data integrity  |  provider
+|  forward_deployment_failure  |  Deployment failure  |  unknown
+|  user_blocked  |  Blocked by user  |  user
+|  ci_quota_exceeded  |  CI quota exceeded  |  provider
+|  pipeline_loop_detected  |  Pipeline loop detected  |  user
+|  builds_disabled  |  Build disabled  |  user
+|  deployment_rejected  |  Deployment rejected  |  user
+|  protected_environment_failure  |  Environment failure  |  provider
+|  secrets_provider_not_found  |  Secret provider not found  |  user
+|  reached_max_descendant_pipelines_depth  |  Reached max descendant pipelines  |  user
+|  ip_restriction_failure  |  IP restriction failure  |  provider
+
+<!-- | ---------- | ---------- | ---------- | -->
+<!-- | :---        |    :----:   |          ---: | -->
+
 ## Enable job log collection (beta)
 
 The following GitLab versions support collecting job logs:
