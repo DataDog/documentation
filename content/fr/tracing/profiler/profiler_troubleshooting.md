@@ -1,12 +1,13 @@
 ---
-title: Dépannage du profileur
-kind: documentation
 further_reading:
-  - link: /tracing/troubleshooting
-    tag: Documentation
-    text: Dépannage de l'APM
+- link: /tracing/troubleshooting
+  tag: Documentation
+  text: Dépannage de l'APM
+kind: documentation
+title: Dépannage du profileur
 ---
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,linux" >}}
+
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
 ## Profils manquants sur la page de recherche de profils
@@ -59,7 +60,8 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 [Découvrez comment utiliser des modèles de remplacement.](#creation-et-utilisation-d-un-fichier-modele-de-remplacement-jfr)
 
 ## Activer le profileur de tas
-<div class="alert alert-info">La fonctionnalité de profileur de tas Java est en version bêta.</div>
+<div class="alert alert-info">La fonctionnalité de profileur de tas Java est disponible en version bêta.</div>
+<div class="aler alert-info">Cette fonctionnalité requiert au minimum la version 11.0.12, 15.0.4, 16.0.2, 17.0.3 ou 18 de Java.</div>
 Pour activer le profileur de tas, lancez votre application avec le paramètre JVM `-Ddd.profiling.heap.enabled=true` ou la variable d'environnement `DD_PROFILING_HEAP_ENABLED=true`.
 
 Vous avez également la possibilité d'activer les événements suivants dans votre [fichier modèle de remplacement](#creation-et-utilisation-d-un-fichier-modele-de-remplacement-jfr) `jfp` :
@@ -113,14 +115,14 @@ N'oubliez pas de réactiver ce paramètre une fois le taux d'exceptions revenu �
 
 Les fournisseurs OpenJDK 8 suivants sont pris en charge pour le profiling en continu, car ils intègrent JDK Flight Recorder dans leurs dernières versions :
 
-| Fournisseur                      | Version du JDK intégrant Flight Recorder                      |
-| --------------------------- | -------------------------------------------------------------- |
-| Azul                        | u212 (u262 recommandée)                                     |
-| AdoptOpenJDK                | u262                                                           |
-| RedHat                      | u262                                                           |
-| Amazon (Corretto)           | u262                                                           |
-| Bell-Soft (Liberica)        | u262                                                           |
-| Tous les builds upstream de fournisseurs | u272                                                           |
+| Fournisseur                      | Version du JDK intégrant Flight Recorder |
+| --------------------------- | ----------------------------------------- |
+| Azul                        | u212 (u262 recommandée)                |
+| AdoptOpenJDK                | u262                                      |
+| RedHat                      | u262                                      |
+| Amazon (Corretto)           | u262                                      |
+| Bell-Soft (Liberica)        | u262                                      |
+| Tous les builds upstream de fournisseurs | u272                                      |
 
 Si votre fournisseur n'est pas répertorié, [ouvrez un ticket d'assistance][2], car il est possible que d'autres fournisseurs proposent une version bêta compatible ou prévoient d'en proposer une.
 
@@ -187,7 +189,9 @@ Si vous avez configuré le profileur et que vous ne voyez pas les profils sur la
 
 ## Erreurs « stack level too deep (SystemStackError) » des générées par l'application
 
-Le profileur instrumente la VM Ruby de façon à surveiller les créations de threads. Cette instrumentation prend en charge la plupart des autres gems Ruby qui instrumentent également les créations de threads, à quelques exceptions près.
+Ce problème ne devrait plus se produire depuis la [version `0.54.0` de `dd-trace-rb`][3]. Si vous le rencontrez tout de même, [ouvrez un ticket d'assistance][2] en prenant soin d'inclure toute la backtrace entraînant l'erreur.
+
+Avant la version `0.54.0`, le profileur devait instrumenter la VM Ruby afin de suivre la création de threads, ce qui entraînait des problèmes de conflits avec l'instrumentation similaire d'autres gems.
 
 Si vous utilisez l'un des gems ci-dessous, suivez les instructions indiquées :
 
@@ -195,19 +199,28 @@ Si vous utilisez l'un des gems ci-dessous, suivez les instructions indiquées :
 * `logging` : désactivez l'héritage du contexte de thread de `logging` en définissant la variable d'environnement `LOGGING_INHERIT_CONTEXT`
   sur `false`.
 
-Si, malgré ces modifications, vous continuez à recevoir des erreurs `SystemStackError`, [ouvrez un ticket d'assistance][2] en prenant soin d'inclure toute la backtrace entraînant l'erreur.
-
 ## Profils manquants pour les tâches Resque
 
-Pour le profiling de tâches [Resque][3], vous devez définir la variable d'environnement `RUN_AT_EXIT_HOOKS` sur `1`, tel que décrit dans la [documentation Resque][1] (en anglais).
+Pour le profiling de tâches [Resque][4], vous devez définir la variable d'environnement `RUN_AT_EXIT_HOOKS` sur `1`, tel que décrit dans la [documentation Resque][5] (en anglais).
 
 En l'absence de ce flag, les profils des tâches Resque de courte durée ne sont pas disponibles.
 
+## Profiling non activé en raison de l'échec de la compilation de l'en-tête juste à temps de la VM Ruby
+
+Un problème de compatibilité connu entre la version 2.7 de Ruby et d'anciennes versions de GCC (4.8 et versions antérieures) empêche le bon fonctionnement du profileur ([rapport Ruby en amont][6], [rapport de bug pour `dd-trace-rb` bug report][7]). Cela peut générer le message d'erreur suivant : « Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken. »
+
+
+Pour corriger ce problème, mettez à jour votre système d'exploitation ou votre image Docker afin d'utiliser une version de GCC plus récente que la v4.8.
+
+Pour obtenir plus d'aide concernant ce problème, [contactez l'assistance][2] en prenant soin d'inclure la sortie de la commande `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` et le fichier `mkmf.log` généré.
 
 [1]: /fr/tracing/troubleshooting/#tracer-debug-logs
 [2]: /fr/help/
-[3]: https://github.com/resque/resque
-[4]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
+[4]: https://github.com/resque/resque
+[5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
+[6]: https://bugs.ruby-lang.org/issues/18073
+[7]: https://github.com/DataDog/dd-trace-rb/issues/1799
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -233,15 +246,29 @@ Si vous avez configuré le profileur et ne voyez aucun profil dans la page de re
       ["response.Error"]="...",
       ```
 
-   6. Vérifiez que la bonne URL a été utilisée dans le champ suivant :
+   6. Vérifiez que vous utilisez la bonne URL dans le champ ci-dessous. Si vous avez conservé les paramètres de configuration par défaut, votre champ devrait ressembler à ce qui suit :
       ```
-      ["_profilesIngestionEndpoint_url"]="https://intake.profile.datadoghq.com/v1/input",
+      ["_profilesIngestionEndpoint_url"]="http://127.0.0.1:8126/profiling/v1/input",
+      ```
+      Si vous avez spécifié dans votre configuration une autre URL d'Agent de trace avec les variables d'environnement `DD_TRACE_AGENT_URL` ou `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`, les valeurs du champ doivent correspond aux variables. Exemple :
+      ```
+      ["_profilesIngestionEndpoint_url"]="http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>/profiling/v1/input",
       ```
 
 Si ce n'est pas le cas, activez le [mode debugging][1] et [ouvrez un ticket d'assistance][2] en fournissant les fichiers de debugging et les informations suivantes :
 - Type et version du système d'exploitation (par exemple, Windows Server 2019)
 - Type et version du runtime (par exemple, .NET Core 6.0)
 - Type d'application (par exemple, application Web exécutée dans IIS)
+
+
+## Charge CPU élevée lors de l'activation du profileur
+
+Le profileur possède une charge fixe. Sa valeur varie, mais devrait avoisiner :
+ -  200 ms de temps CPU par seconde sous Linux (0,2 CPU) ; ou
+ -  20 ms de temps CPU par seconde sous Windows (0,02 CPU).
+
+En raison de ce coût fixe, il est possible que la charge relative du profileur soit considérable pour les conteneurs de très petite taille. Par exemple, si vous exécutez le profileur sur un conteneur Linux auquel 0,4 CPU a été assigné, le coût fixe de 0,2 CPU engendre une charge relative de 50 %. Ajustez les limites du conteneur pour corriger cela.
+
 
 
 [1]: /fr/tracing/troubleshooting/#tracer-debug-logs
@@ -262,7 +289,7 @@ SI vous avez configuré le profileur et ne voyez aucun profil dans la page de re
 [1]: /fr/help/
 {{< /programming-lang >}}
 
-{{< programming-lang lang="linux" >}}
+{{< programming-lang lang="ddprof" >}}
 
 ## Profils manquants sur la page de recherche de profils
 
@@ -286,11 +313,11 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 
 ```
 
-**Remarque** : cette commande doit être exécutée à partir de l'espace de nommage d'un montage dans lequel l'objet `/proc/sys/kernel/perf_event_paranoid` existe et peut être écrit. Il s'agit généralement de l'espace de nommage du montage racine ; en d'autres termes, du host plutôt que d'un conteneur standard.
+**Remarque** : cette commande doit être exécutée à partir de l'espace de nommage d'un montage dans lequel l'objet `/proc/sys/kernel/perf_event_paranoid` existe et peut être écrit. Pour un conteneur, ce paramètre est hérité à partir du host.
 
 Vous pouvez utiliser deux fonctionnalités pour remplacer la valeur de `perf_event_paranoid` :
-- `CAP_SYS_ADMIN` (ajoute de nombreuses autorisations, ce qui peut être déconseillé par certaines organisations)
-- `CAP_PERFMON` (disponible sous Linux v5.8 ou ultérieur)
+- `CAP_SYS_ADMIN` : ajoute de nombreuses autorisations, ce qui peut être déconseillé
+- `CAP_PERFMON` : ajoute les fonctionnalités BPF et `perf_event_open` (disponible sous Linux 5.8 et ultérieur)
 
 L'erreur peut également être causée par des problèmes d'autorisations plus rares :
 - Le profileur ne parvient pas systématiquement à instrumenter des processus dont l'UID change au démarrage. C'est le cas d'un grand nombre de serveurs Web et de bases de données.
@@ -309,17 +336,29 @@ Cette erreur signifie généralement que le profileur ne parvient pas à se conn
 
 ## Profils vides ou creux
 
-Il est possible que vos profils soient vides (erreur « No CPU time reported ») ou qu'ils contiennent uniquement quelques cadres. Les applications possédant des informations de symbolisation de mauvaise qualité peuvent rencontrer ce type de problème. Toutefois, il est possible que ces erreurs soient attendues. En effet, le profileur s'active uniquement lorsque l'application instrumentée est planifiée sur le CPU. Les applications peuvent consacrer la plupart de leur temps en dehors du CPU pour de nombreuses raisons (faible charge utilisateur ou temps d'attente élevée, par exemple).
+Il est possible que vos profils soient vides (erreur « No CPU time reported ») ou qu'ils contiennent uniquement quelques frames. Les applications possédant des informations de symbolisation de mauvaise qualité peuvent rencontrer ce type de problème. Toutefois, il est possible que ces erreurs soient attendues. En effet, le profileur s'active uniquement lorsque l'application instrumentée est planifiée sur le CPU. Les applications peuvent consacrer la plupart de leur temps en dehors du CPU pour de nombreuses raisons (faible charge utilisateur ou temps d'attente élevée, par exemple).
 
-La racine de votre profil correspond au cadre pour lequel le nom de l'application figure entre parenthèses. Si ce cadre indique un temps CPU non négligeable, mais sans le moindre cadre, il est possible que la fidélité du profiling de votre application laisse à désirer. Pour y remédier, vous pouvez considérer les approches suivantes :
+La racine de votre profil correspond au cadre pour lequel le nom de l'application figure entre parenthèses. Si ce cadre indique un temps CPU non négligeable, mais sans le moindre cadre enfant, il est possible que la fidélité du profiling de votre application laisse à désirer. Pour y remédier, vous pouvez considérer les approches suivantes :
 - Les binaires « stripped » ne possèdent pas de symboles. Essayez d'utiliser un binaire qui n'est pas « stripped »  ou une image de conteneur non minifiée.
 - Il est recommandé d'installer les packages de debugging de certaines applications et bibliothèques. C'est notamment le cas pour les services installés par l'intermédiaire du gestionnaire de package de votre référentiel ou d'un outil similaire.
 
+## Erreur lors du chargement des bibliothèques partagées
+
+Lorsque vous utilisez le profileur en continu pour les langages compilés en tant que bibliothèque dynamique, il est possible que le lancement de votre application échoue et que vous receviez l'erreur suivante :
+
+```
+error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
+```
+
+Ce problème survient lorsque votre application inclut la dépendance `libdd_profiling.so`, mais que celle-ci est introuvable lors du rapprochement des dépendances pendant l'exécution. Pour y remédier, suivez l'une des deux méthodes ci-dessous :
+
+- Recréez votre application avec une bibliothèque statique. Dans certains systèmes de build, il n'est pas toujours évident de choisir entre une bibliothèque dynamique et statique. Pour cette raison, utilisez la commande `ldd` pour vérifier si le binaire généré inclut une dépendance dynamique non souhaitée sur `libdd_profiling.so`.
+- Copiez `libdd_profiling.so` au sein d'un des répertoires dans le chemin de recherche de l'éditeur de liens dynamique. Pour obtenir la liste des répertoires disponibles, exécutez `ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n` (commande valide sur la plupart des systèmes Linux).
 
 [1]: /fr/tracing/troubleshooting/#tracer-debug-logs
 [2]: /fr/help/
-[3]: /fr/tracing/profiler/enabling/linux/?tab=environmentvariables#configuration
-[4]: /fr/tracing/profiler/enabling/linux/
+[3]: /fr/tracing/profiler/enabling/ddprof/?tab=environmentvariables#configuration
+[4]: /fr/tracing/profiler/enabling/ddprof/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

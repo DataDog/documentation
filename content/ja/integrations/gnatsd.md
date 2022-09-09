@@ -1,38 +1,60 @@
 ---
+app_id: gnatsd
+app_uuid: 91ef7414-0d7b-4ccd-b1a0-d23ef8b6780f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: gnatsd.connz.connections.in_bytes
+      metadata_path: metadata.csv
+      prefix: gnatsd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gnatsd
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: dev@goldstar.com
+  support_email: dev@goldstar.com
 categories:
 - messaging
 - notification
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd/README.md
-display_name: Gnatsd
+display_on_public_website: true
 draft: false
 git_integration_title: gnatsd
-guid: 7edcf450-d9cf-44aa-9053-ece04ac7c21d
 integration_id: gnatsd
 integration_title: Gnatsd
 integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
-maintainer: dev@goldstar.com
-manifest_version: 1.0.0
-metric_prefix: gnatsd.
-metric_to_check: gnatsd.connz.connections.in_bytes
+manifest_version: 2.0.0
 name: gnatsd
+oauth: {}
 public_title: Gnatsd
 short_description: Datadog で gnatsd クラスターを監視。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::メッセージング
+  - Category::通知
+  configuration: README.md#Setup
+  description: Datadog で gnatsd クラスターを監視。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gnatsd
 ---
 
 

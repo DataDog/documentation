@@ -1,33 +1,57 @@
 ---
+app_id: convox
+app_uuid: 4476973b-6e79-4861-a321-7e24e581873b
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: convox.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Convox
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
-display_name: Convox
+display_on_public_website: true
 draft: false
 git_integration_title: convox
-guid: e8b1f8a7-8859-4c85-81bd-044400854e59
 integration_id: convox
 integration_title: Convox
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
+manifest_version: 2.0.0
 name: convox
+oauth: {}
 public_title: Convox
 short_description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::クラウド
+  configuration: README.md#Setup
+  description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Convox
 ---
 
 

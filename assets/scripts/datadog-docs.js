@@ -1,11 +1,12 @@
 import { initializeIntegrations } from './components/integrations';
-import { initializeSecurityRules } from './components/security-rules';
+import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { getQueryParameterByName } from './helpers/browser';
+import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -82,8 +83,8 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform')) {
-        initializeSecurityRules();
+    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('catalog')) {
+        initializeGroupedListings();
     }
 
     if (document.body.classList.value.includes('integrations')) {
@@ -211,8 +212,9 @@ function closeNav(){
 
 function updateSidebar(event) {
     closeNav();
+    closeMobileNav();
     getPathElement(event);
-
+    setMobileNav();
     const isLi = event.target.nodeName === 'LI';
 
     if (isLi) {
@@ -369,6 +371,7 @@ window.addEventListener('click', (event) => {
 
 window.onload = function () {
     getPathElement();
+    setMobileNav();
 };
 
 // remove branch name from path

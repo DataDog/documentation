@@ -34,16 +34,18 @@ After choosing to create a `SSL` test, define your test's request.
 
 1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
 2. Add **Advanced Options** (optional) to your test:
-    * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
-    * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
-    * **Timeout**: Specify the amount of time in seconds before the test times out.
-    * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
-    * **Client certificate**: Authenticates through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. **Note**: You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+   * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
+   * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
+   * **Timeout**: Specify the amount of time in seconds before the test times out.
+   * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
+   
+   You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
-      ```
-      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-      ```
+   ```
+   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+   ```
 
 3. **Name** your SSL test.
 
@@ -133,7 +135,7 @@ For more information, see [Using Synthetic Test Monitors][9].
 
 ### Create local variables
 
-You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -144,11 +146,13 @@ You can create local variables by clicking **Create Local Variable** at the top 
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+`{{ date(n unit, format) }}`
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at +/- `n` units.
+
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 

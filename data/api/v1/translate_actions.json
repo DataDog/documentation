@@ -58,11 +58,11 @@
     "request_schema_description": "The service checks."
   },
   "GetDailyCustomReports": {
-    "description": "Get daily custom reports.",
+    "description": "Get daily custom reports.\n**Note:** This endpoint will be fully deprecated on December 1, 2022.\nRefer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) for the associated migration guide.",
     "summary": "Get the list of available daily custom reports"
   },
   "GetSpecifiedDailyCustomReports": {
-    "description": "Get specified daily custom reports.",
+    "description": "Get specified daily custom reports.\n**Note:** This endpoint will be fully deprecated on December 1, 2022.\nRefer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) for the associated migration guide.",
     "summary": "Get specified daily custom reports"
   },
   "DeleteDashboards": {
@@ -640,11 +640,11 @@
     "request_schema_description": "Object describing a monitor."
   },
   "GetMonthlyCustomReports": {
-    "description": "Get monthly custom reports.",
+    "description": "Get monthly custom reports.\n**Note:** This endpoint will be fully deprecated on December 1, 2022.\nRefer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) for the associated migration guide.",
     "summary": "Get the list of available monthly custom reports"
   },
   "GetSpecifiedMonthlyCustomReports": {
-    "description": "Get specified monthly custom reports.",
+    "description": "Get specified monthly custom reports.\n**Note:** This endpoint will be fully deprecated on December 1, 2022.\nRefer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) for the associated migration guide.",
     "summary": "Get specified monthly custom reports"
   },
   "ListNotebooks": {
@@ -983,7 +983,7 @@
     "summary": "Get hourly usage for analyzed logs"
   },
   "GetUsageAttribution": {
-    "description": "Get usage attribution.",
+    "description": "Get usage attribution.\n**Note:** This endpoint will be fully deprecated on December 1, 2022.\nRefer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) for the associated migration guide.",
     "summary": "Get usage attribution"
   },
   "GetUsageAuditLogs": {

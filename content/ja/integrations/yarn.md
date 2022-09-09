@@ -1,43 +1,67 @@
 ---
+app_id: yarn
+app_uuid: 427f8f08-00a1-455a-a0e5-9b2ec7ffb0a5
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     hadoop: assets/dashboards/hadoop_dashboard.json
     yarn: assets/dashboards/yarn_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: yarn.metrics.total_mb
+      metadata_path: metadata.csv
+      prefix: yarn.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Yarn
   logs:
     source: yarn
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
 - autodiscovery
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
-display_name: Yarn
+display_on_public_website: true
 draft: false
 git_integration_title: yarn
-guid: 3223c2e3-29dd-4cfb-82a2-51b951c648eb
 integration_id: yarn
 integration_title: Yarn
 integration_version: 4.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: yarn.
-metric_to_check: yarn.metrics.total_mb
+manifest_version: 2.0.0
 name: yarn
-public_title: Yarn インテグレーション
+oauth: {}
+public_title: Yarn
 short_description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::オートディスカバリー
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Yarn
 ---
 
 

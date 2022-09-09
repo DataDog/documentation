@@ -60,4 +60,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [3]: https://app.datadoghq.com/slo
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
-[6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor

@@ -229,8 +229,6 @@ After configuring your Datadog Agent to collect traces and giving your applicati
 
 Refer to the [language-specific APM instrumentation docs][2] for more examples.
 
-**Note:** The PHP tracer does not support sending traces over Unix Domain Socket (UDS). For updates on UDS for PHP, contact support.
-
 
 ## Agent environment variables
 

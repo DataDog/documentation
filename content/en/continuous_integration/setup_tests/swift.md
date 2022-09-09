@@ -88,9 +88,11 @@ end
 
 ### Configuring Datadog
 
-To enable testing instrumentation, add the following environment variables to your test target (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). You must also select your main target in `Expand variables based on` or `Target for Variable Expansion` if using test plans:
+To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if you are using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
+
+<div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
@@ -308,14 +310,15 @@ Alternatively to setting environment variables, all configuration values can be 
 {{< tabs >}}
 {{% tab "Jenkins" %}}
 
-| Environment variable | Value             |
-| -------------------- | ----------------- |
-| `JENKINS_URL`        | `$(JENKINS_URL)`  |
-| `WORKSPACE`          | `$(WORKSPACE)`    |
-| `BUILD_TAG`          | `$(BUILD_TAG)`    |
-| `BUILD_NUMBER`       | `$(BUILD_NUMBER)` |
-| `BUILD_URL`          | `$(BUILD_URL)`    |
-| `JOB_NAME`           | `$(JOB_NAME)`     |
+| Environment variable | Value                  |
+| -------------------- | ---------------------- |
+| `JENKINS_URL`        | `$(JENKINS_URL)`       |
+| `WORKSPACE`          | `$(WORKSPACE)`         |
+| `BUILD_TAG`          | `$(BUILD_TAG)`         |
+| `BUILD_NUMBER`       | `$(BUILD_NUMBER)`      |
+| `BUILD_URL`          | `$(BUILD_URL)`         |
+| `JOB_NAME`           | `$(JOB_NAME)`          |
+| `DD_CUSTOM_TRACE_ID` | `$(DD_CUSTOM_TRACE_ID)`|
 
 Additional Git configuration for physical device testing:
 
@@ -361,6 +364,8 @@ Additional Git configuration for physical device testing:
 | `CI_PIPELINE_IID`    | `$(CI_PIPELINE_IID)` |
 | `CI_PIPELINE_URL`    | `$(CI_PIPELINE_URL)` |
 | `CI_PROJECT_PATH`    | `$(CI_PROJECT_PATH)` |
+| `CI_PROJECT_URL`     | `$(CI_PROJECT_URL)`  |
+
 
 Additional Git configuration for physical device testing:
 
@@ -546,27 +551,42 @@ Additional Git configuration for physical device testing:
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
 {{% /tab %}}
+{{% tab "Xcode Cloud" %}}
+
+| Environment variable    | Value                   |
+| ----------------------- | ----------------------- |
+| `DD_GIT_REPOSITORY_URL` | The repository URL      |
+| `CI_WORKSPACE`          | `$(CI_WORKSPACE)`       |
+| `CI_COMMIT`             | `$(CI_COMMIT)`          |
+| `CI_BUILD_ID`           | `$(CI_BUILD_ID)`        |
+| `CI_BUILD_NUMBER`       | `$(CI_BUILD_NUMBER)`    |
+| `CI_WORKFLOW`           | `$(CI_WORKFLOW)`        |
+| `CI_TAG`                | `$(CI_TAG)`             |
+| `CI_BRANCH`             | `$(CI_BRANCH)`          |
+| `CI_GIT_REF`            | `$(CI_GIT_REF)`         |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Manual testing API
 
 If you use XCTests with your Swift projects, the `DatadogSDKTesting` framework automatically instruments them and sends the results to the Datadog backend. If you don't use XCTest, you can instead use the Swift/Objective-C manual testing API, which also reports test results to the backend.
 
-The API is based around three concepts: *test sessions*, *test suites*, and *tests*.
+The API is based around three concepts: *test module*, *test suites*, and *tests*.
 
-### Test sessions
+### Test module
 
-A test session includes the whole process of running the tests, from when the user launches the testing process until the last test ends and results are reported. The test session also includes starting the environment and the process where the tests run.
+A test module represents the load of a library or bundle that includes the tests.
 
-To start a test session, call `DDTestSession.start()` and pass the name of the module or bundle to test.
+To start a test module, call `DDTestModule.start()` and pass the name of the module or bundle to test.
 
-When all your tests have finished, call `session.end()`, which forces the library to send all remaining test results to the backend.
+When all your tests have finished, call `module.end()`, which forces the library to send all remaining test results to the backend.
 
 ### Test Suites
 
 A test suite comprises a set of tests that share common functionality. They can share a common initialization and teardown, and can also share some variables.
 
-Create test suites in the test session by calling `session.suiteStart()` and passing the name of the test suite.
+Create test suites in the test module by calling `module.suiteStart()` and passing the name of the test suite.
 
 Call `suite.end()` when all the related tests in the suite have finished their execution.
 
@@ -579,25 +599,25 @@ Create tests in a suite by calling `suite.testStart()` and passing the name of t
 ### API interface
 
 {{< code-block lang="swift" >}}
-class DDTestSession {
-    // Starts the session.
+class DDTestModule {
+    // Starts the module.
     // - Parameters:
     //   - bundleName: Name of the module or bundle to test.
-    //   - startTime: Optional. The time the session started.
-    static func start(bundleName: String, startTime: Date? = nil) -> DDTestSession
+    //   - startTime: Optional. The time the module started.
+    static func start(bundleName: String, startTime: Date? = nil) -> DDTestModule
     //
-    // Ends the session.
+    // Ends the module.
     // - Parameters:
-    //   - endTime: Optional. The time the session ended.
+    //   - endTime: Optional. The time the module ended.
     func end(endTime: Date? = nil)
-    // Adds a tag/attribute to the test session. Any number of tags can be added.
+    // Adds a tag/attribute to the test module. Any number of tags can be added.
     // - Parameters:
     //   - key: The name of the tag. If a tag with the same name already exists,
     //     its value will be replaced by the new value.
     //   - value: The value of the tag. Can be a number or a string.
     func setTag(key: String, value: Any)
     //
-    // Starts a suite in this session.
+    // Starts a suite in this module.
     // - Parameters:
     //   - name: Name of the suite.
     //   - startTime: Optional. The time the suite started.
@@ -664,8 +684,8 @@ The following code represents a simple usage of the API:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
-let session = DDTestSession.start(bundleName: "ManualSession")
-let suite1 = session.suiteStart(name: "ManualSuite 1")
+let module = DDTestModule.start(bundleName: "ManualModule")
+let suite1 = module.suiteStart(name: "ManualSuite 1")
 let test1 = suite1.testStart(name: "Test 1")
 test1.setTag(key: "key", value: "value")
 test1.end(status: .pass)
@@ -673,13 +693,13 @@ let test2 = suite1.testStart(name: "Test 2")
 test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
 test2.end(test: test2, status: .fail)
 suite1.end()
-let suite2 = session.suiteStart(name: "ManualSuite 2")
+let suite2 = module.suiteStart(name: "ManualSuite 2")
 ..
 ..
-session.end()
+module.end()
 {{< /code-block >}}
 
-Always call `session.end()` at the end so that all the test info is flushed to Datadog.
+Always call `module.end()` at the end so that all the test info is flushed to Datadog.
 
 ## Further reading
 

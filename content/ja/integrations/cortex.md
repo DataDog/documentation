@@ -1,38 +1,59 @@
 ---
+app_id: cortex
+app_uuid: 15baccdd-d89c-4591-ab45-e6378d8c174f
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: cortex.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: cortex
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@getcortexapp.com
+  support_email: support@getcortexapp.com
 categories:
 - インシデント
 - モニタリング
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md
-display_name: cortex
+display_on_public_website: true
 draft: false
 git_integration_title: cortex
-guid: 3c59d4a9-6f2a-4f86-91e7-84a1a3e4f43b
 integration_id: cortex
 integration_title: Cortex
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: support@getcortexapp.com
-manifest_version: 1.0.0
-metric_prefix: cortex.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: cortex
+oauth: {}
 public_title: Cortex
 short_description: Cortex ダッシュボードから直接 Datadog インシデントを作成
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Incidents
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Cortex ダッシュボードから直接 Datadog インシデントを作成
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cortex
 ---
 
 

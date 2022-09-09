@@ -11,6 +11,9 @@ further_reading:
 - link: /tracing/service_catalog/guides/upstream-downstream-dependencies
   tag: ガイド
   text: アクティブインシデント時の上流と下流の依存関係を見る
+- link: https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/
+  tag: ブログ
+  text: サービス定義 JSON スキーマによるサービスカタログエントリーの管理
 kind: documentation
 title: Datadog サービスカタログ
 ---

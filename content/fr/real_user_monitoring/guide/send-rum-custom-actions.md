@@ -1,6 +1,9 @@
 ---
 aliases:
 - /fr/real_user_monitoring/guide/send-custom-user-actions/
+beta: true
+description: Découvrez comment envoyer des actions personnalisées pour recueillir
+  des interactions utilisateur supplémentaires.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
@@ -12,7 +15,7 @@ title: Envoyer des actions RUM personnalisées
 
 La solution Real User Monitoring [recueille automatiquement des actions][1] effectuées sur vos applications Web. Vous pouvez également recueillir des événements et des durées supplémentaires, par exemple pour le remplissage de formulaires et les transactions opérationnelles.
 
-Les actions RUM personnalisées vous permettent de surveiller des événements pertinents tout en disposant de tous les éléments de contexte pertinents associés. Vous pouvez par exemple recueillir des informations sur le paiement d'un utilisateur sur un site Web d'e-commerce.
+Les actions RUM personnalisées vous permettent de surveiller des événements pertinents tout en disposant de tous les éléments de contexte pertinents associés. Le SDK Browser de Datadog peut par exemple recueillir des informations sur le paiement d'un utilisateur (telles que le nombre d'articles dans le panier, la liste des articles et le montant des différents articles) lorsque celui-ci valide un paiement sur un site Web d'e-commerce.
 
 ## Instrumenter votre code
 

@@ -1,32 +1,34 @@
 ---
-title: Tracer des applications Java
-kind: documentation
 aliases:
-  - /fr/tracing/java
-  - /fr/tracing/languages/java
-  - /fr/agent/apm/java/
-  - /fr/tracing/setup/java
-  - /fr/tracing/setup_overview/java
+- /fr/tracing/java
+- /fr/tracing/languages/java
+- /fr/agent/apm/java/
+- /fr/tracing/setup/java
+- /fr/tracing/setup_overview/java
 code_lang: java
-type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-  - link: 'https://github.com/DataDog/dd-trace-java'
-    tag: GitHub
-    text: Code source de l'APM Datadog Java
-  - link: tracing/visualization/
-    tag: Documentation
-    text: 'Explorer vos services, ressources et traces'
+- link: https://github.com/DataDog/dd-trace-java
+  tag: GitHub
+  text: Code source de l'APM Datadog Java
+- link: tracing/visualization/
+  tag: Documentation
+  text: Explorer vos services, ressources et traces
+kind: documentation
+title: Tracer des applications Java
+type: multi-code-lang
 ---
 ## Exigences de compatibilité
 
-La bibliothèque de tracing Java prend en charge toutes les JVM sur toutes les plateformes à partir de la version 7. Pour tirer parti du tracing avec le [Profileur en continu][1], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 pour la plupart des fournisseurs (version 8u262+) et Zulu Java 8+ (version mineure 1.8.0_212+) sont pris en charge. À partir de la version 8u272+, tous les fournisseurs seront pris en charge pour le profileur.
+La bibliothèque de tracing Java prend en charge toutes les JVM sur toutes les plateformes à partir de la version 7. Pour tirer parti du tracing avec le [profileur en continu][1], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 pour la plupart des fournisseurs (version 8u262+) et Zulu Java 8+ (version mineure 1.8.0_212+) sont pris en charge. À compter de la version 8u272, tous les fournisseurs seront pris en charge pour le profileur.
 
-Tous les langages basés sur la JVM, tels que Scala (versions 2.10.x à 2.13.x), Groovy, Kotlin, ou encore Clojure sont pris en charge. Pour obtenir la liste complète des bibliothèques prises en charge, consultez la page [Exigences de compatibilité][2].
+Tous les langages basés sur la JVM, tels que Scala (versions 2.10.x à 2.13.x), Groovy, Kotlin, ou encore Clojure, sont pris en charge par le traceur et le profileur Java. Pour obtenir la liste complète des bibliothèques prises en charge, consultez la page [Exigences de compatibilité][1].
+
+La configuration du tracing implique de configurer le Profileur en continu. Il vous suffit ensuite d'[activer le Profileur][1] pour commencer à recevoir les données de profiling depuis votre application.
 
 ## Installation et démarrage
 
-### Suivre la documentation intégrée à l'application (conseillé)
+### Suivre la documentation dans l'application (conseillé)
 
 Suivez les [instructions de démarrage rapide][3] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
 
@@ -34,55 +36,81 @@ Suivez les [instructions de démarrage rapide][3] fournies dans l'application Da
 - Définir les tags `service`, `env` et `version` de façon dynamique ;
 - Activer le profileur en continu, l'ingestion de 100 % des traces et l'injection des ID de trace dans les logs durant la configuration.
 
-### Étapes d'installation Java
+### Installation de Java
 
-Sinon, pour commencer le tracing d'applications écrites dans n'importe quel langage :
+Sinon, pour commencer à tracer vos applications :
 
-1. Téléchargez `dd-java-agent.jar`, qui contient les fichiers de classe de l'Agent :
+1. Téléchargez `dd-java-agent.jar`, qui contient les derniers fichiers de classe de l'Agent :
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
+   Pour accéder à une version spécifique du traceur, consultez le [référentiel Maven][4] de Datadog.
 
-2. Ajoutez l'argument JVM suivant lors du démarrage de votre application dans votre script d'application IDE, Maven ou Gradle, ou la commande `java -jar` :
+2. Pour exécuter votre application à partir d'un EDI, d'un script d'application Maven ou Gradle, ou de la commande `java -jar`, avec le profileur en continu, le suivi des déploiements, l'injection de logs (si vous envoyez des logs à Datadog) et le contrôle des volumes de traces, ajoutez l'argument JVM `-javaagent` et les options de configuration suivantes, le cas échéant :
 
-   ```text
-    -javaagent:/path/to/the/dd-java-agent.jar
-   ```
+    ```text
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    ```
 
-3. Ajoutez des [options de configuration](#configuration) pour le tracing et assurez-vous de définir les variables d'environnement ou de passer les propriétés système en tant qu'arguments JVM, en particulier pour les métriques de service, d'environnement, d'injection de logs, de profiling et éventuellement les métriques runtime (toutes les métriques que vous avez l'intention d'utiliser). Consultez les exemples ci-dessous. Notez que si vous utilisez les instructions Quickstart intégrées à l'application, ces options seront générées pour vous.
+    **Remarque :** l'activation du profiling est susceptible d'augmenter vos coûts, en fonction de l'offre APM que vous avez choisie. Consultez la [page des tarifs][5] pour en savoir plus.
 
-### Configurer l'Agent Datadog pour APM
+| Variable d'environnement      | Propriété système                     | Description|
+| --------- | --------------------------------- | ------------ |
+| `DD_ENV`      | `dd.env`                  | L'environnement de votre application (`production`, `staging`, etc.). |
+| `DD_SERVICE`   | `dd.service`     | Le nom d'un ensemble de processus qui effectuent la même tâche. Utilisé pour regrouper les statistiques de votre application. |
+| `DD_VERSION` | `dd.version` |  La version de votre application (par exemple : `2.5`, `202003181415`, `1.3-alpha`, etc.). |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Active le [Profleur en continu][6] |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Active l'injection automatique des clés MDC pour les ID de span et de trace Datadog. Consultez la section [Utilisation avancée][7] pour en savoir plus. |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Définit un taux d'échantillonnage à la racine de la trace pour tous les services.     |
+| `DD_TRACE_SAMPLING_SERVICE_RULES` | `dd.trace.sampling.service.rules` |   Définit un taux d'échantillonnage à la racine de la trace pour les services qui correspondent à la règle spécifiée.    |
 
-Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des traces à partir de votre application instrumentée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml`, sous `apm_enabled: true`, et écoute le trafic des traces sur `localhost:8126`. Pour les environnements conteneurisés, suivez les liens ci-dessous afin d'activer la collecte de traces au sein de l'Agent Datadog.
+D'autres [options de configuration](#configuration) sont décrites ci-dessous.
+
+3. Assurez-vous que l'Agent Datadog est configuré pour l'APM et que votre application peut y accéder en suivant les instructions propres à votre environnement [ci-dessous](#configurer-l-agent-datadog-pour-l-apm).
+
+### Configurer l'Agent Datadog pour l'APM
+
+Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des traces à partir de votre application instrumentée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml` sous `apm_config` avec `enabled: true`, et écoute les données de tracing sur `http://localhost:8126`. Pour les environnements conteneurisés, suivez les liens ci-dessous afin d'activer la collecte de traces au sein de l'Agent Datadog.
 
 {{< tabs >}}
 {{% tab "Conteneurs" %}}
 
-1. Définissez `apm_non_local_traffic: true` dans votre [fichier de configuration principal `datadog.yaml`][1].
+1. Définissez `apm_non_local_traffic: true` dans la section `apm_config` de votre [fichier de configuration principal `datadog.yaml`][1].
 
 2. Consultez les instructions de configuration spécifiques pour vous assurer que l'Agent est configuré de façon à recevoir des traces dans un environnement conteneurisé :
 
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. Une fois que vous avez instrumenté votre application, le client de tracing envoie, par défaut, les traces à `localhost:8126`. S'il ne s'agit pas du host et du port adéquats, modifiez-les en définissant les variables d'environnement ci-dessous :
+3. Une fois l'application instrumentée, le client de tracing tente d'envoyer les traces au socket de domaine Unix `/var/run/datadog/apm.socket` par défaut. Si le socket n'existe pas, les traces sont envoyées à `http://localhost:8126`.
 
-`DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`.
+   Si vous souhaitez spécifier un autre socket, host ou port, utilisez la variable d'environnement `DD_TRACE_AGENT_URL`. Voici quelques exemples :
 
-```bash
-java -javaagent:<CHEMIN-AGENT-JAVA-DD>.jar -jar <CHEMIN_VOTRE_APPLICATION>.jar
-```
+   ```
+   DD_TRACE_AGENT_URL=http://custom-hostname:1234
+   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   ```
 
-Vous pouvez également utiliser des propriétés système :
+   ```bash
+   java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
+   ```
 
-```bash
-java -javaagent:<CHEMIN-AGENT-JAVA-DD>.jar \
-     -Ddd.agent.host=$DD_AGENT_HOST \
-     -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
-     -jar <CHEMIN_VOTRE_APPLICATION>.jar
-```
+   Vous pouvez également utiliser des propriétés système :
 
+   ```bash
+   java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
+       -Ddd.trace.agent.url=$DD_TRACE_AGENT_URL \
+       -jar <YOUR_APPLICATION_PATH>.jar
+   ```
+
+   Là encore, le client de tracing tente d'envoyer les statistiques au socket de domaine Unix `/var/run/datadog/dsd.socket`. Si le socket n'existe pas, les statistiques sont envoyées à `http://localhost:8125`.
+
+{{< site-region region="us3,us5,eu,gov" >}}
+
+4. Définissez `DD_SITE` dans l'Agent Datadog sur {{< region-param key="dd_site" code="true" >}} pour vous assurer que l'Agent envoie les données au bon site Datadog.
+
+{{< /site-region >}}
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
@@ -95,7 +123,7 @@ Pour configurer l'APM Datadog dans AWS Lambda, consultez la documentation dédi
 {{% /tab %}}
 {{% tab "Autres environnements" %}}
 
-Le tracing est disponible pour un certain nombre d'environnements, tels que [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3] et l'[extension Azure App Services][4].
+Le tracing est disponible pour un certain nombre d'environnements, tels que [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3] et [Azure App Services][4].
 
 Pour les autres environnements, veuillez consulter la documentation relative aux [intégrations][5] pour l'environnement qui vous intéresse. [Contactez l'assistance][6] si vous rencontrez des problèmes de configuration.
 
@@ -110,7 +138,7 @@ Pour les autres environnements, veuillez consulter la documentation relative aux
 
 ### Ajouter le traceur Java à la JVM
 
-Consultez la documentation de votre IDE pour savoir comment passer `-javaagent` et d'autres arguments JVM. Voici des instructions pour certains frameworks couramment utilisés :
+Consultez la documentation de votre serveur d'application pour découvrir comment passer `-javaagent` et d'autres arguments JVM. Voici des instructions pour certains frameworks couramment utilisés :
 
 {{< tabs >}}
 {{% tab "Spring Boot" %}}
@@ -128,31 +156,42 @@ Pour en savoir plus, consultez la [documentation de Spring Boot][1].
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Ouvrez votre fichier de script de démarrage Tomcat, par exemple `catalina.sh`, et ajoutez :
+Ouvrez votre fichier de script de démarrage Tomcat, par exemple `setenv.sh` sous Linux, et ajoutez :
 
 ```text
 CATALINA_OPTS="$CATALINA_OPTS -javaagent:/chemin/vers/dd-java-agent.jar"
 ```
 
-Ou sur Windows, `catalina.bat` :
+Sous Windows, il s'agit du fichier `setenv.bat` :
 
 ```text
-set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\chemin\vers\dd-java-agent.jar"
+set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\chemin\vers\dd-java-agent.jar"
 ```
+Si vous ne disposez pas de fichier `setenv`, créez-le dans le répertoire `./bin` du dossier de projet Tomcat.
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
 
-Ajoutez la ligne suivante à la fin de `standalone.sh` :
+- En mode autonome :
+
+  Ajoutez la ligne suivante à la fin de `standalone.conf` :
 
 ```text
 JAVA_OPTS="$JAVA_OPTS -javaagent:/chemin/vers/dd-java-agent.jar"
 ```
 
-Sur Windows, ajoutez la ligne suivante à la fin de `standalone.conf.bat` :
+- En mode autonome et sur Windows, ajoutez la ligne suivante à la fin de `standalone.conf.bat` :
 
 ```text
 set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/chemin/vers/dd-java-agent.jar"
+```
+
+- En mode domaine :
+
+  Ajoutez la ligne suivante dans le fichier `domain.xml`, sous le tag server-groups.server-group.jvm.jvm-options :
+
+```text
+<option value="-javaagent:/chemin/vers/dd-java-agent.jar"/>
 ```
 
 Pour en savoir plus, consultez la [documentation de JBoss][1].
@@ -202,13 +241,13 @@ Pour plus d'informations et d'options, consultez la [documentation relative à W
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
 
-     Pour en savoir plus, consultez la [documentation Oracle][4].
+     Pour en savoir plus, consultez la [documentation Oracle][8] (en anglais).
 
-- N'ajoutez jamais `dd-java-agent` à votre classpath. Cela peut entraîner un comportement inattendu. 
+- N'ajoutez jamais `dd-java-agent` à votre classpath. Cela peut entraîner un comportement inattendu.
 
 ## Instrumentation automatique
 
-L'instrumentation automatique pour Java utilise les fonctionnalités d'instrumentation `java-agent` [fournies par la JVM][5]. Lorsqu'un `java-agent` est enregistré, il possède la capacité de modifier les fichiers de classe durant le chargement.
+L'instrumentation automatique pour Java utilise les fonctionnalités d'instrumentation `java-agent` [fournies par la JVM][9]. Lorsqu'un `java-agent` est enregistré, il est capable de modifier les fichiers de classe durant le chargement.
 
 L'instrumentation peut provenir de l'instrumentation automatique, de l'API OpenTracing ou d'un mélange des deux. L'instrumentation capture généralement les informations suivantes :
 
@@ -223,62 +262,246 @@ Toutes les options de configuration ci-dessous ont une propriété système et u
 Si le même type de clé est défini pour les deux, la configuration de la propriété système est prioritaire.
 Les propriétés système peuvent être définies en tant que flags JVM.
 
+Remarque : si vous utilisez les propriétés système du traceur Java, assurez-vous de les spécifier avant `-jar`, afin qu'elles soient lues en tant qu'options JVM.
 
-| Propriété système                        | Variable d'environnement                   | Valeur par défaut                           | Description                                                                                                                                                                                                                                                           |
-| -------------------------------------- | -------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dd.service`                      | `DD_SERVICE`                      | `unnamed-java-app`                | Le nom d'un ensemble de processus qui effectuent la même tâche. Utilisé pour regrouper les statistiques de votre application. Disponible à partir de la version 0.50.1.                                                                                                                                                                    |
-| `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Exemple : `layer:api,team:intake`) La liste des tags par défaut à ajouter à chaque span, profil et métrique JMX. Si la variable DD_ENV ou DD_VERSION est utilisée, tout tag « env » ou « version » défini dans DD_TAGS sera remplacé. Disponible à partir de la version 0.50.1.  |
-|`dd.env`                              | `DD_ENV`                              | `none`                            | L'environnement de votre application (p. ex. production, staging, etc.). Disponible à partir de la version 0.48.                                                    |
-| `dd.version`                              | `DD_VERSION`                              | `null`                            | La version de votre application (p. ex. 2.5, 202003181415, 1.3-alpha, etc.). Disponible à partir de la version 0.48.             |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Active l'injection automatique des clés MDC pour les ID de span et de trace Datadog. Consultez la section [Utilisation avancée][6] pour en savoir plus   |
-| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Chemin facultatif vers un fichier où les propriétés de configuration sont définies (une par ligne). Le chemin du fichier peut par exemple être spécifié via `-Ddd.trace.config=<CHEMIN_FICHIER>.properties`, en définissant le nom du service dans le fichier avec  `dd.service=<NOM_SERVICE>`. |
-| `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Exemple : `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Renomme de façon dynamique les services via la configuration. Utile pour faire en sorte que les bases de données affichent des noms distincts d'un service à l'autre.                                                                                                       |
-| `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | La valeur par défaut active l'envoi des traces à l'Agent. Si vous utilisez `LoggingWriter` dans votre configuration, les traces sont écrites dans la console.                       |
-| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname vers lequel envoyer les traces. Si vous utilisez un environnement conteneurisé, configurez cette propriété sur l'IP du host. Consultez la documentation relative au [tracing d'applications Docker][7] pour en savoir plus.                                                                                                  |
-| `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`                            | Numéro du port sur lequel l'Agent effectue son écoute pour le host configuré.                                                                                |
-| `dd.trace.agent.unix.domain.socket`    | `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`    | `null`                            | Permet de faire passer des données de tracing par un proxy en vue de leur envoi vers un Agent Datadog distant.                                                            |
-| `dd.trace.agent.url`                   | `DD_TRACE_AGENT_URL`                   | `null`                            | L'URL vers laquelle envoyer les traces. Elle peut commencer par `http://` pour une connexion via HTTP ou par `unix://` pour utiliser un socket de domaine Unix. Une fois définie, elle a la priorité sur `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`. Disponible à partir de la version 0.65. |
-| `dd.trace.agent.timeout`               | `DD_TRACE_AGENT_TIMEOUT`               | `10`                              | Délai d'expiration en secondes pour les interactions réseau avec l'Agent Datadog.                                                                                                                                                                                                   |
-| `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Exemple : `en-tête-insensible-CASSE:nom-du-tag,User-ID:userId`.) Une liste des correspondances entre les clés d'en-tête et les noms de tag. Applique automatiquement les valeurs d'en-tête en tant que tags sur les traces.                                                                                                               |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([Valeurs répertoriées ici][8])               | (Exemple : `com.some.Trace;io.other.Trace`.) Une liste des annotations de méthode à traiter en tant que `@Trace`.                                            |
-| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Exemple : `"package.ClassName[method1,method2,...];AnonymousClass$1[call]"`). Liste des classes/interfaces et méthodes à tracer. Semblable à l'ajout de `@Trace`, mais sans changer le code.                                                                                       |
-| `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Définit le nombre de spans partielles à partir duquel celles-ci doivent être vidées. Permet de réduire la charge de la mémoire en cas de traitement d'un trafic important ou de traces à exécution longue.     |
-| `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (Exemple : `aws.service`) Utilisé pour renommer les spans identifiées avec le tag de service correspondant                                       |
-| `dd.trace.db.client.split-by-instance` | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | `false`                           | Lorsque cette option est définie sur `true`, les spans de base de données reçoivent le nom de l'instance en tant que nom du service.                                                                     |
-| `dd.trace.health.metrics.enabled`      | `DD_TRACE_HEALTH_METRICS_ENABLED`      | `false`                           | Définir sur `true` pour envoyer des métriques de santé du traceur                                                                                             |
-| `dd.trace.health.metrics.statsd.host`  | `DD_TRACE_HEALTH_METRICS_STATSD_HOST`  | identique à `dd.jmxfetch.statsd.host` | Host Statsd vers lequel envoyer les métriques de santé                                                                                                     |
-| `dd.trace.health.metrics.statsd.port`  | `DD_TRACE_HEALTH_METRICS_STATSD_PORT`  | identique à `dd.jmxfetch.statsd.port` | Port Statsd vers lequel envoyer les métriques de santé                                                                                                    |
-| `dd.http.client.tag.query-string`      | `DD_HTTP_CLIENT_TAG_QUERY_STRING`      | `false`                           | Lorsque cette option est définie sur `true`, les paramètres de chaîne de requête et le fragment sont ajoutés aux spans du client Web.                                                    |
-| `dd.http.client.error.statuses`        | `DD_HTTP_CLIENT_ERROR_STATUSES`        | `400-499`                           | Permet de définir une plage d'erreurs à accepter. Par défaut, les erreurs 4xx sont signalées comme des erreurs pour les clients http. Ce paramètre remplace ce comportement. Par exemple, `dd.http.client.error.statuses=400-499`                                                                                                    |
-| `dd.http.server.error.statuses`        | `DD_HTTP_SERVER_ERROR_STATUSES`        | `500-599`                           | Permet de définir une plage d'erreurs à accepter. Par défaut, les codes de statut 5xx sont signalés comme des erreurs pour les serveurs http. Ce paramètre remplace ce comportement. Par exemple, `dd.http.server.error.statuses=500-599`                                                                                                    |
-| `dd.http.server.tag.query-string`      | `DD_HTTP_SERVER_TAG_QUERY_STRING`      | `false`                           | Lorsque cette option est définie sur `true`, les paramètres de chaîne de requête et le fragment sont ajoutés aux spans du serveur Web.                                                     |
-| `dd.trace.enabled`                     | `DD_TRACE_ENABLED`                     | `true`                            | Lorsque cette option est définie sur `false`, l'Agent est désactivé.                                                                                                 |
-| `dd.jmxfetch.enabled`                  | `DD_JMXFETCH_ENABLED`                  | `true`                            | Active la collecte de métriques JMX par l'Agent de tracing Java.                                                                                  |
-| `dd.jmxfetch.config.dir`               | `DD_JMXFETCH_CONFIG_DIR`               | `null`                            | (Exemple : `/opt/datadog-agent/etc/conf.d`) Répertoire de configuration supplémentaire pour la collecte de métriques JMX. L'Agent Java recherche `jvm_direct:true` dans la section `instance` du fichier `yaml` pour changer la configuration.                                            |
-| `dd.jmxfetch.config`                   | `DD_JMXFETCH_CONFIG`                   | `null`                            | (Exemple : `activemq.d/conf.yaml, jmx.d/conf.yaml`) Fichier de configuration de métriques supplémentaires pour la collecte de métriques JMX. L'Agent Java recherche `jvm_direct:true` dans la section `instance` du fichier `yaml` pour changer la configuration.                                  |
-| `dd.jmxfetch.check-period`             | `DD_JMXFETCH_CHECK_PERIOD`             | `1500`                            | Fréquence d'envoi des métriques JMX (en ms).                                                                                                   |
-| `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                             | Fréquence d'actualisation de la liste des beans JMX disponibles (en secondes).                                                                             |
-| `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | identique à `agent.host`              | Host Statsd vers lequel envoyer les métriques JMX. Si vous utilisez des sockets de domaine Unix, utilisez un argument tel que 'unix://CHEMIN_VERS_SOCKET_UDS'. Par exemple : `unix:///var/datadog-agent/dsd.socket`                                                                                                            |
-| `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | Port StatsD vers lequel envoyer les métriques JMX. Si vous utilisez des sockets de domaine Unix, saisissez 0.                                                                                                                                                                                                                              |
-| `dd.integration.opentracing.enabled`              | `DD_INTEGRATION_OPENTRACING_ENABLED`              | true                              | Par défaut, le client de tracing détecte si un GlobalTracer est en cours de chargement et enregistre un traceur dans celui-ci de manière dynamique. En définissant cette option sur false, toute dépendance entre le traceur et OpenTracing est supprimée.                                                                                                                                                                                                                              |
-| `dd.hystrix.tags.enabled` | `DD_HYSTRIX_TAGS_ENABLED` | False | Par défaut, les tags associés au groupe, à la commande et au statut du circuit Hystrix sont désactivés. Cette propriété permet de les activer. |
-| `dd.trace.servlet.async-timeout.error` | `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` | True | Par défaut, les requêtes asynchrones à exécution longue sont considérées comme une erreur. Lorsque cette valeur est définie sur false, toutes les requêtes ayant expiré sont considérées comme réussies. |
-| `dd.trace.startup.logs`                | `DD_TRACE_STARTUP_LOGS`                | True | Lorsque cette option est définie sur `false`, les logs de lancement sont désactivés. Disponible à partir de la version 0.64. |
-| `dd.trace.servlet.principal.enabled`                | `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`                | False | Définir sur `true` pour recueillir l'objet Principal d'utilisateur. Disponible à partir de la version 0.61. |
+
+`dd.service`
+: **Variable d'environnement** : `DD_SERVICE`<br>
+**Valeur par défaut** : `unnamed-java-app`<br>
+Le nom d'un ensemble de processus qui effectuent la même tâche. Utilisé pour regrouper les statistiques de votre application. Disponible à partir de la version 0.50.0.
+
+`dd.tags`
+: **Variables d'environnement** : `DD_TAGS`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `layer:api,team:intake`<br>
+La liste des tags par défaut à ajouter à chaque span, profil et métrique JMX. Si la variable DD_ENV ou DD_VERSION est utilisée, tout tag « env » ou « version » défini dans DD_TAGS est remplacé. Disponible à partir de la version 0.50.0.
+
+`dd.env`
+: **Variable d'environnement** : `DD_ENV`<br>
+**Valeur par défaut** : `none`<br>
+L'environnement de votre application (par exemple, production ou staging). Disponible à partir de la version 0.48.
+
+`dd.version`
+: **Variable d'environnement** : `DD_VERSION`<br>
+**Valeur par défaut** : `null`<br>
+La version de votre application (par exemple, 2.5, 202003181415 ou 1.3-alpha). Disponible à partir de la version 0.48.
+
+`dd.logs.injection`
+: **Variable d'environnement** : `DD_LOGS_INJECTION`<br>
+**Valeur par défaut** : `true`<br>
+Active l'injection automatique des clés MDC pour les ID de span et de trace Datadog. Consultez la section [Utilisation avancée][7] pour en savoir plus.
+
+`dd.trace.config`
+: **Variable d'environnement** : `DD_TRACE_CONFIG`<br>
+**Valeur par défaut** : `null`<br>
+Le chemin facultatif vers un fichier où les propriétés de configuration sont définies (une par ligne). Le chemin du fichier peut par exemple être spécifié via `-Ddd.trace.config=<CHEMIN_FICHIER>.properties`, en définissant le nom du service dans le fichier avec `dd.service=<NOM_SERVICE>`.
+
+`dd.service.mapping`
+: **Variable d'environnement** : `DD_SERVICE_MAPPING`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`<br>
+Renomme de façon dynamique les services via la configuration. Sert notamment à s'assurer que les bases de données possèdent des noms distincts d'un service à l'autre.
+
+`dd.writer.type`
+: **Variable d'environnement** : `DD_WRITER_TYPE`<br>
+**Valeur par défaut** : `DDAgentWriter`<br>
+La valeur par défaut active l'envoi des traces à l'Agent. Si vous utilisez `LoggingWriter` dans votre configuration, les traces sont écrites dans la console.
+
+`dd.agent.host`
+: **Variable d'environnement** : `DD_AGENT_HOST`<br>
+**Valeur par défaut** : `localhost`<br>
+Le hostname vers lequel envoyer les traces. Si vous utilisez un environnement conteneurisé, configurez cette option sur l'IP du host. Consultez la section [Tracer des applications Docker][10] pour en savoir plus.
+
+`dd.trace.agent.port`
+: **Variable d'environnement** : `DD_TRACE_AGENT_PORT`<br>
+**Valeur par défaut** : `8126`<br>
+Le numéro du port sur lequel l'Agent effectue son écoute pour le host configuré.
+
+`dd.trace.agent.unix.domain.socket`
+: **Variable d'environnement** : `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
+**Valeur par défaut** : `null`<br>
+Permet de faire passer des données de tracing par un proxy en vue de leur envoi vers un Agent Datadog distant.
+
+`dd.trace.agent.url`
+: **Variable d'environnement** : `DD_TRACE_AGENT_URL`<br>
+**Valeur par défaut** : `null`<br>
+L'URL vers laquelle envoyer les traces. Elle peut commencer par `http://` pour une connexion via HTTP ou par `unix://` pour connexion via un socket de domaine Unix. Une fois cette option définie, elle a la priorité sur `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT`. Disponible à partir de la version 0.65.
+
+`dd.trace.agent.timeout`
+: **Variable d'environnement** : `DD_TRACE_AGENT_TIMEOUT`<br>
+**Valeur par défaut** : `10`<br>
+Le délai d'expiration en secondes pour les interactions réseau avec l'Agent Datadog.
+
+`dd.trace.header.tags`
+: **Variable d'environnement** : `DD_TRACE_HEADER_TAGS`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepte une liste des correspondances entre les clés d'en-tête (insensibles à la casse) et les noms de tag et applique automatiquement les valeurs d'en-tête correspondantes en tant que tags sur les traces. Accepte également les entrées sans nom de tag qui sont automatiquement mis en correspondance avec des tags au format `http.request.headers.<nom_en-tête>` et `http.response.headers.<nom_en-tête>`, respectivement.<br><br>
+Jusqu'à la version 0.96.0, ce paramètre s'appliquait uniquement aux tags des en-têtes de requête. Pour revenir à l'ancien comportement, ajoutez le paramètre `-Ddd.trace.header.tags.legacy.parsing.enabled=true` ou la variable d'environnement `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.
+
+`dd.trace.request_header.tags`
+: **Variable d'environnement** : `DD_TRACE_REQUEST_HEADER_TAGS`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepte une liste des correspondances entre les clés d'en-tête (insensibles à la casse) et les noms de tag et applique automatiquement les valeurs d'en-tête de requête correspondantes en tant que tags sur les traces. Accepte également les entrées sans nom de tag qui sont automatiquement mis en correspondance avec des tags au format `http.request.headers.<nom_en-tête>`.<br>
+Disponible à partir de la version 0.96.0.
+
+`dd.trace.response_header.tags`
+: **Environment Variable**: `DD_TRACE_RESPONSE_HEADER_TAGS`<br>
+**Default**: `null`<br>
+**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepte une liste des correspondances entre les clés d'en-tête (insensibles à la casse) et les noms de tag et applique automatiquement les valeurs d'en-tête de réponse correspondantes en tant que tags sur les traces. Accepte également les entrées sans nom de tag qui sont automatiquement mis en correspondance avec des tags au format `http.response.headers.<nom_en-tête>`.<br>
+Disponible à partir de la version 0.96.0.
+
+`dd.trace.annotations`
+: **Variable d'environnement** : `DD_TRACE_ANNOTATIONS`<br>
+**Valeur par défaut** : ([répertoriée sur cette page][11])<br>
+**Exemple** : `com.some.Trace;io.other.Trace`<br>
+Une liste des annotations de méthode à traiter en tant que `@Trace`.
+
+`dd.trace.methods`
+: **Variable d'environnement** : `DD_TRACE_METHODS`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
+La liste des classes/interfaces et méthodes à tracer. Semblable à l'ajout de `@Trace`, mais sans changer le code. **Remarque :** l'utilisation d'un wildcard (`[*]`) ne prend pas en compte les appels de méthode constructors, getters, setters, synthetic, toString, equals, hashcode ou finalizer.
+
+`dd.trace.classes.exclude`
+: **Variable d'environnement** : `DD_TRACE_CLASSES_EXCLUDE`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `package.ClassName,package.ClassName$Nested,package.Foo*,package.other.*`<br>
+Une liste de noms de classe complets (pouvant se terminer par un wildcard pour spécifier un préfixe) qui seront ignorés (non modifiés) par le traceur. Ces noms doivent correspondre à la représentation interne JVM (ex. : package.ClassName$Nested et non package.ClassName.Nested).
+
+`dd.trace.partial.flush.min.spans`
+: **Variable d'environnement** : `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`<br>
+**Valeur par défaut** : `1000`<br>
+Définit le nombre de spans partielles à partir duquel celles-ci doivent être vidées. Permet de réduire la charge de la mémoire en cas de traitement d'un trafic important ou de traces à exécution longue.
+
+`dd.trace.split-by-tags`
+: **Variable d'environnement** : `DD_TRACE_SPLIT_BY_TAGS`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `aws.service`<br>
+Utilisé pour renommer le service associé aux spans à identifier avec le tag de span correspondant.
+
+`dd.trace.db.client.split-by-instance` 
+: **Variable d'environnement** : `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
+**Valeur par défaut** : `false`<br>
+Lorsque cette option est définie sur `true`, les spans de base de données reçoivent le nom de l'instance en tant que nom du service.
+
+`dd.trace.health.metrics.enabled`
+: **Variable d'environnement** : `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
+**Valeur par défaut** : `false`<br>
+Lorsque cette option est définie sur `true`, des métriques de santé sur le traceur sont envoyées.
+
+`dd.trace.health.metrics.statsd.host`
+: **Variable d'environnement** : `DD_TRACE_HEALTH_METRICS_STATSD_HOST`<br>
+**Valeur par défaut** : identique à `dd.jmxfetch.statsd.host` <br>
+Le host Statsd vers lequel envoyer les métriques de santé.
+
+`dd.trace.health.metrics.statsd.port`
+: **Variable d'environnement** : `DD_TRACE_HEALTH_METRICS_STATSD_PORT`<br>
+**Valeur par défaut** : identique à `dd.jmxfetch.statsd.port` <br>
+Le port Statsd vers lequel envoyer les métriques de santé.
+
+`dd.http.client.tag.query-string`
+: **Variable d'environnement** : `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Valeur par défaut** : `false`<br>
+Lorsque cette option est définie sur `true`, les paramètres de chaîne de requête et le fragment sont ajoutés aux spans du client Web.
+
+`dd.http.client.error.statuses`
+: **Variable d'environnement** : `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
+**Valeur par défaut** : `400-499`<br>
+Permet de définir une plage d'erreurs à accepter. Par défaut, les erreurs 4xx sont signalées comme des erreurs pour les clients http. Cette option remplace ce comportement. Exemple : `dd.http.client.error.statuses=400-403,405,410-499`.
+
+`dd.http.server.error.statuses`
+: **Variable d'environnement** : `DD_HTTP_SERVER_ERROR_STATUSES`<br>
+**Valeur par défaut** : `500-599`<br>
+Permet de définir une plage d'erreurs à accepter. Par défaut, les codes de statut 5xx sont signalés comme des erreurs pour les serveurs http. Cette option remplace ce comportement. Exemple : `dd.http.server.error.statuses=500,502-599`.
+
+`dd.http.server.tag.query-string`
+: **Variable d'environnement** : `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
+**Valeur par défaut** : `false`<br>
+Lorsque cette option est définie sur `true`, les paramètres de chaîne de requête et le fragment sont ajoutés aux spans du serveur Web.
+
+`dd.trace.enabled`
+: **Variable d'environnement** : `DD_TRACE_ENABLED`<br>
+**Valeur par défaut** : `true`<br>
+Lorsque cette option est définie sur `false`, l'Agent de tracing est désactivé.
+
+`dd.jmxfetch.enabled`
+: **Variable d'environnement** : `DD_JMXFETCH_ENABLED`<br>
+**Valeur par défaut** : `true`<br>
+Active la collecte de métriques JMX par l'Agent de tracing Java.
+
+`dd.jmxfetch.config.dir`
+: **Variable d'environnement** : `DD_JMXFETCH_CONFIG_DIR`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `/path/to/directory/etc/conf.d`<br>
+Le répertoire de configuration supplémentaire pour la collecte de métriques JMX. L'Agent Java recherche `jvm_direct:true` dans la section `instance` du fichier `yaml` pour changer la configuration.
+
+`dd.jmxfetch.config`
+: **Variable d'environnement** : `DD_JMXFETCH_CONFIG`<br>
+**Valeur par défaut** : `null`<br>
+**Exemple** : `path/to/file/conf.yaml,other/path/to/file/conf.yaml`<br>
+Le fichier de configuration de métriques supplémentaires pour la collecte de métriques JMX. L'Agent Java recherche `jvm_direct:true` dans la section `instance` du fichier `yaml` pour changer la configuration.
+
+`dd.jmxfetch.check-period`
+: **Variable d'environnement** : `DD_JMXFETCH_CHECK_PERIOD`<br>
+**Valeur par défaut** : `1500`<br>
+La fréquence d'envoi des métriques JMX (en ms).
+
+`dd.jmxfetch.refresh-beans-period`
+: **Variable d'environnement** : `DD_JMXFETCH_REFRESH_BEANS_PERIOD`<br>
+**Valeur par défaut** : `600`<br>
+La fréquence d'actualisation de la liste des beans JMX disponibles (en secondes).
+
+`dd.jmxfetch.statsd.host`
+: **Variable d'environnement** : `DD_JMXFETCH_STATSD_HOST`<br>
+**Valeur par défaut** : identique à `agent.host`<br>
+Le host Statsd vers lequel envoyer les métriques JMX. Si vous utilisez des sockets de domaine Unix, utilisez un argument tel que 'unix://CHEMIN_VERS_SOCKET_UDS'. Exemple : `unix:///var/datadog-agent/dsd.socket`.
+
+`dd.jmxfetch.statsd.port`
+: **Variable d'environnement** : `DD_JMXFETCH_STATSD_PORT`<br>
+**Valeur par défaut** : `8125`<br>
+Le port StatsD vers lequel envoyer les métriques JMX. Si vous utilisez des sockets de domaine Unix, saisissez 0.
+
+`dd.integration.opentracing.enabled`
+: **Variable d'environnement** : `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
+**Valeur par défaut** : `true`<br>
+Par défaut, le client de tracing détecte si un GlobalTracer est en cours de chargement et enregistre un traceur dans celui-ci de manière dynamique. En définissant cette option sur false, toute dépendance entre le traceur et OpenTracing est supprimée.
+
+`dd.hystrix.tags.enabled`
+: **Variable d'environnement** : `DD_HYSTRIX_TAGS_ENABLED`<br>
+**Valeur par défaut** : `false`<br>
+Par défaut, les tags associés au groupe, à la commande et au statut du circuit Hystrix sont désactivés. Cette option permet de les activer.
+
+`dd.trace.servlet.async-timeout.error` 
+: **Variable d'environnement** : `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` <br>
+**Valeur par défaut** : `true`<br>
+Par défaut, les requêtes asynchrones à exécution longue sont considérées comme des erreurs. Lorsque cette valeur est définie sur false, toutes les requêtes ayant expiré sont considérées comme réussies.
+
+`dd.trace.startup.logs`
+: **Variable d'environnement** : `DD_TRACE_STARTUP_LOGS`<br>
+**Valeur par défaut** : `true`<br>
+Lorsque cette option est définie sur `false`, les logs de lancement informatifs sont désactivés. Disponible à partir de la version 0.64.
+
+`dd.trace.servlet.principal.enabled`
+: **Variable d'environnement** : `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
+**Valeur par défaut** : `false`<br>
+Lorsque cette option est définie sur `true`, l'objet principal utilisateur est recueilli. Disponible à partir de la version 0.61.
 
 
 **Remarques** :
 
 - Si le même type de clé est défini pour les deux, la configuration de la propriété système est prioritaire.
 - Les propriétés système peuvent être utilisées comme paramètres JVM.
-- Par défaut, les métriques JMX de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][9].
+- Par défaut, les métriques JMX de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][12].
 
-  - Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur `true`][10] et que le port `8125` est ouvert sur le conteneur de l'Agent.
-  - Dans Kubernetes, [liez le port DogStatsD à un port de host][14] ; dans ECS, [définissez les flags adéquats dans la définition de votre tâche][12].
+  - Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur `true`][13] et que le port `8125` est ouvert sur le conteneur de l'Agent.
+  - Dans Kubernetes, [bindez le port DogStatsD à un port du host][14] ; dans ECS, [définissez les flags appropriés dans la définition de votre tâche][15].
 
 ### Intégrations
 
-Pour découvrir comment désactiver des intégrations, consultez la section relative à la compatibilité des [intégrations][13].
+Pour découvrir comment désactiver des intégrations, consultez la section relative à la compatibilité des [intégrations][16].
 
 ### Exemples
 
@@ -398,11 +621,11 @@ On obtient le résultat suivant :
 
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="exemple JMXFetch"  >}}
 
-Consultez la [documentation relative à l'intégration Java][14] pour en savoir plus sur la collecte de métriques Java avec JMXFetch.
+Consultez la [documentation relative à l'intégration Java][17] pour en savoir plus sur la collecte de métriques Java avec JMXFetch.
 
 ### Extraction et injection d'en-têtes B3
 
-Le traceur de l'APM Datadog prend en charge [l'extraction et l'injection d'en-têtes B3][15] pour le tracing distribué.
+Le traceur de l'APM Datadog prend en charge [l'extraction et l'injection d'en-têtes B3][18] pour le tracing distribué.
 
 L'injection et l'extraction distribuées d'en-têtes sont contrôlées en configurant des styles d'injection/extraction. Deux styles sont actuellement pris en charge :
 
@@ -439,7 +662,7 @@ Voici à quoi ressemble le processus de transmission de trace à Datadog :
 
 Pour voir le code utilisé, la documentation ou des exemples d'utilisation des bibliothèques et frameworks pris en charge par Datadog, consultez la liste complète des composants à instrumentation automatique pour les applications Java dans la section [Intégrations](#integrations).
 
-### Annotation de trace
+### Annotation de traces
 
 Ajoutez la dépendance `dd-trace-api` à votre projet. Pour Maven, ajoutez ce qui suit à `pom.xml` :
 
@@ -461,33 +684,35 @@ Ajoutez maintenant `@Trace` aux méthodes pour permettre leur tracing lors d'une
 
 Les annotations `@Trace` prennent le nom d'opération par défaut `trace.annotation`, tandis que la méthode tracée prend la ressource par défaut.
 
-## Performances
+## Performance
 
 L'APM Java a un impact minimal sur la charge d'une application :
 
 - Toutes les collectes assurées par l'APM Java sont soumises à des limites de mémoire
 - La transmission de traces ne bloque pas le thread de l'application
 - L'APM Java charge des classes supplémentaires pour la collecte de traces et l'instrumentation de la bibliothèque
-- L'APM Java entraîne généralement une augmentation de la charge processeur inférieure à 3 %
-- L'APM Java entraîne généralement une augmentation de la charge mémoire de JVM inférieure à 3 %
+
 
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/profiler/getting_started/?tab=java
+[1]: /fr/tracing/profiler/enabling/?code-lang=java
 [2]: /fr/tracing/compatibility_requirements/java
 [3]: https://app.datadoghq.com/apm/docs
-[4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[5]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[6]: /fr/tracing/connect_logs_and_traces/java/
-[7]: /fr/tracing/setup/docker/
-[8]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[9]: /fr/developers/dogstatsd/#setup
-[10]: /fr/agent/docker/#dogstatsd-custom-metrics
-[11]: /fr/developers/dogstatsd/
-[12]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[13]: /fr/tracing/compatibility_requirements/java#disabling-integrations
-[14]: /fr/integrations/java/?tab=host#metric-collection
-[15]: https://github.com/openzipkin/b3-propagation
+[4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[5]: /fr/account_management/billing/apm_tracing_profiler/
+[6]: /fr/tracing/profiler/
+[7]: /fr/tracing/connect_logs_and_traces/java/
+[8]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[9]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[10]: /fr/tracing/setup/docker/
+[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[12]: /fr/developers/dogstatsd/#setup
+[13]: /fr/agent/docker/#dogstatsd-custom-metrics
+[14]: /fr/developers/dogstatsd/
+[15]: /fr/agent/amazon_ecs/#create-an-ecs-task
+[16]: /fr/tracing/compatibility_requirements/java#disabling-integrations
+[17]: /fr/integrations/java/?tab=host#metric-collection
+[18]: https://github.com/openzipkin/b3-propagation

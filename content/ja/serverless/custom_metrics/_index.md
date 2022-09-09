@@ -60,7 +60,7 @@ Datadog では、サポートされている Lambda ランタイムからの[**�
 1. Lambda 関数からログを収集しない場合は、環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `false` に設定します。
 1. 以下のサンプルコードまたは説明に従って、カスタムメトリクスを送信してください。
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
@@ -131,14 +131,87 @@ end
 ```
 
 {{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+[java-dogstatsd-client][1] の最新版をインストールし、以下のサンプルコードに従ってカスタムメトリクスを[**ディストリビューション**](#understanding-distribution-metrics)として送信します。
+
+```java
+package com.datadog.lambda.sample.java;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
+
+// statsd クライアントビルダーをインポートする
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
+public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
+
+    // statsd クライアントのインスタンスを作成する
+    private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
+
+    @Override
+    public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
+
+        // ディストリビューションメトリクスを送信する
+        Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
+
+        APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
+        response.setStatusCode(200);
+        return response;
+    }
+}
+```
+
+[1]: https://github.com/DataDog/java-dogstatsd-client
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+[dogstatsd-csharp-client][1] の最新版をインストールし、以下のサンプルコードに従ってカスタムメトリクスを[**ディストリビューションメトリクス**](#understanding-distribution-metrics)として送信します。
+
+```csharp
+using System.IO;
+
+// statsd クライアントをインポートする
+using StatsdClient;
+
+namespace Example
+{            
+  public class Function
+  {
+    static Function()
+    {
+        // statsd クライアントのインスタンスを作成する 
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+        DogStatsd.Configure(dogstatsdConfig);
+    }
+
+    public Stream MyHandler(Stream stream)
+    {
+        // ディストリビューションメトリクスを送信する
+        DogStatsd.Distribution("my.custom.dotnet.metric", 1, tags: new[] { "tag:value" });
+        // 関数ロジック
+    }
+  }
+}
+```
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
+{{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
 1. ランタイムに DogStatsD クライアントを[インストール][1]します
 2. [サンプルコード][2]に従って、カスタムトリクスを[**ディストリビューション**](#understanding-distribution-metrics)として送信します
 
+
 [1]: /ja/developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
 [2]: /ja/developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
-
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -339,7 +412,7 @@ MONITORING|<UNIX_EPOCH_タイムスタンプ>|<メトリクス値>|<メトリク
 [4]: /ja/metrics/#time-and-space-aggregation
 [5]: /ja/dashboards/guide/query-to-the-graph/
 [6]: /ja/logs/logs_to_metrics/
-[7]: /ja/tracing/generate_metrics/
+[7]: /ja/tracing/trace_pipeline/generate_metrics/
 [8]: /ja/serverless/installation/
 [9]: /ja/serverless/forwarder/
 [10]: /ja/integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy

@@ -82,7 +82,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
 {{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
 {
   "schema-version": "v2",
-  "dd-version": "shopping-service"
+  "dd-service": "shopping-service"
 }
 {{< /code-block >}}
 

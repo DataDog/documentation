@@ -115,7 +115,7 @@ TOTP を生成しテストで使用するには、シークレットキーを入
 
 {{< /tabs >}}
 
-グローバル変数を作成したら、対象のフィールドに `{{` を入力してグローバル変数を選択することですべての Synthetic テストで使用可能です。詳しくは、[HTTP テスト][7]、[マルチステップ API テスト][8]、[ブラウザテストのコンフィギュレーション][9]、[手順に関するドキュメント][10]をご参照ください。
+グローバル変数を作成したら、すべての Synthetic テストで使用可能です。グローバル変数をテストにインポートするには、*+ Variables* をクリックし、対象のフィールドに `{{` を入力してグローバル変数を選択します。詳しくは、[HTTP テスト][7]、[マルチステップ API テスト][8]、[ブラウザテストのコンフィギュレーション][9]、[手順に関するドキュメント][10]をご参照ください。
 
 ### アクセス許可
 
@@ -159,7 +159,7 @@ Datadog で管理されるすべての場所と、ご使用のアカウントで
 
 [ブラウザテスト][5]の詳細で、デフォルトのブラウザとデバイスの種類を選択します。
 
-ブラウザは、Google Chrome、Firefox、Microsoft Edge、Internet Explorer 11 から選択できます。デバイスは、大型のノートパソコン、タブレット、小型のモバイルデバイスから選択できます。
+ブラウザは、Google Chrome、Firefox、Microsoft Edge から選択できます。デバイスは、大型のノートパソコン、タブレット、小型のモバイルデバイスから選択できます。
 
 ブラウザとデバイスの選択が完了したら、**Save Default Browsers &amp; Devices** をクリックします。
 
@@ -209,7 +209,7 @@ Datadog がテスト実行から RUM データを収集することを許可す�
 [7]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#use-variables
 [8]: /ja/synthetics/multistep?tab=requestoptions#use-variables
 [9]: /ja/synthetics/browser_tests/?tab=requestoptions#use-global-variables
-[10]: /ja/synthetics/browser_tests/actions#using-variables
+[10]: /ja/synthetics/browser_tests/actions#use-variables
 [11]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /ja/account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /ja/account_management/rbac/#create-a-custom-role

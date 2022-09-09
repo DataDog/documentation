@@ -485,9 +485,18 @@ if (window.DD_LOGS) {
 
 Datadog ブラウザログ SDK を初期化すると、以下のことが可能になります。
 
-- `setLoggerGlobalContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
-- `addLoggerGlobalContext (key: string, value: any)` API を使用して、あなたのすべてのロガーにコンテキストを追加。
-- `getLoggerGlobalContext ()` API を使用して、グローバルコンテキスト全体を取得。
+-  `setGlobalContext (context: object)` API を使用して、すべてのロガーのコンテキスト全てを設定。
+- `setGlobalContextProperty (key: string, value: any)` API を使用して、すべてのロガーにコンテキストを追加。
+- `getGlobalContext ()` API を使用して、グローバルコンテキスト全体を取得。
+- `removeGlobalContextProperty (key: string)` API を使用して、コンテキストプロパティを削除。
+- `clearGlobalContext ()` API を使用して、既存のコンテキストプロパティをすべてクリア。
+
+> Log Browser SDK v4.17.0 では、いくつかの API の名称が更新されました。
+>
+> - `getLoggerGlobalContext` に代わって `getGlobalContext`
+> - `setLoggerGlobalContext` に代わって `setGlobalContext`
+> - `addLoggerGlobalContext` に代わって `setGlobalContextProperty`
+> - `removeLoggerGlobalContext` に代わって `removeGlobalContextProperty`
 
 ##### NPM
 
@@ -496,11 +505,19 @@ NPM の場合は以下を使用します。
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.setLoggerGlobalContext({ env: 'staging' })
+datadogLogs.setGlobalContext({ env: 'staging' })
 
-datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
+datadogLogs.setGlobalContextProperty('referrer', document.referrer)
 
-const context = datadogLogs.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+datadogLogs.getGlobalContext() // => {env: 'staging', referrer: ...}
+
+datadogLogs.removeGlobalContextProperty('referrer')
+
+datadogLogs.getGlobalContext() // => {env: 'staging'}
+
+datadogLogs.clearGlobalContext()
+
+datadogLogs.getGlobalContext() // => {}
 ```
 
 #### CDN 非同期
@@ -509,15 +526,31 @@ CDN 非同期の場合は以下を使用します。
 
 ```javascript
 DD_LOGS.onReady(function () {
-  DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
+DD_LOGS.setGlobalContext({ env: 'staging' })
 })
 
 DD_LOGS.onReady(function () {
-  DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 })
 
 DD_LOGS.onReady(function () {
-  var context = DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.removeGlobalContextProperty('referrer')
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.getGlobalContext() // => {env: 'staging'}
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.clearGlobalContext()
+})
+
+DD_LOGS.onReady(function () {
+DD_LOGS.getGlobalContext() // => {}
 })
 ```
 
@@ -528,11 +561,19 @@ DD_LOGS.onReady(function () {
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
+window.DD_LOGS && DD_LOGS.setGlobalContext({ env: 'staging' })
 
-window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+window.DD_LOGS && DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 
-var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+
+window.DD_LOGS && DD_LOGS.removeGlobalContextProperty('referrer')
+
+window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging'}
+
+window.DD_LOGS && DD_LOGS.clearGlobalContext()
+
+window.DD_LOGS && DD_LOGS.getGlobalContext() // => {}
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
@@ -541,7 +582,7 @@ var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'st
 
 ロガーを作成すると、以下のことができます。
 
-- `setContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
+- `setContext (context: object)` API を使用して、すべてのロガーのコンテキスト全てを設定。
 - `addContext (key: string, value: any)` API を使用して、あなたのロガーにコンテキストを追加。
 
 ##### NPM

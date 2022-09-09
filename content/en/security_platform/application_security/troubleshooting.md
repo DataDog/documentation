@@ -156,7 +156,7 @@ ASM relies on certain tracer integrations. If they are deactivated, ASM won't wo
 
 The required integrations vary by language.
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
 {{< programming-lang lang="java" >}}
 
 For [Java][1], if you are using any of the following technologies, the respective integration is required:
@@ -189,7 +189,7 @@ For [.NET][1], the ASP.NET integration is required.
 {{< programming-lang lang="PHP" >}}
 
 There are no required integrations for [PHP][1].
-
+<p></p>
 
 [1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
@@ -216,7 +216,7 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 {{< programming-lang lang="NodeJS" >}}
 
 For [NodeJS][1], the HTTP integration is required.
-
+<p></p>
 
 [1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
@@ -232,6 +232,15 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /tracing/trace_collection/dd_libraries/ruby/#rails
 [5]: /tracing/trace_collection/dd_libraries/ruby/#sinatra
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+For [Python][1], the WSGI integration is required along with the integration for the
+framework you're using, such as the Django or Flask integration.
+<p></p>
+
+[1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

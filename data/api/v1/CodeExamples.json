@@ -196,6 +196,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1094917386",
+      "description": "Create a new dashboard with manage_status widget and show_priority parameter"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_417992286",
       "description": "Create a new dashboard with note widget"
     },
@@ -248,6 +253,11 @@
       "group": "dashboards",
       "suffix": "_2921337351",
       "description": "Create a new dashboard with trace_service widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1307120899",
+      "description": "Create a new timeseries widget with ci_tests data source"
     }
   ],
   "DeleteDashboard": [
@@ -544,6 +554,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Validate a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_4247196452",
+      "description": "Validate a multi-alert monitor returns \"OK\" response"
     }
   ],
   "ValidateExistingMonitor": [
@@ -729,6 +744,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
+    }
+  ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
     }
   ],
   "CreatePrivateLocation": [
