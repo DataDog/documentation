@@ -2488,16 +2488,26 @@ main:
     parent: cspm
     identifier: ootb_infrastructure_rules
     weight: 4
+  - name: Custom Rules
+    url: security_platform/cspm/custom_rules
+    parent: cspm
+    identifier: custom_rules
+    weight: 5
+  - name: How to write Rego rules
+    url: /security_platform/cspm/custom_rules/writing_rego_rules
+    parent: custom_rules
+    identifier: cspm_writing_rego_rules
+    weight: 51
   - name: Posture Findings
     url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 4
+    weight: 6
   - name: Signals Explorer
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 5
+    weight: 7
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform_heading
