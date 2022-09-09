@@ -27,8 +27,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 
 All Datadog traffic is transmitted over SSL (default 443) to the following domains:
 
-{{< tabs >}}
-{{< tab "Logs" >}}
+### Logs
 
 | Site | Site URL                                      |
 |------|-----------------------------------------------|
@@ -37,8 +36,7 @@ All Datadog traffic is transmitted over SSL (default 443) to the following domai
 | US5  | https://logs.browser-intake-us5-datadoghq.com |
 | EU1  | https://mobile-http-intake.logs.datadoghq.eu  |
 
-{{< /tab >}}
-{{< tab "Traces" >}}
+### Traces
 
 | Site | Site URL                                           |
 |------|----------------------------------------------------|
@@ -47,8 +45,7 @@ All Datadog traffic is transmitted over SSL (default 443) to the following domai
 | US5  | https://trace.browser-intake-us5-datadoghq.com     |
 | EU1  | https://public-trace-http-intake.logs.datadoghq.eu |
 
-{{< /tab >}}
-{{< tab "RUM" >}}
+### RUM
 
 | Site | Site URL                                     |
 |------|----------------------------------------------|
@@ -56,9 +53,6 @@ All Datadog traffic is transmitted over SSL (default 443) to the following domai
 | US3  | https://rum.browser-intake-us3-datadoghq.com |
 | US5  | https://rum.browser-intake-us5-datadoghq.com |
 | EU1  | https://rum-http-intake.logs.datadoghq.eu    |
-
-{{< /tab >}}
-{{< /tabs >}}
 
 ## Navigate the Datadog documentation by site
 
@@ -74,9 +68,9 @@ For example, to see the documentation for the Datadog for Government site, selec
 
 The Datadog for Government site (US1-FED) is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about the Datadog for Government site's security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
 
+[1]: https://www.datadoghq.com/security/
 {{< /site-region >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: https://www.datadoghq.com/security/
