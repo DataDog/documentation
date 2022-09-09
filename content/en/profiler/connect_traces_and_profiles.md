@@ -183,10 +183,11 @@ Endpoint profiling is enabled by default when you turn on profiling for your [Ru
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Endpoint profiling is enabled by default when you turn on profiling for your [PHP][1] service. It requires ddtrace version 0.79.0 or greater. To disable it, set the environment variable `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED` to `0`, `no`, `off`, or `false`.
+Endpoint profiling is enabled by default when you turn on profiling for your [PHP][1] service. It requires [`ddtrace`][2] v0.79.0+. To disable endpoint profiling, set the environment variable `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED` to `0`, `no`, `off`, or `false`.
 <p></p>
 
 [1]: /profiler/enabling/php
+[2]: https://pypi.org/project/ddtrace/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
