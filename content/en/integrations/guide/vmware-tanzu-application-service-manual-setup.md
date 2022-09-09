@@ -198,7 +198,7 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 
 ### Install the Datadog Cluster Agent BOSH release
 
-This repository is a BOSH package for running the Datadog Cluster Agent on Cloud Foundry.
+The Datadog Cluster Agent BOSH release is a BOSH package for running the Datadog Cluster Agent on Cloud Foundry.
 
 This package is to be used in conjunction with the [Datadog Agent BOSH Release][18].
 It provides a BOSH link consumed by the Datadog Agent BOSH release to Autodiscover and schedule integrations for your apps, as well as improved tagging for application containers and process discovery. (see the [spec in GitHub][33]).
