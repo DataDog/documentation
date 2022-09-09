@@ -313,14 +313,14 @@
   - repo_name: datadog-ci-azure-devops
     contents:
     - action: pull-and-push-file
-      branch: alai97/readme-doc-edit
+      branch: master
       globs:
       - 'README.md'
       options:
         dest_path: '/synthetics/cicd_integrations/'
         file_name: 'azure_devops_extension.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/alai97/readme-doc-edit/README.md"]
+          dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/master/README.md"]
           title: Synthetics and CI Azure DevOps Extension
           kind: documentation
 
