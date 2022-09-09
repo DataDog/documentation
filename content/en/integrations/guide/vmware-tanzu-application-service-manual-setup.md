@@ -43,7 +43,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
 
       Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
 
-      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
+      **Important**: Your regular buildpack must be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
 
 3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
@@ -66,7 +66,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
+      **Important**: If you were using a single buildpack before, it must be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
 
 ### Meta-Buildpack **(deprecated)**
 
@@ -159,7 +159,7 @@ properties:
             #...
 ```
 
-The configuration under each check name should look the same as if you were configuring the check in its own file in the Agent's `conf.d` directory.
+The configuration under each check name uses the same format as when configuring the check in its own file in the Agent's `conf.d` directory.
 
 Everything you configure in `runtime.yml` applies to every node. You cannot configure a check for a subset of nodes in your deployment.
 
@@ -255,7 +255,7 @@ This environment variable is a JSON object containing the Autodiscovery configur
   1. Configurations for services bound to your application, whether they be user-provided or from a service broker.
   2. Configurations for services running inside your application, for example, a web-server.
 
-The JSON object should be a dictionary associating a service name to its Autodiscovery template:
+The JSON object is a dictionary associating a service name to its Autodiscovery template:
 ```
 {
     "<SERVICE_NAME>": {
@@ -336,9 +336,9 @@ The second item `postgres-service-name` is a configuration for a service bound t
 To resolve the template variables, it uses the `variables` dictionary to define the values used in the instance configuration.
 This dictionary contains a JSONPath object indicating where to find the variable values for the service `postgres-service-name` defined in the `VCAP_SERVICES` environment variable.
 
-#### Improved tagging for application containers and processes discovery
+#### Improved tagging for application containers and process discovery
 
-Once the two releases are linked, the Datadog Cluster Agent automatically provides tags used by the Datadog Agent when discovering Cloud Foundry application containers.
+Once the two releases are linked, the Datadog Cluster Agent automatically provides a tagger used by the Datadog Agent when discovering Cloud Foundry application containers.
 
 ### Deploy the Datadog Firehose Nozzle
 
