@@ -2,7 +2,6 @@ import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
-import { initializeSecurityRules } from './security-rules';
 import { initGlossaryJS } from './glossary';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
