@@ -187,7 +187,7 @@ Endpoint profiling is enabled by default when you turn on profiling for your [PH
 <p></p>
 
 [1]: /profiler/enabling/php
-[2]: https://pypi.org/project/ddtrace/
+[2]: https://github.com/DataDog/dd-trace-php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
