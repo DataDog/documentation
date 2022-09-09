@@ -89,7 +89,7 @@ These integrations are meant for VMware Tanzu Application Service deployment adm
 
 You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI -- [v1][15] or [v2][16].
 
-#### Install the Datadog Agent BOSH release
+### Install the Datadog Agent BOSH release
 
 Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Upload the latest release to your BOSH Director and then install it on every node in your deployment as an [addon][17] (the same way a Director deploys the BOSH Agent to all nodes).
 
@@ -140,7 +140,7 @@ Check if you have a previously configured `runtime-config` by running:
 bosh -e <BOSH_ENV> runtime-config
 ```
 
-In Bosh v2, if the `runtime.yml` file is empty, you should see the response: `No runtime config`.
+In BOSH v2, if the `runtime.yml` file is empty, you should see the response: `No runtime config`.
 
 #### Enable extra Agent checks
 
@@ -195,6 +195,150 @@ To check if the Agent installations were successful, filter by `cloudfoundry` on
 Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving system metrics:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="The detail view for a host in the Datadog host map with the system integration selected and multiple graphs displaying data"  >}}
+
+### Install the Datadog Cluster Agent BOSH release
+
+This repository is a BOSH package for running the Datadog Cluster Agent on Cloud Foundry.
+
+This package is to be used in conjunction with the [Datadog Agent BOSH Release][18].
+It provides a BOSH link consumed by the Datadog Agent BOSH release to Autodiscover and schedule integrations for your apps, as well as improved tagging for application containers and process discovery. (see the [spec in GitHub][33]).
+
+#### Upload Datadog's Cluster Agent release to your BOSH Director
+
+```text
+# BOSH CLI v1
+bosh upload release https://cloudfoundry.datadoghq.com/datadog-cluster-agent/datadog-cluster-agent-boshrelease-latest.tgz
+# BOSH CLI v2
+bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-cluster-agent/datadog-cluster-agent-boshrelease-latest.tgz
+```
+
+#### Deployment
+Use the example deploy manifest template below to deploy the Datadog Cluster Agent and expose it to the Datadog Agent. See the [spec in GitHub][33] for available properties.
+
+```yaml
+jobs:
+- name: datadog-cluster-agent
+  release: datadog-cluster-agent
+  properties:
+    cluster_agent:
+      token: <TOKEN>  # 32 or more characters in length 
+      bbs_poll_interval: 10
+      warmup_duration: 5
+      log_level: INFO
+      bbs_ca_crt: <CA_CERTIFICATE>
+      bbs_client_crt: <CLIENT_CERTIFICATE>
+      bbs_client_key: <CLIENT_PRIVATE_KEY>
+  provides:
+    datadog-cluster-agent:
+      aliases:
+        - domain: <DNS_NAME (e.g. datadog-cluster-agent)>
+```
+
+**Note**: This creates a DNS alias for the Datadog Cluster Agent service which makes it addressable through a static alias. See [Aliases to services](https://bosh.io/docs/dns/#aliases-to-services) in the BOSH documentation for more details on BOSH DNS aliases.
+
+This DNS alias is specified in the [`cluster_agent.address`](https://bosh.io/jobs/dd-agent?source=github.com/DataDog/datadog-agent-boshrelease&version=4.0.0#p%3dcluster_agent.address) job property of the Datadog Agent runtime configuration, as shown in the example template below:
+
+```yaml
+jobs:
+- name: datadog-agent
+  release: datadog-agent
+  properties: 
+    ...
+    cluster_agent:
+      address: <DNS_NAME>
+    ...
+```
+
+#### Integration configurations discovery
+The Datadog Cluster Agent discovers integrations based on an `AD_DATADOGHQ_COM` environment variable set in your applications.
+This environment variable is a JSON object containing the Autodiscovery configuration templates for your application. The Datadog Cluster Agent can discover and render two types of configurations:
+  1. Configurations for services bound to your application, whether they be user-provided or from a service broker.
+  2. Configurations for services running inside your application, for example, a web-server.
+
+The JSON object should be a dictionary associating a service name to its Autodiscovery template:
+```
+{
+    "<SERVICE_NAME>": {
+        "check_names": [<LIST_OF_INTEGRATION_NAMES_TO_CONFIGURE>],
+        "init_configs": [<LIST_OF_INIT_CONFIGS>],
+        "instances": [<LIST_OF_INSTANCES>],
+        "variables": [<LIST_OF_VARIABLES_DEFINITIONS>]
+    }
+}
+```
+
+For services bound to the application, the `<SERVICE_NAME>` must be the name of the service as it appears in the `cf services` command output. For services running inside the application, the `<SERVICE_NAME>` can be anything.  
+The `variables` key is used only for bound services to resolve template variables inside the configuration template, and must contain the JSON path of the desired value for the `VCAP_SERVICES` environment variable. You can inspect this with command `cf env <APPLICATION_NAME>`.
+
+**Note:** The Datadog Cluster Agent is only able to resolve credentials of services directly available in the `VCAP_SERVICES` environment variable for Autodiscovery.
+
+##### Example
+
+This Autodiscovery configuration in the `AD_DATADOGHQ_COM` environment variable demonstrates a Cloud Foundry application running a web server bound to a PostgreSQL service:
+
+```
+AD_DATADOGHQ_COM: '{
+    "web_server": {
+        "check_names": ["http_check"],
+        "init_configs": [{}],
+        "instances": [
+            {
+                "name": "My Nginx",
+                "url": "http://%%host%%:%%port_p8080%%",
+                "timeout": 1
+            }
+        ]
+    }
+    "postgres-service-name": {
+        "check_names": ["postgres"],
+        "init_configs": [{}],
+        "instances": [
+            {
+                "host": "%%host%%",
+                "port": 5432,
+                "username": "%%username%%",
+                "dbname": "%%dbname%%",
+                "password": "%%password%%"
+            }
+        ],
+        "variables": {
+            "host": "$.credentials.host",
+            "username": "$.credentials.Username",
+            "password": "$.credentials.Password",
+            "dbname": "$.credentials.database_name"
+        }
+    }
+}'
+```
+
+This example demonstrates the accompanying `VCAP_SERVICES` environment variable:
+
+```
+VCAP_SERVICES: '{
+    "my-postgres-service": [
+        {
+            "credentials": {
+                Password: "1234",
+                Username: "User1234",
+                host: "postgres.example.com",
+                database_name: "my_db",
+            },
+            "name": "postgres-service-name",
+        }
+    ]
+}'
+```
+
+In the example above, the first item `web_server` is a configuration for a service running inside the application.
+There are no `variables`, and it uses the template variables `%%host%%` and `%%port%%` available through Autodiscovery.
+
+The second item `postgres-service-name` is a configuration for a service bound to the application.
+To resolve the template variables, it uses the `variables` dictionary to define the values used in the instance configuration.
+This dictionary contains a JSONPath object indicating where to find the variable values for the service `postgres-service-name` defined in the `VCAP_SERVICES` environment variable.
+
+#### Improved tagging for application containers and processes discovery
+
+Once the two releases are linked, the Datadog Cluster Agent automatically provides tags used by the Datadog Agent when discovering Cloud Foundry application containers.
 
 ### Deploy the Datadog Firehose Nozzle
 
@@ -330,4 +474,6 @@ On the [Metrics explorer][23] page in Datadog, search for metrics beginning with
 [29]: https://docs.cloudfoundry.org/running/all_metrics.html
 [30]: /profiler/enabling/
 [32]: /integrations/faq/pivotal_architecture
+[33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
+
 
