@@ -28,7 +28,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 All Datadog traffic is transmitted over SSL (default 443) to the following domains:
 
 {{< tabs >}}
-{{% tab "Logs" %}}
+{{< tab "Logs" >}}
 
 | Site | Site URL                                      |
 |------|-----------------------------------------------|
@@ -37,8 +37,8 @@ All Datadog traffic is transmitted over SSL (default 443) to the following domai
 | US5  | https://logs.browser-intake-us5-datadoghq.com |
 | EU1  | https://mobile-http-intake.logs.datadoghq.eu  |
 
-{{% /tab %}}
-{{% tab "Traces" %}}
+{{< /tab >}}
+{{< tab "Traces" >}}
 
 | Site | Site URL                                           |
 |------|----------------------------------------------------|
@@ -47,8 +47,8 @@ All Datadog traffic is transmitted over SSL (default 443) to the following domai
 | US5  | https://trace.browser-intake-us5-datadoghq.com     |
 | EU1  | https://public-trace-http-intake.logs.datadoghq.eu |
 
-{{% /tab %}}
-{{% tab "RUM" %}}
+{{< /tab >}}
+{{< tab "RUM" >}}
 
 | Site | Site URL                                     |
 |------|----------------------------------------------|
@@ -57,7 +57,7 @@ All Datadog traffic is transmitted over SSL (default 443) to the following domai
 | US5  | https://rum.browser-intake-us5-datadoghq.com |
 | EU1  | https://rum-http-intake.logs.datadoghq.eu    |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Navigate the Docs site 
