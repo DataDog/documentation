@@ -60,13 +60,13 @@ All Datadog traffic is transmitted over SSL (default 443) to the following domai
 {{< /tab >}}
 {{< /tabs >}}
 
-## Navigate the Docs site 
+## Navigate the Datadog documentation by site
 
-Different Datadog sites may support different functionalities depending on the instance's security requirements. You can use the site selector dropdown menu on the right side of the Docs site to select the Datadog site you want to see information about.
+Different Datadog sites may support different functionalities depending on the instance's security requirements. Therefore, documentation may vary between sites. You can use the site selector dropdown menu on the right side of any page in the Datadog documentation to select the Datadog site you want to see information about.
 
 {{< img src="getting_started/site/site-selector.png" alt="The site selector dropdown menu on the right hand side of the Documentation site" style="width:100%" >}}
 
-For example, to access information about the Datadog for Government site, select **US1-FED**.
+For example, to see the documentation for the Datadog for Government site, select **US1-FED**.
 
 {{< site-region region="gov" >}}
 
