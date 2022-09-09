@@ -6,6 +6,7 @@
     <h1 class="pb-0">{{ .Title }}</h1>
     <div class="row">
         <div class="col-10 col-md-12 order-md-1 mt-5">
+            {{ .Content }}
             {{ range $headless_term_pages }}
                 {{ $first_char := substr .Title 0 1 | upper }}
                 {{ $curr_letter := $.Scratch.Get "curr_letter" }}
