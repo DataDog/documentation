@@ -101,23 +101,13 @@ Read more about sampling controls in the [Python tracing library documentation][
 [1]: /tracing/trace_collection/dd_libraries/python
 {{< /tab >}}
 {{< tab "Ruby" >}}
-For Ruby applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
+For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-You can also configure sampling rates by service. For instance, to send 20% of the traces for the service named `my-service`:
+For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
 
-```ruby
-require 'ddtrace'
-
-Datadog.configure do |c|
-  c.tracing.sampler = Datadog::Tracing::Sampling::PrioritySampler.new(
-    post_sampler: Datadog::Tracing::Sampling::RuleSampler.new(
-      [
-        # Sample all 'my-service' traces at 20.00%:
-        Datadog::Tracing::Sampling::SimpleRule.new(service: 'my-service', sample_rate: 0.2000)
-      ]
-    )
-  )
-end
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.

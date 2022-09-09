@@ -611,11 +611,15 @@ main:
     identifier: watchdog_rca
     parent: watchdog_top_level
     weight: 3
+  - name: Insights
+    url: watchdog/insights
+    parent: watchdog_top_level
+    weight: 4
   - name: Faulty Deployment Detection
     url: watchdog/faulty_deployment_detection/
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
-    weight: 4
+    weight: 5
   - name: Events
     url: events/
     identifier: events_top_level
@@ -2382,186 +2386,12 @@ main:
     parent: log_management
     identifier: log_troubleshooting
     weight: 8
-  - name: Security Platform
+  - name: Security Platform Overview
     url: security_platform/
     pre: security-platform
     identifier: security_platform
     parent: security_platform_heading
     weight: 180000
-  - name: Cloud SIEM
-    url: security_platform/cloud_siem/
-    parent: security_platform
-    identifier: cloud_siem
-    weight: 1
-  - name: Getting Started
-    url: security_platform/cloud_siem/getting_started
-    parent: cloud_siem
-    identifier: cloud_siem_getting_started
-    weight: 101
-  - name: Security Home
-    url: security_platform/cloud_siem/security_home
-    parent: cloud_siem
-    identifier: cloud_siem_security_home
-    weight: 102
-  - name: Log Detection Rules
-    url: security_platform/cloud_siem/log_detection_rules
-    parent: cloud_siem
-    identifier: cloud_siem_log_detection_rules
-    weight: 103
-  - name: OOTB Rules
-    url: /security_platform/default_rules#cat-cloud-siem
-    parent: cloud_siem
-    identifier: cloud_siem_default_rules
-    weight: 104
-  - name: Signals Explorer
-    url: /security_platform/explorer
-    parent: cloud_siem
-    identifier: cloud_siem_signals_explorer
-    weight: 105
-  - name: Cloud Security Posture Management
-    url: security_platform/cspm/
-    parent: security_platform
-    identifier: cspm
-    weight: 2
-  - name: Getting Started
-    url: security_platform/cspm/getting_started
-    parent: cspm
-    identifier: cspm_getting_started
-    weight: 201
-  - name: Frameworks and Benchmarks
-    url: security_platform/cspm/frameworks_and_benchmarks
-    parent: cspm
-    weight: 202
-  - name: OOTB Cloud Rules
-    url: security_platform/default_rules/#cat-posture-management-cloud
-    parent: cspm
-    identifier: ootb_cloud_rules
-    weight: 203
-  - name: OOTB Infrastructure Rules
-    url: security_platform/default_rules/#cat-posture-management-infra
-    parent: cspm
-    identifier: ootb_infrastructure_rules
-    weight: 204
-  - name: Posture Findings
-    url: /security_platform/cspm/findings
-    parent: cspm
-    identifier: cspm_findings_explorer
-    weight: 204
-  - name: Signals Explorer
-    url: /security_platform/cspm/signals_explorer/
-    parent: cspm
-    identifier: signals
-    weight: 205
-  - name: Cloud Workload Security
-    url: security_platform/cloud_workload_security/
-    parent: security_platform
-    identifier: cloud_workload_security
-    weight: 3
-  - name: Getting Started
-    url: security_platform/cloud_workload_security/getting_started
-    parent: cloud_workload_security
-    identifier: cws_getting_started
-    weight: 301
-  - name: Agent Expressions
-    url: security_platform/cloud_workload_security/agent_expressions
-    parent: cloud_workload_security
-    identifier: cws_agent_expressions
-    weight: 302
-  - name: Workload Security Detection Rules
-    url: security_platform/cloud_workload_security/workload_security_rules
-    parent: cloud_workload_security
-    identifier: cws_workload_security_rules
-    weight: 303
-  - name: Workload Security Events
-    url: security_platform/cloud_workload_security/backend
-    parent: cloud_workload_security
-    identifier: cws_backend_event_schema_documentation
-    weight: 304
-  - name: OOTB Rules
-    url: security_platform/default_rules#cat-workload-security
-    parent: cloud_workload_security
-    identifier: cws_workload_default_rules
-    weight: 305
-  - name: Signals Explorer
-    url: security_platform/explorer
-    parent: cloud_workload_security
-    identifier: cws_workload_signals_explorer
-    weight: 306
-  - name: Troubleshooting
-    url: security_platform/cloud_workload_security/troubleshooting
-    parent: cloud_workload_security
-    identifier: cws_troubleshooting
-    weight: 307
-  - name: Application Security Monitoring
-    url: security_platform/application_security/
-    parent: security_platform
-    identifier: application_security
-    weight: 4
-  - name: Getting Started
-    url: security_platform/application_security/getting_started/
-    parent: application_security
-    identifier: appsec_getting_started
-    weight: 401
-  - name: Java
-    url: security_platform/application_security/getting_started/java/
-    parent: appsec_getting_started
-    identifier: appsec_java
-    weight: 101
-  - name: .NET
-    url: security_platform/application_security/getting_started/dotnet/
-    parent: appsec_getting_started
-    identifier: appsec_dotnet
-    weight: 102
-  - name: Go
-    url: security_platform/application_security/getting_started/go/
-    parent: appsec_getting_started
-    identifier: appsec_go
-    weight: 103
-  - name: Ruby
-    url: security_platform/application_security/getting_started/ruby/
-    parent: appsec_getting_started
-    identifier: appsec_ruby
-    weight: 104
-  - name: PHP
-    url: security_platform/application_security/getting_started/php/
-    parent: appsec_getting_started
-    identifier: appsec_php
-    weight: 105
-  - name: NodeJS
-    url: security_platform/application_security/getting_started/nodejs/
-    parent: appsec_getting_started
-    identifier: appsec_nodejs
-    weight: 106
-  - name: How It Works
-    url: security_platform/application_security/how-appsec-works/
-    parent: application_security
-    identifier: appsec_howitworks
-    weight: 402
-  - name: OOTB Rules
-    url: security_platform/default_rules/#cat-application-security
-    parent: application_security
-    identifier: appsec_default_rules
-    weight: 403
-  - name: Setup and Configure
-    url: security_platform/application_security/setup_and_configure/
-    parent: application_security
-    identifier: appsec_configuration
-    weight: 404
-  - name: Custom Detection Rules
-    url: security_platform/application_security/custom_rules/
-    parent: application_security
-    identifier: appsec_custom_rules
-    weight: 405
-  - name: Event Rules
-    url: security_platform/application_security/event_rules/
-    parent: application_security
-    identifier: appsec_event_rules
-    weight: 406
-  - name: Troubleshooting
-    url: security_platform/application_security/troubleshooting
-    parent: application_security
-    identifier: appsec_troubleshooting
-    weight: 407
   - name: Detection Rules
     url: security_platform/detection_rules/
     parent: security_platform
@@ -2597,11 +2427,189 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
+  - name: Cloud SIEM
+    url: security_platform/cloud_siem/
+    pre: siem
+    parent: security_platform_heading
+    identifier: cloud_siem
+    weight: 181000
+  - name: Getting Started
+    url: security_platform/cloud_siem/getting_started
+    parent: cloud_siem
+    identifier: cloud_siem_getting_started
+    weight: 1
+  - name: Security Home
+    url: security_platform/cloud_siem/security_home
+    parent: cloud_siem
+    identifier: cloud_siem_security_home
+    weight: 2
+  - name: Log Detection Rules
+    url: security_platform/cloud_siem/log_detection_rules
+    parent: cloud_siem
+    identifier: cloud_siem_log_detection_rules
+    weight: 3
+  - name: OOTB Rules
+    url: /security_platform/default_rules#cat-cloud-siem
+    parent: cloud_siem
+    identifier: cloud_siem_default_rules
+    weight: 4
+  - name: Signals Explorer
+    url: /security_platform/explorer
+    parent: cloud_siem
+    identifier: cloud_siem_signals_explorer
+    weight: 5
   - name: Guides
-    url: security_platform/guide/
-    parent: security_platform
-    identifier: security_platform_guides
-    weight: 9
+    url: security_platform/cloud_siem/guide/
+    parent: cloud_siem
+    identifier: siem_guides
+    weight: 6
+  - name: Cloud Security Posture Management
+    url: security_platform/cspm/
+    parent: security_platform_heading
+    pre: cspm
+    identifier: cspm
+    weight: 182000
+  - name: Getting Started
+    url: security_platform/cspm/getting_started
+    parent: cspm
+    identifier: cspm_getting_started
+    weight: 1
+  - name: Frameworks and Benchmarks
+    url: security_platform/cspm/frameworks_and_benchmarks
+    parent: cspm
+    weight: 2
+  - name: OOTB Cloud Rules
+    url: security_platform/default_rules/#cat-posture-management-cloud
+    parent: cspm
+    identifier: ootb_cloud_rules
+    weight: 3
+  - name: OOTB Infrastructure Rules
+    url: security_platform/default_rules/#cat-posture-management-infra
+    parent: cspm
+    identifier: ootb_infrastructure_rules
+    weight: 4
+  - name: Posture Findings
+    url: /security_platform/cspm/findings
+    parent: cspm
+    identifier: cspm_findings_explorer
+    weight: 4
+  - name: Signals Explorer
+    url: /security_platform/cspm/signals_explorer/
+    parent: cspm
+    identifier: signals
+    weight: 5
+  - name: Cloud Workload Security
+    url: security_platform/cloud_workload_security/
+    parent: security_platform_heading
+    pre: cws
+    identifier: cloud_workload_security
+    weight: 183000
+  - name: Getting Started
+    url: security_platform/cloud_workload_security/getting_started
+    parent: cloud_workload_security
+    identifier: cws_getting_started
+    weight: 1
+  - name: Agent Expressions
+    url: security_platform/cloud_workload_security/agent_expressions
+    parent: cloud_workload_security
+    identifier: cws_agent_expressions
+    weight: 2
+  - name: Workload Security Detection Rules
+    url: security_platform/cloud_workload_security/workload_security_rules
+    parent: cloud_workload_security
+    identifier: cws_workload_security_rules
+    weight: 3
+  - name: Workload Security Events
+    url: security_platform/cloud_workload_security/backend
+    parent: cloud_workload_security
+    identifier: cws_backend_event_schema_documentation
+    weight: 4
+  - name: OOTB Rules
+    url: security_platform/default_rules#cat-workload-security
+    parent: cloud_workload_security
+    identifier: cws_workload_default_rules
+    weight: 5
+  - name: Signals Explorer
+    url: security_platform/explorer
+    parent: cloud_workload_security
+    identifier: cws_workload_signals_explorer
+    weight: 6
+  - name: Troubleshooting
+    url: security_platform/cloud_workload_security/troubleshooting
+    parent: cloud_workload_security
+    identifier: cws_troubleshooting
+    weight: 7
+  - name: Application Security Monitoring
+    url: security_platform/application_security/
+    parent: security_platform_heading
+    pre: app-sec
+    identifier: application_security
+    weight: 184000
+  - name: Getting Started
+    url: security_platform/application_security/getting_started/
+    parent: application_security
+    identifier: appsec_getting_started
+    weight: 1
+  - name: Java
+    url: security_platform/application_security/getting_started/java/
+    parent: appsec_getting_started
+    identifier: appsec_java
+    weight: 101
+  - name: .NET
+    url: security_platform/application_security/getting_started/dotnet/
+    parent: appsec_getting_started
+    identifier: appsec_dotnet
+    weight: 102
+  - name: Go
+    url: security_platform/application_security/getting_started/go/
+    parent: appsec_getting_started
+    identifier: appsec_go
+    weight: 103
+  - name: Ruby
+    url: security_platform/application_security/getting_started/ruby/
+    parent: appsec_getting_started
+    identifier: appsec_ruby
+    weight: 104
+  - name: PHP
+    url: security_platform/application_security/getting_started/php/
+    parent: appsec_getting_started
+    identifier: appsec_php
+    weight: 105
+  - name: NodeJS
+    url: security_platform/application_security/getting_started/nodejs/
+    parent: appsec_getting_started
+    identifier: appsec_nodejs
+    weight: 106
+  - name: How It Works
+    url: security_platform/application_security/how-appsec-works/
+    parent: application_security
+    identifier: appsec_howitworks
+    weight: 2
+  - name: OOTB Rules
+    url: security_platform/default_rules/#cat-application-security
+    parent: application_security
+    identifier: appsec_default_rules
+    weight: 3
+  - name: Setup and Configure
+    url: security_platform/application_security/setup_and_configure/
+    parent: application_security
+    identifier: appsec_configuration
+    weight: 4
+  - name: Custom Detection Rules
+    url: security_platform/application_security/custom_rules/
+    parent: application_security
+    identifier: appsec_custom_rules
+    weight: 5
+  - name: Event Rules
+    url: security_platform/application_security/event_rules/
+    parent: application_security
+    identifier: appsec_event_rules
+    weight: 6
+  - name: Troubleshooting
+    url: security_platform/application_security/troubleshooting
+    parent: application_security
+    identifier: appsec_troubleshooting
+    weight: 7
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
