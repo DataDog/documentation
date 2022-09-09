@@ -5,8 +5,7 @@
       "query": "@test:true",
       "aggregation": "count",
       "groupByFields": [],
-      "distinctFields": [],
-      "metric": ""
+      "distinctFields": []
     }
   ],
   "filters": [],
