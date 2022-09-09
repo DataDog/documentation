@@ -2452,6 +2452,16 @@ main:
     parent: cspm
     identifier: signals
     weight: 205
+  - name: Custom Rego Rules
+    url: /security_platform/cspm/custom_rego_rules/
+    parent: cspm
+    identifier: custom_rego_rules
+    weight: 206
+  - name: How to write Rego rules
+    url: /security_platform/cspm/writing_rego_rules
+    parent: cspm
+    identifier: writing_rego_rules
+    weight: 207
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform
