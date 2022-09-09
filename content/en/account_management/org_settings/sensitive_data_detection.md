@@ -1,7 +1,7 @@
 ---
 title: Sensitive Data Scanner
 kind: documentation
-beta: true
+beta: false
 aliases:
     - /logs/log_configuration/sensitive_data_detection
 further_reading:
