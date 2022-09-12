@@ -11425,6 +11425,7 @@ components:
       - validates
       - isInMoreThan
       - isInLessThan
+      - doesNotExist
       example: contains
       type: string
       x-enum-varnames:
@@ -11441,6 +11442,7 @@ components:
       - VALIDATES
       - IS_IN_MORE_DAYS_THAN
       - IS_IN_LESS_DAYS_THAN
+      - DOES_NOT_EXIST
     SyntheticsAssertionTarget:
       description: An assertion which uses a simple target.
       properties:
