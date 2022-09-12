@@ -66,7 +66,7 @@ See [Configuration](#configuration) for more advanced usage.
 
 After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][4].
 
-If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.profiler.Profiler` object:
+If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.Profiler` object:
 
 ```python
 from ddtrace.profiling import Profiler
