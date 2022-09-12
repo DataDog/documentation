@@ -151,7 +151,7 @@ view. In the drawer, a new tab named **Infrastructure** appears which contains t
 
 ### Error messages for pipeline failures
 
-For failed GitLab pipeline executions (on the [Pipeline Executions][5] page), each error under the `Errors` tab within a specific execution displays a message associated with the error type from GitLab.
+For failed GitLab pipeline executions (that can be found on any pipeline execution page), each error under the `Errors` tab within a specific execution displays a message associated with the error type from GitLab.
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
 
