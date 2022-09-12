@@ -28,7 +28,7 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 - [CIS Kubernetes Benchmark v1.5.1**][5]
 - [PCI DSS v3.2.1][6]
 - [AICPA SOC 2][7]
-- [ISO v27001][8]
+- [ISO/IEC 27001 v2][8]
 - [HIPAA][9]
 - [GDPR][10]
 
