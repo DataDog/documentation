@@ -2719,21 +2719,26 @@ main:
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_github_actions
     weight: 603
+  - name: GitLab
+    url: /synthetics/cicd_integrations/gitlab
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_gitlab
+    weight: 604
   - name: Jenkins
     url: /synthetics/cicd_integrations/jenkins
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_jenkins
-    weight: 604
+    weight: 605
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
     parent: synthetics_cicd_integrations
     identifier: synthetics_testing_tunnel
-    weight: 605
+    weight: 606
   - name: Troubleshooting
     url: /synthetics/cicd_integrations/troubleshooting
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_troubleshooting
-    weight: 606
+    weight: 607
   - name: CI Results Explorer
     url: /synthetics/explorer
     parent: synthetics
