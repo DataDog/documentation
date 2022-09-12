@@ -63,7 +63,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
   * **Note**: If you have more than two sources you want to subscribe to, you can subscribe to the new Kinesis stream after completing this setup.
 2. Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. Refer to [this CloudWatch Logs documentation section][2] (step 3 to 6) to:  
    - Use the `aws iam create-role` command to create the IAM role that gives CloudWatch Logs permission to put logs data into the Kinesis stream.
-   - Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecordBatch` actions.
+   - Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions.
    - Attach the permissions policy to your newly created IAM role using the `aws iam put-role-policy` command.
    - Use the `aws logs put-subscription-filter` command to subscribe your Kinesis stream to each CloudWatch log group you want to ingest into Datadog.  
 
