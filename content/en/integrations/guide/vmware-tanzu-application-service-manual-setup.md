@@ -338,7 +338,7 @@ This dictionary contains a JSONPath object indicating where to find the variable
 
 #### Improved tagging for application containers and process discovery
 
-Once the two releases are linked, the Datadog Cluster Agent automatically provides a tagger used by the Datadog Agent when discovering Cloud Foundry application containers.
+Once the two releases are linked, the Datadog Cluster Agent automatically provides cluster-level metadata, which the node Agents attach as tags to the data from their corresponding Cloud Foundry application containers.
 
 ### Deploy the Datadog Firehose Nozzle
 
