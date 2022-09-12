@@ -312,14 +312,14 @@
   - repo_name: datadog-ci-azure-devops
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: main
       globs:
       - 'README.md'
       options:
         dest_path: '/synthetics/cicd_integrations/'
         file_name: 'azure_devops_extension.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/master/README.md"]
+          dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
           title: Synthetics and Datadog CI Azure DevOps Extension
           kind: documentation
           description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
