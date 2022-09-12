@@ -1,5 +1,8 @@
 ---
 title: Glossary
+is_beta: true
+aliases:
+    - /glossary/
 cascade:
     disable_toc: true
 ---
