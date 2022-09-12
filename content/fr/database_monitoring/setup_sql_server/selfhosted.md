@@ -26,7 +26,7 @@ Pour activer la solution Database Monitoring pour votre base de données, suive
 
 ## Avant de commencer
 
-{{< dbm-sqlserver-before-you-begin >}}
+{{% dbm-sqlserver-before-you-begin %}}
 
 ## Accorder un accès à l'Agent
 

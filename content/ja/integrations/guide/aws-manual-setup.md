@@ -123,7 +123,7 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 {{< /tab >}}
 {{< /tabs >}}
 
-{{< aws-permissions >}}
+{{% aws-permissions %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

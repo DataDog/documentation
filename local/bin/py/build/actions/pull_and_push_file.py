@@ -48,13 +48,10 @@ def pull_and_push_file(content, content_dir):
     output_content = content["options"].get("output_content", True)
 
     if output_content:
+        file_content = file_content.replace("{{%", "{{<").replace("%}}", ">}}")
         destination_path = content["options"]["dest_path"].lstrip('/')
         dest_path_dir = pathlib.Path(content_dir) / pathlib.Path(destination_path)
         dest_path_dir.mkdir(parents=True, exist_ok=True)
-
-        # Test replacing tab logic
-        file_content = file_content.replace("{{%", "{{<").replace("%}}", ">}}")
-
         with open(
             "{}{}{}".format(
                 content_dir,
