@@ -2044,6 +2044,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@popperjs/core@npm:^2.11.6":
+  version: 2.11.6
+  resolution: "@popperjs/core@npm:2.11.6"
+  checksum: 47fb328cec1924559d759b48235c78574f2d71a8a6c4c03edb6de5d7074078371633b91e39bbf3f901b32aa8af9b9d8f82834856d2f5737a23475036b16817f0
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/is@npm:^0.7.0":
   version: 0.7.0
   resolution: "@sindresorhus/is@npm:0.7.0"
@@ -4396,6 +4403,7 @@ __metadata:
     "@datadog/browser-logs": ^4.13.0
     "@datadog/browser-rum": ^4.13.0
     "@datadog/datadog-ci": ^1.2.0
+    "@popperjs/core": ^2.11.6
     a11y: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz"
     acorn: ^7.1.1
     algoliasearch: 4.11.0
