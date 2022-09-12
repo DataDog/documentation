@@ -76,7 +76,7 @@ prof = Profiler(
     service="my-web-app",  # if not specified, falls back to environment variable DD_SERVICE
     version="1.0.3",   # if not specified, falls back to environment variable DD_VERSION
 )
-prof.start()
+prof.start()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
 ```
 
 ## Caveats
@@ -87,14 +87,14 @@ you need to manually start a new profiler in your child process:
 
 ```python
 # For ddtrace-run users, call this in your child process
-ddtrace.profiling.auto.start_profiler()
+ddtrace.profiling.auto.start_profiler()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
 
 # Alternatively, for manual instrumentation,
 # create a new profiler in your child process:
 from ddtrace.profiling import Profiler
 
-prof = Profiler()
-prof.start()
+prof = Profiler(...)
+prof.start()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
 ```
 
 ## Configuration
