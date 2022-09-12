@@ -45,7 +45,7 @@ pip install ddtrace
 
 **Note**: Profiling requires the `ddtrace` library version 0.40+.
 
-If you are using a platform where `ddtrace` binary distribution is not available, install a development environment.
+If you are using a platform where `ddtrace` binary distribution is not available, first install a development environment.
 
 For example, on Alpine Linux, this can be done with:
 ```shell
@@ -62,7 +62,7 @@ To automatically profile your code, set the `DD_PROFILING_ENABLED` environment v
     DD_VERSION=1.0.3 \
     ddtrace-run python app.py
 
-It is strongly recommended that you add tags like `service` or `version`, as they provide the ability to filter and group your profiles across these dimensions. See [Configuration](#configuration) below.
+See [Configuration](#configuration) for more advanced usage.
 
 After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][4].
 
@@ -81,12 +81,9 @@ prof.start()
 
 ## Caveats
 
-When your process forks using `os.fork`, the profiler is actually stopped in
-the child process and needs to be restarted. For Python 3.7+, a new profiler is
-automatically started.
-
-If you use Python < 3.7, you need to manually start a new profiler in your
-child process.
+When your process forks using `os.fork`, the profiler needs to be started in
+the child process. In Python 3.7+, this is done automatically. In Python < 3.7,
+you need to manually start a new profiler in your child process:
 
 ```python
 # For ddtrace-run users, call this in your child process
