@@ -41,9 +41,10 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 
 ## Integrations
 
-{{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in the CI platform provider of your choice:" >}}
+{{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in any CI platform provider of choice. See the documentation for information about the following integrations:" >}}
     {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="synthetics/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
 {{< /whatsnext >}}
 
