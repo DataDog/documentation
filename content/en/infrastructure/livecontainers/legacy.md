@@ -18,7 +18,7 @@ If you are using the official [Datadog Helm Chart][1]:
 
 - Use chart version above 2.4.5 and before 2.10.0. Starting from chart version 2.10.0 onwards, see the [latest configuration instructions][2] instead.
   **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your Helm chart [values.yaml][3] file.
-- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][3]
+- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][3].
 - Deploy a new release.
 
 In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, set `datadog.clusterName` to your cluster name in [values.yaml][3].
@@ -41,8 +41,8 @@ The Cluster Agent must be running, and the Agent must be able to communicate wit
 2. Set the Cluster Agent ClusterRole with the following RBAC permissions.
 
     **Note**: For the `apps` apiGroups, Live Containers need permissions
-    to collect common kubernetes resources (`pods`, `services`, `nodes`, etc.),
-    which should be already in the RBAC if you followed [Cluster Agent Setup][1]. But if they are missing, ensure they are added (after `deployments`, `replicasets`):
+    to collect common Kubernetes resources (for example, `pods`, `services`, and `nodes`),
+    which are already in the RBAC if you followed [Cluster Agent Setup][1]. If they are missing, ensure they are added (after `deployments`, `replicasets`):
 
     ```yaml
       ClusterRole:
