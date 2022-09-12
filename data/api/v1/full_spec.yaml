@@ -13948,6 +13948,91 @@ components:
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
+    TopologyMapWidgetDefinition:
+      description: This widget displays a topology of nodes and edges for different
+        data sources. It replaces the service map widget.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        requests:
+          description: One or more Topology requests.
+          items:
+            $ref: '#/components/schemas/TopologyRequest'
+          minItems: 1
+          type: array
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/TopologyMapWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    TopologyMapWidgetDefinitionType:
+      default: topology_map
+      description: Type of the topology map widget.
+      enum:
+      - topology_map
+      example: topology_map
+      type: string
+      x-enum-varnames:
+      - TOPOLOGY_MAP
+    TopologyQuery:
+      description: Query to service-based topology data sources like the service map
+        or data streams.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/TopologyQueryDataSource'
+        filters:
+          description: Your environment and primary tag (or * if enabled for your
+            account).
+          example:
+          - env:prod
+          - az:us-east
+          items:
+            description: Environment or primary tag, generally in a key:value format
+            type: string
+          minItems: 1
+          type: array
+        service:
+          description: Name of the service
+          example: myService
+          type: string
+      type: object
+    TopologyQueryDataSource:
+      description: Name of the data source
+      enum:
+      - data_streams
+      - service_map
+      type: string
+      x-enum-varnames:
+      - DATA_STREAMS
+      - SERVICE_MAP
+    TopologyRequest:
+      description: Request that will return nodes and edges to be used by topology
+        map.
+      properties:
+        query:
+          $ref: '#/components/schemas/TopologyQuery'
+        request_type:
+          $ref: '#/components/schemas/TopologyRequestType'
+      type: object
+    TopologyRequestType:
+      description: Widget request type.
+      enum:
+      - topology
+      type: string
+      x-enum-varnames:
+      - TOPOLOGY
     TreeMapColorBy:
       default: user
       deprecated: true
@@ -17484,6 +17569,7 @@ components:
       - $ref: '#/components/schemas/TreeMapWidgetDefinition'
       - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       - $ref: '#/components/schemas/FunnelWidgetDefinition'
+      - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
