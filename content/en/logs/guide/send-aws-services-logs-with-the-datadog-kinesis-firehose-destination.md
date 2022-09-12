@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+  tag: "Blog"
+  text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"
 ---
 
 ## Overview
@@ -90,6 +93,10 @@ To populate all logs by ARN:
 
 1. Navigate to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press **Enter**.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://console.aws.amazon.com/cloudwatch/home
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
