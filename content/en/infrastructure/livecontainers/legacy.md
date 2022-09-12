@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-This page provides instructions for setting up Live Containers for older Agent versions. These instructions apply to Datadog Agent versions [7.21.1][1] through 7.27.0 and Cluster Agent [1.9.0][2] through 1.11.0.
+This page provides instructions for setting up Live Containers for older Agent versions. These instructions apply to Datadog Agent versions 7.21.1 through 7.27.0 and Cluster Agent 1.9.0 through 1.11.0.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -109,5 +109,3 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /tagging/assigning_tags?tab=agentv6v7#host-tags
-[2]: /getting_started/tagging/
