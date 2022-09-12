@@ -21,6 +21,8 @@ If you experience unexpected behavior with Datadog Session Replay, use this page
 
 Session Replay does not support the following HTML elements: `iframe`, `video`, `audio`, or `canvas`. Session Replay does not support Web Components.
 
+Session Replay requires you to use an HTTPS connection. If you aren't using a secure connection, the resources time out and you can't see images and some page elements.
+
 ### Fonts or images do not render properly
 
 A Session Replay is not a video, but an actual iframe rebuilt based on snapshots of the DOM. The replay thus depends on the various assets of the page: fonts and images.
