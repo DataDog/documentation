@@ -57,8 +57,10 @@ All the spans from a trace sampled using the Datadog Agent [automatically comput
 
 For more granular control, use tracing library sampling configuration options:
 - Set a specific **sampling rate to apply to all root services** for the library, overriding the Agent's [default mechanism](#in-the-agent).
-- Set a **sampling rate to apply to specific root services** or for specific span operation names.
+- Set a **sampling rate to apply to specific root services**.
 - Set a **rate limit** on the number of ingested traces per second. The default rate limit is 100 traces per second per service instance (when using the Agent [default mechanism](#in-the-agent), the rate limiter is ignored).
+
+Sampling controls can be set for only root services.
 
 **Note**: These rules are also head-based sampling controls. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
 
