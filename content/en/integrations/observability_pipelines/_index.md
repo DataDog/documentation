@@ -25,7 +25,7 @@ further_reading:
     text: Configure Datadog Agents to send data to Vector aggregators
 ---
 
-{{< img src="integrations/observability_pipelines/obs_pipelines_overview.png" alt="test" style="width:100%;" >}}
+{{< img src="integrations/observability_pipelines/obs_pipelines_overview.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows  pointing to different destinations for the modified data" style="width:100%;" >}}
 
 ## What is Observability Pipelines?
 
@@ -56,19 +56,19 @@ Now that you are sending configuration data to Observability Pipelines, start ge
 
 Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows. 
 
-{{< img src="integrations/observability_pipelines/config-map.png" alt="test" style="width:80%;" >}}
+{{< img src="integrations/observability_pipelines/config-map.png" alt="The configuration map showing data coming from http, splunk_hec, and datadog, and flowing into different transforms and then sent to different destinations" style="width:80%;" >}}
 
 ### Quickly identify bottlenecks and optimize performance
 
 Dive into specific Vector components to understand how observability data is flowing into your pipeline to troubleshoot and pinpoint performance bottlenecks and to optimize your pipeline. 
 
-{{< img src="integrations/observability_pipelines/config-map-side-panel.png" alt="test" style="width:85%;" >}}
+{{< img src="integrations/observability_pipelines/config-map-side-panel.png" alt="The S3 source configuration side panel showing graphs for events in and out per second, percentage of errors, and load average percentage" style="width:85%;" >}}
 
 ### Ensure data delivery and reduce latency. 
 
 Find out if data is reaching its destination and get full visibility into any latency issues to meet SLIs and SLOs.
 
-{{< img src="integrations/observability_pipelines/configuration-list.png" alt="test" style="width:85%;" >}}
+{{< img src="integrations/observability_pipelines/configuration-list.png" alt="The Observability Pipelines page showing a list of active and inactive pipelines with columns for created date, number of hosts, version, events in, bytes in, and error rate" style="width:85%;" >}}
 
 ## Further Reading
 
