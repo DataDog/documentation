@@ -29,7 +29,7 @@
         </div>
         <div class="row mb-0 mb-lg-5">
             <div class="col-12 col-lg-3 footer-side">
-                <a href="#" class="mb-2 mb-lg-4 js-cta-footer {{ if .Params.bottom_footer_trigger }} {{ .Params.bottom_footer_trigger }} {{ else }} sign-up-trigger {{ end }} btn btn-white btn-outline btn-block" data-event-category="Signup" data-event-action="Step 1 Footer Initiated" data-event-label="{{ "{{url path}}" }}" data-toggle="modal" data-target="#signupModal">
+                <a href="#" class="mb-2 mb-lg-4 js-cta-footer {{ if .Params.bottom_footer_trigger }} {{ .Params.bottom_footer_trigger }} {{ else }} sign-up-trigger {{ end }} btn btn-white btn-outline btn-block" data-event-category="Signup" data-event-action="Step 1 Footer Initiated" data-event-label="{{ "{{url path}}" }}" data-bs-toggle="modal" data-bs-target="#signupModal">
                     {{ if .Params.custom_footer_cta }}
                         {{ .Params.custom_footer_cta }}
                     {{ else }}
@@ -185,7 +185,7 @@
                         <div class="col-6 col-lg-1 offset-lg-3 mb-1 mb-lg-0">
                             <div class="d-flex d-lg-none mobile-lang-select-container">
                                 <span class="d-flex align-items-center">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;</span>
-                                <label class="sr-only" for="mobile-lang-select">Language Selection</label>
+                                <label class="visually-hidden" for="mobile-lang-select">Language Selection</label>
                                 <select class="mobile-lang-select" id="mobile-lang-select" id="" onchange="javascript:location.href = this.value;">
                                     <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ if ne .Sites.First .Site }}

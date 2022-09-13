@@ -75,7 +75,7 @@ For example:
 
 <div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <span class="sr-only">Error:</span>
+    <span class="visually-hidden">Error:</span>
     Enter a valid email address
 </div>
 ```

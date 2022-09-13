@@ -72,7 +72,7 @@ La bibliothèque RUM utilise diverses stratégies pour nommer les actions de cli
 
 <div class="alert alert-danger" role="alert" data-dd-action-name="Ignorer l'alerte">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <span class="sr-only">Error:</span>
+    <span class="visually-hidden">Error:</span>
     Saisissez une adresse e-mail valide
 </div>
 ```

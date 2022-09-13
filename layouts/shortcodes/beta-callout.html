@@ -6,8 +6,8 @@
         <a href="{{.Get `url`}}" 
             target="_blank" 
             class="{{.Get `custom_class`}} btn btn-outline-primary pb-1 align-self-end d-flex flex-column justify-content-center" 
-            {{with .Get `d_toggle`}}data-toggle="{{.}}"{{end}} 
-            {{with .Get `d_target`}}data-target="{{.}}"{{end}}
+            {{with .Get `d_toggle`}}data-bs-toggle="{{.}}"{{end}} 
+            {{with .Get `d_target`}}data-bs-target="{{.}}"{{end}}
         >
             Request Access
         </a>

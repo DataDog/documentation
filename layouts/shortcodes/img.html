@@ -58,7 +58,7 @@
     </video>
 {{- else -}}
   {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
-  <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-toggle="modal" data-target="#popupImageModal">
+  <a href="{{ print $img_resource $pop_param | relURL }}" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal">
 {{- else if .Get "href" -}}
   <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
      {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
