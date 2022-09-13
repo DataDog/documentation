@@ -92,6 +92,8 @@ The funnel graph displays the sessions for your selected queries out of your tot
 
 {{< img src="real_user_monitoring/explorer/visualize/funnel_updated.mp4" alt="Funnel graph in the RUM Explorer" video="true" width="100%" >}}
 
+You can analyze user journeys in a [notebook][6] by exporting the funnel widget into an existing notebook or by creating a funnel widget in an existing notebook. For more information, see [Export][7].
+
 ## Related events
 
 For all visualizations besides the [funnel](#funnel), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
@@ -111,3 +113,5 @@ For the remaining visualization options, click on the graph and click **View eve
 [3]: /logs/explorer/facets/
 [4]: /real_user_monitoring/explorer/saved_views/
 [5]: /real_user_monitoring/explorer/search#setup-facets-and-measures
+[6]: /notebooks
+[7]: /real_user_monitoring/explorer/export/
