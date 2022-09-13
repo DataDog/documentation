@@ -23,7 +23,7 @@
                 <h2 class="text-white text-center text-md-left font-semibold">{{ i18n "footer_blurb_heading" }}</h2>
                 <p class="text-white text-center text-md-left font-regular border-0 font-22 my-0 py-0">{{ i18n "footer_blurb_desc"  }}</p>
             </div>
-            <div class="col-12 col-lg-3 text-left text-lg-right contact-btn-container">
+            <div class="col-12 col-lg-3 text-start text-lg-right contact-btn-container">
                 <a href="{{ "help/" | absLangURL }}" class="btn btn-primary btn-inline-block mt-3 mb-4 my-lg-0  text-white text-uppercase">{{ i18n "contact_us" }}</a>
             </div>
         </div>
@@ -219,7 +219,7 @@
                         <div class="col-6 col-lg-2 mb-1 mb-lg-0 d-flex justify-content-lg-end">
                             <ul class="footer-menu d-flex  align-items-center">
                                 {{ range $index, $value := .Site.Menus.footer_social }}
-                                <li class="d-flex align-items-center {{ if ne $index ( sub (len $.Site.Menus.footer_social) 1 ) }} mr-2 mr-lg-1 mr-xl-2 {{end}}">
+                                <li class="d-flex align-items-center {{ if ne $index ( sub (len $.Site.Menus.footer_social) 1 ) }} me-2 mr-lg-1 mr-xl-2 {{end}}">
                                     <a class="d-flex align-items-center" href="{{ .URL }}" aria-label="{{ .Name }} link">{{ partial "svg" (dict "context" $dot "src" .Pre  )}}  </a>
                                 </li>
                                 {{end}}

@@ -82,8 +82,8 @@
 </div>
 
 <div class="filters controls d-none d-sm-block" data-ref="controls">
-    <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
-    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+    <a data-ref="filter" data-filter="all" href="#all" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
+    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
 </div>
 
 <div class="input-group mt-4 mb-4">
