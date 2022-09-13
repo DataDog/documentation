@@ -24,7 +24,7 @@
 {{ $currentPage := . }}
 {{ range $menu }}
     {{ if .HasChildren }}
-        <p class="h5 text-uppercase font-weight-bold">{{.Name}}</p>
+        <p class="h5 text-uppercase fw-bold">{{.Name}}</p>
         <ul class="list-unstyled">
             {{ range .Children }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
