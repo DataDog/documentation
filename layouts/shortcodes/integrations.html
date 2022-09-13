@@ -110,9 +110,7 @@
                             <p class="font-primary font-weight-bold text-uppercase text-center">Marketplace</p>
                         </div>
                     {{ end }}
-                    <div class="card-content">
-
-
+                    <div id="{{ $v.name }}" class="card-content">
                       <a href="{{ $v.redirect | absLangURL }}" aria-label="{{ $v.public_title }} datadog integration docs link">
                         <picture class="mx-auto my-auto">
                           {{ $img := (replace $v.int_logo "_large" "_avatar") }}

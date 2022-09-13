@@ -4,6 +4,8 @@ kind: documentation
 description: "A training roadmap for a new MSP to be ready to lead a Datadog sales engineering process"
 private: true
 ---
+The Datadog Partner Network provides many resources for partners. This is a guide to training for Sales Engineers, Solution Architects, Technical Account Managers and anyone who is involved in the technical aspects of Datadog sales at a partner organization.
+
 ## Datadog basics
 
 First, head over to the <a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>. Log in and click **Training**. Under Sales Certification, click **Get started today**.
@@ -31,9 +33,12 @@ The course helps you to:
 
 Once you have completed the Datadog Sales Certification and are familiar with the Datadog basics, you should get your Demo Certification.
 
+When you are ready, contact partner-support@datadoghq.com to receive an invitation to the DPN Demo org used for delivering the Datadog demo. After you've received your invitation, proceed to the 
+<a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>.
+
 {{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="max-width: 367px">}}
 
-Not only does this course teach you to deliver a technical demo, it further helps you understand Datadog's approach to observability and its unified collaborative platform.
+This hands-on video course teaches you to deliver a technical demo of core Datadog products. It further helps you understand Datadog's approach to observability and its unified collaborative platform.
 
 ## Proof of value
 
