@@ -76,21 +76,19 @@ Read more about container tags in the [Kubernetes][4] and [Docker][5] tagging do
 
 ### DogStatsD protocol v1.3
 
-Starting with the Agent `>=v6.40.0` or `>=v7.40.0`, a new optional Unix timestamp field is supported.
+Agents v6.40.0+ and v7.40.0+ support an optional Unix timestamp field.
 
-When this field is provided, the Datadog Agent doesn't do any processing with the metrics (i.e. no aggregation) except from enriching the metrics with tags. This can be useful is you already aggregate your metrics in your application and you want to send them to Datadog without extra processing.
+When this field is provided, the Datadog Agent doesn't do any processing with the metrics (no aggregation) except from enriching the metrics with tags. This can be useful if you already aggregate your metrics in your application, and you want to send them to Datadog without extra processing.
 
-The Unix timestamp should be valid and in the past if you want the metric to be processed by Datadog.
-
-**Only GAUGE and COUNT metrics are supported.**
+The Unix timestamp should be valid and in the past. Only GAUGE and COUNT metrics are supported.
 
 The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|T<METRIC_TIMESTAMP>`
 
-### Example datagrams
+### Example datagram
 
-- `page.views:15|c|#env:dev|T1656581400`: A COUNT indicating that 15 pages views happened the 30th of June, 2022 at 9:30am UTC
+- `page.views:15|c|#env:dev|T1656581400`: A COUNT indicating that 15 page views happened on the 30th of June, 2022 at 9:30am UTC
 
 [1]: /metrics/#naming-metrics
 [2]: /metrics/types/
