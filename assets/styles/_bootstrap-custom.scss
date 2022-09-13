@@ -1,3 +1,5 @@
+$card-border-radius: 0.25rem;
+$card-border-color: rgba(0, 0, 0, 0.125);
 :root {
     // Bootstrap 5 throws a rem/px compatibility error if the base size is set in px.
     // font-size: 16px;
