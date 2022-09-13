@@ -53,6 +53,10 @@ body {
     @media (max-width: 991px) {
         padding-top: 65px;
     }
+    // Restores previous positioning setting for bootstrap columns from bootstrap 4
+    div[class*='col-'] {
+        position: relative;
+    }
 }
 
 .greyside {
@@ -551,7 +555,7 @@ h5 {
     & > ul {
         list-style-type: none;
         padding-top: 6px;
-        
+
         li {
             padding-bottom: 6px;
 
