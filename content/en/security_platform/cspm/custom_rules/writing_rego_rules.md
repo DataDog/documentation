@@ -16,6 +16,8 @@ Cloud Security Posture Management is not available in this site.
 </div>
 {{< /site-region >}}
 
+<div class="alert alert-info">Creating and using custom CSPM rules is a beta feature, available only for Google Cloud Platform (GCP).</div>
+
 ## Overview
 
 Open Policy Agent (OPA) provides [Rego][1], an open source query language with versatile resource inspection features for determining cloud security posture. In Datadog, you can write custom rules with Rego to control the security of your infrastructure. 

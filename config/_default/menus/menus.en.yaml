@@ -2493,7 +2493,7 @@ main:
     parent: cspm
     identifier: custom_rules
     weight: 5
-  - name: How to write Rego rules
+  - name: Writing Custom Rules with Rego
     url: /security_platform/cspm/custom_rules/writing_rego_rules
     parent: custom_rules
     identifier: cspm_writing_rego_rules
