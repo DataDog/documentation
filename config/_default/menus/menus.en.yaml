@@ -900,6 +900,10 @@ main:
     url: infrastructure/livecontainers/configuration
     parent: infrastructure_livecontainers
     weight: 501
+  - name: Legacy Configuration
+    url: infrastructure/livecontainers/legacy
+    parent: infrastructure_livecontainers
+    weight: 502
   - name: Cloud Cost
     url: infrastructure/cloud_cost_management/
     parent: infrastructure
