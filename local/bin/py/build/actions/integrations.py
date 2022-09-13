@@ -809,6 +809,9 @@ class Integrations:
                         new_file_name, result, dependencies, integration_id, integration_version
                     )
 
+                # Remove any shortcodes (tabs) that contain % delimiter:
+                result = result.replace("{{%", "{{<").replace("%}}", ">}}")
+
                 with open(out_name, "w", ) as out:
                     out.write(result)
 
