@@ -43,10 +43,14 @@
             {{ end }}
         </div>
 
-        <div class="glossary-nav col-2 col-md-12 d-flex d-md-block flex-column align-items-end">
-            {{ range $letters }}
-                <a class="btn font-14-18" role="button" href="#{{ . | lower }}">{{ . }}</a>
-            {{ end }}
-        </div>
+        <nav id="glossary-nav">
+            <ul class="nav col-2 col-md-12 d-flex d-md-block flex-column align-items-end">
+                {{ range $letters }}
+                    <li class="nav-item">
+                        <a class="nav-link btn font-14-18" role='button' href='#{{ . | lower }}'>{{ . }}</a>
+                    </li>
+                {{ end }}
+            </ul>
+        </nav>
     </div>
 {{ end }}
