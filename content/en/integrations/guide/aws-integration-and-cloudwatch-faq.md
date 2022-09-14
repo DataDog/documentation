@@ -8,7 +8,7 @@ aliases:
 
 ### Can I collect AWS custom metrics through the integration?
 
-Yes. Check the **custom metrics** checkbox on the [AWS integration tile][1].
+Yes. Check the **custom metrics** checkbox on the [AWS integration page][1].
 
 ### How do I collect metrics from a service for which Datadog doesn’t have an official integration?
 
@@ -64,7 +64,7 @@ aws.apigateway.integration_latency.p50
 
 Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, the server groups all data points in minute bins and returns the sum of each bin as a datapoint. However, the granularity of AWS metrics is one minute, so there is only one datapoint per bin leading to no change.
 
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/api/latest/aws-integration/#set-an-aws-tag-filter
 [3]: /integrations/amazon_billing/
 [4]: /integrations/guide/cloud-metric-delay/
