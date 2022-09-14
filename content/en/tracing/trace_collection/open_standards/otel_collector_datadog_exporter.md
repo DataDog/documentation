@@ -39,6 +39,38 @@ receivers:
 
 processors:
   batch:
+  # The hostmetrics receiver is required to get correct infrastructure metrics in Datadog.
+  hostmetrics:
+    collection_interval: 10s
+    scrapers:
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+      disk:
+      filesystem:
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
+      load:
+      memory:
+        metrics:
+          system.memory.utilization:
+            enabled: true
+      network:
+      processes:
+  # The prometheus receiver scrapes metrics needed for the OpenTelemetry Collector Dashboard.
+  prometheus:
+    config:
+      scrape_configs:
+      - job_name: 'otelcol'
+        scrape_interval: 10s
+        static_configs:
+        - targets: ['0.0.0.0:8888']
 
 exporters:
   datadog:
@@ -49,7 +81,7 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [otlp]
+      receivers: [hostmetrics, otlp]
       processors: [batch]
       exporters: [datadog]
     traces:
@@ -219,7 +251,7 @@ For Gateway deployments:
        service:
          pipelines:
            metrics:
-             receivers: [otlp]
+             receivers: [hostmetrics, otlp]
              processors: [resourcedetection, k8sattributes, batch]
              exporters: [otlp]
            traces:
@@ -254,7 +286,7 @@ For Gateway deployments:
          site: {{< region-param key="dd_site" code="true" >}}
          key: ${DD_API_KEY}
    # ...
-   ```yaml
+   ```
 
 ### Application Configuration
 
@@ -324,6 +356,8 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
              exporters: [otlp]
    # ...
    ```
+
+   In this case, we do not want to use the `hostmetrics` receiver because those metrics will be emitted by the Datadog Agent.
 
 
 ## Further Reading
