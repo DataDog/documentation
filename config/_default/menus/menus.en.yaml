@@ -3365,6 +3365,12 @@ main:
     identifier: api
     parent: essentials_heading
     weight: 220000
+  - name: CoScreen
+    url: coscreen/
+    pre: coscreen
+    identifier: coscreen
+    parent: essentials_heading
+    weight: 230000
   - name: Account Management
     url: account_management/
     pre: cog-2
