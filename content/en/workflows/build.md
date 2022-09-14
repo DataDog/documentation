@@ -29,13 +29,16 @@ To build a workflow, navigate to the [Workflows page][1] under **Integrations**.
 {{< img src="" alt="" >}}
 
 ## Create workflows
-
 ### Create workflows with the workflow builder
 
 To create a workflow using the workflow builder:
-1. Click **New Workflow**.
-1. Enter a name for the workflow and click **Create**.
-1. 
+1. Add an action to the workflow canvas:
+   1. Click **New Workflow**.
+   1. Enter a name for the workflow and click **Create**.
+   1. Click an integration in the actions catalog and drag the desired action into the workflow canvas. You can also search for an action using the search bar.
+   {{< img src="" alt="" >}}
+1. Edit the action:
+   1. 
 
 ### Create workflows with JSON
 
