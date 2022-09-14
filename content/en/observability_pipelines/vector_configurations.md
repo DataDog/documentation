@@ -1,10 +1,10 @@
 ---
 title: Vector Configurations
 kind: Documentation
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/vector_configurations.md"]
+aliases:
+  - /integrations/observability_pipelines/vector_configurations/
 further_reading:
-  - link: /integrations/observability_pipelines/working_with_data/
+  - link: /observability_pipelines/working_with_data/
     tag: Documentation
     text: Working with data using Vector
   - link: https://vector.dev/releases/ 
