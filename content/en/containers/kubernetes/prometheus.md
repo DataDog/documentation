@@ -142,15 +142,16 @@ For a full list of available parameters for instances, including `namespace` and
             ad.datadoghq.com/prometheus-example.checks: |
               {
                 "openmetrics": {
-                  "init_config": {},
                   "instances": [
-                   "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
-                   "namespace": "documentation_example_kubernetes",
-                   "metrics": [
-                     {"promhttp_metric_handler_requests": "handler.requests"},
-                      {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
-                      "go_memory.*"
-                    ]
+                    {
+                      "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+                      "namespace": "documentation_example_kubernetes",
+                      "metrics": [
+                          {"promhttp_metric_handler_requests": "handler.requests"},
+                          {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+                          "go_memory.*"
+                        ]
+                    }
                   ]
                 }
               }
