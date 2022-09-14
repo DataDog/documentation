@@ -23,18 +23,18 @@ disable_toc: false
   - P2 Set Fallback Workflows 
 -->
 
-To build a workflow, navigate to the [Workflows page][1] under **Integrations**. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed. Hover over a workflow for the options to delete or clone the workflow.
+To build a workflow, navigate to the [Workflows page][1] under **Integrations**. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed. Hover over a workflow for the options to delete or clone the workflow. Toggle **My workflows** if you want to see only workflows that you crated. 
 
 ## Create a workflow
 
-To create a workflow, click **New workflow**, enter a name for the workflow, and click **Create**. You can build your workflow out by dragging actions into the workflow canvas, or use JSON.
+To create a workflow, click **New workflow**, enter a name for the workflow, and click **Create**. You can build your workflow out by dragging steps into the workflow canvas, or use JSON.
 
 ### Build a workflow with the workflow builder
 
-1. Click an integration in the actions catalog and drag the desired action onto the workflow canvas. You can also search for an action using the search bar.
-{{< img src="workflows/add-action.mp4" alt="Drag an action onto the workflow canvas" video="true"  >}}
-1. Click on the action in the workflow canvas to configure it or add outputs or context variables. For more information, see [inputs, outputs, and context variables](#inputs-outputs-and-context-variables).
-1. After you're done configuring the action, drag another action onto the workflow canvas to continue building out your workflow, or save the workflow if you're done.
+1. Click an integration in the catalog pane and drag the desired step onto the workflow canvas. You can also search for a step using the search bar.
+{{< img src="workflows/add-step.mp4" alt="Drag a step onto the workflow canvas" video="true"  >}}
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Passing data between steps](#passing-data-between-steps)(#inputs-outputs-and-context-variables).
+1. After you're done configuring the step, drag another step onto the workflow canvas to continue building out your workflow, or save the workflow if you're done.
 
 You can edit a step in the workflow at any time by clicking on it.
 
@@ -45,11 +45,11 @@ After you've created a workflow, you can build or edit it in JSON by clicking **
 - **Export JSON**: Download the workflow.
 
 A typical workflow contains three top-level keys:
-- `"steps"`: An array of "step" objects. Each step defines an action in the workflow and includes a name, the action ID, and the action parameters. The `steps` object also includes a key for outbound connection data.  
-- `"startStepName"`: The name of the first action in the workflow.
+- `"steps"`: An array of "step" objects. Each step defines an step in the workflow and includes a name, the action ID, and the step parameters. The `steps` object also includes a key for outbound connection data.  
+- `"startStepName"`: The name of the first step in the workflow.
 - `"connectionEnvs"`: Connection data and environment variables. 
 
-An example of a workflow with a single action that sends a message to a Slack channel named `#workflows-test`:
+An example of a workflow with a single step that sends a message to a Slack channel named `#workflows-test`:
 
 {{< code-block lang="json" collapsible="true" filename="Example workflow" >}}
 {
@@ -90,7 +90,11 @@ An example of a workflow with a single action that sends a message to a Slack ch
 }
 {{< /code-block >}}
 
-## Inputs, outputs, and context variables
+## Passing data between steps
+
+Some steps create outputs that are available to subsequent steps in a workflow.
+
+Inputs, outputs, and context variables
 
 ## Trigger a workflow
 
