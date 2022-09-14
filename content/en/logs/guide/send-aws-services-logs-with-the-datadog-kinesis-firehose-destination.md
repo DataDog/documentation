@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+  tag: "Blog"
+  text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"
 ---
 
 ## Overview
@@ -23,37 +26,9 @@ AWS fully manages Amazon Kinesis Data Firehose, so you don't need to maintain an
 
 {{< tabs >}}
 {{< tab "Kinesis Firehose Delivery stream" >}}
-
-Datadog recommends using a Kinesis stream as input when using the Datadog Kinesis destination. It gives you the ability to forward your logs to multiple destinations in case Datadog is not the only consumer for those logs. If you only want to send logs to Datadog, or if you already have a Kinesis Datastream with your logs, ignore step 1.
-
-1. (Optional) Create a new Kinesis stream (see the [Kinesis documentation][1]). Name the stream something descriptive, like `DatadogLogStream`, and give it a shard count of 1 (increase the shard count for each MB/s throughput that you need).
-2. Create a [new delivery stream][2] and name it `DatadogLogsforwarder`.
-3. Set the source as "Kinesis stream" (or leave the source as `Direct PUT or other sources` if you don’t want to use a Kinesis stream) and select `DatadogLogStream` (or the existing Kinesis stream that already contains your logs).
-4. Disable the data transformation and record transformation and click `next`.
-5. Select the `Datadog` destination and select the `Datadog US` or `Datadog EU` region, depending on the Datadog Region of your account.
-  {{< img src="logs/guide/choose-destination.png" alt="Choose your destination" style="width:100%;">}}
-6. Paste your `APIKEY` into the `AccessKey` box. (You can get your API key from [your Datadog API settings page][3]).
-7. (Optional) Add custom `parameters`, which are added as custom tags to your logs.
-{{< img src="logs/guide/kinesis_logs_datadog_destination.png" alt="Datadog destination configuration" style="width:100%;">}}
-8. Choose to backup failed events to an S3 bucket.
-9. Configure the delivery stream parameters. The two important parameters are:
-    * Retry time: How long the delivery stream should retry before sending an event to the backup S3 bucket.
-    * Batch size: Datadog recommends a value between 1MB and 4MB. The logs are sent by the delivery stream if the batch size or the linger time (minimum 60 seconds) is reached. Datadog recommends reducing the batch size to be as close to real-time as possible.
-    {{< img src="logs/guide/kinesis_logs_datadog_batch.png" alt="Batch configuration" style="width:100%;" >}}
-
-To ensure that logs that fail through the Delivery Stream are still sent to Datadog, [configure the Datadog Lambda function to trigger on this S3 bucket][4].
-
-[1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
-[2]: https://console.aws.amazon.com/firehose/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
 {{< /tab >}}
 
 {{< tab "CloudFormation template" >}}
-
-Alternatively, customize this CloudFormation template and install it from the AWS Console. See the full [Kinesis CloudFormation template][1].
-
-[1]: /resources/json/kinesis-logs-cloudformation-template.json
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -63,7 +38,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
   * **Note**: If you have more than two sources you want to subscribe to, you can subscribe to the new Kinesis stream after completing this setup.
 2. Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. Refer to [this CloudWatch Logs documentation section][2] (step 3 to 6) to:  
    - Use the `aws iam create-role` command to create the IAM role that gives CloudWatch Logs permission to put logs data into the Kinesis stream.
-   - Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecordBatch` actions.
+   - Create a permissions policy allowing the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions.
    - Attach the permissions policy to your newly created IAM role using the `aws iam put-role-policy` command.
    - Use the `aws logs put-subscription-filter` command to subscribe your Kinesis stream to each CloudWatch log group you want to ingest into Datadog.  
 
@@ -90,6 +65,10 @@ To populate all logs by ARN:
 
 1. Navigate to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press **Enter**.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://console.aws.amazon.com/cloudwatch/home
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample

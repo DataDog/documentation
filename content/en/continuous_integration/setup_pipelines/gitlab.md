@@ -30,54 +30,10 @@ Other supported versions with additional configuration:
 
 {{< tabs >}}
 {{< tab "GitLab.com" >}}
-
-Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
-
-[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 {{< /tab >}}
 {{< tab "GitLab &gt;&equals; 14.1" >}}
-
-Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
-
-You can also activate the integration at the GitLab [instance][3] level, by going to **Admin > Settings > Integrations > Datadog**.
-
-[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
-[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
 {{< /tab >}}
 {{< tab "GitLab &lt; 14.1" >}}
-
-Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
-
-**Omnibus installations**
-
-{{< code-block lang="shell" >}}
-sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
-{{< /code-block >}}
-
-**From source installations**
-
-{{< code-block lang="shell" >}}
-sudo -u git -H bundle exec rails runner \
-  -e production \
-  "Feature.enable(:datadog_ci_integration)"
-{{< /code-block >}}
-
-**Kubernetes installations**
-
-{{< code-block lang="shell" >}}
-kubectl exec -it <task-runner-pod-name> -- \
-  /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
-{{< /code-block >}}
-
-Then, configure the integration on a [project][3] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
-
-<div class="alert alert-warning"><strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
-
-[1]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
-[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -148,6 +104,50 @@ through the UI by going to **Settings > CI/CD > Runners** and editing the approp
 
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
 view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
+
+### Error messages for pipeline failures
+
+For failed GitLab pipeline executions, each error under the `Errors` tab within a specific pipeline execution displays a message associated with the error type from GitLab.
+
+{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
+
+See the table below for the message and domain correlated with each error type. Any unlisted error type will lead to the error message of `Job failed` and error domain of `unknown`.
+
+| Error Type | Error Message | Error Domain |
+| :---  |    :----:   |  ---: |
+|  unknown_failure  |  Failed due to unknown reason  |  unknown
+|  config_error  |  Failed due to error on CI/CD configuration file |  user
+|  external_validation_failure  |  Failed due to external pipeline validation  |  unknown
+|  user_not_verified  |  The pipeline failed due to the user not being verified  |  user
+|  activity_limit_exceeded  |  The pipeline activity limit was exceeded  |  provider
+|  size_limit_exceeded  |  The pipeline size limit was exceeded  |  provider
+|  job_activity_limit_exceeded  |  The pipeline job activity limit was exceeded  |  provider
+|  deployments_limit_exceeded  |  The pipeline deployments limit was exceeded  |  provider
+|  project_deleted  |  The project associated with this pipeline was deleted  |  provider
+|  api_failure  |  API Failure  |  provider
+|  stuck_or_timeout_failure  |  Pipeline is stuck or timed out  |  unknown
+|  runner_system_failure  |  Failed due to runner system failure  |  provider
+|  missing_dependency_failure  |  Failed due to missing dependency  |  unknown
+|  runner_unsupported  |  Failed due to unsupported runner  |  provider
+|  stale_schedule  |  Failed due to stale schedule  |  provider
+|  job_execution_timeout  |  Failed due to job timeout  |  unknown
+|  archived_failure  |  Archived failure  |  provider
+|  unmet_prerequisites  |  Failed due to unmet prerequisite  |  unknown
+|  scheduler_failure  |  Failed due to schedule failure  |  provider
+|  data_integrity_failure  |  Failed due to data integrity  |  provider
+|  forward_deployment_failure  |  Deployment failure  |  unknown
+|  user_blocked  |  Blocked by user  |  user
+|  ci_quota_exceeded  |  CI quota exceeded  |  provider
+|  pipeline_loop_detected  |  Pipeline loop detected  |  user
+|  builds_disabled  |  Build disabled  |  user
+|  deployment_rejected  |  Deployment rejected  |  user
+|  protected_environment_failure  |  Environment failure  |  provider
+|  secrets_provider_not_found  |  Secret provider not found  |  user
+|  reached_max_descendant_pipelines_depth  |  Reached max descendant pipelines  |  user
+|  ip_restriction_failure  |  IP restriction failure  |  provider
+
+<!-- | ---------- | ---------- | ---------- | -->
+<!-- | :---        |    :----:   |          ---: | -->
 
 ## Enable job log collection (beta)
 

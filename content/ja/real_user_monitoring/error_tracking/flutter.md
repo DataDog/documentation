@@ -11,7 +11,7 @@ further_reading:
   tag: ドキュメント
   text: エラートラッキングについて
 kind: documentation
-title: Flutter エラーを追跡する
+title: Flutter のクラッシュレポートとエラー追跡
 ---
 ## 概要
 
