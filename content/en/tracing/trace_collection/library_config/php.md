@@ -134,6 +134,11 @@ The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
+`DD_TRACE_HEALTH_METRICS_ENABLED`
+: **INI**: `datadog.trace_health_metrics_enabled`<br>
+**Default**: `false`<br>
+The tracer will attempt to send stats to DogStatsD when enabled. In addition, where sigaction is available at build time, the tracer will send uncaught exception metrics upon segfaults.
+
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
 : **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
 **Default**: `5000`<br>
@@ -162,7 +167,17 @@ The Agent request transfer timeout (in milliseconds).
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **Default**: `null`<br>
-The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. Added in version `0.47.1`.
+The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. Added in version `0.47.1`. Supports UDS (Unix Domain Sockets) via `unix://`.
+
+`DD_DOGSTATSD_URL`
+: **INI**: `datadog.dogstatsd_url`<br>
+**Default**: `null`<br>
+The URL used to negotiate connection to DogStatsD; takes precedence over `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. Supports `udp://` or `unix://` schemas only.
+
+`DD_DOGSTATSD_PORT`
+: **INI**: `datadog.dogstatsd_port`<br>
+**Default**: `8125`<br>
+The port used to connect to DogStatsD, will be used in combination with `DD_AGENT_HOST` to negotiate connection to DogStatsD where `DD_TRACE_HEALTH_METRICS_ENABLED` is enabled.
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
