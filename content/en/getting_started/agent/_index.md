@@ -99,7 +99,7 @@ The Agent collects host data every 15 seconds to provide an accurate understandi
 
 ### Installation
 
-In the Datadog UI, go to the Agent Installation Page for Ubuntu by navigating to **Integrations > Agent** and selecting Ubuntu. To install the Datadog Agent on a host, use the one-line install command from that page (example shown below), updated with your [Datadog API key][16].
+In the Datadog UI, go to the Agent Installation page for Ubuntu by navigating to **Integrations > Agent** and selecting Ubuntu. To install the Datadog Agent on a host, use the one-line install command from that page (example shown below), updated with your [Datadog API key][16].
 
 Example Ubuntu one-line install command:
 
