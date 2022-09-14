@@ -5,7 +5,8 @@ further_reading:
 - link: "/security_platform/explorer/"
   tag: "Documentation"
   text: "Start investigating signals in the Signals Explorer"
-
+aliases:
+  - /security_platform/guide/automate-the-remediation-of-detected-threats/
 ---
 
 ## Overview

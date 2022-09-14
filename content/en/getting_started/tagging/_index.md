@@ -55,10 +55,8 @@ Below are Datadog's tagging requirements:
 
     Other special characters are converted to underscores.
 
-    **Note**: A tag cannot end with a colon, for example `tag:`.
-
 2. Tags can be **up to 200 characters** long and support Unicode (which includes most character sets, including languages such as Japanese).
-3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`. **Note**: `host` and `device` tags are excluded from this conversion.
+3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 
     | Tag                | Key           | Value          |

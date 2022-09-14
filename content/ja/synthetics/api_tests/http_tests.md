@@ -59,7 +59,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
    * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
-   AWS S3 バケットへの "Single Chunk” 転送リクエストでは、ヘッダーとして sha256 エンコードされたリクエストの本文を含む `x-amz-content-sha256` を追加します。
+   AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
    * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
 
      <br/> 
