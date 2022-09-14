@@ -8,7 +8,7 @@ aliases:
 
 ### Can I collect AWS custom metrics through the integration?
 
-Yes. Check the **custom metrics** checkbox on the [AWS integration page][1].
+Yes. Enable **Collect Custom Metrics** under the **Metric Collection** tab on the [AWS integration page][1].
 
 ### How do I collect metrics from a service for which Datadog doesn’t have an official integration?
 
