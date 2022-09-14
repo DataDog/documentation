@@ -62,12 +62,15 @@ function openMenu(menuItem) {
 export function closeMobileNav(){
     const activeDropdowns = document.querySelectorAll('#mobile-nav .dropdown-menu.show, #mobile-nav .dropdown.show')
     const activeSubNav = document.querySelector('#mobile-nav .sub-nav:not(.d-none)')
-    const activeMobileSelection = document.querySelector('#mobile-nav a[data-path].active')
+    const activeMobileSelection = document.querySelector('#mobile-nav a[data-path].active') || false
     if(activeSubNav){
         activeSubNav.classList.add('d-none')
     }
     activeDropdowns.forEach(dd => dd.classList.remove('show'))
-    activeMobileSelection.classList.remove('active')
+
+    if(activeMobileSelection) {
+      activeMobileSelection.classList.remove('active')
+    }
 }
 
 export function setMobileNav () {
@@ -80,15 +83,18 @@ export function setMobileNav () {
             'a[data-path^="integrations/observability_pipelines/integrate_vector_with_datadog"]'
         );
     }else{
-        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`)
+        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
     }
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
-    const parentMenu = mobileSelection.parentElement
+
+    if (mobileSelection) {
+        const parentMenu = mobileSelection.parentElement || false
     
-    mobileSelection.classList.add('active')
-    if(subMenu){
-        openMenu(subMenu)
-    }else if (parentMenu){
-        openMenu(parentMenu)
+        mobileSelection.classList.add('active')
+        if(subMenu){
+            openMenu(subMenu)
+        }else if (parentMenu){
+            openMenu(parentMenu)
+        }
     }
 }

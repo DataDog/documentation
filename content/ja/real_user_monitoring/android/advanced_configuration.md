@@ -3,16 +3,17 @@ dependencies:
 - https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: dd-sdk-android ソースコード
 - link: /real_user_monitoring
-  tag: ホームページ
+  tag: ドキュメント
   text: Datadog RUM を探索する
 kind: documentation
 title: RUM Android の高度なコンフィギュレーション
 ---
-まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[Android RUM セットアップドキュメント][2]を参照してください。
+## 概要
 
+まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[Android RUM セットアップドキュメント][2]を参照してください。
 
 ## ユーザーセッションの充実
 
@@ -399,7 +400,7 @@ val monitor = RumMonitor.Builder()
 GlobalRum.registerIfAbsent(monitor)
 ```
 
-   ## その他の参照先
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -410,5 +411,5 @@ GlobalRum.registerIfAbsent(monitor)
 [5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
-[8]: https://square.github.io/okhttp/events/
-[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/?tab=error#event-specific-attributes
+[8]: https://square.github.io/okhttp/features/events/
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/#event-specific-attributes

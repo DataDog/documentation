@@ -4,7 +4,7 @@ dependencies:
 description: Recueillez des logs à partir de vos applications Android.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: Code source dd-sdk-android
 - link: logs/explorer
   tag: Documentation

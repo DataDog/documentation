@@ -92,7 +92,7 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 
 - アプリケーションは、定期的またはクリックごとに API へのリクエストを送信することで分析を収集します。
 
-- アプリケーションは "[comet][16])” の技術 (つまり、ストリーミングやロングポーリング) を使用しており、リクエストは不定時間保留されたままです。
+- アプリケーションは "[comet][16]" の技術 (つまり、ストリーミングやロングポーリング) を使用しており、リクエストは不定時間保留されたままです。
 
 このような場合のアクティビティ判定の精度を向上させるには、`excludedActivityUrls` を指定します。これは、ページアクティビティを計算する際に RUM ブラウザ SDK が除外するリソースのリストです。
 
@@ -173,5 +173,5 @@ document.addEventListener("scroll", function handler() {
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[16]: https://en.wikipedia.org/wiki/Comet_(programming
+[16]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
 [17]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures

@@ -61,9 +61,11 @@ tile:
 
 
 
+![Kube Controller Manager ダッシュボード][1]
+
 ## 概要
 
-このチェックは、Kubernetes Control Plane の一部である [Kubernetes Controller Manager][1] を監視します。
+このチェックは、Kubernetes Control Plane の一部である [Kubernetes Controller Manager][2] を監視します。
 
 **注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
 
@@ -71,21 +73,23 @@ tile:
 
 ### インストール
 
-Kubernetes Controller Manager チェックは [Datadog Agent][2] パッケージに含まれているため、
+Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
-このインテグレーションは、コントローラーマネージャーのメトリクスエンドポイントにアクセスする必要があります。通常、これは 
-サービスとしてのコンテナ クラスターでは公開されません。
+1. kube_controller_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kube_controller_manager.d/conf.yam][4] を参照してください。
 
-1. kube_controller_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kube_controller_manager.d/conf.yam][3] を参照してください。
+2. [Agent を再起動します][5]。
 
-2. [Agent を再起動します][4]。
+このインテグレーションは、コントローラーマネージャーのメトリクスエンドポイントにアクセスする必要があります。メトリクスエンドポイントにアクセスできるようにするには、以下が必要です。
+
+* controller-manager プロセスの IP/Port にアクセスできる
+* `get` RBAC 権限で /metrics エンドポイントにアクセスできる (デフォルトの Datadog Helm チャートでは、すでに適切な RBAC ロールとバインディングが追加されています)
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `kube_controller_manager` を探します。
+[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `kube_controller_manager` を探します。
 
 ## 収集データ
 
@@ -103,14 +107,14 @@ Kubernetes Controller Manager チェックには、イベントは含まれま�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-
-[1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
-[7]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/assets/service_checks.json
-[8]: https://docs.datadoghq.com/ja/help/
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_controller_manager/images/screenshot.png
+[2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
+[8]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/assets/service_checks.json
+[9]: https://docs.datadoghq.com/ja/help/

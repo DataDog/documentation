@@ -8,8 +8,8 @@ disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Log%20Management
   tag: Notes de version
-  text: Découvrez les dernières versions de la solution Log Management Datadog (connexion
-    à l'application requise).
+  text: Découvrir les dernières versions de la solution Log Management Datadog (connexion
+    à l'application requise)
 - link: /logs/log_collection/
   tag: Documentation
   text: Commencer à recueillir vos logs
@@ -20,6 +20,10 @@ further_reading:
   tag: Blog
   text: Des enquêtes plus rapides sur les incidents avec la détection des anomalies
     des logs
+- link: https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/
+  tag: Blog
+  text: Surveiller vos appareils IoT de façon évolutive avec la solution Log Management
+    de Datadog
 kind: Documentation
 title: Log Management
 ---
