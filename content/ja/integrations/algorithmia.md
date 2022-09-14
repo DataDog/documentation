@@ -1,37 +1,57 @@
 ---
+app_id: algorithmia
+app_uuid: 09ef6f74-1555-4082-a69e-b5cf21ec4512
 assets:
   dashboards:
     Algorithmia: assets/dashboards/algorithmia.json
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: algorithmia.duration_milliseconds
+      metadata_path: metadata.csv
+      prefix: algorithmia.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Algorithmia
   monitors:
     Algorithmia: assets/monitors/algorithm_duration.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: support@algorithmia.io
+  support_email: support@algorithmia.io
 categories:
 - モニタリング
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
-display_name: Algorithmia
+display_on_public_website: true
 draft: false
 git_integration_title: algorithmia
-guid: bb9defff-03ae-4a22-93a7-6db498d37cd7
 integration_id: algorithmia
 integration_title: Algorithmia
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@algorithmia.io
-manifest_version: 1.0.0
-metric_prefix: algorithmia.
-metric_to_check: algorithmia.duration_milliseconds
+manifest_version: 2.0.0
 name: algorithmia
+oauth: {}
 public_title: Algorithmia
 short_description: 本番環境の機械学習モデルのメトリクスを監視
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: 本番環境の機械学習モデルのメトリクスを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Algorithmia
 ---
 
 

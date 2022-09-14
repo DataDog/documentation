@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/"
   tag: "Blog"
   text: "Detect security threats with anomaly detection rules"
+- link: "/security_platform/notifications/variables/"
+  tag: "Documentation"
+  text: "Learn more about Security Platform notification variables"
 aliases:
     - /cloud_siem/detection_rules/security_monitoring/
     - /security_platform/detection_rules/cloud_siem/
@@ -281,7 +284,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
-The notification box has the same Markdown and preview features as those of [monitor notifications][1]. In addition to the features, you can reference the tags associated with the signal and the event attributes. The attributes can be seen on a signal in the “event attributes” tab, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
+Use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the JSON section of the Overview tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
 
 This JSON object is an example of event attributes which may be associated with a security signal:
 
@@ -304,7 +307,7 @@ This JSON object is an example of event attributes which may be associated with 
 
 ```
 
-You could use the following in the “say what’s happening” section:
+You could use the following in the **Say what’s happening** section:
 
 ```
 {{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
@@ -328,13 +331,15 @@ You can use if-else logic to see if an attribute matches a value:
 {{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
 ```
 
-Tag your signals with different tags, for example, `security:attack` or `technique:T1110-brute-force`.
+See [Notification Variables][1] for more information.
 
-**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
+Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
+
+**Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
 ### Template variables
 
-Security rules support template variables within the markdown notification box. Template variables permit injection of dynamic context from triggered logs directly into a security signal and its associated notifications.
+Use [template variables][2] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications.
 
 For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message states which user and IP address triggered a given signal when using the specified template variable.
 
@@ -354,7 +359,10 @@ Epoch template variables create a human-readable string or math-friendly number 
 {{eval "first_seen_epoch-15*60*1000"}}
 ```
 
+See [Template Variables][2] for more information.
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/notify/?tab=is_alert
+[1]: /security_platform/notifications/variables/
+[2]: /security_platform/notifications/variables/#template-variables

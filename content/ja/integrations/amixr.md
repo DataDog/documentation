@@ -1,38 +1,61 @@
 ---
+app_id: amixr
+app_uuid: 051b4bbe-d7cc-46bf-9a66-169ab7d5a4aa
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: amixr.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Amixr
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: ildar@amixr.io
+  support_email: ildar@amixr.io
 categories:
 - 監視
 - コラボレーション
 - notification
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md
-display_name: Amixr
+display_on_public_website: true
 draft: false
 git_integration_title: amixr
-guid: 56e3b585-27b4-4a04-b528-9c1adfecf387
 integration_id: amixr
 integration_title: Amixr
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: ildar@amixr.io
-manifest_version: 1.0.0
-metric_prefix: amixr.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: amixr
+oauth: {}
 public_title: Amixr
 short_description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Collaboration
+  - Category::Notification
+  configuration: README.md#Setup
+  description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amixr
 ---
 
 

@@ -46,7 +46,7 @@ When set manually this token must be 32 alphanumeric characters.
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-The Cluster Agent is enabeld by default since Datadog Operator `v0.7.0`.
+The Cluster Agent is enabled by default since Datadog Operator `v0.7.0`.
 
 To activate it explicitly, update your `DatadogAgent` object with the following configuration:
 

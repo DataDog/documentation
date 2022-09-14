@@ -202,6 +202,7 @@ ECS Fargate では、タスクを [Replica サービス][10]として実行す�
 
 {{< tabs >}}
 {{% tab "Web UI" %}}
+
 ##### Web UI レプリカサービス
 
 1. [AWS Web Console][1] にログインし、ECS セクションに移動します。必要に応じて、**Networking only** クラスターテンプレートを使用してクラスターを作成します。
@@ -387,6 +388,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
 
 2. 次に、同じ Fargate タスクで、ログを送信する目的のコンテナに対して、ログ構成を定義します。このログ構成は、AWS FireLens をログドライバーとし、Fluent Bit にデータを出力するものである必要があります。下記に、ログドライバーに FireLens が使用され、Fluent Bit にデータを出力しているタスク定義の例を示します。
 
+
 {{< site-region region="us" >}}
   ```json
   {
@@ -407,6 +409,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
   }
   ```
 {{< /site-region >}}
+
 
 {{< site-region region="us3" >}}
   ```json
@@ -429,6 +432,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
   ```
 {{< /site-region >}}
 
+
 {{< site-region region="us5" >}}
   ```json
   {
@@ -450,6 +454,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
   ```
 {{< /site-region >}}
 
+
 {{< site-region region="eu" >}}
   ```json
   {
@@ -470,6 +475,8 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
   }
   ```
 {{< /site-region >}}
+
+
 {{< site-region region="gov" >}}
   ```json
   {
@@ -525,6 +532,7 @@ aws ecs register-task-definition --cli-input-json file://<ファイルへのパ�
 
 例えば、Fluent Bit が Datadog にログを送信するように構成する場合
 
+
 {{< site-region region="us" >}}
 ```yaml
 Resources:
@@ -560,6 +568,7 @@ Resources:
           MemoryReservation: 50
 ```
 {{< /site-region >}}
+
 
 {{< site-region region="us3" >}}
 ```yaml
@@ -597,6 +606,7 @@ Resources:
 ```
 {{< /site-region >}}
 
+
 {{< site-region region="us5" >}}
 ```yaml
 Resources:
@@ -632,6 +642,7 @@ Resources:
           MemoryReservation: 50
 ```
 {{< /site-region >}}
+
 
 {{< site-region region="eu" >}}
 ```yaml
@@ -669,6 +680,7 @@ Resources:
 ```
 {{< /site-region >}}
 
+
 {{< site-region region="gov" >}}
 ```yaml
 Resources:
@@ -704,6 +716,7 @@ Resources:
           MemoryReservation: 50
 ```
 {{< /site-region >}}
+
 
 CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation ドキュメント][2]をご参照ください。
 
@@ -790,14 +803,15 @@ ECS Fargate チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][36]
+- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][34]
 - よくあるご質問: [ECS Fargate のインテグレーションセットアップ][12]
-- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][34]
-- ブログ記事: [AWS Fargate 監視のための主要メトリクス][35]
+- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][35]
+- ブログ記事: [AWS Fargate 監視のための主要メトリクス][36]
 - ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][37]
 - ブログ記事: [Datadog を使用した AWS Fargate モニタリング][38]
 - ブログ記事: [Graviton2 による AWS Fargate のデプロイ][39]
 - ブログ記事: [Windows コンテナ型アプリ向けに AWS Fargate を監視する][40]
+
 
 
 
@@ -834,9 +848,9 @@ ECS Fargate チェックには、イベントは含まれません。
 [31]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [32]: https://docs.datadoghq.com/ja/tracing/setup/
 [33]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
-[34]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
-[35]: https://www.datadoghq.com/blog/aws-fargate-metrics/
-[36]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[34]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[35]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
+[36]: https://www.datadoghq.com/blog/aws-fargate-metrics/
 [37]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
 [38]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
 [39]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/

@@ -31,7 +31,7 @@ title: Kubernetes に Datadog Agent をインストールする
 このページでは、3 種類の方法で Kubernetes 環境に Datadog Agent をインストールする手順を説明します。ユースケースに最適な方法を選択してください。
 
 - [Datadog Operator](?tab=operator)
-- [Helm](?tab=helm)
+- [Helm チャート](?tab=helm)
 - [DaemonSet](?tab=daemonset)
 
 AWS Elastic Kubernetes Service (EKS)、Azure Kubernetes Service (AKS)、Google Kubernetes Engine (GKE)、Red Hat OpenShift、Rancher、Oracle Container Engine for Kubernetes (OKE) など主要な Kubernetes ディストリビューションの専用ドキュメントやサンプルは [Kubernetes ディストリビューション][1]に掲載されています。
@@ -204,6 +204,21 @@ v2.0 では、Datadog のチャートはリファクタリングされており�
 
 現在、デプロイされているチャートバージョンが `v2.0.0` 以前の場合は、[移行ガイド][11]に従って設定を新しいフィールドにマッピングしてください。
 
+### チャート v2.x の Kube ステートメトリクスコア
+
+新しいデプロイメントでは、Datadog は新しい `kube-state-metrics` コアを以下の値で使用することを推奨します。
+
+```yaml
+...
+datadog:
+...
+  kubeStateMetricsCore:
+    enabled: true
+...
+```
+
+`kube-state-metrics` コアの詳細については、[Kubernetes ステートメトリクスコアのドキュメント][12]をお読みください。
+
 ### 非特権
 
 (オプション) 非特権インストールを実行するには、`values.yaml` ファイルに以下を追加します。
@@ -229,6 +244,7 @@ datadog:
 [9]: https://gallery.ecr.aws/datadog/
 [10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
+[12]: /ja/integrations/kubernetes_state_core
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 

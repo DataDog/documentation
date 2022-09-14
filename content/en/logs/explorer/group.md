@@ -129,6 +129,8 @@ Transactions support the [List Aggregates][15] visualization. Clicking a transac
 
 {{< img src="logs/explorer/transactions_side_panel.png" alt="The transaction log panel showing logs within the selected transaction" style="width:80%;" >}}
 
+## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/guide/custom_time_frames

@@ -36,7 +36,7 @@ Add your Datadog API key to your Vector configuration to connect it to Observabi
 With Observability Pipelines, you can also:
 
 - Control your data volume before routing to manage costs.
-- Route data anywhere to reduce lock-in and simplify migrations.
+- Route data anywhere to reduce vendor lock-in and simplify migrations.
 - Meet residency requirements and redact sensitive data to stay more compliant.
 - Enrich, structure, and transform your events to make them more useful.
 

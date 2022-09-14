@@ -321,7 +321,7 @@
         file_name: 'github_actions.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
-          title: Synthetics CI GitHub Actions
+          title: Synthetics and CI GitHub Actions
           kind: documentation
 
   - repo_name: synthetics-ci-orb
@@ -477,7 +477,7 @@
               text: 'Learn about the RUM Explorer'
             - link: '/logs/log_collection/javascript/'
               tag: 'Documentation'
-              text: 'Learn about the Browser Logs SDK'
+              text: 'Learn about the Datadog Browser SDK for Logs'
     - action: pull-and-push-file
       branch: main
       globs:
@@ -509,11 +509,11 @@
             tag: 'Blog'
             text: 'Debug Android crashes faster with Datadog'
           - link: '/real_user_monitoring/error_tracking/'
-            tag: 'GitHub'
+            tag: 'Documentation'
             text: 'Learn about Error Tracking'
           - link: '/real_user_monitoring/error_tracking/explorer'
             tag: 'Documentation'
-            text: 'Visualize Error Tracking data in the Explorer'
+            text: 'Visualize Error Tracking data in the RUM Explorer'
   - repo_name: datadog-cloudformation-resources
     contents:
     - action: pull-and-push-file
@@ -562,7 +562,6 @@
         front_matters:
           title: Android Trace Collection
           kind: documentation
-          beta: true
           aliases:
             - /tracing/setup_overview/setup/android
             - /tracing/setup/android
@@ -588,7 +587,6 @@
         front_matters:
           title: RUM iOS and tvOS Monitoring
           kind: documentation
-          beta: true
           description: "Collect RUM data from your iOS projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/_index.md"]
           further_reading:
@@ -629,7 +627,6 @@
         front_matters:
           title: iOS Trace Collection
           kind: documentation
-          beta: true
           aliases:
             - /tracing/setup_overview/setup/ios/
             - /tracing/setup/ios/
@@ -653,7 +650,6 @@
         front_matters:
           title: Mobile Vitals
           kind: documentation
-          beta: true
           description: "Collect RUM data from your iOS projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_mobile_vitals.md"]
           further_reading:
@@ -674,7 +670,6 @@
         front_matters:
           title: iOS Crash Reporting and Error Tracking
           kind: documentation
-          beta: true
           description: "Set up Error Tracking for your iOS projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/crash_reporting.md"]
           aliases:
@@ -690,6 +685,16 @@
               tag: "Documentation"
               text: "Learn about Error Tracking"
     
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_collection/swiftui.md'
+      options:
+        dest_path: '/real_user_monitoring/ios/'
+        file_name: 'swiftui.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/swiftui.md"]
+
     - action: pull-and-push-folder
       branch: master
       globs:
@@ -712,7 +717,6 @@
         front_matters:
           title: React Native Monitoring
           kind: documentation
-          beta: true
           description: "Collect RUM data from your React Native projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md"]
           further_reading:
@@ -735,7 +739,6 @@
         front_matters:
           title: React Native Integrated Libraries
           kind: faq
-          beta: true
           description: "Collect RUM data from your React Native projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/rum_integrations.md"]
           further_reading:
@@ -758,7 +761,6 @@
         front_matters:
           title: Mobile Vitals
           kind: documentation
-          beta: true
           description: "Collect RUM data from your React Native projects."
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/rum_mobile_vitals.md"]
           further_reading:
@@ -781,7 +783,6 @@
         front_matters:
           title: Expo
           kind: documentation
-          beta: true
           description: "Monitor your React Native projects using Expo and Expo Go with Datadog."
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_development.md"]
           further_reading:
@@ -794,6 +795,31 @@
     - action: pull-and-push-file
       branch: main
       globs:
+      - 'docs/expo_crash_reporting.md'
+      options:
+        dest_path: '/real_user_monitoring/error_tracking/'
+        file_name: 'expo.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_crash_reporting.md"]
+          title: Expo Crash Reporting and Error Tracking
+          kind: documentation
+          description: Capture Expo crash reports in Datadog.
+          further_reading:
+          - link: 'https://www.datadoghq.com/blog/debug-android-crashes/'
+            tag: 'Blog'
+            text: 'Debug Android crashes faster with Datadog'
+          - link: 'https://www.datadoghq.com/blog/ios-crash-reporting-datadog/'
+            tag: 'Blog'
+            text: 'Debug iOS crashes efficiently with Datadog'
+          - link: '/real_user_monitoring/error_tracking/'
+            tag: 'Documentation'
+            text: 'Learn about Error Tracking'
+          - link: '/real_user_monitoring/error_tracking/explorer'
+            tag: 'Documentation'
+            text: 'Visualize Error Tracking data in the RUM Explorer'
+    - action: pull-and-push-file
+      branch: main
+      globs:
       - 'docs/crash_reporting.md'
       options:
         dest_path: '/real_user_monitoring/error_tracking/'
@@ -801,7 +827,6 @@
         front_matters:
           title: React Native Crash Reporting and Error Tracking
           kind: documentation
-          beta: true
           description: Set up Error Tracking for your React Native projects.
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/crash_reporting.md"]
           further_reading:
@@ -817,16 +842,15 @@
     - action: pull-and-push-file
       branch: main
       globs:
-      - 'packages/datadog_flutter_plugin/README.md'
+      - 'packages/datadog_flutter_plugin/doc/rum/rum_collection.md'
       options:
         dest_path: '/real_user_monitoring/flutter/'
         file_name: '_index.md'
         front_matters:
           title: Flutter Monitoring
           kind: documentation
-          beta: true
           description: "Collect RUM data from your Flutter projects."
-          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/README.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/rum_collection.md"]
           further_reading:
             - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
               tag: "Blog"
@@ -837,6 +861,145 @@
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/doc/log_collection.md'
+      options:
+        dest_path: '/logs/log_collection/'
+        file_name: 'flutter.md'
+        front_matters:
+          title: Flutter Log Collection
+          kind: documentation
+          description: "Collect Logs data from your Flutter projects."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/log_collection.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "logs/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your logs"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/doc/common_setup.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: 'setup.md'
+        front_matters:
+          title: Setup
+          kind: documentation
+          description: "Setup Flutter Monitoring for RUM & Session Replay or Log Management."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/common_setup.md"]
+          further_reading:
+            - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+              tag: "Blog"
+              text: "Monitor Flutter application performance with Datadog Mobile RUM"
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/doc/rum/advanced_configuration.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: 'advanced_configuration.md'
+        front_matters:
+          title: RUM Flutter Advanced Configuration
+          kind: documentation
+          description: "Learn how to configure Flutter Monitoring."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/advanced_configuration.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/doc/rum/data_collected.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: 'data_collected.md'
+        front_matters:
+          title: RUM Flutter Data Collected
+          kind: documentation
+          description: "Learn about the data collected by Flutter Monitoring."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/data_collected.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/doc/rum/mobile_vitals.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: 'mobile_vitals.md'
+        front_matters:
+          title: Mobile Vitals
+          kind: documentation
+          description: "Learn about mobile vitals collected by Flutter Monitoring."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/mobile_vitals.md"]
+          further_reading:
+            - link: "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/"
+              tag: "Blog"
+              text: "Monitor Flutter application performance with Datadog Mobile RUM"
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/doc/troubleshooting.md'
+      options:
+        dest_path: '/real_user_monitoring/flutter/'
+        file_name: 'troubleshooting.md'
+        front_matters:
+          title: Troubleshooting
+          kind: documentation
+          description: "Learn how to troubleshoot issues with Flutter Monitoring."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/troubleshooting.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/flutter/"
+              tag: "Documentation"
+              text: "Learn about Flutter Monitoring"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'packages/datadog_flutter_plugin/doc/rum/error_tracking.md'
+      options:
+        dest_path: '/real_user_monitoring/error_tracking/'
+        file_name: 'flutter.md'
+        front_matters:
+          title: Flutter Crash Reporting and Error Tracking
+          kind: documentation
+          description: "Learn how to track Flutter errors with Error Tracking."
+          dependencies: ["https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/error_tracking.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-flutter"
+              tag: "GitHub"
+              text: "dd-sdk-flutter Source code"
+            - link: "real_user_monitoring/error_tracking/"
+              tag: "Documentation"
+              text: "Learn about Error Tracking"
 
   - repo_name: security-monitoring
     contents:
@@ -877,8 +1040,8 @@
       options:
         dest_path: "/developers/"
         file_name: "datadog_apps.md"
-        # front_matters:
-          # dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/gettiing-started.md"]
+        front_matters:
+          dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
 
   - repo_name: datadog-agent
     contents:

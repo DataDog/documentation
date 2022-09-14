@@ -1,41 +1,64 @@
 ---
+app_id: mapr
+app_uuid: 96cb179f-2a53-424b-95ce-302610f155eb
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     MapR - Overview: assets/dashboards/mapr_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: mapr.metrics.submitted
+      metadata_path: metadata.csv
+      prefix: mapr.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: MapR
   logs:
     source: mapr
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - OS & システム
 - 処理
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
-display_name: MapR
+display_on_public_website: true
 draft: false
 git_integration_title: mapr
-guid: 7d1de422-85a6-47cc-9962-427a9499d109
 integration_id: mapr
 integration_title: MapR
-integration_version: 1.9.0
+integration_version: 1.9.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: mapr.
-metric_to_check: mapr.metrics.submitted
+manifest_version: 2.0.0
 name: mapr
-public_title: MapR インテグレーション
+oauth: {}
+public_title: MapR
 short_description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Data Store
+  - Category::OS & System
+  - Category::Processing
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: MapR
 ---
 
 

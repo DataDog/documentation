@@ -92,7 +92,7 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 
 - アプリケーションは、定期的またはクリックごとに API へのリクエストを送信することで分析を収集します。
 
-- アプリケーションは "[comet][16])” の技術 (つまり、ストリーミングやロングポーリング) を使用しており、リクエストは不定時間保留されたままです。
+- アプリケーションは "[comet][16]" の技術 (つまり、ストリーミングやロングポーリング) を使用しており、リクエストは不定時間保留されたままです。
 
 このような場合のアクティビティ判定の精度を向上させるには、`excludedActivityUrls` を指定します。これは、ページアクティビティを計算する際に RUM ブラウザ SDK が除外するリソースのリストです。
 
@@ -138,6 +138,22 @@ document.addEventListener("scroll", function handler() {
 
 **注**: シングルページアプリケーションの場合、`addTiming` API により現在の RUM ビューの開始の相対的なタイミングが発行されます。たとえば、ユーザーがアプリケーションを表示し（初期ロード）、次に別のページを 5 秒間表示して（ルート変更）、8 秒後に `addTiming` をトリガーした場合、タイミングは `8-5 = 3` 秒となります。
 
+また、2 番目のパラメーターとして、独自のタイミングを指定することもできます。これは、現在の RUM ビューの開始点または UNIX エポック (タイムスタンプ) からの相対的なミリ秒数である必要があります。これは、非同期セットアップを使用する場合に特に便利です。例:
+
+```javascript
+document.addEventListener("scroll", function handler() {
+    //1 度だけトリガーするよう、イベントリスナーを削除
+    document.removeEventListener("scroll", handler);
+
+    const timing = Date.now()
+    DD_RUM.onReady(function() {
+      DD_RUM.addTiming('first_scroll', timing);
+    });
+});
+
+```
+
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -157,5 +173,5 @@ document.addEventListener("scroll", function handler() {
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[16]: https://en.wikipedia.org/wiki/Comet_(programming
+[16]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
 [17]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures

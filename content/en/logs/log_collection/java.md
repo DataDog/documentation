@@ -266,7 +266,7 @@ If you are _not_ correlating logs and traces, you can remove the MDC placeholder
 
 ## Configure the Datadog Agent
 
-Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
+Create a file `java.d/conf.yaml` in the Agent's `conf.d/` directory with the following content:
 
 ```yaml
 #Log section

@@ -1,34 +1,53 @@
 ---
+app_id: portworx
+app_uuid: e682ab93-39cd-403b-a16f-8082961bc081
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: portworx.cluster.cpu_percent
+      metadata_path: metadata.csv
+      prefix: portworx.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Portworx
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: paul@portworx.com
+  support_email: paul@portworx.com
 categories:
 - モニター
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md
-display_name: Portworx
+display_on_public_website: true
 draft: false
 git_integration_title: portworx
-guid: 858a4b03-3f75-4019-8ba8-46b00d5aeb46
 integration_id: portworx
 integration_title: Portworx
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: paul@portworx.com
-manifest_version: 1.0.0
-metric_prefix: portworx.
-metric_to_check: portworx.cluster.cpu_percent
+manifest_version: 2.0.0
 name: portworx
-public_title: Datadog-Portworx インテグレーション
+oauth: {}
+public_title: Portworx
 short_description: Portworx インスタンスからランタイムメトリクスを収集
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Portworx インスタンスからランタイムメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Portworx
 ---
 
 

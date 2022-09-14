@@ -44,19 +44,19 @@
   },
 
   "help_sentence": {
-    "other": "Nos ingénieurs sont là pour vous aider."
+    "other": "Nos ingénieurs sont là pour vous aider !"
   },
 
   "email_support_sentence": {
-    "other": "Vous pouvez contacter l'équipe d'assistance Datadog par e-mail à l'adresse <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a> (pour tous les sites)."
+    "other": "Pour échanger avec notre équipe d'assistance, rendez-vous sur le <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">site Web de l'assistance Datadog</a> (pour tous les sites). <br><br> Pour découvrir comment vous connecter au site Web de l'assistance, consultez la section <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">Accéder à votre ticket d'assistance</a>."
   },
 
   "live_chat_support_sentence": {
-    "other": "Discutez avec notre équipe d'assistance du lundi au vendredi entre 16 h et 3 h CET via le chat intégré à l'application ou sur le canal <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Datadog</a> (États-Unis et Europe)."
+    "other": "Discutez avec l'équipe d'assistance Datadog du lundi au vendredi entre 16 h et 2 h HNEC (Heure normale d'Europe centrale) via le chat intégré à l'application."
   },
 
   "event_stream_support_sentence": {
-    "other": "Les messages de votre <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">flux d'événements</a> contenant la mention <code>@support-datadog</code> créent automatiquement un ticket à l'intention de notre équipe d'assistance. Il s'agit du moyen le plus pratique pour transmettre un snapshot de graphique (États-Unis et Europe)."
+    "other": "Le <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">programme de la communauté Slack</a> est un réseau conçu par les utilisateurs Datadog, pour les utilisateurs Datadog, afin d'obtenir des réponses ou de partager des conseils et astuces sur les différentes solutions de Datadog."
   },
 
   "agent_started_sentence": {
@@ -112,7 +112,7 @@
   },
 
   "get_started_free": {
-    "other": "ESSAI GRATUIT"
+    "other": "COMMENCER GRATUITEMENT"
   },
 
   "get_started_free_short": {
@@ -216,16 +216,16 @@
     "other": "Suivi des incidents"
   },
 
-  "email": {
-    "other": "E-mail"
+  "platform": {
+    "other": "Plateforme d'assistance<br>Datadog"
   },
 
   "live_chat": {
-    "other": "Chat live"
+    "other": "Chat en direct avec<br>notre équipe d'assistance"
   },
 
   "event_stream_messaging": {
-    "other": "Messagerie depuis le flux d'événements dans l'application"
+    "other": "Slack Datadog"
   },
 
   "questions": {
@@ -311,8 +311,11 @@
   "footer_blurb_desc": {
     "other": "Nos ingénieurs sont là pour vous aider !"
   },
+  "integration_version": {
+    "other": "Intégration"
+  },
   "beta_check":{
-    "other": "Beta"
+    "other": "Bêta"
   }
 
 }

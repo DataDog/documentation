@@ -1,65 +1,101 @@
 ---
-title: データグラム形式とシェルの使用方法
-kind: documentation
-description: DogStatsD が使用するデータグラム形式および (高度な) シェルの使用方法の概要
 aliases:
-  - /ja/developers/dogstatsd/data_types/
+- /ja/developers/dogstatsd/data_types/
+description: DogStatsD が使用するデータグラム形式および (高度な) シェルの使用方法の概要
 further_reading:
-  - link: developers/dogstatsd
-    tag: ドキュメント
-    text: DogStatsD 入門
-  - link: developers/libraries
-    tag: ドキュメント
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: DogStatsD ソースコード
+- link: developers/dogstatsd
+  tag: ドキュメント
+  text: DogStatsD 入門
+- link: developers/libraries
+  tag: ドキュメント
+  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
+  tag: GitHub
+  text: DogStatsD ソースコード
+kind: documentation
+title: データグラム形式とシェルの使用方法
 ---
-ここでは、DogStatsD が受け付けるメトリクス、イベント、サービスチェックの生のデータグラム形式を規定します。[DogStatsD クライアントライブラリ][1]を使用する場合は、これをお読みになる必要はありません。独自のライブラリを記述する場合、あるいはシェルを使用してメトリクスを送信する場合は、以下を参照してください。
+
+ここでは、DogStatsD が受け付けるメトリクス、イベント、サービスチェックの生のデータグラム形式を規定します。生のデータグラムは UTF-8 でエンコーディングされています。[DogStatsD クライアントライブラリ][1]を使用する場合は、これをお読みになる必要はありません。独自のライブラリを記述する場合、あるいはシェルを使用してメトリクスを送信する場合は、以下を参照してください。
+
+## DogStatsD プロトコル
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-| パラメーター                           | 必須 | 説明                                                                                                                                      |
-| ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `<METRIC_NAME>`                     | はい      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][1]を参照してください。                                    |
-| `<VALUE>`                           | はい      | 整数または浮動小数点数。                                                                                                                             |
-| `<TYPE>`                            | はい      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。[メトリクスタイプのドキュメント][2]を参照してください。      |
-| `<SAMPLE_RATE>`                     | いいえ       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | 文字列のカンマ区切りリスト。キー/値タグにはコロンを使用します（`env:prod`）。タグの定義に関するガイダンスについては、[タグ付けのドキュメント][3]を参照してください。 |
+| パラメーター                           | 必須 | 説明                                                                                                                                                    |
+| ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<METRIC_NAME>`                     | 〇      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][1]を参照してください。                                                  |
+| `<VALUE>`                           | 〇      | 整数または浮動小数点数。                                                                                                                                           |
+| `<TYPE>`                            | 〇      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。詳細は[メトリクスタイプ][2]を参照してください。                    |
+| `<SAMPLE_RATE>`                     | ✕       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、DISTRIBUTION、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | 文字列のカンマ区切りリスト。キー/値タグにはコロンを使用します（`env:prod`）。タグの定義に関するガイダンスについては、[タグの概要][3]を参照してください。              |
 
 以下に、データグラムの例を示します。
 
 - `page.views:1|c` : `page.views` COUNT メトリクスを増やします。
 - `fuel.level:0.5|g`: 燃料タンクが半分空になったことを記録します。
-- `song.length:240|h|@0.5`: 半分の時間で `song.length` ヒストグラムをサンプリングします。
+- `song.length:240|h|@0.5`: 半分の時間だけ送信したように `song.length` ヒストグラムをサンプリングします。
 - `users.uniques:1234|s`: サイトへのユニークビジターを追跡します。
 - `users.online:1|c|#country:china`: アクティブユーザー COUNT メトリクスを増やし、所属国ごとにタグ付けします。
 - `users.online:1|c|@0.5|#country:china`: アクティブな中国ユーザーを追跡し、サンプルレートを使用します。
 
+### DogStatsD プロトコル v1.1
+
+Agent `>=v6.25.0` && `<v7.0.0` または `>=v7.25.0` からは、値のパッキングが可能になります。これは、 `SET` を除くすべてのメトリクスタイプでサポートされています。値は `:` で区切られ、例えば次のようになります。
+
+`<METRIC_NAME>:<VALUE1>:<VALUE2>:<VALUE3>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
+
+`TYPE`、`SAMPLE_RATE`、`TAGS` はすべての値で共有されます。これは、それぞれ 1 つの値で複数のメッセージを送信するよりも、同じメトリクスを生成します。これは、HISTOGRAM、TIMING、DISTRIBUTION の各メトリクスに有効です。
+
+### データグラムの例
+
+- `page.views:1:2:32|d`: `page.views` DISTRIBUTION メトリクスを `1`、`2`、`32` の値で 3 回サンプリングします。
+- `song.length:240:234|h|@0.5`: `song.length` ヒストグラムを、半分の時間を 2 回送信したかのようにサンプリングします。それぞれの値には `0.5` のサンプルレートが適用されます。
+
+### DogStatsD プロトコル v1.2
+
+Agent `>=v6.35.0` および `<v7.0.0` または `>=v7.35.0` からは、新しいコンテナ ID フィールドがサポートされています。
+Datadog Agent は、コンテナ ID の値を使用して、追加のコンテナタグで DogStatsD メトリクスをリッチ化します。
+
+コンテナ ID の先頭には `c:` が付きます。例:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|c:<CONTAINER_ID>`
+
+**注:** `datadog.yaml` ファイルまたは環境変数 `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT=true` で `dogstatsd_origin_detection_client` を `true` に設定すると、Datadog Agent にコンテナ ID フィールドを抽出して、対応するコンテナタグをアタッチするように指示が出ます。
+
+### データグラムの例
+
+- `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: Datadog Agent は、`image_name` や `image_tag` などのコンテナタグを `page.views` メトリクスに追加します。
+
+コンテナタグについては、[Kubernetes][4] と [Docker][5] のタグ付けのドキュメントをご覧ください。
 
 [1]: /ja/metrics/#naming-metrics
 [2]: /ja/metrics/types/
 [3]: /ja/getting_started/tagging/
+[4]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[5]: /ja/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
 {{% tab "Events" %}}
 
-`_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
+`_e{<TITLE_UTF8_LENGTH>,<TEXT_UTF8_LENGTH>}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
 | パラメーター                            | 必須 | 説明                                                                                                            |
 | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `_e`                                 | はい      | データグラムは `_e` で始まる必要があります。                                                                                     |
-| `<TITLE>`                            | はい      | イベントのタイトル。                                                                                                       |
-| `<TEXT>`                             | はい      | イベントテキスト。`\\n` で改行を挿入します。                                                                        |
-| `d:<TIMESTAMP>`                      | いいえ       | イベントにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                         |
-| `h:<HOSTNAME>`                       | いいえ       | イベントにホスト名を追加します。デフォルトはありません。                                                                               |
-| `k:<集計キー>`                | いいえ       | 同じキーを持つ他のイベントとグループ化するための集計キーを追加します。デフォルトはありません。                              |
-| `p:<PRIORITY>`                       | いいえ       | `normal` または `low` に設定します。デフォルトは `normal` です。                                                                            |
-| `s:<ソースタイプ名>`               | いいえ       | イベントにソースタイプを追加します。デフォルトはありません。                                                                            |
-| `t:<ALERT_TYPE>`                     | いいえ       | `error`、`warning`、`info`、`success` のいずれかに設定します。デフォルトは `info` です。                                                        |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | タグ内のコロンは、タグリスト文字列の一部です。他のパラメーターで使用されるコロンのようにパースには使用されません。デフォルトはありません。 |
+| `_e`                                 | 〇      | データグラムは `_e` で始まる必要があります。                                                                                     |
+| `<タイトル>`                            | 〇      | イベントのタイトル。                                                                                                       |
+| `<テキスト>`                             | 〇      | イベントテキスト。`\\n` で改行を挿入します。                                                                        |
+| `<TITLE_UTF8_LENGTH>`                | 〇      | UTF-8 でエンコーディングされた `<TITLE>` 長 (バイト単位)                                                                              |
+| `<TEXT_UTF8_LENGTH>`                 | 〇      | UTF-8 でエンコーディングされた `<TEXT>` 長 (バイト単位)                                                                               |
+| `d:<TIMESTAMP>`                      | ✕       | イベントにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                         |
+| `h:<HOSTNAME>`                       | ✕       | イベントにホスト名を追加します。デフォルトはありません。                                                                               |
+| `k:<集計キー>`                | ✕       | 同じキーを持つ他のイベントとグループ化するための集計キーを追加します。デフォルトはありません。                              |
+| `p:<PRIORITY>`                       | ✕       | `normal` または `low` に設定します。デフォルトは `normal` です。                                                                            |
+| `s:<ソースタイプ名>`               | ✕       | イベントにソースタイプを追加します。デフォルトはありません。                                                                            |
+| `t:<ALERT_TYPE>`                     | ✕       | `error`、`warning`、`info`、`success` のいずれかに設定します。デフォルトは `info` です。                                                        |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | タグ内のコロンは、タグリスト文字列の一部です。他のパラメーターで使用されるコロンのようにパースには使用されません。デフォルトはありません。 |
 
 以下に、データグラムの例を示します。
 
@@ -78,13 +114,13 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 | パラメーター                            | 必須 | 説明                                                                                                                             |
 | ------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `_sc`                                | はい      | データグラムは `_sc` で始まる必要があります。                                                                                                     |
-| `<NAME>`                             | はい      | サービスチェック名。                                                                                                                 |
-| `<STATUS>`                           | はい      | チェックステータスに対応する整数値 (OK = `0`、WARNING = `1`、CRITICAL = `2`、UNKNOWN = `3`)                                  |
-| `d:<TIMESTAMP>`                      | いいえ       | チェックにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                                          |
-| `h:<HOSTNAME>`                       | いいえ       | イベントにホスト名を追加します（デフォルトはありません）。                                                                                               |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | イベントのタグを設定します。カンマで区切られた文字列のリスト（デフォルトはありません）。                                                           |
-| `m:<SERVICE_CHECK_MESSAGE>`          | いいえ       | サービスチェックの現在の状態を説明するメッセージ。このフィールドは、メタデータフィールドの最後に置く必要があります（デフォルトはありません）。 |
+| `_sc`                                | 〇      | データグラムは `_sc` で始まる必要があります。                                                                                                     |
+| `<NAME>`                             | 〇      | サービスチェック名。                                                                                                                 |
+| `<STATUS>`                           | 〇      | チェックステータスに対応する整数値 (OK = `0`、WARNING = `1`、CRITICAL = `2`、UNKNOWN = `3`)                                  |
+| `d:<TIMESTAMP>`                      | ✕       | チェックにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                                          |
+| `h:<HOSTNAME>`                       | ✕       | イベントにホスト名を追加します（デフォルトはありません）。                                                                                               |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | イベントのタグを設定します。カンマで区切られた文字列のリスト（デフォルトはありません）。                                                           |
+| `m:<SERVICE_CHECK_MESSAGE>`          | ✕       | サービスチェックの現在の状態を説明するメッセージ。このフィールドは、メタデータフィールドの最後に置く必要があります（デフォルトはありません）。 |
 
 以下に、データグラムの例を示します。
 
@@ -100,7 +136,7 @@ _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 
 Linux などの Unix 系 OS では、Bash を使用してください。Windows では、PowerShell と [PowerShell-statsd][2] (ネットワークビットを処理する簡単な PowerShell 機能) を使用します。
 
-DogStatsD は、メトリクス、イベント、またはサービスチェックに関する情報を含むメッセージを作成し、ローカルにインストールされた Agent にコレクターとして送信します。宛先 IP アドレスは `127.0.0.1` で、UDP 上のコレクターポートは `8125` です。Agent の構成方法については、[メインの DogStatsD のドキュメント][3]を参照してください。
+DogStatsD は、メトリクス、イベント、またはサービスチェックに関する情報を含むメッセージを作成し、ローカルにインストールされた Agent にコレクターとして送信します。宛先 IP アドレスは `127.0.0.1` で、UDP 上のコレクターポートは `8125` です。Agent の構成の詳細については、[DogStatsD][3] を参照してください。
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
@@ -133,7 +169,7 @@ Windows の場合
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
-任意のプラットフォームで Python を使用する場合 (Windows では、Agent の埋め込み Python インタープリターを使用できます。これは、Agent バージョン <= 6.11 の場合は `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` にあります。)
+任意のプラットフォームで Python を使用する場合 (Windows では、Agent の埋め込み Python インタープリターを使用できます。これは、Agent バージョン <= 6.11 の場合は `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `%ProgramFiles%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` にあります。)
 
 ### Python 2
 
@@ -204,7 +240,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒�
 {{% /tab %}}
 {{< /tabs >}}
 
-コンテナ環境でメトリクス、イベント、またはサービスチェックを送信する方法については、[Kubernetes 上の DogStatsD に関するドキュメント][3]を参照してください。また、環境に応じて [Kubernetes で APM を構成][4]する手順も併せて参照してください。[Docker APM][5] のドキュメントも参考になります。
+コンテナ環境でメトリクス、イベント、またはサービスチェックを送信する方法については、[Kubernetes 上の DogStatsD][3]を参照してください。また、環境に応じて [Kubernetes での APM の構成][4]も併せて参照してください。[Docker APM][5] のドキュメントも参考になります。
 
 ## その他の参考資料
 

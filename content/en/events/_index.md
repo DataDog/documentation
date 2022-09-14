@@ -53,7 +53,7 @@ For example, check out the [Monitor Notifications Overview][18] dashboard, which
 
 ### Normalize and enrich events with processing pipelines
 
-A _processor_ runs data-structuring actions on events attributes when they are ingested. A _pipelines_ is composed of one or multiple processors executed sequentially. With event processing pipelines, you can:
+A _processor_ runs data-structuring actions on events attributes when they are ingested. A _pipeline_ is composed of one or multiple processors executed sequentially. With event processing pipelines, you can:
 
 - Normalize disparate sources of events by remapping attributes. For example, use the same reserved [service tags][19] everywhere.
 - Enrich events with external data saved in a [Reference Table][20] (beta). For example, map a service name with your service directory to enrich events with team ownership information, links to dashboards, or links to documentation.

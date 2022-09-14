@@ -149,7 +149,7 @@ Click the **Span/Trace/Full profile** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="python,go,ruby" >}}
+{{< programming-lang-wrapper langs="python,go,ruby,php" >}}
 {{< programming-lang lang="python" >}}
 
 Endpoint profiling is enabled by default when you turn on profiling for your [Python][1] service. It requires `dd-trace-py` version 0.54.0 or greater.
@@ -180,6 +180,14 @@ Endpoint profiling is enabled by default when you turn on profiling for your [Ru
 <p></p>
 
 [1]: /profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+Endpoint profiling is enabled by default when you turn on profiling for your [PHP][1] service. It requires [`ddtrace`][2] v0.79.0+. To disable endpoint profiling, set the environment variable `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED` to `0`, `no`, `off`, or `false`.
+<p></p>
+
+[1]: /profiler/enabling/php
+[2]: https://github.com/DataDog/dd-trace-php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

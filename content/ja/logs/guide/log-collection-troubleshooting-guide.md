@@ -1,22 +1,23 @@
 ---
-title: ログ収集のトラブルシューティングガイド
-kind: ガイド
 aliases:
-  - /ja/logs/faq/log-collection-troubleshooting-guide
+- /ja/logs/faq/log-collection-troubleshooting-guide
 further_reading:
-  - link: /logs/log_collection/
-    tag: Documentation
-    text: ログの収集方法
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログの調査方法
-  - link: /logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
-    tag: FAQ
-    text: あるはずのタイムスタンプがログに含まれないのはなぜですか
-  - link: /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/
-    tag: FAQ
-    text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
+- link: /logs/log_collection/
+  tag: Documentation
+  text: ログの収集方法
+- link: /logs/explorer/
+  tag: Documentation
+  text: ログの調査方法
+- link: /logs/guide//logs-not-showing-expected-timestamp/
+  tag: ガイド
+  text: あるはずのタイムスタンプがログに含まれないのはなぜですか
+- link: /logs/guide/logs-show-info-status-for-warnings-or-errors/
+  tag: ガイド
+  text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
+kind: ガイド
+title: ログ収集のトラブルシューティングガイド
 ---
+
 `dd-agent` でログコレクターから[新しいログを Datadog に送信][1]する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このページに挙げられたトラブルシューティングをお役立てください。それでも問題が解決しない場合は、[ Datadog サポート][2]までお問い合わせください。
 
 ## Agent を再起動します。
@@ -42,7 +43,7 @@ Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信し
 
 ```yaml
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 詳細については、[HTTPS ログ転送セクション][4]をご参照ください。
