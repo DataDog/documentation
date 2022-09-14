@@ -173,7 +173,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### メールに移動してリンクをクリックする
 
-[メール変数を作成](#test-that-an-email-was-received)したら、このナビゲーションステップを作成すると、ブラウザテストで Synthetic メールのユニークな受信箱にアクセスすることができます。
+[メール変数を作成][4]したら、このナビゲーションステップを作成すると、ブラウザテストで Synthetic メールのユニークな受信箱にアクセスすることができます。
 
 ブラウザテストでクリックさせたいメールやリンクを選択します。このステップで対応するページが表示され、その特定のページから残りの行程に進むことができます。
 
@@ -297,17 +297,17 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### グローバル変数
 
-[Synthetic Monitoring Settings][4] で定義されたグローバル変数を選択します。
+[Synthetic Monitoring Settings][5] で定義されたグローバル変数を選択します。
 
 #### グローバル変数 - MFA
 
-[Synthetic Monitoring Settings][4] で定義された MFA グローバル変数を選択します。
+[Synthetic Monitoring Settings][5] で定義された MFA グローバル変数を選択します。
 
-このタイプのグローバル変数は、時間ベースのワンタイムパスワード (TOTP) シークレットキーを格納し、MFA モジュールと MFA で保護されたワークフローをテストすることができます。詳細については、[ブラウザテストにおける多要素認証 (MFA) のための TOTP][5] を参照してください。
+このタイプのグローバル変数は、時間ベースのワンタイムパスワード (TOTP) シークレットキーを格納し、MFA モジュールと MFA で保護されたワークフローをテストすることができます。詳細については、[ブラウザテストにおける多要素認証 (MFA) のための TOTP][6] を参照してください。
 
 #### Email
 
-Datadog Synthetics のメールアドレスを作成し、テストステップで使用して、[メールが正しく送信されたかどうかをアサート](#test-that-an-email-was-received)したり、たとえば確認リンクをクリックするために、[メール内のリンクにナビゲート](#go-to-an-email-and-click-on-a-link)することが可能です。
+Datadog Synthetics のメールアドレスを作成し、テストステップで使用して、[メールが正しく送信されたかどうかをアサート][7]したり、たとえば確認リンクをクリックするために、[メール内のリンクにナビゲート][8]することが可能です。
 
 テスト実行のたびに一意のメールボックスが生成され、テスト実行間の競合を回避することができます。
 
@@ -319,9 +319,9 @@ Datadog Synthetics のメールアドレスを作成し、テストステップ�
 
 {{< img src="synthetics/browser_tests/subtest.png" alt="ブラウザテストサブテスト" style="width:60%;" >}}
 
-現在のブラウザテストのステップをサブテストに変換するには、**Extract From Steps** タブから記録したステップを選択し、**Convert to Subest** をクリックします。デフォルトでは、サブテストは親テストの前のステップと順番に実行されます。サブテストは、[**高度なオプション**][6]で再利用できる **Main**、**New**、**One** (1 番目)、**Two** (2 番目)、または **Three** (3 番目) のウィンドウで再生するよう選択することができ ます。
+現在のブラウザテストのステップをサブテストに変換するには、**Extract From Steps** タブから記録したステップを選択し、**Convert to Subest** をクリックします。デフォルトでは、サブテストは親テストの前のステップと順番に実行されます。サブテストは、[**高度なオプション**][9]で再利用できる **Main**、**New**、**One** (1 番目)、**Two** (2 番目)、または **Three** (3 番目) のウィンドウで再生するよう選択することができ ます。
 
-サブテストを独立して実行することに意味がない場合は、一時停止することができます。このテストは、親テストの一部として呼び出され続け、 個別に実行されることはありません。詳しくは、[ブラウザのテストジャーニーをテストスイート全体で再利用する][7]を参照ください。
+サブテストを独立して実行することに意味がない場合は、一時停止することができます。このテストは、親テストの一部として呼び出され続け、 個別に実行されることはありません。詳しくは、[ブラウザのテストジャーニーをテストスイート全体で再利用する][10]を参照ください。
 
 ### HTTP リクエスト
 
@@ -354,7 +354,7 @@ HTTP リクエストを定義するには、
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
    * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
-   AWS S3 バケットへの "Single Chunk” 転送リクエストでは、ヘッダーとして sha256 エンコードされたリクエストの本文を含む `x-amz-content-sha256` を追加します。
+   AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
 
    {{% /tab %}}
 
@@ -397,8 +397,8 @@ HTTP リクエストを定義するには、
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][8]、[`xpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_、_[Regex][10]_ |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _String_ <br> _[Regex][10]_                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][11]、[`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _文字列_ <br> _[正規表現][13]_                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
 | ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
@@ -421,8 +421,8 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。また、3 文字以上にする必要があります。
 2. 変数をレスポンスのヘッダーから抽出するか、本文から抽出するか決定します。
 
-   * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[`regex`][10] によりパースします。
-   * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用するか、[`regex`][10]、[`JSONPath`][8] または [`XPath`][9] によりパースします。
+   * **応答ヘッダー**から値を抽出: HTTP リクエストの応答ヘッダー全体を変数値に使用するか、[`regex`][13] によりパースします。
+   * **応答本文**から値を抽出: HTTP リクエストの応答本文全体を変数値に使用するか、[`regex`][13]、[`JSONPath`][11] または [`XPath`][12] によりパースします。
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="応答から抽出された変数" style="width:80%;" >}}
 
@@ -457,10 +457,13 @@ HTTP リクエストの変数や JavaScript のステップのように、実行
 [1]: /ja/synthetics/browser_tests/advanced_options/
 [2]: /ja/synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[4]: /ja/synthetics/settings/
-[5]: /ja/synthetics/guide/browser-tests-totp
-[6]: /ja/synthetics/browser_tests/advanced_options/#subtests
-[7]: /ja/synthetics/guide/reusing-browser-test-journeys
-[8]: https://restfulapi.net/json-jsonpath/
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[4]: /ja/synthetics/guide/email-validation/#create-an-email-variable
+[5]: /ja/synthetics/settings/
+[6]: /ja/synthetics/guide/browser-tests-totp
+[7]: /ja/synthetics/guide/email-validation/#confirm-the-email-was-sent
+[8]: /ja/synthetics/guide/email-validation/#navigate-through-links-in-an-email
+[9]: /ja/synthetics/browser_tests/advanced_options/#subtests
+[10]: /ja/synthetics/guide/reusing-browser-test-journeys
+[11]: https://restfulapi.net/json-jsonpath/
+[12]: https://www.w3schools.com/xml/xpath_syntax.asp
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

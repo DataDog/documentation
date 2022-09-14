@@ -251,6 +251,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2652180930",
+      "description": "Create a new dashboard with topology_map widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2921337351",
       "description": "Create a new dashboard with trace_service widget"
     },

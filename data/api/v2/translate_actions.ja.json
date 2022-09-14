@@ -324,8 +324,8 @@
     "request_schema_description": "ログリストのリクエスト。"
   },
   "ListTagConfigurations": {
-    "description": "構成済みの count/gauge/rate/distribution メトリクス名をすべて返します\n(指定された場合は追加のフィルターを適用)。",
-    "summary": "タグコンフィギュレーションを一覧表示する"
+    "description": "すべてのメトリクスを返します (指定された場合は追加のフィルターにマッチします)。",
+    "summary": "メトリクスのリストを取得する"
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "既存の count、gauge、rate、distribution メトリクスについて、クエリが可能なタグキーのすべてのカスタムリストを削除します。\nメトリクスは、メトリクス名のプレフィックスを渡すことで選択できます。\nDatadog ウェブアプリでの操作と同様に、結果はアカウントのメールアドレスに送信できます。\n`Manage Tags for Metrics` 権限を持つユーザーが発行したアプリケーションキーのみで使用できます。",
@@ -338,6 +338,10 @@
     "summary": "複数のメトリクスにタグを構成",
     "request_description": "",
     "request_schema_description": "1 回の一括タグコンフィギュレーションリクエストのラッパーオブジェクト。"
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "指定されたメトリクス名に対して、ダッシュボードやモニターでアクティブにクエリされるタグや集計をリストアップします。",
+    "summary": "アクティブなタグと集計をリストアップする"
   },
   "ListTagsByMetricName": {
     "description": "特定のメトリクス名のインデックス付きタグキーと値ペアを表示します。",

@@ -220,7 +220,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 
 | AWS service                        | Activate AWS service logging                                                                    | Send AWS logs to Datadog                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][6]                  | [Enable AWS API Gateway logs][7]                                                               | [Manual][8] log collection                                                 |
+| [API Gateway][6]                  | [Enable AWS API Gateway logs][7]                                                               | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection                                                |
 | [Cloudfront][9]                   | [Enable AWS Cloudfront logs][10]                                                                | [Manual][11] and [automatic](#automatically-set-up-triggers) log collection  |
 | [Cloudtrail][12]                   | [Enable AWS Cloudtrail logs][12]                                                                | [Manual][13] log collection                                                 |
 | [DynamoDB][14]                     | [Enable AWS DynamoDB logs][15]                                                                  | [Manual][16] log collection                                                 |

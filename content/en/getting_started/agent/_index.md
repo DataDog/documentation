@@ -101,7 +101,7 @@ The Agent collects host data every 15 seconds to provide an accurate understandi
 
 In the Datadog UI, go to the [Agent Installation Page][18] for Ubuntu by navigating to **Integrations > Agent** .
 
-To install the Datadog Agent on a host, use the [one line install command][19] updated with your [Datadog API key][2]:
+To install the Datadog Agent on a host, use the [one-line install command][18] updated with your [Datadog API key][2]:
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"

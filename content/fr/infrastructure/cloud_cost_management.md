@@ -54,7 +54,7 @@ Configurez AWS de façon à ce que Datadog puisse accéder au rapport de coûts 
   "Version": "2012-10-17",
   "Statement": [
       {
-          "Sid": "DDCCMListBucket",
+          "Sid": "DDCloudCostReadBucket",
           "Effect": "Allow",
           "Action": [
               "s3:ListBucket"
@@ -62,7 +62,7 @@ Configurez AWS de façon à ce que Datadog puisse accéder au rapport de coûts 
           "Resource": "arn:aws:s3:::NOM_COMPARTIMENT"
       },
       {
-          "Sid": "DDCCMGetObject",
+          "Sid": "DDCloudCostGetBill",
           "Effect": "Allow",
           "Action": [
               "s3:GetObject"
@@ -70,7 +70,7 @@ Configurez AWS de façon à ce que Datadog puisse accéder au rapport de coûts 
           "Resource": "arn:aws:s3:::NOM_COMPARTIMENT/PRÉFIXE_RAPPORT/NOM_RAPPORT/*"
       },
       {
-          "Sid": "CostExplorerAccuracyCheck",
+          "Sid": "DDCloudCostCheckAccuracy",
           "Effect": "Allow",
           "Action": [
               "ce:Get*"
@@ -78,7 +78,7 @@ Configurez AWS de façon à ce que Datadog puisse accéder au rapport de coûts 
           "Resource": "*"
       },
       {
-          "Sid": "CURReportDefinition",
+          "Sid": "DDCloudCostListCURs",
           "Action": [
             "cur:DescribeReportDefinitions"
           ],
