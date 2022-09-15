@@ -28,7 +28,22 @@
         align-self: flex-start;
         margin-top: -55px;
 
+        @include media-breakpoint-up(md) {
+            margin-top: 3px;
+            padding-top: 11px;
+            background: white;
+            width: 100%;
+            height: 50px;
+            top: 95px;
+        }
+
         ul {
+            flex-direction: column;
+            
+            @include media-breakpoint-up(md) {
+                flex-direction: row;
+            }
+
             li {
                 a {
                     border-bottom: none;
@@ -38,11 +53,6 @@
                     content: ''
                 }
             }
-        }
-
-        @include media-breakpoint-up(md) {
-            margin-top: 3px;
-            position: unset;
         }
     }
 }

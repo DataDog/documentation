@@ -43,11 +43,12 @@
             {{ end }}
         </div>
 
+        <!-- ID is scrollspy target -->
         <nav id="glossary-nav">
-            <ul class="nav col-2 col-md-12 d-flex d-md-block flex-column align-items-end">
+            <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                 {{ range $letters }}
                     <li class="nav-item">
-                        <a class="nav-link btn font-14-18" role='button' href='#{{ . | lower }}'>{{ . }}</a>
+                        <a class="nav-link btn font-14-19" role='button' href='#{{ . | lower }}'>{{ . }}</a>
                     </li>
                 {{ end }}
             </ul>

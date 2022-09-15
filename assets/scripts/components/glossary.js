@@ -1,11 +1,11 @@
 export const initGlossaryJS = () => {
-    const navButtons = document.querySelectorAll('.glossary-nav .btn')
+    const navButtons = document.querySelectorAll('.js-glossary-nav .nav-link')
 
     const setActiveLetter = () => {
         const hash = window.location.hash.toLowerCase()
     
         if (hash) {
-            const navButtonContainer = document.querySelector('.glossary-nav')
+            const navButtonContainer = document.querySelector('.js-glossary-nav')
             const navButton = navButtonContainer.querySelector(`a[href="${hash}"`)
     
             if (navButton) {
