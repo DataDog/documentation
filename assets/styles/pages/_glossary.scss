@@ -1,27 +1,8 @@
-.glossary {
+.glossary-main {
     h4 {
         text-transform: none;
     }
     
-    .btn {
-        padding: 0 5px;
-
-        &.active {
-            background: $brand-primary;
-            color: white;
-        }
-
-        &:hover:not(.active) {
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-            color: $brand-primary;
-        }
-
-        @include media-breakpoint-up(md) {
-            @include font-size-line-height(18px, 24px);
-            padding: 0px 8px 2px 8px;
-        }
-    }
-
     #glossary-nav {
         position: sticky;
         top: 128px;
@@ -40,6 +21,25 @@
 
         @include media-breakpoint-up(lg) {
             top: 95px;
+        }
+
+        .btn {
+            padding: 0 5px;
+    
+            &.active {
+                background: $brand-primary;
+                color: white;
+            }
+    
+            &:hover:not(.active) {
+                box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+                color: $brand-primary;
+            }
+    
+            @include media-breakpoint-up(md) {
+                @include font-size-line-height(18px, 24px);
+                padding: 0px 8px 2px 8px;
+            }
         }
 
         ul {
