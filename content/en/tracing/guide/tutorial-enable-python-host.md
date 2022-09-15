@@ -9,11 +9,17 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through step by step enabling tracing on a Python application that is installed on a host. In this scenario, you install a Datadog Agent on the same host as the application. 
+This tutorial walks you through step by step enabling tracing on a sample Python application that is installed on a host. In this scenario, you install a Datadog Agent on the same host as the application. 
 
-For other scenarios, including applications in containers, Agent in containers, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including applications in containers, Agent in a container, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
 For general comprehensive tracing setup documentation for Python, see [Tracing Python Applications][2].
+
+### Prerequisites
+
+- A Datadog account and Organization API key.
+- Git
+- Python
 
 ## Install the Agent
 
@@ -31,9 +37,75 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
-## Install a Python application
+<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
+ 
+
+## Install and run a sample Python application
+
+Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/Datadog/tutorial-apm-python-host][8]. Clone the git repository by running:
+
+{{< code-block lang="bash" >}}
+git clone https://github.com/DataDog/apm-tutorial-python-host.git 
+{{< /code-block >}}
+
+Setup, configure, and install Python dependencies for the sample using either Poetry or pip. Run one of the following:
+
+{{% tabs %}}
+
+{{< tab "Poetry" >}}
+
+```bash
+poetry install
+```
+
+{{< /tab >}}
+
+{{< tab "pip" >}}
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+{{< /tab >}}
+
+{{% /tabs %}}
+
+Start the application by running:
+
+{{< code-block lang="bash" >}}
+python -m notes_app.app
+{{< /code-block >}}
+
+The sample `notes_app` application is a basic REST API that stores data in an in-memory database. Open another terminal and send a few API requests:
+
+`curl -X GET 'localhost:8080/notes'`
+: Returns `{}` because there is nothing in the database yet
+
+`curl -X POST 'localhost:8080/notes?desc=hello'`
+: Adds a note with the description `hello` and an ID value of `1`.
+
+`curl -X GET 'localhost:8080/notes?id=1'`
+: Returns the note with `id` value of `1`: `{ "1": "hello" }`
+
+`curl -X POST 'localhost:8080/notes?desc=otherNote`
+: Adds a note with the description `otherNote` and an ID value of `2`.
+
+`curl -X GET 'localhost:8080/notes'`
+: Returns the contents of the database: `{ "1": "hello", "2": "otherNote" }`
+
+`curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
+: Updates the description value for the first note to `UpdatedNote`.
+
+`curl -X DELETE 'localhost:8080/notes?id=1'`
+: Removes the first note from the database.
+
+Run more API calls to see the application in action. When you're done, type Ctrl+C to stop the application.
 
 ## Enable Datadog tracing
+
+Next, install the tracing library.
 
 ## Launch the Python application with automatic instrumentation
 
@@ -59,3 +131,4 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 [5]: /getting_started/site/
 [6]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [7]: https://app.datadoghq.com/event/explorer
+[8]: https://github.com/Datadog/tutorial-apm-python-host
