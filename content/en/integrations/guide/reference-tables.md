@@ -35,7 +35,7 @@ Reference Table names and column headers are validated using the following namin
 | Names and headers cannot contain uppercase letters. 	| Names with uppercase letters are converted to lowercase. This conversion may result in duplicate names. For example, `Fileid` and `FileID` both become `fileid`. In such cases, a number is appended to the duplicate names. For example example, `Fileid` and `FileID` become `fileid1` and `fileid2`. |
 | Names and headers cannot contain spaces. 													| Spaces other than leading and trailing spaces are replaced with underscore `_` characters. Leading and trailing spaces are removed. For example, `customer names` is replaced with `customer_names`. |
 | Names and headers must start with a lower case letter. 									| Uppercase characters are converted to lower case. Other characters are removed. For example, `23Two_three` becomes `two_three`.									|
-| Names and headers only support lowercase letters, numbers, and the `_` character. 		| Unsupported characters are replaced with the underscore `_` character, unless it breaks one of the rules above. In that case, the unsupported characters are normalized by the respective rule.				|
+| Names and headers support only lowercase letters, numbers, and the `_` character. 		| Unsupported characters are replaced with the underscore `_` character, unless it breaks one of the rules above. In that case, the unsupported characters are normalized by the respective rule.				|
 
 ## Create a Reference Table
 
