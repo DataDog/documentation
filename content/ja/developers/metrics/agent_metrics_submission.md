@@ -11,7 +11,7 @@ further_reading:
 ## 関数
 
 {{< tabs >}}
-{{% tab "Count" %}}
+{{< tab "Count" >}}
 
 ### `monotonic_count()`
 
@@ -55,8 +55,8 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
 | `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 
 ### `gauge()`
 
@@ -78,8 +78,8 @@ self.gauge(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
 | `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
-{{% /tab %}}
-{{% tab "Rate" %}}
+{{< /tab >}}
+{{< tab "Rate" >}}
 
 ### `rate()`
 
@@ -101,9 +101,9 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
 | `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Histogram" %}}
+{{< tab "Histogram" >}}
 
 ### `histogram()`
 
@@ -125,7 +125,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
 | `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## チュートリアル

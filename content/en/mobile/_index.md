@@ -114,7 +114,7 @@ Also, you can customize your Open Incidents widgets by filtering on:
 #### Create an Open Incidents widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 1. Tap the **+** button on the top left corner of the screen.
 2. Search for "Datadog" widgets.
@@ -122,8 +122,8 @@ Also, you can customize your Open Incidents widgets by filtering on:
 4. Drag the widget to your desired, on-screen location.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 1. Long press on your home screen.
 2. Tap the **Widgets** button on your home screen editor. If you have app shortcuts, it might appear as only an icon on the top right corner of the bubble.
@@ -131,13 +131,13 @@ Also, you can customize your Open Incidents widgets by filtering on:
 4. Resize the widget to fit your preference.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Edit an Open Incidents widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 1. Long press the widget to configure.
 2. Tap **Edit Widget**.
@@ -149,8 +149,8 @@ Also, you can customize your Open Incidents widgets by filtering on:
 7. Tap outside of the widget to save your selection and exit the configuration screen.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 1. Tap the widget title to configure.
 2. Tap **Organization** to fetch open incidents from the selected organization.
@@ -162,7 +162,7 @@ Also, you can customize your Open Incidents widgets by filtering on:
 8. Long press and resize the widget to fit your preference.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Display Open Incidents from multiple organizations
@@ -170,13 +170,13 @@ Also, you can customize your Open Incidents widgets by filtering on:
 You can display open incidents from multiple organizations on your mobile home screen. 
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 - Tap **Choose** next to the Organization label to fetch open incidents from the selected organization.
 
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 1. Tap the widget title to configure.
 2. From the configuration screen, tap **Organization**.
@@ -185,24 +185,24 @@ You can display open incidents from multiple organizations on your mobile home s
 5. Tap **Save** or **Apply**. 
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Delete an Open Incidents widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 Delete a widget by tapping the **-** button at the top left of the widget when editing your home screen, or by long pressing the widget and selecting **Remove Widget**.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 Delete a widget by long pressing, dragging, and dropping the widget to the **Remove** button.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### SLOs widget
@@ -227,7 +227,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 #### Create an SLOs widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - Long press on your home screen.
 - Tap the “+” button on the top left corner of the screen.
@@ -236,8 +236,8 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Drag the widget to your desired, on-screen location.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Long press on your home screen.
 - Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
@@ -245,13 +245,13 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Resize the widget to fit your preference. It always shows one SLO. If you size the widget to take up the width of your mobile home screen, it displays the selected SLO along with a visualized timeframe of its health.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Edit an SLOs widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - Long press on the widget to configure.
 - Tap "Edit Widget."
@@ -261,8 +261,8 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Tap out of the widget to validate your selection and exit the configuration screen.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Tap the widget title to configure.
 - Tap "Selected SLO" to choose an SLO to track.
@@ -272,7 +272,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Long press and resize the widget to fit your preference.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Display SLOs from multiple organizations
@@ -280,13 +280,13 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 You can display SLOs from multiple organizations on your mobile home screen. 
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 All organizations you’ve logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Tap the widget title to configure.
 - From the configuration screen, tap "Organization".
@@ -295,24 +295,24 @@ All organizations you’ve logged into are displayed in the configuration screen
 - Tap "Save" or "Apply". 
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Delete an SLOs widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 Delete a widget by tapping the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and selecting "Remove Widget".
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 Delete a widget by long pressing, dragging, and dropping the widget to the "Remove" button.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Monitors widget
@@ -326,7 +326,7 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 #### Create a Monitors widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - Long press on the home screen.
 - Tap the “+” button on the top left corner of the screen.
@@ -335,8 +335,8 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 - Drag the widget to your desired, on-screen location.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Long press on your home screen.
 - Tap "Widgets" on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
@@ -344,13 +344,13 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 - Resize the widget to fit your preference. To show more saved views, increase the length of the widget on your mobile home screen.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Edit a Monitors widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 - Long press on the widget to configure.
 - Tap on "Edit Widget".
@@ -359,8 +359,8 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 - Tap out of the widget to validate your selection and exit the configuration screen.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Tap on the widget title to configure.
 - Tap on "Saved Views".
@@ -370,7 +370,7 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 - Scroll inside the widget to see more saved views. Long press and resize the widget to fit your preference.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Display Monitors from multiple organizations
@@ -378,13 +378,13 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 You can display Monitors from multiple organizations within the same widget. 
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 - Tap the widget title to configure.
 - From the configuration screen, tap "Organization".
@@ -393,24 +393,24 @@ All organizations you’ve logged-in are displayed in the configuration screen. 
 - Tap "Save" or "Apply". 
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Delete a Monitors widget
 
 {{< tabs >}}
-{{% tab "iOS" %}}
+{{< tab "iOS" >}}
 
 Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
 
 
-{{% /tab %}}
-{{% tab "Android" %}}
+{{< /tab >}}
+{{< tab "Android" >}}
 
 Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Quick actions

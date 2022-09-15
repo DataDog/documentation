@@ -21,7 +21,7 @@ As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** t
 If you are using the HTTPS transport for logs, please refer to the [agent proxy documentation][2] and use the same set of proxy settings as other data types.
 
 {{< tabs >}}
-{{% tab "TCP" %}}
+{{< tab "TCP" >}}
 
 If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP using the following parameters in the `datadog.yaml` configuration file:
 
@@ -46,8 +46,8 @@ The parameters above can also be set with the following environment variables:
 
   And use the certificate file located in `/etc/ssl/certs/ca-certificates.crt`(Debian, Ubuntu) or `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
 
-{{% /tab %}}
-{{% tab "SOCKS5" %}}
+{{< /tab >}}
+{{< tab "SOCKS5" >}}
 
 To send your logs to your Datadog account with a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
 
@@ -60,13 +60,13 @@ The parameter above can also be set with the following environment variable:
 
 * `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Examples of TCP proxy
 
 {{< tabs >}}
-{{% tab "HAProxy" %}}
+{{< tab "HAProxy" >}}
 ### Using HAProxy as a TCP proxy for logs
 
 This example explains how to configure the Datadog Agent to send logs in TCP to a server with HAProxy installed and listening on port `10514` to then forward the logs to Datadog.
@@ -220,9 +220,9 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 
 {{< /site-region >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NGINX" %}}
+{{< tab "NGINX" >}}
 ### Using NGINX as a TCP Proxy for logs
 
 #### Agent configuration
@@ -283,7 +283,7 @@ stream {
 ```
 
 {{< /site-region >}}
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

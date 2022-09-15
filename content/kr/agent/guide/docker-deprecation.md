@@ -22,7 +22,7 @@ Datadog Agent 버전 7.27 이상을 사용하고 있다면 실행 환경을 Agen
 **참조**: 메트릭 이름이 변경되므로(예: `docker.*`에서 `containerd.*`로), 기존 모니터링, 대시보드, SLO를 업데이트해야 할 수 있습니다.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 [Helm 파트][1]에서 `datadog.criSocketPath` 파라미터를 사용해 컨테이너 런타임 소켓 경로를 설정하세요.
 
 예를 들면 다음과 같습니다.
@@ -32,8 +32,8 @@ criSocketPath:  /var/run/containerd/containerd.sock
 ```
 
 [1]: https://github.com/DataDog/helm-charts/blob/d8817b4401b75b1a064481da989c451633249ea9/charts/datadog/values.yaml#L262-L263
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 도커 소켓 레퍼런스와 도커 소켓 볼륨 마운트를 전부 제거하세요.
 
@@ -63,7 +63,7 @@ volumes:
     name: var-run
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: https://github.com/Azure/AKS/releases/tag/2020-11-16

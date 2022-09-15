@@ -40,7 +40,7 @@ The List view aggregates [resources][4] by [service][3] and sorts them according
 ### More information
 
 {{< tabs >}}
-{{% tab "Span tags" %}}
+{{< tab "Span tags" >}}
 
 Click on a span in the flame graph to show its metadata below the graph. If there's an error, the stack trace is provided:
 
@@ -60,15 +60,15 @@ Some attributes have special meanings that lead to a dedicated display or specif
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating"  >}}
 
 [1]: /tracing/glossary/#trace
-{{% /tab %}}
-{{% tab "Host Info" %}}
+{{< /tab >}}
+{{< tab "Host Info" >}}
 
 View the host information related to the trace including host tags and graphs around the time of the trace.
 
 {{< img src="tracing/visualization/trace/trace_host_info.png" alt="Trace Host Info"  style="width:90%;">}}
 
-{{% /tab %}}
-{{% tab "Logs" %}}
+{{< /tab >}}
+{{< tab "Logs" >}}
 
 See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [log explorer search][1].
 
@@ -76,8 +76,8 @@ See logs related to your service at the time of the trace. When you hover over a
 
 
 [1]: /logs/explorer/search/
-{{% /tab %}}
-{{% tab "Processes" %}}
+{{< /tab >}}
+{{< tab "Processes" >}}
 
 Click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. You can analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the [Live Processes page][1]. To view span-specific processes, enable [process collection][2]. Related processes are not currently supported for serverless and browser traces. 
 
@@ -85,9 +85,9 @@ Click on a service’s span to see the processes running on its underlying infra
 
 [1]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows
 [2]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows#installation
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Network" %}}
+{{< tab "Network" >}}
 
 Click on a service’s span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Overview][1]. To view span-specific processes, enable [Network Performance Monitoring][2].
 
@@ -97,7 +97,7 @@ Click on a service’s span to see network dependencies of the service making th
 
 [1]: /network_monitoring/performance/network_page
 [2]: /network_monitoring/performance/setup
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

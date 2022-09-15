@@ -48,7 +48,7 @@ AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣�
 インストール方法を選択して、Elastic Beanstalk 環境を構成します。
 
 {{< tabs >}}
-{{% tab "単一のコンテナ" %}}
+{{< tab "単一のコンテナ" >}}
 
 単一の Docker コンテナのセットアップの場合、[コンフィギュレーションファイル (.ebextensions) による高度な環境のカスタマイズ][1]を使用して、Datadog Agent を Elastic Beanstalk にインストールします。
 
@@ -139,8 +139,8 @@ func main() {
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
 [8]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
 [9]: https://docs.docker.com/network/network-tutorial-standalone/
-{{% /tab %}}
-{{% tab "複数のコンテナ" %}}
+{{< /tab >}}
+{{< tab "複数のコンテナ" >}}
 
 複数の Docker コンテナの場合、コンテナ化された Datadog Agent を使用して、`Dockerrun.aws.json` という名前のファイルで Docker の使用状況を監視します。
 
@@ -253,8 +253,8 @@ func main() {
 [3]: https://gcr.io/datadoghq/agent
 [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
 [5]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker/
-{{% /tab %}}
-{{% tab "コンテナなし (Linux)" %}}
+{{< /tab >}}
+{{< tab "コンテナなし (Linux)" >}}
 
 コンテナなしのセットアップの場合、[コンフィギュレーションファイル (.ebextensions) による高度な環境のカスタマイズ][1]を使用して、Datadog Agent を Elastic Beanstalk にインストールします。
 
@@ -287,9 +287,9 @@ process_config:
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
 [8]: https://docs.datadoghq.com/ja/tracing/setup/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "コンテナなし (Windows)" %}}
+{{< tab "コンテナなし (Windows)" >}}
 
 コンテナなしのセットアップの場合、[コンフィギュレーションファイル (.ebextensions) による高度な環境のカスタマイズ][1]を使用して、Datadog Agent を Elastic Beanstalk にインストールします。
 
@@ -313,7 +313,7 @@ process_config:
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
 [8]: https://docs.datadoghq.com/ja/tracing/setup/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### 複数 Docker コンテナ

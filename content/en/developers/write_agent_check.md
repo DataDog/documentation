@@ -70,7 +70,7 @@ To change the collection interval of your check, use `min_collection_interval` i
 **Note**: The `min_collection_interval` parameter is available for both standard and custom integrations.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 For Agent 6, `min_collection_interval` must be added at an instance level and is configured individually for each instance.
 
 ```yaml
@@ -80,8 +80,8 @@ instances:
   - min_collection_interval: 30
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 For Agent 5, `min_collection_interval` is added to the `init_config` section to define how often the check is run globally.
 
 ```yaml
@@ -91,7 +91,7 @@ init_config:
 instances: [{}]
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note**: If the `min_collection_interval` is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector tries to run the check every 30 seconds but the check might need to wait in line, depending on how many integrations are enabled on the same Agent. Also if the `check` method takes more than 30 seconds to finish, the Agent skips execution until the next interval.
@@ -101,20 +101,20 @@ instances: [{}]
 To verify your check is running, use the following command:
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 ```shell
 sudo -u dd-agent -- datadog-agent check <CHECK_NAME>
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 ```shell
 sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Once verified, restart the Agent to include it and start reporting data into Datadog.

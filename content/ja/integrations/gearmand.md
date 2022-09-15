@@ -85,7 +85,7 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -106,8 +106,8 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -120,7 +120,7 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
 | `<インスタンスコンフィギュレーション>`  | `{"server":"%%host%%", "port":"4730"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### ログの収集

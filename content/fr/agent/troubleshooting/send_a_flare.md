@@ -23,7 +23,7 @@ Dans les commandes ci-dessous, remplacez `<ID_TICKET>` par l'ID de votre ticket 
 Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail que vous utilisez pour vous connecter à Datadog afin de créer un ticket d'assistance.
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 | Plateforme   | Commande                                                 |
 |------------|---------------------------------------------------------|
@@ -103,8 +103,8 @@ aws ecs execute-command --cluster <NOM_CLUSTER> \
 [3]: /fr/agent/faq/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Plateforme   | Commande                                                                 |
 |------------|-------------------------------------------------------------------------|
@@ -123,15 +123,15 @@ aws ecs execute-command --cluster <NOM_CLUSTER> \
 
 [1]: /fr/agent/basic_agent_usage/windows/#agent-v5
 [2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Agent de cluster" %}}
+{{< tab "Agent de cluster" >}}
 
 | Plateforme   | Commande                                                             |
 |------------|---------------------------------------------------------------------|
 | Kubernetes | `kubectl exec <NOM_POD> -it datadog-cluster-agent flare <ID_TICKET>` |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Envoi manuel

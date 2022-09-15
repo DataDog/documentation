@@ -61,7 +61,7 @@ Para llevar a cabo un control más exhaustivo, usa las opciones de configuració
 La configuración puede definirse en función de las variables de entorno o directamente en el código:
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 Para las aplicaciones de Java, establece una frecuencia de muestreo general en la biblioteca usando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Define las frecuencias de muestreo en función del servicio con la variable de entorno `DD_TRACE_SAMPLING_SERVICE_RULES`.
 
 Por ejemplo, para enviar el 20 % de las trazas del servicio llamado `my-service`:
@@ -79,8 +79,8 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` con un número de trazas por
 Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de trazado de Java][1].
 
 [1]: /es/tracing/setup_overview/setup/java
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 Para las aplicaciones de Python, establece una frecuencia de muestreo general en la biblioteca usando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Define las frecuencias de muestreo en función del servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de trazas:
@@ -95,8 +95,8 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` con un número de trazas por
 Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de trazado de Python][1].
 
 [1]: /es/tracing/setup_overview/setup/python
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 Para las aplicaciones de Ruby, establece una frecuencia de muestreo general en la biblioteca usando la variable de entorno `DD_TRACE_SAMPLE_RATE`.
 
 También puedes configurar las frecuencias de muestreo en función del servicio. Por ejemplo, para enviar el 20 % de las trazas del servicio llamado `my-service`:
@@ -121,8 +121,8 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` con un número de trazas por
 Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de trazado de Ruby][1].
 
 [1]: /es/tracing/setup_overview/setup/ruby#sampling
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 Para las aplicaciones de Go, establece una frecuencia de muestreo general en la biblioteca usando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Define las frecuencias de muestreo en función del servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de trazas:
@@ -137,8 +137,8 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` con un número de trazas por
 Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de trazado de Go][1].
 
 [1]: /es/tracing/setup_overview/setup/go
-{{% /tab %}}
-{{% tab "NodeJS" %}}
+{{< /tab >}}
+{{< tab "NodeJS" >}}
 Para las aplicaciones de Node.js, establece una frecuencia de muestreo general en la biblioteca usando la variable de entorno `DD_TRACE_SAMPLE_RATE`.
 
 También puedes configurar las frecuencias de muestreo en función del servicio. Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de trazas:
@@ -160,8 +160,8 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` con un número de trazas por
 Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de trazado de NodeJS][1].
 
 [1]: /es/tracing/setup_overview/setup/nodejs
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 Para las aplicaciones de PHP, establece una frecuencia de muestreo general en la biblioteca usando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Define las frecuencias de muestreo en función del servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de trazas:
@@ -174,8 +174,8 @@ Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service
 Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de trazado de PHP][1].
 
 [1]: /es/tracing/setup_overview/setup/php
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /tab >}}
+{{< tab "C++" >}}
 De la versión `1.3.2` en adelante, la biblioteca C++ de Datadog admite las siguientes configuraciones:
 - Frecuencia de muestreo general: variable de entorno `DD_TRACE_SAMPLE_RATE`
 - Frecuencias de muestreo en función del servicio: variable de entorno `DD_TRACE_SAMPLING_RULES`.
@@ -191,8 +191,8 @@ Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service
 C++ no ofrece integraciones para llevar a cabo una instrumentación predefinida, pero se usa para trazar proxies como Envoy, Nginx o Istio. Obtén más información sobre cómo configurar el muestreo de proxies en [Trazar proxies][1].
 
 [1]: /es/tracing/setup_overview/proxy_setup
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 Para las aplicaciones de .NET, establece una frecuencia de muestreo general en la biblioteca usando la variable de entorno `DD_TRACE_SAMPLE_RATE`. Define las frecuencias de muestreo en función del servicio con la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
 Por ejemplo, para enviar el 50 % de las trazas del servicio llamado `my-service` y el 10 % del resto de trazas:
@@ -207,7 +207,7 @@ Define la variable de entorno `DD_TRACE_RATE_LIMIT` con un número de trazas por
 Obtén más información sobre los controles de muestreo en la [documentación acerca de la biblioteca de trazado de .NET][1].
 
 [1]: /es/tracing/setup_overview/setup/dotnet-core
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Nota**: Todos los tramos de una traza muestreada con la configuración de una biblioteca de trazado están etiquetados con el motivo de ingesta `rule`. Los servicios configurados con reglas de muestreo definidas por el usuario aparecen con la marca `Configured` en la columna Configuración de la [página de Controles de ingesta][5].
@@ -280,13 +280,13 @@ Si tienes que muestrear un tramo en concreto, pero sin necesidad de que toda la 
 Para usar el mecanismo de análisis, habilítalo con una variable de entorno o en el código. Asimismo, define la frecuencia de muestreo que quieres que se aplique a todos los tramos `analytics_enabled`:
 
 {{< tabs >}}
-{{% tab "Variables de entorno" %}}
+{{< tab "Variables de entorno" >}}
 
 ```
 @env  DD_TRACE_ANALYTICS_ENABLED - boolean - optional false
 ```
-{{% /tab %}}
-{{% tab "API de código" %}}
+{{< /tab >}}
+{{< tab "API de código" >}}
 
 ```
 // en dd-trace-go
@@ -296,7 +296,7 @@ tracerconfig.WithAnalytics(on bool)
 tracerconfig.SetAnalyticsRate(0.4)
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Etiqueta todos los tramos con `analytics_enabled:true`. Asimismo, especifica la frecuencia de muestreo que quieres asociar al tramo:

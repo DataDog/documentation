@@ -57,7 +57,7 @@ Quatre onglets se trouvent sous l'en-tête de profil :
 Dans l'onglet **Profiles**, vous pouvez consulter tous les types de profils disponibles pour un langage donné. Les informations recueillies à propos de votre profil varient en fonction du langage.
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 {{< img src="tracing/profiling/profile.png" alt="Un profil spécifique">}}
 
@@ -73,9 +73,9 @@ Une fois les profils activés, les types suivants sont recueillis :
 | File I/O                 | Affiche le temps passé par chaque méthode pour la lecture et l'écriture de fichiers.                                                                                                                                                                                                                                        |
 | Lock                     | Affiche le temps passé par chaque méthode à attendre un verrouillage.                                                                                                                                                                                                                                                                                                                           |
 | Socket I/O               | Affiche le temps passé par chaque méthode pour la lecture et l'écriture du socket E/S.                                                                                                                                                                                                                                              |
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 Une fois les profils activés, les types suivants sont recueillis :
 
@@ -90,9 +90,9 @@ Une fois les profils activés, les types suivants sont recueillis :
 | Uncaught Exceptions      | Affiche les exceptions qui n'ont pas été interceptées par un bloc try/except. |
 | Exceptions              | Affiche les exceptions qui ont été renvoyées lors de l'exécution du programme. |
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Go" %}}
+{{< tab "Go" >}}
 
 Une fois les profils activés, les types suivants sont recueillis :
 
@@ -104,7 +104,7 @@ Une fois les profils activés, les types suivants sont recueillis :
 | Heap                     | Affiche la quantité de mémoire de tas allouée par chaque fonction qui est restée allouée depuis le lancement de l'application et qui a survécu au dernier nettoyage de la mémoire. Cette valeur correspond à `inuse_space` pour Go. Il s'agit d'une mesure très utile pour étudier l'utilisation globale de la mémoire pour votre service.               |
 | Heap Count               | Affiche le nombre d'objets alloués en mémoire de tas par chaque fonction, ainsi que les objets qui sont restés alloués depuis le lancement de l'application et qui ont survécu au dernier nettoyage de la mémoire. Il s'agit d'une mesure très utile pour étudier l'utilisation globale de la mémoire pour votre service.                              |
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

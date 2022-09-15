@@ -57,7 +57,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -104,8 +104,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [2]: https://docs.datadoghq.com/fr/integrations/java
 [3]: https://docs.datadoghq.com/fr/help
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -142,7 +142,7 @@ JMXFetch
 [1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://docs.datadoghq.com/fr/agent/docker/log/
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Données collectées

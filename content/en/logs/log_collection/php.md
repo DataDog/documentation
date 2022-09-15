@@ -33,7 +33,7 @@ Write your PHP logs into a file, then [use the Agent][1] to forward them to Data
 ### Installation
 
 {{< tabs >}}
-{{% tab "PHP Monolog" %}}
+{{< tab "PHP Monolog" >}}
 
 Use Composer to add Monolog as a dependency:
 
@@ -56,8 +56,8 @@ Alternatively, install it manually:
       use Monolog\Formatter\JsonFormatter;
     ```
 
-{{% /tab %}}
-{{% tab "PHP Zend-Log" %}}
+{{< /tab >}}
+{{< tab "PHP Zend-Log" >}}
 
 Zend-log is a part of the Zend framework. Use [Composer][1] to add Zend-Log:
 
@@ -80,8 +80,8 @@ Alternatively, install it manually:
 ```
 
 [1]: https://getcomposer.org
-{{% /tab %}}
-{{% tab "PHP Symfony" %}}
+{{< /tab >}}
+{{< tab "PHP Symfony" >}}
 
 Declare a Monolog JSON formatter as a service:
 
@@ -91,13 +91,13 @@ services:
         class: Monolog\Formatter\JsonFormatter
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Logger configuration
 
 {{< tabs >}}
-{{% tab "PHP Monolog" %}}
+{{< tab "PHP Monolog" >}}
 
 The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler:
 
@@ -127,8 +127,8 @@ The following configuration enables the JSON formatting and writes the logs and 
   $log->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-{{% /tab %}}
-{{% tab "PHP Zend-Log" %}}
+{{< /tab >}}
+{{< tab "PHP Zend-Log" >}}
 
 The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Zend-Log instance and add a new handler.
 
@@ -156,8 +156,8 @@ The following configuration enables the JSON formatting and writes the logs and 
 Then [Stream your log files to Datadog][1]
 
 [1]: /logs/log_collection/
-{{% /tab %}}
-{{% tab "PHP Symfony" %}}
+{{< /tab >}}
+{{< tab "PHP Symfony" >}}
 
 Configure the formatter in your Monolog configuration: declare the formatter field as follows:
 
@@ -171,7 +171,7 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
             formatter: monolog.json_formatter
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Connect Logs and Traces**
@@ -200,7 +200,7 @@ logs:
 ## Adding more context
 
 {{< tabs >}}
-{{% tab "PHP Monolog" %}}
+{{< tab "PHP Monolog" >}}
 
 It's useful to add additional context data to your logs and events. Monolog makes this convenient by providing methods for setting thread-local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
 
@@ -233,8 +233,8 @@ Monolog comes with a pre-processor feature. It's a simple callback that enriches
   });
 ```
 
-{{% /tab %}}
-{{% tab "PHP Zend-Log" %}}
+{{< /tab >}}
+{{< tab "PHP Zend-Log" >}}
 
 Useful logging information comes from additional context data that you can add to your logs and events. Zend-Log makes this convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
 
@@ -264,8 +264,8 @@ Take a peek to this code if you want to use it:
 If you want to develop yours, [refer the Zend documentation][1].
 
 [1]: https://docs.zendframework.com/zend-log/processors
-{{% /tab %}}
-{{% tab "PHP Symfony" %}}
+{{< /tab >}}
+{{< tab "PHP Symfony" >}}
 
 Add a session Processor to add variable context within your logs:
 
@@ -355,7 +355,7 @@ Add a session Processor to add variable context within your logs:
 3. [Stream generated JSON file to Datadog][1].
 
 [1]: /logs/log_collection/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Monolog framework integration

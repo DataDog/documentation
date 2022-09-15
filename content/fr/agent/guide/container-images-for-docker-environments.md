@@ -14,7 +14,7 @@ further_reading:
 Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles via GCR et Docker Hub peuvent être utilisées dans votre environnement :
 
 {{< tabs >}}
-{{% tab "GCR" %}}
+{{< tab "GCR" >}}
 
 | Produit Datadog                          | GCR                                      | Commande Pull GCR                                                  |
 |------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
@@ -33,8 +33,8 @@ Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles 
 [7]: /fr/getting_started/synthetics/private_location/
 [8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
 
-{{% /tab %}}
-{{% tab "Docker Hub" %}}
+{{< /tab >}}
+{{< tab "Docker Hub" >}}
 
 | Produit Datadog                         | Docker Hub                               | Commande Pull Docker                              |
 |-----------------------------------------|------------------------------------------|--------------------------------------------------|
@@ -54,7 +54,7 @@ Si vous utilisez actuellement Docker, plusieurs images de conteneur disponibles 
 [8]: /fr/getting_started/synthetics/private_location.md
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -18,7 +18,7 @@ This is an [inlined link](/inlined_link). This is a [broken link]
 This is a reference [link][1]
 
 {{< tabs >}}
-{{% tab "<TAB_NAME_1>" %}}
+{{< tab "<TAB_NAME_1>" >}}
 
 This is an [inlined link](/inlined_link). This is a [broken link]
 
@@ -27,7 +27,7 @@ This is a reference [link][1]
 [1]: /reference_link_1
 [3]: /reference_without_text
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: /reference_link_1
@@ -45,7 +45,7 @@ This is an [inlined link][1]. This is a [broken link]
 This is a reference [link][2]
 
 {{< tabs >}}
-{{% tab "<TAB_NAME_1>" %}}
+{{< tab "<TAB_NAME_1>" >}}
 
 This is an [inlined link][1]. This is a [broken link]
 
@@ -54,7 +54,7 @@ This is a reference [link][2]
 
 [1]: /inlined_link
 [2]: /reference_link_1
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: /inlined_link

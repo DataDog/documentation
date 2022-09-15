@@ -46,7 +46,7 @@ Agent はコンテナの作成、廃棄、起動、停止などのイベント�
 
 {{< tabs >}}
 
-{{% tab "AD Annotations v2 (Agent 7.36+)" %}}
+{{< tab "AD Annotations v2 (Agent 7.36+)" >}}
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -75,9 +75,9 @@ annotations:
 `redisdb` は実行するチェックの名前です。`init_config` には最小収集間隔などの構成パラメーターが含まれ、これはオプションです。`instances` の各項目は、チェックの 1 つのインスタンスに対して実行するコンフィギュレーションを表します。**注**: この例では、`%%host%%` はコンテナの IP が動的に入力されるテンプレート変数です。
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "AD Annotations v1" %}}
+{{< tab "AD Annotations v1" >}}
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -103,7 +103,7 @@ annotations:
 `check_names` には実行するチェックの名前が含まれ、`init_configs` には最小収集間隔などの構成パラメーターが含まれます。`instances` の各項目は、チェックの 1 つのインスタンスに対して実行するコンフィギュレーションを表します。**注**: この例では、`%%host%%` はコンテナの IP が動的に入力されるテンプレート変数です。
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -47,7 +47,7 @@ Pour découvrir comment effectuer des contributions open source au traceur PHP, 
 Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des traces à partir de votre application instrumentée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml` sous `apm_config` avec `enabled: true`, et écoute le trafic des traces sur `localhost:8126`. Pour les environnements conteneurisés, suivez les liens ci-dessous afin d'activer la collecte de traces au sein de l'Agent Datadog.
 
 {{< tabs >}}
-{{% tab "Conteneurs" %}}
+{{< tab "Conteneurs" >}}
 
 1. Définissez `apm_non_local_traffic: true` dans la section `apm_config` de votre [fichier de configuration principal `datadog.yaml`][1].
 
@@ -68,15 +68,15 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
 {{< /site-region >}}
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
+{{< /tab >}}
+{{< tab "AWS Lambda" >}}
 
 Pour configurer l'APM Datadog dans AWS Lambda, consultez la documentation dédiée au [tracing de fonctions sans serveur][1].
 
 
 [1]: /fr/tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Autres environnements" %}}
+{{< /tab >}}
+{{< tab "Autres environnements" >}}
 
 Le tracing est disponible pour un certain nombre d'environnements, tels que [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3] et [Azure App Services][4].
 
@@ -88,7 +88,7 @@ Pour les autres environnements, veuillez consulter la documentation relative aux
 [4]: /fr/infrastructure/serverless/azure_app_services/#overview
 [5]: /fr/integrations/
 [6]: /fr/help/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

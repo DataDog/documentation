@@ -29,56 +29,12 @@ Other supported versions with additional configuration:
 ## Configuring the Datadog integration
 
 {{< tabs >}}
-{{% tab "GitLab.com" %}}
-
-Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
-
-[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
-{{% /tab %}}
-{{% tab "GitLab &gt;&equals; 14.1" %}}
-
-Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
-
-You can also activate the integration at the GitLab [instance][3] level, by going to **Admin > Settings > Integrations > Datadog**.
-
-[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
-[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
-{{% /tab %}}
-{{% tab "GitLab &lt; 14.1" %}}
-
-Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
-
-**Omnibus installations**
-
-{{< code-block lang="shell" >}}
-sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
-{{< /code-block >}}
-
-**From source installations**
-
-{{< code-block lang="shell" >}}
-sudo -u git -H bundle exec rails runner \
-  -e production \
-  "Feature.enable(:datadog_ci_integration)"
-{{< /code-block >}}
-
-**Kubernetes installations**
-
-{{< code-block lang="shell" >}}
-kubectl exec -it <task-runner-pod-name> -- \
-  /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
-{{< /code-block >}}
-
-Then, configure the integration on a [project][3] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
-
-<div class="alert alert-warning"><strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
-
-[1]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
-[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-{{% /tab %}}
+{{< tab "GitLab.com" >}}
+{{< /tab >}}
+{{< tab "GitLab &gt;&equals; 14.1" >}}
+{{< /tab >}}
+{{< tab "GitLab &lt; 14.1" >}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Fill in the integration configuration settings:

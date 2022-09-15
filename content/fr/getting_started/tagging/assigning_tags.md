@@ -25,11 +25,11 @@ Les tags peuvent être configurés de différentes manières :
 - Avec [DogStatsD](#dogstatsd)
 
 {{< tabs >}}
-{{% tab "Environnements non conteneurisés" %}}
+{{< tab "Environnements non conteneurisés" >}}
 Dans les environnements non conteneurisés, l'Agent assigne automatiquement le [tag de host](#tags-de-host) et hérite des tags des intégrations. Ces tags, ainsi que d'autres tags que vous pouvez ajouter manuellement, sont configurés dans le [fichier de configuration de l'Agent Datadog](#fichier-de-configuration).
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Environnements conteneurisés" %}}
+{{< tab "Environnements conteneurisés" >}}
 Dans les environnements conteneurisés, Datadog vous conseille de faire appel à [Autodiscovery][1] : cela permet d'utiliser le [tagging de service unifié][2] de façon à unifier la configuration de toutes vos données de télémétrie Datadog.
 
 Autodiscovery vous permet d'appliquer une configuration d'intégration Datadog lors de l'exécution d'un check de l'Agent sur un conteneur donné. Lorsque vous utilisez Autodiscovery, l'Agent Datadog identifie automatiquement les services exécutés sur ce nouveau conteneur, cherche la configuration de monitoring correspondante, puis commence à recueillir des métriques. Les tags peuvent être configurés depuis le [modèle de configuration][3] Autodiscovery.
@@ -40,7 +40,7 @@ Si vous n'utilisez pas Autodiscovery, l'Agent assigne automatique le [tag de hos
 [1]: /fr/getting_started/agent/autodiscovery/
 [2]: /fr/getting_started/tagging/unified_service_tagging
 [3]: /fr/getting_started/agent/autodiscovery/?tab=docker#integration-templates
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Méthodes pour assigner des tags
@@ -48,7 +48,7 @@ Si vous n'utilisez pas Autodiscovery, l'Agent assigne automatique le [tag de hos
 ### Fichier de configuration
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 #### Emplacement du fichier
 
@@ -98,8 +98,8 @@ hostname: mamachine.mondomaine
 [3]: /fr/getting_started/tagging/#defining-tags
 [4]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /fr/dashboards/querying/#arithmetic-between-two-metrics
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 #### Emplacement du fichier
 
@@ -140,7 +140,7 @@ hostname: mamachine.mondomaine
 [3]: /fr/getting_started/tagging/#defining-tags
 [4]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /fr/dashboards/querying/#arithmetic-between-two-metrics
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Héritage des intégrations
@@ -261,23 +261,23 @@ Les métadonnées de span ci-dessus ne sont pas valides, car la valeur de `key` 
 ### IU
 
 {{< tabs >}}
-{{% tab "Hostmap" %}}
+{{< tab "Hostmap" >}}
 
 Vous pouvez assigner des tags de host depuis l'IU via la [page Host Map][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : lorsque vous modifiez des tags de métrique via l'IU, la prise en compte des modifications peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap" style="width:80%;">}}
 
 [1]: /fr/infrastructure/hostmap/
-{{% /tab %}}
-{{% tab "Liste d'infrastructures" %}}
+{{< /tab >}}
+{{< tab "Liste d'infrastructures" >}}
 
 Vous pouvez assigner des tags de host depuis l'IU via la [page Infrastructure List][1]. Cliquez sur le host de votre choix pour le superposer à droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : lorsque vous modifiez des tags de métrique via l'IU, la prise en compte des modifications peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures" style="width:80%;">}}
 
 [1]: /fr/infrastructure/
-{{% /tab %}}
-{{% tab "Monitors" %}}
+{{< /tab >}}
+{{< tab "Monitors" >}}
 
 Depuis la page de [gestion des monitors][1], cochez la case en regard de chaque monitor pour ajouter des tags (sélectionnez un ou plusieurs monitors). Cliquez sur le bouton **Edit Tags**. Saisissez un tag ou sélectionnez un tag précédemment utilisé. Cliquez ensuite sur **Add Tag `nom:tag`** ou **Apply Changes**. Si vous aviez déjà ajouté des tags, vous pouvez assigner plusieurs tags à la fois en cochant leurs cases.
 
@@ -288,8 +288,8 @@ Lorsque vous créez un monitor, assignez des tags de monitor durant l'étape 4 
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Tags création de monitor" style="width:80%;">}}
 
 [1]: /fr/monitors/manage/
-{{% /tab %}}
-{{% tab "Métriques de distribution" %}}
+{{< /tab >}}
+{{< tab "Métriques de distribution" >}}
 
 Créez des agrégations par centile dans les [métriques de distribution][1] en appliquant une liste d'un maximum de dix tags autorisés à une métrique. Cela permet de créer une série temporelle pour chaque combinaison de valeurs de tags potentiellement interrogeable. Pour en savoir plus sur le comptage de métriques custom et de séries temporelles émises à partir de métriques de distribution, consultez [Métriques custom][2].
 
@@ -299,28 +299,28 @@ Créez des agrégations par centile dans les [métriques de distribution][1] en 
 
 [1]: /fr/metrics/distributions/
 [2]: /fr/metrics/custom_metrics/
-{{% /tab %}}
-{{% tab "Intégrations" %}}
+{{< /tab >}}
+{{< tab "Intégrations" >}}
 
 Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentaires à l'ensemble des métriques pour un compte spécifique. Utilisez une liste de tags au format `<KEY>:<VALUE>` séparés par des virgules.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags AWS" style="width:80%;">}}
 
 [1]: /fr/integrations/amazon_web_services/
-{{% /tab %}}
-{{% tab "Service Level Objectives" %}}
+{{< /tab >}}
+{{< tab "Service Level Objectives" >}}
 
 Lorsque vous créez un SLO, assignez des tags durant l'étape 3 *Add name and tags* :
 
 {{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Tags création de SLO" style="width:80%;">}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### API
 
 {{< tabs >}}
-{{% tab "Assignation" %}}
+{{< tab "Assignation" >}}
 
 Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cliquez sur les liens ci-dessous pour accéder aux rubriques indiquées :
 
@@ -344,8 +344,8 @@ Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cl
 [9]: /fr/tracing/guide/send_traces_to_agent_by_api/
 [10]: /fr/api/v1/service-level-objectives/#create-a-slo-object
 [11]: /fr/api/v1/service-level-objectives/#update-a-slo
-{{% /tab %}}
-{{% tab "Exemple" %}}
+{{< /tab >}}
+{{< tab "Exemple" >}}
 
 Les tags de Datadog vous permettent de recueillir facilement vos métriques. Pour mieux comprendre, imaginons que vous cherchez à obtenir un total pour l'ensemble de métriques suivant fourni par votre site Web (example.com) :
 
@@ -373,7 +373,7 @@ Pour obtenir des données détaillées pour chaque host, utilisez l'expression s
 sum:page.views{domain:example.com} by {host}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### DogStatsD

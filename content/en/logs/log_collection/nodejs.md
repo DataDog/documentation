@@ -52,7 +52,7 @@ npm install --save winston
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 {{< tabs >}}
-{{% tab "Winston 3.0" %}}
+{{< tab "Winston 3.0" >}}
 
 ```js
 
@@ -74,8 +74,8 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-{{% /tab %}}
-{{% tab "Winston 2.0" %}}
+{{< /tab >}}
+{{< tab "Winston 2.0" >}}
 
 ```js
 var winston = require('winston');
@@ -96,7 +96,7 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Check the content of the `<FILE_NAME>.log` file to see that Winston already took care of logging everything in JSON:

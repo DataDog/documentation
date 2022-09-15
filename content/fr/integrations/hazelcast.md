@@ -59,7 +59,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -154,8 +154,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [5]: https://docs.hazelcast.org/docs/latest/manual/html-single/index.html#logging-configuration
 [6]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 [7]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -173,7 +173,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://docs.datadoghq.com/fr/agent/docker/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

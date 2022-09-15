@@ -12,7 +12,7 @@ further_reading:
 Profiling は、次のトレースライブラリに同梱されています。アプリケーションのプロファイリングを有効にする方法を確認するには、以下で言語を選択してください。
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profiling ライブラリは、OpenJDK 11 以降、Oracle Java 11以降、Zulu Java 8 以降 (マイナーバージョン 1.8.0_212 以降)でサポートされています。Scala、Groovy、Kotlin、Clojure など、JVM ベースのすべての言語がサポートされています。アプリケーションのプロファイリングを開始するには、
 
@@ -62,9 +62,9 @@ Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profi
 [3]: https://app.datadoghq.com/profiling
 [4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 Datadog Profiler には Python 2.7 以降が必要です。メモリプロファイリングは、Python 3.5 以降でご利用になれます。アプリケーションのプロファイリングを開始するには、
 
@@ -143,9 +143,9 @@ Datadog Profiler には Python 2.7 以降が必要です。メモリプロファ
 [2]: https://app.datadoghq.com/profiling
 [3]: /ja/tracing/visualization/#services
 [4]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Go" %}}
+{{< tab "Go" >}}
 
 Datadog Profiler には Go 1.12 以降が必要です。アプリケーションのプロファイリングを開始するには、
 
@@ -207,9 +207,9 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 [3]: https://app.datadoghq.com/profiling
 [4]: /ja/tracing/visualization/#services
 [5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Node" %}}
+{{< tab "Node" >}}
 
 Datadog Profiler には Node 10.12 以降が必要です。アプリケーションのプロファイリングを開始するには、
 
@@ -249,7 +249,7 @@ Datadog Profiler には Node 10.12 以降が必要です。アプリケーショ
 [2]: https://app.datadoghq.com/profiling
 [3]: /ja/tracing/visualization/#services
 [4]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

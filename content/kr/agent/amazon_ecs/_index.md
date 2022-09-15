@@ -62,7 +62,7 @@ EC2 인스턴스에서 보안 그룹 설정을 다시 한번 확인합니다. �
 작업 구성은 [AWS CLI 도구][12]나 아마존 웹 콘솔에서도 설정할 수 있습니다.
 
 {{< tabs >}}
-{{% tab "AWS CLI" %}}
+{{< tab "AWS CLI" >}}
 
 1. 오리지널 아마존 리눅스 1 AMI를 사용하는 경우 리눅스(Linux) 컨테이너에서 [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2]를 다운로드하세요. 윈도우즈(Windows)의 경우는 [datadog-agent-ecs-win.json][3]를 다운로드합니다.
 2. `datadog-agent-ecs.json`을 수정하고 계정의 [Datadog API 키][4]로 `<YOUR_DATADOG_API_KEY>`를 설정하세요.
@@ -104,8 +104,8 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 [5]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [6]: /kr/agent/amazon_ecs/logs/
 [7]: /kr/agent/amazon_ecs/apm/
-{{% /tab %}}
-{{% tab "웹 UI" %}}
+{{< /tab >}}
+{{< tab "웹 UI" >}}
 
 1. AWS 콘솔에 로그인하고 EC2 컨테이너 서비스 섹션으로 이동합니다.
 2. Datadog를 추가할 클러스터를 클릭합니다.
@@ -132,7 +132,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 **참조**: Datadog 작업 정의에서 CPU를 10개 사용하도록 설정하면 `service:datadog-agent`의 `aws.ecs.cpuutilization`이 1000%로 표시될 수 있습니다. 이는 AWS가 CPU 사용률을 표시할 때 발생하는 독특한 현상입니다. CPU 개수를 늘리면 그래프 왜곡을 방지할 수 있습니다.
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### IAM 정책 만들기 및 수정하기
@@ -164,7 +164,7 @@ Datadog Agent는 각 EC2 인스턴스 상의 한 컨테이너에서 실행하는
 컨테이너 프로세스 정보를 수집하여 Datadog에 전송하는 방법은 다음과 같습니다.
 
 {{< tabs >}}
-{{% tab "리눅스(Linux)" %}}
+{{< tab "리눅스(Linux)" >}}
 
 1. [앞서 설명한 절차](#setup)에 따라 Datadog Agent를 설치합니다.
 2. 오리지널 아마존 리눅스 AMI를 사용하는 경우 [datadog-agent-ecs.json][1] 파일을([datadog-agent-ecs1.json][2] 다음 설정으로 업데이트합니다.
@@ -215,8 +215,8 @@ Datadog Agent는 각 EC2 인스턴스 상의 한 컨테이너에서 실행하는
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-{{% /tab %}}
-{{% tab "윈도우즈(Windows)" %}}
+{{< /tab >}}
+{{< tab "윈도우즈(Windows)" >}}
 
 1. [앞서 설명한 절차](#setup)에 따라 Datadog Agent를 설치합니다.
 2. [datadog-agent-ecs-win.json][1] 파일을 다음의 설정으로 업데이트합니다.
@@ -239,7 +239,7 @@ Datadog Agent는 각 EC2 인스턴스 상의 한 컨테이너에서 실행하는
 ```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 네트워크 성능 모니터링(NPM) 수집

@@ -70,7 +70,7 @@ class HelloCheck(AgentCheck):
 **참조**: `min_collection_interval` 파라미터는 표준 및 커스텀 통합 모두에서 사용 가능합니다.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 Agent 6에서 `min_collection_interval`는 인스턴스 수준에서 반드시 추가해야 하며, 인스턴스마다 개별적으로 설정해야 합니다.
 
 ```yaml
@@ -80,8 +80,8 @@ instances:
   - min_collection_interval: 30
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 Agent 5에서 `min_collection_interval`는 `init_config` 섹션에 추가되어 점검을 글로벌하게 실행할 주기를 정의합니다.
 
 ```yaml
@@ -91,7 +91,7 @@ init_config:
 instances: [{}]
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **참조**: `min_collection_interval`을 `30`으로 설정해도 메트릭이 30초마다 수집되지는 않습니다. 대신, 최소 30초마다 수집할 수 있다는 뜻이 됩니다. 컬렉터(Collector)는 30초마다 점검을 실행하고자 하지만, 동일한 Agent에서 활성화된 통합의 수에 따라 30초 이상 대기해야 할 수도 있습니다. 게다가 `check` 메소드가 종료되기까지 30초 이상 걸린 경우에는 Agent가 다음 간격까지 점검 실행을 건너뜁니다.
@@ -101,20 +101,20 @@ instances: [{}]
 점검이 실행 중인지 확인하려면 다음 명령어를 사용하세요.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 ```shell
 sudo -u dd-agent -- datadog-agent check <CHECK_NAME>
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 ```shell
 sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 확인한 후에는 Agent를 재시작해 이를 포함한 데이터를 Datadog로 보고하세요.

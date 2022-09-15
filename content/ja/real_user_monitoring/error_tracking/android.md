@@ -36,7 +36,7 @@ Android のクラッシュとエラー追跡を有効にすると、リアルユ
 ## マッピングファイルのアップロード
 
 {{< tabs >}}
-{{% tab "US" %}}
+{{< tab "US" >}}
 
 1. 以下のコードスニペットを使用して、[Android Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
@@ -67,8 +67,8 @@ Android のクラッシュとエラー追跡を有効にすると、リアルユ
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /tab >}}
+{{< tab "EU" >}}
 1. 以下のコードスニペットを使用して、[Android Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
    ```groovy
@@ -98,7 +98,7 @@ Android のクラッシュとエラー追跡を有効にすると、リアルユ
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### プラグインコンフィギュレーションオプション

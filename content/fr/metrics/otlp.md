@@ -35,7 +35,7 @@ Une même métrique OTLP peut être mise en correspondance avec plusieurs métri
 
 
 {{< tabs >}}
-{{% tab "Sum" %}}
+{{< tab "Sum" >}}
 
 Une métrique OTLP de type Sum représente une somme de mesures transmises sur un certain intervalle. Par exemple, une métrique Sum peut être utilisée pour suivre le nombre total de connexions à une base de données ou le nombre total de requêtes vers un endpoint. La mise en correspondance des métriques Sum dépend de deux caractéristiques différentes :
 
@@ -48,15 +48,15 @@ Les correspondances par défaut sont les suivantes :
 3. Les Sums delta sont exportées en tant que counts Datadog.
 
 [1]: /fr/dashboards/functions/arithmetic/#cumulative-sum
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 
 Une métrique OTLP de type Gauge représente une valeur échantillonnée à un moment donné. Seule la dernière valeur sur un intervalle de temps donné est incluse dans les métriques OTLP.
 
 Les Gauges OTLP correspondent à des Gauges Datadog, étant donné que ces métriques ne fournissent pas de sémantique d'agrégation. Les points de données sous forme d'entiers et de nombres à virgule flottante des métriques Gauge correspondent à des nombres à virgule flottante dans Datadog.
 
-{{% /tab %}}
-{{% tab "Histogram" %}}
+{{< /tab >}}
+{{< tab "Histogram" >}}
 
 Une métrique OTLP de type Histogram représente la distribution statistique d'un ensemble de valeurs sur un intervalle de temps donné, certaines métriques d'agrégation telles que les Sums ou Counts d'une population de points étant stockées avec une série de counts de bucket. La mise en correspondance des métriques Histogram dépend d'une caractéristique :
 
@@ -87,8 +87,8 @@ L'Agent Datadog et l'exportateur Datadog pour le Collector OpenTelemetry permett
 
 [1]: /fr/metrics/distributions
 [2]: /fr/dashboards/functions/arithmetic/#cumulative-sum
-{{% /tab %}}
-{{% tab "Summary" %}}
+{{< /tab >}}
+{{< tab "Summary" >}}
 
 Les métriques OTLP de type Summary, désormais obsolètes, indiquent les quantiles pour une population sur un intervalle de temps donné. Ces métriques ne sont pas générées par les SDK OpenTelemetry, mais d'autres composants sont susceptibles d'en générer à des fins de rétrocompatibilité.
 
@@ -104,7 +104,7 @@ Les métriques OTLP de type Summary, désormais obsolètes, indiquent les quanti
 : Valeur d'un quantile spécifique.<br>
 **Type stocké dans Datadog** : GAUGE
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Mappage des attributs
@@ -132,7 +132,7 @@ Sur le Collector OpenTelemetry, ajoutez le [processeur de détection des ressour
 ### Exemple
 
 {{< tabs >}}
-{{% tab "Sum" %}}
+{{< tab "Sum" >}}
 
 Imaginons que vous utilisez un instrument Counter OpenTelemetry depuis une seule application qui, par défaut, exporte des métriques Sum cumulatives et **monotones**. Le tableau suivant décrit le comportement de Datadog :
 
@@ -150,8 +150,8 @@ Imaginons que vous utilisez un instrument UpDownCounter OpenTelemetry depuis une
 | N° 2                | [3,-4,1,2]           | 17             | 17                        | GAUGE               |
 | N° 3                | [-1]                 | 16             | 16                        | GAUGE               |
 
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 
 Imaginons que vous utilisez un instrument Gauge penTelemetry, `temperature`, depuis une seule application.
 Le tableau suivant décrit le comportement de Datadog :
@@ -162,8 +162,8 @@ Le tableau suivant décrit le comportement de Datadog :
 | N° 2                | 72               | 72               | 72                        | GAUGE               |
 | N° 3                | 70               | 70               | 70                        | GAUGE               |
 
-{{% /tab %}}
-{{% tab "Histogram" %}}
+{{< /tab >}}
+{{< tab "Histogram" >}}
 
 Imaginons que vous utilisez un instrument Histogram OpenTelemetry, `request.response_time.histogram`, à partir de deux serveurs Web : `webserver:web_1` et `webserver:web_2`. Lors de la période de collecte donnée, `webserver:web_1` renvoie les valeurs `[1,1,1,2,2,2,3,3]` pour la métrique, tandis que `webserver:web_2` renvoie les valeurs `[1,1,2]`. Durant cette période de collecte, les cinq agrégations suivantes représentent la distribution statistique globale de l'ensemble des valeurs recueillies à partir des deux serveurs Web :
 
@@ -187,8 +187,8 @@ Par ailleurs, si vous utilisez le mode `counters` et que vous activez le paramè
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
 [1]: /fr/metrics/distributions
-{{% /tab %}}
-{{% tab "Summary" %}}
+{{< /tab >}}
+{{< tab "Summary" >}}
 
 Imaginons que vous envoyez une métrique OTLP de type Summary, `request.response_time.summary`, à partir d'un serveur Web. Lors de la période de collecte donnée, le serveur Web renvoie les valeurs `[1,1,1,2,2,2,3,3]` pour la métrique. Si les quantiles min., max. et médian sont activés, les métriques suivantes seront alors transmises :
 
@@ -201,7 +201,7 @@ Imaginons que vous envoyez une métrique OTLP de type Summary, `request.response
 | `request.response_time.distribution.quantile` | `3`    | `quantile:1.0`                      | GAUGE               |
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

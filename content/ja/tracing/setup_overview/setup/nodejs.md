@@ -103,7 +103,7 @@ node --require dd-trace/init app.js
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
-{{% tab "コンテナ" %}}
+{{< tab "コンテナ" >}}
 
 1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
 
@@ -133,15 +133,15 @@ node --require dd-trace/init app.js
 {{< /site-region >}}
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
+{{< /tab >}}
+{{< tab "AWS Lambda" >}}
 
 AWS Lambda で Datadog APM を設定するには、[サーバーレス関数のトレース][1]ドキュメントを参照してください。
 
 
 [1]: /ja/tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "その他の環境" %}}
+{{< /tab >}}
+{{< tab "その他の環境" >}}
 
 トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Services Extension][4] など、他の多くの環境で利用できます。
 
@@ -153,7 +153,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 [4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

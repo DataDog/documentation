@@ -28,7 +28,7 @@ title: iOSトレースの収集
 1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
+{{< tab "CocoaPods" >}}
 
 [CocoaPods][4] を使用して、`dd-sdk-ios` をインストールできます。
 ```
@@ -37,16 +37,16 @@ pod 'DatadogSDK'
 
 [4]: https://cocoapods.org/
 
-{{% /tab %}}
-{{% tab "Swift Package Manager (SPM)" %}}
+{{< /tab >}}
+{{< tab "Swift Package Manager (SPM)" >}}
 
 Apple の Swift Package Manager を使用して統合するには、`Package.swift` に以下を依存関係として追加します。
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
-{{% /tab %}}
-{{% tab "Carthage" %}}
+{{< /tab >}}
+{{< tab "Carthage" >}}
 
 [Carthage][5] を使用して、`dd-sdk-ios` をインストールできます。
 ```
@@ -55,14 +55,14 @@ github "DataDog/dd-sdk-ios"
 
 [5]: https://github.com/Carthage/Carthage
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 2. アプリケーションコンテキストと [Datadog クライアントトークン][6]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][7]を使用して `dd-sdk-ios` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][6]を参照してください。
 
 {{< site-region region="us" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 
 ```swift
 Datadog.initialize(
@@ -75,8 +75,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -87,13 +87,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -105,8 +105,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -117,13 +117,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -135,8 +135,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -147,13 +147,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -165,8 +165,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -177,13 +177,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -195,8 +195,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                               environment:@"<environment_name>"];
@@ -207,7 +207,7 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<cli
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
@@ -233,21 +233,21 @@ SDK は新しい値に応じて動作を変更します。
 アプリケーションを作成する際、開発ログを有効にし、提供されたレベルと同等以上の優先度を持つ SDK のすべての内部メッセージをコンソールにログ出力するようにしてください。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.verbosityLevel = .debug
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 3. Datadog トレーサーは [Open Tracing 規格][8]を実装しています。`Tracer` を Open Tracing の `Global.sharedTracer` としてグローバルに構成・登録します。この作業は一度だけで、通常は `AppDelegate` のコードで行います。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Global.sharedTracer = Tracer.initialize(
     configuration: Tracer.Configuration(
@@ -255,41 +255,41 @@ Global.sharedTracer = Tracer.initialize(
     )
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDTracerConfiguration *configuration = [[DDTracerConfiguration alloc] init];
 [configuration sendNetworkInfo:YES];
 DDGlobal.sharedTracer = [[DDTracer alloc] initWithConfiguration:configuration];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 4. 次のメソッドを使用してコードをインスツルメントします。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 let span = Global.sharedTracer.startSpan(operationName: "<span_name>")
 // 測定したいことをします ...
 // ... そして、操作が終了したら:
 span.finish()
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 id<OTSpan> span = [DDGlobal.sharedTracer startSpan:@"<span_name>"];
 // 測定したいことをします ...
 // ... そして、操作が終了したら:
 [span finish];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 5. (任意) - スパン間に親子関係を設定します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 let responseDecodingSpan = Global.sharedTracer.startSpan(
     operationName: "response decoding",
@@ -298,36 +298,36 @@ let responseDecodingSpan = Global.sharedTracer.startSpan(
 // ... HTTP レスポンスデータのデコード ...
 responseDecodingSpan.finish()
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 id<OTSpan> responseDecodingSpan = [DDGlobal.sharedTracer startSpan:@"response decoding"
                                                             childOf:networkRequestSpan.context];
 // ... HTTP レスポンスデータのデコード ...
 [responseDecodingSpan finish];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 6. (任意) - スパンと一緒に追加のタグを指定します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 span.setTag(key: "http.url", value: url)
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [span setTag:@"http.url" value:url];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 7. (任意) スパンにエラーを添付します。これは、[標準 Open Tracing ログフィールド][9]を使用してエラー情報のログを取得することで実施できます。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 span.log(
     fields: [
@@ -338,8 +338,8 @@ span.log(
     ]
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 [span log:@{
     @"event": @"error",
@@ -348,7 +348,7 @@ span.log(
     @"stack": @"FileReader.swift:42",
 }];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 8. (オプション) フロントエンドとバックエンドのように、環境間でトレースを分散させるには、手動で行うか、自動インスツルメンテーションを活用します。どちらの場合も、ネットワークトレースは、調整可能なサンプリングレートでサンプリングされます。デフォルトでは、20% のサンプリングが適用されます。
@@ -356,7 +356,7 @@ span.log(
 * トレースを手動で伝播するには、スパンコンテキストを `URLRequest` ヘッダーに挿入します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 var request: URLRequest = ... // the request to your API
 
@@ -369,8 +369,8 @@ for (headerField, value) in headersWriter.tracePropagationHTTPHeaders {
     request.addValue(value, forHTTPHeaderField: headerField)
 }
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 id<OTSpan> span = [DDGlobal.sharedTracer startSpan:@"network request"];
 DDHTTPHeadersWriter *headersWriter = [[DDHTTPHeadersWriter alloc] initWithSamplingRate:20];
@@ -386,7 +386,7 @@ for (NSString *key in headersWriter.tracePropagationHTTPHeaders) {
     [request addValue:value forHTTPHeaderField:key];
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
  これにより、リクエストにトレーシングヘッダーが追加されるため、バックエンドでリクエストを抽出して分散型トレーシングを続行できます。リクエストが完了したら、完了ハンドラー内で `span.finish()` をコールします。また、バックエンドが [Datadog APM と分散型トレーシング][10]でインスツルメントされている場合、Datadog ダッシュボードにフロントエンドからバックエンドのすべてのトレースが表示されます。
@@ -394,7 +394,7 @@ for (NSString *key in headersWriter.tracePropagationHTTPHeaders) {
 * 特定のホストに対して行われたすべてのネットワークリクエストを SDK に自動トレースさせるには、Datadog の初期化で `firstPartyHosts` 配列を指定し、監視する `URLSession` インスタンスの代表として `DDURLSessionDelegate` を使用します。
 
 {{< tabs >}}
-{{% tab "Swift" %}}
+{{< tab "Swift" >}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -411,8 +411,8 @@ let session = URLSession(
     delegateQueue: nil
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{{< /tab >}}
+{{< tab "Objective-C" >}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
                                                                 environment:@"<environment_name>"];
@@ -428,7 +428,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
                                                         delegate:[[DDNSURLSessionDelegate alloc] init]
                                                     delegateQueue:nil];
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 この操作により、`example.com` と `api.yourdomain.com`  ホスト (例: `https://api.yourdomain.com/v2/users` または `https://subdomain.example.com/image.png`) に対して、この `session` とともに行われたすべてのリクエストをトレースできます。

@@ -20,7 +20,7 @@ Datadog Agent 6 以降は、コンテナからログを収集します。ECS コ
 ECS コンテナ内で実行中のアプリケーションにより書き込まれるログをすべて収集し、Datadog アプリケーションに送信する方法は、以下のとおりです。
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 1. [Amazon ECS のセットアップ手順][1]に従います。
 2. 次の構成で [datadog-agent-ecs.json][2] ファイル (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-ecs1.json][3]) を更新します。
@@ -87,8 +87,8 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 1. [Amazon ECS のセットアップ手順][1]に従います。
 2. 次の構成を使用して [datadog-agent-ecs-win.json][2] ファイルを更新します。
@@ -148,7 +148,7 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
 [1]: https://docs.datadoghq.com/ja/agent/amazon_ecs/
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注:** `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` には、Datadog Agent v6.27.0/7.27.0 が必要です。これ以前のバージョンでは、このオプションは暗黙に無視されます。

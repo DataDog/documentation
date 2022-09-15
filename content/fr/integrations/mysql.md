@@ -146,7 +146,7 @@ Query OK, 0 rows affected (0.00 sec)
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Docker](?tab=docker#docker), [Kubernetes](?tab=kubernetes#kubernetes) ou [ECS](?tab=ecs#ecs) pour la configuration dans un environnement conteneurisé.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -280,8 +280,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: https://dev.mysql.com/doc/refman/5.7/en/performance-schema-quick-start.html
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 #### Docker
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un conteneur :
@@ -313,8 +313,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 [2]: https://docs.datadoghq.com/fr/agent/faq/template_variables/
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#installation
 [4]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -373,8 +373,8 @@ metadata:
 [4]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
 [5]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 [6]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=daemonset#configuration
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -423,7 +423,7 @@ Définissez ensuite des [intégrations de logs][4] en tant qu'étiquettes Docker
 [2]: https://docs.datadoghq.com/fr/agent/faq/template_variables/
 [3]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux
 [4]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

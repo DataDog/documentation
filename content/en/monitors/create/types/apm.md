@@ -32,7 +32,7 @@ To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors -->
 Choose between an **APM Metrics** or a **Trace Analytics** monitor:
 
 {{< tabs >}}
-{{% tab "APM Metrics" %}}
+{{< tab "APM Metrics" >}}
 
 ### Select monitor scope
 
@@ -70,8 +70,8 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 [3]: /tracing/services/resource_page/
 [4]: /monitors/create/configuration/#advanced-alert-conditions
 [5]: /monitors/create/types/metric/#data-window
-{{% /tab %}}
-{{% tab "Trace Analytics" %}}
+{{< /tab >}}
+{{< tab "Trace Analytics" >}}
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
@@ -112,7 +112,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [3]: /tracing/trace_explorer/query_syntax/#numerical-values
 [4]: /tracing/glossary/#indexed-span
 [5]: /monitors/create/configuration/#advanced-alert-conditions
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Notifications

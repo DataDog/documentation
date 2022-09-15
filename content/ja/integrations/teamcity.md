@@ -80,7 +80,7 @@ Teamcity チェックは [Datadog Agent][1] パッケージに含まれていま
 Teamcity を準備するには、[ゲストログインを有効にする][2]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -153,8 +153,8 @@ instances:
 [4]: https://www.jetbrains.com/help/teamcity/teamcity-server-logs.html
 [5]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
 [6]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -176,7 +176,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

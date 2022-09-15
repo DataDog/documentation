@@ -45,7 +45,7 @@ Data security considerations
 Configure the following in the [DB Parameter Group][3] and then **restart the server** for the settings to take effect:
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
+{{< tab "MySQL 5.6" >}}
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
@@ -54,9 +54,9 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "MySQL ≥ 5.7" %}}
+{{< tab "MySQL ≥ 5.7" >}}
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
@@ -65,7 +65,7 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 | `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Grant the Agent access
@@ -75,7 +75,7 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{< tab "MySQL ≥ 8.0" >}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -87,8 +87,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
-{{% tab "MySQL 5.6 & 5.7" %}}
+{{< /tab >}}
+{{< tab "MySQL 5.6 & 5.7" >}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -99,7 +99,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Create the following schema:
@@ -161,7 +161,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
@@ -188,8 +188,8 @@ instances:
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
@@ -235,8 +235,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/guide/secrets-management
 [3]: /agent/faq/template_variables/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
@@ -321,7 +321,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /agent/guide/secrets-management
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validate

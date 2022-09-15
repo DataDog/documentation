@@ -26,7 +26,7 @@ The **Events API emails** section displays all the emails available for your app
 There are two different ways to send events with email:
 
 {{< tabs >}}
-{{% tab "JSON" %}}
+{{< tab "JSON" >}}
 
 If you have complete control over the email sent by an application, then you can use configure a JSON-formatted message. This format allows you to set everything in the event that appears in Datadog.
 
@@ -48,8 +48,8 @@ In a JSON-formatted email, the subject of the email doesn't appear in the event.
 **Note**: If you are testing the email with a standard email client, the body may be converted to HTML. This causes the body to no longer be pure JSON, resulting in an ignored email.
 
 [1]: /api/v1/events/
-{{% /tab %}}
-{{% tab "Plain text" %}}
+{{< /tab >}}
+{{< tab "Plain text" >}}
 
 If you have little control over the email sent by an application, use a plain text formatted message.
 
@@ -77,7 +77,7 @@ The subject of the email becomes the title of the event and the body of the emai
 
 {{< img src="developers/events/plain-event.png" alt="plain event" >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Markdown

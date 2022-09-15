@@ -128,7 +128,7 @@ example.exe
 
 {{< tabs >}}
 
-{{% tab "環境変数" %}}
+{{< tab "環境変数" >}}
 
 環境変数を使ってトレーサーを構成するには、インスツルメンテーションされたアプリケーションを起動する前に変数を設定します。
 
@@ -147,9 +147,9 @@ example.exe
 
 **注:** Windows Service に対して環境変数を設定するには、Windows レジストリで複数文字列キー `HKLM\System\CurrentControlSet\Services\{サービス名}\Environment` を使います。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "コード" %}}
+{{< tab "コード" >}}
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` を作成します。`Tracer` コンストラクタに渡す前にこの `TracerSettings` インスタンスにプロパティを設定します。例:
 
@@ -174,9 +174,9 @@ Tracer.Instance = tracer;
 
 **注:** 設定は `Tracer` を作成する_前_に `TracerSettings` に設定される必要があります。`Tracer` 作成後の `TracerSettings` プロパティの変更は無視されます。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "web.config" %}}
+{{< tab "web.config" >}}
 
 `app.config` または `web.config` ファイルを使ってトレーサーを構成するには、`<appSettings>` セクションを使います。例:
 
@@ -191,9 +191,9 @@ Tracer.Instance = tracer;
 </configuration>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "JSON ファイル" %}}
+{{< tab "JSON ファイル" >}}
 
 JSON ファイルを使ってトレーサーを構成するには、インスツルメンテーションされたアプリケーションのディレクトリに `datadog.json` を作成します。ルート JSON オブジェクトは各設定のキー/値を持つハッシュである必要があります。例:
 
@@ -206,7 +206,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

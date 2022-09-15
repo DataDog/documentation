@@ -37,7 +37,7 @@ Choose **Count** to alert on issues with a high number of errors and **New Issue
 ### Define the search query
 
 {{< tabs >}}
-{{% tab "Count" %}}
+{{< tab "Count" >}}
 
 Select **Web and Mobile Apps** from the dropdown menu.
 
@@ -62,9 +62,9 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 
 [1]: /real_user_monitoring/explorer/search/
 [2]: /monitors/create/configuration/#alert-grouping/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "New Issue" %}}
+{{< tab "New Issue" >}}
 
 The list of new issues might display older issues that are considered new in the selected time frame, such as the past 24 hours or the past week. 
 
@@ -87,7 +87,7 @@ The monitor triggers when the number of errors is `above` or `above or equal to`
 [2]: /real_user_monitoring/explorer/search/
 [3]: /tracing/trace_explorer/?tab=listview#filtering
 [4]: /monitors/create/configuration/#alert-grouping/
-{{% /tab %}} 
+{{< /tab >}} 
 {{< /tabs >}}
 
 #### Advanced Alert Conditions

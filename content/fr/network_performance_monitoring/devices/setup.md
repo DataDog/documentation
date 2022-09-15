@@ -31,7 +31,7 @@ Pour surveiller des périphériques individuels :
 - Modifiez le sous-réseau et la version SNMP dans le fichier `snmp.d/conf.yaml` du dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple snmp.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 {{< tabs >}}
-{{% tab "SNMPv2" %}}
+{{< tab "SNMPv2" >}}
 
 - Pour SNMPv2, configurez une instance en spécifiant l'adresse IP et la _chaîne community_ du périphérique :
 
@@ -41,8 +41,8 @@ Pour surveiller des périphériques individuels :
         community_string: "<COMMUNITY_STRING>"
     ```
 
-{{% /tab %}}
-{{% tab "SNMPv3" %}}
+{{< /tab >}}
+{{< tab "SNMPv3" >}}
 
 - Pour SNMPv3, configurez une instance en spécifiant l'adresse IP et les identifiants SNMPv3 appropriés du périphérique, par exemple : `user`, `auth_protocol`, `auth_key`, `priv_protocol` et `priv_key` :
 
@@ -57,7 +57,7 @@ Pour surveiller des périphériques individuels :
         # privKey: "<PRIV_KEY>"
     ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

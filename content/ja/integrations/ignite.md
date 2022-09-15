@@ -84,7 +84,7 @@ JMX メトリクスエクスポーターはデフォルトで有効になって�
 ロギングについては、[log4j][3] を有効にして、完全な日付のログ形式を利用することを強くお勧めします。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -131,8 +131,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://docs.datadoghq.com/ja/integrations/java/
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -155,7 +155,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [1]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

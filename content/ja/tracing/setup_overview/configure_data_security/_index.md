@@ -51,7 +51,7 @@ Agent [トレース][2]の難読化は、デフォルトで無効になってい
 
 **注:** 複数のタイプのサービスに、同時に自動スクラビングを使用することができます。`datadog.yaml` ファイルの `obfuscation` セクションでそれぞれを構成します。.
 {{< tabs >}}
-{{% tab "MongoDB" %}}
+{{< tab "MongoDB" >}}
 
 `mongodb` タイプの[スパン][1]（具体的には `mongodb.query` スパンタグ）に適用するには、次のように構成します。
 
@@ -75,8 +75,8 @@ apm_config:
 * `keep_values` - Agent トレースの難読化から除外するキーのセットを定義します。
 
 [1]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "ElasticSearch" %}}
+{{< /tab >}}
+{{< tab "ElasticSearch" >}}
 
 `elasticsearch` タイプの[スパン][1]（具体的には `elasticsearch.body` スパンタグ）に適用するには、次のように構成します。
 
@@ -98,8 +98,8 @@ apm_config:
 ```
 
 [1]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Redis" %}}
+{{< /tab >}}
+{{< tab "Redis" >}}
 
 `redis` タイプの[スパン][1]（具体的には `redis.raw_command` スパンタグ）に適用するには、次のように構成します。
 
@@ -115,8 +115,8 @@ apm_config:
 ```
 
 [1]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "MemCached" %}}
+{{< /tab >}}
+{{< tab "MemCached" >}}
 
 `memcached` タイプの[スパン][1]（具体的には `memcached.command` スパンタグ）に適用するには、次のように構成します。
 
@@ -132,8 +132,8 @@ apm_config:
 ```
 
 [1]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Http" %}}
+{{< /tab >}}
+{{< tab "Http" >}}
 
 `http` タイプの[スパン][1]では、`http.url` メタデータに以下の HTTP 難読化規則が適用されます。
 
@@ -154,8 +154,8 @@ apm_config:
 
 
 [1]: /ja/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Stack Traces" %}}
+{{< /tab >}}
+{{< tab "Stack Traces" >}}
 
 `remove_stack_traces` パラメーターを true に設定すると、スタックトレースが削除され、"?" で置換されます。
 
@@ -169,7 +169,7 @@ apm_config:
     remove_stack_traces: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 収集した HTTP データ
@@ -223,7 +223,7 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 例:
 
 {{< tabs >}}
-{{% tab "datadog.yaml" %}}
+{{< tab "datadog.yaml" >}}
 
 ```yaml
 apm_config:
@@ -241,8 +241,8 @@ apm_config:
       pattern: "(?s).*"
 ```
 
-{{% /tab %}}
-{{% tab "環境変数" %}}
+{{< /tab >}}
+{{< tab "環境変数" >}}
 
 ```shell
 DD_APM_REPLACE_TAGS=[
@@ -263,8 +263,8 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 **注**: 推奨の [Daemonset コンフィギュレーション][1]を使用している場合は、この環境変数を trace-agent コンテナに挿入します。
 
@@ -289,14 +289,14 @@ DD_APM_REPLACE_TAGS=[
 ```
 
 [1]: /ja/agent/kubernetes/?tab=daemonset
-{{% /tab %}}
-{{% tab "docker-compose" %}}
+{{< /tab >}}
+{{< tab "docker-compose" >}}
 
 ```docker-compose.yaml
 - DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## リソースを収集から除外

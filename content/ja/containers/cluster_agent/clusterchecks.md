@@ -30,7 +30,7 @@ Datadog Agent は、コンテナを自動的に検出し、そのワークロー
 セットアッププロセスでは、Cluster Agent でディスパッチ機能を有効にすることと、Agent が `clusterchecks` プロバイダーから構成を受け取る準備が整っていることを確認します。これが完了すると、マウントされたコンフィギュレーションファイルまたは Kubernetes Service Annotations を通じて、Cluster Agent に構成を渡すことができます。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 Cluster Agent の Helm デプロイメントでは、`datadog.clusterChecks.enabled` 構成キーによりクラスターチェックのディスパッチがデフォルトで有効になっています。
 ```yaml
 datadog:
@@ -43,8 +43,8 @@ clusterAgent:
 ```
 
 これにより、Cluster Agent でのクラスターチェックの設定が有効になり、Kubernetes Service Annotations (`kube_services`) からの構成を処理できるようになります。
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 クラスターチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `clusterAgent.config.clusterChecksEnabled` 構成キーを使用して有効にします。
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -60,8 +60,8 @@ spec:
 
 これにより、Cluster Agent でのクラスターチェックの設定が有効になり、Kubernetes Service Annotations (`kube_services`) からの構成を処理できるようになります。
 
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 ### Cluster Agent
 
 この機能を使用するには、[Cluster Agent][1] が動作している必要があります。Cluster Agent が動作したら、Cluster Agent のデプロイを以下のように変更します。
@@ -90,7 +90,7 @@ Datadog **Node** Agent で `clusterchecks` 構成プロバイダーを有効に�
     ```
 
 [1]: /ja/agent/cluster_agent/setup/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -134,7 +134,7 @@ Cluster Agent のセットアップセクションで述べた手順に加えて
 また、Datadog Agent 1.18.0 からは、Kubernetes サービスを対象としたチェック構成で、`advanced_ad_identifiers` と[オートディスカバリーテンプレート変数][6]を使用できます ([例をご参照ください][7])。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 Helm では、これらのコンフィギュレーションファイルは `clusterAgent.confd` セクション内に作成することができます。**注**: これは、ノードベースの Agent でファイルを作成する `datadog.confd` セクションとは別のものです。`<INTEGRATION_NAME>` は、実行したいインテグレーションチェックと正確に一致させる必要があります。
 
 ```yaml
@@ -148,8 +148,8 @@ clusterAgent:
       instances:
         - <INSTANCES_CONFIG>
 ```
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 手動で行う場合は、必要な静的コンフィギュレーションファイルを格納する `ConfigMap` を作成し、Cluster Agent コンテナの対応する `/conf.d` ファイルにマウントする必要があります。これは、[ConfigMap を Agent コンテナにマウントする][1]のと同じアプローチに従います。例:
 
 ```yaml
@@ -186,7 +186,7 @@ data:
 
 
 [1]: /ja/agent/kubernetes/integrations/?tab=configmap#configuration
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### 例: 外部でホストされているデータベースの MySQL チェック
@@ -218,7 +218,7 @@ instances:
 #### 例: Kubernetes サービスでの HTTP_Check
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 Kubernetes サービスに対して、クラスターごとに一度だけ [HTTP チェック][1]を行いたい場合は、`clusterAgent.confd` フィールドを使ってチェック構成を定義してください。
 
 ```yaml
@@ -238,8 +238,8 @@ clusterAgent:
 ```
 
 [1]: /ja/integrations/http_check/
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 クラスターごとに 1 回だけ [HTTP チェック][1]を行いたい Kubernetes サービスがある場合は、Cluster Agent コンテナに以下の内容で `/conf.d/http_check.yaml` ファイルをマウントしてください。
 
 ```yaml
@@ -255,7 +255,7 @@ instances:
 ```
 
 [1]: /ja/integrations/http_check/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注:** フィールド `advanced_ad_identifiers` は、Datadog Cluster Agent 1.18+ からサポートされるようになりました。

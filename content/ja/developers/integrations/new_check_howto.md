@@ -293,7 +293,7 @@ ddev test -m integration awesome
 この例では、これらのファイルは次の形式になります。
 
 {{< tabs >}}
-{{% tab "Configuration template" %}}
+{{< tab "Configuration template" >}}
 
 `awesome/assets/configuration/spec.yaml` は、`awesome/datadog_checks/awesome/data/conf.yaml.example` を生成するために使用されます。
 
@@ -337,8 +337,8 @@ files:
 ddev validate config --sync awesome
 ```
 
-{{% /tab %}}
-{{% tab "マニフェスト" %}}
+{{< /tab >}}
+{{< tab "マニフェスト" >}}
 
 Awesome サービスチェックの `awesome/manifest.json`。**注**: `guid` は一意 (かつ有効) でなければなりません。したがって、この例のものを使用_しない_でください (ツールによって自動的に生成されます)。
 
@@ -371,13 +371,13 @@ Awesome サービスチェックの `awesome/manifest.json`。**注**: `guid` �
 }
 ```
 
-{{% /tab %}}
-{{% tab "メタデータ" %}}
+{{< /tab >}}
+{{< tab "メタデータ" >}}
 
 サンプルインテグレーションはメトリクスを送信しません。この場合、生成された `awesome/metadata.csv` には、CSV 列名を含む行だけが含まれます。
 
-{{% /tab %}}
-{{% tab "サービスチェック" %}}
+{{< /tab >}}
+{{< tab "サービスチェック" >}}
 
 サンプルインテグレーションはサービスチェックが含まれているため、`awesome/assets/service_checks.json` ファイルに追加する必要があります。
 
@@ -395,7 +395,7 @@ Awesome サービスチェックの `awesome/manifest.json`。**注**: `guid` �
 ]
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ビルド

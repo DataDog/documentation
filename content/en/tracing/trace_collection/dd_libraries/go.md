@@ -31,7 +31,7 @@ The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`. For a full list
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][7] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -44,7 +44,7 @@ Otherwise, follow the instructions below to add the Datadog Tracing Library to y
 Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
-{{% tab "Containers" %}}
+{{< tab "Containers" >}}
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
@@ -72,15 +72,15 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 {{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
+{{< /tab >}}
+{{< tab "AWS Lambda" >}}
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 
 
 [1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
+{{< /tab >}}
+{{< tab "Other Environments" >}}
 
 Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
@@ -92,7 +92,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 [4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Activate Go integrations to create spans
@@ -101,19 +101,15 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 ## Library configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][8] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
-For configuration instructions and details about using the API, see the Datadog [API documentation][2].
+For configuration instructions and details about using the API, see the Datadog [API documentation][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/go
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[3]: /tracing/glossary/
-[4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
-[5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /profiler/enabling/?code-lang=go
-[7]: https://app.datadoghq.com/apm/docs
-[8]: /tracing/trace_collection/library_config/go/
+[2]: https://app.datadoghq.com/apm/docs
+[3]: /tracing/trace_collection/library_config/go/
+[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

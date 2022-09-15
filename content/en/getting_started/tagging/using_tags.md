@@ -34,7 +34,7 @@ To search multiple tags inclusively, use parentheses and separate each tag with 
 ## Dashboards
 
 {{< tabs >}}
-{{% tab "Assignment" %}}
+{{< tab "Assignment" >}}
 
 Use tags to filter metrics to display in a [dashboard graph][1], or to create aggregated groups of metrics to display. To filter the metrics to display, enter the tag in the **from** text box. Then, your chosen metric displays over all sources that have that particular tag assigned (`service:coffee-house` in the example below).
 
@@ -72,8 +72,8 @@ Use [template variables][3] to save time switching the **from** tag on graphs in
 [1]: /dashboards/
 [2]: /events/
 [3]: /dashboards/template_variables/
-{{% /tab %}}
-{{% tab "Examples" %}}
+{{< /tab >}}
+{{< tab "Examples" >}}
 
 Here is an example of tags using the timeseries chart editor. For the first screenshot, no tags have been applied, and the average CPU usage across all hosts is displayed:
 
@@ -89,7 +89,7 @@ Finally, the second empty field (the **avg by** text box) is used to show an ind
 
 If needed, add additional tags to narrow down the scope even further—for example, hosts in `region:eastus` and `env:production`. Tags can be used throughout Datadog and be applied to all core elements (metrics, traces, and logs).
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Infrastructure
@@ -97,7 +97,7 @@ If needed, add additional tags to narrow down the scope even further—for examp
 To filter the [Host Map][4], [Infrastructure List][5], [Containers][6], and [Processes][7], enter a tag in the **Filter by** text box at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** text box. If you enter `service` in the group box, you see each service as a group heading.
 
 {{< tabs >}}
-{{% tab "Host Map" %}}
+{{< tab "Host Map" >}}
 
 Under this section, use tags to filter or group Hosts:
 
@@ -106,34 +106,34 @@ Under this section, use tags to filter or group Hosts:
 Or Containers:
 
 {{< img src="tagging/using_tags/containermaptags.png" alt="Container Map Tags" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Infrastructure List" %}}
+{{< tab "Infrastructure List" >}}
 
 Here are the filter and group by text boxes on the Infrastructure List page:
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="Tags in the Infrastructure List" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Containers" %}}
+{{< tab "Containers" >}}
 
 Here are the filter and group by text boxes on the Live Containers page:
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="Live Container Tags" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Processes" %}}
+{{< tab "Processes" >}}
 
 Here are the filter and group by text boxes on the Live Processes page:
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="Live Process Tags" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Monitors
 
 {{< tabs >}}
-{{% tab "Manage Monitors" %}}
+{{< tab "Manage Monitors" >}}
 
 To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`. 
 
@@ -142,9 +142,9 @@ To filter monitors by [assigned tags][1], use the search bar or facet checkboxes
 Monitor tags are different and separate from metric tags.
 
 [1]: /getting_started/tagging/assigning_tags/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "New Monitor" %}}
+{{< tab "New Monitor" >}}
 
 When creating a [monitor][1], use metric tags in the:
 
@@ -155,15 +155,15 @@ When creating a [monitor][1], use metric tags in the:
 * **avg by** text box to transform the monitor into a multi-alert monitor on each tag value.
 
 [1]: /monitors/create/#monitor-types
-{{% /tab %}}
-{{% tab "Manage Downtime" %}}
+{{< /tab >}}
+{{< tab "Manage Downtime" >}}
 
 To filter [downtimes][1] by monitor tag, type the tag name in the search bar, for example `service:coffee-house`.
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Manage Monitors Tags" style="width:80%;">}}
 
 [1]: /monitors/notify/downtimes/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Metrics
@@ -177,7 +177,7 @@ Use tags in the [Metrics Explorer][8] to filter metrics over tags or display mul
 Some integrations allow you to optionally limit metrics using tags.
 
 {{< tabs >}}
-{{% tab "AWS" %}}
+{{< tab "AWS" >}}
 
 The [AWS integration tile][1] has the tag filters `to hosts with tag` and `to Lambdas with tag`.
 
@@ -200,8 +200,8 @@ Read more about AWS tagging in the [EC2][2] and [Lambda][3] documentation.
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
-{{% /tab %}}
-{{% tab "Azure" %}}
+{{< /tab >}}
+{{< tab "Azure" >}}
 
 The [Azure integration tile][1] has the tag filter `Optionally filter to VMs with tag`.
 
@@ -214,8 +214,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{% /tab %}}
-{{% tab "Google Cloud" %}}
+{{< /tab >}}
+{{< tab "Google Cloud" >}}
 
 The [Google Cloud integration tile][1] has the tag filter `to hosts with tag`.
 
@@ -231,13 +231,13 @@ Read more about [Creating and managing labels][2] in the Google Cloud documentat
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{< tab "Analytics" >}}
 
 For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see the [trace search][2] page.
 
@@ -245,8 +245,8 @@ For [Trace Search][1], filter traces with tags using the search bar or facet che
 
 [1]: /tracing/app_analytics/search/
 [2]: /tracing/app_analytics/search/#search-bar
-{{% /tab %}}
-{{% tab "Service Map" %}}
+{{< /tab >}}
+{{< tab "Service Map" >}}
 
 After [assigning tags][1], use the Service Map to navigate to different areas of the application by clicking on a particular service. In the example below, view [Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
@@ -257,7 +257,7 @@ After [assigning tags][1], use the Service Map to navigate to different areas of
 [3]: /monitors/manage/
 [4]: /logs/explorer/search/
 [5]: /infrastructure/hostmap/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -276,26 +276,26 @@ To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>
 For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search Logs][10].
 
 {{< tabs >}}
-{{% tab "Search" %}}
+{{< tab "Search" >}}
 
 {{< img src="tagging/using_tags/logsearchtags.png" alt="Log Search Tags" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Analytics" %}}
+{{< /tab >}}
+{{< tab "Analytics" >}}
 
 {{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tabs" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Patterns" %}}
+{{< /tab >}}
+{{< tab "Patterns" >}}
 
 {{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns Tags" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Live Tail" %}}
+{{< /tab >}}
+{{< tab "Live Tail" >}}
 
 {{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" width="80%">}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Additionally, tags are used to filter a logs [Pipeline][14]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
@@ -313,7 +313,7 @@ To filter RUM event data by tags, use the search bar or facet checkboxes. The se
 ## Synthetics
 
 {{< tabs >}}
-{{% tab "Synthetic Tests" %}}
+{{< tab "Synthetic Tests" >}}
 
 The [Synthetic Tests][1] page lists your Synthetic tests. 
 
@@ -324,8 +324,8 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/search/
-{{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{< /tab >}}
+{{< tab "CI Results Explorer" >}}
 
 The [CI Results Explorer][1] displays your browser test results running in a [CI pipeline][2]. 
 
@@ -337,13 +337,13 @@ To filter test runs by tags, use the search bar or facet checkboxes. The search 
 [1]: https://app.datadoghq.com/synthetics/explorer/ci
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Service level objectives
 
 {{< tabs >}}
-{{% tab "Manage SLOs" %}}
+{{< tab "Manage SLOs" >}}
 
 To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example: `-journey:add_item`. 
 
@@ -352,9 +352,9 @@ To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. Th
 SLO tags are different and separate from metric or monitor tags used in the underlying metrics or monitors of an SLO.
 
 [1]: /getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Metric-based SLOs" %}}
+{{< tab "Metric-based SLOs" >}}
 
 When creating a [metric-based SLO][1], use metric tags in the SLO's success ratio metric queries (all metrics must use the same set of metric tags):
 
@@ -364,8 +364,8 @@ When creating a [metric-based SLO][1], use metric tags in the SLO's success rati
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Metric-based SLO Tags" style="width:80%;">}}
 
 [1]: /monitors/service_level_objectives/metric/
-{{% /tab %}}
-{{% tab "Monitor-based SLOs" %}}
+{{< /tab >}}
+{{< tab "Monitor-based SLOs" >}}
 
 When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use the **Calculate on selected groups** toggle to select up to 20 tag values from the underlying monitor to display a status percentage and remaining error budget for both the overall SLO and for each tag value:
 
@@ -373,7 +373,7 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 [1]: /monitors/service_level_objectives/monitor/
 [2]: /getting_started/tagging/using_tags/?tab=newmonitor#monitors
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Developers

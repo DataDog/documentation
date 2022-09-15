@@ -43,7 +43,7 @@ Les deux principaux modificateurs intégrés sont `as_count()` et `as_rate()`.
 Le comportement des métriques varie selon le type appliqué :
 
 {{< tabs >}}
-{{% tab "COUNT" %}}
+{{< tab "COUNT" >}}
 
 * Effet de `as_count()` :
   * Désactive toute [interpolation][1].
@@ -56,8 +56,8 @@ Le comportement des métriques varie selon le type appliqué :
 **Remarque** : aucune normalisation n'est appliquée sur les intervalles de courtes durées (sans agrégation temporelle). Ainsi, les nombres totaux de valeurs brutes des métriques sont renvoyés.
 
 [1]: /fr/dashboards/faq/interpolation-the-fill-modifier-explained/
-{{% /tab %}}
-{{% tab "RATE" %}}
+{{< /tab >}}
+{{< tab "RATE" >}}
 
 * Effet de `as_count()` :
   * Désactive toute [interpolation][1].
@@ -68,12 +68,12 @@ Le comportement des métriques varie selon le type appliqué :
   * Définit l'agrégateur temporel sur `SUM`.
 
 [1]: /fr/dashboards/faq/interpolation-the-fill-modifier-explained/
-{{% /tab %}}
-{{% tab "GAUGE" %}}
+{{< /tab >}}
+{{< tab "GAUGE" >}}
 
 Le type de métrique `GAUGE` représente la valeur finale et absolue d'une métrique. Les modificateurs `as_count()` and `as_rate()` ne changent pas la valeur de ce type de métrique.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Modificateur `weighted()`

@@ -20,7 +20,7 @@ title: Instrumentar aplicaciones .NET serverless
 Datadog te permite habilitar la instrumentación de tus aplicaciones serverless de muchas formas diferentes. Elige el método que más te convenga de todos los que te presentamos a continuación. Por norma general, Datadog recomienda usar la interfaz de línea de comandos de Datadog (Datadog CLI).
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{< tab "Datadog CLI" >}}
 
 Datadog CLI modifica la configuración de las funciones lambda existentes para habilitar la instrumentación sin necesidad de llevar a cabo otra implementación. Es la forma más rápida de empezar con la monitorización serverless de Datadog.
 
@@ -80,8 +80,8 @@ Datadog CLI modifica la configuración de las funciones lambda existentes para 
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [3]: https://docs.datadoghq.com/es/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Marco serverless" %}}
+{{< /tab >}}
+{{< tab "Marco serverless" >}}
 
 El [plugin serverless de Datadog][1] configura automáticamente tus funciones para enviar métricas, trazas (traces) y logs a Datadog mediante la [extensión Datadog Lambda][2].
 
@@ -111,8 +111,8 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 [1]: https://docs.datadoghq.com/es/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/es/serverless/libraries_integrations/extension
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Imagen de contenedor" %}}
+{{< /tab >}}
+{{< tab "Imagen de contenedor" >}}
 
 1. Instala la extensión Datadog Lambda
 
@@ -142,8 +142,8 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://github.com/DataDog/dd-trace-dotnet/releases
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Personalizado" %}}
+{{< /tab >}}
+{{< tab "Personalizado" >}}
 
 1. Instala el rastreador de Datadog
 
@@ -193,7 +193,7 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ¿Qué toca hacer ahora?

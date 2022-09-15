@@ -41,7 +41,7 @@ Pour configurer DogStatsD avec le socket de domaine Unix, activez le serveur Dog
 Pour activer l'UDS DogStatsD de l'Agent :
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 1. Modifiez le [fichier de configuration principal de l'Agent][1] afin de définir l'option `dogstatsd_socket` sur le chemin où DogStatsD doit créer son socket d'écoute :
 
@@ -58,8 +58,8 @@ Pour activer l'UDS DogStatsD de l'Agent :
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/agent/guide/agent-commands/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 1. Définissez le chemin du socket avec la variable d'environnement `DD_DOGSTATSD_SOCKET=<VOTRE_CHEMIN_UDS>` sur le conteneur de l'Agent.
 
@@ -68,8 +68,8 @@ Pour activer l'UDS DogStatsD de l'Agent :
     - Démarrez le conteneur de l'Agent avec `-v /var/run/datadog:/var/run/datadog`.
     - Démarrez vos conteneurs d'application avec `-v /var/run/datadog:/var/run/datadog:ro`.
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 1. Définissez le chemin du socket avec la variable d'environnement `DD_DOGSTATSD_SOCKET=<VOTRE_CHEMIN_UDS>` sur le conteneur de l'Agent (exemple : `/var/run/datadog/dsd.socket`).
 
@@ -104,8 +104,8 @@ Pour activer l'UDS DogStatsD de l'Agent :
 
         **Remarque** : supprimez `readOnly: true` si les conteneurs de votre application doivent disposer d'un accès en écriture au socket.
 
-{{% /tab %}}
-{{% tab "EKS Fargate" %}}
+{{< /tab >}}
+{{< tab "EKS Fargate" >}}
 
 1. Définissez le chemin du socket avec la variable d'environnement `DD_DOGSTATSD_SOCKET=<VOTRE_CHEMIN_UDS>` sur le conteneur de l'Agent (exemple : `/var/run/datadog/dsd.socket`).
 
@@ -138,7 +138,7 @@ Pour activer l'UDS DogStatsD de l'Agent :
 
         **Remarque** : supprimez `readOnly: true` si les conteneurs de votre application doivent disposer d'un accès en écriture au socket.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Test avec netcat
@@ -154,7 +154,7 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 La détection de l'origine permet à DogStatsD d'identifier la provenance des métriques de conteneur et de taguer automatiquement les métriques. Lorsque ce mode est activé, toutes les métriques transmises par UDS reçoivent les mêmes tags de conteneur que les métriques Autodiscovery.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 1. Activez l'option `dogstatsd_origin_detection` [dans le fichier de configuration principal de votre Agent][1] :
 
@@ -193,8 +193,8 @@ La détection de l'origine permet à DogStatsD d'identifier la provenance des m�
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/getting_started/tagging/assigning_tags/#environment-variables
 [3]: /fr/agent/guide/agent-commands/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 1. Définissez la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION=true` pour le conteneur de l'Agent.
 
@@ -205,8 +205,8 @@ Lorsqu'il fonctionne dans un conteneur, DogStatsD doit être exécuté dans l'es
 
 [1]: /fr/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 1. Définissez la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION` sur true pour le conteneur de l'Agent :
 
@@ -238,8 +238,8 @@ Lorsqu'il fonctionne dans un conteneur, DogStatsD doit être exécuté dans l'es
     ```
 
 [1]: /fr/getting_started/tagging/assigning_tags/#environment-variables
-{{% /tab %}}
-{{% tab "EKS Fargate" %}}
+{{< /tab >}}
+{{< tab "EKS Fargate" >}}
 
 1. Définissez la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION` sur true pour le conteneur de l'Agent :
 
@@ -271,7 +271,7 @@ Lorsqu'il fonctionne dans un conteneur, DogStatsD doit être exécuté dans l'es
     ```
 
 [1]: /fr/getting_started/tagging/assigning_tags/#environment-variables
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque :** les tags `container_id`, `container_name` et `pod_name` ne sont pas ajoutés par défaut afin d'éviter la création d'un nombre excessif de [métriques custom][2].

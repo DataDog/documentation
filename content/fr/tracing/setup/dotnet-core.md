@@ -53,7 +53,7 @@ L'instrumentation automatique capture :
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 Pour appliquer l'instrumentation automatique sur Windows, installez le traceur .NET sur le host à l'aide du [programme d'installation MSI pour Windows][1]. Choisissez le programme d'installation correspondant à l'architecture de votre système d'exploitation (x64 ou x86).
 
@@ -68,9 +68,9 @@ net start w3svc
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Pour utiliser l'instrumentation automatique sous Linux, suivez les trois étapes ci-dessous :
 
@@ -117,7 +117,7 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<VERSION_T
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://en.wikipedia.org/wiki/Musl
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -125,7 +125,7 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<VERSION_T
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 Si votre application fonctionne dans IIS, passez directement à la section suivante.
 
@@ -168,9 +168,9 @@ rem Démarrer l'application
 dotnet.exe example.dll
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Sous Linux, les variables d'environnement suivantes sont requises pour activer l'instrumentation automatique :
 
@@ -253,7 +253,7 @@ Ensuite, vérifiez que les variables d'environnement ont été définies avec `s
 
 [1]: https://docs.docker.com/engine/reference/builder/#env
 [2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -279,7 +279,7 @@ Il existe plusieurs façons de configurer le traceur .NET :
 
 {{< tabs >}}
 
-{{% tab "Variables d'environnement" %}}
+{{< tab "Variables d'environnement" >}}
 
 Pour configurer le traceur à l'aide de variables d'environnement, définissez-les avant le lancement de l'application instrumentée.
 
@@ -311,9 +311,9 @@ export DD_VERSION=abc123
 dotnet example.dll
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Code" %}}
+{{< tab "Code" >}}
 
 Pour configurer le traceur dans le code de l'application, créez un `TracerSettings` à partir des sources de configuration par défaut. Définissez les propriétés de cette instance `TracerSettings` avant de la transmettre à un constructeur `Tracer`. Par exemple :
 
@@ -341,9 +341,9 @@ Tracer.Instance = tracer;
 
 **Remarque** : les paramètres de `TracerSettings` doivent être définis _avant_ la création du `Tracer`. Toute modification apportée aux propriétés de `TracerSettings` après la création du `Tracer` sera ignorée.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Fichier JSON" %}}
+{{< tab "Fichier JSON" >}}
 
 Pour configurer le traceur à l'aide d'un fichier JSON, créez `datadog.json` dans le répertoire de l'application instrumentée. L'objet JSON racine doit être un hash avec une paire key/value pour chaque paramètre. Par exemple :
 
@@ -356,7 +356,7 @@ Pour configurer le traceur à l'aide d'un fichier JSON, créez `datadog.json` da
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -40,7 +40,7 @@ To set up DogStatsD with Unix Domain Socket, enable the DogStatsD server through
 To enable the Agent DogStatsD UDS:
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 1. Edit the [Agent's main configuration file][1] to set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
 
@@ -57,8 +57,8 @@ To enable the Agent DogStatsD UDS:
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container.
 
@@ -67,8 +67,8 @@ To enable the Agent DogStatsD UDS:
     - Start the Agent container with `-v /var/run/datadog:/var/run/datadog`
     - Start your application containers with `-v /var/run/datadog:/var/run/datadog:ro`
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container (example: `/var/run/datadog/dsd.socket`).
 
@@ -103,8 +103,8 @@ To enable the Agent DogStatsD UDS:
 
         **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
 
-{{% /tab %}}
-{{% tab "EKS Fargate" %}}
+{{< /tab >}}
+{{< tab "EKS Fargate" >}}
 
 1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container (example: `/var/run/datadog/dsd.socket`).
 
@@ -137,7 +137,7 @@ To enable the Agent DogStatsD UDS:
 
         **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Test with netcat
@@ -153,7 +153,7 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received by UDS are tagged with the same container tags as Autodiscovery metrics.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 1. Enable the `dogstatsd_origin_detection` option in your [Agent's main configuration file][1]:
 
@@ -192,8 +192,8 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/assigning_tags/#environment-variables
 [3]: /agent/guide/agent-commands/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION=true` environment variable for the Agent container.
 
@@ -204,8 +204,8 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
 
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container:
 
@@ -237,8 +237,8 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     ```
 
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
-{{% /tab %}}
-{{% tab "EKS Fargate" %}}
+{{< /tab >}}
+{{< tab "EKS Fargate" >}}
 
 1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container:
 
@@ -270,7 +270,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     ```
 
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][2].

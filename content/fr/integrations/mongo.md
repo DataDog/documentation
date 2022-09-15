@@ -73,7 +73,7 @@ Le check MongoDB est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez
 La plupart des métriques mesurant des éléments précis (tels que la disponibilité, la taille, etc.) doivent être recueillies sur chaque nœud mongod. Les métriques plus globales (comme les statistiques sur les index ou la collecte) doivent être recueillies une seule fois. Ainsi, la configuration de votre Agent dépend du déploiement de votre cluster mongo.
 
 {{< tabs >}}
-{{% tab "Déploiement autonome" %}}
+{{< tab "Déploiement autonome" >}}
 #### Déploiement autonome
 
 Pour configurer cette intégration pour un déploiement MongoDB composé d'un seul nœud :
@@ -103,8 +103,8 @@ db.createUser({
 
 ##### Configurer les Agents
 Pour recueillir toutes les métriques Mongo disponibles, vous avez besoin d'un seul Agent. Il est préférable de l'exécuter sur le même nœud. Consultez les options de configuration ci-dessous.
-{{% /tab %}}
-{{% tab "ReplicaSet" %}}
+{{< /tab >}}
+{{< tab "ReplicaSet" >}}
 #### ReplicaSet
 
 Pour configurer cette intégration pour un ReplicaSet MongoDB :
@@ -137,8 +137,8 @@ Vous avez besoin d'un Agent pour chaque membre. Consultez les options de configu
 Remarque : d'après la [documentation MongoDB][1] (en anglais), la surveillance des nœuds arbitres n'est pas possible à distance. Cependant, tout changement de statut d'un nœud arbitre est signalé à l'Agent connecté au serveur primaire.
 
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
-{{% /tab %}}
-{{% tab "Partitionnement" %}}
+{{< /tab >}}
+{{< tab "Partitionnement" >}}
 #### Partitionnement
 
 Pour configurer cette intégration pour un cluster MongoDB partitionné :
@@ -176,7 +176,7 @@ Créez ensuite le même utilisateur depuis un proxy mongos. Cette étape entraî
 
 Remarque : d'après la [documentation MongoDB][1] (en anglais), la surveillance des nœuds arbitres n'est pas possible à distance. Cependant, tout changement de statut d'un nœud arbitre est signalé à l'Agent connecté au serveur primaire.
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -185,7 +185,7 @@ Remarque : d'après la [documentation MongoDB][1] (en anglais), la surveillance
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -269,8 +269,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/tracing/send_traces/
 [5]: https://docs.datadoghq.com/fr/tracing/setup/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 #### Docker
 
@@ -318,8 +318,8 @@ Ensuite, [instrumentez le conteneur de votre application][5] et définissez `DD_
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 [4]: https://docs.datadoghq.com/fr/agent/docker/apm/?tab=linux
 [5]: https://docs.datadoghq.com/fr/tracing/setup/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -393,8 +393,8 @@ Ensuite, [instrumentez votre conteneur d'application][8] et définissez `DD_AGEN
 [6]: https://docs.datadoghq.com/fr/agent/kubernetes/apm/?tab=java
 [7]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [8]: https://docs.datadoghq.com/fr/tracing/setup/
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -461,7 +461,7 @@ Ensuite, [instrumentez votre conteneur d'application][5] et définissez `DD_AGEN
 [4]: https://docs.datadoghq.com/fr/agent/docker/apm/?tab=linux
 [5]: https://docs.datadoghq.com/fr/tracing/setup/
 [6]: https://docs.datadoghq.com/fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

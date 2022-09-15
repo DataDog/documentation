@@ -36,7 +36,7 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 
 {{< tabs >}}
 
-{{% tab "Azure SQL Database" %}}
+{{< tab "Azure SQL Database" >}}
 
 サーバーに接続するための読み取り専用ログインを作成し、必要な [Azure SQL Roles][1] を付与します。
 ```SQL
@@ -53,9 +53,9 @@ CREATE USER datadog FOR LOGIN datadog;
 ```
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Azure SQL Managed Instance" %}}
+{{< tab "Azure SQL Managed Instance" >}}
 
 サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
 
@@ -82,15 +82,15 @@ USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Windows Azure VM の SQL Server" %}}
+{{< tab "Windows Azure VM の SQL Server" >}}
 
 [Windows Azure VM の SQL Server][1] の場合は、[セルフホスティングの SQL Server のデータベースモニタリングを設定する][2]のドキュメントに従って、Windows Server ホスト VM に直接 Datadog Agent をインストールしてください。
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview
 [2]: /ja/database_monitoring/setup_sql_server/selfhosted/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -99,7 +99,7 @@ CREATE USER datadog FOR LOGIN datadog;
 Azure はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
 {{< tabs >}}
-{{% tab "Windows ホスト" %}}
+{{< tab "Windows ホスト" >}}
 SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
 SQL Server Agent のコンフィギュレーションファイル `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][2]を参照してください。
@@ -167,8 +167,8 @@ driver: '{ODBC Driver 17 for SQL Server}'
 [9]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Linux ホスト" %}}
+{{< /tab >}}
+{{< tab "Linux ホスト" >}}
 SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
 Linux では、Datadog Agent の他に、ODBC SQL Server ドライバー (例えば、[Microsoft ODBC ドライバー][2]) がインストールされていることが必須となります。ODBC SQL Server がインストールされたら、`odbc.ini` と `odbcinst.ini` ファイルを `/opt/datadog-agent/embedded/etc` フォルダーにコピーします。
@@ -215,8 +215,8 @@ instances:
 [6]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
 **注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
@@ -266,8 +266,8 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 [4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
 Kubernetes クラスターでクラスターチェックがまだ有効になっていない場合は、指示に従って[クラスターチェックを有効化][2]します。Cluster Agent の構成は、Cluster Agent コンテナにマウントされた静的ファイル、または Kubernetes サービスアノテーションのいずれかを使用することができます。
@@ -369,7 +369,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [5]: /ja/agent/guide/secrets-management
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Azure インテグレーションをインストールする

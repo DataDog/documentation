@@ -39,7 +39,7 @@ Datadog’s Live Processes gives you real-time visibility into the process runni
 If you are using Agent 5, follow this [specific installation process][1]. If you are using Agent 6 or 7, [see the instructions below][2].
 
 {{< tabs >}}
-{{% tab "Linux/Windows" %}}
+{{< tab "Linux/Windows" >}}
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
 
@@ -63,8 +63,8 @@ After configuration is complete, [restart the Agent][2].
 
 [1]: /agent/guide/agent-configuration-files/
 [2]: /agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Follow the instructions for the [Docker Agent][1], passing in the following attributes, in addition to any other custom settings as appropriate:
 
@@ -80,8 +80,8 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 
 [1]: /agent/docker/#run-the-docker-agent
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
 
@@ -107,8 +107,8 @@ See the standard [Daemonset installation][2] and the [Docker Agent][3] informati
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: /agent/kubernetes/
 [3]: /agent/docker/#run-the-docker-agent
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
 
@@ -122,7 +122,7 @@ datadog:
 
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -137,7 +137,7 @@ In order to hide sensitive data on the Live Processes page, the Agent scrubs sen
 **Note**: The matching is **case insensitive**.
 
 {{< tabs >}}
-{{% tab "Linux/Windows" %}}
+{{< tab "Linux/Windows" >}}
 
 Define your own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under the `process_config` section. Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
 
@@ -162,9 +162,9 @@ process_config:
     strip_proc_arguments: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 You can use the Helm chart to define your own list, which is merged with the default one. Add the environment variables `DD_SCRUB_ARGS` and `DD_CUSTOM_SENSITIVE_WORDS` to your `datadog-values.yaml` file, and upgrade your Datadog Helm chart:
 
@@ -205,7 +205,7 @@ datadog:
                   value: "true" 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

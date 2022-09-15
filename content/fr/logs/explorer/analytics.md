@@ -62,7 +62,7 @@ Sélectionnez un type de visualisation d'analyse de logs à l'aide du sélecteur
 Visualisations disponibles :
 
 {{< tabs >}}
-{{% tab "Séries temporelles" %}}
+{{< tab "Séries temporelles" >}}
 
 Visualisez l'évolution d'une seule [mesure][1] (ou d'une [facette][1] correspondant à un nombre unique de valeurs) pour un intervalle donné. Vous pouvez également fractionner le graphique en utilisant une [facette][1] disponible.
 
@@ -87,9 +87,9 @@ l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP c
 
 
 [1]: /fr/logs/explorer/facets/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Top List" %}}
+{{< tab "Top List" >}}
 
 Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][1] choisie :
 
@@ -97,9 +97,9 @@ L'analyse de logs avec une Top List suivante illustre :
 l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP client uniques** au cours du dernier mois.
 
 [1]: /fr/logs/explorer/facets/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Table" %}}
+{{< tab "Table" >}}
 
 Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][1] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des autres mesures dans la liste. Mettez à jour la requête de recherche ou explorez les logs correspondant à l'une des dimensions.
 
@@ -112,7 +112,7 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
 L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
 
 [1]: /fr/logs/explorer/facets/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Logs associés

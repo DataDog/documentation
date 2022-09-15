@@ -26,7 +26,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 以下のコードブロックのいずれかを `pom.xml` (Maven) または `build.gradle` (Gradle) に追加し、Datadog Lambda Library をローカルにインストールします。以下の `VERSION` を最新のリリースに置き換えてください (直前の `v` は省略): ![Maven Cental][4]
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 `pom.xml` に以下の依存関係を含めます。
 
@@ -38,8 +38,8 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 </dependency>
 ```
 
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 `build.gradle` に以下を含めます。
 
@@ -48,7 +48,7 @@ dependencies {
   implementation 'com.datadoghq:datadog-lambda-java:VERSION'
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### インスツルメントする
@@ -163,7 +163,7 @@ Apache Foundation は、一般的な Java のログ記録ライブラリであ�
 Lambda 関数の依存関係である `datadog-lambda-java` のバージョンは `pom.xml` (Maven) または `build.gradle` (Gradle) で設定されます。
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 `pom.xml` ファイルには、次のようなセクションが含まれています。
 
@@ -178,9 +178,9 @@ Lambda 関数の依存関係である `datadog-lambda-java` のバージョン�
 `VERSION` を最新バージョンの `datadog-lambda-java` (上記で入手可能) に置き換えます。
 その後、Lambda 関数を再デプロイしてください。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Gradle" %}}
+{{< tab "Gradle" >}}
 
 `build.gradle` ファイルには、次のようなセクションが含まれています。
 
@@ -193,7 +193,7 @@ dependencies {
 `VERSION` を最新バージョンの `datadog-lambda-java` (上記で入手可能) に置き換えます。
 その後、Lambda 関数を再デプロイしてください。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs>}}
 
 0.3.x から 1.4.x へのアップグレードで、`dd-trace-java` トレーサーを使用したい場合は、`dd-trace-java` Lambda レイヤーへの参照を見つけ、次のように変更してください。

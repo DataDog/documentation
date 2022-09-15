@@ -26,7 +26,7 @@ further_reading:
 Agent v6 & v7 では、オペレーティングシステムから提供されるサービスマネージャーが Agent のライフサイクルを担う一方で、他のコマンドは Agent バイナリから直接実行する必要があります。Agent v5 では、ほぼすべてがサービスマネージャーによって実行されます。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 ### Amazon Linux 2
 
@@ -54,8 +54,8 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 | コマンドの使用方法の表示              | `sudo datadog-agent --help`                            |
 | チェックの実行                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | 説明                        | コマンド                                           |
 |------------------------------------|---------------------------------------------------|
@@ -75,13 +75,13 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 
 [サービスライフサイクルコマンドについては、こちらを参照してください][2]。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -91,8 +91,8 @@ Agent の構成ファイルおよびフォルダーの場所:
 * `/etc/datadog-agent/conf.d/`
 
 [1]: /ja/integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Agent の構成ファイルおよびフォルダーの場所
 
@@ -103,7 +103,7 @@ Agent の構成ファイルおよびフォルダーの場所
 * `/etc/dd-agent/conf.d/`
 
 [1]: /ja/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## トラブルシューティング

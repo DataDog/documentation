@@ -40,16 +40,16 @@ Après avoir choisi de créer un test `HTTP`, définissez la requête de votre t
 
    {{< tabs >}}
 
-   {{% tab "Options de requête" %}}
+   {{< tab "Options de requête" >}}
 
    * **Follow redirects** : sélectionnez cette option pour que le test HTTP suive jusqu'à dix redirections lors de l'exécution de la requête.
    * **Timeout** : permet de spécifier le délai (en secondes) avant l'expiration du test.
    * **Request headers** : définissez les en-têtes à ajouter à votre requête HTTP. Vous pouvez également remplacer les en-têtes par défaut (par exemple, l'en-tête `user-agent`).
    * **Cookies** : définissez les cookies à ajouter à votre requête HTTP. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Authentification" %}}
+   {{< tab "Authentification" >}}
 
    * **HTTP Basic Auth** : ajoutez des identifiants d'authentification basique HTTP.
    * **Digest Auth** : ajoutez des identifiants d'authentification Digest.
@@ -58,22 +58,22 @@ Après avoir choisi de créer un test `HTTP`, définissez la requête de votre t
 
   </br>Si vous le souhaitez, vous pouvez spécifier le domaine et la station de travail dans la section **Additional configuration**.  
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Paramètres de requête" %}}
+   {{< tab "Paramètres de requête" >}}
 
    * **Encode parameters** : ajoutez le nom et la valeur des paramètres de requête nécessitant un encodage.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Corps de requête" %}}
+   {{< tab "Corps de requête" >}}
 
    * **Body type** : sélectionnez le type du corps de requête (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded` ou `None`) que vous voulez ajouter à votre requête HTTP.
    * **Request body** : ajoutez le contenu du corps de votre requête HTTP. La taille du corps de la requête ne doit pas dépasser 50 Ko.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Certificat" %}}
+   {{< tab "Certificat" >}}
 
    * **Ignore server certificate error** : sélectionnez cette option pour que votre test HTTP poursuive son processus de connexion même lorsque des erreurs de validation du certificat SSL surviennent.
    * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client (`.crt`) et la clé privée associée (`.key`) au format `PEM`. Vous pouvez utiliser la bibliothèque `openssl` pour convertir vos certificats. Par exemple, vous pouvez convertir un certificat `PKCS12` en certificat et clé privée au format `PEM`.
@@ -83,22 +83,22 @@ Après avoir choisi de créer un test `HTTP`, définissez la requête de votre t
      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
      ```
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Proxy" %}}
+   {{< tab "Proxy" >}}
 
    * **Proxy URL** : indiquez l'URL du proxy que la requête HTTP doit utiliser (`http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
    * **Proxy header** : ajoutez les en-têtes à inclure dans la requête HTTP envoyée au proxy.
 
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Confidentialité" %}}
+   {{< tab "Confidentialité" >}}
 
    * **Do not save response body** : sélectionnez cette option pour désactiver l'enregistrement du corps de la réponse au moment de l'exécution. Cela peut être utile pour s'assurer qu'aucune donnée sensible ne figure dans les résultats de test. Utilisez cette option avec précaution, car elle peut rendre plus difficile le dépannage des problèmes. Pour découvrir d'autres recommandations de sécurité, consultez [Sécurité de la surveillance Synthetic][1].
 
 
 [1]: /fr/security/synthetics
-   {{% /tab %}}
+   {{< /tab >}}
 
    {{< /tabs >}}
 

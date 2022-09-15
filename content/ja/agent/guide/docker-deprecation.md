@@ -17,7 +17,7 @@ Datadog Agent のバージョン 7.27 以降の場合は、実行している環
 **注**: メトリクス名が変更されるため（たとえば `docker.*` から `containerd.*` へ）、既存のモニター、ダッシュボード、および SLO を更新する必要がある場合があります。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 [Helm チャート][1]で、コンテナのランタイムソケットへのパスを `criSocketPath` パラメーターで設定します。
 
 例:
@@ -27,8 +27,8 @@ criSocketPath:  /var/run/containerd/containerd.sock
 ```
 
 [1]: https://github.com/DataDog/helm-charts/blob/d8817b4401b75b1a064481da989c451633249ea9/charts/datadog/values.yaml#L262-L263
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 Docker ソケットへのすべての参照と、Docker ソケットのボリュームマウントを削除します。
 
@@ -58,7 +58,7 @@ volumes:
     name: var-run
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: https://github.com/Azure/AKS/releases/tag/2020-11-16

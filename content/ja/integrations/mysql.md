@@ -166,7 +166,7 @@ Query OK, 0 rows affected (0.00 sec)
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -300,8 +300,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: https://dev.mysql.com/doc/refman/5.7/en/performance-schema-quick-start.html
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 #### Docker
 
 コンテナで実行中の Agent に対してこのチェックを構成するには:
@@ -333,8 +333,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 [2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
 [4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -425,8 +425,8 @@ metadata:
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
 [5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -475,7 +475,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
 [3]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
 [4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

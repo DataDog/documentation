@@ -37,7 +37,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 3. プロファイラーを有効にします。
 
    {{< tabs >}}
-{{% tab "環境変数" %}}
+{{< tab "環境変数" >}}
 
 ```shell
 export DD_PROFILING_ENABLED=true
@@ -52,8 +52,8 @@ export DD_VERSION=1.0.3
 node -r dd-trace/init app.js
 ```
 
-{{% /tab %}}
-{{% tab "In code" %}}
+{{< /tab >}}
+{{< tab "In code" >}}
 
 ```js
 const tracer = require('dd-trace').init({
@@ -70,7 +70,7 @@ const tracer = require('dd-trace').init({
 const tracer = require('dd-trace/init')
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 4. Node.js アプリケーションの起動 1〜2 分後、[APM > Profiler ページ][4]にプロファイルが表示されます。
