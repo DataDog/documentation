@@ -19,13 +19,13 @@ To filter out other resources use the [API][8].
 
 ## AWS resource exclusion
 
-Use the [Datadog-AWS integration page][3] to control your metric collection. Select the AWS account and click on the **Metric Collection** tab. Under **Limit Metric Collection to Specific Resources** you can exclude metrics by [host tag][4], Lambda tag, or namespace:
+You can limit the AWS metrics collected for some services to specific resources. On the [Datadog-AWS integration page][3], select the AWS account and click on the **Metric Collection** tab. Under **Limit Metric Collection to Specific Resources** you can then exclude metrics for one or more of EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, and CloudWatch custom metrics.
 
 {{< img src="account_management/billing/aws-resource-exclusion.png" alt="The metric collection tab of an AWS account within the Datadog AWS integration page showing the option to limit metric collection to specific resources with a dropdown menu to select AWS service and a field to add tags in key:value format" >}}
 
-**Note**: Datadog does not charge for ELB metrics, as they can’t be filtered out.
+**Note**: Only EC2 (hosts), Lambda (active functions), and CloudWatch Custom Metrics (custom metrics) are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
 
-**Note**: Host resource exclusion settings apply to both EC2 and its attached EBS volumes. 
+**Note**: EC2 metrics resource exclusion settings apply to both EC2 and its attached EBS volumes. 
 
 When adding limits to existing AWS accounts within the integration page, the previously discovered instances could stay in the [Infrastructure List][5] up to 2 hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 
