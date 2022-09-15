@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Datadog has features to provide logs usage information, such as the [Log Estimated Usage dashboard][1], the [Plan and Usage][2] section in the app, and the available [logs usage metrics][3]. However, there might be situations where you want visibility into specific cost attribution data. For example, understanding the cost attribution to specific teams.
+Datadog provides logs usage information through the [Log Estimated Usage dashboard][1], the [Plan and Usage][2] section in the app, and the available [logs usage metrics][3]. However, there might be situations where you want visibility into specific cost attribution data. For example, understanding the cost attribution to specific teams.
 
-This guide uses that example to walk you through how to set up custom tags, generate custom metrics that use those tags, and create widgets for the custom metrics in a dashboard. The dashboard gives you an overview of your logs usage and costs broken down by teams.
+This guide uses that example to walk you through how to set up custom tags, generate custom metrics that use those tags, and create widgets in a dashboard for those metrics. The dashboard gives you an overview of your logs usage and costs broken down by teams.
 
 {{< img src="logs/faq/logs_cost_attribution/cost_attribution_dashboard.png" alt="A dashboard showing table widgets for usage and cost broken down by teams for ingestion, Sensitive Data Scanner, seven days indexing, and 15 days indexing. " style="width:85%" >}}
 
@@ -29,7 +29,7 @@ The first tag can be any object to which you want to attribute costs, such as de
 
 Then, create the following tags:
 
-- `retention_period` for indicating the number of days for which logs will be retained in Datadog indexes.
+- `retention_period` for indicating the number of days for which logs are retained in Datadog indexes.
 - `online_archives` for indicating whether logs have been routed to Online Archives or not.
 - `sds` for indicating whether logs have been scanned by the Sensitive Data Scanner or not.
 
@@ -71,7 +71,7 @@ Use a [String Builder Processor][6] to create a new `team` attribute for your lo
 
 <div class="alert alert-warning">Datadog recommends that you set up the `retention_period` tag even if your indexes all have the same retention period currently. This makes sure that if you start using multiple retention periods, all logs are tagged with its retention period.</div>
 
-The `retention_period`  tag is the number of days your logs are retained in Datadog indexes. Since indexing is charged based on the number of days that the logs are retained, use the `retention_period` tag to associate each log with its retention period.
+The `retention_period` tag is the number of days your logs are retained in Datadog indexes. Since indexing is charged based on the number of days that the logs are retained, use the `retention_period` tag to associate each log with its retention period.
 
 Datadog recommends the following way to configure the `retention_period` tag:
 
@@ -194,7 +194,7 @@ Datadog highly recommends automating this process by using the [Datadog API endp
 
 The `sds` tag indicates whether or not your logs have been scanned by the Sensitive Data Scanner. Use the `sds` tag to estimate the costs associated with the specific usage of Sensitive Data Scanner.
 
-For the Sensitive Data Scanner, billed usage is based on the volume of logs scanned, so it matches a scanning group, not  a scanning rule. Therefore, you need to create a proxy scanning rule in each scanning group, with a regex to match all logs, to ensure that all scanned logs are tagged.
+For the Sensitive Data Scanner, billed usage is based on the volume of logs scanned, so it matches a scanning group, not a scanning rule. Therefore, you need to create a proxy scanning rule in each scanning group, with a regex to match all logs, to ensure that all scanned logs are tagged.
 
 1. Go to the [Sensitive Data Scanner][10].
 2. In each scanning group, click **Add Scanning Rule**.
@@ -248,7 +248,7 @@ Datadog recommends that you configure the table widget for Log Ingestion in the 
 2. Select the **Table** widget.
 3. In the *Metrics* field, select the **bytes** count metric that you generated earlier to count the number of bytes ingested.
 4. Select the **sum by** field and add the `team` tag to show the usage in bytes by team. You can also add other tags for your different cost buckets, such as `host` to see usage by host.
-5. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for Log Ingestion`. If your contractual price per gigabyte changes, you will need to update the formula manually.
+5. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for Log Ingestion`. If your contractual price per gigabyte changes, you need to update the formula manually.
 6. Click **Save**.
 
 {{< img src="logs/faq/logs_cost_attribution/logs_ingestion_metric_widget.png" alt="The widget edit form showing the data filled in for log ingestion usage" style="width:75%" >}}
@@ -264,7 +264,7 @@ Datadog recommends that you configure the table widget for the Sensitive Data Sc
 3. In the *Metrics* field, select the **bytes** count metric that you generated earlier to count the number of bytes ingested.
 4. In the *from* field, enter **sds:true** to filter for only logs that have been scanned by the Sensitive Data Scanner.
 5. Select the **sum by** field and add the `team` tag  to show the usage in bytes by team. You can also add other tags for your different cost buckets.
-6. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for the Sensitive Data Scanner`. If your contractual price per gigabyte changes, you will need to update the formula manually.
+6. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for the Sensitive Data Scanner`. If your contractual price per gigabyte changes, you need to update the formula manually.
 7. Click **Save**.
 
 {{< img src="logs/faq/logs_cost_attribution/sds_metric_widget.png" alt="The widget edit form showing the data filled in for Sensitive Data Scanner logs usage" style="width:75%" >}}
@@ -284,9 +284,9 @@ Datadog recommends that you configure the table widget for Log Indexing in the f
 4. In the *from* field, add the following:  
       a. `datadog_index:*` to filter to only logs that have been routed to indexes. 
       b. `datadog_is_excluded:false` to filter to only logs that have not matched any exclusion filter.  
-      c. `retention_period:7` to filter to only logs that are retained for 7 days. This value will be different for each widget. You don’t need to add this tag if you have the same retention period for all your indexes and therefore did not set up this tag.
+      c. `retention_period:7` to filter to only logs that are retained for 7 days. This value is different for each widget. You don’t need to add this tag if you have the same retention period for all your indexes and therefore did not set up this tag.
 5. Select the **sum by** field, and add the `team` tag to show the usage in events, by team. You can also add other tags for your different cost buckets.
-6. Add the following formula to convert usage into costs: `Usage in millions of events` * `Unit cost for 7 days of retention`. If your contractual price per million of events changes, you will need to update the formula manually.
+6. Add the following formula to convert usage into costs: `Usage in millions of events` * `Unit cost for 7 days of retention`. If your contractual price per million of events changes, you need to update the formula manually.
 7. Click **Save**.
 
 {{< img src="logs/faq/logs_cost_attribution/indexing_metric_widget.png" alt="The widget edit form showing the data filled in for log indexing usage" style="width:75%" >}}
@@ -312,8 +312,8 @@ Based on that information, Datadog recommends that you configure the table widge
 4. In the *from* field, add the following:
 `datadog_index:*` to filter to only logs that have been routed to indexes.
 `online_archives:true` to filter to only logs that have also been routed to Online Archives.
-5. Select the **sum by** field and add the `team` tag to show the usage in events, by team. You can also add other tags for your different cost buckets.
-6. Add the following formula to convert usage into cost: `Usage in millions of events` * `Unit cost for Online Archives`. If your contractual price per million of events changes, you will need to update the formula manually.
+5. Select the **sum by** field and add the `team` tag to show the usage in events,by team. You can also add other tags for your different cost buckets.
+6. Add the following formula to convert usage into cost: `Usage in millions of events` * `Unit cost for Online Archives`. If your contractual price per million of events changes, you need to update the formula manually.
 7. Click **Save**.
 
 {{< img src="logs/faq/logs_cost_attribution/online_archives_metric_widget.png" alt="The widget edit form showing the data filled in for online archives usage" style="width:75%" >}}
