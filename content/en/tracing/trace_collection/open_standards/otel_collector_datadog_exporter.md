@@ -58,9 +58,6 @@ processors:
             enabled: true
       load:
       memory:
-        metrics:
-          system.memory.utilization:
-            enabled: true
       network:
       processes:
   # The prometheus receiver scrapes metrics needed for the OpenTelemetry Collector Dashboard.
@@ -357,7 +354,7 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
    # ...
    ```
 
-   In this case, we do not want to use the `hostmetrics` receiver because those metrics will be emitted by the Datadog Agent.
+   In this case, don't use the `hostmetrics` receiver because those metrics will be emitted by the Datadog Agent.
 
 
 ## Further Reading
