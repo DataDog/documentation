@@ -119,7 +119,7 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `session.type`               | 文字列 | セッションのタイプ (`user`)。                                              |
 | `session.is_active`          | boolean | セッションが現在アクティブであるかどうかを示します。セッションは、ユーザーがアプリケーションから移動したり、ブラウザウィンドウを閉じたりすると終了し、4 時間の活動または 15 分の非活動時間が経過すると失効します。                               |
 | `session.initial_view.url`   | 文字列 | セッションの初期ビューの URL。                                     |
-| `ssession.initial_view.name` | 文字列 | セッションの初期ビューの名前。                                    |
+| `session.initial_view.name` | 文字列 | セッションの初期ビューの名前。                                    |
 | `session.last_view.url`      | 文字列 | セッションの最後のビューの URL。                                        |
 | `session.last_view.name`     | 文字列 | セッションの最後のビューの名前。                                       |
 | `session.ip`                 | 文字列 | インテークの TCP 接続から抽出されたセッションの IP アドレス。 |
