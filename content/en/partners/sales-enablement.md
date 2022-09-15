@@ -97,6 +97,7 @@ In order to complete your quote, you need to learn the Datadog pricing basics.
 - [Customer plans][3] provides details about standard end-customer pricing options.
 - Finally, to understand discounts offered, check out the Partner Portal[4] pricing tab.
 
+---
 
 Once you go through the recommended training outlined above, you're ready 
 to lead a customer to an effective observability solution and close the sale for your organization.
