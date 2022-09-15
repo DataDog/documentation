@@ -1,7 +1,6 @@
 ---
 title: APM
 related_terms:
-    - Tracer
     - Check
 synonyms:
     - Tracing
