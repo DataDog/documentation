@@ -1,5 +1,4 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md
 description: React Native プロジェクトから RUM データを収集します。
@@ -223,6 +222,33 @@ await DdSdkReactNative.initialize(config);
 
 {{< /site-region >}}
 
+### 報告されたバージョンのオーバーライド
+
+デフォルトでは、SDK は `version` をアプリの商用バージョンとして報告します (例えば、"1.2.44")。
+
+Microsoft の Codepush のような OTA (Over The Air) アップデートプロバイダーを使用している場合、このバージョンをオーバーライドして、JavaScript コードの実行バージョンを表示することができます。
+
+推奨される方法は、`DdSdkReactNativeConfiguration`オブジェクトに `versionSuffix` を指定することです。
+
+```js
+const config = new DdSdkReactNativeConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    '<RUM_APPLICATION_ID>',
+    true,
+    true,
+    true
+);
+
+config.versionSuffix = 'codepush.3';
+```
+
+アプリの商用バージョンが "1.2.44" の場合、Datadog では "1.2.44-codepush.3" と報告され、バージョンとサフィックスの間にダッシュ (`-`) が自動的に追加されます。
+
+また、`version` フィールドを指定することで、バージョンを完全にオーバーライドすることもできます。ただし、ソースマップやその他のマッピングファイルのアップロード時に指定したものと一致させる必要があるため、正しく設定してください。
+
+バージョンフィールドの制限については、[タグドキュメント][15]を参照してください。
+
 ### ユーザーインタラクションの追跡
 
 上記のコード例のようにユーザーインタラクションの追跡が有効になっている場合、SDK は、タップを受け取ったコンポーネントから始まるコンポーネントの階層をトラバースし、`dd-action-name` プロパティを探します。見つかったら、報告されたアクションの名前として使用されます。
@@ -329,9 +355,9 @@ DdRum.startView('<view-key>', 'View Url', {}, Date.now());
 DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
 
 // RUM Actions を手動で追跡
-DdRum.addAction('TAP', 'button name', {}, Date.now());
+DdRum.addAction(RumActionType.TAP, 'button name', {}, Date.now());
 // 継続アクションの場合
-DdRum.startAction('TAP', 'button name', {}, Date.now());
+DdRum.startAction(RumActionType.TAP, 'button name', {}, Date.now());
 // 上記アクションの停止
 DdRum.stopAction({}, Date.now());
 
@@ -339,7 +365,7 @@ DdRum.stopAction({}, Date.now());
 DdRum.addTiming('<timing-name>');
 
 // RUM Errors を手動で追跡
-DdRum.addError('<message>', 'source', '<stacktrace>', {}, Date.now());
+DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 
 // RUM Resource を手動で追跡
 DdRum.startResource(
@@ -447,3 +473,4 @@ end
 [12]: https://docs.expo.dev/
 [13]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
+[15]: https://docs.datadoghq.com/ja/getting_started/tagging/#define-tags
