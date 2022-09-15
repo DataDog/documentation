@@ -141,7 +141,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 **Notes:** 
   - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
-  - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][7] for details.
+  - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
 
 ### Alert grouping
 
@@ -150,7 +150,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
 Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][3] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
 
 ## Set alert conditions
 
@@ -160,7 +160,7 @@ Trigger when the metric is `above`, `above or equal to`, `below`, or `below or e
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][4].
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5].
 
 | Option                     | Description                                                                     |
 |----------------------------|---------------------------------------------------------------------------------|
@@ -212,11 +212,11 @@ For example, a monitor that evaluates over the last `2h` is split in 12 buckets 
 
 #### Other options
 
-For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][5] page.
+For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][6] page.
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 ## Further Reading
 
@@ -224,8 +224,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /dashboards/querying/#advanced-graphing
-[3]: /monitors/notify/?tab=is_alert#tag-variables
-[4]: /monitors/guide/recovery-thresholds/
-[5]: /monitors/create/configuration/#advanced-alert-conditions
-[6]: /monitors/notify/
-[7]: /monitors/guide/as-count-in-monitor-evaluations/
+[3]: /monitors/guide/as-count-in-monitor-evaluations/
+[4]: /monitors/notify/?tab=is_alert#tag-variables
+[5]: /monitors/guide/recovery-thresholds/
+[6]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/notify/
