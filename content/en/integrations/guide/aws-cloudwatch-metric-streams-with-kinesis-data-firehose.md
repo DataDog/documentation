@@ -147,7 +147,7 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 3. Delete the backup S3 bucket for failed messages linked to the Firehose.
 4. Delete the IAM roles associated with the stream and all other resources that were created while setting up the stream.
 
-Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS integration page][1] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
+Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS integration page][6] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
 ## Troubleshooting
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][5].
@@ -160,3 +160,4 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 [3]: https://aws.amazon.com/cloudwatch/pricing/
 [4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
 [5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
+[6]: https://app.datadoghq.com/integrations/amazon-web-services
