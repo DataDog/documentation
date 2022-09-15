@@ -19,11 +19,17 @@ For general comprehensive tracing setup documentation for Python, see [Tracing P
 
 If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][3] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][4]:
 
-{{< code-block >}}
+{{< code-block lang="bash" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 {{< /code-block >}}
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [the site that you use][5].
+
+If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][6].
+
+Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][7], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+
+{{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
 ## Install a Python application
 
@@ -51,3 +57,5 @@ To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE`
 [3]: https://app.datadoghq.com/account/settings#agent/overview
 [4]: /account_management/api-app-keys/
 [5]: /getting_started/site/
+[6]: https://ddtrace.readthedocs.io/en/stable/versioning.html
+[7]: https://app.datadoghq.com/event/explorer
