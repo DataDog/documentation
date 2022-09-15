@@ -1,7 +1,12 @@
 ---
-title: コンテナでのテスト
 kind: documentation
+title: コンテナでのテスト
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+{{< /site-region >}}
+
 ビルド内で自分で起動したコンテナ内でテストを実行する場合 (たとえば、[`docker run`][1] または [`docker-compose`][2] を使用)、使用している CI プロバイダーに応じて以下の環境変数をコンテナに転送します。これにより、Datadog トレーサーによるビルド情報の自動検出が可能になります。
 
 さらに、[言語別のテストインスツルメンテーション手順][3]に記載されているとおり、トレーサーの構成に必要な環境変数で渡す必要があります (`DD_SERVICE`、`DD_ENV`、およびコンテナ内からアクセス可能な、有効な `DD_TRACE_AGENT_URL` など)。
@@ -19,6 +24,10 @@ kind: documentation
 - `APPVEYOR_REPO_COMMIT`
 - `APPVEYOR_REPO_TAG_NAME`
 - `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH`
+- `APPVEYOR_REPO_COMMIT_MESSAGE`
+- `APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED`
+- `APPVEYOR_REPO_COMMIT_AUTHOR`
+- `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`
 
 [AppVeyor により提供されたビルド環境変数の完全リスト][1]
 
@@ -34,8 +43,9 @@ kind: documentation
 - `BUILD_REPOSITORY_URI`
 - `BUILD_SOURCEBRANCH`
 - `BUILD_SOURCEVERSION`
-- `BUILD_SOURCEBRANCH`
-- `BUILD_SOURCEVERSION`
+- `BUILD_SOURCEVERSIONMESSAGE`
+- `BUILD_REQUESTEDFORID`
+- `BUILD_REQUESTEDFOREMAIL`
 - `SYSTEM_TEAMFOUNDATIONSERVERURI`
 - `SYSTEM_TEAMPROJECT`
 - `SYSTEM_JOBID`
@@ -43,6 +53,8 @@ kind: documentation
 - `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI`
 - `SYSTEM_PULLREQUEST_SOURCEBRANCH`
 - `SYSTEM_PULLREQUEST_SOURCECOMMITID`
+- `SYSTEM_STAGEDISPLAYNAME`
+- `SYSTEM_JOBDISPLAYNAME`
 
 [Azure Pipelines により提供されたビルド環境変数の完全リスト][1]
 
@@ -78,6 +90,11 @@ kind: documentation
 - `BUILDKITE_COMMIT`
 - `BUILDKITE_BRANCH`
 - `BUILDKITE_TAG`
+- `BUILDKITE_MESSAGE`
+- `BUILDKITE_BUILD_AUTHOR`
+- `BUILDKITE_BUILD_AUTHOR_EMAIL`
+- `BUILDKITE_BUILD_CREATOR`
+- `BUILDKITE_BUILD_CREATOR_EMAIL`
 
 [Buildkite により提供されたビルド環境変数の完全リスト][1]
 
@@ -96,6 +113,7 @@ kind: documentation
 - `CIRCLE_SHA1`
 - `CIRCLE_BRANCH`
 - `CIRCLE_TAG`
+- `CIRCLE_JOB`
 
 [CircleCI により提供されたビルド環境変数の完全リスト][1]
 
@@ -105,8 +123,10 @@ kind: documentation
 {{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
+- `GITHUB_SERVER_URL`
 - `GITHUB_RUN_ID`
 - `GITHUB_RUN_NUMBER`
+- `GITHUB_RUN_ATTEMPT`
 - `GITHUB_WORKFLOW`
 - `GITHUB_WORKSPACE`
 - `GITHUB_REPOSITORY`
@@ -127,11 +147,17 @@ kind: documentation
 - `CI_PIPELINE_IID`
 - `CI_PROJECT_PATH`
 - `CI_PROJECT_DIR`
+- `CI_JOB_STAGE`
+- `CI_JOB_NAME`
 - `CI_JOB_URL`
 - `CI_REPOSITORY_URL`
 - `CI_COMMIT_SHA`
+- `CI_COMMIT_REF_NAME`
 - `CI_COMMIT_BRANCH`
 - `CI_COMMIT_TAG`
+- `CI_COMMIT_AUTHOR`
+- `CI_COMMIT_MESSAGE`
+- `CI_COMMIT_TIMESTAMP`
 
 [GitLab CI により提供されたビルド環境変数の完全リスト][1]
 
@@ -156,6 +182,23 @@ kind: documentation
 
 [1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
 {{% /tab %}}
+
+{{% tab "TeamCity" %}}
+
+- `TEAMCITY_VERSION`
+- `BUILD_VCS_NUMBER`
+- `BUILD_VCS_URL`
+- `BUILD_ID`
+- `BUILD_NUMBER`
+- `SERVER_URL`
+- `BUILD_ID`
+- `BUILD_CHECKOUTDIR`
+
+[TeamCity により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
+{{% /tab %}}
 {{% tab "Travis CI" %}}
 
 - `TRAVIS`
@@ -170,11 +213,37 @@ kind: documentation
 - `TRAVIS_TAG`
 - `TRAVIS_PULL_REQUEST_SLUG`
 - `TRAVIS_PULL_REQUEST_BRANCH`
+- `TRAVIS_COMMIT_MESSAGE`
 
 [Travis CI により提供されたビルド環境変数の完全リスト][1]
 
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+{{% /tab %}}
+{{% tab "Bitrise" %}}
+
+- `BITRISE_BUILD_SLUG`
+- `BITRISE_TRIGGERED_WORKFLOW_ID`
+- `BITRISE_BUILD_NUMBER`
+- `BITRISE_BUILD_URL`
+- `BITRISE_SOURCE_DIR`
+- `GIT_REPOSITORY_URL`
+- `BITRISE_GIT_COMMIT`
+- `GIT_CLONE_COMMIT_HASH`
+- `BITRISEIO_GIT_BRANCH_DEST`
+- `BITRISE_GIT_BRANCH`
+- `BITRISE_GIT_TAG`
+- `BITRISE_GIT_MESSAGE`
+- `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
+- `GIT_CLONE_COMMIT_MESSAGE_BODY`
+- `GIT_CLONE_COMMIT_AUTHOR_NAME`
+- `GIT_CLONE_COMMIT_AUTHOR_EMAIL`
+- `GIT_CLONE_COMMIT_COMMITER_NAME`
+
+[Bitrise により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://devcenter.bitrise.io/en/references/available-environment-variables.html
 {{% /tab %}}
 {{< /tabs >}}
 

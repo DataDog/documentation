@@ -8,7 +8,7 @@ further_reading:
 - link: /tracing/trace_collection/open_standards/
   tag: ドキュメント
   text: OpenTelemetry トレースを Datadog へ送信
-- link: https://opentelemetry.io/docs/collector/
+- link: tracing/glossary/
   tag: OpenTelemetry
   text: Collectorドキュメント
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
@@ -26,7 +26,7 @@ OpenTelemetry 言語の SDK ログおよびトレースの Datadog 内での接�
 
 1. OpenTelemetry `TraceId` および `SpanId` プロパティは、Datadog のルールセットと異なります。そのため、`TraceId` と `SpanId` を OpenTelemetry の形式 ([符号なし 128bit 整数および符号なし 64bit 整数は、それぞれ 32 Hex 文字列および 16 Hex 文字列 (小文字)][2]) を Datadog 形式 ([符号なし 64bit 整数][3]) に変換する必要があります。
 
-2. OpenTelemetry 言語の SDK には、Datadog SDK で提供されるトレースとログ間の自動相関がないため、前述のように変換済みの `TraceId` および `SpanId` をそれぞれ `dd.trace_id`、`dd.span_id` とマークしたログ属性として追加するプロセッサを使用して、特定のロギングモジュールまたはライブラリに手動でパッチを適用する必要があります。
+2. 自動挿入
 
 3. トレースとログの相関が機能するには、言語レベルログが Datadog 属性に変換される必要があるため、ログが JSON として送信されていることを確認します。
 
@@ -360,7 +360,7 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 
 {{< /tabs >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

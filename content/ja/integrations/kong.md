@@ -3,6 +3,7 @@ app_id: kong
 app_uuid: 41e7a8cb-07b6-46cc-a087-53e87736b5c7
 assets:
   dashboards:
+    Kong API: assets/dashboards/kong_api.json
     Kong Overview: assets/dashboards/kong_overview.json
     Kong Overview OpenMetrics: assets/dashboards/kong_overview_openmetrics.json
   integration:
