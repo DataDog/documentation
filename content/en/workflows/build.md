@@ -82,26 +82,12 @@ Context variables come in three varieties:
 - A small collection of standard **workflow variables** are present in all workflows. 
 - **Step output variables** are built into some steps and allow you to pass data from that step to a subsequent step in your workflow.
 
-The **Context Variables** tab for each step provides a map of all the context variables available to that step.
+The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
 {{< img src="workflows/context-variables.png" alt="The Context Variables tab" >}}
 
-
-Share data between different steps of your workflow
-
-Pass 
-adds power / usefulness
-use values contained in your trigger as values for some of the configurable fields of theyour step
-For example, youwe may want to pass a value from the trigger as a  payload value to the Invoke lambda function action. 
-
-Steps can pass down their output values to subsequentdownstream steps
-
-syntax
-
-
-
-
-
+Access a context variable by enclosing it in double braces (`{{`). You can use a context variable in fields marked with the `{{` notation.
+{{< img src="workflows/use-context-variables.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true"  >}}
 
 ### Workflow variables
 ### Trigger variables
