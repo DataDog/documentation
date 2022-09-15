@@ -504,6 +504,25 @@
       "description": "Delete a tag configuration returns \"No Content\" response"
     }
   ],
+  "ListTagConfigurations": [
+    {
+      "group": "metrics",
+      "suffix": "_265033704",
+      "description": "Get a list of metrics with a tag filter returns \"Success\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2739018321",
+      "description": "Get a list of metrics with configured filter returns \"Success\" response"
+    }
+  ],
+  "ListActiveMetricConfigurations": [
+    {
+      "group": "metrics",
+      "suffix": "",
+      "description": "List active tags and aggregations returns \"Success\" response"
+    }
+  ],
   "ListVolumesByMetricName": [
     {
       "group": "metrics",
@@ -518,18 +537,6 @@
       "description": "List tag configuration by name returns \"Success\" response"
     }
   ],
-  "ListTagConfigurations": [
-    {
-      "group": "metrics",
-      "suffix": "_1799362914",
-      "description": "List tag configurations with a tag filter returns \"Success\" response"
-    },
-    {
-      "group": "metrics",
-      "suffix": "_103226315",
-      "description": "List tag configurations with configured filter returns \"Success\" response"
-    }
-  ],
   "ListTagsByMetricName": [
     {
       "group": "metrics",
@@ -542,6 +549,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Submit metrics returns \"Payload accepted\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1762007427",
+      "description": "Submit metrics with compression returns \"Payload accepted\" response"
     }
   ],
   "EstimateMetricsOutputSeries": [

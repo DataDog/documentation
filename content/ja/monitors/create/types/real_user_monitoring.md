@@ -24,9 +24,9 @@ title: リアルユーザーモニタリングモニター
 
 ## RUM モニターの作成
 
-Datadog で リアルユーザーモニタリングモニターを作成するには、まず [**Monitors** --> **New Monitor** --> **Real User Monitoring**][2] の順に移動します。
+Datadog で RUM モニターを作成するには、まず [**Monitors** --> **New Monitor** --> **Real User Monitoring**][2] の順に移動します。
 
-<div class="alert alert-info"><strong>注</strong>: アカウント当たり上限 1000 件の RUM モニターがデフォルトで設定されています。この制限を解除するには、<a href="/help/">サポートまでお問い合わせ</a>ください。</div>
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 RUM モニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
 ### 検索クエリを定義する
 

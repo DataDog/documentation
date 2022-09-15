@@ -44,4 +44,4 @@ Agent が実行されているホストは引き続き表示され、課金対�
 [5]: /ja/infrastructure/
 [6]: /ja/help/
 [7]: mailto:success@datadoghq.com
-[8]: https://docs.datadoghq.com/ja/api/latest/aws-integration/#set-an-aws-tag-filter
+[8]: /ja/api/latest/aws-integration/#set-an-aws-tag-filter

@@ -6,6 +6,7 @@ import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { getQueryParameterByName } from './helpers/browser';
+import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -211,8 +212,9 @@ function closeNav(){
 
 function updateSidebar(event) {
     closeNav();
+    closeMobileNav();
     getPathElement(event);
-
+    setMobileNav();
     const isLi = event.target.nodeName === 'LI';
 
     if (isLi) {
@@ -369,6 +371,7 @@ window.addEventListener('click', (event) => {
 
 window.onload = function () {
     getPathElement();
+    setMobileNav();
 };
 
 // remove branch name from path

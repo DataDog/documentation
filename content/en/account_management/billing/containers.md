@@ -9,7 +9,7 @@ Containers are supported in Pro and Enterprise plans. Depending on your plan, yo
 
 Additional containers are billed at an [additional cost][1] per container per hour. In addition, you can purchase prepaid containers. Contact [Sales][2] or your [Customer Success][3] Manager to discuss containers for your account.
 
-**Note**: The Agent is monitored by default.
+**Note**: The Agent is monitored by default. This counts towards your billing.
 
 ### Kubernetes
 

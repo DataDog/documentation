@@ -14,7 +14,7 @@ further_reading:
 - link: /logs/explorer/#visualize
   tag: Documentation
   text: ログ分析の実行
-- link: /tracing/connect_logs_and_traces/java/
+- link: /tracing/other_telemetry/connect_logs_and_traces/java/
   tag: Documentation
   text: ログとトレースの接続
 - link: /logs/faq/log-collection-troubleshooting-guide/
@@ -266,7 +266,7 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 
 ## Datadog Agent の構成
 
-Agent の `conf.d/` ディレクトリに、以下の内容の `java.yaml` ファイルを作成します。
+Agent の `conf.d/` ディレクトリに、以下の内容の `java.d/conf.yaml` ファイルを作成します。
 
 ```yaml
 #ログセクション
@@ -517,7 +517,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /ja/logs/log_configuration/parsing
-[3]: /ja/tracing/connect_logs_and_traces/java/
+[3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: https://github.com/logstash/logstash-logback-encoder
 [5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [6]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
