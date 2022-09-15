@@ -165,7 +165,7 @@ function getPathElement(event = null) {
     if (path.includes('integrations/observability_pipelines/integrate_vector_with_datadog')) {
         const integrationsEl = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
         sideNavPathElement = integrationsEl.nextElementSibling.querySelector(
-            '[data-path^="integrations/observability_pipelines/integrate_vector_with_datadog"]'
+            '[data-path*="integrations/observability_pipelines/integrate_vector_with_datadog"]'
         );
         mobileNavPathElement = sideNavPathElement;
     }
