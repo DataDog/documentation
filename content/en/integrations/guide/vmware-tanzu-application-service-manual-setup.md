@@ -43,7 +43,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
 
       Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
 
-      **Important**: Your regular buildpack must be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
+      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
 
 3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
 
@@ -66,7 +66,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it must be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
+      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
 
 ### Meta-Buildpack **(deprecated)**
 
@@ -255,7 +255,7 @@ This environment variable is a JSON object containing the Autodiscovery configur
   1. Configurations for services bound to your application, whether they be user-provided or from a service broker.
   2. Configurations for services running inside your application, for example, a web-server.
 
-The JSON object is a dictionary associating a service name to its Autodiscovery template:
+The JSON object should be a dictionary associating a service name to its Autodiscovery template:
 ```
 {
     "<SERVICE_NAME>": {
@@ -267,7 +267,7 @@ The JSON object is a dictionary associating a service name to its Autodiscovery 
 }
 ```
 
-For services bound to the application, the `<SERVICE_NAME>` must be the name of the service as it appears in the `cf services` command output. For services running inside the application, the `<SERVICE_NAME>` can be anything.  
+For services bound to the application, the `<SERVICE_NAME>` should be the name of the service as it appears in the `cf services` command output. For services running inside the application, the `<SERVICE_NAME>` can be anything.  
 The `variables` key is used only for bound services to resolve template variables inside the configuration template, and must contain the JSON path of the desired value for the `VCAP_SERVICES` environment variable. You can inspect this with command `cf env <APPLICATION_NAME>`.
 
 **Note:** The Datadog Cluster Agent is only able to resolve credentials of services directly available in the `VCAP_SERVICES` environment variable for Autodiscovery.
@@ -338,7 +338,7 @@ This dictionary contains a JSONPath object indicating where to find the variable
 
 #### Improved tagging for application containers and process discovery
 
-Once the two releases are linked, the Datadog Cluster Agent automatically provides cluster-level metadata, which the node Agents attach as tags to the data from their corresponding Cloud Foundry application containers.
+Once the two releases are linked, the Datadog Cluster Agent automatically provides cluster-level metadata, which the node Agents attach as tags to their corresponding Cloud Foundry application containers.
 
 ### Deploy the Datadog Firehose Nozzle
 
