@@ -3,25 +3,6 @@ title: Build Workflows
 kind: documentation
 disable_toc: false
 ---
-<!--
-- Create Workflow
-  - P1 (In dev) Build Workflows with OOTB Templates 
-  - P1 Build Workflows through Workflow Builder 
-  - P3 Build Workflows in JSON 
-  - P1 Inputs, outputs and context variables (Or Passing data between actions) 
-- P2 Edit Workflows 
-- P2 Delete Workflows 
-- Triggering your Workflows
-  - P1 Manual 
-  - P1 Webhook 
-  - (In dev) P1 Datadog Monitors 
-  - (In dev) P1 Schedule 
-  - (In dev) P1 Datadog Dashboard 
-- Fallback on Errors
-  - P2 Set Action retries 
-  - P2 Set Fallback Actions 
-  - P2 Set Fallback Workflows 
--->
 
 To build a workflow, navigate to the [Workflows page][1] under **Integrations**. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed. Hover over a workflow for the options to delete or clone the workflow. Toggle **My workflows** if you want to see only workflows that you crated. 
 
@@ -33,7 +14,7 @@ To create a workflow, click **New workflow**, enter a name for the workflow, and
 
 1. Click an integration in the catalog pane and drag the desired step onto the workflow canvas. You can also search for a step using the search bar.
 {{< img src="workflows/add-step.mp4" alt="Drag a step onto the workflow canvas" video="true"  >}}
-1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Passing data between steps](#passing-data-between-steps)(#inputs-outputs-and-context-variables).
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Using context variables](#using-context-variables)(#inputs-outputs-and-context-variables).
 1. After you're done configuring the step, drag another step onto the workflow canvas to continue building out your workflow, or save the workflow if you're done.
 
 You can edit a step in the workflow at any time by clicking on it.
@@ -90,13 +71,44 @@ An example of a workflow with a single step that sends a message to a Slack chan
 }
 {{< /code-block >}}
 
-## Passing data between steps
-
-Some steps create outputs that are available to subsequent steps in a workflow.
-
-Inputs, outputs, and context variables
-
 ## Trigger a workflow
+
+## Using context variables
+
+Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data that comes from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
+
+Context variables come in three varieties:
+- **Trigger variables** are passed into the workflow by the triggering event.
+- A small collection of standard **workflow variables** are present in all workflows. 
+- **Step output variables** are built into some steps and allow you to pass data from that step to a subsequent step in your workflow.
+
+The **Context Variables** tab for each step provides a map of all the context variables available to that step.
+
+{{< img src="workflows/context-variables.png" alt="The Context Variables tab" >}}
+
+
+Share data between different steps of your workflow
+
+Pass 
+adds power / usefulness
+use values contained in your trigger as values for some of the configurable fields of theyour step
+For example, youwe may want to pass a value from the trigger as a  payload value to the Invoke lambda function action. 
+
+Steps can pass down their output values to subsequentdownstream steps
+
+syntax
+
+
+
+
+
+
+### Workflow variables
+### Trigger variables
+
+### Step output variables
+
+Some steps create outputs that are available to subsequent steps in a workflow. In addition to outputs, workflows You can access this data using context variables.
 
 ## Fallback on errors
 
