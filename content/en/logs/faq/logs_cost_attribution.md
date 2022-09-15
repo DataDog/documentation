@@ -17,7 +17,9 @@ further_reading:
 
 Datadog has features to provide logs usage information, such as the [Log Estimated Usage dashboard][1], the [Plan and Usage][2] section in the app, and the available [logs usage metrics][3]. However, there might be situations where you want visibility into specific cost attribution data. For example, understanding the cost attribution to specific teams.
 
-This guide uses that example to walk you through how to set up custom tags, generate custom metrics that use those tags, and create widgets for the custom metrics in a dashboard. 
+This guide uses that example to walk you through how to set up custom tags, generate custom metrics that use those tags, and create widgets for the custom metrics in a dashboard. The dashboard gives you an overview of your logs usage and costs broken down by teams.
+
+{{< img src="logs/faq/logs_cost_attribution/cost_attribution_dashboard.png" alt="A dashboard showing table widgets for usage and cost broken down by teams for ingestion, Sensitive Data Scanner, seven days indexing, and 15 days indexing. " style="width:85%" >}}
 
 ## Configure custom tags
 
@@ -35,11 +37,13 @@ Then, create the following tags:
 
 Datadog recommends that you use one of these [tagging methods][4] to configure the tag **before ingestion**.
 
-However, if it is necessary to configure the tag **during ingestion**, use processors and remappers to create a new `team` attribute and then remap it to a tag, or directly remap it from another attribute that you are using for logs cost attribution. Create the processors and remappers in the pipelines that filter your logs by teams. If you don’t have these pipelines, create pipelines to filter logs based on the different teams first.
+However, if it is necessary to configure the tag during ingestion, use processors and remappers to create a new `team` attribute and then remap it to a tag, or directly remap it from another attribute that you are using for logs cost attribution. You can use this process to create any number of cost attribution dimensions to break down your log usage.
+
+Create the processors and remappers in the pipelines that filter your logs by teams. If you don’t have these pipelines, create [new pipelines][5] to filter logs based on the different teams first. Position these new pipelines after the other pipelines that the logs go through to accommodate any tags or attributes that are created in those pipelines.
 
 #### Create a new `team` attribute
 
-Use a [String Builder Processor][5] to create a new `team` attribute for your logs.
+Use a [String Builder Processor][6] to create a new `team` attribute for your logs.
 
 1. Navigate to the pipeline, click **Add processor**.
 2. Select **String Builder Processor** for the processor type.
@@ -47,7 +51,7 @@ Use a [String Builder Processor][5] to create a new `team` attribute for your lo
 4. Enter **team** in the *Set the target attribute path* field. If you are breaking down your logs usage by a different attribute (for example, project, region, so on), then enter in the relevant attribute name.
 5. Enter the team name in the *Set the target attribute value* field. For example, if you enter “service_a”, then `team:service_a` is added as an attribute.
 6. Click **Create**.
-7. Add String Builder Processors to the other pipelines filtering by teams or by the attribute you are using.
+7. Add a String Builder Processor to each pipeline that is filtering logs to a different team or the attribute that you are using for cost attribution
 
 #### Create a remapper to convert the `team` attribute to a tag
 
@@ -78,7 +82,7 @@ Datadog recommends the following way to configure the `retention_period` tag:
 
 #### Create a new pipeline for adding custom tags
 
-1. Go to [Logs Pipelines][6]. 
+1. Go to [Logs Pipelines][7]. 
 2. Click **Add a new pipeline**. 
 3. Enter `*` for the **Filter** field to make sure all logs go through the pipeline.
 4. Enter a name and description for the pipeline. 
@@ -90,7 +94,7 @@ Also use this pipeline when you create the category processors and remappers for
 
 #### Create a new `index_name` attribute
 
-Use a [Category Processor][7] to create a new `index_name` attribute for identifying the index to which the logs are routed.
+Use a [Category Processor][8] to create a new `index_name` attribute for identifying the index to which the logs are routed.
 
 1. Navigate to the new pipeline, click **Add processor**.
 2. Select **Category Processor** for the processor type.
@@ -109,7 +113,7 @@ Then, in the *Populate category* section:
 
 #### Create a new `retention_period` attribute
 
-Use a [Category Processor][7] to create a new `retention_period` attribute to associate the index with its retention period.
+Use a [Category Processor][8] to create a new `retention_period` attribute to associate the index with its retention period.
 
 1. Navigate to the pipeline again, click **Add processor**.
 2. Select **Category Processor** for the processor type.
@@ -149,7 +153,7 @@ Datadog recommends the following way to configure the `online_archive` tag:
 
 #### Create an `online_archives` attribute
 
-Use a [Category Processor][7] to create a new `online_archives` attribute to indicate whether or not the associated index has Online Archives enabled.
+Use a [Category Processor][8] to create a new `online_archives` attribute to indicate whether or not the associated index has Online Archives enabled.
 
 1. Navigate to the pipeline previously created, click **Add processor**.
 2. Select **Category Processor** for the processor type.
@@ -178,9 +182,11 @@ Use a [Category Processor][7] to create a new `online_archives` attribute to ind
 7. Enable **Override on conflict**.
 8. Click **Create**.
 
-**The order of categories in a Category Processor is important**. The attribute is assigned the value of the first category for which the log matches the matching query, with the same logic as the indexes. For this reason, make sure that the matching queries and the order of the index Category Processor are the same as the actual order of the indexes, and that the category `true` is always checked before `false` in the Online Archives Category Processor. 
+<div class="alert alert-info"> The order of categories in a Category Processor is important. The attribute is assigned the value of the first category for which the log matches the matching query, with the same logic as the indexes. For this reason, make sure that the matching queries and the order of the index Category Processor are in the same as the actual order of the indexes, and that the category `true` is always checked before `false` in the Online Archives Category Processor.<br><br>
+If the index configurations are changed, you need to update the processor configuration to reflect the change.</div>
 
-<div class="alert alert-warning">Datadog highly recommends automating this process using the <a href="https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#category-processor">Datadog API endpoints</a> to automatically retrieve and update the configuration.</div>
+
+Datadog highly recommends automating this process by using the [Datadog API endpoints][9] to automatically retrieve and update the configuration.
 
 ### Create a `sds` tag
 
@@ -190,7 +196,7 @@ The `sds` tag indicates whether or not your logs have been scanned by the Sensit
 
 For the Sensitive Data Scanner, billed usage is based on the volume of logs scanned, so it matches a scanning group, not  a scanning rule. Therefore, you need to create a proxy scanning rule in each scanning group, with a regex to match all logs, to ensure that all scanned logs are tagged.
 
-1. Go to the [Sensitive Data Scanner][8].
+1. Go to the [Sensitive Data Scanner][10].
 2. In each scanning group, click **Add Scanning Rule**.
 3. Enter **.** in the *Define Regex to match* field to match all logs.
 4. Select **Entire Event** in the *Scan the entire event or a portion of it* field.
@@ -214,9 +220,9 @@ When setting up the custom metrics, the tags in the `group by` field are the dim
 - `datadog_is_excluded` indicates whether the log is rejected by an exclusion filter in the routed index.
 - All the custom tags you have configured above (`team`, `retention_period`, `online_archives`, and `sds`).
 
-See [Generate a log-based metric][9] for instructions on generating the metrics. 
+See [Generate a log-based metric][11] for instructions on generating the metrics. 
 
-<div class="alert alert-warning">It is crucial that you ensure all relevant tags are included in the metric’s dimensions because updating a metric’s configuration (such as changing the query filters, dimensions, and so on) is not retroactively applied to logs that have already been ingested</div>
+<div class="alert alert-info">It is crucial that you ensure all relevant tags are included in the metric’s dimensions because updating a metric’s configuration (such as changing the query filters, dimensions, and so on) is not retroactively applied to logs that have already been ingested</div>
 
 {{< img src="logs/faq/logs_cost_attribution/bytes_injected_metric.png" alt="The new metric form showing logs.estimated.usage.ingested_bytes as the metric name and the group by field with the tags mentioned" style="width:75%" >}}
 
@@ -226,7 +232,7 @@ See [Generate a log-based metric][9] for instructions on generating the metrics.
 
 There are several ways to use the generated custom log metrics in Datadog. The metrics can be displayed in dashboards, alerted on, used in Notebooks, queried in the Metrics Explorer, and more.
 
-Datadog recommends that you [create a dashboard][10] with a [table widget][11] for each of the following products to track usage for:
+Datadog recommends that you [create a dashboard][12] with a [table widget][13] for each of the following products to track usage for:
 
 - Log Ingestion
 - Sensitive Data Scanner for logs
@@ -335,10 +341,12 @@ You can aggregate all products into a single widget to get visibility into the t
 [2]: https://app.datadoghq.com/billing/usage
 [3]: /logs/log_configuration/logs_to_metrics/#logs-usage-metrics
 [4]: /getting_started/tagging/#tagging-methods
-[5]: /logs/log_configuration/processors/?tab=ui#string-builder-processor
-[6]: https://app.datadoghq.com/logs/pipelines
-[7]: /logs/log_configuration/processors/?tab=ui#category-processor
-[8]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
-[9]: /logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric
-[10]: /dashboards/#new-dashboard
-[11]: /dashboards/widgets/table/
+[5]: /logs/log_configuration/pipelines/?tab=source#create-a-pipeline
+[6]: /logs/log_configuration/processors/?tab=ui#string-builder-processor
+[7]: https://app.datadoghq.com/logs/pipelines
+[8]: /logs/log_configuration/processors/?tab=ui#category-processor
+[9]: /logs/log_configuration/processors/?tab=api#category-processor
+[10]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
+[11]: /logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric
+[12]: /dashboards/#new-dashboard
+[13]: /dashboards/widgets/table/
