@@ -21,7 +21,7 @@ OpenTelemetry のインスツルメンテーションのドキュメントを読
 ## Datadog Agent で OTLP の取り込みを有効にする
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 OTLP の取り込みはデフォルトではオフになっており、`datadog.yaml` ファイルの構成を更新するか、環境変数を設定することでオンにすることが可能です。以下の `datadog.yaml` 構成は、デフォルトのポートでエンドポイントを有効にします。
 
@@ -63,8 +63,8 @@ experimental:
 ```
 
 [1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 1. [Datadog Docker Agent のセットアップ][1]に従ってください。
 
@@ -73,8 +73,8 @@ experimental:
    - HTTP の場合: `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` とポート `4318`
 
 [1]: /ja/agent/docker/
-{{< /tab >}}
-{{< tab "Kubernetes (Daemonset)" >}}
+{{% /tab %}}
+{{% tab "Kubernetes (Daemonset)" %}}
 
 1. [Kubernetes Agent のセットアップ][1]に従ってください。
 
@@ -112,9 +112,9 @@ experimental:
    ```
 
 [1]: /ja/agent/kubernetes/?tab=daemonset
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes (Helm) - values.yaml" >}}
+{{% tab "Kubernetes (Helm) - values.yaml" %}}
 
 1. [Kubernetes Agent のセットアップ][1]に従ってください。
 
@@ -142,9 +142,9 @@ experimental:
 
 
 [1]: /ja/agent/kubernetes/?tab=helm
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes (Helm) - set" >}}
+{{% tab "Kubernetes (Helm) - set" %}}
 
 1. [Kubernetes Agent のセットアップ][1]に従ってください。
 
@@ -162,7 +162,7 @@ experimental:
 これは、各プロトコルをデフォルトのポート (OTLP/gRPC は `4317`、OTLP/HTTP は `4318`) で有効にするものです。
 
 [1]: /ja/agent/kubernetes/?tab=helm
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Datadog Agent でサポートされている環境変数や設定は、他にも多数あります。それらすべての概要を知るには、[構成テンプレート][5]を参照してください。
@@ -170,7 +170,7 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
 ## アプリケーションから Datadog Agent に OTLP トレースを送信する
 
 {{< tabs >}}
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 1. アプリケーションコンテナでは、環境変数 `OTEL_EXPORTER_OTLP_ENDPOINT` に、Datadog Agent コンテナを指すように設定します。例:
 
    ```
@@ -180,9 +180,9 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
 2. 両方のコンテナが同じブリッジネットワークに定義されている必要がありますが、これは Docker Compose を使用している場合に自動的に処理されます。そうでない場合は、[Docker アプリケーションのトレース][1]の Docker の例に従って、正しいポートでブリッジネットワークをセットアップしてください。
 
 [1]: /ja/agent/docker/apm/#docker-network
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes" >}}
+{{% tab "Kubernetes" %}}
 1. アプリケーションデプロイファイルで、`OTEL_EXPORTER_OTLP_ENDPOINT` 環境変数を使って、OpenTelemetry クライアントがトレースを送信するエンドポイントを構成します。
 
    gPRC の場合:
@@ -206,7 +206,7 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
       value: "http://$(DD_AGENT_HOST):4318" # sends to HTTP receiver on port 4318
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-info">OTLP ライブラリのドキュメントを確認してください。それらのいくつかは、トレースを `/` ルートパスの代わりに `/v1/traces` に送らなければなりません。</div>

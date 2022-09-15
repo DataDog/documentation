@@ -79,7 +79,7 @@ Dans votre fichier de configuration Fluentd, ajoutez une source `monitor_agent`�
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -202,8 +202,8 @@ Exemple de configuration :
 [8]: https://docs.datadoghq.com/fr/getting_started/tagging/assigning_tags/
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -218,7 +218,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INSTANCE>`  | `{"monitor_agent_url": "http://%%host%%:24220/api/plugins.json"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

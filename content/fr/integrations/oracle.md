@@ -92,7 +92,7 @@ Une fois ces runtimes installés, suivez les étapes ci-dessous :
 #### Création d'un utilisateur Datadog
 
 {{< tabs >}}
-{{< tab "Standalone" >}}
+{{% tab "Standalone" %}}
 
 Créez un utilisateur `datadog` en lecture seule avec un accès approprié à votre serveur Oracle Database. Connectez-vous à votre base de données Oracle avec un utilisateur bénéficiant des droits administrateur (par ex., `SYSDBA` ou `SYSOPER`) et exécutez ce qui suit :
 
@@ -118,8 +118,8 @@ GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 ```
 
-{{< /tab >}}
-{{< tab "Multitenant" >}}
+{{% /tab %}}
+{{% tab "Multitenant" %}}
 
 ##### Oracle 12c ou 19c
 
@@ -134,13 +134,13 @@ GRANT SELECT ON GV_$PROCESS TO c##datadog CONTAINER=ALL;
 GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -217,8 +217,8 @@ instances:
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -231,7 +231,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INSTANCE>`  | `{"server": "%%host%%:1521", "service_name":"<NOM_SERVICE>", "user":"datadog", "password":"<MOT_DE_PASSE>"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

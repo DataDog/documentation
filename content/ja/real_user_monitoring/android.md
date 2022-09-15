@@ -27,7 +27,7 @@ title: Android の RUM データを収集する
 2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][4]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][3]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
 
    {{< tabs >}}
-   {{< tab "US" >}}
+   {{% tab "US" %}}
    ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -38,8 +38,8 @@ title: Android の RUM データを収集する
         }
     }
    ```
-   {{< /tab >}}
-   {{< tab "EU" >}}
+   {{% /tab %}}
+   {{% tab "EU" %}}
    ```kotlin
    class SampleApplication : Application() {
        override fun onCreate() {
@@ -52,7 +52,7 @@ title: Android の RUM データを収集する
        }
    }
    ```
-   {{< /tab >}}
+   {{% /tab %}}
    {{< /tabs >}}
 
    GDPR 規制を遵守するため、SDK は初期化時に追跡に関する同意を求めます。

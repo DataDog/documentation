@@ -50,7 +50,7 @@ npm install --save winston
 ブートストラップファイルまたはコード内のいずれかの場所で、次のようにロガーを宣言します。
 
 {{< tabs >}}
-{{< tab "Winston 3.0" >}}
+{{% tab "Winston 3.0" %}}
 
 ```js
 
@@ -72,8 +72,8 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-{{< /tab >}}
-{{< tab "Winston 2.0" >}}
+{{% /tab %}}
+{{% tab "Winston 2.0" %}}
 
 ```js
 var winston = require('winston');
@@ -94,7 +94,7 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 `<FILE_NAME>.log` ファイルの内容をチェックして、Winston がすべてのログを JSON で記録していることを確認します。

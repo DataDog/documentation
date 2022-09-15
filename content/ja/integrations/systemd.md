@@ -70,7 +70,7 @@ Systemd チェックは [Datadog Agent][2] パッケージに含まれていま�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -84,8 +84,8 @@ Systemd チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -100,7 +100,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               datadog/agent:latest
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

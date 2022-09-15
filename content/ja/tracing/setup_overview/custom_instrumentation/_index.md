@@ -275,7 +275,7 @@ For example, the following snippet traces the `CustomDriver::doWork` method and 
 The built-in instrumentation and your own custom instrumentation will create spans around meaningful operations. You can access the active span in order to include meaningful data.
 
 {{< tabs >}}
-{{< tab "Current span" >}}
+{{% tab "Current span" %}}
 
 The following method returns a `DDTrace\SpanData` object. When tracing is disabled, `null is returned.
 
@@ -288,8 +288,8 @@ if ($span) {
 ?>
 ```
 
-{{< /tab >}}
-{{< tab "Root span" >}}
+{{% /tab %}}
+{{% tab "Root span" %}}
 
 The following method returns a `DDTrace\SpanData` object. When tracing is disabled, `null` is returned. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
 
@@ -302,7 +302,7 @@ if ($span) {
 ?>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Adding tags
@@ -312,7 +312,7 @@ if ($span) {
 </div>
 
 {{< tabs >}}
-{{< tab "Locally" >}}
+{{% tab "Locally" %}}
 
 Add tags to a span via the `DDTrace\SpanData::$meta` array.
 
@@ -329,8 +329,8 @@ Add tags to a span via the `DDTrace\SpanData::$meta` array.
 );
 ```
 
-{{< /tab >}}
-{{< tab "Globally" >}}
+{{% /tab %}}
+{{% tab "Globally" %}}
 
 Set the `DD_TAGS` environment variable (version 0.47.0+) to automatically apply tags to every span that is created. This was previously `DD_TRACE_GLOBAL_TAGS`. For more information about configuring the older version, see [environment variable configuration][1].
 
@@ -339,8 +339,8 @@ DD_TAGS=key1:value1,<TAG_KEY>:<TAG_VALUE>
 ```
 
 [1]: /ja/tracing/setup/php/#environment-variable-configuration
-{{< /tab >}}
-{{< tab "Errors" >}}
+{{% /tab %}}
+{{% tab "Errors" %}}
 
 Thrown exceptions are automatically attached to the active span, unless the exception is thrown at a deeper level in the call stack and it is caught before it reaches any function that is traced.
 
@@ -382,7 +382,7 @@ function doRiskyThing() {
 );
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Distributed tracing

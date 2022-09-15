@@ -37,7 +37,7 @@ To create a [CI monitor][2] in Datadog, use the main navigation: *Monitors -> Ne
 
 
 {{< tabs >}}
-{{< tab "Pipelines" >}}
+{{% tab "Pipelines" %}}
 
 To create a CI Pipeline monitor:
 ### Define the search query
@@ -72,8 +72,8 @@ The following example is of a pipeline error rate monitor using a formula that c
 <div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
 [1]: /continuous_integration/setup_pipelines/custom_commands/
-{{< /tab >}}
-{{< tab "Tests" >}}
+{{% /tab %}}
+{{% tab "Tests" %}}
 
 To create a CI Test monitor:
 ### Define the search query
@@ -127,7 +127,7 @@ The example below configures the notification with the following logic:
 
 In the `Notification message` section of your monitor, add text similar to the code snippet above to configure monitor notifications. You can add as many `is_match` clauses as you need.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 ### Set alert conditions
 

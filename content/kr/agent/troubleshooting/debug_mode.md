@@ -22,7 +22,7 @@ Agent의 로그 레벨 설정은 기본적으로 `INFO`입니다. 그러나 로�
 Agent 전체 디버그 모드를 활성화하는 방법은 다음과 같습니다.
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 1. 로컬 `datadog.yaml` 파일을 수정하세요. 사용하는 OS에 맞게 구체적인 안내를 받으려면 [Agent 주요 설정 파일][1]을 참조하시기 바랍니다.
 
@@ -35,8 +35,8 @@ Agent 전체 디버그 모드를 활성화하는 방법은 다음과 같습니�
 [1]: /kr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /kr/agent/guide/agent-commands/#restart-the-agent
 [3]: /kr/agent/guide/agent-log-files/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 1. 로컬 `datadog.conf` 파일을 수정하세요. 사용하는 OS에 맞게 구체적인 안내를 받으려면 [Agent 주요 설정 파일][1]을 참조하시기 바랍니다.
 
@@ -49,13 +49,13 @@ Agent 전체 디버그 모드를 활성화하는 방법은 다음과 같습니�
 [1]: /kr/agent/guide/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
 [2]: /kr/agent/guide/agent-commands/?tab=agentv5#restart-the-agent
 [3]: /kr/agent/guide/agent-log-files/?tab=agentv5
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 컨테이너화 Agent
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 컨테이너 Agent에서 디버그 모드를 활성화하려면 Agent 부팅 시 `DD_LOG_LEVEL=debug`를 사용하세요.
 
@@ -67,8 +67,8 @@ agent config set log_level debug
 
 전용 컨테이너에 trace-agent가 있는 경우, Agent 컨테이너에서 했던 것처럼 런타임에서 trace-agent 컨테이너용 로그 레벨을 변경할 수 **없습니다**. 전용 trace-agent 컨테이너의 경우 `dd_log_level` 변수를 `debug`로 바꾸고 재배포해야 합니다.
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 컨테이너에서 실행되는 Agent는 `service datadog-agent restart`(또는 이와 유사한 기능)으로 재시작할 수 없습니다. 도커(Docker)에서 컨테이너를 삭제하기 때문입니다. Supervisor를 사용해 컨테이너화 Agent를 재시작하세요.
 
@@ -94,7 +94,7 @@ sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 
 또는 컨테이너를 재시작해도 됩니다.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Agent 로그 레벨

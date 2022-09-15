@@ -108,7 +108,7 @@ Rehydrate from Archives ページで進行中のリハイドレートを直接�
 Datadog は、アーカイブからコンテンツをリハイドレートするために、アーカイブに対して読み取りのアクセス許可を必要とします。このアクセス許可は、いつでも変更できます。
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
 {{< /site-region >}}
@@ -150,9 +150,9 @@ Datadog では、ロールの委任を使用してアクセスを許可するよ
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /ja/integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Azure Storage" >}}
+{{% tab "Azure Storage" %}}
 
 Datadog は、アーカイブのストレージアカウントのスコープを持つ Storage Blob Data Contributor ロールが割り当てられた Azure AD グループを使用して、ログイベントをリハイドレートします。このロールを Datadog のサービスアカウントに付与するには、ストレージアカウントの Access Control (IAM) ページで、[Storage Blob Data Contributor ロールを Datadog インテグレーションアプリに割り当てる][1]必要があります。
 
@@ -160,16 +160,16 @@ Datadog は、アーカイブのストレージアカウントのスコープを
 
 
 [1]: /ja/logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Google Cloud Storage" >}}
+{{% tab "Google Cloud Storage" %}}
 
 アーカイブからログイベントをリハイドレートするために、Datadog は Storage Object Viewer ロールが割り当てられたサービスアカウントを使用します。このロールを Datadog のサービスアカウントに付与するには、[GCP の IAM と管理者のページ][1]でサービスアカウントのアクセス許可を編集し、ロールを 1 つ追加してから、Storage > Storage Object Viewer の順に選択します。
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="GCS からのリハイドレートには Storage Object Viewer ロールが必要"  style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 *Log Rehydration は Datadog, Inc. の商標です

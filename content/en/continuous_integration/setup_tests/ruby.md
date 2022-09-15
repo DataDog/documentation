@@ -76,7 +76,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 The following sections provide CI provider-specific instructions to run and configure the Agent to report test information.
 
 {{< tabs >}}
-{{< tab "Azure Pipelines" >}}
+{{% tab "Azure Pipelines" %}}
 
 To run the Datadog Agent in Azure Pipelines, define a new container in the [resources section][1] and link it with the job declaring it as a [service container][2].
 
@@ -138,8 +138,8 @@ Add your [Datadog API key][3] to your [project environment variables][4] with th
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
-{{< /tab >}}
-{{< tab "GitLab CI" >}}
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 To run the Agent in GitLab, define the Agent container under [services][1].
 
@@ -183,8 +183,8 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{< /tab >}}
-{{< tab "GitHub Actions" >}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 To run the Agent in GitHub Actions, use the [Datadog Agent GitHub Action][1] `datadog/agent-github-action`.
 
@@ -222,8 +222,8 @@ Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_
 [1]: https://github.com/marketplace/actions/datadog-agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{< /tab >}}
-{{< tab "CircleCI" >}}
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 To run the Agent in CircleCI, launch the Agent container before running tests by using the [datadog/agent CircleCI orb][1], and stop it after to ensure results are sent to Datadog.
 
@@ -284,7 +284,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://circleci.com/docs/2.0/env-vars/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Installing the Ruby tracer
@@ -305,7 +305,7 @@ See the [Ruby tracer installation docs][4] for more details.
 ## Instrumenting your tests
 
 {{< tabs >}}
-{{< tab "Cucumber" >}}
+{{% tab "Cucumber" %}}
 
 The Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
 
@@ -343,8 +343,8 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci bundle exec rake cucumber
 ```
 
-{{< /tab >}}
-{{< tab "RSpec" >}}
+{{% /tab %}}
+{{% tab "RSpec" %}}
 
 The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
 
@@ -375,7 +375,7 @@ Run your tests as you normally do, specifying the environment where test are bei
 DD_ENV=ci bundle exec rake spec
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
   
 ### Adding custom tags to tests
@@ -471,10 +471,10 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
+

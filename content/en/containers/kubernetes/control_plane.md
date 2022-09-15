@@ -51,7 +51,7 @@ The API server integration is automatically configured. The Datadog Agent discov
 By providing read access to the Etcd certificates located on the host, the Datadog Agent check can communicate with Etcd and start collecting Etcd metrics.
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Custom `values.yaml`:
 
@@ -88,8 +88,8 @@ agents:
     operator: Exists
 ```
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -147,7 +147,7 @@ data:
         tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Controller Manager and Scheduler
@@ -161,7 +161,7 @@ If the insecure ports of your Controller Manager and Scheduler instances are ena
 Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Custom `values.yaml`:
 
@@ -214,8 +214,8 @@ agents:
     operator: Exists
 ```
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -295,7 +295,7 @@ data:
         bearer_token_auth: true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Notes:**
@@ -374,7 +374,7 @@ These certificates should be mounted on the Cluster Check Runner pods by adding 
 
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 ```yaml
 ...
@@ -393,8 +393,8 @@ clusterChecksRunner:
       mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -418,7 +418,7 @@ spec:
           mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -506,7 +506,7 @@ Certificates are needed to communicate with the Etcd service, which are located 
 **Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 ```yaml
 ...
@@ -525,8 +525,8 @@ clusterChecksRunner:
       mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -550,7 +550,7 @@ spec:
             mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Direct edits of this service are not persisted, so make a copy of the Etcd service:
@@ -699,7 +699,7 @@ spec:
 Deploy the Datadog Agent with manifests based on the following configurations:
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Custom `values.yaml`:
 
@@ -728,8 +728,8 @@ agents:
     operator: Exists
 ```
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -767,7 +767,7 @@ spec:
       clusterChecksEnabled: true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -816,7 +816,7 @@ The following are examples of how to configure the Datadog Agent with Helm and t
 
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Custom `values.yaml`:
 
@@ -845,8 +845,8 @@ agents:
     operator: Exists
 ```
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -884,7 +884,7 @@ spec:
       clusterChecksEnabled: true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

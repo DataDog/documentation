@@ -21,7 +21,7 @@ Depuis les versions 6.14 et 7.14 de l'Agent, il est conseillé d'utiliser et d'
 Si vous utilisez le transport HTTPS pour les logs, consultez la [documentation relative à la configuration de l'Agent pour un proxy][2] et utilisez les mêmes réglages de proxy que les autres types de données.
 
 {{< tabs >}}
-{{< tab "TCP" >}}
+{{% tab "TCP" %}}
 
 Si vous utilisez un proxy pour les transmissions TCP, configurez l'Agent Datadog de façon à envoyer les logs à votre proxy via TCP en utilisant les paramètres suivants dans le fichier de configuration `datadog.yaml` :
 
@@ -46,8 +46,8 @@ Les paramètres ci-dessus peuvent également être configurés avec les variable
 
   Ensuite, utilisez le fichier certificat situé dans `/etc/ssl/certs/ca-certificates.crt` (Debian, Ubuntu) ou `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
 
-{{< /tab >}}
-{{< tab "SOCKS5" >}}
+{{% /tab %}}
+{{% tab "SOCKS5" %}}
 
 Pour envoyer vos logs à votre compte Datadog avec un serveur proxy SOCKS5, utilisez les paramètres suivants dans votre fichier de configuration `datadog.yaml` :
 
@@ -60,13 +60,13 @@ Le paramètre ci-dessus peut également être configuré avec la variable d'envi
 
 * `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Exemples de proxy TCP
 
 {{< tabs >}}
-{{< tab "HAProxy" >}}
+{{% tab "HAProxy" %}}
 ### Utiliser HAProxy en tant que proxy TCP pour les logs
 
 Cet exemple vous explique comment configurer l'Agent Datadog afin d'envoyer des logs à un serveur via le protocole TCP. Pour ce faire, vous devez installer HAProxy et effectuer une écoute sur le port `10514`, puis transmettre les logs à Datadog.
@@ -220,9 +220,9 @@ Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redém
 
 {{< /site-region >}}
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "NGINX" >}}
+{{% tab "NGINX" %}}
 ### Utiliser NGINX en tant que proxy TCP pour les logs
 
 #### Configuration de l'Agent
@@ -283,7 +283,7 @@ stream {
 ```
 
 {{< /site-region >}}
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

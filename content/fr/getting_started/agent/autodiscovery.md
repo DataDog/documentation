@@ -78,7 +78,7 @@ Il vous suffit de suivre les deux étapes suivantes pour configurer Autodiscover
 #### Avec l'Agent exécuté sur un host
 
 {{< tabs >}}
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 
 Ajoutez le bloc de configuration suivant au [fichier de configuration][1] `datadog.yaml`.
 
@@ -91,8 +91,8 @@ config_providers:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Ajoutez le bloc de configuration suivant au [fichier de configuration][1] `datadog.yaml`.
 
@@ -108,23 +108,23 @@ config_providers:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{< /tab >}}
-{{< tab "ECS Fargate" >}}
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
 
 ECS Fargate ne peut pas être surveillé lorsque l'Agent Datadog est exécuté en tant que binaire sur un host.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Avec l'Agent exécuté en tant que conteneur
 
 {{< tabs >}}
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 
 Pour activer automatiquement Autodiscovery sur des conteneurs Docker, montez `/var/run/docker.sock` dans l'Agent conteneurisé. Sous Windows, montez `\\.\pipe\docker_engine`.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 La fonction Autodiscovery est activée par défaut sur Kubernetes.
 
@@ -134,8 +134,8 @@ Pour vous en assurer, vérifiez que la variable d'environnement suivante est dé
 KUBERNETES=yes
 ```
 
-{{< /tab >}}
-{{< tab "ECS Fargate" >}}
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
 
 Pour activer Autodiscovery sur des conteneurs dans Kubernetes, ajoutez la variable d'environnement suivante lors du démarrage de l'Agent conteneurisé :
 
@@ -143,7 +143,7 @@ Pour activer Autodiscovery sur des conteneurs dans Kubernetes, ajoutez la variab
 ECS_FARGATE=true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Modèles d'intégration

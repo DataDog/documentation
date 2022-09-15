@@ -93,18 +93,352 @@ Network Performance Monitoring supports use of the following provisioning system
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
 
 {{< tabs >}}
-{{< tab "Agent (Linux)" >}}
-{{< /tab >}}
-{{< tab "Agent (Windows)" >}}
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
-{{< /tab >}}
-{{< tab "Operator" >}}
-{{< /tab >}}
-{{< tab "Docker" >}}
-{{< /tab >}}
-{{< tab "ECS" >}}
-{{< /tab >}}
+{{% tab "Agent (Linux)" %}}
+
+To enable network performance monitoring with the Datadog Agent, use the following configurations:
+
+1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
+
+2. Copy the system-probe example configuration:
+
+    ```shell
+    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    ```
+
+3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
+
+    ```yaml
+    network_config:   # use system_probe_config for Agent's older than 7.24.1
+      ## @param enabled - boolean - optional - default: false
+      ## Set to true to enable Network Performance Monitoring.
+      #
+      enabled: true
+    ```
+
+4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
+
+    ```shell
+    sudo systemctl start datadog-agent-sysprobe
+    sudo systemctl enable datadog-agent-sysprobe
+    ```
+
+    **Note**: If the `systemctl` command is not available on your system, start it with following command instead: `sudo service datadog-agent-sysprobe start` and then set it up to start on boot before `datadog-agent` starts.
+
+5. [Restart the Agent][2].
+
+    ```shell
+    sudo systemctl restart datadog-agent
+    ```
+
+    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
+### SELinux-enabled systems
+
+On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
+
+The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
+
+If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
+
+1. Modify the base [SELinux policy][3] to match your SELinux configuration.
+    Depending on your system, some types or attributes may not exist (or have different names).
+
+2. Compile the policy into a module; assuming your policy file is named `system_probe_policy.te`:
+
+    ```shell
+    checkmodule -M -m -o system_probe_policy.mod system_probe_policy.te
+    semodule_package -o system_probe_policy.pp -m system_probe_policy.mod
+    ```
+
+3. Apply the module to your SELinux system:
+
+    ```shell
+    semodule -v -i system_probe_policy.pp
+    ```
+
+4. Change the system-probe binary type to use the one defined in the policy; assuming your Agent installation directory is `/opt/datadog-agent`:
+
+    ```shell
+    semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
+    restorecon -v /opt/datadog-agent/embedded/bin/system-probe
+    ```
+
+5. [Restart the Agent][2].
+
+**Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
+
+If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
+
+
+[1]: /infrastructure/process/?tab=linuxwindows#installation
+[2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
+{{% /tab %}}
+{{% tab "Agent (Windows)" %}}
+
+Data collection for Windows relies on a filter driver for collecting network data.
+
+To enable Network Performance Monitoring for Windows hosts:
+
+1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
+
+   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
+
+1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
+
+    ```yaml
+    network_config:
+        enabled: true
+    ```
+3. [Restart the Agent][2].
+
+    For PowerShell (`powershell.exe`):
+    ```shell
+    restart-service -f datadogagent
+    ```
+    For Command Prompt (`cmd.exe`):
+    ```shell
+    net /y stop datadogagent && net start datadogagent
+    ```
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. 
+
+
+[1]: /agent/basic_agent_usage/windows/?tab=commandline
+[2]: /agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+To enable Network Performance Monitoring with Kubernetes using Helm, add:
+
+  ```yaml
+  datadog:
+    networkMonitoring:
+      enabled: true
+  ```
+to your values.yaml. **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
+
+If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
+
+1. Download the [datadog-agent.yaml manifest][2] template.
+2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][3].
+3. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
+4. **Deploy the DaemonSet** with the command:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
+
+If you already have the [Agent running with a manifest][4]:
+
+1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
+
+    ```yaml
+    spec:
+        selector:
+            matchLabels:
+                app: datadog-agent
+        template:
+            metadata:
+                labels:
+                    app: datadog-agent
+                name: datadog-agent
+                annotations:
+                    container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
+    ```
+
+2. Enable process collection and the system probe with the following environment variables in the Agent DaemonSet. If you are running a container per Agent process, add the following environment variables to the Process Agent container; otherwise, add them to the Agent container.
+
+    ```yaml
+      # (...)
+                      env:
+                      # (...)
+                          - name: DD_PROCESS_AGENT_ENABLED
+                            value: 'true'
+                          - name: DD_SYSTEM_PROBE_ENABLED
+                            value: 'true'
+                          - name: DD_SYSTEM_PROBE_EXTERNAL
+                            value: 'true'
+                          - name: DD_SYSPROBE_SOCKET
+                            value: /var/run/sysprobe/sysprobe.sock
+    ```
+
+3. Mount the following extra volumes into the `datadog-agent` container:
+
+    ```yaml
+     # (...)
+            spec:
+                serviceAccountName: datadog-agent
+                containers:
+                    - name: datadog-agent
+                      image: 'gcr.io/datadoghq/agent:latest'
+                      # (...)
+                  volumeMounts:
+                      - name: procdir
+                        mountPath: /host/proc
+                        readOnly: true
+                      - name: cgroups
+                        mountPath: /host/sys/fs/cgroup
+                        readOnly: true
+                      - name: debugfs
+                        mountPath: /sys/kernel/debug
+                      - name: sysprobe-socket-dir
+                        mountPath: /var/run/sysprobe
+    ```
+
+4. Add a new system-probe as a side car to the Agent:
+
+    ```yaml
+     # (...)
+            spec:
+                serviceAccountName: datadog-agent
+                containers:
+                    - name: datadog-agent
+                      image: 'gcr.io/datadoghq/agent:latest'
+                    # (...)
+                    - name: system-probe
+                      image: 'gcr.io/datadoghq/agent:latest'
+                      imagePullPolicy: Always
+                      securityContext:
+                          capabilities:
+                              add:
+                                  - SYS_ADMIN
+                                  - SYS_RESOURCE
+                                  - SYS_PTRACE
+                                  - NET_ADMIN
+                                  - NET_BROADCAST
+                                  - NET_RAW
+                                  - IPC_LOCK
+                                  - CHOWN
+                      command:
+                          - /opt/datadog-agent/embedded/bin/system-probe
+                      env:
+                          - name: DD_SYSPROBE_SOCKET
+                            value: /var/run/sysprobe/sysprobe.sock
+                      resources:
+                          requests:
+                              memory: 150Mi
+                              cpu: 200m
+                          limits:
+                              memory: 150Mi
+                              cpu: 200m
+                      volumeMounts:
+                          - name: procdir
+                            mountPath: /host/proc
+                            readOnly: true
+                          - name: cgroups
+                            mountPath: /host/sys/fs/cgroup
+                            readOnly: true
+                          - name: debugfs
+                            mountPath: /sys/kernel/debug
+                          - name: sysprobe-socket-dir
+                            mountPath: /var/run/sysprobe
+    ```
+
+5. Finally, add the following volumes to your manifest:
+
+    ```yaml
+                volumes:
+                    - name: sysprobe-socket-dir
+                      emptyDir: {}
+                    - name: debugfs
+                      hostPath:
+                          path: /sys/kernel/debug
+    ```
+
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: /resources/yaml/datadog-agent-npm.yaml
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /agent/kubernetes/
+{{% /tab %}}
+{{% tab "Operator" %}}
+<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+
+[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+
+To enable Network Performance Monitoring in Operator, use the following configuration:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: placeholder
+  namespace: placeholder
+spec:
+  # (...)
+  features:
+    networkMonitoring:
+      enabled: true
+```
+
+[1]: https://github.com/DataDog/datadog-operator
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
+
+```shell
+$ docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_PROCESS_AGENT_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-v /sys/kernel/debug:/sys/kernel/debug \
+--security-opt apparmor:unconfined \
+--cap-add=SYS_ADMIN \
+--cap-add=SYS_RESOURCE \
+--cap-add=SYS_PTRACE \
+--cap-add=NET_ADMIN \
+--cap-add=NET_BROADCAST \
+--cap-add=NET_RAW \
+--cap-add=IPC_LOCK \
+--cap-add=CHOWN \
+gcr.io/datadoghq/agent:latest
+```
+
+Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
+
+If using `docker-compose`, make the following additions to the Datadog Agent service.
+
+```
+version: '3'
+services:
+  ..
+  datadog:
+    image: "gcr.io/datadoghq/agent:latest"
+    environment:
+       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_PROCESS_AGENT_ENABLED: 'true'
+       DD_API_KEY: '<DATADOG_API_KEY>'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    - /sys/kernel/debug:/sys/kernel/debug
+    cap_add:
+    - SYS_ADMIN
+    - SYS_RESOURCE
+    - SYS_PTRACE
+    - NET_ADMIN
+    - NET_BROADCAST
+    - NET_RAW
+    - IPC_LOCK
+    - CHOWN
+    security_opt:
+    - apparmor:unconfined
+```
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{% tab "ECS" %}}
+To set up on AWS ECS, see the [AWS ECS][1] documentation page.
+
+
+[1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

@@ -34,7 +34,7 @@ title: Swift テスト
 テストフレームワークのインストール方法は 3 つあります。
 
 {{< tabs >}}
-{{< tab "Swift パッケージマネージャー" >}}
+{{% tab "Swift パッケージマネージャー" %}}
 
 1. プロジェクトに `dd-sdk-swift-testing` パッケージを追加します。これは、[`https://github.com/DataDog/dd-sdk-swift-testing`][1] にあります。
 
@@ -49,8 +49,8 @@ title: Swift テスト
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
-{{< /tab >}}
-{{< tab "Cocoapods" >}}
+{{% /tab %}}
+{{% tab "Cocoapods" %}}
 
 1. `DatadogSDKTesting` 依存関係を `Podfile` のテストターゲットに追加します。
 
@@ -67,8 +67,8 @@ end
 
 2. UITests を実行する場合は、テストを実行するアプリにも依存関係を追加します。
 
-{{< /tab >}}
-{{< tab "フレームワークのリンク" >}}
+{{% /tab %}}
+{{% tab "フレームワークのリンク" %}}
 
 1. [リリース][1]のページから `DatadogSDKTesting.zip` をダウンロードし、解凍します。
 
@@ -79,7 +79,7 @@ end
 3. UITests を実行する場合は、テストを実行するアプリもこのライブラリでリンクします。
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 <div class="alert alert-warning"><strong>注</strong>: このフレームワークはテストにのみ有用であり、テストを実行するときのみアプリケーションとリンクさせる必要があります。フレームワークをユーザーに配布しないでください。 </div>
 
@@ -309,7 +309,7 @@ span?.end()
 ## CI プロバイダーの環境変数
 
 {{< tabs >}}
-{{< tab "Jenkins" >}}
+{{% tab "Jenkins" %}}
 
 | 環境変数 | 値                  |
 | -------------------- | ---------------------- |
@@ -330,8 +330,8 @@ span?.end()
 | `GIT_URL_1`          | `$(GIT_URL_1)`  |
 | `GIT_BRANCH`         | `$(GIT_BRANCH)` |
 
-{{< /tab >}}
-{{< tab "CircleCI" >}}
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 | 環境変数       | 値                         |
 | -------------------------- | ----------------------------- |
@@ -351,8 +351,8 @@ span?.end()
 | `CIRCLE_BRANCH`         | `$(CIRCLE_BRANCH)`         |
 | `CIRCLE_TAG`            | `$(CIRCLE_TAG)`            |
 
-{{< /tab >}}
-{{< tab "GitLab CI" >}}
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 | 環境変数 | 値                |
 | -------------------- | -------------------- |
@@ -380,8 +380,8 @@ span?.end()
 | `CI_COMMIT_AUTHOR`  | `$(CI_COMMIT_AUTHOR)` |
 | `CI_COMMIT_TIMESTAMP`  | `$(CI_COMMIT_TIMESTAMP)` |
 
-{{< /tab >}}
-{{< tab "Travis" >}}
+{{% /tab %}}
+{{% tab "Travis" %}}
 
 | 環境変数       | 値                         |
 | -------------------------- | ----------------------------- |
@@ -404,8 +404,8 @@ span?.end()
 | `TRAVIS_TAG`                 | `$(TRAVIS_TAG)`                 |
 | `TRAVIS_COMMIT_MESSAGE`      | `$(TRAVIS_COMMIT_MESSAGE)`      |
 
-{{< /tab >}}
-{{< tab "GitHub Actions" >}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 | 環境変数 | 値                   |
 | -------------------- | ----------------------- |
@@ -426,8 +426,8 @@ span?.end()
 | `GITHUB_HEAD_REF`    | `$(GITHUB_HEAD_REF)`   |
 | `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)` |
 
-{{< /tab >}}
-{{< tab "Buildkite" >}}
+{{% /tab %}}
+{{% tab "Buildkite" %}}
 
 | 環境変数            | 値                              |
 | ------------------------------- | ---------------------------------- |
@@ -451,8 +451,8 @@ span?.end()
 | `BUILDKITE_BUILD_AUTHOR`       | `$(BUILDKITE_BUILD_AUTHOR)`       |
 | `BUILDKITE_BUILD_AUTHOR_EMAIL` | `$(BUILDKITE_BUILD_AUTHOR_EMAIL)` |
 
-{{< /tab >}}
-{{< tab "Bitbucket Pipelines" >}}
+{{% /tab %}}
+{{% tab "Bitbucket Pipelines" %}}
 
 | 環境変数       | 値                         |
 | -------------------------- | ----------------------------- |
@@ -470,8 +470,8 @@ span?.end()
 | `BITBUCKET_BRANCH`         | `$(BITBUCKET_BRANCH)`         |
 | `BITBUCKET_TAG`            | `$(BITBUCKET_TAG)`            |
 
-{{< /tab >}}
-{{< tab "AppVeyor" >}}
+{{% /tab %}}
+{{% tab "AppVeyor" %}}
 
 | 環境変数     | 値                       |
 | ------------------------ | --------------------------- |
@@ -493,8 +493,8 @@ span?.end()
 | `APPVEYOR_REPO_COMMIT_AUTHOR`            | `$(APPVEYOR_REPO_COMMIT_AUTHOR)`            |
 | `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`      | `$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)`      |
 
-{{< /tab >}}
-{{< tab "Azure Pipelines" >}}
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
 
 | 環境変数             | 値                               |
 | -------------------------------- | ----------------------------------- |
@@ -523,8 +523,8 @@ span?.end()
 | `BUILD_REQUESTEDFORID`                   | `$(BUILD_REQUESTEDFORID)`                   |
 | `BUILD_REQUESTEDFOREMAIL`                | `$(BUILD_REQUESTEDFOREMAIL)`                |
 
-{{< /tab >}}
-{{< tab "Bitrise" >}}
+{{% /tab %}}
+{{% tab "Bitrise" %}}
 
 | 環境変数   | 値                     |
 | ---------------------- | ------------------------- |
@@ -551,8 +551,8 @@ span?.end()
 | `GIT_CLONE_COMMIT_COMMITER_NAME`   | `$(GIT_CLONE_COMMIT_COMMITER_NAME)`   |
 | `GIT_CLONE_COMMIT_COMMITER_EMAIL`  | `$(GIT_CLONE_COMMIT_COMMITER_EMAIL)`  |
 
-{{< /tab >}}
-{{< tab "Xcode Cloud" >}}
+{{% /tab %}}
+{{% tab "Xcode Cloud" %}}
 
 | 環境変数    | 値                   |
 | ----------------------- | ----------------------- |
@@ -566,7 +566,7 @@ span?.end()
 | `CI_BRANCH`             | `$(CI_BRANCH)`          |
 | `CI_GIT_REF`            | `$(CI_GIT_REF)`         |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 手動テスト API

@@ -33,7 +33,7 @@ Docker API は、一度に 1 つのコンテナからログを取得するよう
 アプリケーションのログを収集するには、[Kubernetes クラスターで Datadog Agent を実行する][2]必要があります。Agent でログの収集を有効にするには、次の手順に従ってください。
 
 {{< tabs >}}
-{{< tab "DaemonSet" >}}
+{{% tab "DaemonSet" %}}
 
 **注**: このオプションは Windows ではサポートされません。代わりに Helm オプションを使用してください。
 
@@ -110,8 +110,8 @@ DaemonSet によるログの収集を有効にするには
 Agent が非ルートユーザーで実行しているときは、`/var/lib/docker/containers` に含まれるログファイルを直接読み取れません。この場合、Docker Daemon からコンテナログをフェッチできるよう、Agent コンテナの Docker ソケットをマウントする必要があります。
 
 [1]: /ja/agent/docker/?tab=standard#ignore-containers
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 Helm によるログの収集を有効にするには、次のログ収集コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新してから、Datadog Helm チャートをアップグレードします。
 
@@ -147,8 +147,8 @@ datadog:
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 `datadog-agent.yaml` マニフェストを次のように更新します。
 
@@ -184,7 +184,7 @@ agent:
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **警告**: 非特権インストールを実行する際、Agent が `/var/log/pods` のログファイルを読み取れる必要があります。
@@ -217,7 +217,7 @@ agent:
 **注**: Datadog では、ポッドアノテーションを使い `service` 値を設定する際のベストプラクティスとして、統合サービスタグ付けの使用をお勧めしています。統合サービスタグ付けは `env`、`service`、`version` の 3 つの標準タグを使用して、ログを含むすべての Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][4]ドキュメントをご参照ください。
 
 {{< tabs >}}
-{{< tab "Kubernetes" >}}
+{{% tab "Kubernetes" %}}
 
 インテグレーションテンプレートは、Kubernetes のポッドアノテーションに格納できます。オートディスカバリーを使用して、Agent は、自身が Kubernetes 上で実行されているかどうかを検出し、すべてのポッドアノテーションでインテグレーションテンプレートを自動的に探します。
 
@@ -260,8 +260,8 @@ spec:
 
 **注**: `kind: Pod` を使用して Kubernetes ポッドを直接定義する場合は、各ポッドのアノテーションを `metadata` セクションの直下に追加します。Replication Controller、Replica Set、または Deployment を使用してポッドを間接的に定義する場合は、ポッドアノテーションを `.spec.template.metadata` の下に追加します。
 
-{{< /tab >}}
-{{< tab "File" >}}
+{{% /tab %}}
+{{% tab "File" %}}
 
 テンプレートをローカルファイルとして保存し、それをコンテナ化 Agent 内にマウントする場合は、外部サービスや特定のオーケストレーションプラットフォームを必要としません。この方法の欠点は、テンプレートを変更、追加、または削除するたびに、Agent コンテナを再起動する必要がある点です。Agent は、マウントされた `/conf.d` ディレクトリでオートディスカバリーテンプレートを探します。
 
@@ -289,8 +289,8 @@ logs:
 **注**: Agent はファイル名から直接 `<INTEGRATIONS_NAME>` を推測するため、この名前を設定する必要はありません。
 
 [1]: /ja/agent/guide/ad_identifiers/
-{{< /tab >}}
-{{< tab "ConfigMap" >}}
+{{% /tab %}}
+{{% tab "ConfigMap" %}}
 
 Kubernetes では、[ConfigMaps][1] を使用できます。以下のテンプレートと[Kubernetes カスタムインテグレーションに関するドキュメント][2]を参照してください。
 
@@ -315,8 +315,8 @@ data:
 [1]: /ja/agent/kubernetes/integrations/#configmap
 [2]: /ja/agent/kubernetes/integrations/
 [3]: /ja/agent/guide/ad_identifiers/
-{{< /tab >}}
-{{< tab "Key-value store" >}}
+{{% /tab %}}
+{{% tab "Key-value store" %}}
 
 オートディスカバリーでは、[Consul][1]、Etcd、および Zookeeper をインテグレーションテンプレートソースとして使用できます。key-value ストアを使用するには、Agent の `datadog.yaml` 構成ファイルでストアを構成し、このファイルをコンテナ化 Agent 内にマウントします。あるいは、key-value ストアを環境変数としてコンテナ化 Agent に渡します。
 
@@ -371,8 +371,8 @@ key-value ストアがテンプレートソースとして有効になってい�
 
 [1]: /ja/integrations/consul/
 [2]: /ja/agent/guide/agent-commands/
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 `confd` 内で、インテグレーションごとにログコレクションをカスタマイズできます。この方法で、希望するコンフィギュレーションを Agent コンテナにマウントします。
 
@@ -390,13 +390,13 @@ key-value ストアがテンプレートソースとして有効になってい�
         <LOGS_CONFIG>
   ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 例 - Datadog Redis インテグレーション
 
 {{< tabs >}}
-{{< tab "Kubernetes" >}}
+{{% tab "Kubernetes" %}}
 
 以下のポッドアノテーションは、カスタム `password` パラメーターを使用して `redis` コンテナのインテグレーションテンプレートを定義し、すべてのログに正しい `source` および `service` 属性でタグ付けします。
 
@@ -417,8 +417,8 @@ spec:
         - containerPort: 6379
 ```
 
-{{< /tab >}}
-{{< tab "ConfigMap" >}}
+{{% /tab %}}
+{{% tab "ConfigMap" %}}
 
 次の ConfigMap は、ログを収集するための `source` 属性と `service` 属性を使用して、`redis` コンテナのインテグレーションテンプレートを定義しています。
 
@@ -458,8 +458,8 @@ data:
 # (...)
 ```
 
-{{< /tab >}}
-{{< tab "Key-value store" >}}
+{{% /tab %}}
+{{% tab "Key-value store" %}}
 
 以下の etcd コマンドは、カスタム `password` パラメーターを使用して Redis インテグレーションテンプレートを作成し、すべてのログに正しい `source` および `service` 属性でタグ付けします。
 
@@ -472,8 +472,8 @@ etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "
 
 auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`redis` など) も長いイメージ名 (`redis:latest` など) も使用できます**。
 
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 次のコンフィギュレーションは、ログを収集するための `source` 属性と `service` 属性を使用して、Redis コンテナのインテグレーションテンプレートを定義しています。
   ```yaml
@@ -488,7 +488,7 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 **注**: 上記のコンフィギュレーションは、このインテグレーションからのログのみを収集します。すでに Redis インテグレーションから他のデータを収集している場合は、`logs` セクションを既存のコンフィギュレーションに追加できます。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 例 - アノテーションで構成されたファイルからのログ収集

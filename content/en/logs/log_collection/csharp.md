@@ -44,7 +44,7 @@ Datadog strongly encourages setting up your logging library to produce your logs
 ### Configure your logger
 
 {{< tabs >}}
-{{< tab "Serilog" >}}
+{{% tab "Serilog" %}}
 
 Like many other libraries for .NET, Serilog provides diagnostic logging into files, the console, and elsewhere. It has a clean API and is portable between recent .NET platforms.
 
@@ -104,8 +104,8 @@ In the `log.json` file, confirm the logger instantiated successfully:
 }
 ```
 
-{{< /tab >}}
-{{< tab "NLog" >}}
+{{% /tab %}}
+{{% tab "NLog" %}}
 
 NLog is a logging platform for .NET with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
@@ -168,8 +168,8 @@ namespace Datadog
 }
 ```
 
-{{< /tab >}}
-{{< tab "Log4Net" >}}
+{{% /tab %}}
+{{% tab "Log4Net" %}}
 Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
 To install Log4Net, run the following command in the Package Manager Console:
@@ -261,7 +261,7 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configure the Datadog Agent

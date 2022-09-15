@@ -22,7 +22,7 @@ aliases:
 ## Installation
 
 {{< tabs >}}
-{{< tab "Serverless Framework" >}}
+{{% tab "Serverless Framework" %}}
 
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
 
@@ -53,8 +53,8 @@ For more information and additional settings, see the [plugin documentation][1].
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
-{{< tab "Custom" >}}
+{{% /tab %}}
+{{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
 [Add the Lambda layer][1] of Datadog Lambda Extension to your Lambda functions, using the ARN format based on your AWS region and architecture:
@@ -82,7 +82,7 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Datadog Lambda library

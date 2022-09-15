@@ -18,7 +18,7 @@ You can add the YAML configuration to your `datadog.yaml` or launch the Agent wi
 
 {{< tabs >}}
 
-{{< tab "Metrics & Service checks" >}}
+{{% tab "Metrics & Service checks" %}}
 
 ### YAML configuration
 In `datadog.yaml`:
@@ -37,9 +37,9 @@ additional_endpoints:
 DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "APM" >}}
+{{% tab "APM" %}}
 
 ### YAML configuration
 In `datadog.yaml`: 
@@ -69,9 +69,9 @@ DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Live Processes" >}}
+{{% tab "Live Processes" %}}
 
 ### YAML configuration
 In `datadog.yaml`: 
@@ -92,9 +92,9 @@ process_config:
 DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Orchestrator" >}}
+{{% tab "Orchestrator" %}}
 
 ### YAML configuration
 In `datadog.yaml`: 
@@ -115,9 +115,9 @@ orchestrator_explorer:
 DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "CI Visibility" >}}
+{{% tab "CI Visibility" %}}
 
 <div class="alert alert-info">Requires Agent v6.38+ or v7.38+.</div>
 
@@ -140,14 +140,14 @@ evp_proxy_config:
 DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tab >}}
-{{< /tabs >}} 
+{{% /tab %}}
+{{% /tabs %}} 
 
 ## Logs, Database Monitoring, Network Devices, CSPM, Runtime Security
 
 {{< tabs >}}
 
-{{< tab "Logs" >}}
+{{% tab "Logs" %}}
 
 ### YAML configuration 
 In `datadog.yaml`: 
@@ -168,9 +168,9 @@ DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Database Monitoring" >}}
+{{% tab "Database Monitoring" %}}
 
 ### YAML configuration 
 In `datadog.yaml`: 
@@ -210,9 +210,9 @@ DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
 DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Network Devices" >}}
+{{% tab "Network Devices" %}}
 
 ### YAML configuration
 
@@ -243,9 +243,9 @@ DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
 DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "CSPM" >}}
+{{% tab "CSPM" %}}
 
 ### YAML configuration 
 In `datadog.yaml`: 
@@ -267,9 +267,9 @@ DD_​​COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "CWS" >}}
+{{% tab "CWS" %}}
 
 ### YAML configuration 
 In `datadog.yaml`: 
@@ -291,8 +291,8 @@ DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tab >}}
-{{< /tabs >}}
+{{% /tab %}}
+{{% /tabs %}}
 
 For data from these products, when setting up additional endpoints, you must explicitly set `use_http` to tell the Agent which transport to use. The same transport configuration is shared among all additional endpoints.
 
@@ -307,7 +307,7 @@ You can add the YAML configuration to your `datadog.yaml` or launch the Agent wi
 
 ## Dual shipping in Kubernetes
 
-If you're using the [Datadog Agent Helm chart][1], you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true` 
+If you're using the [Datadog Agent Helm chart](https://github.com/DataDog/helm-charts), you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true` 
 and add the relevant settings to `customAgentConfig`.
 
 ```yaml
@@ -335,7 +335,4 @@ and add the relevant settings to `customAgentConfig`.
         is_reliable: true
 ```
 
-If you're using the [Datadog Agent operator][2] similarly you can set the `agent.customConfig.configData` key. All configurable keys are documented [here][3].
-[1]: https://github.com/DataDog/helm-charts
-[2]: https://github.com/DataDog/datadog-operator
-[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
+If you're using the [Datadog Agent operator](https://github.com/DataDog/datadog-operator) similarly you can set the `agent.customConfig.configData` key. All configurable keys are documented [here](https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md).

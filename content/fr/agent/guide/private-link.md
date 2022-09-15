@@ -35,49 +35,49 @@ Pour utiliser PrivateLink, vous devez configurer un endpoint interne dans votre 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="Nom de service VPC" style="width:70%;" >}}
     {{< tabs >}}
 
-{{< tab "Métriques" >}}
+{{% tab "Métriques" %}}
 
 | Nom de service des métriques Datadog                                |
 | ---------------------------------------------------------- |
 | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8`  |
 
-{{< /tab >}}
-{{< tab "Logs" >}}
+{{% /tab %}}
+{{% tab "Logs" %}}
 
 | Forwarder | Nom du service des logs Datadog |
 | --------- | ------------------------- |
 | Agent Datadog | `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` |
 | Forwarder Lambda ou forwarder personnalisé | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
 
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 | Nom du service de l'API Datadog                                  |
 | --------------------------------------------------------- |
 | `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |
 
-{{< /tab >}}
-{{< tab "Processus" >}}
+{{% /tab %}}
+{{% tab "Processus" %}}
 
 | Nom du service de surveillance de processus Datadog                   |
 | --------------------------------------------------------- |
 | `com.amazonaws.vpce.us-east-1.vpce-svc-05316fe237f6d8ddd` |
 
-{{< /tab >}}
-{{< tab "Traces" >}}
+{{% /tab %}}
+{{% tab "Traces" %}}
 
 | Nom du service des traces Datadog                                |
 | --------------------------------------------------------- |
 | `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
 
-{{< /tab >}}
-{{< tab "Ressources Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Ressources Kubernetes" %}}
 
 | Nom de service de l'explorateur Kubernetes Datadog                  |
 | --------------------------------------------------------- |
 | `com.amazonaws.vpce.us-east-1.vpce-svc-0b03d6756bf6c2ec3` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 4. Cliquer sur le bouton _verify_. Si le message _Service name found_ ne s'affiche pas, contactez l'[équipe d'assistance Datadog][2].
@@ -101,7 +101,7 @@ Dès que le statut _Available_ apparaît, vous pouvez utiliser votre AWS Privat
 Sélectionnez un onglet ci-dessous pour découvrir comment envoyer vos métriques et vos logs à Datadog à l'aide de votre nouvel endpoint de VPC ou pour consulter la nouvelle URL host à utiliser pour l'API Datadog :
 
 {{< tabs >}}
-{{< tab "Métriques" >}}
+{{% tab "Métriques" %}}
 
 _Disponible à partir des versions 6.0 ou ultérieures de l'Agent_
 
@@ -120,8 +120,8 @@ Pour transmettre vos métriques à Datadog à l'aide du nouvel endpoint de votre
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Logs" >}}
+{{% /tab %}}
+{{% tab "Logs" %}}
 
 _Disponible à partir des versions 6.14 ou ultérieures de l'Agent_
 
@@ -160,13 +160,13 @@ Si vous utilisez le modèle CloudFormation pour installer le Forwarder, activez 
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
 [5]: https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 Pour envoyer des données à l'API Datadog ou exploiter les données de l'API via ce nouvel endpoint, remplacez la signature host de l'appel d'API `api.datadoghq.com/api/` par `pvtlink.api.datadoghq.com/api/`.
 
-{{< /tab >}}
-{{< tab "Processus" >}}
+{{% /tab %}}
+{{% tab "Processus" %}}
 
 Pour transmettre vos métriques de processus à Datadog à l'aide du nouvel endpoint de votre VPC, définissez `pvtlink.process.datadoghq.com` comme nouvelle destination pour vos données de processus :
 
@@ -183,8 +183,8 @@ Pour transmettre vos métriques de processus à Datadog à l'aide du nouvel endp
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Traces" >}}
+{{% /tab %}}
+{{% tab "Traces" %}}
 
 Pour transmettre vos métriques de trace à Datadog à l'aide du nouvel endpoint de votre VPC, définissez `trace-pvtlink.agent.datadoghq.com` comme nouvelle destination pour vos traces :
 
@@ -201,8 +201,8 @@ Pour transmettre vos métriques de trace à Datadog à l'aide du nouvel endpoint
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Ressources Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Ressources Kubernetes" %}}
 
 Pour transmettre vos ressources Kubernetes à Datadog à l'aide du nouvel endpoint de votre VPC, définissez `orchestrator-pvtlink.datadoghq.com` comme nouvelle destination pour vos données d'orchestrateur :
 
@@ -225,7 +225,7 @@ Pour transmettre vos ressources Kubernetes à Datadog à l'aide du nouvel endpoi
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Utilisation avancée

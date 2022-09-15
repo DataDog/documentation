@@ -39,7 +39,7 @@ Follow the [Quickstart instructions][4] within the Datadog app for the best expe
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
-{{< tab "Containers" >}}
+{{% tab "Containers" %}}
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
@@ -54,15 +54,15 @@ To connect to the Agent using Unix Domain Sockets, use `DD_TRACE_AGENT_URL` inst
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tab >}}
-{{< tab "AWS Lambda" >}}
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 
 
 [1]: /tracing/serverless_functions/
-{{< /tab >}}
-{{< tab "Other Environments" >}}
+{{% /tab %}}
+{{% tab "Other Environments" %}}
 
 Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
@@ -74,7 +74,7 @@ For other environments, see the [Integrations][5] documentation for that environ
 [4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Instrument your application
@@ -219,7 +219,7 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][7] for details.
 
 ## Further Reading
 
@@ -229,4 +229,6 @@ If needed, configure the tracing library to send application performance telemet
 [2]: /tracing/setup/nginx/
 [3]: /tracing/compatibility_requirements/cpp
 [4]: https://app.datadoghq.com/apm/docs
-[5]: /tracing/trace_collection/library_config/cpp/
+[5]: /tracing/send_traces/
+[6]: https://github.com/opentracing/opentracing-cpp
+[7]: /tracing/trace_collection/library_config/cpp/

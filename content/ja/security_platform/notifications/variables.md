@@ -83,7 +83,7 @@ Epoch テンプレート変数は、通知内で人間が読みやすい文字�
 以下は、セキュリティシグナルに関連するイベント属性を持つ JSON オブジェクトの例です。
 
 {{< tabs >}}
-{{< tab "Cloud SIEM" >}}
+{{% tab "Cloud SIEM" %}}
 
 ```json
 {
@@ -114,9 +114,9 @@ Epoch テンプレート変数は、通知内で人間が読みやすい文字�
 user@domain.com just logged in without MFA from 1.2.3.4.
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "アプリケーションセキュリティモニタリング" >}}
+{{% tab "アプリケーションセキュリティモニタリング" %}}
 
 ```json
 {
@@ -151,7 +151,7 @@ Real routes targeted for {{@service}}.
 Real routes targeted for your_service_name.
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### その他の例

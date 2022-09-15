@@ -57,7 +57,7 @@ DD_API_KEY=<VOTRE_CLÉ_API_DD> DD_SITE="{{< region-param key="dd_site" >}}" DD_A
 #### Méthode manuelle
 
 {{< tabs >}}
-{{< tab "DEB" >}}
+{{% tab "DEB" %}}
 
 Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés sur Debian, exécutez les commandes suivantes :
 
@@ -104,8 +104,8 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     sudo systemctl restart datadog-agent.service
     ```
 
-{{< /tab >}}
-{{< tab "RPM" >}}
+{{% /tab %}}
+{{% tab "RPM" %}}
 
 Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés sur RPM, exécutez les commandes suivantes :
 
@@ -151,7 +151,7 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
     ```
 
 [1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Interface de ligne de commande

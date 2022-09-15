@@ -62,7 +62,7 @@ L'exportateur de métriques JMX est activé par défaut, mais vous devrez peut-�
 Pour le logging, nous vous conseillons fortement d'activer [log4j][3] afin que les logs affichent les dates complètes.
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -109,8 +109,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [2]: https://docs.datadoghq.com/fr/integrations/java/
 [3]: https://docs.datadoghq.com/fr/help/
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -133,7 +133,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

@@ -16,7 +16,7 @@ Après avoir installé l'[intégration AWS][2] et le [Forwarder Datadog][3], sui
 ## Configuration
 
 {{< tabs >}}
-{{< tab "Interface de ligne de commande Datadog" >}}
+{{% tab "Interface de ligne de commande Datadog" %}}
 
 L'interface de ligne de commande Datadog modifie les configurations des fonctions Lambda existantes pour activer l'instrumentation sans exiger un nouveau déploiement. Il s'agit du moyen le plus rapide pour commencer avec la surveillance sans serveur de Datadog.
 
@@ -62,8 +62,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
-{{< /tab >}}
-{{< tab "Serverless Framework" >}}
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. Il configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
 
@@ -96,8 +96,8 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: /fr/serverless/troubleshooting/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
-{{< /tab >}}
-{{< tab "AWS SAM" >}}
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
 
 La [macro CloudFormation Datadog][1] transforme automatiquement votre modèle d'application SAM dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide de couches. Elle configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
 
@@ -142,8 +142,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 Les [Constructs CDK Datadog][1] configurent automatiquement l'ingestion des métriques, traces et logs provenant de vos applications sans serveur. Pour ce faire, ils suivent la procédure suivante :
 
@@ -198,8 +198,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /tab >}}
-{{< tab "Image de conteneur" >}}
+{{% /tab %}}
+{{% tab "Image de conteneur" %}}
 
 ### Installation
 
@@ -240,8 +240,8 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 
 [1]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [2]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{< /tab >}}
-{{< tab "Personnalisé" >}}
+{{% /tab %}}
+{{% tab "Personnalisé" %}}
 
 ### Installation
 
@@ -312,7 +312,7 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Tag

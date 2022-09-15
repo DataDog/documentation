@@ -163,7 +163,7 @@ Datadog はシークレットを保存しないので、**View Installation Inst
 
 {{< tabs >}}
 
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 
 次のコマンドを実行して、コンフィギュレーションファイルをコンテナにマウントすることでプライベートロケーションワーカーを起動します。`<MY_WORKER_CONFIG_FILE_NAME>.json` ファイルはルートホームフォルダーではなく `/etc/docker` 内に格納してください。
 
@@ -177,9 +177,9 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 1. 次で `docker-compose.yml` ファイルを作成します。
 
@@ -201,9 +201,9 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes Deployment" >}}
+{{% tab "Kubernetes Deployment" %}}
 
 プライベートロケーションワーカーを安全にデプロイするために、コンテナ内の `/etc/datadog/synthetics-check-runner.json` 以下に Kubernetes Secret リソースを設定しマウントしてください。
 
@@ -256,9 +256,9 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Helm Chart" >}}
+{{% tab "Helm Chart" %}}
 
 構成パラメーターに、すでに構成されているシークレットを指す環境変数を設定することができます。シークレットを指定した環境変数を作成するには、[Kubernetes のドキュメント][3]を参照してください。
 
@@ -283,9 +283,9 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 [2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "ECS" %}}
 
 以下に一致する EC2 タスクの定義を新規に作成します。各パラメーターを、以前に生成したプライベートロケーションのコンフィギュレーションファイルにある対応する値に置き換えてください。
 
@@ -321,9 +321,9 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 以下に一致する Fargate タスクの定義を新規に作成します。各パラメーターを、以前に生成したプライベートロケーションのコンフィギュレーションファイルにある対応する値に置き換えてください。
 
@@ -358,9 +358,9 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 
 **注:** プライベートロケーションファイアウォールオプションは AWS Fargate ではサポートされていないため、`enableDefaultBlockedIpRanges` パラメーターは `true` に設定できません。
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 Datadog は既に Kubernetes および AWS と統合されているため、すぐに EKS を監視することができます。
 
@@ -411,7 +411,7 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -423,7 +423,7 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
 
 {{< tabs >}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 ```yaml
 healthcheck:
@@ -436,30 +436,9 @@ healthcheck:
   start_period: 30s
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes Deployment" >}}
-
-```yaml
-livenessProbe:
-  httpGet:
-    path: /liveness
-    port: 8080
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-readinessProbe:
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-  httpGet:
-    path: /readiness
-    port: 8080
-```
-
-{{< /tab >}}
-
-{{< tab "Helm Chart" >}}
+{{% tab "Kubernetes Deployment" %}}
 
 ```yaml
 livenessProbe:
@@ -478,9 +457,30 @@ readinessProbe:
     port: 8080
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "Helm Chart" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
 
 ```json
 "healthCheck": {
@@ -494,9 +494,9 @@ readinessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 ```json
 "healthCheck": {
@@ -510,9 +510,9 @@ readinessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 ```yaml
 livenessProbe:
@@ -531,7 +531,7 @@ readinessProbe:
     port: 8080
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -545,7 +545,7 @@ readinessProbe:
 
 {{< tabs >}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 ```yaml
 healthcheck:
@@ -558,26 +558,9 @@ healthcheck:
   start_period: 30s
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes Deployment" >}}
-
-```yaml
-livenessProbe:
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-  failureThreshold: 3
-```
-
-{{< /tab >}}
-
-{{< tab "Helm Chart" >}}
+{{% tab "Kubernetes Deployment" %}}
 
 ```yaml
 livenessProbe:
@@ -592,9 +575,26 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "Helm Chart" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
 
 ```json
 "healthCheck": {
@@ -608,9 +608,9 @@ livenessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 ```json
 "healthCheck": {
@@ -624,9 +624,9 @@ livenessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 ```yaml
 livenessProbe:
@@ -641,7 +641,7 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

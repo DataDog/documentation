@@ -34,7 +34,7 @@ L'endpoint `Screenboard` vous permet de programmer la création, la mise à jour
 ### Exemples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -71,8 +71,8 @@ api.Screenboard.create(board_title=board_title,
 
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -102,8 +102,8 @@ board = {
 result = dog.create_screenboard(board)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<CLÉ_API_DATADOG>
@@ -128,7 +128,7 @@ curl -X POST -H "Content-type: application/json" \
 "https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Mettre à jour un screenboard
@@ -157,7 +157,7 @@ curl -X POST -H "Content-type: application/json" \
 ### Exemples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -195,8 +195,8 @@ api.Screenboard.update(board_id,
 
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -225,8 +225,8 @@ board = {
 result = dog.update_screenboard(board_id, board)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<CLÉ_API_DATADOG>
@@ -252,7 +252,7 @@ curl -X PUT -H "Content-type: application/json" \
 
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supprimer un screenboard
@@ -271,7 +271,7 @@ Supprimez un screenboard existant.
 ### Exemples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -287,8 +287,8 @@ api.Screenboard.delete(811)
 
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -303,8 +303,8 @@ board_id = '2534'
 result = dog.delete_screenboard(board_id)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<CLÉ_API_DATADOG>
@@ -334,7 +334,7 @@ curl -X DELETE \
 "https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Récupérer un screenboard
@@ -352,7 +352,7 @@ Récupérez la définition d'un screenboard existant.
 ### Exemples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -367,8 +367,8 @@ initialize(**options)
 api.Screenboard.get(811)
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -383,8 +383,8 @@ board_id = '6334'
 result = dog.get_screenboard(board_id)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<CLÉ_API_DATADOG>
@@ -414,7 +414,7 @@ curl -X GET \
 "https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Récupérer tous les screenboards
@@ -432,7 +432,7 @@ Récupérez toutes les définitions de vos screenboards.
 ### Exemples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -448,8 +448,8 @@ api.Screenboard.get_all()
 
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -463,8 +463,8 @@ dog = Dogapi::Client.new(api_key, app_key)
 result = dog.get_all_screenboards()
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<CLÉ_API_DATADOG>
@@ -473,5 +473,5 @@ app_key=<CLÉ_APPLICATION_DATADOG>
 curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}

@@ -24,7 +24,7 @@ aliases:
 メールによるイベントの送信方法には 2 つあります。
 
 {{< tabs >}}
-{{< tab "JSON" >}}
+{{% tab "JSON" %}}
 
 アプリケーションから送信されるメールを完全に制御できる場合は、JSON 形式のメッセージを構成できます。JSON 形式では、Datadog に表示されるイベントのすべてを設定できます。
 
@@ -46,8 +46,8 @@ JSON 形式のメールでは、メールの件名はイベントに表示され
 **注**: 標準的なメールクライアントでメールをテストすると、本文が HTML に変換されることがあります。これにより本文が完全な JSON 形式ではなくなるため、メールが無視されます。
 
 [1]: /ja/api/v1/events/
-{{< /tab >}}
-{{< tab "Plain text" >}}
+{{% /tab %}}
+{{% tab "Plain text" %}}
 
 アプリケーションから送信されるメールを部分的にしか制御できない場合は、プレーンテキスト形式のメッセージを使用します。
 
@@ -75,7 +75,7 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 
 {{< img src="developers/events/plain-event.png" alt="プレーンイベント"  >}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Markdown

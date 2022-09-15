@@ -21,7 +21,7 @@ Vous trouverez ci-dessous les différentes options de lancement disponibles avec
 Par défaut, aucun échantillonnage n'est appliqué sur le nombre de sessions recueillies. Pour appliquer un échantillonnage relatif (en pourcentage) au nombre de sessions recueillies, utilisez le paramètre `sampleRate` lors du lancement de RUM. L'exemple suivant recueille seulement 90 % de toutes les sessions pour une application RUM donnée :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -34,8 +34,8 @@ datadogRum.init({
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -46,7 +46,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : lorsqu'une session n'est pas transmise en raison d'un échantillonnage, toutes les vues de page et la télémétrie associées à cette session ne sont pas recueillies.
@@ -58,7 +58,7 @@ window.DD_RUM &&
 Une fois le Real User Monitoring (RUM) lancé, ajoutez des données de contexte supplémentaires à l'ensemble des événements RUM recueillis depuis de votre application avec l'API `addRumGlobalContext(key: string, value: any)` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -72,8 +72,8 @@ datadogRum.addRumGlobalContext('usr', {
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CLÉ_CONTEXTE>', <VALEUR_CONTEXTE>);
@@ -85,7 +85,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
 });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : respectez la [convention de nommage Datadog][2] pour améliorer la corrélation de vos données sur l'ensemble de la solution.
@@ -95,7 +95,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
 Une fois le Real User Monitoring (RUM) lancé, remplacez le contexte par défaut de tous vos événements RUM avec l'API `setRumGlobalContext(context: Context)` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -108,8 +108,8 @@ datadogRum.setRumGlobalContext({
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -122,7 +122,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : respectez la [convention de nommage Datadog][2] pour améliorer la corrélation de vos données sur l'ensemble de la solution.
@@ -132,7 +132,7 @@ window.DD_RUM &&
 Une fois le Real User Monitoring (RUM) lancé, générez des actions utilisateur lorsque vous souhaitez surveiller des interactions spécifiques sur les pages de votre application ou mesurer des délais personnalisés avec l'API `addAction(name: string, context: Context)` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -150,8 +150,8 @@ datadogRum.addAction('checkout', {
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM && DD_RUM.addAction('<NOM>', '<OBJET_JSON>');
@@ -168,7 +168,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Dans l'exemple ci-dessus, le SDK RUM recueille le nombre d'articles dans un panier, la nature de ces articles, ainsi que le montant total du panier.

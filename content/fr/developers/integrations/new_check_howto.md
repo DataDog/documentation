@@ -291,7 +291,7 @@ Pour qu'un check puisse être inclus, l'ensemble des ressources créées par l'a
 Dans cet exemple, ces fichiers ressembleraient à ce qui suit :
 
 {{< tabs >}}
-{{< tab "Modèle de configuration " >}}
+{{% tab "Modèle de configuration " %}}
 
 Le fichier `awesome/assets/configuration/spec.yaml` utilisé pour générer `awesome/datadog_checks/awesome/data/conf.yaml.example` :
 
@@ -335,8 +335,8 @@ Générez le fichier `conf.yaml.example` à l'aide de `ddev` :
 ddev validate config --sync awesome
 ```
 
-{{< /tab >}}
-{{< tab "Manifeste" >}}
+{{% /tab %}}
+{{% tab "Manifeste" %}}
 
 Le fichier `awesome/manifest.json` pour le check de service Awesome. **Remarque** : le `guid` doit être unique (et valide). N'utilisez donc _pas_ celui de cet exemple (l'outil en génère un pour vous) :
 
@@ -369,13 +369,13 @@ Le fichier `awesome/manifest.json` pour le check de service Awesome. **Remarque*
 }
 ```
 
-{{< /tab >}}
-{{< tab "Métadonnées" >}}
+{{% /tab %}}
+{{% tab "Métadonnées" %}}
 
 L'exemple d'intégration n'envoie aucune métrique. Le fichier `awesome/metadata.csv` généré contient donc uniquement la ligne avec  les noms de colonne CSV.
 
-{{< /tab >}}
-{{< tab "Check de service" >}}
+{{% /tab %}}
+{{% tab "Check de service" %}}
 
 L'exemple d'intégration contient un check de service. Vous devez donc l'ajouter au fichier `awesome/assets/service_checks.json` :
 
@@ -393,7 +393,7 @@ L'exemple d'intégration contient un check de service. Vous devez donc l'ajouter
 ]
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Compilation

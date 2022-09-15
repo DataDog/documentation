@@ -101,7 +101,7 @@ Si Supervisor est exécuté en mode root, assurez-vous que `chmod` ou `chown` es
 Rechargez `supervisord`.
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -131,8 +131,8 @@ Consultez [un exemple de configuration du check][2] pour obtenir les description
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -145,7 +145,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INSTANCE>`  | `{"name":"<NOM_SERVEUR_SUPERVISORD>", "host":"%%host%%", "port":"9001", "user":"<UTILISATEUR>", "pass":"<MOTDEPASSE>"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Collecte de logs

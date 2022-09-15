@@ -32,7 +32,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 {{< tabs >}}
 
-{{< tab "Ubuntu と Debian" >}}
+{{% tab "Ubuntu と Debian" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
 
     ```conf
@@ -127,9 +127,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
       sudo systemctl restart rsyslog
       ```
 [1]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Amazon Linux、CentOS、Red Hat" >}}
+{{% tab "Amazon Linux、CentOS、Red Hat" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
 
     ```conf
@@ -224,9 +224,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
       sudo systemctl restart rsyslog
       ```
 [1]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fedora" >}}
+{{% tab "Fedora" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
 
     ```conf
@@ -322,14 +322,14 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
       sudo systemctl restart rsyslog
       ```
 [1]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 #### Rsyslog バージョン <
 
 {{< tabs >}}
 
-{{< tab "Ubuntu と Debian" >}}
+{{% tab "Ubuntu と Debian" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
 
     ```conf
@@ -446,9 +446,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
       ```
 
 [1]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Amazon Linux、CentOS、Red Hat" >}}
+{{% tab "Amazon Linux、CentOS、Red Hat" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
 
     ```conf
@@ -563,9 +563,9 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
       sudo systemctl restart rsyslog
       ```
 [1]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fedora" >}}
+{{% tab "Fedora" %}}
 1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
 
     ```conf
@@ -682,7 +682,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
       ```
 
 [1]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

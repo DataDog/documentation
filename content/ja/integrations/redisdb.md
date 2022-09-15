@@ -95,7 +95,7 @@ Redis チェックは [Datadog Agent][1] パッケージに含まれています
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -168,8 +168,8 @@ Datadog APM は、Redis と統合して分散システム全体のトレース�
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [6]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 #### Docker
 
@@ -223,8 +223,8 @@ Agent コンテナで必要な環境変数
 [5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [6]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
 [7]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 #### Kubernetes
 
@@ -348,8 +348,8 @@ Agent コンテナで必要な環境変数
 [8]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
 [9]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [10]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "ECS" >}}
+{{% /tab %}}
+{{% tab "ECS" %}}
 
 #### ECS
 
@@ -419,7 +419,7 @@ Agent コンテナで必要な環境変数
 [6]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
 [7]: https://docs.datadoghq.com/ja/tracing/setup/
 [8]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

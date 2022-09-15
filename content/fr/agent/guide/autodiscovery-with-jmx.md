@@ -124,7 +124,7 @@ Si vous devez transmettre une configuration plus complexe pour votre intégratio
 Sélectionnez l'un des onglets ci-dessous selon que votre Agent s'exécute en tant que conteneur dans votre cluster ou directement sur votre host :
 
 {{< tabs >}}
-{{< tab "Agent de conteneur" >}}
+{{% tab "Agent de conteneur" %}}
 
 Si votre Agent s'exécute dans votre cluster et que vous souhaitez découvrir automatiquement votre conteneur afin de recueillir des métriques JMX :
 
@@ -227,8 +227,8 @@ Si votre Agent s'exécute dans votre cluster et que vous souhaitez découvrir au
 [27]: /fr/agent/faq/template_variables/
 [28]: /fr/agent/guide/ad_identifiers/#short-image-container-identifiers
 [29]: /fr/integrations/kafka/
-{{< /tab >}}
-{{< tab "Agent de host" >}}
+{{% /tab %}}
+{{% tab "Agent de host" %}}
 
 Si votre Agent s'exécute sur un host et que vous souhaitez découvrir automatiquement votre conteneur afin de recueillir des métriques JMX :
 
@@ -282,7 +282,7 @@ Si votre Agent s'exécute sur un host et que vous souhaitez découvrir automatiq
 [3]: /fr/agent/faq/template_variables/
 [4]: /fr/agent/guide/ad_identifiers/#short-image-container-identifiers
 [5]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Préparation du conteneur

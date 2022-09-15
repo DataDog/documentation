@@ -30,7 +30,7 @@ Pour créer un [monitor d'APM][2] dans Datadog, utilisez la navigation principal
 Choisissez un monitor **APM Metrics** ou **Analytics** :
 
 {{< tabs >}}
-{{< tab "Métriques d'APM" >}}
+{{% tab "Métriques d'APM" %}}
 
 ### Sélectionner le contexte du monitor
 
@@ -62,8 +62,8 @@ Une alerte se déclenche chaque fois qu'une métrique dévie d'un pattern attend
 [1]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /fr/tracing/visualization/service/
 [3]: /fr/tracing/visualization/resource/
-{{< /tab >}}
-{{< tab "Analyse" >}}
+{{% /tab %}}
+{{% tab "Analyse" %}}
 
 ### Définir la requête de recherche
 
@@ -85,7 +85,7 @@ Une alerte se déclenche chaque fois qu'une métrique dévie d'un pattern attend
 [2]: /fr/tracing/trace_search_and_analytics/query_syntax/#facet-search
 [3]: /fr/tracing/trace_search_and_analytics/query_syntax/#numerical-values
 [4]: /fr/tracing/visualization/#indexed-span
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Notifications

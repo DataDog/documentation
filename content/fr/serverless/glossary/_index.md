@@ -20,7 +20,7 @@ Ce glossaire s'intéresse aux termes et aux concepts utilisés dans le contexte 
 La solution Serverless de Datadog permet de surveiller vos applications sans serveur dans plusieurs environnements cloud différents.
 
 {{< tabs >}}
-{{< tab "AWS Lambda" >}}
+{{% tab "AWS Lambda" %}}
 
 AWS Lambda est la plateforme FaaS proposée par Amazon Web Services. Consultez la [documentation AWS Lambda][1] pour en savoir plus.
 
@@ -70,8 +70,8 @@ AWS Lambda est la plateforme FaaS proposée par Amazon Web Services. Consultez l
 [8]: /fr/serverless/troubleshooting/insights/
 [9]: /fr/serverless/distributed_tracing/serverless_trace_merging
 [10]: /fr/serverless/distributed_tracing/serverless_trace_propagation
-{{< /tab >}}
-{{< tab "Azure Functions" >}}
+{{% /tab %}}
+{{% tab "Azure Functions" %}}
 
 Azure Functions est une plateforme FaaS fournie par Microsoft Azure. Consultez la [documentation Microsoft Azure Functions][11] pour en savoir plus.
 
@@ -91,8 +91,8 @@ Azure Functions est une plateforme FaaS fournie par Microsoft Azure. Consultez l
 
 [11]: https://docs.microsoft.com/en-us/azure/azure-functions/
 [12]: https://app.datadoghq.com/functions
-{{< /tab >}}
-{{< tab "Google Cloud Functions" >}}
+{{% /tab %}}
+{{% tab "Google Cloud Functions" %}}
 
 Cloud Functions est l'environnement d'exécution sans serveur de Google. Consultez la [documentation Google Cloud Functions][13] pour en savoir plus.
 
@@ -101,5 +101,5 @@ Cloud Functions est l'environnement d'exécution sans serveur de Google. Consult
 | Fonctions Cloud          | L'offre FaaS de Google.                          |
 
 [13]: https://cloud.google.com/functions/docs
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}

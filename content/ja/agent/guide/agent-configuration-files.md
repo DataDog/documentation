@@ -9,7 +9,7 @@ aliases:
 Agent v6 の構成ファイルは、**YAML** を使用することで、複雑な構成に対するサポートを強化しています。また、チェックも YAML 構成ファイルを使用するため、一貫性のある構成エクスペリエンスが提供されます。このため、`datadog.conf` (v5) に代わって `datadog.yaml` (v6) が使用されます。
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 | プラットフォーム                             | コマンド                              |
 |:-------------------------------------|:-------------------------------------|
@@ -26,8 +26,8 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 | Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\datadog.yaml` |
 | Windows Server 2003/XP 以前     | サポートされないプラットフォーム               |
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | プラットフォーム                             | コマンド                                                                    |
 |:-------------------------------------|:---------------------------------------------------------------------------|
@@ -43,7 +43,7 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 | Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003/XP 以前     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: [`datadog.yaml` ファイルの完全なサンプルは、`datadog-agent` GitHub リポジトリにあります][1]。
@@ -53,7 +53,7 @@ Agent v6 の構成ファイルは、**YAML** を使用することで、複雑�
 Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/conf.d/` に保存されました。6.0 リリース以降は、構成ファイルは `/etc/datadog-agent/conf.d/<名前_チェック>.d/` に保存されます。
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 | プラットフォーム                             | コマンド                        |
 |:-------------------------------------|:-------------------------------|
@@ -94,8 +94,8 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 
 下位互換性を維持するため、Agent では依然として `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml` 形式の構成ファイルを処理しますが、新しいレイアウトへの移行を強くおすすめします。
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | プラットフォーム                             | コマンド                                                              |
 |:-------------------------------------|:---------------------------------------------------------------------|
@@ -111,7 +111,7 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 | Windows Server 2008/Vista 以降 | `%ProgramData%\Datadog\conf.d`                                       |
 | Windows Server 2003/XP 以前     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## JMX 構成ファイル

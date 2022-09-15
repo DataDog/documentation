@@ -20,7 +20,7 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 ## Répertoire de logs de l'Agent
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plateforme                              | Commandes                       |
 |---------------------------------------|-------------------------------|
@@ -30,8 +30,8 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 | Windows Server 2008, Vista et versions ultérieures  | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003, XP ou versions antérieures      | *Plate-forme non prise en charge*        |
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Plateforme                             | Commande                                                              |
 |--------------------------------------|----------------------------------------------------------------------|
@@ -42,13 +42,13 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 | SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
 | Build source                         | `~/.datadog-agent/supervisord/logs/`                                 |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Fichiers de log de l'Agent
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 * `agent.log`
 * `process-agent.log`
@@ -56,15 +56,15 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 * `system-probe.log`
 * `jmxfetch.log` pour l'Agent >= 7.24.0/6.24.0
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 * `collector.log`
 * `dogstatsd.log`
 * `forwarder.log`
 * `supervisord.log`
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Fichiers de log d'installation de l'Agent

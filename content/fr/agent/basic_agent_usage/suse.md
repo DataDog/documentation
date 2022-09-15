@@ -29,7 +29,7 @@ Les packages sont disponibles pour les architectures x86 64 bits. Pour toute au
 Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Avec l'Agent v5, la grande majorité des opérations passent par le gestionnaire de service.
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 ### SUSE 12 et ultérieur
 
@@ -57,8 +57,8 @@ Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 | Afficher l'utilisation des commandes              | `sudo datadog-agent --help`                            |
 | Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <NOM_CHECK>` |
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Rôle                        | Commande                                           |
 |------------------------------------|---------------------------------------------------|
@@ -71,7 +71,7 @@ Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 | Afficher l'utilisation des commandes              | `sudo service datadog-agent`                      |
 | Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <NOM_CHECK>` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : si le wrapper de `service` n'est pas disponible sur votre système, utilisez :
@@ -84,7 +84,7 @@ Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 ## Configuration
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -94,8 +94,8 @@ Fichiers de configuration pour les [intégrations][1] :
 * `/etc/datadog-agent/conf.d/`
 
 [1]: /fr/integrations/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
@@ -106,7 +106,7 @@ Fichiers de configuration pour les [intégrations][1] :
 * `/etc/dd-agent/conf.d/`
 
 [1]: /fr/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Dépannage

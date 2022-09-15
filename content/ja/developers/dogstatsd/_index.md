@@ -54,7 +54,7 @@ DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有
 ### エージェント
 
 {{< tabs >}}
-{{< tab "Host Agent" >}}
+{{% tab "Host Agent" %}}
 
 デフォルトでは、DogStatsD は UDP ポート **8125** をリスニングします。これを変更する必要がある場合は、[Agent のメイン構成ファイル][1]で `dogstatsd_port` オプションを構成し、Agent を再起動します。[Unix ドメインソケット][2]を使用するように DogStatsD を構成することもできます。カスタム Agent DogStatsD サーバーの UDP ポートを有効にするには:
 
@@ -79,8 +79,8 @@ DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有
 [1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /ja/developers/dogstatsd/unix_socket/
 [3]: /ja/agent/guide/agent-commands/
-{{< /tab >}}
-{{< tab "コンテナ Agent" >}}
+{{% /tab %}}
+{{% tab "コンテナ Agent" %}}
 
 デフォルトでは、DogStatsD は UDP ポート **8125** でリッスンするため、コンテナで Agent を実行する場合、このポートをホストポートにバインドする必要があります。StatsD メトリクスが `localhost` の外部から取得される場合、メトリクスの収集を許可するには、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定する必要があります。DogStatsd サーバーを起動した状態で Agent を実行するには、次のコマンドを実行します。
 
@@ -98,8 +98,8 @@ docker run -d --cgroupns host \
 StatsD メトリクスの収集に使用するポートを変更する必要がある場合は、`DD_DOGSTATSD_PORT="<新しい_DOGSTATSD_ポート>` 環境変数を使用します。[Unix ドメインソケット][1]を使用するように DogStatsD を構成することもできます。
 
 [1]: /ja/developers/dogstatsd/unix_socket/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 StatsD メトリクスの収集を開始するには、DogStatsD ポートをホストポートにバインドする必要があります。[Unix ドメインソケット][1]を使用するように DogStatsD を構成することもできます。
 
@@ -179,8 +179,8 @@ env:
 [4]: /ja/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 [6]: /ja/metrics/custom_metrics/
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 [DogStatsD][1] で、helm を使用してカスタムメトリクスを収集するには:
 
@@ -219,7 +219,7 @@ env:
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### コード

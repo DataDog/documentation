@@ -56,7 +56,7 @@ Une fois cette opération terminée, le log doit avoir le format suivant :
 ### Écrire les logs dans un fichier
 
 {{< tabs >}}
-{{< tab "JSON-log-formatter" >}}
+{{% tab "JSON-log-formatter" %}}
 
 Exemple d'utilisation avec [JSON-log-formatter][1] :
 
@@ -88,8 +88,8 @@ Le fichier de log comprend l'entrée de log suivante (sur une ligne) :
 ```
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
-{{< /tab >}}
-{{< tab "Python-json-logger" >}}
+{{% /tab %}}
+{{% tab "Python-json-logger" %}}
 
 Exemple d'utilisation avec [Python-json-logger][1] :
 
@@ -121,7 +121,7 @@ Pour en savoir plus sur la configuration du handler, consultez la documentation 
 
 [1]: https://github.com/madzak/python-json-logger
 [2]: https://github.com/madzak/python-json-logger#customizing-fields
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configurer l'Agent Datadog

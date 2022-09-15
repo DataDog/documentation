@@ -24,7 +24,7 @@ Les nouveaux utilisateurs doivent télécharger et installer la dernière versio
 Choisissez votre version de l'Agent :
 
 {{< tabs >}}
-{{< tab "Agent v7.21+/v6.21+" >}}
+{{% tab "Agent v7.21+/v6.21+" %}}
 
 Pour l'Agent v7.21+/6.21+ :
 
@@ -41,8 +41,8 @@ Pour l'Agent v7.21+/6.21+ :
 
 [1]: /fr/getting_started/integrations/
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Pour utiliser une intégration de la communauté provenant du référentiel integrations-extra avec l'Agent Docker, nous vous recommandons de générer une image de l'Agent avec l'intégration installée. Utilisez le Dockerfile suivant pour créer une version mise à jour de l'Agent comprenant l'intégration `<NOM_INTÉGRATION>` issue de integrations-extras.
 
@@ -56,9 +56,9 @@ La commande `agent integration install` exécutée au sein de Docker génère l'
 Utilisez cette nouvelle image de l'Agent conjointement avec [Autodiscovery][1] pour activer l'intégration `<NOM_INTÉGRATION>`.
 
 [1]: /fr/agent/autodiscovery/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Versions antérieures de l'Agent" >}}
+{{% tab "Versions antérieures de l'Agent" %}}
 
 Pour l'Agent < v7.21/v6.21 :
 
@@ -75,7 +75,7 @@ Pour l'Agent < v7.21/v6.21 :
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /fr/getting_started/integrations/
 [4]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <br>

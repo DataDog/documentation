@@ -27,7 +27,7 @@ title: リファレンステーブルを含むログにカスタムメタデー�
 ## リファレンステーブルを作成する
 
 {{< tabs >}}
-{{< tab "手動アップロード" >}}
+{{% tab "手動アップロード" %}}
 
 **New Reference Table +** をクリックしてから、CSV ファイルをアップロードし、適切な列に名前を付けて、ルックアップのプライマリキーを定義します。
 
@@ -35,9 +35,9 @@ title: リファレンステーブルを含むログにカスタムメタデー�
 
 **注**: CSV の手動アップロードは、4MB までのファイルをサポートしています。
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "AWS S3 アップロード" >}}
+{{% tab "AWS S3 アップロード" %}}
 
 リファレンステーブルは、AWS S3 バケットから CSV ファイルを自動的にプルして、データを最新の状態に保つことができます。インテグレーションでは、S3 で CSV ファイルへの変更が検索され、ファイルが更新されると、リファレンステーブルが新しいデータに置き換えられます。これにより、初期リファレンステーブルが構成されると、S3 API を使用した API 更新も可能になります。
 
@@ -73,7 +73,7 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#installation
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 このリファレンステーブルを使用して、[Lookup Processor][1] でログに属性を追加できます。

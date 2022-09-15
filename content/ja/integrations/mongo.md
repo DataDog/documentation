@@ -99,7 +99,7 @@ MongoDB チェックは [Datadog Agent][2] パッケージに含まれていま�
 ほとんどの低レベルのメトリクス (アップタイム、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (収集/インデックス統計など) は、一度だけ収集する必要があります。これらの理由により、Agent を構成する方法は、mongo クラスターのデプロイ方法によって異なります。
 
 {{< tabs >}}
-{{< tab "スタンドアロン" >}}
+{{% tab "スタンドアロン" %}}
 #### スタンドアロン
 
 このインテグレーションを単一ノードの MongoDB デプロイ用に構成するには
@@ -129,8 +129,8 @@ db.createUser({
 
 ##### Agent の構成
 使用可能なすべての mongo メトリクスを収集するには、できれば同じノードで実行している単一の Agent だけが必要です。コンフィギュレーションオプションについては、以下を参照してください。
-{{< /tab >}}
-{{< tab "ReplicaSet" >}}
+{{% /tab %}}
+{{% tab "ReplicaSet" %}}
 #### ReplicaSet
 
 このインテグレーションを MongoDB レプリカセット用に構成するには
@@ -163,8 +163,8 @@ db.createUser({
 **注**: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
-{{< /tab >}}
-{{< tab "シャード" >}}
+{{% /tab %}}
+{{% tab "シャード" %}}
 #### シャード
 
 このインテグレーションを MongoDB シャードクラスター用に構成するには
@@ -202,7 +202,7 @@ db.createUser({
 **注**: アービターノードの監視はサポートされていません (詳細については、[MongoDB Replica Set Arbiter][1] を参照してください)。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -211,7 +211,7 @@ db.createUser({
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -295,8 +295,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 #### Docker
 
@@ -344,8 +344,8 @@ Agent コンテナで必要な環境変数
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [4]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 #### Kubernetes
 
@@ -450,8 +450,8 @@ Agent コンテナで必要な環境変数
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
 [7]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [8]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "ECS" >}}
+{{% /tab %}}
+{{% tab "ECS" %}}
 
 #### ECS
 
@@ -518,7 +518,7 @@ Agent コンテナで必要な環境変数
 [4]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
 [6]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

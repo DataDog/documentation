@@ -67,22 +67,143 @@ Sampling controls can be set for only root services.
 The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
-{{< tab "Java" >}}
-{{< /tab >}}
-{{< tab "Python" >}}
-{{< /tab >}}
-{{< tab "Ruby" >}}
-{{< /tab >}}
-{{< tab "Go" >}}
-{{< /tab >}}
-{{< tab "NodeJS" >}}
-{{< /tab >}}
-{{< tab "PHP" >}}
-{{< /tab >}}
-{{< tab "C++" >}}
-{{< /tab >}}
-{{< tab ".NET" >}}
-{{< /tab >}}
+{{% tab "Java" %}}
+For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_SERVICE_RULES` environment variable.
+
+For example, to send 20% of the traces for the service named `my-service`:
+
+```
+# using system property
+java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.jar -jar my-app.jar
+
+# using environment variables
+export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+Read more about sampling controls in the [Java tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/java
+{{% /tab %}}
+{{% tab "Python" %}}
+For Python applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+Read more about sampling controls in the [Python tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/python
+{{% /tab %}}
+{{% tab "Ruby" %}}
+For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+Read more about sampling controls in the [Ruby tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/ruby#sampling
+{{% /tab %}}
+{{% tab "Go" %}}
+For Go applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+Read more about sampling controls in the [Go tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/go
+{{% /tab %}}
+{{% tab "NodeJS" %}}
+For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
+
+You can also set by-service sampling rates. For instance, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```javascript
+tracer.init({
+  ingestion:
+    sampler: {
+      sampleRate: 0.1,
+      rules: [
+        { sampleRate: 0.5, service: 'my-service' }
+      ]
+    }
+  }
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+Read more about sampling controls in the [NodeJS tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/nodejs
+{{% /tab %}}
+{{% tab "PHP" %}}
+For PHP applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+Read more about sampling controls in the [PHP tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/php
+{{% /tab %}}
+{{% tab "C++" %}}
+Starting in version version `1.3.2`, the Datadog C++ library supports the following configurations:
+- Global sampling rate: `DD_TRACE_SAMPLE_RATE` environment variable
+- Sampling rates by service: `DD_TRACE_SAMPLING_RULES` environment variable.
+- Rate limit setting: `DD_TRACE_RATE_LIMIT` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+C++ does not provide integrations for out-of-the-box instrumentation, but it’s used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
+
+[1]: /tracing/trace_collection/proxy_setup
+{{% /tab %}}
+{{% tab ".NET" %}}
+For .NET applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
+```
+
+Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+Read more about sampling controls in the [.NET tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-core
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: All the spans from a trace sampled using a tracing library configuration  are tagged with the ingestion reason `rule`. Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][5] Configuration column.
@@ -155,10 +276,23 @@ If you need to sample a specific span, but don't need the full trace to be avail
 To use the analytics mechanism, enable it either by an environment variable or in the code. Also, define a sampling rate to be applied to all `analytics_enabled` spans:
 
 {{< tabs >}}
-{{< tab "Environment variables" >}}
-{{< /tab >}}
-{{< tab "Code API" >}}
-{{< /tab >}}
+{{% tab "Environment variables" %}}
+
+```
+@env  DD_TRACE_ANALYTICS_ENABLED - boolean - optional false
+```
+{{% /tab %}}
+{{% tab "Code API" %}}
+
+```
+// in dd-trace-go
+// set analytics_enabled by default
+tracerconfig.WithAnalytics(on bool)
+// set raw sampling rate to apply on all analytics_enabled spans
+tracerconfig.SetAnalyticsRate(0.4)
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Tag any single span with `analytics_enabled:true`. In addition, specify a sampling rate to be associated with the span:

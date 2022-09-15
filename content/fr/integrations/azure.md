@@ -101,7 +101,7 @@ Intégrez votre compte Microsoft Azure à Datadog à l'aide de l'outil d'interf
 Afin d'intégrer Datadog à Azure à l'aide de l'interface de ligne de commande Azure, assurez-vous que [celle-ci est bien installée][47].
 
 {{< tabs >}}
-{{< tab "CLI Azure v2.0" >}}
+{{% tab "CLI Azure v2.0" %}}
 
 Commencez par vous connecter au compte Azure que vous souhaitez intégrer à Datadog :
 
@@ -131,8 +131,8 @@ az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{id_
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 
-{{< /tab >}}
-{{< tab "CLI Azure v1.0" >}}
+{{% /tab %}}
+{{% tab "CLI Azure v1.0" %}}
 
 Commencez par vous connecter au compte Azure que vous souhaitez intégrer à Datadog :
 
@@ -171,8 +171,8 @@ azure role assignment create --objectId <ID_OBJET> -o "Monitoring Reader" -c /su
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 
-{{< /tab >}}
-{{< tab "CLI Azure antérieures à la v1.0" >}}
+{{% /tab %}}
+{{% tab "CLI Azure antérieures à la v1.0" %}}
 
 Commencez par vous connecter au compte Azure que vous souhaitez intégrer à Datadog :
 
@@ -226,7 +226,7 @@ azure role assignment create --objectId <ID_OBJET> --roleName "Monitoring Reader
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Intégration via le portail Azure
@@ -312,7 +312,7 @@ Le meilleur moyen d'envoyer les logs d'Azure à Datadog est d'utiliser l'Agent o
 
 {{< tabs >}}
 
-{{< tab "Installation automatisée" >}}
+{{% tab "Installation automatisée" %}}
 
 Datadog met à votre disposition deux scripts automatisés.
 
@@ -403,9 +403,9 @@ Si l'installation échoue, consultez la [section Dépannage][3] pour résoudre r
 [1]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.datadoghq.com/fr/integrations/azure/#troubleshooting
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Installation manuelle" >}}
+{{% tab "Installation manuelle" %}}
 
 Pour envoyer des logs depuis Azure vers Datadog, suivez cette méthode globale :
 
@@ -504,9 +504,9 @@ Configurez vos services Azure de façon à ce que leurs logs soient envoyés au 
 [3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
 [5]: https://app.datadoghq.com/logs
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Stockage Blob" >}}
+{{% tab "Stockage Blob" %}}
 
 Pour recueillir des logs à partir de l'ensemble de vos Azure App Services, suivez cette méthode globale :
 
@@ -543,7 +543,7 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez [le portail Azure][7
 [8]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
 [9]: https://app.datadoghq.com/account/settings#api
 [10]: https://app.datadoghq.com/logs
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Données collectées

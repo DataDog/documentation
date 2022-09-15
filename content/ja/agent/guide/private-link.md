@@ -29,7 +29,7 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 ただし、他のリージョンから `us-east-1` にある Datadog の PrivateLink サービスにトラフィックをルーティングするには、リージョン間の [Amazon VPC peering][2] を使用します。リージョン間 VPC ピアリングは、異なる AWS リージョンにまたがる VPC 間の接続を確立することができます。これにより、異なるリージョンの VPC リソース同士がプライベート IP アドレスで通信できるようになります。詳しくは、[Amazon VPC ピアリング][2]をご参照ください。
 
 {{< tabs >}}
-{{< tab "us-east-1" >}}
+{{% tab "us-east-1" %}}
 
 1. AWS Console をリージョン **us-east-1** に接続し、VPC エンドポイントを作成します。
 
@@ -96,9 +96,9 @@ Datadog は、**us-east-1** で AWS PrivateLink のエンドポイントを公�
 [3]: /ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 [5]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "VPC ピアリング" >}}
+{{% tab "VPC ピアリング" %}}
 
 ### Amazon VPC ピアリング
 
@@ -230,7 +230,7 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 [7]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [8]: https://docs.datadoghq.com/ja/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

@@ -56,7 +56,7 @@ OS 設定
 
 2. プロファイラーを含むようにサービス呼び出しを修正します。いつものコマンドは `ddprof` 実行ファイルへの最後の引数として渡されます。
    {{< tabs >}}
-{{< tab "環境変数" >}}
+{{% tab "環境変数" %}}
 
 ```bash
 export DD_ENV=prod
@@ -79,8 +79,8 @@ export DD_VERSION=1.0.3
 exec ./ddprof myapp --arg1 --arg2
 ```
 
-{{< /tab >}}
-{{< tab "パラメーター" >}}
+{{% /tab %}}
+{{% tab "パラメーター" %}}
 
 ```bash
 ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
@@ -98,7 +98,7 @@ exec myapp --arg1
 exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

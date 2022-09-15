@@ -59,7 +59,7 @@ further_reading:
 使用できる可視化タイプは以下のとおりです。
 
 {{< tabs >}}
-{{< tab "Timeseries" >}}
+{{% tab "Timeseries" %}}
 
 選択したタイムフレーム内での 1 つの[メジャー][1] (または[ファセット][2]のユニーク値数) の動きを可視化し、オプションで、使用可能な[ファセット][2]で分割します。
 
@@ -85,9 +85,9 @@ further_reading:
 
 [1]: /ja/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
 [2]: /ja/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Top List" >}}
+{{% tab "Top List" %}}
 
 選択した[メジャー][2]に基づいて、[ファセット][1]から上位の値を可視化します。
 
@@ -99,8 +99,8 @@ further_reading:
 
 [1]: /ja/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /ja/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
-{{< /tab >}}
-{{< tab "Table" >}}
+{{% /tab %}}
+{{% tab "Table" %}}
 
 選択した[メジャー][2] (リストで選択した最初のメジャー) に基づいて[ファセット][1]から上位の値を可視化し、この上位の値に現れる要素に対して他のメジャーの値を表示します。検索クエリを更新したり、いずれかのディメンションに対応するイベントをドリルスルーすることができます。
 
@@ -116,9 +116,9 @@ further_reading:
 
 [1]: /ja/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /ja/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ジオマップ" >}}
+{{% tab "ジオマップ" %}}
 
 世界地図上で単一の[メジャー][1] (または[ファセット][2]の一意の値のカウント) を視覚化します。
 
@@ -128,7 +128,7 @@ further_reading:
 
 [1]: /ja/real_user_monitoring/rum_explorer/?tab=facets#facets-measures
 [2]: /ja/real_user_monitoring/rum_explorer/?tab=measures#facets-measures
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

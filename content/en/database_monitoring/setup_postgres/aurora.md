@@ -71,7 +71,7 @@ CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
 {{< tabs >}}
-{{< tab "Postgres ≥ 10" >}}
+{{% tab "Postgres ≥ 10" %}}
 
 Create the following schema **in every database**:
 
@@ -83,8 +83,8 @@ GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-{{< /tab >}}
-{{< tab "Postgres 9.6" >}}
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
 
 Create the following schema **in every database**:
 
@@ -109,7 +109,7 @@ LANGUAGE sql
 SECURITY DEFINER;
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
@@ -144,7 +144,7 @@ SECURITY DEFINER;
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 
 {{< tabs >}}
-{{< tab "Postgres ≥ 10" >}}
+{{% tab "Postgres ≥ 10" %}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -160,8 +160,8 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{{< /tab >}}
-{{< tab "Postgres 9.6" >}}
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -178,7 +178,7 @@ psql -h localhost -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
@@ -188,7 +188,7 @@ When it prompts for a password, use the password you entered when you created th
 To monitor Aurora hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
 
@@ -217,8 +217,8 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
@@ -280,8 +280,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/guide/secrets-management
 [3]: /agent/faq/template_variables/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
@@ -384,7 +384,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /agent/guide/secrets-management
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

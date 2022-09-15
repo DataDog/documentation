@@ -54,7 +54,7 @@ Si vous utilisez l'Agent dans un conteneur et définissez la variable d'environn
 Par exemple, pour installer l'intégration sur Kubernetes, modifiez votre DaemonSet de façon à monter le socket Containerd du nœud host sur le conteneur de l'Agent et définissez la variable d'environnement `DD_CRI_SOCKET_PATH` sur le chemin de montage du DaemonSet :
 
 {{< tabs >}}
-{{< tab "Conteneur Linux" >}}
+{{% tab "Conteneur Linux" %}}
 
 ##### Conteneur Linux
 
@@ -89,8 +89,8 @@ spec:
 
 **Remarque :** le répertoire `/var/run` doit être monté à partir du host pour que l'intégration s'exécute correctement.
 
-{{< /tab >}}
-{{< tab "Conteneur Windows" >}}
+{{% /tab %}}
+{{% tab "Conteneur Windows" %}}
 
 ##### Conteneur Windows
 
@@ -117,7 +117,7 @@ spec:
               mountPath: \\\\.\\pipe\\containerd-containerd
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configuration

@@ -74,7 +74,7 @@ Agent のインストールには、Kubernetes の [Agent のインストール�
 上記のインストール手順にリンクされている方法のいずれかを使用して Datadog Agent をデプロイする場合は、Agent がデータを収集するために SCC (セキュリティコンテキスト制約) を含める必要があります。デプロイに関連する以下の手順に従ってください。
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 SCC は、Datadog Agent の `values.yaml` 内で直接適用できます。ファイルの `agents:` セクションの下に次のブロックを追加します。
 
@@ -90,8 +90,8 @@ agents:
 
 これは、Agent を最初にデプロイするときに適用できます。または、この変更を行った後に `helm upgrade` を実行して、SCC を適用することもできます。
 
-{{< /tab >}}
-{{< tab "Daemonset" >}}
+{{% /tab %}}
+{{% tab "Daemonset" %}}
 
 ニーズとクラスターの[セキュリティ制約][1]に応じて、次の 3 つのデプロイシナリオがサポートされます。
 
@@ -117,7 +117,7 @@ agents:
 </div>
 
 [1]: https://docs.openshift.com/enterprise/3.0/admin_guide/manage_scc.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}} 
 
 #### ログの収集

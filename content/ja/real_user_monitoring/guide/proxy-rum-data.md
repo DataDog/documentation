@@ -18,7 +18,7 @@ RUM ブラウザ SDK は、プロキシ経由でリクエストを送信する�
 `proxyUrl` [初期化パラメーター][1]を設定すると、すべての RUM データは指定した URL に POST メソッド (例: `https://www.proxy.com/foo`) で送信されます。
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
@@ -31,8 +31,8 @@ datadogRum.init({
 });
 ```
 
-{{< /tab >}}
-{{< tab "CDN async" >}}
+{{% /tab %}}
+{{% tab "CDN async" %}}
 ```html
 <script>
  (function(h,o,u,n,d) {
@@ -49,8 +49,8 @@ datadogRum.init({
   })
 </script>
 ```
-{{< /tab >}}
-{{< tab "CDN sync" >}}
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -61,7 +61,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## プロキシ設定
@@ -79,7 +79,7 @@ Datadog へのプロキシリクエストを成功させるには
 サイトパラメータは、SDK の[初期化パラメータ][3]です。各サイトで有効な取り込み URL のパターンは以下の通りです。
 
 {{< tabs >}}
-{{< tab "最新バージョン" >}}
+{{% tab "最新バージョン" %}}
 
 | サイト    | 有効な取り込み URL パターン                       | サイトパラメーター      |
 |---------|------------------------------------------------|---------------------|
@@ -89,8 +89,8 @@ Datadog へのプロキシリクエストを成功させるには
 | EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
 
-{{< /tab >}}
-{{< tab "`v4` より前" >}}
+{{% /tab %}}
+{{% tab "`v4` より前" %}}
 
 | サイト    | 有効な取り込み URL パターン             | サイトパラメーター      |
 |---------|--------------------------------------|---------------------|
@@ -99,7 +99,7 @@ Datadog へのプロキシリクエストを成功させるには
 | EU1     | `https://*.logs.datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.logs.ddog-gov.com/*`      | `ddog-gov.com`      |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

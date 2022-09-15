@@ -109,7 +109,7 @@ Le check Consul de l'Agent Datadog est inclus avec le package de l'[Agent Datado
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -240,8 +240,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [4]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
 [5]: https://docs.datadoghq.com/fr/developers/dogstatsd/
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -268,7 +268,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

@@ -25,7 +25,7 @@ Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a
 ## メジャー Agent バージョン間の変更点
 
 {{< tabs >}}
-{{< tab "Agent v7 と v6" >}}
+{{% tab "Agent v7 と v6" %}}
 
 Agent v7 は、Datadog Agent の最新のメジャーバージョンです。Agent v6 からの唯一の変更点は、**このバージョンには、インテグレーションおよびカスタムチェック用の Python 3 のサポートのみが含まれている**ことです。
 
@@ -37,8 +37,8 @@ Agent をバージョン 7 にアップグレードする方法については�
 [1]: /ja/agent/versions/upgrade_to_agent_v7/
 [2]: /ja/agent/guide/python-3/
 [3]: /ja/agent/guide/agent-v6-python-3/
-{{< /tab >}}
-{{< tab "Agent v6 と v5" >}}
+{{% /tab %}}
+{{% tab "Agent v6 と v5" %}}
 
 **Agent バージョン 6 の主な変更点**:
 
@@ -79,7 +79,7 @@ Agent v5 から Agent v6 へのすべての変更内容については、[Datado
 [6]: /ja/infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /ja/logs/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

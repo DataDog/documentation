@@ -53,7 +53,7 @@ Les instructions suivantes montrent des exemples de configuration pour les bibli
 ### Format JSON
 
 {{< tabs >}}
-{{< tab "Log4j" >}}
+{{% tab "Log4j" %}}
 
 Pour Log4j, générez les logs au format JSON en utilisant le module SLF4J [log4j-over-slf4j][1] avec Logback. `log4j-over-slf4j` remplace directement Log4j dans votre application, ce qui fait qu'aucune modification du code n'est nécessaire. Pour l'utiliser :
 
@@ -91,8 +91,8 @@ Pour Log4j, générez les logs au format JSON en utilisant le module SLF4J [log4
     ```
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
-{{< /tab >}}
-{{< tab "Log4j 2" >}}
+{{% /tab %}}
+{{% tab "Log4j 2" %}}
 
 Log4j 2 intègre une structure JSON.
 
@@ -137,8 +137,8 @@ Log4j 2 intègre une structure JSON.
     </dependency>
     ```
 
-{{< /tab >}}
-{{< tab "Logback" >}}
+{{% /tab %}}
+{{% tab "Logback" %}}
 
 Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format JSON dans Logback. 
 
@@ -173,7 +173,7 @@ Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format 
     ```
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Ajouter des identifiants de trace à vos logs
@@ -183,7 +183,7 @@ Si l'APM est activé pour cette application, vous pouvez corréler des logs et d
 ### Format brut
 
 {{< tabs >}}
-{{< tab "Log4j" >}}
+{{% tab "Log4j" %}}
 
 Configurez un file appender dans `log4j.xml` :
 
@@ -209,8 +209,8 @@ Configurez un file appender dans `log4j.xml` :
 </log4j:configuration>
 ```
 
-{{< /tab >}}
-{{< tab "Log4j 2" >}}
+{{% /tab %}}
+{{% tab "Log4j 2" %}}
 
 Configurez un file appender dans `log4j2.xml` :
 
@@ -231,8 +231,8 @@ Configurez un file appender dans `log4j2.xml` :
 </Configuration>
 ```
 
-{{< /tab >}}
-{{< tab "Logback" >}}
+{{% /tab %}}
+{{% tab "Logback" %}}
 
 Configurez un file appender dans `logback.xml` :
 
@@ -254,7 +254,7 @@ Configurez un file appender dans `logback.xml` :
 </configuration>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Ajouter des identifiants de trace à vos logs
@@ -298,7 +298,7 @@ Pour transmettre vos logs directement à Datadog :
 Si vous n'utilisez pas déjà Logback, la plupart des bibliothèques de journalisation courantes peuvent être reliées à Logback.
 
 {{< tabs >}}
-{{< tab "Log4j" >}}
+{{% tab "Log4j" %}}
 
 Utilisez le module SLF4J [log4j-over-slf4j][1] avec Logback pour envoyer les logs vers un autre serveur. `log4j-over-slf4j` remplace directement Log4j dans votre application, ce qui fait qu'aucune modification du code n'est nécessaire. Pour l'utiliser :
 
@@ -327,9 +327,9 @@ Utilisez le module SLF4J [log4j-over-slf4j][1] avec Logback pour envoyer les log
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Log4j 2" >}}
+{{% tab "Log4j 2" %}}
 
 Log4j 2 permet la journalisation sur un host à distance, mais n'offre pas la possibilité d'ajouter une clé d'API en préfixe avant les logs. De ce fait, utilisez le module SLF4J [log4j-over-slf4j][1] avec Logback. `log4j-to-slf4j.jar` remplace directement Log4j 2 dans votre application, ce qui fait qu'aucune modification du code n'est nécessaire. Pour l'utiliser :
 
@@ -361,7 +361,7 @@ Log4j 2 permet la journalisation sur un host à distance, mais n'offre pas la p
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
