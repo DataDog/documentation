@@ -38,7 +38,7 @@ Ce guide décrit la marche à suivre pour configurer une archive afin de transf�
 ### Configurer une intégration
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3. 
 
@@ -46,56 +46,56 @@ Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte A
 * Pour les comptes AWS GovCloud ou China uniquement, utilisez les clés d'accès comme alternative à la délégation de rôles.
 
 [1]: /fr/integrations/amazon_web_services/?tab=automaticcloudformation#setup
-{{< /tab >}}
-{{< tab "Stockage Azure" >}}
+{{% /tab %}}
+{{% tab "Stockage Azure" %}}
 
 Si vous ne l'avez pas encore fait, configurez l'[intégration Azure][1] pour l'abonnement associé à votre compte de stockage. Vous devrez [créer une inscription d'application utilisable par Datadog][2] afin de procéder à l'intégration.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /fr/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Google Cloud Storage" >}}
+{{% tab "Google Cloud Storage" %}}
 
 Si vous ne l'avez pas encore fait, configurez l'[intégration GCP][1] pour le projet qui comporte votre compartiment de stockage GCS. Vous devrez [créer un compte de service GCS utilisable par Datadog][2] afin de procéder à l'intégration.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /fr/integrations/google_cloud_platform/?tab=datadogussite#setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Créer un compartiment de stockage
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 Accédez à votre [console AWS][1] et [créez un compartiment S3][2] vers lequel vos archives seront envoyées. Assurez-vous que votre compartiment n'est pas accessible au public.
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Stockage Azure" >}}
+{{% tab "Stockage Azure" %}}
 
 Accédez à votre [portail Azure][1] et [créez un compte de stockage][2] vers lequel vous souhaitez envoyer vos archives. Attribuez un nom à votre compte, choisissez n'importe quel type de compte, puis sélectionnez le niveau d'accès **hot**.
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Google Cloud Storage" >}}
+{{% tab "Google Cloud Storage" %}}
 
 Accédez à votre [compte GCP][1] et [créez un compartiment GCS][2] vers lequel vos archives seront envoyées. Sous « Choose how to control access to objects », sélectionnez « Set object-level and bucket-level permissions ».
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Définir les autorisations
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 Ajoutez les deux instructions d'autorisation suivantes aux stratégies IAM. Modifiez les noms de compartiment et, si vous le souhaitez, indiquez les chemins vers vos archives de logs.
 
@@ -133,8 +133,8 @@ Ajoutez les deux instructions d'autorisation suivantes aux stratégies IAM. Modi
 
 
 [1]: /fr/logs/archives/rehydrating/
-{{< /tab >}}
-{{< tab "Stockage Azure" >}}
+{{% /tab %}}
+{{% tab "Stockage Azure" %}}
 
 * Accordez à votre application Datadog les autorisations nécessaires pour écrire dans votre compte de stockage et effectuer une réintégration à partir de celui-ci.
 * Sélectionnez votre compte de stockage depuis la [page Storage Accounts][1], accédez à **Access Control (IAM)** et sélectionnez **Add -> Add Role Assignment**.
@@ -143,8 +143,8 @@ Ajoutez les deux instructions d'autorisation suivantes aux stratégies IAM. Modi
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Ajouter le rôle Storage Blob Data Contributor à votre application Datadog." style="width:75%;">}}
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
-{{< /tab >}}
-{{< tab "Google Cloud Storage" >}}
+{{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
 
 Accordez à votre compte de service GCP Datadog les autorisations nécessaires pour écrire vos archives dans votre compartiment.
 
@@ -158,7 +158,7 @@ Ajoutez les rôles **Storage Object Creator** (pour la création d'archives) et 
 
 [1]: https://console.cloud.google.com/apis/credentials
 [2]: https://console.cloud.google.com/iam-admin/iam
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Transmettre vos logs vers un compartiment
@@ -168,7 +168,7 @@ Accédez à la [page Archives][4] dans Datadog et sélectionnez l'option **Add a
 Seuls les utilisateurs de Datadog bénéficiant de l'[autorisation Logs Write Archive][3] peuvent effectuer cette étape ainsi que la suivante.
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 Sélectionnez le compte AWS et le rôle appropriés pour votre compartiment S3.
 
@@ -176,8 +176,8 @@ Indiquez le nom de votre compartiment. **Facultatif** : ajoutez un répertoire 
 
 {{< img src="logs/archives/logs_archive_aws_setup.png" alt="Définir les données de votre compartiment S3 dans Datadog"  style="width:75%;">}}
 
-{{< /tab >}}
-{{< tab "Stockage Azure" >}}
+{{% /tab %}}
+{{% tab "Stockage Azure" %}}
 
 Sélectionnez le type d'archive **Azure Storage**, ainsi que le locataire et le client Azure pour l'application Datadog disposant du rôle Storage Blob Data Contributor sur votre compte de stockage.
 
@@ -186,8 +186,8 @@ Indiquez le nom de votre compte de stockage et un nom de conteneur pour votre ar
 {{< img src="logs/archives/logs_archive_azure_setup.png" alt="Définir les données de votre compte de stockage Azure dans Datadog"  style="width:75%;">}}
 
 
-{{< /tab >}}
-{{< tab "Google Cloud Storage" >}}
+{{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
 
 Sélectionnez le type d'archive **GCS**, puis le compte de service GCS doté des autorisations d'écriture dans votre compte de stockage.
 
@@ -195,7 +195,7 @@ Indiquez le nom de votre compartiment. **Facultatif** : ajoutez un répertoire 
 
 {{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Définir les données de votre compte de stockage Azure dans Datadog"  style="width:75%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Paramètres avancés
@@ -228,7 +228,7 @@ Utilisez cette étape de configuration facultative pour :
 #### Classe de stockage
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 Vous pouvez [définir une configuration de cycle de vie sur votre compartiment S3][1] pour transférer automatiquement vos archives de logs vers les classes de stockage optimales.
 
@@ -236,14 +236,14 @@ La fonction [Rehydration][2] prend en charge toutes les classes de stockage à l
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /fr/logs/archives/rehydrating/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 #### Chiffrement côté serveur (SSE)
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 ##### SSE-S3
 
@@ -316,7 +316,7 @@ Datadog prend également en charge le chiffrement côté serveur à l'aide d'un 
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

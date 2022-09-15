@@ -29,7 +29,7 @@ Packages are available for 64-bit x86 architectures. For other architectures, us
 In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 ### SUSE 12 and higher
 
@@ -57,8 +57,8 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo datadog-agent --help`                            |
 | Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Description                        | Command                                           |
 |------------------------------------|---------------------------------------------------|
@@ -71,7 +71,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 | Display command usage              | `sudo service datadog-agent`                      |
 | Run a check                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: If the `service` wrapper is not available on your system, use:
@@ -84,7 +84,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 ## Configuration
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 The configuration files and folders for the Agent are located in:
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -94,8 +94,8 @@ Configuration files for [Integrations][1]:
 * `/etc/datadog-agent/conf.d/`
 
 [1]: /integrations/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 The configuration files and folders for the Agent are located in:
 
@@ -106,7 +106,7 @@ Configuration files for [Integrations][1]:
 * `/etc/dd-agent/conf.d/`
 
 [1]: /integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Troubleshooting

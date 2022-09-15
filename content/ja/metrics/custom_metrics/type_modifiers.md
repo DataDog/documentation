@@ -43,7 +43,7 @@ title: メトリクスタイプのモディファイアー
 適用したメトリクスタイプに応じて、動作は異なります。
 
 {{< tabs >}}
-{{< tab "COUNT" >}}
+{{% tab "COUNT" %}}
 
 * `as_count()` の効果
   * [補間][1]を無効にします。
@@ -56,8 +56,8 @@ title: メトリクスタイプのモディファイアー
 **注**: 間隔が短くて時間集計が発生しない場合、正規化は行われず、未加工のメトリクス値カウントが戻されます。
 
 [1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/
-{{< /tab >}}
-{{< tab "RATE" >}}
+{{% /tab %}}
+{{% tab "RATE" %}}
 
 * `as_count()` の効果
   * [補間][1]を無効にします。
@@ -68,12 +68,12 @@ title: メトリクスタイプのモディファイアー
   * 時間集計関数を `SUM` に設定します。
 
 [1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/
-{{< /tab >}}
-{{< tab "GAUGE" >}}
+{{% /tab %}}
+{{% tab "GAUGE" %}}
 
 `GAUGE` メトリクスタイプはメトリクスの絶対値と最終値を表します。`as_count()` や `as_rate()` モディファイアーは影響しません。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 修飾子 `weighted()`

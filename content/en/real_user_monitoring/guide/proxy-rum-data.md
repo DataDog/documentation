@@ -18,7 +18,7 @@ The RUM Browser SDK can be configured to send requests through a proxy. Requests
 When you set the `proxyUrl` [initialization parameter][1], all RUM data is sent to the specified URL using the POST method (for example, `https://www.proxy.com/foo`).
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
@@ -31,8 +31,8 @@ datadogRum.init({
 });
 ```
 
-{{< /tab >}}
-{{< tab "CDN async" >}}
+{{% /tab %}}
+{{% tab "CDN async" %}}
 ```html
 <script>
  (function(h,o,u,n,d) {
@@ -49,8 +49,8 @@ datadogRum.init({
   })
 </script>
 ```
-{{< /tab >}}
-{{< tab "CDN sync" >}}
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -61,7 +61,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Proxy setup
@@ -76,10 +76,10 @@ To successfully proxy request to Datadog:
 
 Ensure the `ddforward` attribute points to a valid Datadog endpoint for your [Datadog site][2]. Failure to do so may result in an insecure configuration. 
 
-The site parameter is an SDK [initialization parameter][1]. Valid intake URL patterns for each site are listed below:
+The site parameter is an SDK [initialization parameter][3]. Valid intake URL patterns for each site are listed below:
 
 {{< tabs >}}
-{{< tab "Latest version" >}}
+{{% tab "Latest version" %}}
 
 | Site    | Valid intake URL Pattern                       | Site Parameter      |
 |---------|------------------------------------------------|---------------------|
@@ -89,8 +89,8 @@ The site parameter is an SDK [initialization parameter][1]. Valid intake URL pat
 | EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
 
-{{< /tab >}}
-{{< tab "Before `v4`" >}}
+{{% /tab %}}
+{{% tab "Before `v4`" %}}
 
 | Site    | Valid intake URL Pattern             | Site Parameter      |
 |---------|--------------------------------------|---------------------|
@@ -99,7 +99,7 @@ The site parameter is an SDK [initialization parameter][1]. Valid intake URL pat
 | EU1     | `https://*.logs.datadoghq.eu/*`      | `datadoghq.eu`      |
 | US1-FED | `https://*.logs.ddog-gov.com/*`      | `ddog-gov.com`      |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -109,3 +109,4 @@ The site parameter is an SDK [initialization parameter][1]. Valid intake URL pat
 
 [1]: /real_user_monitoring/browser/#initialization-parameters
 [2]: /getting_started/site/
+[3]: /real_user_monitoring/browser/#initialization-parameters

@@ -22,7 +22,7 @@ Cette section spécifie le format des datagrammes bruts pour les métriques, év
 ## Protocole DogStatsD
 
 {{< tabs >}}
-{{< tab "Métriques" >}}
+{{% tab "Métriques" %}}
 
 `<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONNAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
@@ -77,8 +77,8 @@ Consultez la documentation sur le tagging [Kubernetes][4] et [Docker][5] pour en
 [3]: /fr/getting_started/tagging/
 [4]: /fr/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [5]: /fr/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
-{{< /tab >}}
-{{< tab "Événements" >}}
+{{% /tab %}}
+{{% tab "Événements" %}}
 
 `_e{<LONGUEUR_TITRE_UTF8>,<LONGUEUR_TEXTE_UTF8>}:<TITRE>|<TEXTE>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITÉ>|t:<TYPE_ALERTE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
@@ -107,8 +107,8 @@ _e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#
 _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 ```
 
-{{< /tab >}}
-{{< tab "Checks de service" >}}
+{{% /tab %}}
+{{% tab "Checks de service" %}}
 
 `_sc|<NOM>|<STATUT>|d:<TIMESTAMP>|h:<HOSTNAME>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>|m:<MESSAGE_CHECK_SERVICE>`
 
@@ -129,7 +129,7 @@ Voici un exemple de datagramme :
 _sc|Redis connection|2|#env:dev|m:La connexion à Redis a expiré après 10 s
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Envoyer des statistiques à l'aide de DogStatsD et de l'interface système
@@ -139,7 +139,7 @@ Pour Linux et d'autres systèmes d'exploitation comme Unix, utilisez Bash. Pour 
 DogStatsD crée un message qui contient des informations à propos de votre métrique, événement ou check de service et l'envoie à un Agent installé en local sous la forme d'un collecteur. L'adresse IP de destination est `127.0.0.1` et le port du collecteur via UDP est `8125`. Consultez la section [DogStatsD][3] pour en savoir plus sur la configuration de l'Agent.
 
 {{< tabs >}}
-{{< tab "Métriques" >}}
+{{% tab "Métriques" %}}
 
 Voici le format d'envoi de métriques :
 
@@ -187,8 +187,8 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-{{< /tab >}}
-{{< tab "Événements" >}}
+{{% /tab %}}
+{{% tab "Événements" %}}
 
 Voici le format d'envoi d'événements :
 
@@ -216,8 +216,8 @@ PS C:> $text = "Cet événement a été envoyé depuis PowerShell !"
 PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
 ```
 
-{{< /tab >}}
-{{< tab "Checks de service" >}}
+{{% /tab %}}
+{{% tab "Checks de service" %}}
 
 Voici le format d'envoi des checks de service :
 
@@ -237,7 +237,7 @@ Sur Windows :
 PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:La connexion à Redis a expiré après 10 s"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour envoyer des métriques, des événements ou des checks de service sur des environnements conteneurisés, consultez la section relative à [l'utilisation de DogStatsD sur Kubernetes][3], conjointement avec les instructions de [configuration de l'APM sur Kubernetes][4], en fonction de votre installation. La documentation sur l'[APM Docker][5] peut également vous venir en aide.

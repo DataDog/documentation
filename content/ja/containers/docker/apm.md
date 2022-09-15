@@ -40,7 +40,7 @@ _任意のホスト_ からトレースを利用するには、`-p 8126:8126/tcp
 たとえば、次のコマンドを使用すると、Agent はユーザーのホストからのみトレースを受信します。
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -56,8 +56,8 @@ docker run -d --cgroupns host \
 ```
 `<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
@@ -68,7 +68,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 ```
 `<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Docker APM Agent の環境変数
@@ -111,7 +111,7 @@ docker network create <NETWORK_NAME>
 次に、先ほど作成したネットワークに接続されている Agent とアプリケーションコンテナを起動します。
 
 {{< tabs >}}
-{{< tab "標準" >}}
+{{% tab "標準" %}}
 
 ```bash
 # Datadog Agent
@@ -136,8 +136,8 @@ docker run -d --name app \
 
 `<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 ```bash
 # Datadog Agent
@@ -158,7 +158,7 @@ docker run -d --name app \
 ```
 `<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 これで `app` コンテナ内のホスト名 `datadog-agent` が公開されます。

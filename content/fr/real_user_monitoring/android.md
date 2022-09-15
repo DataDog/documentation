@@ -27,7 +27,7 @@ Envoyez des [données Real User Monitoring][1] à Datadog à partir de vos appli
 2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][4]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][5] pour configurer la bibliothèque `dd-sdk-android`, car elles risqueraient d'être exposées côté client dans le bytecode de l'APK de l'application Android. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][4]. Vous devez également spécifier un ID d'application (consultez notre [page sur la prise en main de RUM][3]).
 
     {{< tabs >}}
-    {{< tab "Site américain" >}}
+    {{% tab "Site américain" %}}
 
 ```kotlin
 class SampleApplication : Application() {
@@ -43,8 +43,8 @@ class SampleApplication : Application() {
 }
 ```
 
-    {{< /tab >}}
-    {{< tab "Site européen" >}}
+    {{% /tab %}}
+    {{% tab "Site européen" %}}
 
 ```kotlin
 class SampleApplication : Application() {
@@ -61,7 +61,7 @@ class SampleApplication : Application() {
 }
 ```
 
-    {{< /tab >}}
+    {{% /tab %}}
     {{< /tabs >}}
 
 En fonction de l'architecture de votre application, vous pouvez choisir l'une des implémentations de `ViewTrackingStrategy` suivantes :

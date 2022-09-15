@@ -38,29 +38,29 @@ npm install -g @datadog/datadog-ci
 Alternatively, you can try and use the beta [standalone binary][2] if you don't want to use `npm`.
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 To install the standalone binary on Linux run:
 
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "MacOS" >}}
+{{% tab "MacOS" %}}
 To install the standalone binary on MacOS run:
 
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Windows" >}}
+{{% tab "Windows" %}}
 To install the standalone binary on Windows run:
 
 {{< code-block lang="bash" >}}
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Adding tags to pipeline traces

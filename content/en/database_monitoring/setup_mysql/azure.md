@@ -60,7 +60,7 @@ The agent also requires `performance_schema.events_statements_*` consumers to be
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
 {{< tabs >}}
-{{< tab "MySQL ≥ 8.0" >}}
+{{% tab "MySQL ≥ 8.0" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -72,8 +72,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
-{{< tab "MySQL 5.7" >}}
+{{% /tab %}}
+{{% tab "MySQL 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -84,7 +84,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Create the following schema:
@@ -131,7 +131,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 To monitor Azure hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 To configure this check for an Agent running on a host, for example when you provision a small virtual machine for the Agent to collect from the database:
 
@@ -166,8 +166,8 @@ See the [MySQL integration spec][4] for additional information on setting `deplo
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 To configure the Database Monitoring Agent running in a Docker container, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
@@ -220,8 +220,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/guide/secrets-management
 [3]: /agent/faq/template_variables/
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
@@ -320,7 +320,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [3]: https://helm.sh
 [4]: /agent/guide/secrets-management
 [5]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validate

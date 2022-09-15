@@ -48,7 +48,7 @@ Pour envoyer uniquement un sous-ensemble spécifique de logs à Datadog, utilise
 Par exemple, pour **exclure** les logs qui contiennent une adresse e-mail Datadog, utilisez les paramètres `log_processing_rules` suivants :
 
 {{< tabs >}}
-{{< tab "Fichier de configuration" >}}
+{{% tab "Fichier de configuration" %}}
 
 ```yaml
 logs:
@@ -63,8 +63,8 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
 
@@ -84,8 +84,8 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
 
 **Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
 
@@ -122,7 +122,7 @@ spec:
 
 **Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Include at match
@@ -135,7 +135,7 @@ spec:
 Par exemple, pour **inclure** les logs qui contiennent une adresse e-mail Datadog, utilisez les paramètres `log_processing_rules` suivants :
 
 {{< tabs >}}
-{{< tab "Fichier de configuration" >}}
+{{% tab "Fichier de configuration" %}}
 
 ```yaml
 logs:
@@ -180,8 +180,8 @@ logs:
 |\\w+@datadoghq.com"
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
 
@@ -201,8 +201,8 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
 
 **Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
 
@@ -239,7 +239,7 @@ spec:
 
 **Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Nettoyer les données sensibles de vos logs
@@ -251,7 +251,7 @@ Cette action remplace tous les groupes correspondants par la valeur du paramètr
 Par exemple, pour effacer un numéro de carte bancaire :
 
 {{< tabs >}}
-{{< tab "Fichier de configuration" >}}
+{{% tab "Fichier de configuration" %}}
 
 ```yaml
 logs:
@@ -267,8 +267,8 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
 
@@ -289,8 +289,8 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
 
 **Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
 
@@ -328,7 +328,7 @@ spec:
 
 **Remarque** : échappez les caractères regex dans vos expressions lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 À partir des versions 7.17+ de l'Agent, la chaîne `replace_placeholder` peut développer les références à des groupes de capture telles que `$1`, `$2`, etc. Pour faire en sorte qu'une chaîne suive le groupe de capture sans aucune espace entre les deux, utilisez le format `${<NUMÉRO_GROUPE>}`.
@@ -355,7 +355,7 @@ Par exemple, chaque ligne de log Java commence avec un timestamp au format `aaaa
 ```
 
 {{< tabs >}}
-{{< tab "Fichier de configuration" >}}
+{{% tab "Fichier de configuration" %}}
 
 Pour envoyer les logs d'exemple mentionnés ci-dessus avec un fichier de configuration, utilisez les paramètres `log_processing_rules` suivants :
 
@@ -371,8 +371,8 @@ logs:
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
 
@@ -390,8 +390,8 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
       }]
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
 
@@ -428,7 +428,7 @@ spec:
 
 **Remarque** : échappez les caractères regex dans vos expressions lorsque vous effectuez une agrégation multiligne avec des annotations de pod. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-warning"><strong>Attention :</strong> les expressions régulières pour les logs multiligne doivent commencer au <em>début</em> d'un log. Elles ne peuvent pas être recherchées en milieu de ligne. <em>Une expression sans aucune correspondance peut entraîner la perte de la ligne de log.</em></div>
@@ -459,7 +459,7 @@ Pour les déploiements conteneurisés, vous pouvez activer `auto_multi_line_dete
 Il est également possible d'activer ou de désactiver cette option (en ignorant la configuration globale) dans chaque configuration de log :
 
 {{< tabs >}}
-{{< tab "Fichier de configuration" >}}
+{{% tab "Fichier de configuration" %}}
 
 ```yaml
 logs:
@@ -470,8 +470,8 @@ logs:
     auto_multi_line_detection: true
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
 
@@ -485,8 +485,8 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
       }]
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 ```yaml
 apiVersion: apps/v1
@@ -515,7 +515,7 @@ spec:
           image: testApp:latest
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 La détection multiligne automatique se base sur une liste d'expressions régulières courantes pour essayer de trouver des correspondances avec des logs. Si la liste intégrée ne contient pas assez d'expressions, vous pouvez ajouter des patterns personnalisés dans le fichier `datadog.yaml` :
@@ -596,7 +596,7 @@ logs:
 Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale dans le [fichier de configuration principal][4] de l'Agent, ou à l'aide d'une variable d'environnement :
 
 {{< tabs >}}
-{{< tab "Fichiers de configuration" >}}
+{{% tab "Fichiers de configuration" %}}
 
 Dans le fichier `datadog.yaml` : 
 
@@ -612,8 +612,8 @@ logs_config:
       replace_placeholder: "EMAIL_MASQUÉ"
 ```
 
-{{< /tab >}}
-{{< tab "Variable d'environnement" >}}
+{{% /tab %}}
+{{% tab "Variable d'environnement" %}}
 
 Utilisez la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` pour configurer les règles globales de traitement. Exemple :
 
@@ -621,8 +621,8 @@ Utilisez la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` pour conf
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 Utilisez le paramètre `env` dans le chart Helm pour définir la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` afin de configurer les règles globales de traitement. Par exemple :
 
@@ -632,7 +632,7 @@ env:
     value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 Ces règles globales de traitement s'appliquent à tous les logs recueillis par l'Agent Datadog.
 

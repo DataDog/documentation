@@ -36,7 +36,7 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
 
 {{< tabs >}}
-{{< tab "SQL Server 2014+" >}}
+{{% tab "SQL Server 2014+" %}}
 
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
@@ -45,8 +45,8 @@ GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
 ```
-{{< /tab >}}
-{{< tab "SQL Server 2012" >}}
+{{% /tab %}}
+{{% tab "SQL Server 2012" %}}
 
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
@@ -60,7 +60,7 @@ GRANT VIEW ANY DEFINITION to datadog;
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Agent のインストール
@@ -68,18 +68,18 @@ CREATE USER datadog FOR LOGIN datadog;
 Agent を SQL Server ホストに直接インストールすることをお勧めします。そうすることで、SQL Server 固有のテレメトリーに加え、様々なシステムテレメトリー (CPU、メモリ、ディスク、ネットワーク) を収集することができるからです。
 
 {{< tabs >}}
-{{< tab "Windows Host" >}}
-{{< dbm-sqlserver-agent-setup-windows >}}
-{{< /tab >}}
-{{< tab "Linux Host" >}}
-{{< dbm-sqlserver-agent-setup-linux >}}
-{{< /tab >}}
-{{< tab "Docker" >}}
-{{< dbm-sqlserver-agent-setup-docker >}}
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
-{{< dbm-sqlserver-agent-setup-kubernetes >}}
-{{< /tab >}}
+{{% tab "Windows Host" %}}
+{{% dbm-sqlserver-agent-setup-windows %}}
+{{% /tab %}}
+{{% tab "Linux Host" %}}
+{{% dbm-sqlserver-agent-setup-linux %}}
+{{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-sqlserver-agent-setup-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-sqlserver-agent-setup-kubernetes %}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

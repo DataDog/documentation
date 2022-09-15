@@ -20,7 +20,7 @@ Si votre code source Android mobile est obfusqué, importez votre fichier de map
 ## Importer votre fichier de mapping
 
 {{< tabs >}}
-{{< tab "Site américain de Datadog" >}}
+{{% tab "Site américain de Datadog" %}}
 
 1. Ajoutez le [plug-in Gradle][1] à votre projet Gradle en utilisant l'extrait de code suivant.
 
@@ -42,8 +42,8 @@ plugins {
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
 
-{{< /tab >}}
-{{< tab "Site européen de Datadog" >}}
+{{% /tab %}}
+{{% tab "Site européen de Datadog" %}}
 1. Ajoutez le [plug-in Gradle][1] à votre projet Gradle en utilisant l'extrait de code suivant.
 
 ```groovy
@@ -69,7 +69,7 @@ datadog {
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Options de configuration du plug-in

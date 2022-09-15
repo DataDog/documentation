@@ -21,7 +21,7 @@ This section specifies the raw datagram format for metrics, events, and service 
 ## The DogStatsD protocol
 
 {{< tabs >}}
-{{< tab "Metrics" >}}
+{{% tab "Metrics" %}}
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
@@ -79,8 +79,8 @@ Read more about container tags in the [Kubernetes][4] and [Docker][5] tagging do
 [3]: /getting_started/tagging/
 [4]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [5]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
-{{< /tab >}}
-{{< tab "Events" >}}
+{{% /tab %}}
+{{% tab "Events" %}}
 
 `_e{<TITLE_UTF8_LENGTH>,<TEXT_UTF8_LENGTH>}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
@@ -109,8 +109,8 @@ _e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#
 _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 ```
 
-{{< /tab >}}
-{{< tab "Service Checks" >}}
+{{% /tab %}}
+{{% tab "Service Checks" %}}
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
@@ -131,7 +131,7 @@ Here's an example datagram:
 _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Send metrics using DogStatsD and the shell
@@ -141,7 +141,7 @@ For Linux and other Unix-like OS, use Bash. For Windows, use PowerShell and [Pow
 DogStatsD creates a message that contains information about your metric, event, or service check and sends it to a locally installed Agent as a collector. The destination IP address is `127.0.0.1` and the collector port over UDP is `8125`. See [DogStatsD][3] for details on configuring the Agent.
 
 {{< tabs >}}
-{{< tab "Metrics" >}}
+{{% tab "Metrics" %}}
 
 The format for sending metrics is:
 
@@ -189,8 +189,8 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-{{< /tab >}}
-{{< tab "Events" >}}
+{{% /tab %}}
+{{% tab "Events" %}}
 
 The format for sending events is:
 
@@ -218,8 +218,8 @@ PS C:> $text = "This was sent from PowerShell!"
 PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
 ```
 
-{{< /tab >}}
-{{< tab "Service Checks" >}}
+{{% /tab %}}
+{{% tab "Service Checks" %}}
 
 The format for sending service checks is:
 
@@ -239,7 +239,7 @@ On Windows:
 PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 To send metrics, events, or service checks on containerized environments, see [DogStatsD on Kubernetes][3], in conjunction with [configuring APM on Kubernetes][4], depending on your installation. The [Docker APM][5] documentation may also be helpful.

@@ -36,7 +36,7 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターは、Ope
 
 
 {{< tabs >}}
-{{< tab "Sum" >}}
+{{% tab "Sum" %}}
 
 OTLP Sum は、あるタイムウィンドウで報告された測定値の合計を表します。例えば、データベースへの接続の総数やエンドポイントへのリクエストの総数を追跡するために、Sum を使うことができます。Sum にはマッピングに影響を与える 2 つの特徴があります。
 
@@ -49,15 +49,15 @@ OTLP Sum は、あるタイムウィンドウで報告された測定値の合�
 3. デルタサムは、Datadog のカウントとしてエクスポートされます。
 
 [1]: /ja/dashboards/functions/arithmetic/#cumulative-sum
-{{< /tab >}}
-{{< tab "Gauge" >}}
+{{% /tab %}}
+{{% tab "Gauge" %}}
 
 OTLP Gauge は、ある時刻にサンプリングされた値を表します。与えられたタイムウィンドウの最後の値だけが、OTLP のメトリクスに含まれます。
 
 OTLP Gauge は集計セマンティックを提供しないので、Datadog Gauge にマップされます。整数と浮動小数点の両方の Gauge データポイントが Datadog のフォーマットで浮動小数点数にマップされます。
 
-{{< /tab >}}
-{{< tab "Histogram" >}}
+{{% /tab %}}
+{{% tab "Histogram" %}}
 
 OTLP Histogram は、母集団の合計やカウントなどの特定の集計メトリクスを一連のバケットカウントとともに保存することで、与えられたタイムウィンドウにおける値の集合の統計的分布を表現するものです。ヒストグラムはマッピングに影響を与える 1 つの特徴を持っています。
 
@@ -88,8 +88,8 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターでは、
 
 [1]: /ja/metrics/distributions
 [2]: /ja/dashboards/functions/arithmetic/#cumulative-sum
-{{< /tab >}}
-{{< tab "Summary" >}}
+{{% /tab %}}
+{{% tab "Summary" %}}
 
 OTLP Summary は、タイムウィンドウにわたる母集団の分位情報を伝えるレガシータイプです。OTLP Summary タイプは OpenTelemetry SDK では生成されませんが、後方互換性のために他のコンポーネントで生成されることがあります。
 
@@ -105,7 +105,7 @@ OTLP Summary は、タイムウィンドウにわたる母集団の分位情報�
 : 指定された分位数の値。<br>
 **Datadog In-App Type**: GAUGE
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 属性のマッピング
@@ -132,7 +132,7 @@ OpenTelemetry は、ホスト名に関する特定のセマンティック規則
 ### 例
 
 {{< tabs >}}
-{{< tab "Sum" >}}
+{{% tab "Sum" %}}
 
 デフォルトでは、累積**モノトニック** Sum タイプのメトリクスをエクスポートする、単一のアプリケーションから OpenTelemetry Counter インスツルメントを使用しているとします。次の表は、Datadog の動作をまとめたものです。
 
@@ -150,8 +150,8 @@ OpenTelemetry は、ホスト名に関する特定のセマンティック規則
 | #2                | [3,-4,1,2]           | 17             | 17                        | GAUGE               |
 | #3                | [-1]                 | 16             | 16                        | GAUGE               |
 
-{{< /tab >}}
-{{< tab "Gauge" >}}
+{{% /tab %}}
+{{% tab "Gauge" %}}
 
 OpenTelemetry Gauge のインスツルメントである `temperature` を、単一のアプリケーションから使用しているとします。
 次の表は、Datadog の動作をまとめたものです。
@@ -162,8 +162,8 @@ OpenTelemetry Gauge のインスツルメントである `temperature` を、単
 | #2                | 72               | 72               | 72                        | GAUGE               |
 | #3                | 70               | 70               | 70                        | GAUGE               |
 
-{{< /tab >}}
-{{< tab "Histogram" >}}
+{{% /tab %}}
+{{% tab "Histogram" %}}
 
 OpenTelemetry Histogram インスツルメントである `request.response_time.histogram` を 2 つのウェブサーバーから使用しているとします。`webserver:web_1` と `webserver:web_2` です。ある収集期間において、 `webserver:web_1` が `[1,1,1,2,2,2,3,3]` という値のメトリクスを報告し、 `webserver:web_2` が `[1,1,2]` という値の同じメトリクスを報告しているとします。この収集期間中、次の 5 つの集計は、両方のウェブサーバーから収集されたすべての値のグローバルな統計的分布を表しています。
 
@@ -187,8 +187,8 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`、`upper_bound:inf`  | GAUGE               |
 
 [1]: /ja/metrics/distributions
-{{< /tab >}}
-{{< tab "Summary" >}}
+{{% /tab %}}
+{{% tab "Summary" %}}
 
 レガシー OTLP Summary のメトリクス、`request.response_time.summary` をあるウェブサーバーから送信しているとします。ある収集期間において、ウェブサーバーは `[1,1,1,2,2,3,3]` という値でメトリクスを報告したとします。最小分位数、最大分位数、および中央値分位数が有効になっている場合、次のメトリクスが報告されます。
 
@@ -201,7 +201,7 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 | `request.response_time.distribution.quantile` | `3`    | `quantile:1.0`                      | GAUGE               |
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

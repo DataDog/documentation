@@ -123,7 +123,7 @@ Pour les applications exécutées sous GCE ou GKE, l'Agent Datadog peut être ut
 #### Configurer le Pub/Sub pour transmettre les logs à Datadog
 
 {{< tabs >}}
-{{< tab "Site américain de Datadog" >}}
+{{% tab "Site américain de Datadog" %}}
 
 1. Revenez à la page de présentation des sujets Pub/Sub, puis sélectionnez `Subscriptions` dans le menu de navigation de gauche. Sélectionnez `Create Subscription`.
 2. Créez un ID d'abonnement et sélectionnez le sujet que vous venez de créer.
@@ -136,8 +136,8 @@ Pour les applications exécutées sous GCE ou GKE, l'Agent Datadog peut être ut
 
 Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre à Datadog.
 
-{{< /tab >}}
-{{< tab "Site européen de Datadog" >}}
+{{% /tab %}}
+{{% tab "Site européen de Datadog" %}}
 
 1. Revenez à la page de présentation des sujets Pub/Sub, puis sélectionnez `Subscriptions` dans le menu de navigation de gauche. Sélectionnez `Create Subscription`.
 2. Créez un ID d'abonnement et sélectionnez le sujet que vous venez de créer.
@@ -148,7 +148,7 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 4. Configurez des options supplémentaires si vous le souhaitez, telles que **Subscription expiration**, **Acknowledgement deadline**, **Message retention duration** ou **Dead lettering**.
 5. Cliquez sur `Create` en bas.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Exporter les logs de Stackdriver vers le Pub/Sub

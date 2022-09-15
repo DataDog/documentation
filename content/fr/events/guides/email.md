@@ -26,7 +26,7 @@ La section **Events API emails** affiche l'ensemble des adresses e-mail disponib
 Il existe deux façons d'envoyer des événements par e-mail :
 
 {{< tabs >}}
-{{< tab "JSON" >}}
+{{% tab "JSON" %}}
 
 Si vous êtes libre de configurer les e-mails envoyés par l'application comme bon vous semble, vous pouvez définir un message au format JSON. Ce format vous permet de personnaliser entièrement l'événement qui apparaît dans Datadog.
 
@@ -48,8 +48,8 @@ Avec un e-mail au format JSON, l'objet de l'e-mail n'apparaît pas dans l'évén
 **Remarque** : si vous testez l'e-mail avec un client de messagerie standard, le corps risque d'être converti en HTML. Il ne sera alors plus entièrement composé de JSON et l'e-mail sera ignoré.
 
 [1]: /fr/api/v1/events/
-{{< /tab >}}
-{{< tab "Texte brut" >}}
+{{% /tab %}}
+{{% tab "Texte brut" %}}
 
 Si les possibilités de configuration des e-mails envoyés par une application sont limitées, utilisez un message au format texte brut.
 
@@ -77,7 +77,7 @@ L'objet de l'e-mail devient le titre de l'événement, et le corps de l'e-mail d
 
 {{< img src="developers/events/plain-event.png" alt="événement en texte brut" >}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Markdown

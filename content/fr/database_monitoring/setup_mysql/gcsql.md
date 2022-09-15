@@ -45,7 +45,7 @@ Considérations relatives à la sécurité des données
 Configurez les [flags de base de données][3] suivants. **Redémarrez ensuite le serveur** pour appliquer la configuration :
 
 {{< tabs >}}
-{{< tab "MySQL 5.6" >}}
+{{% tab "MySQL 5.6" %}}
 | Paramètre | Valeur | Description |
 | --- | --- | --- |
 | `performance_schema` | `on` | Requis. Active le [schéma de performance][1]. |
@@ -53,9 +53,9 @@ Configurez les [flags de base de données][3] suivants. **Redémarrez ensuite le
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "MySQL ≥ 5.7" >}}
+{{% tab "MySQL ≥ 5.7" %}}
 | Paramètre | Valeur | Description |
 | --- | --- | --- |
 | `performance_schema` | `on` | Requis. Active le [schéma de performance][1]. |
@@ -64,7 +64,7 @@ Configurez les [flags de base de données][3] suivants. **Redémarrez ensuite le
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Accorder un accès à l'Agent
@@ -74,7 +74,7 @@ L'Agent Datadog requiert un accès en lecture seule pour la base de données, af
 Les instructions suivantes autorisent l'Agent à se connecter depuis n'importe quel host à l'aide de `datadog@'%'`. Vous pouvez restreindre l'utilisateur `datadog` avec `datadog@'localhost'`, de façon à ce qu'il soit uniquement autorisé à se connecter depuis localhost. Consultez la [documentation MYSQL][4] (en anglais) pour en savoir plus.
 
 {{< tabs >}}
-{{< tab "MySQL ≥ 8.0" >}}
+{{% tab "MySQL ≥ 8.0" %}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
@@ -86,8 +86,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
-{{< tab "MySQL 5.6 et 5.7" >}}
+{{% /tab %}}
+{{% tab "MySQL 5.6 et 5.7" %}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
@@ -98,7 +98,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Créez le schéma suivant :
@@ -176,7 +176,7 @@ Pour surveiller les hosts Cloud SQL, installez l'Agent Datadog dans votre infra
 
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 Pour configurer ce check pour un Agent s'exécutant sur un host, par exemple si vous provisionnez une petite instance GCE pour l'Agent afin de recueillir des données depuis une base de données Google Cloud SQL, procédez comme suit :
 
@@ -203,8 +203,8 @@ instances:
 [1]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Pour configurer l'Agent Database Monitoring qui s'exécute dans un conteneur Docker, par exemple dans Google Cloud Run, définissez des [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur le conteneur de votre Agent.
 
@@ -250,8 +250,8 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, util
 [1]: /fr/agent/docker/integrations/?tab=docker
 [2]: /fr/agent/guide/secrets-management
 [3]: /fr/agent/faq/template_variables/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Pour surveiller des bases de données sur un cluster Kubernetes, utilisez [l'Agent de cluster Datadog][1].
 
@@ -334,7 +334,7 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, util
 [2]: /fr/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /fr/agent/guide/secrets-management
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

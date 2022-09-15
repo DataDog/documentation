@@ -59,7 +59,7 @@ Datadog analyse automatiquement la métrique choisie et définit plusieurs param
 Les algorithmes de prévision disponibles sont `linear` et `seasonal` :
 
 {{< tabs >}}
-{{< tab "Linear" >}}
+{{% tab "Linear" %}}
 
 Utilisez l'algorithme linear pour les métriques qui évoluent de façon stable et n'affichent pas de tendance saisonnière récurrente. La sensibilité de l'algorithme linear aux changements de niveau peut être ajustée en sélectionnant l'un des trois modèles disponibles :
 
@@ -75,8 +75,8 @@ Utilisez l'algorithme linear pour les métriques qui évoluent de façon stable 
 
 {{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" style="width:80%;" >}}
 
-{{< /tab >}}
-{{< tab "Seasonal" >}}
+{{% /tab %}}
+{{% tab "Seasonal" %}}
 
 Utilisez l'algorithme seasonal pour les métriques qui affichent des tendances récurrentes. Il est possible de choisir parmi trois _caractères saisonniers_ différents :
 
@@ -90,7 +90,7 @@ Utilisez l'algorithme seasonal pour les métriques qui affichent des tendances r
 
 {{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="saisonnier"  style="width:80%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Notifications

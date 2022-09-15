@@ -85,7 +85,7 @@ chown dd-agent -R /opt/datadog-agent/run
 이 문제는 Agent 사용자 `dd-agent`가 아닌 다른 사용자가 실행한 프로세스 점검으로 프로세스를 모니터링할 때 발생합니다. 실제로 `dd-agent` 사용자는 Agent가 메트릭 데이터를 수집하기 위해 참조하는 `/proc` 전체 파일에 대한 접근 권한이 없습니다.
 
 {{< tabs >}}
-{{< tab "Agent v6.3+" >}}
+{{% tab "Agent v6.3+" %}}
 
 프로세스 점검 설정에서 `try_sudo` 옵션을 활성화하고 적절한 `sudoers` 규칙을 추가하세요.
 
@@ -97,8 +97,8 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 Datadog `error.log` 파일에서 `sudo: sorry, you must have a tty to run sudo`라는 문구를 발견했다면 `visudo`를 실행하고 `Default requiretty` 라인에 코멘트를 추가해야 합니다.
 
-{{< /tab >}}
-{{< tab "Agent v6 & v7" >}}
+{{% /tab %}}
+{{% tab "Agent v6 & v7" %}}
 
 v6.3 이전의 Agent v6을 사용하는 경우 Agent를 업데이트하고 `try_sudo` 옵션을 사용하세요. 업데이트할 수 없다면 문제를 회피하기 위해 Agent를 `root`로 실행할 수 있습니다.
 
@@ -113,8 +113,8 @@ v6.3 이전의 Agent v6을 사용하는 경우 Agent를 업데이트하고 `try_
 [1]: https://github.com/DataDog/datadog-agent
 [2]: /kr/agent/guide/agent-commands/#stop-the-agent
 [3]: /kr/agent/guide/agent-commands/#start-the-agent
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 Agent v5를 사용하는 경우 [최신 버전의 Agent 6][1]로 업데이트하고 `try_sudo` 옵션을 사용하세요. 업데이트할 수 없다면 문제를 회피하기 위해 Agent를 `root`로 실행할 수 있습니다.
 
@@ -132,7 +132,7 @@ Agent v5를 사용하는 경우 [최신 버전의 Agent 6][1]로 업데이트하
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
 [6]: /kr/agent/guide/agent-commands/?tab=agentv5#start-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 자세한 정보와 리눅스 머신에서 이용 가능한 메트릭의 기타 수집 방법이 궁금하신 분은 아래의 깃허브 관련 문제를 참조해주세요.

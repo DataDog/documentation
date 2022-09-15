@@ -50,7 +50,7 @@ Pour vous assurer que votre alerte est correctement calibrée, vous pouvez défi
 Datadog propose deux types d'algorithmes de détection des singularités : `DBSCAN`/`scaledDBSCAN` et `MAD`/`scaledMAD`. Il est conseillé d'utiliser l'algorithme par défaut DBSCAN. Si vous éprouvez des difficultés à détecter les singularités appropriées, vous pouvez ajuster les paramètres de DBSCAN ou essayer l'algorithme MAD. Les algorithmes mis à l'échelle peuvent être utiles si vos métriques sont homogènes et recueillies à grande échelle.
 
 {{< tabs >}}
-{{< tab "DBSCAN" >}}
+{{% tab "DBSCAN" %}}
 
 [DBSCAN][1] (Density-based spatial clustering of applications with noise) est un algorithme de clustering populaire. Généralement, DBSCAN prend en compte :
 
@@ -63,8 +63,8 @@ Datadog utilise une forme simplifiée de DBSCAN pour détecter les singularités
 Cette implémentation de DBSCAN prend en compte un paramètre, la `tolerance`, qui correspond à la constante par laquelle le seuil initial est multiplié pour obtenir le paramètre de distance 𝜀 de DBSCAN. Définissez le paramètre de tolérance en fonction de l'homogénéité que vous attendez de la part de vos groupes : plus la valeur est importante, plus la tolérance aux écarts d'un groupe par rapport aux autres le sera également.
 
 [1]: https://en.wikipedia.org/wiki/DBSCAN
-{{< /tab >}}
-{{< tab "MAD" >}}
+{{% /tab %}}
+{{% tab "MAD" %}}
 
 Le [MAD][1] (median absolute deviation) ou écart médian absolu est une mesure fiable de la variabilité et peut être considéré comme la version analogique fiable de l'écart-type. Les données sont décrites par des statistiques robustes de façon à limiter l'influence des singularités.
 
@@ -76,12 +76,12 @@ La tolérance correspond au nombre d'écarts devant séparer un point de la méd
 Le pourcentage désigne le pourcentage de points d'une série considérés comme des singularités. Si ce pourcentage est dépassé, toute la série est considérée comme une singularité.
 
 [1]: https://en.wikipedia.org/wiki/Median_absolute_deviation
-{{< /tab >}}
-{{< tab "Mis à l'échelle" >}}
+{{% /tab %}}
+{{% tab "Mis à l'échelle" %}}
 
 DBSCAN et MAD possèdent des versions mises à l'échelle (ScaledDBSCAN et ScaledMAD). Dans la plupart des situations, les algorithmes mis à l'échelle se comportent de la même façon que leur version standard. Cependant, si les algorithmes DBSCAN/MAD identifient des singularités au sein d'un groupe de métriques homogènes et que vous souhaitez que l'algorithme de détection des singularités tienne compte de l'amplitude globale des métriques, essayez les algorithmes mis à l'échelle.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ##### DBSCAN et MAD

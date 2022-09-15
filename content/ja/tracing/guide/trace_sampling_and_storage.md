@@ -87,7 +87,7 @@ Datadog APM はサンプリングに関わりなく、インスツルメント�
 APM では、初期設定で分散型トレースが有効になっており、トレースヘッダーと複数のサービス/ホスト間のトレース情報の伝達が可能です。トレースヘッダーには優先度タグが含まれており、トレース情報伝達中にアップストリームとダウンストリームのサービスの間でトレースが完了できるようにします。このタグを上書きすると、手動でトレースの保持（重要なトランザクション処理、デバックモードなど）や削除（ヘルスチェック、静的アセットなど）ができます。
 
 {{< tabs >}}
-{{< tab "Java" >}}
+{{% tab "Java" %}}
 
 手動でトレースを保持:
 
@@ -129,8 +129,8 @@ public class MyClass {
 }
 ```
 
-{{< /tab >}}
-{{< tab "Python" >}}
+{{% /tab %}}
+{{% tab "Python" %}}
 
 手動でトレースを保持:
 
@@ -160,8 +160,8 @@ def handler():
         //続いて実装方法を入力
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 手動でトレースを保持:
 
@@ -184,8 +184,8 @@ Datadog.tracer.trace(name, options) do |span|
 end
 ```
 
-{{< /tab >}}
-{{< tab "Go" >}}
+{{% /tab %}}
+{{% tab "Go" %}}
 
 手動でトレースを保持:
 
@@ -235,8 +235,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-{{< /tab >}}
-{{< tab "Node.js" >}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
 
 手動でトレースを保持:
 
@@ -266,8 +266,8 @@ span.setTag(tags.MANUAL_DROP)
 
 ```
 
-{{< /tab >}}
-{{< tab ".NET" >}}
+{{% /tab %}}
+{{% tab ".NET" %}}
 
 手動でトレースを保持:
 
@@ -299,8 +299,8 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 }
 ```
 
-{{< /tab >}}
-{{< tab "PHP" >}}
+{{% /tab %}}
+{{% tab "PHP" %}}
 
 手動でトレースを保持:
 
@@ -332,8 +332,8 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 ?>
 ```
 
-{{< /tab >}}
-{{< tab "C++" >}}
+{{% /tab %}}
+{{% tab "C++" %}}
 
 手動でトレースを保持:
 
@@ -364,7 +364,7 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 //続いて実装方法を入力
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 トレースの優先度設定はコンテキスト伝達の前に手動で行う必要があります。コンテキスト伝達後に行うと、システムはサービス全体のトレースを確実に保持できません。手動での優先度設定はクライアントをトレースする場所で設定され、トレースは[サンプリングの法則](#サンプリングの法則)に基づいて Agent またはサーバーの場所で削除することができます。

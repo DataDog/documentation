@@ -31,7 +31,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 ### Collecte de logs
 
 {{< tabs >}}
-{{< tab "Site américain de Datadog" >}}
+{{% tab "Site américain de Datadog" %}}
 
 1. Configurez NXLog afin d'envoyer vos logs à votre plate-forme Datadog. Remplacez l'ensemble du contenu du fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
 
@@ -135,8 +135,8 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 
 [1]: /resources/crt/ca-certificates.crt
-{{< /tab >}}
-{{< tab "Site européen de Datadog" >}}
+{{% /tab %}}
+{{% tab "Site européen de Datadog" %}}
 
 1. Configurez NXLog afin d'envoyer vos logs à votre plate-forme Datadog. Remplacez l'ensemble du contenu du fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
 
@@ -240,7 +240,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 
 [1]: /resources/crt/ca-certificates.crt
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Dépannage

@@ -33,7 +33,7 @@ Slack を Datadog に接続すると、以下のことを可能にして、チ�
 
 {{< tabs >}}
 
-{{< tab "Slack アプリケーション" >}}
+{{% tab "Slack アプリケーション" %}}
 
 ### インストール
 
@@ -148,9 +148,9 @@ Slack アクションを使用して、インシデントチャンネルで送�
 [6]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackapplicationus#installation
 [7]: https://app.datadoghq.com/incidents/settings
 [8]: https://docs.datadoghq.com/ja/monitors/incident_management/#follow-up-and-learn-from-the-incident
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Slack Webhook (レガシー)" >}}
+{{% tab "Slack Webhook (レガシー)" %}}
 
 US5 または US1-FED Datadog [サイト][1]を使用している場合は、Slack Webhook を使用します。
 
@@ -179,7 +179,7 @@ Slack インテグレーションは、Datadog サイトの[インテグレー�
 [3]: https://slack.com/apps/A0F7XDT7F-datadog-legacy
 [4]: https://docs.datadoghq.com/ja/monitors/notifications/?tab=slackintegration#notification
 [5]: https://docs.datadoghq.com/ja/events/#notifications
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## モニターアラートからの Slack `@-mentions`

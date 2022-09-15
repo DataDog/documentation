@@ -41,20 +41,20 @@ Azure Service Fabric は、スケーラブルで信頼性の高いマイクロ�
 収集した情報に基づいて、次のコマンドを更新します。
 
 {{< tabs >}}
-{{< tab "Windows" >}}
+{{% tab "Windows" %}}
 
 ```shell
 az vmss extension set --name DatadogWindowsAgent --publisher Datadog.Agent --resource-group <RESOURCE_GROUP_NAME> --vmss-name <VMSS_NAME> --protected-settings "{'api_key':'<YOUR_API_KEY>'}"
 ```
 
-{{< /tab >}}
-{{< tab "Linux" >}}
+{{% /tab %}}
+{{% tab "Linux" %}}
 
 ```shell
 az vmss extension set --name DatadogLinuxAgent --publisher Datadog.Agent --resource-group <RESOURCE_GROUP_NAME> --vmss-name <VMSS_NAME> --protected-settings "{'api_key':'<YOUR_API_KEY>'}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Azure CLI にログインし、更新されたコマンドを実行して、クラスター内のノードに Datadog Agent をデプロイします。

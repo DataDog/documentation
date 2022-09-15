@@ -17,7 +17,7 @@ aliases:
 2. 以下の情報を使用して、Datadog Agent の構成を（Agent のバージョンに基づいて）更新します。
 
 {{< tabs >}}
-{{< tab "Agent 6.3.0+" >}}
+{{% tab "Agent 6.3.0+" %}}
 `datadog.yaml` で、`apm_config` の下に `analyzed_spans` を追加します。例:
 
 ```yaml
@@ -27,8 +27,8 @@ apm_config:
     <サービス名_2>|<操作名_2>: 1
 ```
 
-{{< /tab >}}
-{{< tab "Agent 5.25.0+" >}}
+{{% /tab %}}
+{{% tab "Agent 5.25.0+" %}}
 `datadog.conf` で、`[trace.analyzed_spans]` を追加します。例:
 
 ```text
@@ -37,8 +37,8 @@ apm_config:
 <サービス名_2>|<操作名_2>: 1
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 （バージョン 12.6.5250 以上と互換性がある）Agent コンテナ環境に `DD_APM_ANALYZED_SPANS` を追加します。形式は、スペースを含まないカンマ区切りの正規表現である必要があります。例:
 
 ```text
@@ -49,7 +49,7 @@ DD_APM_ANALYZED_SPANS="<サービス名_1>|<操作名_1>=1,<サービス名_2>|<
 `my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Datadog では、自動的にインスツルメントされたすべてのサービスに `<操作名>` があり、トレースされるリクエストのタイプを設定するために使用されます。たとえば、Python Flask アプリケーションをトレースしている場合、操作名として `flask.request` がある場合があります。Express を使用する Node アプリケーションでは、`express.request` に操作名を尋ねさせることになります。

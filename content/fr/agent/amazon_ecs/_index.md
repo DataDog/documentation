@@ -61,7 +61,7 @@ Vérifiez bien les réglages de groupe de sécurité pour vos instances EC2. Ass
 Configurez la tâche à l'aide des [outils del 'interface de ligne de commande AWS][12] ou de la console Web d'Amazon.
 
 {{< tabs >}}
-{{< tab "Interface de ligne de commande AWS" >}}
+{{% tab "Interface de ligne de commande AWS" %}}
 
 1. Pour les conteneurs Linux, téléchargez [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] si vous utilisez une AMI Amazon Linux 1 d'origine). Pour Windows, téléchargez [datadog-agent-ecs-win.json][3].
 2. Modifiez `datadog-agent-ecs.json` et remplacez `<YOUR_DATADOG_API_KEY>` par la [clé d'API Datadog][4] de votre compte.
@@ -103,8 +103,8 @@ aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs
 [5]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [6]: /fr/agent/amazon_ecs/logs/
 [7]: /fr/agent/amazon_ecs/apm/
-{{< /tab >}}
-{{< tab "Interface utilisateur Web" >}}
+{{% /tab %}}
+{{% tab "Interface utilisateur Web" %}}
 
 1. Connectez-vous à votre console AWS et accédez à la section EC2 Container Service.
 2. Cliquez sur le cluster pour lequel vous souhaitez ajouter Datadog.
@@ -131,7 +131,7 @@ aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs
 **Remarque** : si vous définissez la tâche Datadog de façon à utiliser 10 « CPU units », la métrique `aws.ecs.cpuutilization` pour `service:datadog-agent` peut afficher un pourcentage d'utilisation du processeur de 1000 %. Cela est dû à la façon dont AWS affiche la charge processeur. Vous pouvez ajouter davantage de « CPU units » pour corriger votre graphique.
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Créer ou modifier votre stratégie IAM
@@ -163,7 +163,7 @@ Dans l'idéal, l'Agent Datadog charge un conteneur sur chaque instance EC2. Pour
 Pour recueillir des informations sur les processus pour l'ensemble de vos conteneurs et les envoyer à Datadog :
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 1. Suivez les [instructions ci-dessus](#configuration) pour installer l'Agent Datadog.
 2. Modifiez votre fichier [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] si vous utilisez une AMI Amazon Linux d'origine) avec la configuration suivante :
@@ -214,8 +214,8 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 1. Suivez les [instructions ci-dessus](#configuration) pour installer l'Agent Datadog.
 2. Modifiez votre fichier [datadog-agent-ecs-win.json][1] avec la configuration suivante :
@@ -238,7 +238,7 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
 ```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Collecte de données réseau (NPM)

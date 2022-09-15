@@ -28,7 +28,7 @@ further_reading:
 Web リクエスト (例: `/make-sandwich`) 内で、`getIngredients()` や `assembleSandwich()` など、測定に役立つさまざまなオペレーションを行うことができます。
 
 {{< tabs >}}
-{{< tab "Synchronous" >}}
+{{% tab "Synchronous" %}}
 
 Synchronous コードは、`tracer.trace()` でトレースできます。これにより、コールバックが戻ったときに自動的にスパンが終了し、スローされたエラーが自動的にキャプチャされます。
 
@@ -52,9 +52,9 @@ app.get('/make-sandwich', (req, res) => {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Promise" >}}
+{{% tab "Promise" %}}
 
 Promise は `tracer.trace()` でトレースできます。これにより、返された Promise が解決したときに自動的にスパンが終了し、拒否エラーが自動的にキャプチャされます。
 
@@ -75,9 +75,9 @@ app.get('/make-sandwich', (req, res) => {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Async/await" >}}
+{{% tab "Async/await" %}}
 
 Async/await は `tracer.trace()` でトレースできます。これにより、返された Promise が解決したときに自動的にスパンが終了し、拒否エラーが自動的にキャプチャされます。
 
@@ -101,9 +101,9 @@ app.get('/make-sandwich', async (req, res) => {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ラッパー" >}}
+{{% tab "ラッパー" %}}
 
 コードを変更せずに既存の関数をラップすることもできます。これは、コードを制御しない関数をトレースするのに役立ちます。これは、最後の引数がコールバックの代わりにラップする関数であることを除いて、 `tracer.trace()` と同じ引数を取る `tracer.wrap()` で実行できます。
 
@@ -126,9 +126,9 @@ app.get('/make-sandwich', (req, res) => {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "手動" >}}
+{{% tab "手動" %}}
 
 他のトレーシング方法として、スパンの開始と終了を可能にする手動 API があります。これに必要なのは、
 
@@ -154,7 +154,7 @@ app.get('/make-sandwich', (req, res) => {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#startspan
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## アクティブなスパンへのアクセス
@@ -177,7 +177,7 @@ tracer.trace('sandwich.make', () => {
 ## タグの追加
 
 {{< tabs >}}
-{{< tab "ローカル" >}}
+{{% tab "ローカル" %}}
 
 タグはスパンで `setTag` または `addTags` メソッドを使用してスパンに追加できます。サポートされている値のタイプは、文字列、数値、オブジェクトです。
 
@@ -198,9 +198,9 @@ span.addTags({
 })
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "グローバル" >}}
+{{% tab "グローバル" %}}
 
 タグは、トレーサーで直接構成することにより、すべてのスパンに追加できます。これは、カンマ区切りの `DD_TAGS` 環境変数を使用するか、トレーサーの初期化で `tags` オプションを使用して実行できます。
 
@@ -217,9 +217,9 @@ tracer.init({
 const span = tracer.startSpan()
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "コンポーネント" >}}
+{{% tab "コンポーネント" %}}
 
 一部のインテグレーションでは、スパンフックをサポートしています。スパンフックを使用すると、スパンが完了する直前に更新できます。これは、タグを変更したり、コードからアクセスできないスパンにタグを追加する場合に役立ちます。
 
@@ -239,9 +239,9 @@ tracer.use('express', {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "エラー" >}}
+{{% tab "エラー" %}}
 
 エラーは、エラーオブジェクトをサポートする特別な `error` タグを使用してスパンに追加できます。これは、3 つの異なるタグ (`error.type`、`error.msg`、`error.stack`) にエラーを分割します。
 
@@ -256,7 +256,7 @@ try {
 
 `tracer.trace()` または `tracer.wrap()` を使用している場合、これはエラーがスローされたときに自動的に行われます。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## リクエストのフィルタリング

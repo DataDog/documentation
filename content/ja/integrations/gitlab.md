@@ -88,7 +88,7 @@ GitLab チェックは [Datadog Agent][2] パッケージに含まれていま�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -146,8 +146,8 @@ GitLab チェックは [Datadog Agent][2] パッケージに含まれていま�
 [4]: https://docs.gitlab.com/ee/administration/monitoring/prometheus/gitlab_metrics.html
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/blob/master/gitlab/datadog_checks/gitlab/metrics.py
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -171,7 +171,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

@@ -61,7 +61,7 @@ Datadog automatically analyzes your chosen metric and sets several parameters fo
 The available forecast algorithms are `linear` and `seasonal`:
 
 {{< tabs >}}
-{{< tab "Linear" >}}
+{{% tab "Linear" %}}
 
 Use the linear algorithm for metrics that have steady trends but no repeating seasonal pattern. There are three different _models_ which control the linear algorithm's sensitivity to level shifts:
 
@@ -77,8 +77,8 @@ Use the linear algorithm for metrics that have steady trends but no repeating se
 
 {{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive"  style="width:80%;" >}}
 
-{{< /tab >}}
-{{< tab "Seasonal" >}}
+{{% /tab %}}
+{{% tab "Seasonal" %}}
 
 Use the seasonal algorithm for metrics with repeating patterns. There are three different _seasonality_ choices:
 
@@ -92,7 +92,7 @@ Use the seasonal algorithm for metrics with repeating patterns. There are three 
 
 {{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal"  style="width:80%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Advanced alert conditions

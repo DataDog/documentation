@@ -37,7 +37,7 @@ To begin profiling applications:
 3. Enable the profiler:
 
    {{< tabs >}}
-{{< tab "Environment variables" >}}
+{{% tab "Environment variables" %}}
 
 ```shell
 export DD_PROFILING_ENABLED=true
@@ -52,8 +52,8 @@ export DD_VERSION=1.0.3
 node -r dd-trace/init app.js
 ```
 
-{{< /tab >}}
-{{< tab "In code" >}}
+{{% /tab %}}
+{{% tab "In code" %}}
 
 ```js
 const tracer = require('dd-trace').init({
@@ -70,7 +70,7 @@ const tracer = require('dd-trace').init({
 const tracer = require('dd-trace/init')
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 4. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][4].

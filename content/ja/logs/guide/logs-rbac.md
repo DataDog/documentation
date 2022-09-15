@@ -116,7 +116,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
 ### ロールを作成
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 Datadog オーガニゼーションの設定の [Groups Section][1] で、Role タブの Add Role ボタンを使用して、新しい `ACME Admin` と `ACME User` のロールを作成します。
 
@@ -133,8 +133,8 @@ Datadog オーガニゼーションの設定の [Groups Section][1] で、Role �
 [1]: https://app.datadoghq.com/access/roles
 [2]: /ja/account_management/rbac/permissions?tab=ui#legacy-permissions
 [3]: /ja/account_management/rbac/?tab=datadogapplication#create-a-custom-role
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 `ACME Admin` と `ACME User` のロールについて、次の手順を繰り返します。
 
@@ -191,7 +191,7 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H
 [2]: /ja/api/v2/roles/#list-roles
 [3]: /ja/api/v2/roles/#grant-permission-to-a-role
 [4]: /ja/api/v2/roles/#revoke-permission
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### ユーザーをロールにアタッチする
@@ -199,7 +199,7 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H
 ロールがアクセス許可で構成されたので、これらのロールをユーザーに割り当てます。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 Datadog の [Team Section][1] で、User タブに移動します。ユーザーを選択し、すでに割り当てられている可能性のあるロールに加えて、`ACME Admin` または `ACME User` のロールを割り当てます。ユーザー管理の詳細については、[アカウントの管理][2]セクションをご覧ください。
 
@@ -208,8 +208,8 @@ Datadog の [Team Section][1] で、User タブに移動します。ユーザー
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /ja/account_management/users/
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 [List Users API][1] を使用して、`ACME Admin` または `ACME User` ロールのいずれかに割り当てるユーザーのユーザー ID を取得します。この API はページ区切りされているため、たとえば、ユーザーの姓をクエリパラメーターとして使用して、結果をフィルタリングする必要がある場合があります。次の例では、ユーザー ID は `1581e993-eba0-11e9-a77a-7b9b056a262c` です。
 
@@ -247,7 +247,7 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Cont
 
 [1]: /ja/api/v2/users/#list-all-users
 [2]: /ja/api/v2/roles/#add-a-user-to-a-role
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ログへのアクセスを制限する
@@ -264,7 +264,7 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Cont
 **注**: ロールには、制限クエリを **1 つだけ**アタッチできます。制限クエリをロールにアタッチすると、このロールにすでにアタッチされている制限クエリがすべて削除されます。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 Datadog アプリで [Data Access ページ][1]を使用して、以下を実行します。
 
@@ -276,8 +276,8 @@ Datadog アプリで [Data Access ページ][1]を使用して、以下を実行
 詳細については、[`logs_read_data` アクセス許可セクション][1]を参照してください。
 
 [1]: https://app.datadoghq.com/logs/pipelines/data-access
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 [Create Restriction Query API][1] を使用して、新しい制限クエリを作成します。制限クエリ ID (次の例では `76b2c0e6-98fa-11ea-93e6-775bd9258d59`) を追跡します。
 
@@ -324,7 +324,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 [3]: /ja/api/v2/roles/#grant-permission-to-a-role
 [4]: /ja/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
 [5]: /ja/api/v2/logs-restriction-queries/#get-restriction-query-for-a-given-role
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

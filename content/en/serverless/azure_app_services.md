@@ -44,7 +44,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 ## Setup
 
 {{< tabs >}}
-{{< tab ".NET" >}}
+{{% tab ".NET" %}}
 
 ### Requirements
 
@@ -165,8 +165,8 @@ Learn more about [custom metrics][11].
 [9]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 [10]: /developers/dogstatsd/?tab=net#code
 [11]: /metrics/
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ### Requirements
 
 1. If you haven't already, set up the [Microsoft Azure integration][1] first.
@@ -245,13 +245,13 @@ Learn more about [custom metrics][10].
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
 [9]: /developers/dogstatsd/?tab=java#code
 [10]: /metrics/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Programmatic management
 
 {{< tabs >}}
-{{< tab ".NET" >}}
+{{% tab ".NET" %}}
 
 Datadog provides scripts to update or install the Azure App Service Extension using Powershell. Scripted extension management enables you to [update extensions in bulk by resource group](#powershell-resource-group) and [designate the installation of specific versions of the site extension](#powershell-specific-version). You can also use scripts to programmatically add the extension in CI/CD pipelines, as well as discover and update extensions that are already installed.
 
@@ -351,13 +351,13 @@ Many organizations use [Azure Resource Management (ARM) templates][8] to impleme
 [7]: /getting_started/site/
 [8]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview
 [9]: https://github.com/DataDog/datadog-aas-extension/tree/master/ARM
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 
 <div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. Programmatic management is not available for Java Web Apps.<br/><br/>
     Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Troubleshooting

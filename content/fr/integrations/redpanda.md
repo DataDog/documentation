@@ -58,14 +58,14 @@ Associez Datadog à [Redpanda][1] pour consulter vos métriques clés et ajouter
 2. Installez manuellement l'intégration Redpanda. Consultez la section [Utiliser les intégrations de la communauté][3] pour découvrir plus de détails en fonction de votre environnement.
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
 Pour configurer ce check pour un Agent en cours d'exécution sur un host, exécutez la commande `datadog-agent integration install -t datadog-redpanda==<VERSION_INTÉGRATION>`.
 
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -101,13 +101,13 @@ agents:
 helm upgrade -f values.yaml <NOM_VERSION> datadog/datadog
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -140,8 +140,8 @@ Par défaut, la collecte de logs est désactivée dans l'Agent Datadog. Elle est
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-extras/blob/master/redpanda/datadog_checks/redpanda/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -163,7 +163,7 @@ Pour activer les logs, consultez la [section relative à la collecte de logs Kub
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://app.datadoghq.com/account/settings#agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

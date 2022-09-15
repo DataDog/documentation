@@ -11,7 +11,7 @@ Les profils collectés par les profileurs de Datadog sont directement transmis d
 ## Arguments de configuration des profileurs
 
 {{< tabs >}}
-{{< tab "Java" >}}
+{{% tab "Java" %}}
 
 | Arguments                       | Variable d'environnement        | Description                                      |
 | ------------------------------- | --------------------------- | ------------------------------------------------ |
@@ -20,7 +20,7 @@ Les profils collectés par les profileurs de Datadog sont directement transmis d
 | `-Ddd.profiling.proxy.username` | DD_PROFILING_PROXY_USERNAME | Nom d'utilisateur utilisé par votre proxy.                     |
 | `-Ddd.profiling.proxy.password` | DD_PROFILING_PROXY_PASSWORD | Mot de passe utilisé par votre proxy.                     |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Endpoints de profils Datadog

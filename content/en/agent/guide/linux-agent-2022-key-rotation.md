@@ -73,7 +73,7 @@ This key rotation does not affect installations done by manually downloading the
 Datadog encourages you to use one of the [install methods](#install-methods-that-automatically-trust-the-new-gpg-key) above, which trust the new GPG key as well as all future keys automatically. If this is not an option, use the following instructions to manually download and trust the new key.
 
 {{< tabs >}}
-{{< tab "Debian/Ubuntu" >}}
+{{% tab "Debian/Ubuntu" %}}
 
 Run the following commands on the host:
 
@@ -85,8 +85,8 @@ $ cat /tmp/DATADOG_APT_KEY_F14F620E | sudo gpg --import --batch --no-default-key
 $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 ```
 
-{{< /tab >}}
-{{< tab "RedHat/CentOS/SUSE" >}}
+{{% /tab %}}
+{{% tab "RedHat/CentOS/SUSE" %}}
 
 Run the following commands on the host:
 
@@ -95,13 +95,13 @@ $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915 https://keys.datadoghq.com/DATADOG_RPM_K
 $ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Check if a host trusts the new GPG key
 
 {{< tabs >}}
-{{< tab "Debian/Ubuntu" >}}
+{{% tab "Debian/Ubuntu" %}}
 
 A host correctly trusts the new key if either one of these conditions is true:
 
@@ -110,8 +110,8 @@ A host correctly trusts the new key if either one of these conditions is true:
 
 Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Ensure that `datadog-signing-keys` [version 1.1.0](#datadog-signing-keys-version-110) or later is installed unless using one of the [installation method versions listed above](#install-methods-that-automatically-trust-the-new-gpg-key).
 
-{{< /tab >}}
-{{< tab "RedHat/CentOS/SUSE" >}}
+{{% /tab %}}
+{{% tab "RedHat/CentOS/SUSE" %}}
 
 Run the following command on the host:
 
@@ -129,7 +129,7 @@ Otherwise, the command returns a non-0 exit code with no output.
 
 Alternatively, check if your `datadog.repo` file contains `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public` as one of the `gpgkey` entries. This key file will be updated with the new key as soon as it is in use.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## The `datadog-signing-keys` package

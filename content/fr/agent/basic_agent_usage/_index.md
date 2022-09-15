@@ -22,7 +22,7 @@ title: Utilisation de base de l'Agent
 ## Architecture de l'Agent
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 Les Agents v6 et v7 sont composés d'un processus principal responsable de la collecte des logs et des métriques d'infrastructure, ainsi que de la réception des [métriques DogStatsD][1]. Les composants principaux de ce processus sont les suivants :
 
@@ -69,8 +69,8 @@ Dans la version 6, DogStatsD est une implémentation Golang du daemon d'agréga
 [4]: /fr/developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
 [6]: /fr/metrics/dogstatsd_metrics_submission/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 {{< img src="agent/agent5architecture.jpg" alt="Architecture de l'Agent v5" >}}
 
@@ -109,7 +109,7 @@ minfds = 100  # Votre limite stricte
 [3]: /fr/agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /fr/agent/proxy/?tab=agentv5
 [5]: /fr/agent/faq/network/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Interface graphique
@@ -131,7 +131,7 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 ## Plateformes prises en charge
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plateforme                                 | Versions prises en charge                                        |
 |------------------------------------------|-----------------------------------------------------------|
@@ -168,8 +168,8 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 [10]: /fr/agent/basic_agent_usage/windows/
 [11]: /fr/agent/basic_agent_usage/source/
 [12]: https://github.com/golang/go/issues/24489
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Plateforme                   | Versions prises en charge     |
 |----------------------------|------------------------|
@@ -200,15 +200,15 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 [9]: /fr/agent/basic_agent_usage/osx/
 [10]: /fr/agent/basic_agent_usage/windows/
 [11]: /fr/agent/basic_agent_usage/source/
-{{< /tab >}}
-{{< tab "Agent Unix" >}}
+{{% /tab %}}
+{{% tab "Agent Unix" %}}
 
 | Plateforme | Versions prises en charge                        |
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
 [1]: /fr/agent/basic_agent_usage/aix/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Interface de ligne de commande
@@ -267,30 +267,30 @@ L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le 
 Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* à partir d'un fichier, avec le [redirecteur HTTP][6] activé. Elles montrent l'évolution de l'utilisation des ressources pour les différents niveaux de compression disponibles.
 
 {{< tabs >}}
-{{< tab "Compression HTTP niveau 6" >}}
+{{% tab "Compression HTTP niveau 6" %}}
 
 * Version de l'Agent testé : 6.15.0
 * Processeur : ~ 1,5 % du processeur utilisé en moyenne
 * Mémoire : ~ 95 Mo de RAM utilisés
 * Bande passante réseau : ~ 14 KB/s ▲
 
-{{< /tab >}}
-{{< tab "Compression HTTP niveau 1" >}}
+{{% /tab %}}
+{{% tab "Compression HTTP niveau 1" %}}
 
 * Version de l'Agent testé : 6.15.0
 * Processeur : ~ 1 % du processeur utilisé en moyenne
 * Mémoire : ~ 95 Mo de RAM utilisés
 * Bande passante réseau : ~ 20 KB/s ▲
 
-{{< /tab >}}
-{{< tab "Pas de compression HTTP" >}}
+{{% /tab %}}
+{{% tab "Pas de compression HTTP" %}}
 
 * Version de l'Agent testé : 6.15.0
 * Processeur : ~ 0,7 % du processeur utilisé en moyenne
 * Mémoire : ~ 90 Mo de RAM utilisés (mémoire RSS)
 * Bande passante réseau : ~ 200 KB/s ▲
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Concepts avancés de l'Agent Datadog

@@ -16,7 +16,7 @@ Agent v5 が既にインストールされている場合は、新しい Agent �
 ## ワンステップアップグレード
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
 
@@ -45,13 +45,13 @@ SUSE
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、Datadog がそのままの状態での完全な下位互換性は保証できないためです。
 
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 Windows プラットフォーム用のワンステップインストールはありません。[手動アップグレード](#manual-upgrade)を参照してください。
 
-{{< /tab >}}
-{{< tab "MacOS" >}}
+{{% /tab %}}
+{{% tab "MacOS" %}}
 
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
 
@@ -61,13 +61,13 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、Datadog がそのままの状態での完全な下位互換性は保証できないためです。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 手動アップグレード
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 以下の手動アップグレード手順をご覧ください。
 
@@ -395,8 +395,8 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
   ```
 
 [1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 [最新バージョン][1]をダウンロードし、インストールパッケージを実行します。
 
@@ -412,8 +412,8 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 **注**: アップグレード時に、`datadog.conf` は自動的に `datadog.yaml` にアップグレードされます。
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
-{{< /tab >}}
-{{< tab "MacOS" >}}
+{{% /tab %}}
+{{% tab "MacOS" %}}
 
 1. Agent の最新バージョンの DMG パッケージをダウンロードします。リポジトリの[リリースページ][9]にリストされている最新の macOS 版リリースを使用してください。
 2. DMG パッケージをインストールします。
@@ -425,5 +425,5 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 https://github.com/DataDog/datadog-agent/releases
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}

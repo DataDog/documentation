@@ -30,7 +30,7 @@ Si vous utilisez Glide pour charger des images dans votre application, testez la
 Si vous utilisez la bibliothèque Picasso, laissez-la utiliser votre client `OkHttpClient` pour récupérer des informations RUM et APM sur les requêtes réseau effectuées par Picasso.
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        val picasso = Picasso.Builder(context)
             .downloader(OkHttp3Downloader(okHttpClient)) 
@@ -38,8 +38,8 @@ Si vous utilisez la bibliothèque Picasso, laissez-la utiliser votre client `OkH
             .build()
        Picasso.setSingletonInstance(picasso)
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
         final Picasso picasso = new Picasso.Builder(context)
             .downloader(new OkHttp3Downloader(okHttpClient))
@@ -47,7 +47,7 @@ Si vous utilisez la bibliothèque Picasso, laissez-la utiliser votre client `OkH
             .build();
         Picasso.setSingletonInstance(picasso);
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Retrofit
@@ -55,22 +55,22 @@ Si vous utilisez la bibliothèque Picasso, laissez-la utiliser votre client `OkH
 Si vous utilisez la bibliothèque Retrofit, laissez-la utiliser votre client `OkHttpClient` pour récupérer des informations RUM et APM sur les requêtes réseau effectuées par Retrofit.
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
         val retrofitClient = Retrofit.Builder()
             .client(okHttpClient)
             // ...
             .build()
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
         final Retrofit retrofitClient = new Retrofit.Builder()
             .client(okHttpClient)
             // ...
             .build();
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### SQLDelight
@@ -84,7 +84,7 @@ Conformément à la [documentation générée sur l'API][5] de SQLiteOpenHelper,
 Cette intégration permet de détecter toute corruption de base de données et d'envoyer un événement d'erreur RUM associé.
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
         class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(
                                         <Context>, 
@@ -96,8 +96,8 @@ Cette intégration permet de détecter toute corruption de base de données et d
 
         }
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
        public class <YourOwnSqliteOpenHelper> extends SqliteOpenHelper {
             public <YourOwnSqliteOpenHelper>(){
@@ -109,7 +109,7 @@ Cette intégration permet de détecter toute corruption de base de données et d
             }
        }
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Apollo (GraphQL)
@@ -117,22 +117,22 @@ Cette intégration permet de détecter toute corruption de base de données et d
 Si vous utilisez Apollo, laissez-le utiliser votre client `OkHttpClient` pour récupérer des informations RUM et APM sur les requêtes effectuées via le client Apollo.
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
         val apolloClient =  ApolloClient.builder()
             .okHttpClient(okHttpClient)
             .serverUrl(<URL_SERVEUR_APOLLO>)
             .build()
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
         final ApolloClient apolloClient = new ApolloClient.builder()
             .okHttpClient(okHttpClient)
             .serverUrl(<URL_SERVEUR_APOLLO>)
             .build();
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Android TV (Leanback)

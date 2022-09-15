@@ -36,7 +36,7 @@ Le SDK RUM génère automatiquement un [événement de vue][2] à chaque fois qu
 
 1. Configurez `trackViewsManually` sur true lors de l'initialisation du RUM.
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -47,8 +47,8 @@ datadogRum.init({
     ...
 });
 ```
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -58,8 +58,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -68,30 +68,30 @@ window.DD_RUM &&
         ...
     });
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 2. Vous **devez** démarrer une vue pour chaque nouvelle page ou changement de route (pour les applications monopage). Vous avez la possibilité de définir le nom de vue associé, qui a pour valeur par défaut le chemin de l'URL de la page. Aucune donnée RUM n'est recueillie tant que la vue n'est pas démarrée.
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 ```javascript
 datadogRum.startView('checkout')
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.startView('checkout')
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.startView('checkout')
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : si vous utilisez React, Angular, Vue ou tout autre framework frontend, Datadog recommande d'implémenter la logique `startView` au niveau du routeur du framework.
@@ -129,7 +129,7 @@ Pour en savoir plus, consultez le [guide pour enrichir et contrôler les donnée
 En plus des attributs ajoutés avec l'[API de contexte global](#contexte-global), vous pouvez ajouter d'autres attributs de contexte à l'événement. Par exemple, ajoutez des tags à vos événements de ressource RUM à l'aide des données extraites à partir d'un objet de réponse Fetch :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -145,8 +145,8 @@ datadogRum.init({
     ...
 });
 ```
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -161,8 +161,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
@@ -176,7 +176,7 @@ window.DD_RUM &&
         ...
     });
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : le SDK RUM ne tient pas compte des éléments suivants :
@@ -188,7 +188,7 @@ window.DD_RUM &&
 Vous pouvez par exemple censurer les adresses e-mail de vos URL d'applications Web :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -203,8 +203,8 @@ datadogRum.init({
 });
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -217,8 +217,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -232,7 +232,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Vous pouvez modifier les propriétés d'événement suivantes :
@@ -255,7 +255,7 @@ Vous pouvez modifier les propriétés d'événement suivantes :
 L'API `beforeSend` vous permet d'ignorer un événement RUM en renvoyant `false` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -272,8 +272,8 @@ datadogRum.init({
 });
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.init({
@@ -288,8 +288,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -305,7 +305,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Identifier les sessions utilisateur
@@ -330,7 +330,7 @@ Les attributs suivants sont **facultatifs**, mais nous vous conseillons d'en ren
 Pour identifier les sessions utilisateur, utilisez l'API `setUser` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 ```javascript
 datadogRum.setUser({
     id: '1234',
@@ -341,8 +341,8 @@ datadogRum.setUser({
 })
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.setUser({
@@ -354,8 +354,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.setUser({
@@ -367,7 +367,7 @@ window.DD_RUM && window.DD_RUM.setUser({
 })
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Supprimer l'identification de l'utilisateur
@@ -375,26 +375,26 @@ window.DD_RUM && window.DD_RUM.setUser({
 Supprimez un utilisateur précédemment défini avec l'API `removeUser`. Tous les événements RUM recueillis par la suite ne contiendront pas d'informations sur l'utilisateur.
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 ```javascript
 datadogRum.removeUser()
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.removeUser()
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.removeUser()
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Échantillonnage
@@ -402,7 +402,7 @@ window.DD_RUM && window.DD_RUM.removeUser()
 Par défaut, aucun échantillonnage n'est appliqué au nombre de sessions recueillies. Pour appliquer un échantillonnage relatif (en pourcentage), utilisez le paramètre `sampleRate` lors de l'initialisation de RUM. L'exemple suivant recueille seulement 90 % de toutes les sessions pour une application RUM donnée :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -415,8 +415,8 @@ datadogRum.init({
 });
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```html
 <script>
  (function(h,o,u,n,d) {
@@ -434,8 +434,8 @@ datadogRum.init({
   })
 </script>
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -447,7 +447,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : lorsqu'une session est exclue en raison d'un échantillonnage, toutes les vues de page et la télémétrie associées à cette session ne sont pas recueillies.
@@ -459,7 +459,7 @@ window.DD_RUM &&
 Une fois la fonctionnalité RUM initialisée, ajoutez du contexte supplémentaire à l'ensemble des événements RUM recueillis depuis votre application avec l'API `addRumGlobalContext(key: string, value: any)` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -473,8 +473,8 @@ datadogRum.addRumGlobalContext('activity', {
 });
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.addRumGlobalContext('<CLÉ_CONTEXTE>', '<VALEUR_CONTEXTE>');
@@ -488,8 +488,8 @@ DD_RUM.onReady(function() {
     });
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CLÉ_CONTEXTE>', '<VALEUR_CONTEXTE>');
@@ -501,7 +501,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : respectez la [convention de nommage Datadog][15] pour améliorer la corrélation de vos données sur l'ensemble de la solution.
@@ -511,7 +511,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('activity', {
 Une fois la fonctionnalité RUM initialisée, remplacez le contexte par défaut de tous vos événements RUM avec l'API `setRumGlobalContext(context: Context)` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -524,8 +524,8 @@ datadogRum.setRumGlobalContext({
 });
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
     DD_RUM.setRumGlobalContext({ '<CLÉ_CONTEXTE>': '<VALEUR_CONTEXTE>' });
@@ -538,8 +538,8 @@ DD_RUM.onReady(function() {
     })
 })
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -552,7 +552,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : respectez la [convention de nommage Datadog][15] pour améliorer la corrélation de vos données sur l'ensemble de la solution.
@@ -562,7 +562,7 @@ window.DD_RUM &&
 Une fois la fonctionnalité RUM initialisée, lisez le contexte global avec l'API `getRumGlobalContext()` :
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -570,21 +570,21 @@ import { datadogRum } from '@datadog/browser-rum';
 const context = datadogRum.getRumGlobalContext();
 ```
 
-{{< /tab >}}
-{{< tab "CDN asynchrone" >}}
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 ```javascript
 DD_RUM.onReady(function() {
   var context = DD_RUM.getRumGlobalContext();
 });
 ```
-{{< /tab >}}
-{{< tab "CDN synchrone" >}}
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

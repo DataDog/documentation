@@ -63,7 +63,7 @@ Le check Go-Expvar est fourni avec l'Agent. [Installez l'Agent][3] sur les hosts
 Si votre service Go n'utilise pas déjà le [package Expvar][4], importez-le (`import "expvar"`). Si vous ne souhaitez pas instrumenter vos propres métriques avec Expvar (par exemple, si vous souhaitez seulement recueillir des métriques sur la mémoire de votre service), importez le package en spécifiant un identifiant vide (`import _ "expvar"`). Si votre service n'écoute pas déjà les requêtes HTTP (avec le package http), [configurez une écoute][5] en local uniquement pour l'Agent Datadog.
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -85,8 +85,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [4]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
 [6]: https://docs.datadoghq.com/fr/help/
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -99,7 +99,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INSTANCE>`  | `{"expvar_url": "http://%%host%%:8080"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

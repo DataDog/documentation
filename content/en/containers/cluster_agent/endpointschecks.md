@@ -74,7 +74,7 @@ By design, Endpoints Checks are dispatched to Agents that run on the same node a
 ## Set up Endpoints Check dispatching
 
 {{< tabs >}}
-{{< tab "Operator" >}}
+{{% tab "Operator" %}}
 
 Cluster Check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
 ```yaml
@@ -91,8 +91,8 @@ spec:
 
 This configuration enables both Cluster Check and Endpoints Check dispatching between the Cluster Agent and the Agents.
 
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 This is enabled by default in the Helm deployment of the Cluster Agent through the `datadog.clusterChecks.enabled` configuration key:
 ```yaml
@@ -107,9 +107,9 @@ clusterAgent:
 
 This configuration enables both Cluster Check and Endpoints Check dispatching between the Cluster Agent and the Agents.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Daemonset" >}}
+{{% tab "Daemonset" %}}
 ### Cluster Agent setup
 
 Enable the `kube_endpoints` configuration provider and listener on the Datadog **Cluster** Agent. This can be done by setting the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables:
@@ -156,7 +156,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 [1]: /agent/cluster_agent/clusterchecks/
 [2]: /agent/guide/agent-commands/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -169,7 +169,7 @@ Starting Datadog Agent 1.18.0 you can use `advanced_ad_identifiers` and [Autodis
 #### Example: HTTP_Check on Kubernetes endpoints
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 If there is a Kubernetes service you would like the to perform an [HTTP check][1] against its endpoints, use the `clusterAgent.confd` field to define your check configuration:
 
 ```yaml
@@ -189,8 +189,8 @@ clusterAgent:
 ```
 
 [1]: /integrations/http_check/
-{{< /tab >}}
-{{< tab "Daemonset" >}}
+{{% /tab %}}
+{{% tab "Daemonset" %}}
 If there is a Kubernetes service you would like the to perform an [HTTP check][1] against against its endpoints, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
@@ -206,7 +206,7 @@ instances:
 ```
 
 [1]: /integrations/http_check/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note:** The field `advanced_ad_identifiers` is supported starting Datadog Cluster Agent 1.18+.

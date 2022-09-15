@@ -44,7 +44,7 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 ## Installation
 
 {{< tabs >}}
-{{< tab "Container Installation" >}}
+{{% tab "Container Installation" %}}
 
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command for your respective operating system:
 
@@ -125,8 +125,8 @@ The commands related to log collection are:
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
-{{< /tab >}}
-{{< tab "Host Agent" >}}
+{{% /tab %}}
+{{% tab "Host Agent" %}}
 
 1. Install the [latest version of the Agent][1] on your host.
 2. Collecting logs is _disabled_ by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file:
@@ -147,8 +147,8 @@ The commands related to log collection are:
 [1]: /agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
 [3]: /agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Host Agent with Custom Logging" >}}
+{{% /tab %}}
+{{% tab "Host Agent with Custom Logging" %}}
 
 1. Install the [latest version of the Agent][1] on your host.
 2. Follow the [Custom Log Collection documentation][2] to tail files for logs.
@@ -171,7 +171,7 @@ The commands related to log collection are:
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-configuration-files/
 [4]: /agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Important notes**:
@@ -194,7 +194,7 @@ The container short image name might not match the integration name for custom i
 Autodiscovery expects labels to follow this format, depending on the file type:
 
 {{< tabs >}}
-{{< tab "Dockerfile" >}}
+{{% tab "Dockerfile" %}}
 
 Add the following `LABEL` to your Dockerfile:
 
@@ -202,8 +202,8 @@ Add the following `LABEL` to your Dockerfile:
 LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
-{{< /tab >}}
-{{< tab "Docker-Compose" >}}
+{{% /tab %}}
+{{% tab "Docker-Compose" %}}
 
 Add the following label in your `docker-compose.yaml` file:
 
@@ -212,8 +212,8 @@ labels:
     com.datadoghq.ad.logs: '["<LOGS_CONFIG>"]'
 ```
 
-{{< /tab >}}
-{{< tab "Run Command" >}}
+{{% /tab %}}
+{{% tab "Run Command" %}}
 
 Add the following label as a run command:
 
@@ -221,7 +221,7 @@ Add the following label as a run command:
 -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
@@ -231,7 +231,7 @@ Where `<LOG_CONFIG>` is the log collection configuration you would find inside a
 ### Examples
 
 {{< tabs >}}
-{{< tab "NGINX Dockerfile" >}}
+{{% tab "NGINX Dockerfile" %}}
 
 The following Dockerfile enables the NGINX log integration on the corresponding container (`service` value can be changed):
 
@@ -248,8 +248,8 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-{{< /tab >}}
-{{< tab "Java multi-line logs" >}}
+{{% /tab %}}
+{{% tab "Java multi-line logs" %}}
 
 For multi-line logs like stack traces, the Agent has [multi-line processing rules][1] to aggregate lines into a single log.
 
@@ -273,8 +273,8 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 
 [1]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-{{< /tab >}}
-{{< tab "From file" >}}
+{{% /tab %}}
+{{% tab "From file" %}}
 
 The Agent v7.25.0+/6.25.0+ can directly collect logs from a file based on a container Autodiscovery label. To collect these logs, use the `com.datadoghq.ad.logs` label as shown below on your containers to collect `/logs/app/prod.log`:
 
@@ -298,7 +298,7 @@ labels:
 
 - When using this kind of combination, `source` and `service` have no default value and should be explicitly set in the Autodiscovery label.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: Autodiscovery features can be used with or without the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable. Choose one of the following options:

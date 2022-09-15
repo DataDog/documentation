@@ -27,7 +27,7 @@ Define new entities in Datadog like customer details, service names and informat
 ## Create a Reference Table
 
 {{< tabs >}}
-{{< tab "Manual upload" >}}
+{{% tab "Manual upload" %}}
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
@@ -35,9 +35,9 @@ Click **New Reference Table +**, then upload a CSV file, name the appropriate co
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "AWS S3 upload" >}}
+{{% tab "AWS S3 upload" %}}
 
 Reference Tables can automatically pull a CSV file from an AWS S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
 
@@ -73,7 +73,7 @@ Click **New Reference Table +**, then add a name, select AWS S3, fill out all fi
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 This Reference Table can be used to add additional attributes to logs with the [Lookup Processor][1].

@@ -91,7 +91,7 @@ Databricks で Apache Spark クラスターを監視し、システムと Spark 
 #### 標準クラスター
 
 {{< tabs >}}
-{{< tab "ドライバーのみ" >}}
+{{% tab "ドライバーのみ" %}}
 ##### ドライバーに Datadog Agent をインストールします
 クラスターのドライバーノードに Datadog Agent をインストールします。これは、[Datadog Init Script][1] Databricks ノートブックの例の更新バージョンです。
 
@@ -176,8 +176,8 @@ fi
 
 [1]: https://docs.databricks.com/_static/notebooks/datadog-init-script.html
 [2]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
-{{< /tab >}}
-{{< tab "All nodes" >}}
+{{% /tab %}}
+{{% tab "All nodes" %}}
 ##### ドライバーノードとワーカーノードに Datadog Agent をインストールします
 
 `datadog-install-driver-workers.sh` スクリプトを作成した後、[クラスターコンフィギュレーションページ][1]に init スクリプトパスを追加します。
@@ -259,7 +259,7 @@ chmod a+x /tmp/start_datadog.sh
 """, True)
 ```
 [1]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### ジョブクラスター

@@ -57,7 +57,7 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 2. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
-{{< tab "Environment variables" >}}
+{{% tab "Environment variables" %}}
 
 ```bash
 export DD_ENV=prod
@@ -80,8 +80,8 @@ export DD_VERSION=1.0.3
 exec ./ddprof myapp --arg1 --arg2
 ```
 
-{{< /tab >}}
-{{< tab "Parameters" >}}
+{{% /tab %}}
+{{% tab "Parameters" %}}
 
 ```bash
 ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
@@ -99,7 +99,7 @@ Then you must invoke `ddprof` with that builtin instead:
 exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -201,7 +201,7 @@ The `environment`, `service`, and `service_version` settings are recommended, as
 
 **Note**: Parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
 
-See the [full list of parameters][5] or use the command line.
+See the [full list of parameters](https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md) or use the command line.
 
 ```bash
 ddprof --help
@@ -240,7 +240,7 @@ For most configurations, this consists of all processes visible within the profi
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -250,5 +250,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md
-[6]: /getting_started/profiler/
+[5]: /getting_started/profiler/

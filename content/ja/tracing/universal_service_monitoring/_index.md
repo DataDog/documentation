@@ -57,7 +57,7 @@ HTTPS (OpenSSL)
 サービスのデプロイ方法と Agent の構成に応じて、以下のいずれかの方法を使用して、Agent でユニバーサルサービスモニタリングを有効にします。
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Datadog チャートバージョン >= 2.26.2 を使用して、以下を values ファイルに追加します。
 
@@ -68,8 +68,8 @@ datadog:
     enabled: true
 ```
 
-{{< /tab >}}
-{{< tab "Helm を使用しない Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Helm を使用しない Kubernetes" %}}
 
 1. `datadog-agent` テンプレートにアノテーション `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` を追加します。
 
@@ -188,8 +188,8 @@ datadog:
        path: /
    ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 `docker run` コマンドに以下を追加します。
 
@@ -213,8 +213,8 @@ datadog:
 -v /:/host/root:ro
 ```
 
-{{< /tab >}}
-{{< tab "Docker Compose" >}}
+{{% /tab %}}
+{{% tab "Docker Compose" %}}
 
 以下を `docker-compose.yml` ファイルに追加します。
 
@@ -253,8 +253,8 @@ services:
      - /:/host/root:ro
 ```
 
-{{< /tab >}}
-{{< tab "コンフィギュレーションファイル" >}}
+{{% /tab %}}
+{{% tab "コンフィギュレーションファイル" %}}
 
 Helm Charts や環境変数を使用しない場合は、`system-probe.yaml` ファイルに以下を設定します。
 
@@ -263,8 +263,8 @@ service_monitoring_config:
   enabled: true
 ```
 
-{{< /tab >}}
-{{< tab "環境変数" >}}
+{{% /tab %}}
+{{% tab "環境変数" %}}
 
 Docker や ECS のインストールでよくあるように、`system-probe` を環境変数で構成する場合、以下の環境変数を `process-agent` と `system-probe` の**両方**に渡します。
 
@@ -272,7 +272,7 @@ Docker や ECS のインストールでよくあるように、`system-probe` �
 DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 自動サービスタグ付け

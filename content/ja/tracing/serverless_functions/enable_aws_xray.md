@@ -57,7 +57,7 @@ X-Ray クライアントライブラリから、API への HTTP リクエスト�
 ライブラリをインストールして Lambda プロジェクトにインポートし、インスツルメントするサービスにパッチを適用します。
 
 {{< tabs >}}
-{{< tab "Node.js" >}}
+{{% tab "Node.js" %}}
 
 X-Ray トレーシングライブラリをインストールする
 
@@ -104,8 +104,8 @@ var connection = mysql.createConnection(config);
 その他のコンフィギュレーション、サブセグメントの作成、アノテーションの記録については、[X-Ray Node.js ドキュメント][1]を参照してください。
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
-{{< /tab >}}
-{{< tab "Python" >}}
+{{% /tab %}}
+{{% tab "Python" %}}
 
 X-Ray トレーシングライブラリをインストールする
 
@@ -129,8 +129,8 @@ patch_all()
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-httpclients.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python.html
-{{< /tab >}}
-{{< tab "Go, Ruby, Java, .NET" >}}
+{{% /tab %}}
+{{% tab "Go, Ruby, Java, .NET" %}}
 
 その他のランタイムについては、X-Ray SDK ドキュメントを参照してください。
 
@@ -144,7 +144,7 @@ patch_all()
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
 [4]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: integrations/amazon_web_services/#setup

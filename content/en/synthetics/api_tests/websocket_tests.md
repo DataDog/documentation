@@ -35,18 +35,18 @@ After choosing to create an `WebSocket` test, define your test's request.
 
    {{< tabs >}}
 
-   {{< tab "Request Options" >}}
+   {{% tab "Request Options" %}}
    * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Authentication" >}}
+   {{% tab "Authentication" %}}
 
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
    {{< /tabs >}}
 

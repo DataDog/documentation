@@ -58,7 +58,7 @@ Le check `nginx-ingress-controller` est inclus avec le package de l'[Agent Datad
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -66,15 +66,15 @@ Si votre Agent s'exécute sur un host, modifiez le fichier `nginx_ingress_contro
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Collecte de métriques

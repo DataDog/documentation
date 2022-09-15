@@ -84,7 +84,7 @@ Si ce n'est pas le cas, vous utilisez la version 1 du manifeste.
 Ces deux versions proposent différents attributs et différentes structures. Le tableau ci-dessous répertorie tous les attributs obligatoires et facultatifs des deux versions du fichier `manifest.json` :
 
 {{< tabs >}}
-{{< tab "Version 2 du manifeste" >}}
+{{% tab "Version 2 du manifeste" %}}
 
 | Attribut                                            | Type                        | Obligatoire/Facultatif                        | Description                                                                                                                                                                                                                                 |
 |------------------------------------------------------|-----------------------------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -130,9 +130,9 @@ Ces deux versions proposent différents attributs et différentes structures. Le
 [1]: https://github.com/DataDog/marketplace#faq
 
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Version 1 du manifeste" >}}
+{{% tab "Version 1 du manifeste" %}}
 
 
 | Attribut                   | Type            | Obligatoire/Facultatif | Description                                                                                                                                                                                                              |
@@ -166,7 +166,7 @@ Ces deux versions proposent différents attributs et différentes structures. Le
 [2]: https://www.uuidgenerator.net
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

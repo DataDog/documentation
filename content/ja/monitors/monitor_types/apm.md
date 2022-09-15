@@ -30,7 +30,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 **APM Metrics** または **Analytics** モニターのいずれかを選択します。
 
 {{< tabs >}}
-{{< tab "APM Metrics" >}}
+{{% tab "APM Metrics" %}}
 
 ### モニタースコープを選択
 
@@ -62,8 +62,8 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 [1]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /ja/tracing/visualization/service/
 [3]: /ja/tracing/visualization/resource/
-{{< /tab >}}
-{{< tab "Analytics" >}}
+{{% /tab %}}
+{{% tab "Analytics" %}}
 
 ### 検索クエリを定義する
 
@@ -85,7 +85,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 [2]: /ja/tracing/trace_search_and_analytics/query_syntax/#facet-search
 [3]: /ja/tracing/trace_search_and_analytics/query_syntax/#numerical-values
 [4]: /ja/tracing/visualization/#indexed-span
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 通知

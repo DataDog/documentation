@@ -39,7 +39,7 @@ Unix Domain Socket で DogStatsD をセットアップするには、`dogstatsd_
 Agent DogStatsD UDS を有効にするには
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 1. [Agent のメイン構成ファイル][1]を編集して、DogStatsD がリスニングソケットを作成するパスを `dogstatsd_socket` に設定します。
 
@@ -56,8 +56,8 @@ Agent DogStatsD UDS を有効にするには
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/agent/guide/agent-commands/
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<あなたの UDS パス>` でソケットパスを設定します。
 
@@ -66,8 +66,8 @@ Agent DogStatsD UDS を有効にするには
     - `-v /var/run/datadog:/var/run/datadog` で Agent コンテナを起動します。
     - `-v /var/run/datadog:/var/run/datadog:ro` でアプリケーションコンテナを起動します。
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` でソケットパスを設定します (例: `/var/run/datadog/dsd.socket`)。
 
@@ -102,7 +102,7 @@ Agent DogStatsD UDS を有効にするには
 
       **注**: アプリケーションコンテナでソケットへの書き込みアクセス許可が必要な場合は、 `readOnly: true` を削除してください。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### netcat でテスト
@@ -118,7 +118,7 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 発信点検出により、DogStatsD はコンテナメトリクスとタグメトリクスがどこから発信されたかを自動的に検出します。このモードが有効な場合は、UDS で受信されたすべてのメトリクスがオートディスカバリーメトリクスと同じコンテナタグに基づいてタグ付けされます。
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 1. [Agent のメイン構成ファイル][1]で `dogstatsd_origin_detection` オプションを有効にします。
 
@@ -157,8 +157,8 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 [3]: /ja/agent/guide/agent-commands/
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 1. Agent コンテナの環境変数 `DD_DOGSTATSD_ORIGIN_DETECTION=true` を設定します。
 
@@ -169,8 +169,8 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 
 [1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 1. Agent コンテナの環境変数 `DD_DOGSTATSD_ORIGIN_DETECTION を true に設定します。
 
@@ -194,7 +194,7 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 
 
 [1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注:** `container_id`、`container_name`、`pod_name` タグは、[カスタムメトリクス][2]が多くなりすぎないようにデフォルトでは追加されていません。

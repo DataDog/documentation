@@ -34,7 +34,7 @@ To report test results to Datadog, you need to configure the Datadog .NET librar
 
 {{< tabs >}}
 
-{{< tab "On-Premises CI provider (Datadog Agent)" >}}
+{{% tab "On-Premises CI provider (Datadog Agent)" %}}
 
 If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
 
@@ -45,9 +45,9 @@ If you are using a Kubernetes executor, Datadog recommends using the [Datadog Ad
 
 [1]: /agent/
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Cloud CI provider (Agentless)" >}}
+{{% tab "Cloud CI provider (Agentless)" %}}
 
 <div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
 
@@ -71,7 +71,7 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -96,7 +96,7 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 
 {{< tabs >}}
 
-{{< tab "dotnet test" >}}
+{{% tab "dotnet test" %}}
 
 By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
 
@@ -104,9 +104,9 @@ By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "VSTest.Console" >}}
+{{% tab "VSTest.Console" %}}
 
 By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
 
@@ -114,7 +114,7 @@ By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-cons
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -163,7 +163,7 @@ if (scope != null) {
 // ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][6] section of the .NET custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][8] section of the .NET custom instrumentation documentation.
 
 ### Collecting Git metadata
 
@@ -225,10 +225,10 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 To use the custom instrumentation in your .NET application:
 
 1. Execute `dd-trace --version` to get the version of the tool.
-2. Add the `Datadog.Trace` [NuGet package][7] with the same version to your application.
+2. Add the `Datadog.Trace` [NuGet package][6] with the same version to your application.
 3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
+For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
 
 ## Further reading
 
@@ -240,6 +240,6 @@ For more information about how to add spans and tags for custom instrumentation,
 [3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
-[6]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
-[7]: https://www.nuget.org/packages/Datadog.Trace
-[8]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[6]: https://www.nuget.org/packages/Datadog.Trace
+[7]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[8]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags

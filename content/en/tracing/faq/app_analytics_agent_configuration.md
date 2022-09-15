@@ -25,7 +25,7 @@ Migrate to <a href="/tracing/trace_pipeline"> Trace Retention and Ingestion </a>
 2. Update your Datadog Agent configuration (based on Agent version) with the information below:
 
 {{< tabs >}}
-{{< tab "Agent 6.3.0+" >}}
+{{% tab "Agent 6.3.0+" %}}
 In `datadog.yaml`, add `analyzed_spans` under `apm_config`. For example:
 
 ```yaml
@@ -35,8 +35,8 @@ apm_config:
     <SERVICE_NAME_2>|<OPERATION_NAME_2>: 1
 ```
 
-{{< /tab >}}
-{{< tab "Agent 5.25.0+" >}}
+{{% /tab %}}
+{{% tab "Agent 5.25.0+" %}}
 In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 
 ```text
@@ -45,8 +45,8 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 <SERVICE_NAME_2>|<OPERATION_NAME_2>: 1
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). Format should be a comma-separated regular expressions without spaces. For example:
 
 ```text
@@ -57,7 +57,7 @@ DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<O
 `my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 In Datadog, every automatically instrumented service has an `<OPERATION_NAME>`, which is used to set the type of request being traced. For example, if you're tracing a Python Flask application, you might have a `flask.request` as your operation name. In a Node application using Express, you would have `express.request` ask your operation name.

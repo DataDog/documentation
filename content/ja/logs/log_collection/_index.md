@@ -38,7 +38,7 @@ title: ログの収集とインテグレーション
 ## セットアップ
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 1. [Datadog Agent][1] をインストールします。
 2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][5]を参照してください。
@@ -49,9 +49,9 @@ title: ログの収集とインテグレーション
 [3]: /ja/agent/logs/advanced_log_collection/#filter-logs
 [4]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
 [5]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "アプリケーション" >}}
+{{% tab "アプリケーション" %}}
 
 1. [Datadog Agent][1] をインストールします。
 2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][2]を参照してください。
@@ -61,9 +61,9 @@ title: ログの収集とインテグレーション
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /ja/agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "コンテナ" >}}
+{{% tab "コンテナ" %}}
 
 コンテナまたはオーケストレーターのプロバイダーを選択し、そのプロバイダー専用のログ収集手順に従います。
 
@@ -83,16 +83,16 @@ title: ログの収集とインテグレーション
 [2]: /ja/agent/guide/autodiscovery-management/
 [3]: /ja/agent/kubernetes/integrations/
 [4]: /ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "サーバーレス" >}}
+{{% tab "サーバーレス" %}}
 
 環境から Datadog にログを送信する AWS Lambda 関数である Datadog Forwarder を使用します。AWS サーバーレス環境でログ収集を有効にするには、[Datadog Forwarder のドキュメント][1]を参照してください。
 
 [1]: /ja/serverless/forwarder
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "クラウド/インテグレーション" >}}
+{{% tab "クラウド/インテグレーション" %}}
 
 以下からクラウドプロバイダーを選択すると、ログを自動的に収集して Datadog に転送する方法を確認できます。
 
@@ -109,7 +109,7 @@ Datadog のインテグレーションとログ収集は連携しています。
 [4]: /ja/agent/kubernetes/log/#autodiscovery
 [5]: /ja/agent/docker/log/#log-integrations
 [6]: /ja/integrations/#cat-log-collection
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 追加のコンフィギュレーションオプション
@@ -203,13 +203,13 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 **TCP** または **HTTP** 経由でログを転送できるカスタムプロセスまたはロギングライブラリを、Datadog ログと共に使用​​できます。
 
 {{< tabs >}}
-{{< tab "HTTP" >}}
+{{% tab "HTTP" %}}
 
 HTTP 経由で Datadog プラットフォームにログを送信できます。開始するには、[Datadog ログ HTTP API ドキュメント][1]を参照してください。
 
 [1]: /ja/api/latest/logs/#send-logs
-{{< /tab >}}
-{{< tab "TCP" >}}
+{{% /tab %}}
+{{% tab "TCP" %}}
 
 {{< site-region region="us" >}}
 
@@ -267,7 +267,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**:

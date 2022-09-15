@@ -48,7 +48,7 @@ To send only a specific subset of logs to Datadog use the `log_processing_rules`
 For example, to **filter OUT** logs that contain a Datadog email address, use the following `log_processing_rules`:
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -63,8 +63,8 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
@@ -84,8 +84,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
@@ -122,7 +122,7 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Include at match
@@ -135,7 +135,7 @@ spec:
 For example, to **filter IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -180,8 +180,8 @@ logs:
 |\\w+@datadoghq.com"
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
@@ -201,8 +201,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
@@ -239,7 +239,7 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Scrub sensitive data from your logs
@@ -251,7 +251,7 @@ This replaces all matched groups with the value of the `replace_placeholder` par
 For example, redact credit card numbers:
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -267,8 +267,8 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
@@ -289,8 +289,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
@@ -328,7 +328,7 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`.
@@ -355,7 +355,7 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 ```
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 To send the example logs above with a configuration file, use the following `log_processing_rules`:
 
@@ -371,8 +371,8 @@ logs:
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
@@ -390,8 +390,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       }]
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
@@ -428,7 +428,7 @@ spec:
 
 **Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em></div>
@@ -459,7 +459,7 @@ For containerized deployments, you can enable `auto_multi_line_detection` with t
 It can also be enabled or disabled (overriding the global config) per log configuration:
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -470,8 +470,8 @@ logs:
     auto_multi_line_detection: true
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
@@ -485,8 +485,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       }]
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 ```yaml
 apiVersion: apps/v1
@@ -515,7 +515,7 @@ spec:
           image: testApp:latest
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
@@ -596,7 +596,7 @@ logs:
 For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][4] or through an environment variable:
 
 {{< tabs >}}
-{{< tab "Configuration files" >}}
+{{% tab "Configuration files" %}}
 
 In the `datadog.yaml` file:
 
@@ -612,8 +612,8 @@ logs_config:
       replace_placeholder: "MASKED_EMAIL"
 ```
 
-{{< /tab >}}
-{{< tab "Environment Variable" >}}
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
 
 Use the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to configure global processing rules, for example:
 
@@ -621,8 +621,8 @@ Use the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to configure glob
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 Use the `env` parameter in the helm chart to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules, for example:
 
@@ -632,7 +632,7 @@ env:
     value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 

@@ -68,7 +68,7 @@ After processing, the following structured log is generated:
 Here is a list of all the matchers and filters natively implemented by Datadog:
 
 {{< tabs >}}
-{{< tab "Matchers" >}}
+{{% tab "Matchers" %}}
 
 `date("pattern"[, "timezoneId"[, "localeId"]])` 
 : Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
@@ -145,8 +145,8 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 `data`
 : Matches any string including spaces and newlines. Equivalent to `.*` in regex. Use when none of above patterns is appropriate.
 
-{{< /tab >}}
-{{< tab "Filters" >}}
+{{% /tab %}}
+{{% tab "Filters" %}}
 
 `number`
 : Parses a match as double precision number.
@@ -201,7 +201,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 
 [1]: /logs/log_configuration/processors/#user-agent-parser
 [2]: /logs/log_configuration/processors/#url-parser
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Advanced settings

@@ -79,7 +79,7 @@ annotations:
 #### 호스트 상의 Agent를 사용하는 경우
 
 {{< tabs >}}
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 
 `datadog.yaml` [설정 파일][1]에 다음 설정 블록을 추가하세요.
 
@@ -92,8 +92,8 @@ config_providers:
 ```
 
 [1]: /kr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 `datadog.yaml` [설정 파일][1]에 다음 설정 블록을 추가하세요.
 
@@ -109,23 +109,23 @@ config_providers:
 ```
 
 [1]: /kr/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{< /tab >}}
-{{< tab "ECS Fargate" >}}
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
 
 ECS Fargate는 호스트에서 바이너리로 실행된 Datadog Agent로 모니터링할 수 없다는 점에 유의하세요.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### 컨테이너로 Agent를 사용하는 경우
 
 {{< tabs >}}
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 
 Docker 컨테이너에서 자동적으로 자동탐지를 활성화하려면 `/var/run/docker.sock`을 컨테이너화 Agent에 마운트하세요. Windows의 경우에는 `\\.\pipe\docker_engine`를 마운트하세요.
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 쿠버네티스(Kubernetes)에서는 자동탐지가 기본으로 활성화되어 있습니다.
 
@@ -135,8 +135,8 @@ Docker 컨테이너에서 자동적으로 자동탐지를 활성화하려면 `/v
 KUBERNETES=yes
 ```
 
-{{< /tab >}}
-{{< tab "ECS Fargate" >}}
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
 
 쿠버네티스(Kubernetes) 내 컨테이너에 자동탐지를 활성화하려면, 컨테이너화 Agent를 시작할 때 다음의 환경 변수를 추가하세요.
 
@@ -144,7 +144,7 @@ KUBERNETES=yes
 ECS_FARGATE=true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 통합 템플릿

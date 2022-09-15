@@ -10,7 +10,7 @@ aliases:
 The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is retired in favor of `datadog.yaml` (v6).
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform                             | Command                              |
 |:-------------------------------------|:-------------------------------------|
@@ -19,8 +19,8 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.yaml` |
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Platform                             | Command                                                                    |
 |:-------------------------------------|:---------------------------------------------------------------------------|
@@ -29,7 +29,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: [A full example of the `datadog.yaml` file is available in the `datadog-agent` GitHub repository][1].
@@ -39,7 +39,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform                             | Command                        |
 |:-------------------------------------|:-------------------------------|
@@ -80,8 +80,8 @@ For log collection, the Agent does not accept multiple YAML files that point to 
 
 To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml`, but migrating to the new layout is strongly recommended.
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Platform                             | Command                                                              |
 |:-------------------------------------|:---------------------------------------------------------------------|
@@ -97,7 +97,7 @@ To preserve backwards compatibility, the Agent still picks up configuration file
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\conf.d`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## JMX configuration file

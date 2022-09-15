@@ -92,7 +92,7 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -266,8 +266,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [9]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [10]: https://docs.datadoghq.com/ja/tracing/setup/
 [11]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 #### Docker
 
@@ -317,8 +317,8 @@ Agent コンテナで必要な環境変数
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [6]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 #### Kubernetes
 
@@ -418,8 +418,8 @@ Agent コンテナで必要な環境変数
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
 [7]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [8]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "ECS" >}}
+{{% /tab %}}
+{{% tab "ECS" %}}
 
 #### ECS
 
@@ -486,7 +486,7 @@ Agent コンテナで必要な環境変数
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [6]: https://docs.datadoghq.com/ja/tracing/setup/
 [7]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

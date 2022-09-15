@@ -52,7 +52,7 @@ Datadog provides Agent container images for Python 2 and Python 3.
 To switch from Python 2 to Python 3, update the image tag used to deploy the Agent.
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 By default, the [Datadog Helm chart][1] uses the Agent 7 image that embeds the Python 3 runtime.
 
 To keep the Datadog Agent updated, edit your `values.yaml` to remove any information under the `agent.image` and the `clusterChecksRunner.image` sections.
@@ -99,8 +99,8 @@ clusterChecksRunner:
 
 [1]:https://artifacthub.io/packages/helm/datadog/datadog/
 
-{{< /tab >}}
-{{< tab "Datadog Operator" >}}
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
 By default, the [Datadog Operator][1] uses an `agent:7.*.*` image that embeds the Python 3 runtime.
 
 If the image information is not specified in the `DatadogAgent` resource, the Operator deploys a Python 3 Datadog Agent image.
@@ -192,8 +192,8 @@ spec:
 ```
 
 [1]: https://github.com/DataDog/datadog-operator
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 In your DaemonSet manifest, update the image tag in each container definition:
 
@@ -231,13 +231,13 @@ spec:
         # ...
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Deployment tools
 
 {{< tabs >}}
-{{< tab "Chef" >}}
+{{% tab "Chef" %}}
 
 Use the `extra_config` field to set the ` python_version` field to `3`:
 
@@ -251,8 +251,8 @@ default_attributes(
  )
 ```
 
-{{< /tab >}}
-{{< tab "Puppet" >}}
+{{% /tab %}}
+{{% tab "Puppet" %}}
 
 Use the `agent_extra_config` field to set the `python_version`field to `3`:
 
@@ -264,8 +264,8 @@ class { "datadog_agent":
 }
 ```
 
-{{< /tab >}}
-{{< tab "Ansible" >}}
+{{% /tab %}}
+{{% tab "Ansible" %}}
 
 Set the `python_version` to `3` inside of your `datadog_config`:
 ```
@@ -273,7 +273,7 @@ datadog_config:
   python_version: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

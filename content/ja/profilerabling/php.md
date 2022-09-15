@@ -28,7 +28,7 @@ Datadog Profiler を使用するには、64 ビットの Linux で、少なく�
 - Fibers (PHP 8.1+)
 
 {{< tabs >}}
-{{< tab "GNU C Linux" >}}
+{{% tab "GNU C Linux" %}}
 
 glibc 2.17 以降を搭載した OS が必要です。以下のバージョン以降がこの要件を満たしています。
   - CentOS 7
@@ -37,12 +37,12 @@ glibc 2.17 以降を搭載した OS が必要です。以下のバージョン�
 
 Datadog では、EOL ではない OS のバージョンを実行することを推奨しています。
 
-{{< /tab >}}
-{{< tab "Alpine Linux" >}}
+{{% /tab %}}
+{{% tab "Alpine Linux" %}}
 
 プロファイラーは musl v1.2 に対してビルドされているため、Alpine Linux のバージョン 3.13 以降が必要です。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
@@ -60,7 +60,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 4. 環境変数でプロファイラーを構成します。トレーサーとは異なり、プロファイラーでは INI 設定をサポートしていません。
 
    {{< tabs >}}
-{{< tab "CLI" >}}
+{{% tab "CLI" %}}
 
 PHP を呼び出す前に環境変数を設定します。例:
 
@@ -73,8 +73,8 @@ export DD_VERSION=1.3.2
 php hello.php
 ```
 
-{{< /tab >}}
-{{< tab "PHP-FPM" >}}
+{{% /tab %}}
+{{% tab "PHP-FPM" %}}
 
 php-fpm の `www.conf` ファイルの `env` ディレクティブを使用します。次に例を示します。
 
@@ -85,8 +85,8 @@ env[DD_ENV] = prod
 env[DD_VERSION] = 1.3.2
 ```
 
-{{< /tab >}}
-{{< tab "Apache" >}}
+{{% /tab %}}
+{{% tab "Apache" %}}
 
 サーバー構成、バーチャルホスト、ディレクトリ、または `.htaccess` ファイルから `SetEnv` を使用します。
 
@@ -97,7 +97,7 @@ SetEnv DD_ENV prod
 SetEnv DD_VERSION 1.3.2
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 その他の環境変数については、[構成ドキュメント][4]を参照してください。

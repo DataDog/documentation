@@ -50,7 +50,7 @@ Amazon Relational Database Service (RDS) est un service Web qui facilite la c
 Vous pouvez surveiller les instances RDS avec les intégrations standard, améliorée et native. **Consultez la [liste complète des métriques](#donnees-recueillies) avant de choisir une configuration**. En effet, chaque métrique correspond à une configuration précise. Passez également en revue les informations ci-dessous pour en savoir plus sur les exigences de chaque configuration ainsi que sur le dashboard par défaut :
 
 {{< tabs >}}
-{{< tab "Intégration standard" >}}
+{{% tab "Intégration standard" %}}
 
 Pour installer l'intégration standard, sélectionnez RDS sur le côté gauche du [carré d'intégration AWS][1]. Vous pourrez ainsi recevoir des métriques relatives à votre instance aussi souvent que votre intégration CloudWatch le permet. Tous les types de moteurs RDS sont pris en charge.
 
@@ -58,15 +58,15 @@ Le dashboard par défaut pour cette intégration rassemble des informations sur 
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-{{< /tab >}}
-{{< tab "Intégration améliorée" >}}
+{{% /tab %}}
+{{% tab "Intégration améliorée" %}}
 
 L'intégration améliorée nécessite une configuration supplémentaire et est seulement disponible pour les moteurs MySQL, Aurora, MariaDB, SQL Server, Oracle et PostgreSQL. Des métriques supplémentaires sont disponibles, mais vous devez disposer d'un AWS Lambda pour envoyer les métriques à Datadog. Une granularité plus élevée et des services requis complémentaires peuvent engendrer une hausse des frais AWS.
 
 Le dashboard par défaut pour cette intégration rassemble des informations sur les chargements, la disponibilité, l'utilisation du CPU, les tâches, la mémoire, le swap, les réceptions réseau, les transmissions réseau, le CPU utilisé par processus, la mémoire utilisée par processus, les opérations de disque, le système de fichiers utilisé (pourcentage), les tâches en cours d'exécution et l'utilisation du CPU système.
 
-{{< /tab >}}
-{{< tab "Intégration native" >}}
+{{% /tab %}}
+{{% tab "Intégration native" %}}
 
 L'intégration native des bases de données est facultative et disponible pour les moteurs MySQL, Aurora, MariaDB, SQL Server et PostgreSQL. Pour faire correspondre les métriques de RDS et celles de l'intégration native, utilisez le tag `dbinstanceidentifier` de l'intégration native basé sur l'identificateur que vous attribuez à l'instance RDS. Le tag est automatiquement attribué aux instances RDS.
 
@@ -78,7 +78,7 @@ Il existe trois dashboards par défaut pour cette configuration : MySQL, Aurora
 [1]: https://docs.datadoghq.com/fr/integrations/mysql/
 [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_SettingUp_Aurora.html
 [3]: https://docs.datadoghq.com/fr/integrations/postgres/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Configuration
@@ -86,13 +86,13 @@ Il existe trois dashboards par défaut pour cette configuration : MySQL, Aurora
 ### Installation
 
 {{< tabs >}}
-{{< tab "Intégration standard" >}}
+{{% tab "Intégration standard" %}}
 
 Pour l'intégration RDS standard, commencez par configurer l'[intégration Amazon Web Services][1].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
-{{< /tab >}}
-{{< tab "Intégration améliorée" >}}
+{{% /tab %}}
+{{% tab "Intégration améliorée" %}}
 
 Activez la surveillance améliorée de votre instance RDS. Vous pouvez activer cette fonctionnalité lors de la création de l'instance ou ultérieurement, en sélectionnant **Modify** dans **Instance Actions**. Il est conseillé de choisir une granularité de surveillance de `15` secondes.
 
@@ -146,20 +146,20 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
 [1]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [2]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/rds_enhanced_monitoring#setup
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
-{{< tab "Intégration native" >}}
+{{% /tab %}}
+{{% tab "Intégration native" %}}
 
 1. Accédez à la console AWS et ouvrez la section RDS pour trouver l'instance que vous souhaitez surveiller.
   {{< img src="integrations/awsrds/rds-console.png" alt="Console RDS" >}}
 2. Relevez l'URL de l'endpoint, par exemple **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**, qui est utilisée pour configurer l'Agent. Notez également le paramètre `DB Instance identifier`, par exemple **mysqlrds**, qui est utilisé pour créer des graphiques et des dashboards.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Intégration standard" >}}
+{{% tab "Intégration standard" %}}
 
 1. Dans le [carré d'intégration AWS][1], assurez-vous que l'option `RDS` est cochée dans la section concernant la collecte des métriques.
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][2] afin de recueillir des métriques Amazon RDS. Pour en savoir plus, consultez la section relative aux [stratégies RDS][3] (en anglais) de la documentation AWS.
@@ -176,8 +176,8 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
-{{< /tab >}}
-{{< tab "Intégration améliorée" >}}
+{{% /tab %}}
+{{% tab "Intégration améliorée" %}}
 
 1. Dans le [carré d'intégration AWS][1], assurez-vous que l'option `RDS` est cochée dans la section concernant la collecte des métriques.
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][2] afin de recueillir des métriques Amazon RDS. Pour en savoir plus, consultez la section relative aux [stratégies RDS][3] (en anglais) de la documentation AWS.
@@ -195,8 +195,8 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
-{{< /tab >}}
-{{< tab "Intégration native" >}}
+{{% /tab %}}
+{{% tab "Intégration native" %}}
 
 Configurez un Agent et connectez-vous à votre instance RDS en modifiant le fichier YAML approprié dans votre répertoire conf.d, puis redémarrez votre Agent :
 
@@ -262,7 +262,7 @@ Checks
 ```
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-information
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Utilisation

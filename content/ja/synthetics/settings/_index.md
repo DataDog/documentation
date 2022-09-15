@@ -48,7 +48,7 @@ title: Synthetic モニタリングの設定
 作成する変数のタイプを選択します。
 
 {{< tabs >}}
-{{< tab "Specify Value" >}}
+{{% tab "Specify Value" %}}
 
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。この名前は、グローバル変数全体で一意である必要があります。
 2. 変数の **Description** を入力します（任意）。
@@ -58,9 +58,9 @@ title: Synthetic モニタリングの設定
 
 {{< img src="synthetics/settings/variable_value_2.png" alt="グローバル変数による値の指定" style="width:100%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Create From HTTP Test" >}}
+{{% tab "Create From HTTP Test" %}}
 
 関連するレスポンスヘッダーや本文をパースして、既存の [HTTP テスト][1] から変数を作成できます。
 
@@ -93,9 +93,9 @@ title: Synthetic モニタリングの設定
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
 [4]: https://www.w3schools.com/xml/xpath_syntax.asp
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "MFA Token" >}}  
+{{% tab "MFA Token" %}}  
 
 TOTP を生成しテストで使用するには、シークレットキーを入植する場所にグローバル変数を作成するか、認証プロバイダーからの QR コードをアップロードします。
 
@@ -111,7 +111,7 @@ TOTP を生成しテストで使用するには、シークレットキーを入
 **注**: ブラウザテストの TOTP を使用した MFA について、詳細は [TOTP ガイド][1]をご参照ください。
 
 [1]: /ja/synthetics/guide/browser-tests-totp
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

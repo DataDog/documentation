@@ -38,7 +38,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 ## Setup
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 1. Install the [Datadog Agent][1].
 2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
@@ -49,9 +49,9 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 [5]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Application" >}}
+{{% tab "Application" %}}
 
 1. Install the [Datadog Agent][1].
 2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent’s main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][2] for more information and examples.
@@ -61,9 +61,9 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Container" >}}
+{{% tab "Container" %}}
 
 Choose a container or orchestrator provider and follow their dedicated log collection instructions:
 
@@ -83,16 +83,16 @@ Choose a container or orchestrator provider and follow their dedicated log colle
 [2]: /agent/guide/autodiscovery-management/
 [3]: /agent/kubernetes/integrations/
 [4]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Serverless" >}}
+{{% tab "Serverless" %}}
 
 Use the Datadog Forwarder, an AWS Lambda function that ships logs from your environment to Datadog. To enable log collection in your AWS serverless environment, refer to the [Datadog Forwarder documentation][1].
 
 [1]: /serverless/forwarder
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Cloud/Integration" >}}
+{{% tab "Cloud/Integration" %}}
 
 Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
 
@@ -109,7 +109,7 @@ Datadog integrations and log collection are tied together. You can use an integr
 [4]: /agent/kubernetes/log/#autodiscovery
 [5]: /agent/docker/log/#log-integrations
 [6]: /integrations/#cat-log-collection
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Additional configuration options
@@ -203,13 +203,13 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 Any custom process or logging library able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs.
 
 {{< tabs >}}
-{{< tab "HTTP" >}}
+{{% tab "HTTP" %}}
 
 You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][1] to get started.
 
 [1]: /api/latest/logs/#send-logs
-{{< /tab >}}
-{{< tab "TCP" >}}
+{{% /tab %}}
+{{% tab "TCP" %}}
 
 {{< site-region region="us" >}}
 
@@ -267,7 +267,7 @@ The TCP endpoint is not supported for this site.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/logs/livetail
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Notes**:

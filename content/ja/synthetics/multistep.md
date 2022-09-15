@@ -66,16 +66,16 @@ HTTP リクエストのステップを作成するには、**Create Your First S
 
    {{< tabs >}}
 
-   {{< tab "リクエストオプション" >}}
+   {{% tab "リクエストオプション" %}}
 
    * **Follow redirects**: チェックマークを付けると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
    * **Ignore server certificate error**: チェックマークを付けると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
    * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
    * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "認証" >}}
+   {{% tab "認証" %}}
 
    * **Client certificate**: クライアント証明書と関連する秘密キーをアップロードして、mTLS を介して認証します。
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
@@ -84,34 +84,34 @@ HTTP リクエストのステップを作成するには、**Create Your First S
    * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
    AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "クエリパラメーター" >}}
+   {{% tab "クエリパラメーター" %}}
 
    * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "リクエスト本文" >}}
+   {{% tab "リクエスト本文" %}}
 
    * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "プロキシ" >}}
+   {{% tab "プロキシ" %}}
 
    * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
    * **Proxy Header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Privacy" >}}
+   {{% tab "Privacy" %}}
 
    * **Do not save response body**: レスポンスの本文が実行時に保存されないようにするには、このオプションを選択します。これは、テスト結果に機密データが表示されないようにするために役立ちますが、障害のトラブルシューティングが困難になる可能性があります。セキュリティに関する推奨事項については、[Synthetic モニタリングデータセキュリティ][1]を参照してください。
 
 [1]: /ja/data_security/synthetics
-   {{< /tab >}}
+   {{% /tab %}}
 
    {{< /tabs >}}
 

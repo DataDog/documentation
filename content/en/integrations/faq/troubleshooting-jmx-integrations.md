@@ -22,7 +22,7 @@ java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l l
 If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][2] a copy of the results from above along with the following information:
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 * [Agent Flare][1], which includes:
   * Output of the [status command][2].
@@ -34,8 +34,8 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 [1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
 [2]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 * [Agent Flare][1], which includes:
   * Output of the [info command][2].
@@ -46,7 +46,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 [1]: /agent/troubleshooting/send_a_flare/?tab=agentv5
 [2]: /agent/guide/agent-commands/?tab=agentv5#agent-status-and-information
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: If you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
@@ -54,7 +54,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 ## Agent troubleshooting
 
 {{< tabs >}}
-{{< tab "Agent >= v6.2" >}}
+{{% tab "Agent >= v6.2" %}}
 
 These commands are available since v6.2.0:
 
@@ -81,8 +81,8 @@ These commands are available since v6.2.0:
   sudo -u dd-agent datadog-agent jmx list everything -l debug --flare
   ```
 
-{{< /tab >}}
-{{< tab "Agent v6.0 and v6.1" >}}
+{{% /tab %}}
+{{% tab "Agent v6.0 and v6.1" %}}
 
 The Agent 6 ships JMXFetch and supports all of its features, except those listed below.
 
@@ -118,8 +118,8 @@ Example:
 - The location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.jar` in the example) might reside elsewhere in your system. You should be able to find it with `sudo find / -type f -name 'tools.jar'`.
 - You may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Command                                                           | Description                                                                                                                                                             |
 |:------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -130,8 +130,8 @@ Example:
 | `sudo /etc/init.d/datadog-agent jmx list_everything`              | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
 | `sudo /etc/init.d/datadog-agent jmx collect`                      | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
 
-{{< /tab >}}
-{{< tab "Docker Agent" >}}
+{{% /tab %}}
+{{% tab "Docker Agent" %}}
 
 To check whether Autodiscovery is loading JMX-based checks:
 
@@ -145,7 +145,7 @@ To see JMX-based checks status from the Agent:
 $ docker exec -it <AGENT_CONTAINER_NAME> agent status
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## FAQ

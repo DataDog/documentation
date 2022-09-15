@@ -41,7 +41,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 ### Setup RUM
 
 {{< tabs >}}
-{{< tab "Browser RUM" >}}
+{{% tab "Browser RUM" %}}
 
 1.  Set up [RUM Browser Monitoring][1].
 
@@ -79,8 +79,8 @@ To connect RUM to Traces, you need to specify your browser application in the `s
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
 [1]: /real_user_monitoring/browser/
-{{< /tab >}}
-{{< tab "Android RUM" >}}
+{{% /tab %}}
+{{% tab "Android RUM" %}}
 
 1.  Set up [RUM Android Monitoring][1].
 
@@ -108,8 +108,8 @@ To connect RUM to Traces, you need to specify your browser application in the `s
 **Note**: `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/android/
-{{< /tab >}}
-{{< tab "iOS RUM" >}}
+{{% /tab %}}
+{{% tab "iOS RUM" %}}
 
 1.  Set up [RUM iOS Monitoring][1].
 
@@ -149,7 +149,7 @@ To connect RUM to Traces, you need to specify your browser application in the `s
 **Note**: `tracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/ios/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported libraries

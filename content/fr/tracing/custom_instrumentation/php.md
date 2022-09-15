@@ -79,7 +79,7 @@ Par exemple, le snippet suivant trace la méthode `CustomDriver::doWork()` et aj
 ```
 
 {{< tabs >}}
-{{< tab "Tracer des appels de fonctions" >}}
+{{% tab "Tracer des appels de fonctions" %}}
 
 Les appels de fonctions sont instrumentés avec `DDTrace\trace_function()` et la fermeture de tracing est exécutée une fois l'appel instrumenté terminé.
 
@@ -107,8 +107,8 @@ var_dump(addNums(2, 8));
 // int(10)
 ```
 
-{{< /tab >}}
-{{< tab "Tracer des appels de méthodes" >}}
+{{% /tab %}}
+{{% tab "Tracer des appels de méthodes" %}}
 
 Les méthodes sont instrumentées avec `DDTrace\trace_method()`, qui offre la même fonctionnalité que `DDTrace\trace_function()`. La différence majeure réside dans le fait que la fermeture de tracing est liée à la classe instrumentée qui expose une instance de la classe instrumentée via `$this`.
 
@@ -139,7 +139,7 @@ var_dump($calc->addNums(2, 8));
 // $this->foo: bar
 // int(10)
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Accès aux spans actives
@@ -147,7 +147,7 @@ var_dump($calc->addNums(2, 8));
 L'instrumentation intégrée et votre instrumentation personnalisée créent des spans autour des opérations pertinentes. Vous pouvez accéder à la span active afin d'y inclure des données utiles.
 
 {{< tabs >}}
-{{< tab "Span active" >}}
+{{% tab "Span active" %}}
 
 ```php
 <?php
@@ -158,8 +158,8 @@ if ($span) {
 ?>
 ```
 
-{{< /tab >}}
-{{< tab "Span racine" >}}
+{{% /tab %}}
+{{% tab "Span racine" %}}
 
 Vous avez la possibilité d'accéder à la span racine de la trace plus tard, directement depuis le traceur global via `Tracer::getRootScope()`. Cela s'avère utile lorsque les métadonnées à ajouter à la span racine n'existent pas au début de l'exécution d'un script.
 
@@ -172,13 +172,13 @@ if ($scope) {
 ?>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Ajout de tags
 
 {{< tabs >}}
-{{< tab "Ajout local" >}}
+{{% tab "Ajout local" %}}
 
 Ajoutez des tags à une span via le tableau `DDTrace\SpanData::$meta`.
 
@@ -197,8 +197,8 @@ Ajoutez des tags à une span via le tableau `DDTrace\SpanData::$meta`.
 );
 ```
 
-{{< /tab >}}
-{{< tab "Ajout global" >}}
+{{% /tab %}}
+{{% tab "Ajout global" %}}
 
 Définissez la variable d'environnement `DD_TAGS` (version 0.47.0+) pour appliquer automatiquement des tags à chaque span créée. Il s'agissait auparavant de la variable `DD_TRACE_GLOBAL_TAGS`. Pour en savoir plus sur la configuration de l'ancienne version, consultez la documentation relative à la [configuration des variables d'environnement][1].
 
@@ -207,8 +207,8 @@ DD_TAGS=key1:value1,<CLÉ_TAG>:<VALEUR_TAG>
 ```
 
 [1]: /fr/tracing/setup/php/#environment-variable-configuration
-{{< /tab >}}
-{{< tab "Erreurs" >}}
+{{% /tab %}}
+{{% tab "Erreurs" %}}
 
 Les exceptions sont automatiquement reliées à la span active.
 
@@ -252,7 +252,7 @@ function doRiskyThing() {
 );
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Filtrage de ressources

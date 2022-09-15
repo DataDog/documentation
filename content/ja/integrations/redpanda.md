@@ -56,14 +56,14 @@ Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示した
 2. Redpanda インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][3]を参照してください。
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
 ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-redpanda==<INTEGRATION_VERSION>` を実行します。
 
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -99,13 +99,13 @@ agents:
 helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -143,8 +143,8 @@ Redpanda のパフォーマンスデータの収集を開始するには
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-extras/blob/master/redpanda/datadog_checks/redpanda/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -166,7 +166,7 @@ Redpanda のパフォーマンスデータの収集を開始するには
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://app.datadoghq.com/account/settings#agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

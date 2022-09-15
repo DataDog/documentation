@@ -50,7 +50,7 @@ further_reading:
 [ロールの作成 API][4] を使用して、`team-frontend` および `team-backend` ロールを追加します。
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 API 呼び出し:
 
@@ -64,8 +64,8 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: applicat
 {"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"team-backend","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
 ```
 
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 API 呼び出し:
 
@@ -79,8 +79,8 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: applicat
 {"data":{"type":"roles","id":"63b970ea-99ca-11ea-93e6-e32eb84de6d6","attributes":{"name":"team-frontend","created_at":"2020-05-19T12:15:12.375425+00:00","modified_at":"2020-05-19T12:15:12.375425+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
 ```
 
-{{< /tab >}}
-{{< tab "Generic API" >}}
+{{% /tab %}}
+{{% tab "Generic API" %}}
 
 API 呼び出し:
 
@@ -100,7 +100,7 @@ curl -X POST \
         }'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 作成されるロールはデフォルトで読み取り専用の権限を持ちます。次の手順では、ロールにアクセス許可を追加します。
@@ -161,7 +161,7 @@ Datadog 内のログにアクセスするには、以下のアクセス許可が
 利用可能なすべてのアクセス許可を一覧にして取得した各アクセス許可 ID に対し、以下のようにロールを付与します。
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 API 呼び出し（ロール ID を使用中のものに置き換え、アクセス許可 ID を入力します):
 
@@ -169,16 +169,16 @@ API 呼び出し（ロール ID を使用中のものに置き換え、アクセ
 curl -X POST "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": <PERMISSION_ID>}}'
 ```
 
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 API 呼び出し（ロール ID を使用中のものに置き換え、アクセス許可 ID を入力します):
 
 ```
 curl -X POST "https://app.datadoghq.com/api/v2/roles/63b970ea-99ca-11ea-93e6-e32eb84de6d6/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": <PERMISSION_ID>}}'
 ```
-{{< /tab >}}
-{{< tab "Generic API" >}}
+{{% /tab %}}
+{{% tab "Generic API" %}}
 
 API 呼び出し:
 
@@ -186,7 +186,7 @@ API 呼び出し:
 curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": <PERMISSION_ID>}}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 制限クエリを作成する
@@ -196,7 +196,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 本ガイドでは、バックエンドログおよびフロントエンドログに関連づけられた `team` タグがあることを前提としています。
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 API 呼び出し:
 ```
@@ -219,8 +219,8 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" 
 }
 ```
 
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 API 呼び出し:
 
@@ -244,14 +244,14 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" 
 }
 ```
 
-{{< /tab >}}
-{{< tab "Generic API" >}}
+{{% /tab %}}
+{{% tab "Generic API" %}}
 
 ```
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_キー>" -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "<クエリ>"}}}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 これで、フロントエンドチームおよびバックエンドチームのロールとクエリの両方が作成されました。
@@ -264,7 +264,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" 
 ID はこの例に固有のもので、ユーザーのアカウントで行う場合は全く別のロールとクエリ ID が付与されます。Datadog の制限に関する詳細は、[アクセス許可のドキュメント][10]を参照してください。
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 API 呼び出し:
 
@@ -293,8 +293,8 @@ curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/76
 ```
 
 [1]: https://docs.datadoghq.com/ja/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 API 呼び出し:
 
@@ -323,8 +323,8 @@ curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/b3
 ```
 
 [1]: https://docs.datadoghq.com/ja/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
-{{< /tab >}}
-{{< tab "Generic API" >}}
+{{% /tab %}}
+{{% tab "Generic API" %}}
 
 API 呼び出し:
 
@@ -332,7 +332,7 @@ API 呼び出し:
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "<ROLE_ID>"}}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ロールをユーザーにアタッチします

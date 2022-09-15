@@ -50,7 +50,7 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 If you haven’t installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10].
 
 {{< tabs >}}
-{{< tab "Standard" >}}
+{{% tab "Standard" %}}
 
 ```shell
 docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
@@ -66,8 +66,8 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 
 **Note**: For some features provided by system-probe, including network monitoring, security agent, and oom_kill check, you must also mount the `/etc/os-release` file with `-v /etc/os-release:/host/etc/os-release:ro`. If your Linux distribution does not include an `/etc/os-release` file, mount the equivalent one provided, for example `/etc/redhat-release` or `/etc/fedora-release`.
 
-{{< /tab >}}
-{{< tab "Amazon Linux" >}}
+{{% /tab %}}
+{{% tab "Amazon Linux" %}}
 
 For Amazon Linux < v2:
 
@@ -91,8 +91,8 @@ For ECR-public:
 docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (SAC).
 
@@ -106,8 +106,8 @@ For ECR-Public:
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
 ```
 
-{{< /tab >}}
-{{< tab "Unprivileged" >}}
+{{% /tab %}}
+{{% tab "Unprivileged" %}}
 
 (Optional) To run an unprivileged installation, add `--group-add=<DOCKER_GROUP_ID>` to the install command, for example:
 
@@ -121,7 +121,7 @@ For ECR-Public:
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: For Docker Compose, see [Compose and the Datadog Agent][11].

@@ -59,7 +59,7 @@ RUM は、デフォルトでコンテキスト情報を収集します。その�
 情報を収集したら、RUM イベントの属性にファセットまたはメジャーのインデックスを付けると、[コンテキスト](#context)の作成時や[分析][3]時に使用できます。
 
 {{< tabs >}}
-{{< tab "Facets" >}}
+{{% tab "Facets" %}}
 
 ファセットには、1 つの属性またはタグの個別メンバーがすべて表示されると共に、表示された RUM イベントの数などの基本的な分析が提供されます。ファセットを使用すると、特定の属性に基づきデータセットの絞り込みや切り口の切り替えができます。絞り込むには、表示する値を選択します。
 
@@ -75,8 +75,8 @@ RUM は、デフォルトでコンテキスト情報を収集します。その�
 
 [1]: /ja/real_user_monitoring/explorer/search/#search
 [2]: /ja/real_user_monitoring/rum_analytics/
-{{< /tab >}}
-{{< tab "Measures" >}}
+{{% /tab %}}
+{{% tab "Measures" %}}
 
 メジャーは、RUM イベントに含まれる数値を持つ属性です。
 
@@ -96,7 +96,7 @@ RUM は、デフォルトでコンテキスト情報を収集します。その�
 
 [1]: /ja/real_user_monitoring/explorer/search/#search
 [2]: /ja/real_user_monitoring/rum_analytics/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料
