@@ -576,7 +576,7 @@ main:
     identifier: observability_pipelines_integrations
     weight: 104
   - name: Integrate Vector with Datadog
-    url: /agent/vector_aggregation/
+    url: integrations/observability_pipelines/integrate_vector_with_datadog/
     parent: observability_pipelines
     identifier: observability_pipelines_integrate_vector_with_datadog
     weight: 105
@@ -900,6 +900,10 @@ main:
     url: infrastructure/livecontainers/configuration
     parent: infrastructure_livecontainers
     weight: 501
+  - name: Legacy Configuration
+    url: infrastructure/livecontainers/legacy
+    parent: infrastructure_livecontainers
+    weight: 502
   - name: Cloud Cost
     url: infrastructure/cloud_cost_management/
     parent: infrastructure
@@ -2709,36 +2713,41 @@ main:
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_configuration
     weight: 601
+  - name: Azure DevOps Extension
+    url: /synthetics/cicd_integrations/azure_devops_extension
+    parent: synthetics_cicd_integrations
+    identifier: synthetics_cicd_integrations_azure_devops_extension
+    weight: 602
   - name: CircleCI Orb
     url: /synthetics/cicd_integrations/circleci_orb
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_circleci_orb
-    weight: 602
+    weight: 603
   - name: GitHub Actions
     url: /synthetics/cicd_integrations/github_actions
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_github_actions
-    weight: 603
+    weight: 604
   - name: GitLab
     url: /synthetics/cicd_integrations/gitlab
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_gitlab
-    weight: 604
+    weight: 605
   - name: Jenkins
     url: /synthetics/cicd_integrations/jenkins
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_jenkins
-    weight: 605
+    weight: 606
   - name: Testing Tunnel
     url: /synthetics/testing_tunnel
     parent: synthetics_cicd_integrations
     identifier: synthetics_testing_tunnel
-    weight: 606
+    weight: 607
   - name: Troubleshooting
     url: /synthetics/cicd_integrations/troubleshooting
     parent: synthetics_cicd_integrations
     identifier: synthetics_cicd_integrations_troubleshooting
-    weight: 607
+    weight: 608
   - name: CI Results Explorer
     url: /synthetics/explorer
     parent: synthetics
@@ -3472,7 +3481,7 @@ main:
     parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
-    url: agent/vector_aggregation/
+    url: integrations/observability_pipelines/integrate_vector_with_datadog/
     parent: agent
     identifier: vector_aggregation
     weight: 13

@@ -3790,6 +3790,7 @@ components:
       description: Supported products for hourly usage attribution requests.
       enum:
       - api_usage
+      - apm_fargate_usage
       - apm_host_usage
       - appsec_usage
       - browser_usage
@@ -3817,6 +3818,7 @@ components:
       type: string
       x-enum-varnames:
       - API_USAGE
+      - APM_FARGATE_USAGE
       - APM_HOST_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
@@ -7038,6 +7040,8 @@ components:
       enum:
       - api_usage
       - api_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
       - appsec_usage
@@ -7091,6 +7095,8 @@ components:
       x-enum-varnames:
       - API_USAGE
       - API_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
       - APPSEC_USAGE
@@ -7149,6 +7155,14 @@ components:
           type: number
         api_usage:
           description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_percentage:
+          description: The percentage of APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_usage:
+          description: The APM ECS Fargate task usage by tag(s).
           format: double
           type: number
         apm_host_percentage:
@@ -8859,6 +8873,20 @@ components:
           example: UTC
           type: string
       type: object
+    SLOCreator:
+      description: The creator of the SLO
+      nullable: true
+      properties:
+        email:
+          description: Email of the creator.
+          type: string
+        id:
+          description: User ID of the creator.
+          type: string
+        name:
+          description: Name of the creator.
+          type: string
+      type: object
     SLODeleteResponse:
       description: A response list of all service level objective deleted.
       properties:
@@ -9369,6 +9397,55 @@ components:
           format: int64
           type: integer
       type: object
+    SLOOverallStatuses:
+      description: Overall status of the SLO by timeframes.
+      properties:
+        error:
+          description: Error message if SLO status or error budget could not be calculated.
+          nullable: true
+          type: string
+        indexed_at:
+          description: 'timestamp (UNIX time in seconds) of when the SLO status and
+            error budget
+
+            were calculated.'
+          example: 1662496260
+          format: int64
+          type: integer
+        raw_error_budget_remaining:
+          $ref: '#/components/schemas/SLORawErrorBudgetRemaining'
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to.
+          example: 2
+          format: int64
+          type: integer
+        status:
+          description: The status of the SLO.
+          example: 100
+          format: double
+          nullable: true
+          type: number
+        target:
+          description: The target of the SLO.
+          example: 99
+          format: double
+          type: number
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
+      type: object
+    SLORawErrorBudgetRemaining:
+      description: Error budget remaining for an SLO.
+      properties:
+        unit:
+          description: Error budget remaining unit.
+          example: requests
+          type: string
+        value:
+          description: Error budget remaining value.
+          example: 60
+          format: double
+          type: number
+      type: object
     SLOResponse:
       description: A service level objective response containing a single service
         level objective.
@@ -9806,6 +9883,38 @@ components:
       - formula
       - dimension
       type: object
+    SearchSLOQuery:
+      description: 'A metric-based SLO. **Required if type is `metric`**. Note that
+        Datadog only allows the sum by aggregator
+
+        to be used because this will sum up all request counts instead of averaging
+        them, or taking the max or
+
+        min of all of those requests.'
+      nullable: true
+      properties:
+        denominator:
+          description: A Datadog metric query for total (valid) events.
+          example: sum:my.custom.metric{*}.as_count()
+          type: string
+        metrics:
+          description: 'Metric names used in the query''s numerator and denominator.
+
+            This field will return null and will be implemented in the next version
+            of this endpoint.'
+          example:
+          - my.custom.metric
+          - my.other.custom.metric
+          items:
+            description: Metric name.
+            type: string
+          nullable: true
+          type: array
+        numerator:
+          description: A Datadog metric query for good events.
+          example: sum:my.custom.metric{type:good}.as_count()
+          type: string
+      type: object
     SearchSLOResponse:
       description: A search SLO response containing results from the search query.
       properties:
@@ -9834,7 +9943,7 @@ components:
         slo:
           description: SLOs
           items:
-            $ref: '#/components/schemas/ServiceLevelObjective'
+            $ref: '#/components/schemas/SearchServiceLevelObjective'
           type: array
       type: object
     SearchSLOResponseDataAttributesFacets:
@@ -9964,6 +10073,181 @@ components:
           description: Type of pagination.
           type: string
       type: object
+    SearchSLOThreshold:
+      description: SLO thresholds (target and optionally warning) for a single time
+        window.
+      properties:
+        target:
+          description: 'The target value for the service level indicator within the
+            corresponding
+
+            timeframe.'
+          example: 99.9
+          format: double
+          type: number
+        target_display:
+          description: 'A string representation of the target that indicates its precision.
+
+            It uses trailing zeros to show significant decimal places (for example
+            `98.00`).
+
+
+            Always included in service level objective responses. Ignored in
+
+            create/update requests.'
+          example: '99.9'
+          type: string
+        timeframe:
+          $ref: '#/components/schemas/SearchSLOTimeframe'
+        warning:
+          description: The warning value for the service level objective.
+          example: 90.0
+          format: double
+          nullable: true
+          type: number
+        warning_display:
+          description: 'A string representation of the warning target (see the description
+            of
+
+            the `target_display` field for details).
+
+
+            Included in service level objective responses if a warning target exists.
+
+            Ignored in create/update requests.'
+          example: '90.0'
+          nullable: true
+          type: string
+      required:
+      - timeframe
+      - target
+      type: object
+    SearchSLOTimeframe:
+      description: The SLO time window options.
+      enum:
+      - 7d
+      - 30d
+      - 90d
+      example: 30d
+      type: string
+      x-enum-varnames:
+      - SEVEN_DAYS
+      - THIRTY_DAYS
+      - NINETY_DAYS
+    SearchServiceLevelObjective:
+      description: 'A service level objective object includes a service level indicator,
+        thresholds
+
+        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
+      properties:
+        all_tags:
+          description: 'A list of tags associated with this service level objective.
+
+            Always included in service level objective responses (but may be empty).
+
+            Optional in create/update requests.'
+          example:
+          - env:prod
+          - app:core
+          items:
+            description: A tag to apply to your SLO.
+            type: string
+          type: array
+        created_at:
+          description: 'Creation timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SLOCreator'
+        description:
+          description: 'A user-defined description of the service level objective.
+
+
+            Always included in service level objective responses (but may be `null`).
+
+            Optional in create/update requests.'
+          nullable: true
+          type: string
+        groups:
+          description: 'A list of (up to 100) monitor groups that narrow the scope
+            of a monitor service level objective.
+
+
+            Included in service level objective responses if it is not empty. Optional
+            in
+
+            create/update requests for monitor service level objectives, but may only
+            be
+
+            used when then length of the `monitor_ids` field is one.'
+          example:
+          - env:prod
+          - role:mysql
+          items:
+            description: A group name, for instance `env:prod`.
+            type: string
+          nullable: true
+          type: array
+        id:
+          description: 'A unique identifier for the service level objective object.
+
+
+            Always included in service level objective responses.'
+          readOnly: true
+          type: string
+        modified_at:
+          description: 'Modification timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        monitor_ids:
+          description: 'A list of monitor ids that defines the scope of a monitor
+            service level
+
+            objective. **Required if type is `monitor`**.'
+          items:
+            description: A monitor ID.
+            format: int64
+            type: integer
+          nullable: true
+          type: array
+        name:
+          description: The name of the service level objective object.
+          example: Custom Metric SLO
+          type: string
+        overall_status:
+          description: calculated status and error budget remaining.
+          items:
+            $ref: '#/components/schemas/SLOOverallStatuses'
+          type: array
+        query:
+          $ref: '#/components/schemas/SearchSLOQuery'
+        thresholds:
+          description: 'The thresholds (timeframes and associated targets) for this
+            service level
+
+            objective object.'
+          example:
+          - target: 95
+            target_display: '95'
+            timeframe: 7d
+          - target: 95
+            target_display: '95'
+            timeframe: 30d
+            warning: 97
+            warning_display: '97'
+          items:
+            $ref: '#/components/schemas/SearchSLOThreshold'
+          type: array
+        type:
+          $ref: '#/components/schemas/SLOType'
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -14298,6 +14582,8 @@ components:
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
       - estimated_ingested_spans_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -14330,6 +14616,8 @@ components:
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14374,6 +14662,8 @@ components:
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
       - estimated_ingested_spans_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14417,6 +14707,8 @@ components:
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14455,6 +14747,14 @@ components:
           type: number
         api_usage:
           description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_percentage:
+          description: The percentage of APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_usage:
+          description: The APM ECS Fargate task usage by tag(s).
           format: double
           type: number
         apm_host_percentage:
@@ -15141,6 +15441,11 @@ components:
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
       properties:
+        apm_fargate_count:
+          description: The high-water mark of APM ECS Fargate tasks during the given
+            hour.
+          format: int64
+          type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
@@ -15943,6 +16248,11 @@ components:
             over all hours in the current date all organizations.
           format: int64
           type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
@@ -16271,6 +16581,11 @@ components:
         apm_azure_app_service_host_top99p:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for the given org.
           format: int64
           type: integer
         apm_host_top99p:
@@ -16604,6 +16919,11 @@ components:
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_fargate_count_avg_sum:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
@@ -26527,7 +26847,11 @@ paths:
       description: Get a list of service level objective objects for your organization.
       operationId: SearchSLO
       parameters:
-      - description: The query string to filter results based on SLO names.
+      - description: 'The query string to filter results based on SLO names.
+
+          Some examples of queries include `service:<service-name>`
+
+          and `<slo-name>`.'
         in: query
         name: query
         required: false
@@ -26548,6 +26872,12 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Whether or not to return facet information in the response `[default=false]`.
+        in: query
+        name: include_facets
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -26577,6 +26907,7 @@ paths:
             description: The regional site for Datadog customers.
             enum:
             - datadoghq.com
+            - datadoghq.eu
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ddog-gov.com
@@ -26605,9 +26936,7 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: Note: This endpoint is in public beta for US regions.
-
-        It is not currently supported in the EU region.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}:

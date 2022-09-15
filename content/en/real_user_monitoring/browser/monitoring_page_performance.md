@@ -55,6 +55,7 @@ You can access performance metrics for your views in:
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
+| `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | The moment in the page load timeline when the largest DOM object in the viewport renders and is visible on screen.                                                                                                               |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                                        |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
@@ -115,7 +116,7 @@ DD_RUM.init({
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
 ## Add your own performance timing
-On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing. 
+On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
 
 For example, you can add a timing when your hero image has appeared:
 
@@ -137,7 +138,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
+Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][17] before creating a visualization in the RUM Explorer or in your dashboards.
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
@@ -179,5 +180,4 @@ document.addEventListener("scroll", function handler() {
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
-[18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[17]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

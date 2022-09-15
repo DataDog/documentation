@@ -233,8 +233,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.init_configs='[{}]' \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
-    "host": "<HOSTNAME>",
-    "port": <SQL_PORT>,
+    "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
     "driver": "FreeTDS",
     "username": "datadog",
@@ -287,8 +286,7 @@ helm install <RELEASE_NAME> \
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>
-    port: 1433
+    host: <HOSTNAME>,1433
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
@@ -308,8 +306,7 @@ cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>'
-    port: <SQL_PORT>
+    host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
@@ -337,8 +334,7 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<HOSTNAME>",
-          "port": <SQL_PORT>,
+          "host": "<HOSTNAME>,<SQL_PORT>",
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",

@@ -1,4 +1,6 @@
 ---
+dependencies:
+- https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md
 further_reading:
 - link: https://github.com/DataDog/apps/blob/master/docs/en/ui-extensions-design-guidelines.md
   tag: Github
@@ -9,7 +11,6 @@ further_reading:
 kind: documentation
 title: Datadog Apps
 ---
-
 ## ベータ版に参加しよう 
 Datadog アプリは現在ベータ版ですが、簡単にアクセスをリクエストすることができます。[このフォーム][5]を使用して、今すぐリクエストを送信してください。承認されると、ご自身や組織のため、または素晴らしい Datadog アプリが流通する Datadog コミュニティ全体に公開するために、創造的なアプリの開発を始めることができます。
 
