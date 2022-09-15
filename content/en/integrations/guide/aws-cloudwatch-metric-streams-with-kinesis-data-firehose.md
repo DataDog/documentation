@@ -48,7 +48,7 @@ There is no additional charge from Datadog to stream metrics.
  
 AWS charges based on the number of metric updates on the CloudWatch Metric Stream and the data volume sent to the Kinesis Data Firehose. There is the potential to see an increased CloudWatch cost for the subset of metrics you are streaming, so Datadog recommends prioritizing using metric streams for the AWS services, regions, and accounts where you most need the lower latency. For more information, see [Amazon CloudWatch pricing][3].
  
-EC2 or Lambda metrics in the stream could increase the number of billable hosts and Lambda invocations (if those hosts and functions aren't already monitored with the AWS Integration or Datadog Agent in the case of EC2).
+EC2 or Lambda metrics in the stream could increase the number of billable hosts and Lambda invocations (if those hosts and functions aren't already monitored with the AWS integration or Datadog Agent in the case of EC2).
  
 ## Setup
  
@@ -65,7 +65,7 @@ EC2 or Lambda metrics in the stream could increase the number of billable hosts 
  
 Datadog recommends using CloudFormation because it's automatic and easier if you are using multiple AWS regions.
  
-1. On your Datadog site, go to the **Configuration** tab of the [AWS Integration page][1].
+1. On your Datadog site, go to the **Configuration** tab of the [AWS integration page][1].
 2. Click on the AWS account to set up metric streaming.
 3. Under **Metric Collection**, click on **Automatically Using CloudFormation** under **CloudWatch Metric Streams** to launch a stack in the AWS console.
  {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-setup.png" alt="The CloudWatch Metric Streams section of the Metric Collection tab of the AWS integration page with the Automatically Using CloudFormation button highlighted" responsive="true" style="width:60%;" >}}
@@ -81,7 +81,7 @@ Datadog recommends using CloudFormation because it's automatic and easier if you
  
 ### Results
  
-Once the stack is successfully created, wait five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS Integration page][1] and verify that the activated regions appear for the selected account.
+Once the stack is successfully created, wait five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS integration page][1] and verify that the activated regions appear for the selected account.
  
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-region.png" alt="The CloudWatch Metric Streams section of the Metric Collection tab of the AWS integration page with one activated region" responsive="true" style="width:60%;">}}
  
@@ -122,7 +122,7 @@ If you want to set up metric streams using the AWS Console, follow these steps f
  
 ### Results
  
-Once you see the Metric Stream resource has been successfully created, wait five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS Integration page][3] and verify that the activated regions are enabled under **CloudWatch Metric Streams** for the specified AWS account.
+Once you see the Metric Stream resource has been successfully created, wait five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS integration page][3] and verify that the activated regions are enabled under **CloudWatch Metric Streams** for the specified AWS account.
  
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-region.png" alt="The CloudWatch Metric Streams section of the Metric Collection tab of the AWS integration page with one activated region" responsive="true" style="width:60%;">}}
 **Note**: If you've already enabled polling CloudWatch APIs, the transition to streaming could cause a brief (up to five minutes) period where the specific metrics you are streaming are double-counted in Datadog. This is because of the difference in timing between when Datadog’s crawlers are running and submitting your CloudWatch metrics, and when Datadog recognizes that you have started streaming those metrics and turn off the crawlers.
@@ -147,7 +147,7 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 3. Delete the backup S3 bucket for failed messages linked to the Firehose.
 4. Delete the IAM roles associated with the stream and all other resources that were created while setting up the stream.
 
-Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS Integration page][1] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
+Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog’s [AWS integration page][1] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
 ## Troubleshooting
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][5].
