@@ -27,6 +27,7 @@
         top: 128px;
         align-self: flex-start;
         margin-top: -55px;
+        z-index: 1;
 
         @include media-breakpoint-up(md) {
             margin-top: 3px;
