@@ -6,18 +6,18 @@ private: true
 ---
 The Datadog Partner Network provides many resources for partners. This is a guide to training for Sales Engineers, Solution Architects, Technical Account Managers and anyone who is involved in the technical aspects of Datadog sales at an MSP partner organization.
 
-Should you have any questions during your journey, contact your PSM. Your PSM is your partner through the Datadog journey. There are many resources they can guide you to and many questions they can answer.  
+Should you have any questions during your journey, contact your PSM. Your PSM is your partner through the Datadog journey. There are many resources they can guide you to and many questions they can answer.
 
 ## Get Started with Datadog Partner Network (DPN)
 
-If your organization is new to DPN, familiarize yourself with the DPN program and the Partner Portal.  If it has already been upgraded to Basic Tier or above, proceed to [Datadog basics][5].
+If your organization is new to DPN, familiarize yourself with the DPN program and the Partner Portal. If it has already been upgraded to Basic Tier or above, proceed to [Datadog basics][5].
 
 If you haven't already, register for the DPN program through the [Partner Portal][4]. Once registered, log in and click **Asset Library** to find and download the DPN Program Guide.
 
 {{<img src="partners/sales-enablement/portal_dpn_guide.png" alt="DPN Program Guide" style="max-width:223px">}}
 
 Go through the guide in order to:
-- Learn about the DPN program and how it works  
+- Learn about the DPN program and how it works 
 - Understand partner tiers and tracks. Each tier unlocks benefits, but also has certification and other requirements. 
 
 Follow instructions to register for the Basic Tier and begin training.
@@ -49,7 +49,7 @@ The course helps you to:
 
 Once you have completed the Datadog Sales Certification and are familiar with the Datadog basics, you should get your Demo Certification.
 
-When you are ready, contact your Partner Sales Manager (PSM) to receive an invitation to the DPN Demo org used for delivering the Datadog demo.  After you've received your invitation, proceed to the [Partner Portal][4]
+When you are ready, contact your Partner Sales Manager (PSM) to receive an invitation to the DPN Demo org used for delivering the Datadog demo. After you've received your invitation, proceed to the [Partner Portal][4]
 
 {{<img src="partners/sales-enablement/portal_demo_go.png" alt="DPN Demo Certification" style="max-width: 367px">}}
 
@@ -75,15 +75,15 @@ This course:
 - Describes customer success 
 - Helps you position individual product offerings
 
-If your organization is new to Datadog, this is the right time to develop your service offering.  The Technical certification course prepares you for developing the service offering and it should be completed at this stage.  Reach out to your PSM to get and validate ideas.
+If your organization is new to Datadog, this is the right time to develop your service offering. The Technical certification course prepares you for developing the service offering and it should be completed at this stage. Reach out to your PSM to get and validate ideas.
 
 If the service offering already exists, review it at this stage to put your new Datadog knowledge in the context of your organization's market positioning.
 
 ### Deeper technical knowledge
 
-Before you can begin a successful proof of value engagement, you need to deepen the technical knowledge you have acquired.  Get started with the [Datadog Fundamentals Learning Path][1] offered by the Datadog Learning Center. The Learning Center courses include hands-on labs and deepen your technical understanding of how Datadog works.
+Before you can begin a successful proof of value engagement, you need to deepen the technical knowledge you have acquired. Get started with the [Datadog Fundamentals Learning Path][1] offered by the Datadog Learning Center. The Learning Center courses include hands-on labs and deepen your technical understanding of how Datadog works.
 
-The courses in the Datadog Fundamentals Learning Path will give you:
+The courses in the Datadog Fundamentals Learning Path give you:
 - hands-on experience configuring datadog
 - prepare to handle customer questions
 - understanding of the moving pieces within Datadog
