@@ -78,23 +78,45 @@ An example of a workflow with a single step that sends a message to a Slack chan
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data that comes from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
 Context variables come in three varieties:
-- **Trigger variables** are passed into the workflow by the triggering event.
 - A small collection of standard **workflow variables** are present in all workflows. 
 - **Step output variables** are built into some steps and allow you to pass data from that step to a subsequent step in your workflow.
+- - **Trigger variables** are passed into the workflow by the triggering event.
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
 {{< img src="workflows/context-variables.png" alt="The Context Variables tab" >}}
 
 Access a context variable by enclosing it in double braces (`{{`). You can use a context variable in fields marked with the `{{` notation.
-{{< img src="workflows/use-context-variables.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true"  >}}
+{{< img src="workflows/use-context-variable.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true" >}}
 
 ### Workflow variables
-### Trigger variables
+
+All workflows have three standard variables:
+- `WorkflowName`: The name of the workflow. Accessed with `{{ WorkflowName }}`.
+- `WorkflowId`: The workflow ID. Accessed with `{{ WorkflowId }}`.
+- `InstanceId`: Each workflow run receives a unique instance ID. Access the instance ID with `{{ InstanceId }}`.
 
 ### Step output variables
 
-Some steps create outputs that are available to subsequent steps in a workflow. In addition to outputs, workflows You can access this data using context variables.
+Some steps create outputs that are available to subsequent steps in a workflow. You can access a step variable with the syntax: `Steps.<step_name>.<variable>`. For example, to retrieve the pull request status variable (`state`) from the GitHub pull request status step (`Get_pull_request_status`), you'd use the following context variable:
+
+```
+{{ Steps.Get_pull_request_status.state }}
+```
+
+### Trigger variables
+
+You can pass trigger variables into a workflow using a webhook or when you run a workflow manually. Workflows expect a JSON object of comma-separated key-value pairs. You can access a trigger variable using the syntax `{{ Trigger.key }}`. For example, to retrieve the trigger variable `{ "user": "Bits" }`, use ` {{ Trigger.user }}`. 
+
+#### Configure trigger variables in manual runs
+
+To configure trigger variables for a manual run:
+1. 
+1. When you're ready to run your workflow
+
+#### Configure trigger variables in webhooks
+To configure 
+
 
 ## Fallback on errors
 
