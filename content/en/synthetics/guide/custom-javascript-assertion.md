@@ -22,7 +22,7 @@ To create an assertion using custom JavaScript:
 
 1. Click **Assertion** and select **Test your UI with custom JavaScript**.
 2. Write the body of your assertion.
-3. Select a target element in the UI. 
+3. Optionally, select a target element in the UI. 
 4. Click **Apply**.
 
 For more information about assertions, see [Browser Test Steps][2].
@@ -52,6 +52,13 @@ To verify that a radio button is checked, use `return document.querySelector("<S
 ## Set the value of a specified local storage item
 
 To set the value of a specified local storage item, add the following in the body assertion:
+
+{{< code-block lang="javascript" >}}
+localStorage.setItem(keyName, keyValue);
+return true
+{{< /code-block >}}
+
+For example, to set the number of milliseconds elpased since January 1, 1970, 00:00:00 UTC to "mytime":
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem(“mytime”, Date.now());
