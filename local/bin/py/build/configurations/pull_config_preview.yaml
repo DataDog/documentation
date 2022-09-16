@@ -752,7 +752,7 @@
         dest_path: '/real_user_monitoring/reactnative/'
         file_name: 'advanced_configuration.md'
         front_matters:
-          title: React Native Advanced Configuration
+          title: RUM React Native Advanced Configuration
           kind: documentation
           description: Learn about advanced configuration options for your React Native setup.
           dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/alai97/reactnative-advanced-configuration-doc-update/docs/advanced_configuration.md"]
