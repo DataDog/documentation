@@ -68188,7 +68188,9 @@
             "appKeyAuth": []
           },
           {
-            "AuthZ": []
+            "AuthZ": [
+              "metrics_read"
+            ]
           }
         ],
         "summary": "List active tags and aggregations",
