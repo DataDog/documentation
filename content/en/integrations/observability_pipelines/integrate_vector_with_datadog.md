@@ -512,5 +512,5 @@ Read more about [architecting buffers][18].
 [13]: /getting_started/tagging
 [14]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
 [15]: https://vector.dev/docs/reference/configuration/sinks/datadog_metrics/
-[17]: https://vector.dev/docs/about/concepts/#buffers
-[18]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
+[16]: https://vector.dev/docs/about/concepts/#buffers
+[17]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
