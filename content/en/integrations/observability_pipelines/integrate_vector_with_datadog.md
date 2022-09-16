@@ -386,7 +386,7 @@ sinks:
 
 ### Disk buffers
 
-Datadog recommends enabling disk buffers to prevent data loss. Vector uses [disk buffers][17] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure.  See the configuration below for setting buffers at the sink level.
+Datadog recommends enabling disk buffers to prevent data loss. Vector uses [disk buffers][16] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure.  See the configuration below for setting buffers at the sink level.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
