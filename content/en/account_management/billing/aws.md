@@ -15,13 +15,15 @@ Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances pick
 When you set up the Fargate and Lambda integration tiles, and any custom metrics, it impacts your Datadog bill.
 
 Other AWS resources (ELB, RDS, Dynamo, etc.) are not part of monthly billing and configuration exclusions do not apply.
-To filter out other resources use the [API][8]. 
+ 
 
 ## AWS resource exclusion
 
 You can limit the AWS metrics collected for some services to specific resources. On the [Datadog-AWS integration page][3], select the AWS account and click on the **Metric Collection** tab. Under **Limit Metric Collection to Specific Resources** you can then exclude metrics for one or more of EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, and CloudWatch custom metrics.
 
 {{< img src="account_management/billing/aws-resource-exclusion.png" alt="The metric collection tab of an AWS account within the Datadog AWS integration page showing the option to limit metric collection to specific resources with a dropdown menu to select AWS service and a field to add tags in key:value format" >}}
+
+You can also limit AWS metrics using the [API][8].
 
 **Note**: Only EC2 (hosts), Lambda (active functions), and CloudWatch Custom Metrics (custom metrics) are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
 
