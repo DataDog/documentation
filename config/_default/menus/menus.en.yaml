@@ -2382,9 +2382,8 @@ main:
     identifier: observability_pipelines_integrations
     weight: 4
   - name: Integrate Vector with Datadog
-    url: /agent/vector_aggregation/
+    url: observability_pipelines/integrate_vector_with_datadog/
     parent: observability_pipelines_integrations
-    identifier: integrations/observability_pipelines/integrate_vector_with_datadog/
     identifier: observability_pipelines_integrate_vector_with_datadog
     weight: 302
   - name: Guides
@@ -3483,7 +3482,7 @@ main:
     parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
-    url: integrations/observability_pipelines/integrate_vector_with_datadog/
+    url: observability_pipelines/integrate_vector_with_datadog/
     parent: agent
     identifier: vector_aggregation
     weight: 13
