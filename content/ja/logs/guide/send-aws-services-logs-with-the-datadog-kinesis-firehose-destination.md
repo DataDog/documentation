@@ -104,7 +104,7 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
 CloudWatch のロググループからログを収集している場合、以下のいずれかの方法で [Datadog Forwarder Lambda 関数][1]へのトリガーを構成します。
 
 {{< tabs >}}
-{{% tab "AWS コンソール" %}}
+{{< tab "AWS コンソール" >}}
 
 1. AWS コンソールで、**Lambda** に移動します。
 2. **Functions** をクリックし、Datadog Forwarder を選択します。
@@ -115,8 +115,8 @@ CloudWatch のロググループからログを収集している場合、以下
 7. [Datadog Log セクション][1]にアクセスし、ロググループに送信された新しいログイベントを確認します。
 
 [1]: https://app.datadoghq.com/logs
-{{% /tab %}}
-{{% tab "Terraform" %}}
+{{< /tab >}}
+{{< tab "Terraform" >}}
 
 Terraform ユーザーは、[aws_cloudwatch_log_subscription_filter][1] リソースを使いトリガーのプロビジョニングと管理ができます。以下のサンプルコードを参照してください。
 
@@ -130,8 +130,8 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 ```
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
-{{% /tab %}}
-{{% tab "CloudFormation" %}}
+{{< /tab >}}
+{{< tab "CloudFormation" >}}
 
 AWS CloudFormation ユーザーは、CloudFormation [AWS::Logs::SubscriptionFilter][1] リソースを使いトリガーのプロビジョニングと管理ができます。以下のサンプルコードを参照してください。
 
@@ -151,7 +151,7 @@ Resources:
 [2]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
 [3]: https://www.serverless.com/
 [4]: https://www.serverless.com/framework/docs/providers/aws/guide/resources/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### S3 バケットからログを収集する
@@ -159,7 +159,7 @@ Resources:
 S3 バケットからログを収集している場合、以下のいずれかの方法で [Datadog Forwarder Lambda 関数][1]へのトリガーを構成します。
 
 {{< tabs >}}
-{{% tab "AWS Console" %}}
+{{< tab "AWS Console" >}}
 
 1. Lambda 関数がインストールされたら、AWS コンソールから手動で、ログを含む S3 バケットにトリガーを追加します。
   {{< img src="logs/aws/adding_trigger.png" alt="トリガーの追加" popup="true"style="width:80%;">}}
@@ -173,8 +173,8 @@ S3 バケットからログを収集している場合、以下のいずれか�
 完了したら、[Datadog Log セクション][1]に移動し、ログを確認します。
 
 [1]: https://app.datadoghq.com/logs
-{{% /tab %}}
-{{% tab "Terraform" %}}
+{{< /tab >}}
+{{< tab "Terraform" >}}
 
 Terraform ユーザーは、[aws_s3_bucket_notification][1] リソースを使用してトリガーのプロビジョニングと管理ができます。以下のサンプルコードを参照してください。
 
@@ -192,8 +192,8 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
 
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification
-{{% /tab %}}
-{{% tab "CloudFormation" %}}
+{{< /tab >}}
+{{< tab "CloudFormation" >}}
 
 CloudFormation をご利用の方は、S3 バケットの CloudFormation [NotificationConfiguration][1] を利用してトリガーを構成することが可能です。以下のサンプルコードをご参照ください。
 
@@ -211,7 +211,7 @@ Resources:
 
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## AWS サービスのログを有効にする

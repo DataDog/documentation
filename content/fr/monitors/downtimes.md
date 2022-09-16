@@ -22,17 +22,17 @@ Pour planifier un [downtime de monitor][1] dans Datadog, utilisez le menu princi
 ### Choisir les éléments à désactiver
 
 {{< tabs >}}
-{{% tab "Par nom de monitor" %}}
+{{< tab "Par nom de monitor" >}}
 
 Utilisez le menu déroulant pour choisir les monitors à désactiver ou la fonction de recherche pour les trouver. Si vous choisissez de laisser le champ vide, tous les monitors seront désactivés par défaut. Vous pouvez également sélectionner un contexte afin de limiter votre downtime à un host, appareil ou tag de votre choix. Seuls les monitors qui correspondent à **TOUS les contextes sélectionnés** sont désactivés.
 
-{{% /tab %}}
-{{% tab "Par tags de monitor" %}}
+{{< /tab >}}
+{{< tab "Par tags de monitor" >}}
 
 Planifiez un downtime basé sur un ou plusieurs [tags de monitor][1]. Vous devez sélectionner au moins un tag, et il n'est pas possible de définir plus de 32 tags. Les noms de tag ne doivent pas dépasser 256 caractères. Seuls les monitors possédant **TOUS les tags sélectionnés** sont désactivés. Vous pouvez également sélectionner des contextes pour restreindre encore plus le downtime.
 
 [1]: /fr/monitors/manage_monitor/#monitor-tags
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Si vous choisissez de désactiver des monitors limités par un contexte, cliquez sur **Preview affected monitors** pour voir les monitors inclus. Tous les monitors créés ou modifiés après la planification du downtime sont automatiquement inclus dans le downtime s'ils correspondent au contexte.
@@ -42,12 +42,12 @@ Si vous choisissez de désactiver des monitors limités par un contexte, cliquez
 ### Planifier un downtime
 
 {{< tabs >}}
-{{% tab "Ponctuel" %}}
+{{< tab "Ponctuel" >}}
 
 Définissez un downtime ponctuel en saisissant la date et l'heure de début, ainsi que le fuseau horaire. Vous pouvez aussi définir une date et une heure de fin.
 
-{{% /tab %}}
-{{% tab "Récurrent" %}}
+{{< /tab >}}
+{{< tab "Récurrent" >}}
 
 Les downtimes récurrents sont utiles pour les périodes de maintenance récurrentes.
 
@@ -55,7 +55,7 @@ Définissez un downtime récurrent en saisissant la date et l'heure de début, l
 
 Lorsqu'une occurrence d'un downtime récurrent prend fin, cette occurrence est annulée et un nouveau downtime possédant les mêmes caractéristiques (avec une nouvelle date de début et de fin) est créé. **Remarque** : le créateur d'origine est associé à tous les nouveaux downtimes créés.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Ajouter un message

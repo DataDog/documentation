@@ -83,7 +83,7 @@ To see a signal’s list of event attributes, click **JSON** at the bottom of th
 The following is an example JSON object with event attributes that may be associated with a security signal:
 
 {{< tabs >}}
-{{% tab "Cloud SIEM" %}}
+{{< tab "Cloud SIEM" >}}
 
 ```json
 {
@@ -114,9 +114,9 @@ This is what the notification message looks like:
 user@domain.com just logged in without MFA from 1.2.3.4.
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Application Security Monitoring" %}}
+{{< tab "Application Security Monitoring" >}}
 
 ```json
 {
@@ -151,7 +151,7 @@ The notification shows the service name in the message as follows:
 Real routes targeted for your_service_name.
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### More examples

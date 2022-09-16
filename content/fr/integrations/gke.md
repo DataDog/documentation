@@ -71,7 +71,7 @@ Choisissez un *mode de fonctionnement*, afin de définir le niveau de flexibilit
 - **Autopilot** : Google provisionne et gère toute l'infrastructure sous-jacente du cluster, y compris les nœuds et les pools de nœuds. Vous disposez ainsi d'un cluster optimisé pour un fonctionnement autonome.
 
 {{< tabs >}}
-{{% tab "Intégration standard" %}}
+{{< tab "Intégration standard" >}}
 
 #### Standard
 
@@ -83,8 +83,8 @@ Vous pouvez déployer l'Agent avec un [chart Helm][2] ou directement avec un [Da
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/?tab=helm
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/?tab=daemonset
-{{% /tab %}}
-{{% tab "Autopilot" %}}
+{{< /tab >}}
+{{< tab "Autopilot" >}}
 
 #### Autopilot
 
@@ -127,7 +127,7 @@ Vous pouvez déployer l'Agent avec un [chart Helm][2] ou directement avec un [Da
 
 
 [1]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#values
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

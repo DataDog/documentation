@@ -17,7 +17,7 @@ title: iOS RUM 収集
 1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。最新のベータ版については、Datadog の[リリースページ][3]を参照してください。
 
     {{< tabs >}}
-    {{% tab "CocoaPods" %}}
+    {{< tab "CocoaPods" >}}
 
 [CocoaPods][4] を使用して、`dd-sdk-ios` をインストールできます。
 ```
@@ -26,8 +26,8 @@ pod 'DatadogSDK'
 
 [4]: https://cocoapods.org/
 
-    {{% /tab %}}
-    {{% tab "Swift Package Manager (SPM)" %}}
+    {{< /tab >}}
+    {{< tab "Swift Package Manager (SPM)" >}}
 
 Apple の [Swift Package Manager][5] を使用して SDK を統合するには、`Package.swift` に以下を依存関係として追加します。
 ```swift
@@ -36,8 +36,8 @@ Apple の [Swift Package Manager][5] を使用して SDK を統合するには�
 
 [5]: https://swift.org/package-manager/
 
-    {{% /tab %}}
-    {{% tab "Carthage" %}}
+    {{< /tab >}}
+    {{< tab "Carthage" >}}
 
 [Carthage][6] を使用して、`dd-sdk-ios` をインストールできます。
 ```
@@ -46,13 +46,13 @@ github "DataDog/dd-sdk-ios"
 
 [6]: https://github.com/Carthage/Carthage
 
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. アプリケーションコンテキストと [Datadog クライアントトークン][7]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][9]を使用して `dd-sdk-ios` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][7]を参照してください。また、アプリケーション ID を提供する必要があります ([RUM の使用方法ページ][8]で説明されているように、Javascript RUM アプリケーションを作成します)。
 
     {{< tabs >}}
-    {{% tab "US" %}}
+    {{< tab "US" >}}
 
 ```swift
 Datadog.initialize(
@@ -69,8 +69,8 @@ Datadog.initialize(
 )
 ```
 
-    {{% /tab %}}
-    {{% tab "EU" %}}
+    {{< /tab >}}
+    {{< tab "EU" >}}
 
 ```swift
 Datadog.initialize(
@@ -88,7 +88,7 @@ Datadog.initialize(
 )
 ```
 
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
    GDPR 規制に準拠するために、SDK では初期化時に `trackingConsent` 値が必要です。

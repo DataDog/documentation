@@ -31,7 +31,7 @@ Pour configurer l'URL de départ de votre test, définissez une `startUrl` dans 
 Le package est publié sous [@datadog/datadog-ci][1] dans le registre NPM.
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 Installez le package via NPM :
 
@@ -39,8 +39,8 @@ Installez le package via NPM :
 npm install --save-dev @datadog/datadog-ci
 ```
 
-{{% /tab %}}
-{{% tab "Yarn" %}}
+{{< /tab >}}
+{{< tab "Yarn" >}}
 
 Installez le package via Yarn :
 
@@ -48,7 +48,7 @@ Installez le package via Yarn :
 yarn add --dev @datadog/datadog-ci
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Configurer un client
@@ -331,7 +331,7 @@ Vous pouvez faire en sorte que votre interface de ligne de commande découvre au
 Exécutez des tests via l'interface de ligne de commande :
 
 {{< tabs >}}
-{{% tab "Yarn" %}}
+{{< tab "Yarn" >}}
 
 ```bash
 yarn datadog-ci synthetics run-tests
@@ -339,8 +339,8 @@ yarn datadog-ci synthetics run-tests
 
 **Remarque** : si vous lancez vos tests avec un fichier de configuration globale personnalisé, ajoutez`--config <CHEMIN_FICHIER_CONFIGURATION_GLOBALE>` à votre commande.
 
-{{% /tab %}}
-{{% tab "NPM" %}}
+{{< /tab >}}
+{{< tab "NPM" >}}
 
 Ajoutez les lignes suivantes à votre `package.json` :
 
@@ -360,7 +360,7 @@ npm run datadog-ci-synthetics
 
 **Remarque** : si vous lancez vos tests avec un fichier de configuration globale personnalisé, ajoutez `--config <CHEMIN_FICHIER_CONFIGURATION_GLOBALE>` à la commande associée à votre script `datadog-ci-synthetics`.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Utiliser le tunnel de test

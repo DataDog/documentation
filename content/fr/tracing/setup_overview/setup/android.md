@@ -34,7 +34,7 @@ dependencies {
 **États-Unis** 
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -48,8 +48,8 @@ class SampleApplication : Application() {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 public class SampleApplication extends Application { 
     @Override 
@@ -61,13 +61,13 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}} 
+{{< /tab >}} 
 {{< /tabs >}}
 
 **Europe**
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 class SampleApplication : Application() { 
     override fun onCreate() { 
@@ -80,8 +80,8 @@ class SampleApplication : Application() {
     } 
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 public class SampleApplication extends Application {
     @Override 
@@ -95,7 +95,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
    Pour répondre aux exigences du RGPD, le SDK nécessite la valeur de consentement au suivi à son initialisation.
@@ -128,24 +128,24 @@ public class SampleApplication extends Application {
 3. Configurez et enregistrez le traceur Android. Cette opération, qui doit être effectuée une seule fois, s'effectue généralement dans la méthode `onCreate()` de votre application :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val tracer = AndroidTracer.Builder().build()
 GlobalTracer.registerIfAbsent(tracer)
 ```
-{{% /tab %}} 
-{{% tab "Java" %}}
+{{< /tab >}} 
+{{< tab "Java" >}}
 ```java
 final AndroidTracer tracer = new AndroidTracer.Builder().build();
 GlobalTracer.registerIfAbsent(tracer);
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 4. Définissez le seuil de vidage partiel (facultatif). Vous pouvez optimiser la charge de travail du SDK si vous créez de nombreuses spans dans votre application, ou au contraire en créez très peu. La bibliothèque écrit les spans terminées sur le disque uniquement lorsque leur nombre dépasse le seuil défini. Si vous définissez le seuil sur `1`, chaque span est écrite dès qu'elle est terminée.
 
 {{< tabs >}} 
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 
 ```kotlin
 val tracer = AndroidTracer.Builder()
@@ -153,21 +153,21 @@ val tracer = AndroidTracer.Builder()
         .build()
 ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
 ```java
 final AndroidTracer tracer = new AndroidTracer.Builder()
         .setPartialFlushThreshold(10)
         .build();
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 5. Créez une span personnalisée en utilisant la méthode suivante :
 
 {{< tabs >}} 
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val tracer = GlobalTracer.get()
 val span = tracer.buildSpan("<NOM_SPAN>").start()
@@ -176,8 +176,8 @@ val span = tracer.buildSpan("<NOM_SPAN>").start()
 // Lorsque la span doit être fermée
 span.finish()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final GlobalTracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("<NOM_SPAN>").start();
@@ -186,13 +186,13 @@ final Span span = tracer.buildSpan("<NOM_SPAN>").start();
 // Lorsque la span doit être fermée
 span.finish();
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 6. Pour utiliser les contextes dans des appels synchrones :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val span = tracer.buildSpan("<NOM_SPAN1>").start()
 try {
@@ -218,8 +218,8 @@ try {
     span.finish()
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final Span = tracer.buildSpan("<NOM_SPAN1>").start();
 try {
@@ -251,13 +251,13 @@ try {
     span.finish();
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 7. Pour utiliser les contextes dans des appels asynchrones :
 
     {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val span = tracer.buildSpan("<SPAN_NAME1>").start()
 try{
@@ -278,8 +278,8 @@ try{
     span.finish()
 }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final Span span = tracer.buildSpan("<SPAN_NAME1>").start();
 try {
@@ -304,7 +304,7 @@ try {
     span.finish();
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
     {{< /tabs >}}
 
 8. (Facultatif) Pour distribuer manuellement des traces entre vos environnements, par exemple du frontend au backend :
@@ -312,7 +312,7 @@ try {
    a. Injectez le contexte du traceur dans la requête client.
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val tracer = GlobalTracer.get()
 val span = tracer.buildSpan("<NOM_SPAN>").start()
@@ -325,8 +325,8 @@ tracer.inject(span.context(), Format.Builtin.TEXT_MAP_INJECT,
 val request = tracedRequestBuilder.build() 
 // Distribuer la requête et terminer la span par la suite.
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final Tracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("<NOM_SPAN>").start();
@@ -343,13 +343,13 @@ tracer.inject(
 final Request request = tracedRequestBuilder.build();
 // Distribuer la requête et terminer la span par la suite.
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
    b. Procédez à l'extraction du contexte du traceur client à partir des en-têtes du code serveur.
 
    {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val tracer = GlobalTracer.get() 
 val extractedContext = tracer.extract(
@@ -364,8 +364,8 @@ val extractedContext = tracer.extract(
         ) 
 val serverSpan = tracer.buildSpan("<NOM_SPAN_SERVEUR>").asChildOf(extractedContext).start()      
 ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
 ```java
 final Tracer tracer = GlobalTracer.get();
 final SpanContext extractedContext = tracer.extract(
@@ -388,7 +388,7 @@ final SpanContext extractedContext = tracer.extract(
         });
 final Span serverSpan = tracer.buildSpan("<NOM_SPAN_SERVEUR>").asChildOf(extractedContext).start();
 ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
 **Remarque** : pour les codebases utilisant le client OkHttp, Datadog fournit l'[implémentation ci-dessous](#okhttp).
@@ -419,22 +419,22 @@ AndroidTracer.logErrorMessage(span, message)
 12. Si vous devez modifier certains attributs de vos événements span avant de les rassembler, vous pouvez implémenter `SpanEventMapper` lors de l'initialisation du SDK :
 
 {{< tabs >}} 
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val config = Configuration.Builder(tracesEnabled = true, ...) 
         // ...  
         .setSpanEventMapper(spanEventMapper)
         .build()    
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final Configuration config = new Configuration.Builder(true, true, true, true)
         // ...
         .setSpanEventMapper(spanEventMapper)
         .build();    
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Intégrations
@@ -446,20 +446,20 @@ La bibliothèque `dd-sdk-android` fournit non seulement une solution de tracing 
 Si vous souhaitez effectuer le tracing de vos requêtes OkHttp, vous pouvez ajouter l'[intercepteur][6] fourni tel que suit :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val okHttpClient =  OkHttpClient.Builder() 
         .addInterceptor(DatadogInterceptor(listOf("example.com", "example.eu")))
         .build()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
         .addInterceptor(new DatadogInterceptor(Arrays.asList("example.com", "example.eu")))
         .build();
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Cette méthode crée une span autour de chaque requête traitée par OkHttpClient (correspondant aux hosts fournis). Toutes les informations pertinentes sont automatiquement renseignées (URL, méthode, code de statut, erreur). La span transmet les informations de tracing à votre backend afin de garantir la cohérence des traces dans Datadog.
@@ -467,7 +467,7 @@ Cette méthode crée une span autour de chaque requête traitée par OkHttpClien
 L'intercepteur surveille les requêtes au niveau de l'application. Vous pouvez également ajouter un `TracingInterceptor` au niveau du réseau pour obtenir plus de détails, par exemple lors du suivi de redirections.
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val tracedHosts = listOf("example.com", "example.eu") 
 val okHttpClient =  OkHttpClient.Builder()
@@ -475,8 +475,8 @@ val okHttpClient =  OkHttpClient.Builder()
         .addNetworkInterceptor(TracingInterceptor(tracedHosts))
         .build()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final List<String> tracedHosts = Arrays.asList("example.com", "example.eu"); 
 final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
@@ -484,49 +484,49 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
         .addNetworkInterceptor(new TracingInterceptor(tracedHosts))
         .build();
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 En raison de la méthode d'exécution de la requête OkHttp (utilisation d'un pool de threads), la span de la requête ne sera pas automatiquement associée à la span qui a déclenché la requête. Vous pouvez toutefois spécifier manuellement une span parent dans `OkHttp Request.Builder`, comme suit :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val request = Request.Builder()
         .url(requestUrl)
         .tag(Span::class.java, parentSpan)
         .build()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final Request request = new Request.Builder()
         .url(requestUrl)
         .tag(Span.class, parentSpan)
         .build();
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Ou, si vous utilisez les extensions fournies avec la bibliothèque `dd-sdk-android-ktx` :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 val request = Request.Builder()
         .url(requestUrl)
         .parentSpan(parentSpan)
         .build()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 final Request request = new Request.Builder()
         .url(requestUrl)
         .parentSpan(parentSpan)
         .build();
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque** : si vous utilisez plusieurs intercepteurs, celui-ci doit être appelé en premier.
@@ -543,7 +543,7 @@ Pour fournir une trace continue au sein d'un flux RxJava, suivez les étapes sui
    créées dans les opérateurs du flux s'afficheront dans ce contexte (span parent) :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 Single.fromSupplier{} 
         .subscribeOn(Schedulers.io())
@@ -564,8 +564,8 @@ Single.fromSupplier{}
             }
         }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 Single.fromSupplier({})
         .subscribeOn(Schedulers.io())
@@ -587,7 +587,7 @@ Single.fromSupplier({})
         })
     };
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### RxJava et Retrofit
@@ -596,7 +596,7 @@ Pour obtenir une trace continue dans un flux RxJava qui utilise Retrofit pour le
 2. Servez-vous des adaptateurs [Retrofit RXJava][9] pour utiliser les Observables synchrones pour les requêtes réseau :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 Retrofit.Builder()
     .baseUrl("<VOTRE_URL>")
@@ -604,8 +604,8 @@ Retrofit.Builder()
     .client(okHttpClient)
     .build()
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 new Retrofit.Builder()
     .baseUrl("<VOTRE_URL>")
@@ -613,13 +613,13 @@ new Retrofit.Builder()
     .client(okHttpClient)
     .build();
  ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 3. Ouvrez un contexte autour de votre flux Rx tel que suit :
 
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
 remoteDataSource.getData(query)
     .subscribeOn(Schedulers.io())
@@ -637,8 +637,8 @@ remoteDataSource.getData(query)
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
 remoteDataSource.getData(query)
     .subscribeOn(Schedulers.io())
@@ -657,7 +657,7 @@ remoteDataSource.getData(query)
         }
     });
  ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Collecte groupée de spans

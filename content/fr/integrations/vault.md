@@ -113,7 +113,7 @@ L'intégration Vault nécessite la configuration suivante :
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -166,8 +166,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -228,7 +228,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [2]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
 [3]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
 [4]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

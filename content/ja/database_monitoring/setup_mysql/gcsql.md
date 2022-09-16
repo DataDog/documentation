@@ -46,7 +46,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 次の[データベースフラグ][3]を構成してから、設定を有効にするために**サーバーを再起動**します。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
+{{< tab "MySQL 5.6" >}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
@@ -54,9 +54,9 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "MySQL ≥ 5.7" %}}
+{{< tab "MySQL ≥ 5.7" >}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
@@ -65,7 +65,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Agent にアクセスを付与する
@@ -75,7 +75,7 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{< tab "MySQL ≥ 8.0" >}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
@@ -87,8 +87,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
-{{% tab "MySQL 5.6 & 5.7" %}}
+{{< /tab >}}
+{{< tab "MySQL 5.6 & 5.7" >}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
@@ -99,7 +99,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 次のスキーマを作成します。
@@ -178,7 +178,7 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
 
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 ホストで実行されている Agent に対してこのチェックを設定するには (Agent が Google Cloud SQL データベースから収集するように小さな GCE インスタンスをプロビジョニングする場合など)
 
@@ -212,8 +212,8 @@ instances:
 [1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Google Cloud Run などの Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
@@ -265,8 +265,8 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
 [1]: /ja/agent/docker/integrations/?tab=docker
 [2]: /ja/agent/faq/template_variables/
 [3]: /ja/agent/guide/secrets-management
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
@@ -363,7 +363,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /ja/agent/guide/secrets-management
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

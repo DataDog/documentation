@@ -76,7 +76,7 @@ GitHub Actions や CircleCI など、基底のワーカーノードにアクセ�
 次のセクションでは、Agent を実行し、テスト情報を報告するよう構成するために必要となる CI プロバイダー固有の手順をご説明します。
 
 {{< tabs >}}
-{{% tab "Azure Pipelines" %}}
+{{< tab "Azure Pipelines" >}}
 
 Azure Pipelines で Datadog Agent を実行するには、[リソースセクション][1]で新しいコンテナを定義し、それを [サービスコンテナ][2]として宣言しているジョブと関連付けます。
 
@@ -138,8 +138,8 @@ jobs:
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
-{{% /tab %}}
-{{% tab "GitLab CI" %}}
+{{< /tab >}}
+{{< tab "GitLab CI" >}}
 
 GitLab で Agent を実行するには、 [サービス][1]下で Agent コンテナを定義します。
 
@@ -183,8 +183,8 @@ test:
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{% /tab %}}
-{{% tab "GitHub Actions" %}}
+{{< /tab >}}
+{{< tab "GitHub Actions" >}}
 
 GitHub Actions で Agent を実行するには、[Datadog Agent GitHub Action][1] `datadog/agent-github-action` を使用します。
 
@@ -222,8 +222,8 @@ jobs:
 [1]: https://github.com/marketplace/actions/datadog-agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{% /tab %}}
-{{% tab "CircleCI" %}}
+{{< /tab >}}
+{{< tab "CircleCI" >}}
 
 CircleCI で Agent を実行するには、テストを実行する前に  [datadog/agent CircleCI orb][1] を使用して Agent コンテナを起動し、結果が Datadog に送信されたことを確認してから停止します。
 
@@ -284,7 +284,7 @@ workflows:
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://circleci.com/docs/2.0/env-vars/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Ruby トレーサーのインストール
@@ -305,7 +305,7 @@ gem 'ddtrace', "~> 1.0"
 ## テストのインスツルメンテーション
 
 {{< tabs >}}
-{{% tab "Cucumber" %}}
+{{< tab "Cucumber" >}}
 
 Cucumber インテグレーションでは、`cucumber` フレームワークを使用している場合のシナリオとステップの実行をトレースすることができます。
 
@@ -340,8 +340,8 @@ end
 DD_ENV=ci bundle exec rake cucumber
 ```
 
-{{% /tab %}}
-{{% tab "RSpec" %}}
+{{< /tab >}}
+{{< tab "RSpec" >}}
 
 RSpec インテグレーションでは、`rspec` テストフレームワーク使用時に、グループ単位や個別での例の実行すべてをトレースできます。
 
@@ -372,7 +372,7 @@ end
 DD_ENV=ci bundle exec rake spec
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### テストにカスタムタグを追加する

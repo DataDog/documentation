@@ -27,7 +27,7 @@ Pour en savoir plus sur les rôles par défaut et les rôles personnalisés, et 
 
 {{< tabs >}}
 
-{{% tab "Interface" %}}
+{{< tab "Interface" >}}
 
 1. Créez un monitor ou modifiez-en un pour accéder à la page de modification.
 2. Spécifiez en bas de la page les rôles qui pourront, en plus du créateur, modifier le monitor.
@@ -37,9 +37,9 @@ Pour en savoir plus sur les rôles par défaut et les rôles personnalisés, et 
 Pour en savoir plus, consultez la documentation relative aux [autorisations des monitors][1].
 
 [1]: /fr/monitors/notify/#permissions
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "API" %}}
+{{< tab "API" >}}
 
 Utilisez l'[endpoint API Énumérer les rôles][1] pour obtenir la liste des rôles et des ID associés.
 
@@ -119,7 +119,7 @@ Pour en savoir plus, consultez les sections [Rôles][5] et [Monitors][6] de la d
 [4]: /fr/account_management/rbac/permissions/#monitors
 [5]: /fr/api/latest/roles/
 [6]: /fr/api/latest/monitors/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Déverrouiller des monitors et restreindre leur modification à certains rôles

@@ -35,7 +35,7 @@ Si vous surveillez des services utilisés uniquement pendant la semaine, tels qu
 L'appel d'API suivant vous permet de désactiver les alertes pendant le week-end pour tous les monitors sur le tag `env:prod` :
 
 {{< tabs >}}
-{{% tab "API " %}}
+{{< tab "API " >}}
 
 ```bash
 curl -X POST "https://api.<SITE_DATADOG>/api/v1/downtime" \
@@ -83,15 +83,15 @@ Ensuite, dans la commande cURL, utilisez : `"start": '"${start}"'`.
 }
 ```
 
-{{% /tab %}}
-{{% tab "UI" %}}
+{{< /tab >}}
+{{< tab "UI" >}}
 
 Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sélectionnez `recurring` :
 
 {{< img src="monitors/guide/downtimes_weekend.jpg" alt="Downtimes pendant le week-end" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Downtime en dehors des heures de travail
@@ -101,7 +101,7 @@ En gardant le même exemple, vous pouvez également désactiver ce service en de
 L'appel d'API suivant vous permet de désactiver les alertes de 20 h à 6 h tous les jours de la semaine :
 
 {{< tabs >}}
-{{% tab "API " %}}
+{{< tab "API " >}}
 
 ```bash
 curl -X POST "https://api.<SITE_DATADOG>/api/v1/downtime" \
@@ -143,15 +143,15 @@ Remplacez la valeur du paramètre fictif `<SITE_DATADOG>` par {{< region-param k
 }
 ```
 
-{{% /tab %}}
-{{% tab "UI" %}}
+{{< /tab >}}
+{{< tab "UI" >}}
 
 Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sélectionnez `recurring` :
 
 {{< img src="monitors/guide/downtime_businesshour.jpg" alt="Downtimes en dehors des heures de travail" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Downtime récurrent à un jour précis du mois

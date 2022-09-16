@@ -29,7 +29,7 @@ Datadog リアルユーザーモニタリング (RUM) ソリューションの�
 [`@datadog/browser-rum`][4]を `package.json` ファイルに追加したら、次のコマンドを実行して初期化します。
 
 {{< tabs >}}
-{{% tab "US" %}}
+{{< tab "US" >}}
 
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
@@ -42,8 +42,8 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /tab >}}
+{{< tab "EU" >}}
 
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
@@ -56,7 +56,7 @@ datadogRum.init({
 });
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## バンドルセットアップ
@@ -64,7 +64,7 @@ datadogRum.init({
 生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグ（他のスクリプトタグの前にあるタグ）に貼り付けます。同期型のスクリプトタグをより高い位置に含めると、Datadog RUM ですべてのパフォーマンスデータとエラーを収集できます。
 
 {{< tabs >}}
-{{% tab "US" %}}
+{{< tab "US" >}}
 
 ```html
 <script
@@ -81,8 +81,8 @@ datadogRum.init({
 </script>
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /tab >}}
+{{< tab "EU" >}}
 
 ```html
 <script
@@ -99,7 +99,7 @@ datadogRum.init({
 </script>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: `window.DD_RUM` チェックは、RUM SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。

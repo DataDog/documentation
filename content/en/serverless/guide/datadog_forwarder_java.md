@@ -26,7 +26,7 @@ To fully instrument your serverless application with distributed tracing, your J
 
 Install the Datadog Lambda Library locally by adding one of the following code blocks into `pom.xml` (Maven) or `build.gradle` (Gradle). Replace `VERSION` below with the latest release (omitting the preceding `v`): ![Maven Cental][4]
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 Include the following dependency in your `pom.xml`:
 
@@ -38,8 +38,8 @@ Include the following dependency in your `pom.xml`:
 </dependency>
 ```
 
-{{% /tab %}}
-{{% tab "Gradle" %}}
+{{< /tab >}}
+{{< tab "Gradle" >}}
 
 Include the following in your `build.gradle`:
 
@@ -48,7 +48,7 @@ dependencies {
   implementation 'com.datadoghq:datadog-lambda-java:VERSION'
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Instrument
@@ -163,7 +163,7 @@ You may find the latest version of `0.3.x` in the [`datadog-lambda-java` reposit
 The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` (Maven) or `build.gradle` (Gradle).
 
 {{< tabs >}}
-{{% tab "Maven" %}}
+{{< tab "Maven" >}}
 
 Your `pom.xml` file contains a section similar to the following:
 
@@ -178,9 +178,9 @@ Your `pom.xml` file contains a section similar to the following:
 Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
 Then redeploy your Lambda function.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Gradle" %}}
+{{< tab "Gradle" >}}
 
 Your `build.gradle` file contains a section similar to the following:
 
@@ -193,7 +193,7 @@ dependencies {
 Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
 Then redeploy your Lambda function.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs>}}
 
 If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` Lambda layer and change it to:

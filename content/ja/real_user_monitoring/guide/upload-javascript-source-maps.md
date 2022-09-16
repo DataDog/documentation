@@ -23,7 +23,7 @@ JavaScript バンドルは、ソースコードを縮小化する際に、`sourc
 一般的な JavaScript のバンドルソフトについては、以下の構成を参照してください。
 
 {{< tabs >}}
-{{% tab "WebpackJS" %}}
+{{< tab "WebpackJS" >}}
 
 [SourceMapDevToolPlugin][1] という名前の組み込みの Webpack プラグインを使用して、ソースマップを生成できます。
 
@@ -54,12 +54,12 @@ module.exports = {
 **注**: TypeScript を使用している場合は、`tsconfig.json` ファイルで `compilerOptions.sourceMap` を `true` に設定してください。
 
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
-{{% /tab %}}
-{{% tab "ParcelJS" %}}
+{{< /tab >}}
+{{< tab "ParcelJS" >}}
 
 Parcel は、ビルドコマンドを実行すると、デフォルトでソースマップを生成します: `parcel build <entry file>`。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 アプリケーションをビルドした後、バンドラーは縮小化された JavaScript ファイルを、対応するソースマップと同じ場所に配置したディレクトリ (通常 `dist` という名前) を生成します。

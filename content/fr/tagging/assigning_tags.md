@@ -40,12 +40,12 @@ hostname: mamachine.mondomaine
 ### Ajouter des tags
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 Le fichier de configuration de l'Agent (`datadog.yaml`) est également utilisé pour définir des tags de host qui s'appliquent à l'ensemble des métriques, des traces et des logs transmis par l'Agent Datadog (voir les formats YAML ci-dessous).
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Le fichier de configuration de l'Agent (`datadog.conf`) est également utilisé pour définir des tags de host qui s'appliquent à l'ensemble des métriques, des traces et des logs transmis par l'Agent Datadog. Les tags dans le fichier `datadog.conf` doivent respecter le format suivant :
 
@@ -53,7 +53,7 @@ Le fichier de configuration de l'Agent (`datadog.conf`) est également utilisé 
 tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Les tags pour les [intégrations][5] installées avec l'Agent sont configurés à l'aide des fichiers YAML situés dans le répertoire **conf.d** de l'installation de l'Agent. Pour accéder aux fichiers de configuration, consultez les [fichiers de configuration de l'Agent][8].
@@ -164,7 +164,7 @@ Si vous envoyez une seule trace, taguez ses spans afin d'ignorer les tags de con
 Les exemples suivants utilisent le [tag primaire][12] par défaut `env:<ENVIRONNEMENT>`. Cependant, vous pouvez également le remplacer par un tag `<KEY>:<VALUE>`.
 
 {{< tabs >}}
-{{% tab "Go" %}}
+{{< tab "Go" >}}
 
 ```go
 tracer.SetTag("env", "<ENVIRONNEMENT>")
@@ -172,8 +172,8 @@ tracer.SetTag("env", "<ENVIRONNEMENT>")
 
 Pour OpenTracing, utilisez l'option de démarrage `tracer.WithGlobalTag` pour définir de façon globale l'environnement.
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 Avec sysprop :
 
 ```text
@@ -186,30 +186,30 @@ Avec des variables d'environnement :
 DD_TRACE_SPAN_TAGS="env:<ENVIRONNEMENT>"
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 ```ruby
 Datadog.tracer.set_tags('env' => '<ENVIRONNEMENT>')
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 ```python
 from ddtrace import tracer
 tracer.set_tags({'env': '<ENVIRONNEMENT>'})
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 ```csharp
 using Datadog.Trace;
 Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONNEMENT>");
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque** : les métadonnées span doivent respecter une arborescence. Chaque nœud de l'arborescence est séparé par le caractère `.` et ne peut posséder qu'un seul type. Ainsi, un nœud ne peut pas être un objet (avec des nœuds inférieurs) ET une chaîne de caractères.
@@ -226,23 +226,23 @@ Cet exemple de tags de span n'est donc pas valide :
 ## IU
 
 {{< tabs >}}
-{{% tab "Hostmap" %}}
+{{< tab "Hostmap" >}}
 
 Vous pouvez assigner des tags de host dans l'interface depuis la page relative à la [Hostmap][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : l'application des modifications de tags de métrique effectuées via l'interface peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap"  style="width:80%;">}}
 
 [1]: /fr/infrastructure/hostmap/
-{{% /tab %}}
-{{% tab "Liste d'infrastructures" %}}
+{{< /tab >}}
+{{< tab "Liste d'infrastructures" >}}
 
 Vous pouvez assigner des tags de host dans l'interface depuis la page relative à la [liste d'infrastructures][1]. Cliquez sur un host pour le superposer sur la droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : l'application des modifications de tags de métrique effectuées via l'interface peut prendre jusqu'à 30 minutes.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures"  style="width:80%;">}}
 
 [1]: /fr/infrastructure/
-{{% /tab %}}
-{{% tab "Monitors" %}}
+{{< /tab >}}
+{{< tab "Monitors" >}}
 
 Depuis la page de [gestion des monitors][1], cochez la case en regard de chaque monitor pour ajouter des tags (sélectionnez un ou plusieurs monitors). Cliquez sur le bouton **Edit Tags**. Saisissez un tag ou sélectionnez un tag précédemment utilisé. Cliquez ensuite sur **Add Tag `nom:tag`** ou **Apply Changes**. Si vous aviez déjà ajouté des tags, vous pouvez assigner plusieurs tags à la fois en cochant leurs cases.
 
@@ -253,8 +253,8 @@ Lorsque vous créez un monitor, assignez des tags de monitor durant l'étape 4 
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Tags création de monitor"  style="width:80%;">}}
 
 [1]: /fr/monitors/manage_monitor/
-{{% /tab %}}
-{{% tab "Métriques de distribution" %}}
+{{< /tab >}}
+{{< tab "Métriques de distribution" >}}
 
 Créez des agrégations par centile dans les [métriques de distribution][1] en appliquant une liste blanche d'un maximum de dix tags à une métrique. Cela permet de créer une série temporelle pour chaque combinaison de valeurs de tags potentiellement interrogeable. Pour en savoir plus sur le comptage de métriques custom et de séries temporelles émises à partir de métriques de distribution, consultez [Métriques custom][2].
 
@@ -264,21 +264,21 @@ Créez des agrégations par centile dans les [métriques de distribution][1] en 
 
 [1]: /fr/metrics/distributions/
 [2]: /fr/metrics/custom_metrics/
-{{% /tab %}}
-{{% tab "Intégrations" %}}
+{{< /tab >}}
+{{< tab "Intégrations" >}}
 
 Le carré d'intégration [AWS][1] vous permet d'assigner des tags supplémentaires à l'ensemble des métriques pour un compte spécifique. Utilisez une liste de tags au format `<KEY>:<VALUE>` séparés par des virgules.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags AWS"  style="width:80%;">}}
 
 [1]: /fr/integrations/amazon_web_services/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## API
 
 {{< tabs >}}
-{{% tab "Assignation" %}}
+{{< tab "Assignation" >}}
 
 Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cliquez sur les liens ci-dessous pour accéder aux rubriques indiquées :
 
@@ -300,8 +300,8 @@ Les tags peuvent être assignés de diverses façons avec l'[API Datadog][1]. Cl
 [8]: /fr/api/v1/tags/#add-tags-to-a-host
 [9]: /fr/api/v1/tags/#update-host-tags
 [10]: /fr/api/v1/tracing/
-{{% /tab %}}
-{{% tab "Exemple" %}}
+{{< /tab >}}
+{{< tab "Exemple" >}}
 
 Les tags de Datadog vous permettent de recueillir facilement vos métriques. Pour mieux comprendre, imaginons que vous cherchez à obtenir un total pour l'ensemble de métriques suivant fourni par votre site Web (example.com) :
 
@@ -329,7 +329,7 @@ Pour obtenir des données détaillées pour chaque host, utilisez l'expression s
 sum:page.views{domain:example.com} by {host}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## DogStatsD

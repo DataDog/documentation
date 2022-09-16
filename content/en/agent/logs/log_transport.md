@@ -42,7 +42,7 @@ To check which transport is used by the Agent, run the [Agent status command][1]
 Enforce the use of TCP or HTTPS transport by using the following configurations.
 
 {{< tabs >}}
-{{% tab "HTTPS" %}}
+{{< tab "HTTPS" >}}
 
 To enforce HTTPS transport with Agent versions v6.14+/v7.14+ , update the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
@@ -107,8 +107,8 @@ When logs are sent through HTTPS, use the same [set of proxy settings][3] as the
 [1]: /agent/guide/agent-configuration-files/
 [2]: /agent/basic_agent_usage/#agent-overhead
 [3]: /agent/proxy/
-{{% /tab %}}
-{{% tab "TCP" %}}
+{{< /tab >}}
+{{< tab "TCP" >}}
 
 To enforce TCP transport, update the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
@@ -125,7 +125,7 @@ To send logs with environment variables, configure the following:
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
 
 [1]: /agent/guide/agent-configuration-files/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note**: Setting up a [SOCKS5 proxy][2] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.

@@ -12,7 +12,7 @@ To setup log collection without infrastructure metrics, you have to disable cert
 To disable payloads, you must be running Agent v6.4+. This disables metric data submission so that hosts stop showing up in Datadog. Follow these steps:
 
 {{< tabs >}}
-{{% tab "Host " %}}
+{{< tab "Host " >}}
 
 1. Open the [datadog.yaml configuration file][1].
 2. Add the `enable_payloads` attribute with the following settings:
@@ -31,8 +31,8 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 [1]: /agent/guide/agent-configuration-files/
 [2]: /logs/log_collection/
 [3]: /agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 If you are using the container Agent, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration:
 
@@ -55,8 +55,8 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 If you are deploying the Agent in Kubernetes, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration.
 
@@ -189,5 +189,5 @@ spec:
         - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}

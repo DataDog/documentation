@@ -28,7 +28,7 @@ La bibliothèque `dd-trace` crée automatiquement des spans avec `tracer.init()`
 Dans votre requête Web (par exemple, `/make-sandwich`), vous pouvez effectuer plusieurs opérations, comme `getIngredients()` et `assembleSandwich()`, particulièrement utiles pour les mesures.
 
 {{< tabs >}}
-{{% tab "Code synchrone" %}}
+{{< tab "Code synchrone" >}}
 
 Le code synchrone peut être tracé à l'aide de `tracer.trace()`. La span est alors automatiquement finalisée lors du renvoi de son rappel. Elle capture automatiquement les erreur de rejet.
 
@@ -52,9 +52,9 @@ Cliquez [ici][1] pour obtenir des détails sur l'API pour `tracer.trace()`.
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Promesse" %}}
+{{< tab "Promesse" >}}
 
 Les promesses peuvent être tracées à l'aide de `tracer.trace()`. La span est alors automatiquement finalisée lors de la résolution de la promesse renvoyée. Elle capture automatiquement les erreurs de rejet.
 
@@ -75,9 +75,9 @@ Cliquez [ici][1] pour obtenir des détails sur l'API pour `tracer.trace()`.
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Fonctions async/await" %}}
+{{< tab "Fonctions async/await" >}}
 
 Les fonctions async/await peuvent être tracées à l'aide de `tracer.trace()`. La span est alors automatiquement finalisée lors de la résolution de la promesse renvoyée. Elle capture automatiquement les erreurs de rejet.
 
@@ -101,9 +101,9 @@ Cliquez [ici][1] pour obtenir des détails sur l'API pour `tracer.trace()`.
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Wrapper" %}}
+{{< tab "Wrapper" >}}
 
 Il est également possible de wrapper une fonction existante sans modifier son code, ce qui permet de tracer les fonctions dont vous ne contrôlez pas le code. Pour ce faire, vous pouvez utiliser `tracer.wrap()` qui prend les mêmes arguments que `tracer.trace()` sauf son dernier argument, qui est la fonction à wrapper au lieu d'un rappel.
 
@@ -126,9 +126,9 @@ Cliquez [ici][1] pour obtenir des détails sur l'API pour `tracer.trace()`.
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Méthode manuelle" %}}
+{{< tab "Méthode manuelle" >}}
 
 Si les autres méthodes ne vous permettent pas de répondre à vos besoins en tracing, vous pouvez utiliser une API manuelle afin de lancer des spans et d'y mettre fin comme bon vous semble :
 
@@ -154,7 +154,7 @@ app.get('/make-sandwich', (req, res) => {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#startspan
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Accès aux spans actives
@@ -177,7 +177,7 @@ tracer.trace('sandwich.make', () => {
 ## Ajout de tags
 
 {{< tabs >}}
-{{% tab "Ajout local" %}}
+{{< tab "Ajout local" >}}
 
 Vous pouvez ajouter des tags à une span à l'aide de la méthode `setTag` ou `addTags` sur une span. Les types de valeurs pris en charge sont les chaînes, les nombres et les objets.
 
@@ -198,9 +198,9 @@ span.addTags({
 })
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Globalement" %}}
+{{< tab "Globalement" >}}
 
 Vous pouvez ajouter des tags à chaque span en les configurant directement sur le traceur. Pour ce faire, utilisez la variable d'environnement `DD_TAGS` séparée par des virgules ou l'option `tags` dans la configuration d'initialisation du traceur.
 
@@ -217,9 +217,9 @@ tracer.init({
 const span = tracer.startSpan()
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Composant" %}}
+{{< tab "Composant" >}}
 
 Certaines de nos intégrations prennent en charge les hooks de span qui permettent de mettre à jour la span juste avant qu'elle ne soit finalisée. Ainsi, vous pouvez modifier ou ajouter des tags à une span qui est autrement inaccessible à partir de votre code.
 
@@ -239,9 +239,9 @@ tracer.use('express', {
 
 
 [1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Erreurs" %}}
+{{< tab "Erreurs" >}}
 
 Vous pouvez ajouter des erreurs à une span avec le tag spécial `error` qui prend en charge les objets d'erreur. Ainsi, l'erreur est décomposée en 3 tags différents : `error.type`, `error.msg` et `error.stack`.
 
@@ -256,7 +256,7 @@ try {
 
 Lors de l'utilisation de `tracer.trace()` ou `tracer.wrap()`, cette opération est réalisée automatiquement lorsqu'une erreur est renvoyée.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Filtrage des requêtes

@@ -90,7 +90,7 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
 - **Autopilot**: Google は、ノードやノードプールなどクラスターの基盤となるインフラストラクチャー全体のプロビジョニングおよび管理を行い、最適なクラスターを提供します。
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{< tab "標準" >}}
 
 #### 標準的な方法
 
@@ -102,8 +102,8 @@ Agent は、[Helm チャート][2]を使用してデプロイすることも、[
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=helm
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset
-{{% /tab %}}
-{{% tab "Autopilot" %}}
+{{< /tab >}}
+{{< tab "Autopilot" >}}
 
 #### Autopilot
 
@@ -146,7 +146,7 @@ Agent は、[Helm チャート][2]を使用してデプロイすることも、[
 
 
 [1]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#values
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

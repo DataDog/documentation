@@ -74,7 +74,7 @@ nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 ## エンドポイントチェックのディスパッチを設定する
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{< tab "Operator" >}}
 
 クラスターチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `clusterAgent.config.clusterChecksEnabled` 構成キーを使用して有効にします。
 ```yaml
@@ -91,8 +91,8 @@ spec:
 
 この構成では、Cluster Agent と Agent の間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
 
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 Cluster Agent の Helm デプロイメントでは、`datadog.clusterChecks.enabled` 構成キーによりこれがデフォルトで有効になっています。
 ```yaml
@@ -107,9 +107,9 @@ clusterAgent:
 
 この構成では、Cluster Agent と Agent の間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Daemonset" %}}
+{{< tab "Daemonset" >}}
 ### Cluster Agent のドキュメント
 
 Datadog **クラスター** Agent で、`kube_endpoints` コンフィギュレーションのプロバイダーとリスナーを有効にします。それには `DD_EXTRA_CONFIG_PROVIDERS` と `DD_EXTRA_LISTENERS` の環境変数を設定します。
@@ -156,7 +156,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 [1]: /ja/agent/cluster_agent/clusterchecks/
 [2]: /ja/agent/guide/agent-commands/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -169,7 +169,7 @@ Datadog Agent 1.18.0 からは、Kubernetes エンドポイントを対象とし
 #### 例: Kubernetes エンドポイントでの HTTP_Check
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 そのエンドポイントに対して  [HTTP チェック][1]を行いたい Kubernetes サービスがある場合は、`clusterAgent.confd` フィールドを使ってチェック構成を定義してください。
 
 ```yaml
@@ -189,8 +189,8 @@ clusterAgent:
 ```
 
 [1]: /ja/integrations/http_check/
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 そのエンドポイントに対して [HTTP チェック][1]を行いたい Kubernetes サービスがある場合は、Cluster Agent コンテナに以下の内容で `/conf.d/http_check.yaml` ファイルをマウントしてください。
 
 ```yaml
@@ -206,7 +206,7 @@ instances:
 ```
 
 [1]: /ja/integrations/http_check/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注:** フィールド `advanced_ad_identifiers` は、Datadog Cluster Agent 1.18+ からサポートされるようになりました。

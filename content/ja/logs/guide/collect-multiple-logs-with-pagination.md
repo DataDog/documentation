@@ -24,7 +24,7 @@ further_reading:
 
 {{< tabs >}}
 
-{{% tab "V1 API" %}}
+{{< tab "V1 API" >}}
 
 まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
 
@@ -93,9 +93,9 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
 
 **注**: ページ区切りの結果をより適切に制御するには、絶対的な `time` パラメーターを使用します。`now` キーワードは使用しないでください。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "V2 API" %}}
+{{< tab "V2 API" >}}
 まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
 
 ```bash
@@ -182,7 +182,7 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

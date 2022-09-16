@@ -26,7 +26,7 @@ Par défaut, votre Agent est installé dans sa propre sandbox à l'emplacement `
 Vous pouvez utiliser quelques commandes avec l'Agent Datadog. Seules les _commandes de cycle de vie_, à savoir `start`, `stop`, `restart` et `status`, doivent être exécutées avec `sudo`.
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 | Description                   | Commandes                                 |
 | ----------------------------- | --------------------------------------- |
@@ -36,8 +36,8 @@ Vous pouvez utiliser quelques commandes avec l'Agent Datadog. Seules les _comman
 | Envoyer un flare                    | `sudo ./bin/agent/agent  flare`         |
 | Afficher l'utilisation des commandes         | `sudo ./bin/agent/agent  help`          |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Description                   | Commandes                                 |
 | ----------------------------- | --------------------------------------- |
@@ -47,13 +47,13 @@ Vous pouvez utiliser quelques commandes avec l'Agent Datadog. Seules les _comman
 | Envoyer un flare                    | `sudo ~/.datadog-agent/bin/agent flare` |
 | Afficher l'utilisation des commandes         | `sudo ~/.datadog-agent/bin/agent help`  |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -63,8 +63,8 @@ Fichiers de configuration pour les [intégrations][1] :
 * `/etc/datadog-agent/conf.d/`
 
 [1]: /fr/integrations/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
@@ -75,7 +75,7 @@ Fichiers de configuration pour les [intégrations][1] :
 * `/etc/dd-agent/conf.d/`
 
 [1]: /fr/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Dépannage

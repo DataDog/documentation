@@ -24,7 +24,7 @@ further_reading:
 To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these steps:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 The Cluster Agent is enabled by default since Helm Chart `2.7.0`.
 
@@ -43,8 +43,8 @@ This also automatically generates a random token in a `Secret` shared between bo
 When set manually this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 The Cluster Agent is enabled by default since Datadog Operator `v0.7.0`.
 
@@ -61,8 +61,8 @@ The Operator then creates the necessary RBACs, deploys the Cluster Agent and mod
 
 When set manually this token must be 32 alphanumeric characters.
 
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 
 1. [Set up the Datadog Cluster Agent](#configure-the-datadog-cluster-agent).
 2. [Configure your Agent to communicate with the Datadog Cluster Agent](#configure-the-datadog-agent)
@@ -197,7 +197,7 @@ After redeploying your `Daemonset` with these configurations in place, the Datad
 [12]: /agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
 [13]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
 [14]: /agent/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Verification

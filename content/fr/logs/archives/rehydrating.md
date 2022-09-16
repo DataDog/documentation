@@ -74,7 +74,7 @@ Une archive externe doit être configurée afin de pouvoir réintégrer ses donn
 Datadog doit avoir un accès en lecture à vos archives afin de réintégrer leur contenu. Cette autorisation peut être modifiée à tout moment.
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
+{{< tab "AWS S3" >}}
 
 Afin de réintégrer des événements de log depuis vos archives, Datadog utilise le rôle IAM du compte AWS que vous avez configuré pour [votre intégration AWS][1]. Si vous n'avez pas encore créé ce rôle, [suivez ces étapes pour y remédier][2]. Pour autoriser ce rôle à réintégrer des événements de log depuis vos archives, ajoutez la déclaration d'autorisation suivante à ses stratégies IAM. Veillez à modifier les noms de compartiment et, si nécessaire, spécifiez les chemins contenant vos archives de log.
 
@@ -113,9 +113,9 @@ Datadog prend uniquement en charge la réintégration des archives qui ont été
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /fr/integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Stockage Azure" %}}
+{{< tab "Stockage Azure" >}}
 
 Datadog utilise un groupe Azure AD avec le rôle Storage Blob Data Contributor restreint au compte de stockage de vos archives afin de réintégrer des événements de log. Vous pouvez accorder ce rôle à votre compte de service Datadog depuis la page Contrôle d'accès (IAM) de votre compte de stockage. Pour ce faire, [attribuez le rôle Storage Blob Data Contributor à votre app d'intégration Datadog][1].
 
@@ -123,16 +123,16 @@ Datadog utilise un groupe Azure AD avec le rôle Storage Blob Data Contributor 
 
 
 [1]: /fr/logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Google Cloud Storage" %}}
+{{< tab "Google Cloud Storage" >}}
 
 Afin de réintégrer des événements de log depuis vos archives, Datadog utilise un compte de service avec le rôle Storage Object Viewer. Pour accorder ce rôle à votre compte de service Datadog, accédez à la [page GCP IAM Admin][1], modifiez les autorisations du compte de service, ajoutez un autre rôle, puis sélectionnez Storage > Storage Object Viewer.
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="La réintégration depuis GCS nécessite le rôle Storage Object Viewer"  style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 *Log Rehydration est une marque déposée de Datadog, Inc.

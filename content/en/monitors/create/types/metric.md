@@ -26,15 +26,15 @@ To create a [metric monitor][1] in Datadog, use the main navigation: *Monitors -
 ## Choose the detection method
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{< tab "Threshold" >}}
 
 A threshold alert compares metric values to a static threshold.
 
 On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above or below the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
 
 [1]: /metrics/distributions/
-{{% /tab %}}
-{{% tab "Change" %}}
+{{< /tab >}}
+{{< tab "Change" >}}
 
 A change alert compares the absolute or relative (%) change in value between `N` minutes ago and now against a given threshold. The compared data points aren't single points but are computed using the parameters in the *define the metric* section.
 
@@ -42,8 +42,8 @@ On each alert evaluation, Datadog calculates the raw difference (a positive or n
 
 This type of alert is useful to track spikes, drops, or slow changes in a metric when there is not an unexpected threshold.
 
-{{% /tab %}}
-{{% tab "Anomaly" %}}
+{{< /tab >}}
+{{< tab "Anomaly" >}}
 
 An anomaly detection alert uses past behavior to detect when a metric is behaving abnormally.
 
@@ -54,8 +54,8 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 For more detailed information, see the [Anomaly Monitor][1] page.
 
 [1]: /monitors/create/types/anomaly/
-{{% /tab %}}
-{{% tab "Outliers" %}}
+{{< /tab >}}
+{{< tab "Outliers" >}}
 
 Outlier monitors detect when a member of a group (hosts, availability zones, partitions, etc.) is behaving unusually compared to the rest.
 
@@ -64,8 +64,8 @@ On each alert evaluation, Datadog checks whether or not all groups are clustered
 For more detailed information, see the [Outlier Monitor][1] page.
 
 [1]: /monitors/create/types/outlier/
-{{% /tab %}}
-{{% tab "Forecast" %}}
+{{< /tab >}}
+{{< tab "Forecast" >}}
 
 A forecast alert predicts the future behavior of a metric and compares it to a static threshold. It is well-suited for metrics with strong trends or recurring patterns.
 
@@ -74,7 +74,7 @@ On each alert evaluation, a forecast alert predicts the future values of the met
 For more detailed information, see the [Forecast Monitor][1] page.
 
 [1]: /monitors/create/types/forecasts/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Define the metric
@@ -82,7 +82,7 @@ For more detailed information, see the [Forecast Monitor][1] page.
 Any metric reporting to Datadog is available for monitors. Use the editor and the steps below to define the metric. The query parameters vary slightly based on the chosen detection method.
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{< tab "Threshold" >}}
 
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -106,8 +106,8 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | Alert grouping   | If using a `Simple Alert`, the monitor aggregates over all reporting sources. If using a `Multi Alert`, the monitor applies the alert to each source, according to your group parameters. See [Alert grouping](#alert-grouping) for more details.
 | Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
 
-{{% /tab %}}
-{{% tab "Change" %}}
+{{< /tab >}}
+{{< tab "Change" >}}
 
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -135,7 +135,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | Alert grouping   | If using a `Simple Alert`, the monitor aggregates over all reporting sources. If using a `Multi Alert`, the monitor applies the alert to each source, according to your group parameters. See [Alert grouping](#alert-grouping) for more details.
 | Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Notes:** 

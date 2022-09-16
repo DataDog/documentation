@@ -88,7 +88,7 @@ tile:
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -96,15 +96,15 @@ Agent がホストで実行されている場合は、Agent のコンフィギ�
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### メトリクスの収集

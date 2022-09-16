@@ -30,7 +30,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
 #### Rsyslog version >= 8
 
 {{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< tab "Site américain de Datadog" >}}
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez surveiller des fichiers de log spécifiques, vous devez activer le module imfile en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
@@ -113,8 +113,8 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /tab >}}
+{{< tab "Site européen de Datadog" >}}
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez consulter ou surveiller des fichiers de log spécifiques, activez le module `imfile` en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
@@ -197,13 +197,13 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Rsyslog version < 8
 
 {{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< tab "Site américain de Datadog" >}}
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez consulter ou surveiller des fichiers de log spécifiques, activez le module `imfile` en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
@@ -295,8 +295,8 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /tab >}}
+{{< tab "Site européen de Datadog" >}}
 
 1. (Facultatif) Activez le module de surveillance de fichiers Rsyslog. Si vous souhaitez consulter ou surveiller des fichiers de log spécifiques, activez le module `imfile` en ajoutant ce qui suit à votre fichier `rsyslog.conf` :
 
@@ -388,7 +388,7 @@ Configurez Rsyslog pour rassembler les logs de votre host, de vos conteneurs et 
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Dépannage

@@ -36,7 +36,7 @@ title: Android トレース収集
 2. アプリケーションコンテキストと [Datadog クライアントトークン][4]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
 
     {{< tabs >}}
-    {{% tab "US" %}}
+    {{< tab "US" >}}
 
 ```kotlin
 class SampleApplication : Application() {
@@ -50,8 +50,8 @@ class SampleApplication : Application() {
 }
 ```
 
-    {{% /tab %}}
-    {{% tab "EU" %}}
+    {{< /tab >}}
+    {{< tab "EU" >}}
 
 ```kotlin
 class SampleApplication : Application() {
@@ -66,7 +66,7 @@ class SampleApplication : Application() {
 }
 ```
 
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 3. Android Tracer を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。

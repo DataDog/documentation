@@ -34,7 +34,7 @@ further_reading:
 手動でトレースとログに相関性を持たせたい場合は、Java トレーサーの API を使用して相関識別子を取得します。`CorrelationIdentifier.getTraceId` および `CorrelationIdentifier.getSpanId` メソッドを使用して、ログに記録されるスパンの先頭に識別子を挿入し、スパンの完了時に識別子を削除します。
 
 {{< tabs >}}
-{{% tab "Log4j 2" %}}
+{{< tab "Log4j 2" >}}
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
@@ -53,8 +53,8 @@ try {
 }
 ```
 
-{{% /tab %}}
-{{% tab "SLF4J and Logback" %}}
+{{< /tab >}}
+{{< tab "SLF4J and Logback" >}}
 
 ```java
 import org.slf4j.MDC;
@@ -72,7 +72,7 @@ try {
     MDC.remove("dd.span_id");
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: ログのパースに [Datadog ログインテグレーション][4]を使用していない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされていることを確認する必要があります。詳しくは、[このトピックに関するよくあるご質問][5] を参照してください。

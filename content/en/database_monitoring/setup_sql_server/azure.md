@@ -30,7 +30,7 @@ Do the following steps to enable Database Monitoring with your database:
 Supported SQL Server versions
 : 2012, 2014, 2016, 2017, 2019
 
-{{% dbm-sqlserver-before-you-begin %}}
+{{< dbm-sqlserver-before-you-begin >}}
 
 ## Grant the Agent access
 
@@ -38,7 +38,7 @@ The Datadog Agent requires read-only access to the database server to collect st
 
 {{< tabs >}}
 
-{{% tab "Azure SQL Database" %}}
+{{< tab "Azure SQL Database" >}}
 
 Create a read-only login to connect to your server and grant the required [Azure SQL Roles][1]:
 ```SQL
@@ -74,9 +74,9 @@ See [Install the Agent](#install-the-agent) for more detailed instructions on ho
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Azure SQL Managed Instance" %}}
+{{< tab "Azure SQL Managed Instance" >}}
 
 Create a read-only login to connect to your server and grant the required permissions:
 
@@ -103,15 +103,15 @@ USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "SQL Server on Windows Azure VM" %}}
+{{< tab "SQL Server on Windows Azure VM" >}}
 
 For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitoring for self-hosted SQL Server][2] documentation to install the Datadog Agent directly on the Windows Server host VM.
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview
 [2]: /database_monitoring/setup_sql_server/selfhosted/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -120,7 +120,7 @@ For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitori
 Since Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
-{{% tab "Windows Host" %}}
+{{< tab "Windows Host" >}}
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
 Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][2] for all available configuration options.
@@ -188,8 +188,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: /agent/guide/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Linux Host" %}}
+{{< /tab >}}
+{{< tab "Linux Host" >}}
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
 On Linux, the Datadog Agent additionally requires an ODBC SQL Server driver to be installed—for example, the [Microsoft ODBC driver][2]. Once an ODBC SQL Server is installed, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
@@ -236,8 +236,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: /agent/guide/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 To configure the Database Monitoring Agent running in a Docker container, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
@@ -286,8 +286,8 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
 If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
@@ -386,7 +386,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [5]: /agent/guide/secrets-management
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Install the Azure integration

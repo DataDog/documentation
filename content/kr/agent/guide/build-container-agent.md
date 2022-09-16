@@ -26,20 +26,20 @@ title: Datadog Agent 이미지 빌드
 4. 원하는 Agent 버전에 맞는 데비안(Debian) 패키지를 다운로드합니다. AMD 및 ARM 아키텍처 중에서 선택하세요.
 
     {{< tabs >}}
-{{% tab "AMD" %}}
+{{< tab "AMD" >}}
 
 ```shell
 curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_amd64.deb -o datadog-agent_<AGENT_VERSION>-1_amd64.deb
 ```
 
-{{% /tab %}}
-{{% tab "ARM" %}}
+{{< /tab >}}
+{{< tab "ARM" >}}
 
 ```shell
 curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_arm64.deb -o datadog-agent_<AGENT_VERSION>-1_arm64.deb
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
     **참조**: 전체 데비안 패키지 목록은 [APT 목록][1]에서 확인할 수 있습니다.
@@ -47,20 +47,20 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_V
 5. 실행을 통해 Agent 이미지 빌드:
 
     {{< tabs >}}
-{{% tab "AMD" %}}
+{{< tab "AMD" >}}
 
 ```shell
 docker build --build-arg <BUILD_ARGS> --file amd64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
-{{% /tab %}}
-{{% tab "ARM" %}}
+{{< /tab >}}
+{{< tab "ARM" >}}
 
 ```shell
 docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
     Agent 버전 7.17.0을 AMD 아키텍처에 빌드하고자 하는 경우에는 다음을 실행하세요.

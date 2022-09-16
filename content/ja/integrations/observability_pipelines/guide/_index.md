@@ -29,7 +29,7 @@ title: ログの量とサイズの制御
 [重複排除変換][3]を使用して、パイプラインを通過するデータのコピーを削除するには、構成に次のコンポーネントを追加します。
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -41,8 +41,8 @@ transforms:
     fields: null
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -50,8 +50,8 @@ type = "dedupe"
 inputs = [ "my-source-or-transform-id" ]
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -68,7 +68,7 @@ inputs = [ "my-source-or-transform-id" ]
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Vector は、重複排除されたイベントを追跡するために、すべてのイベントに一意の識別子を割り当てます。`cache` オプションは、将来的に重複したデータをチェックするために、最近のイベントをキャッシュすることができます。`fields` オプションは、イベントが重複しているかどうかを判断するためにどのフィールドを使用するかをリストアップします。
@@ -85,7 +85,7 @@ Vector は、重複排除されたイベントを追跡するために、すべ�
 以下の例では、フィルター変換と Vector Remap Language を使って、`status` が `500` のログのみを送信しています。
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -98,8 +98,8 @@ transforms:
       source: ".status == 500"
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -111,8 +111,8 @@ inputs = [ "my-source-or-transform-id" ]
   source = ".status == 500"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -131,7 +131,7 @@ inputs = [ "my-source-or-transform-id" ]
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### サンプルログ
@@ -141,7 +141,7 @@ CDN のログなど、大量に送られてくるデータやノイズを多く�
 `exclude` フィールドは、サンプリングするイベントを除外し、VRL や Datadog Log Search 構文もサポートします。以下の例では、`rate` で設定された 10 イベントごとにサンプリングする構成を示しています。
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -155,8 +155,8 @@ transforms:
     rate: 10
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -169,8 +169,8 @@ rate = 10
   source = "*stack"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -190,7 +190,7 @@ rate = 10
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ログをメトリクスに変換する
@@ -207,7 +207,7 @@ rate = 10
 以下の例では、`counter` メトリクスを生成するための構成を示しています。`metrics` はイベントに追加するキーと値のペアを定義します。
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -225,8 +225,8 @@ transforms:
           host: "{{host}}"
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -244,8 +244,8 @@ inputs = [ "my-source-or-transform-id" ]
     host = "{{host}}"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -272,7 +272,7 @@ inputs = [ "my-source-or-transform-id" ]
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 上記の構成で以下のようなログが流れた場合
@@ -301,7 +301,7 @@ inputs = [ "my-source-or-transform-id" ]
 以下の例では、縮小変換の構成を使用して、複数の Ruby ログの例外イベントを統合しています。
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -318,8 +318,8 @@ transforms:
     starts_when: match(string!(.message), r'^[^\\s]')
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -332,8 +332,8 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
   message = "concat_newline"
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -357,7 +357,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 縮小変換では、`group_by` はイベントをグループ化するために使用するフィールドの順序付きリストです。この例では、イベントは `host`、`pid`、`tid` フィールドでグループ化されています。
@@ -442,7 +442,7 @@ starts_when = "match(string!(.message), r'^[^\\s]')"
 不要なフィールドを削除するには、[Vector Remap Language][5] を使ってログデータをリマップします。次の例では、`del` を使って不要なタグを削除しています。
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -456,8 +456,8 @@ transforms:
       del(.unecessary_tag_field)
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```toml
 [transforms.my_transform_id]
@@ -469,8 +469,8 @@ del(.unecessary_service_field)
 del(.unecessary_tag_field)"""
 ```
 
-{{% /tab %}}
-{{% tab "JSON" %}}
+{{< /tab >}}
+{{< tab "JSON" >}}
 
 ```json
 {
@@ -486,7 +486,7 @@ del(.unecessary_tag_field)"""
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

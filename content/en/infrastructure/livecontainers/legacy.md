@@ -12,7 +12,7 @@ further_reading:
 This page provides instructions for setting up Live Containers for older Agent versions. These instructions apply to Datadog Agent versions 7.21.1 through 7.27.0 and Cluster Agent 1.9.0 through 1.11.0.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 If you are using the official [Datadog Helm Chart][1]:
 
@@ -26,8 +26,8 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 [1]: https://github.com/DataDog/helm-charts
 [2]: /infrastructure/livecontainers/#configuration
 [3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup][1] for configuration.
 
@@ -106,6 +106,6 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
   ```
 
 [1]: /agent/cluster_agent/setup/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 

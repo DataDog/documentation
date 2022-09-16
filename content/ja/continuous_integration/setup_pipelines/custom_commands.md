@@ -36,29 +36,29 @@ npm install -g @datadog/datadog-ci
 また、`npm` を使いたくない場合は、ベータ版の[スタンドアロンバイナリ][2]を使ってみることもできます。
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 Linux でスタンドアロンバイナリをインストールするには、以下を実行します。
 
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "MacOS" %}}
+{{< tab "MacOS" >}}
 MacOS でスタンドアロンバイナリをインストールするには、以下を実行します。
 
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 Windows でスタンドアロンバイナリをインストールするには、以下を実行します。
 
 {{< code-block lang="bash" >}}
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## パイプライントレースへのタグの追加

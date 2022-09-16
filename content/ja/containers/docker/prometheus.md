@@ -38,7 +38,7 @@ Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] イ
 以下のコマンドで、`<DATADOG_API_KEY>` を自身のオーガニゼーションの API キーに置き換えて、その他のコンテナに隣接する Docker Agent を起動します。
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{< tab "標準" >}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -51,8 +51,8 @@ docker run -d --cgroupns host \
     gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
-{{% tab "Amazon Linux バージョン < 2" %}}
+{{< /tab >}}
+{{< tab "Amazon Linux バージョン < 2" >}}
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -63,8 +63,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
     gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
@@ -72,7 +72,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
@@ -82,7 +82,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 Agent は、Docker 上で実行されているかどうかを検出し、すべてのコンテナラベルの中から Datadog-OpenMetrics ラベルを自動検索します。オートディスカバリーは、ファイルの種類に応じて、ラベルが以下の例のようになっていることを前提とします。
 
 {{< tabs >}}
-{{% tab "Dockerfile" %}}
+{{< tab "Dockerfile" >}}
 
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
@@ -90,8 +90,8 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
-{{% /tab %}}
-{{% tab "docker-compose.yaml" %}}
+{{< /tab >}}
+{{< tab "docker-compose.yaml" >}}
 
 ```yaml
 labels:
@@ -109,14 +109,14 @@ labels:
     ]
 ```
 
-{{% /tab %}}
-{{% tab "Docker 実行コマンド" %}}
+{{< /tab >}}
+{{< tab "Docker 実行コマンド" >}}
 
 ```shell
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 コンフィギュレーションには次のプレースホルダー値を使用します。
@@ -142,7 +142,7 @@ labels:
 
 1. Datadog Agent を起動します。
     {{< tabs >}}
-    {{% tab "Standard" %}}
+    {{< tab "Standard" >}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -153,15 +153,15 @@ docker run -d --cgroupns host \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     gcr.io/datadoghq/agent:latest
 ```
-    {{% /tab %}}
-    {{% tab "Windows" %}}
+    {{< /tab >}}
+    {{< tab "Windows" >}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     gcr.io/datadoghq/agent:latest \
     -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. OpenMetrics チェック用の Autodiscovery Labels を使用して、Agent が収集するサンプルメトリクスを公開する Prometheus コンテナを起動します。

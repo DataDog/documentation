@@ -22,7 +22,7 @@ title: Go サーバーレスアプリケーションのインスツルメンテ�
 ## インストール
 
 {{< tabs >}}
-{{% tab "Serverless Framework" %}}
+{{< tab "Serverless Framework" >}}
 
 [Datadog Serverless Plugin][1] は、[Datadog Lambda 拡張機能][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を自動的に構成します。
 
@@ -53,8 +53,8 @@ custom:
 [2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 ### Datadog Lambda 拡張機能のインストール
 
 AWS のリージョンやアーキテクチャに応じた ARN 形式で、Datadog Lambda 拡張機能の [Lambda レイヤーを Lambda 関数に追加][1]します。
@@ -83,7 +83,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/ja/getting_started/site/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Datadog Lambda ライブラリのインストール

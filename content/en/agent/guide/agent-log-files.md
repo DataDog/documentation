@@ -20,7 +20,7 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 ## Agent log directory
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Platform                              | Command                       |
 |---------------------------------------|-------------------------------|
@@ -30,8 +30,8 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 | Windows Server 2008, Vista and newer  | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003, XP or older      | *unsupported Platform*        |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Platform                             | Command                                                              |
 |--------------------------------------|----------------------------------------------------------------------|
@@ -42,13 +42,13 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 | SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
 | Source build                         | `~/.datadog-agent/supervisord/logs/`                                 |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Agent log files
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 * `agent.log`
 * `process-agent.log`
@@ -56,15 +56,15 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 * `system-probe.log`
 * `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 * `collector.log`
 * `dogstatsd.log`
 * `forwarder.log`
 * `supervisord.log`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Agent installation log files

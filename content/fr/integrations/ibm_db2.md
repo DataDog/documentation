@@ -118,7 +118,7 @@ Exécutez ensuite `get dbm cfg` pour obtenir un résultat similaire à ce qui su
 ### Procédure à suivre
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -158,8 +158,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -185,7 +185,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

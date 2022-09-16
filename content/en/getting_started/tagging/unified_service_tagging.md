@@ -71,7 +71,7 @@ To setup unified service tagging in a containerized environment:
 #### Configuration
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
@@ -189,9 +189,9 @@ containers:
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
@@ -236,9 +236,9 @@ com.datadoghq.tags.version
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "ECS" %}}
+{{< tab "ECS" >}}
 ##### Full configuration
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
@@ -277,7 +277,7 @@ If your service has no need for the Datadog environment variables (for example, 
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Non-containerized environment
@@ -295,7 +295,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 2. Or use [Chef][13], [Ansible][14], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
    {{< tabs >}}
-   {{% tab "Traces" %}}
+   {{< tab "Traces" >}}
 
    When configuring your traces for unified service tagging:
 
@@ -309,18 +309,18 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 [1]: /tracing/setup/
 [2]: /developers/dogstatsd/
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Logs" %}}
+   {{< tab "Logs" >}}
 
    If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
    **Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "RUM & Session Replay" %}}
+   {{< tab "RUM & Session Replay" >}}
 
    If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file. 
 
@@ -329,9 +329,9 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 [1]: /real_user_monitoring/connect_rum_and_traces/
 [2]: /real_user_monitoring/browser/#setup
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Synthetics" %}}
+   {{< tab "Synthetics" >}}
 
    If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2]. 
 
@@ -339,9 +339,9 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 [1]: /synthetics/apm/
 [2]: https://app.datadoghq.com/synthetics/settings/integrations
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "Custom Metrics" %}}
+   {{< tab "Custom Metrics" >}}
 
    Tags are added in an append-only fashion for [custom StatsD metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
 
@@ -350,9 +350,9 @@ To form a single point of configuration for all telemetry emitted directly from 
    **Note**: The Datadog DogStatsD clients for .NET and PHP do not support this functionality.
 
 [1]: /metrics/
-   {{% /tab %}}
+   {{< /tab >}}
 
-   {{% tab "System Metrics" %}}
+   {{< tab "System Metrics" >}}
 
    You can add `env` and `service` tags to your infrastructure metrics. In non-containerized contexts, tagging for service metrics is configured at the Agent level.
 
@@ -397,7 +397,7 @@ instances:
 
 [1]: /agent/guide/agent-configuration-files
 [2]: /integrations/process
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 ### Serverless environment

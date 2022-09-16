@@ -47,7 +47,7 @@ title: プロキシのトレース
 プロキシに関するトレース情報の収集を含めるよう、トレースを設定することができます。
 
 {{< tabs >}}
-{{% tab "Envoy" %}}
+{{< tab "Envoy" >}}
 
 Datadog APM は Envoy v1.9.0 以降に含まれています。
 
@@ -294,8 +294,8 @@ DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
 [3]: /ja/tracing/setup/cpp/#environment-variables
-{{% /tab %}}
-{{% tab "NGINX" %}}
+{{< /tab >}}
+{{< tab "NGINX" >}}
 
 プラグインとコンフィギュレーションを組み合わせて使用することで、NGINX で Datadog APM に対応できます。
 公式 [Linux レポジトリ][1]の NGINX を使用して、プラグインのバイナリを事前構築する手順を以下に記載しました。
@@ -513,8 +513,8 @@ data:
 [9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [10]: https://github.com/kubernetes/ingress-nginx
 [11]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
-{{% /tab %}}
-{{% tab "Istio" %}}
+{{< /tab >}}
+{{< tab "Istio" >}}
 
 Datadog は、Istio 環境のあらゆる側面を監視するため、以下を実現できます。
 - APM でメッシュを実行してアプリケーションの個々の分散型トレースを表示 (以下を参照)。
@@ -673,7 +673,7 @@ Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProt
 [10]: /ja/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /ja/tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

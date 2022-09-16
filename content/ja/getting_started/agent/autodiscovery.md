@@ -79,7 +79,7 @@ annotations:
 #### ホスト上の Agent で
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 `datadog.yaml` [構成ファイル][1]に次の構成ブロックを追加します。
 
@@ -92,8 +92,8 @@ config_providers:
 ```
 
 [1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 `datadog.yaml` [構成ファイル][1]に次の構成ブロックを追加します。
 
@@ -109,23 +109,23 @@ config_providers:
 ```
 
 [1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "ECS Fargate" %}}
+{{< /tab >}}
+{{< tab "ECS Fargate" >}}
 
 ECS Fargate は、ホストでバイナリとして実行している Datadog Agent では監視できません。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### コンテナとしての Agent で
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 Docker コンテナに対してオートディスカバリーを自動的に有効にするには、`/var/run/docker.sock` をコンテナ化 Agent にマウントします。Windows では、`\\.\pipe\docker_engine` をマウントします。
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Kubernetes ではデフォルトでオートディスカバリーが有効になっています。
 
@@ -135,8 +135,8 @@ Kubernetes ではデフォルトでオートディスカバリーが有効にな
 KUBERNETES=yes
 ```
 
-{{% /tab %}}
-{{% tab "ECS Fargate" %}}
+{{< /tab >}}
+{{< tab "ECS Fargate" >}}
 
 Kubernetes 内のコンテナに対してオートディスカバリーを有効にするには、コンテナ化 Agent を起動するときに次の環境変数を追加します。
 
@@ -144,7 +144,7 @@ Kubernetes 内のコンテナに対してオートディスカバリーを有効
 ECS_FARGATE=true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### インテグレーションテンプレート

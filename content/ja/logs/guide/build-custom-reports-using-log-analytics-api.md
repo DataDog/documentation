@@ -39,7 +39,7 @@ further_reading:
 ### 件数の取得
 
 {{< tabs >}}
-{{% tab "Table" %}}
+{{< tab "Table" >}}
 
 以下の API 呼び出しでは、`status` フィールドによりグループ化されたログイベントの `count` を含み、上位 3 項目を表示する `table` を構築します。`type` は `total` である必要があります。
 
@@ -117,8 +117,8 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 
 ```
-{{% /tab %}}
-{{% tab "Timeseries" %}}
+{{< /tab >}}
+{{< tab "Timeseries" >}}
 以下の API 呼び出しでは、`1m` ごとにロールアップされる、`status` フィールドによりグループ化されたログイベントの `count` と `timeseries` を構築します。`type` は `timeseries` である必要があります。
 
 **API call:**
@@ -202,13 +202,13 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 分析の取得
 
 {{< tabs >}}
-{{% tab "Average" %}}
+{{< tab "Average" >}}
 
 以下の API 呼び出しでは、`status` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `avg` を含む `table` を構築します。`type` は `total` である必要があります。
 
@@ -284,8 +284,8 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 同様に、`type` を `timeseries` と設定することで `avg` 時系列を構築できます。
 
-{{% /tab %}}
-{{% tab "Sum" %}}
+{{< /tab >}}
+{{< tab "Sum" >}}
 
 以下の API 呼び出しでは、`service` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `sum` を含む `table` を構築します。`type` は `total` である必要があります。
 
@@ -352,8 +352,8 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 ```
 
-{{% /tab %}}
-{{% tab "Min" %}}
+{{< /tab >}}
+{{< tab "Min" >}}
 
 以下の API 呼び出しでは、`service` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `min` を含む `table` を構築します。`type` は `total` である必要があります。
 
@@ -420,8 +420,8 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 ```
 
-{{% /tab %}}
-{{% tab "Max" %}}
+{{< /tab >}}
+{{< tab "Max" >}}
 
 以下の API 呼び出しでは、`service` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `max` を含む `table` を構築します。`type` は `total` である必要があります。
 
@@ -488,7 +488,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### パーセンタイルの取得

@@ -61,7 +61,7 @@ Les métriques EC2 ou Lambda du flux peuvent entraîner une augmentation du nomb
 ### Installation
 
 {{< tabs >}}
-{{% tab "CloudFormation" %}}
+{{< tab "CloudFormation" >}}
 
 Datadog recommande d'utiliser CloudFormation pour bénéficier d'un processus automatique et plus pratique si vous utilisez plusieurs régions AWS.
 
@@ -91,8 +91,8 @@ Une fois la stack créée, patientez cinq minutes le temps que Datadog détecte 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /fr/getting_started/site/
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
-{{% /tab %}}
-{{% tab "Console AWS" %}}
+{{< /tab >}}
+{{< tab "Console AWS" >}}
 
 Si vous souhaitez configurer les flux de métriques à l'aide de la console AWS, procédez comme suit pour chaque région AWS.
 
@@ -134,7 +134,7 @@ Une fois la ressource de flux de métriques créée, patientez cinq minutes le t
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Désactiver la diffusion de métriques

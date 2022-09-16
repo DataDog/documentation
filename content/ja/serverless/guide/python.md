@@ -54,7 +54,7 @@ CloudFormation Stack なしで Datadog Forwarder をインストールするか�
 #### Datadog Lambda レイヤーのインストール
 
 {{< tabs >}}
-{{% tab "Serverless Framework" %}}
+{{< tab "Serverless Framework" >}}
 
 [Serverless Framework][1] は AWS Lambda 関数と、それが必要とする AWS インフラストラクチャーリソースの開発とデプロイに役立ちます。このフレームワークはサーバーレスアプリケーションのパッケージ化とデプロイで一般的に使用されており、Datadog では Serverless Framework を使用して構築されたサーバーレスアプリケーションを簡単に監視できるように特別に設計されたプラグインが用意されています。
 
@@ -92,8 +92,8 @@ Lambda レイヤーをプロジェクトに直接含める場合は、[この Gi
 [2]: https://github.com/DataDog/datadog-lambda-layer-python
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=serverlessframework#installing-and-using-the-datadog-lambda-layer
 
-{{% /tab %}}
-{{% tab "AWS コンソール" %}}
+{{< /tab >}}
+{{< tab "AWS コンソール" >}}
 
 Datadog Lambda レイヤー ARN には、リージョン、言語ランタイム、バージョンが含まれます。次の形式で作成します。
 
@@ -127,8 +127,8 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:11
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=serverlessframework#installing-and-using-the-datadog-lambda-layer
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 
 ### Lambda コールドスタートのグラフ化
@@ -148,7 +148,7 @@ Datadog Forwarder と Datadog Lambda レイヤーの両方を適切に構成し�
 前のセクションでは、拡張メトリクスを有効にするために Datadog Forwarder をセットアップしました。Lambda 関数から Datadog にログを送信するには、Datadog Forwarder も必要です。
 
 {{< tabs >}}
-{{% tab "Serverless Framework" %}}
+{{< tab "Serverless Framework" >}}
 
 ここまでの手順を実行している場合、Datadog Forwarder が既に有効化されており、Lambda ログは既に Datadog へ自動的に流れているはずです。手順をすべて実行してもログが Datadog に表示されていない場合は、[Lambda ログのトラブルシューティング手順を参照][1]してください。
 
@@ -167,8 +167,8 @@ custom:
 
 [1]: https://docs.datadoghq.com/ja/logs/guide/lambda-logs-collection-troubleshooting-guide/
 
-{{% /tab %}}
-{{% tab "AWS コンソール" %}}
+{{< /tab >}}
+{{< tab "AWS コンソール" >}}
 
 ここまでの手順を実行している場合、Datadog Forwarder が既に有効化されており、Lambda ログは既に Datadog へ自動的に流れているはずです。手順をすべて実行してもログが Datadog に表示されていない場合は、[Lambda ログのトラブルシューティング手順を参照][1]してください。
 
@@ -179,8 +179,8 @@ Datadog の Lambda 関数で監視したいロググループが既にサブス�
 
 [1]: https://docs.datadoghq.com/ja/logs/guide/lambda-logs-collection-troubleshooting-guide/
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 それでもログが Datadog に表示されない場合は、[こちらのトラブルシューティング手順に従ってください][9]。
 
@@ -201,12 +201,12 @@ Datadog サーバーレスビューに再度アクセスして、すべての La
 最初のセクションでは、拡張メトリクスを有効にするために Datadog Forwarder と Lambda レイヤーをセットアップしました。Datadog Forwarder と Lambda レイヤーの両方が、Datadog の関数から分散型トレースを表面化させるためにも必要です。
 
 {{< tabs >}}
-{{% tab "Serverless Framework" %}}
+{{< tab "Serverless Framework" >}}
 
 ここまでの手順を実行したら、この時点で Datadog Forwarder と Lambda レイヤーは既に有効になっています。Serverless Framework を使用すると、追加のコードインスツルメンテーションなしで、トレースが自動的に Datadog に流れます。
 
-{{% /tab %}}
-{{% tab "コードインスツルメンテーション" %}}
+{{< /tab >}}
+{{< tab "コードインスツルメンテーション" >}}
 
 ここまでの手順を実行したら、この時点で Datadog Forwarder と Lambda レイヤーは既に有効になっています。手順に従って Python の APM を設定してください。
 
@@ -240,8 +240,8 @@ Python ライブラリをインスツルメントし、トレースをカスタ�
 
 [1]: https://docs.datadoghq.com/ja/tracing/setup/python/
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 ### トレース、メトリクス、ログを使用した根本原因分析
 
@@ -278,7 +278,7 @@ Datadog の[サーバーレスの状態レポート][10]に概要が示されて
 ここまでの手順を実行したら、Datadog Lambda レイヤーは既に有効化されています。Datadog Lambda レイヤーから送信されたカスタムメトリクスは自動的にディストリビューションとして作成されるため、すぐに avg、sum、 max、min、count をグラフ化できます。また、ディストリビューションメトリクスページで独自のパーセンタイルを有効にすることもできます。
 
 {{< tabs >}}
-{{% tab "Serverless Framework" %}}
+{{< tab "Serverless Framework" >}}
 
 関数からカスタムメトリクスを取り込むには
 
@@ -296,8 +296,8 @@ def lambda_handler(event, context):
         )
 ```
 
-{{% /tab %}}
-{{% tab "AWS コンソール" %}}
+{{< /tab >}}
+{{< tab "AWS コンソール" >}}
 
 関数からカスタムメトリクスを取り込むには
 
@@ -318,8 +318,8 @@ def lambda_handler(event, context):
     )
 ```
 
-{{% /tab %}}
-{{% /tabs %}}
+{{< /tab >}}
+{{< /tabs >}}
 
 メトリクスのモニターを作成すると、サーバーレスアプリケーションの主要な問題について通知を受けることができます。次に、Lambda 関数、データストア、メッセージキュー全体でメトリクス、トレース、ログを組み合わせることにより、このガイドで前述したように根本原因を特定できます。
 

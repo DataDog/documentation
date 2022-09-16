@@ -23,7 +23,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID if 
 If you don't have a case ID, just enter your email address used to login in Datadog to create a new support case.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | Platform   | Command                                                 |
 |------------|---------------------------------------------------------|
@@ -103,8 +103,8 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 [3]: /agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | Platform   | Command                                                                 |
 |------------|-------------------------------------------------------------------------|
@@ -123,15 +123,15 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 [1]: /agent/basic_agent_usage/windows/#agent-v5
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cluster Agent" %}}
+{{< tab "Cluster Agent" >}}
 
 | Platform   | Command                                                             |
 |------------|---------------------------------------------------------------------|
 | Kubernetes | `kubectl exec <POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Manual submission

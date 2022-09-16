@@ -42,7 +42,7 @@ JSON ログ前処理は、デフォルトで標準ログフォワーダーに機
 2. 予約済み属性に基づき、デフォルトのマッピングを変更します。
 
 {{< tabs >}}
-{{% tab "Source" %}}
+{{< tab "Source" >}}
 
 #### ソース属性
 
@@ -53,8 +53,8 @@ JSON 形式のログファイルに `ddsource` 属性が含まれる場合、Dat
 
 [1]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [2]: /ja/agent/docker/log/?tab=containerinstallation#examples
-{{% /tab %}}
-{{% tab "Host" %}}
+{{< /tab >}}
+{{< tab "Host" >}}
 
 #### ホスト属性
 
@@ -64,8 +64,8 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 * `hostname`
 * `syslog.hostname`
 
-{{% /tab %}}
-{{% tab "Date" %}}
+{{< /tab >}}
+{{< tab "Date" >}}
 
 #### 日付属性
 
@@ -90,8 +90,8 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 
 [1]: /ja/logs/log_configuration/processors/#log-date-remapper
-{{% /tab %}}
-{{% tab "Message" %}}
+{{< /tab >}}
+{{< tab "Message" >}}
 
 #### メッセージ属性
 
@@ -103,8 +103,8 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 [1]: /ja/logs/explorer/
 [2]: /ja/logs/explorer/#filters-logs
 [3]: /ja/logs/log_configuration/processors/#log-message-remapper
-{{% /tab %}}
-{{% tab "Status" %}}
+{{< /tab >}}
+{{< tab "Status" >}}
 
 #### ステータス属性
 
@@ -118,8 +118,8 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 `status` 属性の既存のステータスを再マップするには、[ログステータスリマッパー][1]を使用します。
 
 [1]: /ja/logs/log_configuration/processors/#log-status-remapper
-{{% /tab %}}
-{{% tab "Service" %}}
+{{< /tab >}}
+{{< tab "Service" >}}
 
 #### サービス属性
 
@@ -132,8 +132,8 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 
 [1]: /ja/logs/log_configuration/processors/#service-remapper
-{{% /tab %}}
-{{% tab "Trace ID" %}}
+{{< /tab >}}
+{{< tab "Trace ID" >}}
 
 #### トレース ID 属性
 
@@ -147,7 +147,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 [1]: /ja/tracing/connect_logs_and_traces/
 [2]: /ja/logs/log_configuration/processors/#trace-remapper
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## パイプラインを作成する

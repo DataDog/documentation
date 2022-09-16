@@ -46,7 +46,7 @@ further_reading:
 例:
 
 {{< tabs >}}
-{{% tab "Serilog" %}}
+{{< tab "Serilog" >}}
 トレースおよびスパン ID は、ログコンテキストの補完を有効にした後にのみアプリケーションログに挿入されます。以下のコード例を参照してください。
 
 ```csharp
@@ -60,8 +60,8 @@ var log = new LoggerConfiguration()
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/SerilogExample/Program.cs
-{{% /tab %}}
-{{% tab "log4net" %}}
+{{< /tab >}}
+{{< tab "log4net" >}}
 トレースおよびスパン ID は、マップされた診断コンテキスト (MDC) を有効にした後にのみアプリケーションログに挿入されます。以下のコード例を参照してください。
 
 ```xml
@@ -82,8 +82,8 @@ var log = new LoggerConfiguration()
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
-{{% /tab %}}
-{{% tab "NLog" %}}
+{{< /tab >}}
+{{< tab "NLog" >}}
 
 トレースおよびスパン ID は、マップされた診断コンテキスト (MDC) を有効にした後にのみアプリケーションログに挿入されます。NLog バージョン 4.6 以降の場合は、以下のコード例を参照してください。
 
@@ -114,7 +114,7 @@ NLog バージョン 4.5 の場合
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
 [3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 次に、自動または手動挿入のセットアップを完了します。
@@ -148,7 +148,7 @@ NLog バージョン 4.5 の場合
 例:
 
 {{< tabs >}}
-{{% tab "Serilog" %}}
+{{< tab "Serilog" >}}
 
 **注**: Serilog ライブラリでは、メッセージプロパティ名が有効な C# 識別子である必要があります。要求されるプロパティ名は、`dd_env`、`dd_service`、`dd_version`、`dd_trace_id`、`dd_span_id` です。
 
@@ -167,8 +167,8 @@ using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToStri
 }
 ```
 
-{{% /tab %}}
-{{% tab "log4net" %}}
+{{< /tab >}}
+{{< tab "log4net" >}}
 
 ```csharp
 using Datadog.Trace;
@@ -196,8 +196,8 @@ finally
 }
 ```
 
-{{% /tab %}}
-{{% tab "NLog" %}}
+{{< /tab >}}
+{{< tab "NLog" >}}
 
 ```csharp
 using Datadog.Trace;
@@ -214,7 +214,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

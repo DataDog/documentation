@@ -44,7 +44,7 @@ No specific configuration is required.
 If you are using AWS Bottlerocket OS on your nodes, add the following to enable container monitoring (`containerd` check):
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Custom `values.yaml`:
 
@@ -58,8 +58,8 @@ datadog:
     value: "containerd"
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -86,7 +86,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Azure Kubernetes Service (AKS) {#AKS}
@@ -94,7 +94,7 @@ spec:
 AKS requires specific configuration for the `Kubelet` integration due to AKS certificates setup.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Custom `values.yaml`:
 
@@ -111,8 +111,8 @@ datadog:
     tlsVerify: false # Required as of Agent 7.35. See Notes.
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -143,7 +143,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Notes**:
@@ -182,7 +182,7 @@ GKE Autopilot requires some configuration, shown below.
 Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may quickly lead the Agent container to OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Custom `values.yaml`:
 
@@ -236,7 +236,7 @@ providers:
     autopilot: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -252,7 +252,7 @@ OpenShift comes with hardened security by default (SELinux, SecurityContextConst
 This configuration supports OpenShift 3.11 and OpenShift 4, but works best with OpenShift 4.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Custom `values.yaml`:
 
@@ -286,8 +286,8 @@ kube-state-metrics:
     enabled: false
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 When using the Datadog Operator in OpenShift, it is recommended that you install it through OperatorHub or RedHat Marketplace.
 The configuration below is meant to work with this setup (due to SCC/ServiceAccount setup), when the
@@ -346,7 +346,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Rancher {#Rancher}
@@ -356,7 +356,7 @@ Rancher installations are close to vanilla Kubernetes, requiring only some minor
 - Cluster name should be set as it cannot be retrieved automatically from cloud provider
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Custom `values.yaml`:
 
@@ -377,8 +377,8 @@ agents:
     operator: Exists
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -429,7 +429,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Oracle Container Engine for Kubernetes (OKE) {#OKE}
@@ -439,7 +439,7 @@ No specific configuration is required.
 To enable container monitoring, add the following (`containerd` check):
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Custom `values.yaml`:
 
@@ -453,8 +453,8 @@ datadog:
     value: "containerd"
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -481,7 +481,7 @@ spec:
         enabled: false
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 More `values.yaml` examples can be found in the [Helm chart repository][1]
@@ -493,7 +493,7 @@ TKG requires some small configuration changes, shown below. For example, setting
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Custom `values.yaml`:
 
@@ -516,8 +516,8 @@ agents:
       effect: NoSchedule
 ```
 
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 DatadogAgent Kubernetes Resource:
 
@@ -552,7 +552,7 @@ spec:
       collectEvents: true
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

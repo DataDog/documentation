@@ -120,7 +120,7 @@ Supervisor がルートとして実行されている場合は、非ルートユ
 `supervisord` を再度読み込みます。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -150,8 +150,8 @@ instances:
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -164,7 +164,7 @@ instances:
 | `<インスタンスコンフィギュレーション>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "user":"<USERNAME>", "pass":"<PASSWORD>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### ログの収集

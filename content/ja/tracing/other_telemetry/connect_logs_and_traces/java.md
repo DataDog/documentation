@@ -33,7 +33,7 @@ OpenTelemetry 言語の SDK ログおよびトレースの Datadog 内での接�
 特定の言語における OpenTelemetry トレースおよびログの相関方法について、詳しくは以下の例を参照してください。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 手動でトレースとログに相関性を持たせるには、OpenTelemetry 形式の `trace_id` および `span_id` を Datadog 形式に変換するプロセッサで、使用しているロギングモジュールにパッチを適用します。以下の例では、[structlog ロギングライブラリ][1]を使用しています。その他のロギングライブラリの場合は、[Datadog SDK の例を変更][2]した方がより適切なことがあります。また、`trace-examples` GitHub リポジトリでは、[OpenTelemetry がインスツルメントされた Python アプリケーションとそのトレース-ログ相関の例][3]が紹介されています。
 
@@ -76,9 +76,9 @@ log.info("Example log line with trace correlation info")
 [1]: https://www.structlog.org/en/stable/standard-library.html
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "NodeJS" %}}
+{{< tab "NodeJS" >}}
 
 手動でトレースとログに相関性を持たせるには、OpenTelemetry 形式の `trace_id` および `span_id` を Datadog 形式に変換するプロセッサで、使用しているロギングモジュールにパッチを適用します。以下の例では、[winston ロギングライブラリ][1]を使用しています。その他のロギングライブラリの場合は、[Datadog SDK の例を変更][2]した方がより適切なことがあります。また、`trace-examples` GitHub リポジトリでは、[OpenTelemetry がインスツルメントされた Nodejs アプリケーションとそのトレース-ログ相関の例][3]が紹介されています。
 
@@ -207,9 +207,9 @@ logger.info("Example log line with trace correlation info")
 [1]: https://github.com/winstonjs/winston
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/node-microservice/logger.js#L86
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Ruby" %}}
+{{< tab "Ruby" >}}
 
 手動でトレースとログに相関性を持たせるには、OpenTelemetry 形式の `trace_id` および `span_id` を Datadog 形式に変換するプロセッサで、使用しているロギングモジュールにパッチを適用します。以下の例では、[Ruby 標準ライブラリロギング][1]を使用しています。Rails などその他のロギングライブラリの場合は、[Datadog SDK の例を変更][2]した方がより適切なことがあります。また、`trace-examples` GitHub リポジトリでは、[OpenTelemetry がインスツルメントされた Ruby アプリケーションとそのトレース-ログ相関の例][3]が紹介されています。
 
@@ -239,9 +239,9 @@ logger.info("Example log line with trace correlation info")
 [1]: https://ruby-doc.org/stdlib-3.0.0/libdoc/logger/rdoc/index.html
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/ruby-microservice/app.rb#L21-L35
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 手動でトレースとログに相関性を持たせるには、まず [openTelemetry-java-instrumentation ロガー MDC インスツルメンテーション][1]を有効にします。次に、OpenTelemetry 形式の `trace_id` および `span_id` を Datadog 形式に変換するプロセッサで、使用しているロギングモジュールにパッチを適用します。以下の例では、[Spring Boot および Logback][2]を使用しています。その他のロギングライブラリの場合は、[Datadog SDK の例を変更][2]した方がより適切なことがあります。
 
@@ -263,9 +263,9 @@ logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
 [2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
 [3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "PHP" %}}
+{{< tab "PHP" >}}
 
 PHP のトレースとログの相関では、[Datadog SDK PHP 例][1]を変更して上記で説明した追加ステップを含めます。
 
@@ -276,9 +276,9 @@ PHP のトレースとログの相関では、[Datadog SDK PHP 例][1]を変更�
 
 [1]: /ja/tracing/other_telemetry/connect_logs_and_traces/php/
 [2]: /ja/help/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Go" %}}
+{{< tab "Go" >}}
 
 トレースをログと手動で関連付けるには、使用しているログモジュールに、OpenTelemetry 形式の `trace_id` と `span_id` を Datadog 形式に変換する関数を適用します。次の例では、[logrus Library][1] を使用しています。
 
@@ -334,9 +334,9 @@ func convertTraceID(id string) string {
 
 [1]: https://github.com/sirupsen/logrus
 [2]: /ja/help/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab ".NET" %}}
+{{< tab ".NET" >}}
 
 トレースとログを手動で相関付けるには、OpenTelemetry の `TraceId` と `SpanId` を Datadog が使用するフォーマットに変換します。これらの ID をログに `dd.trace_id` と `dd.span_id` 属性で追加してください。次の例では、[Serilog ライブラリ][1]を使用して、OTel (`System.DiagnosticSource.Activity`) のトレースとスパン ID を Datadog の要求するフォーマットに変換する方法を示しています。
 
@@ -356,7 +356,7 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 
 
 [1]: https://serilog.net/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

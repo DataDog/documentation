@@ -60,7 +60,7 @@ Le check CoreDNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'ave
 
 ### Procédure à suivre
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 #### Docker
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un conteneur :
@@ -100,8 +100,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<NOM_SERVICE>"}]'
 [1]: http://docs.datadoghq.com/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 #### Kubernetes
 
@@ -173,8 +173,8 @@ metadata:
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=daemonset
 [4]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=kubernetes#examples---datadog-redis-integration
 [5]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=file
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 
 #### ECS
 
@@ -230,7 +230,7 @@ Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker
 [1]: https://docs.datadoghq.com/fr/agent/amazon_ecs/?tab=awscli#process-collection
 [2]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux
 [3]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux#activate-log-integrations
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

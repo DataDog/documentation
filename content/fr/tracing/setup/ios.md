@@ -27,7 +27,7 @@ Envoyez des [traces][1] à Datadog à partir de vos applications iOS avec la [bi
 1. Déclarez la bibliothèque en tant que dépendance en fonction de votre gestionnaire de packages :
 
     {{< tabs >}}
-    {{% tab "CocoaPods" %}}
+    {{< tab "CocoaPods" >}}
 
 Vous pouvez utiliser [CocoaPods][1] pour installer `dd-sdk-ios` :
 ```
@@ -36,16 +36,16 @@ pod 'DatadogSDK'
 
 
 [1]: https://cocoapods.org/
-    {{% /tab %}}
-    {{% tab "Swift Package Manager (SPM)" %}}
+    {{< /tab >}}
+    {{< tab "Swift Package Manager (SPM)" >}}
 
 Pour réaliser l'intégration grâce au Swift Package Manager d'Apple, ajoutez ce qui suit en tant que dépendance à votre `Package.swift` :
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
-    {{% /tab %}}
-    {{% tab "Carthage" %}}
+    {{< /tab >}}
+    {{< tab "Carthage" >}}
 
 Vous pouvez utiliser [Carthage][1] pour installer `dd-sdk-ios` :
 ```
@@ -54,13 +54,13 @@ github "DataDog/dd-sdk-ios"
 
 
 [1]: https://github.com/Carthage/Carthage
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][4]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][5] pour configurer la bibliothèque `dd-sdk-ios`, car elles risqueraient d'être exposées côté client dans le bytecode de l'IPA de l'application iOS. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][4].
 
     {{< tabs >}}
-    {{% tab "Site américain" %}}
+    {{< tab "Site américain" >}}
 
 ```swift
 Datadog.initialize(
@@ -72,8 +72,8 @@ Datadog.initialize(
 )
 ```
 
-    {{% /tab %}}
-    {{% tab "Site européen" %}}
+    {{< /tab >}}
+    {{< tab "Site européen" >}}
 
 ```swift
 Datadog.initialize(
@@ -86,7 +86,7 @@ Datadog.initialize(
 )
 ```
 
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
      Lors de la création de votre application, vous pouvez activer les logs de développement. Tous les messages internes dans le SDK dont la priorité est égale ou supérieure au niveau spécifié sont alors enregistrés dans les logs de la console.

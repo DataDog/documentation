@@ -20,7 +20,7 @@ Kubernetes 環境に Datadog Agent をインストールした後、追加の構
 ## イベント収集
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{< tab "Operator" >}}
 
 Cluster Agent で Kubernetes のイベントを収集するには、`datadog-agent.yaml` マニフェストで `clusterAgent.config.collectEvents` を `true` に設定します。
 
@@ -42,20 +42,20 @@ agent:
     collectEvents: true
 ```
 
-{{% /tab %}}
-{{% tab "Helm" %}}
+{{< /tab >}}
+{{< tab "Helm" >}}
 
 Kubernetes のイベントを Datadog Cluster Agent で収集したい場合は、`value.yaml` ファイルで `clusterAgent.enabled`、`datadog.collectEvents`、`clusterAgent.rbac.create` オプションを `true` に設定してください。
 
 Cluster Agent を使用しない場合でも、`value.yaml` ファイルで `datadog.leaderElection`、`datadog.collectEvents`、`agents.rbac.create` オプションを `true` に設定すれば、ノード Agent に Kubernetes イベントを収集させることができます。
 
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 Kubernetes クラスターからイベントを収集する場合は、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定します。または、[Datadog Cluster Agent イベント収集][1]を使用します
 
 [1]: /ja/agent/cluster_agent/event_collection/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## インテグレーション

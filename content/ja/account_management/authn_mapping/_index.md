@@ -40,7 +40,7 @@ AuthN Mapping を JSON の本文から新しく作成します。新規作成さ
  `attribute_value` は、ID プロバイダーから送信される属性を表すキー/値ペアの値の部分です。それぞれのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X POST \
@@ -71,8 +71,8 @@ curl -X POST \
 - `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -137,7 +137,7 @@ curl -X POST \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### すべての AuthN マッピングを取得
@@ -160,7 +160,7 @@ AuthN Mapping のリストを返します
   タグの文字列 (`Billing Users` など) でフィルタリングします。
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
@@ -172,8 +172,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 - `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -242,7 +242,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 指定した AuthN マッピングを削除
@@ -259,7 +259,7 @@ UUID で指定した AuthN Mapping を返します。
   `{authn_mapping_id}` を、参照したい AuthN Mapping の ID に置き換えます。
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}" \
@@ -271,8 +271,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
 - `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -338,7 +338,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### マッピングを更新する
@@ -362,7 +362,7 @@ AuthN Mapping の `role`、`saml_assertion_attribute_id`、あるいはその両
  `attribute_value` は、ID プロバイダーから送信される属性を表すキー/値ペアの値の部分です。それぞれのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X PATCH \
@@ -394,8 +394,8 @@ curl -X PATCH \
 - `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -458,7 +458,7 @@ curl -X PATCH \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### マッピングを削除する
@@ -475,7 +475,7 @@ curl -X PATCH \
   `{authn_mapping_id}` を、削除したい AuthN Mapping の ID に置き換えます。
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X DELETE "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
@@ -488,14 +488,14 @@ curl -X DELETE "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
 - `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```sh
 HTTP/2 204
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### AuthN マッピングの有効化を取得
@@ -507,7 +507,7 @@ AuthN Mappings が有効/無効であることを確認します。
 | `GET`    | `/v1/org_preferences`      | なし             |
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X GET \
@@ -521,8 +521,8 @@ curl -X GET \
 - `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -537,7 +537,7 @@ curl -X GET \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### すべてのマッピングを有効化/無効化
@@ -560,7 +560,7 @@ curl -X GET \
   設定を更新するデータで、true または false を設定します。true の場合はすべてのマッピングを有効化し、false だと無効化します。
 
 {{< tabs >}}
-{{% tab "Example" %}}
+{{< tab "Example" >}}
 
 ```sh
 curl -X POST \
@@ -584,8 +584,8 @@ curl -X POST \
 - `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Response" %}}
+{{< /tab >}}
+{{< tab "Response" >}}
 
 ```json
 {
@@ -600,7 +600,7 @@ curl -X POST \
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

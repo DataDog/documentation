@@ -46,7 +46,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 [DB パラメーターグループ][3]で以下の設定を行い、**サーバーを再起動**すると設定が反映されます。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
+{{< tab "MySQL 5.6" >}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。|
@@ -56,9 +56,9 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | オプション。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "MySQL ≥ 5.7" %}}
+{{< tab "MySQL ≥ 5.7" >}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `performance_schema` | `1` | 必須。[パフォーマンススキーマ][1]を有効にします。|
@@ -70,7 +70,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | <code style="word-break:break-all;">performance_schema_max_digest_length</code> と一致する必要があります。|
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: Agent へのアクセス権限付与の一貫として、Agent がランタイム時に動的に `performance-schema-consumer-*` 設定を有効にできるようにすることを推奨します。[ランタイムセットアップコンシューマー](#runtime-setup-consumers)を参照してください。
@@ -150,7 +150,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 Aurora ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するように構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][5]を参照してください。
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{< tab "ホスト" >}}
 
 ホストで実行されている Agent に対してこのチェックを設定するには (Agent が Aurora データベースから収集するように小さな EC2 インスタンスをプロビジョニングする場合など)
 
@@ -179,8 +179,8 @@ instances:
 [1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 ECS や Fargate などの Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
@@ -228,8 +228,8 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 [1]: /ja/agent/docker/integrations/?tab=docker
 [2]: /ja/agent/guide/secrets-management
 [3]: /ja/agent/faq/template_variables/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
@@ -315,7 +315,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /ja/agent/guide/secrets-management
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

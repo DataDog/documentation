@@ -28,7 +28,7 @@ Certaines parties de votre système peuvent ne pas être accessibles aux robots 
 Utilisez l'en-tête joint aux robots Datadog afin de les détecter pour vos tests Browser et tests API.
 
 {{< tabs >}}
-{{% tab "Tests API" %}}
+{{< tab "Tests API" >}}
 
 L'en-tête suivant est joint à tous les robots de test API de Datadog :
 
@@ -36,14 +36,14 @@ L'en-tête suivant est joint à tous les robots de test API de Datadog :
 
 L'en-tête `x-datadog-origin: synthetics` est également ajouté à toutes les requêtes lancées pour un test API Datadog.
 
-{{% /tab %}}
-{{% tab "Tests Browser" %}}
+{{< /tab >}}
+{{< tab "Tests Browser" >}}
 
 L'en-tête suivant est joint à tous les robots de test Browser de Datadog :
 
 `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <ID_TEST_SYNTHETICS_PUBLIC>`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ##### En-têtes d'APM

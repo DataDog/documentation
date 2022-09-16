@@ -53,7 +53,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 Windows で自動インスツルメンテーションを使用するには、 [Windows 用 MSI インストーラー][1]を使ってホストに .NET トレーサーをインストールします。OS のアーキテクチャ (x64 または x86) に合致するインストーラーを選択してください。
 
@@ -68,9 +68,9 @@ net start w3svc
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Linux で自動インスツルメンテーションを使用するには、次の 3 つの手順に従います。
 
@@ -117,7 +117,7 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<トレー
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 [2]: https://en.wikipedia.org/wiki/Musl
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -125,7 +125,7 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<トレー
 
 {{< tabs >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 アプリケーションを IIS 内で実行している場合は、以下の手順をスキップしてください。
 
@@ -168,9 +168,9 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Linux では、自動インスツルメンテーションを有効にするために次の環境変数が必要です:
 
@@ -253,7 +253,7 @@ systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
 
 [1]: https://docs.docker.com/engine/reference/builder/#env
 [2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -279,7 +279,7 @@ systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
 
 {{< tabs >}}
 
-{{% tab "環境変数" %}}
+{{< tab "環境変数" >}}
 
 環境変数を使ってトレーサーを構成するには、インスツルメンテーションされたアプリケーションを起動する前に変数を設定します。
 
@@ -311,9 +311,9 @@ export DD_VERSION=abc123
 dotnet example.dll
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "コード" %}}
+{{< tab "コード" >}}
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` を作成します。`Tracer` コンストラクタに渡す前にこの `TracerSettings` インスタンスにプロパティを設定します。例:
 
@@ -341,9 +341,9 @@ Tracer.Instance = tracer;
 
 **注:** 設定は `Tracer` を作成する_前_に `TracerSettings` に設定される必要があります。`Tracer` 作成後の `TracerSettings` プロパティの変更は無視されます。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "JSON ファイル" %}}
+{{< tab "JSON ファイル" >}}
 
 JSON ファイルを使ってトレーサーを構成するには、インスツルメンテーションされたアプリケーションのディレクトリに `datadog.json` を作成します。ルート JSON オブジェクトは各設定のキー/値を持つハッシュである必要があります。例:
 
@@ -356,7 +356,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

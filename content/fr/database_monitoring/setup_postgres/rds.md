@@ -70,7 +70,7 @@ CREATE USER datadog WITH password '<MOT_DE_PASSE>';
 ```
 
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+{{< tab "Postgres ≥ 10" >}}
 
 Créez le schéma suivant **dans chaque base de données** :
 
@@ -82,8 +82,8 @@ GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+{{< /tab >}}
+{{< tab "Postgres 9.6" >}}
 
 Créez le schéma suivant **dans chaque base de données** :
 
@@ -108,7 +108,7 @@ LANGUAGE sql
 SECURITY DEFINER;
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Remarque** : pour créer des métriques custom nécessitant d'interroger des tables supplémentaires, vous devrez peut-être accorder à l'utilisateur `datadog` l'autorisation `SELECT` pour ces tables. Exemple de commande : `grant SELECT on <NOM_TABLE> to datadog;`. Pour en savoir plus, consultez la section [Collecte de métriques custom Postgres][6].
@@ -142,7 +142,7 @@ SECURITY DEFINER;
 
 Pour vérifier que l'utilisateur de l'Agent possède les autorisations adéquates et qu'il parvient à se connecter à la base de données et à lire les principales tables, exécutez ce qui suit :
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+{{< tab "Postgres ≥ 10" >}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -158,8 +158,8 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+{{< /tab >}}
+{{< tab "Postgres 9.6" >}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -176,7 +176,7 @@ psql -h localhost -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Lorsque vous êtes invité à saisir un mot de passe, indiquez celui que vous avez défini lors de la création de l'utilisateur `datadog`.
@@ -186,7 +186,7 @@ Lorsque vous êtes invité à saisir un mot de passe, indiquez celui que vous av
 Pour surveiller les hosts RDS, installez l'Agent Datadog dans votre infrastructure et configurez-le de façon à ce qu'il se connecte à distance à chaque endpoint d'instance. L'Agent n'a pas besoin de s'exécuter sur la base de données : il doit simplement s'y connecter. Pour obtenir d'autres méthodes d'installation de l'Agent, consultez les [instructions d'installation de l'Agent][8].
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 Pour configurer la collecte de métriques Database Monitoring pour un Agent s'exécutant sur un host, par exemple si vous provisionnez une petite instance EC2 pour l'Agent afin de recueillir des données depuis une base de données RDS, procédez comme suit :
 
@@ -210,8 +210,8 @@ Pour configurer la collecte de métriques Database Monitoring pour un Agent s'ex
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Pour configurer l'Agent Database Monitoring qui s'exécute dans un conteneur Docker, par exemple dans ECS ou Fargate, vous pouvez définir des [modèles d'intégration Autodiscovery][1] en tant qu'étiquettes Docker sur le conteneur de votre Agent.
 
@@ -271,8 +271,8 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, util
 [1]: /fr/agent/docker/integrations/?tab=docker
 [2]: /fr/agent/guide/secrets-management
 [3]: /fr/agent/faq/template_variables/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Pour surveiller des bases de données sur un cluster Kubernetes, utilisez [l'Agent de cluster Datadog][1].
 
@@ -374,7 +374,7 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, util
 [2]: /fr/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: /fr/agent/guide/secrets-management
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

@@ -44,17 +44,17 @@ Agent v6.8 이상의 버전부터는 `datadog-agent integration` 명령을 사�
 예를 들어 vSphere 통합 버전 3.6.0을 설치하려면 다음을 실행하세요.
 
 {{< tabs >}}
-{{% tab "리눅스(Linux)" %}}
+{{< tab "리눅스(Linux)" >}}
 ```shell
 sudo -u dd-agent -- datadog-agent integration install datadog-vsphere==3.6.0
 ```
-{{% /tab %}}
-{{% tab "윈도우즈(Windows) PowerShell" %}}
+{{< /tab >}}
+{{< tab "윈도우즈(Windows) PowerShell" >}}
 **고급** 옵션으로(즉, 관리자 권한으로) `powershell.exe`를 실행하세요.
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration install datadog-vsphere==3.6.0
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 이 명령어는 통합의 파이썬 패키지를 설치함과 동시에 설정 파일(`conf.yaml.example`, `conf.yaml.default`, `auto_conf.yaml`)을 `conf.d` 디렉터리에 복사하여 기존 구성 파일을 덮어씁니다. Agent 전체 업그레이드 시에도 동일한 처리가 이루어집니다. 파일을 복사하던 중에 오류가 발생하는 경우, 명령어는 오류가 있어 종료되지만 지정한 버전의 통합은 설치됩니다.
@@ -76,17 +76,17 @@ Agent 업그레이드에 따라 개별적으로 업그레이드한 모든 통합
 예를 들어 vSphere 통합을 삭제하려면 다음을 실행하세요.
 
 {{< tabs >}}
-{{% tab "리눅스(Linux)" %}}
+{{< tab "리눅스(Linux)" >}}
 ```shell
 sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 ```
-{{% /tab %}}
-{{% tab "윈도우즈(Windows) PowerShell" %}}
+{{< /tab >}}
+{{< tab "윈도우즈(Windows) PowerShell" >}}
 **고급** 옵션으로(즉, 관리자 권한으로) `powershell.exe`를 실행하세요.
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration remove datadog-vsphere
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 통합을 삭제해도 해당하는 설정 폴더가 `conf.d` 디렉터리에서 삭제되지는 않습니다.
@@ -98,17 +98,17 @@ sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 예를 들어 vSphere 통합 정보를 보려면 다음을 실행하세요.
 
 {{< tabs >}}
-{{% tab "리눅스(Linux)" %}}
+{{< tab "리눅스(Linux)" >}}
 ```shell
 sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 ```
-{{% /tab %}}
-{{% tab "윈도우즈(Windows) PowerShell" %}}
+{{< /tab >}}
+{{< tab "윈도우즈(Windows) PowerShell" >}}
 **고급** 옵션으로(즉, 관리자 권한으로) `powershell.exe`를 실행하세요.
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration show datadog-vsphere
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 동결
@@ -116,17 +116,17 @@ sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 Agent의 파이썬 환경에 설치된 모든 파이썬 패키지를 목록으로 표시하려면 `datadog-agent integration freeze` 명령을 사용하세요. 그러면 모든 Datadog 통합(`datadog-`로 시작하는 패키지) 및 통합 실행에 필요한 파이썬 의존 관계가 목록으로 표시됩니다.
 
 {{< tabs >}}
-{{% tab "리눅스(Linux)" %}}
+{{< tab "리눅스(Linux)" >}}
 ```text
 sudo -u dd-agent -- datadog-agent integration freeze
 ```
-{{% /tab %}}
-{{% tab "윈도우즈(Windows) PowerShell" %}}
+{{< /tab >}}
+{{< tab "윈도우즈(Windows) PowerShell" >}}
 **고급** 옵션으로(즉, 관리자 권한으로) `powershell.exe`를 실행하세요.
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration freeze
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: https://github.com/DataDog/integrations-core

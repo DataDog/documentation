@@ -70,7 +70,7 @@ Pour configurer le tagging de service unifié dans un environnement conteneuris�
 #### Procédure à suivre
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 ##### Configuration complète
 
@@ -184,9 +184,9 @@ containers:
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [4]: /fr/tracing/send_traces/
 [5]: /fr/integrations/statsd/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 ##### Configuration complète
 
 Définissez les variables d'environnement `DD_ENV`, `DD_SERVICE` et `DD_VERSION` ainsi que les étiquettes Docker correspondantes pour votre conteneur afin d'exploiter tout le potentiel du tagging de service unifié.
@@ -231,9 +231,9 @@ com.datadoghq.tags.version
 
 Comme expliqué pour la configuration complète, ces étiquettes peuvent être définies dans un Dockerfile ou comme arguments pour lancer le conteneur.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "ECS" %}}
+{{< tab "ECS" >}}
 ##### Configuration complète
 
 Définissez les variables d'environnement `DD_ENV`, `DD_SERVICE` et `DD_VERSION` ainsi que les étiquettes Docker correspondantes dans l'environnement runtime du conteneur de chaque service pour exploiter tout le potentiel du tagging de service unifié. Par exemple, vous pouvez définir tous ces éléments au même endroit via la définition de votre tâche ECS :
@@ -273,7 +273,7 @@ Si votre service n'a pas besoin des variables d'environnement Datadog (par exemp
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Environnement non conteneurisé
@@ -289,7 +289,7 @@ Afin de former un point de configuration unique pour l'ensemble des données de 
 2. Ou utiliser [Chef][11], [Ansible][12] ou un autre outil d'orchestration pour ajouter les variables d'environnement `DD` au fichier de configuration systemd ou initd d'un service. De cette façon, le processus du service a accès à ces variables une fois lancé.
 
 {{< tabs >}}
-{{% tab "Traces" %}}
+{{< tab "Traces" >}}
 
 Lors de la configuration de vos traces pour le tagging de service unifié :
 
@@ -303,18 +303,18 @@ Lors de la configuration de vos traces pour le tagging de service unifié :
 
 [1]: /fr/tracing/setup/
 [2]: /fr/developers/dogstatsd/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Logs" %}}
+{{< tab "Logs" >}}
 
 Si vous [associez vos logs à vos traces][1], activez l'injection automatique dans les logs si cette fonctionnalité est prise en charge par votre traceur d'APM. Le traceur d'APM injecte alors automatiquement les tags `env`, `service` et `version` dans vos logs, éliminant ainsi le besoin de configurer manuellement ces champs ailleurs. 
 
 **Remarque** : le traceur PHP ne prend pas actuellement en charge la configuration du tagging de service unifié pour les logs.
 
 [1]: /fr/tracing/connect_logs_and_traces/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Métriques custom" %}}
+{{< tab "Métriques custom" >}}
 
 Les tags sont ajoutés en mode append-only pour les [métriques custom statsd][1]. Par exemple, si vous avez deux valeurs différentes pour `env`, les métriques sont taguées avec les deux environnements. L'ordre dans lequel un tag remplace un autre du même nom est aléatoire.
 
@@ -323,9 +323,9 @@ Si votre service a accès à `DD_ENV`, `DD_SERVICE` et `DD_VERSION`, alors le cl
 **Remarque** : les clients Datadog DogStatsD pour .NET et PHP ne prennent pas encore en charge cette fonctionnalité.
 
 [1]: /fr/metrics/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Métriques système" %}}
+{{< tab "Métriques système" >}}
 
 Les tags `env` et `service` peuvent également être ajoutés aux métriques de votre infrastructure.
 
@@ -371,7 +371,7 @@ instances:
 
 [1]: /fr/agent/guide/agent-configuration-files
 [2]: /fr/integrations/process
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Environnement sans serveur

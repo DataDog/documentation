@@ -48,7 +48,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de logs
 
 {{< tabs >}}
-{{% tab "Logs standard" %}}
+{{< tab "Logs standard" >}}
 
 #### Activer le logging
 
@@ -73,8 +73,8 @@ Pour en savoir plus sur la collecte de logs de service AWS, consultez la section
 [2]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
 [3]: https://app.datadoghq.com/logs
 [4]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-{{% /tab %}}
-{{% tab "Logs en temps réel" %}}
+{{< /tab >}}
+{{< tab "Logs en temps réel" >}}
 
 #### Activer le logging
 
@@ -101,7 +101,7 @@ Vous pouvez également configurer un consommateur, tel qu'Amazon Kinesis Data Fi
 [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 [2]: https://docs.datadoghq.com/fr/integrations/amazon_kinesis/
 [3]: https://docs.datadoghq.com/fr/serverless/forwarder/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Données collectées

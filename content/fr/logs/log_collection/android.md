@@ -34,7 +34,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 
 {{< site-region region="us" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -50,8 +50,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -66,13 +66,13 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -90,8 +90,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -107,13 +107,13 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -131,8 +131,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -148,13 +148,13 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -172,8 +172,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -189,13 +189,13 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -213,8 +213,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -230,7 +230,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
@@ -264,7 +264,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 
 3. Configurer le logger Android :
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
          val logger = Logger.Builder()
             .setNetworkInfoEnabled(true)
@@ -274,8 +274,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
             .setLoggerName("<LOGGER_NAME>")
             .build()
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
           final Logger logger = new Logger.Builder()
             .setNetworkInfoEnabled(true)
@@ -285,7 +285,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
             .setLoggerName("<LOGGER_NAME>")
             .build();
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
 4. Envoyez une entrée de log personnalisée directement à Datadog avec l'une des fonctions suivantes :
@@ -300,7 +300,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 
 5. Les exceptions interceptées peuvent être envoyées avec un message :
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
         try { 
             doSomething() 
@@ -308,8 +308,8 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
             logger.e("Error while doing something", e) 
         }
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
         try {
             doSomething();
@@ -317,7 +317,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
             logger.e("Error while doing something", e);
         }
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
     **Remarque** : toutes les méthodes de logging peuvent avoir un Throwable qui leur est associé.
@@ -325,39 +325,39 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 6. (Facultatif) - Fournissez une map avec votre message de log pour ajouter des attributs au log envoyé. Chaque entrée de la map est ajoutée en tant qu'attribut.
 
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
         logger.i("onPageStarted", attributes = mapOf("http.url" to url))
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("http.url", url);
         logger.i("onPageStarted", null, attributes);
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
 7. Si vous devez modifier certains attributs de vos événements de log avant de les rassembler, vous pouvez implémenter `EventMapper<événement_log>` lors de l'initialisation du SDK :
 
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
         val config = Configuration.Builder(logsEnabled = true, ...)
                     // ...
                     .setLogEventMapper(logEventMapper)
                     .build()
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
         Configuration config = new Configuration.Builder(true, true, true, true)
                     // ...
                     .setLogEventMapper(logEventMapper)
                     .build();
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
    **Remarque** : si vous renvoyez une valeur nulle ou une autre instance à partir de l'implémentation `EventMapper<événement_log>`, l'événement sera ignoré.

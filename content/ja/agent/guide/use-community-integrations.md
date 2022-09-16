@@ -24,7 +24,7 @@ Datadog Agent のコミュニティ開発のインテグレーションは、Dat
 Agent のバージョンを選択してください:
 
 {{< tabs >}}
-{{% tab "Agent v7.21 / v6.21 以降" %}}
+{{< tab "Agent v7.21 / v6.21 以降" >}}
 
 Agent v7.21 / v6.21 以降の場合:
 
@@ -41,8 +41,8 @@ Agent v7.21 / v6.21 以降の場合:
 
 [1]: /ja/getting_started/integrations/
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 コミュニティインテグレーションを Docker Agent で使用するためにお勧めの方法は、このインテグレーションがインストールされた Agent をビルドすることです。次の Dockerfile を使用して、`<INTEGRATION_NAME>` を含む Agent の更新バージョンをビルドします。
 
@@ -56,9 +56,9 @@ Docker 内で実行された `agent Integration install` コマンドは、無�
 この新しい Agent イメージを[オートディスカバリー][1]と組み合わせて使用して、`<INTEGRATION_NAME>` を有効にします。
 
 [1]: /ja/agent/autodiscovery/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Agent の以前のバージョン" %}}
+{{< tab "Agent の以前のバージョン" >}}
 
 Agent v7.21 / v6.21 以前の場合:
 
@@ -75,7 +75,7 @@ Agent v7.21 / v6.21 以前の場合:
 [2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /ja/getting_started/integrations/
 [4]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 <br>

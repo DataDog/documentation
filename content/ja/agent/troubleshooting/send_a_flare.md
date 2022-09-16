@@ -22,7 +22,7 @@ Datadog Agent は完全にオープンソースなので、[コードの動作�
 ケース ID がない場合は、Datadog へのログインに使用するメールアドレスを入力して新しいサポートケースを作成します。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 | プラットフォーム   | コマンド                                                 |
 |------------|---------------------------------------------------------|
@@ -95,8 +95,8 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 [3]: /ja/agent/guide/heroku-troubleshooting/#send-a-flare
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 | プラットフォーム   | コマンド                                                                 |
 |------------|-------------------------------------------------------------------------|
@@ -115,15 +115,15 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 [1]: /ja/agent/basic_agent_usage/windows/#agent-v5
 [2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Cluster Agent" %}}
+{{< tab "Cluster Agent" >}}
 
 | プラットフォーム   | コマンド                                                             |
 |------------|---------------------------------------------------------------------|
 | Kubernetes | `kubectl exec <ポッド名> -it datadog-cluster-agent flare <ケース_ID>` |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 手動送信

@@ -53,7 +53,7 @@ Exception in thread "main" java.lang.NullPointerException
 ### JSON 形式
 
 {{< tabs >}}
-{{% tab "Log4j" %}}
+{{< tab "Log4j" >}}
 
 Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組み合わせて使用して JSON 形式でログします。`log4j-over-slf4j` は、アプリケーションの Log4j を完全に置き換えるため、コードを変更する必要はありません。これを使用するには
 
@@ -91,8 +91,8 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
     ```
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
-{{% /tab %}}
-{{% tab "Log4j 2" %}}
+{{< /tab >}}
+{{< tab "Log4j 2" >}}
 
 Log4j 2 には JSON レイアウトが含まれています。
 
@@ -137,8 +137,8 @@ Log4j 2 には JSON レイアウトが含まれています。
     </dependency>
     ```
 
-{{% /tab %}}
-{{% tab "Logback" %}}
+{{< /tab >}}
+{{< tab "Logback" >}}
 
 Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用します。
 
@@ -173,7 +173,7 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     ```
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -183,7 +183,7 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 ### 未加工の形式
 
 {{< tabs >}}
-{{% tab "Log4j" %}}
+{{< tab "Log4j" >}}
 
 `log4j.xml` でファイルアペンダーを構成します。
 
@@ -209,8 +209,8 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 </log4j:configuration>
 ```
 
-{{% /tab %}}
-{{% tab "Log4j 2" %}}
+{{< /tab >}}
+{{< tab "Log4j 2" >}}
 
 `log4j2.xml` でファイルアペンダーを構成します。
 
@@ -231,8 +231,8 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 </Configuration>
 ```
 
-{{% /tab %}}
-{{% tab "Logback" %}}
+{{< /tab >}}
+{{< tab "Logback" >}}
 
 `logback.xml` でファイルアペンダーを構成します。
 
@@ -254,7 +254,7 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 </configuration>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -298,7 +298,7 @@ logs:
 まだ Logback を使用していない場合、ほとんどの一般的なログライブラリは Logback にブリッジすることができます。
 
 {{< tabs >}}
-{{% tab "Log4j" %}}
+{{< tab "Log4j" >}}
 
 SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して、ログを別のサーバーに送信します。`log4j-over-slf4j` は、アプリケーションの Log4j を完全に置き換えるため、コードを変更する必要はありません。これを使用するには
 
@@ -327,9 +327,9 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Log4j 2" %}}
+{{< tab "Log4j 2" >}}
 
 Log4j 2 では、リモートホストへのログ記録が可能ですが、ログの前に API キーを付ける機能はありません。このため、SLF4J モジュール [log4j-over-slf4j][1] と Logback を使用してください。`log4j-to-slf4j.jar` は、アプリケーションの Log4j 2 を完全に置き換えるため、コードを変更する必要はありません。これを使用するには
 
@@ -361,7 +361,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

@@ -125,7 +125,7 @@ Datadog-JMX 통합의 복잡한 설정을 전송해야 하는 경우, [자동탐
 클러스터에서 컨테이너로서 Agent를 실행 중인지, 호스트에서 바로 실행 중인지 선택하세요.
 
 {{< tabs >}}
-{{% tab "컨테이너 Agent" %}}
+{{< tab "컨테이너 Agent" >}}
 
 Agent를 클러스터에서 실행 중이며, JMX 메트릭을 수집하기 위해 컨테이너를 자동탐지하는 경우:
 
@@ -228,8 +228,8 @@ Agent를 클러스터에서 실행 중이며, JMX 메트릭을 수집하기 위�
 [27]: /kr/agent/faq/template_variables/
 [28]: /kr/agent/guide/ad_identifiers/#short-image-container-identifiers
 [29]: /kr/integrations/kafka/
-{{% /tab %}}
-{{% tab "호스트 Agent" %}}
+{{< /tab >}}
+{{< tab "호스트 Agent" >}}
 
 Agent를 호스트에서 실행 중이며, JMX 메트릭을 수집하기 위해 컨테이너를 자동탐지하는 경우:
 
@@ -283,7 +283,7 @@ Agent를 호스트에서 실행 중이며, JMX 메트릭을 수집하기 위해 
 [3]: /kr/agent/faq/template_variables/
 [4]: /kr/agent/guide/ad_identifiers/#short-image-container-identifiers
 [5]: /kr/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 컨테이너 준비
