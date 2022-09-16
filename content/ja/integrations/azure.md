@@ -17,9 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/
   tag: ブログ
   text: Microsoft Azure VM の監視方法
-- link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-  tag: よくあるご質問
-  text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
+- link: https://www.datadoghq.com/blog/monitor-azure-arm-vms-datadog/
+  tag: ブログ
+  text: Ampere Altra Arm ベースの CPU を搭載した Microsoft Azure VM を Datadog で監視する？
 - link: https://www.datadoghq.com/blog/monitoring-azure-platform-logs/
   tag: ブログ
   text: Microsoft Azure プラットフォームログをモニタリングするためのベストプラクティス
@@ -32,6 +32,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-government-monitoring-datadog/
   tag: ブログ
   text: Datadog で Azure Government を監視する
+- link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: Documentation
+  text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
 git_integration_title: azure
 has_logo: true
 integration_id: azure
@@ -320,6 +323,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 インテグレーションタイルのセットアップが完了すると、メトリクスがクローラーによって収集されます。他のメトリクスを収集する場合は、以下のように、Datadog Agent を VM にデプロイします。
 
 #### Agent のインストール
+
+Azure 拡張機能を使用して、Windows VM、Linux x64 VM、および Linux ARM ベースの VM に Datadog Agent をインストールすることができます。
 
 1. [Azure ポータル][47]で、**VM** > **Settings** > **Extensions** > **Add** と移動し、**Datadog Agent** を選択します。
 2. **作成**をクリックし、[Datadog API キー][48]を入力して、**OK**をクリックします。

@@ -48,6 +48,81 @@ The namespace can then be used to uniquely pivot from an SNMP Trap to the emitte
 
 It is critical to have consistency between the multiple Agent configurations. For instance, if you have two Agents configured (for example, one for trap collection, and the other for metrics) you must ensure that the namespaces exist in both places. Alternatively, ensure that the namespaces exist in neither. 
 
+## Resolution
+
+Each SNMP Trap has a specific OID-based format. The Datadog Agent performs a _resolution_ step to convert OIDs into more readable strings.
+
+An SNMP Trap consists of:
+- Emitter information (for example, the IP of the device)
+- An OID that defines the type of trap
+- "Variables"—that is, a list of pairs (`OID:value`) that provides additional context for the trap.
+
+Decoding is performed on the Agent side, using a mapping stored on disk at `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/dd_traps_db.json.gz`. Datadog supports more than 11,000 different management information bases (MIBs).
+
+### Mapping format
+
+Mappings are stored as TrapsDB files, and can be YAML or JSON.
+
+#### Examples
+
+{{< tabs >}}
+{{% tab "YAML" %}}
+```yaml
+mibs:
+- NET-SNMP-EXAMPLES-MIB
+traps:
+  1.3.6.1.4.1.8072.2.3.0.1:
+    mib: NET-SNMP-EXAMPLES-MIB
+    name: netSnmpExampleHeartbeatNotification
+vars:
+  1.3.6.1.4.1.8072.2.3.2.1:
+    name: netSnmpExampleHeartbeatRate
+```
+{{% /tab %}}
+{{% tab "JSON" %}}
+```json
+{
+  "mibs": [
+    "NET-SNMP-EXAMPLES-MIB"
+  ],
+  "traps": {
+    "1.3.6.1.4.1.8072.2.3.0.1": {
+      "mib": "NET-SNMP-EXAMPLES-MIB",
+      "name": "netSnmpExampleHeartbeatNotification"
+    }
+  },
+  "vars": {
+    "1.3.6.1.4.1.8072.2.3.2.1": {
+      "name": "netSnmpExampleHeartbeatRate"
+    }
+  }
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Extend the Agent
+
+To extend the capabilities of the Agent, create your own mappings and place them in the `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/` directory.
+
+You can write these mappings by hand, or generate mappings from a list of MIBs using Datadog's developer toolkit, [`ddev`][4].
+
+#### Generate a TrapsDB file from a list of MIBs
+
+**Prerequisites**:
+- Python 3
+- [`ddev`][4] (`pip3 install "datadog-checks-dev[cli]"`)
+- [`pysmi`][5] (`pip3 install pysmi`)
+
+Put all your MIBs into a dedicated folder. Then, run:
+`ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
+
+If your MIBs have dependencies, `ddev` fetches them online if they can be found. Alternatively, put all your dependencies in a separate folder and use the `--mib-sources` parameter to specify this folder.
+
+
+
 [1]: /monitors/
 [2]: /help/
 [3]: /network_monitoring/devices
+[4]: /developers/integrations/new_check_howto/?tab=configurationtemplate#developer-toolkit
+[5]: https://pypi.org/project/pysmi/

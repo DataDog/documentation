@@ -6,6 +6,7 @@ import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { getQueryParameterByName } from './helpers/browser';
+import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -161,6 +162,14 @@ function getPathElement(event = null) {
         );
     }
 
+    if (path.includes('integrations/observability_pipelines/integrate_vector_with_datadog')) {
+        const integrationsEl = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
+        sideNavPathElement = integrationsEl.nextElementSibling.querySelector(
+            '[data-path*="integrations/observability_pipelines/integrate_vector_with_datadog"]'
+        );
+        mobileNavPathElement = sideNavPathElement;
+    }
+
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
@@ -211,8 +220,9 @@ function closeNav(){
 
 function updateSidebar(event) {
     closeNav();
+    closeMobileNav();
     getPathElement(event);
-
+    setMobileNav();
     const isLi = event.target.nodeName === 'LI';
 
     if (isLi) {
@@ -369,6 +379,7 @@ window.addEventListener('click', (event) => {
 
 window.onload = function () {
     getPathElement();
+    setMobileNav();
 };
 
 // remove branch name from path

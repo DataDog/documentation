@@ -1,18 +1,17 @@
 ---
-title: Widget Résumé des monitors
-kind: documentation
-description: Affichez une vue synthétique de tous vos monitors Datadog ou d'un sous-ensemble filtré selon une requête.
-widget_type: manage_status
 aliases:
-  - /fr/graphing/widgets/monitor_summary/
+- /fr/graphing/widgets/monitor_summary/
+description: Affichez une vue synthétique de tous vos monitors Datadog ou d'un sous-ensemble
+  filtré selon une requête.
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Résumé des monitors
+widget_type: manage_status
 ---
+
 Le widget Résumé des monitors affiche une vue synthétique de tous vos monitors Datadog ou d'un sous-ensemble filtré selon une requête.
 
 {{< img src="dashboards/widgets/monitor_summary/monitor-summary-overview.png" alt="résumé des monitors" >}}
@@ -37,9 +36,29 @@ Le widget Résumé des monitors affiche une vue synthétique de tous vos monitor
     {{< img src="dashboards/widgets/monitor_summary/combined_summary_type.png" alt="Type de résumé Combined" style="width:80%;">}}
 
 2. Saisissez une requête de monitor pour afficher un sous-ensemble de monitors sur le widget Résumé des monitors.
-    - Si vous avez des template variables dans votre dashboard et souhaitez les inclure dans votre requête de monitor, tapez le signe dollar `$` dans la barre de recherche, suivi du nom de la template variable. Lorsque vous tapez `$` dans la barre de recherche, une liste des template variables disponibles dans votre dashboard actuel apparaît automatiquement pour que vous puissiez choisir la template variable qui vous intéresse.
 
-    **Remarque** : outre les facettes répertoriées dans le lien ci-dessus, les types de résumé `Group` et `Combined` prennent également en charge les facettes `group` et `group_status` pour les recherches au sein des groupes, de la même manière que la page [Triggered Monitors][2].
+    **Remarque** : outre les facettes répertoriées dans le lien ci-dessus, les types de résumés `Group` et `Combined` prennent également en charge les facettes `group` et `group_status` pour les recherches au sein des groupes, de la même manière que la page [Triggered Monitors][2].
+
+#### Template variables
+
+Pour utiliser des template variables créées dans votre dashboard dans la requête de recherche du widget Résumé des monitors, utilisez le même format de requête que pour la page Manage Monitor.
+
+**Exemple**
+
+1. Appliquer au monitor un filtre `scope` avec une template variable `$service`
+
+   Pour ajouter un filtre `scope` sur la page Manage Monitor ou Triggered Monitors, vous devez utiliser `scope:service:web-store`.
+   Ainsi, vous devez spécifier `scope:$service` dans le widget, puis appliquer la valeur de la template variable au widget.
+
+   {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-scope.png" alt="Template variable scope" style="width:80%;">}}
+
+
+2. Appliquer au monitor un filtre `group` avec une template variable `$env`
+
+   Pour ajouter un filtre `group` sur la page Manage Monitor ou Triggered Monitors, vous devez utiliser `group:env:prod`.
+   Ainsi, vous devez spécifier `group:$env` dans le widget, puis appliquer la valeur de la template variable au widget.
+
+   {{< img src="dashboards/widgets/monitor_summary/templatevariable-example-group.png" alt="Template variable group" style="width:80%;">}}
 
 ## Options
 

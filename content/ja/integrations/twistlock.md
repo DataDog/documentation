@@ -1,42 +1,66 @@
 ---
+app_id: twistlock
+app_uuid: b10f1447-4e25-4c76-ab05-911cde5df5c6
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Twistlock: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: twistlock.images.cve.details
+      metadata_path: metadata.csv
+      prefix: twistlock.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Twistlock
   logs:
     source: twistlock
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - security
 - ログの収集
 - オートディスカバリー
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
-display_name: Twistlock
+display_on_public_website: true
 draft: false
 git_integration_title: twistlock
-guid: 59082b73-62f4-48d4-83f8-af3d5576eae1
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
 integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: twistlock.
-metric_to_check: twistlock.images.cve.details
+manifest_version: 2.0.0
 name: twistlock
-public_title: Prisma Cloud Compute Edition インテグレーション
+oauth: {}
+public_title: Prisma Cloud Compute Edition
 short_description: Twistlock はコンテナセキュリティスキャナ
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Twistlock はコンテナセキュリティスキャナ
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Prisma Cloud Compute Edition
 ---
 
 
@@ -88,7 +112,6 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 Kubernetes を使用している場合は、デプロイ前に twistlock_console.yaml の replication controller セクションに構成を追加してください。
 
 ```yaml
----
 apiVersion: v1
 kind: ReplicationController
 metadata:
@@ -103,7 +126,7 @@ spec:
       annotations:
         ad.datadoghq.com/twistlock-console.check_names: '["twistlock"]'
         ad.datadoghq.com/twistlock-console.init_configs: "[{}]"
-        ad.datadoghq.com/twistlock-console.instances: '[{"url":"http://%%host%%:8083", "username":"<ユーザー名>", "password": "<パスワード>"}]'
+        ad.datadoghq.com/twistlock-console.instances: '[{"url":"http://%%host%%:8083", "username":"<USERNAME>", "password": "<PASSWORD>"}]'
         ad.datadoghq.com/twistlock-console.logs: '[{"source": "twistlock", "service": "twistlock"}]'
       name: twistlock-console
       namespace: twistlock

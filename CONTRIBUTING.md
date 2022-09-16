@@ -198,5 +198,5 @@ Use text formatting to clarify and enhance content.
 [3]: https://tools.ietf.org/html/rfc2606
 [4]: https://github.com/DataDog/gobwords/wiki/Style-guide
 [5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
-[6]: https://github.com/DataDog/documentation/wiki/Import-an-Image
+[6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/

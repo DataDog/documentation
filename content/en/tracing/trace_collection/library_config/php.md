@@ -288,6 +288,24 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   Regular expression used to obfuscate the query string included as part of the URL. Added in version `0.76.0`.
 
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **INI**: `datadog.trace.propagation_style_inject`<br>
+**Default**: `Datadog`<br>
+Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
+
+  - [B3][6]
+  - [B3 single header][7]
+  - Datadog
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **INI**: `datadog.trace.propagation_style_extract`<br>
+**Default**: `Datadog,B3,B3 single header`<br>
+Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
+
+  - [B3][6]
+  - [B3 single header][7]
+  - Datadog
+
 #### Integration names
 
 The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
@@ -378,9 +396,8 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][6] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][8] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
-
 
 ## Further Reading
 
@@ -391,4 +408,6 @@ When the application runs in a docker container, the path `/proc/self` should al
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
-[6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[6]: https://github.com/openzipkin/b3-propagation
+[7]: https://github.com/openzipkin/b3-propagation#single-header
+[8]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

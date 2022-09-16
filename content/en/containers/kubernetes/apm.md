@@ -218,8 +218,8 @@ kind: Deployment
 ```
 **Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
-[1]: /agent/cluster_agent/admission_controller/
 
+[1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -228,8 +228,6 @@ kind: Deployment
 After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog Tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the relative `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
 
 Refer to the [language-specific APM instrumentation docs][2] for more examples.
-
-**Note:** The PHP tracer does not support sending traces over Unix Domain Socket (UDS). For updates on UDS for PHP, contact support.
 
 
 ## Agent environment variables

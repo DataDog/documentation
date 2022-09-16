@@ -251,8 +251,18 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2652180930",
+      "description": "Create a new dashboard with topology_map widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2921337351",
       "description": "Create a new dashboard with trace_service widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1307120899",
+      "description": "Create a new timeseries widget with ci_tests data source"
     }
   ],
   "DeleteDashboard": [
@@ -739,6 +749,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Create a browser test returns \"OK - Returns the created test details.\" response"
+    }
+  ],
+  "CreateGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "_1068962881",
+      "description": "Create a global variable from test returns \"OK\" response"
     }
   ],
   "CreatePrivateLocation": [

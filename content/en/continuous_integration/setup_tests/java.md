@@ -195,6 +195,22 @@ DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{% /tab %}}
 {{< /tabs >}}
 
+### Adding custom tags to tests
+
+You can add custom tags to your tests by using the current active span:
+
+```java
+// inside your test
+final Span span = GlobalTracer.get().activeSpan();
+if (span != null) {
+  span.setTag("test_owner", "my_team");
+}
+// test continues normally
+// ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Java custom instrumentation documentation.
+
 ## Configuration settings
 
 The following system properties set configuration options and have environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
@@ -216,9 +232,9 @@ The following system properties set configuration options and have environment v
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][1] options can also be used.
+All other [Datadog Tracer configuration][2] options can also be used.
 
-**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][2] table to create your custom setup for your integration tests.
+**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][3] table to create your custom setup for your integration tests.
 
 For example, to enable `OkHttp3` client request integration, add `-Ddd.integration.okhttp-3.enabled=true` to your setup.
 
@@ -288,5 +304,6 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
-[2]: /tracing/trace_collection/compatibility/java
+[1]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+[2]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
+[3]: /tracing/trace_collection/compatibility/java

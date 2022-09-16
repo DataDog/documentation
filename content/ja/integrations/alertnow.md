@@ -33,7 +33,7 @@ manifest_version: 2.0.0
 name: alertnow
 oauth: {}
 public_title: AlertNow
-short_description: ''
+short_description: Datadog のアラートと AlertNow のアラートを同期させる
 supported_os:
 - linux
 - mac os
@@ -45,7 +45,7 @@ tile:
   - Supported OS::Mac OS
   - Supported OS::Windows
   configuration: README.md#Setup
-  description: ''
+  description: Datadog のアラートと AlertNow のアラートを同期させる
   media: []
   overview: README.md#Overview
   support: README.md#Support

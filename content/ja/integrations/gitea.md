@@ -1,43 +1,66 @@
 ---
+app_id: gitea
+app_uuid: f4cd02de-cfb8-4de9-a809-7a772ba738ca
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Gitea Overview Dashboard: assets/dashboards/gitea_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: gitea.process.start_time
+      metadata_path: metadata.csv
+      prefix: gitea.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Gitea
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: florent.clarret@gmail.com
+  support_email: florent.clarret@gmail.com
 categories:
 - コラボレーション
 - ソースコントロール
 - 問題追跡
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gitea/README.md
-display_name: Gitea
+display_on_public_website: true
 draft: false
 git_integration_title: gitea
-guid: de1c16d4-2950-4a00-b5f1-23b67852da81
 integration_id: gitea
 integration_title: Gitea
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: florent.clarret@gmail.com
-manifest_version: 1.0.0
-metric_prefix: gitea.
-metric_to_check: gitea.process.start_time
+manifest_version: 2.0.0
 name: gitea
+oauth: {}
 public_title: Gitea
 short_description: Gitea のすべてのメトリクスを Datadog で追跡
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Collaboration
+  - カテゴリ::ソースコントロール
+  - Category::Issue Tracking
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Gitea のすべてのメトリクスを Datadog で追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Gitea
 ---
 
 

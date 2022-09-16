@@ -13,6 +13,9 @@ code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
+- link: "/tracing/guide/trace-php-cli-scripts/"
+  tags: "Guide"
+  text: "Tracing PHP CLI Scripts"
 - link: "https://www.datadoghq.com/blog/monitor-php-performance/"
   tag: "Blog"
   text: "PHP monitoring with Datadog APM and distributed tracing"
@@ -22,9 +25,6 @@ further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "/tracing/"
-  tag: "Documentation"
-  text: "Advanced Usage"
 ---
 ## Compatibility requirements
 
@@ -154,6 +154,10 @@ Automatic instrumentation captures:
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
 
+## Tracing short- and long-running CLI scripts
+
+Additional steps are required for instrumenting CLI scripts. Read [Trace PHP CLI Scripts][7] for more information.
+
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
@@ -241,7 +245,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### PHP installed from the Sury Debian DPA
 
-If PHP was installed from the [Sury Debian DPA][7], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+If PHP was installed from the [Sury Debian DPA][8], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -250,7 +254,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### PHP installed from a different package
 
-The Debian project maintains a wiki page with [instructions to install debug symbols][8].
+The Debian project maintains a wiki page with [instructions to install debug symbols][9].
 
 Edit the file `/etc/apt/sources.list`:
 
@@ -300,7 +304,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 ##### PHP installed from `ppa:ondrej/php`
 
-If PHP was installed from the [`ppa:ondrej/php`][9], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+If PHP was installed from the [`ppa:ondrej/php`][10], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -336,7 +340,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][10] from the `ddebs` can be found in the Ubuntu documentation.
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][11] from the `ddebs` can be found in the Ubuntu documentation.
 
 For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
@@ -346,7 +350,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][11]):
+Import the signing key (make sure the [signing key is correct][12]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -423,7 +427,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][12] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][13] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -499,9 +503,10 @@ For Apache, run:
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
 [6]: /tracing/trace_collection/library_config/php/
-[7]: https://packages.sury.org/php/
-[8]: https://wiki.debian.org/HowToGetABacktrace
-[9]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[10]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[12]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[7]: /tracing/guide/trace-php-cli-scripts/
+[8]: https://packages.sury.org/php/
+[9]: https://wiki.debian.org/HowToGetABacktrace
+[10]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment

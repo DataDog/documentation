@@ -313,6 +313,9 @@
   },
   "beta_check":{
     "other": "Beta"
+  },
+  "learn_more": {
+    "other": "詳細はこちら"
   }
 
 }
