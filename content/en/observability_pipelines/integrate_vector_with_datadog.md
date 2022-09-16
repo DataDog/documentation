@@ -1,10 +1,9 @@
 ---
 title: Integrate Vector with Datadog
 kind: documentation
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrate_vector_with_datadog.md"]
 aliases:
   - /agent/vector_aggregation/
+  - /integrations/observability_pipelines/integrate_vector_with_datadog/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -15,10 +14,10 @@ further_reading:
 - link: "https://vector.dev/docs/"
   tag: "Documentation"
   text: "Vector documentation"
-- link: "/integrations/observability_pipelines/vector_configurations/"
+- link: "/observability_pipelines/vector_configurations/"
   tag: "Documentation"
   text: "Learn more about Vector configurations"
-- link: "/integrations/observability_pipelines/working_with_data/"
+- link: "/observability_pipelines/working_with_data/"
   tag: "Documentation"
   text: "Working with data using Vector"
 ---
@@ -592,16 +591,16 @@ Read more about [architecting buffers][18].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/basic_agent_usage/?tabs=agentv6v7
-[2]: /integrations/observability_pipelines/setup/#install-vector
-[3]: /integrations/observability_pipelines/vector_configurations/
+[2]: /observability_pipelines/setup/#install-vector
+[3]: /observability_pipelines/vector_configurations/
 [4]: /agent/kubernetes/?tab=helm
 [5]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [6]: https://vector.dev/docs/setup/installation/package-managers/helm/
 [7]: https://vector.dev/docs/reference/configuration/
 [8]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-[9]: /integrations/observability_pipelines/working_with_data
+[9]: /observability_pipelines/working_with_data
 [10]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[11]: /integrations/observability_pipelines/integrations/#sources
+[11]: /observability_pipelines/integrations/#sources
 [12]: https://vector.dev/docs/reference/vrl/
 [13]: /getting_started/tagging
 [14]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/

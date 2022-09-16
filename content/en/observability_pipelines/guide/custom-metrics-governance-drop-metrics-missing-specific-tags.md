@@ -11,7 +11,7 @@ further_reading:
 - link: "https://vector.dev/docs/reference/configuration/sources/datadog_agent/ "
   tag: "Documentation"
   text: "Datadog agent as a source for Vector"
-- link: "/integrations/observability_pipelines/integrate_vector_with_datadog/"
+- link: "/observability_pipelines/integrate_vector_with_datadog/"
   tag: "Documentation"
   text: "Configure Datadog agents to send data to Vector"
 ---
