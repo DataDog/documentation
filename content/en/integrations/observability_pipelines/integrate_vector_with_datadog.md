@@ -491,7 +491,7 @@ vector:
 {{% /tab %}}
 {{< /tabs >}}
 
-Read more about [architecting buffers][18].
+Read more about [architecting buffers][17].
 
 ## Further Reading
 
