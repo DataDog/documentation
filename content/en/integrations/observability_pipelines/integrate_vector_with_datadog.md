@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-Vector integrates with Datadog to aggregate logs, metrics, and traces from Datadog Agents and route collected telemetry to Datadog.
+Vector integrates with Datadog to aggregate logs and metrics from Datadog Agents and route collected telemetry to Datadog.
 
 Data flows along the following path:
 `Datadog Agent -> Vector -> Datadog`
@@ -33,12 +33,12 @@ Data flows along the following path:
 Before collecting your observability data from the Datadog Agent using Vector, you must:
 
 - Have the [Datadog Agent v6.35+ or v7.35+ installed][1].
-- Have [Vector installed][2]. To collect traces, you must have Vector v0.23.0 or above.
+- Have [Vector installed][2]. 
 - Have a [basic understanding of configuring Vector][3].
 
 ## Set up the Datadog Agent and your environment
 
-You must configure the [Datadog Agent](#datadog-agent-configuration) before setting up Vector to collect, transform, and route logs, metrics, or traces from the Datadog Agent to Datadog. If you are using Kubernetes, you must also configure [Kubernetes](#kubernetes-configuration) before setting up Vector.
+You must configure the [Datadog Agent](#datadog-agent-configuration) before setting up Vector to collect, transform, and route logs or metrics from the Datadog Agent to Datadog. If you are using Kubernetes, you must also configure [Kubernetes](#kubernetes-configuration) before setting up Vector.
 
 ### Datadog Agent configuration
 
@@ -142,7 +142,7 @@ sources:
 
 ### Add Vector-specific tags
 
-Logs, metrics, and traces sent by the Datadog Agent to Vector can be manipulated or formatted as explained in [working with data][9]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][10] for more information.
+Logs and metrics sent by the Datadog Agent to Vector can be manipulated or formatted as explained in [working with data][9]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][10] for more information.
 
 Vector can also directly collect logs and metrics from [alternative sources][11]. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][12] to [add tags][13], sources, or service values.
 
@@ -273,53 +273,6 @@ source = """
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Traces
-
-To send traces from the Datadog Agent to Datadog:
-
-{{< tabs >}}
-{{% tab "YAML" %}}
-
-```yaml
-remap_traces_for_datadog:
-  type: remap
-  inputs:
-    - some_input_id
-  source: |
-    append(.tags, [join("sender:", “vector”)])
-    append(.tags, [join("vector_aggregator:", to_string(get_hostname!()))])
-```
-
-{{% /tab %}}
-{{% tab "TOML" %}}
-
-```toml
-[remap_traces_for_datadog]
-type = "remap"
-inputs = [ "some_input_id" ]
-source = """
-    append(.tags, [join("sender:", “vector”)])
-    append(.tags, [join("vector_aggregator:", to_string(get_hostname!()))])
-```
-
-{{% /tab %}}
-{{% tab "JSON" %}}
-
-```json
-{
-  "remap_traces_for_datadog": {
-    "type": "remap",
-    "inputs": [
-      "some_input_id"
-    ],
-    "source":
-        append(.tags, [join("sender:", “vector”)])
-        append(.tags, [join("vector_aggregator:", to_string(get_hostname!()))])
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Sink configuration
 
@@ -428,53 +381,6 @@ sinks:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Traces
-
-To send traces to Datadog, Vector must be configured with a [datadog_traces sink][16]. See the following example:
-
-{{< tabs >}}
-{{% tab "YAML" %}}
-
-```yaml
-sinks:
-  traces_to_datadog:
-    type: datadog_traces
-    inputs:
-       - component_id
-    default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
-```
-
-{{% /tab %}}
-{{% tab "TOML" %}}
-
-```toml
-sinks:
-  traces_to_datadog:
-    type: datadog_traces
-    inputs:
-      - component_id
-    default_api_key: '${DATADOG_API_KEY_ENV_VAR}'
-```
-
-{{% /tab %}}
-{{% tab "JSON" %}}
-
-```json
-{
-  "sinks": {
-    "traces_to_datadog": {
-      "type": "datadog_traces",
-      "inputs": [
-        "component_id"
-      ],
-      "default_api_key": "${DATADOG_API_KEY_ENV_VAR}"
-   }
-  }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Advanced Vector configurations
 
@@ -606,6 +512,5 @@ Read more about [architecting buffers][18].
 [13]: /getting_started/tagging
 [14]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
 [15]: https://vector.dev/docs/reference/configuration/sinks/datadog_metrics/
-[16]: https://vector.dev/docs/reference/configuration/sinks/datadog_traces/
 [17]: https://vector.dev/docs/about/concepts/#buffers
 [18]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
