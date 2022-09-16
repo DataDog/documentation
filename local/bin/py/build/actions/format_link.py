@@ -320,8 +320,6 @@ def inline_section(file_prepared):
     :param file_prepared: Array of sections, where the first item is the main section, an all the other one are sub sections in order of appearance.
     :return final_text: Returns text with all sections with reference link inlined in the main section.
     """
-    # inlining sections
-
     final_text = []
 
     end_section_pattern = r"\s*{{< /tab >}}.*"
