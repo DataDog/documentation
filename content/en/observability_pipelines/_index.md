@@ -22,9 +22,9 @@ further_reading:
   - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
     tag: Documentation
     text: Datadog Agent as a source for Vector
-  - link: https://docs.datadoghq.com/agent/vector_aggregation/ 
+  - link: https://docs.datadoghq.com/integrations/observability_pipelines/integrate_vector_with_datadog/ 
     tag: Documentation
-    text: Configure Datadog Agents to send data to Vector aggregators
+    text: Configure Datadog Agents to send data to Vector
 ---
 
 {{< img src="observability_pipelines/obs_pipelines_overview.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}

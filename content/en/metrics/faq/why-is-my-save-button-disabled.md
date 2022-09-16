@@ -23,7 +23,7 @@ Assuming `shopist.basket.size` reports values against four tag value combination
 Using Metrics without Limits™ to tag configure only the `{region, env}` tags, only three tag value combinations remain:
 * `{region:us, env:prod}`
 * `{region:eu, env:prod}`
-* `{region:us, env:staging}`
+* `{region:us, env:dev}`
 
 {{< img src="metrics/faq/disabled-save.png" alt="Disabled Save Configuration">}}
 

@@ -25,9 +25,9 @@ further_reading:
   - link: https://vector.dev/guides/level-up/csv-enrichment-guide/
     tag: Documentation
     text: Use CSV enrichment to provide more context to your data
-  - link: https://docs.datadoghq.com/agent/vector_aggregation/ 
+  - link: /integrations/observability_pipelines/integrate_vector_with_datadog/
     tag: Documentation
-    text: Configure Datadog agents to send data to Vector aggregators
+    text: Configure Datadog agents to send data to Vector
   - link: /observability_pipelines/vector_configurations/
     tag: Documentation
     text: Learn more about Vector configurations

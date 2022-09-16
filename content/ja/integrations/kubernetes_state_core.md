@@ -13,7 +13,7 @@ further_reading:
   tag: ブログ
   text: Kubernetes のステートメトリクスを次のレベルへ進化させる旅
 has_logo: true
-integration_id: kubernetes_state_core
+integration_id: kube-state-metrics
 integration_title: Kubernetes State Metrics Core
 is_public: true
 kind: インテグレーション

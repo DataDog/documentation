@@ -34,7 +34,7 @@ Select the following Delivery options:
 
 Select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
 
-**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][6] for cost visibility into related **member accounts**. If you decide to send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][7] to allow Datadog to have full visibility into the member account:
+**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you decide to send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3] to allow Datadog to have full visibility into the member account:
 
 * **Linked Account Access**
 * **Linked Account Refunds and Credits**
@@ -42,7 +42,7 @@ Select your AWS management account from the dropdown menu, allowing Datadog to d
 
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Cost and Usage Reports details][2].
+If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Cost and Usage Reports details][4].
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
@@ -53,7 +53,7 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 
 ### Configure access to the Cost and Usage Report
  
-Configure AWS to ensure Datadog has permissions to access the CUR and the s3 bucket it is stored in by [creating a policy][3] using the following JSON:
+Configure AWS to ensure Datadog has permissions to access the CUR and the s3 bucket it is stored in by [creating a policy][5] using the following JSON:
  
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -123,7 +123,7 @@ You can visualize your ingested data using the following cost types:
  
 Datadog adds tags to the ingested cost data to help you further break down and understand your costs.
  
-The added tags correlate the cost data with observability data that your systems provide to Datadog, data from resources configured with [AWS Resource tags][4], and the [Cost and Usage Report (CUR)][5].
+The added tags correlate the cost data with observability data that your systems provide to Datadog, data from resources configured with [AWS Resource tags][6], and the [Cost and Usage Report (CUR)][7].
  
 The following tags are also available for filtering and grouping data:
  
@@ -144,9 +144,9 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 {{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
  
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
-[2]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
-[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
-[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
-[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+[3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
+[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[6]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+[7]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
