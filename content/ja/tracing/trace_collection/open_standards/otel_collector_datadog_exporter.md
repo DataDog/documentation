@@ -3,7 +3,7 @@ aliases:
 - /ja/tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 description: OpenTelemetry のトレースを OpenTelemetry コレクターと Datadog エクスポーターに送信する
 further_reading:
-- link: https://opentelemetry.io/docs/collector/
+- link: tracing/glossary/
   tag: OpenTelemetry
   text: Collectorドキュメント
 kind: documentation
@@ -39,6 +39,35 @@ receivers:
 
 processors:
   batch:
+  # Datadog で正しいインフラストラクチャーのメトリクスを取得するためには、hostmetrics レシーバーが必要です。
+  hostmetrics:
+    collection_interval: 10s
+    scrapers:
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+      disk:
+      filesystem:
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
+      load:
+      memory:
+      network:
+      processes:
+  # prometheus レシーバーは、OpenTelemetry Collector Dashboard に必要なメトリクスをスクレイピングします。
+  prometheus:
+    config:
+      scrape_configs:
+      - job_name: 'otelcol'
+        scrape_interval: 10s
+        static_configs:
+        - targets: ['0.0.0.0:8888']
 
 exporters:
   datadog:
@@ -49,7 +78,7 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [otlp]
+      receivers: [hostmetrics, otlp]
       processors: [batch]
       exporters: [datadog]
     traces:
@@ -219,7 +248,7 @@ Datadog コンテナのタグ付けに使用される貴重な Kubernetes 属性
        service:
          pipelines:
            metrics:
-             receivers: [otlp]
+             receivers: [hostmetrics, otlp]
              processors: [resourcedetection, k8sattributes, batch]
              exporters: [otlp]
            traces:
@@ -254,7 +283,7 @@ Datadog コンテナのタグ付けに使用される貴重な Kubernetes 属性
          site: {{< region-param key="dd_site" code="true" >}}
          key: ${DD_API_KEY}
    # ...
-   ```yaml
+   ```
 
 ### アプリケーションの構成
 
@@ -325,8 +354,10 @@ Datadog Agent と並行して OpenTelemetry Collector を使用するには
    # ...
    ```
 
+   この場合、Datadog Agent によってこれらのメトリクスが発行されるため、`hostmetrics` レシーバーを使用しないでください。
 
-## その他の参考資料
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
