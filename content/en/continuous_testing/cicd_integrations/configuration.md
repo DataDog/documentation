@@ -11,10 +11,10 @@ further_reading:
 - link: "/synthetics/cicd_integrations"
   tag: "Documentation"
   text: "Learn about Synthetics and CI/CD"
-- link: "/continous_testing/explorer"
+- link: "/continuous_testing/explorer"
   tag: "Documentation"
   text: "Learn about the CI Results Explorer"
-- link: "/continous_testing/cicd_integrations/testing_tunnel"
+- link: "/continuous_testing/cicd_integrations/testing_tunnel"
   tag: "Documentation"
   text: "Learn about the Testing Tunnel"
 
