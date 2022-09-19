@@ -18,7 +18,7 @@ further_reading:
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
 
-{{< appsec-getstarted >}}
+{{% appsec-getstarted %}}
 - One of the [supported APM tracing integrations][1].
 - [CGO][2] is enabled in your build environment, along with the C library headers and the C toolchain for your compilation target. For detailed instructions, see [Enabling CGO][3]
 
@@ -96,7 +96,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{< /tabs >}}
 
-{{< appsec-getstarted-2 >}}
+{{% appsec-getstarted-2 %}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 

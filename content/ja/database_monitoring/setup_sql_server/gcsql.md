@@ -25,7 +25,7 @@ title: Google Cloud SQL マネージド SQL Server のデータベースモニ�
 サポートされている SQL Server バージョン
 : 2012、2014、2016、2017、2019
 
-{{< dbm-sqlserver-before-you-begin >}}
+{{% dbm-sqlserver-before-you-begin %}}
 
 ## Agent にアクセスを付与する
 

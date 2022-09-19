@@ -28,7 +28,7 @@ title: Azure SQL Server のデータベースモニタリングの設定
 サポートされている SQL Server バージョン
 : 2012、2014、2016、2017、2019
 
-{{< dbm-sqlserver-before-you-begin >}}
+{{% dbm-sqlserver-before-you-begin %}}
 
 ## Agent にアクセスを付与する
 

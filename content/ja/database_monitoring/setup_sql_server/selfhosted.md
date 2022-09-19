@@ -27,7 +27,7 @@ title: セルフホスト SQL Server のデータベースモニタリングの�
 サポートされている SQL Server バージョン
 : 2012、2014、2016、2017、2019
 
-{{< dbm-sqlserver-before-you-begin >}}
+{{% dbm-sqlserver-before-you-begin %}}
 
 ## Agent にアクセスを付与する
 
@@ -69,16 +69,16 @@ Agent を SQL Server ホストに直接インストールすることをお勧�
 
 {{< tabs >}}
 {{< tab "Windows Host" >}}
-{{< dbm-sqlserver-agent-setup-windows >}}
+{{% dbm-sqlserver-agent-setup-windows %}}
 {{< /tab >}}
 {{< tab "Linux Host" >}}
-{{< dbm-sqlserver-agent-setup-linux >}}
+{{% dbm-sqlserver-agent-setup-linux %}}
 {{< /tab >}}
 {{< tab "Docker" >}}
-{{< dbm-sqlserver-agent-setup-docker >}}
+{{% dbm-sqlserver-agent-setup-docker %}}
 {{< /tab >}}
 {{< tab "Kubernetes" >}}
-{{< dbm-sqlserver-agent-setup-kubernetes >}}
+{{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{< /tab >}}
 {{< /tabs >}}
 

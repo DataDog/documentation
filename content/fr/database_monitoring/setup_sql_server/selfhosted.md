@@ -26,7 +26,7 @@ Pour activer la solution Database Monitoring pour votre base de données, suive
 
 ## Avant de commencer
 
-{{< dbm-sqlserver-before-you-begin >}}
+{{% dbm-sqlserver-before-you-begin %}}
 
 ## Accorder un accès à l'Agent
 
@@ -48,10 +48,10 @@ Il est conseillé d'installer directement l'Agent sur le host SQL Server. En ef
 
 {{< tabs >}}
 {{< tab "Host Windows" >}}
-{{< dbm-sqlserver-agent-setup-windows >}}
+{{% dbm-sqlserver-agent-setup-windows %}}
 {{< /tab >}}
 {{< tab "Host Linux" >}}
-{{< dbm-sqlserver-agent-setup-linux >}}
+{{% dbm-sqlserver-agent-setup-linux %}}
 {{< /tab >}}
 {{< /tabs >}}
 
