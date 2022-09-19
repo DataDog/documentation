@@ -84,13 +84,13 @@ The sample `notes_app` application is a basic REST API that stores data in an in
 : Returns `{}` because there is nothing in the database yet
 
 `curl -X POST 'localhost:8080/notes?desc=hello'`
-: Adds a note with the description `hello` and an ID value of `1`.
+: Adds a note with the description `hello` and an ID value of `1`. Returns `(1, hello)`.
 
 `curl -X GET 'localhost:8080/notes?id=1'`
-: Returns the note with `id` value of `1`: `{ "1": "hello" }`
+: Returns the note with `id` value of `1`: `(1, hello)`
 
 `curl -X POST 'localhost:8080/notes?desc=otherNote`
-: Adds a note with the description `otherNote` and an ID value of `2`.
+: Adds a note with the description `otherNote` and an ID value of `2`. Returns `(2, otherNote)`
 
 `curl -X GET 'localhost:8080/notes'`
 : Returns the contents of the database: `{ "1": "hello", "2": "otherNote" }`
