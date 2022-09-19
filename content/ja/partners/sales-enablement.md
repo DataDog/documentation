@@ -4,6 +4,8 @@ kind: documentation
 private: true
 title: パートナーセールスイネーブルメントガイド
 ---
+Datadog パートナーネットワークでは、パートナー向けに多くのリソースを提供しています。これは、セールスエンジニア、ソリューションアーキテクト、テクニカルアカウントマネージャーなど、パートナー組織で Datadog の販売に技術的な側面から関わっている人向けのトレーニングの案内です。
+
 ## Datadog の基礎知識
 
 まず、<a href="https://partners.datadoghq.com/" target="_blank">パートナーポータル</a>にアクセスします。ログインして、**Training** をクリックします。Sales Certification の下にある、**Get started today** をクリックします。
@@ -31,9 +33,11 @@ title: パートナーセールスイネーブルメントガイド
 
 Datadog 販売認定を取得し、Datadog の基礎知識を身につけたら、デモ認定を取得しましょう。
 
+準備ができましたら、partner-support@datadoghq.com にお問い合わせの上、Datadog デモの配信に使用する DPN デモ組織への招待状をお受け取りください。招待状が届いたら、<a href="https://partners.datadoghq.com/" target="_blank">パートナーポータル</a>に進んでください。
+
 {{<img src="partners/portal_demo_go.png" alt="Partner Portal Demo Certification" style="max-width: 367px">}}
 
-このコースでは、技術デモの実施方法を学ぶだけでなく、Datadog の観測可能性へのアプローチと統合コラボレーションプラットフォームをさらに理解することができます。
+このハンズオンビデオコースでは、Datadog のコア製品のテクニカルデモを提供する方法を学びます。さらに、Datadog の観測可能性へのアプローチと統一されたコラボレーションプラットフォームについて理解することができます。
 
 ## 価値証明
 

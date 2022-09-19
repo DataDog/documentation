@@ -171,7 +171,9 @@ GKE は 2 つの異なる運用モードで構成することができます:
 
 Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーションは不要です (`Docker` または `containerd` をお使いの場合)。
 
-**注**: COS (Container Optimized OS) をお使いの場合、Kernel  ヘッダーがないため eBPF ベースの `OOM Kill` および `TCP Queue Length` チェックはサポートされません。
+**注**: COS (Container Optimized OS) を使用する場合、eBPF ベースの `OOM Kill` と `TCP Queue Length` チェックが Helm チャートのバージョン 3.0.1 以降でサポートされるようになりました。これらのチェックを有効にするには、以下の設定を行います。
+- `datadog.systemProbe.enableDefaultKernelHeadersPaths` を `false` にします。
+- `datadog.systemProbe.enableKernelHeaderDownload` を `true` にします。
 
 ### Autopilot
 

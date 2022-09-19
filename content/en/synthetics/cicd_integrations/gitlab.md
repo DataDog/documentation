@@ -54,7 +54,7 @@ synthetic-tests:
 
 ### Run tests using variable overrides
 
-If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, see the Synthetics command][5] in the `datadog-ci` NPM package.
+If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, see the Synthetics command](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics) in the `datadog-ci` NPM package.
 
 {{< code-block lang="yaml" >}}
 stages: 
@@ -101,4 +101,3 @@ A successful test output returns the following in GitLab:
 [2]: https://docs.gitlab.com/ee/ci/pipelines/
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
 [4]: /synthetics/cicd_integrations/configuration
-[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics

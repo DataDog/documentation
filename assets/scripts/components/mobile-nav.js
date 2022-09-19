@@ -46,7 +46,7 @@ if ((announcementBanner && window.getComputedStyle(announcementBanner).getProper
 }
 
 /* Open mobile nav (.dropdown-menu) 4th level where possible based off of desktop side nav state */
-function openMenu(menuItem, direction) {
+function openMenu(menuItem) {
     let currEl = menuItem
     // traverse the selected menu to the top (#main-nav) in order to open
     while(currEl.id != "mobile-nav"){
@@ -75,7 +75,17 @@ export function closeMobileNav(){
 
 export function setMobileNav () {
     const dataPath = window.location.pathname.slice(1,-1)
-    const mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
+    let mobileSelection = ''
+    // redirect the AGENT/aggregating agent path to INTEGRATIONS/observa... on mobile nav
+    if(dataPath.includes('integrations/observability_pipelines/integrate_vector_with_datadog')){
+        const observabilityPipelineMobile = document.querySelector('#mobile-nav a[data-path$="observability_pipelines"]');
+
+        mobileSelection = observabilityPipelineMobile.nextElementSibling.querySelector(
+            'a[data-path*="integrations/observability_pipelines/integrate_vector_with_datadog"]'
+        );
+    }else{
+        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
+    }
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
 
     if (mobileSelection) {
@@ -83,9 +93,9 @@ export function setMobileNav () {
     
         mobileSelection.classList.add('active')
         if(subMenu){
-            openMenu(subMenu, 'submenu')
+            openMenu(subMenu)
         }else if (parentMenu){
-            openMenu(parentMenu, 'parentMenu')
-        }   
+            openMenu(parentMenu)
+        }
     }
 }
