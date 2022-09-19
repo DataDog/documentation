@@ -5,6 +5,7 @@ description: Run Synthetic tests on-demand or at predefined intervals in your CI
 aliases: 
   - /synthetics/ci
   - /synthetics/cicd_testing
+  - /synthetics/cicd_integrations
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -51,13 +52,9 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 
 ## Use the CLI
 
-The [`@datadog/datadog-ci` package][1] allows you to run Synthetics tests directly within your CI/CD pipeline.
+The [`@datadog/datadog-ci` package][1] allows you to run Synthetics tests directly within your CI/CD pipeline. To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
 
-To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
-
-You can also trigger tests by searching with tags. For example: `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`.
-
-**Note:** This command works as an argument. Do not use this in your configuration files.
+You can trigger tests by searching with tags. For example, use `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`. This command works as an argument. Do not use this in your configuration files.
 
 ## Use the API
 
@@ -103,7 +100,7 @@ For more information, see the [Synthetics API endpoint documentation][5].
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /synthetics/cicd_integrations/configuration
+[3]: /continuous_testing/cicd_integrations/configuration
 [4]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
 [5]: /api/latest/synthetics/#get-details-of-batch
-[6]: /synthetics/cicd_integrations/configuration#configure-tests
+[6]: /continuous_testing/cicd_integrations/configuration#configure-tests

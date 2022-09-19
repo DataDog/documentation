@@ -68,6 +68,10 @@ nav_sections:
         link: synthetics/
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Continuous Testing
+        link: continuous_testing/
+        icon: synthetics
+        desc: Implement codeless end-to-end testing using CI/CD providers 
       - title: RUM & Session Replay
         link: real_user_monitoring/
         icon: rum

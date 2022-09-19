@@ -1,20 +1,23 @@
 ---
-title: CI/CD Integrations Configuration
+title: Synthetics and CI/CD Configuration
 kind: documentation
-description: Configure Synthetics to run test in your CI/CD pipelines
+description: Configure Synthetics to run tests in your CI/CD pipelines.
+aliases:
+  - /synthetics/cicd_integrations/configuration
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
+  tag: "Blog"
+  text: "Use Datadog's GitHub Action to add Synthetic testing to workflows"
 - link: "/synthetics/cicd_integrations"
   tag: "Documentation"
   text: "Learn about Synthetics and CI/CD"
-- link: "/synthetics/ci_results_explorer"
+- link: "/continous_testing/explorer"
   tag: "Documentation"
   text: "Learn about the CI Results Explorer"
-- link: "/synthetics/testing_tunnel"
+- link: "/continous_testing/cicd_integrations/testing_tunnel"
   tag: "Documentation"
   text: "Learn about the Testing Tunnel"
-- link: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
-  tag: "Blog"
-  text: "Use Datadog's GitHub Action to add Synthetic testing to workflows"
+
 ---
 
 <div class="alert alert-info">This page is about configuring Synthetic tests for your continuous integration (CI) pipelines. If you want to bring your CI metrics and data into Datadog dashboards, see the <a href="/continuous_integration/" target="_blank">Continuous Integration Visibility</a> section.</div>
@@ -388,12 +391,12 @@ You can also see your CI test results listed in the [CI Results Explorer][5] and
 
 {{< img src="synthetics/ci_results_explorer/ci_results_explorer.png" alt="CI Results Explorer" style="width:100%;">}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: https://github.com/TooTallNate/node-proxy-agent
-[3]: /synthetics/testing_tunnel/
+[3]: /continuous_testing/cicd_integrations/testing_tunnel/
 [4]: /api/latest/synthetics/#get-a-test-configuration
-[5]: /synthetics/ci_results_explorer
+[5]: /continuous_testing/explorer

@@ -2,6 +2,8 @@
 title: GitLab
 kind: documentation
 description: Configure your GitLab instance to run Synthetic tests in your CI/CD pipelines.
+aliases:
+  - /synthetics/cicd_integrations/gitlab
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
