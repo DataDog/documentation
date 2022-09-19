@@ -150,10 +150,10 @@ Add service ownership information such as the team name, Slack channels, and sou
 ## Registering a new service
 You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. Read [Setting Up Service Catalog][8] for more information.
 
-## Role-based access and Service Catalog permissions
+## Role based access and permissions
 
 For general information, see [Role Based Access Control][9] and [Role Permissions][10]. 
-### Service Catalog Read Permission
+### Read permission
 
 The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
 - Service Catalog list 
@@ -162,7 +162,7 @@ The Service Catalog read permission allows a user to read service catalog data, 
 
 The permission is enabled by default in the **Datadog Read Only Role** and **Datadog Standard Role**.
 
-### Service Catalog Write Permission
+### Write permission
 
 The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features: 
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definition` endpoint
