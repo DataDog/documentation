@@ -2,6 +2,7 @@ import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
 import { redirectToRegion } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
+import { initGlossaryJS } from './glossary';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
@@ -200,6 +201,11 @@ function loadPage(newUrl) {
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
             toggleMultiCodeLangNav(pageCodeLang);
+
+            // init glossary if needed
+            if (document.body.classList.contains('glossary')) {
+                initGlossaryJS();
+            }
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
