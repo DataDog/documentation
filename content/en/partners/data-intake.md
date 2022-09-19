@@ -5,7 +5,7 @@ description: "How data can be fed into Datadog and which prerequisites need to b
 private: true
 ---
 
-You've laid the groundwork and it's time to start getting data into Datadog.
+You've laid the groundwork, and it's time to start getting data into Datadog.
 
 Initially, the objective of this phase should be to gather data to provide immediate value to you or your clients. However, in the long run, you should consider this an ongoing process where you constantly assess changes to your environment by asking the following questions:
 - Have you or your clients employed a new technology?
@@ -20,8 +20,8 @@ You can provide immediate value to your clients through integrations. Datadog of
 
 There are three main categories of integrations:
 - Cloud service integrations
-- The Datadog Agent & Agent-based Integrations
-- APIs / Library Integrations & Custom Checks
+- The Datadog Agent & Agent-based integrations
+- APIs / library integrations & custom checks
 
 For more information on the different types of integrations, see [Introduction to Integrations][1].
 
@@ -33,7 +33,7 @@ Setting up a cloud service integration usually only takes a few minutes and deli
 
 **Note**: Cloud service integrations can generate large volumes of data which can have billing effects from both Datadog and the cloud provider.
 
-Be aware that in most scenarios, using a cloud service integration will not be sufficient to get a full understanding of the infrastructure and especially the applications that are running in these environments. We recommend leveraging all means of data collection in addition to cloud service integrations.
+Be aware that in most scenarios, using a cloud service integration will not be sufficient to get a full understanding of the infrastructure and especially the applications that are running in these environments. Datadog recommends leveraging all means of data collection in addition to cloud service integrations.
 
 To learn more about monitoring cloud environments, see:
 - [Monitoring the Cloud][2] (eBook)
@@ -41,9 +41,9 @@ To learn more about monitoring cloud environments, see:
 - [Introduction to Google Cloud Monitoring][4] (Blog)
 - [Introduction to Azure Cloud Monitoring][5] (Blog)
 
-## The Datadog Agent and Agent-based Integrations
+## The Datadog Agent and Agent-based integrations
 
-The Datadog Agent is software that runs on hosts and collects events and metrics to send to Datadog. The Agent is available for all commonly used platforms. While the agent itself can collect a number of metrics about the host it is running on, such as CPU, memory, disk, and network metrics, the real strength of the Agent is its integrations.
+The Datadog Agent is software that runs on hosts and collects events and metrics to send to Datadog. The Agent is available for all commonly used platforms. While the Agent itself can collect a number of metrics about the host it is running on (such as CPU, memory, disk, and network metrics) the real strength of the Agent is its integrations.
 
 Agent-based integrations allow the Agent to collect metrics, logs, traces,
 and events from applications and technologies running either directly on
@@ -84,7 +84,7 @@ For more information, see [Custom Checks][13].
 
 ### Local APIs for data ingestion on the Agent
 
-The Datadog Agent comes bundled with DogStatsD, a metrics aggregation service, which accepts data using UDP. DogStatsD is a good alternative if a custom check does not suit your use case and there are no existing integrations for the application. For example, you can use DogStatsD to collect events and metrics data from a cron job, which probably does not have its own log files.
+The Datadog Agent comes bundled with DogStatsD, a metrics aggregation service, which accepts data using UDP. DogStatsD is a good alternative if a custom check does not suit your use case, and there are no existing integrations for the application. For example, you can use DogStatsD to collect events and metrics data from a cron job, which probably does not have its own log files.
 
 You can either use the DogStatsD endpoints, or use a Datadog client library to facilitate the submission of metrics and events to DogStatsD.
 
@@ -110,7 +110,7 @@ When thinking about tagging, take into consideration the following factors:
 - **Role**: Allows you to understand which role an entity plays in a business service.
 - **Responsibility**: Allows the responsible team to filter all of their resources and enables other users and teams to identify which team is responsible for a certain service.
 
-To set yourself upo for success, make sure you read [Getting Started with Tags][18].
+To set yourself up for success, read [Getting Started with Tags][18].
 
 For more information on tagging and tagging strategy, see:
 - [Best practices for tagging your infrastructure and applications][19] (Blog)
@@ -135,7 +135,7 @@ Depending on the platform and operating system, there might be different prerequ
 
 The main prerequisite for the Agent on any platform is network connectivity. Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent. Except in rare cases, inbound connectivity (limited through local firewalls) is not a factor for Agent deployments.
 
-To work properly, the Agent requires the ability to send traffic to the Datadog service over SSL over 443/tcp. For a full list of ports used by the agent, see [Network Traffic][26].
+To work properly, the Agent requires the ability to send traffic to the Datadog service over SSL over 443/tcp. For a full list of ports used by the Agent, see [Network Traffic][26].
 
 In some circumstances, Agent version-specific endpoints can cause maintenance problems, in which case Datadog can provide a version-agnostic endpoint. If you need a version-agnostic endpoint, contact Datadog support.
 
@@ -147,26 +147,26 @@ For more information, see [Agent Proxy Configuration][27].
 
 ### Agent deployment, upgrade, and configuration
 
-There are various ways to deploy the Datadog Agent to your own and your client's infrastructure. As most service providers already have some configuration management tool in place, it is good practice to use the existing tool for Agent rollout.
+There are various ways to deploy the Datadog Agent to your own and your client's infrastructure. As most service providers already have a configuration management tool in place, it is a good practice to use the existing tool for Agent rollout.
 
-Here are some examples of how to manage your Datadog Agent estate with configuration management tools:
+Here are some examples of how to manage your Datadog Agent with configuration management tools:
 - [Deploying Datadog Agents with Chef][28] (Blog)
 - [Puppet + Datadog: Automate + monitor your systems][7] (Blog)
 - [Deploying and Configuring Datadog with CloudFormation][29] (Blog)
 - [How to Use Ansible to Automate Datadog Configuration][30] (Video)
-- [How to deploy the Datadog agent on AWS hosts with Ansible dynamic inventories][31] (Blog)
+- [How to deploy the Datadog Agent on AWS hosts with Ansible dynamic inventories][31] (Blog)
 
-If you don't plan on using Datadog's repositories, you can always find the latest Agent releases in the [public Github repository][32]. It is recommended that you [verify the distribution channel][33] of Agent packages before deployment.
+If you don't plan on using Datadog's repositories, you can always find the latest Agent releases in the [public GitHub repository][32]. It is recommended that you [verify the distribution channel][33] of Agent packages before deployment.
 
 ### Monitoring the continuous provisioning processes
 
-While it is good practice to use configuration management tools for deploying Datadog, you can also leverage Datadog to monitor proper operation of these tools. Here are some examples:
+While it is a good practice to use configuration management tools for deploying Datadog, you can also leverage Datadog to monitor proper operation of these tools. Here are some examples:
 - [Ask your systems what's going on: monitor Chef with Datadog][34] (Blog)
 - [Ansible + Datadog: Monitor your automation, automate your monitoring][35] (Blog)
 
 ## What's next?
 
-Now that you have data flowing into Datadog, it's time to focus on [Delivering value][36] to your clients.
+Now that you have data flowing into Datadog, it's time to focus on [delivering value][36] to your clients.
 
 
 [1]: /getting_started/integrations/

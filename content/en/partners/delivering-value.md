@@ -13,7 +13,7 @@ Monitors and alerts draw human attention to particular systems and services that
 - Monitors - the definitions for alert conditions
 - Downtimes - time periods when alerts should be raised or suppressed
 
-To familiarize yourself with the concept of Monitors in general, see the following resources:
+To familiarize yourself with the concept of monitors in general, see the following resources:
 - [Alerting][1]
 - [Monitoring 101 - Alerting on what matters][2] (blog).
 - [Intro to Monitoring][3] (Training).
@@ -26,7 +26,7 @@ Before starting a migration project, review existing alert and threshold definit
 - Does the metric have a time-based variation? An [anomaly monitor][4] might be a better approach.
 - Does the metric have a load-based variation? An [arithmetic monitor][5] might be the best approach by combining a metric with a load-indicating metric. For example, load on the systems might be higher if there are more users using a service.
 - Is the absolute value of the metric less important than the rate of change? A [change monitor][6] or a [forecast monitor][7] might be the best approach.
-- Is the value of the metric itself less important than whether it is different from the value for other hosts or entities. For example, is one node in a cluster experiencing high latency while other nodes are not. The [outlier monitor][8] is the best approach in this scenario.
+- Is the value of the metric itself less important than whether it is different from the value for other hosts or entities? For example, is one node in a cluster experiencing high latency while other nodes are not? The [outlier monitor][8] is the best approach in this scenario.
 - Do only a combination of multiple metrics present an actionable situation? [Composite monitors][9] offer a solution that doesn't require scripting.
 
 ### Programmatic monitor management
@@ -43,7 +43,7 @@ Ensure that you [tag monitors][13] to make the management of large numbers of mo
 
 You might run into technologies your clients operate that you do not have a lot of experience with. Datadog offers [Recommended Monitors][14] to help you onboard new technologies quickly and confidently.
 
-To find out more about Monitors, see:
+To find out more about monitors, see:
 - [Manage Monitors][15]
 - [Monitors][16]
 - [Creating Dynamic Alerts Using Tag Values][17] (Video)
@@ -51,7 +51,7 @@ To find out more about Monitors, see:
 
 ### Downtimes
 
-A common problem with monitors and alerts is alert fatigue, where an overabundance of alarms or notifications causes desensitization to the alarms. One way to combat alert fatigue is to limit the number of false positive alarms. This is especially pertinent in controlled situations such as planned system shutdowns, maintenance, or upgrade-windows.
+A common problem with monitors and alerts is alert fatigue, where an overabundance of alarms or notifications causes desensitization to the alarms. One way to combat alert fatigue is to limit the number of false positive alarms. This is especially pertinent in controlled situations such as planned system shutdowns, maintenance, or upgrade windows.
 
 Datadog's Downtimes offer you and your clients a way to mute monitors during times of planned (or ad hoc) maintenance.
 
@@ -76,17 +76,17 @@ Datadog offers various channels through which you or your clients can notify use
   - [PagerDuty][25]
   - [Flowdock][26]
   - [ServiceNow][27]
-  - [Google Hangouts Chat][28]
+  - [Google Chat][28]
   - [Microsoft Teams][29]
   - And [many more][19]
 
-You can also invoke any REST API using the generic [Webhooks integration][30]. You use a Webhooks integration to not only notify users but also to trigger automatic remediation workflows.
+You can also invoke any REST API using the generic [Webhooks integration][30]. You use a Webhooks integration to not only notify users, but also to trigger automatic remediation workflows.
 
 To find out more about notifications, see:
 - [Notifications][31]
 - [Send SMS Alerts with Webhooks and Twilio][32] (Blog)
 
-## Setting up visualizations with Dashboards
+## Setting up visualizations with dashboards
 
 Visualizations are a great way to give your clients a clear picture of complex tech stacks and the abundance of metrics and events being collected. Dashboards are a natural starting point to investigate a potential issue you or your client was notified about by a monitor.
 
@@ -114,7 +114,7 @@ To find out more about Dashboards, see:
 ### Visualizations for users without Datadog access
 
 Depending on your business model, your clients might not require access to Datadog themselves. However, you might still want to provide Datadog visualizations to your clients. You have the following options for providing Datadog visualizations:
-- [Dashboard sharing][42]: Provide a status page to your clients by sharing a public URL to a read-only dashboard, or share the dashboard privately using an individual e-mail address.
+- [Dashboard sharing][42]: Provide a status page to your clients by sharing a public URL to a read-only dashboard, or share the dashboard privately using an individual email address.
   - As a service provider, your business needs to be able to scale. [Managing shared dashboards using Datadog's APIs][40] is the most efficient approach.
 - Embeddable graphs: If you have a client portal in which you want to present Datadog information, embeddable graphs are the way to go. Using parameters, you can filter data according to your needs. For more information, see:
   - [Embeddable Graphs API][43]
