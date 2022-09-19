@@ -675,7 +675,9 @@ Because you can run several containers for one single private location with a si
 
 You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
-For more information, see [Dimensioning Private Locations][18].
+For more information, see [Dimensioning Private Locations][18]. 
+
+In order to use private locations for continuous testing, the value you set for the `concurrency` parameter is the concurrency limit. For more information, see [Continuous Testing][23].
 
 ## Monitor your private location
 
@@ -695,7 +697,7 @@ If you are using the [custom role feature][21], add your user to a custom role t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_integrations
+[1]: /continuous_testing/cicd_integrations
 [2]: /synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/
@@ -717,3 +719,4 @@ If you are using the [custom role feature][21], add your user to a custom role t
 [20]: /account_management/rbac/permissions
 [21]: /account_management/rbac#custom-roles
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
+[23]: /continuous_testing/cicd_integrations/configuration
