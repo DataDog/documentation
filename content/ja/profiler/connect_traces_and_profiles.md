@@ -148,7 +148,7 @@ Go の Code Hotspots の識別を有効にするには、[サービスのプロ�
 
 ### 前提条件
 
-{{< programming-lang-wrapper langs="python,go,ruby" >}}
+{{< programming-lang-wrapper langs="python,go,ruby,php" >}}
 {{< programming-lang lang="python" >}}
 
 [Python][1] サービスでプロファイリングを有効にすると、エンドポイントプロファイリングがデフォルトで有効になります。この機能を利用するには、 `dd-trace-py` バージョン 0.54.0 またはそれ以上が必要です。
@@ -179,6 +179,14 @@ Go の Code Hotspots の識別を有効にするには、[サービスのプロ�
 <p></p>
 
 [1]: /ja/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+[PHP][1] サービスでプロファイリングを有効にすると、 エンドポイントプロファイリングがデフォルトで有効になります。これには [`ddtrace`][2] v0.79.0+ が必要です。エンドポイントプロファイリングを無効にするには、環境変数 `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED` を `0`、`no`、`off` あるいは `false` に設定します。
+<p></p>
+
+[1]: /ja/profiler/enabling/php
+[2]: https://github.com/DataDog/dd-trace-php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

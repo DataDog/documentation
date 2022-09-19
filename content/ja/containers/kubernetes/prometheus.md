@@ -48,6 +48,39 @@ Datadog メトリクスにおける Prometheus および OpenMetrics メトリ�
 
 OpenMetrics/Prometheus のメトリクスを公開する **pod** に以下の `annotations` を適用し、オートディスカバリーを使用して OpenMetrics または Prometheus のチェックを構成します。
 
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+```yaml
+# (...)
+metadata:
+  #(...)
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+      {
+        "openmetrics": {
+          "init_config": {},
+          "instances": [
+            {
+              "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
+              "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
+              "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
+
+            }
+          ]
+        }
+      }
+
+spec:
+  containers:
+    - name: '<CONTAINER_IDENTIFIER>'
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes (AD v1)" %}}
+
 ```yaml
 # (...)
 metadata:
@@ -69,6 +102,9 @@ spec:
   containers:
     - name: '<CONTAINER_IDENTIFIER>'
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 コンフィギュレーションには次のプレースホルダー値を使用します。
 
@@ -92,8 +128,42 @@ spec:
 1. [Datadog Agent を起動します][10]。
 
 2. [Prometheus `prometheus.yaml`][11] を使用して、ポッドにオートディスカバリーの構成をした Prometheus Deployment の例を起動します。
+   {{< tabs >}}
+   {{% tab "Kubernetes (AD v2)" %}}
 
-    ```yaml
+   **注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+   ```yaml
+     # (...)
+    spec:
+      template:
+        metadata:
+          annotations:
+            ad.datadoghq.com/prometheus-example.checks: |
+              {
+                "openmetrics": {
+                  "instances": [
+                    {
+                      "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+                      "namespace": "documentation_example_kubernetes",
+                      "metrics": [
+                          {"promhttp_metric_handler_requests": "handler.requests"},
+                          {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+                          "go_memory.*"
+                        ]
+                    }
+                  ]
+                }
+              }
+        spec:
+          containers:
+          - name: prometheus-example
+          # (...)
+   ```
+   {{% /tab %}}
+   {{% tab "Kubernetes (AD v1)" %}}
+
+   ```yaml
      # (...)
     spec:
       template:
@@ -119,7 +189,10 @@ spec:
           containers:
           - name: prometheus-example
           # (...)
-    ```
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
 
     Prometheus Deployment を作成するコマンド:
 

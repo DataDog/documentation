@@ -162,6 +162,14 @@ function getPathElement(event = null) {
         );
     }
 
+    if (path.includes('integrations/observability_pipelines/integrate_vector_with_datadog')) {
+        const integrationsEl = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
+        sideNavPathElement = integrationsEl.nextElementSibling.querySelector(
+            '[data-path*="integrations/observability_pipelines/integrate_vector_with_datadog"]'
+        );
+        mobileNavPathElement = sideNavPathElement;
+    }
+
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
