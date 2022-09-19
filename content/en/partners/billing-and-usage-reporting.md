@@ -9,7 +9,7 @@ Read on for information on how to monitor both individual client and aggregate u
 
 With a Datadog [admin role][1] in the parent organization, you can view the total and billable usage of all your organizations, both child and parent, as well as how your clients' usage has changed over the past six months. For more information, see [Multi-org usage][2].
 
-Usage is aggregated across all child organizations and billed at the parent organization level. From the parent organization, those with an admin role can view aggregate usage across all child organizations as well as drill into usage of individual child organizations.
+Usage is aggregated across all child organizations and billed at the parent organization level. From the parent organization, those with an admin role can view aggregate usage across all child organizations as well as further analyze usage of individual child organizations.
 
 In case existing roles are not flexible enough for you or your client organization, you can create new custom roles. With custom roles, in addition to the general permissions, it is possible to define more granular permissions for specific assets or data types. You can find the list of permissions specific to billing and usage assets [in the Role Based Access Control documentation][3].
 
