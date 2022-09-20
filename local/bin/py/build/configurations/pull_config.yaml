@@ -809,6 +809,25 @@
     - action: pull-and-push-file
       branch: main
       globs:
+      - 'docs/codepush.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'codepush.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/codepush.md"]
+          title: CodePush
+          kind: documentation
+          description: 'Learn how to use a client-side React Native module to interact with Appcenter Codepush and Datadog.'
+          further_reading:
+            - link: 'https://github.com/DataDog/dd-sdk-reactnative'
+              tag: 'GitHub'
+              text: 'dd-sdk-reactnative Source code'
+            - link: 'real_user_monitoring/reactnative/'
+              tag: 'Documentation'
+              text: "Learn about React Native Monitoring"
+    - action: pull-and-push-file
+      branch: main
+      globs:
       - 'docs/expo_crash_reporting.md'
       options:
         dest_path: '/real_user_monitoring/error_tracking/'

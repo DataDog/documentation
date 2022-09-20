@@ -1297,10 +1297,25 @@ components:
           nullable: true
           type: array
         default:
-          description: The default value for the template variable on dashboard load.
+          deprecated: true
+          description: (deprecated) The default value for the template variable on
+            dashboard load. Cannot be used in conjunction with `defaults`.
           example: my-host
           nullable: true
           type: string
+        defaults:
+          description: One or many default values for template variables on load.
+            If more than one default is specified, they will be unioned together with
+            `OR`. Cannot be used in conjunction with `default`.
+          example:
+          - my-host-1
+          - my-host-2
+          items:
+            description: One of many default values for the template variable on dashboard
+              load.
+            minLength: 1
+            type: string
+          type: array
         name:
           description: The name of the variable.
           example: host1
@@ -1333,8 +1348,21 @@ components:
           description: The name of the variable.
           type: string
         value:
-          description: The value of the template variable within the saved view.
+          deprecated: true
+          description: (deprecated) The value of the template variable within the
+            saved view. Cannot be used in conjunction with `values`.
           type: string
+        values:
+          description: One or many template variable values within the saved view,
+            which will be unioned together using `OR` if more than one is specified.
+            Cannot be used in conjunction with `value`.
+          items:
+            description: One or many values of the template variable within the saved
+              view.
+            minLength: 1
+            type: string
+          minItems: 1
+          type: array
       type: object
     DashboardType:
       description: The type of the associated private dashboard.
