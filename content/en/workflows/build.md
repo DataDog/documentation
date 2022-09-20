@@ -14,7 +14,7 @@ To create a workflow, click **New workflow**, enter a name for the workflow, and
 
 1. Click an integration in the catalog pane and drag the desired step onto the workflow canvas. You can also search for a step using the search bar.
 {{< img src="workflows/add-step.mp4" alt="Drag a step onto the workflow canvas" video="true"  >}}
-1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Using context variables](#using-context-variables)(#inputs-outputs-and-context-variables).
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Using context variables](#context-variables).
 1. After you're done configuring the step, drag another step onto the workflow canvas to continue building out your workflow, or save the workflow if you're done.
 
 You can edit a step in the workflow at any time by clicking on it.
@@ -71,9 +71,7 @@ An example of a workflow with a single step that sends a message to a Slack chan
 }
 {{< /code-block >}}
 
-## Trigger a workflow
-
-## Using context variables
+## Context variables
 
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data that comes from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
@@ -106,18 +104,14 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 
 ### Trigger variables
 
-You can pass trigger variables into a workflow using a webhook or when you run a workflow manually. Workflows expect a JSON object of comma-separated key-value pairs. You can access a trigger variable using the syntax `{{ Trigger.key }}`. For example, to retrieve the trigger variable `{ "user": "Bits" }`, use ` {{ Trigger.user }}`. 
+You can pass trigger variables into a workflow as inputs. Workflows accept a JSON object of comma-separated key-value pairs. You can access a trigger variable in your workflow steps using the syntax `{{ Trigger.key }}`. For example, to access the trigger variable `{ "user": "Bits" }`, use ` {{ Trigger.user }}` in your step.
 
-#### Configure trigger variables in manual runs
+If you add a trigger variable that doesn't exist, the variable is automatically added as a workflow input.
 
-To configure trigger variables for a manual run:
-1. 
-1. When you're ready to run your workflow
-
-#### Configure trigger variables in webhooks
-To configure 
-
+{{< img src="workflows/add-trigger-variable.mp4" alt="Adding a trigger variable to a step automatically adds it to the workflow" video="true" >}}
 
 ## Fallback on errors
+
+TODO: Something about heading to triggers next
 
 [1]: https://app.datadoghq.com/workflow
