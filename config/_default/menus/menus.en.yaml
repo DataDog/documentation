@@ -2801,7 +2801,7 @@ main:
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integraions_testing_tunnel
     weight: 107
-  - name: CI Results Explorer
+  - name: Explorer
     url: continuous_testing/explorer/
     parent: continuous_testing
     identifier: continuous_testing_explorer

@@ -1,13 +1,13 @@
 ---
-title: Synthetics and CI/CD Configuration
+title: Continuous Testing and CI/CD Configuration
 kind: documentation
-description: Configure Synthetics to run tests in your CI/CD pipelines.
+description: Configure Continuous Testing to run tests in your CI/CD pipelines.
 aliases:
   - /synthetics/cicd_integrations/configuration
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
   tag: "Blog"
-  text: "Use Datadog's GitHub Action to add Synthetic testing to workflows"
+  text: "Use Datadog's GitHub Action to add continuous testing to workflows"
 - link: "/synthetics/cicd_integrations"
   tag: "Documentation"
   text: "Learn about Synthetics and CI/CD"

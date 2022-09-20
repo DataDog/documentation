@@ -1,7 +1,7 @@
 ---
-title: Synthetics and CI/CD Troubleshooting
+title: Continuous Testing and CI/CD Troubleshooting
 kind: documentation
-description: Learn about Synthetics and CI/CD concepts and troubleshoot common errors.
+description: Learn about Continuous Testing and CI/CD concepts and troubleshoot common errors.
 aliases:
   - /synthetics/cicd_integrations/troubleshooting
 further_reading:

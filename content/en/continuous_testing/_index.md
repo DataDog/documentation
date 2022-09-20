@@ -1,24 +1,24 @@
 ---
 title: Continuous Testing
 kind: documentation
-description: With test automation, use fast, codeless, and reliable testing in your CI pipelines to ship features with confidence.
+description: With test automation, use fast, codeless, and reliable testing in your CI/CD pipelines to ship features with confidence.
 disable_sidebar: true
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline'
   tag: 'Learning Center'
-  text: 'Synthetic Tests in a CI/CD Pipeline'
+  text: 'Continuous Testing in a CI/CD Pipeline'
 - link: '/continuous_testing/troubleshooting/'
   tag: 'Documentation'
-  text: 'Synthetics and CI/CD Troubleshooting'
+  text: 'Continuous Testing and CI/CD Troubleshooting'
 ---
 
-With **end-to-end testing in production and CI environments**, your development teams can proactively ensure that defective code does not impact your users' experience. 
+With **integration and end-to-end testing in production and CI environments**, your development teams can proactively ensure that defective code does not impact your users' experience. 
 
 You can run Synthetic tests on a CI pipeline in the [Datadog application][1], with the [API][2], or with [Terraform][2].
 
 ## Run tests with your integration and deployment processes
 
-Leverage your Synthetic tests as [canary deployments][3] or run them directly in your [CI pipelines][3].
+Leverage your Synthetic tests as [integration and end-to-end tests][3] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][3].
 
 {{< img src="synthetics/ci.png" alt="CI tests" style="width:100%;">}}
 
