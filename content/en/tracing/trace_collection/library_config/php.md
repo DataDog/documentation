@@ -137,7 +137,7 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
 **Default**: `false`<br>
-The tracer will attempt to send stats to DogStatsD when enabled. In addition, where sigaction is available at build time, the tracer will send uncaught exception metrics upon segfaults.
+When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the tracer sends uncaught exception metrics upon segfaults.
 
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
 : **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
@@ -167,17 +167,19 @@ The Agent request transfer timeout (in milliseconds).
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **Default**: `null`<br>
-The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. Added in version `0.47.1`. Supports UDS (Unix Domain Sockets) via `unix://`.
+The Agent URL. This setting takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.<br>
+**Example**: `https://localhost:8126`<br>
+Added in version `0.47.1`. Supports Unix Domain Sockets (UDS) through `unix://`.
 
 `DD_DOGSTATSD_URL`
 : **INI**: `datadog.dogstatsd_url`<br>
 **Default**: `null`<br>
-The URL used to negotiate connection to DogStatsD; takes precedence over `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. Supports `udp://` or `unix://` schemas only.
+The URL used to negotiate connection to DogStatsD. This setting takes precedence over `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. Supports `udp://` or `unix://` schemas only.
 
 `DD_DOGSTATSD_PORT`
 : **INI**: `datadog.dogstatsd_port`<br>
 **Default**: `8125`<br>
-The port used to connect to DogStatsD, will be used in combination with `DD_AGENT_HOST` to negotiate connection to DogStatsD where `DD_TRACE_HEALTH_METRICS_ENABLED` is enabled.
+The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` to negotiate connection to DogStatsD when `DD_TRACE_HEALTH_METRICS_ENABLED` is enabled.
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
@@ -308,8 +310,8 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 **Default**: `Datadog`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
-  - [B3 single header][8]
+  - [B3][6]
+  - [B3 single header][7]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
@@ -317,8 +319,8 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
 **Default**: `Datadog,B3,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
-  - [B3 single header][8]
+  - [B3][6]
+  - [B3 single header][7]
   - Datadog
 
 #### Integration names
@@ -411,7 +413,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][6] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][8] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Further Reading
@@ -423,6 +425,6 @@ When the application runs in a docker container, the path `/proc/self` should al
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
-[6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[7]: https://github.com/openzipkin/b3-propagation
-[8]: https://github.com/openzipkin/b3-propagation#single-header
+[6]: https://github.com/openzipkin/b3-propagation
+[7]: https://github.com/openzipkin/b3-propagation#single-header
+[8]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
