@@ -4,18 +4,14 @@ kind: Documentation
 is_beta: true
 private: true
 further_reading:
-    - link: 'agent'
+    - link: '/agent/'
       tag: 'Documentation'
       text: 'Getting Started with Datadog Agent'
 ---
 
-The Dynamic Instrumentation is released as part of the Datadog tracing
-libraries. If you are already using [APM to collect traces][1] for your
-application, you can skip installing the library, but you still have to enable
-Dynamic Instrumentation for your application.
+Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your tracing library is up-to-date and then enable Dynamic Instrumentation for your application.
 
-Select your runtime below to learn how to enable Dynamic Instrumentation for
-your application:
+Select your runtime below to learn how to enable Dynamic Instrumentation for your application:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
