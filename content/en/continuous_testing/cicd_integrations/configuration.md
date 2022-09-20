@@ -10,7 +10,7 @@ further_reading:
   text: "Use Datadog's GitHub Action to add continuous testing to workflows"
 - link: "/synthetics/cicd_integrations"
   tag: "Documentation"
-  text: "Learn about Synthetics and CI/CD"
+  text: "Learn about Continuous Testing and CI/CD"
 - link: "/continuous_testing/explorer"
   tag: "Documentation"
   text: "Learn about the CI Results Explorer"

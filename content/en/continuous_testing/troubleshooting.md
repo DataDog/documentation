@@ -7,12 +7,12 @@ aliases:
 further_reading:
 - link: "/synthetics/cicd_integrations/configuration"
   tag: "Documentation"
-  text: "Learn how to configure Synthetics and CI/CD"
+  text: "Learn how to configure Continuous Testing and CI/CD"
 ---
 
 ## Overview
 
-This page provides information to help you troubleshoot issues with Synthetics and CI/CD. If you need additional help, contact [Datadog support][1].
+This page provides information to help you troubleshoot issues with Continuous Testing and CI/CD. If you need additional help, contact [Datadog support][1].
 
 ## Terminology
 

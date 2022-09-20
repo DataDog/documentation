@@ -32,7 +32,7 @@ If you would like to be added to the Windows Private Location beta, reach out to
 Private locations allow you to **monitor internal-facing applications or any private endpoints** that aren’t accessible from the public internet. They can also be used to:
 
 * **Create custom Synthetic locations** in areas that are mission-critical to your business.
-* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetics and CI/CD][1].
+* **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][1].
 * **Compare application performance** from both inside and outside your internal network.
 
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any regular managed location.

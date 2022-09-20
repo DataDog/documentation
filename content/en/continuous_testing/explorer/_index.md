@@ -22,7 +22,7 @@ further_reading:
 
 The [CI Results Explorer][1] provides visibility into the CI jobs executing your Synthetic tests. 
 
-{{< img src="synthetics/ci_results_explorer/ci_results_explorer_1.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/explorer_ci_batches.png" alt="CI Results Explorer" style="width:100%;">}}
 
 You can accomplish the following actions:
 
@@ -38,6 +38,8 @@ The CI Results Explorer displays batches of tests run by [Synthetics and your CI
 1. Click on a batch to open a side panel containing batch CI metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
 3. Click on a failing test result to see the detailed **Test Result** page and investigate the root cause of the issue.
+
+{{< img src="continuous_testing/explorer/explorer_ci_batches_sidepanel.png" alt="CI Results Explorer" style="width:100%;">}}
 
 For more information about search, see [Search Test Batches][4].
 

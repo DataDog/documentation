@@ -1,5 +1,5 @@
 ---
-title: Synthetics and CI/CD
+title: Continuous Testing and CI/CD
 kind: documentation
 description: Run Synthetic tests on-demand or at predefined intervals in your CI/CD pipelines.
 aliases: 
@@ -34,7 +34,7 @@ further_reading:
 
 In addition to running tests at predefined intervals, you can run Datadog Synthetic tests on-demand by using the `@datadog/datadog-ci` package or the API. Run Datadog Synthetic tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
 
-Use Synthetics and CI/CD to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
+Use Continuous Testing and CI/CD to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
 
 This functionality reduces time spent fixing issues in production by proactively catching bugs and regressions earlier in the process, allowing your engineering teams to focus on non-urgent work instead. 
 
@@ -42,7 +42,7 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 
 ## Integrations
 
-{{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in any CI platform provider of choice. See the documentation for information about the following integrations:" >}}
+{{< whatsnext desc="With Continuous Testing and CI/CD, you can run Synthetic tests in any CI platform provider of choice. See the documentation for information about the following integrations:" >}}
     {{< nextlink href="synthetics/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
