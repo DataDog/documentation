@@ -807,14 +807,14 @@
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
-      branch: develop
+      branch: main
       globs:
       - 'docs/codepush.md'
       options:
         dest_path: '/real_user_monitoring/reactnative/'
         file_name: 'codepush.md'
         front_matters:
-          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/codepush.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/codepush.md"]
           title: CodePush
           kind: documentation
           description: 'Learn how to use a client-side React Native module to interact with Appcenter Codepush and Datadog.'
