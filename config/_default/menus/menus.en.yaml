@@ -1300,7 +1300,11 @@ main:
     identifier: workflows
     parent: platform_heading
     weight: 140000
+<<<<<<< HEAD
   - name: Set up Workflows
+=======
+  - name: Set up Workflows 
+>>>>>>> 57b87a4270 (wip)
     url: workflows/setup/
     parent: workflows
     identifier: workflows_setup
@@ -1310,11 +1314,16 @@ main:
     parent: workflows
     identifier: workflows_build
     weight: 2
+  - name: Trigger Workflows
+    url: workflows/trigger/
+    parent: workflows
+    identifier: workflows_trigger
+    weight: 3
   - name: Actions Catalog
     url: workflows/actions_catalog/
     parent: workflows
     identifier: workflows_actions_catalog
-    weight: 3
+    weight: 4
   - name: Generic Actions
     url: workflows/actions_catalog/generic_actions/
     parent: workflows_actions_catalog
@@ -1324,7 +1333,7 @@ main:
     url: workflows/debug/
     parent: workflows
     identifier: workflows_debug
-    weight: 4
+    weight: 5
   - name: APM
     url: tracing/
     pre: apm
