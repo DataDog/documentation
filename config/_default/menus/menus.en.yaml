@@ -2936,21 +2936,26 @@ main:
     parent: rum
     identifier: rum_reactnative
     weight: 4
+  - name: Advanced Configuration
+    url: real_user_monitoring/reactnative/advanced_configuration/
+    parent: rum_reactnative
+    identifier: rum_reactnative_advanced_configuration
+    weight: 401
   - name: Mobile Vitals
     url: real_user_monitoring/reactnative/mobile_vitals/
     parent: rum_reactnative
     identifier: rum_reactnative_mobile_vitals
-    weight: 401
+    weight: 402
   - name: Expo
     url: real_user_monitoring/reactnative/expo/
     parent: rum_reactnative
     identifier: rum_reactnative_expo
-    weight: 402
+    weight: 403
   - name: CodePush
     url: real_user_monitoring/reactnative/codepush/
     parent: rum_reactnative
     identifier: rum_reactnative_codepush
-    weight: 403
+    weight: 404
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum

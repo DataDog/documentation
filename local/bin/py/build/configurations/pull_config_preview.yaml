@@ -738,12 +738,31 @@
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
               text: "dd-sdk-reactnative Source code"
-            - link: "real_user_monitoring/explorer/"
-              tag: "Documentation"
-              text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
               text: "Monitor React Native applications"
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/advanced_configuration.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'advanced_configuration.md'
+        front_matters:
+          title: RUM React Native Advanced Configuration
+          kind: documentation
+          description: Learn about advanced configuration options for your React Native setup.
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/advanced_configuration.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "real_user_monitoring/reactnative/"
+              tag: "Documentation"
+              text: "Learn about React Native Monitoring"  
     - action: pull-and-push-file
       branch: main
       globs:
