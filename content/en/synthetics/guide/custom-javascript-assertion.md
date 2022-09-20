@@ -58,7 +58,7 @@ localStorage.setItem(keyName, keyValue);
 return true
 {{< /code-block >}}
 
-For example, to set the number of milliseconds elpased since January 1, 1970, 00:00:00 UTC to "mytime":
+For example, to set the number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC to "mytime":
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem(“mytime”, Date.now());
