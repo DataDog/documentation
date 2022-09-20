@@ -1,6 +1,14 @@
 .glossary-main {
     h4 {
         text-transform: none;
+
+        @include media-breakpoint-up(md) {
+            scroll-margin-top: 30px;
+        }
+
+        @include media-breakpoint-up(lg) {
+            scroll-margin-top: 40px;
+        }
     }
     
     #glossary-nav {
