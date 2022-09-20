@@ -25,7 +25,9 @@ Il existe d'autres [métriques et attributs propres à un type d'événement don
 | Vue       | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Une vue est lancée et mise en pause lorsque les rappels `viewDidAppear(animated:)` et `viewDidDisappear(animated:)` sont effectués sur la classe `UIViewController`. Chaque `UIViewController` est considéré comme une vue distincte. Tant que l'utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources et Actions) sont joints à la vue, avec un `view.id` unique.                           |
 | Ressource   | 15 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts first party, des API et des fournisseurs tiers. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                       |
 | Error      | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                                                                        |
-| Action     | 30 jours   | Une action représente l'activité utilisateur dans votre application mobile (par exemple, le lancement de l'application ou une action de toucher, de balayage ou de retour). Chaque action possède un `action.id` unique joint à la vue à son origine.                                                                                                      |
+| Action     | 30 jours   | Une action représente l'activité utilisateur dans votre application mobile (par exemple, le lancement de l'application ou une action de toucher, de balayage ou de retour). Chaque action possède un `action.id` unique joint à la vue à son origine.                                                                                                                                              |
+| Tâche longue | 30 jours | Un événement de tâche longue est généré lorsqu'une tâche bloque dans l'application le thread principal pendant une durée supérieure au seuil défini. |
+
 
 Le schéma suivant présente la hiérarchie des événements RUM :
 
@@ -119,7 +121,7 @@ Vous pouvez activer la [surveillance des informations utilisateur][2] de façon 
 | `session.type`               | chaîne | Le type de la session (`user`).                                              |
 | `session.is_active`          | booléen | Indique si la session est actuellement active. Une session prend fin lorsqu'un utilisateur quitte l'application ou ferme la fenêtre du navigateur. Elle expire après 4 heures d'activité ou 15 minutes d'inactivité.                               |
 | `session.initial_view.url`   | chaîne | L'URL de la vue initiale de la session.                                     |
-| `ssession.initial_view.name` | chaîne | Le nom de la vue initiale de la session.                                    |
+| `session.initial_view.name` | chaîne | Le nom de la vue initiale de la session.                                    |
 | `session.last_view.url`      | chaîne | L'URL de la dernière vue de la session.                                        |
 | `session.last_view.name`     | chaîne | Le nom de la dernière vue de la session.                                       |
 | `session.ip`                 | chaîne | L'adresse IP de la session extraite à partir de la connexion TCP de l'admission. |
@@ -223,7 +225,7 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 
 Avant que les données ne soient importées dans Datadog, elles sont stockées en clair dans le répertoire cache (`Library/Caches`) du [bac à sable de votre application][3]. Aucune autre application installée sur l'appareil ne peut lire ces données.
 
-## Pour aller plus loin
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
