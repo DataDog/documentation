@@ -116,7 +116,7 @@ To remove the filter, open the same menu item and click **Delete Filter**.
 [2]: https://github.com/DataDog/dd-trace-java
 [3]: https://github.com/DataDog/dd-trace-py
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: integrations/guide/source-code-integration
+[5]: /integrations/guide/source-code-integration/
 [6]: https://app.datadoghq.com/organization-settings/remote-config
 [7]: /logs/log_configuration/indexes/#add-indexes
 [8]: https://app.datadoghq.com/dynamic-instrumentation
