@@ -23,6 +23,10 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Ensure your events are tagged:">}}
+{{< nextlink href="/events/guides/recommended_event_tags/" >}}Best Practices for Tagging Events{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Other guides:">}}
     {{< nextlink href="/events/guides/migrating_to_new_events_features/" >}}Migrating to the New Events Features{{< /nextlink >}}
 {{< /whatsnext >}}

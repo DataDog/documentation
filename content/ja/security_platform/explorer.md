@@ -18,15 +18,6 @@ title: セキュリティシグナルエクスプローラー
 
 [セキュリティシグナルエクスプローラー][1]から、セキュリティシグナルを相互に関連付けて優先順位を付けます。このページから [Cloud SIEM][2]、[Posture Management][3]、[Workload Security][4]、[Application Security Monitoring][5] ダッシュボードにアクセスすることもできます。
 
-このビューで、以下を行うことができます。
-
-- [セキュリティシグナルについて](#explore-your-security-signals)
-- [セキュリティシグナルの調査](#inspect-a-security-signal)
-  - [脅威インテリジェンス](#threat-intelligence)
-  - [異常検出](#anomaly-detection)
-- [セキュリティシグナル分析の可視化](#visualize-your-security-signals-analytics)
-- [参考文献](#further-reading)
-
 ## セキュリティシグナルの探索
 
 セキュリティシグナルの検索結果が、セキュリティシグナルテーブルに表示されます。
@@ -86,6 +77,20 @@ Datadog Cloud SIEM がログから疑わしい活動を検出した場合、そ�
 レビューしているセキュリティシグナルが異常検知メソッドにより生成されている場合、異常はグラフで可視化されます。グラフ右側の境界ボックスには、異常が検知された場所が表示されます。
 
   {{< img src="security_platform/security_monitoring/explorer/anomaly-detection.png" alt="異常検知のグラフ" >}}
+
+
+### CWS シグナルでアネストリーツリーを処理する
+
+Datadog クラウドワークロードセキュリティシグナルには、システム内の悪意のあるアクティビティを検出するためのプロセスアネストリーツリーが搭載されています。疑わしいプロセスを特定し、攻撃の程度を判断することで、より適切な調査や対処を行うことができます。
+
+  {{< img src="security_platform/cws/ProcessTree.png" alt="プロセスツリーウォーターフォールグラフ" >}}
+
+ウォーターフォール構造では、コンテキスト情報に関連する子プロセスの連続実行が表示されます。各プロセスのメタデータは、システムの活動をより可視化し、セキュリティ侵害を発見するのに役立ちます。
+主な情報の種類:
+* プロセスが生成した Unix ユーティリティを識別する `command line`
+* そのプロセスが機密情報を受け継いでいるかどうかを判断する `environment variables`
+* プロセス実行中に攻撃者が使用したあらゆる識別データを収集する `command line arguments`
+
 
 ## セキュリティシグナル分析を視覚化する
 

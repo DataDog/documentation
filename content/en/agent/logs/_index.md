@@ -26,7 +26,7 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
 
-To enable log collection with an Agent running on your host, change `logs_enabled:false` to `logs_enabled:true` in the Agent's [main configuration file][4] (`datadog.yaml`).
+To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][4] (`datadog.yaml`).
 
 {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 

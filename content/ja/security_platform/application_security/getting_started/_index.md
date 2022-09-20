@@ -1,10 +1,10 @@
 ---
-code_lang: java
-code_lang_weight: 0
+code_lang: ruby
+code_lang_weight: 30
 further_reading:
-- link: https://github.com/DataDog/dd-trace-java
+- link: https://github.com/DataDog/dd-trace-rb
   tag: GitHub
-  text: Java Datadog ライブラリソースコード
+  text: Ruby Datadog ライブラリソースコード
 - link: /security_platform/default_rules/#cat-application-security
   tag: ドキュメント
   text: すぐに使えるアプリケーションセキュリティモニタリングルール
@@ -12,40 +12,121 @@ further_reading:
   tag: ドキュメント
   text: アプリケーションセキュリティモニタリングのトラブルシューティング
 kind: documentation
-title: Java ASM 入門
+title: Ruby ASM 入門
 type: multi-code-lang
 ---
 
-Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Java アプリのアプリケーションセキュリティを監視することができます。
+Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのアプリケーションセキュリティを監視することができます。
 
 {{% appsec-getstarted %}}
 
 ## はじめましょう
 
-1. **[Datadog Java ライブラリ][1]をバージョン 0.94.0 以上に更新します**。
-   ```shell
-   wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
+1. **Gemfile を更新して Datadog ライブラリを含めます**:
+
+   ```ruby
+   gem 'ddtrace', '~> 1.1'
    ```
 
-   ライブラリが対応している言語やフレームワークのバージョンについては、[互換性][2]をご覧ください。
+   ライブラリが対応している言語やフレームワークのバージョンについては、[互換性][1]をご覧ください。
 
-2. **ASM を有効にした状態で Java アプリケーションを実行します。**コマンドラインから
-   ```shell
-   java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
+   `dd-trace` 0.x バージョンからのアップグレードの詳細については、[Ruby トレーサーアップグレードガイド][2]を参照してください。
+
+2. APMトレーサーを有効にして、**ASM を有効にします**。以下のオプションは、最も一般的なケースをカバーするクイックセットアップを説明します。詳細については、[Ruby トレーサーのドキュメント][3]をお読みください。
+
+   ASM を有効にするには、コード内で行います。
+
+{{< tabs >}}
+
+{{% tab "Rails" %}}
+   アプリケーションコードにイニシャライザーを追加して、APM トレーサーを有効にします。
+
+   ```ruby
+   # config/initializers/datadog.rb
+
+   require 'datadog/appsec'
+
+   Datadog.configure do |c|
+     # APM トレーサーを有効にする
+     c.tracing.instrument :rails
+
+     # ASM を有効にする
+     c.appsec.enabled = true
+     c.appsec.instrument :rails
+   end
    ```
 
-   または、アプリケーションが実行される場所に応じて、以下の方法のいずれかを使用します。
+または、自動インスツルメントするために Gemfile を更新して、自動インスツルメンテーションを通じて APM トレーサーを有効にします。
 
-   **注:** 読み取り専用ファイルシステムは現在サポートされていません。アプリケーションは書き込み可能な `/tmp` ディレクトリへのアクセス権を持っている必要があります。
+   ```ruby
+   gem 'ddtrace', '~> 1.1', require: 'ddtrace/auto_instrument'
+   ```
 
-   {{< tabs >}}
+また、`appsec` を有効にします。
+
+   ```ruby
+   # config/initializers/datadog.rb
+
+   require 'datadog/appsec'
+
+   Datadog.configure do |c|
+     # APM トレーサーは自動インスツルメンテーションで有効になっている
+
+     # ASM を有効にする
+     c.appsec.enabled = true
+     c.appsec.instrument :rails
+   end
+   ```
+
+{{% /tab %}}
+
+{{% tab "Sinatra" %}}
+
+   ```ruby
+   require 'sinatra'
+   require 'ddtrace'
+   require 'datadog/appsec'
+
+   Datadog.configure do |c|
+     # APM トレーサーを有効にする
+     c.tracing.instrument :sinatra
+
+     # ASM for Sinatra を有効にする
+     c.appsec.enabled = true
+     c.appsec.instrument :sinatra
+   end
+   ```
+
+または自動インスツルメンテーションで APM トレーサーを有効にします。
+
+   ```ruby
+   require 'sinatra'
+   require 'ddtrace/auto_instrument'
+
+   Datadog.configure do |c|
+     # APM トレーサーは自動インスツルメンテーションで有効になっている
+
+     # ASM for Sinatra を有効にする
+     c.appsec.enabled = true
+     c.appsec.instrument :sinatra
+   end
+   ```
+{{% /tab %}}
+
+{{% tab "Rack" %}}
+   `config.ru` ファイルに以下を追加して、APM トレーサーを有効にします。
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+または、アプリケーションが実行される場所に応じて、以下の方法のいずれかを使用します。
+
+{{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-APM 用の構成コンテナを更新するには、`docker run` コマンドに以下の引数を追加します。
-
-
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...] 
+docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
 {{% /tab %}}
@@ -60,7 +141,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-APM 用のデプロイメント構成ファイルを更新し、ASM 環境変数を追加します。
+APM 用の構成 yaml ファイルコンテナを更新し、AppSec の環境変数を追加します。
 
 ```yaml
 spec:
@@ -92,26 +173,23 @@ spec:
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-サービス起動時に `-Ddd.appsec.enabled` フラグまたは `DD_APPSEC_ENABLED` 環境変数を `true` に設定します。
-
+コード内で ASM を初期化するか、サービス起動時に環境変数 `DD_APPSEC_ENABLED` を true に設定します。
 ```shell
-java -javaagent:dd-java-agent.jar \
-     -Ddd.appsec.enabled=true \
-     -jar <YOUR_SERVICE>.jar \
-     <YOUR_SERVICE_FLAGS>
+env DD_APPSEC_ENABLED=true rails server
 ```
 
 {{% /tab %}}
 
-   {{< /tabs >}}
+{{< /tabs >}}
 
 {{% appsec-getstarted-2-canary %}}
 
 {{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-trace-java/releases
-[2]: /ja/security_platform/application_security/setup_and_configure/?code-lang=java#compatibility
+[1]: /ja/security_platform/application_security/setup_and_configure/?code-lang=ruby#compatibility
+[2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
+[3]: /ja/tracing/trace_collection/dd_libraries/ruby/

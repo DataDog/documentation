@@ -324,8 +324,8 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
-    "summary": "List tag configurations"
+    "description": "Returns all metrics (matching additional filters if specified).",
+    "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
@@ -338,6 +338,10 @@
     "summary": "Configure tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "List tags and aggregations that are actively queried on dashboards and monitors for a given metric name.",
+    "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
     "description": "View indexed tag key-value pairs for a given metric name.",
@@ -446,6 +450,30 @@
     "summary": "Aggregate RUM events",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of RUM events from your organization."
+  },
+  "GetRUMApplications": {
+    "description": "List all the RUM applications in your organization.",
+    "summary": "List all the RUM applications"
+  },
+  "CreateRUMApplication": {
+    "description": "Create a new RUM application in your organization.",
+    "summary": "Create a new RUM application",
+    "request_description": "",
+    "request_schema_description": "RUM application creation request attributes."
+  },
+  "DeleteRUMApplication": {
+    "description": "Delete an existing RUM application in your organization.",
+    "summary": "Delete a RUM application"
+  },
+  "GetRUMApplication": {
+    "description": "Get the RUM application with given ID in your organization.",
+    "summary": "Get a RUM application"
+  },
+  "UpdateRUMApplication": {
+    "description": "Update the RUM application with given ID in your organization.",
+    "summary": "Update a RUM application",
+    "request_description": "",
+    "request_schema_description": "RUM application update request."
   },
   "ListRUMEvents": {
     "description": "List endpoint returns events that match a RUM search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest RUM events.\n\n[1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination",

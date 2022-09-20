@@ -2,22 +2,23 @@
 title: Getting Started in Datadog
 kind: documentation
 further_reading:
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=18'
-      tag: 'Learning Center'
-      text: 'Introduction to Datadog'
-    - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
-      tag: 'Blog'
-      text: 'Introducing the Datadog quick nav menu'
+  - link: 'https://learn.datadoghq.com/courses/dd-101-dev'
+    tag: 'Learning Center'
+    text: 'Datadog 101: Developer'
+  - link: 'https://learn.datadoghq.com/courses/dd-101-sre'
+    tag: 'Learning Center'
+    text: 'Datadog 101: Site Reliability Engineer'
+  - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
+    tag: 'Blog'
+    text: 'Introducing the Datadog quick nav menu'
 
 ---
 
-This page provides a high-level overview of capabilities available on the [Datadog site][1].
-
 ## Overview
 
-The Datadog site navigation varies based on the width of your browser. You can have up to three types of navigation. 
+This page provides a high-level overview of capabilities available on the [Datadog site][1].
 
-To change the navigation type, adjust your browser width.
+The Datadog site navigation varies based on the width of your browser. You can have up to three types of navigation. To change the navigation type, adjust your browser width.
 
 ## Integrations
 

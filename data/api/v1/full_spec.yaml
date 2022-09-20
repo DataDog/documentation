@@ -1297,10 +1297,25 @@ components:
           nullable: true
           type: array
         default:
-          description: The default value for the template variable on dashboard load.
+          deprecated: true
+          description: (deprecated) The default value for the template variable on
+            dashboard load. Cannot be used in conjunction with `defaults`.
           example: my-host
           nullable: true
           type: string
+        defaults:
+          description: One or many default values for template variables on load.
+            If more than one default is specified, they will be unioned together with
+            `OR`. Cannot be used in conjunction with `default`.
+          example:
+          - my-host-1
+          - my-host-2
+          items:
+            description: One of many default values for the template variable on dashboard
+              load.
+            minLength: 1
+            type: string
+          type: array
         name:
           description: The name of the variable.
           example: host1
@@ -1333,8 +1348,21 @@ components:
           description: The name of the variable.
           type: string
         value:
-          description: The value of the template variable within the saved view.
+          deprecated: true
+          description: (deprecated) The value of the template variable within the
+            saved view. Cannot be used in conjunction with `values`.
           type: string
+        values:
+          description: One or many template variable values within the saved view,
+            which will be unioned together using `OR` if more than one is specified.
+            Cannot be used in conjunction with `value`.
+          items:
+            description: One or many values of the template variable within the saved
+              view.
+            minLength: 1
+            type: string
+          minItems: 1
+          type: array
       type: object
     DashboardType:
       description: The type of the associated private dashboard.
@@ -2648,6 +2676,7 @@ components:
       - profiles
       - audit
       - events
+      - ci_tests
       example: logs
       type: string
       x-enum-varnames:
@@ -2659,6 +2688,7 @@ components:
       - PROFILES
       - AUDIT
       - EVENTS
+      - CI_TESTS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -3788,6 +3818,7 @@ components:
       description: Supported products for hourly usage attribution requests.
       enum:
       - api_usage
+      - apm_fargate_usage
       - apm_host_usage
       - appsec_usage
       - browser_usage
@@ -3800,6 +3831,7 @@ components:
       - dbm_hosts_usage
       - dbm_queries_usage
       - estimated_indexed_logs_usage
+      - estimated_ingested_logs_usage
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
@@ -3814,6 +3846,7 @@ components:
       type: string
       x-enum-varnames:
       - API_USAGE
+      - APM_FARGATE_USAGE
       - APM_HOST_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
@@ -3826,6 +3859,7 @@ components:
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
@@ -4174,6 +4208,7 @@ components:
       - audit_stream
       - rum_issue_stream
       - apm_issue_stream
+      - logs_pattern_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4181,6 +4216,7 @@ components:
       - AUDIT_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - LOGS_PATTERN_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -5674,12 +5710,16 @@ components:
       x-enum-varnames:
       - USER_AGENT_PARSER
     MetricContentEncoding:
+      default: deflate
       description: HTTP header used to compress the media-type.
       enum:
       - deflate
+      - gzip
+      example: deflate
       type: string
       x-enum-varnames:
       - DEFLATE
+      - GZIP
     MetricMetadata:
       description: Object with all metric related metadata.
       properties:
@@ -5799,6 +5839,9 @@ components:
           type: string
         pointlist:
           description: List of points of the time series.
+          example:
+          - - 1575317847.0
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           readOnly: true
@@ -6294,6 +6337,17 @@ components:
           format: int64
           nullable: true
           type: integer
+        group_retention_duration:
+          description: 'The time span after which groups with missing data are dropped
+            from the monitor state.
+
+            The minimum value is one hour, and the maximum value is 72 hours.
+
+            Example values are: "60m", "1h", and "2d".
+
+            This option is only available for APM Trace Analytics, Audit Trail, CI,
+            Error Tracking, Event, Logs, and RUM monitors.'
+          type: string
         groupby_simple_monitor:
           description: Whether the log alert monitor triggers a single alert or multiple
             alerts when any group breaches a threshold.
@@ -6384,6 +6438,8 @@ components:
           description: A Boolean indicating whether this monitor notifies when data
             stops reporting.
           type: boolean
+        on_missing_data:
+          $ref: '#/components/schemas/OnMissingDataOption'
         renotify_interval:
           default: null
           description: "The number of minutes after the last notification before a
@@ -6756,6 +6812,10 @@ components:
           description: Whether to show the time that has elapsed since the monitor/group
             triggered.
           type: boolean
+        show_priority:
+          default: false
+          description: Whether to show the priorities column.
+          type: boolean
         sort:
           $ref: '#/components/schemas/WidgetMonitorSummarySort'
         start:
@@ -7008,6 +7068,8 @@ components:
       enum:
       - api_usage
       - api_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
       - appsec_usage
@@ -7032,6 +7094,8 @@ components:
       - dbm_queries_usage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -7059,6 +7123,8 @@ components:
       x-enum-varnames:
       - API_USAGE
       - API_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
       - APPSEC_USAGE
@@ -7083,6 +7149,8 @@ components:
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -7115,6 +7183,14 @@ components:
           type: number
         api_usage:
           description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_percentage:
+          description: The percentage of APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_usage:
+          description: The APM ECS Fargate task usage by tag(s).
           format: double
           type: number
         apm_host_percentage:
@@ -7176,6 +7252,16 @@ components:
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). This field is
             in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_percentage:
+          description: The percentage of estimated live ingested logs usage by tag(s).
+            This field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_usage:
+          description: The estimated live ingested logs usage by tag(s). This field
+            is in private beta.
           format: double
           type: number
         estimated_ingested_spans_percentage:
@@ -8085,6 +8171,32 @@ components:
           format: int64
           type: integer
       type: object
+    OnMissingDataOption:
+      description: 'Controls how groups or monitors are treated if an evaluation does
+        not return any data points.
+
+        The default option results in different behavior depending on the monitor
+        query type.
+
+        For monitors using Count queries, an empty monitor evaluation is treated as
+        0 and is compared to the threshold conditions.
+
+        For monitors using any query type other than Count, for example Gauge, Measure,
+        or Rate, the monitor shows the last known status.
+
+        This option is only available for APM Trace Analytics, Audit Trail, CI, Error
+        Tracking, Event, Logs, and RUM monitors.'
+      enum:
+      - default
+      - show_no_data
+      - show_and_notify_no_data
+      - resolve
+      type: string
+      x-enum-varnames:
+      - DEFAULT
+      - SHOW_NO_DATA
+      - SHOW_AND_NOTIFY_NO_DATA
+      - RESOLVE
     OrgDowngradedResponse:
       description: Status of downgrade
       properties:
@@ -8789,6 +8901,20 @@ components:
           example: UTC
           type: string
       type: object
+    SLOCreator:
+      description: The creator of the SLO
+      nullable: true
+      properties:
+        email:
+          description: Email of the creator.
+          type: string
+        id:
+          description: User ID of the creator.
+          type: string
+        name:
+          description: Name of the creator.
+          type: string
+      type: object
     SLODeleteResponse:
       description: A response list of all service level objective deleted.
       properties:
@@ -9299,6 +9425,55 @@ components:
           format: int64
           type: integer
       type: object
+    SLOOverallStatuses:
+      description: Overall status of the SLO by timeframes.
+      properties:
+        error:
+          description: Error message if SLO status or error budget could not be calculated.
+          nullable: true
+          type: string
+        indexed_at:
+          description: 'timestamp (UNIX time in seconds) of when the SLO status and
+            error budget
+
+            were calculated.'
+          example: 1662496260
+          format: int64
+          type: integer
+        raw_error_budget_remaining:
+          $ref: '#/components/schemas/SLORawErrorBudgetRemaining'
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to.
+          example: 2
+          format: int64
+          type: integer
+        status:
+          description: The status of the SLO.
+          example: 100
+          format: double
+          nullable: true
+          type: number
+        target:
+          description: The target of the SLO.
+          example: 99
+          format: double
+          type: number
+        timeframe:
+          $ref: '#/components/schemas/SLOTimeframe'
+      type: object
+    SLORawErrorBudgetRemaining:
+      description: Error budget remaining for an SLO.
+      properties:
+        unit:
+          description: Error budget remaining unit.
+          example: requests
+          type: string
+        value:
+          description: Error budget remaining value.
+          example: 60
+          format: double
+          type: number
+      type: object
     SLOResponse:
       description: A service level objective response containing a single service
         level objective.
@@ -9736,6 +9911,38 @@ components:
       - formula
       - dimension
       type: object
+    SearchSLOQuery:
+      description: 'A metric-based SLO. **Required if type is `metric`**. Note that
+        Datadog only allows the sum by aggregator
+
+        to be used because this will sum up all request counts instead of averaging
+        them, or taking the max or
+
+        min of all of those requests.'
+      nullable: true
+      properties:
+        denominator:
+          description: A Datadog metric query for total (valid) events.
+          example: sum:my.custom.metric{*}.as_count()
+          type: string
+        metrics:
+          description: 'Metric names used in the query''s numerator and denominator.
+
+            This field will return null and will be implemented in the next version
+            of this endpoint.'
+          example:
+          - my.custom.metric
+          - my.other.custom.metric
+          items:
+            description: Metric name.
+            type: string
+          nullable: true
+          type: array
+        numerator:
+          description: A Datadog metric query for good events.
+          example: sum:my.custom.metric{type:good}.as_count()
+          type: string
+      type: object
     SearchSLOResponse:
       description: A search SLO response containing results from the search query.
       properties:
@@ -9764,7 +9971,7 @@ components:
         slo:
           description: SLOs
           items:
-            $ref: '#/components/schemas/ServiceLevelObjective'
+            $ref: '#/components/schemas/SearchServiceLevelObjective'
           type: array
       type: object
     SearchSLOResponseDataAttributesFacets:
@@ -9894,6 +10101,181 @@ components:
           description: Type of pagination.
           type: string
       type: object
+    SearchSLOThreshold:
+      description: SLO thresholds (target and optionally warning) for a single time
+        window.
+      properties:
+        target:
+          description: 'The target value for the service level indicator within the
+            corresponding
+
+            timeframe.'
+          example: 99.9
+          format: double
+          type: number
+        target_display:
+          description: 'A string representation of the target that indicates its precision.
+
+            It uses trailing zeros to show significant decimal places (for example
+            `98.00`).
+
+
+            Always included in service level objective responses. Ignored in
+
+            create/update requests.'
+          example: '99.9'
+          type: string
+        timeframe:
+          $ref: '#/components/schemas/SearchSLOTimeframe'
+        warning:
+          description: The warning value for the service level objective.
+          example: 90.0
+          format: double
+          nullable: true
+          type: number
+        warning_display:
+          description: 'A string representation of the warning target (see the description
+            of
+
+            the `target_display` field for details).
+
+
+            Included in service level objective responses if a warning target exists.
+
+            Ignored in create/update requests.'
+          example: '90.0'
+          nullable: true
+          type: string
+      required:
+      - timeframe
+      - target
+      type: object
+    SearchSLOTimeframe:
+      description: The SLO time window options.
+      enum:
+      - 7d
+      - 30d
+      - 90d
+      example: 30d
+      type: string
+      x-enum-varnames:
+      - SEVEN_DAYS
+      - THIRTY_DAYS
+      - NINETY_DAYS
+    SearchServiceLevelObjective:
+      description: 'A service level objective object includes a service level indicator,
+        thresholds
+
+        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
+      properties:
+        all_tags:
+          description: 'A list of tags associated with this service level objective.
+
+            Always included in service level objective responses (but may be empty).
+
+            Optional in create/update requests.'
+          example:
+          - env:prod
+          - app:core
+          items:
+            description: A tag to apply to your SLO.
+            type: string
+          type: array
+        created_at:
+          description: 'Creation timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SLOCreator'
+        description:
+          description: 'A user-defined description of the service level objective.
+
+
+            Always included in service level objective responses (but may be `null`).
+
+            Optional in create/update requests.'
+          nullable: true
+          type: string
+        groups:
+          description: 'A list of (up to 100) monitor groups that narrow the scope
+            of a monitor service level objective.
+
+
+            Included in service level objective responses if it is not empty. Optional
+            in
+
+            create/update requests for monitor service level objectives, but may only
+            be
+
+            used when then length of the `monitor_ids` field is one.'
+          example:
+          - env:prod
+          - role:mysql
+          items:
+            description: A group name, for instance `env:prod`.
+            type: string
+          nullable: true
+          type: array
+        id:
+          description: 'A unique identifier for the service level objective object.
+
+
+            Always included in service level objective responses.'
+          readOnly: true
+          type: string
+        modified_at:
+          description: 'Modification timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        monitor_ids:
+          description: 'A list of monitor ids that defines the scope of a monitor
+            service level
+
+            objective. **Required if type is `monitor`**.'
+          items:
+            description: A monitor ID.
+            format: int64
+            type: integer
+          nullable: true
+          type: array
+        name:
+          description: The name of the service level objective object.
+          example: Custom Metric SLO
+          type: string
+        overall_status:
+          description: calculated status and error budget remaining.
+          items:
+            $ref: '#/components/schemas/SLOOverallStatuses'
+          type: array
+        query:
+          $ref: '#/components/schemas/SearchSLOQuery'
+        thresholds:
+          description: 'The thresholds (timeframes and associated targets) for this
+            service level
+
+            objective object.'
+          example:
+          - target: 95
+            target_display: '95'
+            timeframe: 7d
+          - target: 95
+            target_display: '95'
+            timeframe: 30d
+            warning: 97
+            warning_display: '97'
+          items:
+            $ref: '#/components/schemas/SearchSLOThreshold'
+          type: array
+        type:
+          $ref: '#/components/schemas/SLOType'
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.
@@ -11355,6 +11737,7 @@ components:
       - validates
       - isInMoreThan
       - isInLessThan
+      - doesNotExist
       example: contains
       type: string
       x-enum-varnames:
@@ -11371,6 +11754,7 @@ components:
       - VALIDATES
       - IS_IN_MORE_DAYS_THAN
       - IS_IN_LESS_DAYS_THAN
+      - DOES_NOT_EXIST
     SyntheticsAssertionTarget:
       description: An assertion which uses a simple target.
       properties:
@@ -11435,7 +11819,34 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthWeb'
       - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
       - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
       type: object
+    SyntheticsBasicAuthDigest:
+      description: Object to handle digest authentication when performing the test.
+      properties:
+        password:
+          description: Password to use for the digest authentication.
+          example: PaSSw0RD!
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthDigestType'
+        username:
+          description: Username to use for the digest authentication.
+          example: my_username
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    SyntheticsBasicAuthDigestType:
+      default: digest
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - digest
+      example: digest
+      type: string
+      x-enum-varnames:
+      - DIGEST
     SyntheticsBasicAuthNTLM:
       description: Object to handle `NTLM` authentication when performing the test.
       properties:
@@ -12372,13 +12783,17 @@ components:
             the value.
           example: content-type
           type: string
+        localVariableName:
+          description: When type is `local_variable`, name of the local variable to
+            use to extract the value.
+          example: LOCAL_VARIABLE
+          type: string
         parser:
           $ref: '#/components/schemas/SyntheticsVariableParser'
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       required:
       - type
-      - parser
       type: object
     SyntheticsGlobalVariableParseTestOptionsType:
       description: Property of the Synthetics Test Response to use for a Synthetics
@@ -12386,11 +12801,13 @@ components:
       enum:
       - http_body
       - http_header
+      - local_variable
       example: http_body
       type: string
       x-enum-varnames:
       - HTTP_BODY
       - HTTP_HEADER
+      - LOCAL_VARIABLE
     SyntheticsGlobalVariableParserType:
       description: Type of parser for a Synthetics global variable from a synthetics
         test.
@@ -13038,9 +13455,20 @@ components:
         disableCors:
           description: Whether or not to disable CORS mechanism.
           type: boolean
+        disableCsp:
+          description: Disable Content Security Policy for browser tests.
+          type: boolean
         follow_redirects:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
+        ignoreServerCertificateError:
+          description: Ignore server certificate error.
+          type: boolean
+        initialNavigationTimeout:
+          description: Timeout before declaring the initial step as failed (in seconds)
+            for browser tests.
+          format: int64
+          type: integer
         min_failure_duration:
           description: Minimum amount of time in failure required to trigger an alert.
           format: int64
@@ -13129,14 +13557,12 @@ components:
       enum:
       - not_scheduled
       - scheduled
-      - started
       - finished
       - finished_with_error
       type: string
       x-enum-varnames:
       - NOT_SCHEDULED
       - SCHEDULED
-      - STARTED
       - FINISHED
       - FINISHED_WITH_ERROR
     SyntheticsTestRequest:
@@ -13153,6 +13579,16 @@ components:
           type: string
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
+        certificateDomains:
+          default: []
+          description: By default, the client certificate is applied on the domain
+            of the starting URL for browser tests. If you want your client certificate
+            to be applied on other domains instead, add them in `certificateDomains`.
+          items:
+            description: Domain to apply the client certificate.
+            example: ''
+            type: string
+          type: array
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
@@ -13824,6 +14260,91 @@ components:
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
+    TopologyMapWidgetDefinition:
+      description: This widget displays a topology of nodes and edges for different
+        data sources. It replaces the service map widget.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        requests:
+          description: One or more Topology requests.
+          items:
+            $ref: '#/components/schemas/TopologyRequest'
+          minItems: 1
+          type: array
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/TopologyMapWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    TopologyMapWidgetDefinitionType:
+      default: topology_map
+      description: Type of the topology map widget.
+      enum:
+      - topology_map
+      example: topology_map
+      type: string
+      x-enum-varnames:
+      - TOPOLOGY_MAP
+    TopologyQuery:
+      description: Query to service-based topology data sources like the service map
+        or data streams.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/TopologyQueryDataSource'
+        filters:
+          description: Your environment and primary tag (or * if enabled for your
+            account).
+          example:
+          - env:prod
+          - az:us-east
+          items:
+            description: Environment or primary tag, generally in a key:value format
+            type: string
+          minItems: 1
+          type: array
+        service:
+          description: Name of the service
+          example: myService
+          type: string
+      type: object
+    TopologyQueryDataSource:
+      description: Name of the data source
+      enum:
+      - data_streams
+      - service_map
+      type: string
+      x-enum-varnames:
+      - DATA_STREAMS
+      - SERVICE_MAP
+    TopologyRequest:
+      description: Request that will return nodes and edges to be used by topology
+        map.
+      properties:
+        query:
+          $ref: '#/components/schemas/TopologyQuery'
+        request_type:
+          $ref: '#/components/schemas/TopologyRequestType'
+      type: object
+    TopologyRequestType:
+      description: Widget request type.
+      enum:
+      - topology
+      type: string
+      x-enum-varnames:
+      - TOPOLOGY
     TreeMapColorBy:
       default: user
       deprecated: true
@@ -14083,10 +14604,14 @@ components:
       - lambda_invocations_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
       - estimated_ingested_spans_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -14113,10 +14638,14 @@ components:
       - LAMBDA_INVOCATIONS_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14153,12 +14682,16 @@ components:
       - dbm_queries_percentage
       - estimated_indexed_logs_usage
       - estimated_indexed_logs_percentage
+      - estimated_ingested_logs_usage
+      - estimated_ingested_logs_percentage
       - appsec_usage
       - appsec_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
       - estimated_ingested_spans_percentage
+      - apm_fargate_usage
+      - apm_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14194,12 +14727,16 @@ components:
       - DBM_QUERIES_PERCENTAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_LOGS_PERCENTAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
+      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
+      - APM_FARGATE_USAGE
+      - APM_FARGATE_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14238,6 +14775,14 @@ components:
           type: number
         api_usage:
           description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_percentage:
+          description: The percentage of APM ECS Fargate task usage by tag(s).
+          format: double
+          type: number
+        apm_fargate_usage:
+          description: The APM ECS Fargate task usage by tag(s).
           format: double
           type: number
         apm_host_percentage:
@@ -14351,6 +14896,16 @@ components:
         estimated_indexed_spans_usage:
           description: The estimated indexed spans usage by tag(s). Note this field
             is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_percentage:
+          description: The percentage of estimated live ingested logs usage by tag(s).
+            Note this field is in private beta.
+          format: double
+          type: number
+        estimated_ingested_logs_usage:
+          description: The estimated live ingested logs usage by tag(s). Note this
+            field is in private beta.
           format: double
           type: number
         estimated_ingested_spans_percentage:
@@ -14504,6 +15059,9 @@ components:
           description: Shows usage aggregation for a billing period.
           format: double
           type: number
+        region:
+          description: The region of the organization.
+          type: string
         start_date:
           description: Shows the first date of usage.
           format: date-time
@@ -14762,6 +15320,12 @@ components:
           format: double
           nullable: true
           type: number
+        aws_host_count:
+          description: The number of Cloud Security Posture Management AWS hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
         azure_host_count:
           description: The number of Cloud Security Posture Management Azure hosts
             during a given hour.
@@ -14905,6 +15469,11 @@ components:
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
       properties:
+        apm_fargate_count:
+          description: The high-water mark of APM ECS Fargate tasks during the given
+            hour.
+          format: int64
+          type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
@@ -15707,6 +16276,11 @@ components:
             over all hours in the current date all organizations.
           format: int64
           type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for all organizations.
@@ -15794,6 +16368,11 @@ components:
         cspm_aas_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Posture Management
             Azure app services hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p:
@@ -16032,6 +16611,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        apm_fargate_count_avg:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for the given org.
+          format: int64
+          type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
@@ -16120,6 +16704,11 @@ components:
           description: Shows the 99th percentile of all Cloud Security Posture Management
             Azure app services hosts over all hours in the current date for the given
             org.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_azure_host_top99p:
@@ -16286,6 +16875,9 @@ components:
         public_id:
           description: The organization public id.
           type: string
+        region:
+          description: The region of the organization.
+          type: string
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
             legacy sessions over all hours in the current date for the given org.
@@ -16355,6 +16947,11 @@ components:
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_fargate_count_avg_sum:
+          description: Shows the average of all APM ECS Fargate tasks over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
@@ -16451,6 +17048,11 @@ components:
           description: Shows the 99th percentile of all Cloud Security Posture Management
             Azure app services hosts over all hours in the current months for all
             organizations.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            AWS hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p_sum:
@@ -17315,6 +17917,7 @@ components:
       - $ref: '#/components/schemas/TreeMapWidgetDefinition'
       - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       - $ref: '#/components/schemas/FunnelWidgetDefinition'
+      - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
       type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
@@ -17639,6 +18242,8 @@ components:
       - tags,desc
       - triggered,asc
       - triggered,desc
+      - priority,asc
+      - priority,desc
       example: name,asc
       type: string
       x-enum-varnames:
@@ -17657,6 +18262,8 @@ components:
       - TAGS_DESCENDING
       - TRIGGERED_ASCENDING
       - TRIGGERED_DESCENDING
+      - PRIORITY_ASCENDING
+      - PRIORITY_DESCENDING
     WidgetNodeType:
       description: Which type of node to use in the map.
       enum:
@@ -18449,7 +19056,12 @@ paths:
   /api/v1/daily_custom_reports:
     get:
       deprecated: true
-      description: Get daily custom reports.
+      description: 'Get daily custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetDailyCustomReports
       parameters:
       - description: The number of files to return in the response. `[default=60]`.
@@ -18506,16 +19118,18 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
-      x-menu-order: 40
+      x-menu-order: 41
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/daily_custom_reports/{report_id}:
     get:
       deprecated: true
-      description: Get specified daily custom reports.
+      description: 'Get specified daily custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetSpecifiedDailyCustomReports
       parameters:
       - description: Date of the report in the format `YYYY-MM-DD`.
@@ -18557,12 +19171,9 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
-      x-menu-order: 41
+      x-menu-order: 42
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/dashboard:
     delete:
       description: Delete dashboards using the specified IDs. If there are any failures,
@@ -22655,7 +23266,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
@@ -24579,7 +25190,12 @@ paths:
   /api/v1/monthly_custom_reports:
     get:
       deprecated: true
-      description: Get monthly custom reports.
+      description: 'Get monthly custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetMonthlyCustomReports
       parameters:
       - description: The number of files to return in the response `[default=60].`
@@ -24636,16 +25252,18 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
-      x-menu-order: 42
+      x-menu-order: 43
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/monthly_custom_reports/{report_id}:
     get:
       deprecated: true
-      description: Get specified monthly custom reports.
+      description: 'Get specified monthly custom reports.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetSpecifiedMonthlyCustomReports
       parameters:
       - description: Date of the report in the format `YYYY-MM-DD`.
@@ -24693,12 +25311,9 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
-      x-menu-order: 43
+      x-menu-order: 44
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/notebooks:
     get:
       description: 'Get all notebooks. This can also be used to search for notebooks
@@ -26260,7 +26875,11 @@ paths:
       description: Get a list of service level objective objects for your organization.
       operationId: SearchSLO
       parameters:
-      - description: The query string to filter results based on SLO names.
+      - description: 'The query string to filter results based on SLO names.
+
+          Some examples of queries include `service:<service-name>`
+
+          and `<slo-name>`.'
         in: query
         name: query
         required: false
@@ -26281,6 +26900,12 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Whether or not to return facet information in the response `[default=false]`.
+        in: query
+        name: include_facets
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -26310,6 +26935,7 @@ paths:
             description: The regional site for Datadog customers.
             enum:
             - datadoghq.com
+            - datadoghq.eu
             - us3.datadoghq.com
             - us5.datadoghq.com
             - ddog-gov.com
@@ -26338,9 +26964,7 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: Note: This endpoint is in public beta for US regions.
-
-        It is not currently supported in the EU region.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/slo/{slo_id}:
@@ -27121,6 +27745,11 @@ paths:
           - file: synthetics_api_http_test_payload.json
             name: body
           step: there is a valid "synthetics_api_test" in the system
+        synthetics_api_test_multi_step:
+          parameters:
+          - file: synthetics_api_test_multi_step_payload.json
+            name: body
+          step: there is a valid "synthetics_api_test_multi_step" in the system
         synthetics_api_test_with_wrong_dns:
           parameters:
           - file: synthetics_api_test_with_wrong_dns.json
@@ -28029,6 +28658,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-given:
+        synthetics_global_variable:
+          parameters:
+          - file: synthetics_global_variable_payload.json
+            name: body
+          step: there is a valid "synthetics_global_variable" in the system
       x-menu-order: 18
       x-undo:
         operationId: DeleteGlobalVariable
@@ -28429,7 +29064,9 @@ paths:
       description: 'Get hourly usage for analyzed logs (Security Monitoring).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageAnalyzedLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28483,13 +29120,18 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         type: safe
   /api/v1/usage/attribution:
     get:
       deprecated: true
-      description: Get usage attribution.
+      description: 'Get usage attribution.
+
+        **Note:** This endpoint will be fully deprecated on December 1, 2022.
+
+        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
+        for the associated migration guide.'
       operationId: GetUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -28575,18 +29217,17 @@ paths:
       summary: Get usage attribution
       tags:
       - Usage Metering
-      x-menu-order: 39
+      x-menu-order: 40
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/audit_logs:
     get:
       description: 'Get hourly usage for audit logs.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageAuditLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28640,7 +29281,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 28
+      x-menu-order: 29
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -28648,7 +29289,9 @@ paths:
       description: 'Get hourly usage for lambda.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageLambda
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -28700,7 +29343,7 @@ paths:
       summary: Get hourly usage for lambda
       tags:
       - Usage Metering
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -28757,7 +29400,9 @@ paths:
       description: 'Get hourly usage for CI visibility (tests, pipeline, and spans).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageCIApp
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28811,7 +29456,7 @@ paths:
       summary: Get hourly usage for CI visibility
       tags:
       - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 35
       x-undo:
         type: safe
   /api/v1/usage/cspm:
@@ -28819,7 +29464,9 @@ paths:
       description: 'Get hourly usage for cloud security posture management (CSPM).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageCloudSecurityPostureManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28873,7 +29520,7 @@ paths:
       summary: Get hourly usage for CSPM
       tags:
       - Usage Metering
-      x-menu-order: 27
+      x-menu-order: 28
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -28881,7 +29528,9 @@ paths:
       description: 'Get hourly usage for cloud workload security.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageCWS
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28935,7 +29584,7 @@ paths:
       summary: Get hourly usage for cloud workload security
       tags:
       - Usage Metering
-      x-menu-order: 29
+      x-menu-order: 30
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -28943,7 +29592,9 @@ paths:
       description: 'Get hourly usage for database monitoring
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageDBM
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -28997,7 +29648,7 @@ paths:
       summary: Get hourly usage for database monitoring
       tags:
       - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 31
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -29005,7 +29656,9 @@ paths:
       description: 'Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageFargate
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29057,7 +29710,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -29065,7 +29718,9 @@ paths:
       description: 'Get hourly usage for hosts and containers.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29117,7 +29772,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
-      x-menu-order: 10
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v1/usage/hourly-attribution:
@@ -29215,7 +29870,9 @@ paths:
       description: 'Get hourly usage for incident management.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetIncidentManagement
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29269,7 +29926,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
       - Usage Metering
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -29277,7 +29934,9 @@ paths:
       description: 'Get hourly usage for indexed spans.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageIndexedSpans
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29329,7 +29988,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
       - Usage Metering
-      x-menu-order: 13
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -29337,7 +29996,9 @@ paths:
       description: 'Get hourly usage for ingested spans.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetIngestedSpans
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29391,7 +30052,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
       - Usage Metering
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -29399,7 +30060,9 @@ paths:
       description: 'Get hourly usage for IoT.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageInternetOfThings
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29453,7 +30116,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
       - Usage Metering
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -29461,7 +30124,9 @@ paths:
       description: 'Get hourly usage for logs.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29513,7 +30178,7 @@ paths:
       summary: Get hourly usage for logs
       tags:
       - Usage Metering
-      x-menu-order: 11
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/usage/logs-by-retention:
@@ -29521,7 +30186,9 @@ paths:
       description: 'Get hourly usage for indexed logs by retention period.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageLogsByRetention
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29575,7 +30242,7 @@ paths:
       summary: Get hourly logs usage by retention
       tags:
       - Usage Metering
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -29640,7 +30307,7 @@ paths:
       summary: Get hourly usage for logs by index
       tags:
       - Usage Metering
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v1/usage/monthly-attribution:
@@ -29759,7 +30426,9 @@ paths:
       description: 'Get hourly usage for network flows.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageNetworkFlows
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29813,7 +30482,7 @@ paths:
       summary: get hourly usage for network flows
       tags:
       - Usage Metering
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -29821,7 +30490,9 @@ paths:
       description: 'Get hourly usage for network hosts.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageNetworkHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -29873,7 +30544,7 @@ paths:
       summary: Get hourly usage for network hosts
       tags:
       - Usage Metering
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         type: safe
   /api/v1/usage/online-archive:
@@ -29881,7 +30552,9 @@ paths:
       description: 'Get hourly usage for online archive.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageOnlineArchive
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29935,7 +30608,7 @@ paths:
       summary: Get hourly usage for online archive
       tags:
       - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 36
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -29943,7 +30616,9 @@ paths:
       description: 'Get hourly usage for profiled hosts.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageProfiling
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -29997,7 +30672,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 34
       x-undo:
         type: safe
   /api/v1/usage/rum:
@@ -30006,7 +30681,9 @@ paths:
         Units.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageRumUnits
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30058,7 +30735,7 @@ paths:
       summary: Get hourly usage for RUM units
       tags:
       - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 33
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -30067,7 +30744,9 @@ paths:
         Sessions.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageRumSessions
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30125,7 +30804,7 @@ paths:
       summary: Get hourly usage for RUM sessions
       tags:
       - Usage Metering
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         type: safe
   /api/v1/usage/sds:
@@ -30133,7 +30812,9 @@ paths:
       description: 'Get hourly usage for sensitive data scanner.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSDS
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30187,7 +30868,7 @@ paths:
       summary: Get hourly usage for sensitive data scanner
       tags:
       - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 32
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -30195,7 +30876,9 @@ paths:
       description: 'Get hourly usage for SNMP devices.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSNMP
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30249,7 +30932,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -30315,7 +30998,7 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -30324,7 +31007,9 @@ paths:
       description: 'Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSynthetics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30376,7 +31061,7 @@ paths:
       summary: Get hourly usage for synthetics checks
       tags:
       - Usage Metering
-      x-menu-order: 14
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -30384,7 +31069,9 @@ paths:
       description: 'Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSyntheticsAPI
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30436,7 +31123,7 @@ paths:
       summary: Get hourly usage for synthetics API checks
       tags:
       - Usage Metering
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -30444,7 +31131,9 @@ paths:
       description: 'Get hourly usage for synthetics browser checks.
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageSyntheticsBrowser
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30496,7 +31185,7 @@ paths:
       summary: Get hourly usage for synthetics browser checks
       tags:
       - Usage Metering
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -30504,7 +31193,9 @@ paths:
       description: 'Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
 
         **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
+        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
+        for the associated migration guide.'
       operationId: GetUsageTimeseries
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -30556,7 +31247,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
-      x-menu-order: 12
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -30642,7 +31333,7 @@ paths:
       summary: Get all custom metrics by hourly average
       tags:
       - Usage Metering
-      x-menu-order: 6
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v1/user:

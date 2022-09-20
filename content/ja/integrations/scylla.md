@@ -1,43 +1,66 @@
 ---
+app_id: Scylla
+app_uuid: 1d655820-3010-4ae3-8273-a3798321d4d4
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Scylla Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: scylla.node.operation_mode
+      metadata_path: metadata.csv
+      prefix: Scylla.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Scylla
   logs:
     source: Scylla
-  metrics_metadata: metadata.csv
   monitors:
     '[Scylla] Server is shutting down': assets/monitors/instance_down.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - data store
 - ログの収集
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
-display_name: Scylla
+display_on_public_website: true
 draft: false
 git_integration_title: Scylla
-guid: 875e4d62-831b-4929-bea1-57e5c7016d65
 integration_id: Scylla
 integration_title: Scylla
 integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: Scylla.
-metric_to_check: scylla.node.operation_mode
+manifest_version: 2.0.0
 name: Scylla
-public_title: Scylla インテグレーション
+oauth: {}
+public_title: Scylla
 short_description: クラスターのリソース、レイテンシー、健全性などを追跡
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: クラスターのリソース、レイテンシー、健全性などを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Scylla
 ---
 
 

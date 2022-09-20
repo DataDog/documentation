@@ -30,9 +30,34 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 
 {{< programming-lang lang="python" >}}
 
-Datadog Python トレーサーのデバッグモードを有効にするには、`ddtrace-run` を使用するときに環境変数 `DD_TRACE_DEBUG=true` と `DD_CALL_BASIC_CONFIG=true` を設定します。
+Datadog Python Tracer のデバッグモードを有効にする手順は、アプリケーションが使用しているトレーサーのバージョンに依存します。該当するシナリオを選択してください。
 
-既存のログ構成がある場合は、アプリケーションコードでデバッグログを有効にしてください。
+### シナリオ 1: ddtrace バージョン 1.3.2 以上
+
+1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+
+2. デバッグログをログファイルにルーティングするには、 `DD_TRACE_LOG_FILE` にトレーサーのログを書き込むファイル名を、現在の作業ディレクトリからの相対パスで設定します。例えば、`DD_TRACE_LOG_FILE=ddtrace_logs.log` とします。
+   デフォルトでは、ファイルサイズは 15728640 バイト (約 15MB) で、1 つのバックアップログファイルが作成されます。デフォルトのログファイルのサイズを大きくするには、`DD_TRACE_LOG_FILE_SIZE_BYTES` の設定でサイズをバイト単位で指定します。
+
+3. ログをコンソールにルーティングするには、**Python 2** アプリケーションでは、 `logging.basicConfig()` 等を構成してください。**Python 3** のアプリケーションでは、ログは自動的にコンソールに送られます。
+
+
+### シナリオ 2: ddtrace バージョン 1.0.x〜1.2.x
+
+1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+
+2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
+
+### シナリオ 3: ddtrace バージョン 0.x
+
+1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+
+2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
+
+### シナリオ 4: 標準のロギングライブラリを使用した、アプリケーションコードでのデバッグログの構成
+
+どのバージョンの ddtrace でも、トレーサー環境変数 `DD_TRACE_DEBUG` を設定する代わりに、標準ライブラリ `logging` を直接使用して、アプリケーションコード内でデバッグログを有効にすることができます。
+
 ```
 log = logging.getLogger("ddtrace.tracer")
 log.setLevel(logging.DEBUG)
@@ -224,45 +249,32 @@ make install
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-さらに表示するには、`DD_TRACE_LOGGING_RATE=0` を含めます。
+Python トレーサーが生成するログは、ロギングハンドラ名 `ddtrace` を持ちます。
 
 **トレースが生成されました:**
 
 ```shell
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:470] - writing 8 spans (enabled:True)
+<YYYY-MM-DD> 19:51:22,262 DEBUG [ddtrace.internal.processor.trace] [trace.py:211] - trace <TRACE ID> has 8 spans, 7 finished
 ```
 
 **Python トレーサーによって生成されたスパン:**
 
 ```text
-<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:472] -
-      name flask.request
-        id <スパン id>
-  trace_id <トレース id>
- parent_id <親 id>
-   service flask
-  resource GET /
-      type http
-     start <開始時間>
-       end <終了時間>
-  duration 0.004759s
-     error 0
-      tags
-           flask.endpoint:index
-           flask.url_rule:/
-           flask.version:1.1.1
-           http.method:GET
-           http.status_code:200
-           http.url:http://0.0.0.0:5050/
-           system.pid:25985
-
+<YYYY-MM-DD> 19:51:22,251 DEBUG [ddtrace.tracer] [tracer.py:715] - finishing span name='flask.process_response' id=<SPAN ID> trace_id=<TRACE ID>  parent_id=<PARENT ID> service='flask' resource='flask.process_response' type=None start=1655495482.2478693 end=1655495482.2479873 duration=0.000118125 error=0 tags={} metrics={} (enabled:True)
+0.0:5050/
 ```
 
 
 **トレースが Datadog Agent に送信されました:**
 
-```shell
-<YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
+```text
+<YYYY-MM-DD> 19:59:19,657 DEBUG [ddtrace.internal.writer] [writer.py:405] - sent 1.57KB in 0.02605s to http://localhost:8126/v0.4/traces
+```
+
+**Datadog Agent へのトレース送信に失敗した:**
+
+```text
+<YYYY-MM-DD> 19:51:23,249 ERROR [ddtrace.internal.writer] [writer.py:567] - failed to send traces to Datadog Agent at http://localhost:8126/v0.4/traces
 ```
 
 {{< /programming-lang >}}

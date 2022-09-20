@@ -7,6 +7,9 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: ドキュメント
   text: Synthetic ブラウザテストについて
+- link: https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/
+  tag: ブログ
+  text: RUM と Synthetic モニタリングでテストカバレッジを追跡する
 kind: documentation
 title: アプリケーションテストカバレッジダッシュボード
 ---

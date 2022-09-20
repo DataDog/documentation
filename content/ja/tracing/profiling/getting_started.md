@@ -172,7 +172,7 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
         profiler.WithService("<SERVICE_NAME>"),
         profiler.WithEnv("<ENVIRONMENT>"),
         profiler.WithVersion("<APPLICATION_VERSION>"),
-        profiler.WithTags("<KEY1>:<VALUE1>,<KEY2>:<VALUE2>"),
+        profiler.WithTags("<KEY1>:<VALUE1>", "<KEY2>:<VALUE2>"),
     )
     if err != nil {
         log.Fatal(err)

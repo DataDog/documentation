@@ -139,19 +139,72 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+### Infrastructure metric correlation
+
+If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
+[registering a new runner][6]. For existing runners, add tags by updating the runner's `config.toml`. Or add tags
+through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+
+After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
+view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
+
+### Error messages for pipeline failures
+
+For failed GitLab pipeline executions, each error under the `Errors` tab within a specific pipeline execution displays a message associated with the error type from GitLab.
+
+{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
+
+See the table below for the message and domain correlated with each error type. Any unlisted error type will lead to the error message of `Job failed` and error domain of `unknown`.
+
+| Error Type | Error Message | Error Domain |
+| :---  |    :----:   |  ---: |
+|  unknown_failure  |  Failed due to unknown reason  |  unknown
+|  config_error  |  Failed due to error on CI/CD configuration file |  user
+|  external_validation_failure  |  Failed due to external pipeline validation  |  unknown
+|  user_not_verified  |  The pipeline failed due to the user not being verified  |  user
+|  activity_limit_exceeded  |  The pipeline activity limit was exceeded  |  provider
+|  size_limit_exceeded  |  The pipeline size limit was exceeded  |  provider
+|  job_activity_limit_exceeded  |  The pipeline job activity limit was exceeded  |  provider
+|  deployments_limit_exceeded  |  The pipeline deployments limit was exceeded  |  provider
+|  project_deleted  |  The project associated with this pipeline was deleted  |  provider
+|  api_failure  |  API Failure  |  provider
+|  stuck_or_timeout_failure  |  Pipeline is stuck or timed out  |  unknown
+|  runner_system_failure  |  Failed due to runner system failure  |  provider
+|  missing_dependency_failure  |  Failed due to missing dependency  |  unknown
+|  runner_unsupported  |  Failed due to unsupported runner  |  provider
+|  stale_schedule  |  Failed due to stale schedule  |  provider
+|  job_execution_timeout  |  Failed due to job timeout  |  unknown
+|  archived_failure  |  Archived failure  |  provider
+|  unmet_prerequisites  |  Failed due to unmet prerequisite  |  unknown
+|  scheduler_failure  |  Failed due to schedule failure  |  provider
+|  data_integrity_failure  |  Failed due to data integrity  |  provider
+|  forward_deployment_failure  |  Deployment failure  |  unknown
+|  user_blocked  |  Blocked by user  |  user
+|  ci_quota_exceeded  |  CI quota exceeded  |  provider
+|  pipeline_loop_detected  |  Pipeline loop detected  |  user
+|  builds_disabled  |  Build disabled  |  user
+|  deployment_rejected  |  Deployment rejected  |  user
+|  protected_environment_failure  |  Environment failure  |  provider
+|  secrets_provider_not_found  |  Secret provider not found  |  user
+|  reached_max_descendant_pipelines_depth  |  Reached max descendant pipelines  |  user
+|  ip_restriction_failure  |  IP restriction failure  |  provider
+
+<!-- | ---------- | ---------- | ---------- | -->
+<!-- | :---        |    :----:   |          ---: | -->
 
 ## Enable job log collection (beta)
 
 The following GitLab versions support collecting job logs:
 * GitLab.com (SaaS)
-* GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][6]
+* GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][7]
 
 To enable collection of job logs:
 
-1. Enable the `datadog_integration_logs_collection` [feature flag][7] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
+1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
 2. Enable the `Enable logs collection` option and save the changes.
 
-Job logs are collected in the [Logs][8] product and automatically correlated with the GitLab pipeline within CI Visibility.
+Job logs are collected in the [Logs][9] product and automatically correlated with the GitLab pipeline within CI Visibility.
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility</div>
 
@@ -164,6 +217,7 @@ Job logs are collected in the [Logs][8] product and automatically correlated wit
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
-[7]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[8]: /logs/
+[6]: https://docs.gitlab.com/runner/register/
+[7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[8]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[9]: /logs/

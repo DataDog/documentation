@@ -1,43 +1,64 @@
 ---
+app_id: riak-cs
+app_uuid: 29e6a2b4-7f3a-4243-8e10-d065147c3da0
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     riakcs: assets/dashboards/riakcs_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: riakcs.bucket_list_pool.workers
+      metadata_path: metadata.csv
+      prefix: riakcs.
+    process_signatures:
+    - riak-cs start
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RiakCS
   saved_views:
     riak-cs_processes: assets/saved_views/riak-cs_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md
-display_name: RiakCS
+display_on_public_website: true
 draft: false
 git_integration_title: riakcs
-guid: 55ba6b94-8eeb-486b-aa94-6366a044fdf0
 integration_id: riak-cs
 integration_title: Riak CS
 integration_version: 2.9.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: riakcs.
-metric_to_check: riakcs.bucket_list_pool.workers
+manifest_version: 2.0.0
 name: riakcs
-process_signatures:
-- riak-cs start
-public_title: Riak CS インテグレーション
+oauth: {}
+public_title: Riak CS
 short_description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::データストア
+  configuration: README.md#Setup
+  description: GET、PUT、DELETE などの速度と平均レイテンシーを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Riak CS
 ---
 
 

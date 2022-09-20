@@ -6,6 +6,9 @@ further_reading:
 - link: /cloud_siem/default_rules
   tag: Documentation
   text: デフォルトの検出ルールについて
+- link: /security_platform/notifications/
+  tag: ドキュメント
+  text: Security Platform の通知について
 - link: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
   tag: ブログ
   text: Datadog でアプリケーションの悪用を検出

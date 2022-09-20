@@ -43,29 +43,34 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
 
-**Note**: Job log collection is only supported for [Jenkins][2].
+**Note**: Job log collection is supported for a limited set of providers:
+- [GitHub Actions][2]
+- [GitLab][3] (beta)
+- [Jenkins][4]
 
 ## Pipeline executions details and traces
 
-On the [Pipeline Executions][3] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
+On the [Pipeline Executions][5] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
-Alternatively, click the [Analytics][4] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and to share on dashboards.
+Alternatively, click the [**Analytics**][6] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and share on dashboards.
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
 ## Communicate about CI pipelines data
 
-CI pipeline data is available when you create widgets in [Dashboards][5] and [Notebooks][6].
+CI pipeline data is available when you create widgets in [Dashboards][7] and [Notebooks][8].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /continuous_integration/setup_pipelines/jenkins#enable-job-log-collection
-[3]: https://app.datadoghq.com/ci/pipeline-executions
-[4]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[5]: https://app.datadoghq.com/dashboard/lists
-[6]: https://app.datadoghq.com/notebook/list
+[2]: /continuous_integration/setup_pipelines/github/#enable-log-collection
+[3]: /continuous_integration/setup_pipelines/gitlab/#enable-job-log-collection-beta
+[4]: /continuous_integration/setup_pipelines/jenkins#enable-job-log-collection
+[5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
+[7]: https://app.datadoghq.com/dashboard/lists
+[8]: https://app.datadoghq.com/notebook/list

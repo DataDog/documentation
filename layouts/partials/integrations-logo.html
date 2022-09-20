@@ -111,7 +111,6 @@ Both of these should return the same image.
 <!--{{/* if fallback settings */}}-->
 {{- if not $imageExists -}}
   {{- if eq ($fallback | lower) "cloud" -}}
-    {{ warnf "fallback %q %q %q" $basename (or (hasPrefix $basename "gcp") (hasPrefix $basename "google")) (or (hasPrefix $basename "aws") (hasPrefix $basename "amazon")) }}
     {{- if (or (hasPrefix $basename "gcp") (hasPrefix $basename "google")) -}}
       {{- $basename = "google-cloud-platform" -}}
       {{- $imageExists = true -}}
@@ -131,8 +130,11 @@ Both of these should return the same image.
     <!-- try to fallback to the static image -->
     {{- $fname := print ($basename | lower) ".png" }}
     {{- $src := (print "images/integrations_logos/" $fname) -}}
-    {{- if (fileExists (print "static/" $src)) -}}
+    {{- $src_svg := (replace $src ".png" ".svg") -}}
+    {{- if (fileExists (print "static/" $src_svg)) -}}
       <!--{{/* {{- warnf "missing integration svg %q falling back to %q" $basename $fname -}} */}}-->
+      {{- $output_image = (print site.Params.img_url $src_svg) -}}
+    {{- else if (fileExists (print "static/" $src)) -}}
       {{- $output_image = (print site.Params.img_url $src) -}}
     {{- else -}}
       {{- if eq $ctx.Page.Language.Lang "en" -}}

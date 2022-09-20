@@ -27,13 +27,13 @@ further_reading:
 
 Multistep API tests allow you to chain several [HTTP requests][1] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, leverage [API tests][2].
 
-You can do the following actions:
+You can accomplish the following:
 
 * Execute HTTP requests on API endpoints requiring authentication (for example, through a token)
 * Monitor key business transactions at the API level
 * Simulate end-to-end mobile application journeys
 
-{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Multiple test requests as steps in a multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Multiple test steps in a multistep API test" style="width:90%;" >}}
 
 If one of your services starts answering more slowly, or in an unexpected way (for example, unexpected response body or status code), your test can [**alert your team**][3], [**block your CI pipeline**][4], or even [**roll back the faulty deployment**][4].
 
@@ -56,7 +56,7 @@ To create an HTTP request step, click **Create Your First Step**.
 
 {{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
-By default, a maximum of 10 steps can be created. To increase this limit, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+By default, you can create up to 10 test steps. To increase this limit, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 
 #### Define the request
 
@@ -69,6 +69,7 @@ By default, a maximum of 10 steps can be created. To increase this limit, reach 
    {{% tab "Request Options" %}}
 
    * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
@@ -76,10 +77,12 @@ By default, a maximum of 10 steps can be created. To increase this limit, reach 
 
    {{% tab "Authentication" %}}
 
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
+   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
 
    {{% /tab %}}
 
@@ -91,15 +94,8 @@ By default, a maximum of 10 steps can be created. To increase this limit, reach 
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`) you want to add to your HTTP request.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
-
-   {{% /tab %}}
-
-   {{% tab "Certificate" %}}
-
-   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
 
    {{% /tab %}}
 
@@ -112,9 +108,9 @@ By default, a maximum of 10 steps can be created. To increase this limit, reach 
   
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Security][1].
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Data Security][1].
 
-[1]: /security/synthetics
+[1]: /data_security/synthetics
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -125,7 +121,7 @@ Click **Test URL** to try out the request configuration. A response preview appe
 
 #### Add assertions
 
-Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. In Multistep API tests, assertions are optional.
+Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. Assertions are optional in multistep API tests.
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -134,45 +130,39 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
-**Note**: HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+
+- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
+{{< img src="synthetics/api_tests/ms_assertions.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
 
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
-{{< img src="synthetics/api_tests/assertions_multi.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
-
-If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
-
-If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
-
 #### Add execution parameters
 
-Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. 
+Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. 
 
-This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
+In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
-Activate **Consider entire test as failed if this step fails** on your intermediary steps to ensure your overall test still generates an alert in case one of the endpoints does not answer as expected.
-
-##### Retry
-
-Your test can trigger retries X times after Y ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
+The test generates an alert if an endpoint does not answer as expected. Your test can trigger retries X times after Y ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
 
 #### Extract variables from the response
 
-You can also optionally extract variables from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.
+Optionally, extract variables from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs.
 
-To parse your variable:
+To start parsing a variable, click **Extract a variable from response content**:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
-2. Decide whether to extract your variable from the response headers, or from the response body:
+2. Decide whether to extract your variable from the response headers or from the response body.
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
-    * Extract the value from **response body**: use the full response body of your HTTP request as the variable value, parse it with a [`regex`][10], [`JSONPath`][8], or [`XPath`][9].
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][10].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][10], a [`JSONPath`][8], or a [`XPath`][9].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
-You can extract up to ten variables per test step.
-
-Once created, this variable can be used in the following steps of your Multistep API test. For more information, see [Use variables](#use-variables).
+You can extract up to ten variables per test step. Once created, this variable can be used in the following steps of your multistep API test. For more information, see [Use variables](#use-variables).
 
 ### Specify test frequency
 
@@ -224,15 +214,13 @@ For more information, see [Using Synthetic Test Monitors][14].
 
 ## Variables
 
+### Extract variables
+
+In addition to creating local variables, you can [extract variables from any step](#extract-variables-from-the-response) of your multistep API test and [re-inject the values in subsequent steps](#use-variables).
+
 ### Create local variables
 
-#### Extracted variables
-
-You can [extract variables from any step of your Multistep API test](#extract-variables-from-the-response) to then [re-inject their values in subsequent steps](#use-variables) of your test.
-
-#### Variables from pattern
-
-You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -243,11 +231,13 @@ You can create local variables by clicking **Create Local Variable** at the top 
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+`{{ date(n unit, format) }}`
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
+
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 

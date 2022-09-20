@@ -89,7 +89,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Azure Storage" %}}
 
-* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
+* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** or **cool** access tier.
 * Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog Archive Page.
 
 **Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
@@ -271,7 +271,6 @@ You can [set a lifecycle configuration on your S3 bucket][1] to automatically tr
 [Rehydration][2] only supports the following storage classes:
 
 * S3 Standard
-* S3 Intelligent-Tiering
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
@@ -281,7 +280,17 @@ If you wish to rehydrate from archives in another storage class, you must first 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /logs/archives/rehydrating/
 {{% /tab %}}
+{{% tab "Azure Storage" %}}
 
+Archiving and [Rehydration][1] only supports the following access tiers:
+
+- Hot access tier
+- Cool access tier
+
+If you wish to rehydrate from archives in another access tier, you must first move them to one of the supported tiers above.
+
+[1]: /logs/archives/rehydrating/
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Server side encryption (SSE)

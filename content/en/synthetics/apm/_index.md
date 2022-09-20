@@ -111,3 +111,4 @@ These traces are retained [just like your classical APM traces][20].
 [18]: /tracing/trace_collection/dd_libraries/dotnet-core/
 [19]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
 [20]: /tracing/trace_pipeline/trace_retention/
+

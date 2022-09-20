@@ -5,7 +5,7 @@ dependencies:
 description: React Native プロジェクトから RUM データを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: Github
+  tag: GitHub
   text: dd-sdk-reactnative ソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
@@ -393,6 +393,38 @@ const config = new DdSdkReactNativeConfiguration(
 )
 ```
 
+## トラブルシューティング
+
+### `use_frameworks!` での使用
+
+もし `Podfile` で `use_frameworks!` を有効にしている場合、SDK を追加した後に `pod install` を実行すると、このようなエラーが発生する可能性があります。
+
+```shell
+The 'Pods-MyApp' target has transitive dependencies that include statically linked binaries: (DatadogSDKBridge, DatadogSDKCrashReporting)
+```
+
+このエラーを防ぐには、`use_frameworks!` を上書きして、フレームワークである必要があるものを除いて、すべてのポッドを静的にインストールすることができます。
+
+```ruby
+dynamic_frameworks = ['DatadogSDKBridge','DatadogSDKCrashReporting']
+
+# static_framework? 関数をオーバーライドして、他のすべてのフレームワークを静的フレームワークにし、true を返すようにします
+pre_install do |installer|
+  installer.pod_targets.each do |pod|
+    if !dynamic_frameworks.include?(pod.name)
+      def pod.static_framework?;
+        true
+      end
+      def pod.build_type;
+        Pod::BuildType.static_library
+      end
+    end
+  end
+end
+```
+
+**注:** この解決策は、この [StackOverflow][14] の投稿に由来しています。
+
 ## ライセンス
 
 詳細については、[Apache ライセンス、v2.0][9]を参照
@@ -414,3 +446,4 @@ const config = new DdSdkReactNativeConfiguration(
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [12]: https://docs.expo.dev/
 [13]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/
+[14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505

@@ -1,48 +1,71 @@
 ---
+app_id: pgbouncer
+app_uuid: 8aabdf7d-2d07-4d77-a76e-0ade64d8e70f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     pgbouncer: assets/dashboards/pgbouncer_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: pgbouncer.pools.sv_idle
+      metadata_path: metadata.csv
+      prefix: pgbouncer.
+    process_signatures:
+    - pgbouncer
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PGBouncer
   logs:
     source: pgbouncer
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     instance_overview: assets/saved_views/instance_overview.json
     pgbouncer_processes: assets/saved_views/pgbouncer_processes.json
     user_overview: assets/saved_views/user_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
 - autodiscovery
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
-display_name: PGBouncer
+display_on_public_website: true
 draft: false
 git_integration_title: pgbouncer
-guid: 51386802-4502-4991-b592-27eff1ca111c
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 4.2.1
+integration_version: 4.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: pgbouncer.
-metric_to_check: pgbouncer.pools.sv_idle
+manifest_version: 2.0.0
 name: pgbouncer
-process_signatures:
-- pgbouncer
-public_title: PGBouncer インテグレーション
+oauth: {}
+public_title: PGBouncer
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::データストア
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PGBouncer
 ---
 
 

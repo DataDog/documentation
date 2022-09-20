@@ -171,7 +171,9 @@ Depending on the operation mode of your cluster, the Datadog Agent needs to be c
 
 Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`).
 
-**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are not supported due to missing Kernel headers.
+**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are supported starting from the version 3.0.1 of the Helm chart. To enable these checks, configure the following settings:
+- `datadog.systemProbe.enableDefaultKernelHeadersPaths` to `false`.
+- `datadog.systemProbe.enableKernelHeaderDownload` to `true`.
 
 ### Autopilot
 
@@ -197,6 +199,7 @@ datadog:
   # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
   kubeStateMetricsEnabled: false
 
+agents:
   containers:
     agent:
       # resources for the Agent container

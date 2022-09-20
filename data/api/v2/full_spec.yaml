@@ -1291,10 +1291,12 @@ components:
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
+      - identity
       - gzip
       - deflate
       type: string
       x-enum-varnames:
+      - IDENTITY
       - GZIP
       - DEFLATE
     CostByOrg:
@@ -4188,6 +4190,15 @@ components:
         type:
           $ref: '#/components/schemas/MetricType'
       type: object
+    MetricActiveConfigurationType:
+      default: actively_queried_configurations
+      description: The metric actively queried configuration resource type.
+      enum:
+      - actively_queried_configurations
+      example: actively_queried_configurations
+      type: string
+      x-enum-varnames:
+      - ACTIVELY_QUERIED_CONFIGURATIONS
     MetricAllTags:
       description: Object for a single metric's indexed tags.
       properties:
@@ -4351,9 +4362,14 @@ components:
       description: HTTP header used to compress the media-type.
       enum:
       - deflate
+      - zstd1
+      - gzip
+      example: deflate
       type: string
       x-enum-varnames:
       - DEFLATE
+      - ZSTD1
+      - GZIP
     MetricCustomAggregation:
       description: A time and space aggregation combination for use in query.
       example:
@@ -4707,6 +4723,50 @@ components:
       required:
       - metric
       - points
+      type: object
+    MetricSuggestedAggregations:
+      description: List of aggregation combinations that have been actively queried.
+      example:
+      - space: sum
+        time: sum
+      - space: sum
+        time: count
+      items:
+        $ref: '#/components/schemas/MetricCustomAggregation'
+      type: array
+    MetricSuggestedTagsAndAggregations:
+      description: Object for a single metric's actively queried tags and aggregations.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricSuggestedTagsAttributes'
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricActiveConfigurationType'
+      type: object
+    MetricSuggestedTagsAndAggregationsResponse:
+      description: Response object that includes a single metric's actively queried
+        tags and aggregations.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricSuggestedTagsAndAggregations'
+      readOnly: true
+      type: object
+    MetricSuggestedTagsAttributes:
+      description: Object containing the definition of a metric's actively queried
+        tags and aggregations.
+      properties:
+        active_aggregations:
+          $ref: '#/components/schemas/MetricSuggestedAggregations'
+        active_tags:
+          description: List of tag keys that have been actively queried.
+          example:
+          - app
+          - datacenter
+          items:
+            description: Actively queried tag keys.
+            type: string
+          type: array
       type: object
     MetricTagConfiguration:
       description: Object for a single metric tag configuration.
@@ -5633,6 +5693,187 @@ components:
         meta:
           $ref: '#/components/schemas/RUMResponseMetadata'
       type: object
+    RUMApplication:
+      description: RUM application.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationAttributes'
+        id:
+          description: RUM application ID.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        type:
+          $ref: '#/components/schemas/RUMApplicationType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    RUMApplicationAttributes:
+      description: RUM application attributes.
+      properties:
+        application_id:
+          description: ID of the RUM application.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        created_at:
+          description: Timestamp in ms of the creation date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        created_by_handle:
+          description: Handle of the creator user.
+          example: john.doe
+          type: string
+        hash:
+          description: Client token of the RUM application.
+          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          type: string
+        name:
+          description: Name of the RUM application.
+          example: my_rum_application
+          type: string
+        org_id:
+          description: Org ID of the RUM application.
+          example: 999
+          format: int32
+          type: integer
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+        updated_at:
+          description: Timestamp in ms of the last update date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: Handle of the updater user.
+          example: jane.doe
+          type: string
+      required:
+      - application_id
+      - created_at
+      - created_by_handle
+      - name
+      - org_id
+      - type
+      - updated_at
+      - updated_by_handle
+      type: object
+    RUMApplicationCreate:
+      description: RUM application creation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationCreateAttributes'
+        type:
+          $ref: '#/components/schemas/RUMApplicationCreateType'
+      required:
+      - attributes
+      - type
+      type: object
+    RUMApplicationCreateAttributes:
+      description: RUM application creation attributes.
+      properties:
+        name:
+          description: Name of the RUM application.
+          example: my_new_rum_application
+          type: string
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+      required:
+      - name
+      type: object
+    RUMApplicationCreateRequest:
+      description: RUM application creation request attributes.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMApplicationCreate'
+      required:
+      - data
+      type: object
+    RUMApplicationCreateType:
+      default: rum_application_create
+      description: RUM application creation type.
+      enum:
+      - rum_application_create
+      example: rum_application_create
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION_CREATE
+    RUMApplicationResponse:
+      description: RUM application response.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMApplication'
+      type: object
+    RUMApplicationType:
+      default: rum_application
+      description: RUM application response type.
+      enum:
+      - rum_application
+      example: rum_application
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION
+    RUMApplicationUpdate:
+      description: RUM application update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationUpdateAttributes'
+        id:
+          description: RUM application ID.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        type:
+          $ref: '#/components/schemas/RUMApplicationUpdateType'
+      required:
+      - id
+      - type
+      type: object
+    RUMApplicationUpdateAttributes:
+      description: RUM application update attributes.
+      properties:
+        name:
+          description: Name of the RUM application.
+          example: updated_name_for_my_existing_rum_application
+          type: string
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+      type: object
+    RUMApplicationUpdateRequest:
+      description: RUM application update request.
+      properties:
+        data:
+          $ref: '#/components/schemas/RUMApplicationUpdate'
+      required:
+      - data
+      type: object
+    RUMApplicationUpdateType:
+      default: rum_application_update
+      description: RUM application update type.
+      enum:
+      - rum_application_update
+      example: rum_application_update
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION_UPDATE
+    RUMApplicationsResponse:
+      description: RUM applications response.
+      properties:
+        data:
+          description: RUM applications array response.
+          items:
+            $ref: '#/components/schemas/RUMApplication'
+          type: array
+      type: object
     RUMBucketResponse:
       description: Bucket values.
       properties:
@@ -6545,6 +6786,8 @@ components:
           description: The unique identifier of the role.
           example: 00000000-0000-1111-0000-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/RoleRelationships'
         type:
           $ref: '#/components/schemas/RolesType'
       required:
@@ -9514,6 +9757,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - events_read
       summary: Search events
       tags:
       - Events
@@ -9964,17 +10212,27 @@ paths:
                 description: Pass multiple log objects at once.
                 summary: Multi JSON Messages
                 value:
-                - message: hello
-                - message: world
+                - ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345678
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+                  service: payment
+                - ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345679
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] World
+                  service: payment
               simple-json-message:
                 description: Log attributes can be passed as `key:value` pairs in
                   valid JSON messages.
                 summary: Simple JSON Message
                 value:
-                  ddsource: agent
-                  ddtags: env:prod,user:joe.doe
-                  hostname: fa1e1e739d95
-                  message: hello world
+                  ddsource: nginx
+                  ddtags: env:staging,version:5.1
+                  hostname: i-012345678
+                  message: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
+                    World
+                  service: payment
             schema:
               $ref: '#/components/schemas/HTTPLog'
           application/logplex-1:
@@ -9982,13 +10240,13 @@ paths:
               multi-raw-message:
                 description: Submit log messages.
                 summary: Multi Logplex Messages
-                value: 'hello
+                value: '2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
 
-                  world'
+                  2019-11-19T14:37:58,995 INFO [process.name][20081] World'
               simple-logplex-message:
                 description: Submit log string.
                 summary: Simple Logplex Message
-                value: hello world
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
             schema:
               type: string
           text/plain:
@@ -9996,9 +10254,9 @@ paths:
               multi-raw-message:
                 description: Submit log string.
                 summary: Multi Raw Messages
-                value: 'hello
+                value: '2019-11-19T14:37:58,995 INFO [process.name][20081] Hello
 
-                  world
+                  2019-11-19T14:37:58,995 INFO [process.name][20081] World
 
                   '
               simple-raw-message:
@@ -10006,7 +10264,7 @@ paths:
                   parameters in the URL. This enables the addition of tags or the
                   source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.'
                 summary: Simple Raw Message
-                value: hello world
+                value: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
             schema:
               type: string
         description: Log to send (JSON format).
@@ -10134,7 +10392,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v2/logs/config/archive-order:
@@ -11254,7 +11512,7 @@ paths:
       summary: Get a list of logs
       tags:
       - Logs
-      x-menu-order: 3
+      x-menu-order: 4
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -11306,7 +11564,7 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -11316,12 +11574,10 @@ paths:
         type: safe
   /api/v2/metrics:
     get:
-      description: 'Returns all configured count/gauge/rate/distribution metric names
-
-        (with additional filters if specified).'
+      description: Returns all metrics (matching additional filters if specified).
       operationId: ListTagConfigurations
       parameters:
-      - description: Filter metrics that have configured tags.
+      - description: Filter custom metrics that have configured tags.
         example: true
         in: query
         name: filter[configured]
@@ -11336,7 +11592,7 @@ paths:
         schema:
           description: Tag keys to filter by.
           type: string
-      - description: Filter tag configurations by metric type.
+      - description: Filter metrics by metric type.
         in: query
         name: filter[metric_type]
         required: false
@@ -11351,10 +11607,21 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'Filter custom metrics that have or have not been queried in
+          the specified window[seconds].
+
+          If no window is provided or the window is less than 2 hours, a default of
+          2 hours will be applied.'
+        example: true
+        in: query
+        name: filter[queried]
+        required: false
+        schema:
+          type: boolean
       - description: 'Filter metrics that have been submitted with the given tags.
           Supports boolean and wildcard expressions.
 
-          Cannot be combined with other filters.'
+          Can only be combined with the filter[queried] filter.'
         example: env IN (staging,test) AND service:web
         in: query
         name: filter[tags]
@@ -11362,9 +11629,9 @@ paths:
         schema:
           type: string
       - description: 'The number of seconds of look back (from now) to apply to a
-          filter[tag] query.
+          filter[tag] or filter[queried] query.
 
-          Defaults value is 3600 (1 hour), maximum value is 172,800 (2 days).'
+          Defaults value is 3600 (1 hour), maximum value is 1,209,600 (2 weeks).'
         example: 3600
         in: query
         name: window[seconds]
@@ -11402,7 +11669,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - metrics_read
-      summary: List tag configurations
+      summary: Get a list of metrics
       tags:
       - Metrics
       x-menu-order: 5
@@ -11462,7 +11729,7 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: idempotent
     post:
@@ -11524,13 +11791,73 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         operationId: DeleteBulkTagsMetricsConfiguration
         parameters:
         - name: body
           source: ''
         type: unsafe
+  /api/v2/metrics/{metric_name}/active-configurations:
+    get:
+      description: List tags and aggregations that are actively queried on dashboards
+        and monitors for a given metric name.
+      operationId: ListActiveMetricConfigurations
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      - description: 'The number of seconds of look back (from now).
+
+          Default value is 604,800 (1 week), minimum value is 7200 (2 hours), maximum
+          value is 2,630,000 (1 month).'
+        example: 7200
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricSuggestedTagsAndAggregationsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - metrics_read
+      summary: List active tags and aggregations
+      tags:
+      - Metrics
+      x-menu-order: 7
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/all-tags:
     get:
       description: View indexed tag key-value pairs for a given metric name.
@@ -11673,7 +12000,7 @@ paths:
           staging_low_urgency: '@slack-points-aggr-stg-ops'
         team: points-aggregation
         team_escalation: '[Points Aggregation] Primary'
-      x-menu-order: 10
+      x-menu-order: 11
       x-permission:
         operator: OPEN
         permissions: []
@@ -11931,7 +12258,7 @@ paths:
       summary: List distinct metric volumes by metric name
       tags:
       - Metrics
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v2/permissions:
@@ -12714,6 +13041,154 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/rum/applications:
+    get:
+      description: List all the RUM applications in your organization.
+      operationId: GetRUMApplications
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationsResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all the RUM applications
+      tags:
+      - RUM
+      x-undo:
+        type: safe
+    post:
+      description: Create a new RUM application in your organization.
+      operationId: CreateRUMApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMApplicationCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new RUM application
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-given:
+        rum_application:
+          parameters:
+          - name: body
+            value: "{ \"data\": {\n    \"type\": \"rum_application_create\",\n    \"attributes\":
+              {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
+              \   }\n  }\n}"
+          step: there is a valid "rum_application" in the system
+      x-undo:
+        operationId: DeleteRUMApplication
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+  /api/v2/rum/applications/{id}:
+    delete:
+      description: Delete an existing RUM application in your organization.
+      operationId: DeleteRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a RUM application
+      tags:
+      - RUM
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the RUM application with given ID in your organization.
+      operationId: GetRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a RUM application
+      tags:
+      - RUM
+      x-undo:
+        type: safe
+    patch:
+      description: Update the RUM application with given ID in your organization.
+      operationId: UpdateRUMApplication
+      parameters:
+      - description: RUM application ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RUMApplicationUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RUMApplicationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a RUM application
+      tags:
+      - RUM
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/rum/events:
     get:
       description: 'List endpoint returns events that match a RUM search query.
@@ -13593,11 +14068,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Modify the triage assignee of a security signal
       tags:
       - Security Monitoring
@@ -13644,11 +14114,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Change the related incidents of a security signal
       tags:
       - Security Monitoring
@@ -13695,11 +14160,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_signals_write
       summary: Change the triage state of a security signal
       tags:
       - Security Monitoring
@@ -14511,7 +14971,7 @@ paths:
       summary: Get hourly usage for application security
       tags:
       - Usage Metering
-      x-menu-order: 37
+      x-menu-order: 38
       x-undo:
         type: safe
   /api/v2/usage/cost_by_org:
@@ -14656,7 +15116,7 @@ paths:
       summary: Get estimated cost across your account
       tags:
       - Usage Metering
-      x-menu-order: 39
+      x-menu-order: 6
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -14836,7 +15296,7 @@ paths:
       summary: Get hourly usage for lambda traced invocations
       tags:
       - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 37
       x-undo:
         type: safe
   /api/v2/usage/observability_pipelines:
@@ -14898,7 +15358,7 @@ paths:
       summary: Get hourly usage for observability pipelines
       tags:
       - Usage Metering
-      x-menu-order: 38
+      x-menu-order: 39
       x-undo:
         type: safe
   /api/v2/user_invitations:

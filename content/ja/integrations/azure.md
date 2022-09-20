@@ -17,9 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/
   tag: ブログ
   text: Microsoft Azure VM の監視方法
-- link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-  tag: よくあるご質問
-  text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
+- link: https://www.datadoghq.com/blog/monitor-azure-arm-vms-datadog/
+  tag: ブログ
+  text: Ampere Altra Arm ベースの CPU を搭載した Microsoft Azure VM を Datadog で監視する？
 - link: https://www.datadoghq.com/blog/monitoring-azure-platform-logs/
   tag: ブログ
   text: Microsoft Azure プラットフォームログをモニタリングするためのベストプラクティス
@@ -32,6 +32,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-government-monitoring-datadog/
   tag: ブログ
   text: Datadog で Azure Government を監視する
+- link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: Documentation
+  text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
 git_integration_title: azure
 has_logo: true
 integration_id: azure
@@ -66,7 +69,7 @@ Microsoft Azure に接続すると、以下のことができます。
 - ログ、メトリクス、APM トレーシング、ユーザーアクティビティなどの間および Datadog 組織内の Azure アプリケーションからのデータを関連付け。
 
 <div class="alert alert-warning">
-Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。詳細は、<a href="https://docs.datadoghq.com/integrations/faq/azure-status-metric">Azure の状態およびカウントメトリクス</a>をご参照ください。
+Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。詳細は、<a href="https://docs.datadoghq.com/integrations/guide/azure-status-metric">Azure の状態およびカウントメトリクス</a>をご参照ください。
 </div>
 
 | インテグレーション                     | 説明                                                                                               |
@@ -320,6 +323,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 インテグレーションタイルのセットアップが完了すると、メトリクスがクローラーによって収集されます。他のメトリクスを収集する場合は、以下のように、Datadog Agent を VM にデプロイします。
 
 #### Agent のインストール
+
+Azure 拡張機能を使用して、Windows VM、Linux x64 VM、および Linux ARM ベースの VM に Datadog Agent をインストールすることができます。
 
 1. [Azure ポータル][47]で、**VM** > **Settings** > **Extensions** > **Add** と移動し、**Datadog Agent** を選択します。
 2. **作成**をクリックし、[Datadog API キー][48]を入力して、**OK**をクリックします。
@@ -581,7 +586,7 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 {{< /tabs >}}
 
 [44]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
-[45]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/#enable-diagnostics
+[45]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/#enable-diagnostics
 [46]: https://app.datadoghq.com/account/settings#integrations/azure
 [47]: https://portal.azure.com
 [48]: https://app.datadoghq.com/organization-settings/api-keys
@@ -918,5 +923,5 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 [46]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
 [47]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
 [48]: https://app.datadoghq.com/event/explorer
-[49]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/
+[49]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/
 [50]: https://docs.datadoghq.com/ja/help/
