@@ -139,5 +139,7 @@ For more information on triggering workflows, see [Trigger a workflow][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+TODO: Something about heading to triggers next
+
 [1]: https://app.datadoghq.com/workflow
 [2]: /workflows/trigger
