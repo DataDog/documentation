@@ -18,6 +18,10 @@ further_reading:
 - link: /account_management/saml/
   tag: Documentation
   text: Activer l'authentification unique avec SAML
+- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
+  tag: Blog
+  text: Concevoir une stratégie de conformité, gouvernance et transparence pour toutes
+    vos équipes avec les journaux d'audit Datadog
 kind: documentation
 title: Contrôle d'accès à base de rôles (RBAC)
 ---
