@@ -110,7 +110,7 @@ Construct a search query using the same logic as a [log explorer search][1]. Eac
 
 {{< img src="security_platform/security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" >}}
 
-Select the value(s) to detect, the learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user or IP).
+Select the value or values to detect, the learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP).
 
 For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
 
