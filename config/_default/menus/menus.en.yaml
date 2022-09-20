@@ -2951,6 +2951,11 @@ main:
     parent: rum_reactnative
     identifier: rum_reactnative_expo
     weight: 403
+  - name: CodePush
+    url: real_user_monitoring/reactnative/codepush/
+    parent: rum_reactnative
+    identifier: rum_reactnative_codepush
+    weight: 404
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum

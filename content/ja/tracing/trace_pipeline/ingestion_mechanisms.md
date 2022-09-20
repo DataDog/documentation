@@ -3,13 +3,13 @@ aliases:
 - /ja/tracing/trace_ingestion/mechanisms
 description: トレース取り込みを制御するトレーサーと Agent のメカニズムの概要。
 further_reading:
-- link: /tracing/trace_ingestion/ingestion_controls/
+- link: /tracing/trace_pipeline/ingestion_controls/
   tag: ドキュメント
   text: Ingestion Controls
-- link: /tracing/trace_retention/
+- link: /tracing/trace_pipeline/trace_retention/
   tag: ドキュメント
   text: トレースの保持
-- link: /tracing/trace_ingestion/usage_metrics/
+- link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
 kind: documentation
@@ -57,8 +57,10 @@ Datadog Agent の[自動計算されたサンプリングレート](#in-the-agen
 
 よりきめ細かい制御を行うには、トレースライブラリのサンプリング構成オプションを使用します。
 - Agent の[デフォルトメカニズム](#in-the-agent)をオーバーライドし、ライブラリの**すべてのルートサービスに適用する特定のサンプリングレート**を設定します。
-- 特定のルートサービスまたは特定のスパン操作名に対して**適用するサンプリングレート**を設定します。
+- **特定のルートサービスに適用するサンプリングレート**を設定します。
 - 1 秒間に取り込まれるトレース数の**レートリミット**を設定します。デフォルトのレートリミットは、サービスインスタンスあたり 1 秒あたり 100 トレースです (Agent [デフォルトメカニズム](#in-the-agent)を使用している場合、レートリミッターは無視されます)。
+
+ルートサービスのみサンプリング制御を設定することができます。
 
 **注**: これらのルールは、ヘッドベースサンプリング制御でもあります。あるサービスのトラフィックが構成された最大トレース数/秒より大きい場合、トレースはルートでドロップされます。不完全なトレースを作成することはありません。
 
@@ -82,7 +84,7 @@ export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
 
 サンプリングコントロールについては、[Java トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /ja/tracing/setup_overview/setup/java
+[1]: /ja/tracing/trace_collection/dd_libraries/java
 {{% /tab %}}
 {{% tab "Python" %}}
 Python アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
@@ -98,33 +100,23 @@ Python アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を�
 
 サンプリングコントロールについては、[Python トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /ja/tracing/setup_overview/setup/python
+[1]: /ja/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Ruby アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
+Ruby アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
 
-また、サービスごとにサンプリングレートを構成することも可能です。例えば、`my-service` という名前のサービスのトレースの 20% を送信するには
+例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
 
-```ruby
-require 'ddtrace'
-
-Datadog.configure do |c|
-  c.tracing.sampler = Datadog::Tracing::Sampling::PrioritySampler.new(
-    post_sampler: Datadog::Tracing::Sampling::RuleSampler.new(
-      [
-        # 20.00% ですべての 'my-service' トレースをサンプリングします。
-        Datadog::Tracing::Sampling::SimpleRule.new(service: 'my-service', sample_rate: 0.2000)
-      ]
-    )
-  )
-end
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
 環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
 
 サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /ja/tracing/setup_overview/setup/ruby#sampling
+[1]: /ja/tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
 Go アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
@@ -140,7 +132,7 @@ Go アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使っ
 
 サンプリングコントロールについては、[Go トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /ja/tracing/setup_overview/setup/go
+[1]: /ja/tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
 {{% tab "NodeJS" %}}
 Node.js アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
@@ -163,7 +155,7 @@ tracer.init({
 
 サンプリングコントロールについては、[NodeJS トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /ja/tracing/setup_overview/setup/nodejs
+[1]: /ja/tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
 PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
@@ -177,7 +169,7 @@ PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使�
 
 サンプリングコントロールについては、[PHP トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /ja/tracing/setup_overview/setup/php
+[1]: /ja/tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
 バージョン `1.3.2` からは、Datadog C++ ライブラリは以下の構成をサポートしています。
@@ -194,7 +186,7 @@ PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使�
 
 C++ では、すぐに使えるインスツルメンテーションのインテグレーションは提供されていませんが、Envoy、Nginx、Istio などのプロキシトレーシングで利用されています。プロキシに対するサンプリングの構成方法については、[プロキシのトレース][1]で詳しく説明しています。
 
-[1]: /ja/tracing/setup_overview/proxy_setup
+[1]: /ja/tracing/trace_collection/proxy_setup
 {{% /tab %}}
 {{% tab ".NET" %}}
 .NET アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
@@ -210,7 +202,7 @@ C++ では、すぐに使えるインスツルメンテーションのインテ�
 
 サンプリングコントロールについては、[.NET トレースライブラリドキュメント][1]を参照してください。
 
-[1]: /ja/tracing/setup_overview/setup/dotnet-core
+[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -363,11 +355,11 @@ HTTP テストとブラウザテストは、バックエンドサービスがイ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/setup_overview/setup/
-[2]: /ja/tracing/trace_ingestion/usage_metrics/
+[1]: /ja/tracing/trace_collection/dd_libraries/
+[2]: /ja/tracing/trace_pipeline/metrics/
 [3]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[4]: /ja/tracing/visualization/#trace-root-span
-[5]: /ja/tracing/trace_ingestion/control_page
+[4]: /ja/tracing/glossary/#trace-root-span
+[5]: /ja/tracing/trace_pipeline/ingestion_controls/
 [6]: /ja/real_user_monitoring/connect_rum_and_traces/
 [7]: https://github.com/DataDog/browser-sdk/releases/tag/v4.10.0
 [8]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0

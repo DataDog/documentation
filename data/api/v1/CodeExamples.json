@@ -241,6 +241,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_858397694",
+      "description": "Create a new dashboard with template variable defaults returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2850365602",
+      "description": "Create a new dashboard with template variable presets using values returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
     },

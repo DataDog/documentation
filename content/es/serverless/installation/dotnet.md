@@ -17,14 +17,14 @@ title: Instrumentar aplicaciones .NET serverless
 
 ## Instalación
 
-Datadog te permite habilitar la instrumentación de tus aplicaciones serverless de muchas formas diferentes. Elige el método que más te convenga de todos los que te presentamos a continuación. Por norma general, Datadog recomienda usar la interfaz de línea de comandos de Datadog (Datadog CLI).
+Datadog te permite habilitar la Instrumentación de tus aplicaciones serverless de muchas formas diferentes. Elige el método que más te convenga de todos los que te presentamos a continuación. Por norma general, Datadog recomienda usar Datadog CLI.
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{% tab "Datadog CLI" %}}
 
-Datadog CLI modifica la configuración de las funciones lambda existentes para habilitar la instrumentación sin necesidad de llevar a cabo otra implementación. Es la forma más rápida de empezar con la monitorización serverless de Datadog.
+Datadog CLI modifica la configuración de las funciones lambda existentes para habilitar la instrumentación sin necesidad de llevar a cabo otra implementación. Es la forma más rápida de empezar con la monitorización serverless de Datadog.
 
-1. Instala el cliente de Datadog CLI
+1. Instala el cliente de Datadog CLI
 
     ```sh
     npm install -g @datadog/datadog-ci
@@ -76,10 +76,10 @@ Datadog CLI modifica la configuración de las funciones lambda existentes para 
     - Reemplaza `<functionname>` y `<another_functionname>` por los nombres de tus funciones lambda. Otra posibilidad es usar `--functions-regex` para instrumentar automáticamente varias funciones cuyos nombres coincidan con la expresión regular facilitada.
     - Reemplaza `<aws_region>` por el nombre de la región de AWS.
 
-    Si necesitas parámetros adicionales, consulta la [documentación acerca de la interfaz de línea de comandos (CLI)][3].
+    Si necesitas parámetros adicionales, consulta la [documentación acerca de la interfaz de línea de comandos (CLI)][2].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[3]: https://docs.datadoghq.com/es/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/es/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Marco serverless" %}}
 
@@ -104,13 +104,13 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 
     Para rellenar los marcadores de posición:
     - Reemplaza `<DATADOG_SITE>` por {{< region-param key="dd_site" code="true" >}} [asegúrate de que has seleccionado el sitio (SITE) correcto a la derecha].
-    - Reemplaza `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS siempre que tu [clave de API de Datadog][4] se haya almacenado de forma segura. La clave tiene que almacenarse en una cadena de texto sin formato (no en un blob JSON). El permiso `secretsmanager:GetSecretValue` es obligatorio. Para agilizar la prueba, puedes usar `apiKey` y configurar la clave de API de Datadog en texto sin formato.
+    - Reemplaza `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS siempre que tu [clave de API de Datadog][3] se haya almacenado de forma segura. La clave tiene que almacenarse en una cadena de texto sin formato (no en un blob JSON). El permiso `secretsmanager:GetSecretValue` es obligatorio. Para agilizar la prueba, puedes usar `apiKey` y configurar la clave de API de Datadog en texto sin formato.
 
-    Para obtener más información y ajustes adicionales, consulta la [documentación acerca del plugin][1].
+    Para obtener más información y parámetros adicionales, consulta la [documentación acerca del plugin][1].
 
 [1]: https://docs.datadoghq.com/es/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/es/serverless/libraries_integrations/extension
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Imagen de contenedor" %}}
 
@@ -120,7 +120,7 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
-    Reemplaza `<TAG>` por un número de versión específico (ej.: `{{< latest-lambda-layer-version layer="extension" >}}`) o por `latest`. Para ver una lista completa con todas las etiquetas (tags) posibles, dirígete al  [repositorio de Amazon ECR][1].
+    Reemplaza `<TAG>` por un número de versión específico (ej.: `{{< latest-lambda-layer-version layer="extension" >}}`) o por `latest`. Para ver una lista completa con todas las etiquetas (tags) posibles, dirígete al [repositorio de Amazon ECR][1].
 
 2. Instala el cliente de Datadog .NET APM
 
@@ -154,10 +154,10 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
     # Use this format for arm64-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
     # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
 
     # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}

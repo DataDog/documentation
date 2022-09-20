@@ -21,6 +21,8 @@ The `fill()` function has two parameters:
 
 * `LIMIT` [*optional*, *default*=**300**, *maximum*=**600**]: The interpolation limit (in seconds) that represents the maximum size of a gap you want to interpolate.
 
+Read [Interpolation and the Fill Modifier][4] for a detailed explanation of the `.fill()` function and its impact on interpolation.
+
 ## Default zero
 
 | Function         | Description                             | Example                          |
@@ -102,3 +104,4 @@ default_zero(avg:custom_metric{*})
 [1]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [2]: /monitors/guide/as-count-in-monitor-evaluations/
 [3]: /metrics/
+[4]: /dashboards/faq/interpolation-the-fill-modifier-explained/
