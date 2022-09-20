@@ -285,6 +285,17 @@ For Gateway deployments:
    # ...
    ```
 
+### OpenTelemetry Operator for Kubernetes
+
+To use the OpenTelemetry Operator:
+1. Refer to the [official documentation](https://github.com/open-telemetry/opentelemetry-operator#readme) for deploying the OpenTelemetry Operator. As detailed there, you will also need to deploy the certificate manager in addition to the Operator.
+
+2. Deploy the OpenTelemetry Collector using one of our standard configurations:
+   * [Daemonset Deployment](#daemonset-deployment)
+   * [Gateway Deployment](#gateway-collector-service)
+
+Note that we **strongly encourage** using Daemonset deployments with the OpenTelemetry Operator otherwise host metrics may not work.
+
 ### Application Configuration
 
 To configure your application container:
