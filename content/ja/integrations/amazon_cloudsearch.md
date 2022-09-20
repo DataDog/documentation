@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awscloudsearch/
+- /ja/integrations/awscloudsearch/
 categories:
-  - cloud
-  - processing
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- processing
+- aws
+- log collection
 dependencies: []
 description: インデックスの使用率、正常に完了したリクエストの数などを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/awscloudsearch/'
+doc_link: https://docs.datadoghq.com/integrations/awscloudsearch/
 draft: false
 git_integration_title: amazon_cloudsearch
 has_logo: true
 integration_id: amazon-cloudsearch
 integration_title: Amazon CloudSearch
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon CloudSearch インテグレーション
 short_description: インデックスの使用率、正常に完了したリクエストの数などを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon CloudSearch は、AWS クラウドにおけるマネージド型サービスであり、検索ソリューションを容易かつコスト効率よくセットアップ、管理、スケーリングできます。
@@ -37,7 +38,7 @@ Amazon CloudSearch は、AWS クラウドにおけるマネージド型サービ
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`CloudSearch` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CloudSearch` が有効になっていることを確認します。
 2. [Datadog - AWS CloudSearch インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -62,7 +63,7 @@ Amazon CloudSearch から S3 バケットまたは CloudWatch のいずれかに
 {{< get-metrics-from-git "amazon_cloudsearch" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -77,8 +78,8 @@ AWS Cloudsearch インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudsearch
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-cloudsearch
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
