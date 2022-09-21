@@ -31,7 +31,7 @@ Dynamic Instrumentation lets you capture code-level service context and metrics 
 Dynamic Instrumentation requires the following:
 
 - [Datadog Agent][1] 7.39.0 or higher is installed alongside your service.
-- For Java applications, tracing library [`dd-trace-java`][2] 0.108.0 or higher.
+- For Java applications, tracing library [`dd-trace-java`][2] 0.109.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][3] 1.5 or higher.
 - [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][5] is set up for your service.
