@@ -5,7 +5,7 @@ is_beta: true
 private: true
 code_lang: dotnet
 type: multi-code-lang
-code_lang_weight: 10
+code_lang_weight: 30
 further_reading:
     - link: 'agent'
       tag: 'Documentation'
