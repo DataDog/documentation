@@ -80,7 +80,7 @@ Agents v6.40.0+ and v7.40.0+ support an optional Unix timestamp field.
 
 When this field is provided, the Datadog Agent doesn't do any processing with the metrics (no aggregation) except from enriching the metrics with tags. This can be useful if you already aggregate your metrics in your application, and you want to send them to Datadog without extra processing.
 
-The Unix timestamp should be valid and in the past. Only GAUGE and COUNT metrics are supported.
+The Unix timestamp should be a valid positive number in the past. Only GAUGE and COUNT metrics are supported.
 
 The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 
