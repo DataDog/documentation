@@ -50,8 +50,7 @@ Dynamic Instrumentation requires the following:
 
 Dynamic Instrumentation snapshots are sent to Datadog logs. They appear alongside your application logs. 
 
-1. Create a logs index with the name `dynamic-instrumentation-snapshots`.
-2. [Configure the index][7] to the desired retention with **no sampling**. Ensure that the new index takes precedence over any other indexes with filters that might match `source:dd_debugger` because logs enter the first index whose filter they match on.
+Create a logs index and [Configure the index][7] to the desired retention with **no sampling**. Set the filter to match on `source:dd_debugger`. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag because logs enter the first index whose filter they match on.
 
 ### Enable Dynamic Instrumentation
 
@@ -75,7 +74,7 @@ To create a snapshot probe:
 4. If not prefilled, choose a service from the list.
 5. If not prefilled, choose environment and version.
 6. If you set up Source Code Integration for the service, you can select the file where you want to set the probe.
-7. in the source code, select a line on which to set the probe.
+7. In the source code, select a line on which to set the probe.
 
 ### Creating a metric probe
 
