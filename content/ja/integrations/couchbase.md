@@ -38,7 +38,7 @@ draft: false
 git_integration_title: couchbase
 integration_id: couchbase
 integration_title: CouchBase
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
