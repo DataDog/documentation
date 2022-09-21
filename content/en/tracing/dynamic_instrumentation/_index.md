@@ -33,12 +33,13 @@ Dynamic Instrumentation requires the following:
 - [Datadog Agent][1] 7.39.0 or higher is installed alongside your service.
 - For Java applications, tracing library [`dd-trace-java`][2] 0.109.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][3] 1.5 or higher.
-- [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
-- Optionally, [Source Code Integration][5] is set up for your service.
+- For .NET applications, tracing library [`dd-trace-dotnet`][4] 2.15 or higher.
+- [Unified Service Tagging][5] tags `service`, `env`, and `version` are applied to your deployment.
+- Optionally, [Source Code Integration][6] is set up for your service.
 
 ### Enable Remote Configuration
 
-1. Go to the [Remote Configuration setup page][6] and enable the feature for your organization.
+1. Go to the [Remote Configuration setup page][7] and enable the feature for your organization.
 2. Create a key. 
 3. Update your `datadog-agent` with the provided configuration snippet.
 4. Set `remote_configuration.refresh_interval: 5s` in the `datadog-agent` configuration.
@@ -49,7 +50,7 @@ Dynamic Instrumentation requires the following:
 
 Dynamic Instrumentation snapshots are sent to Datadog logs. They appear alongside your application logs. 
 
-Create a logs index and [Configure the index][7] to the desired retention with **no sampling**. Set the filter to match on `source:dd_debugger`. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag because logs enter the first index whose filter they match on.
+Create a logs index and [Configure the index][8] to the desired retention with **no sampling**. Set the filter to match on `source:dd_debugger`. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag because logs enter the first index whose filter they match on.
 
 ### Enable Dynamic Instrumentation
 
@@ -67,7 +68,7 @@ A *snapshot probe* exports the context in which it was configured to Datadog. It
 
 To create a snapshot probe:
 
-1. Go to the [Dynamic Instrumentation page][8].
+1. Go to the [Dynamic Instrumentation page][9].
 2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 3. Select **Snapshot** as the probe type.
 4. If not prefilled, choose a service from the list.
@@ -81,7 +82,7 @@ Metric probes emit metrics at a chosen location in your code. Use the Dynamic In
 
 To create a metric probe:
 
-1. Go to the [Dynamic Instrumentation page][8].
+1. Go to the [Dynamic Instrumentation page][9].
 2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 3. Select **Metric** as the probe type.
 4. Specify a name for the metric.
@@ -113,8 +114,9 @@ To remove the filter, open the same menu item and click **Delete Filter**.
 [1]: /agent/
 [2]: https://github.com/DataDog/dd-trace-java
 [3]: https://github.com/DataDog/dd-trace-py
-[4]: /getting_started/tagging/unified_service_tagging/
-[5]: /integrations/guide/source-code-integration/
-[6]: https://app.datadoghq.com/organization-settings/remote-config
-[7]: /logs/log_configuration/indexes/#add-indexes
-[8]: https://app.datadoghq.com/dynamic-instrumentation
+[4]: https://github.com/DataDog/dd-trace-dotnet
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /integrations/guide/source-code-integration/
+[7]: https://app.datadoghq.com/organization-settings/remote-config
+[8]: /logs/log_configuration/indexes/#add-indexes
+[9]: https://app.datadoghq.com/dynamic-instrumentation
