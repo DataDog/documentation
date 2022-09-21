@@ -3,6 +3,7 @@ title: Network Device Monitoring Setup
 kind: documentation
 aliases:
     - /network_performance_monitoring/devices/setup/
+    - /network_monitoring/devices/setup/
 further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
@@ -17,7 +18,7 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary. 
+Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary.
 
 ## Configuration
 
