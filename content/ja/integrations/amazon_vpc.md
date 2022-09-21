@@ -31,7 +31,7 @@ Amazon Virtual Private Cloud (Amazon VPC) を使用すると、仮想ネット�
 
 ### インストール
 
-Datadog で [Amazon Web Services インテグレーション][1]がセットアップされている必要があります。
+[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
