@@ -18,8 +18,7 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
-{{< beta-callout url="http://d-sh.io/dynamic-instrumentation" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-<!-- **!!!TODO: create beta signup form/link!!!** -->
+{{< beta-callout url="https://www.datadoghq.com/live-debugger-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   Dynamic Instrumentation is in private beta. Fill out this form if you would like to
   access it.
 {{< /beta-callout >}}
