@@ -84,7 +84,7 @@ Combination:
   - `host`
   - `kube_container_name`
 
-### Network DNS based Activity
+### Network DNS based activity
 
 Network Activity Monitoring checks DNS traffic and aims to detect suspicious behaviors which can compromise your network of servers. While checking for queries made to your DNS server by certain IPs, it can trigger on benign access from a known set of IP addresses, such as Private Network IPs or Cloud Network IPs.
 
@@ -131,11 +131,11 @@ For example the Dirty Pipe exploitation is a privilege escalation vulnerability.
 - `@process.executable.user`
 - `@process.executable.uid`
 
-Additionally you might notice that signals are created even when some of your machines are running patched kernel versions (for example Linux versions 5.16.11, 5.15.25, and 5.10 that are patched for Dirty Pipe vulnerability). In this case, add to the combination a workload level tag such as `host`, `kube_container_name` or `kube_service`. However when you use a workload level attribute or tag, please be aware that it applies to a wide range of candidates, decreasing your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define more granular suppression criteria.
+Additionally you might notice that signals are created even when some of your machines are running patched kernel versions (for example Linux versions 5.16.11, 5.15.25, and 5.10 that are patched for Dirty Pipe vulnerability). In this case, add to the combination a workload level tag such as `host`, `kube_container_name` or `kube_service`. However when you use a workload level attribute or tag, be aware that it applies to a wide range of candidates, decreasing your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define more granular suppression criteria.
 
 ## Adding a suppression from the signal
 
-When you are in the process of investigating a potential threat reported by CWS detection rules, you  can encounter some signals that alert on known benign behaviors that are specific to your environment.  
+When you are in the process of investigating a potential threat reported by CWS detection rules, you can encounter some signals that alert on known benign behaviors that are specific to your environment.  
 
 Consider a Java process utility exploitation. An attacker intentionally targets vulnerabilities in your application code that runs Java processes. This kind of attack entails persistent access to your application by spawning its own Java shell utility. 
 
