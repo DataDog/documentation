@@ -3,7 +3,7 @@ title: Enable Dynamic Instrumentation for .NET
 kind: Documentation
 is_beta: true
 private: true
-code_lang: java
+code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
@@ -13,10 +13,6 @@ further_reading:
 ---
 
 Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version, and go directly to enabling Dynamic Instrumentation in step 4.
-
-## Requirements
-
-The Datadog Dynamic Instrumentation library is supported in JDK version 8 and above.
 
 ## Installation
 
