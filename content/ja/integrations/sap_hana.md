@@ -30,7 +30,7 @@ draft: false
 git_integration_title: sap_hana
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 2.2.0
+integration_version: 2.2.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
