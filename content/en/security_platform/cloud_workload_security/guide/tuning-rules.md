@@ -5,9 +5,9 @@ kind: guide
 
 ## Overview	
 
-Datadog Cloud Workload Security monitors suspicious activity occurring at the workload level. However in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, there are several possible workflows that can be used to suppress the activity and limit noise from the defender’s view. 
+Datadog Cloud Workload Security monitors suspicious activity occurring at the workload level. However in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
 
-This guide provides considerations for best practices for fine-tuning signal suppression.
+This guide provides considerations for best practices and steps for fine-tuning signal suppression.
 
 ## Suppression strategy
 
@@ -125,16 +125,15 @@ Common keys:
   - `@file.inode`
   - `@file.mode`
 
-Defining a combination for this type of activity falls under the File category or the Process category with some additional specificity tied to the system call used for the attack. 
+Defining a combination for this type of activity is similar to File or Process activities, with some additional specificity tied to the system call used for the attack. 
 
-For example the dirty pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system leveraging this attack, it would make sense to suppress noise created from root users running expected processes. 
+For example the dirty pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system leveraging this attack, it makes sense to suppress noise created from root users running expected processes. 
 - `@process.executable.user`
 - `@process.executable.uid`
 
-Additionally you might notice that signals are created even when some of your machines are running patched kernel versions (Linux versions 5.16. 11, 5.15. 25, and 5.10 patched for this vulnerability).
-In this case, you could add to the combination a workload level tag such as `host`, `kube_container_name` or `kube_service`. However when you use a workload level attribute or tag, please be aware that it applies to a wide range of candidates, decreasing your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define more granular suppression criteria.
+Additionally you might notice that signals are created even when some of your machines are running patched kernel versions (Linux versions 5.16.11, 5.15.25, and 5.10 that are patched for Dirty Pipe vulnerability). In this case, add to the combination a workload level tag such as `host`, `kube_container_name` or `kube_service`. However when you use a workload level attribute or tag, please be aware that it applies to a wide range of candidates, decreasing your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define more granular suppression criteria.
 
-## Suppression from the signal
+## Adding a suppression from the signal
 
 When investigating a potential threat reported by our CWS Detection rules, some signals are alerting on known benign behaviors that are specific to your environment.  
 
@@ -166,5 +165,30 @@ For additional granularity, there are attributes which provide information about
 - `args`
 - `file.path`
 
+## Adding a suppression from the rule editor
+
+Signals are meant to surface relevant context within security alerts. Although Event data can be leveraged for suppression filters, the observability data the detection rule is built on may offer a better tuning candidate.
+
+In Cloud Workload Security, the runtime Agent logs are generated from collected kernel events. You can preview logs from the signal side-panel without context switching. 
+
+1. Go to your chosen signal and click the Events tab. 
+2. Click **View in Log Explorer** to be navigate to Log Management, which displays the full list of logs that instigate this signals.
+   As the amount of logs can be a bit overwhelming to consult one by one, the signal side panel offers a way to marshall these logs and their shared attributes into a JSON.
+3. Go back to the Event tab and scroll all the way to the end of the panel. Expand the JSON dropdown, to access all log attributes contained in runtime Agent events.
+4. Identify key-value pairs to suppress signals by common keys, including `@process.args`, `@process.group`, `@process.ancestors.comm`, or `@process.ancestors.args`.
+5. Open the rule in the Rule editor and in the **Exclude benign activity with suppression queries**, add queries.
+
+For example, suppose you have a `Java process spawned shell/utility` rule that you want to suppress for the following combination of attributes:
+- `@process.args:+x`
+- `@process.executable.group:exec`
+- `@process.ancestors.executable.comm:root`
+- `@process.ancestors.executable.args:init`
+
+Enter these key values under **This rule will not generate a signal if there is a match** to suppress undesired signals.
+
+If, on the other hand, you want to fire signals under specific conditions by identifying the right set of attributes, specify the combination **Only generate a signal if there is a match**.
+
+## Adding a suppression from the facet list 
 
 
+TKTK
