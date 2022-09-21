@@ -36,9 +36,6 @@ receivers:
     protocols:
       http:
       grpc:
-
-processors:
-  batch:
   # The hostmetrics receiver is required to get correct infrastructure metrics in Datadog.
   hostmetrics:
     collection_interval: 10s
@@ -68,6 +65,14 @@ processors:
         scrape_interval: 10s
         static_configs:
         - targets: ['0.0.0.0:8888']
+
+processors:
+  batch:
+    # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
+    # go over that.
+    send_batch_max_size: 1000
+    send_batch_size: 100
+    timeout: 10s
 
 exporters:
   datadog:
