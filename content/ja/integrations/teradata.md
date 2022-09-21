@@ -33,7 +33,7 @@ draft: false
 git_integration_title: teradata
 integration_id: teradata
 integration_title: Teradata
-integration_version: 1.0.1
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
