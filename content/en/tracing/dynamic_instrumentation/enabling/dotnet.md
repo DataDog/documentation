@@ -50,3 +50,4 @@ See [Dynamic Instrumentation][6] for information about setting snapshot and metr
 [3]: /tracing/trace_collection/dd_libraries/dotnet-core/
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
+[6]: /tracing/dynamic_instrumentation/
