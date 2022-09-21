@@ -35,8 +35,6 @@ Facets also allow you to manipulate your logs in your [log monitors][4], log wid
 
 **Note**: You do not need facets to support [log processing][1], [livetail search][2], [archive][3] forwarding, rehydration, or [metric generation][4] from logs. You also do not need facets for routing logs through to [Pipelines][5] and [Indexes][6] with filters, or excluding or sampling logs from indexes with [exclusion filters][7]. 
 
-**Note**: You can't create facets for the attributes that are within the Array object.
-
 In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
 [1]: /logs/log_configuration/processors
@@ -201,6 +199,8 @@ The index facet is a specific facet that appears only if your organization has [
 
 As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
 
+To create a facet on an array of JSON objects, first use a [grok parser][28] to extract the attribute and then create a facet for that attribute.
+
 **Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
 #### Log side panel
@@ -285,3 +285,4 @@ To delete a facet, follow these steps:
 [25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /logs/log_configuration/attributes_naming_convention
 [27]: /logs/indexes/#indexes
+[28]: /logs/log_configuration/parsing/?tab=matchers#nested-json
