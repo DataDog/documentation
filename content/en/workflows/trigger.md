@@ -33,6 +33,8 @@ To trigger a workflow from a Monitor:
 
 ## Trigger a workflow from a Dashboard
 
+site is {{< region-param key="web_integrations_endpoint" >}}:{{< region-param key="tcp_endpoint_port_ssl" >}}
+
 
 
 ## Trigger a workflow from a Security Signal notification
