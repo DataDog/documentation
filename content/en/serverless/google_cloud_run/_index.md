@@ -12,12 +12,69 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
 
 ## Setup
 
-1. [Build your service](#build-your-service).
-2. Create a secret from your Datadog API key. 
+2. Add Datadog instrumentation to your existing service.
+   {{< programming-lang-wrapper langs="go,python,nodejs,java" >}}
+   {{< programming-lang lang="go" >}}
+   See [Tracing Go Applications][1] for detailed instructions. [Sample code for a simple Go application][2].
+
+   If you’re using a Dockerfile to build your application, add the following lines:
+
+   ```
+   COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   CMD ["/nodejs/bin/node /app/app.js"]
+   ```
+[1]: /tracing/setup_overview/setup/go/?tabs=containers
+[2]: https://github.com/DataDog/crpb/tree/main/go
+   {{< /programming-lang >}}
+   {{< programming-lang lang="python" >}}
+   See [Tracing Python Applications][1] for detailed instructions. [Sample code for a simple Python application][2].
+
+   If you’re using a Dockerfile to build your application, add the following lines:
+
+   ```
+   COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   CMD ["ddtrace-run", "python", "app.py"]
+   ```
+[1]: /tracing/setup_overview/setup/python/?tabs=containers
+[2]: https://github.com/DataDog/crpb/tree/main/python
+   {{< /programming-lang >}}
+   {{< programming-lang lang="nodejs" >}}
+   See [Tracing NodeJS Applications][1] for detailed instructions. [Sample code for a simple NodeJS application][2].
+
+   If you’re using a Dockerfile to build your application, add the following lines:
+
+   ```
+   COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   ```
+[1]: /tracing/setup_overview/setup/nodejs/?tabs=containers
+[2]: https://github.com/DataDog/crpb/tree/main/js
+   {{< /programming-lang >}}
+   {{< programming-lang lang="java" >}}
+   See [Tracing Java Applications][1] for detailed instructions. [Sample code for a simple Java application][2].
+
+   If you’re using a Dockerfile to build your application, add the following lines:
+
+   ```
+   COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   ```
+[1]: /tracing/setup_overview/setup/java/?tabs=containers
+[2]: https://github.com/DataDog/crpb/tree/main/java
+   {{< /programming-lang >}}
+   {{< /programming-lang-wrapper >}}
+3. Run this command to submit your build to GCP.
+
+   ```
+   gcloud builds submit --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+   ```
+4. Create a secret from your Datadog API key. 
    Go to [Secret Manager][2] in your GCP console and click on **Create secret**.
 
    Set a name (for example, `datadog-api-key`) in the **Name** field. Then, paste your Datadog API key in the **Secret value** field.
-3. Deploy your service.
+5. Deploy your service.
    Go to [Cloud Run][3] in your GCP console. and click on **Create service**.
    
    Select **Deploy one revision from an existing container image**. Choose your previously built image.
@@ -32,45 +89,6 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
 
    Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
-### Build your service
-
-{{< programming-lang-wrapper langs="go,python,nodejs,java" >}}
-{{< programming-lang lang="go" >}}
-1. Add Datadog instrumentation to your existing service. See [Tracing Go Applications][1] for more information. 
-
-   [Sample code for a simple Go application][2].
-
-2 - Edit your Dockerfile
-
-If you’re using a Dockerfile to build your application, you need the following lines: 
-
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["/nodejs/bin/node /app/app.js"] (adapt this line to your need)
-
-You can see a full example of a ready-to-use Go Dockerfile here: https://github.com/DataDog/crpb/blob/main/go/Dockerfile
-
-3 - Build and push 
-
-Run this command to submit your build to GCP, once succeeded, your docker image will be ready to use
-
-gcloud builds submit --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-
-
-[1]: /tracing/setup_overview/setup/go/?tabs=containers
-[2]: https://github.com/DataDog/crpb/tree/main/go
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
-
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-
-{{< /programming-lang >}}
-{{< programming-lang lang="java" >}}
-
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
 
 ## Advanced options and configurations
 
