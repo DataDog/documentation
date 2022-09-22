@@ -3,12 +3,14 @@ title: Trigger a workflow
 kind: documentation
 disable_toc: false
 further_reading:
-- link: "logs/processing/pipelines"
+- link: ""
   tag: "Documentation"
   text: "Log processing pipelines"
 ---
 
-You can trigger a workflow manually, on a schedule, or using a variety of automated methods such as a Datadog Monitor, or a webhook. Triggering a workflow using automation requires a unique service account. For more information on setting up a service account for workflow runs, see **TODO: link for this**.
+TODO - add related link to dashboard widgets
+
+You can trigger a workflow manually, on a schedule, or using a variety of automated methods such as a Datadog Monitor, or a webhook. Triggering a workflow using automation requires a unique service account. For more information on setting up a service account for your workflows, see **TODO: link for this**.
 
 ## Manually trigger a workflow
 
@@ -16,6 +18,20 @@ To trigger a workflow manually:
 1. From the workflow page, click the **Run** button. 
 1. Enter the values for existing trigger variables.
 1. When you're ready to run the workflow, click **Save & Run**.
+
+## Manually trigger a workflow from a Dashboard
+
+Before you can trigger a trigger a workflow from a Dashboard, you need to connect the workflow to the dashboard. Your workflow must have a service account associated with it.
+
+To connect your workflow to a Dashboard:
+1. From your Dashboard, click **Add Widget**.
+1. Search for `workflows` and add the **Run Workflow** widget.
+1. Under **Select the workflow**, find your workflow in the dropdown menu.
+1. Enter a title for the widget and click **Save**
+
+To run your workflow, click **Run Workflow** on your dashboard widget.
+
+{{< img src="workflows/trigger-from-dashboard.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
 ## Trigger a workflow from a Monitor
 
@@ -31,12 +47,14 @@ To trigger a workflow from a Monitor:
 
 {{< img src="workflows/monitor-trigger.png" alt="Add a monitor trigger to the message section of a Monitor" >}}
 
-## Trigger a workflow from a Dashboard
+Each time your monitor's threshold is hit, it triggers a workflow run.
 
-site is {{< region-param key="web_integrations_endpoint" >}}:{{< region-param key="tcp_endpoint_port_ssl" >}}
-
-
-
-## Trigger a workflow from a Security Signal notification
 ## Trigger a workflow from a webhook
+
 ## Scheduling a workflow trigger
+
+To schedule a workflow run:
+1. On the workflow canvas, click **Add an Automated Trigger** and select **Schedule**.
+1. Enter a time and frequency for the run.
+1. (Optional) Enter a description for the workflow in the **Memo** field.
+1. Click **Save**.
