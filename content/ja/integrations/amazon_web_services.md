@@ -35,12 +35,12 @@ version: '1.0'
 
 Amazon Web Services (AWS) を接続すると、次のことができるようになります。
 
-- イベントストリームで AWS ステータスの自動更新を確認する
+- イベントエクスプローラーで AWS ステータスの自動更新を確認する
 - Agent をインストールすることなく、EC2 ホストの CloudWatch メトリクスを取得する
 - EC2 ホストに EC2 固有の情報をタグ付けする
 - EC2 のスケジュール設定されたメンテナンス イベントをストリームに表示する
 - その他のさまざまな AWS 製品から CloudWatch メトリクスとイベントを収集する
-- イベントストリームで CloudWatch アラームを確認する
+- イベントエクスプローラーで CloudWatch アラームを確認する
 
 AWS インテグレーションをすぐに使い始めるには、[AWS スタートガイド][1]をご確認ください。
 
@@ -170,7 +170,7 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 #### セットアップ
 
-お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][80]を完了させます。リソース収集が有効化されていることを適宜ご確認ください。
+お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][80]を完了させます。クラウドセキュリティポスチャ管理が有効化されていることを適宜ご確認ください。
 
 **注:** この機能を使用するには、AWS インテグレーションに**ロールの委任**を設定する必要があります。
 
@@ -187,18 +187,18 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
    **手動** - [AWS が管理する `SecurityAudit` ポリシー][81]を Datadog AWS IAM ロールにアタッチします。このポリシーは [AWS コンソール][81]にあります。
 
-2. [Datadog AWS インテグレーションタイル][82]で、以下の手順で設定を完了させます。または、[Update an AWS Integration][74] API エンドポイントを利用することも可能です。
+2. [Datadog AWS インテグレーションページ][82]で、以下の手順で設定を完了させます。または、[Update an AWS Integration][74] API エンドポイントを利用することも可能です。
 
    1. リソース収集を有効化したい AWS アカウントをクリックします。
-   2. そのアカウントの **Resource collection** セクションに移動し、`Expanded collection required for Cloud Security Posture Management` チェックボックスをオンにします。
-   3. タイルの下部で `Update Configuration` をクリックします。
+   2. そのアカウントの **Resource collection** タブに移動し、`Cloud Security Posture Management Collection` を有効にします。
+   3. ページの右下にある `Save` をクリックします。
 
 ## アラームの収集
 
-AWS CloudWatch アラームを Datadog イベントストリームに送信する方法は 2 つあります。
+AWS CloudWatch アラームを Datadog イベントエクスプローラーに送信する方法は 2 つあります。
 
 - アラームポーリング: アラームポーリングは AWS インテグレーションですぐに使用でき、[DescribeAlarmHistory][83] API を介してメトリクスアラームをフェッチします。この方法に従うと、イベントソース `Amazon Web Services` の下にアラームが分類されます。**注**: クローラーは複合アラームを収集しません。
-- SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントストリーム内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][84]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
+- SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントエクスプローラー内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][84]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
 
 ## 収集データ
 
@@ -346,11 +346,11 @@ AWS インテグレーションに関する問題解決は、[AWS インテグ�
 [75]: https://docs.datadoghq.com/ja/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly
 [76]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
 [77]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[78]: /ja/integrations/faq/cloud-metric-delay/#aws
-[79]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?
+[78]: https://docs.datadoghq.com/ja/integrations/guide/cloud-metric-delay/#aws
+[79]: https://docs.datadoghq.com/ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
 [80]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
 [81]: https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit
-[82]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[82]: https://app.datadoghq.com/integrations/amazon-web-services
 [83]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html#API_DescribeAlarmHistory_RequestParameters
 [84]: https://docs.datadoghq.com/ja/integrations/amazon_sns/#receive-sns-messages
 [85]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
