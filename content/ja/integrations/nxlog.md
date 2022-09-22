@@ -27,7 +27,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 ### ログの収集
 
 {{< tabs >}}
-{{< tab "Datadog US site" >}}
+{{% tab "Datadog US site" %}}
 
 1. Configure NXLog を構成してログを Datadog プラットフォームに送信し、`C:\Program Files\nxlog\conf` のファイル全体を以下の内容に書き換えます。
 
@@ -131,8 +131,8 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 
 
 [1]: /resources/crt/ca-certificates.crt
-{{< /tab >}}
-{{< tab "Datadog EU site" >}}
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
 
 1. Configure NXLog を構成してログを Datadog プラットフォームに送信し、`C:\Program Files\nxlog\conf` のファイル全体を以下の内容に書き換えます。
 
@@ -236,7 +236,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 
 
 [1]: /resources/crt/ca-certificates.crt
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## トラブルシューティング

@@ -75,7 +75,7 @@ Ce check étant basé sur JMX, vous devez activer les connexions JMX à distance
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -254,15 +254,15 @@ La liste de filtres est uniquement prise en charge pour les versions > 5.3.0 de
 [5]: https://tomcat.apache.org/tomcat-8.0-doc/logging.html#Using_Log4j
 [6]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
 [7]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
 Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][1].
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

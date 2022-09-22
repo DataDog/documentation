@@ -86,7 +86,7 @@ Airflow インテグレーションを適切に動作させるには、以下の
 Airflow インテグレーションには 2 つの形式があります。まず、Airflow が接続でき、正常であるかどうかを報告するために、提供されたエンドポイントにリクエストを行う Datadog Agent インテグレーションがあります。次に、Airflow が Datadog Agent にメトリクスを送信するように Airflow を構成できる Airflow StatsD 部分があります。これにより、Airflow 表記を Datadog 表記に再マップできます。
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -335,8 +335,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/ja/help/
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -406,7 +406,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [6]: /ja/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
 [7]: https://github.com/DataDog/integrations-core/tree/master/airflow/tests/k8s_sample
 [8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

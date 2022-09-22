@@ -151,7 +151,7 @@ Lancez votre emplacement privé sur :
 
 {{< tabs >}}
 
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 
 Exécutez cette commande pour démarrer votre worker d'emplacement privé en montant votre fichier de configuration dans le conteneur. Assurez-vous que votre fichier `<NOM_FICHIER_CONFIGURATION_WORKER>.json` est placé dans `/etc/docker` et non dans le dossier de base :
 
@@ -165,9 +165,9 @@ Cette commande lance un conteneur Docker et prépare votre emplacement privé à
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 1. Créez un fichier `docker-compose.yml` avec :
 
@@ -189,9 +189,9 @@ docker-compose -f docker-compose.yml up
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Déploiement Kubernetes" >}}
+{{% tab "Déploiement Kubernetes" %}}
 
 1. Créez une ConfigMap Kubernetes avec le fichier JSON précédemment créé en exécutant la commande suivante :
 
@@ -240,9 +240,9 @@ docker-compose -f docker-compose.yml up
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Chart Helm" >}}
+{{% tab "Chart Helm" %}}
 
 1. Ajoutez l'[emplacement privé Datadog Synthetic][1] à vos référentiels Helm :
 
@@ -262,9 +262,9 @@ docker-compose -f docker-compose.yml up
 [1]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
 [2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "ECS" %}}
 
 Créez une définition de tâche EC2 correspondant à celle indiquée ci-dessous. Pensez à remplacer chaque paramètre par la valeur correspondante figurant dans le fichier de configuration de l'emplacement privé que vous avez généré précédemment :
 
@@ -300,9 +300,9 @@ Créez une définition de tâche EC2 correspondant à celle indiquée ci-dessous
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 Créez une nouvelle définition de tâche Fargate correspondant à celle indiquée ci-dessous. Pensez à remplacer chaque paramètre par la valeur correspondante figurant dans le fichier de configuration de l'emplacement privé que vous avez généré précédemment :
 
@@ -341,9 +341,9 @@ Si vous souhaitez utiliser des variables d'environnement dans votre définition 
 
 L'option de pare-feu de l'emplacement privé n'est pas prise en charge sur AWS Fargate. Par conséquent, le paramètre `enableDefaultBlockedIpRanges` ne peut pas être défini sur `true`.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 Étant donné que Datadog s'intègre déjà à Kubernetes et AWS, la plateforme est prête pour la surveillance de EKS.
 
@@ -394,7 +394,7 @@ L'option de pare-feu de l'emplacement privé n'est pas prise en charge sur AWS 
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -408,7 +408,7 @@ Utilisez la configuration ci-dessous pour créer des checks de santé sur vos co
 
 {{< tabs >}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 ```yaml
 healthcheck:
@@ -421,26 +421,9 @@ healthcheck:
   start_period: 30s
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Déploiement Kubernetes" >}}
-
-```yaml
-livenessProbe:
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-  failureThreshold: 3
-```
-
-{{< /tab >}}
-
-{{< tab "Chart Helm" >}}
+{{% tab "Déploiement Kubernetes" %}}
 
 ```yaml
 livenessProbe:
@@ -455,9 +438,26 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "Chart Helm" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
 
 ```json
 "healthCheck": {
@@ -471,9 +471,9 @@ livenessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 ```json
 "healthCheck": {
@@ -487,9 +487,9 @@ livenessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 ```yaml
 livenessProbe:
@@ -504,7 +504,7 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

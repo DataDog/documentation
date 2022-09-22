@@ -58,7 +58,7 @@ Par défaut, les fichiers journal appartiennent au groupe système systemd-journ
     ```
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
@@ -87,8 +87,8 @@ Pour renseigner les attributs `source` et `service`, l'Agent recueille `SYSLOG_I
 [Redémarrez l'Agent][2].
 
 
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][5] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
@@ -101,7 +101,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 | -------------- | ------------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "journald", "service": "<NOM_VOTRE_APPLICATION>"}` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

@@ -46,7 +46,7 @@ The Redis spec in this example includes the following annotations:
 
 {{< tabs >}}
 
-{{< tab "AD Annotations v2 (Agent 7.36+)" >}}
+{{% tab "AD Annotations v2 (Agent 7.36+)" %}}
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -74,9 +74,9 @@ In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, 
 `redisdb` is the name of the check to run. `init_config` contains some configuration parameters, such as minimum collection interval, and is optional. Each item in `instances` represents the configuration to run for one instance of a check. **Note**: In this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 
 [1]: /getting_started/tagging/unified_service_tagging
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "AD Annotations v1" >}}
+{{% tab "AD Annotations v1" %}}
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -101,7 +101,7 @@ In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, 
 `check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. **Note**: In this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 
 [1]: /getting_started/tagging/unified_service_tagging
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

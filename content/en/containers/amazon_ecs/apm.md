@@ -72,7 +72,7 @@ containerDefinitions": [
 2. Assign the private IP address for each underlying instance your containers are running in your application container to the `DD_AGENT_HOST` environment variable. This allows your application traces to be shipped to the Agent. 
 
 {{< tabs >}}
-{{< tab "EC2 metadata endpoint" >}}
+{{% tab "EC2 metadata endpoint" %}}
 
 The [Amazon’s EC2 metadata endpoint][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
 
@@ -82,8 +82,8 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4
 
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-{{< /tab >}}
-{{< tab "ECS container metadata file" >}}
+{{% /tab %}}
+{{% tab "ECS container metadata file" %}}
 
 The [Amazon's ECS container metadata file][1] allows discovery of the private IP address. To get the private IP address for each host, run the following command:
 
@@ -93,7 +93,7 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 
     
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-metadata.html#metadata-file-format
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Set the result as your Trace Agent hostname environment variable for each application container shipping to APM:

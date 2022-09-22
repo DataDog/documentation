@@ -33,7 +33,7 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 - `snmp.d/conf.yaml` ファイル ([Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダー内) の IP アドレスと追加デバイスのメタデータを (タグとして) 含めます。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル snmp.d/conf.yaml][4] を参照してください。
 
 {{< tabs >}}
-{{< tab "SNMPv2" >}}
+{{% tab "SNMPv2" %}}
 
 - SNMPv2 の場合 デバイスの IP アドレスおよびデバイスの_コミュニティ文字列_を指定してインスタンスを構成します。
 
@@ -48,8 +48,8 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
         - "key2:val2"
     ```
 
-{{< /tab >}}
-{{< tab "SNMPv3" >}}
+{{% /tab %}}
+{{% tab "SNMPv3" %}}
 
 - SNMPv3 の場合は、デバイスの IP アドレスおよび SNMPv3 資格情報 (デバイスに応じて) を指定してインスタンスを構成します。例: `user`、`authProtocol`、`authKey`、`privProtocol`、`privKey`:
 
@@ -69,7 +69,7 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
         - "key2:val2"
     ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 - [Agent を再起動します][5]。
@@ -94,7 +94,7 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 2. [`datadog.yaml`][8] Agent コンフィギュレーションファイルを編集し、Datadog がスキャンするすべてのサブネットを含めます。以下のサンプルコンフィギュレーションは、オートディスカバリーに必要なパラメーター、デフォルト値、そして例を示しています。
 
 {{< tabs >}}
-{{< tab "SNMPv2" >}}
+{{% tab "SNMPv2" %}}
 
 ```yaml
 listeners:
@@ -121,9 +121,9 @@ snmp_listener:
       loader: core
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "SNMPv3" >}}
+{{% tab "SNMPv3" %}}
 
 ```yaml
 listeners:
@@ -157,7 +157,7 @@ snmp_listener:
       loader: core
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: Datadog Agent は検出された各 IP の SNMP チェックを自動で構成します。検出されたデバイスは、SNMP を使用してポールされた際に正常に応答する IP となります。

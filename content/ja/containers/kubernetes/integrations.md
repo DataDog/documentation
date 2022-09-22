@@ -56,7 +56,7 @@ title: Kubernetes インテグレーションオートディスカバリー
 ## コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Kubernetes (AD v2)" >}}
+{{% tab "Kubernetes (AD v2)" %}}
 
 **注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
 
@@ -125,9 +125,9 @@ spec:
 
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes (AD v1)" >}}
+{{% tab "Kubernetes (AD v1)" %}}
 
 インテグレーションテンプレートは、Kubernetes のポッドアノテーションに格納できます。オートディスカバリーを使用して、Agent は、自身が Kubernetes 上で実行されているかどうかを検出し、すべてのポッドアノテーションでインテグレーションテンプレートを自動的に探します。
 
@@ -180,8 +180,8 @@ spec:
 
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
-{{< /tab >}}
-{{< tab "File" >}}
+{{% /tab %}}
+{{% tab "File" %}}
 
 テンプレートをローカルファイルとして保存し、それをコンテナ化 Agent 内にマウントする場合は、外部サービスや特定のオーケストレーションプラットフォームを必要としません。この方法の欠点は、テンプレートを変更、追加、または削除するたびに、Agent コンテナを再起動する必要がある点です。Agent は、マウントされた `/conf.d` ディレクトリでオートディスカバリーテンプレートを探します。
 
@@ -210,8 +210,8 @@ instances:
 **注**: Agent はファイル名から直接 `<INTEGRATIONS_NAME>` を推測するため、この名前を設定する必要はありません。
 
 [1]: /ja/agent/guide/ad_identifiers/
-{{< /tab >}}
-{{< tab "ConfigMap" >}}
+{{% /tab %}}
+{{% tab "ConfigMap" %}}
 
 Kubernetes では、[ConfigMaps][1] を使用して外部でコンフィギュレーションを定義し、その後マニフェストを使用してマウントすることができます。以下のテンプレートと [Kubernetes カスタムインテグレーション][2]のドキュメントを参照してください。
 
@@ -236,8 +236,8 @@ data:
 [1]: /ja/agent/kubernetes/integrations/#configmap
 [2]: /ja/agent/kubernetes/integrations/
 [3]: /ja/agent/guide/ad_identifiers/
-{{< /tab >}}
-{{< tab "Key-value store" >}}
+{{% /tab %}}
+{{% tab "Key-value store" %}}
 
 オートディスカバリーでは、[Consul][1]、Etcd、および Zookeeper をインテグレーションテンプレートソースとして使用できます。key-value ストアを使用するには、Agent の `datadog.yaml` 構成ファイルでストアを構成し、このファイルをコンテナ化 Agent 内にマウントします。あるいは、key-value ストアを環境変数としてコンテナ化 Agent に渡します。
 
@@ -296,8 +296,8 @@ key-value ストアがテンプレートソースとして有効になってい�
 
 [1]: /ja/integrations/consul/
 [2]: /ja/agent/guide/agent-commands/
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 `values.yaml` ファイルには、静的およびオートディスカバリーのインテグレーションチェックの両方を定義する `confd` セクションが含まれています。サンプル [values.yaml][1] に、インラインの例があります。各キーは、Agent の `conf.d` ディレクトリのファイルになります。
 
@@ -319,7 +319,7 @@ key-value ストアがテンプレートソースとして有効になってい�
 [2]: /ja/agent/guide/ad_identifiers/
 [3]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
 [4]: /ja/agent/cluster_agent/clusterchecks
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 準備のできていないポッドを許容する
@@ -342,7 +342,7 @@ metadata:
 ### Datadog Redis インテグレーション
 
 {{< tabs >}}
-{{< tab "Kubernetes (AD v2)" >}}
+{{% tab "Kubernetes (AD v2)" %}}
 
 **注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
 
@@ -379,9 +379,9 @@ spec:
 **注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
 
 [1]: /ja/agent/faq/template_variables/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes (AD v1)" >}}
+{{% tab "Kubernetes (AD v1)" %}}
 
 以下のポッドアノテーションは、カスタム `password` パラメーターを使用して `redis` コンテナのインテグレーションテンプレートを定義します。
 
@@ -414,8 +414,8 @@ spec:
 **注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
 
 [1]: /ja/agent/faq/template_variables/
-{{< /tab >}}
-{{< tab "ConfigMap" >}}
+{{% /tab %}}
+{{% tab "ConfigMap" %}}
 
 次の ConfigMap は、`redis` コンテナのインテグレーションテンプレートを定義します。
 
@@ -456,8 +456,8 @@ data:
 # [...]
 ```
 
-{{< /tab >}}
-{{< tab "Key-value store" >}}
+{{% /tab %}}
+{{% tab "Key-value store" %}}
 
 以下の etcd コマンドは、カスタム `password` パラメーターを使用して Redis インテグレーションテンプレートを作成します。
 
@@ -475,8 +475,8 @@ etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":
 auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`redis` など) も長いイメージ名 (`redis:latest` など) も使用できます**。
 
 [1]: /ja/agent/faq/template_variables/
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 以下のコンフィギュレーションは、カスタムパスワードパラメーターを使用して Redis コンテナのインテグレーションテンプレートを定義します。
 ```yaml
@@ -494,7 +494,7 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 **注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
 
 [1]: /ja/agent/faq/template_variables/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Datadog Apache および HTTP チェックインテグレーション
@@ -504,7 +504,7 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメントの [Datadog-Apache インテグレーション][10]と [Datadog-HTTP チェックインテグレーション][11]のページにあります。
 
 {{< tabs >}}
-{{< tab "Kubernetes (AD v2)" >}}
+{{% tab "Kubernetes (AD v2)" %}}
 
 **注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
 
@@ -548,9 +548,9 @@ spec:
         - containerPort: 80
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes (AD v1)" >}}
+{{% tab "Kubernetes (AD v1)" %}}
 
 ```yaml
 apiVersion: v1
@@ -590,8 +590,8 @@ spec:
         - containerPort: 80
 ```
 
-{{< /tab >}}
-{{< tab "File" >}}
+{{% /tab %}}
+{{% tab "File" %}}
 
 * ホストに `conf.d/` フォルダーと `conf.d/apache.d` フォルダーを作成します。
 * ホストの `conf.d/apache.d/conf.yaml` の下にカスタムオートディスカバリー構成を追加します。
@@ -631,8 +631,8 @@ instances:
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [2]: /ja/agent/guide/ad_identifiers/
-{{< /tab >}}
-{{< tab "ConfigMap" >}}
+{{% /tab %}}
+{{% tab "ConfigMap" %}}
 
 次の ConfigMap は、`apache` と `http_check` コンテナのインテグレーションテンプレートを定義します。
 
@@ -690,8 +690,8 @@ data:
 # [...]
 ```
 
-{{< /tab >}}
-{{< tab "Key-value store" >}}
+{{% /tab %}}
+{{% tab "Key-value store" %}}
 
 ```conf
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
@@ -701,7 +701,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 **注**: 各リストの順番が重要です。Agent は、構成の各部分が 3 つのリストの同じインデックスにある場合にのみ、HTTP チェック構成を正しく生成します。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

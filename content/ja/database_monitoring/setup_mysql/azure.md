@@ -59,7 +59,7 @@ Agent は、現在実行中のクエリを収集するために `performance_sch
 Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
 
 {{< tabs >}}
-{{< tab "MySQL ≥ 8.0" >}}
+{{% tab "MySQL ≥ 8.0" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
@@ -71,8 +71,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
-{{< tab "MySQL 5.7" >}}
+{{% /tab %}}
+{{% tab "MySQL 5.7" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
@@ -83,7 +83,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 次のスキーマを作成します。
@@ -130,7 +130,7 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 Azure ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][5]を参照してください。
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 ホスト上で実行されている Agent のこのチェックを構成するには、次の手順に従ってください。(Agent でデータベースからメトリクスを収集するために小規模な仮想マシンをプロビジョニングする場合など)
 
@@ -165,8 +165,8 @@ instances:
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
@@ -219,8 +219,8 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDP
 [2]: /ja/agent/guide/secrets-management
 [3]: /ja/agent/faq/template_variables/
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
@@ -319,7 +319,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [3]: https://helm.sh
 [4]: /ja/agent/guide/secrets-management
 [5]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

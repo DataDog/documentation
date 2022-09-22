@@ -26,20 +26,20 @@ Follow the instructions below to build the Datadog Docker Agent image for a give
 4. Download the Agent Debian package that corresponds to the Agent version you want. Choose between the AMD and ARM architecture:
 
     {{< tabs >}}
-{{< tab "AMD" >}}
+{{% tab "AMD" %}}
 
 ```shell
 curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_amd64.deb -o datadog-agent_<AGENT_VERSION>-1_amd64.deb
 ```
 
-{{< /tab >}}
-{{< tab "ARM" >}}
+{{% /tab %}}
+{{% tab "ARM" %}}
 
 ```shell
 curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_arm64.deb -o datadog-agent_<AGENT_VERSION>-1_arm64.deb
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
     **Note**: The full list of Debian packages available can be found [on this APT listing][1].
@@ -47,20 +47,20 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_V
 5. Build the Agent image by running:
 
     {{< tabs >}}
-{{< tab "AMD" >}}
+{{% tab "AMD" %}}
 
 ```shell
 docker build --build-arg <BUILD_ARGS> --file amd64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
-{{< /tab >}}
-{{< tab "ARM" >}}
+{{% /tab %}}
+{{% tab "ARM" %}}
 
 ```shell
 docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
     For instance to build the Agent version 7.17.0 on the AMD architecture you would run:

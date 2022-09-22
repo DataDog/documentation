@@ -48,7 +48,7 @@ Datadog Agent によって収集されたすべてのログに同一の処理ル
 たとえば、Datadog メールアドレスを含むログを**除外**するには、次の `log_processing_rules` を使用します。
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -63,8 +63,8 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -84,8 +84,8 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 
 **注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -122,7 +122,7 @@ spec:
 
 **注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 一致時に含める
@@ -135,7 +135,7 @@ spec:
 たとえば、Datadog メールアドレスを含むログに**絞り込む**には、次の `log_processing_rules` を使用します。
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -180,8 +180,8 @@ logs:
 |\\w+@datadoghq.com"
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -201,8 +201,8 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 
 **注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -239,7 +239,7 @@ spec:
 
 **注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ログの機密データのスクラビング
@@ -251,7 +251,7 @@ spec:
 以下は、クレジットカード番号を編集する例です。
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -267,8 +267,8 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -289,8 +289,8 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 
 **注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -328,7 +328,7 @@ spec:
 
 **注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_placeholder` はリファレンスを展開して `$1`、`$2` などのグループをキャプチャすることが可能です。キャプチャするグループとの間にスペースを入れずに文字列を続けるには、`${<グループ番号>}` のフォーマットを使用します。
@@ -355,7 +355,7 @@ Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_plac
 ```
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 構成ファイルで上記のログ例を送信するには、次の `log_processing_rules` を使用します。
 
@@ -371,8 +371,8 @@ logs:
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -390,8 +390,8 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
       }]
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -428,7 +428,7 @@ spec:
 
 **注**: ポッドアノテーションを使用して複数行の集約を実行する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em></div>
@@ -459,7 +459,7 @@ logs_config:
 また、ログ構成ごとに有効・無効 (グローバル構成をオーバーライド) を設定することができます。
 
 {{< tabs >}}
-{{< tab "Configuration file" >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -470,8 +470,8 @@ logs:
     auto_multi_line_detection: true
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
 
@@ -485,8 +485,8 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
       }]
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 ```yaml
 apiVersion: apps/v1
@@ -515,7 +515,7 @@ spec:
           image: testApp:latest
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`datadog.yaml` ファイルにカスタムパターンを追加することもできます。
@@ -596,7 +596,7 @@ logs:
 Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][4]で、または環境変数を使用してグローバルに定義できます。
 
 {{< tabs >}}
-{{< tab "Configuration files" >}}
+{{% tab "Configuration files" %}}
 
 `datadog.yaml` ファイルで、以下のようにします。
 
@@ -612,8 +612,8 @@ logs_config:
       replace_placeholder: "MASKED_EMAIL"
 ```
 
-{{< /tab >}}
-{{< tab "環境変数" >}}
+{{% /tab %}}
+{{% tab "環境変数" %}}
 
 グローバルな処理ルールを構成するには、環境変数 `DD_LOGS_CONFIG_PROCESSING_RULES` を使用します。以下に例を示します。
 
@@ -621,8 +621,8 @@ logs_config:
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 Helm チャートで `env` パラメーターを使用して `DD_LOGS_CONFIG_PROCESSING_RULES` 環境変数を設定して、グローバルな処理ルールを構成します。以下に例を示します。
 
@@ -632,7 +632,7 @@ env:
     value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 Datadog Agent によって収集されるすべてのログが、グローバルな処理ルールの影響を受けます。
 

@@ -57,7 +57,7 @@ La bibliothèque client X-Ray vous permet d'analyser vos requêtes HTTP envoyée
 Installez la bibliothèque, importez-la dans vos projets Lambda, puis patchez les services que vous souhaitez instrumenter.
 
 {{< tabs >}}
-{{< tab "Node.js" >}}
+{{% tab "Node.js" %}}
 
 Installer la bibliothèque de tracing X-Ray :
 
@@ -104,8 +104,8 @@ var connection = mysql.createConnection(config);
 Pour en savoir plus sur la configuration, la création de sous-segments et l'enregistrement d'annotations, consultez la [documentation X-Ray pour Node.js][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
-{{< /tab >}}
-{{< tab "Python" >}}
+{{% /tab %}}
+{{% tab "Python" %}}
 
 Installer la bibliothèque de tracing X-Ray :
 
@@ -129,8 +129,8 @@ Pour en savoir plus sur la configuration, la création de sous-segments et l'enr
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-httpclients.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python.html
-{{< /tab >}}
-{{< tab "Go, Ruby, Java, .NET" >}}
+{{% /tab %}}
+{{% tab "Go, Ruby, Java, .NET" %}}
 
 Pour tout autre runtime, consultez la documentation sur X-Ray SDK :
 
@@ -144,7 +144,7 @@ Pour tout autre runtime, consultez la documentation sur X-Ray SDK :
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
 [4]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: integrations/amazon_web_services/#setup

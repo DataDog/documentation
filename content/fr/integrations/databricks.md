@@ -74,7 +74,7 @@ Configurez l'intégration Spark de façon à surveiller votre cluster Apache Sp
 #### Cluster standard
 
 {{< tabs >}}
-{{< tab "Driver uniquement" >}}
+{{% tab "Driver uniquement" %}}
 ##### Installez l'Agent Datadog sur le driver
 Installez l'Agent Datadog sur le nœud driver du cluster. Il s'agit d'une version mise à jour de l'exemple de notebook Databricks avec le [script init Datadog][1].
 
@@ -159,8 +159,8 @@ fi
 
 [1]: https://docs.databricks.com/_static/notebooks/datadog-init-script.html
 [2]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
-{{< /tab >}}
-{{< tab "Tous les nœuds" >}}
+{{% /tab %}}
+{{% tab "Tous les nœuds" %}}
 ##### Installer l'Agent Datadog sur les nœuds worker et driver 
 
 Une fois le script `datadog-install-driver-workers.sh` créé, ajoutez le chemin du script init sur la [page de configuration du cluster][1].
@@ -242,7 +242,7 @@ chmod a+x /tmp/start_datadog.sh
 """, True)
 ```
 [1]: https://docs.databricks.com/clusters/init-scripts.html#configure-a-cluster-scoped-init-script-using-the-ui
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Cluster de tâches

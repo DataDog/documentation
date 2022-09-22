@@ -34,7 +34,7 @@ title: 태그 사용
 ## 대시보드
 
 {{< tabs >}}
-{{< tab "할당" >}}
+{{% tab "할당" %}}
 
 태그를 사용하여 메트릭을 필터링해 [대시보드 그래프][1]에 표시하거나 표시할 메트릭을 집계한 그룹을 만들 수 있습니다. 표시할 메트릭을 필터링하려면 **from** 텍스트 상자에 태그를 입력하세요. 이렇게 하면 선택한 메트릭에 특정 태그가(이번 예시에서는 `service:coffee-house`) 할당된 모든 소스가 표시됩니다.
 
@@ -72,8 +72,8 @@ title: 태그 사용
 [1]: /kr/dashboards/
 [2]: /kr/events/
 [3]: /kr/dashboards/template_variables/
-{{< /tab >}}
-{{< tab "예시" >}}
+{{% /tab %}}
+{{% tab "예시" %}}
 
 여기에서 시계열 차트 편집기를 사용한 태그 예시를 확인하실 수 있습니다. 첫 스크린샷을 보면 적용된 태그가 없으며, 모든 호스트의 평균 CPU 사용량이 표시됩니다.
 
@@ -89,7 +89,7 @@ title: 태그 사용
 
 필요한 경우 추가 태그를 더해 범위를 더 좁힐 수도 있습니다. 예를 들어 `region:eastus` 및 `env:production`에 속하는 호스트만 표시하도록 할 수 있습니다. 태그는 Datadog 전체에서 사용할 수 있으며, 모든 주요 요소(메트릭, 트레이스, 로그)에 적용됩니다.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 인프라스트럭처
@@ -97,7 +97,7 @@ title: 태그 사용
 [호스트 맵][4], [인프라스트럭처 목록][5], [컨테이너][6], [프로세스][7]를 필터링하려면 페이지 상단에 있는 **Filter by** 텍스트 상자에 태그를 입력하세요. 호스트와 컨테이너는 **Group by** 텍스트 상자를 사용하여 태그 키로 그룹화할 수 있습니다. 그룹 상자에 `service`라고 입력하면 각 서비스가 그룹 헤딩으로 표시됩니다.
 
 {{< tabs >}}
-{{< tab "호스트 맵" >}}
+{{% tab "호스트 맵" %}}
 
 이번 섹션에서는 태그를 사용해 호스트를 필터링하거나 그룹으로 묶습니다.
 
@@ -106,34 +106,34 @@ title: 태그 사용
 또는 컨테이너를 필터링하거나 그룹화합니다.
 
 {{< img src="tagging/using_tags/containermaptags.png" alt="컨테이너 맵 태그" style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "인프라스트럭처 목록" >}}
+{{% tab "인프라스트럭처 목록" %}}
 
 인프라스트럭처 목록 페이지의 텍스트 상자로 사용할 수 있는 필터링과 그룹화는 다음과 같습니다.
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="인프라스트럭처 목록의 태그" style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "컨테이너" >}}
+{{% tab "컨테이너" %}}
 
 실시간 컨테이너 페이지의 텍스트 상자로 사용할 수 있는 필터링과 그룹화는 다음과 같습니다.
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="실시간 컨테이너 태그" style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "프로세스" >}}
+{{% tab "프로세스" %}}
 
 실시간 프로세스 페이지의 텍스트 상자로 사용할 수 있는 필터링과 그룹화는 다음과 같습니다.
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="실시간 프로세스 태그" style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 모니터링
 
 {{< tabs >}}
-{{< tab "모니터링 관리" >}}
+{{% tab "모니터링 관리" %}}
 
 [할당된 태그][1]로 모니터링을 필터링하려면 검색창이나 파셋 체크박스를 사용하세요. 검색창 형식은 `tag:<KEY>:<VALUE>`입니다(예: `tag:service:coffee-house`). 특정 태그가 지정된 모니터링을 검색에서 제외하려면 `-`, for example: ``tag:-service:coffee-house`를 사용하세요.
 
@@ -142,9 +142,9 @@ title: 태그 사용
 모니터링 태그는 메트릭 태그와 다르며, 별도로 작용합니다.
 
 [1]: /kr/getting_started/tagging/assigning_tags/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "새 모니터링" >}}
+{{% tab "새 모니터링" %}}
 
 [모니터링][1]을 새로 생성할 때 다음에 메트릭 태그를 사용하세요.
 
@@ -155,15 +155,15 @@ title: 태그 사용
 * **avg by** 텍스트 상자: 각 태그값마다 모니터링을 복수 경고(multi-alert) 모니터링으로 바꿉니다.
 
 [1]: /kr/monitors/create/#monitor-types
-{{< /tab >}}
-{{< tab "다운타임 관리" >}}
+{{% /tab %}}
+{{% tab "다운타임 관리" %}}
 
 모니터링 태그로 [다운타임][1]을 필터링하려면 태그 이름을(예: `service:coffee-house`) 검색창에 입력하세요.
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="모니터링 태그 관리" style="width:80%;">}}
 
 [1]: /kr/monitors/notify/downtimes/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 메트릭
@@ -177,7 +177,7 @@ title: 태그 사용
 일부 통합에서는 선택 사항으로 메트릭의 태그 사용을 제한할 수 있습니다.
 
 {{< tabs >}}
-{{< tab "AWS" >}}
+{{% tab "AWS" %}}
 
 [AWS 통합 타일][1]은 태그 필터 `to hosts with tag`와 `to Lambdas with tag`를 지원합니다.
 
@@ -200,8 +200,8 @@ AWS 태깅을 자세히 알아보려면 [EC2][2] 및 [Lambda][3] 설명서를 �
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
-{{< /tab >}}
-{{< tab "Azure" >}}
+{{% /tab %}}
+{{% tab "Azure" %}}
 
 [Azure 통합 타일][1]은 태그 필터 `Optionally filter to VMs with tag`를 지원합니다.
 
@@ -214,8 +214,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{< /tab >}}
-{{< tab "Google Cloud" >}}
+{{% /tab %}}
+{{% tab "Google Cloud" %}}
 
 [Google Cloud 통합 타일][1]은 태그 필터 `to hosts with tag`를 지원합니다.
 
@@ -231,13 +231,13 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## APM
 
 {{< tabs >}}
-{{< tab "애널리틱스" >}}
+{{% tab "애널리틱스" %}}
 
 [트레이스 검색][1]에서는 검색창이나 파셋 체크박스를 사용하여 태그로 트레이스를 필터링합니다. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `service:coffee-house`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [트레이스 검색][2] 페이지를 참조해주세요.
 
@@ -245,8 +245,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 [1]: /kr/tracing/app_analytics/search/
 [2]: /kr/tracing/app_analytics/search/#search-bar
-{{< /tab >}}
-{{< tab "서비스 맵" >}}
+{{% /tab %}}
+{{% tab "서비스 맵" %}}
 
 [태그를 할당][1]한 후, 서비스 맵을 사용하면 특정 서비스를 클릭해 애플리케이션의 다양한 영역으로 이동할 수 있습니다. 아래 예시를 보시면 [애널리틱스][2], [모니터링][3], [로그][4], [호스트 맵][5]이 태그 `service:coffee-house`로 필터링된 것을 확인할 수 있습니다.
 
@@ -257,7 +257,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 [3]: /kr/monitors/manage/
 [4]: /kr/logs/explorer/search/
 [5]: /kr/infrastructure/hostmap/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -276,26 +276,26 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 로그 [검색][10], [애널리틱스][11], [패턴][12], [라이브 테일][13]은 검색창이나 파셋 체크박스를 사용하여 태그로 로그를 필터링합니다. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `service:coffee-house`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [로그 검색][10] 페이지를 참조해주세요.
 
 {{< tabs >}}
-{{< tab "검색" >}}
+{{% tab "검색" %}}
 
 {{< img src="tagging/using_tags/logsearchtags.png" alt="로그 검색 태그" style="width:80%;">}}
 
-{{< /tab >}}
-{{< tab "애널리틱스" >}}
+{{% /tab %}}
+{{% tab "애널리틱스" %}}
 
 {{< img src="tagging/using_tags/loganalyticstags.png" alt="로그 애널리틱스 탭" style="width:80%;">}}
 
-{{< /tab >}}
-{{< tab "패턴" >}}
+{{% /tab %}}
+{{% tab "패턴" %}}
 
 {{< img src="tagging/using_tags/logpatternstags.png" alt="로그 패턴 태그" style="width:80%;">}}
 
-{{< /tab >}}
-{{< tab "라이브 테일" >}}
+{{% /tab %}}
+{{% tab "라이브 테일" %}}
 
 {{< img src="tagging/using_tags/livetailtags.mp4" alt="라이브 테일 태그" video="true" width="80%">}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 또, 로그 [파이프라인][14]을 필터링할 때도 태그를 사용할 수 있습니다. 아래 예시에서는 파이프라인에서 태그 `service:coffee-house`로 로그를 필터링했습니다.
@@ -313,7 +313,7 @@ RUM 이벤트 데이터를 태그로 필터링하려면 검색창이나 파셋 �
 ## 신서틱
 
 {{< tabs >}}
-{{< tab "신서틱 테스트" >}}
+{{% tab "신서틱 테스트" %}}
 
 [신서틱 테스트][1] 페이지는 신서틱 테스트의 목록을 보여줍니다.
 
@@ -324,8 +324,8 @@ RUM 이벤트 데이터를 태그로 필터링하려면 검색창이나 파셋 �
 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /kr/synthetics/search/
-{{< /tab >}}
-{{< tab "CI Results Explorer" >}}
+{{% /tab %}}
+{{% tab "CI Results Explorer" %}}
 
 [CI Results Explorer][1]는 [CI 파이프라인][2]에서 실행된 브라우저 테스트 결과를 표시합니다.
 
@@ -337,13 +337,13 @@ RUM 이벤트 데이터를 태그로 필터링하려면 검색창이나 파셋 �
 [1]: https://app.datadoghq.com/synthetics/explorer/ci
 [2]: /kr/synthetics/cicd_integrations
 [3]: /kr/synthetics/search/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 서비스 수준 목표(Service Level Objectives)
 
 {{< tabs >}}
-{{< tab "SLO 관리" >}}
+{{% tab "SLO 관리" %}}
 
 [할당된 태그][1]로 SLO를 필터링하려면 검색창이나 파셋 체크박스를 사용하세요. 검색창 형식은 `tag:<KEY>:<VALUE>`입니다(예: `journey:add_item`). 특정 태그가 지정된 SLO를 검색에서 제외하려면 `-`, for example: `-journey:add_item`를 사용하세요.
 
@@ -352,9 +352,9 @@ RUM 이벤트 데이터를 태그로 필터링하려면 검색창이나 파셋 �
 SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 또는 모니터링 태그와 다르며, 별도로 작용합니다.
 
 [1]: /kr/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "메트릭 기반의 SLO" >}}
+{{% tab "메트릭 기반의 SLO" %}}
 
 [메트릭 기반 SLO][1]를 생성할 때, SLO의 성공 비율 메트릭 쿼리에 메트릭 태그를 사용하세요(모든 메트릭은 동일한 메트릭 태그 세트를 사용해야 합니다).
 
@@ -364,8 +364,8 @@ SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="메트릭 기반 SLO 태그" style="width:80%;">}}
 
 [1]: /kr/monitors/service_level_objectives/metric/
-{{< /tab >}}
-{{< tab "모니터링 기반 SLO" >}}
+{{% /tab %}}
+{{% tab "모니터링 기반 SLO" %}}
 
 하나의 [그룹화된 모니터링][2] 정보를 활용하여 [모니터 기반 SLO][1]를 생성하는 경우에는 **Calculate on selected groups** 토글을 사용하세요. 기초 모니터링 결과에서 최대 20개의 태그 값을 선택할 수 있고 SLO 전체 및 각 태그 값의 상태 비율, 남은 오류 여유분이 표시됩니다.
 
@@ -373,7 +373,7 @@ SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 
 
 [1]: /kr/monitors/service_level_objectives/monitor/
 [2]: /kr/getting_started/tagging/using_tags/?tab=newmonitor#monitors
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 개발자

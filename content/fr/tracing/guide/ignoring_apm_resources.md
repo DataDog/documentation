@@ -92,15 +92,15 @@ Pour ignorer correctement des ressources, la règle d'expression régulière sp�
 La syntaxe peut varier en fonction de votre déploiement 
 
 {{< tabs >}}
-{{< tab "datadog.yaml" >}}
+{{% tab "datadog.yaml" %}}
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
-{{< /tab >}}
-{{< tab "Docker Compose" >}}
+{{% /tab %}}
+{{% tab "Docker Compose" %}}
 
 Ajoutez `DD_APM_IGNORE_RESOURCES` à la liste des variables d'environnement du conteneur de l'Agent Datadog, en indiquant un pattern similaire à celui de l'exemple ci-dessous. Docker Compose utilise sa propre fonctionnalité de [substitution de variables][1]. Vous devez donc en tenir compte lorsque vous indiquez des caractères spéciaux, comme `$`.
 
@@ -111,8 +111,8 @@ Ajoutez `DD_APM_IGNORE_RESOURCES` à la liste des variables d'environnement du c
 {{< /code-block >}}
 
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
-{{< /tab >}}
-{{< tab "Docker run" >}}
+{{% /tab %}}
+{{% tab "Docker run" %}}
 
 Ajoutez `DD_APM_IGNORE_RESOURCES` à votre commande docker run permettant de lancer l'Agent Datadog :
 
@@ -128,8 +128,8 @@ docker run -d --name datadog-agent \
               gcr.io/datadoghq/agent:latest
 {{< /code-block >}}
 
-{{< /tab >}}
-{{< tab "Daemonset Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Daemonset Kubernetes" %}}
 
 Dans le conteneur de trace-agent dédié, ajoutez la variable d'environnement `DD_APM_IGNORE_RESOURCES` :
 
@@ -172,8 +172,8 @@ Dans le conteneur de trace-agent dédié, ajoutez la variable d'environnement `D
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
-{{< /tab >}}
-{{< tab "Helm Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Helm Kubernetes" %}}
 
 Dans la section `traceAgent` du fichier `values.yaml`, ajoutez `DD_APM_IGNORE_RESOURCES` sous la section `env`, puis [lancez Helm comme d'habitude][1].
 
@@ -198,8 +198,8 @@ helm install dd-agent -f values.yaml \
 {{< /code-block >}}
 
 [1]: /fr/agent/kubernetes/?tab=helm#installation
-{{< /tab >}}
-{{< tab "Définition de tâche AWS ECS" >}}
+{{% /tab %}}
+{{% tab "Définition de tâche AWS ECS" %}}
 
 Si vous utilisez AWS ECS (par exemple, EC2), dans votre définition du conteneur de l'Agent Datadog, ajoutez la variable d'environnement `DD_APM_IGNORE_RESOURCES` avec des valeurs permettant au JSON d'évaluer un contenu similaire à ce qui suit :
 
@@ -213,7 +213,7 @@ Si vous utilisez AWS ECS (par exemple, EC2), dans votre définition du conteneu
      ]
 {{< /code-block >}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-warning"><strong>Remarque</strong> : le filtrage des traces à l'aide de cette méthode supprime les requêtes concernées des <a href="/tracing/guide/metrics_namespace/">métriques de trace</a>. Pour découvrir comment réduire l'ingestion sans toucher aux métriques de trace, consultez la section relative aux <a href="/tracing/trace_retention_and_ingestion/#controles-de-l-lingestion">contrôles de l'ingestion</a>.</div>

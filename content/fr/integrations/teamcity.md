@@ -65,7 +65,7 @@ Le check Teamcity est inclus avec le package de l'[Agent Datadog][1] : vous n'a
 Pour préparer Teamcity, consultez la section [Activation de la connexion en tant qu'invité][2] (en anglais).
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -138,8 +138,8 @@ Ajoutez un bloc de configuration comme celui-ci aux `instances` pour chaque conf
 [4]: https://www.jetbrains.com/help/teamcity/teamcity-server-logs.html
 [5]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
 [6]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -161,7 +161,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

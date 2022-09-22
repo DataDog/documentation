@@ -60,7 +60,7 @@ L'Agent Datadog v6 peut recueillir des logs et les transférer à Datadog à par
 Voici des exemples de configurations de collecte de logs personnalisée ci-dessous :
 
 {{< tabs >}}
-{{< tab "Suivre des fichiers" >}}
+{{% tab "Suivre des fichiers" %}}
 
 Pour recueillir les logs de votre application `<NOM_APP>` stockés dans `<CHEMIN_FICHIER_LOG>/<NOM_FICHIER_LOG>.log`, créez un fichier `<NOM_APP>.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1] avec le contenu suivant :
 
@@ -73,9 +73,9 @@ logs:
 ```
 
 [1]: /fr/agent/guide/agent-configuration-files/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "TCP/UDP" >}}
+{{% tab "TCP/UDP" %}}
 
 Pour recueillir les logs de votre application `<NOM_APP>` qui transfert ses logs via TCP sur le port **10518**, créez un fichier `<NOM_APP>.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1] avec le contenu suivant :
 
@@ -92,8 +92,8 @@ Si vous utilisez Serilog, vous disposez de l'option `Serilog.Sinks.Network` pour
 **Remarque** : l'Agent prend en charge les logs aux formats brut, JSON et Syslog. Si vous envoyez des logs en lot, séparez vos logs par des caractères de saut de ligne.
 
 [1]: /fr/agent/guide/agent-configuration-files/
-{{< /tab >}}
-{{< tab "journald" >}}
+{{% /tab %}}
+{{% tab "journald" %}}
 
 Pour recueillir les logs depuis journald, créez un fichier `journald.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1] avec le contenu suivant :
 
@@ -107,8 +107,8 @@ Consultez la documentation relative à l'[intégration journald][2] pour obtenir
 
 [1]: /fr/agent/guide/agent-configuration-files/
 [2]: /fr/integrations/journald/
-{{< /tab >}}
-{{< tab "Événements Windows" >}}
+{{% /tab %}}
+{{% tab "Événements Windows" %}}
 
 Pour envoyer des événements Windows à Datadog en tant que logs, ajoutez des canaux au fichier `conf.d/win32_event_log.d/conf.yaml` manuellement ou via Datadog Agent Manager.
 
@@ -148,7 +148,7 @@ Pour terminer, [redémarrez l'Agent][2].
 
 [1]: /fr/logs/log_configuration/pipelines/#integration-pipelines
 [2]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Liste complète des paramètres disponibles pour la collecte de logs :

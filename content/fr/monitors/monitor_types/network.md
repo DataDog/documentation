@@ -40,7 +40,7 @@ Sélectionnez le contexte à surveiller en spécifiant les hostnames ou des tags
 Dans cette section, utilisez les options **Check Alert** et **Cluster Alert** pour choisir entre une alerte de check ou une alerte de cluster :
 
 {{< tabs >}}
-{{< tab "Alerte de check" >}}
+{{% tab "Alerte de check" %}}
 
 Une alerte de check récupère les statuts consécutifs envoyés pour chaque groupe de checks et les compare à vos seuils.
 
@@ -58,8 +58,8 @@ Paramètres d'une alerte de check :
 
     Choisissez le nombre de statuts `OK` consécutifs à partir duquel l'alerte doit être résolue.
 
-{{< /tab >}}
-{{< tab "Alerte de cluster" >}}
+{{% /tab %}}
+{{% tab "Alerte de cluster" %}}
 
 Une alerte de cluster calcule le pourcentage de checks présentant un statut donné et le compare à vos seuils.
 
@@ -69,7 +69,7 @@ Paramètres d'une alerte de cluster :
 
 2. Sélectionnez le pourcentage de seuil d'alerte.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Consultez la documentation relative aux [monitors de métrique][4] pour en savoir plus sur les options [No data][5], [Auto resolve][6] et [Evaluation delay][7].

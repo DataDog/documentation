@@ -61,26 +61,26 @@ Consultez la section [Types envoyés et types stockés](#types-envoyes-et-types-
 ### Définition
 
 {{< tabs >}}
-{{< tab "COUNT" >}}
+{{% tab "COUNT" %}}
 
 Le type de métrique envoyé COUNT représente le nombre d'événements survenus lors d'un intervalle. Une métrique COUNT peut servir à surveiller le nombre total de connexions vers une base de données ou de requêtes transmises à un endpoint. Ce nombre d'événements peut augmenter ou diminuer au fil du temps : il n'est pas strictement croissant.
 
 **Remarque** : les métriques COUNT diffèrent des métriques RATE. En effet, ces dernières représentent le nombre d'événements normalisé par seconde pour la période donnée.
 
-{{< /tab >}}
-{{< tab "RATE" >}}
+{{% /tab %}}
+{{% tab "RATE" %}}
 
 Le type de métrique envoyé RATE représente le nombre total d'événements survenus par seconde lors d'un intervalle. Une métrique RATE peut servir à surveiller la répétitivité d'un événement, telle que la fréquence des connexions vers une base de données ou le flux de requêtes transmises à un endpoint.
 
 **Remarque** : les métriques RATE diffèrent des métriques COUNT. En effet, ces dernières représentent le nombre total d'événements pour la période donnée.
 
-{{< /tab >}}
-{{< tab "GAUGE" >}}
+{{% /tab %}}
+{{% tab "GAUGE" %}}
 
 Le type de métrique envoyé GAUGE représente un snapshot des événements survenus durant un intervalle. La valeur de ce snapshot représentatif correspond à la dernière valeur envoyée à l'Agent lors de l'intervalle. Une métrique GAUGE peut servir à mesurer des données sans cesse transmises, telles que l'espace disque disponible ou la mémoire utilisée.
 
-{{< /tab >}}
-{{< tab "HISTOGRAM" >}}
+{{% /tab %}}
+{{% tab "HISTOGRAM" %}}
 
 Le type de métrique envoyé HISTOGRAM représente la distribution statistique d'un ensemble de valeurs calculées côté Agent sur un intervalle unique. Le type de métrique HISTOGRAM de Datadog est une extension du type de métrique timing de StatsD. L'Agent agrège les valeurs envoyées durant un intervalle donné et génère différentes métriques représentant l'ensemble de valeurs.
 
@@ -102,8 +102,8 @@ Si vous envoyez `X` valeurs pour la métrique HISTOGRAM `<NOM_MÉTRIQUE>` duran
 
 [1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
 [2]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L116-L121
-{{< /tab >}}
-{{< tab "DISTRIBUTION" >}}
+{{% /tab %}}
+{{% tab "DISTRIBUTION" %}}
 
 Le type de métrique envoyé DISTRIBUTION représente la distribution statistique globale d'un ensemble de valeurs calculées lors d'un intervalle unique sur l'intégralité de votre infrastructure distribuée. Une métrique DISTRIBUTION peut servir à instrumenter des objets logiques, tels que des services, indépendamment des hosts sous-jacents.
 
@@ -122,34 +122,34 @@ Si vous envoyez `X` valeurs pour la métrique DISTRIBUTION `<NOM_MÉTRIQUE>` du
 | `min:<NOM_MÉTRIQUE>`   | Représente la valeur minimale des `X` valeurs envoyées durant l'intervalle.                                     | GAUGE               |
 | `sum:<NOM_MÉTRIQUE>`   | Représente la somme de l'ensemble des `X` valeurs envoyées durant l'intervalle.                                           | COUNT               |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Exemple
 
 {{< tabs >}}
-{{< tab "COUNT" >}}
+{{% tab "COUNT" %}}
 
 Imaginons que vous envoyiez la métrique COUNT `activeusers.basket_size` depuis un seul host sur lequel l'Agent Datadog s'exécute. Ce host génère les valeurs suivantes lors de l'intervalle de transmission : `[1,1,1,2,2,2,3,3]`.
 
 L'Agent ajoute toutes les valeurs reçues durant cet intervalle et envoie le total, ici `15`, en tant que valeur de la métrique COUNT.
 
-{{< /tab >}}
-{{< tab "RATE" >}}
+{{% /tab %}}
+{{% tab "RATE" %}}
 
 Imaginons que vous envoyiez la métrique RATE `queue_messages.rate` depuis un seul host sur lequel l'Agent Datadog s'exécute. Ce host génère les valeurs suivantes lors de l'intervalle de transmission : `[1,1,1,2,2,2,3,3]`.
 
 L'Agent ajoute toutes les valeurs reçues durant cet intervalle et envoie le total divisé par le nombre de secondes de l'intervalle. Ici, avec un intervalle de transmission de 10 secondes, la valeur `1.5` est envoyée pour la métrique RATE.
 
-{{< /tab >}}
-{{< tab "GAUGE" >}}
+{{% /tab %}}
+{{% tab "GAUGE" %}}
 
 Imaginons que vous envoyiez la métrique GAUGE `temperature` depuis un seul host sur lequel l'Agent Datadog s'exécute. Ce host génère les valeurs suivantes lors de l'intervalle de transmission : `[71,71,71,71,71,71,71.5]`.
 
 L'Agent envoie la dernière valeur transmise, ici `71.5`, pour la métrique GAUGE.
 
-{{< /tab >}}
-{{< tab "HISTOGRAM" >}}
+{{% /tab %}}
+{{% tab "HISTOGRAM" %}}
 
 Imaginons que vous envoyez la métrique HISTOGRAM `request.response_time.histogram` à partir d'un serveur Web. Celle-ci envoie les valeurs `[1,1,1,2,2,2,3,3]` lors de l'intervalle de transmission. Par défaut, l'Agent transmet les métriques suivantes à Datadog afin de représenter la distribution statistique des valeurs lors de l'intervalle :
 
@@ -161,8 +161,8 @@ Imaginons que vous envoyez la métrique HISTOGRAM `request.response_time.histogr
 | `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
 | `request.response_time.histogram.max`          | `3`    | GAUGE               |
 
-{{< /tab >}}
-{{< tab "DISTRIBUTION" >}}
+{{% /tab %}}
+{{% tab "DISTRIBUTION" %}}
 
 Imaginons que vous envoyiez la métrique DISTRIBUTION `request.response_time.distribution` à partir de deux serveurs Web : `webserver:web_1` et `webserver:web_2`. Lors de l'intervalle de transmission donné, `webserver:web_1` renvoie les valeurs `[1,1,1,2,2,2,3,3]` pour la métrique, tandis que `webserver:web_2` renvoie les valeurs `[1,1,2]`. Durant cet intervalle, les cinq agrégations suivantes représentent la distribution statistique globale de l'ensemble des valeurs recueillies à partir des deux serveurs Web :
 
@@ -198,13 +198,13 @@ Cette fonctionnalité vous permet de contrôler le tagging pour les métriques p
 
 
 [1]: https://app.datadoghq.com/metric/distribution_metrics
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Envoi
 
 {{< tabs >}}
-{{< tab "COUNT" >}}
+{{% tab "COUNT" %}}
 
 Envoyez vos métriques de type COUNT depuis l'une des sources suivantes :
 
@@ -224,8 +224,8 @@ Envoyez vos métriques de type COUNT depuis l'une des sources suivantes :
 [2]: /fr/metrics/agent_metrics_submission/?tab=count#monotonic-count
 [3]: /fr/api/v1/metrics/#submit-metrics
 [4]: /fr/metrics/dogstatsd_metrics_submission/#count
-{{< /tab >}}
-{{< tab "RATE" >}}
+{{% /tab %}}
+{{% tab "RATE" %}}
 
 Envoyez vos métriques de type RATE depuis l'une des sources suivantes :
 
@@ -239,8 +239,8 @@ Envoyez vos métriques de type RATE depuis l'une des sources suivantes :
 
 [1]: /fr/metrics/agent_metrics_submission/?tab=rate
 [2]: /fr/api/v1/metrics/#submit-metrics
-{{< /tab >}}
-{{< tab "GAUGE" >}}
+{{% /tab %}}
+{{% tab "GAUGE" %}}
 
 Envoyez vos métriques de type GAUGE depuis l'une des sources suivantes :
 
@@ -254,8 +254,8 @@ Envoyez vos métriques de type GAUGE depuis l'une des sources suivantes :
 [1]: /fr/metrics/agent_metrics_submission/?tab=gauge
 [2]: /fr/api/v1/metrics/#submit-metrics
 [3]: /fr/metrics/dogstatsd_metrics_submission/#gauge
-{{< /tab >}}
-{{< tab "HISTOGRAM" >}}
+{{% /tab %}}
+{{% tab "HISTOGRAM" %}}
 
 Envoyez vos métriques de type HISTOGRAM depuis l'une des sources suivantes :
 
@@ -269,8 +269,8 @@ Envoyez vos métriques de type HISTOGRAM depuis l'une des sources suivantes :
 
 [1]: /fr/metrics/agent_metrics_submission/?tab=histogram
 [2]: /fr/metrics/dogstatsd_metrics_submission/#histogram
-{{< /tab >}}
-{{< tab "DISTRIBUTION" >}}
+{{% /tab %}}
+{{% tab "DISTRIBUTION" %}}
 
 Envoyez vos métriques de type DISTRIBUTION depuis la source suivante :
 
@@ -280,7 +280,7 @@ Envoyez vos métriques de type DISTRIBUTION depuis la source suivante :
 
 
 [1]: /fr/metrics/dogstatsd_metrics_submission/#distribution
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Types envoyés et types stockés dans Datadog

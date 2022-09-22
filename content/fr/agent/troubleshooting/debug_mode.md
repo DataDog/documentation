@@ -22,7 +22,7 @@ Par défaut, le niveau de log de l'Agent est défini sur `INFO`. Pour obtenir pl
 Pour activer le mode debugging complet de l'Agent :
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 1. Modifiez votre fichier `datadog.yaml` local. Consultez la section [Fichier de configuration principal de l'Agent][1] pour obtenir des détails propres à votre système d'exploitation.
 
@@ -35,8 +35,8 @@ Pour activer le mode debugging complet de l'Agent :
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
 [3]: /fr/agent/guide/agent-log-files/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 1. Modifiez votre fichier `datadog.conf` local. Consultez la section [Fichier de configuration principal de l'Agent][1] pour obtenir des détails propres à votre système d'exploitation.
 
@@ -49,13 +49,13 @@ Pour activer le mode debugging complet de l'Agent :
 [1]: /fr/agent/guide/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
 [2]: /fr/agent/guide/agent-commands/?tab=agentv5#restart-the-agent
 [3]: /fr/agent/guide/agent-log-files/?tab=agentv5
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Agent conteneurisé
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 Pour activer le mode debugging pour l'Agent de conteneur, utilisez `DD_LOG_LEVEL=debug` lors du démarrage de l'Agent.
 
@@ -67,8 +67,8 @@ agent config set log_level debug
 
 Si l'Agent de trace se trouve dans un conteneur dédié, contrairement au conteneur de l'Agent, vous ne pouvez **pas** modifier le niveau de log du conteneur de trace-agent. Lorsque vous définissez la variable `dd_log_level` sur `debug`, il est nécessaire de redéployer le conteneur de trace-agent.
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 Lorsqu'il s'exécute dans un conteneur, l'Agent ne peut pas redémarrer via `service datadog-agent restart` (ou semblable), ce qui entraîne l'arrêt du conteneur par Docker. Utilisez supervisor pour redémarrer un Agent conteneurisé :
 
@@ -94,7 +94,7 @@ sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 
 Le conteneur peut également être redémarré.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Niveau de journalisation de l'Agent

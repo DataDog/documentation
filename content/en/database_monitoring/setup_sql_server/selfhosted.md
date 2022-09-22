@@ -38,7 +38,7 @@ The Datadog Agent requires read-only access to the database server in order to c
 Create a read-only login to connect to your server and grant the required permissions:
 
 {{< tabs >}}
-{{< tab "SQL Server 2014+" >}}
+{{% tab "SQL Server 2014+" %}}
 
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
@@ -47,8 +47,8 @@ GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
 ```
-{{< /tab >}}
-{{< tab "SQL Server 2012" >}}
+{{% /tab %}}
+{{% tab "SQL Server 2012" %}}
 
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
@@ -62,7 +62,7 @@ Create the `datadog` user in each additional application database:
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Install the Agent
@@ -70,18 +70,18 @@ CREATE USER datadog FOR LOGIN datadog;
 It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
 
 {{< tabs >}}
-{{< tab "Windows Host" >}}
+{{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
-{{< /tab >}}
-{{< tab "Linux Host" >}}
+{{% /tab %}}
+{{% tab "Linux Host" %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 {{% dbm-sqlserver-agent-setup-docker %}}
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further reading

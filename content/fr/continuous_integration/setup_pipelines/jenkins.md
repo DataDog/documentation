@@ -43,7 +43,7 @@ Installez et activez le [plug-in Jenkins Datadog][3] v3.3.0 ou une version ulté
 ## Activer l'option CI Visibility sur le plug-in
 
 {{< tabs >}}
-{{< tab "Depuis l'interface" >}}
+{{% tab "Depuis l'interface" %}}
 
 1. Dans l'interface Web de votre instance Jenkins, accédez à **Manage Jenkins > Configure System**.
 2. Accédez à la section `Datadog Plugin` en faisant dérouler l'écran de configuration vers le bas.
@@ -56,8 +56,8 @@ Installez et activez le [plug-in Jenkins Datadog][3] v3.3.0 ou une version ulté
 9. Enregistrez votre configuration.
 
 {{< img src="ci/ci-jenkins-plugin-config.png" alt="Configuration du plug-in Datadog pour Jenkins" style="width:100%;">}}
-{{< /tab >}}
-{{< tab "Avec configuration-as-code" >}}
+{{% /tab %}}
+{{% tab "Avec configuration-as-code" %}}
 Si votre instance Jenkins utilise le plug-in Jenkins [`configuration-as-code`][1] :
 
 1. Créez ou modifiez le YAML de configuration en ajoutant une entrée pour `datadogGlobalConfiguration` :
@@ -80,8 +80,8 @@ Si votre instance Jenkins utilise le plug-in Jenkins [`configuration-as-code`][1
 4. Vérifiez la configuration à l'aide du bouton `View Configuration`.
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{< /tab >}}
-{{< tab "Avec Groovy" >}}
+{{% /tab %}}
+{{% tab "Avec Groovy" %}}
 
 1. Dans l'interface Web de votre instance Jenkins, accédez à **Manage Jenkins > Script Console**.
 2. Exécutez le script de configuration :
@@ -110,8 +110,8 @@ Si votre instance Jenkins utilise le plug-in Jenkins [`configuration-as-code`][1
     // Save config
     d.save()
     ```
-{{< /tab >}}
-{{< tab "Avec des variables d'environnement" >}}
+{{% /tab %}}
+{{% tab "Avec des variables d'environnement" %}}
 
 1. Définissez les variables d'environnement suivantes sur la machine de votre instance Jenkins :
     ```bash
@@ -132,7 +132,7 @@ Si votre instance Jenkins utilise le plug-in Jenkins [`configuration-as-code`][1
     ```
 2. Redémarrez votre instance Jenkins.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour vérifier si l'option CI Visibility est activée, accédez à `Jenkins Log` et recherchez ce qui suit :
@@ -171,7 +171,7 @@ Avec cette configuration, l'Agent écoute les logs sur le port `10518`.
 Ensuite, activez la collecte des logs de tâches sur le plug-in Datadog :
 
 {{< tabs >}}
-{{< tab "Depuis l'interface" >}}
+{{% tab "Depuis l'interface" %}}
 
 1. Dans l'interface Web de votre instance Jenkins, accédez à **Manage Jenkins > Configure System**.
 2. Accédez à la section `Datadog Plugin` en faisant dérouler l'écran de configuration vers le bas.
@@ -181,8 +181,8 @@ Ensuite, activez la collecte des logs de tâches sur le plug-in Datadog :
 6. Cochez la case `Enable Log Collection` pour activer cette option.
 7. Vérifiez la connectivité avec l'Agent Datadog.
 8. Enregistrez votre configuration.
-{{< /tab >}}
-{{< tab "Avec configuration-as-code" >}}
+{{% /tab %}}
+{{% tab "Avec configuration-as-code" %}}
 Si votre instance Jenkins utilise le plug-in [`configuration-as-code`][1] :
 
 1. Créez ou modifiez le YAML de configuration pour l'entrée `datadogGlobalConfiguration` :
@@ -203,8 +203,8 @@ Si votre instance Jenkins utilise le plug-in [`configuration-as-code`][1] :
 4. Vérifiez la configuration à l'aide du bouton `View Configuration`.
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{< /tab >}}
-{{< tab "Avec Groovy" >}}
+{{% /tab %}}
+{{% tab "Avec Groovy" %}}
 
 1. Dans l'interface Web de votre instance Jenkins, accédez à **Manage Jenkins > Script Console**.
 2. Exécutez le script de configuration :
@@ -230,8 +230,8 @@ Si votre instance Jenkins utilise le plug-in [`configuration-as-code`][1] :
     // Save config
     d.save()
     ```
-{{< /tab >}}
-{{< tab "Avec des variables d'environnement" >}}
+{{% /tab %}}
+{{% tab "Avec des variables d'environnement" %}}
 
 1. Définissez les variables d'environnement suivantes sur la machine de votre instance Jenkins :
     ```bash
@@ -249,7 +249,7 @@ Si votre instance Jenkins utilise le plug-in [`configuration-as-code`][1] :
     ```
 2. Redémarrez votre instance Jenkins.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Définir le nom de la branche par défaut
@@ -278,7 +278,7 @@ Le plug-in Jenkins a recours à des variables d'environnement pour récupérer l
 Dans ce cas, vous pouvez propager les informations Git vers les variables d'environnement de votre build. Pour ce faire, utilisez la fonction `.each {k,v -> env.setProperty(k, v)}` après avoir exécuté les étapes `checkout` ou `git`. Exemple :
 
 {{< tabs >}}
-{{< tab "Avec des pipelines déclaratifs" >}}
+{{% tab "Avec des pipelines déclaratifs" %}}
 Si vous configurez votre pipeline à l'aide d'un pipeline déclaratif, propagez les informations Git à l'aide d'un bloc `script` comme indiqué ci-dessous :
 
 Avec l'étape `checkout` :
@@ -309,8 +309,8 @@ pipeline {
 }
 {{< /code-block >}}
 
-{{< /tab >}}
-{{< tab "Avec des pipelines scriptés" >}}
+{{% /tab %}}
+{{% tab "Avec des pipelines scriptés" %}}
 Si vous configurez votre pipeline à l'aide d'un pipeline scripté, vous pouvez propager directement les informations Git vers des variables d'environnement :
 
 Avec l'étape `checkout` :
@@ -333,7 +333,7 @@ node {
 }
 {{< /code-block >}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

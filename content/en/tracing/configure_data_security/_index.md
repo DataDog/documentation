@@ -53,7 +53,7 @@ This option works with the following services:
 
 **Note:** You can use automatic scrubbing for multiple types of services at the same time.  Configure each in the `obfuscation` section of your `datadog.yaml` file.
 {{< tabs >}}
-{{< tab "MongoDB" >}}
+{{% tab "MongoDB" %}}
 
 Applies to [spans][1] of type `mongodb`, more specifically: to the `mongodb.query` span tags.
 
@@ -77,8 +77,8 @@ apm_config:
 * `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
 
 [1]: /tracing/glossary/#spans
-{{< /tab >}}
-{{< tab "ElasticSearch" >}}
+{{% /tab %}}
+{{% tab "ElasticSearch" %}}
 
 Applies to [spans][1] of type `elasticsearch`, more specifically, to the `elasticsearch.body` span tags:
 
@@ -100,8 +100,8 @@ apm_config:
 ```
 
 [1]: /tracing/glossary/#spans
-{{< /tab >}}
-{{< tab "Redis" >}}
+{{% /tab %}}
+{{% tab "Redis" %}}
 
 Applies to [spans][1] of type `redis`, more specifically, to the `redis.raw_command` span tags:
 
@@ -117,8 +117,8 @@ apm_config:
 ```
 
 [1]: /tracing/glossary/#spans
-{{< /tab >}}
-{{< tab "MemCached" >}}
+{{% /tab %}}
+{{% tab "MemCached" %}}
 
 Applies to [spans][1] of type `memcached`, more specifically, to the `memcached.command` span tags:
 
@@ -134,8 +134,8 @@ apm_config:
 ```
 
 [1]: /tracing/glossary/#spans
-{{< /tab >}}
-{{< tab "Http" >}}
+{{% /tab %}}
+{{% tab "Http" %}}
 
 HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http`:
 
@@ -156,8 +156,8 @@ apm_config:
 
 
 [1]: /tracing/glossary/#spans
-{{< /tab >}}
-{{< tab "Stack Traces" >}}
+{{% /tab %}}
+{{% tab "Stack Traces" %}}
 
 Set the `remove_stack_traces` parameter to true, to remove stack traces and replace them with `?`.
 
@@ -171,7 +171,7 @@ apm_config:
     remove_stack_traces: true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## HTTP data collected
@@ -209,7 +209,7 @@ To scrub sensitive data from your [span][4]'s tags, use the `replace_tags` setti
 For example:
 
 {{< tabs >}}
-{{< tab "datadog.yaml" >}}
+{{% tab "datadog.yaml" %}}
 
 ```yaml
 apm_config:
@@ -227,8 +227,8 @@ apm_config:
       pattern: "(?s).*"
 ```
 
-{{< /tab >}}
-{{< tab "Environment Variable" >}}
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
 
 ```shell
 DD_APM_REPLACE_TAGS=[
@@ -249,8 +249,8 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 **Note**: Put this environment variable in the trace-agent container if you are using the recommended [daemonset configuration][1].
 
@@ -275,14 +275,14 @@ DD_APM_REPLACE_TAGS=[
 ```
 
 [1]: /agent/kubernetes/?tab=daemonset
-{{< /tab >}}
-{{< tab "docker-compose" >}}
+{{% /tab %}}
+{{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
 - DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Exclude resources from being collected

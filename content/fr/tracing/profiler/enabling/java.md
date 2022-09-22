@@ -42,7 +42,7 @@ Pour commencer le profiling d'applications, procédez comme suit :
 
 3. Définissez le flag `-Ddd.profiling.enabled` ou la variable d'environnement `DD_PROFILING_ENABLED` sur `true` pour activer le profileur. Spécifiez les paramètres `dd.service`, `dd.env` et `dd.version` pour pouvoir filtrer et regrouper vos profils en fonction de ces dimensions :
    {{< tabs >}}
-{{< tab "Arguments des commandes" >}}
+{{% tab "Arguments des commandes" %}}
 
 Appelez votre service :
 ```diff
@@ -56,8 +56,8 @@ java \
     -jar <VOTRE_SERVICE>.jar <VOS_FLAGS_DE_SERVICE>
 ```
 
-{{< /tab >}}
-{{< tab "Variables d'environnement" >}}
+{{% /tab %}}
+{{% tab "Variables d'environnement" %}}
 
 ```diff
 export DD_SERVICE=<VOTRE SERVICE>
@@ -70,7 +70,7 @@ java \
     -jar <VOTRE_SERVICE>.jar <VOS_FLAGS_DE_SERVICE>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
     **Remarque** : l'argument `-javaagent` doit figurer avant `-jar` et être ajouté en tant qu'option JVM et non en tant qu'argument d'application. Pour en savoir plus, consultez la [documentation Oracle][6] (en anglais) :

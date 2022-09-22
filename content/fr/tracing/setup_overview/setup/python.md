@@ -65,7 +65,7 @@ ddtrace-run python app.py
 Installez et configurez l'Agent Datadog pour recevoir des traces de votre application désormais instrumentalisée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml` sous `apm_config` avec `enabled: true` et écoute le trafic de trace à `localhost:8126`. Pour les environnements coneteneurisés, suivez les liens ci-dessous pour activer la collecte de trace dans l'Agent Datadog.
 
 {{< tabs >}}
-{{< tab "Conteneurs" >}}
+{{% tab "Conteneurs" %}}
 
 1. Positionnez `apm_non_local_traffic: true` dans la section `apm_config` de votre [fichier de configuration `datadog.yaml`][1] principal.
 
@@ -96,15 +96,15 @@ Installez et configurez l'Agent Datadog pour recevoir des traces de votre applic
 {{< /site-region >}}
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tab >}}
-{{< tab "AWS Lambda" >}}
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
 
 Pour configurer l'APM Datadog dans AWS Lambda, consultez la documentation dédiée au [tracing de fonctions sans serveur][1].
 
 
 [1]: /fr/tracing/serverless_functions/
-{{< /tab >}}
-{{< tab "Autres environnements" >}}
+{{% /tab %}}
+{{% tab "Autres environnements" %}}
 
 La trace est disponible pour un certain nombre d'autres environnements, comme [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], et [Azure App Service][4].
 
@@ -116,7 +116,7 @@ Pour les autres environnements, veuillez consulter la documentation relative aux
 [4]: /fr/infrastructure/serverless/azure_app_services/#overview
 [5]: /fr/integrations/
 [6]: /fr/help/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Une fois le traceur configuré et exécuté avec votre application, utilisez la commande `ddtrace-run --status` pour vérifier que les configurations fonctionnent comme prévu. Notez que la sortie de cette commande ne reflète pas les changements de configuration effectués dans le code pendant l'exécution.

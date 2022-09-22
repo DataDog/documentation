@@ -22,7 +22,7 @@ further_reading:
 ## Agent architecture
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 Agent v6 and v7 are composed of a main process responsible for collecting infrastructure metrics, logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
 
@@ -69,8 +69,8 @@ In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggrega
 [4]: /developers/custom_checks/write_agent_check/
 [5]: https://github.com/etsy/statsd
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 {{< img src="agent/agent5architecture.jpg" alt="Agent v5 Architecture" >}}
 
@@ -109,7 +109,7 @@ minfds = 100  # Your hard limit
 [3]: /agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /agent/proxy/?tab=agentv5
 [5]: /agent/faq/network/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## GUI
@@ -131,7 +131,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 ## Supported platforms
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 | Platform                                 | Supported versions                                        |
 |------------------------------------------|-----------------------------------------------------------|
@@ -168,8 +168,8 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
 [12]: https://github.com/golang/go/issues/24489
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Platform                   | Supported versions     |
 |----------------------------|------------------------|
@@ -200,15 +200,15 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx/
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
-{{< /tab >}}
-{{< tab "Unix Agent" >}}
+{{% /tab %}}
+{{% tab "Unix Agent" %}}
 
 | Platform | Supported versions                        |
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
 [1]: /agent/basic_agent_usage/aix/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## CLI
@@ -267,30 +267,30 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][6] enabled. It shows the evolution of resource usage for the different compression levels available.
 
 {{< tabs >}}
-{{< tab "HTTP compression level 6" >}}
+{{% tab "HTTP compression level 6" %}}
 
 * Agent Test version: 6.15.0
 * CPU: ~ 1.5% of the CPU used on average
 * Memory: ~ 95MB of RAM used.
 * Network bandwidth: ~ 14 KB/s ▲
 
-{{< /tab >}}
-{{< tab "HTTP compression level 1" >}}
+{{% /tab %}}
+{{% tab "HTTP compression level 1" %}}
 
 * Agent Test version: 6.15.0
 * CPU: ~ 1% of the CPU used on average
 * Memory: ~ 95MB of RAM used.
 * Network bandwidth: ~ 20 KB/s ▲
 
-{{< /tab >}}
-{{< tab "HTTP Uncompressed" >}}
+{{% /tab %}}
+{{% tab "HTTP Uncompressed" %}}
 
 * Agent Test version: 6.15.0
 * CPU: ~ 0.7% of the CPU used on average
 * Memory: ~ 90MB of RAM used (RSS memory)
 * Network bandwidth: ~ 200 KB/s ▲
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Getting further with the Datadog Agent

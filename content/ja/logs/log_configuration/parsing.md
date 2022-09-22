@@ -68,7 +68,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 以下に、Datadog でネイティブに実装されるすべてのマッチャーとフィルターを示します。
 
 {{< tabs >}}
-{{< tab "マッチャー" >}}
+{{% tab "マッチャー" %}}
 
 `date("pattern"[, "timezoneId"[, "localeId"]])` 
 : 指定されたパターンを持つ日付に一致してパースし、Unix タイムスタンプを生成します。[日付マッチャーの例を参照してください](#parsing-dates)。
@@ -145,8 +145,8 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 `data`
 : スペースと改行を含め、任意の文字列に一致します。正規表現の `.*` と同じです。上記のいずれのパターンも適切でない場合に使用します。
 
-{{< /tab >}}
-{{< tab "フィルター" >}}
+{{% /tab %}}
+{{% tab "フィルター" %}}
 
 `number`
 : 一致部分を倍精度数としてパースします。
@@ -201,7 +201,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 [1]: /ja/logs/log_configuration/processors/#user-agent-parser
 [2]: /ja/logs/log_configuration/processors/#url-parser
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 高度な設定

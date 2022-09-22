@@ -60,7 +60,7 @@ As a best practice in containerized environments, Datadog recommends using unifi
 Starting with Agent v6.0+, the Agent can collect labels for a given container and use them as tags to attach to all data emitted by this container.
 
 {{< tabs >}}
-{{< tab "Containerized Agent" >}}
+{{% tab "Containerized Agent" %}}
 
 To extract a given container label `<LABEL_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
@@ -78,8 +78,8 @@ DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 **Note**: `DD_CONTAINER_LABELS_AS_TAGS` is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS`, and `DD_CONTAINER_ENV_AS_TAGS` to `DD_DOCKER_ENV_AS_TAGS`.
 
-{{< /tab >}}
-{{< tab "Agent" >}}
+{{% /tab %}}
+{{% tab "Agent" %}}
 
 To extract a given container label `<LABEL_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
@@ -97,7 +97,7 @@ container_labels_as_tags:
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Extract environment variables as tags
@@ -123,7 +123,7 @@ com.datadoghq.ad.tags: '["<TAG_KEY_1>:<TAG_VALUE_1>", "<TAG_KEY_2>:<TAG_VALUE_2>
 With Agent v6.0+, the Agent can collect environment variables for a given container and use them as tags to attach to all data emitted by this container.
 
 {{< tabs >}}
-{{< tab "Containerized Agent" >}}
+{{% tab "Containerized Agent" %}}
 
 To extract a given container environment variable `<ENVVAR_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
@@ -137,8 +137,8 @@ For example, you could set up:
 DD_CONTAINER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 ```
 
-{{< /tab >}}
-{{< tab "Agent" >}}
+{{% /tab %}}
+{{% tab "Agent" %}}
 
 To extract a given container environment variable `<ENVVAR_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
@@ -155,7 +155,7 @@ container_env_as_tags:
 ```
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

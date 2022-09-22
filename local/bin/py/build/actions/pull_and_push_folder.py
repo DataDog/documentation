@@ -70,10 +70,6 @@ def pull_and_push_folder(content, content_dir):
                 count=0,
             )
             file_content = TEMPLATE.format(front_matter=front_matter, content=txt.strip())
-            file_content = file_content.replace("{{%", "{{<").replace("%}}", ">}}")
-            # remove space or tab before shortcode
-            file_content = re.sub(r"[\t ]+{{<", '{{<', file_content, 0, re.MULTILINE)
-
             # Replacing the master README.md by _index.md to follow Hugo logic
             if file_name.endswith("README.md"):
                 file_name = "_index.md"

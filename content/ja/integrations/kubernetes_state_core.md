@@ -49,7 +49,7 @@ Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメ�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Helm `values.yaml` で、以下を追加します。
 
@@ -60,8 +60,8 @@ datadog:
     enabled: true
 ```
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 `kubernetes_state_core` のチェックを有効にするには、DatadogAgent リソースの設定 `spec.features.kubeStateMetricsCore.enabled` を `true` に設定する必要があります。
 
@@ -82,7 +82,7 @@ spec:
 
 注: Datadog Operator v0.7.0 以降が必要です。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## kubernetes_state から kubernetes_state_core への移行
@@ -135,7 +135,7 @@ Kubernetes State Metrics Core チェックには後方互換性がありませ�
 : `kubernetes_state` では、`Job` が `CronJob` をオーナーとしていた場合は `kube_job` タグの値が `CronJob` 名となり、それ以外の場合は `Job` 名となります。`kubernetes_state_core` では、`kube_job` タグの値は常に `Job` 名となり、新たに `kube_cronjob` タグキーが追加されて `CronJob` 名をタグ値として持つようになります。`kubernetes_state_core` に移行する場合、クエリフィルターには新しいタグか `kube_job:foo*` (`foo` は `CronJob` 名) を使用することが推奨されます。
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Helm の `values.yaml` で `kubeStateMetricsCore` を有効にすると、レガシーの `kubernetes_state` チェックの自動コンフィギュレーションファイルを無視するように Agent が構成されます。目標は、両方のチェックを同時に実行しないようにすることです。
 
@@ -151,7 +151,7 @@ datadog:
   kubeStateMetricsEnabled: false
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **重要な注意:** Kubernetes State Metrics Core チェックは、レガシーの `kubernetes_state` チェックに代わるものです。Datadog は、一貫したメトリクスを保証するために、両方のチェックを同時に有効にしないことをお勧めします。

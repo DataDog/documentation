@@ -38,7 +38,7 @@ The Datadog Agent 7.27.0 introduces a new SNMP check version in Go that has both
 3. The following step is only applicable if you use Autodiscovery/subnet scanning: Move the configuration for each instance (subnet) from the SNMP check configuration to the main Datadog Agent `datadog.yaml`.
 
 {{< tabs >}}
-{{< tab "SNMPv2" >}}
+{{% tab "SNMPv2" %}}
 
 ```yaml
 listeners:
@@ -63,9 +63,9 @@ snmp_listener:
       - "key2:val2"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "SNMPv3" >}}
+{{% tab "SNMPv3" %}}
 
 ```yaml
 listeners:
@@ -97,7 +97,7 @@ snmp_listener:
         - "key2:val2"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### DCA specific migration

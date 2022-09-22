@@ -54,7 +54,7 @@ DogStatsD is enabled by default over UDP port `8125` for Agent v6+. If you don't
 ### Agent
 
 {{< tabs >}}
-{{< tab "Host Agent" >}}
+{{% tab "Host Agent" %}}
 
 By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][1], and restart the Agent. You can also configure DogStatsD to use a [Unix domain socket][2]. To enable a custom Agent DogStatsD server UDP port:
 
@@ -79,8 +79,8 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /developers/dogstatsd/unix_socket/
 [3]: /agent/guide/agent-commands/
-{{< /tab >}}
-{{< tab "Container Agent" >}}
+{{% /tab %}}
+{{% tab "Container Agent" %}}
 
 By default, DogStatsD listens on UDP port **8125**, so you need to bind this port to your host port when running the Agent in a container. If your StatsD metrics come from outside of `localhost`you must set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` to allow metric collection. In order to run the Agent with the DogStatsd server up, execute the following command:
 
@@ -99,8 +99,8 @@ docker run -d --cgroupns host \
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1]:
 
 [1]: /developers/dogstatsd/unix_socket/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 To start collecting your StatsD metrics, you need to bind the DogStatsD port to a host port. You can also configure DogStatsD to use a [Unix domain socket][1].
 
@@ -182,8 +182,8 @@ To set [tag cardinality][5] for the metrics collected using origin detection, se
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /getting_started/tagging/assigning_tags/#environment-variables
 [6]: /metrics/custom_metrics/
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 To gather custom metrics with [DogStatsD][1] with helm:
 
@@ -222,7 +222,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Code

@@ -22,7 +22,7 @@ title: .NET 서버리스 애플리케이션의 계측
 Datadog는 다양한 서버리스 애플리케이션 계측 방법을 제공합니다. 아래에서 니즈에 가장 적합한 방법을 선택하세요. 일반적으로는 Datadog CLI를 사용하시길 권장합니다.
 
 {{< tabs >}}
-{{< tab "Datadog CLI" >}}
+{{% tab "Datadog CLI" %}}
 
 Datadog CLI는 기존 Lambda 함수의 설정을 변경하여, 새롭게 배포할 필요 없이 계측하도록 해줍니다. 가장 빠르게 시작하는 방법은 Datadog의 서버리스 모니터링을 이용하는 것입니다.
 
@@ -83,8 +83,8 @@ Datadog CLI는 기존 Lambda 함수의 설정을 변경하여, 새롭게 배포�
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/kr/getting_started/site/
 [3]: https://docs.datadoghq.com/kr/serverless/serverless_integrations/cli
-{{< /tab >}}
-{{< tab "Serverless Framework" >}}
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 [Datadog Serverless Plugin][1]이 [Datadog Lambda Extension][2]을 통해 메트릭, 트레이스, 로그를 Datadog로 전송하도록 함수를 자동 설정합니다.
 
@@ -115,8 +115,8 @@ Datadog Serverless Plugin을 설치하고 설정하려면 다음 절차를 따�
 [2]: https://docs.datadoghq.com/kr/serverless/libraries_integrations/extension
 [3]: https://docs.datadoghq.com/kr/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
-{{< tab "컨테이너 이미지" >}}
+{{% /tab %}}
+{{% tab "컨테이너 이미지" %}}
 
 1. Datadog Lambda Extension을 설치합니다.
 
@@ -150,8 +150,8 @@ Datadog Serverless Plugin을 설치하고 설정하려면 다음 절차를 따�
 [2]: https://github.com/DataDog/dd-trace-dotnet/releases
 [3]: https://docs.datadoghq.com/kr/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
-{{< tab "커스텀" >}}
+{{% /tab %}}
+{{% tab "커스텀" %}}
 
 1. Datadog Lambda Extension을 설치합니다.
 
@@ -177,7 +177,7 @@ Datadog Serverless Plugin을 설치하고 설정하려면 다음 절차를 따�
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/kr/getting_started/site/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 다음 단계

@@ -37,7 +37,7 @@ Le traceur .NET prend en charge les bibliothèques de logging suivantes :
 Pour injecter des identificateurs de corrélation dans vos messages de log, suivez les instructions ci-dessous pour votre bibliothèque de journalisation.
 
 {{< tabs >}}
-{{< tab "Serilog" >}}
+{{% tab "Serilog" %}}
 
 <div class="alert alert-warning">
   <strong>Remarque : </strong>depuis la version 2.0.1 du traceur .NET, l'injection automatique pour la bibliothèque de journalisation Serilog requiert l'instrumentation automatique de l'application.
@@ -53,8 +53,8 @@ Pour injecter automatiquement des identificateurs de corrélation dans vos messa
 2. Pour activer le tracing de l'instrumentation automatique de votre application, suivez les [instructions d'installation du traceur .NET][1].
 
 [1]: https://docs.datadoghq.com/fr/tracing/setup_overview/setup/dotnet-core/
-{{< /tab >}}
-{{< tab "log4net" >}}
+{{% /tab %}}
+{{% tab "log4net" %}}
 
 <div class="alert alert-warning">
   <strong>Remarque : </strong>depuis la version 1.29.0 du traceur .NET, l'injection automatique pour la bibliothèque de journalisation log4net requiert l'instrumentation automatique de l'application.
@@ -98,8 +98,8 @@ Pour obtenir d'autres exemples, consultez le [projet d'injection automatique des
 
 [1]: https://docs.datadoghq.com/fr/tracing/setup_overview/setup/dotnet-core/
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
-{{< /tab >}}
-{{< tab "NLog" >}}
+{{% /tab %}}
+{{% tab "NLog" %}}
 
 <div class="alert alert-warning">
   <strong>Remarque : </strong>depuis la version 2.0.1 du traceur .NET, l'injection automatique pour la bibliothèque de journalisation NLog requiert l'instrumentation automatique de l'application.
@@ -144,8 +144,8 @@ Pour obtenir d'autres exemples, consultez les projets d'injection automatique de
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
 [3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
 [4]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
-{{< /tab >}}
-{{< tab "Microsoft.Extensions.Logging" >}}
+{{% /tab %}}
+{{% tab "Microsoft.Extensions.Logging" %}}
 Pour injecter automatiquement des identificateurs de corrélation dans vos messages de log, procédez comme suit :
 
 1. Configurez le traceur .NET avec les paramètres suivants :
@@ -181,7 +181,7 @@ Pour obtenir d'autres exemples, consultez le [projet d'injection automatique des
 [3]: https://github.com/serilog/serilog-extensions-hosting
 [4]: https://github.com/serilog/serilog-extensions-logging
 [5]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/MicrosoftExtensionsExample/Program.cs
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Ensuite, finalisez la configuration en suivant les étapes pour l'injection automatique ou manuelle.
@@ -222,7 +222,7 @@ Enfin, consultez la section [Collecte de logs avec C#][7] pour configurer la col
 Exemples :
 
 {{< tabs >}}
-{{< tab "Serilog" >}}
+{{% tab "Serilog" %}}
 
 **Remarque** : la bibliothèque Serilog exige que les noms de propriété de message soient des identificateurs C# valides. Les noms de propriété imposés sont : `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` et `dd_span_id`.
 
@@ -241,8 +241,8 @@ using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToStri
 }
 ```
 
-{{< /tab >}}
-{{< tab "log4net" >}}
+{{% /tab %}}
+{{% tab "log4net" %}}
 
 ```csharp
 using Datadog.Trace;
@@ -270,8 +270,8 @@ finally
 }
 ```
 
-{{< /tab >}}
-{{< tab "NLog" >}}
+{{% /tab %}}
+{{% tab "NLog" %}}
 
 ```csharp
 using Datadog.Trace;
@@ -288,8 +288,8 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 }
 ```
 
-{{< /tab >}}
-{{< tab "Microsoft.Extensions.Logging" >}}
+{{% /tab %}}
+{{% tab "Microsoft.Extensions.Logging" %}}
 
 ```csharp
 using Datadog.Trace;
@@ -311,7 +311,7 @@ using(_logger.BeginScope(new Dictionary<string, object>
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Configurer la collecte de logs

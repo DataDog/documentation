@@ -151,7 +151,7 @@ Vous pouvez modifier les paramètres de configuration du traceur .NET de différ
 
 {{< tabs >}}
 
-{{< tab "Variables d'environnement" >}}
+{{% tab "Variables d'environnement" %}}
 
 Pour configurer le traceur à l'aide de variables d'environnement, définissez-les avant le lancement de l'application instrumentée.
 
@@ -172,9 +172,9 @@ example.exe
 <strong>Remarque :</strong> pour définir les variables d'environnement pour un service Windows, utilisez la clé multi-chaînes <code>HKLM\System\CurrentControlSet\Services\{nom du service}\Environment</code> dans le registre Windows, tel que précédemment décrit.
 </div>
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Code" >}}
+{{% tab "Code" %}}
 
 Pour configurer le traceur dans le code de l'application, créez une instance `TracerSettings` à partir des sources de configuration par défaut. Définissez les propriétés de cette instance `TracerSettings` avant de la transmettre à un constructeur `Tracer`. Par exemple :
 
@@ -202,9 +202,9 @@ var tracer = new Tracer(settings);
 Tracer.Instance = tracer;
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "web.config" >}}
+{{% tab "web.config" %}}
 
 Pour configurer le traceur à l'aide d'un fichier `app.config` ou `web.config`, utilisez la section `<appSettings>`. Par exemple :
 
@@ -219,9 +219,9 @@ Pour configurer le traceur à l'aide d'un fichier `app.config` ou `web.config`, 
 </configuration>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fichier JSON" >}}
+{{% tab "Fichier JSON" %}}
 
 Pour configurer le traceur à l'aide d'un fichier JSON, créez `datadog.json` dans le répertoire de l'application instrumentée. L'objet JSON racine doit être un hash avec une paire key/value pour chaque paramètre. Par exemple :
 
@@ -234,7 +234,7 @@ Pour configurer le traceur à l'aide d'un fichier JSON, créez `datadog.json` da
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

@@ -32,7 +32,7 @@ Si vous avez déjà configuré vos fonctions Lambda Java à l'aide du Forwarder 
 ## Configuration
 
 {{< tabs >}}
-{{< tab "Interface de ligne de commande Datadog" >}}
+{{% tab "Interface de ligne de commande Datadog" %}}
 L'interface de ligne de commande Datadog permet de modifier les configurations des fonctions Lambda existantes pour instrumenter vos applications sans les redéployer. Il s'agit du moyen le plus rapide de tirer parti de la surveillance sans serveur de Datadog.
 
 Vous pouvez également ajouter la [commande d'instrumentation](#instrumentation) à vos pipelines de CI/CD pour instrumenter toutes vos applications sans serveur. Lancez la commande _après_ le déploiement normal de votre application sans serveur, de sorte que les modifications apportées par l'interface de ligne de commande Datadog ne soient pas écrasées.
@@ -87,8 +87,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [1]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html
 [2]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
 
-{{< /tab >}}
-{{< tab "Configuration personnalisée" >}}
+{{% /tab %}}
+{{% tab "Configuration personnalisée" %}}
 ### Installer l'extension Lambda Datadog
 
 [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
@@ -104,7 +104,7 @@ La dernière `VERSION_EXTENSION` est {{< latest-lambda-layer-version layer="exte
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 ### Installer le client de tracing Datadog
 
@@ -120,7 +120,7 @@ La dernière `VERSION` est {{< latest-lambda-layer-version layer="dd-trace-java"
 
 Installez localement la bibliothèque Lambda Datadog en ajoutant l'un des blocs de code suivants dans votre fichier `pom.xml` ou `build.gradle` (selon la configuration de votre projet). Remplacez `VERSION` par le numéro de la dernière version (en ignorant le `v` qui le précède) : ![Maven Central][4]
 {{< tabs >}}
-{{< tab "Maven" >}}
+{{% tab "Maven" %}}
 
 Ajoutez la dépendance suivante dans votre fichier `pom.xml` :
 
@@ -132,8 +132,8 @@ Ajoutez la dépendance suivante dans votre fichier `pom.xml` :
 </dependency>
 ```
 
-{{< /tab >}}
-{{< tab "Gradle" >}}
+{{% /tab %}}
+{{% tab "Gradle" %}}
 
 Ajoutez le bloc suivant dans votre `build.gradle` :
 
@@ -142,7 +142,7 @@ dependencies {
   implementation 'com.datadoghq:datadog-lambda-java:VERSION'
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configurer des variables d'environnement
@@ -233,7 +233,7 @@ Si vous ne souhaitez pas effectuer de mise à niveau vers `1.4.x`, la version `0
 La version de la dépendance `datadog-lambda-java` dans votre fonction Lambda est définie dans `pom.xml` (Maven) ou `build.gradle` (Gradle).
 
 {{< tabs >}}
-{{< tab "Maven" >}}
+{{% tab "Maven" %}}
 
 Votre fichier `pom.xml` contient une section qui ressemble à ceci :
 
@@ -247,9 +247,9 @@ Votre fichier `pom.xml` contient une section qui ressemble à ceci :
 
 Remplacez `VERSION` par la dernière version de `datadog-lambda-java` (disponible ci-dessus). Redéployez ensuite votre fonction Lambda.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Gradle" >}}
+{{% tab "Gradle" %}}
 
 Votre fichier `build.gradle` contient une section qui ressemble à ceci :
 
@@ -262,7 +262,7 @@ dependencies {
 Remplacez `VERSION` par la dernière version de `datadog-lambda-java` (disponible ci-dessus).
 Ensuite, redéployez votre fonction Lambda.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs>}}
 
 Si vous effectuez une mise à niveau depuis la version 0.3.x vers la version 1.4.x et que vous souhaitez utiliser le traceur `dd-trace-java`, recherchez la référence à la couche Lambda `dd-trace-java` et remplacez-la par ce qui suit :

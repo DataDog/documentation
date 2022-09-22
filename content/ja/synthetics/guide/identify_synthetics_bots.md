@@ -43,16 +43,16 @@ Synthetic テストで生成されたリクエストにアタッチされてい�
 デフォルトでは`user-agent` ヘッダーが Synthetic テストによって実行されるすべてのリクエストに追加されます。テストで追加されたカスタムの `user-agent` は、デフォルトのものを上書きします。
 
 {{< tabs >}}
-{{< tab "シングルおよびマルチステップ API テスト" >}}
+{{% tab "シングルおよびマルチステップ API テスト" %}}
 
 シングルおよびマルチステップ API テストの場合、デフォルトの `user-agent` ヘッダーは `Datadog/Synthetics` です。
 
-{{< /tab >}}
-{{< tab "Browser tests" >}}
+{{% /tab %}}
+{{% tab "Browser tests" %}}
 
 ブラウザテストの場合、デフォルトの `user-agent` ヘッダーの値は、テストを実行するブラウザとデバイスによって異なります。Synthetic テストを識別できるように、デフォルトの `user-agent` 値は常に `DatadogSynthetics` で終わります。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### `sec-datadog`
@@ -60,20 +60,20 @@ Synthetic テストで生成されたリクエストにアタッチされてい�
 Synthetic テストによって実行されるすべてのリクエストに `sec-datadog` ヘッダーが追加されます。この値には、特に、リクエストの発信元であるテストの ID が含まれます。
 
 {{< tabs >}}
-{{< tab "シングルおよびマルチステップ API テスト" >}}
+{{% tab "シングルおよびマルチステップ API テスト" %}}
 
 ```
 sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
-{{< /tab >}}
-{{< tab "Browser tests" >}}
+{{% /tab %}}
+{{% tab "Browser tests" %}}
 
 ```
 sec-datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### APM ヘッダー

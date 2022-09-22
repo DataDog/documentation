@@ -49,7 +49,7 @@ For an explanation of how Prometheus and OpenMetrics metrics map to Datadog metr
 Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying the following `annotations` to your **pod** exposing the OpenMetrics/Prometheus metrics:
 
 {{< tabs >}}
-{{< tab "Kubernetes (AD v2)" >}}
+{{% tab "Kubernetes (AD v2)" %}}
 
 **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
 
@@ -78,8 +78,8 @@ spec:
     - name: '<CONTAINER_IDENTIFIER>'
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes (AD v1)" >}}
+{{% /tab %}}
+{{% tab "Kubernetes (AD v1)" %}}
 
 ```yaml
 # (...)
@@ -103,7 +103,7 @@ spec:
     - name: '<CONTAINER_IDENTIFIER>'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 With the following configuration placeholder values:
@@ -129,7 +129,7 @@ For a full list of available parameters for instances, including `namespace` and
 
 2. Use the [Prometheus `prometheus.yaml`][11] to launch an example Prometheus Deployment with the Autodiscovery configuration on the pod:
    {{< tabs >}}
-   {{< tab "Kubernetes (AD v2)" >}}
+   {{% tab "Kubernetes (AD v2)" %}}
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
 
@@ -160,8 +160,8 @@ For a full list of available parameters for instances, including `namespace` and
           - name: prometheus-example
           # (...)
    ```
-   {{< /tab >}}
-   {{< tab "Kubernetes (AD v1)" >}}
+   {{% /tab %}}
+   {{% tab "Kubernetes (AD v1)" %}}
 
    ```yaml
      # (...)
@@ -191,7 +191,7 @@ For a full list of available parameters for instances, including `namespace` and
           # (...)
    ```
 
-   {{< /tab >}}
+   {{% /tab %}}
    {{< /tabs >}}
 
      Command to create the Prometheus Deployment:
@@ -218,7 +218,7 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 #### Basic configuration
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 In your Helm `values.yaml`, add the following:
 
@@ -230,8 +230,8 @@ datadog:
     serviceEndpoints: true
   # (...)
 ```
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 In your DaemonSet manifest for the Agent `daemonset.yaml`, add the following environment variables for the Agent container:
 ```yaml
@@ -248,7 +248,7 @@ If the Cluster Agent is enabled, inside its manifest `cluster-agent-deployment.y
   value: "true" 
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 This instructs the Datadog Agent to detect the pods that have native Prometheus annotations and generate corresponding OpenMetrics checks.
@@ -264,7 +264,7 @@ This configuration generates a check that collects all metrics exposed using the
 #### Advanced configuration
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 You can define advanced OpenMetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `additionalConfigs` configuration field in `values.yaml`.
 
@@ -313,8 +313,8 @@ datadog:
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 You can define advanced OpenMetrics check configurations or custom Autodiscovery rules other than native Prometheus annotations with the `DD_PROMETHEUS_SCRAPE_CHECKS` environment variable in the Agent and Cluster Agent manifests.
 
@@ -350,7 +350,7 @@ In this example we're defining an advanced configuration targeting a container n
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## From custom to official integration

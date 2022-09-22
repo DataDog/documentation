@@ -43,7 +43,7 @@ The two main in-application modifiers are `as_count()` and `as_rate()`.
 Depending on the metric type you applied them to, the behavior differs:
 
 {{< tabs >}}
-{{< tab "COUNT" >}}
+{{% tab "COUNT" %}}
 
 * Effect of `as_count()`:
   * Disables any [interpolation][1].
@@ -56,8 +56,8 @@ Depending on the metric type you applied them to, the behavior differs:
 **Note**: There is no normalization on tiny intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
 
 [1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
-{{< /tab >}}
-{{< tab "RATE" >}}
+{{% /tab %}}
+{{% tab "RATE" %}}
 
 * Effect of `as_count()`:
   * Disable any [interpolation][1].
@@ -68,12 +68,12 @@ Depending on the metric type you applied them to, the behavior differs:
   * Sets the time aggregator to `SUM`.
 
 [1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
-{{< /tab >}}
-{{< tab "GAUGE" >}}
+{{% /tab %}}
+{{% tab "GAUGE" %}}
 
 `GAUGE` metric types represent the absolute and final value of a metric; `as_count()` and `as_rate()` modifiers have no effect on them.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### The `weighted()` modifier

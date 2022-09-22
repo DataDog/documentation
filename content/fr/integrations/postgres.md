@@ -121,7 +121,7 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 ```
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 **Remarque** : pour créer des métriques custom nécessitant d'interroger des tables supplémentaires, vous devrez peut-être accorder à l'utilisateur `datadog` l'autorisation `SELECT` pour ces tables. Exemple de commande : `grant SELECT on <NOM_TABLE> to datadog;`. Consultez la [rubrique FAQ](#faq) pour en savoir plus.
 
@@ -244,8 +244,8 @@ Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucun
 [4]: https://docs.datadoghq.com/fr/tracing/setup/
 [5]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [6]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 #### Docker
 
@@ -293,8 +293,8 @@ Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à
 [2]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#installation
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 [4]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 #### Kubernetes
 
@@ -368,8 +368,8 @@ Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à
 [5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=daemonset#configuration
 [6]: https://docs.datadoghq.com/fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 [7]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/service_checks.json
-{{< /tab >}}
-{{< tab "ECS" >}}
+{{% /tab %}}
+{{% tab "ECS" %}}
 
 #### ECS
 
@@ -433,7 +433,7 @@ Ensuite, [instrumentez votre conteneur d'application qui envoie des requêtes à
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 [4]: https://docs.datadoghq.com/fr/agent/docker/apm/
 [5]: https://docs.datadoghq.com/fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

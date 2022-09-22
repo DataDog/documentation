@@ -25,7 +25,7 @@ title: 커뮤니티 통합 사용하기
 사용하는 Agent 버전을 선택하세요.
 
 {{< tabs >}}
-{{< tab "Agent v7.21+ / v6.21+" >}}
+{{% tab "Agent v7.21+ / v6.21+" %}}
 
 Agent v7.21 / v6.21 이상인 경우:
 
@@ -42,8 +42,8 @@ Agent v7.21 / v6.21 이상인 경우:
 
 [1]: /kr/getting_started/integrations/
 [2]: /kr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "도커(Docker)" >}}
+{{% /tab %}}
+{{% tab "도커(Docker)" %}}
 
 커뮤니티 통합과 도커(Docker) Agent를 사용할 때는 설치된 통합으로 Agent를 빌드하시길 권장합니다. 다음의 Dockerfile을 사용해, integrations-extras에서 `<INTEGRATION_NAME>`을 포함하도록 업데이트된 버전의 Agent를 빌드하세요
 
@@ -57,9 +57,9 @@ RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VER
 새 Agent 이미지와 [자동탐지][1]를 함께 사용해 `<INTEGRATION_NAME>`를 활성화합니다.
 
 [1]: /kr/agent/autodiscovery/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "이전 버전의 Agent" >}}
+{{% tab "이전 버전의 Agent" %}}
 
 Agent v7.21 / v6.21 이하의 경우:
 
@@ -76,7 +76,7 @@ Agent v7.21 / v6.21 이하의 경우:
 [2]: /kr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /kr/getting_started/integrations/
 [4]: /kr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 <br>

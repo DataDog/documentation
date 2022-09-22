@@ -25,17 +25,17 @@ To schedule a [monitor downtime][1] in Datadog use the main navigation: _Monitor
 ### Choose what to silence
 
 {{< tabs >}}
-{{< tab "By Monitor Name" >}}
+{{% tab "By Monitor Name" %}}
 
 Search or use the drop-down to choose monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
 
-{{< /tab >}}
-{{< tab "By Monitor Tags" >}}
+{{% /tab %}}
+{{% tab "By Monitor Tags" %}}
 
 Schedule a downtime based on one or more [monitor tags][1]. You must select at least one tag with a limit of 32 tags. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
 [1]: /monitors/manage/#monitor-tags
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 If you choose to silence monitors constrained by scope, click **Preview affected monitors** to see the monitors included. Any monitors created or edited after the downtime is scheduled are automatically included in the downtime if they match the scope.
@@ -51,7 +51,7 @@ To include all groups in the scope of a Downtime that applies to multi-alert mon
 The examples below show how `Group scope` may be applied to multi-alert monitors.
 
 {{< tabs >}}
-{{< tab "By Monitor Name" >}}
+{{% tab "By Monitor Name" %}}
 
 **Example 1: Mute notification for a specific service**
 
@@ -78,8 +78,8 @@ The examples below show how `Group scope` may be applied to multi-alert monitors
 {{< img src="monitors/downtimes/downtime_examplebyname2_monitor.jpg" alt="group status shows dev environment and related services muted during downtime" style="width:80%;">}}
 
 4. To schedule a downtime on more than one “group by” (for example, `env:dev` AND `service:web-store`), add the additional scope to the downtime.
-{{< /tab >}}
-{{< tab "By Monitor Tags" >}}
+{{% /tab %}}
+{{% tab "By Monitor Tags" %}}
 
 If a scheduled downtime is based on a common monitor tag and the monitors in scope are multi-alert monitors with one “group by” scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
 
@@ -101,20 +101,20 @@ If a scheduled downtime is based on a common monitor tag and the monitors in sco
 
 {{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.jpg" alt="downtime example"  style="width:80%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Schedule
 
 {{< tabs >}}
-{{< tab "One Time" >}}
+{{% tab "One Time" %}}
 
 Set a one time downtime by entering the start date, time, and time zone. Optionally, set an end date and time.
 
 {{< img src="monitors/downtimes/downtime_onetime.jpg" alt="downtime on alert"  style="width:80%;">}}
 
-{{< /tab >}}
-{{< tab "Recurring" >}}
+{{% /tab %}}
+{{% tab "Recurring" %}}
 
 Recurring downtimes are useful for recurring maintenance windows.
 
@@ -135,7 +135,7 @@ A common use case is to use RRULES to define downtimes on specific days of the m
 
 [1]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [2]: https://icalendar.org/rrule-tool.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Add a message

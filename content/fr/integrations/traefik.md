@@ -60,7 +60,7 @@ Pour l'Agent v7.21+/6.21+, suivez les instructions ci-dessous afin d'installer l
 ### Procédure à suivre
 
 {{< tabs >}}
-{{< tab "v2" >}}
+{{% tab "v2" %}}
 
 #### À propos de la v2
 Pour en savoir plus sur les modifications apportées entre la v1 et la v2, consultez le [guide de migration de Traefik][1]. Pour en savoir plus sur la dernière version, consultez la [documentation de Traefik][2] (en anglais).
@@ -120,8 +120,8 @@ Par défaut, les [logs Traefik][5] sont envoyés à stdout. Nous vous déconseil
 [9]: https://docs.datadoghq.com/fr/getting_started/tracing/#enable-apm
 [10]: https://doc.traefik.io/traefik/observability/tracing/datadog/
 [11]: https://doc.traefik.io/traefik/observability/tracing/overview/
-{{< /tab >}}
-{{< tab "v1" >}}
+{{% /tab %}}
+{{% tab "v1" %}}
 
 #### À propos de la v1
 
@@ -205,7 +205,7 @@ Par défaut, les [logs Traefik][6] sont envoyés à stdout. Nous vous déconseil
 [7]: https://doc.traefik.io/traefik/v1.7/configuration/logs/#clf-common-log-format
 [8]: https://docs.datadoghq.com/fr/getting_started/tracing/#enable-apm
 [9]: https://doc.traefik.io/traefik/v1.7/configuration/tracing/#datadog
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

@@ -48,7 +48,7 @@ Global variables are variables that are accessible from all your Synthetic tests
 Choose the type of variable you want to create:
 
 {{< tabs >}}
-{{< tab "Specify Value" >}}
+{{% tab "Specify Value" %}}
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores. This name should be unique across your global variables.
 2. Enter a **Description** for your variable (optional).
@@ -58,9 +58,9 @@ Choose the type of variable you want to create:
 
 {{< img src="synthetics/settings/variable_value_2.png" alt="Global Variable Specify Value" style="width:100%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Create From HTTP Test" >}}
+{{% tab "Create From HTTP Test" %}}
 
 You can create variables from your existing [HTTP tests][1] by parsing their associated response headers and body:
 
@@ -93,9 +93,9 @@ Variable values are updated whenever the test they are extracted from runs.
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
 [4]: https://www.w3schools.com/xml/xpath_syntax.asp
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "MFA Token" >}}  
+{{% tab "MFA Token" %}}  
  
 To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider.
 
@@ -111,7 +111,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 **Note**: For more information about TOTP-based MFA in a browser test, see the [TOTP guide][1].
 
 [1]: /synthetics/guide/browser-tests-totp
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

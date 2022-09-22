@@ -38,7 +38,7 @@ La version 7.27.0 de l'Agent Datadog prend en charge une nouvelle version des c
 3. Uniquement si vous utilisez Autodiscovery ou l'analyse de sous-réseaux : déplacez la configuration de chaque instance (sous-réseau) depuis la configuration du check SNMP vers le fichier principal `datadog.yaml` de l'Agent Datadog.
 
 {{< tabs >}}
-{{< tab "SNMPv2" >}}
+{{% tab "SNMPv2" %}}
 
 ```yaml
 listeners:
@@ -63,9 +63,9 @@ snmp_listener:
       - "key2:val2"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "SNMPv3" >}}
+{{% tab "SNMPv3" %}}
 
 ```yaml
 listeners:
@@ -97,7 +97,7 @@ snmp_listener:
         - "key2:val2"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Spécificités de l'Agent de cluster Datadog

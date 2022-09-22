@@ -49,7 +49,7 @@ Amazon Relational Database Service (RDS) は、クラウドでリレーショナ
 RDS インスタンスを監視するには、Standard、Enhanced、Native の 3 つのオプションがあります。**コンフィギュレーションを選択する前に、[メトリクスのリスト](#data-collected)全体を確認してください**。各メトリクスには対応するコンフィギュレーションのラベルが付いているためです。さらに、以下の情報を確認して、各コンフィギュレーションの要件とプリセットダッシュボードの詳細を確認してください。
 
 {{< tabs >}}
-{{< tab "標準" >}}
+{{% tab "標準" %}}
 
 標準インテグレーションの場合、[AWS インテグレーションタイル][1]の左側で RDS を選択する必要があります。これにより、ご使用の CloudWatch インテグレーションで利用可能な回数だけ、インスタンスに関するメトリクスを受信できます。すべての RDS エンジンタイプに対応しています。
 
@@ -57,15 +57,15 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-{{< /tab >}}
-{{< tab "Enhanced" >}}
+{{% /tab %}}
+{{% tab "Enhanced" %}}
 
  拡張インテグレーションの場合、構成を追加する必要があります。また、MySQL、Aurora、MariaDB、SQL Server、Oracle、PostgreSQL エンジンで使用できます。メトリクスを追加することができますが、追加したメトリクスを Datadog に送信するには、AWS Lambda が必要です。粒度が高く、追加のサービスが必要になると AWS の追加料金が発生します。
 
 このインテグレーションのプリセットダッシュボードには、負荷、アップタイム、CPU 使用率、タスク、メモリ、SWAP、ネットワーク受信、ネットワーク送信、プロセスごとに使用される CPU、プロセスごとに使用されるメモリ、ディスク操作、使用されるファイルシステム (pct)、 実行中のタスク、システム CPU 使用率のメトリクス情報が含まれています。
 
-{{< /tab >}}
-{{< tab "Native" >}}
+{{% /tab %}}
+{{% tab "Native" %}}
 
 ネイティブデータベースインテグレーションはオプションです。MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各エンジンタイプで使用できます。RDS とネイティブインテグレーションの両方からメトリクスを取得して照合するには、RDS インスタンスに割り当てる識別子に基づいて、ネイティブインテグレーションで `dbinstanceidentifier` タグを使用します。RDS インスタンスには自動的にタグが割り当てられます。
 
@@ -77,7 +77,7 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 [1]: https://docs.datadoghq.com/ja/integrations/mysql/
 [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_SettingUp_Aurora.html
 [3]: https://docs.datadoghq.com/ja/integrations/postgres/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## セットアップ
@@ -85,13 +85,13 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 ### インストール
 
 {{< tabs >}}
-{{< tab "標準" >}}
+{{% tab "標準" %}}
 
 標準 RDS インテグレーションの場合、最初に [Amazon Web Services インテグレーション][1] をセットアップします。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services
-{{< /tab >}}
-{{< tab "Enhanced" >}}
+{{% /tab %}}
+{{% tab "Enhanced" %}}
 
 インスタンスの作成中または作成後に RDS インスタンスの拡張モニタリングを有効にするには、**Instance Actions** の下にある **Modify** を選択します。監視の詳細度には `15` を選択することをお勧めします。
 
@@ -145,20 +145,20 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 [1]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [2]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/rds_enhanced_monitoring#setup
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
-{{< tab "Native" >}}
+{{% /tab %}}
+{{% tab "Native" %}}
 
 1. AWS コンソールに移動し、RDS セクションを開いて、監視するインスタンスを見つけます。
   {{< img src="integrations/awsrds/rds-console.png" alt="RDS コンソール" >}}
 2. エンドポイント URL をメモします (例: **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**)。これは Agent の構成に使用されます。`DB Instance identifier` もメモします (例 **mysqlrds**)。これはグラフやダッシュボードの作成に使用されます。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "標準" >}}
+{{% tab "標準" %}}
 
 1. [AWS インテグレーションタイル][1]で、メトリクスの収集の `RDS` にチェックが入っていることを確認します。
 2. Amazon RDS のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [RDS ポリシー][3]を参照してください。
@@ -175,8 +175,8 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
-{{< /tab >}}
-{{< tab "Enhanced" >}}
+{{% /tab %}}
+{{% tab "Enhanced" %}}
 
 1. [AWS インテグレーションタイル][1]で、メトリクスの収集の `RDS` にチェックが入っていることを確認します。
 2. Amazon RDS のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [RDS ポリシー][3]を参照してください。
@@ -194,8 +194,8 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
-{{< /tab >}}
-{{< tab "Native" >}}
+{{% /tab %}}
+{{% tab "Native" %}}
 
 conf.d ディレクトリ内の適切な yaml ファイルを編集することで Agent を構成し、RDS インスタンスに接続します。その後、Agent を再起動します。
 
@@ -261,7 +261,7 @@ Checks
 ```
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-information
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 使用方法

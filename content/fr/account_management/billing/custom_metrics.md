@@ -27,7 +27,7 @@ Imaginons que dans vos données, `endpoint:X` est pris en charge par les deux ho
 {{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Latence des requêtes" style="width:80%;">}}
 
 {{< tabs >}}
-{{< tab "Count, Rate">}}
+{{% tab "Count, Rate"%}}
 
 La même logique est appliquée pour calculer le nombre de métriques custom pour les métriques de type [COUNT][1] et [RATE][2].
 
@@ -114,8 +114,8 @@ En savoir plus sur [Metrics without Limits™][3].
 [1]: /fr/metrics/types/?tab=count#metric-types
 [2]: /fr/metrics/types/?tab=rate#metric-types
 [3]: /fr/metrics/metrics-without-limits
-{{< /tab >}}
-{{< tab "Gauge" >}}
+{{% /tab %}}
+{{% tab "Gauge" %}}
 Le nombre de combinaisons de valeurs de tag uniques envoyées pour une métrique GAUGE avec ce schéma de tagging est de **quatre** :
 
 - `host:A`, `endpoint:X`, `status:200`
@@ -189,8 +189,8 @@ Vous pouvez ajouter d'autres agrégations en cas de besoin. Le nombre de métriq
 En savoir plus sur [Metrics without Limits™][1].
 
 [1]: /fr/metrics/metrics-without-limits
-{{< /tab >}}
-{{< tab "Histogram" >}}
+{{% /tab %}}
+{{% tab "Histogram" %}}
 
 **Par défaut, une métrique HISTOGRAM génère cinq métriques custom pour chaque combinaison unique de nom de métrique et de valeurs de tag**, ce qui correspond aux agrégations effectuées côté Agent (`max`, `median`, `avg`, `95pc` et `count`). [En savoir plus sur les métriques HISTOGRAM][1].
 
@@ -212,8 +212,8 @@ Par défaut, l'Agent génère cinq métriques custom pour chacune des quatre com
 [1]: /fr/metrics/types/?tab=histogram#metric-types
 [2]: /fr/metrics/types/?tab=histogram#definition
 [3]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tab >}}
-{{< tab "Distribution" >}}
+{{% /tab %}}
+{{% tab "Distribution" %}}
 
 **Par défaut, une métrique DISTRIBUTION génère cinq métriques custom pour chaque combinaison unique de nom de métrique et de valeurs de tag**, ce qui correspond à la distribution statistique globale des valeurs. Ces cinq métriques custom reflètent les agrégations effectuées côté serveur, `count`, `sum`, `min`, `max` et `avg`. [En savoir plus sur les métriques de type DISTRIBUTION][1].
 
@@ -274,7 +274,7 @@ En savoir plus sur [Metrics without Limits™][2].
 
 [1]: /fr/metrics/types/?tab=distribution#definition
 [2]: /fr/metrics/metrics-without-limits
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Suivi des métriques custom

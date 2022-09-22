@@ -14,7 +14,7 @@ title: Agent のアンインストール
 ## Debian と Ubuntu
 
 {{< tabs >}}
-{{< tab "Agent v6 と v7" >}}
+{{% tab "Agent v6 と v7" %}}
 ```shell
 sudo apt-get remove datadog-agent -y
 ```
@@ -31,9 +31,9 @@ sudo apt-get remove datadog-agent -y
 ```shell
 sudo apt-get remove --purge datadog-agent -y
 ```
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 ```shell
 sudo apt-get remove datadog-agent -y
 ```
@@ -48,12 +48,12 @@ sudo apt-get remove datadog-agent -y
 ```shell
 sudo apt-get --purge remove datadog-agent -y
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## CentOS、RHEL、Fedora、Amazon Linux
 {{< tabs >}}
-{{< tab "Agent v6 と v7" >}}
+{{% tab "Agent v6 と v7" %}}
 
 
 ```shell
@@ -74,9 +74,9 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/datadog-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 ```shell
 sudo yum remove datadog-agent
 ```
@@ -96,12 +96,12 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/dd-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## openSUSE と SLES
 {{< tabs >}}
-{{< tab "Agent v6 と v7" >}}
+{{% tab "Agent v6 と v7" %}}
 ```shell
 sudo zypper remove datadog-agent
 ```
@@ -120,9 +120,9 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/datadog-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 
 ```shell
 sudo zypper remove datadog-agent
@@ -142,11 +142,11 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/dd-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 ## macOS
 {{< tabs >}}
-{{< tab "Agent v6 と v7" >}}
+{{% tab "Agent v6 と v7" %}}
 **シングルユーザーインストール**
 
 Agent とすべての Agent 構成ファイルを削除するには
@@ -176,9 +176,9 @@ Agent とすべての Agent 構成ファイルを削除するには
     sudo rm -rf /var/log/datadog
     ```
 3. マシンを再起動すると、変更が有効になります。
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 1. トレイにある骨のアイコンで Datadog Agent を停止して閉じます。
 2. Datadog アプリケーションをアプリケーションフォルダからゴミ箱にドラッグします。
 3. 次を実行します。
@@ -197,13 +197,13 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ```
 
 > この方法では、Agent とすべての Agent コンフィグレーションファイルが削除されます。
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Windows
 
 {{< tabs >}}
-{{< tab "Agent v6 と v7" >}}
+{{% tab "Agent v6 と v7" %}}
 
 Windows で Agent をアンインストールするには、2 つの異なる方法があります。どちらの方法でも Agent は削除されますが、ホスト上の `C:\ProgramData\Datadog` 構成フォルダは削除されません。
 
@@ -228,9 +228,9 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 
 Windows で Agent をアンインストールするには、2 つの異なる方法があります。どちらの方法でも Agent は削除されますが、ホスト上の `C:\ProgramData\Datadog` 構成フォルダは削除されません。
 
@@ -252,5 +252,5 @@ Windows で Agent をアンインストールするには、2 つの異なる方
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}

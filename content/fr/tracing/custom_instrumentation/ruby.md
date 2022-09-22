@@ -28,7 +28,7 @@ Ajoutez des [tags de span][1] personnalisés à vos [spans][2] pour personnalise
 Ajoutez des tags personnalisés à vos spans correspondant à une valeur dynamique au sein du code de votre application, comme `customer.id`.
 
 {{< tabs >}}
-{{< tab "Span active" >}}
+{{% tab "Span active" %}}
 Accédez à la [span][1] active au sein de votre code à l'aide de la méthode de votre choix. **Remarque** : si la méthode est appelée et qu'aucune span n'est active, `active_span` est `nil`.
 
 ```ruby
@@ -54,9 +54,9 @@ end
 ```
 
 [1]: /fr/tracing/visualization/#spans
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Spans instrumentées manuellement" >}}
+{{% tab "Spans instrumentées manuellement" %}}
 
 Ajoutez directement des [tags][1] aux objets `Datadog::Span` en appelant `#set_tag` :
 
@@ -73,7 +73,7 @@ end
 
 
 [1]: /fr/tracing/visualization/#span-tags
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Ajouter des tags à l'ensemble des spans

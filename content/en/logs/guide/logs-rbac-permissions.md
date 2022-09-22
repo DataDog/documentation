@@ -15,19 +15,19 @@ further_reading:
 Once you've created [RBAC roles for logs][1], assign or remove [permissions][2] to the role.
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 Assign or remove permission to a role directly by [updating the role on the Datadog site][1].
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 Assign or remove permission to a role directly through the [Datadog Permission API][1].
 
 [1]: /api/v2/roles/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 More details about individual permissions below.
@@ -65,7 +65,7 @@ This permission can be assigned either globally or restricted to a subset of ind
 **Subset of indexes**:
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 1. Remove the global permission on the role.
 2. Grant this permission to the role in [the Index page on the Datadog site][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
@@ -74,12 +74,12 @@ This permission can be assigned either globally or restricted to a subset of ind
 
 
 [1]: /logs/log_configuration/indexes/
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 This configuration is only supported through the UI.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### `logs_write_pipelines`
@@ -99,14 +99,14 @@ Grants a role the ability to create, edit, or delete processors and nested pipel
 This permission can be assigned either globally or restricted to a subset of pipelines.
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 Assign the role(s) in the modal of a specific pipeline.
 
 {{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors" style="width:75%;" >}}
 
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 1. [Get the Roles ID][1] of the role you want to assign to specific pipelines.
 2. [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
@@ -129,7 +129,7 @@ curl -X POST \
 [1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
 [3]: /api/v1/logs-pipelines/#get-all-pipelines
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### `logs_write_archives`
@@ -158,21 +158,21 @@ In the following example, assuming all roles but `Guest` have the `logs_read_arc
 {{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role" style="width:90%;">}}
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 Proceed to archive creation, or update at any moment while editing the archive.
 
 {{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role" style="width:90%;">}}
 
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a given Archive.
 
 
 [1]: /api/v2/logs-archives/#grant-role-to-an-archive
 [2]: /api/v2/logs-archives/#revoke-role-from-an-archive
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### `logs_write_historical_views`
@@ -230,7 +230,7 @@ Roles are additive. If a user belongs to multiple roles, the data they have acce
 
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 To restrict users so they see no more than logs matching a restriction query, use the [Data Access page][1]:
 
@@ -277,15 +277,15 @@ The Data Access page displays a maximum of 50 restriction queries, and 50 roles 
 {{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="View as Roles" style="width:70%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/data-access
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 Revoke or grant this permission from a role with [the Roles API][1].
 Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 
 [1]: /api/#roles
 [2]: /api/?lang=bash#roles-restriction-queries-for-logs
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Legacy permissions
@@ -305,7 +305,7 @@ Grants a role read access on some number of log indexes. Can be set either globa
 To scope this permission to a subset of indexes, first remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role. Then:
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 Grant this role access to the index in [Configuration page][1].
 
@@ -313,8 +313,8 @@ Grant this role access to the index in [Configuration page][1].
 
 
 [1]: https://app.datadoghq.com/logs/indexes
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 * [Get the Roles ID][1] of the role you want to assign to specific pipelines.
 * [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
@@ -338,7 +338,7 @@ curl -X POST \
 [1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
 [3]: /api/v1/logs-indexes/#get-all-indexes
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### `logs_live_tail`

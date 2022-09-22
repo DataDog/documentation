@@ -32,7 +32,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 {{< tabs >}}
 
-{{< tab "Ubuntu and Debian" >}}
+{{% tab "Ubuntu and Debian" %}}
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -127,9 +127,9 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       sudo systemctl restart rsyslog
       ```
 [1]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Amazon Linux, CentOS, and Red Hat" >}}
+{{% tab "Amazon Linux, CentOS, and Red Hat" %}}
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -224,9 +224,9 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       sudo systemctl restart rsyslog
       ```
 [1]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fedora" >}}
+{{% tab "Fedora" %}}
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -322,14 +322,14 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       sudo systemctl restart rsyslog
       ```
 [1]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 #### Rsyslog version <8
 
 {{< tabs >}}
 
-{{< tab "Ubuntu and Debian" >}}
+{{% tab "Ubuntu and Debian" %}}
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -446,9 +446,9 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       ```
 
 [1]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Amazon Linux, CentOS, and Red Hat" >}}
+{{% tab "Amazon Linux, CentOS, and Red Hat" %}}
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -563,9 +563,9 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       sudo systemctl restart rsyslog
       ```
 [1]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fedora" >}}
+{{% tab "Fedora" %}}
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -682,7 +682,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       ```
 
 [1]: /agent/logs/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

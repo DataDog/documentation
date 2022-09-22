@@ -43,7 +43,7 @@ title: 関連するログがトレース ID パネルに表示されない
 2. この属性を予約された `trace_id` 属性にリマップします。
 
    {{< tabs >}}
-   {{< tab "JSON ログ" >}}
+   {{% tab "JSON ログ" %}}
 
    JSON ログの場合、ステップ 1、2 は自動で行われます。トレーサーは、[トレース][1]と[スパン][2]の ID をログに注入し、これらは[予約属性リマッパー][3]によって自動的にリマップされます。
 
@@ -55,8 +55,8 @@ title: 関連するログがトレース ID パネルに表示されない
    [2]: /tracing/glossary/#spans
    [3]: /logs/log_configuration/processors/#remapper
    [4]: https://app.datadoghq.com/logs/pipelines/remapping
-   {{< /tab >}}
-   {{< tab "ログインテグレーションあり" >}}
+   {{% /tab %}}
+   {{% tab "ログインテグレーションあり" %}}
 
 生のログ (特定の言語の [ログインテグレーション][1]を使ってログを収集している場合) については、`source` 属性に `java`、`python`、`ruby` などの言語を設定します。インテグレーションは、トレースとログを自動的に相関付けます。
 
@@ -68,8 +68,8 @@ title: 関連するログがトレース ID パネルに表示されない
 
    [1]: /logs/log_collection/?tab=application#setup
    [2]: /logs/faq/how-to-investigate-a-log-parsing-issue/
-   {{< /tab >}}
-   {{< tab "カスタム" >}}
+   {{% /tab %}}
+   {{% tab "カスタム" %}}
 
 ログを収集するためのインテグレーションを使用していない生のログの場合
 
@@ -82,7 +82,7 @@ title: 関連するログがトレース ID パネルに表示されない
    [1]: /tracing/glossary/#trace
    [2]: /tracing/glossary/#spans
    [3]: /logs/log_configuration/processors/#trace-remapper
-   {{< /tab >}}
+   {{% /tab %}}
    {{< /tabs >}}
 
 ID が正しく挿入され、ログにリマップされると、トレースパネルでトレースと相関のあるログを見ることができます。

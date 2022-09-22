@@ -60,7 +60,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Traefik チェ
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "v2" >}}
+{{% tab "v2" %}}
 
 #### v2 について
 v1 から v2 への変更点については、[Traefik 移行ガイド][1]を参照してください。最新バージョンについては、[Traefik のドキュメント][2]を参照してください。
@@ -120,8 +120,8 @@ v1 から v2 への変更点については、[Traefik 移行ガイド][1]を参
 [9]: https://docs.datadoghq.com/ja/getting_started/tracing/#enable-apm
 [10]: https://doc.traefik.io/traefik/observability/tracing/datadog/
 [11]: https://doc.traefik.io/traefik/observability/tracing/overview/
-{{< /tab >}}
-{{< tab "v1" >}}
+{{% /tab %}}
+{{% tab "v1" %}}
 
 #### v1 について
 
@@ -205,7 +205,7 @@ v1 については [Traefik のドキュメント][1]を、v1 から v2 への�
 [7]: https://doc.traefik.io/traefik/v1.7/configuration/logs/#clf-common-log-format
 [8]: https://docs.datadoghq.com/ja/getting_started/tracing/#enable-apm
 [9]: https://doc.traefik.io/traefik/v1.7/configuration/tracing/#datadog
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

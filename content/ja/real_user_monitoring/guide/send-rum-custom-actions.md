@@ -23,7 +23,7 @@ title: RUM カスタムアクションの送信
 次の例では、ユーザーがチェックアウトボタンをクリックすると、ユーザーカートの詳細を表示する `checkout` アクションを作成します。
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -36,8 +36,8 @@ function onCheckoutButtonClick(cart) {
 }
 ```
 
-{{< /tab >}}
-{{< tab "CDN async" >}}
+{{% /tab %}}
+{{% tab "CDN async" %}}
 
 API コールを `onReady` コールバックでラップしていることを確認します。
 
@@ -52,8 +52,8 @@ function onCheckoutButtonClick(cart) {
 }
 ```
 
-{{< /tab >}}
-{{< tab "CDN sync" >}}
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 API コールの前に `DD_RUM` をチェックすることを確認します。
 
@@ -68,7 +68,7 @@ function onCheckoutButtonClick(cart) {
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 現在のページビュー情報、geoIP データ、ブラウザ情報などのすべての RUM コンテキストは、[Global Context API][2]で提供される追加属性とともに自動的にアタッチされます。

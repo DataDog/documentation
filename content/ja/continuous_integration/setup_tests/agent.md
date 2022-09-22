@@ -62,7 +62,7 @@ Kubernetes エグゼキューターを使用している場合、Datadog は [Ad
 次のセクションでは、Agent を実行し、テスト情報を報告するよう構成するために必要となる CI プロバイダー固有の手順をご説明します。
 
 {{< tabs >}}
-{{< tab "Azure Pipelines" >}}
+{{% tab "Azure Pipelines" %}}
 
 Azure Pipelines で Datadog Agent を実行するには、[`resources` セクション][1]で新しいコンテナを定義し、それを [`service` コンテナ][2]として宣言しているジョブと関連付けます:
 
@@ -123,8 +123,8 @@ jobs:
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
-{{< /tab >}}
-{{< tab "GitLab CI" >}}
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 GitLab で Agent を実行するには、 [`services`][1] 下で Agent コンテナを定義します:
 
@@ -166,8 +166,8 @@ test:
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{< /tab >}}
-{{< tab "GitHub Actions" >}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 GitHub Actions で Agent を実行するには、[`services`][1] 下で Agent コンテナを定義します:
 
@@ -213,8 +213,8 @@ jobs:
 [1]: https://docs.github.com/en/actions/guides/about-service-containers
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{< /tab >}}
-{{< tab "CircleCI" >}}
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 CircleCI で Agent を実行するには、テストを実行する前に  [datadog/agent CircleCI orb][1] を使用して Agent コンテナを起動し、結果が Datadog に送信されたことを確認してから停止します。
 
@@ -275,7 +275,7 @@ workflows:
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://circleci.com/docs/2.0/env-vars/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Docker Compose の使用

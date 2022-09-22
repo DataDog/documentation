@@ -24,7 +24,7 @@ Agent をホスト上のバイナリとして実行する場合は、[Agent](?ta
 **注**: 各コンテナを除外するには、`name:.*`、`image:.*`、`kube_namespace:.*` を使用できます。`name:`、`image:`、または `kube_namespace:` のプレフィックスなしで `.*` を構成しても機能しません。
 
 {{< tabs >}}
-{{< tab "Containerized Agent" >}}
+{{% tab "Containerized Agent" %}}
 
 **Agent v7.20 以降**でオートディスカバリーから**画像** `<IMAGE_NAME>` を持つ任意の Docker コンテナを削除し、**ログとメトリクス**を除外するには、Datadog Agent に以下の環境変数を追加してください。
 
@@ -96,8 +96,8 @@ Kubernetes で、ネームスペース`<ネームスペース>` 内のすべて�
 DD_CONTAINER_EXCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
-{{< /tab >}}
-{{< tab "Agent" >}}
+{{% /tab %}}
+{{% tab "Agent" %}}
 
 オートディスカバリーから画像`<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
 
@@ -130,7 +130,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: Kubernetes を使用する場合、マニフェスト`.spec.containers[0].name` にあるべきなのはコンテナ`<NAME>` です。
@@ -142,7 +142,7 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 **注**: 包含ルールは正規表現をサポートし、スペース区切り文字列のリストとして定義されます。
 
 {{< tabs >}}
-{{< tab "Containerized Agent" >}}
+{{% tab "Containerized Agent" %}}
 
 **Agent v7.20 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
@@ -202,8 +202,8 @@ Kubernetes で、ネームスペース`<ネームスペース>` 内のすべて�
 DD_CONTAINER_INCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
-{{< /tab >}}
-{{< tab "Agent" >}}
+{{% /tab %}}
+{{% tab "Agent" %}}
 
 オートディスカバリーから画像`<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、[Agent `datadog.yaml` コンフィギュレーションファイル][1]に次のコンフィギュレーションブロックを追加します。
 
@@ -236,7 +236,7 @@ container_include: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: Kubernetes を使用する場合、マニフェスト`.spec.containers[0].name` にあるべきなのはコンテナ`<NAME>` です。
@@ -248,7 +248,7 @@ container_include: [kube_namespace:<NAMESPACE>]
 クロスカテゴリーの包含/除外規則を混在させることはできません。たとえば、画像名 `<IMAGE_NAME_1>` のコンテナを含め、画像名 `<IMAGE_NAME_2>` のコンテナからメトリクスのみを除外する際、以下のようにします。
 
 {{< tabs >}}
-{{< tab "Containerized Agent" >}}
+{{% tab "Containerized Agent" %}}
 ```shell
 DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME_1>"
 DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME_1>"
@@ -257,8 +257,8 @@ DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME_2>"
 
 つまり、`DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME_1>"` の設定だけでは不十分です
 
-{{< /tab >}}
-{{< tab "Agent" >}}
+{{% /tab %}}
+{{% tab "Agent" %}}
 ```yaml
 container_include_metrics: [image:<IMAGE_NAME_1>]
 container_include_logs: [image:<IMAGE_NAME_1>]
@@ -266,7 +266,7 @@ container_exclude_metrics: [image:<IMAGE_NAME_2>]
 ```
 
 つまり、`container_include: [image:<IMAGE_NAME_1>]` の設定だけでは不十分です。
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 グローバルリストと選択（ログとメトリクス）リストの間に相互関係はありません。つまり、コンテナをグローバルに除外してから `container_include_logs` と `container_include_metrics` で含めることはできません。

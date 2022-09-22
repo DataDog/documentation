@@ -26,20 +26,20 @@ Datadog Docker Agent を特定の `<AGENT_VERSION>` でビルドするには、�
 4. その Agent バージョンに対応する Agent Debian パッケージをダウンロードします。AMD と ARM のいずれかのアーキテクチャを選択してください。
 
     {{< tabs >}}
-{{< tab "AMD" >}}
+{{% tab "AMD" %}}
 
 ```shell
 curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_amd64.deb -o datadog-agent_<AGENT_VERSION>-1_amd64.deb
 ```
 
-{{< /tab >}}
-{{< tab "ARM" >}}
+{{% /tab %}}
+{{% tab "ARM" %}}
 
 ```shell
 curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_arm64.deb -o datadog-agent_<AGENT_VERSION>-1_arm64.deb
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
     **注**: 利用可能な Debian パッケージの一覧は、[こちらの APT リスト][1]を参照してください。
@@ -47,20 +47,20 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_V
 5. 以下を実行して Agent イメージをビルドします。
 
     {{< tabs >}}
-{{< tab "AMD" >}}
+{{% tab "AMD" %}}
 
 ```shell
 docker build --build-arg <BUILD_ARGS> --file amd64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
-{{< /tab >}}
-{{< tab "ARM" >}}
+{{% /tab %}}
+{{% tab "ARM" %}}
 
 ```shell
 docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
     たとえば、AMD アーキテクチャで Agent バージョン 7.17.0 のイメージをビルドするには、以下を実行します。

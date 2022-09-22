@@ -43,7 +43,7 @@ supported_os:
 ## Configuration
 
 {{< tabs >}}
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 Utilisez les instructions suivantes pour activer la collecte de métrique pour le sidecar proxy AWS App Mesh, à savoir Envoy. Vous pouvez ajouter des sidecars avec l'une des trois méthodes suivantes : avec un déploiement, via la correction ultérieure d'un déploiement ou avec le contrôleur d'injecteur AWS App Mesh. Les étapes suivantes vous permettent d'appliquer ces trois méthodes.
 
@@ -127,8 +127,8 @@ Vous pouvez également déployer l'injecteur appmesh en suivant les instructions
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_eks/
 [2]: https://github.com/aws/aws-app-mesh-examples/blob/master/walkthroughs/eks/base.md#install-app-mesh--kubernetes-components
-{{< /tab >}}
-{{< tab "ECS Fargate" >}}
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
 
 #### Collecte de métriques
 
@@ -173,8 +173,8 @@ Définissez les paramètres AWS App Mesh `ENABLE_ENVOY_DATADOG_TRACING` et `DATA
 [2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
-{{< /tab >}}
-{{< tab "ECS EC2" >}}
+{{% /tab %}}
+{{% tab "ECS EC2" %}}
 
 #### Collecte de métriques
 
@@ -219,7 +219,7 @@ Activez la collecte de logs en suivant les instructions détaillées dans la doc
 [2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Données collectées
