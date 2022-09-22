@@ -2,6 +2,10 @@
 title: Error Budget Alerts
 kind: documentation
 description: "Use Monitors to alert off of the error budget consumption of an SLO"
+further_reading:
+- link: "/monitors/service_level_objectives/"
+  tag: "Documentation"
+  text: "Overview of Service Level Objectives"
 ---
 
 ## Overview
@@ -9,6 +13,8 @@ description: "Use Monitors to alert off of the error budget consumption of an SL
 SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO’s error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
 
 **Note:** Error budget alerts are only available for [metric-based SLOs][1] or for [monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+
+For a description of key terminology around SLOs, including *error budgets*, see [Service Level Objectives Key terminology].
 
 {{< img src="monitors/service_level_objectives/error_budget_alert_config.png" alt="Error budget alert configuration">}}
 
@@ -55,9 +61,15 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /monitors/service_level_objectives/metric/
 [2]: /monitors/service_level_objectives/monitor/
 [3]: https://app.datadoghq.com/slo
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[7]: /monitors/service_level_objectives/#key-terminology
