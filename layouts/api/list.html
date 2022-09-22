@@ -64,9 +64,6 @@
 {{ range (where .Sites.First.Menus.api ".Name" "==" $ParamTitleEn) }}
   {{ range $menuChild := sort .Children ".Params.order" "asc" }}
 
-    {{/* if hasPrefix ($menuChild.Name | lower) "get hourly usage for" */}}
-    {{/* else */}}
-
     {{ $anchorStr := $menuChild.Name }}
     {{ $versionCount := (len $menuChild.Params.versions) }}
     <div class="row">
@@ -204,7 +201,6 @@
             <hr class="mt-0 mb-2" style="border-top: 2px solid#DADADA"/>
         </div>
     </div>
-    {{/* end */}}
 
   {{ end }}
 {{ end }}
