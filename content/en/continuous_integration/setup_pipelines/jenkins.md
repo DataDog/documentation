@@ -143,7 +143,7 @@ TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 
 ### Infrastructure metric correlation
 
-If you are using Jenkins workers, you can corralate pipelines with the infrastructure that is running them. For this feature to work:
+If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
 
 1. Install the [Datadog Agent][1] in every Jenkins worker.
 2. Set and export a new environment variable called `DD_CI_HOSTNAME` in every Jenkins worker with the worker hostname. 
