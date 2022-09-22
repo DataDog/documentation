@@ -221,6 +221,10 @@ For information about the different methods for setting environment variables, s
 
 #### Services not in IIS
 
+<div class="alert alert-info">
+  <div class="alert-info">Starting v2.14.0, you don't need to set the `CORECLR_PROFILER` when you installed the tracer using the MSI.</div>
+</div>
+
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
    ```
@@ -352,6 +356,10 @@ To attach automatic instrumentation to your service, you must set the required e
 
 #### Windows services
 
+<div class="alert alert-info">
+  <div class="alert-info">Starting v2.14.0, you don't need to set the `CORECLR_PROFILER` when you installed the tracer using the MSI.</div>
+</div>
+
 {{< tabs >}}
 
 {{< tab "Registry Editor" >}}
@@ -384,6 +392,7 @@ To automatically instrument a console application, set the environment variables
 ```bat
 rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
+rem Useless starting v2.14.0 if you setup the tracer with the MSI
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
