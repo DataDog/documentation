@@ -35159,7 +35159,8 @@
                           "sum",
                           "max",
                           "new_value",
-                          "geo_data"
+                          "geo_data",
+                          "event_count"
                         ],
                         "type": "string",
                         "x-enum-varnames": [
@@ -35168,8 +35169,23 @@
                           "SUM",
                           "MAX",
                           "NEW_VALUE",
-                          "GEO_DATA"
+                          "GEO_DATA",
+                          "EVENT_COUNT"
                         ]
+                      },
+                      "correlatedByFields": {
+                        "description": "Fields to group by for Signal Correlation rules.",
+                        "items": {
+                          "description": "Field.",
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "correlatedQueryIndex": {
+                        "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                        "format": "int32",
+                        "maximum": 9,
+                        "type": "integer"
                       },
                       "distinctFields": {
                         "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -35206,6 +35222,10 @@
                       "query": {
                         "description": "Query to run on logs.",
                         "type": "string"
+                      },
+                      "ruleId": {
+                        "description": "Rule ID to match on signals for Signal Correlation rules.",
+                        "type": "string"
                       }
                     },
                     "type": "object"
@@ -35224,6 +35244,7 @@
                   "description": "The rule type.",
                   "enum": [
                     "log_detection",
+                    "signal_correlation",
                     "infrastructure_configuration",
                     "workload_security",
                     "cloud_configuration"
@@ -35231,6 +35252,7 @@
                   "type": "string",
                   "x-enum-varnames": [
                     "LOG_DETECTION",
+                    "SIGNAL_CORRELATION",
                     "INFRASTRUCTURE_CONFIGURATION",
                     "WORKLOAD_SECURITY",
                     "CLOUD_CONFIGURATION"
@@ -35679,7 +35701,8 @@
                     "sum",
                     "max",
                     "new_value",
-                    "geo_data"
+                    "geo_data",
+                    "event_count"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -35688,8 +35711,23 @@
                     "SUM",
                     "MAX",
                     "NEW_VALUE",
-                    "GEO_DATA"
+                    "GEO_DATA",
+                    "EVENT_COUNT"
                   ]
+                },
+                "correlatedByFields": {
+                  "description": "Fields to group by for Signal Correlation rules.",
+                  "items": {
+                    "description": "Field.",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "correlatedQueryIndex": {
+                  "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                  "format": "int32",
+                  "maximum": 9,
+                  "type": "integer"
                 },
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -35727,11 +35765,12 @@
                   "description": "Query to run on logs.",
                   "example": "a > 3",
                   "type": "string"
+                },
+                "ruleId": {
+                  "description": "Rule ID to match on signals for Signal Correlation rules.",
+                  "type": "string"
                 }
               },
-              "required": [
-                "query"
-              ],
               "type": "object"
             },
             "type": "array"
@@ -35752,11 +35791,13 @@
             "description": "The rule type.",
             "enum": [
               "log_detection",
+              "signal_correlation",
               "workload_security"
             ],
             "type": "string",
             "x-enum-varnames": [
               "LOG_DETECTION",
+              "SIGNAL_CORRELATION",
               "WORKLOAD_SECURITY"
             ]
           }
@@ -36259,7 +36300,8 @@
               "sum",
               "max",
               "new_value",
-              "geo_data"
+              "geo_data",
+              "event_count"
             ],
             "type": "string",
             "x-enum-varnames": [
@@ -36268,8 +36310,23 @@
               "SUM",
               "MAX",
               "NEW_VALUE",
-              "GEO_DATA"
+              "GEO_DATA",
+              "EVENT_COUNT"
             ]
+          },
+          "correlatedByFields": {
+            "description": "Fields to group by for Signal Correlation rules.",
+            "items": {
+              "description": "Field.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "correlatedQueryIndex": {
+            "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+            "format": "int32",
+            "maximum": 9,
+            "type": "integer"
           },
           "distinctFields": {
             "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -36306,6 +36363,10 @@
           "query": {
             "description": "Query to run on logs.",
             "type": "string"
+          },
+          "ruleId": {
+            "description": "Rule ID to match on signals for Signal Correlation rules.",
+            "type": "string"
           }
         },
         "type": "object"
@@ -36318,7 +36379,8 @@
           "sum",
           "max",
           "new_value",
-          "geo_data"
+          "geo_data",
+          "event_count"
         ],
         "type": "string",
         "x-enum-varnames": [
@@ -36327,7 +36389,8 @@
           "SUM",
           "MAX",
           "NEW_VALUE",
-          "GEO_DATA"
+          "GEO_DATA",
+          "EVENT_COUNT"
         ]
       },
       "SecurityMonitoringRuleQueryCreate": {
@@ -36341,7 +36404,8 @@
               "sum",
               "max",
               "new_value",
-              "geo_data"
+              "geo_data",
+              "event_count"
             ],
             "type": "string",
             "x-enum-varnames": [
@@ -36350,8 +36414,23 @@
               "SUM",
               "MAX",
               "NEW_VALUE",
-              "GEO_DATA"
+              "GEO_DATA",
+              "EVENT_COUNT"
             ]
+          },
+          "correlatedByFields": {
+            "description": "Fields to group by for Signal Correlation rules.",
+            "items": {
+              "description": "Field.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "correlatedQueryIndex": {
+            "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+            "format": "int32",
+            "maximum": 9,
+            "type": "integer"
           },
           "distinctFields": {
             "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -36389,11 +36468,12 @@
             "description": "Query to run on logs.",
             "example": "a > 3",
             "type": "string"
+          },
+          "ruleId": {
+            "description": "Rule ID to match on signals for Signal Correlation rules.",
+            "type": "string"
           }
         },
-        "required": [
-          "query"
-        ],
         "type": "object"
       },
       "SecurityMonitoringRuleResponse": {
@@ -36728,7 +36808,8 @@
                     "sum",
                     "max",
                     "new_value",
-                    "geo_data"
+                    "geo_data",
+                    "event_count"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -36737,8 +36818,23 @@
                     "SUM",
                     "MAX",
                     "NEW_VALUE",
-                    "GEO_DATA"
+                    "GEO_DATA",
+                    "EVENT_COUNT"
                   ]
+                },
+                "correlatedByFields": {
+                  "description": "Fields to group by for Signal Correlation rules.",
+                  "items": {
+                    "description": "Field.",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "correlatedQueryIndex": {
+                  "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                  "format": "int32",
+                  "maximum": 9,
+                  "type": "integer"
                 },
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -36775,6 +36871,10 @@
                 "query": {
                   "description": "Query to run on logs.",
                   "type": "string"
+                },
+                "ruleId": {
+                  "description": "Rule ID to match on signals for Signal Correlation rules.",
+                  "type": "string"
                 }
               },
               "type": "object"
@@ -36793,6 +36893,7 @@
             "description": "The rule type.",
             "enum": [
               "log_detection",
+              "signal_correlation",
               "infrastructure_configuration",
               "workload_security",
               "cloud_configuration"
@@ -36800,6 +36901,7 @@
             "type": "string",
             "x-enum-varnames": [
               "LOG_DETECTION",
+              "SIGNAL_CORRELATION",
               "INFRASTRUCTURE_CONFIGURATION",
               "WORKLOAD_SECURITY",
               "CLOUD_CONFIGURATION"
@@ -36840,11 +36942,13 @@
         "description": "The rule type.",
         "enum": [
           "log_detection",
+          "signal_correlation",
           "workload_security"
         ],
         "type": "string",
         "x-enum-varnames": [
           "LOG_DETECTION",
+          "SIGNAL_CORRELATION",
           "WORKLOAD_SECURITY"
         ]
       },
@@ -36852,6 +36956,7 @@
         "description": "The rule type.",
         "enum": [
           "log_detection",
+          "signal_correlation",
           "infrastructure_configuration",
           "workload_security",
           "cloud_configuration"
@@ -36859,6 +36964,7 @@
         "type": "string",
         "x-enum-varnames": [
           "LOG_DETECTION",
+          "SIGNAL_CORRELATION",
           "INFRASTRUCTURE_CONFIGURATION",
           "WORKLOAD_SECURITY",
           "CLOUD_CONFIGURATION"
@@ -37175,7 +37281,8 @@
                     "sum",
                     "max",
                     "new_value",
-                    "geo_data"
+                    "geo_data",
+                    "event_count"
                   ],
                   "type": "string",
                   "x-enum-varnames": [
@@ -37184,8 +37291,23 @@
                     "SUM",
                     "MAX",
                     "NEW_VALUE",
-                    "GEO_DATA"
+                    "GEO_DATA",
+                    "EVENT_COUNT"
                   ]
+                },
+                "correlatedByFields": {
+                  "description": "Fields to group by for Signal Correlation rules.",
+                  "items": {
+                    "description": "Field.",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "correlatedQueryIndex": {
+                  "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                  "format": "int32",
+                  "maximum": 9,
+                  "type": "integer"
                 },
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -37221,6 +37343,10 @@
                 },
                 "query": {
                   "description": "Query to run on logs.",
+                  "type": "string"
+                },
+                "ruleId": {
+                  "description": "Rule ID to match on signals for Signal Correlation rules.",
                   "type": "string"
                 }
               },
@@ -80324,7 +80450,8 @@
                                     "sum",
                                     "max",
                                     "new_value",
-                                    "geo_data"
+                                    "geo_data",
+                                    "event_count"
                                   ],
                                   "type": "string",
                                   "x-enum-varnames": [
@@ -80333,8 +80460,23 @@
                                     "SUM",
                                     "MAX",
                                     "NEW_VALUE",
-                                    "GEO_DATA"
+                                    "GEO_DATA",
+                                    "EVENT_COUNT"
                                   ]
+                                },
+                                "correlatedByFields": {
+                                  "description": "Fields to group by for Signal Correlation rules.",
+                                  "items": {
+                                    "description": "Field.",
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                },
+                                "correlatedQueryIndex": {
+                                  "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                                  "format": "int32",
+                                  "maximum": 9,
+                                  "type": "integer"
                                 },
                                 "distinctFields": {
                                   "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -80371,6 +80513,10 @@
                                 "query": {
                                   "description": "Query to run on logs.",
                                   "type": "string"
+                                },
+                                "ruleId": {
+                                  "description": "Rule ID to match on signals for Signal Correlation rules.",
+                                  "type": "string"
                                 }
                               },
                               "type": "object"
@@ -80389,6 +80535,7 @@
                             "description": "The rule type.",
                             "enum": [
                               "log_detection",
+                              "signal_correlation",
                               "infrastructure_configuration",
                               "workload_security",
                               "cloud_configuration"
@@ -80396,6 +80543,7 @@
                             "type": "string",
                             "x-enum-varnames": [
                               "LOG_DETECTION",
+                              "SIGNAL_CORRELATION",
                               "INFRASTRUCTURE_CONFIGURATION",
                               "WORKLOAD_SECURITY",
                               "CLOUD_CONFIGURATION"
@@ -80840,7 +80988,8 @@
                             "sum",
                             "max",
                             "new_value",
-                            "geo_data"
+                            "geo_data",
+                            "event_count"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
@@ -80849,8 +80998,23 @@
                             "SUM",
                             "MAX",
                             "NEW_VALUE",
-                            "GEO_DATA"
+                            "GEO_DATA",
+                            "EVENT_COUNT"
                           ]
+                        },
+                        "correlatedByFields": {
+                          "description": "Fields to group by for Signal Correlation rules.",
+                          "items": {
+                            "description": "Field.",
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "correlatedQueryIndex": {
+                          "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                          "format": "int32",
+                          "maximum": 9,
+                          "type": "integer"
                         },
                         "distinctFields": {
                           "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -80888,11 +81052,12 @@
                           "description": "Query to run on logs.",
                           "example": "a > 3",
                           "type": "string"
+                        },
+                        "ruleId": {
+                          "description": "Rule ID to match on signals for Signal Correlation rules.",
+                          "type": "string"
                         }
                       },
-                      "required": [
-                        "query"
-                      ],
                       "type": "object"
                     },
                     "type": "array"
@@ -80913,11 +81078,13 @@
                     "description": "The rule type.",
                     "enum": [
                       "log_detection",
+                      "signal_correlation",
                       "workload_security"
                     ],
                     "type": "string",
                     "x-enum-varnames": [
                       "LOG_DETECTION",
+                      "SIGNAL_CORRELATION",
                       "WORKLOAD_SECURITY"
                     ]
                   }
@@ -81272,7 +81439,8 @@
                               "sum",
                               "max",
                               "new_value",
-                              "geo_data"
+                              "geo_data",
+                              "event_count"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -81281,8 +81449,23 @@
                               "SUM",
                               "MAX",
                               "NEW_VALUE",
-                              "GEO_DATA"
+                              "GEO_DATA",
+                              "EVENT_COUNT"
                             ]
+                          },
+                          "correlatedByFields": {
+                            "description": "Fields to group by for Signal Correlation rules.",
+                            "items": {
+                              "description": "Field.",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "correlatedQueryIndex": {
+                            "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                            "format": "int32",
+                            "maximum": 9,
+                            "type": "integer"
                           },
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -81319,6 +81502,10 @@
                           "query": {
                             "description": "Query to run on logs.",
                             "type": "string"
+                          },
+                          "ruleId": {
+                            "description": "Rule ID to match on signals for Signal Correlation rules.",
+                            "type": "string"
                           }
                         },
                         "type": "object"
@@ -81337,6 +81524,7 @@
                       "description": "The rule type.",
                       "enum": [
                         "log_detection",
+                        "signal_correlation",
                         "infrastructure_configuration",
                         "workload_security",
                         "cloud_configuration"
@@ -81344,6 +81532,7 @@
                       "type": "string",
                       "x-enum-varnames": [
                         "LOG_DETECTION",
+                        "SIGNAL_CORRELATION",
                         "INFRASTRUCTURE_CONFIGURATION",
                         "WORKLOAD_SECURITY",
                         "CLOUD_CONFIGURATION"
@@ -81466,6 +81655,15 @@
               }
             ],
             "step": "there is a valid \"security_rule\" in the system"
+          },
+          "security_rule_bis": {
+            "parameters": [
+              {
+                "name": "body",
+                "value": "{\n  \"name\": \"{{ unique }}_bis\",\n  \"queries\": [{\n    \"query\": \"@test:false\",\n    \"aggregation\": \"count\",\n    \"groupByFields\": [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\": [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n    \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\": {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\": 86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\": true,\n  \"type\": \"log_detection\"\n}"
+              }
+            ],
+            "step": "there is a valid \"security_rule_bis\" in the system"
           }
         },
         "x-menu-order": 2,
@@ -81946,7 +82144,8 @@
                               "sum",
                               "max",
                               "new_value",
-                              "geo_data"
+                              "geo_data",
+                              "event_count"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -81955,8 +82154,23 @@
                               "SUM",
                               "MAX",
                               "NEW_VALUE",
-                              "GEO_DATA"
+                              "GEO_DATA",
+                              "EVENT_COUNT"
                             ]
+                          },
+                          "correlatedByFields": {
+                            "description": "Fields to group by for Signal Correlation rules.",
+                            "items": {
+                              "description": "Field.",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "correlatedQueryIndex": {
+                            "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                            "format": "int32",
+                            "maximum": 9,
+                            "type": "integer"
                           },
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -81993,6 +82207,10 @@
                           "query": {
                             "description": "Query to run on logs.",
                             "type": "string"
+                          },
+                          "ruleId": {
+                            "description": "Rule ID to match on signals for Signal Correlation rules.",
+                            "type": "string"
                           }
                         },
                         "type": "object"
@@ -82011,6 +82229,7 @@
                       "description": "The rule type.",
                       "enum": [
                         "log_detection",
+                        "signal_correlation",
                         "infrastructure_configuration",
                         "workload_security",
                         "cloud_configuration"
@@ -82018,6 +82237,7 @@
                       "type": "string",
                       "x-enum-varnames": [
                         "LOG_DETECTION",
+                        "SIGNAL_CORRELATION",
                         "INFRASTRUCTURE_CONFIGURATION",
                         "WORKLOAD_SECURITY",
                         "CLOUD_CONFIGURATION"
@@ -82438,7 +82658,8 @@
                             "sum",
                             "max",
                             "new_value",
-                            "geo_data"
+                            "geo_data",
+                            "event_count"
                           ],
                           "type": "string",
                           "x-enum-varnames": [
@@ -82447,8 +82668,23 @@
                             "SUM",
                             "MAX",
                             "NEW_VALUE",
-                            "GEO_DATA"
+                            "GEO_DATA",
+                            "EVENT_COUNT"
                           ]
+                        },
+                        "correlatedByFields": {
+                          "description": "Fields to group by for Signal Correlation rules.",
+                          "items": {
+                            "description": "Field.",
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "correlatedQueryIndex": {
+                          "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                          "format": "int32",
+                          "maximum": 9,
+                          "type": "integer"
                         },
                         "distinctFields": {
                           "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -82484,6 +82720,10 @@
                         },
                         "query": {
                           "description": "Query to run on logs.",
+                          "type": "string"
+                        },
+                        "ruleId": {
+                          "description": "Rule ID to match on signals for Signal Correlation rules.",
                           "type": "string"
                         }
                       },
@@ -82849,7 +83089,8 @@
                               "sum",
                               "max",
                               "new_value",
-                              "geo_data"
+                              "geo_data",
+                              "event_count"
                             ],
                             "type": "string",
                             "x-enum-varnames": [
@@ -82858,8 +83099,23 @@
                               "SUM",
                               "MAX",
                               "NEW_VALUE",
-                              "GEO_DATA"
+                              "GEO_DATA",
+                              "EVENT_COUNT"
                             ]
+                          },
+                          "correlatedByFields": {
+                            "description": "Fields to group by for Signal Correlation rules.",
+                            "items": {
+                              "description": "Field.",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "correlatedQueryIndex": {
+                            "description": "Index of the rule query used to retrieve the correlated field for Signal Correlation rules.",
+                            "format": "int32",
+                            "maximum": 9,
+                            "type": "integer"
                           },
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
@@ -82896,6 +83152,10 @@
                           "query": {
                             "description": "Query to run on logs.",
                             "type": "string"
+                          },
+                          "ruleId": {
+                            "description": "Rule ID to match on signals for Signal Correlation rules.",
+                            "type": "string"
                           }
                         },
                         "type": "object"
@@ -82914,6 +83174,7 @@
                       "description": "The rule type.",
                       "enum": [
                         "log_detection",
+                        "signal_correlation",
                         "infrastructure_configuration",
                         "workload_security",
                         "cloud_configuration"
@@ -82921,6 +83182,7 @@
                       "type": "string",
                       "x-enum-varnames": [
                         "LOG_DETECTION",
+                        "SIGNAL_CORRELATION",
                         "INFRASTRUCTURE_CONFIGURATION",
                         "WORKLOAD_SECURITY",
                         "CLOUD_CONFIGURATION"

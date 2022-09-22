@@ -794,6 +794,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_914562040",
+      "description": "Create a detection rule with type 'signal_correlation' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
