@@ -2603,6 +2603,10 @@ components:
           type: string
         search:
           $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionSearch'
+        storage:
+          description: Option for storage location. Feature in Private Beta.
+          example: indexes
+          type: string
       required:
       - data_source
       - compute
@@ -4187,6 +4191,10 @@ components:
         query_string:
           description: Widget query.
           example: '@service:app'
+          type: string
+        storage:
+          description: Option for storage location. Feature in Private Beta.
+          example: indexes
           type: string
       required:
       - query_string
