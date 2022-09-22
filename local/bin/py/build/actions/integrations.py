@@ -812,6 +812,9 @@ class Integrations:
                 # Remove % delimiters which can cause Hugo's to break with nested shortcodes.
                 result = result.replace("{{%", "{{<").replace("%}}", ">}}")
 
+                # Preserve % delimiters for markdown shortcodes.
+                result = result.replace("{{< aws-permissions >}}", "{{% aws-permissions %}}")
+
                 with open(out_name, "w", ) as out:
                     out.write(result)
 
