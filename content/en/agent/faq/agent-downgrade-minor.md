@@ -27,7 +27,7 @@ sudo apt-get update && sudo apt-get install --allow-downgrades datadog-agent=1:X
 ### Configuration management tools
 
 {{< tabs >}}
-{{< tab "Chef" >}}
+{{% tab "Chef" %}}
 
 ```rb
 node["datadog"]["agent_version"] = "1:X.Y.Z-1"
@@ -35,8 +35,8 @@ node["datadog"]["agent_package_action"] = "install"
 node["datadog"]["agent_allow_downgrade"] = true
 ```
 
-{{< /tab >}}
-{{< tab "Puppet" >}}
+{{% /tab %}}
+{{% tab "Puppet" %}}
 
 ```conf
 class { 'datadog_agent':
@@ -45,8 +45,8 @@ class { 'datadog_agent':
 }
 ```
 
-{{< /tab >}}
-{{< tab "Ansible" >}}
+{{% /tab %}}
+{{% tab "Ansible" %}}
 
 Add the following attributes in your playbook:
 
@@ -55,7 +55,7 @@ datadog_agent_version: "1:X.Y.Z-1"
 datadog_agent_allow_downgrade: yes
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## RHEL/CentOS/Amazon Linux
@@ -69,7 +69,7 @@ sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-X.Y.Z-1
 ### Configuration management tools
 
 {{< tabs >}}
-{{< tab "Chef" >}}
+{{% tab "Chef" %}}
 
 Set the following attributes on your nodes:
 
@@ -79,8 +79,8 @@ node["datadog"]["agent_package_action"] = "install"
 node["datadog"]["agent_allow_downgrade"] = true
 ```
 
-{{< /tab >}}
-{{< tab "Puppet" >}}
+{{% /tab %}}
+{{% tab "Puppet" %}}
 
 ```conf
 class { 'datadog_agent':
@@ -89,8 +89,8 @@ class { 'datadog_agent':
 }
 ```
 
-{{< /tab >}}
-{{< tab "Ansible" >}}
+{{% /tab %}}
+{{% tab "Ansible" %}}
 
 Add the following attributes in your playbook (on CentOS, this only works with Ansible 2.4+):
 
@@ -99,7 +99,7 @@ datadog_agent_version: "X.Y.Z-1"
 datadog_agent_allow_downgrade: yes
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## SUSE
@@ -113,7 +113,7 @@ sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage d
 ### Configuration management tools
 
 {{< tabs >}}
-{{< tab "Chef" >}}
+{{% tab "Chef" %}}
 
 Set the following attributes on your nodes:
 
@@ -123,13 +123,13 @@ node["datadog"]["agent_package_action"] = "install"
 node["datadog"]["agent_allow_downgrade"] = true
 ```
 
-{{< /tab >}}
-{{< tab "Puppet" >}}
+{{% /tab %}}
+{{% tab "Puppet" %}}
 
 Datadog's module doesn’t support SUSE.
 
-{{< /tab >}}
-{{< tab "Ansible" >}}
+{{% /tab %}}
+{{% tab "Ansible" %}}
 
 Add the following attributes in your playbook:
 
@@ -138,7 +138,7 @@ datadog_agent_version: "1:X.Y.Z-1"
 datadog_agent_allow_downgrade: yes
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: /agent/faq/agent-downgrade-major/

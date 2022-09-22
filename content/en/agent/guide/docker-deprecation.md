@@ -22,7 +22,7 @@ With version 7.27+ of the Datadog Agent, the Agent automatically detects the env
 **Note**: You may need to update your existing monitors, dashboards, and SLOs because metrics names change—for example, from `docker.*` to `containerd.*`.
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 Set the path to your container runtime socket with the `datadog.criSocketPath` parameter in the [Helm chart][1].
 
 For example:
@@ -32,8 +32,8 @@ criSocketPath:  /var/run/containerd/containerd.sock
 ```
 
 [1]: https://github.com/DataDog/helm-charts/blob/d8817b4401b75b1a064481da989c451633249ea9/charts/datadog/values.yaml#L262-L263
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 Remove any references to the Docker socket, as well as any Docker socket volume mounts.
 
@@ -63,7 +63,7 @@ volumes:
     name: var-run
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://github.com/Azure/AKS/releases/tag/2020-11-16

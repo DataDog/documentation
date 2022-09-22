@@ -37,7 +37,7 @@ dependencies {
 **US** 
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 class SampleApplication : Application() {
     override fun onCreate() {
@@ -51,8 +51,8 @@ class SampleApplication : Application() {
     }
 }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 public class SampleApplication extends Application { 
     @Override 
@@ -64,13 +64,13 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{< /tab >}} 
+{{% /tab %}} 
 {{< /tabs >}}
 
 **EU**
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 class SampleApplication : Application() { 
     override fun onCreate() { 
@@ -83,8 +83,8 @@ class SampleApplication : Application() {
     } 
 }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 public class SampleApplication extends Application {
     @Override 
@@ -98,7 +98,7 @@ public class SampleApplication extends Application {
     }
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同意を求めます。
@@ -131,24 +131,24 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
 3. Android Tracer を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val tracer = AndroidTracer.Builder().build()
 GlobalTracer.registerIfAbsent(tracer)
 ```
-{{< /tab >}} 
-{{< tab "Java" >}}
+{{% /tab %}} 
+{{% tab "Java" %}}
 ```java
 final AndroidTracer tracer = new AndroidTracer.Builder().build();
 GlobalTracer.registerIfAbsent(tracer);
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 4. (オプション) - 部分フラッシュしきい値を設定します。アプリケーションで多数のスパンを作成する場合、または逆にごく少数の場合は、SDK のワークロードを最適化できます。ライブラリは、終了したスパンの数がしきい値を超えるまでディスクへの書き込みを待機します。値が `1` の場合、各スパンが終了するとすぐに書き込まれます。
 
 {{< tabs >}} 
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 
 ```kotlin
 val tracer = AndroidTracer.Builder()
@@ -156,21 +156,21 @@ val tracer = AndroidTracer.Builder()
         .build()
 ```
 
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 
 ```java
 final AndroidTracer tracer = new AndroidTracer.Builder()
         .setPartialFlushThreshold(10)
         .build();
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 5. 次のメソッドでカスタムスパンを開始します。
 
 {{< tabs >}} 
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val tracer = GlobalTracer.get()
 val span = tracer.buildSpan("<SPAN_NAME>").start()
@@ -179,8 +179,8 @@ val span = tracer.buildSpan("<SPAN_NAME>").start()
 // 続いて、スパンを閉じるべき時に
 span.finish()
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 final GlobalTracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("<SPAN_NAME>").start();
@@ -189,13 +189,13 @@ final Span span = tracer.buildSpan("<SPAN_NAME>").start();
 // 続いて、スパンを閉じるべき時に
 span.finish();
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 6. 同期呼び出しでスコープを使用する:
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val span = tracer.buildSpan("<SPAN_NAME1>").start()
 try {
@@ -221,8 +221,8 @@ try {
     span.finish()
 }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 final Span = tracer.buildSpan("<SPAN_NAME1>").start();
 try {
@@ -254,13 +254,13 @@ try {
     span.finish();
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 7. 非同期呼び出しでスコープを使用する:
 
     {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val span = tracer.buildSpan("<SPAN_NAME1>").start()
 try{
@@ -281,8 +281,8 @@ try{
     span.finish()
 }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 final Span span = tracer.buildSpan("<SPAN_NAME1>").start();
 try {
@@ -307,7 +307,7 @@ try {
     span.finish();
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
     {{< /tabs >}}
 
 8. (任意) フロントエンド - バックエンドなど、環境間でトレースを手動で分散する:
@@ -315,7 +315,7 @@ try {
    a. クライアントリクエストにトレーサーコンテキストを挿入します。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val tracer = GlobalTracer.get()
 val span = tracer.buildSpan("<SPAN_NAME>").start()
@@ -328,8 +328,8 @@ tracer.inject(span.context(), Format.Builtin.TEXT_MAP_INJECT,
 val request = tracedRequestBuilder.build() 
 // リクエストをディスパッチして、スパンを終了させます。
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 final Tracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("<SPAN_NAME>").start();
@@ -346,13 +346,13 @@ tracer.inject(
 final Request request = tracedRequestBuilder.build();
 // リクエストをディスパッチして、スパンを終了させます
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 b. サーバーコードのヘッダーからクライアントトレーサーコンテキストを抽出します。
 
    {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val tracer = GlobalTracer.get() 
 val extractedContext = tracer.extract(
@@ -367,8 +367,8 @@ val extractedContext = tracer.extract(
         ) 
 val serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start()      
 ```
-   {{< /tab >}}
-   {{< tab "Java" >}}
+   {{% /tab %}}
+   {{% tab "Java" %}}
 ```java
 final Tracer tracer = GlobalTracer.get();
 final SpanContext extractedContext = tracer.extract(
@@ -391,7 +391,7 @@ final SpanContext extractedContext = tracer.extract(
         });
 final Span serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start();
 ```
-   {{< /tab >}}
+   {{% /tab %}}
    {{< /tabs >}}
 
 **注**: OkHttp クライアントを使用するコードベースの場合、Datadog は[以下の実装](#okhttp)を提供します。
@@ -422,22 +422,22 @@ AndroidTracer.logErrorMessage(span, message)
 12. バッチ処理前にスパンのイベントで属性を変更する必要がある場合は、SDK の初期化時に `SpanEventMapper` を実装することで上記の処理を行えます。
 
 {{< tabs >}} 
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val config = Configuration.Builder(tracesEnabled = true, ...) 
         // ...  
         .setSpanEventMapper(spanEventMapper)
         .build()    
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 final Configuration config = new Configuration.Builder(true, true, true, true)
         // ...
         .setSpanEventMapper(spanEventMapper)
         .build();    
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## インテグレーション
@@ -449,7 +449,7 @@ final Configuration config = new Configuration.Builder(true, true, true, true)
 OkHttp リクエストをトレースする場合は、次のようにして提供された[インターセプター][6]を追加できます。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val okHttpClient = OkHttpClient.Builder() 
         .addInterceptor(
@@ -457,8 +457,8 @@ val okHttpClient = OkHttpClient.Builder()
         )
         .build()
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 float traceSamplingRate = 20f;
 final OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
@@ -467,7 +467,7 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
         )
         .build();
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 これにより、OkHttpClient によって処理される各リクエストに関するスパンが作成され (提供されたホストに一致)、関連するすべての情報 (URL、メソッド、ステータスコード、エラー) が自動的に入力され、トレース情報がバックエンドに伝播されて、Datadog 内で統合されたトレースが取得されます
@@ -477,7 +477,7 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
 インターセプターは、アプリケーションレベルでリクエストを追跡します。ネットワークレベルで `TracingInterceptor` を追加すると、さらに詳しいデータを取得（リダイレクトをフォローするなど）できます。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val tracedHosts = listOf("example.com", "example.eu") 
 val okHttpClient =  OkHttpClient.Builder()
@@ -485,8 +485,8 @@ val okHttpClient =  OkHttpClient.Builder()
         .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSamplingRate = 20f))
         .build()
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 float traceSamplingRate = 20f;
 final List<String> tracedHosts = Arrays.asList("example.com", "example.eu"); 
@@ -495,7 +495,7 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
         .addNetworkInterceptor(new TracingInterceptor(tracedHosts, traceSamplingRate))
         .build();
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 この場合、特定のリクエストに対して上流のインターセプターが行ったトレースサンプリングの判断は、下流のインターセプターによって尊重されます。
@@ -503,43 +503,43 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
 OkHttp リクエストの実行方法 (スレッドプールを使用) のため、リクエストスパンはリクエストをトリガーしたスパンに自動的にリンクされません。次のように、`OkHttp Request.Builder` で親スパンを手動で指定することは可能です。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val request = Request.Builder()
         .url(requestUrl)
         .tag(Span::class.java, parentSpan)
         .build()
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 final Request request = new Request.Builder()
         .url(requestUrl)
         .tag(Span.class, parentSpan)
         .build();
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 または、`dd-sdk-android-ktx` ライブラリで提供される拡張機能を使用している場合
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 val request = Request.Builder()
         .url(requestUrl)
         .parentSpan(parentSpan)
         .build()
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 final Request request = new Request.Builder()
         .url(requestUrl)
         .parentSpan(parentSpan)
         .build();
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: 複数のインターセプターを使用する場合、これを最初に呼び出す必要があります。
@@ -556,7 +556,7 @@ RxJava ストリーム内で継続的にトレースを提供するには、以�
    ストリームの演算子で作成されたスパンは、このスコープ（親スパン）内に表示されます。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 Single.fromSupplier{} 
         .subscribeOn(Schedulers.io())
@@ -577,8 +577,8 @@ Single.fromSupplier{}
             }
         }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 Single.fromSupplier({})
         .subscribeOn(Schedulers.io())
@@ -600,7 +600,7 @@ Single.fromSupplier({})
         })
     };
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### RxJava + Retrofit
@@ -609,7 +609,7 @@ Single.fromSupplier({})
 2. [Retrofit RxJava][9] アダプターを使用してネットワークリクエストに同期 Observables を使用。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 Retrofit.Builder()
     .baseUrl("<YOUR_URL>")
@@ -617,8 +617,8 @@ Retrofit.Builder()
     .client(okHttpClient)
     .build()
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 new Retrofit.Builder()
     .baseUrl("<YOUR_URL>")
@@ -626,13 +626,13 @@ new Retrofit.Builder()
     .client(okHttpClient)
     .build();
  ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 3. 以下のように、Rx ストリームの周りにスコープを開きます。
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
 remoteDataSource.getData(query)
     .subscribeOn(Schedulers.io())
@@ -650,8 +650,8 @@ remoteDataSource.getData(query)
         }
     }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
 remoteDataSource.getData(query)
     .subscribeOn(Schedulers.io())
@@ -670,7 +670,7 @@ remoteDataSource.getData(query)
         }
     });
  ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## バッチコレクション

@@ -34,7 +34,7 @@ def make_sandwich_request(request):
 ```
 
 {{< tabs >}}
-{{< tab "Decorator" >}}
+{{% tab "Decorator" %}}
 
 `ddtrace` から提供される `tracer.wrap()` デコレータを使用して、対象の関数を修飾することができます。呼び出し場所に関わらずに関数をトレースしたい場合に便利です。
 
@@ -59,8 +59,8 @@ def make_sandwich_request(request):
 
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
-{{< /tab >}}
-{{< tab "Context Manager" >}}
+{{% /tab %}}
+{{% tab "Context Manager" %}}
 
 任意のコードブロックをトレースするには、以下の `ddtrace.Span` コンテキストマネージャーを使用するか、 [高度な使用方法に関するドキュメント][1]を参照してください。
 
@@ -87,8 +87,8 @@ def make_sandwich_request(request):
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
-{{< /tab >}}
-{{< tab "手動" >}}
+{{% /tab %}}
+{{% tab "手動" %}}
 
 デコレータおよびコンテキストマネージャー以外のトレーシング方法として、[スパン][1]の開始と終了を可能にする手動 API があります。これに必要なのは、
 
@@ -108,7 +108,7 @@ def make_sandwich_request(request):
 [1]: /ja/tracing/visualization/#spans
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
 [3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -127,7 +127,7 @@ def make_sandwich_request(request):
 ```
 
 {{< tabs >}}
-{{< tab "現在のスパン" >}}
+{{% tab "現在のスパン" %}}
 
 ```python
 def get_ingredients():
@@ -136,9 +136,9 @@ def get_ingredients():
     # 上記の make_sandwich_request からの my_span
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ルートスパン" >}}
+{{% tab "ルートスパン" %}}
 
 ```python
 def assemble_sandwich(ingredients):
@@ -147,14 +147,14 @@ def assemble_sandwich(ingredients):
         span = tracer.current_root_span()
         # 上記の make_sandwich_request からの my_span
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
 ## タグの追加
 
 {{< tabs >}}
-{{< tab "ローカル" >}}
+{{% tab "ローカル" %}}
 
 スパンに `set_tag` メソッドを適用して、スパンにタグを追加することができます。
 
@@ -166,8 +166,8 @@ def make_sandwich_request(request):
         ingredients = get_ingredients()
         span.set_tag("num_ingredients", len(ingredients))
 ```
-{{< /tab >}}
-{{< tab "グローバル" >}}
+{{% /tab %}}
+{{% tab "グローバル" %}}
 
 タグはトレーサー上にグローバルに設定することができます。これらのタグは作成されるスパンのそれぞれに適用されます。
 
@@ -178,8 +178,8 @@ from myapp import __version__
 # これは各スパンに適用されます
 tracer.set_tags({"version": __version__, "<TAG_KEY_2>": "<TAG_VALUE_2>"})
 ```
-{{< /tab >}}
-{{< tab "エラー" >}}
+{{% /tab %}}
+{{% tab "エラー" %}}
 
 例外発生時点でアクティブなスパンが存在した場合は、その例外の情報がスパンに添付されます。
 
@@ -202,7 +202,7 @@ span = tracer.trace("operation")
 span.error = 1
 span.finish()
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## リソースフィルター

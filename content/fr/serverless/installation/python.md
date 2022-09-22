@@ -35,7 +35,7 @@ Si vos fonctions Lambda sont écrites en code [Python 3.6 ou version antérieure
 ## Configuration
 
 {{< tabs >}}
-{{< tab "Framework Serverless" >}}
+{{% tab "Framework Serverless" %}}
 
 Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda, et configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
 
@@ -63,8 +63,8 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/fr/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "AWS SAM" >}}
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
 
 La [macro CloudFormation Datadog][1] transforme automatiquement votre modèle d'application SAM dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. De plus, elle configure vos fonctions de sorte à ce qu'elles envoient des métriques, des traces et des logs à Datadog via l'[extension Lambda Datadog][2].
 
@@ -107,8 +107,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-python/releases
 [5]: https://gallery.ecr.aws/datadog/lambda-extension
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 
 La [bibliothèque CDK Constructs Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda, et configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
@@ -150,8 +150,8 @@ Pour en savoir plus et obtenir des paramètres supplémentaires, consultez la [p
 [2]: https://github.com/DataDog/datadog-lambda-python/releases
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://gallery.ecr.aws/datadog/lambda-extension
-{{< /tab >}}
-{{< tab "Zappa" >}}
+{{% /tab %}}
+{{% tab "Zappa" %}}
 
 ### Mettre à jour les paramètres
 
@@ -215,8 +215,8 @@ Par exemple :
 [1]: https://github.com/DataDog/datadog-lambda-python/releases
 [2]: https://gallery.ecr.aws/datadog/lambda-extension
 [3]: https://app.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Chalice" >}}
+{{% /tab %}}
+{{% tab "Chalice" %}}
 
 ### Mettre à jour le projet
 
@@ -284,8 +284,8 @@ Par exemple :
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://gallery.ecr.aws/datadog/lambda-extension
 [4]: https://aws.github.io/chalice/topics/middleware.html?highlight=handler#registering-middleware
-{{< /tab >}}
-{{< tab "Interface de ligne de commande Datadog" >}}
+{{% /tab %}}
+{{% tab "Interface de ligne de commande Datadog" %}}
 
 <div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
@@ -330,8 +330,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [2]: https://github.com/DataDog/datadog-lambda-python/releases
 [3]: https://gallery.ecr.aws/datadog/lambda-extension
 [4]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
-{{< /tab >}}
-{{< tab "Image de conteneur" >}}
+{{% /tab %}}
+{{% tab "Image de conteneur" %}}
 
 ### Installation
 
@@ -364,8 +364,8 @@ Remplacez `<TAG>` par un numéro de version spécifique (par exemple, `7`) ou pa
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Personnalisé" >}}
+{{% /tab %}}
+{{% tab "Personnalisé" %}}
 
 ### Installation
 
@@ -447,7 +447,7 @@ Pour configurer la fonction, suivez les étapes ci-dessous :
 [6]: https://pypi.org/project/datadog-lambda/
 [7]: https://gallery.ecr.aws/datadog/lambda-extension
 [8]: https://app.datadoghq.com/account/settings#api
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Explorer la surveillance sans serveur de Datadog

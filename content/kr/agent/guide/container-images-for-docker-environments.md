@@ -15,7 +15,7 @@ title: 도커(Docker) 환경용 컨테이너 이미지
 도커를 사용 중이라면 환경에서 사용하고자 하는 GCR, ECR, Docker Hub를 통해 여러 컨테이너 이미지를 이용할 수 있습니다.
 
 {{< tabs >}}
-{{< tab "GCR" >}}
+{{% tab "GCR" %}}
 
 | Datadog 서비스                          | GCR                                      | GCR Pull 명령어                                                  |
 |------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
@@ -34,8 +34,8 @@ title: 도커(Docker) 환경용 컨테이너 이미지
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
 [7]: /kr/getting_started/synthetics/private_location/
 [8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
-{{< /tab >}}
-{{< tab "ECR" >}}
+{{% /tab %}}
+{{% tab "ECR" %}}
 
 | Datadog 서비스                         | Docker Hub                               | 도커 Pull 명령어                                                     |
 |-----------------------------------------|------------------------------------------|-------------------------------------------------------------------------|
@@ -55,8 +55,8 @@ title: 도커(Docker) 환경용 컨테이너 이미지
 [7]: https://gallery.ecr.aws/datadog/cluster-agent
 [8]: /kr/getting_started/synthetics/private_location
 [9]: https://gallery.ecr.aws/datadog/synthetics-private-location-worker
-{{< /tab >}}
-{{< tab "Docker Hub" >}}
+{{% /tab %}}
+{{% tab "Docker Hub" %}}
 
 | Datadog 서비스                         | Docker Hub                               | 도커 Pull 명령어                                        |
 |-----------------------------------------|------------------------------------------|------------------------------------------------------------|
@@ -79,7 +79,7 @@ Docker Hub는 `agent`, `cluster-agent`, `dogstatsd` 이미지를 대상으로 [D
 [8]: /kr/getting_started/synthetics/private_location
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [10]: https://docs.docker.com/engine/security/trust/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

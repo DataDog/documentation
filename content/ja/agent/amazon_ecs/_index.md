@@ -58,7 +58,7 @@ EC2 インスタンスでセキュリティグループ設定を再度チェッ�
 タスクの構成は [AWS CLI ツール][12]や Amazon Web コンソールでも行えます。
 
 {{< tabs >}}
-{{< tab "AWS CLI" >}}
+{{% tab "AWS CLI" %}}
 
 1. Linux コンテナで [datadog-agent-ecs.json][1] (オリジナルの Amazon Linux 1 AMI を使用している場合は [datadog-agent-ecs1.json][2]) をダウンロードします。Windows の場合は [datadog-agent-ecs-win.json][3] をダウンロードします。
 2. `datadog-agent-ecs.json` を編集し、アカウントの [Datadog API キー][4]を使用して `<YOUR_DATADOG_API_KEY>` を設定します。
@@ -93,8 +93,8 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /ja/agent/amazon_ecs/logs/
 [6]: /ja/agent/amazon_ecs/apm/
-{{< /tab >}}
-{{< tab "Web UI" >}}
+{{% /tab %}}
+{{% tab "Web UI" %}}
 
 1. AWS コンソールにログインし、EC2 コンテナサービス セクションに移動します。
 2. Datadog を追加するクラスターをクリックします。
@@ -120,7 +120,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 **注**: Datadog タスク定義で CPU を 10 台使用するように設定すると、`service:datadog-agent` の `aws.ecs.cpuutilization` が 1000% と表示されることがあります。これは AWS が CPU 使用率を表示する際の独特な現象です。CPU の台数を増やすことで、グラフの歪曲を回避できます。
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### IAM ポリシーの作成と修正
@@ -152,7 +152,7 @@ Datadog Agent は、各 EC2 インスタンス上の 1 つのコンテナーで�
 以下の方法で、コンテナの処理情報を収集し Datadog に送信します。
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 1. [前述の手順](#aws-cli)に従い Datadog Agent をインストールします。
 2. 次の構成で [datadog-agent-ecs.json][1] ファイル (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-ecs1.json][2]) を更新します。
@@ -199,8 +199,8 @@ Datadog Agent は、各 EC2 インスタンス上の 1 つのコンテナーで�
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 1. [前述の手順](#aws-cli)に従い Datadog Agent をインストールします。
 2. 次の構成を使用して [datadog-agent-ecs-win.json][1] ファイルを更新します。
@@ -223,7 +223,7 @@ Datadog Agent は、各 EC2 インスタンス上の 1 つのコンテナーで�
 ```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### ネットワークパフォーマンスのモニタリングの収集

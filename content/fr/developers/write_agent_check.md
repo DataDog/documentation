@@ -69,7 +69,7 @@ Pour modifier l'intervalle de collecte de votre check, utilisez le paramètre `m
 **Remarque** : le paramètre `min_collection_interval` est disponible pour les intégrations personnalisées et standard.
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 Pour la version 6 de l'Agent, `min_collection_interval` doit être ajouté au niveau des instances et configuré individuellement pour chaque instance.
 
 ```yaml
@@ -79,8 +79,8 @@ instances:
   - min_collection_interval: 30
 ```
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 Pour la version 5 de l'Agent, `min_collection_interval` doit être ajouté dans la section `init_config` afin de définir la fréquence d'exécution globale du check.
 
 ```yaml
@@ -90,7 +90,7 @@ init_config:
 instances: [{}]
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : si le paramètre `min_collection_interval` est défini sur `30`, cela ne signifie pas que la métrique est recueillie toutes les 30 secondes, mais plutôt qu'il s'agit de la fréquence de collecte optimale. Le collecteur essaie d'exécuter le check toutes les 30 secondes, mais il est possible que celui-ci soit mis en attente, en fonction du nombre d'intégrations activées sur le même Agent. De plus, si la méthode `check` dure plus de 30 secondes, l'Agent annule son exécution jusqu'au prochain intervalle.
@@ -100,20 +100,20 @@ instances: [{}]
 Pour vérifier que votre check s'exécute, utilisez la commande suivante :
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 ```shell
 sudo -u dd-agent -- datadog-agent check <NOM_CHECK>
 ```
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 ```shell
 sudo -u dd-agent -- dd-agent check <NOM_CHECK>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Après avoir vérifié que le check s'exécute, redémarrez l'Agent afin d'inclure le check et de commencer à transmettre des données à Datadog.

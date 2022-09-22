@@ -31,7 +31,7 @@ TCP (`IP:Port`)、Unix Domain Socket (UDS) のいずれか、または両方を�
 
 ### トレースを受け取るように Datadog Agent を構成する
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 - Helm チャートをまだ[インストール][1]していない場合は、インストールしてください。
 
@@ -58,8 +58,8 @@ Datadog Agent は、TCP 経由でトレースを受信するように構成す�
 **警告**: `datadog.apm.portEnabled` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
 
 [1]: /ja/agent/kubernetes/?tab=helm
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 APM トレースの収集を有効にするには、DaemonSet コンフィギュレーションファイルを開いて以下を編集します。
 
@@ -95,8 +95,8 @@ APM トレースの収集を有効にするには、DaemonSet コンフィギュ
 **警告**: `hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
 
 
-{{< /tab >}}
-{{< tab "DaemonSet (UDS)" >}}
+{{% /tab %}}
+{{% tab "DaemonSet (UDS)" %}}
 
 APM トレースの収集を有効にするには、DaemonSet コンフィギュレーションファイルを開いて以下を編集します。
 
@@ -123,8 +123,8 @@ APM トレースの収集を有効にするには、DaemonSet コンフィギュ
 
 このコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。Agent はそのディレクトリに `DD_APM_RECEIVER_SOCKET` の値を `/var/run/datadog/apm.socket` としたソケットファイルを作成し、リッスンするようにします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。
 
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`agent.apm.hostSocketPath` と `agent.apm.socketPath` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
 
@@ -156,7 +156,7 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 **警告**: `hostPort` パラメーターを指定すると、ホストのポートが開かれます。アプリケーションまたは信頼できるソースからのみアクセスを許可するように、ファイアウォールを設定してください。ネットワークプラグインが `hostPorts` をサポートしていない場合は、`hostNetwork: true` を Agent ポッド仕様に追加してください。ホストのネットワークネームスペースが Datadog Agent と共有されます。つまり、コンテナで開かれたすべてのポートはホストで開きます。ポートがホストとコンテナの両方で使用されると、競合し (同じネットワークネームスペースを共有するので)、ポッドが開始しません。これを許可しない Kubernetes インストールもあります。
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: minikube では、`Unable to detect the kubelet URL automatically`（キューブレット URL を自動的に検出できません）というエラーが表示される場合があります。この場合、`DD_KUBELET_TLS_VERIFY=false` を設定します。
@@ -165,15 +165,15 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 {{< tabs >}}
 
-{{< tab "Datadog Admission Controller" >}}
+{{% tab "Datadog Admission Controller" %}}
 [Datadog Admission Controller][1] は、ポッドと Agent のトレース通信を自動的に構成するために、新しいアプリケーションポッドに環境変数を注入し、必要なボリュームをマウントすることが可能です。
 
 Datadog Agent にトレースを送信するためにアプリケーションを自動的に構成する方法の詳細については、[Datadog Admission Controller][1] のドキュメントをご覧ください。
 
 [1]: /ja/agent/cluster_agent/admission_controller/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "UDS" >}}
+{{% tab "UDS" %}}
 Unix Domain Socket (UDS) を使用して Agent にトレースを送信する場合は、ソケットのあるホストディレクトリ (Agent が作成したもの) をアプリケーションコンテナにマウントし、ソケットへのパスを `DD_TRACE_AGENT_URL` で指定します。
 
 ```yaml
@@ -196,10 +196,10 @@ kind: Deployment
             path: /var/run/datadog/
           name: apmsocketpath
 ```
-{{< /tab >}}
+{{% /tab %}}
 
 
-{{< tab TCP >}}
+{{% tab TCP %}}
 TCP (`<IP_ADDRESS>:8126`) を使用して Agent にトレースを送信している場合、この IP アドレスをアプリケーションポッドに供給します ([Datadog Admission Controller][1] で自動的に、または手動で下位 API を使用してホスト IP をプルします)。アプリケーションコンテナには、`status.hostIP` を指す環境変数 `DD_AGENT_HOST` が必要です。
 
 ```yaml
@@ -220,7 +220,7 @@ kind: Deployment
 
 [1]: /ja/agent/cluster_agent/admission_controller/
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

@@ -40,7 +40,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
    **Note:** Read-only file systems are not currently supported. The application must have access to a writable `/tmp` directory.
 
    {{< tabs >}}
-{{< tab "Docker CLI" >}}
+{{% tab "Docker CLI" %}}
 
 Update your configuration container for APM by adding the following argument in your `docker run` command:
 
@@ -49,8 +49,8 @@ Update your configuration container for APM by adding the following argument in 
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
-{{< /tab >}}
-{{< tab "Dockerfile" >}}
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
 
 Add the following environment variable value to your container Dockerfile:
 
@@ -58,8 +58,8 @@ Add the following environment variable value to your container Dockerfile:
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Update your deployment configuration file for APM and add the ASM environment variable:
 
@@ -75,8 +75,8 @@ spec:
               value: "true"
 ```
 
-{{< /tab >}}
-{{< tab "AWS ECS" >}}
+{{% /tab %}}
+{{% tab "AWS ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -90,8 +90,8 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
-{{< /tab >}}
-{{< tab "AWS Fargate" >}}
+{{% /tab %}}
+{{% tab "AWS Fargate" %}}
 
 Set the `-Ddd.appsec.enabled` flag or the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
 
@@ -102,7 +102,7 @@ java -javaagent:dd-java-agent.jar \
      <YOUR_SERVICE_FLAGS>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
    {{< /tabs >}}
 

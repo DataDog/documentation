@@ -55,7 +55,7 @@ Le check Squid de l'Agent est inclus avec l'[Agent Datadog][2]. Vous n'avez donc
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -98,8 +98,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/squid/datadog_checks/squid/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -125,7 +125,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

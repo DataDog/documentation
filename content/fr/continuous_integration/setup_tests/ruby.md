@@ -76,7 +76,7 @@ En outre, configurez le site Datadog sur le site sélectionné ({{< region-param
 Les instructions des sections suivantes sont spécifiques à certains fournisseurs de CI. Elles permettent d'exécuter et de configurer l'Agent, afin qu'ils transmettent les données des tests.
 
 {{< tabs >}}
-{{< tab "Azure Pipelines" >}}
+{{% tab "Azure Pipelines" %}}
 
 Pour exécuter l'Agent Datadog dans Azure Pipelines, définissez un nouveau conteneur dans la [section relative aux ressources][1] et associez-le à la tâche le déclarant comme [conteneur de service][2].
 
@@ -138,8 +138,8 @@ Ajoutez votre [clé d'API Datadog][3] aux [variables d'environnement de votre pr
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
-{{< /tab >}}
-{{< tab "GitLab CI" >}}
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 Pour exécuter l'Agent dans GitLab, définissez le conteneur de l'Agent dans [services][1].
 
@@ -183,8 +183,8 @@ Ajoutez votre [clé d'API Datadog][2] aux [variables d'environnement de votre pr
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{< /tab >}}
-{{< tab "GitHub Actions" >}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 Pour exécuter l'Agent dans GitHub Actions, utilisez l'[action GitHub de l'Agent Datadog][1] `datadog/agent-github-action`.
 
@@ -222,8 +222,8 @@ Ajoutez votre [clé d'API Datadog][2] aux [secrets de votre projet][3] avec la c
 [1]: https://github.com/marketplace/actions/datadog-agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{< /tab >}}
-{{< tab "CircleCI" >}}
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 Pour exécuter l'Agent dans CircleCI, lancez le conteneur de l'Agent avant d'exécuter les tests, à l'aide de l'[orbe CircleCI datadog/agent][1], puis arrêtez-le pour garantir l'envoi des résultats à Datadog.
 
@@ -284,7 +284,7 @@ Ajoutez votre [clé d'API Datadog][2] aux [variables d'environnement de votre pr
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://circleci.com/docs/2.0/env-vars/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Installer le traceur Ruby
@@ -305,7 +305,7 @@ Consultez la [documentation relative à l'installation du traceur Ruby][4] pour 
 ## Instrumenter vos tests
 
 {{< tabs >}}
-{{< tab "Cucumber" >}}
+{{% tab "Cucumber" %}}
 
 L'intégration Cucumber trace les exécutions de scénarios et d'étapes à l'aide du framework `cucumber`.
 
@@ -343,8 +343,8 @@ Exécutez normalement vos tests, en spécifiant l'environnement concerné (par e
 DD_ENV=ci bundle exec rake cucumber
 ```
 
-{{< /tab >}}
-{{< tab "RSpec" >}}
+{{% /tab %}}
+{{% tab "RSpec" %}}
 
 L'intégration RSpec trace toutes les exécutions d'exemples et de groupes d'exemples lors de l'utilisation du framework de test `rspec`.
 
@@ -375,7 +375,7 @@ Exécutez normalement vos tests, en spécifiant l'environnement concerné (par e
 DD_ENV=ci bundle exec rake spec
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Ajouter des tags personnalisés à des tests

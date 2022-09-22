@@ -27,7 +27,7 @@ title: iOSトレースの収集
 1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。
 
     {{< tabs >}}
-    {{< tab "CocoaPods" >}}
+    {{% tab "CocoaPods" %}}
 
 [CocoaPods][1] を使用して、`dd-sdk-ios` をインストールできます。
 ```
@@ -36,16 +36,16 @@ pod 'DatadogSDK'
 
 
 [1]: https://cocoapods.org/
-    {{< /tab >}}
-    {{< tab "Swift Package Manager (SPM)" >}}
+    {{% /tab %}}
+    {{% tab "Swift Package Manager (SPM)" %}}
 
 Apple の Swift Package Manager を使用して統合するには、`Package.swift` に以下を依存関係として追加します。
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
-    {{< /tab >}}
-    {{< tab "Carthage" >}}
+    {{% /tab %}}
+    {{% tab "Carthage" %}}
 
 [Carthage][1] を使用して、`dd-sdk-ios` をインストールできます。
 ```
@@ -54,13 +54,13 @@ github "DataDog/dd-sdk-ios"
 
 
 [1]: https://github.com/Carthage/Carthage
-    {{< /tab >}}
+    {{% /tab %}}
     {{< /tabs >}}
 
 2. アプリケーションコンテキストと [Datadog クライアントトークン][4]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-ios` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
 
     {{< tabs >}}
-    {{< tab "US" >}}
+    {{% tab "US" %}}
 
 ```swift
 Datadog.initialize(
@@ -72,8 +72,8 @@ Datadog.initialize(
 )
 ```
 
-    {{< /tab >}}
-    {{< tab "EU" >}}
+    {{% /tab %}}
+    {{% tab "EU" %}}
 
 ```swift
 Datadog.initialize(
@@ -86,7 +86,7 @@ Datadog.initialize(
 )
 ```
 
-    {{< /tab >}}
+    {{% /tab %}}
     {{< /tabs >}}
 
      アプリケーションを書く際、開発ログを有効にできます。指定したレベル以上の優先度を持つ SDK 内のすべての内部メッセージがコンソールログに記録されます。

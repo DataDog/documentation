@@ -69,7 +69,7 @@ Le check Varnish est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -146,8 +146,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/varnish/datadog_checks/varnish/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -158,7 +158,7 @@ La configuration du check Varnish en utilisant Autodiscovery dans les environnem
 
 [1]: https://github.com/jib/libvmod-statsd
 [2]: https://github.com/jonnenauha/prometheus_varnish_exporter
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

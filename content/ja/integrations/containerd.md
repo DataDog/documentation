@@ -73,7 +73,7 @@ Containerd は [Datadog Agent][1] の中核となるチェックです。Contain
 たとえば、Kubernetes でインテグレーションをインストールするには、DaemonSet を編集して、Containerd ソケットをホストノードから Agent コンテナにマウントし、`DD_CRI_SOCKET_PATH` 環境変数を DaemonSet のマウントパスに設定します。
 
 {{< tabs >}}
-{{< tab "Linux コンテナ" >}}
+{{% tab "Linux コンテナ" %}}
 
 ##### Linux コンテナ
 
@@ -108,8 +108,8 @@ spec:
 
 **注:** 問題なくインテグレーションを実行するには、ホストから `/var/run` ディレクトリをマウントする必要があります。
 
-{{< /tab >}}
-{{< tab "Windows コンテナ" >}}
+{{% /tab %}}
+{{% tab "Windows コンテナ" %}}
 
 ##### Windows コンテナ
 
@@ -136,7 +136,7 @@ spec:
               mountPath: \\\\.\\pipe\\containerd-containerd
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### コンフィギュレーション

@@ -64,56 +64,56 @@ Pour créer une étape de requête HTTP, cliquez sur **Create Your First Step**.
 
    {{< tabs >}}
 
-   {{< tab "Options de requête" >}}
+   {{% tab "Options de requête" %}}
 
    * **Follow redirects** : activez cette option pour que votre test HTTP suive jusqu'à dix redirections lors de l'exécution de la requête.
    * **Request headers** : définissez les en-têtes à ajouter à votre requête HTTP. Vous pouvez également remplacer les en-têtes par défaut (par exemple, l'en-tête `user-agent`).
    * **Cookies** : définissez les cookies à ajouter à votre requête HTTP. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Authentification" >}}
+   {{% tab "Authentification" %}}
 
    * **HTTP Basic Auth** : ajoutez des identifiants d'authentification basique HTTP.
    * **Digest Auth** : ajoutez des identifiants d'authentification Digest.
    * **NTLM v1** : ajoutez vos identifiants d'authentification NTLM.
    * **AWS Signature v4** : saisissez votre ID de clé d'accès et votre clé d'accès secrète. Datadog génère alors la signature pour votre requête. Cette option repose sur une implémentation de base de SigV4. Les signatures spécifiques (par exemple pour AWS S3) ne sont pas implémentées.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Paramètres de requête" >}}
+   {{% tab "Paramètres de requête" %}}
 
    * **Encode parameters** : ajoutez le nom et la valeur des paramètres de requête nécessitant un encodage.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Corps de requête" >}}
+   {{% tab "Corps de requête" %}}
 
    * **Body type** : sélectionnez le type du corps de requête (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded` ou `None`) que vous voulez ajouter à votre requête HTTP.
    * **Request body** : ajoutez le contenu du corps de votre requête HTTP. La taille du corps de la requête ne doit pas dépasser 50 Ko.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Certificat" >}}
+   {{% tab "Certificat" %}}
 
    * **Ignore server certificate error** : activez cette option pour que votre test HTTP poursuive son processus de connexion même lorsque des erreurs de validation du certificat SSL surviennent.
    * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client et la clé privée associée.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Proxy" >}}
+   {{% tab "Proxy" %}}
 
    * **Proxy URL** : indiquez l'URL du proxy que la requête HTTP doit utiliser (`http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
    * **Proxy Header** : ajoutez les en-têtes à inclure dans la requête HTTP envoyée au proxy.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Confidentialité" >}}
+   {{% tab "Confidentialité" %}}
 
    * **Do not save response body** : sélectionnez cette option pour désactiver l'enregistrement du corps de la réponse au moment de l'exécution. Cela vous permet de vous assurer qu'aucune donnée sensible ne figure dans les résultats de test. Utilisez toutefois cette option avec précaution, car elle peut rendre plus difficile le dépannage des problèmes. Pour découvrir d'autres recommandations de sécurité, consultez la section [Sécurité de la surveillance Synthetic][1].
 
 [1]: /fr/security/synthetics
-   {{< /tab >}}
+   {{% /tab %}}
 
    {{< /tabs >}}
 

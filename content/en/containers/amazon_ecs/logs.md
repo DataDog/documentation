@@ -23,7 +23,7 @@ Datadog Agent 6+ collects logs from containers. The recommended way to collect l
 To collect all logs written by running applications in your ECS containers and send it to your Datadog application:
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 1. Follow the [Amazon ECS setup instructions][1].
 2. Update your [datadog-agent-ecs.json][2] file ([datadog-agent-ecs1.json][3] if you are using an original Amazon Linux AMI) with the following configuration:
@@ -86,8 +86,8 @@ To collect all logs written by running applications in your ECS containers and s
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 1. Follow the [Amazon ECS setup instructions][1].
 2. Update your [datadog-agent-ecs-win.json][2] file with the following configuration:
@@ -151,7 +151,7 @@ To collect all logs written by running applications in your ECS containers and s
 [1]: https://docs.datadoghq.com/agent/amazon_ecs/
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Custom log collection

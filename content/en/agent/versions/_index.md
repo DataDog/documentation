@@ -29,7 +29,7 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
 ## Changes between major Agent versions
 
 {{< tabs >}}
-{{< tab "Agent v7 vs v6" >}}
+{{% tab "Agent v7 vs v6" %}}
 
 Agent v7 is the latest major version of the Datadog Agent. The only change from Agent v6 is that **this version only includes support for Python 3 for integrations and custom checks**.
 
@@ -41,8 +41,8 @@ See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agen
 [1]: /agent/versions/upgrade_to_agent_v7/
 [2]: /agent/guide/python-3/
 [3]: /agent/guide/agent-v6-python-3/
-{{< /tab >}}
-{{< tab "Agent v6 vs v5" >}}
+{{% /tab %}}
+{{% tab "Agent v6 vs v5" %}}
 
 **Agent version 6 main changes**:
 
@@ -83,7 +83,7 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 [6]: /infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /logs/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

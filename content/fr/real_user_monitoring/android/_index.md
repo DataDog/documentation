@@ -65,7 +65,7 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
 
 {{< site-region region="us" >}}
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -86,8 +86,8 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
     public class SampleApplication extends Application { 
         @Override 
@@ -105,13 +105,13 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -132,8 +132,8 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
     public class SampleApplication extends Application { 
         @Override 
@@ -151,13 +151,13 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -178,8 +178,8 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
     public class SampleApplication extends Application { 
         @Override 
@@ -197,13 +197,13 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -224,8 +224,8 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
     public class SampleApplication extends Application { 
         @Override 
@@ -243,13 +243,13 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -270,8 +270,8 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
 ```java
     public class SampleApplication extends Application { 
         @Override 
@@ -289,7 +289,7 @@ Familiarisez-vous avec le fonctionnement de l'option [`ViewTrackingStrategy`][5]
         }
     }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
@@ -300,37 +300,37 @@ Pour fournir les identifiants requis pour l'initialisation, vous devez spécifie
 Configurez et enregistrez le monitor RUM. Cette opération, qui doit être effectuée une seule fois, s'effectue dans la méthode `onCreate()` de votre application.
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
         val monitor = RumMonitor.Builder().build()
         GlobalRum.registerIfAbsent(monitor)
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
         final RumMonitor monitor = new RumMonitor.Builder().build();
         GlobalRum.registerIfAbsent(monitor);
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour effectuer le suivi de vos requêtes OkHttp en tant que ressources, ajoutez l'[intercepteur][9] fourni :
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
         val okHttpClient =  OkHttpClient.Builder()
             .addInterceptor(DatadogInterceptor())
             .build()
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
         final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
             .addInterceptor(new DatadogInterceptor())
             .build();
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Cette approche permet d'enregistrer chaque requête traitée par le client `OkHttpClient` en tant que ressource dans RUM. Toutes les informations pertinentes sont automatiquement renseignées (URL, méthode, code de statut, erreur). Seules les requêtes réseau commençant au moment où une vue est active font l'objet d'un suivi. Si vous souhaitez surveiller des requêtes lorsque votre application est en arrière-plan, [créez manuellement une vue][10].

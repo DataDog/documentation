@@ -52,7 +52,7 @@ Datadog fournit des images de conteneur d'Agent pour Python 2 et 3.
 Pour passer de Python 2 à Python 3, modifiez le tag de l'image servant à déployer l'Agent.
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 Par défaut, le [chart Helm Datadog][1] utilise l'image de l'Agent 7, qui intègre le runtime Python 3.
 
 Pour que l'Agent Datadog reste à jour, supprimez dans votre fichier `values.yaml` toutes les informations sous les sections `agent.image` et `clusterChecksRunner.image`.
@@ -99,8 +99,8 @@ clusterChecksRunner:
 
 [1]:https://artifacthub.io/packages/helm/datadog/datadog/
 
-{{< /tab >}}
-{{< tab "Operator Datadog" >}}
+{{% /tab %}}
+{{% tab "Operator Datadog" %}}
 Par défaut, l'[Operator Datadog][1] utilise l'image `agent:7.*.*`, qui intègre le runtime Python 3.
 
 Si les informations de l'image ne sont pas indiquées dans la ressource `DatadogAgent`, l'Operator déploie une image de l'Agent Datadog compatible avec Python 3.
@@ -192,8 +192,8 @@ spec:
 ```
 
 [1]: https://github.com/DataDog/datadog-operator
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 Dans votre manifeste DaemonSet, modifiez le tag de l'image dans la définition de chaque conteneur :
 
@@ -231,13 +231,13 @@ spec:
         # ...
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Outils de déploiement
 
 {{< tabs >}}
-{{< tab "Chef" >}}
+{{% tab "Chef" %}}
 
 Utilisez le champ `extra_config` pour définir le champ `python_version` sur `3` :
 
@@ -251,8 +251,8 @@ default_attributes(
  )
 ```
 
-{{< /tab >}}
-{{< tab "Puppet" >}}
+{{% /tab %}}
+{{% tab "Puppet" %}}
 
 Utilisez le champ `agent_extra_config` pour définir le champ `python_version` sur `3` :
 
@@ -264,8 +264,8 @@ class { "datadog_agent":
 }
 ```
 
-{{< /tab >}}
-{{< tab "Ansible" >}}
+{{% /tab %}}
+{{% tab "Ansible" %}}
 
 Définissez `python_version` sur `3` dans votre `datadog_config` :
 ```
@@ -273,7 +273,7 @@ datadog_config:
   python_version: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

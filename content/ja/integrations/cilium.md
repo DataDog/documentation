@@ -87,7 +87,7 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -154,8 +154,8 @@ Cilium には `cilium-agent` と `cilium-operator` の 2 種類のログがあ�
 [3]: https://datadoghq.dev/integrations-core/base/openmetrics/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset#installation
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -197,7 +197,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

@@ -44,7 +44,7 @@ Data security considerations
 To collect query metrics, samples, and explain plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example, `mysql.conf`):
 
 {{< tabs >}}
-{{< tab "MySQL 5.6" >}}
+{{% tab "MySQL 5.6" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Required. Enables the Performance Schema. |
@@ -54,9 +54,9 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 | `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "MySQL ≥ 5.7" >}}
+{{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
 | `performance_schema` | `ON` | Required. Enables the Performance Schema. |
@@ -67,7 +67,7 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 | `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -80,7 +80,7 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
-{{< tab "MySQL ≥ 8.0" >}}
+{{% tab "MySQL ≥ 8.0" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -92,8 +92,8 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
-{{< tab "MySQL 5.6 & 5.7" >}}
+{{% /tab %}}
+{{% tab "MySQL 5.6 & 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -104,7 +104,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Create the following schema:

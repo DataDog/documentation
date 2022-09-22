@@ -205,7 +205,7 @@ All outbound traffic is sent over SSL through TCP / UDP.
 Open the following ports to benefit from all the **Agent** functionalities:
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 #### Outbound
 
@@ -311,8 +311,8 @@ Used for Agent services communicating with each other locally within the host on
 [1]: /integrations/go_expvar/
 [2]: /agent/basic_agent_usage/#gui
 [3]: /tracing/
-{{< /tab >}}
-{{< tab "Agent v5 & v4" >}}
+{{% /tab %}}
+{{% tab "Agent v5 & v4" %}}
 
 #### Outbound
 
@@ -339,7 +339,7 @@ See [default NTP targets][2].
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /integrations/ntp/#overview
 [3]: /tracing/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Using proxies

@@ -69,7 +69,7 @@ Then check if the keys are trusted by following the steps in [Check if a host tr
 On CentOS, RHEL, and Amazon Linux, if your Yum repository file is used to define the Datadog repository (`datadog.repo`), update it to add the key as a trusted key:
 
 {{< tabs >}}
-{{< tab "Agent v7" >}}
+{{% tab "Agent v7" %}}
 
 ```conf
 [datadog]
@@ -83,8 +83,8 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
 
-{{< /tab >}}
-{{< tab "Agent v6" >}}
+{{% /tab %}}
+{{% tab "Agent v6" %}}
 
 ```conf
 [datadog]
@@ -99,7 +99,7 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY.public
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: due to a [bug in dnf][7], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.

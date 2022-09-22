@@ -80,7 +80,7 @@ Le check Hive est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez do
     Redémarrez ensuite HiveServer2 ou Hive Metastore. Hive Metastore et HiveServer2 ne peuvent pas partager la même connexion JMX.
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -129,8 +129,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [2]: https://docs.datadoghq.com/fr/integrations/java/
 [3]: https://docs.datadoghq.com/fr/help/
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -153,7 +153,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

@@ -63,7 +63,7 @@ CI 공급자가 컨테이너 기반의 실행기(executor)를 사용하는 경�
 다음 섹션에서는 Agent를 실행하여 테스트 정보를 보고하도록 설정하기 위해 필요한 특정 CI 공급자의 구성 절차를 설명해드리겠습니다.
 
 {{< tabs >}}
-{{< tab "Azure Pipelines" >}}
+{{% tab "Azure Pipelines" %}}
 
 Azure Pipelines에서 Datadog Agent를 실행하려면 [리소스 섹션][1]에서 새로운 컨테이너를 정의하고 이를 [서비스 컨테이너][2]로 선언한 작업과 연계합니다.
 
@@ -125,8 +125,8 @@ jobs:
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
-{{< /tab >}}
-{{< tab "GitLab CI" >}}
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 Git Lab에서 Agent를 실행하려면 [서비스][1]에서 Agent 컨테이너를 정의하세요.
 
@@ -170,8 +170,8 @@ test:
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{< /tab >}}
-{{< tab "GitHub Actions" >}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 Git Hub Actions에서 Agent를 실행하려면 [Datadog Agent GitHub Action][1] `datadog/agent-github-action`을 사용하세요.
 
@@ -209,8 +209,8 @@ jobs:
 [1]: https://github.com/marketplace/actions/datadog-agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{< /tab >}}
-{{< tab "CircleCI" >}}
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 CircleCI에서 Agent를 실행하려면 테스트를 실행하기 전에 [datadog/agent CircleCI orb][1]를 사용하여 Agent 컨테이너를 부팅하고, 결과가 Datadog로 전송되었는지 확인한 후 정지합니다.
 
@@ -271,7 +271,7 @@ workflows:
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://circleci.com/docs/2.0/env-vars/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Docker Compose 사용하기

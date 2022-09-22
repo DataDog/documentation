@@ -21,7 +21,7 @@ further_reading:
 デフォルトでは、収集セッション数にサンプリングは適用されていません。収集セッション数に相対サンプリング (% 表示) を適用するには、RUM を初期化する際に `sampleRate` パラメーターを使用します。下記の例では、RUM アプリケーションの全セッションの 90% のみを収集します。
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { Datacenter, datadogRum } from '@datadog/browser-rum';
@@ -34,8 +34,8 @@ datadogRum.init({
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -46,7 +46,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: サンプルとして抽出したセッションでは、すべてのページビューとそのセッションに紐付くテレメトリーは収集されません。
@@ -58,7 +58,7 @@ window.DD_RUM &&
 リアルユーザーモニタリング (RUM) を初期化したら、`addRumGlobalContext(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにコンテキストを追加します。
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -72,8 +72,8 @@ datadogRum.addRumGlobalContext('usr', {
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<コンテキストキー>', <コンテキスト値>);
@@ -85,7 +85,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
 });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
@@ -95,7 +95,7 @@ window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
 リアルユーザーモニタリング (RUM) を初期化したら、`setRumGlobalContext(context: Context)` API を使用してすべての RUM イベントのデフォルトコンテキストを置換します。
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -108,8 +108,8 @@ datadogRum.setRumGlobalContext({
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -122,7 +122,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
@@ -132,7 +132,7 @@ window.DD_RUM &&
 リアルユーザーモニタリング (RUM) を初期化したら、`addAction(name: string, context: Context)` API を使用してアプリケーションページの特定のインタラクションを監視したり、カスタムタイミングを測定したりする場合のユーザーアクションを生成します。
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -150,8 +150,8 @@ datadogRum.addAction('checkout', {
 });
 ```
 
-{{< /tab >}}
-{{< tab "Bundle" >}}
+{{% /tab %}}
+{{% tab "Bundle" %}}
 
 ```javascript
 window.DD_RUM && DD_RUM.addAction('<名前>', '<JSON_オブジェクト>');
@@ -168,7 +168,7 @@ window.DD_RUM &&
     });
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 上記の例では、RUM SDK がカート内のアイテム数、中身、カート全体の総額を収集します。

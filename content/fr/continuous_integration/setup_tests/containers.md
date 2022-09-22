@@ -12,7 +12,7 @@ Si vous exécutez vos tests à l'intérieur d'un conteneur que vous lancez vous-
 En outre, vous devez passer les variables d'environnement requises pour configurer le traceur telles que décrites dans les [instructions d'instrumentation de test pour chaque langage][3] (telles que `DD_SERVICE`, `DD_ENV` et une `DD_TRACE_AGENT_URL` valide qui est accessible au sein du conteneur).
 
 {{< tabs >}}
-{{< tab "AppVeyor" >}}
+{{% tab "AppVeyor" %}}
 
 - `APPVEYOR`
 - `APPVEYOR_BUILD_ID`
@@ -29,8 +29,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://www.appveyor.com/docs/environment-variables/
-{{< /tab >}}
-{{< tab "Azure Pipelines" >}}
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
 
 - `TF_BUILD`
 - `BUILD_DEFINITIONNAME`
@@ -53,8 +53,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
-{{< /tab >}}
-{{< tab "Bitbucket Pipelines" >}}
+{{% /tab %}}
+{{% tab "Bitbucket Pipelines" %}}
 
 - `BITBUCKET_PIPELINE_UUID`
 - `BITBUCKET_BUILD_NUMBER`
@@ -69,8 +69,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
-{{< /tab >}}
-{{< tab "Buildkite" >}}
+{{% /tab %}}
+{{% tab "Buildkite" %}}
 
 - `BUILDKITE`
 - `BUILDKITE_PIPELINE_SLUG`
@@ -88,8 +88,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://buildkite.com/docs/pipelines/environment-variables
-{{< /tab >}}
-{{< tab "CircleCI" >}}
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 - `CIRCLECI`
 - `CIRCLE_PROJECT_REPONAME`
@@ -106,8 +106,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
-{{< /tab >}}
-{{< tab "GitHub Actions" >}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
 - `GITHUB_RUN_ID`
@@ -123,8 +123,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
-{{< /tab >}}
-{{< tab "GitLab CI" >}}
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 - `GITLAB_CI`
 - `CI_PIPELINE_ID`
@@ -142,8 +142,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
-{{< /tab >}}
-{{< tab "Jenkins" >}}
+{{% /tab %}}
+{{% tab "Jenkins" %}}
 
 - `JENKINS_URL`
 - `BUILD_TAG`
@@ -160,8 +160,8 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
-{{< /tab >}}
-{{< tab "Travis CI" >}}
+{{% /tab %}}
+{{% tab "Travis CI" %}}
 
 - `TRAVIS`
 - `TRAVIS_BUILD_ID`
@@ -180,7 +180,7 @@ En outre, vous devez passer les variables d'environnement requises pour configur
 
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://docs.docker.com/engine/reference/run/

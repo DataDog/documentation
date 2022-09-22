@@ -48,7 +48,7 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 | 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes リソースの非推奨化    |
 
 {{< tabs >}}
-{{< tab "Operator" >}}
+{{% tab "Operator" %}}
 
 <div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
 
@@ -142,8 +142,8 @@ agent:
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /ja/agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 カスタムリリース名でチャートをインストールするには、`<RELEASE_NAME>` (例 `datadog-agent`):
 
@@ -245,8 +245,8 @@ datadog:
 [10]: https://hub.docker.com/u/datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 [12]: /ja/integrations/kubernetes_state_core
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 DaemonSet を利用して、すべてのノード (または [nodeSelectors を使用して][1]特定のノード) に Datadog Agent をデプロイします。
 
@@ -358,7 +358,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 [20]: /ja/getting_started/site/
 [21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [22]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 次のステップ

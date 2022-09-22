@@ -134,7 +134,7 @@ static_resources:
 ### Procédure à suivre
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -184,8 +184,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [2]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
 [3]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -214,7 +214,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [2]: https://docs.datadoghq.com/fr/integrations/openmetrics/
 [3]: https://github.com/DataDog/integrations-core/blob/7.33.x/envoy/datadog_checks/envoy/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

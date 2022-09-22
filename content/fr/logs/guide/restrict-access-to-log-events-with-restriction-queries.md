@@ -50,7 +50,7 @@ Vous pouvez également utiliser l'API et les étapes suivantes pour créer un r�
 Utilisez l'[API de création de rôle][4] pour ajouter un rôle `team-frontend` et `team-backend` :
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 Appel d'API :
 
@@ -64,8 +64,8 @@ Réponse :
 {"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"team-backend","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
 ```
 
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 Appel d'API :
 
@@ -79,8 +79,8 @@ Réponse :
 {"data":{"type":"roles","id":"63b970ea-99ca-11ea-93e6-e32eb84de6d6","attributes":{"name":"team-frontend","created_at":"2020-05-19T12:15:12.375425+00:00","modified_at":"2020-05-19T12:15:12.375425+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
 ```
 
-{{< /tab >}}
-{{< tab "API générique" >}}
+{{% /tab %}}
+{{% tab "API générique" %}}
 
 Appel d'API :
 
@@ -100,7 +100,7 @@ curl -X POST \
         }'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Par défaut, les rôles sont créés avec un accès en lecture seule. L'étape suivante consiste à ajouter des autorisations à ces rôles.
@@ -161,7 +161,7 @@ Les autorisations sont ajoutées une par une via l'[API Roles][8]).
 Après avoir récupéré les ID des autorisations adéquates en énumérant les autorisations disponibles, accordez-les à chaque rôle comme indiqué ci-dessous :
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 Appel d'API (remplacez l'ID du rôle par le vôtre et renseignez l'ID d'autorisation) :
 
@@ -169,16 +169,16 @@ Appel d'API (remplacez l'ID du rôle par le vôtre et renseignez l'ID d'autorisa
 curl -X POST "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" -d '{"data": {"type":"type": "permissions","id": <ID_AUTORISATION>}}’
 ```
 
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 Appel d'API (remplacez l'ID du rôle par le vôtre et renseignez l'ID d'autorisation) :
 
 ```
 curl -X POST "https://app.datadoghq.com/api/v2/roles/63b970ea-99ca-11ea-93e6-e32eb84de6d6/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" -d '{"data": {"type":"type": "permissions","id": <ID_AUTORISATION>}}’
 ```
-{{< /tab >}}
-{{< tab "API générique" >}}
+{{% /tab %}}
+{{% tab "API générique" %}}
 
 Appel d'API :
 
@@ -186,7 +186,7 @@ Appel d'API :
 curl -X POST "https://app.datadoghq.com/api/v2/roles/<ID_RÔLE>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" -d '{"data": {"type":"type": "permissions","id": <ID_AUTORISATION>}}’
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Créer des requêtes de restriction
@@ -196,7 +196,7 @@ Il existe plusieurs façons d'identifier les logs correspondant à chaque équip
 Ce guide part du principe qu'un tag `team` est appliqué aux logs backend et frontend.
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 Appel d'API :
 ```
@@ -219,8 +219,8 @@ Réponse :
 }
 ```
 
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 Appel d'API :
 
@@ -244,14 +244,14 @@ Réponse :
 }
 ```
 
-{{< /tab >}}
-{{< tab "API générique" >}}
+{{% /tab %}}
+{{% tab "API générique" %}}
 
 ```
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "<REQUÊTE>"}}}'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Vous venez de créer le rôle et la requête pour l'équipe frontend et l'équipe backend.
@@ -264,7 +264,7 @@ Vous avez obtenu les ID de rôle et de requête à partir de la réponse à l'ap
 Notez que les ID sont propres à cet exemple et qu'en effectuant la même opération depuis votre compte, vous obtiendrez des ID de rôle et de requête différents. Consultez la [documentation sur les autorisations][10] pour obtenir plus d'informations sur les restrictions dans Datadog.
 
 {{< tabs >}}
-{{< tab "Backend" >}}
+{{% tab "Backend" %}}
 
 Appel d'API :
 
@@ -293,8 +293,8 @@ Réponse :
 ```
 
 [1]: https://docs.datadoghq.com/fr/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
-{{< /tab >}}
-{{< tab "Frontend" >}}
+{{% /tab %}}
+{{% tab "Frontend" %}}
 
 Appel d'API :
 
@@ -323,8 +323,8 @@ Réponse :
 ```
 
 [1]: https://docs.datadoghq.com/fr/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
-{{< /tab >}}
-{{< tab "API générique" >}}
+{{% /tab %}}
+{{% tab "API générique" %}}
 
 Appel d'API :
 
@@ -332,7 +332,7 @@ Appel d'API :
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <CLÉ_API_DATADOG>" -H "DD-APPLICATION-KEY: <CLÉ_APPLICATION_DATADOG>" -d '{"data": {"type": "roles","id": "<ID_RÔLE>"}}’
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Ajouter un rôle à un utilisateur

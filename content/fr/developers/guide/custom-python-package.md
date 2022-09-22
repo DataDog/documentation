@@ -16,7 +16,7 @@ further_reading:
     text: Recueillir vos traces
 ---
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
@@ -26,8 +26,8 @@ Les packages Python peuvent être installés avec le `pip` intégré :
 sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install <NOM_PACKAGE>
 ```
 
-{{< /tab >}}
-{{< tab "macOS" >}}
+{{% /tab %}}
+{{% tab "macOS" %}}
 
 L'Agent intègre un environnement Python dans `/opt/datadog-agent/embedded/`. Les binaires courants comme `python` et `pip` se trouvent dans `/opt/datadog-agent/embedded/bin/`.
 
@@ -37,9 +37,9 @@ Les packages Python peuvent être installés avec le `pip` intégré :
 sudo /opt/datadog-agent/embedded/bin/pip install <NOM_PACKAGE>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Windows" >}}
+{{% tab "Windows" %}}
 
 Pour installer un package Python personnalisé grâce au Python intégré dans l'Agent, utilisez la commande PowerShell suivante :
 
@@ -66,7 +66,7 @@ Ensuite, [redémarrez votre Agent][1].
 {{< img src="agent/windows_python_package.png" alt="Package python pour windows" >}}
 
 [1]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

@@ -72,7 +72,7 @@ CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
 {{< tabs >}}
-{{< tab "Postgres ≥ 10" >}}
+{{% tab "Postgres ≥ 10" %}}
 
 **すべてのデータベース**に以下のスキーマを作成します。
 
@@ -84,8 +84,8 @@ GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-{{< /tab >}}
-{{< tab "Postgres 9.6" >}}
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
 
 **すべてのデータベース**に以下のスキーマを作成します。
 
@@ -110,7 +110,7 @@ LANGUAGE sql
 SECURITY DEFINER;
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注意**: 追加のテーブルへの問い合わせを必要とするカスタムメトリクスを生成する場合は、それらのテーブルに対する `SELECT` 権限を `datadog` ユーザーに付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳細は [PostgreSQL カスタムメトリクス収集の説明][6]を参照してください。
@@ -145,7 +145,7 @@ SECURITY DEFINER;
 権限が正しいことを確認するために、以下のコマンドを実行して、Agent ユーザーがデータベースに接続してコアテーブルを読み取ることができることを確認します。
 
 {{< tabs >}}
-{{< tab "Postgres ≥ 10" >}}
+{{% tab "Postgres ≥ 10" %}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -161,8 +161,8 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{{< /tab >}}
-{{< tab "Postgres 9.6" >}}
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -179,7 +179,7 @@ psql -h localhost -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 パスワードの入力を求められた場合は、`datadog` ユーザーを作成したときに入力したパスワードを使用してください。
@@ -191,7 +191,7 @@ Datadog Agent をインストールすると、Postgres でのデータベース
 1. Agent の `conf.d/postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するホストを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][9] を参照してください。
 
 {{< tabs >}}
-{{< tab "Postgres ≥ 10" >}}
+{{% tab "Postgres ≥ 10" %}}
 
    ```yaml
    init_config:
@@ -205,8 +205,8 @@ Datadog Agent をインストールすると、Postgres でのデータベース
        # dbname: '<DB_NAME>'
    ```
 
-{{< /tab >}}
-{{< tab "Postgres 9.6" >}}
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
 
    ```yaml
    init_config:
@@ -222,7 +222,7 @@ Datadog Agent をインストールすると、Postgres でのデータベース
        # dbname: '<DB_NAME>'
    ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 2. [Agent を再起動します][10]。

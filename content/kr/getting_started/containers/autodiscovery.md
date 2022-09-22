@@ -46,7 +46,7 @@ Agent는 컨테이너 생성, 파기, 시작, 정지 등의 이벤트를 감시�
 
 {{< tabs >}}
 
-{{< tab "AD Annotations v2 (Agent 7.36+)" >}}
+{{% tab "AD Annotations v2 (Agent 7.36+)" %}}
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -74,9 +74,9 @@ annotations:
 `redisdb`는 실행할 점검의 이름입니다. `init_configs`에는 최소 수집 간격 등의 설정 파라미터가 포함됩니다. `instances`는 점검의 한 인스턴스에서 실행되는 설정을 나타냅니다. **참조**: 이번 사례에서 `%%host%%`는 컨테이너 IP에서 동적으로 생성되는 템플릿 변수입니다.
 
 [1]: /kr/getting_started/tagging/unified_service_tagging
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "AD Annotations v1" >}}
+{{% tab "AD Annotations v1" %}}
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -101,7 +101,7 @@ annotations:
 `check_names`는 실행할 점검의 이름입니다. `init_configs`에는 최소 수집 간격 등의 설정 파라미터가 포함됩니다. `instances`는 점검의 한 인스턴스에서 실행되는 설정을 나타냅니다. **참조**: 이번 사례에서 `%%host%%`는 컨테이너 IP에서 동적으로 생성되는 템플릿 변수입니다.
 
 [1]: /kr/getting_started/tagging/unified_service_tagging
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

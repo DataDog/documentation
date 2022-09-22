@@ -36,7 +36,7 @@ Les variables globales sont des variables accessibles à partir de l'ensemble de
 Choisissez le type de variable que vous souhaitez créer :
 
 {{< tabs >}}
-{{< tab "Valeur spécifiée" >}}
+{{% tab "Valeur spécifiée" %}}
 
 1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom peut uniquement contenir des lettres majuscules, des chiffres et des underscores. Aucune autre variable globale ne doit utiliser ce nom.
 2. Saisissez une **description** pour votre variable (facultatif).
@@ -46,9 +46,9 @@ Choisissez le type de variable que vous souhaitez créer :
 
 {{< img src="synthetics/settings/variable_value_2.png" alt="Variable globale avec valeur spécifiée" style="width:100%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Création à partir d'un test HTTP" >}}
+{{% tab "Création à partir d'un test HTTP" %}}
 
 Vous pouvez créer des variables à partir de vos [tests HTTP][1] existants en parsant les en-têtes et le corps de la réponse associée.
 
@@ -69,9 +69,9 @@ Vous pouvez créer des variables à partir de vos [tests HTTP][1] existants en 
 [2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [3]: https://restfulapi.net/json-jsonpath/
 [4]: https://www.w3schools.com/xml/xpath_syntax.asp
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Token MFA" >}}  
+{{% tab "Token MFA" %}}  
 
 Pour générer et utiliser un TOTP dans vos tests, créez une variable globale et ajoutez-y une clé de secret ou importez un code QR fourni par votre fournisseur d'authentification.
 
@@ -87,7 +87,7 @@ Pour générer et utiliser un TOTP dans vos tests, créez une variable globale e
 **Remarque** : pour en savoir plus sur l'authentification multifacteur basée sur un TOTP dans un test Browser, consultez le [guide TOTP][1].
 
 [1]: /fr/synthetics/guide/browser-tests-totp
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

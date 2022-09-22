@@ -101,7 +101,7 @@ See the [Vector documentation][7] for all available configuration parameters and
 To receive data from the Datadog Agent, configure Vector with a [datadog_agent source][8]:
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sources:
@@ -111,8 +111,8 @@ sources:
     multiple_outputs: true # To automatically separate metrics and logs
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 sources:
@@ -122,8 +122,8 @@ sources:
     multiple_outputs: true
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -137,7 +137,7 @@ sources:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Add Vector-specific tags
@@ -151,7 +151,7 @@ Vector can also directly collect logs and metrics from [alternative sources][11]
 You can include specific Vector tags when sending logs to Datadog. Adding these tags is useful if you are migrating to Vector. In this example, we'll tag all logs sent to Datadog with the Vector host.
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 remap_logs_for_datadog:
@@ -171,8 +171,8 @@ remap_logs_for_datadog:
     del(.status)
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [remap_logs_for_datadog]
@@ -190,8 +190,8 @@ source = """
 """
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -216,7 +216,7 @@ del(.status)"
 
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 These tags can be used to validate whether Vector sent the data. More specifically, if you are migrating to Vector, use these tags as attributes to determine whether the data has been moved over correctly.
@@ -228,7 +228,7 @@ These tags can be used to validate whether Vector sent the data. More specifical
 Similarly, to send metrics to Datadog with Vector specific tags, see the following example:
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 remap_metrics_for_datadog:
@@ -240,8 +240,8 @@ remap_metrics_for_datadog:
     .tags.vector_aggregator = get_hostname!()
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [remap_metrics_for_datadog]
@@ -253,8 +253,8 @@ source = """
 """
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -270,7 +270,7 @@ source = """
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -281,7 +281,7 @@ source = """
 To send logs to Datadog, Vector must be configured with at least one [datadog_logs sink][14]. See the following example:
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sinks:
@@ -294,8 +294,8 @@ sinks:
       codec: json
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [sinks.log_to_datadog]
@@ -307,8 +307,8 @@ default_api_key = "${DATADOG_API_KEY}"
   codec = "json"
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -327,7 +327,7 @@ default_api_key = "${DATADOG_API_KEY}"
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Metrics
@@ -335,7 +335,7 @@ default_api_key = "${DATADOG_API_KEY}"
 Similarly to send metrics to Datadog, Vector must be configured with at least one [datadog_metrics sink][15]. See the following example:
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sinks:
@@ -347,8 +347,8 @@ sinks:
     compression: gzip
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 sinks:
@@ -360,8 +360,8 @@ sinks:
    compression: gzip
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -378,7 +378,7 @@ sinks:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -389,7 +389,7 @@ sinks:
 Datadog recommends enabling disk buffers to prevent data loss. Vector uses [disk buffers][16] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure.  See the configuration below for setting buffers at the sink level.
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sinks:
@@ -404,8 +404,8 @@ sinks:
          max_size: 309237645312
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [sinks.metrics_to_datadog]
@@ -420,8 +420,8 @@ compression = "gzip"
 
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -442,7 +442,7 @@ compression = "gzip"
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Disk space
@@ -450,7 +450,7 @@ compression = "gzip"
 You should provision at least 36 GiB per vCPU * of disk space. If you follow the recommendation of 8 vCPUs, you would provision 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs), allocating ​​48 GiB for metrics and 240 GiB for logs. You can add a volume to the Vector instances to hold the buffer in your Helm chart:
 
 {{< tabs >}}
-{{< tab "AWS" >}}
+{{% tab "AWS" %}}
 
 ```
 vector:
@@ -462,8 +462,8 @@ vector:
     size: 288Gi
 ```
 
-{{< /tab >}}
-{{< tab "Azure" >}}
+{{% /tab %}}
+{{% tab "Azure" %}}
 
 ```
 vector:
@@ -475,8 +475,8 @@ vector:
     size: 288Gi
 ```
 
-{{< /tab >}}
-{{< tab "GKE" >}}
+{{% /tab %}}
+{{% tab "GKE" %}}
 
 ```json
 vector:
@@ -488,7 +488,7 @@ vector:
     size: 288Gi
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Read more about [architecting buffers][17].

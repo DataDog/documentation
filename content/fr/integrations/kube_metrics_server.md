@@ -47,7 +47,7 @@ Le check Kube_metrics_server est inclus dans le package de l'[Agent Datadog][2].
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -59,8 +59,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -73,7 +73,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery K
 | `<CONFIG_INSTANCE>`  | `{"prometheus_url": "https://%%host%%:443/metrics"}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### SSL

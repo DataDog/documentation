@@ -43,7 +43,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    {{< tabs >}}
 
-   {{< tab "リクエストオプション" >}}
+   {{% tab "リクエストオプション" %}}
 
    * **Follow redirects**: 選択すると、リクエストを実行するときに HTTP テストで最大 10 個のリダイレクトをフォローします。
    * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、HTTP テストが接続を続行します。
@@ -51,9 +51,9 @@ HTTP テストは、ネットワークの外部または内部からのテスト
    * **Request headers**: HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
    * **Cookies**: HTTP リクエストに追加するクッキーを定義します。`<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` の形式を使用して複数のクッキーを設定します。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "認証" >}}
+   {{% tab "認証" %}}
 
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
@@ -70,35 +70,35 @@ HTTP テストは、ネットワークの外部または内部からのテスト
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "クエリパラメーター" >}}
+   {{% tab "クエリパラメーター" %}}
 
    * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "リクエスト本文" >}}
+   {{% tab "リクエスト本文" %}}
 
    * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "プロキシ" >}}
+   {{% tab "プロキシ" %}}
 
    * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
    * **Proxy header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Privacy" >}}
+   {{% tab "Privacy" %}}
 
    * **Do not save response body**: 応答の本文が実行時に保存されないようにするには、このオプションを選択します。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。セキュリティに関する推奨の詳細は、[Synthetic Monitoring Security][1] をご確認ください。
 
 
 [1]: /ja/data_security/synthetics
-   {{< /tab >}}
+   {{% /tab %}}
 
    {{< /tabs >}}
 

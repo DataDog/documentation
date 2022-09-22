@@ -93,7 +93,7 @@ Network Performance Monitoring supports use of the following provisioning system
 Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
 
 {{< tabs >}}
-{{< tab "Agent (Linux)" >}}
+{{% tab "Agent (Linux)" %}}
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
@@ -173,8 +173,8 @@ If these utilities do not exist in your distribution, follow the same procedure 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
-{{< /tab >}}
-{{< tab "Agent (Windows)" >}}
+{{% /tab %}}
+{{% tab "Agent (Windows)" %}}
 
 Data collection for Windows relies on a filter driver for collecting network data.
 
@@ -205,8 +205,8 @@ To enable Network Performance Monitoring for Windows hosts:
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 [2]: /agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 To enable Network Performance Monitoring with Kubernetes using Helm, add:
 
@@ -350,8 +350,8 @@ If you already have the [Agent running with a manifest][4]:
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 <div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
@@ -372,8 +372,8 @@ spec:
 ```
 
 [1]: https://github.com/DataDog/datadog-operator
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
@@ -432,13 +432,13 @@ services:
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
-{{< tab "ECS" >}}
+{{% /tab %}}
+{{% tab "ECS" %}}
 To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 
 
 [1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

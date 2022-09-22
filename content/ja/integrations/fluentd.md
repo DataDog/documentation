@@ -97,7 +97,7 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -220,8 +220,8 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 [8]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -236,7 +236,7 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 | `<インスタンスコンフィギュレーション>`  | `{"monitor_agent_url": "http://%%host%%:24220/api/plugins.json"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

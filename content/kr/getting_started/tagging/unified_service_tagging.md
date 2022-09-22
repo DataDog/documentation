@@ -71,7 +71,7 @@ title: 통합 서비스 태깅
 #### 설정
 
 {{< tabs >}}
-{{< tab "쿠버네티스" >}}
+{{% tab "쿠버네티스" %}}
 
 [Admission Controller][1]를 활성화하여 Datadog Cluster Agent를 배포한 경우, Admission Controller는 팟 매니페스트를 변이시키고(설정된 변이 조건에 따라) 필요한 모든 환경 변수를 삽입합니다. 이 경우, 팟 매니페스토 내의 환경 변수 `DD_`를 직접 설정할 필요가 없습니다. 자세한 내용은 [Admission Controller 설명서][1]를 참조하세요.
 
@@ -189,9 +189,9 @@ containers:
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
 [5]: /kr/tracing/send_traces/
 [6]: /kr/integrations/statsd/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "도커" >}}
+{{% tab "도커" %}}
 ##### 전체 설정
 
 `DD_ENV`, `DD_SERVICE`, `DD_VERSION` 환경 변수를 설정하고, 컨테이너에 해당하는 도커 라벨을 구성해 통합 서비스 태깅의 모든 기능을 이용할 수 있습니다.
@@ -236,9 +236,9 @@ com.datadoghq.tags.version
 
 전체 설정에서 설명했듯, 이러한 라벨은 Dockerfile에서 설정하거나 컨테이너 시작 시 인수로 설정할 수 있습니다.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "ECS" %}}
 ##### 전체 설정
 
 `DD_ENV`, `DD_SERVICE`, `DD_VERSION` 환경 변수와 해당하는 도커 라벨을 각 서비스 컨테이너의 런타임 환경에서 설정하여 통합 서비스 태깅의 모든 기능을 이용할 수 있습니다. 예를 들어, ECS 작업 정의를 통해 이 설정의 모든 요소를 한 곳에서 설정할 수 있습니다.
@@ -277,7 +277,7 @@ com.datadoghq.tags.version
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 비컨테이너화 환경
@@ -295,7 +295,7 @@ com.datadoghq.tags.version
 2. 또는 [Chef][13], [Ansible][14]이나 다른 오케스트레이션 도구를 사용하여 서비스의 systemd 또는 initd 설정 파일에 DD 환경 변수를 설정합니다. 서비스 프로세스가 시작되면 해당 변수에 액세스할 수 있습니다.
 
    {{< tabs >}}
-   {{< tab "트레이스" >}}
+   {{% tab "트레이스" %}}
 
    통합 서비스 태깅을 위해 트레이스를 설정할 때:
 
@@ -309,18 +309,18 @@ com.datadoghq.tags.version
 
 [1]: /kr/tracing/setup/
 [2]: /kr/developers/dogstatsd/
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "로그" >}}
+   {{% tab "로그" %}}
 
    [연결된 로그와 트레이스][1]를 사용 중이라면, APM 트레이서에서 지원되는 경우 자동 로그 삽입을 활성화합니다. APM 트레이서는 자동으로 `env`, `service`, `version`을 로그에 삽입하므로 다른 곳에서 필드를 수동으로 설정할 필요가 없습니다.
 
    **참조**: PHP 트레이서는 로그용 통합 서비스 태깅 설정을 지원하지 않습니다.
 
 [1]: /kr/tracing/other_telemetry/connect_logs_and_traces/
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "RUM & 세션 리플레이" >}}
+   {{% tab "RUM & 세션 리플레이" %}}
 
    [연결된 RUM 및 트레이스][1]를 사용하는 경우, `service` 필드에서 브라우저 애플리케이션을 지정하고 `env` 필드에서 환경을 정의하세요. 그리고 초기화 파일의 `version` 필드에서 버전 목록을 작성하면 됩니다.
 
@@ -329,9 +329,9 @@ com.datadoghq.tags.version
 
 [1]: /kr/real_user_monitoring/connect_rum_and_traces/
 [2]: /kr/real_user_monitoring/browser/#setup
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "신서틱" >}}
+   {{% tab "신서틱" %}}
 
    [연결된 신서틱(Synthetic) 브라우저 테스트와 트레이스][1]를 사용 중이라면 [통합 설정 페이지][2]의 **APM Integration for Browser Tests** 섹션에서 헤더 발송 URL을 지정하세요.
 
@@ -339,9 +339,9 @@ com.datadoghq.tags.version
 
 [1]: /kr/synthetics/apm/
 [2]: https://app.datadoghq.com/synthetics/settings/integrations
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "커스텀 메트릭" >}}
+   {{% tab "커스텀 메트릭" %}}
 
  태그는 [커스텀 StatsD 메트릭][1]에 변경이 불가능하고 덧붙이기만 가능한(Append-only) 방식으로 추가됩니다. 예를 들어, `env`에 서로 다른 값 두 개가 있는 경우 메트릭은 두 환경 모두에서 태깅됩니다. 한 태그가 같은 이름의 다른 태그를 덮어쓸 수는 없습니다.
 
@@ -350,9 +350,9 @@ com.datadoghq.tags.version
  **참조**: .NET 및 PHP용 DatadogDogStatsD 클라이언트는 이 기능을 지원하지 않습니다.
 
 [1]: /kr/metrics/
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "시스템 메트릭" >}}
+   {{% tab "시스템 메트릭" %}}
 
 인프라스트럭처 메트릭에는 `env` 태그와 `service` 태그를 추가할 수 있습니다. 비컨테이너화 컨텍스트에서 서비스 메트릭의 태깅은 Agent 수준에서 설정됩니다.
 
@@ -397,7 +397,7 @@ instances:
 
 [1]: /kr/agent/guide/agent-configuration-files
 [2]: /kr/integrations/process
-    {{< /tab >}}
+    {{% /tab %}}
     {{< /tabs >}}
 
 ### 서버리스 환경

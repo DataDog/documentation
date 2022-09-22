@@ -59,7 +59,7 @@ Le check Gitlab est inclus avec le package de l'[Agent Datadog][2] : vous n'ave
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -117,8 +117,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [4]: https://docs.gitlab.com/ee/administration/monitoring/prometheus/gitlab_metrics.html
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/blob/master/gitlab/datadog_checks/gitlab/metrics.py
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -142,7 +142,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

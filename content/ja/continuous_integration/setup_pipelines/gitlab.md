@@ -29,14 +29,14 @@ title: GitLab パイプラインでトレースを設定する
 ## Datadog インテグレーションの構成
 
 {{< tabs >}}
-{{< tab "GitLab.com" >}}
+{{% tab "GitLab.com" %}}
 
 [プロジェクト][1]または[グループ][2]でのインテグレーションを構成するには、インスツルメントしたい各プロジェクトまたはグループに対して **Settings > Integrations > Datadog** に移動します。
 
 [1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
-{{< /tab >}}
-{{< tab "GitLab &gt;&equals; 14.1" >}}
+{{% /tab %}}
+{{% tab "GitLab &gt;&equals; 14.1" %}}
 
 [プロジェクト][1]または[グループ][2]でのインテグレーションを構成するには、インスツルメントしたい各プロジェクトまたはグループに対して **Settings > Integrations > Datadog** に移動します。
 
@@ -45,8 +45,8 @@ title: GitLab パイプラインでトレースを設定する
 [1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 [3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
-{{< /tab >}}
-{{< tab "GitLab &lt; 14.1" >}}
+{{% /tab %}}
+{{% tab "GitLab &lt; 14.1" %}}
 
 `datadog_ci_integration` [機能フラグ][1]を有効にして、インテグレーションを有効にします。インストールの種類に応じて、GitLab の [Rails Runner][2] を使用する次のコマンドのいずれかを実行します。
 
@@ -78,7 +78,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
 [3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 インテグレーションコンフィギュレーション設定を入力します。

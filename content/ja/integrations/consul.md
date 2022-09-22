@@ -107,7 +107,7 @@ Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -238,8 +238,8 @@ _Agent バージョン 6.0 以降で利用可能_
 [4]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
 [5]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -266,7 +266,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

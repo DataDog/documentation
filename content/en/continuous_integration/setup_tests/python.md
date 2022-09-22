@@ -75,7 +75,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 The following sections provide CI provider-specific instructions to run and configure the Agent to report test information.
 
 {{< tabs >}}
-{{< tab "Azure Pipelines" >}}
+{{% tab "Azure Pipelines" %}}
 
 To run the Datadog Agent in Azure Pipelines, define a new container in the [resources section][1] and link it with the job declaring it as a [service container][2].
 
@@ -137,8 +137,8 @@ Add your [Datadog API key][3] to your [project environment variables][4] with th
 [2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
-{{< /tab >}}
-{{< tab "GitLab CI" >}}
+{{% /tab %}}
+{{% tab "GitLab CI" %}}
 
 To run the Agent in GitLab, define the Agent container under [services][1].
 
@@ -182,8 +182,8 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 [1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{< /tab >}}
-{{< tab "GitHub Actions" >}}
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
 
 To run the Agent in GitHub Actions, use the [Datadog Agent GitHub Action][1] `datadog/agent-github-action`.
 
@@ -221,8 +221,8 @@ Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_
 [1]: https://github.com/marketplace/actions/datadog-agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{< /tab >}}
-{{< tab "CircleCI" >}}
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
 To run the Agent in CircleCI, launch the Agent container before running tests by using the [datadog/agent CircleCI orb][1], and stop it after to ensure results are sent to Datadog.
 
@@ -283,7 +283,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 [1]: https://circleci.com/developer/orbs/orb/datadog/agent
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://circleci.com/docs/2.0/env-vars/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

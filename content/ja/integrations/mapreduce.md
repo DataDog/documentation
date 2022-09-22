@@ -83,7 +83,7 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -121,8 +121,8 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -147,7 +147,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "mapreduce", "service": "<SERVICE_NAM
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

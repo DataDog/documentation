@@ -52,7 +52,7 @@ Live Search は、トレースページのデフォルトの表示です。Live 
 Live Search を使用すると、スパンは、Datadog Agent から送信された時点で、保持フィルターによりインデックス化する前に Datadog に表示されます。取り込まれたすべてのスパンは、15 分間利用可能になり（ローリングウィンドウ）、サンプリングなしで表示されます。
 
 {{< tabs >}}
-{{< tab "リスト表示" >}}
+{{% tab "リスト表示" %}}
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search リスト表示" video="true" >}}
 
@@ -71,8 +71,8 @@ Live Search の **List view** では、以下のことが可能です。
 
 **注**: スパンを選択すると、ストリームが一時停止し、そのスパンの詳細がトレース側のパネルに表示されます。
 
-{{< /tab >}}
-{{< tab "時系列表示" >}}
+{{% /tab %}}
+{{% tab "時系列表示" %}}
 
 {{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search 時系列表示" video="true" >}}
 
@@ -88,7 +88,7 @@ Live Search の **List view** では、以下のことが可能です。
 
 **注:** 保持済みのスパンを使用した場合のみ、ダッシュボードとモニターへのエクスポートが可能です。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### フィルタリング
@@ -116,12 +116,12 @@ Live Search と同じように、保持されたトレースを検索するこ�
 {{< img src="tracing/live_search/searching-retained-traces.mp4" alt="保持されたトレースを検索する" video="true" >}}
 
 {{< tabs >}}
-{{< tab "リスト表示" >}}
+{{% tab "リスト表示" %}}
 
 カスタム保持フィルターとインテリジェント保持フィルターでインデックス化されたすべてのスパンは、リスト表示で検索することが可能です。ただし、どの保持フィルターにもインデックス化されていないスパンにのみ表示されるタグでフィルタリングすると、[Live Search](#live-search-for-15-minutes) の場合と異なり、検索結果は何も返されません。
 
-{{< /tab >}}
-{{< tab "時系列表示" >}}
+{{% /tab %}}
+{{% tab "時系列表示" %}}
 
 (インテリジェント保持フィルターではなく) カスタム保持フィルターによりインデックス化されたすべてのスパンは、トレース分析に使用する際に検索可能です。
 
@@ -130,7 +130,7 @@ Live Search と同じように、保持されたトレースを検索するこ�
 [1]: /ja/dashboards/widgets/timeseries/
 [2]: /ja/monitors/create/types/apm/?tab=analytics
 [3]: /ja/notebooks
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 保持構成

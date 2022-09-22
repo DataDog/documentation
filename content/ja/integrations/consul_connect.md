@@ -72,7 +72,7 @@ Consul Connect を実行しているサービスで [Datadog Agent][4] をイン
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -90,8 +90,8 @@ Consul Connect を実行しているサービスで [Datadog Agent][4] をイン
 [1]: https://www.consul.io/commands/connect/envoy#admin-bind
 [2]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#metric-collection
 [3]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#log-collection
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -111,7 +111,7 @@ Consul Connect を実行しているサービスで [Datadog Agent][4] をイン
 [2]: https://www.consul.io/docs/connect/proxies/envoy#envoy_stats_bind_addr
 [3]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#metric-collection
 [4]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#log-collection
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

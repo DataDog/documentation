@@ -58,7 +58,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
 #### 수동
 
 {{< tabs >}}
-{{< tab "DEB" >}}
+{{% tab "DEB" %}}
 
 데비안(Debian) 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명령어를 실행하세요.
 
@@ -105,8 +105,8 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGE
     sudo systemctl restart datadog-agent.service
     ```
 
-{{< /tab >}}
-{{< tab "RPM" >}}
+{{% /tab %}}
+{{% tab "RPM" %}}
 
 RPM 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명령어를 실행하세요.
 
@@ -152,7 +152,7 @@ RPM 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명
     ```
 
 [1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## CLI

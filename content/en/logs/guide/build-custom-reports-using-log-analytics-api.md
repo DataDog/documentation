@@ -37,7 +37,7 @@ The following examples are covered in this guide:
 ### Getting counts
 
 {{< tabs >}}
-{{< tab "Table" >}}
+{{% tab "Table" %}}
 
 With the following API call, build a `table` with `count` of log events grouped by the field `status` and showing the top 3 items. The `type` must be `total`.
 
@@ -115,8 +115,8 @@ The result dataset comprises the `buckets` object as shown in the following samp
 }
 
 ```
-{{< /tab >}}
-{{< tab "Timeseries" >}}
+{{% /tab %}}
+{{% tab "Timeseries" %}}
 With the following API call, build a `timeseries` with `count` of log events grouped by the field `status` rolled up every `1m`. The `type` must be `timeseries`.
 
 **API call:**
@@ -200,13 +200,13 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Getting stats
 
 {{< tabs >}}
-{{< tab "Average" >}}
+{{% tab "Average" %}}
 
 With the following API call, build a `table` with `avg` of values in a `metric` such as `@http.response_time` grouped by the field `status`. The `type` must be `total`.
 
@@ -282,8 +282,8 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 Similarly, you can build an `avg` timeseries by setting `type` as `timeseries`.
 
-{{< /tab >}}
-{{< tab "Sum" >}}
+{{% /tab %}}
+{{% tab "Sum" %}}
 
 With the following API call, build a `table` with `sum` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
@@ -350,8 +350,8 @@ Similarly, build a `sum` timeseries by setting `type` as `timeseries`.
 }
 ```
 
-{{< /tab >}}
-{{< tab "Min" >}}
+{{% /tab %}}
+{{% tab "Min" %}}
 
 With the following API call, build a `table` with `min` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
@@ -418,8 +418,8 @@ Similarly, build a `min` timeseries by setting `type` as `timeseries`.
 }
 ```
 
-{{< /tab >}}
-{{< tab "Max" >}}
+{{% /tab %}}
+{{% tab "Max" %}}
 
 With the following API call, build a `table` with `max` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
@@ -486,7 +486,7 @@ Similarly, you can build a `max` timeseries by setting `type` as `timeseries`.
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Getting percentiles

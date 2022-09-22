@@ -14,7 +14,7 @@ further_reading:
 現在 Docker を使用している場合は、Docker Hub および GCR を介して利用できる、環境内で使用できるコンテナイメージが複数あります。
 
 {{< tabs >}}
-{{< tab "Docker Hub" >}}
+{{% tab "Docker Hub" %}}
 
 | Datadog 製品                         | Docker Hub                               | Docker プルコマンド                              |
 |-----------------------------------------|------------------------------------------|--------------------------------------------------|
@@ -34,8 +34,8 @@ further_reading:
 [8]: /ja/getting_started/synthetics/private_location.md
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 
-{{< /tab >}}
-{{< tab "GCR" >}}
+{{% /tab %}}
+{{% tab "GCR" %}}
 
 | Datadog 製品                          | GCR                                      | GCR プルコマンド                                                  |
 |------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
@@ -54,7 +54,7 @@ further_reading:
 [7]: /ja/getting_started/synthetics/private_location/
 [8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

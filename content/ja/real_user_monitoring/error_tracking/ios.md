@@ -39,7 +39,7 @@ iOS のクラッシュとエラー追跡を有効にすると、リアルユー�
 依存関係マネージャーに従ってパッケージを追加し、初期化スニペットを更新します。
 
 {{< tabs >}}
-{{< tab "CocoaPods" >}}
+{{% tab "CocoaPods" %}}
 `DatadogSDKCrashReporting` を `Podfile` に追加します。
 ```ruby
 platform :ios, '11.0'
@@ -49,16 +49,16 @@ target 'App' do
   pod 'DatadogSDKCrashReporting'
 end
 ```
-{{< /tab >}}
-{{< tab "Swift パッケージマネージャー" >}}
+{{% /tab %}}
+{{% tab "Swift パッケージマネージャー" %}}
 `https://github.com/DataDog/dd-sdk-ios` にパッケージを追加し、`DatadogCrashReporting` をアプリケーションターゲットにリンクします。
 
 **注:** `Datadog` や `DatadogStatic` ライブラリにリンクする場合、代わりに `DatadogCrashReporting` にリンクしてください。
 
-{{< /tab >}}
-{{< tab "Carthage" >}}
+{{% /tab %}}
+{{% tab "Carthage" %}}
 `github "DataDog/dd-sdk-ios"` を `Cartfile` に追加し、 `DatadogCrashReporting.xcframework` をアプリケーションターゲットにリンクします。
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 初期化スニペットを更新してクラッシュレポートを含めます。

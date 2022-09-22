@@ -62,7 +62,7 @@ Pour en savoir plus, consultez la section [Utiliser les tags][11].
 
 {{< site-region region="us" >}}
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 
 ```swift
 Datadog.initialize(
@@ -82,8 +82,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -98,13 +98,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -123,8 +123,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -139,13 +139,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -164,8 +164,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -180,13 +180,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -205,8 +205,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -221,13 +221,13 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.initialize(
     appContext: .init(),
@@ -246,8 +246,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -262,7 +262,7 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
 
@@ -273,26 +273,26 @@ Le SDK iOS RUM effectue automatiquement le suivi des sessions utilisateur, en fo
 Configurez et enregistrez le monitor RUM. Cette opération, qui doit être effectuée une seule fois, s'effectue généralement dans le code `AppDelegate` de votre application :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 import Datadog
 
 Global.rum = RUMMonitor.initialize()
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 @import DatadogObjc;
 
 DDGlobal.rum = [[DDRUMMonitor alloc] init];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour surveiller les requêtes envoyées par l'instance `URLSession` en tant que ressources, assignez `DDURLSessionDelegate()` en tant que `delegate` de la `URLSession` en question :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 let session = URLSession(
     configuration: .default,
@@ -300,14 +300,14 @@ let session = URLSession(
     delegateQueue: nil
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                       delegate:[[DDNSURLSessionDelegate alloc] init]
                                                  delegateQueue:nil];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Effectuer le suivi d'événements en arrière-plan
@@ -317,12 +317,12 @@ Vous pouvez effectuer le suivi d'événements, tels que des crashs et des requê
 Ajoutez l'extrait suivant lors de l'initialisation dans votre configuration Datadog :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 .trackBackgroundEvents()
 
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 <div class="alert alert-info"><p>Le suivi d'événements en arrière-plan peut générer des sessions supplémentaires et augmenter vos coûts. Si vous avez la moindre question, <a href="https://docs.datadoghq.com/help/">contactez l'assistance Datadog.</a></p>
 </div>

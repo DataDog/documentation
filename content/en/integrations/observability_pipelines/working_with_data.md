@@ -60,7 +60,7 @@ See [VRL Function Reference][1] for a full list of VRL built-in functions.
 To get started, see the following example for a basic remap transform that contains a VRL program in the `source` field:
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 transforms:
@@ -73,8 +73,8 @@ transforms:
         .timestamp = now()
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [transforms.modify]
@@ -86,8 +86,8 @@ source = '''
 '''
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -103,7 +103,7 @@ source = '''
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 In this example, the `type` field is set to a `remap` transform. The `inputs` field defines where it receives events from the previously defined `previous_component_id` source. The first line in the `source` field deletes the `.user_info` field. At scale, dropping fields is particularly useful for reducing the payload of your events and cutting down on spend for your downstream services. 
@@ -128,7 +128,7 @@ The configuration below uses VRL to modify the log event by:
 - Converting the message to lowercase. 
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 transforms:
@@ -143,8 +143,8 @@ transforms:
          .message = downcase(string!(.message))
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [transforms.parse_syslog_id]
@@ -158,8 +158,8 @@ source = '''
 '''
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -175,7 +175,7 @@ source = '''
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 This configuration returns the following:
@@ -223,7 +223,7 @@ The below snippet is an example log that you want to route to different destinat
 To route based on the `level` value, see the below configuration example:
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 transforms:
@@ -238,8 +238,8 @@ transforms:
       error: .level == "error"
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [transforms.splitting_logs_id]
@@ -253,8 +253,8 @@ inputs = [ "my-source-or-transform-id" ]
   error = '.level == "error"'
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -275,7 +275,7 @@ inputs = [ "my-source-or-transform-id" ]
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Each row under the `route` field defines a route identifier, followed by a logical condition representing the filter of the `route`. The end result of this `route` can then be referenced as an input by other components with the name `<transform_name>.<route_id>`. 
@@ -283,7 +283,7 @@ Each row under the `route` field defines a route identifier, followed by a logic
 For example, if you wish to route logs with `level` field values of `warn` and `error` to Datadog, see the following example: 
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sinks:
@@ -296,8 +296,8 @@ sinks:
     compression: gzip
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [sinks.my_sink_id]
@@ -307,8 +307,8 @@ default_api_key = "${DATADOG_API_KEY_ENV_VAR}"
 compression = "gzip"
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -326,7 +326,7 @@ compression = "gzip"
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 See the [Route Transform documentation][23] for more information.
@@ -336,7 +336,7 @@ See the [Route Transform documentation][23] for more information.
 Downstream services can sometimes get overwhelmed when there is a spike in volume, which can lead to data being dropped. Use the `throttle` transform to safeguard against this scenario and also enforce usage quotas on users. The `throttle` transform rate limits logs passing through a topology. See the following example of a `throttle` transform configuration:
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 transforms:
@@ -349,8 +349,8 @@ transforms:
     window_secs: 1
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [transforms.my_transform_id]
@@ -360,8 +360,8 @@ threshold = 100
 window_secs = 1
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -379,7 +379,7 @@ window_secs = 1
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 The `threshold` field defines the number of events allowed for a given bucket. `window_secs` defines the time frame in which the configured threshold is applied. In the example configuration, when the component receives more than 100 events in a span of 1 second, any additional events are dropped. 

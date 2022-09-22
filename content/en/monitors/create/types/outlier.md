@@ -52,7 +52,7 @@ To ensure your alert is properly calibrated, set the time window in the preview 
 Datadog offers two types of outlier detection algorithms: `DBSCAN`/`scaledDBSCAN` and `MAD`/`scaledMAD`. It is recommended to use the default algorithm, DBSCAN. If you have trouble detecting the correct outliers, adjust the parameters of DBSCAN or try the MAD algorithm. The scaled algorithms may be useful if your metrics are large scale and closely clustered.
 
 {{< tabs >}}
-{{< tab "DBSCAN" >}}
+{{% tab "DBSCAN" %}}
 
 [DBSCAN][1] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes:
 
@@ -65,8 +65,8 @@ Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Each 
 This implementation of DBSCAN takes one parameter, `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀. Set the tolerance parameter according to how similarly you expect your groups to behave—larger values allow for more tolerance in how much a group can deviate from its peers.
 
 [1]: https://en.wikipedia.org/wiki/DBSCAN
-{{< /tab >}}
-{{< tab "MAD" >}}
+{{% /tab %}}
+{{% tab "MAD" %}}
 
 [MAD][1] (median absolute deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in a way that is not influenced by outliers.
 
@@ -78,12 +78,12 @@ Tolerance specifies the number of deviations a point needs to be away from the m
 Percent refers to the percentage of points in the series considered as outliers. If this percentage is exceeded, the whole series is marked as an outlier.
 
 [1]: https://en.wikipedia.org/wiki/Median_absolute_deviation
-{{< /tab >}}
-{{< tab "Scaled" >}}
+{{% /tab %}}
+{{% tab "Scaled" %}}
 
 DBSCAN and MAD have scaled versions (scaledDBSCAN and scaledMAD). In most situations, the scaled algorithms behave the same as their regular counterparts. However, if DBSCAN/MAD algorithms are identifying outliers within a closely clustered group of metrics, and you would like the outlier detection algorithm to scale with the overall magnitude of the metrics, try the scaled algorithms.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ##### DBSCAN vs. MAD

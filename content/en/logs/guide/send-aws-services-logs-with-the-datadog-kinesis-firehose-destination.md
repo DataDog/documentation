@@ -25,7 +25,7 @@ AWS fully manages Amazon Kinesis Data Firehose, so you don't need to maintain an
 ## Setup
 
 {{< tabs >}}
-{{< tab "Kinesis Firehose Delivery stream" >}}
+{{% tab "Kinesis Firehose Delivery stream" %}}
 
 Datadog recommends using a Kinesis stream as input when using the Datadog Kinesis destination. It gives you the ability to forward your logs to multiple destinations in case Datadog is not the only consumer for those logs. If you only want to send logs to Datadog, or if you already have a Kinesis Datastream with your logs, ignore step 1.
 
@@ -50,14 +50,14 @@ To ensure that logs that fail through the Delivery Stream are still sent to Data
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "CloudFormation template" >}}
+{{% tab "CloudFormation template" %}}
 
 Alternatively, customize this CloudFormation template and install it from the AWS Console. See the full [Kinesis CloudFormation template][1].
 
 [1]: /resources/json/kinesis-logs-cloudformation-template.json
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Send AWS logs to your Kinesis stream

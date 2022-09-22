@@ -39,14 +39,14 @@ type: multi-code-lang
 
 {{< tabs >}}
 
-{{< tab "環境変数" >}}
+{{% tab "環境変数" %}}
 
 環境変数を使用してトレーサーを構成するには、インスツルメントされたアプリケーションを起動する前に変数を設定します。さまざまな環境で環境変数を設定する方法については、[プロセス環境変数の構成][1]を参照してください。
 
 [1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/#configuring-process-environment-variables
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "コード" >}}
+{{% tab "コード" %}}
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer.Configure()` を呼び出す前に、この `TracerSettings` インスタンスにプロパティを設定します。例:
 
@@ -71,9 +71,9 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 Tracer.Configure(settings);
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "JSON ファイル" >}}
+{{% tab "JSON ファイル" %}}
 
 JSON ファイルを使ってトレーサーを構成するには、インスツルメンテーションされたアプリケーションのディレクトリに `datadog.json` を作成します。ルート JSON オブジェクトは各設定のキー値を持つオブジェクトである必要があります。例:
 
@@ -86,7 +86,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

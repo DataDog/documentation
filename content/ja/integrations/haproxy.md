@@ -123,7 +123,7 @@ Haproxy チェックは [Datadog Agent][2] パッケージに含まれていま�
 #### Agent の構成
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -164,8 +164,8 @@ Haproxy チェックは [Datadog Agent][2] パッケージに含まれていま�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=helm#use-python-3-with-datadog-agent-v6
 [4]: https://github.com/DataDog/integrations-core/blob/7.34.x/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -208,7 +208,7 @@ spec:
 ```
 
 [1]: https://app.datadoghq.com/account/settings#agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -235,7 +235,7 @@ Agent は、メトリクスを統計エンドポイントを使って収集し�
 
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -307,8 +307,8 @@ Agent は、メトリクスを統計エンドポイントを使って収集し�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 #### Docker
 
@@ -337,8 +337,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]
 [1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 #### Kubernetes
 
@@ -420,8 +420,8 @@ spec:
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
 [4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
-{{< /tab >}}
-{{< tab "ECS" >}}
+{{% /tab %}}
+{{% tab "ECS" %}}
 
 #### ECS
 
@@ -468,7 +468,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
 [3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

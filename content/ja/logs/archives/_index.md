@@ -38,7 +38,7 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 ### インテグレーションを設定
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
@@ -50,57 +50,57 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 * 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
 
 [1]: /ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
-{{< /tab >}}
-{{< tab "Azure Storage" >}}
+{{% /tab %}}
+{{% tab "Azure Storage" %}}
 
 新しいストレージアカウントのあるサブスクリプション内で [Azure インテグレーション][1]をセットアップしていない場合、セットアップします。これには、[Datadog が統合に使用できるアプリ登録の作成][2]も含まれます。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /ja/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Google Cloud Storage" >}}
+{{% tab "Google Cloud Storage" %}}
 
 GCS ストレージバケットを持つプロジェクト用の [GCP インテグレーション][1]をセットアップしていない場合、セットアップします。これには [Datadog が統合に使用できる GCP サービスアカウントの作成][2] も含まれます。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /ja/integrations/google_cloud_platform/?tab=datadogussite#setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### ストレージバケットを作成
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。バケットを一般が閲覧できないように設定してください。
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Azure Storage" >}}
+{{% tab "Azure Storage" %}}
 
 * [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** アクセス層を選択します。
 * そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Google Cloud Storage" >}}
+{{% tab "Google Cloud Storage" %}}
 
 [GCP アカウント][1]にアクセスし、アーカイブを転送する [GCS バケットを作成][2]します。「Choose how to control access to objects」で、「Set object-level and bucket-level permissions」を選択します。
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### アクセス許可を設定
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 次の 2 つのアクセス許可ステートメントを IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。
 
@@ -138,8 +138,8 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 
 
 [1]: /ja/logs/archives/rehydrating/
-{{< /tab >}}
-{{< tab "Azure Storage" >}}
+{{% /tab %}}
+{{% tab "Azure Storage" %}}
 
 * Datadog アプリに、ストレージアカウントへ書き込み、ここからリハイドレートするために必要な許可を与えます。
 * [ストレージアカウントのページ][1]でストレージアカウントを選択し、**Access Control (IAM)** で **Add -> Add Role Assignment** を選択します。
@@ -148,8 +148,8 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Storage Blob Data Contributor ロールを Datadog アプリに追加します。" style="width:75%;">}}
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
-{{< /tab >}}
-{{< tab "Google Cloud Storage" >}}
+{{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
 
 Datadog GCP サービスアカウントに、バケットへアーカイブを書き込むために必要な許可を与えます。
 
@@ -163,7 +163,7 @@ Datadog GCP サービスアカウントに、バケットへアーカイブを�
 
 [1]: https://console.cloud.google.com/apis/credentials
 [2]: https://console.cloud.google.com/iam-admin/iam
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### ログをバケットにルーティング
@@ -173,7 +173,7 @@ Datadog の[アーカイブページ][4]に移動し、下にある **Add a new 
 [ログの書き込みアーカイブ権限][3]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。
 
@@ -181,8 +181,8 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 {{< img src="logs/archives/logs_archive_aws_setup.png" alt="Datadog で S3 バケットの情報を設定"  style="width:75%;">}}
 
-{{< /tab >}}
-{{< tab "Azure Storage" >}}
+{{% /tab %}}
+{{% tab "Azure Storage" %}}
 
 **Azure Storage** アーカイブタイプを選択し、ストレージアカウントで Storage Blob Data Contributor ロールのある Datadog アプリ用の Azure テナントとクライアントを選択します。
 
@@ -191,8 +191,8 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 {{< img src="logs/archives/logs_archive_azure_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定"  style="width:75%;">}}
 
 
-{{< /tab >}}
-{{< tab "Google Cloud Storage" >}}
+{{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
 
 **GCS** のアーカイブタイプを選択し、ストレージバケットに書き込む権限を持つ GCS サービスアカウントを選択します。バケット名を入力します。
 
@@ -200,7 +200,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 {{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定"  style="width:75%;">}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 高度な設定
@@ -233,7 +233,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 #### ストレージクラス
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 [S3 バケットにライフサイクルコンフィギュレーションを設定][1]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
 
@@ -241,14 +241,14 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 #### サーバー側の暗号化 (SSE)
 
 {{< tabs >}}
-{{< tab "AWS S3" >}}
+{{% tab "AWS S3" %}}
 
 ##### SSE-S3
 
@@ -321,7 +321,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

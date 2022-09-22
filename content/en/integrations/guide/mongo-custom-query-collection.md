@@ -35,7 +35,7 @@ For the examples below, the following mongo collection `user_collection` is used
 Choose the type of query you would like to see an example for:
 
 {{< tabs >}}
-{{< tab "Count" >}}
+{{% tab "Count" %}}
 
 To monitor how many users are active at a given time, your [Mongo count command][1] would be:
 
@@ -60,8 +60,8 @@ This would emit one `gauge` metric `mongo.users` with one tag: `user:active`.
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /metrics/types/
-{{< /tab >}}
-{{< tab "Find" >}}
+{{% /tab %}}
+{{% tab "Find" %}}
 
 To monitor the age per user, your [Mongo find command][1] would be:
 
@@ -91,8 +91,8 @@ This would emit one `gauge` metric `mongo.example2.user.age` with two tags: `nam
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
 [2]: /metrics/types/
-{{< /tab >}}
-{{< tab "Aggregate" >}}
+{{% /tab %}}
+{{% tab "Aggregate" %}}
 
 To monitor the average age for an admin and a non-admin user, your [Mongo aggregate command][1] would be:
 
@@ -129,7 +129,7 @@ custom_queries:
 This would emit one `gauge` metric `mongo.example3.user.age` with two tags: `is_admin:true` and `is_admin:false` representing the average age of users for each tags.
 
 [1]: https://docs.mongodb.com/manual/reference/command/aggregate/#dbcmd.aggregate
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: After updating the Mongo YAML file, [restart the Datadog Agent][4].

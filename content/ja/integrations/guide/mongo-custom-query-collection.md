@@ -34,7 +34,7 @@ Datadog-Mongo インテグレーションでカスタムメトリクスを収集
 クエリタイプを選択すると例が表示されます。
 
 {{< tabs >}}
-{{< tab "Count" >}}
+{{% tab "Count" %}}
 
 所定時間のアクティブユーザー数を監視するには、次のような [Mongo count コマンド][1]を実行します。
 
@@ -59,8 +59,8 @@ custom_queries:
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /ja/metrics/types/
-{{< /tab >}}
-{{< tab "Find" >}}
+{{% /tab %}}
+{{% tab "Find" %}}
 
 ユーザーの平均年齢を監視するには、次のような [Mongo find コマンド][1]を実行します。
 
@@ -90,8 +90,8 @@ custom_queries:
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
 [2]: /ja/metrics/types/
-{{< /tab >}}
-{{< tab "Aggregate" >}}
+{{% /tab %}}
+{{% tab "Aggregate" %}}
 
 管理者および非管理者ユーザーの平均年齢を監視するには、次のような [Mongo aggregate コマンド][1]を実行します:
 
@@ -128,7 +128,7 @@ custom_queries:
 これにより、`is_admin:true` と `is_admin:false` の 2 つのタグを持つ 1 つの `gauge` メトリクス `mongo.example3.user.age`（各タグのユーザーの平均年齢を表す）が生成されます。
 
 [1]: https://docs.mongodb.com/manual/reference/command/aggregate/#dbcmd.aggregate
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: Mongo YAML ファイルを更新した後、[Datadog Agentを再起動][4]します。

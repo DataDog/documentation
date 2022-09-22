@@ -29,7 +29,7 @@ Vector の構成は、ログ、メトリクス、トレースを収集し、変�
 コンフィギュレーションファイル (例: `vector.toml`) を作成します。そして、以下のソースの例を追加します。
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sources:
@@ -39,8 +39,8 @@ sources:
     count: 100
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [sources.generate_syslog]
@@ -49,8 +49,8 @@ sources:
    count = 100
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 "sources": {
@@ -62,7 +62,7 @@ sources:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 この `source` コンポーネントは `generate_syslog` という一意の ID を持っています。こ一意の ID は `sink` コンポーネントでデータを変換してルーティングする際に重要です。
@@ -76,7 +76,7 @@ sources:
 次の例を使用して、`demo_logs` ソースから収集したデータを操作する[トランスフォームコンポーネント][2]を定義します。
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 transforms:
@@ -89,8 +89,8 @@ transforms:
         . = merge(., structured)
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [transforms.remap_syslog]
@@ -102,8 +102,8 @@ transforms:
 '''
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 "transforms": {
@@ -117,7 +117,7 @@ transforms:
   }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 この `transforms.remap_syslog` コンポーネントでは、`inputs` オプションが `generate_syslog` に設定されており、先に定義した `generate_syslog` ソースからイベントを受信することになります。このトランスフォームのコンポーネントタイプは `remap` です。
@@ -133,7 +133,7 @@ transforms:
 `transform` コンポーネントでパースされたデータを、次の[シンク][3]の例を使って、宛先にルーティングします。
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sinks:
@@ -145,8 +145,8 @@ sinks:
       codec: json
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [sinks.emit_syslog]
@@ -157,8 +157,8 @@ type = "console"
   codec = "json"
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 "sinks": {
@@ -174,7 +174,7 @@ type = "console"
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 この `sink` (または宛先) コンポーネントは `emit_syslog` という ID を持ちます。`inputs` オプションは、`remap_syslog` トランスフォームによって生成されたイベントをこのシンクで処理することを指定します。`encoding` オプションは、イベントを JSON フォーマットで出力するようにシンクに指示します。
@@ -186,7 +186,7 @@ type = "console"
 ソース、トランスフォーム、シンクの 3 つの基本コンポーネントが揃えば、これで Vector のコンフィギュレーションファイルは完成です。
 
 {{< tabs >}}
-{{< tab "YAML" >}}
+{{% tab "YAML" %}}
 
 ```yaml
 sources:
@@ -212,8 +212,8 @@ sinks:
       codec: json
 ```
 
-{{< /tab >}}
-{{< tab "TOML" >}}
+{{% /tab %}}
+{{% tab "TOML" %}}
 
 ```toml
 [sources.generate_syslog]
@@ -237,8 +237,8 @@ type = "console"
   codec = "json"
 ```
 
-{{< /tab >}}
-{{< tab "JSON" >}}
+{{% /tab %}}
+{{% tab "JSON" %}}
 
 ```json
 {
@@ -272,7 +272,7 @@ type = "console"
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 この構成をコンパイルして実行するには、以下のコマンドを実行します。

@@ -28,7 +28,7 @@ further_reading:
 メッセージ全体や[未加工のイベントの特定の属性][1]をパースするためのカスタム Grok ルールを作成できます。詳細については、[パースのセクション][3]を参照してください。ベストプラクティスとして、Grok プロセッサー毎のパース規則は最大 10 で使用することが推奨されます。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、Grok プロセッサープロセッサーを定義します。
 
@@ -39,8 +39,8 @@ further_reading:
 **Parse my logs** をクリックして、基底のパイプラインを流れるログの 3 つのパースルールのセットを始動させます。そこから属性の名前を微調整し、必要に応じて他のタイプのログに新しいルールを追加します。この機能を使用するには、対応するログがインデックス化され、実際に流入している必要があります。除外フィルターを一時的に無効にするか、サンプリングして、これを機能させることができます。
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次の Grok パーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -67,7 +67,7 @@ further_reading:
 
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ログ日付リマッパー
@@ -95,15 +95,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 * 複数のログ日付リマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ログ日付リマッパープロセッサーを定義します。
 
 {{< img src="logs/processing/processors/log_date_remapper.png" alt="ログ日付リマッパー"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のログ日付リマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -124,7 +124,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ログステータスリマッパー
@@ -154,15 +154,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 **注**: 複数のログステータスリマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ログステータスリマッパープロセッサーを定義します。
 
 {{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="重大度リマッパープロセッサータイル"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のログステータスリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -183,7 +183,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## サービスリマッパー
@@ -193,15 +193,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 **注**: 複数のサービスリマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ログサービスリマッパープロセッサーを定義します。
 
 {{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="サービスリマッパープロセッサータイル"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のログサービスリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -222,7 +222,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ログメッセージリマッパー
@@ -232,15 +232,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 複数のログメッセージリマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ログメッセージリマッパープロセッサーを定義します。
 
 {{< img src="logs/processing/processors/message_processor.png" alt="メッセージプロセッサー"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のログメッセージリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1] を使用します。
 
@@ -261,7 +261,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。デフォルト: `msg`。            |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## リマッパー
@@ -279,15 +279,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 リマッパーのターゲットが属性の場合、リマッパーは値を新しい型（`String`、`Integer`、`Double`）への変換を試みることができます。型変換できない場合、元の型が保持されます（注、`Double` の小数点は `.` を使用します）。 
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、リマッパープロセッサーを定義します。たとえば、ここでは `user` を `user.firstname` に再マップします。
 
 {{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="属性リマッパープロセッサータイル"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -320,7 +320,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `override_on_conflict` | Boolean          | いいえ       | ターゲット要素が既に設定されている場合に上書きするかどうか。デフォルト: `false`。            |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## URL パーサー
@@ -330,15 +330,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 {{< img src="logs/processing/processors/url_processor.png" alt="URL プロセッサー"  style="width:80%;" >}}
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、URL パーサープロセッサーを定義します。
 
 {{< img src="logs/processing/processors/url_processor_tile.png" alt="URL プロセッサータイル"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 ```json
 {
@@ -358,7 +358,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト:  `http.url`                                                                      |
 | `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト: `http.url_details`。 |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ユーザーエージェントパーサー
@@ -370,15 +370,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 **注**: エンコードされた User-Agent がログに含まれている場合 (IIS ログなど) は、パースの前に **URL をデコードする**ようにプロセッサーを構成してください。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ユーザーエージェントプロセッサーを定義します。
 
 {{< img src="logs/processing/processors/useragent_processor_tile.png" alt="ユーザーエージェントプロセッサータイル"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のユーザーエージェントパーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -403,7 +403,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `is_encoded` | Boolean          | いいえ       | ソース属性が URL エンコードされているかどうかを定義します。デフォルト: `false`。                                                     |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## カテゴリプロセッサー
@@ -419,7 +419,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 * カテゴリプロセッサーを定義したら、 [ログステータスリマッパー][9]を使用してカテゴリをログステータスにマップします。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、カテゴリプロセッサーを定義します。たとえば、Web アクセスログをステータスコード範囲に基づいて分類 (応答コード 200 ～ 299 の場合は「OK」、応答コード 300 ～ 399 の場合は「通知」など) するには、次のプロセッサーを追加します。
 
@@ -430,8 +430,8 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 {{< img src="logs/processing/processors/category_processor_result.png" alt="カテゴリープロセッサー結果"  style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のカテゴリプロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -457,7 +457,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `target`     | 文字列          | はい      | 一致するカテゴリによって値が定義されるターゲット属性の名前。                              |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 算術演算プロセッサー
@@ -478,15 +478,15 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 * 測定単位の拡張が必要な場合は、 [スケールフィルター][10]を参照してください。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、算術演算プロセッサーを定義します。
 
 {{< img src="logs/processing/processors/arithmetic_processor.png" alt="算術演算プロセッサー"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次の算術演算プロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -511,7 +511,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `is_replace_missing` | Boolean | いいえ       | `true` の場合は、`expression` 内の欠落している属性をすべて 0 に置き換えます。`false` の場合は、属性が欠落していると演算をスキップします。デフォルト: `false`。 |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ストリングビルダープロセッサー
@@ -529,7 +529,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 * テンプレートの結果は 256 文字以内に収める必要があります。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ストリングビルダープロセッサーを定義します。
 
@@ -580,8 +580,8 @@ John,Jack
 ```
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のストリングビルダープロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -606,7 +606,7 @@ John,Jack
 | `is_replace_missing` | Boolean | ✕       | `true` の場合は、`template` 内の欠落している属性をすべて空の文字列に置き換えます。`false` の場合 (デフォルト) は、属性が欠落していると演算をスキップします。 |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## GeoIP パーサー
@@ -614,7 +614,7 @@ John,Jack
 GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット属性パスに含まれる大陸、国、都道府県 (州)、都市名などの情報を抽出します。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 {{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP プロセッサー"  style="width:80%;">}}
 
@@ -624,8 +624,8 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP 例"  style="width:60%;">}}
 
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次の Geo-IP パーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -648,7 +648,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 | `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト:  `network.client.geoip`  |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ルックアッププロセッサー
@@ -658,7 +658,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 また、このプロセッサーで本番環境に接続を試みた MAC アドレスと盗難に遭ったマシンのリストを照合し、接続元をチェックすることも可能です。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 {{< img src="logs/processing/processors/lookup_processor.png" alt="ルックアッププロセッサー"  style="width:80%;">}}
 
@@ -673,8 +673,8 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 マッピングテーブルのサイズ上限は 100Kb です。この制限はプラットフォーム上のすべてのルックアッププロセッサーに適用されますが、エンリッチメントテーブルはより大容量のファイルサイズをサポートしています。
 
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のルックアッププロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -701,7 +701,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 | `default_lookup` | 文字列           | いいえ       | リスト上にソースの値がない場合、ターゲット属性に設定する値です。                                                                                          |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## トレースリマッパー
@@ -713,15 +713,15 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 2. トレースリマッパープロセッサーを使用して、トレース ID として関連付けられるログ属性を定義します。
 
 {{< tabs >}}
-{{< tab "UI" >}}
+{{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、トレースリマッパープロセッサーを定義します。次のように、プロセッサータイルでトレース ID 属性パスを入力します。
 
 {{< img src="logs/processing/processors/trace_processor.png" alt="トレース ID プロセッサー"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
-{{< /tab >}}
-{{< tab "API" >}}
+{{% /tab %}}
+{{% tab "API" %}}
 
 次のトレースリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
@@ -742,7 +742,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 | `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト: `dd.trace_id`。    |
 
 [1]: /ja/api/v1/logs-pipelines/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

@@ -56,7 +56,7 @@ Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect Pyth
 ### Log into a file
 
 {{< tabs >}}
-{{< tab "JSON-log-formatter" >}}
+{{% tab "JSON-log-formatter" %}}
 
 Usage example with [JSON-log-formatter][1]:
 
@@ -88,8 +88,8 @@ The log file contains the following log record (inline):
 ```
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
-{{< /tab >}}
-{{< tab "Python-json-logger" >}}
+{{% /tab %}}
+{{% tab "Python-json-logger" %}}
 
 Usage example with [Python-json-logger][1]:
 
@@ -121,7 +121,7 @@ For information on configuring the handler, see the [Python-json-logger][2] docu
 
 [1]: https://github.com/madzak/python-json-logger
 [2]: https://github.com/madzak/python-json-logger#customizing-fields
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configure the Datadog Agent

@@ -38,7 +38,7 @@ Les live processes de Datadog vous offrent une visibilité en temps réel sur le
 Si vous utilisez l'Agent v5, suivez ce [processus d'installation][1]. Si vous utilisez les versions 6 ou 7, consultez [ces instructions][2].
 
 {{< tabs >}}
-{{< tab "Linux/Windows" >}}
+{{% tab "Linux/Windows" %}}
 
 Une fois l'installation de l'Agent Datadog effectuée, activez la collecte des live processes en modifiant le [fichier de configuration principal de l'Agent][1]. Définissez le paramètre suivant sur `true` :
 
@@ -62,8 +62,8 @@ Une fois la configuration effectuée, [redémarrez l'Agent][2].
 
 [1]: /fr/agent/guide/agent-configuration-files/
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de tout autre paramètre personnalisé, les attributs suivants (selon les cas) :
 
@@ -79,8 +79,8 @@ Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de to
 
 
 [1]: /fr/agent/docker/#run-the-docker-agent
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Dans le manifeste [dd-agent.yaml][1] utilisé pour créer le Daemonset, ajoutez les variables d'environnement, le montage de volume et le volume suivants :
 
@@ -106,8 +106,8 @@ Consultez la section sur l'[installation Daemonset][2] standard et les pages d'i
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: /fr/agent/kubernetes/
 [3]: /fr/agent/docker/#run-the-docker-agent
-{{< /tab >}}
-{{< tab "Helm" >}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 Mettez à jour votre fichier [datadog-values.yaml][1] avec la configuration de collecte de processus suivante, puis mettez à niveau votre chart Helm Datadog :
 
@@ -121,7 +121,7 @@ datadog:
 
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -136,7 +136,7 @@ Pour masquer des données sensibles sur une page Live Processes, l'Agent nettoie
 **Remarque** : la mise en correspondance est **sensible à la casse**.
 
 {{< tabs >}}
-{{< tab "Linux/Windows" >}}
+{{% tab "Linux/Windows" %}}
 
 Pour définir votre propre liste à fusionner avec celle par défaut, utilisez le champ `custom_sensitive_words` à la section `process_config` du fichier `datadog.yaml`. Appliquez des wildcards (`*`) pour définir votre propre contexte de correspondance. Toutefois, un wildcard unique (`'*'`) ne peut pas être utilisé en tant que mot sensible.
 
@@ -161,9 +161,9 @@ process_config:
     strip_proc_arguments: true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Vous pouvez utiliser le chart Helm pour définir votre propre liste, qui est fusionnée avec la liste par défaut. Ajoutez les variables d'environnement `DD_SCRUB_ARGS` et `DD_CUSTOM_SENSITIVE_WORDS` à votre fichier `datadog-values.yaml`, et modifiez votre chart Helm Datadog :
 
@@ -204,7 +204,7 @@ datadog:
                   value: "true" 
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

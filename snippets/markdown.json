@@ -159,7 +159,7 @@
 	"Reuse":{
 		"prefix": ";;reuse",
 		"body": [
-			"{{< reuse/prodname/reuse_filename >}}"
+			"{{% reuse/prodname/reuse_filename %}}"
 		],
 		"description": "General reuse shortcode"
 	},

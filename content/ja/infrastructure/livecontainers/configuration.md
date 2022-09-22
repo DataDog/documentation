@@ -19,7 +19,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 ライブコンテナの Kubernetes リソースには、以下を構成する前に [Agent バージョン >= 7.27.0][2] および [Cluster Agent バージョン >= 1.11.0][3] が必要です。
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 公式の [Datadog Helm チャート][1]を使用している場合、
 
@@ -39,8 +39,8 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 [Cluster Agent][1] バージョン >= 1.11.0 は、DaemonSet を構成する前に必要となります。Cluster Agent が実行中で Agent と通信できることを確認してください。コンフィギュレーションの詳細は、[Cluster Agent のセットアップ][2]を参照してください。
 
@@ -117,7 +117,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 
 [1]: /ja/agent/cluster_agent/
 [2]: /ja/agent/cluster_agent/setup/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### リソース収集の互換性マトリックス
@@ -150,7 +150,7 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 ライブコンテナの Kubernetes リソースビューでは、最低限必要なバージョンが更新される前は、[Agent バージョン >= 7.21.1][2]および[Cluster Agent バージョン >= 1.9.0][3]が必要でした。これらの古いバージョンでは DaemonSetのコンフィギュレーションが若干異なっていたため、完全な手順が必要な場合は以下をご参照ください。
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 公式の [Datadog Helm チャート][1]を使用している場合、
 
@@ -164,8 +164,8 @@ Datadog Agent と Cluster Agent は、[ライブコンテナ][1]の Kubernetes �
 [1]: https://github.com/DataDog/helm-charts
 [2]: /ja/infrastructure/livecontainers/#configuration
 [3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 Cluster Agent が動作していて、Agent が通信可能である必要があります。コンフィギュレーションについては、[Cluster Agent のセットアップ][1]を参照してください。
 
@@ -244,7 +244,7 @@ Cluster Agent が動作していて、Agent が通信可能である必要があ
   ```
 
 [1]: /ja/agent/cluster_agent/setup/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### カスタムタグをリソースに追加
@@ -257,7 +257,7 @@ Cluster Agent が動作していて、Agent が通信可能である必要があ
 
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 公式の Helm チャートを使用している場合、[values.yaml][1] にそれぞれ `agents.containers.processAgent.env` および `clusterAgent.env` を設定して Process Agent と Cluster Agent の両方に環境変数を追加します。
 
@@ -278,8 +278,8 @@ Cluster Agent が動作していて、Agent が通信可能である必要があ
 次に、新しいリリースをデプロイします。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 Process Agent と Cluster Agent の両コンテナに環境変数を設定します。
 
@@ -288,7 +288,7 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
   value: "tag1:value1 tag2:value2"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### コンテナを対象に入れる/除外する

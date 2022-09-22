@@ -15,7 +15,7 @@ further_reading:
 If you are using Docker, there are several container images available through GCR, ECR, and Docker Hub that you may want to use within your environment:
 
 {{< tabs >}}
-{{< tab "GCR" >}}
+{{% tab "GCR" %}}
 
 | Datadog service                          | GCR                                      | GCR Pull Command                                                  |
 |------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
@@ -34,8 +34,8 @@ If you are using Docker, there are several container images available through GC
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
 [7]: /getting_started/synthetics/private_location/
 [8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
-{{< /tab >}}
-{{< tab "ECR" >}}
+{{% /tab %}}
+{{% tab "ECR" %}}
 
 | Datadog service                         | Docker Hub                               | Docker Pull Command                                                     |
 |-----------------------------------------|------------------------------------------|-------------------------------------------------------------------------|
@@ -55,8 +55,8 @@ If you are using Docker, there are several container images available through GC
 [7]: https://gallery.ecr.aws/datadog/cluster-agent
 [8]: /getting_started/synthetics/private_location
 [9]: https://gallery.ecr.aws/datadog/synthetics-private-location-worker
-{{< /tab >}}
-{{< tab "Docker Hub" >}}
+{{% /tab %}}
+{{% tab "Docker Hub" %}}
 
 | Datadog service                         | Docker Hub                               | Docker Pull Command                                        |
 |-----------------------------------------|------------------------------------------|------------------------------------------------------------|
@@ -79,7 +79,7 @@ To ensure that the images are not tampered with, enable content trust by setting
 [8]: /getting_started/synthetics/private_location
 [9]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [10]: https://docs.docker.com/engine/security/trust/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

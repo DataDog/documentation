@@ -48,7 +48,7 @@ The `Timeboard` endpoint allows you to programmatically create, update delete an
 ### Examples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -88,8 +88,8 @@ api.Timeboard.create(title=title,
 
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -122,8 +122,8 @@ template_variables = [{
 dog.create_dashboard(title, description, graphs, template_variables)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<DATADOG_API_KEY>
@@ -153,7 +153,7 @@ curl  -X POST -H "Content-type: application/json" \
 "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Update a timeboard
@@ -190,7 +190,7 @@ curl  -X POST -H "Content-type: application/json" \
 ### Examples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -221,8 +221,8 @@ api.Timeboard.update(
 )
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -255,8 +255,8 @@ template_variables = [{
 dog.update_dashboard(dash_id, title, description, graphs, template_variables)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<DATADOG_API_KEY>
@@ -309,7 +309,7 @@ curl  -X PUT -H "Content-type: application/json" \
 "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&application_key=${app_key}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Delete a timeboard
@@ -328,7 +328,7 @@ Delete an existing timeboard.
 ### Examples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -367,8 +367,8 @@ newboard = api.Timeboard.create(title=title,
 api.Timeboard.delete(newboard['dash']['id'])
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -383,8 +383,8 @@ dash_id = '2534'
 dog.delete_dashboard(dash_id)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<DATADOG_API_KEY>
@@ -417,7 +417,7 @@ dash_id=$(curl  -X POST -H "Content-type: application/json" \
 curl -X DELETE "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&application_key=${app_key}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Get a timeboard
@@ -435,7 +435,7 @@ Fetch an existing dashboard's definition.
 ### Examples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -450,8 +450,8 @@ initialize(**options)
 api.Timeboard.get(4953)
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -466,8 +466,8 @@ dash_id = '2542'
 dog.get_dashboard(dash_id)
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<DATADOG_API_KEY>
@@ -500,7 +500,7 @@ dash_id=$(curl  -X POST -H "Content-type: application/json" \
 curl "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&application_key=${app_key}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Get all timeboards
@@ -518,7 +518,7 @@ Fetch all of your timeboard definitions.
 ### Examples
 
 {{< tabs >}}
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 ```python
 from datadog import initialize, api
@@ -533,8 +533,8 @@ initialize(**options)
 print api.Timeboard.get_all()
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 require 'rubygems'
@@ -548,8 +548,8 @@ dog = Dogapi::Client.new(api_key, app_key)
 dog.get_dashboards
 ```
 
-{{< /tab >}}
-{{< tab "Bash" >}}
+{{% /tab %}}
+{{% tab "Bash" %}}
 
 ```bash
 api_key=<DATADOG_API_KEY>
@@ -558,6 +558,6 @@ app_key=<DATADOG_APPLICATION_KEY>
 curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 

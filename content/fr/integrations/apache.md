@@ -78,7 +78,7 @@ Le check Apache est fourni avec l'[Agent Datadog][2]. Pour commencer à recueill
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -134,8 +134,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 #### Docker
 
@@ -165,8 +165,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<NOM_SERVICE>"}
 [1]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#installation
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 #### Kubernetes
 
@@ -220,8 +220,8 @@ spec:
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
 [4]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 [5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=daemonset#configuration
-{{< /tab >}}
-{{< tab "ECS" >}}
+{{% /tab %}}
+{{% tab "ECS" %}}
 
 #### ECS
 
@@ -267,7 +267,7 @@ Définissez ensuite des [intégrations de logs][5] en tant qu'étiquettes Docker
 [1]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/fr/agent/amazon_ecs/logs/?tab=linux
 [3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

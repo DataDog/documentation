@@ -39,14 +39,14 @@ You can set configuration settings in the .NET Tracer with any of the following 
 
 {{< tabs >}}
 
-{{< tab "Environment variables" >}}
+{{% tab "Environment variables" %}}
 
 To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-core/#configuring-process-environment-variables
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Code" >}}
+{{% tab "Code" %}}
 
 To configure the tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
 
@@ -71,9 +71,9 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 Tracer.Configure(settings);
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "JSON file" >}}
+{{% tab "JSON file" %}}
 
 To configure the tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key-value pair for each setting. For example:
 
@@ -86,7 +86,7 @@ To configure the tracer using a JSON file, create `datadog.json` in the instrume
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
