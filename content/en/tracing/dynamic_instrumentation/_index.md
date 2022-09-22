@@ -23,7 +23,7 @@ further_reading:
   access it.
 {{< /beta-callout >}}
 
-Dynamic Instrumentation lets you capture code-level service context and metrics data, and sends it to Datadog to use with analytics, alerts, graphs, and other Datadog features. Define probes from within Datadog to get information from your running application without needing to do any code changes or redeployments.
+Dynamic Instrumentation lets you capture data from your live applications without needing to do any code changes or redployment.
 
 ## Getting started
 
@@ -72,7 +72,7 @@ To create a snapshot probe:
 2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 3. Select **Snapshot** as the probe type.
 4. If not prefilled, choose a service from the list.
-5. If not prefilled, choose environment and version.
+5. If not prefilled, choose runtime, environment and version.
 6. If you set up Source Code Integration for the service, you can select the file where you want to set the probe.
 7. In the source code, select a line on which to set the probe.
 
@@ -89,7 +89,7 @@ To create a metric probe:
 5. Select a metric type.
 6. Input a metric expression.
 7. If not prefilled, choose a service from the list.
-8. If not prefilled, choose environment and version.
+5. If not prefilled, choose runtime, environment and version.
 9. If you set up Source Code Integration for the service, you can select the file where you want to set the probe.
 10. In the source code, select a line on which to set the probe.
 
