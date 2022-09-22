@@ -136,7 +136,7 @@ Datadog의 Amazon Web Services 통합은 <a href="https://docs.aws.amazon.com/Am
 - [액세스 키](?tab=accesskeysgovcloudorchinaonly#setup): GovCloud 또는 중국에서만 사용합니다
 
 {{< tabs >}}
-{{% tab "Role delegation" %}}
+{{< tab "Role delegation" >}}
 
 필요한 AWS 역할 구성 방법을 선택하세요. CloudFormation을 권장합니다.
 
@@ -191,9 +191,9 @@ CloudFormation으로 AWS를 구성하려면 [AWS 시작하기 가이드][1]를 �
 [7]: /kr/integrations/faq/aws-integration-with-terraform
 [8]: /kr/integrations/faq/error-datadog-not-authorized-sts-assume-role/#pagetitle
 [9]: https://docs.datadoghq.com/kr/integrations/amazon_web_services/#resource-collection
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "액세스 키(GovCloud 또는 중국 전용)" %}}
+{{< tab "액세스 키(GovCloud 또는 중국 전용)" >}}
 
 #### AWS
 
@@ -215,7 +215,7 @@ CloudFormation으로 AWS를 구성하려면 [AWS 시작하기 가이드][1]를 �
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 {{% aws-permissions %}}

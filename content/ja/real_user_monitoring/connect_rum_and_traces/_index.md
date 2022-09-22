@@ -41,7 +41,7 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 ### RUM の設定
 
 {{< tabs >}}
-{{% tab "ブラウザ RUM" %}}
+{{< tab "ブラウザ RUM" >}}
 
 1.  [RUM ブラウザモニタリング][1]を設定します。
 
@@ -79,8 +79,8 @@ RUM をトレースに接続するには、`service` フィールドにブラウ
 <div class="alert alert-info">ブラウザ SDK の初期化後に生成されたリクエストには、エンドツーエンドのトレーシングを利用できます。初めの HTML 文書のエンドツーエンドトレースおよび始めのブラウザリクエストはサポートされません。</div>
 
 [1]: /ja/real_user_monitoring/browser/
-{{% /tab %}}
-{{% tab "Android RUM" %}}
+{{< /tab >}}
+{{< tab "Android RUM" >}}
 
 1.  [RUM Android モニタリング][1]を設定します。
 
@@ -108,8 +108,8 @@ RUM をトレースに接続するには、`service` フィールドにブラウ
 **注**: `traceSamplingRate` は RUM セッションのサンプリングには影響**しません**。バックエンドのトレースのみがサンプリングされます。
 
 [1]: /ja/real_user_monitoring/android/
-{{% /tab %}}
-{{% tab "iOS RUM" %}}
+{{< /tab >}}
+{{< tab "iOS RUM" >}}
 
 1.  [RUM iOS モニタリング][1]を設定します。
 
@@ -149,7 +149,7 @@ RUM をトレースに接続するには、`service` フィールドにブラウ
 **注**: `tracingSamplingRate` は RUM セッションのサンプリングには影響**しません**。バックエンドのトレースのみがサンプリングされます。
 
 [1]: /ja/real_user_monitoring/ios/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## サポートされるライブラリ

@@ -1,7 +1,7 @@
 ---
 # New params
 receive_enabled: true
-sync_enabled: true
+sync_enabled: false
 
 # if true, no github or transifex api writes will happen.
 # instead logs will be created to simulate results.

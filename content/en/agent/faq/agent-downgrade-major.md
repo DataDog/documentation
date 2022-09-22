@@ -8,7 +8,7 @@ aliases:
 ## Downgrade the Agent from v7 to v6
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 First, [uninstall Agent v7 from your system][1].
 
@@ -26,8 +26,8 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 
 [1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: /agent/versions/upgrade_to_agent_v6/
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 1. [Uninstall Agent v7 from your system][1].
 2. [Download the Datadog Agent installer][2].
@@ -41,8 +41,8 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
-{{% /tab %}}
-{{% tab "MacOS" %}}
+{{< /tab >}}
+{{< tab "MacOS" >}}
 
 First, [uninstall Agent v7 from your system][1].
 
@@ -54,7 +54,7 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 
 [1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: /agent/versions/upgrade_to_agent_v6/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Downgrade the Agent from v6 to v5
@@ -62,7 +62,7 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If so, choose your OS to see the detailed instructions on how to downgrade your Agent from version 6 to version 5:
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 **Debian Flavored Systems**:
 
@@ -178,22 +178,22 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     ```
 
 [1]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Run the agent installer package for the latest 5.x version, instructions can be found
 [in the Datadog agent integration page][1].
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-{{% /tab %}}
-{{% tab "MacOS" %}}
+{{< /tab >}}
+{{< tab "MacOS" >}}
 
 1. Stop the Agent with the systray app, if it's running.
 2. Exit the systray app.
 3. Uninstall the Datadog Agent application.
 4. Install the Agent 5 DMG package using your preferred installation method.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: /agent/guide/upgrade-to-agent-v6/

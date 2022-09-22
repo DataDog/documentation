@@ -73,7 +73,7 @@ CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+{{< tab "Postgres ≥ 10" >}}
 
 Create the following schema **in every database**:
 
@@ -85,8 +85,8 @@ GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+{{< /tab >}}
+{{< tab "Postgres 9.6" >}}
 
 Create the following schema **in every database**:
 
@@ -111,7 +111,7 @@ LANGUAGE sql
 SECURITY DEFINER;
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
@@ -146,7 +146,7 @@ SECURITY DEFINER;
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+{{< tab "Postgres ≥ 10" >}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -162,8 +162,8 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+{{< /tab >}}
+{{< tab "Postgres 9.6" >}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -180,7 +180,7 @@ psql -h localhost -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
@@ -192,7 +192,7 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
 
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+{{< tab "Postgres ≥ 10" >}}
 
    ```yaml
    init_config:
@@ -206,8 +206,8 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        # dbname: '<DB_NAME>'
    ```
 
-{{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+{{< /tab >}}
+{{< tab "Postgres 9.6" >}}
 
    ```yaml
    init_config:
@@ -223,7 +223,7 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        # dbname: '<DB_NAME>'
    ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 2. [Restart the Agent][10].

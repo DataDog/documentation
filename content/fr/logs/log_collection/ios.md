@@ -26,7 +26,7 @@ Envoyez des logs à Datadog à partir de vos applications iOS avec la [biblioth�
 1. Déclarez la bibliothèque en tant que dépendance en fonction de votre gestionnaire de paquets :
 
     {{< tabs >}}
-    {{% tab "CocoaPods" %}}
+    {{< tab "CocoaPods" >}}
 
 Vous pouvez utiliser [CocoaPods][6] pour installer `dd-sdk-ios` :
 ```
@@ -35,16 +35,16 @@ pod 'DatadogSDK'
 
 [6]: https://cocoapods.org/
 
-    {{% /tab %}}
-    {{% tab "Swift Package Manager (SPM)" %}}
+    {{< /tab >}}
+    {{< tab "Swift Package Manager (SPM)" >}}
 
 Pour réaliser l'intégration grâce au Swift Package Manager d'Apple, ajoutez ce qui suit en tant que dépendance à votre `Package.swift` :
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))
 ```
 
-    {{% /tab %}}
-    {{% tab "Carthage" %}}
+    {{< /tab >}}
+    {{< tab "Carthage" >}}
 
 Vous pouvez utiliser [Carthage][7] pour installer `dd-sdk-ios` :
 ```
@@ -53,13 +53,13 @@ github "DataDog/dd-sdk-ios"
 
 [7]: https://github.com/Carthage/Carthage
 
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
 2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][2]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-ios`, car elles risqueraient d'être exposées côté client dans le bytecode de l'IPA de l'application iOS. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2] :
 
     {{< tabs >}}
-    {{% tab "Site américain" %}}
+    {{< tab "Site américain" >}}
 
 ```swift
 Datadog.initialize(
@@ -72,8 +72,8 @@ Datadog.initialize(
 )
 ```
 
-    {{% /tab %}}
-    {{% tab "Site européen" %}}
+    {{< /tab >}}
+    {{< tab "Site européen" >}}
 
 ```swift
 Datadog.initialize(
@@ -87,7 +87,7 @@ Datadog.initialize(
 )
 ```
 
-    {{% /tab %}}
+    {{< /tab >}}
     {{< /tabs >}}
 
     Pour répondre aux exigences du RGPD, le SDK nécessite la valeur `trackingConsent` à son initialisation.

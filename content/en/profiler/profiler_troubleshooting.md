@@ -236,7 +236,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 {{< tabs >}}
 
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 1. Check that the Agent is installed and running.
 
@@ -281,9 +281,9 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Windows" %}}
+{{< tab "Windows" >}}
 
 1. Check that the Agent is installed and running and is visible in the Windows Services panel.
 
@@ -328,7 +328,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

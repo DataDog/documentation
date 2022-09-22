@@ -43,7 +43,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    Or one of the following methods, depending on where your application runs:
 
    {{< tabs >}}
-{{% tab "Docker CLI" %}}
+{{< tab "Docker CLI" >}}
 
 Add the following environment variable value to your Docker command line:
 
@@ -51,8 +51,8 @@ Add the following environment variable value to your Docker command line:
 $ docker run -e DD_APPSEC_ENABLED=true [...]
 ```
 
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
+{{< /tab >}}
+{{< tab "Dockerfile" >}}
 
 Add the following environment variable value to your container Dockerfile:
 
@@ -60,8 +60,8 @@ Add the following environment variable value to your container Dockerfile:
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Update your deployment configuration file for APM and add the ASM environment variable:
 
@@ -77,8 +77,8 @@ spec:
               value: "true"
 ```
 
-{{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{< /tab >}}
+{{< tab "AWS ECS" >}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -92,7 +92,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

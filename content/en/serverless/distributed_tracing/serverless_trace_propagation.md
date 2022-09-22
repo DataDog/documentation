@@ -33,7 +33,7 @@ To successfully connect trace context between resources sending traces, you need
 The following code samples outline how to pass trace context in outgoing payloads to services which do not support HTTP headers, or managed services not supported [natively][4] by Datadog in Node and Python:
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 In Python, you can use the `get_dd_trace_context` helper function to pass tracing context to outgoing events in a Lambda functions:
 
@@ -56,8 +56,8 @@ def handler(event, context):
     )
 ```
 
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 In Node, you can use the `getTraceHeaders` helper function to pass tracing context to outgoing events in a Lambda function:
 
@@ -71,7 +71,7 @@ module.exports.handler = async event => {
   await myCustomClient.sendRequest(payload)
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### From hosts
@@ -102,7 +102,7 @@ To extract the above trace context from the consumer Lambda function, you need t
 The following code samples outline sample extractors you might use for propagating trace context across a third party system, or an API which does not support standard HTTP headers.
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 ```py
 def extractor(payload):
     trace_headers = json.loads(payload["_datadog"]);
@@ -111,8 +111,8 @@ def extractor(payload):
     sampling_priority = trace_headers["x-datadog-sampling-priority"];
     return trace_id, parent_id, sampling_priority
 ```
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 ```js
 exports.json = (payload) => {
@@ -130,8 +130,8 @@ exports.json = (payload) => {
     };
 };
 ```
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 ```go
 var exampleSQSExtractor = func(ctx context.Context, ev json.RawMessage) map[string]string {
 	eh := events.SQSEvent{}
@@ -165,7 +165,7 @@ cfg := &ddlambda.Config{
 }
 ddlambda.WrapFunction(handler, cfg)
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

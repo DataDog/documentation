@@ -36,7 +36,7 @@ A single OTLP metric may be mapped to several Datadog metrics with a suffix indi
 
 
 {{< tabs >}}
-{{% tab "Sum" %}}
+{{< tab "Sum" >}}
 
 An OTLP Sum represents a sum of reported measurements over a time window. For example, a Sum can be used to track the total number of connections made to a database or the total number of requests to an endpoint. Sums have two features that influence the mapping:
 
@@ -49,15 +49,15 @@ The default mapping is as follows:
 3. Delta sums are exported as Datadog counts.
 
 [1]: /dashboards/functions/arithmetic/#cumulative-sum
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 
 An OTLP Gauge represents a sampled value at a given time. Only the last value on a given time window is included in the OTLP metrics.
 
 OTLP Gauges are mapped to Datadog Gauges, since they do not provide an aggregation semantic. Both integer and floating-point Gauge data points are mapped to floating point numbers in the Datadog format. 
 
-{{% /tab %}}
-{{% tab "Histogram" %}}
+{{< /tab >}}
+{{< tab "Histogram" >}}
 
 An OTLP Histogram represents the statistical distribution of a set of values on a given time window, by storing certain aggregation metrics such as the population sum or count together with a series of bucket counts. Histograms have one feature that influences the mapping:
 
@@ -90,8 +90,8 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 
 [1]: /metrics/distributions
 [2]: /dashboards/functions/arithmetic/#cumulative-sum
-{{% /tab %}}
-{{% tab "Summary" %}}
+{{< /tab >}}
+{{< tab "Summary" >}}
 
 An OTLP Summary is a legacy type that conveys quantile information about a population over a time window. OTLP Summary types are not produced by OpenTelemetry SDKs but may be produced by other components for backwards compatibility.
 
@@ -107,7 +107,7 @@ An OTLP Summary is a legacy type that conveys quantile information about a popul
 : Value of a given quantile.<br>
 **Datadog In-App Type**: GAUGE
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Attribute mapping
@@ -134,7 +134,7 @@ If sending data from a remote host, add the ['resource detection' processor][1] 
 ### Example
 
 {{< tabs >}}
-{{% tab "Sum" %}}
+{{< tab "Sum" >}}
 
 Suppose you are using an OpenTelemetry Counter instrument from a single application, which, by default, exports metrics of a cumulative **monotonic** Sum type. The following table summarizes Datadog behavior:
 
@@ -152,8 +152,8 @@ Suppose you are using an OpenTelemetry UpDownCounter instrument from a single ap
 | #2                | [3,-4,1,2]           | 17             | 17                        | GAUGE               |
 | #3                | [-1]                 | 16             | 16                        | GAUGE               |
 
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 
 Suppose you are using an OpenTelemetry Gauge instrument, `temperature`, from a single application.
 The following table summarizes Datadog behavior:
@@ -164,8 +164,8 @@ The following table summarizes Datadog behavior:
 | #2                | 72               | 72               | 72                        | GAUGE               |
 | #3                | 70               | 70               | 70                        | GAUGE               |
 
-{{% /tab %}}
-{{% tab "Histogram" %}}
+{{< /tab >}}
+{{< tab "Histogram" >}}
 
 Suppose you are using an OpenTelemetry Histogram instrument, `request.response_time.histogram`, from two web servers: `webserver:web_1` and `webserver:web_2`. Suppose in a given collection period, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this collection period, the following five aggregations represent the global statistical distribution of all values collected from both web servers:
 
@@ -189,8 +189,8 @@ Alternatively, if you are using the `counters` mode and enabling the `send_count
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
 [1]: /metrics/distributions
-{{% /tab %}}
-{{% tab "Summary" %}}
+{{< /tab >}}
+{{< tab "Summary" >}}
 
 Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.summary`, from one web server. Suppose in a given collection period, the web server reports the metric with the values `[1,1,1,2,2,2,3,3]`. The following metrics would be reported, if min, max, and median quantiles are enabled:
 
@@ -203,7 +203,7 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 | `request.response_time.distribution.quantile` | `3`    | `quantile:1.0`                      | GAUGE               |
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further reading

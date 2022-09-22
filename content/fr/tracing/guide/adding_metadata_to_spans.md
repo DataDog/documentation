@@ -24,7 +24,7 @@ Ajoutez des [tags][1] sous la forme de paires clé/valeur à une span pour corr�
 ## Ajouter des tags à une span
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 L'IU Datadog utilise des [tags][2] pour définir des métadonnées au niveau des [spans][2]. La liste complète de ces tags est disponible dans les API de [Datadog][3] et [OpenTracing][4].
 
@@ -56,8 +56,8 @@ class ServletImpl extends AbstractHttpServlet {
 [2]: /fr/tracing/visualization/#spans
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
 [4]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 Ajoutez directement des [tags][1] à une [span][2] en appelant `set_tag`. Par exemple, avec le gestionnaire de routage suivant :
 
@@ -88,8 +88,8 @@ def handle_customer(customer_id):
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 Ajoutez directement des [tags][1] aux objets `Datadog::Span` en appelant `#set_tag` :
 
@@ -115,8 +115,8 @@ current_span.set_tag('<CLÉ_TAG>', '<VALEUR_TAG>') unless current_span.nil?
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 Ajoutez directement des [tags][1] à une interface `Span` en appelant `SetTag` :
 
@@ -171,8 +171,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 Ajoutez directement des [tags][1] aux objets span en appelant `setTag` ou `addTags` :
 
@@ -200,8 +200,8 @@ span.setTag('<CLÉ_TAG>', '<VALEUR_TAG>')
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 Ajoutez directement des [tags][1] à un objet `Datadog.Trace.Span` en appelant `Span.SetTag()`. Par exemple :
 
@@ -219,8 +219,8 @@ scope.Span.SetTag("<CLÉ_TAG>", "<VALEUR_TAG>");
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 Ajoutez directement des [tags][1] à un objet `DDTrace\Span` en appelant `Span::setTag()`. Par exemple :
 
@@ -239,13 +239,13 @@ Ajoutez directement des [tags][1] à un objet `DDTrace\Span` en appelant `Span::
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Ajouter des tags à l'ensemble des spans
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
 Ajoutez des [tags][1] à l'ensemble des [spans][2] en configurant le traceur à l'aide de la propriété système `Ddd.trace.global.tags` :
 
@@ -257,8 +257,8 @@ java -javaagent:<CHEMIN-AGENT-JAVA-DD>.jar \
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 
 Ajoutez des [tags][1] à l'ensemble des [spans] en configurant le traceur à l'aide de la méthode `tracer.set_tags` :
 
@@ -269,8 +269,8 @@ tracer.set_tags({ 'env': 'dev' })
 ```
 
 [1]: /fr/tracing/visualization/#span-tags
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 Ajoutez des [tags][1] à l'ensemble des [spans][2] en configurant l'option `tags` du traceur :
 
@@ -285,8 +285,8 @@ Consultez la [documentation relative à l'API][3] pour en savoir plus.
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 Ajoutez des [tags][1] à l'ensemble des [spans][2] en configurant l'option `tags` du traceur :
 
@@ -306,8 +306,8 @@ func main() {
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /tab >}}
+{{< tab "Node.js" >}}
 
 Ajoutez des [tags][1] à l'ensemble des [spans][2] en configurant le paramètre `tags` du traceur :
 
@@ -322,8 +322,8 @@ const tracer = require('dd-trace').init({
 
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 Ajoutez des [tags][1] à l'ensemble des [spans][2] générées en configurant le traceur. La configuration peut être définie de plusieurs façons, comme expliqué dans la section [Configuration .NET][3].
 
@@ -336,8 +336,8 @@ DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
 [3]: /fr/tracing/setup/dotnet/#configuration
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 Utilisez la variable d'environnement `DD_TRACE_GLOBAL_TAGS` pour ajouter des [tags][1] à l'ensemble des [spans][2] générées. Consultez la section [Configuration PHP][3]
 pour découvrir comment définir des variables d'environnements.
@@ -349,8 +349,8 @@ DD_TRACE_GLOBAL_TAGS=key1:value1,key2:value2
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
 [3]: /fr/tracing/setup/php/#configuration
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /tab >}}
+{{< tab "C++" >}}
 
 Ajoutez directement des [tags][1] à un objet [span][2] en appelant `Span::SetTag`. Par exemple :
 
@@ -366,7 +366,7 @@ Les valeurs correspondent au [type de variable][3] et peuvent être des objets c
 [1]: /fr/tracing/visualization/#span-tags
 [2]: /fr/tracing/visualization/#spans
 [3]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

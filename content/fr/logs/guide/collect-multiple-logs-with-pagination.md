@@ -24,7 +24,7 @@ Pour récupérer une liste de logs contenant plus de 1 000 logs (soit la limit
 
 {{< tabs >}}
 
-{{% tab "API V1" %}}
+{{< tab "API V1" >}}
 
 Commencez par créer une requête afin de récupérer les logs correspondant à un contexte donné, tel qu'une requête donnée dans un intervalle défini :
 
@@ -93,9 +93,9 @@ Pour voir toutes vos pages de logs, continuez à renvoyer votre requête avec le
 
 **Remarque** : pour mieux contrôler les résultats de pagination, utilisez un paramètre `time` absolu. N'utilisez pas le mot-clé `now`.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "API V2" %}}
+{{< tab "API V2" >}}
 Commencez par créer une requête afin de récupérer les logs correspondant à un contexte donné, tel qu'une requête donnée dans un intervalle défini :
 
 ```bash
@@ -182,7 +182,7 @@ On obtient alors ces résultats :
 }
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

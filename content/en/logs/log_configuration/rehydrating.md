@@ -108,7 +108,7 @@ An external archive must be configured in order to rehydrate data from it. [Foll
 Datadog requires the permission to read from your archives in order to rehydrate content from them. This permission can be changed at any time.
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
+{{< tab "AWS S3" >}}
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
 {{< /site-region >}}
@@ -150,9 +150,9 @@ Datadog only supports rehydrating from archives that have been configured to use
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Azure Storage" %}}
+{{< tab "Azure Storage" >}}
 
 Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
 
@@ -160,16 +160,16 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 
 [1]: /logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Google Cloud Storage" %}}
+{{< tab "Google Cloud Storage" >}}
 
 In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [GCP IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role"  style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 *Log Rehydration is a trademark of Datadog, Inc.

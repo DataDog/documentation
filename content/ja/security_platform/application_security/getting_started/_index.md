@@ -38,7 +38,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 
 {{< tabs >}}
 
-{{% tab "Rails" %}}
+{{< tab "Rails" >}}
    アプリケーションコードにイニシャライザーを追加して、APM トレーサーを有効にします。
 
    ```ruby
@@ -78,9 +78,9 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
    end
    ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Sinatra" %}}
+{{< tab "Sinatra" >}}
 
    ```ruby
    require 'sinatra'
@@ -111,26 +111,26 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
      c.appsec.instrument :sinatra
    end
    ```
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Rack" %}}
+{{< tab "Rack" >}}
    `config.ru` ファイルに以下を追加して、APM トレーサーを有効にします。
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
 または、アプリケーションが実行される場所に応じて、以下の方法のいずれかを使用します。
 
 {{< tabs >}}
-{{% tab "Docker CLI" %}}
+{{< tab "Docker CLI" >}}
 
 ```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
+{{< /tab >}}
+{{< tab "Dockerfile" >}}
 
 コンテナの Dockerfile に以下の環境変数の値を追加します。
 
@@ -138,8 +138,8 @@ docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 APM 用の構成 yaml ファイルコンテナを更新し、AppSec の環境変数を追加します。
 
@@ -155,8 +155,8 @@ spec:
               value: "true"
 ```
 
-{{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{< /tab >}}
+{{< tab "AWS ECS" >}}
 
 以下を環境セクションに追加して、ECS タスク定義 JSON ファイルを更新します。
 
@@ -170,15 +170,15 @@ spec:
 ]
 ```
 
-{{% /tab %}}
-{{% tab "AWS Fargate" %}}
+{{< /tab >}}
+{{< tab "AWS Fargate" >}}
 
 コード内で ASM を初期化するか、サービス起動時に環境変数 `DD_APPSEC_ENABLED` を true に設定します。
 ```shell
 env DD_APPSEC_ENABLED=true rails server
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

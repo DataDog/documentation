@@ -64,18 +64,18 @@ CREATE USER datadog FOR LOGIN datadog;
 AWS はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
 {{< tabs >}}
-{{% tab "Windows Host" %}}
+{{< tab "Windows Host" >}}
 {{% dbm-sqlserver-agent-setup-windows %}}
-{{% /tab %}}
-{{% tab "Linux Host" %}}
+{{< /tab >}}
+{{< tab "Linux Host" >}}
 {{% dbm-sqlserver-agent-setup-linux %}}
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 {{% dbm-sqlserver-agent-setup-docker %}}
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## RDS インテグレーションをインストールする

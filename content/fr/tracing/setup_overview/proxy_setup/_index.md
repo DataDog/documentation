@@ -46,7 +46,7 @@ aliases:
 Vous pouvez configurer le tracing de façon à recueillir les informations de trace liées aux proxies.
 
 {{< tabs >}}
-{{% tab "Envoy" %}}
+{{< tab "Envoy" >}}
 
 L'APM Datadog est inclus dans Envoy v1.9.0 et les versions ultérieures.
 
@@ -234,8 +234,8 @@ Les [variables d'environnement][2] dépendent de la version du traceur C++ inté
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /fr/tracing/setup/cpp/#environment-variables
-{{% /tab %}}
-{{% tab "NGINX" %}}
+{{< /tab >}}
+{{< tab "NGINX" >}}
 
 L'APM Datadog peut prendre en charge NGINX en utilisant une combinaison de plug-ins et de configurations.
 Les instructions ci-dessous utilisent le paquet NGINX disponible dans les [référentiels Linux][1] officiels et des binaires pré-compilés pour les plug-ins.
@@ -380,8 +380,8 @@ Ce qui précède remplace le nom de service par défaut `nginx-ingress-controlle
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
 [7]: https://github.com/kubernetes/ingress-nginx
-{{% /tab %}}
-{{% tab "Istio" %}}
+{{< /tab >}}
+{{< tab "Istio" >}}
 
 Datadog surveille chaque aspect de votre environnement Istio, afin que vous puissiez :
 - Plonger au cœur des traces distribuées pour les applications qui effectuent des transactions sur le maillage avec l'APM (voir ci-dessous).
@@ -500,7 +500,7 @@ Le processus de sélection automatique du protocole peut déterminer que le traf
 [8]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
 [9]: /fr/tracing/setup/cpp/#environment-variables
 [10]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

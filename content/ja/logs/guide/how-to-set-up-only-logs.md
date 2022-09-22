@@ -12,7 +12,7 @@ title: Datadog Agent をログ収集のみに使用
 ペイロードを無効にするには、Agent v6.4 以降を実行している必要があります。これにより、メトリクスデータの送信が無効になり、ホストが Datadog に表示されなくなります。以下のステップを実行してください。
 
 {{< tabs >}}
-{{% tab "Host " %}}
+{{< tab "Host " >}}
 
 1. [datadog.yaml コンフィギュレーションファイル][1]を開きます。
 2. 以下の設定で `enable_payloads` 属性を追加します。
@@ -31,8 +31,8 @@ title: Datadog Agent をログ収集のみに使用
 [1]: /ja/agent/guide/agent-configuration-files/
 [2]: /ja/logs/log_collection/
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 コンテナ Agent を使用している場合は、環境変数 `DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
 
@@ -55,8 +55,8 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Agent を Kubernetes にデプロイしている場合は、環境変数 `DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
 
@@ -186,5 +186,5 @@ spec:
         - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}

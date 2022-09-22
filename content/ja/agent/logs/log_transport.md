@@ -40,7 +40,7 @@ Agent が使用している転送を確認するには、[Agent status コマン
 下記のコンフィギュレーションを使用して、TCP または HTTPS 転送を実行します。
 
 {{< tabs >}}
-{{% tab "HTTPS" %}}
+{{< tab "HTTPS" >}}
 
 バージョン v6.14 以降/v7.14 以降 の Agent で HTTPS 転送を実行するには、Agent の[メインコンフィギュレーションファイル][1] (`datadog.yaml`) を次のように更新します。
 
@@ -58,8 +58,8 @@ logs_config:
 デフォルトで、Datadog Agent はポート `443` を使用して HTTPS 経由でログを Datadog に送信します。
 
 [1]: /ja/agent/guide/agent-configuration-files/
-{{% /tab %}}
-{{% tab "TCP" %}}
+{{< /tab >}}
+{{< tab "TCP" >}}
 
 TCP 転送を実行するには、Agent の[メインコンフィギュレーションファイル][1] (`datadog.yaml`) を次のように更新します。
 
@@ -78,7 +78,7 @@ logs_config:
 
 
 [1]: /ja/agent/guide/agent-configuration-files/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**:  SOCKS5 プロキシは 圧縮 HTTPS でまだサポートされていないため、[SOCKS5 プロキシ][2]サーバーのセットアップでは TCP 転送が実行されます。

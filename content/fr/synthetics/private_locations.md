@@ -114,7 +114,7 @@ Lancez votre worker sur :
 
 {{< tabs >}}
 
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 Lancez votre worker en tant que conteneur autonome à l'aide de la commande d'exécution Docker fournie et du fichier de configuration précédemment créé :
 
@@ -122,9 +122,9 @@ Lancez votre worker en tant que conteneur autonome à l'aide de la commande d'ex
 docker run --rm -v $PWD/worker-config-<ID_EMPLACEMENT>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 Créez une ConfigMap Kubernetes avec le fichier JSON précédemment créé en exécutant la commande suivante :
 
@@ -171,7 +171,7 @@ Exécutez la commande ci-dessous pour appliquer la configuration à votre pod :
 kubectl apply -f private-worker-pod.yaml
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

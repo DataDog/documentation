@@ -34,7 +34,7 @@ title: Android ログの収集
 
 {{< site-region region="us" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -50,8 +50,8 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -66,13 +66,13 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -90,8 +90,8 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -107,13 +107,13 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -131,8 +131,8 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -148,13 +148,13 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -172,8 +172,8 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -189,13 +189,13 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 {{< tabs >}}
-{{% tab "Kotlin" %}}
+{{< tab "Kotlin" >}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -213,8 +213,8 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 ```java
     public class SampleApplication extends Application {
         @Override
@@ -230,7 +230,7 @@ title: Android ログの収集
         }
     }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 {{< /site-region >}}
 
@@ -264,7 +264,7 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
 
 3. Android ロガーの構成：
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
          val logger = Logger.Builder()
             .setNetworkInfoEnabled(true)
@@ -274,8 +274,8 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
             .setLoggerName("<LOGGER_NAME>")
             .build()
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
           final Logger logger = new Logger.Builder()
             .setNetworkInfoEnabled(true)
@@ -285,7 +285,7 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
             .setLoggerName("<LOGGER_NAME>")
             .build();
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
 4. 次のいずれかの関数で、カスタムログエントリを Datadog に直接送信します。
@@ -300,7 +300,7 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
 
 5. キャッチされた例外はメッセージで送信できます。
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
         try { 
             doSomething() 
@@ -308,8 +308,8 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
             logger.e("Error while doing something", e) 
         }
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
         try {
             doSomething();
@@ -317,7 +317,7 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
             logger.e("Error while doing something", e);
         }
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
     **注**: すべてのロギングメソッドに Throwable をアタッチすることができます。
@@ -325,39 +325,39 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
 6. (任意) - ログメッセージと一緒にマップを提供し、発行されたログに属性を追加します。マップの各エントリーは属性として追加されます。
 
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
         logger.i("onPageStarted", attributes = mapOf("http.url" to url))
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("http.url", url);
         logger.i("onPageStarted", null, attributes);
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
 7. バッチ処理前にログイベントで属性を変更する必要がある場合は、SDK の初期化時に `EventMapper<LogEvent>` を実装することで上記の処理を行えます。
 
    {{< tabs >}}
-   {{% tab "Kotlin" %}}
+   {{< tab "Kotlin" >}}
    ```kotlin
         val config = Configuration.Builder(logsEnabled = true, ...)
                     // ...
                     .setLogEventMapper(logEventMapper)
                     .build()
    ```
-   {{% /tab %}}
-   {{% tab "Java" %}}
+   {{< /tab >}}
+   {{< tab "Java" >}}
    ```java
         Configuration config = new Configuration.Builder(true, true, true, true)
                     // ...
                     .setLogEventMapper(logEventMapper)
                     .build();
    ```
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
    **注**: `EventMapper<LogEvent>` の実装から null や異なるインスタンスが返された場合、イベントは削除されます。

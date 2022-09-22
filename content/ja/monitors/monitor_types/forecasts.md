@@ -59,7 +59,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 利用可能な予測アルゴリズムは `linear` と `seasonal` です。
 
 {{< tabs >}}
-{{% tab "Linear" %}}
+{{< tab "Linear" >}}
 
 安定した傾向を持っているが、季節パターンの繰り返しがないメトリクスには線形アルゴリズムを使用します。レベルシフトに対する線形アルゴリズムの感度を制御する 3 つの異なる_モデル_があります。
 
@@ -75,8 +75,8 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 {{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="線形リアクティブ"  style="width:80%;" >}}
 
-{{% /tab %}}
-{{% tab "Seasonal" %}}
+{{< /tab >}}
+{{< tab "Seasonal" >}}
 
 繰り返しパターンを持つメトリクスには季節アルゴリズムを使用します。選択肢として 3 つの異なる_季節性_があります。
 
@@ -90,7 +90,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 {{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="季節"  style="width:80%;">}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 通知

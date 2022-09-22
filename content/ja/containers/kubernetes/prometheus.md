@@ -49,7 +49,7 @@ Datadog メトリクスにおける Prometheus および OpenMetrics メトリ�
 OpenMetrics/Prometheus のメトリクスを公開する **pod** に以下の `annotations` を適用し、オートディスカバリーを使用して OpenMetrics または Prometheus のチェックを構成します。
 
 {{< tabs >}}
-{{% tab "Kubernetes (AD v2)" %}}
+{{< tab "Kubernetes (AD v2)" >}}
 
 **注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
 
@@ -78,8 +78,8 @@ spec:
     - name: '<CONTAINER_IDENTIFIER>'
 ```
 
-{{% /tab %}}
-{{% tab "Kubernetes (AD v1)" %}}
+{{< /tab >}}
+{{< tab "Kubernetes (AD v1)" >}}
 
 ```yaml
 # (...)
@@ -103,7 +103,7 @@ spec:
     - name: '<CONTAINER_IDENTIFIER>'
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 コンフィギュレーションには次のプレースホルダー値を使用します。
@@ -129,7 +129,7 @@ spec:
 
 2. [Prometheus `prometheus.yaml`][11] を使用して、ポッドにオートディスカバリーの構成をした Prometheus Deployment の例を起動します。
    {{< tabs >}}
-   {{% tab "Kubernetes (AD v2)" %}}
+   {{< tab "Kubernetes (AD v2)" >}}
 
    **注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
 
@@ -160,8 +160,8 @@ spec:
           - name: prometheus-example
           # (...)
    ```
-   {{% /tab %}}
-   {{% tab "Kubernetes (AD v1)" %}}
+   {{< /tab >}}
+   {{< tab "Kubernetes (AD v1)" >}}
 
    ```yaml
      # (...)
@@ -191,7 +191,7 @@ spec:
           # (...)
    ```
 
-   {{% /tab %}}
+   {{< /tab >}}
    {{< /tabs >}}
 
     Prometheus Deployment を作成するコマンド:
@@ -218,7 +218,7 @@ Prometheus Autodiscovery を使用して、Datadog Agent でネイティブ Prom
 #### 基本のコンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Helm `values.yaml` で、以下を追加します。
 
@@ -230,8 +230,8 @@ datadog:
     serviceEndpoints: true
   # (...)
 ```
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 Agent 用の DaemonSet マニフェスト `daemonset.yaml` に、Agent コンテナ用の以下の環境変数を追加します。
 ```yaml
@@ -248,7 +248,7 @@ Cluster Agent が有効な場合、そのマニフェスト `cluster-agent-deplo
   value: "true" 
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 これにより、Datadog Agent がネイティブ Prometheus アノテーションのあるポッドを検出し、対応する OpenMetrics チェックを生成するよう指示します。
@@ -264,7 +264,7 @@ Cluster Agent が有効な場合、そのマニフェスト `cluster-agent-deplo
 #### 高度なコンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 `values.yaml` の `additionalConfigs` コンフィギュレーションフィールドで、ネイティブの Prometheus アノテーション以外にも高度な OpenMetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
 
@@ -313,8 +313,8 @@ datadog:
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 Agent と Cluster Agent のマニフェストの `DD_PROMETHEUS_SCRAPE_CHECKS` 環境変数で、ネイティブの Prometheus アノテーション以外にも高度な OpenMetrics チェックコンフィギュレーションまたはオートディスカバリーのカスタムルールを定義することができます。
 
@@ -350,7 +350,7 @@ OpenMetrics チェックによりサポートされるすべての[コンフィ�
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## カスタムインテグレーションを公式インテグレーションに

@@ -34,7 +34,7 @@ This guide assumes that you already have a Vector pipeline set-up. If you’re n
 Vector has a wide array of functions that can [transform][7] your data before it is sent to Datadog. The simplest way to filter out a metric by a specific tag is to use the [filter transform][8]. For example, the following component filters out any metrics that do not have a `team_tag`, ensuring those metrics are dropped in your Vector pipeline.
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -46,8 +46,8 @@ transforms:
       exists(.tags.<team_tag>)
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```
 [transforms.my_transform_id]
@@ -58,13 +58,13 @@ transforms:
     '''
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Similarly, in cases where you want to filter out metrics by namespace instead of tags, use the following configuration.
 
 {{< tabs >}}
-{{% tab "YAML" %}}
+{{< tab "YAML" >}}
 
 ```yaml
 transforms:
@@ -76,8 +76,8 @@ transforms:
        .namespace == "foo" 
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
+{{< /tab >}}
+{{< tab "TOML" >}}
 
 ```
 [transforms.my_transform_id]
@@ -88,7 +88,7 @@ transforms:
     '''
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

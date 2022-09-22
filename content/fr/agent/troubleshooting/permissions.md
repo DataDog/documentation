@@ -84,7 +84,7 @@ Si vous avez activé le [check de processus][7] dans l'Agent qui s'exécute sur 
 Cela se produit lorsque des processus surveillés par le check de processus s'exécutent avec un utilisateur différent de l'utilisateur de l'Agent `dd-agent`. En réalité, l'utilisateur `dd-agent` ne dispose pas d'un accès complet à tous les fichiers dans `/proc`, l'emplacement dans lequel l'Agent effectue ses recherches pour recueillir les données de cette métrique.
 
 {{< tabs >}}
-{{% tab "Agent v6.3 et ultérieur" %}}
+{{< tab "Agent v6.3 et ultérieur" >}}
 
 Activez l'option `try_sudo` dans la configuration du check de processus et ajoutez les règles `sudoers` appropriées :
 
@@ -96,8 +96,8 @@ Cela permet au check de processus d'utiliser `sudo` pour exécuter la commande `
 
 Si la ligne `sudo: sorry, you must have a tty to run sudo` s'affiche dans le fichier `error.log` Datadog, vous devez utiliser `visudo` et mettre en commentaire la ligne `Default requiretty`.
 
-{{% /tab %}}
-{{% tab "Agents v6 et v7" %}}
+{{< /tab >}}
+{{< tab "Agents v6 et v7" >}}
 
 Si vous exécutez un Agent v6 antérieur à 6.3, essayez de mettre à jour l'Agent et d'utiliser l'option `try_sudo`. Si vous ne parvenez pas à effectuer la mise à jour, vous pouvez toujours exécuter l'Agent en tant que `root`.
 
@@ -112,8 +112,8 @@ Si vous exécutez un Agent v6 antérieur à 6.3, essayez de mettre à jour l'Ag
 [1]: https://github.com/DataDog/datadog-agent
 [2]: /fr/agent/guide/agent-commands/#stop-the-agent
 [3]: /fr/agent/guide/agent-commands/#start-the-agent
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Si vous exécutez l'Agent v5, essayez d'effectuer une mise à jour vers la [dernière version de l'Agent 6][1] et d'utiliser l'option `try_sudo`. Si vous ne parvenez pas à effectuer la mise à jour, vous pouvez toujours exécuter l'Agent en tant que `root`.
 
@@ -131,7 +131,7 @@ Si vous exécutez l'Agent v5, essayez d'effectuer une mise à jour vers la [der
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
 [5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
 [6]: /fr/agent/guide/agent-commands/?tab=agentv5#start-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Consultez les issues GitHub suivantes pour en savoir plus à ce sujet et pour découvrir d'autres méthodes pouvant être employées pour enregistrer cette métrique sur des machines Linux.

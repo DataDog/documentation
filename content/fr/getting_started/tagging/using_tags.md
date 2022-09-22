@@ -28,7 +28,7 @@ Le [flux d'événements][2] affiche tous les événements de votre environnement
 ## Dashboards
 
 {{< tabs >}}
-{{% tab "Assignation" %}}
+{{< tab "Assignation" >}}
 
 Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard][1] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques à afficher, saisissez les tags dans la zone de texte **from**. Les données de la métrique choisie s'afficheront alors pour toutes les sources qui possèdent ce tag (à savoir, `service:coffee-house` dans l'exemple ci-dessous).
 
@@ -66,8 +66,8 @@ Utilisez des [template variables][3] pour activer facilement le tag **from** sur
 [1]: /fr/dashboards/
 [2]: /fr/events/
 [3]: /fr/dashboards/template_variables/
-{{% /tab %}}
-{{% tab "Exemples" %}}
+{{< /tab >}}
+{{< tab "Exemples" >}}
 
 Vous trouverez ci-dessous un exemple de tags avec l'éditeur de graphiques pour séries temporelles. Aucun tag n'a été appliqué dans la première capture d'écran. L'utilisation moyenne de processeur est donc affichée pour l'ensemble des hosts :
 
@@ -83,7 +83,7 @@ Enfin, le deuxième champ vide (la zone de texte **avg by**) est utilisé pour a
 
 Vous pouvez ajouter d'autres tags pour réduire davantage la portée, afin d'étudier par exemple les hosts dans `region:eastus` et `env:production`. Les tags peuvent être utilisés pour de nombreuses fonctionnalités de Datadog et appliqués à l'ensemble des éléments de base (métriques, traces et logs).
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Infrastructure
@@ -91,7 +91,7 @@ Vous pouvez ajouter d'autres tags pour réduire davantage la portée, afin d'ét
 Pour filtrer la [hostmap][4], [la liste des infrastructures][5], les [conteneurs][6] et les [processus][7], saisissez un tag dans la zone de texte **Filter by** en haut de la page. Les hosts et conteneurs peuvent être regroupés par clé de tag à l'aide de la zone de texte **Group by**. Si vous saisissez `service` dans cette zone de texte, chaque service s'affiche sous la forme d'un en-tête de groupe.
 
 {{< tabs >}}
-{{% tab "Hostmap" %}}
+{{< tab "Hostmap" >}}
 
 Depuis cette section, utilisez des tags pour filtrer ou regrouper des hosts :
 
@@ -100,43 +100,43 @@ Depuis cette section, utilisez des tags pour filtrer ou regrouper des hosts :
 Ou des conteneurs :
 
 {{< img src="tagging/using_tags/containermaptags.png" alt="Tags map des conteneurs" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Liste d'infrastructures" %}}
+{{< tab "Liste d'infrastructures" >}}
 
 La liste d'infrastructures propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="Tags de la liste d'infrastructures" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Conteneurs" %}}
+{{< tab "Conteneurs" >}}
 
 La page des live containers propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="Tags live containers" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Processus" %}}
+{{< tab "Processus" >}}
 
 La page des live processes propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="Tags live processes" style="width:80%;">}}
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Monitors
 
 {{< tabs >}}
-{{% tab "Gérer les monitors" %}}
+{{< tab "Gérer les monitors" >}}
 
 Pour filtrer des monitors en fonction des [tags qui leur sont assignés][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<KEY>:<VALUE>`. Indiquez par exemple `tag:service:coffee-house`. Pour exclure les monitors associés à un tag spécifique de votre recherche, utilisez `-` (par exemple : `tag:-service:coffee-house`). **Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Gérer les tags de monitor" style="width:80%;">}}
 
 [1]: /fr/getting_started/tagging/assigning_tags/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Nouveau monitor" %}}
+{{< tab "Nouveau monitor" >}}
 
 Lorsque vous créez un [monitor][1], utilisez les tags de métrique dans :
 
@@ -149,15 +149,15 @@ Lorsque vous créez un [monitor][1], utilisez les tags de métrique dans :
 {{< img src="tagging/using_tags/newmonitortags.png" alt="Tags nouveau monitor" style="width:80%;">}}
 
 [1]: /fr/monitors/create/types/
-{{% /tab %}}
-{{% tab "Gérer les downtimes" %}}
+{{< /tab >}}
+{{< tab "Gérer les downtimes" >}}
 
 Pour filtrer les [downtimes][1] en fonction d'un tag de monitor, saisissez le nom du tag dans la barre de recherche, par exemple `service:coffee-house`.
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Gérer les tags de monitor" style="width:80%;">}}
 
 [1]: /fr/monitors/notify/downtimes/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Métriques
@@ -171,7 +171,7 @@ Utilisez les tags dans [Metrics Explorer][8] pour filtrer les métriques en fonc
 Certaines intégrations vous permettent de limiter les métriques recueillies en utilisant des tags.
 
 {{< tabs >}}
-{{% tab "AWS" %}}
+{{< tab "AWS" >}}
 
 Le [carré d'intégration AWS][1] propose les filtres par tags `to hosts with tag` et `to Lambdas with tag`.
 
@@ -194,8 +194,8 @@ Pour en savoir plus sur le tagging dans AWS, consultez la documentation sur [EC2
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
-{{% /tab %}}
-{{% tab "Azure" %}}
+{{< /tab >}}
+{{< tab "Azure" >}}
 
 Le [carré d'intégration Azure][1] propose le filtre par tags `Optionally filter to VMs with tag`.
 
@@ -208,8 +208,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{% /tab %}}
-{{% tab "Google Cloud" %}}
+{{< /tab >}}
+{{< tab "Google Cloud" >}}
 
 Le [carré d'intégration Google Cloud][1] propose le filtre par tags `to hosts with tag`.
 
@@ -225,13 +225,13 @@ Consultez la documentation Google Cloud pour en savoir plus sur la [création et
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{< tab "Analytics" >}}
 
 Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de traces][2].
 
@@ -239,8 +239,8 @@ Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide d
 
 [1]: /fr/tracing/app_analytics/search/
 [2]: /fr/tracing/app_analytics/search/#search-bar
-{{% /tab %}}
-{{% tab "Service Map" %}}
+{{< /tab >}}
+{{< tab "Service Map" >}}
 
 Après avoir [assigné des tags][1], utilisez la Service Map pour accéder à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données [Analytics][2], les [monitors][3], les [logs][4] et la [hostmap][5] correspondant au tag `service:coffee-house`.
 
@@ -251,7 +251,7 @@ Après avoir [assigné des tags][1], utilisez la Service Map pour accéder à di
 [3]: /fr/monitors/manage/
 [4]: /fr/logs/explorer/search/
 [5]: /fr/infrastructure/hostmap/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -270,26 +270,26 @@ Pour exclure des tags, utilisez `</>` afin de modifier le texte, puis ajoutez le
 Pour [les recherches][10], [les analyses][11], [les patterns][12] et le [Live Tailing][13] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][10].
 
 {{< tabs >}}
-{{% tab "Recherche" %}}
+{{< tab "Recherche" >}}
 
 {{< img src="tagging/using_tags/logsearchtags.png" alt="Tags de recherche de logs" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Analyse" %}}
+{{< /tab >}}
+{{< tab "Analyse" >}}
 
 {{< img src="tagging/using_tags/loganalyticstags.png" alt="Tags d'analyse de logs" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Patterns" %}}
+{{< /tab >}}
+{{< tab "Patterns" >}}
 
 {{< img src="tagging/using_tags/logpatternstags.png" alt="Tags de Log Patterns" style="width:80%;">}}
 
-{{% /tab %}}
-{{% tab "Live Tail" %}}
+{{< /tab >}}
+{{< tab "Live Tail" >}}
 
 {{< img src="tagging/using_tags/livetailtags.mp4" alt="Tags live Tail" video="true" width="80%">}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Les tags permettent également de filtrer un [pipeline][14] de logs. Dans l'exemple ci-dessous, le pipeline filtre les logs selon le tag `service:coffee-house`.
@@ -300,16 +300,16 @@ Les tags permettent également de filtrer un [pipeline][14] de logs. Dans l'exem
 ## Service Level Objectives
 
 {{< tabs >}}
-{{% tab "Gérer vos SLO" %}}
+{{< tab "Gérer vos SLO" >}}
 
 Pour filtrer des SLO en fonction des [tags qui leur sont assignés][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>` (par exemple : `journey:add_item`). Pour exclure les SLO associés à un tag spécifique de votre recherche, utilisez `-` (par exemple : `-journey:add_item`). **Remarque** : les tags de SLO sont différents et distincts des tags de métrique ou de monitor utilisés dans les métriques ou les monitors qui composent un SLO.
 
 {{< img src="tagging/using_tags/manage_slo_tags.png" alt="Tags de SLO" style="width:80%;">}}
 
 [1]: /fr/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "SLO basés sur des métriques" %}}
+{{< tab "SLO basés sur des métriques" >}}
 
 Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de métrique dans les requêtes de calcul du taux de réussite du SLO (toutes les métriques doivent utiliser le même ensemble de tags de métrique) :
 
@@ -319,8 +319,8 @@ Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de m
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Tags de SLO basé sur des métriques" style="width:80%;">}}
 
 [1]: /fr/monitors/service_level_objectives/metric/
-{{% /tab %}}
-{{% tab "SLO basés sur des monitors" %}}
+{{< /tab >}}
+{{< tab "SLO basés sur des monitors" >}}
 
 Lorsque vous créez un SLO [basé sur des monitors][1] à partir d'un seul [monitor groupé][2], utilisez l'option **Calculate on selected groups** pour sélectionner jusqu'à 20 valeurs de tag associées au monitor sous-jacent et afficher le pourcentage de statut et la marge d'erreur restante pour le SLO global et pour chaque valeur de tag :
 
@@ -328,7 +328,7 @@ Lorsque vous créez un SLO [basé sur des monitors][1] à partir d'un seul [moni
 
 [1]: /fr/monitors/service_level_objectives/monitor/
 [2]: /fr/getting_started/tagging/using_tags/?tab=newmonitor#monitors
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Développeurs

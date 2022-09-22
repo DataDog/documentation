@@ -31,7 +31,7 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
 - `snmp.d/conf.yaml` ファイル ([Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダー内) のサブネットと SNMP バージョンを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル snmp.d/conf.yaml][4] を参照してください。
 
 {{< tabs >}}
-{{% tab "SNMPv2" %}}
+{{< tab "SNMPv2" >}}
 
 - SNMPv2 の場合 デバイスの IP アドレスおよびデバイスの_コミュニティ文字列_を指定してインスタンスを構成します。
 
@@ -41,8 +41,8 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
         community_string: "<COMMUNITY_STRING>"
     ```
 
-{{% /tab %}}
-{{% tab "SNMPv3" %}}
+{{< /tab >}}
+{{< tab "SNMPv3" >}}
 
 - SNMPv3 の場合は、デバイスの IP アドレスおよび SNMPv3 資格情報 (デバイスに応じて) を指定してインスタンスを構成します。例: `user`、`auth_protocol`、`auth_key`、`priv_protocol`、`priv_key`:
 
@@ -57,7 +57,7 @@ Datadog ネットワークデバイスモニタリングは、個々のデバイ
         # privKey: "<PRIV_KEY>"
     ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

@@ -42,7 +42,7 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 ## Enabling CI Visibility on the plugin
 
 {{< tabs >}}
-{{% tab "Using UI" %}}
+{{< tab "Using UI" >}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
@@ -55,8 +55,8 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 9. Save your configuration.
 
 {{< img src="ci/ci-jenkins-plugin-config.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
-{{% /tab %}}
-{{% tab "Using configuration-as-code" %}}
+{{< /tab >}}
+{{< tab "Using configuration-as-code" >}}
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
@@ -79,8 +79,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 4. Check the configuration using the `View Configuration` button.
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-{{% tab "Using Groovy" %}}
+{{< /tab >}}
+{{< tab "Using Groovy" >}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
@@ -109,8 +109,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Save config
     d.save()
     ```
-{{% /tab %}}
-{{% tab "Using Environment Variables" %}}
+{{< /tab >}}
+{{< tab "Using Environment Variables" >}}
 
 1. Set the following environment variables on your Jenkins instance machine:
     ```bash
@@ -131,7 +131,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     ```
 2. Restart your Jenkins instance.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
@@ -191,7 +191,7 @@ With this setup, the Agent listens in port `10518` for logs.
 Second, enable job log collection on the Datadog Plugin:
 
 {{< tabs >}}
-{{% tab "Using UI" %}}
+{{< tab "Using UI" >}}
 
 1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
 2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
@@ -201,8 +201,8 @@ Second, enable job log collection on the Datadog Plugin:
 6. Click on `Enable Log Collection` checkbox to activate it.
 7. Check the connectivity with the Datadog Agent.
 8. Save your configuration.
-{{% /tab %}}
-{{% tab "Using configuration-as-code" %}}
+{{< /tab >}}
+{{< tab "Using configuration-as-code" >}}
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 1. Create or modify the configuration YAML for the entry `datadogGlobalConfiguration`:
@@ -223,8 +223,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 4. Check the configuration using the `View Configuration` button.
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-{{% tab "Using Groovy" %}}
+{{< /tab >}}
+{{< tab "Using Groovy" >}}
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
@@ -250,8 +250,8 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     // Save config
     d.save()
     ```
-{{% /tab %}}
-{{% tab "Using Environment Variables" %}}
+{{< /tab >}}
+{{< tab "Using Environment Variables" >}}
 
 1. Set the following environment variables on your Jenkins instance machine:
     ```bash
@@ -269,7 +269,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
     ```
 2. Restart your Jenkins instance.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Set the default branch name
@@ -298,7 +298,7 @@ The Jenkins plugin uses environment variables to determine the Git information. 
 In this case, you can propagate the Git information to the environment variables in your build. Use the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
 
 {{< tabs >}}
-{{% tab "Using Declarative Pipelines" %}}
+{{< tab "Using Declarative Pipelines" >}}
 If you're using a declarative pipeline to configure your pipeline, propagate Git information using a `script` block as follows:
 
 Using the `checkout` step:
@@ -329,8 +329,8 @@ pipeline {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Using Scripted Pipelines" %}}
+{{< /tab >}}
+{{< tab "Using Scripted Pipelines" >}}
 If you're using a scripted pipeline to configure your pipeline, you can propagate the git information to environment variables directly.
 
 Using the `checkout` step:
@@ -353,7 +353,7 @@ node {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

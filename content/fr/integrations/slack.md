@@ -36,7 +36,7 @@ Associez Slack à Datadog pour permettre à votre équipe de collaborer en :
 
 {{< tabs >}}
 
-{{% tab "Application Slack" %}}
+{{< tab "Application Slack" >}}
 
 ### Installation
 
@@ -151,9 +151,9 @@ Vous pouvez gérer toutes les tâches créées depuis l'[interface Incidents][5]
 [6]: https://docs.datadoghq.com/fr/integrations/slack/?tab=slackapplicationus#installation
 [7]: https://app.datadoghq.com/incidents/settings
 [8]: https://docs.datadoghq.com/fr/monitors/incident_management/#follow-up-and-learn-from-the-incident
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Webhook Slack (ancienne version)" %}}
+{{< tab "Webhook Slack (ancienne version)" >}}
 
 Utilisez le webhook Slack si vous êtes sur le [site][1] US5 ou US1-FED de Datadog.
 
@@ -182,7 +182,7 @@ Vous pouvez également configurer l'envoi d'alertes vers Slack à partir de [mon
 [3]: https://slack.com/apps/A0F7XDT7F-datadog-legacy
 [4]: https://docs.datadoghq.com/fr/monitors/notifications/?tab=slackintegration#notification
 [5]: https://docs.datadoghq.com/fr/events/#notifications
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Mentions `@` dans Slack depuis l'alerte d'un monitor

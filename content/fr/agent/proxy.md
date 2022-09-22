@@ -29,7 +29,7 @@ Il existe plusieurs options pour envoyer du trafic vers Datadog via SSL/TLS pour
 Les proxies Web traditionnels sont pris en charge de manière native par l'Agent. Si vous devez vous connecter à Internet via un proxy, modifiez le fichier de configuration de l'Agent.
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 Définissez différents serveurs de proxy pour les requêtes `https` et `http` dans le fichier de configuration `datadog.yaml` de votre Agent. L'Agent utilise `https` pour envoyer des données à Datadog, mais les intégrations peuvent utiliser le protocole `http` pour recueillir des métriques. Quelles que soient les requêtes à faire passer par un proxy, vous pouvez activer le SSL sur votre serveur proxy. Vous trouverez ci-dessous des exemples de configuration pour votre fichier `datadog.yaml`.
 
@@ -115,8 +115,8 @@ L'Agent utilise les valeurs suivantes par ordre de priorité :
 2. Les variables d'environnement `HTTPS_PROXY`, `HTTP_PROXY` et `NO_PROXY`
 3. Les valeurs spécifiées dans `datadog.yaml`
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 <div class="alert alert-warning">
 Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs</a>.
@@ -135,7 +135,7 @@ proxy_password: mon_mdp
 N'oubliez pas de [redémarrer l'Agent][1] pour que les nouveaux paramètres soient appliqués.
 
 [1]: /fr/agent/guide/agent-commands/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## HAProxy
@@ -437,7 +437,7 @@ Si vous utilisez une version antérieure de HAProxy, vous devez recharger ou red
 #### Configuration de l'Agent Datadog
 
 {{< tabs >}}
-{{% tab "Agents v6 et v7" %}}
+{{< tab "Agents v6 et v7" >}}
 
 Connectez chaque Agent à HAProxy en définissant son `dd_url` sur l'adresse de HAProxy (par exemple, `haproxy.exemple.com`).
 Le paramètre `dd_url` se trouve dans le fichier `datadog.yaml`.
@@ -471,8 +471,8 @@ Pour vérifier que tout fonctionne correctement, consultez les statistiques HAPr
 
 [1]: /fr/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Connectez chaque Agent à HAProxy en définissant son `dd_url` sur l'adresse de HAProxy (par exemple, `haproxy.exemple.com`).
 Le paramètre `dd_url` se trouve dans le fichier `datadog.conf`.
@@ -515,7 +515,7 @@ Pour vérifier que tout fonctionne correctement, consultez les statistiques HAPr
 
 [1]: /fr/agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## NGINX

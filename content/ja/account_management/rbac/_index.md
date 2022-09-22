@@ -60,7 +60,7 @@ Datadog 読み取り専用ロール
 ### カスタムロールを作成する
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 カスタムロールを作成するには
 
@@ -75,20 +75,20 @@ Datadog 読み取り専用ロール
 [1]: https://app.datadoghq.com/access/roles
 [2]: /ja/account_management/rbac/permissions/
 [3]: /ja/account_management/users/#edit-a-user-roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [ロールの作成 API リファレンス][1]で、ロールの作成方法の例をご紹介しています。
 
 
 [1]: /ja/api/latest/roles/#create-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロールを更新する
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 カスタムロールを編集するには
 
@@ -103,20 +103,20 @@ Datadog 読み取り専用ロール
 
 [1]: https://app.datadoghq.com/access/roles
 [2]: /ja/account_management/rbac/permissions/
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [ロールの更新 API リファレンス][1]で、ロールの更新方法の例をご紹介しています。
 
 
 [1]: /ja/api/latest/roles/#update-a-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロールの複製
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 既存ロールのクローンを作成するには:
 
@@ -130,19 +130,19 @@ Datadog 読み取り専用ロール
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [ロールのクローン作成 API リファレンス][1]で、ロールのクローン作成方法の例をご紹介しています。
 
 [1]: /ja/api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロールを削除する
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{< tab "Datadog application" >}}
 
 カスタムロールを削除するには
 
@@ -156,14 +156,14 @@ Datadog 読み取り専用ロール
 
 
 [1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
+{{< /tab >}}
+{{< tab "API" >}}
 
 [ロールの削除 API リファレンス][1]で、ロールの削除方法の例をご紹介しています。
 
 
 [1]: /ja/api/latest/roles/#delete-role
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ロールテンプレートの適用

@@ -32,7 +32,7 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 **注**: [ドメインコントローラー][5]について特別な考慮事項があります。
 
 {{< tabs >}}
-{{% tab "GUI" %}}
+{{< tab "GUI" >}}
 
 1. [Datadog Agent インストーラー][1]をダウンロードします。
 2. `datadog-agent-7-latest.amd64.msi` を開き、インストーラーを (**管理者**として) 実行します。
@@ -41,8 +41,8 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "コマンドライン" %}}
+{{< /tab >}}
+{{< tab "コマンドライン" >}}
 
 コマンドラインを使用して Agent をインストールするには
 
@@ -98,8 +98,8 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 [2]: /ja/agent/proxy/
 [3]: /ja/agent/faq/windows-agent-ddagent-user/
 [4]: /ja/network_monitoring/performance
-{{% /tab %}}
-{{% tab "アップグレード" %}}
+{{< /tab >}}
+{{< tab "アップグレード" >}}
 
 Agent 7 は Python 3 のみをサポートします。アップグレードする前に、カスタムチェックが Python 3 と互換性があることを確認します。詳細については、[Python 3 カスタムチェックの移行][1]ガイドを参照してください。カスタムチェックを使用していないか、既に互換性を確認している場合は、[GUI](?tab=gui) または[コマンドライン](?tab=commandline)の手順を使用してアップグレードします。
 
@@ -107,7 +107,7 @@ Agent 7 は Python 3 のみをサポートします。アップグレードす�
 
 [1]: /ja/agent/guide/python-3/
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### インストールログファイル
@@ -123,7 +123,7 @@ Agent のインストールログファイルは `%TEMP%\MSI*.LOG` にありま�
 Agent の実行は、Windows サービスコントロールマネージャーによって制御されます。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 * メインの実行可能ファイルは `agent.exe` です。場所は以下の通り、Agent のバージョンにより異なります。
     - Agent バージョン 6.11 以前: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
@@ -169,8 +169,8 @@ Agent の実行は、Windows サービスコントロールマネージャーに
     "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 (スタートメニューにある) Datadog Agent Manager を使用します。
 
@@ -183,7 +183,7 @@ Datadog Agent Manager で `start`、`stop`、および `restart` コマンドを
 Windows PowerShell で、次のコマンドを使用することもできます。
 `[start|stop|restart]-service datadogagent`
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## コンフィギュレーション
@@ -191,15 +191,15 @@ Windows PowerShell で、次のコマンドを使用することもできます�
 [Datadog Agent Manager][6] を使ってチェックを有効化、無効化、および構成します。Agent を再起動して変更内容を適用します。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 メインの Agent 構成ファイルの場所:
 `C:\ProgramData\Datadog\datadog.yaml`
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 メインの Agent 構成ファイルの場所:
 `C:\ProgramData\Datadog\datadog.conf`
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 インテグレーション用構成ファイルの場所:
@@ -213,7 +213,7 @@ Windows PowerShell で、次のコマンドを使用することもできます�
 ### Agent のステータスと情報
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 Agent が実行されていることを確認するには、サービスパネルで `DatadogAgent` サービスが "Started" になっているかどうかをチェックします。また、Datadog Metrics Agent (`agent.exe`) というプロセスがタスクマネージャーに存在している必要があります。
 
@@ -239,8 +239,8 @@ cmd.exe では、次のようにします。
 "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Agent が実行されていることを確認するには、サービスパネルでサービスのステータスが "Started" になっているかどうかをチェックします。また、`ddagent.exe` というプロセスがタスクマネージャーに存在している必要があります。
 
@@ -265,13 +265,13 @@ cmd.exe では、次のようにします。
 
 **注**: Agent バージョンが <= 6.11 の場合、パスは上記ではなく `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe` にする必要があります。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### ログの場所
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 Agent のログは `C:\ProgramData\Datadog\logs\agent.log` にあります。
 
@@ -280,8 +280,8 @@ Agent のログは `C:\ProgramData\Datadog\logs\agent.log` にあります。
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
 [1]: /ja/help/
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Windows Server 2008/Vista 以降のシステムでは、Agent のログは `C:\ProgramData\Datadog\logs` にあります。
 
@@ -290,13 +290,13 @@ Windows Server 2008/Vista 以降のシステムでは、Agent のログは `C:\P
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
 [1]: /ja/help/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### フレアの送信
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 * [http://127.0.0.1:5002][1] に移動して Datadog Agent Manager を表示します。
 
@@ -323,8 +323,8 @@ cmd.exe では、次のようにします。
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Agent 6 を使用した Windows フレア" style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 Datadog のサポートチームに Windows のログと構成のコピーを送信するには、次の手順に従います。
 
@@ -380,7 +380,7 @@ print tempfile.gettempdir()
 
 {{< img src="agent/faq/flare_fail.png" alt="フレア失敗" style="width:70%;">}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ユースケース

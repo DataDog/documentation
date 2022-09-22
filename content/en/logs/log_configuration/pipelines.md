@@ -42,7 +42,7 @@ JSON log preprocessing comes with a default configuration that works for standar
 2. Change the default mapping based on reserved attribute:
 
 {{< tabs >}}
-{{% tab "Source" %}}
+{{< tab "Source" >}}
 
 #### Source attribute
 
@@ -53,8 +53,8 @@ If a JSON formatted log file includes the `ddsource` attribute, Datadog interpre
 
 [1]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [2]: /agent/docker/log/?tab=containerinstallation#examples
-{{% /tab %}}
-{{% tab "Host" %}}
+{{< /tab >}}
+{{< tab "Host" >}}
 
 #### Host attribute
 
@@ -64,8 +64,8 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 * `hostname`
 * `syslog.hostname`
 
-{{% /tab %}}
-{{% tab "Date" %}}
+{{< /tab >}}
+{{< tab "Date" >}}
 
 #### Date attribute
 
@@ -90,8 +90,8 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 
 [1]: /logs/log_configuration/processors/#log-date-remapper
-{{% /tab %}}
-{{% tab "Message" %}}
+{{< /tab >}}
+{{< tab "Message" >}}
 
 #### Message attribute
 
@@ -103,8 +103,8 @@ Specify alternate attributes to use as the source of a log's message by setting 
 [1]: /logs/explorer/
 [2]: /logs/explorer/#filters-logs
 [3]: /logs/log_configuration/processors/#log-message-remapper
-{{% /tab %}}
-{{% tab "Status" %}}
+{{< /tab >}}
+{{< tab "Status" >}}
 
 #### Status attribute
 
@@ -118,8 +118,8 @@ Each log entry may specify a status level which is made available for faceted se
 To remap a status existing in the `status` attribute, use the [log status remapper][1].
 
 [1]: /logs/log_configuration/processors/#log-status-remapper
-{{% /tab %}}
-{{% tab "Service" %}}
+{{< /tab >}}
+{{< tab "Service" >}}
 
 #### Service attribute
 
@@ -132,8 +132,8 @@ Specify alternate attributes to use as the source of a log's service by setting 
 
 
 [1]: /logs/log_configuration/processors/#service-remapper
-{{% /tab %}}
-{{% tab "Trace ID" %}}
+{{< /tab >}}
+{{< tab "Trace ID" >}}
 
 #### Trace ID attribute
 
@@ -147,7 +147,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: /logs/log_configuration/processors/#trace-remapper
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Create a pipeline

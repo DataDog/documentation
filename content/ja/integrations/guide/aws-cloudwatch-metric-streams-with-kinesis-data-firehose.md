@@ -61,7 +61,7 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 ### インストール
 
 {{< tabs >}}
-{{% tab "CloudFormation" %}}
+{{< tab "CloudFormation" >}}
 
 複数の AWS リージョンを使用している場合は自動的かつ簡単になるため、Datadog では CloudFormation の使用をお勧めします。
 
@@ -91,8 +91,8 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /ja/getting_started/site/
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
-{{% /tab %}}
-{{% tab "AWS コンソール" %}}
+{{< /tab >}}
+{{< tab "AWS コンソール" >}}
 
 AWS コンソールを使用してメトリクスストリームを設定する場合は、AWS リージョンごとに次の手順に従います。
 
@@ -134,7 +134,7 @@ AWS コンソールを使用してメトリクスストリームを設定する�
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### メトリクスストリーミングを無効にする

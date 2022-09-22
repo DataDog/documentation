@@ -52,7 +52,7 @@ further_reading:
 このツールの狙いと強みが、ネットワークエンドポイント間のトラフィック分析とネットワークの依存関係のマッピングであるため、価値を最大化するために、インフラストラクチャーの重要なサブセット、そして**_少なくとも 2 つのホスト_**にインストールすることが推奨されます。
 
 {{< tabs >}}
-{{% tab "Agent" %}}
+{{< tab "Agent" >}}
 
 Datadog Agent を使用してネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
 
@@ -169,8 +169,8 @@ Windows ホストのネットワークパフォーマンスモニタリングを
 [2]: /ja/agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 [4]: https://s3.amazonaws.com/ddagent-windows-unstable/datadog-agent-7.23.2-beta1-1-x86_64.msi
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Kubernetes を使用してネットワークパフォーマンスのモニタリングを新規で有効化するには
 
@@ -304,8 +304,8 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
 [1]: /resources/yaml/datadog-agent-npm.yaml
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /ja/agent/kubernetes/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次のコンフィギュレーションを使用します。
 
@@ -362,13 +362,13 @@ services:
 ```
 
 [1]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "ECS" %}}
+{{< /tab >}}
+{{< tab "ECS" >}}
 AWS ECS での設定については、[AWS ECS][1] ドキュメントページを参照してください。
 
 
 [1]: /ja/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

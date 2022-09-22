@@ -34,7 +34,7 @@ Datadog にテスト結果を報告するには、Datadog の .NET ライブラ�
 
 {{< tabs >}}
 
-{{% tab "オンプレミス CI プロバイダー (Datadog Agent)" %}}
+{{< tab "オンプレミス CI プロバイダー (Datadog Agent)" >}}
 
 Jenkins や自己管理型の GitLab CI などのオンプレミス CI プロバイダーでテストを実行する場合、[Agent インストール手順][1]に従って各ワーカノードに Datadog Agent をインストールします。これは、テスト結果が自動的に基礎となるホストメトリクスにリンクされるため、推奨されるオプションです。
 
@@ -45,9 +45,9 @@ Kubernetes のエグゼキューターを使用している場合、Datadog は 
 
 [1]: /ja/agent/
 [2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "クラウド CI プロバイダー (Agentless)" %}}
+{{< tab "クラウド CI プロバイダー (Agentless)" >}}
 
 <div class="alert alert-info">Agentless モードは、Datadog .NET ライブラリのバージョン >= 2.5.1 で使用できます</div>
 
@@ -71,7 +71,7 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /ja/getting_started/site/
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -96,7 +96,7 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 
 {{< tabs >}}
 
-{{% tab "dotnet テスト" %}}
+{{< tab "dotnet テスト" >}}
 
 <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a> の使用によって
 
@@ -104,9 +104,9 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "VSTest.Console" %}}
+{{< tab "VSTest.Console" >}}
 
 <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a> の使用によって
 
@@ -114,7 +114,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

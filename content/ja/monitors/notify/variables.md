@@ -55,7 +55,7 @@ title: 変数
 条件付き変数には、テキストと **@通知**の間に開始と終了のペアが必要です。
 
 {{< tabs >}}
-{{% tab "is_alert" %}}
+{{< tab "is_alert" >}}
 
 モニターがアラートしたときに通知メッセージを送信するには、次の形式を使用します。
 
@@ -65,8 +65,8 @@ title: 変数
 {{/is_alert}}
 ```
 
-{{% /tab %}}
-{{% tab "is_warning" %}}
+{{< /tab >}}
+{{< tab "is_warning" >}}
 
 モニターが警告したときに通知メッセージを送信するには、次の形式を使用します。
 
@@ -76,8 +76,8 @@ title: 変数
 {{/is_warning}}
 ```
 
-{{% /tab %}}
-{{% tab "is_recovery" %}}
+{{< /tab >}}
+{{< tab "is_recovery" >}}
 
 モニターが回復したときに通知メッセージを送信するには、次の形式を使用します。
 
@@ -87,8 +87,8 @@ title: 変数
 {{/is_recovery}}
 ```
 
-{{% /tab %}}
-{{% tab "is_match" %}}
+{{< /tab >}}
+{{< tab "is_match" >}}
 
 次の形式で[タグ変数](#attribute-and-tag-variables)内の部分文字列を検索します。
 
@@ -138,8 +138,8 @@ title: 変数
 
 **注**: `<タグ変数>` が空では**ない**かどうかを確認するには、`<比較文字列>` に空の文字列を使用します。
 
-{{% /tab %}}
-{{% tab "is_exact_match" %}}
+{{< /tab >}}
+{{< tab "is_exact_match" >}}
 
 次の形式で[タグ変数](#attribute-and-tag-variables)内の正確な文字列を検索します。
 
@@ -182,8 +182,8 @@ title: 変数
 {{/is_exact_match}}
 ```
 
-{{% /tab %}}
-{{% tab "is_renotify" %}}
+{{< /tab >}}
+{{< tab "is_renotify" >}}
 
 `production` 環境専用の別の宛先にエスカレーションメッセージを送信するには、次のようにします。
 
@@ -222,7 +222,7 @@ title: 変数
 これはエスカレーションメッセージ @dev-team@company.com です。
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -235,7 +235,7 @@ title: 変数
 マルチアラートグループボックスで選択したディメンションに基づいて、[マルチアラートモニター][1]でマルチアラート変数を構成します。通知を強化して、各アラートのディメンションごとのグループに関連付けられた値を動的に含めます。
 
 {{< tabs >}}
-{{% tab "タグでグループ化" %}}
+{{< tab "タグでグループ化" >}}
 
 メトリクスが `key:value` 構文に続くタグでタグ付けされており、モニタークエリがこのタグでグループ化されている場合は、変数を使用します。
 
@@ -275,9 +275,9 @@ title: 変数
 {{ event.tags.[dot.key.test] }}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "ファセットでグループ化" %}}
+{{< tab "ファセットでグループ化" >}}
 
 ログモニター、トレース分析モニター、RUM モニター、イベントモニターは、モニターがファセットごとにグループ化されている場合、ファセットを変数として使用できます。ログモニターが `@facet_key` でグループ化されている場合は、変数を使用します。
 
@@ -297,7 +297,7 @@ This alert was triggered on {{ @machine_id.name }}
 {{ [@network.client.ip].name }}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 一致する属性/タグ変数
@@ -432,7 +432,7 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 [タグ変数](#attribute-and-tag-variables)を使用して、チームを適切なリソースにリンクする動的 URL 構築を有効にします。たとえば、ダッシュボード、ホストマップ、モニターなどの Datadog 内のページへのリンクを提供できます。
 
 {{< tabs >}}
-{{% tab "ダッシュボード" %}}
+{{< tab "ダッシュボード" >}}
 
 `{{host.name}}` [タグ変数](#attribute-and-tag-variables)を使用して、システムダッシュボードへのリンクを提供します。
 
@@ -452,8 +452,8 @@ https://app.datadoghq.com/dash/integration/<インテグレーション名>?tpl_
 https://app.datadoghq.com/dashboard/<DASHBOARD_ID>/<DASHBOARD_NAME>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
-{{% /tab %}}
-{{% tab "ホストマップ" %}}
+{{< /tab >}}
+{{< tab "ホストマップ" >}}
 
 ホストマップへのリンクを提供するには、`{{service.name}}` などの[タグ変数](#attribute-and-tag-variables)を使用します。
 
@@ -469,8 +469,8 @@ https://app.datadoghq.com/infrastructure/map?filter=service:{{service.name}}
 | `groupby` | `groupby=<タグキー>`        | ホストの六角形のグループ。        |
 | `sizeby`  | `sizeby=avg:<メトリクス名>` | ホストの六角形のサイズ。       |
 
-{{% /tab %}}
-{{% tab "Monitors" %}}
+{{< /tab >}}
+{{< tab "Monitors" >}}
 
 `{{host.name}}` [タグ変数](#attribute-and-tag-variables)を使用して、特定のホストに関連するすべてのモニターへのリンクを提供します。
 
@@ -489,8 +489,8 @@ https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 
 
 [1]: /ja/monitors/create/#monitor-types
-{{% /tab %}}
-{{% tab "Logs" %}}
+{{< /tab >}}
+{{< tab "Logs" >}}
 
 `{{last_triggered_at_epoch}}` [テンプレート変数](#template-variables)を使って、警告の瞬間に起きている全てのログへのリンクを提供します。
 
@@ -507,7 +507,7 @@ https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*10
 | `status`  | `status=<STATUS>`          | ログステータス: Error、Warn、Info など。 |
 
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### コメント

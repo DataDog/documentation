@@ -27,11 +27,11 @@ title: 태그 할당
 - [DogStatsD](#dogstatsd)로 설정
 
 {{< tabs >}}
-{{% tab "컨테이너화하지 않은 환경" %}}
+{{< tab "컨테이너화하지 않은 환경" >}}
 비(非) 컨테이너화 환경에서는 Agent가 자동으로 [호스트 태그](#host-tags)를 할당하고 통합에서 태그 설정을 이어받습니다. 이러한 태그는 사용자가 수동으로 추가한 태그와 함께 [Datadog Agent 설정 파일](#configuration-file)에서 설정됩니다.
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "컨테이너화 환경" %}}
+{{< tab "컨테이너화 환경" >}}
 컨테이너화 환경에서는 Datadog [자동탐지][1]를 통해 자동으로 [통합 서비스 태깅][2]을 사용하시길 권장합니다. 이렇게 하면 모든 Datadog 텔레메트리(원격 계측) 데이터에 걸쳐 단일 설정 지점을 구축할 수 있습니다.
 
 자동탐지의 목표는 Agent 점검을 특정 컨테이너에서 실행할 때 Datadog 통합 설정을 적용하는 것입니다. 자동탐지를 사용하면 Datadog Agent가 자동으로 새 컨테이너에서 어떤 서비스가 실행 중인지 식별하고, 해당하는 모니터링 설정을 찾아 메트릭을 수집합니다. 이후 자동탐지 [설정 템플릿][3]에서 태그를 설정할 수 있습니다.
@@ -42,7 +42,7 @@ title: 태그 할당
 [1]: /kr/getting_started/agent/autodiscovery/
 [2]: /kr/getting_started/tagging/unified_service_tagging
 [3]: /kr/getting_started/agent/autodiscovery/?tab=docker#integration-templates
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 태그 할당 방법
@@ -50,7 +50,7 @@ title: 태그 할당
 ### 설정 파일
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 #### 파일 위치
 
@@ -100,8 +100,8 @@ hostname: mymachine.mydomain
 [3]: /kr/getting_started/tagging/#defining-tags
 [4]: /kr/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /kr/dashboards/querying/#arithmetic-between-two-metrics
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 #### 파일 위치
 
@@ -142,7 +142,7 @@ hostname: mymachine.mydomain
 [3]: /kr/getting_started/tagging/#defining-tags
 [4]: /kr/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /kr/dashboards/querying/#arithmetic-between-two-metrics
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### 통합의 상속
@@ -263,23 +263,23 @@ Datadog 트레이서는 환경 변수, 시스템 속성 또는 코드 내의 설
 ### UI
 
 {{< tabs >}}
-{{% tab "호스트 맵" %}}
+{{< tab "호스트 맵" >}}
 
 [호스트 맵(Host Map) 페이지][1]를 사용하여 UI에서 호스트 태그를 할당합니다. 페이지 하단에 호스트 오버레이를 표시하려면 육각형(호스트)을 클릭하세요. 그런 다음 *User* 섹션에서 **Edit Tags** 버튼을 클릭합니다. 태그 목록을 쉼표(",")로 구분하여 입력하고 **Save Tags**를 클릭합니다. UI에서 호스트 태그를 변경한 경우, 변경 사항이 적용되기까지 최대 5분이 소요될 수 있습니다.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="호스트 맵 태그" style="width:80%;">}}
 
 [1]: /kr/infrastructure/hostmap/
-{{% /tab %}}
-{{% tab "인프라스트럭처 목록" %}}
+{{< /tab >}}
+{{< tab "인프라스트럭처 목록" >}}
 
 [인프라스트럭처 목록(Infrastructure List) 페이지][1]를 사용하여 UI에서 호스트 태그를 할당합니다. 페이지 오른쪽에 호스트 오버레이를 표시하려면 호스트를 클릭하세요. 그런 다음 *User* 섹션에서 **Edit Tags** 버튼을 클릭합니다. 태그 목록을 쉼표(",")로 구분하여 입력하고 **Save Tags**를 클릭합니다. 태그를 추가한 후에는 UI에서 확인할 수 있는지 먼저 살펴본 다음 다른 태그를 더하세요.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="인프라스트럭처 목록 태그" style="width:80%;">}}
 
 [1]: /kr/infrastructure/
-{{% /tab %}}
-{{% tab "모니터링" %}}
+{{< /tab >}}
+{{< tab "모니터링" >}}
 
 [모니터링 관리(Manage Monitors)][1] 페이지에서 각 모니터 옆의 체크박스를 선택해 태그를 추가합니다(하나 이상의 모니터를 선택할 수 있습니다). **Edit Tags** 버튼을 클릭하세요. 태그를 입력하거나 이전에 사용했던 태그를 선택합니다. 다음으로 **Add Tag `tag:name`** 또는 **Apply Changes**를 클릭합니다. 태그를 이전에 추가했다면 태그 체크박스를 사용해 여러 태그를 동시에 할당할 수 있습니다.
 
@@ -290,8 +290,8 @@ Datadog 트레이서는 환경 변수, 시스템 속성 또는 코드 내의 설
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="모니터링 태그 만들기" style="width:80%;">}}
 
 [1]: /kr/monitors/manage/
-{{% /tab %}}
-{{% tab "분포 메트릭" %}}
+{{< /tab >}}
+{{< tab "분포 메트릭" >}}
 
 최대 10개의 태그 허가 목록을 메트릭에 적용하여 [분포 메트릭(Distribution Metrics)][1]에서 백분위 집계를 생성합니다. 그러면 태그 값의 쿼리 가능한 조합으로 시계열이 생성됩니다. 분포 메트릭에서 출력되는 커스텀 메트릭과 시계열을 자세히 알아보려면 [커스텀 메트릭][2] 가이드를 참조하세요.
 
@@ -301,28 +301,28 @@ Datadog 트레이서는 환경 변수, 시스템 속성 또는 코드 내의 설
 
 [1]: /kr/metrics/distributions/
 [2]: /kr/metrics/custom_metrics/
-{{% /tab %}}
-{{% tab "통합" %}}
+{{< /tab >}}
+{{< tab "통합" >}}
 
 [AWS][1] 통합 타일을 사용하면 계정 수준에서 모든 메트릭에 추가 태그를 할당할 수 있습니다. 쉼표(",")로 구분되는 `<KEY>:<VALUE>` 형식의 태그 목록을 사용하세요.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS 태그" style="width:80%;">}}
 
 [1]: /kr/integrations/amazon_web_services/
-{{% /tab %}}
-{{% tab "서비스 수준 목표" %}}
+{{< /tab >}}
+{{< tab "서비스 수준 목표" >}}
 
 SLO 설정 시, 3단계 *이름과 태그 추가*에서 태그를 할당하세요.
 
 {{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="SLO 태그 만들기" style="width:80%;">}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### API
 
 {{< tabs >}}
-{{% tab "할당" %}}
+{{< tab "할당" >}}
 
 태그는 [Datadog API][1]를 사용해 다양한 방법으로 할당할 수 있습니다. 각 섹션의 링크를 정리한 아래 목록을 참조하시기 바랍니다.
 
@@ -346,8 +346,8 @@ SLO 설정 시, 3단계 *이름과 태그 추가*에서 태그를 할당하세�
 [9]: /kr/tracing/guide/send_traces_to_agent_by_api/
 [10]: /kr/api/v1/service-level-objectives/#create-a-slo-object
 [11]: /kr/api/v1/service-level-objectives/#update-a-slo
-{{% /tab %}}
-{{% tab "예시" %}}
+{{< /tab >}}
+{{< tab "예시" >}}
 
 Datadog에서 태깅하기는 메트릭을 수집하는 데 유용한 방법입니다. 빠른 예시를 살펴보려면 웹사이트(example.com)에서 수집한 다음 메트릭의 요약을 찾아보시기 바랍니다.
 
@@ -375,7 +375,7 @@ sum:page.views{domain:example.com}
 sum:page.views{domain:example.com} by {host}
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### DogStatsD

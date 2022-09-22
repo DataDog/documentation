@@ -72,7 +72,7 @@ Le check PHP-FPM est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -123,8 +123,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -178,7 +178,7 @@ Si votre installation PHP-FPM utilise des sockets Unix, vous devez activer `use_
 **Remarque** : avec Autodiscovery, si l'Agent s'exécute dans un conteneur, une tâche ou un pod distinct, il ne peut pas accéder au fichier de sockets Unix de votre pool FPM. Pour y remédier, exécutez l'Agent en tant que sidecar.
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

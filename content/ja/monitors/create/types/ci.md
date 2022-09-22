@@ -37,7 +37,7 @@ Datadog で [CI モニター][2]を作成するには、メインナビゲーシ
 
 
 {{< tabs >}}
-{{% tab "Pipelines" %}}
+{{< tab "Pipelines" >}}
 
 CI Pipeline モニターを作成するには
 ### 検索クエリを定義する
@@ -72,8 +72,8 @@ CI Pipeline モニターを作成するには
 <div class="alert alert-info"><strong>注</strong>: 各モニターに評価数式の構築には、最大 2 つのクエリまで使用できます。</div>
 
 [1]: /ja/continuous_integration/setup_pipelines/custom_commands/
-{{% /tab %}}
-{{% tab "Tests" %}}
+{{< /tab >}}
+{{< tab "Tests" >}}
 
 CI Test モニターを作成するには
 ### 検索クエリを定義する
@@ -127,7 +127,7 @@ CI Test モニターを作成するには
 
 モニターの `Notification message` セクションに、上記のコードスニペットのようなテキストを追加して、モニター通知の設定をします。`is_match` 句は必要なだけ追加することができます。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 ### アラートの条件を設定する
 

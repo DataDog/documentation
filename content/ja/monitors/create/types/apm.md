@@ -32,7 +32,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 **APM Metrics** または **Trace Analytics** モニターのいずれかを選択します。
 
 {{< tabs >}}
-{{% tab "APM Metrics" %}}
+{{< tab "APM Metrics" >}}
 
 ### モニタースコープを選択
 
@@ -70,8 +70,8 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 [3]: /ja/tracing/services/resource_page/
 [4]: /ja/monitors/create/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/create/types/metric/#data-window
-{{% /tab %}}
-{{% tab "Trace Analytics" %}}
+{{< /tab >}}
+{{< tab "Trace Analytics" >}}
 
 <div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 トレース分析モニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
@@ -112,7 +112,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 [3]: /ja/tracing/trace_explorer/query_syntax/#numerical-values
 [4]: /ja/tracing/glossary/#indexed-span
 [5]: /ja/monitors/create/configuration/#advanced-alert-conditions
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 通知

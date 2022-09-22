@@ -70,7 +70,7 @@ containerDefinitions": [
 2. Attribuez l'adresse IP privée utilisée par chaque instance sous-jacente sur laquelle vos conteneurs sont exécutés dans votre conteneur d'application à la variable d'environnement `DD_AGENT_HOST`. Les traces de votre application seront ainsi transmises à l'Agent.
 
 {{< tabs >}}
-{{% tab "Endpoint de métadonnées EC2" %}}
+{{< tab "Endpoint de métadonnées EC2" >}}
 
 L'[endpoint de métadonnées EC2 d'Amazon][1] permet de découvrir des adresses IP privées. Pour obtenir l'adresse IP privée de chaque host, effectuez un curl sur l'URL suivante :
 
@@ -80,8 +80,8 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4
 
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-{{% /tab %}}
-{{% tab "Fichier de métadonnées des conteneurs ECS" %}}
+{{< /tab >}}
+{{< tab "Fichier de métadonnées des conteneurs ECS" >}}
 
 Le [fichier de métadonnées des conteneurs ECS d'Amazon][1] permet de découvrir des adresses IP privées. Pour obtenir l'adresse IP de chaque host, exécutez la commande suivante :
 
@@ -91,7 +91,7 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-metadata.html#metadata-file-format
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Définissez le résultat comme la variable d'environnement de hostname de votre Agent de trace pour chaque conteneur d'application qui transmet des traces à l'APM :

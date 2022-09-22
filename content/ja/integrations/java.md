@@ -67,7 +67,7 @@ Java インテグレーションを利用して、Java アプリケーション�
 Agent をホスト上のバイナリとして実行している場合は、JMX チェックを[別の Agent インテグレーション][5]として構成します。Agent を Kubernetes の DaemonSet として実行している場合は、[オートディスカバリー](?tab=docker#configuration)を使用して JMX チェックを構成します。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 - JMX に接続するように Agent を構成します。[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `jmx.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、以下の[コンフィギュレーションオプション](#configuration-options) または [init_config][2] と [instance][3] テンプレートを参照してください。
 
@@ -95,8 +95,8 @@ Agent をホスト上のバイナリとして実行している場合は、JMX �
 [2]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/init_config/jmx.yaml
 [3]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/instances/jmx.yaml
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 [Datadog Agent コンテナ][1]を実行するための標準 `gcr.io/datadoghq/agent:latest` イメージには JMX がインストールされていません。**`gcr.io/datadoghq/agent:latest-jmx` イメージ**を使用してください。このイメージは `gcr.io/datadoghq/agent:latest` に基づいていますが、Agent が [jmxfetch][2] を実行するために必要な JVM が含まれています。
 
@@ -122,7 +122,7 @@ Agent をホスト上のバイナリとして実行している場合は、JMX �
 [5]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [6]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=file#configuration
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ##### コンフィギュレーションオプション

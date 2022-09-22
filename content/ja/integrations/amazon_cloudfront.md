@@ -46,7 +46,7 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 ### ログの収集
 
 {{< tabs >}}
-{{% tab "Standard Logs" %}}
+{{< tab "Standard Logs" >}}
 
 #### ログの有効化
 
@@ -71,8 +71,8 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 [2]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [3]: https://app.datadoghq.com/logs
 [4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-{{% /tab %}}
-{{% tab "Real-Time Logs" %}}
+{{< /tab >}}
+{{< tab "Real-Time Logs" >}}
 
 #### ログの有効化
 
@@ -99,7 +99,7 @@ Amazon Kinesis Data Firehose などのコンシューマーを構成してリア
 [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/
 [3]: https://docs.datadoghq.com/ja/serverless/forwarder/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 収集データ

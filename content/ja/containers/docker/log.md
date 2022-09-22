@@ -44,7 +44,7 @@ Datadog Agent 6 以降は、コンテナからログを収集します。2 通�
 ## インストール
 
 {{< tabs >}}
-{{% tab "Container Installation" %}}
+{{< tab "Container Installation" >}}
 
 Datadog Agent を埋め込みホストを監視する [Docker コンテナ][1] を実行するには、それぞれの OS で次のコマンドを使用します。
 
@@ -125,8 +125,8 @@ docker run -d --name datadog-agent \
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
-{{% /tab %}}
-{{% tab "ホスト Agent" %}}
+{{< /tab >}}
+{{< tab "ホスト Agent" >}}
 
 1. [最新バージョンの Agent][1] をホストにインストールします。
 2. デフォルトの状態では、Datadog Agent でのログ収集は _無効_ になっています。有効にするには、`datadog.yaml` 構成ファイルに次の行を加えます。
@@ -147,8 +147,8 @@ docker run -d --name datadog-agent \
 [1]: /ja/agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "カスタムログを使用するホスト Agent" %}}
+{{< /tab >}}
+{{< tab "カスタムログを使用するホスト Agent" >}}
 
 1. [最新バージョンの Agent][1] をホストにインストールします。
 2. [カスタムログ収集のドキュメント][2]に従って、ログのファイルを調整します。
@@ -171,7 +171,7 @@ docker run -d --name datadog-agent \
 [2]: /ja/agent/logs/#custom-log-collection
 [3]: /ja/agent/guide/agent-configuration-files/
 [4]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **重要**:
@@ -194,7 +194,7 @@ Datadog Agent 6.8 以降では、`source` や `service` の初期値は `short_i
 オートディスカバリーは、ファイルの種類に応じてラベルが以下の形式となることを前提とします。
 
 {{< tabs >}}
-{{% tab "Dockerfile" %}}
+{{< tab "Dockerfile" >}}
 
 Dockerfile に以下の`LABEL` を追加します：
 
@@ -202,8 +202,8 @@ Dockerfile に以下の`LABEL` を追加します：
 LABEL "com.datadoghq.ad.logs"='[<ログコンフィギュレーション>]'
 ```
 
-{{% /tab %}}
-{{% tab "Docker-Compose" %}}
+{{< /tab >}}
+{{< tab "Docker-Compose" >}}
 
 `docker-compose.yaml` ファイルに以下のラベルを追加します：
 
@@ -212,8 +212,8 @@ labels:
     com.datadoghq.ad.logs: '["<LOGS_CONFIG>"]'
 ```
 
-{{% /tab %}}
-{{% tab "Run Command" %}}
+{{< /tab >}}
+{{< tab "Run Command" >}}
 
 実行コマンドとして次のラベルを追加します：
 
@@ -221,7 +221,7 @@ labels:
 -l com.datadoghq.ad.logs='[<ログコンフィギュレーション>]'
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 `<LOG_CONFIG>` がログ収集コンフィギュレーションの場合、インテグレーション構成ファイルにあります。[詳細は、ログ収集コンフィギュレーションを参照してください][5]。
@@ -231,7 +231,7 @@ labels:
 ### 例
 
 {{< tabs >}}
-{{% tab "NGINX Dockerfile" %}}
+{{< tab "NGINX Dockerfile" >}}
 
 次の Dockerfile は対応するコンテナにおける NGINX ログインテグレーションを有効にします (`service` の値は変更できます)：
 
@@ -248,8 +248,8 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-{{% /tab %}}
-{{% tab "Java multi-line logs" %}}
+{{< /tab >}}
+{{< tab "Java multi-line logs" >}}
 
 スタックトレースのような複数行のログのため、Agent には複数の行を 1 行に集約する[複数行の処理規則][1]があります。
 
@@ -273,8 +273,8 @@ labels:
 
 
 [1]: /ja/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-{{% /tab %}}
-{{% tab "From file" %}}
+{{< /tab >}}
+{{< tab "From file" >}}
 
 Agent v7.25.0 以降/6.25.0 以降では、コンテナのオートディスカバリーラベルに基づくファイルから直接ログを収集できます。このようなログを収集するには、以下のようにコンテナに `com.datadoghq.ad.logs` ラベルを使用して `/logs/app/prod.log` を収集します。
 
@@ -298,7 +298,7 @@ labels:
 
 - このような組み合わせを使用しているとき、`source` と `service` にデフォルト値はなく、オートディスカバリーのラベルで明示的に設定する必要があります。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: オートディスカバリー機能は、`DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 環境変数の有無にかかわらず使用できます。次のオプションの中から 1 つを選択してください。

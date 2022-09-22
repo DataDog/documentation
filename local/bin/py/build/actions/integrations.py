@@ -727,10 +727,10 @@ class Integrations:
                 self.regex_tabs_close, "{{< /tabs >}}", result, 0
             )
             result = re.sub(
-                self.regex_tab_open, "{{% tab", result, 0
+                self.regex_tab_open, "{{< tab", result, 0
             )
             result = re.sub(
-                self.regex_tab_close, "{{% /tab %}}", result, 0
+                self.regex_tab_close, "{{< /tab >}}", result, 0
             )
             result = re.sub(
                 self.regex_tab_end, " %}}", result, 0
@@ -808,6 +808,9 @@ class Integrations:
                     result = self.add_integration_frontmatter(
                         new_file_name, result, dependencies, integration_id, integration_version
                     )
+
+                # Remove % delimiters which can cause Hugo's to break with nested shortcodes.
+                result = result.replace("{{%", "{{<").replace("%}}", ">}}")
 
                 with open(out_name, "w", ) as out:
                     out.write(result)

@@ -59,7 +59,7 @@ See the list of all hosts in your account from the [Infrastructure List][4]. The
 There are differences in hostname resolution between Agent v5 and Agent v6.
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 ### Linux and macOS
 
@@ -114,12 +114,12 @@ If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to fa
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+{{< /tab >}}
+{{< tab "Agent v5" >}}
 
 {{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme"  >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 [1]: /agent/guide/agent-commands/#agent-status-and-information

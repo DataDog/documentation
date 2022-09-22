@@ -76,7 +76,7 @@ Linkerd チェックは [Datadog Agent][2] パッケージに含まれていま�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -92,8 +92,8 @@ Linkerd チェックは [Datadog Agent][2] パッケージに含まれていま�
 [2]: https://github.com/DataDog/integrations-core/blob/master/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -134,7 +134,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [2]: https://github.com/DataDog/integrations-core/blob/7.30.x/linkerd/datadog_checks/linkerd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [4]: https://linkerd.io/2/tasks/modifying-proxy-log-level/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

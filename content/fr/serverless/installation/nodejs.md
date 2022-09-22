@@ -35,7 +35,7 @@ Si vous avez déjà configuré le plug-in Serverless Datadog à l'aide du Forwar
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{< tab "Framework Serverless" >}}
 
 Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda, et configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
 
@@ -63,8 +63,8 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
 [2]: /fr/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 La [macro CloudFormation Datadog][1] transforme automatiquement votre modèle d'application SAM dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches. De plus, elle configure vos fonctions de sorte à ce qu'elles envoient des métriques, des traces et des logs à Datadog via l'[extension Lambda Datadog][2].
 
@@ -107,8 +107,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-js/releases
 [5]: https://gallery.ecr.aws/datadog/lambda-extension
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 La [bibliothèque CDK Constructs Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide des couches Lambda, et configure vos fonctions de sorte à ce qu'elles envoient les métriques, les traces et les logs à Datadog via l'[extension Lambda Datadog][2].
 
@@ -159,8 +159,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://gallery.ecr.aws/datadog/lambda-extension
-{{% /tab %}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+{{< /tab >}}
+{{< tab "Interface de ligne de commande Datadog" >}}
 
 <div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
@@ -208,8 +208,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://gallery.ecr.aws/datadog/lambda-extension
 [4]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Image de conteneur" %}}
+{{< /tab >}}
+{{< tab "Image de conteneur" >}}
 
 ### Install
 
@@ -254,8 +254,8 @@ Remplacez `<TAG>` par un numéro de version spécifique (par exemple, `7`) ou pa
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
-{{% tab "Personnalisé" %}}
+{{< /tab >}}
+{{< tab "Personnalisé" >}}
 
 ### Install
 
@@ -351,7 +351,7 @@ Pour configurer la fonction, suivez les étapes ci-dessous :
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: https://gallery.ecr.aws/datadog/lambda-extension
 [5]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Explorer la surveillance sans serveur de Datadog

@@ -103,7 +103,7 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 以下の手順は、[Amazon Web Console][4]、[AWS CLI ツール][5]、または [AWS CloudFormation][6] を使用したタスクの構成方法を示します。
 
 {{< tabs >}}
-{{% tab "Web UI" %}}
+{{< tab "Web UI" >}}
 ##### Web UI タスク定義
 
 1. [AWS Web Console][1] にログインし、ECS セクションに移動します。
@@ -126,9 +126,9 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 [1]: https://aws.amazon.com/console
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "AWS CLI" %}}
+{{< tab "AWS CLI" >}}
 ##### AWS CLI タスク定義
 
 1. [datadog-agent-ecs-fargate][1] をダウンロードします。**注**: Internet Explorer をお使いの場合は、以下に記載の JSON ファイルを含む gzip ファイルとしてダウンロードされる場合があります。
@@ -156,9 +156,9 @@ aws ecs register-task-definition --cli-input-json file://<ファイルへのパ�
 [1]: http://docs.datadoghq.com/integrations/eks_fargate
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
 [3]: https://docs.docker.com/engine/api/v1.30/#operation/ContainerStats
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "CloudFormation" %}}
+{{< tab "CloudFormation" >}}
 ##### AWS CloudFormation タスク定義
 
  [AWS CloudFormation][1] テンプレートを使用して Fargate コンテナを構成することができます。CloudFormation テンプレート内で `AWS::ECS::TaskDefinition` リソースを使用して Amazon ECS タスクを設定し、そのタスクで必要な起動タイプとして `FARGATE` を指定します。
@@ -193,7 +193,7 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 [1]: https://aws.amazon.com/cloudformation/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -214,7 +214,7 @@ ECS Fargate のメトリクスを収集するには、次のアクセス許可�
 ECS Fargate では、タスクを [Replica サービス][10]として実行するオプションしかありません。Datadog Agent は、アプリケーションやインテグレーションコンテナと同じタスク定義内で実行されます。
 
 {{< tabs >}}
-{{% tab "Web UI" %}}
+{{< tab "Web UI" >}}
 
 ##### Web UI レプリカサービス
 
@@ -232,9 +232,9 @@ ECS Fargate では、タスクを [Replica サービス][10]として実行す�
 12. **Next step** ボタンをクリックし、**Create service** ボタンをクリックします。
 
 [1]: https://aws.amazon.com/console
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "AWS CLI" %}}
+{{< tab "AWS CLI" >}}
 ##### AWS CLI レプリカサービス
 
 [AWS CLI ツール][1]を使用して次のコマンドを実行します。
@@ -257,9 +257,9 @@ aws ecs run-task --cluster <CLUSTER_NAME> \
 ```
 
 [1]: https://aws.amazon.com/cli
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "CloudFormation" %}}
+{{< tab "CloudFormation" >}}
 ##### AWS CloudFormation レプリカサービス
 
 CloudFormation テンプレートでは、前の例で作成した `ECSTaskDefinition` リソースを、作成する `AWS::ECS::Service` リソースに参照させることができます。この後、レプリカサービスに `Cluster` や `DesiredCount` など、アプリケーションに必要なパラメーターを指定します。
@@ -281,7 +281,7 @@ Resources:
 CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation ECS サービスのドキュメント][1]をご参照ください。
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 ### メトリクスの収集
@@ -518,16 +518,16 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
 3. Fargate タスクの実行中は常に、Fargate タスクが管理するコンテナの情報を含むコンテナログが、Fluent Bit から Datadog に送信されるようになります。[Log Explorer ページ][25]で生ログを確認したり、ログ用の[モニターを作成][26]し [Live Container ビュー][27]で確認したりすることが可能です。
 
 {{< tabs >}}
-{{% tab "Web UI" %}}
+{{< tab "Web UI" >}}
 ##### Web UI
 
 Fluent Bit コンテナを既存のタスク定義に追加するには、**Log router integration** の下にある **Enable FireLens integration** チェックボックスをオンにすると、自動的に `log_router` コンテナが作成されます。これは地域の画像を取り込みますが、`latest` の代わりに `stable` の画像タグを使用することをお勧めします。**Apply** をクリックすると、ベースとなるコンテナが作成されます。さらに `firelensConfiguration` をカスタマイズするには、下部にある **Configure via JSON** ボタンをクリックして、手動で編集します。
 
 これを追加した後、タスク定義でログを送信するアプリケーションコンテナを編集し、**Log driver** を `awsfirelens` に変更し、**Log options** に上記の例で示されたキーを記入します。
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "AWS CLI" %}}
+{{< tab "AWS CLI" >}}
 ##### AWS CLI
 
 既存のタスク定義 JSON ファイルを編集して、前のセクションで説明したように、`log_router` コンテナと、アプリケーションコンテナの更新された `logConfiguration` を含めます。これが完了したら、タスク定義の新しいリビジョンを作成することができます。
@@ -536,9 +536,9 @@ Fluent Bit コンテナを既存のタスク定義に追加するには、**Log 
 aws ecs register-task-definition --cli-input-json file://<ファイルへのパス>/datadog-agent-ecs-fargate.json
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "CloudFormation" %}}
+{{< tab "CloudFormation" >}}
 ##### AWS CloudFormation
 
 [AWS CloudFormation][1] のテンプレートを使用するには、`AWS::ECS::TaskDefinition` リソースを使用し、`Datadog` オプションを設定して、ログ管理を構成する必要があります。
@@ -736,7 +736,7 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 
 [1]: https://aws.amazon.com/cloudformation/
 [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

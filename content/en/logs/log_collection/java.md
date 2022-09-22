@@ -53,7 +53,7 @@ The following instructions show setup examples for the Log4j, Log4j 2, and Logba
 ### JSON format
 
 {{< tabs >}}
-{{% tab "Log4j" %}}
+{{< tab "Log4j" >}}
 
 For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] combined with Logback. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes. To use it:
 
@@ -91,8 +91,8 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
     ```
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
-{{% /tab %}}
-{{% tab "Log4j 2" %}}
+{{< /tab >}}
+{{< tab "Log4j 2" >}}
 
 Log4j 2 includes a JSON layout. 
 
@@ -137,8 +137,8 @@ Log4j 2 includes a JSON layout.
     </dependency>
     ```
 
-{{% /tab %}}
-{{% tab "Logback" %}}
+{{< /tab >}}
+{{< tab "Logback" >}}
 
 Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback. 
 
@@ -173,7 +173,7 @@ Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
     ```
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Inject trace IDs in your logs
@@ -183,7 +183,7 @@ If APM is enabled for this application, you can correlate logs and traces by ena
 ### Raw format
 
 {{< tabs >}}
-{{% tab "Log4j" %}}
+{{< tab "Log4j" >}}
 
 Configure a file appender in `log4j.xml`:
 
@@ -209,8 +209,8 @@ Configure a file appender in `log4j.xml`:
 </log4j:configuration>
 ```
 
-{{% /tab %}}
-{{% tab "Log4j 2" %}}
+{{< /tab >}}
+{{< tab "Log4j 2" >}}
 
 Configure a file appender in `log4j2.xml`:
 
@@ -231,8 +231,8 @@ Configure a file appender in `log4j2.xml`:
 </Configuration>
 ```
 
-{{% /tab %}}
-{{% tab "Logback" %}}
+{{< /tab >}}
+{{< tab "Logback" >}}
 
 Configure a file appender in `logback.xml`:
 
@@ -254,7 +254,7 @@ Configure a file appender in `logback.xml`:
 </configuration>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Inject trace IDs in your logs
@@ -298,7 +298,7 @@ To stream logs directly to Datadog:
 If you are not already using Logback, most common logging libraries can be bridged to Logback.
 
 {{< tabs >}}
-{{% tab "Log4j" %}}
+{{< tab "Log4j" >}}
 
 Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes.  To use it:
 
@@ -327,9 +327,9 @@ Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another 
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Log4j 2" %}}
+{{< tab "Log4j 2" >}}
 
 Log4j 2 allows logging to a remote host, but it does not offer the ability to prefix the logs with an API key. Because of this, use the SLF4J module [log4j-over-slf4j][1] and Logback. `log4j-to-slf4j.jar` cleanly replaces Log4j 2 in your application so you do not have to make any code changes. To use it:
 
@@ -361,7 +361,7 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{% /tab %}}
+{{< /tab >}}
 
 {{< /tabs >}}
 

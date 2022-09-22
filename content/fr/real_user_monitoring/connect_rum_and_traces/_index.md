@@ -41,7 +41,7 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
 ### Configurer RUM
 
 {{< tabs >}}
-{{% tab "RUM Browser" %}}
+{{< tab "RUM Browser" >}}
 
 1.  Configurez la [surveillance Browser RUM][1].
 
@@ -66,8 +66,8 @@ Pour associer RUM à vos traces, vous devez indiquer votre application Browser d
 <div class="alert alert-info">Le tracing de bout en bout est disponible pour les requêtes déclenchées après l'initialisation du SDK Browser. Le tracing de bout en bout du document HTML initial ainsi que des premières requêtes Browser n'est pas pris en charge.</div>
 
 [1]: /fr/real_user_monitoring/browser/
-{{% /tab %}}
-{{% tab "RUM pour Android" %}}
+{{< /tab >}}
+{{< tab "RUM pour Android" >}}
 
 1.  Configurez la [surveillance Android RUM][1].
 
@@ -85,8 +85,8 @@ Pour associer RUM à vos traces, vous devez indiquer votre application Browser d
 **Remarque** : par défaut, tous les sous-domaines des hosts répertoriés sont tracés. Par exemple, si vous ajoutez `example.com`, vous activez également le tracing de `api.example.com` et `foo.example.com`.
 
 [1]: /fr/real_user_monitoring/android/
-{{% /tab %}}
-{{% tab "RUM pour iOS" %}}
+{{< /tab >}}
+{{< tab "RUM pour iOS" >}}
 
 1.  Configurez la [surveillance iOS RUM][1].
 
@@ -113,7 +113,7 @@ Pour associer RUM à vos traces, vous devez indiquer votre application Browser d
 **Remarque** : par défaut, tous les sous-domaines des hosts répertoriés sont tracés. Par exemple, si vous ajoutez `example.com`, vous activez également le tracing de `api.example.com` et `foo.example.com`.
 
 [1]: /fr/real_user_monitoring/ios/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Bibliothèques compatibles

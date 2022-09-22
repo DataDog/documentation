@@ -70,7 +70,7 @@ Le check Nagios est inclus avec le package de l'[Agent Datadog][1] : vous n'ave
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -87,8 +87,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -103,7 +103,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 **Remarque** : l'Agent conteneurisé devrait pouvoir accéder au fichier `/etc/nagios3/nagios.cfg` pour activer l'intégration Datadog/Nagios.
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

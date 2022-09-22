@@ -203,7 +203,7 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 **Agent** のすべての機能を利用するには、以下のポートを開きます。
 
 {{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+{{< tab "Agent v6 & v7" >}}
 
 #### アウトバウンド
 
@@ -309,8 +309,8 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 [1]: /ja/integrations/go_expvar/
 [2]: /ja/agent/basic_agent_usage/#gui
 [3]: /ja/tracing/
-{{% /tab %}}
-{{% tab "Agent v5 & v4" %}}
+{{< /tab >}}
+{{< tab "Agent v5 & v4" >}}
 
 #### アウトバウンド
 
@@ -337,7 +337,7 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 [1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /ja/integrations/ntp/#overview
 [3]: /ja/tracing/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## プロキシの使用

@@ -21,7 +21,7 @@ Datadog Agent 6 이상의 버전은 컨테이너에서 로그를 수집합니다
 ECS 컨테이너에서 애플리케이션을 실행하여 생성된 로그를 전부 수집하고 Datadog 애플리케이션으로 보내는 방법은 다음과 같습니다.
 
 {{< tabs >}}
-{{% tab "리눅스(Linux)" %}}
+{{< tab "리눅스(Linux)" >}}
 
 1. [Amazon ECS 설정 가이드][1]를 따릅니다.
 2. [datadog-agent-ecs.json][2] 파일을(오리지널 아마존 리눅스 AMI를 사용하는 경우에는 [datadog-agent-ecs1.json][3]) 다음 설정으로 업데이트합니다.
@@ -84,8 +84,8 @@ ECS 컨테이너에서 애플리케이션을 실행하여 생성된 로그를 �
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-{{% /tab %}}
-{{% tab "윈도우즈(Windows)" %}}
+{{< /tab >}}
+{{< tab "윈도우즈(Windows)" >}}
 
 1. [Amazon ECS 설정 가이드][1]를 따릅니다.
 2. [datadog-agent-ecs-win.json][2] 파일을 다음의 설정으로 업데이트합니다.
@@ -149,7 +149,7 @@ ECS 컨테이너에서 애플리케이션을 실행하여 생성된 로그를 �
 [1]: https://docs.datadoghq.com/kr/agent/amazon_ecs/
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 커스텀 로그 수집

@@ -46,7 +46,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 
 3. `Ddd.profiling.enabled` フラグまたは `DD_PROFILING_ENABLED` 環境変数を `true` に設定し、プロファイラーを有効にします。`dd.service`、`dd.env`、`dd.version` を指定して、プロファイルをこれらの次元でフィルタリングしたりグループ化したりできるようにします。
    {{< tabs >}}
-{{% tab "コマンド引数" %}}
+{{< tab "コマンド引数" >}}
 
 サービスを呼び出します。
 ```diff
@@ -60,8 +60,8 @@ java \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
-{{% /tab %}}
-{{% tab "環境変数" %}}
+{{< /tab >}}
+{{< tab "環境変数" >}}
 
 ```diff
 export DD_SERVICE=<YOUR_SERVICE>
@@ -74,7 +74,7 @@ java \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
     **注**: `javaagent` 引数は `-jar` の前に置く必要があり、アプリケーションの引数ではなく、JVM のオプションとして追加されます。詳細については、[Oracleドキュメント][6]を参照してください。

@@ -27,7 +27,7 @@ Metrics without LimitsTM のユーザーは、インジェストおよびイン�
 {{< img src="account_management/billing/custom_metrics/request_latency.png" alt="リクエストのレイテンシー" style="width:80%;">}}
 
 {{< tabs >}}
-{{% tab "Count, Rate"%}}
+{{< tab "Count, Rate">}}
 
 [COUNT][1] と [RATE][2] のカスタムメトリクスの数は、同じロジックで計算されます。
 
@@ -114,8 +114,8 @@ Metrics without LimitsTM を使って、`endpoint` と `status` のタグだけ�
 [1]: /ja/metrics/types/?tab=count#metric-types
 [2]: /ja/metrics/types/?tab=rate#metric-types
 [3]: /ja/metrics/metrics-without-limits
-{{% /tab %}}
-{{% tab "Gauge" %}}
+{{< /tab >}}
+{{< tab "Gauge" >}}
 このタグスキームで GAUGE メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
 
 - `host:A`、`endpoint:X`、`status:200`
@@ -189,8 +189,8 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 [Metrics without LimitsTM][1] の詳細についてはこちらをご覧ください。
 
 [1]: /ja/metrics/metrics-without-limits
-{{% /tab %}}
-{{% tab "Histogram" %}}
+{{< /tab >}}
+{{< tab "Histogram" >}}
 
 **HISTOGRAM メトリクスは、一意のメトリクス名とタグ値の組み合わせごとに 5 つのカスタムメトリクスをデフォルトで生成し、Agent 側の `max`、`median`、`avg`、`95pc`、`count` の集計をサポートします。詳細については、[HISTOGRAM メトリクスタイプ][1]をご参照ください。
 
@@ -212,8 +212,8 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 [1]: /ja/metrics/types/?tab=histogram#metric-types
 [2]: /ja/metrics/types/?tab=histogram#definition
 [3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "Distribution" %}}
+{{< /tab >}}
+{{< tab "Distribution" >}}
 
 **DISTRIBUTION メトリクスは、一意のメトリクス名とタグ値の組み合わせごとに 5 つのカスタムメトリクスをデフォルトで生成し**、値の全体的な分布を表示します。これら 5 つのカスタムメトリクスは、サーバー側の `count`、`sum`、`min`、`max`、`avg` の集計をサポートします。詳細については、[DISTRIBUTION メトリクスタイプ][1]をご参照ください。
 
@@ -274,7 +274,7 @@ Metrics without LimitsTM で構成されたメトリクス (タグ/集計が構�
 
 [1]: /ja/metrics/types/?tab=distribution#definition
 [2]: /ja/metrics/metrics-without-limits
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## カスタムメトリクスの追跡

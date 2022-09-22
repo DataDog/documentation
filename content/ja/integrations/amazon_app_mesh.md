@@ -42,7 +42,7 @@ supported_os:
 ## セットアップ
 
 {{< tabs >}}
-{{% tab "EKS" %}}
+{{< tab "EKS" >}}
 
 下記の指示に従って、Envoy と呼ばれる AWS App Mesh のサイドカープロキシのメトリクスの収集を有効にします。デプロイ、後でデプロイをパッチ、AWS App Mesh インジェクターコントローラーを使用、のいずれかの方法を選択してサイドカーを追加します。どの方法を選択しても、下記のステップで実行できます。
 
@@ -126,8 +126,8 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_eks/
 [2]: https://github.com/aws/aws-app-mesh-examples/blob/master/walkthroughs/eks/base.md#install-app-mesh--kubernetes-components
-{{% /tab %}}
-{{% tab "ECS Fargate" %}}
+{{< /tab >}}
+{{< tab "ECS Fargate" >}}
 
 #### メトリクスの収集
 
@@ -172,8 +172,8 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
 [2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
-{{% /tab %}}
-{{% tab "ECS EC2" %}}
+{{< /tab >}}
+{{< tab "ECS EC2" >}}
 
 #### メトリクスの収集
 
@@ -218,7 +218,7 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
 [2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 収集データ

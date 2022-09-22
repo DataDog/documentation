@@ -38,7 +38,7 @@ Datadog Agent 7.27.0 では、SNMP を使用したデバイスの監視の際、
 3. 以下の手順は、オートディスカバリー/サブネットスキャンを使用する場合のみ適用されます。各インスタンス（サブネット）のコンフィギュレーションを、SNMP チェックコンフィギュレーションからメインの Datadog Agent `datadog.yaml` に移動します。
 
 {{< tabs >}}
-{{% tab "SNMPv2" %}}
+{{< tab "SNMPv2" >}}
 
 ```yaml
 listeners:
@@ -63,9 +63,9 @@ snmp_listener:
       - "key2:val2"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "SNMPv3" %}}
+{{< tab "SNMPv3" >}}
 
 ```yaml
 listeners:
@@ -97,7 +97,7 @@ snmp_listener:
         - "key2:val2"
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### DCA 特定の移行

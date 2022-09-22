@@ -95,7 +95,7 @@ FoundationDB チェックは [Datadog Agent][2] パッケージに含まれて�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -159,8 +159,8 @@ FoundationDB はデフォルトで XML ログを書き込みますが、Datadog 
 [2]: https://apple.github.io/foundationdb/administration.html#default-cluster-file
 [3]: https://www.foundationdb.org/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -185,7 +185,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

@@ -16,7 +16,7 @@ Datadog Serverless の新規ユーザーには、Datadog で[すぐに使用可�
 ## コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{< tab "Datadog CLI" >}}
 
 Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを修正し、新しいデプロイを必要とせずにインスツルメンテーションを可能にします。Datadog のサーバーレスモニタリングをすばやく開始するための最適な方法です。
 
@@ -62,8 +62,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 [Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
@@ -91,8 +91,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 [Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
@@ -137,8 +137,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 [Datadog CloudFormation マクロ][1]は、AWS CDK によって生成された CloudFormation テンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
@@ -191,8 +191,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "Zappa" %}}
+{{< /tab >}}
+{{< tab "Zappa" >}}
 
 ### 設定の更新
 
@@ -231,8 +231,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
-{{% tab "Chalice" %}}
+{{< /tab >}}
+{{< tab "Chalice" >}}
 
 ### プロジェクトの更新
 
@@ -280,8 +280,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
-{{% tab "Container Image" %}}
+{{< /tab >}}
+{{< tab "Container Image" >}}
 
 ### Install
 
@@ -315,8 +315,8 @@ pip install datadog-lambda
 
 [1]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [2]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 
 ### Install
 
@@ -380,7 +380,7 @@ pip install datadog-lambda -t ./
 [6]: https://pypi.org/project/datadog-lambda/
 [7]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### タグ

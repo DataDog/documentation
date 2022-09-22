@@ -24,7 +24,7 @@ title: Cluster Agentのドキュメント
 お使いの Kubernetes クラスタで Datadog Cluster Agent を設定するには、以下の手順に従います。
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 Helm Chart `2.7.0` 以降、Cluster Agent はデフォルトで有効になっています。
 
@@ -43,8 +43,8 @@ Helm Chart `2.7.0` 以降、Cluster Agent はデフォルトで有効になっ�
 手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{< /tab >}}
+{{< tab "Operator" >}}
 
 Datadog Operator `v0.7.0` 以降、Cluster Agent はデフォルトで有効になっています。
 
@@ -61,8 +61,8 @@ Operator は次に、必要な RBAC を作成し、Cluster Agent をデプロイ
 
 手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
 
-{{% /tab %}}
-{{% tab "Daemonset" %}}
+{{< /tab >}}
+{{< tab "Daemonset" >}}
 
 1. [Datadog Cluster Agent の設定](#configure-the-datadog-cluster-agent)
 2. [Datadog Cluster Agent と通信するように Agent を構成します](#configure-the-datadog-agent)
@@ -197,7 +197,7 @@ Datadog Cluster Agent をセットアップした後、Datadog Agent コンフ�
 [12]: /ja/agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
 [13]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
 [14]: /ja/agent/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

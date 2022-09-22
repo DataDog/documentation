@@ -39,7 +39,7 @@ Tous les utilisateurs peuvent lire l'ensemble des types de données. Les utilisa
 
 En plus des autorisations générales, vous pouvez définir des autorisations plus granulaires pour des ressources ou des types de données spécifiques. Les autorisations peuvent être globales ou limitées à un sous-ensemble d'éléments. Vous trouverez ci-dessous les détails de ces options et leur impact sur chacune des autorisations disponibles.
 
-{{% permissions %}}
+{{< permissions >}}
 {{< permissions group="Logs" >}}
 
 ## Pour aller plus loin

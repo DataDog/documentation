@@ -60,7 +60,7 @@ Datadog Agent の[自動計算されたサンプリングレート](#in-the-agen
 構成は、環境変数で設定するか、コードで直接設定することができます。
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 Java アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_SERVICE_RULES` を使って、サービスごとのサンプリングレートを設定します。
 
 例えば、`my-service` という名前のサービスのトレースの 20% を送信するには
@@ -78,8 +78,8 @@ export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
 サンプリングコントロールについては、[Java トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/java
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /tab >}}
+{{< tab "Python" >}}
 Python アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
 
 例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
@@ -94,8 +94,8 @@ Python アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を�
 サンプリングコントロールについては、[Python トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/python
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 Ruby アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
 
 また、サービスごとにサンプリングレートを構成することも可能です。例えば、`my-service` という名前のサービスのトレースの 20% を送信するには
@@ -120,8 +120,8 @@ end
 サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/ruby#sampling
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 Go アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
 
 例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
@@ -136,8 +136,8 @@ Go アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使っ
 サンプリングコントロールについては、[Go トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/go
-{{% /tab %}}
-{{% tab "NodeJS" %}}
+{{< /tab >}}
+{{< tab "NodeJS" >}}
 Node.js アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
 
 また、サービス別のサンプリングレートを設定することもできます。例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
@@ -159,8 +159,8 @@ tracer.init({
 サンプリングコントロールについては、[NodeJS トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/nodejs
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
 
 例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
@@ -173,8 +173,8 @@ PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使�
 サンプリングコントロールについては、[PHP トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/php
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /tab >}}
+{{< tab "C++" >}}
 バージョン `1.3.2` からは、Datadog C++ ライブラリは以下の構成をサポートしています。
 - グローバルサンプリングレート: 環境変数 `DD_TRACE_SAMPLE_RATE`
 - サービス別のサンプリングレート: 環境変数 `DD_TRACE_SAMPLING_RULES`
@@ -190,8 +190,8 @@ PHP アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使�
 C++ では、すぐに使えるインスツルメンテーションのインテグレーションは提供されていませんが、Envoy、Nginx、Istio などのプロキシトレーシングで利用されています。プロキシに対するサンプリングの構成方法については、[プロキシのトレース][1]で詳しく説明しています。
 
 [1]: /ja/tracing/setup_overview/proxy_setup
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 .NET アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
 
 例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
@@ -206,7 +206,7 @@ C++ では、すぐに使えるインスツルメンテーションのインテ�
 サンプリングコントロールについては、[.NET トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/dotnet-core
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: トレースライブラリ構成を使用してサンプリングされたトレースのすべてのスパンには、取り込み理由 `rule` というタグが付けられます。ユーザー定義のサンプリングルールで構成されたサービスは、[Ingestion Control Page][5] の Configuration 列で `Configured` としてマークされます。
@@ -279,13 +279,13 @@ span.SetTag(ext.ManualDrop, true)
 分析メカニズムを使用するには、環境変数またはコード内のいずれかで有効にします。また、すべての `analytics_enabled` スパンに適用されるサンプリングレートを定義します。
 
 {{< tabs >}}
-{{% tab "環境変数" %}}
+{{< tab "環境変数" >}}
 
 ```
 @env  DD_TRACE_ANALYTICS_ENABLED - ブール値 - オプションの false
 ```
-{{% /tab %}}
-{{% tab "Code API" %}}
+{{< /tab >}}
+{{< tab "Code API" >}}
 
 ```
 // dd-trace-go で
@@ -295,7 +295,7 @@ tracerconfig.WithAnalytics(on bool)
 tracerconfig.SetAnalyticsRate(0.4)
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 任意のシングルスパンに `analytics_enabled:true` のタグを付けます。さらに、そのスパンに関連付けるサンプリングレートを指定します。

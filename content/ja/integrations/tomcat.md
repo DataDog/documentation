@@ -98,7 +98,7 @@ Tomcat チェックは [Datadog Agent][2] パッケージに含まれていま�
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -277,15 +277,15 @@ mydomain:attr0=val0,attr1=val1
 [5]: https://tomcat.apache.org/tomcat-8.0-doc/logging.html#Using_Log4j
 [6]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
 [7]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

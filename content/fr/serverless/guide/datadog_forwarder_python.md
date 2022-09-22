@@ -16,7 +16,7 @@ Après avoir installé l'[intégration AWS][2] et le [Forwarder Datadog][3], sui
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Framework Serverless" %}}
+{{< tab "Framework Serverless" >}}
 
 Le [plug-in Serverless Datadog][1] ajoute automatiquement la bibliothèque Lambda Datadog à vos fonctions à l'aide d'une couche. Il configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
 
@@ -44,8 +44,8 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 La [macro CloudFormation Datadog][1] transforme automatiquement votre modèle d'application SAM dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide de couches. Elle configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
 
@@ -89,8 +89,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-python/releases
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 La [macro CloudFormation Datadog][1] transforme automatiquement le modèle CloudFormation généré par AWS CDK dans le but d'ajouter la bibliothèque Lambda Datadog à vos fonctions à l'aide de couches. Elle configure également vos fonctions de façon à envoyer des métriques, traces et logs à Datadog par l'intermédiaire du [Forwarder Datadog][2].
 
@@ -142,8 +142,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-python/releases
 [5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "Zappa" %}}
+{{< /tab >}}
+{{< tab "Zappa" >}}
 
 ### Mise à jour des paramètres
 
@@ -183,8 +183,8 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [4]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
-{{% tab "Chalice" %}}
+{{< /tab >}}
+{{< tab "Chalice" >}}
 
 ### Mise à jour du projet
 
@@ -232,8 +232,8 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [4]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
-{{% tab "Interface de ligne de commande Datadog" %}}
+{{< /tab >}}
+{{< tab "Interface de ligne de commande Datadog" >}}
 
 <div class="alert alert-warning">Ce service est en bêta publique. Si vous souhaitez nous faire part de vos remarques, contactez l'<a href="/help">assistance Datadog</a>.</div>
 
@@ -274,8 +274,8 @@ Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consul
 [3]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [5]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Image de conteneur" %}}
+{{< /tab >}}
+{{< tab "Image de conteneur" >}}
 
 ### Installation
 
@@ -309,8 +309,8 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 
 [1]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [2]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
-{{% tab "Personnalisé" %}}
+{{< /tab >}}
+{{< tab "Personnalisé" >}}
 
 ### Installation
 
@@ -375,7 +375,7 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 [7]: https://pypi.org/project/datadog-lambda/
 [8]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [9]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Tag

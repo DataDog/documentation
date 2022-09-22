@@ -40,7 +40,7 @@ Select the scope to monitor by choosing host names, tags, or choose `All Monitor
 In this section, choose between a **Check Alert** or **Cluster Alert**:
 
 {{< tabs >}}
-{{% tab "Check Alert" %}}
+{{< tab "Check Alert" >}}
 
 A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
 
@@ -64,8 +64,8 @@ Set up the check alert:
 
 
 [1]: /monitors/manage/status
-{{% /tab %}}
-{{% tab "Cluster Alert" %}}
+{{< /tab >}}
+{{< tab "Cluster Alert" >}}
 
 A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
 
@@ -80,7 +80,7 @@ Each check tagged with a distinct combination of tags is considered to be a dist
 {{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
 
 For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Advanced alert conditions

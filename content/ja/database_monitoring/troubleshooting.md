@@ -18,7 +18,7 @@ description: データベースモニタリングセットアップのトラブ�
 システムメトリクスなどの他のデータは受信しているが、データベースモニタリングのデータ (クエリメトリクスやクエリサンプルなど) を受信していない場合、Agent またはデータベースのコンフィギュレーションに問題がある可能性があります。Agent のコンフィギュレーションが[セットアップ手順][1]の例と同様であることを確認し、コンフィギュレーションファイルの場所を再確認してください。
 
 {{< tabs >}}
-{{% tab "Postgres" %}}
+{{< tab "Postgres" >}}
 
 デバッグを行うには、まず[Agent のステータスコマンド][1]を実行して、収集されたデータや Datadog に送信されたデータのデバッグ情報を収集します。
 
@@ -71,8 +71,8 @@ Database Monitoring Query Samples: Last Run: 1, Total: 17,921
 ```
 
 [1]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-{{% /tab %}}
-{{% tab "MySQL" %}}
+{{< /tab >}}
+{{< tab "MySQL" >}}
 
 デバッグを行うには、まず[Agent のステータスコマンド][1]を実行して、収集されたデータや Datadog に送信されたデータのデバッグ情報を収集します。
 
@@ -127,7 +127,7 @@ Database Monitoring Query Samples: Last Run: 1, Total: 74,451
 ```
 
 [1]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Agent のコンフィギュレーションが正しいことを確認したら、[Agent のログ][3]でデータベースのインテグレーション実行時に警告やエラーが発生していないかをチェックします。
@@ -149,7 +149,7 @@ agent check mysql -t 2
 クエリメトリクスデータの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。
 
 {{< tabs >}}
-{{% tab "Postgres" %}}
+{{< tab "Postgres" >}}
 
 | 考えられる原因                         | ソリューション                                  |
 |----------------------------------------|-------------------------------------------|
@@ -166,8 +166,8 @@ Agent のコンフィギュレーションでデフォルト `postgres` 以外�
 
 
 [1]: /ja/database_monitoring/setup_postgres/
-{{% /tab %}}
-{{% tab "MySQL" %}}
+{{< /tab >}}
+{{< tab "MySQL" >}}
 
 | 考えられる原因                         | ソリューション                                  |
 |----------------------------------------|-------------------------------------------|
@@ -177,7 +177,7 @@ Agent のコンフィギュレーションでデフォルト `postgres` 以外�
 
 [1]: /ja/database_monitoring/setup_mysql/
 [2]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 特定のクエリが見つからない
@@ -185,7 +185,7 @@ Agent のコンフィギュレーションでデフォルト `postgres` 以外�
 いくつかのクエリのデータはあるが、データベースモニタリングで特定のクエリやクエリセットを確認したい場合は、以下のガイドに従ってください。
 
 {{< tabs >}}
-{{% tab "Postgres" %}}
+{{< tab "Postgres" >}}
 
 | 考えられる原因                         | ソリューション                                  |
 |----------------------------------------|-------------------------------------------|
@@ -200,8 +200,8 @@ Agent のコンフィギュレーションでデフォルト `postgres` 以外�
 [1]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [2]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
 [3]: /ja/database_monitoring/setup_postgres/advanced_configuration/
-{{% /tab %}}
-{{% tab "MySQL" %}}
+{{< /tab >}}
+{{< tab "MySQL" >}}
 
 | 考えられる原因                         | ソリューション                                  |
 |----------------------------------------|-------------------------------------------|
@@ -212,7 +212,7 @@ Agent のコンフィギュレーションでデフォルト `postgres` 以外�
 
 [1]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [2]: /ja/database_monitoring/setup_mysql/advanced_configuration/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -226,7 +226,7 @@ Agent のコンフィギュレーションでデフォルト `postgres` 以外�
 長いクエリの場合、データベースのコンフィギュレーション上 SQL の全文が表示されないことがあります。お客様のワークロードに合わせて多少のチューニングが必要です。
 
 {{< tabs >}}
-{{% tab "Postgres" %}}
+{{< tab "Postgres" >}}
 
 Postgres の設定 `track_activity_query_size` は、Postgres が保存し、Agent に対して表示する SQL 文の最大サイズを示します。デフォルトでは、この値は 1024 バイトです。この値を 4096 まで上げると、ほとんどのワークロードのクエリをキャプチャすることができます。しかし、クエリが非常に複雑であったり、非常に長い配列を使用する場合はより高い値が適切となる可能性があります。
 
@@ -246,8 +246,8 @@ SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[ ?
 
 
 [1]: https://www.postgresql.org/docs/current/runtime-config-statistics.html
-{{% /tab %}}
-{{% tab "MySQL" %}}
+{{< /tab >}}
+{{< tab "MySQL" >}}
 
 Datadog Agent から見える MySQL の SQL テキストの長さは、以下の[システム変数][1]によって決定されます。
 
@@ -263,7 +263,7 @@ performance_schema=4096
 
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_digest_length
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### クエリに実行計画が欠けている
@@ -271,7 +271,7 @@ performance_schema=4096
 一部またはすべてのクエリで計画が利用できない場合があります。これは、サポートされていないクエリコマンドである、クエリがサポートされていないクライアントアプリケーションせ生成された、Agent のバージョンが古い、データベースのセットアップが不完全であることなどが原因です。
 
 {{< tabs >}}
-{{% tab "Postgres" %}}
+{{< tab "Postgres" >}}
 
 | 考えられる原因                         | ソリューション                                  |
 |----------------------------------------|-------------------------------------------|
@@ -292,8 +292,8 @@ performance_schema=4096
 [4]: https://github.com/MagicStack/asyncpg
 [5]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [6]: /ja/database_monitoring/setup_postgres/advanced_configuration
-{{% /tab %}}
-{{% tab "MySQL" %}}
+{{< /tab >}}
+{{< tab "MySQL" >}}
 
 | 考えられる原因                         | ソリューション                                  |
 |----------------------------------------|-------------------------------------------|
@@ -305,7 +305,7 @@ performance_schema=4096
 
 [1]: /ja/database_monitoring/setup_mysql/
 [2]: /ja/database_monitoring/setup_mysql/advanced_configuration/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

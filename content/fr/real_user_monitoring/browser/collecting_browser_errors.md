@@ -60,7 +60,7 @@ addError(
 **Remarque** : la fonctionnalité de [suivi des erreurs][4] traite toutes les erreurs envoyées avec la source `custom` ou `source` et contenant une stack trace. Les erreurs envoyées avec une autre source (comme `console`) ne sont pas traitées.
 
 {{< tabs >}}
-{{% tab "NPM" %}}
+{{< tab "NPM" >}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -84,8 +84,8 @@ try {
     datadogRum.addError(error);
 }
 ```
-{{% /tab %}}
-{{% tab "CDN asynchrone" %}}
+{{< /tab >}}
+{{< tab "CDN asynchrone" >}}
 
 ```javascript
 // Envoyer une erreur custom avec un contexte
@@ -113,8 +113,8 @@ try {
     })
 }
 ```
-{{% /tab %}}
-{{% tab "CDN synchrone" %}}
+{{< /tab >}}
+{{< tab "CDN synchrone" >}}
 
 ```javascript
 // Envoyer une erreur custom avec un contexte
@@ -136,7 +136,7 @@ try {
     window.DD_RUM && DD_RUM.addError(error);
 }
 ```
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Dépannage

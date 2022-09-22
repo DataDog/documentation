@@ -28,7 +28,7 @@ further_reading:
 `customer.id` などのアプリケーションコード内の動的な値に対応するカスタムタグをスパンに追加します。
 
 {{< tabs >}}
-{{% tab "Active Span" %}}
+{{< tab "Active Span" >}}
 コード内の任意のメソッドから現在アクティブな[スパン][1]にアクセスします。**注**: メソッドが呼び出され、現在アクティブなスパンがない場合、`active_span` は `nil` です。
 
 ```ruby
@@ -54,9 +54,9 @@ end
 ```
 
 [1]: /ja/tracing/visualization/#spans
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Manually Instrumented Spans" %}}
+{{< tab "Manually Instrumented Spans" >}}
 
 `#set_tag` を呼び出して、`Datadog::Span` オブジェクトに[タグ][1]を直接追加します。
 
@@ -73,7 +73,7 @@ end
 
 
 [1]: /ja/tracing/visualization/#span-tags
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### すべてのスパンにグローバルにタグを追加する

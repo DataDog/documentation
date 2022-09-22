@@ -40,7 +40,7 @@ Note that if your metric is only reporting by `host` with no `device` tag, it wo
 The alert conditions vary based on the [monitor type][1]. Configure monitors to trigger if the query value crosses a threshold, or if a certain number of consecutive checks failed.
 
 {{< tabs >}}
-{{% tab "Threshold alert" %}}
+{{< tab "Threshold alert" >}}
 
 * Trigger when the `average`, `max`, `min`, or `sum` of the metric is
 * `above`, `above or equal to`, `below`, or `below or equal to` the threshold
@@ -89,8 +89,8 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
 [2]: /monitors/guide/recovery-thresholds/
-{{% /tab %}}
-{{% tab "Check alert" %}}
+{{< /tab >}}
+{{< tab "Check alert" >}}
 
 A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds. Set up the check alert to:
 
@@ -113,7 +113,7 @@ See the documentation for [process check][1], [integration check][2], and [custo
 [1]: /monitors/create/types/process_check/
 [2]: /monitors/create/types/integration/?tab=checkalert#integration-status
 [3]: /monitors/create/types/custom_check/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Advanced alert conditions
@@ -129,7 +129,7 @@ There are two ways to deal with missing data:
 - The `On missing data` option is supported by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors
 
 {{< tabs >}}
-{{% tab "Metric-based monitors" %}}
+{{< tab "Metric-based monitors" >}}
 
 `Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
 
@@ -145,9 +145,9 @@ In this case, you should not enable notifications for missing data. This option 
 
 For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 
-{{% /tab %}}
+{{< /tab >}}
 
-{{% tab "Other monitor types" %}}
+{{< tab "Other monitor types" >}}
 
 If data is missing for `N` minutes, select an option from the dropdown menu:
 
@@ -173,7 +173,7 @@ The `Evaluate as zero` and `Show last known status` options are displayed based 
 - **Evaluate as zero:** This option is available for monitors using `Count` queries.
 - **Show last known status:** This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Auto resolve

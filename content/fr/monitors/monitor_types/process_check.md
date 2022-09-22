@@ -35,7 +35,7 @@ Sélectionnez les hosts à surveiller en spécifiant les hostnames ou des tags, 
 ### Définir vos conditions d'alerte
 
 {{< tabs >}}
-{{% tab "Alerte de check" %}}
+{{< tab "Alerte de check" >}}
 
 Une alerte de check récupère les statuts consécutifs envoyés pour chaque groupe de checks et les compare à vos seuils. Pour les monitors de check de processus, les groupes sont statiques : `host` et `process`.
 
@@ -49,8 +49,8 @@ Paramètres d'une alerte de check :
 
     Choisissez le nombre de statuts `OK` consécutifs à partir duquel l'alerte doit être résolue.
 
-{{% /tab %}}
-{{% tab "Alerte de cluster" %}}
+{{< /tab >}}
+{{< tab "Alerte de cluster" >}}
 
 Une alerte de cluster calcule le pourcentage de checks de processus présentant un statut donné et le compare à vos seuils.
 
@@ -60,7 +60,7 @@ Paramètres d'une alerte de cluster :
 
 2. Sélectionnez les seuils d'alerte et d'avertissement en pourcentage. Il est possible de ne définir qu'un seul de ces paramètres (alerte ou avertissement).
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Consultez la documentation relative aux [monitors de métrique][3] pour en savoir plus sur les options [No data][4], [Auto resolve][5] et [Evaluation delay][6].

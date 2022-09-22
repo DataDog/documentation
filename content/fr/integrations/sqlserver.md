@@ -83,7 +83,7 @@ _Propriétés_ -> _Sécurité_ -> _Mode d'authentification SQL Server et Window
 ### Configuration
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### Host
 
@@ -154,8 +154,8 @@ Consultez la [documentation de Datadog][6] pour découvrir comment configurer l'
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
 [6]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
+{{< /tab >}}
+{{< tab "Environnement conteneurisé" >}}
 
 #### Environnement conteneurisé
 
@@ -184,7 +184,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/faq/template_variables/
 [3]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Validation

@@ -63,7 +63,7 @@ Double check the security group settings on your EC2 instances. Make sure these 
 Configure the task using either the [AWS CLI tools][12] or using the Amazon Web Console.
 
 {{< tabs >}}
-{{% tab "AWS CLI" %}}
+{{< tab "AWS CLI" >}}
 
 1. For Linux containers, download [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux 1 AMI). For Windows, download [datadog-agent-ecs-win.json][3].
 2. Edit `datadog-agent-ecs.json` and set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][4] for your account.
@@ -105,8 +105,8 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 [5]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [6]: /agent/amazon_ecs/logs/
 [7]: /agent/amazon_ecs/apm/
-{{% /tab %}}
-{{% tab "Web UI" %}}
+{{< /tab >}}
+{{< tab "Web UI" >}}
 
 1. Log in to your AWS Console and navigate to the EC2 Container Service section.
 2. Click on the cluster you wish to add Datadog to.
@@ -133,7 +133,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 **Note**: Setting the Datadog task definition to use 10 CPU units can cause the `aws.ecs.cpuutilization` for `service:datadog-agent` to display as running at 1000%. This is a peculiarity of how AWS displays CPU utilization. You can add more CPU units to avoid skewing your graph.
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Create or modify your IAM policy
@@ -165,7 +165,7 @@ Ideally, you want the Datadog Agent to load on one container on each EC2 instanc
 To collect processes information for all your containers and send it to Datadog:
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 1. Follow the [above instructions](#setup) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs.json][1] file ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux AMI) with the following configuration:
@@ -216,8 +216,8 @@ To collect processes information for all your containers and send it to Datadog:
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 1. Follow the [above instructions](#setup) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs-win.json][1] file with the following configuration:
@@ -240,7 +240,7 @@ To collect processes information for all your containers and send it to Datadog:
 ```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Network Performance Monitoring collection

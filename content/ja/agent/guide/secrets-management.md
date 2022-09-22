@@ -98,7 +98,7 @@ secret_backend_command: <EXECUTABLE_PATH>
 Agent はサブプロセスとして `secret_backend_command` 実行可能ファイルを実行します。Linux と Windows では実行パターンが異なります。
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Linux では、`secret_backend_command` として設定される実行可能ファイルは以下である必要があります。
 
@@ -106,8 +106,8 @@ Linux では、`secret_backend_command` として設定される実行可能フ�
 * グループまたはその他の権限を持っていない。
 * 所有者に対して少なくとも実行権限を持っている。
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Windows では、`secret_backend_command` として設定される実行可能ファイルは以下である必要があります。
 
@@ -115,7 +115,7 @@ Windows では、`secret_backend_command` として設定される実行可能�
 * `Administrators` グループ、ビルトインローカルシステムアカウント、または Agent ユーザーコンテキスト（デフォルトでは `ddagentuser`）以外のユーザーまたはグループの権限を持っていない。
 * 有効な Win32 アプリケーションであるため、Agent で実行できます（たとえば、PowerShell または Python スクリプトは機能しません）。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 **注**: 実行可能ファイルは、Agent と同じ環境変数を共有します。
@@ -235,7 +235,7 @@ instances:
 | Kubernetes Secrets     | `ENC[k8s_secret@some_namespace/some_name/a_key]` |
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{< tab "Helm" >}}
 
 この実行ファイルを Helm チャートで使用するには、次のように設定します。
 ```yaml
@@ -245,15 +245,15 @@ datadog:
     command: "/readsecret_multiple_providers.sh"
 ```
 
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{< /tab >}}
+{{< tab "DaemonSet" >}}
 
 この実行ファイルを使用するには、環境変数 `DD_SECRET_BACKEND_COMMAND` を以下のように設定します。
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### ファイルからの読み込み例
@@ -359,7 +359,7 @@ Agent CLI の `secret` コマンドは、セットアップに関連するエラ
 Linux では、コマンドは実行可能ファイルのファイルモード、所有者、グループを出力します。Windows では、ACL 権限がリストされます。
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Linux の例
 
@@ -382,8 +382,8 @@ Secrets handle decrypted:
 - db_prod_password: from postgres.yaml
 ```
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Windows の例（管理者の PowerShell から）
 ```powershell
@@ -414,7 +414,7 @@ Secrets handle decrypted:
 - db_prod_password: from sqlserver.yaml
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -451,7 +451,7 @@ password: <obfuscated_password2>
 Agent の外部でテストまたはデバッグするには、Agent の実行方法を模倣できます。
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 #### Linux
 
 ```bash
@@ -461,8 +461,8 @@ sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\"
 Datadog Agent をインストールすると、`dd-agent` ユーザーが作成されます。
 
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 #### Windows
 
 ##### 権限関連のエラー
@@ -522,7 +522,7 @@ exit code:
 0
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 

@@ -30,7 +30,7 @@ Agent v5 の次の機能は、Agent v6 では**使用できません**。
 以前のバージョンの Agent はコンフィギュレーションファイルを `/etc/dd-agent` に保存していました。Agent v6.0 以降では、コンフィギュレーションファイルは `/etc/datadog-agent` に保存されます。
 
 {{< tabs >}}
-{{% tab "Agent" %}}
+{{< tab "Agent" >}}
 
 [Agent のメインコンフィギュレーションファイル][1]は **INI** 形式から **YAML** 形式に移行し、複雑なコンフィギュレーションをサポートし、Agent とチェック全体で一貫したエクスペリエンスを提供します。
 
@@ -95,8 +95,8 @@ sudo -u dd-agent -- datadog-agent import
 [4]: /ja/integrations/disk/
 [5]: /ja/logs/
 [6]: /ja/integrations/amazon_web_services/
-{{% /tab %}}
-{{% tab "チェック" %}}
+{{< /tab >}}
+{{< tab "チェック" >}}
 
 Agent v6 は、有効な YAML ファイルを `<AGENT_DIRECTORY>/conf.d/<CHECK_NAME>.d/` にロードします。これにより、複雑なコンフィギュレーションを複数のファイルに分割できます。
 
@@ -136,8 +136,8 @@ Agent v6 は、チェックの `instance` セクションで次のオプショ�
 
 
 [1]: /ja/getting_started/agent/autodiscovery/
-{{% /tab %}}
-{{% tab "環境変数" %}}
+{{< /tab >}}
+{{< tab "環境変数" >}}
 
 Agent v6 で使用される環境変数のほとんどは、以前のバージョンとは**異なります**。[Agent v6 の環境変数][1]のリストを参照してください。
 
@@ -161,13 +161,13 @@ Agent v6 のプロキシオプションの優先順位は、以前のバージ�
 * Agent v6 は、コンフィギュレーションファイルの値を環境内の値でオーバーライドします。たとえば、コンフィギュレーションファイルで `proxy.http` と `proxy.https` の両方が設定されていて、環境で `DD_PROXY_HTTPS` のみが設定されている場合、Agent は環境の `https` 値とコンフィギュレーションファイルの `http` 値を使用します。
 
 [1]: /ja/agent/docker/#environment-variables
-{{% /tab %}}
-{{% tab "ホスト名" %}}
+{{< /tab >}}
+{{< tab "ホスト名" >}}
 
 Agent v5 と Agent v6 ではホスト名解決に違いがあります。詳細については、[専用ドキュメント][1]をご覧ください。
 
 [1]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/#agent-versions
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## ログ
@@ -198,7 +198,7 @@ Agent v6 のコマンドラインインターフェイスは、サブコマン�
 ### オペレーティングシステムの変更
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{< tab "Linux" >}}
 
 Linux 上の Agent v6 の主な変更点は次のとおりです。
 
@@ -250,8 +250,8 @@ Agent v6 以降では、他の機能は Agent バイナリ自体によってサ�
 | `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Agent の使用状況を表示する            |
 | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` | チェックの実行                    |
 
-{{% /tab %}}
-{{% tab "Windows" %}}
+{{< /tab >}}
+{{< tab "Windows" >}}
 
 Windows 上の Agent v6 の主な変更点は次のとおりです。
 
@@ -262,8 +262,8 @@ Windows 上の Agent v6 の主な変更点は次のとおりです。
 * Windows GUI と Windows システムトレイアイコンが個別に実装されるようになりました。詳細については、[Windows 用 Datadog Agent Manager][1] を参照してください。
 
 [1]: /ja/agent/guide/datadog-agent-manager-windows/
-{{% /tab %}}
-{{% tab "MacOS" %}}
+{{< /tab >}}
+{{< tab "MacOS" >}}
 
 MacOS 上の Agent v6 の主な変更点は次のとおりです。
 
@@ -285,13 +285,13 @@ MacOS 上の Agent v6 の主な変更点は次のとおりです。
 | _not implemented_                  | `datadog-agent --help`                               | コマンドの使用方法の表示          |
 | `datadog-agent check <チェック名>` | `datadog-agent check <チェック名>`                   | チェックを実行します (変更なし)        |
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## 収集 Agent
 
 {{< tabs >}}
-{{% tab "APM Agent" %}}
+{{< tab "APM Agent" >}}
 
 APM Agent は、Linux、MacOS、Windows 用の Agent v6 パッケージにデフォルトで付属しています。
 
@@ -304,8 +304,8 @@ apm_config:
 Docker イメージの場合、APM Agent はデフォルトで無効になっています。`DD_APM_ENABLED` を `true` に設定して有効にします。デフォルトではすべてのインターフェイスをリッスンします。他のプラットフォームでローカル以外のトラフィックをリッスンする場合は、`DD_APM_NON_LOCAL_TRAFFIC` を `true` に設定します。詳細については、[Docker アプリケーションのトレース][1]を参照してください。
 
 [1]: /ja/agent/docker/apm/
-{{% /tab %}}
-{{% tab "Process Agent" %}}
+{{< /tab >}}
+{{< tab "Process Agent" >}}
 
 Process Agent は、Linux 用の Agent v6 パッケージにのみデフォルトで付属しています。
 
@@ -321,13 +321,13 @@ process_config:
 * `"false"`: コンテナがあれば、コンテナのみを収集します (デフォルト)。
 * `"disabled"`: Process Agent を実行しません。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## チェック
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{< tab "Docker" >}}
 
 Agent v6 では、Docker バージョン 1.12.1 以降がサポートされています。
 
@@ -349,8 +349,8 @@ Docker チェックは、Agent の内部アーキテクチャを利用するた�
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 [2]: /ja/agent/docker/tag/
 [3]: /ja/agent/guide/autodiscovery-management/
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{< /tab >}}
+{{< tab "Kubernetes" >}}
 
 Agent v6 では、Kubernetes バージョン 1.3 以降がサポートされています。
 
@@ -384,8 +384,8 @@ Agent v5 はすべてのポッドラベルをタグとして自動的に収集�
 [3]: /ja/help/
 [4]: /ja/agent/kubernetes/
 [5]: /ja/agent/kubernetes/tag/#extract-node-labels-as-tags
-{{% /tab %}}
-{{% tab "JMX" %}}
+{{< /tab >}}
+{{< tab "JMX" >}}
 
 Agent v6 には JMXFetch が付属していますが、次の変更が加えられています。
 
@@ -411,8 +411,8 @@ Agent v6 には `jmxterm` JAR が付属していません。`jmxterm` をダウ�
 
 [1]: https://github.com/jiaqi/jmxterm
 [2]: /ja/integrations/faq/troubleshooting-jmx-integrations/#agent-troubleshooting
-{{% /tab %}}
-{{% tab "システム" %}}
+{{< /tab >}}
+{{< tab "システム" >}}
 
 _Windows Agent のみに影響します_
 
@@ -420,7 +420,7 @@ Windows Agent v5 の場合、`system.mem.pagefile.*` メトリクスは一貫性
 
 この問題は、Windows Agent v6 で修正されています。ただし、下位互換性のために Agent v5 の不一致は残っています。したがって、Agent v5 から Agent v6 にアップグレードする場合、報告される値 (および関連するモニター) は異なります。
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## オートディスカバリー
@@ -428,22 +428,22 @@ Windows Agent v5 の場合、`system.mem.pagefile.*` メトリクスは一貫性
 [オートディスカバリー][7]システムは、Agent v6 用に作り直されました。また、コンテナランタイムとオーケストレーターは分離され、より柔軟になりました。これには、テンプレートの `docker_images` から `ad_identifiers` への移動が含まれます。
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{< tab "Kubernetes" >}}
 
 Kubernetes を使用する場合、オートディスカバリーは Docker デーモンではなく kubelet から情報を取得します。これにより、Docker ソケットにアクセスしなくてもオートディスカバリーが機能します。また、デフォルトの動作では、ポッドアノテーションからオートディスカバリーテンプレートを取得します。`docker` コンフィギュレーションプロバイダーを有効にしてコンテナラベルを使用し、ポッドが不足しているコンテナでオートディスカバリーが必要な場合は、`kubelet` リスナーを Docker リスナーに置き換えることができます。
 
 ポッドアノテーションで[オートディスカバリーテンプレート][1]を指定する場合、アノテーション名のプレフィックスは `ad.datadoghq.com/` です。以前のアノテーションプレフィックス (`service-discovery.datadoghq.com/`) は Agent v6 でも引き続きサポートされていますが、サポートは将来のバージョンで削除される予定です。
 
 [1]: /ja/agent/kubernetes/integrations/
-{{% /tab %}}
-{{% tab "Docker" %}}
+{{< /tab >}}
+{{< tab "Docker" >}}
 
 Docker ラベルの[オートディスカバリーテンプレート][1]は、同じ名前のプレフィックス `com.datadoghq.ad.*` で機能します。
 
 一貫性を保つため、識別子オーバーライドラベルの名前が `com.datadoghq.sd.check.id` から `com.datadoghq.ad.check.id` に変更されました。以前の名前は Agent v6 でも引き続きサポートされていますが、サポートは将来のバージョンで削除される予定です。
 
 [1]: /ja/agent/docker/integrations/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Python モジュール
@@ -458,7 +458,7 @@ Agent v6 では、すべてのチェック関連の Python コードは、`datad
 多くの `utils` ディレクトリが Agent v6 から削除されましたが、削除されたコンテンツのほとんどはチェックに直接関係していませんでした。たとえば、flare モジュールは Go で削除され、再実装されましたが、カスタムチェックで誰も使用していなかった可能性があります。詳細については、[開発ドキュメント][9]を参照してください。
 
 {{< tabs >}}
-{{% tab "インテグレーション" %}}
+{{< tab "インテグレーション" >}}
 
 Agent v6 は Python チェックを完全にサポートしていますが、公式の Agent v5 インテグレーションの一部は削除または置き換えられています。
 
@@ -466,8 +466,8 @@ Agent v6 は Python チェックを完全にサポートしていますが、公
 * docker_daemon - [Docker チェック](?tab=docker#checks)に置き換えられました
 * kubernetes - [Kubernetes チェック](?tab=kubernetes#checks)に置き換えられました
 
-{{% /tab %}}
-{{% tab "Check API" %}}
+{{< /tab >}}
+{{< tab "Check API" >}}
 
 Python チェックの基本クラス (`AgentCheck`) が `datadog_checks.base.checks` からインポートされました。クラス API で削除または変更されたものは多数あります。さらに、各チェックインスタンスは、クラスの独自のインスタンスになりました。したがって、それらの間で状態を共有することはできません。
 
@@ -512,8 +512,8 @@ gauge(self, name, value, tags=None, hostname=None, device_name=None)
 
 **注**: すべての公式インテグレーションは廃止されたメソッドを削除するように更新されたため、これらの変更はカスタムチェックにのみ影響します。
 
-{{% /tab %}}
-{{% tab "カスタムチェック" %}}
+{{< /tab >}}
+{{< tab "カスタムチェック" >}}
 
 #### 優先度
 
@@ -553,7 +553,7 @@ sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <PACKAGE_NAME>
 同様に、Agent v5 でカスタムチェックの要件を満たすために PIP パッケージを追加した可能性があります。追加された PIP パッケージに、すでに Agent v5 にバンドルされているパッケージとの内部依存関係がある場合 (上記のリストを参照)、Agent v6 にアップグレードした後、それらの依存関係は失われます。上記の説明に従って、不足している依存関係をインストールします。
 
 [1]: https://github.com/DataDog/integrations-core
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料

@@ -143,7 +143,7 @@ Vault インテグレーションには以下の機能が必要です。
 ### コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{< tab "Host" >}}
 
 #### ホスト
 
@@ -196,8 +196,8 @@ Vault インテグレーションには以下の機能が必要です。
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-{{% /tab %}}
-{{% tab "Containerized" %}}
+{{< /tab >}}
+{{< tab "Containerized" >}}
 
 #### コンテナ化
 
@@ -258,7 +258,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
 [3]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
 [4]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### 検証

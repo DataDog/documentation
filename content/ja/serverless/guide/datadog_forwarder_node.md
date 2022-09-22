@@ -16,7 +16,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 ## コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Datadog CLI" %}}
+{{< tab "Datadog CLI" >}}
 
 Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを修正し、新しいデプロイを必要とせずにインスツルメンテーションを可能にします。Datadog のサーバーレスモニタリングをすばやく開始するための最適な方法です。
 
@@ -62,8 +62,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{< /tab >}}
+{{< tab "Serverless Framework" >}}
 
 [Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
@@ -96,8 +96,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [4]: /ja/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
+{{< /tab >}}
+{{< tab "AWS SAM" >}}
 
 [Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
@@ -142,8 +142,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{< /tab >}}
+{{< tab "AWS CDK" >}}
 
 以下を行うことで、[Datadog CDK コンストラクト][1]でサーバーレスアプリケーションからのメトリクス、トレース、ログの収集を自動的に構成できます。
 
@@ -198,8 +198,8 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 [1]: https://www.npmjs.com/package/datadog-cdk-constructs
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{% /tab %}}
-{{% tab "Container Image" %}}
+{{< /tab >}}
+{{< tab "Container Image" >}}
 
 ### Install
 
@@ -240,8 +240,8 @@ yarn add datadog-lambda-js dd-trace
 
 [1]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [2]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
-{{% tab "Custom" %}}
+{{< /tab >}}
+{{< tab "Custom" >}}
 
 ### Install
 
@@ -312,7 +312,7 @@ yarn add datadog-lambda-js
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### タグ

@@ -28,7 +28,7 @@ The following are **not** supported:
 - Fibers (PHP 8.1+)
 
 {{< tabs >}}
-{{% tab "GNU C Linux" %}}
+{{< tab "GNU C Linux" >}}
 
 An operating system with glibc 2.17 or newer is required. The following versions or newer meet this requirement:
   - CentOS 7.
@@ -37,12 +37,12 @@ An operating system with glibc 2.17 or newer is required. The following versions
 
 Datadog recommends running an OS version that is not EOL.
 
-{{% /tab %}}
-{{% tab "Alpine Linux" %}}
+{{< /tab >}}
+{{< tab "Alpine Linux" >}}
 
 Version 3.13 or newer of Alpine Linux is required because the profiler is built against musl v1.2.
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
@@ -60,7 +60,7 @@ To begin profiling applications:
 4. Configure the profiler with environment variables. Unlike the tracer the profiler does not support INI settings.
 
    {{< tabs >}}
-{{% tab "CLI" %}}
+{{< tab "CLI" >}}
 
 Set the environment variables before calling PHP, for example:
 
@@ -73,8 +73,8 @@ export DD_VERSION=1.3.2
 php hello.php
 ```
 
-{{% /tab %}}
-{{% tab "PHP-FPM" %}}
+{{< /tab >}}
+{{< tab "PHP-FPM" >}}
 
 Use the `env` directive in the php-fpm’s `www.conf` file, for example:
 
@@ -85,8 +85,8 @@ env[DD_ENV] = prod
 env[DD_VERSION] = 1.3.2
 ```
 
-{{% /tab %}}
-{{% tab "Apache" %}}
+{{< /tab >}}
+{{< tab "Apache" >}}
 
 Use `SetEnv` from the server config, virtual host, directory, or `.htaccess` file:
 
@@ -97,7 +97,7 @@ SetEnv DD_ENV prod
 SetEnv DD_VERSION 1.3.2
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
    See the [configuration docs][4] for more environment variables.

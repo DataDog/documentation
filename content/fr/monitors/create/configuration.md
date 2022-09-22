@@ -38,7 +38,7 @@ Notez que si votre métrique transmet uniquement des données en fonction de `ho
 Les conditions d'alerte varient en fonction du [type de monitor][1]. Vous pouvez configurer vos monitors de façon à ce qu'ils se déclenchent lorsque la valeur de la requête dépasse un certain seuil, ou si un certain nombre de checks consécutifs ont échoué.
 
 {{< tabs >}}
-{{% tab "Alerte de seuil" %}}
+{{< tab "Alerte de seuil" >}}
 
 * Envoyer une alerte lorsque la métrique est `above`, `above or equal to`, `below` ou `below or equal to` (supérieure, supérieure ou égale à, inférieure ou égale à)
 * la valeur seuil `on average`, `at least once`, `at all times` ou `in total` (en moyenne, au moins une fois, en permanence ou au total)
@@ -83,8 +83,8 @@ Lorsque vous modifiez un seuil, l'aperçu du graphique dans l'éditeur affiche u
 
 [1]: /fr/monitors/guide/as-count-in-monitor-evaluations/
 [2]: /fr/monitors/faq/what-are-recovery-thresholds/
-{{% /tab %}}
-{{% tab "Alerte de check" %}}
+{{< /tab >}}
+{{< tab "Alerte de check" >}}
 
 Une alerte de check récupère les statuts consécutifs envoyés pour chaque groupe de checks et les compare à vos seuils. Configurez une alerte de check pour :
 
@@ -107,7 +107,7 @@ Consultez la documentation sur les monitors de [check de processus][1], [check d
 [1]: /fr/monitors/create/types/process_check/
 [2]: /fr/monitors/create/types/integration/?tab=checkalert#integration-status
 [3]: /fr/monitors/create/types/custom_check/
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Conditions d'alerte avancées
