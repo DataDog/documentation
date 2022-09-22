@@ -35,7 +35,7 @@ DDoS 攻撃に対する保護のため、Amazon は Shield Standard と Shield A
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Shield` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Shield` が有効になっていることを確認します。
 2. [Datadog - Amazon Shield インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -73,8 +73,8 @@ Amazon Shield インテグレーションには、サービスのチェック機
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-shield
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-shield
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
