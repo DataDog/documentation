@@ -35,7 +35,7 @@ When evaluating if a process is legitimate, check past processes to help you con
 
 Usually, it's sufficient to suppress based on both the parent process and on unwanted process attributes.
 
-Combination:
+Example combination:
 - `@process.args`
 - `@process.executable.group`
 - `@process.parent.executable.comm`
@@ -46,7 +46,7 @@ If you decide to suppress on a wide time frame, avoid using processes that have 
 
 For example certain programs when rebooting or executing, use temporary files (`/tmp`). Building suppressions based on these values isn't effective in the event a similar activity is detected.
 
-Suppose you want to completely suppress noise of a specific container activity. You decide to choose a command line based on the initialization of the container in question. While executing, the process accesses files which exist for as long as the container exists. If the behavior you intend to target is instead tied to your workload logic, the suppression definition based on ephemeral process instances becomes ineffective for tuning out similar activities on other containers.
+Suppose you want to completely suppress noise of all signals from a particular activity on a container. You choose the full command within the process tree that initiates the process to spin up the container. While executing, the process accesses files which exist for as long as the container exists. If the behavior you intend to target is instead tied to your workload logic, the suppression definition based on ephemeral process instances becomes ineffective for tuning out similar activities on other containers.
 
 ### File activity
 
@@ -73,9 +73,9 @@ Common keys:
   - `@file.inode`
   - `@file.mode`
 
-To determine an actual malicious activity while inspecting a signal, validate if the context in which the process is accessing and modifying the file is expected. To avoid suppressing intended behaviors on files across all of your infrastructure, you should always have a combination that gathers all relevant context information.
+To determine an actual malicious activity while inspecting a signal, validate if the context in which the process is accessing and modifying the file is expected. To avoid suppressing intended behaviors on files across all of your infrastructure, you should always have a combination that gathers all relevant context information from the common keys listed above.
 
-Combination: 
+Example combination: 
   - `@process.args`
   - `@process.executable.path`
   - `@process.user`
@@ -103,7 +103,7 @@ Common keys:
 
 Whenever a local application makes connections to resolve a DNS name, the first characteristics you are looking to check are the list of IPs that instigated the lookup as well as the DNS query.
 
-Combination:
+Example combination:
   - `@network.ip/port`
   - `@network.destination.ip/port`
   - `@dns.question.*`
@@ -185,7 +185,4 @@ Enter these key values under **This rule will not generate a signal if there is 
 
 If, on the other hand, you want to fire signals under specific conditions by identifying the right set of attributes, specify the combination **Only generate a signal if there is a match**.
 
-## Adding a suppression from the facet list 
 
-
-TKTK
