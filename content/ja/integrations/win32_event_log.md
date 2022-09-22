@@ -27,7 +27,7 @@ draft: false
 git_integration_title: win32_event_log
 integration_id: win32-event-log
 integration_title: Win 32 event log
-integration_version: 2.13.1
+integration_version: 2.13.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
