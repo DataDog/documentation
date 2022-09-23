@@ -191,6 +191,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3669695268",
+      "description": "Create a new dashboard with logs query table widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3117424216",
+      "description": "Create a new dashboard with logs_stream list_stream widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2917274132",
       "description": "Create a new dashboard with manage_status widget"
     },
