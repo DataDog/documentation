@@ -1,5 +1,5 @@
 ---
-title: Why do I need to grant screen recording & accessibility permissions when setting up CoScreen?
+title: Screen recording & accessibility permissions when setting up CoScreen on macOs Catalina
 kind: guide
 is_beta: false
 ---

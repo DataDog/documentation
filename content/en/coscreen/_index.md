@@ -29,7 +29,7 @@ When you join a CoScreen, you can use a window picker to select the application 
 
 <!-- {{< img src="coscreen/sharewindow.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}} -->
 
-You can share multiple windows, marked with a colored border, at the same time.
+You can share multiple windows at the same time. Shared windows have a border around them in a color assigned to each CoScreen participant.
 
 ### Share all windows on your display
 

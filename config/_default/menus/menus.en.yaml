@@ -3371,6 +3371,11 @@ main:
     identifier: coscreen
     parent: essentials_heading
     weight: 230000
+  - name: Guides
+    url: coscreen/guide
+    identifier: coscreen_guide
+    parent: coscreen
+    weight: 1
   - name: Account Management
     url: account_management/
     pre: cog-2

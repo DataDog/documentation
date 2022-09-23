@@ -20,6 +20,26 @@ CoScreen will support crystal-clear screen sharing even if you and your peers ha
 #### CPU
 Sharing windows can take up to 60% of one CPU core on older systems because CoScreen captures them at a much higher quality than most other tools. Please check your CPU allocation by going to the Activity Monitor (more) and let us know if you face any unexpected issues: hello@coscreen.co.
 
-### Microphone issues in Windows 10
+### Troubleshooting on macOS
+
+#### The side panel UI is greyed out, and a connection is never established
+
+You may encounter a problem where the UI is stuck in the greyed out joining phase, but you never receive the "Unable to connect to CoScreen" dialog. Because coscreen expects to live on a single non-fixed desktop, if you have configured the application to reside specifically on one more desktops, this problem may occur.
+
+To resolve this issue, right-click on the CoScreen application icon and go to _Options_. Ensure that _Assign To_ is set to _None_. Then, leave and rejoin the CoScreen.
+
+<!-- {{< img src="coscreen/assign-to-none.png" alt="Facet creation for custom tag" style="width:60%;" >}} -->
+
+### Troubleshooting on Windows 10
+
+#### The CoScreen UI appears small
+
+If the CoScreen UI appears to be smaller than that of other apps on your Windows 10 computer, it is related to the scaling factor configured under display settings and how it interacts with CoScreen. You can decrease the scaling and resolution of your screen to improve the experience.
+
+<!-- video: https://www.loom.com/share/221e5a22f8d340469d2f7bb601e1c39e?t=117 -->
+
+#### My voice is hard to understand, or sounds robotic
 
 Some devices use a Realtek voice recognition feature that may cause your voice to sound robotic when using CoScreen, or another video conferencing application. If you are experiencing issues with the audibility of your voice, open the Realtek Audio Console and untick the option **Voice Recognition** to see if the situation improves.
+
+<!-- {{< img src="coscreen/windows_screenshot.png" alt="Facet creation for custom tag" style="width:60%;" >}} -->
