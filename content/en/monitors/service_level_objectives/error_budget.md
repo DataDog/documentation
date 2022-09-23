@@ -14,7 +14,7 @@ SLO error budget alerts are threshold based and notify you when a certain percen
 
 **Note:** Error budget alerts are only available for [metric-based SLOs][1] or for [monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 
-For a description of key terminology around SLOs, including *error budgets*, see [Service Level Objectives Key terminology].
+For a description of key terminology around SLOs, including *error budgets*, see [Service Level Objectives][7].
 
 {{< img src="monitors/service_level_objectives/error_budget_alert_config.png" alt="Error budget alert configuration">}}
 
@@ -61,7 +61,7 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
