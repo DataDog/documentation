@@ -104,8 +104,8 @@ The refresh rate of a private dashboard depends on the time frame you are viewin
 | 1 hour       | 20 seconds   |
 | 3 hours      | 1 minute     |
 | 4 hours      | 1 minute     |
-| 1 day        | 3 minute     |
-| 2 days       | 10 minute    |
+| 1 day        | 3 minutes     |
+| 2 days       | 10 minutes    |
 | 1 week       | 1 hour       |
 | 1 month      | 1 hour       |
 | 3 months     | 1 hour       |
