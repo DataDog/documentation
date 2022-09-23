@@ -18,7 +18,7 @@ You can influence a few key factors behind the quality of the windows you and yo
 CoScreen will support crystal-clear screen sharing even if you and your peers have ultra high display resolutions of 4k and above. Please make sure that your network bandwidth and CPU can handle the corresponding load (see #1). In case you run into issues, try out lower resolutions on both ends and let us know in case you don't get the quality you need.
 
 #### CPU
-Sharing windows can take up to 60% of one CPU core on older systems because CoScreen captures them at a much higher quality than most other tools. Please check your CPU allocation by going to the Activity Monitor (more) and let us know if you face any unexpected issues: hello@coscreen.co.
+Sharing windows can take up to 60% of one CPU core on older systems because CoScreen captures them at a much higher quality than most other tools. Check your CPU allocation by going to the Activity Monitor (more) and let us know if you face any unexpected issues: hello@coscreen.co.
 
 ### Troubleshooting on macOS
 

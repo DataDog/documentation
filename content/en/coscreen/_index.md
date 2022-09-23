@@ -19,6 +19,10 @@ You can integrate CoScreen with Slack, Google Calendar, VS Code, and other apps.
 To request a new integration, or to access CoScreen's API (private beta) to develop your own integrations, 
 <!-- contact support? -->
 
+#### CoScreen + Slack
+
+To install the CoScreen Slack app, go to [coscreen.co/slack][2] and click on _Add to Slack_. To enable CoScreen in private channels, type `@coscreen` and hit enter/return, then click on _Invite to Channel_. To enable CoScreen in multi-user DMs, go to _View Member List_ -> _Add People_ -> _CoScreen_.
+
 ## Usage
 
 With CoScreen, multiple users can share windows with each other at the same time. You can share application windows in multiple ways.
@@ -27,7 +31,7 @@ With CoScreen, multiple users can share windows with each other at the same time
 
 When you join a CoScreen, you can use a window picker to select the application window(s) that you want to share with other members of the CoScreen you've joined. You can also share and unshare windows by clicking on the tab above each window.
 
-<!-- {{< img src="coscreen/sharewindow.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}} -->
+{{< img src="coscreen/sharewindow.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
 You can share multiple windows at the same time. Shared windows have a border around them in a color assigned to each CoScreen participant.
 
@@ -42,3 +46,4 @@ Screen sharing is deactivated by default when you join a CoScreen. CoScreen shar
 If your company uses a corporate firewall/SSL Inspection, the CoScreen client might not be able to connect to the CoScreen server and would therefore be unable to establish a connection between you and your team members. Contact support for a list of URLs to whitelist.
 
 [1]: https://www.coscreen.co/integrations
+[2]: https://coscreen.co/slack
