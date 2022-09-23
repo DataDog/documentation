@@ -18,7 +18,7 @@ Datadog Network Device Monitoring (NDM) supports regular expressions to create m
 
 ### Installation
 
-Follow the [setup instructions][1] to install Datadog NDM SNMP metrics.
+Follow the [setup instructions][1] to install Datadog Network Device Monitoring, and start collecting SNMP Metrics and Traps.
 
 ### Configuration
 
