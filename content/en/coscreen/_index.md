@@ -21,6 +21,24 @@ To request a new integration, or to access CoScreen's API (private beta) to deve
 
 ## Usage
 
+With CoScreen, multiple users can share windows with each other at the same time. You can share application windows in multiple ways.
+
+### Select individual windows to be shared
+
+When you join a CoScreen, you can use a window picker to select the application window(s) that you want to share with other members of the CoScreen you've joined. You can also share and unshare windows by clicking on the tab above each window.
+
+<!-- {{< img src="coscreen/sharewindow.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}} -->
+
+You can share multiple windows, marked with a colored border, at the same time.
+
+### Share all windows on your display
+
+When you join a CoScreen, click on the screen sharing icon next to your user and select _All Windows_. This shares all open windows on a designated display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
+
 ## Security and privacy
+
+Screen sharing is deactivated by default when you join a CoScreen. CoScreen shares windows, but does not share your desktop backgrounds or icons. 
+
+If your company uses a corporate firewall/SSL Inspection, the CoScreen client might not be able to connect to the CoScreen server and would therefore be unable to establish a connection between you and your team members. Contact support for a list of URLs to whitelist.
 
 [1]: https://www.coscreen.co/integrations

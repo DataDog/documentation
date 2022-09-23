@@ -1,6 +1,6 @@
 ---
 title: Why do I need to grant screen recording & accessibility permissions when setting up CoScreen?
-kind: faq
+kind: guide
 is_beta: false
 ---
 
