@@ -106,7 +106,7 @@ security:
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
 outputs:
-  home: ["HTML", "Algolia"]
+  home: ["HTML", "RSS", "JSON", "Algolia"]
 
 outputFormats:
   Algolia:

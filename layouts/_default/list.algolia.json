@@ -5,56 +5,53 @@
 {{ range (where .Site.AllPages "Kind" "!=" "home") }}
     {{ $page := . }}
     {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (ne $page.Params.beta true) (not $page.Draft) (ne $page.Content "") (not (isset .Params "external_redirect")) }}
-        {{ if and (ne $page.Language.Lang "en") ($page.HasShortcode "tabs") }}
+        {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
+        {{ $object_id := md5 $rel_path }}
+        {{ $title := $page.Params.integration_title | default $page.Title }}
+        {{ $content := $page.Plain | truncate 10000 }}
+        {{ $tags := slice }}
+        {{ $rank := 0 }}
+
+        {{- /* Better way to do this?  Frontmatter (cascading) probably? */ -}}
+        {{ if in $page.RelPermalink "/api/latest" }}
+            {{ $tags = $tags | append "api_latest" }}
+            {{ $rank = 10 }}
+        {{ else if in $page.RelPermalink "/guide/" }}
+            {{ $tags = $tags | append "guide" }}
+            {{ $rank = 20 }}
+        {{ else if in $page.RelPermalink "/security_platform/default_rules" }}
+            {{ $tags = $tags | append "default_rules" }}
+            {{ $rank = 30 }}
+        {{ else if in $page.RelPermalink "/integrations/" }}
+            {{ $tags = $tags | append "integrations" }}
+            {{ $rank = 40 }}
+        {{ else if in $page.RelPermalink "/account_management/rbac/permissions" }}
+            {{ $tags = $tags | append "rbac_permissions" }}
+            {{ $rank = 60 }}
+        {{ else if in $page.RelPermalink "/getting_started/" }}
+            {{ $tags = $tags | append "getting_started" }}
+            {{ $rank = 70 }}
         {{ else }}
-            {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
-            {{ $object_id := md5 $rel_path }}
-            {{ $title := $page.Params.integration_title | default $page.Title }}
-            {{ $content := $page.Content | plainify | truncate 10000 }}
-            {{ $tags := slice }}
-            {{ $rank := 0 }}
-
-            {{- /* Better way to do this?  Frontmatter (cascading) probably? */ -}}
-            {{ if in $page.RelPermalink "/api/latest" }}
-                {{ $tags = $tags | append "api_latest" }}
-                {{ $rank = 10 }}
-            {{ else if in $page.RelPermalink "/guide/" }}
-                {{ $tags = $tags | append "guide" }}
-                {{ $rank = 20 }}
-            {{ else if in $page.RelPermalink "/security_platform/default_rules" }}
-                {{ $tags = $tags | append "default_rules" }}
-                {{ $rank = 30 }}
-            {{ else if in $page.RelPermalink "/integrations/" }}
-                {{ $tags = $tags | append "integrations" }}
-                {{ $rank = 40 }}
-            {{ else if in $page.RelPermalink "/account_management/rbac/permissions" }}
-                {{ $tags = $tags | append "rbac_permissions" }}
-                {{ $rank = 60 }}
-            {{ else if in $page.RelPermalink "/getting_started/" }}
-                {{ $tags = $tags | append "getting_started" }}
-                {{ $rank = 70 }}
-            {{ else }}
-                {{ $tags = $tags | append "docs" }}
-                {{ $rank = 50 }}
-            {{ end }}
-
-            {{- /* record for each individual section (split by h2 header) */ -}}
-            {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "tags" $tags "rank" $rank) }}
-
-            {{- /* Full page record */ -}}
-            {{- $.Scratch.Add "algoliaindex" (
-                dict "objectID" $object_id 
-                "title" $title
-                "description" $page.Description
-                "content" $content
-                "type" $page.Type
-                "relpermalink" $page.RelPermalink
-                "full_url" $page.Permalink
-                "language" $page.Language.Lang
-                "tags" $tags
-                "rank" $rank
-            ) -}}
+            {{ $tags = $tags | append "docs" }}
+            {{ $rank = 50 }}
         {{ end }}
+
+        {{- /* record for each individual section (split by h2 header) */ -}}
+        {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "tags" $tags "rank" $rank) }}
+
+        {{- /* Full page record */ -}}
+        {{- $.Scratch.Add "algoliaindex" (
+            dict "objectID" $object_id 
+            "title" $title
+            "description" $page.Description
+            "content" $content
+            "type" $page.Type
+            "relpermalink" $page.RelPermalink
+            "full_url" $page.Permalink
+            "language" $page.Language.Lang
+            "tags" $tags
+            "rank" $rank
+        ) -}}
     {{ end }}
 {{ end }}
 
