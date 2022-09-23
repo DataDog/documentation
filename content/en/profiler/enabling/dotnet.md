@@ -122,11 +122,9 @@ To install the .NET Profiler machine-wide:
 3. Set needed environment variables to configure and enable Profiler.
  To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes.
 
-   **With the Registry Editor:**
+   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
 
-<div class="alert alert-info">
-  <div class="alert-info">Starting v2.14.0, you don't need to set the `CORECLR_PROFILER`/`COR_PROFILER` when you installed the tracer using the MSI.</div>
-</div>
+   **With the Registry Editor:**
 
    In the Registry Editor, modify the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes and set the value data as follows:
 
@@ -172,9 +170,7 @@ To install the .NET Profiler machine-wide:
 {{% tab "Windows services" %}}
 3. Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry key associated to the service. If the profiler is running alone (the tracer is deactivated), you can optionally add the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables.
 
-<div class="alert alert-info">
-  <div class="alert-info">Starting v2.14.0, you don't need to set the `CORECLR_PROFILER`/`COR_PROFILER` when you installed the tracer using the MSI.</div>
-</div>
+   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
 
    **With the Registry Editor:**
 
@@ -236,9 +232,7 @@ To install the .NET Profiler machine-wide:
 {{% /tab %}}
 {{% tab "Windows Standalone applications" %}}
 
-<div class="alert alert-info">
-  <div class="alert-info">Starting v2.14.0, you don't need to set the `CORECLR_PROFILER`/`COR_PROFILER` when you installed the tracer using the MSI.</div>
-</div>
+   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
 
 3. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED` environment variable. If the profiler is running alone (the tracer is deactivated), you can optionally set the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
 
