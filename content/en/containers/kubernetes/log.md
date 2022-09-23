@@ -579,8 +579,8 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 If you are missing tags on Kubernetes logs, this may be because the Agent's internal tagger does not yet have the related container or pod tags when logs are sent. To make the Log Agent wait a few seconds for the tagger to be ready, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to set how many seconds to wait. The default value is 0.
 
 ```yaml
-# This is the number of seconds that the log agent waits for the internal tagger to add the related container/pod tags to the logs before the logs are sent.
-# For example, to have the Log Agent wait 5 seconds (Note the value is an integer):
+# The number of seconds the Log Agent waits for the internal tagger to add the related container or pod tags to the logs before the logs are sent.
+# For example, in order to set the Log Agent to wait five seconds, use an integer in the value:
 tagger_warmup_duration: 5
 ```
 
