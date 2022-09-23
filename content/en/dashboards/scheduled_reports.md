@@ -73,7 +73,7 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 ## Permissions
 
-Only users with the **Dashboard Report Write** permission can generate a report. This permission is turned on by default for Admins and off for all other roles. 
+Users with the Admin role or `Org Management` permission can enable or disable scheduled reports for an account from the **Settings** tab under [Public Sharing][14] in **Organization Settings**. Only users with the **Dashboard Report Write** permission can generate a report. This permission is turned on by default for Admins and off for all other roles.
 
 Images generated in reports show all data regardless of granular read restrictions. We recommend limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn more about managing roles and permissions, read our [account management documentation][13]. 
 
@@ -96,3 +96,4 @@ Images generated in reports show all data regardless of granular read restrictio
 [11]: /dashboards/widgets/timeseries/
 [12]: /dashboards/widgets/top_list/
 [13]: /account_management/users/#edit-a-user-s-roles
+[14]: /account_management/org_settings/#public-sharing
