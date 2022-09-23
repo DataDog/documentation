@@ -63,6 +63,8 @@ logs:
     source: "<SOURCE>"
 ```
 
+If you are using Windows use `path: "<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log"` for the path. Also verify that the `ddagentuser` has all the read/write access to the log file.
+
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 
