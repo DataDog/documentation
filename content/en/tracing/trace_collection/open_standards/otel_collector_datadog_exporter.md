@@ -300,7 +300,7 @@ For example:
    apiVersion: opentelemetry.io/v1alpha1
    kind: OpenTelemetryCollector
    metadata:
-     name: opentelemetry-demo
+     name: opentelemetry-example
    spec:
      mode: daemonset
      hostNetwork: true
@@ -310,7 +310,7 @@ For example:
          valueFrom:
            secretKeyRef:
              key:  datadog_api_key
-             name: opentelemetry-demo-otelcol-dd-secret
+             name: opentelemetry-example-otelcol-dd-secret
    
      config: |
        receivers:
@@ -332,7 +332,7 @@ For example:
              exporters: [datadog]
    ```
 
-**Note:** you should use the daemonset deployment with the OpenTelemetry Operator otherwise host metrics may not work. 
+**Note:** You should use the daemonset deployment with the OpenTelemetry Operator otherwise host metrics may not work. 
 
 ### Application Configuration
 
