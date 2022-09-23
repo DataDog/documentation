@@ -6,6 +6,7 @@ description: "Datadog Workflows"
 disable_sidebar: true
 cascade:
   disable_sidebar: true
+  type: workflows
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies consequat rutrum. Aenean ullamcorper nec ante sed condimentum. Cras iaculis purus et odio convallis, a cursus dui bibendum. In imperdiet bibendum turpis. Donec scelerisque rutrum scelerisque. Pellentesque id placerat eros. Donec vitae ullamcorper massa, vel blandit magna. Maecenas at molestie mi. Curabitur turpis nibh, pharetra in dui a, gravida bibendum est. Quisque molestie, mi at elementum blandit, metus augue auctor urna, id ultricies lacus mauris ac dui. Phasellus suscipit ipsum ut velit pellentesque vehicula.

@@ -1,6 +1,6 @@
 {{ define "main" }}
-{{ $dot := .}}
-  <a class="text-uppercase font-weight-bold text-gray mb-1 d-block" href="/catalog/">&lt;&nbsp; Back to catalog search</a>
-  <h1 id="pagetitle">{{ .Params.bundle_title }}: {{ .Title }}</h1>
+  {{ $dot := .}}
+  <h1 id="pagetitle" class="mt-1">{{ .Params.bundle_title }}</h1>
+  <h2>{{ .Title }}</h2>
   {{ .Content }}
 {{ end }}

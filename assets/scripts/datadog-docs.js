@@ -83,7 +83,7 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('workflows')) {
+    if (document.querySelector('.js-group-header')) {
         initializeGroupedListings();
     }
 

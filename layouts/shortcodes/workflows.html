@@ -50,7 +50,7 @@
           <p class="font-semibold">{{ i18n "description" }}</p>
         </div>
       </div>
-      {{ . | safeHTML }}
+      {{ (replace . "&lt;any-key&gt;" "No outputs") | safeHTML }}
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 {{- $ctx := .context -}}
 {{- $filters := .filters -}}
-{{- $listGroups := .listgroups }}
+{{- $listGroups := .listgroups -}}
+{{- $transformGroupTitle := .transformGroupTitle | default false -}}
 
 {{ with $filters }}
 <div class="controls" data-ref="controls">
@@ -33,14 +34,18 @@
         {{ end }}
       </div>
       <div class="d-inline font-semibold ml-1">
-        <!-- If first word/only word is 3 letters long e.g aws or gcp then lets capitalize -->
-        {{ $words := (split (humanize $v.Key) " ") }}
-        {{ range $index, $word := $words }}
-          {{ if (and (eq $index 0) (eq (len $word) 3)) }}
-            {{ $word | upper }}
-          {{ else }}
-            {{ $word | title }}
+        {{ if $transformGroupTitle }}
+          <!-- If first word/only word is 3 letters long e.g aws or gcp then lets capitalize -->
+          {{ $words := (split (humanize $v.Key) " ") }}
+          {{ range $index, $word := $words }}
+            {{ if (and (eq $index 0) (eq (len $word) 3)) }}
+              {{ $word | upper }}
+            {{ else }}
+              {{ $word | title }}
+            {{ end }}
           {{ end }}
+        {{ else }}
+          {{ $v.Key }}
         {{ end }}
       </div>
       <div class="js-group-header__arrow">></div>
