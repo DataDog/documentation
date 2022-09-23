@@ -92,7 +92,7 @@ Widgets not linked to global time show the data for their local time frame as ap
 
 #### Refresh rate
 
-The refresh rate of a private dashboard depends on the time frame you are viewing. The shorter the time frame is, the more frequently the data is refreshed. Publicly shared dashboards refresh every thirty seconds, regardless of time frame selected.
+The refresh rate of a private dashboard depends on the time frame you are viewing. The shorter the time frame is, the more frequently the data is refreshed. Publicly shared dashboards refresh every thirty seconds, regardless of the selected time frame.
 
 | Time frame   | Refresh Rate |
 |--------------|--------------|
