@@ -290,11 +290,49 @@ For Gateway deployments:
 To use the OpenTelemetry Operator:
 1. See the [official documentation for deploying the OpenTelemetry Operator](https://github.com/open-telemetry/opentelemetry-operator#readme). As detailed there, you need to deploy the certificate manager in addition to the Operator.
 
-2. Deploy the OpenTelemetry Collector using one of the standard configurations:
+2. Configure the Operator using one of the OpenTelemetry Collector standard configurations:
    * [Daemonset Deployment](#daemonset-deployment)
    * [Gateway Deployment](#gateway-collector-service)
 
-**Note:** you are **strongly encouraged** to use the daemonset deployment with the OpenTelemetry Operator otherwise host metrics may not work.
+For example:
+
+   ```yaml
+   apiVersion: opentelemetry.io/v1alpha1
+   kind: OpenTelemetryCollector
+   metadata:
+     name: opentelemetry-demo
+   spec:
+     mode: daemonset
+     hostNetwork: true
+     image: otel/opentelemetry-collector-contrib:0.59.0
+     env:
+       - name: DD_API_KEY
+         valueFrom:
+           secretKeyRef:
+             key:  datadog_api_key
+             name: opentelemetry-demo-otelcol-dd-secret
+   
+     config: |
+       receivers:
+           otlp:
+             protocols:
+               grpc:
+               http:
+       exporters:
+           datadog:
+               api:
+                 key: ${DD_API_KEY}
+       service:
+         pipelines:
+           metrics:
+             receivers: [otlp]
+             exporters: [datadog]
+           traces:
+             receivers: [otlp]
+             exporters: [datadog]
+   ```
+
+**Note:** you should use the daemonset deployment with the OpenTelemetry Operator otherwise host metrics may not work. 
 
 ### Application Configuration
 
