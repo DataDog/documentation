@@ -81,12 +81,36 @@ Click on any dashboard graph to open an options menu:
 | View related logs      | Jump to the [Log Explorer][7] page scoped to your graph.     |
 | View related traces    | Populate a [Traces][8] panel scoped to your graph.           |
 | View related profiles  | Jump to the [Profiling][9] page scoped to your graph.        |
+
 ### Global time selector
+
 To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
 The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][10]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
 Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
+
+#### Refresh rate
+
+The refresh rate of a private dashboard depends on the time frame you are viewing. The shorter the time frame is, the more frequently the data is refreshed. Publicly shared dashboards refresh every thirty seconds, regardless of time frame selected.
+
+| Time frame   | Refresh Rate |
+|--------------|--------------|
+| 1 minute     | 10 seconds   |
+| 2 minutes    | 10 seconds   |
+| 5 minutes    | 10 seconds   |
+| 10 minutes   | 10 seconds   |
+| 30 minutes   | 20 seconds   |
+| 1 hour       | 20 seconds   |
+| 3 hours      | 1 minute     |
+| 4 hours      | 1 minute     |
+| 1 day        | 3 minute     |
+| 2 days       | 10 minute    |
+| 1 week       | 1 hour       |
+| 1 month      | 1 hour       |
+| 3 months     | 1 hour       |
+| 6 months     | 1 hour       |
+| 1 year       | 1 hour       |
 
 ### TV mode
 
@@ -165,7 +189,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][15] page. 
+Search, view, or create dashboards and lists on the [Dashboard List][15] page.
 
 ### New list
 
