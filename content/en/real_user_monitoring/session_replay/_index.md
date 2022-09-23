@@ -84,7 +84,7 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 ### Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for RUM & Session Replay's [Browser Premium plan][7], which includes replays, resources, and long tasks.
+To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for [Browser RUM & Session Replay plan][7], which includes replays.
 
 In order to apply these configurations, upgrade the [RUM Browser SDK][5] to a version >= 3.6.
 
