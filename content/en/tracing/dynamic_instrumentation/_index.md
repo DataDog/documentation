@@ -101,7 +101,7 @@ Alternatively, you can explicitly configure which instances of your service are 
 
 To select a service:
 
-1. Click the three dot context menu next to the service in the probes list and select **Select service instances to instrument**. 
+1. Click the three dot context menu next to the service in the probes list and select **Apply filters for service instrumentation**. 
 2. Create one or more queries to select active instances based on tags. 
 3. Click **Apply Filter**.
 
