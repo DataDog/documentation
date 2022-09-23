@@ -26,14 +26,14 @@ Autres versions prises en charge avec une configuration supplémentaire :
 ## Configurer l'intégration Datadog
 
 {{< tabs >}}
-{{< tab "GitLab.com" >}}
+{{% tab "GitLab.com" %}}
 
 Configurez l'intégration sur un [projet][1] ou un [groupe][2] en accédant à **Settings > Integrations > Datadog** pour chaque projet ou groupe que vous souhaitez instrumenter.
 
 [1] : https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2] : https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
-{{< /tab >}}
-{{< tab "GitLab >= 14.1+" >}}
+{{% /tab %}}
+{{% tab "GitLab >= 14.1+" %}}
 
 Configurez l'intégration sur un [projet][1] ou un [groupe][2] en accédant à **Settings > Integrations > Datadog** pour chaque projet ou groupe que vous souhaitez instrumenter.
 
@@ -42,8 +42,8 @@ Vous pouvez également activer l'intégration au niveau des [instances][3] GitLa
 [1] : https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2] : https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 [3] : https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
-{{< /tab >}}
-{{< tab "GitLab < 14.1" >}}
+{{% /tab %}}
+{{% tab "GitLab < 14.1" %}}
 
 Activez le [flag de fonctionnalité][1] `datadog_ci_integration` pour activer l'intégration. Lancez l'une des commandes suivantes, basées sur l'[exécuteur Rails][2] de GitLab, en fonction de votre type d'installation :
 
@@ -75,7 +75,7 @@ Configurez ensuite l'intégration sur un [projet][3] en accédant à **Settings 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
 [3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Remplissez les paramètres de configuration de l'intégration :

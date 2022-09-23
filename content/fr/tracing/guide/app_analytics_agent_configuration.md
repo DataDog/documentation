@@ -17,7 +17,7 @@ La fonction [App Analytics][1] sert à filtrer les données d'APM avec des tags 
 2. Modifiez la configuration de votre Agent Datadog (en fonction de la version de votre Agent) en suivant les instructions ci-dessous :
 
 {{< tabs >}}
-{{< tab "Agent 6.3.0+" >}}
+{{% tab "Agent 6.3.0+" %}}
 Dans `datadog.yaml`, ajoutez `analyzed_spans` sous `apm_config`. Par exemple :
 
 ```yaml
@@ -27,8 +27,8 @@ apm_config:
     <NOM_SERVICE_2>|<NOM_OPÉRATION_2>: 1
 ```
 
-{{< /tab >}}
-{{< tab "Agent 5.25.0+" >}}
+{{% /tab %}}
+{{% tab "Agent 5.25.0+" %}}
 Dans `datadog.conf`, ajoutez `[trace.analyzed_spans]`. Par exemple :
 
 ```text
@@ -37,8 +37,8 @@ Dans `datadog.conf`, ajoutez `[trace.analyzed_spans]`. Par exemple :
 <NOM_SERVICE_2>|<NOM_OPÉRATION_2>: 1
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 Ajoutez `DD_APM_ANALYZED_SPANS` à l'environnement de conteneur de l'Agent (compatible avec les versions 12.6.5250+). Utilisez des expressions régulières séparées par des virgules sans espace. Par exemple :
 
 ```text
@@ -49,7 +49,7 @@ DD_APM_ANALYZED_SPANS="<NOM_SERVICE_1>|<NOM_OPÉRATION_1>=1,<NOM_SERVICE_2>|<NOM
 `my-express-app|express.request=1,my-dotnet-app|aspnet_core_mvc.request=1`
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Dans Datadog, chaque service instrumenté automatiquement possède un `<NOM_OPÉRATION>. Celui-ci permet de définir le type de requête tracée. Par exemple, si vous tracez une application Flask Python, votre nom d'opération peut être `flask.request`. Pour une application Node utilisant Express, il peut s'agir de `express.request`.

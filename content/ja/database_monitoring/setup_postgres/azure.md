@@ -47,7 +47,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 [サーバーパラメーター][4]で以下の[パラメーター][3]を構成し、**サーバーを再起動**することで設定が有効になります。
 
 {{< tabs >}}
-{{< tab "シングルサーバー" >}}
+{{% tab "シングルサーバー" %}}
 
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
@@ -56,8 +56,8 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `pg_stat_statements.max` | `10000` | オプションです。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
 | `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
-{{< /tab >}}
-{{< tab "フレキシブルサーバー" >}}
+{{% /tab %}}
+{{% tab "フレキシブルサーバー" %}}
 
 | パラメーター            | 値 | 説明 |
 |----------------------| -- | --- |
@@ -68,7 +68,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 [1]: https://www.postgresql.org/docs/current/pgstatstatements.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Agent にアクセスを付与する
@@ -90,7 +90,7 @@ CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
 {{< tabs >}}
-{{< tab "Postgres ≥ 10" >}}
+{{% tab "Postgres ≥ 10" %}}
 
 **すべてのデータベース**に以下のスキーマを作成します。
 
@@ -101,8 +101,8 @@ GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
 ```
 
-{{< /tab >}}
-{{< tab "Postgres 9.6" >}}
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
 
 **すべてのデータベース**に以下のスキーマを作成します。
 
@@ -126,7 +126,7 @@ LANGUAGE sql
 SECURITY DEFINER;
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **注意**: 追加のテーブルへの問い合わせを必要とするカスタムメトリクスを生成する場合は、それらのテーブルに対する `SELECT` 権限を `datadog` ユーザーに付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳細は [PostgreSQL カスタムメトリクス収集][5]の説明を参照してください。
@@ -160,7 +160,7 @@ SECURITY DEFINER;
 
 権限が正しいことを確認するために、以下のコマンドを実行して、Agent ユーザーがデータベースに接続してコアテーブルを読み取ることができることを確認します。
 {{< tabs >}}
-{{< tab "Postgres ≥ 10" >}}。
+{{% tab "Postgres ≥ 10" %}}。
 
 ```shell
 psql -h mydb.example.com -U datadog postgres -A \
@@ -176,8 +176,8 @@ psql -h mydb.example.com -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{{< /tab >}}
-{{< tab "Postgres 9.6" >}}
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
 
 ```shell
 psql -h mydb.example.com -U datadog postgres -A \
@@ -194,7 +194,7 @@ psql -h mydb.example.com -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 パスワードの入力を求められた場合は、`datadog` ユーザーを作成したときに入力したパスワードを使用してください。
@@ -204,7 +204,7 @@ psql -h mydb.example.com -U datadog postgres -A \
 Azure Postgres データベースを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][7]を参照してください。
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 ホスト上で実行されている Agent のデータベースモニタリングメトリクスの収集を構成するには、次の手順に従ってください。(Agent で Azure データベースからメトリクスを収集するために小規模な仮想マシンをプロビジョニングする場合など)
 
@@ -235,8 +235,8 @@ Azure Postgres データベースを監視するには、インフラストラ�
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
@@ -303,8 +303,8 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 [3]: /ja/agent/guide/secrets-management
 [4]: /ja/agent/faq/template_variables/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
@@ -422,7 +422,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 [5]: /ja/agent/guide/secrets-management
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

@@ -33,7 +33,7 @@ Add custom [span tags][1] to your [spans][2] to customize your observability wit
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
 {{< tabs >}}
-{{< tab "Active Span" >}}
+{{% tab "Active Span" %}}
 Access the current active [span][1] from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
 
 ```ruby
@@ -57,9 +57,9 @@ end
 ```
 
 [1]: /tracing/glossary/#spans
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Manually Instrumented Spans" >}}
+{{% tab "Manually Instrumented Spans" %}}
 
 Add [tags][1] directly to `Datadog::Span` objects by calling `#set_tag`:
 
@@ -76,7 +76,7 @@ end
 
 
 [1]: /tracing/glossary/#span-tags
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Adding tags globally to all spans

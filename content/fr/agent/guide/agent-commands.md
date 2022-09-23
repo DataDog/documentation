@@ -22,7 +22,7 @@ Pour les systèmes basés sur Linux où la commande <code>service</code> wrapper
 Liste des commandes pour démarrer l'Agent Datadog :
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plate-forme   | Commandes                                                            |
 |------------|--------------------------------------------------------------------|
@@ -37,8 +37,8 @@ Liste des commandes pour démarrer l'Agent Datadog :
 [1]: /fr/agent/
 [2]: /fr/agent/docker/
 [3]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Plate-forme | Commande                                   |
 |----------|-------------------------------------------|
@@ -50,7 +50,7 @@ Liste des commandes pour démarrer l'Agent Datadog :
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Arrêter l'Agent
@@ -58,7 +58,7 @@ Liste des commandes pour démarrer l'Agent Datadog :
 Liste des commandes pour arrêter l'Agent Datadog :
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plate-forme   | Commande                                                                          |
 |------------|----------------------------------------------------------------------------------|
@@ -72,8 +72,8 @@ Liste des commandes pour arrêter l'Agent Datadog :
 
 [1]: /fr/agent/
 [2]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Plate-forme | Commande                                   |
 |----------|-------------------------------------------|
@@ -85,7 +85,7 @@ Liste des commandes pour arrêter l'Agent Datadog :
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Redémarrez l'Agent
@@ -93,7 +93,7 @@ Liste des commandes pour arrêter l'Agent Datadog :
 Liste des commandes pour redémarrer l'Agent Datadog :
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plate-forme   | Commande                                                                          |
 |------------|----------------------------------------------------------------------------------|
@@ -107,8 +107,8 @@ Liste des commandes pour redémarrer l'Agent Datadog :
 [1]: /fr/agent/
 [2]: /fr/agent/docker/?tab=standard#setup
 [3]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Plate-forme | Commande                                   |
 |----------|-------------------------------------------|
@@ -120,7 +120,7 @@ Liste des commandes pour redémarrer l'Agent Datadog :
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
 [2]: /fr/agent/basic_agent_usage/windows/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Statut et informations sur l'Agent
@@ -130,7 +130,7 @@ Liste des commandes pour redémarrer l'Agent Datadog :
 Liste des commandes pour afficher le statut de l'Agent Datadog :
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plate-forme        | Commande                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
@@ -143,8 +143,8 @@ Liste des commandes pour afficher le statut de l'Agent Datadog :
 
 
 [1]: /fr/agent/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Plate-forme        | Commande                                                                  |
 |-----------------|--------------------------------------------------------------------------|
@@ -156,14 +156,14 @@ Liste des commandes pour afficher le statut de l'Agent Datadog :
 | Windows         | Consultez la [documentation dédiée à l'Agent pour Windows][1].                                |
 
 [1]: /fr/agent/basic_agent_usage/windows/#status-and-information
-{{< /tab >}}
-{{< tab "Agent de cluster" >}}
+{{% /tab %}}
+{{% tab "Agent de cluster" %}}
 
 | Plate-forme   | Commande                        |
 |------------|--------------------------------|
 | Kubernetes | `datadog-cluster-agent status` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Informations sur l'Agent
@@ -171,7 +171,7 @@ Liste des commandes pour afficher le statut de l'Agent Datadog :
 Liste des commandes pour afficher le statut de votre Agent Datadog et les intégrations activées.
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plate-forme   | Commande                                              |
 |------------|------------------------------------------------------|
@@ -199,8 +199,8 @@ Running Checks
 
 [1]: /fr/agent/basic_agent_usage/#gui
 [2]: /fr/agent/basic_agent_usage/windows/#status-and-information
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Plate-forme   | Commande                                                                |
 |------------|------------------------------------------------------------------------|
@@ -223,20 +223,20 @@ Checks
 ```
 
 [1]: /fr/agent/basic_agent_usage/windows/#status-and-information
-{{< /tab >}}
-{{< tab "Agent de cluster" >}}
+{{% /tab %}}
+{{% tab "Agent de cluster" %}}
 
 | Plate-forme   | Commande                        |
 |------------|--------------------------------|
 | Kubernetes | `datadog-cluster-agent status` |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Autres commandes
 
 {{< tabs >}}
-{{< tab "Agents v6 et v7" >}}
+{{% tab "Agents v6 et v7" %}}
 
 L'interface de ligne de commande pour l'Agent v6 est basée sur un système de sous-commandes. Pour consulter la liste des sous-commandes disponibles, exécutez ce qui suit : 
 ```shell
@@ -277,7 +277,7 @@ Certaines options disposent de flags et d'options détaillées que vous pouvez c
 
 [1]: /fr/agent/troubleshooting/config/
 [2]: /fr/agent/troubleshooting/send_a_flare/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

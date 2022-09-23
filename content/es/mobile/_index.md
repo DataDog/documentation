@@ -115,7 +115,7 @@ También puedes personalizar tus widgets de incidencias abiertas aplicando los s
 #### Crear un widget de incidencias abiertas
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 1. Pulsa el botón **+** en la esquina superior izquierda de la pantalla.
 2. Busca los widgets de “Datadog”.
@@ -123,8 +123,8 @@ También puedes personalizar tus widgets de incidencias abiertas aplicando los s
 4. Arrastra el widget para colocarlo en la localización que prefieras de la pantalla.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 1. Mantén pulsada tu pantalla de inicio durante un rato.
 2. Pulsa el botón **Widgets** que aparece en el editor de tu pantalla de inicio. Si tienes accesos directos a aplicaciones, es posible que solo veas un icono en la esquina superior derecha de la burbuja.
@@ -132,13 +132,13 @@ También puedes personalizar tus widgets de incidencias abiertas aplicando los s
 4. Elige el tamaño del widget que prefieras.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Editar un widget de incidencias abiertas
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 1. Mantén pulsado el widget durante un rato para configurarlo.
 2. Pulsa **Editar widget**.
@@ -150,8 +150,8 @@ También puedes personalizar tus widgets de incidencias abiertas aplicando los s
 7. Pulsa en cualquier lugar fuera del widget para guardar tus preferencias y salir de la pantalla de configuración.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 1. Pulsa sobre el título del widget para configurarlo.
 2. Pulsa **Organización** para recuperar las incidencias abiertas de la organización seleccionada.
@@ -163,7 +163,7 @@ También puedes personalizar tus widgets de incidencias abiertas aplicando los s
 8. Mantén pulsado el widget durante un rato para elegir el tamaño que prefieras.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Mostrar incidencias abiertas de varias organizaciones
@@ -171,13 +171,13 @@ También puedes personalizar tus widgets de incidencias abiertas aplicando los s
 Puedes mostrar las incidencias abiertas de varias organizaciones en la pantalla de inicio de tu dispositivo móvil.
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 - Pulsa **Elegir**, junto a la etiqueta Organización, para recuperar las incidencias abiertas de la organización seleccionada.
 
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 1. Pulsa sobre el título del widget para configurarlo.
 2. En la pantalla de configuración, pulsa **Organización**.
@@ -186,24 +186,24 @@ Puedes mostrar las incidencias abiertas de varias organizaciones en la pantalla 
 5. Pulsa **Guardar** o **Aplicar**.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Eliminar un widget de incidencias abiertas
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 Para eliminar un widget, pulsa el botón **-**, situado en la parte superior izquierda del widget, cuando edites tu pantalla de inicio, o bien mantén pulsado el widget durante un rato y selecciona **Elimnar widget**.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 Para eliminar un widget, mantenlo pulsado durante un rato, arrástralo y suéltalo encima del botón **Eliminar**.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Widget de SLO
@@ -228,7 +228,7 @@ También puedes especificar que un dashboard se abra de forma predeterminada cad
 #### Crear un widget de SLO
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 - Mantén pulsada tu pantalla de inicio durante un rato.
 - Pulsa el botón “+” en la esquina superior izquierda de la pantalla.
@@ -237,8 +237,8 @@ También puedes especificar que un dashboard se abra de forma predeterminada cad
 - Arrastra el widget para colocarlo en la localización que prefieras de la pantalla.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 - Mantén pulsada tu pantalla de inicio durante un rato.
 - Pulsa el botón “Widgets” que aparece en el editor de tu pantalla de inicio. Si tienes accesos directos a aplicaciones, es posible que solo veas un icono en la esquina superior derecha de la burbuja.
@@ -246,13 +246,13 @@ También puedes especificar que un dashboard se abra de forma predeterminada cad
 - Elige el tamaño del widget que prefieras. Solo se mostrará un SLO, independientemente de tu elección. Si eliges un tamaño con el que el widget se ajuste al ancho de la pantalla de inicio de tu dispositivo móvil, se mostrará el SLO seleccionado y la representación temporal de su estado.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Editar un widget de SLO
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 - Mantén pulsado el widget durante un rato para configurarlo.
 - Pulsa “Editar widget”.
@@ -262,8 +262,8 @@ También puedes especificar que un dashboard se abra de forma predeterminada cad
 - Pulsa en cualquier lugar fuera del widget para validar tus preferencias y salir de la pantalla de configuración.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 - Pulsa sobre el título del widget para configurarlo.
 - Pulsa “SLO seleccionado” para seleccionar el SLO que quieres consultar.
@@ -273,7 +273,7 @@ También puedes especificar que un dashboard se abra de forma predeterminada cad
 - Mantén pulsado el widget durante un rato para elegir el tamaño que prefieras.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Mostrar SLO de varias organizaciones
@@ -281,13 +281,13 @@ También puedes especificar que un dashboard se abra de forma predeterminada cad
 Puedes mostrar los SLO de varias organizaciones en la pantalla de inicio de tu dispositivo móvil.
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 La pantalla de configuración mostrará todas las organizaciones en las que has iniciado sesión. Si no encuentras la tuya, vuelve a iniciar sesión.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 - Pulsa sobre el título del widget para configurarlo.
 - En la pantalla de configuración, pulsa “Organización”.
@@ -296,24 +296,24 @@ La pantalla de configuración mostrará todas las organizaciones en las que has 
 - Pulsa “Guardar” o “Aplicar”.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Eliminar un widget de SLO
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 Para eliminar un widget, pulsa el botón “-”, situado en la parte superior izquierda del widget, cuando edites tu pantalla de inicio, o bien mantén pulsado el widget durante un rato y selecciona “Eliminar widget”.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 Para eliminar un widget, mantenlo pulsado durante un rato, arrástralo y suéltalo encima del botón “Eliminar”.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Widget de monitores
@@ -327,7 +327,7 @@ Consulta tus [monitores][16] desde tu pantalla de inicio gracias a los widgets d
 #### Crear un widget de monitores
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 - Mantén pulsada la pantalla de inicio durante un rato.
 - Pulsa el botón “+” en la esquina superior izquierda de la pantalla.
@@ -336,8 +336,8 @@ Consulta tus [monitores][16] desde tu pantalla de inicio gracias a los widgets d
 - Arrastra el widget para colocarlo en la localización que prefieras de la pantalla.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 - Mantén pulsada tu pantalla de inicio durante un rato.
 - Pulsa “Widgets” en el editor de tu pantalla de inicio. Si tienes accesos directos a aplicaciones, es posible que solo veas un icono en la esquina superior derecha de la burbuja.
@@ -345,13 +345,13 @@ Consulta tus [monitores][16] desde tu pantalla de inicio gracias a los widgets d
 - Elige el tamaño del widget que prefieras. Para mostrar más vistas guardadas, aumenta la longitud del widget en la pantalla de inicio de tu dispositivo móvil.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Editar un widget de monitores
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 - Mantén pulsado el widget durante un rato para configurarlo.
 - Pulsa “Editar widget”.
@@ -360,8 +360,8 @@ Consulta tus [monitores][16] desde tu pantalla de inicio gracias a los widgets d
 - Pulsa en cualquier lugar fuera del widget para validar tus preferencias y salir de la pantalla de configuración.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 - Pulsa sobre el título del widget para configurarlo.
 - Pulsa “Vistas guardadas”.
@@ -371,7 +371,7 @@ Consulta tus [monitores][16] desde tu pantalla de inicio gracias a los widgets d
 - Desplázate por el widget para ver más vistas guardadas. Mantén pulsado el widget durante un rato y elige el tamaño que prefieras.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Mostrar monitores de varias organizaciones
@@ -379,13 +379,13 @@ Consulta tus [monitores][16] desde tu pantalla de inicio gracias a los widgets d
 Puedes mostrar los monitores de varias organizaciones en el mismo widget.
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 La pantalla de configuración mostrará todas las organizaciones en las que has iniciado sesión. Si no encuentras la tuya, puede que tengas que volver a iniciar sesión.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 - Pulsa sobre el título del widget para configurarlo.
 - En la pantalla de configuración, pulsa “Organización”.
@@ -394,24 +394,24 @@ La pantalla de configuración mostrará todas las organizaciones en las que has 
 - Pulsa “Guardar” o “Aplicar”.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Eliminar un widget de monitores
 
 {{< tabs >}}
-{{< tab "iOS" >}}
+{{% tab "iOS" %}}
 
 Para eliminar un widget, pulsa el botón “-”, situado en la parte superior izquierda del widget, cuando edites tu pantalla de inicio, o bien mantén pulsado el widget durante un rato y, luego, selecciona “Eliminar widget”.
 
 
-{{< /tab >}}
-{{< tab "Android" >}}
+{{% /tab %}}
+{{% tab "Android" %}}
 
 Para eliminar un widget, mantenlo pulsado durante un rato, arrástralo y suéltalo encima del botón “Eliminar”.
 
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Acciones rápidas

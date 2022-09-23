@@ -48,9 +48,6 @@ def pull_and_push_file(content, content_dir):
     output_content = content["options"].get("output_content", True)
 
     if output_content:
-        file_content = file_content.replace("{{%", "{{<").replace("%}}", ">}}")
-        # remove space or tab before shortcode
-        file_content = re.sub(r"[\t ]+{{<", '{{<', file_content, 0, re.MULTILINE)
         destination_path = content["options"]["dest_path"].lstrip('/')
         dest_path_dir = pathlib.Path(content_dir) / pathlib.Path(destination_path)
         dest_path_dir.mkdir(parents=True, exist_ok=True)

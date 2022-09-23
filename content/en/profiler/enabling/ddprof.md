@@ -57,7 +57,7 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 2. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
    {{< tabs >}}
-{{< tab "Environment variables" >}}
+{{% tab "Environment variables" %}}
 
 ```bash
 export DD_ENV=prod
@@ -80,8 +80,8 @@ export DD_VERSION=1.0.3
 exec ./ddprof myapp --arg1 --arg2
 ```
 
-{{< /tab >}}
-{{< tab "Parameters" >}}
+{{% /tab %}}
+{{% tab "Parameters" %}}
 
 ```bash
 ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
@@ -99,7 +99,7 @@ Then you must invoke `ddprof` with that builtin instead:
 exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

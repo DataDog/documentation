@@ -38,7 +38,7 @@ Ce guide suppose également que vous avez accès à un terminal avec `CURL` et a
 Si vous surveillez des services utilisés uniquement pendant la semaine, tels que le logiciel ERP ou le logiciel de comptabilité de votre entreprise, vous souhaitez peut-être recevoir des alertes uniquement pendant la semaine. L'appel d'API suivant vous permet de désactiver les alertes pendant le week-end pour tous les monitors sur le tag `env:prod`.
 
 {{< tabs >}}
-{{< tab "API " >}}
+{{% tab "API " %}}
 
 ```bash
 curl -X POST "https://api.<SITE_DATADOG>/api/v1/downtime" \
@@ -86,15 +86,15 @@ Ensuite, dans la commande cURL, utilisez : `"start": '"${start}"'`.
 }
 ```
 
-{{< /tab >}}
-{{< tab "UI" >}}
+{{% /tab %}}
+{{% tab "UI" %}}
 
 Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sélectionnez `recurring` :
 
 {{< img src="monitors/guide/downtimes_weekend.jpg" alt="Downtimes pendant le week-end" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Downtime en dehors des heures de travail
@@ -104,7 +104,7 @@ En gardant le même exemple, vous pouvez également désactiver ce service en de
 L'appel d'API suivant vous permet de désactiver les alertes de 20 h à 6 h tous les jours de la semaine :
 
 {{< tabs >}}
-{{< tab "API " >}}
+{{% tab "API " %}}
 
 ```bash
 curl -X POST "https://api.<SITE_DATADOG>/api/v1/downtime" \
@@ -146,15 +146,15 @@ Remplacez la valeur du paramètre fictif `<SITE_DATADOG>` par {{< region-param k
 }
 ```
 
-{{< /tab >}}
-{{< tab "UI" >}}
+{{% /tab %}}
+{{% tab "UI" %}}
 
 Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sélectionnez `recurring` :
 
 {{< img src="monitors/guide/downtime_businesshour.jpg" alt="Downtimes en dehors des heures de travail" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Downtime récurrent à un jour précis du mois
@@ -168,7 +168,7 @@ Les attributs spécifiant une durée dans une `RRULE` (comme `DTSTART`, `DTEND` 
 **Exemple** : l'application ERP est mise à jour tous les 2e mardis du mois pour appliquer les patchs et correctifs entre 8 h et 10 h. Les monitors pour cet événement étant définis avec `app:erp`, ce paramètre sert à définir le downtime.
 
 {{< tabs >}}
-{{< tab "API " >}}
+{{% tab "API " %}}
 
 Le paramètre `type` doit être défini sur `rrule`. Les paramètres `start` et `end` doivent correspondre aux valeurs prévues pour le début et la fin du premier jour de la règle récurrente. En supposant que le premier 2e mardi de la règle corresponde au mardi 9 mars, la date de début doit donc être le 9 mars à 8 h, et la date de fin le 9 mars à 10 h :
 
@@ -212,15 +212,15 @@ Remplacez la valeur du paramètre fictif `<SITE_DATADOG>` par {{< region-param k
 }
 ```
 
-{{< /tab >}}
-{{< tab "UI" >}}
+{{% /tab %}}
+{{% tab "UI" %}}
 
 Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sélectionnez `recurring` :
 
 {{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="downtime avec rrule"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Pour aller plus loin

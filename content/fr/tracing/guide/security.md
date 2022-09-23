@@ -60,7 +60,7 @@ Pour nettoyer les données sensibles des tags de votre [span][3], utilisez le pa
 Par exemple :
 
 {{< tabs >}}
-{{< tab "datadog.yaml" >}}
+{{% tab "datadog.yaml" %}}
 
 ```yaml
 apm_config:
@@ -78,8 +78,8 @@ apm_config:
       pattern: "(?s).*"
 ```
 
-{{< /tab >}}
-{{< tab "Variable d'environnement" >}}
+{{% /tab %}}
+{{% tab "Variable d'environnement" %}}
 
 ```shell
 DD_APM_REPLACE_TAGS=[
@@ -100,7 +100,7 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: /fr/tracing/visualization/#trace

@@ -47,7 +47,7 @@ further_reading:
 Use this guide to manually set up the Datadog [AWS Integration][1].
 
 {{< tabs >}}
-{{< tab "Role delegation" >}}
+{{% tab "Role delegation" %}}
 
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
@@ -99,8 +99,8 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 [4]: https://console.aws.amazon.com/iam/home#/roles
 [5]: /security_platform/cspm
 [6]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
-{{< /tab >}}
-{{< tab "Access keys (GovCloud or China Only)" >}}
+{{% /tab %}}
+{{% tab "Access keys (GovCloud or China Only)" %}}
 
 ## Setup
 
@@ -118,7 +118,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 7. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% aws-permissions %}}

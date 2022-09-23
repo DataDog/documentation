@@ -29,7 +29,7 @@ Les numéros des nouvelles versions de l'Agent Datadog respectent les règles <a
 ## Changements entre les différentes versions majeures de l'Agent
 
 {{< tabs >}}
-{{< tab "Agent v7 vs Agent v6" >}}
+{{% tab "Agent v7 vs Agent v6" %}}
 
 L'Agent v7 est la dernière version majeure de l'Agent Datadog. Par rapport à l'Agent v6, la seule nouveauté est que **cette version prend uniquement en charge Python 3 pour les intégrations et les checks custom**.
 
@@ -41,8 +41,8 @@ Consultez la [section Upgrade vers l'Agent v7][1] pour découvrir comment mettr
 [1]: /fr/agent/versions/upgrade_to_agent_v7/
 [2]: /fr/agent/guide/python-3/
 [3]: /fr/agent/guide/agent-v6-python-3/
-{{< /tab >}}
-{{< tab "Agent v6 vs Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v6 vs Agent v5" %}}
 
 **Principales nouveautés de l'Agent v6** :
 
@@ -83,7 +83,7 @@ Pour découvrir l'ensemble des nouveautés de l'Agent v6 par rapport à la v5, 
 [6]: /fr/infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
 [8]: /fr/logs/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

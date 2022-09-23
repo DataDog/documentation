@@ -42,7 +42,7 @@ Agent가 사용하는 전송 방식을 확인하려면 [Agent 상태 명령어][
 다음 설정을 활용해 TCP 또는 HTTPS 트랜스포트를 강제 사용하세요.
 
 {{< tabs >}}
-{{< tab "HTTPS" >}}
+{{% tab "HTTPS" %}}
 
 Agent 버전 v6.14/v7.14 이상에서 HTTPS를 강제 사용하려면 Agent의 [주요 설정 파일][1](`datadog.yaml`)을 다음과 같이 업데이트하세요.
 
@@ -107,8 +107,8 @@ logs_config:
 [1]: /kr/agent/guide/agent-configuration-files/
 [2]: /kr/agent/basic_agent_usage/#agent-overhead
 [3]: /kr/agent/proxy/
-{{< /tab >}}
-{{< tab "TCP" >}}
+{{% /tab %}}
+{{% tab "TCP" %}}
 
 TCP 트랜스포트를 강제 사용하려면 Agent [주요 설정 파일][1](`datadog.yaml`)을 다음과 같이 업데이트하세요.
 
@@ -125,7 +125,7 @@ logs_config:
 기본적으로 Datadog Agent에서 로그를 Datadog로 전송할 때는 TLS-암호화 TCP를 사용합니다. 이를 위해 아웃바운드 커뮤니케이션(Datadog 미국 사이트의 경우 포트 `10516`로, Datadog 유럽 사이트의 경우 포트 `443`로)이 필요합니다.
 
 [1]: /kr/agent/guide/agent-configuration-files/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **참조**: [SOCKS5 프록시][2] 서버 설정 시 TCP 트랜스포트를 강제 사용하세요. socks5 프록시가 아직 HTTPS에서 압축을 지원하지 않기 때문입니다.

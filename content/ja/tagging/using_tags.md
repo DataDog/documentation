@@ -28,7 +28,7 @@ further_reading:
 ## ダッシュボード  
 
 {{< tabs >}}
-{{< tab "Assignment" >}}
+{{% tab "Assignment" %}}
 
 タグを使用し、メトリクスを絞り込んで[ダッシュボード グラフ][1]に表示するか、表示するメトリクスのグループを作成します。表示するメトリクスを絞り込むには、**from** テキストボックスにタグを入力します。これにより、この特定のタグ (この例では `service:coffee-house`) が割り当てられたすべてのソースについて、選択されたメトリクスが表示されます。
 
@@ -50,8 +50,8 @@ further_reading:
 [1]: /ja/dashboards/
 [2]: /ja/events/
 [3]: /ja/dashboards/template_variables/
-{{< /tab >}}
-{{< tab "Examples" >}}
+{{% /tab %}}
+{{% tab "Examples" %}}
 
 以下は、時系列チャートエディターを使用したタグの例です。最初のスクリーンショットでは、タグは適用されていません。すべてのホストでの平均 CPU 使用率が表示されます。
 
@@ -67,7 +67,7 @@ further_reading:
 
 必要に応じて、タグを追加して範囲をさらに絞り込みます。たとえば、`region:eastus` や `env:production` のホストなどです。タグは Datadog 全体で使用でき、すべてのコア要素 (メトリクス、トレース、ログ) に適用されます。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## インフラストラクチャー
@@ -75,7 +75,7 @@ further_reading:
 [ホストマップ][4]、[インフラストラクチャーリスト][5]、[コンテナ][6]、[処理][7]を絞り込むには、ページ上部にある **Filter by** テキストボックスにタグを入力します。ホストとコンテナは **Group by** テキストボックスを使い、タグキーでグループ化できます。グループボックスに `service` と入力すると、各サービスがグループの見出しとして表示されます。
 
 {{< tabs >}}
-{{< tab "Host Map" >}}
+{{% tab "Host Map" %}}
 
 このセクションでは、タグを使用してホストを絞り込みまたはグループ化します。
 
@@ -84,43 +84,43 @@ further_reading:
 または、コンテナを絞り込みまたはグループ化することもできます。
 
 {{< img src="tagging/using_tags/containermaptags.png" alt="コンテナマップタグ"  style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Infrastructure List" >}}
+{{% tab "Infrastructure List" %}}
 
 以下は、インフラストラクチャーリストページのテキストボックスによる絞り込みまたはグループ化です。
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="インフラストラクチャーリストにあるタグ"  style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Containers" >}}
+{{% tab "Containers" %}}
 
 以下は、ライブコンテナページのテキストボックスによる絞り込みまたはグループ化です。
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="ライブコンテナタグ"  style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Processes" >}}
+{{% tab "Processes" %}}
 
 以下は、ライブプロセスページのテキストボックスによる絞り込みまたはグループ化です。
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="ライブプロセスタグ"  style="width:80%;">}}
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## モニター
 
 {{< tabs >}}
-{{< tab "Manage Monitors" >}}
+{{% tab "Manage Monitors" %}}
 
 [割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。**注**: モニター タグは、メトリクス タグとは別のもので、独立しています。
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理のタグ"  style="width:80%;">}}
 
 [1]: /ja/tagging/assigning_tags/
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "New Monitor" >}}
+{{% tab "New Monitor" %}}
 
 [モニター][1]を作成する場合は、以下の場所でメトリクス タグを使用します。
 
@@ -133,15 +133,15 @@ further_reading:
 {{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ"  style="width:80%;">}}
 
 [1]: /ja/monitors/monitor_types/
-{{< /tab >}}
-{{< tab "Manage Downtime" >}}
+{{% /tab %}}
+{{% tab "Manage Downtime" %}}
 
 モニター タグ別に[ダウンタイム][1]を絞り込むには、検索バーに `service:coffee-house` などのタグ名を入力します。
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理のタグ"  style="width:80%;">}}
 
 [1]: /ja/monitors/downtimes/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## メトリクス
@@ -155,7 +155,7 @@ further_reading:
 一部のインテグレーションでは、オプションでタグを使用してメトリクスを制限できます。
 
 {{< tabs >}}
-{{< tab "AWS" >}}
+{{% tab "AWS" %}}
 
 The [AWS インテグレーションタイル][1] には、`to hosts with tag` と `to Lambdas with tag` という 2 つのタグフィルターがあります。
 
@@ -178,8 +178,8 @@ AWS のタグ付けに関する詳細は、[EC2][2] および [Lambda][3] ドキ
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
-{{< /tab >}}
-{{< tab "Azure" >}}
+{{% /tab %}}
+{{% tab "Azure" %}}
 
 [Azure インテグレーションタイル][1] には、`Optionally filter to VMs with tag` というタグフィルターがあります。
 
@@ -192,8 +192,8 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{< /tab >}}
-{{< tab "Google Cloud" >}}
+{{% /tab %}}
+{{% tab "Google Cloud" %}}
 
 [Google Cloud インテグレーションタイル][1] には、タグフィルター `to hosts with tag` があります。
 
@@ -209,13 +209,13 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## APM
 
 {{< tabs >}}
-{{< tab "App Analytics" >}}
+{{% tab "App Analytics" %}}
 
 [トレース検索][1]では、検索バーまたはファセットのチェックボックスを使用して、タグでトレースを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[トレース検索][2]のページを参照してください。
 
@@ -223,8 +223,8 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 [1]: /ja/tracing/app_analytics/search/
 [2]: /ja/tracing/app_analytics/search/#search-bar
-{{< /tab >}}
-{{< tab "Service Map" >}}
+{{% /tab %}}
+{{% tab "Service Map" %}}
 
 [タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域にジャンプできます。以下の例では、タグ `service:coffee-house` で絞り込んで、[App Analytics][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
 
@@ -235,7 +235,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 [3]: /ja/monitors/manage_monitor/
 [4]: /ja/logs/explorer/search/
 [5]: /ja/infrastructure/hostmap/
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -254,26 +254,26 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 ログ[検索][10]、[分析][11]、[パターン][12]、[Live Tail][13]は、検索バーまたはファセットのチェックボックスを使用して、タグでログを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[ログ検索][10]のページを参照してください。
 
 {{< tabs >}}
-{{< tab "Search" >}}
+{{% tab "Search" %}}
 
 {{< img src="tagging/using_tags/logsearchtags.png" alt="ログ検索タグ"  style="width:80%;">}}
 
-{{< /tab >}}
-{{< tab "Analytics" >}}
+{{% /tab %}}
+{{% tab "Analytics" %}}
 
 {{< img src="tagging/using_tags/loganalyticstags.png" alt="ログ分析タグ"  style="width:80%;">}}
 
-{{< /tab >}}
-{{< tab "Patterns" >}}
+{{% /tab %}}
+{{% tab "Patterns" %}}
 
 {{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns タグ"  style="width:80%;">}}
 
-{{< /tab >}}
-{{< tab "Live Tail" >}}
+{{% /tab %}}
+{{% tab "Live Tail" %}}
 
 {{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail タグ" video="true"  width="80%">}}
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 さらに、タグを使用してログ [パイプライン][14]を絞り込みます。以下の例では、パイプラインはタグ `service:coffee-house` でログを絞り込みます。

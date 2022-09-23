@@ -14,7 +14,7 @@ Choose your platform to see dedicated instructions to uninstall the Agent:
 ## Debian and Ubuntu
 
 {{< tabs >}}
-{{< tab "Agent v6 and v7" >}}
+{{% tab "Agent v6 and v7" %}}
 ```shell
 sudo apt-get remove datadog-agent -y
 ```
@@ -31,9 +31,9 @@ sudo apt-get remove datadog-agent -y
 ```shell
 sudo apt-get remove --purge datadog-agent -y
 ```
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 ```shell
 sudo apt-get remove datadog-agent -y
 ```
@@ -48,12 +48,12 @@ sudo apt-get remove datadog-agent -y
 ```shell
 sudo apt-get --purge remove datadog-agent -y
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## CentOS, RHEL, Fedora, and Amazon Linux
 {{< tabs >}}
-{{< tab "Agent v6 and v7" >}}
+{{% tab "Agent v6 and v7" %}}
 
 
 ```shell
@@ -74,9 +74,9 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/datadog-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 ```shell
 sudo yum remove datadog-agent
 ```
@@ -96,12 +96,12 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/dd-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## openSUSE and SLES
 {{< tabs >}}
-{{< tab "Agent v6 and v7" >}}
+{{% tab "Agent v6 and v7" %}}
 ```shell
 sudo zypper remove datadog-agent
 ```
@@ -120,9 +120,9 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/datadog-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 
 ```shell
 sudo zypper remove datadog-agent
@@ -142,11 +142,11 @@ sudo userdel dd-agent \
 && sudo rm -rf /etc/dd-agent/ \
 && sudo rm -rf /var/log/datadog/
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 ## macOS
 {{< tabs >}}
-{{< tab "Agent v6 and v7" >}}
+{{% tab "Agent v6 and v7" %}}
 **Single user installation**
 
 To remove the Agent and all Agent configuration files:
@@ -176,9 +176,9 @@ To remove the Agent and all Agent configuration files:
     sudo rm -rf /var/log/datadog
     ```
 3. Reboot your machine for the changes to take effect.
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 1. Stop and close the Datadog Agent with the bone icon in the tray.
 2. Drag the Datadog application from the application folder to the trash bin.
 3. Run:
@@ -197,13 +197,13 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ```
 
 > This method removes the Agent, as well as all Agent configuration files.
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Windows
 
 {{< tabs >}}
-{{< tab "Agent v6 and v7" >}}
+{{% tab "Agent v6 and v7" %}}
 
 There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
 
@@ -228,9 +228,9 @@ Using `/norestart`:
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Agent v5" >}}
+{{% tab "Agent v5" %}}
 
 There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
 
@@ -252,5 +252,5 @@ Use the following PowerShell command to uninstall the Agent without rebooting:
 start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}

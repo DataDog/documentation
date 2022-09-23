@@ -41,7 +41,7 @@ Les bibliothèques client AWS X-Ray et APM Datadog tracent toutes les deux les i
 
 
 {{< tabs >}}
-{{< tab "Node.js" >}}
+{{% tab "Node.js" %}}
 ```javascript
 module.exports.hello = datadog(
     (event, context, callback) => {
@@ -55,19 +55,19 @@ module.exports.hello = datadog(
     { mergeDatadogXrayTraces: true }
 );
 ```
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Python" >}}
+{{% tab "Python" %}}
 
 Définissez la variable d'environnement `DD_MERGE_XRAY_TRACES` sur `True` sur votre fonction Lambda.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Ruby" >}}
+{{% tab "Ruby" %}}
 
 Définissez la variable d'environnement `DD_MERGE_DATADOG_XRAY_TRACES` sur `True` sur votre fonction Lambda.
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

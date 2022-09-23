@@ -41,7 +41,7 @@ Define the configuration of your browser test.
 
    {{< tabs >}}
 
-   {{< tab "Request Options" >}}
+   {{% tab "Request Options" %}}
 
    Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test. To prevent the Content Security Policy (CSP) from blocking your test, select **Disable CSP**.
 
@@ -54,9 +54,9 @@ Define the configuration of your browser test.
 
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Certificate" >}}
+   {{% tab "Certificate" %}}
 
    Select **Ignore server certificate error** to instruct the test to skip errors in the server certificate. 
   
@@ -65,17 +65,17 @@ Define the configuration of your browser test.
 
    You can include wildcards in the URL.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Proxy" >}}
+   {{% tab "Proxy" %}}
 
    Enter a URL for a proxy you want to send requests through in the **Proxy URL** field as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
 
    You can include [global variables](#use-global-variables) in the URL.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Privacy" >}}
+   {{% tab "Privacy" %}}
 
    Select **Do not capture any screenshots for this test** to prevent screenshots from being taken in your test steps. 
   
@@ -83,7 +83,7 @@ Define the configuration of your browser test.
 
 [1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
 [2]: /data_security/synthetics
-   {{< /tab >}}
+   {{% /tab %}}
 
    {{< /tabs >}}
 

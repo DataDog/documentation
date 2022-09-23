@@ -33,7 +33,7 @@ Rédigez vos logs PHP dans un fichier, puis [utilisez l'Agent][1] pour les trans
 ### Installation
 
 {{< tabs >}}
-{{< tab "PHP Monolog" >}}
+{{% tab "PHP Monolog" %}}
 
 Utilisez Composer pour ajouter Monolog en tant que dépendance :
 
@@ -56,8 +56,8 @@ Vous pouvez également l'installer manuellement :
       use Monolog\Formatter\JsonFormatter;
     ```
 
-{{< /tab >}}
-{{< tab "PHP Zend-Log" >}}
+{{% /tab %}}
+{{% tab "PHP Zend-Log" %}}
 
 Zend-log fait partie du framework Zend. Utilisez [Composer][1] pour ajouter Zend-Log :
 
@@ -80,8 +80,8 @@ Vous pouvez également l'installer manuellement :
 ```
 
 [1]: https://getcomposer.org
-{{< /tab >}}
-{{< tab "PHP Symfony" >}}
+{{% /tab %}}
+{{% tab "PHP Symfony" %}}
 
 Déclarez un formateur JSON Monolog en tant que service :
 
@@ -91,13 +91,13 @@ services:
         class: Monolog\Formatter\JsonFormatter
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Configuration du logger
 
 {{< tabs >}}
-{{< tab "PHP Monolog" >}}
+{{% tab "PHP Monolog" %}}
 
 Utilisez la configuration ci-dessous pour activer le format JSON et enregistrer les logs et les événements dans le fichier `application-json.log`. Juste après avoir lancé l'instance Monolog, modifiez votre code afin d'ajouter un nouveau gestionnaire :
 
@@ -127,8 +127,8 @@ Utilisez la configuration ci-dessous pour activer le format JSON et enregistrer 
   $log->info('Ajout d'un nouvel utilisateur', array('username' => 'Seldaek'));
 ```
 
-{{< /tab >}}
-{{< tab "PHP Zend-Log" >}}
+{{% /tab %}}
+{{% tab "PHP Zend-Log" %}}
 
 Utilisez la configuration ci-dessous pour activer le format JSON et enregistrer les logs et les événements dans le fichier `application-json.log`. Juste après avoir lancé l'instance Zend-log, modifiez votre code afin d'ajouter un nouveau gestionnaire.
 
@@ -156,8 +156,8 @@ Utilisez la configuration ci-dessous pour activer le format JSON et enregistrer 
 [Transférez ensuite vos fichiers de log à Datadog][1].
 
 [1]: /fr/logs/log_collection/
-{{< /tab >}}
-{{< tab "PHP Symfony" >}}
+{{% /tab %}}
+{{% tab "PHP Symfony" %}}
 
 Configurez le formateur dans votre configuration Monolog en déclarant le champ formatter comme suit :
 
@@ -171,7 +171,7 @@ Configurez le formateur dans votre configuration Monolog en déclarant le champ 
             formatter: monolog.json_formatter
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Associer vos logs à vos traces**
@@ -200,7 +200,7 @@ logs:
 ## Ajout de contexte
 
 {{< tabs >}}
-{{< tab "PHP Monolog" >}}
+{{% tab "PHP Monolog" %}}
 
 L'ajout de données de contexte à vos logs et événements est particulièrement utile. Monolog rend cette opération simple en proposant différents moyens de définir des données de contexte propres à chaque thread, qui sont ensuite automatiquement envoyées avec tous les événements. À tout moment, il vous est possible de loguer un événement accompagné de données de contexte :
 
@@ -233,8 +233,8 @@ Monolog intègre un préprocesseur. Il s'agit d'un rappel simple qui enrichit vo
   });
 ```
 
-{{< /tab >}}
-{{< tab "PHP Zend-Log" >}}
+{{% /tab %}}
+{{% tab "PHP Zend-Log" %}}
 
 Ce sont les données de contexte supplémentaire que vous pouvez ajouter à vos logs et événements qui vous dévoilent des insights pertinents. Zend-Log simplifie ce processus en proposant différents moyens de définir des données de contexte propres à chaque thread. Ces données sont ensuite automatiquement envoyées avec chaque événement. À tout moment, il vous est possible de loguer un événement accompagné de données de contexte :
 
@@ -264,8 +264,8 @@ Vous pouvez utiliser le code suivant si vous le souhaitez :
 Si vous souhaitez rédiger votre propre code, [consultez la documentation relative à Zend][1] (en anglais).
 
 [1]: https://docs.zendframework.com/zend-log/processors
-{{< /tab >}}
-{{< tab "PHP Symfony" >}}
+{{% /tab %}}
+{{% tab "PHP Symfony" %}}
 
 Ajoutez un processeur de session pour inclure des données de contexte variables dans vos logs :
 
@@ -355,7 +355,7 @@ Ajoutez un processeur de session pour inclure des données de contexte variables
 3. [Transférez le fichier JSON généré à Datadog][1].
 
 [1]: /fr/logs/log_collection/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Intégration de Monolog à un framework

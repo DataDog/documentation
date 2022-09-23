@@ -15,7 +15,7 @@ further_reading:
 Datadog Agent のコミュニティ開発のインテグレーションは、[Integrations-extra][1] GitHub リポジトリに格納されています。これらはパッケージ化されておらず、Datadog Agent に組み込まれていませんが、以下の手順に従ってアドオンとしてインストールできます。
 
 {{< tabs >}}
-{{< tab "Agent above v6.8" >}}
+{{% tab "Agent above v6.8" %}}
 
 `<インテグレーション名>` チェックをホストにインストールするには
 
@@ -32,8 +32,8 @@ Datadog Agent のコミュニティ開発のインテグレーションは、[In
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /ja/getting_started/integrations/
 [3]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 integrations-extra からの Docker Agent とのインテグレーションを使用する最良の方法は、このインテグレーションがインストールされた Agent をビルドすることです。次の Dockerfile を使用して、integrations-extra からの `<インテグレーション名>` インテグレーションを含む Agent の更新バージョンをビルドします。
 
@@ -47,8 +47,8 @@ Docker 内で実行された `agent Integration install` コマンドは、無�
 次に、この新しい Agent イメージを[オートディスカバリー][1]と組み合わせて使用して、`<インテグレーション名>` チェックを有効にします。
 
 [1]: /ja/agent/autodiscovery/
-{{< /tab >}}
-{{< tab "Agent prior to 6.8" >}}
+{{% /tab %}}
+{{% tab "Agent prior to 6.8" %}}
 
 `<インテグレーション名>` チェックをホストにインストールするには
 
@@ -67,7 +67,7 @@ Docker 内で実行された `agent Integration install` コマンドは、無�
 [3]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /ja/getting_started/integrations/
 [5]: /ja/agent/guide/agent-commands/#restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

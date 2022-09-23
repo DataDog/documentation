@@ -37,7 +37,7 @@ To monitor individual devices:
 - Include the IP address and any additional devices metadata (as tags) in the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
 
 {{< tabs >}}
-{{< tab "SNMPv2" >}}
+{{% tab "SNMPv2" %}}
 
 - For SNMPv2, configure an instance specifying the IP address and _community string_ of the device:
 
@@ -53,8 +53,8 @@ To monitor individual devices:
         - 'key2:val2'
     ```
 
-{{< /tab >}}
-{{< tab "SNMPv3" >}}
+{{% /tab %}}
+{{% tab "SNMPv3" %}}
 
 - For SNMPv3, configure an instance specifying the IP address and SNMPv3 credentials of the device (as appropriate), for example: `user`, `authProtocol`, `authKey`, `privProtocol`, and `privKey`:
 
@@ -75,7 +75,7 @@ To monitor individual devices:
         - 'key2:val2'
     ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 - [Restart the Agent][5].
@@ -100,7 +100,7 @@ To use Autodiscovery with Network Device Monitoring:
 2. Edit the [`datadog.yaml`][8] Agent configuration file to include all the subnets for Datadog to scan. The following sample config provides required parameters, default values, and examples for Autodiscovery.
 
 {{< tabs >}}
-{{< tab "SNMPv2" >}}
+{{% tab "SNMPv2" %}}
 
 ```yaml
 listeners:
@@ -127,9 +127,9 @@ snmp_listener:
       - "key2:val2"
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "SNMPv3" >}}
+{{% tab "SNMPv3" %}}
 
 ```yaml
 listeners:
@@ -162,7 +162,7 @@ snmp_listener:
         - 'key2:val2'
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.

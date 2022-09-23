@@ -35,7 +35,7 @@ title: コンテナ Agent を使用してホストからログを追跡する
 ここでは、Kubernetes と Docker の例を紹介します。
 
 {{< tabs >}}
-{{< tab "Kubernetes" >}}
+{{% tab "Kubernetes" %}}
 
 ホストのログファイルを Agent コンテナにマウントするには、Agent マニフェストのボリュームセクションにホストログディレクトリを、`volumeMounts` セクションにコンテナログディレクトリを設定します。
 
@@ -91,8 +91,8 @@ kubectl create -f <configmap manifest>
             name: ddagent-logs-configmap
 ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 ホストログファイルをマウントするには、Agent の `docker run` コマンドにボリュームパラメーターを追加します。
 
@@ -132,7 +132,7 @@ docker run -d --name datadog-agent \
            -v /<config location>/logs.yaml:/conf.d/logs.yaml \
            gcr.io/datadoghq/agent:latest
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 検証

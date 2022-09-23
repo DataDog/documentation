@@ -54,7 +54,7 @@ Pour installer l'Agent, consultez les [instructions d'installation de l'Agent][2
 Si vous déployez l'Agent Datadog en utilisant l'une des méthodes présentées dans les instructions d'installation ci-dessus, vous devez inclure les contraintes de contexte de sécurité (Security Context Constraints ou SCC) pour que l'Agent recueille des données. Suivez les instructions ci-dessous en fonction de votre déploiement. 
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Les SCC peuvent être appliquées directement dans le fichier `values.yaml` de votre Agent Datadog. Ajouter le bloc suivant sous la section `agents:` dans le fichier. 
 
@@ -70,8 +70,8 @@ agents:
 
 Vous pouvez appliquer ce bloc lors du déploiement initial de l'Agent. Vous pouvez également exécuter une commande `helm upgrade` une fois le changement apporté pour appliquer les SCC.
 
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 En fonction de vos besoins et des [contraintes de sécurité][1] de votre cluster, trois scénarios de déploiement sont pris en charge :
 
@@ -97,7 +97,7 @@ En fonction de vos besoins et des [contraintes de sécurité][1] de votre cluste
 </div>
 
 [1]: https://docs.openshift.com/enterprise/3.0/admin_guide/manage_scc.html
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}} 
 
 #### Collecte de logs

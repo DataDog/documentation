@@ -133,7 +133,7 @@ When it prompts for a password, use the password you entered when you created th
 To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configured to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 To configure Database Monitoring metrics collection for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
 
@@ -161,8 +161,8 @@ See the [Postgres integration spec][3] for additional information on setting `pr
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 To configure the Database Monitoring Agent running in a Docker container such as in Google Cloud Run, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
@@ -215,8 +215,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
 [3]: /agent/guide/secrets-management
 [4]: /agent/faq/template_variables/
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
@@ -315,7 +315,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
 [5]: /agent/guide/secrets-management
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validate

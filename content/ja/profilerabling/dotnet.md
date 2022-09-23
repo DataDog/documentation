@@ -55,7 +55,7 @@ Windows Server バージョン 2012 以降
 
 {{< tabs >}}
 
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 .NET Profiler をマシン全体にインストールするには
 
 1. お使いの OS とアーキテクチャに対応した最新の [.NET Tracer パッケージ][1]をダウンロードします。
@@ -76,9 +76,9 @@ Windows Server バージョン 2012 以降
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Windows" >}}
+{{% tab "Windows" %}}
 
 1. [.NET Monitoring MSI インストーラー][1]を使って、最新版をインストールまたはアップグレードしてください。Continuous Profiler は 64-bit Windows をサポートしていますので、`datadog-dotnet-apm-<VERSION>-x64.msi` のようなファイルが必要です。
 
@@ -86,7 +86,7 @@ Windows Server バージョン 2012 以降
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -97,7 +97,7 @@ Windows Server バージョン 2012 以降
 
 {{< tabs >}}
 
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 3. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
    ```
@@ -116,9 +116,9 @@ Windows Server バージョン 2012 以降
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Internet Information Services (IIS)" >}}
+{{% tab "Internet Information Services (IIS)" %}}
 3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。
  IIS アプリケーションのプロファイラーを有効にするには、レジストリの `HKLM\System\CurrentControlSet\Services\WAS` と `HKLM\System\CurrentControlSet\Services\W3SVC` ノードで環境変数 `DD_PROFILING_ENABLED` を設定する必要があります。
 
@@ -161,9 +161,9 @@ Windows Server バージョン 2012 以降
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Windows サービス" >}}
+{{% tab "Windows サービス" %}}
 3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。サービスのプロファイラーを有効にするには、サービスに関連付けられたレジストリキーに `DD_PROFILING_ENABLED` 環境変数を設定することが必要です。プロファイラーが単独で動作している場合 (トレーサーは非アクティブ)、オプションで `DD_SERVICE`、`DD_ENV`、`DD_VERSION` 環境変数を追加することができます。
 
    **レジストリエディターを使用:**
@@ -219,9 +219,9 @@ Windows Server バージョン 2012 以降
 4. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Windows スタンドアロンアプリケーション" >}}
+{{% tab "Windows スタンドアロンアプリケーション" %}}
 3. コンソール、ASP.NET (Core)、Windows Forms、WPF などの非サービスアプリケーションでプロファイラーを構成して有効にするために、必要な環境変数を設定します。スタンドアロンアプリケーションのプロファイラーを有効にするには、`DD_PROFILING_ENABLED` 環境変数を設定する必要があります。プロファイラーが単独で動作している場合 (トレーサーは無効)、オプションで環境変数 `DD_SERVICE`、`DD_ENV`、`DD_VERSION` を設定することが可能です。推奨される方法は、これらを設定しアプリケーションを起動するバッチファイルを作成し、そのバッチファイルを使用してアプリケーションを実行することです。
 
    .NET Core と .NET 5+ の場合:
@@ -249,7 +249,7 @@ Windows Server バージョン 2012 以降
 4. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

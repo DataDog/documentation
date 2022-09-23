@@ -46,16 +46,16 @@ Identifiez les robots Datadog en utilisant certains **en-têtes par défaut** qu
 Par défaut, un en-tête `user-agent` est ajouté à l'ensemble des requêtes exécutées par les tests Synthetic. Tout `user-agent` personnalisé qui est ajouté au test remplace l'en-tête par défaut.
 
 {{< tabs >}}
-{{< tab "Tests API uniques et à plusieurs étapes" >}}
+{{% tab "Tests API uniques et à plusieurs étapes" %}}
 
 Pour les tests API uniques et à plusieurs étapes, l'en-tête `user-agent` par défaut est `Datadog/Synthetics`.
 
-{{< /tab >}}
-{{< tab "Tests Browser" >}}
+{{% /tab %}}
+{{% tab "Tests Browser" %}}
 
 Pour les tests Browser, la valeur de l'en-tête `user-agent` varie en fonction du navigateur et de l'appareil exécutant le test. La valeur `user-agent` par défaut se termine toujours par `DatadogSynthetics`, afin que vous puissiez facilement déterminer qu'il s'agit de tests Synthetic.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### `sec-datadog`
@@ -63,20 +63,20 @@ Pour les tests Browser, la valeur de l'en-tête `user-agent` varie en fonction d
 Un en-tête `sec-datadog` est ajouté à l'ensemble des requêtes exécutées par les tests Synthetic. Sa valeur inclut l'ID du test à son origine.
 
 {{< tabs >}}
-{{< tab "Tests API uniques et à plusieurs étapes" >}}
+{{% tab "Tests API uniques et à plusieurs étapes" %}}
 
 ```
 sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <ID_PUBLIQUE_TEST_SYNTHETIC>
 ```
 
-{{< /tab >}}
-{{< tab "Tests Browser" >}}
+{{% /tab %}}
+{{% tab "Tests Browser" %}}
 
 ```
 sec-datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <ID_PUBLIQUE_TEST_SYNTHETIC>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### En-têtes d'APM

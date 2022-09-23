@@ -36,7 +36,7 @@ Datadog インテグレーションにより、OCI ユーザーはすべての�
 次のいずれかのプロセスに従って、Oracle Cloud Infrastructure から Datadog にログを送信します。
 
 {{< tabs >}}
-{{< tab "サービスコネクタハブ" >}}
+{{% tab "サービスコネクタハブ" %}}
 
 1. OCI ログを構成します。
 3. OCI 関数を作成します。
@@ -89,8 +89,8 @@ OCI オブジェクトストレージの詳細については、[Oracle のサ�
 [4]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/func.yaml
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt
 [6]: https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available
-{{< /tab >}}
-{{< tab "オブジェクトストア" >}}
+{{% /tab %}}
+{{% tab "オブジェクトストア" %}}
 
 1. OCI ログを構成します。
 2. OCI オブジェクトストアを作成し、OCI ログの読み取り/書き込みアクセスを有効にします。
@@ -159,6 +159,6 @@ OCI オブジェクトストレージの詳細については、[イベント入
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/func.yaml
 [6]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/requirements.txt
 [7]: https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}

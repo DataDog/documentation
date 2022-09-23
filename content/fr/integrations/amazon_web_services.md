@@ -137,7 +137,7 @@ Choisissez l'une des méthodes suivantes pour intégrer vos comptes AWS dans Dat
 - [Clés d'accès](?tab=clésdaccèsgovcloudouchineuniquement#configuration) : Utilisé pour GovCloud ou la Chine uniquement
 
 {{< tabs >}}
-{{< tab "Délégation des rôles" >}}
+{{% tab "Délégation des rôles" %}}
 
 Choisissez la méthode que vous souhaitez utiliser pour configurer le rôle AWS nécessaire. Nous vous conseillons d'utiliser CloudFormation.
 
@@ -324,9 +324,9 @@ L'API Resource Group Tagging vise notamment à réduire le nombre d'appels API r
 [10]: /fr/integrations/amazon_web_services/#all-permissions
 [11]: https://docs.aws.amazon.com/awssupport/latest/user/Welcome.html#trustedadvisorsection
 [12]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Clés d'accès (GovCloud ou Chine uniquement)" >}}
+{{% tab "Clés d'accès (GovCloud ou Chine uniquement)" %}}
 
 #### AWS
 
@@ -348,7 +348,7 @@ Pour en savoir plus, consultez la section [Procédure d'utilisation d'un ID exte
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Collecte de logs

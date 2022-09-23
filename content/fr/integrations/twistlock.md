@@ -55,7 +55,7 @@ Le check Prisma Cloud Compute Edition est inclus avec le package de l'[Agent Dat
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -69,8 +69,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -177,7 +177,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [4]: https://docs.datadoghq.com/fr/agent/kubernetes/?tab=daemonset
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

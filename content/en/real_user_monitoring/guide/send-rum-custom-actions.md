@@ -23,7 +23,7 @@ Create a RUM action using the `addAction` API. Give your action a name and attac
 The following example creates a `checkout` action with details about the user cart when the user clicks on the checkout button.
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -36,8 +36,8 @@ function onCheckoutButtonClick(cart) {
 }
 ```
 
-{{< /tab >}}
-{{< tab "CDN async" >}}
+{{% /tab %}}
+{{% tab "CDN async" %}}
 
 Ensure that you wrap the API call with the `onReady` callback:
 
@@ -52,8 +52,8 @@ function onCheckoutButtonClick(cart) {
 }
 ```
 
-{{< /tab >}}
-{{< tab "CDN sync" >}}
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 Ensure that you check for `DD_RUM` before the API call:
 
@@ -68,7 +68,7 @@ function onCheckoutButtonClick(cart) {
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 All RUM context such as current page view information, geoIP data, and browser information, is automatically attached along with extra attributes provided with the [Global Context API][2].

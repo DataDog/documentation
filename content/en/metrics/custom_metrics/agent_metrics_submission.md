@@ -15,7 +15,7 @@ Functions are used to submit metrics with a [custom Agent check][1]. Different f
 ## Functions
 
 {{< tabs >}}
-{{< tab "Count" >}}
+{{% tab "Count" %}}
 
 ### `monotonic_count()`
 
@@ -59,8 +59,8 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
 | `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
-{{< /tab >}}
-{{< tab "Gauge" >}}
+{{% /tab %}}
+{{% tab "Gauge" %}}
 
 ### `gauge()`
 
@@ -82,8 +82,8 @@ self.gauge(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
 | `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
-{{< /tab >}}
-{{< tab "Rate" >}}
+{{% /tab %}}
+{{% tab "Rate" %}}
 
 ### `rate()`
 
@@ -105,9 +105,9 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
 | `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Histogram" >}}
+{{% tab "Histogram" %}}
 
 ### `histogram()`
 
@@ -129,7 +129,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 | `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
 | `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Tutorial

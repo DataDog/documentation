@@ -34,7 +34,7 @@ Pour les exemples ci-dessous, la méthode de collecte mongo `user_collection` es
 Choisissez le type de requête pour lequel vous souhaitez voir un exemple :
 
 {{< tabs >}}
-{{< tab "Count" >}}
+{{% tab "Count" %}}
 
 Pour surveiller le nombre d'utilisateurs actifs à un moment donné, voici la [commande count Mongo][1] à utiliser :
 
@@ -59,8 +59,8 @@ Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /fr/metrics/types/
-{{< /tab >}}
-{{< tab "Find" >}}
+{{% /tab %}}
+{{% tab "Find" %}}
 
 Pour surveiller l'âge des utilisateurs, utilisez la [commande find Mongo][1] suivante :
 
@@ -90,8 +90,8 @@ Cela génère une métrique `gauge` `mongo.example2.user.age` avec deux tags : 
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
 [2]: /fr/metrics/types/
-{{< /tab >}}
-{{< tab "Aggregate" >}}
+{{% /tab %}}
+{{% tab "Aggregate" %}}
 
 Pour surveiller l'âge moyen d'un administrateur et d'un utilisateur non-administrateur, utilisez la [commande aggregate Mongo][1] suivante :
 
@@ -128,7 +128,7 @@ custom_queries:
 Cela génère une métrique `gauge` `mongo.example3.user.age` avec deux tags : `is_admin:true` et `is_admin:false`. Ces tags représentent l'âge moyen des utilisateurs pour chaque rôle.
 
 [1]: https://docs.mongodb.com/manual/reference/command/aggregate/#dbcmd.aggregate
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : après avoir mis à jour le fichier YAML Mongo, [redémarrez l'Agent Datadog][4].

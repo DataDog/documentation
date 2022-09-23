@@ -20,7 +20,7 @@ Agent v6.14/v7.14 では、Datadog は **HTTPS** トランスポートの使用�
 ログに HTTPS トランスポートを使用している場合は、[Agent プロキシのドキュメント][2]を参照し、他のデータタイプと同じプロキシ設定のセットを使用してください。
 
 {{< tabs >}}
-{{< tab "TCP" >}}
+{{% tab "TCP" %}}
 
 TCP 通信用のプロキシを使用する場合は、`datadog.yaml` 構成ファイルで次のパラメーターを使用して、TCP 経由でプロキシにログを送信するように Datadog Agent を構成します。
 
@@ -45,8 +45,8 @@ logs_config:
 
   および `/etc/ssl/certs/ca-certificates.crt`(Debian、Ubuntu) または `/etc/ssl/certs/ca-bundle.crt` (CentOS、Redhat) にある証明書ファイルを使用
 
-{{< /tab >}}
-{{< tab "SOCKS5" >}}
+{{% /tab %}}
+{{% tab "SOCKS5" %}}
 
 SOCKS5 プロキシサーバーを使用して Datadog アカウントにログを送信するには、`datadog.yaml` 構成ファイルで次の設定を使用します。
 
@@ -59,13 +59,13 @@ logs_config:
 
 * `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## TCP プロキシの例
 
 {{< tabs >}}
-{{< tab "HAProxy" >}}
+{{% tab "HAProxy" %}}
 ### ログの TCP プロキシとしての HAProxy の使用
 
 この例では、HAProxy がインストールされ、ポート `10514` でリッスンしているサーバーに TCP でログを送信し、ログを Datadog に転送するように Datadog Agent を構成する方法について説明します。
@@ -212,9 +212,9 @@ HAProxy コンフィギュレーションが完成したら、リロードする
 
 {{< /site-region >}}
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "NGINX" >}}
+{{% tab "NGINX" %}}
 ### ログの TCP プロキシとしての NGINX の使用
 
 #### Agent の構成
@@ -275,7 +275,7 @@ stream {
 ```
 
 {{< /site-region >}}
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

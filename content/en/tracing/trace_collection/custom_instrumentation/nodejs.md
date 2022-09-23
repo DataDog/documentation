@@ -33,7 +33,7 @@ The built-in instrumentation and your own custom instrumentation will create
 spans around meaningful operations.
 
 {{< tabs >}}
-{{< tab "Locally" >}}
+{{% tab "Locally" %}}
 
 You can access the active span in order to include meaningful data by adding tags.
 
@@ -64,9 +64,9 @@ span.addTags({
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Globally" >}}
+{{% tab "Globally" %}}
 
 You can add tags to every span by configuring them directly on the tracer, either with with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
 
@@ -82,9 +82,9 @@ tracer.init({
 // All spans will now have these tags
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Component" >}}
+{{% tab "Component" %}}
 
 Some of our integrations support span hooks that can be used to update the span right before it's finished. This is useful to modify or add tags to a span that is otherwise inaccessible from your code.
 
@@ -104,9 +104,9 @@ API details for individual plugins can be found [here][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Errors" >}}
+{{% tab "Errors" %}}
 
 Errors can be added to a span with the special `error` tag that supports error objects. This will split the error into three tags: `error.type`, `error.msg` and `error.stack`.
 
@@ -121,7 +121,7 @@ try {
 
 When using `tracer.trace()` or `tracer.wrap()` this is done automatically when an error is thrown.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Creating spans
@@ -131,7 +131,7 @@ The `dd-trace` library creates [spans][2] automatically with `tracer.init()` for
 Within your web request (for example, `/make-sandwich`), you may perform several operations, like `getIngredients()` and `assembleSandwich()`, which are useful to measure.
 
 {{< tabs >}}
-{{< tab "Synchronous" >}}
+{{% tab "Synchronous" %}}
 
 Synchronous code can be traced with `tracer.trace()` which will automatically finish the span when its callback returns and capture any thrown error automatically.
 
@@ -155,9 +155,9 @@ API details for `tracer.trace()` can be found [here][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Promises" >}}
+{{% tab "Promises" %}}
 
 Promises can be traced with `tracer.trace()` which will automatically finish the span when the returned promise resolves and capture any rejection error automatically.
 
@@ -184,9 +184,9 @@ API details for `tracer.trace()` can be found [here][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Async/await" >}}
+{{% tab "Async/await" %}}
 
 Async/await can be traced with `tracer.trace()` which will automatically finish the span when the returned promise resolves and capture any rejection error automatically.
 
@@ -210,9 +210,9 @@ API details for `tracer.trace()` can be found [here][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Wrapper" >}}
+{{% tab "Wrapper" %}}
 
 It's also possible to wrap an existing function without changing its code. This is useful to trace functions for which you don't control the code. This can be done with `tracer.wrap()` which takes the same arguments as `tracer.trace()` except its last argument which is the function to wrap instead of a callback.
 
@@ -239,7 +239,7 @@ API details for `tracer.trace()` can be found [here][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Request filtering

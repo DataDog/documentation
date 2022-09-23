@@ -48,7 +48,7 @@ aliases:
 You can set up tracing to include collecting trace information about proxies.
 
 {{< tabs >}}
-{{< tab "Envoy" >}}
+{{% tab "Envoy" %}}
 
 Datadog APM is included in Envoy v1.9.0 and newer.
 
@@ -295,8 +295,8 @@ The available [environment variables][3] depend on the version of the C++ tracer
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [3]: /tracing/setup/cpp/#environment-variables
-{{< /tab >}}
-{{< tab "Nginx" >}}
+{{% /tab %}}
+{{% tab "Nginx" %}}
 
 Datadog APM supports Nginx in multiple configurations:
 - Nginx operated as a proxy with tracing provided by the new Datadog module.
@@ -578,8 +578,8 @@ variable. To define sampling rules in the Ingress Controller:
 [12]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [13]: https://github.com/kubernetes/ingress-nginx
 [14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
-{{< /tab >}}
-{{< tab "Istio" >}}
+{{% /tab %}}
+{{% tab "Istio" %}}
 
 Datadog monitors every aspect of your Istio environment, so you can:
 - View individual distributed traces for applications transacting over the mesh with APM (see below).
@@ -748,7 +748,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

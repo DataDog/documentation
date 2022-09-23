@@ -87,7 +87,7 @@ Concernant le cycle de vie d'une trace, les décisions sont prises au niveau du 
 L'APM active le tracing distribué par défaut pour permettre aux traces de se propager d'un en-tête de tracing à l'autre sur plusieurs services/hosts. Les en-têtes de tracing incluent un tag de priorité pour garantir la conservation des traces durant leur propagation entre les services en amont et en aval. Vous pouvez remplacer ce tag pour conserver une trace manuellement (transaction critique, mode debugging, etc.) ou supprimer une trace (checks de santé, ressources statiques, etc.).
 
 {{< tabs >}}
-{{< tab "Java" >}}
+{{% tab "Java" %}}
 
 Pour conserver manuellement une trace :
 
@@ -129,8 +129,8 @@ public class MyClass {
 }
 ```
 
-{{< /tab >}}
-{{< tab "Python" >}}
+{{% /tab %}}
+{{% tab "Python" %}}
 
 Pour conserver manuellement une trace :
 
@@ -160,8 +160,8 @@ def handler():
         // ajouter ensuite l'implémentation de la méthode
 ```
 
-{{< /tab >}}
-{{< tab "Ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 Pour conserver manuellement une trace :
 
@@ -184,8 +184,8 @@ Datadog.tracer.trace(name, options) do |span|
 end
 ```
 
-{{< /tab >}}
-{{< tab "Go" >}}
+{{% /tab %}}
+{{% tab "Go" %}}
 
 Pour conserver manuellement une trace :
 
@@ -235,8 +235,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-{{< /tab >}}
-{{< tab "Node.js" >}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
 
 Pour conserver manuellement une trace :
 
@@ -266,8 +266,8 @@ span.setTag(tags.MANUAL_DROP)
 
 ```
 
-{{< /tab >}}
-{{< tab ".NET" >}}
+{{% /tab %}}
+{{% tab ".NET" %}}
 
 Pour conserver manuellement une trace :
 
@@ -299,8 +299,8 @@ using(var scope = Tracer.Instance.StartActive(operationName))
 }
 ```
 
-{{< /tab >}}
-{{< tab "PHP" >}}
+{{% /tab %}}
+{{% tab "PHP" %}}
 
 Pour conserver manuellement une trace :
 
@@ -332,8 +332,8 @@ Pour supprimer manuellement une trace :
 ?>
 ```
 
-{{< /tab >}}
-{{< tab "C++" >}}
+{{% /tab %}}
+{{% tab "C++" %}}
 
 Pour conserver manuellement une trace :
 
@@ -364,7 +364,7 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 // ajouter ensuite l'implémentation de la méthode
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Notez que la priorité des traces doit être contrôlée manuellement  uniquement avant la propagation dans le contexte. Si elle a lieu après, le système ne peut pas garantir que la totalité de la trace est conservée d'un service à un autre. La priorité des traces contrôlées manuellement est définie au niveau du client de tracing. La trace peut toujours être supprimée par l'Agent ou au niveau du serveur en fonction des [règles d'échantillonnage](#regles-d-echantillonnage).

@@ -34,7 +34,7 @@ Depuis la version 0.74.0, le traceur Java injecte automatiquement dans les logs
 Si vous préférez corréler manuellement vos traces avec vos logs, utilisez l'API du traceur Java pour récupérer les identificateurs de corrélation. Utilisez les méthodes `CorrelationIdentifier.getTraceId` et `CorrelationIdentifier.getSpanId` pour injecter des identificateurs au début de la span en cours de création. Supprimez les identificateurs une fois la span terminée.
 
 {{< tabs >}}
-{{< tab "Log4j 2" >}}
+{{% tab "Log4j 2" %}}
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
@@ -53,8 +53,8 @@ try {
 }
 ```
 
-{{< /tab >}}
-{{< tab "SLF4J et Logback" >}}
+{{% /tab %}}
+{{% tab "SLF4J et Logback" %}}
 
 ```java
 import org.slf4j.MDC;
@@ -72,7 +72,7 @@ try {
     MDC.remove("dd.span_id");
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : si vous [n'utilisez pas une intégration de log de Datadog][4] pour parser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` et `dd.span_id` sont parsés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][5].

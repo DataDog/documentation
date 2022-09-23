@@ -9,7 +9,7 @@ Containers are supported in Pro and Enterprise plans. Depending on your plan, yo
 
 Additional containers are billed at an [additional cost][1] per container per hour. In addition, you can purchase prepaid containers. Contact [Sales][2] or your [Customer Success][3] Manager to discuss containers for your account.
 
-**Note**: The Agent is monitored by default. This counts towards your billing.
+**Note**: The Agent is monitored by default. This counts towards your billing. To exclude the Agent container, or any other containers, see [Exclude Containers][8].
 
 ### Kubernetes
 
@@ -63,3 +63,4 @@ For billing questions, contact your [Customer Success][3] Manager.
 [5]: /agent/kubernetes/distributions/?tab=helm#autopilot
 [6]: /integrations/google_kubernetes_engine/
 [7]: /help/
+[8]: /agent/guide/autodiscovery-management/?tab=containerizedagent#exclude-containers

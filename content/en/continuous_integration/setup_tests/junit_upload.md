@@ -37,7 +37,7 @@ npm install -g @datadog/datadog-ci
 If installing NodeJS in the CI is an issue, standalone binaries are provided with [Datadog CI releases][4]. Only _linux-x64_, _darwin-x64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
@@ -47,9 +47,9 @@ Then run any command with `datadog-ci`:
 datadog-ci version
 {{< /code-block >}}
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "MacOS" >}}
+{{% tab "MacOS" %}}
 {{< code-block lang="bash" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
@@ -59,11 +59,11 @@ Then run any command with `datadog-ci`:
 datadog-ci version
 {{< /code-block >}}
 
-{{< /tab >}}
+{{% /tab %}}
 
 
 
-{{< tab "Windows" >}}
+{{% tab "Windows" %}}
 {{< code-block lang="powershell" >}}
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
@@ -73,7 +73,7 @@ Then run any command with `Start-Process -FilePath "datadog-ci.exe"`:
 Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{< /code-block >}}
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

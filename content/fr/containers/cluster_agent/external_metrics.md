@@ -42,7 +42,7 @@ Contrairement au serveur de métriques, les fournisseurs de métriques externes 
 ### Installation
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Pour activer le serveur de métriques externes avec votre Agent de cluster dans Helm, modifiez votre fichier [datadog-values.yaml][1] en ajoutant la configuration de l'Agent de cluster suivante. Après avoir défini `clusterAgent.metricsProvider.enabled` sur `true`, redéployez votre chart Helm Datadog :
 
@@ -59,8 +59,8 @@ Pour activer le serveur de métriques externes avec votre Agent de cluster dans 
 Cela met automatiquement à jour les configurations RBAC requises, et configure également le `Service` et l'`APIService` correspondants afin que Kubernetes puisse les utiliser.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 Pour activer le serveur de métriques externes pour votre Agent de cluster géré par l'Operator Datadog, commencez par [configurer l'Operator Datadog][1]. Définissez ensuite `clusterAgent.config.externalMetrics.enabled` sur `true` dans la ressource personnalisée `DatadogAgent` :
 
@@ -82,8 +82,8 @@ Pour activer le serveur de métriques externes pour votre Agent de cluster gér�
 L'Operator met automatiquement à jour les configurations RBAC nécessaires et configure également le `Service` et le `APIService` correspondants afin que Kubernetes puisse les utiliser.
 
 [1]: /fr/agent/guide/operator-advanced
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 #### Serveur de métriques custom
 
@@ -123,7 +123,7 @@ Dès lors que l'Agent de cluster Datadog est fonctionnel, appliquez des politiqu
 
 [1]: /fr/agent/cluster_agent/setup/?tab=daemonset
 [2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Utilisation
@@ -196,7 +196,7 @@ Pour que l'autoscaling fonctionne correctement, les requêtes personnalisées do
 Configurez l'Agent de cluster Datadog à l'aide de Helm, de l'Operator Datadog ou d'un Daemonset afin qu'il utilise `DatadogMetric` :
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 Pour activer l'utilisation de la CRD `DatadogMetric`, modifiez votre configuration Helm [datadog-values.yaml][1] en définissant `clusterAgent.metricsProvider.useDatadogMetrics` sur `true`. Redéployez ensuite votre chart Helm Datadog : 
 
@@ -215,8 +215,8 @@ Pour activer l'utilisation de la CRD `DatadogMetric`, modifiez votre configurati
 Cette configuration entraîne la mise à jour automatique des fichiers RBAC requis et indique à l'Agent de cluster qu'il doit gérer ces requêtes d'Autoscaler de pods horizontaux par l'intermédiaire de ces ressources `DatadogMetric`.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 Pour activer l'utilisation de la CRD `DatadogMetric`, mettez à jour la ressource personnalisée `DatadogAgent` et définissez `clusterAgent.config.externalMetrics.useDatadogMetrics` sur `true`.
 
@@ -238,8 +238,8 @@ Pour activer l'utilisation de la CRD `DatadogMetric`, mettez à jour la ressourc
 
 L'Operator met automatiquement à jour les configurations RBAC requises et indique à l'Agent de cluster qu'il doit gérer ces requêtes d'Autoscaler de pods horizontaux par l'intermédiaire de ces ressources `DatadogMetric`.
 
-{{< /tab >}}
-{{< tab "Daemonset" >}}
+{{% /tab %}}
+{{% tab "Daemonset" %}}
 Pour activer l'utilisation de la CRD `DatadogMetric`, suivez les étapes supplémentaires suivantes :
 
 1. Installez la CRD `DatadogMetric` dans votre cluster.
@@ -255,7 +255,7 @@ Pour activer l'utilisation de la CRD `DatadogMetric`, suivez les étapes supplé
     ```
 
 3. Définissez la variable `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` sur `true` dans le déploiement de l'Agent de cluster Datadog.
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Autoscaler de pods horizontaux

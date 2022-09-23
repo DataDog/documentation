@@ -25,7 +25,7 @@ To retrieve a log list longer than the maximum 1000 logs limit returned by the [
 
 {{< tabs >}}
 
-{{< tab "V1 API" >}}
+{{% tab "V1 API" %}}
 
 Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
@@ -94,9 +94,9 @@ To see every page of your logs, continue to resend your query where the `startAt
 
 **Notes**: For better control over pagination results, use an absolute `time` parameter - don't use the`now` keyword.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "V2 API" >}}
+{{% tab "V2 API" %}}
 Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
@@ -183,7 +183,7 @@ Which returns these results:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

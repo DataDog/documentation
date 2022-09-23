@@ -30,7 +30,7 @@ NPM パッケージの `@datadog-ci` を使用すると、CI/CD パイプライ�
 パッケージは NPM レジストリの [@datadog/datadog-ci][1] で公開されています。
 
 {{< tabs >}}
-{{< tab "NPM" >}}
+{{% tab "NPM" %}}
 
 NPM からパッケージをインストールします。
 
@@ -38,8 +38,8 @@ NPM からパッケージをインストールします。
 npm install --save-dev @datadog/datadog-ci
 ```
 
-{{< /tab >}}
-{{< tab "Yarn" >}}
+{{% /tab %}}
+{{% tab "Yarn" %}}
 
 Yarn からパッケージをインストールします。
 
@@ -47,7 +47,7 @@ Yarn からパッケージをインストールします。
 yarn add --dev @datadog/datadog-ci
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### クライアントのセットアップ
@@ -330,7 +330,7 @@ CLI にすべての `**/*.synthetics.json` Synthetic テスト (または[グロ
 CLI を実行してテストを実行する
 
 {{< tabs >}}
-{{< tab "Yarn" >}}
+{{% tab "Yarn" %}}
 
 ```bash
 yarn datadog-ci synthetics run-tests
@@ -338,8 +338,8 @@ yarn datadog-ci synthetics run-tests
 
 **注**: カスタムグローバルコンフィギュレーションファイルを使用してテストを起動している場合は、コマンドに `--config <PATH_TO_GLOBAL_CONFIG_FILE` を追加します。
 
-{{< /tab >}}
-{{< tab "NPM" >}}
+{{% /tab %}}
+{{% tab "NPM" %}}
 
 `package.json` に下記を追加します。
 
@@ -359,7 +359,7 @@ npm run datadog-ci-synthetics
 
 **注**: カスタムグローバルコンフィギュレーションファイルを使用してテストを起動している場合は、`datadog-ci-synthetics` スクリプトに紐付けられたコマンドに `--config <PATH_TO_GLOBAL_CONFIG_FILE` を追加します。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### テストトンネルを使用する

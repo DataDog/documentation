@@ -43,7 +43,7 @@ Select the scope to monitor by choosing host names, tags, or choose `All Monitor
 In this section, choose between a **Check Alert** or **Cluster Alert**:
 
 {{< tabs >}}
-{{< tab "Check Alert" >}}
+{{% tab "Check Alert" %}}
 
 A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
 
@@ -61,8 +61,8 @@ Set up the check alert:
 
     Choose how many consecutive runs with the `OK` status resolve the alert.
 
-{{< /tab >}}
-{{< tab "Cluster Alert" >}}
+{{% /tab %}}
+{{% tab "Cluster Alert" %}}
 
 A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
 
@@ -72,7 +72,7 @@ Set up a cluster alert:
 
 2. Select the percentage for the alert threshold.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Advanced alert conditions

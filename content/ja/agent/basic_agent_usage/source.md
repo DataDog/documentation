@@ -26,7 +26,7 @@ further_reading:
 Datadog Agent に含まれるコマンドのうち、`start`/`stop`/`restart`/`status` などの_ライフサイクルコマンド_だけは `sudo` で実行する必要があります。
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 
 | 説明                   | コマンド                                 |
 | ----------------------------- | --------------------------------------- |
@@ -36,8 +36,8 @@ Datadog Agent に含まれるコマンドのうち、`start`/`stop`/`restart`/`s
 | フレアの送信                    | `sudo ./bin/agent/agent flare`         |
 | コマンドの使用方法の表示         | `sudo ./bin/agent/agent help`          |
 
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | 説明                   | コマンド                                 |
 | ----------------------------- | --------------------------------------- |
@@ -47,13 +47,13 @@ Datadog Agent に含まれるコマンドのうち、`start`/`stop`/`restart`/`s
 | フレアの送信                    | `sudo ~/.datadog-agent/bin/agent flare` |
 | コマンドの使用方法の表示         | `sudo ~/.datadog-agent/bin/agent help`  |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## コンフィグレーション
 
 {{< tabs >}}
-{{< tab "Agent v6 & v7" >}}
+{{% tab "Agent v6 & v7" %}}
 Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -63,8 +63,8 @@ Agent の構成ファイルおよびフォルダーの場所:
 * `/etc/datadog-agent/conf.d/`
 
 [1]: /ja/integrations/
-{{< /tab >}}
-{{< tab "Agent v5" >}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 Agent の構成ファイルおよびフォルダーの場所
 
@@ -75,7 +75,7 @@ Agent の構成ファイルおよびフォルダーの場所
 * `/etc/dd-agent/conf.d/`
 
 [1]: /ja/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## トラブルシューティング

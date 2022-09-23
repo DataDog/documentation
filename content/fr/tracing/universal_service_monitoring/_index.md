@@ -57,7 +57,7 @@ USM ne prend pas encore en charge votre plateforme ou protocole préféré ? N'
 Activez Universal Service Monitoring dans votre Agent à l'aide de l'une des méthodes suivantes, selon le type de déploiement de votre service et la configuration de votre Agent :
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 À l'aide de la version 2.26.2 ou d'une version ultérieure du chart Datadog, ajoutez ce qui suit à votre fichier values :
 
@@ -68,8 +68,8 @@ datadog:
     enabled: true
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes sans Helm" >}}
+{{% /tab %}}
+{{% tab "Kubernetes sans Helm" %}}
 
 1. Ajoutez l'annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` au modèle `datadog-agent` :
 
@@ -188,8 +188,8 @@ datadog:
        path: /
    ```
 
-{{< /tab >}}
-{{< tab "Docker" >}}
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Ajoutez ce qui suit à votre commande `docker run` :
 
@@ -213,8 +213,8 @@ SI vous souhaitez prendre en charge le protocole HTTPS (facultatif), ajoutez ég
 -v /:/host/root:ro
 ```
 
-{{< /tab >}}
-{{< tab "Docker Compose" >}}
+{{% /tab %}}
+{{% tab "Docker Compose" %}}
 
 Ajoutez ce qui suit à votre fichier `docker-compose.yml` :
 
@@ -253,8 +253,8 @@ services:
      - /:/host/root:ro
 ```
 
-{{< /tab >}}
-{{< tab "Fichiers de configuration" >}}
+{{% /tab %}}
+{{% tab "Fichiers de configuration" %}}
 
 Si vous n'utilisez pas de chart Helm ni de variables d'environnement, définissez ce qui suit dans votre fichier `system-probe.yaml` :
 
@@ -263,8 +263,8 @@ service_monitoring_config:
   enabled: true
 ```
 
-{{< /tab >}}
-{{< tab "Variables d'environnement" >}}
+{{% /tab %}}
+{{% tab "Variables d'environnement" %}}
 
 Si vous configurez le `system-probe` avec des variables d'environnement, ce qui est généralement le cas avec les installations Docker et ECS, passez la variable d'environnement suivante à `process-agent` **et** à `system-probe` :
 
@@ -272,7 +272,7 @@ Si vous configurez le `system-probe` avec des variables d'environnement, ce qui 
 DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Explorer vos services

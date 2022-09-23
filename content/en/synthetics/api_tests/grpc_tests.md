@@ -40,7 +40,7 @@ After choosing to create a `gRPC` test, define your test's request.
 1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `50051`.
 
 {{< tabs >}}
-{{< tab "Unary Call" >}}
+{{% tab "Unary Call" %}}
 
 2. Upload a [`.proto` file][1] that defines your gRPC server.
 
@@ -50,26 +50,26 @@ After choosing to create a `gRPC` test, define your test's request.
 
 
 [1]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
-{{< /tab >}}
-{{< tab "Health Check" >}}
+{{% /tab %}}
+{{% tab "Health Check" %}}
 2. Enter the service you want to send a health check. Leave this field blank if you want to send a health check on the gRPC server.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 3. Add **Advanced Options** (optional) to your test:
 
    {{< tabs >}}
 
-   {{< tab "Request Options" >}}
+   {{% tab "Request Options" %}}
    
    * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Ignore server certificate error**: Select to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.
    * **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.
 
-   {{< /tab >}}
+   {{% /tab %}}
 
-   {{< tab "Authentication" >}}
+   {{% tab "Authentication" %}}
 
    * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
 
@@ -82,7 +82,7 @@ After choosing to create a `gRPC` test, define your test's request.
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
 
-   {{< /tab >}}
+   {{% /tab %}}
 
    {{< /tabs >}}
 
@@ -99,7 +99,7 @@ Click **Test Service** to try out the request configuration. A response preview 
 Assertions define what an expected test result is. After you click **Test Service**, an assertion on the `response time` is added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 {{< tabs >}}
-{{< tab "Unary Call" >}}
+{{% tab "Unary Call" %}}
 | Type                    | Operator                                        | Value type                           |
 |-------------------------|-------------------------------------------------|--------------------------------------|
 | response time           | `is less than`                                  | _Integer (ms)_                       |
@@ -109,14 +109,14 @@ Assertions define what an expected test result is. After you click **Test Servic
 [1]: https://restfulapi.net/json-jsonpath/
 [2]: https://www.w3schools.com/xml/xpath_syntax.asp
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-{{< /tab >}}
-{{< tab "Health Check" >}}
+{{% /tab %}}
+{{% tab "Health Check" %}}
 | Type                    | Operator                                        | Value type                           |
 |-------------------------|-------------------------------------------------|--------------------------------------|
 | response time           | `is less than`                                  | _Integer (ms)_                       |
 | healthcheck status      | `is`, `is not`                                  | _Integer (ms)_                       |
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:

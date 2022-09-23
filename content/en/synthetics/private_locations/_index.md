@@ -163,7 +163,7 @@ Launch your private location on:
 
 {{< tabs >}}
 
-{{< tab "Docker" >}}
+{{% tab "Docker" %}}
 
 Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
@@ -177,9 +177,9 @@ This command starts a Docker container and makes your private location ready to 
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 1. Create a `docker-compose.yml` file with:
 
@@ -201,9 +201,9 @@ This command starts a Docker container and makes your private location ready to 
 
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes Deployment" >}}
+{{% tab "Kubernetes Deployment" %}}
 
 To deploy the private locations worker in a secure manner, set up and mount a Kubernetes Secret resource in the container under `/etc/datadog/synthetics-check-runner.json`.
 
@@ -256,9 +256,9 @@ For OpenShift, run the private location with the `anyuid` SCC. This is required 
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Helm Chart" >}}
+{{% tab "Helm Chart" %}}
 
 You can set environment variables in your configuration parameters that point to secrets you have already configured. To create environment variables with secrets, see the [Kubernetes documentation][3]. 
 
@@ -283,9 +283,9 @@ Alternatively:
 [2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "ECS" %}}
 
 Create a new EC2 task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
@@ -321,9 +321,9 @@ Create a new EC2 task definition that matches the following. Replace each parame
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 Create a new Fargate task definition that matches the following. Replace each parameter with the corresponding value found in your previously generated private location configuration file:
 
@@ -358,9 +358,9 @@ Create a new Fargate task definition that matches the following. Replace each pa
 
 **Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 Because Datadog already integrates with Kubernetes and AWS, it is ready-made to monitor EKS.
 
@@ -411,7 +411,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -423,7 +423,7 @@ For readiness probes, you need to enable private location status probes on port 
 
 {{< tabs >}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 ```yaml
 healthcheck:
@@ -436,30 +436,9 @@ healthcheck:
   start_period: 30s
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes Deployment" >}}
-
-```yaml
-livenessProbe:
-  httpGet:
-    path: /liveness
-    port: 8080
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-readinessProbe:
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-  httpGet:
-    path: /readiness
-    port: 8080
-```
-
-{{< /tab >}}
-
-{{< tab "Helm Chart" >}}
+{{% tab "Kubernetes Deployment" %}}
 
 ```yaml
 livenessProbe:
@@ -478,9 +457,30 @@ readinessProbe:
     port: 8080
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "Helm Chart" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
 
 ```json
 "healthCheck": {
@@ -494,9 +494,9 @@ readinessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 ```json
 "healthCheck": {
@@ -510,9 +510,9 @@ readinessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 ```yaml
 livenessProbe:
@@ -531,7 +531,7 @@ readinessProbe:
     port: 8080
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -545,7 +545,7 @@ Use the configuration below to set up health checks on your containers with `liv
 
 {{< tabs >}}
 
-{{< tab "Docker Compose" >}}
+{{% tab "Docker Compose" %}}
 
 ```yaml
 healthcheck:
@@ -558,26 +558,9 @@ healthcheck:
   start_period: 30s
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Kubernetes Deployment" >}}
-
-```yaml
-livenessProbe:
-  exec:
-    command:
-      - /bin/sh
-      - -c
-      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 2
-  failureThreshold: 3
-```
-
-{{< /tab >}}
-
-{{< tab "Helm Chart" >}}
+{{% tab "Kubernetes Deployment" %}}
 
 ```yaml
 livenessProbe:
@@ -592,9 +575,26 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "ECS" >}}
+{{% tab "Helm Chart" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
 
 ```json
 "healthCheck": {
@@ -608,9 +608,9 @@ livenessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Fargate" >}}
+{{% tab "Fargate" %}}
 
 ```json
 "healthCheck": {
@@ -624,9 +624,9 @@ livenessProbe:
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "EKS" >}}
+{{% tab "EKS" %}}
 
 ```yaml
 livenessProbe:
@@ -641,7 +641,7 @@ livenessProbe:
   failureThreshold: 3
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

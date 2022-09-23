@@ -61,7 +61,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 ### Configuration
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -73,8 +73,8 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/tls/datadog_checks/tls/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -89,7 +89,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 **Remarque** : si vous utilisez des certificats internes qui n'ont pas été émis par une autorité de certification renommée, certaines métriques risquent de ne pas être transmises à Datadog. Utilisez `tls_verify: false` dans votre modèle d'intégration pour transmettre toutes les métriques dans cette instance.
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

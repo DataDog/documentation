@@ -36,7 +36,7 @@ Grâce à l'intégration Datadog, les utilisateurs d'OCI peuvent transmettre dir
 Pour envoyer des logs depuis Oracle Cloud Infrastructure vers Datadog, suivez l'une des méthodes ci-dessous :
 
 {{< tabs >}}
-{{< tab "Service Connector Hub" >}}
+{{% tab "Service Connector Hub" %}}
 
 1. Configurez un log OCI.
 3. Créez une fonction OCI.
@@ -89,8 +89,8 @@ Pour en savoir plus sur Object Storage OCI, consultez l'[article de blog sur Ser
 [4]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/func.yaml
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt
 [6]: https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available
-{{< /tab >}}
-{{< tab "Stockage d'objets" >}}
+{{% /tab %}}
+{{% tab "Stockage d'objets" %}}
 
 1. Configurez un log OCI.
 2. Créez un stockage d'objets OCI et autorisez l'accès en lecture/écriture pour les logs OCI.
@@ -159,6 +159,6 @@ Pour en savoir plus sur Object Storage OCI, consultez la section [Introduction �
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/func.yaml
 [6]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/requirements.txt
 [7]: https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}

@@ -24,7 +24,7 @@ En plus du [suivi automatique des vues][4], vous pouvez effectuer le suivi de vu
 
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        fun onResume() {
          GlobalRum.get().startView(viewKey, viewName, viewAttributes)
@@ -34,8 +34,8 @@ En plus du [suivi automatique des vues][4], vous pouvez effectuer le suivi de vu
          GlobalRum.get().stopView(viewKey, viewAttributes)
        }
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
        public void onResume() {
             GlobalRum.get().startView(viewKey, viewName, viewAttributes);
@@ -45,27 +45,27 @@ En plus du [suivi automatique des vues][4], vous pouvez effectuer le suivi de vu
             GlobalRum.get().stopView(viewKey, viewAttributes);
        }
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Ajouter vos propres durées de performance
 
 En plus des attributs RUM par défaut, vous pouvez tirer profit de l'API `addTiming` pour découvrir combien de temps votre application consacre à chaque tâche. Les mesures de temps sont exprimées en fonction du début de la vue RUM actuelle. Par exemple, vous pouvez mesurer le temps nécessaire pour afficher votre bannière :
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
       fun onHeroImageLoaded() {
             GlobalRum.get().addTiming("hero_image")
       } 
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
        public void onHeroImageLoaded() {
             GlobalRum.get().addTiming("hero_image");
        }
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Une fois la durée envoyée, elle est accessible via `@view.custom_timings.<nom_durée>` (p. ex., `@view.custom_timings.hero_image`). Vous devez [créer une mesure](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#configurer-des-facettes-et-des-mesures) avant de pouvoir la représenter dans des analyses RUM ou dans des dashboards.
@@ -75,20 +75,20 @@ Une fois la durée envoyée, elle est accessible via `@view.custom_timings.<nom_
 En plus du [suivi automatique des actions][5], vous pouvez effectuer le suivi d'actions utilisateur personnalisées spécifiques (appuis sur l'écran, clics, défilements, etc.) avec `RumMonitor#addUserAction`. Pour effectuer le suivi d'actions continues (par exemple, le défilement d'une liste par l'utilisateur), utilisez `RumMonitor#startUserAction` et `RumMonitor#stopUserAction`.
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        fun onUserInteraction() { 
             GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
        }
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
        public void onUserInteraction() {
             GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes);
        }
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Ressources personnalisées
@@ -96,7 +96,7 @@ En plus du [suivi automatique des actions][5], vous pouvez effectuer le suivi d'
 En plus du [suivi automatique des ressources][6], vous pouvez effectuer le suivi de ressources personnalisées spécifiques (requêtes réseau, API de fournisseur tiers, etc.) avec des méthodes (`GET`, `POST`, etc.), et charger la ressource avec `RumMonitor#startResource`. Arrêtez le suivi avec `RumMonitor#stopResource` une fois le chargement terminé ou avec `RumMonitor#stopResourceWithError` si une erreur survient lors du chargement de la ressource.
 
 {{< tabs >}} 
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        fun loadResource() {
             GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
@@ -108,8 +108,8 @@ En plus du [suivi automatique des ressources][6], vous pouvez effectuer le suivi
             } 
        }
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
        public void loadResource() {
             GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes);
@@ -121,7 +121,7 @@ En plus du [suivi automatique des ressources][6], vous pouvez effectuer le suivi
             }
        }
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Erreurs personnalisées
@@ -236,20 +236,20 @@ Pour effectuer un suivi automatique de vos vues (activités, fragments, etc.), s
 Par exemple, pour définir chaque fragment comme une vue distincte, utilisez la configuration suivante dans vos [paramètres][1] :
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        val configuration = Configuration.Builder(true, true, true, true)
         .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
         .build()
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
        final Configuration configuration = new Configuration.Builder(true, true, true, true)
         .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
         .build();
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -263,22 +263,22 @@ Par exemple, pour définir chaque fragment comme une vue distincte, utilisez la 
 Pour récupérer des mesures de temps dans les ressources (fournisseurs tiers, requêtes réseau) comme le time to first byte ou la résolution DNS, personnalisez `okHttpClient` de façon à ajouter la fabrique [EventListener][8] :
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(DatadogInterceptor())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
    ```java
        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(new DatadogInterceptor())
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Suivi automatique des tâches longues
@@ -286,7 +286,7 @@ Pour récupérer des mesures de temps dans les ressources (fournisseurs tiers, r
 Les opérations longues effectuées sur le thread principal peuvent avoir un impact sur les performances visuelles et la réactivité de votre application. Pour effectuer le suivi de ces opérations, définissez le seuil de durée au-delà duquel une tâche est considérée comme trop longue.
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        val config = Configuration.Builder(true, true, true, true)
         .trackLongTasks(durationThreshold)
@@ -301,8 +301,8 @@ Par exemple, pour remplacer la durée par défaut (`100 ms`), définissez un seu
         .trackLongTasks(250L) // surveiller les tâches qui durent plus de 250 ms en tant que tâches longues
         .build()
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
   ```java
       Configuration configuration = new Configuration.Builder(true, true, true, true)
         .trackLongTasks(durationThreshold)
@@ -317,7 +317,7 @@ Par exemple, pour remplacer la durée par défaut (`100 ms`), définissez un seu
         .trackLongTasks(250L) // surveiller les tâches qui durent plus de 250 ms en tant que tâches longues
         .build();
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Modifier ou ignorer des événements RUM
@@ -326,7 +326,7 @@ Pour modifier certains attributs dans vos événements RUM ou pour ignorer compl
 
 
 {{< tabs >}}
-{{< tab "Kotlin" >}}
+{{% tab "Kotlin" %}}
    ```kotlin
        val config = Configuration.Builder(true, true, true, true)
         ...
@@ -337,8 +337,8 @@ Pour modifier certains attributs dans vos événements RUM ou pour ignorer compl
         .setRumLongTaskEventMapper(rumLongTaskEventMapper)
         .build()
    ```
-{{< /tab >}}
-{{< tab "Java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
   ```java
       Configuration config = new Configuration.Builder(true, true, true, true)
         ...
@@ -350,7 +350,7 @@ Pour modifier certains attributs dans vos événements RUM ou pour ignorer compl
         .build();
 
    ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
    Si vous implémentez l'interface `EventMapper<T>`, vous verrez que seuls certains attributs sont modifiables pour chaque type d'événement :

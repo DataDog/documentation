@@ -21,7 +21,7 @@ Depuis la version 7.27 de l'Agent Datadog, l'Agent détecte automatiquement l'e
 **Remarque** : vous devrez peut-être mettre à jour vos monitors, dashboards et SLO existants, en raison de la modification du nom des métriques. Par exemple, `docker.*` est remplacé par `containerd.*`.
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 Définssez le chemin du socket de votre runtime de conteneur avec le paramètre `datadog.criSocketPath` dans le [chart Helm][1].
 
 Par exemple :
@@ -31,8 +31,8 @@ criSocketPath:  /var/run/containerd/containerd.sock
 ```
 
 [1]: https://github.com/DataDog/helm-charts/blob/d8817b4401b75b1a064481da989c451633249ea9/charts/datadog/values.yaml#L262-L263
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 Supprimez les références au socket Docker, ainsi que les montages de volume du socket Docker.
 
@@ -62,7 +62,7 @@ volumes:
     name: var-run
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://github.com/Azure/AKS/releases/tag/2020-11-16

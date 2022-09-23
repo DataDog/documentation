@@ -66,7 +66,7 @@ Les étapes ci-dessous sont toutes nécessaires pour faire fonctionner l'intégr
 L'intégration Airflow se présente sous deux formes. Il y a d'abord l'intégration de l'Agent Datadog, qui effectue des requêtes vers un endpoint spécifié pour permettre à Airflow de signaler s'il peut établir une connexion et s'il est fonctionnel. Puis il y a la portion StatsD pour Airflow, grâce à laquelle il est possible de configurer Airflow de façon à envoyer des métriques à l'Agent Datadog, qui peut alors remapper la notation Airflow vers une notation Datadog.
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### Host
 
@@ -315,8 +315,8 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/fr/help/
-{{< /tab >}}
-{{< tab "Environnement conteneurisé" >}}
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -386,7 +386,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [6]: /fr/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
 [7]: https://github.com/DataDog/integrations-core/tree/master/airflow/tests/k8s_sample
 [8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/?tab=kubernetes#configuration
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Validation

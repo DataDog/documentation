@@ -29,7 +29,7 @@ Runtime metrics collection can be enabled with one configuration parameter in th
 
 
    {{< tabs >}}
-{{< tab "Environment variables" >}}
+{{% tab "Environment variables" %}}
 
 ```shell
 export DD_RUNTIME_METRICS_ENABLED=true
@@ -38,8 +38,8 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-{{< /tab >}}
-{{< tab "In code" >}}
+{{% /tab %}}
+{{% tab "In code" %}}
 
 ```js
 const tracer = require('dd-trace').init({
@@ -50,7 +50,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Runtime metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.

@@ -53,7 +53,7 @@ title: サーバーレスモニタリングの構成
 予約タグ (`env`、`service`、`version`) とカスタムタグを使用して、Datadog のテレメトリーを一緒に接続します。これらのタグを使用して、メトリクス、トレース、ログをシームレスに操作することができます。使用するインストール方法に応じて、以下の追加パラメーターを追加してください。
 
 {{< tabs >}}
-{{< tab "Datadog CLI" >}}
+{{% tab "Datadog CLI" %}}
 
 [Datadog CLI][1] の最新バージョンを使用していることを確認し、適切な追加引数を指定して `datadog-ci lambda instrument` コマンドを実行します。例えば、以下のようになります。
 
@@ -67,8 +67,8 @@ datadog-ci lambda instrument \
 ```
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
-{{< /tab >}}
-{{< tab "Serverless Framework" >}}
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 [Datadog サーバーレスプラグイン][1]の最新バージョンを使用していることを確認し、`env`、`service`、`version`、`tags` パラメーターを使用してタグを適用します。例えば、以下のようになります。
 
@@ -85,8 +85,8 @@ custom:
 デフォルトでは、`env` と `service` を定義しない場合、プラグインは自動的にサーバーレスアプリケーションの定義にある `stage` と `service` の値を使用します。この機能を無効にするには、`enableTags` を `false` に設定します。
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
-{{< /tab >}}
-{{< tab "AWS SAM" >}}
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
 
 [Datadog サーバーレスマクロ][1]の最新バージョンを使用していることを確認し、`env`、`service`、`version`、`tags` パラメーターを使用してタグを適用します。例えば、以下のようになります。
 
@@ -103,8 +103,8 @@ Transform:
 ```
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 [Datadog サーバーレス cdk コンストラクト][1]の最新バージョンを使用していることを確認し、`env`、`service`、`version`、`tags` パラメーターを使用してタグを適用します。例えば、以下のようになります。
 
@@ -120,8 +120,8 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 ```
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
-{{< /tab >}}
-{{< tab "その他" >}}
+{{% /tab %}}
+{{% tab "その他" %}}
 
 [Datadog Lambda 拡張機能][1]を使用して Lambda 関数からテレメトリーを収集している場合、Lambda 関数に以下の環境変数を設定します。例えば、以下のようになります。
 - DD_ENV: dev
@@ -133,7 +133,7 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 
 [1]: /ja/serverless/libraries_integrations/extension/
 [2]: /ja/serverless/libraries_integrations/forwarder/
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 また、Datadog は、Lambda 関数に定義された既存の AWS リソースタグで、数分遅れで収集したテレメトリーをリッチ化することができます。
@@ -151,7 +151,7 @@ Datadog は [AWS Lambda 関数の JSON リクエストとレスポンスのペ�
 この機能は、デフォルトでは無効になっています。使用するインストール方法については、以下の説明に従ってください。
 
 {{< tabs >}}
-{{< tab "Datadog CLI" >}}
+{{% tab "Datadog CLI" %}}
 
 [Datadog CLI][1] の最新バージョンを使用していることを確認し、追加引数  `--capture-lambda-payload` を指定して `datadog-ci lambda instrument` コマンドを実行します。例えば、以下のようになります。
 
@@ -162,8 +162,8 @@ datadog-ci lambda instrument \
 ```
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
-{{< /tab >}}
-{{< tab "Serverless Framework" >}}
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 [Datadog サーバーレスプラグイン][1]の最新バージョンを使用していることを確認し、`captureLambdaPayload` を `true` に設定します。例えば、以下のようになります。
 
@@ -175,8 +175,8 @@ custom:
 ```
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
-{{< /tab >}}
-{{< tab "AWS SAM" >}}
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
 
 [Datadog サーバーレスマクロ][1]の最新バージョンを使用していることを確認し、`captureLambdaPayload` パラメーターを `true` に設定します。例えば、以下のようになります。
 
@@ -190,8 +190,8 @@ Transform:
 ```
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 [Datadog サーバーレス cdk コンストラクト][1]の最新バージョンを使用していることを確認し、`captureLambdaPayload` パラメーターを `true` に設定します。例えば、以下のようになります。
 
@@ -204,12 +204,12 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 ```
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
-{{< /tab >}}
-{{< tab "その他" >}}
+{{% /tab %}}
+{{% tab "その他" %}}
 
 Lambda 関数で環境変数 `DD_CAPTURE_LAMBDA_PAYLOAD` を `true` に設定します。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 リクエストやレスポンスの JSON オブジェクト内の機密データが Datadog に送信されないようにするには、特定のパラメーターをスクラブすることが可能です。
@@ -312,7 +312,7 @@ Datadog Forwarder Lambda 関数を使用したログ収集を停止したい場�
 Datadog Lambda 拡張機能を使用してログの収集を停止したい場合は、使用するインストール方法に応じて以下の手順に従ってください。
 
 {{< tabs >}}
-{{< tab "Serverless Framework" >}}
+{{% tab "Serverless Framework" %}}
 
 ```yaml
 custom:
@@ -321,8 +321,8 @@ custom:
     enableDDLogs: false
 ```
 
-{{< /tab >}}
-{{< tab "AWS SAM" >}}
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
 
 ```yaml
 Transform:
@@ -333,8 +333,8 @@ Transform:
       enableDDLogs: false
 ```
 
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -344,12 +344,12 @@ const datadog = new Datadog(this, "Datadog", {
 datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 ```
 
-{{< /tab >}}
-{{< tab "その他" >}}
+{{% /tab %}}
+{{% tab "その他" %}}
 
 Lambda 関数で環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `false` に設定します。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ログのパースと変換
@@ -385,15 +385,15 @@ Datadog に送信する前にトレースをフィルタリングするには、
 Datadog Lambda 拡張機能によるトレース収集は、デフォルトで有効になっています。Lambda 関数からのトレース収集を停止したい場合は、以下の手順に従ってください。
 
 {{< tabs >}}
-{{< tab "Datadog CLI" >}}
+{{% tab "Datadog CLI" %}}
 
 ```sh
 datadog-ci lambda instrument \
     --tracing false
     # ... その他の必要な引数 (関数名など)
 ```
-{{< /tab >}}
-{{< tab "Serverless Framework" >}}
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 ```yaml
 custom:
@@ -402,8 +402,8 @@ custom:
     enableDDTracing: false
 ```
 
-{{< /tab >}}
-{{< tab "AWS SAM" >}}
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
 
 ```yaml
 Transform:
@@ -414,8 +414,8 @@ Transform:
       enableDDTracing: false
 ```
 
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -425,12 +425,12 @@ const datadog = new Datadog(this, "Datadog", {
 datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 ```
 
-{{< /tab >}}
-{{< tab "その他" >}}
+{{% /tab %}}
+{{% tab "その他" %}}
 
 Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ログとトレースの接続
@@ -463,7 +463,7 @@ Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します�
 [Datadog ソースコードインテグレーション][26]では、GitHub で Lambda 関数のソースコードにテレメトリー (スタックトレースなど) をリンクさせることができます。以下の手順で機能を有効化してください。**注**: ダーティでもリモートより先でもない、ローカルの Git リポジトリからデプロイする必要があります。
 
 {{< tabs >}}
-{{< tab "Datadog CLI" >}}
+{{% tab "Datadog CLI" %}}
 
 `datadog-ci lambda instrument` を `--source-code-integration true` で実行すると、現在のローカルディレクトリの Git メタデータが自動的に送信され、Lambda 関数に必要なタグが追加されます。
 
@@ -483,8 +483,8 @@ datadog-ci lambda instrument \
     --source-code-integration true
     # ... その他の必要な引数 (関数名など)
 ```
-{{< /tab >}}
-{{< tab "Serverless Framework" >}}
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 `enableSourceCodeIntegration` を `true` に設定すると、Datadog サーバーレスプラグインは自動的に現在のローカルディレクトリの Git メタデータを送信し、Lambda 関数に必要なタグを追加します。
 
@@ -499,8 +499,8 @@ custom:
     enableSourceCodeIntegration: true # default is true
 ```
 
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 初期化関数を次のように変更し、CDK スタックに gitHash の値を渡します。
 
@@ -528,8 +528,8 @@ export class ExampleStack extends cdk.Stack {
 }
 ```
 
-{{< /tab >}}
-{{< tab "その他" >}}
+{{% /tab %}}
+{{% tab "その他" %}}
 
 1. Lambda 関数に環境変数 `DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>,git.repository_url=<REPOSITORY_URL>"` を設定します
 2. CI パイプラインで [datadog-ci git-metadata upload][1] を実行し、Git メタデータをアップロードします
@@ -537,7 +537,7 @@ export class ExampleStack extends cdk.Stack {
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 [2]: https://app.datadoghq.com/account/settings#integrations/github-apps
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## カスタムメトリクスの送信
@@ -583,7 +583,7 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 **注**: Datadog では、まず開発用とステージング用のアプリケーションを移行し、本番用のアプリケーションを 1 つずつ移行していくことを推奨しています。
 
 {{< tabs >}}
-{{< tab "Datadog CLI" >}}
+{{% tab "Datadog CLI" %}}
 
 1. `datadog/datadog-ci` を最新バージョンにアップグレードする
 2. 引数 `--layer-version` を更新し、ランタイムの最新バージョンに設定します。
@@ -592,8 +592,8 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 5. 引数 `--forwarder` を削除します。
 6. Lambda のロググループに Forwarder を自動的にサブスクライブするように Datadog AWS インテグレーションを構成した場合、その地域の Lambda 関数を_すべて_移行した後にそれを無効にしてください。
 
-{{< /tab >}}
-{{< tab "Serverless Framework" >}}
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
 
 1. `serverless-plugin-datadog` を最新バージョンにアップグレードします。このバージョンでは、`addExtension` を `false` に設定しない限り、Datadog Lambda 拡張機能がデフォルトでインストールされます。
 2. 必要なパラメーター `site` と `apiKeySecretArn` を設定します。
@@ -601,8 +601,8 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 4. ただし、Lambda 以外のリソースからログを収集するために Forwarder を保持し、`subscribeToApiGatewayLogs`、`subscribeToHttpApiLogs`、`subscribeToWebsocketLogs` を `true` に設定している場合は、`forwarderArn` パラメーターは削除してください。
 5. Lambda のロググループに Forwarder を自動的にサブスクライブするように Datadog AWS インテグレーションを構成した場合、その地域の Lambda 関数を_すべて_移行した後にそれを無効にしてください。
 
-{{< /tab >}}
-{{< tab "AWS SAM" >}}
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
 
 1. `datadog-serverless-macro` CloudFormation スタックを更新して、最新バージョンを取得します。
 2. `extensionLayerVersion` パラメーターを最新の拡張機能バージョンに設定します。最新の拡張機能バージョンは `{{< latest-lambda-layer-version layer="extension" >}}` です。
@@ -610,8 +610,8 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 4. `forwarderArn` パラメーターを削除します。
 5. Lambda のロググループに Forwarder を自動的にサブスクライブするように Datadog AWS インテグレーションを構成した場合、その地域の Lambda 関数を_すべて_移行した後にそれを無効にしてください。
 
-{{< /tab >}}
-{{< tab "AWS CDK" >}}
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
 
 1. `datadog-cdk-constructs` または `datadog-cdk-constructs-v2` を最新バージョンにアップグレードします。
 2. `extensionLayerVersion` パラメーターを最新の拡張機能バージョンに設定します。最新の拡張機能バージョンは `{{< latest-lambda-layer-version layer="extension" >}}` です。
@@ -620,8 +620,8 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 5. `forwarderArn` パラメーターを削除します。
 6. Lambda のロググループに Forwarder を自動的にサブスクライブするように Datadog AWS インテグレーションを構成した場合、その地域の Lambda 関数を_すべて_移行した後にそれを無効にしてください。
 
-{{< /tab >}}
-{{< tab "その他" >}}
+{{% /tab %}}
+{{% tab "その他" %}}
 
 1. ランタイム用の Datadog Lambda ライブラリレイヤーを最新バージョンにアップグレードします。
 2. 最新バージョンの Datadog Lambda 拡張機能をインストールします。
@@ -630,7 +630,7 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 4. Lambda 関数のロググループから Datadog Forwarder にログをストリーミングするサブスクリプションフィルターを削除します。
 5. Lambda のロググループに Forwarder を自動的にサブスクライブするように Datadog AWS インテグレーションを構成した場合、その地域の Lambda 関数を_すべて_移行した後にそれを無効にしてください。
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## ローカルテスト用の Datadog Lambda 拡張機能の構成

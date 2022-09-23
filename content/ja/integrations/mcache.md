@@ -87,7 +87,7 @@ Memcache チェックは [Datadog Agent][1] パッケージに含まれていま
 #### メトリクスの収集
 
 {{< tabs >}}
-{{< tab "Host" >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
@@ -119,8 +119,8 @@ Datadog APM は、Memcache と統合して分散システム全体のトレー�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
-{{< /tab >}}
-{{< tab "Containerized" >}}
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -171,7 +171,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [4]: https://docs.datadoghq.com/ja/tracing/setup/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 検証

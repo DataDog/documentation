@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
+- link: "https://www.datadoghq.com/blog/audit-trail-best-practices/"
+  tag: "Blog"
+  text: "Monitor critical Datadog assets and configurations with Audit Trail"
 ---
 
 ## Overview

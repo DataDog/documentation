@@ -35,7 +35,7 @@ further_reading:
 以下の API コールを使用して、`env:prod` タグに該当するすべてのモニターから発される週末のアラートをミュートに設定します。
 
 {{< tabs >}}
-{{< tab "API " >}}
+{{% tab "API " %}}
 
 ```bash
 curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
@@ -83,15 +83,15 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 }
 ```
 
-{{< /tab >}}
-{{< tab "UI" >}}
+{{% /tab %}}
+{{% tab "UI" %}}
 
 [Manage Downtime ページ][1]を開いて新しいダウンタイムを追加し、`recurring` を選択します。
 
 {{< img src="monitors/guide/downtimes_weekend.jpg" alt="週末にかけたダウンタイム" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 営業時間外のダウンタイム
@@ -101,7 +101,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 以下の API コールで、平日午後 8 時 から午前 6 時までのアラートをミュートに設定します。
 
 {{< tabs >}}
-{{< tab "API " >}}
+{{% tab "API " %}}
 
 ```bash
 curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
@@ -143,15 +143,15 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 }
 ```
 
-{{< /tab >}}
-{{< tab "UI" >}}
+{{% /tab %}}
+{{% tab "UI" %}}
 
 [Manage Downtime ページ][1]を開いて新しいダウンタイムを追加し、`recurring` を選択します。
 
 {{< img src="monitors/guide/downtime_businesshour.jpg" alt="営業時間外のダウンタイム" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 毎月 n 日の定期的なダウンタイム
@@ -165,7 +165,7 @@ RRULE (繰り返しルール) は [iCalendar RFC][4] のプロパティ名で、
 **例**: ERP アプリは毎月第 2 火曜日に更新され、午前 8 時から 10 時の間にパッチと修正が適用されます。このモニターのスコープは `app:erp` で指定されているため、ダウンタイムのスコープにもこの値を使用します。
 
 {{< tabs >}}
-{{< tab "API " >}}
+{{% tab "API " %}}
 
 `type` パラメーターは `rrule` に指定する必要があります。
 `start`  および `end` パラメーターは繰り返しルール初日の予定開始時間および終了時間と一致するよう設定します。そのため、ルールで指定した最初の第 2 火曜日が 3 月 9 日 (火) であった場合、開始は 3 月 9 日の午前 8時、終了は 3 月 9 日の午前 10 時となります。
@@ -210,15 +210,15 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 }
 ```
 
-{{< /tab >}}
-{{< tab "UI" >}}
+{{% /tab %}}
+{{% tab "UI" %}}
 
 [Manage Downtime ページ][1]を開いて新しいダウンタイムを追加し、`recurring` を選択します。
 
 {{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule ダウンタイム"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### その他の参考資料

@@ -40,7 +40,7 @@ Crée un mappage d'authentification à partir d'un corps JSON. Renvoie le mappag
  `attribute_value` correspond à la valeur dans une paire clé/valeur, qui représente un attribut envoyé par votre fournisseur d'identité. Vous pouvez définir ces paires en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
 
 {{< tabs >}}
-{{< tab "Exemple" >}}
+{{% tab "Exemple" %}}
 
 ```sh
 curl -X POST \
@@ -71,8 +71,8 @@ curl -X POST \
 - Remplacez `<VOTRE_SITE_DD>` par {{< region-param key="dd_site" code="true" >}}.
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Réponse" >}}
+{{% /tab %}}
+{{% tab "Réponse" %}}
 
 ```json
 {
@@ -137,7 +137,7 @@ curl -X POST \
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Récupérer tous les mappages d'authentification
@@ -160,7 +160,7 @@ Renvoie la liste des mappages d'authentification
   filtre par tags sous forme de chaînes. Par exemple, `Billing Users`.
 
 {{< tabs >}}
-{{< tab "Exemple" >}}
+{{% tab "Exemple" %}}
 
 ```sh
 curl -X GET "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings" \
@@ -172,8 +172,8 @@ curl -X GET "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings" \
 - Remplacez `<VOTRE_SITE_DD>` par {{< region-param key="dd_site" code="true" >}}.
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Réponse" >}}
+{{% /tab %}}
+{{% tab "Réponse" %}}
 
 ```json
 {
@@ -242,7 +242,7 @@ curl -X GET "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings" \
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Récupérer un mappage d'authentification spécifique
@@ -259,7 +259,7 @@ Renvoie un mappage d'authentification spécifique via son UUID.
   remplace `{authn_mapping_id}` par l'ID du mappage d'authentification à récupérer.
 
 {{< tabs >}}
-{{< tab "Exemple" >}}
+{{% tab "Exemple" %}}
 
 ```sh
 curl -X GET "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings/{authn_mapping_id}" \
@@ -271,8 +271,8 @@ curl -X GET "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings/{authn_mapping_id
 - Remplacez `<VOTRE_SITE_DD>` par {{< region-param key="dd_site" code="true" >}}.
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Réponse" >}}
+{{% /tab %}}
+{{% tab "Réponse" %}}
 
 ```json
 {
@@ -338,7 +338,7 @@ curl -X GET "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings/{authn_mapping_id
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Modifier un mappage
@@ -362,7 +362,7 @@ Modifie le `role` ou le `saml_assertion_attribute_id` d'un mappage d'authentific
  `attribute_value` correspond à la valeur dans une paire clé/valeur, qui représente un attribut envoyé par votre fournisseur d'identité. Vous pouvez définir ces paires en fonction de vos besoins. Par exemple, `attribute_key` peut être définie sur `member-of` et `attribute_value` peut être définie sur `Development`.
 
 {{< tabs >}}
-{{< tab "Exemple" >}}
+{{% tab "Exemple" %}}
 
 ```sh
 curl -X PATCH \
@@ -394,8 +394,8 @@ curl -X PATCH \
 - Remplacez `<VOTRE_SITE_DD>` par {{< region-param key="dd_site" code="true" >}}.
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Réponse" >}}
+{{% /tab %}}
+{{% tab "Réponse" %}}
 
 ```json
 {
@@ -458,7 +458,7 @@ curl -X PATCH \
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Supprimer un mappage
@@ -475,7 +475,7 @@ Supprime un mappage d'authentification spécifique.
   remplace `{authn_mapping_id}` par l'ID du mappage d'authentification à supprimer.
 
 {{< tabs >}}
-{{< tab "Exemple" >}}
+{{% tab "Exemple" %}}
 
 ```sh
 curl -X DELETE "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings/{UUID}" \
@@ -488,14 +488,14 @@ curl -X DELETE "https://api.<VOTRE_SITE_DD>/api/v2/authn_mappings/{UUID}" \
 - Remplacez `<VOTRE_SITE_DD>` par {{< region-param key="dd_site" code="true" >}}.
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Réponse" >}}
+{{% /tab %}}
+{{% tab "Réponse" %}}
 
 ```sh
 HTTP/2 204
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Récupérer l'indicateur d'activation d'un mappage d'authentification
@@ -507,7 +507,7 @@ Vérifiez si des mappages d'authentification sont activés ou désactivés.
 | `GET`    | `/v1/org_preferences`      | Aucun             |
 
 {{< tabs >}}
-{{< tab "Exemple" >}}
+{{% tab "Exemple" %}}
 
 ```sh
 curl -X GET \
@@ -521,8 +521,8 @@ curl -X GET \
 - Remplacez `<VOTRE_SITE_DD>` par {{< region-param key="dd_site" code="true" >}}.
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Réponse" >}}
+{{% /tab %}}
+{{% tab "Réponse" %}}
 
 ```json
 {
@@ -537,7 +537,7 @@ curl -X GET \
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Activer ou désactiver tous les mappages
@@ -560,7 +560,7 @@ Active/désactive l'application de tous les mappages d'authentification.
   données avec lesquelles mettre à jour la préférence. Doit être true ou false : true pour activer tous les mappages, false pour les désactiver.
 
 {{< tabs >}}
-{{< tab "Exemple" >}}
+{{% tab "Exemple" %}}
 
 ```sh
 curl -X POST \
@@ -584,8 +584,8 @@ curl -X POST \
 - Remplacez `<VOTRE_SITE_DD>` par {{< region-param key="dd_site" code="true" >}}.
 
 [1]: https://api.datadoghq.com/account/settings#api
-{{< /tab >}}
-{{< tab "Réponse" >}}
+{{% /tab %}}
+{{% tab "Réponse" %}}
 
 ```json
 {
@@ -600,7 +600,7 @@ curl -X POST \
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

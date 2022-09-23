@@ -98,7 +98,7 @@ secret_backend_command: <EXECUTABLE_PATH>
 The Agent runs the `secret_backend_command` executable as a sub-process. The execution patterns differ on Linux and Windows.
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 On Linux, the executable set as `secret_backend_command` must:
 
@@ -106,8 +106,8 @@ On Linux, the executable set as `secret_backend_command` must:
 * Have no rights for group or other.
 * Have at least exec rights for the owner.
 
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 On Windows, the executable set as `secret_backend_command` must:
 
@@ -115,7 +115,7 @@ On Windows, the executable set as `secret_backend_command` must:
 * Have no rights for any user or group except for the `Administrators` group, the built-in Local System account, or the Agent user context (`ddagentuser` by default)
 * Be a valid Win32 application so the Agent can execute it (a PowerShell or Python script would not work for example).
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: The executable shares the same environment variables as the Agent.
@@ -235,7 +235,7 @@ The script `readsecret_multiple_providers.sh` can be used to read from both file
 | Kubernetes Secrets     | `ENC[k8s_secret@some_namespace/some_name/a_key]` |
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 To use this executable with the Helm chart, set it as the following:
 ```yaml
@@ -245,15 +245,15 @@ datadog:
     command: "/readsecret_multiple_providers.sh"
 ```
 
-{{< /tab >}}
-{{< tab "DaemonSet" >}}
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
 
 To use this executable, set the environment variable `DD_SECRET_BACKEND_COMMAND` as follows:
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Read from file example
@@ -359,7 +359,7 @@ The `secret` command in the Agent CLI shows any errors related to your setup. Fo
 On Linux, the command outputs file mode, owner and group for the executable. On Windows, ACL rights are listed.
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 
 Example on Linux:
 
@@ -382,8 +382,8 @@ Secrets handle decrypted:
 - db_prod_password: from postgres.yaml
 ```
 
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 Example on Windows (from an Administrator PowerShell):
 ```powershell
@@ -414,7 +414,7 @@ Secrets handle decrypted:
 - db_prod_password: from sqlserver.yaml
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -451,7 +451,7 @@ password: <obfuscated_password2>
 To test or debug outside of the Agent, you can mimic how the Agent runs it:
 
 {{< tabs >}}
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 #### Linux
 
 ```bash
@@ -461,8 +461,8 @@ sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\"
 The `dd-agent` user is created when you install the Datadog Agent.
 
 
-{{< /tab >}}
-{{< tab "Windows" >}}
+{{% /tab %}}
+{{% tab "Windows" %}}
 #### Windows
 
 ##### Rights related errors
@@ -523,7 +523,7 @@ exit code:
 0
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 

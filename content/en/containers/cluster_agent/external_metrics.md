@@ -41,7 +41,7 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 ### Installation
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 To enable the external metrics server with your Cluster Agent in Helm, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration. After you set `clusterAgent.metricsProvider.enabled` to `true`, redeploy your Datadog Helm chart:
 
@@ -58,8 +58,8 @@ To enable the external metrics server with your Cluster Agent in Helm, update yo
 This automatically updates the necessary RBAC configurations as well as sets up the corresponding `Service` and `APIService` for Kubernetes to use.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, [setup the Datadog Operator][1]. Then, set `clusterAgent.config.externalMetrics.enabled` to `true` in the `DatadogAgent` custom resource:
 
@@ -81,8 +81,8 @@ To enable the external metrics server with your Cluster Agent managed by the Dat
 The Operator automatically updates the necessary RBAC configurations and sets the corresponding `Service` and `APIService` for Kubernetes to use.
 
 [1]: /agent/guide/operator-advanced
-{{< /tab >}}
-{{< tab "Daemonset" >}}
+{{% /tab %}}
+{{% tab "Daemonset" %}}
 
 #### Custom metrics server
 
@@ -122,7 +122,7 @@ Once the Datadog Cluster Agent is up and running, apply some additional RBAC pol
 
 [1]: /agent/cluster_agent/setup/?tab=daemonset
 [2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Usage
@@ -195,7 +195,7 @@ For autoscaling to work correctly, custom queries must follow these rules:
 Set up the Datadog Cluster Agent to use `DatadogMetric` using Helm, the Datadog Operator or Daemonset:
 
 {{< tabs >}}
-{{< tab "Helm" >}}
+{{% tab "Helm" %}}
 
 To activate usage of the `DatadogMetric` CRD update your [datadog-values.yaml][1] Helm configuration to set `clusterAgent.metricsProvider.useDatadogMetrics` to `true`. Then redeploy your Datadog Helm chart:
 
@@ -214,8 +214,8 @@ To activate usage of the `DatadogMetric` CRD update your [datadog-values.yaml][1
 This automatically updates the necessary RBAC files and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{< /tab >}}
-{{< tab "Operator" >}}
+{{% /tab %}}
+{{% tab "Operator" %}}
 
 To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `clusterAgent.config.externalMetrics.useDatadogMetrics` to `true`.
 
@@ -237,8 +237,8 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
 
 The Operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
 
-{{< /tab >}}
-{{< tab "Daemonset" >}}
+{{% /tab %}}
+{{% tab "Daemonset" %}}
 To activate usage of the `DatadogMetric` CRD, follow these extra steps:
 
 1. Install the `DatadogMetric` CRD in your cluster.
@@ -254,7 +254,7 @@ To activate usage of the `DatadogMetric` CRD, follow these extra steps:
     ```
 
 3. Set the `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` in the deployment of the Datadog Cluster Agent.
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### HPA

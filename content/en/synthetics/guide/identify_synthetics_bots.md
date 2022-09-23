@@ -46,16 +46,16 @@ Identify Datadog robots by using **default headers**, which are attached to the 
 By default, a `user-agent` header is added to all requests performed by Synthetic tests. Any custom `user-agent` added in the test overrides the default one.
 
 {{< tabs >}}
-{{< tab "Single and multistep API tests" >}}
+{{% tab "Single and multistep API tests" %}}
 
 For single and multistep API tests, the default `user-agent` header is `Datadog/Synthetics`.
 
-{{< /tab >}}
-{{< tab "Browser tests" >}}
+{{% /tab %}}
+{{% tab "Browser tests" %}}
 
 For browser tests, the value of the default `user-agent` header varies depending on the browser and device executing the test. The default `user-agent` value always ends with `DatadogSynthetics` to allow you to identify Synthetic tests.
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### `sec-datadog`
@@ -63,20 +63,20 @@ For browser tests, the value of the default `user-agent` header varies depending
 A `sec-datadog` header is added to all requests performed by Synthetic tests. The value includes the test ID which the request originates from.
 
 {{< tabs >}}
-{{< tab "Single and multistep API tests" >}}
+{{% tab "Single and multistep API tests" %}}
 
 ```
 sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
-{{< /tab >}}
-{{< tab "Browser tests" >}}
+{{% /tab %}}
+{{% tab "Browser tests" %}}
 
 ```
 sec-datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### APM headers

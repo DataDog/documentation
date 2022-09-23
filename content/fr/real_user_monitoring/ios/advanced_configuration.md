@@ -27,7 +27,7 @@ En plus du [suivi automatique des vues](#suivi-automatique-des-vues), vous pouve
 Par exemple :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 // Dans votre `UIViewController` :
 
@@ -42,8 +42,8 @@ override func viewDidDisappear(_ animated: Bool) {
 }
 ```
 
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 // Dans votre `UIViewController` :
 
@@ -59,7 +59,7 @@ override func viewDidDisappear(_ animated: Bool) {
     [DDGlobal.rum stopViewWithViewController:self attributes:nil];
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour découvrir les options disponibles et obtenir plus de détails, consultez la [classe `DDRUMMonitor`][9].
@@ -71,20 +71,20 @@ En plus des attributs RUM par défaut, vous pouvez tirer profit de l'API `addTim
 Par exemple, vous pouvez mesurer le temps nécessaire pour afficher votre bannière :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 func onHeroImageLoaded() {
     Global.rum.addTiming(name: "hero_image")
 } 
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 - (void)onHeroImageLoad {
     [DDGlobal.rum addTimingWithName:@"hero_image"];
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Une fois la durée définie, elle est représentée par `@view.custom_timings.<nom_durée>`. Exemple : `@view.custom_timings.hero_image`.
@@ -100,7 +100,7 @@ Pour enregistrer manuellement des actions RUM instantanées, comme `.tap` sur `G
 Par exemple :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 // Dans votre `UIViewController`:
 
@@ -111,15 +111,15 @@ Par exemple :
     )
 }
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 - (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
     NSString *name = sender.currentTitle ? sender.currentTitle : @"";
     [DDGlobal.rum addUserActionWithType:DDRUMUserActionTypeTap name:name attributes:@{}];
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : lorsque vous utilisez `.startUserAction(type:name:)` et `.stopUserAction(type:)`, l'action `type` doit être identique pour que le SDK puisse faire correspondre le début d'une action à sa fin.
@@ -137,7 +137,7 @@ En plus du [suivi automatique des ressources](#suivi-automatique-des-requetes-re
 Par exemple :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 // dans votre client réseau :
 
@@ -151,8 +151,8 @@ Global.rum.stopResourceLoading(
     response: response
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 // Dans votre client réseau :
 
@@ -164,7 +164,7 @@ Global.rum.stopResourceLoading(
                                         response:response
                                       attributes:@{}];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : la chaîne utilisée pour `resourceKey` dans les deux appels doit être unique à la ressource que vous appelez. Dans le cas contraire, le SDK ne pourra pas faire correspondre le début d'une ressource à sa fin.
@@ -176,16 +176,16 @@ Pour découvrir les options disponibles et obtenir plus de détails, consultez l
 Pour effectuer le suivi d'erreurs spécifiques, informez `Global.rum` lorsqu'une erreur survient et transmettez le message, la source, l'exception et les attributs supplémentaires. Consultez la [rubrique Attributs d'erreur][5] pour en savoir plus.
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Global.rum.addError(message: "message d'erreur.")
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 [DDGlobal.rum addErrorWithMessage:@"message d'erreur." source:DDRUMErrorSourceCustom stack:nil attributes:@{}];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour en savoir plus et découvrir toutes les options disponibles, référez-vous aux commentaires de la documentation relative au code dans la [classe `DDRUMMonitor`][9].
@@ -227,16 +227,16 @@ Pour identifier des sessions utilisateur, utilisez l'API `setUserInfo(id:name:em
 Par exemple :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 [DDDatadog setUserInfoWithId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Paramètres d'initialisation
@@ -302,21 +302,21 @@ Les méthodes suivantes peuvent être utilisées dans `Datadog.Configuration.Bui
 Pour effectuer le suivi automatique des vues (`UIViewControllers`), utilisez l'option `.trackUIKitRUMViews()` lors de la configuration du SDK. Par défaut, le nom des vues est basé sur le nom de la classe du contrôleur des vues. Pour le personnaliser, utilisez `.trackUIKitRUMViews(using: predicate)` et fournissez votre propre implémentation du `predicate` en prenant soin de respecter le protocole `UIKitRUMViewsPredicate` :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 public protocol UIKitRUMViewsPredicate {
     func rumView(for viewController: UIViewController) -> RUMView?
 }
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```swift
 @objc
 public protocol DDUIKitRUMViewsPredicate: AnyObject {
     func rumView(for viewController: UIViewController) -> DDRUMView?
 }
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Au sein de l'implémentation `rumView(for:)`, votre application doit décider si une instance donnée de `UIViewController` doit démarrer la vue RUM (ce qui entraîne l'envoi de sa valeur) ou non (ce qui l'entraîne l'envoi de la valeur `nil`). La valeur de `RUMView` renvoyée doit spécifier le `name` et peut fournir des `attributes` supplémentaires pour la vue RUM créée.
@@ -324,7 +324,7 @@ Au sein de l'implémentation `rumView(for:)`, votre application doit décider si
 Par exemple, vous pouvez configurer le predicate de façon à utiliser un check explicite pour chaque contrôleur de vue de votre application :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 class YourCustomPredicate: UIKitRUMViewsPredicate {
 
@@ -337,8 +337,8 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
     }
 }
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 @interface YourCustomPredicate : NSObject<DDUIKitRUMViewsPredicate>
 
@@ -360,7 +360,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 @end
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Il est même possible de mettre en place une solution plus dynamique selon l'architecture de votre application.
@@ -368,7 +368,7 @@ Il est même possible de mettre en place une solution plus dynamique selon l'arc
 Par exemple, si vos contrôleurs de vue utilisent systématiquement `accessibilityLabel`, vous pouvez nommer les vues en tenant compte de la valeur de l'étiquette d'accessibilité :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 class YourCustomPredicate: UIKitRUMViewsPredicate {
 
@@ -381,8 +381,8 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
     }
 }
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 @interface YourCustomPredicate : NSObject<DDUIKitRUMViewsPredicate>
 
@@ -400,7 +400,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 @end
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : le SDK appelle de nombreuses fois `rumView(for:)` pendant l'exécution de votre application. Veillez donc à ce que cette implémentation demeure rapide, avec un seul thread.
@@ -414,7 +414,7 @@ Pour effectuer le suivi automatique des actions de toucher, utilisez l'option `.
 Pour effectuer automatiquement le suivi des ressources (requêtes réseau) et obtenir leurs informations de durée, comme le temps de latence du premier octet ou la résolution DNS, utilisez l'option `.trackURLSession()` lors de la configuration du SDK et définissez `DDURLSessionDelegate` pour la `URLSession` que vous souhaitez surveiller :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 let session = URLSession(
     configuration: .default,
@@ -422,14 +422,14 @@ let session = URLSession(
     delegateQueue: nil
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                       delegate:[[DDNSURLSessionDelegate alloc] init]
                                                  delegateQueue:nil];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Vous pouvez également configurer des hosts first party à l'aide de `.trackURLSession(firstPartyHosts:)`. Ainsi, les ressources correspondant au domaine fourni sont considérées comme des « first party » dans RUM, et les informations de tracing sont transmises à votre backend (si la fonctionnalité de tracing est activée).
@@ -437,7 +437,7 @@ Vous pouvez également configurer des hosts first party à l'aide de `.trackURLS
 Par exemple, vous pouvez configurer `example.com` en tant que host first party et activer les fonctionnalités RUM et de tracing :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.initialize(
     // ...
@@ -460,8 +460,8 @@ let session = URLSession(
 
 Cette configuration surveille toutes les requêtes envoyées avec la `session` instrumentée. Les requêtes correspondant au domaine `example.com` sont alors considérées comme des « first party » et des informations de tracing sont envoyées à votre backend pour [associer la ressource RUM à sa trace][6].
 
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -478,7 +478,7 @@ DDGlobal.sharedTracer = [[DDTracer alloc] initWithConfiguration:[DDTracerConfigu
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour ajouter des attributs personnalisés aux ressources, utilisez l'option `.setRUMResourceAttributesProvider(_ :)` lors de la configuration du SDK. En définissant la fermeture du fournisseur d'attributs, vous pouvez renvoyer des attributs supplémentaires afin de les joindre à la ressource suivie.
@@ -499,42 +499,42 @@ Par exemple, si vous souhaitez ajouter une requête HTTP et des en-têtes de ré
 Tous les logs de type « error » et « critical » envoyés avec `Logger` sont automatiquement transmis en tant qu'erreurs RUM et associés à la vue RUM actuelle :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 let logger = Logger.builder.build()
 
 logger.error("message")
 logger.critical("message")
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDLogger *logger = [[DDLogger builder] build];
 [logger error:@"message"];
 [logger critical:@"message"];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 De la même manière, toutes les spans finalisées et considérées comme des erreurs sont transmises en tant qu'erreurs RUM :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 let span = Global.sharedTracer.startSpan(operationName: "operation")
 // ... enregistrer l'`error`
 span.setError(error)
 span.finish()
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 // ... enregistre l'`error`
 id<SpanOT> span = [DDGlobal.sharedTracer startSpan:@"operation"];
 [span setError:error];
 [span finish];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Modifier ou ignorer des événements RUM
@@ -542,7 +542,7 @@ id<SpanOT> span = [DDGlobal.sharedTracer startSpan:@"operation"];
 Pour modifier les attributs d'un événement RUM avant de l'envoyer à Datadog, ou pour ignorer complètement un événement, utilisez l'API Event Mapper lors de la configuration du SDK :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.Configuration
     .builderUsing(...)
@@ -560,8 +560,8 @@ Datadog.Configuration
     }
     .build()
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -585,7 +585,7 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 
 [builder build];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Chaque mapper est une fermeture Swift avec une signature `(T) -> T?`, où `T` est un type d'événement RUM concret. Cela permet de modifier des parties de l'événement avant son envoi.
@@ -593,7 +593,7 @@ Chaque mapper est une fermeture Swift avec une signature `(T) -> T?`, où `T` es
 Par exemple, pour effacer des informations sensibles de l'`url` de la ressource RUM, implémentez une fonction `redacted(_:) -> String` personnalisée et utilisez-la dans `RUMResourceEventMapper` :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 .setRUMResourceEventMapper { resourceEvent in
     var resourceEvent = resourceEvent
@@ -601,15 +601,15 @@ Par exemple, pour effacer des informations sensibles de l'`url` de la ressource 
     return resourceEvent
 }
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 [builder setRUMResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
     resourceEvent.resource.url = redacted(resourceEvent.resource.url);
     return resourceEvent;
 }];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Si le mapper d'erreurs, de ressources ou d'actions renvoie la valeur `nil`, l'événement est entièrement ignoré, et il n'est pas envoyé à Datadog. Le mapper d'événements de vue ne doit pas renvoyer la valeur `nil`. Pour ignorer des vues, personnalisez votre implémentation de `UIKitRUMViewsPredicate`. Pour en savoir plus, consultez la rubrique [Suivi automatique des vues](#suivi-automatique-des-vues).
@@ -653,7 +653,7 @@ Pour contrôler les données que votre application envoie au service RUM de Data
 Par exemple, pour ne conserver que 50 % des sessions, utilisez la configuration suivante :
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.initialize(
     // ...
@@ -664,8 +664,8 @@ Datadog.initialize(
         .build()
 )
 ```
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -678,7 +678,7 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Envoi de données lorsque l'appareil est hors ligne
@@ -696,7 +696,7 @@ Si votre application s'exécute sur des appareils qui se trouvent derrière un p
 Lors de l'initialisation du SDK, spécifiez ce qui suit dans la configuration de votre proxy.
 
 {{< tabs >}}
-{{< tab "Swift" >}}
+{{% tab "Swift" %}}
 ```swift
 Datadog.initialize(
     // ...
@@ -714,8 +714,8 @@ Datadog.initialize(
 )
 ```
 
-{{< /tab >}}
-{{< tab "Objective-C" >}}
+{{% /tab %}}
+{{% tab "Objective-C" %}}
 ```objective-c
 DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
                                                                    clientToken:@"<token_client>"
@@ -734,7 +734,7 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
                     trackingConsent:trackingConsent
                       configuration:[builder build]];
 ```
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Pour en savoir plus, consultez la documentation relative à [URLSessionConfiguration.connectionProxyDictionary][8] (en anglais).

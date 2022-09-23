@@ -48,7 +48,7 @@ To begin profiling applications:
 
 3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
    {{< tabs >}}
-{{< tab "Command arguments" >}}
+{{% tab "Command arguments" %}}
 
 Invoke your service:
 ```diff
@@ -62,8 +62,8 @@ java \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
-{{< /tab >}}
-{{< tab "Environment variables" >}}
+{{% /tab %}}
+{{% tab "Environment variables" %}}
 
 ```diff
 export DD_SERVICE=<YOUR_SERVICE>
@@ -76,7 +76,7 @@ java \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
     **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:

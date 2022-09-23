@@ -37,7 +37,7 @@ L'affichage sous forme de liste regroupe les [ressources][4] par [service][3] et
 ### Plus d'informations
 
 {{< tabs >}}
-{{< tab "Tags de span" >}}
+{{% tab "Tags de span" %}}
 
 Cliquez sur une span dans le graphique de performances pour afficher ses métadonnées en dessous du graphique. En cas d'erreur, la stack trace est fournie :
 
@@ -57,15 +57,15 @@ Certains attributs ont des significations particulières qui se traduisent par u
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Formatage des erreurs"  >}}
 
 [1]: /fr/tracing/visualization/#trace
-{{< /tab >}}
-{{< tab "Informations sur le host" >}}
+{{% /tab %}}
+{{% tab "Informations sur le host" %}}
 
 Affichez les informations sur le host qui sont associées à la trace, notamment les tags et les graphiques de host au moment où la trace s'est produite.
 
 {{< img src="tracing/visualization/trace/trace_host_info.png" alt="Informations sur le host de la trace"  style="width:90%;">}}
 
-{{< /tab >}}
-{{< tab "Logs" >}}
+{{% /tab %}}
+{{% tab "Logs" %}}
 
 Consultez les logs associés à votre service au moment où la trace s'est produite. Lorsque vous passez le curseur sur un log, une ligne montrant son timestamp est affichée sur le graphique de performances de la trace. Cliquez sur le log pour accéder à la [recherche du Log Explorer][1].
 
@@ -73,8 +73,8 @@ Consultez les logs associés à votre service au moment où la trace s'est produ
 
 
 [1]: /fr/logs/explorer/search/
-{{< /tab >}}
-{{< tab "Processus" >}}
+{{% /tab %}}
+{{% tab "Processus" %}}
 
 Cliquez sur la span d'un service pour voir les processus qui s'exécutent sur son infrastructure sous-jacente. Les processus d'une span de service sont mis en corrélation avec les hosts ou pods sur lesquels le service s'exécute au moment de la requête. Vous pouvez analyser des métriques de processus, comme le processeur et la mémoire RSS, avec des erreurs au niveau du code. Vous pourrez ainsi distinguer les problèmes spécifiques à l'application des problèmes d'infrastructure globaux. Lorsque vous cliquez sur un processus, vous êtes redirigé vers la [page Live Processes][1]. Pour afficher des processus spécifiques à une span, activez la [collecte de processus][2]. Les processus associés ne sont actuellement pas pris en charge pour les traces sans serveur et Browser. 
 
@@ -82,9 +82,9 @@ Cliquez sur la span d'un service pour voir les processus qui s'exécutent sur so
 
 [1]: https://docs.datadoghq.com/fr/infrastructure/process/?tab=linuxwindows
 [2]: https://docs.datadoghq.com/fr/infrastructure/process/?tab=linuxwindows#installation
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Réseau" >}}
+{{% tab "Réseau" %}}
 
 Cliquez sur la span d'un service pour voir les dépendances réseau du service à l'origine de la requête. Utilisez des métriques de performances réseau clés comme le volume, les erreurs (retransmissions TCP) et la latence réseau (temps d'aller-retour TCP) pour différencier les problèmes spécifiques à une application et les problèmes qui touchent l'ensemble du réseau, en particulier lorsqu'aucune erreur de code n'a été générée. Par exemple, vous pouvez utiliser la télémétrie réseau pour déterminer si une latence de requête élevée est due à une élévation soudaine du trafic de l'application concernée ou à des dépendances défectueuses avec un pod en aval, un groupe de sécurité ou tout autre endpoint tagué. Cliquez sur un processus pour accéder à la [vue d'ensemble du réseau][1]. Pour voir les processus spécifiques à une span, activez la [surveillance des performances réseau][2].
 
@@ -94,7 +94,7 @@ Cliquez sur la span d'un service pour voir les dépendances réseau du service �
 
 [1]: /fr/network_monitoring/performance/network_page
 [2]: /fr/network_monitoring/performance/setup
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

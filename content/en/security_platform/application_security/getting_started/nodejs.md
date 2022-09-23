@@ -36,7 +36,7 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
 2. **Where you import and initialize the NodeJS library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
-{{< tab "In JavaScript code" >}}
+{{% tab "In JavaScript code" %}}
 
 ```js
 // This line must come before importing any instrumented module.
@@ -45,8 +45,8 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-{{< /tab >}}
-{{< tab "In TypeScript code" >}}
+{{% /tab %}}
+{{% tab "In TypeScript code" %}}
 
 For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file in order to maintain correct load order.
 ```typescript
@@ -64,7 +64,7 @@ If the default config is sufficient, or all configuration is done through enviro
 ```typescript
 import `dd-trace/init`;
 ```
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -78,7 +78,7 @@ import `dd-trace/init`;
    ```
    How you do this varies depending on where your service runs:
    {{< tabs >}}
-{{< tab "Docker CLI" >}}
+{{% tab "Docker CLI" %}}
 
 Update your configuration container for APM by adding the following argument in your `docker run` command: 
 
@@ -86,8 +86,8 @@ Update your configuration container for APM by adding the following argument in 
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
 
-{{< /tab >}}
-{{< tab "Dockerfile" >}}
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
 
 Add the following environment variable value to your container Dockerfile:
 
@@ -95,8 +95,8 @@ Add the following environment variable value to your container Dockerfile:
 ENV DD_APPSEC_ENABLED=true
 ```
 
-{{< /tab >}}
-{{< tab "Kubernetes" >}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 Update your configuration yaml file container for APM and add the AppSec env variable:
 
@@ -112,8 +112,8 @@ spec:
               value: "true"
 ```
 
-{{< /tab >}}
-{{< tab "AWS ECS" >}}
+{{% /tab %}}
+{{% tab "AWS ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the  environment section:
 
@@ -127,15 +127,15 @@ Update your ECS task definition JSON file, by adding this in the  environment se
 ]
 ```
 
-{{< /tab >}}
-{{< tab "AWS Fargate" >}}
+{{% /tab %}}
+{{% tab "AWS Fargate" %}}
 
 Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
 ```shell
 DD_APPSEC_ENABLED=true node app.js
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% appsec-getstarted-2-canary %}}

@@ -264,7 +264,7 @@ Le crawler CloudWatch par défaut de Datadog récupère les métriques toutes le
 Vous avez la possibilité de surveiller les logs Fargate de deux façons différentes : en utilisant l'intégration AWS FireLens basée sur le plug-in de sortie Fluent Bit de Datadog afin d'envoyer les logs à Datadog, ou en utilisant le pilote de logs `awslogs` et une fonction Lambda afin d'acheminer les logs vers Datadog. Étant donné que Fluent Bit peut être directement configuré dans vos tâches Fargate, nous vous conseillons d'utiliser AWS FireLens.
 
 {{< tabs >}}
-{{< tab "Fluent Bit et Firelens" >}}
+{{% tab "Fluent Bit et Firelens" %}}
 #### Fluent Bit et FireLens
 
 Configurez l'intégration AWS FireLens basée sur le plug-in de sortie Flutent Bit de Datadog de façon à connecter vos données de logs FireLens aux logs Datadog.
@@ -336,8 +336,8 @@ Configurez l'intégration AWS FireLens basée sur le plug-in de sortie Flutent�
 [6]: https://app.datadoghq.com/logs
 [7]: https://docs.datadoghq.com/fr/monitors/monitor_types/
 [8]: https://docs.datadoghq.com/fr/infrastructure/livecontainers/?tab=linuxwindows
-{{< /tab >}}
-{{< tab "Pilote de logs" >}}
+{{% /tab %}}
+{{% tab "Pilote de logs" %}}
 
 #### Pilote de logs AWS
 
@@ -368,7 +368,7 @@ Surveillez les logs Fargate avec le pilote de logs `awslogs` et une fonction Lam
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#log-collection
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Collecte de traces

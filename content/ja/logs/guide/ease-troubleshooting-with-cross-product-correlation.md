@@ -54,7 +54,7 @@ kind: ガイド
 アプリケーショントレーサーは、デフォルトでトレーサーを生成します。HTTP リクエストヘッダに `x-datadog-trace-id` を挿入することでこれを変更することが可能です。
 
 {{< tabs >}}
-{{< tab "NGINX" >}}
+{{% tab "NGINX" %}}
 
 ##### OpenTracing のセットアップ
 
@@ -93,7 +93,7 @@ http {
 [1]:/ja/tracing/setup_overview/proxy_setup/?tab=nginx
 [2]:/ja/logs/processing/processors/?tab=ui#grok-parser
 [3]:/ja/logs/processing/processors/?tab=ui#trace-remapper
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### データベースログの相関付け
@@ -107,7 +107,7 @@ http {
 #### 方法
 
 {{< tabs >}}
-{{< tab "PostgreSQL" >}}
+{{% tab "PostgreSQL" %}}
 
 ##### データベースログの強化
 
@@ -161,7 +161,7 @@ PostgreSQL パイプラインのクローン作成とカスタマイズ:
 [3]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [4]: /ja/logs/processing/processors/?tab=ui#grok-parser
 [5]: /ja/logs/processing/processors/?tab=ui#trace-remapper
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## フロントエンドプロダクトの相関付け

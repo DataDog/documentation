@@ -37,7 +37,7 @@ The .NET Tracer supports the following logging libraries:
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
 {{< tabs >}}
-{{< tab "Serilog" >}}
+{{% tab "Serilog" %}}
 
 <div class="alert alert-warning">
   <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the Serilog logging library requires the application to be instrumented with automatic instrumentation.
@@ -53,8 +53,8 @@ To automatically inject correlation identifiers into your log messages:
 2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
-{{< /tab >}}
-{{< tab "log4net" >}}
+{{% /tab %}}
+{{% tab "log4net" %}}
 
 <div class="alert alert-warning">
   <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
@@ -98,8 +98,8 @@ For additional examples, see [the log4net automatic trace ID injection project][
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/Log4NetExample/log4net.config
-{{< /tab >}}
-{{< tab "NLog" >}}
+{{% /tab %}}
+{{% tab "NLog" %}}
 
 <div class="alert alert-warning">
   <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the NLog logging library requires the application to be instrumented with automatic instrumentation.
@@ -144,8 +144,8 @@ For additional examples, see the automatic trace ID injection projects using [NL
 [2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog40Example/NLog.config
 [3]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog45Example/NLog.config
 [4]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
-{{< /tab >}}
-{{< tab "Microsoft.Extensions.Logging" >}}
+{{% /tab %}}
+{{% tab "Microsoft.Extensions.Logging" %}}
 To automatically inject correlation identifiers into your log messages:
 
 1. Configure the .NET Tracer with the following tracer settings:
@@ -181,7 +181,7 @@ For additional examples, see [the Microsoft.Extensions.Logging automatic trace i
 [3]: https://github.com/serilog/serilog-extensions-hosting
 [4]: https://github.com/serilog/serilog-extensions-logging
 [5]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/MicrosoftExtensionsExample/Program.cs
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Next, complete the setup for either automatic or manual injection.
@@ -224,7 +224,7 @@ Lastly, see [C# Log Collection][7] to configure your log collection.
 Examples:
 
 {{< tabs >}}
-{{< tab "Serilog" >}}
+{{% tab "Serilog" %}}
 
 **Note**: The Serilog library requires message property names to be valid C# identifiers. The required property names are: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id`, and `dd_span_id`.
 
@@ -243,8 +243,8 @@ using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToStri
 }
 ```
 
-{{< /tab >}}
-{{< tab "log4net" >}}
+{{% /tab %}}
+{{% tab "log4net" %}}
 
 ```csharp
 using Datadog.Trace;
@@ -272,8 +272,8 @@ finally
 }
 ```
 
-{{< /tab >}}
-{{< tab "NLog" >}}
+{{% /tab %}}
+{{% tab "NLog" %}}
 
 ```csharp
 using Datadog.Trace;
@@ -290,8 +290,8 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 }
 ```
 
-{{< /tab >}}
-{{< tab "Microsoft.Extensions.Logging" >}}
+{{% /tab %}}
+{{% tab "Microsoft.Extensions.Logging" %}}
 
 ```csharp
 using Datadog.Trace;
@@ -313,7 +313,7 @@ using(_logger.BeginScope(new Dictionary<string, object>
 }
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 You can read more about using BeginScope to create structured log messages for the following log providers:

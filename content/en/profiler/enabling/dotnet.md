@@ -55,7 +55,7 @@ If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or 
 
 {{< tabs >}}
 
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 To install the .NET Profiler machine-wide:
 
 1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
@@ -76,9 +76,9 @@ To install the .NET Profiler machine-wide:
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Windows" >}}
+{{% tab "Windows" %}}
 
 1. Install or upgrade to the latest version, using the [.NET Monitoring MSI installer][1]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-<VERSION>-x64.msi`.
 
@@ -86,7 +86,7 @@ To install the .NET Profiler machine-wide:
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -97,7 +97,7 @@ To install the .NET Profiler machine-wide:
 
 {{< tabs >}}
 
-{{< tab "Linux" >}}
+{{% tab "Linux" %}}
 3. Set the following required environment variables for automatic instrumentation to attach to your application:
 
    ```
@@ -116,9 +116,8 @@ To install the .NET Profiler machine-wide:
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
-
-{{< tab "Internet Information Services (IIS)" >}}
+{{% /tab %}}
+{{% tab "Internet Information Services (IIS)" %}}
 
 3. Set needed environment variables to configure and enable Profiler.
  To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes.
@@ -168,9 +167,9 @@ To install the .NET Profiler machine-wide:
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Windows services" >}}
+{{% tab "Windows services" %}}
 3. Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry key associated to the service. If the profiler is running alone (the tracer is deactivated), you can optionally add the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables.
 
 <div class="alert alert-info">
@@ -234,9 +233,8 @@ To install the .NET Profiler machine-wide:
 4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
-
-{{< tab "Windows Standalone applications" >}}
+{{% /tab %}}
+{{% tab "Windows Standalone applications" %}}
 
 <div class="alert alert-info">
   <div class="alert-info">Starting v2.14.0, you don't need to set the `CORECLR_PROFILER`/`COR_PROFILER` when you installed the tracer using the MSI.</div>
@@ -271,7 +269,7 @@ To install the .NET Profiler machine-wide:
 4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
-{{< /tab >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
