@@ -10,7 +10,7 @@ further_reading:
 
 TODO - add related link to dashboard widgets
 
-You can trigger a workflow manually, on a schedule, or using a variety of automated methods such as a Datadog Monitor, or a webhook. Triggering a workflow using automation requires a unique service account. For more information on setting up a service account for your workflows, see **TODO: link for this**.
+You can trigger a workflow manually, on a schedule, or using a variety of automated methods such as a Datadog Monitor, or a webhook. Triggering a workflow using automation requires a unique service account. For more information on setting up a service account for your workflows, see [Set up workflows][1].
 
 ## Manually trigger a workflow
 
@@ -29,9 +29,12 @@ To connect your workflow to a Dashboard:
 1. Under **Select the workflow**, find your workflow in the dropdown menu.
 1. Enter a title for the widget and click **Save**
 
-To run your workflow, click **Run Workflow** on your dashboard widget.
-
 {{< img src="workflows/trigger-from-dashboard.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
+
+To run the workflow: 
+1. Click **Run Workflow** on your dashboard widget.
+1. Under **Execution parameters**, enter any required trigger variables for your workflow.
+1. Click **Run** to run the workflow.
 
 ## Trigger a workflow from a Monitor
 
@@ -47,14 +50,37 @@ To trigger a workflow from a Monitor:
 
 {{< img src="workflows/monitor-trigger.png" alt="Add a monitor trigger to the message section of a Monitor" >}}
 
-Each time your monitor's threshold is hit, it triggers a workflow run.
+Each time your monitor's threshold is hit, the monitor triggers a workflow run.
 
 ## Trigger a workflow from a webhook
 
-## Scheduling a workflow trigger
+
+
+## Trigger a workflow from a Security Signal Notification Rule
+
+You can set up a workflow to trigger every time a Security Signal Notification Rule fires. 
+
+To trigger a workflow from a Notification Rule:
+1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
+1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
+1. Save your Workflow.
+1. From the [Setup & Configuration][2] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
+1. In the **Recipient** section, add the full workflow mention name:
+   - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
+   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
+1. Click **Save and Activate**.
+
+{{< img src="workflows/notification-rule-trigger.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
+
+Each time the Notification Rule fires, it triggers a workflow run.
+
+## Schedule a workflow trigger
 
 To schedule a workflow run:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **Schedule**.
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
+
+[1]: workflows/setup/
+[2]: app.datadoghq.com/security/configuration/notification-rules
