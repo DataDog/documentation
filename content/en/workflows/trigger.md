@@ -52,10 +52,6 @@ To trigger a workflow from a Monitor:
 
 Each time your monitor's threshold is hit, the monitor triggers a workflow run.
 
-## Trigger a workflow from a webhook
-
-
-
 ## Trigger a workflow from a Security Signal Notification Rule
 
 You can set up a workflow to trigger every time a Security Signal Notification Rule fires. 
