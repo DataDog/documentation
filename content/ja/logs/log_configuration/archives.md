@@ -81,10 +81,12 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 
 - バケットは一般ユーザーが読み取り可能になるよう設定してください。
 - まれに最後のデータを書き換える必要があるため、[オブジェクトロック][3]を設定しないでください (通常はタイムアウト)。
+- 地域間データ転送料とクラウドストレージコストへの影響については、[AWS Pricing][4] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
+[4]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -418,7 +420,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 }
 ```
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< whatsnext desc="次に、Datadog からアーカイブされたログコンテンツにアクセスする方法を説明します。" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>アーカイブからリハイドレート</u>: ログイベントをアーカイブから取得し、Datadog の Log Explorer に戻します。{{< /nextlink >}}
