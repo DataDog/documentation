@@ -46,18 +46,17 @@ Screen sharing is deactivated by default when you join a CoScreen. CoScreen shar
 
  - **Network Security**
 
-	CoScreen uses a P2P (peer-to-peer) connection whenever you and a second participant can connect directly (e.g. when no corporate firewalls or proxies are between the two of you). That way none of your audio, video, window and control input feeds touch our servers and they are additionally end-to-end encrypted using DTLS-SRTP.
+	CoScreen uses a P2P (peer-to-peer) connection whenever you and another participant can connect directly (for example, when no corporate firewalls or proxies are between the two of you). None of your audio, video, window, or control input feeds touch CoScreen's servers. Connections are end-to-end encrypted using DTLS-SRTP.
 
  - **Video Infrastructure**
 
-   Otherwise, up to a dozen participants can collaborate using an enterprise-grade, HIPAA-compatible video infrastructure with hundreds of servers around the globe that run the mature open-source framework Jitsi (more on https://jitsi.org). All video data is encrypted using DTLS-SRTP during transmission and in addition, we’re planning to support end-to-end encryption also for this scenario soon.
+   Participants collaborate using an enterprise-grade, HIPAA-compatible video infrastructure with hundreds of servers that run the Jitsi framework. All video data is encrypted using DTLS-SRTP during transmission.
+
 
  - **Data Storage**
-   CoScreen does neither record nor store any shared information (e.g. shared windows, audio, video or remote control input).
+   CoScreen does not recore or store any shared information (e.g. shared windows, audio, video or remote control input).
 
-CoScreen only captures usage statistics to make sure the server infrastructure and client capabilities are optimized for how users use CoScreen (e.g. number of active channels/users).
-
-CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][3] for more details.
+   CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][3] for more details.
 
 For all the details on how CoScreen enables secure collaboration, read the [CoScreen Security Whitepaper][4].
 
