@@ -78,7 +78,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
    end
    ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 
@@ -111,13 +111,13 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
      c.appsec.instrument :sinatra
    end
    ```
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Rack" %}}
    `config.ru` ファイルに以下を追加して、APM トレーサーを有効にします。
 
 {{% /tab %}}
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -132,8 +132,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
-{{% /tab %}}
-{{% tab "Dockerfile" %}}
+   {{< /tabs >}}
 
 コンテナの Dockerfile に以下の環境変数の値を追加します。
 
@@ -181,13 +180,13 @@ spec:
 env DD_APPSEC_ENABLED=true rails server
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
 {{% appsec-getstarted-2-canary %}}
 
-{{< img src="/security_platform/application_security/application-security-signal.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 ## {{< partial name="whats-next/whats-next.html" >}}
 
