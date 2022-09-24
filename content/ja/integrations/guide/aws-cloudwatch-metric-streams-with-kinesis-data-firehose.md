@@ -46,7 +46,7 @@ AWS アカウントやリージョン、あるいは特定のネームスペー�
 
 メトリクスをストリーミングするための Datadog からの追加料金はありません。
 
-AWS は、CloudWatch メトリクスストリームのメトリクスアップデートの数と Kinesis Data Firehose に送信されたデータボリュームに基づいて課金します。ストリーミングしているメトリクスのサブセットの CloudWatch コストが増加する可能性があるため、Datadog は、より低いレイテンシーが最も必要な AWS サービス、リージョン、アカウントにメトリクスストリームを使用することを優先することをお勧めします。詳細については、[Amazon CloudWatch の価格設定][3]を参照してください。
+AWS は、CloudWatch メトリクスストリームのメトリクスアップデートの数と Kinesis Data Firehose に送信されたデータボリュームに基づいて課金します。ストリーミングしているメトリクスのサブセットの CloudWatch コストが増加する可能性があるため、Datadog は、より低いレイテンシーが最も必要な AWS サービス、リージョン、アカウントにメトリクスストリームを使用することを優先することをお勧めします。詳細については、[Amazon CloudWatch の価格設定][1]を参照してください。
 
 ストリーム内の EC2 または Lambda メトリクスは、請求対象のホストと Lambda 呼び出しの数を増やす可能性があります (EC2 の場合、これらのホストと関数が AWS インテグレーションまたは Datadog Agent でまだ監視されていない場合)。
 
@@ -56,7 +56,7 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 
 1. [Metric Streaming と API ポーリングの比較](#streaming-vs-polling)のセクションをよく読んで、Metric Streaming を有効にする前に違いを理解してください。
 
-2. まだ接続していない場合は、AWS アカウントを Datadog に接続します。詳細については、[CloudFormation のセットアップ手順][4]を参照してください。
+2. まだ接続していない場合は、AWS アカウントを Datadog に接続します。詳細については、[CloudFormation のセットアップ手順][2]を参照してください。
 
 ### インストール
 
@@ -115,22 +115,22 @@ AWS コンソールを使用してメトリクスストリームを設定する�
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/firehose.png" alt="Firehose" responsive="true" style="width:60%;">}}
 5. Kinesis Data Firehose にレコードを配置するための新しいサービスロールを作成します。
 6. **出力形式を OpenTelemetry 0.7 に変更します**。
-7. **Add additional statistics** では、Datadog に送信する AWS のパーセンタイルメトリクスを含みます。Datadog がポーリングでサポートするパーセンタイルメトリクスの一覧は、[CloudFormation テンプレート][4]を参照してください。
+7. **Add additional statistics** では、Datadog に送信する AWS のパーセンタイルメトリクスを含みます。Datadog がポーリングでサポートするパーセンタイルメトリクスの一覧は、[CloudFormation テンプレート][3]を参照してください。
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="パーセンタイル" responsive="true" style="width:60%;">}}
 8. メトリクスストリームに名前を付けます。
 9. **Create metric stream** をクリックします。
 
 ### 結果
 
-Metric Stream リソースが正常に作成されたことを確認したら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][3]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** で有効化したリージョンが有効になっていることを確認します。
+Metric Stream リソースが正常に作成されたことを確認したら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][4]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** で有効化したリージョンが有効になっていることを確認します。
 
 {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/active-region.png" alt="AWS インテグレーションページの Metric Collection タブの CloudWatch Metric Streams セクションで、1 つのリージョンがアクティブになっている状態" responsive="true" style="width:60%;">}}
 **注**: CloudWatch API のポーリングをすでに有効にしている場合、ストリーミングへの移行により、ストリーミングしている特定のメトリクスが Datadog で二重にカウントされる短い期間 (最大 5 分) が発生する可能性があります。これは、Datadog のクローラーが実行されて CloudWatch メトリクスを送信するタイミングと、Datadog がこれらのメトリクスのストリーミングを開始したことを認識してクローラーをオフにするタイミングが異なるためです。
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
-[3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
+[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -147,17 +147,15 @@ Metric Stream リソースが正常に作成されたことを確認したら、
 3. Firehose にリンクされた失敗メッセージのバックアップ S3 バケットを削除します。
 4. ストリームに関連付けられた IAM ロールと、ストリームのセットアップ中に作成された他のすべてのリソースを削除します。
 
-リソースが削除されたら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][6]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** で無効化したリージョンが表示されないことを確認します。
+リソースが削除されたら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][3]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** で無効化したリージョンが表示されないことを確認します。
 
 ## トラブルシューティング
-Metric Streams のセットアップまたは関連リソースに関する問題の解決には、[AWS のトラブルシューティング][5]をご覧ください。
+Metric Streams のセットアップまたは関連リソースに関する問題の解決には、[AWS のトラブルシューティング][4]をご覧ください。
 
 ## {{< partial name="whats-next/whats-next.html" >}}
  {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Percentiles
-[2]: /ja/metrics/distributions/#overview
-[3]: https://aws.amazon.com/cloudwatch/pricing/
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
-[5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
-[6]: https://app.datadoghq.com/integrations/amazon-web-services
+[1]: https://aws.amazon.com/cloudwatch/pricing/
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
