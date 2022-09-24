@@ -19,7 +19,7 @@ title: Ruby カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 <div class="alert alert-info">
-自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/ruby/">Ruby セットアップ手順</a>からご覧ください。
+自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、 <a href="https://docs.datadoghq.com/tracing/setup/python/">Pythonセットアップ手順</a>からご覧ください。
 </div>
 
 このページでは、Datadog APM を使用して可観測性を追加およびカスタマイズする一般的な使用例について説明します。
@@ -57,7 +57,7 @@ end
 ```
 
 [1]: /ja/tracing/glossary/#spans
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Manually Instrumented Spans" %}}
 
@@ -123,20 +123,7 @@ example_method()
 
 デフォルトの動作: `on_error`
 
-```ruby
-require 'ddtrace'
-require 'timeout'
-
-def example_method
-  puts 'some work'
-  sleep(1)
-  raise StandardError, "This is an exception"
-end
-
-Datadog::Tracing.trace('example.trace') do |span|
-  example_method()
-end
-```
+{{% tab "ルートスパン" %}}
 
 カスタムの動作: `on_error`
 
