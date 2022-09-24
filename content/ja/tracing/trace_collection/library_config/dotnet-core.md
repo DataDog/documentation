@@ -18,10 +18,10 @@ further_reading:
   tag: ブログ
   text: Datadog APM と分散型トレーシングを使用した .NET のモニタリング
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
-  tag: ブログ
+  tag: GitHub
   text: コンテナ化された ASP.NET コアアプリケーションを監視する
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
-  tag: ブログ
+  tag: GitHub
   text: AWS Fargate でコンテナ化された ASP.NET コアアプリケーションを監視する
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: GitHub
@@ -46,11 +46,11 @@ type: multi-code-lang
 
 {{% tab "環境変数" %}}
 
-環境変数を使用してトレーサーを構成するには、インスツルメントされたアプリケーションを起動する前に変数を設定します。さまざまな環境で環境変数を設定する方法については、[プロセス環境変数の構成][1]を参照してください。
+アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer.Configure()` を呼び出す前に、この `TracerSettings` インスタンスにプロパティを設定します。例:
 
 [1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/#configuring-process-environment-variables
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "コード" %}}
 
@@ -77,7 +77,7 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 Tracer.Configure(settings);
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "web.config" %}}
 
@@ -94,7 +94,7 @@ Tracer.Configure(settings);
 </configuration>
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "JSON ファイル" %}}
 
@@ -109,7 +109,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 }
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
