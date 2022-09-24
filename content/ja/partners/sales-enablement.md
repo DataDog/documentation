@@ -8,7 +8,7 @@ Datadog パートナーネットワークでは、パートナー向けに多く
 
 ## Datadog の基礎知識
 
-まず、<a href="https://partners.datadoghq.com/" target="_blank">パートナーポータル</a>にアクセスします。ログインして、**Training** をクリックします。Sales Certification の下にある、**Get started today** をクリックします。
+まず、[パートナーポータル][4]にアクセスします。ログインして、**Training** をクリックします。Sales Certification の下にある、**Get started today** をクリックします。
 
 {{<img src="partners/portal_sales_go.png" alt="Partner Portal Sales Certification" style="max-width:734px">}}
 
@@ -79,3 +79,4 @@ Datadog 販売認定を取得し、Datadog の基礎知識を身につけたら�
 [1]: https://learn.datadoghq.com/bundles/dd-fundamentals
 [2]: /ja/account_management/billing/pricing/
 [3]: https://www.datadoghq.com/pricing/
+[4]: https://partners.datadoghq.com/
