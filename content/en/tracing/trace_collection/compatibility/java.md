@@ -19,7 +19,28 @@ further_reading:
 
 The Java Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
-Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java.
+### Supported JVM runtimes
+
+The Java Tracer supports automatic instrumentation of the following Oracle JDK and OpenJDK JVM runtimes.
+
+| JVM versions | Operating Systems                                                 | Support level         | Tracer version |
+| -------------| ----------------------------------------------------------------- | --------------------- | -------------- |
+| 7 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64) | [GA](#support-ga)     | latest         |
+| 7 to 17      | Linux (arm64)<br>Mac (arm64)                                      | [Beta](#support-beta) | latest         |
+
+Datadog does not officially support any early-access versions of Java.
+
+### Levels of support
+
+| **Level**                                              | **Support provided**                                                                                                                       |
+|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][6]                                                                    |
+| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis. |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                 |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                           |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                               |
+
+## Integrations
 
 Beta integrations are disabled by default but can be enabled individually:
 
@@ -222,3 +243,4 @@ Running the Java tracer in Bitbucket is not supported.
 [3]: http://bytebuddy.net
 [4]: /tracing/manual_instrumentation/java
 [5]: https://github.com/DataDog/documentation#outside-contributors
+[6]: https://www.datadoghq.com/support/
