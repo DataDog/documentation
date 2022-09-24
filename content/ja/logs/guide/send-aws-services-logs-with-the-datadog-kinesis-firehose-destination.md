@@ -40,12 +40,12 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
 | ------------------------------- | ---------------|
 | `APIKEY` を `AccessKey` ボックスに貼り付けます ([Datadog API 設定ページ][3]から API キーを取得できます)。         | CloudWatch     |
 | API ゲートウェイの実行ログ      | CloudWatch     |
-| アプリケーション ELB アクセスログ     | S3             |
-| クラシック ELB アクセスログ         | S3             |
-| CloudFront のアクセスログ          | S3             |
+| アプリケーション ELB アクセスログ     | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
+| クラシック ELB アクセスログ         | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
+| CloudFront のアクセスログ          | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
 | Lambda ログ                     | CloudWatch     |
-| Redshift ログ                   | S3             |
-| S3 アクセスログ                  | S3             |
+| Redshift ログ                   | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
+| S3 アクセスログ                  | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
 
 1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
 2. [Datadog と AWS のインテグレーション][3]に使用する IAM ロールのポリシーに、次のアクセス許可があることを確認します。この許可の使用方法については、以下に説明されています。
@@ -74,7 +74,7 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
     | `cloudfront:GetDistributionConfig`                          | CloudFront アクセスログを含む S3 バケットの名前を取得します。             |
     | `cloudfront:ListDistributions`                              | すべての CloudFront ディストリビューションを一覧表示します。|
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | すべてのロードバランサーを一覧表示します。|
-    | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | ELB アクセスログを含む S3 バケットの名前を取得します。|
+   [ロググループインデックスページ][1] の `Subscriptions` をチェックして、新しい Kinesis ストリームがロググループをサブスクライブしているかを確認します。
     | `lambda:List*`                                              | すべての Lambda 関数を一覧表示します。 |
     | `lambda:GetPolicy`                                          | トリガーが解除された際に Lambda ポリシーを取得します。|
     | `redshift:DescribeClusters`                                 | すべての Redshift クラスターを一覧表示します。|
