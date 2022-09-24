@@ -10,9 +10,9 @@ further_reading:
 - link: 'https://vector.dev/docs/reference/configuration/sources/datadog_agent/ '
   tag: ドキュメント
   text: Vector のソースとなる Datadog Agent
-- link: https://docs.datadoghq.com/agent/vector_aggregation/
+- link: /integrations/observability_pipelines/integrate_vector_with_datadog/
   tag: ドキュメント
-  text: Vector アグリゲーターにデータを送信するための Datadog Agent の構成
+  text: Vector にデータを送信するための Datadog Agent の構成
 kind: ガイド
 title: カスタムメトリクスガバナンス - 特定のタグがないメトリクスを削除する
 ---
@@ -91,7 +91,7 @@ transforms:
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
