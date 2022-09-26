@@ -13,7 +13,7 @@ Read the [user management][2] documentation to add, edit, and disable users.
 
 #### Service accounts
 
-[Service accounts][3] are non-human users that can have roles and own application keys. You can use service accounts to access Datadog APIs without having your application or script be associated with a particular person. Service account application keys are one-time-view only, and are not retrievable after they've been created.
+[Service accounts][3] are non-interactive accounts that can be used to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once, by the individual who created the key. You can use service accounts to access Datadog APIs without having your application or script be associated with a particular person.
 
 ### Groups
 

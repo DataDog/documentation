@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Service accounts are non-interactive accounts that can be used to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once by the individual who created the key.
+Service accounts are non-interactive accounts that can be used to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once, by the individual who created the key.
 
 Suppose an employee at your company sets up an automated script to send requests to the Datadog API, using their personal application key. When that employee leaves the company, you deactivate their Datadog account, and their application key stops working. The automated script also stops working, until someone updates it with a valid application key. Using a service account application key instead of a personal application key for automated requests to the Datadog API avoids this problem.
 
