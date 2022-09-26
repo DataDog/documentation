@@ -864,7 +864,7 @@ const schemaTable = (tableType, data) => {
   } else if(data.additionalProperties) {
     initialData = {"&lt;any-key&gt;": data.additionalProperties};
   } else if(data.oneOf && data.oneOf.length > 0) {
-    initialData = data.oneOf[0].properties;
+    initialData = data;
   } else {
     initialData = data.properties;
   }
