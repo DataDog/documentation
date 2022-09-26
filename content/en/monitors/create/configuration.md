@@ -69,9 +69,8 @@ A rolling time window has a fixed size and moves its starting point over time. M
 **Cumulative time windows**
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
 
-- `Current hour`: Time window of maximal one hour starting at a configurable time (minute). For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
-- `Current day`: Time window of maximal 24 hours starting at a configurable time (hour and minute). For instance, monitor a [daily log index quota](https://docs.datadoghq.com/logs/log_configuration/indexes/
-#set-daily-quota) by using the `current day` time window and letting it start at 2:00pm UTC.
+- `Current hour`: Time window of maximal one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
+- `Current day`: Time window of maximal 24 hours starting at a configurable hour and minute of a day. For instance, monitor a [daily log index quota](https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota) by using the `current day` time window and letting it start at 2:00pm UTC.
 - `Current month`: Looks back at the current month starting on the first of the month at midnight UTC.
 
 
