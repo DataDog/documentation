@@ -182,7 +182,9 @@ If a client is using the Postgres [extended query protocol][9] or prepared state
 | Node     | [node-postgres][17]       | Uses the extended query protocol and cannot be disabled. To enable the Datadog Agent to collect execution plans, use [pg-format][18] to format SQL Queries before passing them to [node-postgres][17].                                                                                                                                                                                 |
 
 #### Query is in a database ignored by the Agent instance config
-The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Prior to Agent 7.41.0, the `postgres` database is also ignored. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][19].
+The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][19].
+
+_Prior to Agent 7.41.0, the `postgres` database also ignored by default._
 
 #### Query cannot be explained
 Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
