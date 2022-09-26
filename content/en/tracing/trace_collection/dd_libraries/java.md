@@ -114,7 +114,7 @@ After the agent is installed, to begin tracing your applications:
    
    **Note:** To download a specific major version, use the `https://dtdg.co/java-tracer-vX` link instead, where `vX` is the desired vesion
    (`https://dtdg.co/java-tracer-v0` for latest version 0 for example).
-   Alternatively, visit Datadog's [Maven repository][3] for any specific version.
+   Alternatively, see Datadog's [Maven repository][3] for any specific version.
 
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
