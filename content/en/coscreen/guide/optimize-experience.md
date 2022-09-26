@@ -28,7 +28,7 @@ You may encounter a problem where the UI is stuck in the greyed out joining phas
 
 To resolve this issue, right-click on the CoScreen application icon and go to _Options_. Ensure that _Assign To_ is set to _None_. Then, leave and rejoin the CoScreen.
 
-<!-- {{< img src="coscreen/assign-to-none.png" alt="Facet creation for custom tag" style="width:60%;" >}} -->
+{{< img src="coscreen/assign-to-none.png" alt="Facet creation for custom tag" style="width:60%;" >}}
 
 ### Troubleshooting on Windows 10
 
@@ -42,4 +42,4 @@ If the CoScreen UI appears to be smaller than that of other apps on your Windows
 
 Some devices use a Realtek voice recognition feature that may cause your voice to sound robotic when using CoScreen, or another video conferencing application. If you are experiencing issues with the audibility of your voice, open the Realtek Audio Console and untick the option **Voice Recognition** to see if the situation improves.
 
-<!-- {{< img src="coscreen/windows_screenshot.png" alt="Facet creation for custom tag" style="width:60%;" >}} -->
+{{< img src="coscreen/windows_screenshot.png" alt="Facet creation for custom tag" style="width:60%;" >}}
