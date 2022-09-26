@@ -5417,6 +5417,18 @@ api:
         - EditSecurityMonitoringSignalIncidents
       unstable: []
       order: 0
+  - name: Get a signal's details
+    url: '#get-a-signals-details'
+    identifier: security-monitoring-get-a-signals-details
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringSignal
+      unstable: []
+      order: 0
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
     identifier: security-monitoring-get-a-list-of-security-signals

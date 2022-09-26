@@ -576,6 +576,10 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
+  "GetSecurityMonitoringSignal": {
+    "description": "Get a signal's details.",
+    "summary": "Get a signal's details"
+  },
   "EditSecurityMonitoringSignalAssignee": {
     "description": "Modify the triage assignee of a security signal.",
     "summary": "Modify the triage assignee of a security signal",
