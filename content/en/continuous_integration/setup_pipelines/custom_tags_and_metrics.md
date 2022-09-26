@@ -26,6 +26,7 @@ Custom tags and metrics work with the following CI providers:
 - CircleCI
 - GitLab (SaaS or self-hosted >= 14.1)
 - GitHub.com (SaaS) **Note:** For GitHub, tags and metrics can only be added to the pipeline span.
+- Jenkins **Note:** For Jenkins, you need to follow [these instructions][5].
 
 ## Installing the Datadog CI CLI
 
@@ -134,3 +135,4 @@ and then click the **create measure** option.
 [2]: https://github.com/datadog/datadog-ci#standalone-binary-beta
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: /continuous_integration/setup_pipelines/jenkins/?tab=usingui#setting-custom-tags-for-your-pipelines
