@@ -576,6 +576,10 @@
     "request_description": "",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
   },
+  "GetSecurityMonitoringSignal": {
+    "description": "シグナルの詳細を取得します。",
+    "summary": "シグナルの詳細を取得する"
+  },
   "EditSecurityMonitoringSignalAssignee": {
     "description": "セキュリティシグナルのトリアージアサインメントを変更します。",
     "summary": "セキュリティシグナルのトリアージアサインメントを変更します",
@@ -683,12 +687,16 @@
     "summary": "アプリケーションセキュリティの時間単位使用量の取得"
   },
   "GetCostByOrg": {
-    "description": "マルチオーガニゼーションのアカウントでコストを取得します。ある月の組織別コストデータは、翌月 16 日までに利用可能になります。",
+    "description": "複数組織のアカウントにまたがるコストを取得します。\nある月の組織別コストデータは、翌月 16 日までに利用可能になります。\n**注:** このエンドポイントは非推奨となりました。代わりに新しいエンドポイント [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account) を使用してください。",
     "summary": "マルチオーガニゼーションのアカウントのコストを取得"
   },
   "GetEstimatedCostByOrg": {
-    "description": "複数組織および単一ルート組織のアカウントにまたがる推定コストを取得します。\n推定コストデータは、当月と前月分のみ利用可能です。それ以前の過去のコストにアクセスするには、/cost_by_org エンドポイントを使用します。",
+    "description": "複数組織および単一ルート組織のアカウントにまたがる推定コストを取得します。\n推定コストデータは、当月と前月分のみ利用可能です。\nそれ以前の過去のコストにアクセスするには、`/historical_cost` エンドポイントを使用します。",
     "summary": "アカウントの推定コストを取得"
+  },
+  "GetHistoricalCostByOrg": {
+    "description": "複数組織および単一ルート組織のアカウントにまたがる過去のコストを取得します。\nある月のコストデータは、翌月 16 日までに利用可能になります。",
+    "summary": "アカウントの過去のコストを取得"
   },
   "GetHourlyUsage": {
     "description": "製品ファミリーの時間単位使用量の取得",
