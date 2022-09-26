@@ -288,13 +288,14 @@ For Gateway deployments:
 ### OpenTelemetry Operator for Kubernetes
 
 To use the OpenTelemetry Operator:
-1. See the [official documentation for deploying the OpenTelemetry Operator](https://github.com/open-telemetry/opentelemetry-operator#readme). As detailed there, you need to deploy the certificate manager in addition to the Operator.
+
+1. Follow the [official documentation for deploying the OpenTelemetry Operator][24]. As described there, deploy the certificate manager in addition to the Operator.
 
 2. Configure the Operator using one of the OpenTelemetry Collector standard configurations:
-   * [Daemonset Deployment](#daemonset-deployment)
-   * [Gateway Deployment](#gateway-collector-service)
+   * [Daemonset deployment](#daemonset-deployment) - Use the daemonset deployment if you want to ensure you receive host metrics. 
+   * [Gateway deployment](#gateway-collector-service)
 
-For example:
+   For example:
 
    ```yaml
    apiVersion: opentelemetry.io/v1alpha1
@@ -332,13 +333,11 @@ For example:
              exporters: [datadog]
    ```
 
-**Note:** You should use the daemonset deployment with the OpenTelemetry Operator otherwise host metrics may not work. 
-
 ### Application Configuration
 
 To configure your application container:
 
- 1. Ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet in both [agent](#daemonset-deployment) and [gateway](#gateway-collector-service) deployments, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][24]:
+ 1. Ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet in both [agent](#daemonset-deployment) and [gateway](#gateway-collector-service) deployments, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][25]:
 
     ```yaml
     # ...
@@ -360,11 +359,11 @@ To configure your application container:
 
 To use the OpenTelemetry Collector alongside the Datadog Agent:
 
-1. Set up an additional DaemonSet to ensure that the Datadog Agent runs on each host alongside the previously set up [OpenTelmetry Collector DaemonSet](#daemonset-deployment). For information, read [the docs about deploying the Datadog Agent in Kubernetes][25].
+1. Set up an additional DaemonSet to ensure that the Datadog Agent runs on each host alongside the previously set up [OpenTelmetry Collector DaemonSet](#daemonset-deployment). For information, read [the docs about deploying the Datadog Agent in Kubernetes][26].
 
-2. Enable [OTLP ingestion in the Datadog Agent][26].
+2. Enable [OTLP ingestion in the Datadog Agent][27].
 
-3. Now that the Datadog Agent is ready to receive OTLP traces and metrics, change your [OpenTelemetry Collector Daemonset](#daemonset-deployment) to use the [OTLP exporter][19] instead of the Datadog Exporter. To do so, add it to [your config map][27]:
+3. Now that the Datadog Agent is ready to receive OTLP traces and metrics, change your [OpenTelemetry Collector Daemonset](#daemonset-deployment) to use the [OTLP exporter][19] instead of the Datadog Exporter. To do so, add it to [your config map][28]:
 
    ```yaml
    # ...
@@ -374,7 +373,7 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
    # ...
    ```
 
-4. Make sure that the `HOST_IP` environment variable is provided [in the DaemonSet][28]:
+4. Make sure that the `HOST_IP` environment variable is provided [in the DaemonSet][29]:
 
    ```yaml
    # ...
@@ -433,8 +432,9 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
 [21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L30-L39
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L27
 [23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/e79d917/processor/k8sattributesprocessor/doc.go#L196-L220
-[24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L24-L32
-[25]: https://docs.datadoghq.com/containers/kubernetes/
-[26]: https://docs.datadoghq.com/tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=kubernetesdaemonset#enabling-otlp-ingestion-on-the-datadog-agent
-[27]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L15
-[28]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33
+[24]: https://github.com/open-telemetry/opentelemetry-operator#readme
+[25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L24-L32
+[26]: https://docs.datadoghq.com/containers/kubernetes/
+[27]: https://docs.datadoghq.com/tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=kubernetesdaemonset#enabling-otlp-ingestion-on-the-datadog-agent
+[28]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L15
+[29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33
