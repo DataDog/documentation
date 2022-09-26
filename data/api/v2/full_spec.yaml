@@ -14028,6 +14028,33 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/security_monitoring/signals/{signal_id}:
+    get:
+      description: Get a signal's details.
+      operationId: GetSecurityMonitoringSignal
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignal'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Get a signal's details
+      tags:
+      - Security Monitoring
+      x-undo:
+        type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
     patch:
       description: Modify the triage assignee of a security signal.

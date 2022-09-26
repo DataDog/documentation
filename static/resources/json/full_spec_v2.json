@@ -83675,6 +83675,168 @@
         }
       }
     },
+    "/api/v2/security_monitoring/signals/{signal_id}": {
+      "get": {
+        "description": "Get a signal's details.",
+        "operationId": "GetSecurityMonitoringSignal",
+        "parameters": [
+          {
+            "description": "The ID of the signal.",
+            "in": "path",
+            "name": "signal_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Object description of a security signal.",
+                  "properties": {
+                    "attributes": {
+                      "description": "The object containing all signal attributes and their\nassociated values.",
+                      "properties": {
+                        "attributes": {
+                          "additionalProperties": {},
+                          "description": "A JSON object of attributes in the security signal.",
+                          "example": {
+                            "workflow": {
+                              "first_seen": "2020-06-23T14:46:01.000Z",
+                              "last_seen": "2020-06-23T14:46:49.000Z",
+                              "rule": {
+                                "id": "0f5-e0c-805",
+                                "name": "Brute Force Attack Grouped By User ",
+                                "version": 12
+                              }
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "message": {
+                          "description": "The message in the security signal defined by the rule that generated the signal.",
+                          "example": "Detect Account Take Over (ATO) through brute force attempts",
+                          "type": "string"
+                        },
+                        "tags": {
+                          "description": "An array of tags associated with the security signal.",
+                          "example": [
+                            "security:attack",
+                            "technique:T1110-brute-force"
+                          ],
+                          "items": {
+                            "description": "The tag associated with the security signal.",
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "timestamp": {
+                          "description": "The timestamp of the security signal.",
+                          "example": "2019-01-02T09:42:36.320Z",
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The unique ID of the security signal.",
+                      "example": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "signal",
+                      "description": "The type of event.",
+                      "enum": [
+                        "signal"
+                      ],
+                      "example": "signal",
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "SIGNAL"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "security_monitoring_rules_read"
+            ]
+          }
+        ],
+        "summary": "Get a signal's details",
+        "tags": [
+          "Security Monitoring"
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
+      }
+    },
     "/api/v2/security_monitoring/signals/{signal_id}/assignee": {
       "patch": {
         "description": "Modify the triage assignee of a security signal.",

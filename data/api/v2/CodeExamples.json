@@ -840,6 +840,13 @@
       "description": "Get a security filter returns \"OK\" response"
     }
   ],
+  "GetSecurityMonitoringSignal": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a signal's details returns \"OK\" response"
+    }
+  ],
   "ListSecurityFilters": [
     {
       "group": "security_monitoring",
