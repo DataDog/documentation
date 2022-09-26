@@ -22,7 +22,7 @@ With the ingestion control page, you have full visibility and complete control o
 
 If you decide to reduce the ingestion volume for certain services, the **request, error, and latency [metrics][3]** (known as RED metrics, for Requests, Errors, and Duration) remain 100% accurate, as they are being calculated based on 100% of the application's traffic, regardless of any sampling configuration. These metrics are included when purchasing Datadog APM. In order to make sure you have full visibility into your application's traffic, you can use these metrics to spot potential errors on a service or a resource, by creating dashboards, monitors, and SLOs.
 
-**Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up some sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data.
+**Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data.
 
 Trace data is very repetitive, which means trace samples to investigate any issues are still available with ingestion sampling. For high throughput services, there's usually no need for you to collect every single request - an important enough problem should always show symptoms in multiple traces. Ingestion controls helps you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
@@ -76,7 +76,7 @@ The **Configuration** column tells you whether or not your services are configur
 
 To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][6].
 
-**Note**: this configuration option only takes effect when using **Datadog tracing libraries**. If data is collected with the OTLP Ingest in the Agent from applications instrumented with OpenTelemetry, modifying `DD_APM_MAX_TPS` will not change sampling rates applied in tracing libraries.
+**Note**: This configuration option only goes into effect when using **Datadog tracing libraries**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_MAX_TPS` does not change sampling rates that are applied in tracing libraries.
 
 Additionally, to reduce the volume of [error][8] and [rare][9] traces:
 - Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.
@@ -94,14 +94,14 @@ Click the **Manage Ingestion Rate** button to configure a sampling rate for the 
 
 **Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][10].
 
-### Trace Sampling with OpenTelemetry
+### Trace sampling with OpenTelemetry
 
-If your applications and services are instrumented with OpenTelemetry libraries and you're using the OpenTelemetry collector, you are able to use OpenTelemetry sampling capabilities:
+If your applications and services are instrumented with OpenTelemetry libraries and you're using the OpenTelemetry collector, you can use the following OpenTelemetry sampling capabilities:
 
-- [TraceIdRatioBased][11] and [ParentBased][12] are 2 built-in samplers that allow you to implement deterministic head-based sampling based on the trace_id at the **sdk** level.
-- The [Tail Sampling Processor][13] and [Probabilistic Sampling Processor][14] allow you to sample traces based on a set of rules at the **collector** level
+- [TraceIdRatioBased][11] and [ParentBased][12] are 2 built-in samplers that allow you to implement deterministic head-based sampling based on the trace_id at the **SDK** level.
+- The [Tail Sampling Processor][13] and [Probabilistic Sampling Processor][14] allow you to sample traces based on a set of rules at the **collector** level.
 
-Using either of the two options will result in sampled [APM Metrics](#effects-of-reducing-trace-ingestion-volume).
+Using either of the two options results in sampled [APM Metrics](#effects-of-reducing-trace-ingestion-volume).
 
 ## Ingestion reasons glossary
 
