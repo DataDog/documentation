@@ -920,6 +920,13 @@
       "description": "Get cost across multi-org account returns \"OK\" response"
     }
   ],
+  "GetHistoricalCostByOrg": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get historical cost across your account returns \"OK\" response"
+    }
+  ],
   "GetHourlyUsage": [
     {
       "group": "usage_metering",

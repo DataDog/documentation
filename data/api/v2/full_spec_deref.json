@@ -96776,7 +96776,8 @@
     },
     "/api/v2/usage/cost_by_org": {
       "get": {
-        "description": "Get cost across multi-org account. Cost by org data for a given month becomes available no later than the 16th of the following month.",
+        "deprecated": true,
+        "description": "Get cost across multi-org account.\nCost by org data for a given month becomes available no later than the 16th of the following month.\n**Note:** This endpoint has been deprecated. Please use the new endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\ninstead.",
         "operationId": "GetCostByOrg",
         "parameters": [
           {
@@ -96980,7 +96981,7 @@
         "tags": [
           "Usage Metering"
         ],
-        "x-menu-order": 5,
+        "x-menu-order": 45,
         "x-undo": {
           "type": "safe"
         }
@@ -96988,14 +96989,14 @@
     },
     "/api/v2/usage/estimated_cost": {
       "get": {
-        "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month. To access historical costs prior to this, use the /cost_by_org endpoint.",
+        "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month.\nTo access historical costs prior to this, use the `/historical_cost` endpoint.",
         "operationId": "GetEstimatedCostByOrg",
         "parameters": [
           {
-            "description": "String to specify whether cost is broken down at a parent-org level or at the sub-org level. Currently, only the 'sub-org' view is supported.",
+            "description": "String to specify whether cost is broken down at a parent-org level or at the sub-org level. Available views are `summary` and `sub-org`. Defaults to `summary`.",
             "in": "query",
             "name": "view",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -97224,8 +97225,228 @@
         "x-menu-order": 6,
         "x-undo": {
           "type": "safe"
+        }
+      }
+    },
+    "/api/v2/usage/historical_cost": {
+      "get": {
+        "description": "Get historical cost across multi-org and single root-org accounts.\nCost data for a given month becomes available no later than the 16th of the following month.",
+        "operationId": "GetHistoricalCostByOrg",
+        "parameters": [
+          {
+            "description": "String to specify whether cost is broken down at a parent-org level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults to `summary`.",
+            "in": "query",
+            "name": "view",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost beginning this month.",
+            "in": "query",
+            "name": "start_month",
+            "required": true,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]` for cost ending this month.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "Chargeback Summary response.",
+                  "properties": {
+                    "data": {
+                      "description": "Response containing Chargeback Summary.",
+                      "items": {
+                        "description": "Cost data.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Cost attributes data.",
+                            "properties": {
+                              "charges": {
+                                "description": "List of charges data reported for the requested month.",
+                                "items": {
+                                  "description": "Charges breakdown.",
+                                  "properties": {
+                                    "charge_type": {
+                                      "description": "The type of charge for a particular product.",
+                                      "example": "on_demand",
+                                      "type": "string"
+                                    },
+                                    "cost": {
+                                      "description": "The cost for a particular product and charge type during a given month.",
+                                      "format": "double",
+                                      "type": "number"
+                                    },
+                                    "product_name": {
+                                      "description": "The product for which cost is being reported.",
+                                      "example": "infra_host",
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "date": {
+                                "description": "The month requested.",
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "org_name": {
+                                "description": "The organization name.",
+                                "type": "string"
+                              },
+                              "public_id": {
+                                "description": "The organization public ID.",
+                                "type": "string"
+                              },
+                              "total_cost": {
+                                "description": "The total cost of products for the month.",
+                                "format": "double",
+                                "type": "number"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Unique ID of the response.",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "cost_by_org",
+                            "description": "Type of cost data.",
+                            "enum": [
+                              "cost_by_org"
+                            ],
+                            "example": "cost_by_org",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COST_BY_ORG"
+                            ]
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden - User is not authorized"
+          },
+          "429": {
+            "content": {
+              "application/json;datetime-format=rfc3339": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
         },
-        "x-unstable": "**Note**: This endpoint is in public beta.\nOnly the sub-org view is available currently, the summary view will be released at a later date."
+        "security": [
+          {
+            "apiKeyAuth": [],
+            "appKeyAuth": []
+          },
+          {
+            "AuthZ": [
+              "usage_read"
+            ]
+          }
+        ],
+        "summary": "Get historical cost across your account",
+        "tags": [
+          "Usage Metering"
+        ],
+        "x-menu-order": 5,
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/usage/hourly_usage": {

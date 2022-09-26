@@ -15160,8 +15160,17 @@ paths:
         type: safe
   /api/v2/usage/cost_by_org:
     get:
-      description: Get cost across multi-org account. Cost by org data for a given
-        month becomes available no later than the 16th of the following month.
+      deprecated: true
+      description: 'Get cost across multi-org account.
+
+        Cost by org data for a given month becomes available no later than the 16th
+        of the following month.
+
+        **Note:** This endpoint has been deprecated. Please use the new endpoint
+
+        [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)
+
+        instead.'
       operationId: GetCostByOrg
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -15213,7 +15222,7 @@ paths:
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 45
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -15221,14 +15230,16 @@ paths:
       description: 'Get estimated cost across multi-org and single root-org accounts.
 
         Estimated cost data is only available for the current month and previous month.
-        To access historical costs prior to this, use the /cost_by_org endpoint.'
+
+        To access historical costs prior to this, use the `/historical_cost` endpoint.'
       operationId: GetEstimatedCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
-          level or at the sub-org level. Currently, only the 'sub-org' view is supported.
+          level or at the sub-org level. Available views are `summary` and `sub-org`.
+          Defaults to `summary`.
         in: query
         name: view
-        required: true
+        required: false
         schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -15303,10 +15314,74 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/usage/historical_cost:
+    get:
+      description: 'Get historical cost across multi-org and single root-org accounts.
 
-        Only the sub-org view is available currently, the summary view will be released
-        at a later date.'
+        Cost data for a given month becomes available no later than the 16th of the
+        following month.'
+      operationId: GetHistoricalCostByOrg
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
+          to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning this month.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/CostByOrgResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get historical cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-undo:
+        type: safe
   /api/v2/usage/hourly_usage:
     get:
       description: Get hourly usage by product family
