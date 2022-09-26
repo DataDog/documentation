@@ -1,0 +1,44 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Create_a_new_dashboard_with_logs_query_table_widget_and_storage_parameter with query table widget and storage parameter",
+  "widgets": [
+    {
+      "definition": {
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "logs",
+                "name": "query1",
+                "search": {
+                  "query": ""
+                },
+                "indexes": [
+                  "*"
+                ],
+                "compute": {
+                  "aggregation": "count"
+                },
+                "group_by": [],
+                "storage": "online_archives"
+              }
+            ],
+            "formulas": [
+              {
+                "conditional_formats": [],
+                "cell_display_mode": "bar",
+                "formula": "query1",
+                "limit": {
+                  "count": 50,
+                  "order": "desc"
+                }
+              }
+            ],
+            "response_format": "scalar"
+          }
+        ]
+      }
+    }
+  ]
+}

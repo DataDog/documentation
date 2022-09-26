@@ -2603,6 +2603,10 @@ components:
           type: string
         search:
           $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinitionSearch'
+        storage:
+          description: Option for storage location. Feature in Private Beta.
+          example: indexes
+          type: string
       required:
       - data_source
       - compute
@@ -4187,6 +4191,10 @@ components:
         query_string:
           description: Widget query.
           example: '@service:app'
+          type: string
+        storage:
+          description: Option for storage location. Feature in Private Beta.
+          example: indexes
           type: string
       required:
       - query_string
@@ -9425,6 +9433,75 @@ components:
           format: int64
           type: integer
       type: object
+    SLOListWidgetDefinition:
+      description: Use the SLO List widget to track your SLOs (Service Level Objectives)
+        on dashboards.
+      properties:
+        requests:
+          description: Array of one request object to display in the widget.
+          items:
+            $ref: '#/components/schemas/SLOListWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/SLOListWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    SLOListWidgetDefinitionType:
+      default: slo_list
+      description: Type of the SLO List widget.
+      enum:
+      - slo_list
+      example: slo_list
+      type: string
+      x-enum-varnames:
+      - SLO_LIST
+    SLOListWidgetQuery:
+      description: Updated SLO List widget.
+      properties:
+        limit:
+          default: 100
+          description: Maximum number of results to display in the table.
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        query_string:
+          description: Widget query.
+          example: env:prod AND service:my-app
+          type: string
+      required:
+      - query_string
+      type: object
+    SLOListWidgetRequest:
+      description: Updated SLO List widget.
+      properties:
+        query:
+          $ref: '#/components/schemas/SLOListWidgetQuery'
+        request_type:
+          $ref: '#/components/schemas/SLOListWidgetRequestType'
+      required:
+      - query
+      - request_type
+      type: object
+    SLOListWidgetRequestType:
+      description: Widget request type.
+      enum:
+      - slo_list
+      type: string
+      x-enum-varnames:
+      - SLO_LIST
     SLOOverallStatuses:
       description: Overall status of the SLO by timeframes.
       properties:
@@ -17908,6 +17985,7 @@ components:
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
       - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
       - $ref: '#/components/schemas/SLOWidgetDefinition'
+      - $ref: '#/components/schemas/SLOListWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
       - $ref: '#/components/schemas/SunburstWidgetDefinition'
