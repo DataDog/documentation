@@ -94,6 +94,15 @@ Click the **Manage Ingestion Rate** button to configure a sampling rate for the 
 
 **Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][10].
 
+### Trace Sampling with OpenTelemetry
+
+If your applications and services are instrumented with OpenTelemetry libraries and you're using the OpenTelemetry collector, you are able to use OpenTelemetry sampling capabilities:
+
+- [TraceIdRatioBased][11] and [ParentBased][12] are 2 built-in samplers that allow you to implement deterministic head-based sampling based on the trace_id at the **sdk** level.
+- The [Tail Sampling Processor][13] and [Probabilistic Sampling Processor][14] allow you to sample traces based on a set of rules at the **collector** level
+
+Using either of the two options will result in sampled [APM Metrics](#effects-of-reducing-trace-ingestion-volume).
+
 ## Ingestion reasons glossary
 
 _Know which ingestion mechanisms are responsible for most of the ingestion volume_
@@ -115,7 +124,7 @@ Several other ingestion reasons are surfaced in the Ingestion Control page and a
 | `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Sampling of errors uncaught by the head-based sampling.             | 10 traces per second per Agent (null, if rules are defined) |
 | `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Sampling of rare traces (catching all combinations of a set of span tags).        | 5 traces per second per Agent (null, if rules are defined) |
 | `manual`             | In-code         | In-code decision override to keep/drop a span and its children.    | null |
-| `analytics`          | Agent and Tracing Libraries | [Deprecated ingestion mechanism][11] that samples single spans without the full trace.   | null                 |
+| `analytics`          | Agent and Tracing Libraries | [Deprecated ingestion mechanism][15] that samples single spans without the full trace.   | null                 |
 
 Additionally, other products can be responsible for sampled span volume:
 
@@ -139,4 +148,8 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
 [10]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#in-tracing-libraries-user-defined-rules
-[11]: /tracing/legacy_app_analytics
+[11]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
+[12]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
+[15]: /tracing/legacy_app_analytics
