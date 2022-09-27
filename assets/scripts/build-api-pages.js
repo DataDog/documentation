@@ -864,7 +864,12 @@ const schemaTable = (tableType, data) => {
   } else if(data.additionalProperties) {
     initialData = {"&lt;any-key&gt;": data.additionalProperties};
   } else if(data.oneOf && data.oneOf.length > 0) {
-    initialData = data;
+    // we don't have access to oneOf names in json so lets set them as "Option n"
+    initialData = data.oneOf
+      .map((obj, indx) => {
+        return {[`Option ${indx + 1}`]: data.oneOf[indx]}
+      })
+      .reduce((obj, item) => ({...obj, ...item}), {});
   } else {
     initialData = data.properties;
   }
