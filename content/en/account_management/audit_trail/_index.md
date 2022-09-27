@@ -84,6 +84,39 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
+
+### Saved Views
+
+All saved views, that are not your default saved view, are shared across your organization:
+
+* **Integration saved views** come out-of-the-box with Audit Trail. These are read-only, and identified by Datadog logo.
+* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Click the **save** button to create a new custom saved view from the current content of your explorer.
+
+At any moment, from the saved view entry in the Views panel:
+
+* **Load** or **reload** a saved view.
+* **Update** a saved view with the configuration of the current view.
+* **Rename** or **delete** a saved view.
+* **Share** a saved view through a short-link.
+* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
+
+*Note*: Update, rename, and delete actions are disabled for integration saved views and [Read Only users][8].
+
+
+### Default View
+
+{{< img src="logs/explorer/saved_views/default.png" alt="Default view" style="width:50%;" >}}
+
+Default view allows you to setup default set of query or filters that you always want to see when you first land on the Audit Trail explorer. You can come back to your default view by opening up the Views panel and clicking on reload button.
+
+Your existing Audit Explorer view is your default saved view. This configuration is only accessible and viewable to you and updating this configuration does not have any impact on your organization. You can **temporarily** override your default saved view by completing any action in the UI or when opening links to the Audit Explorer that embed a different configuration.
+
+At any moment, from the default view entry in the Views panel:
+
+* **Reload** your default view by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
+
 ## Create a monitor
 
 To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][5]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
