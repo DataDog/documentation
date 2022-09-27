@@ -42,6 +42,7 @@ java \
     -Ddd.env=<YOUR_ENVIRONMENT> \
     -Ddd.version=<YOUR_VERSION> \
     -Ddd.dynamic.instrumentation.enabled=true \
+    -Ddd.remote_config.enabled=true \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 {{% /tab %}}
@@ -52,6 +53,7 @@ export DD_SERVICE=<YOUR_SERVICE>
 export DD_ENV=<YOUR_ENV>
 export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+export DD_REMOTE_CONFIG_ENABLED=true
 java \
     -javaagent:dd-java-agent.jar \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
