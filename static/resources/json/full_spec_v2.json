@@ -35210,9 +35210,13 @@
                           },
                           "query": {
                             "description": "Query to run on logs.",
+                            "example": "a > 3",
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "query"
+                        ],
                         "type": "object"
                       },
                       {
@@ -35268,9 +35272,13 @@
                           },
                           "ruleId": {
                             "description": "Rule ID to match on signals.",
+                            "example": "d3f-ru1-e2d",
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "ruleId"
+                        ],
                         "type": "object"
                       }
                     ],
@@ -36205,7 +36213,7 @@
                     },
                     "ruleId": {
                       "description": "Rule ID to match on signals.",
-                      "example": "d3f-ru1-e1d",
+                      "example": "d3f-ru1-e2d",
                       "type": "string"
                     }
                   },
@@ -36791,9 +36799,13 @@
               },
               "query": {
                 "description": "Query to run on logs.",
+                "example": "a > 3",
                 "type": "string"
               }
             },
+            "required": [
+              "query"
+            ],
             "type": "object"
           },
           {
@@ -36849,9 +36861,13 @@
               },
               "ruleId": {
                 "description": "Rule ID to match on signals.",
+                "example": "d3f-ru1-e2d",
                 "type": "string"
               }
             },
+            "required": [
+              "ruleId"
+            ],
             "type": "object"
           }
         ],
@@ -37262,9 +37278,13 @@
                     },
                     "query": {
                       "description": "Query to run on logs.",
+                      "example": "a > 3",
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "query"
+                  ],
                   "type": "object"
                 },
                 {
@@ -37320,9 +37340,13 @@
                     },
                     "ruleId": {
                       "description": "Rule ID to match on signals.",
+                      "example": "d3f-ru1-e2d",
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "ruleId"
+                  ],
                   "type": "object"
                 }
               ],
@@ -37779,9 +37803,13 @@
                     },
                     "query": {
                       "description": "Query to run on logs.",
+                      "example": "a > 3",
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "query"
+                  ],
                   "type": "object"
                 },
                 {
@@ -37837,9 +37865,13 @@
                     },
                     "ruleId": {
                       "description": "Rule ID to match on signals.",
+                      "example": "d3f-ru1-e2d",
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "ruleId"
+                  ],
                   "type": "object"
                 }
               ],
@@ -38720,7 +38752,7 @@
                 },
                 "ruleId": {
                   "description": "Rule ID to match on signals.",
-                  "example": "d3f-ru1-e1d",
+                  "example": "d3f-ru1-e2d",
                   "type": "string"
                 }
               },
@@ -38817,65 +38849,7 @@
           },
           "ruleId": {
             "description": "Rule ID to match on signals.",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "SecurityMonitoringSignalRuleQueryCreate": {
-        "description": "Query for matching rule on signals",
-        "properties": {
-          "aggregation": {
-            "description": "The aggregation type.",
-            "enum": [
-              "count",
-              "cardinality",
-              "sum",
-              "max",
-              "new_value",
-              "geo_data",
-              "event_count"
-            ],
-            "type": "string",
-            "x-enum-varnames": [
-              "COUNT",
-              "CARDINALITY",
-              "SUM",
-              "MAX",
-              "NEW_VALUE",
-              "GEO_DATA",
-              "EVENT_COUNT"
-            ]
-          },
-          "correlatedByFields": {
-            "description": "Fields to group by.",
-            "items": {
-              "description": "Field.",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "correlatedQueryIndex": {
-            "description": "Index of the rule query used to retrieve the correlated field.",
-            "format": "int32",
-            "maximum": 9,
-            "type": "integer"
-          },
-          "metrics": {
-            "description": "Group of target fields to aggregate over when using the new value aggregations.",
-            "items": {
-              "description": "Field.",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "name": {
-            "description": "Name of the query.",
-            "type": "string"
-          },
-          "ruleId": {
-            "description": "Rule ID to match on signals.",
-            "example": "d3f-ru1-e1d",
+            "example": "d3f-ru1-e2d",
             "type": "string"
           }
         },
@@ -40132,70 +40106,6 @@
         "type": "object"
       },
       "SecurityMonitoringStandardRuleQuery": {
-        "description": "Query for matching rule.",
-        "properties": {
-          "aggregation": {
-            "description": "The aggregation type.",
-            "enum": [
-              "count",
-              "cardinality",
-              "sum",
-              "max",
-              "new_value",
-              "geo_data",
-              "event_count"
-            ],
-            "type": "string",
-            "x-enum-varnames": [
-              "COUNT",
-              "CARDINALITY",
-              "SUM",
-              "MAX",
-              "NEW_VALUE",
-              "GEO_DATA",
-              "EVENT_COUNT"
-            ]
-          },
-          "distinctFields": {
-            "description": "Field for which the cardinality is measured. Sent as an array.",
-            "items": {
-              "description": "Field.",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "groupByFields": {
-            "description": "Fields to group by.",
-            "items": {
-              "description": "Field.",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "metric": {
-            "description": "The target field to aggregate over when using the sum or max\naggregations.",
-            "type": "string"
-          },
-          "metrics": {
-            "description": "Group of target fields to aggregate over when using the new value aggregations.",
-            "items": {
-              "description": "Field.",
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "name": {
-            "description": "Name of the query.",
-            "type": "string"
-          },
-          "query": {
-            "description": "Query to run on logs.",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "SecurityMonitoringStandardRuleQueryCreate": {
         "description": "Query for matching rule.",
         "properties": {
           "aggregation": {
@@ -82074,9 +81984,13 @@
                                     },
                                     "query": {
                                       "description": "Query to run on logs.",
+                                      "example": "a > 3",
                                       "type": "string"
                                     }
                                   },
+                                  "required": [
+                                    "query"
+                                  ],
                                   "type": "object"
                                 },
                                 {
@@ -82132,9 +82046,13 @@
                                     },
                                     "ruleId": {
                                       "description": "Rule ID to match on signals.",
+                                      "example": "d3f-ru1-e2d",
                                       "type": "string"
                                     }
                                   },
+                                  "required": [
+                                    "ruleId"
+                                  ],
                                   "type": "object"
                                 }
                               ],
@@ -83065,7 +82983,7 @@
                             },
                             "ruleId": {
                               "description": "Rule ID to match on signals.",
-                              "example": "d3f-ru1-e1d",
+                              "example": "d3f-ru1-e2d",
                               "type": "string"
                             }
                           },
@@ -83503,9 +83421,13 @@
                               },
                               "query": {
                                 "description": "Query to run on logs.",
+                                "example": "a > 3",
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "query"
+                            ],
                             "type": "object"
                           },
                           {
@@ -83561,9 +83483,13 @@
                               },
                               "ruleId": {
                                 "description": "Rule ID to match on signals.",
+                                "example": "d3f-ru1-e2d",
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "ruleId"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -84254,9 +84180,13 @@
                               },
                               "query": {
                                 "description": "Query to run on logs.",
+                                "example": "a > 3",
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "query"
+                            ],
                             "type": "object"
                           },
                           {
@@ -84312,9 +84242,13 @@
                               },
                               "ruleId": {
                                 "description": "Rule ID to match on signals.",
+                                "example": "d3f-ru1-e2d",
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "ruleId"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -84814,9 +84748,13 @@
                             },
                             "query": {
                               "description": "Query to run on logs.",
+                              "example": "a > 3",
                               "type": "string"
                             }
                           },
+                          "required": [
+                            "query"
+                          ],
                           "type": "object"
                         },
                         {
@@ -84872,9 +84810,13 @@
                             },
                             "ruleId": {
                               "description": "Rule ID to match on signals.",
+                              "example": "d3f-ru1-e2d",
                               "type": "string"
                             }
                           },
+                          "required": [
+                            "ruleId"
+                          ],
                           "type": "object"
                         }
                       ],
@@ -85291,9 +85233,13 @@
                               },
                               "query": {
                                 "description": "Query to run on logs.",
+                                "example": "a > 3",
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "query"
+                            ],
                             "type": "object"
                           },
                           {
@@ -85349,9 +85295,13 @@
                               },
                               "ruleId": {
                                 "description": "Rule ID to match on signals.",
+                                "example": "d3f-ru1-e2d",
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "ruleId"
+                            ],
                             "type": "object"
                           }
                         ],
