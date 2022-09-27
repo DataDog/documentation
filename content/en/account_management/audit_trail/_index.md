@@ -48,13 +48,6 @@ To enable Datadog Audit Trail, navigate to your [Organization Settings][2] and s
 
 ## Configuration
 
-### Event types
-
-Event types are a collection of audit events. For example, the Authentication event type contains all events related to authentication and the Dashboards event type contains all the events related to interacting with the dashboards product. To enable an event type, navigate to the *Audit Trail Settings* section of your [Organization Settings][2] and toggle on event types that are relevant to you.
-
-{{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:50%;">}}
-
-See [Audit Trail Events][3] for a list of different events.
 
 ### Archiving
 
