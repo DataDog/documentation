@@ -109,7 +109,7 @@ At any moment, from the saved view entry in the Views panel:
 
 Default view allows you to setup default set of query or filters that you always want to see when you first land on the Audit Trail explorer. You can come back to your default view by opening up the Views panel and clicking on reload button.
 
-Your existing Audit Explorer view is your default saved view. This configuration is only accessible and viewable to you and updating this configuration does not have any impact on your organization. You can **temporarily** override your default saved view by completing any action in the UI or when opening links to the Audit Explorer that embed a different configuration.
+Your existing Audit Trail explorer view is your default saved view. This configuration is only accessible and viewable to you, and updating this configuration does not have any impact on your organization. You can **temporarily** override your default saved view by completing any action in the UI or by opening links to the Audit Trail explorer that embed a different configuration.
 
 At any moment, from the default view entry in the Views panel:
 
