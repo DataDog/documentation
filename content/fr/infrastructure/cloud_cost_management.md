@@ -32,7 +32,13 @@ Sélectionnez les options suivantes dans la section Delivery :
 
 ### Configurer l'intégration AWS
 
-Sélectionnez votre compte de facturation AWS depuis la liste déroulante : Datadog affiche alors les tags associés à ce compte. Si vous utilisez plusieurs comptes de facturation avec des noms similaires, vous pouvez consulter les tags associés à chaque compte pour vous assurer de sélectionner le bon compte.
+Sélectionnez votre compte de gestion AWS depuis la liste déroulante : Datadog affiche alors les tags associés à ce compte. Si vous utilisez plusieurs comptes de gestion avec des noms similaires, vous pouvez consulter les tags associés à chaque compte pour vous assurer d'avoir sélectionné le bon compte.
+
+**Remarque** : Datadog recommande d'envoyer les rapports de coûts et d'utilisation depuis un [**compte de gestion** AWS][6] afin de visualiser les coûts des **comptes membres** associés. Si vous choisissez d'envoyer un rapport de coûts et d'utilisation depuis un **compte membre** AWS, assurez-vous d'avoir sélectionné les options suivantes dans les [préférences][7] du **compte de gestion** pour permettre à Datadog d'avoir une visibilité totale sur le compte membre :
+
+* **Linked Account Access**
+* **Linked Account Refunds and Credits**
+* **Linked Account Discounts**
 
 ### Accéder au rapport de coûts et d'utilisation
 
@@ -142,3 +148,5 @@ Vous pouvez visualiser les dépenses liées à votre infrastructure ainsi que le
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
+[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
