@@ -77,6 +77,41 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
+
+### Saved views
+
+Efficient troubleshooting requires your data to be in the proper scope to permit exploration, have access to visualization options to surface meaningful information, and have relevant facets listed to enable analysis. Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the Audit Trail explorer.
+
+All saved views, that are not your default view, are shared across your organization:
+
+* **Integration saved views** come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
+* **Custom saved views** are created by users. They are editable by any user in your organization (except [read only users][12]), and identified with the avatar of the user who created them Click the **Save** button to create a new custom saved view from the current content of your explorer.
+
+At any moment, from the saved view entry in the Views panel:
+
+* **Load** or **reload** a saved view.
+* **Update** a saved view with the configuration of the current view.
+* **Rename** or **delete** a saved view.
+* **Share** a saved view through a short-link.
+* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
+
+**Note:** Update, rename, and delete actions are disabled for integration saved views and [read only users][12].
+
+
+### Default view
+
+{{< img src="logs/explorer/saved_views/default.png" alt="Default view" style="width:50%;" >}}
+
+The default view feature allows you to set a default set of queries or filters that you always see when you first open the Audit Trail explorer. You can come back to your default view by opening the Views panel and clicking the reload button.
+
+Your existing Audit Trail explorer view is your default saved view. This configuration is only accessible and viewable to you, and updating this configuration does not have any impact on your organization. You can **temporarily** override your default saved view by completing any action in the UI or by opening links to the Audit Trail explorer that embed a different configuration.
+
+At any moment, from the default view entry in the Views panel:
+
+* **Reload** your default view by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
+
 ## Create a monitor
 
 To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][5]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
@@ -112,3 +147,4 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows vari
 [9]: /dashboards/widgets/list/
 [10]: /dashboards/querying/#choose-the-metric-to-graph/
 [11]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
+[12]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
