@@ -20,7 +20,7 @@ The Datadog Dynamic Instrumentation library is supported in JDK version 8 and ab
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.39.0][2]+. 
+1. Install or upgrade your Agent to version [7.39.1][2]+. 
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Download `dd-java-agent.jar`:
@@ -42,6 +42,7 @@ java \
     -Ddd.env=<YOUR_ENVIRONMENT> \
     -Ddd.version=<YOUR_VERSION> \
     -Ddd.dynamic.instrumentation.enabled=true \
+    -Ddd.remote_config.enabled=true \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 {{% /tab %}}
@@ -52,6 +53,7 @@ export DD_SERVICE=<YOUR_SERVICE>
 export DD_ENV=<YOUR_ENV>
 export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+export DD_REMOTE_CONFIG_ENABLED=true
 java \
     -javaagent:dd-java-agent.jar \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
