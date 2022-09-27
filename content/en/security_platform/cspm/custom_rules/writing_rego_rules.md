@@ -51,7 +51,7 @@ Take a close look at each part of this module to understand how it works.
 
 ### Import statements
 
-The first line contains the declaration `package datadog`. A [package][4] groups Rego modules into a single namespace, allowing modules to be imported safely. Currently, importing user modules is not a feature of custom rules. All posture management rules are grouped under the `datadog` namespace. For your results to be returned properly, you should also group your rules under the `package datadog` namespace. 
+The first line contains the declaration `package datadog`. A [package][4] groups Rego modules into a single namespace, allowing modules to be imported safely. Currently, importing user modules is not a feature of custom rules. All posture management rules are grouped under the `datadog` namespace. For your results to be returned properly, group your rules under the `package datadog` namespace. 
 
 ```java
 import future.keywords.contains
