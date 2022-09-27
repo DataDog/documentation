@@ -87,10 +87,12 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 ### Saved views
 
-All saved views, that are not your default saved view, are shared across your organization:
+Efficient troubleshooting requires your data to be in the proper scope to permit exploration, have access to visualization options to surface meaningful information, and have relevant facets listed to enable analysis. Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the Audit Explorer.
+
+All saved views, that are not your default view, are shared across your organization:
 
 * **Integration saved views** come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
-* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Click the **save** button to create a new custom saved view from the current content of your explorer.
+* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][12]), and identified with the avatar of the user who created it. Click the **save** button to create a new custom saved view from the current content of your explorer.
 
 At any moment, from the saved view entry in the Views panel:
 
@@ -100,7 +102,7 @@ At any moment, from the saved view entry in the Views panel:
 * **Share** a saved view through a short-link.
 * **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
-*Note*: Update, rename, and delete actions are disabled for integration saved views and [Read Only users][8].
+*Note*: Update, rename, and delete actions are disabled for integration saved views and [Read Only users][12].
 
 
 ### Default view
@@ -152,3 +154,4 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows vari
 [9]: /dashboards/widgets/list/
 [10]: /dashboards/querying/#choose-the-metric-to-graph/
 [11]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
+[12]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
