@@ -24,7 +24,7 @@ The Agents connect to the Cluster Agent every ten seconds and retrieve the check
 
 This feature is supported on Kubernetes for Agent v6.12.0+ and Cluster Agent v1.3.0+. Starting with v1.4.0, the Cluster Agent converts every Endpoints Check of a non-pod-backed endpoint into a regular Cluster Check. Enable the [Cluster Check][4] feature alongside Endpoints Checks to take advantage of this functionality.
 
-NOTE: If the pods behind your service are static pods, you'll need another annotation ad.datadoghq.com/endpoints.resolve. The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners. See [an example][5] of this annotation with the kube API server.
+**Note:** If the pods behind your service are static pods, you need to add the annotation `ad.datadoghq.com/endpoints.resolve`. The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners. See [this example][5] of using the annotation with the Kubernetes API server.
 
 ### Example: Service with endpoints
 In the example below, a Kubernetes deployment for NGINX was created with three pods.
