@@ -103,7 +103,7 @@ At any moment, from the saved view entry in the Views panel:
 *Note*: Update, rename, and delete actions are disabled for integration saved views and [Read Only users][8].
 
 
-### Default View
+### Default view
 
 {{< img src="logs/explorer/saved_views/default.png" alt="Default view" style="width:50%;" >}}
 
