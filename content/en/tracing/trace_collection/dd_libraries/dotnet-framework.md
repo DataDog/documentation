@@ -159,9 +159,10 @@ To install the .NET Tracer machine-wide:
 
 To install the .NET Tracer per-application:
 
-1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
+1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
-[1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
+
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -205,25 +206,13 @@ For information about the different methods for setting environment variables, s
 
 {{% tab "NuGet" %}}
 
-1. Set the following required environment variables for automatic instrumentation to attach to your application:
-
-   ```
-   COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   COR_PROFILER_PATH=<System-dependent path>
-   DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
-   ```
-
-   The value for the `<APP_DIRECTORY>` placeholder is the path to the directory containing the application's `.dll` files. The value for the `COR_PROFILER_PATH` environment variable varies based on the system where the application is running:
-
-   Operating System and Process Architecture | COR_PROFILER_PATH Value
-   ------------------------------------------|----------------------------
-   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
-   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
-
-2. For standalone applications, manually restart the application.
+Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][1].
+Docker examples are also available in the [repository][2].
 
 
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs.Datadog.Trace.Bundle/README.md
+[2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
 {{< /tabs >}}
