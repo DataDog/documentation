@@ -196,6 +196,7 @@ function getPathElement(event = null) {
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
+        scrollActiveNavItemToTop()
     }
 
     if (mobileNavPathElement) {
@@ -416,3 +417,23 @@ window.addEventListener(
     false
 );
 
+
+
+function scrollActiveNavItemToTop(){
+    // Scroll the open top level left nav item into view below Docs search input
+    if (document.querySelector('.sidenav:not(.sidenav-api)')) {
+        const headerHeight = $('body .main-nav').height();
+        const padding = 200;
+
+        // set max height of side nav
+        document.querySelector('.sidenav-nav').style.maxHeight = document.documentElement.clientHeight - headerHeight - padding
+    
+        const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
+        const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
+
+        if (sideNavActiveMenuItem) {
+            const distanceToTop = sideNavActiveMenuItem.offsetTop;
+            leftSideNav.scrollTop = distanceToTop - 100;
+        }
+    }
+}
