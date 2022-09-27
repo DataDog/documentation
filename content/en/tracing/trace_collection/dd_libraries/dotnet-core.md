@@ -22,24 +22,27 @@ further_reading:
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
-  - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
-    tag: 'Blog'
-    text: 'Monitor containerized ASP.NET Core applications'
   - link: "/tracing/glossary/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
+  - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
+    tag: 'Blog'
+    text: 'Monitor containerized ASP.NET Core applications'
+  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
+    tag: "Blog"
+    text: "Deploy ASP.NET Core applications to Azure App Service"
+  - link: "https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/"
+    tag: "Blog"
+    text: "Optimize your .NET application performance with the Datadog Continuous Profiler"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
     tag: "GitHub"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
     text: "Source code"
-  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
-    tag: "Blog"
-    text: "Deploy ASP.NET Core applications to Azure App Service"
 ---
 
 ## Compatibility requirements
