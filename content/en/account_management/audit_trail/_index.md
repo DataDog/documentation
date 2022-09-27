@@ -85,7 +85,7 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
 
-### Saved Views
+### Saved views
 
 All saved views, that are not your default saved view, are shared across your organization:
 
