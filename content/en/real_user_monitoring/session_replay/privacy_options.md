@@ -14,9 +14,9 @@ further_reading:
 
 ## Overview
 
-Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest. 
+Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
 
-Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected. 
+Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected.
 
 By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK.
 
@@ -39,7 +39,7 @@ datadogRum.init({
     sampleRate: 100,
     premiumSampleRate: 100,
     trackInteractions: true,
-    defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow' 
+    defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 
 datadogRum.startSessionReplayRecording();
@@ -63,7 +63,7 @@ Masks all HTML text, user input, images, and links. Text on your application is 
 
 ### Allow mode
 
-Records everything unmasked, excluding HTML input elements such as `password`, `email`, and `tel`, and elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes.
+Records everything unmasked.
 
 {{< img src="real_user_monitoring/session_replay/allow.png" alt="Allow mode" style="width:70%;">}}
 
@@ -87,17 +87,23 @@ The example below demonstrates how you can override certain elements in your HTM
 </div>
 ```
 
-The dollar amount in the cart is replaced with astericks.
+The dollar amount in the cart is replaced with asterisks.
 
 {{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;">}}
 
-## Advanced privacy options 
+## Privacy restrictions
+
+In order to protect end-user privacy, regardless of your privacy configuration, the following HTML elements are **always masked**:
+- input elements of type `password`, `email`, and `tel`
+- elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes
+
+## Advanced privacy options
 
 ### Completely hide an element
 
-`hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text. 
+`hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text.
 
-If you are concerned about the number of visible elements in sensitive fields, enable ‘hidden’ for your specific elements. These HTML elements are replaced with a gray block at the time of recording. 
+If you are concerned about the number of visible elements in sensitive fields, enable ‘hidden’ for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
@@ -105,7 +111,7 @@ In this example replay session, the username in the Datadog navigation is obfusc
 
 ### Override the action name
 
-To obscure the default action name and update the naming convention for individual actions, set the override for your individual action names. 
+To obscure the default action name and update the naming convention for individual actions, set the override for your individual action names.
 
 You can rename the default action name by overriding the name of a specific HTML element with a more general name. By default, Datadog displays the custom override name.
 
