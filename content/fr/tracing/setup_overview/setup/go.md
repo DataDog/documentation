@@ -27,7 +27,7 @@ type: multi-code-lang
 
 ## Exigences de compatibilité
 
-Le traceur Go nécessite Go `1.12+` et l'Agent Datadog `>= 5.21.1`. Pour obtenir la liste complète des bibliothèques prises en charge, consultez la page [Exigences de compatibilité][1].
+Le traceur Go nécessite Go `1.16+` et l'Agent Datadog `>= 5.21.1`. Pour obtenir la liste complète des bibliothèques prises en charge, consultez la page [Exigences de compatibilité][1].
 
 ## Installation et démarrage
 
@@ -43,7 +43,7 @@ La configuration du tracing implique de configurer le profileur en continu. Il v
 
 #### Suivre la documentation dans l'application (conseillé)
 
-Suivez les [instructions de démarrage rapide][7] fournies sur le site Datadog pour profiter d'une expérience optimale, et notamment :
+Suivez les [instructions de démarrage rapide][7] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
 
 - Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (hosts, Docker, Kubernetes ou Amazon ECS) ;
 - Définir les tags `service`, `env` et `version` de façon dynamique ;
