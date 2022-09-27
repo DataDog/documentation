@@ -102,7 +102,7 @@ At any moment, from the saved view entry in the Views panel:
 * **Share** a saved view through a short-link.
 * **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
-*Note*: Update, rename, and delete actions are disabled for integration saved views and [Read Only users][12].
+**Note:** Update, rename, and delete actions are disabled for integration saved views and [read only users][12].
 
 
 ### Default view
