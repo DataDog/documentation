@@ -25,7 +25,7 @@ The Java Tracer supports automatic instrumentation of the following Oracle JDK a
 
 | JVM versions | Operating Systems                                                             | Support level             | Tracer version |
 | -------------| ----------------------------------------------------------------------------- | ------------------------- | -------------- |
-| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#support-beta)     | latest         |
+| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#support-beta)     | Latest         |
 | 7 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)             | [GA](#support-ga)         | latest         |
 | 7 to 17      | Linux (arm64)<br>Mac (arm64)                                                  | [Beta](#support-beta)     | latest         |
 
