@@ -1,10 +1,10 @@
 ---
 title: Set up Observability Pipelines
 kind: Documentation
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/setup.md"]
+aliases:
+  - /integrations/observability_pipelines/setup/
 further_reading:
-  - link: /integrations/observability_pipelines/vector_configurations/
+  - link: /observability_pipelines/vector_configurations/
     tag: Documentation
     text: Learn more about Vector configurations
   - link: https://vector.dev/docs/setup/going-to-prod/
@@ -16,7 +16,7 @@ further_reading:
   - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
     tag: Documentation
     text: Datadog Agent as a source for Vector
-  - link: /integrations/observability_pipelines/integrate_vector_with_datadog/
+  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
     tag: Documentation
     text: Configure Datadog Agents to send data to Vector
 ---
@@ -154,6 +154,6 @@ Once the setup is complete, Vector is connected to Observability Pipelines and t
 [19]: https://vector.dev/docs/setup/installation/operating-systems/windows/
 [20]: https://vector.dev/docs/setup/installation/operating-systems/macos/
 [21]: https://vector.dev/docs/setup/installation/
-[22]: /integrations/observability_pipelines/vector_configurations
+[22]: /observability_pipelines/vector_configurations
 [23]: https://app.datadoghq.com/organization-settings/service-accounts/new
 [24]: https://app.datadoghq.com/observability-pipelines

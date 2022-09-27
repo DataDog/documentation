@@ -1,8 +1,8 @@
 ---
 title: Integrations
 kind: Documentation
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrations.md"]
+aliases: 
+  - /integrations/observability_pipelines/integrations/
 ---
 ## Overview
 
@@ -181,4 +181,4 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 [78]: https://vector.dev/docs/reference/configuration/sinks/splunk_hec_metrics/
 [79]: https://vector.dev/docs/reference/configuration/sinks/statsd/
 [80]: https://vector.dev/docs/reference/configuration/sinks/vector/
-[81]: /integrations/observability_pipelines/integrate_vector_with_datadog/
+[81]: /observability_pipelines/integrations/integrate_vector_with_datadog/
