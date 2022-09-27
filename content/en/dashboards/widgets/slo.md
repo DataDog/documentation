@@ -15,7 +15,7 @@ further_reading:
 
 ## Setup
 
-Use the SLO Summary widget to track your [SLOs (Service Level Objectives)][1] on screenboards and timeboards. You can use Datadog's [Service Level Objectives][2] page to create new SLOs and view all existing ones. You can then select an existing SLO and use the SLO Summary widget to display it on any dashboard.
+Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
 {{< img src="dashboards/widgets/slo/slo_summary_editor.png" alt="slo summary widget"  >}}
 
@@ -57,9 +57,9 @@ You can optionally define the title’s size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
-The dedicated [widget JSON schema definition][4] for the service map widget is:
+The dedicated [widget JSON schema definition][3] for the SLO Summary widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -68,6 +68,5 @@ The dedicated [widget JSON schema definition][4] for the service map widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/service_level_objectives/
-[2]: https://app.datadoghq.com/slo
-[3]: /api/v1/dashboards/
-[4]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
