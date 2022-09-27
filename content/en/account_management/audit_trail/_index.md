@@ -89,7 +89,7 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 All saved views, that are not your default saved view, are shared across your organization:
 
-* **Integration saved views** come out-of-the-box with Audit Trail. These are read-only, and identified by Datadog logo.
+* **Integration saved views** come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
 * **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Click the **save** button to create a new custom saved view from the current content of your explorer.
 
 At any moment, from the saved view entry in the Views panel:
