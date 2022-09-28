@@ -2391,7 +2391,7 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_guides
     weight: 5
-  - name: Security Platform Overview
+  - name: Security Overview
     url: security_platform/
     pre: security-platform
     identifier: security_platform
@@ -2468,87 +2468,106 @@ main:
     parent: cloud_siem
     identifier: siem_guides
     weight: 6
-  - name: Cloud Security Posture Management
-    url: security_platform/cspm/
+  - name: Cloud Security Management
+    url: security_platform/cloud_security_management
     parent: security_platform_heading
     pre: cspm
+    identifier: csm
+    weight: 181500
+  - name: Cloud Security Posture Management
+    url: security_platform/cspm/
+    parent: csm
     identifier: cspm
-    weight: 182000
+    weight: 1
   - name: Getting Started
     url: security_platform/cspm/getting_started
     parent: cspm
     identifier: cspm_getting_started
-    weight: 1
+    weight: 101
   - name: Frameworks and Benchmarks
     url: security_platform/cspm/frameworks_and_benchmarks
     parent: cspm
-    weight: 2
+    weight: 102
   - name: OOTB Cloud Rules
     url: security_platform/default_rules/#cat-posture-management-cloud
     parent: cspm
     identifier: ootb_cloud_rules
-    weight: 3
+    weight: 103
   - name: OOTB Infrastructure Rules
     url: security_platform/default_rules/#cat-posture-management-infra
     parent: cspm
     identifier: ootb_infrastructure_rules
-    weight: 4
+    weight: 104
   - name: Posture Findings
     url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 4
+    weight: 105
   - name: Signals Explorer
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 5
+    weight: 106
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
-    parent: security_platform_heading
-    pre: cws
+    parent: csm
     identifier: cloud_workload_security
-    weight: 183000
+    weight: 2
   - name: Getting Started
     url: security_platform/cloud_workload_security/getting_started
     parent: cloud_workload_security
     identifier: cws_getting_started
-    weight: 1
+    weight: 201
   - name: Agent Expressions
     url: security_platform/cloud_workload_security/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
-    weight: 2
+    weight: 202
   - name: Workload Security Detection Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
-    weight: 3
+    weight: 203
   - name: Workload Security Events
     url: security_platform/cloud_workload_security/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
-    weight: 4
+    weight: 204
   - name: OOTB Rules
     url: security_platform/default_rules#cat-workload-security
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
-    weight: 5
+    weight: 205
   - name: Signals Explorer
     url: security_platform/explorer
     parent: cloud_workload_security
     identifier: cws_workload_signals_explorer
-    weight: 6
+    weight: 206
   - name: Guides
     url: security_platform/cloud_workload_security/guide
     parent: cloud_workload_security
     identifier: cws_guides
-    weight: 7
+    weight: 207
   - name: Troubleshooting
     url: security_platform/cloud_workload_security/troubleshooting
     parent: cloud_workload_security
     identifier: cws_troubleshooting
-    weight: 8
+    weight: 208
+  - name: Resource Catalog
+    url: security_platform/cloud_security_management/resource_catalog/
+    parent: csm
+    identifier: csm_resource_catalog
+    weight: 3
+  - name: Default Detection Rules
+    url: security_platform/cloud_security_management/ootb_rules/
+    parent: csm
+    identifier: csm_default_rules
+    weight: 4
+  - name: Terminology
+    url: security_platform/cloud_security_management/terminology/
+    parent: csm
+    identifier: csm_terminology
+    weight: 5
   - name: Application Security Monitoring
     url: security_platform/application_security/
     parent: security_platform_heading
