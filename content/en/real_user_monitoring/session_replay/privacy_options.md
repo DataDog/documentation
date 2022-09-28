@@ -94,8 +94,8 @@ The dollar amount in the cart is replaced with asterisks.
 ## Privacy restrictions
 
 In order to protect end-user privacy, regardless of your privacy configuration, the following HTML elements are **always masked**:
-- input elements of type `password`, `email`, and `tel`
-- elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes
+- Input elements of type `password`, `email`, and `tel`
+- Elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes
 
 ## Advanced privacy options
 
