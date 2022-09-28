@@ -2443,31 +2443,26 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_getting_started
     weight: 1
-  - name: Security Home
-    url: security_platform/cloud_siem/security_home
-    parent: cloud_siem
-    identifier: cloud_siem_security_home
-    weight: 2
   - name: Log Detection Rules
     url: security_platform/cloud_siem/log_detection_rules
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
-    weight: 3
+    weight: 2
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
-    weight: 4
+    weight: 3
   - name: Signals Explorer
     url: /security_platform/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
-    weight: 5
+    weight: 4
   - name: Guides
     url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 6
+    weight: 5
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform_heading
