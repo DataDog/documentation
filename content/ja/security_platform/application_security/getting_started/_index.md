@@ -36,7 +36,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 
    ASM を有効にするには、コード内で行います。
 
-   {{< tabs >}}
+{{< tabs >}}
 
 {{% tab "Rails" %}}
    アプリケーションコードにイニシャライザーを追加して、APM トレーサーを有効にします。
@@ -80,7 +80,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 
 {{< /tabs >}}
 
-{{% /tab %}}
+{{% tab "Sinatra" %}}
 
    ```ruby
    require 'sinatra'
@@ -119,14 +119,10 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< /tabs >}}
-
 または、アプリケーションが実行される場所に応じて、以下の方法のいずれかを使用します。
 
-   {{< tabs >}}
-{{% tab "Docker CLI" %}}
-
 {{< tabs >}}
+{{% tab "Docker CLI" %}}
 
 ```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...]

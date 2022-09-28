@@ -1,10 +1,9 @@
 ---
 title: Custom Metrics Governance - Drop Metrics Missing Specific Tags
 kind: guide
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags.md"]
 aliases:
-  - /metrics/custom_metrics/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
+  - /metrics/custom_metrics/guide/custom-metrics-governance-drop-metrics-missing-specific-tags/
+  - /integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags/
 further_reading:
 - link: "https://vector.dev/docs/setup/going-to-prod/"
   tag: "Documentation"
@@ -12,7 +11,7 @@ further_reading:
 - link: "https://vector.dev/docs/reference/configuration/sources/datadog_agent/ "
   tag: "Documentation"
   text: "Datadog agent as a source for Vector"
-- link: "/integrations/observability_pipelines/integrate_vector_with_datadog/"
+- link: "/observability_pipelines/integrations/integrate_vector_with_datadog/"
   tag: "Documentation"
   text: "Configure Datadog agents to send data to Vector"
 ---

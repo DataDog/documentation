@@ -1,10 +1,9 @@
 ---
 title: Integrate Vector with Datadog
 kind: documentation
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrate_vector_with_datadog.md"]
 aliases:
   - /agent/vector_aggregation/
+  - /integrations/observability_pipelines/integrate_vector_with_datadog/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -15,17 +14,17 @@ further_reading:
 - link: "https://vector.dev/docs/"
   tag: "Documentation"
   text: "Vector documentation"
-- link: "/integrations/observability_pipelines/vector_configurations/"
+- link: "/observability_pipelines/vector_configurations/"
   tag: "Documentation"
   text: "Learn more about Vector configurations"
-- link: "/integrations/observability_pipelines/working_with_data/"
+- link: "/observability_pipelines/working_with_data/"
   tag: "Documentation"
   text: "Working with data using Vector"
 ---
 
 ## Overview
 
-Vector integrates with Datadog to aggregate logs, metrics, and traces from Datadog Agents and route collected telemetry to Datadog.
+Vector integrates with Datadog to aggregate logs and metrics from Datadog Agents and route collected telemetry to Datadog.
 
 Data flows along the following path:
 `Datadog Agent -> Vector -> Datadog`
@@ -33,12 +32,12 @@ Data flows along the following path:
 Before collecting your observability data from the Datadog Agent using Vector, you must:
 
 - Have the [Datadog Agent v6.35+ or v7.35+ installed][1].
-- Have [Vector installed][2]. To collect traces, you must have Vector v0.23.0 or above.
+- Have [Vector installed][2]. 
 - Have a [basic understanding of configuring Vector][3].
 
 ## Set up the Datadog Agent and your environment
 
-You must configure the [Datadog Agent](#datadog-agent-configuration) before setting up Vector to collect, transform, and route logs, metrics, or traces from the Datadog Agent to Datadog. If you are using Kubernetes, you must also configure [Kubernetes](#kubernetes-configuration) before setting up Vector.
+You must configure the [Datadog Agent](#datadog-agent-configuration) before setting up Vector to collect, transform, and route logs or metrics from the Datadog Agent to Datadog. If you are using Kubernetes, you must also configure [Kubernetes](#kubernetes-configuration) before setting up Vector.
 
 ### Datadog Agent configuration
 
@@ -142,7 +141,7 @@ sources:
 
 ### Add Vector-specific tags
 
-Logs, metrics, and traces sent by the Datadog Agent to Vector can be manipulated or formatted as explained in [working with data][9]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][10] for more information.
+Logs and metrics sent by the Datadog Agent to Vector can be manipulated or formatted as explained in [working with data][9]. When submitting logs using the Datadog API, see the [Datadog reserved attributes][10] for more information.
 
 Vector can also directly collect logs and metrics from [alternative sources][11]. When doing so, third-party logs may not include proper tagging. Use the [Vector Remap Language][12] to [add tags][13], sources, or service values.
 
@@ -273,53 +272,6 @@ source = """
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Traces
-
-To send traces from the Datadog Agent to Datadog:
-
-{{< tabs >}}
-{{% tab "YAML" %}}
-
-```yaml
-remap_traces_for_datadog:
-  type: remap
-  inputs:
-    - some_input_id
-  source: |
-    append(.tags, [join("sender:", “vector”)])
-    append(.tags, [join("vector_aggregator:", to_string(get_hostname!()))])
-```
-
-{{% /tab %}}
-{{% tab "TOML" %}}
-
-```toml
-[remap_traces_for_datadog]
-type = "remap"
-inputs = [ "some_input_id" ]
-source = """
-    append(.tags, [join("sender:", “vector”)])
-    append(.tags, [join("vector_aggregator:", to_string(get_hostname!()))])
-```
-
-{{% /tab %}}
-{{% tab "JSON" %}}
-
-```json
-{
-  "remap_traces_for_datadog": {
-    "type": "remap",
-    "inputs": [
-      "some_input_id"
-    ],
-    "source":
-        append(.tags, [join("sender:", “vector”)])
-        append(.tags, [join("vector_aggregator:", to_string(get_hostname!()))])
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Sink configuration
 
@@ -428,59 +380,12 @@ sinks:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Traces
-
-To send traces to Datadog, Vector must be configured with a [datadog_traces sink][16]. See the following example:
-
-{{< tabs >}}
-{{% tab "YAML" %}}
-
-```yaml
-sinks:
-  traces_to_datadog:
-    type: datadog_traces
-    inputs:
-       - component_id
-    default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
-```
-
-{{% /tab %}}
-{{% tab "TOML" %}}
-
-```toml
-sinks:
-  traces_to_datadog:
-    type: datadog_traces
-    inputs:
-      - component_id
-    default_api_key: '${DATADOG_API_KEY_ENV_VAR}'
-```
-
-{{% /tab %}}
-{{% tab "JSON" %}}
-
-```json
-{
-  "sinks": {
-    "traces_to_datadog": {
-      "type": "datadog_traces",
-      "inputs": [
-        "component_id"
-      ],
-      "default_api_key": "${DATADOG_API_KEY_ENV_VAR}"
-   }
-  }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Advanced Vector configurations
 
 ### Disk buffers
 
-Datadog recommends enabling disk buffers to prevent data loss. Vector uses [disk buffers][17] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure.  See the configuration below for setting buffers at the sink level.
+Datadog recommends enabling disk buffers to prevent data loss. Vector uses [disk buffers][16] to ensure no data is lost when there is a spike in data being sent or the downstream service is sending back pressure.  See the configuration below for setting buffers at the sink level.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -585,27 +490,26 @@ vector:
 {{% /tab %}}
 {{< /tabs >}}
 
-Read more about [architecting buffers][18].
+Read more about [architecting buffers][17].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/basic_agent_usage/?tabs=agentv6v7
-[2]: /integrations/observability_pipelines/setup/#install-vector
-[3]: /integrations/observability_pipelines/vector_configurations/
+[2]: /observability_pipelines/setup/#install-vector
+[3]: /observability_pipelines/vector_configurations/
 [4]: /agent/kubernetes/?tab=helm
 [5]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [6]: https://vector.dev/docs/setup/installation/package-managers/helm/
 [7]: https://vector.dev/docs/reference/configuration/
 [8]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-[9]: /integrations/observability_pipelines/working_with_data
+[9]: /observability_pipelines/working_with_data
 [10]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[11]: /integrations/observability_pipelines/integrations/#sources
+[11]: /observability_pipelines/integrations/#sources
 [12]: https://vector.dev/docs/reference/vrl/
 [13]: /getting_started/tagging
 [14]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
 [15]: https://vector.dev/docs/reference/configuration/sinks/datadog_metrics/
-[16]: https://vector.dev/docs/reference/configuration/sinks/datadog_traces/
-[17]: https://vector.dev/docs/about/concepts/#buffers
-[18]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data
+[16]: https://vector.dev/docs/about/concepts/#buffers
+[17]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data

@@ -7200,62 +7200,9 @@ components:
       type: object
     SecurityMonitoringRuleCreatePayload:
       description: Create a new rule.
-      properties:
-        cases:
-          description: Cases for generating signals.
-          example: []
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
-          type: array
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
-        hasExtendedTitle:
-          description: Whether the notifications include the triggering group-by values
-            in their title.
-          example: true
-          type: boolean
-        isEnabled:
-          description: Whether the rule is enabled.
-          example: true
-          type: boolean
-        message:
-          description: Message for generated signals.
-          example: ''
-          type: string
-        name:
-          description: The name of the rule.
-          example: My security monitoring rule.
-          type: string
-        options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
-        queries:
-          description: Queries for selecting logs which are part of the rule.
-          example: []
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQueryCreate'
-          type: array
-        tags:
-          description: Tags for generated signals.
-          example:
-          - env:prod
-          - team:security
-          items:
-            description: Tag.
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
-      required:
-      - name
-      - isEnabled
-      - queries
-      - options
-      - cases
-      - message
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleCreatePayload'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRuleCreatePayload'
       type: object
     SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
       description: 'If true, signals in non-production environments have a lower severity
@@ -7480,39 +7427,9 @@ components:
       type: object
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        distinctFields:
-          description: Field for which the cardinality is measured. Sent as an array.
-          items:
-            description: Field.
-            type: string
-          type: array
-        groupByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        metric:
-          description: 'The target field to aggregate over when using the sum or max
-
-            aggregations.'
-          type: string
-        metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        query:
-          description: Query to run on logs.
-          type: string
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
       type: object
     SecurityMonitoringRuleQueryAggregation:
       description: The aggregation type.
@@ -7523,6 +7440,7 @@ components:
       - max
       - new_value
       - geo_data
+      - event_count
       type: string
       x-enum-varnames:
       - COUNT
@@ -7531,112 +7449,13 @@ components:
       - MAX
       - NEW_VALUE
       - GEO_DATA
-    SecurityMonitoringRuleQueryCreate:
-      description: Query for matching rule.
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        distinctFields:
-          description: Field for which the cardinality is measured. Sent as an array.
-          items:
-            description: Field.
-            type: string
-          type: array
-        groupByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        metric:
-          description: 'The target field to aggregate over when using the sum or max
-
-            aggregations.'
-          type: string
-        metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        query:
-          description: Query to run on logs.
-          example: a > 3
-          type: string
-      required:
-      - query
-      type: object
+      - EVENT_COUNT
     SecurityMonitoringRuleResponse:
-      description: Rule.
-      properties:
-        cases:
-          description: Cases for generating signals.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
-          type: array
-        createdAt:
-          description: When the rule was created, timestamp in milliseconds.
-          format: int64
-          type: integer
-        creationAuthorId:
-          description: User ID of the user who created the rule.
-          format: int64
-          type: integer
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
-        hasExtendedTitle:
-          description: Whether the notifications include the triggering group-by values
-            in their title.
-          type: boolean
-        id:
-          description: The ID of the rule.
-          type: string
-        isDefault:
-          description: Whether the rule is included by default.
-          type: boolean
-        isDeleted:
-          description: Whether the rule has been deleted.
-          type: boolean
-        isEnabled:
-          description: Whether the rule is enabled.
-          type: boolean
-        message:
-          description: Message for generated signals.
-          type: string
-        name:
-          description: The name of the rule.
-          type: string
-        options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
-        queries:
-          description: Queries for selecting logs which are part of the rule.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
-          type: array
-        tags:
-          description: Tags for generated signals.
-          items:
-            description: Tag.
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
-        updateAuthorId:
-          description: User ID of the user who updated the rule.
-          format: int64
-          type: integer
-        version:
-          description: The version of the rule.
-          format: int64
-          type: integer
+      description: Create a new rule.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
+      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -7897,6 +7716,172 @@ components:
           maximum: 1000
           type: integer
       type: object
+    SecurityMonitoringSignalRuleCreatePayload:
+      description: Create a new signal correlation rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting signals which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringSignalRuleQuery:
+      description: Query for matching rule on signals
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        correlatedByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        correlatedQueryIndex:
+          description: Index of the rule query used to retrieve the correlated field.
+          format: int32
+          maximum: 9
+          type: integer
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        ruleId:
+          description: Rule ID to match on signals.
+          example: d3f-ru1-e1d
+          type: string
+      required:
+      - ruleId
+      type: object
+    SecurityMonitoringSignalRuleResponse:
+      description: Rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
+    SecurityMonitoringSignalRuleType:
+      description: The rule type.
+      enum:
+      - signal_correlation
+      type: string
+      x-enum-varnames:
+      - SIGNAL_CORRELATION
     SecurityMonitoringSignalState:
       description: The new triage state of the signal.
       enum:
@@ -8053,6 +8038,171 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    SecurityMonitoringStandardRuleCreatePayload:
+      description: Create a new rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringStandardRuleQuery:
+      description: Query for matching rule.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        metric:
+          description: 'The target field to aggregate over when using the sum or max
+
+            aggregations.'
+          type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          example: a > 3
+          type: string
+      required:
+      - query
+      type: object
+    SecurityMonitoringStandardRuleResponse:
+      description: Rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
     SecurityMonitoringTriageUser:
       description: Object representing a given user entity.
       properties:
@@ -11850,7 +12000,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - metrics_read
       summary: List active tags and aggregations
       tags:
       - Metrics
@@ -13791,6 +13942,18 @@ paths:
               86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule" in the system
+        security_rule_bis:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}_bis\",\n  \"queries\": [{\n    \"query\":
+              \"@test:false\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
+              [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\":
+              [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
+              \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
+              {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
+              86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\":
+              true,\n  \"type\": \"log_detection\"\n}"
+          step: there is a valid "security_rule_bis" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteSecurityMonitoringRule
@@ -14025,6 +14188,33 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/security_monitoring/signals/{signal_id}:
+    get:
+      description: Get a signal's details.
+      operationId: GetSecurityMonitoringSignal
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignal'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Get a signal's details
+      tags:
+      - Security Monitoring
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -14975,8 +15165,17 @@ paths:
         type: safe
   /api/v2/usage/cost_by_org:
     get:
-      description: Get cost across multi-org account. Cost by org data for a given
-        month becomes available no later than the 16th of the following month.
+      deprecated: true
+      description: 'Get cost across multi-org account.
+
+        Cost by org data for a given month becomes available no later than the 16th
+        of the following month.
+
+        **Note:** This endpoint has been deprecated. Please use the new endpoint
+
+        [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)
+
+        instead.'
       operationId: GetCostByOrg
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -15028,7 +15227,7 @@ paths:
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 45
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -15036,14 +15235,16 @@ paths:
       description: 'Get estimated cost across multi-org and single root-org accounts.
 
         Estimated cost data is only available for the current month and previous month.
-        To access historical costs prior to this, use the /cost_by_org endpoint.'
+
+        To access historical costs prior to this, use the `/historical_cost` endpoint.'
       operationId: GetEstimatedCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
-          level or at the sub-org level. Currently, only the 'sub-org' view is supported.
+          level or at the sub-org level. Available views are `summary` and `sub-org`.
+          Defaults to `summary`.
         in: query
         name: view
-        required: true
+        required: false
         schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -15118,10 +15319,74 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/usage/historical_cost:
+    get:
+      description: 'Get historical cost across multi-org and single root-org accounts.
 
-        Only the sub-org view is available currently, the summary view will be released
-        at a later date.'
+        Cost data for a given month becomes available no later than the 16th of the
+        following month.'
+      operationId: GetHistoricalCostByOrg
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
+          to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning this month.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/CostByOrgResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get historical cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-undo:
+        type: safe
   /api/v2/usage/hourly_usage:
     get:
       description: Get hourly usage by product family
