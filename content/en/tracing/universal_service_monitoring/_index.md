@@ -293,7 +293,7 @@ The `universal.http.server` operation name captures health metrics for inbound t
 After enabling Universal Service Monitoring, you can:
 
 
-- Navigate to **APM > Service Catalog** or **APM > Service Map** to [visualize your services and their dependencies][3]
+- Navigate to **APM** > **Service Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][3].
 
 - Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][4]. 
 
