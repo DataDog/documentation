@@ -14,6 +14,9 @@ further_reading:
     - link: 'profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+    - link: 'https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/'
+      tag: 'Blog'
+      text: 'Optimize your .NET application performance with the Datadog Continuous Profiler'
 aliases:
   - /tracing/profiler/enabling/dotnet/
 ---
