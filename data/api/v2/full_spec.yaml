@@ -7451,72 +7451,11 @@ components:
       - GEO_DATA
       - EVENT_COUNT
     SecurityMonitoringRuleResponse:
-      description: Rule.
-      properties:
-        cases:
-          description: Cases for generating signals.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
-          type: array
-        createdAt:
-          description: When the rule was created, timestamp in milliseconds.
-          format: int64
-          type: integer
-        creationAuthorId:
-          description: User ID of the user who created the rule.
-          format: int64
-          type: integer
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
-        hasExtendedTitle:
-          description: Whether the notifications include the triggering group-by values
-            in their title.
-          type: boolean
-        id:
-          description: The ID of the rule.
-          type: string
-        isDefault:
-          description: Whether the rule is included by default.
-          type: boolean
-        isDeleted:
-          description: Whether the rule has been deleted.
-          type: boolean
-        isEnabled:
-          description: Whether the rule is enabled.
-          type: boolean
-        message:
-          description: Message for generated signals.
-          type: string
-        name:
-          description: The name of the rule.
-          type: string
-        options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
-        queries:
-          description: Queries for selecting logs which are part of the rule.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
-          type: array
-        tags:
-          description: Tags for generated signals.
-          items:
-            description: Tag.
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
-        updateAuthorId:
-          description: User ID of the user who updated the rule.
-          format: int64
-          type: integer
-        version:
-          description: The version of the rule.
-          format: int64
-          type: integer
+      description: Create a new rule.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
+      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -7546,14 +7485,12 @@ components:
       description: The rule type.
       enum:
       - log_detection
-      - signal_correlation
       - infrastructure_configuration
       - workload_security
       - cloud_configuration
       type: string
       x-enum-varnames:
       - LOG_DETECTION
-      - SIGNAL_CORRELATION
       - INFRASTRUCTURE_CONFIGURATION
       - WORKLOAD_SECURITY
       - CLOUD_CONFIGURATION
@@ -7817,7 +7754,7 @@ components:
           description: Queries for selecting signals which are part of the rule.
           example: []
           items:
-            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQueryCreate'
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
           type: array
         tags:
           description: Tags for generated signals.
@@ -7829,7 +7766,7 @@ components:
             type: string
           type: array
         type:
-          $ref: '#/components/schemas/SecurityMonitoringSignalRuleTypeCreate'
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
       required:
       - name
       - isEnabled
@@ -7866,42 +7803,79 @@ components:
           type: string
         ruleId:
           description: Rule ID to match on signals.
-          type: string
-      type: object
-    SecurityMonitoringSignalRuleQueryCreate:
-      description: Query for matching rule on signals
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        correlatedByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        correlatedQueryIndex:
-          description: Index of the rule query used to retrieve the correlated field.
-          format: int32
-          maximum: 9
-          type: integer
-        metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        ruleId:
-          description: Rule ID to match on signals.
           example: d3f-ru1-e1d
           type: string
       required:
       - ruleId
       type: object
-    SecurityMonitoringSignalRuleTypeCreate:
+    SecurityMonitoringSignalRuleResponse:
+      description: Rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
+    SecurityMonitoringSignalRuleType:
       description: The rule type.
       enum:
       - signal_correlation
@@ -8102,7 +8076,7 @@ components:
           description: Queries for selecting logs which are part of the rule.
           example: []
           items:
-            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQueryCreate'
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
           type: array
         tags:
           description: Tags for generated signals.
@@ -8157,47 +8131,78 @@ components:
           type: string
         query:
           description: Query to run on logs.
-          type: string
-      type: object
-    SecurityMonitoringStandardRuleQueryCreate:
-      description: Query for matching rule.
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        distinctFields:
-          description: Field for which the cardinality is measured. Sent as an array.
-          items:
-            description: Field.
-            type: string
-          type: array
-        groupByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        metric:
-          description: 'The target field to aggregate over when using the sum or max
-
-            aggregations.'
-          type: string
-        metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        query:
-          description: Query to run on logs.
           example: a > 3
           type: string
       required:
       - query
       type: object
+    SecurityMonitoringStandardRuleResponse:
+      description: Rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
     SecurityMonitoringTriageUser:
       description: Object representing a given user entity.
       properties:
