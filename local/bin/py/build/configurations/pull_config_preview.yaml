@@ -674,7 +674,7 @@
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
-    
+
     - action: pull-and-push-file
       branch: master
       globs:
@@ -699,7 +699,7 @@
             - link: "real_user_monitoring/error_tracking/"
               tag: "Documentation"
               text: "Learn about Error Tracking"
-    
+
     - action: pull-and-push-file
       branch: master
       globs:
@@ -762,10 +762,10 @@
               text: "dd-sdk-reactnative Source code"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor your React Native applications" 
+              text: "Monitor your React Native applications"
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
-              text: "Learn how to explore your RUM data"  
+              text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
       branch: main
       globs:
@@ -850,8 +850,8 @@
               text: "dd-sdk-reactnative Source code"
             - link: "real_user_monitoring/error_tracking/"
               tag: "Documentation"
-              text: "Learn about Error Tracking"  
-          
+              text: "Learn about Error Tracking"
+
   - repo_name: dd-sdk-flutter
     contents:
     - action: pull-and-push-file
@@ -1075,3 +1075,16 @@
       options:
         dest_dir: '/security_platform/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
+
+  - repo_name: dd-source
+    contents:
+    - action: workflows
+      branch: main
+      globs:
+        - "domains/workflow/actionplatform/apps/manifest_generator/manifest.schema.json"
+        - "domains/workflow/actionplatform/runner/bundles/com.datadoghq.*/manifest.json"
+      options:
+        dest_path: '/workflows/actions_catalog/'
+        bundle_excludes:
+          - "com.datadoghq.test"
+          - "com.datadoghq.sample"

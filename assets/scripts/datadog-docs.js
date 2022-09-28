@@ -83,7 +83,7 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('catalog')) {
+    if (document.querySelector('.js-group-header')) {
         initializeGroupedListings();
     }
 
@@ -191,6 +191,14 @@ function getPathElement(event = null) {
             `header [href*="${ref}"]`
           );
         }
+    }
+
+    if (path.includes('workflows/actions_catalog')) {
+      const workflowsEl = document.querySelector('.side .nav-top-level > [data-path*="workflows"]');
+      sideNavPathElement = workflowsEl.nextElementSibling.querySelector(
+          '[data-path*="workflows/actions_catalog"]'
+      );
+      mobileNavPathElement = sideNavPathElement;
     }
 
     if (sideNavPathElement) {
