@@ -88,5 +88,5 @@ To schedule a workflow run:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: workflows/setup/
+[1]: /workflows/setup/
 [2]: app.datadoghq.com/security/configuration/notification-rules
