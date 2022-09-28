@@ -176,7 +176,7 @@ apm_config:
 
 ## 収集した HTTP データ
 
-Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、[スパンタグのセマンティクス][11]を参照してください。
+Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、[スパンタグのセマンティクス][3]を参照してください。
 
 ### クライアント IP ヘッダーの構成
 
@@ -200,7 +200,7 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 
 ## ログの機密スパンのスクラビング
 
-[スパン][3]のタグから機密データをスクラブするには、[datadog.yaml コンフィギュレーションファイル][4]の `replace_tags` 設定、または `DD_APM_REPLACE_TAGS` 環境変数を使用します。設定または環境変数の値は、タグ内で機密データの置換方法を指定するパラメーターグループの一覧です。パラメーターは以下のとおりです。
+[スパン][4]のタグから機密データをスクラブするには、[datadog.yaml コンフィギュレーションファイル][5]の `replace_tags` 設定、または `DD_APM_REPLACE_TAGS` 環境変数を使用します。設定または環境変数の値は、タグ内で機密データの置換方法を指定するパラメーターグループの一覧です。パラメーターは以下のとおりです。
 
 * `name`: 置換するタグのキー。すべてのタグを照合するには、`*` を使用します。リソースを照合するには、`resource.name` を使用します。
 * `pattern`: 照合対象の正規表現パターン。
@@ -287,13 +287,13 @@ DD_APM_REPLACE_TAGS=[
 
 ## リソースを収集から除外
 
-特定のリソースをトレースしないオプションに関する詳しい概要については、[不要なリソースを無視する][5]をご参照ください。
+特定のリソースをトレースしないオプションに関する詳しい概要については、[不要なリソースを無視する][6]をご参照ください。
 
 サービスに、ヘルスチェックなどシミュレーショントラフィックが含まれる場合、このようなトレースの収集を除外して、サービスのメトリクスが本番トラフィックと一致するようにすることが望ましい場合があります。
 
 そこで、Agent により Datadog に送信されるトレースから、特定のリソースを除外するように Agent を設定できます。特定のリソースが送信されないようにするには、`datadog.yaml` ファイルの `ignore_resources` 設定を使用します。そして、1 つ以上の正規表現のリストを作成し、リソース名に基づき Agent で除外するリソースを指定します。
 
-コンテナ化された環境で実行している場合は、代わりに Datadog Agent を使用してコンテナに `DD_APM_IGNORE_RESOURCES` を設定します。詳細については、[Docker APM Agent 環境変数][6]をご参照ください。
+コンテナ化された環境で実行している場合は、代わりに Datadog Agent を使用してコンテナに `DD_APM_IGNORE_RESOURCES` を設定します。詳細については、[Docker APM Agent 環境変数][7]をご参照ください。
 
 ```text
 ## @param ignore_resources - 文字列のリスト - オプション
@@ -304,15 +304,15 @@ DD_APM_REPLACE_TAGS=[
 
 ## トレースを Agent API に直接送信
 
-特定のアプリケーション用にカスタマイズされたインスツルメンテーションが必要な場合は、Agent 側のトレース API を使用して、トレースに含めるスパンを個別に選択することを検討してください。詳細については、[API に関するドキュメント][7]を参照してください。
+特定のアプリケーション用にカスタマイズされたインスツルメンテーションが必要な場合は、Agent 側のトレース API を使用して、トレースに含めるスパンを個別に選択することを検討してください。詳細については、[API に関するドキュメント][8]を参照してください。
 
 ## Datadog トレーサーでスパンを修正
 
 このページでは、データが Datadog Agent に到達してから修正する方法について説明していますが、一部のトレーシングライブラリは拡張可能です。カスタムポストプロセッサーを作成してスパンをインターセプトし、適宜 (正規表現マッチなどに基づき) 調整または破棄することが可能です。詳細は、ご希望の言語で「カスタムインスツルメンテーション」ドキュメントをご参照ください。
 
-* Java: [TraceInterceptor インターフェイス][8]
-* Ruby: [処理パイプライン][9]
-* Python: [トレースフィルター][10]
+* Java: [TraceInterceptor インターフェイス][9]
+* Ruby: [処理パイプライン][10]
+* Python: [トレースフィルター][11]
 
 ## テレメトリーの収集
 
@@ -322,12 +322,12 @@ Datadog は、お客様のトレーシングライブラリに関する環境情
 
 [1]: /ja/help/
 [2]: /ja/tracing/glossary/#trace
-[3]: /ja/tracing/glossary/#spans
-[4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /ja/tracing/guide/ignoring_apm_resources/
-[6]: /ja/agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[7]: /ja/tracing/guide/send_traces_to_agent_by_api/
-[8]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
-[9]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
-[11]: /ja/tracing/trace_collection/tracing_naming_convention/#http-requests
+[3]: /ja/tracing/trace_collection/tracing_naming_convention/#http-requests
+[4]: /ja/tracing/glossary/#spans
+[5]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[6]: /ja/tracing/guide/ignoring_apm_resources/
+[7]: /ja/agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[8]: /ja/tracing/guide/send_traces_to_agent_by_api/
+[9]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
+[10]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

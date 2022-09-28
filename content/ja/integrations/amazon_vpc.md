@@ -9,6 +9,10 @@ dependencies: []
 description: AWS VPC ログを収集
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/vpc-security-flowlogs/
+  tag: GitHub
+  text: Datadog でフローログを監視し、VPC のセキュリティを確保する
 git_integration_title: amazon_vpc
 has_logo: false
 integration_id: ''
@@ -29,9 +33,9 @@ Amazon Virtual Private Cloud (Amazon VPC) を使用すると、仮想ネット�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
-Datadog で [Amazon Web Services インテグレーション][1]がセットアップされている必要があります。
+[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
@@ -102,6 +106,10 @@ AWS VPC インテグレーションには、サービスのチェック機能は
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs

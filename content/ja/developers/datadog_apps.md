@@ -48,7 +48,11 @@ $ `yarn start`
 
 このアーキテクチャの詳細については、[Developer Platform 開発者ガイド][3]を参照してください。
 
-4. Datadog 内の [Developer Platform][4] にアクセスし、右上の **+ New App** をクリックします。
+<div class="alert alert-info">
+ブラウザでローカルウィジェットを直接操作すると、JavaScript コンソールでキャッチされない <strong>HandshakeTimeoutError</strong> が表示されることがあります。これは予想されることです。Datadog Apps SDK は、Datadog ユーザーインターフェイスに接続する iframe で実行するように<a href="https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md">設計</a>されており、SDK が通信する Datadog UI がない場合、ウィジェットと Datadog UI 間のハンドシェイク試行はタイムアウトします。
+</div>
+
+1. Datadog 内の [Developer Platform][4] にアクセスし、右上の **+ New App** をクリックします。
 
 <img style="max-width:80%" alt="New App" src="https://user-images.githubusercontent.com/228230/137548671-c0c64c2e-e3cd-494b-990c-8dc8a90d4800.png">
 

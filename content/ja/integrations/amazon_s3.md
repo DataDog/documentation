@@ -41,7 +41,7 @@ Amazon Simple Storage Service (S3) は、可用性の高いスケーラブルな
 
 #### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`S3` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `S3` が有効になっていることを確認します。
 2. Amazon S3 のメトリクスを収集するため、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     - `s3:ListAllMyBuckets`: 使用できるバケットを一覧表示するために使用されます。
@@ -109,10 +109,10 @@ AWS S3 インテグレーションには、サービスのチェック機能は�
 
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-overview.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_s3
+[5]: https://app.datadoghq.com/integrations/amazon-s3
 [6]: http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/server-access-logging.html
 [8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/

@@ -11,6 +11,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
+- link: https://www.datadoghq.com/blog/audit-trail-best-practices/
+  tag: ブログ
+  text: 監査証跡で重要な Datadog のアセットと構成を監視する
 kind: documentation
 title: Datadog Audit Trail（監査証跡）
 ---
@@ -101,7 +104,7 @@ Datadog 監査証跡には、インデックス保持の変更、ログパイプ
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="監査証跡ダッシュボード" style="width:100%;">}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -690,6 +690,10 @@ CWS のログは、以下の JSON スキーマを持ちます。
                     "$ref": "#/$defs/File",
                     "description": "File information of the executable"
                 },
+                "interpreter": {
+                    "$ref": "#/$defs/File",
+                    "description": "File information of the interpreter"
+                },
                 "container": {
                     "$ref": "#/$defs/ContainerContext",
                     "description": "Container context"
@@ -801,6 +805,10 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 "executable": {
                     "$ref": "#/$defs/File",
                     "description": "File information of the executable"
+                },
+                "interpreter": {
+                    "$ref": "#/$defs/File",
+                    "description": "File information of the interpreter"
                 },
                 "container": {
                     "$ref": "#/$defs/ContainerContext",
@@ -2159,6 +2167,10 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "$ref": "#/$defs/File",
             "description": "File information of the executable"
         },
+        "interpreter": {
+            "$ref": "#/$defs/File",
+            "description": "File information of the interpreter"
+        },
         "container": {
             "$ref": "#/$defs/ContainerContext",
             "description": "Container context"
@@ -2226,6 +2238,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | `exit_time` | プロセスの終了時間 |
 | `credentials` | プロセスに関連する認証情報 |
 | `executable` | 実行ファイルのファイル情報 |
+| `interpreter` | インタープリターのファイル情報 |
 | `container` | コンテナコンテキスト |
 | `argv0` | コマンドライン第一引数 |
 | `args` | コマンドライン引数 |
@@ -2238,6 +2251,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | リファレンス |
 | ---------- |
 | [ProcessCredentials](#processcredentials) |
+| [ファイル](#file) |
 | [ファイル](#file) |
 | [ContainerContext](#containercontext) |
 
@@ -2309,6 +2323,10 @@ CWS のログは、以下の JSON スキーマを持ちます。
         "executable": {
             "$ref": "#/$defs/File",
             "description": "File information of the executable"
+        },
+        "interpreter": {
+            "$ref": "#/$defs/File",
+            "description": "File information of the interpreter"
         },
         "container": {
             "$ref": "#/$defs/ContainerContext",
@@ -2388,6 +2406,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | `exit_time` | プロセスの終了時間 |
 | `credentials` | プロセスに関連する認証情報 |
 | `executable` | 実行ファイルのファイル情報 |
+| `interpreter` | インタープリターのファイル情報 |
 | `container` | コンテナコンテキスト |
 | `argv0` | コマンドライン第一引数 |
 | `args` | コマンドライン引数 |
@@ -2402,6 +2421,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | リファレンス |
 | ---------- |
 | [ProcessCredentials](#processcredentials) |
+| [ファイル](#file) |
 | [ファイル](#file) |
 | [ContainerContext](#containercontext) |
 | [プロセス](#process) |
