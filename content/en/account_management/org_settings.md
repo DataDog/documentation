@@ -13,7 +13,7 @@ Read the [user management][2] documentation to add, edit, and disable users.
 
 #### Service accounts
 
-[Service accounts][3] are non-interactive accounts that can be used to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once, by the individual who created the key. You can use service accounts to access Datadog APIs without having your application or script be associated with a particular person.
+[Service accounts][3] are non-interactive accounts that you can use to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once by the individual who created the key. You can use service accounts to access Datadog APIs without associating your application or script with a particular person.
 
 ### Groups
 
@@ -30,21 +30,21 @@ To learn how to create and set mappings, read the [Mapping SAML attributes docum
 
 ##### SAML settings
 
-For more information about configuring SAML, reference the [Single sign on with SAML documentation][6].
+To learn how to configure SAML, read the [Single sign on with SAML documentation][6].
 
 ### Access
 
 #### API Keys
 
-This section allows you to view, copy, and revoke any API key in the list. Your API Keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog. Read the [API keys documentation][7] for more information on creating, editing, and revoking keys.
+This section allows you to view, copy, and revoke any API key in the list. Your API keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog. Read the [API keys documentation][7] for more information on creating, editing, and revoking keys.
 
 #### Application Keys
 
-You can filter application keys by name, ID, or owner, or click the **Only My Keys** toggle to only view application keys you own. Read the [Application keys documentation][7] for more information on how to add or remove them.
+You can filter application keys by name, ID, or owner, or click the **Only My Keys** toggle to only view application keys you own. Read the [Application keys documentation][7] for more information on adding and removing keys.
 
 #### Client Tokens
 
-Client tokens are used to send events and logs from your user’s web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create them][8] is similar to API and Application Keys.
+Client tokens are used to send events and logs from your user’s web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create client tokens][8] is similar to that for API and application keys.
 
 #### Events API Emails
 
@@ -79,6 +79,11 @@ The [**OAuth Apps**][10] page allows you to view or manage OAuth applications in
 To rename your organization, click the **Edit** button in the **Preferences** tab of **Organization Settings**, enter the new name, then click the **Save** button.
 
 **Note: Your organization name may not exceed 32 characters.**
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/users/default_roles/
 [2]: /account_management/users/

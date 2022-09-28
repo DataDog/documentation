@@ -5,28 +5,29 @@ kind: documentation
 
 ## Overview
 
-Service accounts are non-interactive accounts that can be used to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once, by the individual who created the key.
+Service accounts are non-interactive accounts you can use to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once by the individual who created the key.
 
 Suppose an employee at your company sets up an automated script to send requests to the Datadog API, using their personal application key. When that employee leaves the company, you deactivate their Datadog account, and their application key stops working. The automated script also stops working, until someone updates it with a valid application key. Using a service account application key instead of a personal application key for automated requests to the Datadog API avoids this problem.
 
 ## Navigation
 
-Service accounts fall under [Organization Settings][1]. To access service accounts in the UI, take the following steps:
+Service accounts exist in [Organization Settings][1]. 
 
-1. Click **Organization Settings** from the account menu in the bottom of the left side navigation.
-2. From the left menu, select **Service Accounts**.
+To access service accounts in the UI:
 
-The service accounts page appears, with a list of all service accounts in the organization. Users with the Service Account Write permission, including users with the Datadog Admin Role, may create new service accounts. Users without Service Account Write see a read-only view.
+1. Navigate to **Organization Settings** from your account menu.
+2. Under **Accounts**, select **Service Accounts**.
+
+The [Service Accounts page][3] contains a list of all service accounts in your organization. Users with the Service Account Write permission, including users with the Datadog Admin Role, may create service accounts. Users without the Service Account Write permission see a read-only view.
 
 ### View service accounts
 
-By default, the service accounts page shows only active service accounts. To include disabled service accounts in the service account view, click the checkbox next to **Disabled**.
+By default, the Service Accounts page shows only active service accounts. To include disabled service accounts in the list below, select **Disabled**.
 
 Use the search box at the top of the page to filter service accounts. The filter searches name, email, and role fields.
 
-Click on a line in the table to access a detailed view in a right side panel. 
+Click on an account to access a detailed side panel view with the following information: 
 
-In the side panel, you can see additional data, including the following:
 - Status (active or disabled)
 - Created and last modified dates
 - Roles
@@ -37,28 +38,30 @@ In the side panel, you can see additional data, including the following:
 
 To create a service account, perform the following steps:
 
-1. Click the **New Service Account** button on the service accounts page. A dialog box appears.
-2. In the pop-up dialog box, enter the name and email address for your new service account.
-3. Use the **Assign Roles** drop-down to choose one or more roles for your service account.
+1. Click **New Service Account**. A dialog box appears.
+2. Enter a name and email address for your service account.
+3. Use the **Assign Roles** drop-down menu to choose one or more roles for your service account.
 4. To save, click **Create Service Account**.
 
-**Note:** Unlike the email addresses for Datadog users, service account email addresses do not need to be unique across an organization.
+Unlike the email addresses for Datadog users, service account email addresses do not need to be unique across an organization.
 
 ### Edit service account
 
-To modify a service account, click on it from the service accounts page. 
-1. In the side panel, click the **Edit** button next to the service account name. A dialog box appears.
-2. In the pop-up dialog box, update any fields you would like to change. You can edit the name, email address, status, and roles.
+To modify a service account, click on one in the service accounts list. 
+
+1. In the side panel, click **Edit** next to the service account name. A dialog box appears.
+2. Update any fields you would like to change. You can edit the name, email address, status, and roles.
 3. Click **Save**.
 
-To disable a service account, follow the procedure above to edit the service account. In the pop-up dialog box, set the status to **Disabled**.
+To disable a service account, follow the procedure above to edit the service account and set the status to **Disabled**.
 
 ### Create or revoke application keys
 
-To create or revoke service account application keys, select the service account on the service accounts page. The service account detailed view side panel appears.
+To create or revoke service account application keys, select an account from the service account list. The service account's side panel appears.
 
 To create a new application key, follow the steps below:
-- Click the **New Key** button. A dialog box appears.
+
+- Click **New Key**. A dialog box appears.
 - Give the key a descriptive name.
 - Click **Create Key**. 
 
@@ -76,11 +79,11 @@ You can view a service account applications key exactly once, immediately after 
 
 ## Permissions
 
-By creating a service account, you create an actor that interacts with Datadog on your behalf. Therefore, your capabilities on the service accounts page vary depending on your Datadog roles and permissions.
+By creating a service account, you create an actor that interacts with Datadog on your behalf. Your capabilities on the Service Accounts page vary depending on your Datadog roles and permissions.
 
 Creating a service account requires the Service Account Write permission. The Datadog Admin role includes Service Account Write, so anyone with the Datadog Admin role can create service accounts.
 
-When you create a service account, you may give it any subset of the roles and permissions that you have. The exception is if you have the User Access Manage permission. Having User Access Manage effectively gives you administrator access to do anything in Datadog. Therefore, Datadog accounts with the User Access Manage permission have no restrictions on the roles and permissions they can assign to service accounts.
+When creating a service account, you can give it any subset of the roles and permissions that you have. The exception is if you have the User Access Manage permission, which effectively gives you administrator access to do anything in Datadog. Datadog accounts with the User Access Manage permission have no restrictions on the roles and permissions they can assign to service accounts.
 
 
 ## Notifications
@@ -90,5 +93,11 @@ Datadog sends a notification to the email address associated with the service ac
 - Revoke an application key
 - Disable the service account
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /account_management/org_settings/
 [2]: /api/latest/service-accounts/
+[3]: https://app.datadoghq.com/organization-settings/service-accounts
