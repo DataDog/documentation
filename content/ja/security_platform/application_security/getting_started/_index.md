@@ -128,8 +128,6 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのア
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
-   {{< /tabs >}}
-
 コンテナの Dockerfile に以下の環境変数の値を追加します。
 
 ```shell
@@ -176,8 +174,7 @@ spec:
 env DD_APPSEC_ENABLED=true rails server
 ```
 
-{{< /tabs >}}
-
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% appsec-getstarted-2-canary %}}
