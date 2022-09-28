@@ -65,7 +65,7 @@ Masks all HTML text, user input, images, and links. Text on your application is 
 
 ### Allow mode
 
-Records everything unmasked, excluding HTML input elements such as `password`, `email`, and `tel`, and elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes.
+Records everything unmasked.
 
 {{< img src="real_user_monitoring/session_replay/allow.png" alt="Allow mode" style="width:70%;">}}
 
@@ -92,6 +92,12 @@ The example below demonstrates how you can override certain elements in your HTM
 The dollar amount in the cart is replaced with asterisks.
 
 {{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;">}}
+
+## Privacy restrictions
+
+In order to protect end-user privacy, regardless of your privacy configuration, the following HTML elements are **always masked**:
+- Input elements of type `password`, `email`, and `tel`
+- Elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes
 
 ## Advanced privacy options
 

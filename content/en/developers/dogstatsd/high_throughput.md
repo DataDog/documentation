@@ -264,7 +264,7 @@ For more information, see the [DogStatsD for C# repository][1].
 
 If your DogStatsD server uses UDS and is dropping packets at a high throughput, configuring the server to use more CPU may improve processing speed and decrease packet drops.
 
-You may also configure your DogStatsD server if the client telemetry server indicates packet drops and the server does not use more than 2 CPUs or 2 cores even if they are available.
+You may also configure your DogStatsD server if the client telemetry indicates packet drops and the server does not use more than 2 CPUs or 2 cores even if they are available.
 
 To reduce the amount of packet drops:
 
