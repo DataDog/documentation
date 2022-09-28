@@ -51,7 +51,7 @@ Datadog scans for the `service.datadog.yaml` file at the root of each repository
 
 ### Modify service definition
 
-When the GitHub Apps integration has been set up for your service definitions, an **Edit in Github** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
+When the GitHub Apps integration is set up for your service definitions, an **Edit in Github** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
 
 {{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
 
