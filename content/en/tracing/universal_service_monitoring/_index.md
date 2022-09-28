@@ -305,7 +305,7 @@ After enabling Universal Service Monitoring, you can:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
-[2]: /tracing/deployment_tracking/
+[2]: /tracing/services/deployment_tracking/
 [3]: /tracing/service_catalog/
 [4]: /tracing/services/deployment_tracking/
 [5]: /monitors/create/types/apm/?tab=apmmetrics
