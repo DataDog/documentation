@@ -39,9 +39,9 @@ If the service, API, or custom library you are interested in is not listed on th
 
 To discover other services through existing Datadog telemetry such as infrastructure metrics, go to the **Discover Services** tab and follow instructions there. Discovery uses the `DD_SERVICE` [Unified Service Tagging convention][4] to locate services sending data to your Datadog organization.
 
-## Set up the GitHub Apps integration
+## Store and edit service definitions in GitHub
 
-You can use the [GitHub Apps integration][5] to display links for service definitions in GitHub.
+Configure the [GitHub Apps integration][5] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
 
 To install the GitHub Apps integration, navigate to the [integration tile][6] and click **Link GitHub Account** in the **Repo Configuration** tab. 
 
@@ -51,11 +51,11 @@ Datadog scans for the `service.datadog.yaml` file at the root of each repository
 
 ### Modify service definition
 
-The **Edit in Github** button appears in the **Definition** tab and links users directly to a pre-templated commit that you can modify.
+When the GitHub Apps integration has been set up for your service definitions, an **Edit in Github** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
 
 {{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
 
-Once you have updated the YAML files for your repositories, your changes propagate to the Service Catalog. To prevent accidental overwriting, Datadog recommends creating and modifying your service definition files with the GitHub Apps integration or the [Service Definition API endpoints][1].
+After you update the YAML files for your repositories, your changes propagate to the Service Catalog. To prevent accidental overwriting, create and modify your service definition files with the GitHub Apps integration or the [Service Definition API endpoints][1].
 
 ## Further reading
 
