@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 ## Overview
-Google Cloud Run is [tk]
+Google Cloud Run is a serverless compute platform.
 
 ## Quickstart
 
@@ -103,6 +103,10 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
 | `DD_ENV` | See Unified Service Tagging. |
 | `DD_SOURCE` | See Unified Service Tagging. |
 
+### Log collection
+
+You can use the [GCP integration][4] to collect logs. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the Agent.
+
 ### Build with the Datadog buildpack
 
 1. Build your application by running the following:
@@ -124,3 +128,4 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
 [1]: /getting_started/serverless/gcr
 [2]: https://console.cloud.google.com/security/secret-manager
 [3]: https://console.cloud.google.com/run
+[4]: /integrations/google_cloud_platform/#log-collection
