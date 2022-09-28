@@ -23,7 +23,7 @@ During the beta, there is a limit of 100 Reference Tables per account.
 
 Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in an Reference Table and the associated metadata. 
 
-{{< img src="integrations/guide/reference-tables/overview.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
 ## Validation rules
 
