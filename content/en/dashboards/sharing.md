@@ -25,7 +25,7 @@ further_reading:
 Shared dashboards and graphs allow you to display metric, trace, and log visualizations outside of Datadog.
 
 ## Dashboards
-When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard. 
+When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard.
 
 ### Share a dashboard by public URL
 
@@ -41,7 +41,7 @@ To share an entire dashboard publicly, generate a URL:
 ### Share a dashboard with individual email addresses
 
  To authorize one or more specific email addresses to view a dashboard page:
- 
+
 1. On the dashboard's page, click the settings cog in the upper right.
 2. Select **Generate public URL**.
 3. Select **Only specified people** for indicating who can access this dashboard.
@@ -65,6 +65,10 @@ To revoke a shared dashboard:
 3. Click on the settings cog in the upper right.
 4. Click **Configure sharing**.
 5. Click **Revoke public URL**.
+
+### Refresh interval
+
+Publicly shared dashboards refresh every 30 seconds. This refresh interval cannot be customized.
 
 ## Graphs
 

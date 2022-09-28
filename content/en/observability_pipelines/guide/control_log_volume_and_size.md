@@ -1,13 +1,13 @@
 ---
 title: Control Log Volume and Size
 kind: guide
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/guide/control_log_volume_and_size.md"]
+aliases:
+  - /integrations/observability_pipelines/guide/control_log_volume_and_size/
 further_reading:
-  - link: "/integrations/observability_pipelines/working_with_data/"
+  - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
     text: "Working with data using Vector"
-  - link: /integrations/observability_pipelines/vector_configurations/
+  - link: /observability_pipelines/vector_configurations/
     tag: Documentation
     text: Learn more about Vector configurations
 ---
@@ -493,8 +493,8 @@ del(.unecessary_tag_field)"""
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/observability_pipelines/setup/
-[2]: /integrations/observability_pipelines/vector_configurations/
+[1]: /observability_pipelines/setup/
+[2]: /observability_pipelines/vector_configurations/
 [3]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
 [4]: https://vector.dev/docs/reference/configuration/transforms/filter/
 [5]: https://vector.dev/docs/reference/vrl/

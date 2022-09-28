@@ -2,13 +2,15 @@
 import os
 
 import requests
-
+import glob
+import shutil
 from github_connect import GitHub
 from functools import partial
+from itertools import chain, groupby
 from multiprocessing import cpu_count
 from multiprocessing.pool import ThreadPool as Pool
-from os import sep, getenv
-from os.path import isdir, sys
+from os import sep, getenv, makedirs
+from os.path import isdir, sys, dirname, normpath
 
 
 def download_from_repo(github_token, org, repo, branch, globs, extract_dir, commit_sha=None):
@@ -47,6 +49,11 @@ def download_from_repo(github_token, org, repo, branch, globs, extract_dir, comm
                     )
                 ]
 
+def download_from_local_repo(local_repo_path, org, repo, branch, globs, extract_dir, commit_sha=None):
+    for path_to_file in chain.from_iterable(glob.glob('{}{}{}'.format(local_repo_path, sep, pattern), recursive=True) for pattern in globs):
+        dest = "{0}{1}{2}{3}".format(extract_dir, repo, sep, normpath(path_to_file.replace(local_repo_path, '')))
+        makedirs(dirname(dest), exist_ok=True)
+        shutil.copyfile(path_to_file, dest)
 
 def update_globs(new_path, globs):
     """
@@ -61,6 +68,15 @@ def update_globs(new_path, globs):
     return new_globs
 
 
+def grouped_globs_table(list_of_contents):
+    data = {}
+    sorted_list_of_contents = sorted(list_of_contents, key=lambda k: k['repo_name'])
+    for key, value in groupby(sorted_list_of_contents, lambda k: k['repo_name']):
+        grouped_globs = [x['globs'] for x in value]
+        data[key] = list(chain.from_iterable(grouped_globs))
+    return data
+
+
 def local_or_upstream(github_token, extract_dir, list_of_contents):
     """
     This goes through the list_of_contents and check for each repo specified in order:
@@ -71,14 +87,21 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
     :param extract_dir: Directory into which to put all content downloaded.
     :param list_of_content: List of content to check if available locally or if it needs to be downloaded from Github
     """
+    grouped_globs = grouped_globs_table(list_of_contents)
     is_in_ci = os.getenv("CI_COMMIT_REF_NAME")
     for content in list_of_contents:
         local_repo_path = os.path.join("..", content["repo_name"])
         repo_path_last_extract = os.path.join(extract_dir, content["repo_name"])
         if isdir(local_repo_path) and not is_in_ci:
             print(f"\x1b[32mINFO\x1b[0m: Local version of {content['repo_name']} found in: {local_repo_path}")
+            download_from_local_repo(local_repo_path, content["org_name"], content["repo_name"], content["branch"], grouped_globs.get(content["repo_name"], content["globs"]),
+                                     extract_dir, content.get("sha", None))
             content["globs"] = update_globs(
-                local_repo_path,
+                "{0}{1}{2}".format(
+                    extract_dir,
+                    content["repo_name"],
+                    sep,
+                ),
                 content["globs"],
             )
         elif isdir(repo_path_last_extract) and not is_in_ci:
@@ -99,7 +122,7 @@ def local_or_upstream(github_token, extract_dir, list_of_contents):
                                content["org_name"],
                                content["repo_name"],
                                content["branch"],
-                               content["globs"],
+                               grouped_globs.get(content["repo_name"], content["globs"]),
                                extract_dir,
                                content.get("sha", None)
                                )

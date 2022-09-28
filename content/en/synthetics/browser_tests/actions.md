@@ -414,7 +414,7 @@ You can create up to 20 assertions per step by clicking **New Assertion** or by 
 
 #### Extract a variable from the response
 
-Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs.
+Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
 To start parsing a variable, click **Extract a variable from response content**:
 
@@ -426,7 +426,6 @@ To start parsing a variable, click **Extract a variable from response content**:
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
-You can extract up to ten variables per test step. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
 ## Manage step order
 

@@ -1,8 +1,8 @@
 ---
 title: Working with Data
 kind: Documentation
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/working_with_data.md"]
+aliases:
+  - /integrations/observability_pipelines/working_with_data/
 further_reading:
   - link: https://vector.dev/docs/reference/configuration/transforms/aws_ec2_metadata/
     tag: Documentation
@@ -25,10 +25,10 @@ further_reading:
   - link: https://vector.dev/guides/level-up/csv-enrichment-guide/
     tag: Documentation
     text: Use CSV enrichment to provide more context to your data
-  - link: /integrations/observability_pipelines/integrate_vector_with_datadog/
+  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
     tag: Documentation
     text: Configure Datadog agents to send data to Vector
-  - link: /integrations/observability_pipelines/vector_configurations/
+  - link: /observability_pipelines/vector_configurations/
     tag: Documentation
     text: Learn more about Vector configurations
 ---
@@ -402,12 +402,12 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 [12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
 [13]: https://vector.dev/docs/reference/vrl/functions/#path-functions
 [14]: https://vector.dev/docs/reference/vrl/#reference
-[15]: /integrations/observability_pipelines/vector_configurations
+[15]: /observability_pipelines/vector_configurations
 [16]: https://vector.dev/docs/reference/configuration/transforms/sample/
 [17]: https://vector.dev/docs/reference/configuration/transforms/reduce/
 [18]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
 [19]: https://vector.dev/docs/reference/configuration/transforms/filter/
 [20]: https://vector.dev/docs/reference/configuration/transforms/aggregate/
 [21]: https://vector.dev/docs/reference/configuration/transforms/metric_to_log/
-[22]: /integrations/observability_pipelines/guide/control_log_volume_and_size/
+[22]: /observability_pipelines/guide/control_log_volume_and_size/
 [23]: https://vector.dev/docs/reference/configuration/transforms/route/
