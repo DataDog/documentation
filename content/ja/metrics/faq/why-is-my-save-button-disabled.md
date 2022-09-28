@@ -12,7 +12,7 @@ Metrics without Limits™ を使用すると、数学的に正確なクエリ結
 Metrics without Limits™ の構成でインデックス化されるカスタムメトリクスの数は、(`タグの構成で指定された残りのタグ値の組み合わせの数`) × (`集計のカスタマイズセクションで指定された時間/空間集計の数`) になります。
 
 **例**
-例えば、Metrics without LimitsTM を使って `shopist.basket.size` メトリクスのカーディナリティを減らしたい場合を考えてみましょう。
+例えば、Metrics without Limits™ を使って `shopist.basket.size` メトリクスのカーディナリティを減らしたい場合を考えてみましょう。
 
 {{< img src="metrics/faq/all-tags.jpg" alt="全タグ構成">}}
 
