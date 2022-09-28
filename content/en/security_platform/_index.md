@@ -1,5 +1,5 @@
 ---
-title: Security Platform
+title: Datadog Security
 kind: documentation
 aliases:
   - compliance_monitoring
@@ -34,9 +34,9 @@ Cloud Security Posture Management is not currently available in US1-FED.
 
 ## Overview
 
-Bring speed and scale to your production security operations. Datadog’s Security Platform delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, the Datadog security platform brings unprecedented integration between security and operations aligned to your organizations shared goals.
+Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-The Datadog Security Platform includes [Application Security Monitoring](#application-security-monitoring), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
+Datadog Security includes [Application Security Monitoring](#application-security-monitoring), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
 {{< vimeo 669874306 >}}
 </br>
@@ -65,7 +65,7 @@ The Datadog Security Platform includes [Application Security Monitoring](#applic
 
 {{< img src="security_platform/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-To get started with the Datadog Security Platform, navigate to the [Setup & Configuration][9] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+To get started with Datadog Security, navigate to the [Setup & Configuration][9] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ## Further Reading
 

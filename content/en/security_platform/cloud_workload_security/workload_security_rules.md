@@ -13,7 +13,7 @@ further_reading:
   text: "Cloud Workload Security Events"
 - link: "/security_platform/notifications/variables/"
   tag: "Documentation"
-  text: "Learn more about Security Platform notification variables"
+  text: "Learn more about Security notification variables"
 ---
 
 ## Overview
