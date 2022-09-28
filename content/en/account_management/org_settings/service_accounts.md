@@ -1,6 +1,10 @@
 ---
 title: Service Accounts
 kind: documentation
+further_reading:
+    - link: "https://docs.datadoghq.com/api/latest/service-accounts/"
+      tag: "Documentation"
+      text: "Service accounts API reference"
 ---
 
 ## Overview
@@ -18,7 +22,7 @@ To access service accounts in the UI:
 1. Navigate to **Organization Settings** from your account menu.
 2. Under **Accounts**, select **Service Accounts**.
 
-The [Service Accounts page][3] contains a list of all service accounts in your organization. Users with the Service Account Write permission, including users with the Datadog Admin Role, may create service accounts. Users without the Service Account Write permission see a read-only view.
+The [Service Accounts page][2] contains a list of all service accounts in your organization. Users with the Service Account Write permission, including users with the Datadog Admin Role, may create service accounts. Users without the Service Account Write permission see a read-only view.
 
 ### View service accounts
 
@@ -67,11 +71,11 @@ To create a new application key, follow the steps below:
 
 The dialog box refreshes, showing you the key. Copy and paste the key into your desired location. After you close the dialog box, you cannot retrieve the value of the key.
 
-To revoke an application key, find the key in the service account detailed view side panel. Mouse over it, and pencil and trash can icons appear on the right. Click the trash can to revoke the key. A dialog box pops up. Click **Confirm**.
+To revoke an application key, find the key in the service account detailed view side panel and hover over it. Pencil and trash can icons appear on the right. Click the trash can to revoke the key. After the key is revoked, click **Confirm**.
 
 ### API
 
-See the [Service accounts API reference][2] to use service accounts through the Datadog API.
+See the [Service accounts API reference][3] to use service accounts through the Datadog API.
 
 ## Service account application keys
 
@@ -99,5 +103,5 @@ Datadog sends a notification to the email address associated with the service ac
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/org_settings/
-[2]: /api/latest/service-accounts/
-[3]: https://app.datadoghq.com/organization-settings/service-accounts
+[2]: https://app.datadoghq.com/organization-settings/service-accounts
+[3]: /api/latest/service-accounts/

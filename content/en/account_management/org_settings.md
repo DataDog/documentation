@@ -1,6 +1,13 @@
 ---
 title: Organization Settings
 kind: documentation
+further_reading:
+    - link: "/account_management/api-app-keys/"
+      tag: "Documentation"
+      text: "API and application keys"
+    - link: "/account_management/users/"
+      tag: "Documentation"
+      text: "User management"
 ---
 ## Overview
 The Organization Settings section is available to [Administrators][1] by clicking **Organization Settings** from the account menu in the bottom of the left side navigation or by selecting **Organization Settings** from the header dropdown at the top of the Personal Settings page.
