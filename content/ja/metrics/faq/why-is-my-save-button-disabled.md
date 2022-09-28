@@ -20,7 +20,7 @@ Metrics without Limits™ の構成でインデックス化されるカスタム
 
 {{< img src="metrics/faq/all-tags-diagram.jpg" alt="全タグ構成のカスタムメトリクス内訳">}}
 
-Metrics without LimitsTM を使って `{region, env}` タグだけをタグ構成すると、3 つのタグの値の組み合わせだけが残ります。
+Metrics without Limits™ を使って `{region, env}` タグだけをタグ構成すると、3 つのタグの値の組み合わせだけが残ります。
 * `{region:us, env:prod}`
 * `{region:eu, env:prod}`
 * `{region:us, env:dev}`
