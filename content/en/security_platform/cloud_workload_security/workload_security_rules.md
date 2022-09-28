@@ -1,5 +1,5 @@
 ---
-title: Cloud Workload Security Rules
+title: Managing Cloud Workload Security Rules
 kind: documentation
 further_reading:
 - link: "/security_platform/cloud_workload_security/getting_started"
