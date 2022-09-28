@@ -5,6 +5,9 @@ further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Service Definition API"
+- link: "/integrations/github_apps"
+  tag: "Documentation"
+  text: "GitHub Apps Integration"
 ---
 
 ## Overview
@@ -36,6 +39,24 @@ If the service, API, or custom library you are interested in is not listed on th
 
 To discover other services through existing Datadog telemetry such as infrastructure metrics, go to the **Discover Services** tab and follow instructions there. Discovery uses the `DD_SERVICE` [Unified Service Tagging convention][4] to locate services sending data to your Datadog organization.
 
+## Set up the GitHub Apps integration
+
+You can use the [GitHub Apps integration][5] to display links for service definitions in GitHub.
+
+To install the GitHub Apps integration, navigate to the [integration tile][6] and click **Link GitHub Account** in the **Repo Configuration** tab. 
+
+### Service definition YAML files
+
+Datadog searches for a `service_definition.yml` file that corresponds to each repository with read permissions. You can register multiple services in one YAML file by separating them with three dashes (`---`).
+
+### Modify service definition
+
+The **Edit in Github** button appears in the **Definition** tab and links users directly to a pre-templated commit that you can modify.
+
+{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
+
+Once you have updated the YAML files for your repositories, your changes propagate to the Service Catalog. To prevent accidental overwriting, Datadog recommends creating and modifying your service definition files with the GitHub Apps integration or the [Service Definition API endpoints][1].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -44,3 +65,5 @@ To discover other services through existing Datadog telemetry such as infrastruc
 [2]: https://app.datadoghq.com/services/setup
 [3]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [4]: /getting_started/tagging/unified_service_tagging
+[5]: /integrations/github_apps/
+[6]: https://app.datadoghq.com/integrations/github-apps
