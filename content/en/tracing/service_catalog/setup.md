@@ -47,7 +47,7 @@ To install the GitHub Apps integration, navigate to the [integration tile][6] an
 
 ### Service definition YAML files
 
-Datadog searches for a `service_definition.yml` file that corresponds to each repository with read permissions. You can register multiple services in one YAML file by separating them with three dashes (`---`).
+Datadog scans for the `service.datadog.yaml` file at the root of each repository with read permissions. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
 
 ### Modify service definition
 
