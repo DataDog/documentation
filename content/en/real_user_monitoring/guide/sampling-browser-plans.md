@@ -26,7 +26,7 @@ The Datadog Browser SDK v4.20.0 introduces the <code>sessionReplaySampleRate</co
 
 When a session is created, RUM tracks it as either:
 
-- [**Browser RUM**][2]: Sessions, views, actions, resources, long tasks and errors are collected. Calls to `startSessionReplayRecording()` are ignored.
+- [**Browser RUM**][2]: Sessions, views, actions, resources, long tasks, and errors are collected. Calls to `startSessionReplayRecording()` are ignored.
 - [**Browser RUM & Session Replay**][2]: Everything from Browser RUM is collected, including replay recordings. To collect replay recordings, call `startSessionReplayRecording()`.
 
 Two initialization parameters are available to control how the session is tracked:
