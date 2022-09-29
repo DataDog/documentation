@@ -254,6 +254,13 @@
       "description": "Update an existing incident returns \"OK\" response"
     }
   ],
+  "UpdateIncidentAttachments": [
+    {
+      "group": "incidents",
+      "suffix": "_3881702075",
+      "description": "Create an incident attachment returns \"OK\" response"
+    }
+  ],
   "CreateIncident": [
     {
       "group": "incidents",
@@ -278,6 +285,13 @@
       "group": "incidents",
       "suffix": "_2665616954",
       "description": "Get a list of incidents returns \"OK\" response with pagination"
+    }
+  ],
+  "ListIncidentAttachments": [
+    {
+      "group": "incidents",
+      "suffix": "_2457735435",
+      "description": "Get incident attachments returns \"OK\" response"
     }
   ],
   "GetIncident": [
