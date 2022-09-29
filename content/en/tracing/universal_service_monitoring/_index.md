@@ -293,11 +293,11 @@ The `universal.http.server` operation name captures health metrics for inbound t
 After enabling Universal Service Monitoring, you can:
 
 
-- Navigate to **APM > Service Map** to [visualize your services and their dependencies][3] in one place.
+- Navigate to **APM** > **Service Catalog** or **APM** > **Service Map** to [visualize your services and their dependencies][3].
 
 - Click into specific Service pages to see golden signal metrics (requests, errors, and duration), and correlate these against recent code changes with [Deployment Tracking][4]. 
 
-- Create [monitors][5], [dashboards][6], and [SLOs][7] using the `trace.universal.http.*` metrics.
+- Create [monitors][5], [dashboards][6], and [SLOs][7] using the `universal.http.*` metrics.
 
 
 ## Further Reading
@@ -305,8 +305,8 @@ After enabling Universal Service Monitoring, you can:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
-[2]: https://docs.datadoghq.com/tracing/deployment_tracking/
-[3]: /tracing/services/services_map/
+[2]: /tracing/services/deployment_tracking/
+[3]: /tracing/service_catalog/
 [4]: /tracing/services/deployment_tracking/
 [5]: /monitors/create/types/apm/?tab=apmmetrics
 [6]: /dashboards/
