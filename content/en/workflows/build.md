@@ -18,8 +18,8 @@ To create a workflow, click **New workflow**, enter a name for the workflow, and
 
 1. Click an integration in the catalog pane and drag the desired step onto the workflow canvas. You can also search for a step using the search bar.
 {{< img src="workflows/add-step.mp4" alt="Drag a step onto the workflow canvas" video="true"  >}}
-1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Using context variables](#context-variables).
-1. After you're done configuring the step, drag another step onto the workflow canvas to continue building out your workflow, or save the workflow if you're done.
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
+1. After you've configured the step, drag another step onto the workflow canvas to continue building out your workflow, or save the workflow if you're done.
 
 You can edit a step in the workflow at any time by clicking on it.
 
@@ -77,18 +77,18 @@ An example of a workflow with a single step that sends a message to a Slack chan
 
 ## Context variables
 
-Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data that comes from the workflow's trigger source. Perform this kind of data interpolation with context variables.
+Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data that comes from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
 Context variables come in three varieties:
 - A small collection of standard **workflow variables** are present in all workflows. 
-- Some steps come with built-in **Step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
-- - **Trigger variables** are passed into the workflow by the triggering event.
+- Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
+- **Trigger variables** are passed into the workflow by the triggering event.
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
 {{< img src="workflows/context-variables.png" alt="The Context Variables tab" >}}
 
-Access a context variable by enclosing it in double braces (`{{`). Context variables are available in fields marked with the `{{` notation.
+Access a context variable in a step by enclosing it in double braces (`{{`). Context variables are available in fields marked with the `{{` notation.
 {{< img src="workflows/use-context-variable.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true" >}}
 
 ### Workflow variables
@@ -115,10 +115,6 @@ If you add a trigger variable that doesn't exist, the variable is automatically 
 {{< img src="workflows/add-trigger-variable.mp4" alt="Adding a trigger variable to a step automatically adds it to the workflow" video="true" >}}
 
 For more information on triggering workflows, see [Trigger a workflow][2].
-
-## Fallback on errors
-
-
 
 ## Further reading
 
