@@ -250,7 +250,7 @@ For information about the different methods for setting environment variables, s
 Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][1].
 Docker examples are also available in the [repository][2].
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs.Datadog.Trace.Bundle/README.md
+[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace.Bundle/README.md
 [2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
