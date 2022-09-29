@@ -155,6 +155,16 @@
     "request_description": "Incident Payload.",
     "request_schema_description": "Update request for an incident."
   },
+  "ListIncidentAttachments": {
+    "description": "Get all attachments for a given incident.",
+    "summary": "Get a list of attachments"
+  },
+  "UpdateIncidentAttachments": {
+    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
+    "summary": "Create, update, and delete incident attachments",
+    "request_description": "Incident Attachment Payload.",
+    "request_schema_description": "The update request for an incident's attachments."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
