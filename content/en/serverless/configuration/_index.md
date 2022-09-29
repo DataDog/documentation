@@ -546,7 +546,7 @@ You can monitor your custom business logic by [submitting custom metrics][27].
 
 ## Send telemetry over PrivateLink or proxy
 
-The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][28] to the `datadoghq.com` [Datadog site][29], or [send data over a proxy][30] for all other sites.
+The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][28] to the `datadoghq.com` [Datadog site][29], or [send data over a proxy by setting datadog.yaml][30] for all other sites.
 
 If you are using the Datadog Forwarder, follow these [instructions][31].
 
