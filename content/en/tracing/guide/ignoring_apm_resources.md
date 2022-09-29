@@ -54,22 +54,22 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
-**Note**: Filtering traces this way removes these requests from [trace metrics][3]. For information on how to reduce ingestion without affecting the trace metrics, see [ingestion controls][4]
+Filtering traces this way removes these requests from [trace metrics][3]. For more information on how to reduce ingestion without affecting the trace metrics, see [Ingestion Controls][4].
 
-The following span tags are created and added to spans after ingestion on the Datadog backend side. Hence, these tags cannot be used to drop traces at the Datadog Agent level.
+On the backend, Datadog creates and adds the following span tags to spans after ingestion. These tags cannot be used to drop traces at the Datadog Agent level.
 
 
 | Name                                    | Description                                      |
 |-----------------------------------------|--------------------------------------------------|
-| `http.path_group`                       | The full url path from the `http.url` tag        |
-| `http.url_details.host`                 | The host name portion of the `http.url` tag      |
-| `http.url_details.path`                 | The full request target as passed in a HTTP request line or equivalent |
-| `http.url_details.scheme`               | The request scheme from the `http.url` tag       |
-| `http.url_details.queryString`          | The query string portion from the `http.url` tag |
-| `http.url_details.port`                 | The HTTP port from the `http.url` tag            |
-| `http.useragent_details.os.family`      | The OS family reported by the User-Agent         |
-| `http.useragent_details.browser.family` | The Browser Family reported by the User-Agent    |
-| `http.useragent_details.device.family`  | The Device family reported by the User-Agent     |
+| `http.path_group`                       | The full URL path from the `http.url` tag.        |
+| `http.url_details.host`                 | The host name portion of the `http.url` tag.      |
+| `http.url_details.path`                 | The full request target as passed in an HTTP request line or equivalent. |
+| `http.url_details.scheme`               | The request scheme from the `http.url` tag.       |
+| `http.url_details.queryString`          | The query string portion from the `http.url` tag. |
+| `http.url_details.port`                 | The HTTP port from the `http.url` tag.            |
+| `http.useragent_details.os.family`      | The OS family reported by the User-Agent.         |
+| `http.useragent_details.browser.family` | The browser family reported by the User-Agent.    |
+| `http.useragent_details.device.family`  | The device family reported by the User-Agent.     |
 
 ### Ignoring based on resources
 
