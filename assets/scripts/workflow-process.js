@@ -12,20 +12,27 @@ if(!input || !output) {
   process.exit(1);
 }
 
-if (output.endsWith('com.datadoghq.aws.wafv2.json')) {
-  process.exit(0);
-}
-
 let fileData = JSON.parse(fs.readFileSync(input, 'utf8'));
 const yData = JSON.stringify(fileData["types"]["$defs"]).replace(/\#\/\$defs\//g, '#/types/$defs/');
 fileData["types"]["$defs"] = JSON.parse(yData);
 
 $RefParser.dereference(fileData)
     .then((deref) => {
-      // fs.writeFileSync(output, safeJsonStringify(deref, null, 2), 'utf-8');
+      fs.writeFileSync(output, "{\n", 'utf-8');
       const jsonDataFile = {};
-      Object.entries(deref['types']['$defs']).forEach(([key, value]) => {
-        jsonDataFile[key] = schemaTable("request", value);
+      const entries = Object.entries(deref['types']['$defs']);
+      const entryLen = entries.length;
+      let i = 0;
+      entries.forEach(([key, value]) => {
+          try {
+            jsonDataFile[key] = schemaTable("request", value);
+          } catch (e) {
+            console.log(`Couldn't created schematable for ${key} from file ${input}`);
+          }
+          const trail = (i < entryLen-1) ? ",\n" : "\n";
+          fs.appendFileSync(output, `\t"${key}": ${JSON.stringify(jsonDataFile[key])}${trail}`, 'utf-8');
+          i++;
       });
-      fs.writeFileSync(output, safeJsonStringify(jsonDataFile, null, 2), 'utf-8');
+      fs.appendFileSync(output, "}\n", 'utf-8');
+      // fs.writeFileSync(output, JSON.stringify(jsonDataFile), 'utf-8');
     });
