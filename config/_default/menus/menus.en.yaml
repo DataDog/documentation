@@ -2529,7 +2529,7 @@ main:
     identifier: csm_resource_catalog
     weight: 3
   - name: Default Detection Rules
-    url: security_platform/default_rules/
+    url: security_platform/default_rules/#all
     parent: csm
     identifier: csm_default_rules
     weight: 4
@@ -2544,7 +2544,7 @@ main:
     identifier: csm_guides
     weight: 6
   - name: Troubleshooting
-    url: security_platform/cloud_security_management/troubleshooting
+    url: security_platform/cloud_security_management/troubleshooting/
     parent: csm
     identifier: csm_troubleshooting
     weight: 7
