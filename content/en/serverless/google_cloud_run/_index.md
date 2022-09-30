@@ -4,25 +4,30 @@ kind: documentation
 ---
 
 ## Overview
-Google Cloud Run is a serverless compute platform.
+Google Cloud Run is is a fully managed serverless platform for deploying and scaling container-based applications. 
 
 ## Quickstart
 
-To deploy Datadog serverless monitoring on a pre-built demo application, see [Getting Started with Serverless Monitoring (Cloud Run)][1].
+To deploy Datadog serverless monitoring on a pre-built Cloud Run demo application, see [Getting Started with Serverless Monitoring (Cloud Run)][1].
 
-## Setup
+## Build your Container
 
 2. Add Datadog instrumentation to your existing service.
    {{< programming-lang-wrapper langs="go,python,nodejs,java" >}}
    {{< programming-lang lang="go" >}}
    See [Tracing Go Applications][1] for detailed instructions. [Sample code for a simple Go application][2].
 
-   If you’re using a Dockerfile to build your application, add the following lines:
+   If you’re using a Dockerfile to build your application, you will need to:
 
+   1. Copy the Datadog serverless-init binary into your Docker image
+   2. Use the ENTRYPOINT instruction to run the serverless-init binary as your Docker container is initiated 
+   3. Run your existing application and other required commands as arguments via the CMD instruction
+
+   We have included simple examples for each language below, but depending on your existing Dockerfile setup application file structure you may need to adjust them to accomplish the three actions above. 
    ```
    COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
-   CMD ["/nodejs/bin/node /app/app.js"]
+   CMD ["/path/to/your-go-binary"] (adapt this line to you need)
    ```
 [1]: /tracing/setup_overview/setup/go/?tabs=containers
 [2]: https://github.com/DataDog/crpb/tree/main/go
@@ -30,12 +35,19 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
    {{< programming-lang lang="python" >}}
    See [Tracing Python Applications][1] for detailed instructions. [Sample code for a simple Python application][2].
 
-   If you’re using a Dockerfile to build your application, add the following lines:
+ If you’re using a Dockerfile to build your application, you will need to:
+
+   1. Copy the Datadog serverless-init binary into your Docker image
+   2. Use the ENTRYPOINT instruction to run the serverless-init binary as your Docker container is initiated 
+   3. Run your existing application and other required commands as arguments via the CMD instruction
+
+   We have included simple examples for each language below, but depending on your existing Dockerfile setup application file structure you may need to adjust them to accomplish the three actions above. 
 
    ```
    COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
-   CMD ["ddtrace-run", "python", "app.py"]
+   CMD ["ddtrace-run", "python", "app.py"] (adapt this line to your needs)
+
    ```
 [1]: /tracing/setup_overview/setup/python/?tabs=containers
 [2]: https://github.com/DataDog/crpb/tree/main/python
@@ -43,11 +55,19 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
    {{< programming-lang lang="nodejs" >}}
    See [Tracing NodeJS Applications][1] for detailed instructions. [Sample code for a simple NodeJS application][2].
 
-   If you’re using a Dockerfile to build your application, add the following lines:
+  If you’re using a Dockerfile to build your application, you will need to:
+
+   1. Copy the Datadog serverless-init binary into your Docker image
+   2. Use the ENTRYPOINT instruction to run the serverless-init binary as your Docker container is initiated 
+   3. Run your existing application and other required commands as arguments via the CMD instruction
+
+   We have included simple examples for each language below, but depending on your existing Dockerfile setup application file structure you may need to adjust them to accomplish the three actions above. 
 
    ```
    COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
+   CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
+
    ```
 [1]: /tracing/setup_overview/setup/nodejs/?tabs=containers
 [2]: https://github.com/DataDog/crpb/tree/main/js
@@ -55,16 +75,45 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
    {{< programming-lang lang="java" >}}
    See [Tracing Java Applications][1] for detailed instructions. [Sample code for a simple Java application][2].
 
-   If you’re using a Dockerfile to build your application, add the following lines:
+    If you’re using a Dockerfile to build your application, you will need to:
 
+   1. Copy the Datadog serverless-init binary into your Docker image
+   2. Use the ENTRYPOINT instruction to run the serverless-init binary as your Docker container is initiated 
+   3. Run your existing application and other required commands as arguments via the CMD instruction
+
+   We have included simple examples for each language below, but depending on your existing Dockerfile setup application file structure you may need to adjust them to accomplish the three actions above. 
    ```
    COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
+   CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
+
    ```
 [1]: /tracing/setup_overview/setup/java/?tabs=containers
 [2]: https://github.com/DataDog/crpb/tree/main/java
    {{< /programming-lang >}}
    {{< /programming-lang-wrapper >}}
+   
+### Build with the Datadog buildpack
+
+1. Build your application by running the following:
+   ```
+   pack build --builder=gcr.io/buildpacks/builder \
+   --buildpack from=builder \
+   --buildpack datadog/serverless-buildpack:beta4 \
+   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+
+   ```
+
+   **Note**: Not compatible with Alpine.
+
+ 2. Push your image to GCP:
+    ```
+    docker push gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+    ```
+   
+## Deploy to Cloud Run
+We have included instructions below for deploying a Cloud Run service using standard GCP tools. If you have other systems in place for managing Container images, secrets and deployments they can be used instead. 
+
 3. Run this command to submit your build to GCP.
 
    ```
@@ -107,23 +156,6 @@ To deploy Datadog serverless monitoring on a pre-built demo application, see [Ge
 
 You can use the [GCP integration][4] to collect logs. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the Agent.
 
-### Build with the Datadog buildpack
-
-1. Build your application by running the following:
-   ```
-   pack build --builder=gcr.io/buildpacks/builder \
-   --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack:beta4 \
-   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-
-   ```
-
-   **Note**: Not compatible with Alpine.
-
- 2. Push your image to GCP:
-    ```
-    docker push gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-    ```
 
 [1]: /getting_started/serverless/gcr
 [2]: https://console.cloud.google.com/security/secret-manager
