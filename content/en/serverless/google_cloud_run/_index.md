@@ -6,10 +6,6 @@ kind: documentation
 ## Overview
 Google Cloud Run is is a fully managed serverless platform for deploying and scaling container-based applications. 
 
-## Quickstart
-
-To deploy Datadog serverless monitoring on a pre-built Cloud Run demo application, see [Getting Started with Serverless Monitoring (Cloud Run)][1].
-
 ## Build your Container
 
 2. Add Datadog instrumentation to your existing service.
