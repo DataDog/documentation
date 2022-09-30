@@ -1,12 +1,12 @@
 ---
 title: Writing Custom Rules with Rego
-kind: documentation
+kind: guide
 further_reading:
 - link: "/security_platform/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "/security_platform/cspm/frameworks_and_benchmarks"
-  tag: "Documentation"
+- link: "/security_platform/cloud_security_management/guide/writing_rego_rules"
+  tag: "Guide"
   text: "Learn about frameworks and industry benchmarks"
 ---
 
@@ -103,11 +103,11 @@ results contains result if {
 }
 ```
 
-This section passes through all resources of type `some_resource_type` and evaluates them. It  creates an array of results to be processed by the posture management system. Modify this section only to specify the resource type you want to process, for example changing `some_resource_type` to `gcp_iam_policy`.
+This section passes through all resources of type `some_resource_type` and evaluates them. It creates an array of results to be processed by the posture management system. Modify this section only to specify the resource type you want to process, for example changing `some_resource_type` to `gcp_iam_policy`.
 
 ## Other ways to write rules
 
-The template helps you start writing custom rules. You aren't required to follow it – you can instead clone an existing default rule, or you write your own rule from scratch. However, for the posture management system to interpret your results, they must be called `results` in your Rego module and be formatted as follows:
+The template helps you start writing custom rules. You aren't required to follow it. You can instead clone an existing default rule, or you write your own rule from scratch. However, for the posture management system to interpret your results, they must be called `results` in your Rego module and be formatted as follows:
 
 ```json
 [
@@ -145,7 +145,7 @@ eval(resource) = "skip" if {
 }
 ```
 
-This skips the resource if it has no `port` attribute, and fails it if it falls within one of our two "bad" ranges. 
+This skips the resource if it has no `port` attribute, and fails it if it falls within one of the two "bad" ranges. 
 
 Sometimes you want to examine more than one resource type in your rule. In this case, it can be time consuming to loop through all instances of a resource type for each resource. Take the following example:
 
@@ -176,7 +176,7 @@ user_managed_keys_parents := {key_parent |
 }
 ```
 
-Now if you want to know if your service account has a user managed key, query the set in `O(1)` time:
+To find out if your service account has a user managed key, query the set in `O(1)` time:
 
 ```java
 eval(service_account) = "fail" if {
