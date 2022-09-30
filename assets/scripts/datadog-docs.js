@@ -424,13 +424,11 @@ function scrollActiveNavItemToTop(){
     if (document.querySelector('.sidenav:not(.sidenav-api)')) {
         const headerHeight = document.querySelector('body .main-nav').style.height;
         const padding = 200;
+        const maxHeight = document.documentElement.clientHeight - headerHeight - padding
 
-        // set max height of side nav. vanilla js here doesnt enable you to set the max height
-        $('.sidenav-nav').css(
-            'maxHeight',
-            document.documentElement.clientHeight - headerHeight - padding
-        );
-    
+        // set max height of side nav.
+        document.querySelector('.sidenav-nav').style.maxHeight = `${maxHeight}px`
+
         const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
         const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
 
