@@ -2492,12 +2492,12 @@ main:
     url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 105
+    weight: 103
   - name: Signals Explorer
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 106
+    weight: 104
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: csm
@@ -2523,16 +2523,6 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 204
-  - name: Signals Explorer
-    url: security_platform/explorer
-    parent: cloud_workload_security
-    identifier: cws_workload_signals_explorer
-    weight: 206
-  - name: Troubleshooting
-    url: security_platform/cloud_workload_security/troubleshooting
-    parent: cloud_workload_security
-    identifier: cws_troubleshooting
-    weight: 208
   - name: Resource Catalog
     url: security_platform/cloud_security_management/resource_catalog/
     parent: csm
@@ -2553,6 +2543,11 @@ main:
     parent: csm
     identifier: csm_guides
     weight: 6
+  - name: Troubleshooting
+    url: security_platform/cloud_security_management/troubleshooting
+    parent: csm
+    identifier: csm_troubleshooting
+    weight: 7
   - name: Application Security Monitoring
     url: security_platform/application_security/
     parent: security_platform_heading
