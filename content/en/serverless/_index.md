@@ -14,7 +14,7 @@ further_reading:
   text: "Check out the latest Serverless releases! (App login required)."
 - link: "https://www.datadoghq.com/state-of-serverless"
   tag: "Blog"
-  text: "The state of Serverless"
+  text: "The State of Serverless"
 - link: "/serverless/installation/"
   tag: "Documentation"
   text: "Installing Serverless monitoring"
