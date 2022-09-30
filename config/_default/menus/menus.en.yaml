@@ -2488,16 +2488,6 @@ main:
     url: security_platform/cspm/frameworks_and_benchmarks
     parent: cspm
     weight: 102
-  - name: OOTB Cloud Rules
-    url: security_platform/default_rules/#cat-posture-management-cloud
-    parent: cspm
-    identifier: ootb_cloud_rules
-    weight: 103
-  - name: OOTB Infrastructure Rules
-    url: security_platform/default_rules/#cat-posture-management-infra
-    parent: cspm
-    identifier: ootb_infrastructure_rules
-    weight: 104
   - name: Security Findings Explorer
     url: /security_platform/cspm/findings
     parent: cspm
@@ -2533,21 +2523,11 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 204
-  - name: OOTB Rules
-    url: security_platform/default_rules#cat-workload-security
-    parent: cloud_workload_security
-    identifier: cws_workload_default_rules
-    weight: 205
   - name: Signals Explorer
     url: security_platform/explorer
     parent: cloud_workload_security
     identifier: cws_workload_signals_explorer
     weight: 206
-  - name: Guides
-    url: security_platform/cloud_workload_security/guide
-    parent: cloud_workload_security
-    identifier: cws_guides
-    weight: 207
   - name: Troubleshooting
     url: security_platform/cloud_workload_security/troubleshooting
     parent: cloud_workload_security
@@ -2559,7 +2539,7 @@ main:
     identifier: csm_resource_catalog
     weight: 3
   - name: Default Detection Rules
-    url: security_platform/cloud_security_management/ootb_rules/
+    url: security_platform/default_rules/
     parent: csm
     identifier: csm_default_rules
     weight: 4
@@ -2568,6 +2548,11 @@ main:
     parent: csm
     identifier: csm_terminology
     weight: 5
+    - name: Guides
+    url: security_platform/cloud_security_management/guide/
+    parent: csm
+    identifier: csm_guides
+    weight: 6
   - name: Application Security Monitoring
     url: security_platform/application_security/
     parent: security_platform_heading
