@@ -22,7 +22,7 @@ Datadog's admission controller is `MutatingAdmissionWebhook` type. For more deta
 
 ## Requirements
 
-- Datadog Cluster Agent v1.7.0+
+- Datadog Cluster Agent v7.39+
 
 ## Configuration
 
@@ -149,13 +149,12 @@ Adding a this annotation results in the injection of the tracer library for that
 Valid `<language>` values are:
 - `java`
 - `js`
-- `python`
 
 For example to inject the latest Java tracer:
 
 ```yaml
 annotations:
-    datadoghq.com/java-lib.version: "latest"
+    admission.datadoghq.com/java-lib.version: "latest"
 ```
 
 **Note**: Use caution specifying `latest` as major library releases can introduce breaking changes.
@@ -165,9 +164,11 @@ Although it's an uncommon scenario, you can add multiple `<language>-lib.version
 For example to inject the latest Java tracer and Node tracer v3.0.0:
 ```yaml
 annotations:
-    datadoghq.com/java-lib.version: "latest"
-    datadoghq.com/js-lib.version: "3.0.0"
+    admission.datadoghq.com/java-lib.version: "latest"
+    admission.datadoghq.com/js-lib.version: "3.0.0"
 ```
+
+By using `mutateUnlabelled: true`, the cluster agent will attempt to intercept every unlabelled pod.
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
