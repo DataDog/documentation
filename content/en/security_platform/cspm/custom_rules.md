@@ -2,7 +2,7 @@
 title: Custom Rules
 kind: documentation
 further_reading:
-- link: "security_platform/cspm/custom_rules/writing_rego_rules"
+- link: "security_platform/cloud_security_management/guide/writing_rego_rules"
   tag: "Guide"
   text: "Start writing your own Rego rules"
 - link: "security_platform/default_rules"
