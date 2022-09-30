@@ -64,11 +64,6 @@ main:
     url: getting_started/serverless/
     parent: getting_started
     weight: 5
-  - name: Serverless (Cloud Run)
-    identifier: getting_started_gcr
-    url: getting_started/serverless/gcr
-    parent: getting_started
-    weight: 6
   - name: Integrations
     identifier: getting_started_integrations
     url: getting_started/integrations/
