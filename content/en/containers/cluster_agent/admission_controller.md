@@ -172,6 +172,8 @@ By using `mutateUnlabelled: true`, the cluster agent will attempt to intercept e
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
+If `mutateUnlabelled: false`, then the pod label must be set to `admission.datadoghq.com/enabled: "true"`.
+
 Possible options:
 
 | mutateUnlabelled | Pod label                               | Injection |
