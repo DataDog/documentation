@@ -2548,7 +2548,7 @@ main:
     parent: csm
     identifier: csm_terminology
     weight: 5
-    - name: Guides
+  - name: Guides
     url: security_platform/cloud_security_management/guide/
     parent: csm
     identifier: csm_guides
