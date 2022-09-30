@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 ## Overview
-Google Cloud Run is is a fully managed serverless platform for deploying and scaling container-based applications. 
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. 
 
 ## Build your container
 
