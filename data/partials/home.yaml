@@ -60,7 +60,7 @@ nav_sections:
         link: logs/
         icon: log
         desc: Process, monitor, and archive your ingested logs 
-      - title: Security Platform
+      - title: Security
         link: security_platform/
         icon: security-platform
         desc: Detect threats and misconfigurations in your applications and infrastructure
