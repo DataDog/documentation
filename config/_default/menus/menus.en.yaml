@@ -2534,7 +2534,7 @@ main:
     identifier: csm_resource_catalog
     weight: 3
   - name: Default Detection Rules
-    url: security_platform/default_rules/#all
+    url: security_platform/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
     weight: 4
