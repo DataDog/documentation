@@ -19,7 +19,7 @@ Combined with the GitHub Apps integrations, you can see inline code snippets in 
 ## Configuration
 
 <div class="alert alert-info">
-The source code integration supports Go and all JVM languages.
+The source code integration supports Go and Java.
 <br>
 Datadog Agent 7.35.0 or higher is required.
 </div>
