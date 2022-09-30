@@ -127,19 +127,21 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
 
 | Variable | Description |
 | -------- | ----------- |
-| `DD_SITE` | Datadog site. |
+| `DD_SITE` | [Datadog site][4]. |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE` | See Unified Service Tagging. |
-| `DD_VERSION` | See Unified Service Tagging. |
-| `DD_ENV` | See Unified Service Tagging. |
-| `DD_SOURCE` | See Unified Service Tagging. |
+| `DD_SERVICE` | See [Unified Service Tagging][5]. |
+| `DD_VERSION` | See [Unified Service Tagging][5]. |
+| `DD_ENV` | See [Unified Service Tagging][5]. |
+| `DD_SOURCE` | See [Unified Service Tagging][5]. |
 
 ### Log collection
 
-You can use the [GCP integration][4] to collect logs. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the Agent.
+You can use the [GCP integration][6] to collect logs. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the Agent.
 
 
 [1]: https://registry.hub.docker.com/r/datadog/serverless-init
 [2]: https://console.cloud.google.com/security/secret-manager
 [3]: https://console.cloud.google.com/run
-[4]: /integrations/google_cloud_platform/#log-collection
+[4]: /getting_started/site/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /integrations/google_cloud_platform/#log-collection
