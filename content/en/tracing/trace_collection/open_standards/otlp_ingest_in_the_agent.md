@@ -33,6 +33,7 @@ otlp_config:
   receiver:
     protocols:
       grpc:
+        endpoint: localhost:4317
 ```
 For HTTP, default port 4318:
 
@@ -41,14 +42,17 @@ otlp_config:
   receiver:
     protocols:
       http:
+        endpoint: localhost:4318
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
 
-- For gRPC (`0.0.0.0:4317`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 
-- For HTTP (`0.0.0.0:4318`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`
+- For gRPC (`localhost:4317`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 
+- For HTTP (`localhost:4318`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`
 
-These must be passed to both the core Agent and trace Agent if they are running in separate containers.
+These must be passed to both the core Agent and trace Agent processes.
+
+If running in a containerized environment, use `0.0.0.0` instead of `localhost` to ensure visibility.
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
