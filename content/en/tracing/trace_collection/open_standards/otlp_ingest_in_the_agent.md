@@ -50,9 +50,7 @@ Alternatively, configure the endpoints by providing the port through the environ
 - For gRPC (`localhost:4317`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 
 - For HTTP (`localhost:4318`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`
 
-These must be passed to both the core Agent and trace Agent processes.
-
-If running in a containerized environment, use `0.0.0.0` instead of `localhost` to ensure visibility.
+These must be passed to both the core Agent and trace Agent processes. If running in a containerized environment, use `0.0.0.0` instead of `localhost` to ensure the server is available on non-local interfaces.
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
