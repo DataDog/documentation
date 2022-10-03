@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Service Catalog displays a list of matching services. The **Registered** column in the **Ownership** tab indicates that a corresponding service is registered with a green check mark.
+The Service Catalog displays a list of services. The **Registered** column in the **Ownership** tab indicates that a corresponding service is registered with a green check mark.
 
 To update the service definition, use the [Service Definition API][1] or [Terraform][2]. 
 
@@ -64,7 +64,7 @@ After you update the YAML files for your repositories, your changes propagate to
 
 ## Automate service definition updates with Terraform
 
-The Service Catalog provides a service definition as a Terraform resource. In order to create and manage services in the Service Catalog through automated pipelines, you need the [Datadog Provider][8] v3.16.0.
+The Service Catalog provides a service definition as a Terraform resource. Creating and managing services in the Service Catalog through automated pipelines requires [Datadog Provider][8] v3.16.0 or later.
 
 For more information, see the [Datadog Provider documentation][9].
 
