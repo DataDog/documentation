@@ -12,16 +12,20 @@ To build a workflow, navigate to the [**Workflows** page][1] under **Integration
 
 ## Create a workflow
 
-To create a workflow, click **New workflow**, enter a name for the workflow, and click **Create**. Build a workflow by dragging steps onto the workflow canvas, or use the JSON editor.
+To create a workflow:
+1. Click **New workflow**.
+1. Enter a name for the workflow, and click **Create**.
+1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
 
 ### Build a workflow with the workflow builder
 
-1. Click an integration in the catalog pane and drag the desired step onto the workflow canvas. You can also search for a step using the search bar.
+1. Click **Add a step to get started** to add the first step to your workflow.
+1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 {{< img src="workflows/add-step.mp4" alt="Drag a step onto the workflow canvas" video="true"  >}}
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
-1. After you've configured the step, drag another step onto the workflow canvas to continue building out your workflow, or save the workflow if you're done.
+1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
 
-You can edit a step in the workflow at any time by clicking on it.
+You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
 ### Build a workflow with JSON
 
@@ -30,7 +34,7 @@ Build or edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow
 - **Export JSON**: Download the workflow.
 
 A typical workflow contains three top-level keys:
-- `"steps"`: An array of "step" objects. Each step defines a step in the workflow and includes a name, the action ID, and the step parameters. The `steps` object also includes a key for outbound connection data.  
+- `"steps"`: An array of "step" objects. Each step defines a step in the workflow and includes a name, the action ID, and the step parameters. The `steps` object also includes a key for outbound connection data.
 - `"startStepName"`: The name of the first step in the workflow.
 - `"connectionEnvs"`: Connection data and environment variables. 
 
