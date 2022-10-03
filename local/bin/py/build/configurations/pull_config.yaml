@@ -101,6 +101,18 @@
       - "*/README.md"
       - "*/datadog_checks/*/__about__.py"
 
+  - repo_name: integrations
+    contents:
+
+    - action: integrations
+      branch: main
+      globs:
+      - "*/metadata.csv"
+      - "*/manifest.json"
+      - "*/assets/service_checks.json"
+      - "*/README.md"
+      - "*/datadog_checks/*/__about__.py"
+
   - repo_name: marketplace
     contents:
 
@@ -337,7 +349,7 @@
           dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
           title: Synthetics and CI GitHub Actions
           kind: documentation
-  
+
   - repo_name: synthetics-ci-orb
     contents:
     - action: pull-and-push-file
@@ -524,7 +536,7 @@
           - link: '/real_user_monitoring/error_tracking/explorer'
             tag: 'Documentation'
             text: 'Visualize Error Tracking data in the Explorer'
-  
+
   - repo_name: datadog-cloudformation-resources
     contents:
     - action: pull-and-push-file
@@ -735,13 +747,31 @@
             - link: "https://github.com/DataDog/dd-sdk-reactnative"
               tag: "GitHub"
               text: "dd-sdk-reactnative Source code"
-            - link: "real_user_monitoring/explorer/"
-              tag: "Documentation"
-              text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
               text: "Monitor React Native applications"
-
+            - link: "real_user_monitoring/explorer/"
+              tag: "Documentation"
+              text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/advanced_configuration.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'advanced_configuration.md'
+        front_matters:
+          title: RUM React Native Advanced Configuration
+          kind: documentation
+          description: Learn about advanced configuration options for your React Native setup.
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/advanced_configuration.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-reactnative"
+              tag: "GitHub"
+              text: "dd-sdk-reactnative Source code"
+            - link: "real_user_monitoring/reactnative/"
+              tag: "Documentation"
+              text: "Learn about React Native Monitoring"
     - action: pull-and-push-file
       branch: main
       globs:
@@ -764,7 +794,7 @@
               text: "Learn how to explore your RUM data"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor your React Native applications"   
+              text: "Monitor your React Native applications"
     - action: pull-and-push-file
       branch: main
       globs:
@@ -783,10 +813,10 @@
               text: "dd-sdk-reactnative Source code"
             - link: "https://www.datadoghq.com/blog/react-native-monitoring/"
               tag: "Blog"
-              text: "Monitor your React Native applications"   
+              text: "Monitor your React Native applications"
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
-              text: "Learn how to explore your RUM data"  
+              text: "Learn how to explore your RUM data"
     - action: pull-and-push-file
       branch: main
       globs:
@@ -806,6 +836,25 @@
             - link: "real_user_monitoring/explorer/"
               tag: "Documentation"
               text: "Learn how to explore your RUM data"
+    - action: pull-and-push-file
+      branch: main
+      globs:
+      - 'docs/codepush.md'
+      options:
+        dest_path: '/real_user_monitoring/reactnative/'
+        file_name: 'codepush.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/codepush.md"]
+          title: CodePush
+          kind: documentation
+          description: 'Learn how to use a client-side React Native module to interact with Appcenter Codepush and Datadog.'
+          further_reading:
+            - link: 'https://github.com/DataDog/dd-sdk-reactnative'
+              tag: 'GitHub'
+              text: 'dd-sdk-reactnative Source code'
+            - link: 'real_user_monitoring/reactnative/'
+              tag: 'Documentation'
+              text: "Learn about React Native Monitoring"
     - action: pull-and-push-file
       branch: main
       globs:
@@ -1073,3 +1122,16 @@
       options:
         dest_dir: '/security_platform/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
+
+  - repo_name: dd-source
+    contents:
+    - action: workflows
+      branch: main
+      globs:
+        - "domains/workflow/actionplatform/apps/manifest_generator/manifest.schema.json"
+        - "domains/workflow/actionplatform/runner/bundles/com.datadoghq.*/manifest.json"
+      options:
+        dest_path: '/workflows/actions_catalog/'
+        bundle_excludes:
+          - "com.datadoghq.test"
+          - "com.datadoghq.sample"

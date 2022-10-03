@@ -218,8 +218,8 @@ kind: Deployment
 ```
 **Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
-[1]: /agent/cluster_agent/admission_controller/
 
+[1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{< /tabs >}}

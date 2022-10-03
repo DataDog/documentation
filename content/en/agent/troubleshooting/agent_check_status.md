@@ -146,4 +146,3 @@ sudo journalctl -u dd-agent.service
 [1]: /integrations/
 [2]: /agent/troubleshooting/send_a_flare/
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
-[4]: /integrations/

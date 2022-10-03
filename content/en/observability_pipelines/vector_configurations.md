@@ -1,10 +1,10 @@
 ---
 title: Vector Configurations
 kind: Documentation
-dependencies:
-  ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/vector_configurations.md"]
+aliases:
+  - /integrations/observability_pipelines/vector_configurations/
 further_reading:
-  - link: /integrations/observability_pipelines/working_with_data/
+  - link: /observability_pipelines/working_with_data/
     tag: Documentation
     text: Working with data using Vector
   - link: https://vector.dev/releases/ 
@@ -13,7 +13,7 @@ further_reading:
   - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
     tag: Documentation
     text: Datadog Agent as a source for Vector
-  - link: /integrations/observability_pipelines/integrate_vector_with_datadog/
+  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
     tag: Documentation
     text: Configure Datadog Agents to send data to Vector
 ---

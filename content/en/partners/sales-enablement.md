@@ -8,7 +8,7 @@ The Datadog Partner Network provides many resources for partners. This is a guid
 
 ## Datadog basics
 
-First, head over to the <a href="https://partners.datadoghq.com/" target="_blank">Partner Portal</a>. Log in and click **Training**. Under Sales Certification, click **Get started today**.
+First, head over to the [Partner Portal][4]. Log in and click **Training**. Under Sales Certification, click **Get started today**.
 
 {{<img src="partners/portal_sales_go.png" alt="Partner Portal Sales Certification" style="max-width:734px">}}
 
@@ -80,3 +80,4 @@ Should you have any questions during your journey, contact partner-support@datad
 [1]: https://learn.datadoghq.com/bundles/dd-fundamentals
 [2]: /account_management/billing/pricing/
 [3]: https://www.datadoghq.com/pricing/
+[4]: https://partners.datadoghq.com/

@@ -83,7 +83,7 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('catalog')) {
+    if (document.querySelector('.js-group-header')) {
         initializeGroupedListings();
     }
 
@@ -162,10 +162,11 @@ function getPathElement(event = null) {
         );
     }
 
-    if (path.includes('integrations/observability_pipelines/integrate_vector_with_datadog')) {
-        const integrationsEl = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
-        sideNavPathElement = integrationsEl.nextElementSibling.querySelector(
-            '[data-path*="integrations/observability_pipelines/integrate_vector_with_datadog"]'
+    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/integrations/integrate_vector_with_datadog` in the sidenav.
+    if (path.includes('observability_pipelines/integrations/integrate_vector_with_datadog')) {
+        const observabilityPipelineEl = document.querySelector('.side .nav-top-level > [data-path*="observability_pipelines"]');
+        sideNavPathElement = observabilityPipelineEl.nextElementSibling.querySelector(
+            '[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
         );
         mobileNavPathElement = sideNavPathElement;
     }
@@ -191,6 +192,14 @@ function getPathElement(event = null) {
             `header [href*="${ref}"]`
           );
         }
+    }
+
+    if (path.includes('workflows/actions_catalog')) {
+      const workflowsEl = document.querySelector('.side .nav-top-level > [data-path*="workflows"]');
+      sideNavPathElement = workflowsEl.nextElementSibling.querySelector(
+          '[data-path*="workflows/actions_catalog"]'
+      );
+      mobileNavPathElement = sideNavPathElement;
     }
 
     if (sideNavPathElement) {
