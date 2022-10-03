@@ -147,7 +147,7 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [7]: /tracing/trace_pipeline/metrics/
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
-[10]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[10]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
 [11]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [12]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
