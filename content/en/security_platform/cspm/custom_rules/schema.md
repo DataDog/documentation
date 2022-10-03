@@ -4,7 +4,7 @@ kind: documentation
 disable_toc: true
 ---
 
-{{< whatsnext desc="Use these reference pages to help you write custom rules for CSPM" >}}
+{{< whatsnext desc="When you write custom rules for CSPM, you specify the resource types that are referenced by the rules. Review detailed information about resource types in the following pages." >}}
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_sql_database_instance/" >}}<code>gcp_sql_database_instance</code>{{< /nextlink >}}
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_compute_instance/" >}}<code>gcp_compute_instance</code>{{< /nextlink >}}
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_iam_policy/" >}}<code>gcp_iam_policy</code>{{< /nextlink >}}

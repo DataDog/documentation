@@ -10,7 +10,6 @@ further_reading:
 ---
 
 
-{{< img src="tbd.mp4" video=true alt="Navigating around the Resource Catalog" style="width:100%;" >}}
 
 ## Overview
 
