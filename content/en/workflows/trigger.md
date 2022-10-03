@@ -14,7 +14,7 @@ further_reading:
   text: "Find out more about Monitors"
 ---
 
-You can trigger a workflow manually, on a schedule, or using a variety of automated methods such as a Datadog Monitor or a Security Signal Notification Rule. Before you can trigger a workflow using automation, you must associate the workflow with a unique service account. For more information on setting up a service account for your workflows, see [Set up workflows][1].
+You can trigger a workflow manually, on a schedule, or using a variety of automated methods such as a Datadog Monitor, or a Security Signal Notification Rule. Before you can trigger a workflow using automation, you must associate the workflow with a unique service account. For more information on setting up a service account for your workflows, see [Set up workflows][1].
 
 ## Manually trigger a workflow
 
