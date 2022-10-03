@@ -42,6 +42,7 @@ There are three types of monitoring that the Datadog Agent uses for Cloud Worklo
   * SUSE 15+
   * CentOS/RHEL 7.6+
   * Custom kernel builds are not supported.
+* For compatibility with a custom Kubernetes Network Plugin like Cilium or Calico, please refer to the [Troubleshooting page][3].
 
 ## Installation
 
@@ -60,7 +61,7 @@ There are three types of monitoring that the Datadog Agent uses for Cloud Worklo
       securityAgent:
         runtime:
           enabled: true
-          
+
     # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
           network:
             enabled: true
@@ -72,6 +73,7 @@ There are three types of monitoring that the Datadog Agent uses for Cloud Worklo
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
+[3]: /security_platform/cloud_workload_security/troubleshooting#compatibility_with_custom_kubernetes_network_plugins
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -120,7 +122,7 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-  
+
 # For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
@@ -140,10 +142,10 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-  
+
 # For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
 echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-  
+
 systemctl restart datadog-agent
 
 {{< /code-block >}}
