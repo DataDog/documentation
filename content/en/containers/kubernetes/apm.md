@@ -240,7 +240,7 @@ List of all environment variables available for tracing within the Agent running
 
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | [Datadog API Key][3]                                                                                                                                                                                                                                                                                                        |
+| `DD_API_KEY`               | Datadog API Key                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
 | `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][5].                                                                                                                                                                                                                                                                            |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
@@ -276,7 +276,7 @@ List of all environment variables available for tracing within the Agent running
 [2]: /containers/cluster_agent/admission_controller/#apm
 [3]: /tracing/setup/
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /tracing/guide/security/#replace-rules
+[5]: /tracing/configure_data_security#scrub-sensitive-data-from-your-spans
 [6]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [7]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [8]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
