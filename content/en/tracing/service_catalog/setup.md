@@ -55,7 +55,9 @@ When the GitHub Apps integration is set up for your service definitions, an **Ed
 
 {{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
 
-After you update the YAML files for your repositories, your changes propagate to the Service Catalog. To prevent accidental overwriting, create and modify your service definition files with the GitHub Apps integration or the [Service Definition API endpoints][1].
+After you update the YAML files for your repositories, your changes propagate to the Service Catalog. 
+
+To prevent accidental overwriting, create and modify your service definition files with either the GitHub Apps integration or the [Service Definition API endpoints][1]. Updating the same service via both GitHub and API result could result in unintended overwriting.  
 
 ## Further reading
 
