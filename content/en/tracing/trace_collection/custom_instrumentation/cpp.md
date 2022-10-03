@@ -54,13 +54,43 @@ To set tags across all your spans, set the `DD_TAGS` environment variable as a l
 
 ### Set errors on a span
 
-To customize an error associated with one of your spans, use the below:
+To associate a span with an error, set one or more error-related tags on the
+span. For example,
 
 ```cpp
 span->SetTag(opentracing::ext::error, true);
 ```
 
-Error metadata may be set as additional tags on the same span as well.
+Or, equivalently,
+
+```cpp
+span->SetTag("error", true);
+```
+
+Add more specific information about the error by setting any combination of the
+"error.msg", "error.stack", or "error.type" tags. See [Error Tracking][12] for
+more information about error tags.
+
+For example,
+
+```cpp
+// Associate this span with the "bad file descriptor" error from the standard
+// library.
+span->SetTag("error.msg", "[EBADF] invalid file");
+span->SetTag("error.type", "errno");
+```
+
+Setting any of "error.msg", "error.stack", or "error.type" has the effect of
+setting "error" to a true value.
+
+To unset an error on a span, set the "error" tag to a false value. This also has
+the effect of removing any previously set "error.msg", "error.stack", or
+"error.type" tags.
+
+```cpp
+// Clear any error information associated with this span.
+span->SetTag("error", false);
+```
 
 ## Adding spans
 
@@ -172,3 +202,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [9]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
 [10]: https://github.com/openzipkin/b3-propagation
 [11]: /tracing/security
+[12]: https://docs.datadoghq.com/tracing/error_tracking/
