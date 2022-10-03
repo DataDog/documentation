@@ -14,6 +14,9 @@ further_reading:
     - link: 'profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
+    - link: 'https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/'
+      tag: 'Blog'
+      text: 'Optimize your .NET application performance with the Datadog Continuous Profiler'
 aliases:
   - /tracing/profiler/enabling/dotnet/
 ---
@@ -63,16 +66,16 @@ To install the .NET Profiler machine-wide:
 2. Run one of the following commands to install the package and create the .NET log directory `/var/log/datadog/dotnet` with the appropriate permissions:
 
    Debian or Ubuntu
-   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
+   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && sudo /opt/datadog/createLogPath.sh`
 
    CentOS 7+ or Fedora
-   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
+   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && sudo /opt/datadog/createLogPath.sh`
 
    Alpine or other musl-based distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases

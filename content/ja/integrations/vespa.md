@@ -1,34 +1,53 @@
 ---
+app_id: vespa
+app_uuid: 9e31df30-189f-468f-88c7-9c73caf4cdca
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: vespa.mem.heap.free.average
+      metadata_path: metadata.csv
+      prefix: vespa.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Vespa
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: dd@vespa.ai
+  support_email: dd@vespa.ai
 categories:
 - data store
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md
-display_name: Vespa
+display_on_public_website: true
 draft: false
 git_integration_title: vespa
-guid: 810e2a6e-4aa4-4b03-b5a4-563f3752f0eb
 integration_id: vespa
 integration_title: Vespa
 integration_version: 1.1.0
 is_public: true
 kind: インテグレーション
-maintainer: dd@vespa.ai
-manifest_version: 1.0.0
-metric_prefix: vespa.
-metric_to_check: vespa.mem.heap.free.average
+manifest_version: 2.0.0
 name: vespa
-public_title: Datadog-Vespa インテグレーション
+oauth: {}
+public_title: Vespa
 short_description: ビッグデータサービングエンジン Vespa の健全性とパフォーマンスの監視
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: ビッグデータサービングエンジン Vespa の健全性とパフォーマンスの監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vespa
 ---
 
 

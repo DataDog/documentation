@@ -1,6 +1,6 @@
 {
 	"Region selector":{
-		"prefix": "region",
+		"prefix": ";;region",
 		"body": [
 			"{{< site-region region=\"us,us3,us5,eu,gov\" >}}",
 			"{{< /site-region >}}"
@@ -9,7 +9,7 @@
 	},
 	
 	"Frontmatter":{
-		"prefix": "frontmatter",
+		"prefix": ";;frontmatter",
 		"body": [
 			"---",
 			"title: Doc Title",
@@ -27,7 +27,7 @@
 	},
 	
 	"Further reading footer": {
-		"prefix": "further",
+		"prefix": ";;further",
 		"body": [
 			"## Further reading",
 			"",
@@ -36,7 +36,7 @@
 	},
 	
 	"Further reading footer - integrations": {
-	"prefix": "further",
+	"prefix": ";;further",
 	"body": [
 		"## Further reading",
 		"",
@@ -46,7 +46,7 @@
 	},
 	
 	"Alert box":{
-		"prefix": "alert",
+		"prefix": ";;alert",
 		"body": [
 			"<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
 		],
@@ -54,7 +54,7 @@
 	},
 	
 	"Beta callout":{
-		"prefix": "beta",
+		"prefix": ";;beta",
 		"body": [
 			"{{< beta-callout url=\"https://google.com\" d-toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\">}}",
 			"Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!",
@@ -64,7 +64,7 @@
 	},
 	
 	"Integration count":{
-		"prefix": "integration",
+		"prefix": ";;integration",
 		"body": [
 			"{{< translate key=\"integration_count\" >}}"
 		],
@@ -72,23 +72,23 @@
 	},
 	
 	"Tabs":{
-		"prefix": "tab",
+		"prefix": ";;tab",
 		"body": [
 			"{{< tabs >}}",
-			"{{% tab \"${1}\" %}}",
+			"{{< tab \"${1}\" >}}",
 			"",
-			"{{% /tab %}}",
+			"{{< /tab >}}",
 			"",
-			"{{% tab \"${2}\" %}}",
+			"{{< tab \"${2}\" >}}",
 			"",
-			"{{% /tab %}}",
+			"{{< /tab >}}",
 			"{{< /tabs >}}"
 		],
 		"description": "Tabs"
 	},
 	
 	"Tabs - integrations":{
-		"prefix": "tab",
+		"prefix": ";;tab",
 		"body": [
 			"<!-- xxx tabs xxx -->",
 			"<!-- xxx tab \"${1}\" xxx -->",
@@ -104,7 +104,7 @@
 	},
 	
 	"Programming language":{
-		"prefix": "lang",
+		"prefix": ";;lang",
 		"body": [
 			"{{< programming-lang-wrapper langs=\"python\" >}}",
 			"",
@@ -118,7 +118,7 @@
 	},
 	
 	"Table":{
-		"prefix": "table",
+		"prefix": ";;table",
 		"body": [
 			"|      | Required    | Description |",
 			"| ---  | ----------- | ----------- |",
@@ -129,7 +129,7 @@
 	},
 	
 	"Description list":{
-		"prefix": "list",
+		"prefix": ";;list",
 		"body": [
 			"Service",
 			"",
@@ -149,7 +149,7 @@
 	
 	
 	"Agent config":{
-		"prefix": "agent",
+		"prefix": ";;agent",
 		"body": [
 			"{{< agent-config type=\"${1|basic configuration,advanced configuration,log collection configuration,trace collection configuration,process collection configuration,system probe configuration,dogstatsd configuration,jmx configuration,logging configuration,autoconfig configuration,container autodiscovery configuration,cluster check configuration,container detection,docker tag extraction,kubernetes tag extraction,ecs integration configuration,cri integration configuration,containerd integration configuration,kubernetes kubelet connectivity configuration,kubernetes apiserver integration configuration|}\" filename=\"datadog.yaml\" collapsible=\"true\" disable_copy=\"true\">}}"
 		],
@@ -157,7 +157,7 @@
 	},
 	
 	"Reuse":{
-		"prefix": "reuse",
+		"prefix": ";;reuse",
 		"body": [
 			"{{% reuse/prodname/reuse_filename %}}"
 		],
@@ -165,7 +165,7 @@
 	},
 	
 	"Code block":{
-		"prefix": "code",
+		"prefix": ";;code",
 		"body": [
 			"{{< code-block lang=\"java\" filename=\"block.java\" disable_copy=\"true\" collapsible=\"true\" >}}",
 			"import com.datadoge.docs.SweetCodeBlock;",
@@ -180,7 +180,7 @@
 	},
 	
 	"Check mark":{
-		"prefix": "check",
+		"prefix": ";;check",
 		"body": [
 			"{{< X >}}"
 		],

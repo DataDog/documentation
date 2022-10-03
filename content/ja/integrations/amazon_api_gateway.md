@@ -37,7 +37,7 @@ Amazon API Gateway は、開発者があらゆる規模で API の作成、公�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`API Gateway` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `API Gateway` が有効になっていることを確認します。
 
 2. API Gateway ステージにカスタムタグを適用するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
@@ -103,9 +103,9 @@ AWS API Gateway インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_api_gateway
+[4]: https://app.datadoghq.com/integrations/amazon-api-gateway
 [5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv

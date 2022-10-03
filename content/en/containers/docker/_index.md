@@ -184,7 +184,7 @@ Send custom metrics with [the StatsD protocol][20]:
 | `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
-| `DD_DOGSTATSD_DISABLE`           | Disables sending custom metrics from the dogstatsd library.                                                                                                |
+| `DD_USE_DOGSTATSD`           | Enable or disable sending custom metrics from the DogStatsD library.                                                                                                |
 Learn more about [DogStatsD over Unix Domain Sockets][21].
 
 ### Tagging
@@ -223,6 +223,8 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 Additional examples are available on the [Container Discover Management][25] page.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
+
+**Note**: When using containerd, it's possible to ignore containers by namespace using `DD_CONTAINERD_NAMESPACES` and `DD_CONTAINERD_EXCLUDE_NAMESPACES`. Both are a space-separated list of namespaces. When `DD_CONTAINERD_NAMESPACES` is set, the agent reports data for the containers that belong to a namespace present in the list. When `DD_CONTAINERD_EXCLUDE_NAMESPACES` is set, the agent reports data for all the containers except the ones that belong to a namespace of the list.
 
 ### Misc
 

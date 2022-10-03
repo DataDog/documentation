@@ -44,7 +44,7 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.2.0
+integration_version: 5.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -328,6 +328,8 @@ Agent コンテナで必要な環境変数
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -347,12 +349,38 @@ spec:
     - name: elasticsearch
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: elasticsearch
+  annotations:
+    ad.datadoghq.com/elasticsearch.checks: |
+      {
+        "elastic": {
+          "init_config": {},
+          "instances": [
+            {
+              "url": "http://%%host%%:9200"
+            }
+          ]
+        }
+      }
+spec:
+  containers:
+    - name: elasticsearch
+```
+
 ##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1

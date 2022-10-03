@@ -325,6 +325,8 @@ Agent コンテナで必要な環境変数
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -347,12 +349,41 @@ spec:
     - name: postgres
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  annotations:
+    ad.datadoghq.com/postgres.checks: |
+      {
+        "postgres": {
+          "init_config": {},
+          "instances": [
+            {
+              "host": "%%host%%",
+              "port":"5432",
+              "username":"datadog",
+              "password":"<PASSWORD>"
+            }
+          ]
+        }
+      }
+spec:
+  containers:
+    - name: postgres
+```
+
 ##### ログの収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1

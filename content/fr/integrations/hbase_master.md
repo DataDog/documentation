@@ -1,40 +1,62 @@
 ---
+app_id: hbase-master
+app_uuid: e53ed650-6454-4f69-abfc-2cedd35ec2c3
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: hbase.master.assignmentmanager.rit_oldest_age
+      metadata_path: metadata.csv
+      prefix: hbase.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: HBase master
   logs:
     source: hbase
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: unknown
+  sales_email: everpeace@gmail.com
+  support_email: everpeace@gmail.com
 categories:
 - data store
 - log collection
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md
-display_name: HBase master
+display_on_public_website: true
 draft: false
 git_integration_title: hbase_master
-guid: b45e0f05-8ece-4d5c-946b-ce0ee8057e68
 integration_id: hbase-master
 integration_title: Hbase Master
 integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: everpeace@gmail.com
-manifest_version: 1.0.0
-metric_prefix: hbase.
-metric_to_check: hbase.master.assignmentmanager.rit_oldest_age
+manifest_version: 2.0.0
 name: hbase_master
+oauth: {}
 public_title: Hbase Master
 short_description: Intégration de HBase Master.
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Intégration de HBase Master.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Hbase Master
 ---
 
 

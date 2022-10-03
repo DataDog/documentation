@@ -24,7 +24,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 ## はじめに
 
 サポート対象の PostgreSQL バージョン
-: 9.6、10、11、12、13
+: 9.6、10、11、12、13、14
 
 サポートされる Azure PostgreSQL のデプロイメントタイプ
 : Azure VM 上の PostgreSQL、シングルサーバー、フレキシブルサーバー
@@ -215,8 +215,9 @@ Azure Postgres データベースを監視するには、インフラストラ�
      - dbm: true
        host: '<AZURE_INSTANCE_ENDPOINT>'
        port: 5432
-       username: datadog
+       username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
        password: '<PASSWORD>'
+       ssl: true
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -258,8 +259,9 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "dbm": true,
     "host": "<AZURE_INSTANCE_ENDPOINT>",
     "port": 5432,
-    "username": "datadog",
+    "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
     "password": "<UNIQUEPASSWORD>",
+    "ssl": true,
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
       "name": "<YOUR_INSTANCE_NAME>"
@@ -284,7 +286,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": true, "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
 ```
 
 Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
@@ -321,14 +323,16 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
+  --set 'clusterChecksRunner.enabled=true' \
   --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <AZURE_INSTANCE_ENDPOINT>
     port: 5432
-    username: datadog
+    username: "datadog@<AZURE_INSTANCE_ENDPOINT>"
     password: "<UNIQUEPASSWORD>"
+    ssl: true
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
       name: "<YOUR_INSTANCE_NAME>" \
@@ -353,8 +357,9 @@ instances:
   - dbm: true
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 5432
-    username: datadog
+    username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
     password: '<PASSWORD>'
+    ssl: true
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -387,8 +392,9 @@ metadata:
           "dbm": true,
           "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 5432,
-          "username": "datadog",
+          "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
           "password": "<UNIQUEPASSWORD>",
+          "ssl": true,
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "name": "<YOUR_INSTANCE_NAME>"

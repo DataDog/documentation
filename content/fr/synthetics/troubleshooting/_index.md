@@ -14,6 +14,8 @@ kind: documentation
 title: Dépannage de la surveillance Synthetic
 ---
 
+## Présentation
+
 Si vous rencontrez un problème durant la configuration de la surveillance Synthetic Datadog, utilisez cette page pour effectuer un premier dépannage. Si votre problème persiste, [contactez l'assistance Datadog][1].
 
 ## Tests API
@@ -98,6 +100,10 @@ Pour résoudre ce problème, accédez à l'éditeur de votre enregistrement et o
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Résoudre une erreur concernant le localisateur d'utilisateur" video="true" width="100%" >}}
 
+#### Je rencontre des problèmes avec une propriété pointer CSS
+
+Les navigateurs automatisés ne peuvent pas émuler la fonctionnalité de média `pointer` CSS. Les tests Browser utilisent `pointer: none` pour chaque test et chaque appareil (ordinateur portable, tablette ou mobile).
+
 ## Tests API et tests Browser
 
 ### Erreurs Unauthorized
@@ -137,6 +143,10 @@ Cela peut être causé par un problème de saturation des ressources sur vos wor
 
 Cela peut être causé par un problème de saturation des ressources sur vos workers d'emplacement privé. Vérifiez que vos conteneurs d'emplacement privé disposent de [suffisamment de ressources CPU][13].
 
+### Mes tests Browser prennent trop de temps à s'exécuter
+
+Vérifiez que vous ne rencontrez pas de [problèmes de mémoire insuffisante][14] avec vos déploiements d'emplacement privé. Si vous avez déjà essayé de dimensionner vos instances de conteneur en suivant les [conseils de dimensionnement][15], contactez l'[assistance Datadog][1].
+
 ### Les tests API exécutés à partir d'un emplacement privé génèrent des erreurs `TIMEOUT`
 
 Ces erreurs peuvent indiquer que votre emplacement privé ne parvient pas à atteindre l'endpoint sur lequel vos tests API s'exécutent. Assurez-vous que l'emplacement privé est installé sur le même réseau que l'endpoint à tester. Vous pouvez également essayer d'exécuter votre test sur plusieurs endpoints pour vérifier si vous obtenez les mêmes erreurs `TIMEOUT`.
@@ -145,15 +155,13 @@ Ces erreurs peuvent indiquer que votre emplacement privé ne parvient pas à att
 
 ### L'erreur `invalid mount config for type "bind": source path must be a directory` s'affiche lors d'une tentative d'exécution d'un emplacement privé
 
-Cette erreur survient lorsque vous essayez de monter un fichier unique dans un conteneur Windows, ce qui n'est pas possible. Pour en savoir plus, consultez la [documentation Docker relative au volume de montage][14] (en anglais). Vérifiez que la source du montage lié correspond à un répertoire local.
+Cette erreur survient lorsque vous essayez de monter un fichier unique dans un conteneur Windows, ce qui n'est pas possible. Pour en savoir plus, consultez la [documentation Docker relative au volume de montage][16] (en anglais). Vérifiez que la source du montage lié correspond à un répertoire local.
 
 ## Synthetics et CI/CD
 
-## Explorateur de résultats CI
-
 ### Les métadonnées CI ne s'affichent pas dans l'explorateur de résultats CI
 
-Vérifiez si vous utilisez les endpoints d'API pour déclencher vos exécutions de test CI/CD. Pour que les métadonnées CI s'affichent dans l'explorateur de résultats CI, vous devez utiliser le [package NPM][15].
+Vérifiez si vous utilisez les endpoints d'API pour déclencher vos exécutions de test CI/CD. Pour que les métadonnées CI s'affichent dans l'explorateur de résultats CI, vous devez utiliser le [package NPM][17].
 
 ## Pour aller plus loin
 
@@ -172,5 +180,7 @@ Vérifiez si vous utilisez les endpoints d'API pour déclencher vos exécutions 
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /fr/synthetics/api_tests/?tab=httptest#notify-your-team
 [13]: /fr/synthetics/private_locations#private-location-total-hardware-requirements
-[14]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
-[15]: /fr/synthetics/cicd_integrations#use-the-cli
+[14]: https://docs.docker.com/config/containers/resource_constraints/
+[15]: /fr/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[17]: /fr/synthetics/cicd_integrations#use-the-cli

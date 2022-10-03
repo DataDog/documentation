@@ -1,5 +1,9 @@
 ---
 description: SLO のエラーバジェットの消費を警告するためにモニターを使用する
+further_reading:
+- link: /monitors/service_level_objectives/
+  tag: ドキュメント
+  text: サービスレベル目標の概要
 kind: ドキュメント
 title: Error Budget Alerts
 ---
@@ -9,6 +13,8 @@ title: Error Budget Alerts
 SLO エラーバジェットアラートは閾値に基づき、SLO のエラーバジェットの一定の割合が消費されなかったときに通知します。たとえば、対象とする 7 日間でエラーバジェットの 75% が消費されたらアラート、50% が消費されたら警告（オプション）のように設定します。
 
 **注:** エラーバジェットアラートは、メトリクスモニターの種類（メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値モニター）のみで構成された[メトリクスベースの SLO][1] または[モニターベースの SLO][2] でのみ利用可能です。
+
+*エラーバジェット*を含む SLO に関する主要な用語の説明については、[サービスレベル目標][7]を参照してください。
 
 {{< img src="monitors/service_level_objectives/error_budget_alert_config.png" alt="エラーバジェットアラートのコンフィギュレーション">}}
 
@@ -55,9 +61,15 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /ja/monitors/service_level_objectives/metric/
 [2]: /ja/monitors/service_level_objectives/monitor/
 [3]: https://app.datadoghq.com/slo
 [4]: /ja/monitors/notify/
 [5]: /ja/api/v1/monitors/#create-a-monitor
-[6]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[7]: /ja/monitors/service_level_objectives/#key-terminology

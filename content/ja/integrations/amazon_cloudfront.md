@@ -39,7 +39,7 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`CloudFront` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CloudFront` が有効になっていることを確認します。
 2. [Datadog - AWS CloudFront インテグレーション][3]をインストールします。
 3. 任意: [CloudFront ディストリビューションの追加メトリクス][4] を有効化すると、CloudFront トラフィックのパフォーマンスの可視性を高めることができます。
 
@@ -123,8 +123,8 @@ AWS Cloudfront インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudfront
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-cloudfront
 [4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cloudfront/amazon_cloudfront_metadata.csv
 [6]: https://docs.datadoghq.com/ja/help/

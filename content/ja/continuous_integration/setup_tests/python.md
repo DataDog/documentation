@@ -311,6 +311,22 @@ DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
+### テストにカスタムタグを追加する
+
+現在アクティブなスパンを使用して、テストにカスタムタグを追加することができます。
+
+```python
+from ddtrace import tracer
+
+// テスト内
+span = tracer.current_span()
+span.set_tag("test_owner", "my_team")
+// テストは正常に続きます
+// ...
+```
+
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、Python カスタムインスツルメンテーションドキュメントの[タグの追加][5]セクションを参照してください。
+
 ## コンフィギュレーション設定
 
 以下は、コードか、または環境変数を使用した、トレーサーで使用できる最も重要なコンフィギュレーション設定のリストです。
@@ -333,7 +349,7 @@ DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 : `http://hostname:port` の形式のトレース収集用の Datadog Agent URL。<br/>
 **デフォルト**: `http://localhost:8126`
 
-他のすべての [Datadog トレーサーコンフィギュレーション][5]オプションも使用できます。
+他のすべての [Datadog トレーサーコンフィギュレーション][6]オプションも使用できます。
 
 ### Git のメタデータを収集する
 
@@ -392,5 +408,6 @@ Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、
 [1]: /ja/agent/
 [2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /ja/tracing/setup_overview/setup/python/
-[5]: /ja/tracing/setup_overview/setup/python/?tab=containers#configuration
+[4]: /ja/tracing/trace_collection/dd_libraries/python/
+[5]: /ja/tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
+[6]: /ja/tracing/trace_collection/library_config/python/?tab=containers#configuration

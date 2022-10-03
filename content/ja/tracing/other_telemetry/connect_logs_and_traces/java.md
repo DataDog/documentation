@@ -1,9 +1,9 @@
 ---
 aliases:
-- /ja/tracing/connect_logs_and_traces/nodejs
-code_lang: nodejs
-code_lang_weight: 50
-description: Nodejs ログとトレースを接続して Datadog で関連付けます。
+- /ja/tracing/connect_logs_and_traces/java
+code_lang: java
+code_lang_weight: 10
+description: Java ログとトレースを接続して Datadog で関連付けます。
 further_reading:
 - link: tracing/trace_collection/custom_instrumentation
   tag: ドキュメント
@@ -18,57 +18,75 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: Nodejs ログとトレースの接続
+title: Java ログとトレースの接続
 type: multi-code-lang
 ---
+## はじめに
+
+ログ収集が設定されていることを確認します。Log4j、Log4j 2、Logback の手順については、[Java ログ収集][1]を参照してください。
 
 ## 自動挿入
 
-環境変数 `DD_LOGS_INJECTION=true` か、直接トレーサーを構成することで挿入を有効にします:
+バージョン 0.74.0 以降、Java トレーサーは自動的にトレース相関識別子をログに挿入します。それ以前のバージョンでは、システムプロパティとして `dd.logs.injection=true` を追加するか、環境変数 `DD_LOGS_INJECTION=true` を使用して、Java トレーサーの自動挿入を有効にします。コンフィギュレーションの詳細については、[Java トレーサーのコンフィギュレーション][2]ページを参照してください。
 
-```javascript
-// この行は、ロガーをインポートする前に記述する必要があります。
-const tracer = require('dd-trace').init({
-    logInjection: true
-});
-```
-
-これにより、`bunyan`、`paperplane`、`pino`、`winston` の自動トレース ID 挿入が有効になります。
-
-まだの場合は、NodeJS トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成します。これは、
-`env`、`service`、`version` を追加する際のベストプラクティスです (詳細は、[統合サービスタグ付け][1]を参照)。
-
-**注**: 自動挿入が機能するのは JSON 形式のログのみです。
+**注**: トレース ID の `attribute.path` が `dd.trace_id` では*ない* 場合は’、当該トレース ID の `attribute.path` 向け予約済み属性設定アカウントを確認してください。詳しくは、[関連するログがトレース ID パネルに表示されない][3]を参照してください。
 
 ## 手動挿入
 
-自動挿入に対応していないロギングライブラリを使っているが、JSON 形式を使っている場合は、コード内で直接手動挿入を実行することができます。
+手動でトレースとログに相関性を持たせたい場合は、Java トレーサーの API を使用して相関識別子を取得します。`CorrelationIdentifier.getTraceId` および `CorrelationIdentifier.getSpanId` メソッドを使用して、ログに記録されるスパンの先頭に識別子を挿入し、スパンの完了時に識別子を削除します。
 
-`console` を基底のロガーとして使う例:
+{{< tabs >}}
+{{% tab "Log4j 2" %}}
 
-```javascript
-const tracer = require('dd-trace');
-const formats = require('dd-trace/ext/formats');
+```java
+import org.apache.logging.log4j.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
 
-class Logger {
-    log(level, message) {
-        const span = tracer.scope().active();
-        const time = new Date().toISOString();
-        const record = { time, level, message };
+// このブロックより前に開始し、アクティブなスパンがある必要があります。
+try {
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
 
-        if (span) {
-            tracer.inject(span.context(), formats.LOG, record);
-        }
+// 何かをログ
 
-        console.log(JSON.stringify(record));
-    }
+} finally {
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
 }
-
-module.exports = Logger;
 ```
 
-## その他の参考資料
+{{% /tab %}}
+{{% tab "SLF4J and Logback" %}}
+
+```java
+import org.slf4j.MDC;
+import datadog.trace.api.CorrelationIdentifier;
+
+// このブロックより前に開始し、アクティブなスパンがある必要があります。
+try {
+    MDC.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    MDC.put("dd.span_id", CorrelationIdentifier.getSpanId());
+
+// 何かをログ
+
+} finally {
+    MDC.remove("dd.trace_id");
+    MDC.remove("dd.span_id");
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**注**: ログのパースに [Datadog ログインテグレーション][4]を使用していない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされていることを確認する必要があります。詳しくは、[関連するログがトレース ID パネルに表示されない][5]を参照してください。
+
+特定のロガー実装の詳細や JSON 形式でのログ方法については、[Java ログ収集のドキュメントを参照してください][1]。
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/unified_service_tagging
+[1]: /ja/logs/log_collection/java/
+[2]: /ja/tracing/trace_collection/dd_libraries/java/
+[3]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?
+[4]: /ja/logs/log_collection/java/#raw-format
+[5]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

@@ -172,7 +172,7 @@ function readInt32 (buffer, offset) {
 
 const tracingFormat = function () {
   return winston.format(info => {
-    const span = opentelemetry.getSpan(opentelemetry.context.active());
+    const span = opentelemetry.trace.getSpan(opentelemetry.context.active());
     if (span) {
       const context = span.context();
       const traceIdEnd = context.traceId.slice(context.traceId.length / 2)

@@ -48,10 +48,18 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 
 4. ステータスを保存すると、どのアクションが実行されたかを示す確認のトーストが表示され、そのアクションを **Undo** (取り消す) ことができます。アクションを保存すると、シグナルのサイドパネルの上にバナーで表示されます。バナーには、いつ、誰が、どのようなアクションを行ったかが表示されます。
 
+組織のサービスに支障をきたす可能性を警告するセキュリティシグナルは、インシデントと見なされることがあります。このような脅威を処理するために、一定のフレームワークを持つことが必要になることがよくあります。[インシデント管理][4]は、インシデントを効果的に識別し、緩和するためのシステムを提供します。
+
+サイドパネルの右上にあるケバブボタンをクリックし、**Declare incident** をクリックして、Cloud SIEM または Cloud Workload Security のシグナルから直接インシデントを宣言することができます。
+
+サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、アプリケーションセキュリティモニタリングのシグナルからインシデントを宣言します。
+
+{{< img src="monitors/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
+
 ## セキュリティシグナルアクションの監査ログ
 
-管理者またはセキュリティチームのメンバーとして、[監査ログ][4] (公開ベータ版)を使用すると、Datadog 内のセキュリティシグナルに対してチームが取っているアクションを確認することができます。個人としても、自分のアクションの流れを確認することができます。
-シグナルのアクション履歴の保持は、設定された監査ログ[保持][5]にあります。監査ログのデフォルトの保持期間は 7 日間です。保持期間は、3 日から 90 日の間で設定できます。
+管理者またはセキュリティチームのメンバーとして、[監査ログ][5] (公開ベータ版)を使用すると、Datadog 内のセキュリティシグナルに対してチームが取っているアクションを確認することができます。個人としても、自分のアクションの流れを確認することができます。
+シグナルのアクション履歴の保持は、設定された監査ログ[保持][6]にあります。監査ログのデフォルトの保持期間は 7 日間です。保持期間は、3 日から 90 日の間で設定できます。
 監査ログエクスプローラーは、実行されたすべてのシグナルアクションを表示します。オーガニゼーションの設定 に移動し、Security の Audit Logs Settings を選択します。
 
 Cloud Security Platform で行われたアクションによって生成された監査ログを排他的に表示するには
@@ -64,6 +72,7 @@ Cloud Security Platform で行われたアクションによって生成され�
 
 [1]: /ja/account_management/rbac/?tab=datadogapplication#pagetitle
 [2]: /ja/account_management/rbac/permissions/#cloud-security-platform
-[3]: /ja/security_platform/notification_rules/
-[4]: /ja/account_management/audit_logs/#overview
-[5]: /ja/account_management/audit_logs/#retention
+[3]: /ja/security_platform/notifications/rules/
+[4]: /ja/monitors/incident_management/#pagetitle
+[5]: /ja/account_management/audit_trail/#overview
+[6]: /ja/account_management/audit_trail/#retention

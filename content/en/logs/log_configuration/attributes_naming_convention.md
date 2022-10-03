@@ -82,7 +82,8 @@ The standard attribute panel appears when you add a new standard attribute or ed
 
 The default standard attribute list is split into the functional domains:
 
-- [Network/communications](#network)
+- [Network/communications](#web-access)
+- [Geolocation](#geolocation)
 - [HTTP Requests](#http-requests)
 - [Source code](#source-code)
 - [Database](#database)
@@ -90,6 +91,7 @@ The default standard attribute list is split into the functional domains:
 - [User related attributes](#user-related-attributes)
 - [Syslog and log shippers](#syslog-and-log-shippers)
 - [DNS](#dns)
+- [Events](#events)
 
 #### Web Access
 

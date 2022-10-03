@@ -5,6 +5,9 @@ further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Service Definition API"
+- link: "/integrations/github_apps"
+  tag: "Documentation"
+  text: "GitHub Apps Integration"
 ---
 
 ## Overview
@@ -36,6 +39,26 @@ If the service, API, or custom library you are interested in is not listed on th
 
 To discover other services through existing Datadog telemetry such as infrastructure metrics, go to the **Discover Services** tab and follow instructions there. Discovery uses the `DD_SERVICE` [Unified Service Tagging convention][4] to locate services sending data to your Datadog organization.
 
+## Store and edit service definitions in GitHub
+
+Configure the [GitHub Apps integration][5] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
+
+To install the GitHub Apps integration, navigate to the [integration tile][6] and click **Link GitHub Account** in the **Repo Configuration** tab. 
+
+### Service definition YAML files
+
+Datadog scans for the `service.datadog.yaml` file at the root of each repository with read permissions. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
+
+### Modify service definition
+
+When the GitHub Apps integration is set up for your service definitions, an **Edit in Github** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
+
+{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
+
+After you update the YAML files for your repositories, your changes propagate to the Service Catalog. 
+
+To prevent accidental overwriting, create and modify your service definition files with either the GitHub Apps integration or the [Service Definition API endpoints][1]. Updating the same service using both the GitHub and the API could result in unintended overwriting.  
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -44,3 +67,5 @@ To discover other services through existing Datadog telemetry such as infrastruc
 [2]: https://app.datadoghq.com/services/setup
 [3]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [4]: /getting_started/tagging/unified_service_tagging
+[5]: /integrations/github_apps/
+[6]: https://app.datadoghq.com/integrations/github-apps

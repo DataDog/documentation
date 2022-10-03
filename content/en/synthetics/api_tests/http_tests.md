@@ -58,8 +58,8 @@ After choosing to create an `HTTP` test, define your test's request.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.
-   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
+   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
 
      <br/> 

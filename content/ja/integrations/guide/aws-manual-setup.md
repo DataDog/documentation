@@ -34,6 +34,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-cloud-siem/
   tag: ブログ
   text: Datadog セキュリティモニタリングが新登場
+- link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
+  tag: ブログ
+  text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
 kind: ガイド
 title: AWS マニュアルセットアップガイド
 ---
@@ -50,53 +53,53 @@ AWS インテグレーションを手動で設定するには、AWS アカウン
 ## セットアップ
 
 ### 外部 ID を生成する
-インテグレーションページの <a href="https://app.datadoghq.com/account/settings#integrations/amazon_web_services" target="_blank">AWS インテグレーションタイル</a>で External ID を生成します。これは、Datadog 用に作成する AWS IAM ロールの信頼ポリシーで使用されます。
-1. `Configuration` タブを選択し、`Role Delegation` を選択します。
-2. `Manually` をクリックします。これにより、AWS IAM ロールの構成に使用される AWS External ID が作成されます。External ID の詳細については、[IAM ユーザーガイド][1]を参照してください。
-3. この値をクリップボードまたはメモ帳にコピーします。
-  **注: 外部 ID の値がリセットされるため、インテグレーションタイルや Datadog アプリケーションページを閉じないでください。**
+
+1. [AWS インテグレーション構成ページ][1]で、**Add AWS Account** をクリックし、** Manually** を選択します。
+2. アクセスタイプで `Role Delegation` を選択し、`AWS External ID` をコピーします。外部 ID の詳細については、[IAM ユーザーガイド][2]をご参照ください。
+  **注: 外部 ID の値がリセットされるため、インテグレーションタイルや Datadog サイトを閉じないでください。**
 
 ### Datadog のための AWS IAM ポリシー
 Datadog が提供するすべての AWS インテグレーションを利用するために、AWS アカウントの Datadog ロールに[必要な権限](#aws-integration-iam-policy)を持つ IAM ポリシーを作成します。インテグレーションに他のコンポーネントが追加されると、これらの権限は変更される可能性があります。
 
-4. AWS [IAM コンソール][2]で新しいポリシーを作成します。 
-5. `JSON` タブを選択します。テキストボックスに[権限ポリシー](#aws-integration-iam-policy)を貼り付けます。
-6. `Next: Tags` と `Review policy` をクリックします。
-7. ポリシーに `DatadogAWSIntegrationPolicy`、または自分が選択した名前を付け、適切な説明を入力します。
-8. `Create policy` をクリックします。
+3. AWS [IAM コンソール][3]で新しいポリシーを作成します。 
+4. **JSON** タブを選択します。テキストボックスに[権限ポリシー](#aws-integration-iam-policy)を貼り付けます。
+5. **Next: Tags** と **Next: Review** をクリックします。
+6. ポリシーに `DatadogIntegrationPolicy`、または自分が選択した名前を付け、適切な説明を入力します。
+7. **Create policy** をクリックします。
 
 ### Datadog のための AWS IAM ロール
 IAM ポリシーで定義された権限を使用するために、Datadog 用の IAM ロールを作成します。
 
-9. AWS [IAM コンソール][3]で新しいロールを作成します。 
-10. ロールタイプで、`Another AWS account` を選択します。
-11. アカウント ID で、`464622532012` (Datadog のアカウント ID) を入力します。これは、Datadog に AWS データへのアクセスを許可することを意味します。
-12. `Require external ID` を選択し、[AWS External ID](#generate-an-external-id) で生成されたものを入力します。
-**Require MFA** を無効にします。
-13. `Next` をクリックします。
-14. すでにポリシーを作成している場合は、このページで検索して選択します。そうでない場合は、新しいウィンドウで開く `Create Policy` をクリックし、[Datadog のための AWS IAM ポリシー](#aws-integration-iam-policy)の説明に従って操作してください。
-15. Datadog の[クラウドセキュリティポスチャ管理製品][4]を使用する場合は、オプションで AWS SecurityAudit ポリシーをロールにアタッチします。
-16. `Next: Tags` と `Next: Review` をクリックします。
-17. ロールに `DatadogIntegrationRole` などの名前を付け、適切な説明を入力します。
-18. `Create Role` をクリックします。
+8. AWS [IAM コンソール][4]で新しいロールを作成します。
+9. 信頼されるエンティティの種類で **AWS account** を選択し、**Another AWS account** を選択します。
+10. `Account ID` として、`464622532012` を入力します。これは Datadog のアカウント ID で、Datadog に AWS のデータへのアクセスを許可するものです。
+11. **Require external ID** を選択し、[外部 ID を生成する](#generate-an-external-id)セクションでコピーした外部 ID を入力します。
+`Require MFA` を無効にしたままにしてください。詳しくは、AWS のドキュメント、[第三者にお客様の AWS リソースへのアクセスを許可する際の外部 ID の使用方法][2]をご覧ください。
+12. **Next** をクリックします。
+13. すでにポリシーを作成している場合は、このページで検索し、選択してください。そうでない場合は、新しいウィンドウで開く **Create Policy** をクリックし、前のセクションの指示に従います。
+14. オプションで、Datadog の[クラウドセキュリティポスチャ管理製品][5] (CSPM) を使用するための <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit ポリシー</a>をロールにアタッチします。
+15. **Next** をクリックします。
+16. ロールに `DatadogIntegrationRole` などの名前を付け、適切な説明を入力します。
+17. **Create Role** をクリックします。
 
 ### Datadog で設定を完了する
 
-19. 別のタブで開いていた Datadog アカウントの AWS インテグレーションタイルページに戻り、AWS アカウント ID を**ダッシュなしで**入力します (例: `123456789012`)。アカウント ID は、Datadog 用に作成されたロールの ARN に記載されています。
-20. 作成したロールの名前を入力します。
-**注:** インテグレーションタイルに入力する名前は大文字と小文字が区別され、AWS 側で作成されるロール名と完全に一致する必要があります。
-21. [Datadog is not authorized to perform sts:AssumeRole][5] (Datadog は sts:AssumeRole を実行する権限がありません) エラーが発生した場合、AWS 信頼ポリシーの `sts:ExternalId:` が以前にインテグレーションタイルで作成した `AWS External ID` と一致しているか確認してください。
-22. **Install Integration** をクリックします。
-23. データ収集が開始されるまで最大 10 分待ち、すぐに使える <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 概要ダッシュボード</a>を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
+18. 別のタブで開いていた Datadog のアカウントを手動で追加するための AWS インテグレーション構成ページに戻ります。チェックボックスをクリックして、Datadog の IAM ロールが AWS アカウントに追加されたことを確認します。
+19. アカウント ID を**ダッシュなしで**入力します (例: `123456789012`)。アカウント ID は、Datadog 用に作成されたロールの ARN で確認することができます。
+20. 前のセクションで作成したロールの名前を入力し、**Save** をクリックします。
+  **注:** インテグレーションタイルに入力する名前は大文字と小文字が区別され、AWS のロール名と完全に一致する必要があります。
+21. [Datadog is not authorized to perform sts:AssumeRole][6] エラーが発生した場合は、UI で推奨されているトラブルシューティングの手順を実行するか、[トラブルシューティングガイド][6]を読んでください。
+22. データ収集が開始されるまで最大 10 分待ち、すぐに使える <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 概要ダッシュボード</a>を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
 
-[1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[2]: https://console.aws.amazon.com/iam/home#/policies
-[3]: https://console.aws.amazon.com/iam/home#/roles
-[4]: /ja/security_platform/cspm
-[5]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/
+
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
+[2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+[3]: https://console.aws.amazon.com/iam/home#/policies
+[4]: https://console.aws.amazon.com/iam/home#/roles
+[5]: /ja/security_platform/cspm
+[6]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
-
-{{% tab "アクセスキー (GovCloud または中国のみ)" %}}
+{{% tab "Access keys (GovCloud or China Only)" %}}
 
 ## セットアップ
 
@@ -105,21 +108,15 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 1. AWS のコンソールで、Datadog インテグレーションで使用する IAM ユーザーを[必要な権限](#aws-integration-iam-policy)で作成します。
 2. Datadog インテグレーション IAM ユーザー用のアクセスキーとシークレットキーを生成します。
 
-詳しくは、AWS のドキュメント、[第三者にお客様の AWS リソースへのアクセスを許可する際の外部 ID の使用方法][1]をご覧ください。
-
 ### Datadog
 
-3. [AWS インテグレーション タイル][2]を開きます。
+3. [AWS インテグレーションタイル][1]で、**Add AWS Account** をクリックし、** Manually** を選択します。
 4. **Access Keys (GovCloud or China Only)** タブを選択します。
-5. `AWS アクセスキー` と `AWS シークレットキー` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
-6. ダイアログの左側で、メトリクスを収集するサービスを選択します。
-7. オプションで、すべてのホストやメトリクスにタグを追加します。
-8. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
-9. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
-10. **Install Integration** をクリックします。
+5. `Account ID`、`AWS Access Key`、`AWS Secret Key` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
+6. **保存**をクリックします。
+7. データ収集が開始されるまで最大 10 分待ち、すぐに使える <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 概要ダッシュボード</a>を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
 
-[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{< /tabs >}}
 

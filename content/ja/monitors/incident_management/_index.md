@@ -190,7 +190,7 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 
 [Slack][7] との統合に加えて、インシデント管理は以下とも統合されます。
 
-- [PagerDuty][13] は、インシデント通知を PagerDuty に送信します。
+- [PagerDuty][13] と [OpsGenie][18] を使って、オンコールエンジニアにインシデント通知を送信することができます。
 - [Jira][14] は、インシデントの Jira チケットを作成します。
 - [Webhook][15] は、Webhook を使用してインシデント通知を送信します (たとえば、[SMS を Twilio に送信][16])。
 
@@ -219,3 +219,4 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [15]: /ja/integrations/webhooks/
 [16]: /ja/integrations/webhooks/#sending-sms-through-twilio
 [17]: /ja/getting_started/incident_management
+[18]: /ja/integrations/opsgenie/

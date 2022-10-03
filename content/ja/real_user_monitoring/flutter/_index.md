@@ -1,5 +1,4 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/README.md
 description: Flutter プロジェクトから RUM データを収集します。
@@ -16,15 +15,11 @@ further_reading:
 kind: documentation
 title: Flutter モニタリング
 ---
-<div class="alert alert-info"><p>Flutter モニタリングはベータ版です。</p>
-</div>
-
-
 ## 概要
 
 Datadog Real User Monitoring (RUM) を使用すると、Flutter アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
-RUM は、モバイル Flutter の Android および iOS アプリケーションの監視をサポートしています。
+RUM は Flutter 2.8+ の Flutter Android および iOS アプリケーションの監視をサポートしています。
 
 ## 現在の Datadog SDK のバージョン
 
@@ -32,7 +27,7 @@ RUM は、モバイル Flutter の Android および iOS アプリケーショ�
 
 | iOS SDK | Android SDK | Browser SDK |
 | :-----: | :---------: | :---------: |
-| 1.11.0-rc1 | 1.12.0-alpha2 | v4.11.2 |
+| 1.12.0 | 1.14.0 | v4.11.2 |
 
 [//]: # (End SDK Table)
 
@@ -55,7 +50,7 @@ Web の場合、`index.html` の `head` タグの下に以下を追加します�
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
 ```
 
-これは、CDN 配信された Datadog Logging および RUM Browser SDK をロードします。Browser SDK の同期 CDN 配信バージョンは、Flutter プラグインでサポートされる唯一のバージョンであることに注意してください。
+これは、Logs と RUM の CDN 配信された Datadog Browser SDK をロードします。Datadog Browser SDK の同期 CDN 配信バージョンは、Flutter プラグインでサポートされている唯一のバージョンです。
 
 ## セットアップ
 
@@ -67,11 +62,11 @@ Web の場合、`index.html` の `head` タグの下に以下を追加します�
 
 {{< img src="real_user_monitoring/flutter/image_flutter.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
 
-データの安全性を確保するために、クライアントトークンを使用する必要があります。クライアントトークンの設定方法については、[クライアントトークンのドキュメント][4]を参照してください。
+データの安全性を確保するために、クライアントトークンを使用する必要があります。クライアントトークンの設定方法については、[クライアントトークンのドキュメント][3]を参照してください。
 
 ### コンフィギュレーションオブジェクトの作成
 
-以下のスニペットで、Datadog の各機能 (Logging、Tracing、RUM など) のコンフィグレーションオブジェクトを作成します。ある機能に対してコンフィギュレーションを渡さないことで、その機能は無効化されます。
+以下のスニペットで、Datadog の各機能 (Logs や RUM など) のコンフィグレーションオブジェクトを作成します。ある機能に対してコンフィギュレーションを渡さないことで、その機能は無効化されます。
 
 ```dart
 // 追跡に対するユーザーの同意の判断
@@ -86,14 +81,13 @@ final configuration = DdSdkConfiguration(
     sendNetworkInfo: true,
     printLogsToConsole: true,
   ),
-  tracingConfiguration: TracingConfiguration(
-    sendNetworkInfo: true,
-  ),
   rumConfiguration: RumConfiguration(
     applicationId: '<RUM_APPLICATION_ID>',
   )
 );
 ```
+
+利用可能な構成オプションの詳細については、[DdSdkConfiguration オブジェクト][9]のドキュメントを参照してください。
 
 ### ライブラリの初期化
 
@@ -186,38 +180,6 @@ final configuration = DdSdkConfiguration(
 
 Datadog 分散型トレーシングを有効にするには、構成オブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを、分散型トレーシングをサポートするドメインに設定する必要があります。また、`RumConfiguration` で `tracingSamplingRate` を設定することで、Datadog 分散型トレーシングのサンプリングレートを変更することができます。
 
-## トラブルシューティング
-
-### Cocoapods 問題
-
-Datadog SDK を追加した後、Cocoapods から投げられるエラーのために iOS アプリケーションのビルドに問題がある場合、エラーを確認してください。最も一般的なエラーは、Cocoapods から最新のネイティブライブラリを取得する問題で、これは `ios` ディレクトリで以下を実行することで解決できます。
-
-```bash
-pod install --repo-update
-```
-
-もう一つのよくあるエラーは、Apple Silicon Mac での FFI ライブラリの読み込みの問題です。 以下のようなエラーが表示された場合:
-
-```bash
-LoadError - dlsym(0x7fbbeb6837d0, Init_ffi_c): symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:6:in `rescue in <top (required)>'
-/Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi.rb:3:in `<top (required)>'
-```
-
-[Flutter のドキュメント][8]にある、Apple Silicon で Flutter を使うための手順に従います。
-
-### sdkVerbosity の設定
-
-アプリは実行できるのに、Datadog サイトで期待するデータが表示されない場合は、`DatadogSdk.initialize` を呼び出す前に、コードに以下を追加してみてください。
-
-```dart
-DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
-```
-
-これにより、SDK が何をしているか、どのようなエラーに遭遇しているかについての追加情報が出力され、お客様と Datadog サポートが問題を絞り込むのに役立つ場合があります。
-
 ## データストレージ
 
 ### Android
@@ -226,7 +188,7 @@ DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
 
 ### iOS
 
-データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][2]のキャッシュディレクトリ (`Library/Caches`) に平文で保存され、デバイスにインストールされた他のアプリからは読み取ることができません。
+データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][10]のキャッシュディレクトリ (`Library/Caches`) に平文で保存され、デバイスにインストールされた他のアプリからは読み取ることができません。
 
 ## 寄稿
 
@@ -238,10 +200,6 @@ DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
 
 詳細については、[Apache ライセンス、v2.0][5] を参照してください。
 
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
@@ -249,4 +207,5 @@ DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
 [5]: https://github.com/DataDog/dd-sdk-flutter/blob/main/LICENSE
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://pub.dev/packages/datadog_tracking_http_client
-[8]: https://github.com/flutter/flutter/wiki/Developing-with-Flutter-on-Apple-Silicon
+[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
+[10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web

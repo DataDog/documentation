@@ -36,6 +36,8 @@ title: ネットワークトラフィック
 
 [ネットワークデバイスモニタリング][10]
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}
+: `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}
+
 
 [オーケストレーター][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
@@ -365,7 +367,7 @@ Agent の v7.27.0 以降では、メモリ制限に達した場合にディス�
 [4]: /ja/infrastructure/process/
 [5]: /ja/infrastructure/livecontainers/#kubernetes-resources-1
 [6]: /ja/real_user_monitoring/
-[7]: /ja/tracing/profiler/
+[7]: /ja/profiler/
 [8]: /ja/synthetics/private_locations
 [9]: /ja/agent/proxy/
 [10]: /ja/network_monitoring/devices

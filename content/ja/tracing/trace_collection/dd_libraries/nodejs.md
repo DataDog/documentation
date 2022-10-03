@@ -29,13 +29,13 @@ type: multi-code-lang
 ---
 ## 互換性要件
 
-最新の Node.js トレーサーは、バージョン `>=12` に対応しています。Datadog の Node.js バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
+最新の Node.js トレーサーは、バージョン `>=14` に対応しています。Datadog の Node.js バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
 
 ## インストールと利用開始
 
 ### アプリ内のドキュメントに従ってください (推奨)
 
-Datadog アプリ内の[クイックスタート手順][3]に従って、最高のエクスペリエンスを実現します。例:
+Datadog の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
 
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
@@ -104,18 +104,14 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 Agent のインストールが完了したら、以下の手順で Datadog のトレーシングライブラリを Node.js アプリケーションに追加します。
 
-1. Node.js 12 以降に対応する npm を使用して Datadog Tracing ライブラリをインストールします。
+1. Node.js 14 以降に対応する npm を使用して Datadog Tracing ライブラリをインストールします。
 
     ```sh
     npm install dd-trace --save
     ```
-   発売終了済みの Node.js バージョン 10 または 8 をトレースしたい場合は、以下を実行して `dd-trace` のバージョン 0.x をインストールしてください。
+   発売終了済みの Node.js バージョン 12 をトレースしたい場合は、以下を実行して `dd-trace` のバージョン 2.x をインストールしてください。
     ```
-    npm install dd-trace@latest-node10
-    ```
-   または
-    ```
-    npm install dd-trace@latest-node8
+    npm install dd-trace@latest-node12
     ```
    ディストリビューションタグおよび Node.js のランタイムばージョンサポートについて詳しくは、[互換性要件][1] ページを参照してください。
 
@@ -173,7 +169,6 @@ node --require dd-trace/init app.js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/nodejs
-[2]: /ja/getting_started/tagging/unified_service_tagging/
+[2]: https://app.datadoghq.com/apm/docs
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /ja/tracing/trace_collection/library_config/nodejs/
-[5]: https://app.datadoghq.com/apm/docs

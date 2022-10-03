@@ -92,7 +92,7 @@ Override the port that the default tracer submit traces to.
 Override the address of the trace Agent host that the default tracer attempts to submit DogStatsD metrics to. Use `DD_AGENT_HOST` to override `DD_DOGSTATSD_HOST`.
 
 `DD_DOGSTATSD_PORT`
-: **Default**: `8126`<br>
+: **Default**: `8125`<br>
 Override the port that the default tracer submits DogStatsD metrics to.
 
 `DD_LOGS_INJECTION`

@@ -221,13 +221,14 @@ class SomeClass {
     void someMethod() {
         Tracer tracer = GlobalTracer.get();
 
-        // Tags can be set when creating the span
+        // Service and resource name tags are required.
+        // You can set them when creating the span:
         Span span = tracer.buildSpan("<OPERATION_NAME>")
             .withTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>")
             .withTag(DDTags.RESOURCE_NAME, "<RESOURCE_NAME>")
             .start();
         try (Scope scope = tracer.activateSpan(span)) {
-            // Tags can also be set after creation
+            // Alternatively, set tags after creation
             span.setTag("my.tag", "value");
 
             // The code you’re tracing

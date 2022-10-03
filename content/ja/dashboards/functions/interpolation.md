@@ -21,6 +21,8 @@ title: 補間
 
 * `LIMIT` [*任意*、*デフォルト*=**300**、*最大*=**600**]: 補間するギャップの最大サイズを表す補間制限 (秒単位)。
 
+`.fill()` 関数とその補間への影響についての詳しい説明は、[補間と塗りつぶし修飾子][4]を参照してください。
+
 ## デフォルトゼロ
 
 | 関数         | 説明                             | 例                          |
@@ -102,3 +104,4 @@ default_zero(avg:custom_metric{*})
 [1]: /ja/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [2]: /ja/monitors/guide/as-count-in-monitor-evaluations/
 [3]: /ja/metrics/
+[4]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/

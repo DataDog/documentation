@@ -1,0 +1,38 @@
+{
+  "name": "Example-Create_a_detection_rule_with_type_signal_correlation_returns_OK_response_signal_rule",
+  "queries": [
+    {
+      "ruleId": "string",
+      "aggregation": "event_count",
+      "correlatedByFields": [
+        "host"
+      ],
+      "correlatedQueryIndex": 1
+    },
+    {
+      "ruleId": "c5e332c9-eba2-4874-75f2-46be1b96d0e8",
+      "aggregation": "event_count",
+      "correlatedByFields": [
+        "host"
+      ]
+    }
+  ],
+  "filters": [],
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "condition": "a > 0 && b > 0",
+      "notifications": []
+    }
+  ],
+  "options": {
+    "evaluationWindow": 900,
+    "keepAlive": 3600,
+    "maxSignalDuration": 86400
+  },
+  "message": "Test signal correlation rule",
+  "tags": [],
+  "isEnabled": true,
+  "type": "signal_correlation"
+}
