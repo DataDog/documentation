@@ -57,7 +57,7 @@ When the GitHub Apps integration is set up for your service definitions, an **Ed
 
 After you update the YAML files for your repositories, your changes propagate to the Service Catalog. 
 
-To prevent accidental overwriting, create and modify your service definition files with either the GitHub Apps integration or the [Service Definition API endpoints][1]. Updating the same service via both GitHub and API result could result in unintended overwriting.  
+To prevent accidental overwriting, create and modify your service definition files with either the GitHub Apps integration or the [Service Definition API endpoints][1]. Updating the same service using both the GitHub and the API could result in unintended overwriting.  
 
 ## Further reading
 
