@@ -923,9 +923,6 @@ main:
     url: serverless/enhanced_lambda_metrics
     parent: serverless
     weight: 3
-
-
-
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
@@ -969,13 +966,10 @@ main:
     url: serverless/libraries_integrations/cdk/
     parent: libraries_integrations
     weight: 605
-
-
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
     weight: 7
-
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
@@ -991,7 +985,6 @@ main:
     parent: serverless
     identifier: serverless_troubleshooting
     weight: 10
-
   - name: Glossary
     url: serverless/glossary
     parent: serverless
