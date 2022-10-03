@@ -4,12 +4,18 @@ kind: documentation
 description: With test automation, use fast, codeless, and reliable testing in your CI/CD pipelines to ship features with confidence.
 disable_sidebar: true
 further_reading:
+- link: 'https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring'
+  tag: 'Release Notes'
+  text: 'Check out the latest Datadog Continuous Testing releases! (App login required)'
 - link: 'https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline'
   tag: 'Learning Center'
   text: 'Continuous Testing in a CI/CD Pipeline'
+- link: '/synthetics/private_locations/#scale-your-private-location'
+  tag: 'Documentation'
+  text: 'Learn about Private Locations'
 - link: '/continuous_testing/troubleshooting/'
   tag: 'Documentation'
-  text: 'Continuous Testing and CI/CD Troubleshooting'
+  text: 'Troubleshoot Continuous Testing and CI/CD'
 ---
 
 With **integration and end-to-end testing in production and CI environments**, your development teams can proactively ensure that defective code does not impact your users' experience. 
