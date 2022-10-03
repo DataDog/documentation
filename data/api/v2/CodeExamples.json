@@ -678,6 +678,13 @@
       "description": "Get a list of RUM events returns \"OK\" response with pagination"
     }
   ],
+  "GetRUMApplications": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "List all the RUM applications returns \"OK\" response"
+    }
+  ],
   "SearchRUMEvents": [
     {
       "group": "rum",
@@ -688,6 +695,13 @@
       "group": "rum",
       "suffix": "_574690310",
       "description": "Search RUM events returns \"OK\" response with pagination"
+    }
+  ],
+  "UpdateRUMApplication": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Update a RUM application returns \"OK\" response"
     }
   ],
   "AddUserToRole": [
