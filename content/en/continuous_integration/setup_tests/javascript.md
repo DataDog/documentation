@@ -270,18 +270,19 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][2].
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the NodeJS custom instrumentation documentation.
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [RUM][5], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][6] guide.
+If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
 
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
 [2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[5]: /real_user_monitoring/browser/#setup
-[6]: /continuous_integration/guides/rum_integration/
+[5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[6]: /real_user_monitoring/browser/#setup
+[7]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}
