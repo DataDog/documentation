@@ -110,9 +110,10 @@ Muting a monitor does not affect the SLO calculation.
 To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
 
 ### Missing data
-When you create a monitor, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data.
+When you create a metric monitor or service check, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
 
-For monitors configured to ignore missing data, time periods with missing data are treated as OK by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT by the SLO.
+If you pause a Synthetic test, the SLO removes the time period with missing data from its calculation. In the UI, these time periods are marked light gray on the SLO status bar. 
+
 
 ## Underlying monitor and SLO histories
 
