@@ -19,7 +19,7 @@ You can trigger a workflow manually, on a schedule, or using a variety of automa
 ## Manually trigger a workflow
 
 To trigger a workflow manually:
-1. From the workflow page, click the **Run** button. 
+1. From the workflow page, click the **Run** button.
 1. Enter the values for existing trigger variables.
 1. When you're ready to run the workflow, click **Save & Run**.
 
@@ -33,7 +33,7 @@ To trigger a workflow from a Dashboard, add the Run Workflow widget:
 
 {{< img src="workflows/trigger-from-dashboard.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
-To run the workflow: 
+To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
 1. Under **Execution parameters**, enter the required trigger variables for your workflow.
 1. Click **Run** to run the workflow.
@@ -55,7 +55,7 @@ To trigger a workflow from a Monitor:
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
 ## Trigger a workflow from a Security Signal Notification Rule
 
-You can set up a workflow to trigger every time a Security Signal Notification Rule fires. 
+You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
 
 To trigger a workflow from a Notification Rule:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
