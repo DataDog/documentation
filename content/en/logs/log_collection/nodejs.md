@@ -49,7 +49,7 @@ npm install --save winston
 
 ### Log to a file
 
-In your bootstrap file or somewhere in your code, declare the logger in the following way:
+In your bootstrap file or in your code, declare the logger in the following way:
 
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
@@ -145,7 +145,7 @@ If APM is enabled for this application, connect your logs and traces by automati
 You can stream your logs from your application to Datadog without installing an Agent on your Host. However, it is recommended that you use an Agent to forward your logs as it provides a native connection management.
 
 Use the [Winston HTTP transport][4] to send your logs directly through the [Datadog Log API][5].
-In your bootstrap file or somewhere in your code, declare the logger in the following way:
+In your bootstrap file or in your code, declare the logger in the following way:
 
 {{< site-region region="us" >}}
 
