@@ -22,24 +22,27 @@ further_reading:
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
-  - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
-    tag: 'Blog'
-    text: 'Monitor containerized ASP.NET Core applications'
   - link: "/tracing/glossary/"
     tag: "Documentation"
     text: "Explore your services, resources, and traces"
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
+  - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
+    tag: 'Blog'
+    text: 'Monitor containerized ASP.NET Core applications'
+  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
+    tag: "Blog"
+    text: "Deploy ASP.NET Core applications to Azure App Service"
+  - link: "https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/"
+    tag: "Blog"
+    text: "Optimize your .NET application performance with the Datadog Continuous Profiler"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
     tag: "GitHub"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"
     text: "Source code"
-  - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
-    tag: "Blog"
-    text: "Deploy ASP.NET Core applications to Azure App Service"
 ---
 
 ## Compatibility requirements
@@ -61,7 +64,7 @@ For a full list of Datadog’s .NET Core library and processor architecture supp
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, APM). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
 ### Installation
@@ -93,6 +96,7 @@ For containerized, serverless, and cloud environments:
     - The `/var/run/datadog/apm.socket` Unix domain socket by default.
     - If the socket does not exist, then traces are sent to `localhost:8126`.
     - If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` or `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+    - Using Unix Domain Sockets for trace transport is only supported on .NET Core 3.1 and later.
 
 For more information on how to configure these settings, see [Configuration](#configuration).
 
@@ -224,7 +228,6 @@ For information about the different methods for setting environment variables, s
 
    ```
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. For standalone applications and Windows services, manually restart the application.
 
@@ -359,7 +362,6 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -369,7 +371,7 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+[string[]] $v = @("CORECLR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
@@ -383,7 +385,6 @@ To automatically instrument a console application, set the environment variables
 ```bat
 rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
-SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
 dotnet.exe example.dll

@@ -139,19 +139,68 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 **注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
 
+### インフラストラクチャーメトリクスの相関
+
+セルフホスティングの GitLab ランナーを使っている場合、ジョブとそれを実行しているインフラストラクチャーを関連付けることができます。この機能を使うには、GitLab ランナーに `host:<hostname>` という形式のタグが必要です。タグは、[新しいランナーを登録する][6]際に追加することができます。既存のランナーでは、ランナーの `config.toml` を更新することでタグを追加します。または、UI から **Settings > CI/CD > Runners** に移動して、該当するランナーを編集することでタグを追加します。
+
+これらのステップの後、CI Visibility は各ジョブにホスト名を追加します。メトリクスを見るには、トレースビューでジョブスパンをクリックします。ドロワーに、ホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
+
+### パイプライン失敗時のエラーメッセージ
+
+GitLab パイプラインの実行に失敗した場合、特定のパイプライン実行内の `Errors` タブの下の各エラーは、GitLab からのエラータイプに関連するメッセージを表示します。
+
+{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab の失敗の理由" style="width:100%;">}}
+
+各エラータイプに関連するメッセージとドメインについては、以下の表を参照してください。リストにないエラータイプは、`Job failed` というエラーメッセージと `unknown` というエラードメインになります。
+
+| エラーの種類 | エラーメッセージ | エラードメイン |
+| :---  |    :----:   |  ---: |
+|  unknown_failure  |  原因不明で失敗  |  不明
+|  config_error  |  CI/CD コンフィギュレーションファイルのエラーによる失敗 |  ユーザー
+|  external_validation_failure  |  外部パイプラインの検証のため失敗  |  不明
+|  user_not_verified  |  ユーザーが認証されていないため、パイプラインが失敗した  |  ユーザー
+|  activity_limit_exceeded  |  パイプラインのアクティビティ制限を超過した  |  プロバイダー
+|  size_limit_exceeded  |  パイプラインのサイズ制限を超過した  |  プロバイダー
+|  job_activity_limit_exceeded  |  パイプラインのジョブアクティビティ制限を超過した  |  プロバイダー
+|  deployments_limit_exceeded  |  パイプラインのデプロイ制限を超過した  |  プロバイダー
+|  project_deleted  |  このパイプラインに関連するプロジェクトが削除された  |  プロバイダー
+|  api_failure  |  API の失敗  |  プロバイダー
+|  stuck_or_timeout_failure  |  パイプラインが停止している、またはタイムアウトしている  |  不明
+|  runner_system_failure  |  ランナーシステムの不具合による失敗  |  プロバイダー
+|  missing_dependency_failure  |  依存関係がないため失敗  |  不明
+|  runner_unsupported  |  未対応のランナーのため失敗  |  プロバイダー
+|  stale_schedule  |  スケジュールが古くなったため失敗  |  プロバイダー
+|  job_execution_timeout  |  ジョブのタイムアウトによる失敗  |  不明
+|  archived_failure  |  アーカイブの失敗  |  プロバイダー
+|  unmet_prerequisites  |  前提条件が満たされていないため失敗  |  不明
+|  scheduler_failure  |  スケジュール不具合による失敗  |  プロバイダー
+|  data_integrity_failure  |  データ整合性のため失敗  |  プロバイダー
+|  forward_deployment_failure  |  デプロイメントの失敗  |  不明
+|  user_blocked  |  ユーザーによってブロックされた  |  ユーザー
+|  ci_quota_exceeded  |  CI の割り当て超過  |  プロバイダー
+|  pipeline_loop_detected  |  パイプラインループを検出  |  ユーザー
+|  builds_disabled  |  ビルド無効  |  ユーザー
+|  deployment_rejected  |  デプロイメントが拒否された  |  ユーザー
+|  protected_environment_failure  |  環境に関する失敗  |  プロバイダー
+|  secrets_provider_not_found  |  シークレットプロバイダーが見つからない  |  ユーザー
+|  reached_max_descendant_pipelines_depth  |  子孫パイプラインの最大値に到達  |  ユーザー
+|  ip_restriction_failure  |  IP 制限の失敗  |  プロバイダー
+
+<!-- | ---------- | ---------- | ---------- | -->
+<!-- | :---        |    :----:   |          ---: | -->
 
 ## ジョブログ収集を有効にする (ベータ版)
 
 以下の GitLab バージョンは、ジョブログの収集をサポートしています。
 * GitLab.com (SaaS)
-* GitLab >= 14.8 (セルフホスティング) [ジョブログを格納するオブジェクトストレージ][6]を使用している場合のみ
+* GitLab >= 14.8 (セルフホスティング) [ジョブログを格納するオブジェクトストレージ][7]を使用している場合のみ
 
 ジョブログの収集を有効にするには
 
-1. GitLab セルフホストまたは GitLab.com アカウントで `datadog_integration_logs_collection` [機能フラグ][7]を有効化します。これにより、Datadog インテグレーションにある `Enable logs collection` オプションが表示されます。
+1. GitLab セルフホストまたは GitLab.com アカウントで `datadog_integration_logs_collection` [機能フラグ][8]を有効化します。これにより、Datadog インテグレーションにある `Enable logs collection` オプションが表示されます。
 2. `Enable logs collection` オプションを有効にし、変更を保存します。
 
-ジョブログは [Logs][8] 製品に収集され、CI Visibility 内で GitLab パイプラインと自動的に相関が取られます。
+ジョブログは [Logs][9] 製品に収集され、CI Visibility 内で GitLab パイプラインと自動的に相関が取られます。
 
 <div class="alert alert-info"><strong>注</strong>: Logs は、CI Visibility とは別課金となります。</div>
 
@@ -164,6 +213,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
-[7]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[8]: /ja/logs/
+[6]: https://docs.gitlab.com/runner/register/
+[7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[8]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[9]: /ja/logs/

@@ -17,6 +17,7 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}カスタムユーザーアクションの送信{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}RUM エクスプローラーでボットを特定する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}JavaScript ソースマップのアップロード{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/sampling-browser-and-browser-premium" >}}ブラウザおよび Browser Premium のサンプリング構成によるセッションボリュームの制御{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}ブラウザ RUM データの強化および制御{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}RUM ブラウザ SDK のアップグレード{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}ブラウザの RUM データをプロキシする {{< /nextlink >}}

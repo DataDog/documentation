@@ -1,37 +1,61 @@
 ---
+app_id: ambassador
+app_uuid: eb591405-8cda-486a-8cf5-a06af769a3d7
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: envoy.listener.downstream_cx_total
+      metadata_path: metadata.csv
+      prefix: envoy.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Ambassador
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: hello@datawire.io
+  support_email: hello@datawire.io
 categories:
-- Cloud
+- cloud
 - orchestration
 - containers
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md
-display_name: Ambassador
+display_on_public_website: true
 draft: false
 git_integration_title: ambassador
-guid: 71936a65-1a8c-4f6e-a18e-f71d4236182b
 integration_id: ambassador
 integration_title: Ambassador API Gateway
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: hello@datawire.io
-manifest_version: 1.0.0
-metric_prefix: envoy.
-metric_to_check: envoy.listener.downstream_cx_total
+manifest_version: 2.0.0
 name: ambassador
+oauth: {}
 public_title: Ambassador API Gateway
 short_description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::クラウド
+  - Category::オーケストレーション
+  - Category::コンテナ
+  configuration: README.md#Setup
+  description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Ambassador API Gateway
 ---
 
 

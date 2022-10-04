@@ -31,6 +31,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/hybrid-app-monitoring/
   tag: ブログ
   text: Datadog でハイブリッドモバイルアプリケーションを監視する
+- link: https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/
+  tag: ブログ
+  text: Datadog のテクニカルソリューションチームが RUM、セッションリプレイ、エラー追跡を使用して顧客の問題を解決する方法
 - link: /real_user_monitoring/browser/data_collected/
   tag: ドキュメント
   text: 収集された RUM ブラウザデータ

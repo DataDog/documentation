@@ -15,7 +15,7 @@ further_reading:
   tag: Blog
   text: Comment nous avons contribué à élargir les possibilités de Kubernetes State Metrics
 has_logo: true
-integration_id: kubernetes_state_core
+integration_id: kube-state-metrics
 integration_title: Kubernetes State Metrics Core
 is_public: true
 kind: integration
@@ -56,13 +56,11 @@ Le check Kubernetes State Metrics Core est inclus dans l'image de l'[Agent de cl
 
 Ajoutez ce qui suit dans votre fichier `values.yaml` Helm :
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsCore:
     enabled: true
-...
 ```
 
 {{% /tab %}}
@@ -70,7 +68,7 @@ datadog:
 
 Pour activer le check `kubernetes_state_core`, le paramètre `spec.features.kubeStateMetricsCore.enabled` doit être défini sur `true` dans la ressource DatadogAgent :
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -82,7 +80,7 @@ spec:
   features:
     kubeStateMetricsCore:
       enabled: true
-  # ...
+  # (...)
 ```
 
 Remarque : l'Operator Datadog 0.7.0 ou ultérieur est requis.
@@ -150,12 +148,10 @@ Si vous voulez tout de même activer les deux checks simultanément pendant la p
 
 Avec le check Kubernetes State Metrics Core, vous n'avez plus besoin de déployer `kube-state-metrics` dans votre cluster. Vous pouvez désactiver le déploiement de `kube-state-metrics` dans le chart Helm Datadog. Pour ce faire, ajoutez ce qui suit dans votre fichier Helm `values.yaml` :
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsEnabled: false
-...
 ```
 
 {{% /tab %}}

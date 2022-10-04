@@ -34,7 +34,7 @@ Amazon Transit Gateway を使用して、仮想プライベートクラウド (V
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`TransitGateway` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `TransitGateway` が有効になっていることを確認します。
 2. [Datadog - Amazon Transit Gateway インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -82,8 +82,8 @@ Amazon Transit Gateway インテグレーションには、サービスのチェ
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-transit-gateway
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-transit-gateway
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/logs/explorer/
 [6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/

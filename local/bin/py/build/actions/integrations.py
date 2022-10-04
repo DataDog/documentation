@@ -682,6 +682,15 @@ class Integrations:
         result = ''
         if not marketplace:
             try:
+                # Hacky just to fix up azure_container_apps page temporarily
+                if file_name == './integrations_data/extracted/dogweb/integration/azure_container_apps/README.md':
+                    with open(file_name, 'r+') as f:
+                        md_string = f.read()
+                        md_string = md_string.replace("[1]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_container_apps/azure_container_apps_metadata.csv", "[3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_container_apps/azure_container_apps_metadata.csv")
+                        md_string = md_string.replace("[2]: https://docs.datadoghq.com/help/", "[4]: https://docs.datadoghq.com/help/")
+                        f.seek(0)
+                        f.truncate(0)
+                        f.write(md_string)
                 result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)

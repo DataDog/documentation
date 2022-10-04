@@ -6,6 +6,7 @@ import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import { getQueryParameterByName } from './helpers/browser';
+import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -161,6 +162,15 @@ function getPathElement(event = null) {
         );
     }
 
+    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/integrations/integrate_vector_with_datadog` in the sidenav.
+    if (path.includes('observability_pipelines/integrations/integrate_vector_with_datadog')) {
+        const observabilityPipelineEl = document.querySelector('.side .nav-top-level > [data-path*="observability_pipelines"]');
+        sideNavPathElement = observabilityPipelineEl.nextElementSibling.querySelector(
+            '[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
+        );
+        mobileNavPathElement = sideNavPathElement;
+    }
+
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
@@ -187,6 +197,7 @@ function getPathElement(event = null) {
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
+        scrollActiveNavItemToTop()
     }
 
     if (mobileNavPathElement) {
@@ -211,8 +222,9 @@ function closeNav(){
 
 function updateSidebar(event) {
     closeNav();
+    closeMobileNav();
     getPathElement(event);
-
+    setMobileNav();
     const isLi = event.target.nodeName === 'LI';
 
     if (isLi) {
@@ -369,6 +381,7 @@ window.addEventListener('click', (event) => {
 
 window.onload = function () {
     getPathElement();
+    setMobileNav();
 };
 
 // remove branch name from path
@@ -405,3 +418,24 @@ window.addEventListener(
     false
 );
 
+
+
+function scrollActiveNavItemToTop(){
+    // Scroll the open top level left nav item into view below Docs search input
+    if (document.querySelector('.sidenav:not(.sidenav-api)')) {
+        const headerHeight = document.querySelector('body .main-nav').style.height;
+        const padding = 200;
+        const maxHeight = document.documentElement.clientHeight - headerHeight - padding
+
+        // set max height of side nav.
+        document.querySelector('.sidenav-nav').style.maxHeight = `${maxHeight}px`
+
+        const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
+        const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
+
+        if (sideNavActiveMenuItem) {
+            const distanceToTop = sideNavActiveMenuItem.offsetTop;
+            leftSideNav.scrollTop = distanceToTop - 100;
+        }
+    }
+}

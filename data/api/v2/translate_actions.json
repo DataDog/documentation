@@ -155,6 +155,16 @@
     "request_description": "Incident Payload.",
     "request_schema_description": "Update request for an incident."
   },
+  "ListIncidentAttachments": {
+    "description": "Get all attachments for a given incident.",
+    "summary": "Get a list of attachments"
+  },
+  "UpdateIncidentAttachments": {
+    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
+    "summary": "Create, update, and delete incident attachments",
+    "request_description": "Incident Attachment Payload.",
+    "request_schema_description": "The update request for an incident's attachments."
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -324,8 +334,8 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all configured count/gauge/rate/distribution metric names\n(with additional filters if specified).",
-    "summary": "List tag configurations"
+    "description": "Returns all metrics (matching additional filters if specified).",
+    "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
@@ -338,6 +348,10 @@
     "summary": "Configure tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
+  },
+  "ListActiveMetricConfigurations": {
+    "description": "List tags and aggregations that are actively queried on dashboards and monitors for a given metric name.",
+    "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
     "description": "View indexed tag key-value pairs for a given metric name.",
@@ -572,6 +586,10 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
+  "GetSecurityMonitoringSignal": {
+    "description": "Get a signal's details.",
+    "summary": "Get a signal's details"
+  },
   "EditSecurityMonitoringSignalAssignee": {
     "description": "Modify the triage assignee of a security signal.",
     "summary": "Modify the triage assignee of a security signal",
@@ -679,12 +697,16 @@
     "summary": "Get hourly usage for application security"
   },
   "GetCostByOrg": {
-    "description": "Get cost across multi-org account. Cost by org data for a given month becomes available no later than the 16th of the following month.",
+    "description": "Get cost across multi-org account.\nCost by org data for a given month becomes available no later than the 16th of the following month.\n**Note:** This endpoint has been deprecated. Please use the new endpoint\n[`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)\ninstead.",
     "summary": "Get cost across multi-org account"
   },
   "GetEstimatedCostByOrg": {
-    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month. To access historical costs prior to this, use the /cost_by_org endpoint.",
+    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month.\nTo access historical costs prior to this, use the `/historical_cost` endpoint.",
     "summary": "Get estimated cost across your account"
+  },
+  "GetHistoricalCostByOrg": {
+    "description": "Get historical cost across multi-org and single root-org accounts.\nCost data for a given month becomes available no later than the 16th of the following month.",
+    "summary": "Get historical cost across your account"
   },
   "GetHourlyUsage": {
     "description": "Get hourly usage by product family",

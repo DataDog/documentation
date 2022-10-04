@@ -3,8 +3,13 @@ on:
     # At 08:00 on every day-of-week from Monday through Friday.
     - cron: '0 8 * * 1-5'
 
+permissions: {}
 jobs:
   sdk-versions:
+    permissions:
+      contents: write # for git push
+      pull-requests: write # to create pull request
+
     runs-on: ubuntu-latest
     steps:
       - id: set-versions

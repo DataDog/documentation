@@ -154,8 +154,6 @@ When creating a [monitor][1], use metric tags in the:
 
 * **avg by** text box to transform the monitor into a multi-alert monitor on each tag value.
 
-{{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags" style="width:80%;">}}
-
 [1]: /monitors/create/#monitor-types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}

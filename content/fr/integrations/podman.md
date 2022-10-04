@@ -1,33 +1,50 @@
 ---
+app_id: podman
+app_uuid: ecc06845-18ac-448e-b352-1bbf31fdfcc3
 assets:
-  dashboards: {}
-  logs: {}
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Podman
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - containers
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/podman/README.md
-display_name: Podman
+display_on_public_website: true
 draft: false
 git_integration_title: podman
-guid: a2f38981-b8ff-40c4-8494-ac150b3fca6e
 integration_id: podman
 integration_title: Podman
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: container.
+manifest_version: 2.0.0
 name: podman
-public_title: Intégration Podman
+oauth: {}
+public_title: Podman
 short_description: Surveiller toutes vos métriques sur les conteneurs Podman avec
   Datadog
-support: core
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Containers
+  configuration: README.md#Setup
+  description: Surveiller toutes vos métriques sur les conteneurs Podman avec Datadog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Podman
 ---
 
 

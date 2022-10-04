@@ -66,6 +66,16 @@ PHP APM supports the following SAPI's:
 | fpm-fcgi       | Fully Supported |
 | cgi-fcgi       | Fully Supported |
 
+## Supported processor architectures
+
+PHP APM supports the following architectures:
+
+| Processor architectures                   | Support level         | Package version                        |
+| ------------------------------------------|-----------------------|----------------------------------------|
+| Linux GNU amd64 (`x86-64-linux-gnu`)      | [GA](#support-ga)     | All                                    |
+| Linux MUSL amd64 (`x86-64-linux-musl`)    | [GA](#support-ga)     | All                                    |
+| Linux GNU arm64 (`aarch64-linux-gnu`)     | [GA](#support-ga)     | > `0.78.0`                             |
+| Linux MUSL arm64 (`aarch64-linux-musl`)   | [GA](#support-ga)     | > `0.78.0`                             |
 
 ### Integrations
 

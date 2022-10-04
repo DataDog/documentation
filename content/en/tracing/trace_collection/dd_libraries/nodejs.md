@@ -29,13 +29,13 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Node.js Tracer supports versions `>=12`. For a full list of Datadog’s Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog’s Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quickstart instructions][3] within the Datadog app for the best experience, including:
+Follow the [Quick start instructions][2] in Datadog for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -104,18 +104,14 @@ Read [tracer settings][3] for a list of initialization options.
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
-1. Install the Datadog Tracing library using npm for Node.js 12+:
+1. Install the Datadog Tracing library using npm for Node.js 14+:
 
     ```sh
     npm install dd-trace --save
     ```
-    If you need to trace end-of-life Node.js versions 10 or 8, install version 0.x of `dd-trace` by running:
+    If you need to trace end-of-life Node.js version 12, install version 2.x of `dd-trace` by running:
     ```
-    npm install dd-trace@latest-node10
-    ```
-    or
-    ```
-    npm install dd-trace@latest-node8
+    npm install dd-trace@latest-node12
     ```
     For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
 
@@ -178,7 +174,6 @@ If needed, configure the tracing library to send application performance telemet
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: /getting_started/tagging/unified_service_tagging/
+[2]: https://app.datadoghq.com/apm/docs
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
-[5]: https://app.datadoghq.com/apm/docs

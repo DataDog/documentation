@@ -11,6 +11,9 @@ further_reading:
 - link: /tracing/service_catalog/guides/upstream-downstream-dependencies
   tag: ガイド
   text: アクティブインシデント時の上流と下流の依存関係を見る
+- link: https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/
+  tag: ブログ
+  text: サービス定義 JSON スキーマによるサービスカタログエントリーの管理
 kind: documentation
 title: Datadog サービスカタログ
 ---
@@ -147,6 +150,27 @@ Integrations
 ## 新規サービスの登録
 [Service Definition API][7] を使って Datadog テレメトリー (APM トレースなど) を発信していないサービスでも、Service Catalog でサービスの所有権情報を管理することができます。YAML ファイルでサービスの所有権、オンコール情報、カスタムタグを指定すると、その情報が Service Catalog に反映されます。詳しくは、[サービスカタログの設定][8]をお読みください。
 
+## ロールベースアクセスおよび権限
+
+一般的な情報は、[ロールベースアクセスコントロール][9]および[ロール権限][10]を参照してください。
+### 読み取り権限
+
+サービスカタログの読み取り権限により、サービスカタログのデータを読み取ることができ、以下の機能が有効になります。
+- サービスカタログ一覧 
+- Discover UI
+- サービス定義エンドポイント: `/api/v2/services/definition/<service_name>`
+
+この権限は、**Datadog Read Only Role** および **Datadog Standard Role** でデフォルトで有効になっています。
+
+### 書き込み権限
+
+サービスカタログの書き込み権限は、ユーザーがサービスカタログのデータを変更することを許可します。書き込み権限は、以下の機能に対して必要です。
+- `POST /api/v2/services/definition` エンドポイントを使ったサービス定義の挿入または更新
+- `DELETE /api/v2/services/definition/<service_name>` エンドポイントを使ったサービス定義の削除
+- Discover Services UI でオンボーディングプロセスを完了する
+
+この権限は、**Datadog Admin Role** および **Datadog Standard Role** でデフォルトで有効になっています。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -159,3 +183,5 @@ Integrations
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
 [7]: /ja/tracing/service_catalog/service_definition_api/
 [8]: /ja/tracing/service_catalog/setup/
+[9]: /ja/account_management/rbac/
+[10]: /ja/account_management/rbac/permissions/

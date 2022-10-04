@@ -119,14 +119,13 @@ NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 ```javascript
   it('sum function can sum', () => {
     const testSpan = require('dd-trace').scope().active()
-    testSpan.setTag('team.owner', 'calculator')
-    testSpan.setTag('test.importance', 2)
+    testSpan.setTag('team_owner', 'my_team')
     // テストは正常に続きます
     // ...
   })
 ```
 
-これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。カスタムインスツルメンテーションの詳細については、[NodeJS カスタムインスツルメンテーションのドキュメント][1]を参照してください。
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、NodeJS カスタムインスツルメンテーションドキュメントの[タグの追加][1]セクションを参照してください。
 
 [1]: /ja/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -159,14 +158,13 @@ NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 ```javascript
   When('the function is called', function () {
     const stepSpan = require('dd-trace').scope().active()
-    stepSpan.setTag('team.owner', 'calculator')
-    stepSpan.setTag('test.importance', 2)
+    testSpan.setTag('team_owner', 'my_team')
     // テストは正常に続きます
     // ...
-  });
+  })
 ```
 
-これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。カスタムインスツルメンテーションの詳細については、[NodeJS カスタムインスツルメンテーションのドキュメント][1]を参照してください。
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、NodeJS カスタムインスツルメンテーションドキュメントの[タグの追加][1]セクションを参照してください。
 
 [1]: /ja/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}

@@ -1,38 +1,63 @@
 ---
+app_id: lacework
+app_uuid: e23af0ca-003e-4b3d-b6c5-24894b710750
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: lacework.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Lacework
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - セキュリティ
-  - ログの収集
-creates_events: false
-ddtype: crawler
+- セキュリティ
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md
-display_name: Lacework
+- https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: lacework
-guid: 545f8c45-038b-41e5-ae13-8550c0ee563f
 integration_id: lacework
 integration_title: Lacework
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: lacework.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: lacework
-public_title: Datadog-Lacework インテグレーション
+oauth: {}
+public_title: Lacework
 short_description: Lacework は、すべてのクラウド環境に対応するセキュリティプラットフォームです
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Lacework は、すべてのクラウド環境に対応するセキュリティプラットフォームです
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Lacework
 ---
+
+
+
 ## 概要
 
 Datadog-Lacework インテグレーションを使用して、Lacework のログとイベントを Datadog に転送します。

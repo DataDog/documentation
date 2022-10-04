@@ -81,15 +81,17 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 
 - バケットは一般ユーザーが読み取り可能になるよう設定してください。
 - まれに最後のデータを書き換える必要があるため、[オブジェクトロック][3]を設定しないでください (通常はタイムアウト)。
+- 地域間データ転送料とクラウドストレージコストへの影響については、[AWS Pricing][4] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
+[4]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
-* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** アクセス層を選択します。
+* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** または **cool** アクセス層を選択します。
 * そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
 
 **注:** まれに最後のデータを書き換える必要があるため、[不変性ポリシー][3]を設定しないでください (通常はタイムアウト)。
@@ -271,7 +273,6 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 [リハイドレート][2]は、以下のストレージクラスのみをサポートします。
 
 * S3 Standard
-* S3 Intelligent-Tiering
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
@@ -281,7 +282,17 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/
 {{% /tab %}}
+{{% tab "Azure Storage" %}}
 
+アーカイブと[リハイドレート][1]は、以下のアクセス層にのみ対応しています。
+
+- ホットアクセス層
+- クールアクセス層
+
+他のアクセス層にあるアーカイブからリハイドレートする場合は、まず上記のサポートされている層のいずれかに移動させる必要があります。
+
+[1]: /ja/logs/archives/rehydrating/
+{{% /tab %}}
 {{< /tabs >}}
 
 #### サーバー側の暗号化 (SSE)
@@ -409,7 +420,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 }
 ```
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< whatsnext desc="次に、Datadog からアーカイブされたログコンテンツにアクセスする方法を説明します。" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>アーカイブからリハイドレート</u>: ログイベントをアーカイブから取得し、Datadog の Log Explorer に戻します。{{< /nextlink >}}

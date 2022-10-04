@@ -40,7 +40,7 @@ display_on_public_website: true
 draft: false
 git_integration_title: crest_data_systems_microsoft_defender
 integration_id: crest-data-systems-microsoft-defender
-integration_title: Microsoft Defender
+integration_title: Microsoft 365 Defender for Endpoint
 integration_version: ''
 is_public: true
 kind: integration
@@ -58,7 +58,7 @@ pricing:
   tag: cds_ms_defender_endpoint_active_endpoint
   unit_label: Microsoft Defender アクティブエンドポイント
   unit_price: 1.0
-public_title: Microsoft Defender インテグレーション
+public_title: Microsoft 365 Defender for Endpoint インテグレーション
 short_description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
 supported_os:
 - linux
@@ -76,33 +76,33 @@ tile:
   configuration: README.md#Setup
   description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
   media:
-  - caption: Microsoft Defender インテグレーションの概要
+  - caption: Microsoft 365 Defender インテグレーションの概要
     image_url: images/cds-microsoft-defender-integration-overview.png
     media_type: image
-  - caption: Microsoft Defender - エンドポイントの概要
+  - caption: Microsoft 365 Defender - エンドポイントの概要
     image_url: images/cds-microsoft-defender-endpoints-overview.png
     media_type: image
-  - caption: Microsoft Defender - エンドポイントの詳細
+  - caption: Microsoft 365 Defender - エンドポイントの詳細
     image_url: images/cds-microsoft-defender-endpoints-details.png
     media_type: image
-  - caption: Microsoft Defender - ソフトウェアの概要
+  - caption: Microsoft 365 Defender - ソフトウェアの概要
     image_url: images/cds-microsoft-defender-software-overview.png
     media_type: image
-  - caption: Microsoft Defender - ソフトウェアの詳細
+  - caption: Microsoft 365 Defender - ソフトウェアの詳細
     image_url: images/cds-microsoft-defender-software-details.png
     media_type: image
-  - caption: Microsoft Defender - 脅威と脆弱性の概要
+  - caption: Microsoft 365 Defender - 脅威と脆弱性の概要
     image_url: images/cds-microsoft-defender-threats-and-vulnerabilities-overview.png
     media_type: image
-  - caption: Microsoft Defender - アラートの概要
+  - caption: Microsoft 365 Defender - アラートの概要
     image_url: images/cds-microsoft-defender-alerts-overview.png
     media_type: image
-  - caption: Microsoft Defender - インシデントの概要
+  - caption: Microsoft 365 Defender - インシデントの概要
     image_url: images/cds-microsoft-defender-incidents-overview.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Microsoft Defender インテグレーション
+  title: Microsoft 365 Defender for Endpoint インテグレーション
 ---
 
 
@@ -117,7 +117,7 @@ tile:
 
 ### ダッシュボード  
 
- - Microsoft Defender エンドポイントの概要
+ - Microsoft 365 Defender エンドポイントの概要
  - エンドポイントの概要
  - アラートの概要
  - 脅威と脆弱性の概要
@@ -129,6 +129,7 @@ tile:
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
  - メール: datadog.integrations@crestdatasys.com
+ - Web サイト: [crestdatasys.com](https://www.crestdatasys.com/microsoft-365-defender-integration/)
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-microsoft-defender" target="_blank">こちらをクリック</a>してください。

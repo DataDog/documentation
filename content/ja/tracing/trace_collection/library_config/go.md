@@ -16,11 +16,11 @@ title: Go トレーシングライブラリの構成
 type: multi-code-lang
 ---
 
-コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成した後、オプションで、必要に応じてトレーシングライブラリを構成してください。
+[コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成し、Go インテグレーションをアクティブ化][7]した後、オプションで、必要に応じてトレーシングライブラリを構成してください。
 
 Datadog では、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用して、サービスの `env`、`service`、`version` を設定することを推奨します。
 
-これらの環境変数の構成方法に関する推奨事項は、[統合サービスタグ付け][1]のドキュメントをお読みください。これらの変数は、Go トレーサーのバージョン 1.24.0 以降で利用可能です。
+これらの環境変数の構成方法に関する推奨事項は、[統合サービスタグ付け][2]のドキュメントをお読みください。これらの変数は、Go トレーサーのバージョン 1.24.0 以降で利用可能です。
 
 トレーサーの API を通じて、`env`、`service`、`version` を指定することもできます。
 
@@ -45,7 +45,7 @@ func main() {
 ```
 
 Go トレーサーは、コンフィギュレーション用の追加の環境変数と関数をサポートしています。
-[コンフィギュレーションドキュメント][2]で利用可能なすべてのオプションを参照してください。
+[コンフィギュレーションドキュメント][3]で利用可能なすべてのオプションを参照してください。
 
 `DD_VERSION`
 : アプリケーションのバージョン (例: `1.2.3`、`6c44da20`、 `2020.02.13`) を設定します。
@@ -60,6 +60,10 @@ Go トレーサーは、コンフィギュレーション用の追加の環境�
 : **デフォルト**: `localhost` <br>
 トレース送信のためのデフォルトのトレース Agent ホストアドレスをオーバーライドします。
 
+`DD_TRACE_AGENT_PORT`
+: **デフォルト**: `8126` <br>
+Datadog トレース送信のためのデフォルトのトレース Agent ポートをオーバーライドします。
+
 `DD_DOGSTATSD_PORT`
 : **デフォルト**: `8125` <br>
 DogStatsD メトリクス送信のためのデフォルトのトレース Agent ポートをオーバーライドします。
@@ -67,7 +71,7 @@ DogStatsD メトリクス送信のためのデフォルトのトレース Agent 
 `DD_TRACE_SAMPLING_RULES`
 : **デフォルト**: `nil`<br>
 オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
-詳しくは、[取り込みメカニズム][3]を参照してください。<br>
+詳しくは、[取り込みメカニズム][4]を参照してください。<br>
 **例:**<br>
   - サンプルレートを 20% に設定: `'[{"sample_rate": 0.2}]'`
   - 'a' で始まるサービスとスパン名 'b' のサービスのサンプルレートを 10% に、それ以外のサービスのサンプルレートを 20% に設定: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
@@ -98,23 +102,23 @@ Web フレームワークとライブラリインスツルメンテーション�
 : **デフォルト**: `null` <br>
 構成により、サービス名を動的に変更することができます。サービス名はカンマやスペースで区切ることができ、例えば `mysql:mysql-service-name,postgres:postgres-service-name`、`mysql:mysql-service-name postgres:postgres-service-name` のようにすることができます。
 
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **デフォルト**: `false` <br>
+Datadog は、製品の改良のため、[システムの環境・診断情報][8]を収集することがあります。false の場合、このテレメトリーデータは収集されません。
 
 
 ## APM 環境名の構成
 
-[APM 環境名][4]は、[Agent 内][5] またはトレーサーの [WithEnv][2] スタートオプションを使用して構成できます。
+[APM 環境名][5]は、[Agent 内][6] またはトレーサーの [WithEnv][3] スタートオプションを使用して構成できます。
 
 ## B3 ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][6]と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][1]と挿入をサポートしています。
 
 分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`Datadog` と `B3` の 2 つのスタイルがサポートされています。
 
-以下の環境変数を使用して挿入スタイルを構成します
-`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-以下の環境変数を使用して抽出スタイルを構成します
-`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+- 環境変数 `DD_PROPAGATION_STYLE_INJECT=Datadog,B3` を用いて挿入スタイルを構成する
+- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3` を用いて抽出スタイルを構成する
 
 これらの環境変数の値は、挿入または抽出が有効になっているヘッダースタイルのコンマ区切りリストです。デフォルトでは、`Datadog` 抽出スタイルのみが有効になっています。
 
@@ -124,9 +128,11 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/unified_service_tagging
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[3]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
-[4]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
-[5]: /ja/getting_started/tracing/#environment-name
-[6]: https://github.com/openzipkin/b3-propagation
+[1]: https://github.com/openzipkin/b3-propagation
+[2]: /ja/getting_started/tagging/unified_service_tagging
+[3]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
+[5]: /ja/tracing/advanced/setting_primary_tags_to_scope/#environment
+[6]: /ja/getting_started/tracing/#environment-name
+[7]: /ja/tracing/trace_collection/dd_libraries/go
+[8]: /ja/tracing/configure_data_security#telemetry-collection

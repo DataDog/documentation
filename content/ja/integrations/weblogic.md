@@ -1,48 +1,72 @@
 ---
+app_id: weblogic
+app_uuid: 80a8d9e2-48dd-4242-be78-0d929ea1a492
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     metrics: assets/dashboards/metrics.json
     overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: weblogic.jvm_runtime.heap_size
+      metadata_path: metadata.csv
+      prefix: weblogic.
+    process_signatures:
+    - java weblogic.Server
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: WebLogic
   logs:
     source: weblogic
-  metrics_metadata: metadata.csv
   monitors:
     active_threads: assets/monitors/active_threads.json
     stuck_threads: assets/monitors/stuck_threads.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - ログの収集
 - web
 - oracle
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/weblogic/README.md
-display_name: WebLogic
+display_on_public_website: true
 draft: false
 git_integration_title: weblogic
-guid: 7c48d184-c234-4366-b463-46a1faf27f84
 integration_id: weblogic
 integration_title: WebLogic
 integration_version: 1.1.1
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: weblogic.
-metric_to_check: weblogic.jvm_runtime.heap_size
+manifest_version: 2.0.0
 name: weblogic
-process_signatures:
-- java weblogic.Server
+oauth: {}
 public_title: WebLogic
 short_description: WebLogic サーバーの健全性とパフォーマンスを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Web
+  - Category::Oracle
+  configuration: README.md#Setup
+  description: WebLogic サーバーの健全性とパフォーマンスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: WebLogic
 ---
 
 
