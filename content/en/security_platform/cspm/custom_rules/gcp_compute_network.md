@@ -1,8 +1,7 @@
-# gcp_compute_network
-
-
-
-
+---
+title: gcp_compute_network
+kind: documentation
+---
 
 ## `ancestors`
 **Type**: `UNORDERED_LIST_STRING`<br>
@@ -93,7 +92,7 @@
         **GCP name**: `importSubnetRoutesWithPublicIp`<br>
    - `name`<br>
     **Type**: `STRING`<br>
-        **Description**: Name of this peering. Provided by the client when the peering is created. The name must comply with RFC1035. Specifically, the name must be 1-63 characters long and match regular expression `[a-z][1]?`. The first character must be a lowercase letter, and all the following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.<br>
+        **Description**: Name of this peering. Provided by the client when the peering is created. The name must comply with RFC1035. Specifically, the name must be 1-63 characters long and match regular expression <code>[a-z]&#40;[-a-z0-9]*[a-z0-9]&#41;?</code>. The first character must be a lowercase letter, and all the following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.<br>
         **GCP name**: `name`<br>
    - `network`<br>
     **Type**: `STRING`<br>
@@ -152,4 +151,6 @@
     **GCP name**: `subnetworks`<br>
 ## `tags`
 **Type**: `UNORDERED_LIST_STRING`<br>
+
+
 [1]: [-a-z0-9]*[a-z0-9]

@@ -1,8 +1,7 @@
-# gcp_dataproc_cluster
-
-
-
-
+---
+title: gcp_dataproc_cluster
+kind: documentation
+---
 
 ## `ancestors`
 **Type**: `UNORDERED_LIST_STRING`<br>

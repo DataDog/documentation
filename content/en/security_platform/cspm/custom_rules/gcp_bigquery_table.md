@@ -1,8 +1,7 @@
-# gcp_bigquery_table
-
-
-
-
+---
+title: gcp_bigquery_table
+kind: documentation
+---
 
 ## `ancestors`
 **Type**: `UNORDERED_LIST_STRING`<br>

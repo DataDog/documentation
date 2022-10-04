@@ -1,8 +1,7 @@
-# gcp_sql_database_instance
-
-
-
-
+---
+title: gcp_sql_database_instance
+kind: documentation
+---
 
 ## `ancestors`
 **Type**: `UNORDERED_LIST_STRING`<br>
@@ -565,7 +564,7 @@
       **GCP name**: `ipConfiguration`
        - `allocated_ip_range`<br>
         **Type**: `STRING`<br>
-            **Description**: The name of the allocated ip range for the private ip CloudSQL instance. For example: "google-managed-services-default". If set, the instance ip will be created in the allocated range. The range name must comply with [RFC 1035][5]. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z][6]?.`<br>
+            **Description**: The name of the allocated ip range for the private ip CloudSQL instance. For example: "google-managed-services-default". If set, the instance ip will be created in the allocated range. The range name must comply with [RFC 1035][5]. Specifically, the name must be 1-63 characters long and match the regular expression <code>[a-z]&#40;[-a-z0-9]*[a-z0-9]&#41;?.</code><br>
             **GCP name**: `allocatedIpRange`<br>
        - `authorized_networks`<br>
           **Type**: `UNORDERED_LIST_STRUCT`<br>
@@ -641,7 +640,7 @@
             **GCP name**: `kind`<br>
        - `update_track`<br>
         **Type**: `STRING`<br>
-            **Description**: Maintenance timing setting: `canary` (Earlier) or `stable` (Later). [Learn more][7]. <br>
+            **Description**: Maintenance timing setting: `canary` (Earlier) or `stable` (Later). [Learn more][6]. <br>
             **GCP name**: `updateTrack`<br>
                 **Possible values**:<br>
           - `SQL_UPDATE_TRACK_UNSPECIFIED` - This is an unknown maintenance timing preference.<br>
@@ -753,10 +752,11 @@
     **GCP name**: `suspensionReason`<br>
 ## `tags`
 **Type**: `UNORDERED_LIST_STRING`<br>
+
+
 [1]: https://tools.ietf.org/html/rfc3339
 [2]: https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ
 [3]: https://cloud.google.com/sql/docs/mysql/high-availability
 [4]: https://cloud.google.com/sql/docs/mysql/flags
 [5]: https://tools.ietf.org/html/rfc1035
-[6]: [-a-z0-9]*[a-z0-9]
-[7]: https://cloud.google.com/sql/docs/mysql/instance-settings#maintenance-timing-2ndgen
+[6]: https://cloud.google.com/sql/docs/mysql/instance-settings#maintenance-timing-2ndgen

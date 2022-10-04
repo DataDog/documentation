@@ -1,8 +1,7 @@
-# gcp_storage_bucket
-
-
-
-
+---
+title: gcp_storage_bucket
+kind: documentation
+---
 
 ## `acl`
   **Type**: `UNORDERED_LIST_STRUCT`<br>

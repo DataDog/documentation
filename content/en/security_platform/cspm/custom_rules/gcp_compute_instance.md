@@ -1,8 +1,7 @@
-# gcp_compute_instance
-
-
-
-
+---
+title: gcp_compute_instance
+kind: documentation
+---
 
 ## `advanced_machine_features`
   **Type**: `STRUCT`<br>
@@ -133,7 +132,7 @@
     **GCP name**: `minCpuPlatform`<br>
 ## `name`
 **Type**: `STRING`<br>
-    **Description**: The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z][1]?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.<br>
+    **Description**: The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression <code>[a-z]&#40;[-a-z0-9]*[a-z0-9]&#41;?</code> which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.<br>
     **GCP name**: `name`<br>
 ## `network_interfaces`
   **Type**: `UNORDERED_LIST_STRUCT`<br>
@@ -515,4 +514,5 @@
 **Type**: `STRING`<br>
     **Description**: [Output Only] URL of the zone where the instance resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.<br>
     **GCP name**: `zone`<br>
-[1]: [-a-z0-9]*[a-z0-9]
+
+

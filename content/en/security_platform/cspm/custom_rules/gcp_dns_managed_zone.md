@@ -1,8 +1,7 @@
-# gcp_dns_managed_zone
-
-
-
-
+---
+title: gcp_dns_managed_zone
+kind: documentation
+---
 
 ## `ancestors`
 **Type**: `UNORDERED_LIST_STRING`<br>

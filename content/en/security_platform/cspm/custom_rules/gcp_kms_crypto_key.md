@@ -1,8 +1,7 @@
-# gcp_kms_crypto_key
-
-
-
-
+---
+title: gcp_kms_crypto_key
+kind: documentation
+---
 
 ## `ancestors`
 **Type**: `UNORDERED_LIST_STRING`<br>
