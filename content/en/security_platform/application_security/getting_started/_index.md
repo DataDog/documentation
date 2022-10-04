@@ -5,7 +5,7 @@ type: multi-code-lang
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security Management"
+  text: "Protect against Threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
@@ -20,7 +20,7 @@ further_reading:
   text: "How Application Security Management Works in Datadog"
 ---
 
-Set up your application to [detect threats][1] targeting your production systems, using the Datadog library for your application language. You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Set up your application to [detect and protect against threats][1] targeting your production systems, using the Datadog library for your application language. You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
 

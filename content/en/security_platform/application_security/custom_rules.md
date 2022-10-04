@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/event_rules/"
   tag: "Documentation"
   text: "Creating event rules"

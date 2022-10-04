@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security Management"
+  text: "Protect against Threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
   text: "Getting Started Enabling ASM for Your Services"
