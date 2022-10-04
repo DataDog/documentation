@@ -6441,6 +6441,24 @@ components:
           description: A Boolean indicating whether tagged users is notified on changes
             to this monitor.
           type: boolean
+        notify_by:
+          description: 'Controls what granularity a monitor alerts on. Only available
+            for multi-alerts.
+
+            For instance, a monitor grouped by `cluster`, `namespace`, `pod` can be
+            configured to only notify on each
+
+            new `cluster` violating the alert conditions by setting `notify_by` to
+            `["cluster"]`. Tags mentioned
+
+            in `notify_by` have to be a subset of the grouping tags in the query.
+
+            For example, a query grouped by `cluster`, `namespace` cannot notify on
+            `region`.'
+          items:
+            description: A grouping tag.
+            type: string
+          type: array
         notify_no_data:
           default: false
           description: A Boolean indicating whether this monitor notifies when data
@@ -8918,7 +8936,8 @@ components:
           type: string
         id:
           description: User ID of the creator.
-          type: string
+          format: int64
+          type: integer
         name:
           description: Name of the creator.
           type: string
@@ -10045,7 +10064,7 @@ components:
       properties:
         facets:
           $ref: '#/components/schemas/SearchSLOResponseDataAttributesFacets'
-        slo:
+        slos:
           description: SLOs
           items:
             $ref: '#/components/schemas/SearchServiceLevelObjective'
@@ -10126,12 +10145,14 @@ components:
           type: string
         last:
           description: Link to first page.
+          nullable: true
           type: string
         next:
           description: Link to the next page.
           type: string
         prev:
           description: Link to previous page.
+          nullable: true
           type: string
         self:
           description: Link to current page.
@@ -10240,22 +10261,25 @@ components:
       - THIRTY_DAYS
       - NINETY_DAYS
     SearchServiceLevelObjective:
+      description: A service level objective data container.
+      properties:
+        data:
+          $ref: '#/components/schemas/SearchServiceLevelObjectiveData'
+      type: object
+    SearchServiceLevelObjectiveAttributes:
       description: 'A service level objective object includes a service level indicator,
         thresholds
 
-        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
+        for one or more timeframes, and metadata (`name`, `description`, and `tags`).'
       properties:
         all_tags:
           description: 'A list of tags associated with this service level objective.
 
-            Always included in service level objective responses (but may be empty).
-
-            Optional in create/update requests.'
+            Always included in service level objective responses (but may be empty).'
           example:
           - env:prod
           - app:core
           items:
-            description: A tag to apply to your SLO.
             type: string
           type: array
         created_at:
@@ -10277,18 +10301,16 @@ components:
             Optional in create/update requests.'
           nullable: true
           type: string
+        env_tags:
+          description: Tags with the `env` tag key.
+          items:
+            type: string
+          type: array
         groups:
           description: 'A list of (up to 100) monitor groups that narrow the scope
             of a monitor service level objective.
 
-
-            Included in service level objective responses if it is not empty. Optional
-            in
-
-            create/update requests for monitor service level objectives, but may only
-            be
-
-            used when then length of the `monitor_ids` field is one.'
+            Included in service level objective responses if it is not empty.'
           example:
           - env:prod
           - role:mysql
@@ -10297,13 +10319,6 @@ components:
             type: string
           nullable: true
           type: array
-        id:
-          description: 'A unique identifier for the service level objective object.
-
-
-            Always included in service level objective responses.'
-          readOnly: true
-          type: string
         modified_at:
           description: 'Modification timestamp (UNIX time in seconds)
 
@@ -10316,7 +10331,7 @@ components:
           description: 'A list of monitor ids that defines the scope of a monitor
             service level
 
-            objective. **Required if type is `monitor`**.'
+            objective.'
           items:
             description: A monitor ID.
             format: int64
@@ -10334,6 +10349,18 @@ components:
           type: array
         query:
           $ref: '#/components/schemas/SearchSLOQuery'
+        service_tags:
+          description: Tags with the `service` tag key.
+          items:
+            type: string
+          type: array
+        slo_type:
+          $ref: '#/components/schemas/SLOType'
+        team_tags:
+          description: Tags with the `team` tag key.
+          items:
+            type: string
+          type: array
         thresholds:
           description: 'The thresholds (timeframes and associated targets) for this
             service level
@@ -10351,8 +10378,23 @@ components:
           items:
             $ref: '#/components/schemas/SearchSLOThreshold'
           type: array
+      type: object
+    SearchServiceLevelObjectiveData:
+      description: A service level objective ID and attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SearchServiceLevelObjectiveAttributes'
+        id:
+          description: 'A unique identifier for the service level objective object.
+
+
+            Always included in service level objective responses.'
+          readOnly: true
+          type: string
         type:
-          $ref: '#/components/schemas/SLOType'
+          description: The type of the object, must be `slo`.
+          type: string
+      type: object
     SelectableTemplateVariableItems:
       description: Object containing the template variable's name, associated tag/attribute,
         default value and selectable values.

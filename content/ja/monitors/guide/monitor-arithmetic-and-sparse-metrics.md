@@ -1,9 +1,10 @@
 ---
-title: 演算メトリクスと疎なメトリクスの監視
-kind: ガイド
 aliases:
-  - /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics
+- /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics
+kind: ガイド
+title: 演算メトリクスと疎なメトリクスの監視
 ---
+
 ## 概要
 
 演算を使用したクエリに基づくアラートの作成はよく行われます。このようなクエリを意図したとおりに評価できるよう、適切にモニターを設定するには、ツールと挙動についていくつか考慮する必要があります。

@@ -59,7 +59,7 @@ main:
     url: getting_started/containers/datadog_operator
     parent: getting_started_containers
     weight: 402
-  - name: Serverless
+  - name: Serverless (Lambda)
     identifier: getting_started_serverless
     url: getting_started/serverless/
     parent: getting_started
@@ -68,94 +68,94 @@ main:
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: AWS
     identifier: getting_started_with_aws
     url: getting_started/integrations/aws/
-    weight: 601
+    weight: 701
     parent: getting_started_integrations
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
     parent: getting_started
-    weight: 7
+    weight: 8
   - name: Monitors
     identifier: getting_started_monitors
     url: getting_started/monitors/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Logs
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: Profiler
     identifier: getting_started_profiler
     url: getting_started/profiler/
     parent: getting_started
-    weight: 11
+    weight: 12
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 12
+    weight: 13
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 1201
+    weight: 1301
   - name: Unified Service Tagging
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 1202
+    weight: 1302
   - name: Using Tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 1203
+    weight: 1303
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 13
+    weight: 14
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 14
+    weight: 15
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1402
+    weight: 1502
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1401
+    weight: 1501
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1403
+    weight: 1503
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 15
+    weight: 16
   - name: Database Monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 17
+    weight: 18
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -550,41 +550,6 @@ main:
     pre: integrations
     parent: essentials_heading
     weight: 45000
-  - name: Observability Pipelines
-    url: integrations/observability_pipelines/
-    parent: integrations_top_level
-    identifier: observability_pipelines
-    weight: 1
-  - name: Setup
-    url: integrations/observability_pipelines/setup/
-    parent: observability_pipelines
-    identifier: observability_pipelines_setup
-    weight: 101
-  - name: Vector Configurations
-    url: integrations/observability_pipelines/vector_configurations/
-    parent: observability_pipelines
-    identifier: observability_pipelines_vector_configuration
-    weight: 102
-  - name: Working with Data
-    url: integrations/observability_pipelines/working_with_data/
-    parent: observability_pipelines
-    identifier: observability_pipelines_working_with_data
-    weight: 103
-  - name: Integrations
-    url: integrations/observability_pipelines/integrations/
-    parent: observability_pipelines
-    identifier: observability_pipelines_integrations
-    weight: 104
-  - name: Integrate Vector with Datadog
-    url: integrations/observability_pipelines/integrate_vector_with_datadog/
-    parent: observability_pipelines
-    identifier: observability_pipelines_integrate_vector_with_datadog
-    weight: 105
-  - name: Guides
-    url: integrations/observability_pipelines/guide/
-    parent: observability_pipelines
-    identifier: observability_pipelines_guides
-    weight: 106
   - name: Guides
     url: integrations/guide/
     identifier: integration_guides
@@ -914,7 +879,7 @@ main:
     identifier: serverless
     parent: infrastructure_heading
     weight: 100000
-  - name: Installation
+  - name: AWS Lambda
     url: serverless/installation
     parent: serverless
     identifier: serverless_installation
@@ -949,39 +914,19 @@ main:
     parent: serverless_installation
     identifier: serverless_installation_dotnet
     weight: 106
-  - name: Advanced Configurations
+  - name: Advanced Configurations (AWS Lambda)
     url: serverless/configuration
     parent: serverless
     identifier: serverless_configuration
     weight: 2
-  - name: Libraries & Integrations
-    url: serverless/libraries_integrations
-    parent: serverless
-    identifier: libraries_integrations
-    weight: 3
-  - name: Datadog Lambda Extension
-    url: serverless/libraries_integrations/extension/
-    parent: libraries_integrations
-    weight: 301
-  - name: Datadog Serverless Plugin
-    url: serverless/libraries_integrations/plugin/
-    parent: libraries_integrations
-    weight: 302
-  - name: Datadog Serverless Macro
-    url: serverless/libraries_integrations/macro/
-    parent: libraries_integrations
-    weight: 303
-  - name: Datadog Serverless CLI
-    url: serverless/libraries_integrations/cli/
-    parent: libraries_integrations
-    weight: 304
-  - name: Datadog CDK Construct
-    url: serverless/libraries_integrations/cdk/
-    parent: libraries_integrations
-    weight: 305
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
     parent: serverless
+    weight: 3
+  - name: Custom Metrics
+    url: serverless/custom_metrics
+    parent: serverless
+    identifier: custom_metrics
     weight: 4
   - name: Distributed Tracing
     url: serverless/distributed_tracing
@@ -996,35 +941,60 @@ main:
     url: serverless/distributed_tracing/serverless_trace_propagation
     parent: serverless_distributed_tracing
     weight: 503
-  - name: Custom Metrics
-    url: serverless/custom_metrics
+  - name: Libraries & Integrations
+    url: serverless/libraries_integrations
     parent: serverless
-    identifier: custom_metrics
+    identifier: libraries_integrations
     weight: 6
+  - name: Datadog Lambda Extension
+    url: serverless/libraries_integrations/extension/
+    parent: libraries_integrations
+    weight: 601
+  - name: Datadog Serverless Plugin
+    url: serverless/libraries_integrations/plugin/
+    parent: libraries_integrations
+    weight: 602
+  - name: Datadog Serverless Macro
+    url: serverless/libraries_integrations/macro/
+    parent: libraries_integrations
+    weight: 603
+  - name: Datadog Serverless CLI
+    url: serverless/libraries_integrations/cli/
+    parent: libraries_integrations
+    weight: 604
+  - name: Datadog CDK Construct
+    url: serverless/libraries_integrations/cdk/
+    parent: libraries_integrations
+    weight: 605
   - name: Deployment Tracking
     url: serverless/deployment_tracking
     parent: serverless
     weight: 7
+  - name: Azure App Service
+    url: serverless/azure_app_services
+    parent: serverless
+    identifier: serverless_app_services
+    weight: 8
+  - name: Google Cloud Run
+    url: serverless/google_cloud_run
+    parent: serverless
+    identifier: serverless_gcr
+    weight: 9
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 8
-  - name: Azure App Service Extension
-    url: serverless/azure_app_services
-    parent: serverless
-    identifier: serverless_app_services
-    weight: 9
+    weight: 10
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 10
+    weight: 11
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 11
+    weight: 12
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -2390,6 +2360,42 @@ main:
     parent: log_management
     identifier: log_troubleshooting
     weight: 8
+  - name: Observability Pipelines
+    url: observability_pipelines/
+    pre: pipelines
+    identifier: observability_pipelines
+    parent: log_management_heading
+    weight: 175000
+  - name: Setup
+    url: observability_pipelines/setup/
+    parent: observability_pipelines
+    identifier: observability_pipelines_setup
+    weight: 1
+  - name: Vector Configurations
+    url: observability_pipelines/vector_configurations/
+    parent: observability_pipelines
+    identifier: observability_pipelines_vector_configuration
+    weight: 2
+  - name: Working with Data
+    url: observability_pipelines/working_with_data/
+    parent: observability_pipelines
+    identifier: observability_pipelines_working_with_data
+    weight: 3
+  - name: Integrations
+    url: observability_pipelines/integrations/
+    parent: observability_pipelines
+    identifier: observability_pipelines_integrations
+    weight: 4
+  - name: Integrate Vector with Datadog
+    url: observability_pipelines/integrations/integrate_vector_with_datadog/
+    parent: observability_pipelines_integrations
+    identifier: observability_pipelines_integrate_vector_with_datadog
+    weight: 302
+  - name: Guides
+    url: observability_pipelines/guide/
+    parent: observability_pipelines
+    identifier: observability_pipelines_guides
+    weight: 5
   - name: Security Platform Overview
     url: security_platform/
     pre: security-platform
@@ -2442,31 +2448,26 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_getting_started
     weight: 1
-  - name: Security Home
-    url: security_platform/cloud_siem/security_home
-    parent: cloud_siem
-    identifier: cloud_siem_security_home
-    weight: 2
   - name: Log Detection Rules
     url: security_platform/cloud_siem/log_detection_rules
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
-    weight: 3
+    weight: 2
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
-    weight: 4
+    weight: 3
   - name: Signals Explorer
     url: /security_platform/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
-    weight: 5
+    weight: 4
   - name: Guides
     url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 6
+    weight: 5
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform_heading
@@ -3386,6 +3387,10 @@ main:
     url: account_management/org_settings/custom_landing
     parent: organization_settings
     weight: 205
+  - name: Service Accounts
+    url: account_management/org_settings/service_accounts
+    parent: organization_settings
+    weight: 206
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -3496,7 +3501,7 @@ main:
     parent: administration_heading
     weight: 240000
   - name: Aggregating Agents
-    url: integrations/observability_pipelines/integrate_vector_with_datadog/
+    url: observability_pipelines/integrations/integrate_vector_with_datadog/
     parent: agent
     identifier: vector_aggregation
     weight: 13
@@ -7478,6 +7483,32 @@ api:
     url: /api/latest/incidents/
     identifier: incidents
     generated: true
+  - name: 'Create, update, and delete incident attachments'
+    url: '#create,-update,-and-delete-incident-attachments'
+    identifier: 'incidents-create,-update,-and-delete-incident-attachments'
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateIncidentAttachments
+      unstable:
+        - v2
+      order: 7
+  - name: Get a list of attachments
+    url: '#get-a-list-of-attachments'
+    identifier: incidents-get-a-list-of-attachments
+    parent: incidents
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListIncidentAttachments
+      unstable:
+        - v2
+      order: 6
   - name: Update an existing incident
     url: '#update-an-existing-incident'
     identifier: incidents-update-an-existing-incident
@@ -7490,7 +7521,7 @@ api:
         - UpdateIncident
       unstable:
         - v2
-      order: 0
+      order: 3
   - name: Get the details of an incident
     url: '#get-the-details-of-an-incident'
     identifier: incidents-get-the-details-of-an-incident
@@ -7503,7 +7534,7 @@ api:
         - GetIncident
       unstable:
         - v2
-      order: 0
+      order: 2
   - name: Delete an existing incident
     url: '#delete-an-existing-incident'
     identifier: incidents-delete-an-existing-incident
@@ -7516,7 +7547,7 @@ api:
         - DeleteIncident
       unstable:
         - v2
-      order: 0
+      order: 4
   - name: Create an incident
     url: '#create-an-incident'
     identifier: incidents-create-an-incident
@@ -7529,7 +7560,7 @@ api:
         - CreateIncident
       unstable:
         - v2
-      order: 0
+      order: 1
   - name: Get a list of incidents
     url: '#get-a-list-of-incidents'
     identifier: incidents-get-a-list-of-incidents
@@ -7542,7 +7573,7 @@ api:
         - ListIncidents
       unstable:
         - v2
-      order: 0
+      order: 5
   - name: Logs Archives
     url: /api/latest/logs-archives/
     identifier: logs-archives

@@ -2,7 +2,7 @@
 aliases:
 - /ja/tracing/dotnet
 - /ja/tracing/languages/dotnet
-- /ja/tracing/setup/dotnet
+- /ja/tracing/setup/dotnet-core
 - /ja/tracing/setup_overview/dotnet
 - /ja/tracing/setup/dotnet-core
 - /ja/tracing/dotnet-framework
@@ -68,7 +68,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 <strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば Datadog の .NET トレーサーでプロファイラーを有効にした状態）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
 </div>
 
-### インストール
+### APM に Datadog Agent を構成する
 
 1. [APM に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
 2. [トレーサーをインストールします。](#install-the-tracer)
@@ -162,7 +162,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 1. アプリケーションに `Datadog.Monitoring.Distribution` [NuGet パッケージ][1]を追加します。
 
 [1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -224,7 +224,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 2. スタンドアロンアプリケーションの場合は、手動でアプリケーションを再起動します。
 
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -261,7 +261,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "NuGet" %}}
 
@@ -269,7 +269,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 1. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -295,7 +295,7 @@ COR_ENABLE_PROFILING=1
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディタを使用して Windows サービスに環境変数を作成" >}}
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "PowerShell" %}}
 
@@ -303,7 +303,7 @@ COR_ENABLE_PROFILING=1
 [string[]] $v = @("COR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 

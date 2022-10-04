@@ -69,7 +69,7 @@ To explore an audit event, navigate to the [Audit Trail][1] section, also access
 
 {{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
 
-Audit Trail events have the same functionality as logs within the [Log Explorer][4]:
+Audit Trail events have the same functionality as logs within the [Log Explorer][3]:
 
 - Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
@@ -85,7 +85,7 @@ Efficient troubleshooting requires your data to be in the proper scope to permit
 All saved views, that are not your default view, are shared across your organization:
 
 * **Integration saved views** come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
-* **Custom saved views** are created by users. They are editable by any user in your organization (except [read only users][12]), and identified with the avatar of the user who created them Click the **Save** button to create a new custom saved view from the current content of your explorer.
+* **Custom saved views** are created by users. They are editable by any user in your organization (except [read only users][4]), and identified with the avatar of the user who created them Click the **Save** button to create a new custom saved view from the current content of your explorer.
 
 At any moment, from the saved view entry in the Views panel:
 
@@ -95,7 +95,7 @@ At any moment, from the saved view entry in the Views panel:
 * **Share** a saved view through a short-link.
 * **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
-**Note:** Update, rename, and delete actions are disabled for integration saved views and [read only users][12].
+**Note:** Update, rename, and delete actions are disabled for integration saved views and [read only users][4].
 
 
 ### Default view
@@ -138,8 +138,8 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows vari
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
-[3]: /account_management/audit_trail/events/
-[4]: /logs/explorer/
+[3]: /logs/explorer/
+[4]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
 [5]: /monitors/create/types/audit_trail/
 [6]: /dashboards/
 [7]: /dashboards/widgets/top_list/
@@ -147,4 +147,3 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows vari
 [9]: /dashboards/widgets/list/
 [10]: /dashboards/querying/#choose-the-metric-to-graph/
 [11]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
-[12]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions

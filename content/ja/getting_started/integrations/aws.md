@@ -26,7 +26,7 @@ further_reading:
   text: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: ブログ
-  text: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
+  text: Datadog で Graviton3 搭載の EC2 インスタンスを監視する
 kind: documentation
 title: AWS の概要
 ---
@@ -37,7 +37,7 @@ title: AWS の概要
 
 簡単に言うと、これには Datadog の AWS アカウントがデータの収集やプッシュのために AWS アカウントに API コールを行うことを可能にする IAM ロールと関連するポリシーの作成が含まれます。また、このテンプレートは、Datadog にログを送信するための [Datadog Forwarder][1] Lambda 関数をデプロイします。CloudFormation テンプレートを使用することで、このデータを Datadog アカウントに送信するために必要なすべてのツールが提供されます。Datadog は、最新の機能を提供するために CloudFormation テンプレートを保守しています。
 
-最初の接続が確立された後、AWS 環境に関連する個々の AWS サービスインテグレーションを有効にすることができます。ワンクリックで、Datadog は AWS アカウントに必要なリソースをプロビジョニングし、使用するサービスのメトリクスとイベントのクエリを開始します。人気のある AWS サービスをご使用の場合、Datadog はすぐに使えるダッシュボードを用意しています。これは即座に視覚化を提供し、カスタマイズも可能です。このガイドでは、インテグレーションの設定、[CloudTrail][2] と Forwarder Lambda 関数からのログの送信、Amazon Linux EC2 インスタンスへの Datadog Agent のインストールをデモしています。利用可能なサブインテグレーションについては、[個々の AWS サービスに対するインテグレーションを有効にする](#enable-integrations-for-individual-aws-service)セクションを参照してください。
+最初の接続が確立された後、AWS 環境に関連する個々の AWS サービスインテグレーションを有効にすることができます。ワンクリックで、Datadog は AWS アカウントに必要なリソースをプロビジョニングし、使用するサービスのメトリクスとイベントのクエリを開始します。人気のある AWS サービスをご使用の場合、Datadog はすぐに使えるダッシュボードを用意しています。これは即座に視覚化を提供し、カスタマイズも可能です。このガイドでは、インテグレーションの設定と Amazon Linux EC2 インスタンスへの Datadog Agent のインストールをデモし、インテグレーションの機能の概要を説明します。利用可能なサブインテグレーションについては、[個々の AWS サービスに対するインテグレーションを有効にする](#enable-integrations-for-individual-aws-service)セクションを参照してください。
 
 このプロセスは必要な数の AWS アカウントに対して繰り返すことができますし、[API][3]、[AWS CLI][4]、[Terraform][5] を使って一度に複数のアカウントを設定することも可能です。詳しくは、[Datadog-Amazon CloudFormation ガイド][6]をご参照ください。
 
@@ -76,32 +76,22 @@ title: AWS の概要
     * secretsmanager:PutSecretValue
     * serverless:CreateCloudFormationTemplate
 
-
 ## セットアップ
 
+2. Datadog の [AWS インテグレーション構成ページ][8]に移動し、**Add AWS Account** をクリックします。
 
-2. Datadog アカウントの [Integrations ページ][8]の AWS タイルから、この AWS アカウントと統合したい Datadog 製品を選択します。これにより、これらの製品のこの AWS アカウントからデータを統合するための正しいデフォルト設定が選択されます。これらの設定は、必要に応じて将来的に変更することができます。
-{{< img src="getting_started/integrations/cloudformation-setup.png" alt="Datadog AWS インテグレーションタイルに、インテグレーションを確立するためのオプションが表示されます。Role Delegation タブがハイライトされています。">}}
+3. **Automatically using CloudFormation** のオプションで、インテグレーションの設定を行います。
+    a. インテグレーションする AWS リージョンを選択します。 
+    b. Datadog [API キー][58]を追加します。 
+    c. オプションで、[Datadog Forwarder Lambda][1] でログなどを Datadog に送ります。 
+    d. オプションで、[Cloud Security Posture Management][54] (CSPM) を有効にして、クラウド環境、ホスト、コンテナをスキャンして、構成ミスやセキュリティリスクを確認します。
 
-3. CloudFormation スタックを起動する AWS リージョンを選択します。これは、AWS ログを Datadog に送信するための Datadog Lambda Forwarder を作成する場所も設定します (Log Management を選択した場合)。
-
-   **注**: CloudWatch のメトリクスは、選択したリージョンに関係なく、使用しているすべての AWS リージョンから収集されます。
-
-4. AWS アカウントから Datadog へのデータ送信に使用される Datadog API キーを選択または作成します。
-
-5. "Launch CloudFormation Template" をクリックします。これで AWS コンソールが開き、CloudFormation スタックがロードされます。すべてのパラメーターは、事前の Datadog フォームでの選択に基づいて入力されているため、必要な場合以外は編集する必要はありません。
+5. **Launch CloudFormation Template** をクリックします。これで AWS コンソールが開き、CloudFormation スタックがロードされます。すべてのパラメーターは、事前の Datadog フォームでの選択に基づいて入力されているため、必要な場合以外は編集する必要はありません。
 **注:** `DatadogAppKey` パラメーターは、CloudFormation スタックが Datadog に API コールを行い、この AWS アカウントに対して Datadog の構成を追加・編集できるようにするものです。キーは自動的に生成され、Datadog アカウントに結びつけられます。
-{{< img src="getting_started/integrations/params.png" alt="AWS CloudFormation の create-stack ページでは、Stack 名が datadog、IAMRoleName が DatadogIntegrationRole、ExternalId が be46 で終わる難読化された値、DdApiKey が難読化された値となっています。">}}
 
-6. AWS から必要な項目にチェックを入れ、`Create stack` をクリックします。
-    {{< img src="getting_started/integrations/cloudformation-complete.png" alt="AWS CloudFormation Stacks のページでは、ページの左側にある 'Stacks' 列の下に 4 つの完成したスタックが表示されています。スタックは、datadog-DatadogIntegrationRoleStack、datadog-DatadogPolicyMacroStack、datadog-ForwarderStack、および datadog です。各スタックには、作成時のタイムスタンプと、CREATE_COMPLETE の緑色のチェックマークが表示されます。'datadog' スタックがハイライトされ、'Events' タブが表示されています。9 つのイベントが、タイムスタンプ、ロジカル ID、ステータス、ステータス理由とともにリストアップされています。これらのイベントは、各スタックの異なる作成段階を参照しています。">}}
-これにより、Datadog スタックと 3 つのネストされたスタックの作成プロセスが開始されます。これには数分かかる場合があります。続行する前に、スタックが正常に作成されたことを確認します。
+6. AWS から必要な項目にチェックを入れ、**Create stack** をクリックします。これにより、Datadog スタックと 3 つのネストされたスタックの作成プロセスが開始されます。これには数分かかる場合があります。続行する前に、スタックが正常に作成されたことを確認します。
 
-7. Stack の作成後、Datadog の AWS インテグレーションタイルに戻り、作成した新しいアカウントのボックスを見つけます。"Refresh to Check Status" をクリックすると、ページの上部に成功メッセージが表示され、関連する詳細とともに新しいアカウントがページ上に表示されます。
-
-    {{< img src="getting_started/integrations/new-account.png" alt="Datadog アカウントの AWS インテグレーションタイルに Account: New Account セクションが表示され、CloudFormation とのインテグレーション設定が完了待ちである旨のメッセージが表示されます。ステータスを確認するための更新ボタンと、ステータスを確認する前に CloudFormation のスタック生成を確認するための警告が表示されています。">}}
-
-   使用する AWS サービスや監視のユースケースに応じて、インテグレーションタイル内には収集するデータを指定するためのオプションが複数あります。例えば、AWS サービス、ネームスペース、またはタグに基づいてデータ収集を制限することができます。さらに、モニター通知をミュートすることを選択できます。例えば、手動でトリガーされたターミネーションや、[EC2 automuting][9] を有効にした自動スケーリングによってトリガーされたターミネーションなどです。必要に応じて、CloudWatch アラームを Datadog [イベントエクスプローラー][11]に送るために [Alarm Collection][10] を有効にし、カスタムメトリクスを収集するかどうかを選択します。
+7. スタック作成後、Datadog の AWS インテグレーションタイルに戻り、**Ready!** をクリックします。
 
 8. データ収集が開始されるまで最大 10 分待ち、すぐに使える [AWS 概要ダッシュボード][12]を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="Datadog アカウントの AWS 概要ダッシュボード。左側には AWS のロゴと、'No matching entries found' (該当するエントリーはありません) を示す AWS イベントグラフが表示されます。中央には、数値データが表示された EBS ボリューム関連のグラフと、一貫したデータを示すヒートマップが表示されています。右側には、数値データが表示された ELB 関連のグラフと、3 つのソースからのスパイク状のデータを示す時系列グラフが表示されています。">}}
@@ -112,7 +102,12 @@ title: AWS の概要
 
 ## ログを送信する
 
-AWS のログを Datadog に送信する方法の一覧は、[AWS サービスのログを有効にする][14]を参照してください。
+AWSサービスログを Datadog に送信する方法はいくつかあります。
+
+- [Kinesis Firehose destination][63]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
+- [Forwarder Lambda 関数][64]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
+
+最も利用されている AWS サービスのログを流すには、[AWS サービスのログを有効にする][14]のセクションを読んでください。
 
 ### 検証
 
@@ -186,7 +181,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 ### トラブルシューティング
 問題が発生した場合は、[トラブルシューティング][57]を必ずご確認ください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -197,7 +192,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [6]: /ja/integrations/guide/amazon_cloudformation/
 [7]: https://aws.amazon.com/getting-started/?nc1=f_cc
-[8]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[8]: https://app.datadoghq.com/integrations/amazon-web-services
 [9]: /ja/integrations/amazon_ec2/#ec2-automuting
 [10]: /ja/integrations/amazon_web_services/?tab=roledelegation#alarm-collection
 [11]: /ja/events/explorer
@@ -235,15 +230,22 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [43]: /ja/serverless/libraries_integrations
 [44]: /ja/serverless/distributed_tracing
 [45]: /ja/serverless/troubleshooting
-[46]: /ja/integrations/amazon_xray/?tab=nodejs
-[47]: /ja/tracing/setup_overview/
+[46]: /ja/integrations/amazon_xray/
+[47]: /ja/tracing/trace_collection/
 [48]: /ja/tracing/#explore-datadog-apm
 [49]: /ja/watchdog/
 [50]: /ja/security_platform/cloud_siem/getting_started/
 [51]: /ja/security_platform/default_rules/#cat-log-detection
 [52]: /ja/security_platform/explorer/
-[53]: /ja/security_platform/notification_rules/
+[53]: /ja/security_platform/notifications/rules/
 [54]: /ja/security_platform/cspm/getting_started/
 [55]: /ja/security_platform/default_rules/#cat-posture-management-cloud
 [56]: /ja/security_platform/default_rules/#cat-posture-management-infra
 [57]: /ja/integrations/amazon_web_services/?tab=roledelegation#troubleshooting
+[58]: https://app.datadoghq.com/organization-settings/api-keys
+[59]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
+[60]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[61]: /ja/integrations/amazon_xray/
+[62]: /ja/getting_started/tagging/using_tags?tab=aws#integrations
+[63]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[64]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/

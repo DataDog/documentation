@@ -40,9 +40,11 @@ Synthetics と CI/CD を使用して、継続的デリバリー (CD) プロセ�
 
 ## インテグレーション
 
-{{< whatsnext desc="Synthetics と CI/CD を使えば、Synthetic テストをお好みの CI プラットフォームプロバイダーで実行することができます。" >}}
+{{< whatsnext desc="Synthetics と CI/CD を使えば、Synthetic テストをお好みの CI プラットフォームプロバイダーで実行することができます。以下のインテグレーションについては、ドキュメントを参照してください。" >}}
+    {{< nextlink href="synthetics/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="synthetics/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
 {{< /whatsnext >}}
 
