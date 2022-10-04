@@ -116,7 +116,7 @@ user@domain.com just logged in without MFA from 1.2.3.4.
 
 {{% /tab %}}
 
-{{% tab "Application Security Monitoring" %}}
+{{% tab "Application Security Management" %}}
 
 ```json
 {
