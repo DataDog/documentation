@@ -80,7 +80,7 @@ span->SetTag("error.msg", "[EBADF] invalid file");
 span->SetTag("error.type", "errno");
 ```
 
-Setting any of "error.msg", "error.stack", or "error.type" has the effect of
+Adding any of the `error.msg`, `error.stack`, or `error.type` tags sets
 `error` to the value `true`.
 
 To unset an error on a span, set the "error" tag to a false value. This also has
