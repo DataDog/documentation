@@ -8,7 +8,7 @@ further_reading:
   text: "Browse the available actions in the Actions Catalog"
 ---
 
-To build a workflow, navigate to the [**Workflows** page][1] under **Integrations**. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed. Hover over a workflow for the options to delete or clone the workflow. Toggle **My workflows** if you want to see only workflows that you created. 
+To build a workflow, navigate to the [**Workflows** page][1] under **Integrations**. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed. Hover over a workflow for the options to delete or clone the workflow. Toggle **My workflows** if you want to see only workflows that you created.
 
 ## Create a workflow
 
@@ -21,7 +21,7 @@ To create a workflow:
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
-{{< img src="workflows/add-step.mp4" alt="Drag a step onto the workflow canvas" video="true"  >}}
+{{< img src="workflows/workflow-builder.mp4" alt="Drag a step onto the workflow canvas" video="true"  >}}
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
 1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
 
@@ -36,7 +36,7 @@ Build or edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow
 A typical workflow contains three top-level keys:
 - `"steps"`: An array of "step" objects. Each step defines a step in the workflow and includes a name, the action ID, and the step parameters. The `steps` object also includes a key for outbound connection data.
 - `"startStepName"`: The name of the first step in the workflow.
-- `"connectionEnvs"`: Connection data and environment variables. 
+- `"connectionEnvs"`: Connection data and environment variables.
 
 An example of a workflow with a single step that sends a message to a Slack channel named `#workflows-test`:
 
@@ -84,7 +84,7 @@ An example of a workflow with a single step that sends a message to a Slack chan
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data that comes from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
 Context variables come in three varieties:
-- A small collection of standard **workflow variables** are present in all workflows. 
+- A small collection of standard **workflow variables** are present in all workflows.
 - Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
 - **Trigger variables** are passed into the workflow by the triggering event.
 
