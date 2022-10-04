@@ -62,13 +62,13 @@ Choose the type of variable you want to create:
 
 {{% tab "Create From Test" %}}
 
-You can create variables from your existing [HTTP tests][1] by parsing their associated response headers and body or existing [Multistep API tests][2] by using their extracted variables.
+You can create variables from your existing [HTTP tests][1] by parsing their associated response headers and body or from your existing [Multistep API tests][2] by using their extracted variables.
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Enter a **Description** for your variable (optional).
 3. Select **Tags** to associate with your variable (optional).
-4. Select the **test** you want to extract your variable from.
-5. Enable obfuscation of your variable to hide its value on test results (optional).
+4. Enable obfuscation of your variable to hide its value on test results (optional).
+5. Select the **test** you want to extract a variable from.
 6. If you are using a multistep API test, extract your local variable from the test. If you are using an HTTP test, choose to extract your variable from the response header or the response body.
 
     * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [`regex`][3].
