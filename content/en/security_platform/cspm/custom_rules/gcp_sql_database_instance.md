@@ -179,7 +179,7 @@ kind: documentation
         **GCP name**: `clientCertificate`<br>
    - `client_key`<br>
     **Type**: `STRING`<br>
-        **Description**: PEM representation of the replica's private key. The corresponsing public key is encoded in the client's certificate.<br>
+        **Description**: PEM representation of the replica's private key. The corresponding public key is encoded in the client's certificate.<br>
         **GCP name**: `clientKey`<br>
    - `dump_file_path`<br>
     **Type**: `STRING`<br>
@@ -275,7 +275,7 @@ kind: documentation
             **GCP name**: `clientCertificate`<br>
        - `client_key`<br>
         **Type**: `STRING`<br>
-            **Description**: PEM representation of the replica's private key. The corresponsing public key is encoded in the client's certificate.<br>
+            **Description**: PEM representation of the replica's private key. The corresponding public key is encoded in the client's certificate.<br>
             **GCP name**: `clientKey`<br>
        - `connect_retry_interval`<br>
         **Type**: `INT32`<br>
