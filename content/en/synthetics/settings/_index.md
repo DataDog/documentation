@@ -5,27 +5,24 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
+  tag: "Terraform"
+  text: "Create and manage Synthetic Global Variables with Terraform"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
-- link: "/synthetics/browser_tests/"
+- link: "/synthetics/multistep/"
   tag: "Documentation"
-  text: "Configure a Browser Test"
+  text: "Configure a Multistep API Test"
 - link: "/synthetics/private_locations/"
   tag: "Documentation"
   text: "Create a Private Location"
-- link: "/synthetics/identify_synthetics_bots/"
-  tag: "Documentation"
-  text: "Identify Synthetic Bots"
 - link: "/synthetics/guide/explore-rum-through-synthetics/"
   tag: "Documentation"
   text: "Explore RUM & Session Replay in Synthetics"
 - link: "/synthetics/guide/browser-tests-totp"
   tag: "Documentation"
   text: "TOTPs For Multi-Factor Authentication (MFA) in Browser Test"
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
-  tag: "Terraform"
-  text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
 ## Overview
@@ -64,6 +61,8 @@ Choose the type of variable you want to create:
 
 You can create variables from your existing [HTTP tests][1] by parsing their associated response headers and body or from your existing [Multistep API tests][2] by using their extracted variables.
 
+{{< img src="synthetics/settings/global_variable.png" alt="Available variables that you can extract from a multistep API test" style="width:100%;" >}}
+
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 2. Enter a **Description** for your variable (optional).
 3. Select **Tags** to associate with your variable (optional).
@@ -71,10 +70,13 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 5. Select the **test** you want to extract a variable from.
 6. If you are using a multistep API test, extract your local variable from the test. If you are using an HTTP test, choose to extract your variable from the response header or the response body.
 
-    * Extract the value from **Response Header**: use the full response header for your variable or parse it with a [`regex`][3].
-    * Extract the value from **Response Body**: parse the response body of the request with a [`regex`][3], a [`jsonpath`][4], an [`xpath`][5], or use the full response body.
+    * Extract the value from **Response Header**: Use the full response header for your variable or parse it with a [`regex`][3].
+    * Extract the value from **Response Body**: Parse the response body of the request with a [`regex`][3], a [`jsonpath`][4], an [`xpath`][5], or use the full response body.
+    * Extract the value from the **Response Status Code**. 
 
-{{< img src="synthetics/settings/create_variable_from_test.png" alt="Extract a variable from an HTTP or Multistep API Test" style="width:100%;">}}
+    {{< img src="synthetics/settings/create_variable_from_test.png" alt="Extract a variable from an HTTP or Multistep API Test" style="width:100%;">}}
+
+7. Enable obfuscation of your variable to hide its value on test results (optional).
 
 In addition to extracting a value with a regex, you can also use a [regex][3] to parse the following:
 
@@ -117,17 +119,17 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< /tabs >}}
 
-Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click on *+ Variables*; then, type `{{` in the field of interest and select your global variable. For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
+Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 
+
+For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
 
 ### Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][11]. 
 
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
+### Restrict access
 
-#### Restrict access
-
-Access restriction is available for customers using [custom roles][13] on their accounts.
+Access restriction is available for customers using [custom roles][12] on their accounts. If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
@@ -169,7 +171,7 @@ When you are done selecting browsers and devices, click **Save Default Browsers 
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Integration settings
 
@@ -197,7 +199,8 @@ For more information, see [Explore RUM & Session Replay][15].
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Integration Settings** page. To get access to the **Integration Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -213,7 +216,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 [9]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
 [10]: /synthetics/browser_tests/actions#use-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[12]: /account_management/rbac/?tab=datadogapplication#custom-role
-[13]: /account_management/rbac/#create-a-custom-role
+[12]: /account_management/rbac/#create-a-custom-role
+[13]: /account_management/rbac/?tab=datadogapplication#custom-role
 [14]: /account_management/billing/usage_attribution
 [15]: /synthetics/guide/explore-rum-through-synthetics/
