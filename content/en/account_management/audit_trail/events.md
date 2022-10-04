@@ -23,7 +23,6 @@ further_reading:
 - [Notebook](#notebook-events)
 - [OAuth](#oauth-events)
 - [Organization management](#organization-management-events)
-- [Support administration](#support-administration-events)
 
 #### Product-Specific Events
 - [Cloud Security Platform](#cloud-security-platform-events)
@@ -173,11 +172,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [SLO][64]           | A user creates, modifies, or deletes an SLO and the previous and new values for the SLO.| `@evt.name:SLO @asset.type:slo`            |
 | [SLO correction][65]| A user creates, modifies, or deletes an SLO correction and the previous and new values for the SLO correction. | `@evt.name:SLO @asset.type:slo_correction` |
 
-### Support administration events
-
-| Name                 | Description of audit event                                          | Query in audit explorer                           |
-| -------------------- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Support admin access][66] | A Datadog support admin accesses the account and the reason for it. | `@evt.name:"Support Administration" @action:login`  |
 
 ### Synthetic Monitoring events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
