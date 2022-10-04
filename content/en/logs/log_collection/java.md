@@ -290,6 +290,8 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
 3. [Restart the Agent][7].
 4. Run the [Agent’s status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
+If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
+
 ## Agentless logging
 
 In the exceptional case where your application is running on a machine that cannot be accessed or cannot log to a file, it is possible to stream logs to Datadog or to the Datadog Agent directly. This is not the recommended setup, because it requires that your application handles connection issues.
@@ -373,7 +375,7 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 ### Configure Logback
 
-Use the [logstash-logback-encoder][9] logging library along with Logback to stream logs directly to Datadog.
+Use the [logstash-logback-encoder][11] logging library along with Logback to stream logs directly to Datadog.
 
 1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
@@ -441,7 +443,7 @@ Use the [logstash-logback-encoder][9] logging library along with Logback to stre
   Not supported.
     {{< /site-region >}}
 
-    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][10].
+    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][12].
 
 2. Add the Logstash encoder dependency to your `pom.xml` file:
 
@@ -464,7 +466,7 @@ Enrich your log events with contextual attributes.
 
 ### Using the key value parser
 
-The [key value parser][11] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [key value parser][13] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -529,6 +531,8 @@ To generate this JSON:
 [6]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
-[9]: https://github.com/logstash/logstash-logback-encoder
-[10]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[11]: /logs/log_configuration/parsing/#key-value-or-logfmt
+[9]: /logs/log_configuration/parsing/?tab=matchers
+[10]: /logs/explorer/#overview
+[11]: https://github.com/logstash/logstash-logback-encoder
+[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[13]: /logs/log_configuration/parsing/#key-value-or-logfmt
