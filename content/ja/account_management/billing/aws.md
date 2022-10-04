@@ -23,7 +23,7 @@ Fargate と Lambda のインテグレーションタイル、およびカスタ�
 
 {{< img src="account_management/billing/aws-resource-exclusion.png" alt="Datadog AWS インテグレーションページ内の AWS アカウントのメトリクス収集タブ。AWS サービスを選択するドロップダウンメニューと key:value 形式でタグを追加するフィールドで、特定のリソースにメトリクス収集を制限するオプションが表示されている" >}}
 
-また、[API][8] を利用して AWS のメトリクスを制限することも可能です。
+また、[API][4] を利用して AWS のメトリクスを制限することも可能です。
 
 **注**: Datadog の請求対象となるのは、EC2 (ホスト)、Lambda (アクティブ関数)、CloudWatch Custom Metrics (カスタムメトリクス) のみです。フィルターできる他のサービスのためにインテグレーションされたメトリクスは、Datadog の課金対象にはなりません。
 
@@ -42,8 +42,7 @@ Agent が実行されているホストは引き続き表示され、課金対�
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: /ja/getting_started/tagging/using_tags/#integrations
+[4]: /ja/api/latest/aws-integration/#set-an-aws-tag-filter
 [5]: /ja/infrastructure/
 [6]: /ja/help/
 [7]: mailto:success@datadoghq.com
-[8]: /ja/api/latest/aws-integration/#set-an-aws-tag-filter
