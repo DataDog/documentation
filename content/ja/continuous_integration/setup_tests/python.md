@@ -313,16 +313,17 @@ DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 
 ### テストにカスタムタグを追加する
 
-現在アクティブなスパンを使用して、テストにカスタムタグを追加することができます。
+テストの引数に `ddspan` と宣言することで、テストにカスタムタグを追加することができます。
 
 ```python
 from ddtrace import tracer
 
-// テスト内
-span = tracer.current_span()
-span.set_tag("test_owner", "my_team")
-// テストは正常に続きます
-// ...
+# テストの引数として `ddspan` を宣言します
+def test_simple_case(ddspan):
+    # タグを設定します
+    ddspan.set_tag("test_owner", "my_team")
+    # テストは正常に続きます
+    # ...
 ```
 
 これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、Python カスタムインスツルメンテーションドキュメントの[タグの追加][5]セクションを参照してください。
