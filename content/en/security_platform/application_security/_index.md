@@ -1,5 +1,5 @@
 ---
-title: Application Security Monitoring
+title: Application Security Management
 kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 disable_sidebar: true
@@ -12,15 +12,15 @@ further_reading:
   text: "Introducing Datadog Application Security"
 - link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Monitoring Works"
+  text: "How Application Security Management Works"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
-  text: "Datadog Application Security Monitoring"
+  text: "Datadog Application Security Management"
 ---
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-Datadog Application Security Monitoring (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor application security for apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
 ASM leverages Datadog [tracing libraries][1], the [Datadog Agent][2], and in-app detection rules to detect threats in your application environment and trigger signals whenever an attack targets your production system, or a vulnerability is triggered from the code.
 
@@ -32,7 +32,7 @@ With ASM, you can cut through the noise of continuous trace data to focus on sec
 
 ## Understanding how application security is implemented in Datadog
 
-If you're curious how Application Security Monitoring is structured and how it uses tracing data to identify security problems, read [How Application Security Monitoring Works][3].
+If you're curious how Application Security Management is structured and how it uses tracing data to identify security problems, read [How Application Security Management Works][3].
 
 ## Configure your environment
 

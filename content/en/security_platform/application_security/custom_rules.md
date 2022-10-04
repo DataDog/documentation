@@ -4,13 +4,13 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring threats with Datadog Application Security Monitoring"
+  text: "Monitoring threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/event_rules/"
   tag: "Documentation"
   text: "Creating event rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshoot common Datadog Application Security Monitoring issues"
+  text: "Troubleshoot common Datadog Application Security Management issues"
 - link: "/security_platform/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security Platform notification variables"
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Application Security Monitoring (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
+Application Security Management (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts and vulnerability triggers that impact your production systems.
 
 However, there are situations where you may want to customize a rule based on your environment. For example, you may want to customize a detection rule that catches attack attempts on a pre-production development route that accepts SQL and returns the results. Catching SQL attempts is noisy, as the route is restricted to internal developers; therefore you can customize this rule to exclude these patterns.
 

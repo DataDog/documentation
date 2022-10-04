@@ -10,10 +10,10 @@ further_reading:
       text: 'Python Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Monitoring Rules"
+      text: "OOTB Application Security Management Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Monitoring"
+      text: "Troubleshooting Application Security Management"
 ---
 
 You can monitor the security of your Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.

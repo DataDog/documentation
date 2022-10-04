@@ -4,18 +4,18 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring threats with Datadog Application Security Monitoring"
+  text: "Monitoring threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/custom_rules/"
   tag: "Documentation"
   text: "Writing custom detection rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshoot common Datadog Application Security Monitoring issues"
+  text: "Troubleshoot common Datadog Application Security Management issues"
 ---
 
 ## Overview
 
-With Application Security Monitoring (ASM) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
+With Application Security Management (ASM) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
 
 An _event rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM event rules, which are used to display suspicious requests in the trace explorer and in the default signal rules. 
 
