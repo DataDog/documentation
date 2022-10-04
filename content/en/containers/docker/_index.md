@@ -94,7 +94,7 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (SAC).
+The Datadog Agent is supported in Windows Server 2019 (LTSC) and Windows Server 2022 (LTSC).
 
 ```shell
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
