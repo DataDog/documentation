@@ -1127,27 +1127,3 @@
       options:
         dest_dir: '/security_platform/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
-
-  - repo_name: infrastructure-resources
-    contents:
-
-    - action: pull-and-push-folder
-#      branch: kari/docs-poc
-      branch: victoria.ding/gcp-docs
-      globs:
-        - 'generated/md/gcp_sql_database_instance.md'
-        - 'generated/md/gcp_compute_instance.md'
-        - 'generated/md/gcp_iam_policy.md'
-        - 'generated/md/gcp_compute_firewall.md'
-        - 'generated/md/gcp_dns_managed_zone.md'
-        - 'generated/md/gcp_iam_service_account.md'
-        - 'generated/md/gcp_compute_network.md'
-        - 'generated/md/gcp_project.md'
-        - 'generated/md/gcp_bigquery_table.md'
-        - 'generated/md/gcp_storage_bucket.md'
-        - 'generated/md/gcp_dataproc_cluster.md'
-        - 'generated/md/gcp_iam_service_account_key.md'
-        - 'generated/md/gcp_kms_crypto_key.md'
-      options:
-        dest_dir: '/security_platform/cspm/custom_rules/'
-        path_to_remove: 'generated/md/'
