@@ -2549,7 +2549,7 @@ main:
     parent: cloud_workload_security
     identifier: cws_troubleshooting
     weight: 8
-  - name: Application Security Monitoring
+  - name: Application Security Management
     url: security_platform/application_security/
     parent: security_platform_heading
     pre: app-sec
