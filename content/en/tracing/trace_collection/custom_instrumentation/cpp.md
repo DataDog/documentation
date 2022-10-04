@@ -83,9 +83,8 @@ span->SetTag("error.type", "errno");
 Adding any of the `error.msg`, `error.stack`, or `error.type` tags sets
 `error` to the value `true`.
 
-To unset an error on a span, set the "error" tag to a false value. This also has
-removing any previously set `error.msg`, `error.stack`, or
-`error.type` tags.
+To unset an error on a span, set the `error` tag to value `false`, which removes
+any previously set `error.msg`, `error.stack`, or `error.type` tags.
 
 ```cpp
 // Clear any error information associated with this span.
