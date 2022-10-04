@@ -13,7 +13,6 @@ has_logo: true
 integration_title: uWSGI
 is_public: true
 public_title: Integration Datadog-uWSGI
-ddtype: check
 git_integration_title: uwsgi
 supported_os:
 - linux

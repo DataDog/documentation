@@ -8,7 +8,7 @@ Architecture:
 - local/**/*
 - layouts/**/*
 - config/**/*
-- src/**/*
+- assets/**/*
 
 $1:
 - content/en/([^/]+)/.*

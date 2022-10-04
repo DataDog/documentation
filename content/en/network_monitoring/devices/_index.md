@@ -21,6 +21,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/network-device-monitoring/'
       tag: 'Blog'
       text: 'Introducing Network Device Monitoring'
+    - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
+      tag: 'Blog'
+      text: 'Monitor and diagnose network performance issues with SNMP Traps'
 ---
 
 ## Overview

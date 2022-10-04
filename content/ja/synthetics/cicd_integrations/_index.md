@@ -10,18 +10,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
   tag: ブログ
   text: シフトレフトテストのベストプラクティス
-- link: https://learn.datadoghq.com/enrol/index.php?id=37
+- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
   tag: ラーニングセンター
   text: CI/CD パイプラインで Synthetic テストを実行する方法を学ぶ
 - link: /synthetics/api_tests/
   tag: ドキュメント
-  text: APIテストの設定
+  text: API テストを構成する方法を学ぶ
 - link: /synthetics/multistep
   tag: ドキュメント
-  text: マルチステップ API テストの構成
+  text: マルチステップ API テストを構成する方法を学ぶ
 - link: /synthetics/browser_tests/
   tag: ドキュメント
-  text: ブラウザテストの設定
+  text: ブラウザテストを構成する方法を学ぶ
 kind: documentation
 title: Synthetics と CI/CD
 ---
@@ -40,9 +40,11 @@ Synthetics と CI/CD を使用して、継続的デリバリー (CD) プロセ�
 
 ## インテグレーション
 
-{{< whatsnext desc="Synthetics と CI/CD を使えば、Synthetic テストをお好みの CI プラットフォームプロバイダーで実行することができます。" >}}
+{{< whatsnext desc="Synthetics と CI/CD を使えば、Synthetic テストをお好みの CI プラットフォームプロバイダーで実行することができます。以下のインテグレーションについては、ドキュメントを参照してください。" >}}
+    {{< nextlink href="synthetics/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="synthetics/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
 {{< /whatsnext >}}
 

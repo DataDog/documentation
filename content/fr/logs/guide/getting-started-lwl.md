@@ -1,25 +1,26 @@
 ---
-title: Guide de la fonctionnalité Logging without Limits™
-kind: guide
 further_reading:
-  - link: /logs/explorer/
-    tag: Documentation
-    text: "En savoir plus sur la vue Log\_Explorer"
-  - link: /logs/explorer/#patterns
-    tag: Documentation
-    text: Se familiariser avec la vue Log Pattern
-  - link: /logs/live_tail/
-    tag: Documentation
-    text: Explorer la fonctionnalité Live Tail
-  - link: /logs/logs_to_metrics/
-    tag: Documentation
-    text: Découvrir comment générer des métriques à partir de logs ingérés
+- link: /logs/explorer/
+  tag: Documentation
+  text: En savoir plus sur la vue Log Explorer
+- link: /logs/explorer/#patterns
+  tag: Documentation
+  text: Se familiariser avec la vue Log Pattern
+- link: /logs/live_tail/
+  tag: Documentation
+  text: Explorer la fonctionnalité Live Tail
+- link: /logs/logs_to_metrics/
+  tag: Documentation
+  text: Découvrir comment générer des métriques à partir de logs ingérés
+kind: guide
+title: Guide de la fonctionnalité Logging without Limits™
 ---
+
 {{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
 
 ## Présentation
 
-Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, vos logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits™][1] de Datadog vous offre une flexibilité accrue en séparant [le processus d'ingestion des logs du processus d'indexation][2].
+Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, ces logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits™][1] vous offre une flexibilité accrue en séparant [le processus d'ingestion du processus indexation des logs][2]. 
 
 Ce guide identifie les principaux composants de la fonctionnalité Logging without Limits™ tels que les [patterns](#2-identifier-les-patterns-de-journalisation-volumineuse), les [filtres d'exclusion](#3-creer-un-filtre-d-exclusion-de-pattern-de-log), les [métriques custom basées sur des logs](#4-generer-des-metriques-pour-effectuer-un-suivi-des-logs-exclus) et les [monitors](#creer-un-monitor-de-detection-d-anomalie), qui peuvent améliorer l'organisation de votre vue Log Explorer et optimiser la surveillance de vos KPI au fil du temps.
 
@@ -59,22 +60,17 @@ Le volet de contexte des patterns répertorie toutes les instances (tous les év
 **Pour créer un filtre d'exclusion** :
 
 1. Cliquez sur un pattern depuis la liste des patterns.
-2. Cliquez sur le bouton **View All** dans le coin supérieur droit pour générer automatiquement la requête de recherche associée au pattern.
-3. Sélectionnez l'option `</>` à droite de la requête de recherche pour copier cette dernière.
+2. Cliquez sur le bouton **Add Exclusion Filter** en haut à droite. Ce bouton est désactivé si moins de la moitié des logs correspondant à ce pattern sont envoyés dans un même index.
+3. La page Log Index Configuration s'ouvre dans un nouvel onglet, avec un filtre d'exclusion pré-rempli pour l'index où la majorité des logs correspondant à ce pattern sont envoyés.
+4. Le filtre d'exclusion inclut une requête de recherche générée automatiquement pour le pattern. Saisissez le nom du filtre et définissez un pourcentage d'exclusion, puis enregistrez le nouveau filtre d'exclusion.
 
-{{< img src="logs/guide/getting-started-lwl/pattern_view.mp4" alt="Vue Pattern" video=true style="width:100%;">}}
-
-4. Accédez à la page **Configuration**, sous Logs, dans le menu principal. Sélectionnez **Indexes** et cliquez sur l'index correspondant. Les informations relatives à l'ajout d'un filtre d'exclusion sont automatiquement remplies.
-5. Sélectionnez **Add an Exclusion Filter**.
-6. Indiquez le nom du filtre, collez la requête de recherche afin de définir la requête d'exclusion, puis définissez un pourcentage d'exclusion.
-
-{{< img src="logs/guide/getting-started-lwl/exclusion_filter.mp4" alt="Filtre d'exclusion" video=true style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/exclusion_filter_new.mp4" alt="Filtre d'exclusion" video=true style="width:100%;">}}
 
 **Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion. 
 
-Dans cet exemple, le pattern `Updating recommendations with customer_id=* & url=shops/*/*` du statut de service `INFO` est exclu à l'aide d'un filtre exclusion. En supprimant les patterns de journalisation volumineuse comme celui-ci de votre vue Log Explorer, vous pouvez réduire les données parasites et identifier vos problèmes plus facilement. Sachez cependant que ces logs sont **uniquement** retirés de la vue Log Explorer. Ils sont toujours ingérés et consultables dans la vue [Live Tail][5]. Ils peuvent également être envoyés vers les [archives de logs][6] ou utilisés pour [générer des métriques][7].
+Dans cet exemple, le pattern `response code from ses 200` pour le service `email-api-py` et le statut `INFO` est exclu à l'aide d'un filtre exclusion. En supprimant les patterns de journalisation volumineuse comme celui-ci de votre vue Log Explorer, vous pourrez réduire les données parasites et identifier vos problèmes plus facilement. Sachez cependant que ces logs sont **uniquement** retirés de l'indexation. Ils sont toujours ingérés et consultables dans la vue [Live Tail][5]. Ils peuvent également être envoyés vers les [archives de logs][6] ou utilisés pour [générer des métriques][7].
 
-{{< img src="logs/guide/getting-started-lwl/live_tail.jpg" alt="Live Tail" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/live_tail.png" alt="Page Live Tail affichant une liste de logs et le menu déroulant des intervalles" style="width:100%;">}}
 
 Vous pouvez désactiver à tout moment un filtre d'exclusion à l'aide du bouton situé sur sa droite. Pour modifier ou supprimer un filtre, il vous suffit de passer votre curseur dessus pour afficher les options pertinentes.
 

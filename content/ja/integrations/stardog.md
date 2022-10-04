@@ -7,7 +7,6 @@ assets:
 categories:
 - data store
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stardog/README.md
 display_name: Stardog
@@ -24,7 +23,7 @@ manifest_version: 1.0.0
 metric_prefix: stardog.
 metric_to_check: stardog.dbms.memory.native.max
 name: stardog
-public_title: Datadog-Stardog インテグレーション
+public_title: Stardog
 short_description: Datadog 用 Stardog データコレクター。
 support: contrib
 supported_os:

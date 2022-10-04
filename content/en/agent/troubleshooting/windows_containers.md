@@ -71,8 +71,8 @@ Use the following `values.yaml` file to configure communication between Agents d
 targetSystem: windows
 existingClusterAgent:
   join: true
-  serviceName: "<EXISTING_DCA_SECRET_NAME>" # from the first Datadog Helm chart
-  tokenSecretName: "<EXISTING_DCA_SERVICE_NAME>" # from the first Datadog Helm chart
+  serviceName: "<EXISTING_DCA_SERVICE_NAME>" # from the first Datadog Helm chart
+  tokenSecretName: "<EXISTING_DCA_SECRET_NAME>" # from the first Datadog Helm chart
 
 # Disable datadogMetrics deployment since it should have been already deployed with the first chart.
 datadog-crds:

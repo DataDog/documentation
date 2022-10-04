@@ -29,7 +29,7 @@ Analytics monitors allow you to visualize APM data over time and set up alerts b
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
 
-Choose between an **APM Metrics** or **Analytics** monitor:
+Choose between an **APM Metrics** or a **Trace Analytics** monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
@@ -66,14 +66,14 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 For detailed instructions on the advanced alert options (no data, evaluation delay, etc.), see the [Monitor configuration][4] page. For the metric-specific option full data window, see the [Metric monitor][5] page.
 
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[2]: /tracing/visualization/service/
-[3]: /tracing/visualization/resource/
+[2]: /tracing/services/service_page/
+[3]: /tracing/services/resource_page/
 [4]: /monitors/create/configuration/#advanced-alert-conditions
 [5]: /monitors/create/types/metric/#data-window
 {{% /tab %}}
-{{% tab "Analytics" %}}
+{{% tab "Trace Analytics" %}}
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -94,10 +94,14 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 ### Select alert conditions
 
-* Trigger when the metric is `above` or `above or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
+* Trigger when the query result is `above`, `above or equal to`, `below`, or `below or equal to`.
+* The threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 5 minutes and 48 hours.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
+
+#### No data and below alerts
+
+To receive a notification when a group matching a specific query stops sending spans, set the condition to below `1`. This notifies you when no spans match the monitor query in the defined evaluation period for the group.
 
 #### Advanced alert conditions
 
@@ -106,7 +110,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [1]: /tracing/trace_explorer/query_syntax/#search-bar
 [2]: /tracing/trace_explorer/query_syntax/#facet-search
 [3]: /tracing/trace_explorer/query_syntax/#numerical-values
-[4]: /tracing/visualization/#indexed-span
+[4]: /tracing/glossary/#indexed-span
 [5]: /monitors/create/configuration/#advanced-alert-conditions
 {{% /tab %}}
 {{< /tabs >}}

@@ -9,8 +9,6 @@ title: SQL Server の設定
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Database Monitoring for SQL Server 用データベースモニタリングはプライベートベータ版です。ベータ版へのアクセスリクエストは、カスタマーサクセスマネージャーについては、お問い合わせください。</div>
-
 ### サポートされる SQL Server バージョン
 
 |                 | セルフホスト | Azure | AWS RDS | Google Cloud SQL |

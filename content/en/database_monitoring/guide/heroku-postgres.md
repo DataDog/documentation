@@ -45,14 +45,21 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 Create the following function in the database:
 
 ```
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -60,7 +67,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-Finally, we configure the Datadog agent to enable the Postgres check using the new credentials: 
+Finally, we configure the Datadog agent to enable the Postgres check using the new credentials:
 
 ```shell
 # Ensure that you are in the root directory of your application
@@ -104,7 +111,7 @@ fi
 Deploy to Heroku:
 
 ```shell
-# Deploy to Heroku 
+# Deploy to Heroku
 git add .
 git commit -m "Enable postgres integration"
 git push heroku main

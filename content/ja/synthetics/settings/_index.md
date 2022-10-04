@@ -9,9 +9,15 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: ドキュメント
   text: ブラウザーテストの設定
+- link: /synthetics/private_locations/
+  tag: ドキュメント
+  text: プライベートロケーションを作成
 - link: /synthetics/identify_synthetics_bots/
   tag: ドキュメント
   text: Synthetic ボットの特定
+- link: /synthetics/guide/explore-rum-through-synthetics/
+  tag: ドキュメント
+  text: Synthetics で RUM とセッションリプレイを確認する
 - link: /synthetics/guide/browser-tests-totp
   tag: ドキュメント
   text: ブラウザテストにおける多要素認証 (MFA) 用 TOTP
@@ -22,11 +28,18 @@ kind: documentation
 title: Synthetic モニタリングの設定
 ---
 
-[Synthetic モニタリングの設定ページ][1]で、次の設定を調整できます。
+## 概要
 
+[Synthetic モニタリングの設定ページ][1]で、次のトピックにアクセスして制御することができます。
+
+* [プライベートロケーション](#private-locations)
 * [グローバル変数](#global-variables)
-* [プライベートロケーション][2]
 * [デフォルトの設定](#default-settings)
+* [インテグレーション設定](#integration-settings)
+
+## プライベートロケーション
+
+詳しくは、[プライベートロケーションから Synthetic テストを実行する][2]をご覧ください。
 
 ## グローバル変数
 
@@ -102,7 +115,7 @@ TOTP を生成しテストで使用するには、シークレットキーを入
 
 {{< /tabs >}}
 
-グローバル変数を作成したら、対象のフィールドに `{{` を入力してグローバル変数を選択することですべての Synthetic テストで使用可能です。詳しくは、[HTTP テスト][7]、[マルチステップ API テスト][8]、[ブラウザテストのコンフィギュレーション][9]、[手順に関するドキュメント][10]をご参照ください。
+グローバル変数を作成したら、すべての Synthetic テストで使用可能です。グローバル変数をテストにインポートするには、*+ Variables* をクリックし、対象のフィールドに `{{` を入力してグローバル変数を選択します。詳しくは、[HTTP テスト][7]、[マルチステップ API テスト][8]、[ブラウザテストのコンフィギュレーション][9]、[手順に関するドキュメント][10]をご参照ください。
 
 ### アクセス許可
 
@@ -120,35 +133,35 @@ TOTP を生成しテストで使用するには、シークレットキーを入
 
 ## デフォルトの設定
 
+{{< img src="synthetics/settings/default_settings.png" alt="デフォルト設定ページ" style="width:100%;">}}
+
+### 強制タグ
+
+<div class="alert alert-warning">
+タグの実行は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中で、この機能をご希望の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
+</div>
+
+**Enforce tags for usage attributions on all tests** (すべてのテストにおいて、使用量属性のためのタグを強制する) をクリックすると、Synthetics テストで選択したタグを強制的に使用することができます。
+
+サービス、アプリケーション、チームごとにコストと使用量属性を分解することができます。使用量属性タグの伝搬には最大で 15 分かかることがあります。詳しくは、[使用量属性][14]を参照してください。
+
+タグの強制が完了したら、**Save Enforced Tags** をクリックします。
+
 ### デフォルトの場所
 
 [API テスト][3]、[マルチステップ API テスト][4]、または[ブラウザテスト][5]の詳細にデフォルトの場所を選択します。
 
 Datadog で管理されるすべての場所と、ご使用のアカウントでセットアップしたプライベートロケーションから選択できます。
 
-### ブラウザテスト用の APM インテグレーション
+ロケーションの選択が完了したら、**Save Default Locations** をクリックします。
 
-APM インテグレーションのヘッダーを URL に追加することを許可します。Datadog APM インテグレーションのヘッダーでは、APM を使用して Datadog をブラウザテストにリンクさせることができます。
+### デフォルトのブラウザとデバイス
 
-このセクションで URL を追加して、APM ヘッダーの送信先となるエンドポイントを定義します。
+[ブラウザテスト][5]の詳細で、デフォルトのブラウザとデバイスの種類を選択します。
 
-`*` を使用すると幅広いドメイン名を許容することができます。たとえば、`https://*.datadoghq.com/*` を追加すると、`https://datadoghq.com/` のすべてが許可されます。
+ブラウザは、Google Chrome、Firefox、Microsoft Edge から選択できます。デバイスは、大型のノートパソコン、タブレット、小型のモバイルデバイスから選択できます。
 
-エンドポイントがトレースおよび許可されていれば、ブラウザテストの結果は対応するトレースに自動的に結び付けられます。
-
-### タグの実行
-
-<div class="alert alert-warning">
-タグの実行は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中で、この機能をご希望の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
-</div>
-
-Synthetics テストで、選択したタグの実行を可能にします。サービス、アプリケーション、チーム別に費用と使用を分割できます。
-
-タグの実行を有効にするには、**Enforce tags for usage attributions on all tests** をクリックします。
-
-{{< img src="synthetics/settings/tag_enforcement.png" alt="すべてのテストで使用属性のタグを実行" style="width:100%;">}}
-
-詳細は、[使用属性][14]を参照してください。
+ブラウザとデバイスの選択が完了したら、**Save Default Browsers &amp; Devices** をクリックします。
 
 ### アクセス許可
 
@@ -156,6 +169,33 @@ Synthetics テストで、選択したタグの実行を可能にします。サ
 
 [カスタムロール機能][12]を使用している場合は、`synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
 
+## インテグレーション設定
+
+{{< img src="synthetics/settings/integration_settings.png" alt="インテグレーション設定ページ" style="width:100%;">}}
+
+### ブラウザテスト用の APM インテグレーション
+
+APM インテグレーションのヘッダーをその URL に追加することを許可します。Datadog APM インテグレーションのヘッダーでは、APM を使用して Datadog をブラウザテストにリンクさせることができます。
+
+APM ヘッダーを送信するエンドポイントを定義するには、**Value** フィールドに URL を入力します。エンドポイントがトレースされ、許可されている場合、ブラウザテストの結果は自動的にその対応するトレースに結びつけられます。
+
+`*` を使用すると幅広いドメイン名を許容することができます。たとえば、`https://*.datadoghq.com/*` を追加すると、`https://datadoghq.com/` のすべてが許可されます。
+
+URL の追加が完了したら、**Save APM Integration Settings** をクリックします。
+
+### Synthetic データ収集と RUM アプリケーション
+
+Datadog がテスト実行から RUM データを収集することを許可するには、**Enable Synthetic RUM data collection** をクリックします。無効にすると、ブラウザテストレコーダーで RUM 設定を編集することができなくなります。データ収集の有効化が完了したら、**Save RUM Data Collection** をクリックします。
+
+ブラウザテストデータを収集する RUM アプリケーションを **Default Application** ドロップダウンメニューから選択します。デフォルトアプリケーションの指定が完了したら、**Save RUM Data Applications** をクリックします。
+
+詳しくは、[RUM とセッションリプレイの確認][15]をご覧ください。
+
+### アクセス許可
+
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが Synthetic Monitoring **Integration Settings** ページにアクセスできます。**Integration Settings** ページにアクセスするには、ユーザーをこの 2 つの[デフォルトの役割][11]のいずれかにアップグレードします。
+
+[カスタムロール機能][12]を使用している場合は、`synthetics_default_settings_read` および `synthetics_default_settings_write` 権限を含むカスタムロールにユーザーを追加します。
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -169,8 +209,9 @@ Synthetics テストで、選択したタグの実行を可能にします。サ
 [7]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#use-variables
 [8]: /ja/synthetics/multistep?tab=requestoptions#use-variables
 [9]: /ja/synthetics/browser_tests/?tab=requestoptions#use-global-variables
-[10]: /ja/synthetics/browser_tests/actions#using-variables
+[10]: /ja/synthetics/browser_tests/actions#use-variables
 [11]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /ja/account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /ja/account_management/rbac/#create-a-custom-role
 [14]: /ja/account_management/billing/usage_attribution
+[15]: /ja/synthetics/guide/explore-rum-through-synthetics/

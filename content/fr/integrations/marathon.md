@@ -12,20 +12,21 @@ assets:
     marathon_processes: assets/saved_views/marathon_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - configuration & deployment
-  - containers
-  - log collection
-  - autodiscovery
+- configuration & deployment
+- containers
+- log collection
+- autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/marathon/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/marathon/README.md
 display_name: Marathon
 draft: false
 git_integration_title: marathon
 guid: 6af353ff-ecca-420a-82c0-a0e84cf0a35e
 integration_id: marathon
 integration_title: Marathon
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,14 +35,18 @@ metric_prefix: marathon.
 metric_to_check: marathon.apps
 name: marathon
 process_signatures:
-  - start --master mesos marathon
+- start --master mesos marathon
 public_title: Intégration Datadog/Marathon
-short_description: "Suivez vos métriques d'application\_: mémoire et espace disque requis, nombre d'instances et plus encore."
+short_description: 'Suivez vos métriques d''application : mémoire et espace disque
+  requis, nombre d''instances et plus encore.'
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## Présentation
 
 Le check Marathon de l'Agent vous permet de :
@@ -53,11 +58,11 @@ Le check Marathon de l'Agent vous permet de :
 
 ### Installation
 
-Le check Marathon est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre master Marathon.
+Le check Marathon est inclus avec le package de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -169,7 +174,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                                 |
 | -------------- | ----------------------------------------------------- |
@@ -195,13 +200,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check Marathon n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "marathon" >}}
 
-**marathon.can_connect**:<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Marathon pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent

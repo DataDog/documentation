@@ -29,13 +29,13 @@ Datadog に送信したくないトレースのセットをプログラムで特
 
 フィルタータグオプションでは、文字列の完全一致が必要です。正規表現により除外したい場合は、「[リソースに基づいて無視する](#ignoring-based-on-resources)」を参照してください。
 
-環境変数を使って、必要とするスパンタグや拒否するスパンタグを指定することができます。
+環境変数のキーと値をカンマで区切ったリストを使って、必要とするスパンタグや拒否するスパンタグを指定することができます。
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。
+: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REQUIRE=key1:value1,key2:value2` です。
 
 `DD_APM_FILTER_TAGS_REJECT`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。
+: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT=key1:value1,key2:value2` です。
 
 または、Agent のコンフィギュレーションファイルでこれらを設定することもできます。
 
@@ -43,7 +43,7 @@ Datadog に送信したくないトレースのセットをプログラムで特
 apm_config:
   filter_tags:
     require: ["db:sql", "db.instance:mysql"]
-    reject: ["outcome:success"]
+    reject: ["outcome:success", "key2:value2"]
 {{< /code-block >}}
 
 たとえば、`http.url` がこのエンドポイントに一致するヘルスチェックを無視するには次のようにします。
@@ -101,6 +101,13 @@ apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+apm_config:
+  ignore_resources: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
@@ -112,6 +119,14 @@ Datadog Agent コンテナの環境変数のリストに、以下の例のよう
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 {{< /code-block >}}
 
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+    environment:
+      // その他の Datadog Agent の環境変数
+      - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
+{{< /code-block >}}
+
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
 {{% /tab %}}
 {{% tab "Docker run" %}}
@@ -121,6 +136,7 @@ Datadog Agent をスピンアップするための docker run コマンドに、
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -129,6 +145,12 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
+{{< /code-block >}}
+
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+              -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -175,6 +197,13 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Kubernetes Helm" %}}
 
@@ -187,6 +216,13 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
         - name: DD_APM_IGNORE_RESOURCES
           value: Api::HealthchecksController#index$
 
+{{< /code-block >}}
+
+複数の値の場合
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
 代わりに、`helm install` コマンドで `agents.containers.traceAgent.env` を設定することもできます。　
@@ -231,18 +267,18 @@ AWS ECS を使用している場合 (EC2など) は、Datadog Agent のコンテ
 
 {{< programming-lang lang="ruby" >}}
 
-Ruby トレーサーには、特定の条件を満たすトレースを削除する後処理パイプラインがあります。詳しい情報や例は[トレースの後処理][1]を参照してください。
+Ruby トレーサーには、特定の条件を満たすトレースを除去する後処理パイプラインがあります。詳しい情報や例は[トレースの後処理][1]を参照してください。
 
-たとえば、リソース名が `Api::HealthchecksController#index` である場合、そのリソース名を含むトレースを削除するために `trace.delete_if` メソッドを使用します。このフィルターは、[スパンオブジェクト][2]で利用可能な他のメタデータを照合するためにも使用できます。
+たとえば、リソース名が `Api::HealthchecksController#index` である場合、そのリソース名を含むトレースを除去するために `Datadog::Tracing::Pipeline::SpanFilter` クラスを使用します。このフィルターは、[スパンオブジェクト][2]で利用可能な他のメタデータを照合するためにも使用できます。
 
 ```
-Datadog::Tracing::Pipeline.before_flush do |trace|
-  trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
-end
+Datadog::Tracing.before_flush(
+   Datadog::Tracing::Pipeline::SpanFilter.new { |span| span.resource =~ /Api::HealthchecksController#index/ }
+)
 ```
 
-[1]: /ja/tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /ja/tracing/setup_overview/setup/ruby/#manual-instrumentation-2
+[1]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -312,7 +348,7 @@ public class GreetingController {
 }
 ```
 
-[1]: /ja/tracing/setup_overview/custom_instrumentation/java/#extending-tracers
+[1]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -320,5 +356,5 @@ public class GreetingController {
 
 [1]: /ja/help/
 [2]: /ja/tracing/guide/add_span_md_and_graph_it/
-[3]: /ja/tracing/setup_overview/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[3]: /ja/tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
 [4]: https://golang.org/pkg/regexp/

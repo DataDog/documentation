@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Serverless Monitoring
+title: Getting Started with AWS Lambda Serverless Monitoring
 kind: documentation
 
 further_reading:
@@ -10,14 +10,14 @@ further_reading:
 
 ## Overview
 
-_Serverless_ is a model where developers build and run applications and services using a cloud provider, rather than managing infrastructure themselves. Datadog [Serverless Monitoring][10] collects metrics, logs, and traces from your serverless infrastructure, enabling you to monitor your application's health and performance.
+_Serverless_ is a model where developers build and run applications and services using a cloud provider, rather than managing infrastructure themselves. Datadog [Serverless Monitoring][1] collects metrics, logs, and traces from your serverless infrastructure, enabling you to monitor your application's health and performance.
 
-This guide makes use of a serverless [sample app][1] that you can launch with one click. This app has Serverless Monitoring preconfigured. Follow this guide to see how you might troubleshoot a problem in your sample app, and what kinds of visibility Serverless Monitoring can provide.
+This guide makes use of a serverless [sample app][2] that you can launch with one click. This app has Serverless Monitoring preconfigured. Follow this guide to see how you might troubleshoot a problem in your sample app, and what kinds of visibility Serverless Monitoring can provide.
 
 ### Install the sample app
 
-1. [Launch the CloudFormation Stack][9]. This link brings you to a **Create stack** page in CloudFormation.
-2. Enter your [Datadog API key][12] and [Datadog site][13] ({{< region-param key="dd_site" code="true" >}}). 
+1. [Launch the CloudFormation Stack][3]. This link brings you to a **Create stack** page in CloudFormation.
+2. Enter your [Datadog API key][4] and [Datadog site][5] ({{< region-param key="dd_site" code="true" >}}). 
 
   {{< img src="getting_started/serverless/aws_create_stack.png" alt="Close-up of two functions" style="width:80%;">}}
 
@@ -48,7 +48,7 @@ def handler(event, context):
     }
 ```
 
-You can [see your sample app functions in Serverless View][11].
+You can [see your sample app functions in Serverless View][6].
 
 {{< img src="getting_started/serverless/dd_serverless_view.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
 
@@ -61,9 +61,9 @@ If you have invoked your sample app at least once, you will see `datadog-sample-
 {{< img src="getting_started/serverless/functions_view.png" alt="Close-up of two functions" style="width:80%;">}}
 
 ### Serverless Insights
-In Serverless View, the rightmost column is titled **Insights**. Datadog automatically highlights potential issues in your serverless applications, such as [high errors][3] and [high duration][4]; these issues appear in the Insights column.
+In Serverless View, the rightmost column is titled **Insights**. Datadog automatically highlights potential issues in your serverless applications, such as [high errors][7] and [high duration][8]; these issues appear in the Insights column.
 
-For your serverless sample application, Datadog has likely detected a [cold start][5]. Cold starts occur when your serverless application receives a sudden increase in traffic. This can happen if the function was previously receiving a relatively constant number of requests and abruptly started receiving more—or, as in this case, when the function was previously inactive and has been invoked for the first time.
+For your serverless sample application, Datadog has likely detected a [cold start][9]. Cold starts occur when your serverless application receives a sudden increase in traffic. This can happen if the function was previously receiving a relatively constant number of requests and abruptly started receiving more—or, as in this case, when the function was previously inactive and has been invoked for the first time.
 
 ## Create an error to investigate
 
@@ -90,9 +90,9 @@ Click on your function to see more details regarding invocations and recent depl
 
 {{< img src="getting_started/serverless/details_error.png" alt="Close-up of two functions" style="width:80%;">}}
 
-The detailed view, as shown above, contains three graphs. You can set these to display any available metric; by default, they show three [enhanced Lambda metrics][7]: invocations, errors, and duration. 
+The detailed view, as shown above, contains three graphs. You can set these to display any available metric; by default, they show three [enhanced Lambda metrics][10]: invocations, errors, and duration. 
 
-Datadog generates enhanced Lambda metrics out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags. You can also view the default [enhanced Lambda metrics dashboard][8].
+Datadog generates enhanced Lambda metrics out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags. You can also view the default [enhanced Lambda metrics dashboard][11].
 
 
 ### Invocations
@@ -127,19 +127,18 @@ The serverless sample app has logs enabled by default. You can see each function
 
 {{< img src="getting_started/serverless/dd_logs_view.png" alt="Close-up of two functions" style="width:80%;">}}
 
-You can filter these logs to only see errors, or view them in the [Log Explorer][6].
+You can filter these logs to only see errors, or view them in the [Log Explorer][12].
 
 
-[1]: https://github.com/DataDog/serverless-sample-app
-[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension/#tagging
-[3]: https://docs.datadoghq.com/serverless/guide/insights/#high-errors
-[4]: https://docs.datadoghq.com/serverless/guide/insights/#high-duration
-[5]: https://docs.datadoghq.com/serverless/guide/insights/#cold-starts
-[6]: https://docs.datadoghq.com/logs/explorer/
-[7]: https://docs.datadoghq.com/serverless/enhanced_lambda_metrics
-[8]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
-[9]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
-[10]: /serverless
-[11]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
-[12]: https://app.datadoghq.com/organization-settings/api-keys
-[13]: https://docs.datadoghq.com/getting_started/site
+[1]: /serverless
+[2]: https://github.com/DataDog/serverless-sample-app
+[3]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: https://docs.datadoghq.com/getting_started/site
+[6]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
+[7]: https://docs.datadoghq.com/serverless/guide/insights/#high-errors
+[8]: https://docs.datadoghq.com/serverless/guide/insights/#high-duration
+[9]: https://docs.datadoghq.com/serverless/guide/insights/#cold-starts
+[10]: https://docs.datadoghq.com/serverless/enhanced_lambda_metrics
+[11]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
+[12]: https://docs.datadoghq.com/logs/explorer/

@@ -1,0 +1,46 @@
+{
+  "title": "Example-Create_a_distribution_widget_using_a_histogram_request_containing_a_formulas_and_functions_metrics_q",
+  "widgets": [
+    {
+      "definition": {
+        "title": "Metrics HOP",
+        "title_size": "16",
+        "title_align": "left",
+        "show_legend": false,
+        "type": "distribution",
+        "xaxis": {
+          "max": "auto",
+          "include_zero": true,
+          "scale": "linear",
+          "min": "auto"
+        },
+        "yaxis": {
+          "max": "auto",
+          "include_zero": true,
+          "scale": "linear",
+          "min": "auto"
+        },
+        "requests": [
+          {
+            "query": {
+              "query": "histogram:trace.Load{*}",
+              "data_source": "metrics",
+              "name": "query1"
+            },
+            "request_type": "histogram",
+            "style": {
+              "palette": "dog_classic"
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 2
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

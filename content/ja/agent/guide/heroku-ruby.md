@@ -3,6 +3,9 @@ further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: ドキュメント
   text: Heroku ビルドパック
+- link: /logs/guide/collect-heroku-logs
+  tag: ドキュメント
+  text: Heroku ログの収集
 kind: ガイド
 title: Datadog で Heroku の Ruby on Rails アプリケーションをインスツルメント
 ---
@@ -294,7 +297,7 @@ instances:
 
 # Heroku アプリケーションの環境変数を使用して、Redis の構成を上記の設定から更新します
 if [ -n "$REDIS_URL" ]; then
-  REDISREGEX='redis://([^:]*):([^@]+)@([^:]+):([^/]+)$'
+  REDISREGEX='rediss?://([^:]*):([^@]+)@([^:]+):([^/]+)$'
   if [[ $REDIS_URL =~ $REDISREGEX ]]; then
     sed -i "s/<YOUR_REDIS_HOST>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
     sed -i "s/<YOUR_REDIS_PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
@@ -621,17 +624,15 @@ APM Agent
 {{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Datadog のサービスリストビュー" >}}
 {{< img src="agent/guide/heroku_ruby/service_page.png" alt="Datadog の Ruby アプリケーションサービスビュー" >}}
 
-## ログ
+## ログ管理
 
-次に、ログを有効化します。アプリケーションから Datadog へログを送信する方法には、2 種類のオプション（Heroku ログドレインをセットアップまたは Datadog Log Agent ディレクトリを使用）があります。それぞれの方法に利点と欠点があるのですが、両方を設定することも可能です。
+次に、Heroku ログドレインの設定により、ログを有効にします。
 
-ログドレインの主な欠点は、すべてのログが同じ `ddsource` (通常は `heroku` ) から Datadog に届くため、(Heroku 以外の) インテグレーションを使ったログの自動パースが行われないことです。
-
-Datadog Agent を通じてログを送信することの難点は、Heroku システムログおよびルーターログが送信されないことです（ログドレインを使用すれば、これらを送信できます）。
+ログドレインを使用する場合、すべてのログが同じ `ddsource` (通常は `heroku` ) から Datadog に届くため、Heroku 以外のインテグレーションを使ったログの自動パースが行われません。
 
 ### Rails のログを生成する
 
-Rails のログを構成するために、Datadog は lograge の使用を推奨しています。このサンプルアプリケーションでは、ログとトレースが相関するように設定します。
+Rails のログを構成するために、Datadog は Lograge の使用を推奨しています。このサンプルアプリケーションでは、ログとトレースが相関するように設定します。
 
 ```shell
 # アプリケーションコードのあるフォルダーにいることを確認
@@ -650,9 +651,7 @@ gem 'lograge'
 bundle install
 ```
 
-Lograge を構成します。新しいファイル `config/initializers/lograge.rb` を作成します。
-
-Heroku のログドレインを使用して Datadog にログを送信している場合は、そのファイルに以下の内容を追加します。
+Lograge を構成するには、`config/initializers/lograge.rb` という名前のファイルを作成し、以下を追加します。
 
 ```ruby
 Rails.application.configure do
@@ -689,43 +688,6 @@ Rails.application.configure do
 end
 ```
 
-また、Datadog Agent を使用して Ruby アプリケーションのログを送信する場合は、代わりに以下の内容を追加します。
-
-```ruby
-Rails.application.configure do
-  # Lograge 構成
-  config.lograge.enabled = true
-
-  # JSON 形式でログを記録することを指定します
-  config.lograge.formatter = Lograge::Formatters::Json.new
-
-  ## ログのカラーリングを無効にします
-  config.colorize_logging = false
-
-  # 専用ファイルへのログ出力
-  config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
-
-  config.lograge.custom_options = lambda do |event|
-    # 現在のスレッドのトレース情報を取得します
-    correlation = Datadog::Tracing.correlation
-
-    {
-      # ログ出力にタグとして ID を追加します
-      :dd => {
-        # SON シリアライズ時に精度を保つため、大きな数値には文字列を使用します
-        :trace_id => correlation.trace_id.to_s,
-        :span_id => correlation.span_id.to_s,
-        :env => correlation.env.to_s,
-        :service => correlation.service.to_s,
-        :version => correlation.version.to_s
-      },
-      :ddsource => ["ruby"],
-      :params => event.payload[:params].reject { |k| %w(controller action).include? k }
-    }
-  end
-end
-```
-
 Heroku へのデプロイ:
 
 ```shell
@@ -737,13 +699,9 @@ git push heroku main
 
 ### Heroku ログドレインのセットアップ
 
-Heroku には、アプリケーションで実行しているすべての dynos からログを収集し Heroku へ送信するネイティブのログルーターがあります。ログには、アプリケーションログ、Heroku ルーターログ、Heroku システム dynos ログが含まれます。
+Heroku にはログドレインというネイティブのログルーターがあり、アプリケーションで動作しているすべてのダイノからログを収集し、Heroku に送信しています。このログには、アプリケーションのログ、Heroku ルーターのログ、Heroku システムのダイノのログが含まれます。これらのログを Datadog にルーティングするようにログドレインを設定することができます。ログドレインは、`ddsource=heroku` から Datadog に Heroku システムログを送信します。
 
 {{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Heroku ログビュー" >}}
-
-Datadog へログを送信する 1 つ目の方法は、Heroku ログドレインをセットアップし、Heroku で受信した同じログを別のプラットフォームへルーティングする方法です。
-
-ログドレインを設定するメリットとして、dyno から直接は不可能な Heroku のシステムログを Datadog に受信することが挙げられます。主なデメリットは、すべてのログが `ddsource=heroku` から来るので、Datadog で Heroku ログパイプラインのみを有効にすることです。
 
 Heroku ログドレインをセットアップすると、dyno システムメトリクス（CPU、メモリ）を Datadog へ送ることも可能になります。
 
@@ -786,7 +744,7 @@ Logs -> Generate Metrics へ移動し「+ New Metric」ボタンをクリック�
 
 クエリを `Source:heroku` として定義し、すべての Heroku ログをフィルタリングして、`Duration` メジャーを選択します。また、このメトリクスを `appname`、`dyno`、`dynotype`、`@http.status_code` 別にグループ化します。ログのパースで生成されたメトリクスはカスタムメトリクスと認識されます。Datadog では、アプリケーションにトラフィックを生成し新しいログエントリの流れを良くすることをおすすめしています。
 
-最後に、新しいメトリクスに名前を付け、Create Metric をクリックします。
+最後に、メトリクスの名前を追加して、**Create Metric** をクリックします。
 
 {{< img src="agent/guide/heroku_ruby/custom_metric.png" alt="新しいログベースのメトリクスの作成" >}}
 
@@ -819,96 +777,15 @@ Logs -> Generate Metrics へ移動し「+ New Metric」ボタンをクリック�
 
 前のセクションで説明したのと同じ手順を実行してメトリクスを生成し、各メジャーを 15 か月間できます。
 
-### Datadog Agent からログを送信
-
-Datadog へログを送信するもう一つのオプションは、Heroku をログルーターとして使用せずに Datadog Agent で直接アプリケーションから Datadog へログを送信する方法です。Datadog Agent を使用してログを送信する利点は、Ruby インテグレーションを使用して自動的にログをパースできることです。
-
-この方法では、アプリケーション（または Rails フレームワーク）により生成されたログのみが送信されます。Heroku システムログおよびルーターログは送信されません（これらのログは、前のセクションで説明したログドレインを使用すると送信できます）。
-
-#### Rails ログの送信
-
-まず、Logs Agent を有効にします。
-
-```shell
-# Datadog で Logs Agent を有効化
-heroku config:add DD_LOGS_ENABLED=true -a $APPNAME
-```
-
-`datadog/conf.d` という名のプロジェクトのルートにフォルダーを作成することで、Datadog Agent をログインパスにポイントします。
-
-```shell
-# アプリケーションコードのあるフォルダにいることを確認
-cd ruby-getting-started
-
-# アプリケーションコード内にコンフィギュレーションアプリケーションコード内にコンフィギュレーションフォルダーを作成
-mkdir -p datadog/conf.d
-```
-
-そのフォルダ内に `ruby.yaml` という名のファイルを、以下の内容で作成します。
-
-```yaml
-logs:
-  - type: file
-    path: "/app/log/production.log"
-    service: ruby
-    source: ruby
-    sourcecategory: sourcecode
-
-```
-
-Heroku へのデプロイ:
-
-```shell
-# Heroku にデプロイ
-git add .
-git commit -m "Datadog log agent configuration"
-git push heroku main
-```
-
-ビルドが完了したら、Datadog Agent のステータスを、[付録セクション](#appendix-getting-the-datadog-agent-status) で説明されているとおりに実行し、Logs Agent が正しく動作しログを Datadog に送信していることを確認します。以下のセクションをご参照ください。
-
-```shell
-[...]
-
-==========
-Logs Agent
-==========
-
-    Sending compressed logs in HTTPS to agent-http-intake.logs.datadoghq.com on port 443
-    BytesSent: 390
-    EncodedBytesSent: 298
-    LogsProcessed: 1
-    LogsSent: 1
-
-  ruby
-  ----
-    - Type: file
-      Path: /app/log/production.log
-      Status: OK
-      Inputs: /app/log/production.log
-      BytesRead: 166
-      Average Latency (ms): 0
-      24h Average Latency (ms): 0
-      Peak Latency (ms): 0
-      24h Peak Latency (ms): 0
-[...]
-```
-
-この出力は、Logs Agent が正しく動作し Ruby アプリケーションログを Datadog に送信していることを示しています。
-
-[Datadog のログ][24]に移動し、`Source:ruby` でフィルタリングすると Rails ログを Datadog に表示できます。
-
-{{< img src="agent/guide/heroku_ruby/ruby_logs.png" alt="アプリケーションにより生成されたログ" >}}
-
 #### ログとトレースの相関
 
-上記の構成方法に従うと、Datadog Agent または Heroku ログドレインから送信される Ruby ログはトレースと相関します。
+上記の構成方法に従うと、Heroku ログドレインから送信されるログはトレースと相関します。
 
 <div class="alert alert-info">
 <strong>注</strong>: Heroku のルーターやシステムログは Heroku が生成しており、トレースと相関させることは不可能です。
 </div>
 
-[ログビュー][25]に移動して、Rails アプリケーションのログにその相関トレースがあることを確認することで、構成が成功したことを確認することができます。
+[ログビュー][24]に移動して、Rails アプリケーションのログにその相関トレースがあることを確認することで、構成が成功したことを確認することができます。
 
 {{< img src="agent/guide/heroku_ruby/log_trace_correlation.png" alt="ログとトレースの相関" >}}
 
@@ -916,7 +793,7 @@ Logs Agent
 
 このガイドでは、サンプル Rails アプリケーションを使用して Heroku にデプロイし、Datadog でインスツルメントしてメトリクス、dyno システムメトリクス、ログ、トレース、そしてインテグレーションの取得をセットアップしました。
 
-他の Datadog インテグレーションとアプリケーションをインスツルメントするには、公式の[インテグレーション用ドキュメント][26]内のコンフィギュレーションファイルを使用して、Postgres のインテグレーションに使用した手順を実行します。
+他の Datadog インテグレーションとアプリケーションをインスツルメントするには、公式の[インテグレーション用ドキュメント][25]内のコンフィギュレーションファイルを使用して、Postgres のインテグレーションに使用した手順を実行します。
 
 ## 付録: Datadog Agent ステータスの取得
 
@@ -933,7 +810,7 @@ heroku ps:exec -a $APPNAME
 ~ $
 ```
 
-`DD_API_KEY` が設定されていないという警告は無視できます。これは、[Heroku は SSH セッションにコンフィギュレーション変数を設定しません][27]が、Datadog Agent のプロセスはこれにアクセスできたためです。
+`DD_API_KEY` が設定されていないという警告は無視できます。これは、[Heroku は SSH セッションにコンフィギュレーション変数を設定しません][26]が、Datadog Agent のプロセスはこれにアクセスできたためです。
 
 SSH セッション内で Datadog ステータスコマンドを実行します。
 
@@ -987,7 +864,6 @@ Agent (v7.27.0)
 [21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
 [22]: https://app.datadoghq.com/logs/livetail
 [23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages
-[24]: https://app.datadoghq.com/logs?cols=core_host%2Ccore_service&index=%2A&messageDisplay=inline&query=source%3Aruby&stream_sort=desc
-[25]: https://app.datadoghq.com/logs/livetail?cols=core_host%2Ccore_service&from_ts=0&index=%2A&live=true&messageDisplay=inline&query=source%3Aruby&stream_sort=desc&to_ts=-1
-[26]: https://docs.datadoghq.com/ja/integrations/
-[27]: https://devcenter.heroku.com/articles/exec#environment-variables
+[24]: https://app.datadoghq.com/logs/livetail?cols=core_host%2Ccore_service&from_ts=0&index=%2A&live=true&messageDisplay=inline&query=source%3Aruby&stream_sort=desc&to_ts=-1
+[25]: https://docs.datadoghq.com/ja/integrations/
+[26]: https://devcenter.heroku.com/articles/exec#environment-variables

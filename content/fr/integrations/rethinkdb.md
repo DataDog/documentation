@@ -4,8 +4,6 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     RethinkDB Overview: assets/dashboards/overview.json
-  docs:
-    spec: assets/docs/spec.yaml
   logs:
     source: rethinkdb
   metrics_metadata: metadata.csv
@@ -14,18 +12,19 @@ assets:
     rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - data store
-  - log collection
+- data store
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
 display_name: RethinkDB
 draft: false
 git_integration_title: rethinkdb
 guid: a09f3ed3-c947-413c-a9c6-0dcb641ea890
 integration_id: rethinkdb
 integration_title: RethinkDB
+integration_version: 2.3.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,15 +33,19 @@ metric_prefix: rethinkdb.
 metric_to_check: rethinkdb.config.servers
 name: rethinkdb
 process_signatures:
-  - rethinkdb
+- rethinkdb
 public_title: Intégration Datadog/RethinkDB
-short_description: 'Recueillez des métriques de statut, de performance et d''autres métriques à partir d''un cluster RethinkDB.'
+short_description: Recueillez des métriques de statut, de performance et d'autres
+  métriques à partir d'un cluster RethinkDB.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 [RethinkDB][1] est une base de données NoSQL orientée documents distribuée, qui exploite tout le potentiel des flux de modifications en temps réel.
@@ -115,7 +118,7 @@ de configuration disponibles.
 
 3. [Redémarrez l'Agent][8].
 
-Consultez la [documentation de Datadog][9] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Kubernetes.
+Pour activer les logs pour les environnements Kubernetes, consultez la section [Collecte de logs avec Kubernetes][9].
 
 ### Validation
 
@@ -123,32 +126,26 @@ Consultez la [documentation de Datadog][9] pour découvrir comment configurer l'
 
 ## Données collectées
 
-
-
 ### Métriques
 {{< get-metrics-from-git "rethinkdb" >}}
-
-
-### Checks de service
-
-- `rethinkdb.can_connect` : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au serveur RethinkDB configuré. Si ce n'est pas le cas, renvoie `OK`.
-- `rethinkdb.table_status.status.ready_for_outdated_reads` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture obsolètes. Si ce n'est pas le cas, renvoie `WARNING`.
-- `rethinkdb.table_status.status.ready_for_reads` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture. Si ce n'est pas le cas, renvoie `WARNING`.
-- `rethinkdb.table_status.status.ready_for_writes` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes d'écriture. Si ce n'est pas le cas, renvoie `WARNING`.
-- `rethinkdb.table_status.status.all_replicas_ready` : renvoie `OK` si tous les réplicas sont prêts pour des opérations de lecture et d'écriture. Si ce n'est pas le cas, renvoie `WARNING` (par exemple, si des backfills sont en cours).
 
 
 ### Événements
 
 RethinkDB n'inclut aucun événement.
 
+### Checks de service
+{{< get-service-checks-from-git "rethinkdb" >}}
+
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][12].
+Besoin d'aide ? Contactez [l'assistance Datadog][13].
+
 
 [1]: https://rethinkdb.com
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/fr/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://rethinkdb.com/docs/permissions-and-accounts/
 [5]: https://rethinkdb.com/docs/security/#the-admin-account
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -157,4 +154,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [9]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/metadata.csv
-[12]: https://docs.datadoghq.com/fr/help/
+[12]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/assets/service_checks.json
+[13]: https://docs.datadoghq.com/fr/help/

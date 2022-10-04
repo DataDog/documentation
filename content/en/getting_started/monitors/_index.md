@@ -45,7 +45,7 @@ According to the [Disk integration documentation][6], `system.disk.in_use` is *t
 
 To alert on low disk space, the monitor should trigger when the metric is `above` the threshold. The threshold values are based on your preference. For this metric, values between `0` and `1` are appropriate:
 
-{{< img src="getting_started/application/alert_thresholds.png" alt="alert setup"  >}}
+{{< img src="getting_started/application/monitor_configuration.png" alt="Metric monitor configuration settings within the Create Monitor page, with Multi Alert selected and configured to alert on the average of the query over the last 5 minutes for each host and device reporting the metric. The Set alert conditions section is configured to trigger when the evaluated value is above the threshold for any host or device, with the Alert threshold set at 0.9, the Warning threshold set at 0.8, and the monitor configured not to notify if data is missing"  >}}
 
 For this example, the other settings in this section are left on the defaults. For more details, see the [Metric Monitors][7] documentation.
 

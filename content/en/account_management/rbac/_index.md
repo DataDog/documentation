@@ -20,6 +20,9 @@ further_reading:
     - link: '/account_management/saml/'
       tag: 'Documentation'
       text: 'Enable single sign on with SAML'
+    - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+      tag: "Blog"
+      text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
 ---
 
 Roles categorize users and define what account permissions those users have, such as what data they can read or what account assets they can modify. By default, Datadog offers three roles, and you can create [custom roles](#custom-roles) so you can define a better mapping between your users and their permissions.

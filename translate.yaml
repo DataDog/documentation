@@ -5,7 +5,7 @@ sync_enabled: true
 
 # if true, no github or transifex api writes will happen.
 # instead logs will be created to simulate results.
-sync_dry_run_enabled: true
+sync_dry_run_enabled: false
 
 # These files will be ignored or deleted when syncing with Transifex.
 ignores:
@@ -21,6 +21,15 @@ ignores:
   - "**/*.ja.yaml"
   - "**/*.ja.json"
   - "**/ja.json"
+  - "content/en/api/latest/service-level-objective-corrections/*.md"
+  - "content/en/integrations/observability_pipelines/guide/*.md"
+  - "content/en/real_user_monitoring/connect_rum_and_traces/*.md"
+  - "content/en/security_platform/application_security/**/*.md"
+  - "content/en/security_platform/security_signal_management/*.md"
+  - "content/en/tracing/dynamic_instrumentation/**/*.md"
+  - "content/en/tracing/other_telemetry/**/*.md"
+  - "content/en/tracing/setup_overview/**/*.md"
+  - "content/en/tracing/trace_collection/**/*.md"
 
 # These files will be uploaded to Transifex for translation when syncing.
 sources:
@@ -31,9 +40,9 @@ sources:
 - src: "data/api/**/translate_tags.json"
   dst: "data/api/**/translate_tags.{lang}.json"
 - src: "data/partials/*.yaml"
-  dst: "*.{lang}.yaml"
+  dst: "data/partials/*.{lang}.yaml"
 - src: "i18n/en.json"
-  dst: "{lang}.json"
+  dst: "i18n/{lang}.json"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
 - src: "config/_default/menus/menus.en.yaml"
@@ -42,41 +51,3 @@ sources:
   dst: "content/{lang}/agent/faq/agent_v6_changes.md"
 - src: "content/en/agent/faq/certificate_verify_failed-error.md"
   dst: "content/{lang}/agent/faq/certificate_verify_failed-error.md"
-
-# Legacy params
-# TODO: remove when old sync job is deprecated.
-enabled: true
-enabled_send: true
-enabled_receive: true
-transifex:
-  org: 'datadog'
-  project_slug: 'documentation_loc'
-  user: 'api'
-
-filters:
-- src: "data/integrations/*.yaml"
-  template: ".translate/templates/integrations.yaml"
-langs:
-- lang_country: "fr_FR"
-  lang: "fr"
-- lang_country: "ja"
-  lang: "ja"
-- lang_country: "es_ES"
-  lang: "es"
-- lang_country: "ko_KR"
-  lang: "ko"
-github:
-  org: 'DataDog'
-  repo: 'documentation'
-  branch_from: 'master'
-  commit_message: 'Adding translations'
-  pr_to: 'master'
-  pr_title: 'Translation PR'
-  pr_body: 'This is an automated PR created by the scheduled translation task pulling the latest translated files'
-  pr_labels:
-    - "Translation"
-  pr_preview_base_url: "https://docs-staging.datadoghq.com"
-reviewers:
-  - name: 'David Jones'
-    github_user: 'davidejones'
-    slack_user: 'david.jones'

@@ -1,20 +1,21 @@
 ---
-title: Agent 環境変数
-kind: ガイド
 further_reading:
-  - link: /agent/docker/#environment-variables
-    tag: ドキュメント
-    text: Docker Agent 環境変数
-  - link: /agent/docker/apm/#docker-apm-agent-environment-variables
-    tag: ドキュメント
-    text: APM Agent 環境変数
-  - link: /logs/log_collection/#container-log-collection
-    tag: ドキュメント
-    text: コンテナログの収集
-  - link: /agent/proxy/#environment-variables
-    tag: ドキュメント
-    text: プロキシ環境変数
+- link: /agent/docker/#environment-variables
+  tag: ドキュメント
+  text: Docker Agent 環境変数
+- link: /agent/docker/apm/#docker-apm-agent-environment-variables
+  tag: ドキュメント
+  text: APM Agent 環境変数
+- link: /logs/log_collection/#container-log-collection
+  tag: ドキュメント
+  text: コンテナログの収集
+- link: /agent/proxy/#environment-variables
+  tag: ドキュメント
+  text: プロキシ環境変数
+kind: ガイド
+title: Agent 環境変数
 ---
+
 <div class="alert alert-warning">
 Agent v5 の場合は、<a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub リポジトリ</a>を参照してください。
 </div>
@@ -50,12 +51,12 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 
 * **ユーザー定義**キーを使用した構成オプションのネストは、JSON 形式である必要があります。
    ```yaml
-      docker_env_as_tags:
+      container_env_as_tags:
         ENVVAR_NAME: tag_name
-      # DD_DOCKER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
+      # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**注**: 環境変数を使用してネストされたオプションを指定すると、構成オプションで指定されたネストされたオプションが _すべて_ 上書きされます。このルールの例外は `proxy` 構成オプションです。詳細については、[Agent プロキシのドキュメント][3]を参照してください。
+**注**: 環境変数を使用してネストされたオプションを指定すると、構成オプションで指定されたネストされたオプションがすべて上書きされます。このルールの例外は `proxy` 構成オプションです。詳細については、[Agent プロキシのドキュメント][3]を参照してください。
 
 ### 例外
 

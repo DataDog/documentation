@@ -1,45 +1,71 @@
 ---
+app_id: lambdatest
+app_uuid: 8d4556af-b5e8-4608-a4ca-4632111931c1
 assets:
   dashboards:
     LambdaTest: assets/dashboards/overview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: lambdatest.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: LambdaTest
   logs:
     source: lambdatest
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: prateeksaini@lambdatest.com
+  support_email: prateeksaini@lambdatest.com
 categories:
-- 問題の追跡
+- 問題追跡
 - 自動化
 - テスト
 - クラウド
 - コラボレーション
 - コンテナ
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md
-display_name: LambdaTest
+display_on_public_website: true
 draft: false
 git_integration_title: lambdatest
-guid: 082d56cc-f4f3-4de4-93d4-4601a0767c27
 integration_id: lambdatest
 integration_title: LambdaTest
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: prateeksaini@lambdatest.com
-manifest_version: 1.0.0
-metric_prefix: lambdatest.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: lambdatest
-public_title: Datadog-LambdaTest インテグレーション
+oauth: {}
+public_title: LambdaTest
 short_description: 最も強力な自動テストプラットフォーム
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Issue Tracking
+  - Category::Automation
+  - Category::Testing
+  - Category::Cloud
+  - Category::Collaboration
+  - Category::Containers
+  configuration: README.md#Setup
+  description: 最も強力な自動テストプラットフォーム
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: LambdaTest
 ---
 
 

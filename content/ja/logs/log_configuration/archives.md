@@ -81,15 +81,17 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 
 - バケットは一般ユーザーが読み取り可能になるよう設定してください。
 - まれに最後のデータを書き換える必要があるため、[オブジェクトロック][3]を設定しないでください (通常はタイムアウト)。
+- 地域間データ転送料とクラウドストレージコストへの影響については、[AWS Pricing][4] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
+[4]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
-* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** アクセス層を選択します。
+* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** または **cool** アクセス層を選択します。
 * そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
 
 **注:** まれに最後のデータを書き換える必要があるため、[不変性ポリシー][3]を設定しないでください (通常はタイムアウト)。
@@ -116,43 +118,50 @@ GCS ストレージバケットを持つプロジェクト用の [GCP インテ�
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-次の 2 つのアクセス許可ステートメントを AWS インテグレーションのロールにアタッチされている IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。
+1. 次の 2 つのアクセス許可ステートメントを持つ[ポリシーを作成][1]します。
 
-**注:**
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "DatadogUploadAndRehydrateLogArchives",
+         "Effect": "Allow",
+         "Action": ["s3:PutObject", "s3:GetObject"],
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+         ]
+       },
+       {
+         "Sid": "DatadogRehydrateLogArchivesListBucket",
+         "Effect": "Allow",
+         "Action": "s3:ListBucket",
+         "Resource": [
+           "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+           "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+         ]
+       }
+     ]
+   }
+   ```
+     * `GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][2]を可能にします。
+     * アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
 
-* `GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][1]を可能にします。
-* アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
-
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
-      "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
-      "Resource": [
-        "arn:aws:s3:::<バケット名_1_/_バケットへのパス_任意_1>/*",
-        "arn:aws:s3:::<バケット名_2_/_バケットへのパス_任意_2>/*"
-      ]
-    },
-    {
-      "Sid": "DatadogRehydrateLogArchivesListBucket",
-      "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Resource": [
-        "arn:aws:s3:::<バケット名_1>",
-        "arn:aws:s3:::<バケット名_2>"
-      ]
-    }
-  ]
-}
-```
+2. バケット名を編集します。
+3. オプションで、ログアーカイブを含むパスを指定します。
+4. Datadog のインテグレーションロールに新しいポリシーをアタッチします。
+   a. AWS IAM コンソールで **Roles** に移動します。
+   b. Datadog インテグレーションで使用されるロールを見つけます。デフォルトでは、 **DatadogIntegrationRole** という名前になっていますが、組織で名前を変更した場合は、名前が異なる場合があります。ロール名をクリックすると、ロールのサマリーページが表示されます。
+    c. **Add permissions**、**Attach policies** の順にクリックします。
+   d. 上記で作成したポリシーの名称を入力します。
+   e. **Attach policies** をクリックします。
 
 **注**: `s3:PutObject` と `s3:GetObject` アクションのリソース値は `/*` で終わっていることを確認してください。これらの権限はバケット内のオブジェクトに適用されるからです。
 
-[1]: /ja/logs/archives/rehydrating/
+
+[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[2]: /ja/logs/archives/rehydrating/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -261,12 +270,29 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 [S3 バケットにライフサイクルコンフィギュレーションを設定][1]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
 
-[リハイドレート][2]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています (Glacier Instant Retrieval は例外です)。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
+[リハイドレート][2]は、以下のストレージクラスのみをサポートします。
+
+* S3 Standard
+* S3 Standard-IA
+* S3 One Zone-IA
+* S3 Glacier Instant Retrieval
+
+他のストレージクラスにあるアーカイブからリハイドレートする場合は、まず上記のサポートされているストレージクラスのいずれかに移動させる必要があります。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 [2]: /ja/logs/archives/rehydrating/
 {{% /tab %}}
+{{% tab "Azure Storage" %}}
 
+アーカイブと[リハイドレート][1]は、以下のアクセス層にのみ対応しています。
+
+- ホットアクセス層
+- クールアクセス層
+
+他のアクセス層にあるアーカイブからリハイドレートする場合は、まず上記のサポートされている層のいずれかに移動させる必要があります。
+
+[1]: /ja/logs/archives/rehydrating/
+{{% /tab %}}
 {{< /tabs >}}
 
 #### サーバー側の暗号化 (SSE)
@@ -353,7 +379,7 @@ S3 バケットに適した AWS アカウントとロールの組み合わせを
 
 Datadog アカウントでアーカイブ設定が正常に構成された時点から、処理パイプラインは Datadog が収集したすべてのログを加工し始めます。その後アーカイブに転送されます。
 
-ただし、アーカイブ構成を作成または更新してから次にアーカイブのアップロードが試行されるまで、数分かかることがあります。ログは15分ごとにアーカイブにアップロードされるので、**15 分待ってストレージバケットをチェックし**、Datadog アカウントからアーカイブが正常にアップロードされたことを確認してください。その後、アーカイブが依然として保留中の場合は、包含フィルターをチェックしクエリが有効であることと、[live tail][11] でログイベントが一致することを確認します。
+ただし、アーカイブ構成を作成または更新してから次にアーカイブのアップロードが試行されるまで、数分かかることがあります。アーカイブがアップロードされる頻度は様々です。**15 分待ってストレージバケットをチェックし**、Datadog アカウントからアーカイブが正常にアップロードされたことを確認してください。その後、アーカイブが依然として保留中の場合は、包含フィルターをチェックしクエリが有効であることと、[live tail][11] でログイベントが一致することを確認します。
 
 Datadog でコンフィギュレーションの問題が検出された場合、該当するアーカイブがコンフィギュレーションページでハイライトされます。エラーアイコンをチェックして、問題を修正するためにとるべきアクションを確認します。
 
@@ -394,7 +420,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 }
 ```
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< whatsnext desc="次に、Datadog からアーカイブされたログコンテンツにアクセスする方法を説明します。" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>アーカイブからリハイドレート</u>: ログイベントをアーカイブから取得し、Datadog の Log Explorer に戻します。{{< /nextlink >}}

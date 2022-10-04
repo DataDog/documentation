@@ -1,50 +1,74 @@
 ---
+app_id: sonarqube
+app_uuid: c6033e2f-8b3d-4b82-8d35-7c61ce7d0908
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Sonarqube Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sonarqube.server.database.pool_active_connections
+      metadata_path: metadata.csv
+      prefix: sonarqube.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SonarQube
   logs:
     source: sonarqube
-  metrics_metadata: metadata.csv
   monitors:
     SonarQube vulnerabilities: assets/recommended_monitors/vulnerabilities.json
   saved_views:
     status_overview: assets/saved_views/status_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - セキュリティ
-  - 問題追跡
-  - ログの収集
-creates_events: false
-ddtype: check
+- セキュリティ
+- 問題追跡
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
-display_name: SonarQube
+- https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
+display_on_public_website: true
 draft: false
-further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-sonarqube-integration/
-    tag: ブログ
-    text: SonarQube で Datadog のコード品質を監視
 git_integration_title: sonarqube
-guid: ce089575-93bf-47f0-80b6-ffaf6e34722c
 integration_id: sonarqube
 integration_title: SonarQube
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sonarqube.
-metric_to_check: sonarqube.server.database.pool_active_connections
+manifest_version: 2.0.0
 name: sonarqube
+oauth: {}
 public_title: SonarQube
 short_description: SonarQube のサーバーとプロジェクトを監視します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Issue Tracking
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: SonarQube のサーバーとプロジェクトを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SonarQube
 ---
+
+
+
 ## 概要
 
 このチェックは [SonarQube][1] を監視します。
@@ -67,56 +91,77 @@ SonarQube の Web API に関するドキュメントは、SonarQube Web UI の `
 デフォルトのメトリクスのコンフィギュレーションは、[sonarqube.d/metrics.yaml][3] ファイルにあります。Bean に関するドキュメントは、
 [SonarQube のウェブサイト][4]をご覧ください。
 
-SonarQube の JMX サーバーは、デフォルトで無効になっています。つまり、有効にしない限り `sonarqube.server.*` メトリクス
-は収集されません。有効化して SonarQube 内で JMX を構成する方法について、
-詳細は [SonarQube ドキュメント][5]をご参照ください。
+SonarQube の JMX サーバーは、デフォルトで**無効**になっています。つまり、有効にしない限り `sonarqube.server.*` メトリクスは収集されません。有効化して SonarQube 内で JMX を構成する方法について、詳細は [SonarQube ドキュメント][5]をご参照ください。以下は、いくつかの一般的な Java プロセスで JMX サーバーを有効にするために必要な構成です。
 
-これは、SonarQube および JMX のデフォルトに基づく基本的な `sonarqube.d/conf.yaml` 例です。ホストベースまたはコンテナベースで
-Agent をインストールする場合、ここを起点として開始できます。
+```conf
+# WEB SERVER
+sonar.web.javaAdditionalOpts="
+  -Dcom.sun.management.jmxremote=true
+  -Dcom.sun.management.jmxremote.port=10443
+  -Dcom.sun.management.jmxremote.rmi.port=10443
+  ...
+  "
+
+# COMPUTE ENGINE
+sonar.ce.javaAdditionalOpts="
+  -Dcom.sun.management.jmxremote=true
+  -Dcom.sun.management.jmxremote.port=10444
+  -Dcom.sun.management.jmxremote.rmi.port=10444
+  ...
+  "
+
+# ELASTICSEARCH
+sonar.search.javaAdditionalOpts="
+  -Dcom.sun.management.jmxremote=true
+  -Dcom.sun.management.jmxremote.port=10445
+  -Dcom.sun.management.jmxremote.rmi.port=10445
+  ...
+  "
+```
+
+これは、SonarQube および JMX のデフォルトに基づく基本的な `sonarqube.d/conf.yaml` 例です。ホストベースまたはコンテナベースで Agent をインストールする場合、ここを起点として開始できます。
 
 ```yaml
 init_config:
     is_jmx: false
     collect_default_metrics: true
 instances:
+
   # Web API インスタンス
   - is_jmx: false
     web_endpoint: http://localhost:9000
     auth_type: basic
-    username: <username>    # Defined in the Web UI
-    password: <password>    # Defined in the Web UI
-    default_tag: component  # Optional
-    components:
+    username: <username>    # Web UI で定義済み
+    password: <password>    # Web UI で定義済み
+    default_tag: component  # オプション
+    components:             # 必須
       my-project:
         tag: project_name
+
   # Web JMX インスタンス
   - is_jmx: true
     host: localhost
-    port: 10443
+    port: 10443           # SonarQube の sonar.properties ファイルの sonar.web.javaAdditionalOpts を参照してください
     user: <username>      # SonarQube の sonar.properties ファイルで定義済み
     password: <password>  # SonarQube の sonar.properties ファイルで定義済み
+
   # Compute Engine JMX インスタンス
   - is_jmx: true
     host: localhost
-    port: 10444
+    port: 10444           # SonarQube の sonar.properties ファイルの sonar.ce.javaAdditionalOpts を参照してください
     user: <username>      # SonarQube の sonar.properties ファイルで定義済み
     password: <password>  # SonarQube の sonar.properties ファイルで定義済み
 ```
 
-> 注: インテグレーションを構成したら、SonarQube で 1 つ以上のプロジェクトをスキャンし、メトリクスを Datadog に表示します。
-> 
+**注**: インテグレーションを構成したら、SonarQube で 1 つ以上のプロジェクトをスキャンし、メトリクスを Datadog に表示します。
 
-このインテグレーションで収集される.メトリクスは、デフォルトで `component` タグが付けられます。タグ名をコンポーネント別に
-変更するには、コンポーネントの定義で `tag` プロパティを指定します。すべてのプロジェクトに設定するには、インスタンスの
-コンフィグで `default_tag` プロパティを設定します。
+このインテグレーションで収集される.メトリクスは、デフォルトで `component` タグが付けられます。タグ名をコンポーネント別に変更するには、コンポーネントの定義で `tag` プロパティを指定します。すべてのプロジェクトに設定するには、インスタンスのコンフィグで `default_tag` プロパティを設定します。
 
-> 注: SonarQube のプロジェクトには、よく複数のソース管理ブランチが含まれています。このインテグレーションでは、
->SonarQube 内のデフォルトブランチ (通常は `main`) からのメトリクスのみが収集されます。
+**注**: SonarQube のプロジェクトには、よく複数のソース管理ブランチが含まれています。このインテグレーションでは、SonarQube 内のデフォルトブランチ (通常は `main`) からのメトリクスのみが収集されます。
 
-さらに、SonarQube はこのインテグレーションの追加インスタンスおよび収集する JMX メトリクスのコンフィギュレーションを
-使用して監視される Search Server を公開します。収集するメトリクスのカスタマイズ方法については、[JMX チェックのドキュメント][6]
-で詳細をご確認ください。以下のコンフィグ例や、 [sonarqube.d/metrics.yaml][3] 内のデフォルトの JMX メトリクスコンフィグ
-などもご活用いただけます。
+#### サーバーメトリクスの検索
+
+SonarQube はこのインテグレーションの追加インスタンスおよび JMX メトリクスのコンフィギュレーションを使用して監視される検索サーバーを公開します。収集するメトリクスのカスタマイズ方法については、[JMX チェックのドキュメント][6]で詳細をご確認ください。例については、以下のコンフィグや、 [sonarqube.d/metrics.yaml][3] 内のデフォルトの JMX メトリクスコンフィグなどもご活用いただけます。
 
 ```yaml
 init_config:
@@ -135,7 +180,7 @@ instances:
   # Search Server JMX インスタンス
   - is_jmx: true
     host: localhost
-    port: 10445
+    port: 10445           # SonarQube の sonar.properties ファイルの sonar.search.javaAdditionalOpts を参照してください
     user: <username>      # SonarQube の sonar.properties ファイルで定義済み
     password: <password>  # SonarQube の sonar.properties ファイルで定義済み
 ```
@@ -305,7 +350,7 @@ SonarQube には、イベントは含まれません。
 
 
 [1]: https://www.sonarqube.org
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/metrics.yaml
 [4]: https://docs.sonarqube.org/latest/instance-administration/monitoring/
 [5]: https://docs.sonarqube.org/latest/instance-administration/monitoring/#header-4

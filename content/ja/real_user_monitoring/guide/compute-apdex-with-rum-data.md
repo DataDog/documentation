@@ -1,24 +1,25 @@
 ---
-title: RUM データによる Apdex とカスタムパフォーマンス指標の算出
-kind: ガイド
 description: RUM データによる Apdex スコアとカスタムパフォーマンス指標の算出ガイド
 further_reading:
-  - link: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-    tag: ドキュメント
-    text: サービスごとに Apdex スコアを構成する
-  - link: /real_user_monitoring/explorer
-    tag: ドキュメント
-    text: RUM ダッシュボード
-  - link: /real_user_monitoring/browser/data_collected
-    tag: ドキュメント
-    text: 収集された RUM ブラウザデータ
-  - link: /real_user_monitoring/android/data_collected
-    tag: ドキュメント
-    text: 収集された RUM Android データ
-  - link: /real_user_monitoring/ios/data_collected
-    tag: ドキュメント
-    text: 収集された RUM iOS データ
+- link: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
+  tag: ドキュメント
+  text: サービスごとに Apdex スコアを構成する
+- link: /real_user_monitoring/explorer
+  tag: ドキュメント
+  text: RUM ダッシュボード
+- link: /real_user_monitoring/browser/data_collected
+  tag: ドキュメント
+  text: 収集された RUM ブラウザデータ
+- link: /real_user_monitoring/android/data_collected
+  tag: ドキュメント
+  text: 収集された RUM Android データ
+- link: /real_user_monitoring/ios/data_collected
+  tag: ドキュメント
+  text: 収集された RUM iOS データ
+kind: ガイド
+title: RUM データによる Apdex とカスタムパフォーマンス指標の算出
 ---
+
 ## 概要
 
 Datadog は、ブラウザやモバイルの RUM SDK から Real User Monitoring (RUM) イベントを収集し、簡単なグラフの作成や Apdex などのパフォーマンス指標を計算するために使用することができます。
@@ -87,7 +88,7 @@ Apdex スコアを計算するには、APM のサービスモニタリング、�
             "queries": [
                 {
                     "search": {
-                        "query": "@type:view @Largest @view.largest_contentful_paint:<2000000000"
+                        "query": "@type:view @view.largest_contentful_paint:<2000000000"
                     },
                     "data_source": "rum",
                     "compute": {

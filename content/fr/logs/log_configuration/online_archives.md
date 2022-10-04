@@ -1,24 +1,28 @@
 ---
-title: Online Archives
-kind: documentation
-description: Solution rentable permettant d'interroger en direct des logs conservés à long terme
-is_beta: true
+description: Solution rentable permettant d'interroger en direct des logs conservés
+  à long terme
 further_reading:
-  - link: /logs/log_configuration/indexes/#indexes-filters
-    tag: Documentation
-    text: Filtres d'index
-  - link: /logs/log_configuration/indexes/#filtres-d-exclusion
-    tag: Documentation
-    text: Exclusion Filters
-  - link: https://www.datadoghq.com/blog/online-archives-datadog/
-    tag: Blog
-    text: Étude et analyse des logs historiques avec Online Archives
+- link: /logs/log_configuration/indexes/#indexes-filters
+  tag: Documentation
+  text: Filtres d'index
+- link: /logs/log_configuration/indexes/#filtres-d-exclusion
+  tag: Documentation
+  text: Exclusion Filters
+- link: https://www.datadoghq.com/blog/online-archives-datadog/
+  tag: Blog
+  text: Étude et analyse des logs historiques avec Online Archives
+is_beta: true
+kind: documentation
+title: Online Archives
 ---
+
 {{< site-region region="us3,us5,eu,gov" >}}
 
 La fonctionnalité Online Archives est uniquement disponible pour les clients Datadog utilisant le site Datadog hébergé sur AWS (US1).
 
 {{< /site-region >}}
+
+{{< site-region region="us" >}}
 
 <div class="alert alert-warning">
 L'accès à la solution Online Archives est actuellement limité. Pour utiliser cette fonctionnalité, contactez l'<a href="/help/">assistance Datadog</a>.
@@ -48,11 +52,16 @@ Configurez la fonctionnalité Online Archives depuis la page [Logs Index Config
 
 ## Recherche dans Online Archives
 
-Sélectionnez l'option Online Archives dans la liste déroulante du Log Explorer pour effectuer une recherche dans Online Archives plutôt que dans des index. Cette liste déroulante se situe à côté du sélecteur d'intervalle.
+Sélectionnez l'option Online Archives dans le menu déroulant en regard du sélecteur d'intervalle du Log Explorer pour commencer à rechercher des données stockées dans Online Archives plutôt que dans des index. Pour modifier l'intervalle, vous pouvez choisir parmi l'une des options proposées (intervalle maximal de 3 mois) ou sélectionner une plage de dates dans le calendrier afin d'étudier des données plus anciennes.
+
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="Comment effectuer une recherche dans Online Archives" style="width:100%;">}}
 
 Pour effectuer une [recherche][4], saisissez des requêtes dans la barre de recherche, ou sélectionnez la facette de votre choix dans le volet des facettes.
+
+**Remarques** : 
+- Il n'est pas possible d'exporter des logs depuis une archive en ligne vers des dashboards, des notebooks ou des monitors.
+- La vue « Transactions and Patterns » n'est pas disponible pour Online Archives.
 
 ## Analyse dans Online Archives
 
@@ -82,13 +91,13 @@ Vous trouverez ci-dessous quelques exemples de stratégies de rétention de logs
 2. Activez Online Archives pour cet index.
 3. Ajoutez un filtre d'exclusion `*` sur l'index afin de filtrer tous les logs de l'index, mais pas d'Online Archives.
 
-{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="Comment exclure des logs de votre archive en ligne" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="Comment exclure des logs de l'index" style="width:100%;">}}
 
 **Remarque** : l'ordre des index est important. En effet, si plusieurs index correspondent au filtre d'index, les logs `team:security` sont envoyés vers le premier index.
-
-**Remarque :** les dashboards, monitors de log, patterns et transactions ne sont pas disponibles dans Online Archives.
 
 [1]: /fr/logs/log_configuration/indexes/#indexes-filters
 [2]: /fr/logs/log_configuration/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
+
+{{< /site-region >}}

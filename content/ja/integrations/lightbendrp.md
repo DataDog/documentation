@@ -1,7 +1,6 @@
 ---
 categories:
-  - cloud
-ddtype: agent
+- cloud
 dependencies: []
 description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
 doc_link: https://docs.datadoghq.com/integrations/lightbendrp/
@@ -10,6 +9,7 @@ git_integration_title: lightbendrp
 has_logo: true
 integration_id: lightbendrp
 integration_title: Lightbend
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -18,7 +18,8 @@ public_title: Datadog-Lightbend インテグレーション
 short_description: Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡
 version: '1.0'
 ---
-{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Lightbendrp ダッシュボード" popup="true">}}
+
+{{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Lightbend Reactive Platform ダッシュボード" popup="true">}}
 
 ## 概要
 

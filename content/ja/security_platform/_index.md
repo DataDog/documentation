@@ -35,7 +35,7 @@ title: Security Platform
 
 実稼働セキュリティ運用にスピードとスケールを。Datadog のセキュリティプラットフォームは、リアルタイムの脅威検出と、アプリケーション、ホスト、コンテナ、クラウドインフラストラクチャー全体にわたる継続的なコンフィギュレーション監査を提供します。Datadog の可観測性プラットフォームと組み合わせることで、Datadog セキュリティプラットフォームは、組織の共有目標に沿ったセキュリティと運用の間にかつてないインテグレーションをもたらします。
 
-Datadog セキュリティプラットフォームは、[アプリケーションセキュリティモニタリング](#application-security-monitoring)、[Cloud SIEM](#security-monitoring)、[Cloud Security Posture Management (CSPM)](#cloud-security-posture-management)、[クラウドワークロードセキュリティ (CWS)](#cloud-workload-security) を含んでいます。
+Datadog セキュリティプラットフォームは、[アプリケーションセキュリティモニタリング](#application-security-monitoring)、[Cloud SIEM](#cloud-siem)、[Cloud Security Posture Management (CSPM)](#cloud-security-posture-management)、[クラウドワークロードセキュリティ (CWS)](#cloud-workload-security) を含んでいます。
 
 {{< vimeo 669874306 >}}
 </br>

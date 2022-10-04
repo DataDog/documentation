@@ -18,14 +18,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
   tag: "Blog"
   text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
+- link: "https://www.datadoghq.com/blog/dns-based-threat-detection/"
+  tag: "Blog"
+  text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
 ## Overview
 
-There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
+There are three types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
 1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
 2. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
+3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 
 ## Requirements
 
@@ -56,6 +60,10 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
       securityAgent:
         runtime:
           enabled: true
+          
+    # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
+          network:
+            enabled: true
     ```
 
 3. Restart the Agent.
@@ -74,6 +82,7 @@ The following command can be used to start the Runtime Security Agent and `syste
 
 docker run -d --name dd-agent \
   --cgroupns host \
+  --pid host \
   --security-opt apparmor:unconfined \
   --cap-add SYS_ADMIN \
   --cap-add SYS_RESOURCE \
@@ -92,6 +101,7 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
+  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   gcr.io/datadoghq/agent:7
@@ -110,6 +120,9 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
@@ -127,10 +140,144 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
+  
+# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+  
 systemctl restart datadog-agent
 
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Amazon Elastic Beanstalk" %}}
+
+The following deployment can be used to start the Runtime Security Agent and `system-probe` in an Amazon Elastic Beanstalk environment with multiple Docker containers:
+
+```json
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+            "name": "docker_sock",
+            "host": {
+                "sourcePath": "/var/run/docker.sock"
+            }
+        },
+        {
+            "name": "proc",
+            "host": {
+                "sourcePath": "/proc/"
+            }
+        },
+        {
+            "name": "cgroup",
+            "host": {
+                "sourcePath": "/cgroup/"
+            }
+        },
+        {
+            "name": "debug",
+            "host": {
+                "sourcePath": "/sys/kernel/debug"
+            }
+        },
+        {
+           "name": "os_release",
+           "host": {
+                "sourcePath": "/etc/os-release"
+        }
+        },
+        {
+           "name": "etc_passwd",
+           "host": {
+             "sourcePath": "/etc/passwd"
+           }
+        },
+        {
+           "name": "etc_group",
+           "host": {
+             "sourcePath": "/etc/group"
+           }
+        }
+    ],
+    "containerDefinitions": [
+        {
+            "image": "gcr.io/datadoghq/agent:7",
+            "environment": [
+                {
+                    "name": "DD_API_KEY",
+                    "value": "<YOUR_DD_API_KEY>"
+                },
+                {
+                    "name": "DD_SITE",
+                    "value": "<YOUR_DD_SITE>"
+                },
+                {
+                    "name": "DD_TAGS",
+                    "value": "<SIMPLE_TAG>, <KEY:VALUE_TAG>"
+                },
+                {
+                   "name": "DD_RUNTIME_SECURITY_CONFIG_ENABLED",
+                   "value": "true"
+                }
+            ],
+            "memory": 256,
+            "dockerSecurityOptions": ["apparmor:unconfined"],
+            "linuxParameters": {
+             "capabilities": {
+               "add": [
+                 "SYS_ADMIN",
+                 "SYS_RESOURCE",
+                 "SYS_PTRACE",
+                 "NET_ADMIN",
+                 "NET_BROADCAST",
+                 "NET_RAW",
+                 "IPC_LOCK",
+                 "CHOWN"
+               ]
+              }
+            },
+            "mountPoints": [
+                {
+                    "sourceVolume": "docker_sock",
+                    "containerPath": "/var/run/docker.sock",
+                    "readOnly": false
+                },
+                {
+                    "sourceVolume": "proc",
+                    "containerPath": "/host/proc",
+                    "readOnly": true
+                },
+                {
+                    "sourceVolume": "cgroup",
+                    "containerPath": "/host/sys/fs/cgroup",
+                    "readOnly": true
+                },
+                {
+                    "containerPath": "/sys/kernel/debug",
+                    "sourceVolume": "debug"
+                },
+                {
+                    "sourceVolume": "os_release",
+                    "containerPath": "/host/etc/os-release",
+                    "readOnly": false
+                },
+                {
+                    "sourceVolume": "etc_passwd",
+                    "containerPath": "/etc/passwd",
+                    "readOnly": false
+                },
+                {
+                    "sourceVolume": "etc_group",
+                    "containerPath": "/etc/group",
+                    "readOnly": false
+                }
+            ]
+        }
+    ]
+}
+```
 
 {{% /tab %}}
 {{< /tabs >}}

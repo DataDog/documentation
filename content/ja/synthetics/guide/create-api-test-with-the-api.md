@@ -408,7 +408,7 @@ configuration = Configuration(
     api_key= {"apiKeyAuth": "<YOUR_API_KEY>","appKeyAuth": "<YOUR_APPLICATION_KEY>"}
 )
 
-// ApiClient(configuration) に api_client が設定された API クライアントのインスタンスを持つコンテキストを入力します:
+// ApiClient 構成に api_client が設定された API クライアントのインスタンスを持つコンテキストを入力します:
     // API クラスのインスタンスを作成します
     api_instance = synthetics_api.SyntheticsApi(api_client)
     body = SyntheticsAPITest(

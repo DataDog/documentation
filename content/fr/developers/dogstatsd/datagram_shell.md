@@ -1,58 +1,94 @@
 ---
-title: Datagramme et interface système
-kind: documentation
-description: 'Présentation du format des datagrammes utilisé par DogStatsD, ainsi que l''''interface système avancée.'
 aliases:
-  - /fr/developers/dogstatsd/data_types/
+- /fr/developers/dogstatsd/data_types/
+description: Présentation du format des datagrammes utilisé par DogStatsD, ainsi que
+  l''interface système avancée.
 further_reading:
-  - link: developers/dogstatsd
-    tag: Documentation
-    text: Présentation de DogStatsD
-  - link: developers/libraries
-    tag: Documentation
-    text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: Code source de DogStatsD
+- link: developers/dogstatsd
+  tag: Documentation
+  text: Présentation de DogStatsD
+- link: developers/libraries
+  tag: Documentation
+  text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
+- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
+  tag: GitHub
+  text: Code source de DogStatsD
+kind: documentation
+title: Datagramme et interface système
 ---
-Cette section spécifie le format brut des datagrammes pour les métriques, événements et checks de service acceptés par DogStatsD. Vous pouvez l'ignorer si vous utilisez l'une des [bibliothèques client pour DogStatsD][1]. Toutefois, si vous souhaitez rédiger votre propre bibliothèque ou utiliser l'interface système pour envoyer des métriques, lisez attentivement cette section.
+
+Cette section spécifie le format des datagrammes bruts pour les métriques, événements et checks de service acceptés par DogStatsD. Les datagrammes bruts sont encodés en UTF-8. Vous pouvez ignorer cette section si vous utilisez l'une des [bibliothèques client pour DogStatsD][1]. Toutefois, si vous souhaitez rédiger votre propre bibliothèque ou utiliser l'interface système pour envoyer des métriques, lisez attentivement ce qui suit.
+
+## Protocole DogStatsD
 
 {{< tabs >}}
 {{% tab "Métriques" %}}
 
 `<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|@<TAUX_ÉCHANTILLONNAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
-| Paramètre                           | Obligatoire | Description                                                                                                                                      |
-| ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `<NOM_MÉTRIQUE>`                     | Oui      | Chaîne contenant uniquement des caractères alphanumériques ASCII, des underscores et des points. Consultez les [règles de nommage des métriques][1].                                    |
-| `<VALEUR>`                           | Oui      | Nombre entier ou valeur flottante.                                                                                                                             |
-| `<TYPE>`                            | Oui      | `c` pour COUNT, `g` pour GAUGE, `ms` pour TIMER, `h` pour HISTOGRAM, `s` pour SET et `d` pour DISTRIBUTION. Consultez la [documentation relative aux types de métriques][2].      |
-| `<TAUX_ÉCHANTILLONNAGE>`                     | Non       | Valeur flottante entre 0 et 1 (inclusif). Elle ne fonctionne qu'avec des métriques COUNT, HISTOGRAM et TIMER. Valeur par défaut : 1 (entraîne un échantillonnage 100 % du temps). |
-| `<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | Une liste de chaînes séparées par des virgules. Utilisez deux-points « : » pour les tags clé/valeur, par exemple (`env:prod`). Consultez la [documentation relative au tagging][3] pour découvrir comment définir des tags. |
+| Paramètre                           | Obligatoire | Description                                                                                                                                                    |
+| ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<NOM_MÉTRIQUE>`                     | Oui      | Chaîne contenant uniquement des caractères alphanumériques ASCII, des underscores et des points. Consultez les [règles de nommage des métriques][1].                                                  |
+| `<VALEUR>`                           | Oui      | Nombre entier ou valeur flottante.                                                                                                                                           |
+| `<TYPE>`                            | Oui      | `c` pour COUNT, `g` pour GAUGE, `ms` pour TIMER, `h` pour HISTOGRAM, `s` pour SET et `d` pour DISTRIBUTION. Consultez la section [Types de métriques][2] pour en savoir plus.                    |
+| `<TAUX_ÉCHANTILLONNAGE>`                     | Non       | Valeur flottante entre `0` et `1` (inclusif). Elle ne fonctionne qu'avec des métriques COUNT, HISTOGRAM, DISTRIBUTION et TIMER. Valeur par défaut : `1` (entraîne un échantillonnage 100 % du temps). |
+| `<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>` | Non       | Liste de chaînes séparées par des virgules. Utilisez deux-points « : » pour les tags clé/valeur (`env:prod`). Consultez la section [Débuter avec les tags][3] pour découvrir comment définir des tags.              |
 
 Voici quelques exemples de datagrammes :
 
 - `page.views:1|c` : incrémente la métrique COUNT `page.views`.
 - `fuel.level:0.5|g` : indique que le réservoir est à moitié vide.
-- `song.length:240|h|@0.5` : échantillonne l'histogramme `song.length` une fois sur deux.
+- `song.length:240|h|@0.5` : échantillonne l'histogramme `song.length` comme s'il était envoyé une fois sur deux.
 - `users.uniques:1234|s` : surveille les visiteurs uniques du site.
 - `users.online:1|c|#country:china` : incrémente la métrique COUNT correspondant au nombre d'utilisateurs actifs et ajoute un tag avec le pays d'origine.
 - `users.online:1|c|@0.5|#country:china` : surveille les utilisateurs chinois actifs et utilisez un taux d'échantillonnage.
 
+### Protocole DogStatsD v1.1
+
+Avec l'Agent `>=v6.25.0` et `<v7.0.0` ou `>=v7.25.0`, il est possible de rassembler des valeurs. Cette fonctionnalité est proposée pour tous les types de métriques, sauf `SET`. Les valeurs sont séparées par le caractère `:`. Exemple :
+
+`<NOM_MÉTRIQUE>:<VALEUR1>:<VALEUR2>:<VALEUR3>|<TYPE>|@<TAUX_ÉCHANTILLONNAGE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
+
+Les paramètres `TYPE`, `TAUX_ÉCHANTILLONNAGE` et `TAGS` sont partagés entre toutes les valeurs. Les métriques obtenues sont identiques à celles générées par plusieurs messages comportant une seule valeur à la fois. Cette fonctionnalité est particulièrement utile pour les métriques HISTOGRAM, TIMING et DISTRIBUTION.
+
+### Exemples de datagrammes
+
+- `page.views:1:2:32|d` : échantillonne la métrique DISTRIBUTION `page.views` trois fois avec les valeurs `1`, `2` et `32`.
+- `song.length:240:234|h|@0.5` : échantillonne l'histogramme `song.length` comme s'il était envoyé une fois sur deux, à deux reprises. Un taux d'échantillonnage de `0.5` est appliqué à chaque valeur.
+
+### Protocole DogStatsD v1.2
+
+Les versions `>=v6.35.0` && `<v7.0.0` ou `>=v7.35.0` de l'Agent prennent en charge un nouveau champ d'ID de conteneur. L'Agent Datadog se sert de la valeur de l'ID de conteneur pour ajouter aux métriques DogStatsD des tags de conteneur supplémentaires afin de les enrichir.
+
+L'ID de conteneur commence par `c:`. Exemple :
+
+`<NOM_MÉTRIQUE>:<VALEUR>|<TYPE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>|c:<ID_CONTENEUR>`
+
+**Remarque** : définissez `dogstatsd_origin_detection_client` sur `true` dans votre fichier `datadog.yaml` ou la variable d'environnement `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT=true` pour indiquer à l'Agent Datadog d'extraire le champ d'ID de conteneur et d'appliquer les tags de conteneur correspondants.
+
+### Exemples de datagrammes
+
+- `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d` : l'Agent Datadog ajoute des tags de conteneur comme `image_name` et `image_tag` à la métrique `page.views`.
+
+Consultez la documentation sur le tagging [Kubernetes][4] et [Docker][5] pour en savoir plus sur les tags de conteneur.
 
 [1]: /fr/metrics/#naming-metrics
 [2]: /fr/metrics/types/
 [3]: /fr/getting_started/tagging/
+[4]: /fr/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[5]: /fr/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
 {{% tab "Événements" %}}
 
-`_e{<TITRE>.length,<TEXTE>.length}:<TITRE>|<TEXTE>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITÉ>|t:<TYPE_ALERTE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
+`_e{<LONGUEUR_TITRE_UTF8>,<LONGUEUR_TEXTE_UTF8>}:<TITRE>|<TEXTE>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITÉ>|t:<TYPE_ALERTE>|#<CLÉ_TAG_1>:<VALEUR_TAG_1>,<TAG_2>`
 
 | Paramètre                            | Obligatoire | Description                                                                                                            |
 | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `_e`                                 | Oui      | Le datagramme doit commencer par `_e`.                                                                                     |
 | `<TITRE>`                            | Oui      | Titre de l'événement.                                                                                                       |
 | `<TEXTE>`                             | Oui      | Texte de l'événement. Ajoutez des sauts de ligne avec `\\n`.                                                                        |
+| `<LONGUEUR_TITRE_UTF8>`                | Oui      | La longueur (en octets) du `<TITRE>` encodé en UTF-8                                                                              |
+| `<LONGUEUR_TEXTE_UTF8>`                 | Oui      | La longueur (en octets) du `<TEXTE>` encodé en UTF-8                                                                               |
 | `d:<TIMESTAMP>`                      | Non       | Ajoute un timestamp à l'événement. Valeur par défaut ; timestamp epoch Unix actuel.                                         |
 | `h:<HOSTNAME>`                       | Non       | Ajoute un hostname à l'événement. Pas de valeur par défaut.                                                                               |
 | `k:<CLÉ_AGGRÉGATION>`                | Non       | Ajoute une clé d'agrégation afin de regrouper les événements qui possèdent la même clé. Pas de valeur par défaut.                              |
@@ -100,7 +136,7 @@ _sc|Redis connection|2|#env:dev|m:La connexion à Redis a expiré après 10 s
 
 Pour Linux et d'autres systèmes d'exploitation comme Unix, utilisez Bash. Pour Windows, utilisez Powershell et [Powershell-statsd][3] (une fonction Powershell simple qui gère des bits réseau).
 
-DogStatsD crée un message qui contient des informations à propos de votre métrique, événement ou check de service et l'envoie à un Agent installé en local sous la forme d'un collecteur. L'adresse IP de destination est `127.0.0.1`, et le port du collecteur via UDP est `8125`. Consultez la [documentation principale sur DogStatsD][3] pour découvrir comment configurer l'Agent.
+DogStatsD crée un message qui contient des informations à propos de votre métrique, événement ou check de service et l'envoie à un Agent installé en local sous la forme d'un collecteur. L'adresse IP de destination est `127.0.0.1` et le port du collecteur via UDP est `8125`. Consultez la section [DogStatsD][3] pour en savoir plus sur la configuration de l'Agent.
 
 {{< tabs >}}
 {{% tab "Métriques" %}}
@@ -204,7 +240,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:La connexion à Red
 {{% /tab %}}
 {{< /tabs >}}
 
-Pour envoyer des métriques, des événements ou des checks de service sur des environnements conteneurisés, consultez l'article relatif à [l'utilisation de DogStatsD sur Kubernetes][3], conjointement avec les instructions de [configuration de l'APM sur Kubernetes][4], en fonction de votre installation. La documentation sur l'[APM Docker][5] peut également vous venir en aide.
+Pour envoyer des métriques, des événements ou des checks de service sur des environnements conteneurisés, consultez la section relative à [l'utilisation de DogStatsD sur Kubernetes][3], conjointement avec les instructions de [configuration de l'APM sur Kubernetes][4], en fonction de votre installation. La documentation sur l'[APM Docker][5] peut également vous venir en aide.
 
 ## Pour aller plus loin
 

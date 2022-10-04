@@ -1,30 +1,30 @@
 ---
-title: Tracer des applications Node.js
-kind: documentation
 aliases:
-  - /fr/tracing/nodejs/
-  - /fr/tracing/languages/nodejs/
-  - /fr/tracing/languages/javascript/
-  - /fr/tracing/setup/javascript/
-  - /fr/agent/apm/nodejs/
-  - /fr/tracing/setup/nodejs
-  - /fr/tracing/setup_overview/nodejs
+- /fr/tracing/nodejs/
+- /fr/tracing/languages/nodejs/
+- /fr/tracing/languages/javascript/
+- /fr/tracing/setup/javascript/
+- /fr/agent/apm/nodejs/
+- /fr/tracing/setup/nodejs
+- /fr/tracing/setup_overview/nodejs
 code_lang: nodejs
-type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-  - link: https://github.com/DataDog/dd-trace-js
-    tag: GitHub
-    text: Code source
-  - link: https://datadog.github.io/dd-trace-js
-    tag: Documentation
-    text: Documentation sur l'API
-  - link: tracing/visualization/
-    tag: Utiliser l'UI de l'APM
-    text: Explorer vos services, ressources et traces
-  - link: tracing/
-    tag: Utilisation avancée
-    text: Utilisation avancée
+- link: https://github.com/DataDog/dd-trace-js
+  tag: GitHub
+  text: Code source
+- link: https://datadog.github.io/dd-trace-js
+  tag: Documentation
+  text: Documentation sur l'API
+- link: tracing/visualization/
+  tag: Utiliser l'UI de l'APM
+  text: Explorer vos services, ressources et traces
+- link: tracing/
+  tag: Utilisation avancée
+  text: Utilisation avancée
+kind: documentation
+title: Tracer des applications Node.js
+type: multi-code-lang
 ---
 ## Exigences de compatibilité
 
@@ -231,7 +231,7 @@ Indique des noms de service pour chaque plug-in. Valeurs acceptées : paires `p
 Une chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque les logs de debugging sont activés. Exemple : `error`, `debug`.
 
 
-Pour découvrir d'autres options, y compris l'API de configuration par programmation, consultez la [documentation relative à l'API][4].
+Pour découvrir d'autres options, y compris l'API de configuration par programmation, consultez la [documentation relative à l'API][3].
 
 ## Pour aller plus loin
 

@@ -1,42 +1,70 @@
 ---
+app_id: vertica
+app_uuid: c5946789-de76-4ec6-9485-db83dd66fd28
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Vertica Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: vertica.connection.active
+      metadata_path: metadata.csv
+      prefix: vertica.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Vertica
   logs:
     source: vertica
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  monitors:
+    '[Vertica] Nodes down above K-safety level': assets/monitors/vertica_replication_safety.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - ログの収集
-creates_events: false
-ddtype: check
+- data store
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
-display_name: Vertica
+- https://github.com/DataDog/integrations-core/blob/master/vertica/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: vertica
-guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
 integration_id: vertica
 integration_title: Vertica
+integration_version: 3.4.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vertica.
-metric_to_check: vertica.connection.active
+manifest_version: 2.0.0
 name: vertica
-public_title: Datadog-Vertica インテグレーション
+oauth: {}
+public_title: Vertica
 short_description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Vertica のプロジェクションストレージやライセンスの使用状況などを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vertica
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Vertica][1] を監視します。
@@ -71,7 +99,7 @@ CREATE USER datadog IDENTIFIED BY '<パスワード>';
 GRANT SYSMONITOR TO datadog WITH ADMIN OPTION;
 ```
 
-さらに、現在のライセンス使用のメトリクスは最新の[監査][6]の値を使用するため、Datadog は監査をできるだけ頻繁にスケジュールすることをお勧めします。詳細については、[Vertica 監査ライセンスガイド][7]を参照してください。
+現在のライセンス使用のメトリクスは最新の[監査][6]の値を使用するため、Datadog は監査をできるだけ頻繁にスケジュールすることをお勧めします。詳細については、[Vertica 監査ライセンスガイド][7]を参照してください。
 
 [Agent を再起動][8]すると、Datadog への Vertica メトリクスの送信が開始されます。
 
@@ -121,7 +149,7 @@ Vertica には、イベントは含まれません。
 
 
 [1]: https://www.vertica.com
-[2]: https://docs.datadoghq.com/ja/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/vertica/datadog_checks/vertica/data/conf.yaml.example
 [4]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/Glossary/vsql.htm
 [5]: https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/AdministratorsGuide/DBUsersAndPrivileges/Roles/SYSMONITORROLE.htm

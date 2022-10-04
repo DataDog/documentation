@@ -2,6 +2,7 @@
 title: Logs Guides
 kind: guide
 private: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}
@@ -25,6 +26,10 @@ private: true
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
     {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}Use the Datadog Agent for Log Collection Only{{< /nextlink >}}
+    {{< nextlink href="logs/guide/increase-number-of-log-files-tailed" >}}Increase the Number of Log Files Tailed by the Agent{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Use the Container Agent to Tail Logs from the Host{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}Mechanisms to Ensure Logs are Not Lost{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Send Logs from a Custom Log File with Heightened Read Permissions{{< /nextlink >}}   
 {{< /whatsnext >}}
 
 <br>
@@ -33,6 +38,9 @@ private: true
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Log Parsing Best Practices{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}Add Custom Metadata to Logs with Enrichment Tables{{< /nextlink >}}
     {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/logs-not-showing-expected-timestamp" >}}Logs Not Showing the Expected Timestamp{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/remap-custom-severity-to-official-log-status" >}}Remap Custom Severity Values to the Official Log Status{{< /nextlink >}}
+    {{< nextlink href="logs/guide/logs-show-info-status-for-warnings-or-errors" >}}Logs Show Info Status for Warnings or Errors{{< /nextlink >}} 
 {{< /whatsnext >}}
 
 <br>
@@ -51,7 +59,7 @@ private: true
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Cross product" >}}
-    {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross product correlation{{< /nextlink >}}
+{{< whatsnext desc="Datadog Integrations" >}}
+    {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross-product correlation{{< /nextlink >}}
 {{< /whatsnext >}}
 

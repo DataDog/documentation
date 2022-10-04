@@ -62,6 +62,10 @@ Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New As
 
 {{< img src="synthetics/api_tests/assertions_grpc.png" alt="Définir des assertions pour déterminer la réussite ou l'échec de votre test gRPC" style="width:90%;" >}}
 
+Si un test ne contient pas d'assertion sur le corps de la réponse, la charge utile du corps est abandonnée et le temps de réponse associé à la requête est renvoyé, dans la limite du délai d'expiration défini par le worker Synthetic.
+
+Si un test contient une assertion sur le corps de la réponse et que le délai d'expiration est atteint, une erreur `Assertions on the body/response cannot be run beyond this limit` apparaît.
+
 ### Sélectionner des emplacements
 
 Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test de check de santé gRPC. Les tests de check de santé gRPC peuvent être exécutés depuis des [emplacements gérés][2] et des [emplacements privés][3], selon que vous souhaitez exécuter le test de check de santé à l'extérieur ou à l'intérieur de votre réseau.

@@ -1,46 +1,70 @@
 ---
+app_id: jfrog-platform
+app_uuid: b2748652-b976-461c-91dd-5abd4467f361
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Artifactory Metrics: assets/dashboards/artifactory_metrics.json
     Jfrog Artifactory Dashboard: assets/dashboards/jfrog_artifactory_dashboard.json
     Xray Logs: assets/dashboards/xray_logs.json
     Xray Metrics: assets/dashboards/xray_metrics.json
     Xray Violations: assets/dashboards/xray_violations.json
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: jfrog.artifactory.app_disk_free_bytes
+      metadata_path: metadata.csv
+      prefix: jfrog.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: JFrog Platform
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: integrations@jfrog.com
+  support_email: integrations@jfrog.com
 categories:
-  - ログの収集
-  - セキュリティ
-  - メトリクス
-creates_events: false
-ddtype: check
+- ログの収集
+- セキュリティ
+- メトリクス
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md
-display_name: JFrog Platform
+- https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: jfrog_platform
-guid: 2c70552e-b77a-4349-9955-8799b9b57d56
 integration_id: jfrog-platform
 integration_title: JFrog Platform
+integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: integrations@jfrog.com
-manifest_version: 1.0.0
-metric_prefix: jfrog.
-metric_to_check: jfrog.artifactory.app_disk_free_bytes
+manifest_version: 2.0.0
 name: jfrog_platform
+oauth: {}
 public_title: JFrog Platform
 short_description: JFrog Artifactory と Xray のメトリクスおよびイベントを表示、分析します。
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Security
+  - Category::Metrics
+  configuration: README.md#Setup
+  description: JFrog Artifactory と Xray のメトリクスおよびイベントを表示、分析します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JFrog Platform
 ---
+
 ## 概要
 以下では、JFrog Artifactory および JFrog Xray からメトリクスおよびログを収集するように Datadog を構成する方法について説明します。
 
@@ -65,7 +89,7 @@ JFrog の Datadog インテグレーションにより、Artifactory/Xray ログ
 
 ### JFrog Artifactory および Xray メトリクス API ダッシュボード
 
-JFrog Artifactory/Xray メトリクス API と Datadog のインテグレーションにより、Artifactory/Xray の OpenMetrics API エンドポイントから Datadog へメトリクスを送信することができます。このインテグレーションを使用することでシステムのパフォーマンス、ストレージ使用率、JFrog Artifactory/Xray　の接続統計に関するインサイト、アーティファクトおよび Xray によりスキャンされたコンポーネントの数と種類などを得ることができます。このコンフィギュレーションを設定することで、これらのメトリクスが Datadog UI 内に事前設定済みのダッシュボードで利用できるようになり、Datadog 内の既存ダッシュボードの操作性が向上します。
+JFrog Artifactory および Xray メトリクス API と Datadog のインテグレーションにより、OpenMetrics API エンドポイントから Datadog へメトリクスを送信することができます。このインテグレーションを使用することでシステムのパフォーマンス、ストレージ使用率、JFrog Artifactory/Xray　の接続統計に関するインサイト、アーティファクトおよび Xray によりスキャンされたコンポーネントの数と種類などを得ることができます。このコンフィギュレーションを設定することで、これらのメトリクスが事前設定済みのダッシュボードで利用できるようになり、Datadog 内の既存ダッシュボードの操作性が向上します。
 
 ![artifactory][4]
 
@@ -73,92 +97,13 @@ JFrog Artifactory/Xray メトリクス API と Datadog のインテグレーシ�
 
 ## セットアップ
 
-### 要件
-* [Datadog API キー][6]。
-
-### ログの収集
-
-1. インストールタイプに基づき、[jFrog ドキュメントを使用して Fluentd をインストール][7]して、環境変数を定義します。
-
-2. 書き込み許可のあるディレクトリ（例: `$JF_PRODUCT_DATA_INTERNAL` などの場所）に Artifactory Fluentd コンフィギュレーションファイルをダウンロードして、Artifactory でFluentD を構成します。
-
-    ```text
-    cd $JF_PRODUCT_DATA_INTERNAL
-    wget https://raw.githubusercontent.com/jfrog/log-analytics-datadog/master/fluent.conf.rt
-    ```
-
-    ダウンロードした `fluent.conf.rt` の match ディレクティブ（最終セクション）を、以下の詳細で上書きします。
-
-    ```
-    <match jfrog.**>
-      @type datadog
-      @id datadog_agent_jfrog_artifactory
-      api_key API_KEY
-      include_tag_key true
-      dd_source fluentd
-    </match>
-    ```
-
-    * `API_KEY` (必須) は、[Datadog][8] の API キーです。
-    * `dd_source` は、Datadog でインテグレーションの自動セットアップをトリガーするための、ログ内のログインテグレーションの名前です。
-    * `include_tag_key` のデフォルトは false で、true に設定すると JSON レコードに `fluentd` タグが追加されます
-
-3. 書き込み許可のあるディレクトリ（例: `$JF_PRODUCT_DATA_INTERNAL` などの場所）に Xray Fluentd コンフィギュレーションファイルをダウンロードして、Xray でFluentD を構成します。
-
-    ```text
-    cd $JF_PRODUCT_DATA_INTERNAL
-    wget https://raw.githubusercontent.com/jfrog/log-analytics-datadog/master/fluent.conf.xray
-    ```
-
-    ダウンロードした `fluent.conf.xray` の source ディレクティブの `JPD_URL`, `USER`, `JFROG_API_KEY` フィールドに、以下の詳細を入力します。
-
-    ```text
-    <source>
-      @type jfrog_siem
-      tag jfrog.xray.siem.vulnerabilities
-      jpd_url JPD_URL
-      username USER
-      apikey JFROG_API_KEY
-      pos_file "#{ENV['JF_PRODUCT_DATA_INTERNAL']}/log/jfrog_siem.log.pos"
-    </source>
-    ```
-
-    * `JPD_URL` (必須) は、Xray Violations をプルするために使用されるフォーマット `http://<ip_address>` の Artifactory JPD URL です。
-    * `USER` (必須) は、認証用の Artifactory ユーザー名です。
-    * `JFROG_API_KEY` (必須) は、認証用の [Artifactory API キー][9]です。
-
-    ダウンロードした `fluent.conf.xray` の match ディレクティブ（最終セクション）を、以下の詳細で上書きします。
-
-    ```
-    <match jfrog.**>
-      @type datadog
-      @id datadog_agent_jfrog_xray
-      api_key API_KEY
-      include_tag_key true
-      dd_source fluentd
-    </match>
-    ```
-
-    * `API_KEY` (必須) は、[Datadog][8] の API キーです。
-    * `dd_source` は、Datadog でインテグレーションの自動セットアップをトリガーするための、ログ内のログインテグレーションの名前です。
-    * `include_tag_key` のデフォルトは false で、true に設定すると json レコードに `fluentd` タグが追加されます
-
-4. `artifactory` および `xray` インスタンスで `td-agent` を実行し、インテグレーションを有効にします。
-
-    ``` 
-    td-agent
-    ```
-
-    API キーは `td-agent` で構成され、これにより Datadog へのログの送信が開始します。別のタイプのインストールについては、[JFrog ドキュメント][7]を参照してください。
-
-    **Facets** > **Add** (ログの画面左側)  > **Search** からすべての属性をファセットとして追加します。
 
 ### メトリクスの収集
 
 1. Artifactory および Xray でメトリクスを有効化:
 
-    1. [Artifactory でメトリクスを有効化][10]
-    2. [Artifactory および Xray の管理者アクセストークンを作成][11]
+    1. [Artifactory でメトリクスを有効化][6]
+    2. [Artifactory および Xray の管理者アクセストークンを作成][7]
 
 2. Datadog コンフィギュレーション
 
@@ -172,7 +117,7 @@ JFrog Artifactory/Xray メトリクス API と Datadog のインテグレーシ�
     ```
     ホストで実行中の Agent に対してこのチェックを構成するには:
 
-    1. [Agent のコンフィギュレーションディレクトリ][12]のルートにある openmetrics.d/conf.yaml ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル openmetrics.d/conf.yaml][13] を参照してください。
+    1. [Agent のコンフィギュレーションディレクトリ][8]のルートにある openmetrics.d/conf.yaml ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル openmetrics.d/conf.yaml][9] を参照してください。
         ```text
         instances:
            - prometheus_url: http://<ARTIFACTORY_HOST_NAME_OR_IP>:80/artifactory/api/v1/metrics
@@ -199,7 +144,111 @@ JFrog Artifactory/Xray メトリクス API と Datadog のインテグレーシ�
                  - sys*
                  - jfxr*
         ```
-    2. [Agent を再起動][14]します。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][15]のガイドを参照して、上記のパラメーターを適用します。変更が適用されたことを確認するには、[Agent の status サブコマンドを実行][16]し、Checks セクションで `openmetrics` を探します。
+    2. [Agent を再起動][10]します。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][11]のガイドを参照して、上記のパラメーターを適用します。変更が適用されたことを確認するには、[Agent の status サブコマンドを実行][12]し、Checks セクションで `openmetrics` を探します。
+
+### ログ収集 - Agent の使用 (推奨)
+
+1. Agent のログ収集が有効になっていることを確認します。Agent のメインコンフィギュレーションファイル `datadog.yaml` で `logs_enabled: true` が設定されているかどうかを確認することで確認することができます。[詳細については、このドキュメントを参照してください][13]。
+
+2. OpenMetrics のコンフィギュレーションファイル (`openmetrics.d/conf.yaml` にあります) を修正して、適切なログファイルを収集するようにします。 [ワイルドカード][14]を使って、複数のログファイルを選択することができます。ファイルの末尾に以下を追加します。
+
+```yaml
+logs:
+  - type: file
+    path: "<PATH_TO_ARTIFACTORY_LOGS>/<LOG_FILE_NAME>.log"
+    service: "artifactory"
+    source: "jfrog"
+
+  - type: file
+    path: "<PATH_TO_XRAY_LOGS>/<LOG_FILE_NAME>.log"
+    service: "xray"
+    source: "jfrog"
+```
+
+3. [変更を適用するために Agent を再起動][10]します。
+
+### ログ収集 - FluentD の使用
+
+#### 要件
+
+* [Datadog API キー][15]。
+
+#### セットアップと構成
+1. インストールタイプに基づき、[jFrog ドキュメント][16]を使用して Fluentd をインストールして、環境変数を定義します。
+
+2. 書き込み許可のあるディレクトリ（例: `$JF_PRODUCT_DATA_INTERNAL` などの場所）に Artifactory Fluentd コンフィギュレーションファイルをダウンロードして、Artifactory でFluentD を構成します。
+
+    ```text
+    cd $JF_PRODUCT_DATA_INTERNAL
+    wget https://raw.githubusercontent.com/jfrog/log-analytics-datadog/master/fluent.conf.rt
+    ```
+
+    ダウンロードした `fluent.conf.rt` の match ディレクティブ（最終セクション）を、以下の詳細で上書きします。
+
+    ```
+    <match jfrog.**>
+      @type datadog
+      @id datadog_agent_jfrog_artifactory
+      api_key API_KEY
+      include_tag_key true
+      dd_source fluentd
+    </match>
+    ```
+
+    - `API_KEY` (必須) は、[Datadog][17] の API キーです。
+    - `dd_source` は、Datadog でインテグレーションの自動セットアップをトリガーするための、ログ内のログインテグレーションの名前です。
+    - `include_tag_key` のデフォルトは false で、true に設定すると JSON レコードに `fluentd` タグが追加されます
+
+3. 書き込み許可のあるディレクトリ（例: `$JF_PRODUCT_DATA_INTERNAL` などの場所）に Xray Fluentd コンフィギュレーションファイルをダウンロードして、Xray でFluentD を構成します。
+
+    ```text
+    cd $JF_PRODUCT_DATA_INTERNAL
+    wget https://raw.githubusercontent.com/jfrog/log-analytics-datadog/master/fluent.conf.xray
+    ```
+
+    ダウンロードした `fluent.conf.xray` の source ディレクティブの `JPD_URL`, `USER`, `JFROG_API_KEY` フィールドに、以下の詳細を入力します。
+
+    ```text
+    <source>
+      @type jfrog_siem
+      tag jfrog.xray.siem.vulnerabilities
+      jpd_url JPD_URL
+      username USER
+      apikey JFROG_API_KEY
+      pos_file "#{ENV['JF_PRODUCT_DATA_INTERNAL']}/log/jfrog_siem.log.pos"
+    </source>
+    ```
+
+    * `JPD_URL` (必須) は、Xray Violations をプルするために使用されるフォーマット `http://<ip_address>` の Artifactory JPD URL です。
+    * `USER` (必須) は、認証用の Artifactory ユーザー名です。
+    * `JFROG_API_KEY` (必須) は、認証用の [Artifactory API キー][18]です。
+
+    ダウンロードした `fluent.conf.xray` の match ディレクティブ（最終セクション）を、以下の詳細で上書きします。
+
+    ```
+    <match jfrog.**>
+      @type datadog
+      @id datadog_agent_jfrog_xray
+      api_key API_KEY
+      include_tag_key true
+      dd_source fluentd
+    </match>
+    ```
+
+    * `API_KEY` (必須) は、[Datadog][17] の API キーです。
+    * `dd_source` は、Datadog でインテグレーションの自動セットアップをトリガーするための、ログ内のログインテグレーションの名前です。
+    * `include_tag_key` のデフォルトは false で、true に設定すると json レコードに `fluentd` タグが追加されます
+
+4. `artifactory` および `xray` インスタンスで `td-agent` を実行し、インテグレーションを有効にします。
+
+    ``` 
+    td-agent
+    ```
+
+    API キーは `td-agent` で構成され、これにより Datadog へのログの送信が開始します。別のタイプのインストールについては、[JFrog ドキュメント][16]を参照してください。
+
+    **Facets** > **Add** (ログの画面左側)  > **Search** からすべての属性をファセットとして追加します。
+
 
 ### JFrog プラットフォームタイル
 
@@ -213,27 +262,29 @@ Dashboard -> Dashboard List の順に移動し、`JFrog Artifactory Dashboard`�
 
 #### メトリクス
 
-このチェックによって提供されるメトリクスのリストについては、[metadata.csv][17] を参照してください。
+このチェックによって提供されるメトリクスのリストについては、[metadata.csv][19] を参照してください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][18]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][20]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/dashboard.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/xray_logs.png
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/xray_violations.png
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/artifactory_metrics_dashboard.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/xray_metrics_dashboard.png
-[6]: https://app.datadoghq.com/account/settings#api
-[7]: https://github.com/jfrog/log-analytics-datadog/blob/master/README.md
-[8]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[9]: https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey
-[10]: https://github.com/jfrog/metrics#setup
-[11]: https://www.jfrog.com/confluence/display/JFROG/Access+Tokens#AccessTokens-GeneratingAdminTokens
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[13]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/datadog_checks/jfrog_platform/data/conf.yaml.example
-[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[15]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
-[16]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[17]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/metadata.csv
-[18]: https://docs.datadoghq.com/ja/help/
+[6]: https://github.com/jfrog/metrics#setup
+[7]: https://www.jfrog.com/confluence/display/JFROG/Access+Tokens#AccessTokens-GeneratingAdminTokens
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/datadog_checks/jfrog_platform/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://docs.datadoghq.com/ja/agent/logs/?tab=tailfiles#activate-log-collection
+[14]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile#tail-directories-by-using-wildcards
+[15]: https://app.datadoghq.com/organization-settings/api-keys
+[16]: https://github.com/jfrog/log-analytics-datadog/blob/master/README.md
+[17]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[18]: https://www.jfrog.com/confluence/display/JFROG/User+Profile#UserProfile-APIKey
+[19]: https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/metadata.csv
+[20]: https://docs.datadoghq.com/ja/help/

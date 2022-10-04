@@ -1,15 +1,16 @@
 ---
-title: Signals Explorer
-kind: documentation
 further_reading:
-  - link: security_platform/default_rules
-    tag: Documentation
-    text: Explorer les règles de configuration cloud par défaut
-  - link: security_platform/cspm/frameworks_and_benchmarks
-    tag: Documentation
-    text: En savoir plus sur les frameworks pris en charge et les benchmarks de l'industrie
+- link: security_platform/default_rules
+  tag: Documentation
+  text: Explorer les règles de détection de configuration cloud par défaut
+- link: security_platform/cspm/frameworks_and_benchmarks
+  tag: Documentation
+  text: En savoir plus sur les frameworks pris en charge et les benchmarks de l'industrie
+kind: documentation
+title: Signals Explorer
 ---
-{{< site-region region="us3,us5,gov,eu" >}}
+
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">
 La solution Cloud Security Posture Management n'est pas disponible pour ce site.
 </div>
@@ -17,13 +18,13 @@ La solution Cloud Security Posture Management n'est pas disponible pour ce si
 
 ## Présentation
 
-En plus de passer en revue et de corriger directement les problèmes de configuration cloud sur la page des [résultats][1], vous pouvez mettre en place des notifications en cas d'échec et faire en sorte que les signaux soient mis en corrélation avec les problèmes de configuration au même endroit que les menaces en temps réel générées par les solutions [Security Monitoring][2] et [Cloud Workload Security][3].
+En plus de passer en revue et de corriger directement les problèmes de configuration cloud sur la page des [résultats][1], vous pouvez mettre en place des notifications en cas d'échec. Vous avez également la possibilité de configurer des signaux afin de corréler et de trier les problèmes de configuration depuis la même interface que celle des menaces en temps réel générées par [Cloud SIEM][2] et [Cloud Workload Security][3].
 
 ## Limiter les alertes superflues avec les signaux de sécurité
 
 Les signaux sont des alertes de sécurité qui sont générées par Datadog et qui s'affichent dans le [Signals Explorer][4]. Un signal de sécurité se déclenche lorsque Datadog génère un résultat `evaluation:fail` pour une règle de configuration de cloud ou d'infrastructure.
 
-Les règles dont le niveau de gravité est défini sur High ou Critical génèrent des signaux par défaut. Pour les règles ayant un niveau de gravité moins élevé, vous devez activer l'option *Trigger a security signal* pour qu'elles commencent à générer des signaux. Cette même option peut également être utilisée pour empêcher une règle de générer des signaux à tout moment.
+Les règles dont le niveau de gravité est défini sur High ou Critical génèrent des signaux par défaut. Pour les règles de détection ayant un niveau de gravité moins élevé, vous devez activer l'option *Trigger a security signal* pour qu'elles commencent à générer des signaux. Cette même option peut également être utilisée pour empêcher une règle de détection de générer des signaux à tout moment.
 
 {{< img src="security_platform/cspm/signals_explorer/Notifications.png" style="width:100%;">}}
 
@@ -49,7 +50,7 @@ L'onglet suivant dans la section inférieure du volet latéral affiche tous les 
 
 **Remarque** : si vous utilisez autre chose qu'un ID de ressource pour regrouper les alertes, un signal se déclenche la première fois qu'un résultat correspond aux critères de regroupement, mais pas à chaque fois qu'une nouvelle ressource avec le même regroupement (par exemple, le même service ou compte) échoue. Ce comportement est volontaire : il permet d'éviter le déclenchement d'un nouveau signal à chaque fois qu'une nouvelle ressource cloud échoue. Si vous souhaitez recevoir une alerte à chaque fois qu'une ressource cloud échoue pour une règle, définissez l'option *group by* de la règle concernée sur `@resource_type`.
 
-L'onglet Related issues affiche les autres règles qui ont déclenché des signaux avec la même logique de regroupement (même ressource, service ou compte cloud) et le même type de ressource (par exemple, groupe de sécurité).
+L'onglet Related issues affiche les autres règles de détection qui ont déclenché des signaux avec la même logique de regroupement (même ressource, service ou compte cloud) et le même type de ressource (par exemple, groupe de sécurité).
 
 {{< img src="security_platform/cspm/signals_explorer/Related.png" style="width:100%;">}}
 
@@ -62,6 +63,6 @@ En haut du volet latéral, vous pouvez configurer la règle de façon à ce qu'u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/fr/security_platform/cspm/findings/
-[2]: https://docs.datadoghq.com/fr/security_platform/security_monitoring/
+[2]: https://docs.datadoghq.com/fr/security_platform/cloud_siem/
 [3]: https://docs.datadoghq.com/fr/security_platform/cloud_workload_security/
 [4]: https://docs.datadoghq.com/fr/security_platform/explorer

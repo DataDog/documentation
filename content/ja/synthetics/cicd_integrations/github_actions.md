@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.3.1
+        uses: DataDog/synthetics-ci-github-action@v0.6.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -48,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.3.1
+        uses: DataDog/synthetics-ci-github-action@v0.6.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -69,11 +69,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.3.1
+        uses: DataDog/synthetics-ci-github-action@v0.6.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
           test_search_query: 'tag:e2e-tests'
+```
+
+### `test_search_query` と変数のオーバーライドを使用したワークフロー例
+
+```yaml
+name: Run Synthetics tests using search query
+jobs:
+  e2e_testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Datadog Synthetics tests
+        uses: DataDog/synthetics-ci-github-action@v0.6.0
+        with:
+          api_key: ${{secrets.DD_API_KEY}}
+          app_key: ${{secrets.DD_APP_KEY}}
+          test_search_query: 'tag:e2e-tests'
+          variables: 'START_URL=https://staging.website.com,PASSWORD=stagingpassword'
 ```
 
 ### `config_path` によるグローバル構成オーバーライドを使用したワークフロー例
@@ -87,7 +106,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run Datadog Synthetics tests
-        uses: DataDog/synthetics-ci-github-action@v0.3.1
+        uses: DataDog/synthetics-ci-github-action@v0.6.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -100,19 +119,20 @@ jobs:
 | ------------------- | ------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `api_key`           | 文字列 | _必須_  | Datadog API キー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                                    |
 | `app_key`           | 文字列 | _必須_  | Datadog アプリケーションキー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                            |
-| `public_ids`        | 文字列 | _オプション_  | トリガーしたい Synthetic テストの公開IDをカンマで区切った文字列。値を指定しない場合は、`synthetics.json` という名前のファイルを検索します。**デフォルト:** なし。                   |
+| `public_ids`        | 文字列 | _オプション_  | トリガーしたい Synthetic テストの公開 ID をカンマで区切ったリスト。値を指定しない場合は、`synthetics.json` という名前のファイルを検索します。**デフォルト:** なし。                         |
 | `test_search_query` | 文字列 | _オプション_  | [検索][5]クエリに対応するトリガーテスト。**デフォルト:** なし。                                                                                                                                   |
 | `subdomain`         | 文字列 | _オプション_  | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、サブドメインの値は `myorg` に設定する必要があります。**デフォルト:** `app`。 |
 | `files`             | 文字列 | _オプション_  | Synthetic テストの構成ファイルを検出するための Glob パターン。**デフォルト:** `{,!(node_modules)/**/}*.synthetics.json`。                                                                                             |
 | `datadog_site`      | 文字列 | _オプション_  | Datadog のサイト。EU のユーザーは `datadoghq.eu` に設定します。例: `datadoghq.com` または `datadoghq.eu`。**デフォルト:** `datadoghq.com`。                                                              |
 | `config_path`       | 文字列 | _オプション_  | グローバル JSON 構成は、テストを起動するときに使用されます。詳細は[構成例][4]を参照してください。**デフォルト:** `datadog-ci.json`。                                                         |
+| `variables`         | 文字列 | _オプション_  | Synthetic テストに使用するグローバル変数をカンマで区切ったリスト。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                               |
 
 ## 開発
 
 ```bash
 
 
-yarn jest
+yarn test
 
 # プロジェクト構築
 yarn build

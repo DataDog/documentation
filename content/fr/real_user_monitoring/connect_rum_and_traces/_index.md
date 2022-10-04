@@ -147,9 +147,6 @@ Datadog utilise un protocole de tracing distribué et configure les en-têtes HT
 `x-datadog-sampling-priority: 1`
 : Permet de s'assurer que l'Agent conserve la trace.
 
-`x-datadog-sampled: 1`
-: Généré à partir du SDK RUM. Indique que cette requête est sélectionnée pour l'échantillonnage.
-
 **Remarque** : ces en-têtes HTTP ne sont pas ajoutés à la liste blanche du mécanisme CORS. Vous devez donc [configurer Access-Control-Allow-Headers][16] sur le serveur traitant les requêtes que le SDK surveille. Le serveur doit également accepter les [requêtes préliminaires][17] (requêtes OPTIONS), qui sont transmises par le SDK avant chaque requête.
 
 ## Cela a-t-il une incidence sur les quotas de l'APM ?

@@ -1,14 +1,15 @@
 ---
-title: ログの使用量の監視
-kind: ガイド
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: /logs/log_configuration/parsing
-    tag: ドキュメント
-    text: パースの詳細
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: /logs/log_configuration/parsing
+  tag: ドキュメント
+  text: パースの詳細
+kind: ガイド
+title: ログの使用量の監視
 ---
+
 このガイドでは、推定使用量メトリクスを利用してログ使用量を監視する方法を説明します。以下の各ステップについて解説していきます。
 
 * トラフィックの予期せぬスパイクにアラートを生成
@@ -53,15 +54,13 @@ further_reading:
 
 ## 推定使用量ダッシュボード
 
-ログ使用量メトリクスから、推定使用量ダッシュボードを作成して、Datadog 全体のログ管理使用量を監視することもできます。以下はそのダッシュボードの例です。
+ログの取り込みを開始すると、ログ使用量メトリクスをまとめたすぐに使える[ダッシュボード][5]が自動的にアカウントにインストールされます。
 
-{{< img src="logs/guide/log_usage_dashboard.png" alt="ログ推定使用量ダッシュボード"  style="width:70%;">}}
+{{< img src="logs/guide/logslight.png" alt="ログ推定使用量ダッシュボード" style="width:70%;">}}
 
 **注**: このダッシュボードで使用されるメトリクスは推定であるため、正式な請求対象の数値とは異なる場合があります。
 
-このダッシュボードをインポートするには、[推定使用量ダッシュボードの JSON 定義][5]をコピーして、新しいダッシュボードとして貼り付けます。または、新しいダッシュボードの右上にある設定メニュー（歯車アイコン）の `Import Dashboard JSON` オプションを使用します。
-
-**注**: この JSON 定義をタイムボードまたはスクリーンボードとしてインポートすることはできません。
+このダッシュボードにアクセスするには、**Dashboards > Dashboards List** に移動し、`Log Management - Estimated Usage` を検索します。
 
 ## インデックス化されたログを固定しきい値で監視
 
@@ -80,11 +79,13 @@ further_reading:
 また、[インデックスに 1 日の割り当てを設定][8]して、ログが 1 日の規定数よりも多くインデックス化されることを防ぐことも可能です。この場合、Datadog では上記のモニターを過去 24 時間以内にこの割り当ての 80% に達したらアラートが発信されるようセットアップすることを推奨しています。
 1 日の割り当て数に達すると、イベントが生成されます。この際に通知を受信するよう、モニターをセットアップします。
 
-{{< img src="logs/guide/daily_quota_monitor.png" alt="1 日の割り当て数をモニター"  style="width:70%;">}}
+{{< img src="logs/guide/daily_quota_event_monitor.png" alt="イベントモニターの構成ページ。クエリに Source:datadog、group by セクションに datadog_index が選択されている" style="width:70%;">}}
+
+1 日のクォータに達したときに生成されるイベントは、デフォルトで `datadog_index` タグを持ち、インデックス名が表示されます。オプションで`datadog_index`タグに[ファセットを作成する][9]と、上のスクリーンショットに示すように、[マルチアラート][10]の `group by` ステップでそのタグを使用できるようにすることが可能です。
 
 Slack で受信する通知の例:
 
-{{< img src="logs/guide/daily_quota_notification.png" alt="1 日の割り当て数に関する通知"  style="width:70%;">}}
+{{< img src="logs/guide/daily_quota_notification.png" alt="datadog_index:retention-7 の 1 日のクォータの通知" style="width:70%;">}}
 
 ## その他の参考資料
 
@@ -94,7 +95,9 @@ Slack で受信する通知の例:
 [2]: /ja/monitors/create/types/anomaly/
 [3]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [4]: https://app.datadoghq.com/monitors#create/anomaly
-[5]: /resources/json/estimated_log_usage_dashboard_configuration.json
+[5]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [6]: https://app.datadoghq.com/logs
 [7]: /ja/logs/explorer/search/
 [8]: /ja/logs/indexes/#set-daily-quota
+[9]: /ja/events/explorer/#facets
+[10]: /ja/monitors/create/types/event/?tab=threshold#define-the-search-query

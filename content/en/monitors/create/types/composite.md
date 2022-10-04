@@ -117,7 +117,7 @@ The Boolean operators used (`&&`, `||`, `!`) operate on the alert-worthiness of 
 * If `A || B` is alert-worthy, the result is the **most** severe status between A and B.
 * If `A` is `No Data`, `!A` is `No Data`
 * If `A` is alert-worthy, `!A` is `OK`
-* If `A` is no alert-worthy, `!A` is `Alert`
+* If `A` is not alert-worthy, `!A` is `Alert`
 
 Consider a composite monitor that uses two individual monitors: `A` and `B`. The following table shows the resulting status of the composite monitor given the trigger condition (`&&` or `||`), and the different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
@@ -139,6 +139,22 @@ Consider a composite monitor that uses two individual monitors: `A` and `B`. The
 | No Data (T) | No Data (T) | `A \|\| B`    | True             | No Data (T)      | {{< X >}}        |
 
 **Note**: When the composite has `notify_no_data` to false, and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead.
+
+### Composites and Downtimes
+
+A composite monitor and its individual monitors are independent of each other.
+
+#### Downtime on a composite monitor
+
+Consider a composite monitor `C` that consists of two individual monitors with the condition `A || B`. Creating a downtime on the composite monitor will suppress notifications from `C` only.
+
+If monitor `A` or monitor `B` notify services or teams in their respective monitor configurations, the downtime on the composite `C` does not mute any notifications caused by `A` or `B`. To mute notifications from `A` or `B`, set downtime on those monitors.
+
+#### Downtime on an individual monitor used in a composite monitor
+
+Creating a downtime on an individual monitor `A`, which is used within a composite monitor, does not mute the composite monitor.
+
+For example, a downtime mutes monitor `A`, specifically its group `env:staging`. Once the group `env:staging` reaches an alert-worthy state, the notification coming from the individual monitor is suppressed while the composite monitor sends an alert notification.
 
 ### Number of alerts
 
@@ -176,6 +192,30 @@ For example, if monitor `1` is a multi-alert per `device,host`, and monitor `2` 
 However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and monitor `3` may not create a composite result because the groupings are too different:
 {{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification"  style="width:80%;">}}
 
+### New Group Delay and composite
+
+Setting [new_group_delay][4] is possible in composite monitors and if set and bigger than the value on the child monitors, it then overrides the value set on the child monitors.
+
+**Examples:**
+
+1. Composite with different new group delays on child monitors:
+
+    * monitor A: new_group_delay=120s
+    * monitor B: new_group_delay=60s
+    * composite: `A&&B`
+
+    When a new group appears, immediately, the composite monitor has this new group in OK state. After `60s`, the new group has the state from B in the composite monitor. After `120s`, the new group has its worst status among A and B in the composite.
+
+2. Composite with new group delay
+
+    * monitor A: new_group_delay=120s
+    * monitor B: new_group_delay=60s
+    * composite: new_group_delay=200s
+    * composite: `A&&B`
+
+    When a new group appears, immediately, the composite monitor has this new group in OK state. After `200s`, the new group has its worst status among A and B in the composite.
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -183,3 +223,4 @@ However, consider monitor `3`, a multi-alert per `host,url`. Monitor `1` and mon
 [1]: https://app.datadoghq.com/monitors#create/composite
 [2]: /monitors/create/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/
+[4]: /monitors/create/configuration/?tab=thresholdalert#new-group-delay

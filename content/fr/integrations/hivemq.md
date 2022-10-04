@@ -11,19 +11,20 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - messaging
-  - processing
-  - log collection
+- messaging
+- processing
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
 display_name: HiveMQ
 draft: false
 git_integration_title: hivemq
 guid: 905e4d87-2777-4253-ad44-f91ee66ad888
 integration_id: hivemq
 integration_title: HiveMQ
+integration_version: 1.6.1
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -35,10 +36,13 @@ public_title: Intégration Datadog/HiveMQ
 short_description: Surveillez vos clusters HiveMQ.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 [HiveMQ][1] est une plateforme de messagerie MQTT conçue pour le déplacement rapide, efficace et fiable de données depuis et vers des appareils IoT connectés. Cet agent est conforme aux protocoles MQTT 3.1, 3.1.1 et 5.0.
@@ -148,13 +152,8 @@ JMXFetch
 
 
 ### Checks de service
+{{< get-service-checks-from-git "hivemq" >}}
 
-**hivemq.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance HiveMQ qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
-
-### Événements
-
-HiveMQ n'inclut aucun événement.
 
 ## Dépannage
 
@@ -162,5 +161,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 
 [1]: https://www.hivemq.com/hivemq/
-[2]: https://docs.datadoghq.com/fr/agent/
+[2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/help

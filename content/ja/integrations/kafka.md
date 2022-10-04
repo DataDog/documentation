@@ -1,12 +1,25 @@
 ---
+app_id: kafka
+app_uuid: 39640d5e-54be-48ff-abf1-8871499e2fd3
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     kafka: assets/dashboards/kafka_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: kafka.net.bytes_out.rate
+      metadata_path: metadata.csv
+      prefix: kafka.
+    process_signatures:
+    - java kafka.kafka
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Kafka
   logs:
     source: kafka
-  metrics_metadata: metadata.csv
   monitors:
     '[Kafka] High produce latency on broker': assets/monitors/broker_produce_latency.json
     '[Kafka] High producer request rate': assets/recommended_monitors/kafka_high_producer_request_rate.json
@@ -16,39 +29,51 @@ assets:
     kafka_patterns: assets/saved_views/kafka_patterns.json
     kafka_processes: assets/saved_views/kafka_processes.json
     logger_overview: assets/saved_views/logger_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - processing
 - messaging
 - log collection
 - autodiscovery
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kafka/README.md
-display_name: Kafka
+display_on_public_website: true
 draft: false
 git_integration_title: kafka
-guid: f201c0b7-4b31-4528-9955-ae756a4580b8
 integration_id: kafka
 integration_title: Kafka
-integration_version: 2.12.1
+integration_version: 2.13.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: kafka.
-metric_to_check: kafka.net.bytes_out.rate
+manifest_version: 2.0.0
 name: kafka
-process_signatures:
-- java kafka.kafka
-public_title: Datadog-Kafka インテグレーション
+oauth: {}
+public_title: Kafka
 short_description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::処理
+  - Category::メッセージング
+  - Category::ログの収集
+  - Category::オートディスカバリー
+  configuration: README.md#Setup
+  description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Kafka
 ---
 
 
@@ -75,7 +100,7 @@ Kafka コンシューマーメトリクスを収集する方法については�
 
 Agent の Kafka チェックは [Datadog Agent][5] パッケージに含まれています。Kafka ノードに追加でインストールする必要はありません。
 
-このチェックは、メトリクスを JMX を使って収集するため、Agent が [jmxfetch][6] をフォークできるように、各 kafka ノード上に JVM が必要です。Kafka が使用している JVM を使用できます。
+チェックは、[JMXFetch][6] を使用して JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各 kafka ノードで JVM が必要です。Kafka が使用しているのと同じ JVM を使用することができます。
 
 **注**: Kafka チェックは Managed Streaming for Apache Kafka (Amazon MSK) と共に使用することはできません。代わりに [Amazon MSK インテグレーション][6]を使用してください。
 
@@ -342,7 +367,7 @@ sudo service datadog-agent restart
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_msk/#pagetitle
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-and-deep-dive-for-kafka/
-[10]: https://docs.datadoghq.com/ja/integrations/faq/agent-failed-to-retrieve-rmierver-stub/
+[10]: https://docs.datadoghq.com/ja/integrations/guide/agent-failed-to-retrieve-rmiserver-stub/
 [11]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
 [12]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
 [13]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog

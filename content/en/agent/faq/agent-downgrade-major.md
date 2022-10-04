@@ -24,7 +24,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 | Ubuntu       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
 | SUSE         | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent/
+[1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -37,7 +37,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 
 **Note**: Links to all available versions of the Windows Installer are [provided in JSON format][4].
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent/
+[1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
@@ -52,7 +52,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent/
+[1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{< /tabs >}}

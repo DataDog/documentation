@@ -10,15 +10,15 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: adodbapi
-    provider: MSOLEDBSQL
+    adoprovider: MSOLEDBSQL
     tags:  # optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
 
-To use [Windows Authentication][10] set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
+To use [Windows Authentication][10], set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
 
-The `service` and `env` tags allow you to link your database telemetry to other telemetry through a common tagging scheme. To learn how these tags are used throughout Datadog, read the documentation on [unified service tagging][5].
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
 ### Supported Drivers
 
@@ -27,7 +27,7 @@ The `service` and `env` tags allow you to link your database telemetry to other 
 The recommended [ADO][9] provider is [Microsoft OLE DB Driver][2]. Ensure the driver is installed on the host where the agent is running.
 ```yaml
 connector: adodbapi
-provider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL
 ```
 
 The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
@@ -41,7 +41,7 @@ connector: odbc
 driver: '{ODBC Driver 17 for SQL Server}'
 ```
 
-Once all Agent configuration is complete, [Restart the Datadog Agent][6].
+Once all Agent configuration is complete, [restart the Datadog Agent][6].
 
 ### Validate
 

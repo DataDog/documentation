@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
 dependencies: []
 description: Google Cloud Composer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_composer/
@@ -21,6 +20,7 @@ public_title: Datadog-Google Cloud Composer インテグレーション
 short_description: Google Cloud Composer のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud Composer は、複数のクラウドやオンプレミスデータセンターにまたがるパイプラインの作成、スケジューリング、監視を可能にする、フルマネージド型のワークフローオーケストレーションサービスです。

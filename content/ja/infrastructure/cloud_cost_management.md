@@ -1,6 +1,6 @@
 ---
-title: クラウド コスト マネジメント
 kind: documentation
+title: クラウド コスト マネジメント
 ---
 
 <div class="alert alert-warning">クラウドコストマネジメントは、現時点では非公開ベータ版であり、AWS のみ対応しています。アクセスリクエストは<a href="https://www.datadoghq.com/cloud-cost-management-beta/">こちらのフォーム</a>からお願いします。</div>
@@ -10,18 +10,18 @@ kind: documentation
 クラウドコストマネジメントは、エンジニアリングチームとファイナンスチームに、インフラストラクチャーの変更がコストにどのような影響を与えるかを示すインサイトを提供します。これにより、傾向を把握し、組織全体に費用を配分し、非効率性を特定することができます。
 Datadog は、クラウドのコストデータをインジェストし、クエリ可能なメトリクスに変換します。コストが上昇した場合、その変化と使用状況の指標を関連付け、根本原因を特定することができます。
 
+クラウドコストマネジメントを利用するには、Cost and Usage Report (CUR) にアクセスできる AWS アカウントを持ち、Datadog に AWS インテグレーションがインストールされている必要があります。
+
 ## セットアップ
 
-クラウドコストマネジメントを利用するには、Cost Usage Report (CUR) にアクセスできる AWS アカウントを持ち、Datadog に AWS インテグレーションがインストールされている必要があります。
+Datadog で Cloud Cost Management をセットアップするには、Cost and Usage レポートを生成する必要があります。
 
-**注:** Datadog でデータが安定するまでに、セットアップ後最大 48～72 時間かかることがあります。
+### 前提条件: Cost and Usage Report を作成する
 
-### CUR を生成する
-
-AWS の[コストレポートと使用量レポートの作成][1]の説明に従って、以下の Content オプションを選択します。
+AWS の [Cost and Usage Report の作成][1]の説明に従い、Datadog Cloud Cost Management で使用するために以下のコンテンツオプションを選択します。
 
 * **Include resource IDs** (リソース ID を含む)
-* **Automatically refresh your Cost & Usage report** (コストと使用量レポートを自動更新)
+* **Automatically refresh your Cost & Usage Report** (コストと使用量レポートを自動更新)
 
 以下の Delivery オプションを選択します。
 
@@ -30,16 +30,37 @@ AWS の[コストレポートと使用量レポートの作成][1]の説明に�
 * 圧縮タイプ: **GZIP**
 * フォーマット: `text/csv`
 
-### CUR へのアクセスを構成する
+### AWS インテグレーションの構成
 
-以下の JSON を使用して[ポリシーを作成][2]することで、Datadog が CUR とそれが格納されている s3 バケットにアクセスする権限を持つように AWS を構成します。
+ドロップダウンメニューから AWS 管理アカウントを選択し、Datadog がこのアカウントに関連するタグを表示できるようにします。同じような名前の管理アカウントが複数ある場合、選択したアカウントに関連するタグを表示し、必要な特定のアカウントを選択したことを確認します。
+
+**注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][6]からコストと使用量のレポートを送信することを推奨しています。AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、Datadog がメンバーアカウントを完全に視覚化できるように、**管理アカウント**の[設定][7]で次のオプションが選択されていることを確認してください。
+
+* **リンクされたアカウントへのアクセス**
+* **リンクされたアカウントの払い戻しおよびクレジット**
+* **リンクされたアカウントの割引**
+
+### Cost and Usage Report を探す
+
+セットアップの前提条件のセクションで作成したレポートから移動してしまった場合は、AWS のドキュメントに従って [Cost and Usage Report の詳細][2]を見つけて表示します。
+
+Datadog が Cost and Usage Report を検索できるようにするには、対応する詳細情報をフィールドに入力します。
+
+* **Region**: バケットがあるリージョンです。例: `us-east-1`
+* **Bucket Name**: CUR の保存先となる s3 バケット名です。
+* **Report Path Prefix**: フォルダ名です。AWS の詳細ページから **Report path prefix** を表示する場合、パスの最初のセクションになります。例えば、**Report path prefix** が `cur-report-dir/cost-report` と表示されている場合、`cur-report-dir` と入力することになります。
+* **Report Name**: 前提条件のセクションでレポートを生成したときに入力した名前です。AWS の詳細ページから **Report path prefix** を表示する場合、パスの後半部分となります。例えば、**Report path prefix** が `cur-report-dir/cost-report` と表示されている場合、`cost-report` と入力することになります。
+
+### Cost and Usage Report へのアクセス構成
+
+以下の JSON を使用して[ポリシーを作成][3]することで、Datadog が CUR とそれが格納されている s3 バケットにアクセスする権限を持つように AWS を構成します。
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
   "Version": "2012-10-17",
   "Statement": [
       {
-          "Sid": "DDCCMListBucket",
+          "Sid": "DDCloudCostReadBucket",
           "Effect": "Allow",
           "Action": [
               "s3:ListBucket"
@@ -47,7 +68,7 @@ AWS の[コストレポートと使用量レポートの作成][1]の説明に�
           "Resource": "arn:aws:s3:::BUCKETNAME"
       },
       {
-          "Sid": "DDCCMGetObject",
+          "Sid": "DDCloudCostGetBill",
           "Effect": "Allow",
           "Action": [
               "s3:GetObject"
@@ -55,7 +76,7 @@ AWS の[コストレポートと使用量レポートの作成][1]の説明に�
           "Resource": "arn:aws:s3:::BUCKETNAME/REPORT_PREFIX/REPORT_NAME/*"
       },
       {
-          "Sid": "CostExplorerAccuracyCheck",
+          "Sid": "DDCloudCostCheckAccuracy",
           "Effect": "Allow",
           "Action": [
               "ce:Get*"
@@ -63,7 +84,7 @@ AWS の[コストレポートと使用量レポートの作成][1]の説明に�
           "Resource": "*"
       },
       {
-          "Sid": "CURReportDefinition",
+          "Sid": "DDCloudCostListCURs",
           "Action": [
             "cur:DescribeReportDefinitions"
           ],
@@ -74,7 +95,7 @@ AWS の[コストレポートと使用量レポートの作成][1]の説明に�
 }
 {{< /code-block >}}
 
-**ヒント:** このポリシーのために作成した名前は、次のステップのために手元に置いてください。
+**ヒント:** このポリシーのために作成した名前は、次のステップのためにメモしておいてください。
 
 ### Datadog のインテグレーションロールにポリシーをアタッチする
 
@@ -86,6 +107,7 @@ Datadog のインテグレーションロールに新しい S3 ポリシーを�
 4. 上記で作成した S3 バケットポリシーの名称を入力します。
 5. **Attach policy** をクリックします。
 
+**注:** Datadog でデータが安定するまでに、セットアップ後最大 48～72 時間かかることがあります。
 ## コストタイプ
 
 インジェストしたデータは、以下のコストタイプで可視化することができます。
@@ -101,7 +123,7 @@ Datadog のインテグレーションロールに新しい S3 ポリシーを�
 
 Datadog は、インジェストされたコストデータにタグを追加し、コストをさらに分解して理解できるようにします。
 
-追加されたタグは、システムが Datadog に提供する観測可能データ、[AWS リソースタグ][3]で構成されたリソースからのデータ、[コストと使用量レポート (CUR)][4] とコストデータの関連付けを行うものです。
+追加されたタグは、システムが Datadog に提供する観測可能データ、[AWS リソースタグ][4]で構成されたリソースからのデータ、[Cost and Usage Report (CUR)][5] とコストデータの関連付けを行うものです。
 
 また、データのフィルタリングやグループ化には、以下のタグが利用できます。
 
@@ -122,6 +144,9 @@ Datadog は、インジェストされたコストデータにタグを追加し
 {{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト"  >}}
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
-[2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[3]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[4]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[2]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+[5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
+[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings

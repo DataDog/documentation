@@ -94,4 +94,4 @@ From the default view entry in the Views panel:
 [1]: /monitors/manage/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[4]: /monitors/create/types/
+[4]: /monitors/create/

@@ -1,33 +1,37 @@
 ---
-title: Débuter avec les tests Browser
-kind: documentation
 further_reading:
-  - link: https://learn.datadoghq.com/course/view.php?id=39
-    tag: Centre d'apprentissage
-    text: Présentation des tests Synthetic
-  - link: /synthetics/browser_tests
-    tag: Documentation
-    text: En savoir plus sur les tests Browser
-  - link: /getting_started/synthetics/private_location
-    tag: Documentation
-    text: En savoir plus sur les emplacements privés
-  - link: /synthetics/cicd_testing
-    tag: Documentation
-    text: Découvrir comment déclencher des tests Synthetic depuis un pipeline CI/CD
-  - link: /synthetics/identify_synthetics_bots
-    tag: Documentation
-    text: Apprendre à identifier les bots Synthetic pour les tests API
+- link: https://learn.datadoghq.com/course/view.php?id=39
+  tag: Centre d'apprentissage
+  text: Présentation des tests Synthetic
+- link: /synthetics/browser_tests
+  tag: Documentation
+  text: En savoir plus sur les tests Browser
+- link: /getting_started/synthetics/private_location
+  tag: Documentation
+  text: En savoir plus sur les emplacements privés
+- link: /synthetics/cicd_integrations
+  tag: Documentation
+  text: Découvrir comment déclencher des tests Synthetic depuis un pipeline CI/CD
+- link: /synthetics/identify_synthetics_bots
+  tag: Documentation
+  text: Apprendre à identifier les bots Synthetic pour les tests API
+kind: documentation
+title: Débuter avec les tests Browser
 ---
+
 ## Présentation
 
-Les [tests Browser][1] sont des scénarios que Datadog exécute sur vos applications Web. Vous pouvez faire en sorte que vos tests soient exécutés à des intervalles périodiques depuis plusieurs emplacements, appareils et navigateurs, mais aussi les exécuter depuis vos pipelines de CI/CD. Ces tests permettent de vérifier que vos utilisateurs peuvent effectuer les **transactions commerciales essentielles** sur vos applications et qu'ils ne subissent pas d'impacts négatifs suite à un déploiement de code.
+Les [tests Browser][1] sont des scénarios que Datadog exécute sur vos applications Web. Vous pouvez faire en sorte que vos tests soient exécutés à des intervalles périodiques depuis plusieurs emplacements, appareils et navigateurs, mais aussi les exécuter depuis vos pipelines de CI/CD.
+
+{{< img src="getting_started/synthetics/browser-test-overview.png" alt="Présentation d'un test Browser Synthetic" style="width:100%;" >}}
+
+Ces tests permettent de vérifier que vos utilisateurs peuvent effectuer les **transactions commerciales essentielles** sur vos applications et qu'ils ne subissent pas d'impact négatif suite à un déploiement de code récent.
 
 ## Créer un test Browser
 
 L'exemple ci-dessous montre comment créer un test Browser qui reflète les étapes d'un parcours utilisateur allant de l'ajout d'un article au panier jusqu'à la validation du paiement. 
 
-{{< img src="getting_started/synthetics/browser-test.png" alt="Test Browser" style="width:100%;" >}}
-
+{{< img src="getting_started/synthetics/browser-test-1.png" alt="Test Browser représentant chaque étape d'un parcours utilisateur" style="width:100%;" >}}
 ### Configurer les détails de votre test
 
 1. Sur le site Datadog, passez le curseur sur **UX Monitoring** dans le menu de gauche, puis sélectionnez **[Synthetic Tests][2]**.
@@ -35,9 +39,9 @@ L'exemple ci-dessous montre comment créer un test Browser qui reflète les éta
 3. Définissez votre test Browser :
 
     - Ajoutez l'URL du site Web que vous souhaitez surveiller. Si vous ne savez pas quelle URL utiliser, faites un test avec l'application Web e-commerce `https://www.shopist.io`.
-    - Sélectionnez **Advanced Options** pour personnaliser les en-têtes, les identifiants d'authentification ou les cookies de la requête. 
+    - Sélectionnez **Advanced Options** pour définir des options de requête personnalisées, des certificats, des identifiants d'authentification, etc.
       Pour cet exemple, aucune option avancée n'est requise.
-    - Donnez un nom à votre test et ajoutez-y des tags, comme `env:prod` et `app:shopist`. Les tags vous permettent d'organiser vos tests et d'accéder rapidement à ceux qui vous intéressent sur la page d'accueil.
+    - Donnez un nom à votre test et ajoutez-y des tags, comme `env:prod` et `app:shopist`. Les tags vous permettent d'organiser votre collection de tests et d'accéder rapidement à ceux qui vous intéressent sur la page d'accueil.
     - Choisissez les navigateurs et appareils sur lesquels vous souhaitez exécuter votre test. 
 
 #### Sélectionner des emplacements
@@ -46,7 +50,7 @@ Sélectionnez un ou plusieurs **emplacements gérés** ou **emplacements privés
 
 Les emplacements gérés vous permettent de tester des sites Web et endpoints publics. Pour tester des applications internes ou simuler des comportements utilisateur dans des régions géographiques précises, utilisez plutôt des [emplacements privés][4].
 
-L'appliction Shopist est accessible à tous depuis l'URL `https://www.shopist.io/`. Vous pouvez donc choisir n'importe quel emplacement géré pour exécuter votre test.
+L'application Shopist est accessible à tous depuis l'URL `https://www.shopist.io/`. Vous pouvez donc choisir n'importe quel emplacement géré pour exécuter votre test.
 
 #### Indiquer la fréquence du test
 
@@ -126,7 +130,7 @@ Utilisez l'[intégration de l'APM Datadog à la surveillance Synthetic][13] pour
 [2]: https://app.datadoghq.com/synthetics/list
 [3]: https://app.datadoghq.com/synthetics/browser/create
 [4]: /fr/getting_started/synthetics/private_location
-[5]: /fr/synthetics/cicd_testing
+[5]: /fr/synthetics/cicd_integrations
 [6]: /fr/integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
 [8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa

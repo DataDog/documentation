@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /fr/integrations/memcached
+- /fr/integrations/memcached
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
@@ -15,20 +15,21 @@ assets:
     memcached_processes: assets/saved_views/memcached_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - web
-  - caching
-  - autodiscovery
-  - log collection
+- web
+- caching
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/mcache/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_name: Memcached
 draft: false
 git_integration_title: mcache
 guid: b1c4033c-bf96-4456-be63-e74ff171f991
 integration_id: memcached
 integration_title: Memcache
+integration_version: 3.2.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -37,14 +38,18 @@ metric_prefix: memcache.
 metric_to_check: memcache.uptime
 name: mcache
 process_signatures:
-  - memcached
+- memcached
 public_title: Intégration Datadog/Memcache
-short_description: 'Surveillez l''utilisation de la mémoire, les hits, les miss, les expulsions, le pourcentage de remplissage, et plus encore.'
+short_description: Surveillez l'utilisation de la mémoire, les hits, les miss, les
+  expulsions, le pourcentage de remplissage, et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
+- linux
+- mac_os
 ---
+
+
+
 ## Présentation
 
 Le check Memcache de l'Agent vous permet de surveiller l'utilisation de la mémoire, les hits, les miss, les expulsions, le pourcentage de remplissage et d'autres métriques pour Memcache.
@@ -57,7 +62,7 @@ Le check Memcache est inclus avec le package de l'[Agent Datadog][1] : vous n'a
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour la configuration dans un environnement conteneurisé.
 
 #### Collecte de métriques
 
@@ -151,7 +156,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][2] et cherchez `mcache` dans la section Checks.
+Lancez la |sous-commande `status` de l'Agent][2] et cherchez `mcache` dans la section Checks.
 
 ## Données collectées
 
@@ -166,9 +171,8 @@ Le check recueille uniquement les métriques `memcache.slabs.*` si vous définis
 Le check Mcache n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "mcache" >}}
 
-**memcache.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à memcache pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

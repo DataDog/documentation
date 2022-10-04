@@ -58,7 +58,7 @@ However, before combining all data from the different sources (step 3), Datadog 
 
 ### Why?
 
-As Datadog stores data at a 1 second granularity, it cannot display all real data on graphs. See [How data is aggregated in graphs][5] for more details.
+As Datadog stores data at a 1 second granularity, it cannot display all real data on graphs. See [metric aggregation][5] for more details.
 
 For a graph on a 1-week time window, it would require sending hundreds of thousands of values to your browser—and besides, not all these points could be graphed on a widget occupying a small portion of your screen. For these reasons, Datadog is forced to proceed to data aggregation and to send a limited number of points to your browser to render a graph.
 
@@ -163,9 +163,9 @@ Documentation about [StatsD/DogStatsD][10].
 [2]: /dashboards/#screenboards
 [3]: /agent/
 [4]: /metrics/custom_metrics/
-[5]: /dashboards/faq/how-is-data-aggregated-in-graphs/
+[5]: /dashboards/querying/#rollup-to-aggregate-over-time
 [6]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /dashboards/functions/rollup/
-[8]: /dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
+[8]: /metrics/guide/different-aggregators-look-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [10]: /metrics/custom_metrics/dogstatsd_metrics_submission/

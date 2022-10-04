@@ -15,6 +15,9 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run TCP tests on internal hosts"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 
 ## Overview
@@ -86,9 +89,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -98,18 +101,24 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            | Show when the test alerts.                                          |
     | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
+    | `{{#is_recovery}}`         | Show when the test recovers from an alert.                          |
+    | `{{^is_recovery}}`         | Show unless the test recovers from an alert.                        |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click on **Save** to save your test and have Datadog start executing it.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][8].
 
 ## Variables
 
 ### Create local variables
 
-You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -120,15 +129,17 @@ You can create local variables by clicking **Create Local Variable** at the top 
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+`{{ date(n unit, format) }}`
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at +/- `n` units.
+
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][8] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your TCP tests.
+You can use the [global variables defined in the `Settings`][9] in the URL, Advanced Options, and assertions of your TCP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -157,13 +168,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][9].
+By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][10].
 
-If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][11] on their accounts.
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
 You can restrict access to a TCP test based on the roles in your organization. When creating a TCP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -180,7 +191,8 @@ You can restrict access to a TCP test based on the roles in your organization. W
 [5]: /monitors/notify/#notify-your-team
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[8]: /synthetics/settings/#global-variables
-[9]: /account_management/rbac/
-[10]: /account_management/rbac#custom-roles
-[11]: /account_management/rbac/#create-a-custom-role
+[8]: /synthetics/guide/synthetic-test-monitors
+[9]: /synthetics/settings/#global-variables
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

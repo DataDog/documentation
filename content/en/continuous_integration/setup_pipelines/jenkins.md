@@ -20,8 +20,7 @@ further_reading:
 ## Compatibility
 
 Supported Jenkins versions:
-* For 3.x versions of the plugin: Jenkins >= 2.164.1
-* For 4.x versions of the plugin: Jenkins >= 2.303.3
+* Jenkins >= 2.346.1
 
 ## Prerequisite
 
@@ -141,6 +140,27 @@ To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
 Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
+
+### Infrastructure metric correlation
+
+If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
+
+1. Install the [Datadog Agent][1] in every Jenkins worker.
+2. Set and export a new environment variable called `DD_CI_HOSTNAME` in every Jenkins worker with the worker hostname. 
+  * It must be the same hostname that the Datadog Agent is reporting in the infrastructure metrics for that worker.
+  * You can use fixed values or other environment variables as valid values.
+
+```bash
+# Using fixed value
+export DD_CI_HOSTNAME=my-hostname
+
+# Using other environment variable
+export DD_CI_HOSTNAME=$HOSTNAME
+```
+
+This is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not require additional actions.
+
+**Note**: Infrastructure metric correlation is supported since Jenkins Plugin v5.0.0+
 
 ## Enable job log collection
 
@@ -544,6 +564,17 @@ Error writing to server
 
 1. If you are using `localhost` as the hostname, try to change it to the server hostname instead.
 2. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+
+#### HTTP 504
+
+If the HTTP 504 error message appears, make sure that the Jenkins proxy configuration is correct.
+
+{{< code-block lang="text" >}}
+Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
+{{< /code-block >}}
+
+1. If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct.
+  1. Check that `localhost` has been configured in the `No Proxy Hosts` section.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 

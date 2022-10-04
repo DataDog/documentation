@@ -1,46 +1,63 @@
 ---
+app_id: n2ws
+app_uuid: 6c0176c4-b878-43e0-a5a8-d280b0fa123e
 assets:
-  configuration: {}
   dashboards:
     N2WSBackup&Recovery-EntitiesSpecificDashboard: assets/dashboards/N2WSBackup&Recovery-EntityTypesDetails.json
     N2WSBackup&Recovery-EntitiesSpecificDashboardV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-EntityTypesDetails.json
     N2WSBackup&Recovery-GraphicalVersion: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(ColumnGraphs).json
     N2WSBackup&Recovery-GraphicalVersion-Areas: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(AreasGraphs).json
     N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-BackupSuccessRates(ColumnGraphs).json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: cpm_metric.dashboard_activity.backup_success_num
+      metadata_path: metadata.csv
+      prefix: cpm_metric.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: N2WS Backup & Recovery
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: eliad.eini@n2ws.com
+  support_email: eliad.eini@n2ws.com
 categories:
 - cloud
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md
-display_name: N2WS Backup & Recovery
-doc_link: https://docs.datadoghq.com/integrations/n2ws/
+display_on_public_website: true
 draft: false
 git_integration_title: n2ws
-guid: 315aa71c-cc41-4f8c-b0f3-37882c1fa766
-has_logo: true
 integration_id: n2ws
 integration_title: N2WS
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: eliad.eini@n2ws.com
-manifest_version: 1.0.0
-metric_prefix: cpm_metric.
-metric_to_check: cpm_metric.dashboard_activity.backup_success_num
+manifest_version: 2.0.0
 name: n2ws
-public_title: Datadog-N2WS インテグレーション
+oauth: {}
+public_title: N2WS
 short_description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  configuration: README.md#Setup
+  description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: N2WS
 ---
 
 

@@ -50,7 +50,7 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 2. IDE、Maven または Gradle アプリケーションスクリプト、`java -jar` コマンドから、継続的プロファイラー、デプロイ追跡、ログ挿入（Datadog へログを送信する場合）、およびトレースボリュームコントロールを使用してアプリケーションを実行するには、`-javaagent` JVM 引数と、該当する以下のコンフィギュレーションオプションを追加します。
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
     ```
 
     **注:** プロファイリングを有効にすると、APM のバンドルによっては請求に影響を与える場合があります。詳しくは、[料金ページ][5]を参照してください。
@@ -62,7 +62,8 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 | `DD_VERSION` | `dd.version` |  アプリケーションのバージョン（例: `2.5`、`202003181415`、`1.3-alpha` など） |
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | [継続的プロファイラー][6]を有効化 |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Datadog トレース ID とスパン ID に対する自動 MDC キー挿入を有効にします。詳しくは、[高度な使用方法][7]を参照してください。 |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   トレースボリュームコントロールを有効にする     |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   全サービスのトレースのルートでサンプリングレートを設定します。     |
+| `DD_TRACE_SAMPLING_SERVICE_RULES` | `dd.trace.sampling.service.rules` |   指定したルールに合致するサービスのトレースのルートでのサンプリングレートを設定します。    |
 
 追加の[コンフィギュレーションオプション](#configuration) は以下で説明されています。
 

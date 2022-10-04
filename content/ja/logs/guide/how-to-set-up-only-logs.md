@@ -1,9 +1,10 @@
 ---
-title: Datadog Agent をログ収集のみに使用
 aliases:
-  - /logs/faq/how-to-set-up-only-logs
+- /ja/logs/faq/how-to-set-up-only-logs
 kind: documentation
+title: Datadog Agent をログ収集のみに使用
 ---
+
 <div class="alert alert-danger">
 インフラストラクチャーメトリクスなしのログ収集をセットアップするには、一部のペイロードを無効にする必要があります。結果として、収集しているログのメタデータおよびタグが失われる場合があるため、Datadog ではこれを推奨しません。このコンフィギュレーションについて、詳しくは <a href="/help/">Datadog サポート</a>までお問い合わせください。
 </div>
@@ -38,14 +39,15 @@ kind: documentation
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
+           --pid host \
            -e DD_API_KEY=<DATADOG_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_ENABLE_PAYLOADS_EVENTS=false
-           -e DD_ENABLE_PAYLOADS_SERIES=false
-           -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false
-           -e DD_ENABLE_PAYLOADS_SKETCHES=false
+           -e DD_ENABLE_PAYLOADS_EVENTS=false \
+           -e DD_ENABLE_PAYLOADS_SERIES=false \
+           -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false \
+           -e DD_ENABLE_PAYLOADS_SKETCHES=false \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \

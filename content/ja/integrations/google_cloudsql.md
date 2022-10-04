@@ -1,34 +1,35 @@
 ---
 categories:
-  - cloud
-  - data store
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- google cloud
+- log collection
 dependencies: []
 description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
+doc_link: https://docs.datadoghq.com/integrations/google_cloudsql/
 draft: false
 git_integration_title: google_cloudsql
 has_logo: true
 integration_id: google-cloudsql
-integration_title: Google CloudSQL
+integration_title: Google Cloud SQL
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloudsql
-public_title: Datadog-Google CloudSQL インテグレーション
+public_title: Datadog-Google Cloud SQL インテグレーション
 short_description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Google Cloud SQL は、クラウド内の SQL データベースを簡単にセットアップ、保守、運用、管理できるようにするフルマネージド型のデータベースサービスです。
 
-Google CloudSQL からメトリクスを取得して、以下のことができます。
+Google Cloud SQL からメトリクスを取得して、以下のことができます。
 
-- CloudSQL データベースのパフォーマンスを視覚化。
-- CloudSQL データベースのパフォーマンスをアプリケーションと関連付け。
+- Cloud SQL データベースのパフォーマンスを視覚化。
+- Cloud SQL データベースのパフォーマンスをアプリケーションと関連付け。
 
 ## セットアップ
 
@@ -40,18 +41,31 @@ Google CloudSQL からメトリクスを取得して、以下のことができ�
 
 #### コンフィギュレーション
 
-カスタム CloudSQL ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
+カスタム Cloud SQL ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
 
 #### ログの収集
 
-Google Cloud SQL のログは Stackdriver 経由で収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+{{< site-region region="us3" >}}
 
-セットアップが完了したら、Google Cloud SQL のログを Stackdriver から Pub/Sub へエクスポートします。
+ログ収集は、このサイトではサポートされていません。
 
-1. [Stackdriver ページ][3]に移動し、Google Cloud SQL のログを絞り込みます。
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
+Google Cloud SQL のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+
+これが完了したら、Google Cloud SQL のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+
+1. [Google Cloud Logging のページ][3]に移動し、Google Cloud SQL のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+
+[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[3]: https://console.cloud.google.com/logs/viewer
+
+{{< /site-region >}}
 
 ## 収集データ
 
@@ -70,10 +84,8 @@ Cloud SQL インスタンスの現在のサービス状態。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
-[3]: https://console.cloud.google.com/logs/viewer
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloudsql/google_cloudsql_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloudsql/google_cloudsql_metadata.csv
+[3]: https://docs.datadoghq.com/ja/help/

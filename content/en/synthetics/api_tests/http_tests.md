@@ -1,17 +1,18 @@
 ---
 title: HTTP Tests
 kind: documentation
-description: Simulate HTTP requests to monitor public and internal API endpoints
+description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
   - /synthetics/http_test
   - /synthetics/http_check
+  - /synthetics/guide/or-logic-api-tests-assertions
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetic Monitoring"
-- link: 'https://learn.datadoghq.com/course/view.php?id=39'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: "Learning Center"
+  text: "Introduction to Synthetic Tests"
 - link: "/getting_started/synthetics/api_test"
   tag: "Documentation"
   text: "Get started with HTTP tests"
@@ -21,6 +22,9 @@ further_reading:
 - link: "/synthetics/multistep"
   tag: "Documentation"
   text: "Run multistep HTTP tests"
+- link: "/synthetics/guide/synthetic-test-monitors"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
 ---
 ## Overview
 
@@ -42,6 +46,7 @@ After choosing to create an `HTTP` test, define your test's request.
    {{% tab "Request Options" %}}
 
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Timeout**: Specify the amount of time in seconds before the test times out.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
@@ -53,10 +58,18 @@ After choosing to create an `HTTP` test, define your test's request.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not implemented.
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
+   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format.
 
-  </br>You can optionally specify the domain and work station in the **Additional configuration** section.  
+     <br/> 
+   
+     You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
    {{% /tab %}}
 
    {{% tab "Query Parameters" %}}
@@ -67,20 +80,8 @@ After choosing to create an `HTTP` test, define your test's request.
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, or `None`) you want to add to your HTTP request.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
-
-   {{% /tab %}}
-
-   {{% tab "Certificate" %}}
-
-   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example you can convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
-
-     ```
-     openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-     openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-     ```
 
    {{% /tab %}}
 
@@ -96,7 +97,7 @@ After choosing to create an `HTTP` test, define your test's request.
    * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
 
 
-[1]: /security/synthetics
+[1]: /data_security/synthetics
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -107,7 +108,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
 4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
 
-{{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
 
 Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
@@ -117,16 +118,18 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][5], [`xpath`][6] | _String_ <br> _[Regex][7]_ <br> _String_, _[Regex][7]_ |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][5], [`xpath`][6] | _String_ <br> _[Regex][7]_ |
 | header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][7]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
+| status code   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Integer_ <br> _[Regex][7]_                                                     |
 
 HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="Define assertions for your HTTP test to succeed or fail on" style="width:90%;" >}}
+
+To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion. 
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -161,9 +164,9 @@ Your test can trigger retries `X` times after `Y` ms in case of a failed test re
 
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
-### Notify your team
+### Configure the test monitor
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
 1. [Similar to how you configure monitors][8], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
@@ -173,18 +176,24 @@ A notification is sent by your test based on the [alerting conditions](#define-a
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            | Show when the test alerts.                                          |
     | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
+    | `{{#is_recovery}}`         | Show when the test recovers from an alert.                          |
+    | `{{^is_recovery}}`         | Show unless the test recovers from an alert.                        |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Click **Save** to save and start your test.
+4. Click **Create** to save your test configuration and monitor.
+
+For more information, see [Using Synthetic Test Monitors][11].
 
 ## Variables
 
 ### Create local variables
 
-You can create local variables by clicking **Create Local Variable** at the top right hand corner of your test configuration form. You can define their values from one of the below available builtins:
+To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
 
 `{{ numeric(n) }}`
 : Generates a numeric string with `n` digits.
@@ -195,15 +204,17 @@ You can create local variables by clicking **Create Local Variable** at the top 
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ date(n, format) }}`
-: Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.
+`{{ date(n unit, format) }}`
+: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit.
+: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
+
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][12] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -228,7 +239,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][13].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -241,13 +252,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
+By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][14].
 
-If you are using the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][15] on their accounts.
+Access restriction is available for customers using [custom roles][16] on their accounts.
 
 You can restrict access to an HTTP test based on the roles in your organization. When creating an HTTP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -267,8 +278,9 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [8]: /monitors/notify/#notify-your-team
 [9]: https://www.markdownguide.org/basic-syntax/
 [10]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[11]: /synthetics/settings/#global-variables
-[12]: /synthetics/api_tests/errors/#ssl-errors
-[13]: /account_management/rbac/
-[14]: /account_management/rbac#custom-roles
-[15]: /account_management/rbac/#create-a-custom-role
+[11]: /synthetics/guide/synthetic-test-monitors
+[12]: /synthetics/settings/#global-variables
+[13]: /synthetics/api_tests/errors/#ssl-errors
+[14]: /account_management/rbac/
+[15]: /account_management/rbac#custom-roles
+[16]: /account_management/rbac/#create-a-custom-role

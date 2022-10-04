@@ -8,7 +8,7 @@ aliases:
 ---
 
 <div class="alert alert-danger">
-This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_ingestion">ingestion controls</a> and <a href="/tracing/trace_retention">retention filters</a> instead.
+This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_pipeline">ingestion controls and retention filters</a> instead.
 </div>
 
 ##  Migrate to the new configuration options
@@ -500,5 +500,19 @@ apm_config:
     service_B|operation_name_Z: 0.01
 ```
 
-[1]: /tracing/trace_ingestion/
-[2]: /tracing/trace_ingestion/mechanisms
+## Troubleshooting: Maximum events per second limit
+
+If you encounter the following error message in your Agent logs, your applications are emitting more than the default 200 trace events per second allowed by APM.
+
+```
+Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
+
+```
+
+To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_MAX_EPS` environment variable.
+
+**Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
+
+
+[1]: /tracing/trace_pipeline/ingestion_controls/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/

@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
   tag: "Blog"
   text: "Monitor and visualize database performance"
+- link: "https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/"
+  tag: "Blog"
+  text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -16,10 +19,6 @@ further_reading:
 ---
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
-
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
 
@@ -38,8 +37,6 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 <p></p>
 
 ### SQL Server
-
-<div class="alert alert-warning">Database Monitoring for SQL Server is in private beta. Contact your Customer Success Manager to request access to the beta.</div>
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>

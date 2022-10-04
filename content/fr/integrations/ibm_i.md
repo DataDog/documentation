@@ -21,7 +21,7 @@ git_integration_title: ibm_i
 guid: da389374-7541-47e5-bcd1-87cf3b88a469
 integration_id: ibm-i
 integration_title: IBM i
-integration_version: 1.3.0
+integration_version: 1.4.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com

@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_dbforpostgresql
+- /ja/integrations/azure_dbforpostgresql
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure DB for PostgreSQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_postgresql/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure DB for PostgreSQL インテグレーショ
 short_description: Azure DB for PostgreSQL のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Database for PostgreSQL は、サービスとして、エンタープライズ対応のフルマネージド型コミュニティ PostgreSQL データベースを提供します。

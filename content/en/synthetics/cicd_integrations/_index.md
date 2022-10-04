@@ -12,18 +12,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
   tag: "Blog"
   text: "Best practices for shift-left testing"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=37"
+- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
   tag: "Learning Center"
-  text: "Learn how to run Synthetic tests in CI/CD pipelines"
+  text: "Learn how to run Synthetic tests in a CI/CD pipeline"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
-  text: "Configure an API Test"
+  text: "Learn how to configure an API test"
 - link: "/synthetics/multistep"
   tag: "Documentation"
-  text: "Configure a Multistep API Test"
+  text: "Learn how to configure a multistep API test"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
-  text: "Configure a Browser Test"
+  text: "Learn how to configure a browser test"
 
 ---
 
@@ -41,9 +41,11 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 
 ## Integrations
 
-{{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in the CI platform provider of your choice:" >}}
+{{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in any CI platform provider of choice. See the documentation for information about the following integrations:" >}}
+    {{< nextlink href="synthetics/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="synthetics/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -1,6 +1,4 @@
 ---
-title: JavaScript ソースマップのアップロード
-kind: ガイド
 further_reading:
 - link: /real_user_monitoring/error_tracking
   tag: Documentation
@@ -8,21 +6,28 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: エクスプローラーでエラー追跡データを視覚化する
+kind: ガイド
+title: JavaScript ソースマップのアップロード
 ---
 
 ## 概要
 
-フロントエンドの Javascript ソースコードが縮小されている場合、Datadog にソースマップをアップロードして、異なるスタックトレースを難読化できるようにする必要があります。あるエラーについて、ファイルパス、行番号、関連するスタックトレースの各フレームのコードスニペットにアクセスすることができます。
+フロントエンドの JavaScript ソースコードが縮小化されている場合、Datadog にソースマップをアップロードして、異なるスタックトレースの難読化を解除します。任意のエラーについて、関連するスタックトレースの各フレームのファイルパス、行番号、コードスニペットにアクセスすることができます。また、Datadog はスタックフレームをリポジトリ内のソースコードにリンクすることができます。
 
-<div class="alert alert-info"><strong>注</strong>: <a href="/real_user_monitoring/error_tracking/">エラー追跡</a>で最小化および処理できるのは、<a href="/real_user_monitoring/">リアルユーザーモニタリング (RUM)</a> によって収集されたエラーのみです。</div>
+<div class="alert alert-info"><a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> で収集されたエラー、および<a href="/logs/log_collection/javascript/">ブラウザログ収集</a>のログのみ、縮小化解除が可能です。</div>
 
 ## コードのインスツルメンテーション
-ソースコードを縮小するときに、関連するソースコードを `sourcesContent` 属性に直接含むソースマップを生成するように、JavaScript バンドルを構成する必要があります。一般的な JavaScript バンドルのコンフィギュレーションを以下で確認してください。また、関連する縮小ファイルのサイズで拡張された各ソースマップのサイズが、__上限の 50MB__を越えないようにしてください。よく使用される JavaScript バンドルのコンフィギュレーション例については以下を参照してください。
+
+JavaScript バンドルは、ソースコードを縮小化する際に、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように構成します。また、各ソースマップのサイズと関連する縮小化ファイルのサイズを足したものが、**50MB** という制限を超えないことを確認してください。
+
+一般的な JavaScript のバンドルソフトについては、以下の構成を参照してください。
 
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
 
-[SourceMapDevToolPlugin][1] という名前の組み込みの Webpack プラグインを使用して、ソースマップを生成できます。`webpack.config.js` ファイルで構成する方法を以下で確認してください。
+[SourceMapDevToolPlugin][1] という名前の組み込みの Webpack プラグインを使用して、ソースマップを生成できます。
+
+`webpack.config.js` ファイルにある構成例を参照してください。
 
 ```javascript
 // ...
@@ -46,18 +51,20 @@ module.exports = {
 };
 ```
 
-**注**: TypeScript を使用している場合は、`tsconfig.json` ファイルを構成するときに、必ず `compilerOptions.sourceMap` を `true` に設定してください。
+**注**: TypeScript を使用している場合は、`tsconfig.json` ファイルで `compilerOptions.sourceMap` を `true` に設定してください。
 
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
 {{% /tab %}}
 {{% tab "ParcelJS" %}}
 
-Parcel は、ビルドコマンドを実行すると、デフォルトでソースマップを生成します: `parcel build <entry file>`
+Parcel は、ビルドコマンドを実行すると、デフォルトでソースマップを生成します: `parcel build <entry file>`。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-アプリケーションをビルドした後、バンドラーは、ほとんどの場合 `dist` という名前のディレクトリを生成し、対応するソースマップと同じ場所に縮小された JavaScript ファイルを配置します。以下の例を確認してください。
+アプリケーションをビルドした後、バンドラーは縮小化された JavaScript ファイルを、対応するソースマップと同じ場所に配置したディレクトリ (通常 `dist` という名前) を生成します。
+
+次の例をご覧ください。
 
 ```bash
 ./dist
@@ -68,66 +75,79 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
         javascript.464388.js.map
 ```
 
-<div class="alert alert-info">例えば、<code>javascript.364758.min.js</code>と<code>javascript.364758.js.map</code>のファイルサイズの合計が <i>50MB の制限値</i>を超えた場合は、バンドラーでソースコードを複数の小さなブロックに分割するよう構成してファイルサイズを縮小してください (<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS での操作方法はこちらを参照してください</a>)。</div>
+<div class="alert alert-warning"><code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>50MB</b> の制限を超える場合は、ソースコードを複数の小さな塊に分割するようにバンドラーを構成してファイルサイズを小さくしてください。詳しくは、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS によるコードの分割</a>を参照してください。</div>
 
 ## ソースマップのアップロード
 
-ソースマップをアップロードする最良の方法は、CI パイプラインに追加のステップを追加し、[Datadog CLI][1] から専用コマンドを実行することです。`dist` ディレクトリとそのサブディレクトリをスキャンして、関連する縮小ファイルを含むソースマップを自動的にアップロードします。フローは次のとおりです。
+ソースマップをアップロードする最良の方法は、CI パイプラインに追加のステップを追加し、[Datadog CLI][1] から専用コマンドを実行することです。`dist` ディレクトリとそのサブディレクトリをスキャンして、関連する縮小ファイルを含むソースマップを自動的にアップロードします。
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
+1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
+2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
+3. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
 
-1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (必ず最新バージョンを使用してください)。
-2. [新しい専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
-3. 次のコマンドを実行します。
-```bash
-datadog-ci sourcemaps upload /path/to/dist \
-    --service=my-service \
-    --release-version=v35.2395005 \
-    --minified-path-prefix=https://hostname.com/static/js
-```
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "EU" %}}
-
-1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (必ず最新バージョンを使用してください)。
-2. [新しい専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
-3. 2 つの追加環境変数 `export DATADOG_SITE="datadoghq.eu"` および `export DATADOG_API_HOST="api.datadoghq.eu"` をエクスポートして、EU リージョンにファイルをアップロードするために CLI を構成します。
-4. 次のコマンドを実行します。
-```bash
-datadog-ci sourcemaps upload /path/to/dist \
-    --service=my-service \
-    --release-version=v35.2395005 \
-    --minified-path-prefix=https://hostname.com/static/js
-```
+   ```bash
+   datadog-ci sourcemaps upload /path/to/dist \
+     --service=my-service \
+     --release-version=v35.2395005 \
+     --minified-path-prefix=https://hostname.com/static/js
+   ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
-**注**: CLI は、CI のパフォーマンスのオーバーヘッドを最小限に抑えるために、必要な数のソースマップを短い時間 (通常は数秒) でアップロードするように最適化されています。
+{{< site-region region="eu,us3,us5,gov" >}}
+1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
+2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
+3. 以下の 2 つの環境変数をエクスポートして、{{<region-param key="dd_site_name">}} サイトにファイルをアップロードするように CLI を構成します: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} と `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}
+4. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
+   ```bash
+   datadog-ci sourcemaps upload /path/to/dist \
+     --service=my-service \
+     --release-version=v35.2395005 \
+     --minified-path-prefix=https://hostname.com/static/js
+   ```
 
-このコマンドをサンプルの `dist` ディレクトリ (前のセクションを参照) に対して実行することにより、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` および `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` で JavaScript ファイルを配信することを期待します。ユーザーの 1 人のセッションでエラーが発生すると、RUM SDK は即座にそれを収集します。指定されたエラーがこれらの URL の 1 つからダウンロードされ、`version:v35.2395005` および `service:my-service` のタグが付けられたファイルで発生した場合は常に、関連するソースマップを使用してスタックトレースを難読化します (この場合、`javascript.464388.js.map` ファイル)。
 
-**注**: エラー追跡 UI でスタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
 
-<div class="alert alert-info"> JavaScript ソースファイルは、環境 (たとえばステージングまたは本番) に基づき異なるサブドメインから利用できます。関連するソースマップをアップロードしたら、完全な URL の代わりに絶対的なプレフィックスパスを使用する (<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定) ことで複数のサブドメインに機能させることが可能です。</div>
+CI のパフォーマンスに対するオーバーヘッドを最小限に抑えるため、CLI は短時間 (通常数秒) で必要なだけのソースマップをアップロードできるように最適化されています。
+
+`service` と `--release-version` パラメーターは、RUM イベントとブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
+
+<div class="alert alert-info">RUM アプリケーションで複数のサービスを定義している場合、RUM アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
+
+サンプルの `dist` ディレクトリに対してコマンドを実行すると、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` と `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` に JavaScript ファイルを配信することを期待します。
+
+スタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
+
+<div class="alert alert-info">異なるサブドメインから同じ JavaScript ソースファイルを提供する場合、関連するソースマップを一度アップロードし、完全な URL の代わりに絶対プレフィックスパスを使用することで複数のサブドメインで動作するようにしてください。例えば、<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定します。</div>
+
+### スタックフレームをソースコードにリンクする
+
+Git の作業ディレクトリ内で `datadog-ci sourcemaps upload` を実行すると、Datadog はリポジトリのメタデータを収集します。`datadog-ci` コマンドは、リポジトリの URL、現在のコミットハッシュ、そしてソースマップに関連するリポジトリ内のファイルパスのリストを収集します。Git のメタデータ収集の詳細については、[datadog-ci のドキュメント][4]を参照してください。
+
+Datadog は、縮小化を解除されたスタックフレームにソースコードへのリンクを表示します。
 
 ## エラーを簡単にトラブルシューティング
 
-ファイルパスと行番号にアクセスできないため、縮小スタックトレースは役に立ちません。コードベースのどこで何かが起こっているのかを把握するのは簡単ではありません。さらに、コードスニペットは依然として縮小されているため (変換されたコードの 1 行が長い)、トラブルシューティングプロセスがさらに困難になります。縮小スタックトレースの例を以下に示します。
+ファイルパスと行番号にアクセスできなければ、縮小化されたスタックトレースは、コードベースのトラブルシューティングに役立ちません。また、コードスニペットが縮小化されている (つまり、変換された長いコードが 1 行ある) ので、トラブルシューティングがより困難になります。
 
-{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="エラー追跡縮小スタックトレース"  >}}
+次の例では、縮小化されたスタックトレースを表示しています。
 
-それどころか、非縮小スタックトレースは、高速でシームレスなトラブルシューティングに必要なすべてのコンテキストを提供します。
+{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="エラー追跡縮小スタックトレース" >}}
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.mp4" alt="エラー追跡非縮小スタックトレース" video=true >}}
+一方、縮小化解除されたスタックトレースは、迅速でシームレスなトラブルシューティングに必要なすべてのコンテキストを提供します。ソースコードに関連するスタックフレームについては、Datadog はリポジトリへの直接リンクも生成します。
+
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="エラー追跡非縮小スタックトレース" >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/#initialization-parameters
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/#initialization-parameters
+[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

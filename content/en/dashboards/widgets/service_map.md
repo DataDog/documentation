@@ -46,6 +46,6 @@ The dedicated [widget JSON schema definition][5] for the service map widget is:
 
 [1]: /tracing/send_traces/
 [2]: /tracing/guide/setting_primary_tags_to_scope/
-[3]: /tracing/visualization/service/
+[3]: /tracing/services/service_page/
 [4]: /api/v1/dashboards/
 [5]: /dashboards/graphing_json/widget_json/

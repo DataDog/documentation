@@ -2,7 +2,7 @@
 title: Create cluster alerts to notify when a percentage of groups are in critical state
 kind: guide
 further_reading:
-- link: "/monitors/create/types/"
+- link: "/monitors/create/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"
@@ -35,5 +35,3 @@ This monitor tracks the percentage of host that have a CPU usage above 50 percen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/
-[2]: /monitors/create/types/#define-the-conditions

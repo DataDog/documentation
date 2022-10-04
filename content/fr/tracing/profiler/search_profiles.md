@@ -1,19 +1,20 @@
 ---
-title: Rechercher des profils
-kind: documentation
 aliases:
-  - /fr/tracing/profiling/search_profiles
+- /fr/tracing/profiling/search_profiles
 further_reading:
-  - link: tracing/profiler/enabling
-    tag: Documentation
-    text: Activer le profileur en continu pour votre application
-  - link: getting_started/profiler
-    tag: Documentation
-    text: Débuter avec le profileur
-  - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
-    tags: Blog
-    text: Présentation du profiling continu en production dans Datadog
+- link: tracing/profiler/enabling
+  tag: Documentation
+  text: Activer le profileur en continu pour votre application
+- link: getting_started/profiler
+  tag: Documentation
+  text: Débuter avec le profileur
+- link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
+  tags: Blog
+  text: Présentation du profiling continu en production dans Datadog
+kind: documentation
+title: Rechercher des profils
 ---
+
 {{< img src="tracing/profiling/search_profiles.mp4" alt="Rechercher des profils en fonction de tags" video=true >}}
 
 Chaque ligne correspond au profil d'un processus pendant une courte période. Par défaut, les profils sont importés toutes les minutes. En fonction du langage, le profil de ces processus couvre une durée de 15 à 60 secondes.
@@ -157,15 +158,13 @@ Mutex
 : Affiche la durée pendant laquelle les fonctions ont attendu des mutex lors de la période de profiling (valeur par défaut : 60s). Les stack traces dans ce profil pointent vers l'opération `Unlock()` qui a autorisé l'exécution d'une autre goroutine bloquée sur le mutex. Les conflits de mutex de courte durée utilisant des spinlocks ne sont pas enregistrés par ce profil, mais peuvent être observés dans le profil CPU. Consultez également la note sur les modifications de cette mesure avec la version `1.33.0` dans les [profils delta](#profils-delta).
 
 Block
-: Affiche la durée pendant laquelle les fonctions ont attendu des mutex et des opérations de canal lors de la période de profiling (valeur par défaut : 60s). Les opérations de mise en veille, de nettoyage de la mémoire, d'appel système et réseau ne sont pas enregistrées dans ce profil. Les opérations de blocage sont enregistrées uniquement une fois qu'elles deviennent débloquées, ce qui fait que ce profil ne peut pas être utilisé pour effectuer le debugging d'applications qui semblent bloquées. Pour les conflits de mutex, les stack traces dans ce profil pointent vers les opérations `Lock()` bloquées, ce qui indique les emplacements où votre programme est bloqué. Le profil Mutex permet d'identifier quelle partie de votre programme est à l'origine du conflit. Référez-vous à notre documentation sur le [profiling de Block dans Go][1] (en anglais) pour en savoir plus. Consultez également la note sur les modifications de cette mesure avec la version `1.33.0` dans les [profils delta](#profils-delta).
-
-**Remarque** : le profileur de blocage peut entraîner une surcharge considérable pour les workloads de production. Si vous l'activez dans un environnement de production, définissez des débits élevés (comme `100000000`, à savoir 100 ms) et vérifiez si votre latence ou charge CPU augmente.
+: Affiche la durée pendant laquelle les fonctions ont attendu des mutex et des opérations de canal lors de la période de profiling (valeur par défaut : 60 s). Les opérations de mise en veille, de nettoyage de la mémoire, d'appel système et réseau ne sont pas enregistrées dans ce profil. Les opérations de blocage sont enregistrées uniquement une fois qu'elles deviennent débloquées, ce qui fait que ce profil ne peut pas être utilisé pour effectuer le debugging d'applications qui semblent bloquées. Pour les conflits de mutex, les stack traces de ce profil pointent vers les opérations `Lock()` bloquées, ce qui indique les emplacements où votre programme est bloqué. Le profil Mutex permet d'identifier quelle partie de votre programme est à l'origine du conflit. Référez-vous à notre documentation sur le [profiling des blocages en Go][1] (en anglais) pour en savoir plus. Consultez également la note sur les modifications de cette mesure avec la version `1.33.0` dans les [profils delta](#profils-delta). **Remarque** : le profileur de blocage peut entraîner une surcharge considérable pour les workloads de production. Si vous l'activez dans un environnement de production, définissez des débits élevés (comme `100000000`, à savoir 100 ms) et vérifiez si votre latence ou charge CPU augmente.
 
 Goroutines
-: Affiche un snapshot du nombre de goroutines qui exécutent actuellement les mêmes fonctions (sur le processeur, ainsi que celles en attente en dehors du processeur). Une augmentation du nombre de goroutines entre les snapshots peut indiquer des pertes de goroutines dans le programme. Dans la plupart des applications saines, ce profil est principalement constitué de pools de workers et affiche le nombre de goroutines qu'ils utilisent. Pour les applications sensibles à la latence utilisant un grand nombre de goroutines (plus de 10 000), sachez que l'activation de ce profil nécessite des interruptions Stop-The-World O(N). Ces interruptions n'ont lieu qu'une fois pendant chaque période de profiling (valeur par défaut : 60s) et durent normalement `~1μsec` par goroutine. Les applications standard présentant un SLO de latence au 99e centile de `~100ms` peuvent généralement ignorer cet avertissement. Consultez notre documentation sur le [profiling de goroutines dans Go][2] (en anglais) pour en savoir plus.
+: Affiche un snapshot du nombre de goroutines qui exécutent actuellement les mêmes fonctions (sur le processeur, ainsi que celles en attente en dehors du processeur). Une augmentation du nombre de goroutines entre les snapshots peut indiquer des pertes de goroutines dans le programme. Dans la plupart des applications saines, ce profil est principalement constitué de pools de workers et affiche le nombre de goroutines qu'ils utilisent. Pour les applications très sensibles à la latence utilisant un grand nombre de goroutines (plus de 10 000), sachez que l'activation de ce profil nécessite des interruptions Stop-The-World. Ces interruptions n'ont lieu qu'une fois pendant chaque période de profiling (valeur par défaut : 60 s) et durent normalement `~1μsec` par goroutine. Les applications standard présentant un SLO de latence au 99e centile de `~100ms` peuvent généralement ignorer cet avertissement. Consultez notre documentation sur le [profiling de goroutines en Go][2] (en anglais) pour en savoir plus.
 
 #### Profils delta
-<div class="alert alert-info"><strong>Remarque</strong> : pour les versions du profileur Go antérieures à <code>1.33.0</code>, les métriques Allocations, Allocated Memory, Mutex et Block sont affichées sous forme de mesures <em>depuis le lancement du processus</em>, et non de mesures <em>pendant la période de profiling</em>. La version <code>1.33.0</code> du profileur modifie les profils delta et vous permet d'observer l'évolution de ces métriques au lieu de consulter uniquement leur valeur totale. Vous pouvez télécharger les mesures cumulées recueillies à l'aide de l'icône <strong>Download Profile Data</strong>, en sélectionnant les options <code>block.pprof</code>, <code>heap.pprof</code> et <code>mutex.pprof</code>. <br/><br/>Il est possible que Datadog cesse de proposer la fonctionnalité de stockage des mesures cumulées dans ses prochaines versions. Si vous utilisez cette fonctionnalité, <a href="/help/">contactez l'assistance</a> afin de présenter votre scénario d'utilisation.</div>
+<div class="alert alert-info"><strong>Remarque</strong> : pour les versions du profileur Go antérieures à <code>1.33.0</code>, les métriques Allocations, Allocated Memory, Mutex et Block sont affichées sous forme de mesures <em>accumulées depuis le lancement du processus</em>, et non de mesures <em>pendant la période de profiling</em>. La version <code>1.33.0</code> du profileur modifie les profils delta et vous permet d'observer l'évolution de ces métriques au lieu de consulter uniquement leur valeur totale. Le profiling delta est activé par défaut. La version <code>1.35.0</code> du profileur vous permet de désactiver les profils delta grâce à l'option <code>WithDeltaProfiles</code>.<br/><br/>À compter de la version <code>1.37.0</code> du profileur, les profils accumulés ne sont plus importés lorsque le profiling delta est activé, afin de réduire l'utilisation de la bande passante ascendante. Si vous avez besoin des profils accumulés complets, <a href="/help/">contactez l'assistance</a> afin de présenter votre scénario d'utilisation.</div>
 
 
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md

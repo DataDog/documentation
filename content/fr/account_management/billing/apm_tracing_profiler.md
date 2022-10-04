@@ -1,14 +1,15 @@
 ---
-title: Tarification de l'APM
-kind: documentation
 aliases:
-  - /fr/account_management/billing/profiler/
-  - /fr/account_management/billing/apm_distributed_tracing/
-  - /fr/account_management/billing/apm_tracing_profiling/
+- /fr/account_management/billing/profiler/
+- /fr/account_management/billing/apm_distributed_tracing/
+- /fr/account_management/billing/apm_tracing_profiling/
+kind: documentation
+title: Tarification d'APM
 ---
+
 [L'APM et le profileur en continu][1] vous permettent d'identifier les goulots d'étranglement dans vos services, et d'analyser les traces distribuées et les performances du code au sein de votre architecture de microservices.
 
-Deux options de tarification sont disponibles, selon que vous utilisiez ou non l'APM et le profiling. En outre, la fonctionnalité [Tracing Without Limits][2] peut être combinée avec l'APM pour filtrer et regrouper les données de votre application et les spans indexées grâce à des [filtres de rétention personnalisés basés sur des tags][3].
+Deux options de tarification sont disponibles, selon que vous utilisiez ou non l'APM et le profiling. Vous pouvez contrôler le flux de données ingérées grâce aux [contrôles d'ingestion][2]. Il est également possible de définir les spans à conserver durant la période de rétention : pour ce faire, il vous suffit de les indexer avec des [filtres de rétention basés sur des tags][3].
 
 | Paramètre de facturation  | Prix                                      | Spans ingérées et spans indexées                                                                 | Facturation                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -139,7 +140,7 @@ Kubernetes crée des conteneurs pause pour obtenir l'adresse IP du pod respectif
 
 **6. Le nombre de hosts facturés tient-il compte de vos services ?**
 
-L'APM est facturé en fonction du nombre de [hosts][4] déployés avec un Agent qui envoie des traces, et non en fonction du nombre de services. La fonctionnalité Tracing Without Limits est facturée en fonction du nombre de [spans indexées et ingérées][13]. Pour estimer le nombre de spans indexées et ingérées que chaque service envoie, consultez la documentation sur les [métriques d'utilisation][14].
+Le coût d'APM varie en fonction du nombre de [hosts][4] déployés avec des Agents qui envoient des traces, et non en fonction du nombre de services. De plus, pour l'allocation mensuelle par host, le coût d'APM est basé sur le volume de spans ingérées et le nombre de spans indexées. Pour estimer le volume de spans ingérées et indexées qui sont envoyées par chacun de vos services, consultez la documentation relative à l'[ingestion][2] et à la [rétention][13].
 
 **7. Qu'en est-il de vos filtres App Analytics existants ?**
 
@@ -163,8 +164,8 @@ Oui. Si vous souhaitez acheter le profileur en continu sans l'APM, faites-le-nou
 
 
 [1]: /fr/tracing/
-[2]: /fr/tracing/trace_explorer/
-[3]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
+[2]: /fr/tracing/trace_ingestion/ingestion_controls
+[3]: /fr/tracing/trace_retention/#retention-filters
 [4]: /fr/account_management/billing/pricing/#infrastructure-monitoring
 [5]: /fr/account_management/billing/pricing/#apm
 [6]: /fr/tracing/profiling/
@@ -174,5 +175,5 @@ Oui. Si vous souhaitez acheter le profileur en continu sans l'APM, faites-le-nou
 [10]: https://docs.datadoghq.com/fr/account_management/billing/serverless/#serverless-functions
 [11]: /fr/account_management/billing/
 [12]: /fr/tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
-[13]: /fr/tracing/trace_retention_and_ingestion/
-[14]: /fr/tracing/trace_retention_and_ingestion/usage_metrics
+[13]: /fr/tracing/trace_retention/
+[14]: /fr/tracing/trace_retention/usage_metrics

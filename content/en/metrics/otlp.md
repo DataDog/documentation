@@ -5,7 +5,7 @@ further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
       text: 'Learn more about distributions'
-    - link: 'tracing/setup_overview/open_standards/'
+    - link: 'tracing/trace_collection/open_standards/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
 ---
@@ -67,6 +67,8 @@ The default mapping is as follows:
 1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations.
 2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
 
+**Note**: Histogram metrics in OTLP are mapped to Distribution metrics. Because of how OTLP sends this data, the max, min, and percentile aggregations are approximations, not accurate calculations.
+
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
 - If the `mode` is set to `counters`, the following metrics are produced:
 
@@ -121,14 +123,13 @@ You may add all resource attributes as tags by using the `resource_attributes_as
 OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog honors these conventions and tries to use its value as a hostname. The semantic conventions are considered in the following order:
 
 1. `datadog.host.name`, a Datadog-specific hostname convention
-2. `k8s.node.name`, the Kubernetes node name
-3. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
-4. `host.id`, the unique host ID
-5. `host.name`, the system hostname
-6. `container.id`, the container ID
+1. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
+1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions
+1. `host.id`, the unique host ID
+1. `host.name`, the system hostname
 
 If none are present, Datadog assigns a system-level hostname to payloads.
-On the OpenTelemetry Collector, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
+If sending data from a remote host, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
 
 ### Example
 

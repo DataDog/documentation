@@ -159,6 +159,15 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{/is_exact_match}}
 ```
 
+The `is_exact_match` condition also supports matching multiple strings:
+
+```text
+{{#is_exact_match "host.name" "production" "staging"}}
+  This displays if the host that triggered the alert is exactly
+  named production or staging. @dev-team@company.com
+{{/is_exact_match}}
+```
+
 The `is_exact_match` conditional variable also supports [`{{value}}` template variables](#template-variables):
 
 ```text
@@ -295,16 +304,17 @@ If your facet has periods, use brackets around the facet, for example:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI Pipeline monitors][5]_
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI monitors][5]_
 
-To include **any** attribute or tag from a log, a trace span, a RUM event, or a CI Pipeline event matching the monitor query, use the following variables:
+To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
-| Monitor type    | Variable syntax                                         |
-|-----------------|---------------------------------------------------------|
-| Log             |  `{{log.attributes.key}}` or `{{log.tags.key}}`          |
-| Trace Analytics |  `{{span.attributes.key}}` or `{{span.tags.key}}`        |
-| RUM             |  `{{rum.attributes.key}}` or `{{rum.tags.key}}`          |
-| CI Pipeline     | `{{cipipeline.attributes.key}}`                          |
+| Monitor type    | Variable syntax                                  |
+|-----------------|--------------------------------------------------|
+| Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
+| Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
+| RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
+| CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
+| CI Test         | `{{citest.attributes.key}}`                      |
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
@@ -346,13 +356,21 @@ For check monitor variables (custom check and integration check), the variable `
 
 ### Composite monitor variables
 
-Composite monitors can access the value associated with the sub-monitors at the time the alert triggers.
+Composite monitors can access the value and status associated with the sub-monitors at the time the alert triggers.
 
 For example, if your composite monitor has sub-monitor `a`, you can include the value of `a` with:
 
 ```text
 {{ a.value }}
 ```
+
+To retrieve the status of the sub-monitor `a` use:
+
+```text
+{{ a.status }}
+```
+
+Possible values for the status are: `OK`, `Alert`, `Warn`, and `No Data`.
 
 Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag/facet.
 
@@ -472,7 +490,7 @@ The monitors link is customizable with additional parameters. The most common ar
 
 
 
-[1]: /monitors/create/types/
+[1]: /monitors/create/#monitor-types
 {{% /tab %}}
 {{% tab "Logs" %}}
 
@@ -532,10 +550,20 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 {{ .matched }} the host name
 ```
 
+### URL Encode
+
+If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+
+**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+
+```
+https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
+```
+
 [1]: /monitors/create/configuration/#alert-grouping
 [2]: /monitors/create/types/log/
 [3]: /monitors/create/types/apm/?tab=analytics
 [4]: /monitors/create/types/real_user_monitoring/
-[5]: /monitors/create/types/ci_pipelines/
+[5]: /monitors/create/types/ci/
 [6]: /monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

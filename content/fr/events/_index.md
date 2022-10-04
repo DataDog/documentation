@@ -1,403 +1,99 @@
 ---
-title: Événements
-kind: documentation
 aliases:
-  - /fr/guides/eventcorrelation/
-  - /fr/guides/markdown/
-  - /fr/graphing/event_stream/
+- /fr/guides/eventcorrelation/
+- /fr/guides/markdown/
+- /fr/graphing/event_stream/
 further_reading:
-  - link: /api/v1/events/
-    tag: Documentation
-    text: API d'événements Datadog
-  - link: /dashboards/widgets/event_stream/
-    tag: Documentation
-    text: Ajouter un widget Flux d'événements à un dashboard
+- link: /api/v1/events/
+  tag: Documentation
+  text: API d'événements Datadog
+kind: documentation
+title: Événements
 ---
-Un événement représente n'importe quelle activité pouvant s'avérer pertinente pour les équipes d'ingénierie (devs, ops et responsables de la sécurité). Consultez la documentation consacrée aux développeurs pour en savoir plus sur l'[envoi d'événements][1] à Datadog.
 
-{{< site-region region="us" >}}
-## Flux d'événements
+{{< img src="events/events-overview.png" alt="Events Explorer" >}}
 
-Le [flux d'événements][2] affiche les événements les plus récents générés par votre infrastructure et les monitors associés.
+## Prise en main
 
-[2]: https://app.datadoghq.com/event/stream
+Les _événements_ correspondent à des entrées signalant des modifications importantes en lien avec la gestion et le dépannage des opérations IT. Ils concernent par exemple les déploiements de code, la santé des services, les changements de configuration ou les alertes de surveillance.
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-## Flux d'événements
+Les événements Datadog sont consolidés au sein d'une interface unique vous permettant de les rechercher, les analyser et les filtrer depuis n'importe quelle source.
 
-Le [flux d'événements][3] affiche les événements les plus récents générés par votre infrastructure et les monitors associés.
+Datadog recueille automatiquement les événements recueillis par l'Agent et les intégrations installées, sans qu'aucune configuration supplémentaire ne soit requise.
 
-[3]: https://app.datadoghq.eu/event/stream
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-## Event Explorer
+La collecte d'événements est prise en charge par plus d'une centaine d'intégrations Datadog, notamment [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [AWS ECS][6] ou [AWS Auto Scaling][7], [Sentry][8] et [Nagios][9]. 
 
-L'[Event Explorer][4] affiche les événements les plus récents générés par votre infrastructure et les monitors associés. Vous pouvez personnaliser les colonnes affichées à l'aide du bouton **Options** situé en haut à droite des événements.
+## Envoyer des événements personnalisés à Datadog
 
+Vous pouvez également envoyer vos propres événements personnalisés à l'aide de l'[API Datadog][10], de [checks d'Agent custom][11], de [DogStatsD][12] ou de l'[API d'e-mail pour les événements][13].
 
-[4]: https://app.ddog-gov.com/event/explorer
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-## Events explorer
+## Explorer les événements Datadog
 
-L'[Event Explorer][5] affiche les événements les plus récents générés par votre infrastructure et les monitors associés. Vous pouvez personnaliser les colonnes affichées à l'aide du bouton **Options** situé en haut à droite des événements.
+### Flux d'événements
 
+Le flux d'événements Datadog offre un apercu instantané des événements de votre infrastructure et de vos services. Il vous permet de résoudre des problèmes actuels ou passés.
 
-[5]: https://us3.datadoghq.com/event/explorer
-{{< /site-region >}}
+Le flux d'événements affiche les événements les plus récents générés par votre infrastructure ainsi que les monitors associés.
 
-### Recherche
+{{< img src="events/the-event-stream.jpg" alt="Le flux d'événements" >}}
 
-#### Texte intégral
+### Events Explorer et analyses
 
-La recherche en texte intégral fonctionne sur tous les mots-clés fournis dans la requête de recherche après l'application des filtres. La recherche en texte intégral examine le texte, le titre et les tags de l'événement, les utilisateurs qui ont commenté l'événement ainsi que les hostnames et les appareils liés à l'événement.
+<div class="alert alert-warning">L'Events Explorer et les fonctionnalités répertoriées ci-dessous ont été mis à disposition de tous les clients au premier trimestre 2022.</div>
 
-#### Filtres
+L'[Events Explorer][14] vous permet d'agréger et de visualiser les événements reçus par Datadog. Vous pouvez regrouper ou filtrer des événements en fonction d'un attribut et les représenter sur un graphique avec les [outils d'analyse d'événements][15]. Grâce à la [syntaxe de requête][16], il est même possible de filtrer des événements à l'aide d'opérateurs booléens et de wildcards.
 
-Ciblez des propriétés d'événements spécifiques à l'aide des préfixes suivants :
+{{< img src="events/events-explorer.mp4" alt="Tri d'événements en fonction d'attributs et exploration d'analyse" video=true >}}
 
+### Événements en tant que source dans les widgets de dashboard
 
-{{< site-region region="us" >}}
+Vous pouvez configurer une source de données correspondant à vos événements dans les [widgets de graphique][17], afin de créer des séries temporelles, des tableaux et des top lists à partir de vos requêtes de recherche d'événements.
 
+{{< img src="events/events-dashboard.mp4" alt="Un widget de graphique utilisant une source basée sur des événements" video=true >}}
 
-`sources:github,chef`           
-: Affiche les événements de GitHub OU Chef.
+Par exemple, le dashboard [Monitor Notifications Overview][18] permet d'analyser les tendances des événements d'alerte de monitor afin de vous aider à améliorer votre configuration et à réduire les alertes superflues.
 
-`tags:env-prod,db`              
-: Affiche les événements avec le tag #env-prod OU #db.
+### Générer des métriques custom à partir d'événements
 
-`hosts:i-0ade23e6,db.myapp.com` 
-: Affiche les événements provenant de i-0ade23e6 OU de db.myapp.com.
+[Générez des métriques][3] avec une période de rétention de 15 mois à partir de n'importe quelle requête de recherche d'événements pour créer des monitors et des alertes basés sur des événements historiques.
 
-`status:error`                  
-: Affiche les événements avec un statut d'erreur (valeurs autorisées : `error`, `warning` et `success`).
+{{< img src="events/generate-metrics.png" alt="Image de métriques avec la requête de recherche d'événements." >}}
 
-`priority:low`                  
-: Affiche seulement les événements non prioritaires (valeurs autorisées : `low` ou `normal` ; `all` par défaut).
+### Normaliser et enrichir des événements avec des pipelines de traitement
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+Un _processeur_ exécute des opérations de structuration de données sur les attributs des événements au moment de leur ingestion. Un _pipeline_ regroupe un ou plusieurs processeurs, qui sont exécutés l'un après l'autre. Les pipelines de traitement d'événements vous permettent d'accomplir ce qui suit :
 
-`sources:github,chef`           
-: Affiche les événements de GitHub OU Chef.
+- Normaliser des sources d'événements distinctes, en remappant des attributs. Vous pouvez par exemple utiliser les mêmes [tags de service][19] réservés pour tous vos événements.
+- Enrichir des événements avec des données externes stockées dans un [tableau de référence][20] (version bêta). Vous pouvez par exemple mapper un nom de service au répertoire de votre service, de façon à ajouter aux événements des informations sur l'équipe à qui appartient l'événement, des liens vers des dashboards ou encore des références à une documentation.
 
-`tags:env-prod,db`              
-: Affiche les événements avec le tag #env-prod OU #db.
+Datadog prévoit de prendre en charge un nombre croissant de types de processeurs. Pour en savoir plus, [contactez l'assistance][21].
 
-`hosts:i-0ade23e6,db.myapp.com` 
-: Affiche les événements provenant de i-0ade23e6 OU de db.myapp.com.
-
-`status:error`                  
-: Affiche les événements avec un statut d'erreur (valeurs autorisées : `error`, `warning` et `success`).
-
-`priority:low`                  
-: Affiche seulement les événements non prioritaires (valeurs autorisées : `low` ou `normal` ; `all` par défaut).
-
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-
-`source:github,chef`           
-: Affiche les événements de GitHub OU Chef.
-
-`host:i-0ade23e6,db.myapp.com`
-: Affiche les événements provenant de i-0ade23e6 OU de db.myapp.com.
-
-`service:kafka`                
-: Affiche les événements du service `kafka`.
-
-`status:error`                 
-: Affiche les événements avec un statut d'erreur (valeurs autorisées : `error`, `warning` et `success`).
-
-`role:`                        
-: 
-
-`availability-zone:us-east-1a` 
-: Affiche les événements de la zone d'accessibilité AWS `us-east-1a`.
-
-`container_id:foo`             
-: Affiche les événements provenant du conteneur avec l'ID `foo`.
-
-`@evt.name:foo`                
-: Affiche l'événement ayant comme nom `foo`.
-
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-
-`source:github,chef`           
-: Affiche les événements de GitHub OU Chef.
-
-`host:i-0ade23e6,db.myapp.com`
-: Affiche les événements provenant de i-0ade23e6 OU de db.myapp.com.
-
-`service:kafka`                
-: Affiche les événements du service `kafka`.
-
-`status:error`                 
-: Affiche les événements avec un statut d'erreur (valeurs autorisées : `error`, `warning` et `success`).
-
-`role:`                        
-: 
-
-`availability-zone:us-east-1a` 
-: Affiche les événements de la zone d'accessibilité AWS `us-east-1a`.
-
-`container_id:foo`             
-: Affiche les événements provenant du conteneur avec l'ID `foo`.
-
-`@evt.name:foo`                
-: Affiche l'événement ayant comme nom `foo`.
-
-{{< /site-region >}}
-
-**Remarque** : les filtres effectuent une recherche de correspondance exacte et ne prennent pas en compte les chaînes de caractères partielles.
-
-{{< site-region region="gov" >}}
-#### Contexte
-
-Créez un contexte pour explorer vos événements sur votre page Event Explorer. Commencez par sélectionner l'intervalle approprié, puis utilisez la barre de recherche pour filtrer vos événements et vos analyses.
-
-#### Facettes et mesures
-
-Une fois recueillis, les attributs de vos événements peuvent être indexés en tant que facettes ou mesures. À gauche de la vue, vous pouvez utiliser les facettes et les mesures pour filtrer vos résultats. Vous pouvez créer des facettes ou des mesures à partir d'attributs ou de tags d'événement existants.
-
-Une **facette** présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre d'événements représentés. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour filtrer vos données, sélectionnez les valeurs que vous souhaitez afficher. Pour utiliser un attribut en tant que facette, cliquez sur cet attribut, puis sur l'option **Create facet**. La valeur de l'attribut est stockée pour tous les nouveaux événements.
-
-Une **mesure** est un attribut doté d'une valeur numérique associé à votre événement. Pour commencer à utiliser un attribut en tant que mesure, cliquez sur cet attribut numérique, puis sur l'option **Create measure**. La valeur de l'attribut est stockée pour tous les nouveaux événements.
-
-#### Vues enregistrées
-
-Utilisez les vues enregistrées pour configurer automatiquement votre Event Explorer avec un ensemble présélectionné de facettes, de mesures, de recherches, d'intervalles et de visualisations. Consultez la [section relative aux vues enregistrées][5] pour en savoir plus.
-
-
-[5]: logs/explorer/saved_views/
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-#### Contexte
-
-Créez un contexte pour explorer vos événements sur votre page Event Explorer. Commencez par sélectionner l'intervalle approprié, puis utilisez la barre de recherche pour filtrer vos événements et vos analyses.
-
-#### Facettes et mesures
-
-Une fois recueillis, les attributs de vos événements peuvent être indexés en tant que facettes ou mesures. À gauche de la vue, vous pouvez utiliser les facettes et les mesures pour filtrer vos résultats. Vous pouvez créer des facettes ou des mesures à partir d'attributs ou de tags d'événement existants.
-
-Une **facette** présente tous les membres distincts d'un attribut ou d'un tag, en plus de proposer des analyses de base, comme le nombre d'événements représentés. Les facettes vous permettent d'effectuer des pivotements ou de filtrer vos ensembles de données en fonction d'un attribut donné. Pour filtrer vos données, sélectionnez les valeurs que vous souhaitez afficher. Pour utiliser un attribut en tant que facette, cliquez sur cet attribut, puis sur l'option **Create facet**. La valeur de l'attribut est stockée pour tous les nouveaux événements.
-
-Une **mesure** est un attribut doté d'une valeur numérique associé à votre événement. Pour commencer à utiliser un attribut en tant que mesure, cliquez sur cet attribut numérique, puis sur l'option **Create measure**. La valeur de l'attribut est stockée pour tous les nouveaux événements.
-
-#### Vues enregistrées
-
-Utilisez les vues enregistrées pour configurer automatiquement votre Event Explorer avec un ensemble présélectionné de facettes, de mesures, de recherches, d'intervalles et de visualisations. Consultez la [section relative aux vues enregistrées][6] pour en savoir plus.
-
-
-[6]: logs/explorer/saved_views/
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
-#### Réglages avancés
-
-Pour effectuer une recherche plus avancée, utilisez le langage de requête d'événement Datadog, par exemple :
-
-`tags:env-prod OR db`                             
-: Affiche les événements avec le tag #env-prod OU #db.
-
-`tags:security-group:sg-123 AND role:common-node` 
-: Affiche les événements avec les tags `#security-group:sg-123` ET `#role:common-node`.
-
-`cloud_provider:* NOT "azure"`                    
-: Affiche tous les fournisseurs de cloud à l'exception de ceux dotés du tag « azure ».
-
-Utilisez la recherche de tags pour trouver tous les événements dotés du même de clé, par exemple :
-
-`tags:<KEY>:<VALUE>` 
-: Affiche les événements avec le tag `<KEY>:<VALUE>`.
-
-`<KEY>:*`            
-: Affiche tous les événements avec le tag `<KEY>` lié.
-
-`<KEY>`:`<REGEX>`    
-: Affiche tous les événements avec le tag `<KEY>:<VALUE>`, où `<VALUE>` correspond à `<REGEX>`.
-
-`tags:<KEY>`         
-: Cette recherche n'est pas valide.
-
-`<KEY>:<VALUE>`      
-: Cette recherche n'est pas valide.
-
-Pour combiner plusieurs termes dans une requête complexe, utilisez l'un des opérateurs booléens suivants :
-
-`AND`    
-: **Intersection** : les deux termes sont compris dans les événements sélectionnés (`AND` est défini par défaut pour les tags en l'absence d'opérateur).        
-: **Exemple** : `redis_* AND down`
-
-`OR`     
-: **Union** : un des deux termes est inclus dans les événements sélectionnés. Utilisez une virgule (`,`) pour les tags.                               
-: **Exemple** : `sources:nagios,chef directory OR Mixlib`
-
-`NOT`    
-: **Exclusion** : le terme suivant n'est PAS inclus dans l'événement. Cet opérateur fonctionne uniquement avec les chaînes de caractères (utilisez `-` devant les tags). 
-: **Exemple** : `-tags:<KEY>:<VALUE> NOT "<STRING>"`
-
-**Remarque** : certaines des fonctionnalités avancées du langage de requête, comme la logique booléenne, fonctionnent uniquement dans la page de flux d'événements et ne sont pas disponibles dans les carrés de graphiques ou dans les widgets des dashboards.
-
-Combinez des préfixes afin d'effectuer des recherches plus complexes. Par exemple, pour trouver toutes les erreurs `chef` ou `nagios` ouvertes qui mentionnent `cassandra`, utilisez :
-
-```text
-sources:nagios,chef status:error cassandra
-```
-
-**Remarque** : n'ajoutez pas d'espace après deux-points ou une virgule dans ces listes. Tout le contenu qui n'est pas lié à un préfixe fait l'objet d'une recherche plein texte.
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-#### Réglages avancés
-
-Pour effectuer une recherche plus avancée, utilisez le langage de requête d'événement Datadog, par exemple :
-
-`tags:env-prod OR db`                             
-: Affiche les événements avec le tag #env-prod OU #db.
-
-`tags:security-group:sg-123 AND role:common-node` 
-: Affiche les événements avec les tags `#security-group:sg-123` ET `#role:common-node`.
-
-`cloud_provider:* NOT "azure"`                    
-: Affiche tous les fournisseurs de cloud à l'exception de ceux dotés du tag « azure ».
-
-Utilisez la recherche de tags pour trouver tous les événements dotés du même de clé, par exemple :
-
-`tags:<KEY>:<VALUE>` 
-: Affiche les événements avec le tag `<KEY>:<VALUE>`.
-
-`<KEY>:*`            
-: Affiche tous les événements avec le tag `<KEY>` lié.
-
-`<KEY>`:`<REGEX>`    
-: Affiche tous les événements avec le tag `<KEY>:<VALUE>`, où `<VALUE>` correspond à `<REGEX>`.
-
-`tags:<KEY>`         
-: Cette recherche n'est pas valide.
-
-`<KEY>:<VALUE>`      
-: Cette recherche n'est pas valide.
-
-Pour combiner plusieurs termes dans une requête complexe, utilisez l'un des opérateurs booléens suivants :
-
-`AND`    
-: **Intersection** : les deux termes sont compris dans les événements sélectionnés (`AND` est défini par défaut pour les tags en l'absence d'opérateur).        
-: **Exemple** : `redis_* AND down`
-
-`OR`     
-: **Union** : un des deux termes est inclus dans les événements sélectionnés. Utilisez une virgule (`,`) pour les tags.                               
-: **Exemple** : `sources:nagios,chef directory OR Mixlib`
-
-`NOT`    
-: **Exclusion** : le terme suivant n'est PAS inclus dans l'événement. Cet opérateur fonctionne uniquement avec les chaînes de caractères (utilisez `-` devant les tags). 
-: **Exemple** : `-tags:<KEY>:<VALUE> NOT "<STRING>"`
-
-**Remarque** : certaines des fonctionnalités avancées du langage de requête, comme la logique booléenne, fonctionnent uniquement dans la page de flux d'événements et ne sont pas disponibles dans les carrés de graphiques ou dans les widgets des dashboards.
-
-Combinez des préfixes afin d'effectuer des recherches plus complexes. Par exemple, pour trouver toutes les erreurs `chef` ou `nagios` ouvertes qui mentionnent `cassandra`, utilisez :
-
-```text
-sources:nagios,chef status:error cassandra
-```
-
-**Remarque** : n'ajoutez pas d'espace après deux-points ou une virgule dans ces listes. Tout le contenu qui n'est pas lié à un préfixe fait l'objet d'une recherche plein texte.
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-#### Réglages avancés
-
-Pour effectuer une recherche plus avancée, utilisez le langage de requête de log Datadog. Pour en savoir plus, consultez la section relative à la [syntaxe de recherche de log][6].
-
-Pour combiner plusieurs termes dans une requête complexe, utilisez l'un des opérateurs booléens suivants :
-
-`AND`    
-: **Intersection** : les deux termes sont compris dans les événements sélectionnés (`AND` est défini par défaut pour les tags en l'absence d'opérateur).        
-: **Exemple** : `redis_* AND down`
-
-`OR`     
-: **Union** : un des deux termes est inclus dans les événements sélectionnés. Utilisez une virgule (`,`) pour les tags.                               
-: **Exemple** : `sources:nagios,chef directory OR Mixlib`
-
-`NOT`    
-: **Exclusion** : le terme suivant n'est PAS inclus dans l'événement. Cet opérateur fonctionne uniquement avec les chaînes de caractères (utilisez `-` devant les tags). 
-: **Exemple** : `-tags:<KEY>:<VALUE> NOT "<STRING>"`
-
-[6]: /fr/logs/search_syntax/
-
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-#### Réglages avancés
-
-Pour effectuer une recherche plus avancée, utilisez le langage de requête de log Datadog. Pour en savoir plus, consultez la section relative à la [syntaxe de recherche de log][7].
-
-Pour combiner plusieurs termes dans une requête complexe, utilisez l'un des opérateurs booléens suivants :
-
-`AND`    
-: **Intersection** : les deux termes sont compris dans les événements sélectionnés (`AND` est défini par défaut pour les tags en l'absence d'opérateur).        
-: **Exemple** : `redis_* AND down`
-
-`OR`     
-: **Union** : un des deux termes est inclus dans les événements sélectionnés. Utilisez une virgule (`,`) pour les tags.                               
-: **Exemple** : `sources:nagios,chef directory OR Mixlib`
-
-`NOT`    
-: **Exclusion** : le terme suivant n'est PAS inclus dans l'événement. Cet opérateur fonctionne uniquement avec les chaînes de caractères (utilisez `-` devant les tags). 
-: **Exemple** : `-tags:<KEY>:<VALUE> NOT "<STRING>"`
-
-[7]: /fr/logs/search_syntax/
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
-### Agrégation
-
-Par défaut, les événements associés sont agrégés lorsqu'ils sont affichés dans le flux d'événements. Pour afficher les événements non agrégés, décochez la case **Aggregate related events** dans le coin supérieur droit de votre flux d'événements :
-
-{{< img src="events/event_stream_aggregated.png" alt="Flux d'événements agrégés"  style="width:50%;" >}}
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-### Agrégation
-
-Par défaut, les événements associés sont agrégés lorsqu'ils sont affichés dans le flux d'événements. Pour afficher les événements non agrégés, décochez la case **Aggregate related events** dans le coin supérieur droit de votre flux d'événements :
-
-{{< img src="events/event_stream_aggregated.png" alt="Flux d'événements agrégés"  style="width:50%;" >}}
-{{< /site-region >}}
-
-### Notifications
-
-Vous pouvez utiliser la syntaxe `@notifications` dans Datadog pour envoyer des notifications.
-
-`@support-datadog`                      
-: Crée un ticket d'assistance Datadog lorsque cette mention est ajoutée directement dans vos événements (y compris dans les commentaires).
-
-`@all`                                  
-: Envoie une notification à tous les membres de votre organisation.
-
-`@john`                                 
-: Envoie une notification à l'utilisateur `john`.
-
-`@test@example.com`                     
-: Envoie un e-mail à `test@example.com`.
-
-`@slack-<COMPTE_SLACK>-<NOM_CANAL>` 
-: Publie l'événement ou le graphique sur la chaîne Slack spécifiée.
-
-`@webhook`                              
-: Envoie une alerte ou déclenche le webhook. Consultez l'[article de blog sur les webhooks][7] (en anglais) pour en savoir plus.
-
-`@pagerduty`                            
-: Envoie une alerte à Pagerduty. Vous pouvez également utiliser `@pagerduty-acknowledge` et `@pagerduty-resolve`.
+[En savoir plus sur les pipelines de traitement][22].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/events/guides/
-[2]: https://app.datadoghq.com/event/stream
-[3]: https://app.datadoghq.eu/event/stream
-[4]: https://gov.datadoghq.com/event/stream
-[5]: /fr/logs/explorer/saved_views/
-[6]: /fr/logs/search_syntax/
-[7]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
+
+[1]: /fr/agent/kubernetes/#event-collection
+[2]: /fr/agent/docker/#events
+[3]: /fr/integrations/jenkins/#events
+[4]: /fr/integrations/chef/#report-handler
+[5]: /fr/integrations/puppet/#events
+[6]: /fr/integrations/amazon_ecs/#events
+[7]: /fr/integrations/amazon_auto_scaling/#events
+[8]: /fr/integrations/sentry/
+[9]: /fr/integrations/nagios/#events
+[10]: /fr/api/latest/events/#post-an-event
+[11]: /fr/events/guides/agent/
+[12]: /fr/events/guides/dogstatsd/
+[13]: /fr/events/guides/email/
+[14]: /fr/events/explorer/
+[15]: /fr/events/explorer/#event-analytics
+[16]: /fr/logs/explorer/search_syntax/
+[17]: /fr/dashboards/widgets/alert_graph/
+[18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
+[19]: /fr/getting_started/tagging/unified_service_tagging/
+[20]: /fr/logs/guide/reference-tables/
+[21]: /fr/help/
+[22]: /fr/logs/log_configuration/processors/

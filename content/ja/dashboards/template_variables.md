@@ -91,7 +91,7 @@ title: テンプレート変数
 
 テンプレート変数の値を変更する場合、ダッシュボード URL はそのテンプレート変数の値を反映するよう、`&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>` というフォーマットで更新されます。たとえば、テンプレート変数が `$env` のダッシュボードで値が `prod` に変更された場合、URL のパラメーターは `&tpl_var_env=prod` となります。
 
-値だけをクエリに含めるには、`{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value` という構文を使用します。例えば、`env` という名前のテンプレート変数では、 `environment:$env.value` を使用します。
+値だけをクエリに含めるには、`{TX-PL-LABEL}lt;TEMPLATE_VARIABLE_NAME>.value` という構文で値を追加します。例えば、`service` という名前のテンプレート変数では、 `env:staging-$service.value` を使用します。
 
 #### 関連するテンプレート変数
 テンプレート変数の値を選択するときに、**Associated Values** および **Other Values** セクションが表示されます。Associated Values はページで選択されたその他のテンプレート変数の値から計算され、コンフィギュレーションなしで関連する値をシームレスに示します。

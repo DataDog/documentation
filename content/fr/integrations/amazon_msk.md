@@ -1,11 +1,12 @@
 ---
 categories:
-  - cloud
-  - aws
-  - log collection
+- cloud
+- aws
+- log collection
 ddtype: check
 dependencies: []
-description: Surveillez des métriques clés d'Amazon Managed Streaming for Apache Kafka (MSK).
+description: Surveillez des métriques clés d'Amazon Managed Streaming for Apache Kafka
+  (MSK).
 doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
 draft: false
 git_integration_title: amazon_msk
@@ -18,9 +19,10 @@ kind: integration
 manifest_version: '1.0'
 name: amazon_msk
 public_title: Intégration Datadog/Amazon Managed Streaming for Apache Kafka
-short_description: "Surveillez des métriques clés d'Amazon\_MSK."
+short_description: Surveillez des métriques clés d'Amazon MSK.
 version: '1.0'
 ---
+
 ## Présentation
 
 Amazon Managed Streaming for Apache Kafka (MSK) est un service entièrement géré qui vous permet de créer et d'exécuter facilement des applications qui utilisent Apache Kafka pour traiter les données en streaming.
@@ -92,7 +94,9 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Configurez Amazon MSK de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
-**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_msk` est défini en tant que _Target prefix_.
+**Remarques** : 
+- Si vous stockez vos logs dans un compartiment S3, assurez-vous que `amazon_msk` est défini en tant que _Target prefix_.
+- Si vous stockez vos logs dans un groupe de logs CloudWatch, assurez-vous que son nom contient la sous-chaîne `msk`.
 
 #### Envoyer des logs à Datadog
 

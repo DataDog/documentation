@@ -1,26 +1,28 @@
 ---
-title: Débuter avec les dashboards
-kind: documentation
 further_reading:
-  - link: https://www.datadoghq.com/blog/dashboard-sharing/
-    tag: Blog
-    text: Partager des dashboards en tout sécurité avec des utilisateurs en dehors de votre organisation
-  - link: https://www.datadoghq.com/blog/template-variable-associated-values/
-    tag: Blog
-    text: Utiliser les template variables associées pour affiner vos dashboards
-  - link: https://learn.datadoghq.com/enrol/index.php?id=8
-    tag: Apprentissage
-    text: "Apprentissage en ligne à votre rythme\_: Améliorer vos dashboards"
-  - link: /dashboards/
-    tag: Documentation
-    text: Notions de base sur les dashboards
-  - link: /notebooks/
-    tag: Documentation
-    text: Raconter une histoire à partir de données avec les Notebooks
-  - link: /monitors/
-    tag: Documentation
-    text: Monitors, SLO, notifications, downtimes et incidents
+- link: https://www.datadoghq.com/blog/dashboard-sharing/
+  tag: Blog
+  text: Partager des dashboards en tout sécurité avec des utilisateurs en dehors de
+    votre organisation
+- link: https://www.datadoghq.com/blog/template-variable-associated-values/
+  tag: Blog
+  text: Utiliser les template variables associées pour affiner vos dashboards
+- link: https://learn.datadoghq.com/enrol/index.php?id=8
+  tag: Apprentissage
+  text: 'Apprentissage en ligne à votre rythme : Améliorer vos dashboards'
+- link: /dashboards/
+  tag: Documentation
+  text: Notions de base sur les dashboards
+- link: /notebooks/
+  tag: Documentation
+  text: Raconter une histoire à partir de données avec les Notebooks
+- link: /monitors/
+  tag: Documentation
+  text: Monitors, SLO, notifications, downtimes et incidents
+kind: documentation
+title: Débuter avec les dashboards
 ---
+
 ## Présentation
 
 Pour bien débuter avec les dashboards, vous devez connaître les questions que vous vous posez régulièrement. Quels sont les problèmes courants que rencontrent vos clients ? Lorsqu'un problème survient, quelles questions vous aident à trouver une solution ?
@@ -117,6 +119,14 @@ Chaque dashboard présente une représentation JSON que vous pouvez copier ou ex
 
 Étant donné que tous les widgets et les dashboards sont représentés en JSON, vous pouvez automatiser leur création à l'aide de l'[API Dashboards][14]. Cette fonctionnalité est particulièrement utile si vous souhaitez générer un dashboard à chaque fois que votre équipe commence un nouveau projet, rencontre un problème ou formalise un SLO, par exemple.
 
+### Consulter des dashboards depuis l'application mobile Datadog
+
+Consultez vos dashboards sur votre appareil mobile grâce à l'[application mobile Datadog][15], disponible sur l'[App Store d'Apple][16] et le [Google Play Store][17].
+
+Avec cette application, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog.
+
+{{< img src="dashboards/dashboards-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Dashboards sous iOS et Android">}}
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -135,3 +145,6 @@ Chaque dashboard présente une représentation JSON que vous pouvez copier ou ex
 [12]: https://learn.datadoghq.com/enrol/index.php?id=8
 [13]: /fr/integrations/slack/
 [14]: /fr/api/v1/dashboards/
+[15]: /fr/mobile/
+[16]: https://apps.apple.com/app/datadog/id1391380318
+[17]: https://play.google.com/store/apps/details?id=com.datadog.app

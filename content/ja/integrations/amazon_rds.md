@@ -8,9 +8,8 @@ categories:
 - data store
 - aws
 - log collection
-ddtype: crawler
 dependencies: []
-description: Amazon RDS 関連の大量のメトリクスを追跡する。
+description: Amazon RDS に関連する大量のメトリクスを追跡する。
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
 draft: false
 further_reading:
@@ -52,12 +51,12 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 {{< tabs >}}
 {{% tab "標準" %}}
 
-標準インテグレーションの場合、[AWS インテグレーションタイル][1]の左側で RDS を選択する必要があります。これにより、ご使用の CloudWatch インテグレーションで利用可能な回数だけ、インスタンスに関するメトリクスを受信できます。すべての RDS エンジンタイプに対応しています。
+標準インテグレーションの場合、[AWS インテグレーションページ][1]の `Metric Collection` タブで RDS を有効にする必要があります。これにより、ご使用の CloudWatch インテグレーションで利用可能な回数だけ、インスタンスに関するメトリクスを受信できます。すべての RDS エンジンタイプに対応しています。
 
 このインテグレーションのプリセットダッシュボードには、接続、レプリケーションラグ、読み取り操作とレイテンシー、コンピューター、RAM、書き込み操作とレイテンシー、ディスクメトリクスのメトリクス情報が含まれています。
 
 
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 {{% /tab %}}
 {{% tab "Enhanced" %}}
 
@@ -161,7 +160,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 {{< tabs >}}
 {{% tab "標準" %}}
 
-1. [AWS インテグレーションタイル][1]で、メトリクスの収集の `RDS` にチェックが入っていることを確認します。
+1. [AWS インテグレーションページ][1]で、`Metric Collection` タブの下にある `RDS` が有効になっていることを確認します。
 2. Amazon RDS のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [RDS ポリシー][3]を参照してください。
 
     | AWS アクセス許可            | 説明                          |
@@ -175,11 +174,11 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
+[4]: https://app.datadoghq.com/integrations/amazon-rds
 {{% /tab %}}
 {{% tab "Enhanced" %}}
 
-1. [AWS インテグレーションタイル][1]で、メトリクスの収集の `RDS` にチェックが入っていることを確認します。
+1. [AWS インテグレーションページ][1]で、`Metric Collection` タブの下にある `RDS` が有効になっていることを確認します。
 2. Amazon RDS のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [RDS ポリシー][3]を参照してください。
 
     | AWS アクセス許可            | 説明                          |
@@ -191,10 +190,10 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 3. [Datadog - AWS RDS インテグレーション][4]をインストールします。
 
 
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds
+[4]: https://app.datadoghq.com/integrations/amazon-rds
 {{% /tab %}}
 {{% tab "Native" %}}
 
@@ -322,7 +321,7 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 [2]: https://docs.datadoghq.com/ja/dashboards/
 [3]: https://docs.datadoghq.com/ja/monitors/
 [4]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
 [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring

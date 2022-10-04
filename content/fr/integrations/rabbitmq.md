@@ -2,28 +2,35 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    rabbitmq: assets/dashboards/rabbitmq_dashboard.json
+    rabbitmq_screenboard: assets/dashboards/rabbitmq_screenboard_dashboard.json
   logs:
     source: rabbitmq
   metrics_metadata: metadata.csv
-  monitors: {}
+  monitors:
+    disk_usage: assets/monitors/disk_usage.json
+    message_unacknowledge_rate_anomaly: assets/monitors/message_unacknowledge_rate_anomaly.json
   saved_views:
     pid_overview: assets/saved_views/status_overview.json
     rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
+    rabbitmq_processes: assets/saved_views/rabbitmq_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - log collection
-  - autodiscovery
+- processing
+- log collection
+- autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
 display_name: RabbitMQ
+draft: false
 git_integration_title: rabbitmq
 guid: a790a556-fbaa-4208-9d39-c42c3d57084b
 integration_id: rabbitmq
 integration_title: RabbitMQ
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -32,15 +39,20 @@ metric_prefix: rabbitmq.
 metric_to_check: rabbitmq.queue.messages
 name: rabbitmq
 process_signatures:
-  - rabbitmq
+- rabbitmq
+- rabbitmq-server
 public_title: Intégration Datadog/RabbitMQ
-short_description: 'Surveillez la taille de file d''attente, le nombre de clients, les messages sans accusé de réception et plus encore.'
+short_description: Surveillez la taille de file d'attente, le nombre de clients, les
+  messages sans accusé de réception et plus encore.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard RabbitMQ][1]
 
 ## Présentation
@@ -63,7 +75,7 @@ Le check RabbitMQ est inclus avec le package de l'[Agent Datadog][3]. Vous n'ave
 
 #### Préparer RabbitMQ
 
-Activez le plug-in de gestion RabbitMQ. Consultez la [documentation sur RabbitMQ][4] pour l'activer. L'utilisateur Agent doit au minimum disposer du tag `monitoring` et de ces autorisations :
+Activez le [plug-in de gestion RabbitMQ][4]. L'utilisateur Agent doit au minimum disposer du tag `monitoring` et de ces autorisations :
 
 | Autorisation | Commande            |
 | ---------- | ------------------ |
@@ -92,24 +104,13 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 1. Modifiez le fichier `rabbitmq.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos métriques RabbitMQ. Consultez le [fichier d'exemple rabbitmq.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-   ```yaml
-   init_config:
-
-   instances:
-     ## @param rabbit_api_url - string - required
-     ## For every instance a 'rabbitmq_api_url' must be provided, pointing to the api
-     ## url of the RabbitMQ Managment Plugin (http://www.rabbitmq.com/management.html).
-     #
-     - rabbitmq_api_url: http://localhost:15672/api/
-   ```
-
     **Remarque** : par défaut, l'Agent effectue des checks sur toutes les files d'attente, tous les vhosts et tous les nœuds, mais vous pouvez définir des listes ou des expressions régulières pour limiter ce comportement. Consultez le fichier [rabbitmq.d/conf.yaml][2] pour découvrir des exemples.
 
 2. [Redémarrez l'Agent][3].
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. Pour modifier l'emplacement du fichier de log par défaut, définissez la variable d'environnement `RABBITMQ_LOGS` ou ajoutez ces lignes à votre fichier de configuration RabbitMQ (`/etc/rabbitmq/rabbitmq.conf`) :
 
@@ -124,7 +125,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
    logs_enabled: true
    ```
 
-3. Ajoutez ce bloc de configuration à votre fichier `rabbitmq.d/conf.yaml` pour commencer la collecte de vos logs RabbitMQ :
+3. Modifiez la section `logs` de votre fichier `rabbitmq.d/conf.yaml` pour commencer à recueillir vos logs RabbitMQ :
 
    ```yaml
    logs:
@@ -160,13 +161,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-_Disponible à partir des versions > 6.0 de l'Agent_
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<CONFIG_LOG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": {"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}}` |
+| `<CONFIG_LOG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": [{"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}]}` |
 
 [1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
@@ -192,12 +193,8 @@ Pour des raisons de performances, le check RabbitMQ limite le nombre d'exchanges
 Si vous avez besoin d'augmenter le nombre d'exchanges, de files d'attente ou de nœuds, contactez [l'assistance Datadog][7].
 
 ### Checks de service
+{{< get-service-checks-from-git "rabbitmq" >}}
 
-**rabbitmq.aliveness**:<br>
-L'Agent envoie ce check de service pour tous les vhosts (si `vhosts` n'est pas configuré) OU pour un sous-ensemble de vhosts (ceux qui sont configurés dans `vhosts`). Chaque check de service se voit attribuer le tag `vhost:<nom_vhost>`. Renvoie `CRITICAL` en cas d'échec du check de disponibilité. Si ce n'est pas le cas, renvoie `OK`.
-
-**rabbitmq.status**:
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à RabbitMQ pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -206,8 +203,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
-
-### Blog Datadog
 
 - [Métriques clés pour la surveillance RabbitMQ][8]
 - [Recueillir des métriques avec les outils de surveillance RabbitMQ][9]

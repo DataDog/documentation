@@ -24,6 +24,8 @@ Event monitors allow you to alert on events matching a search query.
 
 To create an [event monitor][1] in Datadog, navigate to **Monitors** > **New Monitor** > **Event**.
 
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+
 ### Define the search query
 
 As you define the search query, the top graph updates.
@@ -35,7 +37,7 @@ As you define the search query, the top graph updates.
     * **Monitor over measure**: If a measure is selected, the monitor alerts over the numerical value of the event facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Configure the alert grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
-    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 100 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you can group by `host` to receive separate alerts for each host.
+    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 1000 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you can group by `host` to receive separate alerts for each host.
 
 ### Set alert conditions
 

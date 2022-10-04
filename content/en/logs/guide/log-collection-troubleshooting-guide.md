@@ -10,11 +10,11 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/"
-  tag: "FAQ"
+- link: "/logs/guide//logs-not-showing-expected-timestamp/"
+  tag: "Guide"
   text: "Why do my logs not have the expected timestamp?"
-- link: "/logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/"
-  tag: "FAQ"
+- link: "/logs/guide/logs-show-info-status-for-warnings-or-errors/"
+  tag: "Guide"
   text: "Why do my logs show up with an Info status even for Warnings or Errors?"
 ---
 
@@ -43,7 +43,7 @@ And then by sending a log like the following:
 
 ```yaml
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 See the [HTTPS log forwarding section][4] for more information.

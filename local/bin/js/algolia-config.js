@@ -8,7 +8,7 @@ let ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME || '';
 // If this is a gitlab run and we don't have an index name already defined lets pull
 // from the config so we can define in one place
 if (process.env.CI_ENVIRONMENT_NAME && !ALGOLIA_INDEX_NAME) {
-    const configDocs = require('../../../src/scripts/config/config-docs');
+    const configDocs = require('../../../assets/scripts/config/config-docs');
     switch (process.env.CI_ENVIRONMENT_NAME) {
         case 'live':
             ALGOLIA_INDEX_NAME = configDocs['live'].algoliaConfig.index;

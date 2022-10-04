@@ -18,6 +18,8 @@ kind: documentation
 title: Continuous Integration Visibility
 ---
 
+{{< vimeo 664357090 >}}
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}

@@ -3,8 +3,13 @@ on:
     # At 08:00 on every day-of-week from Monday through Friday.
     - cron: '0 8 * * 1-5'
 
+permissions: {}
 jobs:
   sdk-versions:
+    permissions:
+      contents: write # for git push
+      pull-requests: write # to create pull request
+
     runs-on: ubuntu-latest
     steps:
       - id: set-versions
@@ -39,7 +44,7 @@ jobs:
           git config user.email packages@datadoghq.com
           git add .
           git commit -m "Bump SDK"
-          git push -f origin HEAD:refs/heads/sdk-versions
+          git push -f origin HEAD:refs/heads/sdk/versions
       - uses: actions/github-script@v4
         name: Propose change with latest versions
         with:
@@ -51,7 +56,7 @@ jobs:
               repo: context.repo.repo,
               title: "[SDK] new versions are available",
               body: "SSID",
-              head: "sdk-versions",
+              head: "sdk/versions",
               base: "master",
               maintainer_can_modify: true
             })

@@ -10,17 +10,17 @@ assets:
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
-  - ''
+- ''
 creates_events: false
 ddtype: check
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
 display_name: Vercel
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-vercel-serverless-functions-with-datadog/
-    tag: Blog
-    text: Surveiller les fonctions sans serveur Vercel avec Datadog
+- link: https://www.datadoghq.com/blog/monitor-vercel-serverless-functions-with-datadog/
+  tag: Blog
+  text: Surveiller les fonctions sans serveur Vercel avec Datadog
 git_integration_title: vercel
 guid: cf0daf64-9c85-43b1-8b6b-7d08f8d31b0f
 integration_id: vercel
@@ -37,10 +37,13 @@ public_title: Vercel
 short_description: Surveiller vos application sans serveur exécutées sur Vercel
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![integration-datadog][1]
 
 ## Présentation

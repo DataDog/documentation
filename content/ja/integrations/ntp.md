@@ -1,38 +1,63 @@
 ---
+app_id: ntp
+app_uuid: 399b74d9-ece5-4517-ae16-c05cac6911b2
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: ntp.offset
+      metadata_path: metadata.csv
+      prefix: ntp.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: NTP
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - network
-creates_events: false
-ddtype: check
+- web
+- network
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
-display_name: NTP
+- https://github.com/DataDog/integrations-core/blob/master/ntp/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: ntp
-guid: 9d105f8c-7fd3-48d7-a5d1-1cc386ec0367
 integration_id: ntp
 integration_title: NTP
+integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ntp.
-metric_to_check: ntp.offset
+manifest_version: 2.0.0
 name: ntp
-public_title: Datadog-NTP インテグレーション
+oauth: {}
+public_title: NTP
 short_description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Network
+  configuration: README.md#Setup
+  description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: NTP
 ---
+
+
+
 ## 概要
 
 Network Time Protocol (NTP) インテグレーションはデフォルトで有効になっており、NTP サーバーとの時間オフセットを 15 分ごとに報告します。ローカル Agent の時間が Datadog サービスや監視対象の他のホストと 15 秒以上ずれていると、以下の問題が発生する可能性があります。
@@ -41,12 +66,14 @@ Network Time Protocol (NTP) インテグレーションはデフォルトで有�
 - メトリクスの遅延
 - メトリクスのグラフの途切れ
 
-デフォルトでは、エージェントが実行されているクラウドプロバイダーがチェックにより検出され、可能な場合はそのクラウドプロバイダーのプライベート NTP サーバーが使用されます。クラウドプロバイダーが検出されない場合は、エージェントで以下の NTP サーバーをデフォルトとします。
+デフォルトでは、Agent が実行されているクラウドプロバイダーがチェックにより検出され、可能な場合はそのクラウドプロバイダーのプライベート NTP サーバーが使用されます。クラウドプロバイダーが検出されない場合は、Agent で以下の NTP サーバーをデフォルトとします。
 
 - `0.datadog.pool.ntp.org`
 - `1.datadog.pool.ntp.org`
 - `2.datadog.pool.ntp.org`
 - `3.datadog.pool.ntp.org`
+
+**注:** NTP リクエストはプロキシ設定に対応していません。
 
 ## セットアップ
 
@@ -56,7 +83,7 @@ NTP チェックは [Datadog Agent][1] パッケージに含まれています�
 
 ### コンフィギュレーション
 
-Agent はデフォルトで  NTP チェックを有効にしますが、チェックを自分で構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーで `ntp.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ntp.d/conf.yaml][3] を参照してください。
+Agent はデフォルトで  NTP チェックを有効にします。チェックを自分で構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーで `ntp.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ntp.d/conf.yaml][3] を参照してください。
 
 **注**: Datadog-NTP チェックのコンフィギュレーションファイルを編集する場合は、 [Agent を再起動][4]してコンフィギュレーションの変更を有効にします。
 

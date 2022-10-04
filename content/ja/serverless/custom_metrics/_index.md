@@ -7,11 +7,11 @@ title: サーバーレスアプリケーションからのカスタムメトリ�
 
 Lambda 関数から Datadog へカスタムメトリクスを送信するにはいくつかの異なる方法があります。
 
-- **ログまたはトレースからカスタムメトリクスを作成**: すでに Lambda 関数からトレースまたはログデータが Datadog に送信されていて、クエリを作成するデータが既存のログまたはトレースにキャプチャされている場合は、再デプロイしたりアプリケーションコードに変更を加えたりせずに[ログおよびトレースからカスタムメトリクスを作成](#creating-custom-metrics-from-logs-or-traces)できます。
-- **Datadog Lambda 拡張機能を使用してカスタムメトリクスを送信**: カスタムメトリクスを直接 Lambda 関数から送信する場合、Datadog では [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)の使用をおすすめしています。お使いの Lambda 関数ランタイムで [Datadog Lambda 拡張機能がサポートされているかどうかをご確認][1]ください。
-- **Datadog Forwarder Lambda を使用してカスタムメトリクスを送信**: Datadog Lambda 拡張機能でサポートされていないランタイムからカスタムメトリクスを送信する場合は、[Datadog Forwarder Lambda](#with-the-datadog-forwarder) を使用します。
+- **[ログまたはトレースからカスタムメトリクスを作成](#creating-custom-metrics-from-logs-or-traces)**: すでに Lambda 関数からトレースまたはログデータが Datadog に送信されていて、クエリを作成するデータが既存のログまたはトレースにキャプチャされている場合は、再デプロイしたりアプリケーションコードに変更を加えたりせずにログおよびトレースからカスタムメトリクスを作成できます。
+- **[Datadog Lambda 拡張機能を使ったカスタムメトリクスの送信](#with-the-datadog-lambda-extension)**: Lambda 関数から直接カスタムメトリクスを送信したい場合、Datadog では [Datadog Lambda 拡張機能][1]の使用を推奨しています。
+- **[Datadog Forwarder Lambda を使用したカスタムメトリクスの送信](#with-the-datadog-forwarder)**: Lambda 関数から Datadog Forwarder Lambda 経由でテレメトリーを送信する場合、Datadog が提供するヘルパー関数を使用してログ経由で顧客のメトリクスを送信することができます。
+- **[(非推奨) CloudWatch ログからカスタムメトリクスを送信](#deprecated-cloudwatch-logs)**: `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` 形式のログを出力してカスタムメトリクスを送信する方法は非推奨となりました。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
 - **(非推奨) Datadog Lambda ライブラリを使用したカスタムメトリクスの送信**: Python、Node.js、Go 用の Datadog Lambda ライブラリは、`DD_FLUSH_TO_LOG` を `false` に設定すると呼び出しをブロックし、ランタイムから Datadog にカスタムメトリクスを同期的に送ることをサポートしています。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
-- **(非推奨) CloudWatch ログからカスタムメトリクスを送信**: `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` 形式のログを出力してカスタムメトリクスを送信する方法は[非推奨](#deprecated-cloudwatch-logs)となりました。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
 - **(非推奨) サードパーティのライブラリを使用**: ほとんどのサードパーティライブラリは、メトリクスをディストリビューションとして送信しないため、実際数より少なく数えられる恐れがあります。
 
 ### ディストリビューションメトリクスについて
@@ -53,14 +53,14 @@ def lambda_handler(event, context):
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="AWS Lambda からのカスタムメトリクスの収集" >}}
 
-Datadog では、サポートされている Lambda ランタイムからのカスタムメトリクスの送信には [Datadog Lambda 拡張機能][1]を使用することをお勧めしています。
+Datadog では、サポートされている Lambda ランタイムからの[**ディストリビューション**](#understanding-distribution-metrics)としてのカスタムメトリクスの送信には [Datadog Lambda 拡張機能][1]を使用することをお勧めしています。
 
 1. Lambda ランタイムに適した一般的な[サーバーレスインストール手順][8]に従ってください。
 1. Lambda 関数からトレースを収集しない場合は、環境変数 `DD_TRACE_ENABLED` を `false` に設定します。
 1. Lambda 関数からログを収集しない場合は、環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `false` に設定します。
 1. 以下のサンプルコードまたは説明に従って、カスタムメトリクスを送信してください。
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
@@ -131,10 +131,87 @@ end
 ```
 
 {{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+[java-dogstatsd-client][1] の最新版をインストールし、以下のサンプルコードに従ってカスタムメトリクスを[**ディストリビューション**](#understanding-distribution-metrics)として送信します。
+
+```java
+package com.datadog.lambda.sample.java;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
+
+// statsd クライアントビルダーをインポートする
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
+public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
+
+    // statsd クライアントのインスタンスを作成する
+    private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
+
+    @Override
+    public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
+
+        // ディストリビューションメトリクスを送信する
+        Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
+
+        APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
+        response.setStatusCode(200);
+        return response;
+    }
+}
+```
+
+[1]: https://github.com/DataDog/java-dogstatsd-client
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+[dogstatsd-csharp-client][1] の最新版をインストールし、以下のサンプルコードに従ってカスタムメトリクスを[**ディストリビューションメトリクス**](#understanding-distribution-metrics)として送信します。
+
+```csharp
+using System.IO;
+
+// statsd クライアントをインポートする
+using StatsdClient;
+
+namespace Example
+{            
+  public class Function
+  {
+    static Function()
+    {
+        // statsd クライアントのインスタンスを作成する 
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
+        DogStatsd.Configure(dogstatsdConfig);
+    }
+
+    public Stream MyHandler(Stream stream)
+    {
+        // ディストリビューションメトリクスを送信する
+        DogStatsd.Distribution("my.custom.dotnet.metric", 1, tags: new[] { "tag:value" });
+        // 関数ロジック
+    }
+  }
+}
+```
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
+{{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
-ランタイム用の DogStatsD クライアントを[インストール][12]し、[サンプルコード][13]に従ってカスタムメトリクスを送信してください。注: 正確な結果を得るためには、[**ディストリビューション**](#understanding-distribution-metrics)を使用する必要があります。
+1. ランタイムに DogStatsD クライアントを[インストール][1]します
+2. [サンプルコード][2]に従って、カスタムトリクスを[**ディストリビューション**](#understanding-distribution-metrics)として送信します
 
+
+[1]: /ja/developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
+[2]: /ja/developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -335,10 +412,8 @@ MONITORING|<UNIX_EPOCH_タイムスタンプ>|<メトリクス値>|<メトリク
 [4]: /ja/metrics/#time-and-space-aggregation
 [5]: /ja/dashboards/guide/query-to-the-graph/
 [6]: /ja/logs/logs_to_metrics/
-[7]: /ja/tracing/generate_metrics/
+[7]: /ja/tracing/trace_pipeline/generate_metrics/
 [8]: /ja/serverless/installation/
 [9]: /ja/serverless/forwarder/
 [10]: /ja/integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy
 [11]: /ja/metrics/
-[12]: /ja/developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
-[13]: /ja/developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client

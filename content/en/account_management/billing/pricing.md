@@ -35,7 +35,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 * Datadog records the number of unique database hosts you are monitoring with Datadog Database Monitoring each hour.
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* A **normalized query**, often called a query digest, represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time.
+* Datadog charges based on the total number of configured [normalized queries][6] being tracked at any given time.
 
 ## Log management
 
@@ -86,15 +86,16 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][6].
+For technical questions, contact [Datadog support][7].
 
-Contact [Sales][7] or your [Customer Success][8] Manager to discuss hourly pricing or billing for your account.
+Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly pricing or billing for your account.
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /metrics/custom_metrics/
-[3]: /tracing/trace_retention/#retention-filters
-[4]: /tracing/trace_ingestion/
-[5]: /tracing/trace_retention/
-[6]: /help/
-[7]: mailto:sales@datadoghq.com
-[8]: mailto:success@datadoghq.com
+[3]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[4]: /tracing/trace_pipeline/ingestion_controls/
+[5]: /tracing/trace_pipeline/trace_retention/
+[6]: /database_monitoring/data_collected/#normalized-queries
+[7]: /help/
+[8]: mailto:sales@datadoghq.com
+[9]: mailto:success@datadoghq.com

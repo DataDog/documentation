@@ -1,13 +1,15 @@
 ---
-title: RUM Performance overview Dashboard
+title: RUM Performance Overview Dashboard
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/explorer'
-      tag: 'Documentation'
-      text: 'Explore your views within Datadog'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
 ---
 
-The performance overview dashboard offers a bird’s-eye view of RUM applications. It is separated into three sections:
+## Overview
+
+The performance overview dashboard offers a bird’s-eye view of RUM applications. It shows:
 
 - **Performance metrics**:
     For all views, four browser metrics are highlighted: Loading Time, First Contentful Paint, DOM Content Loaded, and Load Event. For each one of these metrics, widgets show the median, the 75th percentile, and the 90th percentile.
@@ -16,9 +18,9 @@ The performance overview dashboard offers a bird’s-eye view of RUM application
 - **Page views breakdown**:
     Analyze the nature of your traffic and the associated loading time for each segment.
 
-{{< img src="real_user_monitoring/dashboards/performance_overview.png" alt="Performance overview Dashboard" >}}
+{{< img src="real_user_monitoring/dashboards/performance_overview.png" alt="Out-of-the-box RUM Performance Overview Dashboard" style="width:100%" >}}
 
-For more information about the information displayed, check the [RUM Data Collected documentation][1]
+For more information about the data displayed, see [RUM Browser Data Collected][1].
 
 ## Further Reading
 

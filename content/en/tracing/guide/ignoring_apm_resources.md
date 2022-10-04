@@ -5,7 +5,7 @@ kind: documentation
 
 A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application.
 
-There are two ways to specify that such an endpoint should be untraced and excluded from trace metrics: 
+There are two ways to specify that such an endpoint should be untraced and excluded from trace metrics:
 
 - [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent), or
 - [Tracer configuration](#tracer-configuration-options).
@@ -25,17 +25,17 @@ Configuring the Trace Agent to ignore certain spans or resources applies to all 
 
 Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
-If you can programmatically identify a set of traces that you know you don't want sent Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so Datadog can continue to expand this functionality.
+If you can programmatically identify a set of traces that you know you don't want to send to Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so Datadog can continue to expand this functionality.
 
 The filter tags option requires an exact string match. If your use case requires ignoring by regex, see [Ignoring based on resources](#ignoring-based-on-resources).
 
-You can specify span tags to require or reject by using environment variables:
+You can specify span tags to require or reject by using a comma-separated list of keys and values in environment variables:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
+: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REQUIRE=key1:value1,key2:value2`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rejects traces that have root spans with and exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key:value`.
+: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key1:value1,key2:value2`.
 
 Or you can set them in the Agent configuration file:
 
@@ -43,7 +43,7 @@ Or you can set them in the Agent configuration file:
 apm_config:
   filter_tags:
     require: ["db:sql", "db.instance:mysql"]
-    reject: ["outcome:success"]
+    reject: ["outcome:success", "key2:value2"]
 {{< /code-block >}}
 
 For example, to ignore health checks where the `http.url` matches this endpoint:
@@ -54,12 +54,26 @@ apm_config:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
+Filtering traces this way removes these requests from [trace metrics][3]. For more information on how to reduce ingestion without affecting the trace metrics, see [Ingestion Controls][4].
 
+On the backend, Datadog creates and adds the following span tags to spans after ingestion. These tags cannot be used to drop traces at the Datadog Agent level.
+
+
+| Name                                    | Description                                      |
+|-----------------------------------------|--------------------------------------------------|
+| `http.path_group`                       | The full URL path from the `http.url` tag.        |
+| `http.url_details.host`                 | The host name portion of the `http.url` tag.      |
+| `http.url_details.path`                 | The full request target as passed in an HTTP request line or equivalent. |
+| `http.url_details.scheme`               | The request scheme from the `http.url` tag.       |
+| `http.url_details.queryString`          | The query string portion from the `http.url` tag. |
+| `http.url_details.port`                 | The HTTP port from the `http.url` tag.            |
+| `http.useragent_details.os.family`      | The OS family reported by the User-Agent.         |
+| `http.useragent_details.browser.family` | The browser family reported by the User-Agent.    |
+| `http.useragent_details.device.family`  | The device family reported by the User-Agent.     |
 
 ### Ignoring based on resources
 
-The **ignore resources** option allows resources to be excluded if the global root span of the trace matches certain criteria. See [Exclude resources from being collected][3]. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of ignore resources are not included in trace metrics.
+The **ignore resources** option allows resources to be excluded if the global root span of the trace matches certain criteria. See [Exclude resources from being collected][5]. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of ignore resources are not included in trace metrics.
 
 You can specify resources to ignore either in the Agent configuration file, `datadog.yaml`, or with the `DD_APM_IGNORE_RESOURCES` environment variable. See examples below.
 
@@ -73,7 +87,7 @@ apm_config:
 {{< /code-block >}}
 
 **Notes**:
-- The regex syntax that the Trace Agent accepts is evaluated by Go’s [regexp][4].
+- The regex syntax that the Trace Agent accepts is evaluated by Go’s [regexp][6].
 - Depending on your deployment strategy, you may have to adjust the regex by escaping special characters.
 - If you use dedicated containers with Kubernetes, make sure that the environment variable for the ignore resource option is being applied to the **trace-agent** container.
 
@@ -101,6 +115,13 @@ apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+apm_config:
+  ignore_resources: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
@@ -112,6 +133,14 @@ In the Datadog Agent container’s list of environment variables, add `DD_APM_IG
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 {{< /code-block >}}
 
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+    environment:
+      // other Datadog Agent environment variables
+      - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
+{{< /code-block >}}
+
 [1]: https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
 {{% /tab %}}
 {{% tab "Docker run" %}}
@@ -121,6 +150,7 @@ In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESO
 {{< code-block lang="bash" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -129,6 +159,12 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
+{{< /code-block >}}
+
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+              -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -175,6 +211,13 @@ In the dedicated trace-agent container, add the environment variable `DD_APM_IGN
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: ["value1","Api::HealthchecksController#index$"]
+{{< /code-block >}}
+
 {{% /tab %}}
 {{% tab "Kubernetes Helm" %}}
 
@@ -187,6 +230,13 @@ In the `traceAgent` section of the `values.yaml` file, add `DD_APM_IGNORE_RESOUR
         - name: DD_APM_IGNORE_RESOURCES
           value: Api::HealthchecksController#index$
 
+{{< /code-block >}}
+
+For multiple values:
+
+{{< code-block lang="yaml" >}}
+        - name: DD_APM_IGNORE_RESOURCES
+          value: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
 Alternatively, you can set `agents.containers.traceAgent.env` in the `helm install` command:
@@ -231,18 +281,18 @@ Some of the language-specific tracers have an option to modify spans before they
 
 {{< programming-lang lang="ruby" >}}
 
-The Ruby tracer has a post-processing pipeline that deletes traces that meet certain criteria. More information and examples can be found in [Post-processing traces][1].
+The Ruby tracer has a post-processing pipeline that removes traces that meet certain criteria. More information and examples can be found in [Post-processing traces][1].
 
-For example, if the resource name is `Api::HealthchecksController#index`, use the `trace.delete_if` method to delete traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
+For example, if the resource name is `Api::HealthchecksController#index`, use the `Datadog::Tracing::Pipeline::SpanFilter` class to remove traces that contain the resource name. This filter can also be used to match on other metadata available for the [span object][2].
 
 ```
-Datadog::Tracing::Pipeline.before_flush do |trace|
-  trace.delete_if { |span| span.resource =~ /Api::HealthchecksController#index/ }
-end
+Datadog::Tracing.before_flush(
+   Datadog::Tracing::Pipeline::SpanFilter.new { |span| span.resource =~ /Api::HealthchecksController#index/ }
+)
 ```
 
-[1]: /tracing/setup_overview/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[2]: /tracing/setup_overview/setup/ruby/#manual-instrumentation-2
+[1]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[2]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -312,7 +362,7 @@ public class GreetingController {
 }
 ```
 
-[1]: /tracing/setup_overview/custom_instrumentation/java/#extending-tracers
+[1]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -320,5 +370,7 @@ public class GreetingController {
 
 [1]: /help/
 [2]: /tracing/guide/add_span_md_and_graph_it/
-[3]: /tracing/setup_overview/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
-[4]: https://golang.org/pkg/regexp/
+[3]: /tracing/guide/metrics_namespace/
+[4]: /tracing/trace_ingestion/ingestion_controls
+[5]: /tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected
+[6]: https://golang.org/pkg/regexp/

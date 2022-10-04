@@ -1,5 +1,5 @@
 ---
-title: TOTPs For Multi-Factor Authentication (MFA) in Browser Test
+title: TOTPs For Multi-Factor Authentication (MFA) In Browser Tests
 kind: guide
 further_reading:
    - link: 'https://www.datadoghq.com/blog/mfa-synthetic-testing-datadog/'

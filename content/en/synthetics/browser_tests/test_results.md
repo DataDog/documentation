@@ -8,9 +8,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
   tag: "Blog"
   text: "Monitor Core Web Vitals with Synthetic Monitoring"
+- link: "/synthetics/guide/explore-rum-through-synthetics/"
+  tag: "Documentation"
+  text: "Explore RUM & Session Replay in Synthetics"
 ---
 
-Test results appear after a Datadog Synthetic test execution. Browser test results correspond to the test execution at a point in time in one specific location, one specific browser, and one specific device type.
+## Overview
+
+Test results appear after a Synthetic test executes. Browser test results correspond to the test execution at a point in time in a specific location, browser, and device type.
 
 Look at the latest failed test runs and compare them to a recent successful one in the **Sample Results** section. Scroll down to the **Test Results** section and click on a test result to examine a specific result thoroughly.
 
@@ -59,13 +64,11 @@ Every step in which a full URL loads contains page performance information.
 
 [Google's Core Web Vitals][1] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to a good user experience.
 
-Synthetic monitoring includes two available lab metrics: [Largest Contentful Paint][2] and [Cumulative Layout Shift][3].
+Synthetic Monitoring includes two available lab metrics: [Largest Contentful Paint][2] and [Cumulative Layout Shift][3].
 
-[First Input Delay][4] is available when using Real User Monitoring where real user or field data is available.
+{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" style="width=80%" >}}
 
-Learn more about [Real User Monitoring and Core Web Vitals][5].
-
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
+[First Input Delay][4] is available if you are using [Real User Monitoring][5] to collect real user and field data. For more information, see [Monitoring Page Performance][6].
 
 ### Errors
 
@@ -117,13 +120,13 @@ Resources can be filtered by resource type. Also, a search can be performed over
 
 ### Backend Traces
 
-The traces panel shows your traces associated with the browser synthetic test. The UI is similar to the APM [Trace View][6] except for the following difference.
+The traces panel shows your traces associated with the browser synthetic test. The UI is similar to the APM [Trace View][7] except for the following difference.
 
-One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (depending on your tracing setup and on the URLs you allowed in your [Settings][7]). Use the dropdown to choose the trace to view.
+One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (depending on your tracing setup and on the URLs you allowed in your [Settings][8]). Use the dropdown to choose the trace to view.
 
 ### Step duration
 
-The step duration represents the amount of time the step takes to execute with our [locator algorithm][8]. Not only does the step duration include the action (such as user interactions), but also it incorporates the wait and retry mechanism, which allows browser tests to ensure an element is able to be interacted with. 
+The step duration represents the amount of time the step takes to execute with our [locator algorithm][9]. Not only does the step duration include the action (such as user interactions), but also it incorporates the wait and retry mechanism, which allows browser tests to ensure an element is able to be interacted with. 
 
 ## Failed test result
 
@@ -141,10 +144,10 @@ Common browser test errors include:
 : The specified option is missing from the dropdown menu.
 
 `Forbidden URL`
-: The test likely encountered a protocol that is not supported. Reach out to [Datadog support][9] for more details.
+: The test likely encountered a protocol that is not supported. Reach out to [Support][10] for more details.
 
 `General test failure`
-: A general error message. [Contact support][9] for more details.
+: A general error message. [Contact Support][10] for more details.
 
 ## Further Reading
 
@@ -154,8 +157,9 @@ Common browser test errors include:
 [2]: https://web.dev/lcp/
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
-[5]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[6]: /tracing/visualization/trace/
-[7]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
-[8]: /synthetics/guide/browser-test-self-maintenance/
-[9]: /help/
+[5]: /real_user_monitoring/
+[6]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[7]: /tracing/trace_explorer/trace_view/
+[8]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
+[9]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
+[10]: /help/

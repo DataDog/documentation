@@ -54,7 +54,7 @@ Vous pouvez enregistrer l'importation de fichiers en tant qu'étape. Pour enregi
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Créer une étape Upload file" style="width:60%;">}}
 
-Une limite de 10 fichiers (et de 5 Mo par fichier) s'applique. L'étape Upload est prise en charge par les tests Browser exécutés depuis des emplacements gérés.
+Une limite de 10 fichiers (et de 5 Mo par fichier) s'applique.
 
 ## Étapes ajoutées manuellement
 
@@ -135,6 +135,10 @@ return jQuery().jquery.startsWith('3.5.1')
 Effectuez des vérifications sur un fichier téléchargé lors des étapes précédentes. Il est possible de vérifier qu'un fichier a bien été téléchargé et d'exécuter une assertion sur son nom, sa taille et sa valeur MD5.
 
 **Remarque** : pour mieux comprendre comment tester des fichiers téléchargés, consultez [ce guide dédié][6].
+
+Si un test ne contient pas d'assertion sur le corps de la réponse, la charge utile du corps est abandonnée et le temps de réponse associé à la requête est renvoyé, dans la limite du délai d'expiration défini par le worker Synthetic.
+
+Si un test contient une assertion sur le corps de la réponse et que le délai d'expiration est atteint, une erreur `Assertions on the body/response cannot be run beyond this limit` apparaît.
 
 ### Navigation
 
@@ -320,7 +324,7 @@ Si vous le souhaitez, vous pouvez également évaluer la réussite de l'étape e
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][13], [`xpath`][14] | _Chaîne_ <br> _[Regex][15]_ <br> _Chaîne_, _[Regex][15]_ |
 | header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][15]_                                      |
-| temps de réponse | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
+| response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
 
 Si vous cliquez sur **Test URL**, les assertions de base sont automatiquement renseignées :

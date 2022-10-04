@@ -1,14 +1,29 @@
 ---
+app_id: nginx
+app_uuid: b98a5a97-1d65-4f74-9d1a-b2c1be85a470
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     NGINX Plus base overview: assets/dashboards/plus_overview.json
     NGINX-Metrics: assets/dashboards/NGINX-Metrics_dashboard.json
     NGINX-Overview: assets/dashboards/NGINX-Overview_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - nginx.net.connections
+      - nginx.connections.active
+      metadata_path: metadata.csv
+      prefix: nginx.
+    process_signatures:
+    - 'nginx: マスタープロセス'
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Nginx
   logs:
     source: nginx
-  metrics_metadata: metadata.csv
   monitors:
     '[NGINX] 4xx Errors higher than usual': assets/monitors/4xx.json
     '[NGINX] 5xx Errors higher than usual': assets/monitors/5xx.json
@@ -19,39 +34,51 @@ assets:
     bot_errors: assets/saved_views/bot_errors.json
     nginx_processes: assets/saved_views/nginx_processes.json
     status_code_overview: assets/saved_views/status_code_overview.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - log collection
-creates_events: false
-ddtype: check
+- web
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nginx/README.md'
-display_name: Nginx
+- https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: nginx
-guid: 88620208-3919-457c-ba51-d844d09ac97f
 integration_id: nginx
 integration_title: Nginx
+integration_version: 5.4.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: nginx.
-metric_to_check:
-  - nginx.net.connections
-  - nginx.connections.active
+manifest_version: 2.0.0
 name: nginx
-process_signatures:
-  - 'nginx: マスタープロセス'
-public_title: Datadog-Nginx インテグレーション
+oauth: {}
+public_title: Nginx
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nginx
 ---
+
+
+
 ![NGINX のデフォルトのダッシュボード][1]
 
 ## 概要
@@ -65,14 +92,14 @@ NGINX の商用版である NGINX Plus のユーザーの場合、Agent は、NG
 
 - エラー (4xx コード、5xx コードなど)
 - 上流サーバー (アクティブな接続、5xx コード、健全性チェックなど)
-- キャッシュ (サイズ、ヒット、ミスなど)
-- SSL (ハンドシェイク、失敗したハンドシェイクなど)
+- キャッシュ (サイズ、ヒット数、ミス数など)
+- SSL (ハンドシェイクやハンドシェイクの失敗など)
 
 ## セットアップ
 
 ### インストール
 
-NGINX チェックは、ローカルの NGINX ステータスエンドポイントからメトリクスを取得するため、`nginx` バイナリが 2 つの NGINX ステータスモジュールのいずれかと共にコンパイルされている必要があります。
+NGINX チェックは、ローカルの NGINX ステータスエンドポイントからメトリクスを取得するため、`nginx` バイナリが NGINX ステータスモジュールと共にコンパイルされている必要があります。
 
 - [スタブステータスモジュール][2] - オープンソース NGINX 用
 - [HTTP ステータスモジュール][3] - NGINX Plus 専用
@@ -97,7 +124,7 @@ http_stub_status_module
 {{< tabs >}}
 {{% tab "Host" %}}
 
-各 NGINX サーバーで、他の NGINX 構成ファイルが含まれているディレクトリ (例: `/etc/nginx/conf.d/`) に `status.conf` ファイルを作成します。
+各 NGINX サーバーで、他の NGINX 構成ファイルが含まれているディレクトリ (`/etc/nginx/conf.d/` など) に `status.conf` ファイルを作成します。
 
 ```conf
 server {
@@ -160,29 +187,60 @@ sudo nginx -t && sudo nginx -s reload
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-次の ConfigMap は、NGINX コンテナのインテグレーションテンプレートを定義します。
+以下のスニペットを構成 ConfigMaps に追加し、別のポートでメトリクスエンドポイントを公開します。
 
 ```yaml
 kind: ConfigMap
-apiVersion: v1
 metadata:
-  name: nginxconfig
-  namespace: default
+  name: nginx-conf
 data:
-  nginx.conf: |+
-    worker_processes  5;
-    events {
-      worker_connections  4096;
+[...]
+  status.conf: |
+    server {
+      listen 18080;
+
+      location /nginx_status {
+        stub_status on;
+      }
+
+      location / {
+        return 404;
+      }
     }
-    http {
-        server {
-            location /nginx_status {
-              stub_status on;
-              access_log  /dev/stdout;
-              allow all;
-            }
-        }
-    }
+```
+
+次に、NGINX ポッドで `18080` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
+
+```yaml
+spec:
+  containers:
+    - name: nginx
+      ports:
+        - containerPort: 18080
+      volumeMounts:
+        - mountPath: /etc/nginx/conf.d/status.conf
+          subPath: status.conf
+          readOnly: true
+          name: "config"
+  volumes:
+    - name: "config"
+      configMap:
+          name: "nginx-conf"
+```
+
+最後に、NGINX サービスでそのポートを公開します。
+
+```yaml
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    name: default
+  - port: 81
+    protocol: TCP
+    targetPort: 18080
+    name: status
 ```
 
 {{% /tab %}}
@@ -197,7 +255,7 @@ data:
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化セクション](#containerized)を参照してください。
+ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
 ##### メトリクスの収集
 
@@ -283,7 +341,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:81/ng
 #### ログの収集
 
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[Docker ログ収集ドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
 次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
@@ -305,6 +363,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -321,13 +381,29 @@ metadata:
       ]
   labels:
     name: nginx
-spec:
-  containers:
-    - name: nginx
-  volumes:
-        - name: "config"
-          configMap:
-            name: "nginxconfig"
+```
+
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  annotations:
+    ad.datadoghq.com/nginx.checks: |
+      {
+        "nginx": {
+          "init_config": {},
+          "instances": [
+            {
+              "nginx_status_url":"http://%%host%%:81/nginx_status/"
+            }
+          ]
+        }
+      }
+  labels:
+    name: nginx
 ```
 
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
@@ -335,9 +411,11 @@ spec:
 #### ログの収集
 
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][3]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1
@@ -385,7 +463,7 @@ metadata:
 ##### ログの収集
 
 
-ログの収集は、Datadog Agent ではデフォルトで無効になっています。有効にするには、[ECS ログ収集ドキュメント][2]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
 次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
@@ -419,7 +497,7 @@ metadata:
 
 オープンソース NGINX のユーザーは、ここに示したメトリクスのすべてを利用できるわけではありません。各モジュールで提供されるメトリクスを確認するには、[スタブステータス][2] (オープンソース NGINX) と [HTTP ステータス][3] (NGINX Plus) のモジュールリファレンスを比較してください。
 
-オープンソース NGINX と NGINX Plus では名前が異なるメトリクスがいくつかあります。次のメトリクスは、それぞれまったく同じメトリクスです。
+オープンソース NGINX と NGINX Plus では名前が異なるメトリクスがいくつかありますが、それらは同じメトリクスです。
 
 | NGINX                          | NGINX Plus                   |
 | ------------------------------ | ---------------------------- |

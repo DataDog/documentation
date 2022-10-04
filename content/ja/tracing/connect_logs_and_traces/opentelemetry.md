@@ -328,7 +328,7 @@ func convertTraceID(id string) string {
 
 {{< programming-lang lang="dotnet" >}}
 
-トレースとログを手動で相関付けるには、OpenTelemetry の `TraceId` と `SpanId` を Datadog が使用するフォーマットに変換します。これらの ID をログに `dd_trace_id` と `dd_span_id` 属性で追加してください。次の例では、[Serilog ライブラリ][1]を使用して、OTel (`System.DiagnosticSource.Activity`) のトレースとスパン ID を Datadog の要求するフォーマットに変換する方法を示しています。
+トレースとログを手動で相関付けるには、OpenTelemetry の `TraceId` と `SpanId` を Datadog が使用するフォーマットに変換します。これらの ID をログに `dd.trace_id` と `dd.span_id` 属性で追加してください。次の例では、[Serilog ライブラリ][1]を使用して、OTel (`System.DiagnosticSource.Activity`) のトレースとスパン ID を Datadog の要求するフォーマットに変換する方法を示しています。
 
 ```csharp
 var stringTraceId = Activity.Current.TraceId.ToString();
@@ -337,8 +337,8 @@ var stringSpanId = Activity.Current.SpanId.ToString();
 var ddTraceId = Convert.ToUInt64(stringTraceId.Substring(16), 16).ToString();
 var ddSpanId = Convert.ToUInt64(stringSpanId, 16).ToString();
 
-using (LogContext.PushProperty("dd_trace_id", ddTraceId))
-using (LogContext.PushProperty("dd_span_id", ddSpanId))
+using (LogContext.PushProperty("dd.trace_id", ddTraceId))
+using (LogContext.PushProperty("dd.span_id", ddSpanId))
 {
     Serilog.Log.Logger.Information("Example log line with trace correlation info");
 }

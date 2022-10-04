@@ -48,7 +48,7 @@
   },
 
   "email_support_sentence": {
-    "other": "You can contact our Support Team by visiting <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog's Support Website</a>. (all sites)."
+    "other": "You can contact our Support Team by visiting <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog's Support Website</a>. (all sites). <br><br> For details on how to log into the Support Website, see <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\"> Access Your Support Ticket</a>."
   },
 
   "live_chat_support_sentence": {
@@ -56,7 +56,7 @@
   },
 
   "event_stream_support_sentence": {
-    "other": "Contact Datadog team members or chat with our community on <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog's public Slack</a>."
+    "other": "The <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community program</a> is a network built by Datadog users for Datadog users to help each other find answers to questions or to share product tips and tricks."
   },
 
   "agent_started_sentence": {
@@ -316,6 +316,8 @@
   },
   "beta_check":{
     "other": "Beta"
+  },
+  "learn_more": {
+    "other": "Learn More"
   }
-
 }

@@ -146,6 +146,16 @@ Enter a message to notify your team about this downtime. The message field allow
 
 Notify your team by specifying team members or send the message to a service [integration][3].
 
+#### Disable first recovery notification
+
+By default, Datadog sends a recovery notification for monitors that trigger **before** a downtime and end up recovering **during** a downtime. This is useful when using third party integrations to automatically close opened incidents. Selecting the checkbox will mute these notifications.
+
+{{< img src="monitors/downtimes/downtime_first_recovery.png" alt="mute first recovery notification" style="width:80%;">}}
+
+The option to disable the first recovery notification is additive between multiple downtimes. Consequently, if multiple downtimes overlap and mute the same monitor, the first recovery notification will be muted if **at least one** downtime checked the option to disable it.
+
+**Note**: This option mutes the **first** recovery notification. If a monitor proceeds to trigger and recover again during a downtime, then the corresponding notifications are always muted, regardless of this option's settings.
+
 ## Manage
 
 The Manage Downtime page displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
@@ -155,7 +165,7 @@ Use the facets panel and the search bar to filter the list on the `Creator`, the
 
 ### History
 
-Downtime history is viewable on the [Monitor Status][4] page as overlaid on the group transition history, and the [Event stream][5] by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`.
+Downtime history is viewable on the [Monitor Status][4] page as overlaid on the group transition history, and the [Event explorer][5] by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`.
 
 ### Muting
 
@@ -167,7 +177,7 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 ### Expiration
 
-If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
+If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.
@@ -191,6 +201,6 @@ All alerted states are included on the [weekly monitor report][7] even if the mo
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/#cat-notification
 [4]: /monitors/manage/status/
-[5]: /events/#event-stream
+[5]: /events/explorer
 [6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /account_management/#preferences

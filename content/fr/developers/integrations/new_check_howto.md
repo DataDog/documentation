@@ -1,13 +1,15 @@
 ---
-title: Créer une intégration
-kind: documentation
 aliases:
-  - /fr/developers/integrations/integration_sdk/
-  - /fr/developers/integrations/testing/
-  - /fr/integrations/datadog_checks_dev/
-  - /fr/guides/new_integration/
+- /fr/developers/integrations/integration_sdk/
+- /fr/developers/integrations/testing/
+- /fr/integrations/datadog_checks_dev/
+- /fr/guides/new_integration/
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/new_check_howto.md
+kind: documentation
+title: Créer une intégration
 ---
-Pour qu'une intégration basée sur l'Agent soit considérée comme complète, et donc prête à être incluse dans le référentiel principal et intégrée au paquet de l'Agent, un certain nombre d'exigences doivent être satisfaites :
+Pour qu'une intégration basée sur l'Agent soit considérée comme complète, et donc prête à être incluse dans le référentiel principal et intégrée au package de l'Agent, un certain nombre d'exigences doivent être satisfaites :
 
 - Le fichier `README.md` doit être au bon format et inclure le contenu adéquat.
 - Une batterie de tests doit être effectuée afin de vérifier la bonne collecte de métriques.
@@ -20,13 +22,13 @@ Ces exigences forment une checklist de vérification qui est passée en revue du
 ## Prérequis
 
 - Python 3.8+ doit être disponible sur votre système. Python 2.7 est facultatif, mais conseillé.
-- Docker pour exécuter l'ensemble des tests.
+- Docker pour exécuter la collection de tests.
 
-Si la création et l'activation d'[environnements virtuels Python][1] est généralement conseillé pour isoler l'environnement de développement, ce n'est toutefois pas obligatoire. Pour en savoir plus, consultez la [documentation sur l'environnement Python][2].
+Si la création et l'activation d'[environnements virtuels Python][1] est conseillé pour isoler l'environnement de développement, ce n'est toutefois pas obligatoire. Pour en savoir plus, consultez la section [Environnement Python pour le développement d'intégrations avec l'Agent][2].
 
 ## Configuration
 
-Clonez le [référentiel integrations-extras][3]. Par défaut, ces outils s'attendent à ce que vous travailliez dans le répertoire `$HOME/dd/`. Ce n'est toutefois pas obligatoire, et vous aurez la possibilité de modifier ce paramètre ultérieurement.
+Dupliquez le [référentiel integrations-extras][3]. Par défaut, cette ressource s'attend à ce que vous travailliez dans le répertoire `$HOME/dd/`. Ce n'est toutefois pas obligatoire, et vous aurez la possibilité de modifier ce paramètre ultérieurement.
 
 ```shell
 mkdir $HOME/dd && cd $HOME/dd       # facultatif
@@ -41,7 +43,7 @@ Le [kit de développement][4] est complet et intègre de nombreuses fonctionnali
 pip3 install "datadog-checks-dev[cli]"
 ```
 
-Si vous avez choisi de cloner ce référentiel à un emplacement autre que `$HOME/dd/`, vous devrez modifier le fichier de configuration :
+Si vous avez choisi de dupliquer ce référentiel à un emplacement autre que `$HOME/dd/`, vous devez modifier le fichier de configuration :
 
 ```bash
 ddev config set extras "/chemin/vers/integrations-extras"
@@ -53,7 +55,7 @@ Si vous prévoyez de travailler principalement sur `integrations-extras`, défin
 ddev config set repo extras
 ```
 
-**Remarque** : si vous sautez cette étape, vous devrez utiliser l'option `-e` à chaque appel pour vérifier que le contexte est `integrations-extras` :
+**Remarque** : si vous sautez cette étape, utilisez la commande `-e` à chaque appel pour vérifier que le contexte est `integrations-extras`.
 
 ```bash
 ddev -e COMMANDE [OPTIONS]
@@ -65,13 +67,13 @@ L'une des fonctionnalités du kit de développement est la commande `create`, qu
 
 ### Test d'exécution
 
-Pour effectuer un test d'exécution, utilisez le flag `-n/--dry-run`, qui n'effectue aucune écriture sur le disque.
+Effectuez un test d'exécution avec le flag `-n/--dry-run`, qui n'écrit aucun contenu sur le disque.
 
 ```bash
 ddev create -n Awesome
 ```
 
-Cette commande affiche le chemin où les fichiers auraient été écrits, ainsi que la structure. Pour le moment, contentez-vous de vérifier que le chemin dans la _première ligne_ de la sortie correspond à l'emplacement de votre référentiel Extras.
+Cette commande affiche le chemin où les fichiers auraient été écrits, ainsi que la structure. Vérifiez que le chemin dans la _première ligne_ de la sortie correspond à l'emplacement de votre référentiel Extras.
 
 ### Mode interactif
 
@@ -89,7 +91,7 @@ Après avoir répondu aux questions, la sortie correspond à celle du test d'ex�
 
 Un Check est une classe Python qui doit :
 
-- Les intégrations qui s'exécutent via l'Agent 7+ doivent être compatibles avec Python 3. À l'inverse, les versions 5 et 6 de l'Agent utilisent toujours Python 2.7.
+- Les intégrations qui s'exécutent sur l'Agent 7+ doivent être compatibles avec Python 3. Toutefois, les versions 5 et 6 de l'Agent utilisent toujours Python 2.7.
 - Être dérivée de `AgentCheck`
 - Fournir une méthode avec la signature `check(self, instance)`
 
@@ -97,7 +99,7 @@ Les checks se présentent sous la forme de paquets Python classiques stockés da
 
 ### Implémenter la logique du check
 
-Supposons que vous souhaitez créer un check d'Agent composé uniquement d'un check de service appelé `awesome.search` qui recherche une chaîne sur une page Web. Il renverra `OK` si la chaîne est présente, `WARNING` si la page est accessible mais que la chaîne est absente, et `CRITICAL` si la page est inaccessible. Consultez la section [Envoi de métriques : check custom d'Agent][5] pour découvrir comment envoyer des métriques à l'aide de votre check d'Agent.
+Supposons que vous souhaitiez créer un check d'Agent composé uniquement d'un check de service `awesome.search` qui recherche une chaîne sur une page Web. Ce check renvoie `OK` si la chaîne est présente, `WARNING` si la page est accessible mais que la chaîne est absente, et `CRITICAL` si la page est inaccessible. Consultez la section [Envoi de métriques : check custom d'Agent][5] pour découvrir comment envoyer des métriques à l'aide de votre check d'Agent.
 
 Le code contenu dans `awesome/datadog_checks/awesome/check.py` ressemble à ceci :
 
@@ -136,7 +138,7 @@ class AwesomeCheck(AgentCheck):
                 self.service_check('awesome.search', self.WARNING)
 ```
 
-Pour en savoir plus sur la classe Python de base, consultez la [documentation sur l'API Python][6] (en anglais).
+Pour en savoir plus sur la classe Python de base, consultez la section [Anatomie d'un check Python][6] (en anglais).
 
 ### Écrire des tests
 
@@ -145,9 +147,9 @@ Il existe deux types de tests de base :
 - Les tests d'unités, qui permettent de tester une fonctionnalité spécifique
 - Les tests d'intégration, qui exécutent la méthode `check` et vérifient la bonne collecte des métriques 
 
-Les tests sont _obligatoires_ si vous souhaitez que votre intégration soit ajoutée à `integrations-extras`. Notez que [pytest][7] et [tox][8] sont utilisés pour exécuter les tests.
+Les tests sont _obligatoires_ si vous souhaitez que votre intégration soit ajoutée à `integrations-extras`. **Remarque** : [pytest][7] et [tox][8] sont utilisés pour exécuter les tests.
 
-Pour en savoir plus, consultez la [documentation sur le développement de checks Datadog][9].
+Pour en savoir plus, consultez le [guide d'installation de ddev][9] (en anglais).
 
 #### Test d'unité
 
@@ -192,7 +194,7 @@ ddev test awesome
 
 #### Créer un test d'intégration
 
-Ce test d'unité ne vérifie pas la _logique_ de collecte ; nous allons donc ajouter un test d'intégration. `docker` est utilisé pour lancer un conteneur Nginx et laisser le check récupérer la page d'accueil. Créez un fichier compose `awesome/tests/docker-compose.yml` avec le contenu suivant :
+Ce test ne vérifie toutefois pas la _logique_ de collecte ; vous devez donc ajouter un test d'intégration. `docker` est utilisé pour lancer un conteneur Nginx et permettre au check de récupérer la page d'accueil. Créez un fichier compose `awesome/tests/docker-compose.yml` avec le contenu suivant :
 
 ```yaml
 version: "3"
@@ -204,7 +206,7 @@ services:
       - "8000:80"
 ```
 
-Ouvrez ensuite le fichier `awesome/tests/conftest.py` et remplacez le contenu de cette manière :
+Ouvrez ensuite le fichier `awesome/tests/conftest.py` et remplacez le contenu par ce qui suit :
 
 ```python
 import os
@@ -268,12 +270,23 @@ Le check est quasiment fini. Apportons la touche finale en ajoutant les configur
 
 Pour qu'un check puisse être inclus, l'ensemble des ressources créées par l'architecture ddev doit être complet :
 
-- **`README.md`** : ce fichier contient la documentation de votre check. Il explique sa configuration, les données qu'il recueille, etc.
-- **`spec.yaml`** : ce fichier permet de générer un `conf.yaml.example` à l'aide de l'outil `ddev` (consultez l'onglet « Modèle de configuration » ci-dessous). [Pour en savoir plus, consultez la documentation sur les spécifications de configuration][16].
-- **`conf.yaml.example`** : ce fichier contient les options de configuration par défaut (ou des exemples) pour votre check d'Agent. Ne modifiez pas ce fichier manuellement ! Il est généré à partir du contenu du fichier `spec.yaml`. [Consultez la documentation relative aux fichiers de configuration pour mieux comprendre sa logique.][10]
-- **`manifest.json`** : ce fichier contient les métadonnées de votre check d'Agent, telles que le titre, les catégories, etc. [Consultez la documentation relative aux manifestes pour en savoir plus.][11]
-- **`metadata.csv`** : ce fichier contient la liste de toutes les métriques recueillies par votre check d'Agent. [Consultez la documentation relative aux métadonnées des métriques pour en savoir plus.][12]
-- **`service_check.json`** : ce fichier contient la liste de tous les checks de service recueillis par votre check d'Agent. [Consultez la documentation relative aux checks de service pour en savoir plus.][13]
+`README.md`
+: Ce fichier contient la documentation de votre check. Il explique sa configuration, les données qu'il recueille, etc.
+
+`spec.yaml`
+: Ce fichier permet de générer un `conf.yaml.example` à l'aide de l'outil `ddev` (consultez l'onglet « Modèle de configuration » ci-dessous). Pour en savoir plus, consultez la section [Spécification de la configuration][16] (en anglais).
+
+`conf.yaml.example`
+: Ce fichier contient les options de configuration par défaut (ou des exemples) pour votre check d'Agent. Ne modifiez surtout pas ce fichier manuellement. Il est généré à partir du contenu du fichier `spec.yaml`. Consultez les [références relatives au fichier de configuration][10] pour mieux comprendre sa logique.
+
+`manifest.json`
+: Ce fichier contient les métadonnées de votre check d'Agent, telles que le titre, les catégories, etc. Consultez les [références relatives au fichier de manifeste][11] pour en savoir plus.
+
+`metadata.csv`
+: Ce fichier contient la liste de toutes les métriques recueillies par votre check d'Agent. Consultez les [références relatives au fichier metadata des métriques][12] pour en savoir plus.
+
+`service_check.json`
+: Ce fichier contient la liste de tous les checks de service recueillis par votre check d'Agent. Consultez les [références relatives au fichier service_check][13] pour en savoir plus.
 
 Dans cet exemple, ces fichiers ressembleraient à ce qui suit :
 
@@ -305,14 +318,15 @@ files:
         type: string
         example: Example Domain
     - name: flag_follow_redirects
-      # required: false est implicite ; mettez-le en commentaire pour voir ce qui se passe !
+      # required: false est implicite, mettez-le en commentaire pour voir ce qui se passe !
       required: false
       description: Follow 301 redirects.
       value:
         type: boolean
         example: false
-    # Essayez de supprimer la mise en commentaire de ce modèle pour voir ce qui se passe !
-    #- template: instances/default
+    # Essayez d'intervertir ces modèles pour voir ce qui se passe !
+    #- template: instances/http
+    - template: instances/default
 ```
 
 Générez le fichier `conf.yaml.example` à l'aide de `ddev` :
@@ -324,7 +338,7 @@ ddev validate config --sync awesome
 {{% /tab %}}
 {{% tab "Manifeste" %}}
 
-Le fichier `awesome/manifest.json` pour le check de service Awesome. Notez que le `guid` doit être unique (et valide). N'utilisez donc _pas_ celui de cet exemple. Cet identifiant sera de toute façon automatiquement géré :
+Le fichier `awesome/manifest.json` pour le check de service Awesome. **Remarque** : le `guid` doit être unique (et valide). N'utilisez donc _pas_ celui de cet exemple (l'outil en génère un pour vous) :
 
 ```json
 {
@@ -384,12 +398,12 @@ L'exemple d'intégration contient un check de service. Vous devez donc l'ajouter
 
 ## Compilation
 
-`setup.py` contient le script de configuration setuptools, qui facilite la compilation d'un paquet au format wheel. Pour en savoir plus sur les paquets Python, consultez la [documentation Python officielle][14] (en anglais).
+Le fichier `pyproject.toml` fournit les métadonnées servant à compiler le package et créer le wheel. Pour en savoir plus sur les packages Python, consultez la section [Compilation de projets Python][14] (en anglais).
 
-Une fois votre fichier `setup.py` prêt, créez un wheel :
+Une fois votre fichier `pyproject.toml` prêt, créez un wheel :
 
 - Avec l'outil `ddev` (conseillé) : `ddev release build <NOM_INTÉGRATION>`
-- Sans l'outil `ddev` : `cd <RÉPERTOIRE_INTÉGRATION> && python setup.py bdist_wheel`
+- Sans l'outil `ddev` : `cd <RÉPERTOIRE_INTÉGRATION> && pip wheel . --no-deps --wheel-dir dist`
 
 ### Que contient le wheel ?
 
@@ -397,7 +411,7 @@ Le wheel contient tous les fichiers nécessaires au bon fonctionnement de l'int�
 
 ## Installation
 
-Le wheel est installé via la commande `integration` de l'Agent, disponible dans les [versions 6.10.0 et ultérieures de l'Agent][15]. En fonction de votre environnement, il est possible que vous deviez utiliser un utilisateur spécifique ou certaines autorisations précises pour exécuter cette commande :
+Le wheel est installé à l'aide de la commande `integration` de l'Agent, disponible dans les [versions 6.10.0 et ultérieures de l'Agent][15]. En fonction de votre environnement, il est possible que vous deviez utiliser un utilisateur spécifique ou certaines autorisations précises pour exécuter cette commande :
 
 **Linux** (en tant que `dd-agent`) :
 
@@ -429,15 +443,15 @@ Pour les versions >= 6.12 de l'Agent :
 [2]: /fr/developers/integrations/python
 [3]: https://github.com/DataDog/integrations-extras
 [4]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[5]: https://docs.datadoghq.com/fr/metrics/agent_metrics_submission/
+[5]: https://docs.datadoghq.com/fr/developers/metrics/agent_metrics_submission/
 [6]: https://github.com/DataDog/datadog-agent/blob/6.2.x/docs/dev/checks/python/check_api.md
 [7]: https://docs.pytest.org/en/latest
 [8]: https://tox.readthedocs.io/en/latest
-[9]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev#development
-[10]: /fr/developers/integrations/check_references#configuration-file
-[11]: /fr/developers/integrations/check_references#manifest-file
-[12]: /fr/developers/integrations/check_references#metrics-metadata-file
-[13]: /fr/developers/integrations/check_references#service-check-file
-[14]: https://packaging.python.org/tutorials/distributing-packages
+[9]: https://datadoghq.dev/integrations-core/setup/#ddev
+[10]: https://docs.datadoghq.com/fr/developers/integrations/check_references/#configuration-file
+[11]: https://docs.datadoghq.com/fr/developers/integrations/check_references/#manifest-file
+[12]: https://docs.datadoghq.com/fr/developers/integrations/check_references/#metrics-metadata-file
+[13]: https://docs.datadoghq.com/fr/developers/integrations/check_references/#service-check-file
+[14]: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 [15]: https://docs.datadoghq.com/fr/agent/
 [16]: https://datadoghq.dev/integrations-core/meta/config-specs/

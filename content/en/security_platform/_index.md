@@ -36,7 +36,7 @@ Cloud Security Posture Management is not currently available in US1-FED.
 
 Bring speed and scale to your production security operations. Datadog’s Security Platform delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, the Datadog security platform brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-The Datadog Security Platform includes [Application Security Monitoring](#application-security-monitoring), [Cloud SIEM](#security-monitoring), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
+The Datadog Security Platform includes [Application Security Monitoring](#application-security-monitoring), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
 {{< vimeo 669874306 >}}
 </br>
@@ -51,7 +51,7 @@ The Datadog Security Platform includes [Application Security Monitoring](#applic
 
 [Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow.
 
-{{< img src="security_platform/security_monitoring_overview.png" alt="Cloud SIEM sources analyzed view in Datadog" width="100%">}}
+{{< img src="security_platform/security_monitoring/cloud_siem_homepage.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
 ## Cloud Security Posture Management
 

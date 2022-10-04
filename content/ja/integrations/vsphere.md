@@ -1,42 +1,65 @@
 ---
-aliases:
-  - /ja/integrations/vmware/
+app_id: vsphere
+app_uuid: d9b9104f-ffd1-42be-8e18-d8a3aa289b98
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
+    VMware vSphere TKG - Overview: assets/dashboards/vmware_vsphere_tkg_-_overview.json
     vsphere-overview: assets/dashboards/vsphere_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: vsphere.vm.count
+      metadata_path: metadata.csv
+      prefix: vsphere.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: vSphere
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - cloud
-creates_events: true
-ddtype: check
+- cloud
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
-display_name: vSphere
+- https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: vsphere
-guid: 930b1839-cc1f-4e7a-b706-0e8cf3218464
 integration_id: vsphere
 integration_title: vSphere
+integration_version: 6.2.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vsphere.
-metric_to_check: vsphere.vm.count
+manifest_version: 2.0.0
 name: vsphere
-public_title: Datadog-vSphere インテグレーション
+oauth: {}
+public_title: vSphere
 short_description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::クラウド
+  configuration: README.md#Setup
+  description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: vSphere
 ---
+
+
+
 ![Vsphere のグラフ][1]
 
 ## 概要
@@ -51,31 +74,48 @@ vSphere チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ### コンフィギュレーション
 
-vCenter の **管理** セクションで、`datadog-readonly` という読み取り専用ユーザーを追加します。
+vCenter の **Administration** セクションで、`datadog-readonly` という読み取り専用のユーザーを追加し、監視が必要なリソースに読み取り専用のユーザー権限を適用します。リソース階層内のすべての子オブジェクトを監視するには、"Propagate to children” オプションを選択します。
 
 次に、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `vsphere.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル vsphere.d/conf.yaml][4] を参照してください。
 
 [Agent を再起動][5]すると、vSphere メトリクスとイベントが Datadog に送信されます。
 
-**注**: Datadog Agent が vSphere アプライアンスソフトウェアと同じサーバー上にある必要はありません。vSphere チェックが有効になっている Agent は、OS がどこで実行されているかにかかわらず vSphere アプライアンスサーバーをポイントするようにセットアップできます。各インスタンスに応じて `<HOSTNAME>` を更新してください。
+**注**: Datadog Agent が vSphere アプライアンスソフトウェアと同じサーバー上にある必要はありません。vSphere チェックが有効になっている Agent は、vSphere アプライアンスサーバーをポイントするようにセットアップできます。各インスタンスに応じて `<HOSTNAME>` を更新してください。
 
 ### 互換性
 
-Agent バージョン 6.18.0/7.18.0 に付属のチェックバージョン 5.0.0 より、インテグレーションの新しい実装が導入されたことに伴い、コンフィギュレーションの変更が必要になりました。後方互換を維持するため、`use_legacy_implementation` というコンフィギュレーションパラメーターが一時的に利用可能になっています。
+Agent v6.18.0/7.18.0 に付属のチェック v5.0.0 より、新しい実装が導入されたことに伴い、コンフィギュレーションの変更が必要になりました。後方互換を維持するため、`use_legacy_check_version` というコンフィギュレーションパラメーターが一時的に利用可能になっています。
 インテグレーションの旧バージョンをアップグレードする際、このパラメーターはコンフィグで未設定となっており、これまでの実装が強制されます。
-初めてインテグレーションを構成する場合、または新機能 (タグ収集や高度なフィルターオプションなど) を利用したい場合は、[サンプル vsphere.d/conf.yaml][4] コンフィギュレーションファイルを参照してください。特に、`use_legacy_implementation: false` を必ず設定するようにしてください。
+初めてインテグレーションを構成する場合、または新機能 (タグ収集や高度なフィルターオプションなど) を利用したい場合は、[サンプル vsphere.d/conf.yaml][4] コンフィギュレーションファイルを参照してください。特に、`use_legacy_check_version: false` を必ず設定するようにしてください。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `vsphere` を探します。
+[Agent の status サブコマンド][6]を実行し、Checks セクションで `vsphere` を探します。
 
 ## 収集データ
 
-チェックコンフィギュレーションで設定した `collection_level` の値によっては、以下のすべてのメトリクスが収集されるわけではありません。特定の収集レベルでどのメトリクスが収集されるかを確認するには、[Vsphere データ収集レベルのドキュメント][7]を参照してください。
+チェックコンフィギュレーションで設定した `collection_level` の値によっては、以下のすべてのメトリクスが収集されるわけではありません。特定のコレクションに対して収集されたメトリクスを表示するには、[データ収集レベル][7]を参照してください。
 
 ### メトリクス
 {{< get-metrics-from-git "vsphere" >}}
 
+
+#### インスタンスごとのメトリクスを収集
+
+**注**: vSphere インテグレーションは、リソースごとのメトリクス（たとえば CPU に関するもの）とインスタンスごとのメトリクス（たとえば CPU コアに関するもの）の両方を収集できます。つまり、メトリクスにはリソースごとのみ、インスタンスごとのみ、または両方に関連するものがあります。
+リソースとは、現実的または仮想的なマシンのことです。vSphere の VM、ホスト、データストア、クラスターで表されます。
+インスタンスとは、リソース内に見つかる個々のエンティティのことです。vSphere のリソースに関する詳細は、[VMWare インフラストラクチャーアーキテクチャの概要ホワイトペーパー][9]をご参照ください。
+
+デフォルトで、vSphere インテグレーションではリソースごとのメトリクスのみが収集されるため、インスタンスごとのメトリクスの一部が無視されることがあります。これは、`collect_per_instance_filters` オプションを使用して構成することが可能です。以下に例を示します。
+
+```
+collect_per_instance_filters:
+  host:
+    - 'disk\.totalLatency\.avg'
+    - 'disk\.deviceReadLatency\.avg'
+```
+
+`disk` メトリクスは、ホストの各ディスクに特定されるため、収集するには `collect_per_instance_filters` を使用してこのメトリクスを有効にする必要があります。
 
 ### イベント
 
@@ -103,12 +143,20 @@ Agent バージョン 6.18.0/7.18.0 に付属のチェックバージョン 5.0.
 
 ## トラブルシューティング
 
-- [VMWare インテグレーションを使用してプルされる VM の数を制限できますか？][10]
-- [私の vSphere VM がインフラストラクチャーリストビューに複製されています][11]
+- [vSphere による重複ホストのトラブルシューティング][11]
+
+### VM を制限する
+
+VMWare インテグレーションで取り込む VM の数は、`vsphere.d/conf.yaml` ファイルを使用して制限することができます。[サンプル vsphere.d/conf.yaml][4] の `resource_filters` パラメーターのセクションを参照してください。
+
+### vSphere Tanzu Kubernetes Grid (TKG) の監視
+
+Datadog vSphere インテグレーションは、[TKG][12] VM とコントロールプレーン VM からメトリクスとイベントを自動的に収集します。コンテナ、ポッド、ノードレベルのメトリクスを含む、TKG クラスターのより詳細な情報を収集するには、クラスターに [Datadog Agent][13] をインストールすることができます。TKG に特化したコンフィギュレーションファイルの例については、[ディストリビューションドキュメント][14]を参照してください。
 
 ## その他の参考資料
 
-Datadog を使用した vSphere 環境の監視については、Datadog の[ブログ記事][12]を参照してください。
+- [Datadog で vSphere を監視する][15]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/vsphere/images/vsphere_graph.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -118,7 +166,10 @@ Datadog を使用した vSphere 環境の監視については、Datadog の[ブ
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.monitoring.doc/GUID-25800DE4-68E5-41CC-82D9-8811E27924BC.html
 [8]: https://github.com/DataDog/integrations-core/blob/master/vsphere/metadata.csv
-[9]: https://github.com/DataDog/integrations-core/blob/master/vsphere/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
+[9]: https://www.vmware.com/pdf/vi_architecture_wp.pdf
+[10]: https://github.com/DataDog/integrations-core/blob/master/vsphere/assets/service_checks.json
 [11]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-duplicated-hosts-with-vsphere/
-[12]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers
+[12]: https://tanzu.vmware.com/kubernetes-grid
+[13]: https://docs.datadoghq.com/ja/containers/kubernetes/installation/?tab=operator
+[14]: https://docs.datadoghq.com/ja/containers/kubernetes/distributions/?tab=operator#TKG
+[15]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers

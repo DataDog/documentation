@@ -79,23 +79,6 @@ DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 ```
-
-### Queries are missing explain plans
-
-Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup.
-
-| Possible cause                         | Solution                                  |
-|----------------------------------------|-------------------------------------------|
-| The Agent is running an unsupported version. | Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates. |
-| The Agent is not able to execute a required function in the `datadog` schema of the database. | The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. Ensure this function was created by the root user according to the [setup instructions][1] and that the `datadog` user has permission to execute it. |
-| Queries are truncated. | See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text. |
-| The application client used to execute the query is using the Postgres extended query protocol or prepared statements. | Some client applications using the Postgres [extended query protocol][5] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][6] and the Go client [pgx][7] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][8] or set `PreferSimpleProtocol` on the [pgx][7] connection config. |
-| The query is in a database ignored by the Agent instance config `ignore_databases`. | Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. |
-| The query cannot be explained. | Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans. |
-| The query is relatively infrequent or executes quickly. | The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query. |
-| The application is relying on [search paths][10] for specifying which schema to query. | Postgres does not expose the current search path in [`pg_stat_activity`][11], so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`. |
-
-
 ### Query metrics are missing
 
 Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
@@ -120,10 +103,10 @@ If you have data from some queries, but do not see a particular query or set of 
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
-| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][12]. The number of top queries tracked can be raised by contacting Datadog Support. |
-| The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `true`. See the [Postgres documentation][13] for more information. |
-| The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `true`. See the [Postgres documentation][13] for more information. |
-| The `pg_stat_statements.max` Postgres configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][14]. |
+| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][5]. The number of top queries tracked can be raised by contacting Datadog Support. |
+| The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `true`. See the [Postgres documentation][6] for more information. |
+| The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `true`. See the [Postgres documentation][6] for more information. |
+| The `pg_stat_statements.max` Postgres configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][7]. |
 | The query has been executed only once since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate ten second intervals since the Agent was restarted. |
 
 ### Query samples are truncated
@@ -144,7 +127,7 @@ The resulting normalized query will appear in the app as:
 SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[ ?
 ```
 
-To avoid this, raise the `track_activity_query_size` setting to a value large enough to accommodate the largest expected text size of your queries. For further information, see the Postgres documentation on [runtime statistics][15].
+To avoid this, raise the `track_activity_query_size` setting to a value large enough to accommodate the largest expected text size of your queries. For further information, see the Postgres documentation on [runtime statistics][8].
 
 ### Queries are missing explain plans
 
@@ -152,21 +135,28 @@ Some or all queries may not have plans available. This can be due to unsupported
 
 #### Missing explain function {#undefined-explain-function}
 
-Problem: The Agent is not able to execute a required function in the `datadog` schema of the database. 
+Problem: The Agent is unable to execute a required function in the `datadog` schema of the database.
 
-Solution: The Agent requires the function `datadog.explain_statement(...)` to exist in **all databases** the Agent can collect queries from. 
+Solution: The Agent requires the `datadog.explain_statement(...)` function to exist in **all databases** the Agent can collect queries from.
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -174,22 +164,37 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 #### Agent is running an unsupported version
-Ensure that the Agent is running version 7.32.0 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+Ensure that the Agent is running version 7.36.1 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
 #### Queries are truncated
 See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.
 
-#### Application using Postgres extended query protocol or prepared statements
-The application client used to execute the query is using the Postgres extended query protocol or prepared statements. Some client applications using the Postgres [extended query protocol][5] do not support the collection of explain plans due to the separation of the parsed query and raw bind parameters. For instance, the Python client [asyncpg][6] and the Go client [pgx][7] use the extended query protocol by default. To work around this limitation, you can configure your database client to use the simple query protocol. For example: set `preferQueryMode = simple` for the [Postgres JDBC Client][8] or set `PreferSimpleProtocol` on the [pgx][7] connection config.
+#### Postgres extended query protocol
+
+If a client is using the Postgres [extended query protocol][9] or prepared statements, the Datadog Agent is unable to collect explain plans due to the separation of the parsed query and raw bind parameters. If the client provides an option to force using the simple query protocol, then turning that on enables the Datadog Agent to collect execution plans.
+
+| Language | Client                    | Configuration for simple query protocol                                                                                                                                                                                                                                                                                                                                                |
+|----------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Go       | [pgx][10]                  | Set `PreferSimpleProtocol` to switch to the simple query protocol (See the [ConnConfig documentation][11]).                                                                                                                                                                                                                                                                            |
+| Java     | [Postgres JDBC Client][12] | Set `preferQueryMode = simple` to switch to the simple query protocol (See the [PreferQueryMode documentation][13]).                                                                                                                                                                                                                                                                   |
+| Python   | [asyncpg][14]              | Uses the extended query protocol, which cannot be disabled. Disabling prepared statements does not solve the problem.  To enable the collection of execution plans, format SQL Queries using [psycopg sql][15] (or some other comparable SQL formatter that does proper escaping of SQL values) before passing them to the DB client.                                                  |
+| Python   | [psycopg][16]             | `psycopg2` does not use the extended query protocol so execution plans should be collected without issue. <br/> `psycopg3` uses the extended query protocol by default and cannot be disabled. Disabling prepared statements does not solve the problem. To enable the collection of execution plans, format SQL Queries using [psycopg sql][15] before passing them to the DB client. |
+| Node     | [node-postgres][17]       | Uses the extended query protocol and cannot be disabled. To enable the Datadog Agent to collect execution plans, use [pg-format][18] to format SQL Queries before passing them to [node-postgres][17].                                                                                                                                                                                 |
 
 #### Query is in a database ignored by the Agent instance config
-The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][9]. 
+The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][19].
+
+**Note:** The `postgres` database is also ignored by default in Agent versions <7.41.0.
 
 #### Query cannot be explained
 Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
 
 #### Query is relatively infrequent or executes quickly
-The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][7] to capture the query.
+The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][10] to capture the query.
+
+
+#### Application is relying on search paths for specifying which schema to query
+Postgres does not expose the current [search path][20] in [`pg_stat_activity`][21], so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`.
 
 ### Setup fails on `create extension pg_stat_statements`
 
@@ -206,21 +211,27 @@ This error happens when you are missing the `postgresql-contrib` package that in
 sudo apt-get install postgresql-contrib-10
 ```
 
-See the appropriate version of the [Postgres `contrib` documentation][16] for more information.
+For more information, see the appropriate version of the [Postgres `contrib` documentation][22].
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/
 [3]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [4]: /agent/guide/agent-log-files
-[5]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
-[6]: https://github.com/MagicStack/asyncpg
-[7]: https://github.com/jackc/pgx
-[8]: https://jdbc.postgresql.org/documentation/head/connect.html
-[9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[10]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
-[11]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
-[12]: /database_monitoring/data_collected/#which-queries-are-tracked
-[13]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
-[14]: /database_monitoring/setup_postgres/advanced_configuration
-[15]: https://www.postgresql.org/docs/current/runtime-config-statistics.html
-[16]: https://www.postgresql.org/docs/12/contrib.html
+[5]: /database_monitoring/data_collected/#which-queries-are-tracked
+[6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
+[7]: /database_monitoring/setup_postgres/advanced_configuration
+[8]: https://www.postgresql.org/docs/current/runtime-config-statistics.html
+[9]: https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-FLOW-EXT-QUERY
+[10]: https://github.com/jackc/pgx
+[11]: https://pkg.go.dev/github.com/jackc/pgx#ConnConfig
+[12]: https://jdbc.postgresql.org/documentation/head/connect.html
+[13]: https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/jdbc/PreferQueryMode.html
+[14]: https://github.com/MagicStack/asyncpg
+[15]: https://www.psycopg.org/docs/sql.html
+[16]: https://www.psycopg.org/
+[17]: https://node-postgres.com/
+[18]: https://www.npmjs.com/package/pg-format
+[19]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[20]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
+[21]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
+[22]: https://www.postgresql.org/docs/12/contrib.html

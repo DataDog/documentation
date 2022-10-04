@@ -1,9 +1,8 @@
 ---
 categories:
-  - notification
-  - Collaboration
-  - issue tracking
-ddtype: crawler
+- notification
+- Collaboration
+- issue tracking
 dependencies: []
 description: Datadog-StatusPage.io インテグレーション。
 doc_link: https://docs.datadoghq.com/integrations/statuspage/
@@ -12,14 +11,17 @@ git_integration_title: statuspage
 has_logo: true
 integration_id: statuspage
 integration_title: StatusPage.io
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: statuspage
 public_title: Datadog-StatusPage.io インテグレーション
 short_description: Datadog-StatusPage.io インテグレーション。
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 サードパーティサービスの StatusPage からインシデントをキャプチャして、インシデントを独自のメトリクスとイベントに関連付けます。このインテグレーションに独自の StatusPage.io アカウントは必要ありません。

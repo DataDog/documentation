@@ -10,19 +10,20 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - processing
-  - autodiscovery
-  - log collection
+- processing
+- autodiscovery
+- log collection
 creates_events: false
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
 display_name: MapReduce
 draft: false
 git_integration_title: mapreduce
 guid: 1c143492-84ac-42d2-89d5-a45c718092b0
 integration_id: mapreduce
 integration_title: Map Reduce
+integration_version: 3.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -34,10 +35,13 @@ public_title: Intégration Datadog/MapReduce
 short_description: Surveillez le statut et la durée de vos tâches MapReduce.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ![Dashboard MapReduce][1]
 
 ## Présentation
@@ -66,22 +70,6 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 2. [Redémarrez l'Agent][3].
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-{{% /tab %}}
-{{% tab "Environnement conteneurisé" %}}
-
-#### Environnement conteneurisé
-
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
-
-| Paramètre            | Valeur                                                                                         |
-| -------------------- | --------------------------------------------------------------------------------------------- |
-| `<NOM_INTÉGRATION>` | `mapreduce`                                                                                   |
-| `<CONFIG_INIT>`      | vide ou `{}`                                                                                 |
-| `<CONFIG_INSTANCE>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<NOM_CLUSTER_MAPREDUCE>"}` |
-
 ##### Collecte de logs
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
@@ -107,18 +95,41 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 3. [Redémarrez l'Agent][3].
 
-Consultez la [documentation de Datadog][4] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Docker.
-
-[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/docker/log/
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `mapreduce`                                                                                   |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                                 |
+| `<CONFIG_INSTANCE>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<NOM_CLUSTER_MAPREDUCE>"}` |
+
+##### Collecte de logs
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][2].
+
+Définissez ensuite des [intégrations de logs][3] en tant qu'étiquettes Docker :
+
+```yaml
+LABEL "com.datadoghq.ad.logs"='[{"source": "mapreduce", "service": "<NOM_SERVICE>"}]'
+```
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/docker/log/
+[3]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][3] et cherchez `mapreduce` dans la section Checks.
+Lancez la [sous-commande status de l'Agent][3] et cherchez `mapreduce` dans la section Checks.
 
 ## Données collectées
 
@@ -131,14 +142,8 @@ Consultez la [documentation de Datadog][4] pour découvrir comment configurer l'
 Le check Mapreduce n'inclut aucun événement.
 
 ### Checks de service
+{{< get-service-checks-from-git "mapreduce" >}}
 
-**mapreduce.resource_manager.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au Resource Manager.
-Si ce n'est pas le cas, renvoie `OK`.
-
-**mapreduce.application_master.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'Application Master.
-Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

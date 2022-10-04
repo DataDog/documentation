@@ -1,45 +1,70 @@
 ---
+app_id: tidb
+app_uuid: 79e5c6d7-c494-4df7-98bc-c639e211c0b8
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
-    overview: assets/dashboards/one-screen-overview.json
+    TiDB Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: tidb_cluster.tidb_executor_statement_total
+      metadata_path: metadata.csv
+      prefix: tidb_cluster
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: TiDB
   logs:
-    service: tidb
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+    source: tidb
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: xuyifan02@pingcap.com
+  support_email: xuyifan02@pingcap.com
 categories:
-  - data store
-  - ログの収集
-  - autodiscovery
-  - cloud
-creates_events: false
-ddtype: check
+- data store
+- cloud
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
-display_name: TiDB
+- https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: tidb
-guid: 4b34acac-39ce-4ec4-9329-c68cc4e61279
 integration_id: tidb
 integration_title: TiDB
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
-maintainer: xuyifan02@pingcap.com
-manifest_version: 1.0.0
-metric_prefix: tidb_cluster
-metric_to_check: tidb_cluster.tidb.server_connections
+manifest_version: 2.0.0
 name: tidb
+oauth: {}
 public_title: TiDB
 short_description: TiDB クラスター用インテグレーション
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: TiDB クラスター用インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: TiDB
 ---
+
+
+
 ## 概要
 
 [TiDB][1] クラスターを Datadog に接続すると、以下のことができます。
@@ -48,64 +73,61 @@ supported_os:
 - TiDB/TiKV/TiFlash ログやスロークエリログなど、クラスターのログを収集する。
 - 提供されたダッシュボードでクラスターのパフォーマンスを視覚化する。
 
-> **注:** 
+> **注**:
 >
-> - このインテグレーションには TiDB 4.0 以降が必要です。
-> - 現在、TiDB Cloud と Datadog のインテグレーションは利用できません。
+> - このインテグレーションには TiDB 4.0 以降が必要です。 
+> - TiDB Cloud の場合は、[TiDB Cloud インテグレーション][2]をご覧ください。
 
 ## セットアップ
 
 ### インストール
 
-まず、[Datadog Agent をダウンロードして起動][2]します。
+まず、[Datadog Agent をダウンロードして起動][3]します。
 
-次に、TiDB チェックを手動でインストールします。[指示は環境によって異なります][3]。
-
-> 現在の TiDB インテグレーションバージョン: `1.0.0`
-
-#### ホスト
+次に、TiDB チェックを手動でインストールします。[指示は環境によって異なります][4]。
 
 `datadog-agent integration install -t datadog-tidb==<INTEGRATION_VERSION>` を実行します。
 
-#### コンテナ化
-
-Docker Agent とのこのインテグレーションを使用する最良の方法は、このインテグレーションがインストールされた Agent をビルドすることです。次の Dockerfile を使用して、Agent の更新バージョンをビルドします。
-
-```dockerfile
-FROM gcr.io/datadoghq/agent:latest
-
-ARG INTEGRATION_VERSION=1.0.0
-
-RUN agent integration install -r -t datadog-tidb==${INTEGRATION_VERSION}
-```
-
-イメージをビルドし、プライベート Docker レジストリにプッシュします。
-
-次に、Datadog Agent コンテナイメージをアップグレードします。Helm チャートを使用する場合は、`values.yaml` の `agents.image` セクションを変更して、デフォルトの Agent イメージを置き換えます。
-
-```yaml
-agents:
-  enabled: true
-  image:
-    tag: <NEW_TAG>
-    repository: <YOUR_PRIVATE_REPOSITORY>/<AGENT_NAME>
-```
-
-新しい `values.yaml` を使用して Agent をアップグレードします。
-
-```shell
-helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
-```
-
 ### コンフィギュレーション
-
-#### ホスト
 
 ##### メトリクスの収集
 
-1. TiDB のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `tidb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tidb.d/conf.yaml][4] を参照してください。
+1. TiDB のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `tidb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tidb.d/conf.yaml][5] を参照してください。
 
-2. [Agent を再起動します][5]。
+  [サンプル tidb.d/conf.yaml][5] で構成されるのは、PD インスタンスのみです。TiDB クラスターのその他のインスタンスについては、手動で構成する必要があります。たとえば、、以下のようになります。
+
+  ```yaml
+  init_config:
+
+  instances:
+
+    - pd_metric_url: http://localhost:2379/metrics
+      send_distribution_buckets: true
+      tags:
+        - cluster_name:cluster01
+
+    - tidb_metric_url: http://localhost:10080/metrics
+      send_distribution_buckets: true
+      tags:
+        - cluster_name:cluster01
+
+    - tikv_metric_url: http://localhost:20180/metrics
+      send_distribution_buckets: true
+      tags:
+        - cluster_name:cluster01
+
+    - tiflash_metric_url: http://localhost:8234/metrics
+      send_distribution_buckets: true
+      tags:
+        - cluster_name:cluster01
+
+    - tiflash_proxy_metric_url: http://localhost:20292/metrics
+      send_distribution_buckets: true
+      tags:
+        - cluster_name:cluster01
+  ```
+
+3. [Agent を再起動します][6]。
 
 ##### ログの収集
 
@@ -120,42 +142,42 @@ _Agent バージョン 6.0 以降で利用可能_
 2. TiDB のログの収集を開始するには、次の構成ブロックを `tidb.d/conf.yaml` ファイルに追加します。
 
    ```yaml
-     logs:
-      # pd log
-      - type: file
-        path: "/tidb-deploy/pd-2379/log/pd*.log"
-        service: "tidb-cluster"
-        source: "pd"
+   logs:
+    # pd log
+    - type: file
+      path: "/tidb-deploy/pd-2379/log/pd*.log"
+      service: "tidb-cluster"
+      source: "pd"
 
-      # tikv log
-      - type: file
-        path: "/tidb-deploy/tikv-20160/log/tikv*.log"
-        service: "tidb-cluster"
-        source: "tikv"
+    # tikv log
+    - type: file
+      path: "/tidb-deploy/tikv-20160/log/tikv*.log"
+      service: "tidb-cluster"
+      source: "tikv"
 
-      # tidb log
-      - type: file
-        path: "/tidb-deploy/tidb-4000/log/tidb*.log"
-        service: "tidb-cluster"
-        source: "tidb"
-        exclude_paths:
-          - /tidb-deploy/tidb-4000/log/tidb_slow_query.log
-      - type: file
-        path: "/tidb-deploy/tidb-4000/log/tidb_slow_query*.log"
-        service: "tidb-cluster"
-        source: "tidb"
-        log_processing_rules:
-          - type: multi_line
-            name: new_log_start_with_datetime
-            pattern: '#\sTime:'
-        tags:
-          - "custom_format:tidb_slow_query"
+    # tidb log
+    - type: file
+      path: "/tidb-deploy/tidb-4000/log/tidb*.log"
+      service: "tidb-cluster"
+      source: "tidb"
+      exclude_paths:
+        - /tidb-deploy/tidb-4000/log/tidb_slow_query.log
+    - type: file
+      path: "/tidb-deploy/tidb-4000/log/tidb_slow_query*.log"
+      service: "tidb-cluster"
+      source: "tidb"
+      log_processing_rules:
+        - type: multi_line
+          name: new_log_start_with_datetime
+          pattern: '#\sTime:'
+      tags:
+        - "custom_format:tidb_slow_query"
 
-      # tiflash log
-      - type: file
-        path: "/tidb-deploy/tiflash-9000/log/tiflash*.log"
-        service: "tidb-cluster"
-        source: "tiflash"
+    # tiflash log
+    - type: file
+      path: "/tidb-deploy/tiflash-9000/log/tiflash*.log"
+      service: "tidb-cluster"
+      source: "tiflash"
    ```
 
    クラスターのコンフィギュレーションに従って、`path` と `service` を変更します。
@@ -169,50 +191,11 @@ _Agent バージョン 6.0 以降で利用可能_
    ps -fwwp <TIDB_PROCESS_PID/PD_PROCESS_PID/etc.>
    ```
 
-3. [Agent を再起動します][5]。
-
-#### コンテナ化
-
-##### メトリクスの収集
-
-コンテナ化された環境の場合、TiDB チェックが Datadog Agent イメージに統合された後、オートディスカバリーがデフォルトで構成されます。
-
-したがって、メトリクスは Datadog のサーバーに自動的に収集されます。
-
-デフォルトのオートディスカバリー動作をオーバーライドする必要がある場合は、Datadog アノテーションを TiDB ポッドに追加します。
-
-```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-  name: '<POD_NAME>'
-  annotations:
-    ad.datadoghq.com/tidb.check_names: '["tidb"]'
-    ad.datadoghq.com/tidb.init_configs: '[{}]'
-    ad.datadoghq.com/tidb.instances: '[{"pd_metric_url": "http://%%host%%:2379/metrics", "tidb_metric_url": "http://%%host%%:10080/metrics", "tikv_metric_url": "http://%%host%%:20180/metrics"}]'
-    # (...)
-spec:
-  containers:
-    - name: 'tidb'
-# (...)
-```
-
-完全なガイダンスについては、[オートディスカバリーインテグレーションテンプレート][6]を参照してください。
-
-##### ログの収集
-
-_Agent バージョン 6.0 以降で利用可能_
-
-Datadog Agent では、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][7]を参照してください。
-
-| パラメーター      | 値                                                  |
-| -------------- | ------------------------------------------------------ |
-| `<LOG_CONFIG>` | `{"source": "tidb", "service": "tidb_cluster"}` |
+3. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `tidb` を探します。
+[Agent の status サブコマンド][7]を実行し、Checks セクションで `tidb` を探します。
 
 ## 収集データ
 
@@ -220,25 +203,46 @@ Datadog Agent では、ログの収集はデフォルトで無効になってい
 {{< get-metrics-from-git "tidb" >}}
 
 
-### サービスのチェック
-
-TiDB チェックには、サービスのチェック機能は含まれません。
+> `metrics` コンフィギュレーションオプションを使用して TiDB クラスターから追加のメトリクスを収集することが可能です。
 
 ### イベント
 
 TiDB チェックには、イベントは含まれません。
 
+### サービスのチェック
+{{< get-service-checks-from-git "tidb" >}}
+
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+### macOS で TiKV および TiFlash インスタンスに CPU とメモリのメトリクスがありません
+
+以下のケースで、 TiKV および TiFlash の CPU とメモリのメトリクスが提供されていません。
+
+- macOS で TiKV または TiFlash インスタンスを [tiup playground][10] で実行しています。
+- 新しい Apple M1 マシンで TiKV または TiFlash インスタンスを [docker-compose upd][11] で実行しています。
+
+### メトリクスが多すぎます
+
+TiDB チェックでは、Datadog の `distribution` メトリクスタイプがデフォルトで有効になります。データのこの部分は非常に大きく、多くのリソースを消費する可能性があります。この動作は、`tidb.yml` ファイルで変更できます。
+
+- `send_distribution_buckets: false`
+
+Since there are many important metrics in a TiDB クラスターには多くの重要なメトリクスがあるため、TiDB チェックはデフォルトで `max_returned_metrics` を `10000` に設定します。必要に応じて、`tidb.yml` ファイルで `max_returned_metrics` を減少できます。
+
+- `max_returned_metrics: 1000`
+
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://docs.pingcap.com/tidb/stable
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
-[4]: https://github.com/DataDog/integrations-extras/blob/master/tidb/datadog_checks/tidb/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/tidb/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/integrations/tidb_cloud/
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
+[5]: https://github.com/DataDog/integrations-extras/blob/master/tidb/datadog_checks/tidb/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-extras/blob/master/tidb/metadata.csv
+[9]: https://github.com/DataDog/integrations-extras/blob/master/tidb/assets/service_checks.json
+[10]: https://docs.pingcap.com/tidb/stable/tiup-playground
+[11]: https://github.com/DataDog/integrations-extras/tree/master/tidb/tests/compose
+[12]: https://docs.datadoghq.com/ja/help/

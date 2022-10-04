@@ -3,26 +3,28 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: teamcity
   metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     teamcity_processes: assets/saved_views/teamcity_processes.json
   service_checks: assets/service_checks.json
 categories:
-  - configuration & deployment
-  - autodiscovery
-  - log collection
+- configuration & deployment
+- autodiscovery
+- log collection
 creates_events: true
 ddtype: check
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md'
+- https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
 display_name: Teamcity
 draft: false
 git_integration_title: teamcity
 guid: b390dd3f-47d5-4555-976a-36722833f000
 integration_id: teamcity
 integration_title: Teamcity
+integration_version: 2.1.0
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -30,16 +32,20 @@ manifest_version: 1.0.0
 metric_prefix: teamcity.
 name: teamcity
 process_signatures:
-  - teamcity-server.sh
-  - teamcity-server
+- teamcity-server.sh
+- teamcity-server
 public_title: Intégration Datadog/Teamcity
-short_description: Surveillez les builds et visualisez l'impact de chaque déploiement sur les performances.
+short_description: Surveillez les builds et visualisez l'impact de chaque déploiement
+  sur les performances.
 support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## Présentation
 
 Ce check surveille les événements associés aux builds réussis et les envoie à Datadog.
@@ -56,7 +62,7 @@ Le check Teamcity est inclus avec le package de l'[Agent Datadog][1] : vous n'a
 
 #### Préparer Teamcity
 
-Suivez les étapes dans la [documentation de Teamcity][2] pour activer la connexion en tant qu'invité.
+Pour préparer Teamcity, consultez la section [Activation de la connexion en tant qu'invité][2] (en anglais).
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -147,7 +153,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                                |
 | -------------- | ---------------------------------------------------- |
@@ -170,7 +176,7 @@ Le check Teamcity n'inclut aucune métrique.
 
 ### Événements
 
-Les événements Teamcity qui correspondent à des builds réussis sont transmis à votre application Datadog.
+Les événements Teamcity qui correspondent à des builds réussis sont transmis à Datadog.
 
 ### Checks de service
 

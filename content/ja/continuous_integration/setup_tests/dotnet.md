@@ -1,8 +1,11 @@
 ---
 further_reading:
+- link: /continuous_integration/setup_tests/containers/
+  tag: ドキュメント
+  text: コンテナ内でテスト用に環境変数を転送する
 - link: /continuous_integration/explore_tests
   tag: ドキュメント
-  text: テスト結果とパフォーマンスを調べる
+  text: テスト結果とパフォーマンスを確認する
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング CI
@@ -17,37 +20,103 @@ title: .NET テスト
 ## 互換性
 
 対応する .NET バージョン:
-* .NET Core >= 2.1 と >= 3.0
-* .NET >= 5.0
+* .NET Framework 4.6.1 以上
+* .NET Core 2.1、3.1、.NET 5、および .NET 6
 
 対応するテストフレームワーク:
-* xUnit >= 2.2
-* NUnit >= 3.0
-* MsTest V2 >= 14
+* xUnit 2.2 以上
+* NUnit 3.0 以上
+* MsTestV2 14 以上
 
-## 前提条件
+## 報告方法の構成
 
-[テストデータを収集するために Datadog Agent をインストールします][1]。
+Datadog にテスト結果を報告するには、Datadog の .NET ライブラリを構成する必要があります。
 
-<div class="alert alert-warning">
-Agentless モードはベータ版です。この機能を試すには、このページの<a href="/continuous_integration/setup_tests/dotnet#agentless-beta">指示</a>に従ってください。
-</div>
+{{< tabs >}}
 
-## .NET トレーサーのインストール
+{{% tab "オンプレミス CI プロバイダー (Datadog Agent)" %}}
 
-`dd-trace` コマンドをマシンにグローバルにインストールまたは更新するには、次のコマンドを実行します。
+Jenkins や自己管理型の GitLab CI などのオンプレミス CI プロバイダーでテストを実行する場合、[Agent インストール手順][1]に従って各ワーカノードに Datadog Agent をインストールします。これは、テスト結果が自動的に基礎となるホストメトリクスにリンクされるため、推奨されるオプションです。
 
-{{< code-block lang="bash" >}}
-dotnet tool update -g dd-trace
-{{< /code-block >}}
+CI プロバイダーがコンテナベースのエグゼキューターを使用している場合、ビルド内の `localhost` の使用ではコンテナ自体を参照しており、Datadog Agent が動作している基礎となるワーカーノードではないため、すべてのビルドで `DD_AGENT_HOST` 環境変数 (デフォルトは `http://localhost:8126`) を、ビルドコンテナの中からアクセスできるエンドポイントに設定します。
+
+Kubernetes のエグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] の使用を推奨しており、これは自動的にビルドポッドの環境変数 `DD_AGENT_HOST` を設定してローカルの Datadog Agent と通信させます。
+
+
+[1]: /ja/agent/
+[2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
+{{% tab "クラウド CI プロバイダー (Agentless)" %}}
+
+<div class="alert alert-info">Agentless モードは、Datadog .NET ライブラリのバージョン >= 2.5.1 で使用できます</div>
+
+GitHub Actions や CircleCI など、基盤となるワーカーノードにアクセスできないクラウド CI プロバイダーを使用している場合は、Agentless モードを使用するようにライブラリを構成します。そのためには、以下の環境変数を設定します。
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
+: Agentless モードを有効または無効にします。<br/>
+**デフォルト**: `false`
+
+`DD_API_KEY` (必須)
+: テスト結果のアップロードに使用される [Datadog API キー][1]。<br/>
+**デフォルト**: `(empty)`
+
+さらに、どの [Datadog サイト][2]にデータを送信するかを構成します。
+
+`DD_SITE` (必須)
+: 結果をアップロードする [Datadog サイト][2]。<br/>
+**デフォルト**: `datadoghq.com`<br/>
+**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
+
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /ja/getting_started/site/
+{{% /tab %}}
+
+{{< /tabs >}}
+
+## .NET トレーサー CLI のインストール
+
+以下のいずれかの方法で `dd-trace` コマンドをインストールまたは更新してください。
+
+- 以下のコマンドを実行して、.NET SDK を使用する。
+   ```
+   dotnet tool update -g dd-trace
+   ```
+- 適切なバージョンをダウンロードする。
+    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][1]
+    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][2]
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][3]
+
+- または、[github のリリースページより][4]ダウンロードする。
 
 ## テストのインスツルメンテーション
 
 テストスイートをインスツルメントするには、テストコマンドの前に `dd-trace ci run` を付け、テスト中のサービスまたはライブラリの名前を `--dd-service` パラメーターとして指定し、テストが実行されている環境 (たとえば、 開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を `--dd-env` パラメーターとして使用します。例:
 
+{{< tabs >}}
+
+{{% tab "dotnet テスト" %}}
+
+<a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a> の使用によって
+
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "VSTest.Console" %}}
+
+<a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a> の使用によって
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 すべてのテストは自動的にインスツルメントされます。
 
@@ -78,7 +147,23 @@ dd-trace ci run --help
 **環境変数**: `DD_TRACE_AGENT_URL`<br/>
 **デフォルト**: `http://localhost:8126`
 
-他のすべての [Datadog トレーサーコンフィギュレーション][2]オプションも使用できます。
+他のすべての [Datadog トレーサーコンフィギュレーション][5]オプションも使用できます。
+
+### テストにカスタムタグを追加する
+
+現在アクティブなスパンを使用して、テストにカスタムタグを追加することができます。
+
+```csharp
+// テスト内
+var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
+if (scope != null) {
+    scope.Span.SetTag("test_owner", "my_team");
+}
+// テストは正常に続きます
+// ...
+```
+
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、.NET カスタムインスツルメンテーションドキュメントの[タグの追加][6]セクションを参照してください。
 
 ### Git のメタデータを収集する
 
@@ -140,52 +225,21 @@ Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
 
 1. ツールのバージョンを取得するには、`dd-trace --version` を実行します。
-1. 同じバージョンの `Datadog.Trace` [NuGet パッケージ][3]をアプリケーションに追加します。
-2. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
+2. 同じバージョンの `Datadog.Trace` [NuGet パッケージ][7]をアプリケーションに追加します。
+3. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
 
-カスタムインスツルメンテーションのスパンやタグの追加方法については、[.NET カスタムインスツルメンテーションのドキュメント][4]を参照してください。
-
-## Agentless (ベータ版)
-
-Agent を使用せずにテストスイートをインスツルメントするには、以下の環境変数を構成します。
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED` (必須)
-: Agentless モードを有効または無効にします。<br/>
-**デフォルト**: `false`
-
-`DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][5]。<br/>
-**デフォルト**: `(empty)`
-
-そして、テストコマンドの前に `dd-trace ci run` を付けます。`--dd-service` パラメーターを使用して、サービスやライブラリの名前を指定します。`--dd-env` パラメーターには、テストを実行する環境を指定します (開発者のワークステーションでテストを実行する場合は `local` 、CI プロバイダでテストを実行する場合は `ci` など)。
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
-{{< /code-block >}}
-
-また、 `--api-key` パラメーターを使用して、[Datadog API キー][5]を提供することも可能です。例:
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --api-key <API KEY> --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
-{{< /code-block >}}
-
-`--api-key` を設定すると、自動的に Agentless モードが有効になります。
-
-さらに、どの [Datadog サイト][6]にデータを送信するかを構成します。あなたの Datadog サイトは {{< region-param key="dd_site" >}} です。
-
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][6]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
+カスタムインスツルメンテーションのスパンやタグの追加方法については、[.NET カスタムインスツルメンテーションのドキュメント][8]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/continuous_integration/setup_tests/agent/
-[2]: /ja/tracing/setup_overview/setup/dotnet-core/?tab=windows#configuration
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: /ja/tracing/setup_overview/custom_instrumentation/dotnet/
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /ja/getting_started/site/
+[1]: https://dtdg.co/dd-trace-dotnet-win-x64
+[2]: https://dtdg.co/dd-trace-dotnet-linux-x64
+[3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases
+[5]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
+[6]: /ja/tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
+[7]: https://www.nuget.org/packages/Datadog.Trace
+[8]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/

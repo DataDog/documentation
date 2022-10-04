@@ -1,10 +1,10 @@
 ---
-title: Standards ouverts .NET
-kind: documentation
 code_lang: dotnet
-type: multi-code-lang
 code_lang_weight: 70
-description: 'Standards ouverts pour .NET'
+description: Standards ouverts pour .NET
+kind: documentation
+title: Standards ouverts .NET
+type: multi-code-lang
 ---
 
 ## OpenTracing
@@ -12,7 +12,7 @@ description: 'Standards ouverts pour .NET'
 Datadog prend également en charge la norme OpenTracing. Pour en savoir plus, consultez l'[API OpenTracing][1].
 
 ### Configuration
-Pour prendre en charge OpenTracing, ajoutez le [package NuGet][2] `Datadog.Trace.OpenTracing` à votre application. Lors du démarrage de l'application, initialisez la bibliothèque OpenTracing :
+Pour prendre en charge OpenTracing, ajoutez le [package NuGet][2] `Datadog.Trace.OpenTracing` à votre application. Lors du démarrage de l'application, initialisez le SDK OpenTracing :
 
 ```csharp
 using Datadog.Trace.OpenTracing;

@@ -1,15 +1,20 @@
 ---
-title: Gestion des incidents
-kind: documentation
 description: Créer et gérer des incidents
 further_reading:
-  - link: dashboards/querying/#incident-management-analytics
-    tag: Documentation
-    text: Incident Management Analytics
-  - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
-    tag: Blog
-    text: Meilleures pratiques pour écrire des postmortems d'incident
+- link: https://app.datadoghq.com/release-notes?category=Incident%20Management
+  tag: Notes de version
+  text: Découvrez les dernières versions de la gestion des incidents Datadog (connexion
+    à l'application requise).
+- link: dashboards/querying/#incident-management-analytics
+  tag: Documentation
+  text: Incident Management Analytics
+- link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
+  tag: Blog
+  text: Pratiques recommandées pour la création de post-mortems d'incident
+kind: documentation
+title: Gestion des incidents
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">La fonctionnalité de gestion des incidents n'est pas disponible pour le site gouvernemental de Datadog.</div>
 {{< /site-region >}}
@@ -29,7 +34,9 @@ Dans Datadog, les situations suivantes justifient la déclaration d'un incident�
 
 La gestion des incidents ne nécessite aucune installation. Pour consulter vos incidents, accédez à la page [Incidents][1] où vous trouverez tous les incidents en cours. Vous pouvez configurer des champs supplémentaires pour tous les incidents dans les [paramètres d'incident][2].
 
-**Remarque** : créez et gérez vos incidents avec l'[application mobile Datadog][3], disponible sur l'[Apple App Store][4] et sur le [Google Play Store][5].
+**Remarque** : consultez la liste de vos incidents depuis l'écran d'accueil de votre appareil mobile et gérez ou créez des incidents grâce à l'[application mobile Datadog][3], disponible sur l'[App Store d'Apple][4] et le [Google Play Store][5].
+
+{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents sur l'application mobile">}}
 
 ### Créer un incident
 
@@ -58,6 +65,14 @@ Vous pouvez déclarer un incident directement depuis un monitor, en cliquant sur
 Vous pouvez également ajouter un monitor à un incident existant.
 
 {{< img src="monitors/incidents/existing.png" alt="Ajouter un monitor à un incident existant" style="width:80%;">}}
+
+#### Depuis un signal de sécurité
+
+Déclarez un incident directement à partir d'un signal Cloud SIEM ou Cloud Workload Security en cliquant sur les trois petits points en haut à droite du volet latéral, puis sur **Declare incident**.
+
+Déclarez un incident à partir d'un signal Application Security Monitoring en sélectionnant le bouton d'exportation en haut à droite du volet latéral, puis en cliquant sur **Export to incident**.
+
+{{< img src="monitors/incidents/security-signal-incidents.png" alt="Créer un incident depuis un signal de sécurité" style="width:80%;">}}
 
 #### Depuis la page des incidents
 

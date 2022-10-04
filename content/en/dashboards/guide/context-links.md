@@ -67,7 +67,7 @@ To define custom links or override the default links, specify the link name in t
 
 Available variable types for context links include:
 
-* **Time range variables** `{{timestamp_start}}` and `{{timestamp_end}}`. These variables correspond to the time range of the widget. For timeseries and heat map widgets, these variables correspond to the time range of the clicked time bucket.
+* **Time range variables** `{{timestamp_start}}` and `{{timestamp_end}}`. These variables correspond to the time range of the widget. 
 * **Query variables** (`{{@MerchantTier}}` and `{{@MerchantTier.value}}` in the example above). These variables are for widgets with grouped queries, and identify the specific group a user clicks on.
 * **Dashboard template variables** (`{{$env}}` and `{{$env.value}}` in the example above). These variables identify the current value in use for the template variable when user clicks.
 * **`{{tags}}`**, the default combination of all the variables above.
@@ -243,7 +243,7 @@ Remapping the IP address creates a context link that connects your RUM events wi
 [11]: /infrastructure/process/?tab=linuxwindows
 [12]: /tracing/trace_explorer/?tab=listview
 [13]: /real_user_monitoring/explorer/
-[14]: /tracing/profiler/search_profiles/
+[14]: /profiler/search_profiles/
 [15]: /logs/explorer/
 [16]: /dashboards/widgets/
 [17]: /real_user_monitoring/

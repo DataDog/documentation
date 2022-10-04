@@ -13,7 +13,7 @@ further_reading:
   tag: ブログ
   text: Kubernetes のステートメトリクスを次のレベルへ進化させる旅
 has_logo: true
-integration_id: kubernetes_state_core
+integration_id: kube-state-metrics
 integration_title: Kubernetes State Metrics Core
 is_public: true
 kind: インテグレーション
@@ -53,13 +53,11 @@ Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメ�
 
 Helm `values.yaml` で、以下を追加します。
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsCore:
     enabled: true
-...
 ```
 
 {{% /tab %}}
@@ -67,7 +65,7 @@ datadog:
 
 `kubernetes_state_core` のチェックを有効にするには、DatadogAgent リソースの設定 `spec.features.kubeStateMetricsCore.enabled` を `true` に設定する必要があります。
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -79,7 +77,7 @@ spec:
   features:
     kubeStateMetricsCore:
       enabled: true
-  # ...
+  # (...)
 ```
 
 注: Datadog Operator v0.7.0 以降が必要です。
@@ -100,7 +98,7 @@ spec:
 | 非推奨タグ        | 公式タグ                |
 |-----------------------|-----------------------------|
 | cluster_name          | kube_cluster_name           |
-| コンテナ             | kube_container_name         |
+| container             | kube_container_name         |
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
@@ -109,7 +107,7 @@ spec:
 | job_name              | kube_job                    |
 | namespace             | kube_namespace              |
 | phase                 | pod_phase                   |
-| ポッド                   | pod_name                    |
+| pod                   | pod_name                    |
 | replicaset            | kube_replica_set            |
 | replicationcontroller | kube_replication_controller |
 | statefulset           | kube_stateful_set           |
@@ -147,12 +145,10 @@ Helm の `values.yaml` で `kubeStateMetricsCore` を有効にすると、レガ
 
 Kubernetes State Metrics Core チェックでは、クラスターに `kube-state-metrics` をデプロイする必要がなくなりました。Datadog Helm Chart の一部として `kube-state-metrics` のデプロイを無効にできます。これを行うには、Helm の `values.yaml` に以下を追加します。
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsEnabled: false
-...
 ```
 
 {{% /tab %}}
@@ -519,6 +515,9 @@ datadog:
 Kubernetes State Metrics Core チェックには、イベントは含まれません。
 
 ### サービスのチェック
+
+`kubernetes_state.cronjob.complete`
+: cronjob の最後のジョブが失敗したかどうか。タグ:`kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.cronjob.on_schedule_check`
 : cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。

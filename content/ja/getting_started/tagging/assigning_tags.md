@@ -3,6 +3,7 @@ aliases:
 - /ja/agent/tagging
 - /ja/getting_started/tagging/assigning_tags
 - /ja/tagging/assigning_tags/
+description: Datadog でタグを割り当てる方法について説明します。
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
@@ -43,7 +44,7 @@ title: タグの付け方
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグ付けの方法
+## タグの割り当て方法
 
 ### 構成ファイル
 
@@ -96,7 +97,7 @@ hostname: mymachine.mydomain
 [1]: /ja/getting_started/integrations/
 [2]: /ja/agent/guide/agent-configuration-files/
 [3]: /ja/getting_started/tagging/#defining-tags
-[4]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -138,7 +139,7 @@ hostname: mymachine.mydomain
 [1]: /ja/getting_started/integrations/
 [2]: /ja/agent/guide/agent-configuration-files/
 [3]: /ja/getting_started/tagging/#defining-tags
-[4]: /ja/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -163,19 +164,19 @@ hostname: mymachine.mydomain
 
 Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
 
-| 環境変数               | 説明                                          |
-|------------------------------------|------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | docker コンテナラベルを抽出します                      |
-| `DD_DOCKER_ENV_AS_TAGS`            | docker コンテナー環境変数を抽出します       |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                                   |
-| `DD_CHECKS_TAG_CARDINALITY`        | チェックメトリクスにタグを追加 (低、オーケストレーター、高)  |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | カスタムメトリクスにタグを追加 (低、オーケストレーター、高) |
+| 環境変数               | 説明                                                                                             |
+|------------------------------------|---------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_LABELS_AS_TAGS`      | コンテナラベルを抽出します。この環境は、古い `DD_DOCKER_LABELS_AS_TAGS` 環境と同等です。             |
+| `DD_CONTAINER_ENV_AS_TAGS`         | コンテナ環境変数を抽出します。この環境は、古い `DD_DOCKER_ENV_AS_TAGS` 環境と同等です。 |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                                                                                      |
+| `DD_CHECKS_TAG_CARDINALITY`        | チェックメトリクスにタグを追加 (低、オーケストレーター、高)                                                     |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | カスタムメトリクスにタグを追加 (低、オーケストレーター、高)                                                    |
 
 **例:**
 
 ```shell
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
-DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
 `DD_KUBERNETES_POD_LABELS_AS_TAGS` を使用する場合、次の形式のワイルドカードを使用できます。
@@ -186,17 +187,17 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 たとえば、`{"app*", "kube_%%label%%"}` は、ラベル `application` のタグ名 `kube_application` に解決されます。さらに、`{"*": "kube_%%label%%"}` は、すべてのポッドラベルを `kube_` で始まるタグとして追加します。
 
-Docker Swarm `docker-compose.yaml` ファイル内で `DD_DOCKER_LABELS_AS_TAGS` 変数を使用する場合は、次の例のように、アポストロフィーを削除します。
+Docker Swarm `docker-compose.yaml` ファイル内で `DD_CONTAINER_LABELS_AS_TAGS` 変数を使用する場合は、次の例のように、アポストロフィーを削除します。
 
 ```shell
-DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 Docker コンテナにラベルを追加する際は、`docker-compose.yaml` ファイル内で `labels:` キーワードをどこに配置するかが重要となります。スムーズに設定が進むよう、[Docker の統合サービスタグ付け][2]に関するドキュメントを参照してください。
 
  このコンフィギュレーションの外部でコンテナにラベル付けを行う必要がある場合は、`labels:` キーワードを `services:` セクションの **内部**に配置します。`deploy:` セクション内に**含めない**よう注意してください。`labels:` キーワードを `deploy:` セクション内に配置するのは、サービスに対してラベル付けが必要な場合のみです。この配置が正しくないと、Datadog Agent はコンテナからラベルを抽出することができません。
 
-以下は `docker-compose.yaml` ファイル内でこの設定を行う場合のサンプルです。この例では `myapplication:` セクション、`my.custom.label.project`、`my.custom.label.version` のそれぞれに固有の値が割り振られます。`datadog:` セクションの `DD_DOCKER_LABELS_AS_TAGS` 環境変数を使用してラベルを抽出し、`myapplication` コンテナ用のタグを生成します。
+以下は `docker-compose.yaml` ファイル内でこの設定を行う場合のサンプルです。この例では `myapplication:` セクション、`my.custom.label.project`、`my.custom.label.version` のそれぞれに固有の値が割り振られます。`datadog:` セクションの `DD_CONTAINER_LABELS_AS_TAGS` 環境変数を使用してラベルを抽出し、`myapplication` コンテナ用のタグを生成します。
 
 `myapplication` コンテナ内のラベル: `my.custom.label.project` `my.custom.label.version`
 
@@ -215,7 +216,7 @@ services:
       - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
-      - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
+      - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
@@ -263,7 +264,7 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI で行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
+[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="ホストマップタグ" style="width:80%;">}}
 
@@ -271,7 +272,7 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。**注**: UI で行われたメトリクスタグの変更が適用されるまでに最大 30 分かかる場合があります。
+[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。タグを追加したら、タグが UI に表示されていることを確認してから、さらにタグを追加してください。
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="インフラストラクチャーリストタグ" style="width:80%;">}}
 

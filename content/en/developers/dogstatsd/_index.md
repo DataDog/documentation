@@ -86,6 +86,7 @@ By default, DogStatsD listens on UDP port **8125**, so you need to bind this por
 
 ```shell
 docker run -d --cgroupns host \
+              --pid host \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -116,6 +117,8 @@ To start collecting your StatsD metrics, you need to bind the DogStatsD port to 
      This enables your applications to send metrics with DogStatsD on port `8125` on whichever node they happen to be running.
 
      **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][2], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, see the Kubernetes documentation: [HostPort services do not work][3].
+     
+     **Note**: For an Operator deployment, configure the host port with `agent.config.hostPort`.
 
 2. Enable DogStatsD non local traffic to allow StatsD data collection, set `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true` in your `datadog-agent.yaml` manifest:
 
@@ -553,4 +556,4 @@ If you're interested in learning more about the datagram format used by DogStats
 [6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
-[9]: /metrics/
+[9]: /developers/dogstatsd/datagram_shell/

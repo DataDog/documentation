@@ -65,7 +65,7 @@ Algorithm
 : The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).
 
 Seasonality
-: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric.
+: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric. For the `agile` algorithm, `monthly` is also available.
 
 Daylight savings
 : Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality. For more information, see [Anomaly Detection and Time Zones][4].
@@ -86,6 +86,9 @@ Daily
 
 Weekly
 : The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.
+
+Monthly
+: The algorithm expects that a given day of the month behaves like past days of the month, for example the first day of the month behaves like past first days of a month. Available for the `agile` algorithm.
 
 **Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
@@ -174,7 +177,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
 
 `seasonality`
-: `hourly`, `daily`, or `weekly`. Exclude this parameter when using the `basic` algorithm.
+: `hourly`, `daily`, `weekly`, or `monthly`. Exclude this parameter when using the `basic` algorithm. The `monthly` parameter is available when using the `agile` algorithm.
 
 `threshold`
 : A positive number no larger than 1. The fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger.
@@ -224,7 +227,7 @@ A standard configuration of thresholds and threshold window looks like:
 [1]: https://app.datadoghq.com/monitors#create/anomaly
 [2]: /monitors/create/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
-[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
+[4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
 [5]: /dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
@@ -235,5 +238,5 @@ A standard configuration of thresholds and threshold window looks like:
 [12]: /monitors/manage/status/#settings
 [13]: mailto:billing@datadoghq.com
 [14]: /api/v1/monitors/
-[15]: /monitors/faq/anomaly-monitor/
+[15]: /monitors/guide/anomaly-monitor/
 [16]: /help/

@@ -63,6 +63,10 @@ Datadog インテグレーションまたは Marketplace のページに掲載�
 3. SaaS ライセンスまたはサブスクリプション (Marketplace のみ)
 4. プロフェッショナルサービス (Marketplace のみ)
 
+開発中のサービスの種類に関係なく、Marketplace または Integrations ページのいずれかに、リストを表すタイルを作成する必要があります。Marketplace タイルの例を以下に示します。
+
+{{< img src="developers/marketplace/marketplace-tile-example.png" alt="Marketplace タイルの例"  >}}
+
 ユースケースに応じて、製品に最も適したアプローチを選択します。
 
 Datadog アプリ、SaaS ライセンス、プロフェッショナルサービス、API ベースインテグレーションなど、Datadog Agent を使用しない製品を開発している場合、[タイルのみの出品](#tile-only-listing)を作成する必要があります。
@@ -287,7 +291,7 @@ Marketplace タイルが公開されたら、テクノロジーパートナー�
 
 ## お問い合わせ
 
-ご不明な点がございましたら、techpartners@datadoghq.com までお問い合わせください。
+ご質問は marketplace@datadog.com までお願いします。
 
 ## その他の参考資料
 
@@ -301,7 +305,7 @@ Marketplace タイルが公開されたら、テクノロジーパートナー�
 [5]: /ja/help/
 [6]: /ja/account_management/org_switching/
 [7]: /ja/account_management/users/#add-new-members-and-manage-invites
-[8]: https://learn.datadoghq.com/course/view.php?id=38
+[8]: https://learn.datadoghq.com/courses/intro-to-integrations
 [9]: https://learn.datadoghq.com/
 [10]: https://github.com/DataDog/marketplace
 [11]: https://github.com/DataDog/integrations-extras

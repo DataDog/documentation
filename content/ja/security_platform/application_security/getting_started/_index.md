@@ -12,7 +12,7 @@ further_reading:
 - link: /security_platform/application_security/troubleshooting
   tag: ドキュメント
   text: アプリケーションセキュリティモニタリングのトラブルシューティング
-- link: /security_platform/guide/how-appsec-works/
+- link: /security_platform/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog におけるアプリケーションセキュリティモニタリングの仕組み
 kind: documentation
@@ -20,7 +20,7 @@ title: はじめに
 type: multi-code-lang
 ---
 
-アプリケーション言語用の Datadog ライブラリを使用して、本番システムを標的とした[脅威の検出][1]を行うように設定します。Docker、Kubernetes、AWS ECS、(対応言語) AWS Fargate で動作するアプリケーションのセキュリティを監視することができます。
+アプリケーション言語用の Datadog ライブラリを使用して、本番システムを標的とした[脅威の検出][1]を行うように設定します。サーバー、Docker、Kubernetes、AWS ECS、(対応言語) AWS Fargate で直接ホストされたアプリのアプリケーションセキュリティを監視することができます。
 
 {{% appsec-getstarted %}}
 

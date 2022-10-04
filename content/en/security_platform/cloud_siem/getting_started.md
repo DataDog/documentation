@@ -15,7 +15,7 @@ further_reading:
 - link: "/security_platform/explorer"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security_platform/guide/aws-config-guide-for-cloud-siem/"
+- link: "/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/"
   tag: "Documentation"
   text: "AWS Configuration Guide for Cloud SIEM"
 ---
@@ -49,11 +49,11 @@ When a threat is detected with a Detection Rule, a Security Signal is generated.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/guide/aws-config-guide-for-cloud-siem
+[1]: /security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem
 [2]: https://app.datadoghq.com/security/onboarding
 [3]: /logs/log_collection/
 [4]: https://www.datadoghq.com/blog/logging-without-limits/
-[5]: /security_monitoring/default_rules/
+[5]: /security_platform/default_rules/#cat-cloud-siem
 [6]: /security_monitoring/detection_rules/
 [7]: https://app.datadoghq.com/security
 [8]: /security_monitoring/explorer/

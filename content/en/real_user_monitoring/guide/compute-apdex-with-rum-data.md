@@ -1,5 +1,5 @@
 ---
-title: Compute Apdex and custom performance indicators with RUM data
+title: Compute Apdex And Custom Performance Indicators With RUM Data
 kind: guide
 description: Guide for computing your Apdex score and custom performance indicators with RUM data
 further_reading:
@@ -88,7 +88,7 @@ Click the copy icon on the right hand corner to copy the quick graph JSON to you
             "queries": [
                 {
                     "search": {
-                        "query": "@type:view @Largest @view.largest_contentful_paint:<2000000000"
+                        "query": "@type:view @view.largest_contentful_paint:<2000000000"
                     },
                     "data_source": "rum",
                     "compute": {

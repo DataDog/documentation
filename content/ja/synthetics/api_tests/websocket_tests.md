@@ -8,9 +8,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/udp-websocket-api-tests/
   tag: ブログ
   text: UDP と WebSocket のテストを実行し、レイテンシーが重要なアプリケーションを監視します
-- link: https://learn.datadoghq.com/course/view.php?id=39
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: ラーニングセンター
   text: Synthetic テストの紹介
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
 title: WebSocket テスト
 ---
@@ -28,24 +31,24 @@ WebSocket テストは、ネットワークの外部または内部からのテ�
 
 1. テストを実行する **URL** を指定します。
 2. テストで送信したい文字列を入力します。
-2. **Advanced Options** (オプション) をテストに追加します。
+3. **Advanced Options** (オプション) をテストに追加します。
 
-  {{< tabs >}}
+   {{< tabs >}}
 
-  {{% tab "リクエストオプション" %}}
-  * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
-  * **Request headers**: WebSocket 接続を開始する HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
-  * **Cookies**: クッキーを定義して WebSocket 接続を開始する HTTP リクエストに追加します。複数のクッキーを設定するには、次の書式を使用します `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`。
+   {{% tab "リクエストオプション" %}}
+   * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
+   * **Request headers**: WebSocket 接続を開始する HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
+   * **Cookies**: クッキーを定義して WebSocket 接続を開始する HTTP リクエストに追加します。複数のクッキーを設定するには、次の書式を使用します `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{% tab "認証" %}}
+   {{% tab "認証" %}}
 
-  * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
+   * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
 
-  {{% /tab %}}
+   {{% /tab %}}
 
-  {{< /tabs >}}
+   {{< /tabs >}}
 
 <br/>
 
@@ -69,6 +72,12 @@ WebSocket テストは、ネットワークの外部または内部からのテ�
 応答プレビューを直接選択するか、**New Assertion** をクリックしてアサーションを作成します。WebSocket テストごとに最大 20 個のアサーションを作成することができます。
 
 {{< img src="synthetics/api_tests/websocket_assertions.png" alt="WebSocket テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+
+アサーションで `OR` ロジックを実行するには、`matches regex` あるいは `does not match regex` コンパレータを使用して、`(0|100)` のように同じアサーションタイプに対して複数の期待値を設定した正規表現を定義します。文字列レスポンスまたはヘッダーアサーションの値が 0 あるいは 100 の場合、テストは成功です。
+
+テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+
+テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
 
 ### ロケーションを選択する
 
@@ -99,7 +108,7 @@ WebSocket テストは次の頻度で実行できます。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
@@ -111,18 +120,24 @@ WebSocket テストは次の頻度で実行できます。
     |----------------------------|---------------------------------------------------------------------|
     | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
     | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         |テストがアラートから回復したときに表示します。                             |
-    | `{{^is_recovery}}`         |テストがアラートから回復しない限り表示します。                           |
+    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
+    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
+    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
+    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
+    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
+    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
 
 3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックすると、保存され、テストが開始されます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
+
+詳しくは、[Synthetic テストモニターの使用][9]をご覧ください。
 
 ## 変数
 
 ### ローカル変数を作成する
 
-テストコンフィギュレーションフォームの右上隅にある **Create Local Variable** をクリックすると、ローカル変数を作成できます。以下の利用可能なビルトインのいずれかから値を定義できます。
+ローカル変数を作成するには、右上の **Create Local Variable** をクリックします。以下の利用可能なビルトインのいずれかから選択することができます。
 
 `{{ numeric(n) }}`
 : `n` 桁の数字列を生成します。
@@ -133,15 +148,17 @@ WebSocket テストは次の頻度で実行できます。
 `{{ alphanumeric(n) }}`
 : `n` 文字の英数字文字列を生成します。
 
-`{{ date(n, format) }}`
-: テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。
+`{{ date(n unit, format) }}` 
+: テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 
 `{{ timestamp(n, unit) }}` 
-: テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。
+: テストが +/- `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
+
+テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
 
 ### 変数を使用する
 
-WebSocket テストの URL、高度なオプション、およびアサーションで、[`Settings` で定義されたグローバル変数][5]と[ローカルで定義された変数](#create-local-variables)を使用できます。
+WebSocket テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][5]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
@@ -163,7 +180,7 @@ WebSocket テストの URL、高度なオプション、およびアサーショ
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][9]。
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][10]。
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
@@ -173,13 +190,13 @@ WebSocket テストの URL、高度なオプション、およびアサーショ
 
 ## アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][10]を持つユーザーのみが、Synthetic WebSocket テストを作成、編集、削除できます。Synthetic WebSocket テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][10]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが、Synthetic WebSocket テストを作成、編集、削除できます。Synthetic WebSocket テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
 
-[カスタムロール機能][11]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][12]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][13]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、WebSocket テストへのアクセスを制限することができます。WebSocket テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -197,7 +214,8 @@ WebSocket テストの URL、高度なオプション、およびアサーショ
 [6]: /ja/monitors/notify/#notify-your-team
 [7]: https://www.markdownguide.org/basic-syntax/
 [8]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[9]: /ja/synthetics/api_tests/errors/#ssl-errors
-[10]: /ja/account_management/rbac/
-[11]: /ja/account_management/rbac#custom-roles
-[12]: /ja/account_management/rbac/#create-a-custom-role
+[9]: /ja/synthetics/guide/synthetic-test-monitors
+[10]: /ja/synthetics/api_tests/errors/#ssl-errors
+[11]: /ja/account_management/rbac/
+[12]: /ja/account_management/rbac#custom-roles
+[13]: /ja/account_management/rbac/#create-a-custom-role

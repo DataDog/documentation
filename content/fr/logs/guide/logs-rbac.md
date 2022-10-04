@@ -1,31 +1,28 @@
 ---
-title: Configuration du RBAC pour les logs
 aliases:
-  - /fr/logs/guide/restrict-access-to-log-events-with-restriction-queries
-kind: guide
+- /fr/logs/guide/restrict-access-to-log-events-with-restriction-queries
 further_reading:
-  - link: /logs/guide/logs-rbac-permissions/
-    tag: Documentation
-    text: En savoir plus sur les autorisations RBAC pour les logs
-  - link: /logs/explorer/
-    tag: Documentation
-    text: "En savoir plus sur la vue Log\_Explorer"
-  - link: /logs/explorer/#patterns
-    tag: Documentation
-    text: Se familiariser avec la vue Log Pattern
-  - link: /logs/live_tail/
-    tag: Documentation
-    text: Explorer la fonctionnalité Live Tail
+- link: /logs/guide/logs-rbac-permissions/
+  tag: Documentation
+  text: En savoir plus sur les autorisations RBAC pour les logs
+- link: /logs/explorer/
+  tag: Documentation
+  text: En savoir plus sur la vue Log Explorer
+- link: /logs/explorer/#patterns
+  tag: Documentation
+  text: Se familiariser avec la vue Log Pattern
+- link: /logs/live_tail/
+  tag: Documentation
+  text: Explorer la fonctionnalité Live Tail
+kind: guide
+title: Configuration du RBAC pour les logs
 ---
+
 ## Présentation
 
 Les logs peuvent contenir des **informations sensibles** qui peuvent être [nettoyées][1] ou dont l'accès peut être restreint à certains utilisateurs autorisés de votre organisation. Il peut également être préférable de segmenter vos utilisateurs afin qu'ils **n'interfèrent pas entre eux** durant les processus de configuration et de contrôle du budget.
 
 Ce guide fournit une méthodologie pour le développement de rôles Datadog personnalisés qui permettent aux utilisateurs d'accéder aux logs et aux fonctionnalités associées de manière conforme.
-
-<div class="alert alert-warning">
-La création et la modification de rôles personnalisés sont des fonctionnalités que vous devez activer. <a href="/help">Contactez l'assistance Datadog</a> pour activer ces fonctionnalités sur votre compte.
-</div>
 
 ### Plusieurs équipes
 
@@ -65,15 +62,14 @@ Par exemple, dans le cadre de la collecte de logs Docker, associez le tag `team:
 
 ### Se connecter en tant qu'administrateur Datadog
 
-Pour pouvoir effectuer les actions indiquées dans ce guide, vous devez disposer du rôle admin Datadog. Plus précisément, vous avez besoin des autorisations suivantes :
+Pour continuer à suivre les instructions de ce guide, le rôle Admin Datadog ou un rôle similaire doit être attribué à votre compte utilisateur. Vous avez besoin des autorisations suivantes :
 
-* Créer des rôles et affecter des utilisateurs à des rôles (accès privilégié réel)
+* Créer des rôles et affecter des utilisateurs à des rôles
 * Créer des [pipelines de logs][4], des [index de logs][5] et des [archives de logs][6]
 * Si vous souhaitez effectuer ces opérations par l'intermédiaire de l'API, vous devez disposer des autorisations nécessaires à l'utilisation de l'[API Log Configuration][7].
 
-Vérifiez dans [Datadog][8] que vous disposez de toutes ces autorisations. Si ce n'est pas le cas, demandez à un administrateur Datadog de les configurer pour vous.
+Vérifiez dans la [liste des utilisateurs][8] que vous disposez de toutes ces autorisations. Si ce n'est pas le cas, demandez à un administrateur Datadog de les configurer pour vous.
 
-{{< img src="logs/guide/rbac/admin_permissions.png" alt="Vérifier vos autorisations en tant qu'administrateur"  style="width:60%;">}}
 
 ### Obtenir une clé d'API et une clé d'application
 
@@ -122,16 +118,14 @@ Cette section explique comment créer deux rôles, `ACME Admin` et `ACME User`, 
 {{< tabs >}}
 {{% tab "Interface utilisateur" %}}
 
-Depuis la [section Team][1] de Datadog, utilisez le bouton Add Role dans l'onglet Role pour créer les rôles `ACME Admin` et `ACME User`.
+Depuis la [section Groups][1] de la page Organization Settings de Datadog, utilisez le bouton Add Role dans l'onglet Role pour créer les rôles `ACME Admin` et `ACME User`.
 
-{{< img src="logs/guide/rbac/add_role.png" alt="Ajouter un nouveau rôle"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/add_role.png" alt="Ajouter un nouveau rôle" style="width:60%;">}}
 
 Lors de la création d'un rôle :
 
 * Créez le rôle avec un accès standard.
 * Accordez les autorisations Read Index Data et Live Tail. Il s'agit d'[autorisations obsolètes][2] que vous pouvez activer en toute sécurité.
-
-{{< img src="logs/guide/rbac/minimal_permissions.png" alt="Accorder des autorisations minimales"  style="width:60%;">}}
 
 Vous trouverez de plus amples informations sur la création de rôles dans la section [Gestion de compte][3].
 
@@ -392,7 +386,7 @@ Attribuez l'autorisation [logs_write_historical_views][19] aux membres `ACME Adm
 [5]: /fr/account_management/rbac/permissions?tab=ui#logs_modify_indexes
 [6]: /fr/account_management/rbac/permissions?tab=ui#logs_write_archives
 [7]: /fr/account_management/rbac/permissions?tab=ui#logs_public_config_api
-[8]: https://app.datadoghq.com/access/users
+[8]: https://app.datadoghq.com/organization-settings/users
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /fr/account_management/api-app-keys/
 [11]: /fr/api/v2/roles/#list-permissions

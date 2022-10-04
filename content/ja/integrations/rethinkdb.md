@@ -1,46 +1,72 @@
 ---
+app_id: rethinkdb
+app_uuid: f8348717-0ba8-4d42-b856-983e0cde0314
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     RethinkDB Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: rethinkdb.config.servers
+      metadata_path: metadata.csv
+      prefix: rethinkdb.
+    process_signatures:
+    - rethinkdb
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: RethinkDB
   logs:
     source: rethinkdb
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - data store
-  - ログの収集
-creates_events: false
-ddtype: check
+- data store
+- ログの収集
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
-display_name: RethinkDB
+- https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: rethinkdb
-guid: a09f3ed3-c947-413c-a9c6-0dcb641ea890
 integration_id: rethinkdb
 integration_title: RethinkDB
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: rethinkdb.
-metric_to_check: rethinkdb.config.servers
+manifest_version: 2.0.0
 name: rethinkdb
-process_signatures:
-  - rethinkdb
-public_title: Datadog-RethinkDB インテグレーション
+oauth: {}
+public_title: RethinkDB
 short_description: ステータスやパフォーマンスなどのメトリクスを RethinkDB クラスターから収集します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: ステータスやパフォーマンスなどのメトリクスを RethinkDB クラスターから収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: RethinkDB
 ---
+
+
+
 ## 概要
 
 [RethinkDB][1] は分散型のドキュメント指向 NoSQL データベースです。リアルタイムな変更フィードに対してファーストクラスのサポートを提供します。
@@ -113,7 +139,7 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 3. [Agent を再起動します][8]。
 
-Kubernetes 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][9]を参照してください。
+Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][9]を参照してください。
 
 ### 検証
 
@@ -140,7 +166,7 @@ RethinkDB には、イベントは含まれません。
 
 [1]: https://rethinkdb.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/agent/
+[3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://rethinkdb.com/docs/permissions-and-accounts/
 [5]: https://rethinkdb.com/docs/security/#the-admin-account
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

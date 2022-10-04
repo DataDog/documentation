@@ -1,51 +1,84 @@
 ---
+app_id: nagios
+app_uuid: 7e61b923-1847-4c43-85cf-5f4c49ff4806
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: nagios.host.rta
+      metadata_path: metadata.csv
+      prefix: nagios.
+    process_signatures:
+    - nagios
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Nagios
   logs:
     source: nagios
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     nagios_processes: assets/saved_views/nagios_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - monitoring
-  - notification
-  - log collection
-creates_events: true
-ddtype: check
+- monitoring
+- notification
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
-display_name: Nagios
+- https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: nagios
-guid: f7629918-751c-4a05-87e7-0e3de34e51e7
 integration_id: nagios
 integration_title: Nagios
+integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: nagios.
-metric_to_check: nagios.host.rta
+manifest_version: 2.0.0
 name: nagios
-process_signatures:
-  - nagios
-public_title: Datadog-Nagios インテグレーション
+oauth: {}
+public_title: Nagios
 short_description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::モニタリング
+  - Category::通知
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nagios
 ---
+
+
+
 ## 概要
 
 Nagios が監視するインフラストラクチャーから Datadog にイベントを送信してアラートを強化すると共に、Datadog が監視するインフラストラクチャーから取得されたメトリクスを Nagios のイベントと関連付けることができます。
 
-このチェックは、Nagios サーバーのログを監視し、Datadog イベントストリームにイベントを送信します。また、サービスのフラップ、ホスト状態の変化、パッシブサービスチェック、ホストとサービスのダウンタイムなどを追跡します。このチェックは、Nagios パフォーマンスデータをメトリクスとして Datadog に送信することもできます。
+このチェックは、Nagios サーバーのログを監視し、以下のイベントを Datadog に送信します。
+
+- サービスフラップ
+- ホストの状態変化
+- パッシブサービスチェック
+- ホストとサービスのダウンタイム
+
+このチェックは、Nagios のパフォーマンスデータを Datadog にメトリクスとして送信することもできます。
 
 ## セットアップ
 
@@ -73,7 +106,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 {{% /tab %}}
 {{% tab "Containerized" %}}

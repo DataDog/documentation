@@ -1,6 +1,8 @@
 ---
 title: Secrets Management
 kind: documentation
+aliases:
+  - /agent/faq/kubernetes-secrets
 further_reading:
 - link: "/agent/autodiscovery/"
   tag: "Documentation"
@@ -232,10 +234,27 @@ The script `readsecret_multiple_providers.sh` can be used to read from both file
 | Read from files        | `ENC[file@/path/to/file]`                        |
 | Kubernetes Secrets     | `ENC[k8s_secret@some_namespace/some_name/a_key]` |
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+To use this executable with the Helm chart, set it as the following:
+```yaml
+datadog:
+  [...]
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
 To use this executable, set the environment variable `DD_SECRET_BACKEND_COMMAND` as follows:
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Read from file example
 The Agent can read a specified file relative to the path provided. This file can be brought in from [Kubernetes Secrets](#kubernetes-secrets), [Docker Swarm Secrets](#docker-swarm-secrets), or any other custom method.
@@ -301,6 +320,8 @@ roleRef:
 ```
 This `Role` gives access to the `Secret: database-secret` in the `Namespace: database`. The `RoleBinding` links up this permission to the `ServiceAccount: datadog-agent` in the `Namespace: default`. This needs to be manually added to your cluster with respect to your resources deployed.
 
+In addition to these permissions, you need to enable the script to read from multiple providers `"/readsecret_multiple_providers.sh"` when using the Kubernetes Secrets provider.
+
 ### (Legacy) Scripts for reading from files
 Datadog Agent v7.32 introduces the `readsecret_multiple_providers.sh` script. Datadog recommends that you use this script instead of `/readsecret.py` and `/readsecret.sh` from Agent v6.12. Note that `/readsecret.py` and `/readsecret.sh` are still included and supported in the Agent to read files.
 
@@ -364,10 +385,9 @@ Secrets handle decrypted:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Example on Windows (from an Administrator Powershell):
-
+Example on Windows (from an Administrator PowerShell):
 ```powershell
-PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" secret
 === Checking executable rights ===
 Executable path: C:\path\to\you\executable.exe
 Check Rights: OK, the executable has the correct rights
@@ -410,7 +430,7 @@ Source: File Configuration Provider
 Instance 1:
 host: <decrypted_host>
 port: <decrypted_port>
-password: <decrypted_password>
+password: <obfuscated_password>
 ~
 ===
 
@@ -419,7 +439,7 @@ Source: File Configuration Provider
 Instance 1:
 host: <decrypted_host2>
 port: <decrypted_port2>
-password: <decrypted_password2>
+password: <obfuscated_password2>
 ~
 ===
 ```
@@ -435,7 +455,7 @@ To test or debug outside of the Agent, you can mimic how the Agent runs it:
 #### Linux
 
 ```bash
-sudo su dd-agent - bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
+sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /path/to/the/secret_backend_command"
 ```
 
 The `dd-agent` user is created when you install the Datadog Agent.
@@ -475,12 +495,12 @@ To test your executable in the same conditions as the Agent, update the password
 To do so, follow those steps:
 
 1. Remove `ddagentuser` from the `Local Policies/User Rights Assignement/Deny Log on locally` list in the `Local Security Policy`.
-2. Set a new password for `ddagentuser` (since the one generated at install time is never saved anywhere). In Powershell, run:
+2. Set a new password for `ddagentuser` (since the one generated at install time is never saved anywhere). In PowerShell, run:
     ```powershell
     $user = [ADSI]"WinNT://./ddagentuser";
     $user.SetPassword("a_new_password")
     ```
-3. Update the password to be used by `DatadogAgent` service in the Service Control Manager. In Powershell, run:
+3. Update the password to be used by `DatadogAgent` service in the Service Control Manager. In PowerShell, run:
     ```powershell
     sc.exe config DatadogAgent password= "a_new_password"
     ```
@@ -523,7 +543,7 @@ When reading Secrets directly from Kubernetes you can double check your permissi
 kubectl auth can-i get secret/<SECRET_NAME> -n <SECRET_NAMESPACE> --as system:serviceaccount:<AGENT_NAMESPACE>:<AGENT_SERVICE_ACCOUNT>
 ```
 
-Consider the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`. 
+Consider the previous [Kubernetes Secrets example](#read-from-kubernetes-secret-example), where the Secret `Secret:database-secret` exists in the `Namespace: database`, and the Service Account `ServiceAccount:datadog-agent` exists in the `Namespace: default`.
 
 In this case, use the following command:
 

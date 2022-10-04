@@ -1,21 +1,23 @@
 ---
-title: Monitor your Synthetics usage
+title: Using Estimated Usage Metrics
 kind: guide
+description: Learn about estimated usage metrics generated from your Synthetic tests.
 further_reading:
-    - link: '/synthetics/api_tests'
-      tag: 'Documentation'
-      text: 'Create an API Test'
-    - link: '/synthetics/multistep'
-      tag: 'Documentation'
-      text: 'Create a Multistep API Test'
-    - link: '/synthetics/browser_tests'
-      tag: 'Documentation'
-      text: 'Create a Browser Test'
-    - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
-      tag: 'Blog'
-      text: 'Best practices for creating end-to-end tests'
-
+- link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+  tag: 'Blog'
+  text: 'Best practices for creating end-to-end tests'
+- link: '/synthetics/api_tests'
+  tag: 'Documentation'
+  text: 'Create an API Test'
+- link: '/synthetics/multistep'
+  tag: 'Documentation'
+  text: 'Create a Multistep API Test'
+- link: '/synthetics/browser_tests'
+  tag: 'Documentation'
+  text: 'Create a Browser Test'
 ---
+
+## Overview 
 
 Synthetic tests come with [estimated usage metrics][1] that allow you to keep track of your usage. These metrics notably enable you to:
 

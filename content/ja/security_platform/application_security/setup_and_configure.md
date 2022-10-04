@@ -12,7 +12,7 @@ further_reading:
 - link: /security_platform/application_security/troubleshooting
   tag: ドキュメント
   text: ASM のトラブルシューティング
-- link: /security_platform/guide/how-appsec-works/
+- link: /security_platform/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog におけるアプリケーションセキュリティモニタリングの仕組み
 kind: documentation
@@ -21,7 +21,7 @@ title: セットアップと構成
 
 ## 互換性
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -178,8 +178,7 @@ Docker、Kubernetes、AWS ECS で動作する PHP アプリのアプリケーシ
 
 Datadog NodeJS ライブラリは、以下の NodeJS のバージョンをサポートしています。
 
-- NodeJS 13.10.0 以降
-- NodeJS 12.17.0 以降
+- NodeJS 14 以降
 
 これらは、以下のアーキテクチャでサポートされています。
 
@@ -198,6 +197,34 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する NodeJS アプリの�
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+### サポート対象の Python バージョン
+
+Datadog Python ライブラリは、以下の Python のバージョンをサポートしています。
+
+- Python 2.7、3.5、またはそれ以上
+
+これらは、以下のアーキテクチャでサポートされています。
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+- macOS (Darwin) x86-64
+- Windows (msvc) x86、x86-64
+
+Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Python アプリのアプリケーションセキュリティを監視することができます。
+
+### サポートされているフレームワーク
+
+| Framework Web Server | フレームワークの最小バージョン |
+|----------------------|---------------------------|
+| Django               | 1.8                       |
+| Flask                | 0.10                      |
+
+Flask では、クエリ文字列のサポートはありません。
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## トレースへのユーザー情報追加
@@ -208,7 +235,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する NodeJS アプリの�
 
 [ルートスパンにカスタムタグを追加する][1]方法と、後述のインスツルメンテーション関数を利用する方法があります。
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -237,7 +264,7 @@ if ((span instanceof MutableSpan)) {
 ```
 
 
-[1]: /ja/tracing/setup_overview/open_standards/java/#setup
+[1]: /ja/tracing/trace_collection/open_standards/java/#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -292,30 +319,75 @@ if span, ok := tracer.SpanFromContext(request.Context()); ok {
 
 {{< programming-lang lang="ruby" >}}
 
-トレースにカスタムタグを追加するための Ruby トレーサーの API を使用し、アプリケーションで認証されたリクエストを監視できるように、ユーザー情報を追加します。
+以下の API のいずれかを使用して、トレースにユーザー情報を追加し、アプリケーションで認証されたリクエストを監視できるようにします。
 
-ユーザーモニタリングタグは、トレースに適用され、プレフィックス `usr` の後にフィールド名が続きます。例えば、`usr.name` は、ユーザーの名前を追跡するユーザーモニタリングタグです。
+{{< tabs >}}
 
-以下の例では、ルートスパンを取得し、関連するユーザーモニタリングタグを追加する方法を示しています。
+{{% tab "set_user" %}}
+
+`ddtrace` 1.1.0 からは、`Datadog::Kit::Identity.set_user` メソッドが使用できるようになりました。これは、トレースにユーザ情報を追加するための推奨 API です。
+
+```ruby
+# アクティブトレースを取得する
+trace = Datadog::Tracing.active_trace
+
+# 必須ユーザー ID タグを設定する
+Datadog::Kit::Identity.set_user(trace, id: 'd131dd02c56eeec4')
+
+# または、オプションのユーザーモニタリングタグを設定する
+Datadog::Kit::Identity.set_user(
+  trace,
+
+  # 必須 ID
+  id: 'd131dd02c56eeec4',
+
+  #セマティクスが分かっているオプションタグ
+  name: 'Jean Example',
+  email:, 'jean.example@example.com',
+  session_id:, '987654321',
+  role: 'admin',
+  scope: 'read:message, write:files',
+
+  # オプションの自由形式タグ
+  another_tag: 'another_value',
+)
+```
+
+{{% /tab %}}
+
+{{% tab "set_tag" %}}
+
+`Datadog::Kit::Identity.set_user` がニーズに合わない場合は、代わりに `set_tag` を使用することができます。
+
+ユーザーモニタリングタグは、トレースに適用され、プレフィックス `usr.` の後にフィールド名が続きます。例えば、`usr.name` は、ユーザーの名前を追跡するユーザーモニタリングタグです。
+
+以下の例では、アクティブトレースを取得し、関連するユーザーモニタリングタグを追加する方法を示しています。
 
 **注**:
 - タグの値は文字列でなければなりません。
 - `usr.id` タグは必須です。
 
 ```ruby
-# アクティブトレースの取得
+# アクティブトレースを取得する
 trace = Datadog::Tracing.active_trace
 
 # 必須ユーザー ID タグを設定する
 trace.set_tag('usr.id', 'd131dd02c56eeec4')
 
-# オプションのユーザーモニタリングタグを設定する
+# セマティクスが分かっているユーザーモニタリングタグをオプションで設定する
 trace.set_tag('usr.name', 'Jean Example')
 trace.set_tag('usr.email', 'jean.example@example.com')
 trace.set_tag('usr.session_id', '987654321')
 trace.set_tag('usr.role', 'admin')
 trace.set_tag('usr.scope', 'read:message, write:files')
+
+# 自由形式のタグを設定する
+trace.set_tag('usr.another_tag', 'another_value')
 ```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 {{< /programming-lang >}}
 
@@ -378,6 +450,33 @@ function handle () {
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+Python トレーサーパッケージが提供する `set_user` 関数を用いて、トレースにユーザー情報を追加することで、認証済みリクエストを監視します。
+
+この例では、ユーザー監視タグを設定する方法を説明します。
+
+```python
+from ddtrace import tracer
+from ddtrace.contrib.trace_utils import set_user
+
+@app.route("/")
+def view():
+    # スパンが属するトレースにユーザー情報を記録する
+    set_user(
+        tracer,
+        user_id="usr.id",
+        email="usr.email",
+        name="usr.name",
+        session_id="usr.session_id",
+        role="usr.role",
+        scope="usr.scope"
+    )
+    return "OK"
+```
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## データセキュリティへの配慮
@@ -388,8 +487,25 @@ Datadog で収集するデータには、除外、難読化、フィルタリン
 
 ユーザーのデータを保護するために、ASM では機密データスキャンがデフォルトで有効になっています。以下の環境変数を使用することで、構成をカスタマイズすることができます。スキャンは [RE2 構文][2]に基づいているため、スキャンをカスタマイズするには、これらの環境変数の値を有効な RE2 パターンに設定します。
 
-* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - 値が一般的に機密データを含むキーをスキャンするためのパターン。見つかった場合、そのキー、対応するすべての値、およびすべての子ノードが編集されます。
+* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - 値が一般的に機密データを含むキーをスキャンするためのパターン。見つかった場合、そのキーと関連する値およびすべての子ノードが編集されます。
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - 機密データを示す可能性のある値をスキャンするためのパターン。見つかった場合、その値とすべての子ノードが編集されます。
+
+<div class="alert alert-info"><strong>Ruby のみ、ddtrace バージョン 1.1.0 から</strong>
+
+<p>また、コードでスキャンパターンを構成することも可能です。</p>
+
+```ruby
+Datadog.configure do |c|
+  # ...
+
+  # カスタム RE2 正規表現を設定する
+  c.appsec.obfuscator_key_regex = '...'
+  c.appsec.obfuscator_value_regex = '...'
+end
+```
+
+</div>
+
 
 以下は、デフォルトで機密と判定されるデータの例です。
 
@@ -429,9 +545,9 @@ ASM を無効にするには、アプリケーションの構成から `DD_APPSE
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/setup_overview/custom_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/
 [2]: https://github.com/google/re2/wiki/Syntax
-[3]: /ja/tracing/setup_overview/configure_data_security/
+[3]: /ja/tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/appsec/exclusions
 [6]: /ja/help/

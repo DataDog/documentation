@@ -9,6 +9,9 @@ further_reading:
 - link: "real_user_monitoring/explorer/watchdog_insights/"
   tag: "Documentation"
   text: "Learn about Watchdog Insights for RUM"
+- link: "real_user_monitoring/connect_rum_and_traces/"
+  tag: "Documentation"
+  text: "Connect RUM and Traces"
 ---
 
 ## Overview

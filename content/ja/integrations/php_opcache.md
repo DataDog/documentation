@@ -1,41 +1,62 @@
 ---
+app_id: php-opcache
+app_uuid: 392e54ac-60d4-4225-ab5a-d75245e0ea06
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: php_opcache.memory_usage.used_memory
+      metadata_path: metadata.csv
+      prefix: php_opcache.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: PHP OPcache
   monitors:
     '[php_opcache] Cache Full has been detected': assets/monitors/php-opcache_expunges.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
-categories:
-  - ''
-creates_events: false
-ddtype: check
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: noname@withgod.jp
+  support_email: noname@withgod.jp
+categories: []
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
-display_name: PHP OPcache
+- https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: php_opcache
-guid: 323518fd-be8d-4b5e-b35d-829107a1c416
 integration_id: php-opcache
 integration_title: PHP OPcache
+integration_version: 0.0.1
 is_public: true
 kind: integration
-maintainer: noname@withgod.jp
-manifest_version: 1.0.0
-metric_prefix: php_opcache.
-metric_to_check: php_opcache.memory_usage.used_memory
+manifest_version: 2.0.0
 name: php_opcache
-public_title: Datadog-PHP OPcache インテグレーション
+oauth: {}
+public_title: PHP OPcache
 short_description: PHP OPcache バイトコードキャッシュシステムを監視します。
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: PHP OPcache バイトコードキャッシュシステムを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: PHP OPcache
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [PHP OPcache][1] を監視します。
@@ -67,9 +88,9 @@ OPcache はデフォルトでメトリクスを公開しないため、このイ
 ```
 /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php
 ```
-エクスポーターは[こちら][5]からダウンロードできます。
+Datadog [integrations-extras][5] リポジトリからエクスポーターをダウンロードできます。
 
-Agent を構成するとき (次に説明する `instances` 設定)、このファイル名でエクスポーターを直接参照するか、Web サーバーで Agent のエイリアスを構成できます。たとえば、Apache を使用している場合、Web サーバーコンフィギュレーションファイルのエイリアスは次のようになります。
+Agent を[構成する](#configuration) とき、このファイル名でエクスポーターを直接参照するか、Web サーバーで Agent のエイリアスを構成できます。たとえば、Apache を使用している場合、Web サーバーコンフィギュレーションファイルのエイリアスは次のようになります。
 
 ```
 Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/php_opcache/assets/exporter/opcache-dd-handler.php

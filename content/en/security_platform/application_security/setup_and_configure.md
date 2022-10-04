@@ -14,14 +14,14 @@ further_reading:
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"
-- link: "/security_platform/guide/how-appsec-works/"
+- link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Monitoring Works in Datadog"
 ---
 
 ## Compatibility
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -178,8 +178,7 @@ It supports the use of all PHP frameworks, and also the use no framework.
 
 The Datadog NodeJS library supports the following NodeJS versions:
 
-- NodeJS 13.10.0 and higher
-- NodeJS 12.17.0 and higher
+- NodeJS 14 and higher
 
 These are supported on the following architectures:
 
@@ -198,6 +197,34 @@ You can monitor application security for NodeJS apps running in Docker, Kubernet
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+### Supported Python versions
+
+The Datadog Python library supports the following Python versions:
+
+- Python 2.7, 3.5 and higher
+
+These are supported on the following architectures:
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+- macOS (Darwin) x86-64
+- Windows (msvc) x86, x86-64
+
+You can monitor application security for Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+
+### Supported frameworks
+
+| Framework Web Server | Minimum Framework Version |
+|----------------------|---------------------------|
+| Django               | 1.8                       |
+| Flask                | 0.10                      |
+
+Support for query strings is not available for Flask.
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Add user information to traces
@@ -208,7 +235,7 @@ This way, you can identify bad actors that are generating suspicious security ac
 
 You can [add custom tags to your root span][1], or use the instrumentation functions described below.
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -237,7 +264,7 @@ if ((span instanceof MutableSpan)) {
 ```
 
 
-[1]: /tracing/setup_overview/open_standards/java/#setup
+[1]: /tracing/trace_collection/open_standards/java/#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -292,11 +319,49 @@ if span, ok := tracer.SpanFromContext(request.Context()); ok {
 
 {{< programming-lang lang="ruby" >}}
 
-Use the the Ruby tracer's API for adding custom tags to a trace, and add user information so that you can monitor authenticated requests in the application.
+Use one of the following APIs to add user information to a trace so that you can monitor authenticated requests in the application:
 
-User monitoring tags are applied on the trace and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+{{< tabs >}}
 
-The example below shows how to obtain the root span and add relevant user monitoring tags:
+{{% tab "set_user" %}}
+
+Starting with `ddtrace` 1.1.0, the `Datadog::Kit::Identity.set_user` method is available. This is the recommended API for adding user information to traces:
+
+```ruby
+# Get the active trace
+trace = Datadog::Tracing.active_trace
+
+# Set mandatory user id tag
+Datadog::Kit::Identity.set_user(trace, id: 'd131dd02c56eeec4')
+
+# Or set any of these optional user monitoring tags
+Datadog::Kit::Identity.set_user(
+  trace,
+
+  # mandatory id
+  id: 'd131dd02c56eeec4',
+
+  # optional tags with known semantics
+  name: 'Jean Example',
+  email:, 'jean.example@example.com',
+  session_id:, '987654321',
+  role: 'admin',
+  scope: 'read:message, write:files',
+
+  # optional free-form tags
+  another_tag: 'another_value',
+)
+```
+
+{{% /tab %}}
+
+{{% tab "set_tag" %}}
+
+If `Datadog::Kit::Identity.set_user` does not meet your needs, you can use `set_tag` instead.
+
+User monitoring tags are applied on the trace and start with the prefix `usr.` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+
+The example below shows how to obtain the active trace and add relevant user monitoring tags:
 
 **Notes**:
 - Tag values must be strings.
@@ -309,13 +374,20 @@ trace = Datadog::Tracing.active_trace
 # Set mandatory user id tag
 trace.set_tag('usr.id', 'd131dd02c56eeec4')
 
-# Set optional user monitoring tags
+# Set optional user monitoring tags with known sematics
 trace.set_tag('usr.name', 'Jean Example')
 trace.set_tag('usr.email', 'jean.example@example.com')
 trace.set_tag('usr.session_id', '987654321')
 trace.set_tag('usr.role', 'admin')
 trace.set_tag('usr.scope', 'read:message, write:files')
+
+# Set free-form tags:
+trace.set_tag('usr.another_tag', 'another_value')
 ```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 {{< /programming-lang >}}
 
@@ -378,6 +450,33 @@ For information and options, read [the NodeJS tracer documentation][1].
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+
+This example shows how to set user monitoring tags:
+
+```python
+from ddtrace import tracer
+from ddtrace.contrib.trace_utils import set_user
+
+@app.route("/")
+def view():
+    # Record user information in the trace the span belongs to
+    set_user(
+        tracer,
+        user_id="usr.id",
+        email="usr.email",
+        name="usr.name",
+        session_id="usr.session_id",
+        role="usr.role",
+        scope="usr.scope"
+    )
+    return "OK"
+```
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Data security considerations
@@ -386,10 +485,27 @@ The data that you collect with Datadog can contain sensitive information that yo
 
 By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag, so you observe that although the request was suspicious, the request data could not be collected because of data security concerns.
 
-To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][2], so to customize scanning, set the value of these environment variables to a valid RE2 patten:
+To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][2], so to customize scanning, set the value of these environment variables to a valid RE2 pattern:
 
-* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the key, all corresponding values, and any child nodes are redacted.
+* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
+
+<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong>
+
+<p>You can also configure scanning patterns in code:</p>
+
+```ruby
+Datadog.configure do |c|
+  # ...
+
+  # Set custom RE2 regexes
+  c.appsec.obfuscator_key_regex = '...'
+  c.appsec.obfuscator_value_regex = '...'
+end
+```
+
+</div>
+
 
 The following are examples of data that are flagged as sensitive by default:
 
@@ -430,9 +546,9 @@ If you need additional help, contact [Datadog support][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/custom_instrumentation/
+[1]: /tracing/trace_collection/custom_instrumentation/
 [2]: https://github.com/google/re2/wiki/Syntax
-[3]: /tracing/setup_overview/configure_data_security/
+[3]: /tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/appsec/exclusions
 [6]: /help/

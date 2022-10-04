@@ -13,7 +13,9 @@ further_reading:
   - link: /agent/guide/autodiscovery-management/
     tag: Documentation
     text: "Exclude containers from Log Collection with Autodiscovery"
-
+  - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+    tag: "Blog"
+    text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
 ---
 
 ## Overview

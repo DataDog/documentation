@@ -51,9 +51,6 @@
                 "devDependencies": [
                     "**/*.unit.{js,jsx}",
                     "**/test/**/*.{js,jsx}",
-                    "webpack.dev.js",
-                    "webpack.common.js",
-                    "webpack.prod.js",
                     "styleguide.config.js"
                 ]
             }

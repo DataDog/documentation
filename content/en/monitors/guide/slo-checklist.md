@@ -102,6 +102,6 @@ _Example: 99% of requests should complete in less than 250 ms over a 30-day wind
 [2]: https://app.datadoghq.com/monitors#create/metric
 [3]: /metrics
 [4]: /integrations
-[5]: /tracing/generate_metrics/
+[5]: /tracing/trace_pipeline/generate_metrics/
 [6]: /logs/logs_to_metrics/
 [7]: /monitors/service_level_objectives/#searching-and-viewing-slos

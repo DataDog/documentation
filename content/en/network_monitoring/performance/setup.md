@@ -48,7 +48,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver, and support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 and up.
+Data collection is done using a device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
 
 #### macOS
 
@@ -109,10 +109,10 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     ```yaml
     network_config:   # use system_probe_config for Agent's older than 7.24.1
-        ## @param enabled - boolean - optional - default: false
-        ## Set to true to enable Network Performance Monitoring.
-        #
-        enabled: true
+      ## @param enabled - boolean - optional - default: false
+      ## Set to true to enable Network Performance Monitoring.
+      #
+      enabled: true
     ```
 
 4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
@@ -379,6 +379,7 @@ To enable Network Performance Monitoring in Docker, use the following configurat
 
 ```shell
 $ docker run --cgroupns host \
+--pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
 -e DD_SYSTEM_PROBE_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
@@ -447,9 +448,9 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [2]: https://docs.datadoghq.com/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /network_monitoring/dns/
-[5]: https://docs.datadoghq.com/network_monitoring/performance/setup/?tab=agent#windows-systems
-[6]: https://docs.datadoghq.com/integrations/docker_daemon/
-[7]: https://docs.datadoghq.com/agent/kubernetes/
+[5]: https://docs.datadoghq.com/agent/docker/
+[6]: https://docs.datadoghq.com/agent/kubernetes/
+[7]: https://docs.datadoghq.com/agent/amazon_ecs
 [8]: https://docs.datadoghq.com/integrations/istio/
 [9]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
 [10]: https://www.datadoghq.com/blog/istio-datadog/

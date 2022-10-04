@@ -1,46 +1,71 @@
 ---
+app_id: postfix
+app_uuid: 76293d0a-1cde-4f25-ae72-c3e6ef352273
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     postfix: assets/dashboards/postfix_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: postfix.queue.size
+      metadata_path: metadata.csv
+      prefix: postfix.
+    process_signatures:
+    - postfix start
+    - sendmail -bd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Postfix
   logs:
     source: postfix
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     postfix_processes: assets/saved_views/postfix_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - Collaboration
-  - log collection
-creates_events: false
-ddtype: check
+- collaboration
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
-display_name: Postfix
+- https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: postfix
-guid: 7f03c5b7-ee54-466e-8854-5896d62c82b4
 integration_id: postfix
 integration_title: Postfix
+integration_version: 1.12.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: postfix.
-metric_to_check: postfix.queue.size
+manifest_version: 2.0.0
 name: postfix
-process_signatures:
-  - postfix start
-  - sendmail -bd
-public_title: Datadog-Postfix インテグレーション
+oauth: {}
+public_title: Postfix
 short_description: すべての Postfix キューのサイズを監視する。
-support: コア
 supported_os:
-  - linux
-  - mac_os
+- linux
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::コラボレーション
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: すべての Postfix キューのサイズを監視する。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Postfix
 ---
+
+
+
 ![Postfix Graph][1]
 
 ## 概要
@@ -148,7 +173,7 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
          - deferred
    ```
 
-2. `instances` 内の各 `config_directory` について、Agent は、Postfix コンフィギュレーションディレクトリに対して `postqueue -c` をフォークします。Postfix は、メールキューに対するアクティビティを内部アクセス制御によって制限しています。デフォルトでは、Postfix は `anyone` にキューの表示を許可します。実稼働システムの Postfix インストレーションで、より厳密にアクセス制御が構成されている場合は、`dd-agent` ユーザーにメールキューの表示アクセスを許可することが必要な場合があります（[postqueue Postfix のドキュメント][6]を参照してください）。
+2. `instances` 内の各 `config_directory` について、Agent は、Postfix コンフィギュレーションディレクトリに対して `postqueue -c` をフォークします。Postfix は、メールキューに対するアクティビティを内部アクセス制御によって制限しています。デフォルトでは、Postfix は `anyone` にキューの表示を許可します。実稼働システムの Postfix インストレーションで、より厳密にアクセス制御が構成されている場合は、`dd-agent` ユーザーにメールキューの表示アクセスを許可することが必要な場合があります。詳しくは、[postqueue Postfix のドキュメント][6]を参照してください。
 
    ```shell
    postconf -e "authorized_mailq_users = dd-agent"

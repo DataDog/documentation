@@ -1,40 +1,64 @@
 ---
+app_id: sap-hana
+app_uuid: 53d66afa-de92-4f09-9514-778324f38f5c
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     SAP HANA Overview: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: sap_hana.uptime
+      metadata_path: metadata.csv
+      prefix: sap_hana.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SAP HANA
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-  - data store
-creates_events: false
-ddtype: check
+- data store
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
-display_name: SAP HANA
+- https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: sap_hana
-guid: 85dace7c-baf5-4bcc-9fbb-4d3a6b841359
 integration_id: sap-hana
 integration_title: SAP HANA
+integration_version: 2.2.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sap_hana.
-metric_to_check: sap_hana.uptime
+manifest_version: 2.0.0
 name: sap_hana
-public_title: Datadog-SAP HANA インテグレーション
+oauth: {}
+public_title: SAP HANA
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SAP HANA
 ---
+
+
+
 ## 概要
 
 このチェックは、Datadog Agent を通じて [SAP HANA][1] 2.0, SPS 2 を監視します。
@@ -43,13 +67,26 @@ supported_os:
 
 ### インストール
 
-SAP HANA チェックは [Datadog Agent][2] パッケージに含まれています。
+SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれています。このインテグレーションを使用するには、[hdbcli][3] ライブラリを手動でインストールする必要があります。
+
+
+Unix: の場合:
+
+```text
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
+```
+
+Windows の場合:
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install hdbcli==2.10.15
+```
 
 #### HANA の準備
 
 特定のビューを照会するには、選択した HANA 監視ユーザーに特定の特権を付与する必要があります。詳細については、[権限の付与](#granting-privileges)を参照してください。
 
-HANA テナント、シングルテナント、システムデータベースのポート番号を設定する方法については、[SAP への接続のドキュメント][3]を参照してください。
+HANA テナント、シングルテナント、システムデータベースのポート番号を設定する方法については、[SAP への接続のドキュメント][4]を参照してください。
 
 ##### ユーザーの作成
 
@@ -109,13 +146,13 @@ HANA テナント、シングルテナント、システムデータベースの
 
 ### コンフィギュレーション
 
-1. sap_hana のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sap_hana.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sap_hana.d/conf.yaml][4] を参照してください。
+1. sap_hana のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sap_hana.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sap_hana.d/conf.yaml][5] を参照してください。
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションの `sap_hana` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションの `sap_hana` を探します。
 
 ## 収集データ
 
@@ -133,15 +170,16 @@ SAP HANA には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://www.sap.com/products/hana.html
-[2]: https://docs.datadoghq.com/ja/agent/
-[3]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
-[4]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
-[8]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/assets/service_checks.json
-[9]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://pypi.org/project/hdbcli/
+[4]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
+[5]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
+[9]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/assets/service_checks.json
+[10]: https://docs.datadoghq.com/ja/help/

@@ -117,7 +117,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 
 {{< /tabs >}}
 
-Once created, global variables can be used in all Synthetic tests by typing `{{` in the field of interest and selecting your global variable. For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
+Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click on *+ Variables*; then, type `{{` in the field of interest and select your global variable. For more information, see the [HTTP test][7], [Multistep API test][8], [Browser test configuration][9], and [Steps documentation][10].
 
 ### Permissions
 
@@ -161,7 +161,7 @@ When you are done selecting locations, click **Save Default Locations**.
 
 Choose the default browser and device types for your [browser test][5] details.
 
-Your options for browsers include Google Chrome, Firefox, Microsoft Edge, and Internet Explorer 11. Your options for devices include a large laptop, a tablet, and a small mobile device.
+Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
 
 When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
 
@@ -211,7 +211,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 [7]: /synthetics/api_tests/http_tests?tab=requestoptions#use-variables
 [8]: /synthetics/multistep?tab=requestoptions#use-variables
 [9]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
-[10]: /synthetics/browser_tests/actions#using-variables
+[10]: /synthetics/browser_tests/actions#use-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /account_management/rbac/?tab=datadogapplication#custom-role
 [13]: /account_management/rbac/#create-a-custom-role

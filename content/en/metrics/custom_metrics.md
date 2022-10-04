@@ -9,6 +9,7 @@ aliases:
   - /developers/metrics/custom_metrics/
   - /getting_started/custom_metrics
   - /developers/metrics/
+  - /metrics/guide/tag-configuration-cardinality-estimation-tool/
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"

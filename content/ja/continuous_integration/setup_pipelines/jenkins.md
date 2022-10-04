@@ -20,8 +20,7 @@ title: Jenkins パイプラインでトレースを設定する
 ## 互換性
 
 対応する Jenkins のバージョン:
-* 3.x バージョンのプラグインの場合: Jenkins >= 2.164.1
-* 4.x バージョンのプラグインの場合: Jenkins >= 2.303.3
+* Jenkins >= 2.346.1
 
 ## 前提条件
 
@@ -141,6 +140,27 @@ CI Visibility が有効になっていることを確認するには、`Jenkins 
 Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
+
+### インフラストラクチャーメトリクスの相関
+
+Jenkins のワーカーを使用している場合、パイプラインを実行しているインフラストラクチャーでパイプラインを関連付けることができます。この機能を動作させるには
+
+1. 各 Jenkins Worker に [Datadog Agent][1] をインストールします。
+2. 各 Jenkins ワーカーに `DD_CI_HOSTNAME` という新しい環境変数をワーカーのホスト名で設定し、エクスポートします。
+  * Datadog Agent がそのワーカーのインフラストラクチャーメトリクスで報告しているホスト名と同じである必要があります。
+  * 有効な値として、固定値や他の環境変数が使用できます。
+
+```bash
+# 固定値を使用する
+export DD_CI_HOSTNAME=my-hostname
+
+# 他の環境変数を使用する
+export DD_CI_HOSTNAME=$HOSTNAME
+```
+
+これは、Jenkins ワーカーにのみ必要です。Jenkins コントローラの場合、インフラストラクチャーメトリクスの相関は追加アクションを必要としません。
+
+**注**: インフラストラクチャーメトリクスの相関は、Jenkins Plugin v5.0.0+ 以降でサポートされています。
 
 ## ジョブログ収集を有効にする
 
@@ -543,6 +563,17 @@ Error writing to server
 
 1. ホスト名として `localhost` を使用している場合は、代わりにサーバーのホスト名に変更してみてください。
 2. Jenkins インスタンスが HTTP プロキシの後ろにある場合、**Manage Jenkins** > **Manage Plugins** > **Advanced tab** に移動して、プロキシ構成が正しいことを確認します。
+
+#### HTTP 504
+
+HTTP 504 のエラーメッセージが表示される場合は、Jenkins のプロキシ構成が正しいかどうかを確認してください。
+
+{{< code-block lang="text" >}}
+Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
+{{< /code-block >}}
+
+1. Jenkins インスタンスが HTTP プロキシの後ろにある場合、**Manage Jenkins** > **Manage Plugins** > **Advanced tab** に移動して、プロキシ構成が正しいことを確認します。
+  1. `No Proxy Hosts` に `localhost` が構成されていることを確認します。
 
 ### Datadog プラグインセクションが Jenkins コンフィギュレーションに表示されない
 

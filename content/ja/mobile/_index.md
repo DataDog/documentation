@@ -19,7 +19,7 @@ Datadog Mobile アプリを使用すると、Datadog からのアラートをモ
 
 iOS デバイスの場合は [Apple App Store][1] から、Android デバイスの場合は [Google Play ストア][2]からアプリをダウンロードします。
 
-{{< img src="mobile/mobile_app_qr_code.png" style="width:50%; background:none; border:none; box-shadow:none;" alt="Datadog モバイルアプリのダウンロード">}}
+{{< img src="mobile/mobile_app_qr_code.png" style="width:40%; background:none; border:none; box-shadow:none;" alt="Datadog モバイルアプリのダウンロード">}}
 
 ### ログイン
 
@@ -474,7 +474,7 @@ Handoff の詳細については、[Apple Handoff のドキュメント][19]を�
 [5]: /ja/account_management/saml/mobile-idp-login/
 [6]: /ja/monitors/manage/#search
 [7]: https://app.datadoghq.com/monitors
-[8]: /ja/monitors/create/types/
+[8]: /ja/monitors/create/#monitor-types
 [9]: /ja/dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /ja/dashboards/

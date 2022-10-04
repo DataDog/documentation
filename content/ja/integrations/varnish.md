@@ -1,52 +1,79 @@
 ---
+app_id: varnish
+app_uuid: e342e5eb-71ce-4c5b-a9c9-2c33691e858f
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     varnish: assets/dashboards/varnish_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: varnish.n_backend
+      metadata_path: metadata.csv
+      prefix: varnish.
+    process_signatures:
+    - service varnish start
+    - varnishd
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Varnish
   logs:
     source: varnish
-  metrics_metadata: metadata.csv
-  monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
     bot_errors: assets/saved_views/bot_errors.json
     status_code_overview: assets/saved_views/status_code_overview.json
     varnish_processes: assets/saved_views/varnish_processes.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - web
-  - caching
-  - log collection
-creates_events: false
-ddtype: check
+- web
+- caching
+- log collection
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
-display_name: Varnish
+- https://github.com/DataDog/integrations-core/blob/master/varnish/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: varnish
-guid: d2052eae-89b8-4cb1-b631-f373010da4b8
 integration_id: varnish
 integration_title: Varnish
+integration_version: 1.14.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: varnish.
-metric_to_check: varnish.n_backend
+manifest_version: 2.0.0
 name: varnish
-process_signatures:
-  - service varnish start
-  - varnishd
-public_title: Datadog-Varnish インテグレーション
+oauth: {}
+public_title: Varnish
 short_description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
-support: コア
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::キャッシュ
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Varnish
 ---
+
+
+
 ![Varnish のデフォルトのダッシュボード][1]
 
 ## 概要
@@ -82,6 +109,8 @@ Varnish 4.1 以上を実行している場合は、以下を使用して、`dd-a
 ```text
 sudo usermod -G varnish -a dd-agent
 ```
+
+もし `secretfile` を使用する場合は、`dd-agent` ユーザーが読めるようにする必要があります。
 
 ##### メトリクスの収集
 
@@ -163,7 +192,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `varnish` を探します。
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `varnish` を探します。
 
 ## 収集データ
 
