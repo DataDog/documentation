@@ -9,11 +9,11 @@ kind: documentation
   **GCP name**: `allowed`
    - `ip_protocol`<br>
     **Type**: `STRING`<br>
-        **Description**: The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp) or the IP protocol number.<br>
+        **Description**: The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (`tcp`, `udp`, `icmp`, `esp`, `ah`, `ipip`, `sctp`) or the IP protocol number.<br>
         **GCP name**: `IPProtocol`<br>
    - `ports`<br>
     **Type**: `UNORDERED_LIST_STRING`<br>
-        **Description**: An optional list of ports to which this rule applies. This field is only applicable for the UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port. Example inputs include: ["22"], ["80","443"], and ["12345-12349"].<br>
+        **Description**: An optional list of ports to which this rule applies. This field is only applicable for the UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port. Example inputs include: `["22"]`, `["80","443"]`, and `["12345-12349"]`.<br>
         **GCP name**: `ports`<br>
 ## `ancestors`
 **Type**: `UNORDERED_LIST_STRING`<br>
@@ -27,11 +27,11 @@ kind: documentation
   **GCP name**: `denied`
    - `ip_protocol`<br>
     **Type**: `STRING`<br>
-        **Description**: The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp) or the IP protocol number.<br>
+        **Description**: The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (`tcp`, `udp`, `icmp`, `esp`, `ah`, `ipip`, `sctp`) or the IP protocol number.<br>
         **GCP name**: `IPProtocol`<br>
    - `ports`<br>
     **Type**: `UNORDERED_LIST_STRING`<br>
-        **Description**: An optional list of ports to which this rule applies. This field is only applicable for the UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port. Example inputs include: ["22"], ["80","443"], and ["12345-12349"].<br>
+        **Description**: An optional list of ports to which this rule applies. This field is only applicable for the UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port. Example inputs include: `["22"]`, `["80","443"]`, and `["12345-12349"]`.<br>
         **GCP name**: `ports`<br>
 ## `description`
 **Type**: `STRING`<br>
@@ -58,7 +58,7 @@ kind: documentation
     **GCP name**: `id`<br>
 ## `kind`
 **Type**: `STRING`<br>
-    **Description**: [Output Only] Type of the resource. Always compute#firewall for firewall rules.<br>
+    **Description**: [Output Only] Type of the resource. Always `compute#firewall` for firewall rules.<br>
     **GCP name**: `kind`<br>
 ## `labels`
 **Type**: `UNORDERED_LIST_STRING`<br>
@@ -75,16 +75,19 @@ kind: documentation
         **Description**: This field can only be specified for a particular firewall rule if logging is enabled for that rule. This field denotes whether to include or exclude metadata for firewall logs. <br>
         **GCP name**: `metadata`<br>
             **Possible values**:<br>
-      - `EXCLUDE_ALL_METADATA` - <br>
-      - `INCLUDE_ALL_METADATA` - <br>
+      - `EXCLUDE_ALL_METADATA` <br>
+      - `INCLUDE_ALL_METADATA` <br>
 ## `name`
 **Type**: `STRING`<br>
     **Description**: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression <code>[a-z]&#40;[-a-z0-9]*[a-z0-9]&#41;?</code>. The first character must be a lowercase letter, and all following characters (except for the last character) must be a dash, lowercase letter, or digit. The last character must be a lowercase letter or digit.<br>
     **GCP name**: `name`<br>
 ## `network`
 **Type**: `STRING`<br>
-    **Description**: URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used: global/networks/default If you choose to specify this field, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-network - projects/myproject/global/networks/my-network - global/networks/default <br>
-    **GCP name**: `network`<br>
+**Description**: URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used: `global`/`networks`/`default`. If you choose to specify this field, you can specify the network as a full or partial URL. For example, the following are all valid URLs: 
+  - `https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-network `
+  - `projects/myproject/global/networks/my-network `
+  - `global/networks/default` <br>
+**GCP name**: `network`<br>
 ## `organization_id`
 **Type**: `STRING`<br>
 ## `parent`
@@ -109,19 +112,19 @@ kind: documentation
     **GCP name**: `sourceRanges`<br>
 ## `source_service_accounts`
 **Type**: `UNORDERED_LIST_STRING`<br>
-    **Description**: If source service accounts are specified, the firewall rules apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. sourceRanges can be set at the same time as sourceServiceAccounts. If both are set, the firewall applies to traffic that has a source IP address within the sourceRanges OR a source IP that belongs to an instance with service account listed in sourceServiceAccount. The connection does not need to match both fields for the firewall to apply. sourceServiceAccounts cannot be used at the same time as sourceTags or targetTags.<br>
+    **Description**: If source service accounts are specified, the firewall rules apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. `sourceRanges` can be set at the same time as `sourceServiceAccounts`. If both are set, the firewall applies to traffic that has a source IP address within the `sourceRanges` OR a source IP that belongs to an instance with service account listed in `sourceServiceAccount`. The connection does not need to match both fields for the firewall to apply. `sourceServiceAccounts` cannot be used at the same time as `sourceTags` or `targetTags`.<br>
     **GCP name**: `sourceServiceAccounts`<br>
 ## `source_tags`
 **Type**: `UNORDERED_LIST_STRING`<br>
-    **Description**: If source tags are specified, the firewall rule applies only to traffic with source IPs that match the primary network interfaces of VM instances that have the tag and are in the same VPC network. Source tags cannot be used to control traffic to an instance's external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both fields are set, the firewall applies to traffic that has a source IP address within sourceRanges OR a source IP from a resource with a matching tag listed in the sourceTags field. The connection does not need to match both fields for the firewall to apply.<br>
+    **Description**: If source tags are specified, the firewall rule applies only to traffic with source IPs that match the primary network interfaces of VM instances that have the tag and are in the same VPC network. Source tags cannot be used to control traffic to an instance's external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of `sourceRanges` and `sourceTags` may be set. If both fields are set, the firewall applies to traffic that has a source IP address within `sourceRanges` OR a source IP from a resource with a matching tag listed in the `sourceTags` field. The connection does not need to match both fields for the firewall to apply.<br>
     **GCP name**: `sourceTags`<br>
 ## `tags`
 **Type**: `UNORDERED_LIST_STRING`<br>
 ## `target_service_accounts`
 **Type**: `UNORDERED_LIST_STRING`<br>
-    **Description**: A list of service accounts indicating sets of instances located in the network that may make network connections as specified in allowed[]. targetServiceAccounts cannot be used at the same time as targetTags or sourceTags. If neither targetServiceAccounts nor targetTags are specified, the firewall rule applies to all instances on the specified network.<br>
+    **Description**: A list of service accounts indicating sets of instances located in the network that may make network connections as specified in `allowed[]`. `targetServiceAccounts` cannot be used at the same time as `targetTags` or `sourceTags`. If neither `targetServiceAccounts` nor `targetTags` are specified, the firewall rule applies to all instances on the specified network.<br>
     **GCP name**: `targetServiceAccounts`<br>
 ## `target_tags`
 **Type**: `UNORDERED_LIST_STRING`<br>
-    **Description**: A list of tags that controls which instances the firewall rule applies to. If targetTags are specified, then the firewall rule applies only to instances in the VPC network that have one of those tags. If no targetTags are specified, the firewall rule applies to all instances on the specified network.<br>
+    **Description**: A list of tags that controls which instances the firewall rule applies to. If `targetTags` are specified, then the firewall rule applies only to instances in the VPC network that have one of those tags. If no `targetTags` are specified, the firewall rule applies to all instances on the specified network.<br>
     **GCP name**: `targetTags`<br>
