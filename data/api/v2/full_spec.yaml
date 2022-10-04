@@ -12100,7 +12100,9 @@ paths:
         type: safe
   /api/v2/metrics:
     get:
-      description: Returns all metrics (matching additional filters if specified).
+      description: "Returns all metrics that can be configured in the Metrics Summary
+        page or with Metrics without Limits\u2122 (matching additional filters if
+        specified)."
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
