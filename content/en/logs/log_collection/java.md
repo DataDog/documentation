@@ -27,6 +27,8 @@ further_reading:
   text: "How to collect, customize, and standardize Java logs"
 ---
 
+To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.
+
 Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event:
 
 ```java
@@ -43,8 +45,6 @@ To alleviate this complexity, configure your logging library to produce your log
 * Ensure that all log event attributes (such as severity, logger name, and thread name) are properly extracted.
 * Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log events.
 * Avoid the need for [custom parsing rules][2].
-
-**To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.**
 
 The following instructions show setup examples for the Log4j, Log4j 2, and Logback logging libraries.
 
