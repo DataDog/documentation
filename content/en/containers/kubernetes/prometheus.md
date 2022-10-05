@@ -139,22 +139,11 @@ For a full list of available parameters for instances, including `namespace` and
       template:
         metadata:
           annotations:
-            ad.datadoghq.com/prometheus-example.checks: |
-              {
-                "openmetrics": {
-                  "instances": [
-                    {
-                      "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
-                      "namespace": "documentation_example_kubernetes",
-                      "metrics": [
-                          {"promhttp_metric_handler_requests": "handler.requests"},
-                          {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
-                          "go_memory.*"
-                        ]
-                    }
-                  ]
-                }
-              }
+         ad.datadoghq.com/prometheus-example.checks:
+           openmetrics:
+             instances:
+               - openmetrics_endpoint: http://%%host%%:%%port%%/metrics
+               - namespace: abc   
         spec:
           containers:
           - name: prometheus-example
