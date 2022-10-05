@@ -139,11 +139,11 @@ For a full list of available parameters for instances, including `namespace` and
       template:
         metadata:
           annotations:
-         ad.datadoghq.com/prometheus-example.checks:
-           openmetrics:
-             instances:
-               - openmetrics_endpoint: http://%%host%%:%%port%%/metrics
-               - namespace: abc   
+           ad.datadoghq.com/prometheus-example.checks:
+             openmetrics:
+               instances:
+                 - openmetrics_endpoint: http://%%host%%:%%port%%/metrics
+                 - namespace: abc   
         spec:
           containers:
           - name: prometheus-example
