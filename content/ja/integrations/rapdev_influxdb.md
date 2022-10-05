@@ -22,8 +22,8 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  sales_email: sales@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - data store
@@ -97,7 +97,7 @@ tile:
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
-- サポート: datadog-engineering@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
 - チャット: [rapdev.io][2]
 - 電話: 855-857-0222
@@ -110,8 +110,8 @@ tile:
 
 [1]: https://www.influxdata.com/
 [2]: https://www.rapdev.io/#Get-in-touch
-[3]: mailto:ddsales@rapdev.io
-[4]: mailto:datadog-engineering@rapdev.io
+[3]: mailto:sales@rapdev.io
+[4]: mailto:support@rapdev.io
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-influxdb" target="_blank">こちらをクリック</a>してください。

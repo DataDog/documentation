@@ -76,7 +76,7 @@ jobs:
           test_search_query: 'tag:e2e-tests'
 ```
 
-### `test_search_query` と変数のオーバーライドを使用したワークフロー例
+### テスト検索クエリと変数のオーバーライドを使用したワークフロー例
 
 ```yaml
 name: Run Synthetics tests using search query
@@ -91,7 +91,7 @@ jobs:
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
-          test_search_query: 'tag:e2e-tests'
+          test_search_query: 'tag:staging'
           variables: 'START_URL=https://staging.website.com,PASSWORD=stagingpassword'
 ```
 
