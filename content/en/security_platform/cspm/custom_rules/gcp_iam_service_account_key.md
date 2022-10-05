@@ -9,9 +9,9 @@ kind: documentation
 **Type**: `BOOLEAN`<br>
     **Description**: The key status.<br>
     **GCP name**: `disabled`<br>
-- #### gcp_iam_service_account_key: FOREIGN_KEY
+## `gcp_iam_service_account_key: FOREIGN_KEY`
+**Key to**: `gcp_iam_service_account`
 
-  _Key to: gcp_iam_service_account_
 ## `key_algorithm`
 **Type**: `STRING`<br>
     **Description**: Specifies the algorithm (and possibly key size) for the key. <br>
@@ -36,8 +36,10 @@ kind: documentation
   - `KEY_TYPE_UNSPECIFIED` - Unspecified key type. The presence of this in the message will immediately result in an error.<br>
   - `USER_MANAGED` - User-managed keys (managed and rotated by the user).<br>
   - `SYSTEM_MANAGED` - System-managed keys (managed and rotated by Google).<br>
+
 ## `labels`
 **Type**: `UNORDERED_LIST_STRING`<br>
+
 ## `name`
 **Type**: `STRING`<br>
     **Description**: The resource name of the service account key in the following format `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`.<br>
@@ -52,7 +54,7 @@ kind: documentation
     **GCP name**: `privateKeyType`<br>
         **Possible values**:<br>
   - `TYPE_UNSPECIFIED` - Unspecified. Equivalent to `TYPE_GOOGLE_CREDENTIALS_FILE`.<br>
-  - `TYPE_PKCS12_FILE` - PKCS12 format. The password for the PKCS12 file is `notasecret`. For more information, see https://tools.ietf.org/html/rfc7292.<br>
+  - `TYPE_PKCS12_FILE` - PKCS12 format. The password for the PKCS12 file is `notasecret`. For more information, see [RFC 7292][1].<br>
   - `TYPE_GOOGLE_CREDENTIALS_FILE` - Google Credentials File format.<br>
 ## `project_id`
 **Type**: `STRING`<br>
@@ -70,3 +72,6 @@ kind: documentation
 **Type**: `TIMESTAMP`<br>
     **Description**: The key can be used before this timestamp. For system-managed key pairs, this timestamp is the end time for the private key signing operation. The public key could still be used for verification for a few hours after this time.<br>
     **GCP name**: `validBeforeTime`<br>
+
+
+[1]: https://tools.ietf.org/html/rfc7292

@@ -25,7 +25,7 @@ kind: documentation
 **Type**: `UNORDERED_LIST_STRING`<br>
 ## `name`
 **Type**: `STRING`<br>
-    **Description**: Output only. The unique resource name of the project. It is an int64 generated number prefixed by "projects/". Example: `projects/415104041262`<br>
+    **Description**: Output only. The unique resource name of the project. It is an int64 generated number prefixed by `projects/`. Example: `projects/415104041262`<br>
     **GCP name**: `name`<br>
 ## `organization_id`
 **Type**: `STRING`<br>
@@ -44,7 +44,7 @@ kind: documentation
         **Possible values**:<br>
   - `STATE_UNSPECIFIED` - Unspecified state. This is only used/useful for distinguishing unset values.<br>
   - `ACTIVE` - The normal and active state.<br>
-  - `DELETE_REQUESTED` - The project has been marked for deletion by the user (by invoking DeleteProject) or by the system (Google Cloud Platform). This can generally be reversed by invoking UndeleteProject.<br>
+  - `DELETE_REQUESTED` - The project has been marked for deletion by the user (by invoking `DeleteProject`) or by the system (Google Cloud Platform). This can generally be reversed by invoking `UndeleteProject`.<br>
 ## `tags`
 **Type**: `UNORDERED_LIST_STRING`<br>
 ## `update_time`

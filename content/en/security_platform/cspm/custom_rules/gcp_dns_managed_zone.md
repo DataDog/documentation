@@ -24,7 +24,7 @@ kind: documentation
     **GCP name**: `description`<br>
 ## `dns_name`
 **Type**: `STRING`<br>
-    **Description**: The DNS name of this managed zone, for instance "example.com.".<br>
+    **Description**: The DNS name of this managed zone, for instance `example.com.`.<br>
     **GCP name**: `dnsName`<br>
 ## `dnssec_config`
   **Type**: `STRUCT`<br>
@@ -32,18 +32,18 @@ kind: documentation
   **GCP name**: `dnssecConfig`
    - `default_key_specs`<br>
       **Type**: `UNORDERED_LIST_STRUCT`<br>
-      **Description**: Specifies parameters for generating initial DnsKeys for this ManagedZone. Can only be changed while the state is OFF.<br>
+      **Description**: Specifies parameters for generating initial `DnsKeys` for this ManagedZone. Can only be changed while the state is OFF.<br>
       **GCP name**: `defaultKeySpecs`
        - `algorithm`<br>
         **Type**: `STRING`<br>
             **Description**: String mnemonic specifying the DNSSEC algorithm of this key. <br>
             **GCP name**: `algorithm`<br>
                 **Possible values**:<br>
-          - `rsasha1` - <br>
-          - `rsasha256` - <br>
-          - `rsasha512` - <br>
-          - `ecdsap256sha256` - <br>
-          - `ecdsap384sha384` - <br>
+          - `rsasha1` <br>
+          - `rsasha256` <br>
+          - `rsasha512` <br>
+          - `ecdsap256sha256` <br>
+          - `ecdsap384sha384` <br>
        - `key_length`<br>
         **Type**: `INT32`<br>
             **Description**: Length of the keys in bits.<br>
@@ -64,8 +64,8 @@ kind: documentation
         **Description**: Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF. <br>
         **GCP name**: `nonExistence`<br>
             **Possible values**:<br>
-      - `nsec` - <br>
-      - `nsec3` - <br>
+      - `nsec` <br>
+      - `nsec3` <br>
    - `state`<br>
     **Type**: `STRING`<br>
         **Description**: Specifies whether DNSSEC is enabled, and what mode it is in. <br>
@@ -115,7 +115,7 @@ kind: documentation
     **GCP name**: `nameServerSet`<br>
 ## `name_servers`
 **Type**: `UNORDERED_LIST_STRING`<br>
-    **Description**: Delegate your managed_zone to these virtual name servers; defined by the server (output only)<br>
+    **Description**: Delegate your `managed_zone` to these virtual name servers; defined by the server (output only)<br>
     **GCP name**: `nameServers`<br>
 ## `organization_id`
 **Type**: `STRING`<br>
@@ -139,7 +139,7 @@ kind: documentation
         **Type**: `STRING`<br>
        - `network_url`<br>
         **Type**: `STRING`<br>
-            **Description**: The fully qualified URL of the VPC network to forward queries to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}<br>
+            **Description**: The fully qualified URL of the VPC network to forward queries to. This should be formatted like `https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}`<br>
             **GCP name**: `networkUrl`<br>
 ## `private_visibility_config`
   **Type**: `STRUCT`<br>
@@ -155,7 +155,7 @@ kind: documentation
         **Type**: `STRING`<br>
        - `network_url`<br>
         **Type**: `STRING`<br>
-            **Description**: The fully qualified URL of the VPC network to bind to. Format this URL like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}<br>
+            **Description**: The fully qualified URL of the VPC network to bind to. Format this URL like `https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}`<br>
             **GCP name**: `networkUrl`<br>
 ## `project_id`
 **Type**: `STRING`<br>
@@ -165,7 +165,7 @@ kind: documentation
 **Type**: `STRING`<br>
 ## `reverse_lookup_config`
   **Type**: `STRUCT`<br>
-  **Description**: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS resolves reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.<br>
+  **Description**: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS resolves reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under `private_visibility_config`.<br>
   **GCP name**: `reverseLookupConfig`
    - `kind`<br>
     **Type**: `STRING`<br>
@@ -187,7 +187,7 @@ kind: documentation
         **Type**: `STRING`<br>
        - `namespace_url`<br>
         **Type**: `STRING`<br>
-            **Description**: The fully qualified URL of the namespace associated with the zone. Format must be https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace}<br>
+            **Description**: The fully qualified URL of the namespace associated with the zone. Format must be `https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace}`<br>
             **GCP name**: `namespaceUrl`<br>
 ## `tags`
 **Type**: `UNORDERED_LIST_STRING`<br>
