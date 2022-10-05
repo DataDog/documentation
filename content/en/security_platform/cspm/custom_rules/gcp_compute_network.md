@@ -19,7 +19,7 @@ kind: documentation
     **GCP name**: `description`<br>
 ## `enable_ula_internal_ipv6`
 **Type**: `BOOLEAN`<br>
-    **Description**: Enable ULA internal ipv6 on this network. Enabling this feature will assign a /48 from google defined ULA prefix fd20::/20. .<br>
+    **Description**: Enable ULA internal ipv6 on this network. Enabling this feature will assign a /48 from Google defined ULA prefix `fd20::/20.`.<br>
     **GCP name**: `enableUlaInternalIpv6`<br>
 ## `gateway_ipv4`
 **Type**: `STRING`<br>
@@ -31,21 +31,21 @@ kind: documentation
     **GCP name**: `id`<br>
 ## `internal_ipv6_range`
 **Type**: `STRING`<br>
-    **Description**: When enabling ula internal ipv6, caller optionally can specify the /48 range they want from the google defined ULA prefix fd20::/20. The input must be a valid /48 ULA IPv6 address and must be within the fd20::/20. Operation will fail if the speficied /48 is already in used by another resource. If the field is not speficied, then a /48 range will be randomly allocated from fd20::/20 and returned via this field. .<br>
+    **Description**: When enabling ula internal ipv6, caller optionally can specify the /48 range they want from the google defined ULA prefix `fd20::/20`. The input must be a valid /48 ULA IPv6 address and must be within the `fd20::/20`. Operation will fail if the specified /48 is already in used by another resource. If the field is not specified, then a /48 range will be randomly allocated from `fd20::/20` and returned via this field. .<br>
     **GCP name**: `internalIpv6Range`<br>
 ## `ipv4_range`
 **Type**: `STRING`<br>
-    **Description**: Deprecated in favor of subnet mode networks. The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.<br>
+    **Description**: Deprecated in favor of subnet mode networks. The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: `192.168.0.0/16`. Provided by the client when the network is created.<br>
     **GCP name**: `IPv4Range`<br>
 ## `kind`
 **Type**: `STRING`<br>
-    **Description**: [Output Only] Type of the resource. Always compute#network for networks.<br>
+    **Description**: [Output Only] Type of the resource. Always `compute#network` for networks.<br>
     **GCP name**: `kind`<br>
 ## `labels`
 **Type**: `UNORDERED_LIST_STRING`<br>
 ## `mtu`
 **Type**: `INT32`<br>
-    **Description**: Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes. If unspecified, defaults to 1460.<br>
+    **Description**: Maximum Transmission Unit in bytes. The minimum value for this field is `1460` and the maximum value is `1500` bytes. If unspecified, defaults to `1460`.<br>
     **GCP name**: `mtu`<br>
 ## `name`
 **Type**: `STRING`<br>
@@ -53,11 +53,11 @@ kind: documentation
     **GCP name**: `name`<br>
 ## `network_firewall_policy_enforcement_order`
 **Type**: `STRING`<br>
-    **Description**: The network firewall policy enforcement order. Can be either AFTER_CLASSIC_FIREWALL or BEFORE_CLASSIC_FIREWALL. Defaults to AFTER_CLASSIC_FIREWALL if the field is not specified. <br>
+    **Description**: The network firewall policy enforcement order. Can be either `AFTER_CLASSIC_FIREWALL` or `BEFORE_CLASSIC_FIREWALL`. Defaults to `AFTER_CLASSIC_FIREWALL` if the field is not specified. <br>
     **GCP name**: `networkFirewallPolicyEnforcementOrder`<br>
         **Possible values**:<br>
-  - `AFTER_CLASSIC_FIREWALL` - <br>
-  - `BEFORE_CLASSIC_FIREWALL` - <br>
+  - `AFTER_CLASSIC_FIREWALL` <br>
+  - `BEFORE_CLASSIC_FIREWALL` <br>
 ## `organization_id`
 **Type**: `STRING`<br>
 ## `parent`
@@ -68,23 +68,23 @@ kind: documentation
   **GCP name**: `peerings`
    - `auto_create_routes`<br>
     **Type**: `BOOLEAN`<br>
-        **Description**: This field will be deprecated soon. Use the exchange_subnet_routes field instead. Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.<br>
+        **Description**: This field will be deprecated soon. Use the `exchange_subnet_routes` field instead. Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be `true` since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.<br>
         **GCP name**: `autoCreateRoutes`<br>
    - `exchange_subnet_routes`<br>
     **Type**: `BOOLEAN`<br>
-        **Description**: Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.<br>
+        **Description**: Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be `true` since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.<br>
         **GCP name**: `exchangeSubnetRoutes`<br>
    - `export_custom_routes`<br>
     **Type**: `BOOLEAN`<br>
-        **Description**: Whether to export the custom routes to peer network. The default value is false.<br>
+        **Description**: Whether to export the custom routes to peer network. The default value is `false`.<br>
         **GCP name**: `exportCustomRoutes`<br>
    - `export_subnet_routes_with_public_ip`<br>
     **Type**: `BOOLEAN`<br>
-        **Description**: Whether subnet routes with public IP range are exported. The default value is true, all subnet routes are exported. IPv4 special-use ranges are always exported to peers and are not controlled by this field.<br>
+        **Description**: Whether subnet routes with public IP range are exported. The default value is `true`, all subnet routes are exported. IPv4 special-use ranges are always exported to peers and are not controlled by this field.<br>
         **GCP name**: `exportSubnetRoutesWithPublicIp`<br>
    - `import_custom_routes`<br>
     **Type**: `BOOLEAN`<br>
-        **Description**: Whether to import the custom routes from peer network. The default value is false.<br>
+        **Description**: Whether to import the custom routes from peer network. The default value is `false`.<br>
         **GCP name**: `importCustomRoutes`<br>
    - `import_subnet_routes_with_public_ip`<br>
     **Type**: `BOOLEAN`<br>
@@ -104,11 +104,11 @@ kind: documentation
         **GCP name**: `peerMtu`<br>
    - `stack_type`<br>
     **Type**: `STRING`<br>
-        **Description**: Which IP version(s) of traffic and routes are allowed to be imported or exported between peer networks. The default value is IPV4_ONLY. <br>
+        **Description**: Which IP versions of traffic and routes are allowed to be imported or exported between peer networks. The default value is `IPV4_ONLY`. <br>
         **GCP name**: `stackType`<br>
             **Possible values**:<br>
-      - `IPV4_IPV6` - This Peering will allow IPv4 traffic and routes to be exchanged. Additionally if the matching peering is IPV4_IPV6, IPv6 traffic and routes will be exchanged as well.<br>
-      - `IPV4_ONLY` - This Peering will only allow IPv4 traffic and routes to be exchanged, even if the matching peering is IPV4_IPV6.<br>
+      - `IPV4_IPV6` - This Peering will allow IPv4 traffic and routes to be exchanged. Additionally if the matching peering is `IPV4_IPV6`, IPv6 traffic and routes will be exchanged as well.<br>
+      - `IPV4_ONLY` - This Peering will only allow IPv4 traffic and routes to be exchanged, even if the matching peering is `IPV4_IPV6`.<br>
    - `state`<br>
     **Type**: `STRING`<br>
         **Description**: [Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The peering is `ACTIVE` when there's a matching configuration in the peer network. <br>
@@ -132,18 +132,18 @@ kind: documentation
   **GCP name**: `routingConfig`
    - `routing_mode`<br>
     **Type**: `STRING`<br>
-        **Description**: The network-wide routing mode to use. If set to REGIONAL, this network's Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network's Cloud Routers will advertise routes with all subnets of this network, across regions. <br>
+        **Description**: The network-wide routing mode to use. If set to `REGIONAL`, this network's Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to `GLOBAL`, this network's Cloud Routers will advertise routes with all subnets of this network, across regions. <br>
         **GCP name**: `routingMode`<br>
             **Possible values**:<br>
-      - `GLOBAL` - <br>
-      - `REGIONAL` - <br>
+      - `GLOBAL` <br>
+      - `REGIONAL` <br>
 ## `self_link`
 **Type**: `STRING`<br>
     **Description**: [Output Only] Server-defined URL for the resource.<br>
     **GCP name**: `selfLink`<br>
 ## `self_link_with_id`
 **Type**: `STRING`<br>
-    **Description**: [Output Only] Server-defined URL for this resource with the resource id.<br>
+    **Description**: [Output Only] Server-defined URL for this resource with the resource ID.<br>
     **GCP name**: `selfLinkWithId`<br>
 ## `subnetworks`
 **Type**: `UNORDERED_LIST_STRING`<br>
