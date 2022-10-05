@@ -60,7 +60,7 @@ For all graph types, Datadog offers various color options to differentiate multi
 
 For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
 
-## Metric aliasing
+### Metric aliasing
 
 Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
 
