@@ -6548,9 +6548,9 @@ api:
         - GetUsageSynthetics
       unstable: []
       order: 15
-  - name: Get usage across your multi-org account
-    url: '#get-usage-across-your-multi-org-account'
-    identifier: usage-metering-get-usage-across-your-multi-org-account
+  - name: Get usage across your account
+    url: '#get-usage-across-your-account'
+    identifier: usage-metering-get-usage-across-your-account
     parent: usage-metering
     generated: true
     params:
