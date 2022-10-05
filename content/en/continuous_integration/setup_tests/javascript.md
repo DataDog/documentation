@@ -30,7 +30,7 @@ Supported test frameworks:
 * Cypress >= 6.7.0
   * From `dd-trace>=1.4.0`
 
-The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel or others are supported out of the box.
+The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ## Configuring reporting method
 
