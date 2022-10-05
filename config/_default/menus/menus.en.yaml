@@ -3234,116 +3234,133 @@ main:
     identifier: dev_tools
     parent: essentials_heading
     weight: 210000
+  - name: Authorization
+    url: developers/authorization/
+    parent: dev_tools
+    identifier: dev_tools_authorization
+    weight: 1
+  - name: OAuth2 in Datadog
+    url: developers/authorization/oauth2_in_datadog/
+    parent: dev_tools_authorization
+    weight: 101
+  - name: OAuth2 Authorization Endpoints Reference
+    url: developers/authorization/oauth2_endpoints/
+    parent: dev_tools_authorization
+    weight: 102
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
     identifier: dev_tools_dogstatsd
-    weight: 1
+    weight: 2
   - name: Datagram Format
     url: developers/dogstatsd/datagram_shell
     parent: dev_tools_dogstatsd
-    weight: 101
+    weight: 201
   - name: Unix Domain Socket
     url: /developers/dogstatsd/unix_socket
     parent: dev_tools_dogstatsd
-    weight: 102
+    weight: 202
   - name: High Throughput Data
     url: developers/dogstatsd/high_throughput/
     parent: dev_tools_dogstatsd
-    weight: 103
+    weight: 203
   - name: Data Aggregation
     url: developers/dogstatsd/data_aggregation/
     parent: dev_tools_dogstatsd
-    weight: 104
+    weight: 204
   - name: DogStatsD Mapper
     url: developers/dogstatsd/dogstatsd_mapper/
     parent: dev_tools_dogstatsd
-    weight: 105
+    weight: 205
   - name: Custom Checks
     url: developers/custom_checks/
     parent: dev_tools
     identifier: custom_checks
-    weight: 2
+    weight: 3
   - name: Writing a Custom Agent Check
     url: developers/custom_checks/write_agent_check/
     parent: custom_checks
-    weight: 201
+    weight: 301
   - name: Writing a Custom OpenMetrics Check
     url: developers/custom_checks/prometheus/
     parent: custom_checks
-    weight: 202
+    weight: 302
   - name: Integrations
     url: developers/integrations/
     parent: dev_tools
     identifier: dev_tools_integrations
-    weight: 3
+    weight: 4
   - name: Create a New Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
-    weight: 301
+    weight: 401
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 302
+    weight: 402
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 303
+    weight: 403
+  - name: OAuth for Data Integrations
+    url: developers/integrations/oauth_for_data_integrations
+    parent: dev_tools_integrations
+    weight: 404
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 304
+    weight: 405
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 305
+    weight: 406
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools
     identifier: marketplace
-    weight: 4
+    weight: 5
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
-    weight: 5
+    weight: 6
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check
-    weight: 7
+    weight: 8
   - name: 'Submission - Agent Check '
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
-    weight: 701
+    weight: 801
   - name: Submission - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
-    weight: 702
+    weight: 802
   - name: Submission - API
     url: api/v1/service-checks/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
-    weight: 703
+    weight: 803
   - name: Community
     url: developers/community/
     parent: dev_tools
     identifier: dev_community
-    weight: 8
+    weight: 9
   - name: Libraries
     url: developers/community/libraries/
     parent: dev_community
-    weight: 801
+    weight: 901
   - name: Community Office Hours
     url: developers/community/office_hours/
     parent: dev_community
-    weight: 802
+    weight: 902
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
-    weight: 10
+    weight: 11
   - name: API
     url: api/
     pre: api
