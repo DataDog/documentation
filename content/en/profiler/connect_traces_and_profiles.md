@@ -74,7 +74,7 @@ To enable Code Hotspots identification for Go, [turn on profiling for your servi
 - [`profiler.CPUDuration(60*time.Second)`][5] and [`profiler.WithPeriod(60*time.Second)`][6] are passed to [`profiler.Start()`][7] to capture hotspot information for 100% of all spans. These values are set by default in [dd-trace-go][2] versions 1.37.0+.
 
 
-**Warning:** Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO. They are scheduled to be fixed in the 1.18 release.
+**Note:** This features works best with Go version 1.18 or newer. Go 1.17 and below has several bugs (see [GH-35057][8], [GH-48577][9], [CL-369741][10], [CL-369983][11]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/releases
