@@ -36,6 +36,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
   tag: ブログ
   text: AWS Fargate でコンテナ化された ASP.NET コアアプリケーションを監視する
+- link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
+  tag: GitHub
+  text: Datadog Continuous Profiler で .NET アプリケーションのパフォーマンスを最適化する
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: GitHub
   text: カスタムインスツルメンテーションの例
@@ -115,7 +118,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 Azure App Service で Datadog APM を設定するには、[Azure App Service 拡張のトレース][1]を参照してください。
 
 [1]: /ja/serverless/azure_app_services/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Other Environments" %}}
 
@@ -129,7 +132,7 @@ Azure App Service で Datadog APM を設定するには、[Azure App Service 拡
 [3]: /ja/integrations/amazon_elasticbeanstalk/
 [4]: /ja/integrations/
 [5]: /ja/help/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -149,7 +152,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "NuGet" %}}
 
@@ -201,7 +204,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
    ```
 2. スタンドアロンアプリケーションや Windows サービスの場合は、手動でアプリケーションを再起動します。
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "NuGet" %}}
 
