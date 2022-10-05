@@ -31,7 +31,7 @@ draft: false
 git_integration_title: purefb
 integration_id: purefb
 integration_title: Pure Storage FlashBlade
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
