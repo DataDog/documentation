@@ -41,31 +41,32 @@ Graphs can be displayed as lines, areas, and bars. Line graphs contain additiona
 | Style     | Solid, dashed, or dotted |
 | Stroke    | Normal, thin, or thick   |
 
-### Appearance
+### Color
 
 For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
 
-| Palette | Description                                                                                              |
-|---------|----------------------------------------------------------------------------------------------------------|
-| Classic | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat). |
-| Purple  | A gradient color scheme made from purple.                                                                |
-| Cool    | A gradient color scheme made from green and blue.                                                        |
-| Warm    | A gradient color scheme made from yellow and orange.                                                     |
-| Orange  | A gradient color scheme made from orange.                                                                |
-| Gray    | A gradient color scheme made from gray.                                                                  |
-| Red     | A gradient color scheme made from red.                                                                   |
-| Green   | A gradient color scheme made from green.                                                                 |
-| Blue    | A gradient color scheme made from blue.                                                                  |
+| Palette     | Description                                                                                                 |
+|-------------|-------------------------------------------------------------------------------------------------------------|
+| Classic     | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat).    |
+| Categorical | Using a set of 16 colors, applies a consistent color for each series of data across all timeseries widgets. |
+| Purple      | A gradient color scheme made from purple.                                                                   |
+| Cool        | A gradient color scheme made from green and blue.                                                           |
+| Warm        | A gradient color scheme made from yellow and orange.                                                        |
+| Orange      | A gradient color scheme made from orange.                                                                   |
+| Gray        | A gradient color scheme made from gray.                                                                     |
+| Red         | A gradient color scheme made from red.                                                                      |
+| Green       | A gradient color scheme made from green.                                                                    |
+| Blue        | A gradient color scheme made from blue.                                                                     |
 
 For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
 
-### Metric aliasing
+## Metric aliasing
 
 Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
 
 {{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Adding an alias to a search query in the Timeseries widget editor" style="width:100%;" >}}
 
-#### Event overlay
+### Event overlay
 
 You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. 
 
@@ -81,7 +82,7 @@ Once enabled, events are overlaid on your graphs with red bars:
 
 {{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay bar on a timeseries graph" style="width:100%;" >}}
 
-#### Markers
+### Markers
 
 To add markers for additional data sets, click **Add Marker** in the **Markers** section.
 
@@ -89,7 +90,7 @@ To add markers for additional data sets, click **Add Marker** in the **Markers**
 2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line. 
 3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox. 
 
-#### Y-Axis controls
+### Y-Axis controls
 
 Y-Axis controls are available in the UI and in the JSON editor. You can set the value and type of the Y-Axis in order to:
 
@@ -108,7 +109,7 @@ The following configuration options are available:
 
 Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, an empty graph is returned.
 
-#### Legend configuration
+### Legend configuration
 
 You can add configurable legends to your screenboards by selecting from the following options in the **Legend** section:
 
@@ -119,7 +120,7 @@ You can add configurable legends to your screenboards by selecting from the foll
 
 For timeboards, legends display automatically when a dashboard is set to L or XL.
 
-#### Context links
+### Context links
 
 To add a context link in the dropdown menu that appears when you click in a dashboard widget, click **Add a Context Link** in the **Context Links** section.
 
