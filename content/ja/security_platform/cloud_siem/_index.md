@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/security_monitoring/
+- /ja/security_platform/cloud_siem/security_home/
 further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
@@ -13,7 +14,7 @@ title: Cloud SIEM
 
 Datadog Cloud SIEM (Security Information and Event Management) は、開発、運用、セキュリティチームを 1 つのプラットフォームでつなげます。1 つのダッシュボードに DevOps コンテンツ、営業用メトリクス、そしてセキュリティコンテンツを表示。アプリケーションおよびインフラストラクチャーへの標的型攻撃、システムと通信する脅威インテリジェンスにリストされた IP、安全でない構成などの脅威をリアルタイムに検出し、セキュリティに関する問題をメール、Slack、Jira、PagerDuty、または Webhook を使用してチームに通知します。
 
-{{< img src="security_platform/security_monitoring/signals_page.png" alt="Cloud SIEM のシグナルページ。検出ルールの種類を記録するためにフィルタリングされ、シグナルのステータスに基づいた棒グラフと、シグナルのリストが表示されます" >}}
+{{< img src="security_platform/security_monitoring/cloud_siem_homepage.png" alt="Cloud SIEM のホームページには、重要なシグナル、疑わしいアクター、影響を受けるリソース、脅威インテル、シグナルの傾向などのウィジェットを備えた Security Overview セクションが表示されています" >}}
 
 脅威は、Datadog 内でセキュリティシグナルとして表面化され、[セキュリティシグナルエクスプローラー][1]で収集、トリアージされます。セキュリティシグナルは、Datadog Cloud SIEM の[検出ルール][2]により生成されます。検出ルールは、すぐに使用を開始できる状態で提供され、さまざまなソースの脅威を検出します。提供された検出ルールのクローンを作成し、コンフィギュレーションを変更することや、特定のユースケースに合わせて[新しいルール][3]を作成し追加することも可能です。
 
