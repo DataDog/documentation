@@ -3326,19 +3326,34 @@ main:
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
     weight: 703
+  - name: IDE integrations
+    url: developers/ide_integrations/
+    parent: dev_tools
+    identifier: ide_integrations
+    weight: 8
+  - name: IntelliJ IDEA
+    url: developers/ide_integrations/idea/
+    parent: ide_integrations
+    identifier: ide_integrations_idea
+    weight: 801
+  - name: Profiling
+    url: developers/ide_integrations/idea/profiling
+    parent: ide_integrations_idea
+    identifier: ide_integrations_idea_profiling
+    weight: 8001
   - name: Community
     url: developers/community/
     parent: dev_tools
     identifier: dev_community
-    weight: 8
+    weight: 9
   - name: Libraries
     url: developers/community/libraries/
     parent: dev_community
-    weight: 801
+    weight: 901
   - name: Community Office Hours
     url: developers/community/office_hours/
     parent: dev_community
-    weight: 802
+    weight: 902
   - name: Guides
     url: developers/guide/
     parent: dev_tools
