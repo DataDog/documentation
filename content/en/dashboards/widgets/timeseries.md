@@ -92,20 +92,20 @@ To add markers for additional data sets, click **Add Marker** in the **Markers**
 
 ### Y-Axis controls
 
-Y-Axis controls are available in the UI and in the JSON editor. You can set the value and type of the Y-Axis in order to:
+Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis in order to:
 
-* Clip the Y-Axis to specific ranges.
-* Automatically change Y-Axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove the "outliers" series.
-* Change the Y-Axis scale from linear to log, pow, or sqrt.
+* Clip the y-axis to specific ranges.
+* Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove the "outliers" series.
+* Change the y-axis scale from linear to log, pow, or sqrt.
 
 The following configuration options are available:
 
 | Option                | Required | Description                                                                                                                                                                                                               |
 |-----------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`                 | No       | Specify the minimum value to show on the Y-axis. It takes a number or `Auto` as the default value.                                                                                                                |
-| `Max`                 | No       | Specify the maximum value to show on the Y-axis. It takes a number or `Auto` as the default value.                                                                                                                        |
+| `Min`                 | No       | Specify the minimum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                |
+| `Max`                 | No       | Specify the maximum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                        |
 | `Scale`               | No       | Specifies the scale type. Possible values include:<br>- *linear*: A linear scale (default).<br>- *log*: A logarithmic scale.<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON).<br>- *sqrt*: A square root scale. |
-| `Always include zero` | No       | Always include zero or fit the Y-Axis to the data range. The default is to always include zero.                                                                                                                             |
+| `Always include zero` | No       | Always include zero or fit the y-axis to the data range. The default is to always include zero.                                                                                                                             |
 
 Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, an empty graph is returned.
 
