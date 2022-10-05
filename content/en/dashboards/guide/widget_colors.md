@@ -1,14 +1,14 @@
 # Selecting the right colors for your graphs
 
-In Datadog graphs, color is one the main affordances used to distinguish different series of data. Selecting the right color for your graph is critical to ensuring that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively. 
+In Datadog graphs, color is the primary affordances used to distinguish between series of data. Selecting the right color for your graph is critical to ensuring that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively. 
 
-<img width="600" style="text-align:center" alt="image" src="https://user-images.githubusercontent.com/19559239/194149975-b0ad4fb9-5521-42a3-955d-eea0c07a0fbf.png">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194149975-b0ad4fb9-5521-42a3-955d-eea0c07a0fbf.png">
 
 ## Types of color palettes
 
 ### Classic Palette
 
-The default classic color palette is a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. The classic palette ensures that adjacent series have distinct colors.
+The default classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. The classic palette ensures that adjacent series have distinct colors.
 
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194169295-3ed655a6-e463-42c2-ae89-7b8a38a97e9d.png">
 
@@ -26,15 +26,13 @@ For a small subset of compatible tags, Datadog will automatically recognize the 
 
 The cool and warm color palettes use a gradient color scheme composed of two colors. The cool palette is made from green and blue, and the warm palette from yellow and orange. Example of cool color palette below.
 
-<img width="580" alt="image" src="https://user-images.githubusercontent.com/19559239/194169698-e36639cb-3354-465b-bccd-7ce475f1bda5.png">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194169698-e36639cb-3354-465b-bccd-7ce475f1bda5.png">
 
 ### Single-Hue Gradient Palettes
 
 Single-hue gradient palettes assign different shades of a single color to your data. Options include: purple, orange, gray, red, green, and blue.
 
-<img width="1064" alt="image" src="https://user-images.githubusercontent.com/19559239/194169489-9c1a5944-8117-47e2-87be-48e998814bc4.png">
-
-Single-hue gradient palettes assign different shades of a single color to your data. Options include: purple, orange, gray, red, green, and blue.
+<img width="584" alt="image" src="https://user-images.githubusercontent.com/19559239/194170101-84af0627-147b-455a-ad93-9607ba4feffb.png">
 
 ## Which color palette should I use?
 
