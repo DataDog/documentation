@@ -580,4 +580,6 @@ The default value is `TABLE`.<br>
         **Type**: `STRING`<br>
             **Description**: [Pick one] A code resource to load from a Google Cloud Storage URI (`gs://bucket/path`).<br>
             **GCP name**: `resourceUri`<br>
+
+
 [1]: https://cloud.google.com/bigquery/sql-reference/

@@ -108,7 +108,7 @@ kind: documentation
     **GCP name**: `selfLink`<br>
 ## `source_ranges`
 **Type**: `UNORDERED_LIST_STRING`<br>
-    **Description**: If source ranges are specified, the firewall rule applies only to traffic that has a source IP address in these ranges. These ranges must be expressed in CIDR format. One or both of sourceRanges and sourceTags may be set. If both fields are set, the rule applies to traffic that has a source IP address within sourceRanges OR a source IP from a resource with a matching tag listed in the sourceTags field. The connection does not need to match both fields for the rule to apply. Both IPv4 and IPv6 are supported.<br>
+    **Description**: If source ranges are specified, the firewall rule applies only to traffic that has a source IP address in these ranges. These ranges must be expressed in CIDR format. One or both of `sourceRanges` and `sourceTags` may be set. If both fields are set, the rule applies to traffic that has a source IP address within `sourceRanges` OR a source IP from a resource with a matching tag listed in the `sourceTags` field. The connection does not need to match both fields for the rule to apply. Both IPv4 and IPv6 are supported.<br>
     **GCP name**: `sourceRanges`<br>
 ## `source_service_accounts`
 **Type**: `UNORDERED_LIST_STRING`<br>
