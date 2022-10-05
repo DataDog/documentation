@@ -199,7 +199,7 @@ Some use cases to define a group retention time include:
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][5] option mentioned above.
+**Note**: This option is only available for multi-alert monitors and will only work with monitors that support the [`On missing data`][5] option mentioned above (APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors).
 
 #### New group delay
 
