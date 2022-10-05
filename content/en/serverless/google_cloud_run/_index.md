@@ -4,11 +4,11 @@ kind: documentation
 ---
 
 ## Overview
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through our [GCP integration][6]. We also have a solution in Public Beta for instrumentiong your Cloud Run run applications with a purpose-built Agent to enable tracing, custom metrics and direct log collection. 
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [GCP integration][6]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection. 
 
-  <div class="alert alert-warning">This feature is currently available in Public Beta. We welcome feedback on this solution, and your experience monitoring GCP Serverless workloads through this form or through your standard support and account channels. Cloud Run monitoring and APM tracing are available without direct cost during the Beta period. Existing APM customers may incur increased span ingestion and volume costs. We plan to communicate and introduce pricing for this use before General Availability.   <a href="[Feedback Form](https://forms.gle/HSiDGnTPvDvbzDAQA)"></div>
+  <div class="alert alert-warning">This feature is in public beta. You can provide feedback through a <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">feedback form</a>, or through your standard support channels. During the beta period, Cloud Run monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
 
-## Tracking and Custom Metrics
+## Tracking and custom metrics
 ### Build your container
 
 If you are using a Dockerfile to build your application, complete the following:
