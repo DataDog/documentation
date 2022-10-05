@@ -1945,7 +1945,7 @@ main:
     parent: setup_tests
     identifier: ci_java
     weight: 102
-  - name: JavaScript
+  - name: JavaScript and TypeScript
     url: continuous_integration/setup_tests/javascript/
     parent: setup_tests
     identifier: ci_javascript
