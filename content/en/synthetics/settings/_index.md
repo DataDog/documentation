@@ -74,10 +74,6 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
     * Extract the value from **Response Body**: Parse the response body of the request with a [`regex`][3], a [`jsonpath`][4], an [`xpath`][5], or use the full response body.
     * Extract the value from the **Response Status Code**. 
 
-    {{< img src="synthetics/settings/create_variable_from_test.png" alt="Extract a variable from an HTTP or Multistep API Test" style="width:100%;">}}
-
-7. Enable obfuscation of your variable to hide its value on test results (optional).
-
 In addition to extracting a value with a regex, you can also use a [regex][3] to parse the following:
 
   - Match not only the first instance of a pattern, but also all instances of the supplied pattern
