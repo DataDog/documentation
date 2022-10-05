@@ -440,7 +440,7 @@ kind: documentation
           **GCP name**: `backupRetentionSettings`
            - `retained_backups`<br>
             **Type**: `INT32`<br>
-                **Description**: Depending on the value of retention_unit, this is used to determine if a backup needs to be deleted. If retention_unit is `COUNT`, we will retain this many backups.<br>
+                **Description**: Depending on the value of `retention_unit`, this is used to determine if a backup needs to be deleted. If `retention_unit` is `COUNT`, we will retain this many backups.<br>
                 **GCP name**: `retainedBackups`<br>
            - `retention_unit`<br>
             **Type**: `STRING`<br>

@@ -219,7 +219,10 @@ kind: documentation
             **GCP name**: `requirePartitionFilter`<br>
        - `source_uri_prefix`<br>
         **Type**: `STRING`<br>
-            **Description**: [Optional] When hive partition detection is requested, a common prefix for all source URIs should be supplied. The prefix must end immediately before the partition key encoding begins. For example, consider files following this data layout. `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro`. When hive partitioning is requested with either `AUTO` or `STRINGS` detection, the common prefix can be either of `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).<br>
+            **Description**: [Optional] When hive partition detection is requested, a common prefix for all source URIs should be supplied. The prefix must end immediately before the partition key encoding begins. For example, consider files following this data layout. <br>
+            `gs://bucket/path_to_table/dt=2019-01-01/country=BR/id=7/file.avro`<br>
+            `gs://bucket/path_to_table/dt=2018-12-31/country=CA/id=3/file.avro`<br> 
+            When hive partitioning is requested with either `AUTO` or `STRINGS` detection, the common prefix can be either of `gs://bucket/path_to_table` or `gs://bucket/path_to_table/` (trailing slash does not matter).<br>
             **GCP name**: `sourceUriPrefix`<br>
    - `ignore_unknown_values`<br>
     **Type**: `BOOLEAN`<br>

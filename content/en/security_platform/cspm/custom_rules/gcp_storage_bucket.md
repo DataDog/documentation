@@ -21,17 +21,17 @@ kind: documentation
         **GCP name**: `email`<br>
    - `entity`<br>
     **Type**: `STRING`<br>
-    **Description**: The entity holding the permission, in one of the following forms: 
-    - `user-<UserId>` 
-    - `user-<email>` 
-    - `group-<groupId>` 
-    - `group-<email>` 
-    - `domain-<domainName>`
-    - `project-<team-projectId>` 
-    - `allUsers` - allAuthenticatedUsers 
-    Examples: 
-    - The user `liz@example.com` would be `user-liz@example.com`. 
-    - The group `example@googlegroups.com` would be `group-example@googlegroups.com`. 
+    **Description**: The entity holding the permission, in one of the following forms: <br>
+    - `user-<UserId>` <br>
+    - `user-<email>` <br>
+    - `group-<groupId>` <br>
+    - `group-<email>` <br>
+    - `domain-<domainName>`<br>
+    - `project-<team-projectId>`<br> 
+    - `allUsers` - allAuthenticatedUsers <br>
+    Examples: <br>
+    - The user `liz@example.com` would be `user-liz@example.com`. <br>
+    - The group `example@googlegroups.com` would be `group-example@googlegroups.com`. <br>
     - To refer to all members of the Google Apps for Business domain `example.com`, the entity would be `domain-example.com`.<br>
         **GCP name**: `entity`<br>
    - `entity_id`<br>
@@ -142,17 +142,17 @@ kind: documentation
         **GCP name**: `email`<br>
    - `entity`<br>
     **Type**: `STRING`<br>
-    **Description**: The entity holding the permission, in one of the following forms: 
-    - `user-<UserId>` 
-    - `user-<email>` 
-    - `group-<groupId>` 
-    - `group-<email>` 
-    - `domain-<domainName>`
-    - `project-<team-projectId>` 
-    - `allUsers` - allAuthenticatedUsers 
-    Examples: 
-    - The user `liz@example.com` would be `user-liz@example.com`. 
-    - The group `example@googlegroups.com` would be `group-example@googlegroups.com`. 
+    **Description**: The entity holding the permission, in one of the following forms: <br>
+    - `user-<UserId>` <br>
+    - `user-<email>` <br>
+    - `group-<groupId>` <br>
+    - `group-<email>` <br>
+    - `domain-<domainName>`<br>
+    - `project-<team-projectId>` <br>
+    - `allUsers` - allAuthenticatedUsers <br>
+    Examples: <br>
+    - The user `liz@example.com` would be `user-liz@example.com`. <br>
+    - The group `example@googlegroups.com` would be `group-example@googlegroups.com`. <br>
     - To refer to all members of the Google Apps for Business domain `example.com`, the entity would be `domain-example.com`.<br>
         **GCP name**: `entity`<br>
    - `entity_id`<br>

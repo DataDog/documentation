@@ -23,9 +23,9 @@ kind: documentation
       **GCP name**: `autoscalingConfig`
        - `policy_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The autoscaling policy used by the cluster. Only resource names including `projectid` and location (region) are valid. Examples: 
-        - `https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
-        - `projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]` 
+        **Description**: Optional. The autoscaling policy used by the cluster. Only resource names including `projectid` and location (region) are valid. Examples: <br>
+          - `https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`<br>
+          - `projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]` <br>
         Note that the policy must be in the same project and Dataproc region.<br>
             **GCP name**: `policyUri`<br>
    - `config_bucket`<br>
@@ -42,13 +42,13 @@ kind: documentation
           **GCP name**: `metrics`
            - `metric_overrides`<br>
             **Type**: `UNORDERED_LIST_STRING`<br>
-            **Description**: Optional. Specify one or more available [OSS metrics][2] to collect for the metric course (for the SPARK metric source, any [Spark metric][3] can be specified). Provide metrics in the following format: `METRIC_SOURCE:INSTANCE:GROUP:METRIC`. Use camel-case as appropriate. Examples: 
-            - `yarn:ResourceManager:QueueMetrics:AppsCompleted`
-            - `spark:driver:DAGScheduler:job.allJobs`
-            - `sparkHistoryServer:JVM:Memory:NonHeapMemoryUsage.committed`
-            - `hiveserver2:JVM:Memory:NonHeapMemoryUsage.used` 
-            Notes: 
-            - Only the specified overridden metrics will be collected for the metric source. For example, if one or more `spark:executive` metrics are listed as metric overrides, other SPARK metrics will not be collected. 
+            **Description**: Optional. Specify one or more available [OSS metrics][2] to collect for the metric course (for the SPARK metric source, any [Spark metric][3] can be specified). Provide metrics in the following format: `METRIC_SOURCE:INSTANCE:GROUP:METRIC`. Use camel-case as appropriate. Examples: <br>
+            - `yarn:ResourceManager:QueueMetrics:AppsCompleted`<br>
+            - `spark:driver:DAGScheduler:job.allJobs`<br>
+            - `sparkHistoryServer:JVM:Memory:NonHeapMemoryUsage.committed`<br>
+            - `hiveserver2:JVM:Memory:NonHeapMemoryUsage.used` <br>
+            Notes: <br>
+            - Only the specified overridden metrics will be collected for the metric source. For example, if one or more `spark:executive` metrics are listed as metric overrides, other SPARK metrics will not be collected. <br>
             - The collection of the default metrics for other OSS metric sources is unaffected. For example, if both SPARK andd YARN metric sources are enabled, and overrides are provided for Spark metrics only, all default YARN metrics will be collected.<br>
                 **GCP name**: `metricOverrides`<br>
            - `metric_source`<br>
@@ -97,9 +97,9 @@ kind: documentation
             **GCP name**: `internalIpOnly`<br>
        - `network_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine network to be used for machine communications. Cannot be specified with `subnetwork_uri`. If neither `network_uri` nor `subnetwork_uri` is specified, the "default" network of the project is used, if it exists. Cannot be a Custom Subnet Network. See [Using Subnetworks][5] for more information. A full URL, partial URI, or short name are valid. Examples: 
-        - `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default` 
-        - `projects/[project_id]/regions/global/default`
+        **Description**: Optional. The Compute Engine network to be used for machine communications. Cannot be specified with `subnetwork_uri`. If neither `network_uri` nor `subnetwork_uri` is specified, the "default" network of the project is used, if it exists. Cannot be a Custom Subnet Network. See [Using Subnetworks][5] for more information. A full URL, partial URI, or short name are valid. Examples: <br>
+        - `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default` <br>
+        - `projects/[project_id]/regions/global/default`<br>
         - `default`<br>
             **GCP name**: `networkUri`<br>
        - `node_group_affinity`<br>
@@ -108,9 +108,9 @@ kind: documentation
           **GCP name**: `nodeGroupAffinity`
            - `node_group_uri`<br>
             **Type**: `STRING`<br>
-            **Description**: Required. The URI of a sole-tenant [node group resource][6] that the cluster will be created on.A full URL, partial URI, or node group name are valid. Examples: 
-            - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`
-            - `projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`
+            **Description**: Required. The URI of a sole-tenant [node group resource][6] that the cluster will be created on.A full URL, partial URI, or node group name are valid. Examples: <br>
+            - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`<br>
+            - `projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`<br>
             - `node-group-1`<br>
                 **GCP name**: `nodeGroupUri`<br>
        - `private_ipv6_google_access`<br>
@@ -149,14 +149,14 @@ kind: documentation
             **GCP name**: `serviceAccount`<br>
        - `service_account_scopes`<br>
         **Type**: `UNORDERED_LIST_STRING`<br>
-        **Description**: Optional. The URIs of service account scopes to be included in Compute Engine instances. The following base set of scopes is always included: 
-        - `https://www.googleapis.com/auth/cloud.useraccounts.readonly`
-        - `https://www.googleapis.com/auth/devstorage.read_write`
-        - `https://www.googleapis.com/auth/logging.write`
-        If no scopes are specified, the following defaults are also provided: 
-        - `https://www.googleapis.com/auth/bigquery`
-        - `https://www.googleapis.com/auth/bigtable.admin.table`
-        - `https://www.googleapis.com/auth/bigtable.data`
+        **Description**: Optional. The URIs of service account scopes to be included in Compute Engine instances. The following base set of scopes is always included: <br>
+        - `https://www.googleapis.com/auth/cloud.useraccounts.readonly`<br>
+        - `https://www.googleapis.com/auth/devstorage.read_write`<br>
+        - `https://www.googleapis.com/auth/logging.write`<br>
+        If no scopes are specified, the following defaults are also provided: <br>
+        - `https://www.googleapis.com/auth/bigquery`<br>
+        - `https://www.googleapis.com/auth/bigtable.admin.table`<br>
+        - `https://www.googleapis.com/auth/bigtable.data`<br>
         - `https://www.googleapis.com/auth/devstorage.full_control`<br>
             **GCP name**: `serviceAccountScopes`<br>
        - `shielded_instance_config`<br>
@@ -177,16 +177,16 @@ kind: documentation
                 **GCP name**: `enableVtpm`<br>
        - `subnetwork_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with `network_uri`. A full URL, partial URI, or short name are valid. Examples:
-        - `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0`
-        - `projects/[project_id]/regions/us-east1/subnetworks/sub0`
+        **Description**: Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with `network_uri`. A full URL, partial URI, or short name are valid. Examples:<br>
+        - `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0`<br>
+        - `projects/[project_id]/regions/us-east1/subnetworks/sub0`<br>
         - `sub0`<br>
             **GCP name**: `subnetworkUri`<br>
        - `zone_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present. A full URL, partial URI, or short name are valid. Examples: 
-        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]`
-        - `projects/[project_id]/zones/[zone]`
+        **Description**: Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present. A full URL, partial URI, or short name are valid. Examples: <br>
+        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]`<br>
+        - `projects/[project_id]/zones/[zone]`<br>
         - `us-central1-f`<br>
             **GCP name**: `zoneUri`<br>
    - `gke_cluster_config`<br>
@@ -259,19 +259,19 @@ kind: documentation
                         **GCP name**: `bootDiskKmsKey`<br>
                    - `local_ssd_count`<br>
                     **Type**: `INT32`<br>
-                        **Description**: Optional. The number of local SSD disks to attach to the node, which is limited by the maximum number of disks allowable per zone. See `Adding Local SSDs][28].<br>
+                        **Description**: Optional. The number of local SSD disks to attach to the node, which is limited by the maximum number of disks allowable per zone. See [Adding Local SSDs][14].<br>
                         **GCP name**: `localSsdCount`<br>
                    - `machine_type`<br>
                     **Type**: `STRING`<br>
-                        **Description**: Optional. The name of a Compute Engine [machine type][14].<br>
+                        **Description**: Optional. The name of a Compute Engine [machine type][15].<br>
                         **GCP name**: `machineType`<br>
                    - `min_cpu_platform`<br>
                     **Type**: `STRING`<br>
-                        **Description**: Optional. [Minimum CPU platform][15] to be used by this instance. The instance may be scheduled on the specified or a newer CPU platform. Specify the friendly names of CPU platforms, such as `Intel Haswell` or `Intel Sandy Bridge`.<br>
+                        **Description**: Optional. [Minimum CPU platform][16] to be used by this instance. The instance may be scheduled on the specified or a newer CPU platform. Specify the friendly names of CPU platforms, such as `Intel Haswell` or `Intel Sandy Bridge`.<br>
                         **GCP name**: `minCpuPlatform`<br>
                    - `preemptible`<br>
                     **Type**: `BOOLEAN`<br>
-                        **Description**: Optional. Whether the nodes are created as [preemptible VM instances][16]. Preemptible nodes cannot be used in a node pool with the CONTROLLER role or in the DEFAULT node pool if the CONTROLLER role is not assigned (the DEFAULT node pool will assume the CONTROLLER role).<br>
+                        **Description**: Optional. Whether the nodes are created as [preemptible VM instances][17]. Preemptible nodes cannot be used in a node pool with the CONTROLLER role or in the DEFAULT node pool if the CONTROLLER role is not assigned (the DEFAULT node pool will assume the CONTROLLER role).<br>
                         **GCP name**: `preemptible`<br>
                    - `spot`<br>
                     **Type**: `BOOLEAN`<br>
@@ -279,7 +279,7 @@ kind: documentation
                         **GCP name**: `spot`<br>
                - `locations`<br>
                 **Type**: `UNORDERED_LIST_STRING`<br>
-                    **Description**: Optional. The list of [Compute Engine zones][17] where node pool nodes associated with a Dataproc on GKE virtual cluster will be located. Note: All node pools associated with a virtual cluster must be located in the same region as the virtual cluster, and they must be located in the same zone within that region. If a location is not specified during node pool creation, Dataproc on GKE will choose the zone.<br>
+                    **Description**: Optional. The list of [Compute Engine zones][18] where node pool nodes associated with a Dataproc on GKE virtual cluster will be located. Note: All node pools associated with a virtual cluster must be located in the same region as the virtual cluster, and they must be located in the same zone within that region. If a location is not specified during node pool creation, Dataproc on GKE will choose the zone.<br>
                     **GCP name**: `locations`<br>
            - `roles`<br>
             **Type**: `UNORDERED_LIST_STRING`<br>
@@ -296,7 +296,7 @@ kind: documentation
             **GCP name**: `executableFile`<br>
        - `execution_timeout`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. Amount of time executable has to complete. Default is 10 minutes.See [JSON representation of Duration][18]. Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.<br>
+            **Description**: Optional. Amount of time executable has to complete. Default is 10 minutes.See [JSON representation of Duration][19]. Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.<br>
             **GCP name**: `executionTimeout`<br>
    - `lifecycle_config`<br>
       **Type**: `STRUCT`<br>
@@ -304,19 +304,19 @@ kind: documentation
       **GCP name**: `lifecycleConfig`
        - `auto_delete_time`<br>
         **Type**: `TIMESTAMP`<br>
-            **Description**: Optional. The time when cluster will be auto-deleted. See [JSON representation of Timestamp][18].<br>
+            **Description**: Optional. The time when cluster will be auto-deleted. See [JSON representation of Timestamp][19].<br>
             **GCP name**: `autoDeleteTime`<br>
        - `auto_delete_ttl`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. The lifetime duration of cluster. The cluster will be auto-deleted at the end of this period. Minimum value is 10 minutes; maximum value is 14 days. See [JSON representation of Duration][18].<br>
+            **Description**: Optional. The lifetime duration of cluster. The cluster will be auto-deleted at the end of this period. Minimum value is 10 minutes; maximum value is 14 days. See [JSON representation of Duration][19].<br>
             **GCP name**: `autoDeleteTtl`<br>
        - `idle_delete_ttl`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. The duration to keep the cluster alive while idling (when no jobs are running). Passing this threshold will cause the cluster to be deleted. Minimum value is 5 minutes; maximum value is 14 days. See [JSON representation of Duration][18]).<br>
+            **Description**: Optional. The duration to keep the cluster alive while idling (when no jobs are running). Passing this threshold will cause the cluster to be deleted. Minimum value is 5 minutes; maximum value is 14 days. See [JSON representation of Duration][19]).<br>
             **GCP name**: `idleDeleteTtl`<br>
        - `idle_start_time`<br>
         **Type**: `TIMESTAMP`<br>
-            **Description**: Output only. The time when cluster became idle (most recent job finished) and became eligible for deletion due to idleness. See [JSON representation of Timestamp][18]).<br>
+            **Description**: Output only. The time when cluster became idle (most recent job finished) and became eligible for deletion due to idleness. See [JSON representation of Timestamp][19]).<br>
             **GCP name**: `idleStartTime`<br>
    - `master_config`<br>
       **Type**: `STRUCT`<br>
@@ -332,11 +332,11 @@ kind: documentation
                 **GCP name**: `acceleratorCount`<br>
            - `accelerator_type_uri`<br>
             **Type**: `STRING`<br>
-            **Description**: Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See [Compute Engine AcceleratorTypes][19]. Examples: 
-            - `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
-            - `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` 
-            - `nvidia-tesla-k80`
-            Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][20] feature, you must use the short name of the accelerator type resource, for example, `nvidia-tesla-k80`.<br>
+            **Description**: Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See [Compute Engine AcceleratorTypes][20]. Examples: <br>
+            - `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`<br>
+            - `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` <br>
+            - `nvidia-tesla-k80`<br>
+            Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][21] feature, you must use the short name of the accelerator type resource, for example, `nvidia-tesla-k80`.<br>
                 **GCP name**: `acceleratorTypeUri`<br>
        - `disk_config`<br>
           **Type**: `STRUCT`<br>
@@ -353,29 +353,29 @@ kind: documentation
                - `pd-balanced` - Persistent Disk Balanced Solid State Drive
                - `pd-ssd` - Persistent Disk Solid State Drive
                - `pd-standard` - Persistent Disk Hard Disk Drive). 
-               See [Disk types][21].<br>
+               See [Disk types][22].<br>
                 **GCP name**: `bootDiskType`<br>
            - `local_ssd_interface`<br>
             **Type**: `STRING`<br>
-            **Description**: Optional. Interface type of local SSDs (default is `scsi`). 
-            **Valid values**: 
-            - `scsi` - Small Computer System Interface
-            - `nvme` - Non-Volatile Memory Express
-            See [local SSD performance][22].<br>
+            **Description**: Optional. Interface type of local SSDs (default is `scsi`). <br>
+            **Valid values**: <br>
+            - `scsi` - Small Computer System Interface<br>
+            - `nvme` - Non-Volatile Memory Express<br>
+            See [local SSD performance][23].<br>
                 **GCP name**: `localSsdInterface`<br>
            - `num_local_ssds`<br>
             **Type**: `INT32`<br>
-                **Description**: Optional. Number of attached SSDs, from `0` to `8` (default is `0`). If SSDs are not attached, the boot disk is used to store runtime logs and [HDFS][23] data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries. Note: Local SSD options may vary by machine type and number of vCPUs selected.<br>
+                **Description**: Optional. Number of attached SSDs, from `0` to `8` (default is `0`). If SSDs are not attached, the boot disk is used to store runtime logs and [HDFS][24] data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries. Note: Local SSD options may vary by machine type and number of vCPUs selected.<br>
                 **GCP name**: `numLocalSsds`<br>
        - `image_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine image resource used for cluster instances. The URI can represent an image or image family. Image examples: 
-        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]`
-        - `projects/[project_id]/global/images/[image-id]` 
-        - `image-id`
-        Image family examples. Dataproc will use the most recent image from the family: 
-        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]`
-        - `projects/[project_id]/global/images/family/[custom-image-family-name]`
+        **Description**: Optional. The Compute Engine image resource used for cluster instances. The URI can represent an image or image family. Image examples: <br>
+        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]`<br>
+        - `projects/[project_id]/global/images/[image-id]` <br>
+        - `image-id`<br>
+        Image family examples. Dataproc will use the most recent image from the family: <br>
+        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]`<br>
+        - `projects/[project_id]/global/images/family/[custom-image-family-name]`<br>
         If the URI is unspecified, it will be inferred from `SoftwareConfig.image_version` or the system default.<br>
             **GCP name**: `imageUri`<br>
        - `instance_names`<br>
@@ -408,11 +408,11 @@ kind: documentation
             **GCP name**: `isPreemptible`<br>
        - `machine_type_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine machine type used for cluster instances. A full URL, partial URI, or short name are valid. Examples: 
-        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2` 
-        - `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
-        - `n1-standard-2`
-        Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][20] feature, you must use the short name of the machine type resource, for example, `n1-standard-2`.<br>
+        **Description**: Optional. The Compute Engine machine type used for cluster instances. A full URL, partial URI, or short name are valid. Examples: <br>
+        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2` <br>
+        - `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`<br>
+        - `n1-standard-2`<br>
+        Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][21] feature, you must use the short name of the machine type resource, for example, `n1-standard-2`.<br>
             **GCP name**: `machineTypeUri`<br>
        - `managed_group_config`<br>
           **Type**: `STRUCT`<br>
@@ -428,7 +428,7 @@ kind: documentation
                 **GCP name**: `instanceTemplateName`<br>
        - `min_cpu_platform`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. Specifies the minimum CPU platform for the Instance Group. See Dataproc [Minimum CPU Platform][24].<br>
+            **Description**: Optional. Specifies the minimum CPU platform for the Instance Group. See Dataproc [Minimum CPU Platform][25].<br>
             **GCP name**: `minCpuPlatform`<br>
        - `num_instances`<br>
         **Type**: `INT32`<br>
@@ -464,11 +464,11 @@ kind: documentation
                 **GCP name**: `acceleratorCount`<br>
            - `accelerator_type_uri`<br>
             **Type**: `STRING`<br>
-            **Description**: Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See [Compute Engine Accelerator Types][19]. Examples: 
-            - `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` 
-            - `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
-            - `nvidia-tesla-k80Auto` 
-            Zone Exception: If you are using the Dataproc [Auto Zone Placement][20] feature, you must use the short name of the accelerator type resource, for example, `nvidia-tesla-k80`.<br>
+            **Description**: Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See [Compute Engine Accelerator Types][20]. Examples: <br>
+            - `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` <br>
+            - `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`<br>
+            - `nvidia-tesla-k80Auto` <br>
+            Zone Exception: If you are using the Dataproc [Auto Zone Placement][21] feature, you must use the short name of the accelerator type resource, for example, `nvidia-tesla-k80`.<br>
                 **GCP name**: `acceleratorTypeUri`<br>
        - `disk_config`<br>
           **Type**: `STRUCT`<br>
@@ -481,33 +481,33 @@ kind: documentation
            - `boot_disk_type`<br>
             **Type**: `STRING`<br>
             **Description**: Optional. Type of the boot disk (default is `pd-standard`). <br>
-            **Valid values**: 
-            - `pd-balanced` - Persistent Disk Balanced Solid State Drive
-            - `pd-ssd` - Persistent Disk Solid State Drive
+            **Valid values**: <br>
+            - `pd-balanced` - Persistent Disk Balanced Solid State Drive<br>
+            - `pd-ssd` - Persistent Disk Solid State Drive<br>
             - `pd-standard` - Persistent Disk Hard Disk Drive <br>
-            See [Disk types][21].<br>
+            See [Disk types][22].<br>
                 **GCP name**: `bootDiskType`<br>
            - `local_ssd_interface`<br>
             **Type**: `STRING`<br>
                 **Description**: Optional. Interface type of local SSDs (default is `scsi`). 
-            **Valid values**: 
-            - `scsi` - Small Computer System Interface
+            **Valid values**: <br>
+            - `scsi` - Small Computer System Interface<br>
             - `nvme` - Non-Volatile Memory Express. <br>
-            See [local SSD performance][22].<br>
+            See [local SSD performance][23].<br>
                 **GCP name**: `localSsdInterface`<br>
            - `num_local_ssds`<br>
             **Type**: `INT32`<br>
-                **Description**: Optional. Number of attached SSDs, from `0` to `8` (default is `0`). If SSDs are not attached, the boot disk is used to store runtime logs and [HDFS][23] data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries. Note: Local SSD options may vary by machine type and number of vCPUs selected.<br>
+                **Description**: Optional. Number of attached SSDs, from `0` to `8` (default is `0`). If SSDs are not attached, the boot disk is used to store runtime logs and [HDFS][24] data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries. Note: Local SSD options may vary by machine type and number of vCPUs selected.<br>
                 **GCP name**: `numLocalSsds`<br>
        - `image_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine image resource used for cluster instances.The URI can represent an image or image family. Image examples: 
-        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]` 
-        - `projects/[project_id]/global/images/[image-id]` 
-        - `image-idImage` 
-        Family examples. Dataproc will use the most recent image from the family: 
-        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]` 
-        - `projects/[project_id]/global/images/family/[custom-image-family-name]` 
+        **Description**: Optional. The Compute Engine image resource used for cluster instances.The URI can represent an image or image family. Image examples: <br>
+        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]` <br>
+        - `projects/[project_id]/global/images/[image-id]` <br>
+        - `image-idImage` <br>
+        Family examples. Dataproc will use the most recent image from the family: <br>
+        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]` <br>
+        - `projects/[project_id]/global/images/family/[custom-image-family-name]` <br>
         If the URI is unspecified, it will be inferred from `SoftwareConfig.image_version` or the system default.<br>
             **GCP name**: `imageUri`<br>
        - `instance_names`<br>
@@ -540,11 +540,11 @@ kind: documentation
             **GCP name**: `isPreemptible`<br>
        - `machine_type_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine machine type used for cluster instances. A full URL, partial URI, or short name are valid. Examples: 
-        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2` 
-        - `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
-        - `n1-standard-2`
-        Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][20] feature, you must use the short name of the machine type resource, for example, `n1-standard-2`.<br>
+        **Description**: Optional. The Compute Engine machine type used for cluster instances. A full URL, partial URI, or short name are valid. Examples: <br>
+        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2` <br>
+        - `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`<br>
+        - `n1-standard-2`<br>
+        Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][21] feature, you must use the short name of the machine type resource, for example, `n1-standard-2`.<br>
             **GCP name**: `machineTypeUri`<br>
        - `managed_group_config`<br>
           **Type**: `STRUCT`<br>
@@ -560,7 +560,7 @@ kind: documentation
                 **GCP name**: `instanceTemplateName`<br>
        - `min_cpu_platform`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. Specifies the minimum cpu platform for the Instance Group. See Dataproc [Minimum CPU Platform][24].<br>
+            **Description**: Optional. Specifies the minimum cpu platform for the Instance Group. See Dataproc [Minimum CPU Platform][25].<br>
             **GCP name**: `minCpuPlatform`<br>
        - `num_instances`<br>
         **Type**: `INT32`<br>
@@ -653,7 +653,7 @@ kind: documentation
       **GCP name**: `softwareConfig`
        - `image_version`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. The version of software inside the cluster. It must be one of the supported [Dataproc Versions][25], such as `1.2` (including a subminor version, such as `1.2.29`), or the [preview version][26]. If unspecified, it defaults to the latest Debian version.<br>
+            **Description**: Optional. The version of software inside the cluster. It must be one of the supported [Dataproc Versions][26], such as `1.2` (including a subminor version, such as `1.2.29`), or the [preview version][27]. If unspecified, it defaults to the latest Debian version.<br>
             **GCP name**: `imageVersion`<br>
        - `optional_components`<br>
         **Type**: `UNORDERED_LIST_STRING`<br>
@@ -677,11 +677,11 @@ kind: documentation
                 **GCP name**: `acceleratorCount`<br>
            - `accelerator_type_uri`<br>
             **Type**: `STRING`<br>
-            **Description**: Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See [Compute Engine AcceleratorTypes][19]. Examples: 
-            - `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` 
-            - `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` 
-            - `nvidia-tesla-k80`
-            Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][20] feature, you must use the short name of the accelerator type resource, for example, `nvidia-tesla-k80`.<br>
+            **Description**: Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See [Compute Engine AcceleratorTypes][20]. Examples: <br>
+            - `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` <br>
+            - `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80` <br>
+            - `nvidia-tesla-k80`<br>
+            Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][21] feature, you must use the short name of the accelerator type resource, for example, `nvidia-tesla-k80`.<br>
                 **GCP name**: `acceleratorTypeUri`<br>
        - `disk_config`<br>
           **Type**: `STRUCT`<br>
@@ -694,33 +694,33 @@ kind: documentation
            - `boot_disk_type`<br>
             **Type**: `STRING`<br>
                 **Description**: Optional. Type of the boot disk (default is `pd-standard`). <br>
-            **Valid values**: 
-            - `pd-balanced` - Persistent Disk Balanced Solid State Drive
-            - `pd-ssd` - Persistent Disk Solid State Drive
-            - `pd-standard` - Persistent Disk Hard Disk Drive 
-            See [Disk types][21].<br>
+            **Valid values**: <br>
+            - `pd-balanced` - Persistent Disk Balanced Solid State Drive<br>
+            - `pd-ssd` - Persistent Disk Solid State Drive<br>
+            - `pd-standard` - Persistent Disk Hard Disk Drive <br>
+            See [Disk types][22].<br>
                 **GCP name**: `bootDiskType`<br>
            - `local_ssd_interface`<br>
             **Type**: `STRING`<br>
                 **Description**: Optional. Interface type of local SSDs (default is `scsi`). 
-            **Valid values**:
-            - `scsi` - Small Computer System Interface
-            - `nvme` - Non-Volatile Memory Express 
-            See [local SSD performance][22].<br>
+            **Valid values**:<br>
+            - `scsi` - Small Computer System Interface<br>
+            - `nvme` - Non-Volatile Memory Express <br>
+            See [local SSD performance][23].<br>
                 **GCP name**: `localSsdInterface`<br>
            - `num_local_ssds`<br>
             **Type**: `INT32`<br>
-                **Description**: Optional. Number of attached SSDs, from `0` to `8` (default is `0`). If SSDs are not attached, the boot disk is used to store runtime logs and [HDFS][23] data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries. Note: Local SSD options may vary by machine type and number of vCPUs selected.<br>
+                **Description**: Optional. Number of attached SSDs, from `0` to `8` (default is `0`). If SSDs are not attached, the boot disk is used to store runtime logs and [HDFS][24] data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries. Note: Local SSD options may vary by machine type and number of vCPUs selected.<br>
                 **GCP name**: `numLocalSsds`<br>
        - `image_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine image resource used for cluster instances.The URI can represent an image or image family. Image examples: 
-        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]`
-        - `projects/[project_id]/global/images/[image-id]` 
-        - `image-id`
-        Image family examples. Dataproc will use the most recent image from the family: 
-        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]`
-        - `projects/[project_id]/global/images/family/[custom-image-family-name]`
+        **Description**: Optional. The Compute Engine image resource used for cluster instances.The URI can represent an image or image family. Image examples: <br>
+        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]`<br>
+        - `projects/[project_id]/global/images/[image-id]` <br>
+        - `image-id`<br>
+        Image family examples. Dataproc will use the most recent image from the family: <br>
+        - `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]`<br>
+        - `projects/[project_id]/global/images/family/[custom-image-family-name]`<br>
         If the URI is unspecified, it will be inferred from `SoftwareConfig.image_version` or the system default.<br>
             **GCP name**: `imageUri`<br>
        - `instance_names`<br>
@@ -753,11 +753,11 @@ kind: documentation
             **GCP name**: `isPreemptible`<br>
        - `machine_type_uri`<br>
         **Type**: `STRING`<br>
-        **Description**: Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples: 
-        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2` 
-        - `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
-        - `n1-standard-2`
-        Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][20] feature, you must use the short name of the machine type resource, for example, `n1-standard-2`.<br>
+        **Description**: Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples: <br>
+        - `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2` <br>
+        - `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`<br>
+        - `n1-standard-2`<br>
+        Auto Zone Exception: If you are using the Dataproc [Auto Zone Placement][21] feature, you must use the short name of the machine type resource, for example, `n1-standard-2`.<br>
             **GCP name**: `machineTypeUri`<br>
        - `managed_group_config`<br>
           **Type**: `STRUCT`<br>
@@ -773,7 +773,7 @@ kind: documentation
                 **GCP name**: `instanceTemplateName`<br>
        - `min_cpu_platform`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. Specifies the minimum cpu platform for the Instance Group. See Dataproc [Minimum CPU Platform][24].<br>
+            **Description**: Optional. Specifies the minimum cpu platform for the Instance Group. See Dataproc [Minimum CPU Platform][25].<br>
             **GCP name**: `minCpuPlatform`<br>
        - `num_instances`<br>
         **Type**: `INT32`<br>
@@ -830,7 +830,7 @@ kind: documentation
       - `REPAIRING` - The cluster is being repaired. It is not ready for use.<br>
    - `state_start_time`<br>
     **Type**: `TIMESTAMP`<br>
-        **Description**: Output only. Time when this state was entered. See [JSON representation of Timestamp][18].<br>
+        **Description**: Output only. Time when this state was entered. See [JSON representation of Timestamp][19].<br>
         **GCP name**: `stateStartTime`<br>
    - `substate`<br>
     **Type**: `STRING`<br>
@@ -866,7 +866,7 @@ kind: documentation
       - `REPAIRING` - The cluster is being repaired. It is not ready for use.<br>
    - `state_start_time`<br>
     **Type**: `TIMESTAMP`<br>
-        **Description**: Output only. Time when this state was entered. See [JSON representation of Timestamp][18].<br>
+        **Description**: Output only. Time when this state was entered. See [JSON representation of Timestamp][19].<br>
         **GCP name**: `stateStartTime`<br>
    - `substate`<br>
     **Type**: `STRING`<br>
@@ -880,7 +880,7 @@ kind: documentation
 **Type**: `UNORDERED_LIST_STRING`<br>
 ## `virtual_cluster_config`
   **Type**: `STRUCT`<br>
-  **Description**: Optional. The virtual cluster config is used when creating a Dataproc cluster that does not directly control the underlying compute resources, for example, when creating a [Dataproc-on-GKE cluster][27]. Dataproc may set default values, and values may change when clusters are updated. Exactly one of `config` or `virtual_cluster_config` must be specified.<br>
+  **Description**: Optional. The virtual cluster config is used when creating a Dataproc cluster that does not directly control the underlying compute resources, for example, when creating a [Dataproc-on-GKE cluster][28]. Dataproc may set default values, and values may change when clusters are updated. Exactly one of `config` or `virtual_cluster_config` must be specified.<br>
   **GCP name**: `virtualClusterConfig`
    - `auxiliary_services_config`<br>
       **Type**: `STRUCT`<br>
@@ -892,7 +892,7 @@ kind: documentation
           **GCP name**: `metastoreConfig`
            - `dataproc_metastore_service`<br>
             **Type**: `STRING`<br>
-                **Description**: Required. Resource name of an existing Dataproc Metastore service.Example: `projects/[project_id]/locations/[dataproc_region]/services/[service-name]`<br>
+                **Description**: Required. Resource name of an existing Dataproc Metastore service. Example: `projects/[project_id]/locations/[dataproc_region]/services/[service-name]`<br>
                 **GCP name**: `dataprocMetastoreService`<br>
        - `spark_history_server_config`<br>
           **Type**: `STRUCT`<br>
@@ -976,19 +976,19 @@ kind: documentation
                             **GCP name**: `bootDiskKmsKey`<br>
                        - `local_ssd_count`<br>
                         **Type**: `INT32`<br>
-                            **Description**: Optional. The number of local SSD disks to attach to the node, which is limited by the maximum number of disks allowable per zone. See [Adding Local SSDs][28].<br>
+                            **Description**: Optional. The number of local SSD disks to attach to the node, which is limited by the maximum number of disks allowable per zone. See [Adding Local SSDs][14].<br>
                             **GCP name**: `localSsdCount`<br>
                        - `machine_type`<br>
                         **Type**: `STRING`<br>
-                            **Description**: Optional. The name of a [Compute Engine machine type][14].<br>
+                            **Description**: Optional. The name of a [Compute Engine machine type][15].<br>
                             **GCP name**: `machineType`<br>
                        - `min_cpu_platform`<br>
                         **Type**: `STRING`<br>
-                            **Description**: Optional. [Minimum CPU platform][15] to be used by this instance. The instance may be scheduled on the specified or a newer CPU platform. Specify the friendly names of CPU platforms, such as `Intel Haswell` or `Intel Sandy Bridge`.<br>
+                            **Description**: Optional. [Minimum CPU platform][16] to be used by this instance. The instance may be scheduled on the specified or a newer CPU platform. Specify the friendly names of CPU platforms, such as `Intel Haswell` or `Intel Sandy Bridge`.<br>
                             **GCP name**: `minCpuPlatform`<br>
                        - `preemptible`<br>
                         **Type**: `BOOLEAN`<br>
-                            **Description**: Optional. Whether the nodes are created as [preemptible VM instances][16]. Preemptible nodes cannot be used in a node pool with the CONTROLLER role or in the DEFAULT node pool if the CONTROLLER role is not assigned (the DEFAULT node pool will assume the CONTROLLER role).<br>
+                            **Description**: Optional. Whether the nodes are created as [preemptible VM instances][17]. Preemptible nodes cannot be used in a node pool with the CONTROLLER role or in the DEFAULT node pool if the CONTROLLER role is not assigned (the DEFAULT node pool will assume the CONTROLLER role).<br>
                             **GCP name**: `preemptible`<br>
                        - `spot`<br>
                         **Type**: `BOOLEAN`<br>
@@ -996,7 +996,7 @@ kind: documentation
                             **GCP name**: `spot`<br>
                    - `locations`<br>
                     **Type**: `UNORDERED_LIST_STRING`<br>
-                        **Description**: Optional. The list of [Compute Engine zones][17] where node pool nodes associated with a Dataproc on GKE virtual cluster will be located. Note: All node pools associated with a virtual cluster must be located in the same region as the virtual cluster, and they must be located in the same zone within that region. If a location is not specified during node pool creation, Dataproc on GKE will choose the zone.<br>
+                        **Description**: Optional. The list of [Compute Engine zones][18] where node pool nodes associated with a Dataproc on GKE virtual cluster will be located. Note: All node pools associated with a virtual cluster must be located in the same region as the virtual cluster, and they must be located in the same zone within that region. If a location is not specified during node pool creation, Dataproc on GKE will choose the zone.<br>
                         **GCP name**: `locations`<br>
                - `roles`<br>
                 **Type**: `UNORDERED_LIST_STRING`<br>
@@ -1030,18 +1030,18 @@ kind: documentation
 [11]: https://cloud.google.com/compute/docs/gpus
 [12]: https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning
 [13]: https://cloud.google.com/kubernetes-engine/docs/how-to/using-cmek
-[14]: https://cloud.google.com/compute/docs/machine-types
-[15]: https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform
-[16]: https://cloud.google.com/compute/docs/instances/preemptible
-[17]: https://cloud.google.com/compute/docs/zones#available
-[18]: https://developers.google.com/protocol-buffers/docs/proto3#json
-[19]: https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes
-[20]: https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement
-[21]: https://cloud.google.com/compute/docs/disks#disk-types
-[22]: https://cloud.google.com/compute/docs/disks/local-ssd#performance
-[23]: https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html
-[24]: https://cloud.google.com/dataproc/docs/concepts/compute/dataproc-min-cpu
-[25]: https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_dataproc_versions
-[26]: https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions
-[27]: https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke
-[28]: https://cloud.google.com/compute/docs/disks/local-ssd
+[14]: https://cloud.google.com/compute/docs/disks/local-ssd
+[15]: https://cloud.google.com/compute/docs/machine-types
+[16]: https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform
+[17]: https://cloud.google.com/compute/docs/instances/preemptible
+[18]: https://cloud.google.com/compute/docs/zones#available
+[19]: https://developers.google.com/protocol-buffers/docs/proto3#json
+[20]: https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes
+[21]: https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement
+[22]: https://cloud.google.com/compute/docs/disks#disk-types
+[23]: https://cloud.google.com/compute/docs/disks/local-ssd#performance
+[24]: https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html
+[25]: https://cloud.google.com/dataproc/docs/concepts/compute/dataproc-min-cpu
+[26]: https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_dataproc_versions
+[27]: https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions
+[28]: https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke

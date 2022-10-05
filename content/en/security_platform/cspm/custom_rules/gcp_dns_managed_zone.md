@@ -53,8 +53,8 @@ kind: documentation
             **Description**: Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, are only used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and are used to sign all other types of resource record sets. <br>
             **GCP name**: `keyType`<br>
                 **Possible values**:<br>
-          - `keySigning` - <br>
-          - `zoneSigning` - <br>
+          - `keySigning` <br>
+          - `zoneSigning` <br>
        - `kind`<br>
         **Type**: `STRING`<br>
    - `kind`<br>
@@ -196,5 +196,5 @@ kind: documentation
     **Description**: The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources. <br>
     **GCP name**: `visibility`<br>
         **Possible values**:<br>
-  - `public` - <br>
-  - `private` - <br>
+  - `public` <br>
+  - `private` <br>

@@ -15,7 +15,7 @@ kind: documentation
       **GCP name**: `auditLogConfigs`
        - `exempted_members`<br>
         **Type**: `UNORDERED_LIST_STRING`<br>
-            **Description**: Specifies the identities that do not cause logging for this type of permission. Follows the same format of `Binding.member`s`.<br>
+            **Description**: Specifies the identities that do not cause logging for this type of permission. Follows the same format of `Binding.members`.<br>
             **GCP name**: `exemptedMembers`<br>
        - `log_type`<br>
         **Type**: `STRING`<br>
@@ -52,20 +52,20 @@ kind: documentation
             **GCP name**: `location`<br>
        - `title`<br>
         **Type**: `STRING`<br>
-            **Description**: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used, for example, in UIs which allow to enter the expression.<br>
+            **Description**: Optional. Title for the expression, a short string describing its purpose. This can be used, for example, in UIs which allow to enter the expression.<br>
             **GCP name**: `title`<br>
    - `members`<br>
     **Type**: `UNORDERED_LIST_STRING`<br>
-    **Description**: Specifies the principals requesting access for a Google Cloud resource. 
-    **Possible values**:
-    - `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. 
-    - `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. 
-    - `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com`.
-    - `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. 
-    - `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. 
-    - `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. 
-    - `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. 
-    - `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. 
+    **Description**: Specifies the principals requesting access for a Google Cloud resource. <br>
+    **Possible values**:<br>
+    - `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. <br>
+    - `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. <br>
+    - `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com`.<br>
+    - `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. <br>
+    - `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. <br>
+    - `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. <br>
+    - `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. <br>
+    - `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. <br>
     - `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. <br>
         **GCP name**: `members`<br>
    - `role`<br>

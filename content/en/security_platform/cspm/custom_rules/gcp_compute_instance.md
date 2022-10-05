@@ -104,7 +104,7 @@ kind: documentation
     **GCP name**: `lastSuspendedTimestamp`<br>
 ## `machine_type`
 **Type**: `STRING`<br>
-    **Description**: Full or partial URL of the machine type resource to use for this instance, in the format: `zones/zone/machineTypes/machine-type`. This is provided by the client when the instance is created. For example, the following is a valid partial url to a predefined machine type: `zones/us-central1-f/machineTypes/n1-standard-1`. To create a custom machine type, provide a URL to a machine type in the following format, where `CPUS` is `1` or an even number up to `32` (`2`, `4`, `6`, and so on), and `MEMORY` is the total memory for this instance. Memory must be a multiple of 256 MB and must be supplied in MB (for example, 5 GB of memory is 5120 MB): `zones/zone/machineTypes/custom-CPUS-MEMORY` For example: `zones/us-central1-f/machineTypes/custom-4-5120`. For a full list of restrictions, read the Specifications for custom machine types.<br>
+    **Description**: Full or partial URL of the machine type resource to use for this instance, in the format: `zones/zone/machineTypes/machine-type`. This is provided by the client when the instance is created. For example, the following is a valid partial url to a predefined machine type: `zones/us-central1-f/machineTypes/n1-standard-1`. To create a custom machine type, provide a URL to a machine type in the following format, where `CPUS` is `1` or an even number up to `32` (`2`, `4`, `6`, and so on), and `MEMORY` is the total memory for this instance. Memory must be a multiple of 256 MB and must be supplied in MB (for example, 5 GB of memory is 5120 MB): `zones/zone/machineTypes/custom-<CPUS>-<MEMORY>` For example: `zones/us-central1-f/machineTypes/custom-4-5120`. For a full list of restrictions, read the Specifications for custom machine types.<br>
     **GCP name**: `machineType`<br>
 ## `metadata`
   **Type**: `STRUCT`<br>
@@ -184,8 +184,8 @@ kind: documentation
             **Description**: The type of configuration. The default and only option is `ONE_TO_ONE_NAT`. <br>
             **GCP name**: `type`<br>
                 **Possible values**:<br>
-          - `DIRECT_IPV6` - <br>
-          - `ONE_TO_ONE_NAT` - <br>
+          - `DIRECT_IPV6` <br>
+          - `ONE_TO_ONE_NAT` <br>
    - `alias_ip_ranges`<br>
       **Type**: `UNORDERED_LIST_STRUCT`<br>
       **Description**: An array of alias IP ranges for this network interface. You can only specify this field for network interfaces in VPC networks.<br>
@@ -248,8 +248,8 @@ kind: documentation
             **Description**: The type of configuration. The default and only option is `ONE_TO_ONE_NAT`. <br>
             **GCP name**: `type`<br>
                 **Possible values**:<br>
-          - `DIRECT_IPV6` - <br>
-          - `ONE_TO_ONE_NAT` - <br>
+          - `DIRECT_IPV6` <br>
+          - `ONE_TO_ONE_NAT` <br>
    - `ipv6_access_type`<br>
     **Type**: `STRING`<br>
         **Description**: [Output Only] One of `EXTERNAL`, `INTERNAL` to indicate whether the IP can be accessed from the Internet. This field is always inherited from its subnetwork. Valid only if stackType is `IPV4_IPV6`. <br>
@@ -271,9 +271,9 @@ kind: documentation
         **GCP name**: `name`<br>
    - `network`<br>
     **Type**: `STRING`<br>
-    **Description**: URL of the VPC network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network `global`/`networks`/`default` is used. If the selected project doesn't have the default network, you must specify a network or subnet. If the network is not specified but the subnetwork is specified, the network is inferred. If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs: 
-    - `https://www.googleapis.com/compute/v1/projects/project/global/networks/network` 
-    - `projects/project/global/networks/network` 
+    **Description**: URL of the VPC network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network `global`/`networks`/`default` is used. If the selected project doesn't have the default network, you must specify a network or subnet. If the network is not specified but the subnetwork is specified, the network is inferred. If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs: <br>
+    - `https://www.googleapis.com/compute/v1/projects/project/global/networks/network` <br>
+    - `projects/project/global/networks/network` <br>
     - `global/networks/default` <br>
         **GCP name**: `network`<br>
    - `network_ip`<br>
@@ -301,8 +301,8 @@ kind: documentation
       - `IPV4_ONLY` - The network interface will be assigned IPv4 address.<br>
    - `subnetwork`<br>
     **Type**: `STRING`<br>
-    **Description**: The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not specify this field. If the network is in auto subnet mode, specifying the subnetwork is optional. If the network is in custom subnet mode, specifying the subnetwork is required. If you specify this field, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: 
-    - `https://www.googleapis.com/compute/v1/projects/project/regions/region/subnetworks/subnetwork` 
+    **Description**: The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not specify this field. If the network is in auto subnet mode, specifying the subnetwork is optional. If the network is in custom subnet mode, specifying the subnetwork is required. If you specify this field, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: <br>
+    - `https://www.googleapis.com/compute/v1/projects/project/regions/region/subnetworks/subnetwork` <br>
     - `regions/region/subnetworks/subnetwork` <br>
         **GCP name**: `subnetwork`<br>
 ## `network_performance_config`
@@ -484,8 +484,8 @@ kind: documentation
         **GCP name**: `rawKey`<br>
    - `rsa_encrypted_key`<br>
     **Type**: `STRING`<br>
-    **Description**: Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource. You can provide either the `rawKey` or the `rsaEncryptedKey`. For example: `"rsaEncryptedKey": "ieCx/NcW06PcT7Ep1X6LUTc/hLvUDYyzSZPPVCVPTVEohpeHASqC8uw5TzyO9U+Fka9JFHz0mBibXUInrC/jEk014kCK/NPjYgEMOyssZ4ZINPKxlUh2zn1bV+MCaTICrdmuSBTWlUUiFoDD6PYznLwh8ZNdaheCeZ8ewEXgFQ8V+sDroLaN3Xs3MDTXQEMMoNUXMCZEIpg9Vtp9x2oe=="`. The key must meet the following requirements before you can provide it to Compute Engine: 
-    - The key is wrapped using a RSA public key certificate provided by Google. 
+    **Description**: Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource. You can provide either the `rawKey` or the `rsaEncryptedKey`. For example: `"rsaEncryptedKey": "ieCx/NcW06PcT7Ep1X6LUTc/hLvUDYyzSZPPVCVPTVEohpeHASqC8uw5TzyO9U+Fka9JFHz0mBibXUInrC/jEk014kCK/NPjYgEMOyssZ4ZINPKxlUh2zn1bV+MCaTICrdmuSBTWlUUiFoDD6PYznLwh8ZNdaheCeZ8ewEXgFQ8V+sDroLaN3Xs3MDTXQEMMoNUXMCZEIpg9Vtp9x2oe=="`. The key must meet the following requirements before you can provide it to Compute Engine: <br>
+    - The key is wrapped using a RSA public key certificate provided by Google. <br>
     - After being wrapped, the key must be encoded in RFC 4648 base64 encoding. Gets the [RSA public key certificate provided by Google][1] <br>
         **GCP name**: `rsaEncryptedKey`<br>
    - `sha256`<br>
