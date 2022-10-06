@@ -87,7 +87,7 @@ Datadog でエラー追跡モニターを作成するには、[**Monitors** > **
 [2]: /ja/real_user_monitoring/explorer/search/
 [3]: /ja/tracing/trace_explorer/?tab=listview#filtering
 [4]: /ja/monitors/create/configuration/#alert-grouping/
-{{% /tab %}} 
+{{% /tab %}}
 {{< /tabs >}}
 
 #### 高度なアラート条件
@@ -100,17 +100,6 @@ Datadog でエラー追跡モニターを作成するには、[**Monitors** > **
 
 **Notify your team** および **Say what's happening** セクションの詳細については、[通知][5]を参照してください。
 
-#### 違反値トップリスト
-
-エラー追跡モニターがトリガーされた場合、アラートのトリガーとなったファセットまたはメジャー値を通知メッセージに追加することができます。違反ファセットとメジャー値を表示するには、**Include a table of the top 10 breaching values** (違反値上位 10 件の表を含める) をクリックします。ファセットとメジャーは、通知メッセージでグループ化およびグループ化解除が可能です。
-
-
-このモニターは、Slack、Jira、Webhooks、Microsoft Teams、Pagerduty、メールなどのプラットフォームとインテグレーションしています。詳細については、[通知インテグレーションに関するドキュメント][6]をお読みください。
-
-#### 例
-
-例としては、[ログモニタードキュメント][7]を参照してください。
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -120,5 +109,3 @@ Datadog でエラー追跡モニターを作成するには、[**Monitors** > **
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
 [4]: /ja/monitors/create/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/notify/
-[6]: /ja/monitors/notify/#integrations
-[7]: /ja/monitors/create/types/log/#examples

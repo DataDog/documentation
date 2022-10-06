@@ -4,9 +4,12 @@ kind: documentation
 ---
 
 ## Overview
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. 
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [GCP integration][6]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection. 
 
-## Build your container
+  <div class="alert alert-warning">This feature is in public beta. You can provide feedback through a <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">feedback form</a>, or through your standard support channels. During the beta period, Cloud Run monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
+
+## Tracking and custom metrics
+### Build your container
 
 If you are using a Dockerfile to build your application, complete the following:
 
@@ -75,7 +78,7 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
    
-### Build with the Datadog buildpack
+#### Build with the Datadog buildpack
 
 1. Build your application by running the following:
    ```
@@ -93,7 +96,7 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
     docker push gcr.io/YOUR_PROJECT/YOUR_APP_NAME
     ```
    
-## Deploy to Cloud Run
+### Deploy to Cloud Run
 Below are instructions for deploying a Cloud Run service using standard GCP tools. If you have other systems in place for managing container images, secrets, or deployments, you may use those instead.
 
 3. Run this command to submit your build to GCP.
@@ -121,9 +124,9 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
    Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
 
-## Advanced options and configurations
+### Advanced options and configurations
 
-### Environment variables
+#### Environment variables
 
 | Variable | Description |
 | -------- | ----------- |
@@ -134,7 +137,7 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
 | `DD_ENV` | See [Unified Service Tagging][5]. |
 | `DD_SOURCE` | See [Unified Service Tagging][5]. |
 
-### Log collection
+## Log collection
 
 You can use the [GCP integration][6] to collect logs. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the Agent.
 
