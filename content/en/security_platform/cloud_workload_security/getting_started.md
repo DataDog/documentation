@@ -42,7 +42,7 @@ There are three types of monitoring that the Datadog Agent uses for Cloud Worklo
   * SUSE 15+
   * CentOS/RHEL 7.6+
   * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes Network Plugin like Cilium or Calico, please refer to the [Troubleshooting page][3].
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][3].
 
 ## Installation
 

@@ -42,28 +42,28 @@ You can now see events coming from the `runtime-security-agent` in the Log Explo
 
 {{< img src="security_platform/cws/self_test_logs.png" alt="Self test events in the Log Explorer" style="width:90%;">}}
 
-## Compatibility with custom Kubernetes Network Plugins
+## Compatibility with custom Kubernetes network plugins
 
-The network based detections of Cloud Workload Security rely on the Traffic Control sub-system of the Linux Kernel. This sub-system is known to introduce race conditions if multiple vendors try to insert, replace or delete filters on the "clsact" ingress qdisc. Follow the checklist below to ensure that Cloud Workload Security is properly configured:
+The network based detections of Cloud Workload Security rely on the traffic control sub-system of the Linux kernel. This sub-system is known to introduce race conditions if multiple vendors try to insert, replace, or delete filters on the "clsact" ingress qdisc. Follow the checklist below to ensure that Cloud Workload Security is properly configured:
 
-* Check with your vendor if they leverage eBPF Traffic Control classifiers. If not, you can ignore this paragraph.
-* Check with your vendor if they return TC_ACT_OK or TC_ACT_UNSPEC after granting access to a network packet. If the answer is TC_ACT_UNSPEC, you can ignore this paragraph.
-* Check with your vendor on which priority they attach their eBPF classifiers:
-  * If they use priority 1, CWS network detections will not work inside your containers.
+* Check if your vendor leverages eBPF traffic control classifiers. If they do not, you can ignore this paragraph.
+* Check if your vendor returns TC_ACT_OK or TC_ACT_UNSPEC after granting access to a network packet. If they return TC_ACT_UNSPEC, you can ignore this paragraph.
+* Check which priority your vendor attaches their eBPF classifiers to:
+  * If they use priority 1, CWS network detections do not work inside your containers.
   * If they use priority 2 to 10, make sure to configure `runtime_security_config.network.classifier_priority` to a number strictly below the priority chosen by your vendor.
   * If they use priority 11 or higher, you can ignore this paragraph.
 
 For example, there is a known race with Cilium 1.9 and lower with the Datadog Agent (version 7.36 to 7.39.1, 7.39.2 excluded) that may happen when a new pod is started. The race can lead to loss of connectivity inside the pod, depending on how Cilium is configured.
 
-Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you'll want to disable the network based detections of Cloud Workload Security by:
+Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you should want to disable the network based detections of Cloud Workload Security by following the steps below:
 
-* Adding the following parameter to your `system-probe.yaml` configuration file on host based installations:
+* Add the following parameter to your `system-probe.yaml` configuration file on host based installations:
 ```yaml
 runtime_security_config:
   network:
     enabled: false
 ```
-* Adding the following values if you're using the public Helm Chart to deploy the Datadog Agent:
+* Add the following values if you're using the public Helm Chart to deploy the Datadog Agent:
 ```yaml
 datadog:
   securityAgent:
@@ -71,7 +71,7 @@ datadog:
       network:
         enabled: false
 ```
-* Adding the following environment variable if you're deploying the Datadog Agent container manually:
+* Add the following environment variable if you're deploying the Datadog Agent container manually:
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 ```
