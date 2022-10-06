@@ -108,7 +108,7 @@ Check the content of the `<FILE_NAME>.log` file to confirm that Winston is loggi
 
 ## Configure your Datadog Agent
 
-Once [log collection is enabled][6], set up [custom log collection][7] to tail your log files and send them to Datadog.
+Once [log collection is enabled][6], set up [custom log collection][7] to tail your log files and send new logs to Datadog.
 
 1. Create a `nodejs.d/` folder in the `conf.d/` [Agent configuration directory][8].
 2. Create a `conf.yaml` file in `nodejs.d/` with the following content:
@@ -129,7 +129,7 @@ logs:
 ```
 
 3. [Restart the Agent][9].
-4. Run the [Agent’s status subcommand][10] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent’s status subcommand][10] and look for `nodejs` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][11] to extract log attributes. Use the [Log Explorer][12] to view and troubleshoot your logs.
 
@@ -138,11 +138,11 @@ If logs are in JSON format, Datadog automatically [parses the log messages][11] 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
 `env`, `service`, and `version` to your logs by [following the APM NodeJS instructions][3].
 
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the Agent configuration.
 
 ## Agentless logging
 
-You can stream your logs from your application to Datadog without installing an Agent on your Host. However, it is recommended that you use an Agent to forward your logs as it provides a native connection management.
+You can stream your logs from your application to Datadog without installing an Agent on your host. However, it is recommended that you use an Agent to forward your logs as it provides a native connection management.
 
 Use the [Winston HTTP transport][4] to send your logs directly through the [Datadog Log API][5].
 In your bootstrap file or in your code, declare the logger in the following way:
