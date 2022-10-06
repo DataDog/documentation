@@ -8,14 +8,14 @@ In Datadog graphs, color is the primary affordances used to distinguish between 
 
 ### Categorical Palettes 
 
-- Categorical palettes are best used for data that lacks a natural order and needs differentiation, such as AWS availability zones. 
-- Use these palettes to help differentiate many different series of data.
+- Categorical palettes are best used for data that lacks a natural order and needs differentiation, such as AWS availability zones.
+- Use these palettes to help differentiate many different series of data
 
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194394992-87aefa6e-5774-45a5-8632-b9751d6d7924.png">
 
 #### Classic Palette
 
-The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. The Classic palette ensures that adjacent series have distinct colors. Note that this color palette has **visual accessibility support**.
+The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. The Classic palette ensures that adjacent series have distinct colors. The Classic color palette has **visual accessibility support**.
 
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194170680-fc860aef-e916-47ac-8872-2228caad3c11.png">
 
@@ -27,7 +27,7 @@ The Consistent palette allows you to assign the same color consistently to a ser
 
 <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194404128-d46d53dd-8072-4922-a958-35bbad77ed10.png">
 
-For a small subset of compatible tags, Datadog will automatically recognize the *meaning* behind each series of data. In these cases, a 'semantic' color palette will appear rather than consistent, which will use color to represent meaning - i.e. red = error code, green = success code.
+For a small subset of compatible tags, Datadog will automatically recognize the *meaning* behind each series of data. In these cases, a Semantic color palette will appear rather than Consistent, which will use color to represent meaning - i.e. red = error code, green = success code.
 
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/19559239/194404072-253cf0cd-fc6a-4080-ac8c-f2e931e7680c.png">
 
