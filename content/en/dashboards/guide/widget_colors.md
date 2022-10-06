@@ -6,52 +6,54 @@ In Datadog graphs, color is the primary affordances used to distinguish between 
 
 ## Types of color palettes
 
-### Classic Palette
+### Categorical Palettes 
 
-The default classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. The classic palette ensures that adjacent series have distinct colors. Note that this color palette has visual accessibility support.
+- Categorical palettes are best used for data that lacks a natural order and needs differentiation, such as AWS availability zones. 
+- Use these palettes will help differentiate many different series of data.
 
-<img width="700" alt="image" src="https://user-images.githubusercontent.com/19559239/194170680-fc860aef-e916-47ac-8872-2228caad3c11.png">
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194394992-87aefa6e-5774-45a5-8632-b9751d6d7924.png">
 
-### Categorical (Consistent or Semantic)
+#### Classic Palette
 
-The categorical palette allows you to assign the same color consistently to a series of data, making it easier to correlate data across charts. The categorical palette does not guarantee that adjacent data series use the same color, and does not have accessibility support.
+The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. The Classic palette ensures that adjacent series have distinct colors. Note that this color palette has **visual accessibility support**.
 
-<img width="994" alt="image" src="https://user-images.githubusercontent.com/19559239/194346481-dfe33feb-a0c7-41ac-858d-770f4b3c9dc7.png">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194170680-fc860aef-e916-47ac-8872-2228caad3c11.png">
 
-<img width="1100" alt="image" src="https://user-images.githubusercontent.com/19559239/194154617-3e225f2c-a3d1-4663-871a-be777430a047.png">
+#### Consistent/Semantic
+
+The Consistent palette allows you to assign the same color consistently to a series of data, making it **easier to correlate data across charts**. The Consistent palette does not guarantee that adjacent data series use the same color, and does not have accessibility support.
+
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194396077-0e2858b5-57dd-4710-9c0a-91e0d3c4d910.png">
+
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194154617-3e225f2c-a3d1-4663-871a-be777430a047.png">
 
 For a small subset of compatible tags, Datadog will automatically recognize the *meaning* behind each series of data. In these cases, a 'semantic' color palette will appear rather than consistent, which will use color to represent meaning - i.e. red = error code, green = success code.
 
-<img width="1100" alt="image" src="https://user-images.githubusercontent.com/19559239/194159572-8c04fa54-9507-43c9-8b8b-1c07457d72b3.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194159572-8c04fa54-9507-43c9-8b8b-1c07457d72b3.png">
 
-### Two-Hue Gradient Palettes
+### Diverging Palettes
 
-The cool and warm color palettes use a gradient color scheme composed of two colors. The cool palette is made from green and blue, and the warm palette from yellow and orange. Example of cool color palette below.
-
+- The cool and warm diverging palettes are best used for data that has a natural order and a natural midpoint, such as the amount of change of memory utilization (from -100% to +100%, for example, with a natural midpoint at 0%). 
+- Use these palettes will highlight spikes and errors. 
+- The cool palette is made from green and blue, and the warm palette from yellow and orange. Example of cool color palette below.
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396296-2024a00a-3091-4439-8ff9-175ba134a5f5.png">
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194169698-e36639cb-3354-465b-bccd-7ce475f1bda5.png">
 
-### Single-Hue Gradient Palettes
+### Sequential Palettes
 
-Single-hue gradient palettes assign different shades of a single color to your data. Options include: purple, orange, gray, red, green, and blue.
+- Best used for data that has a natural order, such as the CPU utilization (from 0% to 100%) of a group of hosts.
+- Use single hue palettes when you need to emphasize that different series in your dataset have something in common; use multi hue palettes when you need to emphasize the difference in values within a dataset.
+- Palette options include: purple, orange, gray, red, green, and blue.
+- When combined with **color overrides**, the sequential palettes are a great tool for distinguishing the results from multiple queries in a single chart (see 'Color overrides' section below)
 
-<img width="584" alt="image" src="https://user-images.githubusercontent.com/19559239/194170101-84af0627-147b-455a-ad93-9607ba4feffb.png">
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396351-71af5084-a78b-4b39-b23f-79d4a26d495a.png">
 
-## Which color palette should I use?
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194170101-84af0627-147b-455a-ad93-9607ba4feffb.png">
 
-In Datadog, **color is used to distinguish categories of data rather than values**. Scales, size, and labels and instead use to glean proportions and magnitude.
-
-We recommend using either classic, categorical, warm, or cool palettes in cases where distinguishing multiple series or groups is important.
-- Use the categorical palette when your charts use the same data grouper across multiple charts, as it allows you to draw quick correlations.
-- If you are not correlating data between adjacent charts, the classic palette may be a better choice. The classic palette is optimized for readability, as it ensures that adjacent data series use distinct, complementary colors.
-- The warm and cool palettes can also be used to distinguish multiple groups of data. We recommend using these palettes only when you have three or fewer  data series, as it has fewer distinct colors compared to classic.
-
-We recommend using single-hue palettes when tracking the values on a chart are more important than distinguishing distinct groups. Parsing color takes visual attention, so removing it as a variable helps user focus on values and trends rather than categories. 
-
-When combined with **color overrides**, the single-hue palette is a great tool for distinguishing the results from multiple queries in a single chart (see 'Color overrides' section below)
 
 ## Color overrides
 
-Color overrides allow you to assign a single color of your choice to each query. 
+Color overrides allow you to assign a single color of your choice to each query. This is particularly useful when distinguishing the results from multiple queries in a single chart.
 
 <img width="968" alt="image" src="https://user-images.githubusercontent.com/19559239/194158463-475e4571-0322-489f-a9a6-d7e753f8314e.png">
 
