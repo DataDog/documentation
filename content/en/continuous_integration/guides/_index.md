@@ -9,4 +9,5 @@ disable_toc: true
     {{< nextlink href="/continuous_integration/guides/flaky_test_management" >}}Flaky Test Management{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/rum_integration" >}}Instrumenting your browser tests with RUM{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/rum_swift_integration" >}}Instrumenting your Swift tests with RUM{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/pull_request_comments" >}}Test summary pull request comments{{< /nextlink >}}
 {{< /whatsnext >}}
