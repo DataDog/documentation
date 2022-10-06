@@ -20,31 +20,35 @@ Cloud Security Posture Management is not available in this site.
 
 ## Overview
 
-Open Policy Agent (OPA) provides [Rego][1], an open source query language with versatile resource inspection features for determining cloud security posture. In Datadog, you can write custom rules with Rego to control the security of your infrastructure. 
+Open Policy Agent (OPA) provides [Rego][1], an open source policy language with versatile resource inspection features for determining cloud security posture. In Datadog, you can write custom rules with Rego to control the security of your infrastructure. 
 
 ## The template module
 
 Defining a rule starts with a Rego [policy][2], defined inside a [module][3]. Datadog CSPM uses a module template like the one below to simplify writing rules:
 
-```java
+```python
 package datadog
+
+import data.datadog.output as dd_output
 
 import future.keywords.contains
 import future.keywords.if
-import data.datadog.output as dd_output
+import future.keywords.in
 
-eval(resource) = "skip" if {
-    resource.skip_me
+eval(resource_type) = "skip" if {
+    # Logic that evaluates to true if the resource should be skipped
 } else = "pass" {
-    resource.should_pass
+    # Logic that evaluates to true if the resource is compliant
 } else = "fail" {
-    true
+    # Logic that evaluates to true if the resource is not compliant
 }
 
+# This part remains unchanged for all rules
 results contains result if {
-    resource = input.some_resource_type[_]
-    result := dd_output.format(resource,eval(resource))
+	some resource in input.resources[input.main_resource_type]
+	result := dd_output.format(resource, eval(resource))
 }
+
 ```
 
 Take a close look at each part of this module to understand how it works.
@@ -53,14 +57,15 @@ Take a close look at each part of this module to understand how it works.
 
 The first line contains the declaration `package datadog`. A [package][4] groups Rego modules into a single namespace, allowing modules to be imported safely. Currently, importing user modules is not a feature of custom rules. All posture management rules are grouped under the `datadog` namespace. For your results to be returned properly, group your rules under the `package datadog` namespace. 
 
-```java
+```python
 import future.keywords.contains
 import future.keywords.if
+import future.keywords.in
 ```
 
-The next two statements import the OPA-provided keywords [`contains`][5] and [`if`][6]. These keywords allow defining rules with more expressive syntax to improve readability. **Note:** importing all keywords with `import future.keywords` is [not recommended][7].
+The next three statements import the OPA-provided keywords [`contains`][5], [`if`][6], and [`in`][7]. These keywords allow defining rules with more expressive syntax to improve readability. **Note:** importing all keywords with `import future.keywords` is [not recommended][8].
 
-```java
+```python
 import data.datadog.output as dd_output
 ```
 
@@ -70,7 +75,7 @@ The next line imports the Datadog helper method, which formats your results to t
 
 After the import statements comes the first rule in the template module:
 
-```java
+```python
 eval(resource) = "skip" if {
     resource.skip_me
 } else = "pass" {
@@ -82,7 +87,7 @@ eval(resource) = "skip" if {
 
 The rule evaluates the resource, and provides the outcome as a string depending on the state of the resource. You can change the order of `pass`, `fail` and `skip` according to your needs. The rule above has `fail` as a default, if `skip_me` and `should_pass` are false or nonexistent in your resource. Alternatively, you can make `pass` the default: 
 
-```java
+```python
 eval(resource) = "skip" if {
     resource.skip_me
 } else = "fail" {
@@ -96,14 +101,17 @@ eval(resource) = "skip" if {
 
 The final section of the template module builds your set of results:
 
-```java
+```python
+# This part remains unchanged for all rules
 results contains result if {
-    resource = input.some_resource_type[_]
-    result := dd_output.format(resource, eval(resource))
+	some resource in input.resources[input.main_resource_type]
+	result := dd_output.format(resource, eval(resource))
 }
 ```
 
-This section passes through all resources of type `some_resource_type` and evaluates them. It creates an array of results to be processed by the posture management system. Modify this section only to specify the resource type you want to process, for example changing `some_resource_type` to `gcp_iam_policy`.
+This section passes through all resources from the main resource type and evaluates them. It creates an array of results to be processed by the posture management system. The [some][9] keyword declares the local variable `resource`, which comes from the array of main resources. The `eval` rule is executed on every resource, returning a `pass`, `fail` or `skip`. The dd_output.format rule formats the resource and evaluation correctly to be processed by the cloud security platform.
+
+This section of the policy does not need to be modified. Instead, when you select your main resource type in the **Choose your main resource type** dropdown when cloning rules, it will be inserted in this section of the policy. You can also access the array of your resources through `input.resources.some_resource_type`, replacing `some_resource_type` with the main resource type that you chose – for example, `gcp_iam_policy`.
 
 ## Other ways to write rules
 
@@ -123,7 +131,7 @@ The template helps you start writing custom rules. You aren't required to follow
 
 The above rule example evaluates basic true or false flags like `should_pass` in your resource. Consider a rule that expresses a logical `OR`, for example:
 
-```java
+```python
 bad_port_range(resource) {
     resource.port >= 100
     resource.port <= 200
@@ -135,7 +143,7 @@ bad_port_range(resource) {
 
 This rule evaluates to true if the `port` is between `100` and `200`, or between `300` and `400`, inclusive. For this, you can define your `eval` rule as follows:
 
-```java
+```python
 eval(resource) = "skip" if {
     not resource.port
 } else = "fail" {
@@ -147,30 +155,33 @@ eval(resource) = "skip" if {
 
 This skips the resource if it has no `port` attribute, and fails it if it falls within one of the two "bad" ranges. 
 
-Sometimes you want to examine more than one resource type in your rule. In this case, it can be time consuming to loop through all instances of a resource type for each resource. Take the following example:
+Sometimes you want to examine more than one resource type in your rule. To do this, you can select some related resource type(s) in the dropdown under **Advanced Rule Options**. You can then access the array(s) of related resources through `input.resources.related_resource_type`, replacing `related_resource_type` with whatever related resource you would like to access.
 
-```java
-eval(service_account) = "fail" if {
-    key := input.gcp_iam_service_account_key[_]
-    key.parent == service_account.resource_name
+When writing a policy for more than one resource type, it can be time consuming to loop through all instances of a related resource type for each main resource. Take the following example:
+
+```python
+eval(iam_service_account) = "fail" if {
+    some key in input.resources.gcp_iam_service_account_key
+    key.parent == iam_service_account.resource_name
     key.key_type == "USER_MANAGED"
 } else = "pass" {
     true
 }
 
+# This part remains unchanged for all rules
 results contains result if {
-    service_account = input.gcp_iam_service_account[_]
-    result := dd_output.format(service_account, eval(service_account))
+	some resource in input.resources[input.main_resource_type]
+	result := dd_output.format(resource, eval(resource))
 }
 ```
 
-This rule determines whether there are any instances of `gcp_iam_service_account_key` that are user managed and match to a `gcp_iam_service_account`. If the service account has a key that is user managed, it produces a `fail` result. The `eval` rule is executed on every service account, and loops through every service account key to find one that matches the account. resulting in a complexity of `O(MxN)`, where M is the number of service accounts and N is the number of service account keys. 
+This rule determines whether there are any instances of `gcp_iam_service_account_key` that are user managed and match to a `gcp_iam_service_account` (the resource selected as the main resource type). If the service account has a key that is user managed, it produces a `fail` result. The `eval` rule is executed on every service account, and loops through every service account key to find one that matches the account. resulting in a complexity of `O(MxN)`, where M is the number of service accounts and N is the number of service account keys. 
 
-To improve the time complexity significantly, build a [set][8] of key parents that are user managed with a [set comprehension][9]:
+To improve the time complexity significantly, build a [set][10] of key parents that are user managed with a [set comprehension][11]:
 
-```java
+```python
 user_managed_keys_parents := {key_parent |
-    key := input.gcp_iam_service_account_key[_]
+    some key in input.resources.gcp_iam_service_account_key
     key.key_type == "USER_MANAGED"
     key_parent = key.parent
 }
@@ -178,15 +189,15 @@ user_managed_keys_parents := {key_parent |
 
 To find out if your service account has a user managed key, query the set in `O(1)` time:
 
-```java
-eval(service_account) = "fail" if {
-    user_managed_keys_parents[service_account.resource_name]
+```python
+eval(iam_service_account) = "fail" if {
+    user_managed_keys_parents[iam_service_account.resource_name]
 } else = "pass" {
     true
 }
 ```
 
-The new time complexity is `O(M+N)`. Rego provides set, object, and array [comprehensions][10] to help you build [composite values][11] to query.
+The new time complexity is `O(M+N)`. Rego provides set, object, and array [comprehensions][12] to help you build [composite values][13] to query.
 
 ## Find out more
 
@@ -202,8 +213,10 @@ Read the [Rego documentation][2] for more context around rules, modules, package
 [4]: https://www.openpolicyagent.org/docs/latest/policy-language/#packages
 [5]: https://www.openpolicyagent.org/docs/latest/policy-language/#futurekeywordscontains
 [6]: https://www.openpolicyagent.org/docs/latest/policy-language/#futurekeywordsif
-[7]: https://www.openpolicyagent.org/docs/latest/policy-language/#future-keywords
-[8]: https://www.openpolicyagent.org/docs/latest/policy-language/#sets
-[9]: https://www.openpolicyagent.org/docs/latest/policy-language/#set-comprehensions
-[10]: https://www.openpolicyagent.org/docs/latest/policy-language/#comprehensions
-[11]: https://www.openpolicyagent.org/docs/latest/policy-language/#composite-values
+[7]: https://www.openpolicyagent.org/docs/latest/policy-language/#futurekeywordsin
+[8]: https://www.openpolicyagent.org/docs/latest/policy-language/#future-keywords
+[9]: https://www.openpolicyagent.org/docs/latest/policy-language/#some-keyword
+[10]: https://www.openpolicyagent.org/docs/latest/policy-language/#sets
+[11]: https://www.openpolicyagent.org/docs/latest/policy-language/#set-comprehensions
+[12]: https://www.openpolicyagent.org/docs/latest/policy-language/#comprehensions
+[13]: https://www.openpolicyagent.org/docs/latest/policy-language/#composite-values
