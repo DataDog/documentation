@@ -49,7 +49,7 @@ func main() {
 }
 ```
 
-You can add tags to logs using a JSON object. Examples of tags that you can add include `hostname`, `username`, `customers`, `metric` or any information that helps you troubleshoot and understand what is happening in your Go application. For example:
+You can add tags to logs using a JSON object. Examples of tags that you can add include `hostname`, `username`, `customers`, `metric`, or any information that helps you troubleshoot and understand what is happening in your Go application. For example:
 
 ```go
 package main
@@ -78,7 +78,7 @@ func main() {
 
 ## Configure your Datadog Agent
 
-Once [log collection is enabled][3], set up [custom log collection][4] to tail your log files and send them to Datadog.
+Once [log collection is enabled][3], set up [custom log collection][4] to tail your log files and send new logs to Datadog.
 
 1. Create a `go.d/` folder in the `conf.d/` [Agent configuration directory][5].
 2. Create a `conf.yaml` file in `go.d/` with the following content:
@@ -95,7 +95,7 @@ Once [log collection is enabled][3], set up [custom log collection][4] to tail y
     ```
 
 3. [Restart the Agent][6].
-4. Run the [Agent’s status subcommand][7] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent’s status subcommand][7] and look for `go` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][8] to extract log attributes. Use the [Log Explorer][9] to view and troubleshoot your logs.
 
@@ -108,9 +108,9 @@ If APM is enabled for this application, the correlation between application logs
 Tips for getting further with Go log collection:
 
 * Always give a name to the logger corresponding to the functionality or service.
-* Log a lot in the DEBUG level and log accurately in the INFO, WARNING and FATAL levels, since these are the log levels you get in your production environments.
+* Log a lot in the DEBUG level and log accurately in the INFO, WARNING, and FATAL levels, since these are the log levels you get in your production environments.
 * Start small and log the important information first and then add what is missing after discussing with your team.
-* Use tags to add context to the logs so that you can quickly filter over users, customers or other attributes.
+* Use tags to add context to the logs so that you can quickly filter over users, customers, or other attributes.
 
 ## Further Reading
 
