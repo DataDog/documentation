@@ -25,25 +25,23 @@ The Consistent palette allows you to assign the same color consistently to a ser
 
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194396077-0e2858b5-57dd-4710-9c0a-91e0d3c4d910.png">
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194154617-3e225f2c-a3d1-4663-871a-be777430a047.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194404128-d46d53dd-8072-4922-a958-35bbad77ed10.png">
 
 For a small subset of compatible tags, Datadog will automatically recognize the *meaning* behind each series of data. In these cases, a 'semantic' color palette will appear rather than consistent, which will use color to represent meaning - i.e. red = error code, green = success code.
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194159572-8c04fa54-9507-43c9-8b8b-1c07457d72b3.png">
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/19559239/194404072-253cf0cd-fc6a-4080-ac8c-f2e931e7680c.png">
 
 ### Diverging Palettes
 
-- The cool and warm diverging palettes are best used for data that has a natural order and a natural midpoint, such as the amount of change in memory utilization (from -100% to +100%, for example, with a natural midpoint at 0%). 
-- Use these palettes will highlight spikes and errors. 
-- The cool palette is made from green and blue, and the warm palette from yellow and orange. Example of cool color palette below.
+- Use a diverging palette when you need to emphasize the difference in values within a dataset. Diverging palettes are suited to data that has a natural order and a natural midpoint, such as the amount of change in memory utilization (from -100% to +100%, for example, with a natural midpoint at 0%). 
+- There are two diverging palette options: the cool palette is composed of green and blue, and the warm palette interpolates between yellow and orange
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396296-2024a00a-3091-4439-8ff9-175ba134a5f5.png">
-<img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194169698-e36639cb-3354-465b-bccd-7ce475f1bda5.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194403795-b6835f46-a12e-4f80-9d04-c3f7d577c82c.png">
 
 ### Sequential Palettes
 
-- Best used for data that has a natural order, such as the CPU utilization (from 0% to 100%) of a group of hosts.
-- Use single hue palettes when you need to emphasize that different series in your dataset have something in common; use multi hue palettes when you need to emphasize the difference in values within a dataset.
-- Palette options include: purple, orange, gray, red, green, and blue.
+- Use sequential palettes when you need to emphasize that different series in your dataset have something in common. This palette works well for data has a natural order, such as the CPU utilization (from 0% to 100%) of a group of hosts
+- Color options include: purple, orange, gray, red, green, and blue
 - When combined with **color overrides**, the sequential palettes are a great tool for distinguishing the results from multiple queries in a single chart (see 'Color overrides' section below)
 
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396351-71af5084-a78b-4b39-b23f-79d4a26d495a.png">
