@@ -86,20 +86,11 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
       {
           "Sid": "DDCloudCostListCURs",
           "Action": [
-              "cur:DescribeReportDefinitions"
+            "cur:DescribeReportDefinitions"
           ],
           "Effect": "Allow",
           "Resource": "*"
-      },
-      {
-          "Sid": "DDCloudCostListOrganizations",
-          "Action": [
-              "organizations:Describe*",
-              "organizations:List*"
-          ],
-          "Effect": "Allow",
-          "Resource": "*"
-      }
+        }
   ]
 }
 {{< /code-block >}}
@@ -157,5 +148,5 @@ Datadog は、インジェストされたコストデータにタグを追加し
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
-[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
 [7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
