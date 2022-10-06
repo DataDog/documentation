@@ -21,7 +21,7 @@ For example, you can create a signal by combining these two rules:
 
 And use the `expired account ID` attribute to correlate the two rules. 
 
-You can correlate log detection and signal correlation rules, as well as log detection rules with Cloud Workload Security and Application Security Monitoring rules.
+You can correlate log detection rules, as well as log detection rules with Cloud Workload Security and Application Security Monitoring rules.
 
 ## Create a new Signal Correlation rule
 
@@ -57,9 +57,9 @@ In the “Notify” section, configure zero or more [notification targets][2] fo
 
 An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
 
-Once a signal is generated, the signal will remain “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
+Once a signal is generated, the signal remains “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
 
-A signal will “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
+A signal is “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
 
 Click **Add Case** to add additional cases.
 
