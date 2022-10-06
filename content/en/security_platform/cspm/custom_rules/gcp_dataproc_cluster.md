@@ -42,15 +42,15 @@ kind: documentation
           **GCP name**: `metrics`
            - `metric_overrides`<br>
             **Type**: `UNORDERED_LIST_STRING`<br>
+            **GCP name**: `metricOverrides`<br>
             **Description**: Optional. Specify one or more available [OSS metrics][2] to collect for the metric course (for the SPARK metric source, any [Spark metric][3] can be specified). Provide metrics in the following format: `METRIC_SOURCE:INSTANCE:GROUP:METRIC`. Use camel-case as appropriate. Examples: <br>
-            - `yarn:ResourceManager:QueueMetrics:AppsCompleted`<br>
-            - `spark:driver:DAGScheduler:job.allJobs`<br>
-            - `sparkHistoryServer:JVM:Memory:NonHeapMemoryUsage.committed`<br>
-            - `hiveserver2:JVM:Memory:NonHeapMemoryUsage.used` <br>
+              - `yarn:ResourceManager:QueueMetrics:AppsCompleted`<br>
+              - `spark:driver:DAGScheduler:job.allJobs`<br>
+              - `sparkHistoryServer:JVM:Memory:NonHeapMemoryUsage.committed`<br>
+              - `hiveserver2:JVM:Memory:NonHeapMemoryUsage.used` <br>
             Notes: <br>
-            - Only the specified overridden metrics will be collected for the metric source. For example, if one or more `spark:executive` metrics are listed as metric overrides, other SPARK metrics will not be collected. <br>
-            - The collection of the default metrics for other OSS metric sources is unaffected. For example, if both SPARK andd YARN metric sources are enabled, and overrides are provided for Spark metrics only, all default YARN metrics will be collected.<br>
-                **GCP name**: `metricOverrides`<br>
+              - Only the specified overridden metrics will be collected for the metric source. For example, if one or more `spark:executive` metrics are listed as metric overrides, other SPARK metrics will not be collected. <br>
+              - The collection of the default metrics for other OSS metric sources is unaffected. For example, if both SPARK andd YARN metric sources are enabled, and overrides are provided for Spark metrics only, all default YARN metrics will be collected.<br>
            - `metric_source`<br>
             **Type**: `STRING`<br>
                 **Description**: Required. Default metrics are collected unless metricOverrides are specified for the metric source. See [Available OSS metrics][2] for more information. <br>

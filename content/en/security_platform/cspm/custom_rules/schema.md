@@ -3,8 +3,9 @@ title: Cloud Resources Schema Reference
 kind: documentation
 disable_toc: true
 ---
+When you [write custom rules for CSPM][1], you specify the resource types that are referenced by the rules. 
 
-{{< whatsnext desc="When you write custom rules for CSPM, you specify the resource types that are referenced by the rules. Review detailed information about resource types in the following pages." >}}
+{{< whatsnext desc="Review detailed information about resource types in the following pages." >}}
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_sql_database_instance/" >}}<code>gcp_sql_database_instance</code>{{< /nextlink >}}
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_compute_instance/" >}}<code>gcp_compute_instance</code>{{< /nextlink >}}
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_iam_policy/" >}}<code>gcp_iam_policy</code>{{< /nextlink >}}
@@ -19,3 +20,6 @@ disable_toc: true
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_iam_service_account_key/" >}}<code>gcp_iam_service_account_key</code>{{< /nextlink >}}
     {{< nextlink href="/security_platform/cspm/custom_rules/gcp_kms_crypto_key/" >}}<code>gcp_kms_crypto_key</code>{{< /nextlink >}}
 {{< /whatsnext >}}
+
+
+[1]: /security_platform/cspm/custom_rules/
