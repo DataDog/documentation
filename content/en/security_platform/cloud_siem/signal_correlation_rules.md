@@ -14,7 +14,7 @@ further_reading:
 
 Signal correlation rules combine multiple signals together to generate a new signal so that you can alert on more complex use cases and reduce alert fatigue. For example, you can correlate events or signals to identify a specific issue or generate an alert only if a specific `low` severity signal is combined with a specific `high` severity signal.
 
-For example, you can create a signal by combining these two rules:
+As another example, you can create a signal by combining these two rules:
 
 1. Detect if an access attempt was made from an expired account
 2. Detect if there was an attempt to authenticate into a host or resource
@@ -23,15 +23,15 @@ And use the `expired account ID` attribute to correlate the two rules.
 
 You can correlate log detection rules, as well as log detection rules with Cloud Workload Security and Application Security Monitoring rules.
 
-## Create a new Signal Correlation rule
+## Create a Signal Correlation rule
 
-Go to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule type* section, click **Signal Correlation**.
+Navigate to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule type* section, click **Signal Correlation**.
 
 ### Set rules
 
-Select a rule for *Rule a*. Click the pencil icon to rename the rule. Use the *correlated by* dropdown to define the correlating attribute. You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows) for more information about the sliding window.
+1. Select a rule for *Rule a*. Click the pencil icon to rename the rule. Use the *correlated by* dropdown to define the correlating attribute. You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows) for more information about the sliding window.
 
-Select a rule for *Rule b* in the second Rule editor’s dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for *Rule a*.
+2. Select a rule for *Rule b* in the second Rule editor’s dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for *Rule a*.
 
 ### Set rule cases
 
@@ -67,9 +67,9 @@ Click **Add Case** to add additional cases.
 
 ### Say what's happening
 
-The *Rule name* section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
+The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
-Use [notification variables][3] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the *JSON* section of the *Overview* tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
+Use [notification variables][3] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the **JSON** section of the **Overview** tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
 
 This JSON object is an example of event attributes that may be associated with a security signal:
 
