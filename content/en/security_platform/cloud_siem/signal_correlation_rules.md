@@ -51,13 +51,13 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
-In the “Notify” section, configure zero or more [notification targets][2] for each rule case.
+In the *Notify* section, optionally, configure [notification targets][2] for each rule case.
 
 #### Time windows
 
 An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
 
-Once a signal is generated, the signal remains “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
+Once a signal is generated, the signal remains “open” if a case is matched at least once within the `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
 
 A signal is “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
 
@@ -67,11 +67,11 @@ Click **Add Case** to add additional cases.
 
 ### Say what's happening
 
-The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
+The *Rule name* section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
-Use [notification variables][3] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the JSON section of the Overview tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
+Use [notification variables][3] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the *JSON* section of the *Overview* tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
 
-This JSON object is an example of event attributes which may be associated with a security signal:
+This JSON object is an example of event attributes that may be associated with a security signal:
 
 ```json
 {
@@ -92,7 +92,7 @@ This JSON object is an example of event attributes which may be associated with 
 
 ```
 
-You could use the following in the **Say what’s happening** section:
+You could use the following in the *Say what’s happening* section:
 
 ```
 {{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
