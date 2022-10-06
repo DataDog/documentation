@@ -99,7 +99,7 @@ logger.info('Hello log with metas',{color: 'blue' });
 {{% /tab %}}
 {{< /tabs >}}
 
-Check the content of the `<FILE_NAME>.log` file to confirm that Winston is logging in the JSON format:
+Check the content of the `<FILE_NAME>.log` file to confirm that Winston is logging in JSON:
 
 ```json
 {"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
