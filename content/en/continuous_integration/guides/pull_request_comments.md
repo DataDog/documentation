@@ -1,5 +1,5 @@
 ---
-title: Test Summary Pull Request Comments
+title: Enabling Test Summaries in GitHub Pull Requests
 kind: guide
 ---
 
@@ -7,33 +7,25 @@ kind: guide
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-CI Visibility allows you to get insights into your test. With thi integration Datadog brings test
-results to your pull requests. With the comment integration you can get a break down of your test
-services results as well as error messages for failed tests, so that you can resolve all your
-issues quicker.
+Datadog integrates with GitHub to show test result summaries and error messages for failed tests in pull request comments.
+
+### Compatibility
+This integration is only available for test services hosted in `github.com` and unavailable for workflows running on `pull_request` triggers. 
 
 {{< img src="ci/pr-comment-preview.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
 ### Enabling
+To enable the GitHub comments integration:
 
-To enable GitHub comments you first need to install the [Datadog GitHub App][1] and give it read and write
-permissions for pull requests. To do this go to the [GitHub App integration tile][2]. If you already have
-an app installed make sure it has pull request permissions.
-
-To enable GitHub comments go to the test service commit or branch page. Click on the settings icon and then on *Enable GitHub Comments*.
-After a few minutes comments will start to show on new pull requests.
+1. Go to the [GitHub App integration tile][2] and install the [Datadog GitHub App][1].
+2. Give the application read and write permissions for pull requests.
+3. Go to the test service commit or branch page that you would like to enable this GitHub comments for. 
+4. Click on the settings icon at the top right.
+5. Select `Enable GitHub Comments`. After a few minutes, comments will start to display on new pull requests. 
 
 {{< img src="ci/enable-github-comments.png" alt="Enable GitHub comments dropdown" style="width:100%;">}}
 
-Comments will only show in pull requests that where opened before the test run and that have run
-at least one test for an enabled test service.
-
-### Compatibility
-
-The GitHub Pull Request Comment integration is only available for test services hosted in `github.com`
-
-Due to some limitations the integration won't work for workflows running on `pull_request` triggers as the
-PR head commit SHA does not match the one reported in the tests.
+Comments will only show in pull requests that were opened before the test run and that have run at least one test for an enabled test service.
 
 [1]: integrations/github_apps/
 [2]: https://app.datadoghq.com/integrations/github-apps
