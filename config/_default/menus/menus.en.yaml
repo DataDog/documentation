@@ -2533,21 +2533,11 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 204
-  - name: Resource Catalog
-    url: security_platform/cloud_security_management/resource_catalog/
-    parent: csm
-    identifier: csm_resource_catalog
-    weight: 3
   - name: Default Detection Rules
     url: security_platform/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
     weight: 4
-  - name: Terminology
-    url: security_platform/cloud_security_management/terminology/
-    parent: csm
-    identifier: csm_terminology
-    weight: 5
   - name: Guides
     url: security_platform/cloud_security_management/guide/
     parent: csm
