@@ -2453,21 +2453,26 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
     weight: 2
+  - name: Signal Correlation Rules
+    url: security_platform/cloud_siem/signal_correlation_rules
+    parent: cloud_siem
+    identifier: cloud_siem_signal_correlation_rules
+    weight: 3
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
-    weight: 3
+    weight: 4
   - name: Signals Explorer
     url: /security_platform/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
-    weight: 4
+    weight: 5
   - name: Guides
     url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 5
+    weight: 6
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform_heading
