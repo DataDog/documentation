@@ -9,7 +9,7 @@ In Datadog graphs, color is the primary affordances used to distinguish between 
 ### Categorical Palettes 
 
 - Categorical palettes are best used for data that lacks a natural order and needs differentiation, such as AWS availability zones. 
-- Use these palettes will help differentiate many different series of data.
+- Use these palettes to help differentiate many different series of data.
 
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194394992-87aefa6e-5774-45a5-8632-b9751d6d7924.png">
 
@@ -33,7 +33,7 @@ For a small subset of compatible tags, Datadog will automatically recognize the 
 
 ### Diverging Palettes
 
-- The cool and warm diverging palettes are best used for data that has a natural order and a natural midpoint, such as the amount of change of memory utilization (from -100% to +100%, for example, with a natural midpoint at 0%). 
+- The cool and warm diverging palettes are best used for data that has a natural order and a natural midpoint, such as the amount of change in memory utilization (from -100% to +100%, for example, with a natural midpoint at 0%). 
 - Use these palettes will highlight spikes and errors. 
 - The cool palette is made from green and blue, and the warm palette from yellow and orange. Example of cool color palette below.
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396296-2024a00a-3091-4439-8ff9-175ba134a5f5.png">
@@ -47,15 +47,13 @@ For a small subset of compatible tags, Datadog will automatically recognize the 
 - When combined with **color overrides**, the sequential palettes are a great tool for distinguishing the results from multiple queries in a single chart (see 'Color overrides' section below)
 
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396351-71af5084-a78b-4b39-b23f-79d4a26d495a.png">
-
-<img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194170101-84af0627-147b-455a-ad93-9607ba4feffb.png">
-
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194399372-2ba161d8-7965-485a-aea0-e021641e974a.png">
 
 ## Color overrides
 
 Color overrides allow you to assign a single color of your choice to each query. This is particularly useful when distinguishing the results from multiple queries in a single chart.
 
-<img width="968" alt="image" src="https://user-images.githubusercontent.com/19559239/194158463-475e4571-0322-489f-a9a6-d7e753f8314e.png">
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194158463-475e4571-0322-489f-a9a6-d7e753f8314e.png">
 
 ## Accessibility settings
 
