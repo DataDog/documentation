@@ -116,15 +116,22 @@ To connect RUM to Traces, you need to specify your browser application in the `s
 2.  Set the `firstPartyHosts` initialization parameter with the list of internal, first-party origins called by your iOS application.
     ```swift
     Datadog.initialize(
-    appContext: .init(),
-    configuration: Datadog.Configuration
-        .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-        .set(firstPartyHosts: ["example.com", "api.yourdomain.com"])
-        .build()
+        appContext: .init(),
+        configuration: Datadog.Configuration
+            .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
+            .set(firstPartyHosts: ["example.com", "api.yourdomain.com"])
+            .build()
     )
     ```
 
-3.  Initialize URLSession as stated in [Setup][1]:
+3. Initialize the global `Tracer`:
+    ```swift
+    Global.sharedTracer = Tracer.initialize(
+        configuration: Tracer.Configuration(...)
+    )
+    ```
+
+4.  Initialize URLSession as stated in [Setup][1]:
     ```swift
     let session =  URLSession(
         configuration: ...,
@@ -135,14 +142,16 @@ To connect RUM to Traces, you need to specify your browser application in the `s
 
 **Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-4.  _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
+**Note 2**: Trace ID injection works when providing a `URLRequest` to the `URLSession`, distributed tracing will not work when using a `URL` object.
+
+5.  _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
     ```swift
     Datadog.initialize(
-    appContext: .init(),
-    configuration: Datadog.Configuration
-        .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-        .set(tracingSamplingRate: 20)
-        .build()
+        appContext: .init(),
+        configuration: Datadog.Configuration
+            .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
+            .set(tracingSamplingRate: 20)
+            .build()
     )
     ```
 
