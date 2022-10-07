@@ -2482,16 +2482,16 @@ main:
   - name: Custom Rules
     url: security_platform/cspm/custom_rules
     parent: cspm
-    identifier: custom_rules
+    identifier: cspm_custom_rules
     weight: 2
   - name: Writing Custom Rules with Rego
     url: security_platform/cloud_security_management/guide/writing_rego_rules/
-    parent: custom_rules
+    parent: cspm_custom_rules
     identifier: csm_rego_rules
     weight: 201
   - name: Cloud Resources Schema
     url: security_platform/cspm/custom_rules/schema/
-    parent: custom_rules
+    parent: cspm_custom_rules
     identifier: cspm_schema_gcp
     weight: 202
   - name: Findings Reports

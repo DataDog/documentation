@@ -29,7 +29,7 @@ To extend the rules being applied to your environment to evaluate your security 
 
 To clone a rule:
 
-1. Find the rule you want to copy one of the following ways:
+1. Find the rule you want to copy in one of the following ways:
    - Navigate to [**Security > Posture Management** and click **Detection Rules**][1]. Select a rule you want to copy to open its details page. 
    - Navigate to [**Security > Posture Management** and click **Findings**][2]. Select a finding to open its details, and select **Edit Rule** from the **Rule** menu.
 2. Make any changes you want for your new rule.
@@ -60,7 +60,7 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 
 | Key     | Valid values    | Description | 
 | ------  | --------------- | ----------- |
-| `scored` | `true`, `false` | **Reserved.** Indicates whether to include the rule when calculating organization's overall posture score. Automatically added to cloned rules. |
+| `scored` | `true`, `false` | **Reserved.** Indicates whether to include the rule when calculating the organization's overall posture score. Automatically added to cloned rules. |
 | `security` | `compliance` | **Reserved.** Categorizes findings on the [Security Signals page][7]. Can't be removed. |
 | `requirement` | String | **Reserved.** Not allowed for custom rules. Indicates a requirement related to a compliance framework. Don't add this to rules not part of a compliance framework. Not automatically added to cloned rules. |
 | `cloud_provider` | `aws`, `gcp`, `azure` | **Reserved.** Cannot be removed. Is set automatically based on resource type.  |
