@@ -135,14 +135,11 @@ def security_rules(content, content_dir):
                         # previous categorization
                         if relative_path.startswith('configuration'):
                             page_data['rule_category'].append('Posture Management (Cloud)')
-                            page_data['rule_category'].append('Cloud Security Management')
                         elif relative_path.startswith('runtime'):
                             if 'compliance' in relative_path:
                                 page_data['rule_category'].append('Posture Management (Infra)')
-                                page_data['rule_category'].append('Cloud Security Management')
                             else:
                                 page_data['rule_category'].append('Workload Security')
-                                page_data['rule_category'].append('Cloud Security Management')
 
                         # new categorization
                         if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
@@ -151,14 +148,11 @@ def security_rules(content, content_dir):
                         if 'posture-management' in relative_path:
                             if 'cloud-configuration' in relative_path:
                                 page_data['rule_category'].append('Posture Management (Cloud)')
-                                page_data['rule_category'].append('Cloud Security Management')
                             if 'infrastructure-configuration' in relative_path:
                                 page_data['rule_category'].append('Posture Management (Infra)')
-                                page_data['rule_category'].append('Cloud Security Management')
 
                         if 'workload-security' in relative_path:
                             page_data['rule_category'].append('Workload Security')
-                            page_data['rule_category'].append('Cloud Security Management')
 
                         if 'application-security' in relative_path:
                             page_data['rule_category'].append('Application Security')
