@@ -1814,7 +1814,7 @@ main:
     identifier: tracing_data_streams
     weight: 11
   - name: Terms and concepts
-    url: tracing/glossary
+    url: tracing/data_streams/glossary
     parent: tracing_data_streams
     weight: 1101
   - name: Data Security
