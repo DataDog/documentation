@@ -8056,7 +8056,7 @@ components:
       - message
       type: object
     SecurityMonitoringSignalRuleQuery:
-      description: Query for matching rule on signals
+      description: Query for matching rule on signals.
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
@@ -8083,7 +8083,7 @@ components:
           type: string
         ruleId:
           description: Rule ID to match on signals.
-          example: d3f-ru1-e1d
+          example: org-ru1-e1d
           type: string
       required:
       - ruleId
@@ -8137,7 +8137,7 @@ components:
         queries:
           description: Queries for selecting logs which are part of the rule.
           items:
-            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponseQuery'
           type: array
         tags:
           description: Tags for generated signals.
@@ -8155,6 +8155,41 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+    SecurityMonitoringSignalRuleResponseQuery:
+      description: Query for matching rule on signals.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        correlatedByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        correlatedQueryIndex:
+          description: Index of the rule query used to retrieve the correlated field.
+          format: int32
+          maximum: 9
+          type: integer
+        defaultRuleId:
+          description: Default Rule ID to match on signals.
+          example: d3f-ru1-e1d
+          type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        ruleId:
+          description: Rule ID to match on signals.
+          example: org-ru1-e1d
+          type: string
+      type: object
     SecurityMonitoringSignalRuleType:
       description: The rule type.
       enum:
