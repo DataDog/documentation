@@ -1,6 +1,10 @@
 ---
 title: Google Cloud Run
 kind: documentation
+further_reading:
+    - link: 'https://docs.datadoghq.com/serverless/google_cloud_run/'
+      tag: 'Blog'
+      text: 'Collect traces, logs, and custom metrics from GCR services'
 ---
 
 ## Overview
