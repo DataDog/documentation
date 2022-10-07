@@ -1813,6 +1813,10 @@ main:
     parent: tracing
     identifier: tracing_data_streams
     weight: 11
+  - name: Terms and concepts
+    url: tracing/glossary
+    parent: tracing_data_streams
+    weight: 1101
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
