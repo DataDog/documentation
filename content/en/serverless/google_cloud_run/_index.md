@@ -8,7 +8,7 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
   <div class="alert alert-warning">This feature is in public beta. You can provide feedback through a <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">feedback form</a>, or through your standard support channels. During the beta period, Cloud Run monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
 
-## Tracking and custom metrics
+## Tracing and custom metrics
 ### Build your container
 
 If you are using a Dockerfile to build your application, complete the following:
