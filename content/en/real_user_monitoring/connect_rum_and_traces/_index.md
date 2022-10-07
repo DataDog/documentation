@@ -22,6 +22,8 @@ further_reading:
     text: "Troubleshoot with Session Replay browser dev tools"
 ---
 
+## Overview
+
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
 
 The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination enables you to see your full frontend and backend data through one lens.
@@ -59,9 +61,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
     })
     ```
 
-To connect RUM to Traces, you need to specify your browser application in the `service` field.
+    To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
-**Note:** `allowedTracingOrigins` accepts Javascript strings and RegExp that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
+    `allowedTracingOrigins` accepts Javascript strings and RegExp that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
 3.  _(Optional)_ Configure the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces:
 
@@ -95,7 +97,7 @@ To connect RUM to Traces, you need to specify your browser application in the `s
        .build()
     ```
 
-**Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
+    By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
 3.  _(Optional)_ Configure the `traceSamplingRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
 
@@ -140,11 +142,11 @@ To connect RUM to Traces, you need to specify your browser application in the `s
     )
     ```
 
-By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+   By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
+   Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
 
-5.  Optionally, set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. 
+5. _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. 
 
      To keep 20% of backend traces:
     ```swift
@@ -194,7 +196,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
 
-**Note**: These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][17] (OPTIONS requests), which are made by the SDK prior to every request.
+These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][17] (OPTIONS requests), which are made by the SDK prior to every request.
 
 ## How are APM quotas affected?
 
@@ -203,6 +205,8 @@ Connecting RUM and traces may significantly increase the APM ingested volumes. U
 ## How long are traces retained?
 
 These traces are available for 15 minutes in the [Live Search][18] explorer. To retain the traces for a longer period of time, create [retention filters][19]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
