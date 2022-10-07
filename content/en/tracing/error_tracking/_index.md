@@ -24,7 +24,7 @@ It is critical for your system's health to consistently monitor the errors colle
 
 <div class="alert alert-info">Error Tracking is available for all the languages supported by APM and does not require using a different SDK.</div>
 
-The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. If an error span within a trace is processed by Error Tracking **when it is located in the uppermost service span**, it is called a _service entry span_. This span must contain the `error.stack`, `error.message`, and `error.fingerprint` [span tags][1] to be tracked.
+The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error spans within a trace are processed by Error Tracking **if the error is located in a service entry span** (the uppermost service span). This span must also contain the `error.stack`, `error.message`, and `error.fingerprint` [span tags][1] to be tracked.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:90%;" >}}
 
