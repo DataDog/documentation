@@ -3203,25 +3203,25 @@ main:
     parent: nm_parent
     identifier: ndm
     weight: 300
-  - name: Setup
-    url: network_monitoring/devices/setup
+  - name: SNMP Metrics
+    url: network_monitoring/devices/snmp_metrics
     parent: ndm
-    identifier: ndm_setup
+    identifier: ndm_snmp_metrics
     weight: 301
-  - name: Profiles
-    url: network_monitoring/devices/profiles
-    parent: ndm
-    identifier: ndm_profiles
-    weight: 302
-  - name: Data Collected
-    url: network_monitoring/devices/data
-    parent: ndm
-    identifier: ndm_data
-    weight: 303
   - name: SNMP Traps
     url: network_monitoring/devices/snmp_traps
     parent: ndm
     identifier: ndm_snmptraps
+    weight: 302
+  - name: Profiles
+    url: network_monitoring/devices/profiles
+    parent: ndm
+    identifier: ndm_profiles
+    weight: 303
+  - name: Data Collected
+    url: network_monitoring/devices/data
+    parent: ndm
+    identifier: ndm_data
     weight: 304
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
