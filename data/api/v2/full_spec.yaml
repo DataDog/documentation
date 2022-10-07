@@ -2645,7 +2645,8 @@ components:
           format: int64
           type: integer
         resolved:
-          description: Timestamp when the incident's state was set to resolved.
+          description: Timestamp when the incident's state was last changed from active
+            or stable to resolved or completed.
           format: date-time
           nullable: true
           type: string
@@ -3154,11 +3155,6 @@ components:
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
-        resolved:
-          description: Timestamp when the incident's state was set to resolved.
-          format: date-time
-          nullable: true
-          type: string
         title:
           description: The title of the incident, which summarizes what happened.
           example: A test incident title
