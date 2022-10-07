@@ -15,7 +15,7 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 {{< programming-lang-wrapper langs="java,go,dotnet" >}}
 
-{{< programming-lang lang=”java” >}}
+{{< programming-lang lang="java" >}}
 
 ### Prerequisites
 * Datadog Agent v7.34.0+
@@ -29,7 +29,7 @@ To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS
 For example:
 ```yaml
 environment:
-  - DD_DATA_STREAMS_ENABLED: “true”
+  - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
 As an alternative, you can set the system property `-Ddd.data.streams.enabled=true` by running the following when you start your Java application:
@@ -40,7 +40,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar p
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang=”dotnet” >}}
+{{< programming-lang lang="dotnet" >}}
 
 ### Prerequisites
 * Datadog Agent v7.34.0+
@@ -54,14 +54,14 @@ To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS
 For example:
 ```yaml
 environment:
-  - DD_DATA_STREAMS_ENABLED: “true”
+  - DD_DATA_STREAMS_ENABLED: “true"”"
 ```
 
 Note that Data Streams Monitoring is not currently supported where `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED=0`.
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang=”go” >}}
+{{< programming-lang lang="”"go"”" >}}
 ### Prerequisites
 * Datadog Agent v7.34.0+
 * Latest version of the [Data Streams library][1]
@@ -152,7 +152,7 @@ func extractPathwayToContext(req *http.Request) context.Context {
 You can add an additional dimension to end-to-end latency metrics with the `event_type` tag:
 
 ```go
-_, ctx = datastreams.SetCheckpoint(ctx, “type:internal”, “event_type:sell”)
+_, ctx = datastreams.SetCheckpoint(ctx, “type:internal"”", “event_type:sell"”")
 ```
 
 You only need to add the `event_type` tag for the first service in each pathway. High-cardinality data (such as request IDs or hosts) are not supported as values for the `event_type` tag.
