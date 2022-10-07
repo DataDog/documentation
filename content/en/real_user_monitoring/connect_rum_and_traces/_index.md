@@ -131,7 +131,7 @@ To connect RUM to Traces, you need to specify your browser application in the `s
     )
     ```
 
-4.  Initialize URLSession as stated in [Setup][1]:
+4. Initialize URLSession as stated in [Setup][1]:
     ```swift
     let session =  URLSession(
         configuration: ...,
@@ -140,11 +140,13 @@ To connect RUM to Traces, you need to specify your browser application in the `s
     )
     ```
 
-**Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-**Note 2**: Trace ID injection works when providing a `URLRequest` to the `URLSession`, distributed tracing will not work when using a `URL` object.
+Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
 
-5.  _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
+5.  Optionally, set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. 
+
+     To keep 20% of backend traces:
     ```swift
     Datadog.initialize(
         appContext: .init(),
