@@ -22,9 +22,9 @@ further_reading:
     text: "Troubleshoot with Session Replay browser dev tools"
 ---
 
-## Overview
-
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
+
+## Overview
 
 The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination enables you to see your full frontend and backend data through one lens.
 
