@@ -5268,6 +5268,7 @@ components:
         created_at:
           description: The POSIX timestamp of the monitor's creation in nanoseconds.
           example: 1646318692000
+          format: int64
           type: integer
         group_status:
           description: Monitor group status used when there is no `result_groups`.
