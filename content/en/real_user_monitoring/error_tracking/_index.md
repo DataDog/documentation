@@ -1,5 +1,5 @@
 ---
-title: Error Tracking For Web And Mobile Applications
+title: Error Tracking for Web and Mobile Applications
 kind: documentation
 description: Learn how to search and manage errors collected from your web and mobile applications.
 further_reading:
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Datadog collects a lot of errors, and it is critical for your system's health to consistently monitor these errors. When there are so many individual error events, it becomes hard to identify which ones matter the most and which ones should be fixed first. By tracking, triaging, and debugging crashes, you can minimize the impact of fatal errors on your web and mobile application's user experience.
+It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging crashes, you can minimize the impact of fatal errors on your web and mobile applications' user experience.
 
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
 
@@ -38,13 +38,14 @@ Datadog collects a lot of errors, and it is critical for your system's health to
 
 Error Tracking automatically categorizes crashes collected from your web and mobile applications into issues in the [Error Tracking Explorer][1]. 
 
-Click on an issue to view debugging information such as the stack trace or a user session timeline, and metadata such as a user location, version, and any custom attributes you included in your crash reports. 
+Click on an issue to view debugging information, such as the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports. 
 
-You can set alerts on Error Tracking events to stay on top of fatal issues that may occur, along with the following actions:
+Error tracking enables you to:
 
-- **Grouping similar errors into issues** to reduce the noise and identifying the most important ones.
-- **Following issues over time** to know when they first started, if they are still ongoing, and how often they are occurring, which helps you identify the most important ones.
-- **Getting all the context needed in one place** to facilitate troubleshooting.
+- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
+- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
+- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
+- Collect all the necessary context in one place to facilitate troubleshooting.
 
 ## Further Reading
 

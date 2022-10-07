@@ -1,5 +1,5 @@
 ---
-title: Error Tracking For Backend Services
+title: Error Tracking for Backend Services
 kind: documentation
 description: Learn how to search and manage errors collected from your backend services.
 further_reading:
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Datadog collects a lot of errors, and it is critical for your system's health to consistently monitor these errors. When there are so many individual error events, it becomes hard to identify which ones matter the most and which ones should be fixed first. By tracking, triaging, and debugging errors, you can minimize the impact of fatal errors on your backend services.
+It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging stack traces, you can minimize the impact of fatal errors on your backend services.
 
 {{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="The Error Tracking Explorer for APM displaying issues from your backend services" style="width:100%;" >}}
 
@@ -24,7 +24,7 @@ Datadog collects a lot of errors, and it is critical for your system's health to
 
 <div class="alert alert-info">Error Tracking is available for all the languages supported by APM and does not require using a different SDK.</div>
 
-The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error spans within a trace are processed by Error Tracking **when they are located in the uppermost service span**, are called the _service entry span_. In order to be tracked, the span must contain the `error.stack`, `error.message`, and `error.fingerprint` [span tags][1].
+The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. If an error span within a trace is processed by Error Tracking **when it is located in the uppermost service span**, it is called a _service entry span_. This span must contain the `error.stack`, `error.message`, and `error.fingerprint` [span tags][1] to be tracked.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:90%;" >}}
 
@@ -36,11 +36,11 @@ Error Tracking automatically categorizes errors into issues collected from your 
 
 Click on an issue to see a summary of the error, the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
 
-You can set alerts on Error Tracking events to stay on top of fatal issues that may occur, along with the following actions:
-
-- **Grouping similar errors into issues** to turn this noisy flow of errors into a small list of manageable issues.
-- **Following issues over time** to show when they first started, if they are ongoing, and how often they are occurring, which helps you identify the most important ones.
-- **Getting all the context in one place** to facilitate troubleshooting.
+Error tracking enables you to:
+- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
+- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
+- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
+- Collect all the necessary context in one place to facilitate troubleshooting.
 
 ## Further Reading
 
