@@ -20,6 +20,13 @@ It is critical for your system's health to consistently monitor the errors colle
 
 {{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="The Error Tracking Explorer for APM displaying issues from your backend services" style="width:100%;" >}}
 
+Error Tracking enables you to:
+
+- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
+- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
+- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
+- Collect all the necessary context in one place to facilitate troubleshooting.
+
 ## Use span tags to track error spans
 
 <div class="alert alert-info">Error Tracking is available for all the languages supported by APM and does not require using a different SDK.</div>
@@ -35,12 +42,6 @@ Error Tracking computes a fingerprint for each error span it processes using the
 Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][1]. 
 
 Click on an issue to see a summary of the error, the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
-
-Error tracking enables you to:
-- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
-- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
-- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
-- Collect all the necessary context in one place to facilitate troubleshooting.
 
 ## Further Reading
 

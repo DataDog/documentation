@@ -23,6 +23,13 @@ It is critical for your system's health to consistently monitor the errors colle
 
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
 
+Error Tracking enables you to:
+
+- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
+- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
+- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
+- Collect all the necessary context in one place to facilitate troubleshooting.
+
 ## Upload crash reports
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation to upload source maps for your framework:" >}}
@@ -39,13 +46,6 @@ It is critical for your system's health to consistently monitor the errors colle
 Error Tracking automatically categorizes crashes collected from your web and mobile applications into issues in the [Error Tracking Explorer][1]. 
 
 Click on an issue to view debugging information, such as the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports. 
-
-Error tracking enables you to:
-
-- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
-- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
-- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
-- Collect all the necessary context in one place to facilitate troubleshooting.
 
 ## Further Reading
 
