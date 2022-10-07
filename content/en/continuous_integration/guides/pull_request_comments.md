@@ -1,5 +1,5 @@
 ---
-title: Enabling Test Summaries in GitHub Pull Requests
+title: Enabling Test Summaries in GitHub Pull Request Comments
 kind: guide
 ---
 
