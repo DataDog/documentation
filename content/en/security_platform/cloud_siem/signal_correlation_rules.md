@@ -29,9 +29,9 @@ Navigate to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule
 
 ### Set rules
 
-1. Select a rule for *Rule a*. Click the pencil icon to rename the rule. Use the *correlated by* dropdown to define the correlating attribute. You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows) for more information about the sliding window.
+1. Select a rule for **Rule a**. Click the pencil icon to rename the rule. Use the **correlated by** dropdown to define the correlating attribute. You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows) for more information about the sliding window.
 
-2. Select a rule for *Rule b* in the second Rule editor’s dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for *Rule a*.
+2. Select a rule for **Rule b** in the second Rule editor’s dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for **Rule a**.
 
 ### Set rule cases
 
@@ -51,7 +51,7 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
-In the *Notify* section, optionally, configure [notification targets][2] for each rule case.
+In the **Notify** section, optionally, configure [notification targets][2] for each rule case.
 
 #### Time windows
 
@@ -92,7 +92,7 @@ This JSON object is an example of event attributes that may be associated with a
 
 ```
 
-You could use the following in the *Say what’s happening* section:
+You could use the following in the **Say what’s happening** section:
 
 ```
 {{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
