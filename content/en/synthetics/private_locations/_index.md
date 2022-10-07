@@ -677,7 +677,7 @@ You can also **vertically scale** your private locations by increasing the load 
 
 For more information, see [Dimensioning Private Locations][18]. 
 
-In order to use private locations for continuous testing, the value you set for the `concurrency` parameter is the concurrency limit. For more information, see [Continuous Testing][23].
+In order to use private locations for continuous testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
 
 ## Monitor your private location
 
