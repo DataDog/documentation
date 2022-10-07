@@ -12195,7 +12195,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: The steps of the test.
+          description: Array of steps for the test.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
