@@ -1,19 +1,19 @@
 ---
-title: Synthetic Testing Tunnel
+title: Continuous Testing Tunnel
 kind: documentation
-description: Learn about local and remote CI/CD testing using Datadog's Synthetic testing tunnel.
+description: Learn about local and remote CI/CD testing using Datadog's Continuous Testing testing tunnel.
 aliases:
   - /synthetics/testing_tunnel
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
-  text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
+  text: "Incorporate Datadog Continuous Testing tests into your CI/CD pipeline"
 - link: "https://www.datadoghq.com/blog/internal-application-testing-with-datadog/"
   tag: "Blog"
   text: "Test internal applications with Datadog's testing tunnel and private locations"
 - link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
   tag: "Learning Center"
-  text: "Learn how to run Synthetic tests in a CI/CD pipeline"
+  text: "Learn how to run tests in a CI/CD pipeline"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a browser test"
@@ -25,9 +25,9 @@ further_reading:
 
 ## Overview
 
-The Synthetic testing tunnel creates short lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic tests on your private applications.  
+The Continuous Testing tunnel creates short lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic tests on your private applications.  
 
-Datadog recommends using the testing tunnel if you need to launch Synthetics tests against local versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can be used to trigger tests on ephemeral cloud environments.
+Datadog recommends using the testing tunnel if you need to launch Continuous Testing tests against local versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can be used to trigger tests on ephemeral cloud environments.
 
 ## What is the testing tunnel?
 

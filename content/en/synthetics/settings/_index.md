@@ -36,6 +36,7 @@ On the [Synthetic Monitoring Settings page][1], you can access and control the f
 * [Global Variables](#global-variables)
 * [Default Settings](#default-settings)
 * [Integration Settings](#integration-settings)
+* [Continuous Testing Settings][16]
 
 ## Private locations
 
@@ -215,3 +216,4 @@ If you are using the [custom role feature][12], add your user to any custom role
 [13]: /account_management/rbac/#create-a-custom-role
 [14]: /account_management/billing/usage_attribution
 [15]: /synthetics/guide/explore-rum-through-synthetics/
+[16]: /continuous_testing/settings/

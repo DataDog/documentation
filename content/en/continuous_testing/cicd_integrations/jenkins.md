@@ -1,7 +1,7 @@
 ---
 title: Jenkins
 kind: documentation
-description: Configure your Jenkins instance to run Synthetic tests in your CI/CD pipelines.
+description: Configure your Jenkins instance to run Continuous Testing tests in your CI/CD pipelines.
 aliases:
   - /synthetics/cicd_integrations/jenkins
 further_reading:
@@ -15,7 +15,7 @@ further_reading:
  
 ## Overview
  
-Add Synthetic tests to your Jenkins environment.
+Add Continuous Testing tests to your Jenkins environment.
  
 Datadog recommends discussing with your SRE and Infrastructure teams to determine a solution that models your existing Jenkins architecture and customizes an installation that fits your business requirements.
  
@@ -46,7 +46,7 @@ Install `@datadog/datadog-ci` globally for all relevant Node.js installations.
  
 #### Tags
  
-To run Synthetic tests with tags in a Jenkins Declarative pipeline:
+To run Continuous Testing tests with tags in a Jenkins Declarative pipeline:
  
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
@@ -69,7 +69,7 @@ pipeline {
  
 #### Custom test file
  
-To run Synthetic tests with a custom test file in a Jenkins Declarative pipeline:
+To run Continuous Testing tests with a custom test file in a Jenkins Declarative pipeline:
  
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {

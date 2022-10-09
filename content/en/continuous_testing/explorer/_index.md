@@ -1,7 +1,7 @@
 ---
-title: CI Results Explorer
+title: Explorer
 kind: documentation
-description: Examine CI jobs executing Synthetic tests.
+description: Examine CI jobs executing Continuous Testing tests.
 aliases: 
   - /synthetics/cicd_testing/ci_results_explorer
   - /synthetics/ci_results_explorer
@@ -20,26 +20,26 @@ further_reading:
 
 ## Overview
 
-The [CI Results Explorer][1] provides visibility into the CI jobs executing your Synthetic tests. 
+The [Explorer][1] provides visibility into the CI/CD jobs executing your Continuous Testing tests. 
 
-{{< img src="continuous_testing/explorer/explorer_ci_batches.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches.jpg" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 You can accomplish the following actions:
 
-* Investigate every CI job execution to identify and troubleshoot failing test results
+* Investigate every CI/CD job execution to identify and troubleshoot failing test results
 * Compare test results executed against various devices and browsers to pinpoint cross browser and device issues
-* Keep track of the progress of your tests in CI pipelines
+* Keep track of the progress of your tests in CI/CD pipelines
 * Identify flaky tests to fix
 
 ## Explore test batches
 
-The CI Results Explorer displays batches of tests run by [Synthetics and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
+The Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
-1. Click on a batch to open a side panel containing batch CI metadata and batch test results. 
+1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
 3. Click on a failing test result to see the detailed **Test Result** page and investigate the root cause of the issue.
 
-{{< img src="continuous_testing/explorer/explorer_ci_batches_sidepanel.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_sidepanel.png" alt="CI Results Explorer" style="width:100%;">}}
 
 For more information about search, see [Search Test Batches][4].
 
