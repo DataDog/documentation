@@ -178,8 +178,12 @@ Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-java
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 test {
-  if(project.hasProperty("dd-civisibility")) {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true"]
+  if (project.hasProperty("dd-civisibility")) {
+    jvmArgs += List.of(
+            "-javaagent:" + configurations.ddTracerAgent.asPath,
+            "-Ddd.service=my-java-app",
+            "-Ddd.civisibility.enabled=true"
+        )
   }
 }
 {{< /code-block >}}
