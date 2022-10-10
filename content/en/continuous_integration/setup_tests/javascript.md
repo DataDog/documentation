@@ -441,6 +441,12 @@ To enable Intelligent Test Runner the following environment variables need to be
 : Flag to enable test skipping. <br/>
 **Default**: `false`
 
+After setting these environment variables, run your tests as you normally do:
+
+```bash
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
+```
+
 ### UI activation
 In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][13].
 
