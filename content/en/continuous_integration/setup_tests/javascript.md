@@ -412,6 +412,48 @@ forEach([
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
 
+## Intelligent Test Runner
+
+<div class="alert alert-warning">Intelligent Test Runner is currently in closed beta.</div>
+
+Read more about Intelligent Test Runner here.
+
+To enable Intelligent Test Runner the following environment variables need to be set:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+: Enables or disables Agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+`DD_SITE` (Required)
+: The [Datadog site][2] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+`DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (Required)
+: Flag to enable git metadata upload.<br/>
+**Default**: `false`
+
+`DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
+: Flag to enable test skipping. <br/>
+**Default**: `false`
+
+### UI activation
+In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][1].
+
+### Compatibility
+Intelligent test runner is only supported in the following versions and testing frameworks:
+
+* `dd-trace>=3.4.0`
+* `jest>=24.8.0`
+  * Only `jest-circus/runner` is supported as `testRunner`.
+  * Only `jsdom` and `node` are supported as test environments.
+
+[1]: https://app.datadoghq.com/ci/settings/test-service
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
