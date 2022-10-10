@@ -425,11 +425,11 @@ To enable Intelligent Test Runner the following environment variables need to be
 **Default**: `false`
 
 `DD_API_KEY` (Required)
-: The [Datadog API key][1] used to upload the test results.<br/>
+: The [Datadog API key][13] used to upload the test results.<br/>
 **Default**: `(empty)`
 
 `DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
+: The [Datadog site][14] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -448,7 +448,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIV
 ```
 
 ### UI activation
-In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][13].
+In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][15].
 
 ### Compatibility
 Intelligent test runner is only supported in the following versions and testing frameworks:
@@ -475,4 +475,6 @@ Intelligent test runner is only supported in the following versions and testing 
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [12]: https://www.npmjs.com/package/mocha-each
-[13]: https://app.datadoghq.com/ci/settings/test-service
+[13]: https://app.datadoghq.com/organization-settings/api-keys
+[14]: /getting_started/site/
+[15]: https://app.datadoghq.com/ci/settings/test-service
