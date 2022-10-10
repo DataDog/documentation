@@ -8,7 +8,9 @@ further_reading:
   text: "Browse the available actions in the Actions Catalog"
 ---
 
-To build a workflow, navigate to the [**Workflows** page][1] under **Integrations**. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed. Hover over a workflow for the options to delete or clone the workflow. Toggle **My workflows** if you want to see only workflows that you created.
+You can create workflows or edit existing workflows from the [**Workflows** page][1] in Datadog. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed.
+- Hover over a workflow for the options to delete or clone the workflow.
+- Toggle **My workflows** if you want to see only workflows that you created.
 
 ## Create a workflow
 
@@ -81,7 +83,7 @@ An example of a workflow with a single step that sends a message to a Slack chan
 
 ## Context variables
 
-Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data that comes from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
+Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
 Context variables come in three varieties:
 - A small collection of standard **workflow variables** are present in all workflows.
@@ -110,11 +112,14 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 {{ Steps.Get_pull_request_status.state }}
 ```
 
+If you're not sure what variable you're looking for, Datadog suggests existing steps as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
+
 ### Trigger variables
 
 You can pass trigger variables into a workflow as inputs. Workflows accept a JSON object of comma-separated key-value pairs. Access a trigger variable in workflow steps using the syntax `{{ Trigger.key }}`. For example, to access the trigger variable `{ "user": "Bits" }`, use ` {{ Trigger.user }}` in the step.
 
-If you add a trigger variable that doesn't exist, the variable is automatically added as a workflow input.
+- If you add a trigger variable that doesn't exist, the variable is automatically added as a workflow input.
+- If you're not sure what variable you're looking for, Datadog suggests existing steps as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
 
 {{< img src="workflows/add-trigger-variable.mp4" alt="Adding a trigger variable to a step automatically adds it to the workflow" video="true" >}}
 
