@@ -44,6 +44,7 @@ To trigger a workflow from a Monitor:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
 1. Save your Workflow.
+1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
 1. In the message section, add the full workflow mention name:
    - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
@@ -53,6 +54,7 @@ To trigger a workflow from a Monitor:
 {{< img src="workflows/monitor-trigger.png" alt="Add a monitor trigger to the message section of a Monitor" >}}
 
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
+
 ## Trigger a workflow from a Security Signal Notification Rule
 
 You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
@@ -61,7 +63,7 @@ To trigger a workflow from a Notification Rule:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
 1. Save your Workflow.
-1. From the [Setup & Configuration][2] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
+1. From the [Setup & Configuration][3] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
 1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
 1. Click **Save and Activate**.
 
@@ -82,4 +84,5 @@ To schedule a workflow run:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /workflows/setup/
-[2]: https://app.datadoghq.com/security/configuration/rules
+[2]: https://app.datadoghq.com/monitors/manage
+[3]: https://app.datadoghq.com/security/configuration/rules
