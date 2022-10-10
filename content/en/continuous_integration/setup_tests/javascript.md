@@ -442,7 +442,7 @@ To enable Intelligent Test Runner the following environment variables need to be
 **Default**: `false`
 
 ### UI activation
-In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][1].
+In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][13].
 
 ### Compatibility
 Intelligent test runner is only supported in the following versions and testing frameworks:
@@ -451,8 +451,6 @@ Intelligent test runner is only supported in the following versions and testing 
 * `jest>=24.8.0`
   * Only `jest-circus/runner` is supported as `testRunner`.
   * Only `jsdom` and `node` are supported as test environments.
-
-[1]: https://app.datadoghq.com/ci/settings/test-service
 
 ## Further reading
 
@@ -471,3 +469,4 @@ Intelligent test runner is only supported in the following versions and testing 
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [12]: https://www.npmjs.com/package/mocha-each
+[13]: https://app.datadoghq.com/ci/settings/test-service
