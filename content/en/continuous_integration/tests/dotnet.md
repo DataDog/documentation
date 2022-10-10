@@ -232,6 +232,16 @@ To use the custom instrumentation in your .NET application:
 
 For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
 
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author info and files changed (without file contents).
+* Code coverage information, including file names and line numbers covered by each test.
+* Information from the CODEOWNERS file.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

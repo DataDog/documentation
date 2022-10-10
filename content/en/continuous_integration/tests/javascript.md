@@ -433,6 +433,15 @@ forEach([
 
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author info and files changed (without file contents).
+* Code coverage information, including file names and line numbers covered by each test.
+* Information from the CODEOWNERS file.
 
 ## Further reading
 
