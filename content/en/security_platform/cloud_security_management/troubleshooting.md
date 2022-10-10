@@ -55,7 +55,7 @@ The network based detections of Cloud Workload Security rely on the traffic cont
 
 For example, there is a known race with Cilium 1.9 and lower with the Datadog Agent (version 7.36 to 7.39.1, 7.39.2 excluded) that may happen when a new pod is started. The race can lead to loss of connectivity inside the pod, depending on how Cilium is configured.
 
-Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you should want to disable the network based detections of Cloud Workload Security by following the steps below:
+Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you should disable the network based detections of Cloud Workload Security by following the steps below:
 
 * Add the following parameter to your `system-probe.yaml` configuration file on host based installations:
 ```yaml

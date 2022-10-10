@@ -73,7 +73,7 @@ There are three types of monitoring that the Datadog Agent uses for Cloud Worklo
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
-[3]: /security_platform/cloud_workload_security/troubleshooting#compatibility_with_custom_kubernetes_network_plugins
+[3]: /security_platform/cloud_security_management/troubleshooting
 {{% /tab %}}
 
 {{% tab "Docker" %}}
