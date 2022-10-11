@@ -230,6 +230,64 @@ To use the custom instrumentation in your .NET application:
 
 For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
 
+## Intelligent Test Runner
+
+<div class="alert alert-warning">Intelligent Test Runner is currently in closed beta.</div>
+
+Read more about Intelligent Test Runner here.
+
+To enable Intelligent Test Runner the following environment variables need to be set:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+: Enables or disables Agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][9] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+`DD_APPLICATION_KEY` (Required)
+: The [Datadog Application key][10] used to query the tests to be skipped.<br/>
+**Default**: `(empty)`
+
+`DD_SITE` (Required)
+: The [Datadog site][11] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+`DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
+: Flag to enable intelligent test runner. <br/>
+**Default**: `false`
+
+After setting these environment variables, run your tests as you normally do:
+
+{{< tabs >}}
+
+{{% tab "dotnet test" %}}
+
+By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "VSTest.Console" %}}
+
+By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
+
+{{< code-block lang="bash" >}}
+dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### UI activation
+In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][12].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -243,3 +301,7 @@ For more information about how to add spans and tags for custom instrumentation,
 [6]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
 [7]: https://www.nuget.org/packages/Datadog.Trace
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[9]: https://app.datadoghq.com/organization-settings/api-keys
+[10]: https://app.datadoghq.com/organization-settings/application-keys
+[11]: /getting_started/site/
+[12]: https://app.datadoghq.com/ci/settings/test-service
