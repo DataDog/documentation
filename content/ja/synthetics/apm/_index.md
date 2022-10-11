@@ -26,17 +26,17 @@ Synthetic モニタリングとの APM インテグレーションを使用す�
 
 ## 使用方法
 
-本ページの記述は、APM の [HTTP API テスト][20]、[Multistep API テスト][21]、[ブラウザテスト][2]に適用されます。
+本ページの記述は、APM の [HTTP API テスト][1]、[Multistep API テスト][2]、[ブラウザテスト][3]に適用されます。
 
 ### 前提条件
 
-* サービス、およびテストを実行するエンドポイントが [APM 側でトレースされていること][3]。
+* サービス、およびテストを実行するエンドポイントが [APM 側でトレースされていること][4]。
 * サービスが HTTP サーバーを使用していること。
 * HTTP サーバーで、分散型トレーシングをサポートするライブラリが使用されていること。
 
 トレースされている HTTP サーバーを対象とするテストを作成します。Datadog は、サーバーによって生成されたトレースを、対応するテスト結果に自動的にリンクします。
 
-ブラウザテストの結果をリンクするには、APM インテグレーションヘッダーを追加する URL を許可します。これは、[Synthetic の設定][4]で行うことができます。 ワイルドカードには `*` を使用してください。
+ブラウザテストの結果をリンクするには、APM インテグレーションヘッダーを追加する URL を許可します。これは、[Synthetic の設定][5]で行うことができます。 ワイルドカードには `*` を使用してください。
 
 ```text
 https://*.datadoghq.com/*
@@ -48,13 +48,13 @@ https://*.datadoghq.com/*
 
 | ライブラリ                             | 最小バージョン                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][5]                  | [0.50.4][6]                |
-| [Go][7]                  | [1.10.0][8]                |
-| [Java][9]                  | [0.24.1][10]                |
-| [Ruby][11]                  | [0.20.0][12]                |
-| [Node.js][13]                  | [0.10.0][14]                |
-| [PHP][15]                  | [0.33.0][16]                |
-| [.NET][17]                  | [1.18.2][18]                |
+| [Python][6]                  | [0.50.4][7]                |
+| [Go][8]                  | [1.10.0][9]                |
+| [Java][10]                  | [0.24.1][11]                |
+| [Ruby][12]                  | [0.20.0][13]                |
+| [Node.js][14]                  | [0.10.0][15]                |
+| [PHP][16]                  | [0.33.0][17]                |
+| [.NET][18]                  | [1.18.2][19]                |
 
 ### トレースとテストのリンク方法
 
@@ -83,30 +83,31 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 
 ### トレースの保持期間
 
-これらのトレースは、[従来の APM トレースと同様に][19]保持されます。
+これらのトレースは、[従来の APM トレースと同様に][20]保持されます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/api_tests/
-[2]: /ja/synthetics/browser_tests/
-[3]: /ja/tracing/
-[4]: https://app.datadoghq.com/synthetics/settings/default
-[5]: /ja/tracing/setup_overview/setup/python/
-[6]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
-[7]: /ja/tracing/setup_overview/setup/go/
-[8]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[9]: /ja/tracing/setup_overview/setup/java/
-[10]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[11]: /ja/tracing/setup_overview/setup/ruby/
-[12]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[13]: /ja/tracing/setup_overview/setup/nodejs/
-[14]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[15]: /ja/tracing/setup_overview/setup/php/
-[16]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[17]: /ja/tracing/setup_overview/setup/dotnet-core/
-[18]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[19]: /ja/tracing/trace_retention/
-[20]: /ja/synthetics/api_tests/http_tests/?tab=requestoptions
-[21]: /ja/synthetics/multistep?tab=requestoptions
+
+
+[1]: /ja/synthetics/api_tests/http_tests/?tab=requestoptions
+[2]: /ja/synthetics/multistep?tab=requestoptions
+[3]: /ja/synthetics/browser_tests/
+[4]: /ja/tracing/
+[5]: https://app.datadoghq.com/synthetics/settings/default
+[6]: /ja/tracing/trace_collection/dd_libraries/python/
+[7]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
+[8]: /ja/tracing/trace_collection/dd_libraries/go/
+[9]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[10]: /ja/tracing/trace_collection/dd_libraries/java/
+[11]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[12]: /ja/tracing/trace_collection/dd_libraries/ruby/
+[13]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[14]: /ja/tracing/trace_collection/dd_libraries/nodejs/
+[15]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[16]: /ja/tracing/trace_collection/dd_libraries/php/
+[17]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[18]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/
+[19]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[20]: /ja/tracing/trace_pipeline/trace_retention/

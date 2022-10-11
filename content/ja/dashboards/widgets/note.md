@@ -1,34 +1,34 @@
 ---
-title: ノート &amp; リンクウィジェット
-kind: documentation
-description: スクリーンボードにテキストを表示する
 aliases:
-  - /ja/graphing/widgets/note/
+- /ja/graphing/widgets/note/
+description: ダッシュボードウィジェットにテキストを表示します。
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築方法について
+kind: documentation
+title: ノート &amp; リンクウィジェット
 ---
-ノート &amp; リンクウィジェットは、[フリーテキストウィジェット][1]に似ていますが、より多くの書式オプションを利用できます。
+
+**Notes & Links** ウィジェットは、[フリーテキストウィジェット][1]と似ていますが、より多くのフォーマットと表示オプションが含まれています。
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/note/using_link_note_widget.mp4" alt="ノートおよびリンクウィジェットのセットアップ" video="true" style="width:80%;" >}}
-
 1. 表示したいテキストを入力します。マークダウンがサポートされています。
-2. テキストサイズとノートの背景色を選択します。
-3. ポインターの位置を選択します。
+2. プリセットのテンプレートを選択するか、表示オプションをカスタマイズします。
+3. 文字サイズとウィジェットの背景色を選択します。
+4. テキストの位置を調整するには、**Alignment** ボタンをクリックします。パディングを入れない場合は、**No Padding** をクリックします。
+5. ポインターを含めるには、**Show Pointer** をクリックし、ドロップダウンメニューから位置を選択します。
 
-このウィジェットはテンプレート変数をサポートします。`$<VARIABLE_NAME>.value` 構文を使用して、ウィジェットのコンテンツを動的に更新します。たとえば、`$env.value` は、選択した環境へのリンクの値を更新します。
+{{< img src="dashboards/widgets/note/overview.png" alt="Notes & Links ウィジェットエディタの Markdown フィールドにテキストを追加する" style="width:90%;" >}}
 
-{{< img src="dashboards/widgets/note/template_var.jpeg" alt="ノートおよびリンクウィジェットテンプレート変数" style="width:100%;" >}}
+ウィジェットを作成する準備ができたら、**Save** をクリックします。
 
+このウィジェットはテンプレート変数をサポートしています。ウィジェットの内容を動的に更新するには `{TX-PL-LABEL}lt;VARIABLE_NAME>.value` 構文を使用します。
+
+{{< img src="dashboards/widgets/note/template_variable.png" alt="Notes & Links ウィジェットエディタの Markdown フィールドでテンプレート変数を使用する" style="width:90%;" >}}
+
+この例では、`$env.value` が選択された環境に対するリンクの値を更新します。
 
 ## API
 
@@ -38,7 +38,7 @@ further_reading:
 
 {{< dashboards-widgets-api >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

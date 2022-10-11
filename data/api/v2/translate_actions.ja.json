@@ -334,7 +334,7 @@
     "request_schema_description": "ログリストのリクエスト。"
   },
   "ListTagConfigurations": {
-    "description": "すべてのメトリクスを返します (指定された場合は追加のフィルターにマッチします)。",
+    "description": "Metrics Summary ページまたは Metrics without Limits™ で構成可能なすべてのメトリクスを返します (指定された場合は追加のフィルターに一致します)。",
     "summary": "メトリクスのリストを取得する"
   },
   "DeleteBulkTagsMetricsConfiguration": {

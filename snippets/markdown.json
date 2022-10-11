@@ -185,5 +185,21 @@
 			"{{< X >}}"
 		],
 		"description": "Check mark"
+	}, 
+
+	"Image": {
+		"prefix": ";;image",
+		"body": [
+			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" style=\"width:100%;\" >}}"
+		],
+		"description": "Image short-code"
+	},
+
+	"Video": {
+		"prefix": ";;video",
+		"body": [
+			"{{< img src=\"path/to/your/image-name-here.png\" alt=\"Your image description\" video=\"true\" >}}"
+		],
+		"description": "Video short-code"
 	}
 }

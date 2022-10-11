@@ -6205,20 +6205,12 @@ components:
       - rum
       - ci_pipelines
       - ci_tests
-      - audit
-      - events
-      - logs
-      - spans
       example: rum
       type: string
       x-enum-varnames:
       - RUM
       - CI_PIPELINES
       - CI_TESTS
-      - AUDIT
-      - EVENTS
-      - LOGS
-      - SPANS
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -12203,7 +12195,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: The steps of the test.
+          description: Array of steps for the test.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -31065,8 +31057,7 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get usage across your multi-org account. You must have the multi-org
-        feature enabled.
+      description: Get all usage across your account.
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -31123,7 +31114,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get usage across your multi-org account
+      summary: Get usage across your account
       tags:
       - Usage Metering
       x-menu-order: 8

@@ -355,7 +355,7 @@ Agent の v7.27.0 以降では、メモリ制限に達した場合にディス�
 
 メトリクスは `forwarder_storage_path` 設定で定義されたフォルダーに格納されます。デフォルトでは Unix システムの場合 `/opt/datadog-agent/run/transactions_to_retry`、Windows の場合 `C:\ProgramData\Datadog\run\transactions_to_retry` に設定されています。
 
-ストレージスペースの不足を避けるために、ストレージスペースの使用量合計が 95 パーセントを切った場合、Agent はメトリクスをディスクのみに保存します。この制限は `forwarder_storage_max_disk_ratio` 設定で定義されます。
+ストレージスペースの不足を避けるために、ストレージスペースの使用量合計が95パーセント未満の場合のみAgentはメトリクスをディスクに保存します。この制限は `forwarder_storage_max_disk_ratio` 設定で定義されます。
 
 ## その他の参考資料
 

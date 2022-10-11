@@ -1945,7 +1945,7 @@ main:
     parent: setup_tests
     identifier: ci_java
     weight: 102
-  - name: JavaScript
+  - name: JavaScript and TypeScript
     url: continuous_integration/setup_tests/javascript/
     parent: setup_tests
     identifier: ci_javascript
@@ -2453,21 +2453,26 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
     weight: 2
+  - name: Signal Correlation Rules
+    url: security_platform/cloud_siem/signal_correlation_rules
+    parent: cloud_siem
+    identifier: cloud_siem_signal_correlation_rules
+    weight: 3
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
-    weight: 3
+    weight: 4
   - name: Signals Explorer
     url: /security_platform/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
-    weight: 4
+    weight: 5
   - name: Guides
     url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 5
+    weight: 6
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform_heading
@@ -3198,25 +3203,25 @@ main:
     parent: nm_parent
     identifier: ndm
     weight: 300
-  - name: Setup
-    url: network_monitoring/devices/setup
+  - name: SNMP Metrics
+    url: network_monitoring/devices/snmp_metrics
     parent: ndm
-    identifier: ndm_setup
+    identifier: ndm_snmp_metrics
     weight: 301
-  - name: Profiles
-    url: network_monitoring/devices/profiles
-    parent: ndm
-    identifier: ndm_profiles
-    weight: 302
-  - name: Data Collected
-    url: network_monitoring/devices/data
-    parent: ndm
-    identifier: ndm_data
-    weight: 303
   - name: SNMP Traps
     url: network_monitoring/devices/snmp_traps
     parent: ndm
     identifier: ndm_snmptraps
+    weight: 302
+  - name: Profiles
+    url: network_monitoring/devices/profiles
+    parent: ndm
+    identifier: ndm_profiles
+    weight: 303
+  - name: Data Collected
+    url: network_monitoring/devices/data
+    parent: ndm
+    identifier: ndm_data
     weight: 304
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
@@ -6548,9 +6553,9 @@ api:
         - GetUsageSynthetics
       unstable: []
       order: 15
-  - name: Get usage across your multi-org account
-    url: '#get-usage-across-your-multi-org-account'
-    identifier: usage-metering-get-usage-across-your-multi-org-account
+  - name: Get usage across your account
+    url: '#get-usage-across-your-account'
+    identifier: usage-metering-get-usage-across-your-account
     parent: usage-metering
     generated: true
     params:
