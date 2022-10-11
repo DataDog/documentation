@@ -20,7 +20,7 @@ further_reading:
 
 Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams’ workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
 
-{{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The log forwarding page showing custom destinations highlighted and a splunk, HTTP endpoint, and Elasticsearch in the list of destinations" >}}
+{{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The log forwarding page showing custom destinations highlighted and splunk, HTTP endpoint, and Elasticsearch in the list of destinations" >}}
 
 **Note:** Only Datadog users with [logs_write_forwarding_rules][2] permission can create, edit, or delete custom destinations for forwarding logs.
 
