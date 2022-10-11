@@ -7,7 +7,7 @@ further_reading:
   text: "Explore security detection rules"
 - link: "/security_platform/notifications/"
   tag: "Documentation"
-  text: "Learn more about Security Platform notifications"
+  text: "Learn more about Security notifications"
 ---
 
 ## Overview

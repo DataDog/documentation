@@ -1,7 +1,8 @@
 ---
-title: Troubleshooting
+title: Troubleshooting Cloud Security Management
 kind: documentation
-description: "Troubleshooting for Cloud Workload Security."
+aliases:
+- /security_platform/cloud_workload_security/troubleshooting/
 ---
 
 ## Security Agent flare
