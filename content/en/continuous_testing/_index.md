@@ -1,7 +1,7 @@
 ---
 title: Continuous Testing
 kind: documentation
-description: With test automation, use fast, codeless, and reliable testing in your CI/CD pipelines to ship features with confidence.
+description: With Continuous Testing, use fast, codeless, and reliable testing in your CI/CD pipelines to ship features with confidence.
 disable_sidebar: true
 further_reading:
 - link: 'https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring'
@@ -18,32 +18,48 @@ further_reading:
   text: 'Troubleshoot Continuous Testing and CI/CD'
 ---
 
-With **integration and end-to-end testing in production and CI environments**, your development teams can proactively ensure that defective code does not impact your users' experience. 
+<div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashoards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
 
-You can run Synthetic tests on a CI pipeline in the [Datadog application][1], with the [API][2], or with [Terraform][2].
+Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product’s **entire lifecycle**. By offering **code-free** and **reliable** end-to-end testing, and integrating seamlessly with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
 
-## Set up private locations
+## Test with ease and speed
 
-Set the [concurrency value][3] for your private location to customize your continuous testing settings.
+Use automation to accelerate application testing and stop wasting engineering resources with the need to build, run, and maintain hand-coded tests. Save QA effort through time-saving and highly scalable features such as a [codeless web recorder][2], parallel test runs, and built-in multi-location testing. Test even earlier and across every level of your application stack, thanks to broad support for diverse protocols, frameworks, and APIs—including gRPC and WebSockets
 
-## Run tests with your integration and deployment processes
+## Improve test reliability 
 
-Leverage your Synthetic tests as [integration and end-to-end tests][4] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][4].
+Stay focused on building software through our resilient, scalable, and codeless tests that eliminate the burden of implementing test code. Gain confidence in your test results by minimizing false positives through self-healing browser tests and automatic test retries. Automate cross-browser testing to easily ensure the best end-user experience  
 
-{{< img src="synthetics/ci.png" alt="CI tests" style="width:100%;">}}
+## Increase efficiency through seamless integrations
 
-## Examine test results in your CI environment
+Fast-track your application development by testing and troubleshooting on the same unified platform. Use integrations with popular CI providers (GitHub, GitLab, Jenkins, CircleCI, Azure DevOps) and collaboration tools (Slack, Jira) to merge workflows and avoid context-switching. Gain unified control over test creation and state management with the Datadog Terraform provider. Leverage your Synthetic tests as [integration and end-to-end tests][3] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][3].
 
-Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [CI Results Explorer][5].
+## Accelerate troubleshooting
 
-{{< img src="continuous_testing/explorer/explorer_ci_batches.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
+Quickly find the root cause of failed test runs and reduce MTTR by performing tests within a unified monitoring platform. Gain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by Datadog APM integration. Enable developers to 'shift left' and implement testing as part of the CI/CD process, helping improve efficiency, release velocity, and business agility. Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [CI Results Explorer][4].
+
+
+{{< img src="continuous_testing/explorer_ci_batches.jpg" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
+
+## Ready to start?
+
+Ensure you have [Synthetic tests][5] configured, then find the documentation for your [CI/CD provider][1], or use the [datadog-ci NPM package][6] in your CI or CD pipelines. Then start exploring Datadog Continuous Testing runs in the [Explorer][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
-[3]: /synthetics/private_locations/configuration/#advanced-configuration
-[4]: /continuous_testing/cicd_integrations
-[5]: /continuous_testing/explorer
+
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /continuous_testing/cicd_integrations/
+[2]: /synthetics/browser_tests
+[3]: /continuous_testing/explorer
+[4]: https://app.datadoghq.com/synthetics/create#
+[5]: /synthetics/
+[6]: /continuous_testing/cicd_integrations/configuration

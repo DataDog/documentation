@@ -2761,66 +2761,71 @@ main:
     identifier: continuous_testing
     parent: ux_monitoring_heading
     weight: 200000
-  - name: Testing Tunnel
-    url: /continuous_testing/testing_tunnel
-    parent: continuous_testing
-    identifier: continuous_testing_testing_tunnel
-    weight: 1
   - name: CI/CD Integrations
     url: continuous_testing/cicd_integrations
     parent: continuous_testing
     identifier: continuous_testing_cicd_integrations
-    weight: 2
+    weight: 1
   - name: Configuration
     url: /continuous_testing/cicd_integrations/configuration
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_configuration
-    weight: 201
+    weight: 101
   - name: Azure DevOps Extension
     url: /continuous_testing/cicd_integrations/azure_devops_extension
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_azure_devops_extension
-    weight: 202
+    weight: 102
   - name: CircleCI Orb
     url: /continuous_testing/cicd_integrations/circleci_orb
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_circleci_orb
-    weight: 203
+    weight: 103
   - name: GitHub Actions
     url: /continuous_testing/cicd_integrations/github_actions
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_github_actions
-    weight: 204
+    weight: 104
   - name: GitLab
     url: /continuous_testing/cicd_integrations/gitlab
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_gitlab
-    weight: 205
+    weight: 105
   - name: Jenkins
     url: /continuous_testing/cicd_integrations/jenkins
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_jenkins
-    weight: 206
+    weight: 106
+  - name: Settings
+    url: /continuous_testing/settings
+    parent: continuous_testing
+    identifier: continuous_testing_settings
+    weight: 2
+  - name: Testing Tunnel
+    url: /continuous_testing/testing_tunnel
+    parent: continuous_testing
+    identifier: continuous_testing_testing_tunnel
+    weight: 3
   - name: Explorer
     url: continuous_testing/explorer/
     parent: continuous_testing
     identifier: continuous_testing_explorer
-    weight: 3
+    weight: 4
   - name: Search Test Batches
     url: continuous_testing/explorer/search/
     parent: continuous_testing_explorer
     identifier: continuous_testing_explorer_search
-    weight: 301
+    weight: 401
   - name: Search Syntax
     url: continuous_testing/explorer/search_syntax/
     parent: continuous_testing_explorer
     identifier: continuous_testing_explorer_search_syntax
-    weight: 302
+    weight: 402
   - name: Troubleshooting
     url: continuous_testing/troubleshooting/
     parent: continuous_testing
     identifier: continuous_testing_troubleshooting
-    weight: 4
+    weight: 5
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum
