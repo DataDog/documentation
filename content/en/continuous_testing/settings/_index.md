@@ -21,16 +21,17 @@ further_reading:
 
 ## Overview
 
-The Continuous Testing settings can be found within the [Synthetic Monitoring settings page][1].
+You can access Continuous Testing settings on the [Synthetic Monitoring Settings page][1].
 
 {{< img src="continuous_testing/continuous_testing_default.png" alt="Default settings for Continuous Testing" style="width:100%;">}}
 
-You can run one test sequentially by default. You can change this behaviour by setting a [parallelization value](#parallelization).
-
+By default, you can run one test sequentially. To change this behavior, set a [parallelization value](#parallelization) and save your selection.
 
 ## Parallelization
 
-Parallel tests are tests that run simultaneously in your continuous integration and delivery pipelines. This ensure you can:
+Parallel tests are tests that run simultaneously in your continuous integration and continuous delivery (CI/CD) pipelines. 
+
+This ensures you can:
 
 * Reduce pipeline duration and ship new features faster
 * Increase development confidence and speed of delivery
@@ -38,25 +39,26 @@ Parallel tests are tests that run simultaneously in your continuous integration 
 
 {{< img src="continuous_testing/continuous_testing_setting_parallelization.png" alt="Setting parallelization for Continuous Testing" style="width:100%;">}}
 
-
 ### Set parallelization
 
-* Select the parallelization option in the Continuous Testing settings page. 
-* Customize the parallelization you need based on how many tests you need to run in parallel.
-* Select `Save selection`
-* Confirm your selection.
+1. Under **Set your preferences**, select the **Parallelization** option. 
+2. Customize the parallelization you need based on how many tests you want to run in parallel.
+3. Click **Save Selection**.
+4. Confirm your selection.
 
 {{< img src="continuous_testing/continuous_testing_parallelization.png" alt="Parallelization turned on for Continuous Testing" style="width:100%;">}}
 
 ## Permissions
 
-In order to customize the parallelization for Continuous Testing, you must have `BILLING_EDIT` permissions. If you do not, the following message will be displayed:
+In order to customize the parallelization for Continuous Testing, you must have `BILLING_EDIT` permissions. 
 
-{{< img src="continuous_testing/continuous_testing_permissions.png" alt="Permissions in settings for Continuous Testing" style="width:100%;">}}
+Otherwise, the following error displays: `You're missing edit permission for Continuous Testing settings. You can run 15 tests in parallel. To increase this value, reach out to your administrator admin.email@datadoghq.com`
 
+For more information, see [Datadog Role Permissions][2].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/settings/
+[2]: /account_management/rbac/permissions/#billing-and-usage
