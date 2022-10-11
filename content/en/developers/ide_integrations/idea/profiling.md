@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-  The Datadog plugin for IntelliJ IDEA is an early access preview release intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>. If the plugin stops working unexpectedly, check for plugin updates. To leave feedback, check out our <a href="https://github.com/DataDog/datadog-for-intellij/discussions">GitHub discussions page</a>.
+  The Datadog plugin for IntelliJ IDEA is in Public Beta. It is intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their Java services. If the plugin stops working unexpectedly, check for plugin updates.
 {{< /beta-callout >}}
 
 After you add a service to your project, right-click on the service and click **Open in Profiling** to open a Profiling tab for the service. A profiling tab displays data for only one service, but you can have multiple tabs open simultaneously.
@@ -104,10 +104,8 @@ After you select a profile, a yellow dot appears next to the selected tab's titl
 ## What's next?
 
 - [Overview][1]: Return to the overview and setup instructions.
-- [Logging][2]: View Continuous Profiling data from within IDEA.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/ide_integrations/idea/
-[2]: /developers/ide_integrations/idea/logging/

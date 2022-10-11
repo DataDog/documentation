@@ -26,6 +26,3 @@ package.json              @DataDog/corpweb @DataDog/documentation
 
 # Partners
 /content/en/partners/                                   @KateYoak @DataDog/documentation
-
-# IDE Integrations
-/content/en/developers/ide_integrations/                @Datadog/ide-integration @DataDog/documentation
