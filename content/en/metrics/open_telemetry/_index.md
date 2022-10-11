@@ -17,9 +17,9 @@ To send OTel metrics to Datadog, you have two options: the Datadog Agent, or the
 
 ### Datadog Agent setup
 
-{{< img src="metrics/otel/datadog_exporter.png" alt="Exporter" style="width:80%;">}}
+{{< img src="metrics/otel/otlp_ingestion.png" alt="OTel SDKs/Libraries & Datadog Trace Library -> Datadog Agent -> Datadog" style="width:100%;">}}
 
-**OTel SDKs/Libraries** -> **Datadog Agent** -> **Datadog**
+
 
 #### Configuration
 
@@ -75,9 +75,8 @@ Using this setup facilitates collecting telemetry data from sources besides OTel
 
 If you want to use the OTel Collector, but you also want to keep a full range of Datadog capabilities, use the following setup:
 
-{{< img src="metrics/otel/otlp_ingestion.png" alt="Exporter" style="width:80%;">}}
+{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (e.g. Prometheus) -> Datadog Exporter inside OTel Collector -> Datadog" style="width:100%;">}}
 
-**OTel SDKs/Libraries** -> **OTel Collector** with the OTLP Exporter -> **Datadog Agent** -> **Datadog**
 
 #### Configuration
 
@@ -132,13 +131,13 @@ If you want to use the OTel Collector, but you also want to keep a full range of
 
 Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
 
-{{< img src="metrics/otel/dashboard.png" alt="Exporter" style="width:80%;">}}
+{{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][12]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][13] you choose to enable.
 
 ## Deployment-based limitations
 
-Depending on your setup, some components are not supported.
+The OpenTelemetry Collector has two primary development methods: Agent and Gateway. Depending on your development method, some components are not available.
 
 | Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
 | --- | --- | --- | --- | --- |
