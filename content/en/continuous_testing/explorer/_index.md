@@ -22,7 +22,7 @@ further_reading:
 
 The [Explorer][1] provides visibility into the CI/CD jobs executing your Continuous Testing tests. 
 
-{{< img src="continuous_testing/explorer_ci_batches.jpg" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 You can accomplish the following actions:
 
@@ -39,7 +39,7 @@ The Explorer displays batches of tests run by [Continuous Testing and your CI/CD
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
 3. Click on a failing test result to see the detailed **Test Result** page and investigate the root cause of the issue.
 
-{{< img src="continuous_testing/explorer_ci_batches_sidepanel.png" alt="CI Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the CI Results Explorer" style="width:100%;">}}
 
 For more information about search, see [Search Test Batches][4].
 
