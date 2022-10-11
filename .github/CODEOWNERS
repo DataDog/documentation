@@ -28,4 +28,4 @@ package.json              @DataDog/corpweb @DataDog/documentation
 /content/en/partners/                                   @KateYoak @DataDog/documentation
 
 # IDE Integrations
-/content/en/integrations/ide_integrations/              @Datadog/ide-integration @DataDog/documentation
+/content/en/developers/ide_integrations/              @Datadog/ide-integration @DataDog/documentation
