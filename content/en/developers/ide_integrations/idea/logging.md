@@ -1,9 +1,8 @@
 ---
-title: Doc Title
-kind: <UPDATE>
+title: Logging
+kind: documentation
 disable_toc: false
-aliases:
-- /path-to-old-doc/
+is_beta: true
 further_reading:
 - link: "/logs/log_collection/java/"
   tag: "Documentation"
@@ -12,6 +11,10 @@ further_reading:
   tag: "Documentation"
   text: "Log Explorer"
 ---
+
+{{< beta-callout url="#" >}}
+  The Datadog plugin for IntelliJ IDEA is an early access preview release intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>. If the plugin stops working unexpectedly, check for plugin updates. To leave feedback, check out our <a href="https://github.com/DataDog/datadog-for-intellij/discussions">GitHub discussions page</a>.
+{{< /beta-callout >}}
 
 The Datadog plugin for IntelliJ IDEA provides several ways to perform a [Datadog log query][1] directly from the source files in your project.
 
@@ -44,9 +47,17 @@ To quickly open a log query in Datadog without first modifying the log query:
 
 {{< img src="/developers/ide_integrations/idea/log-context-menu.png" alt="A bulb icon indicates an intention action" style="width:100%;" >}}
 
+## What's next?
+
+- [Overview][3]: Return to the overview and setup instructions.
+- [Profiling][4]: View Continuous Profiling data from within IDEA.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/
 [2]: https://www.jetbrains.com/help/idea/intention-actions.html
+[3]: /developers/ide_integrations/idea/
+[4]: /developers/ide_integrations/idea/profiling/

@@ -2,9 +2,14 @@
 title: IDE Integrations
 kind: Documentation
 disable_toc: false
+is_beta: true
 ---
 
-Use Datadog integrations in your IDE of choice to interact with Datadog services as you code.
+{{< beta-callout url="#" >}}
+  The Datadog plugin for IntelliJ IDEA is an early access preview release intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>. If the plugin stops working unexpectedly, check for plugin updates. To leave feedback, check out our <a href="https://github.com/DataDog/datadog-for-intellij/discussions">GitHub discussions page</a>.
+{{< /beta-callout >}}
+
+Use Datadog integrations in your preferred integrated development environment (IDE) to interact with Datadog services as you code.
 
 ## IntelliJ IDEA plugin
 

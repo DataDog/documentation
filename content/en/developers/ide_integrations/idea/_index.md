@@ -2,13 +2,16 @@
 title: Datadog Plugin For IntelliJ IDEA
 kind: documentation
 disable_toc: false
+is_beta: true
 further_reading:
 - link: "/account_management/api-app-keys/"
   tag: "Documentation"
   text: "Find out more about API and application keys."
 ---
 
-**BANNER**: This is an early access preview release of the Datadog plugin, intended for customers that use the [**Continuous Profiler**](https://docs.datadoghq.com/profiler/#pagetitle). If the plugin stops working unexpectedly, check for plugin updates. Consider leaving us [feeback](#feedback).
+{{< beta-callout url="#" >}}
+  The Datadog plugin for IntelliJ IDEA is an early access preview release intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>. If the plugin stops working unexpectedly, check for plugin updates. To leave feedback, check out our <a href="https://github.com/DataDog/datadog-for-intellij/discussions">GitHub discussions page</a>.
+{{< /beta-callout >}}
 
 ## Overview
 
@@ -76,12 +79,12 @@ The names of linked services persist with the project when you close it.
 ## What's next?
 
 Now that you've set up your Datadog plugin for IDEA, find out more about using the plugin in your java projects:
-- [Profiling][2]: 
-- [Logging][3]: 
+- [Profiling][2]: View Continuous Profiling data from within IDEA.
+- [Logging][3]: Perform pre-populated Log Queries from your code in IDEA.
 ## Feedback
 
 User feedback is very important to us. Let us know what you think about the plugin in our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
 
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
-[2]: /integrations/ide_integrations/idea/profiling/
-[3]: /integrations/ide_integrations/idea/logging/
+[2]: /developers/ide_integrations/idea/profiling/
+[3]: /developers/ide_integrations/idea/logging/
