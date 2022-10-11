@@ -82,7 +82,7 @@ The following span tags can be used to describe database spans:
 
 Additional attributes for specific database technologies use the prefix `db.<db.system>`.
 
-### Message Queue
+### Message queue
 
 The following span tags can be used to describe spans corresponding to messaging systems:
 
