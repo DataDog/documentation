@@ -133,7 +133,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
 
-6. [Optional] If runing on AWS, enable 'standard collection' in your AWS integration for additional visibility in NAT gateways Elastic Load Balancers, Application Load Balancers, and Newtork Load Balancers. This feature is not available in the Govcloud region.
+6. [Optional] If runing on AWS, enable 'standard collection' in your AWS integration for additional visibility  to Elastic Load Balancers, Application Load Balancers, and Network Load Balancers. This feature is not available in the Govcloud region.
 
 ### SELinux-enabled systems
 
