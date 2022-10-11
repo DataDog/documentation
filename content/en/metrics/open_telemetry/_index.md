@@ -17,6 +17,8 @@ To send OTel metrics to Datadog, you have two options: the Datadog Agent, or the
 
 ### Datadog Agent setup
 
+{{< img src="metrics/otel/datadog_exporter.png" alt="Exporter" style="width:80%;">}}
+
 **OTel SDKs/Libraries** -> **Datadog Agent** -> **Datadog**
 
 #### Configuration
@@ -73,6 +75,8 @@ Using this setup facilitates collecting telemetry data from sources besides OTel
 
 If you want to use the OTel Collector, but you also want to keep a full range of Datadog capabilities, use the following setup:
 
+{{< img src="metrics/otel/otlp_ingestion.png" alt="Exporter" style="width:80%;">}}
+
 **OTel SDKs/Libraries** -> **OTel Collector** with the OTLP Exporter -> **Datadog Agent** -> **Datadog**
 
 #### Configuration
@@ -126,8 +130,20 @@ If you want to use the OTel Collector, but you also want to keep a full range of
 
 ## Out-of-the-box dashboards
 
-Datadog provides many out-of-the-box dashboards for features and integrations. To use the , go to Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
 
+{{< img src="metrics/otel/dashboard.png" alt="Exporter" style="width:80%;">}}
+
+The **Host Metrics** dashboard is for data collected from the [host metrics receiver][12]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][13] you choose to enable.
+
+## Deployment-based limitations
+
+Depending on your setup, some components are not supported.
+
+| Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
+| --- | --- | --- | --- | --- |
+| as Gateway | | {{< X >}} | {{< X >}} | |
+| as Agent | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 
 ## Further reading
@@ -145,3 +161,5 @@ Datadog provides many out-of-the-box dashboards for features and integrations. T
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /getting_started/site/
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter/examples
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
