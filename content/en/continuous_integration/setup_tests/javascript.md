@@ -1,5 +1,5 @@
 ---
-title: JavaScript Tests
+title: JavaScript and TypeScript Tests
 kind: documentation
 further_reading:
     - link: "/continuous_integration/setup_tests/containers/"
@@ -29,6 +29,8 @@ Supported test frameworks:
 * Cucumber-js >= 7.0.0
 * Cypress >= 6.7.0
   * From `dd-trace>=1.4.0`
+
+The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ## Configuring reporting method
 
@@ -171,41 +173,9 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 {{% tab "Cypress" %}}
 
-### Cypress<10
-
-These are the instructions if you're using a version older than `cypress@10`.
-
-1. Set [`pluginsFile`][1] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][2]:
-{{< code-block lang="json" filename="cypress.json" >}}
-{
-  "pluginsFile": "dd-trace/ci/cypress/plugin"
-}
-{{< /code-block >}}
-
-If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // your previous code is before this line
-  require('dd-trace/ci/cypress/plugin')(on, config)
-}
-{{< /code-block >}}
-
-2. Add the following line to the [`supportFile`][3]:
-{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-// your previous code is before this line
-require('dd-trace/ci/cypress/support')
-{{< /code-block >}}
-
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-{{< code-block lang="bash" >}}
-DD_ENV=ci DD_SERVICE=my-ui-app npm test
-{{< /code-block >}}
-
 ### Cypress >=10
 
-Use the Cypress API documentation to [learn how to write plugins][4] for `cypress>=10`.
+Use the Cypress API documentation to [learn how to write plugins][1] for `cypress>=10`.
 
 In your `cypress.config.js` file, set the following:
 
@@ -215,16 +185,18 @@ const { defineConfig } = require('cypress')
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents: require('dd-trace/ci/cypress/plugin'),
-    supportFile: 'cypress/support/index.js'
+    supportFile: 'cypress/support/e2e.js'
   }
 })
 {{< /code-block >}}
 
 Your `supportFile` should look the same as in `cypress<10`:
 
-{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+{{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
 // your previous code is before this line
 require('dd-trace/ci/cypress/support')
+// also supported:
+// import 'dd-trace/ci/cypress/support'
 {{< /code-block >}}
 
 If you're using other Cypress plugins, your `cypress.config.js` file should contain the following:
@@ -240,6 +212,38 @@ module.exports = defineConfig({
     }
   }
 })
+{{< /code-block >}}
+
+### Cypress<10
+
+These are the instructions if you're using a version older than `cypress@10`.
+
+1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][3]:
+{{< code-block lang="json" filename="cypress.json" >}}
+{
+  "pluginsFile": "dd-trace/ci/cypress/plugin"
+}
+{{< /code-block >}}
+
+If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
+{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+module.exports = (on, config) => {
+  // your previous code is before this line
+  require('dd-trace/ci/cypress/plugin')(on, config)
+}
+{{< /code-block >}}
+
+2. Add the following line to the [`supportFile`][4]:
+{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+// your previous code is before this line
+require('dd-trace/ci/cypress/support')
+{{< /code-block >}}
+
+
+Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+
+{{< code-block lang="bash" >}}
+DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
 
@@ -266,18 +270,19 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about custom instrumentation, see the [NodeJS Custom Instrumentation documentation][1].
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the NodeJS custom instrumentation documentation.
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [RUM][5], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][6] guide.
+If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
 
-[1]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[2]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[3]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[4]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
-[5]: /real_user_monitoring/browser/#setup
-[6]: /continuous_integration/guides/rum_integration/
+[1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[3]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[6]: /real_user_monitoring/browser/#setup
+[7]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -285,7 +290,7 @@ If the browser application being tested is instrumented using [RUM][5], your Cyp
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the tracer. They can be either passed in on its `init()` function, or as environment variables:
+The following is a list of the most important configuration settings that can be used with the tracer.
 
 `service`
 : Name of the service or library under test.<br/>

@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-A security signal is generated when a threat is detected in the Datadog Security Platform. You can send notifications to keep your team informed when these signals are generated. 
+A security signal is generated when a threat is detected in Datadog Security. You can send notifications to keep your team informed when these signals are generated. 
 
 Notifications can be set up for specific [detection rules](#detection-rules-notifications) and also more broadly with [notification rules](#notification-rules). See [Notification Variables][1] to learn how to customize the notifications based on the signal's severity and specific context on the threat. 
 

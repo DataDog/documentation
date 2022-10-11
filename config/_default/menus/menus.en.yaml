@@ -14,7 +14,7 @@ main:
   - name: Log Management
     identifier: log_management_heading
     weight: 5000000
-  - name: Security Platform
+  - name: Security
     identifier: security_platform_heading
     weight: 6000000
   - name: UX Monitoring
@@ -1945,7 +1945,7 @@ main:
     parent: setup_tests
     identifier: ci_java
     weight: 102
-  - name: JavaScript
+  - name: JavaScript and TypeScript
     url: continuous_integration/setup_tests/javascript/
     parent: setup_tests
     identifier: ci_javascript
@@ -2396,7 +2396,7 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_guides
     weight: 5
-  - name: Security Platform Overview
+  - name: Security Overview
     url: security_platform/
     pre: security-platform
     identifier: security_platform
@@ -2453,21 +2453,26 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
     weight: 2
+  - name: Signal Correlation Rules
+    url: security_platform/cloud_siem/signal_correlation_rules
+    parent: cloud_siem
+    identifier: cloud_siem_signal_correlation_rules
+    weight: 3
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
-    weight: 3
+    weight: 4
   - name: Signals Explorer
     url: /security_platform/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
-    weight: 4
+    weight: 5
   - name: Guides
     url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 5
+    weight: 6
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform_heading
@@ -2479,30 +2484,45 @@ main:
     parent: cspm
     identifier: cspm_getting_started
     weight: 1
-  - name: Frameworks and Benchmarks
+  - name: Custom Rules
+    url: security_platform/cspm/custom_rules
+    parent: cspm
+    identifier: cspm_custom_rules
+    weight: 2
+  - name: Writing Custom Rules with Rego
+    url: security_platform/cloud_security_management/guide/writing_rego_rules/
+    parent: cspm_custom_rules
+    identifier: csm_rego_rules
+    weight: 201
+  - name: Cloud Resources Schema
+    url: security_platform/cspm/custom_rules/schema/
+    parent: cspm_custom_rules
+    identifier: cspm_schema_gcp
+    weight: 202
+  - name: Findings Reports
     url: security_platform/cspm/frameworks_and_benchmarks
     parent: cspm
-    weight: 2
+    weight: 3
   - name: OOTB Cloud Rules
     url: security_platform/default_rules/#cat-posture-management-cloud
     parent: cspm
     identifier: ootb_cloud_rules
-    weight: 3
+    weight: 4
   - name: OOTB Infrastructure Rules
     url: security_platform/default_rules/#cat-posture-management-infra
     parent: cspm
     identifier: ootb_infrastructure_rules
-    weight: 4
-  - name: Posture Findings
+    weight: 5
+  - name: Security Findings Explorer
     url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 4
+    weight: 6
   - name: Signals Explorer
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 5
+    weight: 7
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform_heading
@@ -2514,41 +2534,36 @@ main:
     parent: cloud_workload_security
     identifier: cws_getting_started
     weight: 1
-  - name: Agent Expressions
-    url: security_platform/cloud_workload_security/agent_expressions
-    parent: cloud_workload_security
-    identifier: cws_agent_expressions
-    weight: 2
-  - name: Workload Security Detection Rules
+  - name: Managing Detection Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
-    weight: 3
-  - name: Workload Security Events
-    url: security_platform/cloud_workload_security/backend
+    weight: 2
+  - name: Creating Custom Agent Rules
+    url: security_platform/cloud_workload_security/agent_expressions
     parent: cloud_workload_security
-    identifier: cws_backend_event_schema_documentation
-    weight: 4
+    identifier: cws_agent_expressions
+    weight: 3
   - name: OOTB Rules
     url: security_platform/default_rules#cat-workload-security
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
+    weight: 4
+  - name: CWS Events Formats
+    url: security_platform/cloud_workload_security/backend
+    parent: cloud_workload_security
+    identifier: cws_backend_event_schema_documentation
     weight: 5
-  - name: Signals Explorer
-    url: security_platform/explorer
-    parent: cloud_workload_security
-    identifier: cws_workload_signals_explorer
-    weight: 6
   - name: Guides
-    url: security_platform/cloud_workload_security/guide
+    url: security_platform/cloud_security_management/guide
     parent: cloud_workload_security
-    identifier: cws_guides
-    weight: 7
+    identifier: csm_guides
+    weight: 6
   - name: Troubleshooting
-    url: security_platform/cloud_workload_security/troubleshooting
+    url: security_platform/cloud_security_management/troubleshooting/
     parent: cloud_workload_security
-    identifier: cws_troubleshooting
-    weight: 8
+    identifier: csm_troubleshooting
+    weight: 7
   - name: Application Security Monitoring
     url: security_platform/application_security/
     parent: security_platform_heading
@@ -3198,25 +3213,25 @@ main:
     parent: nm_parent
     identifier: ndm
     weight: 300
-  - name: Setup
-    url: network_monitoring/devices/setup
+  - name: SNMP Metrics
+    url: network_monitoring/devices/snmp_metrics
     parent: ndm
-    identifier: ndm_setup
+    identifier: ndm_snmp_metrics
     weight: 301
-  - name: Profiles
-    url: network_monitoring/devices/profiles
-    parent: ndm
-    identifier: ndm_profiles
-    weight: 302
-  - name: Data Collected
-    url: network_monitoring/devices/data
-    parent: ndm
-    identifier: ndm_data
-    weight: 303
   - name: SNMP Traps
     url: network_monitoring/devices/snmp_traps
     parent: ndm
     identifier: ndm_snmptraps
+    weight: 302
+  - name: Profiles
+    url: network_monitoring/devices/profiles
+    parent: ndm
+    identifier: ndm_profiles
+    weight: 303
+  - name: Data Collected
+    url: network_monitoring/devices/data
+    parent: ndm
+    identifier: ndm_data
     weight: 304
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
@@ -6563,9 +6578,9 @@ api:
         - GetUsageSynthetics
       unstable: []
       order: 15
-  - name: Get usage across your multi-org account
-    url: '#get-usage-across-your-multi-org-account'
-    identifier: usage-metering-get-usage-across-your-multi-org-account
+  - name: Get usage across your account
+    url: '#get-usage-across-your-account'
+    identifier: usage-metering-get-usage-across-your-account
     parent: usage-metering
     generated: true
     params:

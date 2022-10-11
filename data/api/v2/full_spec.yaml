@@ -2026,7 +2026,7 @@ components:
             When it matches an integration name, Datadog automatically installs the
             corresponding parsers and facets.
 
-            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
           example: nginx
           type: string
         ddtags:
@@ -2038,7 +2038,7 @@ components:
           example: i-012345678
           type: string
         message:
-          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes)
 
             of your log. By default, Datadog ingests the value of the message attribute
             as the body of the log entry.
@@ -2054,7 +2054,7 @@ components:
             It is used to switch from Logs to APM, so make sure you define the same
             value when you use both products.
 
-            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
           example: payment
           type: string
       required:
@@ -2645,7 +2645,8 @@ components:
           format: int64
           type: integer
         resolved:
-          description: Timestamp when the incident's state was set to resolved.
+          description: Timestamp when the incident's state was last changed from active
+            or stable to resolved or completed.
           format: date-time
           nullable: true
           type: string
@@ -3154,11 +3155,6 @@ components:
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
-        resolved:
-          description: Timestamp when the incident's state was set to resolved.
-          format: date-time
-          nullable: true
-          type: string
         title:
           description: The title of the incident, which summarizes what happened.
           example: A test incident title
@@ -5272,6 +5268,7 @@ components:
         created_at:
           description: The POSIX timestamp of the monitor's creation in nanoseconds.
           example: 1646318692000
+          format: int64
           type: integer
         group_status:
           description: Monitor group status used when there is no `result_groups`.
@@ -8056,7 +8053,7 @@ components:
       - message
       type: object
     SecurityMonitoringSignalRuleQuery:
-      description: Query for matching rule on signals
+      description: Query for matching rule on signals.
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
@@ -8083,7 +8080,7 @@ components:
           type: string
         ruleId:
           description: Rule ID to match on signals.
-          example: d3f-ru1-e1d
+          example: org-ru1-e1d
           type: string
       required:
       - ruleId
@@ -8137,7 +8134,7 @@ components:
         queries:
           description: Queries for selecting logs which are part of the rule.
           items:
-            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponseQuery'
           type: array
         tags:
           description: Tags for generated signals.
@@ -8155,6 +8152,41 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+    SecurityMonitoringSignalRuleResponseQuery:
+      description: Query for matching rule on signals.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        correlatedByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        correlatedQueryIndex:
+          description: Index of the rule query used to retrieve the correlated field.
+          format: int32
+          maximum: 9
+          type: integer
+        defaultRuleId:
+          description: Default Rule ID to match on signals.
+          example: d3f-ru1-e1d
+          type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        ruleId:
+          description: Rule ID to match on signals.
+          example: org-ru1-e1d
+          type: string
+      type: object
     SecurityMonitoringSignalRuleType:
       description: The rule type.
       enum:
