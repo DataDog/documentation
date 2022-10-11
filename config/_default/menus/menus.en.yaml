@@ -11,18 +11,21 @@ main:
   - name: Application Performance
     identifier: apm_heading
     weight: 4000000
+  - name: Continuous Integration
+    identifier: ci_visibility_heading
+    weight: 5000000
   - name: Log Management
     identifier: log_management_heading
-    weight: 5000000
+    weight: 6000000
   - name: Security
     identifier: security_platform_heading
-    weight: 6000000
+    weight: 7000000
   - name: UX Monitoring
     identifier: ux_monitoring_heading
-    weight: 7000000
+    weight: 8000000
   - name: Administration
     identifier: administration_heading
-    weight: 8000000
+    weight: 9000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -1928,9 +1931,9 @@ main:
     url: continuous_integration/
     pre: ci
     identifier: ci
-    parent: apm_heading
+    parent: ci_visibility_heading
     weight: 150000
-  - name: Tracing Tests
+  - name: Setup Tests
     url: continuous_integration/setup_tests/
     parent: ci
     identifier: setup_tests
