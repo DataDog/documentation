@@ -46,7 +46,7 @@ DdLogs.warn('Lorem ipsum dolor sit amet...', {});
 DdLogs.error('Lorem ipsum dolor sit amet...', {});
 
 // RUM Views を手動で追跡
-DdRum.startView('<view-key>', 'View Url', {}, Date.now());
+DdRum.startView('<view-key>', 'View Name', {}, Date.now());
 //...
 DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
 

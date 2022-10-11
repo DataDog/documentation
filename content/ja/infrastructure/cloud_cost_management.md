@@ -34,7 +34,7 @@ AWS の [Cost and Usage Report の作成][1]の説明に従い、Datadog Cloud C
 
 ドロップダウンメニューから AWS 管理アカウントを選択し、Datadog がこのアカウントに関連するタグを表示できるようにします。同じような名前の管理アカウントが複数ある場合、選択したアカウントに関連するタグを表示し、必要な特定のアカウントを選択したことを確認します。
 
-**注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][6]からコストと使用量のレポートを送信することを推奨しています。AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、Datadog がメンバーアカウントを完全に視覚化できるように、**管理アカウント**の[設定][7]で次のオプションが選択されていることを確認してください。
+**注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][2]からコストと使用量のレポートを送信することを推奨しています。AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、Datadog がメンバーアカウントを完全に視覚化できるように、**管理アカウント**の[設定][3]で次のオプションが選択されていることを確認してください。
 
 * **リンクされたアカウントへのアクセス**
 * **リンクされたアカウントの払い戻しおよびクレジット**
@@ -42,7 +42,7 @@ AWS の [Cost and Usage Report の作成][1]の説明に従い、Datadog Cloud C
 
 ### Cost and Usage Report を探す
 
-セットアップの前提条件のセクションで作成したレポートから移動してしまった場合は、AWS のドキュメントに従って [Cost and Usage Report の詳細][2]を見つけて表示します。
+セットアップの前提条件のセクションで作成したレポートから移動してしまった場合は、AWS のドキュメントに従って [Cost and Usage Report の詳細][4]を見つけて表示します。
 
 Datadog が Cost and Usage Report を検索できるようにするには、対応する詳細情報をフィールドに入力します。
 
@@ -53,7 +53,7 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
 
 ### Cost and Usage Report へのアクセス構成
 
-以下の JSON を使用して[ポリシーを作成][3]することで、Datadog が CUR とそれが格納されている s3 バケットにアクセスする権限を持つように AWS を構成します。
+以下の JSON を使用して[ポリシーを作成][5]することで、Datadog が CUR とそれが格納されている s3 バケットにアクセスする権限を持つように AWS を構成します。
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -86,11 +86,20 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
       {
           "Sid": "DDCloudCostListCURs",
           "Action": [
-            "cur:DescribeReportDefinitions"
+              "cur:DescribeReportDefinitions"
           ],
           "Effect": "Allow",
           "Resource": "*"
-        }
+      },
+      {
+          "Sid": "DDCloudCostListOrganizations",
+          "Action": [
+              "organizations:Describe*",
+              "organizations:List*"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+      }
   ]
 }
 {{< /code-block >}}
@@ -123,7 +132,7 @@ Datadog のインテグレーションロールに新しい S3 ポリシーを�
 
 Datadog は、インジェストされたコストデータにタグを追加し、コストをさらに分解して理解できるようにします。
 
-追加されたタグは、システムが Datadog に提供する観測可能データ、[AWS リソースタグ][4]で構成されたリソースからのデータ、[Cost and Usage Report (CUR)][5] とコストデータの関連付けを行うものです。
+追加されたタグは、システムが Datadog に提供する観測可能データ、[AWS リソースタグ][6]で構成されたリソースからのデータ、[Cost and Usage Report (CUR)][7] とコストデータの関連付けを行うものです。
 
 また、データのフィルタリングやグループ化には、以下のタグが利用できます。
 
@@ -144,9 +153,9 @@ Datadog は、インジェストされたコストデータにタグを追加し
 {{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト"  >}}
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
-[2]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
-[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
-[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
-[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+[3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
+[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[6]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+[7]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html

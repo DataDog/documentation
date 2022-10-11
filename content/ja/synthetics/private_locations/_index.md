@@ -157,7 +157,7 @@ Datadog はシークレットを保存しないので、**View Installation Inst
 
 ### プライベートロケーションをインストールする
 
-タスクの定義では、環境変数 `DATADOG_API_KEY`、`DATADOG_ACCESS_KEY`、`DATADOG_SECRET_ACCESS_KEY`、`DATADOG_PRIVATE_KEY` を使用することが可能です。
+タスクの定義では、環境変数 `DATADOG_API_KEY`、`DATADOG_ACCESS_KEY`、`DATADOG_SECRET_ACCESS_KEY`、`DATADOG_PUBLIC_KEY_PEM`、`DATADOG_PRIVATE_KEY` を使用することが可能です。
 
 次でプライベートロケーションを起動します。
 
