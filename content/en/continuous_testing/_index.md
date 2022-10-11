@@ -31,27 +31,25 @@ Thanks to a broad support of diverse protocols, frameworks, and APIs—including
 
 ## Improve test reliability 
 
-Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][3]. Gain confidence in your test results by minimizing false positives through self-healing browser tests and automatic test retries. 
-
-To ensure your users have the best experience, automate cross-browser testing.
+Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][3]. Gain confidence in your test results by minimizing false positives through self-healing browser tests and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2].
 
 ## Increase efficiency through seamless integrations
 
-Fast-track your application development by testing and troubleshooting in one platform. Use integrations with CI providers such as GitHub, GitLab, Jenkins, CircleCI, and Azure DevOps, and collaboration tools such as Slack and Jira to merge workflows and prevent context-switching. 
+Fast-track your application development by testing and troubleshooting in one platform. Use integrations with CI providers such as [GitHub][4], [GitLab][5], [Jenkins][6], [CircleCI][7], and [Azure DevOps][8], and collaboration tools such as Slack or Jira to merge workflows and prevent context switching. 
 
-You can use the [Datadog Terraform provider][4] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][5] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][5].
+You can use the [Datadog Terraform provider][9] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][10] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][10].
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform allows you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][8]. 
+Performing tests in a unified monitoring platform allows you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][11]. 
 
-Enable developers to "shift left" and implement testing as part of the CI/CD process, which improves efficiency, release velocity, and business agility. Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [Explorer][6].
+Enable developers to "shift left" and implement testing as part of the CI/CD process, which improves efficiency, release velocity, and business agility. Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [Explorer][12].
 
-{{< img src="continuous_testing/explorer_ci_batches.jpg" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
-Once you have configured some [Synthetic tests][3], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][7] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Explorer][5].
+Once you have configured some [Synthetic tests][3], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][13] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Explorer][10].
 
 ## Further reading
 
@@ -60,8 +58,13 @@ Once you have configured some [Synthetic tests][3], see the documentation for yo
 [1]: /continuous_testing/cicd_integrations/
 [2]: /synthetics/browser_tests
 [3]: /synthetics/
-[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/
-[5]: /continuous_testing/explorer
-[6]: https://app.datadoghq.com/synthetics/create#
-[7]: /continuous_testing/cicd_integrations/configuration
-[8]: /synthetics/apm/
+[4]: /continuous_testing/cicd_integrations/github_actions
+[5]: /continuous_testing/cicd_integrations/gitlab
+[6]: /continuous_testing/cicd_integrations/jenkins
+[7]: /continuous_testing/cicd_integrations/circleci_orb
+[8]: /continuous_testing/cicd_integrations/azure_devops_extension
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/
+[10]: /continuous_testing/explorer
+[11]: /synthetics/apm/
+[12]: https://app.datadoghq.com/synthetics/create#
+[13]: /continuous_testing/cicd_integrations/configuration
