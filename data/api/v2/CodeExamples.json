@@ -254,6 +254,13 @@
       "description": "Update an existing incident returns \"OK\" response"
     }
   ],
+  "UpdateIncidentAttachments": [
+    {
+      "group": "incidents",
+      "suffix": "_3881702075",
+      "description": "Create an incident attachment returns \"OK\" response"
+    }
+  ],
   "CreateIncident": [
     {
       "group": "incidents",
@@ -278,6 +285,13 @@
       "group": "incidents",
       "suffix": "_2665616954",
       "description": "Get a list of incidents returns \"OK\" response with pagination"
+    }
+  ],
+  "ListIncidentAttachments": [
+    {
+      "group": "incidents",
+      "suffix": "_2457735435",
+      "description": "Get incident attachments returns \"OK\" response"
     }
   ],
   "GetIncident": [
@@ -664,6 +678,13 @@
       "description": "Get a list of RUM events returns \"OK\" response with pagination"
     }
   ],
+  "GetRUMApplications": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "List all the RUM applications returns \"OK\" response"
+    }
+  ],
   "SearchRUMEvents": [
     {
       "group": "rum",
@@ -674,6 +695,13 @@
       "group": "rum",
       "suffix": "_574690310",
       "description": "Search RUM events returns \"OK\" response with pagination"
+    }
+  ],
+  "UpdateRUMApplication": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Update a RUM application returns \"OK\" response"
     }
   ],
   "AddUserToRole": [
@@ -794,6 +822,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_914562040",
+      "description": "Create a detection rule with type 'signal_correlation' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
@@ -838,6 +871,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Get a security filter returns \"OK\" response"
+    }
+  ],
+  "GetSecurityMonitoringSignal": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a signal's details returns \"OK\" response"
     }
   ],
   "ListSecurityFilters": [
@@ -906,6 +946,13 @@
       "group": "usage_metering",
       "suffix": "",
       "description": "Get cost across multi-org account returns \"OK\" response"
+    }
+  ],
+  "GetHistoricalCostByOrg": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Get historical cost across your account returns \"OK\" response"
     }
   ],
   "GetHourlyUsage": [

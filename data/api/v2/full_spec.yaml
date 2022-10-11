@@ -145,6 +145,26 @@ components:
       required: true
       schema:
         type: string
+    IncidentAttachmentFilterQueryParameter:
+      description: Specifies which types of attachments are included in the response.
+      explode: false
+      in: query
+      name: filter[attachment_type]
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentAttachmentAttachmentType'
+        type: array
+    IncidentAttachmentIncludeQueryParameter:
+      description: Specifies which types of related objects are included in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentAttachmentRelatedObject'
+        type: array
     IncidentIDPathParameter:
       description: The UUID of the incident.
       in: path
@@ -2006,7 +2026,7 @@ components:
             When it matches an integration name, Datadog automatically installs the
             corresponding parsers and facets.
 
-            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
           example: nginx
           type: string
         ddtags:
@@ -2018,7 +2038,7 @@ components:
           example: i-012345678
           type: string
         message:
-          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes)
 
             of your log. By default, Datadog ingests the value of the message attribute
             as the body of the log entry.
@@ -2034,7 +2054,7 @@ components:
             It is used to switch from Logs to APM, so make sure you define the same
             value when you use both products.
 
-            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
           example: payment
           type: string
       required:
@@ -2138,6 +2158,243 @@ components:
           format: binary
           type: string
           x-mimetype: application/xml
+      type: object
+    IncidentAttachmentAttachmentType:
+      description: The type of the incident attachment attributes.
+      enum:
+      - link
+      - postmortem
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+      - POSTMORTEM
+    IncidentAttachmentAttributes:
+      description: The attributes object for an attachment.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
+      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
+      type: object
+    IncidentAttachmentData:
+      description: A single incident attachment.
+      example:
+        attributes:
+          attachment:
+            documentUrl: ''
+            title: Postmortem IR-123
+          attachment_type: postmortem
+        id: 00000000-abcd-0002-0000-000000000000
+        relationships:
+          last_modified_by_user:
+            data:
+              id: 00000000-0000-0000-cccc-000000000000
+              type: users
+        type: incident_attachments
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentAttachmentAttributes'
+        id:
+          description: A unique identifier that represents the incident attachment.
+          example: 00000000-abcd-0001-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentAttachmentRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      - attributes
+      - id
+      - relationships
+      type: object
+    IncidentAttachmentLinkAttachmentType:
+      default: link
+      description: The type of link attachment attributes.
+      enum:
+      - link
+      example: link
+      type: string
+      x-enum-varnames:
+      - LINK
+    IncidentAttachmentLinkAttributes:
+      description: The attributes object for a link attachment.
+      properties:
+        attachment:
+          $ref: '#/components/schemas/IncidentAttachmentLinkAttributesAttachmentObject'
+        attachment_type:
+          $ref: '#/components/schemas/IncidentAttachmentLinkAttachmentType'
+      required:
+      - attachment_type
+      - attachment
+      type: object
+    IncidentAttachmentLinkAttributesAttachmentObject:
+      description: The link attachment.
+      properties:
+        documentUrl:
+          description: The URL of this link attachment.
+          example: https://www.example.com/webstore-failure-runbook
+          type: string
+        title:
+          description: The title of this link attachment.
+          example: Runbook for webstore service failures
+          type: string
+      required:
+      - documentUrl
+      - title
+      type: object
+    IncidentAttachmentPostmortemAttachmentType:
+      default: postmortem
+      description: The type of postmortem attachment attributes.
+      enum:
+      - postmortem
+      example: postmortem
+      type: string
+      x-enum-varnames:
+      - POSTMORTEM
+    IncidentAttachmentPostmortemAttributes:
+      description: The attributes object for a postmortem attachment.
+      properties:
+        attachment:
+          $ref: '#/components/schemas/IncidentAttachmentsPostmortemAttributesAttachmentObject'
+        attachment_type:
+          $ref: '#/components/schemas/IncidentAttachmentPostmortemAttachmentType'
+      required:
+      - attachment_type
+      - attachment
+      type: object
+    IncidentAttachmentRelatedObject:
+      description: The object related to an incident attachment.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
+    IncidentAttachmentRelationships:
+      description: The incident attachment's relationships.
+      properties:
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    IncidentAttachmentType:
+      default: incident_attachments
+      description: The incident attachment resource type.
+      enum:
+      - incident_attachments
+      example: incident_attachments
+      type: string
+      x-enum-varnames:
+      - INCIDENT_ATTACHMENTS
+    IncidentAttachmentUpdateAttributes:
+      description: Incident attachment attributes.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
+      - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
+      type: object
+    IncidentAttachmentUpdateData:
+      description: A single incident attachment.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentAttachmentUpdateAttributes'
+        id:
+          description: A unique identifier that represents the incident attachment.
+          example: 00000000-abcd-0001-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      type: object
+    IncidentAttachmentUpdateRequest:
+      description: The update request for an incident's attachments.
+      properties:
+        data:
+          description: 'An array of incident attachments. An attachment object without
+            an "id" key indicates that you want to
+
+            create that attachment. An attachment object without an "attributes" key
+            indicates that you want to
+
+            delete that attachment. An attachment object with both the "id" key and
+            a populated "attributes" object
+
+            indicates that you want to update that attachment.'
+          example:
+          - attributes:
+              attachment:
+                documentUrl: https://app.datadoghq.com/notebook/123
+                title: Postmortem IR-123
+              attachment_type: postmortem
+            id: 00000000-abcd-0002-0000-000000000000
+            type: incident_attachments
+          - attributes:
+              attachment:
+                documentUrl: https://www.example.com/webstore-failure-runbook
+                title: Runbook for webstore service failures
+              attachment_type: link
+            type: incident_attachments
+          - id: 00000000-abcd-0003-0000-000000000000
+            type: incident_attachments
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentUpdateData'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentAttachmentUpdateResponse:
+      description: The response object containing the created or updated incident
+        attachments.
+      properties:
+        data:
+          description: 'An array of incident attachments. Only the attachments that
+            were created or updated by the request are
+
+            returned.'
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentAttachmentsPostmortemAttributesAttachmentObject:
+      description: The postmortem attachment.
+      properties:
+        documentUrl:
+          description: The URL of this notebook attachment.
+          example: https://app.datadoghq.com/notebook/123
+          type: string
+        title:
+          description: The title of this postmortem attachment.
+          example: Postmortem IR-123
+          type: string
+      required:
+      - documentUrl
+      - title
+      type: object
+    IncidentAttachmentsResponse:
+      description: The response object containing an incident's attachments.
+      properties:
+        data:
+          description: An array of incident attachments.
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentAttachmentsResponseIncludedItem'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentAttachmentsResponseIncludedItem:
+      description: An object related to an attachment that is included in the response.
+      oneOf:
+      - $ref: '#/components/schemas/User'
       type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
@@ -2303,9 +2560,11 @@ components:
       description: Object related to an incident.
       enum:
       - users
+      - attachments
       type: string
       x-enum-varnames:
       - USERS
+      - ATTACHMENTS
     IncidentResponse:
       description: Response with an incident.
       properties:
@@ -2380,17 +2639,14 @@ components:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           nullable: true
           type: array
-        postmortem_id:
-          description: The UUID of the postmortem object attached to the incident.
-          example: 00000000-0000-0000-7890-000000000000
-          type: string
         public_id:
           description: The monotonically increasing integer ID for the incident.
           example: 1
           format: int64
           type: integer
         resolved:
-          description: Timestamp when the incident's state was set to resolved.
+          description: Timestamp when the incident's state was last changed from active
+            or stable to resolved or completed.
           format: date-time
           nullable: true
           type: string
@@ -2448,6 +2704,7 @@ components:
       description: An object related to an incident that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/IncidentAttachmentData'
       type: object
     IncidentResponseMeta:
       description: The metadata object containing pagination metadata.
@@ -2479,6 +2736,8 @@ components:
     IncidentResponseRelationships:
       description: The incident's relationships from a response.
       properties:
+        attachments:
+          $ref: '#/components/schemas/RelationshipToIncidentAttachment'
         commander_user:
           $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
@@ -2487,8 +2746,6 @@ components:
           $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
         last_modified_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
-        postmortem:
-          $ref: '#/components/schemas/RelationshipToIncidentPostmortem'
       type: object
     IncidentServiceCreateAttributes:
       description: The incident service's attributes for a create request.
@@ -2898,11 +3155,6 @@ components:
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
-        resolved:
-          description: Timestamp when the incident's state was set to resolved.
-          format: date-time
-          nullable: true
-          type: string
         title:
           description: The title of the incident, which summarizes what happened.
           example: A test incident title
@@ -2959,7 +3211,6 @@ components:
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
               modified: '2020-09-17T14:16:58.696424+00:00'
-              postmortem_id: 00000000-0000-bbbb-0000-000000000000
               public_id: 1
               resolved: null
               severity: SEV-1
@@ -2970,6 +3221,12 @@ components:
               title: Example Incident
             id: 00000000-aaaa-0000-0000-000000000000
             relationships:
+              attachments:
+                data:
+                - id: 00000000-9999-0000-0000-000000000000
+                  type: incident_attachments
+                - id: 00000000-1234-0000-0000-000000000000
+                  type: incident_attachments
               commander_user:
                 data:
                   id: 00000000-0000-0000-cccc-000000000000
@@ -2988,10 +3245,6 @@ components:
                 data:
                   id: 00000000-0000-0000-cccc-000000000000
                   type: users
-              postmortem:
-                data:
-                  id: 00000000-9999-0000-0000-000000000000
-                  type: incident_postmortems
             type: incidents
           - attributes:
               created: '2020-04-21T15:34:08.627205+00:00'
@@ -3003,7 +3256,6 @@ components:
               customer_impacted: false
               detected: '2020-04-14T00:00:00+00:00'
               modified: '2020-09-17T14:16:58.696424+00:00'
-              postmortem_id: 00000000-6006-0000-0000-000000000000
               public_id: 2
               resolved: null
               severity: SEV-5
@@ -3014,6 +3266,10 @@ components:
               title: Example Incident 2
             id: 00000000-1111-0000-0000-000000000000
             relationships:
+              attachments:
+                data:
+                - id: 00000000-9999-0000-0000-000000000000
+                  type: incident_attachments
               commander_user:
                 data:
                   id: 00000000-aaaa-0000-0000-000000000000
@@ -3032,10 +3288,6 @@ components:
                 data:
                   id: 00000000-aaaa-0000-0000-000000000000
                   type: users
-              postmortem:
-                data:
-                  id: 00000000-6006-0000-0000-000000000000
-                  type: incident_postmortems
             type: incidents
           items:
             $ref: '#/components/schemas/IncidentResponseData'
@@ -5016,6 +5268,7 @@ components:
         created_at:
           description: The POSIX timestamp of the monitor's creation in nanoseconds.
           example: 1646318692000
+          format: int64
           type: integer
         group_status:
           description: Monitor group status used when there is no `result_groups`.
@@ -6233,6 +6486,30 @@ components:
             from the other indexes
           type: string
       type: object
+    RelationshipToIncidentAttachment:
+      description: A relationship reference for attachments.
+      properties:
+        data:
+          description: An array of incident attachments.
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentAttachmentData'
+          type: array
+      required:
+      - data
+      type: object
+    RelationshipToIncidentAttachmentData:
+      description: The attachment relationship data.
+      properties:
+        id:
+          description: A unique identifier that represents the attachment.
+          example: 00000000-0000-abcd-1000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - id
+      - type
+      type: object
     RelationshipToIncidentIntegrationMetadataData:
       description: A relationship reference for an integration metadata object.
       example:
@@ -7200,62 +7477,9 @@ components:
       type: object
     SecurityMonitoringRuleCreatePayload:
       description: Create a new rule.
-      properties:
-        cases:
-          description: Cases for generating signals.
-          example: []
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
-          type: array
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
-        hasExtendedTitle:
-          description: Whether the notifications include the triggering group-by values
-            in their title.
-          example: true
-          type: boolean
-        isEnabled:
-          description: Whether the rule is enabled.
-          example: true
-          type: boolean
-        message:
-          description: Message for generated signals.
-          example: ''
-          type: string
-        name:
-          description: The name of the rule.
-          example: My security monitoring rule.
-          type: string
-        options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
-        queries:
-          description: Queries for selecting logs which are part of the rule.
-          example: []
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQueryCreate'
-          type: array
-        tags:
-          description: Tags for generated signals.
-          example:
-          - env:prod
-          - team:security
-          items:
-            description: Tag.
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
-      required:
-      - name
-      - isEnabled
-      - queries
-      - options
-      - cases
-      - message
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleCreatePayload'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRuleCreatePayload'
       type: object
     SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
       description: 'If true, signals in non-production environments have a lower severity
@@ -7480,39 +7704,9 @@ components:
       type: object
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        distinctFields:
-          description: Field for which the cardinality is measured. Sent as an array.
-          items:
-            description: Field.
-            type: string
-          type: array
-        groupByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        metric:
-          description: 'The target field to aggregate over when using the sum or max
-
-            aggregations.'
-          type: string
-        metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        query:
-          description: Query to run on logs.
-          type: string
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
       type: object
     SecurityMonitoringRuleQueryAggregation:
       description: The aggregation type.
@@ -7523,6 +7717,7 @@ components:
       - max
       - new_value
       - geo_data
+      - event_count
       type: string
       x-enum-varnames:
       - COUNT
@@ -7531,112 +7726,13 @@ components:
       - MAX
       - NEW_VALUE
       - GEO_DATA
-    SecurityMonitoringRuleQueryCreate:
-      description: Query for matching rule.
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
-        distinctFields:
-          description: Field for which the cardinality is measured. Sent as an array.
-          items:
-            description: Field.
-            type: string
-          type: array
-        groupByFields:
-          description: Fields to group by.
-          items:
-            description: Field.
-            type: string
-          type: array
-        metric:
-          description: 'The target field to aggregate over when using the sum or max
-
-            aggregations.'
-          type: string
-        metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
-          items:
-            description: Field.
-            type: string
-          type: array
-        name:
-          description: Name of the query.
-          type: string
-        query:
-          description: Query to run on logs.
-          example: a > 3
-          type: string
-      required:
-      - query
-      type: object
+      - EVENT_COUNT
     SecurityMonitoringRuleResponse:
-      description: Rule.
-      properties:
-        cases:
-          description: Cases for generating signals.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
-          type: array
-        createdAt:
-          description: When the rule was created, timestamp in milliseconds.
-          format: int64
-          type: integer
-        creationAuthorId:
-          description: User ID of the user who created the rule.
-          format: int64
-          type: integer
-        filters:
-          description: Additional queries to filter matched events before they are
-            processed.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringFilter'
-          type: array
-        hasExtendedTitle:
-          description: Whether the notifications include the triggering group-by values
-            in their title.
-          type: boolean
-        id:
-          description: The ID of the rule.
-          type: string
-        isDefault:
-          description: Whether the rule is included by default.
-          type: boolean
-        isDeleted:
-          description: Whether the rule has been deleted.
-          type: boolean
-        isEnabled:
-          description: Whether the rule is enabled.
-          type: boolean
-        message:
-          description: Message for generated signals.
-          type: string
-        name:
-          description: The name of the rule.
-          type: string
-        options:
-          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
-        queries:
-          description: Queries for selecting logs which are part of the rule.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
-          type: array
-        tags:
-          description: Tags for generated signals.
-          items:
-            description: Tag.
-            type: string
-          type: array
-        type:
-          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
-        updateAuthorId:
-          description: User ID of the user who updated the rule.
-          format: int64
-          type: integer
-        version:
-          description: The version of the rule.
-          format: int64
-          type: integer
+      description: Create a new rule.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
+      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -7897,6 +7993,207 @@ components:
           maximum: 1000
           type: integer
       type: object
+    SecurityMonitoringSignalRuleCreatePayload:
+      description: Create a new signal correlation rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting signals which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringSignalRuleQuery:
+      description: Query for matching rule on signals.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        correlatedByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        correlatedQueryIndex:
+          description: Index of the rule query used to retrieve the correlated field.
+          format: int32
+          maximum: 9
+          type: integer
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        ruleId:
+          description: Rule ID to match on signals.
+          example: org-ru1-e1d
+          type: string
+      required:
+      - ruleId
+      type: object
+    SecurityMonitoringSignalRuleResponse:
+      description: Rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponseQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
+    SecurityMonitoringSignalRuleResponseQuery:
+      description: Query for matching rule on signals.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        correlatedByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        correlatedQueryIndex:
+          description: Index of the rule query used to retrieve the correlated field.
+          format: int32
+          maximum: 9
+          type: integer
+        defaultRuleId:
+          description: Default Rule ID to match on signals.
+          example: d3f-ru1-e1d
+          type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        ruleId:
+          description: Rule ID to match on signals.
+          example: org-ru1-e1d
+          type: string
+      type: object
+    SecurityMonitoringSignalRuleType:
+      description: The rule type.
+      enum:
+      - signal_correlation
+      type: string
+      x-enum-varnames:
+      - SIGNAL_CORRELATION
     SecurityMonitoringSignalState:
       description: The new triage state of the signal.
       enum:
@@ -8053,6 +8350,171 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    SecurityMonitoringStandardRuleCreatePayload:
+      description: Create a new rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringStandardRuleQuery:
+      description: Query for matching rule.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        metric:
+          description: 'The target field to aggregate over when using the sum or max
+
+            aggregations.'
+          type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          example: a > 3
+          type: string
+      required:
+      - query
+      type: object
+    SecurityMonitoringStandardRuleResponse:
+      description: Rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
+        updateAuthorId:
+          description: User ID of the user who updated the rule.
+          format: int64
+          type: integer
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
     SecurityMonitoringTriageUser:
       description: Object representing a given user entity.
       properties:
@@ -9810,6 +10272,7 @@ paths:
       summary: Get a list of incidents
       tags:
       - Incidents
+      x-menu-order: 5
       x-pagination:
         limitParam: page[size]
         pageOffsetParam: page[offset]
@@ -9863,6 +10326,7 @@ paths:
               unique }}\",\n      \"customer_impacted\": false\n     },\n     \"type\":
               \"incidents\"\n  }\n}"
           step: there is a valid "incident" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteIncident
         parameters:
@@ -9899,6 +10363,7 @@ paths:
       summary: Delete an existing incident
       tags:
       - Incidents
+      x-menu-order: 4
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -9935,6 +10400,7 @@ paths:
       summary: Get the details of an incident
       tags:
       - Incidents
+      x-menu-order: 2
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -9980,6 +10446,98 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/attachments:
+    get:
+      description: Get all attachments for a given incident.
+      operationId: ListIncidentAttachments
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentAttachmentIncludeQueryParameter'
+      - $ref: '#/components/parameters/IncidentAttachmentFilterQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentAttachmentsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: Get a list of attachments
+      tags:
+      - Incidents
+      x-menu-order: 6
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: The bulk update endpoint for creating, updating, and deleting attachments
+        for a given incident.
+      operationId: UpdateIncidentAttachments
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentAttachmentIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentAttachmentUpdateRequest'
+        description: Incident Attachment Payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentAttachmentUpdateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create, update, and delete incident attachments
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-given:
+        incident_attachment:
+          parameters:
+          - name: incident_id
+            source: incident.data.id
+          - name: body
+            value: "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"attachment_type\":
+              \"link\",\n        \"attachment\": {\n          \"documentUrl\": \"https://www.example.com/doc\",\n
+              \         \"title\": \"Important Doc\"\n        }\n      },\n      \"type\":
+              \"incident_attachments\"\n    }\n  ]\n}"
+          step: the "incident" has an "incident_attachment"
+      x-menu-order: 7
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -11574,7 +12132,9 @@ paths:
         type: safe
   /api/v2/metrics:
     get:
-      description: Returns all metrics (matching additional filters if specified).
+      description: "Returns all metrics that can be configured in the Metrics Summary
+        page or with Metrics without Limits\u2122 (matching additional filters if
+        specified)."
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
@@ -13792,6 +14352,18 @@ paths:
               86400\n  },\n  \"message\": \"Test rule\",\n  \"tags\": [],\n  \"isEnabled\":
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule" in the system
+        security_rule_bis:
+          parameters:
+          - name: body
+            value: "{\n  \"name\": \"{{ unique }}_bis\",\n  \"queries\": [{\n    \"query\":
+              \"@test:false\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
+              [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\":
+              [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
+              \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
+              {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
+              86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\":
+              true,\n  \"type\": \"log_detection\"\n}"
+          step: there is a valid "security_rule_bis" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteSecurityMonitoringRule
@@ -14026,6 +14598,33 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.page.limit
         resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/security_monitoring/signals/{signal_id}:
+    get:
+      description: Get a signal's details.
+      operationId: GetSecurityMonitoringSignal
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignal'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Get a signal's details
+      tags:
+      - Security Monitoring
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -14976,8 +15575,17 @@ paths:
         type: safe
   /api/v2/usage/cost_by_org:
     get:
-      description: Get cost across multi-org account. Cost by org data for a given
-        month becomes available no later than the 16th of the following month.
+      deprecated: true
+      description: 'Get cost across multi-org account.
+
+        Cost by org data for a given month becomes available no later than the 16th
+        of the following month.
+
+        **Note:** This endpoint has been deprecated. Please use the new endpoint
+
+        [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)
+
+        instead.'
       operationId: GetCostByOrg
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -15029,7 +15637,7 @@ paths:
       summary: Get cost across multi-org account
       tags:
       - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 45
       x-undo:
         type: safe
   /api/v2/usage/estimated_cost:
@@ -15037,14 +15645,16 @@ paths:
       description: 'Get estimated cost across multi-org and single root-org accounts.
 
         Estimated cost data is only available for the current month and previous month.
-        To access historical costs prior to this, use the /cost_by_org endpoint.'
+
+        To access historical costs prior to this, use the `/historical_cost` endpoint.'
       operationId: GetEstimatedCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
-          level or at the sub-org level. Currently, only the 'sub-org' view is supported.
+          level or at the sub-org level. Available views are `summary` and `sub-org`.
+          Defaults to `summary`.
         in: query
         name: view
-        required: true
+        required: false
         schema:
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -15119,10 +15729,74 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/usage/historical_cost:
+    get:
+      description: 'Get historical cost across multi-org and single root-org accounts.
 
-        Only the sub-org view is available currently, the summary view will be released
-        at a later date.'
+        Cost data for a given month becomes available no later than the 16th of the
+        following month.'
+      operationId: GetHistoricalCostByOrg
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.  Defaults
+          to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning this month.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/CostByOrgResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get historical cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-undo:
+        type: safe
   /api/v2/usage/hourly_usage:
     get:
       description: Get hourly usage by product family

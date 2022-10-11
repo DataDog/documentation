@@ -10,7 +10,7 @@ further_reading:
   text: "Explore default detection rules"
 - link: "/security_platform/notifications/"
   tag: "Documentation"
-  text: "Learn more about Security Platform notifications"
+  text: "Learn more about Security notifications"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
   tag: "Blog"
   text: "Detect Abuse of Functionality with Datadog"

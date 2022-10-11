@@ -162,10 +162,11 @@ function getPathElement(event = null) {
         );
     }
 
-    if (path.includes('integrations/observability_pipelines/integrate_vector_with_datadog')) {
-        const integrationsEl = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
-        sideNavPathElement = integrationsEl.nextElementSibling.querySelector(
-            '[data-path*="integrations/observability_pipelines/integrate_vector_with_datadog"]'
+    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/integrations/integrate_vector_with_datadog` in the sidenav.
+    if (path.includes('observability_pipelines/integrations/integrate_vector_with_datadog')) {
+        const observabilityPipelineEl = document.querySelector('.side .nav-top-level > [data-path*="observability_pipelines"]');
+        sideNavPathElement = observabilityPipelineEl.nextElementSibling.querySelector(
+            '[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
         );
         mobileNavPathElement = sideNavPathElement;
     }
@@ -196,6 +197,7 @@ function getPathElement(event = null) {
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
+        scrollActiveNavItemToTop()
     }
 
     if (mobileNavPathElement) {
@@ -416,3 +418,24 @@ window.addEventListener(
     false
 );
 
+
+
+function scrollActiveNavItemToTop(){
+    // Scroll the open top level left nav item into view below Docs search input
+    if (document.querySelector('.sidenav:not(.sidenav-api)')) {
+        const headerHeight = document.querySelector('body .main-nav').style.height;
+        const padding = 200;
+        const maxHeight = document.documentElement.clientHeight - headerHeight - padding
+
+        // set max height of side nav.
+        document.querySelector('.sidenav-nav').style.maxHeight = `${maxHeight}px`
+
+        const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
+        const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
+
+        if (sideNavActiveMenuItem) {
+            const distanceToTop = sideNavActiveMenuItem.offsetTop;
+            leftSideNav.scrollTop = distanceToTop - 100;
+        }
+    }
+}

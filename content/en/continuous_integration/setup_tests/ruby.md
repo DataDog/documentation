@@ -471,10 +471,10 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /agent/
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
-

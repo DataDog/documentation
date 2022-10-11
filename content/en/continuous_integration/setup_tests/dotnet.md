@@ -163,7 +163,7 @@ if (scope != null) {
 // ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][8] section of the .NET custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][6] section of the .NET custom instrumentation documentation.
 
 ### Collecting Git metadata
 
@@ -225,10 +225,10 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 To use the custom instrumentation in your .NET application:
 
 1. Execute `dd-trace --version` to get the version of the tool.
-2. Add the `Datadog.Trace` [NuGet package][6] with the same version to your application.
+2. Add the `Datadog.Trace` [NuGet package][7] with the same version to your application.
 3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][7].
+For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
 
 ## Further reading
 
@@ -240,6 +240,6 @@ For more information about how to add spans and tags for custom instrumentation,
 [3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
-[6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/trace_collection/custom_instrumentation/dotnet/
-[8]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
+[6]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
+[7]: https://www.nuget.org/packages/Datadog.Trace
+[8]: /tracing/trace_collection/custom_instrumentation/dotnet/

@@ -157,7 +157,7 @@ Datadog does not store your secrets, so store them locally before clicking **Vie
 
 ### Install your private location
 
-You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, and `DATADOG_PRIVATE_KEY` environment variables in your task definition.
+You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables in your task definition.
 
 Launch your private location on:
 

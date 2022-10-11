@@ -37,6 +37,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/
   tag: ブログ
   text: AWS Lambda 関数のエフェメラルストレージ使用量を監視。
+- link: https://www.datadoghq.com/blog/azure-container-apps/
+  tag: GitHub
+  text: Datadog で Azure コンテナアプリを監視する
 kind: ドキュメント
 title: サーバーレス
 ---
@@ -105,7 +108,7 @@ Datadog の Azure App Service 向け拡張機能は、Azure Web Apps のトレ�
 
 Google Cloud Functions は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバレス機能を監視するには、[Google Cloud Platform インテグレーション][7]を有効にします。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

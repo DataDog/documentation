@@ -313,16 +313,17 @@ DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the current active span:
+You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
 
 ```python
 from ddtrace import tracer
 
-// inside your test
-span = tracer.current_span()
-span.set_tag("test_owner", "my_team")
-// test continues normally
-// ...
+# Declare `ddspan` as argument to your test
+def test_simple_case(ddspan):
+    # Set your tags
+    ddspan.set_tag("test_owner", "my_team")
+    # test continues normally
+    # ...
 ```
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.

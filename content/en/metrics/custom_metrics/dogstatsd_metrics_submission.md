@@ -223,6 +223,8 @@ Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about th
 
 Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
+**Note:** Metrics submission calls are asynchronous. If you want to ensure metrics are submitted, call `flush` before the program exits.
+
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}

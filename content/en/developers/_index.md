@@ -11,6 +11,9 @@ further_reading:
 - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
   tag: "Best Practices"
   text: "Create great integration dashboards"
+- link: "https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/"
+  tag: "Blog"
+  text: "DRUIDS, the design system that powers Datadog"
 ---
 
 ## Overview

@@ -1,43 +1,39 @@
 ---
-title: Associer vos logs Python à vos traces
-kind: documentation
-description: Associez vos logs Python à vos traces pour les mettre en corrélation dans Datadog.
+description: Associez vos logs Python à vos traces pour les mettre en corrélation
+  dans Datadog.
 further_reading:
-  - link: /tracing/manual_instrumentation/
-    tag: Documentation
-    text: Instrumenter vos applications manuellement pour créer des traces
-  - link: /tracing/opentracing/
-    tag: Documentation
-    text: Implémenter Opentracing dans vos applications
-  - link: /tracing/visualization/
-    tag: Documentation
-    text: Explorer vos services, ressources et traces
-  - link: https://www.datadoghq.com/blog/request-log-correlation/
-    tag: Blog
-    text: Corréler automatiquement des logs de requête avec des traces
-  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-    tag: Guide
-    text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre produits.
+- link: /tracing/manual_instrumentation/
+  tag: Documentation
+  text: Instrumenter vos applications manuellement pour créer des traces
+- link: /tracing/opentracing/
+  tag: Documentation
+  text: Implémenter Opentracing dans vos applications
+- link: /tracing/visualization/
+  tag: Documentation
+  text: Explorer vos services, ressources et traces
+- link: https://www.datadoghq.com/blog/request-log-correlation/
+  tag: Blog
+  text: Corréler automatiquement des logs de requête avec des traces
+- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+  tag: Guide
+  text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
+    produits.
+kind: documentation
+title: Associer vos logs Python à vos traces
 ---
-## Injection automatique
 
-Activez l'injection avec la variable d'environnement `DD_LOGS_INJECTION=true` lorsque vous utilisez `ddtrace-run`.
-Si vous avez configuré votre traceur avec les variables d'environnement `DD_ENV`, `DD_SERVICE` et `DD_VERSION`, alors `env`, `service` et `version` seront également ajoutés automatiquement. Pour en savoir plus, consultez la [section relative au tagging de service unifié][1].
-
-**Remarque** : l'auto-injection prend en charge la bibliothèque standard `logging`, ainsi que toutes les bibliothèques qui complètent le module de bibliothèque standard, comme la bibliothèque `json_log_formatter`. `ddtrace-run` appelle `logging.basicConfig` avant l'exécution de votre application. Si le logger racine possède un gestionnaire configuré, votre application doit modifier directement le logger racine et le gestionnaire.
-
-## Injection manuelle
+## Injection
 
 ### Logging de la bibliothèque standard
 
-Si vous préférez corréler manuellement vos [traces][2] avec vos logs, patchez votre module `logging` en modifiant votre formateur de log de façon à inclure les attributs ``dd.trace_id`` et ``dd.span_id`` à partir de l'entrée de log.
+Pour mettre en corrélation vos [traces][2] et vos logs, modifiez le format de vos logs de façon à inclure les attributs requis de l'entrée de log et à appeler `ddtrace.patch(logging=True)`.
 
-De même, ajoutez ``dd.env``, ``dd.service`` et ``dd.version`` en tant qu'attributs pour votre entrée de log.
+Ajoutez les attributs ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` et ``dd.span_id`` pour votre entrée de log dans la chaîne de format.
 
-La configuration ci-dessous est utilisée par la méthode d'injection automatique et prise en charge par défaut par l'intégration de log Python :
+L'exemple suivant utilise `logging.basicConfig` pour configurer l'injection de logs :
 
 ``` python
-from ddtrace import patch_all; patch_all(logging=True)
+from ddtrace import patch; patch(logging=True)
 import logging
 from ddtrace import tracer
 

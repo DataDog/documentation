@@ -60,7 +60,7 @@ nav_sections:
         link: logs/
         icon: log
         desc: Process, monitor, and archive your ingested logs 
-      - title: Security Platform
+      - title: Security
         link: security_platform/
         icon: security-platform
         desc: Detect threats and misconfigurations in your applications and infrastructure
@@ -100,6 +100,10 @@ nav_sections:
         link: database_monitoring/
         icon: database-2
         desc: Explore enriched dashboards, query metrics, and query samples
+      - title: Observability Pipelines
+        link: observability_pipelines/
+        icon: pipelines
+        desc: Manage and monitor your telemetry pipelines
   - nav_section:
     - name: 'Configuration'
     - navtiles:
