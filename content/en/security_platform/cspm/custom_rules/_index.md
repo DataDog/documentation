@@ -43,9 +43,9 @@ To create a rule from scratch:
 2. Click **New Rule** in the upper-right.
 3. Select **Cloud Configuration** as the rule type.
 4. Specify the GCP resource types you are writing the rule for.
-5. Write the rule logic using [Rego][3], a policy-as-code language, either from scratch or by using the Datadog template. Read [Writing Custom Rules with Rego][4] for more information. Note that you can mark a resource as "pass", "fail" or "skip". If you do not mark a resource, it will be interpreted as "skip".
+5. Write the rule logic using [Rego][3], a policy-as-code language, either from scratch or by using the Datadog template. Read [Writing Custom Rules with Rego][4] for more information. Note that you can mark a resource as "pass", "fail", or "skip". If you do not mark a resource, it will be interpreted as "skip".
 
-{{< img src="security_platform/cspm/custom_rules/custom_rules_first_half.png" alt="Custom Rules Steps" width="100%">}}
+   {{< img src="security_platform/cspm/custom_rules/custom_rules_first_half.png" alt="Custom Rules Steps" width="100%">}}
 
 6. Exclude benign activity by specifying queries to include or remove certain resources from findings.
 7. Validate the logic of your rule by selecting resources and clicking **Test Rule**. See which resources passed and failed, along with corresponding resource tags.
@@ -55,7 +55,7 @@ To create a rule from scratch:
 11. Specify tags to apply to the result findings. Read [Tagging findings](#tagging-findings) for more information.
 12. Click **Save Rule**.
 
-{{< img src="security_platform/cspm/custom_rules/custom_rules_second_half.png" alt="Custom Rules Steps" width="100%">}}
+    {{< img src="security_platform/cspm/custom_rules/custom_rules_second_half.png" alt="Custom Rules Steps" width="100%">}}
 
 ## Tagging findings
 
@@ -81,7 +81,7 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 [1]: https://app.datadoghq.com/security/configuration/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29&all=false&product=cspm&sort=rule_name
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
-[4]: /security_platform/cspm/custom_rules/writing_rego_rules/
+[4]: /security_platform/cloud_security_management/guide/writing_rego_rules/
 [5]: /security_platform/cspm/frameworks_and_benchmarks/#set-notification-targets-for-detection-rules
 [6]: /security_platform/notifications/
 [7]: https://app.datadoghq.com/security/
