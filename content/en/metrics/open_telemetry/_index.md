@@ -21,7 +21,7 @@ To send OTel metrics to Datadog, you have two options: the Datadog Agent, or the
 
 #### Configuration
 
-1. [Instrument your system with OpenTelemetry][4].
+1. [Instrument your applications with OpenTelemetry SDKs][4].
 2. [Enable OTLP ingestion][5] on the Datadog Agent.
 3. [Send OTLP telemetry][6] from your system to Datadog.
 
@@ -124,6 +124,11 @@ If you want to use the OTel Collector, but you also want to keep a full range of
    ```
    If you are using a containerized environment, ensure the `endpoint` setting is configured to use the approprate hostname for the Datadog Agent.
 
+## Out-of-the-box dashboards
+
+Datadog provides many out-of-the-box dashboards for features and integrations. To use the , go to Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+
+
 
 ## Further reading
 
@@ -132,11 +137,11 @@ If you want to use the OTel Collector, but you also want to keep a full range of
 [1]: https://opentelemetry.io/
 [2]: https://www.cncf.io/
 [3]: https://www.datadoghq.com/pricing/?product=infrastructure#infrastructure
-[4]: https://opentelemetry.io/docs/concepts/instrumenting/
+[4]: https://opentelemetry.io/docs/instrumentation/
 [5]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
 [6]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#sending-otlp-traces-from-the-application-to-datadog-agent
 [7]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [8]: https://opentelemetry.io/docs/collector/configuration/
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: /getting_started/site/
-[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter/examples
