@@ -16,9 +16,9 @@ Datadog Forwarder は、ログ、カスタムメトリクス、トレースを�
 - Kinesis データストリームイベントを Datadog に転送する (CloudWatch ログのみがサポートされています)
 - CloudWatch ログを使用して AWS Lambda 関数からカスタムメトリクスを転送する
 - CloudWatch ログを使用して AWS Lambda 関数からトレースを転送する
-- AWS REPORT ログから解析された拡張 Lambda メトリクス (`aws.lambda.enhanced.*`) を生成して送信する: duration、billed_duration、max_memory_used、timeouts、out_of_memory、and estimated_cost
+- AWS REPORT ログから解析された拡張 Lambda メトリクス (`aws.lambda.enhanced.*`) を生成して送信する: `duration`、`billed_duration`、`max_memory_used`、`timeouts`、`out_of_memory`、`estimated_cost`
 
-Datadog Forwarder で AWS サービスログを送信する方法について、詳細は[こちら](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/)をご覧ください。
+Datadog Forwarder で AWS サービスログを送信する方法について、詳細は [Datadog Lambda 関数で AWS サービスのログを送信する](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/)のガイドをお読みください。
 
 ## インストール
 
@@ -33,14 +33,14 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 
 [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-forwarder&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml)
 
-1. 管理者 AWS アカウント/ロールにログインし、上のボタンで CloudFormation Stack をデプロイします。
+1. 管理者 AWS アカウントまたはロールにログインし、上のボタンで CloudFormation Stack をデプロイします。
 2. `DdApiKey` を入力し、適切な `DdSite` を選択します。他のすべてのパラメーターはオプションです。
 3. **Create stack** をクリックし、作成が完了するまで待ちます。
 4. スタックの "Resources" タブで、論理 ID が `Forwarder` のインストール済みの Forwarder Lambda 関数を見つけます。
 5. [インストールされている Forwarder にトリガーを設定します](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#set-up-triggers)。
 6. 複数の AWS リージョンで運用している場合は、別のリージョンで上記の手順を繰り返します。
 
-**注:** 以前に Datadog の AWS インテグレーションタイルから次の [CloudFormation テンプレート](https://github.com/DataDog/cloudformation-template/tree/master/aws)を使用して AWS インテグレーションを有効にしていた場合は、アカウントには、Datadog Lambda Forwarder 関数が既にプロビジョニングされているはずです。
+**注:** 以前に Datadog の AWS インテグレーションページから次の [CloudFormation テンプレート](https://github.com/DataDog/cloudformation-template/tree/master/aws)を使用して AWS インテグレーションを有効にしていた場合は、アカウントには、Datadog Lambda Forwarder 関数が既にプロビジョニングされているはずです。
 **注:** Datadog Lambda Forwarder 関数のコードブロックは、Lambda レイヤーを通してロジックを実装しているため、空になっています。
 
 <!-- xxz tab xxx -->
@@ -138,7 +138,7 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 4. 新しい Forwarder が期待どおりに機能していること、つまりエラーなしで定期的に呼び出されることを確認します。
 5. 移行されたトリガー (ソース) からのログが Datadog ログエクスプローラーに表示されていることと、正しく表示されていることを確認します。
 6. すべてのトリガーを新しい Forwarder に移行します。
-   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)に管理させる場合は、AWS インテグレーションタイルの "Collect Logs" タブで Forwarder Lambda ARN を更新します。
+   - Datadog にトリガーを[自動的](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers)に管理させる場合は、AWS インテグレーションページの **Log Collection** タブで Forwarder Lambda ARN を更新します。
    - トリガーを[手動](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers)で管理していた場合は、手動で (またはスクリプトを使用して) トリガーを移行する必要があります。
 7. 古い Forwarder Lambda 関数の呼び出しカウントがゼロになっていることを確認します。
 8. 安心したら、古い Forwarder Lambda 関数を削除します。

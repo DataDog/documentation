@@ -4,7 +4,6 @@ aliases:
 categories:
 - collaboration
 - notification
-ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et des graphiques Datadog sur le canal Slack de votre
   équipe.
@@ -189,7 +188,7 @@ Vous pouvez également configurer l'envoi d'alertes vers Slack à partir de [mon
 
 Après avoir configuré l'intégration Slack, saisissez `@slack` dans le message de votre notification pour afficher la liste des canaux auxquels vous pouvez envoyer votre notification.
 
-Ajoutez `< >` de chaque côté de `@nomutilisateur` dans le modèle de message de votre monitor afin de prévenir l'utilisateur défini dans les notifications Slack. Exemple : `@slack-CANAL_SLACK <@NOMUTILISATEUR>`.
+Ajoutez `< >` de chaque côté de `@username` dans le modèle de message de votre monitor afin de prévenir l'utilisateur défini dans les notifications Slack. Exemple : `@slack-CANAL_SLACK <@USERNAME>` ou `@slack-COMPTE_SLACK-CANAL_SLACK <@USERNAME>`.
 
 **Remarque** : si vous ne parvenez pas à ping une personne, utilisez son `nom d'utilisateur` Slack plutôt que son nom d'affichage. Vous le trouverez dans les [paramètres de compte Slack][1], sous **Nom d'utilisateur**.
 
@@ -226,6 +225,18 @@ Vous pouvez également créer une **mention « @ »** transmise directement à
 
 - `@team-{{nom.équipe}}@entreprise.com` envoie directement un e-mail à la liste de diffusion de l'équipe.
 
+### Contrôler tous les aspects de vos notifications Slack
+
+Les alertes de monitor publiées dans votre canal Slack comprennent plusieurs champs :
+* Le **message**
+* Un **snapshot** (graphique) de la requête qui a déclenché le monitor
+* Les **tags** associés
+* Les personnes **notifiées**
+
+Vous pouvez activer ou désactiver chacun de ces champs depuis le carré de l'intégration Slack. Pour chaque canal, cochez la case en regard des champs que vous souhaitez inclure dans les notifications. Les cases des autres champs doivent être décochées.
+
+{{< img src="integrations/slack/slack_notifications_config.png" alt="Configuration des notifications Slack" style="width:80%;">}}
+
 ## Données collectées
 
 ### Métriques
@@ -254,16 +265,16 @@ L'app Slack Datadog nécessite les portées OAuth suivantes. Pour en savoir plus
 | `channels:read`          | Les canaux sont saisis automatiquement dans le carré de l'intégration Slack dans Datadog.                          |
 | `chat:write`             | Permet d'envoyer des messages dans les canaux et conversations approuvés.                                   |
 | `commands`               | Commande `/datadog`.                                                                     |
-| `groups:read`            | Les groupes sont saisis automatiquement dans le carré de l'intégration Slack dans Datadog.                          |
+| `groups:read`            | Les canaux sont saisis automatiquement dans le carré de l'intégration Slack dans Datadog.                          |
 | `im:read`                | Permet d'utiliser la commande `/datadog` dans des conversations individuelles.                                          |
 | `im:write`               | Permet de prévenir les administrateurs lorsque des autorisations supplémentaires sont requises.                                 |
 | `links:read`             | Permet d'afficher les aperçus des liens Datadog.                                                          |
-| `links:write`            | Permet de modifier les aperçus des liens Datadog.                                                          |
+| `links:write`            | Permet d'afficher les aperçus des liens Datadog.                                                          |
 | `mpim:read`              | Permet d'utiliser la commande `/datadog`.                                                             |
 | `reactions:write`        | Permet d'indiquer qu'un message a été ajouté à la chronologie d'un incident.                                        |
 | `team:read`              | Permet de mettre à jour votre espace de travail dans le carré de l'intégration Slack dans Datadog. |
 | `users:read`             | Permet d'utiliser des réponses adaptées à votre fuseau horaire.                                                  |
-| `users:read.email`       | Permet d'ajouter des messages/utilisateurs pour les incidents créés en dehors de Slack.                          |
+| `users:read.email`       | Permet d'ajouter des messages ou des utilisateurs pour les incidents créés en dehors de Slack.                           |
 | `workflow.steps:execute` | Permet de partager des widgets depuis une étape de workflow.                                                     |
 
 ### Portées des tokens utilisateur

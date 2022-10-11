@@ -190,13 +190,13 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 
 [Slack][7] との統合に加えて、インシデント管理は以下とも統合されます。
 
-- [PagerDuty][13] は、インシデント通知を PagerDuty に送信します。
-- [Jira][14] は、インシデントの Jira チケットを作成します。
-- [Webhook][15] は、Webhook を使用してインシデント通知を送信します (たとえば、[SMS を Twilio に送信][16])。
+- [PagerDuty][13] と [OpsGenie][14] は、オンコールエンジニアにインシデント通知を送信します。
+- [Jira][15] は、インシデントの Jira チケットを作成します。
+- [Webhook][16] は、Webhook を使用してインシデント通知を送信します (たとえば、[SMS を Twilio に送信][17])。
 
 ## 準備はいいですか？
 
-[Incident Management 入門][17]ガイドのワークフロー例を実行してください。
+[Incident Management 入門][18]ガイドのワークフロー例を実行してください。
 
 ## その他の参考資料
 
@@ -215,7 +215,8 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [11]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [12]: /ja/monitors/incident_management/analytics/#overview
 [13]: /ja/integrations/pagerduty/
-[14]: /ja/integrations/jira/
-[15]: /ja/integrations/webhooks/
-[16]: /ja/integrations/webhooks/#sending-sms-through-twilio
-[17]: /ja/getting_started/incident_management
+[14]: /ja/integrations/opsgenie/
+[15]: /ja/integrations/jira/
+[16]: /ja/integrations/webhooks/
+[17]: /ja/integrations/webhooks/#sending-sms-through-twilio
+[18]: /ja/getting_started/incident_management

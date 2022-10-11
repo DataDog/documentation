@@ -266,23 +266,29 @@ If you are _not_ correlating logs and traces, you can remove the MDC placeholder
 
 ## Configure the Datadog Agent
 
-Create a file `java.d/conf.yaml` in the Agent's `conf.d/` directory with the following content:
+Once [log collection is enabled][4], set up [custom log collection][5] to tail your log files and send them to Datadog.
 
-```yaml
-#Log section
-logs:
+1. Create a `java.d/` folder in the `conf.d/` [Agent configuration directory][6].
+2. Create a `conf.yaml` file in `java.d/` with the following content:
 
-  - type: file
-    path: "/path/to/your/java/log.log"
-    service: java
-    source: java
-    sourcecategory: sourcecode
-    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
+    ```yaml
+    #Log section
+    logs:
+
+      - type: file
+        path: "/path/to/your/java/log.log"
+        service: java
+        source: java
+        sourcecategory: sourcecode
+        # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+        #log_processing_rules:
+        #  - type: multi_line
+        #    name: new_log_start_with_date
+        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
+
+3. [Restart the Agent][7].
+4. Run the [Agent’s status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 ## Agentless logging
 
@@ -367,7 +373,7 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 ### Configure Logback
 
-Use the [logstash-logback-encoder][4] logging library along with Logback to stream logs directly to Datadog.
+Use the [logstash-logback-encoder][9] logging library along with Logback to stream logs directly to Datadog.
 
 1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
@@ -435,7 +441,7 @@ Use the [logstash-logback-encoder][4] logging library along with Logback to stre
   Not supported.
     {{< /site-region >}}
 
-    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][5].
+    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][10].
 
 2. Add the Logstash encoder dependency to your `pom.xml` file:
 
@@ -458,7 +464,7 @@ Enrich your log events with contextual attributes.
 
 ### Using the key value parser
 
-The [key value parser][6] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [key value parser][11] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -518,6 +524,11 @@ To generate this JSON:
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /logs/log_configuration/parsing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: https://github.com/logstash/logstash-logback-encoder
-[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[6]: /logs/log_configuration/parsing/#key-value-or-logfmt
+[4]: /agent/logs/?tab=tailfiles#activate-log-collection
+[5]: /agent/logs/?tab=tailfiles#custom-log-collection
+[6]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[9]: https://github.com/logstash/logstash-logback-encoder
+[10]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[11]: /logs/log_configuration/parsing/#key-value-or-logfmt

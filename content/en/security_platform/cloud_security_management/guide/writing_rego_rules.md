@@ -5,7 +5,7 @@ further_reading:
 - link: "/security_platform/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "/security_platform/cloud_security_management/guide/writing_rego_rules"
+- link: "/security_platform/cspm/frameworks_and_benchmarks"
   tag: "Guide"
   text: "Learn about frameworks and industry benchmarks"
 ---
@@ -63,7 +63,7 @@ import future.keywords.if
 import future.keywords.in
 ```
 
-The next three statements import the OPA-provided keywords [`contains`][5], [`if`][6], and [`in`][7]. These keywords allow defining rules with more expressive syntax to improve readability. **Note:** importing all keywords with `import future.keywords` is [not recommended][8].
+The next three statements import the OPA-provided keywords [`contains`][5], [`if`][6], and [`in`][7]. These keywords allow defining rules with more expressive syntax to improve readability. **Note:** Importing all keywords with `import future.keywords` is [not recommended][8].
 
 ```python
 import data.datadog.output as dd_output
@@ -111,7 +111,7 @@ results contains result if {
 
 This section passes through all resources from the main resource type and evaluates them. It creates an array of results to be processed by the posture management system. The [some][9] keyword declares the local variable `resource`, which comes from the array of main resources. The `eval` rule is executed on every resource, returning a `pass`, `fail`, or `skip`. The `dd_output.format` rule formats the resource and evaluation correctly to be processed by cloud security.
 
-This section of the policy does not need to be modified. Instead, when you select your main resource type in the **Choose your main resource type** dropdown when cloning rules, it will be inserted in this section of the policy. You can also access the array of your resources through `input.resources.some_resource_type`, replacing `some_resource_type` with the main resource type that you chose, for example, `gcp_iam_policy`.
+This section of the policy does not need to be modified. Instead, when you select your main resource type in the **Choose your main resource type** dropdown when cloning rules, it is inserted in this section of the policy. You can also access the array of your resources through `input.resources.some_resource_type`, replacing `some_resource_type` with the main resource type that you chose, for example, `gcp_iam_policy`.
 
 ## Other ways to write rules
 
@@ -175,7 +175,7 @@ results contains result if {
 }
 ```
 
-This rule determines whether there are any instances of `gcp_iam_service_account_key` that are user managed and match to a `gcp_iam_service_account` (the resource selected as the main resource type). If the service account has a key that is user managed, it produces a `fail` result. The `eval` rule is executed on every service account, and loops through every service account key to find one that matches the account. resulting in a complexity of `O(MxN)`, where M is the number of service accounts and N is the number of service account keys. 
+This rule determines whether there are any instances of `gcp_iam_service_account_key` that are user managed and match to a `gcp_iam_service_account` (the resource selected as the main resource type). If the service account has a key that is user managed, it produces a `fail` result. The `eval` rule is executed on every service account, and loops through every service account key to find one that matches the account, resulting in a complexity of `O(MxN)`, where M is the number of service accounts and N is the number of service account keys. 
 
 To improve the time complexity significantly, build a [set][10] of key parents that are user managed with a [set comprehension][11]:
 

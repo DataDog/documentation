@@ -1,5 +1,4 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_development.md
 description: Expo と Expo Go を使用して React Native プロジェクトを Datadog で監視します。
@@ -15,7 +14,7 @@ title: Expo
 ---
 ## 概要
 
-RUM React Native SDK は Expo と Expo Go をサポートしています。使用するには、`@datadog/mobile-react-native` ではなく、`expo-datadog` からインストールとインポートを行います。
+RUM React Native SDK は Expo と Expo Go をサポートしています。使用するには、`expo-datadog` と `@datadog/mobile-react-native` をインストールします。
 
 `expo-datadog` は SDK 45 から Expo をサポートしており、プラグインのバージョンは Expo のバージョンに従います。例えば、Expo SDK 45 を使用している場合は、`expo-datadog` のバージョン `45.x.x` を使用します。Datadog では、最小バージョンとして **Expo SDK 45** を使用することを推奨しており、それ以前のバージョンでは手動による手順が必要になる場合があります。
 
@@ -24,13 +23,13 @@ RUM React Native SDK は Expo と Expo Go をサポートしています。使�
 NPM でインストールするには、以下を実行します。
 
 ```sh
-npm install expo-datadog
+npm install expo-datadog @datadog/mobile-react-native
 ```
 
 Yarn でインストールするには、以下を実行します。
 
 ```sh
-yarn add expo-datadog
+yarn add expo-datadog @datadog/mobile-react-native
 ```
 
 ## 使用方法
@@ -45,7 +44,7 @@ yarn add expo-datadog
 }
 ```
 
-`eas secret:create` を実行して、`DATADOG_API_KEY` と `DD_API_KEY` を Datadog API キーに、`DATADOG_SITE` を Datadog サイトのホスト (例: `datadoghq.com`) に設定します。
+`eas secret:create` を実行して、`DATADOG_API_KEY` を Datadog API キーに、`DATADOG_SITE` を Datadog サイトのホスト (例: `datadoghq.com`) に設定します。
 
 ### アプリケーションのコンテキストでライブラリを初期化
 

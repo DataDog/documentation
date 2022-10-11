@@ -67,6 +67,14 @@ Monitors are evaluated at a certain frequency, looking back at the last `5 minut
 
 The evaluation frequency defines how often Datadog performs the monitor query. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
 
+Evaluation frequencies depend on the [evaluation window](#evaluation-window) that is being used. A longer window results in lower evaluation frequencies. The table below illustrates how the evaluation frequency is controlled by larger time windows:
+
+| Evaluation Window Ranges        | Evaluation Frequency  |
+|---------------------------------|-----------------------|
+| window < 24 hours               | 1 minute              |
+| 24 hours <= window < 48 hours   | 10 minutes            |
+| window >= 48 hours              | 30 minutes            |
+
 ### Thresholds
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
@@ -199,7 +207,7 @@ Some use cases to define a group retention time include:
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][5] option mentioned above.
+**Note**: The group retention time option requires a multi-alert monitor that supports the [`On missing data`][5] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
 
 #### New group delay
 

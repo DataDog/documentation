@@ -26,7 +26,7 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 
 To enable your privacy settings, set `defaultPrivacyLevel` to `mask-user-input`, `mask`, or `allow` in your JavaScript configuration.
 
-{{< code-block lang="javascript" filename="package.json" disable_copy="false" collapsible="true" >}}
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -37,13 +37,15 @@ datadogRum.init({
     //  env: 'production',
     //  version: '1.0.0',
     sampleRate: 100,
-    premiumSampleRate: 100,
+    sessionReplaySampleRate: 100,
+    trackResources: true,
+    trackLongTasks: true,
     trackInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 
 datadogRum.startSessionReplayRecording();
-{{< /code-block >}}
+```
 
 After updating your configuration, you can override elements of your HTML documents with the following privacy options:
 

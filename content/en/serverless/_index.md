@@ -17,13 +17,13 @@ further_reading:
   text: "The State of Serverless"
 - link: "/serverless/installation/"
   tag: "Documentation"
-  text: "Installing Serverless Monitoring"
+  text: "Installing Serverless monitoring"
 - link: '/serverless/configuration/'
   tag: 'Documentation'
-  text: 'Configure Serverless Monitoring'
+  text: 'Configure Serverless monitoring'
 - link: "/integrations/amazon_lambda/"
   tag: "Documentation"
-  text: "AWS Lambda Integration"
+  text: "AWS Lambda integration"
 - link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
   tag: "Blog"
   text: "Monitor AWS Lambda functions deployed using container images"
@@ -39,6 +39,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
   tag: "Blog"
   text: "Monitor your AWS Lambda functions' ephemeral storage usage"
+- link: "https://www.datadoghq.com/blog/azure-container-apps/"
+  tag: "Blog"
+  text: "Monitor Azure Container Apps with Datadog"
 ---
 
 {{< vimeo 543362476 >}}
