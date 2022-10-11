@@ -65,7 +65,13 @@ The Datadog Agent collects potential hostnames from several different sources. F
 
 ### Inspect
 
-Click on any host to view more details including [aliases](#aliases), [tags][2], [metrics][3], [containers][4] and [logs][5] (if enabled):
+Click on any host to view more details including:
+- [aliases](#aliases)
+- [tags][2]
+- [metrics][3]
+- [containers][4]
+- [logs][5] (if enabled)
+- [Agent configuration](#agent-configuration) (if enabled)
 
 {{< img src="infrastructure/index/Infra-List.png" alt="Infrastructure list host details" style="width:90%;">}}
 
@@ -75,20 +81,30 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 {{< img src="infrastructure/index/Infra-List-Alias.png" alt="Host aliases" style="width:90%;">}}
 
+#### Agent configuration
+
+{{< beta-callout url="#" btn_hidden="true" >}}
+  The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+{{< /beta-callout >}}
+
+If you've set the `inventories_configuration_enabled` option to `true` in your [Agent configuration file][6], you can click **Agent Configuration** to access a read-only version of the Agent's configuration.
+
+{{< img src="infrastructure/index/infra-list-config.png" alt="The Agent configuration view" style="width:100%;">}}
+
 ### Export
 
 For a JSON formatted list of your hosts reporting to Datadog, use one of the following:
 
 * The **JSON API permalink** at the top of the infrastructure list.
-* The [search hosts API endpoint][6] - see the [developer guide][7] for an example.
+* The [search hosts API endpoint][7] - see the [developer guide][8] for an example.
 
 #### Agent version
 
-At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][8], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
+At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][9], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
 
 #### No Agent
 
-Another use case of the JSON export would be to get a list of AWS EC2 instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See this [example script][9].
+Another use case of the JSON export would be to get a list of AWS EC2 instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See this [example script][10].
 
 ## Further Reading
 
@@ -99,7 +115,8 @@ Another use case of the JSON export would be to get a list of AWS EC2 instances 
 [3]: /metrics/
 [4]: /infrastructure/livecontainers/?tab=helm#overview
 [5]: /logs/
-[6]: /api/v1/hosts/#get-the-total-number-of-active-hosts
-[7]: /developers/guide/query-the-infrastructure-list-via-the-api/
-[8]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-[9]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
+[6]: /agent/guide/agent-configuration-files/
+[7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
+[8]: /developers/guide/query-the-infrastructure-list-via-the-api/
+[9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
+[10]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
