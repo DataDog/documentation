@@ -43,7 +43,7 @@ You can use the [Datadog Terraform provider][4] to control test creation and sta
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform allows you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog APM integration. 
+Performing tests in a unified monitoring platform allows you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][8]. 
 
 Enable developers to "shift left" and implement testing as part of the CI/CD process, which improves efficiency, release velocity, and business agility. Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [Explorer][6].
 
@@ -64,3 +64,4 @@ Once you have configured some [Synthetic tests][3], see the documentation for yo
 [5]: /continuous_testing/explorer
 [6]: https://app.datadoghq.com/synthetics/create#
 [7]: /continuous_testing/cicd_integrations/configuration
+[8]: /synthetics/apm/
