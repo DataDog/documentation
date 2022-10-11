@@ -9,7 +9,7 @@ further_reading:
   text: "Find out more about API and application keys."
 ---
 
-{{< beta-callout url="#" >}}
+{{< beta-callout url="#" btn_hidden="true">}}
   The Datadog plugin for IntelliJ IDEA is an early access preview release intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>. If the plugin stops working unexpectedly, check for plugin updates. To leave feedback, check out our <a href="https://github.com/DataDog/datadog-for-intellij/discussions">GitHub discussions page</a>.
 {{< /beta-callout >}}
 
@@ -19,16 +19,16 @@ The **Datadog** plugin for IntelliJ IDEA enables developers to interact with Dat
 
 {{< img src="/developers/ide_integrations/idea/overview.png" alt="The Datadog plugin" style="width:100%;" >}}
 
-The plugin features support for profiling and logging.
+The plugin features support for:
 
 **Profiling**
-- Source editor highlighting at method-level and line-level with navigation to the tool pane.
+- Source editor highlighting at method-level and line-level.
 - Integration of aggregated profiling data to help developers remove costly bottlenecks in code.
-- Top List and Flamegraph visualisations highlighting methods consuming the most resources with direct navigation to source code.
+- Top List and Flame graph visualizations highlighting methods consuming the most resources with direct navigation to source code.
 - Project tree annotations showing profiling information at the package and class level.
 
 **Logging**
-- Navigation to Datadog Logs views on the web directly from source files based on contextual information, such as the logger name and level, that is auto-detected for popular Java logging frameworks.
+- Perform pre-populated Datadog log queries directly from the source files in your project.
 
 ## Setup
 
@@ -78,12 +78,16 @@ The names of linked services persist with the project when you close it.
 
 ## What's next?
 
-Now that you've set up your Datadog plugin for IDEA, find out more about using the plugin in your java projects:
+You've set up your Datadog plugin for IDEA. Next, find out more about using the plugin in your java projects:
 - [Profiling][2]: View Continuous Profiling data from within IDEA.
 - [Logging][3]: Perform pre-populated Log Queries from your code in IDEA.
 ## Feedback
 
-User feedback is very important to us. Let us know what you think about the plugin in our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
+User feedback is important to us. Let us know what you think about the plugin, or provide feedback on how we can improve it on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
 [2]: /developers/ide_integrations/idea/profiling/

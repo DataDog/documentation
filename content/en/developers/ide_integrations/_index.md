@@ -5,7 +5,7 @@ disable_toc: false
 is_beta: true
 ---
 
-{{< beta-callout url="#" >}}
+{{< beta-callout url="#" btn_hidden="true">}}
   The Datadog plugin for IntelliJ IDEA is an early access preview release intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>. If the plugin stops working unexpectedly, check for plugin updates. To leave feedback, check out our <a href="https://github.com/DataDog/datadog-for-intellij/discussions">GitHub discussions page</a>.
 {{< /beta-callout >}}
 

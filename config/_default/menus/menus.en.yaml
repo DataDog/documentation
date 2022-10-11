@@ -3351,11 +3351,6 @@ main:
     parent: ide_integrations
     identifier: ide_integrations_idea
     weight: 801
-  - name: Profiling
-    url: developers/ide_integrations/idea/profiling
-    parent: ide_integrations_idea
-    identifier: ide_integrations_idea_profiling
-    weight: 8001
   - name: Community
     url: developers/community/
     parent: dev_tools
