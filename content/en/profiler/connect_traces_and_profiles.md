@@ -68,7 +68,7 @@ Code Hotspots identification is enabled by default [turn on profiling for your G
 
 Require `dd-trace-go` version 1.37.0 or greater.
 
-**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below has several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
+**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/golang/go/issues/35057
@@ -151,7 +151,7 @@ Endpoint profiling is enabled by default when you [turn on profiling for your Go
 
 Requires `dd-trace-go` version 1.37.0 or greater.
 
-**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below has several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
+**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/golang/go/issues/35057
