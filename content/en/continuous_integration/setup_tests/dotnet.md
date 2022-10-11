@@ -236,7 +236,7 @@ For more information about how to add spans and tags for custom instrumentation,
 
 Read more about Intelligent Test Runner here.
 
-To enable Intelligent Test Runner the following environment variables need to be set:
+To enable Intelligent Test Runner you need to be sure the version of the `dd-trace` tool is >= 2.16.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables are set:
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
