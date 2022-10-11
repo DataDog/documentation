@@ -135,7 +135,7 @@ To configure a new notification rule:
 2. **For incidents matching...**: Select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty and a notification rule triggers for any incident.
 3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10]. Note, if you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][14] for this option to appear.
 4. **With Template**: Select the desired message template you want the notification rule to use.
-5. **Renotify on updates to**: Choose which incident properties trigger renotifications. A new notification is be sent every time one of those selected properties changes.
+5. **Renotify on updates to**: Choose which incident properties trigger renotifications. A new notification is be sent every time one of those selected properties changes. Note, you cannot renotify on properties that are already in your filters (Step 2 in this list).
 6. Click **Save**
 
 You can perform the following operations to manage your notification rules.
