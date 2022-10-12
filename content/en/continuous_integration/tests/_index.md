@@ -1,6 +1,8 @@
 ---
 title: Exploring Tests
 kind: documentation
+aliases:
+  - /continuous_integration/explore_tests/
 further_reading:
     - link: "/continuous_integration/guides/find_flaky_tests/"
       tag: "Guide"
@@ -22,6 +24,19 @@ further_reading:
 
 The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
 
+## Setup
+
+
+
+{{< whatsnext desc="Choose your language to set up tests visibility in Datadog:" >}}
+    {{< nextlink href="continuous_integration/setup_tests/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+{{< /whatsnext >}}
 ## Explore tests
 
 The Tests page shows the _Branches_ view and the _Default Branches_ view.

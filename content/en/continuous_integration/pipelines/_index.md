@@ -1,6 +1,8 @@
 ---
-title: Exploring Pipelines
+title: Pipeline Visibility in Datadog
 kind: documentation
+aliases:
+  - /continuous_integration/explore_pipelines/
 further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
@@ -13,6 +15,18 @@ further_reading:
 
 Your pipelines appear in the [Pipelines][1] page under the CI menu.
 
+## Setup
+
+{{< whatsnext desc="Select your CI provider to set up pipelines visibility in Datadog:" >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/circleci" >}}CircleCI{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/codefresh" >}}Codefresh{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/github" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/gitlab" >}}GitLab{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/setup_pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
+{{< /whatsnext >}}
 ## Pipelines health overview
 
 The Pipelines page shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. The Pipelines page shows metrics for the _default_ branch, usually named something like `main` or `prod`.
@@ -65,6 +79,7 @@ CI pipeline data is available when you create widgets in [Dashboards][7] and [No
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://app.datadoghq.com/ci/pipelines
 [2]: /continuous_integration/setup_pipelines/github/#enable-log-collection
