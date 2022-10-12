@@ -29,7 +29,7 @@ To send OTel metrics to Datadog, you have two options: the Datadog Agent, or the
 
 ### OTel Collector setup
 
-**OTel SDKs/Libraries** and other sources -> **OTel Collector** with the Datadog Exporter -> **Datadog**
+{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (e.g. Prometheus) -> Datadog Exporter inside OTel Collector -> Datadog" style="width:100%;">}}
 
 Using this setup facilitates collecting telemetry data from sources besides OTel SDKs (for example, other libraries, Prometheus, etc.), as well as routing data to multiple vendors. 
 
@@ -75,8 +75,7 @@ Using this setup facilitates collecting telemetry data from sources besides OTel
 
 If you want to use the OTel Collector, but you also want to keep a full range of Datadog capabilities, use the following setup:
 
-{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (e.g. Prometheus) -> Datadog Exporter inside OTel Collector -> Datadog" style="width:100%;">}}
-
+**OTel SDKs/Libraries** -> **OTel Collector** with the OTLP Exporter -> **Datadog Agent** -> **Datadog**
 
 #### Configuration
 
