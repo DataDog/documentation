@@ -1,6 +1,8 @@
 ---
 title: Fine-tuning CWS security signals
 kind: guide
+aliases:
+- /security_platform/cloud_workload_security/guide/tuning-rules/
 ---
 
 ## Overview	

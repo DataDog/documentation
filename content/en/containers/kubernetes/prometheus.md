@@ -58,21 +58,13 @@ Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying 
 metadata:
   #(...)
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
-      {
-        "openmetrics": {
-          "init_config": {},
-          "instances": [
-            {
-              "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
-              "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
-              "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
-
-            }
-          ]
-        }
-      }
-    
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: 
+      openmetrics:
+        instances:
+          openmetrics_endpoint: http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT>
+          namespace: <METRICS_NAMESPACE_PREFIX_FOR_DATADOG>
+          metrics:
+            - <METRIC_TO_FETCH>: <NEW METRIC NAME>
 spec:
   containers:
     - name: '<CONTAINER_IDENTIFIER>'
@@ -143,7 +135,11 @@ For a full list of available parameters for instances, including `namespace` and
              openmetrics:
                instances:
                  - openmetrics_endpoint: http://%%host%%:%%port%%/metrics
-                 - namespace: abc   
+                 - namespace: documentation_example_kubernetes
+                 - metrics:
+                     - promhttp_metric_handler_requests: handler.requests
+                     - promhttp_metric_handler_requests_in_flight: handler.requests.in_flight
+                     - go_memory.*   
         spec:
           containers:
           - name: prometheus-example
