@@ -1,7 +1,7 @@
 ---
 title: Alert Value Widget
 kind: documentation
-description: "Graph the current value of a metric in any monitor defined on your system."
+description: "Graph the current value of a metric in any metric monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_value/
 further_reading:
@@ -10,7 +10,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-Alert values are query values showing the current value of the metric in any monitor defined on your system:
+Alert values are query values showing the current value of the metric in any metric monitor defined on your system:
 
 {{< img src="dashboards/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
 
@@ -19,7 +19,7 @@ Alert values are query values showing the current value of the metric in any mon
 
 ### Configuration
 
-1. Choose a previously created monitor to graph.
+1. Choose a previously created metric monitor to graph.
 2. Select the formatting to display:
     * raw value
     * 0/1/2/3 decimals
