@@ -18,6 +18,6 @@ inventories_configuration_enabled: true
 Alternatively, you can also use the `DD_INVENTORIES_CONFIGURATION_ENABLED=true` environment variable.
 
 **Note**: `inventories_enabled` configuration setting, which is enabled by default, also controls this feature.
-Disabling it will override `inventories_configuration_enabled`.
+Disabling `inventories_enabled` overrides any `inventories_configuration_enabled` settings.
 
 [1]: https://app.datadoghq.com/infrastructure
