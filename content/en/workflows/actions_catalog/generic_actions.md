@@ -11,7 +11,7 @@ further_reading:
 
 <div class="alert alert-warning">Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
-Generic actions are actions which are not associated with a Datadog integration or resource. These actions allow you to implement custom logic within your workflow such as branching the workflow based on a condition, making a custom HTTP request, and transforming data and objects with code. As with all workflow actions, you can use the [context variables][5] tab to access any values available in the workflow context.
+Generic actions are workflow actions which are not associated with a Datadog integration or resource. These actions allow you to implement custom logic within your workflow such as branching the workflow based on a condition, making a custom HTTP request, or transforming data and objects with code. As with all workflow actions, you can use the [context variables][5] tab to access any values available in the workflow context.
 
 ## HTTP
 

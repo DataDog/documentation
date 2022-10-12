@@ -12,7 +12,7 @@ cascade:
 
 Datadog Workflows provide actions that can be performed against your infrastructure and integrations. You can orchestrate and automate your end-to-end processes by linking together actions for cloud providers, Datadog integrations, Datadog itself, custom HTTP requests, and more. Read [build workflows][1] for more information on creating a workflow.
 
-Click on the buttons below to filter by different parts of Datadog Workflows. A description is available for each action, as well as the action's inputs, outputs, and parameters.
+See below a list of all available workflow actions. Click an action to see its description, inputs, outputs, and parameters.
 
 
 [1]: /workflows/build/
