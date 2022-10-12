@@ -291,7 +291,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://junit.org/junit5/
-[2]: https://docs.datadoghq.com/continuous_integration/setup_tests/
+[2]: https://docs.datadoghq.com/continuous_integration/tests/
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
 [4]: https://github.com/DataDog/datadog-ci/releases
 [5]: https://app.datadoghq.com/organization-settings/api-keys

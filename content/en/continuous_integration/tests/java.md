@@ -2,7 +2,7 @@
 title: Java Tests
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/setup_tests/containers/"
+    - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
     - link: "/continuous_integration/tests"

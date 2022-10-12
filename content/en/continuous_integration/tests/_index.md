@@ -29,13 +29,13 @@ The [Tests][1] page, under the CI menu in Datadog, provides a test-first view in
 
 
 {{< whatsnext desc="Choose your language to set up tests visibility in Datadog:" >}}
-    {{< nextlink href="continuous_integration/setup_tests/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_tests/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_tests/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_tests/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_tests/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_tests/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/setup_tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 ## Explore tests
 

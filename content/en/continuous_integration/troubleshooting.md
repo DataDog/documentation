@@ -153,13 +153,13 @@ If you have admin access, you can update it from the [Repository Settings Page][
 Still need help? Contact [Datadog support][1].
 
 [1]: /help/
-[2]: /continuous_integration/setup_tests/
+[2]: /continuous_integration/tests/
 [3]: https://app.datadoghq.com/ci/test-runs
 [4]: https://app.datadoghq.com/ci/test-services
 [5]: /tracing/troubleshooting/tracer_debug_logs
-[6]: /continuous_integration/setup_tests/containers/
+[6]: /continuous_integration/tests/containers/
 [7]: https://github.com/travisjeffery/timecop
 [8]: https://github.com/spulec/freezegun
-[9]: https://docs.datadoghq.com/continuous_integration/setup_tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[10]: https://docs.datadoghq.com/continuous_integration/setup_tests/
+[9]: https://docs.datadoghq.com/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
+[10]: https://docs.datadoghq.com/continuous_integration/tests/
 [11]: https://app.datadoghq.com/ci/settings/repository

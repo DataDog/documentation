@@ -251,4 +251,4 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://docs.docker.com/engine/reference/run/
 [2]: https://docs.docker.com/compose/reference/
-[3]: /continuous_integration/setup_tests/
+[3]: /continuous_integration/tests/
