@@ -8,7 +8,7 @@ Datadog provides an Azure extension to assist with Agent deployment on Azure ins
 * [Introducing Azure monitoring with one-click Datadog deployment][1]
 * [Azure integration documentation][2]
 
-An alternative to the GUI install is via command line.
+An alternative to the GUI installation is the command line.
 To run the Datadog Agent in your Azure instances as an extension, use the following syntaxes:
 
 {{< tabs >}}
@@ -17,7 +17,7 @@ To run the Datadog Agent in your Azure instances as an extension, use the follow
 ```powershell
 Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "datadoghq.com"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<YOUR_DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 ```
-More information on the syntax to set Azure instance extensions can be found in the [Azure Extension Set-AzureVMExtension documentation][3].
+More information on the syntax to set Azure instance extensions can be found in the [Azure Extension Set-AzureVMExtension documentation][1].
 
 The Azure Extension can accept both normal settings and protected settings.
 
@@ -26,7 +26,7 @@ The normal settings include:
 | Variable | Type | Description  |
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
-| `agentVersion` | String | The Agent version to install, following the format x.y.z or latest |
+| `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
 | `agentConfiguration` | URI | (optional) Url to the Azure blob contaning the Agent configuration as a zip. |
 | `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
 
@@ -36,7 +36,7 @@ The protected settings include:
 |----------|------|--------------|
 | `api_key`| String | Adds the Datadog API KEY to the configuration file. |
 
-**Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence. Also note that for now, if an API key is set on the target machine, it's not possible to change it with `Set-AzureVMExtension`.
+**Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence. Also note that if an API key is set on the target machine, it's not possible to change it with `Set-AzureVMExtension`.
 
 ### Specifying a configuration URI
 This example shows how to specify a configuration for the Datadog Agent to use.
@@ -59,13 +59,14 @@ This example shows how to specify a version of the Agent to install. By default 
 Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "datadoghq.com"; "agentVersion" = "7.39.0"} -ProtectedSettings @{"api_key" = "<YOUR_DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 ```
 
+[1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
 {{% /tab %}}
 {{% tab "Linux" %}}
 
 ```bash
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 5.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.39.0"}' --protected-settings '{"api_key":"<YOUR_DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 ```
-More information on the syntax to set Azure instance extensions can be found in the [Azure Extension CLI reference][4].
+More information on the syntax to set Azure instance extensions can be found in the [Azure Extension CLI reference][1].
 
 The Azure Extension can accept both normal settings and protected settings.
 
@@ -74,7 +75,7 @@ The normal settings include:
 | Variable | Type | Description  |
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
-| `agentVersion` | String | The Agent version to install, following the format x.y.z or latest |
+| `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
 
 The protected settings include:
 
@@ -82,10 +83,11 @@ The protected settings include:
 |----------|------|--------------|
 | `api_key`| String | Adds the Datadog API KEY to the configuration file. |
 
+
+[1]: https://learn.microsoft.com/en-us/cli/azure/vm/extension
+
 {{% /tab %}}
 {{< /tabs >}}
 
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
 [2]: /integrations/azure/#deploy-agents
-[3]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
-[4]: https://learn.microsoft.com/en-us/cli/azure/vm/extension
