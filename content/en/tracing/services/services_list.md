@@ -88,7 +88,7 @@ Click the cog menu to choose what to display in your services list:
 {{< img src="tracing/visualization/services_columns_2.png" alt="Services columns" style="width:40%;">}}
 
 ## Data retention
-The services/resources statistics and span summaries on Service List and Service Pages are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer.[Learn more about data retention for APM][12].
+The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][12].
 
 
 ## Further Reading
