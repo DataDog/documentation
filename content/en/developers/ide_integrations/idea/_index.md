@@ -47,7 +47,7 @@ The plugin features:
 ### Add Datadog credentials
 
 After installing the Datadog plugin and restarting IDEA, add your Datadog API and application keys to authenticate with Datadog:
-1. With a file or project open in IDEA, click the **Datadog** tab.
+1. With a file or project open in IDEA, click the **Datadog** tool window.
 1. Click **Add your credentials...**.
 1. Enter your name, [API key and application key][5], and select a site.
 
@@ -145,9 +145,11 @@ Some Datadog plugin features require synchronization with a Profiling tab:
 
 To control which profiling tab contributes data to the IDEA project tree or editor highlights, you can pin a profile, or let IDEA sync data according to whichever plugin tab is active.
 
-To sync a profile, in the desired Profiling tab, click on the **Sync** and:
+To sync a profile, in the desired Profiling tab, click the **Sync** button and:
 - Select **Sync with** and choose the name of the desired profile to pin that profile.
 - Select **Sync with active profile** to allow IDEA to sync data with whichever profile tab is active.
+
+{{< img src="/developers/ide_integrations/idea/code-sync-button.png" alt="Click the Sync button to sync a profile" style="width:75%;" >}}
 
 After you select a profile, a yellow dot appears next to the selected tab's title to indicate that it has focus.
 
