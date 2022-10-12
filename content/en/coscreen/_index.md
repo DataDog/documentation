@@ -7,14 +7,40 @@ kind: documentation
 [CoScreen][1] is a collaborative meeting tool that allows multiple participants to simultaneously share and interact with any application window on their desktops. It was specifically designed for engineers for use cases such as pair programming, incident management, joint troubleshooting, team standups, and employee onboarding.
 
 ## Setup
-### Requirements
+#### Requirements
 CoScreen is a desktop app available for Windows 10 and macOS v10.15 Catalina and higher. 
 
 [Download CoScreen][2].
 
-## Usage
+After installing CoScreen, launch the desktop app and sign up.
 
-With CoScreen, multiple users can share windows with each other at the same time. You can share application windows in multiple ways.
+### Join your first CoScreen
+
+<!-- {{< img src="coscreen/join.mp4" alt="" video="true" >}} -->
+
+Click on **New CoScreen** to create and join a new meeting. If you were invited to a CoScreen meeting, click on the link, or click on **Join a CoScreen** and paste the CoScreen ID or URL of the meeting.
+
+### Invite your collaborators
+
+<!-- {{< img src="coscreen/invite_collaborators.mp4" alt="" video="true" >}} -->
+
+Up to ten users can join one CoScreen at the same time. Invite collaborators by sharing the link.
+
+### Share windows
+
+Click on the **Share windows** button.
+
+<!-- {{< img src="coscreen/share_windows_button.png" alt="" >}} -->
+
+By default, when you join a CoScreen, the following dialog appears:
+
+<!-- {{< img src="coscreen/share_windows.png" alt="" >}} -->
+
+You can share application windows in multiple ways.
+
+ - **Share all windows on your display**.
+ 
+   When you join a CoScreen, click on the screen sharing icon next to your user and select _All Windows_. This shares all open windows on a designated display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
 
  - **Select individual windows to be shared**.
 
@@ -23,13 +49,13 @@ With CoScreen, multiple users can share windows with each other at the same time
    You can share multiple windows at the same time. Shared windows have a border around them in a color assigned to each CoScreen participant.
 
    {{< img src="coscreen/sharewindow.mp4" alt="Facet creation for custom tag" style="width:60%;" video="true">}}
- - **Share all windows on your display**.
- 
-   When you join a CoScreen, click on the screen sharing icon next to your user and select _All Windows_. This shares all open windows on a designated display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
+
 
 Screen sharing is deactivated by default when you join a CoScreen. CoScreen shares windows, but does not share your desktop backgrounds or icons. 
 
 **Note**: If your company uses a corporate firewall/SSL Inspection, the CoScreen client might not be able to connect to the CoScreen server and would therefore be unable to establish a connection between you and your team members. Contact support for a list of URLs to whitelist.
+
+### Collaborate in shared windows
 
 ### Integrations
 
