@@ -9488,7 +9488,6 @@ paths:
       summary: Get all API keys
       tags:
       - Key Management
-      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -9532,7 +9531,6 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
           step: there is a valid "api_key" in the system
-      x-menu-order: 4
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -9565,7 +9563,6 @@ paths:
       summary: Delete an API key
       tags:
       - Key Management
-      x-menu-order: 1
       x-undo:
         type: idempotent
     get:
@@ -9598,7 +9595,6 @@ paths:
       summary: Get API key
       tags:
       - Key Management
-      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -9643,7 +9639,6 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v2/application_keys:
@@ -9687,7 +9682,6 @@ paths:
       summary: Get all application keys
       tags:
       - Key Management
-      x-menu-order: 9
       x-undo:
         type: safe
   /api/v2/application_keys/{app_key_id}:
@@ -9717,7 +9711,6 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -9756,7 +9749,6 @@ paths:
       summary: Get an application key
       tags:
       - Key Management
-      x-menu-order: 8
       x-undo:
         type: safe
     patch:
@@ -9801,7 +9793,6 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v2/audit/events:
@@ -10217,7 +10208,6 @@ paths:
       summary: Get all application keys owned by current user
       tags:
       - Key Management
-      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -10261,7 +10251,6 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "application_key" in the system
-      x-menu-order: 4
       x-undo:
         operationId: DeleteCurrentUserApplicationKey
         parameters:
@@ -10294,7 +10283,6 @@ paths:
       summary: Delete an application key owned by current user
       tags:
       - Key Management
-      x-menu-order: 1
       x-undo:
         type: idempotent
     get:
@@ -10326,7 +10314,6 @@ paths:
       summary: Get one application key owned by current user
       tags:
       - Key Management
-      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -10371,7 +10358,6 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
-      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
@@ -14103,7 +14089,6 @@ paths:
       summary: List all the RUM applications
       tags:
       - RUM
-      x-menu-order: 8
       x-undo:
         type: safe
     post:
@@ -14138,7 +14123,6 @@ paths:
               {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
-      x-menu-order: 7
       x-undo:
         operationId: DeleteRUMApplication
         parameters:
@@ -14166,7 +14150,6 @@ paths:
       summary: Delete a RUM application
       tags:
       - RUM
-      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -14193,7 +14176,6 @@ paths:
       summary: Get a RUM application
       tags:
       - RUM
-      x-menu-order: 5
       x-undo:
         type: safe
     patch:
@@ -14235,7 +14217,6 @@ paths:
       tags:
       - RUM
       x-codegen-request-body-name: body
-      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/rum/events:
@@ -14610,7 +14591,6 @@ paths:
       summary: Get all security filters
       tags:
       - Security Monitoring
-      x-menu-order: 16
       x-undo:
         type: safe
     post:
@@ -14663,7 +14643,6 @@ paths:
               \       }\n     ],\n      \"filtered_data_type\":\"logs\",\n      \"is_enabled\":
               true\n     }\n  }\n}"
           step: there is a valid "security_filter" in the system
-      x-menu-order: 15
       x-undo:
         operationId: DeleteSecurityFilter
         parameters:
@@ -14693,7 +14672,6 @@ paths:
       summary: Delete a security filter
       tags:
       - Security Monitoring
-      x-menu-order: 12
       x-undo:
         type: idempotent
     get:
@@ -14727,7 +14705,6 @@ paths:
       summary: Get a security filter
       tags:
       - Security Monitoring
-      x-menu-order: 14
       x-undo:
         type: safe
     patch:
@@ -14770,7 +14747,6 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 13
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules:
@@ -15119,7 +15095,6 @@ paths:
       summary: Get a signal's details
       tags:
       - Security Monitoring
-      x-menu-order: 11
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -15166,7 +15141,6 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/incidents:
@@ -15213,7 +15187,6 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/state:
@@ -15260,7 +15233,6 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/series:
@@ -15429,7 +15401,6 @@ paths:
       summary: List application keys for this service account
       tags:
       - Service Accounts
-      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -15477,7 +15448,6 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "service_account_application_key" for "service_account_user"
-      x-menu-order: 5
       x-undo:
         operationId: DeleteServiceAccountApplicationKey
         parameters:
@@ -15631,7 +15601,6 @@ paths:
       summary: Get a list of all incident services
       tags:
       - Incident Services
-      x-menu-order: 4
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15680,7 +15649,6 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
           step: there is a valid "service" in the system
-      x-menu-order: 5
       x-undo:
         operationId: DeleteIncidentService
         parameters:
@@ -15843,7 +15811,6 @@ paths:
       summary: Delete an existing incident service
       tags:
       - Incident Services
-      x-menu-order: 2
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15883,7 +15850,6 @@ paths:
       summary: Get details of an incident service
       tags:
       - Incident Services
-      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15928,7 +15894,6 @@ paths:
       tags:
       - Incident Services
       x-codegen-request-body-name: body
-      x-menu-order: 3
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15970,7 +15935,6 @@ paths:
       summary: Get a list of all incident teams
       tags:
       - Incident Teams
-      x-menu-order: 4
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -16019,7 +15983,6 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
           step: there is a valid "team" in the system
-      x-menu-order: 5
       x-undo:
         operationId: DeleteIncidentTeam
         parameters:
@@ -16056,7 +16019,6 @@ paths:
       summary: Delete an existing incident team
       tags:
       - Incident Teams
-      x-menu-order: 2
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -16096,7 +16058,6 @@ paths:
       summary: Get details of an incident team
       tags:
       - Incident Teams
-      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -16141,7 +16102,6 @@ paths:
       tags:
       - Incident Teams
       x-codegen-request-body-name: body
-      x-menu-order: 3
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
