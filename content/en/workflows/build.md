@@ -12,14 +12,7 @@ You can create workflows or edit existing workflows from the [**Workflows** page
 - Hover over a workflow for the options to delete or clone the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.
 
-## Create a workflow
-
-To create a workflow:
-1. Click **New workflow**.
-1. Enter a name for the workflow, and click **Create**.
-1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
-
-### Build a workflow from a blueprint
+## Build a workflow from a blueprint
 
 1. Click the **Blueprints** tab.
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
@@ -28,6 +21,13 @@ To create a workflow:
 1. Workflow steps that require updates are marked with exclamation mark icons.
 1. Click on each workflow step you would like to modify, and fill in any empty fields on the **Configure** tab.
 1. When you are finished modifying the workflow, click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
+
+## Create a new workflow
+
+To create a workflow:
+1. Click **New workflow**.
+1. Enter a name for the workflow, and click **Create**.
+1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
 
 ### Build a workflow with the workflow builder
 
