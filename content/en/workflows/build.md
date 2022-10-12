@@ -19,6 +19,16 @@ To create a workflow:
 1. Enter a name for the workflow, and click **Create**.
 1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
 
+### Build a workflow from a blueprint
+
+1. Click the **Blueprints** tab.
+1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
+1. Find the blueprint you would like to use, and click on it. The workflow canvas appears.
+1. Click the pencil icon to update the workflow name. If desired, type a new name in the text box, and click **Save**.
+1. Workflow steps that require updates are marked with exclamation mark icons.
+1. Click on each workflow step you would like to modify, and fill in any empty fields on the **Configure** tab.
+1. When you are finished modifying the workflow, click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
+
 ### Build a workflow with the workflow builder
 
 1. Click **Add a step to get started** to add the first step to your workflow.
