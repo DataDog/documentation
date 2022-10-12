@@ -30,7 +30,7 @@ The plugin features:
 
 ## Requirements
 
-- **A Datadog account**: The plugins require a datadog account. If you're new to the Datadog suite of products, go the [Datadog website][4] for to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The plugins require a datadog account. If you're new to the Datadog suite of products, go to the [Datadog website][4] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiling**: To display code-level insights, the plugin requires Continuous Profiling instrumented on your Java Services. For more information, see [Getting Started with the Continuous Profiler][3].
 
 ## Setup
@@ -42,14 +42,14 @@ The plugin features:
 1. If you receive a prompt notifying you that Datadog is a third-party plugin, click **Accept**.
 1. Click **Restart IDE** to restart IDEA.
 
-{{< img src="/developers/ide_integrations/idea/datadog-plugin.png" alt="The Datadog plugin" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="The Datadog plugin" style="width:100%;" >}}
 
 ### Add Datadog credentials
 
 After installing the Datadog plugin and restarting IDEA, add your Datadog API and application keys to authenticate with Datadog:
 1. With a file or project open in IDEA, click the **Datadog** tab.
 1. Click **Add your credentials...**.
-1. Enter your name, API key and application key, and select a site.
+1. Enter your name, [API key and application key][5], and select a site.
 
 **Note**: For most users, one pair of keys is all that is required. If you're using a multi-org setup with multiple key pairs, check to ensure that the correct pair is active using the **Tools** -> **Datadog** section in **Preferences**.
 
@@ -143,7 +143,7 @@ Some Datadog plugin features require synchronization with a Profiling tab:
 - The IDEA project tree view is annotated with the selected profiles metrics.
   {{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
 
-To control which profiling tab contributes data to the IDEA project tree or editor highlights, you can pin a profile, or let IDEA sync data according to whichever plugin is active.
+To control which profiling tab contributes data to the IDEA project tree or editor highlights, you can pin a profile, or let IDEA sync data according to whichever plugin tab is active.
 
 To sync a profile, in the desired Profiling tab, click on the **Sync** and:
 - Select **Sync with** and choose the name of the desired profile to pin that profile.
@@ -153,7 +153,7 @@ After you select a profile, a yellow dot appears next to the selected tab's titl
 
 ## Feedback
 
-User feedback is important to us. Let us know what you think about the plugin, or provide feedback on how on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
+Let us know what you think about the plugin! Provide feedback on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
 
 ## Further reading
 
@@ -162,3 +162,4 @@ User feedback is important to us. Let us know what you think about the plugin, o
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
 [3]: /getting_started/profiler/
 [4]: https://www.datadoghq.com/
+[5]: /account_management/api-app-keys/
