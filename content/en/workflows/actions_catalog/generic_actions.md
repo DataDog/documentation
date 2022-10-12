@@ -3,6 +3,7 @@ title: Generic Actions
 kind: documentation
 disable_toc: false
 type: workflows
+is_beta: true
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
