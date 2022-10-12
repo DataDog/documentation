@@ -54,6 +54,18 @@ And to apply the `_.includes` Lodash function on an array returned by a previous
 _.includes($.Steps.Array_function.data, "Bits")
 ```
 
+The data returned by these actions can then be referenced in subsequent steps of the workflow.
+
+### Expression
+
+Use expression actions for data transformations that can be accomplished in a single line of code, and do not require variable assignments or multiple standalone operations. For example:
+
+`[1, 2, 3].filter(x => x < 3)`
+
+### Function
+
+The function action allows for variable assignments and data transformations requiring multiple expressions.
+
 ## Logic
 
 Logic actions enable you to implement custom logic in the execution of your workflows, such as branching to a different workflow based on a condition, or pausing the execution of the workflow.
