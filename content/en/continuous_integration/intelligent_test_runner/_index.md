@@ -17,6 +17,47 @@ By only running tests on relevant code, when tests do fail it's more likely a le
 
 ### Javascript
 
+To enable Intelligent Test Runner, the following environment variables need to be set:
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
+: Enables or disables Agentless mode.<br/>
+**Default**: `false`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+`DD_SITE` (Required)
+: The [Datadog site][3] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+`DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (Required)
+: Flag to enable git metadata upload.<br/>
+**Default**: `false`
+
+`DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
+: Flag to enable test skipping. <br/>
+**Default**: `false`
+
+After setting these environment variables, run your tests as you normally do:
+
+{{< code-block lang="bash" >}}
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
+{{< /code-block >}}
+
+#### UI activation
+In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][4].
+
+#### Compatibility
+
+Intelligent Test Runner is only supported in the following versions and testing frameworks:
+
+* `dd-trace>=3.4.0`
+* `jest>=24.8.0`
+  * Only `jest-circus/runner` is supported as `testRunner`.
+  * Only `jsdom` and `node` are supported as test environments.
+
 ### .NET
 
 To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.16.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables are set:
