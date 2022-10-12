@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 Starting with version `7.40.0` the Agent can send its own configuration to Datadog to be displayed in the
-[Infrastructure page][1]. In the `Agent configuration` section of the host detail panel.
+[Infrastructure page][1] in the `Agent Configuration` section of the host detail panel.
 
 The Agent configuration will be scrubbed from any sensitive information and will only contain settings set by the user
 through the configuration file or environment variables. The configuration will be refreshed every 10 minutes.
