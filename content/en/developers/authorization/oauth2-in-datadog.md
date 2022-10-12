@@ -51,6 +51,8 @@ Outlined below is a step-by-step overview of what your application needs to do i
 
     This endpoint generates an API Key that is only shown once. **Please ensure that you store this value in a secure database or location**. 
 
+**Note:** It's recommended to surface error messages on your UI if errors arise from these endpoints at any point in the flow.
+
 
 ## Authorization Code Grant Flow With PKCE
 ### Overview
