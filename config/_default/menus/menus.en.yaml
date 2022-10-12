@@ -1932,127 +1932,117 @@ main:
     pre: ci
     identifier: ci
     parent: ci_visibility_heading
-    weight: 150000
-  - name: Setup Tests
-    url: continuous_integration/setup_tests/
+    weight: 1
+  - name: Test Visibility
+    url: continuous_integration/tests/
     parent: ci
-    identifier: setup_tests
+    identifier: tests_visibility
     weight: 1
   - name: .NET
-    url: continuous_integration/setup_tests/dotnet/
-    parent: setup_tests
+    url: continuous_integration/tests/dotnet/
+    parent: tests_visibility
     identifier: ci_dotnet
     weight: 101
   - name: Java
-    url: continuous_integration/setup_tests/java/
-    parent: setup_tests
+    url: continuous_integration/tests/java/
+    parent: tests_visibility
     identifier: ci_java
     weight: 102
   - name: JavaScript and TypeScript
-    url: continuous_integration/setup_tests/javascript/
-    parent: setup_tests
+    url: continuous_integration/tests/javascript/
+    parent: tests_visibility
     identifier: ci_javascript
     weight: 103
   - name: Python
-    url: continuous_integration/setup_tests/python/
-    parent: setup_tests
+    url: continuous_integration/tests/python/
+    parent: tests_visibility
     identifier: ci_python
     weight: 104
   - name: Ruby
-    url: continuous_integration/setup_tests/ruby/
-    parent: setup_tests
+    url: continuous_integration/tests/ruby/
+    parent: tests_visibility
     identifier: ci_ruby
     weight: 105
   - name: Swift
-    url: continuous_integration/setup_tests/swift/
-    parent: setup_tests
+    url: continuous_integration/tests/swift/
+    parent: tests_visibility
     identifier: ci_swift
     weight: 106
   - name: JUnit Report Uploads
-    url: continuous_integration/setup_tests/junit_upload/
-    parent: setup_tests
+    url: continuous_integration/tests/junit_upload/
+    parent: tests_visibility
     identifier: ci_junit
     weight: 107
   - name: Tests in Containers
-    url: continuous_integration/setup_tests/containers/
-    parent: setup_tests
+    url: continuous_integration/tests/containers/
+    parent: tests_visibility
     identifier: ci_containers
     weight: 108
-  - name: Setup Pipelines
-    url: continuous_integration/setup_pipelines/
+  - name: Pipeline Visibility
+    url: continuous_integration/pipelines/
     parent: ci
-    identifier: setup_pipelines
+    identifier: pipeline_visibility
     weight: 2
   - name: Buildkite
-    url: continuous_integration/setup_pipelines/buildkite/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/buildkite/
+    parent: pipeline_visibility
     identifier: ci_buildkite
     weight: 201
   - name: CircleCI
-    url: continuous_integration/setup_pipelines/circleci/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/circleci/
+    parent: pipeline_visibility
     identifier: ci_circleci
     weight: 202
   - name: Codefresh
-    url: continuous_integration/setup_pipelines/codefresh/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/codefresh/
+    parent: pipeline_visibility
     identifier: ci_codefresh
     weight: 203
   - name: GitHub Actions
-    url: continuous_integration/setup_pipelines/github/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/github/
+    parent: pipeline_visibility
     identifier: ci_github
     weight: 204
   - name: GitLab
-    url: continuous_integration/setup_pipelines/gitlab/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/gitlab/
+    parent: pipeline_visibility
     identifier: ci_gitlab
     weight: 205
   - name: Jenkins
-    url: continuous_integration/setup_pipelines/jenkins/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/jenkins/
+    parent: pipeline_visibility
     identifier: ci_jenkins
     weight: 206
   - name: Custom Commands
-    url: continuous_integration/setup_pipelines/custom_commands/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/custom_commands/
+    parent: pipeline_visibility
     identifier: ci_custom_commands
     weight: 210
   - name: Custom Tags and Metrics
-    url: continuous_integration/setup_pipelines/custom_tags_and_metrics/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/custom_tags_and_metrics/
+    parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
     weight: 211
-  - name: Exploring Tests
-    url: continuous_integration/explore_tests/
-    parent: ci
-    identifier: explore_tests
-    weight: 3
-  - name: Exploring Pipelines
-    url: continuous_integration/explore_pipelines/
-    parent: ci
-    identifier: explore_pipelines
-    weight: 4
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
     identifier: intelligent_test_runner
-    weight: 5
+    weight: 3
   - name: Setup
     url: continuous_integration/intelligent_test_runner/setup/
     parent: intelligent_test_runner
     identifier: itr_setup
-    weight: 201
+    weight: 301
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 6
+    weight: 4
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 7
+    weight: 5
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
