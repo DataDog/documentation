@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams’ workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
+Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams’ workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
 
 {{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The log forwarding page showing custom destinations highlighted and splunk, HTTP endpoint, and Elasticsearch in the list of destinations" >}}
 
@@ -38,7 +38,7 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 {{% tab "HTTP" %}}
 
 6. Enter a name for the destination. 
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint should start with `https://`.
+7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
 8. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
     - Basic Authentication: Provide the username and password.
     - Request Header: Provide the header name and value. 
@@ -49,7 +49,7 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 {{% tab "Splunk" %}}
 
 6. Enter a name for the destination. .
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint should start with `https://`.
+7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
 8. In the **Configure Authentication** section, enter the Splunk HEC token. 
 9. Click **Save**.
 
@@ -59,7 +59,7 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 
 6. Enter a name for the destination.
 7. In the **Configure Destination** section, enter the following details:
-    a. The endpoint to which you want to send the logs. The endpoint should start with `https://`.
+    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`.
     b. The name of the destination index where you want to send the logs.
     c. The index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. 
 8. In the **Configure Authentication** section, enter the username and password. 
