@@ -20,6 +20,9 @@ CoScreen supports high-resolution screen sharing, even if you and your peers hav
 #### CPU
 Sharing windows can take up to 60 percent of one CPU core on older systems because CoScreen captures them at a much higher quality than many other tools. Check your CPU allocation.
 
+### Firewalls and SSL
+If your organization uses a corporate firewall or SSL inspection, the CoScreen client might not be able to connect to the CoScreen server and would therefore be unable to establish a connection between you and your team members. Contact support for a list of URLs to whitelist.
+
 ### Troubleshooting on macOS
 
 #### The side panel UI is grayed out, and a connection is never established
