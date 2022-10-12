@@ -5,7 +5,7 @@ further_reading:
     - link: "/continuous_integration/setup_tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/explore_tests"
+    - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
@@ -377,7 +377,7 @@ DD_ENV=ci bundle exec rake spec
 
 {{% /tab %}}
 {{< /tabs >}}
-  
+
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the current active span:
@@ -392,7 +392,7 @@ Datadog::Tracing.active_span&.set_tag('test_owner', 'my_team')
 ```
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Ruby custom instrumentation documentation.
-  
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog.configure` block, or using environment variables:

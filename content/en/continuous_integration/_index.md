@@ -73,7 +73,7 @@ See [Setup Pipelines][3] and [Setup Tests][4] for instructions on setting up Dat
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: https://app.datadoghq.com/notebook/list
-[3]: /continuous_integration/setup_pipelines/
-[4]: /continuous_integration/setup_tests/
-[5]: /continuous_integration/explore_pipelines/
-[6]: /continuous_integration/explore_tests/
+[3]: /continuous_integration/pipelines/
+[4]: /continuous_integration/tests/
+[5]: /continuous_integration/pipelines/
+[6]: /continuous_integration/tests/

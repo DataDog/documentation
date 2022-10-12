@@ -2,7 +2,7 @@
 title: Swift Tests
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/explore_tests"
+    - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"

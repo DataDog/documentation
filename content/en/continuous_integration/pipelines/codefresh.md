@@ -2,7 +2,7 @@
 title: Set up Tracing on Codefresh Pipelines
 kind: documentation
 further_reading:
-    - link: "/continuous_integration/explore_pipelines"
+    - link: "/continuous_integration/pipelines"
       tag: "Documentation"
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
