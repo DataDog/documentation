@@ -69,6 +69,8 @@ CREATE USER datadog FOR LOGIN datadog;
 
 It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
 
+**For AlwaysOn users**, information about Availability Group (AG) secondary replicas is collected via the primary replica, so the agent must connect via the listener endpoint. It's recommended to use an observability node architecture where the agent is installed on a separate server and connects to the listener endpoint. Doing so helps keep the agent up and running in the event of a failover.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}

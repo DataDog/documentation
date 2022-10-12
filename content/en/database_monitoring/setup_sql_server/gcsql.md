@@ -22,6 +22,8 @@ Complete the following steps to enable Database Monitoring with your database:
 2. [Install the Agent](#install-the-agent)
 3. [Install the Cloud SQL integration](#install-the-cloud-sql-integration)
 
+**For AlwaysOn users**, information about Availability Group (AG) secondary replicas is collected via the primary replica, so the agent must connect via the listener endpoint. It's recommended to use an observability node architecture where the agent is installed on a separate server and connects to the listener endpoint. Doing so helps keep the agent up and running in the event of a failover.
+
 ## Before you begin
 
 Supported SQL Server versions
