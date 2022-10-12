@@ -58,10 +58,10 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 {{% tab "Elasticsearch" %}}
 
 6. Enter a name for the destination.
-7. In the **Configure Destination** section, enter the following details:
-    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`.
-    b. The name of the destination index where you want to send the logs.
-    c. The index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. 
+7. In the **Configure Destination** section, enter the following details:  
+    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`.  
+    b. The name of the destination index where you want to send the logs.  
+    c. The index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`.  
 8. In the **Configure Authentication** section, enter the username and password. 
 9. Click **Save**.
 
