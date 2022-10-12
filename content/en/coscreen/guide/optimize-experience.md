@@ -10,9 +10,9 @@ You can influence a few key factors behind the quality of the windows you and yo
 
 #### Network bandwidth and stability
 
-* Make sure you that every participant has a fast and stable internet connection with at least 5Mbps up- and download (test your connection here: https://www.speedtest.net).
+* Make sure that every participant has a fast and stable internet connection with at least 5Mbps up- and download (test your connection here: https://www.speedtest.net).
 * Make sure your system does not have a packet loss of more than 2% as video conferencing quickly becomes unstable above that threshold no matter the provider. Check it out using https://packetlosstest.com and if you see issues, try restarting your wifi router/modem, getting closer to your wifi router or test it with an alternative internet connection.
-* CoScreen usually works the fastest if there are only two participants who can connect peer-to-peer (i.e. directly, without having a corporate proxy or firewall between them). As soon as there are 3 or more participants or a direct connection cannot be established, the traffic will be routed via our globally distributed video infrastructure which ensures connectivity in all circumstances.
+* CoScreen usually works the fastest if there are only two participants who can connect peer-to-peer (i.e. directly, without having a corporate proxy or firewall between them). As soon as there are three or more participants, or a direct connection cannot be established, the traffic is routed through a globally distributed video infrastructure which ensures connectivity in all circumstances.
 
 #### Screen resolution
 CoScreen will support crystal-clear screen sharing even if you and your peers have ultra high display resolutions of 4k and above. Please make sure that your network bandwidth and CPU can handle the corresponding load (see #1). In case you run into issues, try out lower resolutions on both ends and let us know in case you don't get the quality you need.
@@ -22,9 +22,9 @@ Sharing windows can take up to 60% of one CPU core on older systems because CoSc
 
 ### Troubleshooting on macOS
 
-#### The side panel UI is greyed out, and a connection is never established
+#### The side panel UI is grayed out, and a connection is never established
 
-You may encounter a problem where the UI is stuck in the greyed out joining phase, but you never receive the "Unable to connect to CoScreen" dialog. Because coscreen expects to live on a single non-fixed desktop, if you have configured the application to reside specifically on one more desktops, this problem may occur.
+You may encounter a problem where the UI is stuck in the grayed out joining phase, but you never receive the "Unable to connect to CoScreen" dialog. Because coscreen expects to live on a single non-fixed desktop, if you have configured the application to reside specifically on one more desktops, this problem may occur.
 
 To resolve this issue, right-click on the CoScreen application icon and go to _Options_. Ensure that _Assign To_ is set to _None_. Then, leave and rejoin the CoScreen.
 

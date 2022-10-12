@@ -4,24 +4,11 @@ kind: documentation
 ---
 
 ## Overview
-tk
-
+[CoScreen][1] is a collaborative meeting tool that allows multiple participants to simultaneously share and interact with any application window on their desktops. It was specifically designed for engineers for use cases such as pair programming, incident management, joint troubleshooting, team standups, and employee onboarding.
 
 ## Setup
 ### Requirements
-CoScreen is available for Windows 10 and macOS v10.15 Catalina and higher. 
-<!-- Waitlist for Linux support -->
-
-### Integrations
-
-You can integrate CoScreen with Slack, Google Calendar, VS Code, and other apps. [See all CoScreen integrations.][1]
-
-To request a new integration, or to access CoScreen's API (private beta) to develop your own integrations, 
-<!-- contact support? -->
-
-#### CoScreen + Slack
-
-To install the CoScreen Slack app, go to [coscreen.co/slack][2] and click on _Add to Slack_. To enable CoScreen in private channels, type `@coscreen` and hit enter/return, then click on _Invite to Channel_. To enable CoScreen in multi-user DMs, go to _View Member List_ -> _Add People_ -> _CoScreen_.
+CoScreen is a desktop app available for Windows 10 and macOS v10.15 Catalina and higher. 
 
 ## Usage
 
@@ -42,6 +29,18 @@ Screen sharing is deactivated by default when you join a CoScreen. CoScreen shar
 
 **Note**: If your company uses a corporate firewall/SSL Inspection, the CoScreen client might not be able to connect to the CoScreen server and would therefore be unable to establish a connection between you and your team members. Contact support for a list of URLs to whitelist.
 
+### Integrations
+
+You can integrate CoScreen with Slack, Google Calendar, VS Code, and other apps. [See all CoScreen integrations.][2]
+
+#### CoScreen + Slack
+
+To install the CoScreen Slack app, go to [coscreen.co/slack][3] and click on _Add to Slack_. To enable CoScreen in private channels, type `@coscreen` and hit enter/return, then click on _Invite to Channel_. To enable CoScreen in multi-user DMs, go to _View Member List_ -> _Add People_ -> _CoScreen_.
+
+#### CoScreen + Google Calendar
+
+To configure this integration, install the [CoScreen Chrome extension][4] and sign in. Open any Google Calendar event and use the **Add CoScreen** button to make the event a CoScreen meeting.
+
 ## Security and privacy
 
  - **Network Security**
@@ -56,11 +55,13 @@ Screen sharing is deactivated by default when you join a CoScreen. CoScreen shar
  - **Data Storage**
    CoScreen does not recore or store any shared information (e.g. shared windows, audio, video or remote control input).
 
-   CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][3] for more details.
+   CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][5] for more details.
 
-For all the details on how CoScreen enables secure collaboration, read the [CoScreen Security Whitepaper][4].
+For all the details on how CoScreen enables secure collaboration, read the [CoScreen Security Whitepaper][6].
 
-[1]: https://www.coscreen.co/integrations
-[2]: https://coscreen.co/slack
-[3]: https://app.termly.io/document/privacy-policy/f8dd1607-7755-4f56-9f7a-bc7d57a69e49
-[4]: https://www.coscreen.co/security
+[1]: https://coscreen.co/
+[2]: https://www.coscreen.co/integrations
+[3]: https://coscreen.co/slack
+[4]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
+[5]: https://app.termly.io/document/privacy-policy/f8dd1607-7755-4f56-9f7a-bc7d57a69e49
+[6]: https://www.coscreen.co/security
