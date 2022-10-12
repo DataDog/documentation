@@ -10,6 +10,8 @@ kind: documentation
 ### Requirements
 CoScreen is a desktop app available for Windows 10 and macOS v10.15 Catalina and higher. 
 
+[Download CoScreen][2].
+
 ## Usage
 
 With CoScreen, multiple users can share windows with each other at the same time. You can share application windows in multiple ways.
@@ -31,37 +33,38 @@ Screen sharing is deactivated by default when you join a CoScreen. CoScreen shar
 
 ### Integrations
 
-You can integrate CoScreen with Slack, Google Calendar, VS Code, and other apps. [See all CoScreen integrations.][2]
+You can integrate CoScreen with Slack, Google Calendar, VS Code, and other apps. [See all CoScreen integrations.][3]
 
 #### CoScreen + Slack
 
-To install the CoScreen Slack app, go to [coscreen.co/slack][3] and click on _Add to Slack_. To enable CoScreen in private channels, type `@coscreen` and hit enter/return, then click on _Invite to Channel_. To enable CoScreen in multi-user DMs, go to _View Member List_ -> _Add People_ -> _CoScreen_.
+To install the CoScreen Slack app, go to [coscreen.co/slack][4] and click on _Add to Slack_. To enable CoScreen in private channels, type `@coscreen` and hit enter/return, then click on _Invite to Channel_. To enable CoScreen in multi-user DMs, go to _View Member List_ -> _Add People_ -> _CoScreen_.
 
 #### CoScreen + Google Calendar
 
-To configure this integration, install the [CoScreen Chrome extension][4] and sign in. Open any Google Calendar event and use the **Add CoScreen** button to make the event a CoScreen meeting.
+To configure this integration, install the [CoScreen Chrome extension][5] and sign in. Open any Google Calendar event and use the **Add CoScreen** button to make the event a CoScreen meeting.
 
 ## Security and privacy
 
- - **Network Security**
+ - **Network security**
 
-	CoScreen uses a P2P (peer-to-peer) connection whenever you and another participant can connect directly (for example, when no corporate firewalls or proxies are between the two of you). None of your audio, video, window, or control input feeds touch CoScreen's servers. Connections are end-to-end encrypted using DTLS-SRTP.
+	CoScreen uses a P2P (peer-to-peer) connection whenever you and another participant can connect directly (for example, when no corporate firewalls or proxies are between the two of you). None of your audio, video, window, or control input feeds touch CoScreen's servers. Connections are end-to-end encrypted using DTLS-SRTP. If there are three or more users in a session, the connection is over a video bridge.
 
- - **Video Infrastructure**
+ - **Video infrastructure**
 
    Participants collaborate using an enterprise-grade, HIPAA-compatible video infrastructure with hundreds of servers that run the Jitsi framework. All video data is encrypted using DTLS-SRTP during transmission.
 
 
- - **Data Storage**
-   CoScreen does not recore or store any shared information (e.g. shared windows, audio, video or remote control input).
+ - **Data storage**
+   CoScreen does not record or store any shared information (e.g. shared windows, audio, video or remote control input).
 
-   CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][5] for more details.
+   CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][6] for more details.
 
-For all the details on how CoScreen enables secure collaboration, read the [CoScreen Security Whitepaper][6].
+For all the details on how CoScreen enables secure collaboration, read the [CoScreen Security Whitepaper][7].
 
 [1]: https://coscreen.co/
-[2]: https://www.coscreen.co/integrations
-[3]: https://coscreen.co/slack
-[4]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
-[5]: https://app.termly.io/document/privacy-policy/f8dd1607-7755-4f56-9f7a-bc7d57a69e49
-[6]: https://www.coscreen.co/security
+[2]: https://www.coscreen.co/download
+[3]: https://www.coscreen.co/integrations
+[4]: https://coscreen.co/slack
+[5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
+[6]: https://app.termly.io/document/privacy-policy/f8dd1607-7755-4f56-9f7a-bc7d57a69e49
+[7]: https://www.coscreen.co/security
