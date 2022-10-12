@@ -2255,11 +2255,16 @@ main:
     parent: log_collection
     identifier: log_collection_ruby
     weight: 111
+  - name: OpenTelemetry
+    url: logs/log_collection/opentelemetry/
+    parent: log_collection
+    identifier: log_collection_opentelemetry
+    weight: 112
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 112
+    weight: 113
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
