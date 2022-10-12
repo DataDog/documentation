@@ -15,7 +15,7 @@ This feature is disabled by default. To enable it, you need to add the following
 inventories_configuration_enabled: true
 ```
 
-Alternatively, you can also use the `DD_INVENTORIES_CONFIGURATION_ENABLED=true` environment variable.
+Alternatively, you can also use the `DD_INVENTORIES_CONFIGURATION_ENABLED=true` environment variable to enable this feature.
 
 **Note**: `inventories_enabled` configuration setting, which is enabled by default, also controls this feature.
 Disabling `inventories_enabled` overrides any `inventories_configuration_enabled` settings.
