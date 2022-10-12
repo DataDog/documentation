@@ -1,5 +1,5 @@
 ---
-title: Enabling Test Summaries in GitHub Pull Requests
+title: Enabling Test Summaries in GitHub Pull Request Comments
 kind: guide
 ---
 
@@ -27,5 +27,5 @@ To enable the GitHub comments integration:
 
 Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled test service.
 
-[1]: integrations/github_apps/
+[1]: /integrations/github_apps/
 [2]: https://app.datadoghq.com/integrations/github-apps
