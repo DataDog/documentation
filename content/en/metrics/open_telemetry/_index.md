@@ -17,7 +17,7 @@ To send OTel metrics to Datadog, you have two options: the Datadog Agent, or the
 
 ### Datadog Agent setup
 
-{{< img src="metrics/otel/otlp_ingestion.png" alt="OTel SDKs/Libraries & Datadog Trace Library -> Datadog Agent -> Datadog" style="width:100%;">}}
+{{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDKs/Libraries, Datadog Trace Library, Datadog Integrations -> Datadog Agent -> Datadog" style="width:100%;">}}
 
 
 
