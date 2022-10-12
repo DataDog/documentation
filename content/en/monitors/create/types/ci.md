@@ -110,7 +110,7 @@ The following example is a test error rate monitor using a formula that calculat
 
 #### Using CODEOWNERS for notifications
 
-You can send the notification to different teams using the `CODEOWNERS` information available in the test event.
+You can send the notification to different teams using the `CODEOWNERS` information available in the test event. 
 
 The example below configures the notification with the following logic:
 * If the test code owner is `MyOrg/my-team`, then send the notification to the `my-team-channel` Slack channel.
