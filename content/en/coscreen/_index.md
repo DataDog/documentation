@@ -16,7 +16,7 @@ After installing CoScreen, launch the desktop app and sign up.
 
 ### Join your first CoScreen
 
-{{< img src="coscreen/join.mp4" alt="" video="true" >}}
+{{< img src="coscreen/join.mp4" alt="" video="true" style="width:40%;">}}
 
 Click on **New CoScreen** to create a new CoScreen. If you were invited to a CoScreen, click on the link, or click on **Join a CoScreen** and paste the CoScreen ID or URL.
 
@@ -24,7 +24,7 @@ When you join a CoScreen, it is added to your list of _Recent CoScreens_ in the 
 
 ### Invite your collaborators
 
-{{< img src="coscreen/invite_collaborators.mp4" alt="" video="true" >}}
+{{< img src="coscreen/invite_collaborators.mp4" alt="" video="true" style="width:40%;">}}
 
 Up to ten users can join one CoScreen at the same time. Invite collaborators by sharing the link.
 
@@ -34,11 +34,11 @@ You can also add your closest collaborators in the list of _Your Collaborators_ 
 
 Click on the **Share windows** button.
 
-{{< img src="coscreen/share_windows_button.png" alt="" >}}
+{{< img src="coscreen/share_windows_button.png" alt="" style="width:40%;">}}
 
 By default, when you join a CoScreen, the following dialog appears:
 
-{{< img src="coscreen/share_windows.png" alt="" >}}
+{{< img src="coscreen/share_windows.png" alt="" style="width:40%;">}}
 
 If you have multiple displays, choose which display contains the window or windows you want to share.
 
