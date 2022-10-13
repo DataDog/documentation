@@ -2028,11 +2028,6 @@ main:
     parent: ci
     identifier: intelligent_test_runner
     weight: 3
-  - name: Setup
-    url: continuous_integration/intelligent_test_runner/setup/
-    parent: intelligent_test_runner
-    identifier: itr_setup
-    weight: 301
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
