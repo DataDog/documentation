@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" url="https://www.datadoghq.com/log-forwarding-limited-availability/" >}}
-  Log Forwarding is currently in beta. Fill out this form to request access to it.
+  Log Forwarding is currently in beta. Fill out this form to request access.
 {{< /beta-callout >}} 
 
 ## Overview
