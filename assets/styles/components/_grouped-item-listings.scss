@@ -1,4 +1,4 @@
-.rule-search {
+.grouped-item-search {
   &:focus {
     box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
     border: 1px solid transparent;
@@ -15,6 +15,10 @@
   overflow: hidden; 
   height: 28px;
 
+  .group-header-text {
+    margin-top: -1px;
+  }
+
   &:hover {
     box-shadow: 0 2px 3px rgba(0,0,0,0.3); 
   }
@@ -28,20 +32,24 @@
     }
   }
 }
+
 .js-group-header__icon {
-  background: rgba(0,0,0,0.05); 
+  background: rgba(0,0,0,0.05);
 }
+
 .js-group-header__arrow {
   transition: transform 0.125s;
-  top: 0px;
+  top: 1px;
   right: 7px;
   position: absolute;
   font-weight: 700;
   font-size: 18px;
   transform: rotate(90deg);
+
   // Point arrow inwards when collapsed
   .js-group-header:not(.active) & {
     transform: rotate(180deg);
+    top: 3px;
   }
 }
 
