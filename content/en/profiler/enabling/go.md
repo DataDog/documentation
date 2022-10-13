@@ -99,7 +99,7 @@ Alternatively you can set profiler configuration using environment variables:
 
 Go's CPU profiler only shows detailed information for Go code by default. If your program calls into C code, time spent running C code will be reflected in the profile, but the call stacks will only show Go function calls.
 
-You can optionally use a library such as [ianlancetalylor/cgosymbolizer][10] to add detailed C function call information to CPU profiles. Note that this library is considered experimental. At Datadog, it has been used in production with few issues. However, the library has been known to occasionally cause crashes and deadlocks. This can happen for programs which use C++ exceptions, or which use libraries such as `tcmalloc` which have their own profiling interfaces.
+You can optionally use a library such as [ianlancetaylor/cgosymbolizer][10] to add detailed C function call information to CPU profiles. Note that this library is considered experimental. At Datadog, it has been used in production with few issues. However, the library can cause (infrequent) deadlocks in programs which use C++ exceptions, or which use libraries such as `tcmalloc` that also collect call stacks.
 
 ## Not sure what to do next?
 
