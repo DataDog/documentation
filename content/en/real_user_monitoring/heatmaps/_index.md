@@ -20,18 +20,24 @@ A heatmap (or heat map) is a visualization of your user's Session Replay data, w
 
 To get started with heatmaps:
 
-- You need to be on the latest version of the SDK (v4.X.Y) 
+- You need to be on the latest version of the SDK (v4.20.0) 
 - Enable [Session Replay](/real_user_monitoring/session_replay/).
+- While Heatmaps are in beta, enable the following feature flag:
+
+datadogRum.init({
+    ...
+    enableExperimentalFeatures: ['clickmap']
+})
 
 ### Analysis
-Start from the [heatmap page](https://app.datadoghq.com/rum/heatmap/view) in Session Replay, select your application, and view. A heatmap shows a single view of an app and then on that page, it shows the aggregate of where all users (sessions) clicked. So each view corresponds to an application. A view is a single page within an application. Each session is a user action and includes everything they did, like all the pages they viewed.
+Start from the [heatmap page](https://app.datadoghq.com/rum/heatmap/view), select your application, and view. A heatmap shows the aggregrate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
 
 - Pick your application.
 - Pick your view.
 
 {{< img src="real_user_monitoring/heatmaps/application-and-view.jpeg" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
-The heatmap displayed shows you the most popular clicks on a given view. To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
+To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
 
 ## Insights
 
@@ -41,7 +47,7 @@ The right panel allows you to make sense of the data in the heatmap itself:
 - The total unique users viewing the page
 - The actions on the page where a frustration signal occurred
 
-Below the panel is all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
+Below the panel are all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
 
 - The number of times the user performed the action and where it falls in overall analytics of top actions on a given page.
 - If that action had a frustration signal occurring on it (like if a user rage clicked on that button), you can view the associated frustration signals as well.
