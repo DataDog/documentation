@@ -7,9 +7,11 @@ aliases:
 
 ## What is APM quantization?
 
-Datadog applies quantization to APM data during ingestion to prevent random IDs, IP addresses, or query parameter values in span or resource names from unnecessarily categorized as separate resources.
+Datadog applies quantization to APM data during ingestion to random GUIDs, numeric IDs, or query parameter values.
+Quantization helps to cut down on the name pollution that results from random patterns.
 
 ## How does quantization affect Resource and Span Names?
+
 Certain patterns in resource or span names will be replaced with static strings:
 - GUIDs: `{guid}`
 - Numeric IDs (6+ digit numbers, surrounded by delimiters or found at the end of a string): `{num}`
@@ -19,7 +21,8 @@ These replacements affect trace metrics, the resource name tag on those metrics,
 
 ### Quanization examples
 
-If a _span name_ is `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84`, then it will be renamed to `find_user_{guid}` and the resulting trace metrics will be:
+If a _span name_ is `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84`,
+then it will be renamed to `find_user_{guid}` and the resulting trace metrics will be:
 - `trace.find_user_dd_guid`
 - `trace.find_user_dd_guid.hits`
 - `trace.find_user_dd_guid.errors`
@@ -28,7 +31,8 @@ If a _span name_ is `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84`, then it wi
 
 To search for relevant spans in trace search, the query would be `operation_name:"find_user_{guid}"`.
 
-If a _resource name_ is `SELECT ? FROM TABLE temp_128390123`, then it will be renamed to `SELECT ? FROM TABLE temp_{num}` and its metric-normalized tag will become `resource_name:select_from_table_temp_num`.
+If a _resource name_ is `SELECT ? FROM TABLE temp_128390123`,
+then it will be renamed to `SELECT ? FROM TABLE temp_{num}` and its metric-normalized tag will become `resource_name:select_from_table_temp_num`.
 To search for relevant spans in trace search, the query would be `resource_name:"SELECT ? FROM TABLE temp_{num}"`.
 
 ## How can I change my instrumentation to avoid quantization?
