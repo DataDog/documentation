@@ -12,7 +12,7 @@ further_reading:
 Heatmaps are currently in private beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start visualizing your customer's journey through your pages today!
 {{< /beta-callout >}} 
 
-{{< img src="real_user_monitoring/heatmaps/heatmaps.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmap.jpeg" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
 A heatmap (or heat map) is a visualization of your user's Session Replay data, where your user's interactions (clicks) are represented by color in the image. Seeing how a user interacts with your product or webpage lets you understand if users engage with your page the way you expect. This insight into how your page is interacted with helps you make UI decisions to optimize how your user engages. This kind of optimization can potentially improve their user experience and increase retention. Heatmaps make it easy to visualize complex data and understand it at a glance:
 
@@ -22,12 +22,6 @@ To get started with heatmaps:
 
 - You need to be on the latest version of the SDK (v4.20.0) 
 - Enable [Session Replay](/real_user_monitoring/session_replay/).
-- While Heatmaps are in beta, enable the following feature flag:
-
-datadogRum.init({
-    ...
-    enableExperimentalFeatures: ['clickmap']
-})
 
 ### Analysis
 Start from the [heatmap page](https://app.datadoghq.com/rum/heatmap/view), select your application, and view. A heatmap shows the aggregrate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
