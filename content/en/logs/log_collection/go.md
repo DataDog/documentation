@@ -102,7 +102,7 @@ Once [log collection is enabled][3], set up [custom log collection][4] to tail y
 
 If logs are in JSON format, Datadog automatically [parses the log messages][8] to extract log attributes. Use the [Log Explorer][9] to view and troubleshoot your logs.
 
-## Connect Logs and Traces
+## Connect logs and traces
 
 If APM is enabled for this application, the correlation between application logs and traces can be improved by following the [APM Go logging documentation][10] to automatically add trace and span IDs in your logs.
 
