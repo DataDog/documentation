@@ -1863,6 +1863,11 @@ main:
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
     weight: 1209
+  - name: APM Quantization
+    url: tracing/troubleshooting/quantization
+    identifier: tracing_troubleshooting_quantization
+    parent: tracing_troubleshooting
+    weight: 1210
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1

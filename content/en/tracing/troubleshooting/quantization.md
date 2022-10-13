@@ -1,66 +1,80 @@
 ---
-title: APM Quantization
+title: Quantization of APM Data
 kind: Documentation
-aliases:
-  - /tracing/troubleshooting/quantization
+further_reading:
+  - link: /tracing/trace_collection/custom_instrumentation/
+    tag: Documentation
+    text: Custom Instrumentation
+  - link: /tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
+    tag: Documentation
+    text: Replace tags in spans
+  - link: /tracing/trace_collection/library_config/
+    tag: Documentation
+    text: Tracing Library Configuration
 ---
 
-## What is APM quantization?
+## Overview
 
-Datadog applies quantization to APM data during ingestion to prevent random IDs, IP addresses, or query parameter values in span or resource names from unnecessarily categorized as separate resources.
+During ingestion, Datadog applies _quantization_ to APM data such as random-number IDs, IP addresses, or query parameter values in span or resource names. The resulting normalization prevents those spans and resources from being unnecessarily categorized as separate when they are, for analysis purposes, the same.
 
-## How does quantization affect Resource and Span Names?
-Certain patterns in resource or span names will be replaced with static strings:
-- GUIDs: `{guid}`
+Certain patterns in resource or span names are replaced with the following static strings:
+- Globally unique identifiers (GUIDs): `{guid}`
 - Numeric IDs (6+ digit numbers, surrounded by delimiters or found at the end of a string): `{num}`
 - Query parameter values: `{val}`
 
-These replacements affect trace metrics, the resource name tag on those metrics, and all the resource and span names for ingested spans.
+These replacements affect:
+- trace metrics,
+- the resource name tag on those metrics, and
+- all the resource and span names for ingested spans.
 
-### Quanization examples
+### Quantization examples
 
-If a _span name_ is `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84`, then it will be renamed to `find_user_{guid}` and the resulting trace metrics will be:
+For example, if a _span name_ is `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84`, it is renamed to `find_user_{guid}` and the resulting trace metrics are:
 - `trace.find_user_dd_guid`
 - `trace.find_user_dd_guid.hits`
 - `trace.find_user_dd_guid.errors`
 - `trace.find_user_dd_guid.duration`
-- `trace.find_user_dd_guid.apdex` (if apdex is configured for the service)
+- `trace.find_user_dd_guid.apdex` (if Apdex is configured for the service)
 
-To search for relevant spans in trace search, the query would be `operation_name:"find_user_{guid}"`.
+To search for these spans in trace search, the query is `operation_name:"find_user_{guid}"`.
 
-If a _resource name_ is `SELECT ? FROM TABLE temp_128390123`, then it will be renamed to `SELECT ? FROM TABLE temp_{num}` and its metric-normalized tag will become `resource_name:select_from_table_temp_num`.
-To search for relevant spans in trace search, the query would be `resource_name:"SELECT ? FROM TABLE temp_{num}"`.
+If a _resource name_ is `SELECT ? FROM TABLE temp_128390123`, it is renamed to `SELECT ? FROM TABLE temp_{num}` and its metric-normalized tag is `resource_name:select_from_table_temp_num`.
 
-## How can I change my instrumentation to avoid quantization?
+To search for these spans in trace search, the query is `resource_name:"SELECT ? FROM TABLE temp_{num}"`.
 
-**NOTE**: Any change to span and resource names upstream in the APM instrumentation or the agent will produce new metrics and tags.
-If you are using queries on quantized data then these queries will need to be updated to work with the new names.
+## Changing instrumentation to avoid default quantization
 
-### In code
+**Note**: Any change to span and resource names upstream in the instrumentation or the Agent produces new metrics and tags. If you use queries on quantized data, those queries must be updated to work with the new names.
 
-Your application may run in an agentless setup or perhaps you would prefer to make instrumentation changes more directly in your code.
-Either way, see [the tracer documentation of your application's runtime][1] for more information on how to create custom configuration for span names and resource names.
+### In-code instrumentation
 
-### With the trace agent
+If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the tracer documentation of your application's runtime][1] for information on how to create custom configuration for span names and resource names.
 
-You can use the `replace_tags` configuration to set up your own replacement strings through Go-compliant regex:
+### Agent configuration
 
-```
+You can use the `replace_tags` YAML configuration option to set up your own replacement strings through Go-compliant regex:
+
+```yaml
 apm_config:
   replace_tags:
-    # Replace tailing numeric IDs in span names with "x".
+    # Replace tailing numeric IDs in span names with "x":
     - name: "span.name"
       pattern: "get_id_[0-9]+"
       repl: "get_id_x"
-    # Replace numeric IDs in resource paths.
+    # Replace numeric IDs in resource paths:
     - name: "resource.name"
       pattern: "/users/[0-9]+/"
       repl: "/users/{user_id}/"
 ```
 
-Or you can use the `DD_APM_REPLACE_TAGS` environment variable that has a JSON string as its value:
-```
+Alternatively, you can use the `DD_APM_REPLACE_TAGS` environment variable with a JSON string as its value:
+
+```bash
 export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get_id_[0-9]+", "repl": "get_id_x"}, {...}, …]'
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/custom_instrumentation/
