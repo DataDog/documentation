@@ -5,6 +5,9 @@ further_reading:
     - link: 'tracing/trace_collection/open_standards/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
+    - link: 'Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter'
+      tag: 'Blog'
+      text: 'Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter'
 ---
 
 ## Overview
