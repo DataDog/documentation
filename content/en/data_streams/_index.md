@@ -168,4 +168,4 @@ You only need to add the `event_type` tag for the first service in each pathway.
 For more information, see [Data Streams terms and concepts][1].
 
 
-[1]: /tracing/data_streams/glossary
+[1]: /data_streams/glossary
