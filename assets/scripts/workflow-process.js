@@ -26,7 +26,7 @@ $RefParser.dereference(fileData)
       entries.forEach(([key, value]) => {
           table = null;
           try {
-            table = schemaTable("request", value);
+            table = schemaTable("request", value, true);
           } catch (e) {
             console.log(`Couldn't created schematable for ${key} from file ${input}`);
           }
