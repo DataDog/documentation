@@ -89,7 +89,7 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 If you've set the `inventories_configuration_enabled` option to `true` in your [Agent configuration file][6], you can click **Agent Configuration** to access a read-only version of the Agent's configuration.
 
-{{< img src="infrastructure/index/infra-list-config.png" alt="The Agent configuration view" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-config1.png" alt="The Agent configuration view" style="width:100%;">}}
 
 ### Export
 
