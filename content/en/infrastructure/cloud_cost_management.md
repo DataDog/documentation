@@ -3,8 +3,6 @@ title: Cloud Cost Management
 kind: documentation
 ---
 
-<div class="alert alert-warning">Cloud Cost Management is in private beta and supports only AWS at this time. To request access, <a href="https://www.datadoghq.com/cloud-cost-management-beta/">use this form.</a></div>
-
 ## Overview
 
 Cloud Cost Management provides insights for engineering and finance teams to see how changes to infrastructure can affect costs. It enables you to understand trends, allocate spend across your organization, and identify inefficiencies.
