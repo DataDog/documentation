@@ -22,7 +22,7 @@ To get started with heatmaps:
 
 - You need to be on the latest version of the SDK (v4.20.0) 
 - Enable [Session Replay](/real_user_monitoring/session_replay/).
-- While Heatmap are in beta, enable the following feature flag:
+- While Heatmaps are in beta, enable the following feature flag:
 
 datadogRum.init({
     ...
