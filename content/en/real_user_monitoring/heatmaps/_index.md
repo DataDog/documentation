@@ -8,7 +8,7 @@ further_reading:
   text: 'Session Replay'
 ---
 
-{{< beta-callout url="#" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< beta-callout url="https://forms.gle/48wkkRoZfwhn74ycA" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
 Heatmaps are currently in private beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start visualizing your customer's journey through your pages today!
 {{< /beta-callout >}} 
 
@@ -24,7 +24,7 @@ To get started with heatmaps:
 - Enable [Session Replay](/real_user_monitoring/session_replay/).
 
 ### Analysis
-Start from the [heatmap page](https://app.datadoghq.com/rum/heatmap/view) in Session Replay, select your application, and view.
+Start from the [heatmap page](https://app.datadoghq.com/rum/heatmap/view) in Session Replay, select your application, and view. A heatmap shows a single view of an app and then on that page, it shows the aggregate of where all users (sessions) clicked. So each view corresponds to an application. A view is a single page within an application. Each session is a user action and includes everything they did, like all the pages they viewed.
 
 - Pick your application.
 - Pick your view.
