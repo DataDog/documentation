@@ -6,14 +6,16 @@ is_beta: true
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-  Tracing library injection using Admission Controller is in private beta. 
+  Tracing library injection using Admission Controller is in beta. 
 {{< /beta-callout >}} 
 
-For your containerized applications that send traces to Datadog by the Cluster Agent, you can configure the Cluster Agent (version 7.39 and higher) to inject APM Java and JavaScript tracing libraries automatically.
+For your Kubernetes applications that send traces to Datadog by the Cluster Agent (version 7.39 and higher), you can configure the Admission Controller to inject APM Java and JavaScript tracing libraries automatically.
 
 After you [install the Cluster Agent][1], do one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
+
+Read [Admission Controller][2] for more information about configuring the Admission Controller.
 
 To opt-in your container for library injection, use Pod annotations inside your application's YAML file to specify language tracers and versions.
 
@@ -65,4 +67,5 @@ Possible options:
 | `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
 
-[1]: /containers/cluster_agent/admission_controller/
+[1]: /containers/cluster_agent/
+[2]: /containers/cluster_agent/admission_controller/
