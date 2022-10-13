@@ -9,7 +9,7 @@ is_beta: true
   Tracing library injection using Admission Controller is in beta. 
 {{< /beta-callout >}} 
 
-For your Kubernetes applications that send traces to Datadog by the Cluster Agent (version 7.39 and higher), you can configure the Admission Controller to inject APM Java and JavaScript tracing libraries automatically. By automating the injection of tracer libraries via the admission controller, application images do not need to change, thus removing a time-costly step and helping you tap into the value of APM quicker than ever before.
+For your Kubernetes applications that send traces to Datadog by the Cluster Agent (version 7.39 and higher), you can configure the Admission Controller to inject APM Java and JavaScript tracing libraries automatically. By automating the injection of tracer libraries through the admission controller, you don't have to change your application images, helping you get up and running with APM quickly.
 
 
 After you [install the Cluster Agent][1], do one of the following:
