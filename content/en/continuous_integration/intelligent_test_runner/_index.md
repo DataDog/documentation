@@ -2,15 +2,23 @@
 title: Intelligent Test Runner
 kind: documentation
 is_beta: true
+further_reading:
+  - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+    tag: "Blog"
+    text: "Monitor all your CI pipelines with Datadog"
 ---
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSdz9w6cIC-rhHz5kU-i2aTjVa2H1lH54lM7rhjPx-8viNfdDw/viewform?usp=pp_url" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
 Intelligent Test Runner for CI Visibility is in beta. You can request access by completing this form.
 {{< /beta-callout >}}
+
+{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
+
 ## Overview
 
 Intelligent Test Runner is Datadog's test impact analysis solution. It allows you to only run the impacted tests for a given commit and skip any that are irrelevant.
 
 By only running tests on relevant code, when tests do fail it's more likely a legitimate failure that pertains to the modified code.
+
 
 ## Setup
 
@@ -140,6 +148,14 @@ To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework m
 
 #### UI activation
 In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][4].
+
+## Configuration
+
+{{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:50%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/application-keys
