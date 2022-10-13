@@ -317,24 +317,53 @@ To use the OpenTelemetry Operator:
            secretKeyRef:
              key:  datadog_api_key
              name: opentelemetry-example-otelcol-dd-secret
-   
+
      config: |
        receivers:
-           otlp:
-             protocols:
-               grpc:
-               http:
+         otlp:
+           protocols:
+             grpc:
+             http:
+       hostmetrics:
+         collection_interval: 10s
+         scrapers:
+           paging:
+             metrics:
+               system.paging.utilization:
+                 enabled: true
+           cpu:
+             metrics:
+               system.cpu.utilization:
+                 enabled: true
+           disk:
+           filesystem:
+             metrics:
+               system.filesystem.utilization:
+                 enabled: true
+           load:
+           memory:
+           network:
+       processors:
+         k8sattributes:
+         batch:
+           # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
+           # go over that.
+           send_batch_max_size: 1000
+           send_batch_size: 100
+           timeout: 10s
        exporters:
-           datadog:
-               api:
-                 key: ${DD_API_KEY}
+         datadog:
+           api:
+             key: ${DD_API_KEY}
        service:
          pipelines:
            metrics:
-             receivers: [otlp]
+             receivers: [hostmetrics, otlp]
+             processors: [k8sattributes, batch]
              exporters: [datadog]
            traces:
              receivers: [otlp]
+             processors: [k8sattributes, batch]
              exporters: [datadog]
    ```
 
