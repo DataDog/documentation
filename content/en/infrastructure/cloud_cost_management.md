@@ -130,21 +130,37 @@ You can visualize your ingested data using the following cost types:
 
 ## Tag enrichment
 
-Datadog adds tags to the ingested cost data to help you further break down and understand your costs.
+Datadog automatically ingests all of your [AWS Resource tags][6] for most of your resources, without you having to manually [activate them][8] as cost allocation tags in your bill. This allows you to easily allocate costs to the dimensions your organization cares about. 
 
-The added tags correlate the cost data with observability data that your systems provide to Datadog, data from resources configured with [AWS Resource tags][6], and the [Cost and Usage Report (CUR)][7].
+Additionally, Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][7].
 
-The following tags are also available for filtering and grouping data:
+The following out-of-the-box tags are also available for filtering and grouping data:
 
-| Tag                        | Description       |
-| -------------------------- | ----------------- |
-| `cloud_product`            | The cloud service being billed.|
-| `cloud_product_group`      | The category for the cloud service being billed (for example, Compute or Storage)|
-| `cloud_usage_type`         | The usage details of this item.|
-| `cloud_charge_type`        | The type of charge covered by this item (for example, Usage, or Tax)|
-| `cloud_purchase_type`      | Whether the usage is Reserved, Spot, or On Demand.|
-| `cloud_account`            | The ID of the account that used this item.|
-| `cloud_billing_account_id` | The ID of the account paying for this usage.|
+| Tag                          | Description       |
+| ---------------------------- | ----------------- |
+| `aws_product`                | The AWS service being billed.|
+| `aws_product_family`         | The category for the AWS service being billed (for example, Compute or Storage).|
+| `aws_management_account_name`| The AWS management account name associated with the item.|
+| `aws_management_account_id`  | The AWS management account id associated with the item.|
+| `aws_member_account_name`    | The AWS memmber account name associated with the item.|
+| `aws_member_account_id`      | The AWS member account id associated with the item.|
+| `aws_cost_type`              | The type of charge covered by this item (for example, Usage, or Tax).|
+| `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On Demand.|
+| `aws_reservation_arn`        | The ARN of the Reserved Instance that the item benefited from.| 
+| `aws_savings_plan_arn`       | The ARN of the Savings Plan the item benefited from.|
+| `aws_usage_type`             | The usage details of the item (for example, BoxUsage:i3.8xlarge).|
+| `aws_operation`              | The operation associated with the item (for example, RunInstances).|
+| `aws_region`                 | The region associated with the item.|
+| `aws_availability_zone`      | The availability zone associated with the item.|
+| `aws_resource_id`            | The resource id associated with the item.|
+| `aws_instance_type`          | The instance types associated with your items.|
+| `aws_instance_family`        | The instance family associated with your item (for example, Storage optimized).|
+| `is_aws_ec2_compute`         | Whether the usage is related to EC2 compute.|
+| `is_aws_ec2_compute_on_demand`| Whether the usage is on demand.|
+| `is_aws_ec2_compute_reservation`| Whether the usage associated with a Reserved Instance.|
+| `is_aws_ec2_capacity_reservation`| Whether the usage associated with a Capacity Reservation.|
+| `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
+| `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
 ## Cloud costs in dashboards
 
@@ -159,3 +175,4 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [7]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[8]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
