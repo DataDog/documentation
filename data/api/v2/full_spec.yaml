@@ -1574,6 +1574,7 @@ components:
         source_id:
           description: Event source ID.
           example: 36
+          format: int64
           type: integer
         type:
           description: Event type.
@@ -1624,12 +1625,14 @@ components:
         monitor_id:
           description: ID of the monitor that triggered the event. When an event isn't
             related to a monitor, this field is empty.
+          format: int64
           nullable: true
           type: integer
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
           description: Related event ID.
+          format: int64
           type: integer
         service:
           description: Service that triggered the event.
@@ -5280,6 +5283,8 @@ components:
           type: integer
         group_status:
           description: Monitor group status used when there is no `result_groups`.
+          format: int32
+          maximum: 2147483647
           type: integer
         groups:
           description: Groups to which the monitor belongs.
@@ -5289,12 +5294,14 @@ components:
           type: array
         id:
           description: The monitor ID.
+          format: int64
           type: integer
         message:
           description: The monitor message.
           type: string
         modified:
           description: The monitor's last-modified timestamp.
+          format: int64
           type: integer
         name:
           description: The monitor name.
@@ -5998,6 +6005,7 @@ components:
           description: Org ID of the RUM application.
           example: 999
           format: int32
+          maximum: 2147483647
           type: integer
         type:
           description: Type of the RUM application. Supported values are `browser`,
@@ -8208,6 +8216,7 @@ components:
       - open
       - archived
       - under_review
+      example: open
       type: string
       x-enum-varnames:
       - OPEN
@@ -12971,6 +12980,8 @@ paths:
         name: filter[hours_ago]
         required: false
         schema:
+          format: int32
+          maximum: 2147483647
           type: integer
       - description: The number of aggregations that a `count`, `rate`, or `gauge`
           metric is configured to use. Max number of aggregation combos is 9.
@@ -12979,6 +12990,8 @@ paths:
         name: filter[num_aggregations]
         required: false
         schema:
+          format: int32
+          maximum: 9
           type: integer
       - description: A boolean, for distribution metrics only, to estimate cardinality
           if the metric includes additional percentile aggregators.
@@ -12995,6 +13008,8 @@ paths:
         name: filter[timespan_h]
         required: false
         schema:
+          format: int32
+          maximum: 2147483647
           type: integer
       responses:
         '200':
