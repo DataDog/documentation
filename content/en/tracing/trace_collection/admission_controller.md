@@ -23,10 +23,10 @@ To opt-in your container for library injection, use Pod annotations inside your 
 The annotations are a `key: value` pair in the following format:
 
 ```yaml
-datadoghq.com/<language>-lib.version: <lib-version>
+    admission.datadoghq.com/<language>-lib.version: <lib-version>
 ```
 
-Adding a this annotation results in the injection of the tracer library for that language and version into the containerized application.
+Adding this annotation results in the injection of the tracer library for that language and version into the containerized application.
 Valid `<language>` values are:
 - `java`
 - `js`
