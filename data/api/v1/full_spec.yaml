@@ -9518,6 +9518,7 @@ components:
       description: Widget request type.
       enum:
       - slo_list
+      example: slo_list
       type: string
       x-enum-varnames:
       - SLO_LIST
@@ -11195,6 +11196,7 @@ components:
       - open
       - archived
       - under_review
+      example: open
       type: string
       x-enum-varnames:
       - OPEN
@@ -15364,19 +15366,23 @@ components:
       properties:
         ci_pipeline_indexed_spans:
           description: The number of spans for pipelines in the queried hour.
+          format: int64
           type: integer
         ci_test_indexed_spans:
           description: The number of spans for tests in the queried hour.
+          format: int64
           type: integer
         ci_visibility_pipeline_committers:
           description: Shows the total count of all active Git committers for Pipelines
             in the current month. A committer is active if they commit at least 3
             times in a given month.
+          format: int64
           type: integer
         ci_visibility_test_committers:
           description: The total count of all active Git committers for tests in the
             current month. A committer is active if they commit at least 3 times in
             a given month.
+          format: int64
           type: integer
         org_name:
           description: The organization name.
@@ -16087,6 +16093,7 @@ components:
           type: string
         online_archive_events_count:
           description: Total count of online archived events within the hour.
+          format: int64
           type: integer
         org_name:
           description: The organization name.
