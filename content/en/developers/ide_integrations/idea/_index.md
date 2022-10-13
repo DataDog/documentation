@@ -7,6 +7,9 @@ further_reading:
 - link: "/account_management/api-app-keys/"
   tag: "Documentation"
   text: "Find out more about API and application keys."
+- link: "/getting_started/profiler/"
+  tag: "Documentation"
+  text: "Getting started with Continuous Profiler."
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
@@ -20,7 +23,7 @@ The Datadog plugin for IntelliJ IDEA helps improve software performance by provi
 - allocate the most memory
 - spend the most time on locks, disk I/O, socket I/O, and so on
 
-{{< img src="/developers/ide_integrations/idea/overview.png" alt="The Datadog plugin" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/overview.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
 The plugin features:
 - Top List: Identify methods that consume the most resources
@@ -30,7 +33,7 @@ The plugin features:
 
 ## Requirements
 
-- **A Datadog account**: The plugins require a datadog account. If you're new to the Datadog suite of products, go to the [Datadog website][4] to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][4] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiling**: To display code-level insights, the plugin requires Continuous Profiling instrumented on your Java Services. For more information, see [Getting Started with the Continuous Profiler][3].
 
 ## Setup
@@ -71,7 +74,7 @@ The Profiling tab shows Continuous Profiling information for the service in a se
 - [Top list](#top-list): Displays a list of the most resource intensive methods for the current profiling measure.
 - [Flame graph](#flame-graph): A flame graph representing stack traces in the profiles.
 
-{{< img src="/developers/ide_integrations/idea/profiling-example.png" alt="An example of the Profiling tab for a service named product-recommendation" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/profiling-example1.png" alt="An example of the Profiling tab for a service named product-recommendation" style="width:100%;" >}}
 
 You can specify the following parameters for the profiling data:
 - The profile type to be displayed
@@ -128,30 +131,15 @@ Profiling samples include stack trace and line number information. Use the **Sep
 
 {{< img src="/developers/ide_integrations/idea/separate-flamegraph-by.png" alt="Use the tooltip button to separate frames by method or line number" style="width:40%;" >}}
 
-## Items of interest
-The Datadog plugin displays an icon in the editor margin and highlights code based on the active Profiling data.
+## Datadog Insights
+
+When a Profiling tab is active, Datadog Insights adds code highlights to the source code editor margin. The Datadog plugin displays an icon in the editor margin and highlights code based on the active Profiling data.
 - Hover over the icon to see more information.
 - Click the icon to open the top list Profiling tab or open Profiling in Datadog.
   {{< img src="/developers/ide_integrations/idea/interest-options.png" alt="Click the Datadog icon to open the Profiling data in a tab or in Datadog" style="width:100%;" >}}
 
-To configure which Profiling data is used for points of interest, see [Code synchronization](#code-synchronization).
-
-## Code synchronization
-
-Some Datadog plugin features require synchronization with a Profiling tab:
-- [Items of interest](#items-of-interest) correspond to whichever profile is selected.
-- The IDEA project tree view is annotated with the selected profiles metrics.
-  {{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
-
-To control which profiling tab contributes data to the IDEA project tree or editor highlights, you can pin a profile, or let IDEA sync data according to whichever plugin tab is active.
-
-To sync a profile, in the desired Profiling tab, click the **Sync** button and:
-- Select **Sync with** and choose the name of the desired profile to pin that profile.
-- Select **Sync with active profile** to allow IDEA to sync data with whichever profile tab is active.
-
-{{< img src="/developers/ide_integrations/idea/code-sync-button.png" alt="Click the Sync button to sync a profile" style="width:75%;" >}}
-
-After you select a profile, a yellow dot appears next to the selected tab's title to indicate that it has focus.
+The active Profiling tab also affects the IDEA project tree view, which is annotated with the selected profile's metrics:
+{{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
 
 ## Feedback
 
