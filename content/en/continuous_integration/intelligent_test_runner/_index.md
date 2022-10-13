@@ -27,6 +27,10 @@ To enable Intelligent Test Runner, the following environment variables need to b
 : The [Datadog API key][1] used to upload the test results.<br/>
 **Default**: `(empty)`
 
+`DD_APPLICATION_KEY` (Required)
+: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
+**Default**: `(empty)`
+
 `DD_SITE` (Required)
 : The [Datadog site][3] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
