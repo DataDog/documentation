@@ -7,7 +7,7 @@ kind: documentation
 
 ## Usage reports
 
-View hourly usage of your account across all billable parameters as well as the top 500 custom metrics submitted. If your organization is the parent-organization in a [multi-org account][3], you can also view the usage of child-organization accounts by toggling between "Overall" and "Individual Organizations" at the top of the page. Individual child-organization accounts are isolated. They are only able to view their own usage and custom metrics.
+View hourly usage of your account across all billable parameters as well as the top 5000 custom metrics submitted. If your organization is the parent-organization in a [multi-org account][3], you can also view the usage of child-organization accounts by toggling between "Overall" and "Individual Organizations" at the top of the page. Individual child-organization accounts are isolated. They are only able to view their own usage and custom metrics.
 
 **Note**: Allow up to 72 hours for this section to update.
 
