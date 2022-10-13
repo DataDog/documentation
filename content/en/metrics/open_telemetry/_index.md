@@ -136,7 +136,7 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 
 ## Deployment-based limitations
 
-The OpenTelemetry Collector has [two primary development methods][14]: Agent and Gateway. Depending on your development method, some components are not available.
+The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and Gateway. Depending on your deployment method, some components are not available.
 
 | Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
 | --- | --- | --- | --- | --- |
