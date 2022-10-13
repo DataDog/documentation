@@ -414,7 +414,7 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 #### 応答から変数を抽出する
 
-オプションで、応答ヘッダーまたは本文をパースすることにより、HTTP リクエストの応答から変数を抽出します。変数の値は、HTTP リクエストステップが実行されるたびに更新されます。
+オプションで、応答ヘッダーまたは本文をパースすることにより、HTTP リクエストの応答から変数を抽出します。変数の値は、HTTP リクエストステップが実行されるたびに更新されます。一度作成すると、この変数はブラウザテストの[次のステップ](#use-variables)で使用することができます。
 
 変数のパースを開始するには、**Extract a variable from response content** をクリックします。
 
@@ -426,7 +426,6 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="応答から抽出された変数" style="width:80%;" >}}
 
-1 つのテストステップにつき最大 10 個の変数を抽出することができます。作成されたこの変数は、ブラウザテストの[次の手順](#use-variables)で使用できます。
 
 ## ステップ順序の管理
 
@@ -450,7 +449,7 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 HTTP リクエストの変数や JavaScript のステップのように、実行時にしか計算されない変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` をフィーチャーした `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に体系的に置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

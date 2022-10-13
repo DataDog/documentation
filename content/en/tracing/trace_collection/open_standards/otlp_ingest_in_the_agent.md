@@ -33,6 +33,7 @@ otlp_config:
   receiver:
     protocols:
       grpc:
+        endpoint: localhost:4317
 ```
 For HTTP, default port 4318:
 
@@ -41,14 +42,15 @@ otlp_config:
   receiver:
     protocols:
       http:
+        endpoint: localhost:4318
 ```
 
 Alternatively, configure the endpoints by providing the port through the environment variables:
 
-- For gRPC (`0.0.0.0:4317`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 
-- For HTTP (`0.0.0.0:4318`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`
+- For gRPC (`localhost:4317`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 
+- For HTTP (`localhost:4318`): `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`
 
-These must be passed to both the core Agent and trace Agent if they are running in separate containers.
+These must be passed to both the core Agent and trace Agent processes. If running in a containerized environment, use `0.0.0.0` instead of `localhost` to ensure the server is available on non-local interfaces.
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
@@ -218,7 +220,7 @@ There are many other environment variables and settings supported in the Datadog
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/
-[2]: /metrics/otlp/
+[2]: /metrics/open_telemetry/otlp_metric_types/
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [5]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml

@@ -47,7 +47,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILD_REQUESTEDFORID`
 - `BUILD_REQUESTEDFOREMAIL`
 - `SYSTEM_TEAMFOUNDATIONSERVERURI`
-- `SYSTEM_TEAMPROJECT`
+- `SYSTEM_TEAMPROJECTID`
 - `SYSTEM_JOBID`
 - `SYSTEM_TASKINSTANCEID`
 - `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI`
@@ -174,6 +174,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `JOB_NAME`
 - `JOB_URL`
 - `GIT_URL`
+- `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
 
@@ -239,6 +240,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_CLONE_COMMIT_AUTHOR_NAME`
 - `GIT_CLONE_COMMIT_AUTHOR_EMAIL`
 - `GIT_CLONE_COMMIT_COMMITER_NAME`
+- `GIT_CLONE_COMMIT_COMMITER_EMAIL`
 
 [Full list of build environment variables provided by Bitrise][1]
 

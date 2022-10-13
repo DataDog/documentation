@@ -24,9 +24,9 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your Go logs to Datadog, use the open-source [logrus][1] logging library to log to a file and then tail that file with your Datadog Agent. 
+To send your Go logs to Datadog, log to a file and then tail that file with your Datadog Agent. You can use the following setup with [logrus][1], an open source logging library.
 
-Datadog strongly recommends setting up your logging library to output your logs in JSON format to avoid the need for [custom parsing rules][2].
+Datadog strongly encourages setting up your logging library to produce your logs in JSON to avoid the need for [custom parsing rules][2].
 
 ## Configure your logger
 
@@ -49,7 +49,9 @@ func main() {
 }
 ```
 
-You can add tags to logs using a JSON object. Examples of tags that you can add include `hostname`, `username`, `customers`, `metric`, or any information that helps you troubleshoot and understand what is happening in your Go application. For example:
+You can add tags to any log if you provide a JSON object that you want to see in the log event.
+
+These tags can be `hostname`, `username`, `customers`, `metric` or any information that can help you troubleshoot and understand what happens in your Go application.
 
 ```go
 package main
@@ -63,9 +65,10 @@ func main() {
     // use JSONFormatter
     log.SetFormatter(&log.JSONFormatter{})
 
-    // log an event as usual with logrus
+    // log an event with logrus
     log.WithFields(log.Fields{"string": "foo", "int": 1, "float": 1.1 }).Info("My first event from golang to stdout")
-  // For tags, a common pattern is to re-use fields between logging statements by re-using
+    
+  // for metadata, a common pattern is to reuse fields between logging statements by reusing
   contextualizedLog := log.WithFields(log.Fields{
     "hostname": "staging-1",
     "appname": "foo-app",
@@ -103,14 +106,12 @@ If logs are in JSON format, Datadog automatically [parses the log messages][8] t
 
 If APM is enabled for this application, the correlation between application logs and traces can be improved by following the [APM Go logging documentation][10] to automatically add trace and span IDs in your logs.
 
-## Getting further
+## Best practices
 
-Tips for getting further with Go log collection:
-
-* Always give a name to the logger corresponding to the functionality or service.
-* Log a lot in the DEBUG level and log accurately in the INFO, WARNING, and FATAL levels, since these are the log levels you get in your production environments.
-* Start small and log the important information first and then add what is missing after discussing with your team.
-* Use tags to add context to the logs so that you can quickly filter over users, customers, or other attributes.
+* Name the logger with a name that corresponds to the relevant functionality or service.
+* Use the `DEBUG`, `INFO`, `WARNING`, and `FATAL` log levels. In Datadog, Go's `FATAL` maps to a severity level of `Emergency`.
+* Start with logging the information that is most important. Expand the comprehensiveness of your logging with further iterations.
+* Use metas to add context to any log. This enables you to quickly filter over users, customers, business-centric attributes, etc.
 
 ## Further Reading
 

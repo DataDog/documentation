@@ -334,7 +334,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all metrics (matching additional filters if specified).",
+    "description": "Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified).",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -653,6 +653,24 @@
     "summary": "Create a new incident service",
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Create request with an incident service payload."
+  },
+  "ListServiceDefinitions": {
+    "description": "Get a list of all service definitions from the Datadog Service Catalog.",
+    "summary": "Get all service definitions"
+  },
+  "CreateOrUpdateServiceDefinitions": {
+    "description": "Create or update service definition in the Datadog Service Catalog.",
+    "summary": "Create or update service definition",
+    "request_description": "Service Definition YAML/JSON.",
+    "request_schema_description": "Create service definitions request."
+  },
+  "DeleteServiceDefinition": {
+    "description": "Delete a single service definition in the Datadog Service Catalog.",
+    "summary": "Delete a single service definition"
+  },
+  "GetServiceDefinition": {
+    "description": "Get a single service definition from the Datadog Service Catalog.",
+    "summary": "Get a single service definition"
   },
   "DeleteIncidentService": {
     "description": "Deletes an existing incident service.",

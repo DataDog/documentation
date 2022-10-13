@@ -269,10 +269,10 @@ import {
     DdRum
 } from '@datadog/mobile-react-native';
 
-// 一意のビュー識別子、カスタムビューの URL、オブジェクトを使用してビューを開始し、ビューに追加の属性をアタッチします
+// 一意のビュー識別子、カスタムビュー名、オブジェクトを使用してビューを開始し、ビューに追加の属性をアタッチします
 DdRum.startView(
-    '<view-key>',
-    '/view/url',
+    '<view-key>', // <view-key> は一意でなければなりません。例えば ViewName-unique-id とすることができます
+    'View Name',
     { 'custom.foo': 'something' },
     Date.now()
 );
