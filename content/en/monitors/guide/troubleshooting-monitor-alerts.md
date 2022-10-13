@@ -36,7 +36,13 @@ If metrics are absent from a monitor's evaluation window, and the monitor is not
 
 #### Monitor state updates due to external conditions
 
-The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4]. 
+The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4].
+
+### Verify the presence of data
+
+If your monitor’s state or status is not what you expect, a great way to verify is to check the underlying data in a Dashboard or Notebook. Checking the state of the underlying data can show why a monitor was behaving the way it did.
+
+An example being if your monitor is in a No Data state, check to see if the data it’s evaluating is making its way into Datadog.
 
 ### Alert conditions
 
