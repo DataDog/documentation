@@ -4,6 +4,9 @@ kind: documentation
 is_beta: true
 private: true
 further_reading:
+- link: "https://www.datadoghq.com/blog/route-logs-with-datadog-log-forwarding/"
+  tag: "Blog"
+  text: "Route logs to third-party systems with Datadog Log Forwarding"
 - link: "/logs/log_collection"
   tag: "Documentation"
   text: "Start collecting your logs"
