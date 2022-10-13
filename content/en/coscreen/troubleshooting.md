@@ -1,5 +1,5 @@
 ---
-title: Optimizing Your CoScreen Experience
+title: CoScreen Optimization and Troubleshooting
 kind: guide
 is_beta: false
 ---
