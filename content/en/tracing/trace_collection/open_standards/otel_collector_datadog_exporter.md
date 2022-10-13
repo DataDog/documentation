@@ -8,6 +8,9 @@ further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "OpenTelemetry"
   text: "Collector documentation"
+- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+  tag: "Blog"
+  text: "Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter"
 ---
 
 The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. Datadog has [an Exporter][1] available for the OpenTelemetry Collector which allows you to forward trace and metric data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs][2].
