@@ -27,6 +27,10 @@ To enable Intelligent Test Runner, the following environment variables need to b
 : The [Datadog API key][1] used to upload the test results.<br/>
 **Default**: `(empty)`
 
+`DD_APPLICATION_KEY` (Required)
+: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
+**Default**: `(empty)`
+
 `DD_SITE` (Required)
 : The [Datadog site][3] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
@@ -113,6 +117,29 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][4].
 
 ### Swift
+
+To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1,  Code Coverage must be enabled at least for your targets, and the following environment variables must be set:
+
+`DD_TEST_RUNNER`
+: Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
+**Default**: `false`<br/>
+**Recommended**: `$(DD_TEST_RUNNER)`
+
+`DD_API_KEY` (Required)
+: The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+`DD_APPLICATION_KEY` (Required)
+: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
+**Default**: `(empty)`
+
+`DD_SITE` (Required)
+: The [Datadog site][3] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+
+#### UI activation
+In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][4].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/application-keys
