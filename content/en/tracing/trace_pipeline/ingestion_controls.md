@@ -136,7 +136,7 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 1. Select the service you want to change the ingested span percent for.
 2. Choose the service language.
 3. Choose the desired ingestion percentage.
-4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service.
+4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service. **Note**: The service name value is case sensitive. It should match the case of your service name.
 5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
 
 
