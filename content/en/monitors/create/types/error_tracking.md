@@ -43,10 +43,10 @@ Select **Web and Mobile Apps** from the dropdown menu.
 
 1. Choose what metric you want to monitor: a count, facet, or measure.
    - For error occurrences, monitor over an overall count based on the issue ID.
-   - For impacted users, monitor over a unique count of user emails based on the issue ID or over a measure. 
-   - For impacted sessions, monitor over a unique count of session IDs based on the issue ID. 
-   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`). 
-   
+   - For impacted users, monitor over a unique count of user emails based on the issue ID or over a measure.
+   - For impacted sessions, monitor over a unique count of session IDs based on the issue ID.
+   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+
    There are three quickfilter options to access the most frequently used facets:
 
    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
@@ -66,11 +66,11 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 
 {{% tab "New Issue" %}}
 
-The list of new issues might display older issues that are considered new in the selected time frame, such as the past 24 hours or the past week. 
+The list of new issues might display older issues that are considered new in the selected time frame, such as the past 24 hours or the past week.
 
 1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
-2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count or [measure][1]. 
-   - Monitor the count of occurrences for a specific issue ID. 
+2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count or [measure][1].
+   - Monitor the count of occurrences for a specific issue ID.
    - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Construct a search query using the same logic as a [RUM Explorer search][2] or [APM Explorer search][3] for the issues’ error occurrences.
 4. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][4].
@@ -79,7 +79,7 @@ The list of new issues might display older issues that are considered new in the
 
 The monitor triggers when the number of errors is `above` or `above or equal to`.
 
-- Set a timespan between 5 minutes and 48 hours (such as `5 minutes`, `15 minutes`. `1 hour`, or `custom`) over which the monitor metric is evaluated. 
+- Set a timespan between 5 minutes and 48 hours (such as `5 minutes`, `15 minutes`. `1 hour`, or `custom`) over which the monitor metric is evaluated.
 - Set the alerting threshold > `<NUMBER>`.
 - Set the warning threshold > `<NUMBER>`.
 
@@ -87,7 +87,7 @@ The monitor triggers when the number of errors is `above` or `above or equal to`
 [2]: /real_user_monitoring/explorer/search/
 [3]: /tracing/trace_explorer/?tab=listview#filtering
 [4]: /monitors/create/configuration/#alert-grouping/
-{{% /tab %}} 
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Advanced Alert Conditions
@@ -100,17 +100,6 @@ To display triggering tags in the notification title, click **Include triggering
 
 For more information about the **Notify your team** and **Say what’s happening** sections, see [Notifications][5].
 
-#### Breaching Values Toplist
-
-When an Error Tracking monitor is triggered, the facet or measure values that triggered the alert can be added to the notification message. To display breaching facets and measure values, click **Include a table of the top 10 breaching values**. Facets and measures can be grouped and ungrouped in the notification message.
-
-
-This monitor integrates with platforms such as Slack, Jira, Webhooks, Microsoft Teams, Pagerduty, and email. For more information, read the [documentation about notification integrations][6].
-
-#### Examples
-
-For examples, see the [Logs Monitor documentation][7].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -120,5 +109,3 @@ For examples, see the [Logs Monitor documentation][7].
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
 [4]: /monitors/create/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/
-[6]: /monitors/notify/#integrations
-[7]: /monitors/create/types/log/#examples

@@ -331,6 +331,14 @@ components:
       schema:
         example: 00000000-0000-1234-0000-000000000000
         type: string
+    ServiceName:
+      description: The name of the service.
+      in: path
+      name: service_name
+      required: true
+      schema:
+        example: my-service
+        type: string
     SignalID:
       description: The ID of the signal.
       in: path
@@ -1566,6 +1574,7 @@ components:
         source_id:
           description: Event source ID.
           example: 36
+          format: int64
           type: integer
         type:
           description: Event type.
@@ -1616,12 +1625,14 @@ components:
         monitor_id:
           description: ID of the monitor that triggered the event. When an event isn't
             related to a monitor, this field is empty.
+          format: int64
           nullable: true
           type: integer
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
           description: Related event ID.
+          format: int64
           type: integer
         service:
           description: Service that triggered the event.
@@ -2026,7 +2037,7 @@ components:
             When it matches an integration name, Datadog automatically installs the
             corresponding parsers and facets.
 
-            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
           example: nginx
           type: string
         ddtags:
@@ -2038,7 +2049,7 @@ components:
           example: i-012345678
           type: string
         message:
-          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes)
 
             of your log. By default, Datadog ingests the value of the message attribute
             as the body of the log entry.
@@ -2054,7 +2065,7 @@ components:
             It is used to switch from Logs to APM, so make sure you define the same
             value when you use both products.
 
-            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes).'
           example: payment
           type: string
       required:
@@ -2645,7 +2656,8 @@ components:
           format: int64
           type: integer
         resolved:
-          description: Timestamp when the incident's state was set to resolved.
+          description: Timestamp when the incident's state was last changed from active
+            or stable to resolved or completed.
           format: date-time
           nullable: true
           type: string
@@ -3154,11 +3166,6 @@ components:
           items:
             $ref: '#/components/schemas/IncidentNotificationHandle'
           type: array
-        resolved:
-          description: Timestamp when the incident's state was set to resolved.
-          format: date-time
-          nullable: true
-          type: string
         title:
           description: The title of the incident, which summarizes what happened.
           example: A test incident title
@@ -5272,9 +5279,12 @@ components:
         created_at:
           description: The POSIX timestamp of the monitor's creation in nanoseconds.
           example: 1646318692000
+          format: int64
           type: integer
         group_status:
           description: Monitor group status used when there is no `result_groups`.
+          format: int32
+          maximum: 2147483647
           type: integer
         groups:
           description: Groups to which the monitor belongs.
@@ -5284,12 +5294,14 @@ components:
           type: array
         id:
           description: The monitor ID.
+          format: int64
           type: integer
         message:
           description: The monitor message.
           type: string
         modified:
           description: The monitor's last-modified timestamp.
+          format: int64
           type: integer
         name:
           description: The monitor name.
@@ -5993,6 +6005,7 @@ components:
           description: Org ID of the RUM application.
           example: 999
           format: int32
+          maximum: 2147483647
           type: integer
         type:
           description: Type of the RUM application. Supported values are `browser`,
@@ -8056,7 +8069,7 @@ components:
       - message
       type: object
     SecurityMonitoringSignalRuleQuery:
-      description: Query for matching rule on signals
+      description: Query for matching rule on signals.
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
@@ -8083,7 +8096,7 @@ components:
           type: string
         ruleId:
           description: Rule ID to match on signals.
-          example: d3f-ru1-e1d
+          example: org-ru1-e1d
           type: string
       required:
       - ruleId
@@ -8137,7 +8150,7 @@ components:
         queries:
           description: Queries for selecting logs which are part of the rule.
           items:
-            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponseQuery'
           type: array
         tags:
           description: Tags for generated signals.
@@ -8155,6 +8168,41 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+    SecurityMonitoringSignalRuleResponseQuery:
+      description: Query for matching rule on signals.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        correlatedByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        correlatedQueryIndex:
+          description: Index of the rule query used to retrieve the correlated field.
+          format: int32
+          maximum: 9
+          type: integer
+        defaultRuleId:
+          description: Default Rule ID to match on signals.
+          example: d3f-ru1-e1d
+          type: string
+        metrics:
+          description: Group of target fields to aggregate over when using the new
+            value aggregations.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        ruleId:
+          description: Rule ID to match on signals.
+          example: org-ru1-e1d
+          type: string
+      type: object
     SecurityMonitoringSignalRuleType:
       description: The rule type.
       enum:
@@ -8168,6 +8216,7 @@ components:
       - open
       - archived
       - under_review
+      example: open
       type: string
       x-enum-varnames:
       - OPEN
@@ -8544,6 +8593,468 @@ components:
           $ref: '#/components/schemas/ServiceAccountCreateData'
       required:
       - data
+      type: object
+    ServiceDefinitionCreateResponse:
+      description: Create service definitions response.
+      properties:
+        data:
+          description: Create service definitions response payload.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionData'
+          type: array
+      type: object
+    ServiceDefinitionData:
+      description: Service definition data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceDefinitionDataAttributes'
+        type:
+          description: Service definition type.
+          type: string
+      type: object
+    ServiceDefinitionDataAttributes:
+      description: Service definition attributes.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ServiceDefinitionMeta'
+        schema:
+          $ref: '#/components/schemas/ServiceDefinitionSchema'
+      type: object
+    ServiceDefinitionGetResponse:
+      description: Get service definition response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceDefinitionData'
+      type: object
+    ServiceDefinitionMeta:
+      description: Metadata about a service definition.
+      properties:
+        github-html-url:
+          description: GitHub HTML URL.
+          type: string
+        ingested-schema-version:
+          description: Ingestion schema version.
+          type: string
+        ingestion-source:
+          description: Ingestion source of the service definition.
+          type: string
+        last-modified-time:
+          description: Last modified time of the service definition.
+          type: string
+      type: object
+    ServiceDefinitionRaw:
+      description: Service Definition in raw JSON/YAML representation.
+      example: '---
+
+        schema-version: v2
+
+        dd-service: my-service
+
+        '
+      type: string
+    ServiceDefinitionSchema:
+      description: Service definition schema.
+      oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV1'
+      - $ref: '#/components/schemas/ServiceDefinitionV2'
+      type: object
+    ServiceDefinitionV1:
+      deprecated: true
+      description: Deprecated - Service definition V1 for providing additional service
+        metadata and integrations.
+      properties:
+        contact:
+          $ref: '#/components/schemas/ServiceDefinitionV1Contact'
+        extensions:
+          additionalProperties: {}
+          description: Extensions to V1 schema.
+          example:
+            myorg/extension: extensionValue
+          type: object
+        external-resources:
+          description: A list of external links related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV1Resource'
+          type: array
+        info:
+          $ref: '#/components/schemas/ServiceDefinitionV1Info'
+        integrations:
+          $ref: '#/components/schemas/ServiceDefinitionV1Integrations'
+        org:
+          $ref: '#/components/schemas/ServiceDefinitionV1Org'
+        schema-version:
+          $ref: '#/components/schemas/ServiceDefinitionV1Version'
+        tags:
+          description: A set of custom tags.
+          example:
+          - my:tag
+          - service:tag
+          items:
+            type: string
+          type: array
+      required:
+      - schema-version
+      - info
+      type: object
+    ServiceDefinitionV1Contact:
+      description: Contact information about the service.
+      properties:
+        email:
+          description: "Service owner\u2019s email."
+          example: contact@datadoghq.com
+          format: email
+          type: string
+        slack:
+          description: "Service owner\u2019s Slack channel."
+          example: https://yourcompany.slack.com/archives/channel123
+          type: string
+    ServiceDefinitionV1Info:
+      description: Basic information about a service.
+      properties:
+        dd-service:
+          description: Unique identifier of the service. Must be unique across all
+            services and is used to match with a service in Datadog.
+          example: myservice
+          type: string
+        description:
+          description: A short description of the service.
+          example: A shopping cart service
+          type: string
+        display-name:
+          description: A friendly name of the service.
+          example: My Service
+          type: string
+        service-tier:
+          description: Service tier.
+          example: Tier 1
+          type: string
+      required:
+      - dd-service
+      type: object
+    ServiceDefinitionV1Integrations:
+      description: Third party integrations that Datadog supports.
+      properties:
+        pagerduty:
+          $ref: '#/components/schemas/ServiceDefinitionV1Pagerduty'
+      type: object
+    ServiceDefinitionV1Org:
+      description: Org related information about the service.
+      properties:
+        application:
+          description: App feature this service supports.
+          example: E-Commerce
+          type: string
+        team:
+          description: Team that owns the service.
+          example: my-team
+          type: string
+      type: object
+    ServiceDefinitionV1Pagerduty:
+      description: PagerDuty service URL for the service.
+      example: https://my-org.pagerduty.com/service-directory/PMyService
+      type: string
+    ServiceDefinitionV1Resource:
+      description: Service's external links.
+      properties:
+        name:
+          description: Link name.
+          example: Runbook
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV1ResourceType'
+        url:
+          description: Link URL.
+          example: https://my-runbook
+          type: string
+      required:
+      - name
+      - type
+      - url
+      type: object
+    ServiceDefinitionV1ResourceType:
+      description: Link type.
+      enum:
+      - doc
+      - wiki
+      - runbook
+      - url
+      - repo
+      - dashboard
+      - oncall
+      - code
+      - link
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - DOC
+      - WIKI
+      - RUNBOOK
+      - URL
+      - REPO
+      - DASHBOARD
+      - ONCALL
+      - CODE
+      - LINK
+    ServiceDefinitionV1Version:
+      default: v1
+      description: Schema version being used.
+      enum:
+      - v1
+      example: v1
+      type: string
+      x-enum-varnames:
+      - V1
+    ServiceDefinitionV2:
+      description: Service definition V2 for providing service metadata and integrations.
+      properties:
+        contacts:
+          description: A list of contacts related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Contact'
+          type: array
+        dd-service:
+          description: Unique identifier of the service. Must be unique across all
+            services and is used to match with a service in Datadog.
+          example: my-service
+          type: string
+        dd-team:
+          description: Experimental feature. A Team handle that matches a Team in
+            the Datadog Teams product.
+          example: my-team
+          type: string
+        docs:
+          description: A list of documentation related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Doc'
+          type: array
+        extensions:
+          additionalProperties: {}
+          description: Extensions to V2 schema.
+          example:
+            myorg/extension: extensionValue
+          type: object
+        integrations:
+          $ref: '#/components/schemas/ServiceDefinitionV2Integrations'
+        links:
+          description: A list of links related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Link'
+          type: array
+        repos:
+          description: A list of code repositories related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Repo'
+          type: array
+        schema-version:
+          $ref: '#/components/schemas/ServiceDefinitionV2Version'
+        tags:
+          description: A set of custom tags.
+          example:
+          - my:tag
+          - service:tag
+          items:
+            type: string
+          type: array
+        team:
+          description: Team that owns the service.
+          example: my-team
+          type: string
+      required:
+      - schema-version
+      - dd-service
+      type: object
+    ServiceDefinitionV2Contact:
+      description: Service owner's contacts information.
+      oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV2Email'
+      - $ref: '#/components/schemas/ServiceDefinitionV2Slack'
+    ServiceDefinitionV2Doc:
+      description: Service documents.
+      properties:
+        name:
+          description: Document name.
+          example: Architecture
+          type: string
+        provider:
+          description: Document provider.
+          example: google drive
+          type: string
+        url:
+          description: Document URL.
+          example: https://gdrive/mydoc
+          type: string
+      required:
+      - name
+      - url
+      type: object
+    ServiceDefinitionV2Email:
+      description: Service owner's email.
+      properties:
+        contact:
+          description: Contact value.
+          example: contact@datadoghq.com
+          format: email
+          type: string
+        name:
+          description: Contact email.
+          example: Team Email
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2EmailType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2EmailType:
+      description: Contact type.
+      enum:
+      - email
+      example: email
+      type: string
+      x-enum-varnames:
+      - EMAIL
+    ServiceDefinitionV2Integrations:
+      description: Third party integrations that Datadog supports.
+      properties:
+        opsgenie:
+          $ref: '#/components/schemas/ServiceDefinitionV2Opsgenie'
+        pagerduty:
+          $ref: '#/components/schemas/ServiceDefinitionV2Pagerduty'
+      type: object
+    ServiceDefinitionV2Link:
+      description: Service's external links.
+      properties:
+        name:
+          description: Link name.
+          example: Runbook
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2LinkType'
+        url:
+          description: Link URL.
+          example: https://my-runbook
+          type: string
+      required:
+      - name
+      - type
+      - url
+      type: object
+    ServiceDefinitionV2LinkType:
+      description: Link type.
+      enum:
+      - doc
+      - wiki
+      - runbook
+      - url
+      - repo
+      - dashboard
+      - oncall
+      - code
+      - link
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - DOC
+      - WIKI
+      - RUNBOOK
+      - URL
+      - REPO
+      - DASHBOARD
+      - ONCALL
+      - CODE
+      - LINK
+    ServiceDefinitionV2Opsgenie:
+      description: Opsgenie integration for the service.
+      properties:
+        region:
+          $ref: '#/components/schemas/ServiceDefinitionV2OpsgenieRegion'
+        service-id:
+          description: Opsgenie service id.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+      required:
+      - service-id
+      type: object
+    ServiceDefinitionV2OpsgenieRegion:
+      description: Opsgenie instance region.
+      enum:
+      - US
+      - EU
+      example: US
+      type: string
+      x-enum-varnames:
+      - US
+      - EU
+    ServiceDefinitionV2Pagerduty:
+      description: PagerDuty service URL for the service.
+      example: https://my-org.pagerduty.com/service-directory/PMyService
+      type: string
+    ServiceDefinitionV2Repo:
+      description: Service code repositories.
+      properties:
+        name:
+          description: Repository name.
+          example: Source Code
+          type: string
+        provider:
+          description: Repository provider.
+          example: GitHub
+          type: string
+        url:
+          description: Repository URL.
+          example: https://github.com/DataDog/schema
+          type: string
+      required:
+      - name
+      - url
+      type: object
+    ServiceDefinitionV2Slack:
+      description: Service owner's Slack channel.
+      properties:
+        contact:
+          description: Slack Channel.
+          example: https://yourcompany.slack.com/archives/channel123
+          type: string
+        name:
+          description: Contact Slack.
+          example: Team Slack
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2SlackType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2SlackType:
+      description: Contact type.
+      enum:
+      - slack
+      example: slack
+      type: string
+      x-enum-varnames:
+      - SLACK
+    ServiceDefinitionV2Version:
+      default: v2
+      description: Schema version being used.
+      enum:
+      - v2
+      example: v2
+      type: string
+      x-enum-varnames:
+      - V2
+    ServiceDefinitionsCreateRequest:
+      description: Create service definitions request.
+      oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV2'
+      - $ref: '#/components/schemas/ServiceDefinitionRaw'
+    ServiceDefinitionsListResponse:
+      description: Create service definitions response.
+      properties:
+        data:
+          description: Data representing service definitions.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionData'
+          type: array
       type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
@@ -8986,6 +9497,7 @@ paths:
       summary: Get all API keys
       tags:
       - Key Management
+      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -9029,6 +9541,7 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n    },\n    \"type\": \"api_keys\"\n  }\n}"
           step: there is a valid "api_key" in the system
+      x-menu-order: 4
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -9061,6 +9574,7 @@ paths:
       summary: Delete an API key
       tags:
       - Key Management
+      x-menu-order: 1
       x-undo:
         type: idempotent
     get:
@@ -9093,6 +9607,7 @@ paths:
       summary: Get API key
       tags:
       - Key Management
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -9137,6 +9652,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v2/application_keys:
@@ -9180,6 +9696,7 @@ paths:
       summary: Get all application keys
       tags:
       - Key Management
+      x-menu-order: 9
       x-undo:
         type: safe
   /api/v2/application_keys/{app_key_id}:
@@ -9209,6 +9726,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -9247,6 +9765,7 @@ paths:
       summary: Get an application key
       tags:
       - Key Management
+      x-menu-order: 8
       x-undo:
         type: safe
     patch:
@@ -9291,6 +9810,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v2/audit/events:
@@ -9706,6 +10226,7 @@ paths:
       summary: Get all application keys owned by current user
       tags:
       - Key Management
+      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -9749,6 +10270,7 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "application_key" in the system
+      x-menu-order: 4
       x-undo:
         operationId: DeleteCurrentUserApplicationKey
         parameters:
@@ -9781,6 +10303,7 @@ paths:
       summary: Delete an application key owned by current user
       tags:
       - Key Management
+      x-menu-order: 1
       x-undo:
         type: idempotent
     get:
@@ -9812,6 +10335,7 @@ paths:
       summary: Get one application key owned by current user
       tags:
       - Key Management
+      x-menu-order: 3
       x-undo:
         type: safe
     patch:
@@ -9856,6 +10380,7 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
@@ -12455,6 +12980,8 @@ paths:
         name: filter[hours_ago]
         required: false
         schema:
+          format: int32
+          maximum: 2147483647
           type: integer
       - description: The number of aggregations that a `count`, `rate`, or `gauge`
           metric is configured to use. Max number of aggregation combos is 9.
@@ -12463,6 +12990,8 @@ paths:
         name: filter[num_aggregations]
         required: false
         schema:
+          format: int32
+          maximum: 9
           type: integer
       - description: A boolean, for distribution metrics only, to estimate cardinality
           if the metric includes additional percentile aggregators.
@@ -12479,6 +13008,8 @@ paths:
         name: filter[timespan_h]
         required: false
         schema:
+          format: int32
+          maximum: 2147483647
           type: integer
       responses:
         '200':
@@ -13587,6 +14118,7 @@ paths:
       summary: List all the RUM applications
       tags:
       - RUM
+      x-menu-order: 8
       x-undo:
         type: safe
     post:
@@ -13621,6 +14153,7 @@ paths:
               {\n        \"name\": \"test_name_create\",\n        \"type\": \"browser\"\n
               \   }\n  }\n}"
           step: there is a valid "rum_application" in the system
+      x-menu-order: 7
       x-undo:
         operationId: DeleteRUMApplication
         parameters:
@@ -13648,6 +14181,7 @@ paths:
       summary: Delete a RUM application
       tags:
       - RUM
+      x-menu-order: 6
       x-undo:
         type: idempotent
     get:
@@ -13674,6 +14208,7 @@ paths:
       summary: Get a RUM application
       tags:
       - RUM
+      x-menu-order: 5
       x-undo:
         type: safe
     patch:
@@ -13715,6 +14250,7 @@ paths:
       tags:
       - RUM
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/rum/events:
@@ -14089,6 +14625,7 @@ paths:
       summary: Get all security filters
       tags:
       - Security Monitoring
+      x-menu-order: 16
       x-undo:
         type: safe
     post:
@@ -14141,6 +14678,7 @@ paths:
               \       }\n     ],\n      \"filtered_data_type\":\"logs\",\n      \"is_enabled\":
               true\n     }\n  }\n}"
           step: there is a valid "security_filter" in the system
+      x-menu-order: 15
       x-undo:
         operationId: DeleteSecurityFilter
         parameters:
@@ -14170,6 +14708,7 @@ paths:
       summary: Delete a security filter
       tags:
       - Security Monitoring
+      x-menu-order: 12
       x-undo:
         type: idempotent
     get:
@@ -14203,6 +14742,7 @@ paths:
       summary: Get a security filter
       tags:
       - Security Monitoring
+      x-menu-order: 14
       x-undo:
         type: safe
     patch:
@@ -14245,6 +14785,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 13
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules:
@@ -14593,6 +15134,7 @@ paths:
       summary: Get a signal's details
       tags:
       - Security Monitoring
+      x-menu-order: 11
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -14639,6 +15181,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/incidents:
@@ -14685,6 +15228,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 9
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/state:
@@ -14731,6 +15275,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/series:
@@ -14899,6 +15444,7 @@ paths:
       summary: List application keys for this service account
       tags:
       - Service Accounts
+      x-menu-order: 6
       x-undo:
         type: safe
     post:
@@ -14946,6 +15492,7 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n    },\n    \"type\": \"application_keys\"\n  }\n}"
           step: there is a valid "service_account_application_key" for "service_account_user"
+      x-menu-order: 5
       x-undo:
         operationId: DeleteServiceAccountApplicationKey
         parameters:
@@ -15099,6 +15646,7 @@ paths:
       summary: Get a list of all incident services
       tags:
       - Incident Services
+      x-menu-order: 4
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15147,6 +15695,7 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n     },\n     \"type\": \"services\"\n  }\n}"
           step: there is a valid "service" in the system
+      x-menu-order: 5
       x-undo:
         operationId: DeleteIncidentService
         parameters:
@@ -15156,6 +15705,132 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/services/definitions:
+    get:
+      description: Get a list of all service definitions from the Datadog Service
+        Catalog.
+      operationId: ListServiceDefinitions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDefinitionsListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all service definitions
+      tags:
+      - Service Definition
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create or update service definition in the Datadog Service Catalog.
+      operationId: CreateOrUpdateServiceDefinitions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceDefinitionsCreateRequest'
+        description: Service Definition YAML/JSON.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDefinitionCreateResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create or update service definition
+      tags:
+      - Service Definition
+      x-codegen-request-body-name: body
+      x-given:
+        service_definition:
+          parameters:
+          - name: body
+            value: "{\n  \"dd-service\": \"service-{{ unique}}\",\n  \"dd-team\":
+              \"my-team\",\n  \"docs\": [{\"name\": \"Architecture\",\n            \"provider\":
+              \"google drive\",\n            \"url\": \"https://gdrive/mygivedoc\"}],\n
+              \ \"extensions\": {\"frogextension\": \"extensionfrogvalue\"},\n  \"integrations\":
+              {\"opsgenie\": {\"region\": \"US\",\n                                \"service-id\":
+              \"123e4567-e89b-12d3-a456-426614174000\"},\n                   \"pagerduty\":
+              \"https://my-org.pagerduty.com/service-directory/PMyService\"},\n  \"links\":
+              [{\"name\": \"Runbook\", \"type\": \"runbook\", \"url\": \"https://my-runbook\"}],\n
+              \ \"repos\": [{\"name\": \"Source Code\",\n             \"provider\":
+              \"GitHub\",\n             \"url\": \"https://github.com/DataDog/given\"}],\n
+              \ \"schema-version\": \"v2\",\n  \"tags\": [\"this:tag\", \"service:tag\"],\n
+              \ \"team\": \"super-team\"\n}"
+          step: there is a valid "service_definition" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteServiceDefinition
+        parameters:
+        - name: service_name
+          source: data[0].attributes.schema.dd-service
+        type: unsafe
+  /api/v2/services/definitions/{service_name}:
+    delete:
+      description: Delete a single service definition in the Datadog Service Catalog.
+      operationId: DeleteServiceDefinition
+      parameters:
+      - $ref: '#/components/parameters/ServiceName'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a single service definition
+      tags:
+      - Service Definition
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a single service definition from the Datadog Service Catalog.
+      operationId: GetServiceDefinition
+      parameters:
+      - $ref: '#/components/parameters/ServiceName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDefinitionGetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a single service definition
+      tags:
+      - Service Definition
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/services/{service_id}:
     delete:
       description: Deletes an existing incident service.
@@ -15183,6 +15858,7 @@ paths:
       summary: Delete an existing incident service
       tags:
       - Incident Services
+      x-menu-order: 2
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15222,6 +15898,7 @@ paths:
       summary: Get details of an incident service
       tags:
       - Incident Services
+      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15266,6 +15943,7 @@ paths:
       tags:
       - Incident Services
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15307,6 +15985,7 @@ paths:
       summary: Get a list of all incident teams
       tags:
       - Incident Teams
+      x-menu-order: 4
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15355,6 +16034,7 @@ paths:
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
               unique }}\"\n     },\n     \"type\": \"teams\"\n  }\n}"
           step: there is a valid "team" in the system
+      x-menu-order: 5
       x-undo:
         operationId: DeleteIncidentTeam
         parameters:
@@ -15391,6 +16071,7 @@ paths:
       summary: Delete an existing incident team
       tags:
       - Incident Teams
+      x-menu-order: 2
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15430,6 +16111,7 @@ paths:
       summary: Get details of an incident team
       tags:
       - Incident Teams
+      x-menu-order: 1
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -15474,6 +16156,7 @@ paths:
       tags:
       - Incident Teams
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -16611,6 +17294,10 @@ tags:
   name: Security Monitoring
 - description: Create, edit, and disable service accounts.
   name: Service Accounts
+- description: API to create, update, retrieve and delete service definitions.
+  externalDocs:
+    url: https://docs.datadoghq.com/tracing/service_catalog/
+  name: Service Definition
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.

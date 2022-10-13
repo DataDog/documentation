@@ -14,7 +14,7 @@ main:
   - name: Log Management
     identifier: log_management_heading
     weight: 5000000
-  - name: Security Platform
+  - name: Security
     identifier: security_platform_heading
     weight: 6000000
   - name: UX Monitoring
@@ -1062,11 +1062,21 @@ main:
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 705
+  - name: Send OpenTelemetry Metrics to Datadog
+    url: metrics/open_telemetry
+    parent: metrics_top_level
+    identifier: metrics_otel
+    weight: 8
+  - name: OTLP Metric Types
+    url: metrics/open_telemetry/otlp_metric_types
+    parent: metrics_otel
+    identifier: metrics_otlp_types
+    weight: 801
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
     identifier: metrics_guide
-    weight: 8
+    weight: 9
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1945,7 +1955,7 @@ main:
     parent: setup_tests
     identifier: ci_java
     weight: 102
-  - name: JavaScript
+  - name: JavaScript and TypeScript
     url: continuous_integration/setup_tests/javascript/
     parent: setup_tests
     identifier: ci_javascript
@@ -2245,11 +2255,16 @@ main:
     parent: log_collection
     identifier: log_collection_ruby
     weight: 111
+  - name: OpenTelemetry
+    url: logs/log_collection/opentelemetry/
+    parent: log_collection
+    identifier: log_collection_opentelemetry
+    weight: 112
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 112
+    weight: 113
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
@@ -2396,7 +2411,7 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_guides
     weight: 5
-  - name: Security Platform Overview
+  - name: Security Overview
     url: security_platform/
     pre: security-platform
     identifier: security_platform
@@ -2453,21 +2468,26 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_log_detection_rules
     weight: 2
+  - name: Signal Correlation Rules
+    url: security_platform/cloud_siem/signal_correlation_rules
+    parent: cloud_siem
+    identifier: cloud_siem_signal_correlation_rules
+    weight: 3
   - name: OOTB Rules
     url: /security_platform/default_rules#cat-cloud-siem
     parent: cloud_siem
     identifier: cloud_siem_default_rules
-    weight: 3
+    weight: 4
   - name: Signals Explorer
     url: /security_platform/explorer
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
-    weight: 4
+    weight: 5
   - name: Guides
     url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 5
+    weight: 6
   - name: Cloud Security Posture Management
     url: security_platform/cspm/
     parent: security_platform_heading
@@ -2479,30 +2499,45 @@ main:
     parent: cspm
     identifier: cspm_getting_started
     weight: 1
-  - name: Frameworks and Benchmarks
+  - name: Custom Rules
+    url: security_platform/cspm/custom_rules
+    parent: cspm
+    identifier: cspm_custom_rules
+    weight: 2
+  - name: Writing Custom Rules with Rego
+    url: security_platform/cloud_security_management/guide/writing_rego_rules/
+    parent: cspm_custom_rules
+    identifier: csm_rego_rules
+    weight: 201
+  - name: Cloud Resources Schema
+    url: security_platform/cspm/custom_rules/schema/
+    parent: cspm_custom_rules
+    identifier: cspm_schema_gcp
+    weight: 202
+  - name: Findings Reports
     url: security_platform/cspm/frameworks_and_benchmarks
     parent: cspm
-    weight: 2
+    weight: 3
   - name: OOTB Cloud Rules
     url: security_platform/default_rules/#cat-posture-management-cloud
     parent: cspm
     identifier: ootb_cloud_rules
-    weight: 3
+    weight: 4
   - name: OOTB Infrastructure Rules
     url: security_platform/default_rules/#cat-posture-management-infra
     parent: cspm
     identifier: ootb_infrastructure_rules
-    weight: 4
-  - name: Posture Findings
+    weight: 5
+  - name: Security Findings Explorer
     url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 4
+    weight: 6
   - name: Signals Explorer
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 5
+    weight: 7
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
     parent: security_platform_heading
@@ -2514,41 +2549,36 @@ main:
     parent: cloud_workload_security
     identifier: cws_getting_started
     weight: 1
-  - name: Agent Expressions
-    url: security_platform/cloud_workload_security/agent_expressions
-    parent: cloud_workload_security
-    identifier: cws_agent_expressions
-    weight: 2
-  - name: Workload Security Detection Rules
+  - name: Managing Detection Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
-    weight: 3
-  - name: Workload Security Events
-    url: security_platform/cloud_workload_security/backend
+    weight: 2
+  - name: Creating Custom Agent Rules
+    url: security_platform/cloud_workload_security/agent_expressions
     parent: cloud_workload_security
-    identifier: cws_backend_event_schema_documentation
-    weight: 4
+    identifier: cws_agent_expressions
+    weight: 3
   - name: OOTB Rules
     url: security_platform/default_rules#cat-workload-security
     parent: cloud_workload_security
     identifier: cws_workload_default_rules
+    weight: 4
+  - name: CWS Events Formats
+    url: security_platform/cloud_workload_security/backend
+    parent: cloud_workload_security
+    identifier: cws_backend_event_schema_documentation
     weight: 5
-  - name: Signals Explorer
-    url: security_platform/explorer
-    parent: cloud_workload_security
-    identifier: cws_workload_signals_explorer
-    weight: 6
   - name: Guides
-    url: security_platform/cloud_workload_security/guide
+    url: security_platform/cloud_security_management/guide
     parent: cloud_workload_security
-    identifier: cws_guides
-    weight: 7
+    identifier: csm_guides
+    weight: 6
   - name: Troubleshooting
-    url: security_platform/cloud_workload_security/troubleshooting
+    url: security_platform/cloud_security_management/troubleshooting/
     parent: cloud_workload_security
-    identifier: cws_troubleshooting
-    weight: 8
+    identifier: csm_troubleshooting
+    weight: 7
   - name: Application Security Monitoring
     url: security_platform/application_security/
     parent: security_platform_heading
@@ -3198,25 +3228,25 @@ main:
     parent: nm_parent
     identifier: ndm
     weight: 300
-  - name: Setup
-    url: network_monitoring/devices/setup
+  - name: SNMP Metrics
+    url: network_monitoring/devices/snmp_metrics
     parent: ndm
-    identifier: ndm_setup
+    identifier: ndm_snmp_metrics
     weight: 301
-  - name: Profiles
-    url: network_monitoring/devices/profiles
-    parent: ndm
-    identifier: ndm_profiles
-    weight: 302
-  - name: Data Collected
-    url: network_monitoring/devices/data
-    parent: ndm
-    identifier: ndm_data
-    weight: 303
   - name: SNMP Traps
     url: network_monitoring/devices/snmp_traps
     parent: ndm
     identifier: ndm_snmptraps
+    weight: 302
+  - name: Profiles
+    url: network_monitoring/devices/profiles
+    parent: ndm
+    identifier: ndm_profiles
+    weight: 303
+  - name: Data Collected
+    url: network_monitoring/devices/data
+    parent: ndm
+    identifier: ndm_data
     weight: 304
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
@@ -4191,7 +4221,7 @@ api:
       operationids:
         - RevokeEmbeddableGraph
       unstable: []
-      order: 0
+      order: 1
   - name: Enable embed
     url: '#enable-embed'
     identifier: embeddable-graphs-enable-embed
@@ -4203,7 +4233,7 @@ api:
       operationids:
         - EnableEmbeddableGraph
       unstable: []
-      order: 0
+      order: 2
   - name: Get specific embed
     url: '#get-specific-embed'
     identifier: embeddable-graphs-get-specific-embed
@@ -4215,7 +4245,7 @@ api:
       operationids:
         - GetEmbeddableGraph
       unstable: []
-      order: 0
+      order: 3
   - name: Create embed
     url: '#create-embed'
     identifier: embeddable-graphs-create-embed
@@ -4227,7 +4257,7 @@ api:
       operationids:
         - CreateEmbeddableGraph
       unstable: []
-      order: 0
+      order: 4
   - name: Get all embeds
     url: '#get-all-embeds'
     identifier: embeddable-graphs-get-all-embeds
@@ -4239,7 +4269,7 @@ api:
       operationids:
         - ListEmbeddableGraphs
       unstable: []
-      order: 0
+      order: 5
   - name: Events
     url: /api/latest/events/
     identifier: events
@@ -4430,7 +4460,7 @@ api:
       operationids:
         - UpdateCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 2
   - name: Get one application key owned by current user
     url: '#get-one-application-key-owned-by-current-user'
     identifier: key-management-get-one-application-key-owned-by-current-user
@@ -4442,7 +4472,7 @@ api:
       operationids:
         - GetCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 3
   - name: Delete an application key owned by current user
     url: '#delete-an-application-key-owned-by-current-user'
     identifier: key-management-delete-an-application-key-owned-by-current-user
@@ -4454,7 +4484,7 @@ api:
       operationids:
         - DeleteCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 1
   - name: Create an application key for current user
     url: '#create-an-application-key-for-current-user'
     identifier: key-management-create-an-application-key-for-current-user
@@ -4466,7 +4496,7 @@ api:
       operationids:
         - CreateCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 4
   - name: Get all application keys owned by current user
     url: '#get-all-application-keys-owned-by-current-user'
     identifier: key-management-get-all-application-keys-owned-by-current-user
@@ -4478,7 +4508,7 @@ api:
       operationids:
         - ListCurrentUserApplicationKeys
       unstable: []
-      order: 0
+      order: 5
   - name: Edit an application key
     url: '#edit-an-application-key'
     identifier: key-management-edit-an-application-key
@@ -5051,7 +5081,7 @@ api:
       operationids:
         - UnmuteAllMonitors
       unstable: []
-      order: 0
+      order: 3
   - name: Mute all monitors
     url: '#mute-all-monitors'
     identifier: monitors-mute-all-monitors
@@ -5063,7 +5093,7 @@ api:
       operationids:
         - MuteAllMonitors
       unstable: []
-      order: 0
+      order: 4
   - name: Validate an existing monitor
     url: '#validate-an-existing-monitor'
     identifier: monitors-validate-an-existing-monitor
@@ -5087,7 +5117,7 @@ api:
       operationids:
         - UnmuteMonitor
       unstable: []
-      order: 0
+      order: 1
   - name: Mute a monitor
     url: '#mute-a-monitor'
     identifier: monitors-mute-a-monitor
@@ -5099,7 +5129,7 @@ api:
       operationids:
         - MuteMonitor
       unstable: []
-      order: 0
+      order: 2
   - name: Edit a monitor
     url: '#edit-a-monitor'
     identifier: monitors-edit-a-monitor
@@ -5223,7 +5253,7 @@ api:
       operationids:
         - UpdateNotebook
       unstable: []
-      order: 0
+      order: 4
   - name: Get a notebook
     url: '#get-a-notebook'
     identifier: notebooks-get-a-notebook
@@ -5235,7 +5265,7 @@ api:
       operationids:
         - GetNotebook
       unstable: []
-      order: 0
+      order: 5
   - name: Delete a notebook
     url: '#delete-a-notebook'
     identifier: notebooks-delete-a-notebook
@@ -5247,7 +5277,7 @@ api:
       operationids:
         - DeleteNotebook
       unstable: []
-      order: 0
+      order: 3
   - name: Create a notebook
     url: '#create-a-notebook'
     identifier: notebooks-create-a-notebook
@@ -5259,7 +5289,7 @@ api:
       operationids:
         - CreateNotebook
       unstable: []
-      order: 0
+      order: 1
   - name: Get all notebooks
     url: '#get-all-notebooks'
     identifier: notebooks-get-all-notebooks
@@ -5271,7 +5301,7 @@ api:
       operationids:
         - ListNotebooks
       unstable: []
-      order: 0
+      order: 2
   - name: Organizations
     url: /api/latest/organizations/
     identifier: organizations
@@ -5421,7 +5451,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalIncidents
       unstable: []
-      order: 0
+      order: 9
   - name: Get a signal's details
     url: '#get-a-signals-details'
     identifier: security-monitoring-get-a-signals-details
@@ -5433,7 +5463,7 @@ api:
       operationids:
         - GetSecurityMonitoringSignal
       unstable: []
-      order: 0
+      order: 11
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
     identifier: security-monitoring-get-a-list-of-security-signals
@@ -5529,7 +5559,7 @@ api:
       operationids:
         - UpdateSecurityFilter
       unstable: []
-      order: 0
+      order: 13
   - name: Get a security filter
     url: '#get-a-security-filter'
     identifier: security-monitoring-get-a-security-filter
@@ -5541,7 +5571,7 @@ api:
       operationids:
         - GetSecurityFilter
       unstable: []
-      order: 0
+      order: 14
   - name: Delete a security filter
     url: '#delete-a-security-filter'
     identifier: security-monitoring-delete-a-security-filter
@@ -5553,7 +5583,7 @@ api:
       operationids:
         - DeleteSecurityFilter
       unstable: []
-      order: 0
+      order: 12
   - name: Create a security filter
     url: '#create-a-security-filter'
     identifier: security-monitoring-create-a-security-filter
@@ -5565,7 +5595,7 @@ api:
       operationids:
         - CreateSecurityFilter
       unstable: []
-      order: 0
+      order: 15
   - name: Get all security filters
     url: '#get-all-security-filters'
     identifier: security-monitoring-get-all-security-filters
@@ -5577,7 +5607,7 @@ api:
       operationids:
         - ListSecurityFilters
       unstable: []
-      order: 0
+      order: 16
   - name: Change the triage state of a security signal
     url: '#change-the-triage-state-of-a-security-signal'
     identifier: security-monitoring-change-the-triage-state-of-a-security-signal
@@ -5590,7 +5620,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalState
       unstable: []
-      order: 0
+      order: 2
   - name: Modify the triage assignee of a security signal
     url: '#modify-the-triage-assignee-of-a-security-signal'
     identifier: security-monitoring-modify-the-triage-assignee-of-a-security-signal
@@ -5603,7 +5633,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalAssignee
       unstable: []
-      order: 0
+      order: 3
   - name: Add a security signal to an incident
     url: '#add-a-security-signal-to-an-incident'
     identifier: security-monitoring-add-a-security-signal-to-an-incident
@@ -5615,7 +5645,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 0
+      order: 1
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
@@ -5927,7 +5957,7 @@ api:
       operationids:
         - UpdateSlackIntegration
       unstable: []
-      order: 0
+      order: 2
   - name: Create a Slack integration
     url: '#create-a-slack-integration'
     identifier: slack-integration-create-a-slack-integration
@@ -5939,7 +5969,7 @@ api:
       operationids:
         - CreateSlackIntegration
       unstable: []
-      order: 0
+      order: 3
   - name: Get info about a Slack integration
     url: '#get-info-about-a-slack-integration'
     identifier: slack-integration-get-info-about-a-slack-integration
@@ -5951,7 +5981,7 @@ api:
       operationids:
         - GetSlackIntegration
       unstable: []
-      order: 0
+      order: 4
   - name: Delete a Slack integration
     url: '#delete-a-slack-integration'
     identifier: slack-integration-delete-a-slack-integration
@@ -5963,7 +5993,7 @@ api:
       operationids:
         - DeleteSlackIntegration
       unstable: []
-      order: 0
+      order: 1
   - name: Snapshots
     url: /api/latest/snapshots/
     identifier: snapshots
@@ -6548,9 +6578,9 @@ api:
         - GetUsageSynthetics
       unstable: []
       order: 15
-  - name: Get usage across your multi-org account
-    url: '#get-usage-across-your-multi-org-account'
-    identifier: usage-metering-get-usage-across-your-multi-org-account
+  - name: Get usage across your account
+    url: '#get-usage-across-your-account'
+    identifier: usage-metering-get-usage-across-your-account
     parent: usage-metering
     generated: true
     params:
@@ -7357,7 +7387,7 @@ api:
         - UpdateIncidentService
       unstable:
         - v2
-      order: 0
+      order: 3
   - name: Get details of an incident service
     url: '#get-details-of-an-incident-service'
     identifier: incident-services-get-details-of-an-incident-service
@@ -7370,7 +7400,7 @@ api:
         - GetIncidentService
       unstable:
         - v2
-      order: 0
+      order: 1
   - name: Delete an existing incident service
     url: '#delete-an-existing-incident-service'
     identifier: incident-services-delete-an-existing-incident-service
@@ -7383,7 +7413,7 @@ api:
         - DeleteIncidentService
       unstable:
         - v2
-      order: 0
+      order: 2
   - name: Create a new incident service
     url: '#create-a-new-incident-service'
     identifier: incident-services-create-a-new-incident-service
@@ -7396,7 +7426,7 @@ api:
         - CreateIncidentService
       unstable:
         - v2
-      order: 0
+      order: 5
   - name: Get a list of all incident services
     url: '#get-a-list-of-all-incident-services'
     identifier: incident-services-get-a-list-of-all-incident-services
@@ -7409,7 +7439,7 @@ api:
         - ListIncidentServices
       unstable:
         - v2
-      order: 0
+      order: 4
   - name: Incident Teams
     url: /api/latest/incident-teams/
     identifier: incident-teams
@@ -7426,7 +7456,7 @@ api:
         - UpdateIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 3
   - name: Get details of an incident team
     url: '#get-details-of-an-incident-team'
     identifier: incident-teams-get-details-of-an-incident-team
@@ -7439,7 +7469,7 @@ api:
         - GetIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 1
   - name: Delete an existing incident team
     url: '#delete-an-existing-incident-team'
     identifier: incident-teams-delete-an-existing-incident-team
@@ -7452,7 +7482,7 @@ api:
         - DeleteIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 2
   - name: Create a new incident team
     url: '#create-a-new-incident-team'
     identifier: incident-teams-create-a-new-incident-team
@@ -7465,7 +7495,7 @@ api:
         - CreateIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 5
   - name: Get a list of all incident teams
     url: '#get-a-list-of-all-incident-teams'
     identifier: incident-teams-get-a-list-of-all-incident-teams
@@ -7478,7 +7508,7 @@ api:
         - ListIncidentTeams
       unstable:
         - v2
-      order: 0
+      order: 4
   - name: Incidents
     url: /api/latest/incidents/
     identifier: incidents
@@ -8015,7 +8045,7 @@ api:
       operationids:
         - UpdateRUMApplication
       unstable: []
-      order: 0
+      order: 4
   - name: Get a RUM application
     url: '#get-a-rum-application'
     identifier: rum-get-a-rum-application
@@ -8027,7 +8057,7 @@ api:
       operationids:
         - GetRUMApplication
       unstable: []
-      order: 0
+      order: 5
   - name: Delete a RUM application
     url: '#delete-a-rum-application'
     identifier: rum-delete-a-rum-application
@@ -8039,7 +8069,7 @@ api:
       operationids:
         - DeleteRUMApplication
       unstable: []
-      order: 0
+      order: 6
   - name: Create a new RUM application
     url: '#create-a-new-rum-application'
     identifier: rum-create-a-new-rum-application
@@ -8051,7 +8081,7 @@ api:
       operationids:
         - CreateRUMApplication
       unstable: []
-      order: 0
+      order: 7
   - name: List all the RUM applications
     url: '#list-all-the-rum-applications'
     identifier: rum-list-all-the-rum-applications
@@ -8063,7 +8093,7 @@ api:
       operationids:
         - GetRUMApplications
       unstable: []
-      order: 0
+      order: 8
   - name: Aggregate RUM events
     url: '#aggregate-rum-events'
     identifier: rum-aggregate-rum-events
@@ -8287,7 +8317,7 @@ api:
       operationids:
         - CreateServiceAccountApplicationKey
       unstable: []
-      order: 0
+      order: 5
   - name: List application keys for this service account
     url: '#list-application-keys-for-this-service-account'
     identifier: service-accounts-list-application-keys-for-this-service-account
@@ -8299,4 +8329,56 @@ api:
       operationids:
         - ListServiceAccountApplicationKeys
       unstable: []
-      order: 0
+      order: 6
+  - name: Service Definition
+    url: /api/latest/service-definition/
+    identifier: service-definition
+    generated: true
+  - name: Get a single service definition
+    url: '#get-a-single-service-definition'
+    identifier: service-definition-get-a-single-service-definition
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetServiceDefinition
+      unstable: []
+      order: 3
+  - name: Delete a single service definition
+    url: '#delete-a-single-service-definition'
+    identifier: service-definition-delete-a-single-service-definition
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteServiceDefinition
+      unstable: []
+      order: 4
+  - name: Create or update service definition
+    url: '#create-or-update-service-definition'
+    identifier: service-definition-create-or-update-service-definition
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateOrUpdateServiceDefinitions
+      unstable: []
+      order: 2
+  - name: Get all service definitions
+    url: '#get-all-service-definitions'
+    identifier: service-definition-get-all-service-definitions
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListServiceDefinitions
+      unstable: []
+      order: 1

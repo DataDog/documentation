@@ -19,7 +19,7 @@ GitHub アプリのインテグレーションと組み合わせることで、�
 ## コンフィギュレーション
 
 <div class="alert alert-info">
-ソースコードのインテグレーションは、Go とすべての JVM 言語をサポートしています。
+ソースコードのインテグレーションは、Go、Java、JavaScript、Python をサポートしています。
 <br>
 Datadog Agent 7.35.0 以降が必要です。
 </div>
