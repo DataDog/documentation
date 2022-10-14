@@ -8,29 +8,7 @@ further_reading:
   text: "Learn how to use the OAuth 2.0 authorization endpoints"
 ---
 
-## Overview
-
-Datadog uses the [OAuth 2.0 (OAuth2) Authorization Framework][1] to allow users to securely authorize third-party applications' access to restricted Datadog resources on behalf of the user. The access that applications have is determined by [scopes][2], which enable users to grant explicit consent for a specific set of granular permissions requested by the application. 
-
-### Clients and credentials
-
-An OAuth2 client is the component of an application that enables users to authorize the application access to Datadog resources on the user's behalf. OAuth2 defines two types of clients: public and [confidential][4]. 
-
-Public Clients
-: Typically used for browser-based applications and are not capable of storing confidential information. Examples of public clients include OAuth clients for [Datadog Apps][3]. 
-
-Confidential Clients
-: Capable of storing sensitive data and requires an additional `client_secret` to make authorization requests. OAuth clients for data integrations are confidential clients. 
-
-When you create an OAuth client, a set of client credentials is issued in the form of a client ID, and optionally, a client secret for confidential clients. 
-
-Client ID 
-: Used to identify your client when making requests to the authorization and token endpoints. 
-
-Client Secret 
-: If issued, used to authenticate the client when making requests to the authorization endpoints. Immediately copy and store the client secret securely as it is a confidential password exposed only once upon client creation. 
-
-## Implement an OAuth protocol
+## Implement the OAuth protocol
 
 This section contains a step-by-step overview on how to prepare your application for implementing the OAuth protocol end-to-end once your **confidential** client is created. 
 
