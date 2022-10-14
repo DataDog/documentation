@@ -7,12 +7,12 @@ is_beta: true
 
 TODO: replace "#" with the real signup link
 {{< beta-callout url="#" btn_hidden="true">}}
-  Datadog Workflows is currently in beta.
+  Datadog Workflows is in beta.
 {{< /beta-callout >}}
 
 {{< img src="workflows/hero.jpg" alt="Graphic showing three purposes of Workflows: Orchestrate, Automate, and Break down Silos"  >}}
 
-Datadog Workflows allows you to orchestrate and automate your end-to-end processes. Build workflows that put together [actions][1] that connect to your infrastructure and tools. These actions can also perform data and logical operations, allowing you to build complex flows with branches, decisions, and data operations.
+Datadog Workflows allows you to orchestrate and automate your end-to-end processes. Build workflows made up of [actions][1] that connect to your infrastructure and tools. These actions can also perform data and logical operations, allowing you to build complex flows with branches, decisions, and data operations.
 
 ## Configure workflow actions
 
