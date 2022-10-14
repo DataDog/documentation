@@ -99,5 +99,5 @@ For all the details on how CoScreen enables secure collaboration, read the [CoSc
 [3]: https://www.coscreen.co/integrations
 [4]: https://coscreen.co/slack
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
-[6]: https://app.termly.io/document/privacy-policy/f8dd1607-7755-4f56-9f7a-bc7d57a69e49
+[6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
