@@ -3,7 +3,7 @@ title: CoScreen
 kind: documentation
 ---
 
-{{< img src="coscreen/collab.mp4" alt="Facet creation for custom tag" width=80% video="true">}}
+{{< img src="coscreen/collab.mp4" alt="Three users share three windows at the same time." width=80% video="true">}}
 
 ## Overview
 [CoScreen][1] is a collaborative meeting tool that allows multiple participants to simultaneously share and interact with any application window on their desktops. It was specifically designed for engineers for use cases such as pair programming, incident management, joint troubleshooting, team standups, and employee onboarding.
@@ -34,7 +34,7 @@ You can share application windows in multiple ways.
 
  - **Select individual windows to be shared**.
 
-   {{< img src="coscreen/sharewindow.mp4" alt="Facet creation for custom tag" width=50% video="true">}}
+   {{< img src="coscreen/sharewindow.mp4" alt="A 'Share window' tab-shaped button is attached to the top of a window. Clicking on this button highlights the window in purple. The text changes to 'Unshare window.'" width=50% video="true">}}
 
    Share and unshare windows by clicking on the tab above each window. You can also use the window sharing dialog to select the application window(s) that you want to share with other members of the CoScreen you've joined.
 
@@ -46,11 +46,11 @@ You can share application windows in multiple ways.
 
 Click on the **Share windows** button to bring up the window sharing dialog.
 
-{{< img src="coscreen/share_windows_button.png" alt="" style="width:50%;">}}
+{{< img src="coscreen/share_windows_button.png" alt="A panel of buttons from the CoScreen desktop UI. The 'Share windows' button is highlighted." style="width:50%;">}}
 
 By default, when you join a CoScreen, the following dialog appears:
 
-{{< img src="coscreen/share_windows.png" alt="" style="width:60%;">}}
+{{< img src="coscreen/share_windows.png" alt="The window sharing dialog. Users are prompted to choose a display, and then to select a window or windows to share." style="width:60%;">}}
 
 If you have multiple displays, choose which display contains the window or windows you want to share.
 
@@ -59,7 +59,7 @@ Screen sharing is deactivated by default when you join a CoScreen.
 
 ### Collaborate in shared windows
 
-{{< img src="coscreen/collaborate.mp4" alt="" video="true" width=70% >}}
+{{< img src="coscreen/collaborate.mp4" alt="Two cursors interact with a shared window at the same time." video="true" width=70% >}}
 
 You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. **Everyone can click and type into any shared window**. If you click the _Edit_ button on the tab of a remote window, you can also draw on a shared window.
 
