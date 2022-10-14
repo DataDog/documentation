@@ -126,18 +126,13 @@ To get better metadata for traces and for smooth integration with Datadog:
 
 Run an Opentelemetry Collector container to receive traces either from [localhost](#receive-traces-from-localhost), or from [other containers](#receive-traces-from-other-containers).
 
-<div class="alert alert-info">
-The latest tag of the OpenTelemetry Collector Contrib distro <a href="https://github.com/open-telemetry/opentelemetry-collector-releases/issues/73">is not updated on every release</a>.
-Pin the Collector to the latest version to pick up the latest changes.
-</div>
-
 ### Receive traces from localhost
 
 To run the OpenTelemetry Collector as a Docker image and receive traces from the same host:
 
 1. Create a `collector.yaml` file. You may use the [example template above](#configuring-the-datadog-exporter) to get started.
 
-2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib:<VERSION>`][10].
+2. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib`][10].
 
 3. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4138.
 
@@ -148,7 +143,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
        -p 4317:4317 \
        --hostname $(hostname) \
        -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
-       otel/opentelemetry-collector-contrib:<VERSION>
+       otel/opentelemetry-collector-contrib
    ```
 
 5. Make sure you've configured your application with the appropriate resource attributes for [unified service tagging](#unified-service-tagging).
@@ -175,7 +170,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
        --network <NETWORK_NAME> \
        --hostname $(hostname) \
        -v $(pwd)/otel_collector_config.yaml:/etc/otelcol-contrib/config.yaml \
-       otel/opentelemetry-collector-contrib:<VERSION>
+       otel/opentelemetry-collector-contrib
    ```
 
     When running the application container, ensure that the environment variable `OTEL_EXPORTER_OTLP_ENDPOINT` is configured to use the appropriate hostname for the OpenTelemetry Collector. In the example below, this is `opentelemetry-collector`.
@@ -313,7 +308,7 @@ To use the OpenTelemetry Operator:
    spec:
      mode: daemonset
      hostNetwork: true
-     image: otel/opentelemetry-collector-contrib:0.59.0
+     image: otel/opentelemetry-collector-contrib
      env:
        - name: DD_API_KEY
          valueFrom:
