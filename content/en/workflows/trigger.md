@@ -96,6 +96,6 @@ To schedule a workflow run:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /workflows/service-accounts/
+[1]: /workflows/service_accounts/
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules
