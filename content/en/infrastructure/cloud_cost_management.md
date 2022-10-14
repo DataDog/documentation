@@ -141,9 +141,9 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `aws_product`                | The AWS service being billed.|
 | `aws_product_family`         | The category for the AWS service being billed (for example, Compute or Storage).|
 | `aws_management_account_name`| The AWS management account name associated with the item.|
-| `aws_management_account_id`  | The AWS management account id associated with the item.|
+| `aws_management_account_id`  | The AWS management account ID associated with the item.|
 | `aws_member_account_name`    | The AWS memmber account name associated with the item.|
-| `aws_member_account_id`      | The AWS member account id associated with the item.|
+| `aws_member_account_id`      | The AWS member account ID associated with the item.|
 | `aws_cost_type`              | The type of charge covered by this item (for example, Usage, or Tax).|
 | `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On Demand.|
 | `aws_reservation_arn`        | The ARN of the Reserved Instance that the item benefited from.| 
@@ -152,13 +152,13 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `aws_operation`              | The operation associated with the item (for example, RunInstances).|
 | `aws_region`                 | The region associated with the item.|
 | `aws_availability_zone`      | The availability zone associated with the item.|
-| `aws_resource_id`            | The resource id associated with the item.|
+| `aws_resource_id`            | The resource ID associated with the item.|
 | `aws_instance_type`          | The instance types associated with your items.|
 | `aws_instance_family`        | The instance family associated with your item (for example, Storage optimized).|
 | `is_aws_ec2_compute`         | Whether the usage is related to EC2 compute.|
-| `is_aws_ec2_compute_on_demand`| Whether the usage is on demand.|
-| `is_aws_ec2_compute_reservation`| Whether the usage associated with a Reserved Instance.|
-| `is_aws_ec2_capacity_reservation`| Whether the usage associated with a Capacity Reservation.|
+| `is_aws_ec2_compute_on_demand`| Whether the usage is on-demand.|
+| `is_aws_ec2_compute_reservation`| Whether the usage is associated with a Reserved Instance.|
+| `is_aws_ec2_capacity_reservation`| Whether the usage is associated with a Capacity Reservation.|
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
