@@ -54,7 +54,7 @@ After installing the Datadog plugin and restarting IDEA, add your Datadog API an
 1. Click **Add your credentials...**.
 1. Enter your name, [API key and application key][5], and select a site.
 
-**Note**: For most users, one pair of keys is all that is required. If you're using a multi-org setup with multiple key pairs, check to ensure that the correct pair is active using the **Tools** -> **Datadog** section in **Preferences**.
+**Note**: For most users, one pair of keys is all that is required. If you're using a multi-org setup with multiple key pairs, check to ensure that the correct pair is active. To find out which key IDEA is using, click **Preferences** -> **Tools** -> **Datadog** and check which account is active.
 
 ### Link a service
 
