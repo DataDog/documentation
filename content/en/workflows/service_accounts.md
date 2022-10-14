@@ -1,5 +1,5 @@
 ---
-title: Service accounts for Workflows
+title: Service Accounts for Workflows
 kind: Documentation
 disable_toc: false
 further_reading:
@@ -8,7 +8,7 @@ further_reading:
   text: "Learn more about Datadog service accounts"
 ---
 
-To add am automated or scheduled trigger to a workflow, the workflow must have an associated service account. The service account is needed:
+To add an automated or scheduled trigger to a workflow, the workflow must have an associated service account. The service account is needed:
 - to resolve the connections defined in the workflow actions at runtime
 - to provide an identity for workflow executions
 - to provide an identity for workflow audit trails
@@ -19,11 +19,11 @@ To use automated or scheduled triggers, a workflow must be associated with a uni
 
 To create a service account for a workflow:
 - You must have either the Datadog admin role, or a custom role with the `SERVICE_ACCOUNT_WRITE` permission. For more information on service accounts and permissions, see [Service accounts][1].
-- Before you can add a service account, you need a workflow with at least one action so you can add a Trigger.
+- Before you can add a service account, you need a workflow with at least one action so you can add a trigger.
 
 ## Associate a service account with a workflow
 
-You can dynamically create a service account for your workflow when you [add a trigger][5]. Alternatively, click on the workflow name add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
+You can dynamically create a service account for your workflow when you [add a trigger][5]. Alternatively, click on the workflow name and add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
 
 {{< img src="workflows/create-service-account.png" alt="You can create a service account by clicking on the workflow name" style="width:100%;" >}}
 
