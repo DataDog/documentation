@@ -4,7 +4,6 @@ kind: documentation
 ---
 
 ## Overview
-Datadog uses the [OAuth 2.0 (OAuth2) Authorization Framework][1] to allow users to securely authorize third-party applications' access to restricted Datadog resources on behalf of the user. The access that applications have is determined by [scopes][2], which enable users to grant explicit consent for a specific set of granular permissions requested by the application. 
 
 ### Clients
 An OAuth2 client is the component of an application that enables users to authorize the application access to Datadog resources on the user's behalf. OAuth2 defines two types of clients: public clients and confidential clients. 
@@ -57,8 +56,6 @@ Outlined below is a step-by-step overview of what your application needs to do i
 Users can kick off authorization from within Datadog, by going to the integration tile and clicking "Connect Accounts", but they can also kick off authorization from the integration's external website if desired. For example, if there's an integration configuration page on your website that Datadog users will use, you can give users the option to kick off authorization from there as well.
 
 When kicking off authorization from a third-party location (anywhere outside of the Datadog integration tile), the Datadog site (i.e. EU, US1, US3, or US5) must be taken into account when routing them through the authorization flow and building out the URL for the `authorization` and `token` endpoints. To ensure that users are authorizing in their correct site, always direct users to the US1 Datadog site (app.datadoghq.com), and from there the user will have a choice to select their region. After the site is selected, ensure that all followup API calls use the selected site.
-
-
 
 
 ## Authorization Code Grant Flow With PKCE
