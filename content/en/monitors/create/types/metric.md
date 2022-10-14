@@ -195,11 +195,11 @@ For example, a monitor that evaluates over the last `2h` is split in 12 buckets 
 
 #### Other options
 
-For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][5] page.
+For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][6] page.
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 ## Further Reading
 
@@ -209,5 +209,6 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: /dashboards/querying/#advanced-graphing
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /monitors/notify/?tab=is_alert#tag-variables
-[5]: /monitors/create/configuration/#advanced-alert-conditions
-[6]: /monitors/notify/
+[5]: /monitors/guide/recovery-thresholds/
+[6]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/notify/

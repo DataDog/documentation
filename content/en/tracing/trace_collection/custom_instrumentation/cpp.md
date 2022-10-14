@@ -68,7 +68,7 @@ span->SetTag("error", true);
 ```
 
 Add more specific information about the error by setting any combination of the
-`error.msg`, `error.stack`, or `error.type` tags. See [Error Tracking][7] for
+`error.msg`, `error.stack`, or `error.type` tags. See [Error Tracking][12] for
 more information about error tags.
 
 An example of adding a combination of error tags:
@@ -95,7 +95,7 @@ span->SetTag("error", false);
 
 ### Manually instrument a method
 
-To manually instrument your code, install the tracer as in the [setup examples][8], and then use the tracer object to create [spans][2].
+To manually instrument your code, install the tracer as in the [setup examples][7], and then use the tracer object to create [spans][2].
 
 ```cpp
 {
@@ -117,7 +117,7 @@ To manually instrument your code, install the tracer as in the [setup examples][
 
 ### Inject and extract context for distributed tracing
 
-Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][9], which accept [generic `Reader` and `Writer` types][10]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][8], which accept [generic `Reader` and `Writer` types][9]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
 
 ```cpp
 // Allows writing propagation headers to a simple map<string, string>.
@@ -161,7 +161,7 @@ There are additional configurations possible for both the tracing client and Dat
 
 ### B3 headers extraction and injection
 
-Datadog APM tracer supports [B3 headers extraction][11] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][10] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -184,7 +184,7 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][12] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page.
 
 ## Further Reading
 
@@ -196,9 +196,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/ext/tags.h
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
-[7]: /tracing/error_tracking/
-[8]: /tracing/setup/cpp/#installation
-[9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
-[10]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
-[11]: https://github.com/openzipkin/b3-propagation
-[12]: /tracing/security
+[7]: /tracing/setup/cpp/#installation
+[8]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
+[9]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
+[10]: https://github.com/openzipkin/b3-propagation
+[11]: /tracing/security
+[12]: /tracing/error_tracking/

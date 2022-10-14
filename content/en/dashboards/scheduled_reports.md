@@ -81,7 +81,7 @@ Images generated in reports show all data regardless of granular read restrictio
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
 
-Users with the Admin role or **Org Management** permission can enable or disable the scheduled reports feature for an account from the **Settings** tab under [Public Sharing][15] in **Organization Settings**.
+Users with the Admin role or **Org Management** permission can enable or disable the scheduled reports feature for an account from the **Settings** tab under [Public Sharing][16] in **Organization Settings**.
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:100%;" >}}
 
@@ -103,4 +103,5 @@ Users with the Admin role or **Org Management** permission can enable or disable
 [12]: /dashboards/widgets/table/
 [13]: /dashboards/widgets/timeseries/
 [14]: /dashboards/widgets/top_list/
-[15]: /account_management/org_settings/#public-sharing
+[15]: /account_management/users/#edit-a-users-roles
+[16]: /account_management/org_settings/#public-sharing
