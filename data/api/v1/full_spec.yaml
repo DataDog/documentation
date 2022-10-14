@@ -6443,18 +6443,20 @@ components:
           type: boolean
         notify_by:
           description: 'Controls what granularity a monitor alerts on. Only available
-            for multi-alerts.
+            for monitors with groupings.
 
-            For instance, a monitor grouped by `cluster`, `namespace`, `pod` can be
-            configured to only notify on each
+            For instance, a monitor grouped by `cluster`, `namespace`, and `pod` can
+            be configured to only notify on each
 
             new `cluster` violating the alert conditions by setting `notify_by` to
             `["cluster"]`. Tags mentioned
 
-            in `notify_by` have to be a subset of the grouping tags in the query.
+            in `notify_by` must be a subset of the grouping tags in the query.
 
-            For example, a query grouped by `cluster`, `namespace` cannot notify on
-            `region`.'
+            For example, a query grouped by `cluster` and `namespace` cannot notify
+            on `region`.
+
+            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
           items:
             description: A grouping tag.
             type: string
@@ -9518,6 +9520,7 @@ components:
       description: Widget request type.
       enum:
       - slo_list
+      example: slo_list
       type: string
       x-enum-varnames:
       - SLO_LIST
@@ -11195,6 +11198,7 @@ components:
       - open
       - archived
       - under_review
+      example: open
       type: string
       x-enum-varnames:
       - OPEN
@@ -15364,19 +15368,23 @@ components:
       properties:
         ci_pipeline_indexed_spans:
           description: The number of spans for pipelines in the queried hour.
+          format: int64
           type: integer
         ci_test_indexed_spans:
           description: The number of spans for tests in the queried hour.
+          format: int64
           type: integer
         ci_visibility_pipeline_committers:
           description: Shows the total count of all active Git committers for Pipelines
             in the current month. A committer is active if they commit at least 3
             times in a given month.
+          format: int64
           type: integer
         ci_visibility_test_committers:
           description: The total count of all active Git committers for tests in the
             current month. A committer is active if they commit at least 3 times in
             a given month.
+          format: int64
           type: integer
         org_name:
           description: The organization name.
@@ -16087,6 +16095,7 @@ components:
           type: string
         online_archive_events_count:
           description: Total count of online archived events within the hour.
+          format: int64
           type: integer
         org_name:
           description: The organization name.

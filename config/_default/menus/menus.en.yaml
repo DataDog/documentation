@@ -1062,11 +1062,21 @@ main:
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 705
+  - name: Send OpenTelemetry Metrics to Datadog
+    url: metrics/open_telemetry
+    parent: metrics_top_level
+    identifier: metrics_otel
+    weight: 8
+  - name: OTLP Metric Types
+    url: metrics/open_telemetry/otlp_metric_types
+    parent: metrics_otel
+    identifier: metrics_otlp_types
+    weight: 801
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
     identifier: metrics_guide
-    weight: 8
+    weight: 9
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1540,16 +1550,21 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_serverless
     weight: 106
+  - name: Admission Controller Injection
+    url: tracing/trace_collection/admission_controller/
+    parent: tracing_trace_collection
+    identifier: tracing_admission_controller
+    weight: 107
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 107
+    weight: 108
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 108
+    weight: 109
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
@@ -2245,11 +2260,16 @@ main:
     parent: log_collection
     identifier: log_collection_ruby
     weight: 111
+  - name: OpenTelemetry
+    url: logs/log_collection/opentelemetry/
+    parent: log_collection
+    identifier: log_collection_opentelemetry
+    weight: 112
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 112
+    weight: 113
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
@@ -7356,6 +7376,130 @@ api:
         - DownloadCloudWorkloadPolicyFile
       unstable: []
       order: 1
+  - name: Confluent Cloud
+    url: /api/latest/confluent-cloud/
+    identifier: confluent-cloud
+    generated: true
+  - name: Update resource in Confluent account
+    url: '#update-resource-in-confluent-account'
+    identifier: confluent-cloud-update-resource-in-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateConfluentResource
+      unstable: []
+      order: 1
+  - name: Get resource from Confluent account
+    url: '#get-resource-from-confluent-account'
+    identifier: confluent-cloud-get-resource-from-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetConfluentResource
+      unstable: []
+      order: 2
+  - name: Delete resource from Confluent account
+    url: '#delete-resource-from-confluent-account'
+    identifier: confluent-cloud-delete-resource-from-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteConfluentResource
+      unstable: []
+      order: 3
+  - name: Add resource to Confluent account
+    url: '#add-resource-to-confluent-account'
+    identifier: confluent-cloud-add-resource-to-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateConfluentResource
+      unstable: []
+      order: 4
+  - name: List Confluent Account resources
+    url: '#list-confluent-account-resources'
+    identifier: confluent-cloud-list-confluent-account-resources
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListConfluentResource
+      unstable: []
+      order: 5
+  - name: Update Confluent account
+    url: '#update-confluent-account'
+    identifier: confluent-cloud-update-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateConfluentAccount
+      unstable: []
+      order: 6
+  - name: Get Confluent account
+    url: '#get-confluent-account'
+    identifier: confluent-cloud-get-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetConfluentAccount
+      unstable: []
+      order: 7
+  - name: Delete Confluent account
+    url: '#delete-confluent-account'
+    identifier: confluent-cloud-delete-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteConfluentAccount
+      unstable: []
+      order: 8
+  - name: Add Confluent account
+    url: '#add-confluent-account'
+    identifier: confluent-cloud-add-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateConfluentAccount
+      unstable: []
+      order: 9
+  - name: List Confluent accounts
+    url: '#list-confluent-accounts'
+    identifier: confluent-cloud-list-confluent-accounts
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListConfluentAccount
+      unstable: []
+      order: 10
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services

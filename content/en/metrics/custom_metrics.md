@@ -28,7 +28,7 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
-**Note**: Users with the Datadog Admin roles can see the monthly average number of custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
+**Note**: Users with the Datadog Admin role or `usage_read` permission can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
 
 ## Custom metrics properties
 

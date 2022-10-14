@@ -145,6 +145,20 @@ components:
       required: true
       schema:
         type: string
+    ConfluentAccountID:
+      description: Confluent Account id.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
+    ConfluentResourceID:
+      description: Confluent Account Resource ID.
+      in: path
+      name: resource_id
+      required: true
+      schema:
+        type: string
     IncidentAttachmentFilterQueryParameter:
       description: Specifies which types of attachments are included in the response.
       explode: false
@@ -1316,6 +1330,287 @@ components:
             $ref: '#/components/schemas/CloudWorkloadSecurityAgentRuleData'
           type: array
       type: object
+    ConfluentAccountCreateRequest:
+      description: Payload schema when adding a Confluent account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    ConfluentAccountCreateRequestAttributes:
+      description: Attributes associated with the account creation request.
+      properties:
+        api_key:
+          description: The API key associated with your Confluent account.
+          example: TESTAPIKEY123
+          type: string
+        api_secret:
+          description: The API secret associated with your Confluent account.
+          example: test-api-secret-123
+          type: string
+        resources:
+          description: A list of Confluent resources associated with the Confluent
+            account.
+          items:
+            $ref: '#/components/schemas/ConfluentAccountResourceAttributes'
+          type: array
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - api_key
+      - api_secret
+      type: object
+    ConfluentAccountCreateRequestData:
+      description: The data body for adding a Confluent account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ConfluentAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    ConfluentAccountResourceAttributes:
+      description: Attributes object for updating a Confluent resource.
+      properties:
+        id:
+          description: The ID associated with a Confluent resource.
+          example: resource-id-123
+          type: string
+        resource_type:
+          description: The resource type of the Resource. Can be `kafka`, `connector`,
+            `ksql`, or `schema_registry`.
+          example: kafka
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      type: object
+    ConfluentAccountResponse:
+      description: The expected response schema when getting a Confluent account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentAccountResponseData'
+      type: object
+    ConfluentAccountResponseAttributes:
+      description: The attributes of a Confluent account.
+      properties:
+        api_key:
+          description: The API key associated with your Confluent account.
+          example: TESTAPIKEY123
+          type: string
+        resources:
+          description: A list of Confluent resources associated with the Confluent
+            account.
+          items:
+            $ref: '#/components/schemas/ConfluentResourceResponseAttributes'
+          type: array
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - api_key
+      type: object
+    ConfluentAccountResponseData:
+      description: An API key and API secret pair that represents a Confluent account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentAccountResponseAttributes'
+        id:
+          description: A randomly generated ID associated with a Confluent account.
+          example: account_id_abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfluentAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    ConfluentAccountType:
+      default: confluent-cloud-accounts
+      description: The JSON:API type for this API. Should always be `confluent-cloud-accounts`.
+      enum:
+      - confluent-cloud-accounts
+      example: confluent-cloud-accounts
+      type: string
+      x-enum-varnames:
+      - CONFLUENT_CLOUD_ACCOUNTS
+    ConfluentAccountUpdateRequest:
+      description: The JSON:API request for updating a Confluent account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    ConfluentAccountUpdateRequestAttributes:
+      description: Attributes object for updating a Confluent account.
+      properties:
+        api_key:
+          description: The API key associated with your Confluent account.
+          example: TESTAPIKEY123
+          type: string
+        api_secret:
+          description: The API secret associated with your Confluent account.
+          example: test-api-secret-123
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - api_key
+      - api_secret
+      type: object
+    ConfluentAccountUpdateRequestData:
+      description: Data object for updating a Confluent account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ConfluentAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    ConfluentAccountsResponse:
+      description: Confluent account returned by the API.
+      properties:
+        data:
+          description: The Confluent account.
+          items:
+            $ref: '#/components/schemas/ConfluentAccountResponseData'
+          type: array
+      type: object
+    ConfluentResourceRequest:
+      description: The JSON:API request for updating a Confluent resource.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentResourceRequestData'
+      required:
+      - data
+      type: object
+    ConfluentResourceRequestAttributes:
+      description: Attributes object for updating a Confluent resource.
+      properties:
+        resource_type:
+          description: The resource type of the Resource. Can be `kafka`, `connector`,
+            `ksql`, or `schema_registry`.
+          example: kafka
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      type: object
+    ConfluentResourceRequestData:
+      description: JSON:API request for updating a Confluent resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentResourceRequestAttributes'
+        id:
+          description: The ID associated with a Confluent resource.
+          example: resource-id-123
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfluentResourceType'
+      required:
+      - attributes
+      - type
+      - id
+      type: object
+    ConfluentResourceResponse:
+      description: Response schema when interacting with a Confluent resource.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConfluentResourceResponseData'
+      type: object
+    ConfluentResourceResponseAttributes:
+      description: Model representation of a Confluent Cloud resource.
+      properties:
+        resource_type:
+          description: The resource type of the Resource. Can be `kafka`, `connector`,
+            `ksql`, or `schema_registry`.
+          example: kafka
+          type: string
+        tags:
+          description: A list of strings representing tags. Can be a single key, or
+            key-value pairs separated by a colon.
+          example:
+          - myTag
+          - myTag2:myValue
+          items:
+            type: string
+          type: array
+      required:
+      - resource_type
+      type: object
+    ConfluentResourceResponseData:
+      description: Confluent Cloud resource data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConfluentResourceResponseAttributes'
+        id:
+          description: The ID associated with the Confluent resource.
+          example: resource_id_abc123
+          type: string
+        type:
+          $ref: '#/components/schemas/ConfluentResourceType'
+      required:
+      - attributes
+      - type
+      - id
+      type: object
+    ConfluentResourceType:
+      default: confluent-cloud-resources
+      description: The JSON:API type for this request.
+      enum:
+      - confluent-cloud-resources
+      example: confluent-cloud-resources
+      type: string
+      x-enum-varnames:
+      - CONFLUENT_CLOUD_RESOURCES
+    ConfluentResourcesResponse:
+      description: Response schema when interacting with a list of Confluent resources.
+      properties:
+        data:
+          description: The JSON:API data attribute.
+          items:
+            $ref: '#/components/schemas/ConfluentResourceResponseData'
+          type: array
+      type: object
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -1574,6 +1869,7 @@ components:
         source_id:
           description: Event source ID.
           example: 36
+          format: int64
           type: integer
         type:
           description: Event type.
@@ -1624,12 +1920,14 @@ components:
         monitor_id:
           description: ID of the monitor that triggered the event. When an event isn't
             related to a monitor, this field is empty.
+          format: int64
           nullable: true
           type: integer
         priority:
           $ref: '#/components/schemas/EventPriority'
         related_event_id:
           description: Related event ID.
+          format: int64
           type: integer
         service:
           description: Service that triggered the event.
@@ -5280,6 +5578,8 @@ components:
           type: integer
         group_status:
           description: Monitor group status used when there is no `result_groups`.
+          format: int32
+          maximum: 2147483647
           type: integer
         groups:
           description: Groups to which the monitor belongs.
@@ -5289,12 +5589,14 @@ components:
           type: array
         id:
           description: The monitor ID.
+          format: int64
           type: integer
         message:
           description: The monitor message.
           type: string
         modified:
           description: The monitor's last-modified timestamp.
+          format: int64
           type: integer
         name:
           description: The monitor name.
@@ -5998,6 +6300,7 @@ components:
           description: Org ID of the RUM application.
           example: 999
           format: int32
+          maximum: 2147483647
           type: integer
         type:
           description: Type of the RUM application. Supported values are `browser`,
@@ -8208,6 +8511,7 @@ components:
       - open
       - archived
       - under_review
+      example: open
       type: string
       x-enum-varnames:
       - OPEN
@@ -11180,6 +11484,348 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
+  /api/v2/integrations/confluent-cloud/accounts:
+    get:
+      description: List Confluent accounts.
+      operationId: ListConfluentAccount
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List Confluent accounts
+      tags:
+      - Confluent Cloud
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Create a Confluent account.
+      operationId: CreateConfluentAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentAccountCreateRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Add Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+      x-given:
+        confluent_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"confluent-cloud-accounts\",\n
+              \   \"attributes\": {\n      \"api_key\": \"{{ unique_alnum }}\",\n
+              \     \"api_secret\": \"test-api-secret\",\n      \"tags\": [\n        \"tag1\",\n
+              \       \"tag2:val2\"\n      ],\n      \"resources\": [\n        {\n
+              \         \"id\": \"test-resource-id\",\n          \"resource_type\":
+              \"kafka\",\n          \"tags\": [\n            \"tag1\",\n            \"tag2:val2\"\n
+              \         ]\n        }\n      ]\n    }\n  }\n}"
+          step: there is a valid "confluent_account" in the system
+      x-menu-order: 9
+      x-undo:
+        operationId: DeleteConfluentAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integrations/confluent-cloud/accounts/{account_id}:
+    delete:
+      description: Delete a Confluent account with the provided account ID.
+      operationId: DeleteConfluentAccount
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete Confluent account
+      tags:
+      - Confluent Cloud
+      x-menu-order: 8
+      x-undo:
+        type: safe
+    get:
+      description: Get the Confluent account with the provided account ID.
+      operationId: GetConfluentAccount
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get Confluent account
+      tags:
+      - Confluent Cloud
+      x-menu-order: 7
+      x-undo:
+        type: safe
+    patch:
+      description: Update the Confluent account with the provided account ID.
+      operationId: UpdateConfluentAccount
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentAccountUpdateRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: safe
+  /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources:
+    get:
+      description: Get a Confluent resource for the account associated with the provided
+        ID.
+      operationId: ListConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourcesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List Confluent Account resources
+      tags:
+      - Confluent Cloud
+      x-menu-order: 5
+      x-undo:
+        type: safe
+    post:
+      description: Create a Confluent resource for the account associated with the
+        provided ID.
+      operationId: CreateConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentResourceRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Add resource to Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: safe
+  /api/v2/integrations/confluent-cloud/accounts/{account_id}/resources/{resource_id}:
+    delete:
+      description: Delete a Confluent resource with the provided resource id for the
+        account associated with the provided account ID.
+      operationId: DeleteConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      - $ref: '#/components/parameters/ConfluentResourceID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete resource from Confluent account
+      tags:
+      - Confluent Cloud
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    get:
+      description: Get a Confluent resource with the provided resource id for the
+        account associated with the provided account ID.
+      operationId: GetConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      - $ref: '#/components/parameters/ConfluentResourceID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get resource from Confluent account
+      tags:
+      - Confluent Cloud
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Confluent resource with the provided resource id for the
+        account associated with the provided account ID.
+      operationId: UpdateConfluentResource
+      parameters:
+      - $ref: '#/components/parameters/ConfluentAccountID'
+      - $ref: '#/components/parameters/ConfluentResourceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfluentResourceRequest'
+        description: Confluent payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfluentResourceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update resource in Confluent account
+      tags:
+      - Confluent Cloud
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - STANDARD
+      x-undo:
+        type: idempotent
   /api/v2/logs:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -12971,6 +13617,8 @@ paths:
         name: filter[hours_ago]
         required: false
         schema:
+          format: int32
+          maximum: 2147483647
           type: integer
       - description: The number of aggregations that a `count`, `rate`, or `gauge`
           metric is configured to use. Max number of aggregation combos is 9.
@@ -12979,6 +13627,8 @@ paths:
         name: filter[num_aggregations]
         required: false
         schema:
+          format: int32
+          maximum: 9
           type: integer
       - description: A boolean, for distribution metrics only, to estimate cardinality
           if the metric includes additional percentile aggregators.
@@ -12995,6 +13645,8 @@ paths:
         name: filter[timespan_h]
         required: false
         schema:
+          format: int32
+          maximum: 2147483647
           type: integer
       responses:
         '200':
@@ -17159,6 +17811,9 @@ tags:
 - description: Workload activity security rules for generating events using the Datadog
     security Agent.
   name: Cloud Workload Security
+- description: Configure your Datadog Confluent Cloud integration directly through
+    the Datadog API.
+  name: Confluent Cloud
 - description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and

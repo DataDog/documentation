@@ -1,9 +1,10 @@
 ---
-title: Add Custom Metadata to Logs with Reference Tables
+title: Add Custom Metadata with Reference Tables
 kind: guide
 beta: true
 aliases:
   - /logs/guide/enrichment-tables/
+  - /logs/guide/reference-tables/
 further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
@@ -20,9 +21,22 @@ During the beta, there is a limit of 100 Reference Tables per account.
 
 ## Overview
 
-Define new entities in Datadog like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. This is represented by a primary key in an Reference Table and the associated metadata. This data can be applied as tags to logs at ingest time in the [Lookup Processor][1].
+Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in an Reference Table and the associated metadata. 
 
-{{< img src="logs/guide/enrichment-tables/overview.png" alt="Reference Tables" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
+
+## Validation rules
+
+Reference Table names and column headers are validated using the following naming conventions and automatically updated or normalized, if necessary.
+
+| Rule     | Normalization |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Names and headers can not be duplicated.											| Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
+| Names and headers cannot contain uppercase letters. 								| Names with uppercase letters are converted to lowercase. This conversion may result in duplicate names, which are then enumerated. For example, `Fileid` and `FileID` both become `fileid` and are enumerated to `fileid1` and `fileid2` respectively. |
+| Names and headers cannot contain spaces. 											| Spaces other than leading and trailing spaces are replaced with underscore `_` characters. Leading and trailing spaces are removed. For example, `customer names` is replaced with `customer_names`. |
+| Names and headers must start with a lowercase letter. 							| Uppercase characters are converted to lowercase. Non-letter leading characters are removed. For example, `23Two_three` becomes `two_three`.	|
+| Names and headers support only lowercase letters, numbers, and the `_` character. | Unsupported characters are replaced with the underscore `_` character, unless it breaks one of the rules above. In that case, the unsupported characters are normalized by the respective rule.				|
+| Names and headers must be 56 characters or less. 									| No normalization is done. Names and headers that have more than 56 characters are rejected and need to be renamed. |
 
 ## Create a Reference Table
 
@@ -31,7 +45,7 @@ Define new entities in Datadog like customer details, service names and informat
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
-{{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Create an Reference Table" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/configure-enrichment-table.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
@@ -67,7 +81,7 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 
 Click **New Reference Table +**, then add a name, select AWS S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="logs/guide/enrichment-tables/configure-s3-reference-table.png" alt="Create an Reference Table" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the AWS S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
 **Note**: The upload from an S3 bucket method supports files up to 200MB.
 
