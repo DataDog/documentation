@@ -8,7 +8,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-  The Cloud Security Investigator is currently in beta.
+  The Cloud Security Investigator is in beta.
 {{< /beta-callout >}} 
 
 <div class="alert alert-warning">Cloud Security Investigator currently only supports AWS Cloudtrail logs.</div>
@@ -21,7 +21,7 @@ When a security signal alerts on suspicious activity by a user, common questions
 - What other actions did the user take around that specific time frame? 
 - What are all the actions taken on a resource by the user?
 
-For example, you received a security signal that someone changed the configuration of an AWS S3 bucket so that it is accessible by everyone, but the action was taken by an assumed role. To investigate, you might want to look into who took the action and what other activities they have taken recently, as that could indicate compromised credentials.
+For example, suppose you receive a security signal that someone changed the configuration of an AWS S3 bucket so that it is accessible by everyone, but the action was taken by an assumed role. To investigate, look into who took the action and what other activities they did recently, as that could indicate compromised credentials.
 
 The Cloud Security Investigator (CSI) provides a graphical interface for you to pivot from one affected entity to another, so that you can see user behavior and its impact on your environment.
 
