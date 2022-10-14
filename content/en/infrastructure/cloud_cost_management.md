@@ -130,7 +130,7 @@ You can visualize your ingested data using the following cost types:
 
 ## Tag enrichment
 
-Datadog automatically ingests all of your [AWS Resource tags][6] for most of your resources, without you having to manually [activate them][8] as cost allocation tags in your bill. This allows you to easily allocate costs to the dimensions your organization cares about. 
+Datadog automatically ingests all of your [AWS Resource tags][6] for most of your resources, without you having to manually [activate them][8] as cost allocation tags in your bill. This allows you to allocate costs to the dimensions your organization cares about. 
 
 Additionally, Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][7].
 
