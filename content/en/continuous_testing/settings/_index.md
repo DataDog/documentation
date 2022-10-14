@@ -25,19 +25,19 @@ You can access Continuous Testing settings on the [Synthetic Monitoring Settings
 
 {{< img src="continuous_testing/continuous_testing_default.png" alt="Default settings for Continuous Testing" style="width:100%;">}}
 
-By default, you can run one test sequentially. To change this behavior, set a [parallelization value](#parallelization) and save your selection.
+By default, you can run one test sequentially. To change this behavior, set a [parallelization value](#set-parallelization) and save your selection.
 
 ## Parallelization
 
 Parallel tests are tests that run simultaneously in your continuous integration and continuous delivery (CI/CD) pipelines. 
+
+{{< img src="continuous_testing/continuous_testing_parallelization.png" alt="Setting parallelization for Continuous Testing" style="width:100%;">}}
 
 This ensures you can:
 
 * Reduce pipeline duration and ship new features faster
 * Increase development confidence and speed of delivery
 * Have complete test coverage and reduce the volume of production-breaking bugs from reaching your codebase
-
-{{< img src="continuous_testing/continuous_testing_setting_parallelization.png" alt="Setting parallelization for Continuous Testing" style="width:100%;">}}
 
 ### Set parallelization
 
@@ -46,11 +46,9 @@ This ensures you can:
 3. Click **Save Selection**.
 4. Confirm your selection.
 
-{{< img src="continuous_testing/continuous_testing_parallelization.png" alt="Parallelization turned on for Continuous Testing" style="width:100%;">}}
-
 ## Permissions
 
-In order to customize the parallelization for Continuous Testing, you must have `BILLING_EDIT` permissions. 
+In order to customize the parallelization for Continuous Testing, you must have the `billing_edit` permission. 
 
 Otherwise, the following error displays: `You're missing edit permission for Continuous Testing settings. You can run 15 tests in parallel. To increase this value, reach out to your administrator admin.email@datadoghq.com`
 
