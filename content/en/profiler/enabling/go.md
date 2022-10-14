@@ -99,7 +99,21 @@ Alternatively you can set profiler configuration using environment variables:
 
 Go's CPU profiler only shows detailed information for Go code by default. If your program calls into C code, time spent running C code will be reflected in the profile, but the call stacks will only show Go function calls.
 
-You can optionally use a library such as [ianlancetaylor/cgosymbolizer][10] to add detailed C function call information to CPU profiles. Note that this library is considered experimental. At Datadog, it has been used in production with few issues. However, the library can cause (infrequent) deadlocks in programs which use C++ exceptions, or which use libraries such as `tcmalloc` that also collect call stacks.
+You can optionally use a library such as [ianlancetaylor/cgosymbolizer][10] to add detailed C function call information to CPU profiles. To use the library:
+
+1. Download the pacakge:
+
+    ```shell
+   go get github.com/ianlancetaylor/cgosymbolizer@latest
+    ```
+
+2. Add the following import anywhere in your program:
+
+    ```Go
+    import _ "github.com/ianlancetaylor/cgosymbolizer"
+    ```
+
+**Note**: This library is considered experimental. At Datadog, it has been used in production with few issues. However, the library can cause (infrequent) deadlocks in programs which use C++ exceptions, or which use libraries such as `tcmalloc` that also collect call stacks.
 
 ## Not sure what to do next?
 
@@ -118,4 +132,4 @@ The [Getting Started with Profiler][9] guide takes a sample service with a perfo
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /getting_started/profiler/
-[10]: https://pkg.go.dev/ianlancetaylor/cgosymbolizer
+[10]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
