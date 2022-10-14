@@ -81,14 +81,14 @@
       - "*/datadog_checks/*/__about__.py"
 
     - action: pull-and-push-folder
-      branch: master
+      branch: anawishnoff/authorization-developer-docs
       globs:
       - docs/dev/*.md
       options:
         dest_dir: '/developers/integrations/'
         path_to_remove: 'docs/dev/'
         front_matters:
-          dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
+          dependencies: [ "https://github.com/DataDog/integrations-core/blob/anawishnoff/authorization-developer-docs/docs/dev/" ]
 
   - repo_name: integrations-extras
     contents:

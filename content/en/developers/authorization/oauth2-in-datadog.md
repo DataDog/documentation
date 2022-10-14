@@ -58,8 +58,6 @@ Users can kick off authorization from within Datadog, by going to the integratio
 When kicking off authorization from a third-party location (anywhere outside of the Datadog integration tile), the Datadog site (i.e. EU, US1, US3, or US5) must be taken into account when routing them through the authorization flow and building out the URL for the `authorization` and `token` endpoints. To ensure that users are authorizing in their correct site, always direct users to the US1 Datadog site (app.datadoghq.com), and from there the user will have a choice to select their region. After the site is selected, ensure that all followup API calls use the selected site.
 
 
-
-
 ## Authorization Code Grant Flow With PKCE
 ### Overview
 While the OAuth2 protocol supports several grant flows, the [authorization code grant flow][8] with [PKCE](###PKCE) is the recommended grant type for long-running applications in which a user grants explicit consent once and client credentials can be securely stored. This grant type allows applications to securely obtain a unique authorization code and exchange it for an access token that enables them to make requests to Datadog APIs.

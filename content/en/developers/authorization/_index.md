@@ -13,6 +13,8 @@ further_reading:
   text: "OAuth2 Authorization Endpoints Reference"
 ---
 
+## Overview
+
 Datadog uses the [OAuth 2.0 (OAuth2) Authorization Framework][1] to allow users to securely authorize third-party applications' access to restricted Datadog resources on behalf of the user. The access that applications have is determined by [scopes][2], which enable users to grant explicit consent for a specific set of granular permissions requested by the application. 
 
 [1]: https://datatracker.ietf.org/doc/html/rfc6749

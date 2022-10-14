@@ -186,7 +186,7 @@ curl -X POST \
 [5]: https://datatracker.ietf.org/doc/html/rfc6749#section-1.5
 [6]: https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.3
 [7]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.1.2
-[8]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.1### 
+[8]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.1###
 [9]: https://datatracker.ietf.org/doc/html/rfc6749#section-5.1
 [10]: https://datatracker.ietf.org/doc/html/rfc6749#section-5.2
 [11]: https://datatracker.ietf.org/doc/html/rfc7009#section-2
