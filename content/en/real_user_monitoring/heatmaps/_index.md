@@ -9,12 +9,12 @@ further_reading:
 ---
 
 {{< beta-callout url="https://forms.gle/48wkkRoZfwhn74ycA" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-Heatmaps are currently in private beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start visualizing your customer's journey through your pages today!
+Heatmaps are currently in private beta, but you can easily request access! Use this form to submit your request today. We'll reach out directly once approved.
 {{< /beta-callout >}} 
 
 {{< img src="real_user_monitoring/heatmaps/heatmap.jpeg" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
-A heatmap (or heat map) is a visualization of your user's Session Replay data, where your user's interactions (clicks) are represented by color in the image. Seeing how a user interacts with your product or webpage lets you understand if users engage with your page the way you expect. This insight into how your page is interacted with helps you make UI decisions to optimize how your user engages. This kind of optimization can potentially improve their user experience and increase retention. Heatmaps make it easy to visualize complex data and understand it at a glance:
+A heatmap (or heat map) is a visualization of your user's Session Replay data, where your user's interactions (clicks) are represented by color in the image. Seeing where a user clicks helps you understand if users engage with your page the way you expect and if they are finding all of your CTAs and important buttons. Visualizing these interactions in a heatmap makes it easy to understand complex data at a glance. Taking the insights from Heatmaps helps you make UI decisions to optimize your user experience and increase retention.
 
 ## Getting started
 
