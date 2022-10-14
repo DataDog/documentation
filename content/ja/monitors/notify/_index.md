@@ -107,35 +107,23 @@ Disk space is low @ops-team@company.com
 
 #### Email
 
-* `@<DD_USER_EMAIL_ADDRESS>` を使用して、Datadog のアクティブユーザーにメールで通知します。**注**: 保留中の Datadog ユーザー招待または無効化されているユーザーに関連付けられているメールアドレスは非アクティブと見なされ、通知を受信しません。
-* `@<メール>`を使用して、Datadog 以外のユーザーにメールで通知します。
+{{% notifications-email %}}
 
 #### インテグレーション
 
-`@<インテグレーション名>-<値>` という形式を使用して、接続されたインテグレーションを通じてチームに通知します。以下は、プレフィックスのリストと例のリンクです。
-
-| インテグレーション    | プレフィックス       | 例       |
-|----------------|--------------|----------------|
-| [Jira][8]      | `@jira`      | [例][9]  |
-| [PagerDuty][10] | `@pagerduty` | [例][11]  |
-| [Slack][12]     | `@slack`     | [例][13]  |
-| [Webhooks][14]  | `@webhook`   | [例][15] |
-
-チームへの通知に使用できる[インテグレーションのリスト][16]をご覧ください。
-
-**注**: 括弧 (`(`, `)`) を含むハンドルはサポートされていません。括弧を含むハンドルが使用される場合、ハンドルはパースされずアラートも作成されません。
+{{% notifications-integrations %}}
 
 ### 変更
 
-[イベント][17]は、モニターが作成、変更、無音、または削除されるたびに作成されます。`Notify` オプションを設定して、これらのイベントをチームメンバー、チャットサービス、モニター作成者に通知します。
+[イベント][8]は、モニターが作成、変更、無音、または削除されるたびに作成されます。`Notify` オプションを設定して、これらのイベントをチームメンバー、チャットサービス、モニター作成者に通知します。
 
 ### アクセス許可
 
 すべてのユーザーは、関連するロールに関係なく、すべてのモニターを読むことができます。
 
-デフォルトでは、[モニターの書き込み権限][18]を持つユーザーのみがモニターを編集できます。[Datadog Admin ロールおよび Datadog Standard ロール][19]には、デフォルトでモニターの書き込み権限があります。オーガニゼーションで[カスタムロール][20]を使用している場合、他のカスタムロールにモニターの書き込み権限が付与されていることがあります。
+デフォルトでは、[モニターの書き込み権限][9]を持つユーザーのみがモニターを編集できます。[Datadog Admin ロールおよび Datadog Standard ロール][10]には、デフォルトでモニターの書き込み権限があります。オーガニゼーションで[カスタムロール][11]を使用している場合、他のカスタムロールにモニターの書き込み権限が付与されていることがあります。
 
-モニターの編集が許可される[ロール][21]のリストを指定することで、さらにモニターに制限を設定できます。モニターの作成者は、常にモニターを編集することが可能です。
+モニターの編集が許可される[ロール][12]のリストを指定することで、さらにモニターに制限を設定できます。モニターの作成者は、常にモニターを編集することが可能です。
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC 制限付きモニター" style="width:90%;" >}}
 
@@ -143,17 +131,17 @@ Disk space is low @ops-team@company.com
 
 **注**: 制限は UI と API の両方に適用されます。
 
-モニターの RBAC 設定や、モニターを固定設定からロール制限の使用へ移行する方法について、詳しくは[モニターに RBAC を設定する方法][22]をご参照ください。
+モニターの RBAC 設定や、モニターを固定設定からロール制限の使用へ移行する方法について、詳しくは[モニターに RBAC を設定する方法][13]をご参照ください。
 
 ## テスト通知
 
-テスト通知は、ホスト、メトリクス、異常、外れ値、予測値、ログ、RUM、APM、インテグレーション（チェックのみ）、プロセス（チェックのみ）、ネットワーク（チェックのみ）、カスタムチェック、イベント、複合条件の[モニターの種類][23]でサポートされています。
+テスト通知は、ホスト、メトリクス、異常、外れ値、予測値、ログ、RUM、APM、インテグレーション（チェックのみ）、プロセス（チェックのみ）、ネットワーク（チェックのみ）、カスタムチェック、イベント、複合条件の[モニターの種類][14]でサポートされています。
 
 ### テストを実行する
 
 1. モニターを定義したら、モニターページの右下にある **Test Notifications** ボタンを使用して通知をテストします。
 
-2. テスト通知ポップアップから、テストするモニターケースを選択します。テストできるのは、アラート条件で指定されたしきい値について、モニターのコンフィギュレーションで使用可能な状態のみです。ただし、[回復しきい値][24]は例外です。これは、モニターがアラート状態でなくなったか、警告状態がなくなったときに、Datadog が回復通知を送信するためです。
+2. テスト通知ポップアップから、テストするモニターケースを選択します。テストできるのは、アラート条件で指定されたしきい値について、モニターのコンフィギュレーションで使用可能な状態のみです。ただし、[回復しきい値][15]は例外です。これは、モニターがアラート状態でなくなったか、警告状態がなくなったときに、Datadog が回復通知を送信するためです。
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="このモニターの通知をテストする" style="width:70%;" >}}
 
@@ -174,7 +162,7 @@ Disk space is low @ops-team@company.com
 {{host.name}} <-- これが入力されます
 {{/is_alert}}
 ```
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -184,21 +172,12 @@ Disk space is low @ops-team@company.com
 [4]: /ja/monitors/notify/variables/
 [5]: /ja/monitors/notify/variables/#conditional-variables
 [6]: /ja/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[7]: /ja/monitors/notify/variables/?tab=is_renotify#examples 
-[8]: /ja/integrations/jira/
-[9]: /ja/integrations/jira/#usage
-[10]: /ja/integrations/pagerduty/
-[11]: /ja/integrations/pagerduty/#troubleshooting
-[12]: /ja/integrations/slack/
-[13]: /ja/integrations/slack/#mentions-in-slack-from-monitor-alert
-[14]: /ja/integrations/webhooks/
-[15]: /ja/integrations/webhooks/#usage
-[16]: /ja/integrations/#cat-notification
-[17]: /ja/events/
-[18]: /ja/account_management/rbac/permissions/#monitors
-[19]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[20]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
-[21]: /ja/account_management/rbac/?tab=datadogapplication
-[22]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
-[23]: /ja/monitors/create/#monitor-types
-[24]: /ja/monitors/guide/recovery-thresholds/
+[7]: /ja/monitors/notify/variables/?tab=is_renotify#examples
+[8]: /ja/events/
+[9]: /ja/account_management/rbac/permissions/#monitors
+[10]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[11]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
+[12]: /ja/account_management/rbac/?tab=datadogapplication
+[13]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
+[14]: /ja/monitors/create/#monitor-types
+[15]: /ja/monitors/guide/recovery-thresholds/

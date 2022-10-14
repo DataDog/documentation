@@ -3919,7 +3919,7 @@
           "query": {
             "query_string": "env:prod AND service:my-app"
           },
-          "request_type": null
+          "request_type": "slo_list"
         }
       ],
       "type": "slo_list"
@@ -3931,7 +3931,7 @@
             "limit": "integer",
             "query_string": "env:prod AND service:my-app"
           },
-          "request_type": "string"
+          "request_type": "slo_list"
         }
       ],
       "title": "string",

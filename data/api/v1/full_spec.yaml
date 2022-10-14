@@ -6443,18 +6443,20 @@ components:
           type: boolean
         notify_by:
           description: 'Controls what granularity a monitor alerts on. Only available
-            for multi-alerts.
+            for monitors with groupings.
 
-            For instance, a monitor grouped by `cluster`, `namespace`, `pod` can be
-            configured to only notify on each
+            For instance, a monitor grouped by `cluster`, `namespace`, and `pod` can
+            be configured to only notify on each
 
             new `cluster` violating the alert conditions by setting `notify_by` to
             `["cluster"]`. Tags mentioned
 
-            in `notify_by` have to be a subset of the grouping tags in the query.
+            in `notify_by` must be a subset of the grouping tags in the query.
 
-            For example, a query grouped by `cluster`, `namespace` cannot notify on
-            `region`.'
+            For example, a query grouped by `cluster` and `namespace` cannot notify
+            on `region`.
+
+            Setting `notify_by` to `[*]` configures the monitor to notify as a simple-alert.'
           items:
             description: A grouping tag.
             type: string
@@ -9518,6 +9520,7 @@ components:
       description: Widget request type.
       enum:
       - slo_list
+      example: slo_list
       type: string
       x-enum-varnames:
       - SLO_LIST
@@ -11195,6 +11198,7 @@ components:
       - open
       - archived
       - under_review
+      example: open
       type: string
       x-enum-varnames:
       - OPEN
@@ -12195,7 +12199,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: The steps of the test.
+          description: Array of steps for the test.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -15364,19 +15368,23 @@ components:
       properties:
         ci_pipeline_indexed_spans:
           description: The number of spans for pipelines in the queried hour.
+          format: int64
           type: integer
         ci_test_indexed_spans:
           description: The number of spans for tests in the queried hour.
+          format: int64
           type: integer
         ci_visibility_pipeline_committers:
           description: Shows the total count of all active Git committers for Pipelines
             in the current month. A committer is active if they commit at least 3
             times in a given month.
+          format: int64
           type: integer
         ci_visibility_test_committers:
           description: The total count of all active Git committers for tests in the
             current month. A committer is active if they commit at least 3 times in
             a given month.
+          format: int64
           type: integer
         org_name:
           description: The organization name.
@@ -16087,6 +16095,7 @@ components:
           type: string
         online_archive_events_count:
           description: Total count of online archived events within the hour.
+          format: int64
           type: integer
         org_name:
           description: The organization name.
@@ -20872,6 +20881,7 @@ paths:
       summary: Get all embeds
       tags:
       - Embeddable Graphs
+      x-menu-order: 5
       x-undo:
         type: safe
     post:
@@ -20919,6 +20929,7 @@ paths:
       tags:
       - Embeddable Graphs
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         operationId: TODO
         parameters: []
@@ -20962,6 +20973,7 @@ paths:
       summary: Get specific embed
       tags:
       - Embeddable Graphs
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/enable:
@@ -21005,6 +21017,7 @@ paths:
       summary: Enable embed
       tags:
       - Embeddable Graphs
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -21048,6 +21061,7 @@ paths:
       summary: Revoke embed
       tags:
       - Embeddable Graphs
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -22648,6 +22662,7 @@ paths:
       summary: Delete a Slack integration
       tags:
       - Slack Integration
+      x-menu-order: 1
       x-undo:
         type: idempotent
     get:
@@ -22684,6 +22699,7 @@ paths:
       summary: Get info about a Slack integration
       tags:
       - Slack Integration
+      x-menu-order: 4
       x-undo:
         type: safe
     post:
@@ -22726,6 +22742,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         operationId: DeleteSlackIntegration
         parameters: []
@@ -22767,6 +22784,7 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
@@ -25187,6 +25205,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/unmute:
@@ -25251,6 +25270,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/validate:
@@ -25556,6 +25576,7 @@ paths:
       summary: Get all notebooks
       tags:
       - Notebooks
+      x-menu-order: 2
       x-undo:
         type: safe
     post:
@@ -25636,6 +25657,7 @@ paths:
           - file: notebook_payload.json
             name: body
           step: there is a valid "notebook" in the system
+      x-menu-order: 1
       x-undo:
         operationId: DeleteNotebook
         parameters:
@@ -25680,6 +25702,7 @@ paths:
       summary: Delete a notebook
       tags:
       - Notebooks
+      x-menu-order: 3
       x-undo:
         type: idempotent
     get:
@@ -25723,6 +25746,7 @@ paths:
       summary: Get a notebook
       tags:
       - Notebooks
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -25818,6 +25842,7 @@ paths:
       tags:
       - Notebooks
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/org:
@@ -26233,6 +26258,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 1
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -26279,6 +26305,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
@@ -26325,6 +26352,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-menu-order: 2
       x-undo:
         type: idempotent
   /api/v1/series:
@@ -31057,8 +31085,7 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get usage across your multi-org account. You must have the multi-org
-        feature enabled.
+      description: Get all usage across your account.
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -31115,7 +31142,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get usage across your multi-org account
+      summary: Get usage across your account
       tags:
       - Usage Metering
       x-menu-order: 8
@@ -31923,6 +31950,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: safe
   /v1/monitor/unmute_all:
@@ -31949,6 +31977,7 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
 security:

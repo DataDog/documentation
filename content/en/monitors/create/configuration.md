@@ -61,17 +61,40 @@ The query returns a series of points, but a single value is needed to compare to
 
 ### Evaluation window
 
-Monitors are evaluated at a certain frequency, looking back at the last `5 minutes`, `15 minutes`, `1 hour`, and more.
+A monitor can be evaluated using rolling time windows, or cumulative time windows.
+
+#### Rolling time windows
+
+A rolling time window has a fixed size and moves its starting point over time. Monitors support looking back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom specified time window.
+
+#### Cumulative time windows
+A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
+
+- `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
+- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][2] by using the `current day` time window and letting it start at 2:00pm UTC.
+- `Current month`: Looks back at the current month starting on the first of the month at midnight UTC. This option represents a month-to-date time window.
+
+{{< img src="/monitors/create/cumulative_evaluation_window.png" alt="Cumulative Evaluation Window" style="width:100%;">}}
+
+A cumulative time window is reset once its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am, etc.
 
 ### Evaluation frequency
 
 The evaluation frequency defines how often Datadog performs the monitor query. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
 
+Evaluation frequencies depend on the [evaluation window](#evaluation-window) that is being used. A longer window results in lower evaluation frequencies. The table below illustrates how the evaluation frequency is controlled by larger time windows:
+
+| Evaluation Window Ranges        | Evaluation Frequency  |
+|---------------------------------|-----------------------|
+| window < 24 hours               | 1 minute              |
+| 24 hours <= window < 48 hours   | 10 minutes            |
+| window >= 48 hours              | 30 minutes            |
+
 ### Thresholds
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][2]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][3]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
 
 | Option                                   | Description                    |
 |------------------------------------------|--------------------------------|
@@ -88,7 +111,8 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
-[2]: /monitors/guide/recovery-thresholds/
+[2]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
+[3]: /monitors/guide/recovery-thresholds/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
@@ -199,7 +223,7 @@ Some use cases to define a group retention time include:
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][5] option mentioned above.
+**Note**: The group retention time option requires a multi-alert monitor that supports the [`On missing data`][5] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
 
 #### New group delay
 

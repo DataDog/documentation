@@ -106,60 +106,61 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [elasticsearch][30]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
 | [ioredis][31]          | `>=2`    | Fully supported |                                                  |
 | [knex][32]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
-| [memcached][33]        | `>=2.2`  | Fully supported |                                                  |
-| [mongodb-core][34]     | `>=2`    | Fully supported | Supports Mongoose                                |
-| [mysql][35]            | `>=2`    | Fully supported |                                                  |
-| [mysql2][36]           | `>=1`    | Fully supported |                                                  |
-| [oracledb][37]         | `>=5`    | Fully supported |                                                  |
-| [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
-| [redis][39]            | `>=0.12` | Fully supported |                                                  |
-| [sharedb][40]          | `>=1`    | Fully supported |                                                  |
-| [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| [mariadb][33]          | `>=3`    | Fully supported |                                                  |
+| [memcached][34]        | `>=2.2`  | Fully supported |                                                  |
+| [mongodb-core][35]     | `>=2`    | Fully supported | Supports Mongoose                                |
+| [mysql][36]            | `>=2`    | Fully supported |                                                  |
+| [mysql2][37]           | `>=1`    | Fully supported |                                                  |
+| [oracledb][38]         | `>=5`    | Fully supported |                                                  |
+| [pg][39]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
+| [redis][40]            | `>=0.12` | Fully supported |                                                  |
+| [sharedb][41]          | `>=1`    | Fully supported |                                                  |
+| [tedious][42]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 
 ### Worker compatibility
 
 | Module                     | Versions | Support Type    | Notes                                                  |
 | -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][43]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
-| [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
-| [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
-| [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
-| [kafka-node][47]           |          | Coming Soon     |                                                        |
-| [rhea][48]                 | `>=1`    | Fully supported |                                                        |
+| [@google-cloud/pubsub][43] | `>=1.2`  | Fully supported |                                                        |
+| [amqp10][44]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
+| [amqplib][45]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
+| [generic-pool][46]         | `>=2`    | Fully supported |                                                        |
+| [kafkajs][47]         | `>=1.4`    | Fully supported |                                                        |
+| [kafka-node][48]           |          | Coming Soon     |                                                        |
+| [rhea][49]                 | `>=1`    | Fully supported |                                                        |
 
 ### SDK compatibility
 
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [aws-sdk][50]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
 
 ### Promise library compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bluebird][50]   | `>=2`     | Fully supported |
-| [promise][51]    | `>=7`     | Fully supported |
-| [promise-js][52] | `>=0.0.3` | Fully supported |
-| [q][53]          | `>=1`     | Fully supported |
-| [when][54]       | `>=3`     | Fully supported |
+| [bluebird][51]   | `>=2`     | Fully supported |
+| [promise][52]    | `>=7`     | Fully supported |
+| [promise-js][53] | `>=0.0.3` | Fully supported |
+| [q][54]          | `>=1`     | Fully supported |
+| [when][55]       | `>=3`     | Fully supported |
 
 ### Logger compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bunyan][55]     | `>=1`     | Fully supported |
-| [paperplane][56] | `>=2.3.2` | Fully supported |
-| [pino][57]       | `>=2`     | Fully supported |
-| [winston][58]    | `>=1`     | Fully supported |
+| [bunyan][56]     | `>=1`     | Fully supported |
+| [paperplane][57] | `>=2.3.2` | Fully supported |
+| [pino][58]       | `>=2`     | Fully supported |
+| [winston][59]    | `>=1`     | Fully supported |
 
 ## Unsupported libraries
 
 ### Fibers
 
-[`fibers`][59] is incompatible with `async_hooks`, a Node.js [module][60] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][61] may result in instability (crashes) or incorrect tracing.
+[`fibers`][60] is incompatible with `async_hooks`, a Node.js [module][61] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][62] may result in instability (crashes) or incorrect tracing.
 
-For additional information or to discuss [leave a comment on this github issue][62] or [reach out to support][3] to discuss further.
+For additional information or to discuss [leave a comment on this github issue][63] or [reach out to support][3] to discuss further.
 
 ## Further Reading
 
@@ -197,33 +198,34 @@ For additional information or to discuss [leave a comment on this github issue][
 [30]: https://github.com/elastic/elasticsearch-js
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
-[33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
-[35]: https://github.com/mysqljs/mysql
-[36]: https://github.com/sidorares/node-mysql2
-[37]: https://oracle.github.io/node-oracledb/
-[38]: https://node-postgres.com
-[39]: https://github.com/NodeRedis/node_redis
-[40]: https://share.github.io/sharedb/
-[41]: http://tediousjs.github.io/tedious
-[42]: https://github.com/googleapis/nodejs-pubsub
-[43]: https://github.com/noodlefrenzy/node-amqp10
-[44]: https://github.com/squaremo/amqp.node
-[45]: https://github.com/coopernurse/node-pool
-[46]: https://github.com/tulios/kafkajs
-[47]: https://github.com/SOHU-Co/kafka-node
-[48]: https://github.com/amqp/rhea
-[49]: https://github.com/aws/aws-sdk-js
-[50]: https://github.com/petkaantonov/bluebird
-[51]: https://github.com/then/promise
-[52]: https://github.com/kevincennis/promise
-[53]: https://github.com/kriskowal/q
-[54]: https://github.com/cujojs/when
-[55]: https://github.com/trentm/node-bunyan
-[56]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[57]: http://getpino.io
-[58]: https://github.com/winstonjs/winston
-[59]: https://github.com/laverdet/node-fibers
-[60]: https://nodejs.org/api/async_hooks.html
-[61]: https://www.meteor.com/
-[62]: https://github.com/DataDog/dd-trace-js/issues/1229
+[33]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
+[34]: https://github.com/3rd-Eden/memcached
+[35]: http://mongodb.github.io/node-mongodb-native/core
+[36]: https://github.com/mysqljs/mysql
+[37]: https://github.com/sidorares/node-mysql2
+[38]: https://oracle.github.io/node-oracledb/
+[39]: https://node-postgres.com
+[40]: https://github.com/NodeRedis/node_redis
+[41]: https://share.github.io/sharedb/
+[42]: http://tediousjs.github.io/tedious
+[43]: https://github.com/googleapis/nodejs-pubsub
+[44]: https://github.com/noodlefrenzy/node-amqp10
+[45]: https://github.com/squaremo/amqp.node
+[46]: https://github.com/coopernurse/node-pool
+[47]: https://github.com/tulios/kafkajs
+[48]: https://github.com/SOHU-Co/kafka-node
+[49]: https://github.com/amqp/rhea
+[50]: https://github.com/aws/aws-sdk-js
+[51]: https://github.com/petkaantonov/bluebird
+[52]: https://github.com/then/promise
+[53]: https://github.com/kevincennis/promise
+[54]: https://github.com/kriskowal/q
+[55]: https://github.com/cujojs/when
+[56]: https://github.com/trentm/node-bunyan
+[57]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[58]: http://getpino.io
+[59]: https://github.com/winstonjs/winston
+[60]: https://github.com/laverdet/node-fibers
+[61]: https://nodejs.org/api/async_hooks.html
+[62]: https://www.meteor.com/
+[63]: https://github.com/DataDog/dd-trace-js/issues/1229

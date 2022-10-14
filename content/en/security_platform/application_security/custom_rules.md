@@ -13,7 +13,7 @@ further_reading:
   text: "Troubleshoot common Datadog Application Security Management issues"
 - link: "/security_platform/notifications/variables/"
   tag: "Documentation"
-  text: "Learn more about Security Platform notification variables"
+  text: "Learn more about Security notification variables"
 - link: "/tracing/trace_explorer/query_syntax/"
   tag: "Documentation"
   text: "Syntax for defining the ASM query"

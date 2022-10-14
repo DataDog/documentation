@@ -40,7 +40,8 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/alert_value" >}}Alert Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/check_status" >}}Check Status{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" >}}Service Level Objective (SLO){{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo" >}}Service Level Objective (SLO) Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo_list" >}}Service Level Objective (SLO) List{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/service_map" >}}Service Map{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}

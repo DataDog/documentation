@@ -3,7 +3,7 @@ title: Troubleshooting DBM Setup for Postgres
 kind: documentation
 description: Troubleshoot Database Monitoring setup for Postgres
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 

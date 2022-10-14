@@ -138,7 +138,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 {{% /tab %}}
 {{< /tabs >}}
 
-**Notes:** 
+**Notes:**
   - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
   - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
@@ -155,23 +155,6 @@ Note that if your metric is only reporting by `host` with no `device` tag, it wo
 ## Set alert conditions
 
 Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
-
-### Thresholds
-
-Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
-
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5].
-
-| Option                     | Description                                                                     |
-|----------------------------|---------------------------------------------------------------------------------|
-| Alert threshold            | The value used to trigger an alert notification.                                |
-| Warning threshold          | The value used to trigger a warning notification.                               |
-| Alert recovery threshold   | An optional threshold to indicate an additional condition for alert recovery.   |
-| Warning recovery threshold | An optional threshold to indicate an additional condition for warning recovery. |
-
-As you change a threshold, the preview graph in the editor displays a marker showing the cutoff point.
-
-**Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
 
 ### Advanced alert conditions
 
@@ -212,11 +195,11 @@ For example, a monitor that evaluates over the last `2h` is split in 12 buckets 
 
 #### Other options
 
-For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][6] page.
+For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][5] page.
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
 
 ## Further Reading
 
@@ -226,6 +209,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: /dashboards/querying/#advanced-graphing
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /monitors/notify/?tab=is_alert#tag-variables
-[5]: /monitors/guide/recovery-thresholds/
-[6]: /monitors/create/configuration/#advanced-alert-conditions
-[7]: /monitors/notify/
+[5]: /monitors/create/configuration/#advanced-alert-conditions
+[6]: /monitors/notify/
