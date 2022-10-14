@@ -3257,10 +3257,12 @@ main:
   - name: OAuth2 in Datadog
     url: developers/authorization/oauth2_in_datadog/
     parent: dev_tools_authorization
+    identifier: dev_tools_authorization_oauth2_in_datadog
     weight: 101
-  - name: OAuth2 Authorization Endpoints Reference
+  - name: OAuth2 Authorization 
     url: developers/authorization/oauth2_endpoints/
     parent: dev_tools_authorization
+    identifier: dev_tools_authorization_oauth2_endpoints
     weight: 102
   - name: DogStatsD
     url: developers/dogstatsd/
