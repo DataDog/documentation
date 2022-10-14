@@ -654,6 +654,24 @@
     "request_description": "インシデントサービスのペイロード。",
     "request_schema_description": "インシデントサービスペイロードを使用してリクエストを作成します。"
   },
+  "ListServiceDefinitions": {
+    "description": "Datadog サービスカタログからすべてのサービス定義のリストを取得します。",
+    "summary": "すべてのサービス定義を取得する"
+  },
+  "CreateOrUpdateServiceDefinitions": {
+    "description": "Datadog サービスカタログでサービス定義を作成または更新します。",
+    "summary": "サービス定義を作成または更新する",
+    "request_description": "サービス定義 YAML/JSON。",
+    "request_schema_description": "サービス定義のリクエストを作成します。"
+  },
+  "DeleteServiceDefinition": {
+    "description": "Datadog サービスカタログの単一のサービス定義を削除します。",
+    "summary": "単一のサービス定義を削除する"
+  },
+  "GetServiceDefinition": {
+    "description": "Datadog サービスカタログから単一のサービス定義を取得します。",
+    "summary": "単一のサービス定義を取得する"
+  },
   "DeleteIncidentService": {
     "description": "既存のインシデントサービスを削除します。",
     "summary": "既存のインシデントサービスを削除する"
