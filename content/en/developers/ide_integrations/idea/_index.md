@@ -87,7 +87,7 @@ The **Top List** sub-tab shows the methods that consume the most resources based
 
 {{< img src="/developers/ide_integrations/idea/top-list1.png" alt="The Top-list view" style="width:100%;" >}}
 
-- Double-clicking an item in the list, or selecting **Jump to Source** from the context menu, opens a source code editor showing where the method is defined.
+- Double-clicking an item in the list (or selecting **Jump to Source** from the context menu) opens a source code editor showing where the method is defined.
 - To see a flame graph visualization of a method, select **Search in Flame Graph** from the context menu.
 
 ### Call tree
@@ -106,7 +106,7 @@ Right-click on a method in the call tree to see options to navigate to the sourc
 
 ## Flame graph
 
-A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin aggregates data collected over the requested time frame and multiple individual profiles are aggregated together. Each individual profile covers a 60 second interval within the requested time frame.
+A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin aggregates data collected over the requested time frame, and multiple individual profiles are aggregated together. Each individual profile covers a 60 second interval within the requested time frame.
 
 {{< img src="/developers/ide_integrations/idea/flamegraph1.png" alt="A flame graph showing CPU Time over the last 4 hours" style="width:100%;" >}}
 
