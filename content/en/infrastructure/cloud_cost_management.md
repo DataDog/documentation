@@ -145,7 +145,7 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `aws_member_account_name`    | The AWS memmber account name associated with the item.|
 | `aws_member_account_id`      | The AWS member account ID associated with the item.|
 | `aws_cost_type`              | The type of charge covered by this item (for example, Usage, or Tax).|
-| `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On Demand.|
+| `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On-Demand.|
 | `aws_reservation_arn`        | The ARN of the Reserved Instance that the item benefited from.| 
 | `aws_savings_plan_arn`       | The ARN of the Savings Plan the item benefited from.|
 | `aws_usage_type`             | The usage details of the item (for example, BoxUsage:i3.8xlarge).|
