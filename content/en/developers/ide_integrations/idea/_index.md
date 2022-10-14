@@ -13,23 +13,24 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-  The Datadog plugin for IntelliJ IDEA is in Public Beta. It is intended for customers that use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their Java services. If the plugin stops working unexpectedly, check for plugin updates.
+  The Datadog plugin for IntelliJ IDEA is in public beta. It is intended for Java developers who use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their Java services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
 {{< /beta-callout >}}
 
 ## Overview
 
-The Datadog plugin for IntelliJ IDEA helps improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data. The plugin helps reduce latency and lower cloud costs by highlighting code lines that:
+The Datadog plugin for IntelliJ IDEA helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data. Together with the Continuous Profiler, the plugin helps you to reduce latency and lower cloud costs by highlighting code lines that:
 - consume the most CPU
 - allocate the most memory
 - spend the most time on locks, disk I/O, socket I/O, and so on
 
-{{< img src="/developers/ide_integrations/idea/overview.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
 The plugin features:
-- Top List: Identify methods that consume the most resources
-- Flame graph: visualize aggregated profile data
+- Top list: Identify methods that consume the most resources
+- Flame graph: Visualize aggregated profile data
+- Navigate directly from the top list and flame graph to the relevant lines in your code
 - Find resource consumption broken down by method name and line number
-- Insights available from various staging and production environments
+- Gain insight into your staging and production environments
 
 ## Requirements
 
@@ -74,8 +75,6 @@ The Profiling tab shows Continuous Profiling information for the service in a se
 - [Top list](#top-list): Displays a list of the most resource intensive methods for the current profiling measure.
 - [Flame graph](#flame-graph): A flame graph representing stack traces in the profiles.
 
-{{< img src="/developers/ide_integrations/idea/profiling-example1.png" alt="An example of the Profiling tab for a service named product-recommendation" style="width:100%;" >}}
-
 You can specify the following parameters for the profiling data:
 - The profile type to be displayed
 - The environment in which the service is running
@@ -87,19 +86,16 @@ The available profiling types usually include options like **CPU Time** and **Al
 
 The **Top List** sub-tab shows the methods that consume the most resources based on the aggregated profile data loaded from the Datadog servers. **Top List** is designed to show a summary of the methods that are most likely to be interesting from a resource consumption point of view.
 
-{{< img src="/developers/ide_integrations/idea/top-list.png" alt="The Top-list view" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/top-list1.png" alt="The Top-list view" style="width:100%;" >}}
 
-Double-clicking an item in the list, or selecting **Jump to Source** item from the context menu, opens a source code editor showing where the method is defined.
-
-{{< img src="/developers/ide_integrations/idea/jump-to-source.png" alt="Select Jump to Source from the context menu" style="width:100%;" >}}
-
-To see a flame graph visualization of a method, select the **Search in Flame Graph** item from the context menu.
+- Double-clicking an item in the list, or selecting **Jump to Source** from the context menu, opens a source code editor showing where the method is defined.
+- To see a flame graph visualization of a method, select **Search in Flame Graph** from the context menu.
 
 ### Call tree
 
 The call tree to the right of the method list shows the paths that lead to (and from) the selected method.
 
-{{< img src="/developers/ide_integrations/idea/call-tree.png" alt="The method call tree" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/call-tree1.png" alt="The method call tree" style="width:100%;" >}}
 
 The default **Caller Hierarchy** view shows the callers (or predecessors) of the target method and the frequency with which they appear in the call stack.
 
@@ -113,7 +109,7 @@ Right-click on a method in the call tree to see options to navigate to the sourc
 
 A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin aggregates data collected over the requested time frame and multiple individual profiles are aggregated together. Each individual profile covers a 60 second interval within the requested time frame.
 
-{{< img src="/developers/ide_integrations/idea/flamegraph.png" alt="A flame graph showing CPU Time over the last 4 hours" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/flamegraph1.png" alt="A flame graph showing CPU Time over the last 4 hours" style="width:100%;" >}}
 
 Each time you change the profile type, the time frame, or the environment, the Datadog plugin generates a new flame graph.
 
