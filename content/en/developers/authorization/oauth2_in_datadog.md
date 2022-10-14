@@ -36,7 +36,7 @@ This section contains a step-by-step overview on how to prepare your application
 
 1. Create and configure your OAuth client in the [Developer Platform][16]. 
 
-2. After a user installs your integration, they can see a button to connect their account on the **Configure** tab in the integration tile. 
+2. After a user installs your integration, they can click on the **Connect Accounts** button which connects their account on the **Configure** tab in the integration tile. 
 
    When a user clicks this button, they are directed to the `onboarding_url` that you provided as a part of the OAuth client creation process. This page should be the sign-in page for your platform.
 
@@ -60,7 +60,15 @@ This section contains a step-by-step overview on how to prepare your application
 
    If the `API_KEYS_WRITE` scope has not been added to your client, this step fails. This endpoint generates an API Key that is only shown once. **Store this value in a secure database or location**. 
 
-If you notice errors from these endpoints at any point in the process, take a look at the error messages in the UI. For more information about client creation and publishing, see the [OAuth for Datadog Integrations][5].
+For more information about client creation and publishing, see the [OAuth for Datadog Integrations][5].
+
+### Initiate authorization from a third-party location 
+
+You can start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile, or from the integration's external website. For example, if there's an integration configuration page on your website that Datadog users need to use, you can give users the option to start the authorization process from there.
+
+When kicking off authorization from a third-party location—anywhere outside of the Datadog integration tile—you need to account for the [Datadog site][17] (such as EU, US1, US3, or US5) when routing users through the authorization flow and building out the URL for the `authorization` and `token` endpoints. 
+
+To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region. After the site is selected, ensure that all followup API calls use the selected site. 
 
 ## Authorization code grant flow with PKCE
 
@@ -97,8 +105,8 @@ The [PKCE protocol][11] integrates with the authorization code grant flow by com
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://datatracker.ietf.org/doc/html/rfc6749
-[2]: https://docs.datadoghq.com/api/latest/scopes/
-[3]: https://docs.datadoghq.com/developers/datadog_apps/#oauth-api-access
+[2]: /api/latest/scopes/
+[3]: /developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
 [5]: /developers/integrations/oauth_for_data_integrations
 [6]: /developers/authorization/oauth2_endpoints##request-authorization-from-a-user
@@ -112,3 +120,4 @@ The [PKCE protocol][11] integrates with the authorization code grant flow by com
 [14]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.3
 [15]: https://datatracker.ietf.org/doc/html/rfc6234#section-4.1
 [16]: https://app.datadoghq.com/apps
+[17]: /getting_started/site/
