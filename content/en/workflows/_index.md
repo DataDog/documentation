@@ -6,7 +6,7 @@ is_beta: true
 ---
 
 TODO: replace "#" with the real signup link
-{{< beta-callout url="#" btn_hidden="true">}}
+{{< beta-callout url="#">}}
   Datadog Workflows is in beta.
 {{< /beta-callout >}}
 
@@ -38,7 +38,5 @@ Watch the video below to see a workflow configured to redeploy a Lambda function
 
 {{< wistia 0klmggfhaf>}}
 
-TODO: add the blueprint link once that page is ready
-
 [1]: /workflows/actions_catalog/
-[2]: TBD
+[2]: /workflows/build/#build-a-workflow-from-a-blueprint
