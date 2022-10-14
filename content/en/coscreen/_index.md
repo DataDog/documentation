@@ -24,17 +24,13 @@ When you join a CoScreen, it is added to your list of _Recent CoScreens_ in the 
 
 ### Invite your collaborators
 
-Up to ten users can join one CoScreen at the same time. Invite collaborators by sharing the link.
+Invite collaborators by sharing the link.
 
 You can also add your closest collaborators in the list of _Your Collaborators_ in the main menu. After a collaborator accepts your request, you can see if they are online and available, and call them with a click.
 
 ### Share windows
 
 You can share application windows in multiple ways.
-
- - **Share all windows on your display**.
- 
-   Bring up the window sharing dialog and select the first option, _Entire display_, to share all open windows on this display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
 
  - **Select individual windows to be shared**.
 
@@ -43,6 +39,10 @@ You can share application windows in multiple ways.
    Share and unshare windows by clicking on the tab above each window. You can also use the window sharing dialog to select the application window(s) that you want to share with other members of the CoScreen you've joined.
 
    Multiple users can share multiple windows at the same time. Shared windows have a border around them in a color assigned to each CoScreen participant.
+
+ - **Share all windows on your display**.
+ 
+   Bring up the window sharing dialog and select the first option, _Entire display_, to share all open windows on this display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
 
 Click on the **Share windows** button to bring up the window sharing dialog.
 
@@ -59,7 +59,9 @@ Screen sharing is deactivated by default when you join a CoScreen.
 
 ### Collaborate in shared windows
 
-You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. **Everyone can click and type into any shared window**. Click and drag your pointer to draw lines.
+{{< img src="coscreen/collaborate.mp4" alt="" video="true" width=70% >}}
+
+You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. **Everyone can click and type into any shared window**. If you click the _Edit_ button on the tab of a remote window, you can also draw on a shared window.
 
 ### Integrations
 

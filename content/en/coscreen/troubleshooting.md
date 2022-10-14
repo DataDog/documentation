@@ -11,7 +11,7 @@ You can influence a few key factors behind the quality of the windows you and yo
 #### Network bandwidth and stability
 
 * Make sure that every participant has a fast and stable internet connection with at least 5Mbps upload and download.
-* Make sure your system does not have a packet loss of more than 2 percent. Video conferencing becomes unstable above that threshold, regardless of provider. as video conferencing quickly becomes unstable above that threshold no matter the provider. Run a [packet loss test][1]. If you see issues, try restarting your router or modem, move closer to your router, or test with an alternative internet connection.
+* Make sure your system does not have a packet loss of more than 2 percent. Video conferencing becomes unstable above that threshold, regardless of provider. Run a [packet loss test][1]. If you see issues, try restarting your router or modem, move closer to your router, or test with an alternative internet connection.
 * CoScreen works fastest if there are only two participants who can connect peer-to-peer (that is: directly, without having a corporate proxy or firewall between them). As soon as there are three or more participants, or a direct connection cannot be established, the traffic is routed through a globally distributed video infrastructure which ensures connectivity in all circumstances.
 
 #### Screen resolution
