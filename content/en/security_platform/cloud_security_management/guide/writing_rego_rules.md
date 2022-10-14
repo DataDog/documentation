@@ -8,6 +8,7 @@ further_reading:
 - link: "/security_platform/cspm/frameworks_and_benchmarks"
   tag: "Guide"
   text: "Learn about frameworks and industry benchmarks"
+is_beta: true
 ---
 
 {{< site-region region="gov" >}}
@@ -16,7 +17,10 @@ Cloud Security Posture Management is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Creating and using custom CSPM rules is a beta feature, available only for Google Cloud Platform (GCP).</div>
+{{< beta-callout url="#" btn_hidden="true">}}
+Creating and using custom CSPM rules is a beta feature, available only for Google Cloud Platform (GCP).
+{{< /beta-callout >}} 
+
 
 ## Overview
 
