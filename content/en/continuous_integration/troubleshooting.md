@@ -148,6 +148,28 @@ The default branch is used to power some features of the products, namely:
 
 If you have admin access, you can update it from the [Repository Settings Page][11].
 
+### Intelligent Test Runner is not working
+
+[Intelligent Test Runner][12] works by analyzing your commit history along with code coverage information of past test runs to determine which tests need to be run and which ones can be safely skipped. A minimum amount of information need to exist in order for Intelligent Test Runner to work correctly:
+
+- Your repository needs to have a commit history of at least 2 commits in the past month.
+- You need to have collected test code coverage in past commits.
+
+Due to these restrictions, the first time you enable Intelligent Test Runner you will not see any tests skipped and the test execution time might be slower than usual due to code coverage being collected automatically.
+
+Intelligent Test Runner will only take into account the commit history and test code coverage information for the past month. Additionally, it will not take into account code coverage information that is generated more than one week after a commit was made.
+
+### Intelligent Test Runner incorrectly skipped a test
+
+Intelligent Test Runner performs test impact analysis based on code coverage to determine which tests are impacted by a given commit or set of commits. While this strategy works for the majority of tests, there are known scenarios where Intelligent Test Runner could skip a test that should have been run:
+
+- Changes in library dependencies.
+- Changes in compiler options.
+- Changes in external services.
+- Changes to data files in data-driven tests.
+
+If you are authoring a commit that includes any of those cases, you can force-disable Intelligent Test Runner by adding `ITR:RunAll` (case insensitive) anywhere in your commit message.
+
 ### Need further help?
 
 Still need help? Contact [Datadog support][1].
@@ -163,3 +185,4 @@ Still need help? Contact [Datadog support][1].
 [9]: https://docs.datadoghq.com/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [10]: https://docs.datadoghq.com/continuous_integration/tests/
 [11]: https://app.datadoghq.com/ci/settings/repository
+[12]: /continuous_integration/intelligent_test_runner/
