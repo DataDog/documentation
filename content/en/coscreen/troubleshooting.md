@@ -31,7 +31,7 @@ You may encounter a problem where the UI is stuck in the grayed out joining phas
 
 To resolve this issue, right-click on the CoScreen application icon and go to _Options_. Ensure that _Assign To_ is set to _None_. Then, leave and rejoin the CoScreen.
 
-{{< img src="coscreen/assign-to-none.png" alt="Facet creation for custom tag" style="width:60%;" >}}
+{{< img src="coscreen/assign-to-none.png" alt="Screenshot of macOS dock. Right-clicking on the CoScreen brings up a menu, and hovering over 'Options' opens up a second menu. Under 'Assign To', the user has selected 'None.'" style="width:60%;" >}}
 
 ### Troubleshooting on Windows 10
 
@@ -39,12 +39,10 @@ To resolve this issue, right-click on the CoScreen application icon and go to _O
 
 If the CoScreen UI appears to be smaller than that of other apps on your Windows 10 computer, it is related to the scaling factor configured under display settings and how it interacts with CoScreen. You can decrease the scaling and resolution of your screen to improve the experience.
 
-<!-- video: https://www.loom.com/share/221e5a22f8d340469d2f7bb601e1c39e?t=117 -->
-
 #### My voice is hard to understand, or sounds robotic
 
 Some devices use a Realtek voice recognition feature that may cause your voice to sound robotic when using CoScreen, or another video conferencing application. If you are experiencing issues with the audibility of your voice, open the Realtek Audio Console and untick the option **Voice Recognition** to see if the situation improves.
 
-{{< img src="coscreen/windows_screenshot.png" alt="Facet creation for custom tag" style="width:60%;" >}}
+{{< img src="coscreen/windows_screenshot.png" alt="Screenshot of Windows dialog for Realtek Audio Console. The 'Voice Recognition' toggle is set to off." style="width:70%;" >}}
 
 [1]: https://packetlosstest.com/
