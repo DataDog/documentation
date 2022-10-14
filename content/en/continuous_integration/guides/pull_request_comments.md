@@ -20,14 +20,16 @@ To enable the GitHub comments integration:
 1. Go to the [GitHub App integration tile][1] and install the [Datadog GitHub App][2].
 2. Give the application read and write permissions for pull requests.
 
-In the UI, you can do it in two different ways:
+In the UI, you can do this from the settings page or the commit or branch page.
 
-1. Go to [CI Test Service Settings page][3] and search for the repository or test service.
+#### CI Settings page
+
+1. Go to the [CI Test Service Settings page][3] and search for the repository or test service.
 2. Toggle the `GitHub Comments` column for the desired service.
 
-{{< img src="ci/enable-settings-github-comments.png" alt="Enable GitHub comments dropdown" style="width:100%;">}}
+{{< img src="ci/enable-settings-github-comments.png" alt="he Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
 
-Or
+#### Commit or branch page
 
 1. Go to the test service commit or branch page where you would like to enable GitHub comments.
 2. Click on the settings icon at the top right.
