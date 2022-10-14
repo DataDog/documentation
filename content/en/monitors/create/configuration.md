@@ -61,7 +61,9 @@ The query returns a series of points, but a single value is needed to compare to
 
 ### Evaluation window
 
-A monitor can be evaluated using rolling time windows, or cumulative time windows.
+A monitor can be evaluated using rolling time windows, or cumulative time windows. While rolling time windows are generally better suited when answering questions such as "What's the average of the last N data points?", cumulative time windows are better suited when answering questions such as "What's the sum of all the data available up to this point in time?". The figure below illustrates the difference between cumulative and rolling time windows.
+
+{{< img src="/monitors/create/rolling_vs_expanding.png" alt="Rolling vs Cumulative Time Window" style="width:100%;">}}
 
 #### Rolling time windows
 
