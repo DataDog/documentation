@@ -25,12 +25,11 @@ The Datadog plugin for IntelliJ IDEA helps you to improve software performance b
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
-The plugin features:
-- Top list: Identify methods that consume the most resources
-- Flame graph: Visualize aggregated profile data
-- Navigate directly from the top list and flame graph to the relevant lines in your code
-- Find resource consumption broken down by method name and line number
-- Gain insight into your staging and production environments
+In addition to code highlighting, you can use the Datadog plugin for Intellij IDEA to:
+- Identify methods that consume the most resources with the **Top List** view.
+- Visualize aggregated profile data with the **Flame Graph** view.
+- Navigate directly from the top list and flame graph to the relevant lines in your code.
+- Find resource consumption broken down by method name and line number.
 
 ## Requirements
 
