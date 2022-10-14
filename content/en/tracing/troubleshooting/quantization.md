@@ -15,10 +15,10 @@ further_reading:
 
 ## Overview
 
-During ingestion, Datadog applies _quantization_ to APM data such as random-number IDs, IP addresses, or query parameter values in span or resource names. The resulting normalization prevents those spans and resources from being unnecessarily categorized as separate when they are, for analysis purposes, the same.
+During ingestion, Datadog applies _quantization_ to APM data such as random globally unique IDs (GUIDs), numeric IDs, and query parameter values in span or resource names. The resulting normalization cuts down on name pollution that results from these random patterns by grouping those spans and resources together because they are, for analysis purposes, the same.
 
 Certain patterns in resource or span names are replaced with the following static strings:
-- Globally unique identifiers (GUIDs): `{guid}`
+- GUIDs: `{guid}`
 - Numeric IDs (6+ digit numbers, surrounded by delimiters or found at the end of a string): `{num}`
 - Query parameter values: `{val}`
 
