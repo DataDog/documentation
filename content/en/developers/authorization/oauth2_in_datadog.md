@@ -8,9 +8,15 @@ further_reading:
   text: "Learn how to use the OAuth 2.0 authorization endpoints"
 ---
 
-## Implement the OAuth protocol
+{{< beta-callout btn_hidden="true" >}}
+  The Datadog Developer Platform is currently in beta. If you don't have access, contact apps@datadoghq.com.
+{{< /beta-callout >}} 
 
-This section contains a step-by-step overview on how to prepare your application for implementing the OAuth protocol end-to-end once your **confidential** client is created. 
+## Overview
+
+This page provides a step-by-step overview on how to implement the OAuth protocol end-to-end on your application once your **confidential** client is created. 
+
+### Implement the OAuth protocol
 
 1. Create and configure your OAuth client in the [Developer Platform][16]. 
 
