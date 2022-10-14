@@ -39,8 +39,8 @@ You can set permissions on each connection to limit modifications or restrict th
 
 1. Navigate to the [Workflows list][2].
 1. Click **Connections** in the upper right. A list of connections appears.
-1. Hover over the connection on which you would like to set granular permissions. Edit, permissions, and delete icons appear on the right.
-1. Click the lock (permissions) icon.
+1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the padlock (**Permissions**) icon.
 1. Select **Restrict Access**.
 1. Select a role from the dropdown. Click **Add**. The role you selected populates into the bottom of the dialog box.
 1. Next to the role name, select your desired permission from the dropdown.
@@ -50,8 +50,8 @@ You can set permissions on each connection to limit modifications or restrict th
 
 1. Navigate to the [Workflows list][2].
 1. Click **Connections** in the upper right. A list of connections appears.
-1. Hover over the connection you would like to edit. Edit, permissions, and delete icons appear on the right.
-1. Click the pencil (edit) icon. A dialog box appears.
+1. Hover over the connection you would like to edit. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the pencil (**Edit**) icon. A dialog box appears.
 1. Update the fields you would like to change.
 1. Click **Save**.
 
@@ -59,8 +59,8 @@ You can set permissions on each connection to limit modifications or restrict th
 
 1. Navigate to the [Workflows list][2].
 1. Click **Connections** in the upper right. A list of connections appears.
-1. Hover over the connection you would like to delete. Edit, permissions, and delete icons appear on the right.
-1. Click the trash can (delete) icon. "Are you sure?" text appears.
+1. Hover over the connection you would like to delete. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the trash can (**Delete**) icon. "Are you sure?" text appears.
 1. Select **Delete**.
 
 ## Add credentials to an action
