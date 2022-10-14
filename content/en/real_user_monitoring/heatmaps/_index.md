@@ -21,10 +21,18 @@ A heatmap (or heat map) is a visualization of your user's Session Replay data, w
 To get started with heatmaps:
 
 - You need to be on the latest version of the SDK (v4.20.0) 
-- Enable [Session Replay](/real_user_monitoring/session_replay/).
+- Enable [Session Replay][1].
+- While Heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
+
+{{< code-block lang="json" filename="block.json">}}
+datadogRum.init({
+    ...
+    enableExperimentalFeatures: ['clickmap']
+})
+{{< /code-block >}}
 
 ### Analysis
-Start from the [heatmap page](https://app.datadoghq.com/rum/heatmap/view), select your application, and view. A heatmap shows the aggregrate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
+Start from the [heatmap page][3], select your application, and view. A heatmap shows the aggregrate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
 
 - Pick your application.
 - Pick your view.
@@ -50,4 +58,11 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 ### Next steps
 
-After understanding analytics, the next thing you do is understand that action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer](/real_user_monitoring/explorer/) or building a funnel including that action to [analyze conversion rates](https://docs.datadoghq.com/real_user_monitoring/guide/alerting-with-conversion-rates/). You can also watch associated [session replays](/real_user_monitoring/session_replay/) to visually see a user performing that action in the context of their overall session. 
+After understanding analytics, the next thing you do is understand that action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer][4] or building a funnel including that action to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing that action in the context of their overall session.
+
+[1]: /real_user_monitoring/session_replay/
+[2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
+[3]: https://app.datadoghq.com/rum/heatmap/view
+[4]: /real_user_monitoring/explorer/
+[5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
+
