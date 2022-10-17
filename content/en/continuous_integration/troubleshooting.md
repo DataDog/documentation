@@ -150,14 +150,14 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 ### Intelligent Test Runner is not working
 
-[Intelligent Test Runner][12] works by analyzing your commit history along with code coverage information of past test runs to determine which tests need to be run and which ones can be safely skipped. A minimum amount of information need to exist in order for Intelligent Test Runner to work correctly:
+[Intelligent Test Runner][12] works by analyzing your commit history along with code coverage information about past test runs to determine which tests need to be run and which ones can be safely skipped. A minimum amount of information needs to exist in order for the Intelligent Test Runner to work correctly:
 
-- Your repository needs to have a commit history of at least 2 commits in the past month.
+- Your repository needs to have a commit history of at least two commits in the past month.
 - You need to have collected test code coverage in past commits.
 
-Due to these restrictions, the first time you enable Intelligent Test Runner you will not see any tests skipped and the test execution time might be slower than usual due to code coverage being collected automatically.
+Due to these restrictions, the first time you enable Intelligent Test Runner, you cannot see any tests skipped and the test execution time may be slower than usual because the code coverage is collected automatically.
 
-Intelligent Test Runner will only take into account the commit history and test code coverage information for the past month. Additionally, it will not take into account code coverage information that is generated more than one week after a commit was made.
+Intelligent Test Runner only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
 
 ### Intelligent Test Runner incorrectly skipped a test
 
@@ -182,7 +182,7 @@ Still need help? Contact [Datadog support][1].
 [6]: /continuous_integration/tests/containers/
 [7]: https://github.com/travisjeffery/timecop
 [8]: https://github.com/spulec/freezegun
-[9]: https://docs.datadoghq.com/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[10]: https://docs.datadoghq.com/continuous_integration/tests/
+[9]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
+[10]: /continuous_integration/tests/
 [11]: https://app.datadoghq.com/ci/settings/repository
 [12]: /continuous_integration/intelligent_test_runner/

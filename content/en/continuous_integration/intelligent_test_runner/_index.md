@@ -129,7 +129,8 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 {{< /tabs >}}
 
 #### UI activation
-In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][4].
+
+In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][4] page.
 
 ### Swift
 

@@ -28,7 +28,7 @@ The [Tests][1] page, under the CI menu in Datadog, provides a test-first view in
 
 
 
-{{< whatsnext desc="Choose your language to set up tests visibility in Datadog:" >}}
+{{< whatsnext desc="Choose a language to set up test visibility in Datadog:" >}}
     {{< nextlink href="continuous_integration/tests/dotnet" >}}.NET{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/javascript" >}}JavaScript{{< /nextlink >}}
