@@ -83,9 +83,9 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 To install the [JavaScript tracer][4], run:
 
-{{< code-block lang="bash" >}}
+```bash
 yarn add --dev dd-trace
-{{< /code-block >}}
+```
 
 For more information, see the [JavaScript tracer installation docs][5].
 
@@ -94,10 +94,20 @@ For more information, see the [JavaScript tracer installation docs][5].
 
 {{< tabs >}}
 {{% tab "Jest/Mocha" %}}
-Set `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
-{{< code-block lang="bash" >}}
+```bash
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+```
+
+**Important**: if you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" jest"
+  }
+}
 {{< /code-block >}}
 
 ### Using Yarn >=2
@@ -110,9 +120,9 @@ If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error
 
 You can fix it by setting `NODE_OPTIONS` to the following:
 
-{{< code-block lang="bash" >}}
+```bash
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-{{< /code-block >}}
+```
 
 ### Adding custom tags to tests
 
@@ -135,8 +145,18 @@ To create filters or `group by` fields for these tags, you must first create fac
 {{% tab "Cucumber" %}}
 Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
-{{< code-block lang="bash" >}}
+```bash
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+```
+
+**Important**: if you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" jest"
+  }
+}
 {{< /code-block >}}
 
 ### Using Yarn >=2
@@ -149,9 +169,9 @@ If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error
 
 You can fix this by setting `NODE_OPTIONS` to the following:
 
-{{< code-block lang="bash" >}}
+```
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-{{< /code-block >}}
+```
 
 ### Adding custom tags to tests
 
