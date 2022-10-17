@@ -1300,7 +1300,7 @@ main:
     identifier: workflows
     parent: platform_heading
     weight: 140000
-  - name: Set up Workflows
+  - name: Authentication
     url: workflows/setup/
     parent: workflows
     identifier: workflows_setup
