@@ -1,6 +1,8 @@
 ---
 title: Set up Tracing on a CircleCI Workflow
 kind: documentation
+aliases:
+  - /continuous_integration/setup_pipelines/circleci
 further_reading:
     - link: "/continuous_integration/pipelines"
       tag: "Documentation"

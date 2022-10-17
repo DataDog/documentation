@@ -1,6 +1,8 @@
 ---
 title: Set up Tracing on a Buildkite Pipeline
 kind: documentation
+aliases:
+  - /continuous_integration/setup_pipelines/buildkite
 further_reading:
     - link: "/continuous_integration/pipelines"
       tag: "Documentation"

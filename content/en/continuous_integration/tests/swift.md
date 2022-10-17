@@ -1,6 +1,8 @@
 ---
 title: Swift Tests
 kind: documentation
+aliases:
+  - /continuous_integration/setup_tests/swift
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -266,7 +268,7 @@ You can also disable or enable specific auto-instrumentation in some of the test
 
 ### Environment variables
 
-You can use `DD_TAGS` environment variable  (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). It must contain pairs of `key:tag` separated by spaces. For example:
+You can use `DD_TAGS` environment variable (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). It must contain pairs of `key:tag` separated by spaces. For example:
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}

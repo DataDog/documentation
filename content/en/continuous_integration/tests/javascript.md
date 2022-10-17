@@ -1,6 +1,8 @@
 ---
 title: JavaScript and TypeScript Tests
 kind: documentation
+aliases:
+  - /continuous_integration/setup_tests/javascript
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"

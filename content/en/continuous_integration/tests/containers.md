@@ -1,6 +1,8 @@
 ---
 title: Tests in Containers
 kind: documentation
+aliases:
+  - /continuous_integration/setup_tests/containers
 ---
 
 {{< site-region region="gov" >}}

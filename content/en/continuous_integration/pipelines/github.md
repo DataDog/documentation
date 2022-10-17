@@ -1,6 +1,8 @@
 ---
 title: Set up Tracing on GitHub Actions Workflows
 kind: documentation
+aliases:
+  - /continuous_integration/setup_pipelines/github
 further_reading:
     - link: "/continuous_integration/pipelines"
       tag: "Documentation"

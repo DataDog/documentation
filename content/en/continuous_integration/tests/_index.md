@@ -2,7 +2,7 @@
 title: Exploring Tests
 kind: documentation
 aliases:
-  - /continuous_integration/tests/
+  - /continuous_integration/explore_tests/
 further_reading:
     - link: "/continuous_integration/guides/find_flaky_tests/"
       tag: "Guide"

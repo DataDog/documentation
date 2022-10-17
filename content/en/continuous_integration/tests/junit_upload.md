@@ -1,6 +1,8 @@
 ---
 title: Uploading JUnit test report files to Datadog
 kind: documentation
+aliases:
+  - /continuous_integration/setup_tests/junit_upload
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"

@@ -1,6 +1,8 @@
 ---
 title: Set up Tracing on Codefresh Pipelines
 kind: documentation
+aliases:
+  - /continuous_integration/setup_pipelines/codefresh
 further_reading:
     - link: "/continuous_integration/pipelines"
       tag: "Documentation"

@@ -1,6 +1,8 @@
 ---
 title: Python Tests
 kind: documentation
+aliases:
+  - /continuous_integration/setup_tests/python
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"

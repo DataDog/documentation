@@ -2,7 +2,8 @@
 title: Pipeline Visibility in Datadog
 kind: documentation
 aliases:
-  - /continuous_integration/pipelines/
+  - /continuous_integration/pipelines_setup/
+  - /continuous_integration/explore_pipelines/
 further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
