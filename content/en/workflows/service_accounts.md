@@ -6,43 +6,25 @@ further_reading:
 - link: "/account_management/org_settings/service_accounts/"
   tag: "Documentation"
   text: "Learn more about Datadog service accounts"
+- link: "/workflows/authentication/"
+  tag: "Documentation"
+  text: "Learn how to create Connections for the actions in your workflow."
 ---
 
-To add an automated or scheduled trigger to a workflow, the workflow must have an associated service account. The service account is needed to:
+To add an automated trigger to a workflow, the workflow must have an associated service account. The service account is needed to:
 - resolve the connections defined in the workflow actions at runtime
 - provide an identity for workflow executions
 - provide an identity for workflow audit trails
 
-To use automated or scheduled triggers, a workflow must be associated with a unique service account.
+To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][1].
 
-## Requirements
-
-To create a service account for a workflow:
-- You must have either the Datadog admin role, or a custom role with the `SERVICE_ACCOUNT_WRITE` permission. For more information on service accounts and permissions, see [Service accounts][1].
-- Before you can add a service account, you need a workflow with at least one action.
+<div class="alert alert-info">The service account you create allows a workflow to be triggered automatically. However, individual actions in the workflow might still require <bold>Connections</bold>. For more information, see <a href="/workflows/authentication/">Authentication</a>.</div>
 
 ## Associate a service account with a workflow
 
-You can dynamically create a service account for your workflow when you [add a trigger][5]. Alternatively, click on the workflow name and add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
+You can dynamically create a service account for your workflow when you [add an automatic trigger][2]. Alternatively, click on the workflow name and click **Create**.
 
-{{< img src="workflows/create-service-account.png" alt="You can create a service account by clicking on the workflow name" style="width:70%;" >}}
-
-Service accounts use the email address associated with your Datadog account and follow the pattern: `[WF]:<your-workflow-name>`.
-
-## Service account roles and permissions
-
-When a workflow action runs, it checks the service account's roles to make sure that it is allowed to execute. For example, the **AWS Lambda** action requires the `CONNECTION_RESOLVE` resource permissions. The Datadog Admin Role and Datadog Standard Role both have `CONNECTION_RESOLVE` resource permissions, so the service account would require one of those roles before the **AWS Lambda** action could execute.
-
-In addition to roles, you can further restrict a role's workflow permissions. You can restrict the permissions as follows:
-- **Viewer**: Can view workflows
-- **Resolver**: Can resolve and review workflows
-- **Editor**: Can edit, resolve and review workflows
-
-In the example below, the connection `raph-test` is restricted to the **Datadog Admin Role** with **Editor** permissions, and the **Datadog Standard Role** with **Resolver** permissions.
-
-{{< img src="workflows/service-account-example.png" alt="A connection with roles and permissions assigned" style="width:70%;" >}}
-
-At runtime, a workflow using this connection would require a service account with the Datadog Standard Role before it could successfully execute.
+Service accounts use the email address associated with your Datadog account and follow the pattern: `[WF]: <your-workflow-name>`.
 
 ## View service account details
 
@@ -50,13 +32,11 @@ To view a service account's details:
 1. On your workflow canvas, click on the automated or scheduled trigger.
 1. Next to the service account, click **View**.
 
-{{< img src="workflows/service-account-details.png" alt="Service account details" style="width:70%;" >}}
+{{< img src="workflows/service-account-details1.png" alt="Service account details" style="width:70%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/org_settings/service_accounts/
-[2]: https://app.datadoghq.com/workflow
-[3]: /workflows/build
-[5]: /workflows/trigger/
+[2]: /workflows/trigger/
