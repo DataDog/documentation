@@ -161,7 +161,10 @@ In addition to the environment variables above, the Intelligent Test Runner need
 
 ## Configuration
 
+The default branch is automatically excluded from having Intelligent Test Runner enabled to reduce irrelevant test noise, but it remains configurable. Because impacted tests could be missed by this exclusion, Datadog recommends you include your default branch.
+
 {{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:50%;">}}
+
 
 ## Further Reading
 
