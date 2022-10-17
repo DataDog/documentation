@@ -84,7 +84,7 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 #### Agent configuration
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-  The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+  The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39.
 {{< /beta-callout >}}
 
 If you've set the `inventories_configuration_enabled` option to `true` in your [Agent configuration file][6], you can click **Agent Configuration** to access a read-only version of the Agent's configuration.
