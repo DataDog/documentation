@@ -32,7 +32,8 @@ To enable Intelligent Test Runner, the following environment variables need to b
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
-**Default**: `false`
+**Default**: `false`<br/>
+**Note**: Required only during Beta phase
 
 `DD_API_KEY` (Required)
 : The [Datadog API key][1] used to upload the test results.<br/>
@@ -49,11 +50,13 @@ To enable Intelligent Test Runner, the following environment variables need to b
 
 `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (Required)
 : Flag to enable git metadata upload.<br/>
-**Default**: `false`
+**Default**: `false`<br/>
+**Note**: Required only during Beta phase
 
 `DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
 : Flag to enable test skipping. <br/>
-**Default**: `false`
+**Default**: `false`<br/>
+**Note**: Required only during Beta phase
 
 After setting these environment variables, run your tests as you normally do:
 
@@ -79,7 +82,8 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
-**Default**: `false`
+**Default**: `false`<br/>
+**Note**: Required only during Beta phase
 
 `DD_API_KEY` (Required)
 : The [Datadog API key][1] used to upload the test results.<br/>
@@ -96,7 +100,8 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 
 `DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
 : Flag to enable intelligent test runner. <br/>
-**Default**: `false`
+**Default**: `false`<br/>
+**Note**: Required only during Beta phase
 
 After setting these environment variables, run your tests as you normally do:
 
@@ -129,7 +134,7 @@ In addition to the environment variables above, the Intelligent Test Runner need
 
 ### Swift
 
-To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1,  Code Coverage must be enabled at least for your targets, and the following environment variables must be set:
+To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1. Code Coverage must be enabled at least for your targets, and the following environment variables must be set:
 
 `DD_TEST_RUNNER`
 : Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
