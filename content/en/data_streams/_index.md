@@ -3,15 +3,15 @@ title: Data Streams Monitoring
 kind: documentation
 ---
 
-{{< img src="data_streams/data_streams_hero.jpeg" alt="Datadog Data Streams Monitoring"  style="width:100%;" >}}
+{{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring"  style="width:100%;" >}}
 
 ## Overview
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
 
-* Unlock end-to-end pipeline health with the time it takes for messages to traverse across flows of queues and services.
+* Measure pipeline health with end-to-end latencies for events traversing across your system.
 * Pinpoint faulty producers, consumers or queues, then pivot to related logs or clusters to troubleshoot faster.
-* Prevent cascading impact of delays by equipping service owners to stop backed up events from overwhelming downstream services.
+* Prevent cascading delays by equipping service owners to stop backed up events from overwhelming downstream services.
 
 ## Setup
 
@@ -20,13 +20,14 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 {{< programming-lang lang="java" >}}
 
 ### Prerequisites
-* Datadog Agent v7.34.0+
-* Kafka integration 
-* Java Agent v0.105+
 
-Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latency and the relationship between queues and services.
+To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and Java libraries:
+* [Datadog Agent v7.34.0+][1]
+* [APM enabled with the Java Agent v0.105+][2]
 
-To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to true on services sending messages to (or consuming messages from) Kafka or RabbitMQ.
+### Installation
+
+Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to true on services sending messages to (or consuming messages from) Kafka or RabbitMQ.
 
 For example:
 ```yaml
@@ -34,24 +35,28 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-As an alternative, you can set the system property `-Ddd.data.streams.enabled=true` by running the following when you start your Java application:
+As an alternative, you can instead set the system property `-Ddd.data.streams.enabled=true` by running the following when you start your Java application:
 
 ```bash
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
 ```
+
+[1]: /agent
+[2]: /tracing/trace_collection/dd_libraries/java/
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
 
 ### Prerequisites
-* Datadog Agent v7.34.0+
-* Kafka integration
-* .NET Tracer v2.16.0+ (not yet confirmed)
 
-.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latency and the relationship between queues and services.
+To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and .NET libraries:
+* [Datadog Agent v7.34.0+][1]
+* .NET Tracer v2.17.0+ ([.NET Core][2], [.NET Framework][3])
 
-To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to true on services sending messages to (or consuming messages from) Kafka.
+### Installation
+
+.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to true on services sending messages to (or consuming messages from) Kafka.
 
 For example:
 ```yaml
@@ -59,19 +64,29 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-Note that Data Streams Monitoring is not currently supported where `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED=0`.
+[1]: /agent
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+[3]: /tracing/trace_collection/dd_libraries/dotnet-framework
 
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-### Prerequisites
-* Datadog Agent v7.34.0+
-* Latest version of the [Data Streams library][1]
 
-Start the pipeline with `datastreams.Start()` at the start of your application. The default Trace Agent URL is `localhost:8126`. If this is different for your application, use the option `datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))`.
+### Prerequisites
+
+To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and Data Streams Monitoring libraries:
+* [Datadog Agent v7.34.0+][2]
+* [Data Streams Library v0.2+][1]
+
+### Installation
+
+Initiate a Data Streams pathway with `datastreams.Start()` at the start of your pipeline. Then, two types of instrumentation are available:
+- Instrumentation for Kafka-based workloads
+- Custom instrumentation for any other queuing technology or protocol
+
+<div class="alert alert-info">The default Trace Agent URL is <code>localhost:8126</code>. If this is different for your application, use the option <code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code>.</div>
 
 ### Kafka instrumentation
-
 
 1. Configure producers to call `TraceKafkaProduce()` before sending out a Kafka message:
 
@@ -159,15 +174,13 @@ _, ctx = datastreams.SetCheckpoint(ctx, "type:internal", "event_type:sell")
 
 You only need to add the `event_type` tag for the first service in each pathway. High-cardinality data (such as request IDs or hosts) are not supported as values for the `event_type` tag.
 
-
-
-
 [1]: https://github.com/DataDog/data-streams-go
+[2]: /agent
+
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
-For more information, see [Data Streams terms and concepts][1].
-
+For more information on how to use Data Streams Monitoring after setup, see key [terms and concepts][1].
 
 [1]: /data_streams/glossary
