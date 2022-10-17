@@ -1062,11 +1062,21 @@ main:
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
     weight: 705
+  - name: Send OpenTelemetry Metrics to Datadog
+    url: metrics/open_telemetry
+    parent: metrics_top_level
+    identifier: metrics_otel
+    weight: 8
+  - name: OTLP Metric Types
+    url: metrics/open_telemetry/otlp_metric_types
+    parent: metrics_otel
+    identifier: metrics_otlp_types
+    weight: 801
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
     identifier: metrics_guide
-    weight: 8
+    weight: 9
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
@@ -1540,16 +1550,21 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_serverless
     weight: 106
+  - name: Admission Controller Injection
+    url: tracing/trace_collection/admission_controller/
+    parent: tracing_trace_collection
+    identifier: tracing_admission_controller
+    weight: 107
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 107
+    weight: 108
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 108
+    weight: 109
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
@@ -2245,11 +2260,16 @@ main:
     parent: log_collection
     identifier: log_collection_ruby
     weight: 111
+  - name: OpenTelemetry
+    url: logs/log_collection/opentelemetry/
+    parent: log_collection
+    identifier: log_collection_opentelemetry
+    weight: 112
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 112
+    weight: 113
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
@@ -3344,22 +3364,32 @@ main:
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check
-    weight: 8
+    weight: 7
   - name: 'Submission - Agent Check '
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
-    weight: 801
+    weight: 701
   - name: Submission - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
-    weight: 802
+    weight: 702
   - name: Submission - API
     url: api/v1/service-checks/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
-    weight: 803
+    weight: 703
+  - name: IDE Integrations
+    url: developers/ide_integrations/
+    parent: dev_tools
+    identifier: ide_integrations
+    weight: 8
+  - name: IntelliJ IDEA
+    url: developers/ide_integrations/idea/
+    parent: ide_integrations
+    identifier: ide_integrations_idea
+    weight: 801
   - name: Community
     url: developers/community/
     parent: dev_tools
@@ -3377,7 +3407,7 @@ main:
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
-    weight: 11
+    weight: 10
   - name: API
     url: api/
     pre: api
@@ -4225,7 +4255,7 @@ api:
       operationids:
         - RevokeEmbeddableGraph
       unstable: []
-      order: 0
+      order: 1
   - name: Enable embed
     url: '#enable-embed'
     identifier: embeddable-graphs-enable-embed
@@ -4237,7 +4267,7 @@ api:
       operationids:
         - EnableEmbeddableGraph
       unstable: []
-      order: 0
+      order: 2
   - name: Get specific embed
     url: '#get-specific-embed'
     identifier: embeddable-graphs-get-specific-embed
@@ -4249,7 +4279,7 @@ api:
       operationids:
         - GetEmbeddableGraph
       unstable: []
-      order: 0
+      order: 3
   - name: Create embed
     url: '#create-embed'
     identifier: embeddable-graphs-create-embed
@@ -4261,7 +4291,7 @@ api:
       operationids:
         - CreateEmbeddableGraph
       unstable: []
-      order: 0
+      order: 4
   - name: Get all embeds
     url: '#get-all-embeds'
     identifier: embeddable-graphs-get-all-embeds
@@ -4273,7 +4303,7 @@ api:
       operationids:
         - ListEmbeddableGraphs
       unstable: []
-      order: 0
+      order: 5
   - name: Events
     url: /api/latest/events/
     identifier: events
@@ -4464,7 +4494,7 @@ api:
       operationids:
         - UpdateCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 2
   - name: Get one application key owned by current user
     url: '#get-one-application-key-owned-by-current-user'
     identifier: key-management-get-one-application-key-owned-by-current-user
@@ -4476,7 +4506,7 @@ api:
       operationids:
         - GetCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 3
   - name: Delete an application key owned by current user
     url: '#delete-an-application-key-owned-by-current-user'
     identifier: key-management-delete-an-application-key-owned-by-current-user
@@ -4488,7 +4518,7 @@ api:
       operationids:
         - DeleteCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 1
   - name: Create an application key for current user
     url: '#create-an-application-key-for-current-user'
     identifier: key-management-create-an-application-key-for-current-user
@@ -4500,7 +4530,7 @@ api:
       operationids:
         - CreateCurrentUserApplicationKey
       unstable: []
-      order: 0
+      order: 4
   - name: Get all application keys owned by current user
     url: '#get-all-application-keys-owned-by-current-user'
     identifier: key-management-get-all-application-keys-owned-by-current-user
@@ -4512,7 +4542,7 @@ api:
       operationids:
         - ListCurrentUserApplicationKeys
       unstable: []
-      order: 0
+      order: 5
   - name: Edit an application key
     url: '#edit-an-application-key'
     identifier: key-management-edit-an-application-key
@@ -5085,7 +5115,7 @@ api:
       operationids:
         - UnmuteAllMonitors
       unstable: []
-      order: 0
+      order: 3
   - name: Mute all monitors
     url: '#mute-all-monitors'
     identifier: monitors-mute-all-monitors
@@ -5097,7 +5127,7 @@ api:
       operationids:
         - MuteAllMonitors
       unstable: []
-      order: 0
+      order: 4
   - name: Validate an existing monitor
     url: '#validate-an-existing-monitor'
     identifier: monitors-validate-an-existing-monitor
@@ -5121,7 +5151,7 @@ api:
       operationids:
         - UnmuteMonitor
       unstable: []
-      order: 0
+      order: 1
   - name: Mute a monitor
     url: '#mute-a-monitor'
     identifier: monitors-mute-a-monitor
@@ -5133,7 +5163,7 @@ api:
       operationids:
         - MuteMonitor
       unstable: []
-      order: 0
+      order: 2
   - name: Edit a monitor
     url: '#edit-a-monitor'
     identifier: monitors-edit-a-monitor
@@ -5257,7 +5287,7 @@ api:
       operationids:
         - UpdateNotebook
       unstable: []
-      order: 0
+      order: 4
   - name: Get a notebook
     url: '#get-a-notebook'
     identifier: notebooks-get-a-notebook
@@ -5269,7 +5299,7 @@ api:
       operationids:
         - GetNotebook
       unstable: []
-      order: 0
+      order: 5
   - name: Delete a notebook
     url: '#delete-a-notebook'
     identifier: notebooks-delete-a-notebook
@@ -5281,7 +5311,7 @@ api:
       operationids:
         - DeleteNotebook
       unstable: []
-      order: 0
+      order: 3
   - name: Create a notebook
     url: '#create-a-notebook'
     identifier: notebooks-create-a-notebook
@@ -5293,7 +5323,7 @@ api:
       operationids:
         - CreateNotebook
       unstable: []
-      order: 0
+      order: 1
   - name: Get all notebooks
     url: '#get-all-notebooks'
     identifier: notebooks-get-all-notebooks
@@ -5305,7 +5335,7 @@ api:
       operationids:
         - ListNotebooks
       unstable: []
-      order: 0
+      order: 2
   - name: Organizations
     url: /api/latest/organizations/
     identifier: organizations
@@ -5455,7 +5485,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalIncidents
       unstable: []
-      order: 0
+      order: 9
   - name: Get a signal's details
     url: '#get-a-signals-details'
     identifier: security-monitoring-get-a-signals-details
@@ -5467,7 +5497,7 @@ api:
       operationids:
         - GetSecurityMonitoringSignal
       unstable: []
-      order: 0
+      order: 11
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
     identifier: security-monitoring-get-a-list-of-security-signals
@@ -5563,7 +5593,7 @@ api:
       operationids:
         - UpdateSecurityFilter
       unstable: []
-      order: 0
+      order: 13
   - name: Get a security filter
     url: '#get-a-security-filter'
     identifier: security-monitoring-get-a-security-filter
@@ -5575,7 +5605,7 @@ api:
       operationids:
         - GetSecurityFilter
       unstable: []
-      order: 0
+      order: 14
   - name: Delete a security filter
     url: '#delete-a-security-filter'
     identifier: security-monitoring-delete-a-security-filter
@@ -5587,7 +5617,7 @@ api:
       operationids:
         - DeleteSecurityFilter
       unstable: []
-      order: 0
+      order: 12
   - name: Create a security filter
     url: '#create-a-security-filter'
     identifier: security-monitoring-create-a-security-filter
@@ -5599,7 +5629,7 @@ api:
       operationids:
         - CreateSecurityFilter
       unstable: []
-      order: 0
+      order: 15
   - name: Get all security filters
     url: '#get-all-security-filters'
     identifier: security-monitoring-get-all-security-filters
@@ -5611,7 +5641,7 @@ api:
       operationids:
         - ListSecurityFilters
       unstable: []
-      order: 0
+      order: 16
   - name: Change the triage state of a security signal
     url: '#change-the-triage-state-of-a-security-signal'
     identifier: security-monitoring-change-the-triage-state-of-a-security-signal
@@ -5624,7 +5654,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalState
       unstable: []
-      order: 0
+      order: 2
   - name: Modify the triage assignee of a security signal
     url: '#modify-the-triage-assignee-of-a-security-signal'
     identifier: security-monitoring-modify-the-triage-assignee-of-a-security-signal
@@ -5637,7 +5667,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalAssignee
       unstable: []
-      order: 0
+      order: 3
   - name: Add a security signal to an incident
     url: '#add-a-security-signal-to-an-incident'
     identifier: security-monitoring-add-a-security-signal-to-an-incident
@@ -5649,7 +5679,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 0
+      order: 1
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
@@ -5961,7 +5991,7 @@ api:
       operationids:
         - UpdateSlackIntegration
       unstable: []
-      order: 0
+      order: 2
   - name: Create a Slack integration
     url: '#create-a-slack-integration'
     identifier: slack-integration-create-a-slack-integration
@@ -5973,7 +6003,7 @@ api:
       operationids:
         - CreateSlackIntegration
       unstable: []
-      order: 0
+      order: 3
   - name: Get info about a Slack integration
     url: '#get-info-about-a-slack-integration'
     identifier: slack-integration-get-info-about-a-slack-integration
@@ -5985,7 +6015,7 @@ api:
       operationids:
         - GetSlackIntegration
       unstable: []
-      order: 0
+      order: 4
   - name: Delete a Slack integration
     url: '#delete-a-slack-integration'
     identifier: slack-integration-delete-a-slack-integration
@@ -5997,7 +6027,7 @@ api:
       operationids:
         - DeleteSlackIntegration
       unstable: []
-      order: 0
+      order: 1
   - name: Snapshots
     url: /api/latest/snapshots/
     identifier: snapshots
@@ -7375,6 +7405,130 @@ api:
         - DownloadCloudWorkloadPolicyFile
       unstable: []
       order: 1
+  - name: Confluent Cloud
+    url: /api/latest/confluent-cloud/
+    identifier: confluent-cloud
+    generated: true
+  - name: Update resource in Confluent account
+    url: '#update-resource-in-confluent-account'
+    identifier: confluent-cloud-update-resource-in-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateConfluentResource
+      unstable: []
+      order: 1
+  - name: Get resource from Confluent account
+    url: '#get-resource-from-confluent-account'
+    identifier: confluent-cloud-get-resource-from-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetConfluentResource
+      unstable: []
+      order: 2
+  - name: Delete resource from Confluent account
+    url: '#delete-resource-from-confluent-account'
+    identifier: confluent-cloud-delete-resource-from-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteConfluentResource
+      unstable: []
+      order: 3
+  - name: Add resource to Confluent account
+    url: '#add-resource-to-confluent-account'
+    identifier: confluent-cloud-add-resource-to-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateConfluentResource
+      unstable: []
+      order: 4
+  - name: List Confluent Account resources
+    url: '#list-confluent-account-resources'
+    identifier: confluent-cloud-list-confluent-account-resources
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListConfluentResource
+      unstable: []
+      order: 5
+  - name: Update Confluent account
+    url: '#update-confluent-account'
+    identifier: confluent-cloud-update-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateConfluentAccount
+      unstable: []
+      order: 6
+  - name: Get Confluent account
+    url: '#get-confluent-account'
+    identifier: confluent-cloud-get-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetConfluentAccount
+      unstable: []
+      order: 7
+  - name: Delete Confluent account
+    url: '#delete-confluent-account'
+    identifier: confluent-cloud-delete-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteConfluentAccount
+      unstable: []
+      order: 8
+  - name: Add Confluent account
+    url: '#add-confluent-account'
+    identifier: confluent-cloud-add-confluent-account
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateConfluentAccount
+      unstable: []
+      order: 9
+  - name: List Confluent accounts
+    url: '#list-confluent-accounts'
+    identifier: confluent-cloud-list-confluent-accounts
+    parent: confluent-cloud
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListConfluentAccount
+      unstable: []
+      order: 10
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services
@@ -7391,7 +7545,7 @@ api:
         - UpdateIncidentService
       unstable:
         - v2
-      order: 0
+      order: 3
   - name: Get details of an incident service
     url: '#get-details-of-an-incident-service'
     identifier: incident-services-get-details-of-an-incident-service
@@ -7404,7 +7558,7 @@ api:
         - GetIncidentService
       unstable:
         - v2
-      order: 0
+      order: 1
   - name: Delete an existing incident service
     url: '#delete-an-existing-incident-service'
     identifier: incident-services-delete-an-existing-incident-service
@@ -7417,7 +7571,7 @@ api:
         - DeleteIncidentService
       unstable:
         - v2
-      order: 0
+      order: 2
   - name: Create a new incident service
     url: '#create-a-new-incident-service'
     identifier: incident-services-create-a-new-incident-service
@@ -7430,7 +7584,7 @@ api:
         - CreateIncidentService
       unstable:
         - v2
-      order: 0
+      order: 5
   - name: Get a list of all incident services
     url: '#get-a-list-of-all-incident-services'
     identifier: incident-services-get-a-list-of-all-incident-services
@@ -7443,7 +7597,7 @@ api:
         - ListIncidentServices
       unstable:
         - v2
-      order: 0
+      order: 4
   - name: Incident Teams
     url: /api/latest/incident-teams/
     identifier: incident-teams
@@ -7460,7 +7614,7 @@ api:
         - UpdateIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 3
   - name: Get details of an incident team
     url: '#get-details-of-an-incident-team'
     identifier: incident-teams-get-details-of-an-incident-team
@@ -7473,7 +7627,7 @@ api:
         - GetIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 1
   - name: Delete an existing incident team
     url: '#delete-an-existing-incident-team'
     identifier: incident-teams-delete-an-existing-incident-team
@@ -7486,7 +7640,7 @@ api:
         - DeleteIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 2
   - name: Create a new incident team
     url: '#create-a-new-incident-team'
     identifier: incident-teams-create-a-new-incident-team
@@ -7499,7 +7653,7 @@ api:
         - CreateIncidentTeam
       unstable:
         - v2
-      order: 0
+      order: 5
   - name: Get a list of all incident teams
     url: '#get-a-list-of-all-incident-teams'
     identifier: incident-teams-get-a-list-of-all-incident-teams
@@ -7512,7 +7666,7 @@ api:
         - ListIncidentTeams
       unstable:
         - v2
-      order: 0
+      order: 4
   - name: Incidents
     url: /api/latest/incidents/
     identifier: incidents
@@ -8049,7 +8203,7 @@ api:
       operationids:
         - UpdateRUMApplication
       unstable: []
-      order: 0
+      order: 4
   - name: Get a RUM application
     url: '#get-a-rum-application'
     identifier: rum-get-a-rum-application
@@ -8061,7 +8215,7 @@ api:
       operationids:
         - GetRUMApplication
       unstable: []
-      order: 0
+      order: 5
   - name: Delete a RUM application
     url: '#delete-a-rum-application'
     identifier: rum-delete-a-rum-application
@@ -8073,7 +8227,7 @@ api:
       operationids:
         - DeleteRUMApplication
       unstable: []
-      order: 0
+      order: 6
   - name: Create a new RUM application
     url: '#create-a-new-rum-application'
     identifier: rum-create-a-new-rum-application
@@ -8085,7 +8239,7 @@ api:
       operationids:
         - CreateRUMApplication
       unstable: []
-      order: 0
+      order: 7
   - name: List all the RUM applications
     url: '#list-all-the-rum-applications'
     identifier: rum-list-all-the-rum-applications
@@ -8097,7 +8251,7 @@ api:
       operationids:
         - GetRUMApplications
       unstable: []
-      order: 0
+      order: 8
   - name: Aggregate RUM events
     url: '#aggregate-rum-events'
     identifier: rum-aggregate-rum-events
@@ -8321,7 +8475,7 @@ api:
       operationids:
         - CreateServiceAccountApplicationKey
       unstable: []
-      order: 0
+      order: 5
   - name: List application keys for this service account
     url: '#list-application-keys-for-this-service-account'
     identifier: service-accounts-list-application-keys-for-this-service-account
@@ -8333,4 +8487,56 @@ api:
       operationids:
         - ListServiceAccountApplicationKeys
       unstable: []
-      order: 0
+      order: 6
+  - name: Service Definition
+    url: /api/latest/service-definition/
+    identifier: service-definition
+    generated: true
+  - name: Get a single service definition
+    url: '#get-a-single-service-definition'
+    identifier: service-definition-get-a-single-service-definition
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetServiceDefinition
+      unstable: []
+      order: 3
+  - name: Delete a single service definition
+    url: '#delete-a-single-service-definition'
+    identifier: service-definition-delete-a-single-service-definition
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteServiceDefinition
+      unstable: []
+      order: 4
+  - name: Create or update service definition
+    url: '#create-or-update-service-definition'
+    identifier: service-definition-create-or-update-service-definition
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateOrUpdateServiceDefinitions
+      unstable: []
+      order: 2
+  - name: Get all service definitions
+    url: '#get-all-service-definitions'
+    identifier: service-definition-get-all-service-definitions
+    parent: service-definition
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListServiceDefinitions
+      unstable: []
+      order: 1

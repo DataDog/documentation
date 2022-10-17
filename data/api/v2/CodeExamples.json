@@ -100,6 +100,41 @@
       "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
+  "CreateConfluentResource": [
+    {
+      "group": "confluent_cloud",
+      "suffix": "",
+      "description": "Add resource to Confluent account returns \"OK\" response"
+    }
+  ],
+  "DeleteConfluentAccount": [
+    {
+      "group": "confluent_cloud",
+      "suffix": "_2919241291",
+      "description": "Delete resource from Confluent account returns \"OK\" response"
+    }
+  ],
+  "GetConfluentAccount": [
+    {
+      "group": "confluent_cloud",
+      "suffix": "",
+      "description": "Get Confluent account returns \"OK\" response"
+    }
+  ],
+  "ListConfluentAccount": [
+    {
+      "group": "confluent_cloud",
+      "suffix": "",
+      "description": "List Confluent accounts returns \"OK\" response"
+    }
+  ],
+  "UpdateConfluentAccount": [
+    {
+      "group": "confluent_cloud",
+      "suffix": "",
+      "description": "Update Confluent account returns \"OK\" response"
+    }
+  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -939,6 +974,34 @@
       "group": "service_accounts",
       "suffix": "_819075131",
       "description": "Get one app key owned by this service account returns \"OK\" response"
+    }
+  ],
+  "CreateOrUpdateServiceDefinitions": [
+    {
+      "group": "service_definition",
+      "suffix": "",
+      "description": "Create or update service definition returns \"CREATED\" response"
+    }
+  ],
+  "DeleteServiceDefinition": [
+    {
+      "group": "service_definition",
+      "suffix": "",
+      "description": "Delete a single service definition returns \"OK\" response"
+    }
+  ],
+  "GetServiceDefinition": [
+    {
+      "group": "service_definition",
+      "suffix": "",
+      "description": "Get a single service definition returns \"OK\" response"
+    }
+  ],
+  "ListServiceDefinitions": [
+    {
+      "group": "service_definition",
+      "suffix": "",
+      "description": "Get all service definitions returns \"OK\" response"
     }
   ],
   "GetCostByOrg": [

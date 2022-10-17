@@ -87,6 +87,10 @@ Click the cog menu to choose what to display in your services list:
 
 {{< img src="tracing/visualization/services_columns_2.png" alt="Services columns" style="width:40%;">}}
 
+## Data retention
+The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][12].
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -102,3 +106,4 @@ Click the cog menu to choose what to display in your services list:
 [9]: /tracing/trace_explorer/trace_view/
 [10]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [11]: /tracing/services/service_page/#service-monitor
+[12]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/
