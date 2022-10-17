@@ -20,14 +20,14 @@ Intelligent Test Runner for CI Visibility is in private beta. You can request ac
 
 Intelligent Test Runner is Datadog's test impact analysis solution. It allows you to only run the impacted tests for a given commit and skip any that are irrelevant.
 
-By only running tests on relevant code, when tests do fail it's more likely a legitimate failure that pertains to the modified code.
+By only running tests on relevant code, when tests fail, it is likely a legitimate failure that pertains to the modified code.
 
 
 ## Setup
 
-Prior to setting up Intelligent Test Runner, you must have finished setting up Test Visibility for your particular language.
+Prior to setting up Intelligent Test Runner, you must have finished setting up [Test Visibility][5] for your particular language.
 
-### Javascript
+### JavaScript
 
 To enable Intelligent Test Runner, the following environment variables need to be set:
 
@@ -66,7 +66,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIV
 {{< /code-block >}}
 
 #### UI activation
-In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][4].
+In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][4] page.
 
 #### Compatibility
 
@@ -79,7 +79,7 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ### .NET
 
-To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.16.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables are set:
+To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >= 2.16.0 (execute `dd-trace --version` to get the version of the tool) and the following environment variables must be set:
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
@@ -100,17 +100,16 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 `DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
-: Flag to enable intelligent test runner. <br/>
+: Flag to enable Intelligent Test Runner. <br/>
 **Default**: `false`<br/>
 **Note**: Required only during Beta phase
 
-After setting these environment variables, run your tests as you normally do:
+After setting these environment variables, run your tests as you normally do by using [dotnet test][6] or [VSTest.Console.exe][7]:
 
 {{< tabs >}}
 
 {{% tab "dotnet test" %}}
 
-By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
 
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
@@ -120,7 +119,6 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 {{% tab "VSTest.Console" %}}
 
-By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
 
 {{< code-block lang="bash" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
@@ -135,7 +133,7 @@ In addition to the environment variables above, the Intelligent Test Runner need
 
 ### Swift
 
-To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1. `Code Coverage` option must also be enabled in the test settings of your scheme or testplan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
+To enable Intelligent Test Runner, the version of the `dd-sdk-swift` framework must be >= 2.2.0-rc.1. The `Code Coverage` option must also be enabled in the test settings of your scheme or test plan, or  `--enable-code-coverage` must be added to your `swift test` command (if using a SPM target).
 
 The following environment variables must also be set:
 
@@ -158,13 +156,14 @@ The following environment variables must also be set:
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 #### UI activation
-In addition to the environment variables above, the Intelligent Test Runner needs to be activated in [Test Service Settings][4].
+
+In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][4] page.
 
 ## Configuration
 
-The default branch is automatically excluded from having Intelligent Test Runner enabled to reduce irrelevant test noise, but it remains configurable. Because impacted tests could be missed by this exclusion, Datadog recommends you include your default branch.
+The default branch is automatically excluded from having Intelligent Test Runner enabled to reduce irrelevant test noise, but it remains configurable. Because impacted tests could be missed by this exclusion, Datadog recommends including your default branch.
 
-{{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:50%;">}}
+{{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
 
 
 ## Further Reading
@@ -175,3 +174,6 @@ The default branch is automatically excluded from having Intelligent Test Runner
 [2]: https://app.datadoghq.com/organization-settings/application-keys
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/ci/settings/test-service
+[5]: /continuous_integration/tests/
+[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
