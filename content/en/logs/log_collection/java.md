@@ -27,7 +27,9 @@ further_reading:
   text: "How to collect, customize, and standardize Java logs"
 ---
 
-Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event:
+To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.
+
+Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event. For example:
 
 ```java
 //4 events generated when only one is expected!
@@ -37,14 +39,12 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-To alleviate this complexity, configure your logging library to produce your logs in JSON format. By logging to JSON, you:
+To address this issue, configure your logging library to produce your logs in JSON format. By logging to JSON, you:
 
 * Ensure that the stack trace is properly wrapped into the log event.
 * Ensure that all log event attributes (such as severity, logger name, and thread name) are properly extracted.
-* Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log events.
+* Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log event.
 * Avoid the need for [custom parsing rules][2].
-
-**To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.**
 
 The following instructions show setup examples for the Log4j, Log4j 2, and Logback logging libraries.
 
@@ -176,7 +176,7 @@ Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Inject trace IDs in your logs
+#### Inject trace IDs into your logs
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3] for more information.
 
@@ -257,7 +257,7 @@ Configure a file appender in `logback.xml`:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Inject trace IDs in your logs
+#### Inject trace IDs into your logs
 
 If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3].
 
@@ -290,6 +290,8 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
 3. [Restart the Agent][7].
 4. Run the [Agent’s status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
+If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
+
 ## Agentless logging
 
 In the exceptional case where your application is running on a machine that cannot be accessed or cannot log to a file, it is possible to stream logs to Datadog or to the Datadog Agent directly. This is not the recommended setup, because it requires that your application handles connection issues.
@@ -306,7 +308,7 @@ If you are not already using Logback, most common logging libraries can be bridg
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes.  To use it:
+Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes.  To use it:
 
 1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
@@ -337,7 +339,7 @@ Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another 
 
 {{% tab "Log4j 2" %}}
 
-Log4j 2 allows logging to a remote host, but it does not offer the ability to prefix the logs with an API key. Because of this, use the SLF4J module [log4j-over-slf4j][1] and Logback. `log4j-to-slf4j.jar` cleanly replaces Log4j 2 in your application so you do not have to make any code changes. To use it:
+Log4j 2 allows logging to a remote host, but it does not offer the ability to prefix the logs with an API key. Because of this, use the SLF4J module [log4j-over-slf4j][1] and Logback. `log4j-to-slf4j.jar` cleanly replaces Log4j 2 in your application so that you do not have to make any code changes. To use it:
 
 1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
@@ -373,7 +375,7 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 
 ### Configure Logback
 
-Use the [logstash-logback-encoder][9] logging library along with Logback to stream logs directly to Datadog.
+Use the [logstash-logback-encoder][11] logging library along with Logback to stream logs directly to Datadog.
 
 1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
@@ -441,7 +443,7 @@ Use the [logstash-logback-encoder][9] logging library along with Logback to stre
   Not supported.
     {{< /site-region >}}
 
-    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][10].
+    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][12].
 
 2. Add the Logstash encoder dependency to your `pom.xml` file:
 
@@ -464,7 +466,7 @@ Enrich your log events with contextual attributes.
 
 ### Using the key value parser
 
-The [key value parser][11] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [key value parser][13] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -529,6 +531,8 @@ To generate this JSON:
 [6]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
-[9]: https://github.com/logstash/logstash-logback-encoder
-[10]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[11]: /logs/log_configuration/parsing/#key-value-or-logfmt
+[9]: /logs/log_configuration/parsing/?tab=matchers
+[10]: /logs/explorer/#overview
+[11]: https://github.com/logstash/logstash-logback-encoder
+[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[13]: /logs/log_configuration/parsing/#key-value-or-logfmt
