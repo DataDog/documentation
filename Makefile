@@ -34,6 +34,7 @@ DD_API_KEY ?= false
 DD_APP_KEY ?= false
 DATADOG_API_KEY ?= $(DD_API_KEY)
 DATADOG_APP_KEY ?= $(DD_APP_KEY)
+FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
 help:
@@ -77,6 +78,7 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 start-docker: clean  ## Build and run docs including external content via docker
 	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
+	export FULL_BUILD=$(FULL_BUILD) && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
 
 stop-docker: ## Stop the running docker container.

@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-A security signal is generated when a threat is detected in the Datadog Security Platform. You can send notifications to keep your team informed when these signals are generated. 
+A security signal is generated when a threat is detected in Datadog Security. You can send notifications to keep your team informed when these signals are generated. 
 
 Notifications can be set up for specific [detection rules](#detection-rules-notifications) and also more broadly with [notification rules](#notification-rules). See [Notification Variables][1] to learn how to customize the notifications based on the signal's severity and specific context on the threat. 
 
@@ -25,27 +25,15 @@ Send notifications through email, Slack, Jira, PagerDuty, or a webhook.
 
 ### Email
 
-* Notify an active Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. An email address associated with a pending Datadog user invitation or a disabled user is considered inactive and does not receive notifications.
-* Notify any non-Datadog user by email with `@<EMAIL>`.
+{{% notifications-email %}}
 
 ### Integrations
 
-Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. 
-
-This table lists prefixes and example links:
-
-| Integration    | Prefix       | Examples       |
-|----------------|--------------|----------------|
-| [Jira][2]      | `@jira`      | [Examples][3]  |
-| [PagerDuty][4] | `@pagerduty` | [Examples][5]  |
-| [Slack][6]     | `@slack`     | [Examples][7]  |
-| [Webhooks][8]  | `@webhook`   | [Examples][9] |
-
-Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
+{{% notifications-integrations %}}
 
 ## Detection Rule notifications
 
-When you [create or modify a new detection rule][10], you can use the **Set rule case** and **Say what’s happening** section to define the notifications that are sent. 
+When you [create or modify a new detection rule][2], you can use the **Set rule case** and **Say what’s happening** section to define the notifications that are sent. 
 
 ### Set rule case
 
@@ -69,20 +57,12 @@ Use the **Tag resulting signals** dropdown to tag your signals with different ta
 
 ## Notification rules
 
-Notification rules allow you to set general alerting preferences so that you don’t have to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][11] for more information on setup and configuration.
+Notification rules allow you to set general alerting preferences so that you don’t have to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_platform/notifications/variables/
-[2]: /integrations/jira/
-[3]: /integrations/jira/#usage
-[4]: /integrations/pagerduty/
-[5]: /integrations/pagerduty/#send-a-notification-to-a-specific-pagerduty-service
-[6]: /integrations/slack/
-[7]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[8]: /integrations/webhooks/
-[9]: /integrations/webhooks/#usage
-[10]: /security_platform/detection_rules/#creating-and-managing-detection-rules
-[11]: /security_platform/notifications/rules/
+[2]: /security_platform/detection_rules/#creating-and-managing-detection-rules
+[3]: /security_platform/notifications/rules/

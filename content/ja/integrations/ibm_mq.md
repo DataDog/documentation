@@ -360,17 +360,20 @@ IBM MQ チェックはサーバー上でクエリを実行しますが、これ�
 ### ログのエラー
 * `Unpack for type ((67108864,)) not implemented`: このようなエラーが発生し、MQ サーバーが IBM OS で動作している場合は、`convert_endianness` を有効にして Agent を再起動します。
 
+### ログに表示される警告
+* `Error getting [...]: MQI Error. Comp: 2, Reason 2085: FAILED: MQRC_UNKNOWN_OBJECT_NAME`: このようなメッセージが表示される場合、インテグレーションが存在しないキューからメトリクスを収集しようとしていることが原因です。これは、構成ミスか、`auto_discover_queues` を使用している場合、インテグレーションが[ダイナミックキュー][8]を発見して、メトリクスを収集しようとしたときに、そのキューがもはや存在しないことが原因です。この場合、より厳格な `queue_patterns` や `queue_regex` を指定して問題を軽減するか、あるいは警告を無視することができます。 
+
 
 ### その他
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM MQ メトリクスおよびログの監視][9]
+- [Datadog を使用した IBM MQ メトリクスおよびログの監視][10]
 
 
 [1]: https://www.ibm.com/products/mq
@@ -380,5 +383,6 @@ IBM MQ チェックはサーバー上でクエリを実行しますが、これ�
 [5]: https://www.ibm.com/docs/en/ibm-mq/9.1?topic=formats-reset-queue-statistics
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=reference-setmqaut-grant-revoke-authority
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
+[8]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=queues-dynamic-model
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog

@@ -126,7 +126,7 @@ SNMP no longer supports only listing OIDs by their human-readable name. You can 
 {{< code-block lang="yaml" filename="scalar_symbols.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
-  symbol: hrSystemUptime
+    symbol: hrSystemUptime
 {{< /code-block >}}
 
 **With Agent 7.27.0:**
@@ -134,9 +134,9 @@ metrics:
 {{< code-block lang="yaml" filename="scalar_symbols_7_27.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
-  symbol:
-    OID: 1.3.6.1.2.1.25.1.1.0
-    name: hrSystemUptime
+    symbol:
+      OID: 1.3.6.1.2.1.25.1.1.0
+      name: hrSystemUptime
 {{< /code-block >}}
 
 #### Table symbols
@@ -146,14 +146,14 @@ metrics:
 {{< code-block lang="yaml" filename="table_symbols.yaml" >}}
 
 metrics:
-  -MIB: HOST-RESOURCES-MIB
-  table: hrStorageTable
-  symbols:
-    - hrStorageAllocationUnits
-    - hrStoageSize
-  metrics_tags:
-    - tag: storagedec
-      column: hrStorageDescr
+  - MIB: HOST-RESOURCES-MIB
+    table: hrStorageTable
+    symbols:
+      - hrStorageAllocationUnits
+      - hrStoageSize
+    metrics_tags:
+      - tag: storagedec
+        column: hrStorageDescr
 
 {{< /code-block >}}
 
@@ -162,20 +162,20 @@ metrics:
 
 {{< code-block lang="yaml" filename="table_symbols_7_27.yaml" >}}
 metrics:
-  -MIB: HOST-RESOURCES-MIB
-  table:
-    OID: 1.3.6.1.2.1.25.2.3
-    name: hrStorageTable
-  symbols:
-    - OID: 1.3.6.1.2.1.25.2.3.1.4
-      name: hrStorageAllocationUnits
-    - OID: 1.3.6.1.2.1.25.2.3.1.5
-      name: hrStoageSize
-  metrics_tags:
-    - tag: storagedec
-      column:
-        OID: 1.3.6.1.2.1.25.2.3.1.3
-        name: hrStorageDescr
+  - MIB: HOST-RESOURCES-MIB
+    table:
+      OID: 1.3.6.1.2.1.25.2.3
+      name: hrStorageTable
+    symbols:
+      - OID: 1.3.6.1.2.1.25.2.3.1.4
+        name: hrStorageAllocationUnits
+      - OID: 1.3.6.1.2.1.25.2.3.1.5
+        name: hrStoageSize
+    metrics_tags:
+      - tag: storagedec
+        column:
+          OID: 1.3.6.1.2.1.25.2.3.1.3
+          name: hrStorageDescr
 {{< /code-block >}}
 
 

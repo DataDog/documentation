@@ -24,6 +24,8 @@ Agents は 10 秒ごとに Cluster Agent に接続し、実行するチェック
 
 この機能は、Kubernetes for Agent v6.12.0+ および Cluster Agent v1.3.0+ でサポートされています。v1.4.0 以降、Cluster Agent は、非ポッドバックアップエンドポイントのすべてのエンドポイントチェックを通常のクラスターチェックに変換します。この機能を利用するには、エンドポイントチェックと一緒に[クラスターチェック][4]機能を有効にしてください。
 
+**注:** サービスの背後にあるポッドが静的ポッドである場合、アノテーション `ad.datadoghq.com/endpoints.resolve` を追加する必要があります。Datadog Cluster Agent は、エンドポイントチェックとしてチェックをスケジュールし、Cluster Check Runners にディスパッチします。Kubernetes API サーバーでアノテーションを使用した[この例][5]を参照してください。
+
 ### 例: エンドポイントを持つサービス
 以下の例では、NGINX 用の Kubernetes デプロイメントが 3 つのポッドで作成されています。
 
@@ -107,7 +109,7 @@ clusterAgent:
 
 この構成では、Cluster Agent と Agent の間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Daemonset" %}}
 ### Cluster Agent のドキュメント
@@ -164,7 +166,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 ### 静的なコンフィギュレーションファイルからの構成
 
-Datadog Agent 1.18.0 からは、Kubernetes エンドポイントを対象としたチェック構成で、`advanced_ad_identifiers` と[オートディスカバリーテンプレート変数][5]を使用できます ([例をご参照ください][6])。
+Datadog Agent 1.18.0 からは、Kubernetes エンドポイントを対象としたチェック構成で、`advanced_ad_identifiers` と[オートディスカバリーテンプレート変数][6]を使用できます ([例をご参照ください][7])。
 
 #### 例: Kubernetes エンドポイントでの HTTP_Check
 
@@ -213,7 +215,7 @@ instances:
 
 ### Kubernetes のサービスアノテーションからの構成
 
-[Kubernetes ポッド][7]のアノテーション方法と同様に、サービスにも以下のような構文でアノテーションを付けることができます。
+[Kubernetes ポッド][8]のアノテーション方法と同様に、サービスにも以下のような構文でアノテーションを付けることができます。
 
 ```yaml
 ad.datadoghq.com/endpoints.check_names: '[<インテグレーション名>]'
@@ -222,12 +224,12 @@ ad.datadoghq.com/endpoints.instances: '[<インスタンスコンフィギュレ
 ad.datadoghq.com/endpoints.logs: '[<ログコンフィギュレーション>]'
 ```
 
-`%%host%%` の[テンプレート変数][8]がサポートされ、これがエンドポイントの IP に置き換えられます。`kube_namespace`、`kube_service`、`kube_endpoint_ip` のタグは、自動的にインスタンスに追加されます。
+`%%host%%` の[テンプレート変数][9]がサポートされ、これがエンドポイントの IP に置き換えられます。`kube_namespace`、`kube_service`、`kube_endpoint_ip` のタグは、自動的にインスタンスに追加されます。
 
 **注**: カスタムエンドポイントのログ構成は、Docker ソケットのログ収集時のみサポートされ、Kubernetes のログファイル収集はサポートされません。
 
 ### 統合サービスタグ付け
-オプションとして、[統合サービスタグ付け][9]を活用するために、これらのチェックで生成されたデータに `env`、`service`、`version` タグを設定することができます。
+オプションとして、[統合サービスタグ付け][10]を活用するために、これらのチェックで生成されたデータに `env`、`service`、`version` タグを設定することができます。
 ```yaml
 tags.datadoghq.com/env: "<ENV>"
 tags.datadoghq.com/service: "<SERVICE>"
@@ -238,8 +240,8 @@ tags.datadoghq.com/version: "<VERSION>"
 
 以下の例では、これらのオプションをすべて利用しています。このサービスは `nginx` デプロイのポッドに関連付けられます。この構成に基づき:
 
-- このサービスをバックアップする各 NGINX ポッドに対して、[`nginx`][10] ベースのエンドポイントチェックがディスパッチされます。このチェックは、NGINX ポッドと同じそれぞれのノード上の Agent によって実行されます (ポッドの IP を `%%host%%` として使用します)。
-- [`http_check`][11] ベースのクラスターチェックは、クラスターの 1 つの Agent にディスパッチされます。このチェックはサービスの IP を `%%host%%` として使用し、自動的にそれぞれのエンドポイントに負荷が分散されます。
+- このサービスをバックアップする各 NGINX ポッドに対して、[`nginx`][11] ベースのエンドポイントチェックがディスパッチされます。このチェックは、NGINX ポッドと同じそれぞれのノード上の Agent によって実行されます (ポッドの IP を `%%host%%` として使用します)。
+- [`http_check`][12] ベースのクラスターチェックは、クラスターの 1 つの Agent にディスパッチされます。このチェックはサービスの IP を `%%host%%` として使用し、自動的にそれぞれのエンドポイントに負荷が分散されます。
 - チェックは、統合サービスタグ付けラベルに対応する `env:prod`、`service:my-nginx`、`version:1.19.0` のタグでディスパッチされます。
 
 ```yaml
@@ -282,7 +284,7 @@ spec:
 
 ## トラブルシューティング
 
-エンドポイントチェックのトラブルシューティングは、[クラスターチェックのトラブルシューティング][12]と似ています。唯一の違いは、クラスターチェックと同時にエンドポイントチェックをスケジューリングするノードベースの Agent に対して行われる点です。
+エンドポイントチェックのトラブルシューティングは、[クラスターチェックのトラブルシューティング][13]と似ています。唯一の違いは、クラスターチェックと同時にエンドポイントチェックをスケジューリングするノードベースの Agent に対して行われる点です。
 
 **注**: エンドポイントチェックは、監視されるサービスのエンドポイントをホストするポッドと同じノードで動作している Agent によってスケジューリングされます。エンドポイントがポッドをホストしない場合は、クラスター Agent がエンドポイントチェックをクラスター チェックに変換します。このクラスターチェックは、どのノードの Agent でも実行できます。
 
@@ -364,7 +366,7 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 ...
 ```
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -372,11 +374,12 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 [2]: /ja/agent/cluster_agent
 [3]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [4]: /ja/agent/cluster_agent/clusterchecks/
-[5]: /ja/agent/guide/template_variables/
-[6]: /ja/agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
-[7]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[8]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[9]: /ja/getting_started/tagging/unified_service_tagging
-[10]: /ja/integrations/nginx/
-[11]: /ja/integrations/http_check/
-[12]: /ja/agent/cluster_agent/troubleshooting/
+[5]: /ja/containers/kubernetes/control_plane/?tab=helm#api-server-2
+[6]: /ja/agent/guide/template_variables/
+[7]: /ja/agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
+[8]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[9]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[10]: /ja/getting_started/tagging/unified_service_tagging
+[11]: /ja/integrations/nginx/
+[12]: /ja/integrations/http_check/
+[13]: /ja/agent/cluster_agent/troubleshooting/

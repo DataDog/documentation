@@ -41,7 +41,7 @@ Amazon MQ は、クラウドでメッセージブローカーを容易にセッ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`MQ` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MQ` が有効になっていることを確認します。
 
 2. [Datadog - AWS Amazon MQ インテグレーション][3]をインストールします。
 
@@ -86,8 +86,8 @@ AWS Amazon MQ インテグレーションには、サービスのチェック機
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_mq
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-mq
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

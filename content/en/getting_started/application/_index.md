@@ -11,7 +11,9 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/datadog-quick-nav-menu/'
     tag: 'Blog'
     text: 'Introducing the Datadog quick nav menu'
-
+  - link: 'https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/'
+    tag: 'Blog'
+    text: 'DRUIDS, the design system that powers Datadog'
 ---
 
 ## Overview

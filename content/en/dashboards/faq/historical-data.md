@@ -16,7 +16,7 @@ If you stop reporting data to Datadog, after a certain period of time metrics, t
 |--------------------------------------|----------|
 | Hosts                                | 2 hours  |
 | Metrics                              | 24 hours |
-| Tags in template variable drop-downs | 30 days  |
+| Tags in template variable drop-downs | 48 hours |
 | Tags in other drop-downs             | 12 hours |
 | APM `env` tags                       | 60 days  |
 
