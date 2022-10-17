@@ -26,7 +26,7 @@ Batch timeout
 : A batch timeout occurs when your batch does not complete within a reasonable time based on the [polling timeout][3] set in your configuration file. 
 
 Execution rule
-: An [execution rule][4] defines the impact of a test failure on a CI/CD pipeline from most to least impactful: `skipped`, `non_blocking`, and `blocking`. These options are weighted and defaults to the most impactful. If your test is configured as `skipped` in the UI and `blocking` in the configuration file, it is skipped during the test run. </br><br> You can set the execution rule in your tests' properties, global configuration file, or an individual test's override file. 
+: An [execution rule][4] defines the impact of a test failure on a CI/CD pipeline from most to least impactful: `skipped`, `non_blocking`, and `blocking`. These options are weighted and default to the most impactful. If your test is configured as `skipped` in the UI and `blocking` in the configuration file, it is skipped during the test run. </br><br> You can set the execution rule in your tests' properties, global configuration file, or an individual test's override file. 
 
 ## Explorer
 

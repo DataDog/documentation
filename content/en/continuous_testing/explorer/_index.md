@@ -1,5 +1,5 @@
 ---
-title: Explorer
+title: Continuous Testing Explorer
 kind: documentation
 description: Examine CI jobs executing Continuous Testing tests.
 aliases: 
@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The [Explorer][1] provides visibility into the CI/CD jobs executing your Continuous Testing tests. 
+The [Continuous Testing Explorer][1] provides visibility into the CI/CD jobs executing your Continuous Testing tests. 
 
 {{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
@@ -33,7 +33,7 @@ You can accomplish the following actions:
 
 ## Explore test batches
 
-The Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
+The Continuous Testing Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 

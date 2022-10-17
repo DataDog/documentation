@@ -1,7 +1,7 @@
 ---
 title: Continuous Testing and CI/CD
 kind: documentation
-description: Run Synthetic tests on-demand or at predefined intervals in your CI/CD pipelines.
+description: Run Continuous Testing tests on-demand or at predefined intervals in your CI/CD pipelines.
 aliases: 
   - /synthetics/ci
   - /synthetics/cicd_testing

@@ -25,9 +25,9 @@ further_reading:
 
 ## Overview
 
-The Continuous Testing tunnel creates short lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic tests on your private applications.  
+The Continuous Testing tunnel creates short-lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic tests on your private applications.  
 
-Datadog recommends using the testing tunnel if you need to launch Continuous Testing tests against local versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can be used to trigger tests on ephemeral cloud environments.
+Datadog recommends using the testing tunnel if you need to launch Continuous Testing tests against local versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can be used to trigger tests on short-lived cloud environments.
 
 ## What is the testing tunnel?
 

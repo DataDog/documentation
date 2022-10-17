@@ -1,7 +1,7 @@
 ---
 title: Continuous Testing
 kind: documentation
-description: With Continuous Testing, use fast, codeless, and reliable testing in your CI/CD pipelines to ship features with confidence.
+description: Customize the number of Continuous Testing tests running in parallel in your CI/CD pipelines to increase your testing coverage.
 disable_sidebar: true
 further_reading:
 - link: 'https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring'
@@ -20,13 +20,13 @@ further_reading:
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashoards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
 
-Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product’s **entire lifecycle**. By offering **code-free**, **reliable end-to-end testing** and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
+Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product’s entire lifecycle. By offering code-free, reliable end-to-end testing and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
 
 ## Test with ease and speed
 
-With automation, you can accelerate application testing and save engineering resources by eliminating the need to build, run, and maintain hand-coded tests. With highly scalable features such as a [codeless web recorder][2], parallel test runs, and built-in multi-location testing, you can save a lot of your QA team's time and effort.
+With scalable features such as a [codeless web recorder][2], parallel test runs, and built-in multi-location testing, you can save your QA teams time and effort.
 
-Thanks to a broad support of diverse protocols, frameworks, and APIs—including gRPC and WebSockets—you can test across every level of your application stack and earlier.
+With support for multiple protocols, frameworks, and APIs—including gRPC and WebSockets—you can test across every level of your application stack.
 
 
 ## Improve test reliability 
@@ -41,15 +41,15 @@ You can use the [Datadog Terraform provider][9] to control test creation and sta
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform allows you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][11]. 
+Performing tests in a unified monitoring platform helps you to quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools— through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][11]. 
 
-Enable developers to "shift left" and implement testing as part of the CI/CD process, which improves efficiency, release velocity, and business agility. Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [Explorer][12].
+Explore browser tests running in a CI pipeline and troubleshoot failing test results by looking at executed jobs in the [Continuous Testing Explorer][12].
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
-Once you have configured some [Synthetic tests][3], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][13] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Explorer][10].
+Once you have configured some [Synthetic tests][3], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][13] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Continuous Testing Explorer][10].
 
 ## Further reading
 
