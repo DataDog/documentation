@@ -193,7 +193,7 @@ If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when
 
 All alerted states are included on the [weekly monitor report][7] even if the monitor is in a downtime.
 
-## AUTOMUTING
+## Auto-muting
 
 Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. Following scenarios are supported:
 
