@@ -71,6 +71,75 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `http.useragent_details.browser.family` | The browser family reported by the User-Agent.    |
 | `http.useragent_details.device.family`  | The device family reported by the User-Agent.     |
 
+<div class="alert alert-warning"><strong>Note</strong>: Starting from October 1st 2022, Datadog backend applies a remapping in order to apply <a href="//tracing/trace_collection/tracing_naming_convention">Span Tags Semantics
+</a> across tracers on all ingested spans. Use tags in the `Remap from` column to drop traces at the Datadog Agent level</div>
+
+
+<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
+#### Network communications
+
+| **Name**                   | **Remap from**                                      |
+|----------------------------|-----------------------------------------------------|
+| `network.host.ip`          | `tcp.local.address` - Node.js                       |
+| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js |
+
+#### HTTP requests
+
+| **Name**                       | **Remap from**                                                                                        |
+|--------------------------------|-------------------------------------------------------------------------------------------------------|
+| `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
+| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.url_details.queryString` | `http.query.string` - Python                                                                          |
+
+#### Database
+
+| **Name**                         | **Remap from**                                                                                                                                                                                                                  |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `db.system`                      | `db.type` - Java, Python, Node.js, Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
+| `db.instance`                    | `mongodb.db` - Python, sql.db - Python                                                                                                                                                                                          |
+| `db.statement`                   | `cassandra.query` - Go<br>`consul.command` - Python<br>`memcached.query` - Python<br>`mongodb.query` - Python, .NET, Go<br>`redis.command` - Python<br>`redis.raw_command` - Python<br>`sql.query` - Python, PHP, Node.js, Java |
+| `db.row_count`                   | `cassandra.row_count` - Python<br>`db.rowcount` - Python, PHP<br>`mongodb.rows` - Python<br>`sql.rows` - Python                                                                                                                 |
+| `db.cassandra.cluster`           | `cassandra.cluster` - Python, Go                                                                                                                                                                                                |
+| `db.cassandra.consistency_level` | `cassandra.consistency_level` - Python, Go                                                                                                                                                                                      |
+| `db.cassandra.table`             | `cassandra.keyspace` - Python, Go                                                                                                                                                                                               |
+| `db.redis.database_index`        | `db.redis.dbIndex` - Java<br>`out.redis_db` - Python, Ruby                                                                                                                                                                      |
+| `db.mongodb.collection`          | `mongodb.collection` - Python, .NET, Ruby, PHP                                                                                                                                                                                  |
+| `db.cosmosdb.container`          | `cosmosdb.container` - .NET                                                                                                                                                                                                     |
+
+#### Message Queue
+
+| **Name**                               | **Remap from**                                                                                             |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `messaging.destination`                | `amqp.destination` - Node.js<br>`amqp.queue` - .NET<br>`msmq.queue.path` - .NET<br>`aws.queue.name` - .NET |
+| `messaging.url`                        | `aws.queue.url` - .NET, Java                                                                               |
+| `messaging.message_id`                 | `server_id` - Go                                                                                           |
+| `messaging.message_payload_size`       | `message.size` - .NET, Java                                                                                |
+| `messaging.operation`                  | `amqp.command` - .NET<br>`msmq.command` - .NET                                                             |
+| `messaging.rabbitmq.routing_key`       | `amqp.routing_key` - Java<br>`amqp.routingKey` - Nodes.js                                                  |
+| `messaging.rabbitmq.delivery_mode`     | `messaging.rabbitmq.exchange` - .NET                                                                       |
+| `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
+| `messaging.msmq.queue.transactional`   | `msmq.queue.transactional` - .NET                                                                          |
+| `messaging.kafka.consumer_group`       | `kafka.group` - Java                                                                                       |
+| `messaging.kafka.tombstone`            | `kafka.tombstone` - .NET<br>`tombstone` - Java                                                             |
+| `messaging.kafka.partition`            | `kafka.partition` - .NET<br>`partition` - Node.js, Go, Java                                                |
+| `messaging.kafka.offset`               | `kafka.offset` - .NET                                                                                      |
+| `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
+
+
+#### Remote procedure calls
+
+| **Name**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `rpc.service`                  | `grpc.method.service` - Python, .NET                                                                    |
+| `rpc.method`                   | `grpc.method.name` - Python, .NET, Go                                                                   |
+| `rpc.grpc.package`             | `grpc.method.package` - Python, .NET, Go                                                                |
+| `rpc.grpc.status_code`         | `grpc.code` - Go<br>`status.code` - Python, .NET, Node.js<br>`grpc.status.code` - Python, .NET, Node.js |
+| `rpc.grpc.kind`                | `grpc.method.kind` - Python, Node.js, Go, .NET                                                          |
+| `rpc.grpc.path`                | `rpc.grpc.path` - Python, Node.js, Go, .NET                                                             |
+| `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js        
+
+
 ### Ignoring based on resources
 
 The **ignore resources** option allows resources to be excluded if the global root span of the trace matches certain criteria. See [Exclude resources from being collected][5]. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of ignore resources are not included in trace metrics.
