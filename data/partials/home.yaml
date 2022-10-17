@@ -70,7 +70,7 @@ nav_sections:
         desc: Ensure uptime, flag regional issues, and test application performance
       - title: Continuous Testing
         link: continuous_testing/
-        icon: synthetics
+        icon: continuous-testing
         desc: Perform codeless integration and end-to-end testing with CI/CD providers 
       - title: RUM & Session Replay
         link: real_user_monitoring/
