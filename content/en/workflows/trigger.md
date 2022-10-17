@@ -1,8 +1,12 @@
 ---
 title: Trigger a workflow
 kind: documentation
+beta: true
 disable_toc: false
 further_reading:
+- link: "/workflows/service_accounts/"
+  tag: "Documentation"
+  text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
@@ -13,6 +17,10 @@ further_reading:
   tag: "Documentation"
   text: "Find out more about Monitors"
 ---
+
+{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+{{< /beta-callout >}}
 
 You can trigger a workflow manually, on a schedule, or using a variety of automated methods such as a Datadog Monitor, or a Security Signal Notification Rule. Before you can trigger a workflow on a schedule, or using automation, you must associate the workflow with a unique service account. For more information on Workflows service accounts, see [Service accounts for Workflows][1].
 
@@ -42,12 +50,8 @@ To run the workflow:
 
 To trigger a workflow from a Monitor:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
+1. Click **Create** to create a service account. For more information, see [Service Accounts for Workflows][1].
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
-1. Add a service account:
-   1. Under **Configure**, add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
-   1. Select roles for your service account.
-   1. (Optional) If required, select permissions for the role.
-      <div class="alert alert-info">For more on roles and permissions, see <a href="https://docs.datadoghq.com/workflows/service_accounts/#service-account-roles-and-permissions">Service account roles and permissions</a>.</div>
 1. Save your Workflow.
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
@@ -66,11 +70,8 @@ You can set up a workflow to trigger every time a Security Signal Notification R
 
 To trigger a workflow from a Notification Rule:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
+1. Click **Create** to create a service account. For more information, see [Service Accounts for Workflows][1].
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
-1. Add a service account:
-   1. Under **Configure**, add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
-   1. Select roles for your service account.
-   1. (Optional) If required, select permissions for the role.
 1. Save your Workflow.
 1. From the [Setup & Configuration][3] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
 1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
@@ -84,10 +85,7 @@ Each time the Notification Rule fires, it triggers a workflow run.
 
 To schedule a workflow run:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **Schedule**.
-1. Add a service account:
-   1. Under **Configure**, add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
-   1. Select roles for your service account.
-   1. (Optional) If required, select permissions for the role.
+1. Click **Create** to create a service account. For more information, see [Service Accounts for Workflows][1].
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
