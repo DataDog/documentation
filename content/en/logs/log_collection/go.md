@@ -49,9 +49,9 @@ func main() {
 }
 ```
 
-You can add tags to any log if you provide a JSON object that you want to see in the log event.
+You can add metas to any log if you provide a JSON object that you want to see in the log event.
 
-These tags can be `hostname`, `username`, `customers`, `metric` or any information that can help you troubleshoot and understand what happens in your Go application.
+These metas can be `hostname`, `username`, `customers`, `metric` or any information that can help you troubleshoot and understand what happens in your Go application.
 
 ```go
 package main
