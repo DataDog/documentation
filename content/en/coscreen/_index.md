@@ -26,7 +26,7 @@ When you join a CoScreen, it is added to your list of _Recent CoScreens_ in the 
 
 Invite collaborators by sharing the link.
 
-You can also add your closest collaborators in the list of _Your Collaborators_ in the main menu. After a collaborator accepts your request, you can see if they are online and available, and call them with a click.
+You can also add your closest collaborators to the list of _Your Collaborators_ in the main menu. After a collaborator accepts your request, you can see if they are online and available and call them with a click.
 
 ### Share windows
 
@@ -36,15 +36,15 @@ You can share application windows in multiple ways.
 
    {{< img src="coscreen/sharewindow.mp4" alt="A 'Share window' tab-shaped button is attached to the top of a window. Clicking on this button highlights the window in purple. The text changes to 'Unshare window.'" width=50% video="true">}}
 
-   Share and unshare windows by clicking on the tab above each window. You can also use the window sharing dialog to select the application window(s) that you want to share with other members of the CoScreen you've joined.
+Share and unshare windows by clicking on the tab above each window. You can also use the window sharing dialog to select the application window(s) that you want to share with other members of the CoScreen you've joined.
 
-   Multiple users can share multiple windows at the same time. Shared windows have a border around them in a color assigned to each CoScreen participant.
+ Multiple users can share multiple windows at the same time. Shared windows have a border around them in a different color assigned to each CoScreen participant.
 
  - **Share all windows on your display**.
  
-   Bring up the window sharing dialog and select the first option, _Entire display_, to share all open windows on this display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
+Open the window sharing dialog and select the first option, _Entire display_, to share all open windows on this display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
 
-Click on the **Share windows** button to bring up the window sharing dialog.
+Click on the **Share windows** button to open the window sharing dialog.
 
 {{< img src="coscreen/share_windows_button.png" alt="A panel of buttons from the CoScreen desktop UI. The 'Share windows' button is highlighted." style="width:50%;">}}
 
@@ -79,18 +79,18 @@ To configure this integration, install the [CoScreen Chrome extension][5] and si
 
  - **Network security**
 
-	CoScreen uses a P2P (peer-to-peer) connection whenever you and another participant can connect directly (for example, when no corporate firewalls or proxies are between the two of you). None of your audio, video, window, or control input feeds touch CoScreen's servers. Connections are end-to-end encrypted using DTLS-SRTP. If there are three or more users in a session, the connection is over a video bridge.
+CoScreen uses a P2P (peer-to-peer) connection whenever you and another participant can connect directly (for example, when there are no corporate firewalls or proxies between you). None of your audio, video, window, or control input feeds touch CoScreen's servers. Connections are end-to-end encrypted using DTLS-SRTP. If there are three or more users in a session, the connection is over a video bridge.
 
  - **Video infrastructure**
 
-   Participants collaborate using an enterprise-grade, HIPAA-compatible video infrastructure with hundreds of servers that run the Jitsi framework. All video data is encrypted using DTLS-SRTP during transmission.
+Participants collaborate using an enterprise-grade, HIPAA-compatible video infrastructure with hundreds of servers that run the Jitsi framework. All video data is encrypted using DTLS-SRTP during transmission.
 
 
  - **Data storage**
 
-   CoScreen does not record or store any shared information (e.g. shared windows, audio, video or remote control input).
+CoScreen does not record or store any shared information (for example, shared windows, audio, video or remote control input).
 
-   CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][6] for more details.
+CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][6] for more details.
 
 For all the details on how CoScreen enables secure collaboration, read the [CoScreen Security Whitepaper][7].
 
