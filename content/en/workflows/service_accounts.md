@@ -29,7 +29,7 @@ Service accounts use the email address associated with your Datadog account and 
 ## View service account details
 
 To view a service account's details:
-1. On your workflow canvas, click on the automated or scheduled trigger.
+1. On your workflow canvas, click on the automated trigger.
 1. Next to the service account, click **View**.
 
 {{< img src="workflows/service-account-details1.png" alt="Service account details" style="width:60%;" >}}
