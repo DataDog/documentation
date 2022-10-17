@@ -193,6 +193,14 @@ If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when
 
 All alerted states are included on the [weekly monitor report][7] even if the monitor is in a downtime.
 
+## AUTOMUTING
+
+Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. Following scenarios are supported:
+
+- Auto-muting for manual shutdown of AWS EC2 instances and instance termination by AWS autoscaling based on host statuses from the CloudWatch API, more information [here][8].
+- Auto-muting for manual shutdown of Google Compute Engine (GCE) instances and instance termination triggered by GCE autoscaling based on host statuses from the GCE API, more information [here][9].
+- Auto-muting for shutdown or termination of Azure VMs, whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the Azure Resource Health API, more information [here][10].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -204,3 +212,6 @@ All alerted states are included on the [weekly monitor report][7] even if the mo
 [5]: /events/explorer
 [6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /account_management/#preferences
+[8]: /integrations/amazon_ec2/#ec2-automuting
+[10]: /integrations/google_compute_engine/#gce-automuting
+[9]: /integrations/azure_vm/#automuting-monitors
