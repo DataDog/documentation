@@ -61,7 +61,26 @@ The query returns a series of points, but a single value is needed to compare to
 
 ### Evaluation window
 
-Monitors are evaluated at a certain frequency, looking back at the last `5 minutes`, `15 minutes`, `1 hour`, and more.
+A monitor can be evaluated using cumulative time windows or rolling time windows. Cumulative time windows are best suited for questions that require historical context, such as "What's the sum of all the data available up to this point in time?" Rolling time windows are best suited for answering questions that do not require this context, such as "What's the average of the last _N_ data points?" 
+
+The figure below illustrates the difference between cumulative and rolling time windows.
+
+{{< img src="/monitors/create/rolling_vs_expanding.png" alt="Two graphs showing cumulative vs. rolling time windows. Cumulative time windows continue to expand as time goes on. Rolling time windows cover particular moments in time." style="width:100%;">}}
+
+#### Rolling time windows
+
+A rolling time window has a fixed size and moves its starting point over time. Monitors support looking back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom specified time window.
+
+#### Cumulative time windows
+A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
+
+- `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
+- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota](https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota) by using the `current day` time window and letting it start at 2:00pm UTC.
+- `Current month`: Looks back at the current month starting on the first of the month at midnight UTC. This option represents a month-to-date time window and is only available for metric monitors.
+
+{{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
+
+A cumulative time window is reset once its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am, etc.
 
 ### Evaluation frequency
 

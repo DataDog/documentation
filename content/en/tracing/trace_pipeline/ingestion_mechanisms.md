@@ -80,6 +80,8 @@ java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.j
 export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
 ```
 
+The service name value is case sensitive and must match the case of the actual service name.
+
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
 Read more about sampling controls in the [Java tracing library documentation][1].
@@ -141,14 +143,15 @@ You can also set by-service sampling rates. For instance, to send 50% of the tra
 
 ```javascript
 tracer.init({
-  ingestion:
-    sampler: {
-      sampleRate: 0.1,
-      rules: [
-        { sampleRate: 0.5, service: 'my-service' }
-      ]
+    ingestion: {
+        sampler: {
+            sampleRate: 0.1,
+            rules: [
+                { sampleRate: 0.5, service: 'my-service' }
+            ]
+        }
     }
-  }
+});
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.

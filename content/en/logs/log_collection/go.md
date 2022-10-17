@@ -30,7 +30,7 @@ Datadog strongly encourages setting up your logging library to produce your logs
 
 ## Configure your logger
 
-For a classic Go configuration, open a `main.go` file and paste the following code:
+For a classic Go configuration, open a `main.go` file and paste in the following code:
 
 ```go
 package main
@@ -67,6 +67,7 @@ func main() {
 
     // log an event with logrus
     log.WithFields(log.Fields{"string": "foo", "int": 1, "float": 1.1 }).Info("My first event from golang to stdout")
+    
   // for metadata, a common pattern is to reuse fields between logging statements by reusing
   contextualizedLog := log.WithFields(log.Fields{
     "hostname": "staging-1",
@@ -78,24 +79,32 @@ func main() {
 }
 ```
 
-### Connect logs and traces
-
-If APM is enabled for this application, you can improve the correlation between application logs and traces by [following APM Go logging instructions][3] to automatically add trace and span IDs in your logs.
-
 ## Configure your Datadog Agent
 
-Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
+Once [log collection is enabled][3], set up [custom log collection][4] to tail your log files and send new logs to Datadog.
 
-```yaml
-##Log section
-logs:
+1. Create a `go.d/` folder in the `conf.d/` [Agent configuration directory][5].
+2. Create a `conf.yaml` file in `go.d/` with the following content:
 
-  - type: file
-    path: "/path/to/your/go/log.log"
-    service: go
-    source: go
-    sourcecategory: sourcecode
-```
+    ```yaml
+    ##Log section
+    logs:
+
+      - type: file
+        path: "/path/to/your/go/log.log"
+        service: go
+        source: go
+        sourcecategory: sourcecode
+    ```
+
+3. [Restart the Agent][6].
+4. Run the [Agent’s status subcommand][7] and look for `go` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+
+If logs are in JSON format, Datadog automatically [parses the log messages][8] to extract log attributes. Use the [Log Explorer][9] to view and troubleshoot your logs.
+
+## Connect logs and traces
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by following the [APM Go logging documentation][10] to automatically add trace and span IDs in your logs.
 
 ## Best practices
 
@@ -110,4 +119,11 @@ logs:
 
 [1]: https://github.com/sirupsen/logrus
 [2]: /logs/log_configuration/parsing
-[3]: /tracing/other_telemetry/connect_logs_and_traces/go/
+[3]: /agent/logs/?tab=tailfiles#activate-log-collection
+[4]: /agent/logs/?tab=tailfiles#custom-log-collection
+[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[8]: /logs/log_configuration/parsing/?tab=matchers
+[9]: /logs/explorer/#overview
+[10]: /tracing/other_telemetry/connect_logs_and_traces/go/

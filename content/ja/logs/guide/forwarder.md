@@ -292,7 +292,7 @@ Datadog Forwarder は Datadog によって署名されています。Forwarder �
 : Datadog Forwarder Lambda 関数のタイムアウト
 
 `ReservedConcurrency`
-: Datadog Forwarder Lambda 関数用に予約されている同時実行数
+: Datadog Forwarder Lambda 関数用に予約されている同時実行数。空の場合、予約されていないアカウントの同時実行数を使用します。
 
 `LogRetentionInDays`
 : Datadog Forwarder Lambda 関数により生成されたログの CloudWatch ログ保存期間
