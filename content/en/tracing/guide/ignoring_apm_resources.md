@@ -74,8 +74,6 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 <div class="alert alert-warning"><strong>Note</strong>: Starting from October 1st 2022, Datadog backend applies a remapping in order to apply <a href="//tracing/trace_collection/tracing_naming_convention">Span Tags Semantics
 </a> across tracers on all ingested spans. Use tags in the `Remap from` column to drop traces at the Datadog Agent level</div>
 
-
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 #### Network communications
 
 | **Name**                   | **Remap from**                                      |
