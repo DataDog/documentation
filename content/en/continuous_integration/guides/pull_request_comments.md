@@ -27,13 +27,13 @@ In the UI, you can do this from the settings page or the commit or branch page.
 1. Go to the [CI Test Service Settings page][3] and search for the repository or test service.
 2. Toggle the `GitHub Comments` column for the desired service.
 
-{{< img src="ci/enable-settings-github-comments.png" alt="he Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
+{{< img src="ci/enable-settings-github-comments.png" alt="The Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
 
 #### Commit or branch page
 
 1. Go to the test service commit or branch page where you would like to enable GitHub comments.
 2. Click on the settings icon at the top right.
-3. Select `Enable GitHub Comments` so that comments display on new pull requests. Note this change takes a few minutes.
+3. Select `Enable GitHub Comments` so that comments display on new pull requests. Note that this change takes a few minutes.
 
 {{< img src="ci/enable-github-comments.png" alt="Enable GitHub comments dropdown" style="width:100%;">}}
 
