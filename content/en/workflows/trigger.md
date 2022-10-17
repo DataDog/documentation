@@ -46,7 +46,7 @@ To trigger a workflow from a Monitor:
 1. Add a service account:
    1. Under **Configure**, add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
    1. Select roles for your service account.
-   1. (Optional) If requires, select permissions for the role.
+   1. (Optional) If required, select permissions for the role.
       <div class="alert alert-info">For more on roles and permissions, see <a href="https://docs.datadoghq.com/workflows/service_accounts/#service-account-roles-and-permissions">Service account roles and permissions</a>.</div>
 1. Save your Workflow.
 1. Navigate to the [**Monitors** page][2] in Datadog.
@@ -70,7 +70,7 @@ To trigger a workflow from a Notification Rule:
 1. Add a service account:
    1. Under **Configure**, add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
    1. Select roles for your service account.
-   1. (Optional) If requires, select permissions for the role.
+   1. (Optional) If required, select permissions for the role.
 1. Save your Workflow.
 1. From the [Setup & Configuration][3] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
 1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
@@ -87,7 +87,7 @@ To schedule a workflow run:
 1. Add a service account:
    1. Under **Configure**, add a service account next to **@worklow-** to dynamically create a service account and associate it with the workflow.
    1. Select roles for your service account.
-   1. (Optional) If requires, select permissions for the role.
+   1. (Optional) If required, select permissions for the role.
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
