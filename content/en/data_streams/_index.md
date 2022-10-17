@@ -3,6 +3,8 @@ title: Data Streams Monitoring
 kind: documentation
 ---
 
+{{< img src="data_streams/data-streams-hero.jpeg" alt="Datadog Data Streams Monitoring"  style="width:100%;" >}}
+
 ## Overview
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
