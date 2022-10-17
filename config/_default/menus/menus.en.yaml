@@ -2778,7 +2778,7 @@ main:
     weight: 12
   - name: Continuous Testing
     url: continuous_testing/
-    pre: synthetics
+    pre: continuous-testing
     identifier: continuous_testing
     parent: ux_monitoring_heading
     weight: 200000
