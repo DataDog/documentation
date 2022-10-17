@@ -11,7 +11,7 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSdz9w6cIC-rhHz5kU-i2aTjVa2H1lH54lM7rhjPx-8viNfdDw/viewform?usp=pp_url" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-Intelligent Test Runner for CI Visibility is in beta. You can request access by completing this form.
+Intelligent Test Runner for CI Visibility is in private beta. You can request access by completing this form.
 {{< /beta-callout >}}
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
@@ -25,6 +25,7 @@ By only running tests on relevant code, when tests do fail it's more likely a le
 
 ## Setup
 
+Prior to setting up Intelligent Test Runner, you must have finished setting up Test Visibility for your particular language.
 
 ### Javascript
 
