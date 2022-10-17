@@ -3,7 +3,7 @@ title: Data Streams Monitoring
 kind: documentation
 ---
 
-{{< img src="data_streams/data-streams-hero.jpeg" alt="Datadog Data Streams Monitoring"  style="width:100%;" >}}
+{{< img src="data_streams/data_streams_hero.jpeg" alt="Datadog Data Streams Monitoring"  style="width:100%;" >}}
 
 ## Overview
 
