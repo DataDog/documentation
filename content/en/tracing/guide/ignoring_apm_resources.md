@@ -72,7 +72,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `http.useragent_details.device.family`  | The device family reported by the User-Agent.     |
 
 <div class="alert alert-warning"><strong>Note</strong>: Starting from October 1st 2022, Datadog backend applies a remapping in order to apply <a href="/tracing/trace_collection/tracing_naming_convention">Span Tags Semantics
-</a> across tracers on all ingested spans. If you want to drop spans based on tags at the Datadog Agent level, use tags in the `Remap from` column.</div>
+</a> across tracers on all ingested spans. If you want to drop spans based on tags at the Datadog Agent level, use tags in the <strong>Remap from</strong> column.</div>
 
 #### Network communications
 
