@@ -87,7 +87,17 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
   The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39.
 {{< /beta-callout >}}
 
-If you've set the `inventories_configuration_enabled` option to `true` in your [Agent configuration file][6], you can click **Agent Configuration** to access a read-only version of the Agent's configuration.
+The Agent can send its own configuration to Datadog to be displayed in the `Agent Configuration` section of the host detail panel.
+
+The Agent configuration is scrubbed of any sensitive information and only contains configuration you've set using the configuration file or environment variables. The configuration changes are updated every 10 minutes.
+
+This feature is disabled by default. To enable it, add the following settings to your [Agent configuration file][6]:
+
+```yaml
+inventories_configuration_enabled: true
+```
+
+Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED=true` environment variable to enable this feature.
 
 {{< img src="infrastructure/index/infra-list-config3.png" alt="The Agent configuration view" style="width:100%;">}}
 
