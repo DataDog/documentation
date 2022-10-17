@@ -6,7 +6,7 @@ further_reading:
 - link: "/account_management/org_settings/service_accounts/"
   tag: "Documentation"
   text: "Learn more about Datadog service accounts"
-- link: "/workflows/authentication/"
+- link: "/workflows/setup/"
   tag: "Documentation"
   text: "Learn how to create Connections for the actions in your workflow."
 ---
@@ -18,7 +18,7 @@ To add an automated trigger to a workflow, the workflow must have an associated 
 
 To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][1].
 
-<div class="alert alert-info">The service account you create allows a workflow to be triggered automatically. However, individual actions in the workflow might still require <bold>Connections</bold>. For more information, see <a href="/workflows/authentication/">Authentication</a>.</div>
+<div class="alert alert-info">The service account you create allows a workflow to be triggered automatically. However, individual actions in the workflow might still require <bold>Connections</bold>. For more information, see <a href="/workflows/setup/">Authentication</a>.</div>
 
 ## Associate a service account with a workflow
 
@@ -32,7 +32,7 @@ To view a service account's details:
 1. On your workflow canvas, click on the automated or scheduled trigger.
 1. Next to the service account, click **View**.
 
-{{< img src="workflows/service-account-details1.png" alt="Service account details" style="width:70%;" >}}
+{{< img src="workflows/service-account-details1.png" alt="Service account details" style="width:60%;" >}}
 
 ## Further reading
 
