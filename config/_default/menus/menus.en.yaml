@@ -2744,124 +2744,135 @@ main:
     url: synthetics/search/
     parent: synthetics
     weight: 5
-  - name: CI/CD Integrations
-    url: /synthetics/cicd_integrations
-    parent: synthetics
-    identifier: synthetics_cicd_integrations
-    weight: 6
-  - name: Configuration
-    url: /synthetics/cicd_integrations/configuration
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_configuration
-    weight: 601
-  - name: Azure DevOps Extension
-    url: /synthetics/cicd_integrations/azure_devops_extension
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_azure_devops_extension
-    weight: 602
-  - name: CircleCI Orb
-    url: /synthetics/cicd_integrations/circleci_orb
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_circleci_orb
-    weight: 603
-  - name: GitHub Actions
-    url: /synthetics/cicd_integrations/github_actions
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_github_actions
-    weight: 604
-  - name: GitLab
-    url: /synthetics/cicd_integrations/gitlab
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_gitlab
-    weight: 605
-  - name: Jenkins
-    url: /synthetics/cicd_integrations/jenkins
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_jenkins
-    weight: 606
-  - name: Testing Tunnel
-    url: /synthetics/testing_tunnel
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_testing_tunnel
-    weight: 607
-  - name: Troubleshooting
-    url: /synthetics/cicd_integrations/troubleshooting
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_troubleshooting
-    weight: 608
-  - name: CI Results Explorer
-    url: /synthetics/explorer
-    parent: synthetics
-    identifier: synthetics_explorer
-    weight: 7
-  - name: Search Test Batches
-    url: /synthetics/explorer/search
-    parent: synthetics_explorer
-    identifier: synthetics_explorer_search
-    weight: 701
-  - name: Search Syntax
-    url: /synthetics/explorer/search_syntax
-    parent: synthetics_explorer
-    identifier: synthetics_explorer_search_syntax
-    weight: 701
   - name: Dashboards
     url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
-    weight: 8
+    weight: 6
   - name: API Test
     url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
-    weight: 801
+    weight: 601
   - name: Browser Test
     url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
-    weight: 802
+    weight: 602
   - name: Testing Coverage
     url: synthetics/dashboards/testing_coverage
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_testing_coverage
-    weight: 803
+    weight: 603
   - name: Test Summary
     url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 804
+    weight: 604
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 9
+    weight: 7
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 10
+    weight: 8
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 11
+    weight: 9
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 12
+    weight: 10
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 13
+    weight: 11
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 14
+    weight: 12
+  - name: Continuous Testing
+    url: continuous_testing/
+    pre: continuous-testing
+    identifier: continuous_testing
+    parent: ux_monitoring_heading
+    weight: 200000
+  - name: CI/CD Integrations
+    url: continuous_testing/cicd_integrations
+    parent: continuous_testing
+    identifier: continuous_testing_cicd_integrations
+    weight: 1
+  - name: Configuration
+    url: /continuous_testing/cicd_integrations/configuration
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_configuration
+    weight: 101
+  - name: Azure DevOps Extension
+    url: /continuous_testing/cicd_integrations/azure_devops_extension
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_azure_devops_extension
+    weight: 102
+  - name: CircleCI Orb
+    url: /continuous_testing/cicd_integrations/circleci_orb
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_circleci_orb
+    weight: 103
+  - name: GitHub Actions
+    url: /continuous_testing/cicd_integrations/github_actions
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_github_actions
+    weight: 104
+  - name: GitLab
+    url: /continuous_testing/cicd_integrations/gitlab
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_gitlab
+    weight: 105
+  - name: Jenkins
+    url: /continuous_testing/cicd_integrations/jenkins
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_jenkins
+    weight: 106
+  - name: Settings
+    url: /continuous_testing/settings
+    parent: continuous_testing
+    identifier: continuous_testing_settings
+    weight: 2
+  - name: Testing Tunnel
+    url: /continuous_testing/testing_tunnel
+    parent: continuous_testing
+    identifier: continuous_testing_testing_tunnel
+    weight: 3
+  - name: Explorer
+    url: continuous_testing/explorer/
+    parent: continuous_testing
+    identifier: continuous_testing_explorer
+    weight: 4
+  - name: Search Test Batches
+    url: continuous_testing/explorer/search/
+    parent: continuous_testing_explorer
+    identifier: continuous_testing_explorer_search
+    weight: 401
+  - name: Search Syntax
+    url: continuous_testing/explorer/search_syntax/
+    parent: continuous_testing_explorer
+    identifier: continuous_testing_explorer_search_syntax
+    weight: 402
+  - name: Troubleshooting
+    url: continuous_testing/troubleshooting/
+    parent: continuous_testing
+    identifier: continuous_testing_troubleshooting
+    weight: 5
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 155000
+    weight: 210000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
@@ -3197,7 +3208,7 @@ main:
     pre: network
     identifier: nm_parent
     parent: infrastructure_heading
-    weight: 200000
+    weight: 220000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent

@@ -1,19 +1,21 @@
 ---
 title: Jenkins
 kind: documentation
-description: Configure your Jenkins instance to run Synthetic tests in your CI/CD pipelines.
+description: Configure your Jenkins instance to run Continuous Testing tests in your CI/CD pipelines.
+aliases:
+  - /synthetics/cicd_integrations/jenkins
 further_reading:
-- link: "/continuous_integration/setup_pipelines/jenkins/"
-  tag: "Documentation"
-  text: "Set up Tracing on a Jenkins Pipeline"
 - link: "https://www.datadoghq.com/blog/jenkins-testing/"
   tag: "Blog"
   text: "Run Datadog Synthetic tests in your Jenkins pipelines"
+- link: "/continuous_integration/setup_pipelines/jenkins/"
+  tag: "Documentation"
+  text: "Set up Tracing on a Jenkins pipeline"
 ---
  
 ## Overview
  
-Add Synthetic tests to your Jenkins environment.
+Add Continuous Testing tests to your Jenkins environment.
  
 Datadog recommends discussing with your SRE and Infrastructure teams to determine a solution that models your existing Jenkins architecture and customizes an installation that fits your business requirements.
  
@@ -44,7 +46,7 @@ Install `@datadog/datadog-ci` globally for all relevant Node.js installations.
  
 #### Tags
  
-To run Synthetic tests with tags in a Jenkins Declarative pipeline:
+To run Continuous Testing tests with tags in a Jenkins Declarative pipeline:
  
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
@@ -67,7 +69,7 @@ pipeline {
  
 #### Custom test file
  
-To run Synthetic tests with a custom test file in a Jenkins Declarative pipeline:
+To run Continuous Testing tests with a custom test file in a Jenkins Declarative pipeline:
  
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
@@ -93,12 +95,12 @@ You can expect the following output:
 
 {{< img src="synthetics/cicd_integrations/jenkins/example-test-run.png" alt="Example Test Run in Jenkins" style="width:80%;">}}
 
-## Further Reading
+## Further reading
  
 {{< partial name="whats-next/whats-next.html" >}}
  
 [1]: https://www.jenkins.io/doc/book/pipeline/docker/#using-docker-with-pipeline
 [2]: https://plugins.jenkins.io/config-file-provider/
 [3]: https://www.jenkins.io/doc/book/using/using-credentials/#adding-new-global-credentials
-[4]: /synthetics/cicd_integrations/configuration#configure-tests
+[4]: /continuous_testing/cicd_integrations/configuration#configure-tests
 [5]: /continuous_integration/setup_pipelines/jenkins/

@@ -33,14 +33,15 @@ On the [Synthetic Monitoring Settings page][1], you can access and control the f
 * [Global Variables](#global-variables)
 * [Default Settings](#default-settings)
 * [Integration Settings](#integration-settings)
+* [Continuous Testing Settings][2]
 
 ## Private locations
 
-For more information, see [Run Synthetic Tests from Private Locations][2].
+For more information, see [Run Synthetic Tests from Private Locations][3].
 
 ## Global variables
 
-Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][3] and [multistep API tests][4] as well as [browser tests][5] of your test suite. To create a global variable, go to the [Global Variables][6] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
+Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4] and [multistep API tests][5] as well as [browser tests][6] of your test suite. To create a global variable, go to the [Global Variables][7] tab in the **Settings** page, and click **New Global Variable** on the upper right corner.
 
 Choose the type of variable you want to create:
 
@@ -125,7 +126,7 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][11] c
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][12] on their accounts. If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
+Access restriction is available for customers using [custom roles][11] on their accounts. If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
@@ -143,13 +144,13 @@ Tag enforcement is an advanced feature included in the Enterprise plan. For all 
 
 Allow selected tags on your Synthetics tests to be enforced by clicking **Enforce tags for usage attributions on all tests**. 
 
-You can break down cost and usage attributes by services, applications, or teams. Usage attribution tags can take up to fifteen minutes to propagate. For more information, see [Usage Attribution][14].
+You can break down cost and usage attributes by services, applications, or teams. Usage attribution tags can take up to fifteen minutes to propagate. For more information, see [Usage Attribution][13].
 
 When you are done enforcing tags, click **Save Enforced Tags**.
 
 ### Default locations
 
-Choose the default locations for your [API test][3], [multistep API test][4], or [browser test][5] details. 
+Choose the default locations for your [API test][4], [multistep API test][5], or [browser test][6] details. 
 
 Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
@@ -157,7 +158,7 @@ When you are done selecting locations, click **Save Default Locations**.
 
 ### Default browsers and devices
 
-Choose the default browser and device types for your [browser test][5] details.
+Choose the default browser and device types for your [browser test][6] details.
 
 Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
 
@@ -167,7 +168,7 @@ When you are done selecting browsers and devices, click **Save Default Browsers 
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Integration settings
 
@@ -189,30 +190,29 @@ To allow Datadog to collect RUM data from your test runs, click **Enable Synthet
 
 Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
 
-For more information, see [Explore RUM & Session Replay][15].
+For more information, see [Explore RUM & Session Replay][14].
 
 ### Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Integration Settings** page. To get access to the **Integration Settings** page, upgrade your user to one of those two [default roles][11]. 
 
-If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/settings
-[2]: /synthetics/private_locations/
-[3]: /synthetics/api_tests/
-[4]: /synthetics/multistep/
-[5]: /synthetics/browser_tests/
-[6]: https://app.datadoghq.com/synthetics/settings/variables
-[7]: /synthetics/api_tests/http_tests?tab=requestoptions#use-variables
-[8]: /synthetics/multistep?tab=requestoptions#use-variables
-[9]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
-[10]: /synthetics/browser_tests/actions#use-variables
+[2]: /continuous_testing/settings/
+[3]: /synthetics/private_locations/
+[4]: /synthetics/api_tests/
+[5]: /synthetics/multistep/
+[6]: /synthetics/browser_tests/
+[7]: https://app.datadoghq.com/synthetics/settings/variables
+[8]: /synthetics/api_tests/http_tests?tab=requestoptions#use-variables
+[9]: /synthetics/multistep?tab=requestoptions#use-variables
+[10]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[12]: /account_management/rbac/#create-a-custom-role
-[13]: /account_management/rbac/?tab=datadogapplication#custom-role
-[14]: /account_management/billing/usage_attribution
-[15]: /synthetics/guide/explore-rum-through-synthetics/
+[12]: /account_management/rbac/?tab=datadogapplication#custom-role
+[13]: /account_management/billing/usage_attribution
+[14]: /synthetics/guide/explore-rum-through-synthetics/
