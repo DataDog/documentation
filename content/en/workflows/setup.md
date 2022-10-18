@@ -38,7 +38,7 @@ Use custom connections to authenticate [generic actions][3] or any action for wh
 
 ### Create custom connection
 
-1. In the left navigation, go to **Integrations** -> **Workflows** to access the [Workflows list][3].
+1. In the left navigation, go to **Integrations** -> **Workflows** to access the [Workflows list][4].
 1. Click **Connections** in the upper right.
 1. Select **New Connection**. A dialog box appears.
 1. Choose an integration schema. The **Custom** option allows you to authenticate using a token or username/password combination. The other options use authentication schemas associated with the integration.
@@ -60,7 +60,7 @@ Resolver
 Editor
 : Can edit, resolve, and view
 
-1. Navigate to the [Workflows list][3].
+1. Navigate to the [Workflows list][4].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
@@ -72,7 +72,7 @@ Editor
 
 ### Edit connection
 
-1. Navigate to the [Workflows list][3].
+1. Navigate to the [Workflows list][4].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection you would like to edit. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the pencil (**Edit**) icon. A dialog box appears.
@@ -81,7 +81,7 @@ Editor
 
 ### Delete connection
 
-1. Navigate to the [Workflows list][3].
+1. Navigate to the [Workflows list][4].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection you would like to delete. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the trash can (**Delete**) icon. "Are you sure?" text appears.
@@ -91,7 +91,7 @@ Editor
 
 Whether you configured credentials in the integration tile or created a custom connection, Workflows makes your credentials available for each workflow action. To add credentials to an action, follow the steps below:
 
-1. Navigate to the [Workflows list][3].
+1. Navigate to the [Workflows list][4].
 1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
 1. In the workflow visualization, click the action to which you need to add a credential.
 1. The right side panel populates with the action details.
@@ -104,4 +104,5 @@ Whether you configured credentials in the integration tile or created a custom c
 
 [1]: /workflows/actions_catalog/
 [2]: /integrations/
-[3]: https://app.datadoghq.com/workflow
+[3]: /workflows/actions_catalog/generic_actions/
+[4]: https://app.datadoghq.com/workflow
