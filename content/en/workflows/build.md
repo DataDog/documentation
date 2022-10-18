@@ -2,6 +2,7 @@
 title: Build Workflows
 kind: documentation
 disable_toc: false
+is_beta: true
 further_reading:
 - link: "/workflows/actions_catalog"
   tag: "Documentation"

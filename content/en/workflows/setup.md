@@ -2,6 +2,7 @@
 title: Authentication
 kind: documentation
 disable_toc: false
+is_beta: true
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"

@@ -2,7 +2,7 @@
 title: Service Accounts for Workflows
 kind: Documentation
 disable_toc: false
-beta: true
+is_beta: true
 further_reading:
 - link: "/account_management/org_settings/service_accounts/"
   tag: "Documentation"

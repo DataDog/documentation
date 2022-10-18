@@ -1,7 +1,7 @@
 ---
 title: Trigger a workflow
 kind: documentation
-beta: true
+is_beta: true
 disable_toc: false
 further_reading:
 - link: "/workflows/service_accounts/"
