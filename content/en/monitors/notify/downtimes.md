@@ -195,11 +195,11 @@ All alerted states are included on the [weekly monitor report][7] even if the mo
 
 ## Auto-muting
 
-Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. Following scenarios are supported:
+Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. The following scenarios are supported:
 
-- Auto-muting for manual shutdown of AWS EC2 instances and instance termination by AWS autoscaling based on host statuses from the CloudWatch API, more information [here][8].
-- Auto-muting for manual shutdown of Google Compute Engine (GCE) instances and instance termination triggered by GCE autoscaling based on host statuses from the GCE API, more information [here][9].
-- Auto-muting for shutdown or termination of Azure VMs, whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the Azure Resource Health API, more information [here][10].
+- Auto-muting for manual shutdown of [AWS EC2 instances][8] and instance termination by AWS autoscaling based on host statuses from the CloudWatch API.
+- Auto-muting for manual shutdown of [Google Compute Engine (GCE)][10] instances and instance termination triggered by GCE autoscaling based on host statuses from the GCE API.
+- Auto-muting for shutdown or termination of [Azure VMs][9], whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the Azure Resource Health API.
 
 ## Further Reading
 
