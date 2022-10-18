@@ -1,7 +1,9 @@
 ---
 title: GitLab
 kind: documentation
-description: Configure your GitLab instance to run Synthetic tests in your CI/CD pipelines.
+description: Configure your GitLab instance to run Continuous Testing tests in your CI/CD pipelines.
+aliases:
+  - /synthetics/cicd_integrations/gitlab
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
@@ -13,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Run Synthetic tests in your [GitLab][1] pipelines, block deployments, and trigger rollbacks to ensure your code is added in production when your essential business workflows are functioning as expected.
+Run Continuous Testing tests in your [GitLab][1] pipelines, block deployments, and trigger rollbacks to ensure your code is added in production when your essential business workflows are functioning as expected.
 
-To integrate Synthetic tests with a [GitLab pipeline][2], you can use the [datadog-ci npm package][3].
+To integrate Continuous Testing tests with a [GitLab pipeline][2], you can use the [datadog-ci npm package][3].
 
 ## Setup
 

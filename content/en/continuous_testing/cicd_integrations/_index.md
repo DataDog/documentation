@@ -1,10 +1,11 @@
 ---
-title: Synthetics and CI/CD
+title: Continuous Testing and CI/CD
 kind: documentation
-description: Run Synthetic tests on-demand or at predefined intervals in your CI/CD pipelines.
+description: Run Continuous Testing tests on-demand or at predefined intervals in your CI/CD pipelines.
 aliases: 
   - /synthetics/ci
   - /synthetics/cicd_testing
+  - /synthetics/cicd_integrations
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -27,13 +28,13 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">This page is about running Synthetic tests in your continuous integration (CI) pipelines. If you want to bring your CI metrics and data into Datadog dashboards, see the <a href="/continuous_integration/" target="_blank">Continuous Integration Visibility</a> section.</div>
+<div class="alert alert-info">This page is about running Continuous Testing tests in your continuous integration (CI) and continuous delivery (CD) pipelines. If you want to bring your CI/CD metrics and data into Datadog dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility</a> section.</div>
 
 ## Overview
 
-In addition to running tests at predefined intervals, you can run Datadog Synthetic tests on-demand by using the `@datadog/datadog-ci` package or the API. Run Datadog Synthetic tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
+In addition to running tests at predefined intervals, you can reuse your Datadog Synthetic tests and run them on-demand using the `@datadog/datadog-ci` package or the API. Run Datadog Continuous Testing tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
 
-Use Synthetics and CI/CD to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
+Use Continuous Testing and CI/CD to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes, or a new release is freshly cut. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
 
 This functionality reduces time spent fixing issues in production by proactively catching bugs and regressions earlier in the process, allowing your engineering teams to focus on non-urgent work instead. 
 
@@ -41,7 +42,7 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 
 ## Integrations
 
-{{< whatsnext desc="With Synthetics and CI/CD, you can run Synthetic tests in any CI platform provider of choice. See the documentation for information about the following integrations:" >}}
+{{< whatsnext desc="With Continuous Testing and CI/CD, you can run Continuous Testing tests in any CI platform provider of choice. See the documentation for information about the following integrations:" >}}
     {{< nextlink href="synthetics/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
@@ -51,13 +52,9 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 
 ## Use the CLI
 
-The [`@datadog/datadog-ci` package][1] allows you to run Synthetics tests directly within your CI/CD pipeline.
+The [`@datadog/datadog-ci` package][1] allows you to run Continuous Testing tests directly within your CI/CD pipeline. To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
 
-To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
-
-You can also trigger tests by searching with tags. For example: `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`.
-
-**Note:** This command works as an argument. Do not use this in your configuration files.
+You can trigger tests by searching with tags. For example, use `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`. This command works as an argument. Do not use this in your configuration files.
 
 ## Use the API
 
@@ -103,7 +100,7 @@ For more information, see the [Synthetics API endpoint documentation][5].
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /synthetics/cicd_integrations/configuration
+[3]: /continuous_testing/cicd_integrations/configuration
 [4]: /api/latest/synthetics/#trigger-tests-from-cicd-pipelines
 [5]: /api/latest/synthetics/#get-details-of-batch
-[6]: /synthetics/cicd_integrations/configuration#configure-tests
+[6]: /continuous_testing/cicd_integrations/configuration#configure-tests
