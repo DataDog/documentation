@@ -10,8 +10,8 @@ further_reading:
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
 ---
-{{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSdz9w6cIC-rhHz5kU-i2aTjVa2H1lH54lM7rhjPx-8viNfdDw/viewform?usp=pp_url" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-Intelligent Test Runner for CI Visibility is in private beta. You can request access by completing this form.
+{{< beta-callout url="https://app.datadoghq.com/ci/getting-started" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+Intelligent Test Runner for CI Visibility is in private beta. You can request access by completing the form on the CI Visibility **Getting Started** page.
 {{< /beta-callout >}}
 
 ## Overview
