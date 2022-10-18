@@ -21,13 +21,13 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and Java libraries:
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Java libraries:
 * [Datadog Agent v7.34.0+][1]
 * [APM enabled with the Java Agent v0.105+][2]
 
 ### Installation
 
-Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to true on services sending messages to (or consuming messages from) Kafka or RabbitMQ.
+Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to `true` on services sending messages to (or consuming messages from) Kafka or RabbitMQ.
 
 For example:
 ```yaml
@@ -41,22 +41,22 @@ As an alternative, you can instead set the system property `-Ddd.data.streams.en
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
 ```
 
+
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and .NET libraries:
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and .NET libraries:
 * [Datadog Agent v7.34.0+][1]
 * .NET Tracer v2.17.0+ ([.NET Core][2], [.NET Framework][3])
 
 ### Installation
 
-.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to true on services sending messages to (or consuming messages from) Kafka.
+.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to `true` on services sending messages to (or consuming messages from) Kafka.
 
 For example:
 ```yaml
@@ -64,10 +64,10 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
+
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
 [3]: /tracing/trace_collection/dd_libraries/dotnet-framework
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
@@ -75,8 +75,8 @@ environment:
 ### Prerequisites
 
 To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and Data Streams Monitoring libraries:
-* [Datadog Agent v7.34.0+][2]
-* [Data Streams Library v0.2+][1]
+* [Datadog Agent v7.34.0+][1]
+* [Data Streams Library v0.2+][2]
 
 ### Installation
 
@@ -110,9 +110,9 @@ This function extracts the pathway that a Kafka message has gone through so far.
 
 **Note**: The output `ctx` from `TraceKafkaProduce()` and the output `ctx` from `TraceKafkaConsume()` both contain information about the updated pathway. 
 
-For `TraceKafkaProduce()`, if you are sending multiple Kafka messages at once (fan-out) do not reuse the output `ctx` across calls.
+For `TraceKafkaProduce()`, if you are sending multiple Kafka messages at once (fan-out), do not reuse the output `ctx` across calls.
 
-For `TraceKafkaConsume()`, if you are aggregating multiple messages to create a smaller number of payloads (fan-in) call `MergeContext()` to merge the contexts into one context that can be passed into the next `TraceKafkaProduce()` call:
+For `TraceKafkaConsume()`, if you are aggregating multiple messages to create a smaller number of payloads (fan-in), call `MergeContext()` to merge the contexts into one context that can be passed into the next `TraceKafkaProduce()` call:
 
 ```go
 import (
@@ -135,7 +135,7 @@ ddkafka.TraceKafkaProduce(mergedContext, &producedMsg)
 
 ### Manual instrumentation
 
-You can also use manual instrumentationl.
+You can also use manual instrumentation.
 
 For example, in HTTP, you can propagate the pathway with HTTP headers.
 
@@ -174,9 +174,9 @@ _, ctx = datastreams.SetCheckpoint(ctx, "type:internal", "event_type:sell")
 
 You only need to add the `event_type` tag for the first service in each pathway. High-cardinality data (such as request IDs or hosts) are not supported as values for the `event_type` tag.
 
-[1]: https://github.com/DataDog/data-streams-go
-[2]: /agent
 
+[1]: /agent
+[2]: https://github.com/DataDog/data-streams-go
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
