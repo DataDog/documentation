@@ -134,20 +134,136 @@ proxy_password: my_password
 
 Do not forget to [restart the Agent][1] for the new settings to take effect.
 
+## Squid
 
+[Squid][2] is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows and is licensed under the GNU GPL. Squid is easy to configure and widely used for proxying traffic in a variety of different situations. 
+
+This is the best option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. 
+
+### Proxy forwarding with Squid
+
+#### Squid configuration
+
+Squid should be installed on a host that has connectivity to Datadog. Use your operating system's package manager or install the software directly from [Squid's project page][2].
+
+Most of these settings will be configured within Squid's configuration file, usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. 
+
+##### Define Access Lists (ACLs) for local IP address ranges
+
+First, you will want to be sure that Squid is configured to accept traffic from the correct internal IP address ranges where your agents are running. Many of these Access Lists (ACLs) may already be defined.
+
+Ensure that your `squid.conf` file contains the following. The IP ranges listed below may be different for your environment depending on your network.
+
+```conf
+# Example rule allowing access from local networks
+# Adapt this list to your (internal) IP networks from which 
+# you would like to send agent traffic
+acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
+acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
+acl localnet src 100.64.0.0/10          # RFC 6598 shared address space (CGN)
+acl localnet src 169.254.0.0/16         # RFC 3927 link-local (directly plugged) machines
+acl localnet src 172.16.0.0/12          # RFC 1918 local private network (LAN)
+acl localnet src 192.168.0.0/16         # RFC 1918 local private network (LAN)
+acl localnet src fc00::/7               # RFC 4193 local private network range
+acl localnet src fe80::/10              # RFC 4291 link-local (directly plugged) machines
+```
+
+##### Allow local traffic from the defined ACLs
+
+Now that your ACLs are correctly configured, modify `squid.conf` to allow HTTP traffic from the ACLs listed above.
+
+```conf
+# Example rule allowing access from local networks
+http_access allow localnet
+http_access allow localhost
+```
+
+##### Ensure Squid is listening on the correct port
+
+Squid should be listening on port `3128`, but you should check `squid.conf` to verify this. 
+
+```conf
+# Squid port
+http_port 3128
+```
+
+##### Start Squid
+
+Now that Squid has been correctly configured, restart Squid so that your configurations can be applied.  
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+```bash
+sudo systemctl start squid
+```
+
+If Squid is already running, restart Squid.
+
+```bash
+sudo systemctl restart squid
+```
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Assuming you've [already configured Squid as a system service][9], you can run the following.
+
+```bash
+net start squid
+```
+
+If Squid is already running, restart Squid.
+
+```bash
+net stop squid
+net start squid
+```
+
+{{% /tab %}}
+{{ < /tabs >}}
+
+#### Datadog Agent configuration
+
+**Agent v6 & v7**
+
+Modify the Agent's configuration file (`datadog.yaml`) to include the following.
+
+```yaml
+proxy:
+  http: http://127.0.0.1:3128
+  https: http://127.0.0.1:3128
+```
+
+After saving these changes, [restart the Agent][1].
+
+Verify that everything is working by checking your [Infrastructure Overview][6].
+
+**Agent v5**
+
+Modify the Agent's configuration file (`datadog.conf`) to include the following.
+
+```conf
+proxy_host: 127.0.0.1
+proxy_port: 3128
+```
+
+After saving these changes, [restart the Agent][1].
+
+Verify that everything is working by checking your [Infrastructure Overview][6].
 
 ## HAProxy
 
-[HAProxy][2] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
+[HAProxy][3] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
 
 `agent ---> haproxy ---> Datadog`
 
-This is the best option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents. 
+This is another good option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents. 
 
 **Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][3] for additional information.
 
 The communication between HAProxy and Datadog is always encrypted with TLS. The communication between the Agent host and the HAProxy host is not encrypted by default, because the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if the HAproxy host and Agent host are not located on the same isolated local network.
-To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][4] for more information.
+To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][5] for more information.
 
 
 **Note**: Download the Datadog certificate with one of the following commands:
@@ -738,7 +854,7 @@ skip_ssl_validation: true
 
 Finally [restart the Agent][1].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][6].
 
 **Agent v5**
 
@@ -779,11 +895,11 @@ skip_ssl_validation: yes
 
 Finally [restart the Agent][1].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][6].
 
 ## NGINX
 
-[NGINX][6] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
+[NGINX][7] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`
 
@@ -1086,7 +1202,7 @@ With this option set to `true`, the Agent skips the certificate validation step 
 skip_ssl_validation: true
 ```
 
-When sending logs over TCP, see [TCP Proxy for Logs][7].
+When sending logs over TCP, see [TCP Proxy for Logs][8].
 
 ## Datadog Agent
 
@@ -1135,9 +1251,11 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 
 
 [1]: /agent/guide/agent-commands/
-[2]: http://haproxy.1wt.eu
-[3]: http://www.haproxy.org/#perf
-[4]: https://www.haproxy.com/blog/haproxy-ssl-termination/
-[5]: https://app.datadoghq.com/infrastructure
-[6]: https://www.nginx.com
-[7]: /agent/logs/proxy
+[2]: http://www.squid-cache.org/
+[3]: http://haproxy.1wt.eu
+[4]: http://www.haproxy.org/#perf
+[5]: https://www.haproxy.com/blog/haproxy-ssl-termination/
+[6]: https://app.datadoghq.com/infrastructure
+[7]: https://www.nginx.com
+[8]: /agent/logs/proxy
+[9]: https://wiki.squid-cache.org/KnowledgeBase/Windows
