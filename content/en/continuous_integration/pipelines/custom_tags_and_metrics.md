@@ -1,6 +1,8 @@
 ---
 title: Adding Custom Tags and Metrics to Pipeline Traces
 kind: documentation
+aliases:
+  - /continuous_integration/setup_pipelines/custom_tags_and_metrics
 further_reading:
   - link: "/continuous_integration/troubleshooting/"
     tag: "Documentation"
@@ -135,4 +137,4 @@ and then click the **create measure** option.
 [2]: https://github.com/datadog/datadog-ci#standalone-binary-beta
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: /continuous_integration/setup_pipelines/jenkins/?tab=usingui#setting-custom-tags-for-your-pipelines
+[5]: /continuous_integration/pipelines/jenkins?tab=usingui#setting-custom-tags-for-your-pipelines

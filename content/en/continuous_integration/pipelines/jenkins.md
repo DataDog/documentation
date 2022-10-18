@@ -1,11 +1,13 @@
 ---
 title: Set up Tracing on a Jenkins Pipeline
 kind: documentation
+aliases:
+  - /continuous_integration/setup_pipelines/jenkins
 further_reading:
-    - link: "/continuous_integration/explore_pipelines"
+    - link: "/continuous_integration/pipelines"
       tag: "Documentation"
       text: "Explore Pipeline Execution Results and Performance"
-    - link: "/continuous_integration/setup_pipelines/custom_commands/"
+    - link: "/continuous_integration/pipelines/custom_commands/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
@@ -146,7 +148,7 @@ TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
 
 1. Install the [Datadog Agent][1] in every Jenkins worker.
-2. Set and export a new environment variable called `DD_CI_HOSTNAME` in every Jenkins worker with the worker hostname. 
+2. Set and export a new environment variable called `DD_CI_HOSTNAME` in every Jenkins worker with the worker hostname.
   * It must be the same hostname that the Datadog Agent is reporting in the infrastructure metrics for that worker.
   * You can use fixed values or other environment variables as valid values.
 

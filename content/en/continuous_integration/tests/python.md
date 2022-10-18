@@ -1,11 +1,13 @@
 ---
-title: Ruby Tests
+title: Python Tests
 kind: documentation
+aliases:
+  - /continuous_integration/setup_tests/python
 further_reading:
-    - link: "/continuous_integration/setup_tests/containers/"
+    - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/explore_tests"
+    - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
@@ -17,18 +19,17 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Ruby test instrumentation is in beta.
+<div class="alert alert-info">Python test instrumentation is in beta.
 </div>
 
 ## Compatibility
 
-Supported Ruby interpreters:
-* Ruby >= 2.1
-* JRuby >= 9.2
+Supported Python interpreters:
+* Python >= 2.7 and >= 3.5
 
 Supported test frameworks:
-* Cucumber >= 3.0
-* RSpec >= 3.0.0
+* pytest >= 3.0.0
+  * pytest < 5 when using Python 2
 
 ## Installing the Datadog Agent
 
@@ -287,123 +288,59 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installing the Ruby tracer
 
-To install the Ruby tracer:
+## Installing the Python tracer
 
-1. Add the `ddtrace` gem to your `Gemfile`:
+Install the Python tracer by running:
 
-    {{< code-block lang="ruby" filename="Gemfile" >}}
-source 'https://rubygems.org'
-gem 'ddtrace', "~> 1.0"
+{{< code-block lang="bash" >}}
+pip install -U ddtrace
 {{< /code-block >}}
 
-2. Install the gem by running `bundle install`
-
-See the [Ruby tracer installation docs][4] for more details.
+For more information, see the [Python tracer installation documentation][4].
 
 ## Instrumenting your tests
 
-{{< tabs >}}
-{{% tab "Cucumber" %}}
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
-The Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
+{{< code-block lang="bash" >}}
+DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
+{{< /code-block >}}
 
-To activate your integration, add the following code to your application:
+If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
 
-<!-- TODO: Explicitly setting `c.tracing.enabled` overrides any existing value, including the environment
-variable `DD_TRACE_ENABLED`. This prevents production environments from being able to disable the tracer
-using `DD_TRACE_ENABLED`.
-This snippet should be adapted to work correctly with the production tracer configuration or
-instruct clients to only include this code in a CI environment.
-This affects all code snippets in this file.
--->
-```ruby
-require 'cucumber'
-require 'datadog/ci'
+{{< code-block lang="bash" >}}
+DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
+{{< /code-block >}}
 
-Datadog.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
-
-  # Configures the tracer to ensure results delivery
-  c.ci.enabled = true
-
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  # Enables the Cucumber instrumentation
-  c.ci.instrument :cucumber
-end
-```
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-```bash
-DD_ENV=ci bundle exec rake cucumber
-```
-
-{{% /tab %}}
-{{% tab "RSpec" %}}
-
-The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
-
-To activate your integration, add this to the `spec_helper.rb` file:
-
-```ruby
-require 'rspec'
-require 'datadog/ci'
-
-Datadog.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
-
-  # Configures the tracer to ensure results delivery
-  c.ci.enabled = true
-
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  # Enables the RSpec instrumentation
-  c.ci.instrument :rspec
-end
-```
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-```bash
-DD_ENV=ci bundle exec rake spec
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-  
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the current active span:
+You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
 
-```ruby
-require 'ddtrace'
+```python
+from ddtrace import tracer
 
-# inside your test
-Datadog::Tracing.active_span&.set_tag('test_owner', 'my_team')
-# test continues normally
-# ...
+# Declare `ddspan` as argument to your test
+def test_simple_case(ddspan):
+    # Set your tags
+    ddspan.set_tag("test_owner", "my_team")
+    # test continues normally
+    # ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Ruby custom instrumentation documentation.
-  
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
+
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog.configure` block, or using environment variables:
+The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
 
-`service`
+`ddtrace.config.service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: `$PROGRAM_NAME`<br/>
-**Example**: `my-ruby-app`
+**Default**: `pytest`<br/>
+**Example**: `my-python-app`
 
-`env`
+`ddtrace.config.env`
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
 **Default**: `none`<br/>
@@ -471,10 +408,9 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/
 [2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /tracing/trace_collection/dd_libraries/ruby/#installation
-[5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
-[6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
+[4]: /tracing/trace_collection/dd_libraries/python/
+[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
+[6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration

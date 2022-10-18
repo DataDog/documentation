@@ -1,11 +1,13 @@
 ---
 title: .NET Tests
 kind: documentation
+aliases:
+  - /continuous_integration/setup_tests/dotnet
 further_reading:
-    - link: "/continuous_integration/setup_tests/containers/"
+    - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/explore_tests"
+    - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"

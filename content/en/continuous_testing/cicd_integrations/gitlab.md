@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
   text: "Run Datadog Synthetic tests in your GitLab pipelines"
-- link: "/continuous_integration/setup_pipelines/gitlab/"
+- link: "/continuous_integration/pipelines/gitlab/"
   tag: "Documentation"
   text: "Set up Tracing on a GitLab Pipeline"
 ---
