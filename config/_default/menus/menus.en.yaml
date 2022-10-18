@@ -1325,11 +1325,6 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
-  - name: Debug Workflows
-    url: workflows/debug/
-    parent: workflows
-    identifier: workflows_debug
-    weight: 5
   - name: Service Accounts
     url: workflows/service_accounts/
     parent: workflows
