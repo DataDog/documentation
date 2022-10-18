@@ -19,7 +19,7 @@ During ingestion, Datadog applies _quantization_ to APM data such as random glob
 
 Certain patterns in resource or span names are replaced with the following static strings:
 - GUIDs: `{guid}`
-- Numeric IDs (6+ digit numbers, surrounded by delimiters or found at the end of a string): `{num}`
+- Numeric IDs (6+ digit numbers surrounded by non-alphanumeric characters or found at the end of a string): `{num}`
 - Query parameter values: `{val}`
 
 These replacements affect:
@@ -30,11 +30,11 @@ These replacements affect:
 ### Quantization examples
 
 For example, if a _span name_ is `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84`, it is renamed to `find_user_{guid}` and the resulting trace metrics are:
-- `trace.find_user_dd_guid`
-- `trace.find_user_dd_guid.hits`
-- `trace.find_user_dd_guid.errors`
-- `trace.find_user_dd_guid.duration`
-- `trace.find_user_dd_guid.apdex` (if Apdex is configured for the service)
+- `trace.find_user_guid`
+- `trace.find_user_guid.hits`
+- `trace.find_user_guid.errors`
+- `trace.find_user_guid.duration`
+- `trace.find_user_guid.apdex` (if Apdex is configured for the service)
 
 To search for these spans in trace search, the query is `operation_name:"find_user_{guid}"`.
 
