@@ -1,13 +1,14 @@
 ---
 title: NetFlow Monitoring
 kind: documentation
+is_beta: true
 further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
 ---
 
-{{< beta-callout url="#" btn-hidden="true" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< beta-callout url="#" btn_hidden="true" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
 NetFlow Monitoring for Datadog Network Device Monitoring is in private beta.
 {{< /beta-callout >}}
 
