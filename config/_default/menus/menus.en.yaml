@@ -1329,7 +1329,7 @@ main:
     url: workflows/service_accounts/
     parent: workflows
     identifier: workflows_service_accounts
-    weight: 6
+    weight: 5
   - name: APM
     url: tracing/
     pre: apm
