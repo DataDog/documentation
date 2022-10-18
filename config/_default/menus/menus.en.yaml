@@ -3279,7 +3279,7 @@ main:
     pre: dev-code
     identifier: dev_tools
     parent: essentials_heading
-    weight: 230000
+    weight: 210000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
