@@ -221,7 +221,7 @@ net start squid
 ```
 
 {{% /tab %}}
-{{ < /tabs >}}
+{{< /tabs >}}
 
 #### Datadog Agent configuration
 
