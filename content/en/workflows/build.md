@@ -8,6 +8,10 @@ further_reading:
   text: "Browse the available actions in the Actions Catalog"
 ---
 
+{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
+{{< /beta-callout >}}
+
 You can create workflows or edit existing workflows from the [**Workflows** page][1] in Datadog. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed.
 - Hover over a workflow for the options to delete or clone the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.
