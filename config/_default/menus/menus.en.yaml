@@ -1300,15 +1300,15 @@ main:
     identifier: workflows
     parent: platform_heading
     weight: 140000
-  - name: Authentication
-    url: workflows/setup/
-    parent: workflows
-    identifier: workflows_setup
-    weight: 1
   - name: Build Workflows
     url: workflows/build/
     parent: workflows
     identifier: workflows_build
+    weight: 1
+  - name: Authentication
+    url: workflows/setup/
+    parent: workflows
+    identifier: workflows_setup
     weight: 2
   - name: Trigger Workflows
     url: workflows/trigger/
@@ -1325,16 +1325,11 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
-  - name: Debug Workflows
-    url: workflows/debug/
-    parent: workflows
-    identifier: workflows_debug
-    weight: 5
   - name: Service Accounts
     url: workflows/service_accounts/
     parent: workflows
     identifier: workflows_service_accounts
-    weight: 6
+    weight: 5
   - name: APM
     url: tracing/
     pre: apm
