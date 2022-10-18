@@ -8,9 +8,7 @@ further_reading:
   text: "Using Profiles with Network Device Monitoring"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-NetFlow Monitoring for Datadog Network Device Monitoring is in private beta.
-{{< /beta-callout >}}
+<div class="alert alert-warning">NetFlow Monitoring for Datadog Network Device Monitoring is in private beta.</div>
 
 ## Overview
 
