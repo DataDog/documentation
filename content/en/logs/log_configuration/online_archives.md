@@ -3,6 +3,7 @@ title: Online Archives
 kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 is_beta: true
+private: true
 further_reading:
 - link: "/logs/log_configuration/indexes/#indexes-filters"
   tag: "Documentation"
