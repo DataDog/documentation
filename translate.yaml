@@ -52,3 +52,7 @@ sources:
   dst: "content/{lang}/agent/faq/agent_v6_changes.md"
 - src: "content/en/agent/faq/certificate_verify_failed-error.md"
   dst: "content/{lang}/agent/faq/certificate_verify_failed-error.md"
+- src: "content/en/workflows/actions_catalog/_index.md"
+  dst: "content/{lang}/workflows/actions_catalog/_index.md"
+- src: "content/en/workflows/actions_catalog/generic_actions.md"
+  dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"
