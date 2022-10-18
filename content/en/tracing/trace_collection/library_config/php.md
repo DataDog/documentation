@@ -270,6 +270,11 @@ Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
+`DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
+**Default**: `*`<br>
+A comma-separated list of query parameters to be collected as part of the resource URI. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+
 `DD_TRACE_CLIENT_IP_HEADER_DISABLED`
 : **INI**: `datadog.trace.client_ip_header_disabled`<br>
 **Default**: `0`<br>
