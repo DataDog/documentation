@@ -127,6 +127,12 @@ content/en/serverless/libraries_integrations/cli.md
 content/en/serverless/libraries_integrations/cdk.md
 content/en/serverless/libraries_integrations/extension.md
 
+# workflows
+content/en/workflows/actions_catalog/*
+data/workflows/
+!content/en/workflows/actions_catalog/_index.md
+!content/en/workflows/actions_catalog/generic_actions.md
+
 # Runtime data
 pids
 *.pid

@@ -1297,6 +1297,42 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Workflows
+    url: workflows/
+    pre: workflows
+    identifier: workflows
+    parent: platform_heading
+    weight: 140000
+  - name: Build Workflows
+    url: workflows/build/
+    parent: workflows
+    identifier: workflows_build
+    weight: 1
+  - name: Authentication
+    url: workflows/setup/
+    parent: workflows
+    identifier: workflows_setup
+    weight: 2
+  - name: Trigger Workflows
+    url: workflows/trigger/
+    parent: workflows
+    identifier: workflows_trigger
+    weight: 3
+  - name: Actions Catalog
+    url: workflows/actions_catalog/
+    parent: workflows
+    identifier: workflows_actions_catalog
+    weight: 4
+  - name: Generic Actions
+    url: workflows/actions_catalog/generic_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_generic_actions
+    weight: 101
+  - name: Service Accounts
+    url: workflows/service_accounts/
+    parent: workflows
+    identifier: workflows_service_accounts
+    weight: 5
   - name: APM
     url: tracing/
     pre: apm
