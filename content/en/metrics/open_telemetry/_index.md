@@ -5,6 +5,9 @@ further_reading:
     - link: 'tracing/trace_collection/open_standards/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
+    - link: 'https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/'
+      tag: 'Blog'
+      text: 'Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter'
 ---
 
 ## Overview
@@ -136,7 +139,7 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 
 ## Deployment-based limitations
 
-The OpenTelemetry Collector has [two primary development methods][14]: Agent and Gateway. Depending on your development method, some components are not available.
+The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and Gateway. Depending on your deployment method, some components are not available.
 
 | Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
 | --- | --- | --- | --- | --- |

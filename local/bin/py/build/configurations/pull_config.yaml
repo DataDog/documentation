@@ -328,13 +328,15 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/synthetics/cicd_integrations/'
+        dest_path: '/continuous_testing/cicd_integrations/'
         file_name: 'azure_devops_extension.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
-          title: Synthetics and Datadog CI Azure DevOps Extension
+          title: Continuous Testing and Datadog CI Azure DevOps Extension
           kind: documentation
           description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
+          aliases:
+            - /synthetics/cicd_integrations/azure_devops_extension
 
   - repo_name: synthetics-ci-github-action
     contents:
@@ -343,12 +345,14 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/synthetics/cicd_integrations/'
+        dest_path: '/continuous_testing/cicd_integrations/'
         file_name: 'github_actions.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
-          title: Synthetics and CI GitHub Actions
+          title: Continuous Testing and CI GitHub Actions
           kind: documentation
+          aliases:
+            - /synthetics/cicd_integrations/github_actions
 
   - repo_name: synthetics-ci-orb
     contents:
@@ -357,12 +361,14 @@
       globs:
       - 'README.md'
       options:
-        dest_path: '/synthetics/cicd_integrations/'
+        dest_path: '/continuous_testing/cicd_integrations/'
         file_name: 'circleci_orb.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
-          title: Synthetics CI CircleCI Orb
+          title: Continuous Testing and CircleCI Orb
           kind: documentation
+          aliases:
+            - /synthetics/cicd_integrations/circleci_orb
 
   - repo_name: dd-sdk-android
     contents:
@@ -1122,3 +1128,16 @@
       options:
         dest_dir: '/security_platform/cloud_workload_security/'
         path_to_remove: 'docs/cloud-workload-security/'
+
+  - repo_name: dd-source
+    contents:
+    - action: workflows
+      branch: main
+      globs:
+        - "domains/workflow/actionplatform/apps/manifest_generator/manifest.schema.json"
+        - "domains/workflow/actionplatform/runner/bundles/com.datadoghq.*/manifest.json"
+      options:
+        dest_path: '/workflows/actions_catalog/'
+        bundle_excludes:
+          - "com.datadoghq.test"
+          - "com.datadoghq.sample"

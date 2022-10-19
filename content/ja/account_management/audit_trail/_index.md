@@ -44,7 +44,7 @@ title: Datadog Audit Trail（監査証跡）
 
 Datadog 監査証跡を有効にするには、[オーガニゼーションの設定][2]で *Security* の *Audit Trail Settings* を選択し、**Enable** ボタンをクリックします。
 
-{{< img src="account_management/audit_logs/audit_enable.png" alt="Datadog の監査証跡設定" style="width:100%;">}}
+{{< img src="account_management/audit_logs/audit_trail_settings.png" alt="監査証跡の設定ページで無効になっている様子" style="width:85%;">}}
 
 ## コンフィギュレーション
 

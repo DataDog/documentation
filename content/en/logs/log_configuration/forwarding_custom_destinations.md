@@ -4,6 +4,9 @@ kind: documentation
 is_beta: true
 private: true
 further_reading:
+- link: "https://www.datadoghq.com/blog/route-logs-with-datadog-log-forwarding/"
+  tag: "Blog"
+  text: "Route logs to third-party systems with Datadog Log Forwarding"
 - link: "/logs/log_collection"
   tag: "Documentation"
   text: "Start collecting your logs"
@@ -12,8 +15,8 @@ further_reading:
   text: "Learn about log pipelines"
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
-  Log Forwarding is currently in beta.
+{{< beta-callout url="https://www.datadoghq.com/log-forwarding-limited-availability/" >}}
+  Log Forwarding is currently in beta. Fill out this form to request access.
 {{< /beta-callout >}} 
 
 ## Overview

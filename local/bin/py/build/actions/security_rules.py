@@ -143,7 +143,10 @@ def security_rules(content, content_dir):
 
                         # new categorization
                         if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
-                            page_data['rule_category'].append('Cloud SIEM')
+                            if 'signal-correlation/production' in relative_path:
+                                page_data['rule_category'].append('Cloud SIEM (Signal Correlation)')
+                            else:
+                                page_data['rule_category'].append('Cloud SIEM (Log Detection)')
 
                         if 'posture-management' in relative_path:
                             if 'cloud-configuration' in relative_path:
