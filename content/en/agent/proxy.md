@@ -136,7 +136,7 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 ## Squid
 
-[Squid][2] is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows and is licensed under the GNU GPL. Squid is easy to configure and widely used for proxying traffic in a variety of different situations. 
+[Squid][2] is a caching proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL. Squid is easy to configure and widely used for proxying traffic in a variety of different situations. 
 
 This is the best option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. 
 
