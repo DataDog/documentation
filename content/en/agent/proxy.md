@@ -148,43 +148,21 @@ Squid should be installed on a host that has connectivity to Datadog. Use your o
 
 Most of these settings will be configured within Squid's configuration file, usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. 
 
-##### Define Access Lists (ACLs) for local IP address ranges
+##### Configure Squid to only send traffic to Datadog
 
 First, you will want to be sure that Squid is configured to accept traffic from the correct internal IP address ranges where your agents are running. Many of these Access Lists (ACLs) may already be defined.
 
-Ensure that your `squid.conf` file contains the following. The IP ranges listed below may be different for your environment depending on your network.
+Ensure that your `squid.conf` file contains the following settings. The IP ranges listed below may be different for your environment depending on your network.
 
 ```conf
-# Example rule allowing access from local networks
-# Adapt this list to your (internal) IP networks from which 
-# you would like to send agent traffic
-acl localnet src 0.0.0.1-0.255.255.255  # RFC 1122 "this" network (LAN)
-acl localnet src 10.0.0.0/8             # RFC 1918 local private network (LAN)
-acl localnet src 100.64.0.0/10          # RFC 6598 shared address space (CGN)
-acl localnet src 169.254.0.0/16         # RFC 3927 link-local (directly plugged) machines
-acl localnet src 172.16.0.0/12          # RFC 1918 local private network (LAN)
-acl localnet src 192.168.0.0/16         # RFC 1918 local private network (LAN)
-acl localnet src fc00::/7               # RFC 4193 local private network range
-acl localnet src fe80::/10              # RFC 4291 link-local (directly plugged) machines
-```
+http_port 0.0.0.0:3128
 
-##### Allow local traffic from the defined ACLs
+acl local src 127.0.0.1/32
 
-Now that your ACLs are correctly configured, modify `squid.conf` to allow HTTP traffic from the ACLs listed above.
+acl Datadog dstdomain .{{< region-param key="dd_site" >}}
 
-```conf
-# Example rule allowing access from local networks
-http_access allow localnet
-http_access allow localhost
-```
-
-##### Ensure Squid is listening on the correct port
-
-Squid should be listening on port `3128`, but you should check `squid.conf` to verify this. 
-
-```conf
-# Squid port
-http_port 3128
+http_access allow Datadog
+http_access allow local manager
 ```
 
 ##### Start Squid
