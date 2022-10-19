@@ -9,7 +9,7 @@ further_reading:
   text: "Cloud Resource Schema"
 ---
 
-{{< beta-callout url="https://google.com" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< beta-callout url="https://dashcon.io/security" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   Resource Catalog is in private beta. Fill out this form if you would like to access it.
 {{< /beta-callout >}}
 
