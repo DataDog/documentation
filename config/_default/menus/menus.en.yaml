@@ -2522,11 +2522,16 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
     weight: 5
+  - name: Cloud Security Investigator
+    url: security_platform/cloud_siem/cloud_security_investigator
+    parent: cloud_siem
+    identifier: cloud_siem_cloud_security_investigator
+    weight: 6
   - name: Guides
     url: security_platform/cloud_siem/guide/
     parent: cloud_siem
     identifier: siem_guides
-    weight: 6
+    weight: 7
   - name: Cloud Security Management
     url: security_platform/cloud_security_management
     parent: security_platform_heading
