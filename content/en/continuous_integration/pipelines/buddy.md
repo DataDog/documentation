@@ -47,7 +47,7 @@ Buddy does not include their repository URL in their webhooks. To get the most o
 we recommend you add an action with name `[DD] GIT Reposository` that runs
 
 ```
-echo "[DD] $BUDY_SCM_URL
+echo "[DD] $BUDDY_SCM_URL"
 ```
 
 Then CI Visibility will automatically recognize te git repository url and pipelines will show in the 
