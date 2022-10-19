@@ -17,11 +17,11 @@ further_reading:
 
 ## Overview
 
-Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified type of log exceeds a user-defined threshold over a given period of time.
+Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified type of log exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
 
 ## Monitor creation
 
-To create a [logs monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
+To create a [logs monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
 <div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
@@ -29,11 +29,11 @@ To create a [logs monitor][2] in Datadog, use the main navigation: *Monitors -->
 
 As you define the search query, the graph above the search fields updates.
 
-1. Construct a search query using the same logic as a [log explorer search][3].
-2. Choose to monitor over a log count, [facet][4], or [measure][4]:
+1. Construct a search query using the same logic as a [log explorer search][4].
+2. Choose to monitor over a log count, [facet][5], or [measure][5]:
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
-    * **Monitor over a facet**: If a [facet][4] is selected, the monitor alerts over the `Unique value count` of the facet. For example, if you have a facet on `user.email`, the unique value count is the number of unique user emails.
-    * **Monitor over measure**: If a [measure][4] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * **Monitor over a facet**: If a [facet][5] is selected, the monitor alerts over the `Unique value count` of the facet. For example, if you have a facet on `user.email`, the unique value count is the number of unique user emails.
+    * **Monitor over measure**: If a [measure][5] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group logs by multiple dimensions (optional):
 
    All logs matching the query are aggregated into groups based on the value of up to four log facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
@@ -69,11 +69,11 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 
 #### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (evaluation delay, new group delay, etc.), see the [Monitor configuration][5] page.
+For detailed instructions on the advanced alert options (evaluation delay, new group delay, etc.), see the [Monitor configuration][6] page.
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][6] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 #### Log samples and breaching values toplist
 
@@ -105,8 +105,9 @@ Include a sample of 10 logs in the alert notification:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/
-[2]: https://app.datadoghq.com/monitors#create/log
-[3]: /logs/explorer/search/
-[4]: /logs/explorer/facets/
-[5]: /monitors/create/configuration/#advanced-alert-conditions
-[6]: /monitors/notify/
+[2]: /logs/log_configuration/indexes/
+[3]: https://app.datadoghq.com/monitors#create/log
+[4]: /logs/explorer/search/
+[5]: /logs/explorer/facets/
+[6]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/notify/
