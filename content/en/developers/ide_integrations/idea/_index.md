@@ -47,6 +47,8 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 
 {{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="The Datadog plugin" style="width:100%;" >}}
 
+Alternatively you can install the plugin from the [Jetbrains Marketplace](https://plugins.jetbrains.com/plugin/19495-datadog).
+
 ### Add Datadog credentials
 
 After installing the Datadog plugin and restarting IDEA, add your Datadog API and application keys to authenticate with Datadog:
