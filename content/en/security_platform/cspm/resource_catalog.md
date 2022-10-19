@@ -10,18 +10,20 @@ further_reading:
 ---
 
 {{< beta-callout url="https://google.com" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Resource Catalog is currently in private beta. Fill out this form if you would like to access it.
+  Resource Catalog is in private beta. Fill out this form if you would like to access it.
 {{< /beta-callout >}}
 
 {{< img src="security_platform/cspm/resource_catalog/resource_catalog.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
 
 ## Overview
 
-Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationship between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security findings have been found. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
+Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security findings have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
 
-The Resource Catalog leverages existing Datadog cloud integrations and the Datadog agent and includes cloud resources such as databases, storage services, and hosts.
+Resource Catalog leverages Datadog cloud integrations and the Datadog Agent you likely already have installed to gather data from cloud resources such as databases, storage services, and hosts.
 
-**Note**: In order for cloud resources to appear in the Resource Catalog, you must first enable [Cloud Security Management][1] for each cloud account.
+## Adding resources to Resource Catalog
+
+For cloud resources to appear in the Resource Catalog, enable [Cloud Security Management][1] for each cloud account.
 
 The Resource Catalog is useful for:
 
@@ -33,17 +35,17 @@ The Resource Catalog is useful for:
 
 ## Browse the Resource Catalog
 
-On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization which are either detected from an Agent on a host, or from configuring a cloud integration on the resource. Information about the resources in your organization is organized into two views: List and Map.
+On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown on two views: List and Map.
 
 ### List view
 
-The Resource Catalog list is sortable by cloud platform, resource type, account, team, region, findings, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Or you can sort by **Findings** to identify cloud resources most prone to misconfigurations.
+You can sort resources in the Resource Catalog list by cloud platform, resource type, account, team, region, findings, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Sort by **Findings** to identify cloud resources most prone to misconfigurations.
 
-To find a particular resource, search by its name. To filter the list, select one or more facets. You may find it helpful to filter by your team name or scope the findings displayed to particular environments and clusters in order to see only matching resources in the list.
+To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left-hand side. For example, you may find it helpful to filter by your team name, or to scope the findings to particular environments and clusters.
 
 ### Map view
 
-The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region and apply filters such as cloud provider and resource type to see only matching resources in the map. You can also use the `Fill by` selector to fill the map elements by Findings or Threats.
+The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the `Fill by` selector to fill the map elements by Findings or Threats.
 
 #### Findings
 
@@ -69,6 +71,6 @@ Click the **Share** button and select **Share Findings** to share a link to the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security_platform/cloud_security_management
+[1]: /security_platform/cloud_security_management
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /integrations/#cat-notification
