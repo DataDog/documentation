@@ -45,6 +45,7 @@ Datadog Agent をインストールしたら、[Agent のメイン構成ファ�
 
 ```yaml
 process_config:
+  process_collection:
     enabled: true
 ```
 
