@@ -2,9 +2,6 @@
 title: Cloud Cost Management
 kind: documentation
 ---
-
-<div class="alert alert-warning">Cloud Cost Management is in private beta and supports only AWS at this time. To request access, <a href="https://www.datadoghq.com/cloud-cost-management-beta/">use this form.</a></div>
-
 ## Overview
 
 Cloud Cost Management provides insights for engineering and finance teams to see how changes to infrastructure can affect costs. It enables you to understand trends, allocate spend across your organization, and identify inefficiencies.
@@ -130,9 +127,9 @@ You can visualize your ingested data using the following cost types:
 
 ## Tag enrichment
 
-Datadog automatically ingests all of your [AWS Resource tags][6] for most of your resources, without you having to manually [activate them][8] as cost allocation tags in your bill. This allows you to allocate costs to the dimensions your organization cares about. 
+Datadog automatically ingests all of your [AWS Resource tags][6] for most of your resources, without you having to manually [activate them][7] as cost allocation tags in your bill. This allows you to allocate costs to the dimensions your organization cares about.
 
-Additionally, Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][7].
+Additionally, Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][8].
 
 The following out-of-the-box tags are also available for filtering and grouping data:
 
@@ -146,7 +143,7 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `aws_member_account_id`      | The AWS member account ID associated with the item.|
 | `aws_cost_type`              | The type of charge covered by this item (for example, Usage, or Tax).|
 | `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On-Demand.|
-| `aws_reservation_arn`        | The ARN of the Reserved Instance that the item benefited from.| 
+| `aws_reservation_arn`        | The ARN of the Reserved Instance that the item benefited from.|
 | `aws_savings_plan_arn`       | The ARN of the Savings Plan the item benefited from.|
 | `aws_usage_type`             | The usage details of the item (for example, BoxUsage:i3.8xlarge).|
 | `aws_operation`              | The operation associated with the item (for example, RunInstances).|
@@ -174,5 +171,5 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[7]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
-[8]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
+[7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
+[8]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
