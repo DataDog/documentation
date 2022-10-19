@@ -167,7 +167,7 @@ http_access allow local manager
 
 ##### Start Squid
 
-Restart Squid so that your configurations can be applied. If you're configuring Squid on Windows, you will first need [to configure Squid as a system service][9]
+Restart Squid so that your configurations can be applied. If you're configuring Squid on Windows, you will first need [to configure Squid as a system service][9].
 
 {{< tabs >}}
 {{% tab "Linux" %}}
