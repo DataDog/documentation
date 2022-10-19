@@ -47,6 +47,10 @@ On the inspection page, each node can be inspected allowing you to pivot around 
 
 {{< img src="tracing/visualization/services_map/servicemap.png" alt="Service Map" style="width:90%;">}}
 
+A node is collapsed when there are two services in the filter (applied through the search bar or facets) that are connected by one or more services which are not in the filter.
+
+{{< img src="tracing/visualization/services_map/service_map_collapsed.png" alt="Service Map Collapsed Node" style="width:50%;">}}
+
 ## The "service" tag
 
 Clicking on a service reveals further filtering options:

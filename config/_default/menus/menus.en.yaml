@@ -11,18 +11,21 @@ main:
   - name: Application Performance
     identifier: apm_heading
     weight: 4000000
+  - name: Continuous Integration
+    identifier: ci_visibility_heading
+    weight: 5000000
   - name: Log Management
     identifier: log_management_heading
-    weight: 5000000
+    weight: 6000000
   - name: Security
     identifier: security_platform_heading
-    weight: 6000000
+    weight: 7000000
   - name: UX Monitoring
     identifier: ux_monitoring_heading
-    weight: 7000000
+    weight: 8000000
   - name: Administration
     identifier: administration_heading
-    weight: 8000000
+    weight: 9000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -1294,6 +1297,42 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Workflows
+    url: workflows/
+    pre: workflows
+    identifier: workflows
+    parent: platform_heading
+    weight: 140000
+  - name: Build Workflows
+    url: workflows/build/
+    parent: workflows
+    identifier: workflows_build
+    weight: 1
+  - name: Authentication
+    url: workflows/setup/
+    parent: workflows
+    identifier: workflows_setup
+    weight: 2
+  - name: Trigger Workflows
+    url: workflows/trigger/
+    parent: workflows
+    identifier: workflows_trigger
+    weight: 3
+  - name: Actions Catalog
+    url: workflows/actions_catalog/
+    parent: workflows
+    identifier: workflows_actions_catalog
+    weight: 4
+  - name: Generic Actions
+    url: workflows/actions_catalog/generic_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_generic_actions
+    weight: 101
+  - name: Service Accounts
+    url: workflows/service_accounts/
+    parent: workflows
+    identifier: workflows_service_accounts
+    weight: 5
   - name: APM
     url: tracing/
     pre: apm
@@ -1943,118 +1982,113 @@ main:
     url: continuous_integration/
     pre: ci
     identifier: ci
-    parent: apm_heading
-    weight: 150000
-  - name: Tracing Tests
-    url: continuous_integration/setup_tests/
+    parent: ci_visibility_heading
+    weight: 1
+  - name: Test Visibility
+    url: continuous_integration/tests/
     parent: ci
-    identifier: setup_tests
+    identifier: tests_visibility
     weight: 1
   - name: .NET
-    url: continuous_integration/setup_tests/dotnet/
-    parent: setup_tests
+    url: continuous_integration/tests/dotnet/
+    parent: tests_visibility
     identifier: ci_dotnet
     weight: 101
   - name: Java
-    url: continuous_integration/setup_tests/java/
-    parent: setup_tests
+    url: continuous_integration/tests/java/
+    parent: tests_visibility
     identifier: ci_java
     weight: 102
   - name: JavaScript and TypeScript
-    url: continuous_integration/setup_tests/javascript/
-    parent: setup_tests
+    url: continuous_integration/tests/javascript/
+    parent: tests_visibility
     identifier: ci_javascript
     weight: 103
   - name: Python
-    url: continuous_integration/setup_tests/python/
-    parent: setup_tests
+    url: continuous_integration/tests/python/
+    parent: tests_visibility
     identifier: ci_python
     weight: 104
   - name: Ruby
-    url: continuous_integration/setup_tests/ruby/
-    parent: setup_tests
+    url: continuous_integration/tests/ruby/
+    parent: tests_visibility
     identifier: ci_ruby
     weight: 105
   - name: Swift
-    url: continuous_integration/setup_tests/swift/
-    parent: setup_tests
+    url: continuous_integration/tests/swift/
+    parent: tests_visibility
     identifier: ci_swift
     weight: 106
   - name: JUnit Report Uploads
-    url: continuous_integration/setup_tests/junit_upload/
-    parent: setup_tests
+    url: continuous_integration/tests/junit_upload/
+    parent: tests_visibility
     identifier: ci_junit
     weight: 107
   - name: Tests in Containers
-    url: continuous_integration/setup_tests/containers/
-    parent: setup_tests
+    url: continuous_integration/tests/containers/
+    parent: tests_visibility
     identifier: ci_containers
     weight: 108
-  - name: Tracing Pipelines
-    url: continuous_integration/setup_pipelines/
+  - name: Pipeline Visibility
+    url: continuous_integration/pipelines/
     parent: ci
-    identifier: setup_pipelines
+    identifier: pipeline_visibility
     weight: 2
   - name: Buildkite
-    url: continuous_integration/setup_pipelines/buildkite/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/buildkite/
+    parent: pipeline_visibility
     identifier: ci_buildkite
     weight: 201
   - name: CircleCI
-    url: continuous_integration/setup_pipelines/circleci/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/circleci/
+    parent: pipeline_visibility
     identifier: ci_circleci
     weight: 202
   - name: Codefresh
-    url: continuous_integration/setup_pipelines/codefresh/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/codefresh/
+    parent: pipeline_visibility
     identifier: ci_codefresh
     weight: 203
   - name: GitHub Actions
-    url: continuous_integration/setup_pipelines/github/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/github/
+    parent: pipeline_visibility
     identifier: ci_github
     weight: 204
   - name: GitLab
-    url: continuous_integration/setup_pipelines/gitlab/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/gitlab/
+    parent: pipeline_visibility
     identifier: ci_gitlab
     weight: 205
   - name: Jenkins
-    url: continuous_integration/setup_pipelines/jenkins/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/jenkins/
+    parent: pipeline_visibility
     identifier: ci_jenkins
     weight: 206
   - name: Custom Commands
-    url: continuous_integration/setup_pipelines/custom_commands/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/custom_commands/
+    parent: pipeline_visibility
     identifier: ci_custom_commands
     weight: 210
   - name: Custom Tags and Metrics
-    url: continuous_integration/setup_pipelines/custom_tags_and_metrics/
-    parent: setup_pipelines
+    url: continuous_integration/pipelines/custom_tags_and_metrics/
+    parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
     weight: 211
-  - name: Exploring Tests
-    url: continuous_integration/explore_tests/
+  - name: Intelligent Test Runner
+    url: continuous_integration/intelligent_test_runner/
     parent: ci
-    identifier: explore_tests
+    identifier: intelligent_test_runner
     weight: 3
-  - name: Exploring Pipelines
-    url: continuous_integration/explore_pipelines/
-    parent: ci
-    identifier: explore_pipelines
-    weight: 4
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 5
+    weight: 4
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 6
+    weight: 5
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -2498,98 +2532,87 @@ main:
     parent: cloud_siem
     identifier: siem_guides
     weight: 7
-  - name: Cloud Security Posture Management
-    url: security_platform/cspm/
+  - name: Cloud Security Management
+    url: security_platform/cloud_security_management
     parent: security_platform_heading
     pre: cspm
+    identifier: csm
+    weight: 181500
+  - name: Cloud Security Posture Management
+    url: security_platform/cspm/
+    parent: csm
     identifier: cspm
-    weight: 182000
+    weight: 1
   - name: Getting Started
     url: security_platform/cspm/getting_started
     parent: cspm
     identifier: cspm_getting_started
-    weight: 1
+    weight: 101
   - name: Custom Rules
     url: security_platform/cspm/custom_rules
     parent: cspm
-    identifier: cspm_custom_rules
-    weight: 2
-  - name: Writing Custom Rules with Rego
-    url: security_platform/cloud_security_management/guide/writing_rego_rules/
-    parent: cspm_custom_rules
-    identifier: csm_rego_rules
-    weight: 201
+    identifier: custom_rules
+    weight: 102
   - name: Cloud Resources Schema
     url: security_platform/cspm/custom_rules/schema/
-    parent: cspm_custom_rules
-    identifier: cspm_schema_gcp
-    weight: 202
+    parent: cspm
+    identifier: cspm_schema_gcp_test
+    weight: 103
   - name: Findings Reports
     url: security_platform/cspm/frameworks_and_benchmarks
     parent: cspm
-    weight: 3
-  - name: OOTB Cloud Rules
-    url: security_platform/default_rules/#cat-posture-management-cloud
-    parent: cspm
-    identifier: ootb_cloud_rules
-    weight: 4
-  - name: OOTB Infrastructure Rules
-    url: security_platform/default_rules/#cat-posture-management-infra
-    parent: cspm
-    identifier: ootb_infrastructure_rules
-    weight: 5
+    weight: 104
   - name: Security Findings Explorer
     url: /security_platform/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 6
+    weight: 105
   - name: Signals Explorer
     url: /security_platform/cspm/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 7
+    weight: 106
   - name: Cloud Workload Security
     url: security_platform/cloud_workload_security/
-    parent: security_platform_heading
-    pre: cws
+    parent: csm
     identifier: cloud_workload_security
-    weight: 183000
+    weight: 2
   - name: Getting Started
     url: security_platform/cloud_workload_security/getting_started
     parent: cloud_workload_security
     identifier: cws_getting_started
-    weight: 1
+    weight: 201
   - name: Managing Detection Rules
     url: security_platform/cloud_workload_security/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
-    weight: 2
+    weight: 202
   - name: Creating Custom Agent Rules
     url: security_platform/cloud_workload_security/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
-    weight: 3
-  - name: OOTB Rules
-    url: security_platform/default_rules#cat-workload-security
-    parent: cloud_workload_security
-    identifier: cws_workload_default_rules
-    weight: 4
+    weight: 203
   - name: CWS Events Formats
     url: security_platform/cloud_workload_security/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
-    weight: 5
+    weight: 204
+  - name: Default Detection Rules
+    url: security_platform/default_rules/#cat-cloud-security-management
+    parent: csm
+    identifier: csm_default_rules
+    weight: 4
   - name: Guides
-    url: security_platform/cloud_security_management/guide
-    parent: cloud_workload_security
+    url: security_platform/cloud_security_management/guide/
+    parent: csm
     identifier: csm_guides
     weight: 6
   - name: Troubleshooting
     url: security_platform/cloud_security_management/troubleshooting/
-    parent: cloud_workload_security
+    parent: csm
     identifier: csm_troubleshooting
     weight: 7
-  - name: Application Security Monitoring
+  - name: Application Security Management
     url: security_platform/application_security/
     parent: security_platform_heading
     pre: app-sec
@@ -2749,124 +2772,135 @@ main:
     url: synthetics/search/
     parent: synthetics
     weight: 5
-  - name: CI/CD Integrations
-    url: /synthetics/cicd_integrations
-    parent: synthetics
-    identifier: synthetics_cicd_integrations
-    weight: 6
-  - name: Configuration
-    url: /synthetics/cicd_integrations/configuration
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_configuration
-    weight: 601
-  - name: Azure DevOps Extension
-    url: /synthetics/cicd_integrations/azure_devops_extension
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_azure_devops_extension
-    weight: 602
-  - name: CircleCI Orb
-    url: /synthetics/cicd_integrations/circleci_orb
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_circleci_orb
-    weight: 603
-  - name: GitHub Actions
-    url: /synthetics/cicd_integrations/github_actions
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_github_actions
-    weight: 604
-  - name: GitLab
-    url: /synthetics/cicd_integrations/gitlab
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_gitlab
-    weight: 605
-  - name: Jenkins
-    url: /synthetics/cicd_integrations/jenkins
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_jenkins
-    weight: 606
-  - name: Testing Tunnel
-    url: /synthetics/testing_tunnel
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_testing_tunnel
-    weight: 607
-  - name: Troubleshooting
-    url: /synthetics/cicd_integrations/troubleshooting
-    parent: synthetics_cicd_integrations
-    identifier: synthetics_cicd_integrations_troubleshooting
-    weight: 608
-  - name: CI Results Explorer
-    url: /synthetics/explorer
-    parent: synthetics
-    identifier: synthetics_explorer
-    weight: 7
-  - name: Search Test Batches
-    url: /synthetics/explorer/search
-    parent: synthetics_explorer
-    identifier: synthetics_explorer_search
-    weight: 701
-  - name: Search Syntax
-    url: /synthetics/explorer/search_syntax
-    parent: synthetics_explorer
-    identifier: synthetics_explorer_search_syntax
-    weight: 701
   - name: Dashboards
     url: synthetics/dashboards
     parent: synthetics
     identifier: synthetics_dashboards
-    weight: 8
+    weight: 6
   - name: API Test
     url: synthetics/dashboards/api_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_api_test
-    weight: 801
+    weight: 601
   - name: Browser Test
     url: synthetics/dashboards/browser_test
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_browser_test
-    weight: 802
+    weight: 602
   - name: Testing Coverage
     url: synthetics/dashboards/testing_coverage
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_testing_coverage
-    weight: 803
+    weight: 603
   - name: Test Summary
     url: synthetics/dashboards/test_summary
     parent: synthetics_dashboards
     identifier: synthetics_dashboards_test_summary
-    weight: 804
+    weight: 604
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 9
+    weight: 7
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 10
+    weight: 8
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 11
+    weight: 9
   - name: Data Security
     url: data_security/synthetics/
     parent: synthetics
-    weight: 12
+    weight: 10
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 13
+    weight: 11
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 14
+    weight: 12
+  - name: Continuous Testing
+    url: continuous_testing/
+    pre: continuous-testing
+    identifier: continuous_testing
+    parent: ux_monitoring_heading
+    weight: 200000
+  - name: CI/CD Integrations
+    url: continuous_testing/cicd_integrations
+    parent: continuous_testing
+    identifier: continuous_testing_cicd_integrations
+    weight: 1
+  - name: Configuration
+    url: /continuous_testing/cicd_integrations/configuration
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_configuration
+    weight: 101
+  - name: Azure DevOps Extension
+    url: /continuous_testing/cicd_integrations/azure_devops_extension
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_azure_devops_extension
+    weight: 102
+  - name: CircleCI Orb
+    url: /continuous_testing/cicd_integrations/circleci_orb
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_circleci_orb
+    weight: 103
+  - name: GitHub Actions
+    url: /continuous_testing/cicd_integrations/github_actions
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_github_actions
+    weight: 104
+  - name: GitLab
+    url: /continuous_testing/cicd_integrations/gitlab
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_gitlab
+    weight: 105
+  - name: Jenkins
+    url: /continuous_testing/cicd_integrations/jenkins
+    parent: continuous_testing_cicd_integrations
+    identifier: continuous_testing_cicd_integrations_jenkins
+    weight: 106
+  - name: Settings
+    url: /continuous_testing/settings
+    parent: continuous_testing
+    identifier: continuous_testing_settings
+    weight: 2
+  - name: Testing Tunnel
+    url: /continuous_testing/testing_tunnel
+    parent: continuous_testing
+    identifier: continuous_testing_testing_tunnel
+    weight: 3
+  - name: Explorer
+    url: continuous_testing/explorer/
+    parent: continuous_testing
+    identifier: continuous_testing_explorer
+    weight: 4
+  - name: Search Test Batches
+    url: continuous_testing/explorer/search/
+    parent: continuous_testing_explorer
+    identifier: continuous_testing_explorer_search
+    weight: 401
+  - name: Search Syntax
+    url: continuous_testing/explorer/search_syntax/
+    parent: continuous_testing_explorer
+    identifier: continuous_testing_explorer_search_syntax
+    weight: 402
+  - name: Troubleshooting
+    url: continuous_testing/troubleshooting/
+    parent: continuous_testing
+    identifier: continuous_testing_troubleshooting
+    weight: 5
   - name: RUM & Session Replay
     url: real_user_monitoring/
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 155000
+    weight: 210000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
@@ -3202,7 +3236,7 @@ main:
     pre: network
     identifier: nm_parent
     parent: infrastructure_heading
-    weight: 200000
+    weight: 220000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent
@@ -3248,26 +3282,31 @@ main:
     parent: ndm
     identifier: ndm_snmptraps
     weight: 302
+  - name: NetFlow Monitoring
+    url: network_monitoring/devices/netflow
+    parent: ndm
+    identifier: ndm_netflow
+    weight: 303
   - name: Profiles
     url: network_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 303
+    weight: 304
   - name: Data Collected
     url: network_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 304
+    weight: 305
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 305
+    weight: 306
   - name: Guides
     url: network_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 306
+    weight: 307
   - name: Developers
     url: developers/
     pre: dev-code
@@ -3366,19 +3405,29 @@ main:
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
     weight: 703
+  - name: IDE integrations
+    url: developers/ide_integrations/
+    parent: dev_tools
+    identifier: ide_integrations
+    weight: 8
+  - name: IntelliJ IDEA
+    url: developers/ide_integrations/idea/
+    parent: ide_integrations
+    identifier: ide_integrations_idea
+    weight: 801
   - name: Community
     url: developers/community/
     parent: dev_tools
     identifier: dev_community
-    weight: 8
+    weight: 9
   - name: Libraries
     url: developers/community/libraries/
     parent: dev_community
-    weight: 801
+    weight: 901
   - name: Community Office Hours
     url: developers/community/office_hours/
     parent: dev_community
-    weight: 802
+    weight: 902
   - name: Guides
     url: developers/guide/
     parent: dev_tools
@@ -3390,6 +3439,17 @@ main:
     identifier: api
     parent: essentials_heading
     weight: 220000
+  - name: CoScreen
+    url: coscreen/
+    pre: coscreen
+    identifier: coscreen
+    parent: essentials_heading
+    weight: 230000
+  - name: Troubleshooting
+    url: coscreen/troubleshooting
+    identifier: coscreen_troubleshooting
+    parent: coscreen
+    weight: 1
   - name: Account Management
     url: account_management/
     pre: cog-2
