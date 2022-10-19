@@ -167,7 +167,7 @@ http_access allow local manager
 
 ##### Start Squid
 
-Now that Squid has been correctly configured, restart Squid so that your configurations can be applied.  
+Restart Squid so that your configurations can be applied.  
 
 {{< tabs >}}
 {{% tab "Linux" %}}
