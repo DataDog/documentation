@@ -19,6 +19,7 @@ Your pipelines appear in the [Pipelines][1] page under the CI menu.
 ## Setup
 
 {{< whatsnext desc="Select your CI provider to set up pipelines visibility in Datadog:" >}}
+    {{< nextlink href="continuous_integration/pipelines/buddy" >}}Buddy{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/codefresh" >}}Codefresh{{< /nextlink >}}
