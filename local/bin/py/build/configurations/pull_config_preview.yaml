@@ -1126,7 +1126,7 @@
         file_name: 'agent_config.yaml'
         output_content: false
     - action: pull-and-push-folder
-      branch: kari/cws-nav-updates
+      branch: main
       globs:
       - 'docs/cloud-workload-security/agent_expressions.md'
       - 'docs/cloud-workload-security/backend.md'
