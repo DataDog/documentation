@@ -152,7 +152,7 @@ Most of the settings below are configured within Squid's configuration file, usu
 
 First, configure Squid to accept traffic from the correct internal IP address ranges where your Agents are running. Many of these ACLs may already be defined.
 
-Ensure that your `squid.conf` file contains the following settings. The IP ranges listed below may be different for your environment depending on your network.
+Edit your `squid.conf` file so Squid is able to accept local traffic and forward it to the necessary Datadog intakes. An example config file is shared below:
 
 ```conf
 http_port 0.0.0.0:3128
