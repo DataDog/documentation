@@ -31,7 +31,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 [Squid][2] is a forward proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL. Squid is easy to configure and widely used for proxying traffic in a variety of different situations. 
 
-This is the best option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. 
+This is a simple, straightforward option if you do not already have a running web proxy in your network.
 
 #### Proxy forwarding with Squid
 
