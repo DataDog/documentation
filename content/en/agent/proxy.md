@@ -146,7 +146,7 @@ This is the best option if you do not have a web proxy readily available in your
 
 Squid should be installed on a host that has connectivity to Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][2].
 
-Most of these settings will be configured within Squid's configuration file, usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. 
+Most of the settings below are configured within Squid's configuration file, usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. 
 
 ##### Configure Squid to only send traffic to Datadog
 
