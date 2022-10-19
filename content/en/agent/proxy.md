@@ -176,7 +176,7 @@ Restart Squid so that your configurations can be applied.
 sudo systemctl start squid
 ```
 
-If Squid is already running, restart Squid.
+If Squid is already running, restart Squid instead with the following command:
 
 ```bash
 sudo systemctl restart squid
