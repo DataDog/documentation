@@ -168,7 +168,7 @@ Intelligent Test Runner performs test impact analysis based on code coverage to 
 - Changes in external services.
 - Changes to data files in data-driven tests.
 
-If you are authoring a commit that includes any of those cases, you can force-disable Intelligent Test Runner by adding `ITR:RunAll` (case insensitive) anywhere in your commit message.
+If you are authoring a commit that includes any of those cases, you can force-disable test skipping in Intelligent Test Runner by adding `ITR:NoSkip` (case insensitive) anywhere in your commit message.
 
 ### Need further help?
 
