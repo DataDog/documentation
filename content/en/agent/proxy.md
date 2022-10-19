@@ -191,7 +191,7 @@ Assuming you've [already configured Squid as a system service][9], you can run t
 net start squid
 ```
 
-If Squid is already running, restart Squid.
+If Squid is already running, restart Squid instead with the following commands:
 
 ```bash
 net stop squid
