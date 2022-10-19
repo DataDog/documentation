@@ -37,7 +37,7 @@ The .NET Tracer supports the following logging libraries:
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
 
 <div class="alert alert-info">
-  <div class="alert-info">You can also refer to <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> as they may be easier to follow up.</div>
+  <div class="alert-info">See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.</div>
   </div>
 </div>
 
@@ -350,4 +350,3 @@ Ensure that log collection is configured in the Datadog Agent and that the [Logs
 [13]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging
 [14]: https://github.com/huorswords/Microsoft.Extensions.Logging.Log4Net.AspNetCore#using-beginscope
 [15]: /logs/log_collection/csharp/#configure-your-datadog-agent
-[16]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection
