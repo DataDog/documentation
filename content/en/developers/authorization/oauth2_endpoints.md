@@ -24,7 +24,7 @@ Applications using protected Datadog resources must be authorized by a user befo
 
 #### Overview
 
-To start the authorization code grant flow, an application makes a `GET` request to Datadog’s authorization endpoint. This redirects a user to Datadog’s authorization-grant flow and renders a consent page displaying the list of scopes requested by your application and a prompt for the user to authorize access. 
+To start the authorization code grant flow, an application makes a `GET` request to Datadog’s authorization endpoint. This redirects a user to Datadog’s authorization-grant flow and renders a consent page displaying the list of scopes requested by your application and a prompt for the user to authorize access. This also returns the [Datadog site][12] that the request is being made from. 
 
 #### Request 
 In the authorization request, the application constructs the redirect URI by adding the following parameters to the query component of the URI using the `application/x-www-form-urlencoded` format: 
@@ -46,7 +46,7 @@ https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/
 
 #### Success Response
 
-If a user successfully grants the access request, your application [obtains an authorization code](#Obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code` in the query component.
+If a user successfully grants the access request, your application [obtains an authorization code](#Obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `site` parameter, in the query component. 
 
 #### Error Response
 
@@ -88,7 +88,7 @@ The [access token request][4] is made with the following parameters in the body 
 |------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `redirect_uri`                       | The same [redirection endpoint][5] sent in the authorization requests.                                                                                                                                   |
 | `client_id`                          | The client ID of your OAuth2 client.                                                                                                                                                                |
-| `client_secret` (if issued)          | The client secret of your OAuth2 private client.                                                                                                                                                    |
+| `client_secret` (if issued)          | The client secret of your OAuth2 confidential client.                                                                                                                                                    |
 | `grant_type`                         | The grant type should be `authorization_code` to receive your initial access token and refresh token, and the grant type should be `refresh_token` to receive any subsequent access and refresh tokens. |
 | `code_verifier` (if PKCE is enabled) | The raw [code verifier][6] used to derive the code challenge sent in the authorization requests.                                                                                                         |
 | `code`                               | The authorization code generated and returned from the previous authorization POST request.                                                                                                         |
@@ -131,7 +131,7 @@ The [revocation request][10] is made with the following parameters in the **body
 | HTTP Body Parameter          | Description                                                                                                              |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `client_id`                    | The client ID of your OAuth2 client.                                                                                      |
-| `client_secret` (if issued)                    | The client secret of your OAuth2 private client.                                                                                       |
+| `client_secret` (if issued)                    | The client secret of your OAuth2 confidential client.                                                                                       |
 | `token`                        | The token string to be revoked.                                                                                           |
 | `token_type_hint` (optional)   | A hint about the token type to be revoked to help optimize token lookup. For example, `access_token` or `refresh_token`.  |
 
@@ -142,7 +142,7 @@ Use this cURL command to make a revocation request:
 ```
 curl -X POST \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
-    -d 'client_id=$CLIENT_ID&token=$TOKEN_TO_REVOKE' \
+    -d 'client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&token=$TOKEN_TO_REVOKE' \
     "https://api.datadoghq.com/oauth2/v1/revoke" \ 
 ```
 
@@ -165,6 +165,7 @@ If a token request fails for any reason, such as missing or invalid parameters, 
 [9]: https://datatracker.ietf.org/doc/html/rfc7009#section-2
 [10]: https://datatracker.ietf.org/doc/html/rfc7009#section-2.1
 [11]: https://datatracker.ietf.org/doc/html/rfc7009#section-2.2
+[12]:https://docs.datadoghq.com/getting_started/site/
 {{% /tab %}}
 {{% tab "API Key Creation Endpoints" %}}
 
