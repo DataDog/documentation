@@ -210,7 +210,7 @@ Job logs are collected in the [Logs][9] product and automatically correlated wit
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility</div>
 
-Log files larger than 1GiB will be truncated.
+Log files larger than 1GiB are truncated.
 
 ## Further reading
 

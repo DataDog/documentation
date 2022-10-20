@@ -67,7 +67,7 @@ To enable logs, follow these steps:
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
 
-Log files larger than 1GiB will be truncated.
+Log files larger than 1GiB are truncated.
 
 ### Infrastructure metric correlation
 
