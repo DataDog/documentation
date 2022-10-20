@@ -1,4 +1,4 @@
 ---
 title: distributed tracing
 ---
-observing the performance and status of a code request as it moves across a distributed (often cloud-based) infrastructure
+Distributed tracing is a method of tracking application requests as they flow from frontend devices to backend services and databases. Developers can use distributed tracing to troubleshoot requests that exhibit high latency or errors.
