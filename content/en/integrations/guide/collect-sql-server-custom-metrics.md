@@ -9,7 +9,7 @@ further_reading:
   text: "Datadog-MySQL integration"
 ---
 
-By default the [Datadog-SQL server Check][1] only captures *some* of the metrics available in the `sys.dm_os_performance_counters` table. Add additional metrics by following one of the guides below.
+By default, the [Datadog-SQL server Check][1] only captures *some* of the metrics available in the `sys.dm_os_performance_counters` table. Add additional metrics by following one of the guides below.
 
 ## Collecting metrics from DMV
 
@@ -29,7 +29,7 @@ Parameter descriptions:
 |----------------|-------------------------------------------------------|
 | `name`         | Name of your metric inside Datadog.                   |
 | `counter_name` | The counter name of [SQL server database objects][2]. |
-| `tags`         | A list of key:value tag pairs                         |
+| `tags`         | A list of key:value tag pairs.                        |
 
 If a counter has multiple instances associated with it, you can choose to fetch a single instance with the `instance_name` parameter name:
 
@@ -50,7 +50,7 @@ custom_metrics:
   object_name: SQLServer:Plan Cache
 ```
 
-To collect all instances of a counter with multiple instances use the special, case-sensitive value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
+To collect all instances of a counter with multiple instances, use the special, case-sensitive value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
 
 ```yaml
 custom_metrics:
