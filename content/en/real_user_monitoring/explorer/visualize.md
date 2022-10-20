@@ -92,7 +92,7 @@ The funnel graph displays the sessions for your selected queries out of your tot
 
 {{< img src="real_user_monitoring/explorer/visualize/funnel_updated.mp4" alt="Funnel graph in the RUM Explorer" video="true" width="100%" >}}
 
-You can analyze user journeys in a [notebook][6] by exporting the funnel widget into an existing notebook or by creating a funnel widget in an existing notebook. For more information, see [Export RUM Events][7]. You can also alert on conversion rate/drop off rate by exporting the data points to a monitor.
+You can analyze user journeys in a [notebook][6] by exporting the funnel widget into an existing notebook or by creating a funnel widget in an existing notebook. For more information, see [Export RUM Events][7]. You can also alert on conversion and drop off rates by exporting the data points to a monitor.
 
 ## Related events
 
