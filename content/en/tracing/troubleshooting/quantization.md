@@ -23,9 +23,9 @@ Certain patterns in resource or span names are replaced with the following stati
 - Query parameter values: `{val}`
 
 These replacements affect:
-- trace metrics,
+- trace metric names,
 - the resource name tag on those metrics, and
-- all the resource and span for all ingested spans.
+- the resource and span names for all ingested spans.
 
 ### Quantization examples
 
