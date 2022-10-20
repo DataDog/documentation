@@ -27,7 +27,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 ## Web proxy
 
-### Configuring a web proxy to proxy agent traffic
+For specific information regarding Squid, see the [Squid](#squid) section of this page.
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
@@ -136,19 +136,17 @@ proxy_password: my_password
 
 Do not forget to [restart the Agent][1] for the new settings to take effect.
 
-### Configuring Squid to proxy agent traffic
+### Squid
 
-[Squid][2] is a forward proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL license. Squid is easy to configure and widely used for proxying traffic in a variety of deployment scenarios. 
-
-This is a simple, straightforward option if you do not already have a running web proxy in your network.
+[Squid][2] is a forward proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL license. Squid is a straightforward option if you do not already have a running web proxy in your network.
 
 #### Proxy forwarding with Squid
 
 ##### Configure Squid to only send traffic to Datadog
 
-Squid should be installed on a host that has connectivity to both your internal agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][2].
+Install Squid on a host that has connectivity to both your internal Agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][2].
 
-Most options are configured within Squid's configuration file, usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. 
+To configure Squid, edit the configuration file. This file is usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. 
 
 Edit your `squid.conf` configuration file so that Squid is able to accept local traffic and forward it to the necessary Datadog intakes:
 
@@ -165,7 +163,7 @@ http_access allow local manager
 
 ##### Start Squid
 
-Start (or restart) Squid so that your new configurations can be applied. Note that if you're configuring Squid on Windows, you will first need [to configure Squid as a system service][9].
+Start (or restart) Squid so that your new configurations can be applied. 
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -183,7 +181,7 @@ sudo systemctl restart squid
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Assuming Squid is configured as a system service, you can run the following in an Administrator command prompt:
+If you are configuring Squid on Windows, you must first [configure Squid as a system service][1]. You can then run the following in an Administrator command prompt:
 
 ```bash
 net start squid
@@ -196,6 +194,7 @@ net stop squid
 net start squid
 ```
 
+[1]: https://wiki.squid-cache.org/KnowledgeBase/Windows
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -203,7 +202,7 @@ net start squid
 
 **Agent v6 & v7**
 
-Modify the Agent's configuration file (`datadog.yaml`) to include the following.
+Modify the Agent's configuration file (`datadog.yaml`) to include the following:
 
 ```yaml
 proxy:
@@ -217,7 +216,7 @@ Verify that Datadog is able to receive the data from your Agent(s) by checking y
 
 **Agent v5**
 
-Modify the Agent's configuration file (`datadog.conf`) to include the following.
+Modify the Agent's configuration file (`datadog.conf`) to include the following:
 
 ```conf
 proxy_host: 127.0.0.1
@@ -1234,4 +1233,3 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 [6]: https://app.datadoghq.com/infrastructure
 [7]: https://www.nginx.com
 [8]: /agent/logs/proxy
-[9]: https://wiki.squid-cache.org/KnowledgeBase/Windows
