@@ -1,4 +1,4 @@
 ---
 title: eBPF
 ---
-eBPF is a Linux kernel technology that allows user to run bytecode without changiing the kernel or adding kernel modules.
+eBPF is a Linux kernel technology that allows users to run bytecode without changing the kernel or adding kernel modules.
