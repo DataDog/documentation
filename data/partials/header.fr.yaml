@@ -6,55 +6,55 @@ left:
       - name: product_features
         link: 'https://www.datadoghq.com/product/'
         title: Fonctionnalités
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''icône fonctionnalités''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''icône fonctionnalités''>'
       - name: product_integrations
         link: 'https://www.datadoghq.com/product/platform/integrations/'
         title: Intégrations
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''icône intégrations''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''icône intégrations''>'
       - name: product_dashboards
         link: 'https://www.datadoghq.com/product/platform/dashboards/'
         title: Dashboards
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''icône dashboard''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''icône dashboard''>'
       - name: product_logs
         link: 'https://www.datadoghq.com/product/log-management/'
         title: Log Management
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''icône log''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''icône log''>'
       - name: product_apm
         link: 'https://www.datadoghq.com/product/apm/'
         title: APM
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''icône apm''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''icône apm''>'
       - name: product_profiler
         link: 'https://www.datadoghq.com/product/code-profiling/'
         title: Profileur en continu
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profiler''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profiler''>'
       - name: product_security
         link: 'https://www.datadoghq.com/product/security-monitoring/'
         title: Security Monitoring
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''icône sécurité''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''icône sécurité''>'
       - name: product_network
         link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
         title: Surveillance réseau
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''icône réseau''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''icône réseau''>'
       - name: product_synthetics
         link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
         title: Surveillance Synthetic
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''icône synthetics''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''icône synthetics''>'
       - name: product_rum
         link: 'https://www.datadoghq.com/product/real-user-monitoring/'
         title: Real User Monitoring
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
       - name: product_serverless
         link: 'https://www.datadoghq.com/product/serverless-monitoring/'
         title: Informatique sans serveur
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône sans serveur''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône sans serveur''>'
       - name: product_alerts
         link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: Alertes
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''icône alerte''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''icône alerte''>'
       - name: product_api
         link: api
         title: API
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''icône api''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''icône api''>'
   - name: customers
     link: 'https://www.datadoghq.com/customers/'
     title: Clients

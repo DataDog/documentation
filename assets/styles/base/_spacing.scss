@@ -27,7 +27,7 @@ $spacer-halved: 0.3125rem !default;
         }
     }
 
-    .mr-half-#{$i} {
+    .me-half-#{$i} {
         margin-right: multiplyunit($spacer-halved, $i) !important;
     }
     .mb-half-#{$i} {
