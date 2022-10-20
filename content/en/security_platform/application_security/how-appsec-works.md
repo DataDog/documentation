@@ -1,5 +1,5 @@
 ---
-title: How Application Security Monitoring Works in Datadog
+title: How Application Security Management Works in Datadog
 kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
@@ -12,12 +12,12 @@ further_reading:
   text: "Introducing Datadog Application Security"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
-  text: "Get started with Application Security Monitoring"
+  text: "Get started with Application Security Management"
 ---
 
 ## Overview
 
-Datadog Application Security Monitoring (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities.
+Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities.
 
 APM records information about each HTTP request, referred to as traces. Datadog ASM uses the information APM is already collecting, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are an aggregation of suspicious requests. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 

@@ -157,13 +157,7 @@ This might mean your private location is unable to reach the endpoint your API t
 
 This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][16]. Ensure that the source of the bind mount is a local directory.
 
-## Synthetics and CI/CD
-
-### CI metadata does not appear in the CI Results Explorer
-
-Check whether you are using API endpoints to trigger your CI/CD test runs. To have your CI Results Explorer populate with CI metadata, you must use the [NPM package][17].
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -183,4 +177,3 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. To ha
 [14]: https://docs.docker.com/config/containers/resource_constraints/
 [15]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
-[17]: /synthetics/cicd_integrations#use-the-cli

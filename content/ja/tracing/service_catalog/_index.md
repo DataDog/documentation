@@ -165,7 +165,7 @@ Integrations
 ### 書き込み権限
 
 サービスカタログの書き込み権限は、ユーザーがサービスカタログのデータを変更することを許可します。書き込み権限は、以下の機能に対して必要です。
-- `POST /api/v2/services/definition` エンドポイントを使ったサービス定義の挿入または更新
+- `POST /api/v2/services/definitions` エンドポイントを使ったサービス定義の挿入または更新
 - `DELETE /api/v2/services/definition/<service_name>` エンドポイントを使ったサービス定義の削除
 - Discover Services UI でオンボーディングプロセスを完了する
 

@@ -3,6 +3,7 @@ title: Online Archives
 kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 is_beta: true
+private: true
 further_reading:
 - link: "/logs/log_configuration/indexes/#indexes-filters"
   tag: "Documentation"
@@ -91,6 +92,9 @@ Here are examples of different log retention strategies and how to implement the
 3. Add a `*` exclusion filter on the index to filter out all logs from the Index but not from the Online Archives.
 
 {{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from the index" style="width:100%;">}}
+
+### Disabling Online Archives
+Select the index where you want to turn off Online Archives and then switch the Online Archives toggle to the OFF position.
 
 **Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
 

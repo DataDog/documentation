@@ -22,7 +22,7 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-You can set up your logging library and .NET tracing configurations so that trace and span IDs are injected into application logs, providing you with application performance monitoring data correlated with log data. 
+You can set up your logging library and .NET tracing configurations so that trace and span IDs are injected into application logs, providing you with application performance monitoring data correlated with log data.
 
 Configure the .NET Tracer with [Unified Service Tagging][1] for the best experience and helpful context when correlating application traces and logs.
 
@@ -30,11 +30,16 @@ The .NET Tracer supports the following logging libraries:
 - [Serilog][2] (v1.4+)
 - [log4net][3]
 - [NLog][4]
-- [Microsoft.Extensions.Logging][5] (added in v1.28.6) 
+- [Microsoft.Extensions.Logging][5] (added in v1.28.6)
 
 ## Getting started
 
 To inject correlation identifiers into your log messages, follow the instructions for your logging library.
+
+<div class="alert alert-info">
+  <div class="alert-info">See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.</div>
+  </div>
+</div>
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
@@ -159,7 +164,7 @@ To automatically inject correlation identifiers into your log messages:
 
 ```csharp
 Host.CreateDefaultBuilder(args)
-    .ConfigureLogging(logging => 
+    .ConfigureLogging(logging =>
     {
         logging.AddFile(opts =>
         {
@@ -207,7 +212,6 @@ If you prefer to manually correlate your traces with your logs, you can add corr
   | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
   | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
   | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
-
 
 **Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see [Correlated Logs Not Showing Up in the Trace ID Panel][10].
 

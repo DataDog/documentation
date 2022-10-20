@@ -4,19 +4,19 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security Monitoring"
+  text: "Protect against Threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
   text: "Getting Started Enabling ASM for Your Services"
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
-  text: "Out-of-the-Box Application Security Monitoring Rules"
+  text: "Out-of-the-Box Application Security Management Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"
 - link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Monitoring Works in Datadog"
+  text: "How Application Security Management Works in Datadog"
 ---
 
 ## Compatibility
@@ -536,7 +536,7 @@ To create an exclusion filter, do one of the following:
 
 **Note**: Requests (traces) matching an exclusion filter are not billed.
 
-## Disabling Application Security Monitoring
+## Disabling Application Security Management
 
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once it's removed, restart your service.
 
