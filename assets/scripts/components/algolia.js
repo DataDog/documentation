@@ -53,7 +53,7 @@ const appendHomeLinkToAutocompleteWidget = () => {
     const autocompleteHeaderElement = headers[0];
     const searchPageLink = document.createElement('a');
 
-    searchPageLink.className = "font-regular text-underline pl-2 js-api-search";
+    searchPageLink.className = "font-regular text-underline ps-2 js-api-search";
     searchPageLink.innerText = 'Click here to search the full docs';
     searchPageLink.href = `${baseUrl}/search/`;
 
