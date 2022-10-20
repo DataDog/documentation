@@ -1,18 +1,19 @@
 ---
-title: 取り込んだログからメトリクスを生成する
-kind: documentation
 aliases:
-  - /ja/logs/processing/logs_to_metrics/
-  - /ja/logs/logs_to_metrics/
+- /ja/logs/processing/logs_to_metrics/
+- /ja/logs/logs_to_metrics/
 description: 取り込んだログからメトリクスを生成します。
 further_reading:
-  - link: logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: logs/logging_without_limits
-    tag: ドキュメント
-    text: Datadog でインデックス化するログの量を制御する
+- link: logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: logs/logging_without_limits
+  tag: ドキュメント
+  text: Datadog でインデックス化するログの量を制御する
+kind: documentation
+title: 取り込んだログからメトリクスを生成する
 ---
+
 ## 概要
 
 Datadog の [Logging without Limits][1]\* を使用すると、インデックスに含めるものと除外するものを動的に決定できます。同時に、多くのタイプのログが、長期間にわたり KPI などトレンドの追跡テレメトリーとして使用されます。ログベースのメトリクスは、インジェストストリーム全体からログデータを要約するコスト効率の高い方法です。つまり、[除外フィルター][2]を使用して調査用に保存するアイテムを制限しても、15 か月間のすべてのログデータの傾向と異常を 10 秒の粒度で視覚化できます。

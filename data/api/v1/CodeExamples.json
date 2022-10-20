@@ -191,6 +191,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3669695268",
+      "description": "Create a new dashboard with logs query table widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3117424216",
+      "description": "Create a new dashboard with logs_stream list_stream widget and storage parameter"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2917274132",
       "description": "Create a new dashboard with manage_status widget"
     },
@@ -231,6 +241,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1423904722",
+      "description": "Create a new dashboard with slo list widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_173805046",
       "description": "Create a new dashboard with slo widget"
     },
@@ -241,6 +256,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_858397694",
+      "description": "Create a new dashboard with template variable defaults returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2850365602",
+      "description": "Create a new dashboard with template variable presets using values returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
     },
@@ -248,6 +273,11 @@
       "group": "dashboards",
       "suffix": "_1213075383",
       "description": "Create a new dashboard with toplist widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2652180930",
+      "description": "Create a new dashboard with topology_map widget"
     },
     {
       "group": "dashboards",

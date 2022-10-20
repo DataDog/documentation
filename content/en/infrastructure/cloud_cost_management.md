@@ -2,29 +2,26 @@
 title: Cloud Cost Management
 kind: documentation
 ---
- 
-<div class="alert alert-warning">Cloud Cost Management is in private beta and supports only AWS at this time. To request access, <a href="https://www.datadoghq.com/cloud-cost-management-beta/">use this form.</a></div>
- 
 ## Overview
- 
+
 Cloud Cost Management provides insights for engineering and finance teams to see how changes to infrastructure can affect costs. It enables you to understand trends, allocate spend across your organization, and identify inefficiencies.
 Datadog ingests your cloud cost data and transforms it into queryable metrics. If costs rise, you can correlate the change with usage metrics to determine the root cause.
- 
+
 To use Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog.
- 
+
 ## Setup
 
 To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
- 
+
 ### Prerequisite: generate a Cost and Usage Report
- 
+
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
- 
+
 * **Include resource IDs**
 * **Automatically refresh your Cost & Usage Report**
- 
+
 Select the following Delivery options:
- 
+
 * Time granularity: **Hourly**
 * Report versioning: **Create new report version**
 * Compression type: **GZIP**
@@ -34,7 +31,7 @@ Select the following Delivery options:
 
 Select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
 
-**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][6] for cost visibility into related **member accounts**. If you decide to send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][7] to allow Datadog to have full visibility into the member account:
+**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you decide to send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3] to allow Datadog to have full visibility into the member account:
 
 * **Linked Account Access**
 * **Linked Account Refunds and Credits**
@@ -42,7 +39,7 @@ Select your AWS management account from the dropdown menu, allowing Datadog to d
 
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Cost and Usage Reports details][2].
+If you have navigated away from the report that you created in the setup prerequisites section, follow AWS documentation to find and [view your Cost and Usage Reports details][4].
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
@@ -52,9 +49,9 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 * **Report Name**: This is the name you entered when you generated the report in the prerequisite section. If viewing the **Report path prefix** from the AWS details page, this is the second half of the path. For example, if **Report path prefix** is displayed as `cur-report-dir/cost-report`, you would enter `cost-report`.
 
 ### Configure access to the Cost and Usage Report
- 
-Configure AWS to ensure Datadog has permissions to access the CUR and the s3 bucket it is stored in by [creating a policy][3] using the following JSON:
- 
+
+Configure AWS to ensure Datadog has permissions to access the CUR and the s3 bucket it is stored in by [creating a policy][5] using the following JSON:
+
 {{< code-block lang="yaml" collapsible="true" >}}
 {
   "Version": "2012-10-17",
@@ -86,67 +83,93 @@ Configure AWS to ensure Datadog has permissions to access the CUR and the s3 buc
       {
           "Sid": "DDCloudCostListCURs",
           "Action": [
-            "cur:DescribeReportDefinitions"
+              "cur:DescribeReportDefinitions"
           ],
           "Effect": "Allow",
           "Resource": "*"
-        }
+      },
+      {
+          "Sid": "DDCloudCostListOrganizations",
+          "Action": [
+              "organizations:Describe*",
+              "organizations:List*"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+      }
   ]
 }
 {{< /code-block >}}
- 
+
 **Tip:** Make note of the name you created for this policy for next steps.
- 
+
 ### Attach the policy to the Datadog integration role
- 
+
 Attach the new S3 policy to the Datadog integration role.
- 
+
 1. Navigate to **Roles** in the AWS IAM console.
 2. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.
 3. Click **Attach policies**.
 4. Enter the name of the S3 bucket policy created above.
 5. Click **Attach policy**.
- 
+
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 ## Cost types
- 
+
 You can visualize your ingested data using the following cost types:
- 
+
 | Cost Type            | Description           |
 | -------------------- | --------------------- |
 | `aws.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis). |
 | `aws.cost.unblended` | Cost shown as the amount charged at the time of usage (cash basis).|
 | `aws.cost.blended`   | Cost based on the average rate paid for a usage type across an organization's member accounts.|
 | `aws.cost.ondemand`  | Cost based on the list rate provided by AWS. |
- 
+
 ## Tag enrichment
- 
-Datadog adds tags to the ingested cost data to help you further break down and understand your costs.
- 
-The added tags correlate the cost data with observability data that your systems provide to Datadog, data from resources configured with [AWS Resource tags][4], and the [Cost and Usage Report (CUR)][5].
- 
-The following tags are also available for filtering and grouping data:
- 
-| Tag                        | Description       |
-| -------------------------- | ----------------- |
-| `cloud_product`            | The cloud service being billed.|
-| `cloud_product_group`      | The category for the cloud service being billed (for example, Compute or Storage)|
-| `cloud_usage_type`         | The usage details of this item.|
-| `cloud_charge_type`        | The type of charge covered by this item (for example, Usage, or Tax)|
-| `cloud_purchase_type`      | Whether the usage is Reserved, Spot, or On Demand.|
-| `cloud_account`            | The ID of the account that used this item.|
-| `cloud_billing_account_id` | The ID of the account paying for this usage.|
- 
+
+Datadog automatically ingests all of your [AWS Resource tags][6] for most of your resources, without you having to manually [activate them][7] as cost allocation tags in your bill. This allows you to allocate costs to the dimensions your organization cares about.
+
+Additionally, Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][8].
+
+The following out-of-the-box tags are also available for filtering and grouping data:
+
+| Tag                          | Description       |
+| ---------------------------- | ----------------- |
+| `aws_product`                | The AWS service being billed.|
+| `aws_product_family`         | The category for the AWS service being billed (for example, Compute or Storage).|
+| `aws_management_account_name`| The AWS management account name associated with the item.|
+| `aws_management_account_id`  | The AWS management account ID associated with the item.|
+| `aws_member_account_name`    | The AWS memmber account name associated with the item.|
+| `aws_member_account_id`      | The AWS member account ID associated with the item.|
+| `aws_cost_type`              | The type of charge covered by this item (for example, Usage, or Tax).|
+| `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On-Demand.|
+| `aws_reservation_arn`        | The ARN of the Reserved Instance that the item benefited from.|
+| `aws_savings_plan_arn`       | The ARN of the Savings Plan the item benefited from.|
+| `aws_usage_type`             | The usage details of the item (for example, BoxUsage:i3.8xlarge).|
+| `aws_operation`              | The operation associated with the item (for example, RunInstances).|
+| `aws_region`                 | The region associated with the item.|
+| `aws_availability_zone`      | The availability zone associated with the item.|
+| `aws_resource_id`            | The resource ID associated with the item.|
+| `aws_instance_type`          | The instance types associated with your items.|
+| `aws_instance_family`        | The instance family associated with your item (for example, Storage optimized).|
+| `is_aws_ec2_compute`         | Whether the usage is related to EC2 compute.|
+| `is_aws_ec2_compute_on_demand`| Whether the usage is on-demand.|
+| `is_aws_ec2_compute_reservation`| Whether the usage is associated with a Reserved Instance.|
+| `is_aws_ec2_capacity_reservation`| Whether the usage is associated with a Capacity Reservation.|
+| `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
+| `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
+
 ## Cloud costs in dashboards
- 
+
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
- 
+
 {{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
- 
+
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
-[2]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
-[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[5]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
-[6]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html 
-[7]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
+[3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
+[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
+[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
+[6]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+[7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
+[8]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html

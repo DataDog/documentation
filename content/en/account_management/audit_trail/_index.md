@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
+- link: "https://www.datadoghq.com/blog/audit-trail-best-practices/"
+  tag: "Blog"
+  text: "Monitor critical Datadog assets and configurations with Audit Trail"
 ---
 
 ## Overview
@@ -41,17 +44,10 @@ For security admins or InfoSec teams, audit trail events help with compliance ch
 
 To enable Datadog Audit Trail, navigate to your [Organization Settings][2] and select *Audit Trail Settings* under *Security*. Click the **Enable** button.
 
-{{< img src="account_management/audit_logs/audit_enable.png" alt="Audit Trail setup in Datadog" style="width:100%;">}}
+{{< img src="account_management/audit_logs/audit_trail_settings.png" alt="The Audit Trail Settings page showing it disabled" style="width:85%;">}}
 
 ## Configuration
 
-### Event types
-
-Event types are a collection of audit events. For example, the Authentication event type contains all events related to authentication and the Dashboards event type contains all the events related to interacting with the dashboards product. To enable an event type, navigate to the *Audit Trail Settings* section of your [Organization Settings][2] and toggle on event types that are relevant to you.
-
-{{< img src="account_management/audit_logs/audit_toggles.png" alt="Audit Trail event types setup in Datadog" style="width:50%;">}}
-
-See [Audit Trail Events][3] for a list of different events.
 
 ### Archiving
 
@@ -73,13 +69,48 @@ To explore an audit event, navigate to the [Audit Trail][1] section, also access
 
 {{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
 
-Audit Trail events have the same functionality as logs within the [Log Explorer][4]:
+Audit Trail events have the same functionality as logs within the [Log Explorer][3]:
 
 - Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
 - Inspect related audit trail events by selecting an event and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, etc.
 
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
+
+
+### Saved views
+
+Efficient troubleshooting requires your data to be in the proper scope to permit exploration, have access to visualization options to surface meaningful information, and have relevant facets listed to enable analysis. Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the Audit Trail explorer.
+
+All saved views, that are not your default view, are shared across your organization:
+
+* **Integration saved views** come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
+* **Custom saved views** are created by users. They are editable by any user in your organization (except [read only users][4]), and identified with the avatar of the user who created them Click the **Save** button to create a new custom saved view from the current content of your explorer.
+
+At any moment, from the saved view entry in the Views panel:
+
+* **Load** or **reload** a saved view.
+* **Update** a saved view with the configuration of the current view.
+* **Rename** or **delete** a saved view.
+* **Share** a saved view through a short-link.
+* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
+
+**Note:** Update, rename, and delete actions are disabled for integration saved views and [read only users][4].
+
+
+### Default view
+
+{{< img src="logs/explorer/saved_views/default.png" alt="Default view" style="width:50%;" >}}
+
+The default view feature allows you to set a default set of queries or filters that you always see when you first open the Audit Trail explorer. You can come back to your default view by opening the Views panel and clicking the reload button.
+
+Your existing Audit Trail explorer view is your default saved view. This configuration is only accessible and viewable to you, and updating this configuration does not have any impact on your organization. You can **temporarily** override your default saved view by completing any action in the UI or by opening links to the Audit Trail explorer that embed a different configuration.
+
+At any moment, from the default view entry in the Views panel:
+
+* **Reload** your default view by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
 
 ## Create a monitor
 
@@ -107,8 +138,8 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][11] that shows vari
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: https://app.datadoghq.com/organization-settings/
-[3]: /account_management/audit_trail/events/
-[4]: /logs/explorer/
+[3]: /logs/explorer/
+[4]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
 [5]: /monitors/create/types/audit_trail/
 [6]: /dashboards/
 [7]: /dashboards/widgets/top_list/

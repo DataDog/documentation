@@ -29,8 +29,7 @@ title: Agent プロキシのコンフィギュレーション
 
 Agent は従来の Web プロキシをネイティブにサポートします。プロキシ経由でインターネットに接続する必要がある場合は、Agent 構成ファイルを編集します。
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+**Agent v6 & v7**
 
 Agent `datadog.yaml` コンフィギュレーションファイルで、`https` リクエスト用と `http` リクエスト用にそれぞれプロキシサーバーを設定します。Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたいずれのリクエストでも、プロキシサーバーで SSL を有効化することができます。`datadog.yaml` ファイルのコンフィギュレーション例は以下の通りです。
 
@@ -117,8 +116,7 @@ Agent は、これらの値を以下の優先順で使用します。
 2. 環境変数 `HTTPS_PROXY`、`HTTP_PROXY`、`NO_PROXY`
 3. `datadog.yaml` 内の値
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+**Agent v5**
 
 <div class="alert alert-warning">
 メトリクスのプロキシで使われる <code>&ltHOST&gt;:&ltPORT&gt;</code> はログのプロキシで使うことは**できません**。<a href="/agent/logs/proxy">ログ用プロキシ</a>ページを参照してください。
@@ -136,22 +134,20 @@ proxy_password: my_password
 
 新しい設定を有効にするために、[Agent を再起動する][1]ことを忘れないでください。
 
-[1]: /ja/agent/guide/agent-commands/
-{{% /tab %}}
-{{< /tabs >}}
+
 
 ## HAProxy
 
-[HAProxy][1] は、TCP アプリケーションと HTTP アプリケーションのプロキシを提供する、無料で高速、そして信頼性の高いソリューションです。通常、HAProxy はロードバランサーとして着信リクエストをプールサーバーに分散するために使われますが、Agent トラフィックを外部接続がないホストから Datadog にプロキシするために使うこともできます。
+[HAProxy][2] は、TCP アプリケーションと HTTP アプリケーションのプロキシを提供する、無料で高速、そして信頼性の高いソリューションです。通常、HAProxy はロードバランサーとして着信リクエストをプールサーバーに分散するために使われますが、Agent トラフィックを外部接続がないホストから Datadog にプロキシするために使うこともできます。
 
 `agent ---> haproxy ---> Datadog`
 
 これは、ネットワーク内に容易に利用できる Web プロキシがなく、多数の Agent をプロキシしたい場合に最適なオプションです。場合によっては、1 つのプロキシが 1000 以上の Agent を収容できるため、ネットワーク内のローカル Agent のトラフィックを処理するには、1 つの HAProxy インスタンスで十分なことがあります。
 
-**注**: この数字は、特に `m3.xl` インスタンスの性能に基づいた保守的な見積もりです。多くのネットワーク関連やホスト関連の変数が HAProxy のスループットに影響を与える可能性があるので、サービスを開始する前と後の両方でプロキシの配置に目を光らせておく必要があります。詳しい情報は [HAProxy ドキュメント][2]を参照してください。
+**注**: この数字は、特に `m3.xl` インスタンスの性能に基づいた保守的な見積もりです。多くのネットワーク関連やホスト関連の変数が HAProxy のスループットに影響を与える可能性があるので、サービスを開始する前と後の両方でプロキシの配置に目を光らせておく必要があります。詳しい情報は [HAProxy ドキュメント][3]を参照してください。
 
 HAProxy と Datadog 間の通信は、常に TLS で暗号化されています。Agent ホストと HAProxy ホスト間の通信は、プロキシと Agent が同じホスト上にあると想定されるため、デフォルトでは暗号化されません。しかし、HAproxy ホストと Agent ホストが同じ孤立したローカルネットワーク上に配置されていない場合、この通信を TLS 暗号化で保護することをお勧めします。
-Agent と HAProxy 間のデータを暗号化するには、HAProxy ホストの Subject Alternative Name (SAN) 拡張機能を持つ x509 証明書を作成する必要があります。この証明書バンドル (*.pem) には、公開証明書と秘密鍵の両方が含まれている必要があります。詳しくは、こちらの [HAProxy のブログ記事][3]をご覧ください。
+Agent と HAProxy 間のデータを暗号化するには、HAProxy ホストの Subject Alternative Name (SAN) 拡張機能を持つ x509 証明書を作成する必要があります。この証明書バンドル (*.pem) には、公開証明書と秘密鍵の両方が含まれている必要があります。詳しくは、こちらの [HAProxy のブログ記事][4]をご覧ください。
 
 
 **注**: 次のコマンドで Datadog 証明書をダウンロードしてください:
@@ -171,8 +167,7 @@ Datadog への接続があるホストに HAProxy をインストールする必
 
 **注**: Agent と HAProxy が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` 構成ファイルを使用することが推奨されます。
 
-{{< tabs >}}
-{{% tab "HTTP" %}}
+##### HTTP
 
 ```conf
 # 基本構成
@@ -421,8 +416,7 @@ backend datadog-appsec-events # 非推奨
 ```
 
 
-{{% /tab %}}
-{{% tab "HTTPS" %}}
+##### HTTPS
 
 この構成では、Agent と HAProxy 間の通信に SSL/TLS の暗号化を追加します。変数 `<PATH_TO_PROXY_CERTIFICATE_PEM>` をプロキシ証明書バンドルへのパス (*.pem) に置き換えてください。
 
@@ -673,10 +667,6 @@ backend datadog-appsec-events # 非推奨
 ```
 
 
-{{% /tab %}}
-{{< /tabs >}}
-
-
 **注**: プロキシホストで証明書を取得できない場合、`verify required ca-file <PATH_TO_CERTIFICATES>` の代わりに `verify none` を使用できますが、その場合 HAProxy は Datadog のインテーク証明書を確認できないので注意が必要です。
 
 HAProxy 1.8 以降では、DNS サービスの検出によりサーバーの変更を検出し、構成に自動的に適用することができます。
@@ -684,8 +674,7 @@ HAProxy 1.8 以降では、DNS サービスの検出によりサーバーの変�
 
 #### Datadog Agent 構成
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
+**Agent v6 & v7**
 
 `haproxy.example.com` などの `dd_url` を HAProxy のアドレスに設定して、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.yaml` ファイルにあります。
 
@@ -749,12 +738,9 @@ skip_ssl_validation: true
 
 最後に、[Agent を再起動][1]します。
 
-すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][2]を確認します。
+すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][5]を確認します。
 
-[1]: /ja/agent/guide/agent-commands/#restart-the-agent
-[2]: https://app.datadoghq.com/infrastructure
-{{% /tab %}}
-{{% tab "Agent v5" %}}
+**Agent v5**
 
 `haproxy.example.com` などの `dd_url` を HAProxy のアドレスに設定して、HAProxy をポイントするように各 Agent を編集します。この `dd_url` 設定は、`datadog.conf` ファイルにあります。
 
@@ -792,16 +778,11 @@ skip_ssl_validation: yes
 
 最後に、[Agent を再起動][1]します。
 
-すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][2]を確認します。
-
-[1]: /ja/agent/guide/agent-commands/#restart-the-agent
-[2]: https://app.datadoghq.com/infrastructure
-{{% /tab %}}
-{{< /tabs >}}
+すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][5]を確認します。
 
 ## NGINX
 
-[NGINX][4] は、リバースプロキシ、ロードバランサー、メールプロキシ、HTTP キャッシュとしても使用できる Web サーバーです。NGINX を Datadog Agent のプロキシとして使用することも可能です。
+[NGINX][6] は、リバースプロキシ、ロードバランサー、メールプロキシ、HTTP キャッシュとしても使用できる Web サーバーです。NGINX を Datadog Agent のプロキシとして使用することも可能です。
 
 `agent ---> nginx ---> Datadog`
 
@@ -825,8 +806,7 @@ Datadog への接続があるホストに NGINX をインストールする必�
 
 **注**: Agent と NGINX が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` 構成ファイルを使用することが推奨されます。
 
-{{< tabs >}}
-{{% tab "HTTP" %}}
+##### HTTP
 
 ```conf
 user nginx;
@@ -928,8 +908,7 @@ stream {
 }
 ```
 
-{{% /tab %}}
-{{% tab "HTTPS" %}}
+##### HTTPS
 
 
 この構成では、Agent と NGINX 間の通信に SSL/TLS の暗号化を追加します。`<PATH_TO_PROXY_CERTIFICATE>` をプロキシ公開証明書へのパスに、`<PATH_TO_PROXY_CERTIFICATE_KEY>` を秘密鍵へのパスに置き換えてください。
@@ -1039,8 +1018,6 @@ stream {
     }
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
 **注**: プロキシホストで証明書を取得できない場合、`proxy_ssl_verify on` を削除できますが、その場合 NGINX は Datadog のインテーク証明書を確認できないので注意が必要です。
 
@@ -1108,7 +1085,7 @@ Agent と NGINX 間で暗号化を使用する場合、Agent がプロキシ証�
 skip_ssl_validation: true
 ```
 
-TCP 経由でログを送信する場合は、[ログの TCP プロキシ][5]を参照してください。
+TCP 経由でログを送信する場合は、[ログの TCP プロキシ][7]を参照してください。
 
 ## Datadog Agent
 
@@ -1151,13 +1128,15 @@ TCP 経由でログを送信する場合は、[ログの TCP プロキシ][5]を
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: http://haproxy.1wt.eu
-[2]: http://www.haproxy.org/#perf
-[3]: https://www.haproxy.com/blog/haproxy-ssl-termination/
-[4]: https://www.nginx.com
-[5]: /ja/agent/logs/proxy
+[1]: /ja/agent/guide/agent-commands/
+[2]: http://haproxy.1wt.eu
+[3]: http://www.haproxy.org/#perf
+[4]: https://www.haproxy.com/blog/haproxy-ssl-termination/
+[5]: https://app.datadoghq.com/infrastructure
+[6]: https://www.nginx.com
+[7]: /ja/agent/logs/proxy

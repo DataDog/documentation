@@ -22,7 +22,7 @@ Datadog's admission controller is `MutatingAdmissionWebhook` type. For more deta
 
 ## Requirements
 
-- Datadog Cluster Agent v1.7.0+
+- Datadog Cluster Agent v7.39+
 
 ## Configuration
 
@@ -128,25 +128,16 @@ Finally, run the following commands:
 - `kubectl apply -f agent-services.yaml`
 - `kubectl apply -f cluster-agent-deployment.yaml`
 
-### APM and DogStatsD
 
-To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
+### APM
+You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracing libraries automatically. Read [APM Tracing Setup with Admission Controller][3] for more information
 
+
+### DogStatsD
+
+To configure DogStatsD clients or other APM libraries that do not support library injection, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by doing one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
-
-To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
-
-Possible options:
-
-| mutateUnlabelled | Pod label                               | Injection |
-|------------------|-----------------------------------------|-----------|
-| `true`           | No label                                | Yes       |
-| `true`           | `admission.datadoghq.com/enabled=true`  | Yes       |
-| `true`           | `admission.datadoghq.com/enabled=false` | No        |
-| `false`          | No label                                | No        |
-| `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
-| `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
 
 #### Order of priority
@@ -175,8 +166,8 @@ Possible options:
 
 - The admission controller needs to be deployed and configured before the creation of new application pods. It cannot update pods that already exist.
 - To disable the admission controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
-- By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
-- In a Google Kubernetes Engine (GKE) Private Cluster, you need to [add a Firewall Rule for the control plane][4]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
+- By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][4]).
+- In a Google Kubernetes Engine (GKE) Private Cluster, you need to [add a Firewall Rule for the control plane][5]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
 
 
 ## Further Reading
@@ -185,5 +176,6 @@ Possible options:
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
 [2]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
-[3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
-[4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
+[3]: /tracing/trace_collection/admission_controller/
+[4]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
+[5]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules

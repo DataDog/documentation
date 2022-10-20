@@ -201,7 +201,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/ddprof/lib
 
 **注**: パラメーターには必ず値を設定する必要があります。例えば、プロファイラーの構成をログに記録するには、`--show_config` だけではなく、 `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` を設定するか、`--show_config yes` を渡さなければなりません。このような引数の場合、設定を有効にするには `yes`、`true`、`enable` を、無効にするには `no`、`false`、`disable` を同じように使用することができます。
 
-[パラメーターの全リスト](https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md)を参照するか、コマンドラインを使用してください。
+[パラメーターの全リスト][5]を参照するか、コマンドラインを使用してください。
 
 ```bash
 ddprof --help
@@ -240,7 +240,7 @@ ddprof --help
 
 ## 次のステップ
 
-[プロファイラーの概要][5]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
 ## その他の参考資料
 
@@ -250,4 +250,5 @@ ddprof --help
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
 [4]: /ja/getting_started/tagging/unified_service_tagging
-[5]: /ja/getting_started/profiler/
+[5]: https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md
+[6]: /ja/getting_started/profiler/

@@ -35,7 +35,7 @@ The latest Node.js Tracer supports versions `>=14`. For a full list of Datadogâ€
 
 ### Follow the in-app documentation (recommended)
 
-Follow the [Quick start instructions][5] in Datadog for the best experience, including:
+Follow the [Quick start instructions][2] in Datadog for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -101,6 +101,8 @@ For other environments, see the [Integrations][5] documentation for that environ
 Read [tracer settings][3] for a list of initialization options.
 
 ### Instrument your application
+
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/admission_controller">Injecting Libraries Using Admission Controller</a> for instructions.</div>
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
@@ -174,7 +176,6 @@ If needed, configure the tracing library to send application performance telemet
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: /getting_started/tagging/unified_service_tagging/
+[2]: https://app.datadoghq.com/apm/docs
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
-[5]: https://app.datadoghq.com/apm/docs

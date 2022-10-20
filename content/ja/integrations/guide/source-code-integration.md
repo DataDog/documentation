@@ -19,7 +19,7 @@ GitHub アプリのインテグレーションと組み合わせることで、�
 ## コンフィギュレーション
 
 <div class="alert alert-info">
-ソースコードのインテグレーションは、Go とすべての JVM 言語をサポートしています。
+ソースコードのインテグレーションは、Go、Java、JavaScript、Python をサポートしています。
 <br>
 Datadog Agent 7.35.0 以降が必要です。
 </div>
@@ -60,7 +60,7 @@ Datadog Agent 7.35.0 以降が必要です。
 docker build . \
   -t my-application \
   --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
-  --label org.opencontainers.image.source=https://git-provider.example/me/my-repo
+  --label org.opencontainers.image.source=git-provider.example/me/my-repo
 ```
 
 [1]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
@@ -70,7 +70,7 @@ docker build . \
 Kubernetes を使用している場合は、[Datadog のタグオートディスカバリー][1]を使用してデプロイされたポッドにポッドアノテーションを付けます。
 
 ```
-ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.repository_url": "<REPOSITORY_URL>"}'
+ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.repository_url": "git-provider.example/me/my-repo"}'
 ```
 
 git commit SHA とリポジトリ URL がテレメトリーに追加されます。
@@ -84,7 +84,7 @@ git commit SHA とリポジトリ URL がテレメトリーに追加されます
 トレース、スパン、プロファイルに `git.commit.sha` と `git.repository_url` というタグを付けるには、環境変数 `DD_TAGS` でトレーサーを構成します。
 
 ```
-export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url:<REPOSITORY_URL>"
+export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA> git.repository_url:git-provider.example/me/my-repo"
 ./my-application start
 ```
 

@@ -10,7 +10,7 @@ further_reading:
   text: "Explore default detection rules"
 - link: "/security_platform/notifications/"
   tag: "Documentation"
-  text: "Learn more about Security Platform notifications"
+  text: "Learn more about Security notifications"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
   tag: "Blog"
   text: "Detect Abuse of Functionality with Datadog"
@@ -31,7 +31,7 @@ For each of monitoring option, there are [default detection rules][1] that work 
 
 - With [Cloud Workload Security][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 
-- [Application Security Monitoring][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
+- [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
 ## Creating and managing detection rules
 

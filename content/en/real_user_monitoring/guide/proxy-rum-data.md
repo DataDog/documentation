@@ -76,7 +76,7 @@ To successfully proxy request to Datadog:
 
 Ensure the `ddforward` attribute points to a valid Datadog endpoint for your [Datadog site][2]. Failure to do so may result in an insecure configuration. 
 
-The site parameter is an SDK [initialization parameter][3]. Valid intake URL patterns for each site are listed below:
+The site parameter is an SDK [initialization parameter][1]. Valid intake URL patterns for each site are listed below:
 
 {{< tabs >}}
 {{% tab "Latest version" %}}
@@ -109,4 +109,3 @@ The site parameter is an SDK [initialization parameter][3]. Valid intake URL pat
 
 [1]: /real_user_monitoring/browser/#initialization-parameters
 [2]: /getting_started/site/
-[3]: /real_user_monitoring/browser/#initialization-parameters

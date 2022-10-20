@@ -55,6 +55,7 @@ You can access performance metrics for your views in:
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
+| `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | The moment in the page load timeline when the largest DOM object in the viewport renders and is visible on screen.                                                                                                               |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                                        |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
@@ -93,7 +94,7 @@ Whenever a navigation or a click occurs, the RUM Browser SDK tracks the page act
 The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 
 - The application collects analytics by sending requests to an API periodically or after every click.
-- The application uses "[comet][16]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
+- The application uses "[comet][17]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
@@ -115,7 +116,7 @@ DD_RUM.init({
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
 ## Add your own performance timing
-On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing. 
+On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
 
 For example, you can add a timing when your hero image has appeared:
 

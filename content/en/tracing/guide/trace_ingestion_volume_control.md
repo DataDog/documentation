@@ -22,6 +22,8 @@ With the ingestion control page, you have full visibility and complete control o
 
 If you decide to reduce the ingestion volume for certain services, the **request, error, and latency [metrics][3]** (known as RED metrics, for Requests, Errors, and Duration) remain 100% accurate, as they are being calculated based on 100% of the application's traffic, regardless of any sampling configuration. These metrics are included when purchasing Datadog APM. In order to make sure you have full visibility into your application's traffic, you can use these metrics to spot potential errors on a service or a resource, by creating dashboards, monitors, and SLOs.
 
+**Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are based on the **sampled** set of data.
+
 Trace data is very repetitive, which means trace samples to investigate any issues are still available with ingestion sampling. For high throughput services, there's usually no need for you to collect every single request - an important enough problem should always show symptoms in multiple traces. Ingestion controls helps you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
 #### Metrics from spans
@@ -74,6 +76,8 @@ The **Configuration** column tells you whether or not your services are configur
 
 To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][6].
 
+**Note**: This configuration option only goes into effect when using **Datadog tracing libraries**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_MAX_TPS` does not change sampling rates that are applied in tracing libraries.
+
 Additionally, to reduce the volume of [error][8] and [rare][9] traces:
 - Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.
 - Set `DD_APM_DISABLE_RARE_SAMPLER` to true to stop sampling rare traces.
@@ -89,6 +93,15 @@ If the main reason for most of the ingestion volume is head-based sampling (`aut
 Click the **Manage Ingestion Rate** button to configure a sampling rate for the service. Select the service language and the ingestion sampling rate you want to apply.
 
 **Note:** The application needs to be redeployed in order to apply the configuration changes. Datadog recommends applying the changes by setting [environment variables][10].
+
+### Trace sampling with OpenTelemetry
+
+If your applications and services are instrumented with OpenTelemetry libraries and you're using the OpenTelemetry collector, you can use the following OpenTelemetry sampling capabilities:
+
+- [TraceIdRatioBased][11] and [ParentBased][12] are 2 built-in samplers that allow you to implement deterministic head-based sampling based on the trace_id at the **SDK** level.
+- The [Tail Sampling Processor][13] and [Probabilistic Sampling Processor][14] allow you to sample traces based on a set of rules at the **collector** level.
+
+Using either of the two options results in sampled [APM Metrics](#effects-of-reducing-trace-ingestion-volume).
 
 ## Ingestion reasons glossary
 
@@ -111,7 +124,7 @@ Several other ingestion reasons are surfaced in the Ingestion Control page and a
 | `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Sampling of errors uncaught by the head-based sampling.             | 10 traces per second per Agent (null, if rules are defined) |
 | `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Sampling of rare traces (catching all combinations of a set of span tags).        | 5 traces per second per Agent (null, if rules are defined) |
 | `manual`             | In-code         | In-code decision override to keep/drop a span and its children.    | null |
-| `analytics`          | Agent and Tracing Libraries | [Deprecated ingestion mechanism][11] that samples single spans without the full trace.   | null                 |
+| `analytics`          | Agent and Tracing Libraries | [Deprecated ingestion mechanism][15] that samples single spans without the full trace.   | null                 |
 
 Additionally, other products can be responsible for sampled span volume:
 
@@ -134,5 +147,9 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [7]: /tracing/trace_pipeline/metrics/
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
-[10]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#in-tracing-libraries-user-defined-rules
-[11]: /tracing/legacy_app_analytics
+[10]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[11]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
+[12]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
+[15]: /tracing/legacy_app_analytics

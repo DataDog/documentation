@@ -398,7 +398,7 @@ You can customize logs collection per integration within `confd`. This method mo
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes, including custom tags.
 
 ```yaml
 apiVersion: v1
@@ -406,7 +406,7 @@ kind: Pod
 metadata:
   name: redis
   annotations:
-    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
+    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis","tags":"env:prod"}]'
   labels:
     name: redis
 spec:
@@ -436,6 +436,7 @@ data:
     logs:
       source: redis
       service: redis
+      tags: env:prod
 ```
 
 In the manifest, define the `volumeMounts` and `volumes`:
@@ -465,7 +466,7 @@ The following etcd commands create a Redis integration template with a custom `p
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
-etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis"}]'
+etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": "env:prod"}]'
 ```
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
@@ -484,6 +485,7 @@ The following configuration defines the integration template for Redis container
       logs:
         - source: redis
         - service: redis
+        - tags: env:prod
   ```
 
 **Note**: The above configuration collects only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.
@@ -577,6 +579,12 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 ## Troubleshooting
 
 If you are missing tags on Kubernetes logs, this may be because the Agent's internal tagger does not yet have the related container or pod tags when logs are sent. To make the Log Agent wait a few seconds for the tagger to be ready, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to set how many seconds to wait. The default value is 0.
+
+```yaml
+# The number of seconds the Log Agent waits for the internal tagger to add the related container or pod tags to the logs before the logs are sent.
+# For example, in order to set the Log Agent to wait five seconds, use an integer in the value:
+tagger_warmup_duration: 5
+```
 
 ## Further Reading
 

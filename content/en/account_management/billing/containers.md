@@ -5,11 +5,11 @@ kind: documentation
 
 ## Overview
 
-Containers are supported in Pro and Enterprise plans. Depending on your plan, you can monitor 10 or 20 containers free for each host license. The container count is averaged across your entire infrastructure.
+Containers are supported in Pro and Enterprise plans. Depending on your plan, you can monitor 5 or 10 containers free for each host license. The container count is averaged across your entire infrastructure.
 
 Additional containers are billed at an [additional cost][1] per container per hour. In addition, you can purchase prepaid containers. Contact [Sales][2] or your [Customer Success][3] Manager to discuss containers for your account.
 
-**Note**: The Agent is monitored by default.
+**Note**: The Agent is monitored by default. This counts towards your billing. To exclude the Agent container, or any other containers, see [Exclude Containers][4].
 
 ### Kubernetes
 
@@ -17,17 +17,17 @@ Kubernetes creates pause containers (requires Agent v5.8+) to acquire the respec
 
 ### Fargate
 
-Fargate is charged based on the concurrent number of tasks. For pricing, see the [Infrastructure][4] section on the pricing page.
+Fargate is charged based on the concurrent number of tasks. For pricing, see the [Infrastructure][5] section on the pricing page.
 
 ### GKE Autopilot
 
-Billing of [GKE Autopilot][5] environments is the same as that of [GKE Standard][6].
+Billing of [GKE Autopilot][6] environments is the same as that of [GKE Standard][7].
 
 ## Frequently asked questions
 
 **How does Datadog measure hourly on-demand usage?**
 
-Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (10/host for Pro and 20/host for Enterprise by default) and any contracted container commitment. The number of containers exceeding the allotment is averaged out over the hour to calculate the hourly on-demand usage. The average is determined by summing each five minute increment over each hour and dividing by twelve. This method normalizes the on-demand usage for short term spikes and variations between hosts.
+Containers are metered in five minute increments. The difference is calculated between the number of containers observed and the allotment for the account. The allotment for the account is the total of the included containers (5/host for Pro and 10/host for Enterprise by default) and any contracted container commitment. The number of containers exceeding the allotment is averaged out over the hour to calculate the hourly on-demand usage. The average is determined by summing each five minute increment over each hour and dividing by twelve. This method normalizes the on-demand usage for short term spikes and variations between hosts.
 
 **What if a user runs a particularly high number of containers for a short period of time?**
 
@@ -52,14 +52,15 @@ If a container in the pod is running for over ten seconds, it is counted against
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][7].
+For technical questions, contact [Datadog support][8].
 
 For billing questions, contact your [Customer Success][3] Manager.
 
 [1]: https://www.datadoghq.com/pricing/#tab-faq-infrastructure
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: https://www.datadoghq.com/pricing/#section-infra
-[5]: /agent/kubernetes/distributions/?tab=helm#autopilot
-[6]: /integrations/google_kubernetes_engine/
-[7]: /help/
+[4]: /agent/guide/autodiscovery-management/?tab=containerizedagent#exclude-containers
+[5]: https://www.datadoghq.com/pricing/#section-infra
+[6]: /agent/kubernetes/distributions/?tab=helm#autopilot
+[7]: /integrations/google_kubernetes_engine/
+[8]: /help/

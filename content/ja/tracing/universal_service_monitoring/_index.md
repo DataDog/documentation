@@ -30,10 +30,10 @@ title: ユニバーサル サービス モニタリング
 ### 対応バージョンと互換性
 
 必要な Agent のバージョン
-: ユニバーサルサービスモニタリングでは、サービスと共にインストールされる Datadog Agent のバージョンが 7.38 以上であることが必要です。
+: ユニバーサルサービスモニタリングでは、サービスと共にインストールされる Datadog Agent のバージョンが 7.39 以上であることが必要です。
 
 対応プラットフォーム
-: Linux kernel 4.4 以上<br/>
+: Linux kernel 4.14 以上<br/>
 CentOS または RHEL 8.0 以上<br/>
 
 対応アプリケーション層プロトコル
@@ -47,7 +47,7 @@ HTTPS (OpenSSL)
 
 ### 前提条件
 
-- Datadog Agent 7.38 以降がサービスと共にインストールされていること。トレースライブラリのインストールは必要_ありません_。
+- Datadog Agent 7.39 以降がサービスと共にインストールされていること。トレースライブラリのインストールは必要_ありません_。
 - [統合サービスタグ付け][1] の `env` と `service` のタグがデプロイに適用されていること。`version` タグはオプションです。
 
 **注**: コンテナを使用しないシングルテナントのセットアップで、1 つのサービスがホスト上で実行される場合、ホスト自体に統合サービスタグを適用する必要があります。USM は、コンテナを使用しない単一ホスト上の複数のサービスの監視や、環境変数を使用して統合サービスタグが適用されている単一ホスト上の監視をサポートしていません。
@@ -294,11 +294,11 @@ Agent を構成した後、APM サービスリストにサービスが表示さ�
 ユニバーサルサービスモニタリングを有効にすると、次のことが可能になります。
 
 
-- **APM > Service Map** に移動し、[サービスとその依存関係を一度に視覚化][3]します。
+- **APM** > **Service Catalog** または **APM** > **Service Map** に移動して、[サービスとその依存関係を視覚化します][3]。
 
 - 特定の Service ページをクリックして、ゴールデンシグナルメトリクス (リクエスト、エラー、期間) を確認し、[デプロイ追跡][4]で最近のコード変更と相関させることができます。
 
-- `trace.universal.http.*` メトリクスを使用して、[モニター][5]、[ダッシュボード][6]、[SLO][7] を作成します。
+- `universal.http.*` メトリクスを使用して、[モニター][5]、[ダッシュボード][6]、[SLO][7] を作成します。
 
 
 ## その他の参考資料
@@ -306,8 +306,8 @@ Agent を構成した後、APM サービスリストにサービスが表示さ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/unified_service_tagging
-[2]: https://docs.datadoghq.com/ja/tracing/deployment_tracking/
-[3]: /ja/tracing/services/services_map/
+[2]: /ja/tracing/services/deployment_tracking/
+[3]: /ja/tracing/service_catalog/
 [4]: /ja/tracing/services/deployment_tracking/
 [5]: /ja/monitors/create/types/apm/?tab=apmmetrics
 [6]: /ja/dashboards/

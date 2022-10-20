@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - AWS
-  - ログの収集
-ddtype: check
+- cloud
+- AWS
+- ログの収集
 dependencies: []
 description: Amazon Managed Streaming for Apache Kafka (MSK) のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon Managed Streaming for Apache Kafka インテグレ�
 short_description: Amazon MSK のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Managed Streaming for Apache Kafka (MSK) は、Apache Kafka を使用してストリーミングデータを処理するアプリケーションを、簡単に構築して実行できるフルマネージド型のサービスです。
@@ -82,7 +82,7 @@ Amazon MSK チェックには、イベントは含まれません。
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][14]のメトリクス収集で、`MSK` をオンにします。
+1. [AWS インテグレーションページ][14]で、`Metric Collection` タブの下にある `Kafka` が有効になっていることを確認します。
 
 2. [Datadog - Amazon MSK インテグレーション][15]をインストールします。
 
@@ -92,7 +92,9 @@ Amazon MSK チェックには、イベントは含まれません。
 
 Amazon MSK から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_msk` に設定されているかを確認してください。
+**注**: 
+- S3 バケットにログを送る場合は、_Target prefix_ が `amazon_msk` に設定されているかを確認してください。
+- CloudWatch のロググループにログを送る場合は、その名前に `msk` という部分文字列が含まれていることを確認してください。
 
 #### ログを Datadog に送信する方法
 
@@ -125,8 +127,8 @@ Amazon MSK クローラーには、イベントやサービスのチェック機
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/amazon_msk/metadata.csv
 [13]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[14]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[15]: https://app.datadoghq.com/account/settings#integrations/amazon-msk
+[14]: https://app.datadoghq.com/integrations/amazon-web-services
+[15]: https://app.datadoghq.com/integrations/amazon-msk
 [16]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [17]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [18]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

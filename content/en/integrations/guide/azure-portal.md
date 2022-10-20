@@ -223,6 +223,16 @@ The Azure portal provides a read-only view of the API keys. To manage the keys, 
 
 The Azure Datadog integration allows you to install the Datadog Agent on a VM or app service. If there is no default key selected, a Datadog Agent installation fails.
 
+### Cloud Security Posture Management
+
+Select `Cloud Security Posture Management` in the left sidebar to configure [Cloud Security Posture management][8].
+
+By default, CSPM is not enabled. To enable CSPM, select `Enable Datadog Cloud Security Posture Management` and click **Save**. This enables Datadog CSPM for any subscriptions associated with the Datadog resource.
+
+To disable, uncheck the box and click **Save**.
+
+{{< img src="integrations/guide/azure_portal/enable-CSPM.png" alt="The Azure Portal page with Cloud Security Posture Management selected under the Settings tab" responsive="true" style="width:100%;">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -235,3 +245,4 @@ The Azure Datadog integration allows you to install the Datadog Agent on a VM or
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
 [6]: /serverless/azure_app_services
 [7]: /serverless/azure_app_services/#requirements
+[8]: /security_platform/cspm/
