@@ -67,6 +67,8 @@ To enable logs, follow these steps:
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
 
+Log files larger than 1GiB will be truncated.
+
 ### Infrastructure metric correlation
 
 If you are using self-hosted GitHub runners, you can correlate jobs to the host that is running them. To do this, make sure the GitHub runner name
