@@ -27,7 +27,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 ## Web proxy
 
-### Configuring web proxies
+### Configuring a web proxy to proxy agent traffic
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
