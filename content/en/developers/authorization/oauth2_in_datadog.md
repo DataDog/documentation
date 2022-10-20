@@ -29,6 +29,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
    To learn how to derive the `code_challenge` parameter, see the [PKCE](#authorization-code-grant-flow-with-pkce) section. Your application must save `code_verifier` for the token request in Step 5.
 
    - In order to build the URL for this post request, use the `site` query parameter that is provided on the redirect to your `redirect_uri`. 
+   - This parameter will only be provided if the user initiates authorization from the Datadog integration tile - see [Initiate authorization from a third-party location](#Initiate-authorization-from-a-third-party-location) for more options if the user chooses to initiate authorization externally.  
    - For example, `site` may be `https://app.datadoghq.com`, `https://app.datadoghq.eu`, `https://us5.datadoghq.com`, or it might have a custom subdomain that must be accounted for, such as `https://<custom_subdomain>.datadoghq.com`. 
    - To handle multiple Datadog sites dynamically, you can append the Datadog `authorize` path to this constructed URL.
 
