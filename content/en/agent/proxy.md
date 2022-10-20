@@ -144,9 +144,7 @@ This is a simple, straightforward option if you do not already have a running we
 
 #### Proxy forwarding with Squid
 
-##### Squid configuration
-
-###### Configure Squid to only send traffic to Datadog
+##### Configure Squid to only send traffic to Datadog
 
 Squid should be installed on a host that has connectivity to both your internal agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][2].
 
@@ -165,7 +163,7 @@ http_access allow Datadog
 http_access allow local manager
 ```
 
-###### Start Squid
+##### Start Squid
 
 Start (or restart) Squid so that your new configurations can be applied. Note that if you're configuring Squid on Windows, you will first need [to configure Squid as a system service][9].
 
