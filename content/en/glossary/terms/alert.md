@@ -1,4 +1,4 @@
 ---
 title: alert
 ---
-Datadog monitors generate alerts, which are indications that a set condition has been reached. 
+Datadog monitors generate alerts, indicating that a set condition has been reached. 

@@ -1,4 +1,4 @@
 ---
 title: function
 ---
-In serverless computing, a function is a programmatic function that is hosted on managed infrastructure.
+In serverless computing, a function is a programmatic function hosted on managed infrastructure.

@@ -1,4 +1,4 @@
 ---
 title: source
 ---
-A log source is where logs are being collected and ingested into Datadog.
+A log source is where logs are collected and ingested into Datadog.

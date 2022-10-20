@@ -1,4 +1,4 @@
 ---
 title: serverless
 ---
-Serverless is a cloud development and execution model in which server infrastructure is handled by a cloud service provider.
+Serverless is a cloud development and execution model in which a cloud service provider handles server infrastructure.
