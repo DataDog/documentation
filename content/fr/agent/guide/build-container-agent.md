@@ -11,10 +11,10 @@ Suivez les instructions ci-dessous pour créer l'image Docker de l'Agent Datadog
     git clone https://github.com/DataDog/datadog-agent.git
     ```
 
-2. Accédez au dossier `datadog-agent/Dockerfile/agent/` :
+2. Accédez au dossier `datadog-agent/Dockerfiles/agent/` :
 
     ```shell
-    cd datadog-agent/Dockerfile/agent/
+    cd datadog-agent/Dockerfiles/agent/
     ```
 
 3. Sélectionnez la branche correspondant à la version de l'Agent Datadog qui vous intéresse :
