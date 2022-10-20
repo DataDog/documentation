@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-During ingestion, Datadog applies _quantization_ to APM data such as random globally unique IDs (GUIDs), numeric IDs, and query parameter values in span or resource names. The resulting normalization cuts down on name pollution that results from these random patterns by grouping those spans and resources together because they are, for analysis purposes, the same.
+During ingestion, Datadog applies _quantization_ to APM data such as random globally unique IDs (GUIDs), numeric IDs, and query parameter values in [span][1] or [resource][2] names. The resulting normalization cuts down on name pollution that results from these random patterns by grouping those spans and resources together because they are, for analysis purposes, the same.
 
 Certain patterns in resource or span names are replaced with the following static strings:
 - GUIDs: `{guid}`
@@ -25,7 +25,7 @@ Certain patterns in resource or span names are replaced with the following stati
 These replacements affect:
 - trace metrics,
 - the resource name tag on those metrics, and
-- all the resource and span names for ingested spans.
+- all the resource and span for all ingested spans.
 
 ### Quantization examples
 
@@ -48,7 +48,7 @@ To search for these spans in trace search, the query is `resource_name:"SELECT ?
 
 ### In-code instrumentation
 
-If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the tracer documentation of your application's runtime][1] for information on how to create custom configuration for span names and resource names.
+If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the tracer documentation of your application's runtime][3] for information on how to create custom configuration for span names and resource names.
 
 ### Agent configuration
 
@@ -77,4 +77,6 @@ export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get_id_[0-9]+",
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/
+[1]: /tracing/glossary/#spans
+[2]: /tracing/glossary/#resources
+[3]: /tracing/trace_collection/custom_instrumentation/
