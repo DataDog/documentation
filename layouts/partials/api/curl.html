@@ -98,13 +98,21 @@
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
 {{- end -}}
 
-{{- /* Render binary data (usually compressed) @<(echo "Uncompressed data" | gzip) */ -}}
+{{- /* Render binary data (usually compressed) */ -}}
 {{- if gt (len $contentEncoding) 0 -}}
+{{- if eq $contentEncoding "gzip" -}}
 &nbsp;\
-<span class="o">--data-binary</span> <span class="n">@<</span><span class="o">({{ $contentEncoding }} <<</span> <span class="n">EOF</span>
+<span class="o">--data-binary</span> <span class="n">@<</span><span class="o">(gzip <<</span> <span class="n">EOF</span>
 <span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
 <span class="n">)</span>
+{{- else if eq $contentEncoding "deflate" -}}
+&nbsp;\
+<span class="o">--data-binary</span> <span class="n">@<</span><span class="o">(echo $(cat <<</span> <span class="n">EOF</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+<span class="n">) | gzip --no-name | tail --bytes=+11 | head --bytes=-8)</span>
+{{- end -}}
 {{ else if (or ($body) ($endpoint.action.requestBody)) }}
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
 &nbsp;\
