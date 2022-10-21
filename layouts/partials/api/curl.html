@@ -4,6 +4,7 @@
 {{- $parameters := partial "api/arguments-data.html" (dict "endpoint" $endpoint) -}}
 {{- $count := 0 -}}
 {{- $body := .body -}}
+{{- $title := .title -}}
 
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
@@ -61,6 +62,18 @@
 {{- else -}}
 &nbsp;\
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
+{{- with $parameters.headerParams -}}
+{{- range . -}}
+{{- $def := "" -}}
+{{- range $enumVal := .schema.enum -}}
+{{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
+{{- end -}}
+{{- if or (isset .schema "example") (gt (len $def) 0) -}}
+&nbsp;\
+<span class="o">-H</span> <span class="s1">"{{ .name }}: {{ .example | default (.schema.example | default $def ) }}"</span>
+{{- end -}}
+{{- end -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 
