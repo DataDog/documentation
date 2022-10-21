@@ -130,6 +130,7 @@ Finally, run the following commands:
 - `kubectl apply -f agent-services.yaml`
 - `kubectl apply -f cluster-agent-deployment.yaml`
 {{% /tab %}}
+{{< /tabs >}}
 
 ### APM
 You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracing libraries automatically. Read [APM Tracing Setup with Admission Controller][3] for more information
