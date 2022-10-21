@@ -52,7 +52,7 @@ To enable the admission controller for Helm chart v2.34.6 and earlier, set the p
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Datadog operator" %}}
+{{% tab "Datadog Operator" %}}
 
 To enable the admission controller for the Datadog operator, set the parameter `clusterAgent.config.admissionController.enabled` to `true` in the custom resource:
 
