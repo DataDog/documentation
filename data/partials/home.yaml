@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 500 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 600 built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -59,7 +59,7 @@ nav_sections:
       - title: Log Management
         link: logs/
         icon: log
-        desc: Process, monitor, and archive your ingested logs 
+        desc: Process, monitor, and archive your ingested logs
       - title: Security
         link: security_platform/
         icon: security-platform
@@ -71,7 +71,7 @@ nav_sections:
       - title: Continuous Testing
         link: continuous_testing/
         icon: continuous-testing
-        desc: Perform codeless integration and end-to-end testing with CI/CD providers 
+        desc: Perform codeless integration and end-to-end testing with CI/CD providers
       - title: RUM & Session Replay
         link: real_user_monitoring/
         icon: rum
