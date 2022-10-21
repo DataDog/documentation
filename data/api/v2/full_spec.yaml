@@ -8380,8 +8380,7 @@ components:
           maximum: 9
           type: integer
         metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
+          description: Group of target fields to aggregate over.
           items:
             description: Field.
             type: string
@@ -8484,8 +8483,7 @@ components:
           example: d3f-ru1-e1d
           type: string
         metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
+          description: Group of target fields to aggregate over.
           items:
             description: Field.
             type: string
@@ -8739,13 +8737,17 @@ components:
             type: string
           type: array
         metric:
-          description: 'The target field to aggregate over when using the sum or max
+          deprecated: true
+          description: '(Deprecated) The target field to aggregate over when using
+            the sum or max
 
-            aggregations.'
+            aggregations. `metrics` field should be used instead.'
           type: string
         metrics:
-          description: Group of target fields to aggregate over when using the new
-            value aggregations.
+          description: Group of target fields to aggregate over when using the sum,
+            max, geo data, or new value aggregations. The sum, max, and geo data aggregations
+            only accept one value in this list, whereas the new value aggregation
+            accepts up to five values.
           items:
             description: Field.
             type: string
@@ -15491,7 +15493,7 @@ paths:
           - name: body
             value: "{\n  \"name\": \"{{ unique }}\",\n  \"queries\": [{\n    \"query\":
               \"@test:true\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
-              [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\":
+              [],\n    \"distinctFields\": [],\n    \"metrics\": []\n  }],\n  \"filters\":
               [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
               \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
               {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
@@ -15503,7 +15505,7 @@ paths:
           - name: body
             value: "{\n  \"name\": \"{{ unique }}_bis\",\n  \"queries\": [{\n    \"query\":
               \"@test:false\",\n    \"aggregation\": \"count\",\n    \"groupByFields\":
-              [],\n    \"distinctFields\": [],\n    \"metric\": \"\"\n  }],\n  \"filters\":
+              [],\n    \"distinctFields\": [],\n    \"metrics\": []\n  }],\n  \"filters\":
               [],\n  \"cases\": [{\n    \"name\": \"\",\n    \"status\": \"info\",\n
               \   \"condition\": \"a > 0\",\n    \"notifications\": []\n  }],\n  \"options\":
               {\n    \"evaluationWindow\": 900,\n    \"keepAlive\": 3600,\n    \"maxSignalDuration\":
