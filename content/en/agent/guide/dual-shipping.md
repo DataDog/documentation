@@ -11,7 +11,6 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the following configurations.
 
-
 ## Metrics, APM, Live Processes, Orchestrator, CI Visibility
 
 You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
@@ -19,6 +18,8 @@ You can add the YAML configuration to your `datadog.yaml` or launch the Agent wi
 {{< tabs >}}
 
 {{% tab "Metrics & Service checks" %}}
+
+<div class="alert alert-info">Requires Agent version >= 6.17 or 7.17.</div>
 
 ### YAML configuration
 In `datadog.yaml`:
@@ -33,6 +34,8 @@ additional_endpoints:
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent version >= 6.18 or 7.18.</div>
+
 ```bash
 DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
 ```
@@ -41,8 +44,10 @@ DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3
 
 {{% tab "APM" %}}
 
+<div class="alert alert-info">Requires Agent version >= 6.7.0.</div>
+
 ### YAML configuration
-In `datadog.yaml`: 
+In `datadog.yaml`:
 ```yaml
 apm_config:
   [...]
@@ -63,6 +68,8 @@ apm_config:
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent version >= 6.19 or 7.19.</div>
+
 ```bash
 DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 
@@ -72,6 +79,8 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [
 {{% /tab %}}
 
 {{% tab "Live Processes" %}}
+
+<div class="alert alert-info">Requires Agent version >= 6.4.0.</div>
 
 ### YAML configuration
 In `datadog.yaml`: 
@@ -88,6 +97,8 @@ process_config:
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent version >= 6.20 or 7.20.</div>
+
 ```bash
 DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
 ```
@@ -97,7 +108,7 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2
 {{% tab "Orchestrator" %}}
 
 ### YAML configuration
-In `datadog.yaml`: 
+In `datadog.yaml`:
 ```yaml
 orchestrator_explorer:
   [...]
@@ -119,10 +130,10 @@ DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.
 
 {{% tab "CI Visibility" %}}
 
-<div class="alert alert-info">Requires Agent v6.38+ or v7.38+.</div>
+<div class="alert alert-info">Requires Agent >= 6.38 or 7.38.</div>
 
 ### YAML configuration
-In `datadog.yaml`: 
+In `datadog.yaml`:
 ```yaml
 evp_proxy_config:
   [...]
@@ -141,7 +152,7 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [
 ```
 
 {{% /tab %}}
-{{% /tabs %}} 
+{{% /tabs %}}
 
 ## Logs, Database Monitoring, Network Devices, CSPM, Runtime Security
 
@@ -149,8 +160,10 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [
 
 {{% tab "Logs" %}}
 
-### YAML configuration 
-In `datadog.yaml`: 
+<div class="alert alert-info">TCP requires Agent version >= 6.6.<br/>HTTPS requires Agent version >= 6.13.</div>
+
+### YAML configuration
+In `datadog.yaml`:
 ```yaml
 logs_config:
   use_http: true
@@ -163,6 +176,8 @@ logs_config:
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent >= 6.18 or 7.18.</div>
+
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
@@ -172,8 +187,10 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"age
 
 {{% tab "Database Monitoring" %}}
 
-### YAML configuration 
-In `datadog.yaml`: 
+<div class="alert alert-info">Requires Agent >= 6.29 or 7.29.</div>
+
+### YAML configuration
+In `datadog.yaml`:
 ```yaml
 database_monitoring:
   samples:
@@ -214,9 +231,11 @@ DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 
 {{% tab "Network Devices" %}}
 
+<div class="alert alert-info">Requires Agent >= 6.29 or 7.29.</div>
+
 ### YAML configuration
 
-In `datadog.yaml`: 
+In `datadog.yaml`:
 ```yaml
 network_devices:
   metadata:
