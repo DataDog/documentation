@@ -250,6 +250,11 @@ The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For ver
 **Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
 
+`DD_TRACE_RATE_LIMIT`
+: **INI**: `datadog.trace.rate_limit`<br>
+**Default**: `0`<br>
+Maximum number of spans to sample per-second. All processes in an apache or fpm pool share the same limiter. When unset (<=0) rate limiting is delegated to the Datadog Agent.
+
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`
 **Default**: `1000`<br>
