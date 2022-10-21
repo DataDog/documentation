@@ -5,6 +5,7 @@
 {{- $count := 0 -}}
 {{- $body := .body -}}
 {{- $title := .title -}}
+{{- $contentEncoding := "" -}}
 
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
@@ -69,6 +70,7 @@
 {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
 {{- end -}}
 {{- if or (isset .schema "example") (gt (len $def) 0) -}}
+{{- $contentEncoding = (.example | default (.schema.example | default $def)) -}}
 &nbsp;\
 <span class="o">-H</span> <span class="s1">"{{ .name }}: {{ .example | default (.schema.example | default $def ) }}"</span>
 {{- end -}}
@@ -96,8 +98,15 @@
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
 {{- end -}}
 
+{{- /* Render binary data (usually compressed) @<(echo "Uncompressed data" | gzip) */ -}}
+{{- if gt (len $contentEncoding) 0 -}}
+&nbsp;\
+<span class="o">--data-binary</span> <span class="n">@<</span><span class="o">({{ $contentEncoding }} <<</span> <span class="n">EOF</span>
+<span class="s1">{{ $body | default .exampleValue | default (.dollarScratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+<span class="n">)</span>
+{{ else if (or ($body) ($endpoint.action.requestBody)) }}
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
-{{- if (or ($body) ($endpoint.action.requestBody)) -}}
 &nbsp;\
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
 <span class="s1">{{ .exampleValue | default $body | default (.dollarScratch.Get "jsonRequestBody") }}</span>
