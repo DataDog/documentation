@@ -40,9 +40,7 @@ The state of a monitor may also sometimes update in the absence of a monitor eva
 
 ### Verify the presence of data
 
-If your monitor’s state or status is not what you expect, a great way to verify is to check the underlying data in a Dashboard or Notebook. Checking the state of the underlying data can show why a monitor was behaving the way it did.
-
-An example being if your monitor is in a No Data state, check to see if the data it’s evaluating is making its way into Datadog.
+If your monitor’s state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][20] with a formatted graph of the monitor query.
 
 ### Alert conditions
 
