@@ -63,7 +63,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
     To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
-    `allowedTracingOrigins` accepts Javascript strings, RegExp and function that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
+    `allowedTracingOrigins` accepts JavaScript strings, regular expressions, and functions that match the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
 3.  _(Optional)_ Configure the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces:
 
