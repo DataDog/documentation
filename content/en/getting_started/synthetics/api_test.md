@@ -74,9 +74,9 @@ Assertions are fully customizable. To add a custom assertion, click on elements 
 
 ### Select locations 
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from.
+Select one or more **Managed Locations** or **Private Locations** to run your test from. {{% managed-locations %}}
 
-Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
+To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
 
 The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from.
 
