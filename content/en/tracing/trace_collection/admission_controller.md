@@ -9,7 +9,7 @@ is_beta: true
   Tracing library injection using Admission Controller is in beta. 
 {{< /beta-callout >}} 
 
-For your Kubernetes applications that send traces to Datadog by the Cluster Agent (version 7.39 and higher), you can configure the Admission Controller to inject APM Java and JavaScript tracing libraries automatically. By automating the injection of tracer libraries through the admission controller, you don't have to change your application images, helping you get up and running with APM quickly.
+For your Kubernetes applications that send traces to Datadog by the Cluster Agent (version 7.39 and higher for Java and JavaScript, version 7.40 and higher for Python), you can configure the Admission Controller to inject APM Java and JavaScript tracing libraries automatically. By automating the injection of tracer libraries through the admission controller, you don't have to change your application images, helping you get up and running with APM quickly.
 
 
 After you [install the Cluster Agent][1], do one of the following:
@@ -31,24 +31,36 @@ Adding this annotation results in the injection of the tracer library for that l
 Valid `<language>` values are:
 - `java`
 - `js`
+- `python`
 
-For example to inject the latest Java tracer:
+For example to inject the Java tracer v1.0.0:
 
 ```yaml
 annotations:
-    admission.datadoghq.com/java-lib.version: "latest"
+    admission.datadoghq.com/java-lib.version: "1.0.0"
 ```
 
 **Note**: Use caution specifying `latest` as major library releases can introduce breaking changes.
 
 Although it's an uncommon scenario, you can add multiple `<language>-lib.version` annotations to inject multiple language tracers into one container.
 
-For example to inject the latest Java tracer and Node tracer v3.0.0:
+For example to inject the Java tracer v1.0.0, Python tracer v1.0.0, and Node tracer v3.0.0:
+```yaml
+annotations:
+    admission.datadoghq.com/java-lib.version: "1.0.0"
+    admission.datadoghq.com/python-lib.version: "1.0.0"
+    admission.datadoghq.com/js-lib.version: "3.0.0"
+```
+
+You can also inject the latest version of a tracer library for the Java, Python and Node language via the following annotation:
 ```yaml
 annotations:
     admission.datadoghq.com/java-lib.version: "latest"
-    admission.datadoghq.com/js-lib.version: "3.0.0"
+    admission.datadoghq.com/python-lib.version: "latest"
+    admission.datadoghq.com/js-lib.version: "latest"
 ```
+
+Note that the latest keyword should be used with caution, as it may risk potential errors due to major version differences from your newly injected applications versus your existing applications that have already been deployed. 
 
 Adding a `mutateUnlabelled: true` annotation causes the cluster agent to attempt to intercept every unlabelled pod.
 
