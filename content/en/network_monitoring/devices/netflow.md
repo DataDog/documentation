@@ -8,7 +8,7 @@ further_reading:
   text: "Using Profiles with Network Device Monitoring"
 ---
 
-<div class="alert alert-warning">NetFlow Monitoring for Datadog Network Device Monitoring is in private beta.</div>
+<div class="alert alert-warning">NetFlow Monitoring for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview
 
@@ -16,9 +16,9 @@ Use NetFlow Monitoring in Datadog to visualize and monitor your flow records fro
 
 ## Installation
 
-To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.40 or newer.
+To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.39 or newer.
 
-**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is recommended.
+**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended.
 
 ## Configuration
 
@@ -31,7 +31,7 @@ network_devices:
   netflow:
     enabled: true
     listeners:
-      - flow_type: netflow9   # choices: netflow5, netflow9, ipfix, sflow
+      - flow_type: netflow9   # choices: netflow5, netflow9, ipfix, sflow5
         port: 2055            # devices must send traffic to this port
       - flow_type: netflow5
         port: 2056
