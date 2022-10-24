@@ -14,6 +14,7 @@ For specific database setup troubleshooting, use the corresponding troubleshooti
 
 * [Troubleshooting MySQL Setup][2]
 * [Troubleshooting Postgres Setup][3]
+* [Troubleshooting SQL Server Setup][4]
 
 ## Diagnosing common problems
 ### Query bind parameters cannot be viewed
@@ -29,10 +30,11 @@ It is recommended to have a single Datadog Agent monitor at most 10 DBM hosts. I
 
 ## Need more help?
 
-If you are still experiencing problems, contact [Datadog Support][4] for help.
+If you are still experiencing problems, contact [Datadog Support][5] for help.
 
 
 [1]: /database_monitoring/#getting-started
 [2]: /database_monitoring/setup_mysql/troubleshooting/
 [3]: /database_monitoring/setup_postgres/troubleshooting/
-[4]: /help/
+[3]: /database_monitoring/setup_sql_server/troubleshooting/
+[5]: /help/
