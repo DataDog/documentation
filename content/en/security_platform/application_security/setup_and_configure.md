@@ -227,6 +227,10 @@ Support for query strings is not available for Flask.
 
 {{< /programming-lang-wrapper >}}
 
+## Configuring a client IP header
+
+ASM automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
+
 ## Add user information to traces
 
 Instrument your services with the standardized user tags to track authenticated user activity, whether you're tracking application performance or application security.
