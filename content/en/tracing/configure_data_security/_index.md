@@ -7,7 +7,7 @@ aliases:
     - /tracing/security
     - /tracing/guide/security
     - /tracing/guide/agent_obfuscation
-    - /tracing/guide/agent-obfuscation
+    - /tracing/guide/agent-obfuscationDD
     - /tracing/custom_instrumentation/agent_customization
     - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
     - /tracing/setup_overview/configure_data_security/
@@ -177,12 +177,6 @@ apm_config:
 ## HTTP data collected
 
 Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, see [Span Tags Semantics][3].
-
-### Configuring a client IP header
-
-Datadog automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
-
-If you do not wish to collect the client IP value, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
 
 ### Redacting the query in the URL
 
