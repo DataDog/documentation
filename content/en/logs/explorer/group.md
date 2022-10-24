@@ -113,14 +113,14 @@ Patterns support the [List Aggregates][15] visualization. Clicking a pattern in 
 
 Use Pattern Inspector to get a visual breakdown of the underlying values of a log pattern’s aggregation based on your search query. For example, if you are investigating an issue, you could see how many hosts are involved or what regions or data centers are impacted.
 
-{{< img src="logs/explorer/group/inspect_values.png" alt="The distribution of values pop-up showing a bar graph of the values" style="width:70%;" >}}
+{{< img src="logs/explorer/group/inspect_values.png" alt="The distribution of values graph showing a bar graph of the values" style="width:70%;" >}}
 
 To use Pattern Inspector:
 
 1. Go to [Log Explorer][16].
 2. Click **Patterns** in the **Group into** section. In the list of patterns, the aggregate values in the message section are highlighted in yellow. Hover over an aggregate value to get a preview of the visual distribution of its values. 
 3. Click on an aggregate value to open the log pattern’s side panel. 
-4. In the **Pattern Inspector** tab, click on a value and then **View logs** to see the related logs in the side panel. Click **Search for** to see the related logs in the Log Explorer.
+4. On the **Pattern Inspector** tab, click on a value and select **View logs** to see the related logs in the side panel. Click **Search for** to see the related logs in the Log Explorer.
 
 {{< img src="logs/explorer/group/pattern_inspector_panel.png" alt="The pattern panel showing the Pattern Inspector tab" style="width:50%;" >}}
 
