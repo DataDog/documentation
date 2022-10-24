@@ -38,6 +38,8 @@ There are three ways you can install the testing framework:
 {{< tabs >}}
 {{% tab "Swift Package Manager" %}}
 
+### Using Xcode Project
+
 1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
 {{< img src="continuous_integration/swift_package.png" alt="Swift Package" >}}
@@ -48,6 +50,21 @@ There are three ways you can install the testing framework:
 {{< img src="continuous_integration/swift_link2.png" alt="Swift Linking SPM" >}}
 
 3. If you run UITests, also link the app running the tests with this library.
+
+### Using Swift Package Project
+
+1. Add `dd-sdk-swift-testing` to your package dependencies array, eg:
+
+{{< code-block lang="swift" >}}
+.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.1.0")
+{{< /code-block >}}
+
+2. Add the the testing framework to your testing targets dependencies. Add the following line to your test targets dependencies array:
+{{< code-block lang="swift" >}}
+.product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
+{{< /code-block >}}
+
+3. If you run UITests, also add the dependency to your applications running the tests.
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
@@ -90,6 +107,8 @@ end
 
 ### Configuring Datadog
 
+#### Using Xcode Project
+
 To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if you are using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
@@ -97,6 +116,21 @@ To enable testing instrumentation, add the following environment variables to yo
 <div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
 For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
+
+#### Using Swift Package Project
+
+To enable testing instrumentation, you must set the following environment variables to your commandline execution for the tests. You can alternatively set them in the environment before running the tests or you can prepend them to the command:
+
+<pre>
+<code>
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD swift test ...
+
+or
+
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD xcodebuild test -scheme ...
+</code>
+</pre>
+
 
 Set all these variables in your test target:
 
@@ -107,6 +141,10 @@ Set all these variables in your test target:
 
 `DD_API_KEY`
 : The [Datadog API key][1] used to upload the test results.<br/>
+**Default**: `(empty)`
+
+`DD_APPLICATION_KEY`
+: The [Datadog Application key][5] used to upload the test results.<br/>
 **Default**: `(empty)`
 
 `DD_SERVICE`
@@ -121,7 +159,7 @@ Set all these variables in your test target:
 **Examples**: `ci`, `local`
 
 `SRCROOT`
-: The path to the project SRCROOT environment variable. Use `$(SRCROOT)` for the value, because it is automatically set by Xcode.<br/>
+: The path to the project location. Use `$(SRCROOT)` for the value if using Xcode, because it is automatically set by it.<br/>
 **Default**: `(empty)`<br/>
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
@@ -711,3 +749,5 @@ Always call `module.end()` at the end so that all the test info is flushed to Da
 [2]: /getting_started/site/
 [3]: /continuous_integration/guides/rum_swift_integration
 [4]: https://opentelemetry.io/
+[5]: https://app.datadoghq.com/organization-settings/application-keys
+
