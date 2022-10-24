@@ -11,62 +11,48 @@ further_reading:
   text: "Monitor Notifications"
 ---
 
-Introduce
-{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="manage monitor page"  >}}
+# Tag Enforcement for Monitors
 
-## Search
+{{< beta-callout url="#" btn_hidden="true" >}}
+  Interested in enforcing tags for monitors? Reach out to support@datadoghq.com!
+{{< /beta-callout >}}
 
-To [search your monitors][2], construct a query using the facet panel on the left or the search bar at the top.
+Monitor tag policies are configurations that enforce and validate the existence of tag keys and values on your Datadog monitors. These policies are useful for attribution as well as ensuring that monitor notifications include the tag keys and values neeeded for downstream services to process alerts properly.
 
-## Manage
+Once set up, tag policies apply to **all** Datadog monitors as well as Synthetic tests of a given account. There are three ways to leverage tag policies:
 
-After searching, select one or more monitors to update using the checkboxes next to each result. Select all results with the top checkbox next to the *STATUS* column heading. Modify the monitors in bulk using the buttons at the right above the search results:
+- Enforce tag keys and values
+- Enforce tag keys only
+- Optional tag keys but mandatory values
 
-| Option    | Description                                                                |
-|-----------|----------------------------------------------------------------------------|
-| Mute      | [Mute][3] the selected monitors for `1h`, `4h`, `12h`, `1d`, `1w`, or `Forever`. |
-| Unmute    | If the selected monitors are muted, unmute them.                           |
-| Resolve   | [Resolve][4] the alert for the selected monitors.                          |
-| Delete    | Permanently delete the selected monitors.                                  |
-| Edit Tags | Edit the monitor tags for the selected monitors.                           |
+**Note**: once a monitor tag policy which enforces tag keys and/or values is active, monitors that violate this policy are restricted from creation/update. In the latter case, monitors will still continue to evaluate and notify as expected.
 
-To edit an individual monitor, hover over it and use the buttons to the far right: Edit, Clone, Mute, Delete. To see more details on a monitor, click its name to see the status page.
+## Enforce tag keys and values
 
-**Note**: You can view Monitor Saved Views from your mobile device home screen or view and mute monitors by downloading the [Datadog Mobile App][5], available on the [Apple App Store][6] and [Google Play Store][7].
+{{< img src="monitors/settings/monitor_tag_enforcement_key_and_value.png" alt="Enforce monitor tag keys and values"  >}}
 
-### Triggered monitors
+In order to make sure that each monitor is tagged properly, you can use monitor tag policies to enforce tag keys and values. This is useful not just for attribution use cases but also when alerts are routed to downstream systems and workflows for triaging and processing.
 
-You can [mute][3] or [resolve][4] triggered monitors in bulk using the [Triggered Monitors][8] page. This page only shows monitors with a triggered status (Alert, Warn, or No Data).
+## Enforce tag keys only
 
-#### Grouped results
+{{< img src="monitors/settings/monitor_tag_enforcement_key_only.png" alt="Enforce monitor tag keys only"  >}}
 
-The triggered monitors page shows a row for each group (reporting source) of each monitor. For example, a monitor grouped by host with 14 hosts in a triggered status shows 14 rows on the triggered monitors page. This lets you mute or [resolve][3] a monitor for specific reporting sources.
+You can use monitor tag policies to asure the presence of certain tag keys on monitors. This way, it is mandatory for each monitor to have a value set for the enforced key. In the example above, we make sure that every monitor has a tag value set for `product_id`.
 
-When writing a search query, the same attributes from the manage monitors page are available, even if they are not displayed as check boxes on the triggered monitors page.
+## Optional tag keys but mandatory values
 
-Attribute differences for the triggered monitors page:
+If your setup doesn't require monitor tags to be present at all times, but you would still like to enforce the values of a tag key *if* it's present, then you can build tag policies and leave the checkbox for *Required* unchecked.
 
-* `group_status` is the attribute name instead of `status`.
-* The `triggered` attribute lets you filter monitors by how long they have been triggered.
-* The `group` attribute helps you narrow down search results for monitors grouped by more than one tag. For example, a monitor is grouped by `host` and `env`. After searching, you see four rows with the groups `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` attribute to only show prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
+{{< img src="monitors/settings/monitor_tag_enforcement_optional_key_with_values.png" alt="Enforce monitor tag keys only"  >}}
 
-### Monitor tags
+With the example above, monitors not using the `env` tag are able to be created/updated. However, monitors using the `env` tag will require to have values set to `dev`, `staging`, or `prod`. Not meeting this condition will result in failure of creation/update.
 
-Monitor tags are independent of tags sent by the Agent or integrations. Add up to 80 tags directly to your monitors for filtering on the [manage monitors][1], [triggered monitors][8], or [manage downtime][9] pages. Learn more about monitor tags in [Assigning Tags for the UI][10].
+## RBAC
 
-**Note**: Monitor tags are added to the alert event generated by the monitor.
+The creation/update of monitor tag policies is only permitted for users with the `MONITOR_CONFIG_POLICY_WRITE_PERMISSION` permission.
 
-## Further Reading
+# Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: /monitors/manage/search/
-[3]: /monitors/manage/status/#mute
-[4]: /monitors/manage/status/#resolve
-[5]: /mobile/#monitors
-[6]: https://apps.apple.com/app/datadog/id1391380318
-[7]: https://play.google.com/store/apps/details?id=com.datadog.app
-[8]: https://app.datadoghq.com/monitors/triggered
-[9]: https://app.datadoghq.com/monitors#downtime
-[10]: /getting_started/tagging/assigning_tags/?tab=monitors#ui
