@@ -25,11 +25,12 @@ further_reading:
 
 ## Overview
 
-There are three types of monitoring that the Datadog Agent uses for Cloud Workload Security:
+There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
-1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-2. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
+1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
+2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
+4. **Kernal Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
 ## Requirements
 
