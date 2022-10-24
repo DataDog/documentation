@@ -122,6 +122,8 @@ If you are using a driver **other than `MSOLEDBSQL` 2019**, this error can be re
 # this example uses SQL Server authentication
 instances:
   - host: localhost,1433
+    username: datadog
+    password: <DD_AGENT_PASSWORD>
     connection_string: "TrustServerCertificate=yes;"
     connector: odbc
     driver: '{ODBC Driver 17 for SQL Server}'
