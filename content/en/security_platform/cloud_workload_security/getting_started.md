@@ -123,15 +123,19 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
-# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
 systemctl restart datadog-agent
 
 {{< /code-block >}}
 
+For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+
+```shell
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+```
+
 Once you apply the changes, restart both the Security Agent and the system-probe.
 
+[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
 
 {{% tab "Fedora/CentOS" %}}
@@ -143,13 +147,17 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
-# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
 systemctl restart datadog-agent
 
 {{< /code-block >}}
 
+For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+
+```shell
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+```
+
+[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}
@@ -286,3 +294,5 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
+
+[3]: /security_platform/cloud_security_management/troubleshooting
