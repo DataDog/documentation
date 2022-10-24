@@ -166,9 +166,9 @@ $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{< tabs >}}
 
 {{% tab "Datadog Admission Controller" %}}
-The Datadog admission controller is a component of the Datadog Cluster Agent that provides the benefit of simplifying your application pod configuration. Learn more about the [Datadog Admission Controller][1] by reading the documentation.
+The Datadog Admission Controller is a component of the Datadog Cluster Agent that simplifies your application pod configuration. Learn more by reading the [Datadog Admission Controller documentation][1].
 
-You can leverage the Datadog Admission Controller to inject environment variables and mount the necessary volumes on new application-pods in order to configure pod and agent trace communication automatically. Learn how to automatically configure your application to submit traces to Datadog Agent by reading the [Injecting Libraries Using Admission Controller][2] documentation.
+Use the Datadog Admission Controller to inject environment variables and mount the necessary volumes on new application pods, automatically configuring pod and Agent trace communication. Learn how to automatically configure your application to submit traces to Datadog Agent by reading the [Injecting Libraries Using Admission Controller][2] documentation.
 
 [1]: /agent/cluster_agent/admission_controller/
 [2]: /tracing/trace_collection/admission_controller/
@@ -199,7 +199,7 @@ kind: Deployment
 ```
 
 ### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog Tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the relative `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer sends the traces to the appropriate `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
 
 {{% /tab %}}
 
@@ -224,7 +224,7 @@ kind: Deployment
 **Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
 ### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog Tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the relative `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the appropriate `DD_AGENT_HOST` (for `IP:Port`) or `DD_TRACE_AGENT_URL` (for UDS) endpoint.
 
 [1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}

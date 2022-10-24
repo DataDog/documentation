@@ -15,7 +15,7 @@ In most environments, configuring your application to send traces to Datadog inv
 
 For your Kubernetes applications that send traces to Datadog by the Cluster Agent (version 7.39 and higher for Java and JavaScript, version 7.40 and higher for Python), you can configure the Admission Controller to inject APM Java and JavaScript tracing libraries automatically.
 
-By automating the injection of tracer libraries through the admission controller, you don't have to change your application images, helping you get up and running with APM quickly.
+By automating the injection of tracer libraries through the Admission Controller, you don't have to change your application images, helping you get up and running with APM quickly.
 
 After you install the Datadog Agent, and then the [Cluster Agent][1], do one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
@@ -65,7 +65,7 @@ annotations:
     admission.datadoghq.com/js-lib.version: "latest"
 ```
 
-Note that the latest keyword should be used with caution, as it may risk potential errors due to major version differences from your newly injected applications versus your existing applications that have already been deployed. 
+**Note**: Use caution specifying `latest`, as it may raise errors because of major version differences between your newly injected applications and your existing applications that have already been deployed. 
 
 Adding a `mutateUnlabelled: true` annotation causes the cluster agent to attempt to intercept every unlabelled pod.
 
