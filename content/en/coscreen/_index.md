@@ -1,6 +1,10 @@
 ---
 title: CoScreen
 kind: documentation
+further_reading:
+- link: 'https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/'
+  tag: 'Blog'
+  text: 'Leverage collaborative screen sharing with Datadog CoScreen'
 ---
 
 {{< img src="coscreen/collab.mp4" alt="Three users share three windows at the same time." width=80% video="true">}}
@@ -93,6 +97,10 @@ CoScreen does not record or store any shared information (for example, shared wi
 CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][6] for more details.
 
 For all the details on how CoScreen enables secure collaboration, read the [CoScreen Security Whitepaper][7].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://coscreen.co/
 [2]: https://www.coscreen.co/download

@@ -3,6 +3,10 @@ title: Workflows
 kind: documentation
 disable_toc: false
 is_beta: true
+further_reading:
+- link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
+  tag: "Blog"
+  text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
 ---
 
 {{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
@@ -36,6 +40,10 @@ Below are a few examples of workflows you can build:
 Watch the video below to see a workflow configured to redeploy a Lambda function when it experiences a high error rate.
 
 {{< wistia 0klmggfhaf>}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /workflows/actions_catalog/
 [2]: /workflows/build/#build-a-workflow-from-a-blueprint
