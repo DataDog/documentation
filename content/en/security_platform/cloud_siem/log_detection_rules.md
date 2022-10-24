@@ -186,23 +186,14 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 ### Severity and notification
 
-Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1] for each rule case.
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
+{{% cloud-siem-rule-time-windows %}}
 
-Once a signal is generated, the signal will remain “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
+Click **Add Case** to add additional cases.
 
-A signal will “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
-
-Additional cases can be added by clicking the **Add Case** button.
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
-
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "New Value" %}}
@@ -211,9 +202,7 @@ Additional cases can be added by clicking the **Add Case** button.
 
 ### Severity and notification
 
-Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1] for each rule case.
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Forget value
 
@@ -225,16 +214,13 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 **Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
 
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "Anomaly" %}}
 
 ### Severity and notification
 
-Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1].
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Time windows
 
@@ -244,7 +230,6 @@ Once a signal is generated, the signal will remain "open" if the data remains an
 
 A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
 
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "Impossible Travel" %}}
@@ -253,19 +238,12 @@ The impossible travel detection method does not require setting a rule case.
 
 ### Severity and notification
 
-Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1].
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases is true. This is a sliding window and evaluates in real-time.
+{{% cloud-siem-rule-time-windows %}}
 
-Once a signal is generated, the signal remains “open” if a case is matched at least once within the `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
-
-A signal closes regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
-
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 {{< /tabs >}}
 

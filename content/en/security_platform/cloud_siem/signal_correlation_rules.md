@@ -49,27 +49,17 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 #### Severity and notification
 
-Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the **Notify** section, optionally, configure [notification targets][2] for each rule case.
+{{% cloud-siem-rule-severity-notification %}}
 
 #### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
-
-Once a signal is generated, the signal remains “open” if a case is matched at least once within the `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
-
-A signal is “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
-
-Click **Add Case** to add additional cases.
-
-**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
+{{% cloud-siem-rule-time-windows %}}
 
 ### Say what's happening
 
 The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
-Use [notification variables][3] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the **JSON** section of the **Overview** tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
+Use [notification variables][2] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the **JSON** section of the **Overview** tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
 
 This JSON object is an example of event attributes that may be associated with a security signal:
 
@@ -116,7 +106,7 @@ You can use if-else logic to see if an attribute matches a value:
 {{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
 ```
 
-See [Notification Variables][3] for more information.
+See [Notification Variables][2] for more information.
 
 Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
 
@@ -124,7 +114,7 @@ Use the **Tag resulting signals** dropdown to tag your signals with different ta
 
 ### Template variables
 
-Use [template variables][4] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications.
+Use [template variables][3] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications.
 
 For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message states which user and IP address triggered a given signal when using the specified template variable.
 
@@ -144,13 +134,12 @@ Epoch template variables create a human-readable string or math-friendly number 
 {{eval "first_seen_epoch-15*60*1000"}}
 ```
 
-See [Template Variables][4] for more information.
+See [Template Variables][3] for more information.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/rules
-[2]: /security_platform/notifications/#integrations
-[3]: /security_platform/notifications/variables/
-[4]: /security_platform/notifications/variables/#template-variables
+[2]: /security_platform/notifications/variables/
+[3]: /security_platform/notifications/variables/#template-variables
