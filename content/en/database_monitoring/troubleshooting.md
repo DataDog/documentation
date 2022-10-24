@@ -36,5 +36,5 @@ If you are still experiencing problems, contact [Datadog Support][5] for help.
 [1]: /database_monitoring/#getting-started
 [2]: /database_monitoring/setup_mysql/troubleshooting/
 [3]: /database_monitoring/setup_postgres/troubleshooting/
-[3]: /database_monitoring/setup_sql_server/troubleshooting/
+[4]: /database_monitoring/setup_sql_server/troubleshooting/
 [5]: /help/
