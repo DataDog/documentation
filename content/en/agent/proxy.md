@@ -1033,7 +1033,7 @@ stream {
         listen 3845; #listen for network devices netflow
         proxy_ssl_verify on;
         proxy_ssl on;
-        proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
+        proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
