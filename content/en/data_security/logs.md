@@ -50,7 +50,7 @@ If you have any questions about how the Log Management Service satisfies the app
 Datadog allows customers to send logs to PCI DSS compliant Datadog org upon request. To setup a PCI compliant Datadog Org, please follow these steps. 
 
 1. Set up a new Datadog org in the Datadog US1 site.  PCI DSS compliance is only supported for new orgs created in US1.
-2. Contact Datadog support or Customer Success and request that the new org be configured as PCI compliant org.
+2. Contact Datadog support or Customer Success to request that the new org be configured as a PCI-compliant org.
 3. Enable Datadog Audit Trail in the new org. Datadog Audit Trail is a requirement to remain compliant with PCI DSS.
 4. Datadog Support or Customer Success confirms that the new org is now PCI DSS compliant
 5. Update the Datadog agents to ship logs to the following dedicated PCI compliant endpoint 
