@@ -5845,8 +5845,7 @@ api:
         - v1
       operationids:
         - GetSLOHistory
-      unstable:
-        - v1
+      unstable: []
       order: 6
   - name: Get Corrections For an SLO
     url: '#get-corrections-for-an-slo'
