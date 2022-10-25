@@ -400,6 +400,14 @@ frontend appsec-events-frontend
     option tcplog
     default_backend datadog-appsec-events
 
+# This declares the endpoint where your Agents connects for
+# sending Network Devices Monitoring NetFlow flows (e.g the value of "network_devices.netflow.dd_url")
+frontend network_devices_netflow_frontend
+    bind *:3845
+    mode http
+    option tcplog
+    default_backend datadog-network-devices-netflow
+
 # This is the Datadog server. In effect, any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
