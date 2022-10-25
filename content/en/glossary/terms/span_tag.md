@@ -1,4 +1,5 @@
 ---
 title: span tag
 ---
-tags that are applied to spans, in the form of key-value pairs, to correlate a request with other telemetry, to to filter it in searches
+
+A span tag is a tag that is applied to a [span][#span], in the form of a key-value pair, to correlate a request with other telemetry (or to filter it in searches). 
