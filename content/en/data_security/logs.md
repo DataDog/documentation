@@ -50,7 +50,7 @@ If you have any questions about how the Log Management Service satisfies the app
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-PCI DSS compliance for Log Management is only supported for the <a href="/getting_started/site/">US1 site</a>.
+PCI DSS compliance for Log Management is only available for new Datadog orgs created in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
 Datadog allows customers to send logs to PCI DSS compliant Datadog orgs upon request. To set up a PCI-complaint Datadog org, follow these steps:
