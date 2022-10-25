@@ -319,7 +319,7 @@ To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-PCI compliance APM is only supported for the <a href="/getting_started/site/">US1 site</a>.
+PCI compliance for APM is only available for new Datadog orgs created in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
 PCI compliance for APM is available when you create a new Datadog organization. [Audit Trail][1] must be enabled and remain enabled to maintain PCI compliance. Contact [Datadog support][2] to enable PCI-compliant APM.
