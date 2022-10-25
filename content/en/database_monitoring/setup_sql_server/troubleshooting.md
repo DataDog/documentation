@@ -6,11 +6,9 @@ description: Troubleshoot Database Monitoring setup for SQL Server
 
 This page details common issues with setting up and using Database Monitoring with SQL Server, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
-## Diagnosing common problems
+## Common SQL Server connection issues
 
-### Troubleshooting agent connection errors
-
-#### SQL Server unable to connect 'Login Failed for user'
+### SQL Server unable to connect 'Login Failed for user'
 
 There are two ways that the agent can connect to a SQL Server instance:
 
@@ -43,7 +41,7 @@ If the `datadog` user is unable to log into the SQL Server instance, please ensu
 
 Microsoft also provides a helpful doc on troubleshooting these types of errors, which can be [followed here][5].
 
-#### SQL Server Unable to connect due to “Invalid connection string attribute”
+### SQL Server Unable to connect due to “Invalid connection string attribute”
 
 The following ADO Providers are supported on Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
@@ -80,7 +78,7 @@ To troubleshoot:
 
 If neither step produces meaningful help, or the error code you are seeing is not listed, Datadog recommends to use the `MSOLEDBSQL` driver or the `Microsoft ODBC Driver for SQL Server`. Either of these options will produce more meaningful error messages, which should help troubleshooting why the connection is failing.
 
-#### SSL Provider: The certificate chain was issued by an authority that is not trusted
+### SSL Provider: The certificate chain was issued by an authority that is not trusted
 
 This error is common after upgrading to the latest [MSOLEDBSQL][6] driver due to [breaking changes][7] that were introduced. In the latest version of the driver, all connections to the SQL instance are encrypted by default.
 
@@ -129,7 +127,7 @@ instances:
     driver: '{ODBC Driver 17 for SQL Server}'
 ```
 
-#### SQL Server unable to connect 'SSL Security error (18)'
+### SQL Server unable to connect 'SSL Security error (18)'
 
 This is a known issue for older versions of the SQL Server ODBC driver. You can check which version of the driver is being used by the agent by looking at the connection string in the error message.
 
@@ -138,7 +136,7 @@ For example, if you see `Provider=SQL Server` in the connection string of the er
 This issue is described in more detail in this [Microsoft blog post][9]
 
 
-#### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist'
+### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist'
 
 This error can sometimes just be the result of not properly setting the `host` field. For the integration, you should the `host` field with the following syntax: `host:server,port`.
 
@@ -152,15 +150,60 @@ Should be set as:
 host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 ```
 
-### Other common questions
+### Empty connection string
 
-#### SQL Server user tag is missing on the Query Metrics page
+Datadog's SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` probably includes some character that causes issues with adodbapi.
+
+```text
+OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
+```
+
+At the moment, the only character known to cause this specific connectivity issue is the `%` character. If you want to use the "%" character in your `sqlserver.yaml`, that is if your Datadog SQL Server user password includes a `%`), you need to escape that character by including a double `%%` in place of each single `%`.
+
+### Connecting to SQL Server on a Linux host
+
+To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
+
+1. Install the [Microsoft ODBC Driver][10] for your Linux distribution.
+   If you are unsure of the driver name to use, you can find it enclosed in brackets at the top of `/etc/odbcinst.ini`.
+
+    ```text
+    $ cat /etc/odbcinst.ini
+    [ODBC Driver 13 for SQL Server]
+    Description=Microsoft ODBC Driver 13 for SQL Server
+    Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
+    UsageCount=1
+    ```
+2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+3. If needed, install the pyodbc module. This can be done by running pip install pyodbc within your Agent's python environment. For example:
+
+    ```shell
+    $ sudo /opt/datadog-agent/embedded/bin/pip install pyodbc
+    ```
+3. Configure your SQL Server `conf.yaml` to use the odbc connector and specify the proper driver as indicated in the `odbcinst.ini` file.
+
+    ```yaml
+    init_config:
+
+    instances:
+      - host: <HOST>,<PORT>
+        # enable the odbc connector
+        connector: odbc
+        # enable the ODBC driver
+        driver: ODBC Driver 13 for SQL Server
+        username: <USERNAME>
+        password: <PASSWORD>
+    ```
+
+## Other common questions
+
+### SQL Server user tag is missing on the Query Metrics page
 
 The `user` tag has been removed from all SQL Server metric telemetry.
 
 The `user` tag was previously incorrect and did not reflect the user who executed the query in the Query Metrics UI. This is due to a technical limitation in the tables that we are querying in SQL Server for this data.
 
-#### Why are there so many “CREATE PROCEDURE” queries?
+### Why are there so many “CREATE PROCEDURE” queries?
 
 In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the Datadog agent.
 
@@ -173,3 +216,4 @@ In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE`
 [7]: https://techcommunity.microsoft.com/t5/sql-server-blog/ole-db-driver-19-0-for-sql-server-released/ba-p/3170362
 [8]: https://learn.microsoft.com/en-us/sql/connect/oledb/release-notes-for-oledb-driver-for-sql-server?view=sql-server-ver16#1863
 [9]: https://community.hostek.com/t/ssl-security-error-for-microsoft-sql-driver/348
+[10]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
