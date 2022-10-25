@@ -53,13 +53,13 @@ There are three ways you can install the testing framework:
 
 ### Using Swift Package Project
 
-1. Add `dd-sdk-swift-testing` to your package dependencies array, eg:
+1. Add `dd-sdk-swift-testing` to your package dependencies array, for example:
 
 {{< code-block lang="swift" >}}
 .package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.1.0")
 {{< /code-block >}}
 
-2. Add the the testing framework to your testing targets dependencies. Add the following line to your test targets dependencies array:
+2. To add the testing framework to your testing targets' dependencies, add the following line to your test targets dependencies array:
 {{< code-block lang="swift" >}}
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
@@ -159,7 +159,7 @@ Set all these variables in your test target:
 **Examples**: `ci`, `local`
 
 `SRCROOT`
-: The path to the project location. Use `$(SRCROOT)` for the value if using Xcode, because it is automatically set by it.<br/>
+: The path to the project location. If using Xcode, use `$(SRCROOT)` for the value, because it is automatically set by it.<br/>
 **Default**: `(empty)`<br/>
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
