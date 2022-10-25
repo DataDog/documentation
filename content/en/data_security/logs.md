@@ -30,7 +30,7 @@ As of version 6, the Agent can be configured to obfuscate specific patterns with
 
 ## HIPAA-enabled customers
 
-Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog’s Log Management Service.
+Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog's Log Management Service.
 
 These features are not available to customers who have signed Datadog's BAA:
 
@@ -47,19 +47,17 @@ If you have any questions about how the Log Management Service satisfies the app
 
 ## PCI DSS compliance for Log Management
 
-Datadog allows customers to send logs to PCI DSS compliant Datadog orgs upon request. To set up a PCI-complaint Datadog org, follow these steps: 
+Datadog allows customers to send logs to PCI DSS compliant Datadog orgs upon request. To set up a PCI-complaint Datadog org, follow these steps:
 
 1. Set up a new Datadog org in the Datadog US1 site.  PCI DSS compliance is only supported for new orgs created in US1.
-2. Contact Datadog support or Customer Success to request that the new org be configured as a PCI-compliant org.
+2. Contact [Datadog support][7] or your [Customer Success Manager][8] to request that the new org be configured as a PCI-compliant org.
 3. Enable Audit Trail in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
 4. Datadog support or Customer Success confirms that the new org is PCI DSS compliant.
-5. Update the Datadog Agents to ship logs to the following dedicated PCI-compliant endpoint: 
-    `agent-http-intake-pci.logs.datadoghq.com`
-  
+5. Update the Datadog Agents to ship logs to the following dedicated PCI-compliant endpoint: `agent-http-intake-pci.logs.datadoghq.com`
+
 If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
 
-**Note:**
-Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+**Note**: Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
 
 These legacy endpoints are still supported:
 
@@ -78,3 +76,5 @@ These legacy endpoints are still supported:
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /logs/logs_to_metrics/
 [6]: /logs/explorer/#share-views
+[7]: /help/
+[8]: mailto:success@datadoghq.com
