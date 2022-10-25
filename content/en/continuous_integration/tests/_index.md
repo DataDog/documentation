@@ -96,29 +96,21 @@ In addition to tests, CI Visibility provides visibility over the whole testing p
 {{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
 
 #### Sessions
-Test sessions are the highest level of aggregation. They correspond one to one to a test command:
-
-```bash
-yarn test
-```
-
-```bash
-mvn test
-```
+Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test` or `dotnet test`.
 
 #### Module
 The definition of module changes slightly per language:
 
-* In .NET a module groups every test that is run under the same [unit test project][8].
-* In Swift a module groups every test that is run for a given bundle.
-* In JavaScript there are no modules.
+* In .NET a test module groups every test that is run under the same [unit test project][8].
+* In Swift a test module groups every test that is run for a given bundle.
+* In JavaScript there are no test modules.
 
 An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][9].
 
 #### Suite
-A suite is a group of tests exercising the same unit of code.
+A test suite is a group of tests exercising the same unit of code.
 
-An example of a suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][10]
+An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][10]
 
 #### Compatibility
 Not every language supported by CI Visibility has support for test suite level visibility:
