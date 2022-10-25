@@ -197,6 +197,37 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
 ## Other common questions
 
+### Picking a SQL Server driver
+
+In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][11] or the [OLE DB driver][12]. Depending on which driver you pick, this will influence what you set for the [connector][13] field in your instance config.
+
+For example, for the [Microsoft ODBC driver][11]:
+
+  ```yaml
+  connector: odbc
+  driver: '{ODBC Driver 18 for SQL Server}'
+  ```
+
+For the [OLE DB driver][12]:
+
+  ```yaml
+  connector: adodbapi
+  adoprovider: MSOLEDBSQL
+  ```
+
+These values will be used to map to the `Provider` part of the connection string. 
+
+So for example, if you set `adoprovider: MSOLEDBSQL`, then the connection string would include `Provider=MSOLEDBSQL`. This should match the name of the driver version you have installed.
+
+In the latest version of the [Microsoft OLE DB driver][12], the driver name was changed from `MSOLEDBSQL` to `MSOLEDBSQL19`, which means this should appear in your instance config like so:
+
+  ```yaml
+  connector: adodbapi
+  adoprovider: MSOLEDBSQL19
+  ```
+
+It is recommended to stay up to date with the latest available version of the driver you select.
+
 ### SQL Server user tag is missing on the Query Metrics page
 
 The `user` tag has been removed from all SQL Server metric telemetry.
@@ -217,3 +248,6 @@ In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE`
 [8]: https://learn.microsoft.com/en-us/sql/connect/oledb/release-notes-for-oledb-driver-for-sql-server?view=sql-server-ver16#1863
 [9]: https://community.hostek.com/t/ssl-security-error-for-microsoft-sql-driver/348
 [10]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
+[11]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
+[12]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
+[13]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
