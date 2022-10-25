@@ -56,7 +56,7 @@ Datadog allows customers to send logs to PCI DSS compliant Datadog org upon requ
 5. Update the Datadog agents to ship logs to the following dedicated PCI compliant endpoint 
     `agent-http-intake-pci.logs.datadoghq.com`
   
-If you have any questions about how the Log Management Service satisfies the applicable requirements under PCI DSS, contact your account manager.
+If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
 
 **Note:**
 Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
