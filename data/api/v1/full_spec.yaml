@@ -16245,6 +16245,18 @@ components:
       description: Sensitive Data Scanner usage for a given organization for a given
         hour.
       properties:
+        apm_scanned_bytes:
+          description: "The total number of bytes scanned of APM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        events_scanned_bytes:
+          description: "The total number of bytes scanned of Events usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
         hour:
           description: The hour for the usage.
           format: date-time
@@ -16261,6 +16273,12 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        rum_scanned_bytes:
+          description: "The total number of bytes scanned of RUM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
         total_scanned_bytes:
           description: "The total number of bytes scanned across all usage types by
             the Sensitive Data Scanner from the start of the given hour\u2019s month
@@ -16688,9 +16706,24 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -17026,9 +17059,24 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for the given org.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -17401,9 +17449,24 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner in the current months for all organizations.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
