@@ -103,7 +103,7 @@ Usually when tests fail the CI job aborts execution and the upload command will 
 {{< tabs >}}
 
 {{% tab "GitHub Actions" %}}
-You can use the [Status check functions][1].
+Use the [Status check functions][1]:
 
 {{< code-block lang="yaml" >}}
 steps:
@@ -118,7 +118,7 @@ steps:
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-You can use the [after_script section][1]
+Use the [`after_script` section][1]:
 
 {{< code-block lang="yaml" >}}
 test:
@@ -133,7 +133,7 @@ test:
 {{% /tab %}}
 
 {{% tab "Jenkins" %}}
-You can use the [post section][1]
+Use the [`post` section][1]:
 
 {{< code-block lang="groovy" >}}
 pipeline {
