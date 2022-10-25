@@ -172,9 +172,9 @@ HAProxy should be installed on a host that has connectivity to Datadog. You can 
 **Note**: It is recommended to use the `HTTPS` configuration file if the Agent and HAProxy are not part of the same isolated local network.
 
 {{< tabs >}}
-{{< tab "HTTP" >}}
+{{% tab "HTTP" %}}
 
-```conf
+<pre><code>
 # Basic configuration
 global
     log 127.0.0.1 local0
@@ -201,7 +201,7 @@ listen stats
     stats uri /
 
 # This section is to reload DNS Records
-# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
+# Replace &lt;DNS_SERVER_IP&gt; and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
 # For HAProxy 1.8 and newer
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
@@ -418,9 +418,9 @@ backend datadog-appsec-events # deprecated
     server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
-```
+</pre></code>
 
-{{< /tab >}}
+{{% /tab %}}
 {{< tab "HTTPS" >}}
 
 This configuration adds SSL/TLS encryption on communication between the Agent and HAProxy. Replace the variable `<PATH_TO_PROXY_CERTIFICATE_PEM>` with the path to the proxy certificate bundle (*.pem).
@@ -753,7 +753,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 [1]: /agent/guide/agent-commands/#restart-the-agent
 [2]: https://app.datadoghq.com/infrastructure
-{{< /tab >}}
+{{% /tab %}}
 {{< tab "Agent v5" >}}
 
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy, for example: `haproxy.example.com`.
