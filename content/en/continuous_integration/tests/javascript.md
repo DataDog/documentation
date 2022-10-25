@@ -41,7 +41,7 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
   * From `dd-trace>=3.3.0`.
   * Only [`jest-circus`][1] is supported as [`testRunner`][3].
 * Mocha >= 5.2.0
-  * From `dd-trace>=3.3.0`
+  * From `dd-trace>=3.3.0`.
 
 
 ## Configuring reporting method
