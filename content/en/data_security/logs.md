@@ -45,7 +45,7 @@ These features are not available to customers who have signed Datadog's BAA:
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, contact your account manager. HIPAA-enabled customers do not need to use specific endpoints to submit logs to enforce specific encryptions. The encryptions are enabled on all log submission endpoints.
 
-## PCI DSS compliant Datadog Orgs
+## PCI DSS compliance for Log Management
 
 Datadog allows customers to send logs to PCI DSS compliant Datadog org upon request. To setup a PCI compliant Datadog Org, please follow these steps. 
 
