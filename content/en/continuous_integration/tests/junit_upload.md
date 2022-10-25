@@ -98,7 +98,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </pre>
 
 **Make sure that this command runs in your CI even when your tests have failed.**
-Usually when tests fail the CI job aborts execution and the upload command will not run.
+Usually when tests fail the CI job aborts execution and the upload command does not run.
 
 {{< tabs >}}
 
