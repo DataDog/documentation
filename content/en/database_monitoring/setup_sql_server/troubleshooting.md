@@ -18,7 +18,7 @@ There are two ways that the agent can connect to a SQL Server instance:
 
 2. [SQL Server Authentication][3]
 
-Windows authentication is the default authentication mode, and is more secure than SQL Server Auth. By using Windows Authentication, Windows groups can be created at the domain level, and a login can be created on SQL Server for the entire group. In order to use windows authentication with the agent, the customer should:
+Windows authentication is the default authentication mode, and is more secure than SQL Server Auth. By using Windows Authentication, Windows groups can be created at the domain level, and a login can be created on SQL Server for the entire group. In order to use windows authentication you should:
 
 1. Use the service account created at time of [agent install][4], and make sure this account has the proper access to SQL Server.
 
@@ -34,8 +34,8 @@ For example:
 # this example uses SQL Authentication
 sqlcmd -S <INSTANCE_ENDPOINT> -U datadog -P <DATADOG_PASSWORD> -d master
 
-# this examples uses Windows Authentication
-# It can be run via powershell via selecting the `run as user...` option to run as the ddagentuser
+# this example uses Windows Authentication
+# Run this command in powershell via selecting the `run as user...` option to run as the ddagentuser
 sqlcmd -S <INSTANCE_ENDPOINT> -d master -E
 ```
 
@@ -45,9 +45,9 @@ Microsoft also provides a helpful doc on troubleshooting these types of errors, 
 
 #### SQL Server Unable to connect due to “Invalid connection string attribute”
 
-Customers that run on Windows use one of the supported ADO Providers: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
+The following ADO Providers are supported on Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
-The `SQLOLEDB` and `SQLNCLI11` providers produce a particularly uninformative error message, Invalid connection string attribute: Example:
+The `SQLOLEDB` and `SQLNCLI11` providers produce a particularly uninformative error message, `Invalid connection string attribute`. For example:
 
 ```
 datadog_checks.sqlserver.connection.SQLConnectionError:
@@ -64,7 +64,7 @@ Look in the error message for HResult error codes. Here are some known codes:
 
 `-2147217843` — **“login failed for user”**: this means the agent succeeded in establishing a connection to the host but the login was rejected for some reason.
 
-In order to troubleshoot this you can:
+To troubleshoot:
 
 1. Check the agent’s login credentials
 
@@ -72,7 +72,7 @@ In order to troubleshoot this you can:
 
 `-2147467259` — **“could not open database requested for login”**: this error appears either due to network issues or due to an unknown database. To troubleshoot:
 
-In order to troubleshoot this you can:
+To troubleshoot:
 
 1. Check the TCP connection from the agent to the host by running `telnet {host} {port}` to make sure there is network connectivity from the Agent to the database.
 
@@ -92,25 +92,25 @@ If you are using the latest version of the Microsoft OLE DB Driver for SQL Serve
    - Add the self-signed certificate as a trusted certificate on the client
    - Add `TrustServerCertificate=yes;` to the connection string
 
-This is described in more detail [in the microsoft documentation][7]
+This is described in more detail [in the Microsoft documentation][7]
 
 2. If your SQL Server instance does not require encryption to connect (`rds.force_ssl=0` on AWS), then update the connection string to include `Use Encryption for Data=False;`. For example:
 
 ```yaml
 # example uses windows authentication
 instances:
-  - host: localhost,1433
+  - host: <INSTANCE_ENDPOINT>,<PORT>
     connection_string: "Trusted_Connection=yes;Use Encryption for Data=False;"
     connector: adodbapi
     adoprovider: MSOLEDBSQL19
 ```
 
-3. Install the [2018 version of the MSOLEDBSQL driver][8], which does not use encryption by default. In order to do this, update the `adoprovider` to `MSOLEDBSQL`. For example:
+3. Install the [2018 version of the MSOLEDBSQL driver][8], which does not use encryption by default. After installing the driver, update the `adoprovider` to `MSOLEDBSQL`. For example:
 
 ```yaml
 # example uses windows authentication
 instances:
-  - host: localhost,1433
+  - host: <INSTANCE_ENDPOINT>,<PORT>
     connection_string: "Trusted_Connection=yes;"
     connector: adodbapi
     adoprovider: MSOLEDBSQL
@@ -121,7 +121,7 @@ If you are using a driver **other than `MSOLEDBSQL` 2019**, this error can be re
 ```yaml
 # this example uses SQL Server authentication
 instances:
-  - host: localhost,1433
+  - host: <INSTANCE_ENDPOINT>,<PORT>
     username: datadog
     password: <DD_AGENT_PASSWORD>
     connection_string: "TrustServerCertificate=yes;"
@@ -156,13 +156,13 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 #### SQL Server user tag is missing on the Query Metrics page
 
-The `user` tag has been removed from all sqlserver metric telemetry.
+The `user` tag has been removed from all SQL Server metric telemetry.
 
-The `user` tag was previously incorrect and did not reflect the user who executed the query in the Query Metrics UI. This is due to a technical limitation in the tables that we are querying in sqlserver for this data.
+The `user` tag was previously incorrect and did not reflect the user who executed the query in the Query Metrics UI. This is due to a technical limitation in the tables that we are querying in SQL Server for this data.
 
 #### Why are there so many “CREATE PROCEDURE” queries?
 
-In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the sqlserver agent.
+In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the Datadog agent.
 
 [1]: /database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication
