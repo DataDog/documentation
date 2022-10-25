@@ -51,7 +51,7 @@ Datadog allows customers to send logs to PCI DSS compliant Datadog org upon requ
 
 1. Set up a new Datadog org in the Datadog US1 site.  PCI DSS compliance is only supported for new orgs created in US1.
 2. Contact Datadog support or Customer Success to request that the new org be configured as a PCI-compliant org.
-3. Enable Datadog Audit Trail in the new org. Datadog Audit Trail is a requirement to remain compliant with PCI DSS.
+3. Enable Audit Trail in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
 4. Datadog Support or Customer Success confirms that the new org is now PCI DSS compliant
 5. Update the Datadog agents to ship logs to the following dedicated PCI compliant endpoint 
     `agent-http-intake-pci.logs.datadoghq.com`
