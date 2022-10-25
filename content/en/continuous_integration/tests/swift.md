@@ -29,6 +29,9 @@ Supported platforms:
 * macOS >= 10.13
 * tvOS >= 11.0
 
+### Test suite level visibility compatibility
+[Test suite level visibility][1] is only supported from `dd-sdk-swift-testing>=***`.
+
 **Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
 
 ## Installing the Swift testing SDK
@@ -106,7 +109,7 @@ Set all these variables in your test target:
 **Recommended**: `$(DD_TEST_RUNNER)`
 
 `DD_API_KEY`
-: The [Datadog API key][1] used to upload the test results.<br/>
+: The [Datadog API key][2] used to upload the test results.<br/>
 **Default**: `(empty)`
 
 `DD_SERVICE`
@@ -129,7 +132,7 @@ Set all these variables in your test target:
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
+: The [Datadog site][3] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
@@ -205,7 +208,7 @@ For UITests, both the test target and the application running from the UITests m
 
 ### RUM Integration
 
-If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][3] guide. An iOS RUM version >= 1.10 is needed.
+If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][4] guide. An iOS RUM version >= 1.10 is needed.
 
 
 ## Additional optional configuration
@@ -288,7 +291,7 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 
 **Note**: Using OpenTelemetry is only supported for Swift.
 
-Datadog Swift testing framework uses [OpenTelemetry][4] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
+Datadog Swift testing framework uses [OpenTelemetry][5] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -707,7 +710,8 @@ Always call `module.end()` at the end so that all the test info is flushed to Da
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
-[3]: /continuous_integration/guides/rum_swift_integration
-[4]: https://opentelemetry.io/
+[1]: /continuous_integration/tests/#test-suite-level-visibility
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /getting_started/site/
+[4]: /continuous_integration/guides/rum_swift_integration
+[5]: https://opentelemetry.io/
