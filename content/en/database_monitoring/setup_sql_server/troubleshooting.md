@@ -94,38 +94,38 @@ This is described in more detail [in the Microsoft documentation][7]
 
 2. If your SQL Server instance does not require encryption to connect (`rds.force_ssl=0` on AWS), then update the connection string to include `Use Encryption for Data=False;`. For example:
 
-```yaml
-# example uses windows authentication
-instances:
-  - host: <INSTANCE_ENDPOINT>,<PORT>
-    connection_string: "Trusted_Connection=yes;Use Encryption for Data=False;"
-    connector: adodbapi
-    adoprovider: MSOLEDBSQL19
-```
+  ```yaml
+  # example uses windows authentication
+  instances:
+    - host: <INSTANCE_ENDPOINT>,<PORT>
+      connection_string: "Trusted_Connection=yes;Use Encryption for Data=False;"
+      connector: adodbapi
+      adoprovider: MSOLEDBSQL19
+  ```
 
 3. Install the [2018 version of the MSOLEDBSQL driver][8], which does not use encryption by default. After installing the driver, update the `adoprovider` to `MSOLEDBSQL`. For example:
 
-```yaml
-# example uses windows authentication
-instances:
-  - host: <INSTANCE_ENDPOINT>,<PORT>
-    connection_string: "Trusted_Connection=yes;"
-    connector: adodbapi
-    adoprovider: MSOLEDBSQL
-```
+  ```yaml
+  # example uses windows authentication
+  instances:
+    - host: <INSTANCE_ENDPOINT>,<PORT>
+      connection_string: "Trusted_Connection=yes;"
+      connector: adodbapi
+      adoprovider: MSOLEDBSQL
+  ```
 
 If you are using a driver **other than `MSOLEDBSQL` 2019**, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the 2017 `ODBC` driver:
 
-```yaml
-# this example uses SQL Server authentication
-instances:
-  - host: <INSTANCE_ENDPOINT>,<PORT>
-    username: datadog
-    password: <DD_AGENT_PASSWORD>
-    connection_string: "TrustServerCertificate=yes;"
-    connector: odbc
-    driver: '{ODBC Driver 17 for SQL Server}'
-```
+  ```yaml
+  # this example uses SQL Server authentication
+  instances:
+    - host: <INSTANCE_ENDPOINT>,<PORT>
+      username: datadog
+      password: <DD_AGENT_PASSWORD>
+      connection_string: "TrustServerCertificate=yes;"
+      connector: odbc
+      driver: '{ODBC Driver 17 for SQL Server}'
+  ```
 
 ### SQL Server unable to connect 'SSL Security error (18)'
 
