@@ -47,7 +47,7 @@ If you have any questions about how the Log Management Service satisfies the app
 
 ## PCI DSS compliance for Log Management
 
-Datadog allows customers to send logs to PCI DSS compliant Datadog org upon request. To setup a PCI compliant Datadog Org, please follow these steps. 
+Datadog allows customers to send logs to PCI DSS compliant Datadog orgs upon request. To set up a PCI-complaint Datadog org, follow these steps: 
 
 1. Set up a new Datadog org in the Datadog US1 site.  PCI DSS compliance is only supported for new orgs created in US1.
 2. Contact Datadog support or Customer Success to request that the new org be configured as a PCI-compliant org.
