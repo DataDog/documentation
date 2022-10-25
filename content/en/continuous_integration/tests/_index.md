@@ -120,7 +120,7 @@ An example of a suite is `src/commands/junit/__tests__/upload.test.ts`, which co
 Not every language supported by CI Visibility has support for test suite level visibility:
 
 * [Swift][11] has complete support since `dd-sdk-swift-testing>=2.1.0`
-* [.NET][12] has complete support since version ...
+* [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`
 * [Javascript][13] has limited support since `dd-trace-js>=3.3.0`
 
 ## Communicate about CI tests data

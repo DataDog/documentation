@@ -31,7 +31,7 @@ Supported test frameworks:
 * MsTestV2 14 and above
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][1] is only supported from `dd-trace-dotnet>=***`.
+[Test suite level visibility][1] is only supported from `dd-trace-dotnet>=2.16.0`.
 
 
 ## Configuring reporting method
