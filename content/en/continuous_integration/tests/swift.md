@@ -29,10 +29,10 @@ Supported platforms:
 * macOS >= 10.13
 * tvOS >= 11.0
 
+**Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
+
 ### Test suite level visibility compatibility
 [Test suite level visibility][1] is only supported from `dd-sdk-swift-testing>=2.1.0`.
-
-**Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
 
 ## Installing the Swift testing SDK
 
