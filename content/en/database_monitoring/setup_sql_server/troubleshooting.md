@@ -45,7 +45,7 @@ Microsoft also provides a helpful doc on troubleshooting these types of errors, 
 
 The following ADO Providers are supported on Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
-The `SQLOLEDB` and `SQLNCLI11` providers produce a particularly uninformative error message, `Invalid connection string attribute`. For example:
+The `SQLOLEDB` and `SQLNCLI11` providers produce the error message `Invalid connection string attribute` for a wide variety of possible issues. For example:
 
 ```
 datadog_checks.sqlserver.connection.SQLConnectionError:
@@ -215,7 +215,7 @@ For the [OLE DB driver][12]:
   adoprovider: MSOLEDBSQL
   ```
 
-These values will be used to map to the `Provider` part of the connection string. 
+These values will be used to map to the `Provider` part of the connection string.
 
 So for example, if you set `adoprovider: MSOLEDBSQL`, then the connection string would include `Provider=MSOLEDBSQL`. This should match the name of the driver version you have installed.
 
@@ -230,9 +230,9 @@ It is recommended to stay up to date with the latest available version of the dr
 
 ### SQL Server user tag is missing on the Query Metrics page
 
-The `user` tag has been removed from all SQL Server metric telemetry.
+The `user` tag is no longer supported for Query Metrics due to technical limitations in SQL Server which prevent the collection of the correct user running queries.
 
-The `user` tag was previously incorrect and did not reflect the user who executed the query in the Query Metrics UI. This is due to a technical limitation in the tables that we are querying in SQL Server for this data.
+The `user` tag is available for Query Activity events and Database Load metrics.
 
 ### Why are there so many “CREATE PROCEDURE” queries?
 
