@@ -32,7 +32,7 @@ event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <
 | `<message>`          | String          | Yes      | The text body of the event                                                                 |
 | `<alert_type>`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
 | `<aggregation_key>`  | String          | No       | A key to use for aggregating events                                                        |
-| `<source_type_name>` | String          | No       | The source type name                                                                       |
+| `<source_type_name>` | String          | No       | The source type name (defaults to `my_apps`)                                               |
 | `<date_happened>`    | Integer         | No       | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
 | `<priority>`         | String          | No       | Specifies the priority of the event (`normal` or `low`)                                    |
 | `<tags>`             | List of strings | No       | A list of tags associated with this event                                                  |
