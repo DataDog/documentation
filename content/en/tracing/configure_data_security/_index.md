@@ -7,7 +7,7 @@ aliases:
     - /tracing/security
     - /tracing/guide/security
     - /tracing/guide/agent_obfuscation
-    - /tracing/guide/agent-obfuscationDD
+    - /tracing/guide/agent-obfuscation
     - /tracing/custom_instrumentation/agent_customization
     - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
     - /tracing/setup_overview/configure_data_security/

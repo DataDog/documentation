@@ -229,7 +229,7 @@ Support for query strings is not available for Flask.
 
 ## Configuring a client IP header
 
-ASM automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
+ASM automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library only checks the specified header for the client IP.
 
 ## Add user information to traces
 
