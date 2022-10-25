@@ -314,6 +314,25 @@ Datadog may gather environmental and diagnostic information about your tracing l
  
 To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable to `false` in your instrumented application.
 
+## PCI compliance for APM
+
+{{< site-region region="us" >}}
+
+<div class="alert alert-warning">
+PCI compliance APM is only supported for the <a href="/getting_started/site/">US1 site</a>.
+</div>
+
+PCI compliance for APM is available when you create a new Datadog organization. [Audit Trail][1] must be enabled and remain enabled to maintain PCI compliance. Contact [Datadog support][2] to enable PCI-compliant APM.
+
+[1]: /account_management/audit_trail/
+[2]: /help/
+
+{{< /site-region >}}
+
+{{< site-region region="us2,us3,us5,eu,gov" >}}
+PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
+{{< /site-region >}}
+
 [1]: /help/
 [2]: /tracing/glossary/#trace
 [3]: /tracing/trace_collection/tracing_naming_convention/#http-requests
