@@ -59,7 +59,7 @@ Datadog allows customers to send logs to PCI DSS compliant Datadog org upon requ
 If you have any questions about how the Log Management Service satisfies the applicable requirements under PCI DSS, contact your account manager.
 
 **Note:**
-Logs can be viewed through various pages in the Datadog platform. All manifestations of logs in the Datadog platform, including pages such as Traces are part of the log management product.
+Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
 
 These legacy endpoints are still supported:
 
