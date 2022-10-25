@@ -401,7 +401,7 @@ frontend appsec-events-frontend
     default_backend datadog-appsec-events
 
 # This declares the endpoint where your Agents connects for
-# sending Network Devices Monitoring NetFlow flows (e.g the value of "network_devices.netflow.dd_url")
+# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
 frontend network_devices_netflow_frontend
     bind *:3845
     mode http
@@ -668,7 +668,7 @@ frontend appsec-events-frontend
     default_backend datadog-appsec-events
 
 # This declares the endpoint where your Agents connect for
-# sending Network Devices Monitoring NetFlow flows (e.g the value of "network_devices.netflow.dd_url")
+# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
 frontend network_devices_netflow_frontend
     bind *:3845 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
