@@ -963,6 +963,13 @@
       "description": "Get a quick list of security signals returns \"OK\" response with pagination"
     }
   ],
+  "GetSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a rule's details returns \"OK\" response"
+    }
+  ],
   "GetSecurityFilter": [
     {
       "group": "security_monitoring",
@@ -984,6 +991,13 @@
       "description": "Get all security filters returns \"OK\" response"
     }
   ],
+  "ListSecurityMonitoringRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "List rules returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalAssignee": [
     {
       "group": "security_monitoring",
@@ -996,6 +1010,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update an existing rule returns \"OK\" response"
     }
   ],
   "CreateServiceAccountApplicationKey": [
