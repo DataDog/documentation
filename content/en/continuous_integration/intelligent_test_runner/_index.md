@@ -23,6 +23,17 @@ Intelligent Test Runner is Datadog's test impact analysis solution. It allows yo
 
 By only running tests on relevant code, when tests fail, it is likely a legitimate failure that pertains to the modified code.
 
+## Limitations during beta phase
+
+During the beta phase of Intelligent Test Runner there are certain limitations:
+
+- Some of the environment variables required in the following sections won't be necessary after beta.
+- Intelligent Test Runner only works without the Datadog Agent.
+- There are known limitations on the current implementation of Intelligent Test Runner that would cause tests to be skipped when they shouldn't. If you encounter these scenarios you can add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message to ensure all tests are run. Intelligent Test Runner is not able to detect:
+  - Changes in library dependencies.
+  - Changes in compiler options.
+  - Changes in external services.
+  - Changes to data files in data-driven tests.
 
 ## Setup
 
