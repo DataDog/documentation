@@ -60,7 +60,7 @@ This same error is produced regardless of failure reason (unknown hostname, coul
 
 Look in the error message for HResult error codes. Here are some known codes:
 
-`-2147217843` — **“login failed for user”**: this means the agent succeeded in establishing a connection to the host but the login was rejected for some reason.
+`-2147217843` **“login failed for user”**: this means the agent succeeded in establishing a connection to the host but the login was rejected for some reason.
 
 To troubleshoot:
 
@@ -68,7 +68,7 @@ To troubleshoot:
 
 2. Try to login with those credentials manually using sqlcmd. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-`-2147467259` — **“could not open database requested for login”**: this error appears either due to network issues or due to an unknown database. To troubleshoot:
+`-2147467259` **“could not open database requested for login”**: this error appears either due to network issues or due to an unknown database. To troubleshoot:
 
 To troubleshoot:
 
