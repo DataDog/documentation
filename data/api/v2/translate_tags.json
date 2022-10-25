@@ -7,14 +7,6 @@
     "name": "AuthN Mappings",
     "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers."
   },
-  "ci-visibility-pipelines": {
-    "name": "CI Visibility Pipelines",
-    "description": "Search or aggregate your CI Visibility pipeline events over HTTP."
-  },
-  "ci-visibility-tests": {
-    "name": "CI Visibility Tests",
-    "description": "Search or aggregate your CI Visibility test events over HTTP."
-  },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
     "description": "Workload activity security rules for generating events using the Datadog security Agent."

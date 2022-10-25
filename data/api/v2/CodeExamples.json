@@ -58,68 +58,6 @@
       "description": "List all AuthN Mappings returns \"OK\" response"
     }
   ],
-  "AggregateCIAppPipelineEvents": [
-    {
-      "group": "ci_visibility_pipelines",
-      "suffix": "",
-      "description": "Aggregate pipelines events returns \"OK\" response"
-    }
-  ],
-  "ListCIAppPipelineEvents": [
-    {
-      "group": "ci_visibility_pipelines",
-      "suffix": "",
-      "description": "Get a list of pipelines events returns \"OK\" response"
-    },
-    {
-      "group": "ci_visibility_pipelines",
-      "suffix": "_1270618359",
-      "description": "Get a list of pipelines events returns \"OK\" response with pagination"
-    }
-  ],
-  "SearchCIAppPipelineEvents": [
-    {
-      "group": "ci_visibility_pipelines",
-      "suffix": "",
-      "description": "Search pipelines events returns \"OK\" response"
-    },
-    {
-      "group": "ci_visibility_pipelines",
-      "suffix": "_3246135003",
-      "description": "Search pipelines events returns \"OK\" response with pagination"
-    }
-  ],
-  "AggregateCIAppTestEvents": [
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "",
-      "description": "Aggregate tests events returns \"OK\" response"
-    }
-  ],
-  "ListCIAppTestEvents": [
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "",
-      "description": "Get a list of tests events returns \"OK\" response"
-    },
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "_3852605281",
-      "description": "Get a list of tests events returns \"OK\" response with pagination"
-    }
-  ],
-  "SearchCIAppTestEvents": [
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "",
-      "description": "Search tests events returns \"OK\" response"
-    },
-    {
-      "group": "ci_visibility_tests",
-      "suffix": "_1675695429",
-      "description": "Search tests events returns \"OK\" response with pagination"
-    }
-  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
