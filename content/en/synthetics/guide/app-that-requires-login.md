@@ -26,6 +26,8 @@ You may need to monitor user journeys located behind a login. There are two ways
 - [Include the login steps in your browser test recording](#include-the-login-steps-in-your-recording)
 - [Leverage advanced options for API, multistep, and browser tests](#leverage-test-configuration-options)
 
+You can also ensure your credentials are securely stored and obfuscated across the application by [using obfuscated global variables](#account-security).
+
 To ensure your credentials are securely stored and obfuscated across the application, use [secured global variables](#account-security).
 
 ## Include the login steps in your recording
@@ -88,9 +90,9 @@ By default, the browser, API, or multistep API test automatically passes through
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][9] (for example, one global variable for username, another one for password) and set these variables as secure to obfuscate their values from anyone else who has access to your instance of Datadog.
+Store your credentials as [global variables][9] (for example, one global variable for username, another one for password) and set these variables as obfuscated to hide their values from anyone else who has access to your instance of Datadog.
 
-Once you have created secure variables, you can [import these global variables][10] into your browser tests and leverage them for your login steps, or use secure variables in your HTTP and multistep API tests.
+Once you create the obfuscated variables, you can then [import these global variables][10] into your browser tests and leverage them for your login steps.
 
 While global variables are securely stored and encrypted, Datadog recommends using an account dedicated to testing with dummy credentials as a general best practice for testing.
 

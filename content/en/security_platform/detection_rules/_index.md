@@ -78,7 +78,7 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 [3]: /security_platform/cloud_siem/log_detection_rules/
 [4]: /security_platform/cspm/
 [5]: /security_platform/cloud_workload_security/
-[6]: /security_platform/explorer/
+[6]: /security_platform/application_security/
 [7]: /tracing/
 [8]: /agent/
 [9]: https://app.datadoghq.com/security/configuration/rules

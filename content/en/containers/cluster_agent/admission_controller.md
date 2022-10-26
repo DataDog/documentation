@@ -25,8 +25,8 @@ Datadog's admission controller is `MutatingAdmissionWebhook` type. For more deta
 - Datadog Cluster Agent v7.39+
 
 ## Configuration
-
-### Helm chart
+{{< tabs >}}
+{{% tab "Helm chart" %}}
 Starting from Helm chart v2.35.0, Datadog Admission controller is activated by default. No extra configuration is needed to enable the admission controller.
 
 To enable the admission controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
@@ -50,8 +50,9 @@ To enable the admission controller for Helm chart v2.34.6 and earlier, set the p
     mutateUnlabelled: false
 [...]
 {{< /code-block >}}
+{{% /tab %}}
 
-### Datadog operator
+{{% tab "Datadog Operator" %}}
 
 To enable the admission controller for the Datadog operator, set the parameter `clusterAgent.config.admissionController.enabled` to `true` in the custom resource:
 
@@ -65,8 +66,9 @@ To enable the admission controller for the Datadog operator, set the parameter `
         mutateUnlabelled: false
 [...]
 ```
+{{% /tab %}}
 
-### Manual setup
+{{% tab "Manual setup" %}}
 
 To enable the admission controller without using Helm or the Datadog operator, add the following to your configuration:
 
@@ -127,7 +129,8 @@ Finally, run the following commands:
 - `kubectl apply -f cluster-agent-rbac.yaml`
 - `kubectl apply -f agent-services.yaml`
 - `kubectl apply -f cluster-agent-deployment.yaml`
-
+{{% /tab %}}
+{{< /tabs >}}
 
 ### APM
 You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracing libraries automatically. Read [APM Tracing Setup with Admission Controller][3] for more information

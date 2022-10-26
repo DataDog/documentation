@@ -57,13 +57,13 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
         clientToken: '<DATADOG_CLIENT_TOKEN>',
         ...otherConfig,
         service: "my-web-application",
-        allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/]
+        allowedTracingOrigins: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (origin) => origin === "https://api.example.com"]
     })
     ```
 
     To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
-    `allowedTracingOrigins` accepts Javascript strings and RegExp that matches the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
+    `allowedTracingOrigins` accepts JavaScript strings, regular expressions, and functions that match the origins called by your browser application, defined as: `<scheme> "://" <hostname> [ ":" <port> ]`.
 
 3.  _(Optional)_ Configure the `tracingSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from browser requests are sent to Datadog. To keep 20% of backend traces:
 
@@ -146,7 +146,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
    Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
 
-5. _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. 
+5. _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
      To keep 20% of backend traces:
     ```swift

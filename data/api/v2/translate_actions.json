@@ -75,6 +75,38 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "AggregateCIAppPipelineEvents": {
+    "description": "The API endpoint to aggregate CI Visibility pipeline events into buckets of computed metrics and timeseries.",
+    "summary": "Aggregate pipelines events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of pipeline events from your organization."
+  },
+  "ListCIAppPipelineEvents": {
+    "description": "List endpoint returns CI Visibility pipeline events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest pipeline events.",
+    "summary": "Get a list of pipelines events"
+  },
+  "SearchCIAppPipelineEvents": {
+    "description": "List endpoint returns CI Visibility pipeline events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "summary": "Search pipelines events",
+    "request_description": "",
+    "request_schema_description": "The request for a pipelines search."
+  },
+  "AggregateCIAppTestEvents": {
+    "description": "The API endpoint to aggregate CI Visibility test events into buckets of computed metrics and timeseries.",
+    "summary": "Aggregate tests events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve aggregation buckets of test events from your organization."
+  },
+  "ListCIAppTestEvents": {
+    "description": "List endpoint returns CI Visibility test events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
+    "summary": "Get a list of tests events"
+  },
+  "SearchCIAppTestEvents": {
+    "description": "List endpoint returns CI Visibility test events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "summary": "Search tests events",
+    "request_description": "",
+    "request_schema_description": "The request for a tests search."
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
     "summary": "Get all application keys owned by current user"

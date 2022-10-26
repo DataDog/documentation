@@ -190,7 +190,7 @@ The query is in a database ignored by the Agent instance config `ignore_database
 Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
 
 #### Query is relatively infrequent or executes quickly
-The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][10] to capture the query.
+The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][23] to capture the query.
 
 
 #### Application is relying on search paths for specifying which schema to query
@@ -235,3 +235,4 @@ For more information, see the appropriate version of the [Postgres `contrib` doc
 [20]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
 [21]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
 [22]: https://www.postgresql.org/docs/12/contrib.html
+[23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281

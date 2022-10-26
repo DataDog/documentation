@@ -151,7 +151,7 @@ env:
 
 With this, any pod running your application is able to send DogStatsD metrics with port `8125` on `$DD_AGENT_HOST`.
 
-**Note**: As a best practice, Datadog recommends using unified service tagging when assigning attributes. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, see [unified service tagging][8].
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning attributes. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, see [unified service tagging][4].
 
 #### Origin detection over UDP
 
@@ -160,7 +160,7 @@ Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect wh
 **Notes**: 
 
 * Origin detection with UDP uses the pod ID as the entity ID, so container-level tags are not emitted.
-* An alternative to UDP is [Unix Domain Sockets][4].
+* An alternative to UDP is [Unix Domain Sockets][5].
 
 To enable origin detection over UDP, add the following lines to your application manifest:
 
@@ -172,16 +172,17 @@ env:
               fieldPath: metadata.uid
 ```
 
-To set [tag cardinality][5] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` (default) or `orchestrator`.
+To set [tag cardinality][6] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` (default) or `orchestrator`.
 
-**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][6].
+**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][7].
 
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-[4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
-[5]: /getting_started/tagging/assigning_tags/#environment-variables
-[6]: /metrics/custom_metrics/
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+[6]: /getting_started/tagging/assigning_tags/#environment-variables
+[7]: /metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 

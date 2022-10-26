@@ -11,7 +11,7 @@ further_reading:
   The Cloud Security Investigator is in beta.
 {{< /beta-callout >}} 
 
-<div class="alert alert-warning">Cloud Security Investigator currently only supports AWS Cloudtrail logs.</div>
+<div class="alert alert-warning">Cloud Security Investigator currently only supports AWS CloudTrail logs.</div>
 
 ## Overview
 

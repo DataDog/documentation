@@ -1907,6 +1907,11 @@ main:
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
     weight: 1209
+  - name: APM Quantization
+    url: tracing/troubleshooting/quantization
+    identifier: tracing_troubleshooting_quantization
+    parent: tracing_troubleshooting
+    weight: 1210
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
@@ -5840,8 +5845,7 @@ api:
         - v1
       operationids:
         - GetSLOHistory
-      unstable:
-        - v1
+      unstable: []
       order: 6
   - name: Get Corrections For an SLO
     url: '#get-corrections-for-an-slo'
@@ -7365,6 +7369,86 @@ api:
         - ListAuthNMappings
       unstable: []
       order: 4
+  - name: CI Visibility Pipelines
+    url: /api/latest/ci-visibility-pipelines/
+    identifier: ci-visibility-pipelines
+    generated: true
+  - name: Search pipelines events
+    url: '#search-pipelines-events'
+    identifier: ci-visibility-pipelines-search-pipelines-events
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchCIAppPipelineEvents
+      unstable: []
+      order: 2
+  - name: Get a list of pipelines events
+    url: '#get-a-list-of-pipelines-events'
+    identifier: ci-visibility-pipelines-get-a-list-of-pipelines-events
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCIAppPipelineEvents
+      unstable: []
+      order: 1
+  - name: Aggregate pipelines events
+    url: '#aggregate-pipelines-events'
+    identifier: ci-visibility-pipelines-aggregate-pipelines-events
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateCIAppPipelineEvents
+      unstable: []
+      order: 3
+  - name: CI Visibility Tests
+    url: /api/latest/ci-visibility-tests/
+    identifier: ci-visibility-tests
+    generated: true
+  - name: Search tests events
+    url: '#search-tests-events'
+    identifier: ci-visibility-tests-search-tests-events
+    parent: ci-visibility-tests
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchCIAppTestEvents
+      unstable: []
+      order: 2
+  - name: Get a list of tests events
+    url: '#get-a-list-of-tests-events'
+    identifier: ci-visibility-tests-get-a-list-of-tests-events
+    parent: ci-visibility-tests
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCIAppTestEvents
+      unstable: []
+      order: 1
+  - name: Aggregate tests events
+    url: '#aggregate-tests-events'
+    identifier: ci-visibility-tests-aggregate-tests-events
+    parent: ci-visibility-tests
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateCIAppTestEvents
+      unstable: []
+      order: 3
   - name: Cloud Workload Security
     url: /api/latest/cloud-workload-security/
     identifier: cloud-workload-security
