@@ -31,7 +31,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 
 ### Amazon Linux 2, Amazon Linux 2022
 
-<div class="alert alert-info">Amazon Linux 2022 installations on Agent versions <= 7.39 require the <code>libxcrypt-compat</code> package. To install the package, run:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre>.</div>
+<div class="alert alert-info">Amazon Linux 2022 installations on Agent versions <= 6.39/7.39 require the <code>libxcrypt-compat</code> package. To install the package, run:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre>.</div>
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
