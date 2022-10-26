@@ -36,7 +36,7 @@ To require a tag with mandatory values, select the **Required** check box and sp
 
 {{< img src="monitors/settings/monitor_tag_enforcement_key_and_value.png" alt="Enforce monitor tag keys and values"  >}}
 
-### Require tag only
+### Require tags only
 
 Alternatively, you can require a tag but allow users to specify their own values. In this example, monitors are required to have the `product_id` tag. The value can be anything specified by the user.
 
