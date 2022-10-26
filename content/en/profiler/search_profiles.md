@@ -201,8 +201,14 @@ Wall Time
 CPU
 : The time each method spent running on the CPU.
 
-Thrown Exceptions
+Thrown Exceptions (beta)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
+
+Allocations (beta)
+: The number and size of allocated objects by each method, as well as their type.
+
+Lock (beta)
+: The number of times threads are waiting for a lock and for how long.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
