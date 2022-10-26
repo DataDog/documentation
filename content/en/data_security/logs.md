@@ -14,6 +14,8 @@ further_reading:
 
 The Log Management product supports multiple [environments and formats][1], allowing you to submit to Datadog nearly any data you choose. This article describes the main security guarantees and filtering controls available to you when submitting logs to Datadog.
 
+**Note**: Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+
 ## Information security
 
 The Datadog Agent submits logs to Datadog either through HTTPS or through TLS-encrypted TCP connection on port 10516, requiring outbound communication (see [Agent Transport for logs][2]).
@@ -77,9 +79,9 @@ PCI DSS compliance for Log Management is not available for the {{< region-param 
 
 {{< /site-region >}}
 
-**Note**: Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+## Encrypted endpoints
 
-These legacy endpoints are still supported:
+All log submission endpoints are encrypted, but these legacy endpoints are still supported:
 
 * `tcp-encrypted-intake.logs.datadoghq.com`
 * `lambda-tcp-encrypted-intake.logs.datadoghq.com`
