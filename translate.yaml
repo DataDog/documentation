@@ -27,7 +27,7 @@ ignores:
   - "content/en/real_user_monitoring/connect_rum_and_traces/*.md"
   - "content/en/security_platform/application_security/**/*.md"
   - "content/en/security_platform/security_signal_management/*.md"
-  - "content/en/tracing/dynamic_instrumentation/**/*.md"
+  - "content/en/dynamic_instrumentation/**/*.md"
   - "content/en/tracing/other_telemetry/**/*.md"
   - "content/en/tracing/setup_overview/**/*.md"
   - "content/en/tracing/trace_collection/**/*.md"
