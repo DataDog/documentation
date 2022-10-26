@@ -110,7 +110,7 @@ Optionally, limit metric collection for Azure VMs and App Service Plans using Az
  * There is no option to limit metric collection for other resource types.
 
 #### Log collection
-There are two types of logs that can be emitted from Azure to Datadog: Subscription level logs and Azure resource logs.
+There are three types of logs that can be emitted from Azure to Datadog using the Datadog resource.
 
 **Subscription level logs** provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (PUT, POST, DELETE).
 
@@ -121,6 +121,16 @@ To send subscription level logs to Datadog, select “Send subscription activity
 To send Azure resource logs to Datadog, select “Send Azure resource logs for all defined resources”. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][4]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
 
 You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
+
+**Azure Active Directory (Azure AD) logs** contain the history of sign-in activity and the audit trail of changes made in Azure AD for a particular tenant. To send Azure Active Directory Logs:
+
+1. Navigate to Azure Active Directory in Azure, and select **Diagnostic Settings** in the left navigation bar.
+2. Click **Add diagnostic setting**.
+3. Select the log categories you want to send to Datadog. Datadog recommends sending all categories.
+4. In **Destination details**, select **Send to a partner solution**.
+5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
+
+All Azure AD logs from the tenant is sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource linking subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You do not need to do this more than once for each Azure tenant.
 
 ##### Tag rules for sending logs
 
