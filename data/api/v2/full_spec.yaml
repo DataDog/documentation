@@ -5260,6 +5260,8 @@ components:
           description: The search query - following the log search syntax.
           example: service:web* AND @http.status_code:[200 TO 299]
           type: string
+        storage_tier:
+          $ref: '#/components/schemas/LogsStorageTier'
         to:
           default: now
           description: The maximum time for the requested logs, supports date math
@@ -5348,6 +5350,17 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+    LogsStorageTier:
+      default: indexes
+      description: Specifies storage type as indexes or online-archives
+      enum:
+      - indexes
+      - online-archives
+      example: indexes
+      type: string
+      x-enum-varnames:
+      - INDEXES
+      - ONLINE_ARCHIVES
     LogsWarning:
       description: A warning message indicating something that went wrong with the
         query
@@ -14136,6 +14149,13 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: Specifies the storage type to be used
+        example: indexes
+        in: query
+        name: filter[storage_tier]
+        required: false
+        schema:
+          $ref: '#/components/schemas/LogsStorageTier'
       - description: Order of logs in results.
         in: query
         name: sort

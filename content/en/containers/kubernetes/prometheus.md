@@ -58,13 +58,20 @@ Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying 
 metadata:
   #(...)
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: 
-      openmetrics:
-        instances:
-          openmetrics_endpoint: http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT>
-          namespace: <METRICS_NAMESPACE_PREFIX_FOR_DATADOG>
-          metrics:
-            - <METRIC_TO_FETCH>: <NEW METRIC NAME>
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+      {
+        "openmetrics": {
+          "init_config": {},
+          "instances": [
+            {
+              "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
+              "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
+              "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
+            }
+          ]
+        }
+      }
+    
 spec:
   containers:
     - name: '<CONTAINER_IDENTIFIER>'
@@ -124,22 +131,29 @@ For a full list of available parameters for instances, including `namespace` and
    {{% tab "Kubernetes (AD v2)" %}}
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
-
+   
    ```yaml
      # (...)
     spec:
       template:
         metadata:
           annotations:
-           ad.datadoghq.com/prometheus-example.checks:
-             openmetrics:
-               instances:
-                 - openmetrics_endpoint: http://%%host%%:%%port%%/metrics
-                 - namespace: documentation_example_kubernetes
-                 - metrics:
-                     - promhttp_metric_handler_requests: handler.requests
-                     - promhttp_metric_handler_requests_in_flight: handler.requests.in_flight
-                     - go_memory.*   
+            ad.datadoghq.com/prometheus-example.checks: |
+              {
+                "openmetrics": {
+                  "instances": [
+                    {
+                      "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+                      "namespace": "documentation_example_kubernetes",
+                      "metrics": [
+                          {"promhttp_metric_handler_requests": "handler.requests"},
+                          {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+                          "go_memory.*"
+                        ]
+                    }
+                  ]
+                }
+              }
         spec:
           containers:
           - name: prometheus-example
