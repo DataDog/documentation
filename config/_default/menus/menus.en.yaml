@@ -996,7 +996,7 @@ main:
     weight: 12
   - name: Cloud Cost
     url: infrastructure/cloud_cost_management/
-    pre: icon-cloud-cost-management
+    pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
   - name: Metrics
