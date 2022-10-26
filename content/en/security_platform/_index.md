@@ -23,7 +23,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
     tag: "Blog"
     text: "Best practices for securing Kubernetes applications"
-  
+  - link: "https://www.datadoghq.com/blog/securing-cloud-native-infrastructure-network-perimeter/"
+    tag: "Blog"
+    text: "Best practices for network perimeter security in cloud-native environments"
 ---
 
 {{< site-region region="gov" >}}
