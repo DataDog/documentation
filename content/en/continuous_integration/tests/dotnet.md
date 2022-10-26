@@ -239,8 +239,11 @@ When CI Visibility is enabled, the following data is collected from your project
 * Test names and durations.
 * Predefined environment variables set by CI providers.
 * Git commit history including the hash, message, author information, and files changed (without file contents).
-* Code coverage information, including file names and line numbers covered by each test.
 * Information from the CODEOWNERS file.
+
+In addition to that, if [Intelligent Test Runner][9] is enabled, the following data is collected from your project:
+
+* Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 
@@ -255,3 +258,4 @@ When CI Visibility is enabled, the following data is collected from your project
 [6]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
 [7]: https://www.nuget.org/packages/Datadog.Trace
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[9]: /continuous_integration/intelligent_test_runner/
