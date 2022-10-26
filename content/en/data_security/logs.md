@@ -79,9 +79,9 @@ PCI DSS compliance for Log Management is not available for the {{< region-param 
 
 {{< /site-region >}}
 
-## Encrypted endpoints
+## Endpoint encryption
 
-All log submission endpoints are encrypted, but these legacy endpoints are still supported:
+All log submission endpoints are encrypted. These legacy endpoints are still supported:
 
 * `tcp-encrypted-intake.logs.datadoghq.com`
 * `lambda-tcp-encrypted-intake.logs.datadoghq.com`
