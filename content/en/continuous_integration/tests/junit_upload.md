@@ -97,8 +97,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-**Make sure that this command runs in your CI even when your tests have failed.**
-Usually when tests fail the CI job aborts execution and the upload command does not run.
+<div class="alert alert-warning">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
 
 {{< tabs >}}
 
@@ -169,7 +168,7 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 
 {{< /tabs >}}
 
-**Note:** Reports larger than 250 MiB may not be process completely resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
+**Note:** Reports larger than 250 MiB may not be processed completely resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
 
 ## Configuration settings
 
