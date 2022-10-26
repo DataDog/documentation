@@ -121,6 +121,40 @@ Note: The span value is the number of data points. So `median_7()` uses the last
 
 Note: The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
+## Weighted 
+Note: Weighted() is only available when querying `SUM BY` on gauge type metrics. 
+
+| Function       | Description                                                           | Example                        |
+| :----          | :-------                                                              | :---------                     |
+| `weighted()`   | Automatically removes noise while preserving the trend of the metric. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
+
+The `weighted()` function accounts for the short-lived lifespan of transient, churning tag values when summing gauge metrics in space to prevent artificial spikes. 
+
+This function is automatically appended to queries on gauges if both of the following conditions are met: 
+1. The metric has a regular submission interval that is also specified on Metrics Summary
+2. The metric is queried with `SUM by` (i.e. a query string that resembles `sum: mygaugemetric{*}`)
+
+Here is an example graph of our original query with inaccurate spikes (in purple) and the query with the properly weighted calculation (in green): 
+
+{{< img src="dashboards/functions/smoothing/weighed.png" alt="autosmooth illustration" style="width:80%;">}}
+
+### How does .weighted() work? 
+Every metrics query has a standard order of evaluation (quick review of that order [here][3]). For example, the following query is calculated as follows: 
+`sum:kubernetes.cpu.requests{*} by {kube_container_name}.rollup(avg, 60)`
+
+1. Time aggregation -- We first sum the values across all unique tag value combinations (aka timeseries) in time for each 60s rollup time interval. The number of unique tag value combinations is actually determined by the most volatile / high granularity tag, let's say `container_id`,  on this metric. 
+2. Then per `kube_container_name` (space aggregation), we sum of all averaged values as a single representative value. So summing values for each `kube_container_name` is dependent upon the number of unique `container_id`s there are for each rollup interval.
+3. The `weighted()` function properly accounts for the lifespan of the churning `container_id` tag values when summing by `kube_container_name` for this gauge metric.
+
+#### Example
+Let's suppose our gauge metric's submission interval is defined at 10s. And we're graphing a datapoint every 60s in time. Our raw data could resemble: 
+(INSERT TABLE HERE) 
+
+1. _Time Aggregation -- Rolling up data_
+With time aggregation, we're rolling up data every 60s with either `avg` (without weighted) or the proposed `weighted_avg`: 
+(INSERT TABLE HERE) 
+3. _Space Aggregation_ 
+
 ## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
@@ -138,3 +172,4 @@ Note: The span value is the number of data points. So `median_9()` uses the last
 
 [1]: http://futuredata.stanford.edu/asap
 [2]: https://www.datadoghq.com/blog/auto-smoother-asap
+[3]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
