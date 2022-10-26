@@ -168,7 +168,7 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 
 {{< /tabs >}}
 
-**Note:** Reports larger than 250 MiB may not be processed completely resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
+**Note:** Reports larger than 250 MiB may not be processed completely, resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
 
 ## Configuration settings
 
