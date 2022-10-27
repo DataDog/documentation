@@ -44,7 +44,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 6. Upon success, you receive your `access_token` and `refresh_token` in the response body. Your application should display a confirmation page with the following message: `You may now close this tab`.
 
 7. Use the `access_token` to make calls to Datadog API endpoints by sending it in as a part of the authorization header of your request: ```headers = {"Authorization": "Bearer {}".format(access_token)}```.
-    - When making calls to API endpoints, ensure that the user's Datadog site is taken into account. For example, if a user is in the EU region, the events endpoint is `https://api.datadoghq.eu/api/v1/events`, while for users in US1, the events endpoint is `https://api.datadoghq.com/api/v1/events`.
+    - When making calls to API endpoints, ensure that the user's Datadog site is taken into account. For example, if a user is in the EU region, the events endpoint is `https://api.datadoghq.eu/api/v1/events`, while for users in US1, the events endpoint is `https://api.datadoghq.com/api/v1/events`. Some endpoints may also require an API key, which is created in Step 8 below. 
 
 8. Call the [API Key Creation endpoint][7] to generate an API key that allows you to send data on behalf of Datadog users.
 
