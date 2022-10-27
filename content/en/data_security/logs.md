@@ -17,6 +17,8 @@ further_reading:
 
 The Log Management product supports multiple [environments and formats][1], allowing you to submit to Datadog nearly any data you choose. This article describes the main security guarantees and filtering controls available to you when submitting logs to Datadog.
 
+**Note**: Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+
 ## Information security
 
 The Datadog Agent submits logs to Datadog either through HTTPS or through TLS-encrypted TCP connection on port 10516, requiring outbound communication (see [Agent Transport for logs][2]).
@@ -37,7 +39,7 @@ Datadog will sign a Business Associate Agreement (BAA) with customers that trans
 
 These features are not available to customers who have signed Datadog's BAA:
 
-* Users cannot request support via chat.
+* Users cannot request support through chat.
 * Group-by dimensions are limited to host tags, source, service, and status for [Log-based Metrics][5].
 * Notifications from Log Monitors cannot include log samples.
 * You cannot configure Log Monitors with a `group-by` clause.
@@ -58,7 +60,7 @@ PCI DSS compliance for Log Management is only available for new Datadog orgs cre
 
 Datadog allows customers to send logs to PCI DSS compliant Datadog orgs upon request. To set up a PCI-complaint Datadog org, follow these steps:
 
-1. Set up a new Datadog org in the [US1 site][1].  PCI DSS compliance is only supported for new orgs created in US1.
+1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
 2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
 3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
 4. Datadog support or Customer Success confirms that the new org is PCI DSS compliant.
@@ -80,9 +82,9 @@ PCI DSS compliance for Log Management is not available for the {{< region-param 
 
 {{< /site-region >}}
 
-**Note**: Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+## Endpoint encryption
 
-These legacy endpoints are still supported:
+All log submission endpoints are encrypted. These legacy endpoints are still supported:
 
 * `tcp-encrypted-intake.logs.datadoghq.com`
 * `lambda-tcp-encrypted-intake.logs.datadoghq.com`
