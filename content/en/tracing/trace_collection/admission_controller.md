@@ -83,5 +83,5 @@ Possible options:
 
 [1]: /containers/cluster_agent/setup/?tab=helm
 [2]: /containers/cluster_agent/admission_controller/
-[3]: /k8-injection-doc-updates/containers/kubernetes/installation/?tab=helm
+[3]: /containers/kubernetes/installation/?tab=helm
 [4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
