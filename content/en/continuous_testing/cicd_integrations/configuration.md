@@ -274,9 +274,9 @@ Use the drop-down menu next to **CI Execution** to define the execution rule for
 
 The execution rule associated with the test is the most restrictive one in the configuration file. The options range from most to least restrictive: `skipped`, `non_blocking`, and `blocking`. For example, if your test is configured as `skipped` in the UI but `blocking` in the configuration file, it is `skipped` when your test runs.
 
-#### Customizing your Continuous Testing test start URL
+#### Customizing your start URL
 
-You can override the starting URL for your tests through the `startURL` configuration option. For example, your test starting URL is `shopist.io`, but you want to test your staging environment at `staging.shopist.io`, you would pass the option as `starURL: "staging.shopist.io"`.
+You can override the start URL for your tests through the `startURL` configuration option. For example, your test starting URL is `shopist.io`, but you want to test your staging environment at `staging.shopist.io`, you would pass the option as `starURL: "staging.shopist.io"`.
 
 If you want to customize this start URL further (or only part of the URL), you can use the `startUrlSubstitutionRegex` configuration option. The format is `s/your_regex/your_substitution/modifiers` and follow Javascript regex syntax. For example, s/(https://www.)(.*)/$1extra-$2/ to transform https://www.example.com into https://www.extra-example.com
 
