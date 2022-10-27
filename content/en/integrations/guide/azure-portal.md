@@ -111,16 +111,7 @@ Optionally, limit metric collection for Azure VMs and App Service Plans using Az
 
 #### Log collection
 
-{{< site-region region="us,us5,eu,gov" >}}
-
-There are two types of logs that can be emitted from Azure to Datadog using the Datadog resource.
-
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-
 There are three types of logs that can be emitted from Azure to Datadog using the Datadog resource.
-
-{{< /site-region >}}
 
 **Subscription level logs** provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (PUT, POST, DELETE).
 
@@ -132,8 +123,6 @@ To send Azure resource logs to Datadog, select “Send Azure resource logs for a
 
 You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
 
-{{< site-region region="us3" >}}
-
 **Azure Active Directory (Azure AD) logs** contain the history of sign-in activity and audit trail of changes made in Azure AD for a particular tenant. To send Azure AD Logs:
 
 1. Navigate to Azure Active Directory in Azure, and select **Diagnostic Settings** in the left navigation bar.
@@ -143,8 +132,6 @@ You can optionally filter the set of Azure resources sending logs to Datadog usi
 5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
 
 All Azure AD logs from the tenant is sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that link subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You do not need to do this more than once for each Azure tenant.
-
-{{< /site-region >}}
 
 ##### Tag rules for sending logs
 
