@@ -39,9 +39,9 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 * Customize context links to specify the pages users are directed to. See the [Context Links][10] Guide.
 * Apply mathematic functions to your queries. See the [Dashboard Graphing documentation][11].
 
-## N/A Values
+## N/A values
 
-Columns in the table widget are queried independently from one another, and overlapping groups with matching names are joined on-the-fly to form the rows of the table. As a result of that process, there might be situations with no total overlap, showing N/A cells. To mitigate this:
+Columns in the table widget are queried independently from one another. Overlapping groups with matching names are joined on-the-fly to form the rows of the table. As a result of that process, there might be situations with no total overlap, showing N/A cells. To mitigate this:
   * Extend the limit of queries to higher numbers, to maximize overlap between columns
   * Sort tables according to the one column that you could consider as “driving” the insight
 
