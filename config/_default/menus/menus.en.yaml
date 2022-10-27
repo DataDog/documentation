@@ -1241,10 +1241,10 @@ main:
     url: monitors/settings/
     weight: 4
     parent: alerting
-    identifier: slos
+    identifier: monitor_settings
   - name: Service Level Objectives
     url: monitors/service_level_objectives/
-    weight: 4
+    weight: 5
     parent: alerting
     identifier: slos
   - name: Incident Management
