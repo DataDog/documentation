@@ -143,7 +143,7 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 ### Partial and downstream pipelines
 
-In the **Pipeline Executions** page, you can now use the filters below in the search bar:
+In the **Pipeline Executions** page, you can use the filters below in the search bar:
 
 `Downstream Pipeline`
 : Possible values: `true`, `false`
