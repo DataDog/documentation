@@ -29,11 +29,14 @@ During the beta phase of Intelligent Test Runner there are certain limitations:
 
 - Some of the environment variables required in the following sections won't be necessary after beta.
 - Intelligent Test Runner only works without the Datadog Agent.
-- There are known limitations on the current implementation of Intelligent Test Runner that would cause tests to be skipped when they shouldn't. If you encounter these scenarios you can add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message to ensure all tests are run. Intelligent Test Runner is not able to detect:
+- There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run.
+- Intelligent Test Runner is not able to detect:
   - Changes in library dependencies.
   - Changes in compiler options.
   - Changes in external services.
   - Changes to data files in data-driven tests.
+  
+To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message. 
 
 ## Setup
 
