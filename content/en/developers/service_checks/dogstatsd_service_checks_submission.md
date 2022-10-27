@@ -136,7 +136,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             dogStatsdService.ServiceCheck("Service.check.name", 0, message: "Application is OK.", tags: new[] { "env:dev" });
         }
     }
