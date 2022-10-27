@@ -26,8 +26,6 @@ You may need to monitor user journeys located behind a login. There are two ways
 - [Include the login steps in your browser test recording](#include-the-login-steps-in-your-recording)
 - [Leverage advanced options in your browser tests](#leverage-test-configuration-options)
 
-You can also ensure your credentials are securely stored and obfuscated across the application by [using obfuscated global variables](#account-security).
-
 To ensure your credentials are securely stored and obfuscated across the application, use [obfuscated global variables](#account-security).
 
 ## Include the login steps in your recording
@@ -68,33 +66,29 @@ Depending on the type of MFA leveraged by your application, [JavaScript steps][5
 
 <div class="alert alert-info">Datadog is constantly adding features to help you record test scenarios more easily. <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">Sending feedback</a> about the MFA systems that matter the most to you is appreciated.</div>
 
-## Leverage test configuration options
+## Leverage browser test configuration options
 
-The second method is to use one or several of the available advanced configuration options for [HTTP steps in browser tests][7]. 
+The second way to ensure that your Datadog Browser tests can login into your applications is to leverage one or several of the available browser test configurations. You can indeed decide to apply:
 
-You can apply the following options to your HTTP request:
-
-- Specific request headers
+- Specific headers
 - Cookies
-- Credentials for basic authentication, digest authentication, NTLM, AWS Signature, or OAuth 2.0
+- Basic Auth, Digest Auth, or NTLM credentials
 
-These configuration options are set at each test execution and apply to every browser test step at execution time, not recording time. 
+These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
 
-{{< img src="synthetics/guide/app_that_requires_login/http_request_advanced_options_oauth.png" alt="Login to your app with browser test configuration options such as OAuth 2.0" style="width:90%" >}}
+You can manually apply these configured headers, cookies, and credentials on the page you are recording from and then record steps your test performs post-login. By default, the browser test automatically passes through authentication with your specified headers, cookies, and/or credentials at execution time and then goes through all recorded steps.
 
-You can manually apply these configured headers, cookies, and credentials on the page you are recording from and record the steps your test performs post-login. 
+{{< img src="synthetics/guide/app_that_requires_login/bt_adv_options.jpg" alt="Login to your app with browser test configuration options">}}
 
-By default, the browser test automatically passes through authentication with your specified headers, cookies, and credentials at execution time and then completes all recorded steps.
-
-## Secure your account
+## Account security
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][9] (for example, one global variable for username, another one for password) and set these variables as obfuscated to hide their values from anyone else who has access to your instance of Datadog.
+Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and  set these variables as obfuscated to hide their values from anyone else who has access to your instance of Datadog.
 
-Once you create the obfuscated variables, you can then [import these global variables][10] into your browser tests and leverage them for your login steps.
+Once you create the obfuscated variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
 
-While global variables are securely stored and encrypted, Datadog recommends using an account dedicated to testing with dummy credentials as a general best practice for testing.
+**Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 
 ## Further Reading
 
@@ -105,8 +99,5 @@ While global variables are securely stored and encrypted, Datadog recommends usi
 [3]: /synthetics/guide/identify_synthetics_bots/
 [4]: /synthetics/guide/browser-tests-totp
 [5]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
-[6]: /synthetics/api_tests/http_tests?tab=authentication
-[7]: /synthetics/browser_tests/actions/#http-requests
-[8]: /synthetics/multistep?tab=authentication
-[9]: /synthetics/settings/?tab=specifyvalue#global-variables
-[10]: /synthetics/browser_tests/actions#use-variables
+[6]: /synthetics/settings/?tab=specifyvalue#global-variables
+[7]: /synthetics/browser_tests/actions#a-global-variable
