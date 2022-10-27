@@ -1237,6 +1237,11 @@ main:
     parent: monitors_manage
     identifier: monitors_check_summary
     weight: 303
+  - name: Monitor Settings
+    url: monitors/settings/
+    weight: 4
+    parent: alerting
+    identifier: slos
   - name: Service Level Objectives
     url: monitors/service_level_objectives/
     weight: 4
