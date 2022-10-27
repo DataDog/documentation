@@ -226,7 +226,7 @@ New start URL to provide to the HTTP or browser test.
 
 `startUrlSubstitutionRegex`
 : **Type**: string<br>
-Regex to modify the start URL of the test (browser and HTTP tests only), whether it was given by the original test or by the configuration override startUrl. If the URL contains variables, this regex will be applied after the interpolation of the variables.
+Regex to modify the start URL of the test (browser and HTTP tests only), whether it was given by the original test or by the configuration override `startURL`. If the URL contains variables, this regex is applied after the interpolation of the variables.
 
 `variables`
 : **Type**: object<br>
