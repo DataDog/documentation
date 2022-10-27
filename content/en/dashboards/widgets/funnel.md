@@ -10,16 +10,18 @@ further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Notebooks"
-- link: "/blog/reduce-customer-friction-funnel-analysis/"
+- link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
   tag: "Blog"
   text: "Use funnel analysis to understand and optimize key user flows"
 ---
 
 The funnel widget visualizes conversion rates across user workflows and end-to-end user journeys.
 
-<!-- INSERT IMG {{< img src="dashboards/widgets/geomap/geomap.png" alt="Funnel" >}} -->
+{{< img src="dashboards/widgets/funnel/funnel.png" alt="Funnel" >}}
 
 ## Setup
+
+{{< img src="dashboards/widgets/funnel/funnel_setup.png" alt="Funnel Setup" >}}
 
 ### Configuration
 
