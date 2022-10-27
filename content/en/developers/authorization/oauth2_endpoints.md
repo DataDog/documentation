@@ -24,7 +24,7 @@ Applications using protected Datadog resources must be authorized by a user befo
 
 #### Overview
 
-To start the authorization code grant flow, an application makes a `GET` request to Datadog’s authorization endpoint. This redirects a user to Datadog’s authorization-grant flow and renders a consent page displaying the list of scopes requested by your application and a prompt for the user to authorize access. This also returns the [Datadog site][12] that the request is being made from. 
+To start the authorization code grant flow, an application makes a `GET` request to Datadog’s authorization endpoint. This redirects a user to Datadog’s authorization-grant flow and renders a consent page displaying the list of scopes requested by your application and a prompt for the user to authorize access. This also returns the [Datadog site][3] that the request is being made from. 
 
 #### Request 
 In the authorization request, the application constructs the redirect URI by adding the following parameters to the query component of the URI using the `application/x-www-form-urlencoded` format: 
@@ -67,6 +67,7 @@ Your application does not need to make this authorization request. This step is 
 
 [1]: https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1
 [2]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.1
+[3]: https://docs.datadoghq.com/getting_started/site/
 {{% /tab %}}
 {{% tab "Token Endpoints" %}}
 
@@ -165,7 +166,6 @@ If a token request fails for any reason, such as missing or invalid parameters, 
 [9]: https://datatracker.ietf.org/doc/html/rfc7009#section-2
 [10]: https://datatracker.ietf.org/doc/html/rfc7009#section-2.1
 [11]: https://datatracker.ietf.org/doc/html/rfc7009#section-2.2
-[12]:https://docs.datadoghq.com/getting_started/site/
 {{% /tab %}}
 {{% tab "API Key Creation Endpoints" %}}
 
