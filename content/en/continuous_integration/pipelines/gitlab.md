@@ -142,7 +142,9 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
 ### Partial and downstream pipelines
-In the `Pipeline Executions` page, you can now use the filters below in the search bar:
+
+In the **Pipeline Executions** page, you can now use the filters below in the search bar:
+
 `Downstream Pipeline`
 : Possible values: `true`, `false`
 
