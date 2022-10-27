@@ -24,11 +24,11 @@ further_reading:
 You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 
 - [Include the login steps in your browser test recording](#include-the-login-steps-in-your-recording)
-- [Leverage advanced options for API, multistep, and browser tests](#leverage-test-configuration-options)
+- [Leverage advanced options in your browser tests](#leverage-test-configuration-options)
 
 You can also ensure your credentials are securely stored and obfuscated across the application by [using obfuscated global variables](#account-security).
 
-To ensure your credentials are securely stored and obfuscated across the application, use [secured global variables](#account-security).
+To ensure your credentials are securely stored and obfuscated across the application, use [obfuscated global variables](#account-security).
 
 ## Include the login steps in your recording
 
@@ -70,7 +70,7 @@ Depending on the type of MFA leveraged by your application, [JavaScript steps][5
 
 ## Leverage test configuration options
 
-The second method is to use one or several of the available advanced configuration options for [HTTP tests][6], [HTTP steps in browser tests][7], or [multistep API tests][8]. 
+The second method is to use one or several of the available advanced configuration options for [HTTP steps in browser tests][7]. 
 
 You can apply the following options to your HTTP request:
 
@@ -84,7 +84,7 @@ These configuration options are set at each test execution and apply to every br
 
 You can manually apply these configured headers, cookies, and credentials on the page you are recording from and record the steps your test performs post-login. 
 
-By default, the browser, API, or multistep API test automatically passes through authentication with your specified headers, cookies, and credentials at execution time and then completes all recorded steps.
+By default, the browser test automatically passes through authentication with your specified headers, cookies, and credentials at execution time and then completes all recorded steps.
 
 ## Secure your account
 
