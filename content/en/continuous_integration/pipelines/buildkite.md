@@ -92,7 +92,7 @@ In the **Pipeline Executions** page, you can use the filters below in the search
 {{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
 
 These filters can also be applied through the facet panel on the left hand side of the page.
-{{< img src="ci/partial_retries_facet_panel.png" alt="GitLab Partial Retry Facet Panel" style="width:40%;">}}
+{{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
 
 ## Further reading
 
