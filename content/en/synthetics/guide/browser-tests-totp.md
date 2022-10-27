@@ -36,7 +36,7 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
 ## Use TOTP in your Synthetic tests
-You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a [browser][2], [API][3], or [multistep API test][4], inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
+You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a [browser test][2], inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
 
 {{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="Recording a TOTP validation" video="true" >}}
 
@@ -53,5 +53,3 @@ To use TOTP in your [browser tests][2]:
 
 [1]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [2]: /synthetics/browser_tests/
-[3]: /synthetics/api_tests/
-[4]: /synthetics/multistep/
