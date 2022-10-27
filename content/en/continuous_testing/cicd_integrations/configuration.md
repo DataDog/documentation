@@ -274,7 +274,7 @@ Use the drop-down menu next to **CI Execution** to define the execution rule for
 
 The execution rule associated with the test is the most restrictive one in the configuration file. The options range from most to least restrictive: `skipped`, `non_blocking`, and `blocking`. For example, if your test is configured as `skipped` in the UI but `blocking` in the configuration file, it is `skipped` when your test runs.
 
-#### Customizing your start URL
+#### Customize your start URL
 
 You can override the start URL for your tests through the `startURL` configuration option. For example, assuming your test starting URL is `shopist.io`, and you want to test your staging environment at `staging.shopist.io`, pass the option as `startURL: "staging.shopist.io"`.
 
