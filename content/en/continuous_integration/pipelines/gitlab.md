@@ -147,7 +147,7 @@ In the `Pipeline Executions` page, you can now use the filters below in the sear
 * `Manually Triggered` - possible values: `true`, `false` 
 * `Partial Pipeline` - possible values: `retry`, `paused`, `resumed`
 
-{{< img src="ci/partial_retries_search_tags.png" alt="GitLab Partial Retry Filters" style="width:100%;">}}
+{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
 
 These filters can also be applied through the facet panel on the left hand side of the page.
 {{< img src="ci/partial_retries_facet_panel.png" alt="GitLab Partial Retry Facet Panel" style="width:100%;">}}
