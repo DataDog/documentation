@@ -85,9 +85,14 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 
 ### Partial and downstream pipelines
 In the **Pipeline Executions** page, you can use the filters below in the search bar:
-* `Downstream Pipeline` - possible values: `true`, `false` 
-* `Manually Triggered` - possible values: `true`, `false` 
-* `Partial Pipeline` - possible values: `retry`, `paused`, `resumed`
+`Downstream Pipeline`
+: Possible values: `true`, `false`
+
+`Manually Triggered`
+: Possible values: `true`, `false`
+
+`Partial Pipeline`
+: Possible values: `retry`, `paused`, `resumed`
 
 {{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
 
