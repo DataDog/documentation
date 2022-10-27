@@ -27,18 +27,17 @@ By only running tests on relevant code, when tests fail, it is likely a legitima
 
 During the beta phase of Intelligent Test Runner there are certain limitations:
 
-- Some of the environment variables required in the following sections won't be necessary after beta.
+- Some of the environment variables required in the following sections are only required during the beta phase.
 - Intelligent Test Runner only works without the Datadog Agent.
-- There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run.
-- Intelligent Test Runner is not able to detect:
+- There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run. Intelligent Test Runner is not able to detect:
   - Changes in library dependencies.
   - Changes in compiler options.
   - Changes in external services.
   - Changes to data files in data-driven tests.
-  
-To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message. 
 
-## Setup
+To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
+
+## Setup Datadog Library
 
 Prior to setting up Intelligent Test Runner, you must have finished setting up [Test Visibility][1] for your particular language.
 
@@ -174,6 +173,12 @@ The following environment variables must also be set:
 #### UI activation
 
 In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][5] page.
+
+## Setup CI Job
+
+Intelligent Test Runner uses git metadata information (commit history) to work. However, some CI providers use a git shallow clone (`git clone --depth=0`) which only download the target commit without downloading any historical commit information. This setup does not contain enough information for Intelligent Test Runner. If your CI is using shallow clones, it must be changed.
+
+An efficient alternative to shallow clones are partial clones (supported in Git v2.27+), which will clone the current commit plus the necessary git metadata without retrieving all past versions of all files: `git clone --filter=blob:none`.
 
 ## Configuration
 

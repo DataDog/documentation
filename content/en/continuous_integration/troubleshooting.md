@@ -155,10 +155,13 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 - Your repository needs to have a commit history of at least two commits in the past month.
 - You need to have collected test code coverage in past commits.
+- You git clone must contain commit and tree history. Shallow git clones (`git clone --depth=0`) are not supported.
 
 Due to these restrictions, the first time you enable Intelligent Test Runner, you cannot see any tests skipped and the test execution time may be slower than usual because the code coverage is collected automatically.
 
 Intelligent Test Runner only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
+
+If you CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
 
 ### Intelligent Test Runner incorrectly skipped a test
 
