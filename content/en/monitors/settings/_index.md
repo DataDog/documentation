@@ -11,19 +11,19 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-  Monitor tag policies is in private beta. To request access, contact Support at support@datadoghq.com.
+Monitor tag policies are in private beta. To request access, contact Support at support@datadoghq.com.
 {{< /beta-callout >}}
 
 Monitor tag policies allow you to enforce the presence of certain tags and tag values on your Datadog monitors. This is useful for attribution purposes and for ensuring that alerts are routed to the correct downstream systems and workflows for triage and processing.
 
-Once set up, tag policies apply to **all** Datadog monitors as well as Synthetic tests.
+Once set up, tag policies apply to **all** Datadog monitors and Synthetic tests.
 
 - To create a new monitor, it must adhere to your organization's tag policies.
 - Existing monitors that violate your organization's tag policies continue to provide alerts and notifications, but must be updated to match the tag policies before you can modify other settings.
 
 ## Configure monitor tag policies
 
-You can configure tag policies on the **Monitors** > **Settings** page. This page is only available if monitor tag policies is enabled for your account. There are three ways to leverage tag policies:
+You can configure tag policies on the **Monitors** > **Settings** page. This page is only available if monitor tag policies are enabled for your account. There are three ways to leverage tag policies:
 
 - Require tags with mandatory values
 - Require tags only
@@ -51,7 +51,7 @@ To make a tag optional but require that monitors with the tag use specific value
 
 To configure monitor tag policies, you must be assigned a role with the `MONITOR_CONFIG_POLICY_WRITE_PERMISSION` permission.
 
-For more information, see see [Role Based Access Control][2] and [Role Permissions][3].
+For more information, see [Role Based Access Control][2] and [Role Permissions][3].
 
 ## Further Reading
 
