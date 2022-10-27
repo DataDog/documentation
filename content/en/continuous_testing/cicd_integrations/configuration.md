@@ -276,7 +276,7 @@ The execution rule associated with the test is the most restrictive one in the c
 
 #### Customizing your start URL
 
-You can override the start URL for your tests through the `startURL` configuration option. For example, your test starting URL is `shopist.io`, but you want to test your staging environment at `staging.shopist.io`, you would pass the option as `starURL: "staging.shopist.io"`.
+You can override the start URL for your tests through the `startURL` configuration option. For example, assuming your test starting URL is `shopist.io`, and you want to test your staging environment at `staging.shopist.io`, pass the option as `startURL: "staging.shopist.io"`.
 
 If you want to customize this start URL further (or only part of the URL), you can use the `startUrlSubstitutionRegex` configuration option. The format is `s/your_regex/your_substitution/modifiers` and follow Javascript regex syntax. For example, s/(https://www.)(.*)/$1extra-$2/ to transform https://www.example.com into https://www.extra-example.com
 
