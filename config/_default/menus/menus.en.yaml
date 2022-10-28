@@ -663,75 +663,79 @@ main:
     url: dashboards/widgets/free_text/
     parent: dashboards_widgets
     weight: 17
+  - name: Funnel
+    url: dashboards/widgets/funnel/
+    parent: dashboards_widgets
+    weight: 18 
   - name: Geomap
     url: dashboards/widgets/geomap/
     parent: dashboards_widgets
-    weight: 18
+    weight: 19
   - name: Group
     url: dashboards/widgets/group/
     parent: dashboards_widgets
-    weight: 19
+    weight: 20
   - name: Heat Map
     url: dashboards/widgets/heat_map/
     parent: dashboards_widgets
-    weight: 20
+    weight: 21
   - name: Host Map
     url: dashboards/widgets/hostmap/
     parent: dashboards_widgets
-    weight: 21
+    weight: 22
     identifier: widgets_host_map
   - name: Iframe
     url: dashboards/widgets/iframe/
     parent: dashboards_widgets
-    weight: 22
+    weight: 23
   - name: Image
     url: dashboards/widgets/image/
     parent: dashboards_widgets
-    weight: 23
+    weight: 24
   - name: Log Stream
     url: dashboards/widgets/log_stream/
     parent: dashboards_widgets
-    weight: 24
+    weight: 25
   - name: Monitor Summary
     url: dashboards/widgets/monitor_summary/
     parent: dashboards_widgets
-    weight: 25
+    weight: 26
   - name: Notes and Links
     url: dashboards/widgets/note/
     parent: dashboards_widgets
-    weight: 26
+    weight: 27
   - name: Query Value
     url: dashboards/widgets/query_value/
     parent: dashboards_widgets
-    weight: 27
+    weight: 28
   - name: Scatter Plot
     url: dashboards/widgets/scatter_plot/
     parent: dashboards_widgets
-    weight: 28
+    weight: 29
   - name: SLO Summary
     url: dashboards/widgets/slo/
     parent: dashboards_widgets
-    weight: 29
+    weight: 30
   - name: Service Map
     url: dashboards/widgets/service_map/
     parent: dashboards_widgets
-    weight: 30
+    weight: 31
   - name: Service Summary
     url: dashboards/widgets/service_summary/
     parent: dashboards_widgets
-    weight: 31
+    weight: 32
   - name: Table
     url: dashboards/widgets/table/
     parent: dashboards_widgets
-    weight: 32
+    weight: 33
   - name: Timeseries
     url: dashboards/widgets/timeseries/
     parent: dashboards_widgets
-    weight: 33
+    weight: 34
   - name: Top List
     url: dashboards/widgets/top_list/
     parent: dashboards_widgets
-    weight: 34
+    weight: 35
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
