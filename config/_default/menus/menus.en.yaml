@@ -666,7 +666,7 @@ main:
   - name: Funnel
     url: dashboards/widgets/funnel/
     parent: dashboards_widgets
-    weight: 18 
+    weight: 18
   - name: Geomap
     url: dashboards/widgets/geomap/
     parent: dashboards_widgets
