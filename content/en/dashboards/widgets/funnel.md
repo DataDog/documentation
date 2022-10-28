@@ -21,14 +21,14 @@ The funnel widget visualizes conversion rates across user workflows and end-to-e
 
 ## Setup
 
-{{< img src="dashboards/widgets/funnel/funnel_setup.png" alt="Funnel Setup" >}}
+{{< img src="dashboards/widgets/funnel/funnel_setup.png" alt="Funnel widget setup screen" >}}
 
 ### Configuration
 
 1. Choose the data to graph:
     * RUM: See the [Search RUM Events documentation][1] to configure a RUM query.
 2. Select **View** or **Action** and choose a query from the dropdown menu.
-3. Click **+** and select another query from the dropdown menu to visualize the funnel. See the [RUM Visualize documentation][2] for more information on visualizing Funnel analysis.
+3. Click the **+** button and select another query from the dropdown menu to visualize the funnel. See the [RUM Visualize documentation][2] for more information on visualizing Funnel analysis.
 
 ### Options
 
