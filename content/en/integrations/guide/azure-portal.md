@@ -134,8 +134,8 @@ You can optionally filter the set of Azure resources sending logs to Datadog usi
 ###### Tag rules for sending logs
 
 * Azure resources with `include` tags send logs to Datadog.
-* Azure resources with `exclude` tags don’t send logs to Datadog.
-* If there’s a conflict between inclusion and exclusion rules, exclusion takes priority.
+* Azure resources with `exclude` tags don't send logs to Datadog.
+* If there's a conflict between inclusion and exclusion rules, exclusion takes priority.
 
 For example, the screenshot below shows a tag rule where only virtual machines, virtual machine scale sets, and app service plans tagged with `Datadog = True` send metrics to Datadog. Resources (of all types) tagged with `Datadog = True` send logs to Datadog.
 
