@@ -38,7 +38,7 @@ On screenboards and notebooks, choose whether your widget has a custom timeframe
 
 #### Title
 
-Display a custom title for your widget by activating the `Show a Title` check box:
+Display a custom title for your widget by activating the `Show a Title` check box.
 
 ## Further Reading
 
