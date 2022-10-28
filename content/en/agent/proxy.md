@@ -847,6 +847,11 @@ network_devices:
             logs_dd_url: haproxy.example.com:3842
             # Comment the line below to use encryption between the Agent and HAProxy
             logs_no_ssl: true
+    netflow:
+        forwarder:
+            logs_dd_url: haproxy.example.com:3845
+            # Comment the line below to use encryption between the Agent and HAProxy
+            logs_no_ssl: true
 
 appsec_config (deprecated):
     appsec_dd_url: haproxy.example.com:3844
@@ -1206,6 +1211,11 @@ network_devices:
     snmp_traps:
         forwarder:
             logs_dd_url: nginx.example.com:3842
+            # Comment the line below to use encryption between the Agent and NGINX
+            logs_no_ssl: true
+    netflow:
+        forwarder:
+            logs_dd_url: nginx.example.com:3845
             # Comment the line below to use encryption between the Agent and NGINX
             logs_no_ssl: true
 

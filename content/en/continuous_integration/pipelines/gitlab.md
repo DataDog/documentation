@@ -141,6 +141,25 @@ After the integration is successfully configured, the [Pipelines][4] and [Pipeli
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+### Partial and downstream pipelines
+
+In the **Pipeline Executions** page, you can use the filters below in the search bar:
+
+`Downstream Pipeline`
+: Possible values: `true`, `false`
+
+`Manually Triggered`
+: Possible values: `true`, `false`
+
+`Partial Pipeline`
+: Possible values: `retry`, `paused`, `resumed`
+
+{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
+
+These filters can also be applied through the facet panel on the left hand side of the page.
+{{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
+
+
 ### Infrastructure metric correlation
 
 If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
