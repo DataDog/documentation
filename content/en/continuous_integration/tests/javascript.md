@@ -433,6 +433,18 @@ forEach([
 
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author information, and files changed (without file contents).
+* Information from the CODEOWNERS file.
+
+In addition to that, if [Intelligent Test Runner][13] is enabled, the following data is collected from your project:
+
+* Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 
@@ -451,3 +463,4 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [12]: https://www.npmjs.com/package/mocha-each
+[13]: /continuous_integration/intelligent_test_runner/

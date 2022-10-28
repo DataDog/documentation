@@ -423,7 +423,8 @@ var dogstatsdConfig = new StatsdConfig
 
 using (var dogStatsdService = new DogStatsdService())
 {
-    dogStatsdService.Configure(dogstatsdConfig);
+    if (!dogStatsdService.Configure(dogstatsdConfig))
+        throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     // ...
 } // Flush metrics not yet sent
 ```
