@@ -1,6 +1,8 @@
 ---
 title: Enabling Dynamic Instrumentation
 kind: Documentation
+aliases:
+    - /tracing/dynamic_instrumentation/enabling/
 is_beta: true
 private: true
 further_reading:
