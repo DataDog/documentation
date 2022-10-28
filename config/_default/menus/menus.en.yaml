@@ -995,7 +995,7 @@ main:
     parent: serverless
     weight: 12
   - name: Cloud Cost
-    url: infrastructure/cloud_cost_management/
+    url: cloud_cost_management/
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000

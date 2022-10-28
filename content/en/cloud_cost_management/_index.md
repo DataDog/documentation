@@ -1,10 +1,12 @@
 ---
 title: Cloud Cost Management
 kind: documentation
+aliases:
+  - /infrastructure/cloud_cost_management
 further_reading:
-- link: "https://docs.datadoghq.com/infrastructure/cloud_cost_management/"
-  tag: "Blog"
-  text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
+  - link: "https://docs.datadoghq.com/infrastructure/cloud_cost_management/"
+    tag: "Blog"
+    text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
 ---
 ## Overview
 
@@ -165,7 +167,7 @@ The following out-of-the-box tags are also available for filtering and grouping 
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
 
-{{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
 
 ## Further reading
 
