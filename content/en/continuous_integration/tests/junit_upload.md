@@ -345,7 +345,7 @@ XPath syntax is used for familiarity but only a limited subset of expressions ar
 : The XML attribute from the parent `<testsuite attribute-name="value">` of the current `<testcase>`.
 
 `/testcase/..//property[@name='property-name']`
-: The `value` attribute from the `<property name="property-name" value="value">` inside the parent `<testsuite>` of current `<testcase>`.
+: The `value` attribute from the `<property name="property-name" value="value">` inside the parent `<testsuite>` of the current `<testcase>`.
 
 `/testcase//property[@name='property-name']`
 : The `value` attribute from the `<property name="property-name" value="value">` inside the current `<testcase>`.
