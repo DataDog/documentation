@@ -199,7 +199,9 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
 ### Picking a SQL Server driver
 
-In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][11] or the [OLE DB driver][12]. Depending on which driver you pick, this will influence what you set for the [connector][13] field in your instance config.
+In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][11] or the [OLE DB driver][12].
+
+Depending on which driver you pick, this will influence what you set for the [connector][13] field in your instance config.
 
 For example, for the [Microsoft ODBC driver][11]:
 
@@ -228,9 +230,9 @@ In the latest version of the [Microsoft OLE DB driver][12], the driver name was 
 
 It is recommended to stay up to date with the latest available version of the driver you select.
 
-### SQL Server user tag is missing on the Query Metrics page
+### SQL Server user tag is missing on the Query Metrics and Plan Samples
 
-The `user` tag is no longer supported for Query Metrics due to technical limitations in SQL Server which prevent the collection of the correct user running queries.
+The `user` tag is no longer supported for Query Metrics and Plan Samples due to technical limitations in SQL Server which prevent the collection of the correct user running queries.
 
 The `user` tag is available for Query Activity events and Database Load metrics.
 
