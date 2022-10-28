@@ -12,7 +12,7 @@ Datadog integrates with GitHub to show test result summaries and error messages 
 ### Compatibility
 This integration is only available for test services hosted on `github.com`. It is also unavailable for workflows running on `pull_request` triggers.
 
-{{< img src="ci/pr-comment-preview.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
+{{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
 ### Enabling
 To enable the GitHub comments integration:
