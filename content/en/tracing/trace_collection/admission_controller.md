@@ -36,22 +36,22 @@ Valid `<language>` values are:
 - `java`
 - `js`
 
-For example to inject the Java tracer v0.113.0:
+For example to inject the Java tracer v0.114.0:
 
 ```yaml
 annotations:
-    admission.datadoghq.com/java-lib.version: "0.113.0"
+    admission.datadoghq.com/java-lib.version: "v0.114.0"
 ```
 
 **Note**: Use caution specifying `latest` as major library releases can introduce breaking changes.
 
 Although it's an uncommon scenario, you can add multiple `<language>-lib.version` annotations to inject multiple language tracers into one container.
 
-For example to inject the Java tracer v0.113.0, and Node tracer v3.0.0:
+For example to inject the Java tracer v0.114.0, and Node tracer v3.6.0:
 ```yaml
 annotations:
-    admission.datadoghq.com/java-lib.version: "0.113.0"
-    admission.datadoghq.com/js-lib.version: "3.0.0"
+    admission.datadoghq.com/java-lib.version: "v0.114.0"
+    admission.datadoghq.com/js-lib.version: "v3.6.0"
 ```
 
 You can also inject the latest version of a tracer library for the Java and Node language via the following annotation:
