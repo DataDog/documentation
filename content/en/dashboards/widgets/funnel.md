@@ -17,7 +17,7 @@ further_reading:
 
 The funnel widget visualizes conversion rates across user workflows and end-to-end user journeys.
 
-{{< img src="dashboards/widgets/funnel/funnel.png" alt="Funnel" >}}
+{{< img src="dashboards/widgets/funnel/funnel.png" alt="Funnel widget visualizing drop-off rates of a user on an e-commerce site" >}}
 
 ## Setup
 
