@@ -1,6 +1,8 @@
 ---
 title: Enable Dynamic Instrumentation for Python
 kind: Documentation
+aliases:
+    - /tracing/dynamic_instrumentation/enabling/python/
 is_beta: true
 private: true
 code_lang: python
@@ -78,4 +80,4 @@ See [Dynamic Instrumentation][5] for information about setting snapshot and metr
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /tracing/dynamic_instrumentation/
+[5]: /dynamic_instrumentation/

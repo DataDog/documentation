@@ -22,15 +22,6 @@ ignores:
   - "**/*.ja.yaml"
   - "**/*.ja.json"
   - "**/ja.json"
-  - "content/en/api/latest/service-level-objective-corrections/*.md"
-  - "content/en/integrations/observability_pipelines/guide/*.md"
-  - "content/en/real_user_monitoring/connect_rum_and_traces/*.md"
-  - "content/en/security_platform/application_security/**/*.md"
-  - "content/en/security_platform/security_signal_management/*.md"
-  - "content/en/tracing/dynamic_instrumentation/**/*.md"
-  - "content/en/tracing/other_telemetry/**/*.md"
-  - "content/en/tracing/setup_overview/**/*.md"
-  - "content/en/tracing/trace_collection/**/*.md"
 
 # These files will be uploaded to Transifex for translation when syncing.
 sources:

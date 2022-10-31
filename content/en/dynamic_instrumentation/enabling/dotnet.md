@@ -1,6 +1,8 @@
 ---
 title: Enable Dynamic Instrumentation for .NET
 kind: Documentation
+aliases:
+    - /tracing/dynamic_instrumentation/enabling/dotnet/
 is_beta: true
 private: true
 code_lang: dotnet
@@ -50,4 +52,4 @@ See [Dynamic Instrumentation][6] for information about setting snapshot and metr
 [3]: /tracing/trace_collection/dd_libraries/dotnet-core/
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: /tracing/dynamic_instrumentation/
+[6]: /dynamic_instrumentation/
