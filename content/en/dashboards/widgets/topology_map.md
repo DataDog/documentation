@@ -4,7 +4,7 @@ kind: documentation
 description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
 widget_type: "topologymap"
 aliases:
-    - /graphing/widgets/topology_map/
+    - /dashboards/widgets/service_map
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
