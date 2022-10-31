@@ -10387,6 +10387,7 @@ components:
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
+            user_access_read: View users and their roles and settings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -12492,9 +12493,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Confluent accounts
       tags:
       - Confluent Cloud
@@ -12526,9 +12524,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Confluent account
       tags:
       - Confluent Cloud
@@ -12569,9 +12564,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Confluent account
       tags:
       - Confluent Cloud
@@ -12598,9 +12590,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Confluent account
       tags:
       - Confluent Cloud
@@ -12634,9 +12623,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Confluent account
       tags:
       - Confluent Cloud
@@ -12666,9 +12652,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Confluent Account resources
       tags:
       - Confluent Cloud
@@ -12703,9 +12686,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add resource to Confluent account
       tags:
       - Confluent Cloud
@@ -12732,9 +12712,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete resource from Confluent account
       tags:
       - Confluent Cloud
@@ -12763,9 +12740,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get resource from Confluent account
       tags:
       - Confluent Cloud
@@ -12801,9 +12775,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update resource in Confluent account
       tags:
       - Confluent Cloud
@@ -16763,7 +16734,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - security_monitoring_rules_read
+        - security_monitoring_signals_read
       summary: Get a signal's details
       tags:
       - Security Monitoring
@@ -18487,7 +18458,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List all users
       tags:
       - Users
@@ -18615,7 +18587,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get user details
       tags:
       - Users
@@ -18753,7 +18726,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get a user permissions
       tags:
       - Users
