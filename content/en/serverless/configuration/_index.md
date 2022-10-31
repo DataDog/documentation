@@ -593,7 +593,7 @@ The Datadog Extension supports retrieving [AWS Secrets Manager][40] values autom
 The Datadog Extension supports decrypting [AWS KMS][41] values automatically for any environment variables prefixed with `_KMS_ENCRYPTED`. You can use this to securely store your environment variables in KMS and dual ship with Datadog.
 
 1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
-2. Add the `kms:GenerateDataKey` and `kms:Decrypt` permissions to your lambda function IAM role permissions.
+2. Add the `kms:GenerateDataKey` and `kms:Decrypt` permissions to your Lambda function IAM role permissions.
 3. For dual shipping metrics, encrypt `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 4. For dual shipping traces, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_ADDITIONAL_KMS_ENCRYPTED` environment variable equal to its value.
 5. For dual shipping profiling, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
@@ -602,7 +602,7 @@ The Datadog Extension supports decrypting [AWS KMS][41] values automatically for
 {{% /tab %}}
 {{< /tabs >}}
 
-For more advanced usage, [check here][32].
+For more advanced usage, see the [Dual Shipping guide][32].
 
 ## Propagate trace context over AWS resources
 
