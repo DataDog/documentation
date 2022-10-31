@@ -151,7 +151,7 @@ Azure Active Directory (Azure AD) logs contain the history of sign-in activity a
 4. In **Destination details**, select **Send to a partner solution**.
 5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
 
-All Azure AD logs from the tenant is sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that link subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You do not need to do this more than once for each Azure tenant.
+All Azure AD logs from the tenant is sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that link subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
 
 ### Monitored resources
 
