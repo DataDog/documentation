@@ -123,7 +123,7 @@ Attach the new S3 policy to the Datadog integration role.
 
 ### Provide linked account access for cost validation
 
-Cloud Cost Management product periodically matches cost calculations against the AWS Cost Explorer to ensure complete cost accuracy. If your CUR is from a Linked Account, in the AWS Cost Management preferences, enable **Linked Account Access**, **Linked Account Refunds and Credits**, and **Linked Account Discounts**.
+Cloud Cost Management periodically matches cost calculations against the AWS Cost Explorer to ensure complete cost accuracy. If your CUR is from a Linked Account, in the AWS Cost Management preferences, enable **Linked Account Access**, **Linked Account Refunds and Credits**, and **Linked Account Discounts**.
 
 
 ## Cost types
