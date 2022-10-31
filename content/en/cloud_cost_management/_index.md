@@ -120,6 +120,12 @@ Attach the new S3 policy to the Datadog integration role.
 5. Click **Attach policy**.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+
+### Provide linked account access for cost validation
+
+The Datadog Cloud Cost Management product matches cost calculations against AWS' Cost Explorer to ensure complete cost accuracy. If your Cost and Usage Report (CUR) provided to Datadog is from a Linked Account, please allow Linked Account Access, Linked Account Refunds and Credits, and Linked Account Discounts under AWS Cost Management preferences.
+
+
 ## Cost types
 
 You can visualize your ingested data using the following cost types:
