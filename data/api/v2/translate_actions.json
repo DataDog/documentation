@@ -807,7 +807,7 @@
     "summary": "Get historical cost across your account"
   },
   "GetHourlyUsage": {
-    "description": "Get hourly usage by product family",
+    "description": "Get hourly usage by product family.",
     "summary": "Get hourly usage by product family"
   },
   "GetUsageLambdaTracedInvocations": {

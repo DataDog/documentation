@@ -18083,7 +18083,7 @@ paths:
         type: safe
   /api/v2/usage/hourly_usage:
     get:
-      description: Get hourly usage by product family
+      description: Get hourly usage by product family.
       operationId: GetHourlyUsage
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
