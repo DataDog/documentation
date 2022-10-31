@@ -141,12 +141,7 @@ To install the .NET Tracer machine-wide:
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
-<div class="alert alert-info">
-  <div class="alert-info">
-    <div>You can also script the MSI setup. A powershell example would be: <br/>
-    <code>RUN Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'</code></div>
-  </div>
-</div>
+You can also script the MSI setup by running the following in PowerShell: `RUN Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
