@@ -552,7 +552,57 @@ If you are using the Datadog Forwarder, follow these [instructions][31].
 
 ## Send telemetry to multiple Datadog organizations
 
-If you wish to send data to more than one Datadog organization, follow the instructions for [dual shipping][32] and include the file `datadog.yaml` in the root directory of your project.
+If you wish to send data to mutliple organizations, you can enable dual shipping using a plaintext API key, AWS Secrets Manager, or AWS KMS.
+
+{{< tabs >}}
+{{% tab "Plaintext API Key" %}}
+
+You can enable dual shipping using a plaintext API key by setting the following environment variables on your Lambda function.
+
+```bash
+# Enable dual shipping for metrics
+DD_ADDITIONAL_ENDPOINTS={"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for APM (traces)
+DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for APM (profiling)
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for logs
+DD_LOGS_CONFIG_USE_HTTP=true
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
+```
+
+{{% /tab %}}
+{{% tab "AWS Secrets Manager" %}}
+
+The Datadog Extension supports retrieving [AWS Secrets Manager][40] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
+
+1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
+2. Add the `secretsmanager:GetSecretValue` permission to your Lambda function IAM role permissions.
+3. Create a new secret on Secrets Manager to store the dual shipping metrics environment variable. The contents should be similar to `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}`.
+4. Set the environment variable `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function to the ARN from the aforementioned secret.
+5. Create a new secret on Secrets Manager to store the dual shipping APM (traces) environment variable. The contents should be **similar** to `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`.
+6. Set the environment variable `DD_APM_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+7. Create a new secret on Secrets Manager to store the dual shipping APM (profiling) environment variable. The contents should be **similar** to `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`.
+8. Set the environment variable `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+9. Create a new secret on Secrets Manager to store the dual shipping logs environment variable. The contents should be **similar** to `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`.
+10. Set the environment variable `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+
+{{% /tab %}}
+{{% tab "AWS KMS" %}}
+
+The Datadog Extension supports decrypting [AWS KMS][41] values automatically for any environment variables prefixed with `_KMS_ENCRYPTED`. You can use this to securely store your environment variables in KMS and dual ship with Datadog.
+
+1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
+2. Add the `kms:GenerateDataKey` and `kms:Decrypt` permissions to your Lambda function IAM role permissions.
+3. For dual shipping metrics, encrypt `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
+4. For dual shipping traces, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_ADDITIONAL_KMS_ENCRYPTED` environment variable equal to its value.
+5. For dual shipping profiling, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
+5. For dual shipping logs, encrypt `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` using KMS and set the `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For more advanced usage, see the [Dual Shipping guide][32].
 
 ## Propagate trace context over AWS resources
 
@@ -686,3 +736,5 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
+[40]: https://aws.amazon.com/secrets-manager/
+[41]: https://aws.amazon.com/kms/
