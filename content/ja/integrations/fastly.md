@@ -27,8 +27,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
+- caching
 - log collection
+- metrics
+- web
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -47,8 +49,10 @@ supported_os: []
 tile:
   changelog: ''
   classifier_tags:
-  - Category::Web
+  - Category::キャッシュ
   - Category::ログの収集
+  - Category::Metrics
+  - Category::Web
   configuration: README.md#Setup
   description: ファイルをキャッシュすることで、Web ページの読み込みを早くするコンテンツ配信ネットワーク
   media: []
@@ -57,11 +61,11 @@ tile:
   title: Fastly
 ---
 
-{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" popup="true">}}
-
 ## 概要
 
 Fastly に接続して、Fastly のキーメトリクス (キャッシュカバレッジ、ヘッダーサイズなど) を Datadog の他のメトリクスと関連付けて表示できます。
+
+{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" popup="true">}}
 
 ## セットアップ
 
