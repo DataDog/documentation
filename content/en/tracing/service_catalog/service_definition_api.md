@@ -108,7 +108,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
                     "contacts": [],
                     "docs": [],
                     "repos": [],
-                    "tags": null,
+                    "tags": [],
                     "integrations": {},
                     "team": "",
                     "extensions": {}
