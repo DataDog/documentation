@@ -143,7 +143,7 @@ For example, the screenshot below shows a tag rule where only virtual machines, 
 
 ##### Azure Active Directory logs
 
-Azure Active Directory (Azure AD) logs contain the history of sign-in activity and audit trail of changes made in Azure AD for a particular tenant. To send Azure AD Logs:
+Azure Active Directory (Azure AD) logs contain the history of sign-in activity and an audit trail of changes made in Azure AD for a particular tenant. To send Azure AD Logs:
 
 1. Navigate to Azure Active Directory in Azure, and select **Diagnostic Settings** in the left navigation bar.
 2. Click **Add diagnostic setting**.
@@ -151,7 +151,7 @@ Azure Active Directory (Azure AD) logs contain the history of sign-in activity a
 4. In **Destination details**, select **Send to a partner solution**.
 5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
 
-All Azure AD logs from the tenant is sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that link subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
+All Azure AD logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that link subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
 
 ### Monitored resources
 
