@@ -48,7 +48,7 @@ By default, the **Automatic** option shows a labeled Aside legend within a dashb
 
 In the case where multiple groups of data are plotted at once, you can choose a single category and view proportions within it.
 
-To view a single category, hover over the outer portion of the category ring, and click. To go back to the previous view, move your cursor to the center of the cart and click.
+To view a single category, hover over the outer portion of the category ring, and click. To go back to the previous view, move your cursor to the center of the chart and click.
 
 {{< img src="dashboards/widgets/pie_chart/interaction_animation.mp4" alt="Animation of pie chart interaction to filter and focus on a single category" video="true" style="width:80%;">}}
 

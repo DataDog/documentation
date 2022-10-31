@@ -83,7 +83,7 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [
 <div class="alert alert-info">Requires Agent version >= 6.4.0.</div>
 
 ### YAML configuration
-In `datadog.yaml`: 
+In `datadog.yaml`:
 ```yaml
 process_config:
   [...]
@@ -253,6 +253,14 @@ network_devices:
         Host: "mydomain.datadoghq.com"
         Port: 443
         is_reliable: true
+  netflow:
+    forwarder:
+      use_http: true
+      additional_endpoints:
+      - api_key: "apiKey2"
+        Host: "mydomain.datadoghq.com"
+        Port: 443
+        is_reliable: true
 ```
 
 ### Environment variable configuration
@@ -266,8 +274,8 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 {{% tab "CSPM" %}}
 
-### YAML configuration 
-In `datadog.yaml`: 
+### YAML configuration
+In `datadog.yaml`:
 ```yaml
 ​​compliance_config:
   endpoints:
@@ -290,8 +298,8 @@ DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 
 {{% tab "CWS" %}}
 
-### YAML configuration 
-In `datadog.yaml`: 
+### YAML configuration
+In `datadog.yaml`:
 ```yaml
 runtime_security_config:
   endpoints:
@@ -315,7 +323,7 @@ DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": 
 
 For data from these products, when setting up additional endpoints, you must explicitly set `use_http` to tell the Agent which transport to use. The same transport configuration is shared among all additional endpoints.
 
-The `is_reliable` setting (First available in Agent `7.34.0`) tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. This ensures that data is not missed if a destination becomes unavailable. 
+The `is_reliable` setting (First available in Agent `7.34.0`) tells the Agent to treat this endpoint with the same priority as the primary endpoint. The primary endpoint is always reliable. This ensures that data is not missed if a destination becomes unavailable.
 
 
 For example, if you're sending data to the main endpoint and an additional endpoint with `is_reliable: true`, and one endpoint becomes unavailable, data continues to flow to the other endpoint. If both endpoints become unavailable, the Agent stops reading and sending data until at least one endpoint recovers. This ensures all data makes it to at least one reliable endpoint.
@@ -326,7 +334,7 @@ You can add the YAML configuration to your `datadog.yaml` or launch the Agent wi
 
 ## Dual shipping in Kubernetes
 
-If you're using the [Datadog Agent Helm chart](https://github.com/DataDog/helm-charts), you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true` 
+If you're using the [Datadog Agent Helm chart](https://github.com/DataDog/helm-charts), you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
 and add the relevant settings to `customAgentConfig`.
 
 ```yaml
@@ -343,7 +351,7 @@ and add the relevant settings to `customAgentConfig`.
       - apikey2
       - apikey3
       "https://app.datadoghq.eu":
-      - apikey4 
+      - apikey4
 
     logs_config:
       use_http: true

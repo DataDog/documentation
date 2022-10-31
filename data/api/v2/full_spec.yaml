@@ -1128,6 +1128,635 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    CIAppAggregateBucketValue:
+      description: A bucket value, can either be a timeseries or a single value.
+      oneOf:
+      - $ref: '#/components/schemas/CIAppAggregateBucketValueSingleString'
+      - $ref: '#/components/schemas/CIAppAggregateBucketValueSingleNumber'
+      - $ref: '#/components/schemas/CIAppAggregateBucketValueTimeseries'
+    CIAppAggregateBucketValueSingleNumber:
+      description: A single number value.
+      format: double
+      type: number
+    CIAppAggregateBucketValueSingleString:
+      description: A single string value.
+      type: string
+    CIAppAggregateBucketValueTimeseries:
+      description: A timeseries array.
+      items:
+        $ref: '#/components/schemas/CIAppAggregateBucketValueTimeseriesPoint'
+      type: array
+      x-generate-alias-as-model: true
+    CIAppAggregateBucketValueTimeseriesPoint:
+      description: A timeseries point.
+      properties:
+        time:
+          description: The time value for this point.
+          example: '2020-06-08T11:55:00.123Z'
+          format: date-time
+          type: string
+        value:
+          description: The value for this point.
+          example: 19
+          format: double
+          type: number
+      type: object
+    CIAppAggregateSort:
+      description: A sort rule.
+      example:
+        aggregation: count
+        order: asc
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/CIAppAggregationFunction'
+        metric:
+          description: The metric to sort by (only used for `type=measure`).
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/CIAppSortOrder'
+        type:
+          $ref: '#/components/schemas/CIAppAggregateSortType'
+      type: object
+    CIAppAggregateSortType:
+      default: alphabetical
+      description: The type of sorting algorithm.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    CIAppAggregationFunction:
+      description: An aggregation function.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - median
+      example: pc90
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PERCENTILE_75
+      - PERCENTILE_90
+      - PERCENTILE_95
+      - PERCENTILE_98
+      - PERCENTILE_99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - MEDIAN
+    CIAppCompute:
+      description: A compute rule to compute metrics or timeseries.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/CIAppAggregationFunction'
+        interval:
+          description: 'The time buckets'' size (only used for type=timeseries)
+
+            Defaults to a resolution of 150 points.'
+          example: 5m
+          type: string
+        metric:
+          description: The metric to use.
+          example: '@duration'
+          type: string
+        type:
+          $ref: '#/components/schemas/CIAppComputeType'
+      required:
+      - aggregation
+      type: object
+    CIAppComputeType:
+      default: total
+      description: The type of compute.
+      enum:
+      - timeseries
+      - total
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - TOTAL
+    CIAppComputes:
+      additionalProperties:
+        $ref: '#/components/schemas/CIAppAggregateBucketValue'
+      description: A map of the metric name to value for regular compute, or a list
+        of values for a timeseries.
+      type: object
+    CIAppEventAttributes:
+      description: JSON object containing all event attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from CI Visibility events.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        service:
+          description: 'The name of the application or service generating CI Visibility
+            events.
+
+            It is used to switch from CI Visibility to APM, so make sure you define
+            the same
+
+            value when you use both products.'
+          example: web-ui-tests
+          type: string
+        tags:
+          $ref: '#/components/schemas/TagsEventAttribute'
+        timestamp:
+          $ref: '#/components/schemas/TimestampEventAttribute'
+      type: object
+    CIAppGroupByHistogram:
+      description: 'Used to perform a histogram computation (only for measure facets).
+
+        At most, 100 buckets are allowed, the number of buckets is `(max - min)/interval`.'
+      properties:
+        interval:
+          description: The bin size of the histogram buckets.
+          example: 10
+          format: double
+          type: number
+        max:
+          description: 'The maximum value for the measure used in the histogram
+
+            (values greater than this one are filtered out).'
+          example: 100
+          format: double
+          type: number
+        min:
+          description: 'The minimum value for the measure used in the histogram
+
+            (values smaller than this one are filtered out).'
+          example: 50
+          format: double
+          type: number
+      required:
+      - interval
+      - min
+      - max
+      type: object
+    CIAppGroupByMissing:
+      description: The value to use for logs that don't have the facet used to group-by.
+      oneOf:
+      - $ref: '#/components/schemas/CIAppGroupByMissingString'
+      - $ref: '#/components/schemas/CIAppGroupByMissingNumber'
+    CIAppGroupByMissingNumber:
+      description: The missing value to use if there is a number valued facet.
+      format: double
+      type: number
+    CIAppGroupByMissingString:
+      description: The missing value to use if there is a string valued facet.
+      type: string
+    CIAppGroupByTotal:
+      default: false
+      description: A resulting object to put the given computes in over all the matching
+        records.
+      oneOf:
+      - $ref: '#/components/schemas/CIAppGroupByTotalBoolean'
+      - $ref: '#/components/schemas/CIAppGroupByTotalString'
+      - $ref: '#/components/schemas/CIAppGroupByTotalNumber'
+    CIAppGroupByTotalBoolean:
+      description: If set to true, creates an additional bucket labeled "$facet_total".
+      type: boolean
+    CIAppGroupByTotalNumber:
+      description: A number to use as the key value for the total bucket.
+      format: double
+      type: number
+    CIAppGroupByTotalString:
+      description: A string to use as the key value for the total bucket.
+      type: string
+    CIAppPipelineEvent:
+      description: Object description of a pipeline event after being processed and
+        stored by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CIAppEventAttributes'
+        id:
+          description: Unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/CIAppPipelineEventTypeName'
+      type: object
+    CIAppPipelineEventTypeName:
+      description: Type of the event.
+      enum:
+      - cipipeline
+      example: cipipeline
+      type: string
+      x-enum-varnames:
+      - cipipeline
+    CIAppPipelineEventsRequest:
+      description: The request for a pipelines search.
+      properties:
+        filter:
+          $ref: '#/components/schemas/CIAppPipelinesQueryFilter'
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+        page:
+          $ref: '#/components/schemas/CIAppQueryPageOptions'
+        sort:
+          $ref: '#/components/schemas/CIAppSort'
+      type: object
+    CIAppPipelineEventsResponse:
+      description: Response object with all pipeline events matching the request and
+        pagination information.
+      properties:
+        data:
+          description: Array of events matching the request.
+          items:
+            $ref: '#/components/schemas/CIAppPipelineEvent'
+          type: array
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadata'
+      type: object
+    CIAppPipelinesAggregateRequest:
+      description: The object sent with the request to retrieve aggregation buckets
+        of pipeline events from your organization.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/CIAppCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/CIAppPipelinesQueryFilter'
+        group_by:
+          description: The rules for the group-by.
+          items:
+            $ref: '#/components/schemas/CIAppPipelinesGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+        page:
+          $ref: '#/components/schemas/CIAppQueryPageOptions'
+      type: object
+    CIAppPipelinesAggregationBucketsResponse:
+      description: The query results.
+      properties:
+        buckets:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/CIAppPipelinesBucketResponse'
+          type: array
+      type: object
+    CIAppPipelinesAnalyticsAggregateResponse:
+      description: The response object for the pipeline events aggregate API endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppPipelinesAggregationBucketsResponse'
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadata'
+      type: object
+    CIAppPipelinesBucketResponse:
+      description: Bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group-by.
+            type: string
+          description: The key-value pairs for each group-by.
+          example:
+            '@ci.provider.name': gitlab
+            '@ci.status': success
+          type: object
+        computes:
+          $ref: '#/components/schemas/CIAppComputes'
+      type: object
+    CIAppPipelinesGroupBy:
+      description: A group-by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: '@ci.status'
+          type: string
+        histogram:
+          $ref: '#/components/schemas/CIAppGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group-by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/CIAppGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/CIAppAggregateSort'
+        total:
+          $ref: '#/components/schemas/CIAppGroupByTotal'
+      required:
+      - facet
+      type: object
+    CIAppPipelinesQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested events; supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query following the Log search syntax.
+          example: '@ci.provider.name:github AND @ci.status:error'
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested events, supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now
+          type: string
+      type: object
+    CIAppQueryOptions:
+      description: 'Global query options that are used during the query.
+
+        Only supply timezone or time offset, not both. Otherwise, the query fails.'
+      properties:
+        time_offset:
+          description: The time offset (in seconds) to apply to the query.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: 'The timezone can be specified both as an offset, for example:
+            "UTC+03:00".'
+          example: GMT
+          type: string
+      type: object
+    CIAppQueryPageOptions:
+      description: Paging attributes for listing events.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of events in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    CIAppResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. The request can also be
+            made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/ci/tests/events?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    CIAppResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/CIAppResponsePage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppResponseStatus'
+        warnings:
+          description: 'A list of warnings (non-fatal errors) encountered. Partial
+            results may return if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/CIAppWarning'
+          type: array
+      type: object
+    CIAppResponsePage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of `page[cursor]`.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    CIAppResponseStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
+    CIAppSort:
+      description: Sort parameters when querying events.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    CIAppSortOrder:
+      description: The order to use, ascending or descending.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASCENDING
+      - DESCENDING
+    CIAppTestEvent:
+      description: Object description of test event after being processed and stored
+        by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CIAppEventAttributes'
+        id:
+          description: Unique ID of the event.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/CIAppTestEventTypeName'
+      type: object
+    CIAppTestEventTypeName:
+      description: Type of the event.
+      enum:
+      - citest
+      example: citest
+      type: string
+      x-enum-varnames:
+      - citest
+    CIAppTestEventsRequest:
+      description: The request for a tests search.
+      properties:
+        filter:
+          $ref: '#/components/schemas/CIAppTestsQueryFilter'
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+        page:
+          $ref: '#/components/schemas/CIAppQueryPageOptions'
+        sort:
+          $ref: '#/components/schemas/CIAppSort'
+      type: object
+    CIAppTestEventsResponse:
+      description: Response object with all test events matching the request and pagination
+        information.
+      properties:
+        data:
+          description: Array of events matching the request.
+          items:
+            $ref: '#/components/schemas/CIAppTestEvent'
+          type: array
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadata'
+      type: object
+    CIAppTestsAggregateRequest:
+      description: The object sent with the request to retrieve aggregation buckets
+        of test events from your organization.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/CIAppCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/CIAppTestsQueryFilter'
+        group_by:
+          description: The rules for the group-by.
+          items:
+            $ref: '#/components/schemas/CIAppTestsGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/CIAppQueryOptions'
+        page:
+          $ref: '#/components/schemas/CIAppQueryPageOptions'
+      type: object
+    CIAppTestsAggregationBucketsResponse:
+      description: The query results.
+      properties:
+        buckets:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/CIAppTestsBucketResponse'
+          type: array
+      type: object
+    CIAppTestsAnalyticsAggregateResponse:
+      description: The response object for the test events aggregate API endpoint.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppTestsAggregationBucketsResponse'
+        links:
+          $ref: '#/components/schemas/CIAppResponseLinks'
+        meta:
+          $ref: '#/components/schemas/CIAppResponseMetadata'
+      type: object
+    CIAppTestsBucketResponse:
+      description: Bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group-by.
+            type: string
+          description: The key-value pairs for each group-by.
+          example:
+            '@test.service': web-ui-tests
+            '@test.status': skip
+          type: object
+        computes:
+          $ref: '#/components/schemas/CIAppComputes'
+      type: object
+    CIAppTestsGroupBy:
+      description: A group-by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: '@test.service'
+          type: string
+        histogram:
+          $ref: '#/components/schemas/CIAppGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group-by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/CIAppGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/CIAppAggregateSort'
+        total:
+          $ref: '#/components/schemas/CIAppGroupByTotal'
+      required:
+      - facet
+      type: object
+    CIAppTestsQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested events; supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query following the Log search syntax.
+          example: '@test.service:web-ui-tests AND @test.status:fail'
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested events, supports date, math,
+            and regular timestamps (in milliseconds).
+          example: now
+          type: string
+      type: object
+    CIAppWarning:
+      description: A warning message indicating something that went wrong with the
+        query.
+      properties:
+        code:
+          description: A unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: A detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: A short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid, results hold data
+            from the other indexes
+          type: string
+      type: object
     ChargebackBreakdown:
       description: Charges breakdown.
       properties:
@@ -4631,6 +5260,8 @@ components:
           description: The search query - following the log search syntax.
           example: service:web* AND @http.status_code:[200 TO 299]
           type: string
+        storage_tier:
+          $ref: '#/components/schemas/LogsStorageTier'
         to:
           default: now
           description: The maximum time for the requested logs, supports date math
@@ -4719,6 +5350,17 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+    LogsStorageTier:
+      default: indexes
+      description: Specifies storage type as indexes or online-archives
+      enum:
+      - indexes
+      - online-archives
+      example: indexes
+      type: string
+      x-enum-varnames:
+      - INDEXES
+      - ONLINE_ARCHIVES
     LogsWarning:
       description: A warning message indicating something that went wrong with the
         query
@@ -9353,6 +9995,19 @@ components:
             $ref: '#/components/schemas/ServiceDefinitionData'
           type: array
       type: object
+    TagsEventAttribute:
+      description: Array of tags associated with your event.
+      example:
+      - team:A
+      items:
+        description: Tag associated with your event.
+        type: string
+      type: array
+    TimestampEventAttribute:
+      description: Timestamp of your event.
+      example: '2019-01-02T09:42:36.320Z'
+      format: date-time
+      type: string
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -9732,6 +10387,7 @@ components:
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
+            user_access_read: View users and their roles and settings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -10482,6 +11138,338 @@ paths:
       x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
+  /api/v2/ci/pipelines/analytics/aggregate:
+    post:
+      description: The API endpoint to aggregate CI Visibility pipeline events into
+        buckets of computed metrics and timeseries.
+      operationId: AggregateCIAppPipelineEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CIAppPipelinesAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CIAppPipelinesAnalyticsAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Aggregate pipelines events
+      tags:
+      - CI Visibility Pipelines
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/ci/pipelines/events:
+    get:
+      description: 'List endpoint returns CI Visibility pipeline events that match
+        a log search query.
+
+        [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
+
+
+        Use this endpoint to see your latest pipeline events.'
+      operationId: ListCIAppPipelineEvents
+      parameters:
+      - description: Search query following log syntax.
+        example: '@ci.provider.name:github @ci.pipeline.name:Pull Request Labeler'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested events.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/CIAppSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CIAppPipelineEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a list of pipelines events
+      tags:
+      - CI Visibility Pipelines
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/ci/pipelines/events/search:
+    post:
+      description: 'List endpoint returns CI Visibility pipeline events that match
+        a log search query.
+
+        [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
+
+
+        Use this endpoint to build complex events filtering and search.'
+      operationId: SearchCIAppPipelineEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CIAppPipelineEventsRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CIAppPipelineEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Search pipelines events
+      tags:
+      - CI Visibility Pipelines
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/ci/tests/analytics/aggregate:
+    post:
+      description: The API endpoint to aggregate CI Visibility test events into buckets
+        of computed metrics and timeseries.
+      operationId: AggregateCIAppTestEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CIAppTestsAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CIAppTestsAnalyticsAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Aggregate tests events
+      tags:
+      - CI Visibility Tests
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/ci/tests/events:
+    get:
+      description: 'List endpoint returns CI Visibility test events that match a log
+        search query.
+
+        [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
+
+
+        Use this endpoint to see your latest test events.'
+      operationId: ListCIAppTestEvents
+      parameters:
+      - description: Search query following log syntax.
+        example: '@test.name:test_foo @test.suite:github.com/DataDog/dd-go/model'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested events.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested events.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of events in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/CIAppSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of events in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CIAppTestEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a list of tests events
+      tags:
+      - CI Visibility Tests
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/ci/tests/events/search:
+    post:
+      description: 'List endpoint returns CI Visibility test events that match a log
+        search query.
+
+        [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
+
+
+        Use this endpoint to build complex events filtering and search.'
+      operationId: SearchCIAppTestEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CIAppTestEventsRequest'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CIAppTestEventsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Search tests events
+      tags:
+      - CI Visibility Tests
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.page.limit
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -11505,9 +12493,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Confluent accounts
       tags:
       - Confluent Cloud
@@ -11539,9 +12524,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Confluent account
       tags:
       - Confluent Cloud
@@ -11582,9 +12564,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Confluent account
       tags:
       - Confluent Cloud
@@ -11611,9 +12590,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Confluent account
       tags:
       - Confluent Cloud
@@ -11647,9 +12623,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Confluent account
       tags:
       - Confluent Cloud
@@ -11679,9 +12652,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Confluent Account resources
       tags:
       - Confluent Cloud
@@ -11716,9 +12686,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add resource to Confluent account
       tags:
       - Confluent Cloud
@@ -11745,9 +12712,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete resource from Confluent account
       tags:
       - Confluent Cloud
@@ -11776,9 +12740,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get resource from Confluent account
       tags:
       - Confluent Cloud
@@ -11814,9 +12775,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update resource in Confluent account
       tags:
       - Confluent Cloud
@@ -13162,6 +14120,13 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: Specifies the storage type to be used
+        example: indexes
+        in: query
+        name: filter[storage_tier]
+        required: false
+        schema:
+          $ref: '#/components/schemas/LogsStorageTier'
       - description: Order of logs in results.
         in: query
         name: sort
@@ -15072,7 +16037,7 @@ paths:
         Cloud Workload Security rules, and downloads them as a .policy file. This
         file can then be deployed to
 
-        your agents to update the policy running in your environment.'
+        your Agents to update the policy running in your environment.'
       operationId: DownloadCloudWorkloadPolicyFile
       responses:
         '200':
@@ -15769,7 +16734,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - security_monitoring_rules_read
+        - security_monitoring_signals_read
       summary: Get a signal's details
       tags:
       - Security Monitoring
@@ -17089,7 +18054,7 @@ paths:
         type: safe
   /api/v2/usage/hourly_usage:
     get:
-      description: Get hourly usage by product family
+      description: Get hourly usage by product family.
       operationId: GetHourlyUsage
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -17493,7 +18458,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List all users
       tags:
       - Users
@@ -17621,7 +18587,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get user details
       tags:
       - Users
@@ -17759,7 +18726,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get a user permissions
       tags:
       - Users
@@ -17810,6 +18778,10 @@ tags:
 
     sent from Identity Providers.'
   name: AuthN Mappings
+- description: Search or aggregate your CI Visibility pipeline events over HTTP.
+  name: CI Visibility Pipelines
+- description: Search or aggregate your CI Visibility test events over HTTP.
+  name: CI Visibility Tests
 - description: Workload activity security rules for generating events using the Datadog
     security Agent.
   name: Cloud Workload Security

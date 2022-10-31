@@ -3,6 +3,9 @@ title: Intelligent Test Runner
 kind: documentation
 is_beta: true
 further_reading:
+  - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
+    tag: "Blog"
+    text: "Streamline CI testing with Datadog Intelligent Test Runner"
   - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
