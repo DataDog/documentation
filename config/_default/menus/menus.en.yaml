@@ -727,7 +727,7 @@ main:
   - name: Timeseries
     url: dashboards/widgets/timeseries/
     parent: dashboards_widgets
-    weight: 32
+    weight: 33
   - name: Top List
     url: dashboards/widgets/top_list/
     parent: dashboards_widgets
