@@ -2220,6 +2220,11 @@ main:
     parent: dbm_setup_sql_server
     identifier: dbm_setup_sql_server_gcsql
     weight: 104
+  - name: Troubleshooting
+    url: database_monitoring/setup_sql_server/troubleshooting/
+    parent: dbm_setup_sql_server
+    identifier: dbm_troubleshooting_sql_server
+    weight: 107
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
