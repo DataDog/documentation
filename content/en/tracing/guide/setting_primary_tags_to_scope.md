@@ -92,7 +92,7 @@ To enable container-based second primary tags, install Agent version 7.35.0 or l
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Using the Datadog Helm chart version 2.26.2 or later, and add the following to your values file:
+Using the Datadog Helm chart version 2.26.2 or later, add the following to your values file:
 
 ```yaml
 #...
@@ -149,7 +149,7 @@ Restart the Agent. Go to the [APM Settings][6] page and select the second primar
 
 Now you can filter your services in the [Service List][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
-### Custom Labels as Tags
+### Custom labels as tags
 
 If you haven't already, you may also configure the Agent to send container or Pod labels as custom tags for your traces with [Assigning Tags][8].
 
@@ -157,7 +157,7 @@ If you haven't already, you may also configure the Agent to send container or Po
 
 Primary tags appear at the top of APM pages. Use these selectors to filter the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown.
 
-{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="The dropdown menu showing options for selecting a scope with the second primary tag"  style="width:90%;">}}
+{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="The dropdown menu showing options for selecting a scope with the second primary tag" style="width:90%;">}}
 
 
 ## Further Reading
