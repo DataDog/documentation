@@ -3343,7 +3343,7 @@ main:
     parent: dev_tools_authorization
     identifier: dev_tools_authorization_oauth2_in_datadog
     weight: 101
-  - name: Authorization Endpoints 
+  - name: Authorization Endpoints
     url: developers/authorization/oauth2_endpoints/
     parent: dev_tools_authorization
     identifier: dev_tools_authorization_oauth2_endpoints
