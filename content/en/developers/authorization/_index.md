@@ -2,11 +2,14 @@
 title: Authorization
 type: documentation
 further_reading:
+- link: "https://www.datadoghq.com/blog/oauth/"
+  tag: "Blog"
+  text: "Streamline and secure data integrations with OAuth"
 - link: "/developers/integrations/oauth_for_data_integrations"
-  tag: "documentation"
+  tag: "Documentation"
   text: "Implement OAuth for your Data Integration"
 - link: "/developers/authorization/oauth2_in_datadog/"
-  tag: "documentation"
+  tag: "Documentation"
   text: "Learn more about OAuth2 in Datadog"
 - link: "/developers/authorization/oauth2_endpoints"
   tag: "API"
