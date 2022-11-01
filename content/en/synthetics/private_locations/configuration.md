@@ -43,7 +43,7 @@ The two below parameters can be used to customize DNS resolution on your **API t
 `dnsUseHost`
 : **Type**: Boolean <br>
 **Default**: `true`<br>
-Use host local DNS configuration first (for example, the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any.
+Use host local DNS configuration first (for example, the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter.
 
 `dnsServer`
 : **Type**: Array of Strings <br>

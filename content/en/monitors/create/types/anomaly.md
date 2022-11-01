@@ -55,7 +55,7 @@ Recovery window
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds"  style="width:80%;">}}
 
 
 Deviations

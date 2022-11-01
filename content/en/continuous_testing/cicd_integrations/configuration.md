@@ -120,9 +120,10 @@ For example:
         "deviceIds": ["laptop_large"],
         "followRedirects": true,
         "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
-            "locations": ["aws:us-west-1"],
+        "locations": ["aws:us-west-1"],
         "retry": { "count": 2, "interval": 300 },
         "executionRule": "blocking",
+        "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
         "variables": { "titleVariable": "new value" },
         "pollingTimeout": 180000
@@ -223,6 +224,10 @@ Execution rule of the test that defines the CLI behavior in case of a failing te
 : **Type**: string<br>
 New start URL to provide to the HTTP or browser test.
 
+`startUrlSubstitutionRegex`
+: **Type**: string<br>
+Regex to modify the start URL of the test (browser and HTTP tests only), whether it was given by the original test or by the configuration override `startURL`. If the URL contains variables, this regex is applied after the interpolation of the variables.
+
 `variables`
 : **Type**: object<br>
 Variables to replace in the test. This object should contain the name of the variable to replace as keys and the new value of the variable as values.
@@ -247,9 +252,10 @@ The duration in milliseconds after which `datadog-ci` stops polling for test res
                 "deviceIds": ["laptop_large"],
                 "followRedirects": true,
                 "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
-            "locations": ["aws:us-west-1"],
+                "locations": ["aws:us-west-1"],
                 "retry": { "count": 2, "interval": 300 },
                 "executionRule": "skipped",
+                "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
                 "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
                 "variables": { "titleVariable": "new value" },
                 "pollingTimeout": 180000
@@ -268,63 +274,11 @@ Use the drop-down menu next to **CI Execution** to define the execution rule for
 
 The execution rule associated with the test is the most restrictive one in the configuration file. The options range from most to least restrictive: `skipped`, `non_blocking`, and `blocking`. For example, if your test is configured as `skipped` in the UI but `blocking` in the configuration file, it is `skipped` when your test runs.
 
-#### Starting URL
+#### Customize your start URL
 
-`URL`
-: Test's original starting URL <br>
-**Example**: `https://www.example.org:81/path/to/something?abc=123#target`
+You can override the start URL for your tests through the `startURL` configuration option. For example, assuming your test starting URL is `shopist.io`, and you want to test your staging environment at `staging.shopist.io`, pass the option as `startURL: "staging.shopist.io"`.
 
-`DOMAIN`
-: Test's domain name<br>
-**Example**: `example.org`
-
-`HASH`
-: Test's hash<br>
-**Example**: `#target`
-
-`HOST`
-: Test's host<br>
-**Example**: `www.example.org:81`
-
-`HOSTNAME`
-: Test's hostname<br>
-**Example**: `www.example.org`
-
-`ORIGIN`
-: Test's origin<br>
-**Example**: `https://www.example.org:81`
-
-`PARAMS`
-: Test's query parameters<br>
-**Example**: `?abc=123`
-
-`PATHNAME`
-: Test's URl path<br>
-**Example**: `/path/to/something`
-
-`PORT`
-: Test's host port<br>
-**Example**: `81`
-
-`PROTOCOL`
-: Test's protocol<br>
-**Example**: `https:`
-
-`SUBDOMAIN`
-: Test's sub domain<br>
-**Example**: `www`
-
-Whether you use Synthetic tests to control your CI/CD deployments in production or staging, you can run Synthetic tests against a generated staging URL instead of in production by setting local environment variables in your test's starting URL. 
-
-To trigger an existing Synthetics test on a staging endpoint instead of in production, set the `$SUBDOMAIN` environment variable to `staging-example` and the `$PORT` environment variable to a port used for staging. Your Synthetic tests run against the generated staging URL instead of running in production. 
-
-For example, you can write `https://app.datadoghq.com/synthetics/details/abc-123-zyx?live=1h#test-results` as:
-
-* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
-* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
-* `{{URL}}`
-
-**Note:** If you have environment variables with names corresponding to one of the reserved variables above, your environment variables are ignored and replaced with the corresponding component parsed from your test's `startUrl`. 
+If you want to customize this start URL further (or only part of the URL), you can use the `startUrlSubstitutionRegex` configuration option. The format is `s/your_regex/your_substitution/modifiers` and follows JavaScript regex syntax. For example, `s/(https://www.)(.*)/$1extra-$2/` transforms `https://www.example.com` into `https://www.extra-example.com`.
 
 ### Run tests
 

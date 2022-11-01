@@ -1,6 +1,12 @@
 ---
 title: Cloud Cost Management
 kind: documentation
+aliases:
+  - /infrastructure/cloud_cost_management
+further_reading:
+  - link: "https://docs.datadoghq.com/infrastructure/cloud_cost_management/"
+    tag: "Blog"
+    text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
 ---
 ## Overview
 
@@ -127,7 +133,7 @@ You can visualize your ingested data using the following cost types:
 
 ## Tag enrichment
 
-Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][8].
+Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6].
 
 The following out-of-the-box tags are also available for filtering and grouping data:
 
@@ -161,13 +167,15 @@ The following out-of-the-box tags are also available for filtering and grouping 
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
 
-{{< img src="infrastructure/cloudcost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
 [3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[6]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-[7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
-[8]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html

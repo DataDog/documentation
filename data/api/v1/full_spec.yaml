@@ -6205,12 +6205,20 @@ components:
       - rum
       - ci_pipelines
       - ci_tests
+      - audit
+      - events
+      - logs
+      - spans
       example: rum
       type: string
       x-enum-varnames:
       - RUM
       - CI_PIPELINES
       - CI_TESTS
+      - AUDIT
+      - EVENTS
+      - LOGS
+      - SPANS
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6495,6 +6503,8 @@ components:
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
             Default is false."
           type: boolean
+        scheduling_options:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
         silenced:
           additionalProperties:
             description: UTC epoch timestamp in seconds when the downtime for the
@@ -6545,6 +6555,39 @@ components:
           example: count
           type: string
       readOnly: true
+      type: object
+    MonitorOptionsSchedulingOptions:
+      description: Configuration options for scheduling.
+      properties:
+        evaluation_window:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
+      type: object
+    MonitorOptionsSchedulingOptionsEvaluationWindow:
+      description: Configuration options for the evaluation window. If `hour_starts`
+        is set, no other fields may be set. Otherwise, `day_starts` and `month_starts`
+        must be set together.
+      properties:
+        day_starts:
+          description: The time of the day at which a one day cumulative evaluation
+            window starts. Must be defined in UTC time in `HH:mm` format.
+          example: 04:00
+          type: string
+        hour_starts:
+          description: The minute of the hour at which a one hour cumulative evaluation
+            window starts.
+          example: 0
+          format: int32
+          maximum: 59
+          minimum: 0
+          type: integer
+        month_starts:
+          description: The day of the month at which a one month cumulative evaluation
+            window starts.
+          example: 1
+          format: int32
+          maximum: 1
+          minimum: 1
+          type: integer
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -16245,6 +16288,18 @@ components:
       description: Sensitive Data Scanner usage for a given organization for a given
         hour.
       properties:
+        apm_scanned_bytes:
+          description: "The total number of bytes scanned of APM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
+        events_scanned_bytes:
+          description: "The total number of bytes scanned of Events usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
         hour:
           description: The hour for the usage.
           format: date-time
@@ -16261,6 +16316,12 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        rum_scanned_bytes:
+          description: "The total number of bytes scanned of RUM usage across all
+            usage types by the Sensitive Data Scanner from the start of the given
+            hour\u2019s month until the given hour."
+          format: int64
+          type: integer
         total_scanned_bytes:
           description: "The total number of bytes scanned across all usage types by
             the Sensitive Data Scanner from the start of the given hour\u2019s month
@@ -16688,9 +16749,24 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -17026,9 +17102,24 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner over all hours in the current date for the given org.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for the given org.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -17401,9 +17492,24 @@ components:
             hours in the current months for all organizations.
           format: int64
           type: integer
+        sds_apm_scanned_bytes_sum:
+          description: Sum of all APM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
+          format: int64
+          type: integer
+        sds_events_scanned_bytes_sum:
+          description: Sum of all event stream events bytes scanned with sensitive
+            data scanner in the current months for all organizations.
+          format: int64
+          type: integer
         sds_logs_scanned_bytes_sum:
           description: Shows the sum of all bytes scanned of logs usage by the Sensitive
             Data Scanner over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        sds_rum_scanned_bytes_sum:
+          description: Sum of all RUM bytes scanned with sensitive data scanner in
+            the current months for all organizations.
           format: int64
           type: integer
         sds_total_scanned_bytes_sum:
@@ -18636,6 +18742,7 @@ components:
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
+            user_access_read: View users and their roles and settings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -27394,9 +27501,6 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/synthetics/ci/batch/{batch_id}:
     get:
       description: Get a batch's updated details.
@@ -31505,7 +31609,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List all users
       tags:
       - Users

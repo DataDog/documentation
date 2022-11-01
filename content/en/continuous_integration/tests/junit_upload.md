@@ -97,7 +97,78 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-**Note:** Reports larger than 250 MiB may not be process completely resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
+<div class="alert alert-warning">Make sure that this command runs in your CI even when your tests have failed. Usually, when tests fail, the CI job aborts execution, and the upload command does not run.</div>
+
+{{< tabs >}}
+
+{{% tab "GitHub Actions" %}}
+Use the [Status check functions][1]:
+
+{{< code-block lang="yaml" >}}
+steps:
+  - name: Run tests
+    run: ./run-tests.sh
+  - name: Upload test results to Datadog
+    if: always()
+    run: datadog-ci junit upload --service service_name ./junit.xml
+{{< /code-block >}}
+
+[1]: https://docs.github.com/en/actions/learn-github-actions/expressions#always
+{{% /tab %}}
+
+{{% tab "GitLab" %}}
+Use the [`after_script` section][1]:
+
+{{< code-block lang="yaml" >}}
+test:
+  stage: test
+  script:
+    - ./run-tests.sh
+  after_script:
+    - datadog-ci junit upload --service service_name ./junit.xml
+{{< /code-block >}}
+
+[1]: https://docs.gitlab.com/ee/ci/yaml/#after_script
+{{% /tab %}}
+
+{{% tab "Jenkins" %}}
+Use the [`post` section][1]:
+
+{{< code-block lang="groovy" >}}
+pipeline {
+  agent any
+  stages {
+    stage('Run tests') {
+      steps {
+        sh './run-tests.sh'
+      }
+      post {
+        always {
+          sh 'datadog-ci junit upload --service service_name ./junit.xml'
+        }
+      }
+    }
+  }
+}
+{{< /code-block >}}
+
+[1]: https://www.jenkins.io/doc/book/pipeline/syntax/#post
+{{% /tab %}}
+
+{{% tab "Bash" %}}
+If your CI system allows sub-shells:
+
+{{< code-block lang="bash" >}}
+$(./run-tests.sh); export tests_exit_code=$?
+datadog-ci junit upload --service service_name ./junit.xml
+if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+**Note:** Reports larger than 250 MiB may not be processed completely, resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
 
 ## Configuration settings
 

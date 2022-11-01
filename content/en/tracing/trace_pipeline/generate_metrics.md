@@ -53,7 +53,7 @@ To generate metrics from spans, on the [APM Setup and Configuration][8] page sel
 
 1. **Name your metric:** Metric names must follow the [metric naming convention][11]. Metric names that start with `trace.*` are not permitted and will not be saved.
 
-**Important Note**: Span-based metrics are considered custom metrics and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.
+<div class="alert alert-warning"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
 ## Updating existing span-based metrics
 

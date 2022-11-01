@@ -125,20 +125,18 @@ To create a message template:
 
 {{< img src="monitors/incidents/notification_rules_example.jpeg" alt="Notification Rules Example" style="width:80%;">}}
 
-Notification rules allow you to configure scenarios when specific stakeholders should always be automatically notified of an incident. You can use notification rules to ensure key stakeholders are always made aware of high priority incidents, to notify external systems whenever a new incident is declared or updated, or to notify specific responders when a particular service or team experiences an incident.
+Notification rules allow you to configure scenarios when specific stakeholders should be automatically notified of an incident. You can use notification rules to ensure key stakeholders are always made aware of high priority incidents, to notify external systems whenever a new incident is declared or updated, or to notify specific responders when a particular service or team experiences an incident.
 
 **Example:** Set a notification rule to automatically notify team stakeholders whenever a SEV-1 or SEV-2 for `service:web-store` AND `application:purchasing` incident is declared and when that incident moves through different states of progression.
 
 To configure a new notification rule:
 
-1. Click **New Rule**
-2. Select the incident property field `key:value` pairs you want notifications to be sent for. By default, a rule notifies your recipients on any incident.
-3. Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10]. **Note**: If you want to notify a recipient's mobile device, select the option that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][14] for this option to appear.
-4. Select the desired message template you want the notification rule to use.
-5. Choose whether you want recipients to be renotified when an incident changes its status.
+1. Click **New Rule**.
+2. Under **For incidents matching...**, select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty, and a notification rule triggers for any incident.
+3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][10]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][14] for this option to appear.
+4. **With Template**: Select the desired message template you want the notification rule to use.
+5. **Renotify on updates to**: Choose which incident properties trigger renotifications. Whenever one or more of the selected properties changes, a new notification is sent.  Note that you cannot renotify on properties that are already in your filters (see step 2, above).
 6. Click **Save**
-
-**Note**: Notification rules send messages only if an incident changes status (including when it is first declared) and are tagged with the property field values that match the filter of the notification rules.
 
 You can perform the following operations to manage your notification rules.
 

@@ -10,18 +10,30 @@ kind: guide
 Datadog integrates with GitHub to show test result summaries and error messages for failed tests in pull request comments.
 
 ### Compatibility
-This integration is only available for test services hosted on `github.com`. It is also unavailable for workflows running on `pull_request` triggers. 
+This integration is only available for test services hosted on `github.com`. It is also unavailable for workflows running on `pull_request` triggers.
 
-{{< img src="ci/pr-comment-preview.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
+{{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
 ### Enabling
 To enable the GitHub comments integration:
 
 1. Go to the [GitHub App integration tile][1] and install the [Datadog GitHub App][2].
 2. Give the application read and write permissions for pull requests.
-3. Go to the test service commit or branch page where you would like to enable GitHub comments. 
-4. Click on the settings icon at the top right.
-5. Select `Enable GitHub Comments` so that comments display on new pull requests. Note this change takes a few minutes. 
+
+In the UI, you can do this from the settings page or the commit or branch page.
+
+#### CI Settings page
+
+1. Go to the [CI Test Service Settings page][3] and search for the repository or test service.
+2. Toggle the `GitHub Comments` column for the desired service.
+
+{{< img src="ci/enable-settings-github-comments.png" alt="The Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
+
+#### Commit or branch page
+
+1. Go to the test service commit or branch page where you would like to enable GitHub comments.
+2. Click on the settings icon at the top right.
+3. Select `Enable GitHub Comments` so that comments display on new pull requests. Note that this change takes a few minutes.
 
 {{< img src="ci/enable-github-comments.png" alt="Enable GitHub comments dropdown" style="width:100%;">}}
 
@@ -29,3 +41,4 @@ Comments only appear on pull requests that were opened before the test run and t
 
 [1]: https://app.datadoghq.com/integrations/github-apps
 [2]: /integrations/github_apps/
+[3]: https://app.datadoghq.com/ci/settings/test-service

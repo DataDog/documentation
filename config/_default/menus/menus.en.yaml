@@ -663,75 +663,79 @@ main:
     url: dashboards/widgets/free_text/
     parent: dashboards_widgets
     weight: 17
+  - name: Funnel
+    url: dashboards/widgets/funnel/
+    parent: dashboards_widgets
+    weight: 18
   - name: Geomap
     url: dashboards/widgets/geomap/
     parent: dashboards_widgets
-    weight: 18
+    weight: 19
   - name: Group
     url: dashboards/widgets/group/
     parent: dashboards_widgets
-    weight: 19
+    weight: 20
   - name: Heat Map
     url: dashboards/widgets/heat_map/
     parent: dashboards_widgets
-    weight: 20
+    weight: 21
   - name: Host Map
     url: dashboards/widgets/hostmap/
     parent: dashboards_widgets
-    weight: 21
+    weight: 22
     identifier: widgets_host_map
   - name: Iframe
     url: dashboards/widgets/iframe/
     parent: dashboards_widgets
-    weight: 22
+    weight: 23
   - name: Image
     url: dashboards/widgets/image/
     parent: dashboards_widgets
-    weight: 23
+    weight: 24
   - name: Log Stream
     url: dashboards/widgets/log_stream/
     parent: dashboards_widgets
-    weight: 24
+    weight: 25
   - name: Monitor Summary
     url: dashboards/widgets/monitor_summary/
     parent: dashboards_widgets
-    weight: 25
+    weight: 26
   - name: Notes and Links
     url: dashboards/widgets/note/
     parent: dashboards_widgets
-    weight: 26
+    weight: 27
   - name: Query Value
     url: dashboards/widgets/query_value/
     parent: dashboards_widgets
-    weight: 27
+    weight: 28
   - name: Scatter Plot
     url: dashboards/widgets/scatter_plot/
     parent: dashboards_widgets
-    weight: 28
+    weight: 29
   - name: SLO Summary
     url: dashboards/widgets/slo/
     parent: dashboards_widgets
-    weight: 29
+    weight: 30
   - name: Service Map
     url: dashboards/widgets/service_map/
     parent: dashboards_widgets
-    weight: 30
+    weight: 31
   - name: Service Summary
     url: dashboards/widgets/service_summary/
     parent: dashboards_widgets
-    weight: 31
+    weight: 32
   - name: Table
     url: dashboards/widgets/table/
     parent: dashboards_widgets
-    weight: 32
+    weight: 33
   - name: Timeseries
     url: dashboards/widgets/timeseries/
     parent: dashboards_widgets
-    weight: 33
+    weight: 34
   - name: Top List
     url: dashboards/widgets/top_list/
     parent: dashboards_widgets
-    weight: 34
+    weight: 35
   - name: Querying
     url: dashboards/querying/
     parent: dashboards
@@ -872,10 +876,6 @@ main:
     url: infrastructure/livecontainers/legacy
     parent: infrastructure_livecontainers
     weight: 502
-  - name: Cloud Cost
-    url: infrastructure/cloud_cost_management/
-    parent: infrastructure
-    weight: 6
   - name: Serverless
     url: serverless
     pre: serverless
@@ -998,6 +998,11 @@ main:
     identifier: serverless_guides
     parent: serverless
     weight: 12
+  - name: Cloud Cost
+    url: cloud_cost_management/
+    pre: cloud-cost-management
+    parent: infrastructure_heading
+    weight: 110000
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1237,9 +1242,14 @@ main:
     parent: monitors_manage
     identifier: monitors_check_summary
     weight: 303
+  - name: Monitor Settings
+    url: monitors/settings/
+    weight: 4
+    parent: alerting
+    identifier: monitor_settings
   - name: Service Level Objectives
     url: monitors/service_level_objectives/
-    weight: 4
+    weight: 5
     parent: alerting
     identifier: slos
   - name: Incident Management
@@ -2210,6 +2220,11 @@ main:
     parent: dbm_setup_sql_server
     identifier: dbm_setup_sql_server_gcsql
     weight: 104
+  - name: Troubleshooting
+    url: database_monitoring/setup_sql_server/troubleshooting/
+    parent: dbm_setup_sql_server
+    identifier: dbm_troubleshooting_sql_server
+    weight: 107
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
@@ -3318,78 +3333,97 @@ main:
     identifier: dev_tools
     parent: essentials_heading
     weight: 210000
+  - name: Authorization
+    url: developers/authorization/
+    parent: dev_tools
+    identifier: dev_tools_authorization
+    weight: 1
+  - name: OAuth2 in Datadog
+    url: developers/authorization/oauth2_in_datadog/
+    parent: dev_tools_authorization
+    identifier: dev_tools_authorization_oauth2_in_datadog
+    weight: 101
+  - name: Authorization Endpoints 
+    url: developers/authorization/oauth2_endpoints/
+    parent: dev_tools_authorization
+    identifier: dev_tools_authorization_oauth2_endpoints
+    weight: 102
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
     identifier: dev_tools_dogstatsd
-    weight: 1
+    weight: 2
   - name: Datagram Format
     url: developers/dogstatsd/datagram_shell
     parent: dev_tools_dogstatsd
-    weight: 101
+    weight: 201
   - name: Unix Domain Socket
     url: /developers/dogstatsd/unix_socket
     parent: dev_tools_dogstatsd
-    weight: 102
+    weight: 202
   - name: High Throughput Data
     url: developers/dogstatsd/high_throughput/
     parent: dev_tools_dogstatsd
-    weight: 103
+    weight: 203
   - name: Data Aggregation
     url: developers/dogstatsd/data_aggregation/
     parent: dev_tools_dogstatsd
-    weight: 104
+    weight: 204
   - name: DogStatsD Mapper
     url: developers/dogstatsd/dogstatsd_mapper/
     parent: dev_tools_dogstatsd
-    weight: 105
+    weight: 205
   - name: Custom Checks
     url: developers/custom_checks/
     parent: dev_tools
     identifier: custom_checks
-    weight: 2
+    weight: 3
   - name: Writing a Custom Agent Check
     url: developers/custom_checks/write_agent_check/
     parent: custom_checks
-    weight: 201
+    weight: 301
   - name: Writing a Custom OpenMetrics Check
     url: developers/custom_checks/prometheus/
     parent: custom_checks
-    weight: 202
+    weight: 302
   - name: Integrations
     url: developers/integrations/
     parent: dev_tools
     identifier: dev_tools_integrations
-    weight: 3
+    weight: 4
   - name: Create a New Integration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
-    weight: 301
+    weight: 401
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 302
+    weight: 402
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 303
+    weight: 403
+  - name: OAuth for Data Integrations
+    url: developers/integrations/oauth_for_data_integrations
+    parent: dev_tools_integrations
+    weight: 404
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 304
+    weight: 405
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 305
+    weight: 406
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools
     identifier: marketplace
-    weight: 4
+    weight: 5
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
-    weight: 5
+    weight: 6
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
@@ -3410,7 +3444,7 @@ main:
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
     weight: 703
-  - name: IDE integrations
+  - name: IDE Integrations
     url: developers/ide_integrations/
     parent: dev_tools
     identifier: ide_integrations
@@ -5845,8 +5879,7 @@ api:
         - v1
       operationids:
         - GetSLOHistory
-      unstable:
-        - v1
+      unstable: []
       order: 6
   - name: Get Corrections For an SLO
     url: '#get-corrections-for-an-slo'
@@ -7370,6 +7403,86 @@ api:
         - ListAuthNMappings
       unstable: []
       order: 4
+  - name: CI Visibility Pipelines
+    url: /api/latest/ci-visibility-pipelines/
+    identifier: ci-visibility-pipelines
+    generated: true
+  - name: Search pipelines events
+    url: '#search-pipelines-events'
+    identifier: ci-visibility-pipelines-search-pipelines-events
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchCIAppPipelineEvents
+      unstable: []
+      order: 2
+  - name: Get a list of pipelines events
+    url: '#get-a-list-of-pipelines-events'
+    identifier: ci-visibility-pipelines-get-a-list-of-pipelines-events
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCIAppPipelineEvents
+      unstable: []
+      order: 1
+  - name: Aggregate pipelines events
+    url: '#aggregate-pipelines-events'
+    identifier: ci-visibility-pipelines-aggregate-pipelines-events
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateCIAppPipelineEvents
+      unstable: []
+      order: 3
+  - name: CI Visibility Tests
+    url: /api/latest/ci-visibility-tests/
+    identifier: ci-visibility-tests
+    generated: true
+  - name: Search tests events
+    url: '#search-tests-events'
+    identifier: ci-visibility-tests-search-tests-events
+    parent: ci-visibility-tests
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchCIAppTestEvents
+      unstable: []
+      order: 2
+  - name: Get a list of tests events
+    url: '#get-a-list-of-tests-events'
+    identifier: ci-visibility-tests-get-a-list-of-tests-events
+    parent: ci-visibility-tests
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCIAppTestEvents
+      unstable: []
+      order: 1
+  - name: Aggregate tests events
+    url: '#aggregate-tests-events'
+    identifier: ci-visibility-tests-aggregate-tests-events
+    parent: ci-visibility-tests
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateCIAppTestEvents
+      unstable: []
+      order: 3
   - name: Cloud Workload Security
     url: /api/latest/cloud-workload-security/
     identifier: cloud-workload-security

@@ -1,40 +1,58 @@
 ---
+app_id: journald
+app_uuid: 2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: journald
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - log collection
-creates_events: false
-ddtype: check
+- log collection
 dependencies:
-  - 'https://github.com/DataDog/integrations-core/blob/master/journald/README.md'
-display_name: journald
+- https://github.com/DataDog/integrations-core/blob/master/journald/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: journald
-guid: 845431ef-9092-4254-a188-138fc9273fa5
 integration_id: journald
 integration_title: journald
+integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: journald.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: journald
+oauth: {}
 public_title: journald
 short_description: Surveillez vos logs systemd-journald avec Datadog.
-support: core
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Surveillez vos logs systemd-journald avec Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: journald
 ---
+
+
+
 ## Présentation
 
 Systemd-journald est un service système qui recueille et stocke des données de journalisation.
@@ -62,7 +80,7 @@ Par défaut, les fichiers journal appartiennent au groupe système systemd-journ
 
 Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-Modifiez le fichier `journald.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos logs.
+Modifiez le fichier `journald.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos logs.
 
 #### Collecte de logs
 
@@ -87,20 +105,24 @@ Pour renseigner les attributs `source` et `service`, l'Agent recueille `SYSLOG_I
 [Redémarrez l'Agent][2].
 
 
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][5] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 #### Collecte de logs
 
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][6].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "journald", "service": "<NOM_VOTRE_APPLICATION>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -163,6 +185,7 @@ journald n'inclut aucun événement.
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [2]: https://app.datadoghq.com/account/settings#agent
