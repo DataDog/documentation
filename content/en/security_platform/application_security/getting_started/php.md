@@ -5,6 +5,9 @@ code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
+    - link: "/security_platform/application_security/add-user-info/"
+      tag: "Documentation"
+      text: "Adding User Information to Traces"
     - link: 'https://github.com/DataDog/dd-trace-php'
       tag: 'GitHub'
       text: 'PHP Datadog Tracer Library source code'
