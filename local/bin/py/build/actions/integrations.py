@@ -623,11 +623,16 @@ class Integrations:
         dir_path = dirname(normpath(file_name))
         dir_name = basename(dir_path)
         dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
+        collision_name = dir_name
+        manifest_json_path = f'{dir_path}/manifest.json'
         manifest_json = {}
-        with open(dir_path + '/manifest.json') as fp:
-            manifest_json = json.load(fp)
-        integration_id = manifest_json.get("integration_id", "") or manifest_json.get('app_id', "") or ""
-        collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
+
+        if exists(manifest_json_path):
+            with open(manifest_json_path) as fp:
+                manifest_json = json.load(fp)
+                integration_id = manifest_json.get("integration_id", "") or manifest_json.get('app_id', "") or ""
+                collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
+    
         return collision_name
 
     def process_integration_readme(self, file_name, marketplace=False):
