@@ -17,11 +17,11 @@ further_reading:
 
 {{< beta-callout url="https://www.datadoghq.com/log-forwarding-limited-availability/" >}}
   Log Forwarding is currently in beta. Fill out this form to request access.
-{{< /beta-callout >}} 
+{{< /beta-callout >}}
 
 ## Overview
 
-Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams’ workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
+Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams' workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
 
 {{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The Log Forwarding page, showing custom destinations highlighted. The list of destinations includes Splunk (filtered by service:logs-processing), HTTP Endpoint (filtered by source:okta OR source:paloalto), and Elasticsearch (filtered by team:acme env:prod)." >}}
 
@@ -41,35 +41,40 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 {{% tab "HTTP" %}}
 
 6. Enter a name for the destination. 
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
+7. In the **Define endpoint** field, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
+    - For example, if you want to send logs to Sumo Logic, follow their [Configure HTTP Source for Logs and Metrics documentation][1] to get the HTTP Source Address URL to send data to their collector. Enter the HTTP Source Address URL in the **Define endpoint** field.
 8. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
-    - Basic Authentication: Provide the username and password.
+    - Basic Authentication: Provide the username and password for the account to which you want to send logs.
     - Request Header: Provide the header name and value. 
 9. Click **Save**.
 
+[1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
 {{% /tab %}}
 
 {{% tab "Splunk" %}}
 
 6. Enter a name for the destination.
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
-8. In the **Configure Authentication** section, enter the Splunk HEC token. 
+7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, `https://<your_account>.splunkcloud.com:8088/services/collector`.
+8. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
 9. Click **Save**.
 
+[1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
 {{% /tab %}}
 
 {{% tab "Elasticsearch" %}}
 
 6. Enter a name for the destination.
 7. In the **Configure Destination** section, enter the following details:  
-    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`.  
+    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.  
     b. The name of the destination index where you want to send the logs.  
-    c. The index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`.  
-8. In the **Configure Authentication** section, enter the username and password. 
+    c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`.  
+8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
 9. Click **Save**.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+On the [Log Forwarding][3] page, hover over the status for a destination to see the percentage of logs that matched the filter criteria and have been forwarded in the past hour.
 
 ## Edit a destination
 1. Navigate to [Log Forwarding][3].
