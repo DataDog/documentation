@@ -19,8 +19,8 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  sales_email: sales@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -31,7 +31,7 @@ display_on_public_website: true
 draft: false
 git_integration_title: rapdev_github
 integration_id: rapdev-github
-integration_title: Rapdev GitHub
+integration_title: GitHub
 integration_version: ''
 is_public: true
 kind: integration
@@ -49,7 +49,7 @@ pricing:
   tag: repo_name
   unit_label: GitHub リポジトリ
   unit_price: 1
-public_title: Rapdev GitHub インテグレーション
+public_title: GitHub インテグレーション
 short_description: GitHub の組織やエンタープライズを監視する
 supported_os:
 - linux
@@ -79,7 +79,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Rapdev GitHub インテグレーション
+  title: GitHub インテグレーション
 ---
 
 
@@ -96,14 +96,14 @@ tile:
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
-- サポート: datadog-engineering@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-github" target="_blank">こちらをクリック</a>してください。

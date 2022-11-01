@@ -1,9 +1,9 @@
 ---
 aliases:
-- /ja/tracing/connect_logs_and_traces/php
-code_lang: php
-code_lang_weight: 70
-description: PHP ログとトレースを接続して Datadog で関連付けます。
+- /ja/tracing/connect_logs_and_traces/java
+code_lang: java
+code_lang_weight: 10
+description: Java ログとトレースを接続して Datadog で関連付けます。
 further_reading:
 - link: tracing/trace_collection/custom_instrumentation
   tag: ドキュメント
@@ -18,76 +18,75 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: PHP ログとトレースの接続
+title: Java ログとトレースの接続
 type: multi-code-lang
 ---
+## はじめに
+
+ログ収集が設定されていることを確認します。Log4j、Log4j 2、Logback の手順については、[Java ログ収集][1]を参照してください。
 
 ## 自動挿入
 
-PHP にロギングを実装するさまざまな方法があり<span class="x x-first x-last">、</span>PHP の組み込みエラーロギング API が完全に回避されている場合、Datadog PHP トレースライブラリは、トレースとスパン <span class="x x-first x-last">ID</span> をログに自動的に挿入できることが確実ではありません。
-PHP ログとトレースを手動で接続する方法については、以下のセクションをご覧ください。
+バージョン 0.74.0 以降、Java トレーサーは自動的にトレース相関識別子をログに挿入します。それ以前のバージョンでは、システムプロパティとして `dd.logs.injection=true` を追加するか、環境変数 `DD_LOGS_INJECTION=true` を使用して、Java トレーサーの自動挿入を有効にします。コンフィギュレーションの詳細については、[Java トレーサーのコンフィギュレーション][2]ページを参照してください。
+
+**注**: トレース ID の `attribute.path` が `dd.trace_id` では*ない* 場合は’、当該トレース ID の `attribute.path` 向け予約済み属性設定アカウントを確認してください。詳しくは、[関連するログがトレース ID パネルに表示されない][3]を参照してください。
 
 ## 手動挿入
 
-<div class="alert alert-warning">
-注: 関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入されています。
-</div>
+手動でトレースとログに相関性を持たせたい場合は、Java トレーサーの API を使用して相関識別子を取得します。`CorrelationIdentifier.getTraceId` および `CorrelationIdentifier.getSpanId` メソッドを使用して、ログに記録されるスパンの先頭に識別子を挿入し、スパンの完了時に識別子を削除します。
 
-ログとトレースを一緒に接続するには、ログに、それぞれトレース ID とスパン ID を含む `dd.trace_id` 属性と `dd.span_id` 属性が含まれている必要があります。
+{{< tabs >}}
+{{% tab "Log4j 2" %}}
 
-[Datadog ログインテグレーション][1]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされ、[トレースリマッパー][2]のおかげで再マップされていることを確実にする必要があります。詳細については、[関連するログがトレースIDパネルに表示されない][3]を参照してください。
+```java
+import org.apache.logging.log4j.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
 
-たとえば、次でこの 2 つの属性をログに追加します。
+// このブロックより前に開始し、アクティブなスパンがある必要があります。
+try {
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
 
-```php
-  <?php
-  $context = \DDTrace\current_context();
-  $append = sprintf(
-      ' [dd.trace_id=%d dd.span_id=%d]',
-      $context['trace_id'],
-      $context['span_id']
-  );
-  my_error_logger('Error message.' . $append);
-?>
+// 何かをログ
+
+} finally {
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
+}
 ```
 
-ロガーが [**monolog/monolog** ライブラリ][4]を実装する場合、`Logger::pushProcessor()` を使ってすべてのログメッセージに識別子を自動的に付加します:
+{{% /tab %}}
+{{% tab "SLF4J and Logback" %}}
 
-```php
-<?php
-  $logger->pushProcessor(function ($record) {
-      $context = \DDTrace\current_context();
-      $record['message'] .= sprintf(
-          ' [dd.trace_id=%d dd.span_id=%d]',
-          $context['trace_id'],
-          $context['span_id']
-      );
-      return $record;
-  });
-?>
+```java
+import org.slf4j.MDC;
+import datadog.trace.api.CorrelationIdentifier;
+
+// このブロックより前に開始し、アクティブなスパンがある必要があります。
+try {
+    MDC.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    MDC.put("dd.span_id", CorrelationIdentifier.getSpanId());
+
+// 何かをログ
+
+} finally {
+    MDC.remove("dd.trace_id");
+    MDC.remove("dd.span_id");
+}
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-アプリケーションで、ログメッセージに trace_id および span_id を付加するのではなく json ログフォーマットを使用している場合は、以下の ID を含む一時レベルキー "dd" を追加できます。
+**注**: ログのパースに [Datadog ログインテグレーション][4]を使用していない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされていることを確認する必要があります。詳しくは、[関連するログがトレース ID パネルに表示されない][5]を参照してください。
 
-```php
-<?php
-  $context = \DDTrace\current_context();
-  $logger->pushProcessor(function ($record) use ($context) {
-      $record['dd'] = [
-          'trace_id' => $context['trace_id'],
-          'span_id'  => $context['span_id'],
-      ];
+特定のロガー実装の詳細や JSON 形式でのログ方法については、[Java ログ収集のドキュメントを参照してください][1]。
 
-      return $record;
-  });
-?>
-```
-
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_collection/php/
-[2]: /ja/logs/log_configuration/processors/#trace-remapper
-[3]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
-[4]: https://github.com/Seldaek/monolog
+[1]: /ja/logs/log_collection/java/
+[2]: /ja/tracing/trace_collection/dd_libraries/java/
+[3]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?
+[4]: /ja/logs/log_collection/java/#raw-format
+[5]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom

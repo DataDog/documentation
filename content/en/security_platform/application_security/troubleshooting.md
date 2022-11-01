@@ -1,25 +1,25 @@
 ---
-title: Troubleshooting Application Security Monitoring
+title: Troubleshooting Application Security Management
 kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security Monitoring"
+  text: "Monitoring Threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
-  text: "Get Started Using Application Security Monitoring to Detect Threats"
+  text: "Get Started Using Application Security Management to Detect Threats"
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
 - link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Monitoring Works in Datadog"
+  text: "How Application Security Management Works in Datadog"
 ---
 
 
 ## Overview
 
-If you experience unexpected behavior with Datadog Application Security Monitoring (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
+If you experience unexpected behavior with Datadog Application Security Management (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
 ## ASM rate limits
 
@@ -156,7 +156,7 @@ ASM relies on certain tracer integrations. If they are deactivated, ASM won't wo
 
 The required integrations vary by language.
 
-{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS" >}}
+{{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,NodeJS,python" >}}
 {{< programming-lang lang="java" >}}
 
 For [Java][1], if you are using any of the following technologies, the respective integration is required:
@@ -189,7 +189,7 @@ For [.NET][1], the ASP.NET integration is required.
 {{< programming-lang lang="PHP" >}}
 
 There are no required integrations for [PHP][1].
-
+<p></p>
 
 [1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
@@ -216,7 +216,7 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 {{< programming-lang lang="NodeJS" >}}
 
 For [NodeJS][1], the HTTP integration is required.
-
+<p></p>
 
 [1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
@@ -232,6 +232,15 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /tracing/trace_collection/dd_libraries/ruby/#rails
 [5]: /tracing/trace_collection/dd_libraries/ruby/#sinatra
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+For [Python][1], the WSGI integration is required along with the integration for the
+framework you're using, such as the Django or Flask integration.
+<p></p>
+
+[1]: /security_platform/application_security/setup_and_configure/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

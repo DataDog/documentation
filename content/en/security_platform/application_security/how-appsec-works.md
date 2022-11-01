@@ -1,5 +1,5 @@
 ---
-title: How Application Security Monitoring Works in Datadog
+title: How Application Security Management Works in Datadog
 kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
@@ -12,16 +12,18 @@ further_reading:
   text: "Introducing Datadog Application Security"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
-  text: "Get started with Application Security Monitoring"
+  text: "Get started with Application Security Management"
 ---
 
 ## Overview
 
-Datadog Application Security Monitoring (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities.
+Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into any bad actors targeting your systems.
 
 APM records information about each HTTP request, referred to as traces. Datadog ASM uses the information APM is already collecting, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are an aggregation of suspicious requests. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For ASM to be effective, it must be embedded in the application to get access to the data. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal to noise ratio, lowering false positives.
+
+Datadog ASM identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
 
 ## Compatibility
 
@@ -76,7 +78,7 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [1]: /tracing/trace_collection/
 [2]: /security_platform/application_security/getting_started/#prerequisites
 [3]: /tracing/configure_data_security/?tab=http
-[4]: /security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[4]: /security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 [5]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [6]: /security_platform/default_rules/#cat-application-security
 [7]: https://app.datadoghq.com/security/appsec/event-rules

@@ -144,7 +144,7 @@ Datadog can also enrich the collected telemetry with existing AWS resource tags 
 
 ## Collect the request and response payloads
 
-<div class="alert alert-info">This feature is currently supported for Python, Node.js, Java, and .NET.</div>
+<div class="alert alert-info">This feature is currently supported for Python, Node.js, and .NET.</div>
 
 Datadog can [collect and visualize the JSON request and response payloads of AWS Lambda functions][5], giving you deeper insight into your serverless applications and helping troubleshoot Lambda function failures.
 
@@ -370,15 +370,15 @@ For high throughput services, there’s usually no need for you to collect every
 
 The default sampling mechanism for ingestion is called [head-based sampling][19]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header. Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, you must configure the sampling rate on the root service to take effect.
 
-After spans have been ingested by Datadog, the Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. You can also define custom [retention filters][38] to index trace data you want to keep for longer to support your organization's goals.
+After spans have been ingested by Datadog, the Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. You can also define custom [retention filters][20] to index trace data you want to keep for longer to support your organization's goals.
 
-Learn more about the [Datadog Trace Pipeline][39].
+Learn more about the [Datadog Trace Pipeline][21].
 
 ## Filter or scrub sensitive information from traces
 
-To filter traces before sending them to Datadog, see [Ignoring Unwanted Resources in APM][20].
+To filter traces before sending them to Datadog, see [Ignoring Unwanted Resources in APM][22].
 
-To scrub trace attributes for data security, see [Configure the Datadog Agent or Tracer for Data Security][21].
+To scrub trace attributes for data security, see [Configure the Datadog Agent or Tracer for Data Security][23].
 
 ## Disable trace collection
 
@@ -437,7 +437,7 @@ Set the environment variable `DD_TRACE_ENABLED` to `false` on your Lambda functi
 
 If you are using the [Lambda extension][2] to collect traces and logs, Datadog automatically adds the AWS Lambda request ID to the `aws.lambda` span under the `request_id` tag. Additionally, Lambda logs for the same request are added under the `lambda.request_id` attribute. The Datadog trace and log views are connected using the AWS Lambda request ID.
 
-If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][22]). 
+If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][24]). 
 
 If you are using a runtime or custom logger that isn't supported, follow these steps:
 - When logging in JSON, you need to obtain the Datadog trace ID using `dd-trace` and add it to your logs under the `dd.trace_id` field:
@@ -454,13 +454,13 @@ If you are using a runtime or custom logger that isn't supported, follow these s
     1. Obtain the Datadog trace ID using `dd-trace` and add it to your log.
     2. Clone the default Lambda log pipeline, which is read-only.
     3. Enable the cloned pipeline and disable the default one.
-    4. Update the [Grok parser][23] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
+    4. Update the [Grok parser][25] rules of the cloned pipeline to parse the Datadog trace ID into the `dd.trace_id` attribute. For example, use rule `my_rule \[%{word:level}\]\s+dd.trace_id=%{word:dd.trace_id}.*` for logs that look like `[INFO] dd.trace_id=4887065908816661012 My log message`.
 
 ## Link errors to your source code
 
 <div class="alert alert-info">This feature is supported for Go and Java.</div>
 
-[Datadog source code integration][24] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in GitHub. Follow the instructions below to enable the feature. **Note**: You must deploy from a local Git repository that is neither dirty nor ahead of remote.
+[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in GitHub. Follow the instructions below to enable the feature. **Note**: You must deploy from a local Git repository that is neither dirty nor ahead of remote.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -542,29 +542,79 @@ export class ExampleStack extends cdk.Stack {
 
 ## Submit custom metrics
 
-You can monitor your custom business logic by [submitting custom metrics][25].
+You can monitor your custom business logic by [submitting custom metrics][27].
 
 ## Send telemetry over PrivateLink or proxy
 
-The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][26] to the `datadoghq.com` [Datadog site][27], or [send data over a proxy][28] for all other sites.
+The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][28] to the `datadoghq.com` [Datadog site][29], or [send data over a proxy][30] for all other sites.
 
-If you are using the Datadog Forwarder, follow these [instructions][29].
+If you are using the Datadog Forwarder, follow these [instructions][31].
 
 ## Send telemetry to multiple Datadog organizations
 
-If you wish to send data to more than one Datadog organization, follow the instructions for [dual shipping][30] and include the file `datadog.yaml` in the root directory of your project.
+If you wish to send data to mutliple organizations, you can enable dual shipping using a plaintext API key, AWS Secrets Manager, or AWS KMS.
+
+{{< tabs >}}
+{{% tab "Plaintext API Key" %}}
+
+You can enable dual shipping using a plaintext API key by setting the following environment variables on your Lambda function.
+
+```bash
+# Enable dual shipping for metrics
+DD_ADDITIONAL_ENDPOINTS={"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for APM (traces)
+DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for APM (profiling)
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# Enable dual shipping for logs
+DD_LOGS_CONFIG_USE_HTTP=true
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
+```
+
+{{% /tab %}}
+{{% tab "AWS Secrets Manager" %}}
+
+The Datadog Extension supports retrieving [AWS Secrets Manager][40] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
+
+1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
+2. Add the `secretsmanager:GetSecretValue` permission to your Lambda function IAM role permissions.
+3. Create a new secret on Secrets Manager to store the dual shipping metrics environment variable. The contents should be similar to `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}`.
+4. Set the environment variable `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function to the ARN from the aforementioned secret.
+5. Create a new secret on Secrets Manager to store the dual shipping APM (traces) environment variable. The contents should be **similar** to `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`.
+6. Set the environment variable `DD_APM_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+7. Create a new secret on Secrets Manager to store the dual shipping APM (profiling) environment variable. The contents should be **similar** to `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`.
+8. Set the environment variable `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+9. Create a new secret on Secrets Manager to store the dual shipping logs environment variable. The contents should be **similar** to `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`.
+10. Set the environment variable `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+
+{{% /tab %}}
+{{% tab "AWS KMS" %}}
+
+The Datadog Extension supports decrypting [AWS KMS][41] values automatically for any environment variables prefixed with `_KMS_ENCRYPTED`. You can use this to securely store your environment variables in KMS and dual ship with Datadog.
+
+1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
+2. Add the `kms:GenerateDataKey` and `kms:Decrypt` permissions to your Lambda function IAM role permissions.
+3. For dual shipping metrics, encrypt `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
+4. For dual shipping traces, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_ADDITIONAL_KMS_ENCRYPTED` environment variable equal to its value.
+5. For dual shipping profiling, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
+5. For dual shipping logs, encrypt `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` using KMS and set the `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For more advanced usage, see the [Dual Shipping guide][32].
 
 ## Propagate trace context over AWS resources
 
-Datadog automatically injects the trace context into outgoing AWS SDK requests and extracts the trace context from the Lambda event. This enables Datadog to trace a request or transaction over distributed services. See [Serverless Trace Propagation][31].
+Datadog automatically injects the trace context into outgoing AWS SDK requests and extracts the trace context from the Lambda event. This enables Datadog to trace a request or transaction over distributed services. See [Serverless Trace Propagation][33].
 
 ## Merge X-Ray and Datadog traces
 
-AWS X-Ray supports tracing through certain AWS managed services such as AppSync and Step Functions, which is not supported by Datadog APM natively. You can enable the [Datadog X-Ray integration][32] and merge the X-Ray traces with the Datadog native traces. See [additional details][33].
+AWS X-Ray supports tracing through certain AWS managed services such as AppSync and Step Functions, which is not supported by Datadog APM natively. You can enable the [Datadog X-Ray integration][34] and merge the X-Ray traces with the Datadog native traces. See [additional details][35].
 
 ## Enable AWS Lambda code signing
 
-[Code signing for AWS Lambda][34] helps to ensure that only trusted code is deployed from your Lambda functions to AWS. When you enable code signing on your functions, AWS validates that all of the code in your deployments is signed by a trusted source, which you define from your code signing configuration.
+[Code signing for AWS Lambda][36] helps to ensure that only trusted code is deployed from your Lambda functions to AWS. When you enable code signing on your functions, AWS validates that all of the code in your deployments is signed by a trusted source, which you define from your code signing configuration.
 
 If your Lambda functions are configured to use code signing, you must add Datadog's Signing Profile ARN to your function's code signing configuration before you can deploy Lambda functions using Lambda Layers published by Datadog.
 
@@ -576,9 +626,9 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 
 ## Migrate to the Datadog Lambda extension
 
-Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. If you are unsure, see [Deciding to migrate to the Datadog Lambda extension][35].
+Datadog can collect the monitoring data from your Lambda functions either using the [Forwarder Lambda function][4] or the [Lambda extension][2]. Datadog recommends the Lambda extension for new installations. If you are unsure, see [Deciding to migrate to the Datadog Lambda extension][37].
 
-To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][36]. For your convenience, the key differences are summarized below.
+To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][38]. For your convenience, the key differences are summarized below.
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
 
@@ -639,7 +689,7 @@ To test your Lambda function's container image locally with the Datadog Lambda e
 
 ## Troubleshoot
 
-If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][37].
+If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][39].
 
 ## Further Reading
 
@@ -666,23 +716,25 @@ If you have trouble configuring your installations, set the environment variable
 [17]: /tracing/trace_pipeline/ingestion_controls/#configure-the-service-ingestion-rate
 [18]: /tracing/guide/trace_ingestion_volume_control#effects-of-reducing-trace-ingestion-volume
 [19]: /tracing/trace_pipeline/ingestion_mechanisms/?tabs=environmentvariables#head-based-sampling
-[20]: /tracing/guide/ignoring_apm_resources/
-[21]: /tracing/configure_data_security/
-[22]: /tracing/other_telemetry/connect_logs_and_traces/
-[23]: /logs/log_configuration/parsing/
-[24]: /integrations/guide/source-code-integration
-[25]: /serverless/custom_metrics
-[26]: /agent/guide/private-link/
-[27]: /getting_started/site/
-[28]: /agent/proxy/
-[29]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
-[30]: /agent/guide/dual-shipping/
-[31]: /serverless/distributed_tracing/serverless_trace_propagation/
-[32]: /integrations/amazon_xray/
-[33]: /serverless/distributed_tracing/serverless_trace_merging
-[34]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
-[35]: /serverless/guide/extension_motivation/
-[36]: /serverless/guide#install-using-the-datadog-forwarder
-[37]: /serverless/guide/troubleshoot_serverless_monitoring/
-[38]: /tracing/trace_pipeline/trace_retention/
-[39]: /tracing/trace_pipeline/
+[20]: /tracing/trace_pipeline/trace_retention/
+[21]: /tracing/trace_pipeline/
+[22]: /tracing/guide/ignoring_apm_resources/
+[23]: /tracing/configure_data_security/
+[24]: /tracing/other_telemetry/connect_logs_and_traces/
+[25]: /logs/log_configuration/parsing/
+[26]: /integrations/guide/source-code-integration
+[27]: /serverless/custom_metrics
+[28]: /agent/guide/private-link/
+[29]: /getting_started/site/
+[30]: /agent/proxy/
+[31]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
+[32]: /agent/guide/dual-shipping/
+[33]: /serverless/distributed_tracing/serverless_trace_propagation/
+[34]: /integrations/amazon_xray/
+[35]: /serverless/distributed_tracing/serverless_trace_merging
+[36]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
+[37]: /serverless/guide/extension_motivation/
+[38]: /serverless/guide#install-using-the-datadog-forwarder
+[39]: /serverless/guide/troubleshoot_serverless_monitoring/
+[40]: https://aws.amazon.com/secrets-manager/
+[41]: https://aws.amazon.com/kms/

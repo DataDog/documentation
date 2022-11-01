@@ -1,40 +1,60 @@
 ---
+app_id: zabbix
+app_uuid: 9b7022c4-95c7-4872-83b6-7eaba2cc9d88
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: zabbix.system.uptime
+      metadata_path: metadata.csv
+      prefix: zabbix.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Zabbix
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: KosukeKamiya@users.noreply.github.com
+  support_email: KosukeKamiya@users.noreply.github.com
 categories:
 - ネットワーク
 - モニタリング
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
-display_name: Zabbix
+display_on_public_website: true
 draft: false
 git_integration_title: zabbix
-guid: bf1fa08e-3df3-40b7-ab1d-1ba685c3057d
 integration_id: zabbix
 integration_title: zabbix
 integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: KosukeKamiya@users.noreply.github.com
-manifest_version: 1.0.0
-metric_prefix: zabbix.
-metric_to_check: zabbix.system.uptime
+manifest_version: 2.0.0
 name: zabbix
+oauth: {}
 public_title: zabbix
 short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: zabbix
 ---
 
 

@@ -1,46 +1,65 @@
 ---
-aliases:
-- /ja/xenserver
+app_id: citrix-hypervisor
+app_uuid: cf4ad6ea-85ae-4f7d-8e79-7b8d36924425
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: citrix_hypervisor.host.cpu
+      metadata_path: metadata.csv
+      prefix: citrix_hypervisor.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Citrix Hypervisor
   logs:
     source: citrix_hypervisor
-  metrics_metadata: metadata.csv
   monitors:
     Host CPU high: assets/recommended_monitors/host_cpu_high.json
     VM CPU high: assets/recommended_monitors/vm_cpu_high.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md
-display_name: Citrix Hypervisor
+display_on_public_website: true
 draft: false
 git_integration_title: citrix_hypervisor
-guid: d6c1911b-f7fd-4537-af4f-1aa40dae40c2
 integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: citrix_hypervisor.
-metric_to_check: citrix_hypervisor.host.cpu
+manifest_version: 2.0.0
 name: citrix_hypervisor
+oauth: {}
 public_title: Citrix Hypervisor
 short_description: Citrix Hypervisor ホストの健全性とパフォーマンスを監視します。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Cloud
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Citrix Hypervisor ホストの健全性とパフォーマンスを監視します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Citrix Hypervisor
 ---
 
 
@@ -114,6 +133,11 @@ Citrix Hypervisor インテグレーションには、イベントは含まれ�
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog を使用した Citrix Hypervisor パフォーマンスの監視][11]
 
 [1]: https://www.citrix.com/products/citrix-hypervisor/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
@@ -125,3 +149,4 @@ Citrix Hypervisor インテグレーションには、イベントは含まれ�
 [8]: https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/assets/service_checks.json
 [10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/monitor-citrix-hypervisor-datadog/

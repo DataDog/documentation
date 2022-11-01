@@ -63,7 +63,7 @@ There are a few different types of offerings that you can list on the Datadog In
 3. SaaS license or subscription (Marketplace only)
 4. Professional services (Marketplace only)
 
-Regardless of the type of offering that you are developing, a tile that represents your listing needs to be created for either the Marktplace or Integrations page. You can see an example of a Marketplace tile below:
+Regardless of the type of offering that you are developing, a tile that represents your listing needs to be created for either the Marketplace or Integrations page. You can see an example of a Marketplace tile below:
 
 {{< img src="developers/marketplace/marketplace-tile-example.png" alt="Example Marketplace tile"  >}}
 
@@ -181,7 +181,7 @@ For standalone SaaS licenses, Datadog Apps, and professional services--or if you
 In the `marketplace` or `integrations-extras` directory you specified above, run: 
 
 ```
-ddev create -t tile -v2 "<Offering Name>"
+ddev create -t tile "<Offering Name>"
 ```
 
 #### Full data integration
@@ -189,7 +189,7 @@ ddev create -t tile -v2 "<Offering Name>"
 To generate a complete data integration scaffolding, from the `marketplace` or `integrations-extras` directory specified above, run: 
 
 ```
-ddev create -v2 "<Offering Name>"
+ddev create "<Offering Name>"
 ```
 
 ### Populate the tile scaffolding

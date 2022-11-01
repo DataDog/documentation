@@ -1,7 +1,6 @@
 ---
 title: Error Tracking Explorer
 kind: documentation
-beta: false
 ---
 
 {{< img src="tracing/error_tracking/error_tracking_explore_inspect.png" alt="Error Tracking Explorer"  >}}

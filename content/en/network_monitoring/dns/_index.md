@@ -1,7 +1,7 @@
 ---
 title: DNS Monitoring
 kind: documentation
-description: Diagnose and debug DNS server issues  
+description: Diagnose and debug DNS server issues
 aliases:
     - /network_performance_monitoring/network_table
     - /network_performance_monitoring/dns_monitoring
@@ -42,9 +42,9 @@ Are you looking for Network Device Monitoring instead? See the [NDM setup instru
 
 ## Queries
 
-Use the source and destination search bars at the top of the page to query for dependencies between a client (_source_), which makes the DNS request, and a DNS server (_destination_), which responds to the DNS request. The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format. 
+Use the source and destination search bars at the top of the page to query for dependencies between a client (_source_), which makes the DNS request, and a DNS server (_destination_), which responds to the DNS request. The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
 
-To refine your search to a particular client, aggregate and filter DNS traffic using tags in the source search bar. In the default view, the source is aggregated by the `service` tag. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server. 
+To refine your search to a particular client, aggregate and filter DNS traffic using tags in the source search bar. In the default view, the source is aggregated by the `service` tag. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
 
 {{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring default view"  style="width:100%;">}}
 
@@ -62,7 +62,7 @@ This example shows all flows from pods in the production environment’s availab
 
 ## Metrics
 
-Your DNS metrics are displayed through the graphs and the associated table. 
+Your DNS metrics are displayed through the graphs and the associated table.
 
 **Note:** Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
 
@@ -104,5 +104,5 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 
 
 [1]: /network_monitoring/performance/
-[2]: /network_monitoring/devices/setup?tab=snmpv2
+[2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [3]: /network_monitoring/performance/network_page#table

@@ -49,7 +49,7 @@ To access the context menu, first hover over an individual category: this can be
 
 ### Full-screen
 
-Viewing the pie chart widget in full-screen reveals the standard set of [full-screen options][5].
+Viewing the treemap widget in full-screen reveals the standard set of [full-screen options][5].
 
 ## API
 

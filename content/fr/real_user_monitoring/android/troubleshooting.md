@@ -3,10 +3,10 @@ dependencies:
 - https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: Code source dd-sdk-android
 - link: /real_user_monitoring
-  tag: Page d'accueil
+  tag: Documentation
   text: Explorer le service RUM de Datadog
 kind: documentation
 title: Dépannage
@@ -42,18 +42,6 @@ Pour mettre à jour le consentement au suivi une fois le SDK lancé, effectuez l
 
 - Si vous la remplacez par `TrackingConsent.GRANTED` : le SDK envoie tous les lots de données actuels, ainsi que toutes les données ultérieures, directement au endpoint de collecte de données.
 - Si vous la remplacez par `TrackingConsent.NOT_GRANTED` : le SDK supprime tous les lots de données et ne recueille plus aucune donnée par la suite.
-
-## Échantillonner des sessions RUM
-
-Pour contrôler les données que votre application envoie au service RUM de Datadog, vous pouvez spécifier un taux d'échantillonnage pour les sessions RUM lors de l'[initialisation du RumMonitor][1]. Ce taux est défini sous forme de pourcentage entre 0 et 100.
-
-```kotlin
-val monitor = RumMonitor.Builder()
-        // Ici, 75 % des sessions RUM sont envoyées à Datadog
-        .sampleRumSessions(75.0f)
-        .build()
-GlobalRum.registerIfAbsent(monitor)
-```
 
 ## Envoi de données lorsque l'appareil est hors ligne
 
@@ -94,7 +82,7 @@ logger = new Logger.Builder()
 ```
 
 
-### Attributs
+### Attributes
 
 Dans les anciennes versions, l'ajout ou la suppression d'un attribut se faisait avec les méthodes `Logger.addField()` et `Logger.removeField()`. Ces méthodes ont été renommées par souci de cohérence et s'intitulent désormais `Logger.addAttribute()` et `Logger.removeAttribute()`. Leur comportement reste le même.
 
@@ -102,5 +90,3 @@ Dans les anciennes versions, l'ajout ou la suppression d'un attribut se faisait 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://docs.datadoghq.com/fr/real_user_monitoring/android/

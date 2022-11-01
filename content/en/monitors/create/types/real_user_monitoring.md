@@ -20,13 +20,13 @@ further_reading:
 
 ## Overview
 
-Once [Real User Monitoring is enabled][1] for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
+Once [Real User Monitoring (RUM) is enabled][1] for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
 ## Create a RUM monitor
 
-To create a Real User Monitoring monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Real User Monitoring**][2].
+To create a RUM monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Real User Monitoring**][2].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1,000 RUM monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 RUM monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -70,11 +70,11 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 
 For example, this monitor triggers if and only if there are no RUM events for all applications:
 
-  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="Below monitor split by application" style="width:70%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="The monitor configuration page with the search query left blank, set to the count of all RUM events and grouped by @application.id over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
 
 And this monitor triggers if there are no logs for the application `Shop.ist`:
 
-  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="Below monitor for given application" style="width:70%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="The monitor configuration page with Application Id:Shopist entered in the search query, set to the count of all RUM events matching that application over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
 
 #### Advanced alert conditions
 

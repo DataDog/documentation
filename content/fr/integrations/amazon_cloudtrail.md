@@ -1,17 +1,17 @@
 ---
 aliases:
-  - /fr/integrations/awscloudtrail/
-  - /fr/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/
-  - /fr/integrations/amazon_cloudtrail/
+- /fr/integrations/awscloudtrail/
+- /fr/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/
+- /fr/integrations/amazon_cloudtrail/
 categories:
-  - cloud
-  - monitoring
-  - aws
-  - log collection
-  - security
-ddtype: crawler
+- cloud
+- monitoring
+- aws
+- log collection
+- security
 dependencies: []
-description: Recevez des alertes concernant toute activité suspecte sur un compte AWS.
+description: Recevez des alertes concernant toute activité suspecte sur un compte
+  AWS.
 doc_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
 draft: false
 git_integration_title: amazon_cloudtrail
@@ -23,10 +23,12 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_cloudtrail
-public_title: "Intégration Datadog/AWS\_CloudTrail"
-short_description: Recevez des alertes concernant toute activité suspecte sur un compte AWS.
+public_title: Intégration Datadog/AWS CloudTrail
+short_description: Recevez des alertes concernant toute activité suspecte sur un compte
+  AWS.
 version: '1.0'
 ---
+
 ## Présentation
 
 AWS CloudTrail fournit un journal d'audit pour votre compte AWS. Datadog consulte ce journal d'audit et crée des événements. Effectuez des recherches sur ces événements au sein de votre flux d'événements Datadog ou utilisez-les pour corréler des éléments dans vos dashboards. Voici un exemple d'événement CloudTrail :
@@ -83,19 +85,20 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-Lorsque vous définissez vos journaux de suivi, sélectionnez un compartiment S3 dans lequel écrire les logs :
-
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Journalisation CloudTrail" popup="true" style="width:70%;">}}
+Dans AWS CloudTrail, [créez un journal de suivi][7] et sélectionnez un compartiment S3 dans lequel écrire les logs.
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][7].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs CloudTrail dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
-   Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs CloudTrail et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add :
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][8] dans votre compte AWS.
+2. Une fois configuré, accédez à la fonction Lambda du Forwarder Datadog. Dans la section Présentation de Functions, cliquez sur **Add Trigger**.
+3. Sélectionnez le déclencheur **S3** pour la Trigger Configuration.
+4. Sélectionnez le compartiment S3 où se trouvent vos logs CloudTrail.
+5. Ne changez pas le type d'événements `All object create events`.
+6. Cliquez sur **Add** pour ajouter le déclencheur à votre fonction Lambda.
 
-Une fois ces étapes terminées, les logs s'affichent dans votre [Datadog Log Explorer][8].
+Accédez au [Log Explorer][9] pour commencer à explorer vos logs.
+
+Pour en savoir plus sur la collecte de logs de service AWS, consultez la section [Envoyer des logs de service AWS avec la fonction Lambda Datadog][10].
 
 ## Données collectées
 
@@ -105,7 +108,7 @@ L'intégration AWS CloudTrail n'inclut aucune métrique.
 
 ### Événements
 
-L'intégration AWS CloudTrail crée de nombreux événements en fonction du journal d'audit AWS CloudTrail. Tous les événements dans votre [flux d'événements][9] Datadog se voient assigner le tag `#cloudtrail`. Vous pouvez définir leur priorité dans la configuration de l'intégration.
+L'intégration AWS CloudTrail crée de nombreux événements basés sur le journal d'audit AWS CloudTrail. Tous les événements dans votre [flux d'événements][11] Datadog se voient assigner le tag `#cloudtrail`. Vous pouvez définir leur priorité dans la configuration de l'intégration.
 
 Voici la liste des événements CloudTrail qui peuvent avoir une priorité normale (afin de s'afficher dans le flux d'événements sous le filtre par défaut) :
 
@@ -148,7 +151,7 @@ L'intégration AWS CloudTrail n'inclut aucun check de service.
 
 ### Le carré CloudTrail ne s'affiche pas ou aucun compte n'est indiqué
 
-Pour configurer le carré CloudTrail, vous devez d'abord configurer le [carré Amazon Web Services][10].
+Pour configurer le carré CloudTrail, vous devez d'abord configurer le [carré Amazon Web Services][12].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudtrail
@@ -156,7 +159,9 @@ Pour configurer le carré CloudTrail, vous devez d'abord configurer le [carré A
 [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html
 [5]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
 [6]: https://docs.datadoghq.com/fr/help/
-[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[8]: https://app.datadoghq.com/logs
-[9]: https://docs.datadoghq.com/fr/events/
-[10]: https://docs.datadoghq.com/fr/integrations/aws/
+[7]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html
+[8]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
+[9]: https://app.datadoghq.com/logs
+[10]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[11]: https://docs.datadoghq.com/fr/events/
+[12]: https://docs.datadoghq.com/fr/integrations/aws/

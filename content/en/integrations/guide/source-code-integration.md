@@ -19,7 +19,7 @@ Combined with the GitHub Apps integrations, you can see inline code snippets in 
 ## Configuration
 
 <div class="alert alert-info">
-The source code integration supports Go and all JVM languages.
+The source code integration supports Go, Java, JavaScript, and Python.
 <br>
 Datadog Agent 7.35.0 or higher is required.
 </div>
@@ -51,7 +51,8 @@ To link data to a specific commit, tag your telemetry with `git.commit.sha` and 
 {{% tab "Docker Runtime" %}}
 
 <div class="alert alert-warning">
-This approach requires Docker, or containerd >= 1.5.6. For other container setups, see the "Other" section.
+This approach requires Docker, or containerd >= 1.5.6. It doesn't support containers running on AWS Fargate.
+For other container setups, see the "Other" section.
 </div>
 
 If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as Docker labels:
@@ -60,7 +61,7 @@ If you are running your app in containers, Datadog can extract source code infor
 docker build . \
   -t my-application \
   --label org.opencontainers.image.revision=$(git rev-parse HEAD) \
-  --label org.opencontainers.image.source=https://git-provider.example/me/my-repo
+  --label org.opencontainers.image.source=git-provider.example/me/my-repo
 ```
 
 [1]: https://github.com/opencontainers/image-spec/blob/859973e32ccae7b7fc76b40b762c9fff6e912f9e/annotations.md#pre-defined-annotation-keys
@@ -70,7 +71,7 @@ docker build . \
 If you use Kubernetes, tag your deployed pod with a pod annotation using [Datadog's Tag Autodiscovery][1]:
 
 ```
-ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.repository_url": "<REPOSITORY_URL>"}'
+ad.datadoghq.com/tags: '{"git.commit.sha": "<FULL_GIT_COMMIT_SHA>", "git.repository_url": "git-provider.example/me/my-repo"}'
 ```
 
 The git commit SHA and repository URL are added to your telemetry.
@@ -84,7 +85,7 @@ For non-containerized or unsupported environments, manually tag your traces, spa
 To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:
 
 ```
-export DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA> git.repository_url=<REPOSITORY_URL>"
+export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA> git.repository_url:git-provider.example/me/my-repo"
 ./my-application start
 ```
 

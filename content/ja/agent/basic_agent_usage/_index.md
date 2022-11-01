@@ -147,7 +147,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [SUSE Enterprise Linux][7] (SysVinit を使用) | Agent 6.16.0/7.16.0 - 6.33.0/7.33.0 の SUSE 11 SP4        |
 | [OpenSUSE][7] (systemd を使用)               | Agent 6.33.0+/7.33.0+ の OpenSUSE 15+                     |
 | [Fedora][8]                              | Fedora 26 以上                                                |
-| [macOS][9]                               | macOS 10.12 以上                                              |
+| [macOS][9]                               | macOS 10.12+ は Agent < 6.35.0/7.35.0、 macOS 10.13+ は Agent < 7.39.0、macOS 10.14+ は Agent 7.39.0+ |
 | [Windows Server][10]                     | Windows Server 2008 R2+ (Server Core を含む)           |
 | [Windows][10]                            | Windows 7 以上                                                |
 | [Windows Azure Stack HCI OS][10]         | すべてのバージョン                                              |
@@ -182,7 +182,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [Kubernetes][6]            | バージョン 1.3 ～ 1.8     |
 | [SUSE Enterprise Linux][7] | SUSE 11 SP4 以上           |
 | [Fedora][8]                | Fedora 26 以上             |
-| [MacOS][9]                 | macOS 10.10 以上           |
+| [macOS][9]                 | macOS 10.10 以上           |
 | [Windows Server][10]       | Windows Server 2008 以上   |
 | [Windows][10]              | Windows 7 以上             |
 

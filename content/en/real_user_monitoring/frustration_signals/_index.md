@@ -67,7 +67,7 @@ Search through all the data collected by RUM in the [RUM Explorer][4] to surface
 Enter a facet in the search query to start your search. Available search fields include:
 
 Frustration Type
-: Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration_type:rage_click` to the search query.
+: Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration.type:rage_click` to the search query.
 
 Frustration Count
 : Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views with at least one frustration signal, add `session.frustration.count:>1` or `view.frustration.count:>1` to the search query.

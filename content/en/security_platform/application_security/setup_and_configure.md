@@ -4,19 +4,19 @@ kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security Monitoring"
+  text: "Protect against Threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
   text: "Getting Started Enabling ASM for Your Services"
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
-  text: "Out-of-the-Box Application Security Monitoring Rules"
+  text: "Out-of-the-Box Application Security Management Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"
 - link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Monitoring Works in Datadog"
+  text: "How Application Security Management Works in Datadog"
 ---
 
 ## Compatibility
@@ -178,8 +178,7 @@ It supports the use of all PHP frameworks, and also the use no framework.
 
 The Datadog NodeJS library supports the following NodeJS versions:
 
-- NodeJS 13.10.0 and higher
-- NodeJS 12.17.0 and higher
+- NodeJS 14 and higher
 
 These are supported on the following architectures:
 
@@ -228,6 +227,10 @@ Support for query strings is not available for Flask.
 
 {{< /programming-lang-wrapper >}}
 
+## Configuring a client IP header
+
+ASM automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library only checks the specified header for the client IP.
+
 ## Add user information to traces
 
 Instrument your services with the standardized user tags to track authenticated user activity, whether you're tracking application performance or application security.
@@ -236,7 +239,7 @@ This way, you can identify bad actors that are generating suspicious security ac
 
 You can [add custom tags to your root span][1], or use the instrumentation functions described below.
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -451,6 +454,33 @@ For information and options, read [the NodeJS tracer documentation][1].
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+
+This example shows how to set user monitoring tags:
+
+```python
+from ddtrace import tracer
+from ddtrace.contrib.trace_utils import set_user
+
+@app.route("/")
+def view():
+    # Record user information in the trace the span belongs to
+    set_user(
+        tracer,
+        user_id="usr.id",
+        email="usr.email",
+        name="usr.name",
+        session_id="usr.session_id",
+        role="usr.role",
+        scope="usr.scope"
+    )
+    return "OK"
+```
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## Data security considerations
@@ -510,7 +540,7 @@ To create an exclusion filter, do one of the following:
 
 **Note**: Requests (traces) matching an exclusion filter are not billed.
 
-## Disabling Application Security Monitoring
+## Disabling Application Security Management
 
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once it's removed, restart your service.
 

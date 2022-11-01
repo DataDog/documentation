@@ -1,5 +1,5 @@
 ---
-title: Frameworks and Industry Benchmarks
+title: Findings Reports
 kind: documentation
 further_reading:
 - link: "security_platform/default_rules"
@@ -28,10 +28,11 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 - [CIS Kubernetes Benchmark v1.5.1**][5]
 - [PCI DSS v3.2.1][6]
 - [AICPA SOC 2][7]
-- [HIPAA][8]
-- [GDPR][9]
+- [ISO/IEC 27001 v2][8]
+- [HIPAA][9]
+- [GDPR][10]
 
-*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][10] and forward [Cloudtrail logs to Datadog][11].
+*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [Cloudtrail logs to Datadog][12].
 
 **Some [CIS Kubernetes Benchmark][5] detection rules only apply to self-hosted Kubernetes clusters.
 
@@ -39,7 +40,7 @@ Each [OOTB rule][1] maps to one or more controls within a compliance standard or
 
 ## Customize how your environment is scanned by each rule
 
-On the [Rules][12] page, hover over a rule and click on the pencil icon to edit the rule. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how the rule scans your environment.
+On the [Rules][13] page, hover over a rule and click on the pencil icon to edit the rule. Under **Define search queries**, click the **Advanced** drop down menu to set filtering logic for how the rule scans your environment.
 
 For example, you can remove all resources tagged with `env:staging` using the **This rule will not generate a finding if there is a match with any of the following suppression queries** function. Or, limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a finding if there is a match with any of the following queries** function.
 
@@ -47,14 +48,14 @@ For example, you can remove all resources tagged with `env:staging` using the **
 
 ## Set notification targets for detection rules
 
-From the [Rules][12] page, you can add notification targets. The complete list of notification options are:
+From the [Rules][13] page, you can add notification targets. The complete list of notification options are:
 
-- [Slack][13]
-- [Jira][14]
-- [PagerDuty][15]
-- [ServiceNow][16]
-- [Microsoft Teams][17]
-- [Webhooks][18]
+- [Slack][14]
+- [Jira][15]
+- [PagerDuty][16]
+- [ServiceNow][17]
+- [Microsoft Teams][18]
+- [Webhooks][19]
 - Email
 
 In the “Notify” section, configure zero or more notification targets for each rule case. You cannot edit the preset severity.
@@ -72,14 +73,15 @@ In the “Notify” section, configure zero or more notification targets for eac
 [5]: https://www.cisecurity.org/benchmark/kubernetes/
 [6]: https://www.pcisecuritystandards.org/document_library
 [7]: https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html
-[8]: https://www.hhs.gov/hipaa/index.html
-[9]: https://gdpr.eu/
-[10]: /security_platform/cloud_siem/
-[11]: /integrations/amazon_cloudtrail/
-[12]: https://app.datadoghq.com/security/configuration/rules/
-[13]: /integrations/slack/
-[14]: /integrations/jira/
-[15]: /integrations/pagerduty
-[16]: /integrations/servicenow/
-[17]: /integrations/microsoft_teams/
-[18]: /integrations/webhooks/
+[8]: https://www.iso.org/isoiec-27001-information-security.html
+[9]: https://www.hhs.gov/hipaa/index.html
+[10]: https://gdpr.eu/
+[11]: /security_platform/cloud_siem/
+[12]: /integrations/amazon_cloudtrail/
+[13]: https://app.datadoghq.com/security/configuration/rules/
+[14]: /integrations/slack/
+[15]: /integrations/jira/
+[16]: /integrations/pagerduty
+[17]: /integrations/servicenow/
+[18]: /integrations/microsoft_teams/
+[19]: /integrations/webhooks/

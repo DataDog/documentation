@@ -270,6 +270,11 @@ Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
+`DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
+**Default**: `*`<br>
+A comma-separated list of query parameters to be collected as part of the resource URI. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+
 `DD_TRACE_CLIENT_IP_HEADER_DISABLED`
 : **INI**: `datadog.trace.client_ip_header_disabled`<br>
 **Default**: `0`<br>
@@ -287,6 +292,24 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
   Regular expression used to obfuscate the query string included as part of the URL. Added in version `0.76.0`.
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **INI**: `datadog.trace.propagation_style_inject`<br>
+**Default**: `Datadog`<br>
+Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
+
+  - [B3][7]
+  - [B3 single header][8]
+  - Datadog
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **INI**: `datadog.trace.propagation_style_extract`<br>
+**Default**: `Datadog,B3,B3 single header`<br>
+Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
+
+  - [B3][7]
+  - [B3 single header][8]
+  - Datadog
 
 #### Integration names
 
@@ -381,7 +404,6 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 When [`open_basedir`][6] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -392,3 +414,5 @@ When the application runs in a docker container, the path `/proc/self` should al
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[7]: https://github.com/openzipkin/b3-propagation
+[8]: https://github.com/openzipkin/b3-propagation#single-header

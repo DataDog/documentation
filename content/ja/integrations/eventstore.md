@@ -1,38 +1,58 @@
 ---
-aliases: []
+app_id: eventstore
+app_uuid: b0c2527f-671e-4a98-aa74-807d7f1826e3
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: eventstore.proc.mem
+      metadata_path: metadata.csv
+      prefix: eventstore.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Eventstore
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: 不明
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
-display_name: Eventstore
+display_on_public_website: true
 draft: false
 git_integration_title: eventstore
-guid: 4BEB8E51-E7DA-4145-B780-E3B3A6A8CD60
 integration_id: eventstore
 integration_title: Eventstore
 integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
-maintainer: '@xorima'
-manifest_version: 1.0.0
-metric_prefix: eventstore.
-metric_to_check: eventstore.proc.mem
+manifest_version: 2.0.0
 name: eventstore
+oauth: {}
 public_title: Eventstore
 short_description: Eventstore のメトリクスを収集
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  configuration: README.md#Setup
+  description: Eventstore のメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Eventstore
 ---
 
 

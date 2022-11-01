@@ -25,7 +25,7 @@ The Datadog Continuous Profiler for compiled languages (`ddprof`) uses OS level 
 ## Requirements
 
 Supported operating systems
-: Linux kernel v4.17+, libc 2.18+
+: Linux kernel v4.17+, glibc 2.18+ or musl libc
 
 Supported architecture
 : `amd64` or `arm64` processors
@@ -45,10 +45,10 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
 ### Standalone
 
-1. Download the appropriate [`ddprof` release][2] for your Linux distribution. For example, here is one way to pull the latest release for an `amd64` (aka `x86_64`) platform:
+1. Download the latest [`ddprof` release][2] for your Linux distribution. For example, here is one way to pull the `v0.9.3` release for an `amd64` (also known as `x86_64`) platform:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.3/ddprof-0.9.3-amd64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
@@ -112,7 +112,7 @@ The library exposes a C API.
 1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
 
    ```bash
-   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.2/ddprof-0.9.2-amd64-unknown-linux-gnu.tar.xz
+   curl -L -o ddprof-x86_64-linux-gnu.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.9.3/ddprof-0.9.3-amd64-unknown-linux-gnu.tar.xz
    tar xvf ddprof-x86_64-linux-gnu.tar.xz --directory /tmp
    ```
 
@@ -189,7 +189,7 @@ Configuration for the profiler can be set by command line parameters, environmen
 | DD_TRACE_AGENT_URL              | url             | U          |           | `https://<hostname>:<port>` overrides other agent host/port settings.                                                                |
 | DD_TAGS                         | tags            | T          |           | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` pairs separated by commas, such as: `layer:api,team:intake`. |
 | DD_PROFILING_NATIVE_NICE        | nice            | i          |           | Sets the nice level of the profiler without affecting the instrumented processes.                                                    |
-| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | a          | no        | Whether to log profiler configuration parameters.                                                                                    |
+| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | c          | no        | Whether to log profiler configuration parameters.                                                                                    |
 | DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o          | stdout    | How to emit profiler logs. See the section on logging for details.                                                                   |
 | DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l          | warn      | Determines log verbosity.                                                                                                            |
 | DD_PROFILING_NATIVE_TARGET_PID  | pid             | p          |           | Engages pidmode. See the section on pidmode for details.                                                                             |
@@ -200,6 +200,12 @@ When passing command line arguments, precede long names with two dashes and shor
 The `environment`, `service`, and `service_version` settings are recommended, as they are used by the Profiling UI.
 
 **Note**: Parameters must be set with a value. For example, to log profiler configuration, you must either set `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` or pass `--show_config yes`, rather than `--show_config` alone. For such arguments, `yes`, `true`, and `enable` may be used interchangeably to enable the setting and `no`, `false`, and `disable` may be used to disable it.
+
+See the [full list of parameters][5] or use the command line.
+
+```bash
+ddprof --help
+```
 
 ### Logging
 
@@ -234,7 +240,7 @@ For most configurations, this consists of all processes visible within the profi
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -244,4 +250,5 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /getting_started/profiler/
+[5]: https://github.com/DataDog/ddprof/blob/v0.9.3/docs/Commands.md
+[6]: /getting_started/profiler/

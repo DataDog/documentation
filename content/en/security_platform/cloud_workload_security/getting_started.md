@@ -25,10 +25,12 @@ further_reading:
 
 ## Overview
 
-There are two types of monitoring that the Datadog Agent uses for Cloud Workload Security:
+There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
-1. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-2. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
+1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
+2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
+3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
+4. **Kernel Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
 ## Requirements
 
@@ -41,6 +43,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
   * SUSE 15+
   * CentOS/RHEL 7.6+
   * Custom kernel builds are not supported.
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][3].
 
 ## Installation
 
@@ -59,7 +62,7 @@ There are two types of monitoring that the Datadog Agent uses for Cloud Workload
       securityAgent:
         runtime:
           enabled: true
-          
+
     # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
           network:
             enabled: true
@@ -119,16 +122,20 @@ By default Runtime Security is disabled. To enable it, both the datadog.yaml and
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-  
-# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
 
 systemctl restart datadog-agent
 
 {{< /code-block >}}
 
+For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+
+```shell
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+```
+
 Once you apply the changes, restart both the Security Agent and the system-probe.
 
+[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
 
 {{% tab "Fedora/CentOS" %}}
@@ -139,14 +146,18 @@ For a package-based deployment, the Datadog package has to be deployed: run `yum
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-  
-# For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-  
+
 systemctl restart datadog-agent
 
 {{< /code-block >}}
 
+For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+
+```shell
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+```
+
+[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}
@@ -283,3 +294,5 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
+
+[3]: /security_platform/cloud_security_management/troubleshooting

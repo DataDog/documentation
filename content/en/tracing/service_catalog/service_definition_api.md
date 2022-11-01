@@ -11,7 +11,9 @@ further_reading:
 
 ## Overview
 
-A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor service ownership consistently across every telemetry type. If you want to define a service using additional criteria, customize the service definition that fits your architectural style and register it using this API. 
+A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor service ownership consistently across every telemetry type. If you want to define a service using additional criteria, customize the service definition that fits your architectural style and register it using this API. You may do this by using the reserved `service` tag: for example, `"service": "service-name"`.
+
+For more details, see the [API reference for service definitions][8].
 
 ## Requirements
 
@@ -82,7 +84,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
 {{< code-block lang="json" filename="service.definition.json" collapsible="true" >}}
 {
   "schema-version": "v2",
-  "dd-version": "shopping-service"
+  "dd-service": "shopping-service"
 }
 {{< /code-block >}}
 
@@ -106,7 +108,7 @@ You can generate this body data on the [Service Catalog Getting Started page][7]
                     "contacts": [],
                     "docs": [],
                     "repos": [],
-                    "tags": null,
+                    "tags": [],
                     "integrations": {},
                     "team": "",
                     "extensions": {}
@@ -368,3 +370,4 @@ curl --location --request DELETE 'https://api.datadoghq.com/api/v2/services/defi
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://app.datadoghq.com/services/setup
+[8]: https://docs.datadoghq.com/api/latest/service-definition/

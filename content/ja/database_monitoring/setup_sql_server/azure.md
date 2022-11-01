@@ -52,7 +52,26 @@ ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
+Datadog Agent を構成する場合、特定の Azure SQL DB サーバーにあるアプリケーションデータベースごとに 1 つのチェックインスタンスを指定します。`master` やその他の[システムデータベース][2]は含めないでください。各データベースは分離された計算環境で実行されているため、Datadog Agent は Azure SQL DB の各アプリケーションデータベースに直接接続する必要があります。これは、`database_autodiscovery` が Azure SQL DB では機能しないことも意味するので、有効化してはいけません。
+
+```yaml
+init_config:
+instances:
+  - host: '<SERVER_NAME>.database.windows.net,1433'
+    database: '<DATABASE_1>'
+    username: datadog
+    password: '<PASSWORD>'
+
+  - host: '<SERVER_NAME>.database.windows.net,1433'
+    database: '<DATABASE_2>'
+    username: datadog
+    password: '<PASSWORD>'
+```
+
+Datadog Agent のインストールと構成の詳細については、[Agent のインストール](#install-the-agent)を参照してください。
+
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
+[2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
 {{% /tab %}}
 
 {{% tab "Azure SQL Managed Instance" %}}
@@ -233,8 +252,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.init_configs='[{}]' \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
-    "host": "<HOSTNAME>",
-    "port": <SQL_PORT>,
+    "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
     "driver": "FreeTDS",
     "username": "datadog",
@@ -287,8 +305,7 @@ helm install <RELEASE_NAME> \
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>
-    port: 1433
+    host: <HOSTNAME>,1433
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
@@ -308,8 +325,7 @@ cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>'
-    port: <SQL_PORT>
+    host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
@@ -337,8 +353,7 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<HOSTNAME>",
-          "port": <SQL_PORT>,
+          "host": "<HOSTNAME>,<SQL_PORT>",
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",

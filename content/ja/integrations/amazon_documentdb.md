@@ -1,18 +1,17 @@
 ---
 categories:
-  - cloud
-  - data store
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- data store
+- aws
+- ログの収集
 dependencies: []
 description: AWS DocumentDB のメトリクスとログを監視
 doc_link: https://docs.datadoghq.com/integrations/amazon_documentdb/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-documentdb-with-datadog/
-    tag: ブログ
-    text: Amazon DocumentDB のメトリクスとログを Datadog で収集
+- link: https://www.datadoghq.com/blog/monitor-documentdb-with-datadog/
+  tag: ブログ
+  text: Amazon DocumentDB のメトリクスとログを Datadog で収集
 git_integration_title: amazon_documentdb
 has_logo: true
 integration_id: amazon-documentdb
@@ -26,6 +25,7 @@ public_title: Datadog-Amazon DocumentDB インテグレーション
 short_description: AWS DocumentDB のメトリクスとログを監視
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon DocumentDB は、MongoDB のワークロードをサポートする、高速で、スケーラブル、高可用性、フルマネージド型のドキュメントデータベースサービスです。
@@ -38,7 +38,7 @@ Amazon DocumentDB は、MongoDB のワークロードをサポートする、高
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`DocumentDB` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DocumentDB` が有効になっていることを確認します。
 2. [Datadog - AWS DocumentDB インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -82,8 +82,8 @@ AWS DocumentDB インテグレーションには、サービスのチェック�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_documentdb
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-documentdb
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

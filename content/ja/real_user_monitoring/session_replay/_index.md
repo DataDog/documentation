@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/real_user_monitoring/guide/session-replay-getting-started/
 description: セッションリプレイでユーザーの Web 閲覧体験をキャプチャし、視覚化する方法について説明します。
 further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/
@@ -40,7 +42,7 @@ RUM ブラウザ SDK は[オープンソース][1]であり、オープンソー
 
 ### npm
 
-`@datadog/browser-rum package` を [`@datadog/browser-rum`][5] のバージョン >3.6.0 に置き換えます。記録を開始するには、`datadogRum.startSessionReplayRecording()` を呼び出します。
+`@datadog/browser-rum` パッケージを [`@datadog/browser-rum`][5] のバージョン >3.6.0 に置き換えます。記録を開始するには、`datadogRum.startSessionReplayRecording()` を呼び出します。
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -53,7 +55,9 @@ datadogRum.init({
     //  env: 'production',
     //  version: '1.0.0',
     sampleRate: 100,
-    premiumSampleRate: 100,
+    sessionReplaySampleRate: 100,
+    trackResources: true,
+    trackLongTasks: true,
     trackInteractions: true
 });
 
@@ -80,7 +84,7 @@ if (user.isAuthenticated) {
 
 ### セッションリプレイを無効にする
 
-セッションの記録を停止するには、`startSessionReplayRecording()` を削除し、`premiumSampleRate` を `0` に設定します。これにより、RUM &amp; セッションリプレイの[ブラウザプレミアムプラン][7]のデータ収集が停止され、リプレイ、リソース、ロングタスクが含まれるようになります。
+セッションの記録を停止するには、`startSessionReplayRecording()` を削除し、`sessionReplaySampleRate` を `0` に設定します。これにより、リプレイを含む [Browser RUM & セッションリプレイプラン][7]のデータ収集が停止します。
 
 これらの構成を適用するには、[RUM ブラウザ SDK][5] をバージョン 3.6 以降にアップグレードしてください。
 

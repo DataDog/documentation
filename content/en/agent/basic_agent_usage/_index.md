@@ -133,7 +133,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| Platform                                 | Supported versions                                        |
+| Platform (64-bit x86)                    | Supported versions                                        |
 |------------------------------------------|-----------------------------------------------------------|
 | [Amazon Linux][1]                        | Amazon Linux 2                                            |
 | [Debian][2] with systemd                 | Debian 7 (wheezy)+ in Agent < 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
@@ -146,13 +146,24 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 6.16.0/7.16.0 - 6.33.0/7.33.0        |
 | [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26+                                                |
-| [macOS][9]                               | macOS 10.12+                                              |
+| [macOS][9]                               | macOS 10.12+ in Agent < 6.35.0/7.35.0, macOS 10.13+ in Agent < 7.39.0, macOS 10.14+ in Agent 7.39.0+ |
 | [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
 | [Windows][10]                            | Windows 7+                                                |
 | [Windows Azure Stack HCI OS][10]         | All Versions                                              |
 
+| Platform (64-bit Arm v8)                 | Supported versions                                        |
+|------------------------------------------|-----------------------------------------------------------|
+| [Amazon Linux][1]                        | Amazon Linux 2                                            |
+| [Debian][2] with systemd                 | Debian 9 (stretch)+                                       |
+| [Ubuntu][3]                              | Ubuntu 16.04+                                             |
+| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 8+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
+| [Docker][5]                              | Version 1.12+                                             |
+| [Kubernetes][6]                          | Version 1.3+                                              |
+| [Fedora][8]                              | Fedora 27+                                                |
+| [macOS][9]                               | macOS 11.0+                                               |
+
+
 **Notes**: 
-- 64-bit x86 packages are available for all platforms on the list. Arm v8 packages are available for all platforms except Windows and MacOS.
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 - Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
@@ -181,7 +192,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Kubernetes][6]            | Version 1.3 to 1.8     |
 | [SUSE Enterprise Linux][7] | SUSE 11 SP4+           |
 | [Fedora][8]                | Fedora 26+             |
-| [MacOS][9]                 | macOS 10.10+           |
+| [macOS][9]                 | macOS 10.10+           |
 | [Windows Server][10]       | Windows Server 2008+   |
 | [Windows][10]              | Windows 7+             |
 

@@ -43,7 +43,7 @@ Une fois l'Agent [installé][1] sur votre host Windows, lancez Datadog Agent Man
 Depuis une invite Powershell avec élévation de privilèges :
 
 ```powershell
-& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
 ```
 
 Datadog Agent Manager se lance dans votre navigateur Web par défaut. L'adresse Web est `http://127.0.0.1:5002`.

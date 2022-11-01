@@ -12,7 +12,7 @@ further_reading:
 - link: /security_platform/application_security/troubleshooting
   tag: ドキュメント
   text: ASM のトラブルシューティング
-- link: /security_platform/guide/how-appsec-works/
+- link: /security_platform/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog におけるアプリケーションセキュリティモニタリングの仕組み
 kind: documentation
@@ -21,7 +21,7 @@ title: セットアップと構成
 
 ## 互換性
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -178,8 +178,7 @@ Docker、Kubernetes、AWS ECS で動作する PHP アプリのアプリケーシ
 
 Datadog NodeJS ライブラリは、以下の NodeJS のバージョンをサポートしています。
 
-- NodeJS 13.10.0 以降
-- NodeJS 12.17.0 以降
+- NodeJS 14 以降
 
 これらは、以下のアーキテクチャでサポートされています。
 
@@ -198,6 +197,34 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する NodeJS アプリの�
 
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+### サポート対象の Python バージョン
+
+Datadog Python ライブラリは、以下の Python のバージョンをサポートしています。
+
+- Python 2.7、3.5、またはそれ以上
+
+これらは、以下のアーキテクチャでサポートされています。
+
+- Linux (GNU) x86-64
+- Alpine Linux (musl) x86-64
+- macOS (Darwin) x86-64
+- Windows (msvc) x86、x86-64
+
+Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Python アプリのアプリケーションセキュリティを監視することができます。
+
+### サポートされているフレームワーク
+
+| Framework Web Server | フレームワークの最小バージョン |
+|----------------------|---------------------------|
+| Django               | 1.8                       |
+| Flask                | 0.10                      |
+
+Flask では、クエリ文字列のサポートはありません。
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## トレースへのユーザー情報追加
@@ -208,7 +235,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する NodeJS アプリの�
 
 [ルートスパンにカスタムタグを追加する][1]方法と、後述のインスツルメンテーション関数を利用する方法があります。
 
-{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -237,7 +264,7 @@ if ((span instanceof MutableSpan)) {
 ```
 
 
-[1]: /ja/tracing/setup_overview/open_standards/java/#setup
+[1]: /ja/tracing/trace_collection/open_standards/java/#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -423,6 +450,33 @@ function handle () {
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/docs/API.md#user-identification
 {{< /programming-lang >}}
 
+{{< programming-lang lang="python" >}}
+
+Python トレーサーパッケージが提供する `set_user` 関数を用いて、トレースにユーザー情報を追加することで、認証済みリクエストを監視します。
+
+この例では、ユーザー監視タグを設定する方法を説明します。
+
+```python
+from ddtrace import tracer
+from ddtrace.contrib.trace_utils import set_user
+
+@app.route("/")
+def view():
+    # スパンが属するトレースにユーザー情報を記録する
+    set_user(
+        tracer,
+        user_id="usr.id",
+        email="usr.email",
+        name="usr.name",
+        session_id="usr.session_id",
+        role="usr.role",
+        scope="usr.scope"
+    )
+    return "OK"
+```
+
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 ## データセキュリティへの配慮
@@ -436,7 +490,7 @@ Datadog で収集するデータには、除外、難読化、フィルタリン
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - 値が一般的に機密データを含むキーをスキャンするためのパターン。見つかった場合、そのキーと関連する値およびすべての子ノードが編集されます。
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - 機密データを示す可能性のある値をスキャンするためのパターン。見つかった場合、その値とすべての子ノードが編集されます。
 
-<div class="alert alert-info"><strong>Ruby のみ、ddtrace バージョン 1.1.0 から</strong> 
+<div class="alert alert-info"><strong>Ruby のみ、ddtrace バージョン 1.1.0 から</strong>
 
 <p>また、コードでスキャンパターンを構成することも可能です。</p>
 
@@ -491,9 +545,9 @@ ASM を無効にするには、アプリケーションの構成から `DD_APPSE
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/setup_overview/custom_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/
 [2]: https://github.com/google/re2/wiki/Syntax
-[3]: /ja/tracing/setup_overview/configure_data_security/
+[3]: /ja/tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/appsec/exclusions
 [6]: /ja/help/

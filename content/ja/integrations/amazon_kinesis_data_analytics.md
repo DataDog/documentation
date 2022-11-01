@@ -35,8 +35,7 @@ Amazon Kinesis Data Analytics は、Apache Flink を使用して、ストリー�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]で、メトリクスコレクションの下にある `KinesisAnalytics` にチェックが入っていることを
-   確認します。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Kinesis Analytics` が有効になっていることを確認します。
 2. [Datadog - Amazon Kinesis Data Analytics インテグレーション][3]をインストールします。
 
 ## 収集データ
@@ -58,7 +57,7 @@ Amazon Kinesis Data Analytics インテグレーションには、サービス�
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-kinesis-data-analytics
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-kinesis-data-analytics
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis_data_analytics/amazon_kinesis_data_analytics_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

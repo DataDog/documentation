@@ -29,7 +29,7 @@ draft: false
 git_integration_title: http_check
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 8.0.1
+integration_version: 8.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

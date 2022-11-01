@@ -13,6 +13,9 @@ further_reading:
 - link: profiler/profiler_troubleshooting
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
+- link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
+  tag: GitHub
+  text: Datadog Continuous Profiler で .NET アプリケーションのパフォーマンスを最適化する
 kind: ドキュメント
 title: .NET プロファイラーの有効化
 type: multi-code-lang
@@ -43,10 +46,10 @@ Windows Server バージョン 2012 以降
 対応言語
 : C#、F#、Visual Basic など、.NET ランタイムをターゲットとするあらゆる言語。
 
-## インストール
+## APM に Datadog Agent を構成する
 
 <div class="alert alert-warning">
-<strong>**注**:</strong> Datadog の .NET トレーサーおよびプロファイラーは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば APM）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
+<strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば Datadog の .NET トレーサーでプロファイラーを有効にした状態）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
 </div>
 
 すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][1]+ または [6.20.2][2]+ にアップグレードしてください。プロファイラーはトレーサーと一緒に出荷されますので、OS に応じて以下の手順でインストーラーをインストールしてください。
@@ -63,20 +66,20 @@ Windows Server バージョン 2012 以降
 2. 以下のコマンドのいずれかを実行して、パッケージをインストールし、適切な権限で .NET のログディレクトリ `/var/log/datadog/dotnet` を作成します。
 
    Debian または Ubuntu
-   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
+   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && sudo /opt/datadog/createLogPath.sh`
 
    CentOS 7+ または Fedora
-   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
+   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && sudo /opt/datadog/createLogPath.sh`
 
    Alpine などの musl ベースの分布
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
    その他の分布
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Windows" %}}
 
@@ -86,7 +89,7 @@ Windows Server バージョン 2012 以降
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -116,7 +119,7 @@ Windows Server バージョン 2012 以降
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
 3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。
@@ -129,7 +132,6 @@ Windows Server バージョン 2012 以降
    .NET Core と .NET 5+ の場合:
    ```text
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -140,7 +142,6 @@ Windows Server バージョン 2012 以降
    .NET Framework の場合:
    ```text
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -163,7 +164,7 @@ Windows Server バージョン 2012 以降
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Windows サービス" %}}
 3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。サービスのプロファイラーを有効にするには、サービスに関連付けられたレジストリキーに `DD_PROFILING_ENABLED` 環境変数を設定することが必要です。プロファイラーが単独で動作している場合 (トレーサーは非アクティブ)、オプションで `DD_SERVICE`、`DD_ENV`、`DD_VERSION` 環境変数を追加することができます。
@@ -175,7 +176,6 @@ Windows Server バージョン 2012 以降
    .NET Core と .NET 5+ の場合:
    ```text
    CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -186,7 +186,6 @@ Windows Server バージョン 2012 以降
    .NET Framework の場合:
    ```text
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    DD_PROFILING_ENABLED=1
    DD_SERVICE=MyService
    DD_ENV=production
@@ -200,7 +199,6 @@ Windows Server バージョン 2012 以降
    ```powershell
    [string[]] $v = @(
        "CORECLR_ENABLE_PROFILING=1",
-       "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -213,7 +211,6 @@ Windows Server バージョン 2012 以降
    ```powershell
    [string[]] $v = @(
        "COR_ENABLE_PROFILING=1",
-       "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}",
        "DD_PROFILING_ENABLED=1",
        "DD_SERVICE=MyService",
        "DD_ENV=production",
@@ -225,7 +222,7 @@ Windows Server バージョン 2012 以降
 4. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Windows スタンドアロンアプリケーション" %}}
 3. コンソール、ASP.NET (Core)、Windows Forms、WPF などの非サービスアプリケーションでプロファイラーを構成して有効にするために、必要な環境変数を設定します。スタンドアロンアプリケーションのプロファイラーを有効にするには、`DD_PROFILING_ENABLED` 環境変数を設定する必要があります。プロファイラーが単独で動作している場合 (トレーサーは無効)、オプションで環境変数 `DD_SERVICE`、`DD_ENV`、`DD_VERSION` を設定することが可能です。推奨される方法は、これらを設定しアプリケーションを起動するバッチファイルを作成し、そのバッチファイルを使用してアプリケーションを実行することです。
@@ -233,7 +230,6 @@ Windows Server バージョン 2012 以降
    .NET Core と .NET 5+ の場合:
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
-   SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
@@ -245,7 +241,6 @@ Windows Server バージョン 2012 以降
    .NET Framework の場合:
    ```cmd
    SET COR_ENABLE_PROFILING=1
-   SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    SET DD_PROFILING_ENABLED=1
    SET DD_SERVICE=MyService
    SET DD_ENV=production
@@ -287,7 +282,7 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 
 <br>
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 [プロファイラーの概要][4]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 

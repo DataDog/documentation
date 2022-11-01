@@ -23,7 +23,7 @@ You may need to monitor journeys located behind a login. There are two ways to e
 - [Include the login steps in your recording](#include-the-login-steps-in-your-recording)
 - [Leverage browser test configuration options](#leverage-browser-test-configuration-options)
 
-You can also ensure your credentials are securely stored and obfuscated across the application [using secured global variables](#account-security).
+You can also ensure your credentials are securely stored and obfuscated across the application [using obfuscated global variables](#account-security).
 
 <div class="alert alert-info"> Are you interested in testing applications sitting behind MFA? Visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">below section</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.</div>
 
@@ -83,9 +83,9 @@ You can manually apply these configured headers, cookies, and credentials on the
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and  set these variables as secure to obfuscate their values from anyone else who has access to your instance of Datadog.
+Store your credentials as [global variables][6] (for example, one global variable for username, another one for password) and  set these variables as obfuscated to hide their values from anyone else who has access to your instance of Datadog.
 
-Once you create the secure variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
+Once you create the obfuscated variables, you can then [import these global variables][7] into your browser tests and leverage them for your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 

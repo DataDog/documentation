@@ -20,9 +20,10 @@ This page identifies key components of Metrics without Limits™ that can help y
 
 ### Configuration of tags
 
-Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Custom”** to configure the tags you’d like to remain as queryable on dashboards and monitors. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
+Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Include Tags...”** to configure the tags you’d like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (colored in blue with an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
 
-{{< img src="metrics/mwl_tags.mp4" alt="Configuration of Tags" video=true >}}
+{{< img src="metrics/mwl_tag_config.mp4" alt="Configuration of Tags" video=true >}}
+
 
 There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
 
@@ -37,11 +38,12 @@ You can further adjust your custom metrics filters by opting in to more [metrics
 
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
 
+The tag configuration modal pre-populates with an allowlist of aggregations that have been actively queried on dashboards, notebooks, monitors and through API in the past 30 days (colored in blue with an icon). You can also include your own additional aggregations.
 
 
 ### Configure multiple metrics at a time
 
-Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. By clicking **Configure Tags** on Metrics Summary, you can specify a namespace for your metrics. You can then configure all metrics matching that namespace prefix with the same allowlist of tags.
+Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. By clicking **Include Tags...** on Metrics Summary, you can specify a namespace for your metrics. You can then configure all metrics matching that namespace prefix with the same allowlist of tags.
 
 ## Metrics without Limits™ billing
 

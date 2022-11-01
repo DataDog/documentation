@@ -1,43 +1,61 @@
 ---
+app_id: snmp-cisco
+app_uuid: 91202d4a-1af4-4c64-88e4-5ba02b23c69f
 assets:
-  configuration: {}
-  dashboards: {}
-  logs: {}
-  metrics_metadata: ''
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cisco
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - モニタリング
 - notification
 - ネットワーク
 - オートディスカバリー
 - snmp
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
-display_name: Cisco
+display_on_public_website: true
 draft: false
 git_integration_title: snmp_cisco
-guid: 4109f288-7460-4ed2-b0c3-04e708fbd5bd
 integration_id: snmp-cisco
 integration_title: Cisco
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_to_check:
-- snmp.cefcFRUPowerAdminStatus
-- snmp.devClientCount
+manifest_version: 2.0.0
 name: snmp_cisco
-public_title: Cisco インテグレーション
+oauth: {}
+public_title: Cisco
 short_description: Cisco ネットワークデバイスから SNMP メトリクスを収集
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  - Category::Notification
+  - Category::Network
+  - Category::Autodiscovery
+  - Category::SNMP
+  configuration: README.md#Setup
+  description: Cisco ネットワークデバイスから SNMP メトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cisco
 ---
 
 
@@ -82,7 +100,12 @@ SNMP Cisco には、イベントは含まれません。
 
 * [Datadog での SNMP モニタリング][4]
 
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 [1]: https://app.datadoghq.com/account/settings#integrations/meraki
 [2]: https://app.datadoghq.com/account/settings#integrations/snmp
 [3]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
 [4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[5]: https://docs.datadoghq.com/ja/help/

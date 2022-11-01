@@ -1,23 +1,24 @@
 ---
-title: Collecte d'erreurs du navigateur
-kind: documentation
 further_reading:
-  - link: /real_user_monitoring/error_tracking/
-    tag: Documentation
-    text: Suivi des erreurs
-  - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-    tag: Blog
-    text: Real User Monitoring
-  - link: /real_user_monitoring/explorer/
-    tag: Documentation
-    text: Explorer vos vues dans Datadog
-  - link: /real_user_monitoring/explorer/visualize/
-    tag: Documentation
-    text: Appliquer des visualisations sur vos événements
-  - link: /real_user_monitoring/dashboards/
-    tag: Documentation
-    text: Dashboards RUM
+- link: /real_user_monitoring/error_tracking/
+  tag: Documentation
+  text: Suivi des erreurs
+- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
+  tag: Blog
+  text: Real User Monitoring
+- link: /real_user_monitoring/explorer/
+  tag: Documentation
+  text: Explorer vos vues dans Datadog
+- link: /real_user_monitoring/explorer/visualize/
+  tag: Documentation
+  text: Appliquer des visualisations sur vos événements
+- link: /real_user_monitoring/dashboards/
+  tag: Documentation
+  text: Dashboards RUM
+kind: documentation
+title: Collecte d'erreurs du navigateur
 ---
+
 Les erreurs frontend sont recueillies par le service Real User Monitoring (RUM). Le message d'erreur et la stack trace sont inclus lorsque cela est possible.
 
 ## Origines des erreurs
@@ -48,7 +49,7 @@ Les erreurs de type source comprennent des informations au niveau du code concer
 
 ## Recueillir des erreurs manuellement
 
-Surveillez les exceptions gérées, les objets Promise rejetés et les autres erreurs non suivies automatiquement par le SDK RUM avec l'API `addError()` :
+Surveillez les exceptions gérées, les objets Promise rejetés et les autres erreurs non suivies automatiquement par le SDK Browser RUM avec l'API `addError()` :
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -153,13 +154,14 @@ Pour en savoir plus sur les scripts interorigines et découvrir pourquoi les dé
 - Votre site Web inclut des bibliothèques JavaScript tierces hébergées sur les serveurs du fournisseur.
 
 Pour gagner en visibilité sur les scripts interorigines, suivez les deux étapes ci-dessous :
-1. Appelez les bibliothèques JavaScript avec `crossorigin="anonymous"`.
+1. Appelez les bibliothèques JavaScript avec [`crossorigin="anonymous"`][7].
 
     Grâce à `crossorigin="anonymous"`, la requête servant à récupérer le script est sécurisée. Aucune donnée sensible n'est transmise via des cookies ou l'authentification HTTP.
 
-2. Configurez l'en-tête HTTP `Access-Control-Allow-Origin`.
+2. Configurez l'en-tête de réponse HTTP [`Access-Control-Allow-Origin`][8] sur :
 
-    Cet en-tête a généralement pour valeur `Access-Control-Allow-Origin: *`, ce qui autorise toutes les origines à récupérer la ressource. Restreignez plutôt les origines pouvant accéder à votre ressource avec, par exemple, `Access-Control-Allow-Origin: www.example.com`.
+    - `Access-Control-Allow-Origin: *` pour permettre à toutes les origines de récupérer la ressource.
+    - `Access-Control-Allow-Origin: example.com` pour autoriser une origine spécifique uniquement. Si le serveur prend en charge les clients issus de plusieurs origines, il doit renvoyer l'origine du client spécifique qui effectue la requête.
 
 ## Pour aller plus loin
 
@@ -172,3 +174,5 @@ Pour gagner en visibilité sur les scripts interorigines, suivez les deux étape
 [4]: /fr/real_user_monitoring/error_tracking
 [5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
+[7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+[8]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
