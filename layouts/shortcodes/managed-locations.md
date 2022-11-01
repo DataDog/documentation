@@ -9,3 +9,9 @@ Datadog's out-of-the-box managed locations allow you to test public-facing websi
 | Oregon (AWS)              | Sydney (AWS)    | Paris (AWS)     |
 | São Paulo (AWS)           | Tokyo (AWS)     | Stockholm (AWS) |
 | Virginia (Azure)          |                 |                 |
+
+The Datadog for Government site (US1-FED) uses the following managed location:
+
+| Americas |
+|----------|
+| US-West  |

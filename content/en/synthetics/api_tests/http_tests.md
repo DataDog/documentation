@@ -137,7 +137,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your HTTP test from. HTTP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network.
+Select the **Locations** to run your HTTP test from. HTTP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. 
 
 ### Specify test frequency
 
@@ -268,7 +268,7 @@ You can restrict access to an HTTP test based on the roles in your organization.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/synthetics/#get-all-locations-public-and-private
+[1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search
