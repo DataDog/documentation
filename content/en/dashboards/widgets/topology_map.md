@@ -2,7 +2,7 @@
 title: Topology Map Widget
 kind: documentation
 description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
-widget_type: "topologymap"
+widget_type: "topology_map"
 aliases:
     - /dashboards/widgets/service_map
 further_reading:
@@ -38,5 +38,5 @@ The dedicated [widget JSON schema definition][3] for the service map widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/services/services_map/
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
