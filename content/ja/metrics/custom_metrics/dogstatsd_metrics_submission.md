@@ -86,7 +86,7 @@ statsd = Datadog::Statsd.new('localhost', 8125, tags: ['environment:dev'])
 
 while true do
     statsd.increment('example_metric.increment')
-    statsd.increment('example_metric.increment', tags: ['another': 'tag'])
+    statsd.increment('example_metric.increment', tags: ['another:tag'])
     statsd.decrement('example_metric.decrement')
     statsd.count('example_metric.count', 2)
     sleep 10
@@ -222,6 +222,8 @@ while (TRUE) {
 `GAUGE` メトリクスとして保存された `GAUGE` メトリクスを Datadog に送信します。 `GAUGE` タイプについては、[メトリクスのタイプ][5] に関するドキュメントを参照してください。
 
 次のコードを実行して、DogStatsD の `GAUGE` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+
+**注:** メトリクス送信の呼び出しは非同期です。メトリクスを確実に送信したい場合は、プログラムが終了する前に `flush` を呼び出してください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 

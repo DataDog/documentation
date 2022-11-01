@@ -107,6 +107,26 @@ CI Test モニターを作成するには
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query-fnf.png" alt="ステップ a、b、c で定義されたモニター。ステップ a および b はクエリで、ステップ c はそこから割合を算出します。" style="width:80%;" >}}
 
 <div class="alert alert-info"><strong>注</strong>: 各モニターに評価数式の構築には、最大 2 つのクエリまで使用できます。</div>
+
+#### CODEOWNERS を利用した通知
+
+テストイベントで利用可能な `CODEOWNERS` の情報を使って、異なるチームに通知を送信することができます。
+
+以下の例では、次のロジックで通知を構成しています。
+* もしテストコードのオーナーが `MyOrg/my-team` ならば、`my-team-channel` Slack チャンネルに通知を送ります。
+* もしテストコードのオーナーが `MyOrg/my-other-team` ならば、`my-other-team-channel` Slack チャンネルに通知を送ります。
+
+{{< code-block lang="text" >}}
+{{#is_match "citest.attributes.test.codeowners" "MyOrg/my-team"}}
+  @slack-my-team-channel
+{{/is_match}}
+{{#is_match "citest.attributes.test.codeowners" "MyOrg/my-other-team"}}
+  @slack-my-other-team-channel
+{{/is_match}}
+{{< /code-block >}}
+
+モニターの `Notification message` セクションに、上記のコードスニペットのようなテキストを追加して、モニター通知の設定をします。`is_match` 句は必要なだけ追加することができます。
+
 {{% /tab %}}
 {{< /tabs >}}
 ### アラートの条件を設定する

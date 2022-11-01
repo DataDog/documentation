@@ -7,7 +7,7 @@ further_reading:
 - link: /tracing/trace_retention/
   tag: ドキュメント
   text: トレースの保持
-- link: /tracing/trace_retention/usage_metrics/
+- link: /tracing/trace_ingestion/usage_metrics/
   tag: ドキュメント
   text: 使用量メトリクス
 kind: documentation
@@ -16,13 +16,13 @@ title: 取り込みのメカニズム
 
 アプリケーションで生成されたスパンを Datadog に送信する (_取り込む_) かどうかは、複数のメカニズムによって決定されます。これらのメカニズムの背後にあるロジックは、[トレーシングライブラリ][1]と Datadog Agent の中にあります。構成によっては、インスツルメントされたサービスによって生成されたトラフィックの全てまたは一部が取り込まれます。
 
-取り込まれた各スパンには、このページで説明されているメカニズムのいずれかを参照する一意の**取り込み理由**が付加されています。使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` と `datadog.estimated_usage.apm.ingested_spans` は `ingestion_reason` によってタグ付けされています。
+取り込まれた各スパンには、このページで説明されているメカニズムのいずれかを参照する一意の**取り込み理由**が付加されています。[使用量メトリクス][2]`datadog.estimated_usage.apm.ingested_bytes` と `datadog.estimated_usage.apm.ingested_spans` は `ingestion_reason` によってタグ付けされています。
 
-[取り込み理由ダッシュボード][2]を使って、それぞれの取り込み理由を確認することができます。各メカニズムに起因するボリュームの概要を把握し、どの構成オプションに焦点を当てるべきかを迅速に知ることができます。
+[取り込み理由ダッシュボード][3]を使って、それぞれの取り込み理由を確認することができます。各メカニズムに起因するボリュームの概要を把握し、どの構成オプションに焦点を当てるべきかを迅速に知ることができます。
 
 ## ヘッドベースサンプリング
 
-デフォルトのサンプリングメカニズムは_ヘッドベースサンプリング_と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、[ルートスパン][3]の開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
+デフォルトのサンプリングメカニズムは_ヘッドベースサンプリング_と呼ばれています。トレースを維持するか削除するかの決定は、トレースの一番最初、[ルートスパン][4]の開始時に行われます。この決定は、HTTP リクエストヘッダーなどのリクエストコンテキストの一部として、他のサービスに伝搬されます。
 
 この判断はトレースの最初に行われ、その後トレースのすべての部分に伝えられるため、トレースは全体として保持または削除されることが保証されます。
 
@@ -44,6 +44,8 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 ```
 
 **注**: Agent で設定した traces-per-second サンプリングレートは、Datadog トレースライブラリにのみ適用されます。OpenTelemetry SDK など他のトレースライブラリには影響を与えません。
+
+Datadog Agent の[自動計算されたサンプリングレート](#in-the-agent)を使ってサンプリングされたトレースの全てのスパンには、取り込み理由 `auto` のタグが付けられています。 `ingestion_reason` タグは、[使用量メトリクス][2]にも設定されています。Datadog Agent のデフォルトのメカニズムを使用するサービスは、[Ingestion Control Page][5] の Configuration の列で `Automatic` とラベル付けされます。
 
 ### トレーシングライブラリ: ユーザー定義のルール
 `ingestion_reason: rule`
@@ -71,7 +73,7 @@ java -Ddd.trace.sampling.service.rules=my-service:0.2 -javaagent:dd-java-agent.j
 export DD_TRACE_SAMPLING_SERVICE_RULES=my-service:0.2
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、Agent のデフォルトである `100` よりも少ない、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
 
 サンプリングコントロールについては、[Java トレースライブラリドキュメント][1]を参照してください。
 
@@ -87,7 +89,7 @@ Python アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を�
 @env DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.5}]
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、Agent のデフォルトである `100` よりも少ない、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
 
 サンプリングコントロールについては、[Python トレースライブラリドキュメント][1]を参照してください。
 
@@ -113,6 +115,8 @@ Datadog.configure do |c|
 end
 ```
 
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
+
 サンプリングコントロールについては、[Ruby トレースライブラリドキュメント][1]を参照してください。
 
 [1]: /ja/tracing/setup_overview/setup/ruby#sampling
@@ -127,7 +131,7 @@ Go アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使っ
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、Agent のデフォルトである `100` よりも少ない、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
 
 サンプリングコントロールについては、[Go トレースライブラリドキュメント][1]を参照してください。
 
@@ -150,7 +154,7 @@ tracer.init({
   }
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、Agent のデフォルトである `100` よりも少ない、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
 
 サンプリングコントロールについては、[NodeJS トレースライブラリドキュメント][1]を参照してください。
 
@@ -197,7 +201,7 @@ C++ では、すぐに使えるインスツルメンテーションのインテ�
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
-環境変数 `DD_TRACE_RATE_LIMIT` に、Agent のデフォルトである `100` よりも少ない、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。
+環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
 
 サンプリングコントロールについては、[.NET トレースライブラリドキュメント][1]を参照してください。
 
@@ -205,13 +209,11 @@ C++ では、すぐに使えるインスツルメンテーションのインテ�
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: Datadog Agent の[自動計算されたサンプリングレート](#in-the-agent)を使用してサンプリングされたトレースのすべてのスパンには、取り込み理由 `auto` が付けられます。トレースライブラリ構成 (`DD_TRACE_SAMPLE_RATE` または `DD_TRACE_SAMPLING_RULES`) を使用してサンプリングされたトレースのすべてのスパンには、取り込み理由 `rule` でタグ付けされています。
-
-**注**: ユーザー定義のサンプリングルールで構成されたサービスは、[Ingestion Control Page][4] Configuration 列に `Configured` と表示されます。Datadog Agent [デフォルトメカニズム](#in-the-agent)を使用するサービスは、`Automatic` とラベル付けされます。
+**注**: トレースライブラリ構成を使用してサンプリングされたトレースのすべてのスパンには、取り込み理由 `rule` というタグが付けられます。ユーザー定義のサンプリングルールで構成されたサービスは、[Ingestion Control Page][5] の Configuration 列で `Configured` としてマークされます。
 
 ## エラーとレアトレース
 
-ヘッドベースサンプリングで捕捉できなかったトレースについては、2 つの Datadog Agent の追加サンプリングメカニズムにより、重要かつ多様なトレースが保持され、取り込まれるようにします。この 2 つのサンプラーは、あらかじめ決められたタグの組み合わせをすべてキャッチすることで、多様なトレースセットを保持します。
+ヘッドベースサンプリングで捕捉できなかったトレースについては、2 つの Datadog Agent の追加サンプリングメカニズムにより、重要かつ多様なトレースが保持され、取り込まれるようにします。この 2 つのサンプラーは、あらかじめ決められたタグの組み合わせをすべてキャッチすることで、多様なローカルトレースセット (同一ホストからのスパンセット) を保持します。
 
 - **Error traces**: サンプリングエラーは、システムの潜在的な不具合を可視化するために重要です。
 - **Rare traces**: レアトレースをサンプリングすることで、トラフィックの少ないサービスやリソースを確実に監視し、システム全体の可視性を維持することができます。
@@ -221,7 +223,7 @@ C++ では、すぐに使えるインスツルメンテーションのインテ�
 ### エラートレース
 `ingestion_reason: error`
 
-エラーサンプラーは、ヘッドベースのサンプリングでは捕捉できないエラースパンを含むトレースの断片を捕捉します。`service`、`name`、`resource`、`http.status`、`error.type` のすべての組み合わせを捕捉するように 10 トレース/秒のレートを分散させます。
+エラーサンプラーは、ヘッドベースサンプリングでは捕捉できないエラースパンを含むトレースの断片を捕捉します。最大 10 トレース/秒 (Agent 毎) の速度でエラートレースを捕捉します。ヘッドベースのサンプリングレートが低い場合に、エラーを包括的に可視化することができます。
 
 Agent バージョン 7.33 以降では、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数でエラーサンプラーを構成することが可能です。
 ```
@@ -231,10 +233,13 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 
 **注**: エラーサンプラーを無効にするには、このパラメーターを `0` に設定します。
 
+**注**: エラーサンプラーは、Agent レベルのエラースパンを持つローカルトレースをキャプチャします。トレースが分散されている場合、完全なトレースが Datadog に送信されることを保証する方法はありません。
+
+
 ### レアトレース
 `ingestion_reason: rare`
 
-レアサンプラーは、レアスパンのセットを Datadog に送信します。レアサンプリングは、`env`、`service`、`name`、`resource`、`error.type`、`http.status` の組み合わせをキャッチするために、分散レートにもなっています。レアトレースのデフォルトのサンプリングレートは、1 秒間に 5 個のトレースです。
+レアサンプラーは、Datadog にレアスパンのセットを送信します。これは、`env`、`service`、`name`、`resource`、`error.type`、`http.status` の組み合わせを最大で毎秒 5 トレース (Agent 毎) 捕捉することができます。ヘッドベースのサンプリングレートが低い場合に、低トラフィックのリソースを確実に可視化することができます。
 
 Agent バージョン 7.33 以降では、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) または環境変数でレアサンプラーを無効にすることが可能です。
 
@@ -243,9 +248,7 @@ Agent バージョン 7.33 以降では、Agent のメインコンフィギュ�
 @env DD_APM_DISABLE_RARE_SAMPLER - ブール値 - オプション - デフォルト: false
 ```
 
-**注**: このメカニズムは、ヘッドベースのサンプリングの下流で発生するため、サンプリングされたレアトレースは不完全になる可能性があります。Agent がトレーシングライブラリから完全なトレースを受信することを保証する方法はありません。
-
-
+**注**: レアサンプラーは、Agent レベルのローカルトレースをキャプチャします。トレースが分散されている場合、完全なトレースが Datadog に送信されることを保証する方法はありません。
 
 ## 強制維持と削除
 `ingestion_reason: manual`
@@ -319,7 +322,7 @@ Agent のメインコンフィギュレーションファイル (`datadog.yaml`)
 ### RUM トレース
 `ingestion_reason:rum`
 
-Web アプリケーションやモバイルアプリケーションからのリクエストは、バックエンドサービスがインスツルメントされたときにトレースを生成します。[APM とリアルユーザーモニタリングのインテグレーション][5]は、Web やモバイルアプリケーションのリクエストを対応するバックエンドトレースにリンクし、フロントエンドとバックエンドの全データを 1 つのレンズで見ることができるようにします。
+Web アプリケーションやモバイルアプリケーションからのリクエストは、バックエンドサービスがインスツルメントされたときにトレースを生成します。[APM とリアルユーザーモニタリングのインテグレーション][6]は、Web やモバイルアプリケーションのリクエストを対応するバックエンドトレースにリンクし、フロントエンドとバックエンドの全データを 1 つのレンズで見ることができるようにします。
 
 RUM ブラウザ SDK のバージョン `4.10.0` からは、`tracingSampleRate` という初期化パラメーターを設定することで、取り込み量を制御し、バックエンドのトレースのサンプリングを保持することができます。 `tracingSampleRate` には `0` から `100` の間の数値を設定します。
 もし `tracingSampleRate` の値が設定されていない場合は、デフォルトでブラウザのリクエストから来るトレースの 100% が Datadog に送信されます。
@@ -328,16 +331,16 @@ RUM ブラウザ SDK のバージョン `4.10.0` からは、`tracingSampleRate`
 
 | SDK         | パラメーター             | 最小バージョン   |
 |-------------|-----------------------|-------------------|
-| Browser     | `tracingSampleRate`   | [v4.10.0][6]      |
-| iOS         | `tracingSamplingRate` | [1.11.0][7]       |
-| Android     | `traceSamplingRate`   | [1.13.0][8]       |
-| Flutter     | `tracingSamplingRate` | [1.0.0-beta.2][9] |
-| React Native | `tracingSamplingRate` | [1.0.0-rc6][10]   |
+| Browser     | `tracingSampleRate`   | [v4.10.0][7]      |
+| iOS         | `tracingSamplingRate` | [1.11.0][8]       |
+| Android     | `traceSamplingRate`   | [1.13.0][9]       |
+| Flutter     | `tracingSamplingRate` | [1.0.0-beta.2][10] |
+| React Native | `tracingSamplingRate` | [1.0.0-rc6][11]   |
 
 ### Synthetic トレース
 `ingestion_reason:synthetics` と `ingestion_reason:synthetics-browser`
 
-HTTP テストとブラウザテストは、バックエンドサービスがインストルメントされたときに、トレースを生成します。[Synthetic テストと APM のインテグレーション][11]は、 Synthetic テストを対応するバックエンドのトレースとリンクさせます。失敗したテストの実行から、そのテストの実行によって生成されたトレースを見ることで、問題の根本的な原因を突き止めることができます。
+HTTP テストとブラウザテストは、バックエンドサービスがインストルメントされたときに、トレースを生成します。[Synthetic テストと APM のインテグレーション][12]は、 Synthetic テストを対応するバックエンドのトレースとリンクさせます。失敗したテストの実行から、そのテストの実行によって生成されたトレースを見ることで、問題の根本的な原因を突き止めることができます。
 
 デフォルトでは、Synthetic HTTP テストとブラウザテストの 100% がバックエンドトレースを生成します。
 
@@ -347,8 +350,8 @@ HTTP テストとブラウザテストは、バックエンドサービスがイ
 
 | 製品    | 取り込み理由                    | 取り込みのメカニズムの説明 |
 |------------|-------------------------------------|---------------------------------|
-| サーバーレス | `lambda` と `xray`                   | Datadog トレーシングライブラリまたは AWS X-Ray インテグレーションでトレースした[サーバーレスアプリケーション][12]から受信したトレース。 |
-| アプリケーション セキュリティ モニタリング     | `appsec`                            | Datadog トレーシングライブラリから取り込まれたトレースで、[ASM][13] によって脅威としてフラグが立てられたもの。 |
+| サーバーレス | `lambda` と `xray`                   | Datadog トレーシングライブラリまたは AWS X-Ray インテグレーションでトレースした[サーバーレスアプリケーション][13]から受信したトレース。 |
+| アプリケーション セキュリティ モニタリング     | `appsec`                            | Datadog トレーシングライブラリから取り込まれたトレースで、[ASM][14] によって脅威としてフラグが立てられたもの。 |
 
 
 ## その他の参考資料
@@ -356,15 +359,16 @@ HTTP テストとブラウザテストは、バックエンドサービスがイ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/setup_overview/setup/
-[2]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[3]: /ja/tracing/visualization/#trace-root-span
-[4]: /ja/tracing/trace_ingestion/control_page
-[5]: /ja/real_user_monitoring/connect_rum_and_traces/
-[6]: https://github.com/DataDog/browser-sdk/releases/tag/v4.10.0
-[7]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
-[8]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
-[9]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_tracking_http_client%2Fv1.0.0-beta.2
-[10]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc6
-[11]: /ja/synthetics/apm/
-[12]: /ja/serverless/distributed_tracing/
-[13]: /ja/security_platform/application_security/
+[2]: /ja/tracing/trace_ingestion/usage_metrics/
+[3]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
+[4]: /ja/tracing/visualization/#trace-root-span
+[5]: /ja/tracing/trace_ingestion/control_page
+[6]: /ja/real_user_monitoring/connect_rum_and_traces/
+[7]: https://github.com/DataDog/browser-sdk/releases/tag/v4.10.0
+[8]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
+[9]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
+[10]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_tracking_http_client%2Fv1.0.0-beta.2
+[11]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc6
+[12]: /ja/synthetics/apm/
+[13]: /ja/serverless/distributed_tracing/
+[14]: /ja/security_platform/application_security/

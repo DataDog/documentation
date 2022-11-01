@@ -4,7 +4,7 @@ kind: guide
 aliases:
   - /synthetics/faq/uptime-check-internal-website/ 
 private: true
-disable_sidebar: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}
@@ -26,7 +26,8 @@ disable_sidebar: true
     {{< nextlink href="synthetics/guide/synthetic-tests-caching" >}}Avoiding cache issues in Synthetic tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/monitor-https-redirection" >}}Monitor your HTTP requests are redirected into HTTPS{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/reusing-browser-test-journeys/" >}}Reusing browser tests journeys across your test suite{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/email-validation" >}}Email validation with browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/custom-javascript-assertion/" >}}Using custom JavaScript assertions in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/email-validation/" >}}Email validation in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}

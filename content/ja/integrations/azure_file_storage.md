@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_filestorage
+- /ja/integrations/azure_filestorage
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure File Storage インテグレーション
 short_description: Azure File Storage のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure File Storage は、業界標準のサーバーメッセージブロック (SMB) プロトコルを使用してアクセスできるフルマネージド型のファイル共有をクラウドで提供します。

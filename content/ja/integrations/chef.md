@@ -1,19 +1,19 @@
 ---
 aliases:
-  - /ja/guides/chef/
+- /ja/guides/chef/
 categories:
-  - configuration & deployment
-  - provisioning
-  - log collection
-ddtype: crawler
+- configuration & deployment
+- provisioning
+- log collection
 dependencies: []
 description: Chef クライアントの実行を追跡。失敗、成功、大きな変更を把握。
-doc_link: 'https://docs.datadoghq.com/integrations/chef/'
+doc_link: https://docs.datadoghq.com/integrations/chef/
 draft: false
 git_integration_title: chef
 has_logo: true
 integration_id: chef
 integration_title: Chef
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -22,6 +22,7 @@ public_title: Datadog-Chef インテグレーション
 short_description: Chef クライアントの実行を追跡。失敗、成功、大きな変更を把握。
 version: '1.0'
 ---
+
 {{< img src="integrations/chef/chefdashboard.png" alt="Chef イベント" popup="true">}}
 
 ## 概要
@@ -47,9 +48,9 @@ knife cookbook upload datadog
 
 ツールの手順に従って、クックブックを Chef Server にアップロードします。
 
-クックブックのレシピをノードの `run_list` に追加する前に、Chef 属性を介して API キーなどの Datadog アカウント資格情報を追加する必要があります。
+クックブックのレシピをノードの `run_list` に追加する前に、Chef 属性を使って API キーなどの Datadog アカウント資格情報を追加する必要があります。
 
-通常、これは、`role` または `environment` ファイル、または属性を宣言する別のクックブックを介して行われます。
+通常、これは、`role` または `environment` ファイル、または属性を宣言する別のクックブックを使って行われます。
 
 以下は、`base.rb` ロールファイル (通常はオーガニゼーションのすべてのホストに適用される) の例です。
 
@@ -69,9 +70,7 @@ default_attributes(
 )
 ```
 
-必要なキーが 2 つあります。Datadog では、API キーは Integrations => API メニュー項目に移動して検索できます。または、[このリンク][3]をクリックしてログインすると、直接アクセスできます。
-
-次に、同じページで Chef で使用されるアプリケーションキーを作成する必要があります。キーには任意の名前を指定できますが、「chef_appkey」のような名前をお勧めします。
+**注**: 必要なキーは 2 つです。Datadog [API キー][3]と[アプリケーションキー][4]です。
 
 上に示されている属性に両方の値を指定します。
 
@@ -112,9 +111,9 @@ default_attributes(
 )
 ```
 
-ここで行ったことは、ノードの実行リストの先頭に `datadog::dd-handler` レシピを追加することだけです。先頭に追加することで、ハンドラーは起動後に観察したすべての詳細をキャプチャすることができます。ハンドラーが `run_list` の末尾に追加され、ハンドラーが実行される前に何らかのエラーが発生した場合は、一部の出力を受信できないことがあります。
+この例では、ノードの実行リストの先頭に `datadog::dd-handler` レシピが追加されました。先頭に追加することで、ハンドラーは起動後に観察したすべての詳細をキャプチャすることができます。ハンドラーが `run_list` の末尾に追加され、ハンドラーが実行される前に何らかのエラーが発生した場合は、一部の出力を受信できないことがあります。
 
-設定が完了したら、Chef Server にロールをアップロードして待ちます。数ホストで Chef が実行されると、新規の自動 Dashboard が作成され、関連する Chef メトリクスが表示されます。これは[ダッシュボードリスト][4]の右側に表示されます。
+設定されたら、Chef Server にロールをアップロードして待ちます。いくつかのホストで Chef が実行されると、新しい自動 Dashboard が作成されて、関連する Chef メトリクスが表示されます。これは[ダッシュボードリスト][5]の右側にあります。
 
 ### Datadog への Chef メトリクスの送信
 
@@ -154,7 +153,7 @@ default_attributes(
     echo -e "\033[0;31mmissing datadog cookbook - OK\033[0m"
     ```
 
-    これでクックブックをノードに適用する準備が整いました。
+   クックブックをノードに適用する準備が整いました。
 
 4. クックブックをアップロードしたら、ノードの run_list またはロールに追加します。
 
@@ -168,11 +167,11 @@ default_attributes(
 
 ### ログの収集
 
-Agent 6.0 を使用してログを収集できるようになりました。有効化する方法については、[インラインドキュメント][5]を参照してください。[詳細については、以下のセットアップ例](#カスタマイズ)を参考にしてください。
+ログ収集は Agent v6.0+ で利用可能です。[attributes/default.rb][6] を参照して有効にしてください。詳しくは、下記の[設定例](#customizations)を参照してください。
 
 ### 検証
 
-[イベントストリーム][6]で、検索バーに `sources:chef` と入力します。Chef 実行が表示されます。
+[イベントストリーム][7]から、検索バーに `sources:chef` と入力します。Chef 実行が表示されるはずです。
 
 ## 収集データ
 
@@ -188,7 +187,7 @@ Datadog Chef クックブックに、インテグレーション固有のレシ�
 
 これらのレシピの 1 つを実行リストに含めると、そのサービスの監視に必要な Python モジュールなどの監視依存関係がインストールされると共に、正しい構成ファイルが書き出されます。
 
-以下に、`webserver.rb` ロールファイルを拡張して、Datadog から Apache を自動的に監視する例を挙げます。
+以下に、`webserver.rb` ロールファイルを拡張して、Datadog を使って Apache を自動的に監視する例を挙げます。
 
 ```ruby
 name 'webserver'
@@ -226,13 +225,14 @@ default_attributes(
 )
 ```
 
-ここでは、`datadog::apache` レシピを実行リストに追加し、Datadog が監視する Apache のインスタンスを制御するための属性をいくつか指定しました。
+この例では、`datadog::apache` レシピが、Datadog によって監視されるべき Apache のインスタンスを制御するいくつかの属性と共に実行リストに追加されています。
 
 属性の `instances` 部分に渡すインテグレーション値の詳細については、各レシピファイルを参照してください。
 
 [1]: https://docs.chef.io/handlers.html
 [2]: https://supermarket.chef.io/cookbooks/datadog
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://app.datadoghq.com/dashboard/lists
-[5]: https://github.com/DataDog/chef-datadog/blob/v2.15.0/attributes/default.rb#L383-L388
-[6]: https://app.datadoghq.com/event/stream
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/organization-settings/application-keys
+[5]: https://app.datadoghq.com/dashboard/lists
+[6]: https://github.com/DataDog/chef-datadog/blob/v2.15.0/attributes/default.rb#L383-L388
+[7]: https://app.datadoghq.com/event/stream

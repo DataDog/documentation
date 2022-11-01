@@ -145,7 +145,7 @@ By default, [Datadog tracers can automatically inject trace and span IDs into yo
 Specify alternate attributes to use as the source of a log's trace ID by setting a [trace ID remapper processor][2].
 
 
-[1]: /tracing/connect_logs_and_traces/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}

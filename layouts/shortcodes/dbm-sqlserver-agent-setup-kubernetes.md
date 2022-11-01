@@ -61,7 +61,7 @@ metadata:
         {
           "dbm": true,
           "host": "<HOSTNAME>",
-          "port": <SQL_PORT>,
+          "port": "<SQL_PORT>",
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",

@@ -5,7 +5,7 @@ further_reading:
 - link: '/getting_started/tagging/unified_service_tagging/'
   tag: 'Documentation'
   text: 'Learn about Unified Service Tagging'
-- link: '/tracing/connect_logs_and_traces/'
+- link: '/tracing/other_telemetry/connect_logs_and_traces'
   tag: 'Documentation'
   text: 'Connect Logs and Traces'
 - link: '/real_user_monitoring/connect_rum_and_traces/'
@@ -226,9 +226,9 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
-[3]: /tracing/connect_logs_and_traces
+[3]: /tracing/other_telemetry/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /tracing/setup_overview/proxy_setup/?tab=nginx
+[5]: /tracing/trace_collection/proxy_setup/?tab=nginx
 [6]: /logs/log_configuration/processors/#grok-parser
 [7]: /logs/log_configuration/processors/#trace-remapper
 [8]: /integrations/postgres/?tab=host#log-collection

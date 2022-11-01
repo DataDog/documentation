@@ -1,9 +1,8 @@
 ---
 categories:
-  - cloud
-  - aws
-  - ログの収集
-ddtype: crawler
+- cloud
+- aws
+- ログの収集
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_sagemaker/
@@ -21,6 +20,7 @@ public_title: Datadog-Amazon SageMaker インテグレーション
 short_description: Amazon SageMaker のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon SageMaker は、フルマネージド型の機械学習サービスです。Amazon SageMaker を使用して、データサイエンティストや開発者は、機械学習モデルを構築およびトレーニングした後に、実稼働準備ができたホスト環境にモデルを直接デプロイすることができます。
@@ -35,7 +35,7 @@ Amazon SageMaker は、フルマネージド型の機械学習サービスです
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`SageMaker` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `SageMaker` が有効になっていることを確認します。
 2. [Datadog - Amazon SageMaker インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -73,8 +73,8 @@ Amazon SageMaker インテグレーションには、サービスのチェック
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-sagemaker
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-sagemaker
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#log-collection
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

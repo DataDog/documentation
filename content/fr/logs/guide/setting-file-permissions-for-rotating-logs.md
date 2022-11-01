@@ -1,19 +1,20 @@
 ---
-title: Définir les autorisations de fichier pour la rotation des logs (Linux)
-kind: guide
 aliases:
-  - /fr/logs/faq/setting-file-permissions-for-rotating-logs
+- /fr/logs/faq/setting-file-permissions-for-rotating-logs
 further_reading:
-  - link: /logs/guide/log-parsing-best-practice/
-    tag: FAQ
-    text: "Parsing de log\_: bonnes pratiques à adopter"
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Apprendre à traiter vos logs
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: En savoir plus sur le parsing
+- link: /logs/guide/log-parsing-best-practice/
+  tag: FAQ
+  text: 'Parsing de log : bonnes pratiques à adopter'
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Apprendre à traiter vos logs
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: En savoir plus sur le parsing
+kind: guide
+title: Définir les autorisations de fichier pour la rotation des logs (Linux)
 ---
+
 L'Agent Datadog s'exécute avec l'utilisateur `dd-agent` et le groupe `dd-agent`. Cela l'empêche d'accéder aux logs dans `/var/log`, car ils sont uniquement accessibles par l'utilisateur root (ou un sudo administrateur).
 
 ## Définir des autorisations avec des ACL

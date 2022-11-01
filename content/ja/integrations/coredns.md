@@ -1,45 +1,67 @@
 ---
-aliases: []
+app_id: coredns
+app_uuid: b613759e-89ca-4d98-a2c1-4d465c42e413
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     CoreDNS: assets/dashboards/coredns.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: coredns.request_count
+      metadata_path: metadata.csv
+      prefix: coredns.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: CoreDNS
   logs:
     source: coredns
-  metrics_metadata: metadata.csv
   monitors:
     '[CoreDNS] Cache hits count low': assets/monitors/coredns_cache_hits_low.json
     '[CoreDNS] Request duration high': assets/monitors/coredns_request_duration_high.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - コンテナ
 - ネットワーク
 - オートディスカバリー
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
-display_name: CoreDNS
+display_on_public_website: true
 draft: false
 git_integration_title: coredns
-guid: 9b316155-fc8e-4cb0-8bd5-8af270759cfb
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 2.2.0
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: coredns.
-metric_to_check: coredns.request_count
+manifest_version: 2.0.0
 name: coredns
-public_title: Datadog-CoreDNS インテグレーション
+oauth: {}
+public_title: CoreDNS
 short_description: CoreDNS は、Kubernetes の DNS メトリクスを収集します。
-support: コア
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Containers
+  - Category::Network
+  - Category::Autodiscovery
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: CoreDNS は、Kubernetes の DNS メトリクスを収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CoreDNS
 ---
 
 
@@ -111,6 +133,8 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 
 アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
 
+**Annotations v1** (Datadog Agent < v7.36 向け)
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -133,7 +157,36 @@ spec:
     - name: coredns
 ```
 
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: coredns
+  annotations:
+    ad.datadoghq.com/coredns.checks: |
+      {
+        "coredns": {
+          "init_config": {},
+          "instances": [
+            {
+              "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
+              "tags": ["dns-pod:%%host%%"]
+            }
+          ]
+        }
+      }
+  labels:
+    name: coredns
+spec:
+  containers:
+    - name: coredns
+```
+
 レガシーの OpenMetricsBaseCheckV1 バージョンのチェックを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えてください。
+
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
     ad.datadoghq.com/coredns.instances: |
@@ -143,6 +196,17 @@ spec:
           "tags": ["dns-pod:%%host%%"]
         }
       ]
+```
+
+**Annotations v2** (Datadog Agent v7.36+ 向け)
+
+```yaml
+          "instances": [
+            {
+              "prometheus_url": "http://%%host%%:9153/metrics", 
+              "tags": ["dns-pod:%%host%%"]
+            }
+          ]
 ```
 
 **注**:
@@ -156,6 +220,8 @@ spec:
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
 次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
+
+**Annotations v1/v2**
 
 ```yaml
 apiVersion: v1

@@ -2,6 +2,7 @@
 aliases:
 - /ja/agent/autodiscovery/basic_autodiscovery
 - /ja/getting_started/agent/autodiscovery
+- /ja/agent/autodiscovery
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: ドキュメント

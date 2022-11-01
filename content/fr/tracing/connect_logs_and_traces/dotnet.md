@@ -211,6 +211,8 @@ Si vous préférez corréler manuellement vos traces avec vos logs, vous pouvez 
 
 **Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][7] pour parser vos logs, des règles de parsing de log personnalisées doivent être définies pour parser `dd.trace_id` et `dd.span_id` en tant que chaînes. Pour en savoir plus, consultez la [FAQ à ce sujet][10].
 
+**Remarque** : si vous utilisez Serilog, Nlog ou log4net via ILogger, consultez la section Microsoft.Extensions.Logging pour configurer ces propriétés avec `BeginScope()`.
+
 Après avoir effectué les [étapes de prise en main](#prise-en-main), procédez comme suit pour terminer la configuration de l'enrichissement manuel de vos logs :
 
 1. Ajoutez le [package NuGet `Datadog.Trace`][11] comme référence dans votre projet.
@@ -314,9 +316,14 @@ using(_logger.BeginScope(new Dictionary<string, object>
 {{% /tab %}}
 {{< /tabs >}}
 
+Découvrez en détail comment utiliser BeginScope pour créer des messages de log structurés pour les fournisseurs suivants :
+- Serilog : [The semantics of ILogger.BeginScope()][13]
+- NLog : [NLog properties with Microsoft Extension Logging][14]
+- log4net : [Using BeginScope][15]
+
 ## Configurer la collecte de logs
 
-Vérifiez que la collecte de logs est activée dans l'Agent Datadog et que la [configuration de l'Agent de log][12] pour le suivi des fichiers spécifiés est définie sur `source: csharp`, afin que les pipelines de log puissent parser les fichiers de log. Pour en savoir plus, consultez la section [Collecte de logs avec C#][7].
+Vérifiez que la collecte de logs est activée dans l'Agent Datadog et que la [configuration de l'Agent de log][12] pour le suivi des fichiers spécifiés est définie sur `source: csharp`, afin que les pipelines de log puissent parser les fichiers de log. Pour en savoir plus, consultez la section [Collecte de logs avec C#][7]. Si la `source` est définie sur une valeur autre que `csharp`, vous devrez peut-être ajouter un [remappeur de traces][8] vers le pipeline de traitement de logs approprié pour que la mise en corrélation fonctionne correctement.
 
 <div class="alert alert-warning"><strong>Remarque :</strong> la collecte automatique de logs fonctionne uniquement pour les logs au format JSON. Pour les autres formats, utilisez des règles de parsing personnalisées.</div>
 
@@ -336,3 +343,6 @@ Vérifiez que la collecte de logs est activée dans l'Agent Datadog et que la [c
 [10]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/
 [12]: /fr/logs/log_collection/csharp/#configure-your-datadog-agent
+[13]: https://nblumhardt.com/2016/11/ilogger-beginscope/
+[14]: https://github.com/NLog/NLog.Extensions.Logging/wiki/NLog-properties-with-Microsoft-Extension-Logging
+[15]: https://github.com/huorswords/Microsoft.Extensions.Logging.Log4Net.AspNetCore#using-beginscope

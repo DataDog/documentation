@@ -108,35 +108,23 @@ Disk space is low @ops-team@company.com
 
 #### Email
 
-* Notify an active Datadog user by email with `@<DD_USER_EMAIL_ADDRESS>`. **Note**: An email address associated with a pending Datadog user invitation or a disabled user is considered inactive and does not receive notifications.
-* Notify any non-Datadog user by email with `@<EMAIL>`.
+{{% notifications-email %}}
 
 #### Integrations
 
-Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. Below is a list of prefixes and example links:
-
-| Integration    | Prefix       | Examples       |
-|----------------|--------------|----------------|
-| [Jira][8]      | `@jira`      | [Examples][9]  |
-| [PagerDuty][10] | `@pagerduty` | [Examples][11]  |
-| [Slack][12]     | `@slack`     | [Examples][13]  |
-| [Webhooks][14]  | `@webhook`   | [Examples][15] |
-
-See the [list of integrations][16] that can be used to notify your team.
-
-**Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not parsed and no alert is created.
+{{% notifications-integrations %}}
 
 ### Modifications
 
-An [event][17] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
+An [event][8] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
 
 ### Permissions
 
 All users can read all monitors, regardless of the role they are associated with.
 
-By default, only users attached to roles with the [Monitors Write permission][18] can edit monitors. [Datadog Admin Role and Datadog Standard Role][19] have the Monitors Write permission by default. If your organization uses [Custom Roles][20], other custom roles may have the Monitors Write permission.
+By default, only users attached to roles with the [Monitors Write permission][9] can edit monitors. [Datadog Admin Role and Datadog Standard Role][10] have the Monitors Write permission by default. If your organization uses [Custom Roles][11], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][21] allowed to edit it. The monitor's creator can always edit the monitor. 
+You can further restrict your monitor by specifying a list of [roles][12] allowed to edit it. The monitor's creator can always edit the monitor. 
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
@@ -144,17 +132,17 @@ Editing includes any updates to the monitor configuration, deleting the monitor,
 
 **Note**: The limitations are applied both in the UI and API.
 
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][22].
+For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][13].
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][23]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][14]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][24] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][15] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -162,7 +150,7 @@ Test notifications are supported for the [monitor types][23]: host, metric, anom
 
 ### Events
 
-Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+Test notifications produce events that can be searched within the event explorer. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
 
 Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
 
@@ -185,21 +173,12 @@ Message variables auto-populate with a randomly selected group based on the scop
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables
 [6]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[7]: /monitors/notify/variables/?tab=is_renotify#examples 
-[8]: /integrations/jira/
-[9]: /integrations/jira/#usage
-[10]: /integrations/pagerduty/
-[11]: /integrations/pagerduty/#troubleshooting
-[12]: /integrations/slack/
-[13]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[14]: /integrations/webhooks/
-[15]: /integrations/webhooks/#usage
-[16]: /integrations/#cat-notification
-[17]: /events/
-[18]: /account_management/rbac/permissions/#monitors
-[19]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[20]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[21]: /account_management/rbac/?tab=datadogapplication
-[22]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[23]: /monitors/create/#monitor-types
-[24]: /monitors/guide/recovery-thresholds/
+[7]: /monitors/notify/variables/?tab=is_renotify#examples
+[8]: /events/
+[9]: /account_management/rbac/permissions/#monitors
+[10]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[11]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[12]: /account_management/rbac/?tab=datadogapplication
+[13]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[14]: /monitors/create/#monitor-types
+[15]: /monitors/guide/recovery-thresholds/

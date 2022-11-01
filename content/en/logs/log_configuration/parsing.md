@@ -44,7 +44,7 @@ john connected on 11/08/2017
 With the following parsing rule:
 
 ```text
-MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
+MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
 After processing, the following structured log is generated:

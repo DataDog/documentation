@@ -26,7 +26,8 @@
                     "developers",
                     "account_management",
                     "synthetics",
-                    "database_monitoring"
+                    "database_monitoring",
+                    "profiler"
                 ]
             },
             "tags": ["faq"],
@@ -117,7 +118,9 @@
                     "tracing",
                     "serverless",
                     "watchdog",
-                    "database_monitoring"
+                    "database_monitoring",
+                    "profiler",
+                    "containers"
                 ]
             },
             "tags": ["docs"],
@@ -145,7 +148,8 @@
         "/tracing/guide/agent-5-tracing-setup/$",
         "docs.datadoghq.com/fr/.*/faq/",
         "docs.datadoghq.com/ja/.*/faq/",
-        "docs.datadoghq.com/resources/"
+        "docs.datadoghq.com/resources/",
+        "/partners/"
     ],
     "selectors": {
         "api_latest": {

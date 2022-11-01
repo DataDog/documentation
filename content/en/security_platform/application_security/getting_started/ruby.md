@@ -10,10 +10,10 @@ further_reading:
       text: 'Ruby Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Monitoring Rules"
+      text: "OOTB Application Security Management Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Monitoring"
+      text: "Troubleshooting Application Security Management"
 ---
 
 You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
@@ -211,4 +211,4 @@ env DD_APPSEC_ENABLED=true rails server
 
 [1]: /security_platform/application_security/setup_and_configure/?code-lang=ruby#compatibility
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
-[3]: /tracing/setup_overview/setup/ruby/
+[3]: /tracing/trace_collection/dd_libraries/ruby/

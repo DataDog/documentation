@@ -3,7 +3,7 @@ title: Troubleshooting DBM Setup for Postgres
 kind: documentation
 description: Troubleshoot Database Monitoring setup for Postgres
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -142,14 +142,21 @@ Solution: The Agent requires the `datadog.explain_statement(...)` function to ex
 Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -175,13 +182,15 @@ If a client is using the Postgres [extended query protocol][9] or prepared state
 | Node     | [node-postgres][17]       | Uses the extended query protocol and cannot be disabled. To enable the Datadog Agent to collect execution plans, use [pg-format][18] to format SQL Queries before passing them to [node-postgres][17].                                                                                                                                                                                 |
 
 #### Query is in a database ignored by the Agent instance config
-The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `postgres` database are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][19].
+The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][19].
+
+**Note:** The `postgres` database is also ignored by default in Agent versions <7.41.0.
 
 #### Query cannot be explained
 Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
 
 #### Query is relatively infrequent or executes quickly
-The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][10] to capture the query.
+The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][23] to capture the query.
 
 
 #### Application is relying on search paths for specifying which schema to query
@@ -226,3 +235,4 @@ For more information, see the appropriate version of the [Postgres `contrib` doc
 [20]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
 [21]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
 [22]: https://www.postgresql.org/docs/12/contrib.html
+[23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281

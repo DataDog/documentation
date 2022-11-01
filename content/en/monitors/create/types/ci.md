@@ -71,7 +71,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 <div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
-[1]: /continuous_integration/setup_pipelines/custom_commands/
+[1]: /continuous_integration/pipelines/custom_commands/
 {{% /tab %}}
 {{% tab "Tests" %}}
 
@@ -107,6 +107,26 @@ The following example is a test error rate monitor using a formula that calculat
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:80%;" >}}
 
 <div class="alert alert-info"><strong>Note</strong>: A maximum of two queries can be used to build the evaluation formula per monitor.</div>
+
+#### Using CODEOWNERS for notifications
+
+You can send the notification to different teams using the `CODEOWNERS` information available in the test event. 
+
+The example below configures the notification with the following logic:
+* If the test code owner is `MyOrg/my-team`, then send the notification to the `my-team-channel` Slack channel.
+* If the test code owner is `MyOrg/my-other-team`, then send the notification to the `my-other-team-channel` Slack channel.
+
+{{< code-block lang="text" >}}
+{{#is_match "citest.attributes.test.codeowners" "MyOrg/my-team"}}
+  @slack-my-team-channel
+{{/is_match}}
+{{#is_match "citest.attributes.test.codeowners" "MyOrg/my-other-team"}}
+  @slack-my-other-team-channel
+{{/is_match}}
+{{< /code-block >}}
+
+In the `Notification message` section of your monitor, add text similar to the code snippet above to configure monitor notifications. You can add as many `is_match` clauses as you need.
+
 {{% /tab %}}
 {{< /tabs >}}
 ### Set alert conditions

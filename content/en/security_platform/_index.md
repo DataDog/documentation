@@ -1,5 +1,5 @@
 ---
-title: Security Platform
+title: Datadog Security
 kind: documentation
 aliases:
   - compliance_monitoring
@@ -23,7 +23,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
     tag: "Blog"
     text: "Best practices for securing Kubernetes applications"
-  
+  - link: "https://www.datadoghq.com/blog/securing-cloud-native-infrastructure-network-perimeter/"
+    tag: "Blog"
+    text: "Best practices for network perimeter security in cloud-native environments"
 ---
 
 {{< site-region region="gov" >}}
@@ -34,16 +36,16 @@ Cloud Security Posture Management is not currently available in US1-FED.
 
 ## Overview
 
-Bring speed and scale to your production security operations. Datadog’s Security Platform delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, the Datadog security platform brings unprecedented integration between security and operations aligned to your organizations shared goals.
+Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-The Datadog Security Platform includes [Application Security Monitoring](#application-security-monitoring), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
+Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
 {{< vimeo 669874306 >}}
 </br>
 
-## Application Security Monitoring
+## Application Security Management
 
-[Application Security Monitoring][1] (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment.
+[Application Security Management][1] (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment.
 
 {{< img src="/security_platform/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
@@ -51,7 +53,7 @@ The Datadog Security Platform includes [Application Security Monitoring](#applic
 
 [Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow.
 
-{{< img src="security_platform/security_monitoring_overview.png" alt="Cloud SIEM sources analyzed view in Datadog" width="100%">}}
+{{< img src="security_platform/security_monitoring/cloud_siem_homepage.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
 ## Cloud Security Posture Management
 
@@ -65,7 +67,7 @@ The Datadog Security Platform includes [Application Security Monitoring](#applic
 
 {{< img src="security_platform/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-To get started with the Datadog Security Platform, navigate to the [Setup & Configuration][9] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+To get started with Datadog Security, navigate to the [Setup & Configuration][9] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ## Further Reading
 

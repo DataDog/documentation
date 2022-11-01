@@ -1,23 +1,26 @@
 ---
 categories:
-  - network
-  - web
-ddtype: crawler
+- network
+- web
 dependencies: []
 description: ゾーン変更を監視し、ゾーンまたはレコード別に秒単位でクエリを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/dyn/'
+doc_link: https://docs.datadoghq.com/integrations/dyn/
 draft: false
 git_integration_title: dyn
 has_logo: true
+integration_id: ''
 integration_title: Dyn
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: dyn
 public_title: Datadog-Dyn インテグレーション
 short_description: ゾーン変更を監視し、ゾーンまたはレコード別に秒単位でクエリを追跡。
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/dyn/dyn_overview.png" alt="Dyn の概要" popup="true">}}
 
 ## 概要
@@ -43,7 +46,7 @@ Dyn で `datadog` 読み取り専用ユーザーをまだ作成していない�
 
 Datadog 読み取り専用ユーザーを作成し、次の手順を行います。
 
-1. Datadog アプリケーションで [Dyn インテグレーション][2]を構成します。
+1. インテグレーションタイルを使用して Datadog [Dyn インテグレーション][2]を構成:
    {{< img src="integrations/dyn/dyn_integration.png" alt="Dyn インテグレーション" style="width:75%;" popup="true">}}
 
 2. イベントと `dyn.changes` メトリクスを収集するゾーン (_Zone notes_) を選択します。<br>

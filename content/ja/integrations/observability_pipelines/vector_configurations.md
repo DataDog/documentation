@@ -1,4 +1,6 @@
 ---
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/vector_configurations.md
 further_reading:
 - link: /integrations/observability_pipelines/working_with_data/
   tag: ドキュメント
@@ -9,9 +11,9 @@ further_reading:
 - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
   tag: ドキュメント
   text: Vector のソースとなる Datadog Agent
-- link: /agent/vector_aggregation/
+- link: /integrations/observability_pipelines/integrate_vector_with_datadog/
   tag: ドキュメント
-  text: Vector アグリゲーターにデータを送信するための Datadog Agent の構成
+  text: Vector にデータを送信するための Datadog Agent の構成
 kind: ドキュメント
 title: Vector の構成
 ---

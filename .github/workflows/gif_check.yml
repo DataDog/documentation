@@ -1,25 +1,32 @@
-name: "No GIFs"
+name: "Check for GIF files"
 
 on:
   pull_request:
     paths:
-    - 'static/images/**'
+    - 'static/images/**/*'
 
 jobs:
-  file_existence:
+  look-for-gifs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+          fetch-depth: 0
 
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "static/images/**/*.gif"
-
-      - name: GIF file exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: |
-          echo "GIF file(s) found! Use MP4 format for videos."
-          exit 1
+    - name: Find changed files
+      id: changed_files
+      uses: tj-actions/changed-files@v3
+      
+    - name: Look for gifs
+      env:
+        branch: ${{ github.head_ref }}
+      id: comment_body
+      run: |
+        for file in ${{ steps.changed_files.outputs.all_changed_files }}; do
+          echo "Checking file ${file}..."
+          if [[ "$file" =~ ^static/images/(.*).gif$ ]]; then
+            echo "The file $file is a gif. Please replace with an mp4"
+            exit 1
+          fi
+        done

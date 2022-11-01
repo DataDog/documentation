@@ -56,7 +56,7 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 ### Dashboards
-Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling view, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, which update in real-time and can represent fixed points in the past. They also work well for debugging.
 
 ### Timeboards
 Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
@@ -81,12 +81,36 @@ Click on any dashboard graph to open an options menu:
 | View related logs      | Jump to the [Log Explorer][7] page scoped to your graph.     |
 | View related traces    | Populate a [Traces][8] panel scoped to your graph.           |
 | View related profiles  | Jump to the [Profiling][9] page scoped to your graph.        |
+
 ### Global time selector
+
 To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
 The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][10]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
 Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
+
+#### Refresh rate
+
+The refresh rate of a private dashboard depends on the time frame you are viewing. The shorter the time frame is, the more frequently the data is refreshed. Publicly shared dashboards refresh every thirty seconds, regardless of the selected time frame.
+
+| Time frame   | Refresh rate |
+|--------------|--------------|
+| 1 minute     | 10 seconds   |
+| 2 minutes    | 10 seconds   |
+| 5 minutes    | 10 seconds   |
+| 10 minutes   | 10 seconds   |
+| 30 minutes   | 20 seconds   |
+| 1 hour       | 20 seconds   |
+| 3 hours      | 1 minute     |
+| 4 hours      | 1 minute     |
+| 1 day        | 3 minutes     |
+| 2 days       | 10 minutes    |
+| 1 week       | 1 hour       |
+| 1 month      | 1 hour       |
+| 3 months     | 1 hour       |
+| 6 months     | 1 hour       |
+| 1 year       | 1 hour       |
 
 ### TV mode
 
@@ -104,11 +128,11 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event stream][12]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [event explorer][12]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
-Change events for dashboards with notifications enabled are seen in the event stream by searching:
+Change events for dashboards with notifications enabled are seen in the event explorer by searching:
 
 ```text
 tags:audit,dash
@@ -134,7 +158,7 @@ If you manage your Dashboards with Terraform, you can use the latest version of 
 
 #### High-density mode
 
-High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default for on large screens for dashboards that use group widgets.
+High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets.
 
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display" style="width:90%;">}}
 #### Clone dashboard
@@ -165,7 +189,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][15] page. 
+Search, view, or create dashboards and lists on the [Dashboard List][15] page.
 
 ### New list
 
@@ -258,7 +282,7 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [6]: https://app.datadoghq.com/infrastructure/map
 [7]: https://app.datadoghq.com/logs
 [8]: /tracing/
-[9]: /tracing/profiler/
+[9]: /profiler/
 [10]: /dashboards/guide/custom_time_frames/
 [11]: /dashboards/sharing/#dashboards
 [12]: /events/

@@ -4,6 +4,7 @@ kind: documentation
 aliases:
  - /agent/autodiscovery/basic_autodiscovery
  - /getting_started/agent/autodiscovery
+ - /agent/autodiscovery
 further_reading:
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"

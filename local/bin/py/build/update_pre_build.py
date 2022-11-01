@@ -3,11 +3,12 @@
 import sys
 import yaml
 
-from pull_and_push_file import pull_and_push_file
-from pull_and_push_folder import pull_and_push_folder
+from actions.pull_and_push_file import pull_and_push_file
+from actions.pull_and_push_folder import pull_and_push_folder
 from content_manager import prepare_content
-from integrations import Integrations
-from security_rules import security_rules
+from actions.integrations import Integrations
+from actions.security_rules import security_rules
+from actions.workflows import workflows
 
 from collections import OrderedDict
 from optparse import OptionParser
@@ -70,8 +71,10 @@ class Build:
                     pull_and_push_file(content, self.content_dir)
                 elif content["action"] in ("security-rules", "compliance-rules"):
                     security_rules(content, self.content_dir)
+                elif content['action'] == "workflows":
+                    workflows(content, self.content_dir)
                 elif content["action"] == "Not Available":
-                    if getenv("LOCAL") == 'True':
+                    if not getenv("CI_COMMIT_REF_NAME"):
                         print("\x1b[33mWARNING\x1b[0m: Processing of {} canceled, since content is not available. Documentation is in degraded mode".format(
                             content["repo_name"]))
                 else:
@@ -80,7 +83,7 @@ class Build:
                     raise ValueError
             except Exception as e:
                 print(e)
-                if getenv("LOCAL") == 'True':
+                if not getenv("CI_COMMIT_REF_NAME"):
                     print(
                         "\x1b[33mWARNING\x1b[0m: Unsuccessful processing of {}".format(content))
                 else:
@@ -94,7 +97,7 @@ class Build:
             Int.merge_integrations()
         except Exception as e:
             print(e)
-            if getenv("LOCAL") == 'True':
+            if not getenv("CI_COMMIT_REF_NAME"):
                 print(
                     "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
             else:

@@ -1,9 +1,21 @@
 import Cookies from 'js-cookie';
-import config from './regions.config';
+import config from './config/regions.config'
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
-    const regionSelector = document.querySelector('.js-region-select');
+    const regionSelector = document.querySelector('.js-region-select')
+    const currentUserSavedRegion = Cookies.get('site')
+    const currentReferrerAppRegion = getDDSiteFromReferrer()
+
+    // keep docs/app saved regions in sync.   if user navigates to docs from app,
+    // we want docs links back to the app returning user to DD app region they came from.
+    // reloading resets document.referrer ensuring user region remains in sync.
+    if (currentReferrerAppRegion && currentReferrerAppRegion !== currentUserSavedRegion) {
+        regionOnChangeHandler(currentReferrerAppRegion)
+        window.location.reload()
+    } else {
+        redirectToRegion()
+    }
 
     if (regionSelector) {
         const options = regionSelector.querySelectorAll('.dropdown-item');
@@ -17,22 +29,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// returns the Datadog site associated with referrer URL, if applicable.
+// i.e. 'app.datadoghq.eq' => 'eu'
+const getDDSiteFromReferrer = () => {
+    const ddFullSitesObject = config.dd_full_site
+    let referrerSite = ''
+
+    if (document.referrer) {
+        const referrerHostname = new URL(document.referrer).hostname
+
+        for (const site in ddFullSitesObject) {
+            if (ddFullSitesObject[site] === referrerHostname) {
+                referrerSite = site
+            }
+        }
+    }
+    
+    return referrerSite
+}
+
 function replaceButtonInnerText(value) {
     const selectedRegion = config.dd_datacenter[value];
     const regionSelector = document.querySelector('.js-region-select');
     const buttonInner = regionSelector.querySelector('.btn-inner');
     buttonInner.innerText = selectedRegion;
-}
-
-function isReferrerEU() {
-    if (window.document.referrer.includes('datadoghq.eu') &&
-    window.document.referrer.indexOf(
-        `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
-    ) === -1) {
-        return true;
-    }
-
-    return false;
 }
 
 function regionOnChangeHandler(region) {
@@ -51,12 +71,7 @@ function regionOnChangeHandler(region) {
         showRegionSnippet(region);
         replaceButtonInnerText(region);
         Cookies.set('site', region, { path: '/' });
-    } else if (isReferrerEU()) {
-        // need to reload the page if referrer is from EU to reset window.document.referrer
-        Cookies.set('site', region, { path: '/' });
-        window.location.reload();
-    }
-    else if (config.allowedRegions.includes(region)){
+    } else if (config.allowedRegions.includes(region)) {
         showRegionSnippet(region);
         replaceButtonInnerText(region);
         Cookies.set('site', region, { path: '/' });
@@ -114,11 +129,9 @@ function showRegionSnippet(newSiteRegion) {
     }
 }
 
-// have option to pass new site region to function.
 function redirectToRegion(region = '') {
     const regionSelector = document.querySelector('.js-region-select');
     const queryParams = new URLSearchParams(window.location.search);
-
     let newSiteRegion = region;
 
     if (config.allowedRegions.includes(queryParams.get('site'))) {
@@ -127,20 +140,6 @@ function redirectToRegion(region = '') {
 
         Cookies.set('site', newSiteRegion, { path: '/' });
     } else if (newSiteRegion !== '') {
-        Cookies.set('site', newSiteRegion, { path: '/' });
-        showRegionSnippet(newSiteRegion);
-    } else if (isReferrerEU()) {
-        newSiteRegion = 'eu';
-        Cookies.set('site', newSiteRegion, { path: '/' });
-        showRegionSnippet(newSiteRegion);
-    } else if (
-        window.document.referrer.includes('datadoghq.com') &&
-        window.document.referrer.indexOf(
-            `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
-        ) === -1
-    ) {
-        // not current domain
-        newSiteRegion = 'us';
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
     } else if (
@@ -156,9 +155,7 @@ function redirectToRegion(region = '') {
         }
     } else {
         newSiteRegion = 'us';
-
         Cookies.set('site', newSiteRegion, { path: '/' });
-
         showRegionSnippet(newSiteRegion);
     }
 
@@ -167,6 +164,4 @@ function redirectToRegion(region = '') {
     }
 }
 
-redirectToRegion();
-
-export { redirectToRegion, showRegionSnippet, regionOnChangeHandler };
+export { redirectToRegion, getDDSiteFromReferrer };

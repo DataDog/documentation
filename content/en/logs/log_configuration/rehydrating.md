@@ -48,7 +48,7 @@ By creating historical views with specific queries (for example, over one or mor
 #### Notify
 
 Events are triggered automatically when a rehydration starts and finishes.
-These events are available in your [Events stream][7].
+These events are available in your [Events Explorer][7].
 
 During the creation of a historical view, you can use the built-in template variables to customize the notification triggered at the end of the rehydration:
 
@@ -93,7 +93,7 @@ One hour later, the historical view is definitively deleted; until that time, th
 
 ### Viewing deleted historical views
 
-View deleted historical views for up to 90 days in the past using the `View` dropdown menu:
+View deleted historical views for up to 1 year in the past using the `View` dropdown menu:
 
 {{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="Deleting Historical Views" width="75%" >}}
 

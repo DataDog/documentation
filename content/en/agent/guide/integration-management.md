@@ -43,17 +43,19 @@ The syntax for this command is `datadog-agent integration install <INTEGRATION_P
 
 For example, to install version 3.6.0 of the vSphere integration, run:
 
-Linux:
-
+{{< tabs >}}
+{{% tab "Linux" %}}
 ```shell
 sudo -u dd-agent -- datadog-agent integration install datadog-vsphere==3.6.0
 ```
-
-Windows:
-
+{{% /tab %}}
+{{% tab "Windows PowerShell" %}}
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration install datadog-vsphere==3.6.0
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration install datadog-vsphere==3.6.0
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 The command installs the Python package of the integration and copies the configuration files (`conf.yaml.example`, `conf.yaml.default`, `auto_conf.yaml`) to the `conf.d` directory, overwriting the existing ones. The same thing is done during a full Agent upgrade. If a failure occurs while copying of the files, the command exits with a failure, but the version of the integration you specified still gets installed.
 
@@ -73,17 +75,19 @@ To remove an integration, use the `datadog-agent integration remove` command. Th
 
 For example, to remove the vSphere integration, run:
 
-Linux:
-
+{{< tabs >}}
+{{% tab "Linux" %}}
 ```shell
 sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 ```
-
-Windows:
-
+{{% /tab %}}
+{{% tab "Windows PowerShell" %}}
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration remove datadog-vsphere
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration remove datadog-vsphere
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 Removing an integration does not remove the corresponding configuration folder in the `conf.d` directory.
 
@@ -93,33 +97,37 @@ To get information, such as the version, about an installed integration, use the
 
 For example, to show information on the vSphere integration, run:
 
-Linux:
-
+{{< tabs >}}
+{{% tab "Linux" %}}
 ```shell
 sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 ```
-
-Windows:
-
+{{% /tab %}}
+{{% tab "Windows PowerShell" %}}
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration show datadog-vsphere
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration show datadog-vsphere
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Freeze
 
 To list all the Python packages installed in the Agent's Python environment, use the `datadog-agent integration freeze` command. This lists all the Datadog integrations (packages starting with `datadog-`) and the Python dependencies required to run the integrations.
 
-Linux:
-
+{{< tabs >}}
+{{% tab "Linux" %}}
 ```text
 sudo -u dd-agent -- datadog-agent integration freeze
 ```
-
-Windows:
-
+{{% /tab %}}
+{{% tab "Windows PowerShell" %}}
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" integration freeze
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration freeze
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://github.com/DataDog/integrations-core
 [2]: https://github.com/DataDog/integrations-core/blob/master/AGENT_INTEGRATIONS.md

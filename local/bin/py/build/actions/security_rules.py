@@ -97,7 +97,9 @@ def security_rules(content, content_dir):
             if message_file_name.exists():
                 # delete file or skip if staged
                 # any() will return True when at least one of the elements is Truthy
-                if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isDeleted', False) or not data.get('isEnabled', True):
+                # TODO: remove isStaged check after upstream removal
+                if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isShadowDeployed', False) \
+                    or data.get('isDeleted', False) or not data.get('isEnabled', True) or data.get('isDeprecated', False):
                     if p.exists():
                         logger.info(f"removing file {p.name}")
                         global_aliases.append(f"/security_monitoring/default_rules/{p.stem}")
@@ -133,24 +135,33 @@ def security_rules(content, content_dir):
                         # previous categorization
                         if relative_path.startswith('configuration'):
                             page_data['rule_category'].append('Posture Management (Cloud)')
+                            page_data['rule_category'].append('Cloud Security Management')
                         elif relative_path.startswith('runtime'):
                             if 'compliance' in relative_path:
                                 page_data['rule_category'].append('Posture Management (Infra)')
+                                page_data['rule_category'].append('Cloud Security Management')
                             else:
                                 page_data['rule_category'].append('Workload Security')
+                                page_data['rule_category'].append('Cloud Security Management')
 
                         # new categorization
-                        if 'security-monitoring' in relative_path:
-                            page_data['rule_category'].append('Cloud SIEM')
+                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
+                            if 'signal-correlation/production' in relative_path:
+                                page_data['rule_category'].append('Cloud SIEM (Signal Correlation)')
+                            else:
+                                page_data['rule_category'].append('Cloud SIEM (Log Detection)')
 
                         if 'posture-management' in relative_path:
                             if 'cloud-configuration' in relative_path:
                                 page_data['rule_category'].append('Posture Management (Cloud)')
+                                page_data['rule_category'].append('Cloud Security Management')
                             if 'infrastructure-configuration' in relative_path:
                                 page_data['rule_category'].append('Posture Management (Infra)')
+                                page_data['rule_category'].append('Cloud Security Management')
 
                         if 'workload-security' in relative_path:
                             page_data['rule_category'].append('Workload Security')
+                            page_data['rule_category'].append('Cloud Security Management')
 
                         if 'application-security' in relative_path:
                             page_data['rule_category'].append('Application Security')
@@ -174,7 +185,7 @@ def security_rules(content, content_dir):
                             page_data["scope"] = tech
 
                         # Hardcoded rules in cloud siem which can span several different log sources do not include a source tag
-                        if 'security-monitoring' in relative_path:
+                        if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
                             is_hardcoded = not page_data.get("source", None)
                             if is_hardcoded:
                                 page_data["source"] = "multi Log Sources"

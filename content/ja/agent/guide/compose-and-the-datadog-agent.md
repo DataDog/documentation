@@ -40,6 +40,7 @@ services:
     image: redis
   datadog:
     build: datadog
+    pid: host
     environment:
      - DD_API_KEY=${DD_API_KEY}
      - DD_SITE={{< region-param key="dd_site" >}}
@@ -80,6 +81,7 @@ services:
       com.datadoghq.ad.logs: '[{"source": "redis", "service": "redis"}]'
   datadog:
     build: datadog
+    pid: host
     environment:
      - DD_API_KEY=${DD_API_KEY}
      - DD_SITE={{< region-param key="dd_site" >}}

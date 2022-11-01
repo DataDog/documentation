@@ -142,14 +142,21 @@ SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[ ?
 Agent が実行計画を収集できるように、**すべてのデータベース**に関数を作成します。
 
 ```SQL
-CREATE OR REPLACE FUNCTION datadog.explain_statement (
-   l_query text,
-   out explain JSON
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
 )
 RETURNS SETOF JSON AS
 $$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
 BEGIN
-   RETURN QUERY EXECUTE 'EXPLAIN (FORMAT JSON) ' || l_query;
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
 END;
 $$
 LANGUAGE 'plpgsql'
@@ -175,7 +182,9 @@ Agent のバージョンが 7.36.1 以上であることを確認してくださ
 | Node     | [node-postgres][17]       | 拡張クエリプロトコルを使用するため、無効化することはできません。Datadog Agent が実行計画を収集できるようにするには、[pg-format][18] を使用して、SQL クエリを [node-postgres][17] に渡す前にフォーマットしてください。                                                                                                                                                                                 |
 
 #### クエリが Agent インスタンスの構成で無視されるデータベースにある
-Agent インスタンスのコンフィギュレーション `ignore_databases` が無視するデータベース内にクエリが存在します。`postgres` データベースなどのデフォルトのデータベースは、`ignore_databases` 設定では無視されます。これらのデータベースのクエリにはサンプルや実行計画がありません。インスタンスコンフィギュレーションでの設定値と、[サンプルコンフィギュレーションファイル][19]のデフォルト値を確認してください。
+Agent インスタンスのコンフィギュレーション `ignore_databases` が無視するデータベース内にクエリが存在します。`rdsadmin` や `azure_maintenance` データベースなどのデフォルトのデータベースは、`ignore_databases` 設定では無視されます。これらのデータベースのクエリにはサンプルや実行計画がありません。インスタンスコンフィギュレーションでの設定値と、[サンプルコンフィギュレーションファイル][19]のデフォルト値を確認してください。
+
+**注:** Agent バージョン <7.41.0 では、`postgres` データベースもデフォルトで無視されます。
 
 #### クエリが実行されない
 BEGIN、COMMIT、SHOW、USE、ALTER などの一部のクエリでは、データベースから有効な実行計画を得ることができません。SELECT、UPDATE、INSERT、DELETE、REPLACE の各クエリのみが実行計画をサポートしています。

@@ -29,27 +29,26 @@ Datadog は、GuardDuty の調査結果を Datadog のログ管理ソリュー�
 
 #### ログの有効化
 
-1. **GuardDuty Finding** イベントタイプを使用して Cloudwatch で新しい規則を作成します。
+1. [Datadog Forwarder Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_1.png" alt="aws gd 1" style="width:75%;" >}}
+2. [Amazon EventBridge][2] で新しいルールを作成します。ルールに名前を付け、**Rule with an event pattern** を選択します。**Next** をクリックします。
 
-2. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
+3. GuardDuty Findings に一致するようにイベントパターンを構築します。**Event source** セクションで、`AWS events or EventBridge partner events` を選択します。**Event pattern** セクションでは、ソースに `AWS services` を、サービスに `GuardDuty` を、タイプに `GuardDuty Finding` を指定します。**Next** をクリックします。
 
-3. Lambda 関数が作成されたら、Datadog Lambda 関数をターゲットとして定義します。
+4. Datadog Forwarder をターゲットとして選択します。ターゲットタイプに `AWS service`、ターゲットに `Lambda function` を設定し、ドロップダウンメニューの `Function` から Datadog forwarder を選択します。**Next** をクリックします。
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_2.png" alt="aws gd 2" style="width:75%;" >}}
-
-4. 規則を保存します。
+5. 必要なタグを構成し、**Create rule** をクリックします。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
+1. AWS コンソールで、**Lambda** に移動します。
 
-2. Lambda 関数をセットアップしたら、**CloudWatch Events** をトリガーとして選択し、`GuardDutyRule` を作成することで、GuardDuty をトリガーとして追加します。
+2. **Functions** をクリックし、Datadog forwarder を選択します。
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3" style="width:75%;">}}
+3. Function Overview セクションで、**Add Trigger** をクリックします。ドロップダウンメニューから **EventBridge (CloudWatch Events)** を選択し、[ログの有効化セクション](#enable-logging)で作成したルールを指定します。
 
-3. 完了したら、[Datadog Log セクション][2]を参照して、ログを確認します。
+4. [Datadog ログエクスプローラー][3]で新しい GuardDuty Findings を確認することができます。
 
-[1]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[2]: https://app.datadoghq.com/logs
+[1]: /ja/logs/guide/forwarder/
+[2]: https://console.aws.amazon.com/events/home
+[3]: https://app.datadoghq.com/logs

@@ -157,5 +157,5 @@ logs:
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
-[4]: /tracing/connect_logs_and_traces/python
+[4]: /tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /agent/guide/agent-commands/

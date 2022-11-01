@@ -3,10 +3,10 @@ integration_title: RSS
 name: rss
 kind: integration
 doclevel: basic
-description: "See RSS feeds in your Datadog event stream."
+description: "See RSS feeds in your Datadog event explorer."
 is_public: true
 public_title: Datadog-RSS Integration
-short_description: "Capture any RSS feed inside your Datadog event stream"
+short_description: "Capture any RSS feed inside your Datadog event explorer"
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md']
 categories:
@@ -21,7 +21,7 @@ integration_id: "feed"
 
 Capture RSS feed activity in Datadog to:
 
-- Add events from custom sources to your stream.
+- Add events from custom sources to your explorer.
 - Discuss feed events with your team.
 
 ## Setup
@@ -39,14 +39,13 @@ Configuration requires:
 
 ### Validation
 
-Check the [Events Stream][1] and [Events Explorer][2] to view RSS feed activity in Datadog.
+Check the [Events Explorer][1] to view RSS feed activity in Datadog.
 
 ## Further Reading
 
 ### Documentation
 
-- [Exploring Datadog Events][3]
+- [Exploring Datadog Events][2]
 
-[1]: https://app.datadoghq.com/event/stream
-[2]: https://app.datadoghq.com/event/explorer
-[3]: https://docs.datadoghq.com/events/#exploring-datadog-events
+[1]: https://app.datadoghq.com/event/explorer
+[2]: https://docs.datadoghq.com/events/#exploring-datadog-events

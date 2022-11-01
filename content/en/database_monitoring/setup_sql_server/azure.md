@@ -13,7 +13,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -54,30 +54,20 @@ Grant the Agent access to each additional Azure SQL Database on this server:
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-When configuring the Datadog Agent, specify one check instance for each application database located on a given single Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
+When configuring the Datadog Agent, specify one check instance for each application database located on a given Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
 
 ```yaml
 init_config:
 instances:
-  # database_1
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_1>'
-    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_1>'
     username: datadog
     password: '<PASSWORD>'
-    azure:
-      deployment_type: 'sql_database'
-      name: '<SERVER_NAME>'
 
-  # database_2
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_2>'
-    reported_hostname: '<SERVER_NAME>.database.windows.net/<DATABASE_2>'
     username: datadog
     password: '<PASSWORD>'
-    azure:
-      deployment_type: 'sql_database'
-      name: '<SERVER_NAME>'
 ```
 
 See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
@@ -264,8 +254,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -l com.datadoghq.ad.init_configs='[{}]' \
   -l com.datadoghq.ad.instances='[{
     "dbm": true,
-    "host": "<HOSTNAME>",
-    "port": <SQL_PORT>,
+    "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
     "driver": "FreeTDS",
     "username": "datadog",
@@ -318,8 +307,7 @@ helm install <RELEASE_NAME> \
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>
-    port: 1433
+    host: <HOSTNAME>,1433
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
@@ -339,8 +327,7 @@ cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>'
-    port: <SQL_PORT>
+    host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
@@ -368,8 +355,7 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<HOSTNAME>",
-          "port": <SQL_PORT>,
+          "host": "<HOSTNAME>,<SQL_PORT>",
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",

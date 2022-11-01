@@ -12,7 +12,7 @@ further_reading:
 - link: /security_platform/application_security/troubleshooting
   tag: ドキュメント
   text: アプリケーションセキュリティモニタリングのトラブルシューティング
-- link: /security_platform/guide/how-appsec-works/
+- link: /security_platform/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog におけるアプリケーションセキュリティモニタリングの仕組み
 kind: documentation

@@ -52,11 +52,11 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 4. Datadog サイトを構成する
 
-   &nbsp;テレメトリーの送信先である [Datadog サイト][2]を指定します。デフォルトは `datadoghq.com` です。
-
     ```sh
-    export DATADOG_SITE="<DD_SITE>" # such as datadoghq.com, datadoghq.eu or ddog-gov.com
+    export DATADOG_SITE="<DATADOG_SITE>"
     ```
+
+   `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。(右側で正しい SITE が選択されていることを確認してください)。
 
 5. Datadog API キーを構成する
 
@@ -86,12 +86,11 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
     - `<functionname>` と `<another_functionname>` は Lambda 関数の名前に置き換えます。また、`--functions-regex` を使用すると、指定した正規表現にマッチする名前を持つ複数の関数を自動的にインスツルメントすることができます。
     - `<aws_region>` を AWS リージョン名に置き換えます。
 
-    その他のパラメーターは、[CLI ドキュメント][3]に記載されています。
+    その他のパラメーターは、[CLI ドキュメント][2]に記載されています。
 
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/ja/getting_started/site/
-[3]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
+[2]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
@@ -117,15 +116,14 @@ Datadog サーバーレスプラグインをインストールして構成する
     ```
 
    プレースホルダーを埋めるには
-    - `<DATADOG_SITE>` を、テレメトリーの送信先となる [Datadog サイト][3]に置き換えます。
-    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `apiKey` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。(右側で正しい SITE が選択されていることを確認してください)。
+    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `apiKey` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
     詳細および追加設定については、[プラグインドキュメント][1]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
-[3]: https://docs.datadoghq.com/ja/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -161,8 +159,8 @@ Datadog サーバーレスプラグインをインストールして構成する
     ```
 
    プレースホルダーを埋めるには
-    - `<DATADOG_SITE>` を、テレメトリーの送信先となる [Datadog サイト][4]に置き換えます。
-    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][5]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `apiKey` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。(右側で正しい SITE が選択されていることを確認してください)。
+    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `apiKey` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
     [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
@@ -170,8 +168,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[4]: https://docs.datadoghq.com/ja/getting_started/site/
-[5]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -206,14 +203,13 @@ Datadog サーバーレスプラグインをインストールして構成する
     ```
 
    プレースホルダーを埋めるには
-    - `<DATADOG_SITE>` を、テレメトリーの送信先となる [Datadog サイト][2]に置き換えます。
-    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `apiKey` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。(右側で正しい SITE が選択されていることを確認してください)。
+    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][2]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `apiKey` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
     [Datadog CDK のドキュメント][1]に詳細と追加のパラメーターがあります。
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
-[2]: https://docs.datadoghq.com/ja/getting_started/site/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
@@ -241,19 +237,23 @@ Datadog サーバーレスプラグインをインストールして構成する
 
     - イメージの `CMD` 値を `node_modules/datadog-lambda-js/dist/handler.handler` に設定します。AWS で設定するか、Dockerfile 内で直接設定します。なお、両方の値を設定した場合、AWS で設定した値が Dockerfile 内の値をオーバーライドします。
     - 元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
+    - コンテナで ESModule を使用している場合、`handler.js` ファイルを削除する必要があります。このファイルは Node 12 用に存在し、AWS が Node 12 のサポートを非推奨にしたときに削除されます。
+      ```dockerfile
+      RUN rm node_modules/datadog-lambda-js/dist/handler.js
+      CMD ["node_modules/datadog-lambda-js/dist/handler.handler"]
+      ```
 
     **注**: Lambda 関数が `arm64` で実行する場合、コンテナイメージを arm64 ベースの Amazon Linux 環境で構築するか、代わりに[関数コードで Datadog ラッパーを適用する][2]必要があります。また、Datadog ハンドラーのリダイレクトと互換性のないサードパーティのセキュリティツールや監視ツールを使用している場合、そのようなことが必要になる場合があります。
 
 4. Datadog サイトと API キーの構成
 
-    - 環境変数 `DD_SITE` に、テレメトリー送信先の [Datadog サイト][3]を設定します。
-    - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
+    - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
-[3]: https://docs.datadoghq.com/ja/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -312,13 +312,12 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 4. Datadog サイトと API キーの構成
 
-    - 環境変数 `DD_SITE` に、テレメトリー送信先の [Datadog サイト][3]を設定します。
-    - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][4]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
+    - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
-[3]: https://docs.datadoghq.com/ja/getting_started/site/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 

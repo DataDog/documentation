@@ -1,15 +1,14 @@
 ---
 categories:
-  - cloud
-ddtype: crawler
+- cloud
 dependencies: []
 description: Alibaba Cloud サービスを Datadog と統合
 doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/
-    tag: ブログ
-    text: Alibaba Cloud を Datadog で監視
+- link: https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/
+  tag: ブログ
+  text: Alibaba Cloud を Datadog で監視
 git_integration_title: alibaba_cloud
 has_logo: true
 integration_id: alibaba-cloud
@@ -23,6 +22,7 @@ public_title: Datadog-Alibaba Cloud インテグレーション
 short_description: Alibaba Cloud サービスを Datadog と統合
 version: '1.0'
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog Alibaba Cloud インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
 {{< /site-region >}}

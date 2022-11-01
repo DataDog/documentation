@@ -44,7 +44,7 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
 
      {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over over the top trace in the table and **click View Trace**
+4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over the top trace in the table and **click View Trace**
 
     This is the Flame graph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error-prone ones. The Flame graph can be zoomed, scrolled, and explored naturally. Under the Flame graph you can see associated metadata, Logs, and Host information.
 
@@ -63,11 +63,11 @@ Datadog APM seamlessly integrates with the other Datadog metrics and information
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/glossary/#trace
 [2]: https://app.datadoghq.com/apm/services
-[3]: /tracing/visualization/#services
-[4]: /tracing/visualization/#resources
-[5]: /tracing/visualization/#spans
-[6]: /tracing/visualization/trace/?tab=spanmetadata
+[3]: /tracing/glossary/#services
+[4]: /tracing/glossary/#resources
+[5]: /tracing/glossary/#spans
+[6]: /tracing/trace_explorer/trace_view/?tab=spanmetadata
 [7]: /tracing/guide/adding_metadata_to_spans/
-[8]: /tracing/connect_logs_and_traces/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/

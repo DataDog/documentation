@@ -1,40 +1,60 @@
 ---
+app_id: exchange-server
+app_uuid: e334d30a-a7df-4c06-9d1f-d8b6663df38a
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Exchange Server Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: exchange.processor.cpu_user
+      metadata_path: metadata.csv
+      prefix: exchange.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Exchange Server
   logs:
-    source: exchange-server
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+    source: exchange_server
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md
-display_name: Exchange Server
+display_on_public_website: true
 draft: false
 git_integration_title: exchange_server
-guid: 7bc177b0-b07d-4a83-921f-9cd8deef039b
 integration_id: exchange-server
 integration_title: Microsoft Exchange Server
-integration_version: 1.13.1
+integration_version: 1.14.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: exchange.
-metric_to_check: exchange.processor.cpu_user
+manifest_version: 2.0.0
 name: exchange_server
-public_title: Datadog-Microsoft Exchange Server インテグレーション
+oauth: {}
+public_title: Microsoft Exchange Server
 short_description: Microsoft Exchange Server のメトリクスを収集してグラフ化
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::OS とシステム
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Microsoft Exchange Server のメトリクスを収集してグラフ化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Microsoft Exchange Server
 ---
 
 
@@ -106,6 +126,10 @@ Exchange Server チェックには、イベントは含まれません。
 ### サービスのチェック
 
 Exchange Server チェックには、サービスのチェック機能は含まれません。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

@@ -24,6 +24,9 @@ further_reading:
 - link: integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
   tag: 설명서
   text: Kinesis Data Firehose를 이용한 AWS CloudWatch Metric Streams
+- link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
+  tag: 블로그
+  text: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
 kind: documentation
 title: AWS를 이용해 시작하기
 ---
@@ -34,9 +37,9 @@ title: AWS를 이용해 시작하기
 
 간단하게 보면, 여기에는 Datadog의 AWS 계정이 데이터 수집이나 푸시를 위해 AWS 계정으로 API를 호출하도록 허용하는 IAM 역할 및 관련 정책 작성이 포함됩니다. 본 템플릿은 Datadog로 로그를 전송하기 위한 [Datadog Forwarder][1] Lambda 함수를 배포합니다. CloudFormation 템플릿을 사용하면 Datadog 계정으로 데이터를 전송할 때 필요한 모든 도구를 지원받을 수 있으며, Datadog는 최신 기능을 제공하기 위해 CloudFormation 템플릿을 유지 관리합니다.
 
-최초로 연결한 후, AWS 환경과 관련된 개별 AWS 서비스를 통합할 수 있습니다. 클릭 한 번이면 Datadog에서 AWS 계정에 필요한 리소스를 프로비저닝하고, 사용하는 서비스의 메트릭과 이벤트를 쿼리하기 시작합니다. 유명 AWS 서비스를 사용 중인 경우, Datadog는 곧바로 사용 가능한 대시보드를 준비합니다. 이 대시보드는 즉시 시각화를 제공하며 사용자 맞춤형 설정도 가능합니다. 본 가이드는 통합 구성, [CloudTrail][2] 및 Forwarder Lambda 함수에서 로그 전송, 아마존 리눅스 EC2 인스턴스에 Datadog Agent를 설치하는 방법을 설명합니다. 사용 가능한 서브 통합의 목록은 [개별 AWS 서비스 통합 활성화](#enable-integrations-for-individual-aws-service) 섹션에서 참조해주세요.
+최초로 연결한 후, AWS 환경과 관련된 개별 AWS 서비스를 통합할 수 있습니다. 클릭 한 번이면 Datadog에서 AWS 계정에 필요한 리소스를 프로비저닝하고, 사용하는 서비스의 메트릭과 이벤트를 쿼리하기 시작합니다. 주요 AWS 서비스를 사용 중인 경우, Datadog는 곧바로 사용 가능한 대시보드를 제공합니다. 이 대시보드는 즉시 시각화를 제공하며 사용자 맞춤형 설정도 가능합니다. 본 가이드는 통합 구성, [CloudTrail][2] 및 Forwarder Lambda 함수에서 로그 전송, 아마존 리눅스 EC2 인스턴스에 Datadog Agent를 설치하는 방법을 설명합니다. 사용 가능한 서브 통합의 목록은 [개별 AWS 서비스 통합 활성화](#enable-integrations-for-individual-aws-service) 섹션에서 참고해주세요.
 
-이번 프로세스는 여러 AWS 계정에서 몇 번이고 필요한 만큼 반복할 수 있습니다. 또는 [API][3], [AWS CLI][4]나 [Terraform][5]를 사용해 한 번에 여러 계정을 구성하기도 가능합니다. 더 자세한 정보는 [Datadog-Amazon CloudFormation 가이드][6]에서 알아볼 수 있습니다.
+이번 프로세스는 여러 AWS 계정에서 필요한 만큼 반복할 수 있습니다. 또는 [API][3], [AWS CLI][4]나 [Terraform][5]를 사용해 한 번에 여러 계정을 구성하기도 가능합니다. 더 자세한 정보는 [Datadog-Amazon CloudFormation 가이드][6]에서 알아볼 수 있습니다.
 
 ## 전제 조건
 
@@ -74,7 +77,7 @@ title: AWS를 이용해 시작하기
     * serverless:CreateCloudFormationTemplate
 
 
-## 구성
+## 설정
 
 
 2. Datadog 계정에 표시된 [Integrations 페이지][8]의 AWS 타일에서 해당 AWS 계정과 통합하고자 하는 Datadog 제품을 선택하세요. 그러면 해당 제품에 맞추어 AWS 계정의 데이터 통합용 기본 설정이 적절하게 선택됩니다. 이러한 설정은 필요에 따라 추후 변경할 수 있습니다.
@@ -88,7 +91,7 @@ title: AWS를 이용해 시작하기
 
 5. "Launch CloudFormation Template"을 클릭하세요. AWS 콘솔이 열리며 CloudFormation 스택을 불러옵니다. 모든 파라미터는 이전 Datadog 양식에서 선택한 내용을 바탕으로 미리 입력된 상태입니다. 그러니 별도의 요구 사항이 없다면 파라미터를 수정할 필요가 없습니다.
 **참조:** `DatadogAppKey` 파라미터는 CloudFormation 스택이 Datadog로 API를 호출해 해당 AWS 계정에 Datadog 설정을 추가하고 수정하도록 해줍니다. 키는 자동으로 생성하며, 사용자의 Datadog 계정과 연동됩니다.
-{{< img src="getting_started/integrations/params.png" alt="AWS CloudFormation의 create-stack 페이지에서 Stack 이름이 datadog로, IAMRoleName이 DatadogIntegrationRole로, ExternalId이 be46로 끝나는 난독화 값, DdApiKey가 난독화 값으로 나타납니다.">}}
+{{< img src="getting_started/integrations/params.png" alt="AWS CloudFormation의 create-stack 페이지에서 Stack 이름이 datadog로, IAMRoleName이 DatadogIntegrationRole로, ExternalId가 be46로 끝나는 난독화 값, DdApiKey가 난독화 값으로 나타납니다.">}}
 
 6. AWS에서 필수 항목에 체크한 다음 `Create stack`을 클릭합니다.
     {{< img src="getting_started/integrations/cloudformation-complete.png" alt="AWS CloudFormation Stacks 페이지 왼쪽의 'Stacks' 열 아래에 완성된 스택 4개가 표시됩니다. 스택은 datadog-DatadogIntegrationRoleStack, datadog-DatadogPolicyMacroStack, datadog-ForwarderStack, datadog입니다. 각 스택은 생성 타임스탬프, CREATE_COMPLETE 표기와 함께 녹색 체크 표시가 되어 있습니다. 'datadog' 스택이 강조 표시되었으며 'Events' 탭이 나타납니다. 이벤트 9개와 각각의 타임스탬프, 로지컬 ID, 상태, 상태의 사유가 목록으로 정리되어 있습니다. 이러한 이벤트는 각 스택의 서로 다른 생성 단계를 참조합니다.">}}
@@ -96,9 +99,9 @@ title: AWS를 이용해 시작하기
 
 7. 스택을 생성한 후 Datadog의 AWS 통합 타일로 돌아가서 새로 생성한 계정 항목을 찾으세요. "Refresh to Check Status"를 클릭하면 페이지 상단에 성공 메시지가 나타나면서, 관련된 상세 정보와 함께 새 계정이 페이지에 표시됩니다.
 
-    {{< img src="getting_started/integrations/new-account.png" alt="Datadog 계정의 AWS 통합 타일입니다. 왼쪽을 보면 EC2 자동화 옵션이 활성화 상태임을 알 수 있습니다. 'Limit metric collection by AWS Service'라는 섹션은 Datadog AWS 통합과 관련된 서브 통합을 보여줍니다. 해당 서브 통합은 ApiGateway, ApplicationELB, AppRunner, AppStream, AppSync, Athena, AutoScaling, Billing, Budgeting, CertificateManager, CloudFront, CloudHSM, CloudSearch, CodeBuild, Cognito, Connect입니다. 'Turning on sub-integrations can affect your CloudWatch API usage. See our AWS FAQ for more info.'(서브 통합을 사용하면 CloudWatch API 사용에 영향을 미칠 수 있습니다. 더 자세한 정보는 AWS FAQ를 참조하세요.)라는 머리말이 있습니다. 모든 항목에 체크 표시가 되어 있습니다. 아래로는 'Other options'(기타 옵션)라는 섹션이 존재합니다. Collect CloudWatch alarms 및 Collect custom metrics라는 체크박스 두 개가 있습니다. 두 옵션 모두 체크 표시되어 있습니다. 페이지 오른쪽에는 연결된 AWS 계정의 설정을 보여주는 섹션이 있습니다. 계정 ID는 난수화 값으로 표시됩니다. AWS 역할 이름은 DatadogIntegrationRole입니다.">}}
+    {{< img src="getting_started/integrations/new-account.png" alt="계정을 보여주는 Datadog 계정의 AWS 통합 타일. 새 계정 섹션과 메시지는 CloudFormation 통합이 완료 대기 중임을 보여줍니다. 상태를 새로고침해 확인하기 위한 버튼이 있고, 상태를 확인하기 전에 CloudFormation 스택 생성을 점검하라는 경고가 표시되어 있습니다.">}}
 
-    사용하는 AWS 서비스나 모니터링 사용 사례에 따라 통합 타일 내에 수집 데이터를 특정하기 위한 옵션이 다양하게 존재합니다. 예를 들면 AWS 서비스, 네임스페이스 또는 태그를 기반으로 데이터 수집을 제한할 수 있습니다. 또한, 모니터링 알림을 음소거할 수도 있습니다. 직접 트리거한 종료나 [EC2 자동화][9]를 사용하는 자동 스케일링에 따라 트리거된 종료 등이 그 예시입니다. 필요한 경우, CloudWatch 경보를 Datadog [Event Stream][11]으로 전송하기 위해 [Alarm Collection] [10]을 활성화하고 커스텀 메트릭 수집 여부를 선택합니다.
+    사용하는 AWS 서비스나 모니터링 사용 사례에 따라 통합 타일 내에 수집 데이터를 특정하기 위한 옵션이 다양하게 존재합니다. 예를 들면 AWS 서비스, 네임스페이스 또는 태그를 기반으로 데이터 수집을 제한할 수 있습니다. 또한, 모니터링 알림을 음소거할 수도 있습니다. 직접 트리거한 종료나 [EC2 자동화][9]를 사용하는 자동 스케일링에 따라 트리거된 종료 등이 그 예시입니다. 필요한 경우, CloudWatch 경보를 Datadog [Event Explorer][11]로 전송하기 위해 [Alarm Collection] [10]을 활성화하고 커스텀 메트릭 수집 여부를 선택합니다.
 
 8. 최대 10분 정도를 기다리면 데이터 수집이 시작되고, 곧바로 사용 가능한 [AWS 개요 대시보드][12]가 표시됩니다. 여기에서 AWS 서비스와 인프라에서 전송한 메트릭을 확인할 수 있습니다.
 {{< img src="getting_started/integrations/aws-dashboard.png" alt="Datadog 계정 내의 AWS 개요 대시보드. 왼쪽에는 AWS 로고와 'No matching entries found'(해당하는 엔트리 없음)이라고 표시된 AWS 이벤트 그래프가 있습니다. 중앙에는 EBS 볼륨과 관련된 그래프와 수치 데이터, 일관된 데이터를 보여주는 히트맵이 표시됩니다. 오른쪽에는 ELB 관련 그래프와 수치 데이터, 출처 3곳에서 가져온 급등락 데이터를 보여주는 시계열 그래프가 있습니다.">}}
@@ -113,14 +116,14 @@ Datadog로 AWS 로그를 전송하는 방법의 전체 목록은 [AWS 서비스�
 
 ### 검증
 
-로그를 활성화한 후에는 패싯 패널의 `source` 또는 `service` 패싯을 사용해 [Logs Explorer][15]에서 원하는 로그를 찾아볼 수 있습니다. S3에서의 예시는 다음과 같습니다.
-{{< img src="getting_started/integrations/logs-explorer.png" alt="Datadog 계정의 Logs Explorer 페이지. 왼쪽에는 Source와 Service 패싯이 표시되는데, 둘 모두 's3'으로 체크 표시되어 있습니다. 오른쪽에는 목록 형식으로 일련의 로그 엔트리가 표시됩니다.">}}
+로그를 활성화한 후에는 파셋 패널의 `source` 또는 `service` 파셋을 사용해 [Logs Explorer][15]에서 원하는 로그를 찾아볼 수 있습니다. S3에서의 예시는 다음과 같습니다.
+{{< img src="getting_started/integrations/logs-explorer.png" alt="Datadog 계정의 Logs Explorer 페이지. 왼쪽에는 Source와 Service 파셋이 표시되는데, 둘 모두 's3'으로 체크 표시되어 있습니다. 오른쪽에는 목록 형식으로 일련의 로그 엔트리가 표시됩니다.">}}
 
 ## Datadog 플랫폼의 추가 활용법
 
 ### EC2의 Datadog Agent로 더욱 깊이 있는 시각화
 
-Datadog AWS 통합은 기본적으로 CloudWatch API를 크롤링하여 AWS가 제공하는 메트릭을 얻습니다. 여기서 [Datadog Agent] [16]을 사용하면 EC2 인스턴스를 더욱 깊이 있게 시각화할 수 있습니다. Agent는 가벼운 데몬으로서 메트릭이나 이벤트를 리포트하며, 로그나 트레이스용으로 구성할 수도 있습니다. Datadog 애플리케이션의 [Agent Installation] [17] 섹션은 다양한 운영체제에 Agent를 설치하는 방법을 설명합니다. 다양한 운영체제(예: 아마존 리눅스)에는 인스턴스 터미널에서 실행하여 Agent를 설치할 수 있는 원스텝 설치 명령이 존재합니다.
+Datadog AWS 통합은 기본적으로 CloudWatch API를 크롤링하여 AWS가 제공하는 메트릭을 얻습니다. 여기서 [Datadog Agent] [16]을 사용하면 EC2 인스턴스를 더욱 깊이 있게 시각화할 수 있습니다. Agent는 가벼운 데몬으로서 메트릭이나 이벤트를 리포트하며, 로그나 트레이스용으로 구성할 수도 있습니다. Datadog 애플리케이션의 [Agent Installation] [17] 섹션은 다양한 운영체제에 Agent를 설치하는 방법을 설명합니다. 다양한 운영체제(예: 아마존 리눅스)에는 인스턴스 터미널에서 실행하여 Agent를 설치할 수 있는 원스텝 설치 명령어가 존재합니다.
 {{< img src="getting_started/integrations/integrations-agent-installation.png" alt="Datadog 'Integrations' 탭의 'Agent' 섹션. 왼쪽에 Datadog Agent 지원 운영체제 목록이 표시됩니다. 이 중에서 'Amazon Linux'(아마존 리눅스)가 강조 표시되어 있습니다. 오른쪽에는 'Use our easy one-step install'(간단한 원스텝 설치 사용)이라는 문구가 나타납니다. 문구 아래로 Agent를 설치하는 명령어가 있는데, DD_API_KEY 부분이 난독화되어 있습니다.">}}
 
 Agent가 설치되면 [Infrastructure List][18]에 뼈다귀 아이콘 그래픽이 표시됩니다.
@@ -148,7 +151,7 @@ Agent가 설치되면 [Infrastructure List][18]에 뼈다귀 아이콘 그래픽
 
 #### EKS와 Fargate
 
-Fargate 포드는 AWS에서 관리하므로 CPU, 메모리를 비롯한 호스트 기반의 시스템 점검을 배제합니다. AWS Fargate 포드에서 데이터를 수집하려면 [Amazon EKS on AWS Fargate 설명서][31]를 참조해, 커스텀 RBAC(역할 기반 액세스 컨트롤)로 애플리케이션 포드의 사이드카로서 Agent를 실행하세요. **참조**: Datadog Agent version 7.17 이상이 필요합니다.
+Fargate 파드는 AWS에서 관리하므로 CPU, 메모리를 비롯한 호스트 기반의 시스템 점검을 배제합니다. AWS Fargate 파드에서 데이터를 수집하려면 [Amazon EKS on AWS Fargate 설명서][31]를 참조해, 커스텀 RBAC(역할 기반 액세스 컨트롤)로 애플리케이션 파드의 사이드카로서 Agent를 실행하세요. **참조**: Datadog Agent version 7.17 이상이 필요합니다.
 
 #### EKS Anywhere
 
@@ -178,7 +181,7 @@ Datadog 서버리스 애플리케이션을 실행하는 AWS Lambda 함수에서 
 
 #### CSPM
 
-[CSPM을 이용해 시작하기][54] 가이드를 읽고 클라우드 환경의 구성 오류 검출과 평가에 대해 알아보세요. 리소스 설정 데이터는 즉각 이용 가능한 Posture Management [Cloud][55] 및 [인프라스트럭처][56] 탐지 규칙을 기준으로 평가되며, 공격자의 기술과 발생 가능한 구성 오류에 플래그를 세워 신속한 대응과 복구를 지원합니다.
+[CSPM을 이용해 시작하기][54] 가이드를 읽고 클라우드 환경의 구성 오류 검출과 평가에 대해 알아보세요. 리소스 설정 데이터는 곧바로 이용 가능한 Posture Management [Cloud][55] 및 [인프라스트럭처][56] 탐지 규칙을 기준으로 평가되며, 공격자의 기술과 발생 가능한 구성 오류에 플래그를 지정해 신속한 대응과 복구를 지원합니다.
 
 ### 트러블슈팅
 문제가 발생하는 경우 [트러블슈팅][57] 섹션을 확인해주세요.
@@ -197,7 +200,7 @@ Datadog 서버리스 애플리케이션을 실행하는 AWS Lambda 함수에서 
 [8]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [9]: /kr/integrations/amazon_ec2/#ec2-automuting
 [10]: /kr/integrations/amazon_web_services/?tab=roledelegation#alarm-collection
-[11]: /kr/events/stream/
+[11]: /kr/events/explorer
 [12]: https://app.datadoghq.com/screen/integration/7/aws-overview
 [13]: /kr/integrations/#cat-aws
 [14]: /kr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
@@ -233,13 +236,13 @@ Datadog 서버리스 애플리케이션을 실행하는 AWS Lambda 함수에서 
 [44]: /kr/serverless/distributed_tracing
 [45]: /kr/serverless/troubleshooting
 [46]: /kr/integrations/amazon_xray/?tab=nodejs
-[47]: /kr/tracing/setup_overview/
+[47]: /kr/tracing/trace_collection/
 [48]: /kr/tracing/#explore-datadog-apm
 [49]: /kr/watchdog/
 [50]: /kr/security_platform/cloud_siem/getting_started/
 [51]: /kr/security_platform/default_rules/#cat-log-detection
 [52]: /kr/security_platform/explorer/
-[53]: /kr/security_platform/notification_rules/
+[53]: /kr/security_platform/notifications/rules/
 [54]: /kr/security_platform/cspm/getting_started/
 [55]: /kr/security_platform/default_rules/#cat-posture-management-cloud
 [56]: /kr/security_platform/default_rules/#cat-posture-management-infra

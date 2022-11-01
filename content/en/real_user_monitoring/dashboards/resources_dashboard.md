@@ -2,14 +2,14 @@
 title: RUM Resources Dashboard
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/explorer'
-      tag: 'Documentation'
-      text: 'Learn about the RUM Explorer'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
 ---
 
 ## Overview
 
-The resources dashboard provides insights about your applications’ resources. It is separated in four sections:
+The resources dashboard provides insights about your applications’ resources. It shows:
 
 - **Resources overview**:
     Visualize which resources are being loaded the most, their associated status code, and their size split by resource type.
@@ -22,7 +22,7 @@ The resources dashboard provides insights about your applications’ resources. 
 
 {{< img src="real_user_monitoring/dashboards/resources_dashboard.png" alt="Resource Dashboard" >}}
 
-For more information about the information displayed, see [RUM Browser Data Collected][3].
+For more information about the data displayed, see [RUM Browser Data Collected][3].
 
 ## Further Reading
 

@@ -1,49 +1,75 @@
 ---
+app_id: vault
+app_uuid: 450e17a2-3ca0-4dc5-800c-99c5db736073
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
-    Vault - Overview: assets/dashboards/vault_overview.json
+    Vault - Overview: assets/dashboards/vault_overview_legacy.json
+    Vault - Overview (OpenMetricsV2): assets/dashboards/vault_overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: vault.is_leader
+      metadata_path: metadata.csv
+      prefix: vault.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Vault
   logs:
     source: vault
-  metrics_metadata: metadata.csv
   monitors:
     '[Vault] S3 time to access secrets is high': assets/monitors/vault_S3_time_high.json
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
     service_name_overview: assets/saved_views/service_name_overview.json
     vault_patern: assets/saved_views/vault_patern.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - security
 - 構成 & デプロイ
 - ログの収集
 - オートディスカバリー
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/vault/README.md
-display_name: Vault
+display_on_public_website: true
 draft: false
 git_integration_title: vault
-guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
 integration_title: Vault
-integration_version: 3.2.0
+integration_version: 3.3.2
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: vault.
-metric_to_check: vault.is_leader
+manifest_version: 2.0.0
 name: vault
-public_title: Datadog-Vault インテグレーション
+oauth: {}
+public_title: Vault
 short_description: Vault は機密情報管理サービスアプリケーション
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Configuration & Deployment
+  - Category::Log Collection
+  - Category::Autodiscovery
+  configuration: README.md#Setup
+  description: Vault は機密情報管理サービスアプリケーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Vault
 ---
 
 
@@ -56,7 +82,7 @@ supported_os:
 
 ### インストール
 
-Vault チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+Vault チェックは [Datadog Agent][2] パッケージに含まれています。
 
 #### 前提条件
 
@@ -245,6 +271,11 @@ _Agent バージョン 6.0 以降で利用可能_
 {{< get-metrics-from-git "vault" >}}
 
 
+**注:** 
+
+* `vault.replication.fetchRemoteKeys`、`vault.replication.merkleDiff`、`vault.replication.merkleSync` で始まるメトリクスは、レプリケーションが不健全状態でなければ報告されません。
+* このチェックのバージョン3.4.0 以降では、メトリクスの収集に [OpenMetrics][7] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、構成で `use_openmetrics` の値を `false` に設定します。
+
 ### イベント
 
 `vault.leader_change`:
@@ -256,16 +287,16 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した HashiCorp Vault の監視][8]
-- [HashiCorp Vault のメトリクスおよびログの監視][9]
-- [HashiCorp Vault 監視用ツール][10]
-- [Datadog を使用した HashiCorp Vault の監視方法][11]
+- [Datadog を使用した HashiCorp Vault の監視][9]
+- [HashiCorp Vault のメトリクスおよびログの監視][10]
+- [HashiCorp Vault 監視用ツール][11]
+- [Datadog を使用した HashiCorp Vault の監視方法][12]
 
 
 [1]: https://www.vaultproject.io
@@ -274,8 +305,9 @@ _Agent バージョン 6.0 以降で利用可能_
 [4]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
 [5]: https://www.vaultproject.io/docs/auth
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
-[9]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
-[10]: https://www.datadoghq.com/blog/vault-monitoring-tools
-[11]: https://www.datadoghq.com/blog/vault-monitoring-with-datadog
+[7]: https://docs.datadoghq.com/ja/integrations/openmetrics/
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[10]: https://www.datadoghq.com/blog/monitor-vault-metrics-and-logs/
+[11]: https://www.datadoghq.com/blog/vault-monitoring-tools
+[12]: https://www.datadoghq.com/blog/vault-monitoring-with-datadog

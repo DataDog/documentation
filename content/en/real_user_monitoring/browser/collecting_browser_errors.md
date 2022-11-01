@@ -154,13 +154,14 @@ For more information about cross-origin scripts and why details are hidden, see 
 - Your website includes third-party JavaScript libraries hosted on the provider's servers.
 
 Get visibility into cross-origin scripts by following these two steps:
-1. Call JavaScript libraries with `crossorigin="anonymous"`.
+1. Call JavaScript libraries with [`crossorigin="anonymous"`][7].
 
     With `crossorigin="anonymous"`, the request to fetch the script is performed securely. No sensitive data is forwarded via cookies or HTTP authentication.
 
-2. Configure the `Access-Control-Allow-Origin` HTTP header.
+2. Configure the [`Access-Control-Allow-Origin`][8] HTTP response header:
 
-    The most common value for this header is `Access-Control-Allow-Origin: *`, which allows all origins to fetch the resource. Instead, restrict which origins can access your resources by setting, for example `Access-Control-Allow-Origin: www.example.com`.
+    - `Access-Control-Allow-Origin: *` to allow all origins to fetch the resource.
+    - `Access-Control-Allow-Origin: example.com` to specify a single allowed origin. If the server supports clients from multiple origins, it must return the origin for the specific client making the request.
 
 ## Further Reading
 
@@ -173,3 +174,5 @@ Get visibility into cross-origin scripts by following these two steps:
 [4]: /real_user_monitoring/error_tracking
 [5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
+[7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+[8]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin

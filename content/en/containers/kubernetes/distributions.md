@@ -35,6 +35,7 @@ These configuration can then be customized to add any Datadog feature.
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
+* [vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -47,7 +48,7 @@ If you are using AWS Bottlerocket OS on your nodes, add the following to enable 
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -62,7 +63,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -97,7 +98,7 @@ AKS requires specific configuration for the `Kubelet` integration due to AKS cer
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -115,7 +116,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -151,7 +152,7 @@ spec:
 
 - In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case, removing the `agent.config.kubelet.host` field (defaults to `status.hostIP`) and using `tlsVerify: false` is **required**. Using the `DD_KUBELET_TLS_VERIFY=false` environment variable also resolves this issue. Both of these options deactivate verification of the server certificate.
 
-  ```
+  ```yaml
   env:
     - name: DD_KUBELET_TLS_VERIFY
       value: "false"
@@ -170,7 +171,9 @@ Depending on the operation mode of your cluster, the Datadog Agent needs to be c
 
 Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`).
 
-**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are not supported due to missing Kernel headers.
+**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are supported starting from the version 3.0.1 of the Helm chart. To enable these checks, configure the following settings:
+- `datadog.systemProbe.enableDefaultKernelHeadersPaths` to `false`.
+- `datadog.systemProbe.enableKernelHeaderDownload` to `true`.
 
 ### Autopilot
 
@@ -196,6 +199,7 @@ datadog:
   # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
   kubeStateMetricsEnabled: false
 
+agents:
   containers:
     agent:
       # resources for the Agent container
@@ -252,7 +256,7 @@ This configuration supports OpenShift 3.11 and OpenShift 4, but works best with 
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -289,7 +293,7 @@ When using the Datadog Operator in OpenShift, it is recommended that you install
 The configuration below is meant to work with this setup (due to SCC/ServiceAccount setup), when the
 Agent is installed in the same namespace as the Datadog Operator.
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -356,7 +360,7 @@ Rancher installations are close to vanilla Kubernetes, requiring only some minor
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -378,7 +382,7 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -439,7 +443,7 @@ To enable container monitoring, add the following (`containerd` check):
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -454,7 +458,7 @@ datadog:
 
 DatadogAgent Kubernetes Resource:
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -482,6 +486,75 @@ spec:
 
 More `values.yaml` examples can be found in the [Helm chart repository][1]
 More `DatadogAgent` examples can be found in the [Datadog Operator repository][2]
+
+## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
+
+TKG requires some small configuration changes, shown below. For example, setting a toleration is required for the controller to schedule the Node Agent on the `master` nodes.
+
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    # Set tlsVerify to false since the Kubelet certificates are self-signed
+    tlsVerify: false
+  # Disable the `kube-state-metrics` dependency chart installation.
+  kubeStateMetricsEnabled: false
+  # Enable the new `kubernetes_state_core` check.
+  kubeStateMetricsCore:
+    enabled: true
+# Add a toleration so that the agent can be scheduled on the control plane nodes.
+agents:
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      effect: NoSchedule
+```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiSecret:
+      secretName: datadog-secret
+      keyName: api-key
+    appSecret:
+      secretName: datadog-secret
+      keyName: app-key
+  features:
+    # Enable the new `kubernetes_state_core` check.
+    kubeStateMetricsCore:
+      enabled: true
+  agent:
+    config:
+      kubelet:
+        # Set tlsVerify to false since the Kubelet certificates are self-signed
+        tlsVerify: false
+      # Add a toleration so that the agent can be scheduled on the control plane nodes.
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+  clusterAgent:
+    config:
+      collectEvents: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

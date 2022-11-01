@@ -33,13 +33,13 @@ Find below a summary of Datadog data collection, resolution, and retention:
 |Infrastructure      |Custom metrics (Agent check)                  |Datadog Agent + custom Agent check                                                            |15 seconds           |1 second             |15 months                                                                                   |
 |Infrastructure      |Custom metrics (API)                          |POST directly to Datadog's API                                                                |Real time            |1 second             |15 months                                                                                   |
 |Infrastructure      |Custom metrics (StatsD)                       |Datadog Agent (built-in statsD collector)                                                     |15 seconds           |1 second             |15 months                                                                                   |
-|Infrastructure      |Events                                        |Datadog Agent, integrations, or API                                                           |Real time            |1 second             |13 months                                                                                   |
+|Infrastructure      |Events                                        |Datadog Agent, integrations, or API                                                           |Real time            |1 second             |15 months                                                                                   |
 |Infrastructure      |Live containers                               |Datadog Agent + enabled Docker integration or Datadog container Agent                         |2 seconds            |1 second             |36 hours                                                                                    |
 |Infrastructure      |Live processes                                |Datadog Agent + Process Agent                                                                 |2 seconds            |1 second             |36 hours                                                                                    |
 |Infrastructure      |Network Performance Monitoring                |System Probe                                                                                  |30 seconds           |1 min                |14 days                                                                                     |
 |Infrastructure      |System metrics                                |Datadog Agent                                                                                 |15 seconds           |1 second             |15 months                                                                                   |
 |Logs                |Logs                                          |Datadog Agent + Logs, 3rd party log collectors, or API                                        |Real time            |1 millisecond        |Plan                                                                                        |
-|Real User Monitoring|Error Tracking                                |RUM SDK                                                                                       |2 minutes            |60 seconds           |15 days                                                                                     |
+|Real User Monitoring|Error Tracking                                |RUM SDK                                                                                       |2 minutes            |60 seconds           |30 days                                                                                     |
 |Real User Monitoring|Real User Monitoring                          |RUM SDK                                                                                       |Real time            |1 millisecond        |30 days for session, view, action and error events <br/>15 days for resource and long task events|
 |Real User Monitoring|Session Replays                               |RUM SDK                                                                                       |Real time            |1 millisecond        |30 days                                                                                     |
 |Cloud SIEM          |Security Signals                              |Datadog Cloud SIEM                                                                            |Real time            |1 millisecond        |15 months                                                                                   |
@@ -51,6 +51,6 @@ Find below a summary of Datadog data collection, resolution, and retention:
 
 
 [1]: /tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
-[2]: /integrations/faq/cloud-metric-delay/#faster-metrics
-[3]: /synthetics/cicd_integrations#use-the-api
-[4]: /synthetics/cicd_integrations#use-the-cli
+[2]: /integrations/guide/cloud-metric-delay/#faster-metrics
+[3]: /continuous_testing/cicd_integrations#use-the-api
+[4]: /continuous_testing/cicd_integrations#use-the-cli

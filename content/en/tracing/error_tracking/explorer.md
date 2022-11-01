@@ -1,7 +1,6 @@
 ---
 title: Error Tracking Explorer
 kind: documentation
-beta: false
 ---
 
 {{< img src="tracing/error_tracking/error_tracking_explore_inspect.png" alt="Error Tracking Explorer"  >}}
@@ -55,4 +54,4 @@ Each error sample gives the information you need to understand why it happened a
 - Insights about the health of the underlying host or container when this particular error occurred.
 
 [1]: /tracing/trace_explorer/#live-search-for-15-minutes
-[2]: /tracing/trace_retention/#retention-filters
+[2]: /tracing/trace_pipeline/trace_retention/#retention-filters

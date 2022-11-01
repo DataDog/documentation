@@ -30,13 +30,13 @@ To create a [metric monitor][1] in Datadog, use the main navigation: *Monitors -
 
 A threshold alert compares metric values to a static threshold.
 
-On each alert evaluation, Datadog calculates the average/minimum/maximum/sum over the selected period and checks if it is above or below the threshold. This is the standard alert case where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
+On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above or below the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
 
 [1]: /metrics/distributions/
 {{% /tab %}}
 {{% tab "Change" %}}
 
-A change alert compares the absolute or relative (%) change in value between `N` minutes ago and now against a given threshold. The compared data points aren't single points but are computed using the parameters in the *alert conditions* section.
+A change alert compares the absolute or relative (%) change in value between `N` minutes ago and now against a given threshold. The compared data points aren't single points but are computed using the parameters in the *define the metric* section.
 
 On each alert evaluation, Datadog calculates the raw difference (a positive or negative value) between the series now and `N` minutes ago, then computes the average/minimum/maximum/sum over the selected period. An alert is triggered when this computed series crosses the threshold.
 
@@ -79,18 +79,69 @@ For more detailed information, see the [Forecast Monitor][1] page.
 
 ## Define the metric
 
-Any metric currently reporting to Datadog is available for monitors. Use the editor and these steps to define the metric:
-{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope"  >}}
+Any metric reporting to Datadog is available for monitors. Use the editor and the steps below to define the metric. The query parameters vary slightly based on the chosen detection method.
 
-| Step                | Required | Default    | Example           |
-|---------------------|----------|------------|-------------------|
-| Select a metric     | Yes      | None       | `system.cpu.user` |
-| Define the from     | No       | Everywhere | `env:prod`        |
-| Exclude [tags][2]        | No       | None       | `role:testing`    |
-| Specify aggregation | Yes      | `avg by`   | `sum by`          |
-| Group by            | No       | Everything | `host`            |
+{{< tabs >}}
+{{% tab "Threshold" %}}
 
-**Note**: Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][3].
+| Step                              | Required | Default        | Example           |
+|-----------------------------------|----------|----------------|-------------------|
+| Select a metric                   | Yes      | None           | `system.cpu.user` |
+| Define the `from`                 | No       | Everywhere     | `env:prod`        |
+| Specify metric aggregation        | Yes      | `avg by`       | `sum by`          |
+| Group by                          | No       | Everything     | `host`            |
+| Set the alert grouping            | No       | `Simple Alert` | `Multi Alert`     |
+| Specify monitor query aggregation | No       | `average`      | `sum`             |
+| Evaluation window                 | No       | `5 minutes`    | `1 day`           |
+
+**Definitions**
+
+| Option           | Description                                                                                                                                                                   |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| average          | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                   |
+| max              | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the max() function to your monitor query.                              |
+| min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query.                      |
+| sum              | If the summation of every point in the series crosses the threshold, an alert is triggered. It adds the `sum()` function to your monitor query.                               |
+| percentile(pXX)  | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
+| Alert grouping   | If using a `Simple Alert`, the monitor aggregates over all reporting sources. If using a `Multi Alert`, the monitor applies the alert to each source, according to your group parameters. See [Alert grouping](#alert-grouping) for more details.
+| Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
+
+{{% /tab %}}
+{{% tab "Change" %}}
+
+| Step                              | Required | Default        | Example           |
+|-----------------------------------|----------|----------------|-------------------|
+| Select a metric                   | Yes      | None           | `system.cpu.user` |
+| Define the `from`                 | No       | Everywhere     | `env:prod`        |
+| Specify metric aggregation        | No       | `avg by`       | `sum by`          |
+| Group by                          | No       | Everything     | `host`            |
+| Set the alert grouping            | No       | `Simple Alert` | `Multi Alert`     |
+| Specify monitor query aggregation | No       | `average`      | `sum`             |
+| Select a change type              | No       | `change `      | `% change`        |
+| Evaluation window                 | No       | `5 minutes`    | `1 day`           |
+| Comparison window                 | No       | `5 minutes`    | `1 month`         |
+
+**Definitions**
+
+| Option           | Description                                                                                                                                                                   |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| change           | The absolute change of the value.                                                                                                                                             |
+| %&nbsp;change    | The percentage change of the value compared to its previous value. For example, the percentage change for a previous value of 2 with a current value of 4 is 100%.            |
+| average          | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                   |
+| max              | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the max() function to your monitor query.                              |
+| min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query.                      |
+| sum              | If the summation of every point in the series crosses the threshold, an alert is triggered. It adds the `sum()` function to your monitor query.                               |
+| percentile(pXX)  | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
+| Alert grouping   | If using a `Simple Alert`, the monitor aggregates over all reporting sources. If using a `Multi Alert`, the monitor applies the alert to each source, according to your group parameters. See [Alert grouping](#alert-grouping) for more details.
+| Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Notes:**
+  - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified.
+  - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
+  - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
 
 ### Alert grouping
 
@@ -103,73 +154,7 @@ Note that if your metric is only reporting by `host` with no `device` tag, it wo
 
 ## Set alert conditions
 
-The alert conditions vary slightly based on the chosen detection method.
-
-{{< tabs >}}
-{{% tab "Threshold" %}}
-
-* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
-* the threshold `on average`, `at least once`, `at all times`, `in total`, or `percentile` (`percentile` is only offered on distribution metrics with percentiles enabled).
-
-    _Note that if you've chosen a distribution metric with a percentile aggregator in Step 2: Define the Metric, a matching percentile threshold is automatically specified._
-
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 730 hours (1 month).
-
-The evaluation frequency changes based on the evaluation time frame you select:
-
-* `timeframe < 24h`: evaluation performs every 1 minute.
-* `24h <= timeframe < 48h`: evaluation performs every 10 minutes.
-* `timeframe >= 48h`: evaluation performs every 30 minutes.
-
-**Definitions**:
-
-| Option                  | Description                                                                                                                                                                                                                   |
-|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| on&nbsp;average         | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                                                                   |
-| at&nbsp;least&nbsp;once | If any single value in the generated series crosses the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for below or `max()` for above.              |
-| at&nbsp;all&nbsp;times  | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a function to your monitor query based on your selection: `min()` for above or `max()` for below. |
-| in&nbsp;total           | If the summation of every point in the series crosses the threshold, then an alert is triggered. It adds the `sum()` function to your monitor query.                                                                        |
-| percentile(pXX)         | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
-
-
-**Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
-
-[1]: /monitors/guide/as-count-in-monitor-evaluations/
-{{% /tab %}}
-{{% tab "Change" %}}
-
-* The `average`, `maximum`, `minimum`, or `in total`
-* of the `change` or `% change`
-* over `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
-* compared to `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours before.
-* is `above`, `above or equal to`, `below`, or `below or equal to` the threshold.
-
-**Definitions**:
-
-| Option        | Description                                                                                                                                                        |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| change        | The absolute change of the value.                                                                                                                                  |
-| %&nbsp;change | The percentage change of the value compared to its previous value. For example, the percentage change for a previous value of 2 with a current value of 4 is 100%. |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Thresholds
-
-Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
-
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][5].
-
-| Option                     | Description                                                                     |
-|----------------------------|---------------------------------------------------------------------------------|
-| Alert threshold            | The value used to trigger an alert notification.                                |
-| Warning threshold          | The value used to trigger a warning notification.                               |
-| Alert recovery threshold   | An optional threshold to indicate an additional condition for alert recovery.   |
-| Warning recovery threshold | An optional threshold to indicate an additional condition for warning recovery. |
-
-As you change a threshold, the preview graph in the editor displays a marker showing the cutoff point.
-
-**Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
+Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
 
 ### Advanced alert conditions
 
@@ -221,8 +206,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /getting_started/tagging/using_tags/?tab=assignment
-[3]: /dashboards/querying/#advanced-graphing
+[2]: /dashboards/querying/#advanced-graphing
+[3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /monitors/notify/?tab=is_alert#tag-variables
 [5]: /monitors/guide/recovery-thresholds/
 [6]: /monitors/create/configuration/#advanced-alert-conditions

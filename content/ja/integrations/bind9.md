@@ -7,7 +7,6 @@ assets:
 categories:
 - モニター
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md
 display_name: BIND 9
@@ -24,7 +23,7 @@ manifest_version: 1.0.0
 metric_prefix: bind9.
 metric_to_check: bind9.nsstat_AuthQryRej
 name: bind9
-public_title: Datadog-bind9 インテグレーション
+public_title: bind9
 short_description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
 support: contrib
 supported_os:

@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_customerinsights
+- /ja/integrations/azure_customerinsights
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Customer Insights のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_customer_insights/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Customer Insights インテグレーショ
 short_description: Azure Customer Insights のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Customer Insights を使用すると、どのような規模のオーガニゼーションであっても、多種多様なデータセットを結合して知識やインサイトを得ることで、あらゆる角度から捉えた顧客の全体像を構築することができます。

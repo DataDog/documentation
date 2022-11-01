@@ -1,132 +1,142 @@
 ---
 title: Timeseries Widget
 kind: documentation
-description: "Display the evolution of one or more metrics, log events, Indexed Spans, or process metrics over time."
+description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:
     - /graphing/widgets/timeseries/
     - /dashboards/widgets/network/
     - /graphing/widgets/network/
 further_reading:
-- link: "/dashboards/graphing_json/"
-  tag: "Documentation"
-  text: "Building Dashboards using JSON"
 - link: "https://www.datadoghq.com/blog/full-screen-graphs"
   tag: "Blog"
   text: "Explore your data in full-screen graph mode"
+- link: "/dashboards/graphing_json/"
+  tag: "Documentation"
+  text: "Building Dashboards using JSON"
 ---
 
 The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
-{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="Timeseries" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="A timeseries widget showing the average system.cpu.user for a host" style="width:90%;" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup" style="width:80%;" >}}
-
 ### Configuration
 
+{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup" style="width:90%;" >}}
+
 1. Choose the data to graph:
-    * Metric: See the [Querying documentation][3] to configure a metric query.
-    * Indexed Spans: See the [Trace search documentation][4] to configure an Indexed Span query.
-    * Log Events: See the [Log search documentation][5] to configure a log event query.
+   * Metric: See the [Querying documentation][3] to configure a metric query.
+   * Indexed Spans: See the [Trace search documentation][4] to configure an Indexed Span query.
+   * Log Events: See the [Log search documentation][5] to configure a log event query.
 
-2. Customize your graph with the available [options](#options).
+2. Customize your graph with the available [options](#display-options).
 
-### Options
+## Display options
 
-#### Line graphs
-
-Line graphs include two additional parameters:
+Graphs can be displayed as lines, areas, and bars. Line graphs contain additional parameters:
 
 | Parameter | Options               |
 |-----------|-----------------------|
-| Style     | Solid, Dashed, Dotted |
-| Stroke    | Normal, Thin, Thick   |
+| Style     | Solid, dashed, or dotted |
+| Stroke    | Normal, thin, or thick   |
 
-#### Appearance
+### Color
 
-Graphs can be displayed as areas, bars, or lines. For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
+For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
 
-| Palette | Description                                                                                              |
-|---------|----------------------------------------------------------------------------------------------------------|
-| Classic | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat). |
-| Cool    | A gradient color scheme made from green and blue.                                                        |
-| Warm    | A gradient color scheme made from yellow and orange.                                                     |
-| Purple  | A gradient color scheme made from purple.                                                                |
-| Orange  | A gradient color scheme made from orange.                                                                |
-| Gray    | A gradient color scheme made from gray.                                                                  |
+| Palette     | Description                                                                                                 |
+|-------------|-------------------------------------------------------------------------------------------------------------|
+| Classic     | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat).    |
+| Categorical | Using a set of 16 colors, applies a consistent color for each series of data across all timeseries widgets. |
+| Purple      | A gradient color scheme made from purple.                                                                   |
+| Cool        | A gradient color scheme made from green and blue.                                                           |
+| Warm        | A gradient color scheme made from yellow and orange.                                                        |
+| Orange      | A gradient color scheme made from orange.                                                                   |
+| Gray        | A gradient color scheme made from gray.                                                                     |
+| Red         | A gradient color scheme made from red.                                                                      |
+| Green       | A gradient color scheme made from green.                                                                    |
+| Blue        | A gradient color scheme made from blue.                                                                     |
 
 For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
 
-#### Metric aliasing
+### Metric aliasing
 
-Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of the query/formula click on **as...**, then enter your metric alias:
+Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
 
-{{< img src="dashboards/querying/metric_alias.png" alt="metric alias" style="width:75%;" >}}
+{{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Adding an alias to a search query in the Timeseries widget editor" style="width:100%;" >}}
 
-##### Event overlay
+### Event overlay
 
-Add events from related systems to add more context to your graph. For example, you can add GitHub commits, Jenkins deploys, or Docker creation events. Expand the **Event Overlays** section and enter a query to display those events. Use the same query format as for the [Event Stream][7], for example:
+You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. 
+
+Use the same query format as for the [Event Explorer][7], for example:
 
 | Query                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Shows all events from the Jenkins source.                  |
-| `tag:role:web`              | Shows all events with the tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][8]. |
+| `tag:role:web`              | Shows all events with the `role:web` tag.                  |
+| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [template variable][8]. |
 
 Once enabled, events are overlaid on your graphs with red bars:
 
-{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay" style="width:75%;" >}}
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay bar on a timeseries graph" style="width:100%;" >}}
 
-##### Legend configuration
+### Markers
 
-Add configurable legends on your screenboards by navigating to the legend section in the graph editor and selecting an option.
+To add markers for additional data sets, click **Add Marker** in the **Markers** section.
 
-{{< img src="dashboards/widgets/timeseries/legend-config.jpg" alt="Legend configuration" style="width:100%;" >}}
+1. Select a Line or Range and input a value or a range or values.
+2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line. 
+3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox. 
 
-Options:
+### Y-Axis controls
 
-* Automatic (default)
-* Compact
-* Expanded: Configurable columns for value, avg, sum, min, max
-* None
+Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis in order to:
 
-Note: For timeboards, legends display automatically when dashboard is set to L or XL.
-
-##### Y-axis controls
-
-Y-axis controls are available through the UI and the JSON editor. They allow you to:
-
-* Add a second y-axis for visualizations that include more than one data set.
 * Clip the y-axis to specific ranges.
-* Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove "outliers" series.
+* Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove the "outliers" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
-
-If your visualization includes more than one data set, you can add a second y-axis by expanding the *Y-axis controls* button. Click on *+ Add right y-axis* and then specify which side each metric's y-axis corresponds to under each metric's configuration options. On the graph, you can isolate which part of the visualization corresponds with which y-axis by hovering over the y-axis of interest.
-
-Change the Y-axis scale by expanding the *Y-Axis Controls* button.
 
 The following configuration options are available:
 
-| Option                | Required | Description                                                                                                                                                                                                       |
-|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`/`Max`           | No       | Specify the minimum and/or maximum value to show on y-axis. It takes a number or `Auto` as the default value.                                                                                                     |
-| `Scale`               | No       | Specifies the scale type. Possible values:<br>- *linear*: A linear scale (default)<br>- *log*: A logarithmic scale<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON)<br>- *sqrt*: A square root scale |
-| `Always include zero` | No       | Always include zero or fit the axis to the data range. The default is to always include zero.                                                                                                                     |
+| Option                | Required | Description                                                                                                                                                                                                               |
+|-----------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Min`                 | No       | Specify the minimum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                |
+| `Max`                 | No       | Specify the maximum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                        |
+| `Scale`               | No       | Specifies the scale type. Possible values include:<br>- *linear*: A linear scale (default).<br>- *log*: A logarithmic scale.<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON).<br>- *sqrt*: A square root scale. |
+| `Always include zero` | No       | Always include zero or fit the y-axis to the data range. The default is to always include zero.                                                                                                                             |
 
-**Note**: Because the mathematical log function doesn't accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
+Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, an empty graph is returned.
 
-## Full screen
+### Legend configuration
 
-In addition to the [standard full screen options][9], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+You can add configurable legends to your screenboards by selecting from the following options in the **Legend** section:
 
-See [Explore your data in full-screen graph mode][10], to learn more.
+* Automatic (default)
+* Compact
+* Expanded: Configurable columns for value, avg, sum, min, and max
+* None
+
+For timeboards, legends display automatically when a dashboard is set to L or XL.
+
+### Context links
+
+To add a context link in the dropdown menu that appears when you click in a dashboard widget, click **Add a Context Link** in the **Context Links** section.
+
+For more information about editing and deleting context links, see [Context Links][9].
+
+### Full screen
+
+In addition to the [standard full screen options][10], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+
+For more information, see [Explore your data in full-screen graph mode][11].
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][11] for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][12] for additional reference.
 
-The dedicated [widget JSON schema definition][12] for the timeseries widget is:
+The dedicated [widget JSON schema definition][13] for the timeseries widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -137,12 +147,13 @@ The dedicated [widget JSON schema definition][12] for the timeseries widget is:
 [1]: /dashboards/#timeboards
 [2]: /dashboards/#screenboards
 [3]: /dashboards/querying/
-[4]: /tracing/app_analytics/search/#search-bar
+[4]: /tracing/trace_explorer/query_syntax/#search-bar
 [5]: /logs/search_syntax/
 [6]: /dashboards/querying/#filter
 [7]: /events/
 [8]: /dashboards/template_variables/
-[9]: /dashboards/widgets/#full-screen
-[10]: https://www.datadoghq.com/blog/full-screen-graphs
-[11]: /api/v1/dashboards/
-[12]: /dashboards/graphing_json/widget_json/
+[9]: /dashboards/guide/context-links/
+[10]: /dashboards/widgets/#full-screen
+[11]: https://www.datadoghq.com/blog/full-screen-graphs
+[12]: /api/v1/dashboards/
+[13]: /dashboards/graphing_json/widget_json/

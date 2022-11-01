@@ -383,13 +383,46 @@ NGINX をコンテナまたはオーケストレーション環境で使用し�
 
 このコンフィギュレーションが完了すると、NGINX への HTTP リクエストが開始し Datadog トレースを伝達します。リクエストは APM UI に表示されます。
 
+#### サンプリング
+
+Datadog に送信される Nginx から始まるトレースの量を制御するには、コンフィギュレーションファイル `dd-config.json` で `sample_rate` パラメータを `0.0` (0%) から `1.0` (100%) の間の値に設定して、サンプリングレートを指定します。
+
+```json
+{
+  "environment": "prod",
+  "service": "nginx",
+  "agent_host": "localhost",
+  "agent_port": 8126,
+  "sample_rate": 0.2
+}
+```
+
+値を指定しない場合、[Datadog Agent が算出したサンプリングレート][7] (10 トレース/秒/Agent) が適用されます。
+
+`sampling_rules` 構成パラメータで、**サービスごとの**サンプリングレートを設定します。パラメータ `sampling_limit_per_second` を設定して、サービスインスタンスごとに秒あたりのトレース数を設定することで、レート制限を設定します。`sampling_limit_per_second` が設定されていない場合、1 秒間に 100 個のトレースという制限が適用されます。
+
+例えば、`nginx` というサービスのトレースの 50% を送信するには (1 秒間に最大 `50` トレース)
+
+```json
+{
+  "environment": "prod",
+  "service": "nginx",
+  "agent_host": "localhost",
+  "agent_port": 8126,
+  "sampling_rules": [{"service":"nginx", "sample_rate":0.5}],
+  "sampling_limit_per_second":50
+}
+```
+
+[dd-opentracing-cpp][8] ライブラリのサンプリング構成オプションについては、[リポジトリドキュメント][9]で詳しく説明しています。
+
 #### NGINX および FastCGI
 
 場所が HTTP ではなく FastCGI バックエンドを提供している場合、`location` ブロックは `opentracing_propagate_context` ではなく `opentracing_fastcgi_propagate_context` を使用する必要があります。
 
 ## Kubernetes 対応 NGINX Ingress コントローラー
 
-[Kubernetes ingress-nginx][7] コントローラーのバージョン 0.23.0 以降には、OpenTracing 対応 NGINX プラグインが含まれています。
+[Kubernetes ingress-nginx][10] コントローラーのバージョン 0.23.0 以降には、OpenTracing 対応 NGINX プラグインが含まれています。
 
 このプラグインを有効化するには、ConfigMap を作成または編集して `enable-opentracing: "true"` と、トレースの送信先となる `datadog-collector-host` に設定します。
 ConfigMap 名は nginx-ingress コントローラーコンテナのコマンドライン引数により明示的に引用し、`--configmap=$(POD_NAMESPACE)/nginx-configuration` をデフォルトに設定します。
@@ -434,9 +467,15 @@ data:
 
 ### サンプリング
 
-Nginx から始まるトレースのDatadogへの送信量を制御するには、パラメーター `DD_TRACE_SAMPLING_RULES` を `0.0` (0%) から `1.0` (100%) の間の値に設定し、サンプリングレートを指定してください。値を指定しない場合、Nginx から始まるトレースの 100% が送信されます。Kubernetes Nginx ingress controller は `dd-opentracing-cpp` ライブラリの [v1.2.1][8] を使用します。
+Nginx から始まるトレースのDatadogへの送信量を制御するには、パラメーター `DD_TRACE_SAMPLING_RULES` を `0.0` (0%) から `1.0` (100%) の間の値に設定し、サンプリングレートを指定してください。値を指定しない場合、Nginx から始まるトレースの 100% が送信されます。Kubernetes Nginx ingress controller は `dd-opentracing-cpp` ライブラリの [v1.2.1][11] を使用します。
 
-[Datadog Agent が算出したサンプリングレート][9] (10 トレース/秒/Agent) を使用し、100% に設定されたデフォルトのサンプリングルールを無視するには、パラメーター `DD_TRACE_SAMPLING_RULES` を空の配列に設定します。
+例えば、`ingress-nginx` サービスから始まるトレースの 10% を保持するには
+
+```
+DD_TRACE_SAMPLING_RULES=[{"service":"ingress-nginx","sample_rate":0.1}]
+```
+
+[Datadog Agent が算出したサンプリングレート][7] (10 トレース/秒/Agent) を使用し、100% に設定されたデフォルトのサンプリングルールを無視するには、パラメーター `DD_TRACE_SAMPLING_RULES` を空の配列に設定します。
 
 ```
 DD_TRACE_SAMPLING_RULES=[]
@@ -469,9 +508,11 @@ data:
 [4]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
 [5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
 [6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
-[7]: https://github.com/kubernetes/ingress-nginx
-[8]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
-[9]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
+[7]: /ja/tracing/trace_ingestion/mechanisms#in-the-agent
+[8]: https://github.com/DataDog/dd-opentracing-cpp/
+[9]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
+[10]: https://github.com/kubernetes/ingress-nginx
+[11]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.2.1
 {{% /tab %}}
 {{% tab "Istio" %}}
 

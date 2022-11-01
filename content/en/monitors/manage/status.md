@@ -103,11 +103,11 @@ The notebook matches the monitor evaluation period time range and includes relat
 
 ## Events
 
-Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event stream][7].
+Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event explorer][7].
 
 ### Audit events
 
-For all monitor types, monitor changes (monitor edits for instance) create an event in the [event stream][7]. This event explains the change and displays the user that made the change.
+For all monitor types, monitor changes (monitor edits for instance) create an event in the [event explorer][7]. This event explains the change and displays the user that made the change.
 
 If you made changes to a monitor, you can see examples with the following event search:
 
@@ -117,7 +117,7 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3
 
 Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Notify your team**, choose **Notify** in the drop-down next to: *alert recipients and monitor creator when this alert is modified*.
 
-The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [event stream][8].
+The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [event explorer][8].
 
 ## Export and import
 
@@ -136,5 +136,5 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [5]: /monitors/notify/
 [6]: /notebooks
 [7]: /events/
-[8]: https://app.datadoghq.com/event/stream
+[8]: https://app.datadoghq.com/event/explorer
 [9]: https://app.datadoghq.com/monitors#create/import

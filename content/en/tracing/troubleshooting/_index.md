@@ -71,9 +71,13 @@ For a given 40 minute interval, Datadog accepts the following combinations. To a
 
 Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][9]. If you have questions, before you change the limits, consult with the Datadog [support team][1].
 
+## APM resource usage
+
+Read about detecting trace collection CPU usage and about calculating adequate resource limits for the Agent in [Agent Resource Usage][10].
+
 ## Modifying, discarding, or obfuscating spans
 
-There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, see [Security and Agent Customization][10]. While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1].
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, see [Security and Agent Customization][11]. While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1].
 
 ## Troubleshooting data requested by Datadog Support
 
@@ -91,7 +95,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     Tracer debug logs go one step deeper than startup logs, and help to identify if integrations are instrumenting properly in a manner that can't necessarily be checked until traffic flows through the application. Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-4. **A [Datadog Agent flare][11] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Datadog Agent while in [debug or trace mode][12] depending on what information you are looking for in these logs.**
+4. **A [Datadog Agent flare][12] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Datadog Agent while in [debug or trace mode][13] depending on what information you are looking for in these logs.**
 
     Datadog Agent flares enables you to see what is happening within the Datadog Agent, for example, if traces are being rejected or malformed. This does not help if traces are not reaching the Datadog Agent, but does help identify the source of an issue, or any metric discrepancies.
 
@@ -107,7 +111,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
     Knowing how your application is deployed helps the Support team identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, Support may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][13], and adding span tags**
+6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][14], and adding span tags**
 
     Custom instrumentation can be a powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so support may ask about this to rule it out as a suspect.  
     
@@ -118,23 +122,24 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
    * **Datadog Tracer**
    * **Datadog Agent**
 
-    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][14] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
+    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][15] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /tracing/guide/metrics_namespace/
+[2]: /tracing/metrics/metrics_namespace/
 [3]: /tracing/troubleshooting/tracer_startup_logs/
 [4]: /tracing/troubleshooting/connection_errors/
 [5]: /tracing/troubleshooting/tracer_debug_logs/
-[6]: /tracing/visualization/#services
-[7]: /tracing/visualization/#resources
-[8]: /tracing/visualization/#span-tags
+[6]: /tracing/glossary/#services
+[7]: /tracing/glossary/#resources
+[8]: /tracing/glossary/#span-tags
 [9]: /tracing/troubleshooting/agent_rate_limits
-[10]: /tracing/custom_instrumentation/agent_customization
-[11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
-[12]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
-[13]: /tracing/custom_instrumentation/
-[14]: /tracing/compatibility_requirements/
+[10]: /tracing/troubleshooting/agent_apm_resource_usage/
+[11]: /tracing/custom_instrumentation/agent_customization
+[12]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[13]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
+[14]: /tracing/custom_instrumentation/
+[15]: /tracing/compatibility_requirements/

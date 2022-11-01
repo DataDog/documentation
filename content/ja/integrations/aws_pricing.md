@@ -9,7 +9,6 @@ categories:
 - cloud
 - コスト管理
 creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
 display_name: AWS Pricing
@@ -26,7 +25,7 @@ manifest_version: 1.0.0
 metric_prefix: aws.pricing.
 metric_to_check: aws.pricing.amazonecs
 name: aws_pricing
-public_title: Datadog-AWS Pricing インテグレーション
+public_title: AWS Pricing
 short_description: サービスの AWS Pricing 情報をレートコードごとに収集
 support: contrib
 supported_os:

@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_datalakestore
+- /ja/integrations/azure_datalakestore
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Data Lake Store のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
@@ -22,6 +21,7 @@ public_title: Datadog-Microsoft Azure Data Lake Store インテグレーショ�
 short_description: Azure Data Lake Store のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Data Lake Store は、ビッグデータ分析を可能にする無制限のデータレイクです。

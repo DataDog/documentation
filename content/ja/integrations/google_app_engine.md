@@ -2,7 +2,6 @@
 categories:
 - cloud
 - google cloud
-ddtype: crawler
 dependencies: []
 description: プロジェクトのメトリクスを収集してプロジェクトバージョン間で比較。
 doc_link: https://docs.datadoghq.com/integrations/google_app_engine/

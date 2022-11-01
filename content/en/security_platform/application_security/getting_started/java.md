@@ -10,10 +10,10 @@ further_reading:
   text: 'Java Datadog Library source code'
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
-  text: "OOTB Application Security Monitoring Rules"
+  text: "OOTB Application Security Management Rules"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting Application Security Monitoring"
+  text: "Troubleshooting Application Security Management"
 
 ---
 
@@ -37,7 +37,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
    Or one of the following methods, depending on where your application runs:
 
-**Note:** Read-only file systems are not currently supported. The application must have access to a writable `/tmp` directory.
+   **Note:** Read-only file systems are not currently supported. The application must have access to a writable `/tmp` directory.
 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
@@ -104,7 +104,7 @@ java -javaagent:dd-java-agent.jar \
 
 {{% /tab %}}
 
-{{< /tabs >}}
+   {{< /tabs >}}
 
 {{% appsec-getstarted-2-canary %}}
 

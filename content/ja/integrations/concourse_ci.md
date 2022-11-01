@@ -5,11 +5,10 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - コラボレーション
+- コラボレーション
 creates_events: false
-ddtype: crawler
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
 display_name: Concourse CI
 draft: false
 git_integration_title: concourse_ci
@@ -24,14 +23,17 @@ manifest_version: 1.0.0
 metric_prefix: concourse.ci.
 metric_to_check: concourse.ci.goroutines
 name: concourse_ci
-public_title: Datadog-Concourse-CI インテグレーション
+public_title: Concourse-CI
 short_description: Concourse CI から送信されるメトリクスを収集
 support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- mac_os
+- windows
 ---
+
+
+
 ## 概要
 
 Concourse CI で Datadog メトリクスエミッターを構成すると、以下のことができます。

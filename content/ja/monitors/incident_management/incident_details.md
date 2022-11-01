@@ -1,12 +1,13 @@
 ---
-title: インシデント詳細ページ
-kind: documentation
 description: インシデントのコンテキストと作業を管理する
 further_reading:
-  - link: dashboards/querying/#incident-management-analytics
-    tag: ドキュメント
-    text: インシデント管理分析
+- link: dashboards/querying/#incident-management-analytics
+  tag: ドキュメント
+  text: インシデント管理分析
+kind: documentation
+title: インシデント詳細ページ
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog {{< region-param key="dd_site_name" >}} サイトでは、Incident Management はご利用いただけません。</div>
 {{< /site-region >}}

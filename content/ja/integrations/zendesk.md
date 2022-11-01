@@ -1,9 +1,8 @@
 ---
 categories:
-  - Collaboration
-  - issue tracking
-  - log collection
-ddtype: crawler
+- Collaboration
+- issue tracking
+- log collection
 dependencies: []
 description: 新しいチケットと解決済みチケットを追跡。Datadog モニターからチケットを自動生成。
 doc_link: https://docs.datadoghq.com/integrations/zendesk/
@@ -12,14 +11,17 @@ git_integration_title: zendesk
 has_logo: true
 integration_id: zendesk
 integration_title: Zendesk
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: zendesk
 public_title: Datadog-Zendesk インテグレーション
 short_description: 新しいチケットと解決済みチケットを追跡。Datadog モニターからチケットを自動生成。
+team: web-integrations
 version: '1.0'
 ---
+
 {{< img src="integrations/zendesk/zendesk_dash.png" alt="Zendesk ダッシュボード" popup="true">}}
 
 ## 概要
@@ -53,47 +55,6 @@ Zendesk と統合して、以下のことができます。
 4. 上の手順 5 で受け取った Zendesk API トークンを入力します。
 5. Install Integration ボタンをクリックします。
 
-### トリガーを使用してログを転送
-
-Zendesk 管理者は、Datadog Log の [HTTP エンドポイント][3]および Zendesk トリガーを利用して、任意の JSON ペイロードを Datadog に送信できます。
-
-{{< tabs >}}
-{{% tab "Datadog US API" %}}
-
-以下の手順でターゲットを作成します。
-
-1. `https://<YOUR_DOMAIN>.zendesk.com/agent/admin/extensions` に移動します。
-2. URL 引数には `https://http-intake.logs.datadoghq.com/v1/input/<DATADOG_API_キー>?ddsource=zendesk`、**Method** には POST、**Content Type** には JSON を指定して、新しいターゲットを追加します。
-
-{{% /tab %}}
-{{% tab "Datadog EU API" %}}
-
-以下の手順でターゲットを作成します。
-
-1. `https://<YOUR_DOMAIN>.zendesk.com/agent/admin/extensions` に移動します。
-2. URL 引数には `https://http-intake.logs.datadoghq.eu/v1/input/<DATADOG_API_キー>?ddsource=zendesk` **Method** には POST、**Content Type** には JSON を指定して、新しいターゲットを追加します。
-
-{{% /tab %}}
-{{< /tabs >}}
-
-次に、チケットが作成されるごとにイベントを作成します。
-
-1. `https://<YOUR_DOMAIN>.zendesk.com/agent/admin/triggers` に移動します。
-2. 新しいトリガーを追加します。
-3. トリガーを実行する条件を決定します。
-4. **Actions** で、関連するターゲットの作成を通知します。
-5. 次の例のように、JSON 形式で通知の本文を追加します。
-
-```json
-{
-    "assignee": "{{ticket.assignee.name}}",
-    "ticket_id": "{{ticket.id}}",
-    "ticket_url": "{{ticket.url}}",
-    "assigner": "{{current_user.email}}",
-    "type": "assignment"
-}
-```
-
 ## 収集データ
 
 ### メトリクス
@@ -118,5 +79,4 @@ Zendesk インテグレーションには、サービスのチェック機能は
 
 [1]: https://app.datadoghq.com
 [2]: https://app.datadoghq.com/account/settings#integrations/zendesk
-[3]: https://docs.datadoghq.com/ja/api/?lang=bash#send-logs-over-http
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/zendesk/zendesk_metadata.csv
+[3]: https://github.com/DataDog/dogweb/blob/prod/integration/zendesk/zendesk_metadata.csv

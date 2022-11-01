@@ -2,6 +2,7 @@
 title: Logs Guides
 kind: guide
 private: true
+disable_toc: true
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}
@@ -35,7 +36,6 @@ private: true
 
 {{< whatsnext desc="Log Processing" >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Log Parsing Best Practices{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/enrichment-tables/" >}}Add Custom Metadata to Logs with Enrichment Tables{{< /nextlink >}}
     {{< nextlink href="/logs/guide/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
     {{< nextlink href="/logs/guide/logs-not-showing-expected-timestamp" >}}Logs Not Showing the Expected Timestamp{{< /nextlink >}}
     {{< nextlink href="/logs/guide/remap-custom-severity-to-official-log-status" >}}Remap Custom Severity Values to the Official Log Status{{< /nextlink >}}

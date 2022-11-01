@@ -1,14 +1,14 @@
 ---
 dependencies:
-  - https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md
+- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md
 description: iOS アプリケーションからログを収集する。
 further_reading:
-  - link: https://github.com/DataDog/dd-sdk-ios
-    tag: Github
-    text: dd-sdk-ios ソースコード
-  - link: logs/explorer
-    tag: ドキュメント
-    text: ログの調査方法
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: GitHub
+  text: dd-sdk-ios ソースコード
+- link: logs/explorer
+  tag: ドキュメント
+  text: ログの調査方法
 kind: ドキュメント
 title: iOS ログ収集
 ---
@@ -58,8 +58,39 @@ github "DataDog/dd-sdk-ios"
 
 2. アプリケーションコンテキストと [Datadog クライアントトークン][2]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-ios` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
-    {{< tabs >}}
-    {{% tab "US" %}}
+{{< site-region region="us" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+Datadog.initialize(
+    appContext: .init(),
+    trackingConsent: trackingConsent,
+    configuration: Datadog.Configuration
+        .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
+        .set(serviceName: "app-name")
+        .set(endpoint: .us1)
+        .build()
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
+                                                              environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us1]];
+
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
 
 ```swift
 Datadog.initialize(
@@ -68,12 +99,29 @@ Datadog.initialize(
     configuration: Datadog.Configuration
         .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
         .set(serviceName: "app-name")
+        .set(endpoint: .eu1)
         .build()
 )
 ```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
+                                                              environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint eu1]];
 
-    {{% /tab %}}
-    {{% tab "EU" %}}
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
 
 ```swift
 Datadog.initialize(
@@ -82,58 +130,182 @@ Datadog.initialize(
     configuration: Datadog.Configuration
         .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
         .set(serviceName: "app-name")
-        .set(endpoint: .eu)
+        .set(endpoint: .us3)
         .build()
 )
 ```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
+                                                              environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us3]];
 
-    {{% /tab %}}
-    {{< /tabs >}}
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 
-    GDPR 規制に準拠するために、SDK では初期化時に `trackingConsent` 値が必要です。
-    `trackingConsent` は、次のいずれかの値になります。
+{{< site-region region="us5" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
 
-    - `.pending` - SDK はデータの収集とバッチ処理を開始しますが、Datadog に送信しません。SDK は、新しい追跡同意値がバッチデータをどう処理するかを決定するのを待ちます。
-    - `.granted` - SDK はデータの収集を開始し、Datadog に送信します。
-    - `.notGranted` - SDK はデータを収集しません。ログ、トレース、RUM イベントは Datadog に送信されません。
+```swift
+Datadog.initialize(
+    appContext: .init(),
+    trackingConsent: trackingConsent,
+    configuration: Datadog.Configuration
+        .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
+        .set(serviceName: "app-name")
+        .set(endpoint: .us5)
+        .build()
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
+                                                              environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us5]];
 
-    SDK の初期化後に追跡同意値を変更するには、`Datadog.set(trackingConsent:)` API 呼び出しを使用します。
-    SDK は、新しい値に応じて動作を変更します。たとえば、現在の追跡同意が `.pending` の場合:
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 
-    - `.granted` に変更すると、SDK は現在および将来のすべてのデータを Datadog に送信します。
-    - `.notGranted` に変更すると、SDK は現在のすべてのデータを消去し、将来のデータを収集しません。
+{{< site-region region="gov" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
 
-     アプリケーションを書く際、開発ログを有効にできます。指定したレベル以上の優先度を持つ SDK 内のすべての内部メッセージがコンソールログに記録されます。
+```swift
+Datadog.initialize(
+    appContext: .init(),
+    trackingConsent: trackingConsent,
+    configuration: Datadog.Configuration
+        .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
+        .set(serviceName: "app-name")
+        .set(endpoint: .us1_fed)
+        .build()
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfigurationBuilder *builder = [DDConfiguration builderWithClientToken:@"<client_token>"
+                                                              environment:@"<environment_name>"];
+[builder setWithServiceName:@"app-name"];
+[builder setWithEndpoint:[DDEndpoint us1_fed]];
 
-    ```swift
-    Datadog.verbosityLevel = .debug
-    ```
+[DDDatadog initializeWithAppContext:[DDAppContext new]
+                    trackingConsent:trackingConsent
+                      configuration:[builder build]];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+
+GDPR 規定を遵守するため、SDK は初期化時に `trackingConsent` の値を求めます。
+`trackingConsent` は以下のいずれかの値になります。
+
+- `.pending` - the SDK はデータの収集とバッチ処理を開始しますが、Datadog へは送信しません。SDK はバッチ処理が完了したデータをどうするかについての新たな同意値が得られるまで待機します。
+- `.granted` - SDK はデータの収集を開始し、Datadog へ送信します。
+- `.notGranted` - SDK はデータを収集しません。ログ、トレース、RUM イベントは Datadog に送信されません。 
+
+SDK の初期化後に追跡同意値を変更するには、`Datadog.set(trackingConsent:)` API 呼び出しを使用します。
+SDK は、新しい値に応じて動作を変更します。たとえば、現在の追跡同意が `.pending` の場合: 
+
+- `.granted` に変更すると、SDK は現在および今後のすべてのデータを Datadog に送信します。
+- `.notGranted` に変更すると、SDK は現在のすべてのデータを消去し、今後のデータを収集しません。
+
+データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][6]のキャッシュディレクトリ (`Library/Caches`) に平文で保存され、デバイスにインストールされた他のアプリからは読み取ることができません。
+
+アプリケーションを作成する際、開発ログを有効にし、提供されたレベルと同等以上の優先度を持つ SDK のすべての内部メッセージをコンソールにログ出力するようにしてください。
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+Datadog.verbosityLevel = .debug
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 3. `Logger` の構成：
 
-    ```swift
-    logger = Logger.builder
-        .sendNetworkInfo(true)
-        .printLogsToConsole(true, usingFormat: .shortWith(prefix: "[iOS App] "))
-        .build()
-    ```
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+let logger = Logger.builder
+    .sendNetworkInfo(true)
+    .printLogsToConsole(true, usingFormat: .shortWith(prefix: "[iOS App] "))
+    .set(datadogReportingThreshold: .info)
+    .build()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDLoggerBuilder *builder = [DDLogger builder];
+[builder sendNetworkInfo:YES];
+[builder setWithDatadogReportingThreshold:.info];
+[builder printLogsToConsole:YES];
+
+DDLogger *logger = [builder build];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 4. 次のいずれかのメソッドで、カスタムログエントリを Datadog に直接送信します。
 
-    ```swift
-    logger.debug("A debug message.")
-    logger.info("Some relevant information?")
-    logger.notice("Have you noticed?")
-    logger.warn("An important warning…")
-    logger.error("An error was met!")
-    logger.critical("Something critical happened!")
-    ```
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+logger.debug("A debug message.")
+logger.info("Some relevant information?")
+logger.notice("Have you noticed?")
+logger.warn("An important warning...")
+logger.error("An error was met!")
+logger.critical("Something critical happened!")
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[logger debug:@"A debug message."];
+[logger info:@"Some relevant information?"];
+[logger notice:@"Have you noticed?"];
+[logger warn:@"An important warning..."];
+[logger error:@"An error was met!"];
+[logger critical:@"Something critical happened!"];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 5. (任意) - ログメッセージと一緒に `attributes` のマップを提供し、発行されたログに属性を追加します。マップの各エントリーは属性として追加されます。
 
-    ```swift
-    logger.info("Clicked OK", attributes: ["context": "onboarding flow"])
-    ```
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+logger.info("Clicked OK", attributes: ["context": "onboarding flow"])
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[logger info:@"Clicked OK" attributes:@{@"context": @"onboarding flow"}];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## 高度なロギング
 
@@ -160,10 +332,19 @@ Datadog.initialize(
 
 `addTag(withKey:value:)` メソッドを使い、指定されたロガーから送信されるすべてのログにタグを追加します。
 
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```swift
 // これにより、"build_configuration:debug" タグが追加されます
 logger.addTag(withKey: "build_configuration", value: "debug")
 ```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[logger addTagWithKey:@"build_configuration" value:@"debug"];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 **注意**: `<タグの値>` は `文字列` でなければなりません。
 
@@ -171,10 +352,19 @@ logger.addTag(withKey: "build_configuration", value: "debug")
 
 `removeTag(withKey:)` メソッドを使い、指定されたロガーから送信されるすべてのログからタグを削除します。
 
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```swift
 // これにより "build_configuration" で始まるすべてのタグが削除されます
 logger.removeTag(withKey: "build_configuration")
 ```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[logger removeTagWithKey:@"build_configuration"];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 [Datadog タグに関する詳細][5]。
 
@@ -193,10 +383,19 @@ logger.removeTag(withKey: "build_configuration")
 
 `addAttribute(forKey:value:)` メソッドを使い、指定されたロガーから送信されるすべてのログにカスタム属性を追加します。
 
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```swift
 // これにより、文字列値を持つ "device-model" 属性が追加されます
 logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 ```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[logger addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 **注**: `<属性の値>` は `Encodable` (`文字列`、`日付`、カスタム `Codable` データモデルなど) に適合する限り任意です。
 
@@ -204,11 +403,19 @@ logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 
 `removeAttribute(forKey:)` メソッドを使い、指定されたロガーから送信されるすべてのログからカスタム属性を削除します。
 
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```swift
 // これにより、"device-model" 属性は今後送信されるすべてのログから削除されます。
 logger.removeAttribute(forKey: "device-model")
-
 ```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[logger removeAttributeForKey:@"device-model"];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## その他の参考資料
 
@@ -219,3 +426,4 @@ logger.removeAttribute(forKey: "device-model")
 [3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [4]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/
 [5]: https://docs.datadoghq.com/ja/tagging/
+[6]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web

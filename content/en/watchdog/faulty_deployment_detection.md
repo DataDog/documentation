@@ -3,7 +3,7 @@ title: Automatic Faulty Deployment Detection
 kind: documentation
 ---
 
-## Overview 
+## Overview
 
 Automatic Faulty Deployment Detection finds faulty code deployments within minutes, reducing mean time to detection (MTTD). Whenever code is deployed to production, Watchdog compares the performance of the new code version with previous versions to spot new types of errors introduced in a deployment. If Watchdog determines that a new deployment is faulty, details about the affected service appears on the APM service page, as well as the resource page of the affected endpoints.
 
@@ -15,7 +15,7 @@ Click **View Details** in the yellow banner to open a slide-out panel with addit
 
 {{< img src="watchdog/faulty_deployment_details.png" alt="The faulty deployment tracking details panel" >}}
 
-Whenever a faulty deployment is detected, Watchdog adds this as an event in the [Event Stream][2]. You can set up a monitor to get automatically notified on such events. To do so, navigate to the [New Monitors][3] page and choose **Events**, and include `tags:deployment_analysis` in the search query defining the monitor.
+Whenever a faulty deployment is detected, Watchdog adds this as an event in the [Event Explorer][2]. You can set up a monitor to get automatically notified on such events. To do so, navigate to the [New Monitors][3] page and choose **Events**, and include `tags:deployment_analysis` in the search query defining the monitor.
 
 You can also enable the monitor by clicking the **Suggested Monitors** button, and then **Enable**. The Suggested Monitors button is only available if the service does not yet have a monitor configured. If the button is not available, follow the instruction above to create the monitor from the [New Monitors][3] page.
 
@@ -32,5 +32,5 @@ Watchdog attempts to determine if the new deployment is a plausible cause of the
 - There were not enough previous deployments in the recent history for Watchdog to establish a baseline for the analysis.
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /events/stream/
+[2]: /events/explorer
 [3]: https://app.datadoghq.com/monitors/create

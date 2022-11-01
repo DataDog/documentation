@@ -9,66 +9,95 @@ further_reading:
   tag: ドキュメント
   text: エクスプローラーでエラー追跡データを視覚化する
 kind: documentation
-title: Android エラー追跡
+title: Android のクラッシュレポートとエラー追跡
 ---
 ## 概要
 
-エラー追跡では、Android SDK から収集されたエラーを処理します。エラー追跡をすばやく開始するには、最新バージョンの [dd-sdk-android][1] をダウンロードします。
+エラー追跡は、RUM Android SDK から収集されたエラーを処理します。
 
-モバイルの Android ソースコードが難読化されている場合は、 Proguard/R8 マッピングファイルを Datadog にアップロードして、さまざまなスタックトレースを難読化します。その後、特定のエラーについて、ファイルパス、行番号、および関連するスタックトレースの各フレームのコードスニペットにアクセスできます。
+Android のクラッシュとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
+
+- 集計済みの Android クラッシュダッシュボードおよび属性
+- 難読化された Android クラッシュレポート
+- Android エラー追跡とトレンド分析
+
+クラッシュレポートは [**Error Tracking**][1] に表示されます。
+
+## セットアップ
+
+まだ Android SDK をインストールしていない場合は、[アプリ内セットアップ手順][2]に従うか、[Android RUM セットアップドキュメント][3]を参照してください。
+
+1. Gradle の依存関係に最新版の [RUM Android SDK][4] を追加します。
+2. [SDK の初期化][5]の際に、アプリケーションの `env` と `variant` を構成します。
+3. Gradle タスクを実行し、難読化されたスタックトレースにアクセスするために、Proguard/R8 マッピングファイルを Datadog にアップロードします。
+
+任意のエラーについて、ファイルパス、行番号、関連するスタックトレースの各フレームのコードスニペットにアクセスすることができます。
 
 ## マッピングファイルのアップロード
 
 {{< tabs >}}
 {{% tab "US" %}}
 
-1. 以下のスニペットを使用して、[Gradle プラグイン][1]を Gradle プロジェクトに追加します。
+1. 以下のコードスニペットを使用して、[Android Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
-```groovy
-// アプリの build.gradle スクリプトで
-plugins {
-    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
-}
-```
+   ```groovy
+   // In your app's build.gradle script
+   plugins {
+       id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
+   }
+   ```
 
-2. [新しい専用の Datadog API キーを作成][2]し、`DD_API_KEY` という名前の環境変数としてエクスポートします (または、タスクプロパティとして渡すこともできます)。
-3. （オプション）2 つの追加環境変数 `export DATADOG_SITE="datadoghq.eu"` および `export DATADOG_API_HOST="api.datadoghq.eu"` をエクスポートして、EU リージョンにファイルをアップロードするためにプラグインを構成します。
+2. [Datadog 専用の API キーを作成][2]し、環境変数として `DD_API_KEY` または `DATADOG_API_KEY` という名前でエクスポートします。また、プロジェクトのルートに `datadog-ci.json` ファイルがあれば、その中の `apiKey` プロパティから取得することも可能です。
+3. オプションとして、`build.gradle` スクリプトでプラグインを構成して、EU リージョンにファイルをアップロードするように構成します。
+
+   ```
+   datadog {
+       site = "EU1"
+   }
+   ```
+
 4. 難読化された APK が構築されたらアップロードタスクを実行します。
-```bash
-./gradlew uploadMappingRelease
-```
-**注**: プロジェクトで追加のフレーバーを使用している場合、プラグインは、難読化が有効になっている各バリアントのアップロードタスクを提供します。この場合、SDK を適切なバリアント名で初期化します (必要な API はバージョン `1.8.0` 以降で使用可能です)。
+
+   ```bash
+   ./gradlew uploadMappingRelease
+   ```
+
+**注**: プロジェクトで追加のフレーバーを使用している場合、プラグインは、難読化が有効になっている各バリアントのアップロードタスクを提供します。この場合、RUM Android SDK を適切なバリアント名で初期化します (必要な API はバージョン `1.8.0` 以降で使用可能です)。
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
 
 {{% /tab %}}
 {{% tab "EU" %}}
-1. 以下のスニペットを使用して、[Gradle プラグイン][1]を Gradle プロジェクトに追加します。
+1. 以下のコードスニペットを使用して、[Android Gradle プラグイン][1]を Gradle プロジェクトに追加します。
 
-```groovy
-// アプリの build.gradle スクリプトで
-plugins {
-    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
-}
-```
+   ```groovy
+   // In your app's build.gradle script
+   plugins {
+       id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
+   }
+   ```
 
-2. [新しい専用の Datadog API キーを作成][2]し、`DD_API_KEY` という名前の環境変数としてエクスポートします (または、タスクプロパティとして渡すこともできます)。
+2. [Datadog 専用の API キーを作成][2]し、環境変数として `DD_API_KEY` または `DATADOG_API_KEY` という名前でエクスポートします。また、プロジェクトのルートに `datadog-ci.json` ファイルがあれば、その中の `apiKey` プロパティから取得することも可能です。
 3. アプリの `build.gradle` スクリプトファイルで以下のスニペットを追加し、EU リージョンで使用するようプラグインを構成します。
 
-```groovy
-datadog {
-    site = "EU"
-}
-```
+   ```groovy
+   datadog {
+       site = "EU1"
+   }
+   ```
+
 4. 難読化された APK が構築されたらアップロードタスクを実行します。
-```bash
-./gradlew uploadMappingRelease
-```
-**注**: プロジェクトで追加のフレーバーを使用している場合、プラグインは、難読化が有効になっている各バリアントのアップロードタスクを提供します。この場合、SDK を適切なバリアント名で初期化します (必要な API はバージョン `1.8.0` 以降で使用可能です)。
+
+   ```bash
+   ./gradlew uploadMappingRelease
+   ```
+
+**注**: プロジェクトで追加のフレーバーを使用している場合、プラグインは、難読化が有効になっている各バリアントのアップロードタスクを提供します。この場合、RUM Android SDK を適切なバリアント名で初期化します (必要な API はバージョン `1.8.0` 以降で使用可能です)。
 
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/account/settings#api
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -76,9 +105,7 @@ datadog {
 
 プラグイン拡張機能を介して構成できるプラグインプロパティがいくつかあります。複数のバリアントを使用している場合は、バリアントの特定のフレーバーにプロパティ値を設定できます。
 
-**例:**
-
-バリアント `fooBarRelease` の場合、次のコンフィギュレーションを使用できます。
+例えば、`fooBarRelease` バリアントの場合、以下のような構成になります。
 
 ```groovy
 datadog {
@@ -94,15 +121,21 @@ datadog {
 }
 ```
 
-このバリアントのタスクコンフィギュレーションは、提供されている 3 つのフレーバーコンフィギュレーションすべてから `bar` -> `foo` -> `fooBar` の順序でマージされます。これは、`versionName` プロパティの最終値を `fooBar` として解決します。
+このバリアントのタスク構成は、以下の順序で提供される 3 つのフレーバー構成のすべてからマージされます。
+
+1. `bar`
+2. `foo`
+3. `fooBar`
+
+これにより、`versionName` プロパティの最終的な値は `fooBar` と解決されます。
 
 | プロパティ名              | 説明                                                                                                                                                                                               |
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `versionName`              | アプリケーションのバージョン名。                                                                                                                                                                      |
-| `serviceName`              | アプリケーションのサービス名。                                                                                                                                                                      |
-| `site`                     | データをアップロードする Datadog サイト("US"、"EU"、"GOV" のいずれか)。                                                                                                                                       |
-| `remoteRepositoryUrl`      | ソースコードがデプロイされたリモートリポジトリの URL。指定しない場合、この値はタスクの実行時に現在の GIT コンフィギュレーションから解決されます。                     |
-| `checkProjectDependencies` | このプロパティは、Datadog SDK が依存関係に含まれているかどうかをプラグインがチェックするかどうかを制御します。"none" - 無視、"warn" - 警告をログに記録、"fail" - エラーでビルドに失敗します (デフォルト)。 |
+| `versionName`              | アプリケーションのバージョン名 (デフォルトでは `build.gradle` スクリプトの `android` ブロックで宣言されたバージョン)。                                                                                                               |
+| `serviceName`              | アプリケーションのサービス名 (デフォルトでは `build.gradle` スクリプトの `android` ブロックで宣言されたアプリケーションのパッケージ名)。                                                                                                                          |
+| `site`                     | データをアップロードする Datadog サイト (US1、US3、US5、EU1、または US1_FED)。                                                                                                                                       |
+| `remoteRepositoryUrl`      | ソースコードがデプロイされたリモートリポジトリの URL。これを指定しない場合、この値はタスクの実行時に Git コンフィギュレーションから解決されます。                     |
+| `checkProjectDependencies` | このプロパティは、Datadog Android SDK が依存関係に含まれているかどうかをプラグインがチェックするかどうかを制御します。チェックしない場合、"none" は無視され、"warn" は警告をログに記録し、"fail" はエラーでビルドに失敗します (デフォルト)。 |
 
 ### CI/CD パイプラインとのインテグレーション
 
@@ -116,20 +149,12 @@ CI/CD パイプラインでこのタスクを実行し、ビルドグラフの�
 tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ```
 
-## エラーの解決
-
-クラス名、ファイルパス、そして行番号にアクセスできないため、難読化されたスタックトレースは役に立ちません。コードベースのどこで何かが起こっているのかを把握するのは簡単ではありません。さらに、コードスニペットは依然として縮小されているため (変換されたコードの 1 行が長い)、トラブルシューティングプロセスがさらに困難になります。縮小スタックトレースの例を以下に示します。
-
-![image_obfuscated][2]
-
-それどころか、難読化を解除されたスタックトレースは、トラブルシューティングに必要なすべてのコンテキストを提供します。
-
-![image_deobfuscated][3]
-
-[1]: https://github.com/DataDog/dd-sdk-android
-[2]: https://raw.githubusercontent.com/DataDog/dd-sdk-android-gradle-plugin/main/docs/images/obfuscated_stacktrace.png
-[3]: https://raw.githubusercontent.com/DataDog/dd-sdk-android-gradle-plugin/main/docs/images/deobfuscated_stacktrace.png
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/rum/error-tracking
+[2]: https://app.datadoghq.com/rum/application/create
+[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/#setup
+[4]: https://github.com/DataDog/dd-sdk-android
+[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
