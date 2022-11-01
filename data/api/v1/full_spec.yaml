@@ -13743,6 +13743,12 @@ components:
         body:
           description: Body to include in the test.
           type: string
+        bodyType:
+          description: Request body type. Supported values are `text/plain`, `application/json`,
+            `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`,
+            or `None`.
+          example: text/plain
+          type: string
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
         certificateDomains:
