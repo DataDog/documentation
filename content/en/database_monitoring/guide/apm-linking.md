@@ -14,10 +14,10 @@ This guide assumes that you have configured [Datadog Monitoring](/database_monit
 ## Before you begin
 
 Supported tracers
-: dd-trace-go >= 1.42.0 (db accessed via the `database/sql` or `github.com/jmoiron/sqlx` packages)
+: dd-trace-go >= 1.42.0 (support for `database/sql` and `github.com/jmoiron/sqlx` packages)
 
 Supported databases
-: mysql or postgres
+: postgres, mysql
 
 Supported Agent versions
 : 7.36.1+
