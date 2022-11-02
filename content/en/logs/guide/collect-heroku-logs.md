@@ -27,7 +27,7 @@ heroku drains:add 'https://http-intake.logs.{{< region-param key="dd_site" >}}/a
 * Replace `<DD_API_KEY>` with your [Datadog API Key][2].
 * Replace `<ENV>` with your application's [environment][3].
 * Replace `<APPLICATION_NAME>` and `<SERVICE>` with your application name.
-* Replace `<HOST>` with the desired hostname. **Note**: Per the [host section][4], metrics and traces set the default host name to the dyno name. It is not yet possible to dynamically set the dyno name as the hostname for logs. For now, to correlate between metrics, traces, and logs the `dyno` and `dynotype` tags can be used.
+* Replace `<HOST>` with the desired hostname. **Note**: Per the [host section][4], metrics and traces set the default hostname to the dyno name. It is not yet possible to dynamically set the dyno name as the hostname for logs. For now, to correlate between metrics, traces, and logs the `dyno` and `dynotype` tags can be used.
 
 ### Custom attributes
 
