@@ -14,7 +14,7 @@ This guide assumes that you have configured [Datadog Monitoring](/database_monit
 ## Before you begin
 
 Supported tracers
-: dd-trace-go >= 1.42.0 (support for `database/sql` and `github.com/jmoiron/sqlx` packages)
+: [dd-trace-go](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1) >= 1.42.0 (support for [database/sql](https://pkg.go.dev/database/sql) and [sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) packages)
 
 Supported databases
 : postgres, mysql
