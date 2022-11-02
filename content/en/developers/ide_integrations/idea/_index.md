@@ -47,7 +47,8 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 
 {{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="The Datadog plugin" style="width:100%;" >}}
 
-Alternatively you can install the plugin from the [Jetbrains Marketplace](https://plugins.jetbrains.com/plugin/19495-datadog).
+Alternatively, you can install the plugin from the [Jetbrains Marketplace][6].
+<span id="datadog_plugin_install_button"></span>
 
 ### Add Datadog credentials
 
@@ -146,7 +147,14 @@ Let us know what you think about the plugin! Provide feedback on our [discussion
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<script src="https://plugins.jetbrains.com/assets/scripts/mp-widget.js"></script>
+<script>
+  // Please, replace #yourelement with a real element id on your webpage
+  MarketplaceWidget.setupMarketplaceWidget('install', 19495, "#datadog_plugin_install_button");
+</script>
+
 [1]: https://github.com/DataDog/datadog-for-intellij/discussions
 [3]: /getting_started/profiler/
 [4]: https://www.datadoghq.com/
 [5]: /account_management/api-app-keys/
+[6]: https://plugins.jetbrains.com/plugin/19495-datadog
