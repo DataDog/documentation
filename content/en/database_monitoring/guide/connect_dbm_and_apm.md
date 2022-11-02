@@ -9,12 +9,12 @@ private: true
 The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
 </div>
 
-This guide assumes that you have configured [Datadog Monitoring](/database_monitoring/#getting-started) and are using [APM](/tracing/).
+This guide assumes that you have configured [Datadog Monitoring][1] and are using [APM][2].
 
 ## Before you begin
 
 Supported tracers
-: [dd-trace-go](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1) >= 1.42.0 (support for [database/sql](https://pkg.go.dev/database/sql) and [sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) packages)
+: [dd-trace-go][3] >= 1.42.0 (support for [database/sql][4] and [sqlx][5] packages)
 
 Supported databases
 : postgres, mysql
@@ -92,4 +92,8 @@ func main() {
 ```
 {{% /tab %}}
 
-
+[1]: /database_monitoring/#getting-started
+[2]: /tracing/
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[4]: https://pkg.go.dev/database/sql
+[5]: https://pkg.go.dev/github.com/jmoiron/sqlx
