@@ -17,16 +17,18 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 If you are using a Dockerfile to build your application, complete the following:
 
-1. Copy the [Datadog `serverless-init` binary][2] into your Docker image.
+1. Instrument your application with a [supported Datadog tracing library][7]
 
-2. Use the ENTRYPOINT instruction to run the `serverless-init` binary as your Docker container is initiated.
+2. Copy the [Datadog `serverless-init` binary][2] into your Docker image.
 
-3. Use the CMD instruction to run your existing application and other required commands as arguments.
+3. Use the ENTRYPOINT instruction to run the `serverless-init` binary as your Docker container is initiated.
 
-The following are examples of how to complete these three steps. You may need to adjust these examples depending on your existing Dockerfile setup.
+4. Use the CMD instruction to run your existing application and other required commands as arguments.
+
+The following are examples of how to complete these three steps. You may need to adjust these examples depending on your existing Dockerfile setup. 
 
 
-{{< programming-lang-wrapper langs="go,python,nodejs,java" >}}
+{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
 ```
 COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
@@ -79,6 +81,33 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 
 [1]: /tracing/setup_overview/setup/java/?tabs=containers
 [2]: https://github.com/DataDog/crpb/tree/main/java
+{{< /programming-lang >}}
+
+{{< programming-lang lang="dotnet" >}}
+```
+COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
+
+```
+
+See [Tracing .NET Applications][1] for detailed instructions. [Sample code for a simple .NET application][2].
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-core?tab=containers
+[2]: https://github.com/DataDog/crpb/tree/main/dotnet
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+```
+COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
+
+```
+
+See [Tracing Ruby Applications][1] for detailed instructions. [Sample code for a simple Ruby application][2].
+
+[1]: /tracing/trace_collection/dd_libraries/ruby/
+[2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -156,3 +185,4 @@ You can use the [GCP integration][1] to collect logs. Alternatively, you can set
 [4]: https://console.cloud.google.com/run
 [5]: /getting_started/site/
 [6]: /getting_started/tagging/unified_service_tagging/
+[7]: /tracing/trace_collection/#for-setup-instructions-select-your-language
