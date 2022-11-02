@@ -405,16 +405,12 @@ const handleSearch = () => {
         const index = initializeAlgoliaIndex();
         const query = getQueryParameterByName('s', window.location.href);
 
-        console.log(index)
-        console.log(query)
-
         index.search(decodeURIComponent(query), {
             hitsPerPage: 200,
             attributesToRetrieve: ['*'],
             filters: `language:${getSiteLang()}`
         })
         .then(({ hits }) => {
-            console.log(hits)
             renderResults(query, hits);
         })
         .catch(() => {
