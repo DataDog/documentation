@@ -247,12 +247,14 @@ To manually correlate your traces with your logs, first enable the [openTelemetr
 
 ```java
 String traceIdValue = Span.current().getSpanContext().getTraceId();
+// 128bit (represented as 32-hex-character string) value needs to be converted to 64bit (represented as 16-hex-character string)
 String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
 String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
 String spanIdValue = Span.current().getSpanContext().getSpanId();
-String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+// already 64bit value (represented as 16-hex-character string)
+String spanIdHexString = spanIdValue;
 long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
 String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 
