@@ -196,7 +196,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<YOUR_INSTANCE_NAME>"
     }
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
