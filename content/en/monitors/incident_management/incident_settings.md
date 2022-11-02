@@ -85,7 +85,7 @@ In addition to the five default fields and the fields based on metric tags, you 
 This feature is in open beta.
 </div>
 
-{{< img src="monitors/incidents/responder_types.jpeg" alt="Responder Types Settings" style="width:80%;">}}
+{{< img src="monitors/incidents/responder_types_settings.jpeg" alt="Responder Types Settings" style="width:80%;">}}
 
 The responder types settings provide you with the ability to create custom roles to assign to your incident responders and to specify if those roles are meant to be held by one person or multiple people per incident. These roles are unrelated to the [Role Based Access Control (RBAC)][15] system. Responder types allow your responders to understand what their responsibilities are in an incident based on the definitions of your own incident response process. By default there are two roles:
 
