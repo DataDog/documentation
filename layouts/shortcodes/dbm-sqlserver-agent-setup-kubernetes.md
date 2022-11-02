@@ -75,7 +75,7 @@ metadata:
           "connector": "odbc",
           "driver": "FreeTDS",
           "include_ao_metrics": true,  # Optional: For AlwaysOn users
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"]  # Optional
         }
       ]
 spec:
