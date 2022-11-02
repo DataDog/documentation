@@ -2,7 +2,11 @@ import docsearch from 'docsearch.js';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
-const lang = document.documentElement.lang || 'en';
+let lang = document.documentElement.lang || 'en';
+
+if (lang.toLowerCase() === 'en-us') {
+    lang = 'en'
+}
 
 // Set baseUrl based on environment
 let baseUrl = window.location.origin;
