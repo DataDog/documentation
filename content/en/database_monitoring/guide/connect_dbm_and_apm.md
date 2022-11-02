@@ -1,5 +1,5 @@
 ---
-title: Linking Database Monitoring with APM
+title: Connecting DBM and APM
 kind: guide
 beta: true
 private: true
