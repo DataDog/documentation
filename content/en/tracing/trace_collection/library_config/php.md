@@ -253,7 +253,7 @@ A JSON encoded string to configure the sampling rate. Examples: Set the sample r
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
 **Default**: `0`<br>
-Maximum number of spans to sample per-second. All processes in an apache or fpm pool share the same limiter. When unset (<=0) rate limiting is delegated to the Datadog Agent.
+Maximum number of spans to sample per second. All processes in an Apache or FPM pool share the same limiter. When unset (0) rate limiting is delegated to the Datadog Agent.
 
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`
