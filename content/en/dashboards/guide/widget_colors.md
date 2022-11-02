@@ -35,15 +35,17 @@ The Consistent palette allows you to assign the same color consistently to a ser
 <!-- <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194404128-d46d53dd-8072-4922-a958-35bbad77ed10.png"> -->
 {{< img src="dashboards/guide/colors/5_consistent_interface.png" alt="TK" style="width:80%;" >}}
 
-For a small subset of compatible tags, Datadog will automatically recognize the *meaning* behind each series of data. In these cases, a Semantic color palette will appear rather than Consistent, which will use color to represent meaning - i.e. red = error code, green = success code.
+For a small subset of compatible tags, Datadog automatically recognizes the meaning behind each series of data. In this case, the Consistent color palette appears as a Semantic color palette, which uses color to represent meaning. For instance, the color red may represent an error.
 
 <!-- <img width="600" alt="image" src="https://user-images.githubusercontent.com/19559239/194404072-253cf0cd-fc6a-4080-ac8c-f2e931e7680c.png"> -->
 {{< img src="dashboards/guide/colors/6_semantic_interface.png" alt="TK" style="width:80%;" >}}
 
-### Diverging Palettes
+### Diverging 
 
-- Use a diverging palette when you need to emphasize the difference in values within a dataset. Diverging palettes are suited to data that has a natural order and a natural midpoint, such as the amount of change in memory utilization (from -100% to +100%, for example, with a natural midpoint at 0%). 
-- There are two diverging palette options: the cool palette is composed of green and blue, and the warm palette interpolates between yellow and orange
+Use a Diverging palette when you need to emphasize the difference in values within a data set. Diverging palettes are best suited to data that has a natural order and a natural midpoint. For example: the amount of change in memory utilization, from -100% to +100%, with a natural midpoint at 0%. 
+
+There are two Diverging palette options: cool (green and blue) or warm (interpolates between yellow and orange).
+
 <!-- <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396296-2024a00a-3091-4439-8ff9-175ba134a5f5.png"> -->
 <!-- <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194403795-b6835f46-a12e-4f80-9d04-c3f7d577c82c.png"> -->
 
@@ -52,9 +54,11 @@ For a small subset of compatible tags, Datadog will automatically recognize the 
 
 ### Sequential Palettes
 
-- Use sequential palettes when you need to emphasize that different series in your dataset have something in common. This palette works well for data has a natural order, such as the CPU utilization (from 0% to 100%) of a group of hosts
-- Color options include: purple, orange, gray, red, green, and blue
-- When combined with **color overrides**, the sequential palettes are a great tool for distinguishing the results from multiple queries in a single chart (see 'Color overrides' section below)
+Use a Sequential palettes when you need to emphasize that different series in your dataset have something in common. This palette works well for data that has a natural order, such as the CPU utilization (from 0% to 100%) of a group of hosts.
+
+Color options include purple, orange, gray, red, green, and blue.
+
+When combined with [color overrides](#color-overrides), the Sequential palettes help you to distinguish results from multiple queries in a single chart.
 
 <!-- <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396351-71af5084-a78b-4b39-b23f-79d4a26d495a.png"> -->
 <!-- <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194399372-2ba161d8-7965-485a-aea0-e021641e974a.png"> -->
@@ -72,9 +76,8 @@ Color overrides allow you to assign a single color of your choice to each query.
 
 ## Accessibility settings
 
-Datadog offers accessible color modes for graphs to cater to visual needs like **color vision deficiency**, **low visual acuity**, and **contrast sensitivity**. Selecting an accessible color mode will render all graphs with the 'classic' color palette in a set of accessible colors catered to a specific vision need. You can set an accessible color mode from the [User Preferences page][1].
+Datadog offers accessible color modes for graphs to cater to visual needs, including color vision deficiency, low visual acuity, and contrast sensitivity. Selecting an accessible color mode renders all graphs with the Classic palette in a set of accessible colors catered to a specific vision need. You can set an accessible color mode from the [User Preferences page][1].
 
-![image][2]
+{{< img src="dashboards/guide/colors/visual_accessibility.png" alt="TK" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/personal-settings/preferences
-[2]: https://user-images.githubusercontent.com/19559239/194154147-9c951d22-ff7f-49ca-ab65-9cda271ffa40.png
