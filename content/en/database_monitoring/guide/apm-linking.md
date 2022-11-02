@@ -56,6 +56,7 @@ sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tra
 3. Via code on sql.Open
 ```go
 sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+
 db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull))
 if err != nil {
 	log.Fatal(err)
@@ -65,13 +66,13 @@ if err != nil {
 Full example:
 ```go
 import (
-    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+	"database/sql"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 
 func main() {
-    // The first step is to set the dbm propagation mode when registering the driver. Note that this can also
+	// The first step is to set the dbm propagation mode when registering the driver. Note that this can also
 	// be done on sqltrace.Open for more granular control over the feature.
 	sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
