@@ -119,8 +119,6 @@ For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitori
 
 Since Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
-**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
-
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
@@ -136,7 +134,6 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -210,7 +207,6 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -262,7 +258,6 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "driver": "FreeTDS",
     "username": "datadog",
     "password": "<PASSWORD>",
-    "include_ao_metrics": true,  # Optional: For AlwaysOn users
     "tags": [
       "service:<CUSTOM_SERVICE>"
       "env:<CUSTOM_ENV>"
@@ -340,7 +335,6 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
-    include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -372,7 +366,6 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
-          "include_ao_metrics": true,  # Optional: For AlwaysOn users
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",

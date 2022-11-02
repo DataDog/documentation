@@ -72,7 +72,6 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     provider: MSOLEDBSQL
-    include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -253,7 +252,6 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
-    include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -278,7 +276,6 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
-    include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -311,7 +308,6 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
-          "include_ao_metrics": true,  # Optional: For AlwaysOn users
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "gcp": {
             "project_id": "<PROJECT_ID>",

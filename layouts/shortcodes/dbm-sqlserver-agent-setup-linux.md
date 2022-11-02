@@ -15,7 +15,8 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # optional
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
