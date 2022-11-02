@@ -15,8 +15,14 @@ const initializeAlgoliaIndex = () => {
 }
 
 const getSiteLang = () => {
-    const lang = document.querySelector('html').lang || 'en'
-    return lang.toLowerCase() === 'en-us' ? 'en' : lang
+    const siteEnv = document.querySelector('html').dataset.env
+    const lang = document.querySelector('html').lang.toLowerCase() || 'en-us'
+
+    if (siteEnv === 'live') {
+        return lang
+    }
+
+    return lang === 'en-us' ? 'en' : lang
 }
 
 const getTitle = (hit) => {
