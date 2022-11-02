@@ -1,14 +1,19 @@
 ---
 title: Linking Database Monitoring with APM
 kind: guide
+beta: true
 private: true
 ---
 
-This guide assumes that you have configured [Datadog Monitoring](database_monitoring/#getting-started) and are using [APM](/tracing/).
+<div class="alert alert-warning">
+The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
+</div>
+
+This guide assumes that you have configured [Datadog Monitoring](/database_monitoring/#getting-started) and are using [APM](/tracing/).
 
 ## Before you begin
 
-Supported configurations
+Supported tracers
 : dd-trace-go >= 1.42.0 (db accessed via the `database/sql` or `github.com/jmoiron/sqlx` packages)
 
 Supported databases
@@ -17,7 +22,7 @@ Supported databases
 Supported Agent versions
 : 7.36.1+
 
-Data Privacy
+Data privacy
 : Enabling sql comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other 3rd parties that have been granted access to the database.
 
 ## Setup
