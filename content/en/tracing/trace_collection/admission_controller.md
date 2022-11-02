@@ -13,7 +13,7 @@ is_beta: true
 First, configure the Datadog Agent. Our recommended method of installation for Kubernetes environments is via Helm Charts. Learn how to configure the [Datadog Agent in Kubernetes via Helm Charts][3] by reading our documentation.
 
 ## Unified Service Tagging
-For your Kubernetes applications that send traces to Datadog Agent, you can configure the Datadog admission controller to inject Java, JavaScript and Python libraries automatically. To inject the Java and Javascript libraries, use Datadog Cluster Agent v7.39+. To inject the Python library, use Datadog Cluster Agent v7.40+.
+For your Kubernetes applications that send traces to Datadog Agent, you can configure the Datadog admission controller to inject Java, JavaScript, and Python libraries automatically. To inject the Java and Javascript libraries, use Datadog Cluster Agent v7.39+. To inject the Python library, use Datadog Cluster Agent v7.40+.
 
 We highly recommend using our Unified Service Tagging approach to connect your infrastructure, applications and logs to get the maximum value out of Datadog. Learn how to apply [Unified Service Tagging][4] to your services by reading our documentation.
 
@@ -55,10 +55,11 @@ annotations:
     admission.datadoghq.com/js-lib.version: "v3.6.0"
 ```
 
-You can also inject the latest version of a tracer library for the Java and Python language via the following annotation:
+You can also inject the latest version of a tracer library using the following annotation:
 ```yaml
 annotations:
     admission.datadoghq.com/java-lib.version: "latest"
+    admission.datadoghq.com/js-lib.version: "latest"
     admission.datadoghq.com/python-lib.version: "latest"
 ```
 
@@ -82,7 +83,7 @@ Possible options:
 | `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
 ## Configure the Tracer from a Different Registry
-You may pyll the APM library from a different registry using the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent.
+You may pull the APM library from a different registry using the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent.
 
 The default value is set to `grc.io/datadoghq`. The supported values are `docker.io/datadog` and `public.ecr.aws/datadog`.
 
