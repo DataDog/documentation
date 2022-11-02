@@ -109,7 +109,7 @@ In the Response Team section, you can form your response team by adding other us
 1. `Incident Commander` - The individual responsible for leading the response team 
 3. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
 
-If you wish to create custom responders roles, you can do so in the Incident Settings for Responder Types. This allows you to create new responder types with custom names and descriptions. It also allows you to choose if a responder type should be a one person role or a multi person role.
+If you wish to create custom responders roles, you can do so in the [Incident Settings for Responder Types][15]. This allows you to create new responder types with custom names and descriptions. It also allows you to choose if a responder type should be a one person role or a multi person role.
   
 **Note:** These roles are unrelated to those found in the [Role Based Access Control (RBAC)][14] system. RBAC roles control a user's permissions to access certain features in Datadog. The Responder Types system in Incident Management does not change a user's permissions in any capacity. It is instead about inviting responders to your incidents and giving them a documented role in your response process for visibility. 
 
@@ -166,3 +166,4 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [12]: /monitors/incident_management/incident_settings#message-templates
 [13]: /getting_started/incident_management
 [14]: /account_management/rbac/?tab=datadogapplication
+[15]: /monitors/incident_management/incident_settings/#responder-types

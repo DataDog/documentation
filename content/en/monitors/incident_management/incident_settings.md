@@ -87,7 +87,7 @@ This feature is in open beta.
 
 {{< img src="monitors/incidents/responder_types_settings.jpeg" alt="Responder Types Settings" style="width:80%;">}}
 
-The responder types settings provide you with the ability to create custom roles to assign to your incident responders and to specify if those roles are meant to be held by one person or multiple people per incident. These roles are unrelated to the [Role Based Access Control (RBAC)][15] system. Responder types allow your responders to understand what their responsibilities are in an incident based on the definitions of your own incident response process. By default there are two roles:
+The responder types settings provide you with the ability to create custom roles to [assign to your incident responders][16] and to specify if those roles are meant to be held by one person or multiple people per incident. These roles are unrelated to the [Role Based Access Control (RBAC)][15] system. Responder types allow your responders to understand what their responsibilities are in an incident based on the definitions of your own incident response process. By default there are two roles:
 
 1. `Incident Commander` - The individual responsible for leading the response team 
 2. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
@@ -201,3 +201,4 @@ To create a postmortem template:
 [13]: /dashboards/
 [14]: /mobile/
 [15]: /account_management/rbac/?tab=datadogapplication#pagetitle
+[16]: /monitors/incident_management/incident_details/#response-team-section
