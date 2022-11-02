@@ -2,10 +2,11 @@ import docsearch from 'docsearch.js';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
-let lang = document.documentElement.lang || 'en';
+let lang = document.documentElement.lang.toLowerCase() || 'en-us';
 
-if (lang.toLowerCase() === 'en-us') {
-    lang = 'en'
+// Todo: Remove this after the staging algolia index has been updated.
+if (env !== 'live') {
+    lang = lang === 'en-us' ? 'en' : lang
 }
 
 // Set baseUrl based on environment
