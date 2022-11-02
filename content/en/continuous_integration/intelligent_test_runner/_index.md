@@ -23,11 +23,11 @@ Intelligent Test Runner is Datadog's test impact analysis solution. It allows yo
 
 By only running tests on relevant code, when tests fail, it is likely a legitimate failure that pertains to the modified code.
 
-## Limitations during beta phase
+## Limitations during beta
 
-During the beta phase of Intelligent Test Runner there are certain limitations:
+During the beta of Intelligent Test Runner there are certain limitations:
 
-- Some of the environment variables required in the following sections are only required during the beta phase.
+- Some of the environment variables required in the following sections are only required during the beta.
 - Intelligent Test Runner only works without the Datadog Agent.
 - There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run. Intelligent Test Runner is not able to detect:
   - Changes in library dependencies.
@@ -48,7 +48,7 @@ To enable Intelligent Test Runner, the following environment variables need to b
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta phase
+**Note**: Required only during Beta
 
 `DD_API_KEY` (Required)
 : The [Datadog API key][2] used to upload the test results.<br/>
@@ -66,12 +66,12 @@ To enable Intelligent Test Runner, the following environment variables need to b
 `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (Required)
 : Flag to enable git metadata upload.<br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta phase
+**Note**: Required only during Beta
 
 `DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
 : Flag to enable test skipping. <br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta phase
+**Note**: Required only during Beta
 
 After setting these environment variables, run your tests as you normally do:
 
@@ -98,7 +98,7 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta phase
+**Note**: Required only during Beta
 
 `DD_API_KEY` (Required)
 : The [Datadog API key][2] used to upload the test results.<br/>
@@ -116,7 +116,7 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 `DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
 : Flag to enable Intelligent Test Runner. <br/>
 **Default**: `false`<br/>
-**Note**: Required only during Beta phase
+**Note**: Required only during Beta
 
 After setting these environment variables, run your tests as you normally do by using [dotnet test][6] or [VSTest.Console.exe][7]:
 
@@ -176,7 +176,7 @@ In addition to setting the environment variables above, you need to activate the
 
 ## Setup CI Job
 
-Intelligent Test Runner uses git metadata information (commit history) to work. However, some CI providers use a git shallow clone (`git clone --depth=0`) which only download the target commit without downloading any historical commit information. This setup does not contain enough information for Intelligent Test Runner. If your CI is using shallow clones, it must be changed.
+Intelligent Test Runner uses git metadata information (commit history) to work. However, some CI providers use a git shallow clone (`git clone --depth=0`) which only download the target commit without downloading any historical commit information. This setup does not contain enough information for Intelligent Test Runner to work. If your CI is using shallow clones, it must be changed.
 
 An efficient alternative to shallow clones are partial clones (supported in Git v2.27+), which will clone the current commit plus the necessary git metadata without retrieving all past versions of all files: `git clone --filter=blob:none`.
 

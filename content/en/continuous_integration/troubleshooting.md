@@ -154,7 +154,7 @@ If you have admin access, you can update it from the [Repository Settings Page][
 [Intelligent Test Runner][12] works by analyzing your commit history along with code coverage information about past test runs to determine which tests need to be run and which ones can be safely skipped. A minimum amount of information needs to exist in order for the Intelligent Test Runner to work correctly:
 
 - Your repository needs to have a commit history of at least two commits in the past month.
-- You need to have collected test code coverage in past commits.
+- You need to have collected test code coverage in past commits, which happens on test runs where Intelligent Test Runner was enabled.
 - You git clone must contain commit and tree history. Shallow git clones (`git clone --depth=0`) are not supported.
 
 Due to these restrictions, the first time you enable Intelligent Test Runner, you cannot see any tests skipped and the test execution time may be slower than usual because the code coverage is collected automatically.
