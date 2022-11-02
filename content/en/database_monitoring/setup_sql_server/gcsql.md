@@ -22,8 +22,6 @@ Complete the following steps to enable Database Monitoring with your database:
 2. [Install the Agent](#install-the-agent)
 3. [Install the Cloud SQL integration](#install-the-cloud-sql-integration)
 
-**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
-
 ## Before you begin
 
 Supported SQL Server versions
@@ -57,6 +55,8 @@ This is required because Google Cloud SQL does not permit granting `CONNECT ANY 
 
 GCP does not grant direct host access, meaning the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
+**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
@@ -72,7 +72,8 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     provider: MSOLEDBSQL
-    tags:  # optional
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
@@ -145,10 +146,10 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # optional
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
@@ -198,6 +199,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "driver": "FreeTDS",
     "username": "datadog",
     "password": "<PASSWORD>",
+    "include_ao_metrics": true,  # Optional: For AlwaysOn users
     "tags": [
       "service:<CUSTOM_SERVICE>"
       "env:<CUSTOM_ENV>"
@@ -251,6 +253,10 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>' \
@@ -272,6 +278,10 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
@@ -301,6 +311,8 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "include_ao_metrics": true,  # Optional: For AlwaysOn users
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional,
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
