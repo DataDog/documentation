@@ -6,7 +6,7 @@ kind: guide
 In Datadog graphs, color is the primary method by which you can distinguish between series of data. Selecting the right color for your graph ensures that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively. 
 
 <!-- <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194149975-b0ad4fb9-5521-42a3-955d-eea0c07a0fbf.png"> -->
-{{< img src="dashboards/guide/colors/colors_top.png" alt="TK" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/colors_top.png" alt="TK" style="width:80%;" >}}
 
 ## Types of color palettes
 
@@ -15,7 +15,7 @@ In Datadog graphs, color is the primary method by which you can distinguish betw
 Categorical palettes are best used for data that needs to be differentiated, but does not follow a natural order—for example, availability zones.
 
 <!-- <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194394992-87aefa6e-5774-45a5-8632-b9751d6d7924.png"> -->
-{{< img src="dashboards/guide/colors/2_alphabet.png" alt="TK" video="true" style="width:40%;" >}}
+{{< img src="dashboards/guide/colors/2_alphabet.png" alt="TK" style="width:40%;" >}}
 
 #### Classic
 
@@ -24,21 +24,21 @@ The default Classic palette uses a set of six distinct colors optimized for read
 The Classic color palette has visual accessibility support.
 
 <!-- <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194170680-fc860aef-e916-47ac-8872-2228caad3c11.png"> -->
-{{< img src="dashboards/guide/colors/3_classic_palette.png" alt="TK" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/3_classic_palette.png" alt="TK" style="width:80%;" >}}
 
 #### Consistent/Semantic
 
-The Consistent palette allows you to assign the same color consistently to a series of data, making it **easier to correlate data across charts**. The Consistent palette does not guarantee that adjacent data series use the same color, and does not have accessibility support.
+The Consistent palette allows you to assign the same color consistently to a series of data, making it easier to correlate data across charts. Unlike the Classic palette, the Consistent palette does not guarantee that adjacent data series use the same color, and does not have accessibility support.
 
 <!-- <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194396077-0e2858b5-57dd-4710-9c0a-91e0d3c4d910.png"> -->
-{{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="TK" video="true" style="width:70%;" >}}
+{{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="TK" style="width:70%;" >}}
 <!-- <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194404128-d46d53dd-8072-4922-a958-35bbad77ed10.png"> -->
-{{< img src="dashboards/guide/colors/5_consistent_interface.png" alt="TK" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/5_consistent_interface.png" alt="TK" style="width:80%;" >}}
 
 For a small subset of compatible tags, Datadog will automatically recognize the *meaning* behind each series of data. In these cases, a Semantic color palette will appear rather than Consistent, which will use color to represent meaning - i.e. red = error code, green = success code.
 
 <!-- <img width="600" alt="image" src="https://user-images.githubusercontent.com/19559239/194404072-253cf0cd-fc6a-4080-ac8c-f2e931e7680c.png"> -->
-{{< img src="dashboards/guide/colors/6_semantic_interface.png" alt="TK" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/6_semantic_interface.png" alt="TK" style="width:80%;" >}}
 
 ### Diverging Palettes
 
@@ -47,8 +47,8 @@ For a small subset of compatible tags, Datadog will automatically recognize the 
 <!-- <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396296-2024a00a-3091-4439-8ff9-175ba134a5f5.png"> -->
 <!-- <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194403795-b6835f46-a12e-4f80-9d04-c3f7d577c82c.png"> -->
 
-{{< img src="dashboards/guide/colors/7_divergent_palette.png" alt="TK" video="true" style="width:80%;" >}}
-{{< img src="dashboards/guide/colors/8_divergent_graphs.png" alt="TK" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/7_divergent_palette.png" alt="TK" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/8_divergent_graphs.png" alt="TK" style="width:80%;" >}}
 
 ### Sequential Palettes
 
@@ -59,8 +59,8 @@ For a small subset of compatible tags, Datadog will automatically recognize the 
 <!-- <img width="300" alt="image" src="https://user-images.githubusercontent.com/19559239/194396351-71af5084-a78b-4b39-b23f-79d4a26d495a.png"> -->
 <!-- <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194399372-2ba161d8-7965-485a-aea0-e021641e974a.png"> -->
 
-{{< img src="dashboards/guide/colors/9_sequential_palette.png" alt="TK" video="true" style="width:30%;" >}}
-{{< img src="dashboards/guide/colors/10_sequential_graphs.png" alt="TK" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/9_sequential_palette.png" alt="TK" style="width:30%;" >}}
+{{< img src="dashboards/guide/colors/10_sequential_graphs.png" alt="TK" style="width:80%;" >}}
 
 ## Color overrides
 
@@ -68,7 +68,7 @@ Color overrides allow you to assign a single color of your choice to each query.
 
 <!-- <img width="900" alt="image" src="https://user-images.githubusercontent.com/19559239/194158463-475e4571-0322-489f-a9a6-d7e753f8314e.png"> -->
 
-{{< img src="dashboards/guide/colors/11_overrides.png" alt="TK" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/11_overrides.png" alt="TK" style="width:80%;" >}}
 
 ## Accessibility settings
 
