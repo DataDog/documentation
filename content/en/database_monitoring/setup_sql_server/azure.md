@@ -25,8 +25,6 @@ Do the following steps to enable Database Monitoring with your database:
 2. [Install the Agent](#install-the-agent)
 3. [Install the Azure integration](#install-the-azure-integration)
 
-**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
-
 ## Before you begin
 
 Supported SQL Server versions
@@ -121,6 +119,8 @@ For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitori
 
 Since Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
+**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
@@ -136,7 +136,8 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    tags:  # optional
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
@@ -209,10 +210,10 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # optional
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -261,6 +262,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "driver": "FreeTDS",
     "username": "datadog",
     "password": "<PASSWORD>",
+    "include_ao_metrics": true,  # Optional: For AlwaysOn users
     "tags": [
       "service:<CUSTOM_SERVICE>"
       "env:<CUSTOM_ENV>"
@@ -314,6 +316,10 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       name: '<YOUR_INSTANCE_NAME>' \
@@ -334,6 +340,10 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -362,6 +372,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "include_ao_metrics": true,  # Optional: For AlwaysOn users
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "name": "<YOUR_INSTANCE_NAME>"
