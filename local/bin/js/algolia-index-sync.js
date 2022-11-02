@@ -25,7 +25,6 @@ const updateSettings = index => {
         searchableAttributes: ['title', 'relpermalink', 'section_header', 'type, tags', 'unordered(description, content)'],
         ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
         customRanking: ['desc(rank)'],
-        // replicas: Object.keys(replicas),
         attributesToHighlight: ['title', 'section_header', 'description', 'content', 'type', 'tags'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
@@ -76,45 +75,6 @@ const updateSynonyms = index => {
     })
 }
 
-const updateRules = index => {
-    // const rule = {
-    //     objectID: 'a-rule-id',
-    //     conditions: [
-    //         {
-    //             pattern: 'search query',
-    //             anchoring: 'one of: is, contains, starts with, or ends with'
-    //         }
-    //     ],
-    //     consequence: {
-    //         params: {
-    //             filters: 'relevant filter here'
-    //         },
-    //         promote: {},
-    //         hide: {}
-    //     },
-    //     enabled: false
-    // }
-
-    // how do we deal with figuring out objectIDs
-    // for promoting hits?
-    const rule = {
-        objectID: 'azure',
-        conditions: [{
-            pattern: 'azure',
-            anchoring: 'is'
-        }],
-        consequence: {
-            promote: [{
-                objectID: '61bd3abb1485b1e2df64e5b7b56d6281',
-                position: 0
-            }]
-        }
-    }
-
-    // do we want to forward to replicas here?
-    return index.saveRule(rule)
-}
-
 const updateReplicas = (client, indexName) => {
     const replicas = {};
     
@@ -148,17 +108,18 @@ const updateIndex = indexName => {
 }
 
 const sync = () => {
-    const appId = process.env.ALGOLIA_APP_ID || '';
-    const adminKey = process.env.ALGOLIA_ADMIN_KEY || '';
-    const indexName = getIndexName();
+    const appId = process.env.ALGOLIA_APP_ID || ''
+    const adminKey = process.env.ALGOLIA_ADMIN_KEY || ''
+    const indexName = getIndexName()
+    console.info(appId)
 
     if (appId === '' || adminKey === '' || indexName === '') {
         console.error('Missing Algolia App Id, API Key, or Index name.  Exiting...')
-        process.exit(1);
+        process.exit(1)
     }
 
-    const client = algoliasearch(appId, adminKey);
-    const index = client.initIndex(indexName);
+    const client = algoliasearch(appId, adminKey)
+    const index = client.initIndex(indexName)
 
     updateSettings(index)
         .then(() => console.log(`${indexName} settings update complete`))
@@ -168,12 +129,8 @@ const sync = () => {
         .then(() => console.log(`${indexName} synonyms update complete`))
         .catch(err => console.error(err))
 
-    // updateRules(index)
-    //     .then(() => console.log(`${indexName} rules update complete`))
-    //     .catch(err => console.error(err))
-
-    updateReplicas(client, indexName);
-    updateIndex(indexName);
+    updateReplicas(client, indexName)
+    updateIndex(indexName)
 }
 
-sync();
+sync()
