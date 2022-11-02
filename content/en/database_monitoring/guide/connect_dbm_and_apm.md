@@ -92,6 +92,7 @@ func main() {
 ```
 {{% /tab %}}
 
+
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
