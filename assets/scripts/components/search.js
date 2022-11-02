@@ -15,7 +15,8 @@ const initializeAlgoliaIndex = () => {
 }
 
 const getSiteLang = () => {
-    return document.querySelector('html').lang;
+    const lang = document.querySelector('html').lang || 'en'
+    return lang.toLowerCase() === 'en-us' ? 'en' : lang
 }
 
 const getTitle = (hit) => {
@@ -404,12 +405,16 @@ const handleSearch = () => {
         const index = initializeAlgoliaIndex();
         const query = getQueryParameterByName('s', window.location.href);
 
+        console.log(index)
+        console.log(query)
+
         index.search(decodeURIComponent(query), {
             hitsPerPage: 200,
             attributesToRetrieve: ['*'],
             filters: `language:${getSiteLang()}`
         })
         .then(({ hits }) => {
+            console.log(hits)
             renderResults(query, hits);
         })
         .catch(() => {
