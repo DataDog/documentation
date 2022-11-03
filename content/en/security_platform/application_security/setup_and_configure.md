@@ -13,7 +13,7 @@ further_reading:
   text: "Out-of-the-Box Application Security Management Rules"
 - link: "/security_platform/application_security/add-user-info/"
   tag: "Documentation"
-  text: "Adding User Information to Traces"
+  text: "Adding user information to traces"
 - link: "/security_platform/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"

@@ -7,7 +7,7 @@ code_lang_weight: 30
 further_reading:
     - link: "/security_platform/application_security/add-user-info/"
       tag: "Documentation"
-      text: "Adding User Information to Traces"
+      text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-rb'
       tag: 'GitHub'
       text: 'Ruby Datadog Library source code'

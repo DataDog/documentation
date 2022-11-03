@@ -11,7 +11,7 @@ further_reading:
   text: "Programming Language and Framework Compatibility"
 - link: "/security_platform/application_security/add-user-info/"
   tag: "Documentation"
-  text: "Tracking User Activity"
+  text: "Tracking user activity"
 - link: "/security_platform/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Management Rules"

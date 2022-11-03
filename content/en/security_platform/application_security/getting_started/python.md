@@ -7,7 +7,7 @@ code_lang_weight: 50
 further_reading:
     - link: "/security_platform/application_security/add-user-info/"
       tag: "Documentation"
-      text: "Adding User Information to Traces"
+      text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-py'
       tag: 'GitHub'
       text: 'Python Datadog Library source code'
