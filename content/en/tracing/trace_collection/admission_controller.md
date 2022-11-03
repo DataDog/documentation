@@ -13,7 +13,7 @@ is_beta: true
 First, configure the Datadog Agent. Our recommended method of installation for Kubernetes environments is via Helm Charts. Learn how to configure the [Datadog Agent in Kubernetes via Helm Charts][3] by reading our documentation.
 
 ## Unified Service Tagging
-For your Kubernetes applications that send traces to Datadog Agent (version 7.39 and higher), you can configure the Datadog admission controller to inject  Java and JavaScript libraries automatically.
+For your Kubernetes applications that send traces to Datadog Agent, you can configure the Datadog admission controller to inject Java, JavaScript, and Python libraries automatically. To inject the Java and Javascript libraries, use Datadog Cluster Agent v7.39+. To inject the Python library, use Datadog Cluster Agent v7.40+.
 
 We highly recommend using our Unified Service Tagging approach to connect your infrastructure, applications and logs to get the maximum value out of Datadog. Learn how to apply [Unified Service Tagging][4] to your services by reading our documentation.
 
@@ -35,6 +35,7 @@ Adding this annotation results in the injection of the tracer library for that l
 Valid `<language>` values are:
 - `java`
 - `js`
+- `python`
 
 For example to inject the Java tracer v0.114.0:
 
@@ -54,16 +55,17 @@ annotations:
     admission.datadoghq.com/js-lib.version: "v3.6.0"
 ```
 
-You can also inject the latest version of a tracer library for the Java and Node language via the following annotation:
+You can also inject the latest version of a tracer library using the following annotation:
 ```yaml
 annotations:
     admission.datadoghq.com/java-lib.version: "latest"
     admission.datadoghq.com/js-lib.version: "latest"
+    admission.datadoghq.com/python-lib.version: "latest"
 ```
 
 **Note**: Use caution specifying `latest`, as it may raise errors because of major version differences between your newly injected applications and your existing applications that have already been deployed. 
 
-Adding a `mutateUnlabelled: true` annotation causes the cluster agent to attempt to intercept every unlabelled pod.
+Adding a `mutateUnlabelled: true` Agent config in the Helm chart causes the Cluster Agent to attempt to intercept every unlabelled pod.
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
@@ -80,6 +82,10 @@ Possible options:
 | `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
 | `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
+## Configure the Tracer from a Different Registry
+You may pull the APM library from a different registry using the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent.
+
+The default value is set to `grc.io/datadoghq`. The supported values are `docker.io/datadog` and `public.ecr.aws/datadog`.
 
 [1]: /containers/cluster_agent/setup/?tab=helm
 [2]: /containers/cluster_agent/admission_controller/

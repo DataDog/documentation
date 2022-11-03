@@ -603,7 +603,7 @@ class Integrations:
         The build should fail if we found any sections that should not be displayed in Docs.
         Current exclude list: ["Setup", "Pricing", "Tiered Pricing"]
         """
-        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing)"
+        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing|Uninstall)"
         matches = re.search(setup_header_markdown_regex, markdown_string, re.MULTILINE | re.IGNORECASE)
         return matches == None
 
@@ -695,7 +695,8 @@ class Integrations:
                 markdown_string = f"{markdown_string}\n{purchase_copy}"
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
                 markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
-                updated_markdown = self.remove_h3_markdown_section(markdown_setup_removed, '### Pricing')
+                markdown_uninstall_removed = self.remove_markdown_section(markdown_setup_removed, '## Uninstall')
+                updated_markdown = self.remove_h3_markdown_section(markdown_uninstall_removed, '### Pricing')
                 is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
                 if not is_marketplace_integration_markdown_valid:

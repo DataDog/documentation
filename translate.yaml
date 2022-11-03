@@ -14,6 +14,8 @@ ignores:
   - "content/en/security_monitoring/default_rules/*.md"
   - "content/en/integrations/rapdev_services.md"
   - "content/en/workflows/actions_catalog/*.md"
+  - "content/en/api/v1/**/*.md"
+  - "content/en/api/v2/**/*.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
