@@ -7,7 +7,7 @@ further_reading:
   text: "Protect against threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/setup_and_configure/"
   tag: "Documentation"
-  text: "Other Setup Considerations and Configuration Options"
+  text: "Other setup considerations and configuration options"
 ---
 
 ## Overview
