@@ -22,7 +22,7 @@ docker_daemon:
   short_name: cpu system
   unit_name: percent
 - curated_metric: ''
-  description: 95th percentile of docker.cpu.system
+  description: 95th percentile of docker.cpu.system [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.95percentile
@@ -32,7 +32,7 @@ docker_daemon:
   short_name: cpu system 95%
   unit_name: percent
 - curated_metric: ''
-  description: Average value of docker.cpu.system
+  description: Average value of docker.cpu.system [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.avg
@@ -42,7 +42,8 @@ docker_daemon:
   short_name: cpu system avg
   unit_name: percent
 - curated_metric: ''
-  description: The rate that the value of docker.cpu.system was sampled
+  description: The rate that the value of docker.cpu.system was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.count
@@ -59,10 +60,10 @@ docker_daemon:
   metric_type: gauge
   orientation: '0'
   per_unit_name: ''
-  short_name: cpu system max
+  short_name: cpu system max [deprecated in agent 6.0]
   unit_name: percent
 - curated_metric: ''
-  description: Median value of docker.cpu.system
+  description: Median value of docker.cpu.system [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.system.median
@@ -83,7 +84,7 @@ docker_daemon:
   short_name: cpu user
   unit_name: percent
 - curated_metric: ''
-  description: 95th percentile of docker.cpu.user
+  description: 95th percentile of docker.cpu.user [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.95percentile
@@ -93,7 +94,7 @@ docker_daemon:
   short_name: cpu user 95%
   unit_name: percent
 - curated_metric: ''
-  description: Average value of docker.cpu.user
+  description: Average value of docker.cpu.user [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.avg
@@ -103,7 +104,8 @@ docker_daemon:
   short_name: cpu user avg
   unit_name: percent
 - curated_metric: ''
-  description: The rate that the value of docker.cpu.user was sampled
+  description: The rate that the value of docker.cpu.user was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.count
@@ -113,7 +115,7 @@ docker_daemon:
   short_name: cpu user count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.cpu.user
+  description: Max value of docker.cpu.user [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.max
@@ -123,7 +125,7 @@ docker_daemon:
   short_name: cpu user max
   unit_name: percent
 - curated_metric: ''
-  description: Median value of docker.cpu.user
+  description: Median value of docker.cpu.user [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.cpu.user.median
@@ -184,7 +186,7 @@ docker_daemon:
   short_name: mem cache
   unit_name: byte
 - curated_metric: ''
-  description: 95th percentile value of docker.mem.cache
+  description: 95th percentile value of docker.mem.cache [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.95percentile
@@ -194,7 +196,7 @@ docker_daemon:
   short_name: mem cache 95%
   unit_name: byte
 - curated_metric: ''
-  description: Average value of docker.mem.cache
+  description: Average value of docker.mem.cache [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.avg
@@ -204,7 +206,8 @@ docker_daemon:
   short_name: mem cache avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.mem.cache was sampled
+  description: The rate that the value of docker.mem.cache was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.count
@@ -214,7 +217,7 @@ docker_daemon:
   short_name: mem cache count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.mem.cache
+  description: Max value of docker.mem.cache [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.max
@@ -224,7 +227,7 @@ docker_daemon:
   short_name: mem cache max
   unit_name: byte
 - curated_metric: ''
-  description: Median value of docker.mem.cache
+  description: Median value of docker.mem.cache [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.cache.median
@@ -245,7 +248,7 @@ docker_daemon:
   short_name: mem rss
   unit_name: byte
 - curated_metric: ''
-  description: 95th percentile value of docker.mem.rss
+  description: 95th percentile value of docker.mem.rss [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.95percentile
@@ -255,7 +258,7 @@ docker_daemon:
   short_name: mem rss 95%
   unit_name: byte
 - curated_metric: ''
-  description: Average value of docker.mem.rss
+  description: Average value of docker.mem.rss [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.avg
@@ -265,7 +268,8 @@ docker_daemon:
   short_name: mem rss avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.mem.rss was sampled
+  description: The rate that the value of docker.mem.rss was sampled [deprecated in
+    agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.count
@@ -275,7 +279,7 @@ docker_daemon:
   short_name: mem rss count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.mem.rss
+  description: Max value of docker.mem.rss [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.max
@@ -285,7 +289,7 @@ docker_daemon:
   short_name: mem rss max
   unit_name: byte
 - curated_metric: ''
-  description: Median value of docker.mem.rss
+  description: Median value of docker.mem.rss [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.rss.median
@@ -305,7 +309,7 @@ docker_daemon:
   short_name: mem swap
   unit_name: byte
 - curated_metric: ''
-  description: 95th percentile value of docker.mem.swap
+  description: 95th percentile value of docker.mem.swap [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.95percentile
@@ -315,7 +319,7 @@ docker_daemon:
   short_name: mem swap 95%
   unit_name: byte
 - curated_metric: ''
-  description: Average value of docker.mem.swap
+  description: Average value of docker.mem.swap [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.avg
@@ -325,7 +329,8 @@ docker_daemon:
   short_name: mem swap avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.mem.swap was sampled
+  description: The rate that the value of docker.mem.swap was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.count
@@ -335,7 +340,7 @@ docker_daemon:
   short_name: mem swap count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.mem.swap
+  description: Max value of docker.mem.swap [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.max
@@ -345,7 +350,7 @@ docker_daemon:
   short_name: mem swap max
   unit_name: byte
 - curated_metric: ''
-  description: Median value of docker.mem.swap
+  description: Median value of docker.mem.swap [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.swap.median
@@ -558,7 +563,7 @@ docker_daemon:
   unit_name: byte
 - curated_metric: ''
   description: 95th percentile of docker.mem.limit. Ordinarily this value will not
-    change
+    change [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.95percentile
@@ -569,6 +574,7 @@ docker_daemon:
   unit_name: byte
 - curated_metric: ''
   description: Average value of docker.mem.limit. Ordinarily this value will not change
+    [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.avg
@@ -578,7 +584,8 @@ docker_daemon:
   short_name: mem limit avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.mem.limit was sampled
+  description: The rate that the value of docker.mem.limit was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.count
@@ -589,6 +596,7 @@ docker_daemon:
   unit_name: sample
 - curated_metric: ''
   description: Max value of docker.mem.limit. Ordinarily this value will not change
+    [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.max
@@ -599,6 +607,7 @@ docker_daemon:
   unit_name: byte
 - curated_metric: ''
   description: Median value of docker.mem.limit. Ordinarily this value will not change
+    [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.limit.median
@@ -619,7 +628,7 @@ docker_daemon:
   unit_name: byte
 - curated_metric: ''
   description: 95th percentile of docker.mem.sw_limit. Ordinarily this value will
-    not change
+    not change [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit.95percentile
@@ -630,7 +639,7 @@ docker_daemon:
   unit_name: byte
 - curated_metric: ''
   description: Average value of docker.mem.sw_limit. Ordinarily this value will not
-    change
+    change [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit.avg
@@ -640,7 +649,8 @@ docker_daemon:
   short_name: mem + sw limit avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.mem.sw_limit was sampled
+  description: The rate that the value of docker.mem.sw_limit was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit.count
@@ -651,6 +661,7 @@ docker_daemon:
   unit_name: sample
 - curated_metric: ''
   description: Max value of docker.mem.sw_limit. Ordinarily this value will not change
+    [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit.max
@@ -661,7 +672,7 @@ docker_daemon:
   unit_name: byte
 - curated_metric: ''
   description: Median value of docker.mem.sw_limit. Ordinarily this value will not
-    change
+    change [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_limit.median
@@ -745,7 +756,7 @@ docker_daemon:
   short_name: mem in use
   unit_name: fraction
 - curated_metric: ''
-  description: 95th percentile of docker.mem.in_use
+  description: 95th percentile of docker.mem.in_use [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.95percentile
@@ -755,7 +766,7 @@ docker_daemon:
   short_name: mem in use 95%
   unit_name: fraction
 - curated_metric: ''
-  description: Average value of docker.mem.in_use
+  description: Average value of docker.mem.in_use [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.avg
@@ -765,7 +776,8 @@ docker_daemon:
   short_name: mem in use avg
   unit_name: fraction
 - curated_metric: ''
-  description: The rate that the value of docker.mem.in_use was sampled
+  description: The rate that the value of docker.mem.in_use was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.count
@@ -775,7 +787,7 @@ docker_daemon:
   short_name: mem in use count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.container.mem.in_use
+  description: Max value of docker.container.mem.in_use [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.max
@@ -785,7 +797,7 @@ docker_daemon:
   short_name: mem in use max
   unit_name: fraction
 - curated_metric: ''
-  description: Median value of docker.container.mem.in_use
+  description: Median value of docker.container.mem.in_use [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.in_use.median
@@ -806,7 +818,8 @@ docker_daemon:
   short_name: mem + sw in use
   unit_name: fraction
 - curated_metric: ''
-  description: 95th percentile of docker.mem.sw<em>in</em>use
+  description: 95th percentile of docker.mem.sw<em>in</em>use [deprecated in agent
+    6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.95percentile
@@ -816,7 +829,7 @@ docker_daemon:
   short_name: mem + sw in use 95%
   unit_name: fraction
 - curated_metric: ''
-  description: Average value of docker.mem.sw<em>in</em>use
+  description: Average value of docker.mem.sw<em>in</em>use [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.avg
@@ -827,6 +840,7 @@ docker_daemon:
   unit_name: fraction
 - curated_metric: ''
   description: The rate that the value of docker.mem.sw<em>in</em>use was sampled
+    [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.count
@@ -836,7 +850,8 @@ docker_daemon:
   short_name: mem + sw in use count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.container.mem.sw<em>in</em>use
+  description: Max value of docker.container.mem.sw<em>in</em>use [deprecated in agent
+    6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.max
@@ -846,7 +861,8 @@ docker_daemon:
   short_name: mem + sw in use max
   unit_name: fraction
 - curated_metric: ''
-  description: Median value of docker.container.mem.sw<em>in</em>use
+  description: Median value of docker.container.mem.sw<em>in</em>use [deprecated in
+    agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.mem.sw_in_use.median
@@ -866,7 +882,7 @@ docker_daemon:
   short_name: io read
   unit_name: byte
 - curated_metric: ''
-  description: 95th percentile of docker.io.read_bytes
+  description: 95th percentile of docker.io.read_bytes [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.95percentile
@@ -876,7 +892,7 @@ docker_daemon:
   short_name: io read 95%
   unit_name: byte
 - curated_metric: ''
-  description: Average value of docker.io.read_bytes
+  description: Average value of docker.io.read_bytes [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.avg
@@ -886,7 +902,8 @@ docker_daemon:
   short_name: io read avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.io.read_bytes was sampled
+  description: The rate that the value of docker.io.read_bytes was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.count
@@ -896,7 +913,7 @@ docker_daemon:
   short_name: io read count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.container.io.read_bytes
+  description: Max value of docker.container.io.read_bytes [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.max
@@ -906,7 +923,8 @@ docker_daemon:
   short_name: io read max
   unit_name: byte
 - curated_metric: ''
-  description: Median value of docker.container.io.read_bytes
+  description: Median value of docker.container.io.read_bytes [deprecated in agent
+    6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.read_bytes.median
@@ -926,7 +944,7 @@ docker_daemon:
   short_name: io write
   unit_name: byte
 - curated_metric: ''
-  description: 95th percentile of docker.io.write_bytes
+  description: 95th percentile of docker.io.write_bytes [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.95percentile
@@ -936,7 +954,7 @@ docker_daemon:
   short_name: io write 95%
   unit_name: byte
 - curated_metric: ''
-  description: Average value of docker.io.write_bytes
+  description: Average value of docker.io.write_bytes [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.avg
@@ -946,7 +964,8 @@ docker_daemon:
   short_name: io write avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.io.write_bytes was sampled
+  description: The rate that the value of docker.io.write_bytes was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.count
@@ -956,7 +975,7 @@ docker_daemon:
   short_name: io write count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.container.io.write_bytes
+  description: Max value of docker.container.io.write_bytes [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.max
@@ -966,7 +985,8 @@ docker_daemon:
   short_name: io write max
   unit_name: byte
 - curated_metric: ''
-  description: Median value of docker.container.io.write_bytes
+  description: Median value of docker.container.io.write_bytes [deprecated in agent
+    6.0]
   integration: docker
   interval: ''
   metric_name: docker.io.write_bytes.median
@@ -1006,7 +1026,7 @@ docker_daemon:
   short_name: net received
   unit_name: byte
 - curated_metric: ''
-  description: 95th percentile of docker.net.bytes_rcvd
+  description: 95th percentile of docker.net.bytes_rcvd [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.95percentile
@@ -1016,7 +1036,7 @@ docker_daemon:
   short_name: net received 95%
   unit_name: byte
 - curated_metric: ''
-  description: Average value of docker.net.bytes_rcvd
+  description: Average value of docker.net.bytes_rcvd [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.avg
@@ -1026,7 +1046,8 @@ docker_daemon:
   short_name: net received avg
   unit_name: byte
 - curated_metric: ''
-  description: The rate that the value of docker.net.bytes_rcvd was sampled
+  description: The rate that the value of docker.net.bytes_rcvd was sampled [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.count
@@ -1036,7 +1057,7 @@ docker_daemon:
   short_name: net received count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.container.net.bytes_rcvd
+  description: Max value of docker.container.net.bytes_rcvd [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.max
@@ -1046,7 +1067,8 @@ docker_daemon:
   short_name: net received max
   unit_name: byte
 - curated_metric: ''
-  description: Median value of docker.container.net.bytes_rcvd
+  description: Median value of docker.container.net.bytes_rcvd [deprecated in agent
+    6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_rcvd.median
@@ -1066,7 +1088,8 @@ docker_daemon:
   short_name: net sent
   unit_name: byte
 - curated_metric: ''
-  description: 95th percentile of docker.net.bytes<em>sent</em>bytes
+  description: 95th percentile of docker.net.bytes<em>sent</em>bytes [deprecated in
+    agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.95percentile
@@ -1076,7 +1099,8 @@ docker_daemon:
   short_name: net sent 95%
   unit_name: byte
 - curated_metric: ''
-  description: Average value of docker.net.bytes<em>sent</em>bytes
+  description: Average value of docker.net.bytes<em>sent</em>bytes [deprecated in
+    agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.avg
@@ -1087,6 +1111,7 @@ docker_daemon:
   unit_name: byte
 - curated_metric: ''
   description: The rate that the value of docker.net.bytes<em>sent</em>bytes was sampled
+    [deprecated in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.count
@@ -1096,7 +1121,8 @@ docker_daemon:
   short_name: net sent count
   unit_name: sample
 - curated_metric: ''
-  description: Max value of docker.container.net.bytes<em>sent</em>bytes
+  description: Max value of docker.container.net.bytes<em>sent</em>bytes [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.max
@@ -1106,7 +1132,8 @@ docker_daemon:
   short_name: net sent max
   unit_name: byte
 - curated_metric: ''
-  description: Median value of docker.container.net.bytes<em>sent</em>bytes
+  description: Median value of docker.container.net.bytes<em>sent</em>bytes [deprecated
+    in agent 6.0]
   integration: docker
   interval: ''
   metric_name: docker.net.bytes_sent_bytes.median
