@@ -330,7 +330,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_CPU_ENABLED` | Boolean        | If set to `false`, disables the CPU profiling. Defaults to `true`.  |
 | `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables the Exceptions profiling (beta). Defaults to `false`.  |
 | `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables the Allocations profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_CONTENTION_ENABLED` | Boolean        | If set to `true`, enables the Contention profiling (beta). Defaults to `false`.  |
+| `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables the Lock Contention profiling (beta). Defaults to `false`.  |
 
 <div class="alert alert-warning">
 <strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.
