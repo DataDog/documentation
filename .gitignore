@@ -47,7 +47,6 @@ package-lock.json
 content/en/integrations/*.md
 data/integrations/
 content/en/integrations/guide/amazon_cloudformation.md
-!data/integrations/docker_daemon.yaml
 !content/en/integrations/_index.md
 !content/en/integrations/cloudability.md
 !content/en/integrations/cloudcheckr.md
