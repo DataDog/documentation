@@ -30,7 +30,7 @@ Data privacy
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Update your app dependencies to include dd-trace-go@v1.42.0 or greater
+Update your app dependencies to include [dd-trace-go@v1.42.0][3] or greater
 ```
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.42.0
 ```
@@ -46,14 +46,14 @@ import (
 
 Enable the dbm propagation feature using one of the 3 methods:
 1. Env variable: 
-DD_TRACE_SQL_COMMENT_INJECTION_MODE=full
+`DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
 
 2. Via code during the driver registration
 ```go
 sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull), sqltrace.WithServiceName("my-db-service"))
 ```
 
-3. Via code on sql.Open
+3. Via code on `sqltrace.Open`
 ```go
 sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
@@ -91,6 +91,7 @@ func main() {
 }
 ```
 {{% /tab %}}
+{{< /tabs >}}
 
 
 [1]: /database_monitoring/#getting-started
