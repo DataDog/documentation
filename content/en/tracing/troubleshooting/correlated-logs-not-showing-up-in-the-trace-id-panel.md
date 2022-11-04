@@ -25,7 +25,7 @@ There are two types of logs that appear in a [trace][1]:
 - `container_id`: Display logs from the trace's container within the trace's timeframe.
 - `pod_name`: Display logs from the trace's pod within the trace's timeframe.
 
-{{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options" style="width:35%;">}}
+{{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options" style="width:80%;">}}
 
 In some cases, the **Logs** section in the trace panel may appear empty. This guide walks you through how to fix this issue.
 
