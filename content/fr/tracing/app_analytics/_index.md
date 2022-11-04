@@ -467,7 +467,7 @@ Les modifications apportées aux taux d'échantillonnage sont mises en file d'at
 
 {{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Filtrage des spans analysées" >}}
 
-[1]: https://app.datadoghq.com/apm/search/analytics
+[1]: https://app.datadoghq.com/apm/analytics
 [2]: /fr/tracing/visualization/#apm-event
 [3]: /fr/tracing/visualization/#spans
 [4]: /fr/tracing/visualization/#services

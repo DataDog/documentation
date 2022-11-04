@@ -1765,7 +1765,7 @@ Datadog.logger.info { "this is typically called by tracing code" }
 
 ### 環境とタグ
 
-デフォルトでは、トレース Agent（このライブラリではなく、さまざまなクライアントからデータを収集するバックグラウンドで実行されるプログラム）は、Agent コンフィギュレーションファイルで設定されたタグを使用します。詳しくは、[環境チュートリアル](https://app.datadoghq.com/apm/docs/tutorials/environments)をご覧ください。
+デフォルトでは、トレース Agent（このライブラリではなく、さまざまなクライアントからデータを収集するバックグラウンドで実行されるプログラム）は、Agent コンフィギュレーションファイルで設定されたタグを使用します。詳しくは、[環境チュートリアル](https://app.datadoghq.com/apm/service-setup)をご覧ください。
 
 次の環境変数を使用して、トレースとメトリクスに自動的にタグを付けるようにアプリケーションを構成できます。
 

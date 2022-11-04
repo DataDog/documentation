@@ -110,6 +110,6 @@ For configuration instructions and details about using the API, see the Datadog 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/go
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
 [4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

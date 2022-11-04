@@ -286,7 +286,7 @@ Analytics は、クエリを作成し無限濃度でトレースの調査を実�
 [3]: /ja/tracing/visualization/#span-tags
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#services
-[6]: https://app.datadoghq.com/apm/search
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
 [9]: /ja/tracing/trace_explorer/query_syntax/

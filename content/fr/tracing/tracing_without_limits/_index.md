@@ -228,4 +228,4 @@ Chaque filtre de rétention défini sur vos services, y compris le [filtre d'éc
 [1]: https://app.datadoghq.com/apm/traces
 [2]: https://app.datadoghq.com/apm/traces/retention-filters
 [3]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[4]: https://app.datadoghq.com/apm/traces/data-ingestion
+[4]: https://app.datadoghq.com/apm/traces/ingestion-control
