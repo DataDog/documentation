@@ -305,15 +305,15 @@ Pour commencer à diagnostiquer les problèmes concernant l'extension ASM de Dat
 Il se trouve généralement dans `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`. Toutefois, l'emplacement précis du fichier `ini` peut varier en fonction de votre installation. Consultez le début de la sortie de `phpinfo()` pour identifier le répertoire à partir duquel les éventuels fichiers `.ini` sont analysés. Définissez les options de configuration suivantes dans le fichier `.ini` :
 
 ```php
-datadog.appsec.log_level=‘debug’
-datadog.appsec.helper_extra_args=‘--log_level=debug’
-datadog.appsec.helper_log_file=‘/tmp/helper.log’
+datadog.appsec.log_level='debug'
+datadog.appsec.helper_extra_args='--log_level=debug'
+datadog.appsec.helper_log_file='/tmp/helper.log'
 ```
 
 L'extension enregistre les logs dans le fichier de log `php_error` par défaut. Si le fichier ne contient aucun log, ajoutez ce qui suit au fichier `.ini` :
 
 ```php
-datadog.appsec.log_file=’tmp/extension.log’
+datadog.appsec.log_file='tmp/extension.log'
 ```
 
 ### Installation ne trouvant pas PHP
