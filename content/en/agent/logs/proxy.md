@@ -108,7 +108,7 @@ defaults
     option  redispatch
     timeout client 5s
     timeout server 5s
-    timeout connect 5
+    timeout connect 5s
 # This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.

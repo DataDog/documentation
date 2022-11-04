@@ -235,6 +235,19 @@ To use the custom instrumentation in your .NET application:
 
 For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][9].
 
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author information, and files changed (without file contents).
+* Information from the CODEOWNERS file.
+
+In addition to that, if [Intelligent Test Runner][10] is enabled, the following data is collected from your project:
+
+* Code coverage information, including file names and line numbers covered by each test.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -249,3 +262,4 @@ For more information about how to add spans and tags for custom instrumentation,
 [7]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
 [8]: https://www.nuget.org/packages/Datadog.Trace
 [9]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[10]: /continuous_integration/intelligent_test_runner/

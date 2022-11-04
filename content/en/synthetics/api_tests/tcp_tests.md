@@ -184,7 +184,7 @@ You can restrict access to a TCP test based on the roles in your organization. W
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/synthetics/#get-all-locations-public-and-private
+[1]: /api/latest/synthetics/#get-all-locations-public-and-private
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_integrations
 [4]: /synthetics/search/#search

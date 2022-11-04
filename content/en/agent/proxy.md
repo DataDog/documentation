@@ -393,14 +393,6 @@ frontend instrumentation_telemetry_data_frontend
     default_backend datadog-instrumentations-telemetry
 
 # This declares the endpoint where your Agents connects for
-# sending appsec events (deprecated).
-frontend appsec-events-frontend
-    bind *:3844
-    mode tcp
-    option tcplog
-    default_backend datadog-appsec-events
-
-# This declares the endpoint where your Agents connects for
 # sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
 frontend network_devices_netflow_frontend
     bind *:3845
@@ -504,14 +496,6 @@ backend datadog-instrumentations-telemetry
     server-template mothership 5 instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
-
-backend datadog-appsec-events # deprecated
-    balance roundrobin
-    mode tcp
-    # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
-    # Uncomment the following configuration for older HAProxy versions
-    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
 backend datadog-network-devices-netflow
     balance roundrobin
@@ -660,14 +644,6 @@ frontend instrumentation_telemetry_data_frontend
     default_backend datadog-instrumentations-telemetry
 
 # This declares the endpoint where your Agents connect for
-# sending appsec events (deprecated).
-frontend appsec-events-frontend
-    bind *:3844 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
-    mode tcp
-    option tcplog
-    default_backend datadog-appsec-events
-
-# This declares the endpoint where your Agents connect for
 # sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
 frontend network_devices_netflow_frontend
     bind *:3845 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
@@ -772,14 +748,6 @@ backend datadog-instrumentations-telemetry
     # Uncomment the following configuration for older HAProxy versions
     # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
-backend datadog-appsec-events # deprecated
-    balance roundrobin
-    mode tcp
-    # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
-    # Uncomment the following configuration for older HAProxy versions
-    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
-
 backend datadog-network-devices-netflow
     balance roundrobin
     mode http
@@ -847,9 +815,11 @@ network_devices:
             logs_dd_url: haproxy.example.com:3842
             # Comment the line below to use encryption between the Agent and HAProxy
             logs_no_ssl: true
-
-appsec_config (deprecated):
-    appsec_dd_url: haproxy.example.com:3844
+    netflow:
+        forwarder:
+            logs_dd_url: haproxy.example.com:3845
+            # Comment the line below to use encryption between the Agent and HAProxy
+            logs_no_ssl: true
 ```
 
 When using encryption between the Agent and HAProxy, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
@@ -1024,12 +994,6 @@ stream {
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3844; #listen for appsec events (deprecated)
-        proxy_ssl_verify on;
-        proxy_ssl on;
-        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
-    }
-    server {
         listen 3845; #listen for network devices netflow
         proxy_ssl_verify on;
         proxy_ssl on;
@@ -1141,12 +1105,6 @@ stream {
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3844 ssl; #listen for appsec events (deprecated)
-        proxy_ssl_verify on;
-        proxy_ssl on;
-        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
-    }
-    server {
         listen 3845 ssl; #listen for network devices netflow
         proxy_ssl_verify on;
         proxy_ssl on;
@@ -1208,9 +1166,11 @@ network_devices:
             logs_dd_url: nginx.example.com:3842
             # Comment the line below to use encryption between the Agent and NGINX
             logs_no_ssl: true
-
-appsec_config (deprecated):
-    appsec_dd_url: haproxy.example.com:3844
+    netflow:
+        forwarder:
+            logs_dd_url: nginx.example.com:3845
+            # Comment the line below to use encryption between the Agent and NGINX
+            logs_no_ssl: true
 
 ```
 

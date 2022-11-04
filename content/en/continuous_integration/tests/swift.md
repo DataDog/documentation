@@ -744,6 +744,19 @@ module.end()
 
 Always call `module.end()` at the end so that all the test info is flushed to Datadog.
 
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author information, and files changed (without file contents).
+* Information from the CODEOWNERS file.
+
+In addition to that, if [Intelligent Test Runner][7] is enabled, the following data is collected from your project:
+
+* Code coverage information, including file names and line numbers covered by each test.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -754,3 +767,4 @@ Always call `module.end()` at the end so that all the test info is flushed to Da
 [4]: /continuous_integration/guides/rum_swift_integration
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
+[7]: /continuous_integration/intelligent_test_runner/
