@@ -99,7 +99,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSamplingRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
+3.  _(Optional)_ Configure the `traceSamplingRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
 ```java
     val okHttpClient = OkHttpClient.Builder()
@@ -146,15 +146,15 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
    Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
 
-5. _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
+5. _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
 
-     To keep 20% of backend traces:
+     To keep 100% of backend traces:
     ```swift
     Datadog.initialize(
         appContext: .init(),
         configuration: Datadog.Configuration
             .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-            .set(tracingSamplingRate: 20)
+            .set(tracingSamplingRate: 100)
             .build()
     )
     ```
