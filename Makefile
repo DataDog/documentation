@@ -117,6 +117,11 @@ placeholders:
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
 
+# preview a simplified version of the pretty-pull-config file
+pretty-pull-config: hugpython
+	@python local/bin/py/build/actions/pretty_config.py
+	@open pretty_config.html
+
 update_pre_build:
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
 
