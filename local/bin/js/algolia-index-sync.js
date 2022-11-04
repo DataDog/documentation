@@ -24,8 +24,9 @@ const updateSettings = index => {
     const settings = {
         searchableAttributes: ['title', 'relpermalink', 'section_header', 'type, tags', 'unordered(description, content)'],
         ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
-        customRanking: ['desc(rank)'],
-        attributesToHighlight: ['title', 'section_header', 'description', 'content', 'type', 'tags'],
+        customRanking: ['asc(tags)', 'desc(rank)'],
+        attributesToHighlight: ['title', 'section_header', 'content', 'type', 'tags'],
+        attributesForFaceting: ['language', 'tags'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
         attributeForDistinct: 'relpermalink',
@@ -111,7 +112,6 @@ const sync = () => {
     const appId = process.env.ALGOLIA_APP_ID || ''
     const adminKey = process.env.ALGOLIA_ADMIN_KEY || ''
     const indexName = getIndexName()
-    console.info(appId)
 
     if (appId === '' || adminKey === '' || indexName === '') {
         console.error('Missing Algolia App Id, API Key, or Index name.  Exiting...')
