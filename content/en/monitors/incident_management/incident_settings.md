@@ -96,7 +96,7 @@ The responder types settings provide you with the ability to create custom roles
 
 To create a custom responder type:
 
-1. Click the **+ Add Responder Type** below the table
+1. Click the **+ Add Responder Type** button below the table.
 2. Give your new Responder Type a name
 3. Choose if the Responder Type is a `One person role` or a `Multi person role`. A `One person role` can only be held by a single person per incident, while a `Multi person role` can be held by an unlimited number of people per incident.
 4. Give the Responder Type a description. This description appears in the UI for selecting a role to assign to your teammates.
