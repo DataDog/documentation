@@ -228,5 +228,5 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 [1]: /ja/tracing/setup/envoy/
 [2]: /ja/tracing/setup/nginx/
 [3]: /ja/tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/docs
+[4]: https://app.datadoghq.com/apm/service-setup
 [5]: /ja/tracing/trace_collection/library_config/cpp/

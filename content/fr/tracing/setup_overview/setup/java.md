@@ -700,7 +700,7 @@ L'APM Java a un impact minimal sur la charge d'une application :
 
 [1]: /fr/tracing/profiler/enabling/?code-lang=java
 [2]: /fr/tracing/compatibility_requirements/java
-[3]: https://app.datadoghq.com/apm/docs
+[3]: https://app.datadoghq.com/apm/service-setup
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
 [5]: /fr/account_management/billing/apm_tracing_profiler/
 [6]: /fr/tracing/profiler/

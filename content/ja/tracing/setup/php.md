@@ -290,7 +290,7 @@ PHPトレーサーを削除するには:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/php
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /ja/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: /ja/tracing/send_traces/

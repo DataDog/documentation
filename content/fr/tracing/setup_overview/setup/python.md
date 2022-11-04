@@ -187,7 +187,7 @@ Active la [mise en relation des logs et des traces injectées][8].
 
 [1]: /fr/tracing/compatibility_requirements/python
 [2]: /fr/tracing/profiler/enabling/?tab=python
-[3]: https://app.datadoghq.com/apm/docs
+[3]: https://app.datadoghq.com/apm/service-setup
 [4]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [5]: /fr/getting_started/tagging/unified_service_tagging
 [6]: /fr/tracing/guide/setting_primary_tags_to_scope/

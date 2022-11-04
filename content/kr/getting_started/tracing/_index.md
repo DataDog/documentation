@@ -167,7 +167,7 @@ hello world
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /kr/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: https://app.datadoghq.com/apm/docs
+[10]: https://app.datadoghq.com/apm/service-setup
 [11]: /kr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [12]: /kr/getting_started/tagging/unified_service_tagging
 [13]: /kr/tracing/guide/setting_primary_tags_to_scope/
