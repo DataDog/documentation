@@ -23,7 +23,7 @@ Vous pouvez passer directement des informations d'une span aux données de profi
 
 ### Prérequis
 
-{{< programming-lang-wrapper langs="java,python,go,ruby" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 L'identification des hotspots de code est activée par défaut lorsque vous [activez le profiling pour votre service][1]. Si votre code est instrumenté manuellement, le profileur en continu nécessite l'activation des spans dans le contexte :
 
@@ -85,6 +85,22 @@ Pour activer l'identification des hotspots de code pour Go, [activez le profilin
 [9]: https://github.com/golang/go/issues/48577
 [10]: https://go-review.googlesource.com/c/go/+/369741/
 [11]: https://go-review.googlesource.com/c/go/+/369983/
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+L'identification des hotspots de code est activée par défaut lorsque vous [activez le profiling pour votre service][1].
+
+Nécessite une bibliothèque de tracing version 2.7.0 ou version ultérieure.
+
+[1]: /fr/tracing/profiler/enabling/dotnet
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+L'identification des hotspots de code est activée par défaut lorsque vous [activez le profiling pour votre service][1].
+
+Nécessite une bibliothèque de tracing version 0.71 ou version ultérieure.
+
+[1]: /fr/tracing/profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

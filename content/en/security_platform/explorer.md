@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-From the [Security Signals Explorer][1], correlate and triage security signals. You can also access [Cloud SIEM][2], [Posture Management][3], [Workload Security][4], and [Application Security Monitoring][5] dashboards from this page.
+From the [Security Signals Explorer][1], correlate and triage security signals. You can also access [Cloud SIEM][2], [Posture Management][3], [Workload Security][4], and [Application Security Management][5] dashboards from this page.
 
 ## Explore your Security Signals
 

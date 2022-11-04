@@ -24,6 +24,7 @@ title: パイプライントレースへのタグとメトリクスの追加
 - CircleCI
 - GitLab (SaaS またはセルフホスト >= 14.1)
 - GitHub.com (SaaS) **注:** GitHub の場合、タグとメトリクスはパイプラインスパンにのみ追加可能です。
+- Jenkins **注:** Jenkins の場合、[こちらの説明][5]に従って、パイプラインにカスタムタグを設定してください。
 
 ## Datadog CI CLI のインストール
 
@@ -130,3 +131,4 @@ datadog-ci metric --level job --metric "binary.size:`ls -l dst/binary | awk '{pr
 [2]: https://github.com/datadog/datadog-ci#standalone-binary-beta
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: /ja/continuous_integration/setup_pipelines/jenkins/?tab=usingui#setting-custom-tags-for-your-pipelines

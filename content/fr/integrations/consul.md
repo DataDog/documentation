@@ -43,7 +43,7 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -62,11 +62,11 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Conteneurs
+  - Category::Containers
   - Category::Orchestration
-  - Category::Configuration et déploiement
+  - Category::Configuration & Deployment
   - Category::Notification
-  - Category::Collecte de logs
+  - Category::Log Collection
   - Category::Autodiscovery
   configuration: README.md#Setup
   description: Recevez des alertes en fonction des checks de santé Consul, visualisez

@@ -10,7 +10,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -21,6 +21,8 @@ Complete the following steps to enable Database Monitoring with your database:
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 2. [Install the Agent](#install-the-agent)
 3. [Install the Cloud SQL integration](#install-the-cloud-sql-integration)
+
+**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
 
 ## Before you begin
 
@@ -205,7 +207,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_id": "<INSTANCE_ID>"
     }
   }]' \
-  datadoghq/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.

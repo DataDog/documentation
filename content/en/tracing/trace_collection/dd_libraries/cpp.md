@@ -219,7 +219,7 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][7] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
 
 ## Further Reading
 
@@ -228,7 +228,5 @@ If needed, configure the tracing library to send application performance telemet
 [1]: /tracing/setup/envoy/
 [2]: /tracing/setup/nginx/
 [3]: /tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/docs
-[5]: /tracing/send_traces/
-[6]: https://github.com/opentracing/opentracing-cpp
-[7]: /tracing/trace_collection/library_config/cpp/
+[4]: https://app.datadoghq.com/apm/service-setup
+[5]: /tracing/trace_collection/library_config/cpp/

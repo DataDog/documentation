@@ -29,15 +29,15 @@ In some cases, the **Logs** section in the trace panel may appear empty. This gu
 
 ## Host option
 
-If the **Log** section is empty for the `host` option, navigate to the [Log Explorer][4] and ensure the following conditions:
+If the **Log** section is empty for the `host` option, navigate to the [Log Explorer][2] and ensure the following conditions:
 
 1. Logs are being sent from the host that emitted the trace.
 2. There are logs for that host within the trace's timeframe.
-3. The logs' timestamp is properly set. For more information, see [Logs Not Showing Expected Timestamp][2].
+3. The logs' timestamp is properly set. For more information, see [Logs Not Showing Expected Timestamp][3].
 
 ## Trace_id option
 
-If the **Log** section is empty for the `trace_id` option, ensure you have a standard `trace_id` attribute in your logs. If your logs do not contain `trace_id`, [correlate your traces and logs][3] in order to do the following:
+If the **Log** section is empty for the `trace_id` option, ensure you have a standard `trace_id` attribute in your logs. If your logs do not contain `trace_id`, [correlate your traces and logs][4] in order to do the following:
 
 1. Extract the trace ID in a log attribute.
 2. Remap this attribute to the reserved `trace_id` attribute.
@@ -51,10 +51,10 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="The preprocessing for JSON logs page with the Trace Id section highlighted" >}}
 
-   [1]: /tracing/glossary/#trace
-   [2]: /tracing/glossary/#spans
-   [3]: /logs/log_configuration/processors/#remapper
-   [4]: https://app.datadoghq.com/logs/pipelines/remapping
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
+[3]: /logs/log_configuration/processors/#remapper
+[4]: https://app.datadoghq.com/logs/pipelines/remapping
    {{% /tab %}}
    {{% tab "With Log integration" %}}
 
@@ -66,8 +66,8 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    It is possible that the log format is not recognized by the integration pipeline. In this case, clone the pipeline and follow the [parsing troubleshooting guide][2] to make sure the pipeline accepts the log format.
 
-   [1]: /logs/log_collection/?tab=application#setup
-   [2]: /logs/faq/how-to-investigate-a-log-parsing-issue/
+[1]: /logs/log_collection/?tab=application#setup
+[2]: /logs/faq/how-to-investigate-a-log-parsing-issue/
    {{% /tab %}}
    {{% tab "Custom" %}}
 
@@ -79,9 +79,9 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    2. Then define a [Trace remapper][3] on the extracted attribute to remap it to the official trace ID of the logs.
 
-   [1]: /tracing/glossary/#trace
-   [2]: /tracing/glossary/#spans
-   [3]: /logs/log_configuration/processors/#trace-remapper
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
+[3]: /logs/log_configuration/processors/#trace-remapper
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -94,6 +94,6 @@ Once the IDs are properly injected and remapped to your logs, you can see the lo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/#trace
-[2]: /logs/guide/logs-not-showing-expected-timestamp/
-[3]: /tracing/other_telemetry/connect_logs_and_traces/
-[4]: https://app.datadoghq.com/logs
+[2]: https://app.datadoghq.com/logs
+[3]: /logs/guide/logs-not-showing-expected-timestamp/
+[4]: /tracing/other_telemetry/connect_logs_and_traces/

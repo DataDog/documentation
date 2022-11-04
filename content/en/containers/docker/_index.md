@@ -49,6 +49,8 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 
 If you haven’t installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10].
 
+**Note**: For Docker Compose, see [Compose and the Datadog Agent][11].
+
 {{< tabs >}}
 {{% tab "Standard" %}}
 
@@ -94,7 +96,7 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (SAC).
+The Datadog Agent is supported in Windows Server 2019 (LTSC) and Windows Server 2022 (LTSC).
 
 ```shell
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
@@ -124,11 +126,10 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: For Docker Compose, see [Compose and the Datadog Agent][11].
-
 ## Integrations
 
 Once the Agent is up and running, use [Datadog's Autodiscovery feature][12] to collect metrics and logs automatically from your application containers.
+
 
 ## Environment variables
 
@@ -184,7 +185,7 @@ Send custom metrics with [the StatsD protocol][20]:
 | `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
-| `DD_DOGSTATSD_DISABLE`           | Disables sending custom metrics from the dogstatsd library.                                                                                                |
+| `DD_USE_DOGSTATSD`           | Enable or disable sending custom metrics from the DogStatsD library.                                                                                                |
 Learn more about [DogStatsD over Unix Domain Sockets][21].
 
 ### Tagging

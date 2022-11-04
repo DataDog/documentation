@@ -71,7 +71,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 <div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
-[1]: /continuous_integration/setup_pipelines/custom_commands/
+[1]: /continuous_integration/pipelines/custom_commands/
 {{% /tab %}}
 {{% tab "Tests" %}}
 

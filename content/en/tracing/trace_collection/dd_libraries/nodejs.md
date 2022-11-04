@@ -102,6 +102,8 @@ Read [tracer settings][3] for a list of initialization options.
 
 ### Instrument your application
 
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/admission_controller">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
 1. Install the Datadog Tracing library using npm for Node.js 14+:
@@ -174,6 +176,6 @@ If needed, configure the tracing library to send application performance telemet
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/

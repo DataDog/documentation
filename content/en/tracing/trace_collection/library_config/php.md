@@ -250,6 +250,11 @@ The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For ver
 **Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
 
+`DD_TRACE_RATE_LIMIT`
+: **INI**: `datadog.trace.rate_limit`<br>
+**Default**: `0`<br>
+Maximum number of spans to sample per second. All processes in an Apache or FPM pool share the same limiter. When unset (0) rate limiting is delegated to the Datadog Agent.
+
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`
 **Default**: `1000`<br>
@@ -270,10 +275,10 @@ Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
-`DD_TRACE_CLIENT_IP_HEADER_DISABLED`
-: **INI**: `datadog.trace.client_ip_header_disabled`<br>
-**Default**: `0`<br>
-Disable client IP collection from relevant IP headers. Added in version `0.76.0`.
+`DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
+: **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
+**Default**: `*`<br>
+A comma-separated list of query parameters to be collected as part of the resource URI. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>

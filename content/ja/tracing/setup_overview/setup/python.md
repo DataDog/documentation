@@ -237,7 +237,7 @@ Web フレームワークとライブラリインスツルメンテーション�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/python
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [4]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
 [5]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun

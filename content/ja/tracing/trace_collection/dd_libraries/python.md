@@ -159,18 +159,18 @@ ddtrace-run python app.py
 
 ## コンフィギュレーション
 
-必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][5]を参照してください。
+必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][3]を参照してください。
 
 ### v1 へのアップグレード
 
-ddtrace v1 にアップグレードする場合は、ライブラリドキュメントの[アップグレードガイド][3]と[リリースノート][4]で詳細を確認してください。
+ddtrace v1 にアップグレードする場合は、ライブラリドキュメントの[アップグレードガイド][4]と[リリースノート][5]で詳細を確認してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/python
-[2]: https://app.datadoghq.com/apm/docs
-[3]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
-[4]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
-[5]: /ja/tracing/trace_collection/library_config/python/
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: /ja/tracing/trace_collection/library_config/python/
+[4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0

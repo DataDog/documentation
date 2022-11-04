@@ -10,7 +10,7 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
-<div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security Platform</a> section.</div>
+<div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security_platform/" target="_blank">Security</a> section.</div>
 
 The [Synthetic Monitoring product][2] allows you to proactively monitor how your systems and applications are performing using simulated requests and business transactions. Synthetic tests can be initiated from all around the globe, from either managed or private locations.  
 

@@ -32,7 +32,7 @@ draft: false
 git_integration_title: pulsar
 integration_id: pulsar
 integration_title: Pulsar
-integration_version: 1.1.1
+integration_version: 1.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

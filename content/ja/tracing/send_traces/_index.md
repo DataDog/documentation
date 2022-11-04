@@ -92,7 +92,7 @@ AWS Elastic Beanstalk により監視を行うと、トレースがデフォル�
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /ja/tracing/send_traces/agent-apm-metrics/
 [6]: /ja/agent/
-[7]: https://app.datadoghq.com/apm/docs
+[7]: https://app.datadoghq.com/apm/service-setup
 [8]: /ja/tracing/serverless_functions/
 [9]: /ja/infrastructure/serverless/azure_app_services/#overview
 [10]: /ja/agent/basic_agent_usage/heroku/#installation

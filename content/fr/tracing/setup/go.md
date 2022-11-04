@@ -139,7 +139,7 @@ Si plusieurs styles d'extraction sont activés, les tentative d'extraction sont 
 [3]: /fr/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: https://app.datadoghq.com/apm/docs
+[6]: https://app.datadoghq.com/apm/service-setup
 [7]: /fr/tracing/send_traces/
 [8]: /fr/tracing/setup/docker/
 [9]: /fr/agent/kubernetes/apm/

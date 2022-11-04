@@ -430,7 +430,7 @@ java -javaagent:<CHEMIN-AGENT-JAVA-DD>.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /fr/tracing/send_traces/
 [4]: /fr/tracing/setup/docker/
 [5]: /fr/agent/kubernetes/apm/

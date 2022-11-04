@@ -5,15 +5,18 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
+    - link: "/security_platform/application_security/add-user-info/"
+      tag: "Documentation"
+      text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-go/tree/v1'
       tag: 'GitHub'
       text: 'Go Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Monitoring Rules"
+      text: "OOTB Application Security Management Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Monitoring"
+      text: "Troubleshooting Application Security Management"
 ---
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 

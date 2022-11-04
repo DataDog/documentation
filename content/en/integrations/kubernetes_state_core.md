@@ -103,6 +103,7 @@ Here is the mapping between deprecated tags and the official tags that have repl
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
+| hpa                   | horizontalpodautoscaler     |
 | image                 | image_name                  |
 | job                   | kube_job                    |
 | job_name              | kube_job                    |

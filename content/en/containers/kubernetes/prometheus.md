@@ -67,7 +67,6 @@ metadata:
               "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
               "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
               "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
-
             }
           ]
         }
@@ -132,7 +131,7 @@ For a full list of available parameters for instances, including `namespace` and
    {{% tab "Kubernetes (AD v2)" %}}
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
-
+   
    ```yaml
      # (...)
     spec:

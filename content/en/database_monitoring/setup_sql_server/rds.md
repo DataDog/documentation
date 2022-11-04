@@ -13,7 +13,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -24,6 +24,8 @@ Do the following steps to enable Database Monitoring with your database:
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 2. [Install the Agent](#install-the-agent)
 3. [Install the RDS integration](#install-the-rds-integration)
+
+**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
 
 ## Before you begin
 
