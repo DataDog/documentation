@@ -92,7 +92,7 @@ The responder types settings provide you with the ability to create custom roles
 1. `Incident Commander` - The individual responsible for leading the response team 
 2. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
 
-**Note:** Only `Incident Commander` appears in the Incident Settings so that you may customize its description. `Incident Commander` cannot be deleted as a responder type, nor can its name or status as a `One person role` be changed. The `Responder` role does not appear in the Incident Settings at all, due to it being a generic fallback role if a responder is not otherwise assigned a different role.
+**Note:** The `Incident Commander` responder type appears in Incident Settings so that you may customize its description. `Incident Commander` cannot be deleted as a responder type, nor can its name or status as a `One person role` be changed. The `Responder` role is a generic fallback role if a responder is not otherwise assigned a different role, and does not appear in Incident Settings.
 
 To create a custom Responder Type:
 
