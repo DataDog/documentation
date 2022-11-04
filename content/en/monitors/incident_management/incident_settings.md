@@ -94,7 +94,7 @@ The responder types settings provide you with the ability to create custom roles
 
 **Note:** The `Incident Commander` responder type appears in Incident Settings so that you may customize its description. `Incident Commander` cannot be deleted as a responder type, nor can its name or status as a `One person role` be changed. The `Responder` role is a generic fallback role if a responder is not otherwise assigned a different role, and does not appear in Incident Settings.
 
-To create a custom Responder Type:
+To create a custom responder type:
 
 1. Click the **+ Add Responder Type** below the table
 2. Give your new Responder Type a name
