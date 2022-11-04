@@ -161,7 +161,7 @@ Due to these restrictions, the first time you enable Intelligent Test Runner, yo
 
 Intelligent Test Runner only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
 
-If you CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
+If your CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
 
 ### Intelligent Test Runner incorrectly skipped a test
 
