@@ -78,7 +78,7 @@ Before getting started, ensure you have the following prerequisites:
 
 ## Setup
 
-2. Go to the the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
+2. Go to the [AWS integration configuration page][8] in Datadog and click **Add AWS Account**.
 
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
     a. Select the AWS regions to integrate with.  
