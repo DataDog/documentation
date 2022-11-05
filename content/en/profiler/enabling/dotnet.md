@@ -102,9 +102,9 @@ To install the .NET Profiler machine-wide:
 
 To install the .NET Profiler per-application:
 
-1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
+1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
-[1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
 {{< /tabs >}}
