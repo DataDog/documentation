@@ -5,6 +5,10 @@ private: true
 disable_toc: true
 aliases:
     - /integrations/observability_pipelines/guide/
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="General guides:" >}}

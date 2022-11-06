@@ -2,6 +2,10 @@
 kind: ガイド
 private: true
 title: 開発者ガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="一般:" >}}

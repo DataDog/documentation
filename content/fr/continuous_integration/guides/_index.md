@@ -3,6 +3,10 @@ disable_sidebar: true
 kind: guide
 private: true
 title: Guides sur CI Visibility
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Guides sur CI Visibility :" >}}

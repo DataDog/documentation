@@ -11,6 +11,10 @@ further_reading:
   - link: /api/latest/rate-limits/
     tag: Documentation
     text: Rate Limits
+cascade:
+    algolia:
+        rank: 10
+        tags: ["api_latest"]
 ---
 
 {{< h2 >}}API Reference{{< /h2 >}}

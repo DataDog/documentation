@@ -5,6 +5,10 @@ disable_toc: true
 kind: ガイド
 private: true
 title: Synthetic モニタリングガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}

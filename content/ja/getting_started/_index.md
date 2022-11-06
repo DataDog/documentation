@@ -9,6 +9,10 @@ further_reading:
   - link: https://learn.datadoghq.com/course/view.php?id=18
     tag: ラーニングセンター
     text: Datadog 入門
+cascade:
+    algolia:
+        rank: 70
+        tags: ["getting_started"]
 ---
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
 {{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Datadog UI の使用方法 (ダッシュボード、インフラストラクチャーリスト、マップなど) をご覧ください。{{< /nextlink >}}

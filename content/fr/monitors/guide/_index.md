@@ -3,6 +3,10 @@ title: Guides sur les monitors
 kind: guide
 private: true
 disable_sidebar: true
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

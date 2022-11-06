@@ -2,6 +2,10 @@
 kind: guide
 private: true
 title: Guides d'utilisation de la solution Database Monitoring
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

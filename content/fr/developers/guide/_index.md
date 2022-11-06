@@ -2,6 +2,10 @@
 kind: guide
 private: true
 title: Guides du développeur
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

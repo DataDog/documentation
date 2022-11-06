@@ -6,6 +6,10 @@ disable_toc: true
 kind: ガイド
 private: true
 title: トレースガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 

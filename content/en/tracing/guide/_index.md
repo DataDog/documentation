@@ -6,6 +6,10 @@ disable_toc: true
 aliases:
 - /tracing/getting_further/
 - /tracing/guide/ecommerce_and_retail_use_cases/
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 

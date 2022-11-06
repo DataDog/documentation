@@ -5,6 +5,10 @@ disable_toc: true
 kind: ガイド
 private: true
 title: セキュリティプラットフォームガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}

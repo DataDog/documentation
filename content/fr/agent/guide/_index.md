@@ -3,6 +3,10 @@ disable_toc: true
 kind: guide
 private: true
 title: Guides de l'Agent
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

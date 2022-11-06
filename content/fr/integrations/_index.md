@@ -7,6 +7,10 @@ aliases:
   - /fr/integrations/tcp_queue_length/
   - /fr/integrations/snyk/
 description: Rassembler des données de tous vos systèmes, toutes vos applications et tous vos services
+cascade:
+    algolia:
+        rank: 40
+        tags: ["integrations"]
 ---
 Plus de {{< translate key="integration_count" >}} intégrations par défaut. Récupérez des données pour tous vos systèmes, toutes vos applications et tous vos services.
 

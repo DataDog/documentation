@@ -4,6 +4,10 @@ aliases:
 kind: guide
 private: true
 title: Guides sur la sécurité
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 

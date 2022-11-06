@@ -4,6 +4,10 @@ aliases:
 kind: ガイド
 private: true
 title: セキュリティガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 

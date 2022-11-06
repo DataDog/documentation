@@ -2,6 +2,10 @@
 title: Account Management Guides
 kind: guide
 private: true
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Usage metering API migration guides:" >}}

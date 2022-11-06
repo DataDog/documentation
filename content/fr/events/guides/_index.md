@@ -10,6 +10,10 @@ further_reading:
   text: Monitors d'événement
 kind: documentation
 title: Guides sur les événements
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 Un événement représente n'importe quelle activité pouvant s'avérer pertinente pour les équipes d'ingénierie (dev, ops et sécurité).

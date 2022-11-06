@@ -3,6 +3,10 @@ disable_toc: true
 kind: ガイド
 private: true
 title: CI Visibility ガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="CI Visibility ガイド:" >}}

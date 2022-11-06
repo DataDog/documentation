@@ -2,6 +2,10 @@
 title: ネットワークパフォーマンスモニタリングガイド
 kind: ガイド
 private: true
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="" >}}

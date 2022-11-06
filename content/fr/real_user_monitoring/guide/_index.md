@@ -2,6 +2,10 @@
 kind: guide
 private: true
 title: Guides pour les solutions Real User Monitoring et Session Replay
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="RUM :" >}}

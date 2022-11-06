@@ -2,6 +2,10 @@
 kind: ガイド
 private: true
 title: データベースモニタリングガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

@@ -3,6 +3,10 @@ disable_toc: true
 kind: ガイド
 private: true
 title: ログガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}

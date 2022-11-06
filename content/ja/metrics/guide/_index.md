@@ -6,6 +6,10 @@ disable_sidebar: true
 kind: ガイド
 private: true
 title: メトリクスガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

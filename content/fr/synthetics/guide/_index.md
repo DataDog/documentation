@@ -2,6 +2,10 @@
 title: Guides d'utilisation de la surveillance Synthetic
 kind: guide
 private: true
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

@@ -9,6 +9,10 @@ further_reading:
     - link: 'https://learn.datadoghq.com/course/view.php?id=18'
       tag: 'Learning Center'
       text: 'Introduction to Datadog'
+cascade:
+    algolia:
+        rank: 70
+        tags: ["getting_started"]
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}

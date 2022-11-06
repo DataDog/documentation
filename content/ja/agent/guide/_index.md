@@ -3,6 +3,10 @@ disable_toc: true
 kind: ガイド
 private: true
 title: Agent ガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

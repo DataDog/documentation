@@ -11,6 +11,10 @@ further_reading:
   text: レート制限
 title: API リファレンス
 type: api
+cascade:
+    algolia:
+        rank: 10
+        tags: ["api_latest"]
 ---
 
 {{< h2 >}}API リファレンス{{< /h2 >}}

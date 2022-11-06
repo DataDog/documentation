@@ -11,6 +11,9 @@ further_reading:
     - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
+algolia:
+    rank: 60
+    tags: ["rbac_permissions"]
 ---
 
 After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][1], or through the [Datadog Permission API][2]. Find below a list of available permissions.

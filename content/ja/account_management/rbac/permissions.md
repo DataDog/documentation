@@ -11,6 +11,10 @@ further_reading:
   text: Permission API を使用してアクセス許可を管理する
 kind: ドキュメント
 title: Datadog ロールのアクセス許可
+cascade:
+    algolia:
+        rank: 60
+        tags: ["rbac_permissions"]
 ---
 
 ロールを作成した後、[Datadog でロールを更新][1]するか [Datadog Permission API][2] を使用して、このロールへアクセス許可を直接割り当てたり削除したりできます。利用可能なアクセス許可の一覧は次のとおりです。

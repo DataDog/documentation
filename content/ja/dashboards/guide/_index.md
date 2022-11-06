@@ -6,6 +6,10 @@ disable_toc: true
 kind: ガイド
 private: true
 title: グラフ作成ガイド
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="一般ガイド:" >}}

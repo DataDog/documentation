@@ -11,6 +11,9 @@ further_reading:
   text: Gérer vos autorisations avec l'API Permission
 kind: documentation
 title: Autorisations des rôles Datadog
+algolia:
+    rank: 60
+    tags: ["rbac_permissions"]
 ---
 
 Une fois votre rôle créé, attribuez-lui ou retirez-lui directement des autorisations en [le modifiant dans Datadog][1] ou via [l'API Permission de Datadog][2]. Vous trouverez ci-dessous la liste des autorisations disponibles.

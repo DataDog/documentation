@@ -6,6 +6,10 @@ disable_toc: true
 kind: guide
 private: true
 title: Guides sur les métriques
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

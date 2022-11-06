@@ -4,6 +4,10 @@ kind: guide
 private: true
 aliases:
   - /fr/tracing/getting_further/
+cascade:
+    algolia:
+        rank: 20
+        tags: ["guide"]
 ---
 {{< whatsnext desc="Prise en main de l'APM" >}}
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. Être alerté en cas de latence au 99e centile anormale pour un service de base de données [3min]{{< /nextlink >}}
