@@ -61,7 +61,7 @@ They are sent remotely using the Remote Configuration protocol, a secure channel
 
 At this stage, attackers' IPs flagged in ASM Security Signals can be blocked temporarily or permanently from a single click through the Datadog UI.
 
-From there, all services already protected by ASM will block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Traces Explorer][10]. Services where ASM is disabled won't be protected.
+From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Traces Explorer][10]. Services where ASM is disabled aren't protected.
 
 
 {{< img src="/security_platform/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
