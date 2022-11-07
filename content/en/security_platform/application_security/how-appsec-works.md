@@ -50,7 +50,7 @@ Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rul
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
-## Built-in Protection
+## Built-in protection
 
 <div class="alert alert-info">One-click IP blocking is in private beta. Access early preview through <a href="https://dashcon.io/appsec" target="_blank">this form</a>.</div>
 
