@@ -50,6 +50,24 @@ Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rul
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
+## Native Protection
+
+<div class="alert alert-info">This feature is currently in private beta, please contact us through <a href="https://dashcon.io/appsec" target="_blank">this form</a> to access early previews.</div>
+
+Datadog ASM offers native protection capabilities to slow down attacks and attackers. 
+
+The blocking actions are implemented through the [tracing libraries][9], not requiring to introduce a new dependency in your stack.
+They are sent remotely using the Remote Configuration protocol, a secure channel between the Datadog platform and your infrastructure, through the [Datadog Agent][12].
+
+At this stage, attackers' IPs flagged in ASM Security Signals can be blocked temporarily or permanently from a single click through the Datadog UI.
+
+From there, all services already protected by ASM will block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Traces Explorer][10]. Services where ASM is disabled won't be protected.
+
+In future iterations, ASM will allow to block authenticated attackers when tracked ([learn more][11]). 
+On top of that, it'll provide ways to block attacks matching known attacks patterns in real-time from the [tracing libraries][9].
+
+{{< img src="/security_platform/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
+
 ## Coverage
 
 Datadog ASM categorizes attack attempts into different threat types:
@@ -83,3 +101,7 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [6]: /security_platform/default_rules/#cat-application-security
 [7]: https://app.datadoghq.com/security/appsec/event-rules
 [8]: /security_platform/cloud_siem/
+[9]: /tracing/
+[10]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
+[11]: /security_platform/application_security/add-user-info/?tab=set_user
+[12]: /agent/
