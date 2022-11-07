@@ -312,7 +312,7 @@ datadog.appsec.helper_log_file='/tmp/helper.log'
 The extension outputs logs to the default `php_error` log file. If there are no logs in the file, add the following to the `.ini` file:
 
 ```php
-datadog.appsec.log_file='tmp/extension.log`
+datadog.appsec.log_file='tmp/extension.log'
 ```
 
 ### Installation fails to find PHP
