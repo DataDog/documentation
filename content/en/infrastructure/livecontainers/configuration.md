@@ -155,7 +155,7 @@ The following table presents the list of collected resources and the minimal Age
 | Services | 7.27.0 | 1.11.0 | 2.10.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
 
-***\* For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.***
+**Note**: For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.
 
 ### Add custom tags to resources
 
