@@ -1,6 +1,8 @@
 ---
 title: Cloud SIEM Investigator
 kind: documentation
+aliases:
+  - /security_platform/cloud_siem/cloud_security_investigator/
 further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
@@ -8,7 +10,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-  The Cloud Security Investigator is in beta.
+  The Cloud SIEM Investigator is in beta.
 {{< /beta-callout >}} 
 
 <div class="alert alert-warning">Cloud SIEM Investigator currently only supports AWS CloudTrail logs.</div>
