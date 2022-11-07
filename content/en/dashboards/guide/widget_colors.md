@@ -5,7 +5,6 @@ kind: guide
 
 In Datadog graphs, color is the primary method by which you can distinguish between series of data. Selecting the right color for your graph ensures that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively. 
 
-<!-- <img width="500" alt="image" src="https://user-images.githubusercontent.com/19559239/194149975-b0ad4fb9-5521-42a3-955d-eea0c07a0fbf.png"> -->
 {{< img src="dashboards/guide/colors/colors_top.png" alt="Under the heading 'Graph your data', the user is selecting from a list of color palettes." style="width:90%;" >}}
 
 ## Types of color palettes
