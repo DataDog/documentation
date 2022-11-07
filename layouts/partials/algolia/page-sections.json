@@ -16,7 +16,6 @@
         {{ $section_content = $context | plainify | truncate 10000 }}
 
         {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
-            {{- /* todo: make sure url_with_anchor is unique when translated pages are introduced */ -}}
             {{ $full_url := print $page.Permalink "#" ($section_header | anchorize) }}
             {{ $object_id := md5 $full_url }}
             {{
@@ -24,7 +23,6 @@
                     dict "objectID" $object_id
                     "title" $title
                     "section_header" $section_header
-                    "description" $page.Description
                     "content" $section_content
                     "type" $page.Type
                     "rel_permalink" $page.RelPermalink

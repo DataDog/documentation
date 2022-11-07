@@ -22,14 +22,14 @@ const getIndexName = () => {
 
 const updateSettings = index => {
     const settings = {
-        searchableAttributes: ['title', 'relpermalink', 'section_header', 'type, tags', 'unordered(description, content)'],
+        searchableAttributes: ['title', 'section_header', 'type, tags', 'unordered(content)'],
         ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
         customRanking: ['asc(tags)', 'desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'type', 'tags'],
         attributesForFaceting: ['language', 'tags'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
-        attributeForDistinct: 'relpermalink',
+        attributeForDistinct: 'full_url',
         distinct: 1
     }
 
