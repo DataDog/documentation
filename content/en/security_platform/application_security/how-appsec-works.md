@@ -52,7 +52,7 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 ## Native Protection
 
-<div class="alert alert-info">This feature is currently in private beta, please contact us through <a href="https://dashcon.io/appsec" target="_blank">this form</a> to access early previews.</div>
+<div class="alert alert-info">One-click IP blocking is in private beta. Access early preview through <a href="https://dashcon.io/appsec" target="_blank">this form</a>.</div>
 
 Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 
