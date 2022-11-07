@@ -61,11 +61,11 @@ tile:
   title: Fastly
 ---
 
+{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" popup="true">}}
+
 ## 概要
 
 Fastly に接続して、Fastly のキーメトリクス (キャッシュカバレッジ、ヘッダーサイズなど) を Datadog の他のメトリクスと関連付けて表示できます。
-
-{{< img src="integrations/fastly/fastlygraph.png" alt="Fastly Graph" popup="true">}}
 
 ## セットアップ
 
