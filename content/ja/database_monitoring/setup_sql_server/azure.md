@@ -11,7 +11,7 @@ kind: documentation
 title: Azure SQL Server のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -22,6 +22,8 @@ title: Azure SQL Server のデータベースモニタリングの設定
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 2. [Agent をインストールする](#install-the-agent)
 3. [Azure インテグレーションをインストールする](#install-the-azure-integration)
+
+**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
 
 ## はじめに
 
@@ -72,7 +74,7 @@ Datadog Agent のインストールと構成の詳細については、[Agent �
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Azure SQL Managed Instance" %}}
 
@@ -101,7 +103,7 @@ USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Windows Azure VM の SQL Server" %}}
 
@@ -109,7 +111,7 @@ CREATE USER datadog FOR LOGIN datadog;
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview
 [2]: /ja/database_monitoring/setup_sql_server/selfhosted/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -266,7 +268,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<YOUR_INSTANCE_NAME>"
     }
   }]' \
-  datadoghq/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 `deployment_type` と `name` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
