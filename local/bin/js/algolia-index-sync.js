@@ -67,6 +67,16 @@ const updateSynonyms = index => {
             objectID: 'permissions',
             type: 'synonym',
             synonyms: ['permissions', 'Role Permissions']
+        },
+        {
+            objectID: 'dbm',
+            type: 'synonym',
+            synonyms: ['dbm', 'database monitoring']
+        },
+        {
+            objectID: 'npm',
+            type: 'synonym',
+            synonyms: ['npm', 'network performance monitoring']
         }
     ]
 
