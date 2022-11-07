@@ -1,0 +1,46 @@
+---
+title: Cloud SIEM Investigator
+kind: documentation
+further_reading:
+- link: "/cloud_siem/explorer/"
+  tag: "Documentation"
+  text: "Learn about the Security Signals Explorer"
+---
+
+{{< beta-callout url="#" btn_hidden="true">}}
+  The Cloud Security Investigator is in beta.
+{{< /beta-callout >}} 
+
+<div class="alert alert-warning">Cloud SIEM Investigator currently only supports AWS CloudTrail logs.</div>
+
+## Overview
+
+When a security signal alerts on suspicious activity by a user or a resource, common questions asked as part of the investigation could include:
+
+- Is the user accessing other accounts? 
+- What other actions did the user take around that specific time frame? 
+- What are all the actions taken on a resource by the user?
+- What users have interacted with this resource?
+
+For example, suppose you receive a security signal that someone changed the configuration of an AWS S3 bucket so that it is accessible by everyone, but the action was taken by an assumed role. To investigate, look into who took the action and what other activities they did recently, as that could indicate compromised credentials.
+
+The Cloud SIEM Investigator provides a graphical interface for you to pivot from one affected entity to another, so that you can see user behavior and its impact on your environment.
+
+
+## Visualize and investigate the activity
+
+1. Navigate to the [Cloud SIEM Investigator][1]. Alternatively, you can get to it from **Security** > **Cloud SIEM**, and then click the **Investigator** tab. 
+
+2. Select an entity type in the **In** field dropdown.
+
+3. Select a entity or enter a specific entity name in the **Investigate** field to see a graph of the activities associated with the entity. For the Assumed Role entity, select an `AccessKeyID` or enter an `AccessKeyID` in the **for** field. 
+
+4. Click on a node and select **Show list of logs** or **View in Log Explorer** to see the related logs. If you click on a service node, click **Investigate service** to pivot to the Investigator view for that service. Use the **and filter by** dropdown to filter by actions.
+
+You can also go to the Cloud SIEM Investigator directly from a security signal. In the security signal panel, click **Investigate user activity**, where `user` is the user identity in question, to see the Investigator view filtered to the specific user identity.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/security/csi/aws
