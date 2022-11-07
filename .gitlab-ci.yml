@@ -33,7 +33,7 @@ before_script:
   - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
-  - export SLACK_URL=${get_secret 'guacops_slack_url'}
+  - export SLACK_URL=$(get_secret 'guacops_slack_url')
 
 # set policy for the common case
 # yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
