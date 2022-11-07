@@ -4,12 +4,12 @@
 
 {{ range (where .Site.AllPages "Kind" "!=" "home") }}
     {{ $page := . }}
-    {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (ne $page.Params.beta true) (not $page.Draft) (ne $page.Content "") (not (isset .Params "external_redirect")) }}
+    {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (ne $page.Params.beta true) (not $page.Draft) (not (isset .Params "external_redirect")) }}
         {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
         {{ $object_id := md5 $rel_path }}
         {{ $title := $page.Params.integration_title | default $page.Title }}
         {{ $content := $page.Plain | truncate 10000 }}
-        {{ $tags := $page.Params.algolia.tags | default slice "docs" }}
+        {{ $tags := $page.Params.algolia.tags | default (slice "docs") }}
         {{ $rank := $page.Params.algolia.rank | default 50 }}
 
         {{- /* record for each individual section (split by h2 header) */ -}}
