@@ -2542,7 +2542,7 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
     weight: 5
-  - name: Cloud Security Investigator
+  - name: Cloud SIEM Investigator
     url: security_platform/cloud_siem/cloud_siem_investigator
     parent: cloud_siem
     identifier: cloud_siem_cloud_security_investigator
