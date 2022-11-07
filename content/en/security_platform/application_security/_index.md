@@ -30,7 +30,7 @@ Once a security signal is triggered, quickly pivot to investigate and protect in
 
 With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
-Until you fully remediate the potential vulnerabilities lying in the application's code, ASM enables you to slow down the attackers by blocking their IPs temporarily or permanently, in 1-click. This feature is currently in private beta, please contact us through [this form][7] to access early previews.
+Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click. One-click IP blocking is in private beta. Access early preview through [this form][7].
 
 ## Understanding how application security is implemented in Datadog
 
