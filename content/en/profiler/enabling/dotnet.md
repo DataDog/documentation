@@ -279,6 +279,7 @@ To install the .NET Profiler per-application:
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    CORECLR_PROFILER_PATH=<System-dependent path>
    DD_PROFILING_ENABLED=1
+   LD_PRELOAD=<APP_DIRECTORY>/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
    DD_SERVICE=MyService
    DD_ENV=production
    DD_VERSION=1.2.3
