@@ -54,7 +54,7 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 <div class="alert alert-info">This feature is currently in private beta, please contact us through <a href="https://dashcon.io/appsec" target="_blank">this form</a> to access early previews.</div>
 
-Datadog ASM offers native protection capabilities to slow down attacks and attackers. 
+Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 
 The blocking actions are implemented through the [tracing libraries][9], not requiring to introduce a new dependency in your stack.
 They are sent remotely using the Remote Configuration protocol, a secure channel between the Datadog platform and your infrastructure, through the [Datadog Agent][12].
