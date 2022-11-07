@@ -59,7 +59,7 @@ Datadog ASM offers built-in protection capabilities to slow down attacks and att
 IP blocking actions are implemented through the [tracing libraries][9], not introducing any new dependencies in your stack.
 IP blocking actions are sent remotely using the Remote Configuration protocol, a secure channel between the Datadog platform and your infrastructure, through the [Datadog Agent][12].
 
-At this stage, attackers' IPs flagged in ASM Security Signals can be blocked temporarily or permanently from a single click through the Datadog UI.
+You can block attackers' IPs that are flagged in ASM Security Signals temporarily or permanently with a single click in the Datadog UI.
 
 From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Traces Explorer][10]. Services where ASM is disabled aren't protected.
 
