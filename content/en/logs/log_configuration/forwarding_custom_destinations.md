@@ -45,8 +45,10 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
     - For example, if you want to send logs to Sumo Logic, follow their [Configure HTTP Source for Logs and Metrics documentation][1] to get the HTTP Source Address URL to send data to their collector. Enter the HTTP Source Address URL in the **Define endpoint** field.
 8. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
     - Basic Authentication: Provide the username and password for the account to which you want to send logs.
-    - Request Header: Provide the header name and value. 
-9. Click **Save**.
+    - Request Header: Provide the header name and value. For example, if you use the Authorization header and the username for the account to which you want to send logs is `myaccount` and the password is `mypassword`: 
+        -  Enter `Authorization` for the **Header Name**. 
+        - The header value is in the format of `Basic username:password`, where `username:password` is encoded in base64. For this example, the header value is `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
+  9. Click **Save**.
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
 {{% /tab %}}
