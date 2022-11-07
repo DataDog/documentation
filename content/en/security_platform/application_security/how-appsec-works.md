@@ -63,8 +63,6 @@ At this stage, attackers' IPs flagged in ASM Security Signals can be blocked tem
 
 From there, all services already protected by ASM will block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Traces Explorer][10]. Services where ASM is disabled won't be protected.
 
-In future iterations, ASM will allow to block authenticated attackers when tracked ([learn more][11]). 
-On top of that, it'll provide ways to block attacks matching known attacks patterns in real-time from the [tracing libraries][9].
 
 {{< img src="/security_platform/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
 
