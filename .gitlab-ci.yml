@@ -33,6 +33,7 @@ before_script:
   - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
+  - export SLACK_URL=${get_secret 'ci.guac_ops_slack_url'}
 
 # set policy for the common case
 # yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
@@ -58,7 +59,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: public.ecr.aws/x2b9z2t7/webops/site-build:sha-15de74a
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:sha-20d5b6a
   tags:
     - "runner:main"
   except:
@@ -86,6 +87,7 @@ build_preview:
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
+    - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog"
     - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
