@@ -6,6 +6,10 @@ aliases:
 is_beta: true
 private: true
 further_reading:
+- link: "/dynamic_instrumentation/faq"
+  tag: "Documentation"
+  text: "Learn more about how Dynamic Instrumentation works"
+
 - link: "/tracing/trace_collection/dd_libraries"
   tag: "Documentation"
   text: "Learn more about how to instrument your application"
@@ -39,20 +43,41 @@ Dynamic Instrumentation requires the following:
 - [Unified Service Tagging][5] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][6] is set up for your service.
 
+**Note**: `debugger_read` and `debugger_write` permissions required to access Dynamic Instrumentation. While Datadog Administrator have those permissions by default, for more information about default and custom roles and assign roles to users, see [Role Based Access Control][11].
+
 ### Enable Remote Configuration
 
 1. Go to the [Remote Configuration setup page][7] and enable the feature for your organization.
 2. Create a key. 
 3. Update your `datadog-agent` with the provided configuration snippet.
-4. Set `remote_configuration.refresh_interval: 5s` in the `datadog-agent` configuration.
+4. Set `remote_configuration.refresh_interval` to be 5[sec].
+{{< tabs >}}
+{{% tab "Datadog-agent config.yaml" %}}
+
+Modify `datadog-agent` configuration:
+```yaml
+remote_configuration:
+  refresh_interval: 5s
+```
+{{% /tab %}}
+{{% tab "Environment variables" %}}
+
+Add enviroment variabless for the datadog-agent:
+```shell
+export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 **Note**: Datadog Administrator permissions are required to enable Remote Configuration and create a key. This is a one-time setup per environment. If you do not have the necessary access rights, contact your Datadog administrator.
 
 ### Create a logs index
 
-Dynamic Instrumentation snapshots are sent to Datadog logs. They appear alongside your application logs. 
+Dynamic Instrumentation snapshots are sent to Datadog logs. They appear alongside your application logs.  
 
-Create a logs index and [Configure the index][8] to the desired retention with **no sampling**. Set the filter to match on `source:dd_debugger`. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag because logs enter the first index whose filter they match on.
+If you are using Logs Indexes with [Exlusion filters][8], Follow the next instructions to ensure Dynamic Instrumentation snapshots are not filtered from logs.
+
+Create a logs index and [Configure the index][9] to the desired retention with **no sampling**. Set the filter to match on `source:dd_debugger`. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag because logs enter the first index whose filter they match on.
 
 ### Enable Dynamic Instrumentation
 
@@ -70,7 +95,7 @@ A *snapshot probe* exports the context in which it was configured to Datadog. It
 
 To create a snapshot probe:
 
-1. Go to the [Dynamic Instrumentation page][9].
+1. Go to the [Dynamic Instrumentation page][10].
 2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 3. Select **Snapshot** as the probe type.
 4. If not prefilled, choose a service from the list.
@@ -84,7 +109,7 @@ Metric probes emit metrics at a chosen location in your code. Use the Dynamic In
 
 To create a metric probe:
 
-1. Go to the [Dynamic Instrumentation page][9].
+1. Go to the [Dynamic Instrumentation page][10].
 2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 3. Select **Metric** as the probe type.
 4. Specify a name for the metric.
@@ -120,5 +145,7 @@ To remove the filter, open the same menu item and click **Delete Filter**.
 [5]: /getting_started/tagging/unified_service_tagging/
 [6]: /integrations/guide/source-code-integration/
 [7]: https://app.datadoghq.com/organization-settings/remote-config
-[8]: /logs/log_configuration/indexes/#add-indexes
-[9]: https://app.datadoghq.com/dynamic-instrumentation
+[8]: /logs/log_configuration/indexes/#exclusion-filters
+[9]: /logs/log_configuration/indexes/#add-indexes
+[10]: https://app.datadoghq.com/dynamic-instrumentation
+[11]: https://docs.datadoghq.com/account_management/rbac/permissions#apm
