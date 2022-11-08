@@ -22,7 +22,7 @@ const getIndexName = () => {
 
 const updateSettings = index => {
     const settings = {
-        searchableAttributes: ['title', 'section_header', 'type, tags', 'unordered(content)'],
+        searchableAttributes: ['title', 'section_header', 'tags', 'type', 'unordered(content)'],
         ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
         customRanking: ['asc(tags)', 'desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'type', 'tags'],
