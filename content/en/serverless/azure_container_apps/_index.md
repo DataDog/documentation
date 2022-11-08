@@ -4,13 +4,13 @@ kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/azure-container-apps/'
       tag: 'Blog'
-      text: 'Collect traces, logs, and custom metrics from GCR services'
+      text: 'Collect traces, logs, and custom metrics from Container Apps services'
 ---
 
 ## Overview
-Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution, now in alpha, for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution, now in beta, for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
-  <div class="alert alert-warning">This feature is in alpha. You can provide feedback through your standard support channels. During the alpha period, Container Apps monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
+  <div class="alert alert-warning">This feature is in beta. You can provide feedback through your standard support channels. During the beta period, Container Apps monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
 
 ## Tracing and custom metrics
 ### Build your container
@@ -29,7 +29,7 @@ The following are examples of how to complete these three steps. You may need to
 {{< programming-lang-wrapper langs="go,python,nodejs,java" >}}
 {{< programming-lang lang="go" >}}
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:latest /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/path/to/your-go-binary"] (adapt this line to your needs)
 ```
@@ -43,7 +43,7 @@ See [Tracing Go Applications][1] for more details. [Sample code for a simple Go 
 {{< programming-lang lang="python" >}}
 
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:latest /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["ddtrace-run", "python", "app.py"] (adapt this line to your needs)
 ```
@@ -56,7 +56,7 @@ See [Tracing Python Applications][1] for detailed instructions. [Sample code for
 
 {{< programming-lang lang="nodejs" >}}
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:latest /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
 
@@ -69,7 +69,7 @@ See [Tracing NodeJS Applications][1] for detailed instructions. [Sample code for
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:latest /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
 
@@ -97,7 +97,7 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 
 ## Log collection
 
-You can use the [GCP integration][1] to collect logs. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the Agent.
+You can use the [Azure integration][1] to collect logs. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to true to capture application logs through the Agent.
 
 ## Further reading
 
