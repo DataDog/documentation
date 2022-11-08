@@ -50,7 +50,7 @@ Enable them directly or create your own [APM monitors][3].
 
 The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][4], where errors are automatically aggregated into issues.
 
-{{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:100%;">}}
+{{< img src="tracing/visualization/service/summary_cards.png" alt="Summary cards"  style="width:100%;">}}
 
 Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary cards highlights how your services reacted to application threats.
 
