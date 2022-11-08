@@ -154,7 +154,7 @@ View security signals on your service, which are automatically created when Data
 
 This tab has overview graphs that shows the timeline of attacks, the types of attacks, as well as the attacker information (Client IP or authenticated user). Click on a security signal to get information about what the detected threat is, and what actions can be taken to remediate it.
 
-{{< img src="tracing/visualization/service/security_tab.jpg" alt="Security"  style="width:90%;">}}
+{{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
 
 ### Infrastructure
 If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance. 
