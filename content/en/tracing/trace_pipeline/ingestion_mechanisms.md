@@ -265,7 +265,7 @@ span.SetTag(ext.ManualKeep, true)
 span.SetTag(ext.ManualDrop, true)
 ```
 
-## Single spans (App Analytics)
+## Single spans
 `ingestion_reason: single_span`
 
 If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span. If you are building [metrics from spans][15], you can configure library span sampling rules to ensure these metrics are based on 100% of the application traffic.
@@ -370,6 +370,8 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-warning"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
 
 ## Product ingested spans
 
