@@ -268,7 +268,9 @@ span.SetTag(ext.ManualDrop, true)
 ## Single spans
 `ingestion_reason: single_span`
 
-If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span. If you are building [metrics from spans][15], you can configure library span sampling rules to ensure these metrics are based on 100% of the application traffic.
+If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span.
+
+For instance, if you are building [metrics from spans][15] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
 
 
 {{< tabs >}}
