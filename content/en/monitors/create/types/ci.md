@@ -155,7 +155,7 @@ This notification will only be sent for monitor alerts!
 {{/is_alert}}
 ```
 
-**Note**: A monitor that uses a formula for its evaluation query will keep the last state (e.g. Alert) if there is no data.
+**Note**: A monitor that uses a formula for its evaluation query will keep the last state (e.g. Alert) if there is no data by default.
 
 ## Further Reading
 
