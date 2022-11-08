@@ -46,7 +46,7 @@ import (
 
 Enable the database monitoring propagation feature using one of the following methods:
 1. Env variable: 
-`DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+   `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
 
 2. Using code during the driver registration:
 ```go
