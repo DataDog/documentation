@@ -160,7 +160,7 @@ export DD_CI_HOSTNAME=my-hostname
 export DD_CI_HOSTNAME=$HOSTNAME
 ```
 
-If you are using Kubernetes to manage your Jenkins instances, add the `DD_CI_HOSTNAME` environment variable to the [pod that executes the Jenkins job][9]. The value of this environment variable will depend on what you are using in your Datadog Agent daemonset when reporting the infrastructure metrics.
+If you are using Kubernetes to manage your Jenkins instances, add the `DD_CI_HOSTNAME` environment variable to the [pod that executes the Jenkins job][9]. The value of this environment variable depends on what you are using in your Datadog Agent daemonset when reporting the infrastructure metrics.
 
 This is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not require additional actions.
 
