@@ -194,7 +194,10 @@ The query may not have been sampled for selection because it does not represent 
 
 
 #### Application is relying on search paths for specifying which schema to query
-Postgres does not expose the current [search path][20] in [`pg_stat_activity`][21], so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The only way to work around this limitation is to update the application code to use fully qualified queries instead of relying on search paths. For example, do `select * from schema_A.table_B` instead of `SET search_path TO schema_A; select * from table_B`.
+Postgres does not expose the current [search path][20] in [`pg_stat_activity`][21], so it's not possible for the Datadog Agent to find out which search path is being used for any active Postgres processes. The work around for this limitation is to alter the search path for the user defined in the Postgres integration config to include the schema.
+```sql
+ALTER ROLE datadog SET search_path = "$user",public,schema1,schema2,etc;
+```
 
 ### Setup fails on `create extension pg_stat_statements`
 
