@@ -52,7 +52,7 @@ The service page features summary cards with highlights on your service health. 
 
 {{< img src="tracing/visualization/service/summary_cards.png" alt="Summary cards" style="width:100%;">}}
 
-Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary cards highlights how your services reacted to application threats.
+Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary highlights how your services react to application threats.
 
 {{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights"  style="width:70%;">}}
 
@@ -150,9 +150,9 @@ This tab has overview graphs that show which resources have the most issues and 
 {{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking tab"  style="width:90%;">}}
 
 ### Security
-View security signals on your service, which are automatically created when Datadog detects application attacks impacting your services, identifying meaningful threats to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
+View security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you review instead of assessing each individual attack attempt. Read more about [Application Security][18].
 
-This tab has overview graphs that shows the timeline of attacks, the types of attacks, as well as the attacker information (Client IP or authenticated user). Click on a security signal to get information about what the detected threat is, and what actions can be taken to remediate it.
+This tab has overview graphs that show the timeline of attacks, the types of attacks, and attacker information (Client IP or authenticated user). Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
 
 {{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
 
