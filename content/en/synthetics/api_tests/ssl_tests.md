@@ -79,7 +79,9 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your SSL test from. SSL tests can run from both [managed][1] and [private locations][2] depending on whether you want to monitor certificates from outside or inside your network.
+Select the **Locations** to run your SSL test from. {{% managed-locations %}} 
+
+SSL tests can run from both [managed][1] and [private locations][2] depending on your preference for monitoring certificates from outside or inside your network.
 
 ### Specify test frequency
 

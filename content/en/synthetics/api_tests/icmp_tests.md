@@ -63,7 +63,9 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your ICMP test from. ICMP tests can run from both [managed][1] and [private locations][2] depending on whether you want to trigger the ICMP pings from outside or inside your network.
+Select the **Locations** to run your ICMP test from. {{% managed-locations %}} 
+
+ICMP tests can run from both [managed][1] and [private locations][2] depending on your preference for triggering trigger the ICMP pings from outside or inside your network.
 
 ### Specify test frequency
 

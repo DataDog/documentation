@@ -50,6 +50,8 @@ Multistep API tests can run from Datadog [managed locations][5] and [private loc
 
 Select the **Locations** for your Multistep API test. Multistep API tests can run from both [managed][5] and [private locations][6] depending on your preference for running the test from outside or inside your network.
 
+{{% managed-locations %}} 
+
 ### Define steps
 
 To create an HTTP request step, click **Create Your First Step**.

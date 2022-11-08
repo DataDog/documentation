@@ -28,7 +28,11 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-warning">API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, chain your requests with <a href="https://docs.datadoghq.com/synthetics/multistep/">multistep API tests</a>.</div>
+
 API tests help you **proactively monitor** your most important services so they are available anytime and from anywhere. 
+
+## Create an API test
 
 Launch requests on the different network layers of your systems with these subtypes:
 
@@ -36,9 +40,9 @@ Launch requests on the different network layers of your systems with these subty
 
 If your service starts answering slower or in an unexpected way (such as an unexpected response body or wrong A record), your test can [alert your team][1], [block your CI pipeline][2], and [roll back the faulty deployment][2].
 
-API tests run from Datadog [managed locations][3] or [private locations][4], allowing **internal and external coverage** of your systems.
+## Run tests from managed or private locations
 
-**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, chain your requests with [multistep API tests][5].
+API tests run from Datadog [managed locations][3] or [private locations][4], allowing **internal and external coverage** of your systems. {{% managed-locations %}}  
 
 ## Further Reading
 
@@ -48,4 +52,3 @@ API tests run from Datadog [managed locations][3] or [private locations][4], all
 [2]: /continuous_testing/cicd_integrations
 [3]: /api/latest/synthetics/#get-all-locations-public-and-private
 [4]: /synthetics/private_locations
-[5]: /synthetics/multistep/

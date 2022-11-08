@@ -129,7 +129,9 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your gRPC test from. gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network.
+Select the **Locations** to run your gRPC test from. {{% managed-locations %}} 
+
+gRPC tests can run from both [managed][2] and [private locations][3] depending on your preference for running the test from outside or inside your network.
 
 ### Specify test frequency
 

@@ -68,7 +68,9 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
+Select the **Locations** to run your DNS test from. {{% managed-locations %}} 
+
+DNS tests can run from both [managed][1] and [private locations][2] depending on your preference for monitoring a public or private domain.
 
 ### Specify test frequency
 

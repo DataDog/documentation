@@ -62,7 +62,9 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your TCP test from: TCP tests can run from both [managed][1] and [private locations][2] depending on whether you want to launch the connection from outside or inside your network.
+Select the **Locations** to run your TCP test from. {{% managed-locations %}} 
+
+TCP tests can run from both [managed][1] and [private locations][2] depending on your preference for launching the connection from outside or inside your network.
 
 ### Specify test frequency
 
