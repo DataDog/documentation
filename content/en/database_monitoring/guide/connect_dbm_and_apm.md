@@ -23,7 +23,7 @@ Supported Agent versions
 : 7.36.1+
 
 Data privacy
-: Enabling sql comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other 3rd parties that have been granted access to the database.
+: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
 
 ## Setup
 
