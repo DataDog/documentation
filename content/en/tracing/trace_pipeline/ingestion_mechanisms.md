@@ -266,56 +266,110 @@ span.SetTag(ext.ManualDrop, true)
 ```
 
 ## Single spans (App Analytics)
-`ingestion_reason: analytic`
+`ingestion_reason: single_span`
 
-<div class="alert alert-warning">
-On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated mechanism with configuration information relevant to legacy App Analytics. Instead, use new configuration options <a href="#head-based-sampling">head-based sampling</a> to have full control over your data ingestion.
-</div>
+If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span. If you are building [metrics from spans][15], you can configure library span sampling rules to ensure these metrics are based on 100% of the application traffic.
 
-If you need to sample a specific span, but don't need the full trace to be available, tracers allow a sampling rate to be configured for a single span. This span will be ingested at no less than the configured rate, even when the enclosing trace is dropped.
-
-### In the tracing libraries
-
-To use the analytics mechanism, enable it either by an environment variable or in the code. Also, define a sampling rate to be applied to all `analytics_enabled` spans:
 
 {{< tabs >}}
-{{% tab "Environment variables" %}}
+{{% tab "Python" %}}
+Starting from version [v1.4.0][1], for Python applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env  DD_TRACE_ANALYTICS_ENABLED - boolean - optional false
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
 ```
+
+Read more about sampling controls in the [Python tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.4.0
+[2]: /tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
-{{% tab "Code API" %}}
+{{% tab "Java" %}}
+For Java applications, single span sampling rules are not yet supported. Please reach out to [Datadog Support][1] if you are interested in getting access to this feature.
+
+Read more about sampling controls in the [Java tracing library documentation][2].
+
+[1]: https://www.datadoghq.com/support/
+[2]: /tracing/trace_collection/dd_libraries/java
+{{% /tab %}}
+{{% tab "Ruby" %}}
+Starting from version [v1.5.0][1], for Ruby applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-// in dd-trace-go
-// set analytics_enabled by default
-tracerconfig.WithAnalytics(on bool)
-// set raw sampling rate to apply on all analytics_enabled spans
-tracerconfig.SetAnalyticsRate(0.4)
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
 ```
 
+Read more about sampling controls in the [Ruby tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v1.5.0
+[2]: /tracing/trace_collection/dd_libraries/ruby#sampling
+{{% /tab %}}
+{{% tab "Go" %}}
+Starting from version [v1.41.0][1], for Go applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [Go tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
+[2]: /tracing/trace_collection/dd_libraries/go
+{{% /tab %}}
+{{% tab "NodeJS" %}}
+For Node.js applications, single span sampling rules are not yet supported. Please reach out to [Datadog Support][1] if you are interested in getting access to this feature.
+
+Read more about sampling controls in the [NodeJS tracing library documentation][2].
+
+[1]: https://www.datadoghq.com/support/
+[2]: /tracing/trace_collection/dd_libraries/nodejs
+{{% /tab %}}
+{{% tab "PHP" %}}
+Starting from version [v0.77.0][1], for PHP applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [PHP tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.77.0
+[2]: /tracing/trace_collection/dd_libraries/php
+{{% /tab %}}
+{{% tab "C++" %}}
+Starting from version [v1.3.3][1], for C++ applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+```
+
+[1]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.3.3
+{{% /tab %}}
+{{% tab ".NET" %}}
+Starting from version [v2.18.0][1], for .NET applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [.NET tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.18.0
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 {{< /tabs >}}
-
-Tag any single span with `analytics_enabled:true`. In addition, specify a sampling rate to be associated with the span:
-```
-// in dd-trace-go
-// make a span analytics_enabled
-span.SetTag(ext.AnalyticsEvent, true)
-// make a span analytics_enabled with a rate of 0.5
-s := tracer.StartSpan("redis.cmd", AnalyticsRate(0.5))
-```
-
-### In the Agent
-
-In the Agent, an additional rate limiter is set to 200 spans per second. If the limit is reached, some spans are dropped and not forwarded to Datadog.
-
-Set the rate in the Agent main configuration file (`datadog.yaml`) or as an environment variable:
-```
-@param max_events_per_second - integer - optional 200
-@env DD_APM_MAX_EPS - integer - optional 200
-```
 
 ## Product ingested spans
 
@@ -372,3 +426,4 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 [12]: /synthetics/apm/
 [13]: /serverless/distributed_tracing/
 [14]: /security_platform/application_security/
+[15]: /tracing/trace_pipeline/generate_metrics/
