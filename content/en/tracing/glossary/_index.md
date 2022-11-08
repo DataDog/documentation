@@ -178,6 +178,8 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
 
+Sublayer metrics are only available if a service has downstream dependencies. 
+
 ## Execution time
 
 Execution time is calculated by adding up the time that a span is active, meaning it has no child spans. For non-concurrent work, this is straightforward. In the following image, the execution time for Span 1 is $\D1 + \D2 + \D3$. The execution time for Spans 2 and 3 are their respective widths.
