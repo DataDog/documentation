@@ -108,6 +108,10 @@ For the example below, the **service entry spans** are:
 
 The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance.
 
+
+Span summary table is only available for resources containing service entry spans.
+
+
 The span summary table contains the following columns:
 
 Average spans per trace
