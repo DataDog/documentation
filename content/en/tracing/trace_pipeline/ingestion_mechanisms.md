@@ -280,8 +280,9 @@ Starting from version [v1.4.0][1], for Python applications, set by-service and b
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
+
 
 Read more about sampling controls in the [Python tracing library documentation][2].
 
@@ -302,7 +303,7 @@ Starting from version [v1.5.0][1], for Ruby applications, set by-service and by-
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
 Read more about sampling controls in the [Ruby tracing library documentation][2].
@@ -316,7 +317,7 @@ Starting from version [v1.41.0][1], for Go applications, set by-service and by-o
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
 Read more about sampling controls in the [Go tracing library documentation][2].
@@ -338,7 +339,7 @@ Starting from version [v0.77.0][1], for PHP applications, set by-service and by-
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
 Read more about sampling controls in the [PHP tracing library documentation][2].
@@ -352,7 +353,7 @@ Starting from version [v1.3.3][1], for C++ applications, set by-service and by-o
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/releases/tag/v1.3.3
@@ -363,7 +364,7 @@ Starting from version [v2.18.0][1], for .NET applications, set by-service and by
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "max_per_second": 50}]
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
 
 Read more about sampling controls in the [.NET tracing library documentation][2].

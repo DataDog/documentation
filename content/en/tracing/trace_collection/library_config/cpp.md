@@ -39,18 +39,26 @@ If specified, adds the `env` tag with the specified value to all generated spans
 If specified, sets the default service name. Otherwise, the service name must be provided via TracerOptions or JSON configuration.
 
 `DD_TRACE_ANALYTICS_ENABLED` 
-: **Version**: v1.1.3 <br>
+: ***Deprecated*** <br>
 **Default**: `false` <br>
 Enable App Analytics globally for the application.
 
 `DD_TRACE_ANALYTICS_SAMPLE_RATE` 
-: **Version**: v1.1.3 <br>
+: ***Deprecated*** <br>
 Sets the App Analytics sampling rate. Overrides `DD_TRACE_ANALYTICS_ENABLED` if set. A floating point number between `0.0` and `1.0`.
 
 `DD_TRACE_SAMPLING_RULES` 
 : **Version**: v1.1.4 <br>
 **Default**: `[{"sample_rate": 1.0}]` <br>
 A JSON array of objects. Each object must have a "sample_rate", and the "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+
+`DD_SPAN_SAMPLING_RULES`
+: **Version**: v1.3.3 <br>
+**Default**: `nil`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The "sample_rate" value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][4].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_VERSION` 
 : **Version**: v1.1.4 <br>
