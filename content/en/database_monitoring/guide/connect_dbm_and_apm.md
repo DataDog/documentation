@@ -30,7 +30,7 @@ Data privacy
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Update your app dependencies to include [dd-trace-go@v1.42.0][3] or greater
+Update your app dependencies to include [dd-trace-go@v1.42.0][3] or greater:
 ```
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.42.0
 ```
