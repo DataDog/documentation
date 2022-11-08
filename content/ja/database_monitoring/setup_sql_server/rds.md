@@ -11,7 +11,7 @@ kind: documentation
 title: Amazon RDS 上の SQL Server のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -22,6 +22,8 @@ title: Amazon RDS 上の SQL Server のデータベースモニタリングの�
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 2. [Agent をインストールする](#install-the-agent)
 3. [RDS インテグレーションをインストールする](#install-the-rds-integration)
+
+**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
 
 ## はじめに
 

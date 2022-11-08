@@ -134,7 +134,7 @@ DD_TRACE_AGENT_URL=unix:<CHEMIN_SOCKET> node server
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /fr/tracing/visualization/
 [4]: https://datadog.github.io/dd-trace-js
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development

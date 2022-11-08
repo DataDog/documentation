@@ -286,7 +286,7 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [3]: /fr/tracing/glossary/#span-tags
 [4]: /fr/tracing/glossary/#resources
 [5]: /fr/tracing/glossary/#services
-[6]: https://app.datadoghq.com/apm/search
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
 [9]: /fr/tracing/trace_explorer/query_syntax/

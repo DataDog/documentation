@@ -228,5 +228,5 @@ If needed, configure the tracing library to send application performance telemet
 [1]: /tracing/setup/envoy/
 [2]: /tracing/setup/nginx/
 [3]: /tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/docs
+[4]: https://app.datadoghq.com/apm/service-setup
 [5]: /tracing/trace_collection/library_config/cpp/

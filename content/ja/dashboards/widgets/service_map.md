@@ -1,24 +1,25 @@
 ---
-title: サービスマップウィジェット
-kind: documentation
-description: 1 つのサービスについて、それを呼び出したすべてのサービスおよびそれから呼び出されたすべてのサービスを表すマップを表示する
-widget_type: servicemap
 aliases:
-  - /ja/graphing/widgets/service_map/
+- /ja/graphing/widgets/service_map/
+description: 1 つのサービスについて、それを呼び出したすべてのサービスおよびそれから呼び出されたすべてのサービスを表すマップを表示する
 further_reading:
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: サービスマップウィジェット
+widget_type: servicemap
 ---
+
 このウィジェットは、1 つのサービスについて、それを呼び出したすべてのサービスおよびそれから呼び出されたすべてのサービスを表すマップを表示します。ウィジェットの中央にあるノードは、マッピング対象のサービスを表します。マッピング対象のサービスを呼び出したサービスは、左側に表示され、呼び出し元からサービスへ矢印が引かれます。マッピング対象のサービスから呼び出されたサービスは、右側に表示され、呼び出しの方向に矢印が引かれます。
 
 サービスマップウィジェットは、タイムスコープに対応しません。常に、過去 2 週間に呼び出しを行ったサービスを表示します。また、直近の 1 時間について、サービスごとにリアルタイムにメトリクスが計算されます。
 
-{{< img src="dashboards/widgets/service_map/test_service_map.png" alt="サービスマップのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/test_service_map.png" alt="サービスマップのセットアップ" style="width:80%;">}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/service_map/service_map.png" alt="サービスマップのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/service_map/service_map.png" alt="サービスマップのセットアップ" style="width:80%;">}}
 
 ### コンフィギュレーション
 
@@ -39,12 +40,12 @@ further_reading:
 
 {{< dashboards-widgets-api >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/send_traces/
 [2]: /ja/tracing/guide/setting_primary_tags_to_scope/
-[3]: /ja/tracing/visualization/service/
+[3]: /ja/tracing/services/service_page/
 [4]: /ja/api/v1/dashboards/
 [5]: /ja/dashboards/graphing_json/widget_json/

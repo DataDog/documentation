@@ -116,7 +116,7 @@ docker run -d --name dd-agent \
 
 For a package-based deployment, the Datadog package has to be deployed: run `dkpg -i datadog-agent_7….deb`
 
-By default Runtime Security is disabled. To enable it, both the datadog.yaml and the system-probe.yaml files need to be adapted. Run the following commands to enable these configurations:
+By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
 
 {{< code-block lang="bash" filename="debian-runtime-security.sh" >}}
 
@@ -142,7 +142,33 @@ Once you apply the changes, restart both the Security Agent and the system-probe
 
 For a package-based deployment, the Datadog package has to be deployed: run `yum/dnf install datadog-agent_7….rpm`
 
+By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+
 {{< code-block lang="bash" filename="fedora-centos-runtime-security.sh" >}}
+
+echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
+echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+
+systemctl restart datadog-agent
+
+{{< /code-block >}}
+
+For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+
+```shell
+echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+```
+
+[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+{{% /tab %}}
+
+{{% tab "Host (Others)" %}}
+
+For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager.
+
+By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+
+{{< code-block lang="bash" filename="host-runtime-security.sh" >}}
 
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
 echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml

@@ -30,6 +30,9 @@ Supported test frameworks:
 * NUnit 3.0 and above
 * MsTestV2 14 and above
 
+### Test suite level visibility compatibility
+[Test suite level visibility][1] is supported from `dd-trace-dotnet>=2.16.0`.
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog .NET library:
@@ -86,11 +89,11 @@ Install or update the `dd-trace` command using one of the following ways:
    dotnet tool update -g dd-trace
    ```
 - By downloading the appropriate version:
-    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][1]
-    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][2]
-    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][3]
+    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][2]
+    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][3]
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][4]
 
-- Or by downloading [from the github release page][4].
+- Or by downloading [from the github release page][5].
 
 ## Instrumenting tests
 
@@ -149,7 +152,7 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][5] options can also be used.
+All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Adding custom tags to tests
 
@@ -165,7 +168,7 @@ if (scope != null) {
 // ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][6] section of the .NET custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
 
 ### Collecting Git metadata
 
@@ -227,10 +230,10 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 To use the custom instrumentation in your .NET application:
 
 1. Execute `dd-trace --version` to get the version of the tool.
-2. Add the `Datadog.Trace` [NuGet package][7] with the same version to your application.
+2. Add the `Datadog.Trace` [NuGet package][8] with the same version to your application.
 3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
+For more information about how to add spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][9].
 
 ## Information collected
 
@@ -241,7 +244,7 @@ When CI Visibility is enabled, the following data is collected from your project
 * Git commit history including the hash, message, author information, and files changed (without file contents).
 * Information from the CODEOWNERS file.
 
-In addition to that, if [Intelligent Test Runner][9] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][10] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
@@ -250,12 +253,13 @@ In addition to that, if [Intelligent Test Runner][9] is enabled, the following d
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://dtdg.co/dd-trace-dotnet-win-x64
-[2]: https://dtdg.co/dd-trace-dotnet-linux-x64
-[3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases
-[5]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
-[6]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
-[7]: https://www.nuget.org/packages/Datadog.Trace
-[8]: /tracing/trace_collection/custom_instrumentation/dotnet/
-[9]: /continuous_integration/intelligent_test_runner/
+[1]: /continuous_integration/tests/#test-suite-level-visibility
+[2]: https://dtdg.co/dd-trace-dotnet-win-x64
+[3]: https://dtdg.co/dd-trace-dotnet-linux-x64
+[4]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
+[5]: https://github.com/DataDog/dd-trace-dotnet/releases
+[6]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
+[7]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
+[8]: https://www.nuget.org/packages/Datadog.Trace
+[9]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[10]: /continuous_integration/intelligent_test_runner/

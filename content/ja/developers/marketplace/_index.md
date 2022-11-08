@@ -181,7 +181,7 @@ ddev config set repo extras
 上記で指定した `marketplace` または `integrations-extras` ディレクトリで以下を実行します。
 
 ```
-ddev create -t tile -v2 "<Offering Name>"
+ddev create -t tile "<Offering Name>"
 ```
 
 #### 完全なデータインテグレーション
@@ -189,7 +189,7 @@ ddev create -t tile -v2 "<Offering Name>"
 データインテグレーションの完全なスキャフォールディングを生成するには、上記で指定した `marketplace` または `integrations-extras` ディレクトリから以下を実行します。
 
 ```
-ddev create -v2 "<Offering Name>"
+ddev create "<Offering Name>"
 ```
 
 ### タイルスキャフォールディングにデータを入力します

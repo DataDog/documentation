@@ -60,6 +60,8 @@ When kicking off authorization from a third-party location—anywhere outside of
 
 To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region. Once the authorization flow is complete, ensure that all followup API calls use the correct site that is returned as a query parameter with the `redirect_uri` (See Step 5 in [Implement the OAuth protocol](#Implement-the-oauth-protocol)).
 
+When users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when returning to the integration tile). To avoid this, users should be routed from third-party platforms to the Datadog integration tile to begin authorization. 
+
 ## Authorization code grant flow with PKCE
 
 While the OAuth2 protocol supports several grant flows, the [authorization code grant flow][8] [with PKCE](#authorization-code-grant-flow-with-pkce) is the recommended grant type for long-running applications where a user grants explicit consent once and client credentials can be securely stored. 

@@ -470,7 +470,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 {{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Indexed span のフィルタリング" >}}
 
-[1]: https://app.datadoghq.com/apm/search/analytics
+[1]: https://app.datadoghq.com/apm/analytics
 [2]: /ja/tracing/visualization/#apm-event
 [3]: /ja/tracing/visualization/#spans
 [4]: /ja/tracing/visualization/#services

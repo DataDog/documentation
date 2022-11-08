@@ -92,7 +92,7 @@ Ensuite, [instrumentez votre application][2]. Pour consulter toutes les fonction
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /fr/tracing/send_traces/agent-apm-metrics/
 [6]: /fr/agent/
-[7]: https://app.datadoghq.com/apm/docs
+[7]: https://app.datadoghq.com/apm/service-setup
 [8]: /fr/tracing/serverless_functions/
 [9]: /fr/infrastructure/serverless/azure_app_services/#overview
 [10]: /fr/agent/basic_agent_usage/heroku/#installation

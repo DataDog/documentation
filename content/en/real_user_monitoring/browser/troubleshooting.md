@@ -36,6 +36,8 @@ If the RUM Browser SDK is not installed, or if it is not successfully initialize
 
 You can also check your browser developer tools console or network tab if you notice any errors related to the loading of the RUM Browser SDK.
 
+**Note**: To ensure accurate results, set `sampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][8].
+
 ### Data to the Datadog intake
 
 The RUM Browser SDK sends batches of data periodically to the Datadog intake. If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
@@ -117,3 +119,4 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [5]: /real_user_monitoring/faq/content_security_policy/
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
+[8]: /real_user_monitoring/guide/sampling-browser-plans/

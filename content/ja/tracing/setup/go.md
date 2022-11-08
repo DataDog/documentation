@@ -141,7 +141,7 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 [3]: /ja/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: https://app.datadoghq.com/apm/docs
+[6]: https://app.datadoghq.com/apm/service-setup
 [7]: /ja/tracing/send_traces/
 [8]: /ja/tracing/setup/docker/
 [9]: /ja/agent/kubernetes/apm/

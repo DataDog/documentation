@@ -1765,7 +1765,7 @@ Datadog.logger.info { "Ceci est généralement appelé par le code de tracing" }
 
 ### Environnement et tags
 
-Par défaut, l'Agent de trace (c'est-à-dire le programme exécuté en arrière-plan pour recueillir les données des différents clients, et non cette bibliothèque) utilise les tags définis dans le fichier de configuration de l'Agent. Consultez notre [tutoriel sur les environnements](https://app.datadoghq.com/apm/docs/tutorials/environments) pour en savoir plus.
+Par défaut, l'Agent de trace (c'est-à-dire le programme exécuté en arrière-plan pour recueillir les données des différents clients, et non cette bibliothèque) utilise les tags définis dans le fichier de configuration de l'Agent. Consultez notre [tutoriel sur les environnements](https://app.datadoghq.com/apm/service-setup) pour en savoir plus.
 
 Vous pouvez configurer l'application de façon à taguer automatiquement vos traces et vos métriques à l'aide des variables d'environnement suivantes :
 

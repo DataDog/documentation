@@ -41,12 +41,12 @@ Le [schéma JSON][5] utilisé pour le widget Service Map est le suivant :
 
 {{< dashboards-widgets-api >}}
 
-## Pour aller plus loin
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/send_traces/
 [2]: /fr/tracing/guide/setting_primary_tags_to_scope/
-[3]: /fr/tracing/visualization/service/
+[3]: /fr/tracing/services/service_page/
 [4]: /fr/api/v1/dashboards/
 [5]: /fr/dashboards/graphing_json/widget_json/

@@ -102,9 +102,9 @@ To install the .NET Profiler machine-wide:
 
 To install the .NET Profiler per-application:
 
-1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
+1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
-[1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -279,6 +279,7 @@ To install the .NET Profiler per-application:
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    CORECLR_PROFILER_PATH=<System-dependent path>
    DD_PROFILING_ENABLED=1
+   LD_PRELOAD=<APP_DIRECTORY>/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
    DD_SERVICE=MyService
    DD_ENV=production
    DD_VERSION=1.2.3

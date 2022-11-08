@@ -432,7 +432,7 @@ java -javaagent:<DD-JAVA-エージェントパス>.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /ja/tracing/send_traces/
 [4]: /ja/tracing/setup/docker/
 [5]: /ja/agent/kubernetes/apm/
