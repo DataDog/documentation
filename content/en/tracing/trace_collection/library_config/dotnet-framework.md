@@ -173,10 +173,10 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 `DD_SPAN_SAMPLING_RULES`
 : **TracerSettings property**: `SpanSamplingRule`<br>
 **Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The "sample_rate" value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][4].<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][3].<br>
 **Example:**<br>
-  - Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -315,6 +315,7 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
 [6]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#head-based-sampling

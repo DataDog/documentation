@@ -270,7 +270,7 @@ span.SetTag(ext.ManualDrop, true)
 
 If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span.
 
-For instance, if you are building [metrics from spans][15] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
+For example, if you are building [metrics from spans][6] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
 
 
 {{< tabs >}}
@@ -290,7 +290,7 @@ Read more about sampling controls in the [Python tracing library documentation][
 [2]: /tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Java" %}}
-For Java applications, single span sampling rules are not yet supported. Please reach out to [Datadog Support][1] if you are interested in getting access to this feature.
+For Java applications, single span sampling rules are not supported. Contact [Datadog Support][1] if you are interested in this potential future feature.
 
 Read more about sampling controls in the [Java tracing library documentation][2].
 
@@ -326,7 +326,7 @@ Read more about sampling controls in the [Go tracing library documentation][2].
 [2]: /tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
 {{% tab "NodeJS" %}}
-For Node.js applications, single span sampling rules are not yet supported. Please reach out to [Datadog Support][1] if you are interested in getting access to this feature.
+For Node.js applications, single span sampling rules are not supported. Contact [Datadog Support][1] if you are interested in this potential future feature.
 
 Read more about sampling controls in the [NodeJS tracing library documentation][2].
 
@@ -364,7 +364,7 @@ Starting from version [v2.18.0][1], for .NET applications, set by-service and by
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
 ```
 
 Read more about sampling controls in the [.NET tracing library documentation][2].
@@ -381,7 +381,7 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 ### RUM Traces
 `ingestion_reason:rum`
 
-A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][6] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
+A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][7] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
 
 Starting in version `4.10.0` of the RUM browser SDK , you can control ingested volumes and keep a sampling of the backend traces by configuring the `tracingSampleRate` initialization parameter.  Set `tracingSampleRate` to a number between `0` and `100`.
 If no `tracingSampleRate` value is set, a default of 100% of the traces coming from the browser requests are sent to Datadog.
@@ -390,16 +390,16 @@ Similarly, control the trace sampling rate in other SDKs by using similar parame
 
 | SDK         | Parameter             | Minimum version   |
 |-------------|-----------------------|-------------------|
-| Browser     | `tracingSampleRate`   | [v4.10.0][7]      |
-| iOS         | `tracingSamplingRate` | [1.11.0][8]       |
-| Android     | `traceSamplingRate`   | [1.13.0][9]       |
-| Flutter     | `tracingSamplingRate` | [1.0.0-beta.2][10] |
-| React Native | `tracingSamplingRate` | [1.0.0-rc6][11]   |
+| Browser     | `tracingSampleRate`   | [v4.10.0][8]      |
+| iOS         | `tracingSamplingRate` | [1.11.0][9]       |
+| Android     | `traceSamplingRate`   | [1.13.0][10]       |
+| Flutter     | `tracingSamplingRate` | [1.0.0-beta.2][11] |
+| React Native | `tracingSamplingRate` | [1.0.0-rc6][12]   |
 
 ### Synthetic traces
 `ingestion_reason:synthetics` and `ingestion_reason:synthetics-browser`
 
-HTTP and browser tests generate traces when the backend services are instrumented. [The APM integration with Synthetic Testing][12] links your synthetic tests with the corresponding backend traces. Navigate from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
+HTTP and browser tests generate traces when the backend services are instrumented. [The APM integration with Synthetic Testing][13] links your synthetic tests with the corresponding backend traces. Navigate from a test run that failed to the root cause of the issue by looking at the trace generated by that test run.
 
 By default, 100% of synthetic HTTP and browser tests generate backend traces.
 
@@ -409,8 +409,8 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 
 | Product    | Ingestion Reason                    | Ingestion Mechanism Description |
 |------------|-------------------------------------|---------------------------------|
-| Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][13] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
-| Application Security Management     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][14] as a threat. |
+| Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][14] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
+| Application Security Management     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][15] as a threat. |
 
 
 ## Further Reading
@@ -422,13 +422,13 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 [3]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
 [4]: /tracing/glossary/#trace-root-span
 [5]: /tracing/trace_pipeline/ingestion_controls/
-[6]: /real_user_monitoring/connect_rum_and_traces/
-[7]: https://github.com/DataDog/browser-sdk/releases/tag/v4.10.0
-[8]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
-[9]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
-[10]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_tracking_http_client%2Fv1.0.0-beta.2
-[11]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc6
-[12]: /synthetics/apm/
-[13]: /serverless/distributed_tracing/
-[14]: /security_platform/application_security/
-[15]: /tracing/trace_pipeline/generate_metrics/
+[6]: /tracing/trace_pipeline/generate_metrics/
+[7]: /real_user_monitoring/connect_rum_and_traces/
+[8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.10.0
+[9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
+[10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
+[11]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_tracking_http_client%2Fv1.0.0-beta.2
+[12]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc6
+[13]: /synthetics/apm/
+[14]: /serverless/distributed_tracing/
+[15]: /security_platform/application_security/
