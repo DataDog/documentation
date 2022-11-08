@@ -716,24 +716,24 @@ main:
     url: dashboards/widgets/slo/
     parent: dashboards_widgets
     weight: 30
-  - name: Service Map
-    url: dashboards/widgets/service_map/
-    parent: dashboards_widgets
-    weight: 31
   - name: Service Summary
     url: dashboards/widgets/service_summary/
     parent: dashboards_widgets
-    weight: 32
+    weight: 31
   - name: Table
     url: dashboards/widgets/table/
     parent: dashboards_widgets
-    weight: 33
+    weight: 32
   - name: Timeseries
     url: dashboards/widgets/timeseries/
     parent: dashboards_widgets
-    weight: 34
+    weight: 33
   - name: Top List
     url: dashboards/widgets/top_list/
+    parent: dashboards_widgets
+    weight: 34
+  - name: Topology Map
+    url: dashboards/widgets/topology_map/
     parent: dashboards_widgets
     weight: 35
   - name: Querying
