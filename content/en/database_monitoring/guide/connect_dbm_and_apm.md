@@ -54,14 +54,14 @@ sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tra
 ```
 
 3. Using code on `sqltrace.Open`:
-```go
-sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
-
-db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull))
-if err != nil {
-	log.Fatal(err)
-}
-```
+   ```go
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   
+   db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull))
+   if err != nil {
+	   log.Fatal(err)
+   }
+   ```
 
 Full example:
 ```go
