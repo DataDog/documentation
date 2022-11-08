@@ -44,10 +44,10 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 : Measures the elapsed milliseconds from when the function code returns the response back to the client to when the function stops executing, representing the duration added by Lambda extension executions.
 
 `aws.lambda.enhanced.response_latency`
-: Measures the elapsed time in milliseconds from when the invocation request is received to when the response is returned to the client.
+: Measures the elapsed time in milliseconds from when the invocation request is received to when the first byte of response is sent to the client.
 
 `aws.lambda.enhanced.response_duration`
-:
+: Measures the elapsed time in milliseconds from when the first byte of response to the last byte of response is sent to the client.
 
 `aws.lambda.enhanced.produced_bytes`
 : Measures the number of bytes returned by a function.
