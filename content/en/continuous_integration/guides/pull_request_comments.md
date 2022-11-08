@@ -10,7 +10,9 @@ kind: guide
 Datadog integrates with GitHub to show test result summaries and error messages for failed tests in pull request comments.
 
 ### Compatibility
-This integration is only available for test services hosted on `github.com`. It is also unavailable for workflows running on `pull_request` triggers.
+This integration is only available for test services hosted on `github.com`.
+
+<div class="alert alert-info"><strong>Note</strong>: The integration is not currently available for GitHub Actions when triggered by the <code>pull_request*</code> event. </div>
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
