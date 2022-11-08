@@ -52,7 +52,7 @@ The service page features summary cards with highlights on your service health. 
 
 {{< img src="tracing/visualization/service/summary_cards.jpg" alt="Summary cards"  style="width:100%;">}}
 
-Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident.
+Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary cards highlights how your services reacted to application threats.
 
 {{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights"  style="width:70%;">}}
 
@@ -201,3 +201,4 @@ View common patterns in your service’s logs, and use facets like status in the
 [15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
+[18]: /security_platform/application_security/how-appsec-works/
