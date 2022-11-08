@@ -49,9 +49,9 @@ Enable the database monitoring propagation feature using one of the following me
    `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
 
 2. Using code during the driver registration:
-```go
-sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull), sqltrace.WithServiceName("my-db-service"))
-```
+   ```go
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull), sqltrace.WithServiceName("my-db-service"))
+   ```
 
 3. Using code on `sqltrace.Open`:
    ```go
