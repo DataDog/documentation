@@ -160,6 +160,8 @@ export DD_CI_HOSTNAME=my-hostname
 export DD_CI_HOSTNAME=$HOSTNAME
 ```
 
+If you are using Kubernetes to manage your Jenkins instances, add the `DD_CI_HOSTNAME` environment variable to the [pod that executes the Jenkins job][9]. The value of this environment variable will depend on what you are using in your Datadog Agent daemonset when reporting the infrastructure metrics.
+
 This is only required for Jenkins workers. For the Jenkins controller, the infrastructure metric correlation does not require additional actions.
 
 **Note**: Infrastructure metric correlation is supported since Jenkins Plugin v5.0.0+
@@ -616,3 +618,4 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
+[9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
