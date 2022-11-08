@@ -6,7 +6,7 @@ private: true
 ---
 
 <div class="alert alert-warning">
-The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
+The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
 </div>
 
 This guide assumes that you have configured [Datadog Monitoring][1] and are using [APM][2].
