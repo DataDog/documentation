@@ -34,7 +34,7 @@ Consult on this page:
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 * [Additional tabs](#additional-tabs)
-    *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), and more
+    *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
 
 ## Service monitor
 
