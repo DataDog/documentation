@@ -101,9 +101,9 @@ Click on a service’s span to see network dependencies of the service making th
 
 {{% tab "Security" %}}
 
-See attack attempts targeting the services of the distributed trace. You can see the pattern used by the attacker, the rule detecting the attack and whether the attacker found a vulnerability in your service.
+See attack attempts that target the services of the distributed trace. You can see the pattern used by the attacker, the rule that detects the attack, and whether the attacker found a vulnerability in your service.
 
-Click in view in ASM to investigate further leveraging [Datadog Application Security Management][1].
+Click **View in ASM** to investigate further using [Datadog Application Security Management][1].
 
 {{< img src="tracing/visualization/trace/trace_security.png" alt="Trace Attack Attempts" style="width:90%;">}}
 
