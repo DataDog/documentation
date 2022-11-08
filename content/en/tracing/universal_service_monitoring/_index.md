@@ -20,7 +20,7 @@ further_reading:
 ---
 
 {{< beta-callout url="http://d-sh.io/universal" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Universal Service Monitoring (USM) is in private beta. There is currently no billing impact for enabling and using USM. Let us know if you would like to access it.
+  Universal Service Monitoring (USM) is in public beta. There is currently no billing impact for enabling and using USM.
 {{< /beta-callout >}}
 
 Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into APM views such as the Services List, Service details, and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.
