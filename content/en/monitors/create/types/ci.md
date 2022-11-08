@@ -103,8 +103,6 @@ The following example is a test error rate monitor using a formula that calculat
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:80%;" >}}
 
-<div class="alert alert-info"><strong>Note</strong>: A maximum of two queries can be used to build the evaluation formula per monitor.</div>
-
 #### Using CODEOWNERS for notifications
 
 You can send the notification to different teams using the `CODEOWNERS` information available in the test event.
