@@ -48,7 +48,7 @@ Enable the dbm propagation feature using one of the 3 methods:
 1. Env variable: 
 `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
 
-2. Via code during the driver registration
+2. Using code during the driver registration:
 ```go
 sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull), sqltrace.WithServiceName("my-db-service"))
 ```
