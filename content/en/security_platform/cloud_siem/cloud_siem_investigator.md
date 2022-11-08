@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-When a security signal alerts on suspicious activity by a user or a resource, common questions asked as part of the investigation could include:
+When a security signal alerts on suspicious activity by a user or a resource, some commonly asked questions during the investigation include:
 
 - Is the user accessing other accounts? 
 - What other actions did the user take around that specific time frame? 
@@ -31,15 +31,15 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 ## Visualize and investigate the activity
 
-1. Navigate to the [Cloud SIEM Investigator][1]. Alternatively, you can get to it from **Security** > **Cloud SIEM**, and then click the **Investigator** tab. 
+1. Navigate to **Security** > **Cloud SIEM** and click the [**Investigator** tab][1]. 
 
-2. Select an entity type in the **In** field dropdown.
+2. Select an entity type in the **In** field dropdown menu.
 
-3. Select a entity or enter a specific entity name in the **Investigate** field to see a graph of the activities associated with the entity. For the Assumed Role entity, select an `AccessKeyID` or enter an `AccessKeyID` in the **for** field. 
+3. Select an entity or enter a specific entity name in the **Investigate** field to see a graph of the activities associated with the entity. For the **Assumed Role** entity, select an `AccessKeyID` or enter an `AccessKeyID` in the **for** field. 
 
-4. Click on a node and select **Show list of logs** or **View in Log Explorer** to see the related logs. If you click on a service node, click **Investigate service** to pivot to the Investigator view for that service. Use the **and filter by** dropdown to filter by actions.
+4. Click on a node and select **Show list of logs** or **View in Log Explorer** to see the related logs. If you click on a service node, click **Investigate service** to pivot to the Investigator view for that service. Use the **and filter by** dropdown menu to filter by actions.
 
-You can also go to the Cloud SIEM Investigator directly from a security signal. In the security signal panel, click **Investigate user activity**, where `user` is the user identity in question, to see the Investigator view filtered to the specific user identity.
+You can also navigate to the Cloud SIEM Investigator directly from a security signal. In the security signal panel, click **Investigate user activity** (where `user` is the user identity in question) to see the Investigator view filtered to the specific user identity.
 
 ## Further reading
 
