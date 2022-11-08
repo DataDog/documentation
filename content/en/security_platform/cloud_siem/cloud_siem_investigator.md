@@ -13,9 +13,9 @@ further_reading:
   The Cloud SIEM Investigator is in beta.
 {{< /beta-callout >}} 
 
-<div class="alert alert-warning">Cloud SIEM Investigator currently only supports AWS CloudTrail logs.</div>
-
 ## Overview
+
+<div class="alert alert-warning">Cloud SIEM Investigator currently only supports AWS CloudTrail logs.</div>
 
 When a security signal alerts on suspicious activity by a user or a resource, some commonly asked questions during the investigation include:
 
