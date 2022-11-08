@@ -20,9 +20,6 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">CI monitors are in alpha.
-</div>
-
 ## Overview
 
 Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline or CI Test monitor.
@@ -110,7 +107,7 @@ The following example is a test error rate monitor using a formula that calculat
 
 #### Using CODEOWNERS for notifications
 
-You can send the notification to different teams using the `CODEOWNERS` information available in the test event. 
+You can send the notification to different teams using the `CODEOWNERS` information available in the test event.
 
 The example below configures the notification with the following logic:
 * If the test code owner is `MyOrg/my-team`, then send the notification to the `my-team-channel` Slack channel.
@@ -146,7 +143,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Notifications behavior when there is no data
 
-A monitor that uses an event count, or a formula for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor using a formula to alert on pipeline error rate with an evaluation window of five minutes will automatically resolve after five minutes without any data.
+A monitor that uses an event count for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor on pipeline error count with an evaluation window of five minutes will automatically resolve after five minutes without any data.
 
 As CI pipeline data is usually sparse and can have relatively long periods with no data, this can result in monitor recovery notifications that might not be desired.
 
@@ -157,6 +154,8 @@ In these cases, Datadog recommends configuring the monitor notification to trigg
 This notification will only be sent for monitor alerts!
 {{/is_alert}}
 ```
+
+**Note**: A monitor that uses a formula for its evaluation query will keep the last state (e.g. Alert) if there is no data.
 
 ## Further Reading
 
