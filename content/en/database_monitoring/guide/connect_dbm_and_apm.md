@@ -53,7 +53,7 @@ Enable the dbm propagation feature using one of the 3 methods:
 sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull), sqltrace.WithServiceName("my-db-service"))
 ```
 
-3. Via code on `sqltrace.Open`
+3. Using code on `sqltrace.Open`:
 ```go
 sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
