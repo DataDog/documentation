@@ -458,7 +458,7 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 ## Link errors to your source code
 
-<div class="alert alert-info">This feature is currently supported for Go, Java, Python and Node.js.</div>
+<div class="alert alert-info">This feature is currently supported for Go, Java, Python and JavaScript.</div>
 
 [Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in GitHub. Follow the instructions below to enable the feature. **Note**: You must deploy from a local Git repository that is neither dirty nor ahead of remote.
 
