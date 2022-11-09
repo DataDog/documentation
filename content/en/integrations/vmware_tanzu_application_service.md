@@ -3,8 +3,8 @@ integration_title: VMware Tanzu Application Service
 name: vmware_tanzu_application_service
 kind: integration
 aliases:
-  - /integrations/cloud_foundry/
-  - /integrations/pivotal_platform/
+    - /integrations/cloud_foundry/
+    - /integrations/pivotal_platform/
 git_integration_title: vmware_tanzu_application_service
 newhlevel: true
 updated_for_agent: 6.0
@@ -18,9 +18,6 @@ categories:
     - log collection
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md']
-aliases:
-    - /integrations/cloud_foundry/
-    - /integrations/pivotal_platform/
 doc_link: /integrations/vmware_tanzu_application_service/
 integration_id: "pivotal-platform"
 ---
