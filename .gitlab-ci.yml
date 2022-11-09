@@ -29,11 +29,10 @@ before_script:
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
   # set common env variables for this shell
-  - export GITHUB_TOKEN=$(get_secret 'github_token')
-  - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
-  - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
+  - export GITHUB_TOKEN=$(get_secret 'documentation.github_token')
+  - export DATADOG_API_KEY=$(get_secret 'documentation.dd-api-key')
+  - export DATADOG_APP_KEY=$(get_secret 'documentation.dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
-  - export SLACK_URL=$(get_secret 'guacops_slack_url')
 
 # set policy for the common case
 # yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
