@@ -26,15 +26,14 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ## Setup
 
+For additional information about sending OpenTelemetry data to Datadog, configuring it, and using Datadog's observability platform to gain actionable insights into your service performance, see:
+
+- [Trace collection through open standards][5]
+- [Metrics collection through OpenTelemetry][6]
+- [Logs collection through OpenTelemetry][7]
 
 
-## Connect OpenTelemetry traces and Datadog logs
 
-If you are using OpenTelemetry for your traces, but Datadog Logs collection for your logs data, you can correlate them by connecting OpenTelemetry traces and Datadog logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces. See [Connect OpenTelemetry Traces and Logs][5] for language specific instructions and example code.
-
-## Other alternatives
-
-Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for [sending OpenTracing data to Datadog][6].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -43,5 +42,6 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [2]: https://www.cncf.io/
 [3]: /opentelemetry/otel_collector_datadog_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
-[5]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
-[6]: /tracing/trace_collection/open_standards/java
+[5]: /tracing/trace_collection/open_standards/
+[6]: /metrics/open_telemetry/
+[7]: /logs/log_collection/opentelemetry/

@@ -31,10 +31,13 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating tracing data and sending it to observability products.">}}
 
+## Connect OpenTelemetry traces and logs
+
+You can correlate OpenTelemetry traces and logs so that your application logs monitoring and analysis has the additional context provided by the OpenTelemetry traces. See [Connect OpenTelemetry Traces and Logs][5] for language specific instructions and example code.
 
 ## Other alternatives
 
-Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for [sending OpenTracing data to Datadog][5].
+Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for [sending OpenTracing data to Datadog][6].
 
 ## Further Reading
 
@@ -44,4 +47,5 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
 [2]: https://opentracing.io/docs/
 [3]: /opentelemetry/otel_collector_datadog_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
-[5]: /tracing/trace_collection/open_standards/java
+[5]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
+[6]: /tracing/trace_collection/open_standards/java
