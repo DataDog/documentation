@@ -23,7 +23,7 @@ If you are using a Dockerfile to build your application, complete the following:
 
 3. Use the ENTRYPOINT instruction to run the `serverless-init` binary as your Docker container is initiated.
 
-4. Use the CMD instruction to run your existing application and other required commands as arguments.
+4. Use the `CMD` instruction to run your existing application and other required commands as arguments.
 
 The following are examples of how to complete these three steps. You may need to adjust these examples depending on your existing Dockerfile setup. 
 
