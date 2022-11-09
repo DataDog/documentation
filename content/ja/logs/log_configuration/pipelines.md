@@ -145,7 +145,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 [トレース ID リマッパープロセッサー][2]を設定し、別の属性を指定してログのトレース ID のソースとして使用します。
 
 
-[1]: /ja/tracing/connect_logs_and_traces/
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [2]: /ja/logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}
