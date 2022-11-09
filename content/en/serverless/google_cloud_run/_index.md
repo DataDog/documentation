@@ -21,7 +21,7 @@ If you are using a Dockerfile to build your application, complete the following:
 
 2. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][2] into your Docker image.
 
-3. Use the ENTRYPOINT instruction to run the `serverless-init` binary as your Docker container is initiated.
+3. Use the `ENTRYPOINT` instruction to run the `serverless-init` binary as your Docker container is initiated.
 
 4. Use the `CMD` instruction to run your existing application and other required commands as arguments.
 
