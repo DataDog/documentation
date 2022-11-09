@@ -38,7 +38,7 @@ A standard Marketplace integration tile appears with the following format:
 
 Choose from the following offering types to create an integration tile that represents your listing on the [Datadog Marketplace][1]:
 
-- A [Datadog Agent-based integration][2])
+- A [Datadog Agent-based integration][2]
 - A [REST API integration](#build-a-rest-api-integration)
 - A [Datadog App](#build-a-datadog-app)
 - [SaaS license or subscription](#build-an-informational-tile-only-listing)
