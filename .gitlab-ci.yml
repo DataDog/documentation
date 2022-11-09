@@ -81,7 +81,7 @@ build_preview:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
     - touch Makefile.config
     - make dependencies
     - make config
@@ -116,7 +116,7 @@ link_checks_preview:
     URL: ${PREVIEW_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -221,7 +221,7 @@ build_live:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - touch Makefile.config
     - make clean-examples
@@ -266,7 +266,7 @@ test_live_link_checks:
     URL: ${LIVE_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -405,8 +405,8 @@ post_success_event_to_dd_live:
     GIT_STRATEGY: none
   when: on_success
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
-    - post_dd_metric "documentation.pipeline.completed" "1" "" "success"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success" "documentation"
+    - post_dd_metric "documentation.pipeline.completed" "1" "" "success" "documentation"
   only:
     - master
 
@@ -419,7 +419,7 @@ post_failure_event_to_dd_live:
     GIT_STRATEGY: none
   when: on_failure
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"
-    - post_dd_metric "documentation.pipeline.completed" "0" "" "failure"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error" "documentation"
+    - post_dd_metric "documentation.pipeline.completed" "0" "" "failure" "documentation"
   only:
     - master
