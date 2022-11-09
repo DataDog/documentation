@@ -13,10 +13,10 @@ further_reading:
   tag: ドキュメント
   text: 収集されたログからメトリクスを生成する方法
 kind: ガイド
-title: Logging Without LimitsTM ガイド
+title: Logging Without Limits™ ガイド
 ---
 
-{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without LimitsTM" >}}
+{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
 
 ## 概要
 
