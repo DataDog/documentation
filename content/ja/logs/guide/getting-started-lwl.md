@@ -116,7 +116,7 @@ title: Logging Without Limits™ ガイド
   * [新しいログベースのメトリクスを追加](#add-a-new-log-based-metric)
   * [異常検知モニターの作成](#create-an-anomaly-detection-monitor)
 
-Logging Without LimitsTM の詳細やログエクスポローラー、Live Tail、ログパターンの活用方法については、以下のリンクをご覧ください。
+Logging Without Limits™ の詳細やログエクスポローラー、Live Tail、ログパターンの活用方法については、以下のリンクをご覧ください。
 
 ## その他の参考資料
 
