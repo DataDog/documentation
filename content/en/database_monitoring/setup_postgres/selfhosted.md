@@ -286,7 +286,6 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 
 If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][15]
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
