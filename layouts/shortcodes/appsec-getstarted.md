@@ -1,6 +1,6 @@
 In general, setting up Application Security Management (ASM) involves:
 
-1. [Identifying which service(s)][102] to enable ASM on.
+1. [Identifying which services][102] to enable ASM on.
 2. Updating to the latest Datadog library (the most recent APM tracing library).
 3. Enabling the library to collect the application security data from the services and send it to Datadog.
 4. Triggering security signals in your application and seeing how Datadog displays the resulting information.
