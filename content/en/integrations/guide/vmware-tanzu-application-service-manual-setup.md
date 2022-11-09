@@ -196,6 +196,11 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="The detail view for a host in the Datadog host map with the system integration selected and multiple graphs displaying data"  >}}
 
+#### Collect CAPI metadata and 
+
+Add support for CAPI metadata and DCA tags collection in PCF containers.
+Application labels and annotations will be present in the application logs, metrics and traces (under the Infrastructure Tab).
+
 ### Install the Datadog Cluster Agent BOSH release
 
 The Datadog Cluster Agent BOSH release is a BOSH package for running the Datadog Cluster Agent on Cloud Foundry.
@@ -336,6 +341,13 @@ The second item `postgres-service-name` is a configuration for a service bound t
 To resolve the template variables, it uses the `variables` dictionary to define the values used in the instance configuration.
 This dictionary contains a JSONPath object indicating where to find the variable values for the service `postgres-service-name` defined in the `VCAP_SERVICES` environment variable.
 
+#### Improve CCCache performance on cache miss
+
+If you're using Datadog Agent version `7.40.0` and above, you can add more flags to increase control over the CCCache behavior:
+
+- `refresh_on_cache_miss` to control cache miss behavior
+- Split `advanced_tags` into `sidecars_tags` and `isolation_segments_tags`
+
 #### Improved tagging for application containers and process discovery
 
 Once the two releases are linked, the Datadog Cluster Agent automatically provides cluster-level metadata, which the node Agents attach as tags to their corresponding Cloud Foundry application containers.
@@ -448,6 +460,10 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 On the [Metrics explorer][23] page in Datadog, search for metrics beginning with `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="The Metrics Explorer in Datadog with cloudfoundry.nozzle entered in the search bar"  >}}
+
+#### Disable the application metadata prefix
+
+You have the option to disable the application metadata prefix in the Firehose Nozzle app metrics.
 
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20(PCF)%20is%20now%20VMware%20Tanzu%20Application%20Service
 [2]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
