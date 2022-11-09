@@ -1,6 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 import { configure, searchBox, hits, index } from 'instantsearch.js/es/widgets';
+import { hitsDropdown } from './algolia/hitsDropdown';
 import configDocs from '../config/config-docs';
 
 function getConfig(environment) {
@@ -79,9 +80,8 @@ if (searchBoxContainer) {
             }
         }),
 
-        hits({
-            container: hitsContainer,
-            escapeHTML: true
+        hitsDropdown({
+            container: hitsContainer
         })
     ]);
 
