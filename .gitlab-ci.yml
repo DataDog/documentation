@@ -181,7 +181,7 @@ replica_algolia_preview:
   environment: "preview"
   script:
     - yarn install --immutable
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'documentation.algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'documentation.algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -309,7 +309,7 @@ replica_algolia:
   environment: "live"
   script:
     - yarn install --immutable
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'documentation.algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'documentation.algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:
@@ -381,7 +381,7 @@ test_pa11y:
     - build_live
   script:
     - yarn install --immutable
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'documentation.dd-api-key')
   only:
     - schedules
 
