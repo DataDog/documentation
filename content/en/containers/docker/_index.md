@@ -49,8 +49,6 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 
 If you haven’t installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10].
 
-**Note**: For Docker Compose, see [Compose and the Datadog Agent][11].
-
 {{< tabs >}}
 {{% tab "Standard" %}}
 
@@ -125,6 +123,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: For Docker Compose, see [Compose and the Datadog Agent][11].
 
 ## Integrations
 

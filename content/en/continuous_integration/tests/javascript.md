@@ -34,6 +34,16 @@ Supported test frameworks:
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
+### Test suite level visibility compatibility
+[Test suite level visibility][4] is supported from `dd-trace>=3.3.0`. Only Jest and Mocha are currently supported.
+
+* Jest >= 24.8.0
+  * From `dd-trace>=3.3.0`.
+  * Only [`jest-circus`][1] is supported as [`testRunner`][3].
+* Mocha >= 5.2.0
+  * From `dd-trace>=3.3.0`.
+
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog JavaScript library:
@@ -83,13 +93,13 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 ## Installing the JavaScript tracer
 
-To install the [JavaScript tracer][4], run:
+To install the [JavaScript tracer][5], run:
 
 ```bash
 yarn add --dev dd-trace
 ```
 
-For more information, see the [JavaScript tracer installation docs][5].
+For more information, see the [JavaScript tracer installation docs][6].
 
 
 ## Instrument your tests
@@ -331,7 +341,7 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][6] options can also be used.
+All other [Datadog Tracer configuration][7] options can also be used.
 
 ### Collecting Git metadata
 
@@ -386,12 +396,12 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][7] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][8].
+[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][9].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][10] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][11] guide.
 
 
 
@@ -412,14 +422,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][11] instead:
+And use [`test.each`][12] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][12]:
+For `mocha`, use [`mocha-each`][13]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -442,7 +452,7 @@ When CI Visibility is enabled, the following data is collected from your project
 * Git commit history including the hash, message, author information, and files changed (without file contents).
 * Information from the CODEOWNERS file.
 
-In addition to that, if [Intelligent Test Runner][13] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][14] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
@@ -454,13 +464,14 @@ In addition to that, if [Intelligent Test Runner][13] is enabled, the following 
 [1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
 [2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
-[4]: https://github.com/DataDog/dd-trace-js
-[5]: /tracing/trace_collection/dd_libraries/nodejs
-[6]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[7]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[8]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[9]: /real_user_monitoring/browser/
-[10]: /continuous_integration/guides/rum_integration/
-[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[12]: https://www.npmjs.com/package/mocha-each
-[13]: /continuous_integration/intelligent_test_runner/
+[4]: /continuous_integration/tests/#test-suite-level-visibility
+[5]: https://github.com/DataDog/dd-trace-js
+[6]: /tracing/trace_collection/dd_libraries/nodejs
+[7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
+[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[10]: /real_user_monitoring/browser/
+[11]: /continuous_integration/guides/rum_integration/
+[12]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[13]: https://www.npmjs.com/package/mocha-each
+[14]: /continuous_integration/intelligent_test_runner/

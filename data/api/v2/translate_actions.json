@@ -799,7 +799,7 @@
     "summary": "Get cost across multi-org account"
   },
   "GetEstimatedCostByOrg": {
-    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month.\nTo access historical costs prior to this, use the `/historical_cost` endpoint.",
+    "description": "Get estimated cost across multi-org and single root-org accounts.\nEstimated cost data is only available for the current month and previous month\nand is delayed by up to 72 hours from when it was incurred.\nTo access historical costs prior to this, use the `/historical_cost` endpoint.",
     "summary": "Get estimated cost across your account"
   },
   "GetHistoricalCostByOrg": {
