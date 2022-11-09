@@ -43,7 +43,7 @@ Dynamic Instrumentation requires the following:
 - [Unified Service Tagging][5] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][6] is set up for your service.
 
-**Note**: `debugger_read` and `debugger_write` permissions required to access Dynamic Instrumentation. While Datadog Administrator have those permissions by default, for more information about default and custom roles and assign roles to users, see [Role Based Access Control][11].
+**Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][11].
 
 ### Enable Remote Configuration
 
@@ -54,7 +54,7 @@ Dynamic Instrumentation requires the following:
 {{< tabs >}}
 {{% tab "Datadog-agent config.yaml" %}}
 
-Modify `datadog-agent` configuration:
+Modify `datadog-agent.yaml`:
 ```yaml
 remote_configuration:
   refresh_interval: 5s
@@ -62,7 +62,7 @@ remote_configuration:
 {{% /tab %}}
 {{% tab "Environment variables" %}}
 
-Add enviroment variabless for the datadog-agent:
+Export environment variable:
 ```shell
 export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
 ```
@@ -75,7 +75,7 @@ export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
 
 Dynamic Instrumentation snapshots are sent to Datadog logs. They appear alongside your application logs.  
 
-If you are using Logs Indexes with [Exlusion filters][8], Follow the next instructions to ensure Dynamic Instrumentation snapshots are not filtered from logs.
+If you are using Logs Indexes with [Exlusion filters][8], follow the next instructions to ensure Dynamic Instrumentation snapshots are not filtered from logs.
 
 Create a logs index and [Configure the index][9] to the desired retention with **no sampling**. Set the filter to match on `source:dd_debugger`. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag because logs enter the first index whose filter they match on.
 

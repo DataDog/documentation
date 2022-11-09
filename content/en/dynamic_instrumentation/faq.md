@@ -13,13 +13,13 @@ Java, Python and .NET
     {{< nextlink href="/logs/faq/how-to-investigate-a-log-parsing-issue" >}}How to investigate a log parsing issue?{{< /nextlink >}}
 {{< /whatsnext >}} -->
 
-## How does Dynamic Instrumentation works?
+## How does Dynamic Instrumentation work?
 
 Dynamic instrumentation allows users to add probes to their production systems at anypoint in their code (and even 3rd party libraries). Dynamic Instrumentation has low overhead and is guaranteed to have no side effects on your system.
 
-## What data does Dynamic Instrumentation Snapshot probe captures
+## What data does a Dynamic Instrumentation Snapshot probe capture
 
-Dynamic instrumentation capture the current context of a method or line that includes:
+Dynamic instrumentation captures the current context of a method or line:
 * Method Arguments, Local Variables and fields. 
 * * Captures 3 levels deep of class objects
 * * Limit to the first 100 items inside collections
@@ -30,7 +30,7 @@ Dynamic instrumentation capture the current context of a method or line that inc
 
 ## What probe types does Dynamic Instrumentation support?
 
-* *Snapshots probes* - captures the context of a method/line (rate limited for 1 snapshot per sec)
+* *Snapshot probe* - captures the context of a method/line (rate limited for 1 snapshot per sec)
 * * Method arguments, Local Variables and fields, all captured at 3 levels deep.
 * * Stack trace
 * * Exceptions
