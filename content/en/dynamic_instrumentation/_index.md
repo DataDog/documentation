@@ -7,9 +7,8 @@ is_beta: true
 private: true
 further_reading:
 - link: "/dynamic_instrumentation/faq"
-  tag: "Documentation"
+  tag: "FAQ"
   text: "Learn more about how Dynamic Instrumentation works"
-
 - link: "/tracing/trace_collection/dd_libraries"
   tag: "Documentation"
   text: "Learn more about how to instrument your application"
