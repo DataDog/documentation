@@ -19,11 +19,17 @@ further_reading:
 
 Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into any bad actors targeting your systems.
 
-APM records information about each HTTP request, referred to as traces. Datadog ASM uses the information APM is already collecting, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are an aggregation of suspicious requests. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+APM records information about each application request, referred to as traces. Datadog ASM uses the same library as APM to monitor your traffic, and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. For ASM to be effective, it must be embedded in the application to get access to the data. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal to noise ratio, lowering false positives.
 
 Datadog ASM identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
+
+## Identify services exposed to application attacks
+
+Datadog ASM uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][14], [Service Page][15], [Traces][16]).
+
+Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
 
 ## Compatibility
 
@@ -34,6 +40,10 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
 Datadog ASM uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. When APM is enabled, the Datadog Library generates distributed traces. Datadog ASM flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
 {{< img src="security_platform/application_security/How_Application_Security_Works_d1.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
+
+## Data Sampling and Retention
+
+In the tracing library, Datadog ASM guarantees the collection of traces including security data. A default [retention filter][] guarantees the retention of those traces in the Datadog platform.
 
 ## Data privacy
 
@@ -103,3 +113,7 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 [10]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [11]: /security_platform/application_security/add-user-info/?tab=set_user
 [12]: /agent/
+[13]: /tracing/trace_pipeline/trace_retention/
+[14]: /tracing/service_catalog/#security-view
+[15]: /tracing/services/service_page/#security
+[16]: /tracing/trace_explorer/trace_view/?tab=security#more-information
