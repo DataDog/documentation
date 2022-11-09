@@ -1,6 +1,6 @@
 ## Example Agent Configurations
 
-### One Agent connecting to multiple hosts
+### One agent connecting to multiple hosts
 To connect to multiple hosts, create an entry for each host in the integration config.
 ```yaml
 init_config:
@@ -67,4 +67,22 @@ instances:
     password: '<PASSWORD>'
     dbname: bar  # Default: `postgres`
     # dbstrict: true 
+
+### Working with hosts through a remote proxy
+When connecting to a database host through a remote proxy, it can be useful to set a custom hostname. Utilize the `reported_hostname` option to override the hostname detected by the agent.
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: localhost
+    port: 5000
+    username: datadog
+    password: '<PASSWORD>'
+    reported_hostname: foo
+  - dbm: true
+    host: localhost
+    port: 5001
+    username: datadog
+    password: '<PASSWORD>'
+    reported_hostname: bar
 ```
