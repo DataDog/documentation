@@ -1,5 +1,5 @@
 ---
-title: VMware Tanzu Application Service Manual Setup Guide
+title: Pivotal Cloud Foundry Manual Setup Guide
 kind: guide
 description: "Steps for manually setting up the Datadog VMware Tanzu Application Service Integration"
 aliases:
@@ -14,21 +14,21 @@ There are three main components for the VMware Tanzu Application Service integra
 
 ## Monitor your applications
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your VMware Tanzu Application Service application. This is a [supply buildpack][2] for VMware Tanzu Application Service that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
+Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your VMware Tanzu Application Service application. This is a [supply buildpack][2] for VMware Tanzu Application Service that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
 
-### Pivotal Platform < 1.12
+### Pivotal Cloud Foundry < 1.12
 
-The Datadog buildpack uses the Pivotal Platform [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
+The Datadog buildpack uses the Pivotal Cloud Foundry [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
 
-For older versions, Pivotal Platform provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version in order to use Datadog's buildpack.
+For older versions, Pivotal Cloud Foundry provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version in order to use Datadog's buildpack.
 
-1. **Upload the multi-buildpack back-port.** Download the latest multi-buildpack release and upload it to your Pivotal Platform environment.
+1. **Upload the multi-buildpack back-port.** Download the latest multi-buildpack release and upload it to your Pivotal Cloud Foundry environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. **Add a multi-buildpack manifest to your application.** As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Platform Buildpack and to your regular buildpack:
+2. **Add a multi-buildpack manifest to your application.** As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Cloud Foundry Buildpack and to your regular buildpack:
 
     ```yaml
     buildpacks:
@@ -43,17 +43,17 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
 
       Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
 
-      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
+      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Cloud Foundry's How Buildpacks Work][6].
 
-3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Platform for your application:
+3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Cloud Foundry for your application:
 
     ```shell
     cf push <YOUR_APP> -b multi-buildpack
     ```
 
-### Pivotal Platform >= 1.12
+### Pivotal Cloud Foundry Platform >= 1.12
 
-1. **Upload the Datadog Pivotal Platform Buildpack.** [Download the latest Datadog build pack release][7] and upload it to your Pivotal Platform environment.
+1. **Upload the Datadog Pivotal Cloud Foundry Buildpack.** [Download the latest Datadog build pack release][7] and upload it to your Pivotal Cloud Foundry environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
@@ -66,7 +66,7 @@ For older versions, Pivotal Platform provides a backwards compatible version of 
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Platform's How Buildpacks Work][6].
+      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Cloud Foundry's How Buildpacks Work][6].
 
 ### Meta-Buildpack **(deprecated)**
 
@@ -201,7 +201,7 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 The Datadog Cluster Agent BOSH release is a BOSH package for running the Datadog Cluster Agent on Cloud Foundry.
 
 This package is to be used in conjunction with the [Datadog Agent BOSH Release][18].
-It provides a BOSH link consumed by the Datadog Agent BOSH release to Autodiscover and schedule integrations for your apps, as well as improved tagging for application containers and process discovery. (see the [spec in GitHub][33]).
+It provides a BOSH link consumed by the Datadog Agent BOSH release to Autodiscover and schedule integrations for your apps, as well as improved tagging for application containers and process discovery. For more information, see the [spec in GitHub][33].
 
 #### Upload Datadog's Cluster Agent release to your BOSH Director
 
