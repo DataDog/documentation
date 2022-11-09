@@ -126,24 +126,21 @@ const createPages = (apiYaml, deref, apiVersion) => {
 
     // create a copy in /latest/
     indexYamlStr = yaml.safeDump(baseFrontMatter);
-    indexYamlStr = `---\n${indexYamlStr}---\n`;
+    indexYamlStr = `---\n${indexYamlStr}---\n${tag.description}\n\n`;
 
     // create markdown containing summary and description for each endpoint
-    // this is for compiling the search index, it is not used for rendering content.
-    if (tag.name === 'CI Visibility Tests') {
-      // just get this sections data
-      const data = Object.keys(deref.paths)
-        .filter((path) => isTagMatch(deref.paths[path], tag.name))
-        .map((path) => deref.paths[path]);
+    // this is for compiling the algolia search index, it is not used for rendering content.
+    const data = Object.keys(deref.paths)
+      .filter((path) => isTagMatch(deref.paths[path], tag.name))
+      .map((path) => deref.paths[path]);
 
-      data.forEach((actionObj) => {
-        Object.entries(actionObj).forEach(([actionKey, action]) => {
-          const { summary, description } = action
+    data.forEach((actionObj) => {
+      Object.entries(actionObj).forEach(([actionKey, action]) => {
+        const { summary, description } = action
 
-          indexYamlStr += `## ${summary}\n\n${description}\n\n`
-        })
+        indexYamlStr += `## ${summary}\n\n${description}\n\n`
       })
-    }
+    })
 
     fs.mkdirSync(`./content/en/api/latest/${newDirName}`, {recursive: true});
     fs.writeFileSync(`./content/en/api/latest/${newDirName}/_index.md`, indexYamlStr, 'utf8');
@@ -1023,7 +1020,6 @@ const processSpecs = (specs) => {
 
 const init = () => {
   const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
-  console.info('Building Api Pages now******************')
   processSpecs(specs);
 };
 
