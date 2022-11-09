@@ -38,7 +38,7 @@ A standard Marketplace integration tile appears with the following format:
 
 Choose from the following offering types to create an integration tile that represents your listing on the [Datadog Marketplace][1]:
 
-- A [Datadog Agent-based integration][2]
+- A [Datadog Agent-based integration](#build-an-agent-based-integration)
 - A [REST API integration](#build-a-rest-api-integration)
 - A [Datadog App](#build-a-datadog-app)
 - [SaaS license or subscription](#build-an-informational-tile-only-listing)
@@ -242,11 +242,10 @@ Once a Marketplace integration tile is live, Technology Partners can meet with D
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/marketplace/
-[2]: (#build-an-agent-based-integration
 [3]: /developers/integrations/
 [4]: /api/latest/
 [5]: /developers/integrations/oauth_for_data_integrations/
-[6]: /developers/datadog_app/
+[6]: /developers/datadog_apps/
 [7]: https://app.datadoghq.com/apps/
 [8]: /api/latest/metrics/
 [9]: /api/latest/logs/
