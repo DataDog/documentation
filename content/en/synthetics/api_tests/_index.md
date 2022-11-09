@@ -42,7 +42,7 @@ If your service starts answering slower or in an unexpected way (such as an unex
 
 ## Run tests from managed or private locations
 
-API tests run from Datadog [managed locations][3] or [private locations][4], allowing **internal and external coverage** of your systems. {{% managed-locations %}}  
+API tests run from Datadog [managed locations][3] or [private locations][4], allowing **internal and external coverage** of your systems.
 
 ## Further Reading
 
@@ -50,5 +50,5 @@ API tests run from Datadog [managed locations][3] or [private locations][4], all
 
 [1]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
 [2]: /continuous_testing/cicd_integrations
-[3]: /api/latest/synthetics/#get-all-locations-public-and-private
+[3]: /synthetics/api_tests/http_tests/#select-locations
 [4]: /synthetics/private_locations
