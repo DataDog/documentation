@@ -5,7 +5,6 @@ kind: integration
 aliases:
     - /integrations/cloud_foundry/
     - /integrations/pivotal_platform/
-git_integration_title: vmware_tanzu_application_service
 newhlevel: true
 updated_for_agent: 6.0
 description: 'Track the health of your VMware Tanzu Application Service (formerly Pivotal Cloud Foundry) VMs and the jobs they run.'
