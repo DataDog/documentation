@@ -43,7 +43,7 @@ Datadog ASM uses processes already contained in the Agent and APM, so there are 
 
 ## Data Sampling and Retention
 
-In the tracing library, Datadog ASM guarantees the collection of traces including security data. A default [retention filter][] guarantees the retention of those traces in the Datadog platform.
+In the tracing library, Datadog ASM guarantees the collection of traces including security data. A default [retention filter][13] guarantees the retention of those traces in the Datadog platform.
 
 ## Data privacy
 
