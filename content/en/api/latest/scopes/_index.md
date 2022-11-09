@@ -1,4 +1,5 @@
 ---
+render_content: true
 title: Authorization Scopes
 disable_sidebar: true
 ---

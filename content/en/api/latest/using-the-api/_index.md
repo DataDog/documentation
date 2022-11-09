@@ -1,4 +1,5 @@
 ---
+render_content: true
 title: Using the API
 type: api
 ---

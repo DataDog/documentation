@@ -6,7 +6,6 @@ const marked = require('marked');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
-
 const supportedLangs = ['en'];
 
 /**
