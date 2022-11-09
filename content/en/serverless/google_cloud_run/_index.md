@@ -19,7 +19,7 @@ If you are using a Dockerfile to build your application, complete the following:
 
 1. Instrument your application with a [supported Datadog tracing library][7]
 
-2. Copy the [Datadog `serverless-init` binary][2] into your Docker image.
+2. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][2] into your Docker image.
 
 3. Use the ENTRYPOINT instruction to run the `serverless-init` binary as your Docker container is initiated.
 
