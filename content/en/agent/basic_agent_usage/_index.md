@@ -240,10 +240,8 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `help`            | Help about any command.                                                     |
 | `hostname`        | Print the hostname used by the Agent.                                       |
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
-| `installservice`  | Install the Agent within the service control manager.                       |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
 | `regimport`       | Import the registry settings into `datadog.yaml`.                           |
-| `remove-service`  | Remove the Agent from the service control manager.                          |
 | `restart`         | [Restart the Agent][2].                                                     |
 | `restart-service` | Restart the Agent within the service control manager.                       |
 | `start`           | [Start the Agent][3].                                                       |
