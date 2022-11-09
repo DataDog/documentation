@@ -129,6 +129,7 @@ const createPages = (apiYaml, deref, apiVersion) => {
 
     // create markdown containing summary and description for each endpoint
     // this is for compiling the algolia search index, it is not used for rendering content.
+    // api page content is controlled by layout in most cases.
     const data = Object.keys(deref.paths)
       .filter((path) => isTagMatch(deref.paths[path], tag.name))
       .map((path) => deref.paths[path]);
