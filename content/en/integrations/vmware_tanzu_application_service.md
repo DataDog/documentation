@@ -1,25 +1,27 @@
 ---
-integration_title: Pivotal Platform
-name: pivotal_platform
+integration_title: VMware Tanzu Application Service
+name: vmware_tanzu_application_service
 kind: integration
 aliases:
   - /integrations/cloud_foundry/
-git_integration_title: pivotal_platform
+  - /integrations/pivotal_platform/
+git_integration_title: vmware_tanzu_application_service
 newhlevel: true
 updated_for_agent: 6.0
 description: 'Track the health of your VMware Tanzu Application Service (formerly Pivotal Cloud Foundry) VMs and the jobs they run.'
 is_public: true
-public_title: Datadog-Pivotal Platform Integration
+public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) Integration
 short_description: 'Track the health of VMware Tanzu Application Service VMs and the jobs they run.'
 categories:
     - provisioning
     - configuration & deployment
     - log collection
 dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md']
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md']
 aliases:
     - /integrations/cloud_foundry/
-doc_link: /integrations/pivotal_platform/
+    - /integrations/pivotal_platform/
+doc_link: /integrations/vmware_tanzu_application_service/
 integration_id: "pivotal-platform"
 ---
 
