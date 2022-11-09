@@ -15,6 +15,7 @@ cascade:
     algolia:
         rank: 10
         tags: ["api_latest"]
+render_content: true
 ---
 
 {{< h2 >}}API Reference{{< /h2 >}}
