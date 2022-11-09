@@ -558,6 +558,12 @@ main:
     identifier: integration_guides
     parent: integrations_top_level
     weight: 2
+  - name: OpenTelemetry
+    url: opentelemetry/
+    identifier: opentelemetry_top_level
+    pre: open-telemetry
+    parent: essentials_heading
+    weight: 46000
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
