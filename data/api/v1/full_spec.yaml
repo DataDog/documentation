@@ -13660,7 +13660,8 @@ components:
             certificates.'
           type: boolean
         allow_insecure:
-          description: Allows loading insecure content for an HTTP request.
+          description: Allows loading insecure content for an HTTP request in an API
+            test.
           type: boolean
         checkCertificateRevocation:
           description: For SSL test, whether or not the test should fail on revoked
@@ -13684,7 +13685,7 @@ components:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
         ignoreServerCertificateError:
-          description: Ignore server certificate error.
+          description: Ignore server certificate error for browser tests.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds)
