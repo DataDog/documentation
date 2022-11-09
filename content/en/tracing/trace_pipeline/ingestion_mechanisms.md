@@ -326,12 +326,17 @@ Read more about sampling controls in the [Go tracing library documentation][2].
 [2]: /tracing/trace_collection/dd_libraries/go
 {{% /tab %}}
 {{% tab "NodeJS" %}}
-For Node.js applications, single span sampling rules are not supported. Contact [Datadog Support][1] if you are interested in this potential future feature.
+For Node.js applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
-Read more about sampling controls in the [NodeJS tracing library documentation][2].
+For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
-[1]: https://www.datadoghq.com/support/
-[2]: /tracing/trace_collection/dd_libraries/nodejs
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
+```
+
+Read more about sampling controls in the [Node.js tracing library documentation][1].
+
+[1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
 Starting from version [v0.77.0][1], for PHP applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
