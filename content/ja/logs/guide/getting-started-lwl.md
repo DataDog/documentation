@@ -107,7 +107,7 @@ title: Logging Without Limits™ ガイド
 
 ## まとめ
 
-ここでは、Logging without LimitsTM を以下に適用する方法について説明しました。
+ここでは、Logging without Limits™ を以下に適用する方法について説明しました。
 
 1. [最多ログのサービスステータスを特定](#1-identify-your-most-logged-service-status)
 2. [大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
