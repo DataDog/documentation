@@ -3428,11 +3428,17 @@ main:
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools
-    identifier: marketplace
+    identifier: dev_tools_marketplace
     weight: 5
+  - name: Develop A Marketplace Offering
+    url: developers/marketplace/offering
+    parent: dev_tools_marketplace
+    identifier: dev_tools_marketplace_offering
+    weight: 501
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
+    identifier: dev_tools_datadog_apps
     weight: 6
   - name: Service Checks
     url: developers/service_checks/
