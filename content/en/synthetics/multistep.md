@@ -83,6 +83,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
    * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
    For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+   * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).
 
    {{% /tab %}}
 
@@ -297,7 +298,7 @@ You can restrict access to a multistep API test based on the roles in your organ
 [2]: /synthetics/api_tests/
 [3]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
 [4]: /synthetics/cicd_integrations
-[5]: /api/v1/synthetics/#get-all-locations-public-and-private
+[5]: /api/latest/synthetics/#get-all-locations-public-and-private
 [6]: /synthetics/private_locations
 [7]: /synthetics/search/#search
 [8]: https://restfulapi.net/json-jsonpath/

@@ -3824,6 +3824,7 @@ components:
       - api_usage
       - apm_fargate_usage
       - apm_host_usage
+      - appsec_fargate_usage
       - appsec_usage
       - browser_usage
       - container_usage
@@ -3852,6 +3853,7 @@ components:
       - API_USAGE
       - APM_FARGATE_USAGE
       - APM_HOST_USAGE
+      - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
       - CONTAINER_USAGE
@@ -6205,12 +6207,20 @@ components:
       - rum
       - ci_pipelines
       - ci_tests
+      - audit
+      - events
+      - logs
+      - spans
       example: rum
       type: string
       x-enum-varnames:
       - RUM
       - CI_PIPELINES
       - CI_TESTS
+      - AUDIT
+      - EVENTS
+      - LOGS
+      - SPANS
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -6495,6 +6505,8 @@ components:
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
             Default is false."
           type: boolean
+        scheduling_options:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
         silenced:
           additionalProperties:
             description: UTC epoch timestamp in seconds when the downtime for the
@@ -6545,6 +6557,39 @@ components:
           example: count
           type: string
       readOnly: true
+      type: object
+    MonitorOptionsSchedulingOptions:
+      description: Configuration options for scheduling.
+      properties:
+        evaluation_window:
+          $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
+      type: object
+    MonitorOptionsSchedulingOptionsEvaluationWindow:
+      description: Configuration options for the evaluation window. If `hour_starts`
+        is set, no other fields may be set. Otherwise, `day_starts` and `month_starts`
+        must be set together.
+      properties:
+        day_starts:
+          description: The time of the day at which a one day cumulative evaluation
+            window starts. Must be defined in UTC time in `HH:mm` format.
+          example: 04:00
+          type: string
+        hour_starts:
+          description: The minute of the hour at which a one hour cumulative evaluation
+            window starts.
+          example: 0
+          format: int32
+          maximum: 59
+          minimum: 0
+          type: integer
+        month_starts:
+          description: The day of the month at which a one month cumulative evaluation
+            window starts.
+          example: 1
+          format: int32
+          maximum: 1
+          minimum: 1
+          type: integer
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -7098,6 +7143,8 @@ components:
       - api_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
       - appsec_usage
@@ -7153,6 +7200,8 @@ components:
       - API_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
       - APPSEC_USAGE
@@ -7227,6 +7276,16 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_percentage:
+          description: The percentage of Application Security Monitoring ECS Fargate
+            task usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_usage:
+          description: The Application Security Monitoring ECS Fargate task usage
+            by tag(s).
           format: double
           type: number
         appsec_percentage:
@@ -11807,6 +11866,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
       type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
@@ -11936,6 +11996,42 @@ components:
       - RECEIVED_MESSAGE
       - GRPC_HEALTHCHECK_STATUS
       - CONNECTION
+    SyntheticsAssertionXPathOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesXPath
+      example: validatesXPath
+      type: string
+      x-enum-varnames:
+      - VALIDATES_X_PATH
+    SyntheticsAssertionXPathTarget:
+      description: An assertion for the `validatesXPath` operator.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathOperator'
+        property:
+          description: The associated assertion property.
+          type: string
+        target:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathTargetTarget'
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
+    SyntheticsAssertionXPathTargetTarget:
+      description: Composed target for `validatesXPath` operator.
+      properties:
+        operator:
+          description: The specific operator to use on the path.
+          type: string
+        targetValue:
+          description: The path target value to compare to.
+        xPath:
+          description: The X path to assert.
+          type: string
+      type: object
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
@@ -13253,6 +13349,9 @@ components:
         name:
           description: The name of the step.
           type: string
+        noScreenshot:
+          description: A boolean set to not take a screenshot for the step.
+          type: boolean
         params:
           description: The parameters of the step.
           type: object
@@ -13561,7 +13660,8 @@ components:
             certificates.'
           type: boolean
         allow_insecure:
-          description: Allows loading insecure content for an HTTP request.
+          description: Allows loading insecure content for an HTTP request in an API
+            test.
           type: boolean
         checkCertificateRevocation:
           description: For SSL test, whether or not the test should fail on revoked
@@ -13585,7 +13685,7 @@ components:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
         ignoreServerCertificateError:
-          description: Ignore server certificate error.
+          description: Ignore server certificate error for browser tests.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds)
@@ -13700,6 +13800,8 @@ components:
         body:
           description: Body to include in the test.
           type: string
+        bodyType:
+          $ref: '#/components/schemas/SyntheticsTestRequestBodyType'
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
         certificateDomains:
@@ -13778,6 +13880,24 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyType:
+      description: Type of the request body.
+      enum:
+      - text/plain
+      - application/json
+      - text/xml
+      - text/html
+      - application/x-www-form-urlencoded
+      - graphql
+      example: text/plain
+      type: string
+      x-enum-varnames:
+      - TEXT_PLAIN
+      - APPLICATION_JSON
+      - TEXT_XML
+      - TEXT_HTML
+      - APPLICATION_X_WWW_FORM_URLENCODED
+      - GRAPHQL
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:
@@ -14735,6 +14855,8 @@ components:
       - estimated_ingested_spans_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -14769,6 +14891,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -14815,6 +14939,8 @@ components:
       - estimated_ingested_spans_percentage
       - apm_fargate_usage
       - apm_fargate_percentage
+      - appsec_fargate_usage
+      - appsec_fargate_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -14860,6 +14986,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - APM_FARGATE_USAGE
       - APM_FARGATE_PERCENTAGE
+      - APPSEC_FARGATE_USAGE
+      - APPSEC_FARGATE_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -14914,6 +15042,16 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_percentage:
+          description: The percentage of Application Security Monitoring ECS Fargate
+            task usage by tag(s).
+          format: double
+          type: number
+        appsec_fargate_usage:
+          description: The Application Security Monitoring ECS Fargate task usage
+            by tag(s).
           format: double
           type: number
         appsec_percentage:
@@ -15599,6 +15737,11 @@ components:
         apm_fargate_count:
           description: The high-water mark of APM ECS Fargate tasks during the given
             hour.
+          format: int64
+          type: integer
+        appsec_fargate_count:
+          description: The Application Security Monitoring ECS Fargate tasks during
+            the given hour.
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
@@ -16432,6 +16575,11 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
@@ -16780,6 +16928,11 @@ components:
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        appsec_fargate_count_avg:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for the given org.
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
@@ -17133,6 +17286,11 @@ components:
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
             hours in the current months for all organizations.
+          format: int64
+          type: integer
+        appsec_fargate_count_avg_sum:
+          description: Shows the average of all Application Security Monitoring ECS
+            Fargate tasks over all hours in the current months for all organizations.
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
@@ -18699,6 +18857,7 @@ components:
             user_access_invite: Invite other users to your organization.
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
+            user_access_read: View users and their roles and settings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -31565,7 +31724,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List all users
       tags:
       - Users

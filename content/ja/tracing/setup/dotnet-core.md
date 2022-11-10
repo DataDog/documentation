@@ -413,7 +413,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /ja/tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /ja/tracing/custom_instrumentation/dotnet/

@@ -19,6 +19,10 @@ further_reading:
   text: "Create and manage tests with Terraform"
 ---
 
+<div class="alert alert-info">
+If you would like to enable Continuous Testing and customize your parallelization, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+</div>
+
 ## Overview
 
 You can access Continuous Testing settings on the [Synthetic Monitoring Settings page][1].

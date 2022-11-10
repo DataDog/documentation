@@ -108,6 +108,10 @@ For the example below, the **service entry spans** are:
 
 The span summary table shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance.
 
+
+The span summary table is only available for resources containing service entry spans.
+
+
 The span summary table contains the following columns:
 
 Average spans per trace
@@ -177,6 +181,8 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 ## Sublayer metric
 
 Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
+
+Sublayer metrics are only available if a service has downstream dependencies. 
 
 ## Execution time
 

@@ -97,6 +97,8 @@ The displayed metrics represent, per span:
 
 **Note**: A span is considered active when it's not waiting for a child span to complete. The active spans at a given time, for a given trace, are all the leaf spans (in other words, spans without children).
 
+The span summary table is only available for resources containing service entry spans.
+
 ## Traces
 
 Consult the list of [traces][7] associated with this resource in the [Trace search][8] modal already filtered on your environment, service, operation, and resource name:

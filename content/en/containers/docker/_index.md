@@ -130,6 +130,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 Once the Agent is up and running, use [Datadog's Autodiscovery feature][12] to collect metrics and logs automatically from your application containers.
 
+
 ## Environment variables
 
 The Agent's [main configuration file][13] is `datadog.yaml`. For the Docker Agent, `datadog.yaml` configuration options are passed in with environment variables.

@@ -181,7 +181,7 @@ For standalone SaaS licenses, Datadog Apps, and professional services--or if you
 In the `marketplace` or `integrations-extras` directory you specified above, run: 
 
 ```
-ddev create -t tile -v2 "<Offering Name>"
+ddev create -t tile "<Offering Name>"
 ```
 
 #### Full data integration
@@ -189,7 +189,7 @@ ddev create -t tile -v2 "<Offering Name>"
 To generate a complete data integration scaffolding, from the `marketplace` or `integrations-extras` directory specified above, run: 
 
 ```
-ddev create -v2 "<Offering Name>"
+ddev create "<Offering Name>"
 ```
 
 ### Populate the tile scaffolding

@@ -260,7 +260,7 @@ You can restrict access to a browser test based on the roles in your organizatio
 
 
 [1]: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
-[2]: /api/v1/synthetics/#get-all-locations-public-and-private
+[2]: /api/latest/synthetics/#get-all-locations-public-and-private
 [3]: /synthetics/private_locations
 [4]: /synthetics/cicd_testing
 [5]: /synthetics/search/#search

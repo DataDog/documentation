@@ -284,7 +284,7 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [3]: /tracing/glossary/#span-tags
 [4]: /tracing/glossary/#resources
 [5]: /tracing/glossary/#services
-[6]: https://app.datadoghq.com/apm/search
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /tracing/trace_explorer/#live-search-for-15-minutes
 [8]: https://app.datadoghq.com/apm/analytics
 [9]: /tracing/trace_explorer/query_syntax/

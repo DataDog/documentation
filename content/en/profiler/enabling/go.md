@@ -95,6 +95,26 @@ Alternatively you can set profiler configuration using environment variables:
 | `DD_VERSION`                                     | String        | The [version][8] of your service. |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
+### Showing C function calls in CPU profiles
+
+By default, Go's CPU profiler only shows detailed information for Go code. If your program calls C code, the time spent running C code is reflected in the profile, but the call stacks only show Go function calls.
+
+To add detailed C function call information to CPU profiles, you may opt to use library such as [ianlancetaylor/cgosymbolizer][10]. To use this library:
+
+1. Download the package:
+
+    ```shell
+   go get github.com/ianlancetaylor/cgosymbolizer@latest
+    ```
+
+2. Add the following import anywhere in your program:
+
+    ```Go
+    import _ "github.com/ianlancetaylor/cgosymbolizer"
+    ```
+
+**Note**: This library is considered experimental. It can cause (infrequent) deadlocks in programs that use C++ exceptions, or that use libraries such as `tcmalloc`, which also collect call stacks.
+
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][9] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
@@ -112,3 +132,4 @@ The [Getting Started with Profiler][9] guide takes a sample service with a perfo
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /getting_started/profiler/
+[10]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview

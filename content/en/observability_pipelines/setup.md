@@ -123,7 +123,6 @@ See [Vector Configurations][22] for more examples on setting up the three main V
 
 Connect your Vector configuration to Observability Pipelines by doing the following:
 
-- In Datadog, [create a service account][23], if you don’t already have one. A service account is required to generate the application keys necessary to connect Vector to Observability Pipelines. 
 - Go to [Observability Pipelines][24].
 - Click **Create Configuration**, and follow the in-app instructions to set up the configuration.
 
