@@ -153,7 +153,6 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
 
 `DD_SPAN_SAMPLING_RULES`
-: **TracerSettings property**: `SpanSamplingRule`<br>
 **Default**: `null`<br>
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
 For more information, see [Ingestion Mechanisms][1].<br>
