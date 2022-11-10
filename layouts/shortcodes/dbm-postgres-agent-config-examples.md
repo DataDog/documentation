@@ -67,6 +67,7 @@ instances:
     password: '<PASSWORD>'
     dbname: bar  # Default: `postgres`
     # dbstrict: true 
+```
 
 ### Working with hosts through a remote proxy
 When connecting to a database host through a remote proxy, it can be useful to set a custom hostname. Utilize the `reported_hostname` option to override the hostname detected by the agent.
