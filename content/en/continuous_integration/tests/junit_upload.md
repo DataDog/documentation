@@ -196,7 +196,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 See [Providing metadata with XPath expressions][9] for more details on the supported expressions.<br/>
 **Default**: (none)<br/>
 **Example**: `test.suite=/testcase/@classname`<br/>
-**Note**: Tags specified using `--xpath-tag` and with --tags or `DD_TAGS` environment variable are merged. xpath-tag gets the highest precedence, as the value is usually different for each test.
+**Note**: Tags specified using `--xpath-tag` and with `--tags` or `DD_TAGS` environment variable are merged. xpath-tag gets the highest precedence, as the value is usually different for each test.
 
 `--logs` **(beta)**
 : Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
@@ -355,7 +355,7 @@ Examples:
 {{< tabs >}}
 
 {{% tab "Test suite from @classname" %}}
-By default the `test.suite` tag of the tests is read from `<testsuite name="suite name">`. However some plugins might report a better value in `<testcase classname="TestSuite">`.
+By default, the `test.suite` tag of the tests is read from `<testsuite name="suite name">`. However, some plugins might report a better value in `<testcase classname="TestSuite">`.
 
 To change `test.suite` tags from `value 1`, `value 2` to `SomeTestSuiteClass`, `OtherTestSuiteClass`:
 
@@ -379,7 +379,7 @@ datadog-ci junit upload --service service_name \
 {{% /tab %}}
 
 {{% tab "Tag from attribute" %}}
-To add `custom_tag` to each test with values `value 1`, `value 2`.
+To add `custom_tag` to each test with values `value 1`, `value 2`:
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -399,7 +399,7 @@ datadog-ci junit upload --service service_name \
 {{% /tab %}}
 
 {{% tab "Tag from testsuite property" %}}
-To add `custom_tag` to each test with values `value 1`, `value 2`.
+To add `custom_tag` to each test with values `value 1`, `value 2`:
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -424,7 +424,7 @@ datadog-ci junit upload --service service_name \
   --xpath-tag custom_tag=/testcase/..//property[@name=\'prop\'] ./junit.xml
 {{< /code-block >}}
 
-**Note:** the escaping of quotes with `\'`. The quotes are required and bash removes them if not escaped.
+**Note:** The name must be in quotes. Bash requires quotes to be escaped using a backslash, for example `[@name='prop']` must be entered as `[@name=\'prop\'].
 {{% /tab %}}
 
 {{< /tabs >}}
