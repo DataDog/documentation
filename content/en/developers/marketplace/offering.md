@@ -1,5 +1,5 @@
 ---
-title: Create A Marketplace Offering
+title: Develop A Marketplace Offering
 type: documentation
 description: Learn how to develop and publish an offering on the Datadog Marketplace.
 further_reading:
@@ -95,7 +95,7 @@ A Datadog API key is required to submit data to a Datadog API endpoint, and an a
 
 If you are developing an offering that does not use the Datadog Agent (such as a Datadog App, SaaS license, professional service, or an API-based integration) to collect data, you only need to create an informational tile listing. These tile-only listings require Datadog users to install and configure the integration outside of Datadog.
 
-The Datadog Development Toolkit offers a command option to create tile-only scaffolding: `ddev create -t tile -v2 "<Offering Name>"`. When using this command, you only receive the files related to your tile, instead of all the files used to build a full Agent-based data integration.
+The Datadog Development Toolkit offers a command option to create tile-only scaffolding: `ddev create -t tile "<Offering Name>"`. When using this command, you only receive the files related to your tile, instead of all the files used to build a full Agent-based data integration.
 
 ### Build a bi-directional data integration
 
@@ -168,7 +168,7 @@ After creating a `README.md` file, follow these instructions to complete your li
 
 #### Media Carousel
 
-Listings created with the `-v2` flag allow you to implement a media carousel of images and a video into your integration tile. 
+A media carousel of images and a video is included in your integration tile. 
 
 Technology Partners can add a video to an integration tile. Do not upload the video in your pull request. Instead, send a copy or a download link of your video to <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. The Marketplace team replies with a `vimeo_link` which you can add in the `manifest.json` file to include the video in the media carousel.
 
@@ -183,7 +183,7 @@ The video must meet the following requirements:
 | Video Length       | The maximum video length is 60 seconds.                                               |
 | Description        | The maximum number of characters allowed is 300.                                      |
 
-Technology Partners can add up to eight images (seven if you are including a video) in an integration tile's  media carousel. When naming image files, do not use spaces. Instead, use underscores (`_`). 
+Technology Partners can add up to eight images (seven if you are including a video) in an integration tile's media carousel. When naming image files, do not use spaces. Instead, use underscores (`_`). 
 
 The images must meet the following requirements:
 
@@ -219,7 +219,7 @@ For more information, see [Integrations Assets Reference][19].
 
 ### Open a pull request
 
-Open a pull request that contains your integration tile's asset files (such as images, not videos) in the `marketplace` repository. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
+Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][16]. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
 
 To request access to the Azure DevOps pipeline, leave a comment in the pull request requesting access.
 
@@ -227,11 +227,11 @@ To request access to the Azure DevOps pipeline, leave a comment in the pull requ
 
 Once your pull request passes all the checks, reviewers from the `Datadog/agent-integrations`, `Datadog/marketplace-review`, and `Datadog/documentation` teams provide suggestions and feedback on best practices. 
 
-Once you have addressed the feedback and re-requested reviews, these reviewers approve your pull request and the integration tile is enabled in your sandbox account. This allows you to validate and preview additional changes in the integation tile on the Datadog Marketplace before your pull request is merged. 
+Once you have addressed the feedback and re-requested reviews, these reviewers approve your pull request. Contact the Marketplace team if you would like to preview the integration tile in your sandbox account. This allows you to validate and preview additional changes in the integration tile on the Datadog Marketplace before your pull request is merged. 
 
 ### Coordinate GTM opportunities
 
-Once a Marketplace integration tile is live, Technology Partners can meet with Datadog's Partner Marketing team to coordinate a joint go-to-market (GTM) strategy, which includes the following:
+Once a Marketplace tile is live, Technology Partners can meet with Datadog's Partner Marketing team to coordinate a joint go-to-market (GTM) strategy, which includes the following:
 
 - A Datadog quote for partner press releases
 - A blog post on the [Datadog Monitor][20]
