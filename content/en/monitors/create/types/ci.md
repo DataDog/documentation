@@ -141,19 +141,11 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Notifications behavior when there is no data
 
-A monitor that uses an event count for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor on pipeline error count with an evaluation window of five minutes will automatically resolve after five minutes without any data.
+A monitor that uses an event count for its evaluation query after the specified  period with no data will evaluate to 0, potentially resolving immediately.
 
-As CI pipeline data is usually sparse and can have relatively long periods with no data, this can result in monitor recovery notifications that might not be desired.
+In this case Datadog recommends using a formula like `(number of failures)/(number of all events)`, because if `(number of all events) = 0`, the division `x/0` cannot be evaluated and the monitor will keep the last known state.
 
-In these cases, Datadog recommends configuring the monitor notification to trigger only for alerts by wrapping the full message with the `{{#is_alert}}` and `{{/is_alert}}` directives.
-
-```text
-{{#is_alert}}
-This notification will only be sent for monitor alerts!
-{{/is_alert}}
-```
-
-**Note**: A monitor that uses a formula for its evaluation query will keep the last state (for example, **Alert**) if there is no data by default.
+For example, use a monitor on pipeline error rate rather than on pipeline error count.
 
 ## Further Reading
 
