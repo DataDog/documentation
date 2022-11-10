@@ -20,6 +20,8 @@ This page walks you through how to develop an offering on the Datadog Marketplac
 
 ## Development process
 
+To develop a Marketplace tile, follow these instructions below:
+
 1. [Choose a type of offering to list](#select-an-offering).
 2. Build an [Agent-based integration](#build-an-agent-based-integration), a [REST API-based integration](#build-a-rest-api-integration), a [Datadog App](#build-a-datadog-app), an [informational tile-only listing](#build-an-informational-tile-only-listing), or a [bi-directional data integration](#build-a-bi-directional-data-integration).
 3. [Access the Marketplace repository and set up a directory](#set-up-a-directory-and-clone-the-marketplace-repository).
@@ -77,19 +79,19 @@ Datadog adds additional Datadog-specific extensions to the StatsD protocol, incl
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information about Datadog Agent-based integrations, see [Introduction to Agent-based Integrations][3].
+For more information about Datadog Agent-based integrations, see [Introduction to Agent-based Integrations][2].
 
 ### Build a REST API integration
 
-Use an [API integration][4] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
+Use an [API integration][3] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
  
 Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#) once your development work is complete.
  
-A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][5] in a Marketplace tile instead.
+A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][4] in a Marketplace tile instead.
 
 ### Build a Datadog App
 
-[Datadog Apps][6] are custom dashboard widgets that are developed in the [Datadog Developer Platform][7]. Once your Datadog App is ready to publish, you need to create an informational tile-only listing on the **Integrations** or **Marketplace** page.
+[Datadog Apps][5] are custom dashboard widgets that are developed in the [Datadog Developer Platform][6]. Once your Datadog App is ready to publish, you need to create an informational tile-only listing on the **Integrations** or **Marketplace** page.
 
 ### Build an informational tile-only listing
 
@@ -103,27 +105,27 @@ All Datadog integrations must be bi-directional, meaning that integrations can p
 
 Integrations send the following types of data to Datadog:
 
-- [Metrics][8]
-- [Logs][9]
-- [Events][10]
-- [Service Checks][11]
-- [Traces][12]
-- [Incidents][13]
-- [Security Events][14]
+- [Metrics][7]
+- [Logs][8]
+- [Events][9]
+- [Service Checks][10]
+- [Traces][11]
+- [Incidents][12]
+- [Security Events][13]
 
-For more information about requesting accessing to the Marketplace repository, see the [Marketplace documentation][15].
+For more information about requesting accessing to the Marketplace repository, see the [Marketplace documentation][14].
 
 ### Set up a directory and clone the Marketplace repository
 
 The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps. 
 
-Once you have been granted access to the [Marketplace repository][16], create the `dd` directory and clone the `marketplace` repo by using `git clone git@github.com:DataDog/marketplace.git`. 
+Once you have been granted access to the [Marketplace repository][15], create the `dd` directory and clone the `marketplace` repo by using `git clone git@github.com:DataDog/marketplace.git`. 
 
 ### Install and run the Datadog development toolkit
 
 The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing a data integration by generating a skeleton of your integration tile's assets and metadata.
 
-First, ensure that [Python v3.8 and later][17] is installed. To avoid potential environment conflicts, create a virtual environment in the directory where you cloned the Marketplace repository by running `python3 -m pip install virtualenv --user`.
+First, ensure that [Python v3.8 and later][16] is installed. To avoid potential environment conflicts, create a virtual environment in the directory where you cloned the Marketplace repository by running `python3 -m pip install virtualenv --user`.
 
 Then, name and activate the virtual environment with these commands:
 
@@ -132,7 +134,7 @@ virtualenv [name of env]
 source [name of env]/bin/activate
 ```
 
-To install the latest released version of the Datadog Development Toolkit from [PyPI][18], run `python -m pip install --upgrade "datadog-checks-dev[cli]"`.
+To install the latest released version of the Datadog Development Toolkit from [PyPI][17], run `python -m pip install --upgrade "datadog-checks-dev[cli]"`.
 
 If you are using the Z Shell, you may need to use escaped characters by running `python -m pip install --upgrade datadog-checks-dev\[cli\]`.
 
@@ -159,12 +161,14 @@ The `ddev` command generates a skeleton of the following folders and files belon
 
 #### README
 
-After creating a `README.md` file, follow these instructions to complete your listing:
+Once you have created a `README.md` file, add the following sections as H2s (`##`) and fill out the content that is displayed in the Marketplace tile:
 
-1. Write a description under an `## Overview` header that describes the value your offering provides to users and benefits to purchasing and installing the integration in the Datadog Marketplace (for example, out-of-the-box dashboards for more comprehensive observability, replays of user sessions, logs, alerts, and more). This information is displayed in the **Overview** tab on the integration tile.
-2. Include all the steps to setting up your Marketplace integration under a `##Setup` header that includes information divided into H3 headings (`###`) about installing the integration using the in-app integration tile, configuring the integration with the appropriate roles and permissions in your Datadog organization, out-of-the-box Datadog features that users who purchased and installed the integration can access (such as metrics, events, monitors, logs, dashboards, and more), and uninstalling the integration.
-3. Specify the types of data collected by your Marketplace integration under a `##Data Collected` header that includes information divided into H3 headings (`###`) about out-of-the-box metrics, events, and service checks. You can optionally include additional types of data collected such as logs, monitors, and dashboards. If your Marketplace integration does not provide these, use the following text in that particular section: `The [Datadog Marketplace] integration does not include any [events or service checks]`.
-4. At the end of the README, provide some contact information under a `###Support` header that includes an email to contact Support, a phone number to your company, or a link to your company's documentation or blog post.
+| Header Name | Header Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Overview        | Write a description under an `## Overview` header that describes the value your offering provides to users and benefits to purchasing and installing the integration in the Datadog Marketplace (for example, out-of-the-box dashboards, replays of user sessions, logs, alerts, and more). <br><br>This information is displayed in the **Overview** tab on the integration tile.                                                                                                                                                                                                         |
+| Data Collected  | Specify the types of data collected by your Marketplace integration that includes information about out-of-the-box metrics, events, or service checks. <br><br>You can include additional types of data collected such as logs, monitors, dashboards, and more. If your Marketplace integration does not provide any of these, you do not need to add a Data Collected section.                                                                                                                                                                                                            |
+| Support         | Provide contact information that includes an email to your Support team, a phone number to your company, a link to your company's documentation or blog post, and more help information in a bulleted list format.                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Setup           | Include all the steps to setting up your Marketplace integration that includes information divided into H3 headings (`###`). Standard topics include:<br><br>- Installing the integration using the in-app integration tile. <br>- Configuring the integration with the appropriate roles and permissions in your Datadog organization.<br>- Accessing out-of-the-box Datadog features that users who purchased and installed the integration can access (such as metrics, events, monitors, logs, dashboards, and more).<br>- Uninstalling the integration using the in-app integration tile. |
 
 #### Media Carousel
 
@@ -215,11 +219,11 @@ Follow this template to define the `media` object in the media carousel which in
     ],
 {{< /code-block >}}
 
-For more information, see [Integrations Assets Reference][19].
+For more information, see [Integrations Assets Reference][18].
 
 ### Open a pull request
 
-Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][16]. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
+Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][15]. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
 
 To request access to the Azure DevOps pipeline, leave a comment in the pull request requesting access.
 
@@ -234,7 +238,7 @@ Once you have addressed the feedback and re-requested reviews, these reviewers a
 Once a Marketplace tile is live, Technology Partners can meet with Datadog's Partner Marketing team to coordinate a joint go-to-market (GTM) strategy, which includes the following:
 
 - A Datadog quote for partner press releases
-- A blog post on the [Datadog Monitor][20]
+- A blog post on the [Datadog Monitor][19]
 - Amplification of social media posts
 
 ## Further Reading
@@ -242,21 +246,21 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/marketplace/
-[3]: /developers/integrations/
-[4]: /api/latest/
-[5]: /developers/integrations/oauth_for_data_integrations/
-[6]: /developers/datadog_apps/
-[7]: https://app.datadoghq.com/apps/
-[8]: /api/latest/metrics/
-[9]: /api/latest/logs/
-[10]: /api/latest/events/
-[11]: /api/latest/service-checks/
-[12]: /tracing/guide/send_traces_to_agent_by_api/
-[13]: /api/latest/incidents/
-[14]: /api/latest/security-monitoring/
-[15]: /developers/marketplace/#request-access-to-marketplace
-[16]: https://github.com/Datadog/marketplace
-[17]: https://www.python.org/downloads/
-[18]: https://pypi.org/project/datadog-checks-dev/
-[19]: /developers/integrations/check_references/#manifest-file
-[20]: https://datadoghq.com/blog/
+[2]: /developers/integrations/
+[3]: /api/latest/
+[4]: /developers/integrations/oauth_for_data_integrations/
+[5]: /developers/datadog_apps/
+[6]: https://app.datadoghq.com/apps/
+[7]: /api/latest/metrics/
+[8]: /api/latest/logs/
+[9]: /api/latest/events/
+[10]: /api/latest/service-checks/
+[11]: /tracing/guide/send_traces_to_agent_by_api/
+[12]: /api/latest/incidents/
+[13]: /api/latest/security-monitoring/
+[14]: /developers/marketplace/#request-access-to-marketplace
+[15]: https://github.com/Datadog/marketplace
+[16]: https://www.python.org/downloads/
+[17]: https://pypi.org/project/datadog-checks-dev/
+[18]: /developers/integrations/check_references/#manifest-file
+[19]: https://datadoghq.com/blog/

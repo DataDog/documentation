@@ -20,9 +20,9 @@ further_reading:
 
 The Datadog Marketplace is a digital marketplace where Datadog Technology Partners can list their offerings to Datadog users. Datadog customers can access integration tiles on the [**Integrations** page][1] or the [**Marketplace** page][2]. 
 
-{{< vimeo 445376146 >}}
+{{< img src="developers/marketplace/marketplace_overview.png" alt="The Datadog Marketplace page" style="width:100%" >}}
 
-</br> While the **Integrations** page includes data integrations and Datadog Apps built by Datadog and Technology Partners at no cost, the **Marketplace** page is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings including data integrations, Datadog Apps, software, and professional services. 
+While the **Integrations** page includes data integrations and Datadog Apps built by Datadog and Technology Partners at no cost, the **Marketplace** page is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings including data integrations, Datadog Apps, software, and professional services. 
 
 ## Join the Datadog partner network
 
