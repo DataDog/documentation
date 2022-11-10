@@ -687,6 +687,9 @@ The available [environment variables][11] depend on the version of the C++ trace
 
 | Istio Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.15.x | v1.2.1 |
+| v1.14.x | v1.2.1 |
+| v1.13.x | v1.2.1 |
 | v1.12.x | v1.2.1 |
 | v1.11.x | v1.2.1 |
 | v1.10.x | v1.2.1 |
