@@ -20,12 +20,13 @@ The following are guidelines for building the integration:
 
 1. The `source` and `service` tags must be in lowercase. 
 
+2. Set the `source` tag to the integration name.
+
     Datadog recommends that the `source` tag be set to `<integration_name>` and that the `service` tag be set to the name of the service that produces the telemetry. For example, the `service` tag can be used to differentiate logs by product line. 
     
     For cases where there aren't different services, set `service` to the same value as `source`. The `source` and `service` tags must be non-editable by the user because the tags are used to enable integration pipelines and dashboards. The tags can be set in the payload or through the query parameter, for example, `?ddsource=example&service=example`.
 
-
-2. The integration must support all Datadog sites.
+3. The integration must support all Datadog sites.
 
     The user must be able to choose between the different Datadog sites whenever applicable. See [Getting Started with Datadog Sites][2] for more information about site differences. The endpoints for each site are as follows:
     | Site    | HTTP Endpoint                           |
@@ -36,19 +37,19 @@ The following are guidelines for building the integration:
     | US1-FED | http-intake.logs.ddog-gov.datadoghq.com |
     | EU1     | http-intake.logs.datadoghq.eu           |
 
-3. Allow the user to attach custom tags while setting up the integration.
+4. Allow the user to attach custom tags while setting up the integration.
 
     Datadog recommends that manual user tags be sent as key-value attributes in the JSON body. If it's not possible to add manual tags to the logs, you can send the tags using the `ddtags=<TAGS>` query parameter. See the [Send Logs API documentation][1] for examples.
 
-4. Send data without arrays in the JSON body whenever possible. 
+5. Send data without arrays in the JSON body whenever possible. 
 
     While it's possible to send some data as tags, Datadog recommends that data be sent in the JSON body and avoid using arrays. This gives users greater flexibility with the operations they can carry out on the data in the Datadog log platform. 
 
-5. Do not log Datadog API keys.
+6. Do not log Datadog API keys.
 
     Datadog API keys can either be passed in the header or as part of the HTTP path. See [Send Logs API documentation][1] for examples. Datadog recommends using methods that do not log the API key in your setup.
 
-6. Do not use Datadog application keys.
+7. Do not use Datadog application keys.
 
     The Datadog application key is different from the API key and is not required to send logs using the HTTP endpoint. 
 
