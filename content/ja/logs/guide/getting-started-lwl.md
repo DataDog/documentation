@@ -13,16 +13,16 @@ further_reading:
   tag: ドキュメント
   text: 収集されたログからメトリクスを生成する方法
 kind: ガイド
-title: Logging Without LimitsTM ガイド
+title: Logging Without Limits™ ガイド
 ---
 
-{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without LimitsTM" >}}
+{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
 
 ## 概要
 
-クラウドベースのアプリケーションは、毎分数百万というペースでログを生成できますが。すべてのログに価値があるわけではなく、またその重要度もマチマチです。そこで、Datadog の [Logging without LimitsTM][1] は、[ログの取り込みとインデックス化][2]を切り離すことで柔軟に対応します。
+クラウドベースのアプリケーションは、毎分数百万というペースでログを生成できますが。すべてのログに価値があるわけではなく、またその重要度もマチマチです。そこで、Datadog の [Logging without Limits™][1] は、[ログの取り込みとインデックス化][2]を切り離すことで柔軟に対応します。
 
-このガイドでは、ログエクスポローラーを構造化し KPI をモニターするのに役立つ、Logging Without LimitsTM の主要な機能、 [パターン](#2-大量のログパターンを識別)、[除外フィルター](#3-除外フィルターログパターンを作成)、[ログベースのカスタムメトリクス](#4-除外されたログを追跡するメトリクスを作成)、 [モニター](#異常検知モニターを作成)を紹介します。
+このガイドでは、ログエクスポローラーを構造化し KPI をモニターするのに役立つ、Logging Without Limits™ の主要な機能、 [パターン](#2-大量のログパターンを識別)、[除外フィルター](#3-除外フィルターログパターンを作成)、[ログベースのカスタムメトリクス](#4-除外されたログを追跡するメトリクスを作成)、 [モニター](#異常検知モニターを作成)を紹介します。
 
 ## 1. 最多ログのサービスステータスを特定
 
@@ -107,7 +107,7 @@ title: Logging Without LimitsTM ガイド
 
 ## まとめ
 
-ここでは、Logging without LimitsTM を以下に適用する方法について説明しました。
+ここでは、Logging without Limits™ を以下に適用する方法について説明しました。
 
 1. [最多ログのサービスステータスを特定](#1-identify-your-most-logged-service-status)
 2. [大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
@@ -116,7 +116,7 @@ title: Logging Without LimitsTM ガイド
   * [新しいログベースのメトリクスを追加](#add-a-new-log-based-metric)
   * [異常検知モニターの作成](#create-an-anomaly-detection-monitor)
 
-Logging Without LimitsTM の詳細やログエクスポローラー、Live Tail、ログパターンの活用方法については、以下のリンクをご覧ください。
+Logging Without Limits™ の詳細やログエクスポローラー、Live Tail、ログパターンの活用方法については、以下のリンクをご覧ください。
 
 ## その他の参考資料
 
