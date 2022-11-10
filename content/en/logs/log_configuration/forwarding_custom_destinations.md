@@ -46,7 +46,7 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 8. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
     - Basic Authentication: Provide the username and password for the account to which you want to send logs.
     - Request Header: Provide the header name and value. For example, if you use the Authorization header and the username for the account to which you want to send logs is `myaccount` and the password is `mypassword`: 
-        -  Enter `Authorization` for the **Header Name**. 
+        - Enter `Authorization` for the **Header Name**. 
         - The header value is in the format of `Basic username:password`, where `username:password` is encoded in base64. For this example, the header value is `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
   9. Click **Save**.
 
