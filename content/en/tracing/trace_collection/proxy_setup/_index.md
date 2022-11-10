@@ -280,6 +280,11 @@ The available [environment variables][3] depend on the version of the C++ tracer
 
 | Envoy Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.24 | v1.2.1 |
+| v1.23 | v1.2.1 |
+| v1.22 | v1.2.1 |
+| v1.21 | v1.2.1 |
+| v1.20 | v1.2.1 |
 | v1.19 | v1.2.1 |
 | v1.18 | v1.2.1 |
 | v1.17 | v1.1.5 |
