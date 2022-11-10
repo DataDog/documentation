@@ -27,7 +27,7 @@ Upgrading to a given Agent 7 minor version:
 
 Upgrading to the latest Agent 7 minor version:
 
-: bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
+: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
