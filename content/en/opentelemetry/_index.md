@@ -1,15 +1,22 @@
 ---
 title: OpenTelemetry in Datadog
 kind: Documentation
-aliases:
-  - /tracing/trace_collection/open_standards/
 further_reading:
-  - link: //
-    tag: Documentation
-    text:  
-  - link: 
-    tag: Blog
-    text: 
+- link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
+  tag: "Blog"
+  text: "Datadog's partnership with OpenTelemetry"
+- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+  tag: "Blog"
+  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter 
+- link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/"
+  tag: "Blog"
+  text: "Forward logs from the OpenTelemetry Collector with the Datadog Exporter"
+- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
+  tag: "Blog"
+  text: "OTLP ingestion in the Agent"
+- link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
+  tag: "Blog"
+  text: "Learn more about AWS’s managed Lambda Layer for OpenTelemetry"
 ---
 
 ## Overview

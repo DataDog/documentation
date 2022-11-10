@@ -6,15 +6,9 @@ further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "OpenTelemetry"
   text: "Collector documentation"
-- link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
-  tag: "Blog"
-  text: "Datadog's partnership with OpenTelemetry"
 - link: "/tracing/other_telemetry/connect_logs_and_traces/opentelemetry"
   tag: "Documentation"
   text: "Connect OpenTelemetry Traces and Logs"
-- link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
-  tag: "Blog"
-  text: "Learn more about AWS’s managed Lambda Layer for OpenTelemetry"
 aliases:
 - /tracing/setup_overview/open_standards/
 ---
