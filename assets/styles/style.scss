@@ -19,7 +19,8 @@
 @import 'vendor/chroma-styles';
 
 // docsearch
-// @import 'main_docsearch';
+@import 'main_docsearch';
+@import 'algolia_instantsearch';
 
 // global to all pages
 @import 'pages/global';
