@@ -136,11 +136,11 @@ spec:
 [2]: https://www.cncf.io/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/reference/specification/logs/overview/#third-party-application-logs
-[5]: https://docs.datadoghq.com/tracing/trace_collection/open_standards/otel_collector_datadog_exporter/#running-the-collector
-[6]: https://docs.datadoghq.com/tracing/trace_collection/open_standards/otel_collector_datadog_exporter/#configuring-the-datadog-exporter
-[7]: https://docs.datadoghq.com/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
+[5]: /opentelemetry/otel_collector_datadog_exporter/#running-the-collector
+[6]: /opentelemetry/otel_collector_datadog_exporter/#configuring-the-datadog-exporter
+[7]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
 [8]: https://opentelemetry.io/docs/instrumentation/
-[9]: https://docs.datadoghq.com/logs/log_collection/?tab=host
+[9]: /logs/log_collection/?tab=host
 [10]: /logs/log_configuration/parsing/
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs/operators
 [12]: https://opentelemetry.io/docs/reference/specification/logs/data-model/

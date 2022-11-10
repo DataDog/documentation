@@ -155,8 +155,8 @@ The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and 
 [2]: https://www.cncf.io/
 [3]: https://www.datadoghq.com/pricing/?product=infrastructure#infrastructure
 [4]: https://opentelemetry.io/docs/instrumentation/
-[5]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-[6]: /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/?tab=host#sending-otlp-traces-from-the-application-to-datadog-agent
+[5]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
+[6]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host#sending-otlp-traces-from-the-application-to-datadog-agent
 [7]: https://opentelemetry.io/docs/collector/getting-started/#deployment
 [8]: https://opentelemetry.io/docs/collector/configuration/
 [9]: https://app.datadoghq.com/organization-settings/api-keys
