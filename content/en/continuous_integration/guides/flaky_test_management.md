@@ -37,14 +37,15 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table for the current branch or default branch of the repository.
 
-### In the Test Runs page
+### Test Runs page
 
-1. In the facets list on the left sidebar, in the "Test" section, expand the "New Flaky" facet and check `true`
-2. This displays all test runs that exhibited flakiness behavior for the first time as per the definition above.
+1. Navigate to the [Test Runs][1] page.
+2. In the facets list on the left sidebar, in the **Test** section, expand the **New Flaky** facet and check `true`.
+All test runs that exhibited flakiness behavior for the first time as per the definition above are displayed.
 
-### In the Branches page
+### Branches page
 
-1. On the Tests page, select the **Branches** view.
+1. On the [Tests][2] page, select the **Branches** view.
 
 2. Filter the table to see branches, services, or commits of interest to you.
 
@@ -62,18 +63,22 @@ Click on the **New Flaky** number and then click **Ignore flaky tests**.
 
 Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository.
 
-### In the Test Runs page
+### Test Runs page
 
-1. In the facets list on the left sidebar, in the "Test" section, expand the "Known Flaky" facet and check `true`
-2. Failed test runs that were known to be flaky as per the definition above are displayed.
+1. Navigate to the [Test Runs][1] page.
+2. In the facets list on the left sidebar, in the **Test** section, expand the **Known Flaky** facet and check `true`.
+Failed test runs that were known to be flaky as per the definition above are displayed.
 
 
-### In the Branches page
+### Branches page
 
-1. On the Tests page, select the **Branches** view.
+1. On the [Tests][2] page, select the **Branches** view.
 
 2. Filter the table to see any branches, services, or commits of interest.
 
 3. The **Failed** column contains the number of failed tests and known flaky failed tests in the latest commit.
 
 {{< img src="ci/known-flaky-failed-tests.png" alt="CI Tests Branches view with a branch selected and a text box in the Failed column displaying 1 tests failed and 1 known flaky" style="width:100%;">}}
+
+[1]: https://app.datadoghq.com/ci/test-runs
+[2]: https://app.datadoghq.com/ci/test-services
