@@ -81,7 +81,7 @@ Thresholds
 : The percentage of points that need to be anomalous for alerting, warning, and recovery.
 
 ### Seasonality
-<div class="alert alert-info">Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient. For example, a weekly seasonality requires at least two weeks of data.</div>
+<div class="alert alert-info">**Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient. For example, a weekly seasonality requires at least two weeks of data.</div>
 
 Hourly
 : The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
