@@ -93,7 +93,7 @@ Define the configuration of your browser test.
    - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels. 
    - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
    - For a small mobile device, the dimensions are 320 pixels x 550 pixels.  
-6. Select **managed and private locations**: Set locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks. 
+6. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks. 
 
    {{% managed-locations %}} 
   
