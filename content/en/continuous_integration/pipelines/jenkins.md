@@ -20,9 +20,26 @@ further_reading:
 {{< /site-region >}}
 
 ## Compatibility
+**Supported Jenkins versions**
+: Jenkins >= 2.346.1
 
-Supported Jenkins versions:
-* Jenkins >= 2.346.1
+**Trace collection**
+: Description placeholder
+
+**Queue time**
+: View amount of time pipeline jobs sit in the queue before processing
+
+**Logs correlation**
+: Correlate pipeline spans to logs
+
+**Custom spans**
+: Configure custom spans
+
+**Custom predefined tags**
+: Configure custom tags through the Jenkins UI plug-in
+
+**Parameters**
+: Set custom `env` or `service` parameters
 
 ## Prerequisite
 
