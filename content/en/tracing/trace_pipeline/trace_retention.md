@@ -65,7 +65,7 @@ The `Spans Indexed` column for each retention filter is powered by the `datadog.
 
 ### Datadog intelligent retention filter
 
-The intelligent retention filter is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. All [service entry spans][5] are indexed for the traces kept by the intelligent retention filter.
+The intelligent retention filter is always active for your services, and it keeps a proportion of traces to help you monitor the health of your applications. 
 
 For 30 days, intelligent retention retains:
 
