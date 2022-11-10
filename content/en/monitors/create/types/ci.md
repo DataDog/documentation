@@ -141,7 +141,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Notifications behavior when there is no data
 
-A monitor that uses an event count for its evaluation query after the specified  period with no data will evaluate to 0, potentially resolving immediately.
+A monitor that uses an event count for its evaluation query after the specified period with no data will evaluate to 0, potentially resolving immediately.
 
 In this case Datadog recommends using a formula like `(number of failures)/(number of all events)`, because if `(number of all events) = 0`, the division `x/0` cannot be evaluated and the monitor will keep the last known state.
 
