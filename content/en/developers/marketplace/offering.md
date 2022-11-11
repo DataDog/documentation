@@ -83,7 +83,7 @@ A Datadog API key is required to submit data to a Datadog API endpoint, and an a
 
 ### Build a Datadog App
 
-[Datadog Apps][5] are custom dashboard widgets that are developed in the [Datadog Developer Platform][6]. Once your Datadog App is ready to publish, you need to create an informational tile-only listing on the **Integrations** or **Marketplace** page.
+[Datadog Apps][5] are custom dashboard widgets that are developed in the [Datadog Developer Platform][6]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#build-an-informational-tile-only-listing) on the **Integrations** or **Marketplace** page.
 
 ### Build an informational tile-only listing
 
