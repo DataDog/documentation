@@ -1,5 +1,3 @@
-## Example Agent Configurations
-
 ### One agent connecting to multiple hosts
 To connect to multiple hosts, create an entry for each host in the Postgres integration config.
 ```yaml
