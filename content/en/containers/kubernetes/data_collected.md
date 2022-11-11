@@ -55,7 +55,7 @@ Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics
 
 ## Events
 
-As the 5.17.0 release, Datadog Agent now supports built in [leader election option][9] for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead, Agents will coordinate to ensure only one Agent instance is gathering events at a given time, events below will be available:
+As the 5.17.0 release, Datadog Agent now supports built in [leader election option][1] for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead, Agents will coordinate to ensure only one Agent instance is gathering events at a given time, events below will be available:
 
 - Backoff
 - Conflict
@@ -97,3 +97,5 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/documentation/blob/master/content/en/containers/cluster_agent/event_collection.md
