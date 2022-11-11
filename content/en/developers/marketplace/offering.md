@@ -51,21 +51,17 @@ Choose from the following offering types to create an integration tile that repr
 {{< tabs >}}
 {{% tab "OpenMetrics check" %}}
 
-An [OpenMetrics check][1] is suitable for gathering telemetry data from existing applications that expose metrics using the Open Metrics standard.
+An [OpenMetrics check][20] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
 
 
-[1]: https://docs.datadoghq.com/developers/custom_checks/prometheus/
-{{% /tab %}}
-{{% tab "Python Check" %}}
+#### Python Check
 
-A [Python check][1] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
+A [Python check][21] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
 
 
-[1]: https://docs.datadoghq.com/developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
-{{% /tab %}}
-{{% tab "DogStatsD" %}}
+#### DogStatsD
 
-[DogStatsD][1] is suitable for applications that already emit telemetry using the StatsD protocol. 
+[DogStatsD][22] is suitable for applications that already emit telemetry using the StatsD protocol. 
 
 Datadog adds additional Datadog-specific extensions to the StatsD protocol, including the following:
 
@@ -75,9 +71,6 @@ Datadog adds additional Datadog-specific extensions to the StatsD protocol, incl
 - Tagging
 
 
-[1]: https://docs.datadoghq.com/developers/dogstatsd/
-{{% /tab %}}
-{{< /tabs >}}
 
 For more information about Datadog Agent-based integrations, see [Introduction to Agent-based Integrations][2].
 
@@ -263,3 +256,6 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [17]: https://pypi.org/project/datadog-checks-dev/
 [18]: /developers/integrations/check_references/#manifest-file
 [19]: https://datadoghq.com/blog/
+[20]: /developers/custom_checks/prometheus/
+[21]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
+[22]: /developers/dogstatsd/
