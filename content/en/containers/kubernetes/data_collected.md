@@ -98,4 +98,4 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/documentation/blob/master/content/en/containers/cluster_agent/event_collection.md
+[1]: https://www.datadoghq.com/blog/datadog-cluster-agent/
