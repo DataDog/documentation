@@ -335,7 +335,7 @@ In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable
 
 The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][10] expression within the ones supported.
 
-XPath syntax is used for familiarity but only a limited subset of expressions are supported:
+While XPath syntax is used for familiarity, only the following expressions are supported:
 
 
 `/testcase/@attribute-name`
