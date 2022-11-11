@@ -48,8 +48,7 @@ Choose from the following offering types to create an integration tile that repr
 
 ### Build an Agent-based integration
 
-{{< tabs >}}
-{{% tab "OpenMetrics check" %}}
+#### OpenMetrics check
 
 An [OpenMetrics check][20] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
 
