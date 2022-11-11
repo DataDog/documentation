@@ -49,7 +49,7 @@ Choose from the following offering types to create an integration tile that repr
 ### Build an Agent-based integration
 
 {{< tabs >}}
-{{% tab "Datadog Agent-Based Integration" %}}
+{{% tab "OpenMetrics check" %}}
 
 An [OpenMetrics check][1] is suitable for gathering telemetry data from existing applications that expose metrics using the Open Metrics standard.
 
@@ -85,7 +85,7 @@ For more information about Datadog Agent-based integrations, see [Introduction t
 
 Use an [API integration][3] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
  
-Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#) once your development work is complete.
+Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#build-an-informational-tile-only-listing) once your development work is complete.
  
 A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][4] in a Marketplace tile instead.
 
@@ -95,7 +95,7 @@ A Datadog API key is required to submit data to a Datadog API endpoint, and an a
 
 ### Build an informational tile-only listing
 
-If you are developing an offering that does not use the Datadog Agent (such as a Datadog App, SaaS license, professional service, or an API-based integration) to collect data, you only need to create an informational tile listing. These tile-only listings require Datadog users to install and configure the integration outside of Datadog.
+If you are developing an offering that does not use the Datadog Agent (such as a Datadog App, SaaS license, professional service, or an API-based integration), you only need to create an informational tile listing. These tile-only listings require Datadog users to install and configure the integration outside of Datadog, and listings for SaaS licenses and professional services do not collect any data.
 
 The Datadog Development Toolkit offers a command option to create tile-only scaffolding: `ddev create -t tile "<Offering Name>"`. When using this command, you only receive the files related to your tile, instead of all the files used to build a full Agent-based data integration.
 
@@ -113,11 +113,10 @@ Integrations send the following types of data to Datadog:
 - [Incidents][12]
 - [Security Events][13]
 
-For more information about requesting accessing to the Marketplace repository, see the [Marketplace documentation][14].
 
 ### Set up a directory and clone the Marketplace repository
 
-The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps. 
+The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps. To request access to the [Marketplace repository][15], see the [Marketplace documentation][14].
 
 Once you have been granted access to the [Marketplace repository][15], create the `dd` directory and clone the `marketplace` repo by using `git clone git@github.com:DataDog/marketplace.git`. 
 
@@ -147,11 +146,11 @@ ddev config set repo marketplace
 
 ### Create an informational tile only listing
 
-For standalone SaaS licenses, Datadog Apps, professional services, and Datadog REST API-based integrations, the Datadog Development Toolkit creates the scaffolding for an informational tile-only listing. To create the informational tile-only listing's scaffolding, run `ddev create -t tile -v2 "<Offering Name>"` in the `marketplace` directory specified above.
+For standalone SaaS licenses, Datadog Apps, professional services, and Datadog REST API-based integrations, the Datadog Development Toolkit creates the scaffolding for an informational tile-only listing. To create the informational tile-only listing's scaffolding, run `ddev create -t tile "<Offering Name>"` in the `marketplace` directory specified above.
 
 ### Create a full data integration
 
-To generate a complete data integration's scaffolding, run `ddev create -v2 "<Offering Name>"` from the `marketplace` directory specified above.
+To generate a complete data integration's scaffolding, run `ddev create "<Offering Name>"` from the `marketplace` directory specified above.
 
 ### Populate the tile scaffolding
 
@@ -166,9 +165,9 @@ Once you have created a `README.md` file, add the following sections as H2s (`##
 | Header Name | Header Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 |-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Overview        | Write a description under an `## Overview` header that describes the value your offering provides to users and benefits to purchasing and installing the integration in the Datadog Marketplace (for example, out-of-the-box dashboards, replays of user sessions, logs, alerts, and more). <br><br>This information is displayed in the **Overview** tab on the integration tile.                                                                                                                                                                                                         |
+| Setup           | Include all the steps to setting up your Marketplace integration that includes information divided into H3 headings (`###`). Standard topics include:<br><br>- Installing the integration using the in-app integration tile. <br>- Configuring the integration with the appropriate roles and permissions in your Datadog organization.<br>- Accessing out-of-the-box Datadog features that users who purchased and installed the integration can access (such as metrics, events, monitors, logs, dashboards, and more).<br>- Uninstalling the integration using the in-app integration tile. |
 | Data Collected  | Specify the types of data collected by your Marketplace integration that includes information about out-of-the-box metrics, events, or service checks. <br><br>You can include additional types of data collected such as logs, monitors, dashboards, and more. If your Marketplace integration does not provide any of these, you do not need to add a Data Collected section.                                                                                                                                                                                                            |
 | Support         | Provide contact information that includes an email to your Support team, a phone number to your company, a link to your company's documentation or blog post, and more help information in a bulleted list format.                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Setup           | Include all the steps to setting up your Marketplace integration that includes information divided into H3 headings (`###`). Standard topics include:<br><br>- Installing the integration using the in-app integration tile. <br>- Configuring the integration with the appropriate roles and permissions in your Datadog organization.<br>- Accessing out-of-the-box Datadog features that users who purchased and installed the integration can access (such as metrics, events, monitors, logs, dashboards, and more).<br>- Uninstalling the integration using the in-app integration tile. |
 
 #### Media Carousel
 
@@ -187,7 +186,7 @@ The video must meet the following requirements:
 | Video Length       | The maximum video length is 60 seconds.                                               |
 | Description        | The maximum number of characters allowed is 300.                                      |
 
-Technology Partners can add up to eight images (seven if you are including a video) in an integration tile's media carousel. When naming image files, do not use spaces. Instead, use underscores (`_`). 
+Technology Partners can add up to eight images (seven if you are including a video) in an integration tile's media carousel.
 
 The images must meet the following requirements:
 
@@ -196,7 +195,7 @@ The images must meet the following requirements:
 | Type               | `.jpg` or `.png`.                                                                                                                                 |
 | Size               | The average is around 500KB. The maximum image size is 1MB.                                                                                       |
 | Dimensions         | The aspect ratio must be 16:9 exactly and fit these specifications:<br><br>- Width: 1440px<br>- Minimum height: 810px<br>- Maximum height: 2560px |
-| Name               | Use letters, numbers, underscores, and hyphens. Spaces are not allowed.                                                                           |
+| Name               | Use letters, numbers, underscores, and hyphens. Do not use spaces.                                                                           |
 | Color Mode         | RGB                                                                                                                                               |
 | Color Profile      | sRGB                                                                                                                                              |
 | Description        | The maximum number of characters allowed is 300.                                                                                                  |
@@ -227,7 +226,7 @@ Open a pull request that contains your integration tile's asset files (including
 
 To request access to the Azure DevOps pipeline, leave a comment in the pull request requesting access.
 
-### Obtain approval to merge
+### Review process
 
 Once your pull request passes all the checks, reviewers from the `Datadog/agent-integrations`, `Datadog/marketplace-review`, and `Datadog/documentation` teams provide suggestions and feedback on best practices. 
 
