@@ -1,7 +1,7 @@
 ## Example Agent Configurations
 
 ### One agent connecting to multiple hosts
-To connect to multiple hosts, create an entry for each host in the integration config.
+To connect to multiple hosts, create an entry for each host in the Postgres integration config.
 ```yaml
 init_config:
 instances:
@@ -24,7 +24,7 @@ instances:
 ```
 
 ### Running custom queries
-To collect custom metrics, use the `custom_queries` option.
+To collect custom metrics, use the `custom_queries` option. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
 ```yaml
 init_config:
 instances:
