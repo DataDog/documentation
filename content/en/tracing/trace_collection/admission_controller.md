@@ -15,6 +15,8 @@ First, configure the Datadog Agent. Our recommended method of installation for K
 ## Unified Service Tagging
 For your Kubernetes applications that send traces to Datadog Agent, you can configure the Datadog admission controller to inject Java, JavaScript, and Python libraries automatically. To inject the Java and Javascript libraries, use Datadog Cluster Agent v7.39+. To inject the Python library, use Datadog Cluster Agent v7.40+.
 
+For Python applications, we do not support uWSGI at this time.
+
 We highly recommend using our Unified Service Tagging approach to connect your infrastructure, applications and logs to get the maximum value out of Datadog. Learn how to apply [Unified Service Tagging][4] to your services by reading our documentation.
 
 ## Annotate your Pods
@@ -85,7 +87,7 @@ Possible options:
 ## Configure the Tracer from a Different Registry
 You may pull the APM library from a different registry using the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent.
 
-The default value is set to `grc.io/datadoghq`. The supported values are `docker.io/datadog` and `public.ecr.aws/datadog`.
+The default value is set to `grc.io/datadoghq`.
 
 [1]: /containers/cluster_agent/setup/?tab=helm
 [2]: /containers/cluster_agent/admission_controller/
