@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-If you are using Docker, there are several container images available through GCR, and ECR that you may want to use within your environment:
+If you are using Docker, there are several container images available through GCR and ECR that you may want to use within your environment:
 
 {{< tabs >}}
 {{% tab "GCR" %}}
@@ -58,7 +58,7 @@ If you are using Docker, there are several container images available through GC
 {{% /tab %}}
 {{< /tabs >}}
 
-If you need to use Docker Hub, see [the FAQ][1].
+If you need to use Docker Hub, see [Docker Hub][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
