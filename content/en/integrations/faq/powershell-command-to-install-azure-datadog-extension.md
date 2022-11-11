@@ -45,7 +45,7 @@ The Datadog Windows Agent Azure Extension will check that the `agentConfiguratio
 The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
 
 ```powershell
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "datadoghq.com"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "datadoghq.com"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
 ```
 
 **Note**: Once the Datadog Agent is installed, the configuration can only be changed when upgrading to a newer version.
@@ -76,7 +76,7 @@ The normal settings include:
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
-| `agentConfiguration` | URI | (optional) Url to the Azure blob contaning the Agent configuration as a zip. |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip. |
 | `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
@@ -85,13 +85,13 @@ The protected settings include:
 |----------|------|--------------|
 | `api_key`| String | Adds the Datadog API KEY to the configuration file. |
 
-**Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence. Also note that if an API key is set on the target machine, it's not possible to change it with the `api_key` setting.
+**Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence. If an API key is set on the target machine, it's not possible to change it with the `api_key` setting.
 
 ### Specifying a configuration URI
 This example shows how to specify a configuration for the Datadog Agent to use.
-The Datadog Agent configuration URI must be an Azure blob storage URI.
-The Datadog Linux Agent Azure Extension will check that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
+- The Datadog Agent configuration URI must be an Azure blob storage URI.
+- The Datadog Linux Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
+- The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
 
 ```bash
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<YOUR_DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
