@@ -329,6 +329,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{< /tabs >}}
 
+## Example Agent Configurations
+{{% dbm-sqlserver-agent-config-examples %}}
+
 ## Install the Google Cloud SQL integration
 
 To collect more comprehensive database metrics from Google Cloud SQL, install the [Google Cloud SQL integration][2].

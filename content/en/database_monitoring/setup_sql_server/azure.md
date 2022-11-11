@@ -391,6 +391,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{< /tabs >}}
 
+## Example Agent Configurations
+{{% dbm-sqlserver-agent-config-examples %}}
+
 ## Install the Azure integration
 
 To collect more comprehensive database metrics and logs from Azure, install the [Azure integration][1].
