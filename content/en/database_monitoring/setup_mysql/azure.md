@@ -327,6 +327,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the **Checks** section. Or visit the [Databases][7] page to get started.
 
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
+
 ## Install the Azure MySQL Integration
 
 To collect more comprehensive database metrics from Azure, install the [MySQL integration][8] (optional).
