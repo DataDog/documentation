@@ -1,27 +1,29 @@
 ### Connecting with DSN using the ODBC driver
 1. Configure the `odbc.ini` file based on your DSN settings.
-- Example:
-  ```text
-  [DATADOG]
-  Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.1.so.1.1
-  Server=127.0.0.1
-  Port=1433
-  User=datadog
-  Password=Password
-  ```
+
+    Example: 
+    ```text
+    [DATADOG]
+    Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.1.so.1.1
+    Server=127.0.0.1
+    Port=1433
+    User=datadog
+    Password=Password
+    ```
 2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
 3. Configure the SQL Server integration config to include the DSN.
-- Example:
-  ```yaml
-  instances:
-    - dbm: true
-      host: 'localhost,1433'
-      username: datadog
-      password: '<PASSWORD>'
-      connector: 'odbc'
-      driver: 'ODBC Driver 18 for SQL Server'
-      dsn: 'DATADOG'
-  ```
+  
+    Example:
+    ```yaml
+    instances:
+      - dbm: true
+        host: 'localhost,1433'
+        username: datadog
+        password: '<PASSWORD>'
+        connector: 'odbc'
+        driver: 'ODBC Driver 18 for SQL Server'
+        dsn: 'DATADOG'
+    ```
 4. Restart the agent.
 
 ### Using AlwaysOn
