@@ -141,11 +141,12 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Notifications behavior when there is no data
 
-A monitor that uses an event count for its evaluation query after the specified period with no data will evaluate to 0, potentially resolving immediately.
+A monitor that uses an event count for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor configured to alert on the number of pipeline errors with an evaluation window of five minutes will automatically resolve after five minutes without any pipeline executions.
 
-In this case Datadog recommends using a formula like `(number of failures)/(number of all events)`, because if `(number of all events) = 0`, the division `x/0` cannot be evaluated and the monitor will keep the last known state.
+As an alternative, Datadog recommends using rate formulas. For example, instead of using a monitor on the number of pipeline failures (count), use a monitor on the rate of pipeline failures (formula), such as `(number of pipeline failures)/(number of all pipeline executions)`. In this case, when there's no data, the denominator `(number of all pipeline executions)` will be `0`, making the division `x/0` impossible to evaluate. The monitor will keep the previous known state instead of evaluating it to `0`.
 
-For example, use a monitor on pipeline error rate rather than on pipeline error count.
+This way, if the monitor triggers because there's a burst of pipeline failures that makes the error rate go above the monitor threshold, it will not clear until the error rate goes below the threshold, which can be at any time afterwards.
+
 
 ## Further Reading
 
