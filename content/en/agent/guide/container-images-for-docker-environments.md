@@ -60,6 +60,8 @@ If you are using Docker, there are several container images available through GC
 
 If you need to use Docker Hub, see [Docker Hub][1].
 
+## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/docker-hub/
