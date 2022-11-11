@@ -5,7 +5,7 @@
 
     {{ range (where .Site.AllPages "Kind" "!=" "home") }}
         {{ $page := . }}
-        {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (ne $page.Params.beta true) (not $page.Draft) (not (isset .Params "external_redirect")) }}
+        {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (ne $page.Type "api") (ne $page.Params.beta true) (not $page.Draft) (not (isset .Params "external_redirect")) }}
             {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
             {{ $object_id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}
