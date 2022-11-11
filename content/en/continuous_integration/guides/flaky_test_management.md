@@ -41,7 +41,7 @@ These are tests that exhibit flaky behavior and didn’t previously exist in the
 
 1. Navigate to the [Test Runs][1] page.
 2. In the facets list on the left sidebar, expand the **New Flaky** facet in the **Test** section, and check `true`.
-All test runs that exhibited flakiness behavior for the first time as per the definition above are displayed.
+All test runs that exhibited flakey behavior for the first time as per the definition above are displayed.
 
 ### Branches page
 
