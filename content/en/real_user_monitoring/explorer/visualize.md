@@ -28,6 +28,10 @@ While you can add attributes and tags in columns, Datadog recommends sorting the
 
 The RUM events table configuration is stored with additional elements of your troubleshooting context in [Saved Views][4].
 
+### List widget
+
+The [List Widget on dashboards](https://docs.datadoghq.com/dashboards/widgets/list/) allows you to view individual events for a given data source, including RUM data. You can export sessions to the list widget directly from the RUM explorer or build queries from scratch on any dashboard.
+
 ## Timeseries
 
 Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
