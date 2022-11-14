@@ -97,7 +97,7 @@ To create a metric probe:
 
 ### Selecting instrumented instances
 
-By default, Dynamic Instrumentation in enabled on only one randomly selected instance of your service for each environment and version combination. If the enabled instance is destroyed, a new one is selected at random from the remaining ones.
+By default, Dynamic Instrumentation is enabled on only one randomly selected instance of your service for each environment and version combination. If the enabled instance is destroyed, a new one is selected at random from the remaining ones.
 
 Alternatively, you can explicitly configure which instances of your service are enabled. You can use this feature to enable Dynamic Instrumentation on more service instances, or to restrict enablement in certain environments.
 
