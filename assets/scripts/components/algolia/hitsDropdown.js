@@ -27,22 +27,34 @@ const renderHits = (renderOptions, isFirstRender) => {
             const markedResultsSectionHeader = markedResults.section_header ? markedResults.section_header.value : null;
             const markedResultsContent = markedResults.content.value;
 
-            const tag = markedResultsTag;
             const sectionHeader = markedResultsSectionHeader;
             const title = sectionHeader ? sectionHeader : markedResultsTitle;
-            const content = truncateContent(markedResultsContent, 165);
+            const content = truncateContent(markedResultsContent, 145);
 
-            console.log(tag);
-            console.log(sectionHeader);
-            console.log(title);
-            console.log(content);
-            console.log("--------");
+            let tag = markedResultsTag;
+
+            switch (tag) {
+                case 'docs':
+                    tag = 'Documentation';
+                    break;
+                case 'getting_started':
+                    tag = 'Getting Started';
+                    break;
+                case 'integrations':
+                    tag = 'Integrations';
+                    break;
+                case 'guide':
+                    tag = 'Guide';
+                    break;
+                default:
+                    return;
+            }
 
             return `
             <li class="ais-Hits-item">
                 <a href="${item.relpermalink}" target="_blank" rel="noopener noreferrer">
                   <p>${tag}</p>
-                  <p>${title}</p>
+                  <p><strong>${title}</strong></p>
                   <p>${content}</p>
                 </a>
             </li>
