@@ -13,8 +13,8 @@ Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker tec
 
 Click on the buttons below to filter by different parts of Datadog Security. OOTB rules are available for [Cloud SIEM][2], [Posture Management][3], which is divided into cloud or infrastructure configuration, [Workload Security][4], and [Application Security Management][5].
 
-[1]: /security_platform/detection_rules/
-[2]: /security_platform/cloud_siem/
-[3]: /security_platform/cspm/
-[4]: /security_platform/cloud_workload_security/
-[5]: /security_platform/application_security/
+[1]: /security/detection_rules/
+[2]: /security/cloud_siem/
+[3]: /security/cspm/
+[4]: /security/cloud_workload_security/
+[5]: /security/application_security/
