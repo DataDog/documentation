@@ -19,7 +19,7 @@ Choose a security scenario below to begin automating remediation.
 
 In a cloud environment, it’s important to delete a misconfigured resource as soon as it is created. In this scenario, you can configure a [webhook integration][2] to send a [webhook][2] to your cloud provider’s API management service.
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="A diagram for a webhook sent to a cloud provider's API" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="A diagram for a webhook sent to a cloud provider's API" >}}
 
 Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group–based Detection Rule. This process automatically sends the webhook’s JSON payload to the designated AWS API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
 
@@ -33,7 +33,7 @@ First, set up a [new Detection Rule][5] using the New Value detection method.
 
 Then, set up a [webhook][2] that sends a payload to your cloud’s identity and access management (IAM) service to ban the unknown IP when this rule is triggered.
 
-{{< img src="security_platform/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="A new webhook that bans an unknown IP address" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="A new webhook that bans an unknown IP address" >}}
 
 The following example illustrates what the relevant webhook payload could look like when a security signal is produced by Datadog:
 

@@ -13,7 +13,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud environment, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
-{{< img src="security_platform/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
+{{< img src="security/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
 
 Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against Datadog's OOTB Posture Management [Cloud][1] and [Infrastructure][2] detection rules.
 
@@ -34,12 +34,12 @@ Control
 Resource
 : A configurable entity that needs to be continuously scanned for adherence with one or more controls. Examples of AWS instance resources include hosts, containers, security groups, users, and customer-managed IAM policies.
 
-  {{< img src="security_platform/cspm/getting_started/resource.png" alt="Posture management resource information in the Datadog app" style="width:65%;">}}
+  {{< img src="security/cspm/getting_started/resource.png" alt="Posture management resource information in the Datadog app" style="width:65%;">}}
 
 Rule
 : A rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.
 
-  {{< img src="security_platform/cspm/getting_started/rules.png" alt="A list of Cloud Security Posture Management detection rules" style="width:65%;">}}
+  {{< img src="security/cspm/getting_started/rules.png" alt="A list of Cloud Security Posture Management detection rules" style="width:65%;">}}
 
 Findings
 : A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a Pass or Fail status.
@@ -47,7 +47,7 @@ Findings
 Framework
 : A collection of requirements that map to an industry benchmark or regulatory standard.
 
-  {{< img src="security_platform/cspm/getting_started/frameworks.png" alt="The frameworks overview in the Cloud Security Posture Management landing page" style="width:100%;">}}
+  {{< img src="security/cspm/getting_started/frameworks.png" alt="The frameworks overview in the Cloud Security Posture Management landing page" style="width:100%;">}}
 
 ## Get started
 

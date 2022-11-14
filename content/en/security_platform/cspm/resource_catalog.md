@@ -13,7 +13,7 @@ further_reading:
   Resource Catalog is in private beta. Fill out this form if you would like to access it.
 {{< /beta-callout >}}
 
-{{< img src="security_platform/cspm/resource_catalog/resource_catalog.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
+{{< img src="security/cspm/resource_catalog/resource_catalog.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
 
 ## Overview
 

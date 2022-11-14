@@ -23,7 +23,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 Navigate to the [Getting Started page][1] to configure your environment for scanning.
 
-{{< img src="security_platform/cspm/getting_started/posture-management-setup.png" alt="Setup page for CSPM" style="width:100%;">}}
+{{< img src="security/cspm/getting_started/posture-management-setup.png" alt="Setup page for CSPM" style="width:100%;">}}
 
 ## Setup
 

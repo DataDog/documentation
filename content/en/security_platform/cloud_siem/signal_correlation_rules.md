@@ -37,7 +37,7 @@ Navigate to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule
 
 #### Trigger
 
-{{< img src="security_platform/security_monitoring/detection_rules/define_rule_case.png" alt="The set rule cases section showing the trigger, severity, and notification fields" >}}
+{{< img src="security/security_monitoring/detection_rules/define_rule_case.png" alt="The set rule cases section showing the trigger, severity, and notification fields" >}}
 
 Rule cases are evaluated as case statements. Thus, the first case to match generates the signal. An example of a rule case is`a > 3`, where `a` is the rule name. Click and drag your rule cases to manipulate their ordering.
 
