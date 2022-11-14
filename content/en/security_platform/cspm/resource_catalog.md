@@ -4,7 +4,7 @@ kind: documentation
 is_beta: true
 private: true
 further_reading:
-- link: "/security_platform/cspm/custom_rules/schema/"
+- link: "/security/cspm/custom_rules/schema/"
   tag: "Documentation"
   text: "Cloud Resource Schema"
 ---
@@ -71,6 +71,6 @@ Click the **Share** button and select **Share Findings** to share a link to the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/cloud_security_management
+[1]: /security/cloud_security_management
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /integrations/#cat-notification

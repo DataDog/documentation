@@ -5,7 +5,7 @@ further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security_platform/notifications/variables/"
+- link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 ---
@@ -151,6 +151,6 @@ See [Template Variables][4] for more information.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/rules
-[2]: /security_platform/notifications/#integrations
-[3]: /security_platform/notifications/variables/
-[4]: /security_platform/notifications/variables/#template-variables
+[2]: /security/notifications/#integrations
+[3]: /security/notifications/variables/
+[4]: /security/notifications/variables/#template-variables

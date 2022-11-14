@@ -2,13 +2,13 @@
 title: Getting Started with CSPM
 kind: documentation
 further_reading:
-- link: "security_platform/default_rules"
+- link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default cloud configuration detection rules"
-- link: "security_platform/cspm/findings"
+- link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore CSPM findings"
-- link: "security_platform/cspm/frameworks_and_benchmarks"
+- link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---
@@ -44,5 +44,5 @@ Evaluate the security posture of your hosts and containers. This section guides 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration?config_k9_configuration=true&detect-threats=apache&secure-cloud-environment=amazon-web-services&secure-hosts-and-containers=kubernetes&selected-products=compliance_monitoring
-[2]: /security_platform/default_rules#cat-posture-management-cloud
-[3]: /security_platform/default_rules/#cat-posture-management-infra
+[2]: /security/default_rules#cat-posture-management-cloud
+[3]: /security/default_rules/#cat-posture-management-infra

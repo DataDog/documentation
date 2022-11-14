@@ -23,15 +23,15 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security_platform/cloud_siem/getting_started">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/security_platform/default_rules#cat-cloud-siem">}}Start using out-of-the-box Cloud SIEM detection rules{{< /nextlink >}}
-  {{< nextlink href="/security_platform/detection_rules">}}Create your own custom detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_siem/getting_started">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules#cat-cloud-siem">}}Start using out-of-the-box Cloud SIEM detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/detection_rules">}}Create your own custom detection rules{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/explorer
-[2]: /security_platform/default_rules#cat-cloud-siem
-[3]: /security_platform/detection_rules
+[1]: /security/explorer
+[2]: /security/default_rules#cat-cloud-siem
+[3]: /security/detection_rules

@@ -2,22 +2,22 @@
 title: Setup and Configure
 kind: documentation
 further_reading:
-- link: "/security_platform/application_security/"
+- link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against Threats with Datadog Application Security Management"
-- link: "/security_platform/application_security/getting_started/"
+- link: "/security/application_security/getting_started/"
   tag: "Documentation"
   text: "Getting Started Enabling ASM for Your Services"
-- link: "/security_platform/default_rules/#cat-application-security"
+- link: "/security/default_rules/#cat-application-security"
   tag: "Documentation"
   text: "Out-of-the-Box Application Security Management Rules"
-- link: "/security_platform/application_security/add-user-info/"
+- link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Adding user information to traces"
-- link: "/security_platform/application_security/troubleshooting"
+- link: "/security/application_security/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting ASM"
-- link: "/security_platform/application_security/how-appsec-works/"
+- link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works in Datadog"
 ---
@@ -305,7 +305,7 @@ If you need additional help, contact [Datadog support][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/application_security/add-user-info/
+[1]: /security/application_security/add-user-info/
 [2]: https://github.com/google/re2/wiki/Syntax
 [3]: /tracing/configure_data_security/
 [4]: https://app.datadoghq.com/security/appsec/signals

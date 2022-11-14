@@ -2,13 +2,13 @@
 title: Custom Rules
 kind: documentation
 further_reading:
-- link: "security_platform/cloud_security_management/guide/writing_rego_rules"
+- link: "security/cloud_security_management/guide/writing_rego_rules"
   tag: "Guide"
   text: "Start writing your own Rego rules"
-- link: "security_platform/default_rules"
+- link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "security_platform/cspm/frameworks_and_benchmarks"
+- link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true
@@ -85,7 +85,7 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 [1]: https://app.datadoghq.com/security/configuration/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29&all=false&product=cspm&sort=rule_name
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
-[4]: /security_platform/cloud_security_management/guide/writing_rego_rules/
-[5]: /security_platform/cspm/frameworks_and_benchmarks/#set-notification-targets-for-detection-rules
-[6]: /security_platform/notifications/
+[4]: /security/cloud_security_management/guide/writing_rego_rules/
+[5]: /security/cspm/frameworks_and_benchmarks/#set-notification-targets-for-detection-rules
+[6]: /security/notifications/
 [7]: https://app.datadoghq.com/security/

@@ -5,16 +5,16 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-    - link: "/security_platform/application_security/add-user-info/"
+    - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-py'
       tag: 'GitHub'
       text: 'Python Datadog Library source code'
-    - link: "/security_platform/default_rules/#cat-application-security"
+    - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
-    - link: "/security_platform/application_security/troubleshooting"
+    - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Management"
 ---
@@ -108,4 +108,4 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/application_security/setup_and_configure/?code-lang=python#compatibility
+[1]: /security/application_security/setup_and_configure/?code-lang=python#compatibility

@@ -5,10 +5,10 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "See What's New in Datadog Security Compliance"
-  - link: "/security_platform/cspm/getting_started"
+  - link: "/security/cspm/getting_started"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Posture Management"
-  - link: "/security_platform/cloud_workload_security/getting_started"
+  - link: "/security/cloud_workload_security/getting_started"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Cloud Workload Security"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
@@ -49,6 +49,6 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][3]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/cspm/
-[2]: /security_platform/cloud_workload_security/
+[1]: /security/cspm/
+[2]: /security/cloud_workload_security/
 [3]: https://app.datadoghq.com/security/configuration

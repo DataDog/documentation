@@ -5,16 +5,16 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-    - link: "/security_platform/application_security/add-user-info/"
+    - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-dotnet'
       tag: 'GitHub'
       text: '.NET Datadog Library source code'
-    - link: "/security_platform/default_rules/#cat-application-security"
+    - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
-    - link: "/security_platform/application_security/troubleshooting"
+    - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Management"
 ---
@@ -191,4 +191,4 @@ ENV DD_APPSEC_ENABLED=true
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /security_platform/application_security/setup_and_configure/?code-lang=dotnet#compatibility
+[2]: /security/application_security/setup_and_configure/?code-lang=dotnet#compatibility

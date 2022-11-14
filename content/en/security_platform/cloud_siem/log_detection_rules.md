@@ -18,7 +18,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/"
   tag: "Blog"
   text: "Detect security threats with anomaly detection rules"
-- link: "/security_platform/notifications/variables/"
+- link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 aliases:
@@ -366,5 +366,5 @@ See [Template Variables][2] for more information.
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/notifications/variables/
-[2]: /security_platform/notifications/variables/#template-variables
+[1]: /security/notifications/variables/
+[2]: /security/notifications/variables/#template-variables

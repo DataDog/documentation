@@ -52,15 +52,15 @@ Framework
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security_platform/cspm/getting_started">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/security_platform/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud detection rules{{< /nextlink >}}
-  {{< nextlink href="/security_platform/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure detection rules{{< /nextlink >}}
-  {{< nextlink href="/security_platform/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
+  {{< nextlink href="/security/cspm/getting_started">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment with Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security_platform/default_rules/#cat-posture-management-cloud
-[2]: /security_platform/default_rules/#cat-posture-management-infra
+[1]: /security/default_rules/#cat-posture-management-cloud
+[2]: /security/default_rules/#cat-posture-management-infra
 [3]: https://app.datadoghq.com/security/compliance/homepage
-[4]: /security_platform/cspm/findings
+[4]: /security/cspm/findings
 [5]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security

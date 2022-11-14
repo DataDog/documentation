@@ -2,7 +2,7 @@
 title: Automate the Remediation of Detected Threats with Webhooks
 kind: guide
 further_reading:
-- link: "/security_platform/explorer/"
+- link: "/security/explorer/"
   tag: "Documentation"
   text: "Start investigating signals in the Signals Explorer"
 aliases:
@@ -88,10 +88,10 @@ Datadog generates the Security Signal, which details the offense as well as the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/cloud_siem/
+[1]: /security/cloud_siem/
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[3]: /security_platform/detection_rules/
+[3]: /security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#new-term
+[5]: /security/cloud_siem/log_detection_rules/?tab=threshold#new-term
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
-[7]: /security_platform/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query
+[7]: /security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

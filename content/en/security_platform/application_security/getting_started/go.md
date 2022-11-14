@@ -5,16 +5,16 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-    - link: "/security_platform/application_security/add-user-info/"
+    - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-go/tree/v1'
       tag: 'GitHub'
       text: 'Go Datadog Library source code'
-    - link: "/security_platform/default_rules/#cat-application-security"
+    - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
-    - link: "/security_platform/application_security/troubleshooting"
+    - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting Application Security Management"
 ---
@@ -107,7 +107,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/application_security/setup_and_configure/?code-lang=go#supported-frameworks
+[1]: /security/application_security/setup_and_configure/?code-lang=go#supported-frameworks
 [2]: https://github.com/golang/go/wiki/cgo
-[3]: /security_platform/application_security/setup_and_configure/?code-lang=go#enabling-cgo
-[4]: /security_platform/application_security/setup_and_configure/?code-lang=go#compatibility
+[3]: /security/application_security/setup_and_configure/?code-lang=go#enabling-cgo
+[4]: /security/application_security/setup_and_configure/?code-lang=go#compatibility

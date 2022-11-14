@@ -2,10 +2,10 @@
 title: Writing Custom Rules with Rego
 kind: guide
 further_reading:
-- link: "/security_platform/default_rules"
+- link: "/security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "/security_platform/cspm/frameworks_and_benchmarks"
+- link: "/security/cspm/frameworks_and_benchmarks"
   tag: "Guide"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true

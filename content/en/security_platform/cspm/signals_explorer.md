@@ -2,10 +2,10 @@
 title: Signals Explorer
 kind: documentation
 further_reading:
-- link: "security_platform/default_rules"
+- link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default cloud configuration detection rules"
-- link: "security_platform/cspm/frameworks_and_benchmarks"
+- link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about supported frameworks and industry benchmarks"
 ---
@@ -62,7 +62,7 @@ At the top of the side panel, you can configure the rule or send a notification 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security_platform/cspm/findings/
-[2]: https://docs.datadoghq.com/security_platform/cloud_siem/
-[3]: https://docs.datadoghq.com/security_platform/cloud_workload_security/
-[4]: https://docs.datadoghq.com/security_platform/explorer
+[1]: https://docs.datadoghq.com/security/cspm/findings/
+[2]: https://docs.datadoghq.com/security/cloud_siem/
+[3]: https://docs.datadoghq.com/security/cloud_workload_security/
+[4]: https://docs.datadoghq.com/security/explorer

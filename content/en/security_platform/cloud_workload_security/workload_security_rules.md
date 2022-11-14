@@ -2,16 +2,16 @@
 title: Managing Cloud Workload Security Rules
 kind: documentation
 further_reading:
-- link: "/security_platform/cloud_workload_security/getting_started"
+- link: "/security/cloud_workload_security/getting_started"
   tag: "Documentation"
   text: "Get Started with Cloud Workload Security"
-- link: "/security_platform/cloud_workload_security/agent_expressions"
+- link: "/security/cloud_workload_security/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
-- link: "security_platform/cloud_workload_security/backend"
+- link: "security/cloud_workload_security/backend"
   tag: "Documentation"
   text: "Cloud Workload Security Events"
-- link: "/security_platform/notifications/variables/"
+- link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 ---
@@ -175,9 +175,9 @@ To finalize your setup, restart the [Datadog Agent][6].
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/default_rules/#cat-workload-security
-[2]: /security_platform/cloud_workload_security/agent_expressions
+[1]: /security/default_rules/#cat-workload-security
+[2]: /security/cloud_workload_security/agent_expressions
 [3]: https://app.datadoghq.com/security/configuration/rules
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
-[5]: /security_platform/notifications/variables/
+[5]: /security/notifications/variables/
 [6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent

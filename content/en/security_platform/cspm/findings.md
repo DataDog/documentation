@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /security_platform/findings
 further_reading:
-- link: "security_platform/default_rules"
+- link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "security_platform/cspm/frameworks_and_benchmarks"
+- link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---
@@ -65,5 +65,5 @@ The side panel lists detection rules that were evaluated against the resource, s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
-[2]: /security_platform/cloud_siem/
-[3]: /security_platform/cloud_workload_security/
+[2]: /security/cloud_siem/
+[3]: /security/cloud_workload_security/

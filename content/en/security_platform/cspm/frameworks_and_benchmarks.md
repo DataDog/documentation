@@ -2,10 +2,10 @@
 title: Findings Reports
 kind: documentation
 further_reading:
-- link: "security_platform/default_rules"
+- link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "security_platform/cspm/findings"
+- link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore CSPM findings"
 ---
@@ -76,7 +76,7 @@ In the “Notify” section, configure zero or more notification targets for eac
 [8]: https://www.iso.org/isoiec-27001-information-security.html
 [9]: https://www.hhs.gov/hipaa/index.html
 [10]: https://gdpr.eu/
-[11]: /security_platform/cloud_siem/
+[11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
 [13]: https://app.datadoghq.com/security/configuration/rules/
 [14]: /integrations/slack/
