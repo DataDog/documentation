@@ -1,16 +1,20 @@
 ---
 title: Datadog API Catalog
 kind: documentation
+is_beta: true
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
-
 ---
+
+{{< beta-callout url="https://datadoghq.com" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+  Datadog API Catalog is in beta! Use this form request access. 
+{{< /beta-callout >}} 
 
 ## Overview
 
-The API Catalog provides a single view and entry point into exploring the performance, reliability, and ownership of all your API Endpoints in one place. Sort the list of endpoints by error rate, latence, or any other grouping that is meaningful to you, to gain insights into which endpoints most need your attention.
+The API Catalog provides a single view and entry point into exploring the performance, reliability, and ownership of all your API Endpoints in one place. Sort the list of endpoints by error rate, latency, or any other grouping that is meaningful to you, to gain insights into which endpoints most need your attention.
 
 Protect your mission-critical API-driven business features from failing by continuously discovering and monitoring the APIs that you expose to your customers, and the ones your services rely on to function.
 
@@ -22,7 +26,7 @@ API Catalog brings together data from across Datadog to surface API-related meta
 
 ## Exploring the list of endpoints
 
-The [API Catalog][1] view shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped environments and time frame you select. 
+The [API Catalog][1] view shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environments and time frame you select. 
 
 In the list table, **sort** by any of the columns by clicking a header. For example, click **P99** to see endpoints with the highest 99th percentile for latency.
 
@@ -36,7 +40,7 @@ To **filter the list** of endpoints or to search for a particular endpoint of in
 
 You can [define tags](#adding-bulk-tags) to use as facets so you can easily find groups of endpoints you're most interested in.
 
-**Note**: The `API Type` facet is based on auto-generated tags with values of `public` and `unknown` (which usually indicates a private endpoint).
+**Note**: The `API Type` facet is based on auto-generated tags and has values of `public` and `unknown` (which usually indicates a private endpoint).
 
 Use the **Group by** selector to group endpoints together by opinionated tags, so you can better navigate a large collection of endpoints in the list. The list group shows aggregated performance data for the endpoints in the group.
 
@@ -44,9 +48,9 @@ Use the **Group by** selector to group endpoints together by opinionated tags, s
 
 Click an endpoint in the list to open a details page that shows performance, governance, and metadata information for the endpoint, collected from various areas of Datadog into one place. Here you can edit the short name and description, and add custom tags. You can also launch deeper investigations of the various types of telemetry using links into other areas of Datadog. 
 
-For example, click on the monitors section to open a detailed card with more information and a link to monitors for the endpoint.
+<!-- For example, click on the monitors section to open a detailed card with more information and a link to monitors for the endpoint. -->
 
-The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings in the details page  to suit your investigation by using the time frame selector and other scope drop-downs. 
+The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings in the details page to suit your investigation by using the time frame selector and other scope drop-downs. 
 
 ## Adding bulk tags
 
@@ -58,18 +62,18 @@ For example, if you want to create latency alerts for endpoints that are particu
 - `experimental`
 - `contains password`
 - `contains PII`
-- Business logic (for example: `payments` )
+- Business logic (for example, `payments` )
 - Specific customer group (`subscribers`)
 
 When you add a tag, it appears in the list of facets on the left of the catalog. Click a facet to filter the list and add the tag to the Search query field.
 
 ## Exploring endpoints during incidents
 
-When investigating an incident, getting a higher resolution view through the API endpoints can lead to faster understanding of the root cause. Resolve incidents faster with **API ownership information** -- team, code repository, on-call details -- directly associated with each endpoint, to know who to reach when something goes wrong. 
+When you investigate an incident, getting a higher resolution view through the API endpoints can lead to faster understanding of the root cause. Resolve incidents faster with **API ownership information** -- team, code repository, on-call details -- directly associated with each endpoint, to know who to reach when something goes wrong. 
 
 The ownership information displayed on API Catalog pages is derived from the underlying Service definition supplied to the Service Catalog.
 
-
+<!-- 
 ## Creating monitors
 
 I want to get alerted each time an endpoint (or a group of endpoints) with high throughput gets a high error rate, so that I will not get false positive alerts on high error rate with low throughput.
@@ -79,11 +83,12 @@ As an SRE, I would like to view all endpoints with defined Monitors (alerted), s
 
 
 choose the type of metric in advance from the catalog (since there would be a lot of not-API-related queries inside the monitors page) and it would be exported together with the defined queries
-
+-->
 ## Setting up
 
-Only APM instrumented services and supported libraries are discoverable
-Ownership data is inherited from Service Catalog (Must be setup)
+To set up your API Catalog list:
+- [Instrument the services with APM][3]. Only APM instrumented services and supported libraries are discoverable.
+- [Define service ownership information][2] using Service Catalog.
 
 
 ## Further reading
@@ -92,3 +97,4 @@ Ownership data is inherited from Service Catalog (Must be setup)
 
 [1]: https://app.datadoghq.com/apis/catalog
 [2]: /tracing/service_catalog/
+[3]: /tracing/trace_collection/
