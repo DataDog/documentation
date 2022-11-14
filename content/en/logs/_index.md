@@ -74,7 +74,7 @@ Start exploring your ingested logs in the [Log Explorer][1].
 \*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
-[2]: /security_platform/cloud_siem/
+[2]: /security/cloud_siem/
 [3]: /logs/log_collection/
 [4]: /logs/log_configuration/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/
