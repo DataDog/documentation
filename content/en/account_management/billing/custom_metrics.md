@@ -7,7 +7,7 @@ aliases:
 
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
 
-**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
+**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][25] or through a [custom Agent Check][26] is a custom metric.
 
 Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
 
@@ -340,3 +340,5 @@ For billing questions, contact your [Customer Success][10] Manager.
 [22]: /integrations/sqlserver/
 [23]: /integrations/amazon_web_services/
 [24]: /help/
+[25]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[26]: /metrics/custom_metrics/agent_metrics_submission/
