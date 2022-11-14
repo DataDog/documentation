@@ -6,8 +6,8 @@ aliases:
 is_beta: true
 private: true
 further_reading:
-- link: "/dynamic_instrumentation/faq"
-  tag: "FAQ"
+- link: "/dynamic_instrumentation/how-it-works/"
+  tag: "Documentation"
   text: "Learn more about how Dynamic Instrumentation works"
 - link: "/tracing/trace_collection/dd_libraries"
   tag: "Documentation"
@@ -42,31 +42,31 @@ Dynamic Instrumentation requires the following:
 - [Unified Service Tagging][5] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][6] is set up for your service.
 
-**Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][11].
+**Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][7].
 
 ### Enable Remote Configuration
 
-1. Go to the [Remote Configuration setup page][7] and enable the feature for your organization.
+1. Go to the [Remote Configuration setup page][8] and enable the feature for your organization.
 2. Create a key. 
 3. Update your `datadog-agent` with the provided configuration snippet.
-4. Set `remote_configuration.refresh_interval` to be 5[sec].
-{{< tabs >}}
-{{% tab "Datadog-agent config.yaml" %}}
-
-Modify `datadog-agent.yaml`:
-```yaml
-remote_configuration:
-  refresh_interval: 5s
-```
-{{% /tab %}}
-{{% tab "Environment variables" %}}
-
-Export environment variable:
-```shell
-export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
-```
-{{% /tab %}}
-{{< /tabs >}}
+4. Set `remote_configuration.refresh_interval` to be 5 seconds:
+   {{< tabs >}}
+   {{% tab "Configuration YAML" %}}
+   
+   Edit `datadog-agent.yaml` to add:
+   ```yaml
+   remote_configuration:
+     refresh_interval: 5s
+   ```
+   {{% /tab %}}
+   {{% tab "Environment variables" %}}
+   
+   Export the following environment variable:
+   ```shell
+   export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
 **Note**: Datadog Administrator permissions are required to enable Remote Configuration and create a key. This is a one-time setup per environment. If you do not have the necessary access rights, contact your Datadog administrator.
 
@@ -74,9 +74,11 @@ export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
 
 Dynamic Instrumentation snapshots are sent to Datadog logs. They appear alongside your application logs.  
 
-If you are using Logs Indexes with [Exlusion filters][8], follow the next instructions to ensure Dynamic Instrumentation snapshots are not filtered from logs.
+If you use Logs Indexes with [Exclusion filters][9], ensure Dynamic Instrumentation snapshots are not filtered from logs:
 
-Create a logs index and [Configure the index][9] to the desired retention with **no sampling**. Set the filter to match on `source:dd_debugger`. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag because logs enter the first index whose filter they match on.
+1. Create a logs index and [configure it][10] to the desired retention with **no sampling**.
+2. Set the filter to match on `source:dd_debugger`. 
+3. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag, because logs enter the first index whose filter they match on.
 
 ### Enable Dynamic Instrumentation
 
@@ -90,11 +92,11 @@ Dynamic Instrumentation can help you understand what your application is doing a
 
 ### Creating a snapshot probe
 
-A *snapshot probe* exports the context in which it was configured to Datadog. It captures class properties, method arguments and local variables.
+A *snapshot probe* exports the context in which it was configured to Datadog. It captures class properties, method arguments and local variables. For more information, read [How Dynamic Instrumentation Works][11].
 
 To create a snapshot probe:
 
-1. Go to the [Dynamic Instrumentation page][10].
+1. Go to the [Dynamic Instrumentation page][12].
 2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 3. Select **Snapshot** as the probe type.
 4. If not prefilled, choose a service from the list.
@@ -104,11 +106,11 @@ To create a snapshot probe:
 
 ### Creating a metric probe
 
-Metric probes emit metrics at a chosen location in your code. Use the Dynamic Instrumentation expression language to reference numeric values from the context, such as from a local variable or a class field.
+Metric probes emit metrics at a chosen location in your code. Use the Dynamic Instrumentation expression language to reference numeric values from the context, such as from a local variable or a class field. For more information, read [How Dynamic Instrumentation Works][11].
 
 To create a metric probe:
 
-1. Go to the [Dynamic Instrumentation page][10].
+1. Go to the [Dynamic Instrumentation page][12].
 2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
 3. Select **Metric** as the probe type.
 4. Specify a name for the metric.
@@ -143,8 +145,9 @@ To remove the filter, open the same menu item and click **Delete Filter**.
 [4]: https://github.com/DataDog/dd-trace-dotnet
 [5]: /getting_started/tagging/unified_service_tagging/
 [6]: /integrations/guide/source-code-integration/
-[7]: https://app.datadoghq.com/organization-settings/remote-config
-[8]: /logs/log_configuration/indexes/#exclusion-filters
-[9]: /logs/log_configuration/indexes/#add-indexes
-[10]: https://app.datadoghq.com/dynamic-instrumentation
-[11]: https://docs.datadoghq.com/account_management/rbac/permissions#apm
+[7]: /account_management/rbac/permissions#apm
+[8]: https://app.datadoghq.com/organization-settings/remote-config
+[9]: /logs/log_configuration/indexes/#exclusion-filters
+[10]: /logs/log_configuration/indexes/#add-indexes
+[11]: /dynamic_instrumentation/how-it-works/
+[12]: https://app.datadoghq.com/dynamic-instrumentation
