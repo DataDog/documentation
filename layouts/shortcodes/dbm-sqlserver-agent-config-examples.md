@@ -41,28 +41,41 @@ instances:
 ```
 
 ### One agent connecting to multiple hosts
-To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
+It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
+In these cases, it is recommended to limit to the number of instances per Agent to a maximum of 10 database instances.
 ```yaml
 init_config:
 instances:
   - dbm: true
-    host: 'localhost_A,1433'
+    host: 'products-primary.123456789012.us-east-1.rds.amazonaws.com,1433'
     username: datadog
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     password: '<PASSWORD>'
+    tags:
+      - 'env:prod'
+      - 'team:team-discovery'
+      - 'service:product-recommendation'
   - dbm: true
-    host: 'localhost_B,1434'
+    host: 'products–replica-1.us-east-1.rds.amazonaws.com,1433'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
     password: '<PASSWORD>'
+    tags:
+      - 'env:prod'
+      - 'team:team-discovery'
+      - 'service:product-recommendation'
   - dbm: true
-    host: 'localhost_C,1435'
+    host: 'products–replica-2.us-east-1.rds.amazonaws.com,1433'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
     password: '<PASSWORD>'
+    tags:
+      - 'env:prod'
+      - 'team:team-discovery'
+      - 'service:product-recommendation'
     [...]
 ```
 
@@ -78,16 +91,18 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     custom_queries:
-    - query: SELECT age, salary, name FROM foo;
+    - query: SELECT age, salary, hours_worked, name FROM hr.employees;
       columns:
-        - name: foo_age
+        - name: age
           type: gauge
-        - name: foo_salary
-          type: count
-        - name: foo_name
-          type: tag
+        - name: salary
+           type: gauge
+        - name: hours
+           type: count
+        - name: name
+           type: tag
       tags:
-        - query:custom
+        - 'table:employees'
 ```
 ### Working with hosts through a remote proxy
 When connecting to a database host through a remote proxy, it can be useful to set a custom hostname. Utilize the `reported_hostname` option to override the hostname detected by the agent.
@@ -100,12 +115,12 @@ instances:
     adoprovider: MSOLEDBSQL
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: foo
+    reported_hostname: products-primary
   - dbm: true
     host: 'localhost,1433'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: bar
+    reported_hostname: products-replica-1
 ```
