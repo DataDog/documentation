@@ -1,6 +1,6 @@
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
-import { configure, searchBox, hits, index } from 'instantsearch.js/es/widgets';
+import { configure, searchBox } from 'instantsearch.js/es/widgets';
 import { hitsDropdown } from './algolia/hitsDropdown';
 import configDocs from '../config/config-docs';
 
@@ -18,10 +18,12 @@ const algoliaConfig = getConfig(env).algoliaConfig;
 const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
 const indexName = algoliaConfig.index;
 const searchResultsPage = document.querySelector('.search_results');
+const searchBoxContainerContainer = document.querySelector('.searchbox-container');
 const searchBoxContainer = document.querySelector('#searchbox');
+const hitsContainerContainer = document.querySelector('.hits-container');
 const hitsContainer = document.querySelector('#hits');
 const numHits = 4;
-const filtersDocs = '';
+const filtersDocs = 'language: en';
 
 if (searchBoxContainer) {
     const search = instantsearch({
@@ -48,11 +50,13 @@ if (searchBoxContainer) {
             if (helper.state.query) {
                 helper.search();
                 if (!searchResultsPage) {
-                    hitsContainer.classList.remove('d-none');
+                    searchBoxContainerContainer.classList.add('active-search');
+                    hitsContainerContainer.classList.remove('d-none');
                 }
             } else {
                 if (!searchResultsPage) {
-                    hitsContainer.classList.add('d-none');
+                    searchBoxContainerContainer.classList.remove('active-search');
+                    hitsContainerContainer.classList.add('d-none');
                 } else {
                     helper.search();
                 }

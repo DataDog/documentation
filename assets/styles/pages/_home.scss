@@ -15,6 +15,10 @@
             height: 346px;
             background-image: url('../images/home-hero.png');
         }
+
+        & .container.position-relative {
+            z-index: 1;
+        }
     }
 
     .guides {

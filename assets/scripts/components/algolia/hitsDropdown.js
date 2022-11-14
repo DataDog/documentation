@@ -7,35 +7,43 @@ const renderHits = (renderOptions, isFirstRender) => {
     const aisHits = document.createElement('div');
     const aisHitsList = document.createElement('ol');
 
+    const truncateContent = (content, length) => {
+        if (content.length > length) {
+            return `${content.slice(0, length)} ...`;
+        } else {
+            return content;
+        }
+    };
+
     aisHits.classList.add('ais-Hits');
     aisHitsList.classList.add('ais-Hits-list');
 
     const hitsItems = hits
         .map((item) => {
-            console.log(item);
+            // console.log(item);
             const markedResults = item._highlightResult;
+            const markedResultsTag = markedResults.tags[0].value;
             const markedResultsTitle = markedResults.title.value;
             const markedResultsSectionHeader = markedResults.section_header ? markedResults.section_header.value : null;
             const markedResultsContent = markedResults.content.value;
-            // const highlightedHierarchy = markedResults.hierarchy;
-            // const lengthOfHierarchy = Object.keys(highlightedHierarchy).length;
-            const hitText = markedResultsTitle;
-            // let count = 0;
 
-            // for (const [key, value] of Object.entries(highlightedHierarchy)) {
-            //     hitText += `${value.value}`;
+            const tag = markedResultsTag;
+            const sectionHeader = markedResultsSectionHeader;
+            const title = sectionHeader ? sectionHeader : markedResultsTitle;
+            const content = truncateContent(markedResultsContent, 165);
 
-            //     if (count < lengthOfHierarchy - 1) {
-            //         hitText += " <span class='mx-1'>&gt;</span>";
-            //     }
-
-            //     count++;
-            // }
+            console.log(tag);
+            console.log(sectionHeader);
+            console.log(title);
+            console.log(content);
+            console.log("--------");
 
             return `
             <li class="ais-Hits-item">
                 <a href="${item.relpermalink}" target="_blank" rel="noopener noreferrer">
-                  <p>${hitText}</p>
+                  <p>${tag}</p>
+                  <p>${title}</p>
+                  <p>${content}</p>
                 </a>
             </li>
         `;
