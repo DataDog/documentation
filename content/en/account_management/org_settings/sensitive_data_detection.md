@@ -71,7 +71,7 @@ The Scanning Rule Library contains an evergrowing collection of predefined rules
 
 ### Permissions
 
-By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant the permission for Data Scanner under **Access Management**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
+By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
 
 {{< img src="logs/sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
 

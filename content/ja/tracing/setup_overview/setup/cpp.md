@@ -279,6 +279,6 @@ JSON のオブジェクト配列です。各オブジェクトの "sample_rate" 
 [1]: /ja/tracing/setup/envoy/
 [2]: /ja/tracing/setup/nginx/
 [3]: /ja/tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/docs
+[4]: https://app.datadoghq.com/apm/service-setup
 [5]: /ja/tracing/send_traces/
 [6]: https://github.com/opentracing/opentracing-cpp

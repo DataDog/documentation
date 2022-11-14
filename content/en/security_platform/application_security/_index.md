@@ -22,13 +22,15 @@ further_reading:
 
 Datadog Application Security Management (ASM) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
-ASM leverages Datadog [tracing libraries][1], the [Datadog Agent][2], and in-app detection rules to detect and protect against threats in your application environment and trigger security signals whenever an attack targets your production system, or a vulnerability is triggered from the code.
+ASM leverages Datadog [tracing libraries][1], and the [Datadog Agent][2] to identify services exposed to application attacks. Once configured, ASM leverages in-app detection rules to detect and protect against threats in your application environment and trigger security signals whenever an attack impacts your production system, or a vulnerability is triggered from the code.
 
 When a threat is detected, a security signal is generated in Datadog. For `HIGH` or `CRITICAL` severity security signals, notifications can be sent to Slack, email, or PagerDuty to notify your team and provide real-time context around threats.
 
-Once a security signal is triggered, quickly pivot to investigate in Datadog. Leverage the deep observability data provided by ASM and APM distributed tracing, in one view, to resolve application issues. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation and mitigation steps, all within the same panel.
+Once a security signal is triggered, quickly pivot to investigate and protect in Datadog. Leverage the deep observability data provided by ASM and APM distributed tracing, in one view, to resolve application issues. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation and mitigation steps, all within the same panel.
 
 With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
+
+Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click. One-click IP blocking is in private beta. Access early preview through [this form][7].
 
 ## Understanding how application security is implemented in Datadog
 
@@ -42,7 +44,7 @@ To start configuring your environment to detect and protect threats with ASM, fo
 
 ## Investigate and remediate security signals
 
-In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to remediate the issue. In the same panel, view traces with their correlated attack flow and request information to gain further context.
+In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
 ## Next steps
 
@@ -54,3 +56,4 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [4]: /security_platform/default_rules/#cat-application-security
 [5]: /security_platform/application_security/getting_started/
 [6]: /security_platform/explorer/
+[7]: https://dashcon.io/appsec

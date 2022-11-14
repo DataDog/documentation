@@ -279,6 +279,6 @@ Le ou les styles de propagation à utiliser lors de l'extraction des en-têtes d
 [1]: /fr/tracing/setup/envoy/
 [2]: /fr/tracing/setup/nginx/
 [3]: /fr/tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/docs
+[4]: https://app.datadoghq.com/apm/service-setup
 [5]: /fr/tracing/send_traces/
 [6]: https://github.com/opentracing/opentracing-cpp

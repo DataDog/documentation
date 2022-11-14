@@ -2,12 +2,7 @@ import docsearch from 'docsearch.js';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
-let lang = document.documentElement.lang.toLowerCase() || 'en-us';
-
-// Todo: Remove this after the staging algolia index has been updated.
-if (env !== 'live') {
-    lang = lang === 'en-us' ? 'en' : lang
-}
+const lang = document.documentElement.lang.toLowerCase() || 'en-us';
 
 // Set baseUrl based on environment
 let baseUrl = window.location.origin;

@@ -11866,6 +11866,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
       type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
@@ -11995,6 +11996,42 @@ components:
       - RECEIVED_MESSAGE
       - GRPC_HEALTHCHECK_STATUS
       - CONNECTION
+    SyntheticsAssertionXPathOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesXPath
+      example: validatesXPath
+      type: string
+      x-enum-varnames:
+      - VALIDATES_X_PATH
+    SyntheticsAssertionXPathTarget:
+      description: An assertion for the `validatesXPath` operator.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathOperator'
+        property:
+          description: The associated assertion property.
+          type: string
+        target:
+          $ref: '#/components/schemas/SyntheticsAssertionXPathTargetTarget'
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
+    SyntheticsAssertionXPathTargetTarget:
+      description: Composed target for `validatesXPath` operator.
+      properties:
+        operator:
+          description: The specific operator to use on the path.
+          type: string
+        targetValue:
+          description: The path target value to compare to.
+        xPath:
+          description: The X path to assert.
+          type: string
+      type: object
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       oneOf:
@@ -13623,7 +13660,8 @@ components:
             certificates.'
           type: boolean
         allow_insecure:
-          description: Allows loading insecure content for an HTTP request.
+          description: Allows loading insecure content for an HTTP request in an API
+            test.
           type: boolean
         checkCertificateRevocation:
           description: For SSL test, whether or not the test should fail on revoked
@@ -13647,7 +13685,7 @@ components:
           description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
         ignoreServerCertificateError:
-          description: Ignore server certificate error.
+          description: Ignore server certificate error for browser tests.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds)
@@ -13762,6 +13800,8 @@ components:
         body:
           description: Body to include in the test.
           type: string
+        bodyType:
+          $ref: '#/components/schemas/SyntheticsTestRequestBodyType'
         certificate:
           $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
         certificateDomains:
@@ -13840,6 +13880,24 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyType:
+      description: Type of the request body.
+      enum:
+      - text/plain
+      - application/json
+      - text/xml
+      - text/html
+      - application/x-www-form-urlencoded
+      - graphql
+      example: text/plain
+      type: string
+      x-enum-varnames:
+      - TEXT_PLAIN
+      - APPLICATION_JSON
+      - TEXT_XML
+      - TEXT_HTML
+      - APPLICATION_X_WWW_FORM_URLENCODED
+      - GRAPHQL
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:

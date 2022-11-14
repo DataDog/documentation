@@ -5,6 +5,9 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
+    - link: "/security_platform/application_security/add-user-info/"
+      tag: "Documentation"
+      text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-go/tree/v1'
       tag: 'GitHub'
       text: 'Go Datadog Library source code'

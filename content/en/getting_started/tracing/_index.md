@@ -38,7 +38,7 @@ vagrant ssh
 To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 ### Validation
@@ -167,7 +167,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: https://app.datadoghq.com/apm/docs
+[10]: https://app.datadoghq.com/apm/service-setup
 [11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /tracing/guide/setting_primary_tags_to_scope/
