@@ -49,8 +49,6 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 
 Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<ご使用の_DATADOG_API_キー>` を [Datadog API キー][10]と置き換えてください。
 
-**注**: Docker Compose については、[Compose と Datadog Agent][11] を参照してください。
-
 {{< tabs >}}
 {{% tab "標準" %}}
 
@@ -125,6 +123,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**注**: Docker Compose については、[Compose と Datadog Agent][11] を参照してください。
 
 ## インテグレーション
 
