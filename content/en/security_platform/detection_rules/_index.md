@@ -8,7 +8,7 @@ further_reading:
 - link: "/cloud_siem/default_rules"
   tag: "Documentation"
   text: "Explore default detection rules"
-- link: "/security_platform/notifications/"
+- link: "/security/notifications/"
   tag: "Documentation"
   text: "Learn more about Security notifications"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
@@ -72,13 +72,12 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /security_platform/default_rules/
-[2]: /security_platform/cloud_siem/
-[3]: /security_platform/cloud_siem/log_detection_rules/
-[4]: /security_platform/cspm/
-[5]: /security_platform/cloud_workload_security/
-[6]: /security_platform/application_security/
+[1]: /security/default_rules/
+[2]: /security/cloud_siem/
+[3]: /security/cloud_siem/log_detection_rules/
+[4]: /security/cspm/
+[5]: /security/cloud_workload_security/
+[6]: /security/application_security/
 [7]: /tracing/
 [8]: /agent/
 [9]: https://app.datadoghq.com/security/configuration/rules

@@ -6,7 +6,7 @@ aliases:
   - /security_platform/notification_profiles/
   - /security_platform/notification_rules/
 further_reading:
-- link: "/security_platform/detection_rules/"
+- link: "/security/detection_rules/"
   tag: "Documentation"
   text: "Explore security detection rules"
 ---
