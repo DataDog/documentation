@@ -80,8 +80,15 @@ The [Amazon’s EC2 metadata endpoint][1] allows discovery of the private IP add
 curl http://169.254.169.254/latest/meta-data/local-ipv4
 {{< /code-block >}}
 
+If you are using the Version 2 of the Instance Metadata Service (IMDSv2):
+
+{{< code-block lang="curl" >}}
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-token: $TOKEN"
+{{< /code-block >}}
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+[2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 {{% /tab %}}
 {{% tab "ECS container metadata file" %}}
 
