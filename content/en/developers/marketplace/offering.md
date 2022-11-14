@@ -23,10 +23,10 @@ This page walks you through how to develop an offering on the Datadog Marketplac
 To develop a Marketplace tile, follow these instructions below:
 
 1. [Choose a type of offering to list](#select-an-offering).
-2. Build an [Agent-based integration](#build-an-agent-based-integration), a [REST API-based integration](#build-a-rest-api-integration), a [Datadog App](#build-a-datadog-app), an [informational tile-only listing](#build-an-informational-tile-only-listing), or a [bi-directional data integration](#build-a-bi-directional-data-integration).
+2. Build an [Agent-based integration](#build-an-agent-based-integration), a [REST API-based integration](#build-a-rest-api-integration), a [Datadog App](#build-a-datadog-app), an [informational tile-only listing](#build-a-saas-license-or-professional-service-integration), or a [bi-directional data integration](#build-a-bi-directional-data-integration).
 3. [Access the Marketplace repository and set up a directory](#set-up-a-directory-and-clone-the-marketplace-repository).
 4. [Install and run the Datadog Development Toolkit command](#install-and-run-the-datadog-development-toolkit).
-5. Create an [information tile-only listing](#create-an-informational-tile-only-listing) or a [full data integration](#create-a-full-data-integration).
+5. Create an [information tile-only listing](#build-a-saas-license-or-professional-service-integration) or a [full data integration](#create-a-full-data-integration).
 6. [Populate the integration tile scaffolding](#populate-the-tile-scaffolding). 
 7. [Open a pull request](#open-a-pull-request).
 8. [Review feedback and request approval to merge the pull request and release the integration tile](#obtain-approval-to-merge). 
@@ -43,24 +43,24 @@ Choose from the following offering types to create an integration tile that repr
 - A [Datadog Agent-based integration](#build-an-agent-based-integration)
 - A [REST API integration](#build-a-rest-api-integration)
 - A [Datadog App](#build-a-datadog-app)
-- [SaaS license or subscription](#build-an-informational-tile-only-listing)
+- A [SaaS license or subscription](#build-a-saas-license-or-professional-service-integration)
 - [Professional services](#build-a-bi-directional-data-integration)
 
 ### Build an Agent-based integration
 
 #### OpenMetrics check
 
-An [OpenMetrics check][20] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
+An [OpenMetrics check][2] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
 
 
 #### Python Check
 
-A [Python check][21] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
+A [Python check][3] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
 
 
 #### DogStatsD
 
-[DogStatsD][22] is suitable for applications that already emit telemetry using the StatsD protocol. 
+[DogStatsD][4] is suitable for applications that already emit telemetry using the StatsD protocol. 
 
 Datadog adds additional Datadog-specific extensions to the StatsD protocol, including the following:
 
@@ -71,21 +71,21 @@ Datadog adds additional Datadog-specific extensions to the StatsD protocol, incl
 
 
 
-For more information about Datadog Agent-based integrations, see [Introduction to Agent-based Integrations][2].
+For more information about Datadog Agent-based integrations, see [Introduction to Agent-based Integrations][5].
 
 ### Build a REST API integration
 
-Use an [API integration][3] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
+Use an [API integration][6] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
  
-Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#build-an-informational-tile-only-listing) once your development work is complete.
+Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-integration) once your development work is complete.
  
-A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][4] in a Marketplace tile instead.
+A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][7] in a Marketplace tile instead.
 
 ### Build a Datadog App
 
-[Datadog Apps][5] are custom dashboard widgets that are developed in the [Datadog Developer Platform][6]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#build-an-informational-tile-only-listing) on the **Integrations** or **Marketplace** page.
+[Datadog Apps][8] are custom dashboard widgets that are developed in the [Datadog Developer Platform][9]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-integration) on the **Integrations** or **Marketplace** page.
 
-### Build an informational tile-only listing
+### Build a SaaS license or professional service integration
 
 If you are developing an offering that does not use the Datadog Agent (such as a Datadog App, SaaS license, professional service, or an API-based integration), you only need to create an informational tile listing. These tile-only listings require Datadog users to install and configure the integration outside of Datadog, and listings for SaaS licenses and professional services do not collect any data.
 
@@ -97,26 +97,26 @@ All Datadog integrations must be bi-directional, meaning that integrations can p
 
 Integrations send the following types of data to Datadog:
 
-- [Metrics][7]
-- [Logs][8]
-- [Events][9]
-- [Service Checks][10]
-- [Traces][11]
-- [Incidents][12]
-- [Security Events][13]
+- [Metrics][10]
+- [Logs][11]
+- [Events][12]
+- [Service Checks][13]
+- [Traces][14]
+- [Incidents][15]
+- [Security Events][16]
 
 
 ### Set up a directory and clone the Marketplace repository
 
-The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps. To request access to the [Marketplace repository][15], see the [Marketplace documentation][14].
+The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps. To request access to the [Marketplace repository][17], see the [Marketplace documentation][18].
 
-Once you have been granted access to the [Marketplace repository][15], create the `dd` directory and clone the `marketplace` repo by using `git clone git@github.com:DataDog/marketplace.git`. 
+Once you have been granted access to the [Marketplace repository][17], create the `dd` directory and clone the `marketplace` repo by using `git clone git@github.com:DataDog/marketplace.git`. 
 
 ### Install and run the Datadog development toolkit
 
 The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing a data integration by generating a skeleton of your integration tile's assets and metadata.
 
-First, ensure that [Python v3.8 and later][16] is installed. To avoid potential environment conflicts, create a virtual environment in the directory where you cloned the Marketplace repository by running `python3 -m pip install virtualenv --user`.
+First, ensure that [Python v3.8 and later][19] is installed. To avoid potential environment conflicts, create a virtual environment in the directory where you cloned the Marketplace repository by running `python3 -m pip install virtualenv --user`.
 
 Then, name and activate the virtual environment with these commands:
 
@@ -125,7 +125,7 @@ virtualenv [name of env]
 source [name of env]/bin/activate
 ```
 
-To install the latest released version of the Datadog Development Toolkit from [PyPI][17], run `python -m pip install --upgrade "datadog-checks-dev[cli]"`.
+To install the latest released version of the Datadog Development Toolkit from [PyPI][20], run `python -m pip install --upgrade "datadog-checks-dev[cli]"`.
 
 If you are using the Z Shell, you may need to use escaped characters by running `python -m pip install --upgrade datadog-checks-dev\[cli\]`.
 
@@ -210,11 +210,11 @@ Follow this template to define the `media` object in the media carousel which in
     ],
 {{< /code-block >}}
 
-For more information, see [Integrations Assets Reference][18].
+For more information, see [Integrations Assets Reference][21].
 
 ### Open a pull request
 
-Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][15]. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
+Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace` repository][17]. Automatic tests run checks in Azure DevOps pipelines to verify that your pull request is in good shape and contains all the required content to be updated.
 
 To request access to the Azure DevOps pipeline, leave a comment in the pull request requesting access.
 
@@ -229,7 +229,7 @@ Once you have addressed the feedback and re-requested reviews, these reviewers a
 Once a Marketplace tile is live, Technology Partners can meet with Datadog's Partner Marketing team to coordinate a joint go-to-market (GTM) strategy, which includes the following:
 
 - A Datadog quote for partner press releases
-- A blog post on the [Datadog Monitor][19]
+- A blog post on the [Datadog Monitor][22]
 - Amplification of social media posts
 
 ## Further Reading
@@ -237,24 +237,24 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/marketplace/
-[2]: /developers/integrations/
-[3]: /api/latest/
-[4]: /developers/integrations/oauth_for_data_integrations/
-[5]: /developers/datadog_apps/
-[6]: https://app.datadoghq.com/apps/
-[7]: /api/latest/metrics/
-[8]: /api/latest/logs/
-[9]: /api/latest/events/
-[10]: /api/latest/service-checks/
-[11]: /tracing/guide/send_traces_to_agent_by_api/
-[12]: /api/latest/incidents/
-[13]: /api/latest/security-monitoring/
-[14]: /developers/marketplace/#request-access-to-marketplace
-[15]: https://github.com/Datadog/marketplace
-[16]: https://www.python.org/downloads/
-[17]: https://pypi.org/project/datadog-checks-dev/
-[18]: /developers/integrations/check_references/#manifest-file
-[19]: https://datadoghq.com/blog/
-[20]: /developers/custom_checks/prometheus/
-[21]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
-[22]: /developers/dogstatsd/
+[2]: /developers/custom_checks/prometheus/
+[3]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
+[4]: /developers/dogstatsd/
+[5]: /developers/integrations/
+[6]: /api/latest/
+[7]: /developers/integrations/oauth_for_data_integrations/
+[8]: /developers/datadog_apps/
+[9]: https://app.datadoghq.com/apps/
+[10]: /api/latest/metrics/
+[11]: /api/latest/logs/
+[12]: /api/latest/events/
+[13]: /api/latest/service-checks/
+[14]: /tracing/guide/send_traces_to_agent_by_api/
+[15]: /api/latest/incidents/
+[16]: /api/latest/security-monitoring/
+[17]: https://github.com/Datadog/marketplace
+[18]: /developers/marketplace/#request-access-to-marketplace
+[19]: https://www.python.org/downloads/
+[20]: https://pypi.org/project/datadog-checks-dev/
+[21]: /developers/integrations/check_references/#manifest-file
+[22]: https://datadoghq.com/blog/
