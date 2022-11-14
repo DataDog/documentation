@@ -32,8 +32,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     custom_queries:
-    - metric_prefix: ddprefix
-      query: SELECT age, salary, name FROM foo;
+    - query: SELECT age, salary, name FROM foo;
       columns:
         - name: foo_age
           type: gauge
