@@ -41,7 +41,7 @@ For Datadog ASM to be compatible with your Datadog configuration, you must have 
  
 Datadog ASM supports functions deployed on AWS Lambda. Detection is done by using the [Lambda extension][6]. 
 
-Full threat monitoring capabilities are available for Lambda functions. You can detect attackers targeting your functions, trace their attack flow with deep network and code-level insights, and remediate the threat.
+Full threat monitoring capabilities are available for Lambda functions. You can detect attackers targeting your functions, trace their attack path with deep code-level insights, and then remediate the threat.
 
 
 ## Performance
