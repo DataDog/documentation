@@ -170,7 +170,7 @@ In this case, you should not enable notifications for missing data. This option 
 
 ##### Simple Alert
 
-For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that woul change the status from OK. 
+For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that would change the status from OK. 
 
 ##### Multi Alert
 
