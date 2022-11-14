@@ -61,7 +61,7 @@ nav_sections:
         icon: log
         desc: Process, monitor, and archive your ingested logs
       - title: Security
-        link: security_platform/
+        link: security/
         icon: security-platform
         desc: Detect threats and misconfigurations in your applications and infrastructure
       - title: Synthetic Monitoring
