@@ -197,4 +197,4 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [8]: /tracing/service_catalog/setup/
 [9]: /account_management/rbac/
 [10]: /account_management/rbac/permissions/
-[11]: /security_platform/application_security/how-appsec-works/
+[11]: /security/application_security/how-appsec-works/
