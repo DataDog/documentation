@@ -29,9 +29,9 @@ before_script:
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
   # set common env variables for this shell
-  - export GITHUB_TOKEN=$(get_secret 'documentation.github_token')
-  - export DATADOG_API_KEY=$(get_secret 'documentation.dd-api-key')
-  - export DATADOG_APP_KEY=$(get_secret 'documentation.dd-app-key')
+  - export GITHUB_TOKEN=$(get_secret 'github_token')
+  - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
+  - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
 
 # set policy for the common case
@@ -81,7 +81,7 @@ build_preview:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - touch Makefile.config
     - make dependencies
     - make config
@@ -93,8 +93,8 @@ build_preview:
     - rm -rf data/service_checks
     - in-isolation deploy_preview > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
-    - remove_static_from_repo "documentation"
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834" "documentation"
+    - remove_static_from_repo
+    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
@@ -116,7 +116,7 @@ link_checks_preview:
     URL: ${PREVIEW_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs-staging.datadoghq.com/$CI_COMMIT_REF_NAME/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -124,7 +124,7 @@ link_checks_preview:
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
-    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834" "documentation"; fi
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   artifacts:
@@ -143,7 +143,7 @@ missing_tms_preview:
   dependencies:
     - build_preview
   script:
-    - check_missing_tms "documentation"
+    - check_missing_tms
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   interruptible: true
@@ -221,17 +221,17 @@ build_live:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700" "documentation"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - touch Makefile.config
     - make clean-examples
     - make dependencies
     - yarn run prebuild
     - yarn run build:live
     - in-isolation deploy_live
-    - create_artifact "documentation"
-    - create_artifact_ignored "documentation"
-    - remove_static_from_repo "documentation"
+    - create_artifact
+    - create_artifact_ignored
+    - remove_static_from_repo
   artifacts:
     when: on_success
     paths:
@@ -266,7 +266,7 @@ test_live_link_checks:
     URL: ${LIVE_DOMAIN}
     GIT_STRATEGY: none
   script:
-    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info" "documentation"
+    - post_dd_event "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
@@ -274,7 +274,7 @@ test_live_link_checks:
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
-    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834" "documentation"; fi
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834" ; fi
   only:
     - master
   artifacts:
@@ -355,7 +355,7 @@ manage_ignored_translations:on-schedule:
     - schedules
   script:
     - echo "Downloading ignored translation source files..."
-    - manage_ignored_translation_files "documentation"
+    - manage_ignored_translation_files
 
 test_missing_tms_live:
   <<: *base_template
@@ -367,7 +367,7 @@ test_missing_tms_live:
   dependencies:
     - build_live
   script:
-    - check_missing_tms "documentation"
+    - check_missing_tms
   only:
     - master
 
@@ -392,7 +392,7 @@ tag_successful_live_pipeline:
   environment: "live"
   when: on_success
   script:
-    - tag_successful_pipeline "documentation"
+    - tag_successful_pipeline
   only:
     - master
 
@@ -405,8 +405,8 @@ post_success_event_to_dd_live:
     GIT_STRATEGY: none
   when: on_success
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success" "documentation"
-    - post_dd_metric "documentation.pipeline.completed" "1" "" "success" "documentation"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} succeeded" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "success"
+    - post_dd_metric "documentation.pipeline.completed" "1" "" "success"
   only:
     - master
 
@@ -419,7 +419,7 @@ post_failure_event_to_dd_live:
     GIT_STRATEGY: none
   when: on_failure
   script:
-    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error" "documentation"
-    - post_dd_metric "documentation.pipeline.completed" "0" "" "failure" "documentation"
+    - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} failed" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "error"
+    - post_dd_metric "documentation.pipeline.completed" "0" "" "failure"
   only:
     - master
