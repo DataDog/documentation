@@ -58,7 +58,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: public.ecr.aws/x2b9z2t7/webops/site-build:test
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
   tags:
     - "runner:main"
   except:
@@ -161,8 +161,8 @@ index_algolia_preview:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
+        echo APPLICATION_ID=$(get_secret 'ci.algolia_preview_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.algolia_preview_api_key') >> .env
         export DISPLAY=:99
         Xvfb :99 -ac &
         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
@@ -181,7 +181,7 @@ replica_algolia_preview:
   environment: "preview"
   script:
     - yarn install --immutable
-    - ALGOLIA_APP_ID=$(get_secret 'documentation.algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'documentation.algolia_preview_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:config
   dependencies:
     - build_preview
   when: manual
@@ -291,8 +291,8 @@ index_algolia:
   timeout: 2h 30m
   script:
     - |-
-      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-      echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+      echo APPLICATION_ID=$(get_secret 'ci.algolia_docsearch_application_id') > .env
+      echo API_KEY=$(get_secret 'ci.algolia_docsearch_api_key') >> .env
       export DISPLAY=:99
       Xvfb :99 -ac &
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
@@ -309,7 +309,7 @@ replica_algolia:
   environment: "live"
   script:
     - yarn install --immutable
-    - ALGOLIA_APP_ID=$(get_secret 'documentation.algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'documentation.algolia_docsearch_api_key') yarn run algolia:config
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
   dependencies:
     - build_live
   only:
@@ -381,7 +381,7 @@ test_pa11y:
     - build_live
   script:
     - yarn install --immutable
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'documentation.dd-api-key')
+    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
   only:
     - schedules
 
