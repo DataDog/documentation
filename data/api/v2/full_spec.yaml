@@ -9907,12 +9907,12 @@ components:
       properties:
         region:
           $ref: '#/components/schemas/ServiceDefinitionV2OpsgenieRegion'
-        service-id:
-          description: Opsgenie service id.
-          example: 123e4567-e89b-12d3-a456-426614174000
+        service-url:
+          description: Opsgenie service url.
+          example: https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000
           type: string
       required:
-      - service-id
+      - service-url
       type: object
     ServiceDefinitionV2OpsgenieRegion:
       description: Opsgenie instance region.
@@ -17368,12 +17368,12 @@ paths:
               \"my-team\",\n  \"docs\": [{\"name\": \"Architecture\",\n            \"provider\":
               \"google drive\",\n            \"url\": \"https://gdrive/mygivedoc\"}],\n
               \ \"extensions\": {\"frogextension\": \"extensionfrogvalue\"},\n  \"integrations\":
-              {\"opsgenie\": {\"region\": \"US\",\n                                \"service-id\":
-              \"123e4567-e89b-12d3-a456-426614174000\"},\n                   \"pagerduty\":
-              \"https://my-org.pagerduty.com/service-directory/PMyService\"},\n  \"links\":
-              [{\"name\": \"Runbook\", \"type\": \"runbook\", \"url\": \"https://my-runbook\"}],\n
-              \ \"repos\": [{\"name\": \"Source Code\",\n             \"provider\":
-              \"GitHub\",\n             \"url\": \"https://github.com/DataDog/given\"}],\n
+              {\"opsgenie\": {\"region\": \"US\",\n                                \"service-url\":
+              \"https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000\"},\n
+              \                  \"pagerduty\": \"https://my-org.pagerduty.com/service-directory/PMyService\"},\n
+              \ \"links\": [{\"name\": \"Runbook\", \"type\": \"runbook\", \"url\":
+              \"https://my-runbook\"}],\n  \"repos\": [{\"name\": \"Source Code\",\n
+              \            \"provider\": \"GitHub\",\n             \"url\": \"https://github.com/DataDog/given\"}],\n
               \ \"schema-version\": \"v2\",\n  \"tags\": [\"this:tag\", \"service:tag\"],\n
               \ \"team\": \"super-team\"\n}"
           step: there is a valid "service_definition" in the system
