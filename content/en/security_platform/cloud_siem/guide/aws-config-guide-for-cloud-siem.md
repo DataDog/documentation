@@ -2,13 +2,13 @@
 title: AWS Configuration Guide for Cloud SIEM
 kind: documentation
 further_reading:
-- link: "/security_platform/default_rules/#cat-cloud-siem"
+- link: "/security/default_rules/#cat-cloud-siem"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
-- link: "/security_platform/explorer/"
+- link: "/security/explorer/"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security_platform/cloud_siem/log_detection_rules/"
+- link: "/security/cloud_siem/log_detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
 - link: "/getting_started/integrations/aws/"
@@ -100,10 +100,10 @@ Since Cloud SIEM applies detection rules to all processed logs, see the [in-app 
 [7]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
 [8]: https://docs.datadoghq.com/logs/explorer/
 [9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
-[10]: https://docs.datadoghq.com/security_platform/explorer/
+[10]: https://docs.datadoghq.com/security/explorer/
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
-[12]: https://docs.datadoghq.com/security_platform/default_rules/#cat-cloud-siem
-[13]: https://docs.datadoghq.com/security_platform/detection_rules/
+[12]: https://docs.datadoghq.com/security/default_rules/#cat-cloud-siem
+[13]: https://docs.datadoghq.com/security/detection_rules/
 [14]: https://app.datadoghq.com/security/configuration?detect-threats=apache&secure-cloud-environment=amazon-web-services&secure-hosts-and-containers=kubernetes&selected-products=security_monitoring
 [15]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
 [16]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service

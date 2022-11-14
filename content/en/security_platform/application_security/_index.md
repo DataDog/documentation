@@ -4,13 +4,13 @@ kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 disable_sidebar: true
 further_reading:
-- link: "/security_platform/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
   tag: "Blog"
   text: "Introducing Datadog Application Security"
-- link: "/security_platform/application_security/how-appsec-works/"
+- link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
@@ -52,8 +52,8 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 [1]: /tracing/
 [2]: /agent/
-[3]: /security_platform/application_security/how-appsec-works/
-[4]: /security_platform/default_rules/#cat-application-security
-[5]: /security_platform/application_security/getting_started/
-[6]: /security_platform/explorer/
+[3]: /security/application_security/how-appsec-works/
+[4]: /security/default_rules/#cat-application-security
+[5]: /security/application_security/getting_started/
+[6]: /security/explorer/
 [7]: https://dashcon.io/appsec

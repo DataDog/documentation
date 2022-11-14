@@ -8,13 +8,13 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "Check out the latest Datadog Security releases! (App login required)."
-  - link: "/security_platform/cloud_siem/getting_started"
+  - link: "/security/cloud_siem/getting_started"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
-  - link: "/security_platform/cspm/getting_started"
+  - link: "/security/cspm/getting_started"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Posture Management"
-  - link: "/security_platform/cloud_workload_security/getting_started"
+  - link: "/security/cloud_workload_security/getting_started"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Cloud Workload Security"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
@@ -73,12 +73,12 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][9]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_platform/application_security/
+[1]: /security/application_security/
 [2]: /tracing/
 [3]: /agent/
-[4]: /security_platform/cloud_siem
+[4]: /security/cloud_siem
 [5]: /logs/
 [6]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
-[7]: /security_platform/cspm/
-[8]: /security_platform/cloud_workload_security/
+[7]: /security/cspm/
+[8]: /security/cloud_workload_security/
 [9]: https://app.datadoghq.com/security/configuration

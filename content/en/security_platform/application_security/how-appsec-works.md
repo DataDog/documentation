@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
 further_reading:
-- link: "/security_platform/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
   tag: "Blog"
   text: "Introducing Datadog Application Security"
-- link: "/security_platform/application_security/getting_started/"
+- link: "/security/application_security/getting_started/"
   tag: "Documentation"
   text: "Get started with Application Security Management"
 ---
@@ -102,16 +102,16 @@ Datadog ASM includes over 100 attack patterns that help protect against [many di
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: /security_platform/application_security/getting_started/#prerequisites
+[2]: /security/application_security/getting_started/#prerequisites
 [3]: /tracing/configure_data_security/?tab=http
-[4]: /security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
+[4]: /security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 [5]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[6]: /security_platform/default_rules/#cat-application-security
+[6]: /security/default_rules/#cat-application-security
 [7]: https://app.datadoghq.com/security/appsec/event-rules
-[8]: /security_platform/cloud_siem/
+[8]: /security/cloud_siem/
 [9]: /tracing/
 [10]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
-[11]: /security_platform/application_security/add-user-info/?tab=set_user
+[11]: /security/application_security/add-user-info/?tab=set_user
 [12]: /agent/
 [13]: /tracing/trace_pipeline/trace_retention/
 [14]: /tracing/service_catalog/#security-view

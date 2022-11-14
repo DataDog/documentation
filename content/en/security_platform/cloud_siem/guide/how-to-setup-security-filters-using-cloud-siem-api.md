@@ -234,7 +234,7 @@ If you aim to only analyze explicitly specified categories of logs, be cautious 
 | CDN Logs              | `source:(cloudfront OR cloudflare OR fastly)`    |
 | Web Server Logs       | `source:(nginx* OR apache OR iis)`               |
 
-[1]: /security_platform/default_rules#cat-cloud-siem
+[1]: /security/default_rules#cat-cloud-siem
 [2]: /api/latest/security-monitoring/#get-all-security-filters
 [3]: /api/v1/authentication/
 [4]: https://curl.haxx.se/download.html

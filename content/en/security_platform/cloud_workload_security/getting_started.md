@@ -321,4 +321,4 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /security_platform/cloud_security_management/troubleshooting
+[3]: /security/cloud_security_management/troubleshooting
