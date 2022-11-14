@@ -161,8 +161,8 @@ index_algolia_preview:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   script:
     - |-
-        echo APPLICATION_ID=$(get_secret 'ci.algolia_preview_application_id') > .env
-        echo API_KEY=$(get_secret 'ci.algolia_preview_api_key') >> .env
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_preview_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_preview_api_key') >> .env
         export DISPLAY=:99
         Xvfb :99 -ac &
         echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
@@ -274,7 +274,7 @@ test_live_link_checks:
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
-    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834" ; fi
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   only:
     - master
   artifacts:
@@ -291,8 +291,8 @@ index_algolia:
   timeout: 2h 30m
   script:
     - |-
-      echo APPLICATION_ID=$(get_secret 'ci.algolia_docsearch_application_id') > .env
-      echo API_KEY=$(get_secret 'ci.algolia_docsearch_api_key') >> .env
+      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+      echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
       export DISPLAY=:99
       Xvfb :99 -ac &
       echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
