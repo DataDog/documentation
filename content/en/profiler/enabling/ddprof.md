@@ -1,5 +1,5 @@
 ---
-title: Enabling the Profiler for Compiled Languages
+title: Enabling the Native Profiler for Compiled Languages
 kind: Documentation
 code_lang: ddprof
 type: multi-code-lang
@@ -17,10 +17,11 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The profiler for compiled languages, <code>ddprof</code> is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+The native profiler for compiled languages, <code>ddprof</code> is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
-The Datadog Continuous Profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
+The native profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
+Profiles sent from `ddprof` show up under the _native_ runtime in the Datadog web app.
 
 ## Requirements
 
