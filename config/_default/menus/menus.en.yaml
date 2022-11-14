@@ -4843,7 +4843,7 @@ api:
       operationids:
         - GetLogsIndex
       unstable: []
-      order: 3
+      order: 2
   - name: Create an index
     url: '#create-an-index'
     identifier: logs-indexes-create-an-index
@@ -4855,7 +4855,7 @@ api:
       operationids:
         - CreateLogsIndex
       unstable: []
-      order: 2
+      order: 3
   - name: Get all indexes
     url: '#get-all-indexes'
     identifier: logs-indexes-get-all-indexes
