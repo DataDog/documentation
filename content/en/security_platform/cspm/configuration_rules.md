@@ -28,10 +28,9 @@ These detection rules work with out-of-the-box integration configurations and ma
   {{< nextlink href="/security_platform/default_rules/#cat-posture-management-infra">}}<u>Infrastructure Configuration</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-[1]: /security_platform/default_rules/#cat-posture-management-cloud
-[2]: /security_platform/detection_rules/
+[1]: /security/default_rules/#cat-posture-management-cloud
+[2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
-[4]: /security_platform/cspm/frameworks_and_benchmarks
-[5]: /security_platform/default_rules/#cat-posture-management-infra
+[4]: /security/cspm/frameworks_and_benchmarks
+[5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
