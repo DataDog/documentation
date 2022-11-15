@@ -87,7 +87,7 @@ The log file contains the following log record (inline):
 }
 ```
 
-[1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
+[1]: https://pypi.python.org/pypi/JSON-log-formatter/
 {{% /tab %}}
 {{% tab "Python-json-logger" %}}
 
