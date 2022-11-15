@@ -23,10 +23,10 @@ This page walks you through how to develop an offering on the Datadog Marketplac
 To develop a Marketplace tile, follow these instructions below:
 
 1. [Choose a type of offering to list](#select-an-offering).
-2. Build an [Agent-based integration](#build-an-agent-based-integration), a [REST API-based integration](#build-a-rest-api-integration), a [Datadog App](#build-a-datadog-app), an [informational tile-only listing](#build-a-saas-license-or-professional-service-integration), or a [bi-directional data integration](#build-a-bi-directional-data-integration).
+2. Build an [Agent-based integration](#build-an-agent-based-integration), a [REST API-based integration](#build-a-rest-api-integration), a [Datadog App](#build-a-datadog-app), an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering), or a [bi-directional data integration](#build-a-bi-directional-data-integration).
 3. [Access the Marketplace repository and set up a directory](#set-up-a-directory-and-clone-the-marketplace-repository).
 4. [Install and run the Datadog Development Toolkit command](#install-and-run-the-datadog-development-toolkit).
-5. Create an [information tile-only listing](#build-a-saas-license-or-professional-service-integration) or a [full data integration](#create-a-full-data-integration).
+5. Create an [information tile-only listing](#build-a-saas-license-or-professional-service-offering) or an [Agent-based integration](#create-an-agent-based-integration).
 6. [Populate the integration tile scaffolding](#populate-the-tile-scaffolding). 
 7. [Open a pull request](#open-a-pull-request).
 8. [Review feedback and request approval to merge the pull request and release the integration tile](#obtain-approval-to-merge). 
@@ -43,7 +43,7 @@ Choose from the following offering types to create an integration tile that repr
 - A [Datadog Agent-based integration](#build-an-agent-based-integration)
 - A [REST API integration](#build-a-rest-api-integration)
 - A [Datadog App](#build-a-datadog-app)
-- A [SaaS license or subscription](#build-a-saas-license-or-professional-service-integration)
+- A [SaaS license or subscription](#build-a-saas-license-or-professional-service-offering)
 - [Professional services](#build-a-bi-directional-data-integration)
 
 ### Build an Agent-based integration
@@ -77,19 +77,19 @@ For more information about Datadog Agent-based integrations, see [Introduction t
 
 Use an [API integration][6] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
  
-Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-integration) once your development work is complete.
+Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering) once your development work is complete.
  
 A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][7] in a Marketplace tile instead.
 
 ### Build a Datadog App
 
-[Datadog Apps][8] are custom dashboard widgets that are developed in the [Datadog Developer Platform][9]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-integration) on the **Integrations** or **Marketplace** page.
+[Datadog Apps][8] are custom dashboard widgets that are developed in the [Datadog Developer Platform][9]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering) on the **Integrations** or **Marketplace** page.
 
-### Build a SaaS license or professional service integration
+### Build a SaaS license or professional service offering
 
 If you are developing an offering that does not use the Datadog Agent (such as a Datadog App, SaaS license, professional service, or an API-based integration), you only need to create an informational tile listing. These tile-only listings require Datadog users to install and configure the integration outside of Datadog, and listings for SaaS licenses and professional services do not collect any data.
 
-The Datadog Development Toolkit offers a command option to create tile-only scaffolding: `ddev create -t tile "<Offering Name>"`. When using this command, you only receive the files related to your tile, instead of all the files used to build a full Agent-based data integration.
+The Datadog Development Toolkit offers a command option to create tile-only scaffolding: `ddev create -t tile "<Offering Name>"`. When using this command, you only receive the files related to your tile, instead of all the files used to build a full Agent-based integration.
 
 ### Build a bi-directional data integration
 
@@ -114,7 +114,7 @@ Once you have been granted access to the [Marketplace repository][17], create th
 
 ### Install and run the Datadog development toolkit
 
-The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing a data integration by generating a skeleton of your integration tile's assets and metadata.
+The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata.
 
 First, ensure that [Python v3.8 and later][19] is installed. To avoid potential environment conflicts, create a virtual environment in the directory where you cloned the Marketplace repository by running `python3 -m pip install virtualenv --user`.
 
@@ -140,9 +140,9 @@ ddev config set repo marketplace
 
 For standalone SaaS licenses, Datadog Apps, professional services, and Datadog REST API-based integrations, the Datadog Development Toolkit creates the scaffolding for an informational tile-only listing. To create the informational tile-only listing's scaffolding, run `ddev create -t tile "<Offering Name>"` in the `marketplace` directory specified above.
 
-### Create a full data integration
+### Create a full Agent-based integration
 
-To generate a complete data integration's scaffolding, run `ddev create "<Offering Name>"` from the `marketplace` directory specified above.
+To generate a complete integration's scaffolding, run `ddev create "<Offering Name>"` from the `marketplace` directory specified above.
 
 ### Populate the tile scaffolding
 

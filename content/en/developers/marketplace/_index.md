@@ -22,11 +22,11 @@ The Datadog Marketplace is a digital marketplace where Datadog Technology Partne
 
 {{< img src="developers/marketplace/marketplace_overview.png" alt="The Datadog Marketplace page" style="width:100%" >}}
 
-While the **Integrations** page includes data integrations and Datadog Apps built by Datadog and Technology Partners at no cost, the **Marketplace** page is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings including data integrations, Datadog Apps, software, and professional services. 
+While the **Integrations** page includes integrations and Datadog Apps built by Datadog and Technology Partners at no cost, the **Marketplace** page is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings including Agent-based or API-based integrations, Datadog Apps, software, and professional services. 
 
 ## Join the Datadog partner network
 
-Before requesting access to the Datadog Marketplace, first apply to join the [Datadog Partner Network's][3] **Technology Partners** track. As a Datadog Technology Partner, you can either develop a [data integration][4] or a [Datadog App][5], or list your SaaS license or professional services offering. 
+Before requesting access to the Datadog Marketplace, first apply to join the [Datadog Partner Network's][3] **Technology Partners** track. As a Datadog Technology Partner, you can either develop an [Agent-based or API-based integration][4] or a [Datadog App][5], or list your SaaS license or professional services offering. 
 
 ## Apply for a sandbox account
 
@@ -49,7 +49,7 @@ Once you've joined the Technology Partners track and requested a sandbox account
 * Completing the on-demand [**Introduction to Datadog Integrations**][8] course on the [Datadog Learning Center][9].
 * Joining the Marketplace Engineering Office Hours through the public [Datadog Slack channel][10].
 * Reading the documentation about [Datadog Apps][5] if you want to build a custom widget that integrates external data and actions with Datadog dashboards. 
-* Reading the documentation about setting up an [OAuth 2.0 client][11] for data integrations and Datadog Apps.
+* Reading the documentation about setting up an [OAuth 2.0 client][11] for Agent-based or API-based integrations and Datadog Apps.
 
 ## List an offering on Marketplace
 
@@ -69,7 +69,7 @@ Professional services
 
 ### Review the example pull request
 
-While the process for building a data integration is identical in the [`integrations-extras`][12] and [`marketplace`][13] repositories, a Marketplace offering requires additional files and information such as pricing plans. 
+While the process for building an integration is identical in the [`integrations-extras`][12] and [`marketplace`][13] repositories, a Marketplace offering requires additional files and information such as pricing plans. 
 
 ### Request access to Marketplace
 
