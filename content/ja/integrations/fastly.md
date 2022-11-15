@@ -15,7 +15,7 @@ assets:
       prefix: fastly.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: fastly
+    source_type_name: Fastly
   monitors:
     '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json
     '[Fastly] Abnormal bandwidth being sent for service: {{service.name}}': assets/monitors/rec_monitor_bandwidth.json
