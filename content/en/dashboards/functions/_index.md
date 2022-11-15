@@ -51,3 +51,4 @@ Functions can be applied to your queries by clicking the Add Function `Σ` icon 
 
 [1]: /metrics/#time-aggregation
 [2]: /metrics/#space-aggregation
+[3]: /metrics/#anatomy-of-a-metric-query
