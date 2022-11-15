@@ -11,6 +11,8 @@ cascade:
     algolia:
         rank: 40
         tags: ["integrations"]
+        category: Integrations
+        subcategory: Documentation
 ---
 すべてのシステム、アプリケーション、サービスの横断的な監視を実現します。Datadog が提供する {{< translate key="integration_count" >}} 以上の組み込みインテグレーションをご活用ください。
 

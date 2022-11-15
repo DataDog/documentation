@@ -6,6 +6,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Guides sur la gestion de compte
 ---
 
 {{< whatsnext desc="Guides sur la migration des API de mesure de l'utilisation :" >}}

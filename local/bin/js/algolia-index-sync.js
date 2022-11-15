@@ -18,25 +18,33 @@ const getIndexName = () => {
     }
 
     return algoliaIndexName;
-}
+};
 
-const updateSettings = index => {
+const updateSettings = (index) => {
     const settings = {
-        searchableAttributes: ['title', 'section_header', 'type, tags', 'unordered(content)'],
+        searchableAttributes: [
+            'title',
+            'section_header',
+            'tags',
+            'category',
+            'subcategory',
+            'type',
+            'unordered(content)'
+        ],
         ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
         customRanking: ['asc(tags)', 'desc(rank)'],
-        attributesToHighlight: ['title', 'section_header', 'content', 'type', 'tags'],
+        attributesToHighlight: ['title', 'section_header', 'content', 'type', 'tags', 'category', 'subcategory'],
         attributesForFaceting: ['language', 'tags'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
         attributeForDistinct: 'full_url',
         distinct: 1
-    }
+    };
 
-    return index.setSettings(settings, { forwardToReplicas: true })
-}
+    return index.setSettings(settings, { forwardToReplicas: true });
+};
 
-const updateSynonyms = index => {
+const updateSynonyms = (index) => {
     const synonyms = [
         {
             objectID: 'agent',
@@ -78,17 +86,17 @@ const updateSynonyms = index => {
             type: 'synonym',
             synonyms: ['npm', 'network performance monitoring']
         }
-    ]
+    ];
 
     return index.saveSynonyms(synonyms, {
         forwardToReplicas: true,
         replaceExistingSynonyms: true
-    })
-}
+    });
+};
 
 const updateReplicas = (client, indexName) => {
     const replicas = {};
-    
+
     replicas[`${indexName}_api`] = {
         ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
         customRanking: ['desc(rank)']
@@ -101,46 +109,46 @@ const updateReplicas = (client, indexName) => {
             console.log(`Index ${replicaIndexName} configuration update complete...`);
         });
     });
-}
+};
 
-const updateIndex = indexName => {
+const updateIndex = (indexName) => {
     const localAlogliaSearchIndex = require('../../../public/algolia.json');
 
     const cb = (error, result) => {
         if (error) {
-            console.error(error)
-            throw error
+            console.error(error);
+            throw error;
         }
 
-        console.log(result)
-    }
+        console.log(result);
+    };
 
-    atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb)
-}
+    atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb);
+};
 
 const sync = () => {
-    const appId = process.env.ALGOLIA_APP_ID || ''
-    const adminKey = process.env.ALGOLIA_ADMIN_KEY || ''
-    const indexName = getIndexName()
+    const appId = process.env.ALGOLIA_APP_ID || '';
+    const adminKey = process.env.ALGOLIA_ADMIN_KEY || '';
+    const indexName = getIndexName();
 
     if (appId === '' || adminKey === '' || indexName === '') {
-        console.error('Missing Algolia App Id, API Key, or Index name.  Exiting...')
-        process.exit(1)
+        console.error('Missing Algolia App Id, API Key, or Index name.  Exiting...');
+        process.exit(1);
     }
 
-    const client = algoliasearch(appId, adminKey)
-    const index = client.initIndex(indexName)
+    const client = algoliasearch(appId, adminKey);
+    const index = client.initIndex(indexName);
 
     updateSettings(index)
         .then(() => console.log(`${indexName} settings update complete`))
-        .catch(err => console.error(err))
+        .catch((err) => console.error(err));
 
     updateSynonyms(index)
         .then(() => console.log(`${indexName} synonyms update complete`))
-        .catch(err => console.error(err))
+        .catch((err) => console.error(err));
 
-    updateReplicas(client, indexName)
-    updateIndex(indexName)
-}
+    updateReplicas(client, indexName);
+    updateIndex(indexName);
+};
 
-sync()
+sync();

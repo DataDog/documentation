@@ -7,6 +7,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Guides sur CI Visibility
 ---
 
 {{< whatsnext desc="Guides sur CI Visibility :" >}}

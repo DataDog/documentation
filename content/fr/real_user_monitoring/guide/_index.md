@@ -6,6 +6,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Guides pour les solutions RUM et Session Replay
 ---
 
 {{< whatsnext desc="RUM :" >}}

@@ -7,6 +7,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Serverless Monitoring Guides
 ---
 
 ## Monitor your serverless applications

@@ -3,13 +3,15 @@ aliases:
 - /ja/tracing/getting_further/
 - /ja/tracing/guide/ecommerce_and_retail_use_cases/
 disable_toc: true
-kind: ガイド
+kind: guide
 private: true
 title: トレースガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: トレースガイド
 ---
 
 

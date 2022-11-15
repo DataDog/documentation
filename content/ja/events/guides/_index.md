@@ -16,6 +16,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: イベントガイド
 ---
 
 イベントは、エンジニア (開発、運用、セキュリティ) が注目すべきアクティビティの記録です。

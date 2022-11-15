@@ -11,6 +11,8 @@ cascade:
     algolia:
         rank: 40
         tags: ["integrations"]
+        category: Integrations
+        subcategory: Documentation
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

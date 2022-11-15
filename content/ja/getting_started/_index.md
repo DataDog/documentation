@@ -13,6 +13,8 @@ cascade:
     algolia:
         rank: 70
         tags: ["getting_started"]
+        category: Getting Started
+        subcategory: Documentation
 ---
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
 {{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Datadog UI の使用方法 (ダッシュボード、インフラストラクチャーリスト、マップなど) をご覧ください。{{< /nextlink >}}
