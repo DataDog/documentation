@@ -7,6 +7,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Logs Guides
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}

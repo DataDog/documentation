@@ -14,6 +14,8 @@ further_reading:
 algolia:
     rank: 60
     tags: ["rbac_permissions"]
+    category: Documentation
+    subcategory: Datadog Role Permissions
 ---
 
 After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][1], or through the [Datadog Permission API][2]. Find below a list of available permissions.

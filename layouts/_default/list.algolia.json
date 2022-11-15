@@ -11,10 +11,12 @@
             {{ $title := $page.Params.integration_title | default $page.Title }}
             {{ $content := $page.Plain | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags | default (slice "docs") }}
+            {{ $category := $page.Params.algolia.category | default "Documentation" }}
+            {{ $subcategory := $page.Params.algolia.subcategory | default $page.Title }}
             {{ $rank := $page.Params.algolia.rank | default 50 }}
 
             {{- /* record for each individual section (split by h2 header) */ -}}
-            {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "tags" $tags "rank" $rank) }}
+            {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "tags" $tags "categoroy" $category "subcategory" $subcategory "rank" $rank) }}
 
             {{- /* Full page record */ -}}
             {{- $.Scratch.Add "algoliaindex" (
@@ -26,6 +28,8 @@
                 "full_url" $page.Permalink
                 "language" $page.Language.Lang
                 "tags" $tags
+                "category" $category
+                "subcategory" $subcategory
                 "rank" $rank
             ) -}}
         {{ end }}

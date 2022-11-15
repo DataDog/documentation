@@ -7,6 +7,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Guides sur les monitors
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

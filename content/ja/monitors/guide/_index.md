@@ -1,12 +1,14 @@
 ---
 disable_toc: true
-kind: ガイド
+kind: guide
 private: true
 title: モニターガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: モニターガイド
 ---
 
 {{< whatsnext desc="一般ガイド:" >}}

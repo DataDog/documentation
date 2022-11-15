@@ -2,13 +2,15 @@
 aliases:
 - /ja/integrations/observability_pipelines/guide/
 disable_toc: true
-kind: ガイド
+kind: guide
 private: true
 title: Observability Pipelines ガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: Observability Pipelines
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

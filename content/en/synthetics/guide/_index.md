@@ -9,6 +9,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Synthetic Monitoring Guides
 ---
 
 {{< whatsnext desc="General Guides:" >}}

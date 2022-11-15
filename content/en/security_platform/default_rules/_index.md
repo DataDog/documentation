@@ -11,6 +11,8 @@ cascade:
     algolia:
         rank: 30
         tags: ["default_rules"]
+        category: Documentation
+        subcategory: Security Detection Rules
 ---
 
 Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration. For more information, see the Detection Rules documentation.

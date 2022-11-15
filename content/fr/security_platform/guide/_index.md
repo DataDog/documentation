@@ -9,6 +9,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Guides sur la plateforme de sécurité
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}
