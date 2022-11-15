@@ -202,7 +202,7 @@ Datadog highly recommends automating this process by using the [Datadog API endp
 
 The `sds` tag indicates whether or not your logs have been scanned by the Sensitive Data Scanner. Use the `sds` tag to estimate the costs associated with the specific usage of Sensitive Data Scanner.
 
-For the Sensitive Data Scanner, billed usage is based on the volume of logs scanned, so it matches a scanning group, not a scanning rule. Therefore, you need to create a proxy scanning rule in each scanning group with a regex to match all logs to ensure that all scanned logs are tagged.
+For the Sensitive Data Scanner, billed usage is based on the volume of logs scanned, so it matches a scanning group, not a scanning rule. Therefore, you need to create a proxy scanning rule in each scanning group with a regex to match all logs. This ensures that all scanned logs are tagged.
 
 1. Go to the [Sensitive Data Scanner][8].
 2. In each scanning group:  
