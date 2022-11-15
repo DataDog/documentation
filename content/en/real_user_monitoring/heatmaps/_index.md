@@ -54,6 +54,15 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 {{< img src="real_user_monitoring/heatmaps/actions.jpeg" alt="Shows an example action and the information you can get about that action." style="width:60%;">}}
 
+## Troubleshooting
+
+### I am looking at a heatmap for a given view, but it's showing me an unexpected page.
+
+Heatmaps are based on RUM view names and depending on how your RUM application is configured, many pages can start being grouped under the same view name or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names) function.
+
+### The view that I selected is not matching the initial content shown to me in the heatmap.
+
+Datadog uses Session Replay data to generate heatmaps. The initial background image shown in the heatmap is smartly picked from both recent Session Replays, and one that best matches the initial state of the page. In some cases, we might not be able to find the correct replay, so you can change the background of the heatmap through the Select Page State button. 
 ### Next steps
 
 After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer][4] or building a funnel that includes the action in order to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
