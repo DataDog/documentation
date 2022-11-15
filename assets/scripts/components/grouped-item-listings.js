@@ -29,7 +29,7 @@ export function initializeGroupedListings() {
             results = allRules;
         }
 
-        if (searchValue && searchValue.length > 2) {
+        if (searchValue && searchValue.length >= 2) {
             results = Array.from(results).filter(item => (item.dataset.name && item.dataset.name.indexOf(searchValue) > -1));
         }
 
