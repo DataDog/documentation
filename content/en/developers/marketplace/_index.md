@@ -59,13 +59,13 @@ Integrations
 : Integrations that submit or pull third-party data through the Datadog Agent or an API.
 
 Software licenses
-: Integrations that are informational and are tile-only listings on the Datadog Marketplace. 
+: SaaS licenses enable you to deliver and license software solutions to customers through the Datadog Marketplace. 
 
 UI extensions or applications
 : An application (such as a [Datadog App][5]) that are tile-only listings on the Datadog Marketplace.
 
 Professional services
-: Integrations that are informational and are tile-only listings on the Datadog Marketplace. 
+: Professional Services enable you to offer your team's services for implementation, support, or management for a set period of time. 
 
 ### Review the example pull request
 

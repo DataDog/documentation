@@ -48,6 +48,19 @@ Choose from the following offering types to create an integration tile that repr
 
 ### Build an Agent-based integration
 
+All Datadog integrations must be bi-directional, meaning that integrations can pull data from and push data into Datadog, except for informational tile-only listings on the Datadog Marketplace, such as a standalone SaaS license or a professional service offering. 
+
+Integrations send the following types of data to Datadog:
+
+- [Metrics][10]
+- [Logs][11]
+- [Events][12]
+- [Service Checks][13]
+- [Traces][14]
+- [Incidents][15]
+- [Security Events][16]
+
+
 #### OpenMetrics check
 
 An [OpenMetrics check][2] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
@@ -79,6 +92,18 @@ Use an [API integration][6] to enrich and submit data from your backend, or pull
  
 Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering) once your development work is complete.
  
+All Datadog integrations must be bi-directional, meaning that integrations can pull data from and push data into Datadog. 
+
+Integrations send the following types of data to Datadog:
+
+- [Metrics][10]
+- [Logs][11]
+- [Events][12]
+- [Service Checks][13]
+- [Traces][14]
+- [Incidents][15]
+- [Security Events][16]
+
 A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][7] in a Marketplace tile instead.
 
 ### Build a Datadog App
@@ -91,19 +116,6 @@ If you are developing an offering that does not use the Datadog Agent (such as a
 
 The Datadog Development Toolkit offers a command option to create tile-only scaffolding: `ddev create -t tile "<Offering Name>"`. When using this command, you only receive the files related to your tile, instead of all the files used to build a full Agent-based integration.
 
-### Build a bi-directional data integration
-
-All Datadog integrations must be bi-directional, meaning that integrations can pull data from and push data into Datadog, except for informational tile-only listings on the Datadog Marketplace, such as a standalone SaaS license or a professional service offering. 
-
-Integrations send the following types of data to Datadog:
-
-- [Metrics][10]
-- [Logs][11]
-- [Events][12]
-- [Service Checks][13]
-- [Traces][14]
-- [Incidents][15]
-- [Security Events][16]
 
 
 ### Set up a directory and clone the Marketplace repository
