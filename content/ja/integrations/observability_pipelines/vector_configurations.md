@@ -11,9 +11,9 @@ further_reading:
 - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
   tag: ドキュメント
   text: Vector のソースとなる Datadog Agent
-- link: /agent/vector_aggregation/
+- link: /integrations/observability_pipelines/integrate_vector_with_datadog/
   tag: ドキュメント
-  text: Vector アグリゲーターにデータを送信するための Datadog Agent の構成
+  text: Vector にデータを送信するための Datadog Agent の構成
 kind: ドキュメント
 title: Vector の構成
 ---

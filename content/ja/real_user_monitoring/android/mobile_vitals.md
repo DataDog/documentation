@@ -3,7 +3,7 @@ dependencies:
 - https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: dd-sdk-android ソースコード
 - link: https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/
   tag: ブログ

@@ -14,11 +14,11 @@ Query values display the current value of a given metric, APM, or log query. The
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
-{{< img src="dashboards/widgets/query_value/query_value.png" alt="Query value widget"  >}}
+{{< img src="dashboards/widgets/query_value/query_value1.png" alt="Query value widget" style="width:80%;" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/query_value/query-value-widget-setup.png" alt="Query value widget setup" style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="Query value widget setup" style="width:80%;">}}
 
 ### Configuration
 

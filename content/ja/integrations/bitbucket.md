@@ -26,7 +26,7 @@ team: web-integrations
 version: '1.0'
 ---
 
-{{< img src="integrations/bitbucket/integrations-bitbucket.gif" alt="integrations bitbucket" popup="true">}}
+{{< img src="integrations/bitbucket/integrations-bitbucket.mp4" alt="integrations bitbucket" video="true" >}}
 
 ## 概要
 

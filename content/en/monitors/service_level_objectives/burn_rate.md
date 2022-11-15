@@ -160,3 +160,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
 [5]: /api/v1/monitors/#create-a-monitor
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor

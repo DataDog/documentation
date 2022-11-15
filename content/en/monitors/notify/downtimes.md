@@ -177,7 +177,7 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 ### Expiration
 
-If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
+If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins.
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.
@@ -193,6 +193,14 @@ If a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when
 
 All alerted states are included on the [weekly monitor report][7] even if the monitor is in a downtime.
 
+## Auto-muting
+
+Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. The following scenarios are supported:
+
+- Auto-muting for manual shutdown of [AWS EC2 instances][8] and instance termination by AWS autoscaling based on host statuses from the CloudWatch API.
+- Auto-muting for manual shutdown of [Google Compute Engine (GCE)][10] instances and instance termination triggered by GCE autoscaling based on host statuses from the GCE API.
+- Auto-muting for shutdown or termination of [Azure VMs][9], whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the Azure Resource Health API.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -204,3 +212,6 @@ All alerted states are included on the [weekly monitor report][7] even if the mo
 [5]: /events/explorer
 [6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /account_management/#preferences
+[8]: /integrations/amazon_ec2/#ec2-automuting
+[10]: /integrations/google_compute_engine/#gce-automuting
+[9]: /integrations/azure_vm/#automuting-monitors

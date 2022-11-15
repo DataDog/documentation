@@ -39,41 +39,40 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
 
 1. RUM ブラウザ SDK を初期化する際に、`trackViewsManually` を true に設定します。
 
-    {{< tabs >}}
-    {{% tab "NPM" %}}
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
 
-    ```
-    import { datadogRum } from '@datadog/browser-rum';
-
-    datadogRum.init({
+datadogRum.init({
+    ...,
+    trackViewsManually: true,
+    ...
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.init({
+        ...,
+        trackViewsManually: true,
+        ...
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
         ...,
         trackViewsManually: true,
         ...
     });
-    ```
-    {{% /tab %}}
-    {{% tab "CDN 非同期" %}}
-    ```
-    DD_RUM.onReady(function() {
-        DD_RUM.init({
-            ...,
-            trackViewsManually: true,
-            ...
-        })
-    })
-    ```
-    {{% /tab %}}
-    {{% tab "CDN 同期" %}}
-    ```
-    window.DD_RUM &&
-        window.DD_RUM.init({
-            ...,
-            trackViewsManually: true,
-            ...
-        });
-    ```
-    {{% /tab %}}
-    {{< /tabs >}}
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 2. 新しいページまたはルート変更 (単一ページアプリケーションの場合) ごとにビューを開始する必要があります。RUM データは、ビューの開始時に収集されます。オプションで、関連するビュー名、サービス名、およびバージョンを定義します。
 
@@ -87,22 +86,33 @@ RUM SDK は、ユーザーが新しいページにアクセスするたびに、
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```
-datadogRum.startView('checkout', 'purchase', '1.2.3')
+```javascript
+datadogRum.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
-    DD_RUM.startView('checkout', 'purchase', '1.2.3')
+    DD_RUM.startView({
+      name: 'checkout',
+      service: 'purchase',
+      version: '1.2.3'
+    })
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
-window.DD_RUM && window.DD_RUM.startView('checkout', 'purchase', '1.2.3')
+```javascript
+window.DD_RUM && window.DD_RUM.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -121,7 +131,7 @@ RUM イベントをインターセプトすると、次のことが可能にな�
 
 [バージョン 2.13.0][5] 以降、`beforeSend` は 2 つの引数を取ります。RUM ブラウザ SDK によって生成された `event` と、RUM イベントの作成をトリガーした `context` です。
 
-```
+```javascript
 function beforeSend(event, context)
 ```
 
@@ -134,7 +144,7 @@ function beforeSend(event, context)
 | リソース (XHR)   | [XMLHttpRequest][8] と [PerformanceResourceTiming][9]            |
 | リソース (フェッチ) | [リクエスト][10]、[リソース][11]、[PerformanceResourceTiming][9]      |
 | リソース (その他) | [PerformanceResourceTiming][9] |
-| エラー            | [エラー][12]                     |
+| Error            | [エラー][12]                     |
 | ロングタスク        | [PerformanceLongTaskTiming][13] |
 
 詳細については、[RUM データの強化と制御ガイド][14]を参照してください。
@@ -145,8 +155,7 @@ function beforeSend(event, context)
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
-```
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -162,7 +171,7 @@ datadogRum.init({
 ```
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.init({
         ...,
@@ -178,7 +187,7 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-```
+```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
@@ -207,8 +216,7 @@ RUM ブラウザ SDK は以下を無視します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
-```
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -220,10 +228,9 @@ datadogRum.init({
     ...
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.init({
         ...,
@@ -237,8 +244,7 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
@@ -249,7 +255,6 @@ window.DD_RUM &&
         ...
     });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -275,7 +280,7 @@ RUM ブラウザ SDK は、上記にリストされていないイベントプ�
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -289,10 +294,9 @@ datadogRum.init({
     ...
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.init({
         ...,
@@ -308,8 +312,7 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
@@ -322,7 +325,6 @@ window.DD_RUM &&
         ...
     });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -353,7 +355,7 @@ RUM セッションにユーザー情報を追加すると、次の役に立ち�
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```
+```javascript
 datadogRum.setUser({
     id: '1234',
     name: 'John Doe',
@@ -362,10 +364,9 @@ datadogRum.setUser({
     ...
 })
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.setUser({
         id: '1234',
@@ -378,8 +379,7 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM && window.DD_RUM.setUser({
     id: '1234',
     name: 'John Doe',
@@ -398,21 +398,19 @@ window.DD_RUM && window.DD_RUM.setUser({
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```
+```javascript
 datadogRum.getUser()
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.getUser()
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM && window.DD_RUM.getUser()
 ```
 
@@ -425,21 +423,19 @@ window.DD_RUM && window.DD_RUM.getUser()
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```
+```javascript
 datadogRum.setUserProperty('name', 'John Doe')
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.setUserProperty('name', 'John Doe')
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 ```
 
@@ -452,24 +448,21 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```
+```javascript
 datadogRum.removeUserProperty('name')
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.removeUserProperty('name')
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -481,24 +474,21 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-```
+```javascript
 datadogRum.clearUser()
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.clearUser()
 })
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM && window.DD_RUM.clearUser()
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -510,8 +500,7 @@ window.DD_RUM && window.DD_RUM.clearUser()
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
-```
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -521,10 +510,9 @@ datadogRum.init({
     sampleRate: 90,
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 <script>
  (function(h,o,u,n,d) {
    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
@@ -543,8 +531,7 @@ datadogRum.init({
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
@@ -553,7 +540,6 @@ window.DD_RUM &&
         sampleRate: 90,
     });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -569,8 +555,7 @@ RUM を初期化した後、`setGlobalContextProperty(key: string, value: any)` 
 
 {{< tabs >}}
 {{% tab "NPM" %}}
-
-```
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.setGlobalContextProperty('<CONTEXT_KEY>', <CONTEXT_VALUE>);
@@ -581,10 +566,9 @@ datadogRum.setGlobalContextProperty('activity', {
     amount: 23.42
 });
 ```
-
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
@@ -599,8 +583,7 @@ DD_RUM.onReady(function() {
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
-
-```
+```javascript
 window.DD_RUM && window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 
 // コード例
@@ -609,7 +592,6 @@ window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     amount: 23.42
 });
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 

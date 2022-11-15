@@ -1,67 +1,92 @@
 ---
-title: Continuous Profiler の概要
-kind: ドキュメント
 aliases:
-  - /ja/tracing/profiling/intro_to_profiling
-  - /ja/tracing/profiler/intro_to_profiling
+- /ja/tracing/profiling/intro_to_profiling
+- /ja/tracing/profiler/intro_to_profiling
 further_reading:
-  - link: /tracing/profiler/
-    tag: ドキュメント
-    text: Continuous Profiler
-  - link: /tracing/profiler/enabling/
-    tag: ドキュメント
-    text: プロファイラーの有効化
-  - link: 'https://learn.datadoghq.com/course/view.php?id=18'
-    tag: ラーニングセンター
-    text: Datadog 入門
+- link: /profiler/
+  tag: ドキュメント
+  text: Continuous Profiler
+- link: /profiler/enabling/
+  tag: ドキュメント
+  text: プロファイラーの有効化
+- link: https://learn.datadoghq.com/course/view.php?id=18
+  tag: ラーニングセンター
+  text: Datadog 入門
+- link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
+  tags: ブログ
+  text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
+kind: ドキュメント
+title: Continuous Profiler の概要
 ---
-プロファイリングによってサービスがより速く、より安く、より信頼できると聞いたことがあるかもしれません。しかし、プロファイラーを使用したことがない場合は、ダークアートのように思えるかもしれません。
 
-このガイドでは、プロファイリングについて説明し、パフォーマンスの問題があるサンプルサービスのプロファイルを作成し、Continuous Profiler を使用して問題を理解して修正する方法を確認します。
+プロファイリングはサービスをより速く、より安く、より信頼性の高いものにするために役立ちますが、プロファイラーを使ったことがない人には少し分かりにくいかもしれません。
 
-## プロファイリングとは？
+このガイドでは、プロファイリングについて説明するとともに、パフォーマンスに問題のあるサンプルサービスを例として、Datadog Continuous Profiler を使用して問題を理解・修正する方法をご紹介します。
 
-プロファイラーは、実行中のプログラムに関するデータを収集することにより、各関数が実行している「作業」の量を示します。たとえば、インフラストラクチャーモニタリングでは、アプリサーバーが CPU の 80% を使用していることが示されている場合があっても、その理由がわからないかもしれません。プロファイリングにより、関数 `doSomeWork` が CPU の 48% を使用していること、関数 `renderGraph` がさらに 19% を使用していることなどがわかります。多くのプログラムはごく少数の場所で多くの時間を費やし、それらがどこにあるのかが明確でないことが多いため、これはパフォーマンスの問題に取り組むときに重要です。プログラムのどの部分を最適化するかを推測した場合、エンジニアは多くの時間を費やし、たいした結果が得られないことがよくあります。プロファイラーを使用することで、コードのどの部分を最適化して最大の利益を得ることができるかを正確に見つけることができます。
+## 概要
 
-APM ツールを使用したことがある方にとっては、プロファイリングは、インスツルメンテーションを必要とせずにコードの非常にきめ細かいビューを提供する「より深い」トレーサーのように考えられるかもしれません。
+プロファイラーは、実行中のプログラムに関するデータを収集することで、各関数がどれだけ「仕事」をしているかを示します。たとえば、インフラストラクチャーのモニタリングでアプリサーバーが CPU を 80% 使用していることが確認できても、その理由が分からない場合だってあるでしょう。プロファイリングにより、このような作業の内訳を把握することができます。
+
+| 関数      | CPU の使用率 |
+|---------------|-----------|
+| `doSomeWork`  | 48%       |
+| `renderGraph` | 19%       |
+| その他         | 13%       |
+
+パフォーマンスの問題に取り組む際には、この情報が重要になります。というのも、多くのプログラムは複数の場所で実行されており、それが明らかでない場合があるからです。プログラムのどの部分を最適化すべきかを推測している段階では、エンジニアは多くの時間を費やしてもほとんど成果を得ることができません。このような場合、プロファイラーを使えばコードのどの部分を最適化すべきかを正確に見つけることができます。
+
+APM ツールを使用したことがある方にとっては、プロファイリングは、インスツルメンテーションを必要とせずにコードのきめ細かいビューを提供する「より深い」トレーサーのように考えられるかもしれません。
 
 Datadog Continuous Profiler は、CPU 使用率、メモリに割り当てられているオブジェクトの量と種類、ロックの取得を待機する時間、ネットワークまたはファイル I/O の量など、さまざまな種類の「作業」を追跡できます。使用可能なプロファイルタイプは、プロファイリングされる言語によって異なります。
 
-私たちは、簡単に試すことができるパフォーマンスの問題がある[サンプルサービス][1]を用意しました。サンプルサービスには、5000 本の映画の「データベース」を検索できる API があります。これでパフォーマンスの問題を修正します。このガイドではプロセスを説明しますが、独自のシェル、ブラウザー、および IDE を使用して完全なエクスペリエンスを得ることもできます。
+## セットアップ
 
-## 前提条件
+### 前提条件
 
-以下が必要です。
-1. [docker-compose][2]
-2. Datadog アカウントと [API キー][3] (アプリケーションキーは必要ありません)。Datadog アカウントをまだお持ちでない場合は、[無料トライアルにサインアップ][4]してください。
+はじめに、以下の前提条件を確認してください。
 
-## サンプルを実行する
+1. [docker-compose][1]
+2. Datadog のアカウントと [API キー][2]が必要です。Datadog アカウントをお持ちでない場合は、[無料トライアルにサインアップ][3]してください。
 
-サンプルサービスを次の方法で起動して実行します。
-```
+### インストール
+
+[dd-continuous-profiler-example][4] リポジトリでは、パフォーマンスに問題のあるサービスの例を実験用に提供しています。5000 本の映画の「データベース」を検索するための API も含まれています。
+
+サンプルサービスをインストールして実行します。
+
+```shell
 git clone https://github.com/DataDog/dd-continuous-profiler-example.git
 cd dd-continuous-profiler-example
 echo "DD_API_KEY=YOUR_API_KEY" > docker.env
 docker-compose up -d
 ```
 
-すべてのコンテナが構築されて実行されたら、「ツールボックス」コンテナにジャンプして次のことを調べることができます。
+### 検証
+
+コンテナが構築・実行されると、「toolbox」コンテナを使用して次のことを調べることができます。
+
 ```
 docker exec -it dd-continuous-profiler-example_toolbox_1 bash
 ```
 
-次で API を試すことができます。
+API を以下と共に使用します。
 ```
 curl -s http://movies-api-java:8080/movies?q=wars | jq
 ```
 
-`movies-api-py` と呼ばれるサンプルサービスの Python バージョンもあります。そちらの方が合っている場合は、それに応じてチュートリアル全体でコマンドを調整できます。
+また、`movies-api-py` と呼ばれるサンプルサービスの Python バージョンもあります。利用する場合は、それに応じてチュートリアル全体でコマンドを調整してください。
 
-## ベンチマークする
+### データの生成
 
-ApacheBench ツール [ab][5] を使用してより多くのトラフィックを生成しましょう。20 秒間リクエストを送信する 10 個の同時 HTTP クライアントを実行します。まだツールボックスコンテナ内で:
-```
+ApacheBench ツール [ab][5] を使ってトラフィックを生成します。10 台の同時 HTTP クライアントが 20 秒間リクエストを送信することを想定して実行します。toolbox コンテナの中で次を実行してください。
+
+```shell
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
+```
+
+結果出力例:
+
+```text
 ...
 Reported latencies by ab:
 Percentage of the requests served within a certain time (ms)
@@ -76,71 +101,91 @@ Percentage of the requests served within a certain time (ms)
  100%    867 (longest request)
 ```
 
-## プロファイルの読み方
+## 調査
 
-[プロファイル検索][6]に進み、トラフィックを生成していた期間をカバーするプロファイルを探します。1 分ほどかかる場合があります。CPU 使用率が高くなるため、どのプロファイルに負荷テストが含まれているかがわかります。
+### プロファイルの読み取り
 
-{{< img src="tracing/profiling/intro_to_profiling/list.png" alt="プロファイルのリスト" style="width:80%;">}}
+[プロファイル検索][6]を使用して、トラフィックを生成していた期間をカバーするプロファイルを探します。読み込みに 1 分ほどかかる場合があります。負荷テストを含むプロファイルは、CPU 使用率が高くなります。
 
-開くと、次のようなプロファイルの視覚化が表示されます。
+{{< img src="profiler/intro_to_profiling/list.png" alt="プロファイルのリスト" style="width:80%;">}}
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph.png" alt="フレームグラフ">}}
+開くと、次のように視覚化されたプロファイルが表示されます。
+
+{{< img src="profiler/intro_to_profiling/flame_graph.png" alt="フレームグラフ">}}
 
 これはフレームグラフです。これが示す最も重要なことは、各メソッドが使用した CPU の量 (これは CPU プロファイルであるため) と、各メソッドがどのように呼び出されたかです。たとえば、上から 2 番目の行から読み取ると、`Thread.run()` が `QueuedThreadPool$2.run()` を呼び出し (数ある中で)、これが `QueuedThreadPool.runjob(Runnable)` を呼び出し、これが `ReservedTheadExecutor$ReservedThread.run()` を呼び出し、と続いていきます。
 
-フレームグラフの下部にある 1 つの領域を拡大すると、次のように表示されます。
+フレームグラフの下の部分にズームインするとツールチップが表示され、この `parse()` 関数に約 309ms (0.90%) の CPU 時間が費やされていることがわかります。
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_parse.png" alt="フレームグラフ parse() フレーム">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_parse.png" alt="フレームグラフ parse() フレーム">}}
 
-ツールチップは、この `parse()` 関数内で CPU 時間の約 390ms (0.90%) が費やされたことを示しています。`String.length()` は `parse()` のすぐ下にあります。これは、`parse()` がそれを呼び出すことを意味します。
+`String.length()` が `parse()` 関数の直下にあるのは、その `parse()` 関数を呼び出していることを意味します。`String.length()` にカーソルを合わせると、約 112ms の CPU 時間を要したことがわかります。
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_length.png" alt="フレームグラフ String.length() フレーム">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_length.png" alt="フレームグラフ String.length() フレーム">}}
 
-`String.length()` にカーソルを合わせると、約 112ms の CPU 時間がかかったことがわかります。したがって、278ms 秒が `parse()` に直接費やされたことがわかります (390ms - 112ms)。これは、その下に何もない `parse()` ボックスの部分によって視覚的に表されます。
+つまり、309ms - 112ms で 197 ミリ秒が `parse()` に直接費やされたことになります。それを視覚的に表しているのが、`parse()` ボックス下の何も表示されていない部分です。
 
-フレームグラフは時間の経過を表していないことに注目してください。プロファイルのこのビットを見ると、
+フレームグラフは時間の経過を表しているわけでは_ない_ことを覚えておきましょう。プロファイルのこの部分を見ると、`Gson$1.write()` は `TypeAdapters$16.write()` より前には実行されず、その後も同様に実行されなかったことが分かります
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_write.png" alt="write() フレームが隣り合っているフレームグラフセクション">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_write.png" alt="write() フレームが隣り合っているフレームグラフセクション">}}
 
-`Gson$1.write()` は `TypeAdapters$16.write()` の前には実行されませんでしたが、その後にも実行されなかった可能性があります。それらは同時に実行されている可能性があります。または、プログラムが一方の呼び出しを複数実行し、次にもう一方の呼び出しを複数実行して、前後に切り替え続けた可能性があります。フレームグラフは、プログラムが同じ一連の関数を実行している間は常にマージされるため、関数が呼び出されるたびに多数の小さなボックスが表示されることなく、コードのどの部分が最も多くの CPU を使用しているかが一目でわかります。
+ それらは同時に実行されているか、プログラムが一方の呼び出しを複数実行し、次にもう一方の呼び出しを複数実行して、前後に切り替え続けた可能性があります。フレームグラフはプログラムが同じ一連の関数を実行している間は常にマージされるため、関数が呼び出されるたびに多数の小さなボックスが表示されることなく、コードのどの部分が最も多くの CPU を使用しているかが一目でわかります。
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_replyjson.png" alt="replyJSON() の上にマウスを置いたフレームグラフ">}}
+拡大してみると、CPU 使用率の約 87% がこの `replyJSON()` メソッド内で発生していることがわかります。その下のグラフでは、`replyJSON()` と呼び出したメソッドが最終的に 4 つの主要なコードパス (「スタックトレース」) に分岐し、ソートや日付のパースに関連する関数を実行していることがわかります。
 
-ズームアウトすると、CPU 使用率の約 87% が `replyJSON()` メソッド内にあることがわかります。そして、下を見ると、
-
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="replyJSON() の下のスタックトレースを指す矢印の付いたフレームグラフ">}}
-
-`replyJSON()` とそれが呼び出すメソッドは、最終的に 4 つのメインコードパス (「スタックトレース」) に分岐し、それぞれが並べ替えと日付の解析に関係する関数を実行していることがわかります。
+{{< img src="profiler/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="replyJSON() の下のスタックトレースを指す矢印の付いたフレームグラフ">}}
 
 また、次のような CPU プロファイルの一部も表示されます。
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_gc.png" alt="GC (ガベージコレクション) を示すフレームグラフ" style="width:60%;">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_gc.png" alt="GC (ガベージコレクション) を示すフレームグラフ" style="width:80%;">}}
 
-## プロファイルタイプ
+### プロファイルタイプ
 
-CPU 時間のほぼ 6% をガベージコレクションに費やしたという事実は、私たちが大量のガベージを生成している可能性があることを示唆しています。したがって、割り当てメモリプロファイルタイプに移動します。
+CPU 時間の約 6％ がガベージコレクションに費やされており、大量のガベージを生成している可能性があります。そこで、**Allocated Memory** プロファイルタイプをレビューします。
 
-{{< img src="tracing/profiling/intro_to_profiling/types.png" alt="プロファイルタイプセレクター" style="width:60%;">}}
+{{< img src="profiler/intro_to_profiling/types.png" alt="プロファイルタイプセレクター" style="width:60%;">}}
 
-割り当てメモリプロファイルでは、ボックスのサイズは、各関数が割り当てられたメモリの量と、関数が割り当てを実行するようになった呼び出しスタックを示します。ここで、この 1 分間のプロファイル中に、`replyJSON()` メソッドとそれが呼び出した他のメソッドが 17.47 GiB を割り当て、上記の CPU プロファイルで見たのと同じ日付解析コードに主に関連していることがわかります。
+Allocated Memory プロファイルのボックスのサイズは、各関数が割り当てられたメモリの量と、関数が割り当てを実行するようになった呼び出しスタックを示します。ここで、この 1 分間のプロファイル中に、`replyJSON()` メソッドとそれが呼び出した他のメソッドが 17.47 GiB を割り当て、上記の CPU プロファイルで見たのと同じ日付解析コードに主に関連していることがわかります。
 
-{{< img src="tracing/profiling/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="replyJSON() の下のスタックトレースを指す矢印の付いた割り当てプロファイルのフレームグラフ">}}
+{{< img src="profiler/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="replyJSON() の下のスタックトレースを指す矢印の付いた割り当てプロファイルのフレームグラフ">}}
 
-## 問題の修正
+## 修復
 
-ここでコードを見て、何が起こっているのかを見てみましょう。CPU フレームグラフをもう一度見ると、これらの高価なコードパスが 66 行目の Lambda を通過していることがわかります。Lambda は `LocalDate.parse()` を呼び出します。
+### コードの修正
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_sort_lambda.png" alt="ソート Lambda 上にマウスを置いたフレームグラフ">}}
+コードを見直して、何が起こっているのかを確認します。CPU フレームグラフを見ると、高価なコードパスが 66 行目で Lambda を通過し、そのLambda が `LocalDate.parse()` を呼び出していることがわかります。
 
-これは、[`dd-continuous-profiler-example/java/src/main/java/movies-api/Server.java`][7] のこのコードに対応しており、ここで 66 行目の `LocalDate.parse()` に対する呼び出しを確認します。
+{{< img src="profiler/intro_to_profiling/flame_graph_sort_lambda.png" alt="ソート Lambda 上にマウスを置いたフレームグラフ">}}
 
-{{< img src="tracing/profiling/intro_to_profiling/slow_sort_code.png" alt="遅いソートコード">}}
+これは [`dd-continuous-profiler-example`][7] で、`LocalDate.parse()` を呼び出す部分のコードに対応しています。
 
-これは API のソートロジックであり、リリース日の降順で結果を返します。これは、`LocalDate` に変換されたリリース日をソートキーとして使用することによって行われます。これらの `LocalDate` をキャッシュできるので、各映画のリリース日をすべてのリクエストではなく 1 回だけ解析しますが、さらに簡単な修正があります。日付を ISO 8601 形式 (yyyy-mm-dd) で解析していることがわかります。つまり、日付を文字列として並べ替えることができ、まったく解析することはできません。
+```java
+private static Stream<Movie> sortByDescReleaseDate(Stream<Movie> movies) {
+  return movies.sorted(Comparator.comparing((Movie m) -> {
+    // 問題: ソートされる各アイテムの datetime 解析。
+    // サンプルソリューション:
+    //   日付はすでに ISO 形式 (yyyy-mm-dd) になっているため、通常の文字列ソートでうまく並び替えることができます。
+    //   `return m.releaseDate`
+    try {
+      return LocalDate.parse(m.releaseDate);
+    } catch (Exception e) {
+      return LocalDate.MIN;
+    }
+  }).reversed());
+}
+```
 
-先に進み、try/catch 全体を次のように `returnm.releaseDate;` に置き換えます。
+これはAPI のソートロジックであり、リリース日の降順で結果を返します。ここではソートキーとして、リリース日を `LocalDate` に変換したものを使用しています。時間を節約するために、リクエストごとにパースするのではなく、映画の公開日ごとにパースするよう `LocalDate` をキャッシュすることもできますが、もっと良い方法があります。日付は ISO 8601 形式　(yyyy-mm-dd) でパースされているため、パースする代わりに文字列として並び替えることができます。
 
-{{< img src="tracing/profiling/intro_to_profiling/optimized_sort_code.png" alt="最適化されたソートコード">}}
+次のように、`try` と `catch` を `return m.releaseDate;` で置き換えます。
+
+```java
+private static Stream<Movie> sortByDescReleaseDate(Stream<Movie> movies) {
+  return movies.sorted(Comparator.comparing((Movie m) -> {
+    return m.releaseDate;
+  }).reversed());
+}
+```
 
 次に、サービスを再構築して再起動します。
 ```
@@ -148,15 +193,17 @@ docker-compose build movies-api-java
 docker-compose up -d
 ```
 
-## 再テスト
+### 再テスト
 
-結果を確認しましょう。以前と同じように、もう一度トラフィックを生成します。
-```
+結果をテストし、トラフィックを再度生成します。
+
+```shell
 docker exec -it dd-continuous-profiler-example_toolbox_1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 
-新しい結果は次のようになります。
+結果出力例:
+
 ```
 Reported latencies by ab:
 Percentage of the requests served within a certain time (ms)
@@ -173,37 +220,38 @@ Percentage of the requests served within a certain time (ms)
 
 p99 は 795ms から 218ms になり、全体として、以前の 4〜6 倍高速になりました。
 
-この新しい負荷テストを含むプロファイルを見つけてCPUプロファイルを見ると、私たちが調べていたフレームグラフの `replyJSON` 部分が CPU 使用率全体のはるかに小さい割合になっていることがわかります。
+新しい負荷テストを含む[プロファイル](#read-the-profile)を探し、CPU プロファイルを確認します。フレームグラフの `replyJSON` の部分は、前回の負荷テストに比べて CPU の総使用量に占める割合がかなり小さくなっています。
 
-{{< img src="tracing/profiling/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="最適化された replyJSON() スタックトレースを使用したフレームグラフ">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="最適化された replyJSON() スタックトレースを使用したフレームグラフ">}}
 
-## クリーンアップ
+### クリーンアップ
 
-探索が終了したら、次でクリーンアップできます。
-```
+確認が終了したら、次を実行してクリーンアップします。
+
+```shell
 docker-compose down
 ```
 
-## コストの節約
+## 推奨事項
 
-このように CPU 使用率を改善すると、簡単にコストを節約できます。これが実際のサービスであった場合、この小さな改善により、サーバーを半分に縮小でき、年間数千ドルを節約できる可能性があります。これがたった 10 分程度の作業で実現できるのです。
+### コストの節約
 
-## サービスを改善する
+このように、CPU 使用率を改善してコストを節約することができます。これが実際のサービスであった場合、この小さな改善により、サーバーを半分に縮小でき、年間数千ドルを節約できる可能性があります。これがたった 10 分程度の作業で実現できるのです。
 
-ここでは表面をざっと見ただけですが、これで始め方がわかったはずです。**[あなたのサービスで試してみましょう][8]**。
+### サービスを改善する
 
-{{< site-region region="us" >}}{{< /site-region >}}
-{{< site-region region="eu" >}}{{< /site-region >}}
+このガイドでは、プロファイリングの概要をほんの少しだけ紹介しましたが、どのように始めればいいのかを理解していただけたかと思います。**[お使いのサービスで、早速プロファイラーを有効にしてみましょう][8]**。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-continuous-profiler-example
-[2]: https://docs.docker.com/compose/install/
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://app.datadoghq.com/signup
+
+[1]: https://docs.docker.com/compose/install/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/signup
+[4]: https://github.com/DataDog/dd-continuous-profiler-example
 [5]: https://httpd.apache.org/docs/2.4/programs/ab.html
 [6]: https://app.datadoghq.com/profiling?query=env%3Aexample%20service%3Amovies-api-java
 [7]: https://github.com/DataDog/dd-continuous-profiler-example/blob/25819b58c46227ce9a3722fa971702fd5589984f/java/src/main/java/movies/Server.java#L66
-[8]: /ja/tracing/profiler/enabling/
+[8]: /ja/profiler/enabling/

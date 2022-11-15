@@ -17,15 +17,13 @@ further_reading:
   text: "Generate metrics from ingested logs"
 ---
 
-<div class="alert alert-warning">
-Generating custom metrics from RUM events is in beta. Access to this feature is provisioned to customers using Real User Monitoring. Contact <a href="/help">Datadog Support</a> to provide feedback.
-</div>
-
 ## Overview
 
 Real User Monitoring (RUM) allows you to capture events that occur in your browser and mobile applications using the Datadog RUM SDKs and collect data from events at a [sample rate][1]. Datadog retains this event data in the [RUM Explorer][2], where you can create search queries and visualizations.
 
 RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months.
+
+**Billing Note:** Metrics created from RUM events are billed as [Custom Metrics][5].
 
 ## Create a RUM-based custom metric
 
@@ -49,7 +47,7 @@ To create a custom metric from a search query in the [RUM Explorer][4], click th
 
 5. Select a path to group by from the dropdown menu next to **group by**. The metric tag name is the original attribute or tag name without the `@`. By default, custom metrics generated from RUM events do not contain tags unless they are explicitly added. You can use an attribute or tag dimension that exists in your RUM events such as `@error.source` or `env` to create metric tags. 
    
-   <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a>. Datadog recommends avoiding grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs. For more information, see <a href="/data_security/logs/">Log Management Data Security</a>.
+   <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
    </div>
 
 6. For custom metrics created on sessions and views, select **The active session/view starts matching the query** or **The session/view becomes inactive or is completed** to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).

@@ -189,7 +189,8 @@ namespace Example
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
-        DogStatsd.Configure(dogstatsdConfig);
+        if (!DogStatsd.Configure(dogstatsdConfig))
+            throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     }
 
     public Stream MyHandler(Stream stream)

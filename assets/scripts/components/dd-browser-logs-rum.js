@@ -22,7 +22,7 @@ if (window.DD_RUM) {
             version: CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
             trackFrustrations: true,
-            enableExperimentalFeatures: ["frustration-signals"],
+            enableExperimentalFeatures: ["frustration-signals","clickmap"],
             sampleRate: 50,
             premiumSampleRate: 50,
             allowedTracingOrigins: [window.location.origin]

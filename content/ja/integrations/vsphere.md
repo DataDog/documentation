@@ -3,6 +3,7 @@ app_id: vsphere
 app_uuid: d9b9104f-ffd1-42be-8e18-d8a3aa289b98
 assets:
   dashboards:
+    VMware vSphere TKG - Overview: assets/dashboards/vmware_vsphere_tkg_-_overview.json
     vsphere-overview: assets/dashboards/vsphere_overview.json
   integration:
     configuration:
@@ -30,7 +31,7 @@ draft: false
 git_integration_title: vsphere
 integration_id: vsphere
 integration_title: vSphere
-integration_version: 6.1.2
+integration_version: 6.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

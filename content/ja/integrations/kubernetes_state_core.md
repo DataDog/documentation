@@ -13,7 +13,7 @@ further_reading:
   tag: ブログ
   text: Kubernetes のステートメトリクスを次のレベルへ進化させる旅
 has_logo: true
-integration_id: kubernetes_state_core
+integration_id: kube-state-metrics
 integration_title: Kubernetes State Metrics Core
 is_public: true
 kind: インテグレーション
@@ -53,13 +53,11 @@ Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメ�
 
 Helm `values.yaml` で、以下を追加します。
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsCore:
     enabled: true
-...
 ```
 
 {{% /tab %}}
@@ -67,7 +65,7 @@ datadog:
 
 `kubernetes_state_core` のチェックを有効にするには、DatadogAgent リソースの設定 `spec.features.kubeStateMetricsCore.enabled` を `true` に設定する必要があります。
 
-```
+```yaml
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
 metadata:
@@ -79,7 +77,7 @@ spec:
   features:
     kubeStateMetricsCore:
       enabled: true
-  # ...
+  # (...)
 ```
 
 注: Datadog Operator v0.7.0 以降が必要です。
@@ -104,6 +102,7 @@ spec:
 | cronjob               | kube_cronjob                |
 | daemonset             | kube_daemon_set             |
 | deployment            | kube_deployment             |
+| hpa                   | horizontalpodautoscaler     |
 | image                 | image_name                  |
 | job                   | kube_job                    |
 | job_name              | kube_job                    |
@@ -147,12 +146,10 @@ Helm の `values.yaml` で `kubeStateMetricsCore` を有効にすると、レガ
 
 Kubernetes State Metrics Core チェックでは、クラスターに `kube-state-metrics` をデプロイする必要がなくなりました。Datadog Helm Chart の一部として `kube-state-metrics` のデプロイを無効にできます。これを行うには、Helm の `values.yaml` に以下を追加します。
 
-```
-...
+```yaml
 datadog:
-...
+  # (...)
   kubeStateMetricsEnabled: false
-...
 ```
 
 {{% /tab %}}
@@ -552,7 +549,7 @@ Cluster Agent コンテナ内で [Cluster Agent の `status` サブコマンド�
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

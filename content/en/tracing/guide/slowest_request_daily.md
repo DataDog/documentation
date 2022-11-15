@@ -44,7 +44,7 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
 
      {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over over the top trace in the table and **click View Trace**
+4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over the top trace in the table and **click View Trace**
 
     This is the Flame graph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error-prone ones. The Flame graph can be zoomed, scrolled, and explored naturally. Under the Flame graph you can see associated metadata, Logs, and Host information.
 

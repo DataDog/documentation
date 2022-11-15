@@ -24,6 +24,8 @@ type: multi-code-lang
 
 Datadog Profiler を使用するには、[JDK Flight Recorder][2] が必要です。Datadog Profiler ライブラリは、OpenJDK 11+、Oracle JDK 11+、[OpenJDK 8 (バージョン 1.8.0.262/8u262+)][3] と Azul Zulu 8 (バージョン 1.8.0.212/8u212+) でサポートされています。OpenJ9 では、[JDK Flight Recorder][2] に対応していないため、サポートされていません。
 
+**注**: Java Flight Recorder for OracleJDK を有効にするには、Oracle からの商用ライセンスが必要な場合があります。これがライセンスの一部であるかどうかを確認するには、Oracle の担当者にお問い合わせください。
+
 LTS 以外の JDK バージョンには、Datadog Profiler ライブラリに関連する安定性とパフォーマンスの修正が含まれていない可能性があるため、Long Term Support JDK のバージョン8、11、17 を使用してください。
 
 Java、Scala、Groovy、Kotlin、Clojure など、すべての JVM ベースの言語をサポートしています。
@@ -109,7 +111,7 @@ dd-java-agent v0.84.0 以降および Java 15 以前では、割り当てが多�
 
 [プロファイラーの概要][10]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

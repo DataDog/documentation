@@ -3,10 +3,10 @@ dependencies:
 - https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: GitHub
   text: dd-sdk-android ソースコード
 - link: /real_user_monitoring
-  tag: ホームページ
+  tag: ドキュメント
   text: Datadog RUM を探索する
 kind: documentation
 title: トラブルシューティング
@@ -42,18 +42,6 @@ SDK の初期化後に追跡に関する同意を更新する場合は、 `Datad
 
 - `TrackingConsent.GRANTED` に更新した場合: SDK は現在のバッチデータと将来的なデータをすべてデータ収集エンドポイントに直接送信します。
 - `TrackingConsent.NOT_GRANTED`: SDK はすべてのバッチデータを消去し、以後のデータも収集しません。
-
-## RUM セッションのサンプリング
-
-アプリケーションが Datadog RUM に送信するデータを制御するには、[RumMonitor を初期化][1]し、RUM セッションのサンプリングレートを 0～100 の間に指定します。
-
-```kotlin
-val monitor = RumMonitor.Builder()
-        // ここでは RUM セッションの 75% を Datadog へ送信
-        .sampleRumSessions(75.0f)
-        .build()
-GlobalRum.registerIfAbsent(monitor)
-```
 
 ## デバイスがオフラインの時のデータ送信
 
@@ -104,5 +92,3 @@ logger = new Logger.Builder()
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/

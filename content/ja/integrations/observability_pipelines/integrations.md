@@ -1,183 +1,514 @@
 ---
+aliases:
+- /ja/agent/vector_aggregation/
 dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrations.md
-kind: ドキュメント
-title: インテグレーション
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/observability_pipelines/integrate_vector_with_datadog.md
+further_reading:
+- link: /logs/
+  tag: ドキュメント
+  text: Datadog ログ管理の詳細はこちら
+- link: /agent/proxy/
+  tag: ドキュメント
+  text: プロキシを使用するよう Agent を構成する
+- link: https://vector.dev/docs/
+  tag: ドキュメント
+  text: Vector ドキュメント
+- link: /integrations/observability_pipelines/vector_configurations/
+  tag: ドキュメント
+  text: Vector の構成の詳細
+- link: /integrations/observability_pipelines/working_with_data/
+  tag: ドキュメント
+  text: Vector を使ったデータ操作
+kind: documentation
+title: Vector と Datadog のインテグレーション
 ---
+
 ## 概要
 
-Vector は Datadog と統合し、60 種類の[ソース](#sources)と[シンク](#sinks)とすぐに統合することが可能です。
+Vector は Datadog と統合し、Datadog Agent からログとメトリクスを集計し、収集したテレメトリーを Datadog にルーティングします。
 
-## ソース
+データは次のような経路で流れます:
+`Datadog Agent -> Vector -> Datadog`
 
-| ソース名                   | 説明                                                                                           |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------- |
-| [Apache Metrics][1]           | Apache の HTTPD サーバーからメトリクスを収集します。                                                           |
-| [AWS ECS Metrics][2]          | AWS ECS と AWS Fargate で実行されているタスクの Docker コンテナの統計情報を収集します。                          |
-| [AWS Kinesis Firehose][3]     | AWS Kinesis Firehose からログを収集します。                                                               |
-| [AWS S3][4]                   | AWS S3 からログを収集します。                                                                             |
-| [AWS SQS][5]                  | AWS SQS からログを収集します。                                                                            |
-| [Datadog Agent][6]            | Datadog Agent が収集したログやメトリクスを受信します。                                                |
-| [Demo logs][7]                | テストやデモに便利なフェイクログイベントを生成します。                                  |
-| [dnstap][8]                   | dnstap 対応サーバーから DNS ログを収集します。                                                     |
-| [Docker logs][9]              | Docker からログを収集します。                                                                             |
-| [EventStoreDB][10]            | EventStoreDB が収集したメトリクスを受信します。                                                     |
-| [Exec][11]                    | ホスト上で動作しているプロセスから出力を収集します。                                                     |
-| [File][12]                    | ファイルからログを収集します。                                                                              |
-| [Fluent][13]                  | Fluentd または Fluent Bit Agent からログを収集します。                                                      |
-| [Heroku Logplex][14]          | Heroku アプリのログを受信するルーターである Heroku の Logplex からログを収集します。  |
-| [Host metrics][15]            | ローカルシステムからメトリクスデータを収集します。                                                            |
-| [HTTP][16]                    | HTTP サーバーが発するログを収集します。                                                               |
-| [Internal logs][17]           | 実行中の Vector インスタンスから出力されるすべてのログおよびトレースメッセージを公開します。                             |
-| [Internal metrics][18]        | Vector 自身が生成するメトリクスにアクセスし、Vector のパイプラインで処理します。             |
-| [JournalD][19]                | JournalD からログを収集します。                                                                           |
-| [Kafka][20]                   | Kafka からログを収集します。                                                                              |
-| [Kubernetes logs][21]         | Kubernetes Node からログを収集します。                                                                   |
-| [Logstash][22]                | Logstash Agent からログを収集します。                                                                   |
-| [MongoDB metrics][23]         | MongoDB データベースからメトリクスを収集します。                                                            |
-| [NATS][24]                    | NATS メッセージングシステムで対象の観測可能性データを読み取ります。                                   |
-| [NGINX metrics][25]           | NGINX からメトリクスを収集します。                                                                           |
-| [PostgreSQL metrics][26]      | PostgreSQL データベースからメトリクスを収集します。                                                         |
-| [Prometheus remote write][27] | Prometheus からメトリクスを収集します。                                                                      |
-| [Prometheus scrape][28]       | Prometheus クライアントでメトリクスを収集します。                                                            |
-| [Redis][29]                   | Redis から観測可能性データを収集します。                                                                |
-| [Socket][30]                  | ソケットクライアントを使用してログを収集します。                                                                 |
-| [Splunk HEC][31]              | Splunk からログを受信します。                                                                             |
-| [StatsD][32]                  | StatsD アグリゲーターが発するログを収集します。                                                        |
-| [stdin][33]                   | stdin で送信されるログを収集します。                                                                          |
-| [Syslog][34]                  | Syslog で送信されるログを収集します。                                                                         |
-| [Vector][35]                  | 別の Vector インスタンスから観測可能性データを収集します。                                              |
+Vector を使用して Datadog Agent から観測可能性データを収集する前に、以下が必要です。
 
-## シンク
+- [Datadog Agent v6.35+ または v7.35+ がインストールされていること][1]。
+- [Vector がインストールされていること][2]。
+- [Vector の構成に関する基本的な理解][3]があること。
 
-| シンク名                             | 説明                                                                               |
-| ------------------------------------- | ----------------------------------------------------------------------------------------- |
-| [AWS Cloudwatch logs][36]             | ログイベントを AWS Cloudwatch Logs に公開します。                                                |
-| [AWS Cloudwatch metrics][37]          | AWS Cloudwatch Metrics にメトリクスイベントを公開します。                                          |
-| [AWS Kinesis Data Firehose Logs][38]  | AWS Kinesis Data Firehose のトピックにログを公開します。                                         |
-| [AWS Kinesis Streams logs][39]        | AWS Kinesis Streams のトピックにログを公開します。                                               |
-| [AWS S3][40]                          | 観測可能性イベントを AWS S3 オブジェクトストレージシステムに格納します。                           |
-| [AWS SQS][41]                         | 観測可能性イベントを Simple Queue Service のトピックに公開します。                              |
-| [Azure Blob Storage][42]              | 観測可能性データを Azure Blob Storage に格納します。                                      |
-| [Azure Monitor logs][43]              | Azure Monitor Logs サービスにログイベントを公開します。                                     |
-| [Blackhole][44]                       | 観測可能性イベントをどこにも送らないので、デバッグに便利です。            |
-| [Clickhouse][45]                      | Clickhouse のデータベースにログデータを配信します。                                              |
-| [Console][46]                         | 観測可能性イベントをコンソールに表示します。デバッグに便利です。  |
-| [Datadog events][47]                  | 観測可能性イベントを Datadog Events API に公開します。                                   |
-| [Datadog logs][48]                    | Datadog にログイベントを公開します。                                                            |
-| [Datadog metrics][49]                 | Datadog にメトリクスイベントを公開します。                                                         |
-| [Datadog traces][50]                  | Datadog にトレースを公開します。                                                                |
-| [Elasticsearch][51]                   | Elasticsearch の観測可能性イベントをインデックス化します。                                              |
-| [File][52]                            | 観測可能性イベントをファイルに出力します。                                                   |
-| [GCP Cloud Monitoring][53]            | GCP のクラウドモニタリングシステムにメトリクスを配信します。                                         |
-| [GCP Cloud storage][54]               | 観測可能性イベントを GCP Cloud Storage に格納します。                                          |
-| [GCP Stackdriver][55]                 | GCP の Cloud Operationsスイートにログを配信します。                                             |
-| [GCP PubSub][56]                      | 観測可能性イベントを GCP の PubSub メッセージングシステムに公開します。                            |
-| [Honeycomb][57]                       | ログイベントを Honeycomb に配信します。                                                          |
-| [HTTP][58]                            | 観測可能性イベントデータを HTTP サーバーに配信します。                                       |
-| [Humio logs][59]                      | ログイベントデータを Humio に配信します。                                                          |
-| [Humio metrics][60]                   | メトリクスイベントデータを Humio に配信します。                                                       |
-| [InfluxDB logs][61]                   | ログイベントデータを InfluxDB に配信します。                                                       |
-| [InfluxDB metrics][62]                | メトリクスイベントデータを InfluxDB に配信します。                                                    |
-| [Kafka][63]                           | 観測可能性イベントデータを Apache Kafka のトピックに公開します。                                  |
-| [LogDNA][64]                          | ログイベントデータを LogDNA に配信します。                                                         |
-| [Loki][65]                            | ログイベントデータを Loki 集計システムへ配信します。                                    |
-| [NATS][66]                            | NATS メッセージングシステムで観測可能性データを対象に公開します。                      |
-| [New Relic][67]                       | New Relic にイベントを配信します。                                                              |
-| [New Relic logs][68]                  | New Relic にログイベントを配信します。                                                          |
-| [Papertrail][69]                      | SolarWinds から Papertrail にログイベントを配信します。                                         |
-| [Prometheus Exporter][70]             | ホスト上で動作している Prometheus エクスポーターにメトリクスイベントを出力します。                        |
-| [Prometheus remote write][71]         | Prometheus のリモート書き込みエンドポイントにメトリクスデータを配信します。                                |
-| [Pulsar][72]                          | Apache Pulsar のトピックに観測可能なイベントを公開します。                                     |
-| [Redis][73]                           | 観測可能性データを Redis に公開します。                                                      |
-| [Sematext logs][74]                   | Sematext にログイベントを公開します。                                                           |
-| [Sematext metrics][75]                | Sematext にメトリクスイベントを公開します。                                                        |
-| [Socket][76]                          | リモートソケットエンドポイントにログを配信します。                                                 |
-| [Splunk HEC logs][77]                 | ログデータを Splunk の HTTP イベントコレクターに配信します。                                        |
-| [Splunk HEC metrics][78]              | メトリクスデータを Splunk の HTTP イベントコレクターに配信します。                                     |
-| [Statsd][79]                          | StatsD アグリゲーターにログデータを配信します。                                                  |
-| [Vector][80]                          | 観測可能性データを別の Vector インスタンスに中継します。                                      |
+## Datadog Agent と環境のセットアップ
 
-## Datadog Agent
-- [Vector による Datadog Agent の集計](https://docs.datadoghq.com/agent/vector_aggregation/ )
+Datadog Agent から Datadog にログやメトリクスを収集、変換、ルーティングするためには、Vector を設定する前に [Datadog Agent](#datadog-agent-configuration) を構成する必要があります。Kubernetes を使用している場合は、Vector を設定する前に [Kubernetes](#kubernetes-configuration) も構成する必要があります。
 
-[1]: https://vector.dev/docs/reference/configuration/sources/apache_metrics/
-[2]: https://vector.dev/docs/reference/configuration/sources/aws_ecs_metrics/
-[3]: https://vector.dev/docs/reference/configuration/sources/aws_kinesis_firehose/
-[4]: https://vector.dev/docs/reference/configuration/sources/aws_s3/
-[5]: https://vector.dev/docs/reference/configuration/sources/aws_sqs/
-[6]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-[7]: https://vector.dev/docs/reference/configuration/sources/demo_logs/
-[8]: https://vector.dev/docs/reference/configuration/sources/dnstap/
-[9]: https://vector.dev/docs/reference/configuration/sources/docker_logs/
-[10]: https://vector.dev/docs/reference/configuration/sources/eventstoredb_metrics/
-[11]: https://vector.dev/docs/reference/configuration/sources/exec/
-[12]: https://vector.dev/docs/reference/configuration/sources/file/
-[13]: https://vector.dev/docs/reference/configuration/sources/fluent/
-[14]: https://vector.dev/docs/reference/configuration/sources/heroku_logs/
-[15]: https://vector.dev/docs/reference/configuration/sources/host_metrics/
-[16]: https://vector.dev/docs/reference/configuration/sources/http/
-[17]: https://vector.dev/docs/reference/configuration/sources/internal_logs/
-[18]: https://vector.dev/docs/reference/configuration/sources/internal_metrics/
-[19]: https://vector.dev/docs/reference/configuration/sources/journald/
-[20]: https://vector.dev/docs/reference/configuration/sources/kafka/
-[21]: https://vector.dev/docs/reference/configuration/sources/kubernetes_logs/
-[22]: https://vector.dev/docs/reference/configuration/sources/logstash/
-[23]: https://vector.dev/docs/reference/configuration/sources/mongodb_metrics/
-[24]: https://vector.dev/docs/reference/configuration/sources/nats/
-[25]: https://vector.dev/docs/reference/configuration/sources/nginx_metrics/
-[26]: https://vector.dev/docs/reference/configuration/sources/postgresql_metrics/
-[27]: https://vector.dev/docs/reference/configuration/sources/prometheus_remote_write/
-[28]: https://vector.dev/docs/reference/configuration/sources/prometheus_scrape/
-[29]: https://vector.dev/docs/reference/configuration/sources/redis/
-[30]: https://vector.dev/docs/reference/configuration/sources/socket/
-[31]: https://vector.dev/docs/reference/configuration/sources/splunk_hec/
-[32]: https://vector.dev/docs/reference/configuration/sources/statsd/
-[33]: https://vector.dev/docs/reference/configuration/sources/stdin/
-[34]: https://vector.dev/docs/reference/configuration/sources/syslog/
-[35]: https://vector.dev/docs/reference/configuration/sources/vector/
-[36]: https://vector.dev/docs/reference/configuration/sinks/aws_cloudwatch_logs/
-[37]: https://vector.dev/docs/reference/configuration/sinks/aws_cloudwatch_metrics/
-[38]: https://vector.dev/docs/reference/configuration/sinks/aws_kinesis_firehose/
-[39]: https://vector.dev/docs/reference/configuration/sinks/aws_kinesis_streams/
-[40]: https://vector.dev/docs/reference/configuration/sinks/aws_s3/
-[41]: https://vector.dev/docs/reference/configuration/sinks/aws_sqs/
-[42]: https://vector.dev/docs/reference/configuration/sinks/azure_blob/
-[43]: https://vector.dev/docs/reference/configuration/sinks/azure_monitor_logs/
-[44]: https://vector.dev/docs/reference/configuration/sinks/blackhole/
-[45]: https://vector.dev/docs/reference/configuration/sinks/clickhouse/
-[46]: https://vector.dev/docs/reference/configuration/sinks/console/
-[47]: https://vector.dev/docs/reference/configuration/sinks/datadog_events/
-[48]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
-[49]: https://vector.dev/docs/reference/configuration/sinks/datadog_metrics/
-[50]: https://vector.dev/docs/reference/configuration/sinks/datadog_traces/
-[51]: https://vector.dev/docs/reference/configuration/sinks/elasticsearch/
-[52]: https://vector.dev/docs/reference/configuration/sinks/file/
-[53]: https://vector.dev/docs/reference/configuration/sinks/gcp_stackdriver_metrics/
-[54]: https://vector.dev/docs/reference/configuration/sinks/gcp_cloud_storage/
-[55]: https://vector.dev/docs/reference/configuration/sinks/gcp_stackdriver_logs/
-[56]: https://vector.dev/docs/reference/configuration/sinks/gcp_pubsub/
-[57]: https://vector.dev/docs/reference/configuration/sinks/honeycomb/
-[58]: https://vector.dev/docs/reference/configuration/sinks/http/
-[59]: https://vector.dev/docs/reference/configuration/sinks/humio_logs/
-[60]: https://vector.dev/docs/reference/configuration/sinks/humio_metrics/
-[61]: https://vector.dev/docs/reference/configuration/sinks/influxdb_logs/
-[62]: https://vector.dev/docs/reference/configuration/sinks/influxdb_metrics/
-[63]: https://vector.dev/docs/reference/configuration/sinks/kafka/
-[64]: https://vector.dev/docs/reference/configuration/sinks/logdna/
-[65]: https://vector.dev/docs/reference/configuration/sinks/loki/
-[66]: https://vector.dev/docs/reference/configuration/sinks/nats/
-[67]: https://vector.dev/docs/reference/configuration/sinks/new_relic/
-[68]: https://vector.dev/docs/reference/configuration/sinks/new_relic_logs/
-[69]: https://vector.dev/docs/reference/configuration/sinks/papertrail/
-[70]: https://vector.dev/docs/reference/configuration/sinks/prometheus_exporter/
-[71]: https://vector.dev/docs/reference/configuration/sinks/prometheus_remote_write/
-[72]: https://vector.dev/docs/reference/configuration/sinks/pulsar/
-[73]: https://vector.dev/docs/reference/configuration/sinks/redis/
-[74]: https://vector.dev/docs/reference/configuration/sinks/sematext_logs/
-[75]: https://vector.dev/docs/reference/configuration/sinks/sematext_metrics/
-[76]: https://vector.dev/docs/reference/configuration/sinks/socket/
-[77]: https://vector.dev/docs/reference/configuration/sinks/splunk_hec_logs/
-[78]: https://vector.dev/docs/reference/configuration/sinks/splunk_hec_metrics/
-[79]: https://vector.dev/docs/reference/configuration/sinks/statsd/
-[80]: https://vector.dev/docs/reference/configuration/sinks/vector/
+### Datadog Agent 構成
+
+#### Vector にログを送信する
+
+Vector にログを送信するには、Agent のコンフィギュレーションファイルである `datadog.yaml` を以下で更新してください。
+
+```yaml
+vector:
+  logs.enabled: true
+  # Vector 側で TLS/SSL が有効になっている場合、プロトコルを https に調整します
+  logs.url: "http://<VECTOR_HOST>"
+
+```
+
+#### Vector にメトリクスを送信する
+
+メトリクスを送信するには、`datadog.yaml` ファイルを以下のように更新します。
+
+```yaml
+vector:
+  metrics.enabled: true
+  # Vector 側で TLS/SSL が有効になっている場合、プロトコルを https に調整します
+  metrics.url: "http://<VECTOR_HOST>"
+```
+
+`VECTOR_HOST` は Vector が動作しているシステムのホスト名で、Vector の `datadog_agent` ソースがリッスンしている TCP ポートも含まれている必要があります。
+
+#### Docker を使用する
+
+Docker を使用している場合は、Agent のコンフィギュレーションファイル `datadog.yaml` に以下を追加します。
+
+```
+-e DD_VECTOR_METRICS_URL=http://<VECTOR_HOST>:<VECTOR_PORT>
+-e DD_VECTOR_METRICS_ENABLED=true
+-e DD_VECTOR_LOGS_URL=http://<VECTOR_HOST>:<VECTOR_PORT>
+-e DD_VECTOR_LOGS_ENABLED=true
+```
+
+### Kubernetes 構成
+
+Datadog の公式 Helm チャートを使用し、`agents.customAgentConfig` の値に [Agent 構成設定](#datadog-agent-configuration)を追加します。
+
+**注:** `agents.customAgentConfig` を考慮するためには `agent.useConfigMap` を `true` に設定しなければなりません。
+
+Datadog Helm チャートの詳細については、[Kubernetes ドキュメント][4]を参照してください。
+
+Vector では、Datadog のログソースがあらかじめ設定された[データ集計用公式チャート][5]を提供しています。Helm を使用した Vector のインストールについては[公式の Vector ドキュメント][6]を参照してください。
+
+Vector のチャートには、`values.yaml` ファイルの `customConfig` フィールドを使用して、任意の有効な Vector の構成を保持することができます。`datadog_logs` を有効にするには、これらの [Vector 構成](#vector-configurations)をそのまま Vector チャート構成に含めることができます。
+
+## Vector の構成
+
+Vector で処理されるすべてのデータに適用可能なすべての構成パラメーターと変換については、[Vector ドキュメント][7]を参照してください。
+
+### ソース構成
+
+Datadog Agent からデータを受信するには、Vector に [datadog_agent ソース][8]を構成します。
+
+{{< tabs >}}
+{{% tab "YAML" %}}
+
+```yaml
+sources:
+  datadog_agents:
+    type: datadog_agent
+    address: "[::]:8080"
+    multiple_outputs: true # メトリクスとログを自動的に分離するには
+```
+
+{{% /tab %}}
+{{% tab "TOML" %}}
+
+```toml
+sources:
+  datadog_agents:
+    type: datadog_agent
+    address: '[::]:8080'
+    multiple_outputs: true
+```
+
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+```json
+{
+  "sources": {
+    "datadog_agents": {
+      "type": "datadog_agent",
+      "address": "[::]:8080",
+      "multiple_outputs": true
+    }
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### ベクター固有のタグを追加する
+
+Datadog Agent から Vector に送信されるログやメトリクスは、[データを活用する][9]で説明するように操作やフォーマットすることが可能です。Datadog API を使用してログを送信する場合は、[Datadog の予約属性][10]を参照してください。
+
+Vector は、[代替ソース][11]からログやメトリクスを直接収集することも可能です。その際、サードパーティーのログには適切なタグ付けがされていない場合があります。[タグの追加][13]、ソースやサービス値の追加には、[Vector Remap Language][12] をご利用ください。
+
+#### ログ管理
+
+Datadog にログを送信する際に、特定の Vector タグを含めることができます。これらのタグを追加することは、Vector に移行する場合に便利です。この例では、Datadog に送信されるすべてのログに Vector のホストでタグを付けます。
+
+{{< tabs >}}
+{{% tab "YAML" %}}
+
+```yaml
+remap_logs_for_datadog:
+  type: remap
+  inputs:
+        - datadog_agents
+  source: |
+  # 受信した .ddtags フィールドをパースし、含まれるタグに簡単にアクセスできるようにします
+    .ddtags = parse_key_value!(.ddtags, key_value_delimiter: ":" field_delimiter: ",")
+    .ddtags.sender = "vector"
+    .ddtags.vector_aggregator = get_hostname!()
+
+  # Datadog のタグを `datadog_logs` シンクの文字列として再エンコードします
+    .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+
+  # Datadog Agent は、取り込み時にストリップされる "status" フィールドを渡します
+    del(.status)
+```
+
+{{% /tab %}}
+{{% tab "TOML" %}}
+
+```toml
+[remap_logs_for_datadog]
+type = "remap"
+inputs = [ "datadog_agents" ]
+source = """
+# 受信した .ddtags フィールドをパースし、含まれるタグにより簡単にアクセスできるようにします
+  .ddtags = parse_key_value!(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+  .ddtags.sender = "vector"
+  .ddtags.vector_aggregator = get_hostname!()
+# Datadog のタグを `datadog_logs` シンクの文字列として再エンコードします
+  .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+# Datadog Agent は、取り込み時にストリップされる 'status' フィールドを渡します
+  del(.status)
+"""
+```
+
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+```json
+{
+  "remap_logs_for_datadog": {
+    "type": "remap",
+    "inputs": [
+      "datadog_agents"
+    ],
+    "source":
+"# 受信した .ddtags フィールドをパースし、含まれるタグにより簡単にアクセスできるようにします
+.ddtags = parse_key_value!(.ddtags, key_value_delimiter: \":\", field_delimiter: \",\")
+.ddtags.sender = \"vector\"\n.ddtags.vector_aggregator = get_hostname!()
+
+# Datadog のタグを `datadog_logs` シンクの文字列として再エンコードします
+.ddtags = encode_key_value(.ddtags, key_value_delimiter: \":\", field_delimiter: \",\")
+
+# Datadog Agent は、取り込み時にストリップされる \"status\" フィールドを渡します
+del(.status)"
+
+  }
+}
+
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+これらのタグは、Vector がデータを送信したかどうかを検証するために使用することができます。具体的には、Vector に移行する場合、これらのタグを属性として使用し、データが正しく移行されたかどうかを判断します。
+
+**注:** この構成の `del(.status)` は、Datadog Agent によって `ERROR` に分類されたコンテナログを処理します。このステータスは通常、ログの取り込みエンドポイントによって取り除かれますが、Vector は Agent から生のペイロードを受け取るため、Vector 自身がこの処理を実行する必要があります。
+
+#### メトリクス
+
+同様に、Vector の特定タグを使用して Datadog にメトリクスを送信するには、次の例を参照してください。
+
+{{< tabs >}}
+{{% tab "YAML" %}}
+
+```yaml
+remap_metrics_for_datadog:
+  type: remap
+  inputs:
+    - some_input_id
+  source: |
+    .tags.sender = "vector"
+    .tags.vector_aggregator = get_hostname!()
+```
+
+{{% /tab %}}
+{{% tab "TOML" %}}
+
+```toml
+[remap_metrics_for_datadog]
+type = "remap"
+inputs = [ "some_input_id" ]
+source = """
+    .tags.sender = "vector"
+    .tags.vector_aggregator = get_hostname!()
+"""
+```
+
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+```json
+{
+  "remap_metrics_for_datadog": {
+    "type": "remap",
+    "inputs": [
+      "some_input_id"
+    ],
+    "source":
+       .tags.sender = "vector"
+       .tags.vector_aggregator = get_hostname!()
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### シンクの構成
+
+#### ログ管理
+
+Datadog にログを送信するには、Vector に少なくとも 1 つの [datadog_logs シンク][14]が構成されている必要があります。以下の例を参照してください。
+
+{{< tabs >}}
+{{% tab "YAML" %}}
+
+```yaml
+sinks:
+  log_to_datadog:
+    type: datadog_logs
+    inputs:
+       - remap_logs_for_datadog
+    default_api_key: "${DATADOG_API_KEY}"
+    encoding:
+      codec: json
+```
+
+{{% /tab %}}
+{{% tab "TOML" %}}
+
+```toml
+[sinks.log_to_datadog]
+type = "datadog_logs"
+inputs = [ "remap_logs_for_datadog" ]
+default_api_key = "${DATADOG_API_KEY}"
+
+  [sinks.log_to_datadog.encoding]
+  codec = "json"
+```
+
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+```json
+{
+  "sinks": {
+    "log_to_datadog": {
+      "type": "datadog_logs",
+      "inputs": [
+        "remap_logs_for_datadog"
+      ],
+      "default_api_key": "${DATADOG_API_KEY}",
+      "encoding": {
+        "codec": "json"
+      }
+    }
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### メトリクス
+
+同様に Datadog にメトリクスを送信するには、Vector に少なくとも 1 つの [datadog_metrics シンク][15]が構成されている必要があります。以下の例を参照してください。
+
+{{< tabs >}}
+{{% tab "YAML" %}}
+
+```yaml
+sinks:
+  metrics_to_datadog:
+    type: datadog_metrics
+    inputs:
+       - tag_metrics
+    default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
+    compression: gzip
+```
+
+{{% /tab %}}
+{{% tab "TOML" %}}
+
+```toml
+sinks:
+  metrics_to_datadog:
+    type: datadog_metrics
+    inputs:
+      - tag_metrics
+    default_api_key: '${DATADOG_API_KEY_ENV_VAR}'
+   compression: gzip
+```
+
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+```json
+{
+  "sinks": {
+    "metrics_to_datadog": {
+      "type": "datadog_metrics",
+      "inputs": [
+        "tag_metrics"
+      ],
+      "default_api_key": "${DATADOG_API_KEY_ENV_VAR}",
+    compression: gzip
+   }
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Vector の高度な構成
+
+### ディスクバッファ
+
+Datadog は、データ損失を防ぐためにディスクバッファを有効にすることを推奨しています。Vector は[ディスクバッファ][16]を使用して、送信されるデータが急増したり、下流のサービスがプレッシャーを送り返しているときに、データが失われないようにします。 シンクレベルでのバッファの設定については、以下の構成を参照してください。
+
+{{< tabs >}}
+{{% tab "YAML" %}}
+
+```yaml
+sinks:
+  metrics_to_datadog:
+    type: datadog_metrics
+    inputs:
+       - tag_metrics
+    default_api_key: "${DATADOG_API_KEY_ENV_VAR}"
+    compression: gzip
+    buffer:
+         type: disk
+         max_size: 309237645312
+```
+
+{{% /tab %}}
+{{% tab "TOML" %}}
+
+```toml
+[sinks.metrics_to_datadog]
+type = "datadog_metrics"
+inputs = [ "some_input_id" ]
+default_api_key = "${DATADOG_API_KEY_ENV_VAR}"
+compression = "gzip"
+
+  [sinks.metrics_to_datadog.buffer]
+  type = "disk"
+  max_size = 309_237_645_312
+
+```
+
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+```json
+{
+  "sinks": {
+    "metrics_to_datadog": {
+      "type": "datadog_metrics",
+      "inputs": [
+        "tag_metrics"
+      ],
+      "default_api_key": "${DATADOG_API_KEY_ENV_VAR}",
+    compression: gzip,
+    “buffer”: {
+         “type”: “disk”
+         “max_size”: 309237645312
+     }
+   }
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### ディスクスペース
+
+ディスクスペースは、vCPU * あたり少なくとも 36 GiB をプロビジョニングする必要があります。8 vCPU の推奨に従うと、288 GiB のディスクスペース (10 MiB * 60 秒 * 60 分 * 8 vCPU) をプロビジョニングし、メトリクス用に 48 GiB、ログ用に 240 GiB を割り当てることになります。Vector インスタンスにボリュームを追加して、Helm チャートのバッファを保持することができます。
+
+{{< tabs >}}
+{{% tab "AWS" %}}
+
+```
+vector:
+  persistence:
+    enabled: true
+    storageClassName: "io2"
+    accessModes:
+      - ReadWriteOnce
+    size: 288Gi
+```
+
+{{% /tab %}}
+{{% tab "Azure" %}}
+
+```
+vector:
+  persistence:
+    enabled: true
+    storageClassName: "default"
+    accessModes:
+      - ReadWriteOnce
+    size: 288Gi
+```
+
+{{% /tab %}}
+{{% tab "GKE" %}}
+
+```json
+vector:
+  persistence:
+    enabled: true
+    storageClassName: "premium-rwo"
+    accessModes:
+      - ReadWriteOnce
+    size: 288Gi
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+[アーキテクトバッファ][17]の詳細を参照してください。
+
+## {{< partial name="whats-next/whats-next.html" >}}
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/agent/basic_agent_usage/?tabs=agentv6v7
+[2]: /ja/integrations/observability_pipelines/setup/#install-vector
+[3]: /ja/integrations/observability_pipelines/vector_configurations/
+[4]: /ja/agent/kubernetes/?tab=helm
+[5]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
+[6]: https://vector.dev/docs/setup/installation/package-managers/helm/
+[7]: https://vector.dev/docs/reference/configuration/
+[8]: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
+[9]: /ja/integrations/observability_pipelines/working_with_data
+[10]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[11]: /ja/integrations/observability_pipelines/integrations/#sources
+[12]: https://vector.dev/docs/reference/vrl/
+[13]: /ja/getting_started/tagging
+[14]: https://vector.dev/docs/reference/configuration/sinks/datadog_logs/
+[15]: https://vector.dev/docs/reference/configuration/sinks/datadog_metrics/
+[16]: https://vector.dev/docs/about/concepts/#buffers
+[17]: https://vector.dev/docs/setup/going-to-prod/architecting/#buffering-data

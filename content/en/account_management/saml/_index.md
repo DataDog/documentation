@@ -16,15 +16,9 @@ further_reading:
 
 Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization's Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
-**Note**: If you don't have SAML enabled on your Datadog account, reach out to [support][2] to enable it.
+**Notes**: 
 
-Here's a two-minute video walkthrough:
-
-{{< wistia 2qe33x8h3v >}}
-
-
-**Notes**:
-
+- If you don't have SAML enabled on your Datadog account, reach out to [support][2] to enable it.
 - This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
 - SAML configuration requires [Datadog Administrator][9] access.
 

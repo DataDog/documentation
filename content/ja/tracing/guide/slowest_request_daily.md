@@ -1,23 +1,24 @@
 ---
-title: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-kind: ガイド
 further_reading:
-  - link: /tracing/guide/alert_anomalies_p99_database/
-    tag: 3 分
-    text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: /tracing/guide/week_over_week_p50_comparison/
-    tag: 2 分
-    text: サービスのレイテンシーを前週と比較する
-  - link: /tracing/guide/apm_dashboard/
-    tag: 4 分
-    text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-  - link: /tracing/guide/add_span_md_and_graph_it/
-    tag: 7 分
-    text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
-  - link: /tracing/guide/
-    tag: ''
-    text: すべてのガイド
+- link: /tracing/guide/alert_anomalies_p99_database/
+  tag: 3 分
+  text: データベースサービスの異常な p99 レイテンシーに関するアラート
+- link: /tracing/guide/week_over_week_p50_comparison/
+  tag: 2 分
+  text: サービスのレイテンシーを前週と比較する
+- link: /tracing/guide/apm_dashboard/
+  tag: 4 分
+  text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
+- link: /tracing/guide/add_span_md_and_graph_it/
+  tag: 7 分
+  text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
+- link: /tracing/guide/
+  tag: ''
+  text: すべてのガイド
+kind: ガイド
+title: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
 ---
+
 _所要時間 3 分_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="最も遅いトレースを特定し、そのホストメトリクスを解明する"  style="width:90%;">}}
@@ -63,11 +64,11 @@ Datadog APM では、インフラストラクチャーメトリクスやログ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/visualization/#trace
+[1]: /ja/tracing/glossary/#trace
 [2]: https://app.datadoghq.com/apm/services
-[3]: /ja/tracing/visualization/#services
-[4]: /ja/tracing/visualization/#resources
-[5]: /ja/tracing/visualization/#spans
-[6]: /ja/tracing/visualization/trace/?tab=spanmetadata
+[3]: /ja/tracing/glossary/#services
+[4]: /ja/tracing/glossary/#resources
+[5]: /ja/tracing/glossary/#spans
+[6]: /ja/tracing/trace_explorer/trace_view/?tab=spanmetadata
 [7]: /ja/tracing/guide/adding_metadata_to_spans/
-[8]: /ja/tracing/connect_logs_and_traces/
+[8]: /ja/tracing/other_telemetry/connect_logs_and_traces/

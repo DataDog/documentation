@@ -4,7 +4,7 @@ dependencies:
 description: iOS アプリケーションからログを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: Github
+  tag: GitHub
   text: dd-sdk-ios ソースコード
 - link: logs/explorer
   tag: ドキュメント

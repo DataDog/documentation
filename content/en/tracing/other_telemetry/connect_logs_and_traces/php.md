@@ -43,7 +43,7 @@ For instance, you would append those two attributes to your logs with:
   <?php
   $context = \DDTrace\current_context();
   $append = sprintf(
-      ' [dd.trace_id=%d dd.span_id=%d]',
+      ' [dd.trace_id=%s dd.span_id=%s]',
       $context['trace_id'],
       $context['span_id']
   );
@@ -58,7 +58,7 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
   $logger->pushProcessor(function ($record) {
       $context = \DDTrace\current_context();
       $record['message'] .= sprintf(
-          ' [dd.trace_id=%d dd.span_id=%d]',
+          ' [dd.trace_id=%s dd.span_id=%s]',
           $context['trace_id'],
           $context['span_id']
       );

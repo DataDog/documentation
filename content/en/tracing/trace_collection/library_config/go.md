@@ -102,15 +102,18 @@ Enable web framework and library instrumentation. When false, the application co
 : **Default**: `null` <br>
 Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
 
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **Default**: `false` <br>
+Datadog may collect [environmental and diagnostic information about your system][5] to improve the product. When false, this telemetry data will not be collected.
 
 
 ## Configure APM environment name
 
-The [APM environment name][5] may be configured [in the Agent][6] or using the [WithEnv][3] start option of the tracer.
+The [APM environment name][6] may be configured [in the Agent][7] or using the [WithEnv][3] start option of the tracer.
 
 ## B3 headers extraction and injection
 
-The Datadog APM tracer supports [B3 headers extraction][1] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -131,9 +134,11 @@ extracted value is used.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/openzipkin/b3-propagation
+[1]: /tracing/trace_collection/dd_libraries/go
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=go#pagetitle
-[5]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[6]: /getting_started/tracing/#environment-name
+[5]: /tracing/configure_data_security#telemetry-collection
+[6]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[7]: /getting_started/tracing/#environment-name
+[8]: https://github.com/openzipkin/b3-propagation

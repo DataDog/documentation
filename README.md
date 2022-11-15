@@ -98,7 +98,7 @@ Prerequsites:
 1. Go to project root
 2. Make a copy of `Makefile.config.example` called `Makefile.config`
 3. Enter value for `GITHUB_TOKEN`
-4. Set `DOCKER` to true
+4. Set `FULL_BUILD` to true to build the full documentation with all extra content
 5. Run `make start-docker`
 
 To stop the app, hit Ctrl-C or run `make stop-docker`

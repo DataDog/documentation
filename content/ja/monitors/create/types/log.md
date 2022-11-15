@@ -23,7 +23,7 @@ title: ログモニター
 
 Datadog で[ログモニター][2]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> Logs* の順に進みます。
 
-<div class="alert alert-info"><strong>注</strong>: アカウント当たり上限 1000 件のログモニターがデフォルトで設定されています。この制限を解除するには、<a href="/help/">サポートまでお問い合わせ</a>ください。</div>
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 ログモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
 ### 検索クエリを定義する
 

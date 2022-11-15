@@ -209,7 +209,7 @@ if (span != null) {
 // ...
 ```
 
-これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、Java カスタムインスツルメンテーションドキュメントの[タグの追加][3]セクションを参照してください。
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、Java カスタムインスツルメンテーションドキュメントの[タグの追加][1]セクションを参照してください。
 
 ## コンフィギュレーション設定
 
@@ -232,9 +232,9 @@ if (span != null) {
 **環境変数**: `DD_TRACE_AGENT_URL`<br/>
 **デフォルト**: `http://localhost:8126`
 
-他のすべての [Datadog トレーサーコンフィギュレーション][1]オプションも使用できます。
+他のすべての [Datadog トレーサーコンフィギュレーション][2]オプションも使用できます。
 
-**重要:** インテグレーションテストを行う際に、より多くのインテグレーションを有効化したい場合があるかもしれません。特殊なインテグレーションを有効化するには、[Datadog Tracer Compatibility][2] テーブルを使用してインテグレーションテスト用のカスタム設定を作成してください。
+**重要:** インテグレーションテストを行う際に、より多くのインテグレーションを有効化したい場合があるかもしれません。特殊なインテグレーションを有効化するには、[Datadog Tracer Compatibility][3] テーブルを使用してインテグレーションテスト用のカスタム設定を作成してください。
 
 たとえば、`OkHttp3` クライアントリクエストのインテグレーションを有効化する場合は、設定に `-Ddd.integration.okhttp-3.enabled=true` を追加します。
 
@@ -304,6 +304,6 @@ Datadog にテストが表示されない場合は、Java トレーサのバー�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/library_config/java/?tab=containers#configuration
-[2]: /ja/tracing/trace_collection/compatibility/java
-[3]: /ja/tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+[1]: /ja/tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+[2]: /ja/tracing/trace_collection/library_config/java/?tab=containers#configuration
+[3]: /ja/tracing/trace_collection/compatibility/java

@@ -16,11 +16,11 @@ further_reading:
 
 このウィジェットは、最新の報告値を表示することも、タイムウィンドウ全体のすべてのクエリ値から計算された集計値を表示することもできます。この可視化機能は、小さくてもはっきりとしたインフラストラクチャークエリへのウィンドウを提供します。
 
-{{< img src="dashboards/widgets/query_value/query_value.png" alt="クエリ値ウィジェット"  >}}
+{{< img src="dashboards/widgets/query_value/query_value.png1" alt="クエリ値ウィジェット"  >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/query_value/query-value-widget-setup.png" alt="クエリ値ウィジェットのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="クエリ値ウィジェットのセットアップ"  style="width:80%;">}}
 
 ### コンフィギュレーション
 

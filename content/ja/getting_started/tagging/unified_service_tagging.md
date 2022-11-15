@@ -139,7 +139,7 @@ tags.datadoghq.com/<container-name>.version
 
 [Kubernetes ステートメトリクス][3]を構成するには:
 
-1. [コンフィギュレーションファイル][4]で `join_standard_tags` を `true` に設定します。
+1. コンフィギュレーションファイルで、`join_standard_tags` を `true` に設定します。設定場所については、こちらの[コンフィギュレーションファイルの例][4]を参照してください。
 
 2. 同じ標準ラベルを親リソース (`Deployment` など) のラベルのコレクションに追加します。
 
@@ -186,7 +186,7 @@ containers:
 [1]: /ja/agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
 [3]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
-[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /ja/tracing/send_traces/
 [6]: /ja/integrations/statsd/
 {{% /tab %}}

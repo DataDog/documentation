@@ -22,7 +22,7 @@ This page outlines the basic features of the Datadog Agent for CentOS. To instal
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: CentOS 6 and above are supported.
+**Note**: CentOS 6 and above are supported on the 64-bit x86 architecture. CentOS 8 and above are supported on the 64-bit Arm v8 architecture.
 
 ## Commands
 

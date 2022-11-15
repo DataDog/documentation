@@ -287,6 +287,24 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
   ```
  URL の一部として含まれるクエリ文字列を難読化するために使用される正規表現。バージョン `0.76.0` で追加されました。
 
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **INI**: `datadog.trace.propagation_style_inject`<br>
+**デフォルト**: `Datadog`<br>
+トレースヘッダを挿入する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
+
+  - [B3][7]
+  - [B3 シングルヘッダ][8]
+  - Datadog
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **INI**: `datadog.trace.propagation_style_extract`<br>
+**デフォルト**: `Datadog,B3,B3 single header`<br>
+トレースヘッダを抽出する際に使用する伝搬スタイル。複数のスタイルを使用する場合は、カンマで区切ってください。サポートされているスタイルは以下の通りです。
+
+  - [B3][7]
+  - [B3 シングルヘッダ][8]
+  - Datadog
+
 #### インテグレーション名
 
 以下の表は、各インテグレーションに紐付くデフォルトのサービス名をまとめたものです。サービス名は `DD_SERVICE_MAPPING` に変更してください。
@@ -380,7 +398,6 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 [`open_basedir`][6] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
 アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
 
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -388,6 +405,8 @@ HTTP サーバーとクライアントインテグレーションでは、URL �
 [1]: /ja/getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [3]: /ja/tracing/setup/nginx/#nginx-and-fastcgi
-[4]: /ja/tracing/profiler/enabling/php/
+[4]: /ja/profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[7]: https://github.com/openzipkin/b3-propagation
+[8]: https://github.com/openzipkin/b3-propagation#single-header

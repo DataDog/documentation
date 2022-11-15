@@ -9,90 +9,211 @@ further_reading:
 - link: /continuous_integration/setup_pipelines/custom_tags_and_metrics/
   tag: ドキュメント
   text: カスタムタグとメトリクスを追加してパイプラインの可視性を拡張する
-- link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
-  tag: blog
-  text: Datadog CI Visibility で GitHub Actions のワークフローを監視する
 kind: documentation
-title: GitHub Actions のワークフローにトレースを設定する
+title: GitLab パイプラインでトレースを設定する
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) は、サポートされていません。</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点では CI Visibility は使用できません。</div>
 {{< /site-region >}}
 
 ## 互換性
 
-サポートされている GitHub バージョン:
-* GitHub.com (SaaS)
-* GitHub Enterprise Server (GHES) 3.5.0 以上
+対応する GitLab のバージョン:
+* GitLab.com (SaaS)
+* GitLab >= 14.1 (セルフホスティング)
 
+その他の対応バージョン (追加構成あり):
+* GitLab >= 13.7.0 (セルフホスティング)、機能フラグ `datadog_ci_integration` を有効にすることで利用可能です。
 
 ## Datadog インテグレーションの構成
 
-### GitHub アプリの構成
+{{< tabs >}}
+{{% tab "GitLab.com" %}}
 
-[GitHub Actions][1] のインテグレーションは、プライベートな [GitHub アプリ][2]を使用してワークフロー情報を収集します。すでにアプリをお持ちの場合は、次のセクションに進んでください。
+[プロジェクト][1]または[グループ][2]でのインテグレーションを構成するには、インスツルメントしたい各プロジェクトまたはグループに対して **Settings > Integrations > Datadog** に移動します。
 
-1. [GitHub アプリインテグレーションタイル][3]に移動します。
-2. **Link GitHub Account** をクリックします。
-3. 指示に従って、個人または組織のアカウントにインテグレーションを構成します。
-4. **Edit Permissions** で、`Actions: Read` アクセスを許可します。
-5. **Create App in GitHub** をクリックすると、アプリの作成プロセス GitHub が完了します。
-6. アプリの名前は、例えば `Datadog CI Visibility` とします。
-7. **Install GitHub App** をクリックし、GitHub の指示に従ってください。
+[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
+[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
+{{% /tab %}}
+{{% tab "GitLab &gt;&equals; 14.1" %}}
 
-### GitHub Actions のトレースを構成する
+[プロジェクト][1]または[グループ][2]でのインテグレーションを構成するには、インスツルメントしたい各プロジェクトまたはグループに対して **Settings > Integrations > Datadog** に移動します。
 
-GitHub アプリを作成し、インストールしたら、視覚化したいアカウントやリポジトリで CI Visibility を有効にします。
+また、GitLab [インスタンス][3]レベルで、**Admin > Settings > Integrations > Datadog** にアクセスして、インテグレーションを有効にすることができます。
 
-1. **[Getting Started][4]** ページに移動し、**GitHub** をクリックします。
-2. 有効にしたいアカウントの **Enable Account** をクリックします。
-3. **Enable CI Visibility** をクリックして、アカウント全体の CI Visibility を有効にします。
-4. また、リポジトリリストをスクロールして、**Enable CI Visibility** トグルをクリックすると、個々のリポジトリを有効にすることができます。
+[1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
+[2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
+[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-instance-level-default-settings-for-a-project-integration
+{{% /tab %}}
+{{% tab "GitLab &lt; 14.1" %}}
 
-パイプラインは、アカウントやリポジトリに対して CI Visibility を有効にすると、すぐに表示されます。
+`datadog_ci_integration` [機能フラグ][1]を有効にして、インテグレーションを有効にします。インストールの種類に応じて、GitLab の [Rails Runner][2] を使用する次のコマンドのいずれかを実行します。
 
-### ログ収集の有効化
+**Omnibus インストール**
 
-GitHub Actions CI Visibility のインテグレーションでは、ワークフロージョブのログを [Logs Product][5] に自動転送することもできます。
-ログを有効にするには、以下の手順で行います。
+{{< code-block lang="shell" >}}
+sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
+{{< /code-block >}}
 
-1. **[CI Visibility settings][6]** ページに移動します。
-2. 有効になっている、またはリポジトリを有効にしているアカウントをクリックします。
-3. アカウント全体のログを有効にするには、**Enable Job Logs Collection** をクリックします。
-4. また、リポジトリリストをスクロールして、**Enable Job Logs Collection** トグルをクリックすると、個々のリポジトリを有効にすることができます。
+**ソースインストールから**
 
-ログ収集の切り替え直後は、ワークフロージョブのログが Datadog Logs に転送されます。なお、ログは CI Visibility とは別課金となります。ログの保持、除外、インデックスは、Logs Settings で構成されます。
+{{< code-block lang="shell" >}}
+sudo -u git -H bundle exec rails runner \
+  -e production \
+  "Feature.enable(:datadog_ci_integration)"
+{{< /code-block >}}
 
-### インフラストラクチャーメトリクスの相関
+**Kubernetes インストール**
 
-セルフホスト型の GitHub ランナーを使用している場合は、ジョブとそれを実行しているホストを関連付けることができます。これを行うには、GitHub ランナー名が実行されているマシンのホスト名と一致することを確認します。CI Visibility はこれを利用して、インフラストラクチャーのメトリクスにリンクします。メトリクスを見るには、トレースビューでジョブスパンをクリックすると、ウィンドウ内にホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
+{{< code-block lang="shell" >}}
+kubectl exec -it <task-runner-pod-name> -- \
+  /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
+{{< /code-block >}}
+
+次に、インスツルメントしたい各プロジェクトの **Settings > Integrations > Datadog** で、[プロジェクト][3]単位でインテグレーションを構成します。
+
+<div class="alert alert-warning"><strong>注</strong>: GitLab の初期バージョンの<a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">バグ</a>により、<strong>GitLab のバージョン 14.1 未満</strong>では、GitLab の UI でオプションが利用可能であっても、<strong>グループまたはインスタンス</strong>レベルで Datadog インテグレーションを有効にすることができません。</div>
+
+[1]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
+[3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
+{{% /tab %}}
+{{< /tabs >}}
+
+インテグレーションコンフィギュレーション設定を入力します。
+
+**Active**
+: インテグレーションを有効にします。
+
+**Datadog site**
+: データを送信する [Datadog サイト][1]を指定します。<br/>
+**デフォルト**: `datadoghq.com`<br/>
+**選択したサイト**: {{< region-param key="dd_site" code="true" >}}<br/>
+
+**API URL** (オプション)
+: データを直接送信するために使用される API URL をオーバーライドできます。これは、高度なシナリオでのみ使用されます。<br/>
+**デフォルト**: (空、オーバーライドなし)
+
+**API key**
+: データを送信するときに使用する API キーを指定します。Datadog の Integrations セクションの [APIs タブ][2]で生成できます。
+
+**Service** (オプション)
+: インテグレーションによって生成された各スパンにアタッチするサービス名を指定します。これを使用して、GitLab インスタンスを区別します。<br/>
+**デフォルト**: `gitlab-ci`
+
+**Env** (オプション)
+: インテグレーションによって生成された各スパンに接続する環境 (`env` タグ) を指定します。これを使用して、GitLab インスタンスのグループを区別します (例: ステージングまたは本番)。<br/>
+**デフォルト**: `none`
+
+**タグ** (オプション)
+:  インテグレーションによって生成された各スパンに付ける任意のカスタムタグを指定します。1 行に 1 つのタグを `key:value` の形式で指定します。<br/>
+**デフォルト**: (空、追加タグなし)<br/>
+**注**: GitLab.com と GitLab >= 14.8 セルフホスティングでのみ利用可能です。
+
+**Test settings** ボタンを使用してインテグレーションをテストできます (プロジェクトでインテグレーションを構成する場合にのみ使用できます)。成功したら、**Save changes** をクリックしてインテグレーションのセットアップを完了します。
+
+## Webhook を介したインテグレーション
+
+ネイティブの Datadog インテグレーションを使用する代わりに、[Webhook][3] を使用してパイプラインデータを Datadog に送信できます。
+
+<div class="alert alert-info"><strong>注</strong>: ネイティブの Datadog インテグレーションは、推奨されるアプローチであり、積極的に開発中のオプションです。</div>
+
+リポジトリ (または GitLab インスタンス設定) の **Settings > Webhooks** に移動し、新しい Webhook を追加します。
+
+- **URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> ここで、`<API_KEY>` は [Datadog API キー][2]です。
+- **Secret Token**: 空白のままにします
+- **Trigger**: `Job events` と `Pipeline events` を選択します。
+
+カスタムの `env` または `service` パラメーターを設定するには、Webhook の URL で他のクエリパラメーターを追加します: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
+
+### カスタムタグの設定
+
+インテグレーションによって生成されたすべてのパイプラインとジョブのスパンにカスタムタグを設定するには、**URL** に URL エンコードされたクエリパラメーター `tags` を追加し、`key:value` ペアをカンマで区切って指定します。key:value のペアにカンマが含まれる場合は、引用符で囲んでください。例えば、`key1:value1, "key2: value with , comma",key3:value3` を追加するには、以下の文字列を **Webhook URL** に追記する必要があります。
+
+`?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`
 
 ## Datadog でパイプラインデータを視覚化する
 
-パイプラインが終了した後、[Pipelines][7] ページと [Pipeline Executions][8] ページにデータが入力されます。
+インテグレーションが正常に構成されたら、パイプラインが終了した後、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが入力されます。
 
 **注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
 
-## GitHub Actions のトレースを無効にする
+### インフラストラクチャーメトリクスの相関
 
-CI Visibility GitHub Actions のインテグレーションを無効にするには、GitHub アプリがワークフロージョブおよびワークフロー実行イベントのサブスクリプションを終了していることを確認します。イベントを削除するには
+セルフホスティングの GitLab ランナーを使っている場合、ジョブとそれを実行しているインフラストラクチャーを関連付けることができます。この機能を使うには、GitLab ランナーに `host:<hostname>` という形式のタグが必要です。タグは、[新しいランナーを登録する][6]際に追加することができます。既存のランナーでは、ランナーの `config.toml` を更新することでタグを追加します。または、UI から **Settings > CI/CD > Runners** に移動して、該当するランナーを編集することでタグを追加します。
 
-1. [GitHub Apps][9] のページに移動します。
-2. 該当する Datadog GitHub アプリの **Edit > Permission & events** をクリックします (複数のアプリがある場合は、それぞれのアプリでこのプロセスを繰り返す必要があります)。
-3. **Subscribe to events** セクションまでスクロールし、**Workflow job** および **Workflow run** が選択されていないことを確認します。
+これらのステップの後、CI Visibility は各ジョブにホスト名を追加します。メトリクスを見るには、トレースビューでジョブスパンをクリックします。ドロワーに、ホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
 
+### パイプライン失敗時のエラーメッセージ
+
+GitLab パイプラインの実行に失敗した場合、特定のパイプライン実行内の `Errors` タブの下の各エラーは、GitLab からのエラータイプに関連するメッセージを表示します。
+
+{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab の失敗の理由" style="width:100%;">}}
+
+各エラータイプに関連するメッセージとドメインについては、以下の表を参照してください。リストにないエラータイプは、`Job failed` というエラーメッセージと `unknown` というエラードメインになります。
+
+| エラーの種類 | エラーメッセージ | エラードメイン |
+| :---  |    :----:   |  ---: |
+|  unknown_failure  |  原因不明で失敗  |  不明
+|  config_error  |  CI/CD コンフィギュレーションファイルのエラーによる失敗 |  ユーザー
+|  external_validation_failure  |  外部パイプラインの検証のため失敗  |  不明
+|  user_not_verified  |  ユーザーが認証されていないため、パイプラインが失敗した  |  ユーザー
+|  activity_limit_exceeded  |  パイプラインのアクティビティ制限を超過した  |  プロバイダー
+|  size_limit_exceeded  |  パイプラインのサイズ制限を超過した  |  プロバイダー
+|  job_activity_limit_exceeded  |  パイプラインのジョブアクティビティ制限を超過した  |  プロバイダー
+|  deployments_limit_exceeded  |  パイプラインのデプロイ制限を超過した  |  プロバイダー
+|  project_deleted  |  このパイプラインに関連するプロジェクトが削除された  |  プロバイダー
+|  api_failure  |  API の失敗  |  プロバイダー
+|  stuck_or_timeout_failure  |  パイプラインが停止している、またはタイムアウトしている  |  不明
+|  runner_system_failure  |  ランナーシステムの不具合による失敗  |  プロバイダー
+|  missing_dependency_failure  |  依存関係がないため失敗  |  不明
+|  runner_unsupported  |  未対応のランナーのため失敗  |  プロバイダー
+|  stale_schedule  |  スケジュールが古くなったため失敗  |  プロバイダー
+|  job_execution_timeout  |  ジョブのタイムアウトによる失敗  |  不明
+|  archived_failure  |  アーカイブの失敗  |  プロバイダー
+|  unmet_prerequisites  |  前提条件が満たされていないため失敗  |  不明
+|  scheduler_failure  |  スケジュール不具合による失敗  |  プロバイダー
+|  data_integrity_failure  |  データ整合性のため失敗  |  プロバイダー
+|  forward_deployment_failure  |  デプロイメントの失敗  |  不明
+|  user_blocked  |  ユーザーによってブロックされた  |  ユーザー
+|  ci_quota_exceeded  |  CI の割り当て超過  |  プロバイダー
+|  pipeline_loop_detected  |  パイプラインループを検出  |  ユーザー
+|  builds_disabled  |  ビルド無効  |  ユーザー
+|  deployment_rejected  |  デプロイメントが拒否された  |  ユーザー
+|  protected_environment_failure  |  環境に関する失敗  |  プロバイダー
+|  secrets_provider_not_found  |  シークレットプロバイダーが見つからない  |  ユーザー
+|  reached_max_descendant_pipelines_depth  |  子孫パイプラインの最大値に到達  |  ユーザー
+|  ip_restriction_failure  |  IP 制限の失敗  |  プロバイダー
+
+<!-- | ---------- | ---------- | ---------- | -->
+<!-- | :---        |    :----:   |          ---: | -->
+
+## ジョブログ収集を有効にする (ベータ版)
+
+以下の GitLab バージョンは、ジョブログの収集をサポートしています。
+* GitLab.com (SaaS)
+* GitLab >= 14.8 (セルフホスティング) [ジョブログを格納するオブジェクトストレージ][7]を使用している場合のみ
+
+ジョブログの収集を有効にするには
+
+1. GitLab セルフホストまたは GitLab.com アカウントで `datadog_integration_logs_collection` [機能フラグ][8]を有効化します。これにより、Datadog インテグレーションにある `Enable logs collection` オプションが表示されます。
+2. `Enable logs collection` オプションを有効にし、変更を保存します。
+
+ジョブログは [Logs][9] 製品に収集され、CI Visibility 内で GitLab パイプラインと自動的に相関が取られます。
+
+<div class="alert alert-info"><strong>注</strong>: Logs は、CI Visibility とは別課金となります。</div>
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.github.com/actions
-[2]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
-[3]: https://app.datadoghq.com/account/settings#integrations/github-apps
-[4]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[5]: https://docs.datadoghq.com/ja/logs/
-[6]: https://app.datadoghq.com/ci/settings
-[7]: https://app.datadoghq.com/ci/pipelines
-[8]: https://app.datadoghq.com/ci/pipeline-executions
-[9]: https://github.com/settings/apps
+[1]: /ja/getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
+[4]: https://app.datadoghq.com/ci/pipelines
+[5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://docs.gitlab.com/runner/register/
+[7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+[8]: https://docs.gitlab.com/ee/administration/feature_flags.html
+[9]: /ja/logs/

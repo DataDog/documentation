@@ -9,7 +9,7 @@ further_reading:
   text: RUM エクスプローラーについて
 - link: /logs/log_collection/javascript/
   tag: ドキュメント
-  text: Browser Logs SDK について
+  text: Datadog Browser SDK for Logs について
 kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---
@@ -27,7 +27,7 @@ RUM ブラウザモニタリングを設定するには、RUM アプリケーシ
    - アプリケーションの名前を入力し、**Generate Client Token** をクリックします。これにより、アプリケーションの `clientToken` と `applicationId` が生成されます。
    - RUM ブラウザ SDK のインストールタイプを選択します。[npm](#npm)、またはホストバージョン ([CDN 非同期](#cdn-async)または [CDN 同期](#cdn-sync)) のいずれかを選択します。
    - [RUM とセッションリプレイ][19]の統合サービスタグ付けを使用するために、アプリケーションの環境名とサービス名を定義します。初期化スニペットで、デプロイされたアプリケーションのバージョン番号を設定します。詳しくは、[タグ付け](#tagging)を参照してください。
-   - 収集した総ユーザーセッションのサンプリングレートを設定し、スライダーで収集した総 [Browser Premium][11] セッションのパーセンテージを設定します。Browser Premium セッションには、リソースやロングタスク、リプレイ記録などが含まれます。
+   - 収集した総ユーザーセッションのサンプリングレートを設定し、スライダーで収集した総 [Browser Premium][11] セッションのパーセンテージを設定します。Browser Premium セッションには、リソースやロングタスク、リプレイ記録が含まれます。ユーザーセッションの総量から収集される Browser Premium セッションの割合の構成については、[ブラウザおよび Browser Premium サンプリングのセットアップを構成する][21]を参照してください。
    - **Session Replay Enabled** をクリックすると、[セッションリプレイ][17]でリプレイ録画にアクセスできます。
    - ドロップダウンメニューから、セッションリプレイの[プライバシー設定][18]を選択します。
 2. 変更をアプリケーションにデプロイします。実行が開始されると、ユーザーのブラウザから Datadog によってイベントが収集されます。
@@ -38,7 +38,7 @@ Datadog がデータの受信を開始するまで、アプリケーションは
 ### 適切なインストール方法の選択
 
 npm (node package manager)
-: 最新の Web アプリケーションには、この方法が推奨されます。RUM ブラウザ SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。Datadog では、ログを収集する場合、Browser Logs SDK と一致するバージョンを使用することを推奨しています。
+: 最新の Web アプリケーションには、この方法が推奨されます。RUM ブラウザ SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。Datadog では、Browser Logs SDK と一致するバージョンを使用することを推奨しています。
 
 CDN 非同期
 : この方法は、パフォーマンス目標のある Web アプリケーションに推奨されます。RUM ブラウザ SDK は、CDN から非同期的に読み込まれるため、SDK のダウンロードによるページの読み込みパフォーマンスへの影響を回避できます。ただし、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。
@@ -347,7 +347,7 @@ SDK の実行に関するテレメトリーデータ (エラーやデバッグ�
 **タイプ:** リスト<br/>
 ページアクティビティを計算するときに無視されるリクエスト起源のリストです。[ページアクティビティの計算方法][16]を参照してください。
 
-Logs Browser SDK も使用する場合、一致するコンフィギュレーションが必要なオプション:
+Logs Browser SDK を使用している場合、一致するコンフィギュレーションが必要なオプション:
 
 `trackSessionAcrossSubdomains`
 : 任意<br/>
@@ -387,108 +387,6 @@ init(configuration: {
 })
 ```
 
-### ブラウザと Browser Premium のサンプリング構成
-
-この機能を使用するには、RUM ブラウザ SDK v3.0.0+ が必要です。
-
-<blockquote class="alert alert-info">
-RUM ブラウザ SDK v4.10.2 は、<code>replaySampleRate</code> 初期化パラメーターを廃止し、<code>premiumSampleRate</code> 初期化パラメーターを導入しています。
-</blockquote>
-
-セッションが作成されると、RUM はそのセッションを次のいずれかとして追跡します。
-
-- [**ブラウザ RUM**][11]: セッション、ビュー、アクション、およびエラーのみが収集されます。`startSessionReplayRecording()` への呼び出しは無視されます。
-- [**Browser Premium**][11]: リソースやロングタスク、リプレイ記録を含む、ブラウザからのすべての情報が収集されます。リプレイ記録を収集するには、`startSessionReplayRecording()` を呼び出します。
-
-セッションの追跡方法を制御するために、2 つの初期化パラメーターが利用可能です。
-
-- `sampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
-- `premiumSampleRate` は、全体のサンプルレートの**後に**適用され、Browser Premium として追跡されるセッションの割合を制御します。デフォルトは `100%` で、すべてのセッションがデフォルトで Browser Premium として追跡されます。
-
-セッションの 100% をブラウザとして追跡する場合
-
-<details open>
-  <summary>最新バージョン</summary>
-
-```
-datadogRum.init({
-    ....
-    sampleRate: 100,
-    premiumSampleRate: 0
-});
-```
-
-</details>
-
-<details>
-  <summary><code>v4.10.2</code> より前</summary>
-
-```
-datadogRum.init({
-    ....
-    sampleRate: 100,
-    replaySampleRate: 0
-});
-```
-
-</details>
-
-セッションの 100% を Browser Premium として追跡する場合
-
-<details open="false">
-  <summary>最新バージョン</summary>
-
-```
-datadogRum.init({
-    ....
-    sampleRate: 100,
-    premiumSampleRate: 100
-});
-```
-
-</details>
-
-<details>
-  <summary><code>v4.10.2</code> より前</summary>
-
-```
-datadogRum.init({
-    ....
-    sampleRate: 100,
-    replaySampleRate: 100
-});
-```
-
-</details>
-
-`premiumSampleRate` は `sampleRate` に対するパーセンテージです。`sampleRate` を 60、`premiumSampleRate` を 50 に設定すると、40% のセッションがドロップされ、30% のセッションがブラウザとして、30% のセッションが Browser Premium として収集されるようになります。
-
-<details open>
-  <summary>最新バージョン</summary>
-
-```
-datadogRum.init({
-    ....
-    sampleRate: 60,
-    premiumSampleRate: 50
-});
-```
-
-</details>
-
-<details>
-  <summary><code>v4.10.2</code> より前</summary>
-
-```
-datadogRum.init({
-    ....
-    sampleRate: 60,
-    replaySampleRate: 50
-});
-```
-
-</details>
-
 ### タグ付け
 
 サービスとは、一連のページにマッピングされた、独立したデプロイ可能なコードリポジトリのことです。
@@ -498,16 +396,18 @@ datadogRum.init({
 
 ### 内部コンテキストにアクセスする
 
-Datadog ブラウザ RUM SDK が初期化されると、SDK の内部コンテキストにアクセスすることができます。これにより、以下にアクセスすることができます。
+Datadog ブラウザ RUM SDK が初期化されると、SDK の内部コンテキストにアクセスすることができます。
 
-| 属性      | 説明                                                   |
-| -------------- | ------------------------------------------------------------- |
-| application_id | アプリケーションの ID                                         |
-| session_id     | セッションの ID                                             |
-| user_action    | アクション ID を含むオブジェクト (アクションが見つからなかった場合は未定義) |
-| view           | 現在のビューイベントに関する詳細を含むオブジェクト        |
+以下の属性を調べることができます。
 
-詳細は、[**RUM Browser Data Collected** ページ][2]でご確認ください。
+| 属性      | 説明                                                       |
+| -------------- | ----------------------------------------------------------------- |
+| application_id | アプリケーションの ID。                                            |
+| session_id     | セッションの ID。                                                |
+| user_action    | アクション ID を含むオブジェクト (アクションが見つからなかった場合は未定義)。 |
+| view           | 現在のビューイベントに関する詳細を含むオブジェクト。           |
+
+詳細については、[RUM ブラウザデータ収集][2]を参照してください。
 
 #### 例
 
@@ -525,13 +425,13 @@ Datadog ブラウザ RUM SDK が初期化されると、SDK の内部コンテ�
 }
 ```
 
+オプションで `startTime` パラメーターを使用すると、特定の時刻のコンテキストを取得することができます。このパラメーターが省略された場合は、現在のコンテキストが返されます。
+
 ```
 getInternalContext (startTime?: 'number' | undefined)
 ```
 
-オプションで `startTime` パラメーターを使用すると、特定の時刻のコンテキストを取得することができます。このパラメーターが省略された場合は、現在のコンテキストが返されます。
-
-##### NPM
+#### NPM
 
 NPM の場合は以下を使用します。
 
@@ -551,7 +451,7 @@ DD_RUM.onReady(function () {
 })
 ```
 
-##### CDN 同期
+#### CDN 同期
 
 CDN 同期の場合は以下を使用します。
 
@@ -573,7 +473,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions
 [7]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/proxy-rum-data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[9]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions#declaring-a-name-for-click-actions
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [10]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
 [12]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
@@ -585,3 +485,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [18]: https://docs.datadoghq.com/ja/real_user_monitoring/session_replay/privacy_options
 [19]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags
 [20]: https://docs.datadoghq.com/ja/real_user_monitoring/frustration_signals/
+[21]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/sampling-browser-and-browser-premium/

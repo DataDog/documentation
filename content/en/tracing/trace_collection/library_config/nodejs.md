@@ -75,6 +75,9 @@ Enable automatic injection of trace IDs in logs for supported logging libraries.
 `DD_TRACE_RATE_LIMIT`
 : Percentage of spans to sample as a float between `0` and `1`. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
+`DD_TRACE_SAMPLING_RULES` 
+: A JSON array of objects. Each object must have a "sample_rate", and the "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
+
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**:  `false`<br>
 Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.

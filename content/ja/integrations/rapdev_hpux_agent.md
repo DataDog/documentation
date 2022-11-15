@@ -16,8 +16,8 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  sales_email: sales@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -76,20 +76,20 @@ HP-UX Agent を使用すると、Datadog 内のシステムメトリクスを収
 
 HP-UX Agent は、Datadog インフラストラクチャーリストをサポートするために必要なホストメタデータを提供し、組織が他のサポートされている Datadog ホストオペレーティングシステムと同様の HP-UX ホストシステムで作業できるようにします。
 
-HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用します。HP-UX Agent は現在、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
+HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用します。HP-UX Agent は現在、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。カスタム Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
 
 ## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
- - メール: datadog-engineering@rapdev.io 
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222 
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">こちらをクリック</a>してください。

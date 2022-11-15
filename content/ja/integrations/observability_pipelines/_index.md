@@ -25,7 +25,7 @@ kind: ドキュメント
 title: オブザーバビリティ パイプライン
 ---
 
-{{< img src="integrations/observability_pipelines/obs_pipelines_overview.png" alt="テスト" style="width:100%;" >}}
+{{< img src="integrations/observability_pipelines/obs_pipelines_overview.png" alt="左側の異なるデータソースが、transform、reduce、route という 3 つの六角形に流れ、矢印が修正されたデータの異なる宛先を指しているグラフィック" style="width:100%;" >}}
 
 ## 可観測性パイプラインとは？
 
@@ -36,7 +36,7 @@ Vector の構成に Datadog API キーを追加して、観測可能性パイプ
 観測可能性パイプラインを使えば、以下のようなことも可能です。
 
 - ルーティングの前にデータ量をコントロールし、コスト管理を行うことができます。
-- データをどこにでも転送できるため、ロックインを減らし、マイグレーションを簡素化できます。
+- データをどこにでも転送できるため、ベンダーロックインを減らし、マイグレーションを簡素化できます。
 - 居住地に関する必須条件を満たし、機密データを編集することで、よりコンプライアンスを維持することができます。
 - イベントを充実させ、構造化し、より有用なものに変換することができます。
 
@@ -56,19 +56,19 @@ Vector の構成に Datadog API キーを追加して、観測可能性パイプ
 
 パイプラインのトポロジーを全体的に把握し、各フローの平均負荷、エラー率、スループットなどの主要なパフォーマンス指標を監視することができます。
 
-{{< img src="integrations/observability_pipelines/config-map.png" alt="テスト" style="width:80%;" >}}
+{{< img src="integrations/observability_pipelines/config-map.png" alt="http、splunk_hec、datadog から来たデータが、異なる変換に流れ、異なる宛先に送られる様子を示した構成図" style="width:80%;" >}}
 
 ### ボトルネックの早期特定とパフォーマンスの最適化
 
 Vector の特定のコンポーネントに潜り込み、観測可能性データがどのようにパイプラインに流れ込んでいるかを理解し、トラブルシューティングやパフォーマンスのボトルネックの特定、パイプラインの最適化に役立てることができます。
 
-{{< img src="integrations/observability_pipelines/config-map-side-panel.png" alt="テスト" style="width:85%;" >}}
+{{< img src="integrations/observability_pipelines/config-map-side-panel.png" alt="S3 ソース構成のサイドパネルに、1 秒あたりのイベントの出入り、エラーの割合、ロードアベレージの割合のグラフが表示される" style="width:85%;" >}}
 
 ### データ配信を確実に行い、レイテンシーを低減します。
 
 データが宛先に届いているかどうかを確認し、レイテンシーの問題を完全に視覚化して、SLI と SLO を満たすことができます。
 
-{{< img src="integrations/observability_pipelines/configuration-list.png" alt="テスト" style="width:85%;" >}}
+{{< img src="integrations/observability_pipelines/configuration-list.png" alt="観測可能性パイプラインのページには、アクティブなパイプラインと非アクティブなパイプラインのリストが表示され、作成日、ホスト数、バージョン、イベント数、バイト数、エラー率などの列が表示される" style="width:85%;" >}}
 
 ## その他の参考資料
 

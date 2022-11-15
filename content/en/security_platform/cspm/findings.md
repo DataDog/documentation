@@ -1,5 +1,5 @@
 ---
-title: Findings Explorer
+title: Security Findings Explorer
 kind: documentation
 aliases:
   - /security_platform/findings

@@ -7,6 +7,7 @@ title: モニターガイド
 
 {{< whatsnext desc="一般ガイド:" >}}
     {{< nextlink href="monitors/guide/monitor_api_options" >}}モニター API オプション{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}モニターアラートのトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}モニター演算とスパース Metrics{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() モニター評価{{< /nextlink >}}
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}テンプレート変数評価{{< /nextlink >}}

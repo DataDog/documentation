@@ -7,7 +7,6 @@ categories:
 - web
 - aws
 - log collection
-ddtype: crawler
 dependencies: []
 description: Surveillez les taux d'erreur, le nombre de requêtes et les volumes de
   téléchargement et de chargement.
@@ -55,25 +54,25 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Lorsque vous activez la journalisation CloudFront pour une distribution, indiquez le compartiment Amazon S3 dans lequel vous souhaitez que CloudFront stocke vos logs. Si vous utilisez Amazon S3 comme source, Datadog vous déconseille d'utiliser le même compartiment pour vos fichiers de log. L'utilisation d'un compartiment distinct simplifie la maintenance.
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Journalisation Cloudfront 1" popup="true" style="width:70%;">}}
-
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Journalisation Cloudfront 2" popup="true" style="width:70%;">}}
-
 **Remarque importante** : vous pouvez stocker des fichiers de log de plusieurs distributions dans un même compartiment. Lorsque vous activez la journalisation, vous pouvez indiquer `cloudfront` en tant que préfixe dans les noms de fichiers pour [déterminer à quelle distribution sont associés vos fichiers][1].
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][2].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs CloudFront en cliquant sur S3 dans la liste des déclencheurs pour votre Lambda dans la console AWS :
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
-   Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs CloudFront et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda du Forwarder Datadog][2] dans votre compte AWS.
+2. Une fois la fonction Lambda configurée, accédez-y. Dans la section Function Overview, cliquez sur **Add Trigger**.
+3. Sélectionnez le déclencheur **S3** pour le champ Trigger Configuration.
+4. Sélectionnez le compartiment S3 où se trouvent vos logs CloudFront.
+5. Conservez le type d'événement `All object create events`.
+6. Cliquez sur **Add** pour ajouter le déclencheur à votre fonction Lambda.
 
-Accédez ensuite à la [section Log de Datadog][3] pour commencer à explorer vos logs !
+Accédez au [Log Explorer][3] pour commencer à explorer vos logs.
+
+Pour en savoir plus sur la collecte de logs de service AWS, consultez la section [Envoyer des logs de service AWS avec la fonction Lambda Datadog][4].
 
 [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
-[2]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[2]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
 [3]: https://app.datadoghq.com/logs
+[4]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 {{% /tab %}}
 {{% tab "Logs en temps réel" %}}
 

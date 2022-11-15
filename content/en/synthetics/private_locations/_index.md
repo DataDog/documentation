@@ -32,10 +32,10 @@ If you would like to be added to the Windows Private Location beta, reach out to
 Private locations allow you to **monitor internal-facing applications or any private endpoints** that aren’t accessible from the public internet. They can also be used to:
 
 * **Create custom Synthetic locations** in areas that are mission-critical to your business.
-* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetics and CI/CD][1].
+* **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][1].
 * **Compare application performance** from both inside and outside your internal network.
 
-Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any regular managed location.
+Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any managed location.
 
 Your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog’s servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
 
@@ -45,11 +45,11 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 ### Docker
 
-Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Google Container Registry. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
 
 ### Datadog private locations endpoints
 
-To pull test configurations and push test results, the private location worker needs access to the below Datadog API endpoints.
+To pull test configurations and push test results, the private location worker needs access to the following Datadog API endpoints.
 
 {{< site-region region="us" >}}
 
@@ -80,6 +80,16 @@ To pull test configurations and push test results, the private location worker n
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | 443  | `intake.synthetics.us3.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.us5.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -157,7 +167,7 @@ Datadog does not store your secrets, so store them locally before clicking **Vie
 
 ### Install your private location
 
-You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, and `DATADOG_PRIVATE_KEY` environment variables in your task definition.
+You can use `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables in your task definition.
 
 Launch your private location on:
 
@@ -675,7 +685,9 @@ Because you can run several containers for one single private location with a si
 
 You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
-For more information, see [Dimensioning Private Locations][18].
+For more information, see [Dimensioning Private Locations][18]. 
+
+In order to use private locations for continuous testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
 
 ## Monitor your private location
 
@@ -695,7 +707,7 @@ If you are using the [custom role feature][21], add your user to a custom role t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/cicd_integrations
+[1]: /continuous_testing/cicd_integrations
 [2]: /synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/
@@ -717,3 +729,4 @@ If you are using the [custom role feature][21], add your user to a custom role t
 [20]: /account_management/rbac/permissions
 [21]: /account_management/rbac#custom-roles
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
+[23]: /continuous_testing/cicd_integrations/configuration

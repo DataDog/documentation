@@ -133,7 +133,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| Platform                                 | Supported versions                                        |
+| Platform (64-bit x86)                    | Supported versions                                        |
 |------------------------------------------|-----------------------------------------------------------|
 | [Amazon Linux][1]                        | Amazon Linux 2                                            |
 | [Debian][2] with systemd                 | Debian 7 (wheezy)+ in Agent < 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
@@ -151,8 +151,19 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Windows][10]                            | Windows 7+                                                |
 | [Windows Azure Stack HCI OS][10]         | All Versions                                              |
 
+| Platform (64-bit Arm v8)                 | Supported versions                                        |
+|------------------------------------------|-----------------------------------------------------------|
+| [Amazon Linux][1]                        | Amazon Linux 2                                            |
+| [Debian][2] with systemd                 | Debian 9 (stretch)+                                       |
+| [Ubuntu][3]                              | Ubuntu 16.04+                                             |
+| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 8+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
+| [Docker][5]                              | Version 1.12+                                             |
+| [Kubernetes][6]                          | Version 1.3+                                              |
+| [Fedora][8]                              | Fedora 27+                                                |
+| [macOS][9]                               | macOS 11.0+                                               |
+
+
 **Notes**: 
-- 64-bit x86 packages are available for all platforms on the list. Arm v8 packages are available for all platforms except Windows and MacOS.
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 - Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
@@ -229,10 +240,8 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `help`            | Help about any command.                                                     |
 | `hostname`        | Print the hostname used by the Agent.                                       |
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
-| `installservice`  | Install the Agent within the service control manager.                       |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
 | `regimport`       | Import the registry settings into `datadog.yaml`.                           |
-| `remove-service`  | Remove the Agent from the service control manager.                          |
 | `restart`         | [Restart the Agent][2].                                                     |
 | `restart-service` | Restart the Agent within the service control manager.                       |
 | `start`           | [Start the Agent][3].                                                       |

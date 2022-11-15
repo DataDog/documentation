@@ -41,7 +41,7 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 5.1.1
+integration_version: 5.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

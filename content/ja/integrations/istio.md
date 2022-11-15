@@ -40,7 +40,7 @@ draft: false
 git_integration_title: istio
 integration_id: istio
 integration_title: Istio
-integration_version: 4.2.1
+integration_version: 4.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

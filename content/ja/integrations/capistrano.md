@@ -57,7 +57,7 @@ set :datadog_api_key, "${独自の_API_キー}"
 2. 検索バーに `sources:capistrano` を入力するか、左側のインテグレーションの FROM リストで 'Capistrano' をクリックします。
 3. 検索バーに `priority:all` を入力するか、左側の PRIORITY リストで 'All' をクリックします。Capistrano タスクは、デフォルトでは Low 優先度で送信されます。そのため、デフォルトのイベントストリームビュー（Normal 優先度）を使用すると表示されません。
 
-{{< img src="integrations/capistrano/capistranoevents.gif" >}}
+{{< img src="integrations/capistrano/capistranoevents.mp4" video="true" >}}
 
 ## 収集データ
 

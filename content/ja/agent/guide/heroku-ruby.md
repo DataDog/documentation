@@ -297,7 +297,7 @@ instances:
 
 # Heroku アプリケーションの環境変数を使用して、Redis の構成を上記の設定から更新します
 if [ -n "$REDIS_URL" ]; then
-  REDISREGEX='redis://([^:]*):([^@]+)@([^:]+):([^/]+)$'
+  REDISREGEX='rediss?://([^:]*):([^@]+)@([^:]+):([^/]+)$'
   if [[ $REDIS_URL =~ $REDISREGEX ]]; then
     sed -i "s/<YOUR_REDIS_HOST>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
     sed -i "s/<YOUR_REDIS_PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"

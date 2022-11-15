@@ -116,25 +116,22 @@ further_reading:
 
 1. 特定のパイプラインに割り当てるロールの[ロール ID を取得][1]します。
 2. 地域の `logs_write_processors` アクセス許可 API の[アクセス許可 ID を取得][2]します。
-3. このロールを割り当てるパイプラインの[パイプライン ID を取得][3]します。
-4. 以下の呼び出しで、そのロールにアクセス許可を付与します。
+3. 以下の呼び出しで、そのロールにアクセス許可を付与します。
 
 ```sh
 curl -X POST \
-        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
-                "scope": {
-                    "pipelines": [ "<PIPELINE-X_ID>", "<PIPELINE-Y_ID>"]
-                }
+                "id": "<PERMISSION_UUID>",
+                "type": "permissions"
             }'
 ```
 
 [1]: /ja/api/v2/roles/#list-roles
 [2]: /ja/api/v2/roles/#list-permissions
-[3]: /ja/api/v1/logs-pipelines/#get-all-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -201,7 +198,7 @@ curl -X POST \
 `Prod Archive` からリハイドレートされた `service:ci-cd` ログの場合、次の点に注意してください。
 
 * [インデックスデータのログ読み取り](#logs-read-index-data)レガシーアクセス許可を使用**しない**場合、これらのログには `CI-CD` ロールメンバーがアクセスできます。
-* [インデックスデータのログ読み取り](#logs-read-index-data)レガシーアクセス許可を使用**する**場合、結果の履歴ビューは `PROD` および `ADMIN` ロールメンバーに制限されるため、これらのログには `CI-CD` ロールメンバーはアクセスできません。 
+* [インデックスデータのログ読み取り](#logs-read-index-data)レガシーアクセス許可を使用**する**場合、結果の履歴ビューは `PROD` および `ADMIN` ロールメンバーに制限されるため、これらのログには `CI-CD` ロールメンバーはアクセスできません。
 
 
 ### `logs_public_config_api`
@@ -334,21 +331,19 @@ Datadog API でログコンフィギュレーションを表示、作成また�
 
 ```bash
 curl -X POST \
-        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
-                "scope": {
-                    "indexes": ["<INDEX-1_ID>",["<INDEX-2_ID>"]
-                }
+                "id": "<PERMISSION_UUID>",
+                "type": "permissions"
             }'
 ```
 
 
 [1]: /ja/api/v2/roles/#list-roles
 [2]: /ja/api/v2/roles/#list-permissions
-[3]: /ja/api/v1/logs-indexes/#get-all-indexes
 {{% /tab %}}
 {{< /tabs >}}
 

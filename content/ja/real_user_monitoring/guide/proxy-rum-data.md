@@ -76,7 +76,7 @@ Datadog へのプロキシリクエストを成功させるには
 
 `ddforward` 属性が [Datadog サイト][2]の有効な Datadog エンドポイントを指していることを確認してください。これを行わないと、安全でない構成になる可能性があります。
 
-サイトパラメータは、SDK の[初期化パラメータ][3]です。各サイトで有効な取り込み URL のパターンは以下の通りです。
+サイトパラメータは、SDK の[初期化パラメータ][1]です。各サイトで有効な取り込み URL のパターンは以下の通りです。
 
 {{< tabs >}}
 {{% tab "最新バージョン" %}}
@@ -109,4 +109,3 @@ Datadog へのプロキシリクエストを成功させるには
 
 [1]: /ja/real_user_monitoring/browser/#initialization-parameters
 [2]: /ja/getting_started/site/
-[3]: /ja/real_user_monitoring/browser/#initialization-parameters

@@ -39,7 +39,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 ### コンフィギュレーション
 
-1. [AWS インテグレーションタイル][2]で **Configuration** タブを開き、**Limit metric collection by AWS Service** で `EC2` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EC2` が有効になっていることを確認します。
 
 2. Amazon EC2 のメトリクスを収集するには、次の必須アクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [EC2 ポリシー][4]を参照してください。
 
@@ -51,7 +51,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 3. [Datadog - AWS EC2 インテグレーション][5]をインストールします。
 
-**注**: Datadog を使用して EC2 インスタンスの一部を監視する場合は、それらの EC2 インスタンスに `datadog:true` などの AWS タグを割り当てます。次に、[Datadog AWS インテグレーションタイル][2]の **Optionally limit metrics collection** テキストボックスで、そのタグを指定します。
+**注**: Datadog で EC2 インスタンスのサブセットを監視したい場合、それらの EC2 インスタンスに `datadog:true` などの AWS タグを付与します。[Datadog AWS インテグレーションページ][2]の **Metric Collection** タブにある **Limit metric collection to specific resources** テキストボックスで、そのタグを指定します。
 
 #### EC2 オートミュート
 
@@ -59,7 +59,7 @@ Datadog は、CloudWatch API からのホストステータスに基づいて、
 
 オートミュートを有効にするには、EC2 インテグレーションをインストールする必要があります。メトリクスの収集が何らかのタグが付いたホストに限られている場合は、それらのタグと一致するインスタンスだけがオートミュートされます。
 
-EC2 インスタンスのシャットダウンが予期される場合にモニターをオフにするには、[AWS インテグレーションタイル][2]で **EC2 automuting** チェックボックスをオンにします。
+EC2 インスタンスのシャットダウンが予期される場合にモニターをオフにするには、[AWS インテグレーションページ][2]で **EC2 automuting** チェックボックスをオンにします。
 
 {{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="AWS EC2 オートミュート" >}}
 
@@ -75,7 +75,7 @@ EC2 インスタンスのシャットダウンが予期される場合にモニ�
 - 説明: (オプション)
 - タイプ: `安全な文字列`
 - KMS の主要なソース: `現在のアカウント`
-- KMS キー ID: 選択されているデフォルト値を使用します。
+- KMS キー ID: 選択されているデフォルト値を使用します
 - 値: [Datadog API キー][9]
 
 #### Systems Manager
@@ -137,10 +137,10 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 - [Datadog で EC2 インスタンスを監視する方法][22]
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_ec2
+[5]: https://app.datadoghq.com/integrations/amazon-ec2
 [6]: https://app.datadoghq.com/monitors#downtime
 [7]: https://docs.datadoghq.com/ja/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [8]: https://console.aws.amazon.com/systems-manager/parameters

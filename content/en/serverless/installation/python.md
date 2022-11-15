@@ -190,7 +190,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
         python_layer_version={{< latest-lambda-layer-version layer="python" >}},
         extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
         site="<DATADOG_SITE>",
-        apiKeySecretArn="<DATADOG_API_KEY_SECRET_ARN>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
       )
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
     ```

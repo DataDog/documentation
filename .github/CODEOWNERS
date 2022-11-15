@@ -23,3 +23,6 @@ package.json              @DataDog/corpweb @DataDog/documentation
 
 # Agent Shared Component
 /content/en/agent/proxy.md                              @DataDog/agent-shared-components @DataDog/documentation
+
+# Partners
+/content/en/partners/                                   @KateYoak @DataDog/documentation

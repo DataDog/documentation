@@ -20,6 +20,15 @@
           "targetValue": "0"
         },
         "type": "body"
+      },
+      {
+        "operator": "validatesXPath",
+        "target": {
+          "xPath": "target-xpath",
+          "targetValue": "0",
+          "operator": "contains"
+        },
+        "type": "body"
       }
     ],
     "configVariables": [

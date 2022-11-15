@@ -19,7 +19,29 @@ further_reading:
 
 The Java Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
-Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java.
+### Supported JVM runtimes
+
+The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
+
+| JVM versions | Operating Systems                                                             | Support level             | Tracer version |
+| -------------| ----------------------------------------------------------------------------- | ------------------------- | -------------- |
+| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#support-beta)     | Latest         |
+| 7 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)             | [GA](#support-ga)         | Latest         |
+| 7 to 17      | Linux (arm64)<br>Mac (arm64)                                                  | [Beta](#support-beta)     | Latest         |
+
+Datadog does not officially support any early-access versions of Java.
+
+### Levels of support
+
+| **Level**                                              | **Support provided**                                                                                                                       |
+|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. Contact [Datadog support][2] for special requests.                                                                   |
+| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features and bug and security fixes are provided on a best-effort basis. |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features and bug and security fixes.                                                 |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                           |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                               |
+
+## Integrations
 
 Beta integrations are disabled by default but can be enabled individually:
 
@@ -52,7 +74,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Play                    | 2.3-2.8    | Fully Supported | `play`, `play-action`                          |
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported | `restlet-http`.                                |
-| Spark Java              | 2.3+       | [Beta][2]       | `sparkjava` (requires `jetty`)                 |
+| Spark Java              | 2.3+       | [Beta][3]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
@@ -74,7 +96,7 @@ The following instrumentations are disabled by default and can be enabled with t
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
 
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][3] if you need help.
 
 ### Networking framework compatibility
 
@@ -94,7 +116,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
-| Grizzly HTTP Client      | 1.9+        | [Beta][3]         | `grizzly-client`                               |
+| Grizzly HTTP Client      | 1.9+        | [Beta][4]         | `grizzly-client`                               |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
@@ -104,7 +126,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| Ning HTTP Client         | 1.9.0+      | [Beta][3]         | `ning`                                         |
+| Ning HTTP Client         | 1.9.0+      | [Beta][4]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
@@ -115,7 +137,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **JMS Note**: Datadog's JMS integration automatically adds and reads message object properties `x__dash__datadog__dash__trace__dash__id` and `x__dash__datadog__dash__parent__dash__id` to maintain context propagation between consumer and producer services.
 
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][3] if you need help.
 
 ### Data store compatibility
 
@@ -166,7 +188,7 @@ The following instrumentations are disabled by default and can be enabled with t
 | ----------------------- |---------------------------------------------- |
 | JDBC-Datasource		  | `-Ddd.integration.jdbc-datasource.enabled=true` |
 
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][3] if you need help.
 
 ### Additional framework compatibility
 
@@ -187,13 +209,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK        | < 8.0    | Fully Supported | `twilio-sdk`                                   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
+Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][3].
 
 To improve visibility into applications using unsupported frameworks, consider:
 
-- [Adding custom instrumentation][4].
-- [Submitting a pull request][5] with instrumentation for inclusion in a future release.
-- Contacting [Datadog support][2] and submitting a feature request.
+- [Adding custom instrumentation][5].
+- [Submitting a pull request][6] with instrumentation for inclusion in a future release.
+- Contacting [Datadog support][3] and submitting a feature request.
 
 ### Disabling integrations
 
@@ -218,7 +240,8 @@ Running the Java tracer in Bitbucket is not supported.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java
-[2]: /help/
-[3]: http://bytebuddy.net
-[4]: /tracing/manual_instrumentation/java
-[5]: https://github.com/DataDog/documentation#outside-contributors
+[2]: https://www.datadoghq.com/support/
+[3]: /help/
+[4]: http://bytebuddy.net
+[5]: /tracing/manual_instrumentation/java
+[6]: https://github.com/DataDog/documentation#outside-contributors

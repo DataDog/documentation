@@ -66,14 +66,14 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 高度なアラートオプション (データなし、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][4]ページを参照してください。メトリクス固有のオプションのフルデータウィンドウについては、[メトリクスモニター][5]ページを参照してください。
 
 [1]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-[2]: /ja/tracing/visualization/service/
-[3]: /ja/tracing/visualization/resource/
+[2]: /ja/tracing/services/service_page/
+[3]: /ja/tracing/services/resource_page/
 [4]: /ja/monitors/create/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/create/types/metric/#data-window
 {{% /tab %}}
 {{% tab "Trace Analytics" %}}
 
-<div class="alert alert-info"><strong>注</strong>: アカウント当たり上限 1000 件のトレース分析モニターがデフォルトで設定されています。この制限を解除するには、<a href="/help/">サポートまでお問い合わせ</a>ください。</div>
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 トレース分析モニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
 ### 検索クエリを定義する
 
@@ -110,7 +110,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 [1]: /ja/tracing/trace_explorer/query_syntax/#search-bar
 [2]: /ja/tracing/trace_explorer/query_syntax/#facet-search
 [3]: /ja/tracing/trace_explorer/query_syntax/#numerical-values
-[4]: /ja/tracing/visualization/#indexed-span
+[4]: /ja/tracing/glossary/#indexed-span
 [5]: /ja/monitors/create/configuration/#advanced-alert-conditions
 {{% /tab %}}
 {{< /tabs >}}

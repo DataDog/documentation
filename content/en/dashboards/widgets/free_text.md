@@ -1,7 +1,7 @@
 ---
 title: Free Text Widget
 kind: documentation
-description: "Display text in your Screenboards."
+description: "Display text in a dashboard widget."
 aliases:
     - /graphing/widgets/free_text/
 further_reading:

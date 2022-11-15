@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /tracing/trace_ingestion/ingestion_controls/
+- link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
   text: Page de contrôle de l'ingestion
 kind: guide
@@ -22,7 +22,7 @@ La page de contrôle de l'ingestion vous offre une visibilité complète sur vot
 
 Si vous choisissez de réduire le volume d'ingestion de certains services, les **[métriques][3] liées aux requêtes, aux erreurs et à la latence** (à savoir les métriques RED, pour Requête, Erreurs et Durée) restent justes, car elles sont calculées à partir de l'ensemble du trafic de l'application, sans tenir compte de la configuration de l'échantillonnage. Ces métriques sont fournies lorsque vous adoptez la solution APM Datadog. Afin de garantir une visibilité complète sur le trafic de votre application, vous pouvez vous servir de ces métriques pour créer des dashboards, monitors et SLO. Vous pourrez ainsi identifier les erreurs potentielles concernant un service ou une ressource.
 
-Les données des traces sont très répétitives. Pour cette raison, lorsque vous échantillonnez l'ingestion, vous pouvez tout de même étudier des échantillons de traces afin d'analyser la source d'une erreur. Pour les services à haut débit, vous n'avez généralement pas besoin de recueillir chaque requête : les problèmes suffisamment graves sont détectables dans plusieurs traces. Les contrôles d'ingestion vous permettent de visualiser les données dont vous avez besoin pour diagnostiquer des problèmes tout en respectant votre marge d'erreur.
+Les données des traces sont très répétitives. Pour cette raison, lorsque vous échantillonnez l'ingestion, vous pouvez tout de même étudier des échantillons de traces afin d'analyser la source d'une erreur. Pour les services à haut débit, vous n'avez généralement pas besoin de recueillir chaque requête : les problèmes suffisamment graves sont systématiquement détectables dans plusieurs traces. Les contrôles d'ingestion vous permettent de visualiser les données dont vous avez besoin pour diagnostiquer des problèmes tout en respectant votre marge d'erreur.
 
 #### Métriques générées à partir de spans
 
@@ -125,14 +125,14 @@ Consultez la [documentation relative aux mécanismes d'ingestion][2] pour en sav
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/trace_ingestion/ingestion_controls
-[2]: /fr/tracing/trace_ingestion/mechanisms
-[3]: /fr/tracing/guide/metrics_namespace/
-[4]: /fr/tracing/generate_metrics/
+[1]: /fr/tracing/trace_pipeline/ingestion_controls
+[2]: /fr/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /fr/tracing/metrics/metrics_namespace/
+[4]: /fr/tracing/trace_pipeline/generate_metrics/
 [5]: /fr/monitors/create/types/apm/?tab=analytics
-[6]: /fr/tracing/trace_ingestion/mechanisms/#head-based-sampling
-[7]: /fr/tracing/trace_retention/usage_metrics/
-[8]: /fr/tracing/trace_ingestion/mechanisms#error-traces
-[9]: /fr/tracing/trace_ingestion/mechanisms#rare-traces
-[10]: /fr/tracing/trace_ingestion/mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[6]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[7]: /fr/tracing/trace_pipeline/metrics/
+[8]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[9]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[10]: /fr/tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#in-tracing-libraries-user-defined-rules
 [11]: /fr/tracing/legacy_app_analytics

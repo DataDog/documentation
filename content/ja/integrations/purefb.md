@@ -24,13 +24,6 @@ author:
 categories:
 - os system
 - data store
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::OS System
-- Category::Data Store
-- Offering::Integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefb/README.md
 display_on_public_website: true
@@ -38,7 +31,7 @@ draft: false
 git_integration_title: purefb
 integration_id: purefb
 integration_title: Pure Storage FlashBlade
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -52,6 +45,13 @@ supported_os:
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Mac OS
+  - Supported OS::Windows
+  - Category::OS System
+  - Category::Data Store
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pure Storage FlashBlade のパフォーマンスと利用状況を監視
   media:
