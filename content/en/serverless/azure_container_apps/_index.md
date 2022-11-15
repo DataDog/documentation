@@ -82,6 +82,13 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+### Custom metrics
+You can submit custom metrics using a [DogStatsd client][1].
+
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+
+Please note that only `distribution` metrics should be used.
+
 ### Advanced options and configurations
 
 #### Environment variables
@@ -94,6 +101,7 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 | `DD_VERSION` | See [Unified Service Tagging][4]. |
 | `DD_ENV` | See [Unified Service Tagging][4]. |
 | `DD_SOURCE` | See [Unified Service Tagging][4]. |
+| `DD_TAGS` | See [Unified Service Tagging][6]. |
 
 ## Log collection
 
