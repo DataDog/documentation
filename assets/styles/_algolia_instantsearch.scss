@@ -94,16 +94,34 @@
         list-style: none;
         padding-inline-start: 0;
         margin-bottom: 0;
+
+        &.no-hits {
+            display: none;
+        }
     }
 
     .ais-Hits-item {
         & a {
-            display: block;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
             padding: 3px 12px 4px 12px;
 
             &:hover {
                 background-color: rgba(69, 142, 225, 0.05);
             }
+        }
+
+        & .ais-Hits-subcategory {
+            width: 25%;
+        }
+
+        & .ais-Hits-title {
+            width: 75%;
+        }
+
+        & .ais-Hits-content {
+            width: 75%;
         }
 
         & p {
@@ -116,6 +134,23 @@
             padding: 0;
             color: #8821a2;
             background-color: #f9f0fb;
+        }
+
+        & strong {
+            color: #02060c;
+            font-weight: 700;
+        }
+    }
+
+    .ais-Hits-item.ais-Hits-category {
+        margin: 3px 12px 4px 12px;
+        border-bottom: 1px solid #e6e6e6;
+
+        & p {
+            width: 100%;
+            font-size: 16px;
+            line-height: 22px;
+            color: #33363d;
         }
     }
 }

@@ -13,6 +13,7 @@ function getConfig(environment) {
 }
 
 const { env } = document.documentElement.dataset;
+const pageLanguage = document.documentElement.lang || 'en';
 const algoliaConfig = getConfig(env).algoliaConfig;
 
 const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
@@ -22,8 +23,8 @@ const searchBoxContainerContainer = document.querySelector('.searchbox-container
 const searchBoxContainer = document.querySelector('#searchbox');
 const hitsContainerContainer = document.querySelector('.hits-container');
 const hitsContainer = document.querySelector('#hits');
-const numHits = 4;
-const filtersDocs = 'language: en';
+const numHits = 5;
+const filtersDocs = `language: ${pageLanguage}`;
 
 if (searchBoxContainer) {
     const search = instantsearch({
