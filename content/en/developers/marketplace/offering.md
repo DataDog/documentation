@@ -23,7 +23,7 @@ This page walks you through how to develop an offering on the Datadog Marketplac
 To develop a Marketplace tile, follow these instructions below:
 
 1. [Choose a type of offering to list](#select-an-offering).
-2. Build an [Agent-based integration](#build-an-agent-based-integration), a [REST API-based integration](#build-a-rest-api-integration), a [Datadog App](#build-a-datadog-app), an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering), or a [bi-directional data integration](#build-a-bi-directional-data-integration).
+2. Build an [Agent-based integration](#build-an-agent-based-integration), a [REST API-based integration](#build-a-rest-api-integration), a [Datadog App](#build-a-datadog-app), or an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering).
 3. [Access the Marketplace repository and set up a directory](#set-up-a-directory-and-clone-the-marketplace-repository).
 4. [Install and run the Datadog Development Toolkit command](#install-and-run-the-datadog-development-toolkit).
 5. Create an [information tile-only listing](#build-a-saas-license-or-professional-service-offering) or an [Agent-based integration](#create-an-agent-based-integration).
@@ -44,7 +44,7 @@ Choose from the following offering types to create an integration tile that repr
 - A [REST API integration](#build-a-rest-api-integration)
 - A [Datadog App](#build-a-datadog-app)
 - A [SaaS license or subscription](#build-a-saas-license-or-professional-service-offering)
-- [Professional services](#build-a-bi-directional-data-integration)
+- [Professional services](#build-a-saas-license-or-professional-service-offering)
 
 ### Build an Agent-based integration
 
@@ -52,28 +52,28 @@ All Datadog integrations must be bi-directional, meaning that integrations can p
 
 Integrations send the following types of data to Datadog:
 
-- [Metrics][10]
-- [Logs][11]
-- [Events][12]
-- [Service Checks][13]
-- [Traces][14]
-- [Incidents][15]
-- [Security Events][16]
+- [Metrics][2]
+- [Logs][3]
+- [Events][4]
+- [Service Checks][5]
+- [Traces][6]
+- [Incidents][7]
+- [Security Events][8]
 
 
 #### OpenMetrics check
 
-An [OpenMetrics check][2] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
+An [OpenMetrics check][9] is suitable for gathering telemetry data from existing applications that expose metrics using the OpenMetrics standard.
 
 
 #### Python Check
 
-A [Python check][3] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
+A [Python check][10] is suitable for monitoring services or products that do not expose metrics in a standard format. The Python check is used to collect telemetry data from various APIs or command line tools.
 
 
 #### DogStatsD
 
-[DogStatsD][4] is suitable for applications that already emit telemetry using the StatsD protocol. 
+[DogStatsD][11] is suitable for applications that already emit telemetry using the StatsD protocol. 
 
 Datadog adds additional Datadog-specific extensions to the StatsD protocol, including the following:
 
@@ -84,11 +84,11 @@ Datadog adds additional Datadog-specific extensions to the StatsD protocol, incl
 
 
 
-For more information about Datadog Agent-based integrations, see [Introduction to Agent-based Integrations][5].
+For more information about Datadog Agent-based integrations, see [Introduction to Agent-based Integrations][12].
 
 ### Build a REST API integration
 
-Use an [API integration][6] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
+Use an [API integration][13] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform.
  
 Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering) once your development work is complete.
  
@@ -96,19 +96,19 @@ All Datadog integrations must be bi-directional, meaning that integrations can p
 
 Integrations send the following types of data to Datadog:
 
-- [Metrics][10]
-- [Logs][11]
-- [Events][12]
-- [Service Checks][13]
-- [Traces][14]
-- [Incidents][15]
-- [Security Events][16]
+- [Metrics][2]
+- [Logs][3]
+- [Events][4]
+- [Service Checks][5]
+- [Traces][6]
+- [Incidents][7]
+- [Security Events][8]
 
-A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for a data integration][7] in a Marketplace tile instead.
+A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Optionally, you can setup [OAuth for an integration][14] in a Marketplace tile instead.
 
 ### Build a Datadog App
 
-[Datadog Apps][8] are custom dashboard widgets that are developed in the [Datadog Developer Platform][9]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering) on the **Integrations** or **Marketplace** page.
+[Datadog Apps][15] are custom dashboard widgets that are developed in the [Datadog Developer Platform][16]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#build-a-saas-license-or-professional-service-offering) on the **Integrations** or **Marketplace** page.
 
 ### Build a SaaS license or professional service offering
 
@@ -249,21 +249,21 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/marketplace/
-[2]: /developers/custom_checks/prometheus/
-[3]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
-[4]: /developers/dogstatsd/
-[5]: /developers/integrations/
-[6]: /api/latest/
-[7]: /developers/integrations/oauth_for_data_integrations/
-[8]: /developers/datadog_apps/
-[9]: https://app.datadoghq.com/apps/
-[10]: /api/latest/metrics/
-[11]: /api/latest/logs/
-[12]: /api/latest/events/
-[13]: /api/latest/service-checks/
-[14]: /tracing/guide/send_traces_to_agent_by_api/
-[15]: /api/latest/incidents/
-[16]: /api/latest/security-monitoring/
+[2]: /api/latest/metrics/
+[3]: /api/latest/logs/
+[4]: /api/latest/events/
+[5]: /api/latest/service-checks/
+[6]: /tracing/guide/send_traces_to_agent_by_api/
+[7]: /api/latest/incidents/
+[8]: /api/latest/security-monitoring/
+[9]: /developers/custom_checks/prometheus/
+[10]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
+[11]: /developers/dogstatsd/
+[12]: /developers/integrations/
+[13]: /api/latest/
+[14]: /developers/integrations/oauth_for_data_integrations/
+[15]: /developers/datadog_apps/
+[16]: https://app.datadoghq.com/apps/
 [17]: https://github.com/Datadog/marketplace
 [18]: /developers/marketplace/#request-access-to-marketplace
 [19]: https://www.python.org/downloads/
