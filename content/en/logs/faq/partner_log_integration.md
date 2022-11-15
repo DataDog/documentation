@@ -10,7 +10,7 @@ This guide walks Datadog Partners through the following steps on how to create a
 
 1. [Send logs to Datadog](#send-logs-to-datadog)
 2. [Set up the log integration assets in your Datadog partner account](#set-up-the-log-integration-assets-in-your-datadog-partner-account)
-3. [Review and deploy the integration](#review-and-deploy-integration)
+3. [Review and deploy the integration](#review-and-deploy-the-integration)
 
 ## Send logs to Datadog
 
@@ -43,7 +43,7 @@ The following are guidelines for building the integration:
 
 5. Send data without arrays in the JSON body whenever possible. 
 
-    While it's possible to send some data as tags, Datadog recommends that data be sent in the JSON body and avoid using arrays. This gives users greater flexibility with the operations they can carry out on the data in the Datadog log platform. 
+    While it's possible to send some data as tags, Datadog recommends that data be sent in the JSON body and that arrays are avoided. This gives users greater flexibility with the operations they can carry out on the data in the Datadog log platform. 
 
 6. Do not log Datadog API keys.
 
