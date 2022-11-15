@@ -5,7 +5,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/oauth/"
   tag: "Blog"
   text: "Streamline and secure integrations with OAuth"
-- link: "/developers/integrations/oauth_for_data_integrations"
+- link: "/developers/integrations/oauth_for_integrations"
   tag: "Documentation"
   text: "Implement OAuth for your integration"
 - link: "/developers/authorization/oauth2_in_datadog/"
@@ -28,7 +28,7 @@ Public Clients
 : Typically used for browser-based applications and are not capable of storing confidential information. Examples of public clients include OAuth clients for [Datadog Apps][4]. 
 
 Confidential Clients
-: Capable of storing sensitive data and requires an additional `client_secret` to make authorization requests. OAuth clients for data integrations are confidential clients. 
+: Capable of storing sensitive data and requires an additional `client_secret` to make authorization requests. OAuth clients for integrations are confidential clients. 
 
 When you create an OAuth client, a set of client credentials is issued in the form of a client ID, and optionally, a client secret for confidential clients. 
 
