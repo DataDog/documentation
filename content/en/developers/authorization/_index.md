@@ -4,7 +4,7 @@ type: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/oauth/"
   tag: "Blog"
-  text: "Streamline and secure integrations with OAuth"
+  text: "Authorize your Datadog integrations with OAuth"
 - link: "/developers/integrations/oauth_for_integrations"
   tag: "Documentation"
   text: "Implement OAuth for your integration"
