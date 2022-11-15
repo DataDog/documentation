@@ -7286,8 +7286,10 @@ components:
       properties:
         from:
           default: now-15m
-          description: The minimum time for the requested events; supports date, math,
-            and regular timestamps (in milliseconds).
+          description: The minimum time for the requested events; supports date (in
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date,
+            hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds
+            are optional), math, and regular timestamps (in milliseconds).
           example: now-15m
           type: string
         query:
@@ -7297,8 +7299,10 @@ components:
           type: string
         to:
           default: now
-          description: The maximum time for the requested events; supports date, math,
-            and regular timestamps (in milliseconds).
+          description: The maximum time for the requested events; supports date (in
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date,
+            hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds
+            are optional), math, and regular timestamps (in milliseconds).
           example: now
           type: string
       type: object
