@@ -21,13 +21,13 @@
         username: datadog
         password: '<PASSWORD>'
         connector: 'odbc'
-        driver: 'ODBC Driver 18 for SQL Server'
+        driver: '{ODBC Driver 18 for SQL Server}'
         dsn: 'DATADOG'
     ```
 4. Restart the agent.
 
 ### Using AlwaysOn
-The Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
+The Agent must be installed on a separate server and connected to the cluster through the listener endpoint.
 ```yaml
 instances:
   - dbm: true

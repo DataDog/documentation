@@ -60,26 +60,27 @@ instances:
         - 'table:employees'
 ```
 
-### Monitoring multiple databases 
-To specify the name of the database to connect to, use `dbname`. If omitted, the default system `postgres` database is queried. Additionally, configure `dbstrict` to `true` if you only want to gather metrics from the database provided in the `dbname` option.
+### Monitoring multiple databases with DBM and the default integration
+To specify the name of the database to connect to, use `dbname`. If omitted, the default system `postgres` database is queried.
 
 ```yaml
 init_config:
 instances:
   - dbm: true
-    host: localhost
+    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
-    dbname: foo  # Default: `postgres`
-    # dbstrict: true 
-  - dbm: true
-    host: localhost
+  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
-    dbname: bar  # Default: `postgres`
-    # dbstrict: true 
+    dbname: on_sale
+  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    dbname: inventory
 ```
 
 ### Working with hosts through a remote proxy
