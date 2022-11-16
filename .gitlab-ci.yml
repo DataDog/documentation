@@ -33,6 +33,8 @@ before_script:
   - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
+  - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
+
 
 # set policy for the common case
 # yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
@@ -86,7 +88,6 @@ build_preview:
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
-    - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
     - yarn run prebuild
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
