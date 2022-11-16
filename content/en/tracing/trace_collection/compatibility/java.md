@@ -25,11 +25,11 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 
 | JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#support-beta)               | Latest         |
-| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#support-ga)                   | Latest         |
-| 8 to 17      | Linux (arm64)<br>Mac (arm64)                                                    | [Beta](#support-beta)               | Latest         |
-| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#support-maintenance) | v0             |
-| 7            | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#support-eol)         | v0             |
+| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
+| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
+| 8 to 17      | Linux (arm64)<br>Mac (arm64)                                                    | [Beta](#levels-of-support)               | Latest         |
+| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) | v0             |
+| 7            | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support)         | v0             |
 
 Datadog does not officially support any early-access versions of Java.
 
