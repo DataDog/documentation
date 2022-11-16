@@ -26,7 +26,6 @@ version: '1.0'
 
 Utilisez `@opsgenie` pour créer des alertes :
 
-- Depuis votre flux d'événements
 - En prenant un snapshot
 - Lorsqu'une alerte de métrique est déclenchée
 
@@ -59,11 +58,11 @@ Utilisez `@opsgenie` pour créer des alertes :
 
 L'intégration OpsGenie n'inclut aucune métrique.
 
-### Événements
+### Events
 
 L'intégration OpsGenie n'inclut aucun événement.
 
-### Checks de service
+### Service Checks
 
 L'intégration OpsGenie n'inclut aucun check de service.
 

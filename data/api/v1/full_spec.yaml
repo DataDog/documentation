@@ -5004,6 +5004,7 @@ components:
         daily_limit:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
+          example: 300000000
           format: int64
           type: integer
         disable_daily_limit:
@@ -5014,6 +5015,7 @@ components:
             omitted, the index''s current
 
             `daily_limit` is maintained.'
+          example: false
           type: boolean
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
@@ -5039,6 +5041,7 @@ components:
             for all logs
 
             already in this index. It may also affect billing.'
+          example: 15
           format: int64
           type: integer
       required:
@@ -23767,7 +23770,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         operationId: TODO
         parameters: []
@@ -23808,7 +23811,7 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
-      x-menu-order: 3
+      x-menu-order: 2
       x-undo:
         type: safe
     put:

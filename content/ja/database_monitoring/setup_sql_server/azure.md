@@ -23,8 +23,6 @@ title: Azure SQL Server のデータベースモニタリングの設定
 2. [Agent をインストールする](#install-the-agent)
 3. [Azure インテグレーションをインストールする](#install-the-azure-integration)
 
-**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
-
 ## はじめに
 
 サポートされている SQL Server バージョン
@@ -210,7 +208,6 @@ instances:
     tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -312,6 +309,10 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
+    include_ao_metrics: true  # オプション: AlwaysOn ユーザー向け
+    tags:  # オプション
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       name: '<YOUR_INSTANCE_NAME>' \
@@ -332,6 +333,9 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
+    tags:  # オプション
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -360,6 +364,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "name": "<YOUR_INSTANCE_NAME>"

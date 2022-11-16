@@ -82,18 +82,24 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+### Custom metrics
+You can submit custom metrics using a [DogStatsd client][3].
+
+**Note**: Only `DISTRIBUTION` metrics should be used.
+
 ### Advanced options and configurations
 
 #### Environment variables
 
 | Variable | Description |
 | -------- | ----------- |
-| `DD_SITE` | [Datadog site][3]. |
+| `DD_SITE` | [Datadog site][4]. |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE` | See [Unified Service Tagging][4]. |
-| `DD_VERSION` | See [Unified Service Tagging][4]. |
-| `DD_ENV` | See [Unified Service Tagging][4]. |
-| `DD_SOURCE` | See [Unified Service Tagging][4]. |
+| `DD_SERVICE` | See [Unified Service Tagging][5]. |
+| `DD_VERSION` | See [Unified Service Tagging][5]. |
+| `DD_ENV` | See [Unified Service Tagging][5]. |
+| `DD_SOURCE` | See [Unified Service Tagging][5]. |
+| `DD_TAGS` | See [Unified Service Tagging][5]. |
 
 ## Log collection
 
@@ -106,5 +112,6 @@ You can use the [Azure integration][1] to collect logs. Alternatively, you can s
 
 [1]: /integrations/azure/#log-collection
 [2]: https://registry.hub.docker.com/r/datadog/serverless-init
-[3]: /getting_started/site/
-[4]: /getting_started/tagging/unified_service_tagging/
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /getting_started/site/
+[5]: /getting_started/tagging/unified_service_tagging/
