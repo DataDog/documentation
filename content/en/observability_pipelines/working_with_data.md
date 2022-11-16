@@ -27,21 +27,21 @@ further_reading:
     text: Use CSV enrichment to provide more context to your data
   - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
     tag: Documentation
-    text: Configure Datadog agents to send data to Vector
-  - link: /observability_pipelines/vector_configurations/
+    text: Configure Datadog Agents to send data to Observability Pipelines
+  - link: /observability_pipelines/configurations/
     tag: Documentation
-    text: Learn more about Vector configurations
+    text: Learn more about Observability Pipelines configurations
 ---
 
 ## Overview
 
-Vector enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure Vector pipelines that are composed of a series of Vector `transform` components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
+Observability Pipelines enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure pipelines for Observability Pipelines that are composed of a series of `transform` components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
 
 ## Remap data with Vector Remap Language
 
 Vector Remap Language (VRL) is an expression-oriented, domain specific language designed for transforming observability data (logs and metrics). It features a simple syntax and [built-in functions][1] tailored to observability use cases.
 
-Vector Remap Language is supported in Vector’s `remap` transform. 
+Vector Remap Language is supported in the `remap` transform. 
 
 Remap transforms act on a single event and can be used to transform them or specify conditions for routing and filtering. You can use VRL in the following ways:
 
@@ -110,7 +110,7 @@ In this example, the `type` field is set to a `remap` transform. The `inputs` fi
 
 The second line adds the `.timestamp` field and the value to the event, changing the content of every event that passes through this transform.
 
-See [VRL References][14] and [Vector Configurations][15] for more information.
+See [VRL References][14] and [Configurations][15] for more information.
 
 ## Parse data
 
@@ -190,7 +190,7 @@ This configuration returns the following:
 
 ## Sample, reduce, filter, and aggregate data
 
-Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. Vector offers a variety of ways to control your data volume:
+Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. Observability Pipelines offers a variety of ways to control your data volume:
 
 - [Sample events][16] based on supplied criteria and at a configurable rate.
 - [Reduce and collapse][17] multiple events into a single event.
@@ -212,7 +212,7 @@ The below snippet is an example log that you want to route to different destinat
 {
   "logs": {
     "kind": "absolute",
-    “level”: “info”,
+    "level": "info,
     "name": "memory_available_bytes",
     "namespace": "host",
     "tags": {}

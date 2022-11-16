@@ -6,7 +6,7 @@ aliases:
 ---
 ## Overview
 
-Vector integrates with Datadog and offers out-of-the-box integrations with 60 different [sources](#sources) and [sinks](#sinks). 
+Observability Pipelines offers out-of-the-box integrations with 60 different [sources](#sources) and [sinks](#sinks). 
 
 ## Sources
 
@@ -28,8 +28,8 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 | [Heroku Logplex][14]          | Collect logs from Heroku’s Logplex, the router responsible for receiving logs from your Heroku apps.  |
 | [Host metrics][15]            | Collect metric data from the local system.                                                            |
 | [HTTP][16]                    | Collect logs emitted by an HTTP server.                                                               |
-| [Internal logs][17]           | Expose all log and trace messages emitted by the running Vector instance.                             |
-| [Internal metrics][18]        | Access to the metrics produced by Vector itself and process them in your Vector pipeline.             |
+| [Internal logs][17]           | Expose all log and trace messages emitted by the running Observability Pipelines instance.                             |
+| [Internal metrics][18]        | Access to the metrics produced by Observability Pipelines itself and process them in your pipelines.             |
 | [JournalD][19]                | Collect logs from JournalD.                                                                           |
 | [Kafka][20]                   | Collect logs from Kafka.                                                                              |
 | [Kubernetes logs][21]         | Collect logs from Kubernetes Nodes.                                                                   |
@@ -69,10 +69,10 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 | [Datadog traces][50]                  | Publish traces to Datadog.                                                                |
 | [Elasticsearch][51]                   | Index observability events in Elasticsearch.                                              |
 | [File][52]                            | Output observability events into files.                                                   |
-| [GCP Cloud Monitoring][53]            | Deliver metrics to GCP’s Cloud Monitoring system.                                         |
+| [GCP Cloud Monitoring][53]            | Deliver metrics to GCP's Cloud Monitoring system.                                         |
 | [GCP Cloud storage][54]               | Store observability events in GCP Cloud Storage.                                          |
-| [GCP Stackdriver][55]                 | Deliver logs to GCP’s Cloud Operations suite.                                             |
-| [GCP PubSub][56]                      | Publish observability events to GCP’s PubSub messaging system.                            |
+| [GCP Stackdriver][55]                 | Deliver logs to GCP's Cloud Operations suite.                                             |
+| [GCP PubSub][56]                      | Publish observability events to GCP's PubSub messaging system.                            |
 | [Honeycomb][57]                       | Deliver log events to Honeycomb.                                                          |
 | [HTTP][58]                            | Deliver observability event data to an HTTP server.                                       |
 | [Humio logs][59]                      | Deliver log event data to Humio.                                                          |
@@ -93,13 +93,13 @@ Vector integrates with Datadog and offers out-of-the-box integrations with 60 di
 | [Sematext logs][74]                   | Publish log events to Sematext.                                                           |
 | [Sematext metrics][75]                | Publish metric events to Sematext.                                                        |
 | [Socket][76]                          | Deliver logs to a remote socket endpoint.                                                 |
-| [Splunk HEC logs][77]                 | Deliver log data to Splunk’s HTTP Event Collector.                                        |
-| [Splunk HEC metrics][78]              | Deliver metric data to Splunk’s HTTP Event Collector.                                     |
+| [Splunk HEC logs][77]                 | Deliver log data to Splunk's HTTP Event Collector.                                        |
+| [Splunk HEC metrics][78]              | Deliver metric data to Splunk's HTTP Event Collector.                                     |
 | [Statsd][79]                          | Deliver log data to a StatsD aggregator.                                                  |
 | [Vector][80]                          | Relay observability data to another Vector instance.                                      |
 
 ## Datadog Agent
-- [Aggregating Datadog agents with Vector][81]
+- [Aggregating Datadog agents with Observability Pipelines][81]
 
 [1]: https://vector.dev/docs/reference/configuration/sources/apache_metrics/
 [2]: https://vector.dev/docs/reference/configuration/sources/aws_ecs_metrics/

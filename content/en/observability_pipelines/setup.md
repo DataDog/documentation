@@ -4,28 +4,24 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/setup/
 further_reading:
-  - link: /observability_pipelines/vector_configurations/
+  - link: /observability_pipelines/configurations/
     tag: Documentation
-    text: Learn more about Vector configurations
+    text: Learn more about Observability Pipelines configurations
   - link: https://vector.dev/docs/setup/going-to-prod/
     tag: Documentation
     text: Take Observability Pipelines to production with capacity planning
-  - link: https://vector.dev/releases/ 
     tag: Documentation
-    text: Check out the new release for Vector
-  - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-    tag: Documentation
-    text: Datadog Agent as a source for Vector
+    text: Datadog Agent as a source for Observability Pipelines
   - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
     tag: Documentation
-    text: Configure Datadog Agents to send data to Vector
+    text: Configure Datadog Agents to send data to Observability Pipelines
 ---
 
 ## Overview
 
-Observability Pipelines connects to the open-source [Vector][1] project to help you manage and monitor the flow of logs, metrics, and traces throughout your infrastructure.
+Observability Pipelines helps you manage and monitor the flow of logs, metrics, and traces throughout your infrastructure.
 
-To set up Observability Pipelines, first [install Vector](#install-vector) and [set up Vector configurations](#set-up-vector-configurations), then [connect your Vector configurations to Observability Pipelines](#connect-vector-to-observability-pipelines) using your Datadog API.
+To set up Observability Pipelines, first [install Observability Pipelines](#install-vector) and [set up configurations for Observability Pipelines](#set-up-vector-configurations), then [connect your configurations to Datadog](#connect-vector-to-observability-pipelines) using your Datadog API.
 
 ## Install Vector
 
@@ -53,40 +49,40 @@ Run the command `vector --version` to make sure the installation was successful.
 
 Vector supports a wide variety of package managers across several operating systems and platforms. Install Vector using your preferred package manager:
 
-- [APT][2]
-- [dpkg][3]
-- [Helm][4]
-- [Homebrew][5]
-- [MSI][6]
-- [Nix][7]
-- [RPM][8]
-- [YUM][9]
+- [APT][1]
+- [dpkg][2]
+- [Helm][3]
+- [Homebrew][4]
+- [MSI][5]
+- [Nix][6]
+- [RPM][7]
+- [YUM][8]
 
 ### Specific platforms and operating systems
 
-Many users choose to [install Vector on their Kubernetes platform][10], but Vector can be installed on any of the following platforms and operating systems:
+Many users choose to [install Vector on their Kubernetes platform][9], but Vector can be installed on any of the following platforms and operating systems:
 
-- [Docker][11]
-- [Kubernetes][10]
-- [Amazon Linux][12]
-- [CentOS][13]
-- [Debian][14]
-- [NixOS][15]
-- [RHEL][16]
-- [Raspbian][17]
-- [Ubuntu][18]
-- [Windows][19]
-- [macOS][20]
+- [Docker][10]
+- [Kubernetes][9]
+- [Amazon Linux][11]
+- [CentOS][12]
+- [Debian][13]
+- [NixOS][14]
+- [RHEL][15]
+- [Raspbian][16]
+- [Ubuntu][17]
+- [Windows][18]
+- [macOS][19]
 
-For more detailed, platform specific instructions, see [Vector's documentation][21].
+For more detailed, platform specific instructions, see [Vector's documentation][20].
 
-## Set up Vector configurations 
+## Set up Observability Pipelines configurations 
 
-Vector topologies are defined by a configuration file that tells it how to collect, transform, and route data. Vector topologies are made up of three types of components: sources, transforms, and sinks. 
+Observability Pipelines topologies are defined by a configuration file that tells it how to collect, transform, and route data. The topologies are made up of three types of components: sources, transforms, and sinks. 
 
-Vector configurations support TOML, YAML, and JSON. The location of your Vector configuration file depends on your installation method, but for most Linux-based systems, the file can be found at `/etc/vector/vector.toml`. 
+Observability Pipelines configurations support TOML, YAML, and JSON. The location of your configuration file depends on your installation method, but for most Linux-based systems, the file can be found at `/etc/vector/vector.toml`. 
 
-If you already have Vector configurations set up, skip to [Connect Vector to Observability Pipelines](#connect-vector-to-observability-pipelines).
+If you already have Observability Pipelines configurations set up, skip to [Connect Observability Pipelines to Datadog UI](#connect-observability-pipelines-to-datadog-ui).
 
 ### Configuration example
 
@@ -105,54 +101,52 @@ sinks:
       codec: text
 ```
 
-A Vector configuration file can contain multiple Vector components. Each component is prefixed with the component type and has a unique ID. In this example, the first component has `sources` for a source component with the ID `in`. The component, `sources.in`, uses the `stdin` source, which tells Vector to receive data over `stdin`.
+A configuration file can contain multiple components. Each component is prefixed with the component type and has a unique ID. In this example, the first component has `sources` for a source component with the ID `in`. The component, `sources.in`, uses the `stdin` source to receive data over `stdin`.
 
-The second component, `sinks.out`, uses a console sink, which tells Vector to print the data to stdout. The `encoding.codec` option tells Vector to print data as plain text (unencoded).
+The second component, `sinks.out`, uses a console sink to print data to stdout. The `encoding.codec` option prints out data as plain text (unencoded).
 
-The `inputs` option of the `sinks.out` component tells Vector where this sink’s events are coming from. In this case, events are received from the other component, `sources` with ID `in`.
+The `inputs` option of the `sinks.out` component tells Observability Pipelines where this sink's events are coming from. In this case, events are received from the other component, `sources` with ID `in`.
 
-Run the command `vector --config ./vector.yaml` to start Vector with the configuration file. 
+Run the command `vector --config ./vector.yaml` to start Observability Pipelines with the configuration file. 
 
 Run the following command to pipe a single event, `Hello world!`, through the configuration:
 
 `echo 'Hello world!' | vector --config ./vector.yaml`
 
-See [Vector Configurations][22] for more examples on setting up the three main Vector configuration components: sources, transforms, and sinks.
+See [Configurations][21] for more examples on setting up the three main Observability Pipelines configuration components: sources, transforms, and sinks.
 
-## Connect Vector to Observability Pipelines 
+## Connect Observability Pipelines to Datadog
 
-Connect your Vector configuration to Observability Pipelines by doing the following:
+Connect your Observability Pipelines configuration to Datadog by doing the following:
 
-- Go to [Observability Pipelines][24].
+- Go to [Observability Pipelines][22].
 - Click **Create Configuration**, and follow the in-app instructions to set up the configuration.
 
-Once the setup is complete, Vector is connected to Observability Pipelines and the data shows up in the Datadog app.
+Once the setup is complete, start exploring your Observability Pipelines data in Datadog.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/vectordotdev/vector
-[2]: https://vector.dev/docs/setup/installation/package-managers/apt/
-[3]: https://vector.dev/docs/setup/installation/package-managers/dpkg/
-[4]: https://vector.dev/docs/setup/installation/package-managers/helm/
-[5]: https://vector.dev/docs/setup/installation/package-managers/homebrew/
-[6]: https://vector.dev/docs/setup/installation/package-managers/msi/
-[7]: https://vector.dev/docs/setup/installation/package-managers/nix/
-[8]: https://vector.dev/docs/setup/installation/package-managers/rpm/
-[9]: https://vector.dev/docs/setup/installation/package-managers/yum/
-[10]: https://vector.dev/docs/setup/installation/platforms/kubernetes/
-[11]: https://vector.dev/docs/setup/installation/platforms/docker/
-[12]: https://vector.dev/docs/setup/installation/operating-systems/amazon-linux/
-[13]: https://vector.dev/docs/setup/installation/operating-systems/centos/
-[14]: https://vector.dev/docs/setup/installation/operating-systems/debian/
-[15]: https://vector.dev/docs/setup/installation/operating-systems/nixos/
-[16]: https://vector.dev/docs/setup/installation/operating-systems/rhel/
-[17]: https://vector.dev/docs/setup/installation/operating-systems/raspbian/
-[18]: https://vector.dev/docs/setup/installation/operating-systems/ubuntu/
-[19]: https://vector.dev/docs/setup/installation/operating-systems/windows/
-[20]: https://vector.dev/docs/setup/installation/operating-systems/macos/
-[21]: https://vector.dev/docs/setup/installation/
-[22]: /observability_pipelines/vector_configurations
-[23]: https://app.datadoghq.com/organization-settings/service-accounts/new
-[24]: https://app.datadoghq.com/observability-pipelines
+[1]: https://vector.dev/docs/setup/installation/package-managers/apt/
+[2]: https://vector.dev/docs/setup/installation/package-managers/dpkg/
+[3]: https://vector.dev/docs/setup/installation/package-managers/helm/
+[4]: https://vector.dev/docs/setup/installation/package-managers/homebrew/
+[5]: https://vector.dev/docs/setup/installation/package-managers/msi/
+[6]: https://vector.dev/docs/setup/installation/package-managers/nix/
+[7]: https://vector.dev/docs/setup/installation/package-managers/rpm/
+[8]: https://vector.dev/docs/setup/installation/package-managers/yum/
+[9]: https://vector.dev/docs/setup/installation/platforms/kubernetes/
+[10]: https://vector.dev/docs/setup/installation/platforms/docker/
+[11]: https://vector.dev/docs/setup/installation/operating-systems/amazon-linux/
+[12]: https://vector.dev/docs/setup/installation/operating-systems/centos/
+[13]: https://vector.dev/docs/setup/installation/operating-systems/debian/
+[14]: https://vector.dev/docs/setup/installation/operating-systems/nixos/
+[15]: https://vector.dev/docs/setup/installation/operating-systems/rhel/
+[16]: https://vector.dev/docs/setup/installation/operating-systems/raspbian/
+[17]: https://vector.dev/docs/setup/installation/operating-systems/ubuntu/
+[18]: https://vector.dev/docs/setup/installation/operating-systems/windows/
+[19]: https://vector.dev/docs/setup/installation/operating-systems/macos/
+[20]: https://vector.dev/docs/setup/installation/
+[21]: /observability_pipelines/vector_configurations
+[22]: https://app.datadoghq.com/observability-pipelines

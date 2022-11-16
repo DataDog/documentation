@@ -14,7 +14,7 @@ further_reading:
 - link: "https://vector.dev/docs/"
   tag: "Documentation"
   text: "Vector documentation"
-- link: "/observability_pipelines/vector_configurations/"
+- link: "/observability_pipelines/configurations/"
   tag: "Documentation"
   text: "Learn more about Vector configurations"
 - link: "/observability_pipelines/working_with_data/"
@@ -498,7 +498,7 @@ Read more about [architecting buffers][17].
 
 [1]: /agent/basic_agent_usage/?tabs=agentv6v7
 [2]: /observability_pipelines/setup/#install-vector
-[3]: /observability_pipelines/vector_configurations/
+[3]: /observability_pipelines/configurations/
 [4]: /agent/kubernetes/?tab=helm
 [5]: https://github.com/timberio/helm-charts/tree/master/charts/vector-aggregator
 [6]: https://vector.dev/docs/setup/installation/package-managers/helm/
