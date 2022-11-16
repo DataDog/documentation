@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-<code>ddprof</code> is in public beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+<code>ddprof</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 The native profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
