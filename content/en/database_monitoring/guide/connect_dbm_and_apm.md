@@ -15,6 +15,7 @@ This guide assumes that you have configured [Datadog Monitoring][1] and are usin
 
 Supported tracers
 : [dd-trace-go][3] >= 1.42.0 (support for [database/sql][4] and [sqlx][5] packages)
+: [dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [ruby-pg][8] gems)
 
 Supported databases
 : postgres, mysql
@@ -94,6 +95,44 @@ func main() {
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 
 {{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+Update your app dependencies to include [dd-trace-rb 1.6.0][1] or greater:
+```
+<TODO>
+```
+
+Enable the database monitoring propagation feature using one of the following methods:
+1. Env variable: 
+   `DD_DBM_PROPAGATION_MODE=service`
+
+2. Using code during the driver configuration:
+   ```rb
+	Datadog.configure do |c|
+    	c.tracing.sql_comment_propagation = 'full'
+		c.tracing.instrument :mysql2, **options
+	end
+   ```
+
+Full example:
+```rb
+require 'mysql2'
+require 'ddtrace'
+
+Datadog.configure do |c|
+	c.tracing.sql_comment_propagation = 'full'
+	c.tracing.instrument :mysql2, **options
+end
+
+client = Mysql2::Client.new(:host => "localhost", :username => "root")
+client.query("SELECT * FROM users WHERE group='x'")
+```
+
+[1]: https://github.com/dataDog/dd-trace-rb
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -102,3 +141,6 @@ func main() {
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
+[6]: https://github.com/dataDog/dd-trace-rb
+[7]: https://github.com/brianmario/mysql2
+[8]: https://github.com/ged/ruby-pg
