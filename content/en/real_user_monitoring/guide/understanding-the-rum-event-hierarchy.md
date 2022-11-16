@@ -23,7 +23,7 @@ All RUM data refers to user or synthetics sessions, which are at the top of the 
 
 To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the user and application.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-list-all-sessions.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-list-all-sessions.png" alt="Sample search listing all sessions from user "Jane Doe"." style="width:80%;">}}
 
 Notice that each session is automatically associated with a unique `session.id`.
 
@@ -34,7 +34,7 @@ Each view automatically collects multiple view specific attributes and data, suc
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.mp4" alt="RUM views" video="true" style="width:80%;">}}
 
-Similarly to the `session.id`, each view will automatically have a unique `view.id` connected to it. 
+Similarly to the `session.id`, each view automatically has a unique `view.id` connected to it. 
 
 ### Actions, errors, resources, and long tasks
 
@@ -48,7 +48,7 @@ Actions represent user activity on a page. In browsers, all click actions are au
 
 In this example, search within the actions event for an action error count (of at least 1) and specific action name to see how many times clicking "Add to cart" led to a user encountering an error.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart.png" alt="Sample search of all "Add to Cart" actions that led to an error." style="width:80%;">}}
 
 ### Errors
 
@@ -60,7 +60,7 @@ Errors can be viewed across both RUM and Error Tracking. Source and custom error
 
 In this example, search within the errors event for the application ID, crashes, and view (page) name to see all crashes that occurred on the "CheckoutViewController" page for a particular operating system and application.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
 
 ### Resources
 Resources are collected from views and include external requests from your application to a network provider, like XHR, JS loading, images, fonts, etc. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
@@ -69,7 +69,7 @@ Resources are collected from views and include external requests from your appli
 
 In this example, select **Resources** from the event type dropdown, then make a query for images that loaded on the cart view and were larger or equal to 1000 kilobytes.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources.png" alt="Sample search of all images loaded on the cart view that were 1 megabyte or greater." style="width:80%;">}}
 
 ### Long tasks
 Long tasks are anything that blocks the UI thread for a given period of time. On mobile, for example, a long task may be a frozen frame if the screen is blocked for longer than 300 ms.
@@ -78,15 +78,15 @@ Long tasks are anything that blocks the UI thread for a given period of time. On
 
 In this example, select Long tasks from the event type dropdown and specify the duration.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-long-tasks.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-long-tasks.png" alt="Sample search of all frozen frame long tasks lasting longer than 500 milliseconds." style="width:80%;">}}
 
 ## No data appears after writing a query
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears.png" alt="Example of no data appearing after writing a query." style="width:80%;">}}
 
 If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **views**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time picker to ensure you are in a time window where data should be appearing.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-2.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-2.png" alt="Example of updating a query by using the view selector." style="width:80%;">}}
 
 ## How to query a event type that is nested in a different event type 
 
@@ -96,7 +96,7 @@ When querying for specific actions, you can use the parent event type, but not o
 
 In this example, search within the actions event type for all view names in the Top List view to see the top 10 actions that occurred on /, which represents the homepage.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-mix-match-event-types.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-mix-match-event-types.png" alt="Sample search of the top ten actions that occurred on the homepage." style="width:80%;">}}
 
 ## Further Reading
 
