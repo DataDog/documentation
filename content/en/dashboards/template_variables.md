@@ -58,22 +58,21 @@ On log, APM, and RUM widgets, you can use wildcards in the middle of a value (fo
 
 ### Saved views
 
+{{< img src="dashboards/template_variables/saved_views.mp4" alt="Walk through of how to create, delete, and modify saved views" style="width:100%;" video="true">}}
+
 #### Create
 
-{{< img src="dashboards/template_variables/default_view.png" alt="Default Saved View" style="width:85%;">}}
+To the left of the template variables on a dashboard, there is a dropdown listed as *Saved Views*. When you make a change to a template variable value, the value is not automatically saved to a view.
 
-To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view.
-To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables.
+To save the current values of the template variables in a view, click on the *Saved Views* dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables.
 
 #### Delete
 
 To delete a view, click on the saved views dropdown and choose *Manage views...*. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
 
-{{< img src="dashboards/template_variables/manage_views.png" alt="Manage View Popup" style="width:75%;">}}
-
 #### Modify
 
-To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
+To modify the *Default view*, click on the pencil icon and update the template variable values. Then click *Done* to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
 
 ## Use
 
@@ -81,22 +80,19 @@ Template variables are used in widgets and event overlays.
 
 ### Widgets
 
-When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you create the template variable `env`, the option `$env` is available.
+When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you configure the template variable `environment`, the option `$environment` is available as a dynamic variable in the widget. 
 
-After the widget is saved, the value of the template variable is the one selected from the top of your dashboard:
+{{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="Template variable can be set dynamically in widgets" style="width:100%;">}}
 
-{{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" style="width:75%;">}}
-
-To query based on just a prefix or suffix, use a wildcard character (`*`) at the beginning or end of the template variable value. For example, find all regions that begin with `us` using `us*`, or all emails under the `example.com` domain with `*@example.com`.
+Selecting the `environment` value of "production", dynamically scopes widgets with the `$environment` variable to the production environment.
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
 To include just the value in the query, append it with the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `service`, use `env:staging-$service.value`.
 
 #### Associated template variables
-When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated from the other template variable values selected on the page, and seamlessly identify the related values without any configuration.
 
-{{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables" style="width:75%;">}}
+When selecting a template variable value, associated values are displayed at the top of the selector. Associated values are calculated from the other template variable values selected on the page, and seamlessly identify the related values without any configuration.
 
 #### Text
 
