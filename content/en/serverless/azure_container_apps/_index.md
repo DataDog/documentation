@@ -99,7 +99,7 @@ You can submit custom metrics using a [DogStatsd client][3].
 | `DD_VERSION` | See [Unified Service Tagging][5]. |
 | `DD_ENV` | See [Unified Service Tagging][5]. |
 | `DD_SOURCE` | See [Unified Service Tagging][5]. |
-| `DD_TAGS` | See [Unified Service Tagging][6]. |
+| `DD_TAGS` | See [Unified Service Tagging][5]. |
 
 ## Log collection
 
