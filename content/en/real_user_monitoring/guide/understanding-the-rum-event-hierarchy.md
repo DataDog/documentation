@@ -12,14 +12,14 @@ further_reading:
 
 ## Overview
 
-This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type. Refer to the diagram below for a high level overview of the hierarchy.
+This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type. See the diagram below for a high level overview of the hierarchy.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="Diagram of the RUM event hierarchy." style="width:50%;">}}
 
 ## Sessions
-All RUM data refers to user or synthetics sessions, which are at the top of the event hierarchy. A session is a unique user journey and encompasses everything (e.g., pages viewed, clicks, scrolls, errors) the user triggered. A session can last up to 4 hours of continuous activity, or it can expire after [15 minutes of inactivity][2]. Since a session encompasses the entire journey, all [attributes][3] tied to that user are also tied to that session. For example, you may want to query on a default attribute, like `application.id`, then add something more custom, like [user attributes][4].
+All RUM data refers to user or synthetics sessions, which are at the top of the event hierarchy. A session is a unique user journey and encompasses everything (e.g., pages viewed, views, clicks, scrolls, errors) the user triggered. A session can last up to 4 hours of continuous activity, or it can expire after [15 minutes of inactivity][2]. Since a session encompasses the entire journey, all [attributes][3] tied to that user are also tied to that session. For example, you may want to query on a default attribute, like `application.id`, then add something more custom, like [user attributes][4].
 
-#### Sample search: List all sessions from user “Jane Doe”
+#### Sample search: List all sessions from user "Jane Doe"
 
 To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the user and application.
 
@@ -44,9 +44,9 @@ Within views, the SDK creates more granular events that all fall along the same 
 
 Actions represent user activity on a page. In browsers, all click actions are automatically collected. On mobile, all taps, swipes, and scrolls are collected. Beyond these default actions, you can also send [custom actions][5], such as form completion and business transactions. 
 
-#### Sample search: Top list of all “Add to cart” actions that led to an error 
+#### Sample search: Top list of all "Add to cart" actions that led to an error 
 
-In this example, search within the actions event for an action error count (of at least 1) and specific action name to see how many times clicking “Add to cart” led to a user encountering an error.
+In this example, search within the actions event for an action error count (of at least 1) and specific action name to see how many times clicking "Add to cart" led to a user encountering an error.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
 
@@ -56,9 +56,9 @@ You can use RUM to collect [frontend errors][6] that occur during the user sessi
 
 Errors can be viewed across both RUM and Error Tracking. Source and custom errors will be processed by Error Tracking, while console errors will be solely in RUM.
 
-#### Sample search: List of all crashes that occurred on the “CheckoutViewController” page in the iOS Shop.ist application
+#### Sample search: List of all crashes that occurred on the "CheckoutViewController"page in the iOS Shop.ist application
 
-In this example, search within the errors event for the application ID, crashes, and view (page) name to see all crashes that occurred on the “CheckoutViewController” page for a particular operating system and application.
+In this example, search within the errors event for the application ID, crashes, and view (page) name to see all crashes that occurred on the "CheckoutViewController" page for a particular operating system and application.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
 
@@ -84,11 +84,11 @@ In this example, select Long tasks from the event type dropdown and specify the 
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
 
-If you aren’t seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **views**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don’t see any data, check the time picker to ensure you are in a time window where data should be appearing.
+If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **views**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time picker to ensure you are in a time window where data should be appearing.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-2.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
 
-## How to query multiple event types for specific actions
+## How to query a event type that is nested in a different event type 
 
 When querying for specific actions, you can use the parent event type, but not one at equal or lower level. For example, actions are nested underneath views, and actions and errors are at the same level in the hierarchical chain. This means you can query for all actions and events that happened on a given page, but not for all actions that had a specific error type.
 
