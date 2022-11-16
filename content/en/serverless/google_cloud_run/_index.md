@@ -17,7 +17,7 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 If you are using a Dockerfile to build your application, complete the following:
 
-1. Instrument your application with a [supported Datadog tracing library][7]
+1. Instrument your application with a [supported Datadog tracing library][8]
 
 2. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][2] into your Docker image.
 
@@ -156,6 +156,10 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
 
    Under the **Environment variables** section, ensure that the name is set to `DD_API_KEY`.
 
+### Custom metrics
+You can submit custom metrics using a [DogStatsd client][5].
+
+**Note**: Only `DISTRIBUTION` metrics should be used.
 
 ### Advanced options and configurations
 
@@ -163,12 +167,13 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
 
 | Variable | Description |
 | -------- | ----------- |
-| `DD_SITE` | [Datadog site][5]. |
+| `DD_SITE` | [Datadog site][6]. |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE` | See [Unified Service Tagging][6]. |
-| `DD_VERSION` | See [Unified Service Tagging][6]. |
-| `DD_ENV` | See [Unified Service Tagging][6]. |
-| `DD_SOURCE` | See [Unified Service Tagging][6]. |
+| `DD_SERVICE` | See [Unified Service Tagging][7]. |
+| `DD_VERSION` | See [Unified Service Tagging][7]. |
+| `DD_ENV` | See [Unified Service Tagging][7]. |
+| `DD_SOURCE` | See [Unified Service Tagging][7]. |
+| `DD_TAGS` | See [Unified Service Tagging][7]. |
 
 ## Log collection
 
@@ -183,6 +188,7 @@ You can use the [GCP integration][1] to collect logs. Alternatively, you can set
 [2]: https://registry.hub.docker.com/r/datadog/serverless-init
 [3]: https://console.cloud.google.com/security/secret-manager
 [4]: https://console.cloud.google.com/run
-[5]: /getting_started/site/
-[6]: /getting_started/tagging/unified_service_tagging/
-[7]: /tracing/trace_collection/#for-setup-instructions-select-your-language
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[6]: /getting_started/site/
+[7]: /getting_started/tagging/unified_service_tagging/
+[8]: /tracing/trace_collection/#for-setup-instructions-select-your-language

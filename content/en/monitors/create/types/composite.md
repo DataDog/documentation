@@ -81,7 +81,7 @@ For detailed instructions on the advanced alert options (auto resolve, etc.), se
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][5]. For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
 ### API
 
@@ -224,3 +224,4 @@ Setting [new_group_delay][4] is possible in composite monitors and if set and bi
 [2]: /monitors/create/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/
 [4]: /monitors/create/configuration/?tab=thresholdalert#new-group-delay
+[5]: /monitors/notify/variables/?tab=is_alert#composite-monitor-variables

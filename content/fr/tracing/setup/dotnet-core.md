@@ -414,7 +414,7 @@ Le tableau suivant énumère les variables de configuration qui sont uniquement 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /fr/tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /fr/tracing/custom_instrumentation/dotnet/

@@ -20,7 +20,7 @@ CI batch
 : The group of Continuous Testing tests triggered through a continuous integration or continuous delivery (CI/CD) pipeline or the [Datadog Synthetic Monitoring API][2].
 
 Test run
-: A single run of a Continuuos Testing test. If you have configured retries, they count as individual test runs. For example, a test with two retries can have up to three associated test runs.
+: A single run of a Continuous Testing test. If you have configured retries, they count as individual test runs. For example, a test with two retries can have up to three associated test runs.
 
 Batch timeout
 : A batch timeout occurs when your batch does not complete within a reasonable time based on the [polling timeout][3] set in your configuration file. 

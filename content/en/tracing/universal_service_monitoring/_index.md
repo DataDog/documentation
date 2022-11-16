@@ -19,8 +19,8 @@ further_reading:
   text: "Read about the Service Map"
 ---
 
-{{< beta-callout url="http://d-sh.io/universal" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Universal Service Monitoring (USM) is in private beta. There is currently no billing impact for enabling and using USM. Let us know if you would like to access it.
+{{< beta-callout url="#" d-toggle="modal" btn_hidden="true" d_target="#signupModal" custom_class="sign-up-trigger">}}
+  Universal Service Monitoring (USM) is in public beta. There is currently no billing impact for enabling and using USM.
 {{< /beta-callout >}}
 
 Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into APM views such as the Services List, Service details, and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.
@@ -30,7 +30,7 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 ### Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.39.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.40.
 
 Supported platforms
 : Linux kernel 4.14 and greater<br/>
@@ -46,10 +46,10 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Datadog Agent 7.39 or higher is installed alongside your service. Installing a tracing library is _not_ required.
-- [Unified Service Tagging][1] tags for `env` and `service` have been applied to your deployment. The `version` tag is optional.
+- Datadog Agent 7.40 or higher is installed alongside your service. Installing a tracing library is _not_ required.
+- [Unified Service Tagging][1] tag for `env` has been applied to your deployment. The `service` and `version` tags are optional.
 
-**Note**: For non-container single-tenant setups where one service runs on a host, you must apply Unified Service Tags to the host itself. USM does not support monitoring multiple services on a single host without containers, nor on a single host where Unified Service Tags are applied using environment variables.
+**Note**: For non-container single-tenant setups where one service runs on a host, you must apply Unified Service Tags to the host itself. USM does not currently support monitoring multiple services on a single host without containers, nor on a single host where Unified Service Tags are applied using environment variables. 
 
 ## Enabling Universal Service Monitoring
 

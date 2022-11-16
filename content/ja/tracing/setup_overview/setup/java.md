@@ -700,7 +700,7 @@ Java APM がアプリケーションのオーバーヘッドに与える影響�
 
 [1]: /ja/tracing/profiler/enabling/?code-lang=java
 [2]: /ja/tracing/compatibility_requirements/java
-[3]: https://app.datadoghq.com/apm/docs
+[3]: https://app.datadoghq.com/apm/service-setup
 [4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
 [5]: /ja/account_management/billing/apm_tracing_profiler/
 [6]: /ja/tracing/profiler/

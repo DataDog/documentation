@@ -987,7 +987,7 @@ Pour Apache, exécutez :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/compatibility_requirements/php
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /fr/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services

@@ -716,24 +716,24 @@ main:
     url: dashboards/widgets/slo/
     parent: dashboards_widgets
     weight: 30
-  - name: Service Map
-    url: dashboards/widgets/service_map/
-    parent: dashboards_widgets
-    weight: 31
   - name: Service Summary
     url: dashboards/widgets/service_summary/
     parent: dashboards_widgets
-    weight: 32
+    weight: 31
   - name: Table
     url: dashboards/widgets/table/
     parent: dashboards_widgets
-    weight: 33
+    weight: 32
   - name: Timeseries
     url: dashboards/widgets/timeseries/
     parent: dashboards_widgets
-    weight: 34
+    weight: 33
   - name: Top List
     url: dashboards/widgets/top_list/
+    parent: dashboards_widgets
+    weight: 34
+  - name: Topology Map
+    url: dashboards/widgets/topology_map/
     parent: dashboards_widgets
     weight: 35
   - name: Querying
@@ -978,26 +978,31 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 8
+  - name: Azure Container Apps
+    url: serverless/azure_container_apps
+    parent: serverless
+    identifier: serverless_container_apps
+    weight: 9
   - name: Google Cloud Run
     url: serverless/google_cloud_run
     parent: serverless
     identifier: serverless_gcr
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 11
+    weight: 12
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 12
+    weight: 13
   - name: Cloud Cost
     url: cloud_cost_management/
     pre: cloud-cost-management
@@ -2542,10 +2547,10 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
     weight: 5
-  - name: Cloud Security Investigator
-    url: security_platform/cloud_siem/cloud_security_investigator
+  - name: Investigator
+    url: security_platform/cloud_siem/investigator
     parent: cloud_siem
-    identifier: cloud_siem_cloud_security_investigator
+    identifier: cloud_siem_investigator
     weight: 6
   - name: Guides
     url: security_platform/cloud_siem/guide/
@@ -2673,6 +2678,11 @@ main:
     parent: appsec_getting_started
     identifier: appsec_nodejs
     weight: 106
+  - name: Python
+    url: security_platform/application_security/getting_started/python/
+    parent: appsec_getting_started
+    identifier: appsec_python
+    weight: 107
   - name: How It Works
     url: security_platform/application_security/how-appsec-works/
     parent: application_security
@@ -2683,26 +2693,31 @@ main:
     parent: application_security
     identifier: appsec_default_rules
     weight: 3
+  - name: Tracking User Activity
+    url: security_platform/application_security/add-user-info/
+    parent: application_security
+    identifier: appsec_user_info
+    weight: 4
   - name: Setup and Configure
     url: security_platform/application_security/setup_and_configure/
     parent: application_security
     identifier: appsec_configuration
-    weight: 4
+    weight: 5
   - name: Custom Detection Rules
     url: security_platform/application_security/custom_rules/
     parent: application_security
     identifier: appsec_custom_rules
-    weight: 5
+    weight: 6
   - name: Event Rules
     url: security_platform/application_security/event_rules/
     parent: application_security
     identifier: appsec_event_rules
-    weight: 6
+    weight: 7
   - name: Troubleshooting
     url: security_platform/application_security/troubleshooting
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 7
+    weight: 8
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -3343,7 +3358,7 @@ main:
     parent: dev_tools_authorization
     identifier: dev_tools_authorization_oauth2_in_datadog
     weight: 101
-  - name: Authorization Endpoints 
+  - name: Authorization Endpoints
     url: developers/authorization/oauth2_endpoints/
     parent: dev_tools_authorization
     identifier: dev_tools_authorization_oauth2_endpoints
@@ -3618,7 +3633,7 @@ main:
     parent: data_security
     weight: 1
   - name: Tracing
-    url: /tracing/setup_overview/configure_data_security/
+    url: /tracing/configure_data_security/
     parent: data_security
     weight: 2
   - name: Log Management
@@ -4828,7 +4843,7 @@ api:
       operationids:
         - GetLogsIndex
       unstable: []
-      order: 3
+      order: 2
   - name: Create an index
     url: '#create-an-index'
     identifier: logs-indexes-create-an-index
@@ -4840,7 +4855,7 @@ api:
       operationids:
         - CreateLogsIndex
       unstable: []
-      order: 2
+      order: 3
   - name: Get all indexes
     url: '#get-all-indexes'
     identifier: logs-indexes-get-all-indexes

@@ -168,7 +168,11 @@ If you are monitoring a metric over an auto-scaling group of hosts that stops an
 
 In this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
 
-##### Grouping
+##### Simple Alert
+
+For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that would change the status from OK. 
+
+##### Multi Alert
 
 For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 

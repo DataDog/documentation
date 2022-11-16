@@ -68,4 +68,4 @@ Toutes les requêtes valides dans les autres vues le sont également dans la vue
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/livetail
+[1]: https://app.datadoghq.com/apm/traces

@@ -205,13 +205,13 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 
     ```yaml
     logs_config:
-        use_http: true
+        force_use_http: true
     ```
 
     If you are using the container Agent, set the following environment variable instead:
 
     ```
-    DD_LOGS_CONFIG_USE_HTTP=true
+    DD_LOGS_CONFIG_FORCE_USE_HTTP=true
     ```
 
     This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][8].
