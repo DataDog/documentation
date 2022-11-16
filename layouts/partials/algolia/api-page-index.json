@@ -1,0 +1,11 @@
+{{- /* Outputs all API endpoint data associated to the given page as JSON. */ -}}
+
+{{ $hugo_context := .context }}
+{{ $page := .page }}
+{{ $title := .title }}
+{{ $lang := .lang }}
+{{ $api_version := .version }}
+{{ $action_data := .action_data }}
+{{ $api_v1_translate_actions := .api_v1_translate_actions }}
+
+{{ $operationId := .operationId }}
