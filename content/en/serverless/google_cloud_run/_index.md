@@ -130,7 +130,7 @@ Below are instructions for deploying a Cloud Run service using standard GCP tool
 ### Custom metrics
 You can submit custom metrics using a [DogStatsd client][5].
 
-Please note that only `distribution` metrics should be used.
+**Note**: Only `DISTRIBUTION` metrics should be used.
 
 ### Advanced options and configurations
 
