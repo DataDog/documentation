@@ -30,10 +30,10 @@ Cloud SIEM applies detection rules to all processed logs in Datadog to detect th
 
 This guide walks you through the following steps so that you can start detecting threats with your AWS CloudTrail logs:
 
-- [Set up Datadog’s AWS integration](##set-up-aws-integration-using-cloudformation)
-- [Enable AWS CloudTrail logs](#enable-aws-cloudtrail-logs)
-- [Send AWS CloudTrail logs to Datadog](#send-aws-cloudtrail-logs-to-datadog)
-- [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
+1. [Set up Datadog's AWS integration](##set-up-aws-integration-using-cloudformation)
+2. [Enable AWS CloudTrail logs](#enable-aws-cloudtrail-logs)
+3. [Send AWS CloudTrail logs to Datadog](#send-aws-cloudtrail-logs-to-datadog)
+4. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
 
 ## Set up AWS integration using CloudFormation
 
@@ -49,7 +49,7 @@ This guide walks you through the following steps so that you can start detecting
 7. Check the required boxes from AWS and click **Create stack**.
 8. After the CloudFormation stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
 
-See [Getting Started with AWS][3] for more information about Datadog’s AWS integration and CloudFormation template. See [AWS manual setup instructions][4] if you need to set up the AWS integration manually.
+See [Getting Started with AWS][3] for more information about Datadog's AWS integration and CloudFormation template. See [AWS manual setup instructions][4] if you need to set up the AWS integration manually.
 
 ## Enable AWS CloudTrail logging 
 
@@ -72,7 +72,7 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 4. Select the S3 bucket you are using to collect AWS CloudTrail logs. 
 5. For Event type, select **All object create events**.
 6. Click **Add**.
-7. See CloudTrail logs in Datadog’s [Log Explorer][7].
+7. See CloudTrail logs in Datadog's [Log Explorer][7].
 
 See [Log Explorer][8] for more information on how to search and filter, group, and visualize your logs. 
 
