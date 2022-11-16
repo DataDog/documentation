@@ -30,8 +30,8 @@ Cloud SIEM applies detection rules to all processed logs in Datadog to detect th
 
 This guide walks you through the following steps so that you can start detecting threats with your AWS CloudTrail logs:
 
-1. [Set up Datadog's AWS integration](##set-up-aws-integration-using-cloudformation)
-2. [Enable AWS CloudTrail logs](#enable-aws-cloudtrail-logs)
+1. [Set up Datadog's AWS integration](#set-up-aws-integration-using-cloudformation)
+2. [Enable AWS CloudTrail logs](#enable-aws-cloudtrail-logging)
 3. [Send AWS CloudTrail logs to Datadog](#send-aws-cloudtrail-logs-to-datadog)
 4. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
 
