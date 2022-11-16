@@ -88,9 +88,9 @@ If you aren’t seeing data after writing a query, confirm that the event select
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-2.png" alt="Diagram of the RUM event hierarchy." style="width:80%;">}}
 
-## How to find views for specific actions that are of separate event types / mix and match event types 
+## How to query multiple event types for specific aftions
 
-When querying for a specific event, you can use the parent event type, but not one at equal or lower level. For example, actions are nested underneath views, and actions and errors are at the same level in the hierarchical chain. This means you can query for all actions that happened on a given page, but not for all actions that had a specific error type.
+When querying for specific actions, you can use the parent event type, but not one at equal or lower level. For example, actions are nested underneath views, and actions and errors are at the same level in the hierarchical chain. This means you can query for all actions and events that happened on a given page, but not for all actions that had a specific error type.
 
 #### Sample search: The top 10 actions that occurred on / (the homepage)
 
