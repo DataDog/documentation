@@ -85,7 +85,7 @@ See [Tracing Java Applications][1] for detailed instructions. [Sample code for a
 ### Custom metrics
 You can submit custom metrics using a [DogStatsd client][3].
 
-Please note that only `distribution` metrics should be used.
+**Note**: Only `DISTRIBUTION` metrics should be used.
 
 ### Advanced options and configurations
 
