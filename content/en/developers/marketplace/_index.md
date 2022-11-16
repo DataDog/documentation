@@ -26,7 +26,7 @@ While the **Integrations** page includes integrations and Datadog Apps built by 
 
 ## Join the Datadog partner network
 
-Before requesting access to the Datadog Marketplace, first apply to join the [Datadog Partner Network's][3] **Technology Partners** track. As a Datadog Technology Partner, you can either develop an [Agent-based or API-based integration][4] or a [Datadog App][5], or list your SaaS license or professional services offering.
+Before requesting access to the Datadog Marketplace, first apply to join the [Datadog Partner Network's][3] **Technology Partners** track. As a Datadog Technology Partner, you can either develop an [Agent-based or API integration][4] or a [Datadog App][5], or list your SaaS license or professional services offering.
 
 ## Apply for a sandbox account
 
