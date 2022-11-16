@@ -1,0 +1,25 @@
+{
+  "data": {
+    "attributes": {
+      "description": "This report summarizes the recent errors, latency, and uptime of our Web Application Backend.",
+      "destinations": {
+        "email": {
+          "recipient_addresses": [
+            "jane.doe@example.com"
+          ]
+        }
+      },
+      "schedule": {
+        "active": true,
+        "frequency": "1d",
+        "repeat_at": "13:30",
+        "repeat_on_day_of_month": null,
+        "repeat_on_day_of_week": null,
+        "timezone": "America/New_York"
+      },
+      "timeframe": "1w",
+      "title": "Summary of recent stability and performance for Web Application Backend"
+    },
+    "type": "dashboard_reports"
+  }
+}

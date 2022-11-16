@@ -2469,6 +2469,515 @@ components:
             $ref: '#/components/schemas/DashboardListItemResponse'
           type: array
       type: object
+    DashboardReport:
+      description: Dashboard report schema.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DashboardReportAttributes'
+        id:
+          description: ID of the dashboard report.
+          example: d34db33f-1337-4a7a-d099-da7ad0900002
+          type: string
+        relationships:
+          $ref: '#/components/schemas/DashboardReportRelationships'
+        type:
+          $ref: '#/components/schemas/DashboardReportType'
+      required:
+      - id
+      - type
+      type: object
+    DashboardReportAttributes:
+      description: Attributes for the dashboard report schema.
+      properties:
+        created_at:
+          description: Date the report was created.
+          format: date-time
+          type: string
+        description:
+          description: Description of the report used in both the user interface,
+            and as part of the email body for each report sent. Must be a UTF-8 encoded
+            string less than 4 KiB in size.
+          example: This report summarizes the recent errors, latency, and uptime of
+            our Web Application Backend.
+          maxLength: 4096
+          nullable: true
+          type: string
+        destinations:
+          $ref: '#/components/schemas/DashboardReportDestination'
+        modified_at:
+          description: Date the report was most recently modified.
+          format: date-time
+          nullable: true
+          type: string
+        schedule:
+          $ref: '#/components/schemas/DashboardReportSchedule'
+        template_variables:
+          $ref: '#/components/schemas/DashboardReportTemplateVariables'
+        timeframe:
+          $ref: '#/components/schemas/DashboardReportTimeframe'
+        title:
+          description: Title of the report in both the user interface, and as part
+            of the email subject for each report sent.
+          example: Summary of stability and performance for Web App Backend over the
+            last week
+          maxLength: 78
+          minLength: 1
+          type: string
+      type: object
+    DashboardReportCreate:
+      description: Schema for request body to create a dashboard report.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DashboardReportCreateAttributes'
+        type:
+          $ref: '#/components/schemas/DashboardReportType'
+      required:
+      - type
+      type: object
+    DashboardReportCreateAttributes:
+      description: Attributes for the dashboard report schema used to create a dashboard
+        report.
+      properties:
+        description:
+          description: Description of the report in both the user interface and as
+            part of the email body for each report sent. Must be a UTF-8 encoded string
+            less than 4 KiB in size.
+          example: 'This report summarizes the recent errors, latency, and uptime
+            of
+
+            our Web Application Backend.'
+          maxLength: 4096
+          nullable: true
+          type: string
+        destinations:
+          $ref: '#/components/schemas/DashboardReportDestination'
+        schedule:
+          $ref: '#/components/schemas/DashboardReportSchedule'
+        template_variables:
+          $ref: '#/components/schemas/DashboardReportTemplateVariables'
+        timeframe:
+          $ref: '#/components/schemas/DashboardReportTimeframe'
+        title:
+          description: Title of the report in both the user interface, and as part
+            of the email subject for each report sent.
+          example: Summary of recent stability and performance for Web Application
+            Backend
+          maxLength: 78
+          minLength: 1
+          type: string
+      required:
+      - destinations
+      - schedule
+      - timeframe
+      - title
+      type: object
+    DashboardReportCreateRequest:
+      description: Request body when creating a new dashboard report.
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardReportCreate'
+      required:
+      - data
+      type: object
+    DashboardReportDestination:
+      description: Report destination-specific configuration. This determines how
+        reports are sent. Only email destinations are supported.
+      example:
+        email:
+          recipient_addresses:
+          - jane.doe@example.com
+      properties:
+        email:
+          $ref: '#/components/schemas/DashboardReportDestinationEmail'
+      type: object
+    DashboardReportDestinationEmail:
+      description: Email destinations for a report.
+      properties:
+        recipient_addresses:
+          description: List of email addresses to send reports to.
+          items:
+            description: Email address to which to send a report. You must have at
+              least a Pro account to send emails to recipients outside of your Datadog
+              organization.
+            example: jane.doe@example.com
+            format: email
+            type: string
+          minLength: 1
+          type: array
+      type: object
+    DashboardReportRelationships:
+      description: Relationships of a dashboard report.
+      properties:
+        dashboard:
+          $ref: '#/components/schemas/DashboardReportRelationshipsDashboard'
+      type: object
+    DashboardReportRelationshipsDashboard:
+      description: Dashboard associated with the report.
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardReportRelationshipsDashboardData'
+      required:
+      - data
+      type: object
+    DashboardReportRelationshipsDashboardData:
+      description: JSON:API data representing a report's associated dashboard.
+      properties:
+        id:
+          description: ID of a report's associated dashboard. Screenboards (dashboards
+            with layout_type=FREE) are not supported.
+          example: q5j-nti-fv6
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardReportResourceType'
+      required:
+      - id
+      - type
+      type: object
+    DashboardReportResourceType:
+      default: dashboards
+      description: JSON:API type of the report's associated dashboard.
+      enum:
+      - dashboards
+      example: dashboards
+      type: string
+      x-enum-varnames:
+      - DASHBOARDS_TYPE
+    DashboardReportResponse:
+      description: Response body when creating, reading, or updating a dashboard report.
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardReport'
+      type: object
+    DashboardReportSchedule:
+      description: Report schedule-specific configuration that defines when and how
+        often a report is sent.
+      properties:
+        active:
+          description: Enables or disables automatic report sending as configured
+            in the report's schedule. If set to `false`, schedule is paused and reports
+            are not sent.
+          example: true
+          type: boolean
+        frequency:
+          $ref: '#/components/schemas/DashboardReportScheduleFrequency'
+        repeat_at:
+          $ref: '#/components/schemas/DashboardReportScheduleRepeatAt'
+        repeat_on_day_of_month:
+          $ref: '#/components/schemas/DashboardReportScheduleRepeatOnDayOfMonth'
+        repeat_on_day_of_week:
+          $ref: '#/components/schemas/DashboardReportScheduleRepeatOnDayOfWeek'
+        timezone:
+          description: Time zone to use for repeat_at. Must be a valid Time Zone Database
+            (https://www.iana.org/time-zones) name
+          example: America/New_York
+          type: string
+      type: object
+    DashboardReportScheduleFrequency:
+      description: Frequency with which to send the report.
+      enum:
+      - 1d
+      - 2d
+      - 3d
+      - 4d
+      - 5d
+      - 6d
+      - 1w
+      - 2w
+      - 3w
+      - 1mo
+      - 2mo
+      - 3mo
+      - 4mo
+      - 5mo
+      - 6mo
+      - 7mo
+      - 8mo
+      - 9mo
+      - 10mo
+      - 11mo
+      - 12mo
+      type: string
+      x-enum-varnames:
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_1D
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_2D
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_3D
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_4D
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_5D
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_6D
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_1W
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_2W
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_3W
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_1MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_2MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_3MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_4MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_5MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_6MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_7MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_8MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_9MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_10MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_11MO
+      - DASHBOARD_REPORT_SCHEDULE_FREQUENCY_12MO
+    DashboardReportScheduleRepeatAt:
+      description: ISO8601 formatted time (HH:MM) to send the report, using the time
+        zone specified in the `timezone` field.
+      enum:
+      - 00:00
+      - 00:30
+      - 01:00
+      - 01:30
+      - 02:00
+      - 02:30
+      - 03:00
+      - 03:30
+      - 04:00
+      - 04:30
+      - 05:00
+      - 05:30
+      - 06:00
+      - 06:30
+      - 07:00
+      - 07:30
+      - 08:00
+      - 08:30
+      - 09:00
+      - 09:30
+      - '10:00'
+      - '10:30'
+      - '11:00'
+      - '11:30'
+      - '12:00'
+      - '12:30'
+      - '13:00'
+      - '13:30'
+      - '14:00'
+      - '14:30'
+      - '15:00'
+      - '15:30'
+      - '16:00'
+      - '16:30'
+      - '17:00'
+      - '17:30'
+      - '18:00'
+      - '18:30'
+      - '19:00'
+      - '19:30'
+      - '20:00'
+      - '20:30'
+      - '21:00'
+      - '21:30'
+      - '22:00'
+      - '22:30'
+      - '23:00'
+      - '23:30'
+      example: '13:30'
+      type: string
+      x-enum-varnames:
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_00_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_00_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_01_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_01_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_02_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_02_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_03_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_03_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_04_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_04_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_05_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_05_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_06_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_06_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_07_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_07_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_08_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_08_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_09_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_09_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_10_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_10_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_11_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_11_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_12_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_12_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_13_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_13_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_14_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_14_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_15_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_15_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_16_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_16_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_17_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_17_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_18_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_18_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_19_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_19_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_20_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_20_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_21_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_21_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_22_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_22_30
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_23_00
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_AT_23_30
+    DashboardReportScheduleRepeatOnDayOfMonth:
+      description: Defines which day of the month to send the monthly report. If the
+        frequency field uses months (for example, `1mo`), this field is required.
+        If the frequency field does not use months (for example `1d`, `1w`), then
+        this field must be `null` (if provided). If this field is not provided in
+        an update request, and the update request changes the frequency to use days
+        or weeks (for example, `1d`, `1w`), then this field is automatically set to
+        `null`. This field is mutually exclusive with `repeat_on_day_of_week`, and
+        cannot be defined in the same request that includes a non-null value for `repeat_on_day_of_week`.
+      enum:
+      - 1st
+      - 15th
+      example: 1st
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_MONTH_1ST
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_MONTH_15TH
+    DashboardReportScheduleRepeatOnDayOfWeek:
+      description: Defines which day of the week to send the weekly report. If the
+        frequency field uses weeks (such as `1w`), this field is required and defines
+        which day of the week to send the report. If the frequency field does not
+        use weeks (for example, `1d`, `1mo`), then this field must be `null` (if provided).
+        If this field is not provided in an update request, and the update request
+        changes the frequency to use days or months (for example, `1d`, `1mo`), then
+        this field is automatically set to `null`.  This field is mutually exclusive
+        with `repeat_on_day_of_month` and cannot be defined in the same request that
+        includes a non-null value for `repeat_on_day_of_month`.
+      enum:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+      - Sunday
+      example: Monday
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_WEEK_MONDAY
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_WEEK_TUESDAY
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_WEEK_WEDNESDAY
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_WEEK_THURSDAY
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_WEEK_FRIDAY
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_WEEK_SATURDAY
+      - DASHBOARD_REPORT_SCHEDULE_REPEAT_ON_DAY_OF_WEEK_SUNDAY
+    DashboardReportTemplateVariables:
+      additionalProperties:
+        description: Key/value pairs for template variables.
+        type: string
+      description: Template variables used to parameterize the dashboard when generating
+        a report.
+      example:
+        bar: '*'
+        foo: '*'
+      type: object
+    DashboardReportTimeframe:
+      description: Time period covered by the widgets in the dashboard report, at
+        the time of report generation.
+      enum:
+      - 5m
+      - 15m
+      - 30m
+      - 1h
+      - 4h
+      - 1d
+      - 2d
+      - 1w
+      - 1mo
+      example: 1w
+      type: string
+      x-enum-varnames:
+      - DASHBOARD_REPORT_TIMEFRAME_5M
+      - DASHBOARD_REPORT_TIMEFRAME_15M
+      - DASHBOARD_REPORT_TIMEFRAME_30M
+      - DASHBOARD_REPORT_TIMEFRAME_1H
+      - DASHBOARD_REPORT_TIMEFRAME_4H
+      - DASHBOARD_REPORT_TIMEFRAME_1D
+      - DASHBOARD_REPORT_TIMEFRAME_2D
+      - DASHBOARD_REPORT_TIMEFRAME_1W
+      - DASHBOARD_REPORT_TIMEFRAME_1MO
+    DashboardReportType:
+      default: dashboard_reports
+      description: JSON:API type of the dashboard report.
+      enum:
+      - dashboard_reports
+      example: dashboard_reports
+      type: string
+      x-enum-varnames:
+      - DASHBOARD_REPORTS_TYPE
+    DashboardReportUpdateAttributes:
+      description: Attributes of a dashboard report that can be updated. Fields that
+        are not to be updated can be omitted, with some exceptions for `repeat_on_day_of_week`
+        and `repeat_on_day_of_month`, as noted in their respective sections.
+      properties:
+        description:
+          description: Description of the report in both the user interface and as
+            part of the email body for each report sent. Must be a UTF-8 encoded string
+            less than 4 KiB in size.
+          example: 'This report summarizes the recent errors, latency, and uptime
+            of
+
+            our Web Application Backend.'
+          maxLength: 4096
+          nullable: true
+          type: string
+        destinations:
+          $ref: '#/components/schemas/DashboardReportDestination'
+        schedule:
+          $ref: '#/components/schemas/DashboardReportSchedule'
+        template_variables:
+          $ref: '#/components/schemas/DashboardReportTemplateVariables'
+        timeframe:
+          $ref: '#/components/schemas/DashboardReportTimeframe'
+        title:
+          description: Title of the report in both the user interface, and as part
+            of the email subject for each report sent.
+          example: Summary of recent stability and performance for Web Application
+            Backend
+          maxLength: 78
+          minLength: 1
+          type: string
+      type: object
+    DashboardReportUpdateRequest:
+      description: Request body when updating a dashboard report.
+      properties:
+        data:
+          $ref: '#/components/schemas/DashboardReportUpdateRequestData'
+      required:
+      - data
+      type: object
+    DashboardReportUpdateRequestData:
+      description: JSON:API data key.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DashboardReportUpdateAttributes'
+        id:
+          description: ID of the report to update.
+          example: d34db33f-1337-4a7a-d099-da7ad0900002
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardReportType'
+      required:
+      - id
+      - type
+      type: object
+    DashboardReportsResponse:
+      description: Response body when fetching a list of dashboard reports.
+      properties:
+        data:
+          description: JSON:API data key with value of a list of dashboard reports.
+          items:
+            $ref: '#/components/schemas/DashboardReport'
+          type: array
+      type: object
     DashboardType:
       description: The type of the dashboard.
       enum:
@@ -11889,6 +12398,341 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/dashboards/{dashboard_id}/reports:
+    get:
+      description: List of the dashboard reports configured on a given dashboard.
+        This list includes report configurations that are both enabled and disabled,
+        but does not include reports that have been deleted for the given dashboard.
+      operationId: GetDashboardReportConfigsList
+      parameters:
+      - description: ID of the Dashboard for which to get all dashboard reports.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+        - generate_dashboard_reports
+      summary: Get Dashboard Reports for a Dashboard
+      tags:
+      - Dashboard Reports
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: New dashboard report configuration for a given dashboard. This
+        creates a new report email schedule, frequency, timeframe, and more.
+      operationId: CreateDashboardReportConfig
+      parameters:
+      - description: ID of the dashboard for which to create a dashboard report.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardReportCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardReportResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+        - generate_dashboard_reports
+      summary: Create a new Dashboard Report
+      tags:
+      - Dashboard Reports
+      x-codegen-request-body-name: body
+      x-given:
+        dashboard_report:
+          parameters:
+          - name: dashboard_id
+            source: dashboard.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"description\":
+              \"This report summarizes the recent errors, latency, and uptime of our
+              Web Application Backend.\",\n      \"destinations\": {\n        \"email\":
+              {\n          \"recipient_addresses\": [\n            \"jane.doe@example.com\"\n
+              \         ]\n        }\n      },\n      \"schedule\": {\n        \"active\":
+              true,\n        \"frequency\": \"1d\",\n        \"repeat_at\": \"13:30\",\n
+              \       \"repeat_on_day_of_month\": null,\n        \"repeat_on_day_of_week\":
+              null,\n        \"timezone\": \"America/New_York\"\n      },\n      \"timeframe\":
+              \"1w\",\n      \"title\": \"Summary of recent stability and performance
+              for Web Application Backend\"\n    },\n    \"type\": \"dashboard_reports\"\n
+              \ }\n}"
+          step: there is a valid "dashboard_report" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteDashboardReportConfig
+        parameters:
+        - name: dashboard_id
+          source: data.relationships.dashboard.data.id
+        - name: report_uuid
+          source: data.id
+        type: unsafe
+  /api/v2/dashboards/{dashboard_id}/reports/{report_uuid}:
+    delete:
+      description: Delete a dashboard report configuration, disabling the sending
+        of scheduled emails for this report in the future. This operation cannot be
+        undone. To pause the sending of emails for this report without deleting it,
+        deactivate the report with a `PATCH` request.
+      operationId: DeleteDashboardReportConfig
+      parameters:
+      - description: ID of the dashboard for which to delete the associated report.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      - description: ID of the dashboard report to delete.
+        in: path
+        name: report_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+        - generate_dashboard_reports
+      summary: Delete a Dashboard Report
+      tags:
+      - Dashboard Reports
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    get:
+      description: Fetch a single Dashboard Report configuration. This includes the
+        same information provided when fetching a dashboard's list of currently configured
+        reports, but only for singular reports.
+      operationId: GetDashboardReportConfig
+      parameters:
+      - description: ID of the dashboard for which to get the associated dashboard
+          report.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      - description: ID of the dashboard report to get.
+        in: path
+        name: report_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardReportResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+        - generate_dashboard_reports
+      summary: Get a Dashboard Report
+      tags:
+      - Dashboard Reports
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    patch:
+      description: Update a Dashboard Report configuration, including the schedule
+        and email settings.  Changes to the schedule happen immediately, but it may
+        take up to five minutes for your report to be sent if the scheduled time is
+        close to the time of the update request.
+      operationId: UpdateDashboardReportConfig
+      parameters:
+      - description: ID of the dashboard for which to update the associated report.
+        in: path
+        name: dashboard_id
+        required: true
+        schema:
+          type: string
+      - description: ID of the dashboard report to update.
+        in: path
+        name: report_uuid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardReportUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardReportResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+        - generate_dashboard_reports
+      summary: Update Dashboard Report
+      tags:
+      - Dashboard Reports
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/events:
     get:
       description: 'List endpoint returns events that match an events search query.
@@ -18800,6 +19644,10 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: Dashboard reports allow for sending scheduled emails with snapshots
+    of your dashboard's widgets, using a given timeframe and frequency, to multiple
+    email recipients.
+  name: Dashboard Reports
 - description: 'The events service allows you to programmatically post events to the
     event stream
 

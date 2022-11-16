@@ -235,6 +235,41 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "CreateDashboardReportConfig": [
+    {
+      "group": "dashboard_reports",
+      "suffix": "",
+      "description": "Create a new Dashboard Report returns \"Created\" response"
+    }
+  ],
+  "DeleteDashboardReportConfig": [
+    {
+      "group": "dashboard_reports",
+      "suffix": "",
+      "description": "Delete a Dashboard Report returns \"No Content\" response"
+    }
+  ],
+  "GetDashboardReportConfigsList": [
+    {
+      "group": "dashboard_reports",
+      "suffix": "",
+      "description": "Get Dashboard Reports for a Dashboard returns \"OK\" response"
+    }
+  ],
+  "GetDashboardReportConfig": [
+    {
+      "group": "dashboard_reports",
+      "suffix": "",
+      "description": "Get a Dashboard Report returns \"OK\" response"
+    }
+  ],
+  "UpdateDashboardReportConfig": [
+    {
+      "group": "dashboard_reports",
+      "suffix": "",
+      "description": "Update Dashboard Report returns \"OK\" response"
+    }
+  ],
   "ListEvents": [
     {
       "group": "events",
