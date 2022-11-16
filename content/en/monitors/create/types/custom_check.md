@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-Service check monitors include any service check not reported by one of the [more than {{< translate key="integration_count" >}} integrations][1] included with the Agent. Service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4]. For more information, see the [Service Check Overview][11]
+Service check monitors include any service check not reported by one of the [more than {{< translate key="integration_count" >}} integrations][1] included with the Agent. Service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4]. For more information, see the [Service Check Overview][5]
 
 ## Monitor creation
 
-To create a [service check monitor][5] in Datadog, use the main navigation: *Monitors --> New Monitor --> Service Check*.
+To create a [service check monitor][6] in Datadog, use the main navigation: *Monitors --> New Monitor --> Service Check*.
 
 ### Pick a service check
 
@@ -82,11 +82,11 @@ Set up a cluster alert:
 
 #### Advanced alert conditions
 
-See the [Monitor configuration][6] documentation for information on [No data][7], [Auto resolve][8], and [New group delay][9] options.
+See the [Monitor configuration][7] documentation for information on [No data][8], [Auto resolve][9], and [New group delay][10] options.
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][11] page.
 
 ## Further Reading
 
@@ -96,10 +96,10 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: /developers/custom_checks/write_agent_check/
 [3]: /developers/dogstatsd/
 [4]: /api/v1/service-checks/
-[5]: https://app.datadoghq.com/monitors#create/custom
-[6]: /monitors/create/configuration/#advanced-alert-conditions
-[7]: /monitors/create/configuration/#no-data
-[8]: /monitors/create/configuration/#auto-resolve
-[9]: /monitors/create/configuration/#new-group-delay
-[10]: /monitors/notify/
-[11]: /developers/service_checks/#overview
+[5]: /developers/service_checks/#overview
+[6]: https://app.datadoghq.com/monitors#create/custom
+[7]: /monitors/create/configuration/#advanced-alert-conditions
+[8]: /monitors/create/configuration/#no-data
+[9]: /monitors/create/configuration/#auto-resolve
+[10]: /monitors/create/configuration/#new-group-delay
+[11]: /monitors/notify/
