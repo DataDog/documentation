@@ -75,8 +75,8 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 Datadog ASM offers built-in protection capabilities to slow down attacks and attackers. 
 
-IP blocking actions are implemented through the [tracing libraries][12], not introducing any new dependencies in your stack.
-IP blocking actions are sent remotely using the Remote Configuration protocol, a secure channel between the Datadog platform and your infrastructure, through the [Datadog Agent][13].
+IP blocking actions are implemented through the [tracing libraries][9], not introducing any new dependencies in your stack.
+IP blocks are saved in the Datadog platform, automatically and securely fetched by the [Datadog Agent][12], deployed in your infrastructure, and applied to your application.
 
 You can block attackers' IPs that are flagged in ASM Security Signals temporarily or permanently with a single click in the Datadog UI.
 

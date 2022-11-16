@@ -17,10 +17,6 @@ further_reading:
   text: "Generate metrics from ingested logs"
 ---
 
-<div class="alert alert-warning">
-Generating custom metrics from RUM events is in beta. Access to this feature is provisioned to customers using Real User Monitoring. Contact <a href="/help">Datadog Support</a> to provide feedback.
-</div>
-
 ## Overview
 
 Real User Monitoring (RUM) allows you to capture events that occur in your browser and mobile applications using the Datadog RUM SDKs and collect data from events at a [sample rate][1]. Datadog retains this event data in the [RUM Explorer][2], where you can create search queries and visualizations.
