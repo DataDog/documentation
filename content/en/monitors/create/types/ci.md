@@ -147,6 +147,24 @@ As an alternative, Datadog recommends using rate formulas. For example, instead 
 
 This way, if the monitor triggers because there's a burst of pipeline failures that makes the error rate go above the monitor threshold, it will not clear until the error rate goes below the threshold, which can be at any time afterwards.
 
+## Example monitors
+Common monitor use cases are outlined below. Monitor queries can be modified to filter for specific branches, authors, or any other in-app facet.
+
+### Trigger alerts for performance regressions
+The `duration` metric can be used to identify pipeline and test performance regressions for any branch. Alerting on this metric can prevent performance regressions from being introduced into your codebase.
+
+{{< img src="ci/regression_monitor.png" alt="CI pipeline regression monitor" style="width:40%;">}}
+
+### Track new flaky tests
+Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by Test Full Name so you don’t get alerted on the same new flaky test more than once.
+
+{{< img src="ci/flaky_test_monitor.png" alt="CI flaky test monitor" style="width:40%;">}}
+
+### Maintain code coverage percentage
+[Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time. 
+
+{{< img src="ci/codecoveragepct_monitor_light.png" alt="CI flaky test monitor" style="width:40%;">}}
+
 
 ## Further Reading
 
@@ -157,3 +175,4 @@ This way, if the monitor triggers because there's a burst of pipeline failures t
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
 [3]: /monitors/create/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
+[5]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
