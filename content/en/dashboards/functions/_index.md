@@ -19,11 +19,17 @@ aliases:
   - /getting_started/from_the_query_to_the_graph
   - /graphing/miscellaneous/from_the_query_to_the_graph
   - /graphing/functions/
+further_reading:
+- link: "/metrics/#querying-metrics"
+  tag: "Documentation"
+  text: "Querying metrics"
 ---
 
 ## Overview
 
-Functions can modify how the results of a metric query are returned for visualizations. Most functions are applied after the results of the metric query are returned, but functions can also change the parameters before the query is made. For example, the Rollup function changes the time aggregation of a query before the results are returned. Alternatively, arithmetic functions apply changes to the returned results of the metric query. See the [Metrics][3] page to learn more about querying metrics. To learn more about the different functions, see the [function types](#function-types).
+Functions can modify how the results of a metric query are returned for visualizations. Most functions are applied after the results of the metric query are returned, but functions can also change the parameters before the query is made. 
+
+For example, the Rollup function changes the time aggregation of a query before the results are returned. Alternatively, arithmetic functions apply changes to the returned results of the metric query. See the [Metrics][3] page to learn more about querying metrics. To learn more about the different functions, see the [function types](#function-types).
 
 ## Add a function
 
@@ -48,6 +54,9 @@ Functions can be applied to your queries by clicking the Add Function `Σ` icon 
     {{< nextlink href="/dashboards/functions/beta" >}}Beta: Compute the rolling average of a metric.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/#time-aggregation
 [2]: /metrics/#space-aggregation

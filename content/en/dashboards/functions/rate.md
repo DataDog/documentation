@@ -5,7 +5,7 @@ aliases:
     - /graphing/functions/rate/
 further_reading:
 - link: "/monitors/guide/alert-on-no-change-in-value/"
-  tag: "Guide"
+  tag: "Documentation"
   text: "Alert on no change in value"
 ---
 
