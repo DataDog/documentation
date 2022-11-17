@@ -32,8 +32,6 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: [A full example of the `datadog.yaml` file is available in the `datadog-agent` GitHub repository][1].
-
 ## Agent configuration directory
 
 Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`.
@@ -102,7 +100,6 @@ To preserve backwards compatibility, the Agent still picks up configuration file
 
 ## JMX configuration file
 
-JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][2].
+JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][1].
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /agent/kubernetes/integrations/#configuration
+[1]: /agent/kubernetes/integrations/#configuration
