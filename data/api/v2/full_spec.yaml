@@ -804,8 +804,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'Timezone code. Can be specified as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -1203,6 +1203,10 @@ components:
       - max
       - avg
       - median
+      - latest
+      - earliest
+      - most_frequent
+      - delta
       example: pc90
       type: string
       x-enum-varnames:
@@ -1218,6 +1222,10 @@ components:
       - MAX
       - AVG
       - MEDIAN
+      - LATEST
+      - EARLIEST
+      - MOST_FREQUENT
+      - DELTA
     CIAppCompute:
       description: A compute rule to compute metrics or timeseries.
       properties:
@@ -1497,8 +1505,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -2743,7 +2751,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified as an offset, for example: `UTC+03:00`.'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -5281,8 +5290,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -7286,8 +7295,10 @@ components:
       properties:
         from:
           default: now-15m
-          description: The minimum time for the requested events; supports date, math,
-            and regular timestamps (in milliseconds).
+          description: The minimum time for the requested events; supports date (in
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date,
+            hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds
+            are optional), math, and regular timestamps (in milliseconds).
           example: now-15m
           type: string
         query:
@@ -7297,8 +7308,10 @@ components:
           type: string
         to:
           default: now
-          description: The maximum time for the requested events; supports date, math,
-            and regular timestamps (in milliseconds).
+          description: The maximum time for the requested events; supports date (in
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date,
+            hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds
+            are optional), math, and regular timestamps (in milliseconds).
           example: now
           type: string
       type: object
@@ -7314,8 +7327,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -9907,12 +9920,12 @@ components:
       properties:
         region:
           $ref: '#/components/schemas/ServiceDefinitionV2OpsgenieRegion'
-        service-id:
-          description: Opsgenie service id.
-          example: 123e4567-e89b-12d3-a456-426614174000
+        service-url:
+          description: Opsgenie service url.
+          example: https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000
           type: string
       required:
-      - service-id
+      - service-url
       type: object
     ServiceDefinitionV2OpsgenieRegion:
       description: Opsgenie instance region.
@@ -17368,12 +17381,12 @@ paths:
               \"my-team\",\n  \"docs\": [{\"name\": \"Architecture\",\n            \"provider\":
               \"google drive\",\n            \"url\": \"https://gdrive/mygivedoc\"}],\n
               \ \"extensions\": {\"frogextension\": \"extensionfrogvalue\"},\n  \"integrations\":
-              {\"opsgenie\": {\"region\": \"US\",\n                                \"service-id\":
-              \"123e4567-e89b-12d3-a456-426614174000\"},\n                   \"pagerduty\":
-              \"https://my-org.pagerduty.com/service-directory/PMyService\"},\n  \"links\":
-              [{\"name\": \"Runbook\", \"type\": \"runbook\", \"url\": \"https://my-runbook\"}],\n
-              \ \"repos\": [{\"name\": \"Source Code\",\n             \"provider\":
-              \"GitHub\",\n             \"url\": \"https://github.com/DataDog/given\"}],\n
+              {\"opsgenie\": {\"region\": \"US\",\n                                \"service-url\":
+              \"https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000\"},\n
+              \                  \"pagerduty\": \"https://my-org.pagerduty.com/service-directory/PMyService\"},\n
+              \ \"links\": [{\"name\": \"Runbook\", \"type\": \"runbook\", \"url\":
+              \"https://my-runbook\"}],\n  \"repos\": [{\"name\": \"Source Code\",\n
+              \            \"provider\": \"GitHub\",\n             \"url\": \"https://github.com/DataDog/given\"}],\n
               \ \"schema-version\": \"v2\",\n  \"tags\": [\"this:tag\", \"service:tag\"],\n
               \ \"team\": \"super-team\"\n}"
           step: there is a valid "service_definition" in the system

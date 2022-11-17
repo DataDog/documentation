@@ -5,6 +5,7 @@ description: Examine CI jobs executing Continuous Testing tests.
 aliases: 
   - /synthetics/cicd_testing/ci_results_explorer
   - /synthetics/ci_results_explorer
+  - /synthetics/explorer
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"

@@ -10,15 +10,15 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range. The values displayed by a query value need not represent an instantaneous measurement.
+Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range. This can be supplemented with optional backgrounds of timeseries data. The values displayed by a query value do not require an instantaneous measurement.
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
-{{< img src="dashboards/widgets/query_value/query_value.png" alt="Query value widget"  >}}
+{{< img src="dashboards/widgets/query_value/query_value1.png" alt="Query value widget" style="width:80%;" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/query_value/query-value-widget-setup.png" alt="Query value widget setup" style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="Query value widget setup" style="width:80%;">}}
 
 ### Configuration
 
@@ -28,6 +28,10 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Log Events: See the [Log search documentation][3] to configure a log event query.
 2. Choose the units and the formatting. Autoformat scales the Dashboard for you based on the units.
 3. Optional: configure a conditional format depending on the value displayed.
+4. Optional: overlay timeseries background
+    * Min to Max: Scale graph from min to max
+    * Line: Scale graph to include zero (0)
+    * Bars: Shows discrete, periodic measurements
 
 ### Options
 

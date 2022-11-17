@@ -978,26 +978,31 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 8
+  - name: Azure Container Apps
+    url: serverless/azure_container_apps
+    parent: serverless
+    identifier: serverless_container_apps
+    weight: 9
   - name: Google Cloud Run
     url: serverless/google_cloud_run
     parent: serverless
     identifier: serverless_gcr
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 10
+    weight: 11
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 11
+    weight: 12
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 12
+    weight: 13
   - name: Cloud Cost
     url: cloud_cost_management/
     pre: cloud-cost-management
@@ -2542,10 +2547,10 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_signals_explorer
     weight: 5
-  - name: Cloud SIEM Investigator
-    url: security_platform/cloud_siem/cloud_siem_investigator
+  - name: Investigator
+    url: security_platform/cloud_siem/investigator
     parent: cloud_siem
-    identifier: cloud_siem_cloud_security_investigator
+    identifier: cloud_siem_investigator
     weight: 6
   - name: Guides
     url: security_platform/cloud_siem/guide/
@@ -3634,7 +3639,7 @@ main:
     parent: data_security
     weight: 1
   - name: Tracing
-    url: /tracing/setup_overview/configure_data_security/
+    url: /tracing/configure_data_security/
     parent: data_security
     weight: 2
   - name: Log Management
@@ -4844,7 +4849,7 @@ api:
       operationids:
         - GetLogsIndex
       unstable: []
-      order: 3
+      order: 2
   - name: Create an index
     url: '#create-an-index'
     identifier: logs-indexes-create-an-index
@@ -4856,7 +4861,7 @@ api:
       operationids:
         - CreateLogsIndex
       unstable: []
-      order: 2
+      order: 3
   - name: Get all indexes
     url: '#get-all-indexes'
     identifier: logs-indexes-get-all-indexes
