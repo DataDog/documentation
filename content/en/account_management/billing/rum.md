@@ -41,7 +41,7 @@ Yes. Datadog uses cookies to stitch together the various steps of your users int
 
 ## My Usage page shows RUM sessions billed under the Browser RUM & Session Replay Plan, but I have not configured capturing session recordings for my application.
 
-The **Browser RUM & Session Replay** Plan unlocks session recordings (replays)
+The **Browser RUM & Session Replay** Plan unlocks session recordings (replays).
 
 - If you are collecting replays, you are billed for the sessions under the Replay Plan.
 
