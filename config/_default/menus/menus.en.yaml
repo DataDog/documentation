@@ -3342,6 +3342,12 @@ main:
     parent: ndm
     identifier: ndm_guide
     weight: 307
+  - name: Universal Service Monitoring
+    url: universal_service_monitoring/
+    pre: world
+    identifier: usm_parent
+    parent: infrastructure_heading
+    weight: 230000
   - name: Developers
     url: developers/
     pre: dev-code
