@@ -58,7 +58,7 @@ Agent integrations are bi-directional; they pull data from, and push data into D
 Integrations send the following types of data to Datadog:
 
 - [Metrics][5]
-- [Logs][6]
+- [Logs & Log Pipelines][6]
 - [Events][7]
 - [Service Checks][8]
 - [Traces][9]
@@ -81,7 +81,7 @@ REST API integrations must be bi-directional, meaning that the integration shoul
 REST API Integrations send the following types of data to Datadog:
 
 - [Metrics][5]
-- [Logs][6]
+- [Logs & Log Pipelines][6]
 - [Events][7]
 - [Service Checks][8]
 - [Traces][9]

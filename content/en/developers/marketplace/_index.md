@@ -69,7 +69,7 @@ Professional services
 
 ### Review the example pull request
 
-While the process for building an integration is identical in the [`integrations-extras`][12] and [`marketplace`][13] repositories, a Marketplace offering requires additional files and information such as pricing plans.
+While the process for building an integration is identical for the Integrations page through the [`integrations-extras`][12] repository and the Marketplace page through the [`marketplace`][13] repository, a Marketplace offering requires additional files and information such as pricing plans.
 
 ### Request access to Marketplace
 
