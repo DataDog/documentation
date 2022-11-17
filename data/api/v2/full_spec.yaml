@@ -1203,6 +1203,10 @@ components:
       - max
       - avg
       - median
+      - latest
+      - earliest
+      - most_frequent
+      - delta
       example: pc90
       type: string
       x-enum-varnames:
@@ -1218,6 +1222,10 @@ components:
       - MAX
       - AVG
       - MEDIAN
+      - LATEST
+      - EARLIEST
+      - MOST_FREQUENT
+      - DELTA
     CIAppCompute:
       description: A compute rule to compute metrics or timeseries.
       properties:
