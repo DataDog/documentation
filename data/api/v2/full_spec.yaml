@@ -804,8 +804,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'Timezone code. Can be specified as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -1505,8 +1505,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -2751,7 +2751,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified as an offset, for example: `UTC+03:00`.'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -5289,8 +5290,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -7326,8 +7327,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
