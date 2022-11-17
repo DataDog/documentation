@@ -156,7 +156,7 @@ The `duration` metric can be used to identify pipeline and test performance regr
 {{< img src="ci/regression_monitor.png" alt="CI pipeline regression monitor" style="width:40%;">}}
 
 ### Track new flaky tests
-Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by Test Full Name so you don’t get alerted on the same new flaky test more than once.
+Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
 
 {{< img src="ci/flaky_test_monitor.png" alt="CI flaky test monitor" style="width:40%;">}}
 
