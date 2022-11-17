@@ -71,7 +71,7 @@ Each check tagged with a distinct combination of tags is considered to be a dist
 
 For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
 
-Set up a cluster alert:
+To set up a cluster alert:
 
 1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
 
@@ -97,7 +97,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [3]: /developers/dogstatsd/
 [4]: /api/v1/service-checks/
 [5]: /developers/service_checks/#overview
-[6]: https://app.datadoghq.com/monitors#create/custom
+[6]: https://app.datadoghq.com/monitors/create/custom
 [7]: /monitors/create/configuration/#advanced-alert-conditions
 [8]: /monitors/create/configuration/#no-data
 [9]: /monitors/create/configuration/#auto-resolve
