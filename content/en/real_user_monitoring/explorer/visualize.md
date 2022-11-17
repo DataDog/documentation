@@ -32,6 +32,8 @@ The RUM events table configuration is stored with additional elements of your tr
 
 The [List Widget on dashboards](https://docs.datadoghq.com/dashboards/widgets/list/) allows you to view individual events for a given data source, including RUM data. You can export sessions to the list widget directly from the RUM explorer or build queries from scratch on any dashboard.
 
+In addition to dashboards, the list widget can be used in Notebooks as well, allowing you to add RUM events as part of reports and investigations. 
+
 ## Timeseries
 
 Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
