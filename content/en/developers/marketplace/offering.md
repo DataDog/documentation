@@ -92,11 +92,11 @@ A Datadog API key is required to submit data to a Datadog API endpoint, and an a
 
 ### Datadog Apps
 
-[Datadog Apps][16] are custom dashboard widgets that are developed in the [Datadog Developer Platform][17]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#saas-license-or-professional-service-offerings) on the **Integrations** or **Marketplace** page.
+[Datadog Apps][16] are custom dashboard widgets that are developed in the [Datadog Developer Platform][17]. Once your Datadog App is ready to publish, you need to create an [informational tile-only listing](#saas-license-or-professional-service-offerings) on the Integrations or Marketplace page.
 
 ### SaaS license or professional service offerings
 
-If you are developing an offering that does not use the Datadog Agent (such as a Datadog App, SaaS license, professional service, or an API integration), you only need to create an informational tile listing. These tile-only listings require Datadog users to install and configure the integration outside of Datadog, and listings for SaaS licenses and professional services do not collect any data.
+To list a SaaS license or professional service offering in the Marketplace, you only need to create an informational tile-only listing.  
 
 ## Set up a directory and clone the Marketplace repository
 
@@ -154,7 +154,7 @@ Run the `ddev` command to generate a skeleton of the folders and files needed fo
 
 ### Create an informational tile only listing
 
-For standalone SaaS licenses, Datadog Apps, professional services, and Datadog REST API integrations, use the Datadog Development Toolkit to create scaffolding for an informational tile-only listing.
+For Datadog Apps, Datadog REST API integrations, professional services, and standalone SaaS licenses, use the Datadog Development Toolkit to create scaffolding for an informational tile-only listing.
 
 To create the informational tile-only listing's scaffolding:
 
@@ -184,7 +184,8 @@ Once you have created a `README.md` file, add the following sections as H2s (`##
 | Header Name | Header |
 |-------------|--------|
 | Overview | Write a description under an `## Overview` header that describes the value your offering provides to users and benefits to purchasing and installing the integration in the Datadog Marketplace (for example, out-of-the-box dashboards, replays of user sessions, logs, alerts, and more). <br><br>This information is displayed in the **Overview** tab on the integration tile. |
-| Setup | Include all the steps to setting up your Marketplace integration that includes information divided into H3 headings (`###`). Standard topics include:<br><br>- Installing the integration using the in-app integration tile. <br>- Configuring the integration with the appropriate roles and permissions in your Datadog organization.<br>- Accessing out-of-the-box Datadog features that users who purchased and installed the integration can access (such as metrics, events, monitors, logs, dashboards, and more).<br>- Uninstalling the integration using the in-app integration tile. |
+| Setup | Include all the steps to setting up your Marketplace integration that includes information divided into H3 headings (`###`). Standard topics include:<br><br>- Installing the integration using the in-app integration tile. <br>- Configuring the integration with the appropriate roles and permissions in your Datadog organization.<br>- Accessing out-of-the-box Datadog features that users who purchased and installed the integration can access (such as metrics, events, monitors, logs, dashboards, and more).|
+| Uninstallation | Include all the steps to uninstalling your Marketplace integration. This information is displayed in the **Configure** tab on the integration tile.|
 | Data Collected  | Specify the types of data collected by your Marketplace integration that includes information about out-of-the-box metrics, events, or service checks. <br><br>You can include additional types of data collected such as logs, monitors, dashboards, and more. If your Marketplace integration does not provide any of these, you do not need to add a Data Collected section. |
 | Support | Provide contact information that includes an email to your Support team, a phone number to your company, a link to your company's documentation or blog post, and more help information in a bulleted list format. |
 
