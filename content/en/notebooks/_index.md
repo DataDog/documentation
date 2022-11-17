@@ -94,7 +94,7 @@ To open a cell for editing, mouse over it and use `Cmd + Click` / `Ctrl + Click`
 
 To insert cells, use the **+** button that appears to the left of the cell. To share, clone, or delete cells, use the action tray that appears above the cell on hover. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data.
 
-{{< img src="notebooks/export-to-dash.png" alt="Export Notebook graph to Dashboard"  style="width:90%;">}}
+{{< img src="notebooks/export-to-dash.png" alt="Export Notebook graph to Dashboard" style="width:90%;">}}
 
 ### Full screen
 
@@ -153,7 +153,11 @@ Notebooks can be set to automatically snapshot graphs that might expire. Enable 
 
 To share a version of your notebook with snapshots, click **View graph snapshots** in the notebook header and copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
 
-## Sharing Notebooks
+### Template variables
+
+Notebooks support template variables, dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][11].
+
+## Sharing notebooks
 
 Use the **Share** menu in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
 
@@ -163,7 +167,7 @@ To copy a notebook into a document editor, click **Copy formatted contents**. Pa
 
 {{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Google Docs" style="width:80%;">}}
 
-### Import or Export Notebook JSON
+### Import or export notebook JSON
 
 Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
 
@@ -181,3 +185,4 @@ Use **Export Notebook JSON** to download a JSON file containing the definition o
 [8]: /dashboards/widgets/query_value/
 [9]: https://daringfireball.net/projects/markdown/
 [10]: /dashboards/querying/#graphing-editor
+[11]: /dashboards/template_variables/
