@@ -15612,6 +15612,12 @@ components:
           format: double
           nullable: true
           type: number
+        gcp_host_count:
+          description: The number of Cloud Security Posture Management GCP hosts during
+            a given hour.
+          format: double
+          nullable: true
+          type: number
         host_count:
           description: The total number of Cloud Security Posture Management hosts
             during a given hour.
@@ -16687,6 +16693,11 @@ components:
             containers over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cspm_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Posture Management
             hosts over all hours in the current date for all organizations.
@@ -17041,6 +17052,11 @@ components:
         cspm_container_hwm:
           description: Shows the high-water mark of Cloud Security Posture Management
             containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_host_top99p:
@@ -17406,6 +17422,11 @@ components:
           description: Shows the sum of the the high-water marks of Cloud Security
             Posture Management containers over all hours in the current months for
             all organizations.
+          format: int64
+          type: integer
+        cspm_gcp_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Posture Management
+            GCP hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_host_top99p_sum:
