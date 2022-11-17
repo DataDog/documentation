@@ -112,7 +112,7 @@ Once you've decided on an offering, set up a directory:
 3. Once you have been granted access to the Marketplace repository, create the `dd` directory and clone the `marketplace` repo:
    {{< code-block lang="shell" >}}
    git clone git@github.com:DataDog/marketplace.git
-   {{< /code-block >}}.
+   {{< /code-block >}}
 
 ## Install and configure the Datadog development toolkit
 
@@ -138,19 +138,15 @@ Install and configure the development toolkit:
    {{< /code-block >}}
 
    You can exit the virtual environment at any time by running `deactivate`.
-3. Ensure the Python wheel package is installed and up-to-date:
-   {{< code-block lang="shell" >}}
-   pip3 install wheel
-   {{< /code-block >}}
 
-4. Install the [Developer Toolkit][10]:
+3. Install the [Developer Toolkit][10]:
    {{< code-block lang="shell" >}}
    pip3 install "datadog-checks-dev[cli]"
    {{< /code-block >}}
 
    If you are using the Z Shell, you may need to use escaped characters by running `pip3 install datadog-checks-dev\[cli\]`.
 
-6. Set `marketplace` as the default working repository:
+4. Set `marketplace` as the default working repository:
    {{< code-block lang="shell" >}}
    ddev config set marketplace $HOME/dd/marketplace
    ddev config set repo marketplace
