@@ -1,12 +1,42 @@
-{{- if eq hugo.Environment "development" -}}
+{{- if ne hugo.Environment "development" -}}
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
 
-    
+    {{ range (where .Site.AllPages "Kind" "!=" "home") }}
+        {{ $page := . }}
+        {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (ne $page.Params.beta true) (not $page.Draft) (not (isset .Params "external_redirect")) }}
+            {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
+            {{ $object_id := md5 $rel_path }}
+            {{ $title := $page.Params.integration_title | default $page.Title }}
+            {{ $content := $page.Plain | truncate 10000 }}
+            {{ $tags := $page.Params.algolia.tags | default (slice "docs") }}
+            {{ $category := $page.Params.algolia.category | default "Documentation" }}
+            {{ $subcategory := $page.Params.algolia.subcategory | default $page.Title }}
+            {{ $rank := $page.Params.algolia.rank | default 50 }}
 
-    {{- /* api pages are controlled by layout and not markdown, so we need to index them */ -}}
-    {{ partial "algolia/api-pages-index.json" (dict "context" $hugo_context) }}
+            {{- /* record for each individual section (split by h2 header) */ -}}
+            {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "tags" $tags "categoroy" $category "subcategory" $subcategory "rank" $rank) }}
+
+            {{- /* Full page record */ -}}
+            {{- $.Scratch.Add "algoliaindex" (
+                dict "objectID" $object_id 
+                "title" $title
+                "content" $content
+                "type" $page.Type
+                "relpermalink" $page.RelPermalink
+                "full_url" $page.Permalink
+                "language" $page.Language.Lang
+                "tags" $tags
+                "category" $category
+                "subcategory" $subcategory
+                "rank" $rank
+            ) -}}
+        {{ end }}
+    {{ end }}
+
+    {{- /* api pages are controlled by layout and not markdown, so we need to index them separately */ -}}
+    {{ partial "algolia/api-pages-full-index.json" (dict "context" $hugo_context) }}
 
     {{- /* Outputs final JSON object, copied to public/ folder. */ -}}
     {{- $.Scratch.Get "algoliaindex" | jsonify -}}

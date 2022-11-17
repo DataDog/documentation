@@ -4,16 +4,11 @@
 {{ $api_v2_data := index $hugo_context.Site.Data.api.v2 "full_spec_deref" }}
 
 {{ range (where $hugo_context.Site.AllPages "Type" "=" "api") }}
-    {{ if and (in .RelPermalink "latest/logs/") (eq .Language.Lang "en") }}
-        {{/* Hugo page-level variables */}}
+    {{ if and (in .RelPermalink "latest/") }}
+        {{ $page := . }}
         {{ $title := .Title }}
         {{ $lang := .Language.Lang }}
-        {{ $type := .Type }}
-        {{ $tags := .Params.algolia.tags }}
-        {{ $rank := .Params.algolia.rank }}
-        {{ $permalink := .Permalink }}
-        {{ $rel_permalink := .RelPermalink }}
-        {{ $duplicates := slice }} {{/* Keep track of actions that appear in both v1 and v2 */}}
+        {{ $hugo_context.Scratch.Add "duplicate_operation_ids" slice }}
 
         {{/* API spec is not translated, so we need english title to access API action data properly */}}
         {{ if ne $lang "en" }}
@@ -36,74 +31,47 @@
         {{ end }}
 
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
-        {{ range $endpoint_path, $endpoint_action := $api_v1_data.paths }}
-            {{ range $endpoint_action }}
+        {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
+            {{ range $endpoint_data }}
                 {{ if in .tags $title }}
 
-                    {{/* Get action data */}}
-                    {{ $operationId := .operationId }}
-                    {{ $action_data := index $api_v1_translate_actions $operationId }}
-                    {{ $section_header := $action_data.summary }}
-                    {{ $section_content := $action_data.description }}
-                    {{ $full_url := print $permalink "#" ($section_header | anchorize) }}
-
-                    {{/* API actions can have both v1 and v2 endpoints, which needs to be reflected in search results with an updated link */}}
-                    {{ $v2_version := index $api_v2_translate_actions $operationId }}
-                    {{ $v2_exists := ne $v2_version nil }}
-
-                    {{ if $v2_exists }}
-                        {{ $duplicates = $duplicates | append $operationId }}
-                        {{ $full_url = print $full_url "-v1" }}
-                    {{ end }}
-
-                    {{
-                        $hugo_context.Scratch.Add "algoliaindex" (
-                            dict "objectID" (md5 $full_url)
-                            "title" $title
-                            "section_header" $section_header
-                            "content" $section_content
-                            "type" $type
-                            "rel_permalink" $rel_permalink
-                            "full_url" $full_url
-                            "language" $lang
-                            "tags" $tags
-                            "rank" $rank
-                        )
+                    {{ 
+                        $params := (dict
+                            "context" $hugo_context 
+                            "page" $page 
+                            "title" $title 
+                            "lang" $lang 
+                            "api_version" "v1" 
+                            "endpoint_data" . 
+                            "api_v1_translate_actions" $api_v1_translate_actions
+                            "api_v2_translate_actions" $api_v2_translate_actions
+                        ) 
                     }}
+
+                    {{ partial "algolia/api-page-index.json" $params }}
                 {{ end }}
             {{ end }}
         {{ end }}
 
         {{/* Get all v2 api actions for this page by matching title with spec data's tag property */}}
-        {{ range $endpoint_path, $endpoint_action := $api_v2_data.paths }}
-            {{ range $endpoint_action }}
+        {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
+            {{ range $endpoint_data }}
                 {{ if in .tags $title }}
 
-                    {{/* Get action data */}}
-                    {{ $operationId := .operationId }}
-                    {{ $action_data := index $api_v2_translate_actions $operationId }}
-                    {{ $section_header := $action_data.summary }}
-                    {{ $section_content := $action_data.description }}
-                    {{ $full_url := print $permalink "#" ($section_header | anchorize) }}
-                    
-                    {{ if in $duplicates $operationId }}
-                        {{ $full_url = print $full_url "-v2" }}
-                    {{ end }}
-
-                    {{
-                        $hugo_context.Scratch.Add "algoliaindex" (
-                            dict "objectID" (md5 $full_url)
-                            "title" $title
-                            "section_header" $section_header
-                            "content" $section_content
-                            "type" $type
-                            "rel_permalink" $rel_permalink
-                            "full_url" $full_url
-                            "language" $lang
-                            "tags" $tags
-                            "rank" $rank
-                        )
+                    {{ 
+                        $params := (dict 
+                            "context" $hugo_context 
+                            "page" $page 
+                            "title" $title 
+                            "lang" $lang 
+                            "api_version" "v2" 
+                            "endpoint_data" . 
+                            "api_v1_translate_actions" $api_v1_translate_actions
+                            "api_v2_translate_actions" $api_v2_translate_actions
+                        ) 
                     }}
+
+                    {{ partial "algolia/api-page-index.json" $params }}
                 {{ end }}
             {{ end }}
         {{ end }}

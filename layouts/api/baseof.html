@@ -32,29 +32,6 @@ data-spy="scroll" data-target="#navbar-example2" data-offset="5"
   class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
 
   {{ partial "header/header.html" . }}
-  {{ $api_v2_data := index .Site.Data.api.v2 "full_spec_deref" }}
-  {{ $title := "CI Visibility Tests" }}
-
-  {{ range $endpoint, $endpoint_data := $api_v2_data.paths }}
-    {{ range $endpoint_data }}
-      {{ if in .tags $title }}
-        <h4>Title: {{ $title }}</h4>
-        <h4>Section Header: {{ .summary }}</h4>
-        <h4>Content: {{ .description }}</h4>
-        <h4>Full URL: {{ print "#" (.summary | anchorize) }}</h4>
-      {{ end }}
-    {{ end }}
-  {{ end }}
-
-  {{/* range (where .Site.AllPages "Type" "=" "api") }}
-    {{ if in .RelPermalink "/latest" }}
-      {{ $title := .Title }}
-      {{ $lang := .Language.Lang }}
-      {{ $tags := .Params.tags }}
-      {{ $rank := .Params.rank }}
-      {{ $rel_permalink := .RelPermalink }}
-    {{ end }}
-  {{ end */}}
 
   <div class="container container__content">
     <div class="row">
