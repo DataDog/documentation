@@ -57,7 +57,7 @@ $ docker run -e DD_APPSEC_ENABLED=true [...]
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your container Dockerfile:
+Add the following environment variable value to your application container's Dockerfile:
 
 ```shell
 ENV DD_APPSEC_ENABLED=true
@@ -66,7 +66,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your application's deployment configuration file for APM and add the ASM environment variable:
 
 ```yaml
 spec:
@@ -83,7 +83,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your application's ECS task definition JSON file, by adding this in the environment section:
 
 ```json
 "environment": [
