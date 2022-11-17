@@ -133,7 +133,6 @@ Install and configure the development toolkit:
 
 2. Set up a Python virtual environment:
    {{< code-block lang="shell" >}}
-   cd $HOME/dd/integrations-extras
    python3 -m venv venv
    . venv/bin/activate
    {{< /code-block >}}
