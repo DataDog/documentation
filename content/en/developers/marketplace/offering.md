@@ -269,7 +269,7 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [3]: /developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
 [4]: /developers/dogstatsd/
 [5]: /api/latest/metrics/
-[6]: /api/latest/logs/
+[6]: /logs/faq/partner_log_integration/
 [7]: /api/latest/events/
 [8]: /api/latest/service-checks/
 [9]: /tracing/guide/send_traces_to_agent_by_api/
