@@ -492,7 +492,7 @@
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
-      branch: main
+      branch: rtrieu/docs-4436-update-browser-premium
       globs:
       - 'packages/rum/README.md'
       options:
