@@ -104,15 +104,11 @@ Once you've decided on an offering, set up a directory:
 
 1. Request access to the [Marketplace repository][18] by following the instructions in the [Marketplace documentation][19].
 2. Create a `dd` directory:
-   {{< code-block lang="shell" >}}
-   mkdir $HOME/dd
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}mkdir $HOME/dd{{< /code-block >}}
 
    The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
 3. Once you have been granted access to the Marketplace repository, create the `dd` directory and clone the `marketplace` repo:
-   {{< code-block lang="shell" >}}
-   git clone git@github.com:DataDog/marketplace.git
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}git clone git@github.com:DataDog/marketplace.git{{< /code-block >}}
 
 ## Install and configure the Datadog development toolkit
 
@@ -127,37 +123,30 @@ Before you begin, make sure you meet the following prerequisites:
 Install and configure the development toolkit:
 
 1. Make sure you're inside the `marketplace` directory:
-   {{< code-block lang="shell" >}}
-   cd $HOME/dd/marketplace
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
 
 2. Set up a Python virtual environment:
    {{< code-block lang="shell" >}}
    python3 -m venv venv
-   . venv/bin/activate
-   {{< /code-block >}}
+   . venv/bin/activate{{< /code-block >}}
 
    You can exit the virtual environment at any time by running `deactivate`.
 
 3. Install the [Developer Toolkit][10]:
-   {{< code-block lang="shell" >}}
-   pip3 install "datadog-checks-dev[cli]"
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}pip3 install "datadog-checks-dev[cli]"{{< /code-block >}}
 
    If you are using the Z Shell, you may need to use escaped characters by running `pip3 install datadog-checks-dev\[cli\]`.
 
 4. Set `marketplace` as the default working repository:
    {{< code-block lang="shell" >}}
    ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace
-   {{< /code-block >}}
+   ddev config set repo marketplace{{< /code-block >}}
 
    If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
 
    {{< code-block lang="shell" >}}
    ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace
-   {{< /code-block >}}
+   ddev config set repo marketplace{{< /code-block >}}
 
 ## Populate the integration tile scaffolding
 
@@ -170,25 +159,17 @@ For standalone SaaS licenses, Datadog Apps, professional services, and Datadog R
 To create the informational tile-only listing's scaffolding:
 
 1. Make sure you're inside the `marketplace` directory:
-   {{< code-block lang="shell" >}}
-   cd $HOME/dd/marketplace
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
 2. Run the `ddev` command with the `-t tile` option
-   {{< code-block lang="shell" >}}
-   ddev create -t tile "<Offering Name>"
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}ddev create -t tile "<Offering Name>"{{< /code-block >}}
 
 ### Create a full Agent-based integration
 
 To generate the scaffolding for an Agent-based integration:
 1. Make sure you're inside the `marketplace` directory:
-   {{< code-block lang="shell" >}}
-   cd $HOME/dd/marketplace
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
 2. Run the `ddev` command with the `-t tile` option
-   {{< code-block lang="shell" >}}
-   ddev create "<Offering Name>"
-   {{< /code-block >}}
+   {{< code-block lang="shell" >}}ddev create "<Offering Name>"{{< /code-block >}}
 
 ## Complete the necessary integration asset files
 
