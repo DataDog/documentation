@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-Service check monitors include any service check not reported by one of the [more than {{< translate key="integration_count" >}} integrations][1] included with the Agent. Service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4]. For more information, see the [Service Check Overview][5]
+Service check monitors include any service check not reported by one of the [more than {{< translate key="integration_count" >}} integrations][1] included with the Agent. Service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4]. For more information, see the [Service Check Overview][5].
 
 ## Monitor creation
 
-To create a [service check monitor][6] in Datadog, use the main navigation: *Monitors --> New Monitor --> Service Check*.
+To create a [service check monitor][6] in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Service Check**.
 
 ### Pick a service check
 
