@@ -59,7 +59,7 @@ These must be passed to both the core Agent and trace Agent processes. If runnin
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
-<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The use of the `experimental:` configuration listed below for configuring OTLP receiving in `datadog.yaml` and the corresponding environment variables `DD_OTLP_HTTP_PORT` and `DD_OTLP_GRPC_PORT` is now deprecated and will be removed in Agent version `7.37.0`.</div>
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The use of the <code>experimental:</code> configuration listed below for configuring OTLP receiving in <code>datadog.yaml</code> and the corresponding environment variables <code>DD_OTLP_HTTP_PORT</code> and <code>DD_OTLP_GRPC_PORT</code> is now deprecated and will be removed in Agent version <code>7.37.0</code>.</div>
 
 ```yaml
 experimental:
@@ -217,7 +217,7 @@ There are many other environment variables and settings supported in the Datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Check the documentation of your OTLP Library. Some of them must send traces to `/v1/traces` instead of the `/` root path.</div>
+<div class="alert alert-info">Check the documentation of your OTLP Library. Some of them must send traces to <code>/v1/traces</code> instead of the <code>/</code> root path.</div>
 
 
 ## Further Reading

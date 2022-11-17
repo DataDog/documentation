@@ -1,8 +1,10 @@
 ---
 title: Send Metrics from OpenTelemetry to Datadog
 kind: documentation
+aliases:
+- /metrics/open_telemetry/
 further_reading:
-    - link: 'tracing/trace_collection/open_standards/'
+    - link: '/opentelemetry/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
     - link: 'https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/'

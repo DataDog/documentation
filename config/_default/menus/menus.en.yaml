@@ -1087,7 +1087,7 @@ main:
     identifier: dev_tools_metrics_api
     weight: 705
   - name: Send OpenTelemetry Metrics to Datadog
-    url: metrics/open_telemetry
+    url: opentelemetry/otel_metrics/
     parent: metrics_top_level
     identifier: metrics_otel
     weight: 8
@@ -1571,7 +1571,7 @@ main:
     identifier: tracing_custom_inst_dotnet
     weight: 108
   - name: Instrumenting with OpenStandards
-    url: tracing/trace_collection/open_standards/
+    url: opentelemetry/otel_tracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
     weight: 105
@@ -2331,7 +2331,7 @@ main:
     identifier: log_collection_ruby
     weight: 111
   - name: OpenTelemetry
-    url: logs/log_collection/opentelemetry/
+    url: opentelemetry/otel_logs/
     parent: log_collection
     identifier: log_collection_opentelemetry
     weight: 112

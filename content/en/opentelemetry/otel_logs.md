@@ -1,6 +1,8 @@
 ---
 title: Send Logs from OpenTelemetry to Datadog
 kind: documentation
+aliases:
+- /logs/log_collection/opentelemetry/
 ---
 
 <div class="alert alert-warning"><a href="https://opentelemetry.io/docs/reference/specification/logs/">OpenTelemetry logging</a> and Datadog Exporter's feature for sending logs to Datadog are in alpha.</div>

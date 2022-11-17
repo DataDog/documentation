@@ -35,9 +35,11 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 For additional information about sending OpenTelemetry data to Datadog, configuring it, and using Datadog's observability platform to gain actionable insights into your service performance, see:
 
-- [Trace collection through open standards][5]
-- [Metrics collection through OpenTelemetry][6]
-- [Logs collection through OpenTelemetry][7]
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/otel_tracing/" >}}Trace collection through OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_metrics/" >}}Metrics collection through OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_logs/" >}}Logs collection through OpenTelemetry{{< /nextlink >}}
+{{< /whatsnext >}}
 
 
 
@@ -49,6 +51,3 @@ For additional information about sending OpenTelemetry data to Datadog, configur
 [2]: https://www.cncf.io/
 [3]: /opentelemetry/otel_collector_datadog_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
-[5]: /tracing/trace_collection/open_standards/
-[6]: /metrics/open_telemetry/
-[7]: /logs/log_collection/opentelemetry/
