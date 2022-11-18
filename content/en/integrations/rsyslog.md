@@ -81,7 +81,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
    
-   1. Add the following two lines to your Rsyslog configuration file:
+   1. Add the following lines to your Rsyslog configuration file:
 
       ```conf
       $ModLoad immark
@@ -95,7 +95,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       ```
 
 {{< site-region region="us">}}
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo apt-get install rsyslog-gnutls ca-certificates
@@ -116,7 +116,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo apt-get install rsyslog-gnutls ca-certificates
@@ -202,7 +202,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       ```
 
 {{< site-region region="us">}}
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo yum install rsyslog-gnutls ca-certificates
@@ -311,7 +311,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       ```
 
 {{< site-region region="us">}}
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo dnf install rsyslog-gnutls ca-certificates
@@ -333,7 +333,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 {{< site-region region="eu" >}}
 
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
    1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo dnf install rsyslog-gnutls ca-certificates
@@ -419,7 +419,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
    
-   1. Add the following two lines to your Rsyslog configuration:
+   1. Add the following lines to your Rsyslog configuration:
 
       ```conf
       $ModLoad immark
@@ -461,7 +461,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 {{< site-region region="eu" >}}
 
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
 
@@ -523,7 +523,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     sudo systemctl restart rsyslog
     ```
 
-5. Associate your logs with the host metrics and tags:
+5. Associate your logs with the host metrics and tags.
    
    To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
 
@@ -562,7 +562,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       ```
 
 {{< site-region region="us">}}
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
 
@@ -589,7 +589,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
 
@@ -651,7 +651,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     sudo systemctl restart rsyslog
     ```
 
-5. Associate your logs with the host metrics and tags:
+5. Associate your logs with the host metrics and tags.
    
    To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
 
@@ -690,7 +690,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
       ```
 
 {{< site-region region="us">}}
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
 
@@ -718,7 +718,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 {{< site-region region="eu" >}}
 
-8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
 
     1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
 
