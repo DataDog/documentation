@@ -97,9 +97,9 @@ Create custom tags so you can break down custom log usage metrics into categorie
 
 Datadog recommends using the following method to configure the `retention_period` tag:
 
-1. [Create a new `index_name` attribute](#create-a-new-indexname-attribute).
-2. [Create a new `retention_period` attribute](#create-a-retentionperiod-tag).
-3. [Create a Remapper to convert the `retention_period` attribute to a tag](#create-a-remapper-to-convert-the-retentionperiod-attribute-to-a-tag).
+1. [Create a new `index_name` attribute](#create-a-new-index_name-attribute).
+2. [Create a new `retention_period` attribute](#create-a-new-retention_period-attribute).
+3. [Create a Remapper to convert the `retention_period` attribute to a tag](#create-a-remapper-to-convert-the-retention_period-attribute-to-a-tag).
 
 #### Create a new `index_name` attribute
 
