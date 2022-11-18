@@ -79,10 +79,10 @@ After setting these environment variables, run your tests as you normally do:
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
-**Important**: by default, `jest` fails if there are no tests to run. It may happen that intelligent test runner skips every test. To prevent `jest` from failing, pass [`--passWithNoTests`][5] to `jest`.
+**Important**:  It is possible for Intelligent Test Runner to skip every test. By default, `jest` fails if there are no tests to run. To prevent `jest` from failing, pass [`--passWithNoTests`][5] to `jest`.
 
 #### UI activation
-In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
 
 #### Compatibility
 
@@ -146,7 +146,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 #### UI activation
 
-In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
 
 ### Swift
 
@@ -174,7 +174,7 @@ The following environment variables must also be set:
 
 #### UI activation
 
-In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][6] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
 
 ## Setup CI Job
 
