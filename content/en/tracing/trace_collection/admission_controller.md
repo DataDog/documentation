@@ -123,16 +123,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    tags.datadoghq.com/env: "prod"
-    tags.datadoghq.com/service: "my-service"
-    tags.datadoghq.com/version: "1.1"
+    tags.datadoghq.com/env: "prod" # Unified service tag - Deployment Env tag
+    tags.datadoghq.com/service: "my-service" # Unified service tag - Deployment Service tag
+    tags.datadoghq.com/version: "1.1" # Unified service tag - Deployment Version tag
 ...
 template:
   metadata:
     labels:
-        tags.datadoghq.com/env: "prod"
-        tags.datadoghq.com/service: "my-service"
-        tags.datadoghq.com/version: "1.1"
+        tags.datadoghq.com/env: "prod" # Unified service tag - Pod Env tag
+        tags.datadoghq.com/service: "my-service" # Unified service tag - Pod Service tag
+        tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
     annotations:
         admission.datadoghq.com/java-lib.version: "v0.114.0" # Enable java instrumentation (version 0.114.0) injection
