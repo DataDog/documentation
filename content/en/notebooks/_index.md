@@ -155,9 +155,9 @@ To share a version of your notebook with snapshots, click **View graph snapshots
 
 ### Template variables
 
-Notebooks support template variables, dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][11].
+Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][11].
 
-## Sharing notebooks
+## Share notebooks
 
 Use the **Share** menu in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
 

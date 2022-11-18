@@ -62,25 +62,27 @@ On log, APM, and RUM widgets, you can use wildcards in the middle of a value (fo
 
 #### Create
 
-To the left of the template variables on a dashboard, there is a dropdown listed as *Saved Views*. When you make a change to a template variable value, the value is not automatically saved to a view.
+Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
 
-To save the current values of the template variables in a view, click on the *Saved Views* dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables.
+To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. Enter a unique name for the view and click **Save**. 
+
+Your saved view appears in the dropdown menu. Click on the view to retrieve your previously saved template variable values.
 
 #### Delete
 
-To delete a view, click on the saved views dropdown and choose *Manage views...*. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
+To delete a view, click on the saved views dropdown and choose **Manage views...**. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
 
 #### Modify
 
-To modify the *Default view*, click on the pencil icon and update the template variable values. Then click *Done* to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
+To modify the **Default view**, click on the pencil icon and update the template variable values. Then click **Done** to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
 
-## Use
+## Usage
 
 Template variables are used in widgets and event overlays.
 
 ### Widgets
 
-When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you configure the template variable `environment`, the option `$environment` is available as a dynamic variable in the widget. 
+When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you configure the `environment` template variable, the `$environment` option is available as a dynamic variable in the widget. 
 
 {{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="Template variable can be set dynamically in widgets" style="width:100%;">}}
 
@@ -92,7 +94,7 @@ To include just the value in the query, append it with the syntax `$<TEMPLATE_VA
 
 #### Associated template variables
 
-When selecting a template variable value, associated values are displayed at the top of the selector. Associated values are calculated from the other template variable values selected on the page, and seamlessly identify the related values without any configuration.
+When selecting a template variable value, associated values are displayed at the top of the selector. Associated values are calculated from other template variable values selected on the page, and seamlessly identify the related values without any configuration.
 
 #### Text
 
