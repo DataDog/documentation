@@ -30,7 +30,7 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 ### Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.40.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 6.40/7.40.
 
 Supported platforms
 : Linux kernel 4.14 and greater<br/>
@@ -47,7 +47,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Datadog Agent 7.40 or higher is installed alongside your service. Installing a tracing library is _not_ required.
+- Datadog Agent 6.40/7.40 or higher is installed alongside your service. Installing a tracing library is _not_ required.
 - [Unified Service Tagging][1] tag for `env` has been applied to your deployment. The `service` and `version` tags are optional.
 
 **Note**: For non-container single-tenant setups where one service runs on a host, you must apply Unified Service Tags to the host itself. USM does not currently support monitoring multiple services on a single host without containers, nor on a single host where Unified Service Tags are applied using environment variables. USM does not work for monitoring serverless code.
@@ -277,7 +277,7 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 7.40 or above) with the network driver component enabled. During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
+1. Install the [Datadog Agent][1] (version 6.40/7.40 or above) with the network driver component enabled. During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
