@@ -81,7 +81,7 @@ Use a [Category Processor][6] to create a new `team` attribute for your logs.
 
 ## Configure custom tags
 
-Create custom tags so you can break down custom log usage metrics into categories that are relevant to your use case. For this example, create the following tags:
+Create custom tags so you can organize custom log usage metrics into categories that are relevant to your use case. For this example, create the following tags:
 
 - `retention_period` for indicating the number of days for which logs are retained in Datadog indexes.
 - `online_archives` for indicating whether logs have been routed to Online Archives.
