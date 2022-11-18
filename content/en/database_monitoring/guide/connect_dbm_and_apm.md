@@ -15,7 +15,7 @@ This guide assumes that you have configured [Datadog Monitoring][1] and are usin
 
 Supported tracers
 : [dd-trace-go][3] >= 1.42.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
-: [dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)
+[dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)
 
 Supported databases
 : postgres, mysql
