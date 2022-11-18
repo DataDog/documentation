@@ -68,7 +68,7 @@ Use a [Category Processor][6] to create a new `team` attribute for your logs.
 
 #### Create a remapper to convert the `team` attribute to a tag
 
-1. Navigate to the pipeline, click **Add processor**.
+1. Navigate to the pipeline and click **Add processor**.
 2. Select **Remapper** for the processor type.
 3. Enter a name for the processor. For example, "Convert team attribute to tag".
 4. In the **Set attribute(s) or tag key to remap** section, select **Attribute(s)** and enter `team`.
