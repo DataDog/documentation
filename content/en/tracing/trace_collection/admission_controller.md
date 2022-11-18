@@ -152,6 +152,8 @@ If the injection was sucessfull you should see an init container called datadog-
 
 {{< img src="tracing/trace_collection/datadog-lib-init-container.jpg" alt="datadog-lib-init">}}
 
+A `kubectl describe pod <my-pod>` command should also show the datadog-lib-init init container.
+
 The instrumentation will also start sending telemetry to Datadog (such as traces to [APM][8]).
 
 ## Do I need to generate a new application image to instrument it with Datadog?
