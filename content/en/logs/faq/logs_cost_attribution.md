@@ -38,7 +38,7 @@ Create a new log pipeline that filters to logs for which you want to attribute c
 
 Leave the new pipeline at the end of the list of pipelines. This lets the logs go through the other pipelines so that those tags and attributes are created first.
 
-Add all processors created for this cost attribution example to this new pipeline.
+Add all processors you create for this cost attribution example to the new pipeline.
 
 ### Add a `team` tag
 
