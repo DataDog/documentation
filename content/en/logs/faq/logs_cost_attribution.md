@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Datadog provides log usage information through the [Log Estimated Usage dashboard][1], the [Plan and Usage][2] section in the app, and the available [logs usage metrics][3]. However, there might be situations where you want visibility into specific cost attribution data, such as for specific teams.
+Datadog provides log usage information through the [Log Estimated Usage dashboard][1], the [Plan and Usage][2] section in the app, and the available [logs usage metrics][3]. However, there might be situations where you want visibility into more granular cost attribution data, such as for specific teams.
 
 This guide walks you through the steps on how to see your log cost attribution for different teams. You can also use this process for other attributes, such as departments, projects, products, regions, and so on.
 
@@ -32,7 +32,7 @@ The dashboard gives you an overview of your log usage and costs broken down by t
 Create a new log pipeline that filters to logs for which you want to attribute costs. For this example, filter to the subset of logs that you want to breakdown by team.
 
 1. Navigate to [Logs Pipelines][4].
-2. Click **Add a new pipeline**
+2. Click **Add a new pipeline**.
 3. Enter the filter for logs you want to attribute costs.
 4. Enter a name for the pipeline. For example, `Cost attribution by team`.
 5. Optionally, add tags and a description.
@@ -46,7 +46,7 @@ Add all processors created for this cost attribution example to this new pipelin
 
 Datadog recommends that you use one of these [tagging methods][5] to add the `team` tag to logs **before ingestion**.
 
-However, if it is necessary to configure the tag during ingestion, follow these steps to create and add a `team` tag.
+However, if you need to configure the tag during ingestion, follow these steps to create and add a `team` tag.
 
 1. [Create a new `team` attribute](#create-a-new-team-attribute).
 2. [Create a remapper to convert the `team` attribute to a tag](#create-a-remapper-to-convert-the-team-attribute-to-a-tag).
@@ -57,15 +57,14 @@ You can use this process to create the attributes you want for breaking down you
 
 Use a [Category Processor][6] to create a new `team` attribute for your logs.
 
-1. Navigate to the pipeline previously created, click **Add processor**.
+1. Navigate to the new pipeline and click **Add processor**.
 2. Select **Category Processor** for the processor type.
 3. Enter a name for the processor. For example, "Create team attribute".
 4. Enter `team` in the **Set target category attribute** field. This creates a `team` attribute.
-5. Add a category for each team. For example, if you want log events that match `service:a` and `env:prod` to have the `team:service_a` tag :
-Then, in the **Populate category** section:  
+5. In the **Populate category** section, add a category for each team. For example, to add the tag `team:service_a` to log events that match `service:a` and `env:prod`:
       a. Enter `service:a` and `env:prod` in the **All events that match** field.  
       b. Enter `service_a` in the **Appear under the value name** field.  
-      c. Click **Add**
+      c. Click **Add**.
 6. Add the other teams as separate categories.
 7.  Click **Create**.
 
@@ -92,11 +91,11 @@ Create custom tags so you can break down custom log usage metrics into categorie
 
 ### Create a `retention_period` tag
 
-<div class="alert alert-warning">Datadog recommends that you set up the <code>retention_period</code> tag even if your indexes all have the same retention period currently. This makes sure that if you start using multiple retention periods, all logs are tagged with its retention period.</div>
+<div class="alert alert-warning">Datadog recommends that you set up the <code>retention_period</code> tag even if your indexes all have the same retention period. This makes sure that if you start using multiple retention periods, all logs are tagged with its retention period.</div>
 
-`retention_period` is the number of days your logs are retained in Datadog indexes. Since indexing is charged based on the number of days that the logs are retained, use the `retention_period` tag to associate each log with its retention period and see cost attribution.
+`retention_period` is the number of days your logs are retained in Datadog indexes. Since indexing billing costs are incurred based on the number of days that the logs are retained, use the `retention_period` tag to associate each log with its retention period to see cost attribution.
 
-Datadog recommends the following way to configure the `retention_period` tag:
+Datadog recommends using the following method to configure the `retention_period` tag:
 
 1. [Create a new `index_name` attribute](#create-a-new-indexname-attribute).
 2. [Create a new `retention_period` attribute](#create-a-retentionperiod-tag).
@@ -106,7 +105,7 @@ Datadog recommends the following way to configure the `retention_period` tag:
 
 Use a [Category Processor][6] to create a new `index_name` attribute for identifying the index to which the logs are routed.
 
-1. Navigate to the pipeline previously created, click **Add processor**.
+1. Navigate to the pipeline previously created and click **Add processor**.
 2. Select **Category Processor** for the processor type.
 3. Enter a name for the processor. For example, "Create index_name attribute".
 4. Enter **index_name** in the **Set target category attribute** field. This creates an `index_name` attribute.
@@ -125,7 +124,7 @@ Then, in the **Populate category** section:
 
 Use a [Category Processor][6] to create a new `retention_period` attribute to associate the index with its retention period.
 
-1. Navigate to the pipeline, click **Add processor**.
+1. Navigate to the pipeline and click **Add processor**.
 2. Select **Category Processor** for the processor type.
 3. Enter a name for the processor. For example, "Create retention_period attribute".
 4. Enter `retention_period` in the **Set target category attribute** field. This creates a `retention_period` attribute.
@@ -140,7 +139,7 @@ Use a [Category Processor][6] to create a new `retention_period` attribute to as
 
 #### Create a remapper to convert the `retention_period` attribute to a tag
 
-1. Navigate to the pipeline, click **Add processor**.
+1. Navigate to the pipeline and click **Add processor**.
 2. Select **Remapper** for the processor type.
 3. Enter a name for the processor. For example, "Convert retention_period attribute to tag".
 4. In the **Set attribute(s) or tag key to remap** section, select **Attribute(s)** and enter `retention_period`.
@@ -153,17 +152,17 @@ Use a [Category Processor][6] to create a new `retention_period` attribute to as
 
 ### Create an `online_archives` tag
 
-<div class="alert alert-warning">Datadog recommends that you set up the <code>online_archives</code> tag even if none of your indexes have online archives enabled currently. This makes sure that if you start using Online Archives, all the relevant logs are tagged with <code>online_archives</code>.</div>
+<div class="alert alert-warning">Datadog recommends that you set up the <code>online_archives</code> tag even if none of your indexes have online archives enabled. This ensures that if you start using Online Archives, the relevant logs are tagged with <code>online_archives</code>.</div>
 
 The `online_archives` tag indicates whether or not your logs have been routed to Online Archives. Since Online Archives are charged differently than standard indexing, use the `online_archives` tag to determine which logs have been routed to Online Archives and see cost attribution.
 
-Datadog recommends the following way to configure the `online_archive` tag:
+Datadog recommends using the following method to configure the `online_archive` tag:
 
 #### Create an `online_archives` attribute
 
 Use a [Category Processor][6] to create a new `online_archives` attribute to indicate whether or not the associated index has Online Archives enabled.
 
-1. Navigate to the pipeline previously created, click **Add processor**.
+1. Navigate to the pipeline previously created and click **Add processor**.
 2. Select **Category Processor** for the processor type.
 3. Enter a name for the processor. For example, "Create online_archives attribute". This creates an `online_archives` attribute.
 4. In the **Populate category** section, add two categories:
@@ -181,7 +180,7 @@ Use a [Category Processor][6] to create a new `online_archives` attribute to ind
 
 #### Create a Remapper to convert the `online_archives` attribute to a tag
 
-1. Navigate to the pipeline, click **Add processor**.
+1. Navigate to the pipeline and click **Add processor**.
 2. Select **Remapper** for the processor type.
 3. Enter a name for the processor. For example, "Convert online_archives attribute to tag".
 4. In the **Set attribute(s) or tag key to remap** section, select **Attribute(s)** and enter `online_archives`.
@@ -190,7 +189,7 @@ Use a [Category Processor][6] to create a new `online_archives` attribute to ind
 7. Enable **Override on conflict**.
 8. Click **Create**.
 
-<div class="alert alert-info"> The order of categories in a Category Processor is important. The attribute is assigned the value of the first category for which the log matches the matching query, with the same logic as the indexes. For this reason, make sure that the matching queries and the order of the index Category Processor are the same as the actual order of the indexes, and that the category `true` is always checked before `false` in the Online Archives Category Processor.<br><br>
+<div class="alert alert-info"> The order of categories in a Category Processor is important. The attribute is assigned the value of the first category for which the log matches the matching query, with the same logic as the indexes. For this reason, be sure that the matching queries and the order of the index Category Processor are the same as the actual order of the indexes, and that the category `true` is always checked before `false` in the Online Archives Category Processor.<br><br>
 If the index configurations are changed, you need to update the processor configuration to reflect the change.</div>
 
 
@@ -231,7 +230,7 @@ When setting up custom metrics, the tags in the `group by` field are the dimensi
 
 See [Generate a log-based metric][9] for instructions on generating the metrics. 
 
-<div class="alert alert-info">It is crucial that you ensure all relevant tags are included in the metric's dimensions because updating a metric's configuration (such as changing the query filters, dimensions, and so on) is not retroactively applied to logs that have already been ingested</div>
+<div class="alert alert-info">It is crucial that you ensure all relevant tags are included in the metric's dimensions because updating a metric's configuration (such as changing the query filters, dimensions, and so on) is not retroactively applied to logs that have already been ingested.</div>
 
 {{< img src="logs/faq/logs_cost_attribution/bytes_injected_metric.png" alt="The new metric form showing logs.estimated.usage.ingested_bytes as the metric name and the group by field with the tags mentioned" style="width:75%" >}}
 
@@ -250,10 +249,10 @@ Datadog recommends that you [create a dashboard][10] with a [table widget][11] f
 
 To create a new dashboard:
 
-1. Navigate to the [Dashboards list][12]
+1. Navigate to the [Dashboards list][12].
 2. Click **New Dashboard** in the upper right.
 3. Enter a dashboard name.
-4. Click **New Dashboard** 
+4. Click **New Dashboard**.
 
 ### Create a widget for Log Ingestion usage
 
@@ -278,7 +277,7 @@ Datadog recommends that you configure the table widget for the Sensitive Data Sc
 1. In the dashboard, click **Add Widgets**. 
 2. Select the **Table** widget.
 3. In the **Metrics** field, select the **bytes** count metric that you generated earlier to count the number of bytes ingested.
-4. In the **from** field, enter `sds:true` to filter for only logs that have been scanned by the Sensitive Data Scanner.
+4. In the **from** field, enter `sds:true` to filter only for logs that have been scanned by the Sensitive Data Scanner.
 5. Select the **sum by** field and add the `team` tag to show the usage in bytes by team. You can also add other tags for your different cost buckets.
 6. Add the following formula to convert usage into costs: `Usage in gigabytes` * `Unit cost for the Sensitive Data Scanner`.  
       **Note**: If your contractual price per gigabyte changes, you need to update the formula manually. 
