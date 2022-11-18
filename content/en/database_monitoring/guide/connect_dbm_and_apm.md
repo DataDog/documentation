@@ -14,7 +14,7 @@ This guide assumes that you have configured [Datadog Monitoring][1] and are usin
 ## Before you begin
 
 Supported tracers
-: [dd-trace-go][3] >= 1.42.0 (support for [database/sql][4] and [sqlx][5] packages)
+: [dd-trace-go][3] >= 1.42.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
 : [dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)
 
 Supported databases
@@ -113,7 +113,7 @@ Enable the database monitoring propagation feature using one of the following me
 1. Env variable:
    `DD_DBM_PROPAGATION_MODE=service`
 
-2. Option `comment_propagation` (default: ENV['DD_DBM_PROPAGATION_MODE']), for [mysql2][9] or [pg][10]:
+2. Option `comment_propagation` (default: `ENV['DD_DBM_PROPAGATION_MODE']`), for [mysql2][2] or [pg][3]:
    ```rb
 	Datadog.configure do |c|
 		c.tracing.instrument :mysql2, comment_propagation: 'service'
@@ -139,6 +139,8 @@ client.query("SELECT 1;")
 ```
 
 [1]: https://github.com/dataDog/dd-trace-rb
+[2]: /tracing/trace_collection/dd_libraries/ruby/#mysql2
+[3]: /tracing/trace_collection/dd_libraries/ruby/#postgres
 
 {{% /tab %}}
 
@@ -153,5 +155,3 @@ client.query("SELECT 1;")
 [6]: https://github.com/dataDog/dd-trace-rb
 [7]: https://github.com/brianmario/mysql2
 [8]: https://github.com/ged/ruby-pg
-[9]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby/#mysql2
-[10]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/ruby/#postgres
