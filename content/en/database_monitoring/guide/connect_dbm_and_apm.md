@@ -127,9 +127,9 @@ require 'mysql2'
 require 'ddtrace'
 
 Datadog.configure do |c|
-  c.service = 'billing-api'
-  c.env = 'production'
-  c.version = '1.3-alpha'
+	c.service = 'billing-api'
+	c.env = 'production'
+	c.version = '1.3-alpha'
 
 	c.tracing.instrument :mysql2, comment_propagation: ENV['DD_DBM_PROPAGATION_MODE']
 end
