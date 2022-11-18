@@ -264,80 +264,11 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
 
-Use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the JSON section of the Overview tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
+In the **Rule message** section, use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. Specifically, use [template variables][2] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications. See the [Notification Variables documentation][1] for more information and examples.
 
-This JSON object is an example of event attributes which may be associated with a security signal:
-
-```json
-{
-  "network": {
-    "client": {
-      "ip": "1.2.3.4"
-    }
-  },
-  "usr": {
-    "id": "user@domain.com"
-  },
-  "evt": {
-    "category": "authentication",
-    "outcome": "success"
-  },
-  "used_mfa": "false"
-}
-
-```
-
-You could use the following in the **Say what’s happening** section:
-
-```
-{{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
-```
-
-And this would be rendered as the following:
-
-```
-user@domain.com just logged in without MFA from 1.2.3.4.
-```
-
-You can use if-else logic to see if an attribute exists with the notation:
-
-```
-{{#if @network.client.ip}}The attribute IP attribute exists.{{/if}}
-```
-
-You can use if-else logic to see if an attribute matches a value:
-
-```
-{{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
-```
-
-See [Notification Variables][1] for more information.
-
-Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.`technique:T1110-brute-force`.
 
 **Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
-
-### Template variables
-
-Use [template variables][2] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications.
-
-For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message states which user and IP address triggered a given signal when using the specified template variable.
-
-```text
-The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}} which is a known malicious IP address.
-```
-
-Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation.
-
-```text
-* [Investigate user in the authentication dashboard](https://app.datadoghq.com/example/integration/security-monitoring---authentication-events?tpl_var_username={{@usr.id}})
-```
-
-Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification.
-
-```text
-{{eval "first_seen_epoch-15*60*1000"}}
-```
 
 See [Template Variables][2] for more information.
 
