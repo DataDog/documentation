@@ -140,7 +140,7 @@ template:
   -  ...
 ```
 
-# Step 4 - Apply the configuration
+## Step 4 - Apply the configuration
 With that, your pods are all set to be instrumented after a their new configuration is applied.
 
 <div class="alert alert-warning">The library will be injected only on new pods and will not have any impact on running pods</div>
