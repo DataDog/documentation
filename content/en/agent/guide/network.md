@@ -343,6 +343,16 @@ See [default NTP targets][2].
 {{% /tab %}}
 {{< /tabs >}}
 
+## Configure ports
+
+If you need to change an inbound port because the default port is already in use by an existing service on your network, use the `datadog.yaml` configuration file. You can find most of the ports in the **Advanced Configuration** section of the file:
+
+{{< agent-config type="advanced configuration" filename="datadog.yaml" collapsible="true" disable_copy="true">}}
+
+The APM receiver port is located in the **Trace Collection Configuration** section of the `datadog.yaml` configuration file:
+
+{{< agent-config type="trace collection configuration" filename="datadog.yaml" collapsible="true" disable_copy="true">}}
+
 ## Using proxies
 
 For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
