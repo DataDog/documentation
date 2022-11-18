@@ -43,6 +43,7 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
 * Mocha >= 5.2.0
   * From `dd-trace>=3.3.0`.
 
+Additionally, test suite level visibility is only supported in Agentless mode.
 
 ## Configuring reporting method
 
