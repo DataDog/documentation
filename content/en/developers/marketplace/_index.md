@@ -67,15 +67,9 @@ UI extensions or applications
 Professional services
 : Professional Services enable you to offer your team's services for implementation, support, or management for a set period of time.
 
-### Review the example pull request
-
-While the process for building an integration is identical for the Integrations page through the [`integrations-extras`][12] repository and the Marketplace page through the [`marketplace`][13] repository, a Marketplace offering requires additional files and information such as pricing plans.
-
 ### Request access to Marketplace
 
-To request access to the private Marketplace repository, email <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>.
-
-Once you have been granted access, you can review an [example pull request][14] in the Marketplace repository with annotations and best practices.
+To request access to the private Marketplace repository, email <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. A Marketplace offering requires files and information such as pricing plans. Once you have been granted access, you can review an [example pull request][12] in the Marketplace repository with annotations and best practices.
 
 ## Further Reading
 
@@ -92,6 +86,4 @@ Once you have been granted access, you can review an [example pull request][14] 
 [9]: https://learn.datadoghq.com/
 [10]: https://chat.datadoghq.com/
 [11]: /developers/authorization/
-[12]: https://github.com/DataDog/integrations-extras
-[13]: https://github.com/DataDog/marketplace
-[14]: https://github.com/DataDog/marketplace/pull/107
+[12]: https://github.com/DataDog/marketplace/pull/107
