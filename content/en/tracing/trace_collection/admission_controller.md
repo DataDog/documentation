@@ -80,7 +80,7 @@ To select your pods for library injection, the annotation corresponding to your 
 
 The available library versions are available in the corresponding container registery.
 
-**Note**: `latest` tag is supported but use this option with caution as major library releases can introduce breaking changes.
+<div class="alert alert-warning">Note: `latest` tag is supported but use this option with caution as major library releases can introduce breaking changes.</div>
 
 ### Example
 
