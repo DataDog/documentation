@@ -17,13 +17,11 @@ further_reading:
 
 Datadog provides log usage information through the [Log Estimated Usage dashboard][1], the [Plan and Usage][2] section in the app, and the available [logs usage metrics][3]. However, there might be situations where you want visibility into more granular cost attribution data, such as for specific teams.
 
-This guide walks you through the steps on how to see your log cost attribution for different teams. You can also use this process for other attributes, such as departments, projects, products, regions, and so on.
+This guide walks you through the steps on how to create custom metrics and a dashboard to see your log cost attribution for different teams. You can also use this process for other attributes, such as departments, projects, products, regions, and so on.
 
 1. [Configure custom tags](#configure-custom-tags).
 2. [Generate custom log metrics](#generate-custom-logs-metrics) with those tags. 
 3. [Create widgets in a dashboard](#create-a-dashboard-using-the-custom-logs-metrics) for the custom log metrics. 
-
-The dashboard gives you an overview of your log usage and costs broken down by teams.
 
 {{< img src="logs/faq/logs_cost_attribution/cost_attribution_dashboard.png" alt="A dashboard showing table widgets for usage and cost broken down by teams for ingestion, Sensitive Data Scanner, seven days indexing, and 15 days indexing. " style="width:85%" >}}
 
