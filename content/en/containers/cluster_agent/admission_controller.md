@@ -134,15 +134,32 @@ Finally, run the following commands:
 {{% /tab %}}
 {{< /tabs >}}
 
-### APM
-You can configure the Cluster Agent (version 7.39 and higher) to inject APM tracing libraries automatically. Read [APM Tracing Setup with Admission Controller][2] for more information
+### Instrumentation Library injection
+You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries. Read [Instrumentation library injection with Admission Controller][2] for more information
 
 
-### DogStatsD
+### APM and DogStatsD
 
 To configure DogStatsD clients or other APM libraries that do not support library injection, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by doing one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
+
+Adding a `mutateUnlabelled: true` Agent config in the Helm chart causes the Cluster Agent to attempt to intercept every unlabelled pod.
+
+To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
+
+If `mutateUnlabelled` is set to `false`, the pod label must be set to `admission.datadoghq.com/enabled: "true"`.
+
+Possible options:
+
+| mutateUnlabelled | Pod label                               | Injection |
+|------------------|-----------------------------------------|-----------|
+| `true`           | No label                                | Yes       |
+| `true`           | `admission.datadoghq.com/enabled=true`  | Yes       |
+| `true`           | `admission.datadoghq.com/enabled=false` | No        |
+| `false`          | No label                                | No        |
+| `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
+| `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
 
 #### Order of priority

@@ -43,6 +43,7 @@ There are three steps to start using this feature with an existing Datadog Agent
 1. Enable Datadog Admission controller to mutate your pods
 2. Annotate your pods to select which instrumentation library to inject
 3. Tag your pods with Unified Service Tags to tie Datadog telemetry together and navigate seemlessly across traces, metrics and logs with consistent tags
+4. Apply your new configuration
 
 ## Step 1 - Enable Datadog Admission controller to mutate your pods
 By default, Datadog Admission controller only mutates pods labeled with a specific label.
