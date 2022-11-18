@@ -345,7 +345,7 @@ See [default NTP targets][2].
 
 ## Configure ports
 
-If you need to change an inbound port because the default port is already in use by an existing service on your network, use the `datadog.yaml` configuration file. You can find most of the ports in the **Advanced Configuration** section of the file:
+If you need to change an inbound port because the default port is already in use by an existing service on your network, edit the `datadog.yaml` configuration file. You can find most of the ports in the **Advanced Configuration** section of the file:
 
 {{< agent-config type="advanced configuration" filename="datadog.yaml" collapsible="true" disable_copy="true">}}
 
