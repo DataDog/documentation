@@ -27063,6 +27063,22 @@ paths:
     get:
       description: Get all Service Level Objective corrections.
       operationId: ListSLOCorrection
+      parameters:
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The number of SLO corrections to return in the response. Default
+          is 25.
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
