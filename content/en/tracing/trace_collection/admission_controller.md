@@ -11,8 +11,8 @@ is_beta: true
 
 # Overview
 With Kubernetes environment, there are two ways to instrument your application by:
-* [Adding manually the instrumentation library in the application][5]
 * Injecting the instrumentation library using the Admission Controller
+* [Adding manually the instrumentation library in the application][5]
 
 This page provides instructions on how to inject instrumentation libraries in your applications with the [Datadog Admission Controller][2].
 With this approach, Datadog agent leverages the Kubernetes Admission Controller concept to intercept requests to the Kubernetes API and mutate new pods to inject selected instrumentation library.
@@ -25,9 +25,9 @@ To know more about Kubernetes Admission Controller, see [Kubernetes Admission Co
 Datadog publishes instrumentation libraries images in gcr.io, AWS’ ECR, and on Docker Hub:
 | Language   | gcr.io                              | hub.docker.com                              | public.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
-| Java       | gcr.io/datadoghq/dd-lib-java-init   | hub.docker.com/r/datadog/dd-lib-java-init   | public.ecr.aws/datadog/dd-lib-java-init   |
-| Javascript | gcr.io/datadoghq/dd-lib-js-init     | hub.docker.com/r/datadog/dd-lib-js-init     | public.ecr.aws/datadog/dd-lib-js-init     |
-| Python     | gcr.io/datadoghq/dd-lib-python-init | hub.docker.com/r/datadog/dd-lib-python-init | public.ecr.aws/datadog/dd-lib-python-init |
+| Java       | [gcr.io/datadoghq/dd-lib-java-init][9]   | [hub.docker.com/r/datadog/dd-lib-java-init][10]   | [public.ecr.aws/datadog/dd-lib-java-init][11]   |
+| Javascript | [gcr.io/datadoghq/dd-lib-js-init][12]     | [hub.docker.com/r/datadog/dd-lib-js-init][13]     | [public.ecr.aws/datadog/dd-lib-js-init][14]     |
+| Python     | [gcr.io/datadoghq/dd-lib-python-init][15] | [hub.docker.com/r/datadog/dd-lib-python-init][16] | [public.ecr.aws/datadog/dd-lib-python-init][17] |
 
 # Pre-requisites
 * Kubernetes v1.14+
@@ -176,3 +176,12 @@ The default value is set to `grc.io/datadoghq` and can be set to `docker.io/data
 [6]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 [7]: tracing/trace_collection/library_config/
 [8]: https://app.datadoghq.com/apm/traces
+[9]: http://gcr.io/datadoghq/dd-lib-java-init 
+[10]: http://hub.docker.com/r/datadog/dd-lib-java-init 
+[11]: http://public.ecr.aws/datadog/dd-lib-java-init
+[12]: http://gcr.io/datadoghq/dd-lib-js-init
+[13]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[14]: http://public.ecr.aws/datadog/dd-lib-js-init
+[15]: http://gcr.io/datadoghq/dd-lib-python-init
+[16]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[17]: http://public.ecr.aws/datadog/dd-lib-python-init
