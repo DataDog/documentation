@@ -15,7 +15,7 @@ First, configure the Datadog Agent. Our recommended method of installation for K
 ## Unified Service Tagging
 For your Kubernetes applications that send traces to Datadog Agent, you can configure the Datadog admission controller to inject Java, JavaScript, and Python libraries automatically. To inject the Java and Javascript libraries, use Datadog Cluster Agent v7.39+. To inject the Python library, use Datadog Cluster Agent v7.40+.
 
-For Python applications, we do not support uWSGI at this time.
+For Python applications, Datadog does not support uWSGI.
 
 We highly recommend using our Unified Service Tagging approach to connect your infrastructure, applications and logs to get the maximum value out of Datadog. Learn how to apply [Unified Service Tagging][4] to your services by reading our documentation.
 
