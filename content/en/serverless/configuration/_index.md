@@ -536,7 +536,7 @@ export class ExampleStack extends cdk.Stack {
 3. Optionally, [install a GitHub App][2] to display inline source code snippets
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -736,5 +736,3 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
-[40]: https://aws.amazon.com/secrets-manager/
-[41]: https://aws.amazon.com/kms/
