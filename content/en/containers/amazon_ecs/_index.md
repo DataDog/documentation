@@ -58,7 +58,7 @@ The following sample is a minimal configuration for core infrastructure monitori
     1. Set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][14] for your account.
     2. Set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} 
 
-        **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) and do not set this, it will result in an invalid API key message. Use the [documentation site selector][13] to see documentation appropriate for the site you're using.
+        **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) and do not set this, it results in an invalid API key message. Use the [documentation site selector][13] to see documentation appropriate for the site you're using.
 
 3. Optionally - Add the following to your ECS task definition to deploy on an [ECS Anywhere cluster][15].
     ```json
@@ -76,7 +76,7 @@ The following sample is a minimal configuration for core infrastructure monitori
     }
     ```
 
-For all of these examples the `DD_API_KEY` environment variable can alternatively be populated by referencing the the [ARN of a "Plaintext" secret stored in AWS Secret Manager][16]. Any additional tags can be added by the enviornment variable `DD_TAGS`.
+For all of these examples the `DD_API_KEY` environment variable can alternatively be populated by referencing the [ARN of a "Plaintext" secret stored in AWS Secret Manager][16]. Any additional tags can be added by the environment variable `DD_TAGS`.
 
 #### Registering the task definition
 
@@ -116,7 +116,7 @@ Ideally, you want one running Datadog Agent container on each EC2 instance. The 
 6. Daemon services don't need Auto Scaling, so click **Next Step**, and then **Create Service**.
 
 ### Setup Additional Agent Features
-The initial Task Definition provided above is a fairly minimal one. This Task Definition will deploy an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. This Agent can also run Agent Integrations based on [Docker Autodiscovery Labels][12] discovered on your corresponding containers. 
+The initial Task Definition provided above is a fairly minimal one. This Task Definition deploys an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. This Agent can also run Agent Integrations based on [Docker Autodiscovery Labels][12] discovered on your corresponding containers.
 
 If you're using:
 - APM you can consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23]
@@ -135,7 +135,7 @@ If you're using [DogStatsD][8] you can add in a Host Port mapping for 8125/udp t
 ```
 as well as set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
 
-For APM and DogStatsD double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog recommends to use the host's private IP to route data from the application containers to the Datadog Agent container.
+For APM and DogStatsD double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog recommends using the host's private IP to route data from the application containers to the Datadog Agent container.
 
 #### Process collection
 
@@ -209,7 +209,7 @@ Live Container data is automatically collected by the Datadog Agent container. T
 
 ## AWSVPC mode
 
-For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instances security group to reach the applicative containers on relevant ports.
+For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instance's security group to reach the applicative containers on relevant ports.
 
 While it's possible to run the Agent in `awsvpc` mode, it's not the recommended setup, because it may be difficult to retrieve the ENI IP to reach the Agent for Dogstatsd metrics and APM traces.
 
