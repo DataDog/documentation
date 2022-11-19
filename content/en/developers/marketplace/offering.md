@@ -132,7 +132,7 @@ Install and configure the development toolkit:
 
    You can exit the virtual environment at any time by running `deactivate`.
 
-3. Install the [Developer Toolkit][10]:
+3. Install the [Developer Toolkit][21]:
    {{< code-block lang="shell" >}}pip3 install "datadog-checks-dev[cli]"{{< /code-block >}}
 
    If you are using the Z Shell, you may need to use escaped characters by running `pip3 install datadog-checks-dev\[cli\]`.
@@ -150,7 +150,7 @@ Install and configure the development toolkit:
 
 ## Populate the integration tile scaffolding
 
-Run the `ddev` command to generate a skeleton of the folders and files needed for your integration. The options you use with the command are different depending on what type of integration you are developing. For a full list of the files created by the `ddev` command, see [Integrations assets][21].
+Run the `ddev` command to generate a skeleton of the folders and files needed for your integration. The options you use with the command are different depending on what type of integration you are developing. For a full list of the files created by the `ddev` command, see [Integrations assets][22].
 
 ### Create an informational tile only listing
 
@@ -284,6 +284,6 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [18]: https://github.com/Datadog/marketplace
 [19]: /developers/marketplace/#request-access-to-marketplace
 [20]: https://www.python.org/downloads/
-[21]: https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file
+[21]: https://pypi.org/project/datadog-checks-dev/
 [22]: /developers/integrations/check_references/#manifest-file
 [23]: https://datadoghq.com/blog/
