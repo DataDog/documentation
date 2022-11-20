@@ -50,6 +50,8 @@ Like many other libraries for .NET, Serilog provides diagnostic logging into fil
 
 Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
 
+NOTE: Limitation 1. Logs of >128KB are not suported 2. No automatic log truncation
+
 To install Serilog with NuGet, run the following command in the Package Manager Console:
 
 ```text
