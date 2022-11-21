@@ -42,7 +42,7 @@ further_reading:
 
 - **Parameters**: Set custom `env` or `service` [parameters][13]
 
-- **Pipeline failure reasons**: Identify pipeline failure reasons via [error messages][15]
+- **Pipeline failure reasons**: Identify pipeline failure reasons from [error messages][15]
 
 ## Configuring the Datadog integration
 
