@@ -70,9 +70,11 @@ To setup your client, Datadog API and application keys need to be configured. Th
     datadog-ci synthetics run-tests --apiKey "<API_KEY>" --appKey "<APPLICATION_KEY>"
     ```
 
-3. Or defined in a global configuration file:
+3. Or defined in a [global configuration fil](#global-configuration-file-options):
 
      The global JSON configuration file can specify additional advanced options. Specify the path to this file using the flag `--config` [when launching your tests](#run-tests). If you set the name of your global configuration file to `datadog-ci.json`, that name is the default.
+
+### Global configuration file options
 
 In the global configuration file, you can configure the following options: 
 
@@ -85,11 +87,24 @@ In the global configuration file, you can configure the following options:
 `datadogSite`
 : The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
+`failOnCriticalErrors`
+: A boolean flag that will fail the CI job if no tests were triggered, or results couldn't be fetched from Datadog. The default is set to `false`.
+
+`failOnMissingTests`
+: A boolean flag that will fail the CI job if at least one test is missing within a run (for example, if it has been removed/deleted). The default is set to `false`.
+
+`failOnTimeout`
+: A boolean flag that will fail the CI job if at least one test exceees the default test timeout. The default is set to `true`.
+
 `files`
 : Glob pattern to detect Synthetic tests config files.
 
 `global`
-: Overrides of Synthetic tests applied to all tests ([see below for descriptions of each field](#configure-tests)).
+: Overrides of Synthetic tests applied to all tests ([see below for descriptions of each field](#additional-configuration)).
+
+`pollingTimeout`
+: **Type**: integer<br>
+The duration in milliseconds after which `datadog-ci` stops polling for test results. The default is 30 minutes. At the CI level, test results completed after this duration are considered failed.
 
 `proxy`
 : The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is the [proxy-agent][2] library.
@@ -111,6 +126,9 @@ For example:
     "appKey": "<DATADOG_APPLICATION_KEY>",
     "datadogSite": "datadoghq.com",
     "files": "{,!(node_modules)/**/}*.synthetics.json",
+    "failOnCriticalErrors": false,
+    "failOnMissingTests": false,
+    "failOnTimeout": true,
     "global": {
         "allowInsecureCertificates": true,
         "basicAuth": { "username": "test", "password": "test" },
@@ -144,7 +162,7 @@ For example:
 
 ### Configure tests
 
-By default, the client automatically discovers and runs all tests specified in `**/*.synthetics.json` files. This path can be configured in the [global configuration file](#setup-a-client). 
+By default, the client automatically discovers and runs all tests specified in `**/*.synthetics.json` files. This path can be configured in the [global configuration file](#global-configuration-file-options). 
 
 These files have a `tests` key which contains an array of objects with the IDs of the tests to run and any potential test configuration overrides.
 
@@ -167,7 +185,7 @@ For example:
 
 The default configurations used for the tests are the original tests' configurations, which are visible in the UI or by [getting your tests' configurations from the API][4].
 
-However, in the context of your CI deployment, you may decide to override some or all of your test parameters with the overrides below. To define overrides for all of your tests, set the same parameters at the [global configuration file](#setup-a-client) level.
+However, in the context of your CI deployment, you may decide to override some or all of your test parameters with the overrides below. To define overrides for all of your tests, set the same parameters at the [global configuration file](#global-configuration-file-options) level.
 
 `allowInsecureCertificates`
 : **Type**: boolean<br>
@@ -282,7 +300,7 @@ If you want to customize this start URL further (or only part of the URL), you c
 
 ### Run tests
 
-You can decide to have the CLI auto-discover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-a-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
+You can decide to have the CLI auto-discover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#global-configuration-file-options)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
 Run tests by executing the CLI:
 
