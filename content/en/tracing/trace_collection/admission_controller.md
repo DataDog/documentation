@@ -178,10 +178,10 @@ The default value is set to `grc.io/datadoghq` and can be set to `docker.io/data
 [8]: https://app.datadoghq.com/apm/traces
 [9]: http://gcr.io/datadoghq/dd-lib-java-init 
 [10]: http://hub.docker.com/r/datadog/dd-lib-java-init 
-[11]: http://public.ecr.aws/datadog/dd-lib-java-init
+[11]: http://gallery.ecr.aws/datadog/dd-lib-java-init
 [12]: http://gcr.io/datadoghq/dd-lib-js-init
 [13]: http://hub.docker.com/r/datadog/dd-lib-js-init
-[14]: http://public.ecr.aws/datadog/dd-lib-js-init
+[14]: http://gallery.ecr.aws/datadog/dd-lib-js-init
 [15]: http://gcr.io/datadoghq/dd-lib-python-init
 [16]: http://hub.docker.com/r/datadog/dd-lib-python-init
-[17]: http://public.ecr.aws/datadog/dd-lib-python-init
+[17]: http://gallery.ecr.aws/datadog/dd-lib-python-init
