@@ -134,7 +134,7 @@ Finally, run the following commands:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Instrumentation Library injection
+### Instrumentation library injection
 You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries. Read [Instrumentation library injection with Admission Controller][2] for more information
 
 
