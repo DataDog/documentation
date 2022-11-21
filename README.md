@@ -10,9 +10,9 @@ Built with [hugo][1], a static website generation tool.
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. [Install hugo][12]
+3. [Install Go][13] (at minimum, `go version` 1.12)
 
-4. [Install Go][13] (at minimum, `go version` 1.12)
+4. [Install hugo][12]
 
 5. Install yarn: `npm install -g yarn`
 
