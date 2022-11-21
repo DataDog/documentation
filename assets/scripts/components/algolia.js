@@ -19,7 +19,7 @@ const algoliaConfig = getConfig(env).algoliaConfig;
 
 const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
 const indexName = algoliaConfig.index;
-const searchResultsPage = document.querySelector('.search_results');
+const searchResultsPage = document.querySelector('.search_results_page');
 const searchBoxContainerContainer = document.querySelector('.searchbox-container');
 const searchBoxContainer = document.querySelector('#searchbox');
 const hitsContainerContainer = document.querySelector('.hits-container');
@@ -93,7 +93,7 @@ if (searchBoxContainer) {
             }
         }),
 
-        searchbarHits({
+        hitComponent({
             container: hitsContainer
         })
     ]);

@@ -160,3 +160,23 @@
         border-radius: 0 3px 0 0;
     }
 }
+
+.searchbox-container.search_results_page {
+    flex-direction: column;
+    height: unset;
+    filter: none;
+
+    #searchbox {
+        height: 38px;
+    }
+
+    .hits-container,
+    #hits {
+        position: relative;
+    }
+
+    #hits {
+        top: 0;
+        filter: none;
+    }
+}
