@@ -167,9 +167,9 @@ Accepts a comma-separated list of key-value pairs of case-insensitive header key
 Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.
 
 `DD_TRACE_CLIENT_IP_ENABLED`
-**Default**: `false`<br>
-Enables client IP collection from relevant IP headers.<br>
+: Enables client IP collection from relevant IP headers.<br>
 Added in version `2.19.0`.<br>
+**Default**: `false`<br>
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
