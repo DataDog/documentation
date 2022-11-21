@@ -86,7 +86,7 @@ When creating or editing a widget, existing template variables display as option
 
 {{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="Template variable can be set dynamically in widgets" style="width:100%;">}}
 
-Selecting the `environment` value of "production", dynamically scopes widgets with the `$environment` variable to the production environment.
+Selecting **production** for the `environment` value dynamically scopes widgets with the `$environment` variable to the production environment.
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
