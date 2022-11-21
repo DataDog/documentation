@@ -15907,11 +15907,6 @@ components:
             (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
-        opentelemetry_apm_host_count:
-          description: Contains the total number of hosts using APM reported by Datadog
-            exporter for the OpenTelemetry Collector.
-          format: int64
-          type: integer
         opentelemetry_host_count:
           description: Contains the total number of hosts reported by Datadog exporter
             for the OpenTelemetry Collector.
@@ -16885,12 +16880,6 @@ components:
             date for all organizations.
           format: int64
           type: integer
-        opentelemetry_apm_host_top99p:
-          description: Shows the 99th percentile of APM hosts reported by the Datadog
-            exporter for the OpenTelemetry Collector over all hours in the current
-            date for all organizations.
-          format: int64
-          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -17250,12 +17239,6 @@ components:
           type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
-            date for the given org.
-          format: int64
-          type: integer
-        opentelemetry_apm_host_top99p:
-          description: Shows the 99th percentile of APM hosts reported by the Datadog
-            exporter for the OpenTelemetry Collector over all hours in the current
             date for the given org.
           format: int64
           type: integer
@@ -17645,12 +17628,6 @@ components:
           type: integer
         online_archive_events_count_agg_sum:
           description: Sum of all online archived events over all hours in the current
-            months for all organizations.
-          format: int64
-          type: integer
-        opentelemetry_apm_host_top99p_sum:
-          description: Shows the 99th percentile of APM hosts reported by the Datadog
-            exporter for the OpenTelemetry Collector over all hours in the current
             months for all organizations.
           format: int64
           type: integer
