@@ -21,6 +21,7 @@ disable_toc: true
     {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Enrich and control your browser RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Upgrade the RUM Browser SDK{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Proxy your browser RUM data {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/define-applications-services-components-for-your-rum-monitored-web-application/" >}}Define Applications, Services, and Components for your RUM-Monitored Web Application {{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay:" >}}
