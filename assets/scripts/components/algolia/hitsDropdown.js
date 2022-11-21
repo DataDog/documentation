@@ -35,11 +35,11 @@ const renderHits = (renderOptions, isFirstRender) => {
     };
 
     const addHitsToEmptyElements = () => {
-        container.querySelector('#ais-Hits-category-1 .ais-Hits-list').innerHTML = documentationJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-2 .ais-Hits-list').innerHTML = guideJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-3 .ais-Hits-list').innerHTML = gettingStartedJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-4 .ais-Hits-list').innerHTML = integrationJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-5 .ais-Hits-list').innerHTML = apiJoinedListItemsHTML;
+        container.querySelector('#ais-Hits-category-1 .ais-Hits-list').innerHTML = apiJoinedListItemsHTML;
+        container.querySelector('#ais-Hits-category-2 .ais-Hits-list').innerHTML = gettingStartedJoinedListItemsHTML;
+        container.querySelector('#ais-Hits-category-3 .ais-Hits-list').innerHTML = guideJoinedListItemsHTML;
+        container.querySelector('#ais-Hits-category-4 .ais-Hits-list').innerHTML = documentationJoinedListItemsHTML;
+        container.querySelector('#ais-Hits-category-5 .ais-Hits-list').innerHTML = integrationJoinedListItemsHTML;
     };
 
     const hideOrShowElements = () => {
