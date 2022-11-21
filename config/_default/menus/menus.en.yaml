@@ -3410,31 +3410,40 @@ main:
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 401
+  - name: Create an API Integration
+    url: developers/integrations/api_integration/
+    parent: dev_tools_integrations
+    weight: 402
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 402
+    weight: 403
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 403
+    weight: 404
   - name: OAuth for Data Integrations
     url: developers/integrations/oauth_for_data_integrations
     parent: dev_tools_integrations
-    weight: 404
+    weight: 405
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 405
+    weight: 406
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 406
+    weight: 407
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools
     identifier: marketplace
     weight: 5
+  - name: Create an API Integration
+    url: developers/marketplace/api_integration/
+    parent: marketplace
+    identifier: marketplace_api_integration
+    weight: 501
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
