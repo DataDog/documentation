@@ -34,7 +34,7 @@ further_reading:
 
 - **Custom spans**: Configure custom spans
 
-- **Custom predefined tags**: Configure [custom tags][12] and metrics at runtime
+- **Custom pre-defined tags**: Configure [custom tags][12] and metrics at runtime
 
 - **Parameters**: Set custom parameters such as default branch name and Git information
 
