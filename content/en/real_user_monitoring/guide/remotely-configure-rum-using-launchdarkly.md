@@ -15,7 +15,7 @@ further_reading:
 ## Overview
 When instrumenting a [RUM application][1], you can remotely control the RUM initialization configurations based on your immediate needs, such as an ongoing incident where you might need higher fidelity data.
 
-Instead of having to deploy the changes to your RUM initialization configurations, you can use feature flags. Feature flag management companies like [LaunchDarkly][2] evaluate feature flags on the server side and thus allow you to make changes to your code without needing to redeploy. 
+Instead of having to deploy the changes to your RUM initialization configurations, you can use feature flags. Feature flag management companies like [LaunchDarkly][2] evaluate feature flags on the server side and thus allow you to make changes to your code without needing to redeploy it. 
 
 ## Setting up your flag in LaunchDarkly
 To set up your flag in LaunchDarkly, start by following their documentation on [setting up an SDK][3]. More information on the Client-side SDK is available in LaunchDarkly's [documentation][4].
@@ -45,9 +45,9 @@ In the example below, a feature flag for an individual parameter, `SampleRate`, 
 
 2. Specify the flag variations. For the `SampleRate` parameter, you'll want to pass a number value, so you can choose the flag type to be Number and add the Sample Rates you would like as the value in the variation fields.
 
-**Note:** You can create multiple different flag variations if you'd like. Don't worry about adding all the possible sample rates that you might want now. You can always add a new variation of values later.
+   **Note:** You can create multiple different flag variations if you'd like. Don't worry about adding all the possible sample rates that you might want now. You can always add a new variation of values later.
 
-{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-sample-rate-flag-setup.png" alt="Add variants for the sample rate in LaunchDarkly" style="width:75%;">}}
+   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-sample-rate-flag-setup.png" alt="Add variants for the sample rate in LaunchDarkly" style="width:75%;">}}
 
 3. Set your default rules. In the example below, the "Default Sample Rate" is set when the feature flag is off and the "High Fidelity Sample Rate" when the feature flag is on.
 
@@ -59,13 +59,13 @@ In this example, a feature flag for the entire RUM Configuration Object is creat
 
 1. Create a new feature flag in LaunchDarkly and provide a name, and key. 
 
-{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-new-flag.png" alt="Create a new flag for the RUM configuration in LaunchDarkly" style="width:75%;">}}
+   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-new-flag.png" alt="Create a new flag for the RUM configuration in LaunchDarkly" style="width:75%;">}}
 
 2. Modify the Flag Variations. For the [RUM configuration][5], you'll want to pass an Object, so you can choose the flag type to be JSON, add the configurations you'd like as the values, and modify the JSON to an Object in our code later.
 
-**Note:** You can create multiple different flag variations if you'd like. Don't worry about adding all possible configurations that you might want, you can always go in and add a new variation of values whenever you want.
+   **Note:** You can create multiple different flag variations if you'd like. Don't worry about adding all possible configurations that you might want, you can always go in and add a new variation of values whenever you want.
 
-{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-flag-setup.png" alt="Add variants for the RUM configuration in LaunchDarkly" style="width:75%;">}}
+   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-flag-setup.png" alt="Add variants for the RUM configuration in LaunchDarkly" style="width:75%;">}}
 
 3. Set your default rules. The "Default Configuration" is set when the feature flag is off and the "High Fidelity Configuration" when the feature flag is on.
 
