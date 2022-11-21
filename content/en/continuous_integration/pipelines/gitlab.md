@@ -38,7 +38,7 @@ further_reading:
 
 - **Custom spans**: Configure custom spans
 
-- **Custom predefined tags**: Configure [custom tags][10] and metrics at runtime
+- **Custom pre-defined tags**: Configure [custom tags][10] and metrics at runtime
 
 - **Parameters**: Set custom `env` or `service` [parameters][13]
 
