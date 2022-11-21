@@ -25,7 +25,7 @@ further_reading:
 ## Compatibility
 - **Supported GitHub versions**:
   - GitHub.com (SaaS)
-  - GitHub Enterprise Server (GHES) 3.5.0 or above
+  - GitHub Enterprise Server (GHES) 3.5.0 or newer
 - **Partial pipelines**: View partially retried and downstream pipeline executions
 
 - **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
