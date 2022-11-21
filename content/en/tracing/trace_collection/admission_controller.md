@@ -125,7 +125,7 @@ Set Unified Service tags by using the following labels:
 ...
 ```
 
-It is not necessary to set `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
+It is not strictly necessary to set `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
 
 For example:
 
@@ -174,7 +174,6 @@ The supported features and configuration options for the tracing library are the
 
 
 
-<<<<<<< HEAD
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/trace_collection/
 [3]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
@@ -191,22 +190,3 @@ The supported features and configuration options for the tracing library are the
 [14]: /getting_started/tagging/unified_service_tagging/
 [15]: https://app.datadoghq.com/apm/traces
 [16]: /tracing/trace_collection/library_config/
-=======
-[1]: /containers/cluster_agent/setup/?tab=helm
-[2]: /containers/cluster_agent/admission_controller/
-[3]: /containers/kubernetes/installation/?tab=helm
-[4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
-[5]: /tracing/trace_collection/
-[6]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
-[7]: tracing/trace_collection/library_config/
-[8]: https://app.datadoghq.com/apm/traces
-[9]: http://gcr.io/datadoghq/dd-lib-java-init 
-[10]: http://hub.docker.com/r/datadog/dd-lib-java-init 
-[11]: http://gallery.ecr.aws/datadog/dd-lib-java-init
-[12]: http://gcr.io/datadoghq/dd-lib-js-init
-[13]: http://hub.docker.com/r/datadog/dd-lib-js-init
-[14]: http://gallery.ecr.aws/datadog/dd-lib-js-init
-[15]: http://gcr.io/datadoghq/dd-lib-python-init
-[16]: http://hub.docker.com/r/datadog/dd-lib-python-init
-[17]: http://gallery.ecr.aws/datadog/dd-lib-python-init
->>>>>>> f52d9d086234648af212e8bf2cbe93d4f9e7d943
