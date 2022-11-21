@@ -4,7 +4,9 @@ kind: search
 disable_sidebar: true
 ---
 
-<div id="tipue_search_content">
-    <div class="content"></div>
-    <div class="page_navigation"></div>
+<div class="searchbox-container search_results">
+    <div id="searchbox"></div>
+    <div class="hits-container d-none">
+        <div id="hits"></div>
+    </div>
 </div>

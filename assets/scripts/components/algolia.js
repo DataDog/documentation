@@ -1,8 +1,9 @@
+import configDocs from '../config/config-docs';
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 import { configure, searchBox } from 'instantsearch.js/es/widgets';
-import { hitsDropdown } from './algolia/hitsDropdown';
-import configDocs from '../config/config-docs';
+import { searchbarHits } from './algolia/searchbarHits';
+import { searchpageHits } from './algolia/searchpageHits';
 
 function getConfig(environment) {
     if (environment === 'live') {
@@ -23,9 +24,16 @@ const searchBoxContainerContainer = document.querySelector('.searchbox-container
 const searchBoxContainer = document.querySelector('#searchbox');
 const hitsContainerContainer = document.querySelector('.hits-container');
 const hitsContainer = document.querySelector('#hits');
-const numHits = 5;
 const filtersDocs = `language: ${pageLanguage}`;
+let numHits = 5;
+let hitComponent = searchbarHits;
 
+if (searchResultsPage) {
+    numHits = 10;
+    hitComponent = searchpageHits;
+}
+
+// No searchBoxContainer means no instantSearch
 if (searchBoxContainer) {
     const search = instantsearch({
         indexName,
@@ -85,7 +93,7 @@ if (searchBoxContainer) {
             }
         }),
 
-        hitsDropdown({
+        searchbarHits({
             container: hitsContainer
         })
     ]);
@@ -95,13 +103,13 @@ if (searchBoxContainer) {
     if (!searchResultsPage) {
         const handleSearchbarKeydown = (e) => {
             if (e.code === 'Enter') {
-                window.location.pathname += '/search';
+                window.location.pathname += 'search';
             }
         };
 
         const handleSearchbarSubmitClick = () => {
             if (document.querySelector('.ais-SearchBox-input').value) {
-                window.location.pathname += '/search';
+                window.location.pathname += 'search';
             }
         };
 

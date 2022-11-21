@@ -133,4 +133,4 @@ const renderHits = (renderOptions, isFirstRender) => {
     }
 };
 
-export const hitsDropdown = connectHits(renderHits);
+export const searchbarHits = connectHits(renderHits);
