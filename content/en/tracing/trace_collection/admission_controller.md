@@ -49,9 +49,9 @@ There are three steps to start using this feature with an existing Datadog Agent
 By default, Datadog Admission controller only mutates pods labeled with a specific label.
 To enable mutation on your pods, add the label `admission.datadoghq.com/enabled: "true"` to your pod spec.
 
-Note that you can configure Datadog Admission Controller to enable injection config without having this pod label by configuring the cluster agent with `clusterAgent.admissionController.mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) to `true`.
+**Note**: You can configure Datadog Admission Controller to enable injection config without having this pod label by configuring the cluster agent with `clusterAgent.admissionController.mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) to `true`.
 
-For more details on how to configure and use Datadog Admission Controller refer to the [dedicated documentation][2].
+For more details on how to configure and read [Datadog Admission Controller page][2].
 
 ### Example
 ```yaml
@@ -102,8 +102,8 @@ template:
 ```
 
 ## Step 3 - Tag your pods with Unified Service Tags
-With Unified Service Tags you can tie Datadog telemetry together and navigate seemlessly across traces, metrics and logs with consistent tags. 
-We recommend to set the Unified Service Tagging on both the deployment object and the pod template specs.
+With Unified Service Tags, you can tie Datadog telemetry together and navigate seemlessly across traces, metrics and logs with consistent tags. 
+Datadog recommends to set the Unified Service Tagging on both the deployment object and the pod template specs.
 Unified Service tags can be set with the following labels:
 ```yaml
 ...
@@ -115,7 +115,7 @@ Unified Service tags can be set with the following labels:
 ...
 ```
 
-Note that it is not necessary to set `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables in the pod template spec as the Admission Controller will take care of propagating tag values as environement variables when injecting the library.
+Note that it is not necessary to set `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables in the pod template spec as the Admission Controller takes care of propagating tag values as environement variables when injecting the library.
 
 ### Example
 ```yaml
@@ -154,16 +154,16 @@ If the injection was sucessfull you should see an init container called datadog-
 
 A `kubectl describe pod <my-pod>` command should also show the datadog-lib-init init container.
 
-The instrumentation will also start sending telemetry to Datadog (such as traces to [APM][8]).
+The instrumentation also starts sending telemetry to Datadog (such as traces to [APM][8]).
 
-## Do I need to generate a new application image to instrument it with Datadog?
+## Do you need to generate a new application image to instrument it with Datadog?
 No, the library injection is taking care of adding the instrumentation library without any change in your application image.
 
-## How can I configure the library when using library injection feature?
-The supported features and configurations options remain the same with library injection as with other installation methods and can be set via environment variables.
+## How can you configure the library when using library injection feature?
+The supported features and configurations options remain the same with library injection as with other installation methods and can be set with environment variables.
 Refer to the corresponding [Datadog Library configuration page][7] for more details.
 
-## How can I use a different container registery?
+## How can you use a different container registery?
 You may pull the APM library from a different registry using the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent.
 
 The default value is set to `grc.io/datadoghq` and can be set to `docker.io/datadog`, `public.ecr.aws/datadog` or another URL if you are hosting the images in a local container registery.
