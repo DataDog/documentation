@@ -18,7 +18,7 @@ When instrumenting a [RUM application][1], you can remotely control the RUM init
 Instead of having to deploy the changes to your RUM initialization configurations, you can use feature flags. Feature flag management companies like [LaunchDarkly][2] evaluate feature flags on the server side and thus allow you to make changes to your code without needing to redeploy it. 
 
 ## Setting up your flag in LaunchDarkly
-To set up your flag in LaunchDarkly, start by following their documentation on [setting up an SDK][3]. More information on the Client-side SDK is available in LaunchDarkly's [documentation][4].
+To set up your flag in LaunchDarkly, start by following their documentation on [setting up an SDK][3]. For additional details, see LaunchDarkly's [Client-side SDK documentation][4].
 
 LaunchDarkly supports multivariate flags, which lets you customize the number and types of variations they return. Multivariate flag types include: 
 
