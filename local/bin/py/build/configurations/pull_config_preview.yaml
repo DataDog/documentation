@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: rtrieu/azure-rename-preview
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
