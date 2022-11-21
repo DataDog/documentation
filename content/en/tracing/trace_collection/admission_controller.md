@@ -125,7 +125,7 @@ Set Unified Service tags by using the following labels:
 ...
 ```
 
-It is not strictly necessary to set `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
+**Note**: It is not necessary to set the _environment variables_ for universal service tagging (`DD_ENV`, `DD_SERVICE`, `DD_VERSION`) in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
 
 For example:
 
