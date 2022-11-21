@@ -78,7 +78,7 @@ To modify the **Default view**, click on the pencil icon and update the template
 
 ## Usage
 
-Template variables are used in widgets and event overlays.
+Template variables are used in widgets and event overlays. 
 
 ### Widgets
 
@@ -91,6 +91,8 @@ Selecting **production** for the `environment` value dynamically scopes widgets 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
 To include just the value in the query, append it with the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `service`, use `env:staging-$service.value`.
+
+Hover over the template variable fields to see at a quick glance, the widgets that use that variable highlighted on the dashboard.
 
 #### Associated template variables
 
