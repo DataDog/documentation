@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: rtrieu/docs-4365-azure-native-integration
+      branch: prod
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
