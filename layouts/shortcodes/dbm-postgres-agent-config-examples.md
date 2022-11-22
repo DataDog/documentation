@@ -61,7 +61,7 @@ instances:
 ```
 
 ### Monitoring multiple databases with DBM and the default integration
-To specify the name of the database to connect to, use `dbname`. If omitted, the default system `postgres` database is queried.
+If you wish to collect the generic Postgres integration metrics from logical databases, other than the default `postgres` db, you must list them each in their instance config. **Note**: you should list each logical db *without* setting `dbm: true`, and then add one final instance with `dbm: true` so that we don't "double monitor" the databases. This is because Datadog's Database Monitoring collects metrics from global views like `pg_stat_statements` and `pg_stat_activity`.
 
 ```yaml
 init_config:
