@@ -170,13 +170,57 @@
         height: 38px;
     }
 
+    .ais-SearchBox {
+        width: 50%;
+    }
+
+    .ais-SearchBox-form {
+        background-color: #e6e6e6;
+    }
+
+    .ais-SearchBox-input {
+        background-color: #e6e6e6;
+    }
+
     .hits-container,
     #hits {
         position: relative;
+        z-index: unset;
+    }
+
+    .hits-container {
+        padding-top: 40px;
     }
 
     #hits {
         top: 0;
         filter: none;
+        border-top: none;
+    }
+
+    .ais-Hits-item {
+        margin-bottom: 30px;
+    }
+
+    .ais-Hits-item a {
+        border: none;
+    }
+
+    .ais-Hits-row {
+        width: 100%;
+        display: flex;
+
+        & .ais-Hits-category,
+        & .ais-Hits-subcategory {
+            width: max-content;
+            min-width: max-content;
+        }
+    }
+
+    .ais-Hits-category-spacer {
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 12px;
     }
 }

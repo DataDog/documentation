@@ -3,54 +3,16 @@ import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 const renderHits = (renderOptions, isFirstRender) => {
     const addAttributesToEmptyElements = () => {
         aisHits.classList.add('ais-Hits');
-        aisHitsCategory1.classList.add('ais-Hits-category', 'ais-Hits-category-1');
-        aisHitsCategory2.classList.add('ais-Hits-category', 'ais-Hits-category-2');
-        aisHitsCategory3.classList.add('ais-Hits-category', 'ais-Hits-category-3');
-        aisHitsCategory4.classList.add('ais-Hits-category', 'ais-Hits-category-4');
-        aisHitsCategory5.classList.add('ais-Hits-category', 'ais-Hits-category-5');
-        aisHitsCategory1.id = 'ais-Hits-category-1';
-        aisHitsCategory2.id = 'ais-Hits-category-2';
-        aisHitsCategory3.id = 'ais-Hits-category-3';
-        aisHitsCategory4.id = 'ais-Hits-category-4';
-        aisHitsCategory5.id = 'ais-Hits-category-5';
-        aisHitsList1.classList.add('ais-Hits-list', 'no-hits');
-        aisHitsList2.classList.add('ais-Hits-list', 'no-hits');
-        aisHitsList3.classList.add('ais-Hits-list', 'no-hits');
-        aisHitsList4.classList.add('ais-Hits-list', 'no-hits');
-        aisHitsList5.classList.add('ais-Hits-list', 'no-hits');
+        aisHitsList.classList.add('ais-Hits-list');
     };
 
     const appendEmptyElements = () => {
         container.appendChild(aisHits);
-        aisHits.appendChild(aisHitsCategory1);
-        aisHits.appendChild(aisHitsCategory2);
-        aisHits.appendChild(aisHitsCategory3);
-        aisHits.appendChild(aisHitsCategory4);
-        aisHits.appendChild(aisHitsCategory5);
-        aisHitsCategory1.appendChild(aisHitsList1);
-        aisHitsCategory2.appendChild(aisHitsList2);
-        aisHitsCategory3.appendChild(aisHitsList3);
-        aisHitsCategory4.appendChild(aisHitsList4);
-        aisHitsCategory5.appendChild(aisHitsList5);
+        aisHits.appendChild(aisHitsList);
     };
 
     const addHitsToEmptyElements = () => {
-        container.querySelector('#ais-Hits-category-1 .ais-Hits-list').innerHTML = apiJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-2 .ais-Hits-list').innerHTML = gettingStartedJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-3 .ais-Hits-list').innerHTML = guideJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-4 .ais-Hits-list').innerHTML = documentationJoinedListItemsHTML;
-        container.querySelector('#ais-Hits-category-5 .ais-Hits-list').innerHTML = integrationJoinedListItemsHTML;
-    };
-
-    const hideOrShowElements = () => {
-        const finalHitsLists = document.querySelectorAll('.ais-Hits-list');
-        finalHitsLists.forEach((list) => {
-            if (list.childElementCount) {
-                list.classList.remove('no-hits');
-            } else {
-                list.classList.add('no-hits');
-            }
-        });
+        container.querySelector('.ais-Hits-list').innerHTML = joinedListItemsHTML;
     };
 
     const truncateContent = (content, length) => {
@@ -62,8 +24,8 @@ const renderHits = (renderOptions, isFirstRender) => {
     };
 
     // Returns a bunch of <li>s
-    const generateJoinedHits = (hitsArray, category) => {
-        const joinedListItems = hitsArray
+    const generateJoinedHits = (hitsArray) => {
+        return hitsArray
             .map((item) => {
                 const link = item.relpermalink;
                 const hitData = item._highlightResult;
@@ -71,6 +33,29 @@ const renderHits = (renderOptions, isFirstRender) => {
                 const title = hitData.title.value;
                 const sectionHeader = hitData.section_header ? hitData.section_header.value : null;
                 const content = hitData.content.value;
+                const tag = item.tags[0];
+                let category = 'Documentation';
+
+                switch (tag) {
+                    case 'guide':
+                        category = 'Guides';
+                        break;
+
+                    case 'getting_started':
+                        category = 'Getting Started';
+                        break;
+
+                    case 'integrations':
+                        category = 'Integrations';
+                        break;
+
+                    case 'api_latest':
+                        category = 'API';
+                        break;
+
+                    default:
+                        break;
+                }
 
                 const displayTitle = sectionHeader ? sectionHeader : title;
                 const displayContent = truncateContent(content, 145);
@@ -78,50 +63,30 @@ const renderHits = (renderOptions, isFirstRender) => {
                 return `
                     <li class="ais-Hits-item">
                         <a href="${link}" target="_blank" rel="noopener noreferrer">
-                        <p class="ais-Hits-subcategory">${subcategory}</p>
-                        <p class="ais-Hits-title"><strong>${displayTitle}</strong></p>
-                        <p class="ais-Hits-content">${displayContent}</p>
+                            <div class="ais-Hits-row">
+                                <p class="ais-Hits-category">${category}</p>
+                                <i class="ais-Hits-category-spacer icon-right-carrot-normal"></i>
+                                <p class="ais-Hits-subcategory">${subcategory}</p>
+                                <i class="ais-Hits-category-spacer icon-right-carrot-normal"></i>
+                                <p class="ais-Hits-title"><strong>${displayTitle}</strong></p>
+                            </div>
+                            <div class="ais-Hits-row">
+                                <p class="ais-Hits-content">${displayContent}</p>
+                            </div>
                         </a>
                     </li>
                 `;
             })
             .join('');
-
-        return hitsArray.length
-            ? [`<li class="ais-Hits-item ais-Hits-category"><p>${category}</p></li>`, joinedListItems].join('')
-            : null;
     };
 
     const { widgetParams, hits } = renderOptions;
     const { container } = widgetParams;
-    const docsHitsArray = hits.filter(
-        (hit) =>
-            hit.tags[0] === 'docs' ||
-            hit.tags[0] === 'default_rules' ||
-            hit.tags[0] === 'rbac_permissions' ||
-            hit.tags[0] === null
-    );
-    const guidesHitsArray = hits.filter((hit) => hit.tags[0] === 'guide');
-    const gettingStartedHitsArray = hits.filter((hit) => hit.tags[0] === 'getting_started');
-    const integrationsHitsArray = hits.filter((hit) => hit.tags[0] === 'integrations');
-    const apiHitsArray = hits.filter((hit) => hit.tags[0] === 'api_latest');
-    const documentationJoinedListItemsHTML = generateJoinedHits(docsHitsArray, 'Documentation');
-    const guideJoinedListItemsHTML = generateJoinedHits(guidesHitsArray, 'Guides');
-    const gettingStartedJoinedListItemsHTML = generateJoinedHits(gettingStartedHitsArray, 'Getting Started');
-    const integrationJoinedListItemsHTML = generateJoinedHits(integrationsHitsArray, 'Integrations');
-    const apiJoinedListItemsHTML = generateJoinedHits(apiHitsArray, 'API');
+
+    const joinedListItemsHTML = generateJoinedHits(hits, null);
 
     const aisHits = document.createElement('div');
-    const aisHitsCategory1 = document.createElement('div');
-    const aisHitsCategory2 = document.createElement('div');
-    const aisHitsCategory3 = document.createElement('div');
-    const aisHitsCategory4 = document.createElement('div');
-    const aisHitsCategory5 = document.createElement('div');
-    const aisHitsList1 = document.createElement('ol');
-    const aisHitsList2 = document.createElement('ol');
-    const aisHitsList3 = document.createElement('ol');
-    const aisHitsList4 = document.createElement('ol');
-    const aisHitsList5 = document.createElement('ol');
+    const aisHitsList = document.createElement('ol');
 
     if (isFirstRender) {
         addAttributesToEmptyElements();
@@ -129,7 +94,6 @@ const renderHits = (renderOptions, isFirstRender) => {
         return;
     } else {
         addHitsToEmptyElements();
-        hideOrShowElements();
     }
 };
 
