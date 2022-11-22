@@ -19,6 +19,16 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+## Compatibility
+
+- **Partial pipelines**: View [partially retried][5] and downstream pipeline executions
+
+- **Manual steps**: View manually triggered pipelines
+
+- **Queue time**: View amount of time pipeline jobs sit in the queue before processing
+
+- **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
+
 ## Configure the Datadog integration
 
 The steps to activate the Datadog integration for [Buildkite][1] are:
@@ -109,3 +119,5 @@ These filters can also be applied through the facet panel on the left hand side 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#partial-and-downstream-pipelines
+[6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
