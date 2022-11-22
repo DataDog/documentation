@@ -39,7 +39,7 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. In or
 
 ## Within your CI/CD pipeline
 
-### My tests are timing out in my CI. What do I do?
+### My tests are timing out in my CI pipeline
 
 The first thing to check is which failure mode flags you are passing in your [global configuration file][10]. For CI runs that contain multiple tests, some tests are queued based on the parallelization setting defined on the [Continuous Testing Settings page][9]. You may need to adapt both your configuration and parallelization based on your organizational needs.
 
