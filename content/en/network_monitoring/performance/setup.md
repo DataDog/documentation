@@ -132,7 +132,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
-6. [Optional] Make sure the Azure integration is installed for more visibility into Azure load balancers. This feature is currently not available in the Govcloud region.
+6. Optionally, install the Azure integration for more visibility into Azure load balancers.
 
 ### SELinux-enabled systems
 
