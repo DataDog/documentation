@@ -264,15 +264,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ## Say what's happening
 
-Add a **Rule name** to configure the rule name that appears in the detection rules list view and the title of the Security Signal.
-
-In the **Rule message** section, use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. Specifically, use [template variables][2] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications. See the [Notification Variables documentation][1] for more information and examples.
-
-Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.`technique:T1110-brute-force`.
-
-**Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
-
-See [Template Variables][2] for more information.
+{{% cloud-siem-rule-say-whats-happening %}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

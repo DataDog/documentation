@@ -61,19 +61,10 @@ Note: The evaluation window must be less than or equal to the keep alive and max
 
 ### Say what's happening
 
-Add a **Rule name** to configure the rule name that appears in the detection rules list view and the title of the Security Signal.
-
-In the **Rule message** section, use [notification variables][2] and Markdown to customize the notifications sent when a signal is generated. Specifically, use [template variables][3] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications. See the [Notification Variables documentation][2] for more information and examples.
-
-Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
-
-
-**Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
+{{% cloud-siem-rule-say-whats-happening %}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/rules
-[2]: /security_platform/notifications/variables/
-[3]: /security_platform/notifications/variables/#template-variables
