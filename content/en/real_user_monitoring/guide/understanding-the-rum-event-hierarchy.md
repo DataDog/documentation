@@ -38,7 +38,7 @@ Similarly to the `session.id`, each view automatically has a unique `view.id` co
 
 ### Actions, errors, resources, and long tasks
 
-Within views, the SDK creates more granular events that all fall along the same level hierarchically. However, each event is unique and carries its own attributes and properties.
+Within views, the SDK creates more granular events that all fall along the same hierarchy level. However, each event is unique and carries its own attributes and properties.
 
 ### Actions
 
