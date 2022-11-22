@@ -48,7 +48,7 @@ Actions represent user activity on a page. In browsers, all click actions are au
 
 This example displays a query that searches for all actions from users clicking on the "Add to cart" button that resulted in an error.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart.png" alt="Sample search of all "Add to Cart" actions that led to an error." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart.png" alt="Sample search of all 'Add to Cart' actions that led to an error." style="width:80%;">}}
 
 ### Errors
 
