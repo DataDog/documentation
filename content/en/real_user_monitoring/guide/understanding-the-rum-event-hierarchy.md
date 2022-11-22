@@ -52,7 +52,7 @@ This example displays a query that searches for all actions from users clicking 
 
 ### Errors
 
-You can use RUM to collect [frontend errors][6] that occur during the user session. By default, the browser SDK creates error events for unhandled exceptions and console errors. Additionally, you can collect custom errors through the RUM `addError` API ([browser][7] | [mobile][8]). On mobile apps, you can also see if the error led to a session termination, also known as a crash.
+You can use RUM to collect [frontend errors][6] that occur during the user session. By default, the browser SDK creates error events for unhandled exceptions and console errors. Additionally, you can collect custom errors through the RUM `addError` API (on [browser][7] and [mobile][8]). On mobile apps, you can also see if the error led to a session termination, also known as a crash.
 
 Errors can be viewed across both RUM and Error Tracking. Source and custom errors will be processed by Error Tracking, while console errors will be solely in RUM.
 
