@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type. See the diagram below for a high level overview of the hierarchy.
+This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type. 
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="Diagram of the RUM event hierarchy." style="width:50%;">}}
 
