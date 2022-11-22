@@ -21,12 +21,28 @@ further_reading:
 
 ## Compatibility
 
-Supported GitLab versions:
-* GitLab.com (SaaS)
-* GitLab >= 14.1 (self-hosted)
+- **Supported GitLab versions**:
+  - GitLab.com (SaaS)
+  - GitLab >= 14.1 (self-hosted)
+  - GitLab >= 13.7.0 (self-hosted) by enabling the `datadog_ci_integration` feature flag
 
-Other supported versions with additional configuration:
-* GitLab >= 13.7.0 (self-hosted), by enabling the `datadog_ci_integration` feature flag.
+- **Partial pipelines**: View [partially retried][11] and downstream pipeline executions
+
+- **Manual steps**: View manually triggered pipelines
+
+- **Queue time**: View amount of time pipeline jobs wait in the queue before processing
+
+- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][12]
+
+- **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][14] for self-hosted GitLab runners
+
+- **Custom spans**: Configure custom spans
+
+- **Custom pre-defined tags**: Configure [custom tags][10] and metrics at runtime
+
+- **Parameters**: Set custom `env` or `service` [parameters][13]
+
+- **Pipeline failure reasons**: Identify pipeline failure reasons from [error messages][15]
 
 ## Configuring the Datadog integration
 
@@ -244,3 +260,9 @@ Log files larger than 1GiB are truncated.
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /logs/
+[10]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#setting-custom-tags
+[11]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
+[12]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#enable-job-log-collection-beta
+[13]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#integrating-through-webhooks
+[14]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#infrastructure-metric-correlation
+[15]: https://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#error-messages-for-pipeline-failures

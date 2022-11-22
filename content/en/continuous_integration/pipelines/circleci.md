@@ -22,6 +22,16 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+## Compatibility
+
+- **Partial pipelines**: View partial and downstream pipeline executions
+
+- **Custom spans**: Configure custom spans
+
+- **Custom pre-defined tags**: Set [custom tags][6] to all generated pipeline and job spans
+
+- **Custom tags and metrics at runtime**: Configure [custom tags][7] and metrics at runtime
+
 ## Configure the Datadog integration
 
 The Datadog integration for [CircleCI][1] works by using [webhooks][2] to send data to Datadog.
@@ -54,3 +64,5 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://docs.datadoghq.com/continuous_integration/pipelines/circleci/#setting-custom-tags
+[7]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
