@@ -67,7 +67,7 @@ Resources are collected from views and include external requests from your appli
 
 #### Sample search: A list of all images loaded on the `/cart` view filtered by image size
 
-In this example, select **Resources** from the event type dropdown, then make a query for images that loaded on the cart view and were larger or equal to 1000 kilobytes.
+In this example, **Resources** is selected from the event type dropdown, then a query for images that loaded on the cart view and were larger or equal to 1000 kilobytes are listed.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources.png" alt="Sample search of all images loaded on the cart view that were 1 megabyte or greater." style="width:80%;">}}
 
