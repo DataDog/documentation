@@ -12090,6 +12090,8 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthSigv4'
       - $ref: '#/components/schemas/SyntheticsBasicAuthNTLM'
       - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthOauthClient'
+      - $ref: '#/components/schemas/SyntheticsBasicAuthOauthROP'
       type: object
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
@@ -12153,6 +12155,115 @@ components:
       type: string
       x-enum-varnames:
       - NTLM
+    SyntheticsBasicAuthOauthClient:
+      description: Object to handle `oauth client` authentication when performing
+        the test.
+      properties:
+        accessTokenUrl:
+          description: Access token URL to use when performing the authentication.
+          example: https://example.com
+          type: string
+        audience:
+          description: Audience to use when performing the authentication.
+          example: audience
+          type: string
+        clientId:
+          description: Client ID to use when performing the authentication.
+          example: oauth-username
+          type: string
+        clientSecret:
+          description: Client secret to use when performing the authentication.
+          example: oauth-password
+          type: string
+        resource:
+          description: Resource to use when performing the authentication.
+          example: resource
+          type: string
+        scope:
+          description: Scope to use when performing the authentication.
+          example: scope
+          type: string
+        tokenApiAuthentication:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthTokenApiAuthentication'
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthClientType'
+      required:
+      - accessTokenUrl
+      - tokenApiAuthentication
+      - clientId
+      - clientSecret
+      type: object
+    SyntheticsBasicAuthOauthClientType:
+      default: oauth-client
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - oauth-client
+      example: oauth-client
+      type: string
+      x-enum-varnames:
+      - OAUTH_CLIENT
+    SyntheticsBasicAuthOauthROP:
+      description: Object to handle `oauth rop` authentication when performing the
+        test.
+      properties:
+        accessTokenUrl:
+          description: Access token URL to use when performing the authentication.
+          example: https://example.com
+          type: string
+        audience:
+          description: Audience to use when performing the authentication.
+          example: audience
+          type: string
+        clientId:
+          description: Client ID to use when performing the authentication.
+          example: client-id
+          type: string
+        clientSecret:
+          description: Client secret to use when performing the authentication.
+          example: client-secret
+          type: string
+        password:
+          description: Password to use when performing the authentication.
+          example: password
+          type: string
+        resource:
+          description: Resource to use when performing the authentication.
+          example: resource
+          type: string
+        scope:
+          description: Scope to use when performing the authentication.
+          example: scope
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsBasicAuthOauthROPType'
+        username:
+          description: Username to use when performing the authentication.
+          example: username
+          type: string
+      required:
+      - accessTokenUrl
+      - password
+      - username
+      type: object
+    SyntheticsBasicAuthOauthROPType:
+      default: oauth-rop
+      description: The type of basic authentication to use when performing the test.
+      enum:
+      - oauth-rop
+      example: oauth-rop
+      type: string
+      x-enum-varnames:
+      - OAUTH_ROP
+    SyntheticsBasicAuthOauthTokenApiAuthentication:
+      description: Type of token to use when performing the authentication.
+      enum:
+      - header
+      - body
+      example: header
+      type: string
+      x-enum-varnames:
+      - HEADER
+      - BODY
     SyntheticsBasicAuthSigv4:
       description: Object to handle `SIGV4` authentication when performing the test.
       properties:
@@ -15907,6 +16018,11 @@ components:
             (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
+        opentelemetry_apm_host_count:
+          description: Contains the total number of hosts using APM reported by Datadog
+            exporter for the OpenTelemetry Collector.
+          format: int64
+          type: integer
         opentelemetry_host_count:
           description: Contains the total number of hosts reported by Datadog exporter
             for the OpenTelemetry Collector.
@@ -16880,6 +16996,12 @@ components:
             date for all organizations.
           format: int64
           type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
         opentelemetry_host_top99p:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
@@ -17239,6 +17361,12 @@ components:
           type: integer
         online_archive_events_count_sum:
           description: Sum of all online archived events over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        opentelemetry_apm_host_top99p:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
             date for the given org.
           format: int64
           type: integer
@@ -17628,6 +17756,12 @@ components:
           type: integer
         online_archive_events_count_agg_sum:
           description: Sum of all online archived events over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        opentelemetry_apm_host_top99p_sum:
+          description: Shows the 99th percentile of APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
             months for all organizations.
           format: int64
           type: integer

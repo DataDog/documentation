@@ -25,6 +25,7 @@ Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the
 
 * **Include resource IDs**
 * **Automatically refresh your Cost & Usage Report**
+* **Set RefreshClosedReports:true**
 
 Select the following Delivery options:
 
