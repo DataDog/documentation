@@ -44,7 +44,7 @@ Your private locations test results display identically to your managed location
 
 1. You can use any Unix virtual machine with Docker or without a virtual machine. Install [Docker][4] on a machine, or use another container runtime such as [Podman][10].
 
-   To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 16.04][2].
+   To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][11].
 
 2. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
 3. Click **Add Private Location**.
@@ -107,3 +107,4 @@ Use your new private location just like a managed location in your Synthetic tes
 [8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
 [9]: /getting_started/synthetics/browser_test
 [10]: https://podman.io/
+[11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
