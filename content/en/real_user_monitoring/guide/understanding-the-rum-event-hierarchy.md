@@ -30,7 +30,7 @@ Each session is automatically associated with a unique `session.id`.
 ## Views
 Within a session, a view event is created each time a user navigates to a page (Browser RUM) or to a screen or screen segment (Mobile RUM) of an application. 
 
-Each view automatically collects multiple view specific attributes and data, such as text in the URL and timing metrics, like the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, user information, etc. However, for event-specific attributes, these must be view-specific. To switch over to view events only, you can adjust the event selector as shown in the video below.
+Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the video below.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.mp4" alt="RUM views" video="true" style="width:80%;">}}
 
