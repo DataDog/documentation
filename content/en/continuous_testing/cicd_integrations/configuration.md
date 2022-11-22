@@ -94,7 +94,7 @@ In the global configuration file, you can configure the following options:
 : A boolean flag that fails the CI job if at least one test is missing in a run (for example, if it has been removed or deleted). The default is set to `false`.
 
 `failOnTimeout`
-: A boolean flag that will fail the CI job if at least one test exceees the default test timeout. The default is set to `true`.
+: A boolean flag that fails the CI job if at least one test exceeds the default test timeout. The default is set to `true`.
 
 `files`
 : Glob pattern to detect Synthetic tests config files.
