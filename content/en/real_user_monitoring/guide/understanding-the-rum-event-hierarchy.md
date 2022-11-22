@@ -96,7 +96,7 @@ When querying for specific actions, you can use the parent event type, but not o
 
 #### Sample search: The top 10 actions that occurred on `/`
 
-In this example, search within the actions event type for all view names in the Top List view to see the top 10 actions that occurred on `/`, which represents the homepage.
+This example searches within the actions event type for all view names using the Top List view to see the top 10 actions that occurred on `/`, which represents the homepage.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-mix-match-event-types.png" alt="Sample search of the top ten actions that occurred on the homepage." style="width:80%;">}}
 
