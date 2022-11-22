@@ -90,7 +90,7 @@ If you aren't seeing data after writing a query, confirm that the event selector
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-2.png" alt="Example of updating a query by using the view selector." style="width:80%;">}}
 
-### How to query a event type that is nested in a different event type 
+### Querying an event type that is nested in a different event type 
 
 When querying for specific actions, you can use the parent event type, but not one at equal or lower level. For example, actions are nested underneath views, and actions and errors are at the same level in the hierarchical chain. This means you can query for all actions and errors that happened on a given page, but not for all actions that had a specific error type.
 
