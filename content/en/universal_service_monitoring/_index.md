@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into APM views such as the Service Catalog, Services List, and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.
+Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into views such as the Service Catalog and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.
 
 {{< img src="universal_service_monitoring/service_overview.mp4" alt="Video demonstrating Universal Service Monitoring. An overview of a service is accessed by clicking on a service on the Service Map and selecting View service overview." video="true" >}}
 
@@ -35,7 +35,7 @@ Required Agent version
 Supported platforms
 : Linux kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater<br/>
-Windows IIS
+IIS on Windows 2012 R2 and greater
 
 Supported application-layer protocols
 : HTTP<br/>
@@ -300,7 +300,7 @@ To update the service's name, use [unified service tagging][1].
 
 ## Exploring your services
 
-After you configure the Agent, wait about five minutes for your service to appear in the APM Service Catalog. Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
+After you configure the Agent, wait about five minutes for your service to appear in the Service Catalog. Click the service to see the service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
 
 The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
 
