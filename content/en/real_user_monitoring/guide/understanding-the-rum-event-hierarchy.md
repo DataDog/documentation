@@ -44,7 +44,7 @@ Within views, the SDK creates more granular events that all fall along the same 
 
 Actions represent user activity on a page. In browsers, all click actions are automatically collected. On mobile, all taps, swipes, and scrolls are collected. Beyond these default actions, you can also send [custom actions][5], such as form completion and business transactions. 
 
-#### Sample search: Top list of all "Add to cart" actions that led to an error
+#### Sample search: Top list of actions leading to an error
 
 In this example, search for all actions from users clicking on the "Add to cart" button that resulted in an error.
 
