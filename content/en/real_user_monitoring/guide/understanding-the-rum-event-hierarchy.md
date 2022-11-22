@@ -56,7 +56,7 @@ You can use RUM to collect [frontend errors][6] that occur during the user sessi
 
 Errors can be viewed in both RUM and Error Tracking. Source and custom errors are processed by Error Tracking, while console errors are solely in RUM.
 
-#### Sample search: List of all crashes that occurred on the "CheckoutViewController"page in the iOS Shop.ist application
+#### Sample search: List of all crashes that occurred on a page in the application
 
 In this example, search within the errors event to see all crashes that occurred on the “CheckoutViewController” page for a particular operating system and application.
 
