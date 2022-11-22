@@ -14,7 +14,7 @@ further_reading:
 
 This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type. 
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="Diagram of the RUM event hierarchy." style="width:50%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="Diagram of the RUM event hierarchy, displaying a single session containing multiple views." style="width:50%;">}}
 
 ## Sessions
 All RUM data refers to user or synthetics sessions, which are at the top of the event hierarchy. A session is a unique user journey and encompasses everything (for example, pages viewed, views, clicks, scrolls, and errors) the user triggered. A session can last up to four hours of continuous activity, or it can expire after [15 minutes of inactivity][2]. Since a session encompasses the entire journey, all [attributes][3] tied to that user are also tied to that session. For example, you may want to query on a default attribute, like `application.id`, then add something more custom, like [user attributes][4].
