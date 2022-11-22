@@ -194,6 +194,8 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 Click **Add Case** to add additional cases.
 
+Note: The evaluation window must be less than or equal to the keep alive and maximum signal duration.
+
 {{% /tab %}}
 
 {{% tab "New Value" %}}
@@ -224,11 +226,11 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 ### Time windows
 
-Datadog automatically detects the seasonality of the data and will generate a security signal when the data is determined to be anomalous.
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
 
-Once a signal is generated, the signal will remain "open" if the data remains anomalous and the last updated timestamp will be updated for the anomalous duration.
+Once a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
 
-A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
 
 {{% /tab %}}
 
@@ -262,7 +264,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ## Say what's happening
 
-The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
+Add a **Rule name** to configure the rule name that appears in the detection rules list view and the title of the Security Signal.
 
 In the **Rule message** section, use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. Specifically, use [template variables][2] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications. See the [Notification Variables documentation][1] for more information and examples.
 

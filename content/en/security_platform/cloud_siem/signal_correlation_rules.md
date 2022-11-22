@@ -55,9 +55,13 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 {{% cloud-siem-rule-time-windows %}}
 
+Click **Add Case** to add additional cases.
+
+Note: The evaluation window must be less than or equal to the keep alive and maximum signal duration.
+
 ### Say what's happening
 
-The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
+Add a **Rule name** to configure the rule name that appears in the detection rules list view and the title of the Security Signal.
 
 In the **Rule message** section, use [notification variables][2] and Markdown to customize the notifications sent when a signal is generated. Specifically, use [template variables][3] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications. See the [Notification Variables documentation][2] for more information and examples.
 
