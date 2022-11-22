@@ -4,6 +4,7 @@ import instantsearch from 'instantsearch.js';
 import { configure, searchBox } from 'instantsearch.js/es/widgets';
 import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
+import { customPagination } from './algolia/customPagination';
 
 function getConfig(environment) {
     if (environment === 'live') {
@@ -95,6 +96,12 @@ if (searchBoxContainer) {
 
         hitComponent({
             container: hitsContainer
+        }),
+
+        customPagination({
+            isNotSearchPage: !searchResultsPage,
+            container: document.querySelector('#pagination'),
+            scrollTo: document.querySelector('#pagetitle')
         })
     ]);
 

@@ -182,6 +182,11 @@
         background-color: #e6e6e6;
     }
 
+    #count {
+        padding: 20px 12px 0 12px;
+        align-self: flex-start;
+    }
+
     .hits-container,
     #hits {
         position: relative;
@@ -189,7 +194,7 @@
     }
 
     .hits-container {
-        padding-top: 40px;
+        padding-top: 20px;
     }
 
     #hits {
@@ -222,5 +227,32 @@
         display: inline-flex;
         align-items: center;
         padding: 0 12px;
+    }
+
+    #pagination {
+        align-self: flex-start;
+    }
+
+    .ais-Pagination-list {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        font-weight: 600;
+    }
+
+    .ais-Pagination-list li:not(:last-child) {
+        padding-right: 24px;
+    }
+
+    .ais-Pagination-list li:before {
+        content: none;
+    }
+
+    .ais-Pagination-item a {
+        border: none;
+    }
+
+    .ais-Pagination-item--disabled p {
+        color: #e6e6e6;
     }
 }
