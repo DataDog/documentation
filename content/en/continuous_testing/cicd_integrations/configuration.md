@@ -88,7 +88,7 @@ In the global configuration file, you can configure the following options:
 : The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
 `failOnCriticalErrors`
-: A boolean flag that will fail the CI job if no tests were triggered, or results couldn't be fetched from Datadog. The default is set to `false`.
+: A boolean flag that fails the CI job if no tests were triggered, or results couldn't be fetched from Datadog. The default is set to `false`.
 
 `failOnMissingTests`
 : A boolean flag that fails the CI job if at least one test is missing in a run (for example, if it has been removed or deleted). The default is set to `false`.
