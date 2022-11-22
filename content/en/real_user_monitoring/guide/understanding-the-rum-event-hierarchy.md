@@ -76,7 +76,7 @@ Long tasks are anything that blocks the UI thread for a given period of time. On
 
 #### Sample search: All frozen frame long tasks that lasted more than 500 ms
 
-In this example, select Long tasks from the event type dropdown and specify the duration.
+In this example, **Long tasks** is selected from the event type dropdown and then duration is specified.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-long-tasks.png" alt="Sample search of all frozen frame long tasks lasting longer than 500 milliseconds." style="width:80%;">}}
 
