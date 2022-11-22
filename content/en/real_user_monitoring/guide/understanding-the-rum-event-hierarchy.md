@@ -63,7 +63,7 @@ This example displays query that searches within the errors event to view all cr
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
 
 ### Resources
-Resources are collected from views and include external requests from your application to a network provider, like XHR, JS loading, images, fonts, etc. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
+Resources are collected from views and include external requests from your application to a network provider, things like XHR, JS loading, images, or fonts, for example. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
 
 #### Sample search: A list of all images loaded on the /cart view, where the image size was greater than or equal to 1000 kilobytes (or 1MB)
 
