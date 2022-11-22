@@ -23,7 +23,7 @@ All RUM data refers to user or synthetics sessions, which are at the top of the 
 
 To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the user and application.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-list-all-sessions.png" alt="Sample search listing all sessions from user 'Jane Doe'." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-all-session-user.png" alt="Sample search listing all sessions from user 'Jane Doe'." style="width:80%;">}}
 
 Each session is automatically associated with a unique `session.id`.
 
@@ -32,7 +32,7 @@ Within a session, a view event is created each time a user navigates to a page (
 
 Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the video below.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.mp4" alt="RUM views" video="true" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.png" alt="RUM views" video="true" style="width:80%;">}}
 
 Similarly to the `session.id`, each view automatically has a unique `view.id` connected to it. 
 
@@ -84,11 +84,11 @@ In this example, **Long tasks** is selected from the event type dropdown and the
 
 ### No data appears after writing a query
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears.png" alt="Example of no data appearing after writing a query." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-original.png" alt="Example of no data appearing after writing a query." style="width:80%;">}}
 
-If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **views**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time picker to ensure you are in a time window where data should be appearing.
+If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **views**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time frame selector to ensure you are in a time window where data should be appearing.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-2.png" alt="Example of updating a query by using the view selector." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-after.png" alt="Example of updating a query by using the view and time frame selectors." style="width:80%;">}}
 
 ### Querying an event type that is nested in a different event type 
 
