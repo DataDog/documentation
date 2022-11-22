@@ -20,13 +20,13 @@ further_reading:
 
 Custom metrics provide visibility into all facets of your business -- from application performance, infrastructure health and business KPIs. In order to govern your custom metric volumes, Datadog offers several tools for cost visibility and control, such as [estimated real-time custom metric usage][1], [usage attribution][2], and [Metrics without Limits][3]™.
 
-These tools use metrics tags to provide visibility into metrics that have been ingested into Datadog. This helps you monitor the number of custom metrics associated with any tag. For example, you can use tags to see how many custom metrics a particular application team is generating. However, custom metrics can be submitted without proper tagging; making it harder to understand your overall volume of custom metrics. It’s also harder without proper tagging to attribute the metrics back to the specific team, service, or application that is generating them.
+These tools use metrics tags to provide visibility into metrics that have been ingested into Datadog. This helps you monitor the number of custom metrics associated with any tag. For example, you can use tags to see how many custom metrics a particular application team is generating. However, custom metrics can be submitted without proper tagging; making it harder to understand your overall volume of custom metrics. It's also harder without proper tagging to attribute the metrics back to the specific team, service, or application that is generating them.
 
 ## Prerequisites
 
 To filter out custom metrics that are missing crucial tag keys, like `team`, use [Vector][4] to drop them before they get ingested into Datadog. Vector, an open source tool optimized for observability pipelines, or its enterprise solution, Datadog Observability Pipelines, lets you control which custom metrics are sent to Datadog.
 
-This guide assumes that you already have a Vector pipeline set-up. If you’re not familiar with Vector, see [Setting up Vector][5] and [Vector Remap Language][6] for more information.
+This guide assumes that you already have a Vector pipeline set-up. If you're not familiar with Vector, see [Setting up Vector][5] and [Vector Remap Language][6] for more information.
 
 ## Configure the filter transform
 

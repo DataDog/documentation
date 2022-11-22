@@ -3418,8 +3418,8 @@ main:
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
     weight: 403
-  - name: OAuth for Data Integrations
-    url: developers/integrations/oauth_for_data_integrations
+  - name: OAuth for Integrations
+    url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
     weight: 404
   - name: Python
