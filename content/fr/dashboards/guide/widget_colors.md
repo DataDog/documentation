@@ -5,7 +5,7 @@ title: Sélectionner des couleurs appropriées pour vos graphiques
 
 Dans les graphiques Datadog, l'utilisation de couleurs est la principale façon de distinguer les différentes séries de données. En sélectionnant les couleurs appropriées pour vos graphiques, les membres de votre équipe pourront analyser les données qui y figurent, tirer des conclusions et résoudre les problèmes efficacement. 
 
-{{< img src="dashboards/guide/colors/colors_top.png" alt="Sous "Graph your data", l'utilisateur sélectionne l'une des palettes de couleurs disponibles." style="width:90%;" >}}
+{{< img src="dashboards/guide/colors/colors_top.png" alt="Sous Graph your data, l'utilisateur sélectionne l'une des palettes de couleurs disponibles." style="width:90%;" >}}
 
 ## Types de palettes de couleurs
 
