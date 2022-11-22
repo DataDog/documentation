@@ -70,7 +70,7 @@ To setup your client, Datadog API and application keys need to be configured. Th
     datadog-ci synthetics run-tests --apiKey "<API_KEY>" --appKey "<APPLICATION_KEY>"
     ```
 
-3. Or defined in a [global configuration fil](#global-configuration-file-options):
+3. Or defined in a [global configuration file](#global-configuration-file-options):
 
      The global JSON configuration file can specify additional advanced options. Specify the path to this file using the flag `--config` [when launching your tests](#run-tests). If you set the name of your global configuration file to `datadog-ci.json`, that name is the default.
 
