@@ -278,7 +278,7 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [12]: /developers/integrations/
 [13]: /developers/#creating-your-own-solution
 [14]: /api/latest/
-[15]: /developers/integrations/oauth_for_data_integrations/
+[15]: /developers/integrations/oauth_for_integrations/
 [16]: /developers/datadog_apps/
 [17]: https://app.datadoghq.com/apps/
 [18]: https://github.com/Datadog/marketplace
