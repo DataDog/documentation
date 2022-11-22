@@ -23,7 +23,7 @@ All RUM data refers to user or synthetics sessions, which are at the top of the 
 
 To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the user and application.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-list-all-sessions.png" alt="Sample search listing all sessions from user "Jane Doe"." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-list-all-sessions.png" alt="Sample search listing all sessions from user 'Jane Doe'." style="width:80%;">}}
 
 Notice that each session is automatically associated with a unique `session.id`.
 
