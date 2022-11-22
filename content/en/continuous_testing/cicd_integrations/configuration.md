@@ -100,7 +100,7 @@ In the global configuration file, you can configure the following options:
 : Glob pattern to detect Synthetic tests config files.
 
 `global`
-: Overrides of Synthetic tests applied to all tests ([see below for descriptions of each field](#additional-configuration)).
+: Overrides for Synthetic tests applied to all tests.
 
 `pollingTimeout`
 : **Type**: integer<br>
