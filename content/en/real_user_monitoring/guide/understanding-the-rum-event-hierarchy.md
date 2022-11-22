@@ -28,7 +28,7 @@ To list all sessions from a specific user, select **Sessions** from the event ty
 Each session is automatically associated with a unique `session.id`.
 
 ## Views
-Within a session, a view event is created each time a user navigates to a page (Browser RUM) or screen/screen segment (Mobile RUM) of an application. 
+Within a session, a view event is created each time a user navigates to a page (Browser RUM) or to a screen or screen segment (Mobile RUM) of an application. 
 
 Each view automatically collects multiple view specific attributes and data, such as text in the URL and timing metrics, like the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, user information, etc. However, for event-specific attributes, these must be view-specific. To switch over to view events only, you can adjust the event selector as shown in the video below.
 
