@@ -90,7 +90,7 @@ From the RUM Explorer, you can then analyze:
 
 Imagine a web development team owns a set of pages like the example below.
 
-[ insert image ]
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership.png" alt="Examples of sets of pages a web development could own" style="width:90%;">}}
 
 Inside your RUM application, create services for each set of pages owned by a team.
 
@@ -98,20 +98,20 @@ Inside your RUM application, create services for each set of pages owned by a te
 - For each page of your website, assign a view name and a service following [these instructions][8]
   - `"purchase"` service for the pages available at `/checkout`, `/payment`, `/confirmOrder` 
   - `"catalog"` service for the pages available at `/beds`, `/chairs/123`, `/search` 
-- [Upload a sourcemap for each service[9] to view unminified stack traces in Error Tracking 
+- [Upload a sourcemap for each service][9] to view unminified stack traces in Error Tracking 
 
 Get insights into the performance or the adoption of a given team's scope by using the service attribute in RUM:
 
 - From the RUM Application Overview page, narrow down all graphs by `service` to get a holistic view for a team's scope
-- Any query done in the RUM Explorer can use the `service` attribute to filter 
+- Any query done in the RUM Explorer can use the `service` attribute to filter: 
   - Errors by service 
   - Page views by service 
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-appliactions-overview-page.jpg" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page.jpg" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
 ### Teams own UI components
 
-[ insert image ]
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components.png" alt="Components can be tracked using custom actions" style="width:90%;">}}
 
 Components are tracked using custom actions [mentioned above][10]. 
 
@@ -131,3 +131,4 @@ Components are tracked using custom actions [mentioned above][10].
 [7]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
 [8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
+[10]: #track-components-in-web-pages
