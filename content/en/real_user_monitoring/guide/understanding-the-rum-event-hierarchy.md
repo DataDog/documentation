@@ -25,7 +25,7 @@ To list all sessions from a specific user, select **Sessions** from the event ty
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-list-all-sessions.png" alt="Sample search listing all sessions from user 'Jane Doe'." style="width:80%;">}}
 
-Notice that each session is automatically associated with a unique `session.id`.
+Each session is automatically associated with a unique `session.id`.
 
 ## Views
 Within a session, a view event is created each time a user navigates to a page (Browser RUM) or screen/screen segment (Mobile RUM) of an application. 
