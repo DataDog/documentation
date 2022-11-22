@@ -45,7 +45,7 @@ Choose between a **Pipelines** or a **Tests** monitor:
     * **Stage**: Evaluates the execution of a group of one or more jobs in CI providers that support it.
     * **Job**: Evaluates the execution of a group of commands.
     * **Command**: Evaluates manually instrumented [custom command][1] events, which are individual commands being executed in a job.
-    * **Alls**: Evaluates all types of events.
+    * **All**: Evaluates all types of events.
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
     * **CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
@@ -74,7 +74,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 ### Define the search query
 
 1. Common monitor types: (optional) Provides a template query for each of the **New Flaky Test**, **Test Failures**, and **Test Performance** common monitor types, which you can then customize. Learn more about this feature by reading [Track new flaky tests](#track-new-flaky-tests).
-2. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`
+2. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`.
 3. Choose to monitor over a CI Test event count, facet, or measure:
     * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
     * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
@@ -87,7 +87,7 @@ The following example is of a pipeline error rate monitor using a formula that c
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:100%;" >}}
 
 #### Test runs with different parameters or configurations
-Use `@test.fingerprint` in the monitor group by when you have tests with the same test full name, but different test parameters or configurations. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fingerprint` provides the same granularity level as the Test Stats, Failed, and Flaky Tests section on the **Commit Overview** page.
+Use `@test.fingerprint` in the monitor `group by` when you have tests with the same test full name, but different test parameters or configurations. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fingerprint` provides the same granularity level as the Test Stats, Failed, and Flaky Tests section on the **Commit Overview** page.
 
 For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint only triggers the alert on the Chrome test run.
 
