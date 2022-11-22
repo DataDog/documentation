@@ -194,7 +194,7 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 Click **Add Case** to add additional cases.
 
-Note: The evaluation window must be less than or equal to the keep alive and maximum signal duration.
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 {{% /tab %}}
 
