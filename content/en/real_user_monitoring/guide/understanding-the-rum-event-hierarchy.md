@@ -72,7 +72,7 @@ In this example, **Resources** is selected from the event type dropdown, then a 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources.png" alt="Sample search of all images loaded on the cart view that were 1000 kilobytes or greater." style="width:80%;">}}
 
 ### Long tasks
-Long tasks are anything that blocks the UI thread for a given period of time. On mobile, for example, a long task may be a frozen frame if the screen is blocked for longer than 300 ms.
+Long tasks are any task that blocks the UI thread for a specified period of time. On mobile for example, a long task may be a frozen frame if the screen is blocked for longer than 300 milliseconds.
 
 #### Sample search: All frozen frame long tasks that lasted more than 500 ms
 
