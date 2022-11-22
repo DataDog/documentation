@@ -91,7 +91,7 @@ In the global configuration file, you can configure the following options:
 : A boolean flag that will fail the CI job if no tests were triggered, or results couldn't be fetched from Datadog. The default is set to `false`.
 
 `failOnMissingTests`
-: A boolean flag that will fail the CI job if at least one test is missing within a run (for example, if it has been removed/deleted). The default is set to `false`.
+: A boolean flag that fails the CI job if at least one test is missing in a run (for example, if it has been removed or deleted). The default is set to `false`.
 
 `failOnTimeout`
 : A boolean flag that will fail the CI job if at least one test exceees the default test timeout. The default is set to `true`.
