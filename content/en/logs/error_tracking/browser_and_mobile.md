@@ -30,11 +30,31 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
 1. Download the latest version of the [Logs Browser SDK][3].
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
 
-Uncaught exceptions are tracked automatically. For example: `throw new Error('an exception occurred');`.
+Once you have initalized your SDK, like so for example(with NPM):
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
 
-## Log an error
+datadogLogs.init({
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  service: '<MY_SERVICE>',
+  env: '<MY_ENV>'
+  forwardErrorsToLogs: true,
+  sampleRate: 100,
+})
+```
+You **must** add the following snippet near initalization to catch and submit all uncaught exceptions to Datadog.
 
-To log an error yourself, along with information about the stack trace, use the following:
+```javascript
+window.onerror = function (message, source, lineno, colno, error) {
+    datadogLogs.logger.error(error?.message || '', {
+        error: { stack: error?.stack },
+    });
+};
+```
+
+
+To log a caught exception yourself, you may optionally use:
 
 ```javascript
 const e = new Error('an exception occurred');
