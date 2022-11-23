@@ -51,7 +51,7 @@ Click **New Reference Table +**, then upload a CSV file, name the appropriate co
 
 {{% /tab %}}
 
-{{% tab "AWS S3 upload" %}}
+{{% tab "AWS S3" %}}
 
 Reference Tables can automatically pull a CSV file from an AWS S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
 
