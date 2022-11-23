@@ -12,6 +12,8 @@ further_reading:
   Datadog API Catalog is in beta! Use this form request access. 
 {{< /beta-callout >}} 
 
+<!-- screen shot tktk -->
+
 ## Overview
 
 The API Catalog provides a single view and entry point into exploring the performance, reliability, and ownership of all your API Endpoints in one place. It's a central place where your whole company can find constantly up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
@@ -64,6 +66,8 @@ To **filter the list** of endpoints or to search for a particular endpoint of in
 
 To **scope the data** shown in the table, specify an environment and timeframe.
 
+<!-- screen cap changing the scope and seeing the metrics change tktk -->
+
 You can [define tags](#group-apis-to-express-a-feature-or-business-logic) to use as facets so you can easily find groups of endpoints you're most interested in.
 
 **Note**: The `API Type` facet is based on auto-generated tags and has values of `public` and `unknown` (which usually indicates a private endpoint).
@@ -71,24 +75,38 @@ You can [define tags](#group-apis-to-express-a-feature-or-business-logic) to use
 
 ## Investigating endpoint details
 
+When you're exploring an endpoint, getting a higher resolution view of the API endpoints details is helpful.
+
 Click an endpoint in the list to open a details page that shows performance, governance, and metadata information for the endpoint, collected from various areas of Datadog into one place. Here you can edit the short name and description, and add custom tags. You can also launch deeper investigations of the various types of telemetry using links into other areas of Datadog. 
+
+For example, you can:
+- Add facets to endpoints by the owning service or the team they belong to. For example, you could add a `web-store` service facet.
+- Look up a specific endpoint by path (for example, `/checkout`) when it shows high error rate and high request count.
+- Navigate to related telemetry like traces and logs.
+- View the Error/Hits graph and correlated Response Code graph to identify issues.
 
 The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings in the details page to suit your investigation by using the time frame selector and other scope drop-downs. 
 
 
 ## Exploring endpoints during incidents
 
-When you investigate an incident, getting a higher resolution view through the API endpoints can lead to faster understanding of the root cause. Resolve incidents faster with **API ownership information** -- team, on-call information, communication details -- directly associated with each endpoint, to know who to reach when something goes wrong. 
+When investigating an incident, getting a detailed resolution view of the API endpoint can lead to faster understanding of the root cause.
 
-The ownership information displayed on API Catalog pages is derived from the underlying Service definition supplied to the Service Catalog.
+In addition, you can quickly identify who is the owning team of each endpoint, who is the on-call engineer, and how to reach them (email, Slack, PagerDuty) to help resolve incidents involving a specific API endpoint faster.
 
-<!-- screen shot tktk -->
+The ownership information -- team, on call information, communication details -- is derived from the underlying Service definition supplied to the Service Catalog.
+
+<!-- screen shot highlighting section in the side panel tktk -->
 
 ## Group APIs to express a feature or business logic
 
 In addition to tagging an endpoint in its details page, you can **group endpoints by adding tags to multiple endpoints at once**. Select multiple endpoint check boxes, and click **Edit tags** to provide business logic, importance, or other useful grouping information labels to the selected endpoints. This can help you quickly view and access groups of endpoints defined by your own criteria, and create assets such as monitors and dashboards for endpoint groups with common ground and expectations.
 
-For example, if you want to create latency alerts for endpoints that are particularly sensitive to performance problems, tag those endpoints with a tag like `Latency sensitive`. Or tag endpoints that handle sensitive data with a tag like `PII` and alert when endpoints with that tag have a `401 Unauthorized` response. Other examples of useful tags:
+For example, if you want to create latency alerts for endpoints that are particularly sensitive to performance problems, tag those endpoints with a tag like `Latency sensitive`. 
+
+<!-- screen cap of making the "Latency sensitive" group tktk  -->
+
+Or tag endpoints that handle sensitive data with a tag like `PII` and alert when endpoints with that tag have a `401 Unauthorized` response. Other examples of useful tags:
 
 - `critical to feature X`
 - `newly added - V2`
@@ -102,7 +120,7 @@ When you add a tag, it appears in the list of facets on the left of the catalog.
 
 ## Setting up
 
-Automatically built on top of APM data, API Catalog can be turned on with no additional setup required. Only APM Only APM instrumented services and supported libraries are discoverable. 
+Automatically built on top of APM data, API Catalog can be turned on with no additional setup required. Only APM instrumented services and supported libraries are discoverable. 
 
 To set up your API Catalog list:
 - [Instrument the services][3] with APM. 
