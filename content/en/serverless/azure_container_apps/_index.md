@@ -19,9 +19,9 @@ If you are using a Dockerfile to build your application, complete the following:
 
 If you are using a Dockerfile to build your application, complete the following:
 
-1. Instrument your application with a [supported Datadog tracing library][8]
+1. Instrument your application with a [supported Datadog tracing library][2].
 
-2. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][2] into your Docker image.
+2. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][3] into your Docker image.
 
 3. Use the `ENTRYPOINT` instruction to run the `serverless-init` binary as your Docker container is initiated.
 
@@ -113,7 +113,7 @@ See [Tracing Ruby Applications][1] for detailed instructions. [Sample code for a
 {{< /programming-lang-wrapper >}}
 
 ### Custom metrics
-You can submit custom metrics using a [DogStatsd client][3].
+You can submit custom metrics using a [DogStatsd client][4].
 
 **Note**: Only `DISTRIBUTION` metrics should be used.
 
@@ -123,13 +123,13 @@ You can submit custom metrics using a [DogStatsd client][3].
 
 | Variable | Description |
 | -------- | ----------- |
-| `DD_SITE` | [Datadog site][4]. |
+| `DD_SITE` | [Datadog site][5]. |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE` | See [Unified Service Tagging][5]. |
-| `DD_VERSION` | See [Unified Service Tagging][5]. |
-| `DD_ENV` | See [Unified Service Tagging][5]. |
-| `DD_SOURCE` | See [Unified Service Tagging][5]. |
-| `DD_TAGS` | See [Unified Service Tagging][5]. |
+| `DD_SERVICE` | See [Unified Service Tagging][6]. |
+| `DD_VERSION` | See [Unified Service Tagging][6]. |
+| `DD_ENV` | See [Unified Service Tagging][6]. |
+| `DD_SOURCE` | See [Unified Service Tagging][6]. |
+| `DD_TAGS` | See [Unified Service Tagging][6]. |
 
 ## Log collection
 
@@ -141,7 +141,8 @@ You can use the [Azure integration][1] to collect logs. Alternatively, you can s
 
 
 [1]: /integrations/azure/#log-collection
-[2]: https://registry.hub.docker.com/r/datadog/serverless-init
-[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[4]: /getting_started/site/
-[5]: /getting_started/tagging/unified_service_tagging/
+[2]: /tracing/trace_collection/dd_libraries/
+[3]: https://registry.hub.docker.com/r/datadog/serverless-init
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[5]: /getting_started/site/
+[6]: /getting_started/tagging/unified_service_tagging/
