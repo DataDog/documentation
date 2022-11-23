@@ -16,11 +16,14 @@ This page provides information to help you troubleshoot issues with Continuous T
 
 ## Terminology
 
-CI batch
+CI batch 
 : The group of Continuous Testing tests triggered through a continuous integration or continuous delivery (CI/CD) pipeline or the [Datadog Synthetic Monitoring API][2].
 
 Test run
-: A single run of a Continuous Testing test. If you have configured retries, they count as individual test runs. For example, a test with two retries can have up to three associated test runs.
+: A single run of a Continuous Testing test, which can be an [API][7] or [browser test][8]. If you have configured retries, they count as individual test runs. For example, a test with two retries can have up to three associated test runs.
+
+Parallel test
+: A Continuous Testing test that is run at the same time as another Continuous Testing test. To set how many tests you would like to run in parallel, configure parallelization on the [Continuous Testing Settings page][9].
 
 Batch timeout
 : A batch timeout occurs when your batch does not complete within a reasonable time based on the [polling timeout][3] set in your configuration file. 
@@ -34,6 +37,12 @@ Execution rule
 
 Check whether you are using API endpoints to trigger your CI/CD test runs. In order to populate the CI Results Explorer with CI metadata, you must use one of Datadog's [native integrations][5], or the [NPM package][6].
 
+## Within your CI/CD pipeline
+
+### My tests are timing out in my CI pipeline
+
+The first thing to check is which failure mode flags you are passing in your [global configuration file][10]. For CI runs that contain multiple tests, some tests are queued based on the parallelization setting defined on the [Continuous Testing Settings page][9]. You may need to adapt both your configuration and parallelization based on your organizational needs.
+
 ## Further reading
  
 {{< partial name="whats-next/whats-next.html" >}}
@@ -44,3 +53,7 @@ Check whether you are using API endpoints to trigger your CI/CD test runs. In or
 [4]: /continuous_testing/cicd_integrations/configuration/?tab=npm#execution-rule
 [5]: /continuous_testing/cicd_integrations
 [6]: /continuous_testing/cicd_integrations#use-the-cli
+[7]: /synthetics/api_tests/
+[8]: /synthetics/browser_tests/?tab=requestoptions
+[9]: /continuous_testing/settings
+[10]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options

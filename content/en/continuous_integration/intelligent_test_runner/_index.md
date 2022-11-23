@@ -79,8 +79,10 @@ After setting these environment variables, run your tests as you normally do:
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
+**Important**:  It is possible for Intelligent Test Runner to skip every test. By default, `jest` fails if there are no tests to run. To prevent `jest` from failing, pass [`--passWithNoTests`][5] to `jest`.
+
 #### UI activation
-In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][5] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
 
 #### Compatibility
 
@@ -118,7 +120,7 @@ To enable Intelligent Test Runner, the version of the `dd-trace` tool must be >=
 **Default**: `false`<br/>
 **Note**: Required only during Beta
 
-After setting these environment variables, run your tests as you normally do by using [dotnet test][6] or [VSTest.Console.exe][7]:
+After setting these environment variables, run your tests as you normally do by using [dotnet test][7] or [VSTest.Console.exe][8]:
 
 {{< tabs >}}
 
@@ -144,7 +146,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 #### UI activation
 
-In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][5] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
 
 ### Swift
 
@@ -172,7 +174,7 @@ The following environment variables must also be set:
 
 #### UI activation
 
-In addition to setting the environment variables above, you need to activate the Intelligent Test Runner on the [Test Service Settings][5] page.
+In addition to setting the environment variables, you or a user in your organization with admin permissions must activate the Intelligent Test Runner on the [Test Service Settings][6] page.
 
 ## Setup CI Job
 
@@ -195,6 +197,7 @@ The default branch is automatically excluded from having Intelligent Test Runner
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
-[5]: https://app.datadoghq.com/ci/settings/test-service
-[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[5]: https://jestjs.io/docs/cli#--passwithnotests
+[6]: https://app.datadoghq.com/ci/settings/test-service
+[7]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+[8]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options

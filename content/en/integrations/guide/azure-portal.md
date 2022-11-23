@@ -1,5 +1,5 @@
 ---
-title: Datadog in the Azure Portal
+title: Managing the Azure Native Integration
 kind: guide
 further_reading:
   - link: "/integrations/azure/"
@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-  This guide is for Datadog customers using US3 with Azure.
+  This guide is for managing the Azure Native integration with the Datadog resource.
 </div>
 
 This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between a Datadog organization and an Azure subscription. [Create a Datadog resource][1] in Azure before proceeding with this guide.
