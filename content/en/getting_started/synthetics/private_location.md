@@ -42,7 +42,7 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. You can use any Unix virtual machine with Docker or without a virtual machine. Install [Docker][4] on a machine, or use another container runtime such as [Podman][10].
+1. Install [Docker][4] on a Unix-like machine, or use another container runtime such as [Podman][10].
 
    To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][11].
 
