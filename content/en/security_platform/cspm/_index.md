@@ -19,6 +19,28 @@ Assess the configuration of your cloud resources, such as security groups, stora
 
 View your cloud security posture at a high level with the [Posture Management][3] page. Examine the details of findings and analyze historical configurations with [Findings][4].
 
+## Detect misconfigurations across your cloud accounts and workloads
+
+Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against Datadog's OOTB Posture Management [Cloud][1] and [Infrastructure][2] detection rules.
+
+<placeholder for screenshot>
+
+## Manage out-of-the-box and custom configuration rules
+
+<placeholder for screenshot>
+
+## Maintain compliance with industry frameworks and benchmarks
+
+<placeholder for screenshot>
+
+## Review and remediate findings
+
+<placeholder for screenshot>
+
+## Set up notifications
+
+<placeholder for screenshot>
+
 ## Glossary
 
 
