@@ -1,0 +1,62 @@
+{{ define "main" }}
+  <h1 class="pb-0">{{ .Title }}</h1>
+
+
+  {{/* $s := (index .Site.Data.reference "schema.deref") */}}
+  {{ $s := .Site.Data.reference.schema }}
+  {{ $t := (index .Site.Data.reference "schema.tables") }}
+  {{ range $key, $val := $s.definitions }}
+
+
+    <h2>Source</h2>
+    {{ range $source := (index (index $s.definitions "vector::sources::Sources") "oneOf") }}
+      <div style="padding:10px; border-bottom:1px solid grey">
+        {{ $def_lookup_name := (replace (index (index $source.allOf 0) "$ref") "#/definitions/" "") }}
+        <h3>{{ $source._metadata.logical_name}}</h3>
+        <h4>{{ $source.description }}</h4>
+        {{/* (index $s.definitions $def_lookup_name) */}}
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active js-tab-model" id="-model">
+            <div class="schema-table row">
+              {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary">Expand All</p>{{ end }}
+              <div class="col-12">
+                <div class="row table-header">
+                  <div class="col-4 column">
+                    <p class="font-semibold">{{ i18n "field" }}</p>
+                  </div>
+                  <div class="col-2 column">
+                    <p class="font-semibold">{{ i18n "type" }}</p>
+                  </div>
+                  <div class="col-6 column">
+                    <p class="font-semibold">{{ i18n "description" }}</p>
+                  </div>
+                </div>
+                {{ index $t $def_lookup_name | safeHTML }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/*
+      <h2>Transform</h2>
+      {{ range $source := (index (index $s.definitions "vector::transforms::Transforms") "oneOf") }}
+        <div style="padding:10px; border-bottom:1px solid grey">
+          <h3>{{ $source._metadata.logical_name}}</h3>
+          <h4>{{ $source.description }}</h4>
+        </div>
+      {{ end }}
+
+      <h2>Sink</h2>
+      {{ range $source := (index (index $s.definitions "vector::sinks::Sinks") "oneOf") }}
+        <div style="padding:10px; border-bottom:1px solid grey">
+          <h3>{{ $source._metadata.logical_name}}</h3>
+          <h4>{{ $source.description }}</h4>
+        </div>
+      {{ end }}
+    */}}
+
+  {{ end }}
+
+{{ end }}
