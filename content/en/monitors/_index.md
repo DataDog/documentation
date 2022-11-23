@@ -30,9 +30,21 @@ Configure monitors, notify your teams, and manage alerts at a glance on the Aler
 
 ## Create monitors
 
+To create a monitor in Datadog:
+
+1. Navigate to **Monitors** > **New Monitor**.
+2. Select a monitor type corresponding to the kind of telemetry you want to alert on. <!-- Add a link to the new page for the monitor types -->
+3. [Configure Monitors][4]: Create monitors that look over metrics, events, logs, integration availability, network endpoints, and more.
+
 {{< img src="/monitors/create.png" alt="Create a monitor" style="width:90%;">}}
 
-[Configure Monitors][4]: Create monitors that look over metrics, events, logs, integration availability, network endpoints, and more.
+To create a monitor programmatically, see the [Datadog API][2] or [community maintained libraries][3].
+
+## Exporting and importing monitors
+
+You can download a JSON file containing the definition of a monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
+
+[Import a JSON monitor definition][4] into Datadog by selecting *Monitors --> New Monitor --> Import* in the main navigation.
 
 ## Notify your teams
 
