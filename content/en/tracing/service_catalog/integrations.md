@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Service Catalog][9]. You can also utilize autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
+When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Service Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
 
 ## OpsGenie integration
 
-You can add OpsGenie metadata to a service so that the [Service Catalog][11] displays and links to information such as who is on-call for the service.
+You can add OpsGenie metadata to a service so that the Service Catalog displays and links to information such as who is on-call for the service.
 
 ### Setup
 
@@ -46,7 +46,7 @@ Once you've completed these steps, an **On Call** information box appears in the
 
 ## PagerDuty integration
 
-You can add PagerDuty metadata to a service so that the [Service Catalog][11] displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service.
+You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service.
 
 ### Setup
 
