@@ -44,11 +44,11 @@ If you choose to silence monitors constrained by scope, click **Preview affected
 
 If a downtime is scheduled for a simple alert monitor, the `Group scope` field can be ignored since a simple alert monitor aggregates over all reporting sources to send a single alert.
 
-If a multi-alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
+If a multi alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
-To include all groups in the scope of a Downtime that applies to multi-alert monitors, select `All` for the `Group scope`.
+To include all groups in the scope of a Downtime that applies to multi alert monitors, select `All` for the `Group scope`.
 
-The examples below show how `Group scope` may be applied to multi-alert monitors.
+The examples below show how `Group scope` may be applied to multi alert monitors.
 
 {{< tabs >}}
 {{% tab "By Monitor Name" %}}
@@ -81,12 +81,12 @@ The examples below show how `Group scope` may be applied to multi-alert monitors
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}
 
-If a scheduled downtime is based on a common monitor tag and the monitors in scope are multi-alert monitors with one "group by" scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
+If a scheduled downtime is based on a common monitor tag and the monitors in scope are multi alert monitors with one “group by” scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
 
 **Example 1: Two multi alert monitors, each with one “group by” scope, have the `downtime:true` monitor tag in common.**
 
-1. *Monitor A* is a multi-alert monitor for hosts reporting a metric averaged across multiple `service` groups.
-2. *Monitor B* is a multi-alert monitor for hosts reporting the same metric for `service:web-store`.
+1. *Monitor A* is a multi alert monitor for hosts reporting a metric averaged across multiple `service` groups.
+2. *Monitor B* is a multi alert monitor for hosts reporting the same metric for `service:web-store`.
 3. Downtime is scheduled for any monitor that has the `downtime:true` monitor tag.
 4. This downtime is constrained to the group `service:web-store`.
 5. Preview affected monitors shows both monitors have the group `service:web-store` in scope.
