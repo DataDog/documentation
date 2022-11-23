@@ -104,7 +104,7 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 
 {{< img src="integrations/guide/reference-tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
 
-For more information, see the [Azure integration documentation][4]. **Note:** Archiving to Azure ChinaCloud is not supported.
+For more information, see the [Azure integration documentation][4]. 
 
 [1]: https://app.datadoghq.com/integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
