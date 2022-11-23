@@ -42,6 +42,8 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
+    
+   - **note**: In some cases, you may not see the **Enable** button on the SAML configuration page. In these cases, you'll need to return to the **Login Methods** page and enable SAML by default using the `on/off` dropdown.
 
 6. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
