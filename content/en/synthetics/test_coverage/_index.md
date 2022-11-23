@@ -1,7 +1,7 @@
 ---
 title: Application Test Coverage
 kind: documentation
-description: The Test Coverage page provides recommended views and untested actions for you to create browser tests or compare the number of tests to real user behavior.
+description: The Test Coverage page recommends views and actions that need new Synthetic browser tests for fuller test coverage, and compares the number of Synthetic tests to real user behavior.
 aliases:
   - /synthetics/dashboards/testing_coverage
 further_reading:
