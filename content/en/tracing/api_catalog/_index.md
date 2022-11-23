@@ -12,7 +12,7 @@ further_reading:
   Datadog API Catalog is in beta! Use this form request access. 
 {{< /beta-callout >}} 
 
-<!-- screen shot tktk -->
+{{< img src="tracing/api_catalog/api-catalog-overview.png" alt="API Catalog showing a list of API endpoints along with their Error Rate, P99 Latency, Requests Count, and Owning Team, with searching, filtering, and scoping features." style="width:100%;" >}}
 
 ## Overview
 
@@ -64,9 +64,9 @@ The table also shows **team ownership** for the API. This information is inherit
 
 To **filter the list** of endpoints or to search for a particular endpoint of interest, enter a query in the **Search** field. Search by service, path, or any other primary tag you wish. Or select a combination of facets on the left.
 
-To **scope the data** shown in the table, specify an environment and timeframe.
+To **scope the data** shown in the table, specify an environment, another primary tag (such as datacenter), and a time frame.
 
-<!-- screen cap changing the scope and seeing the metrics change tktk -->
+{{< img src="tracing/api_catalog/api-catalog-scope.mp4" alt="Showing how changing scope settings changes the metrics shown in the API Catalog" video="true" >}}
 
 You can [define tags](#group-apis-to-express-a-feature-or-business-logic) to use as facets so you can easily find groups of endpoints you're most interested in.
 
@@ -96,11 +96,11 @@ In addition, you can quickly identify who is the owning team of each endpoint, w
 
 The ownership information -- team, on call information, communication details -- is derived from the underlying Service definition supplied to the Service Catalog.
 
-<!-- screen shot highlighting section in the side panel tktk -->
+{{< img src="tracing/api_catalog/api-catalog-team-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint, as defined in Service Catalog" style="width:100%;" >}}
 
 ## Group APIs to express a feature or business logic
 
-In addition to tagging an endpoint in its details page, you can **group endpoints by adding tags to multiple endpoints at once**. Select multiple endpoint check boxes, and click **Edit tags** to provide business logic, importance, or other useful grouping information labels to the selected endpoints. This can help you quickly view and access groups of endpoints defined by your own criteria, and create assets such as monitors and dashboards for endpoint groups with common ground and expectations.
+In addition to tagging an endpoint in its details page, you can **group endpoints by adding tags to multiple endpoints at once**. Select multiple endpoint check boxes, and click **Edit tags** to provide labels that describe business logic, importance, or other useful grouping information. Applying these labels can help you quickly view and access groups of endpoints defined by your own criteria, and create assets such as monitors and dashboards for endpoint groups with common ground and expectations.
 
 For example, if you want to create latency alerts for endpoints that are particularly sensitive to performance problems, tag those endpoints with a tag like `Latency sensitive`. 
 
