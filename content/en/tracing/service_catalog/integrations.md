@@ -34,7 +34,7 @@ You can add OpsGenie metadata to a service so that the Service Catalog displays 
    ```yaml
    "integrations": {
      "opsgenie": {
-           "service-url": "https://www.opsgenies.com/service/123e4567-e89b-12d3-a456-426614174000",
+           "service-url": "https://www.opsgenie.com/service/123e4567-x12y-1234-a456-123456789000",
            "region": "US"
      }
    }
