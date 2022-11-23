@@ -89,7 +89,8 @@ if (searchBoxContainer) {
             showSubmit: true,
             templates: {
                 submit({ cssClasses }, { html }) {
-                    return html`<span class="${cssClasses.submit}">search</span>`;
+                    return html`<span id="submit-text" class="${cssClasses.submit}">search</span
+                        ><i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
                 }
             }
         }),
@@ -111,13 +112,14 @@ if (searchBoxContainer) {
     if (!searchResultsPage) {
         const handleSearchbarKeydown = (e) => {
             if (e.code === 'Enter') {
-                window.location.pathname += 'search';
+                e.preventDefault();
+                window.location.pathname = 'search';
             }
         };
 
         const handleSearchbarSubmitClick = () => {
             if (document.querySelector('.ais-SearchBox-input').value) {
-                window.location.pathname += 'search';
+                window.location.pathname = 'search';
             }
         };
 
