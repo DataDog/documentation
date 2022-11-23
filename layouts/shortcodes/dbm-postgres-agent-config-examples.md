@@ -1,6 +1,6 @@
 ### One agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the Postgres integration config.
-In these cases, it is recommended to limit to the number of instances per Agent to a maximum of 10 database instances.
+In these cases, it is recommended to limit to the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
 ```yaml
 init_config:
 instances:
@@ -34,6 +34,19 @@ instances:
     [...]
 ```
 
+### Storing passwords securely
+While it is possible to declare passwords directly in the Agent configuration files, it is a more secure practice to encrypt and store database credentials elsewhere using secret management software such as [Vault](https://www.vaultproject.io/). The Agent is able to read these credentials using the `ENC[]` syntax. Review the [secrets management documentation](/agent/guide/secrets-management/) for the required setup to store these credentials. The following example shows how to declare and use those credentials:
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: localhost
+    port: 5432
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+```
+
+
 ### Running custom queries
 To collect custom metrics, use the `custom_queries` option. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
 ```yaml
@@ -48,11 +61,11 @@ instances:
     - metric_prefix: employee
       query: SELECT age, salary, hours_worked, name FROM hr.employees;
       columns:
-        - name: age
+        - name: custom.employee_age
           type: gauge
-        - name: salary
+        - name: custom.employee_salary
            type: gauge
-        - name: hours
+        - name: custom.employee_hours
            type: count
         - name: name
            type: tag
@@ -60,31 +73,48 @@ instances:
         - 'table:employees'
 ```
 
-### Monitoring multiple databases with DBM and the default integration
-If you wish to collect the generic Postgres integration metrics from logical databases, other than the default `postgres` db, you must list them each in their instance config. **Note**: you should list each logical db *without* setting `dbm: true`, and then add one final instance with `dbm: true` so that we don't "double monitor" the databases. This is because Datadog's Database Monitoring collects metrics from global views like `pg_stat_statements` and `pg_stat_activity`.
+### Monitoring relation metrics for multiple logical databases
+In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database).
 
+Specify a single "DBM" instance to collect DBM telemetry from all databases. Additionally, specify all logical databases the Agent must connect to. It is important to only have `dbm: true` on one configuration instance per host in order to prevent duplication of metrics.
 ```yaml
 init_config:
 instances:
+  # This instance is the "DBM" instance. It will connect to the
+  # `postgres` database and send DBM telemetry from all databases
   - dbm: true
     host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
+  # This instance only collects data from the `on_sale` database
+  # and collects relation metrics from tables prefixed by "2022_"
   - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
     dbname: on_sale
+    dbstrict: true
+    relations:
+      - relation_regex: 2022_.*
+        relkind:
+          - r
+          - i
+  # This instance only collects data from the `inventory` database
+  # and collects relation metrics only from the specified tables
   - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
     dbname: inventory
+    dbstrict: true
+    relations:
+      - relation_name: products
+      - relation_name: external_seller_products
 ```
 
-### Working with hosts through a remote proxy
-When connecting to a database host through a remote proxy, it can be useful to set a custom hostname. Utilize the `reported_hostname` option to override the hostname detected by the agent.
+### Working with hosts through a proxy
+If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry is tagged with the hostname of the proxy rather than the database instance. Utilize the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
 ```yaml
 init_config:
 instances:
