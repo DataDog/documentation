@@ -18,16 +18,22 @@ further_reading:
 
 ## Overview
 
-It is critical for your system’s health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging crashes, you can minimize the impact of fatal errors on your logs. 
+It is critical for your system’s health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. [Error Tracking for Logs](https://app.datadoghq.com/logs/error-tracking) intelligently groups error logs into Issues that help you understand and triage errors by cutting through noise. It reduces thousands to millions of raw data points to a few issues rich with diagnostic data like a stack trace, error distributions, and code snippets that help you understand the underlying bug’s root cause.
 
-{{< img src="logs/error_tracking/homepage.png" alt="The Error Tracking Explorer for Logs displaying issues from Python logs" style="width:100%;" >}}
+**Error Tracking can easily be enabled in-app with just a few clicks. Start by navigating to the Error Tracking item in the Logs menu.**
+
+Once you have setup logs for *Browser and Mobile* or *Backend* error tracking, the issue List will populate with cards like the `java.lang.ArithmeticException` issue below. You can choose to sort by volume, age, and filter by all custom and default facets on your logs.
+
+{{< img src="logs/error_tracking/homepage.png" alt="The Error Tracking Explorer for Logs displaying Java issues" style="width:100%;" >}}
 
 Error Tracking enables you to:
 
-- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
+- Set monitors on error tracking events, like high error volumes or new issues introduced.
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
 - Collect all the necessary context in one place to facilitate troubleshooting.
+
+Error Tracking for Logs processes properly configured error logs with stack traces.
 
 ## Setup
 
@@ -36,16 +42,18 @@ Error Tracking enables you to:
     {{< nextlink href="logs/error_tracking/backend" >}}Backend{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Examine issues to start troubleshooting or debugging
+## Investigate issues and to start triaging
 
-An *issue* is a grouping of any number of errors based on a fingerprinting algorithm that groups certain error logs based on required attributes (such as a stack trace). Error Tracking automatically categorizes crashes collected from your logs into issues in the [Error Tracking Explorer][1]. 
+An *issue* is a grouping of any number of errors based on a fingerprinting algorithm that groups certain error logs with required attributes (like a stack trace).
 
 {{< img src="logs/error_tracking/sidepanel.png" alt="A sidepanel consisting of details of a log error" style="width:100%;" >}}
 
-Click on an issue to view debugging information, such as the stack trace, log tags, and the distribution of errors for each `version`, `env`, and `source` tag. 
+
+Click on an issue to see seasonality patterns, a stack trace, and the error’s distribution across `env` and `version` tags. The issue panel also displays the first and last versions impacted with timestamps. *This metadata lives beyond your standard log retention*. If errors grouped into this issue have different stacktraces, you can examine them by clicking Group Into Patterns.
+
+To learn more about Error Tracking for Logs, read our beta launch [blog post][1].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /logs/error_tracking/explorer
+[1]: datadoghq.com/blog/error-tracking-logs/
