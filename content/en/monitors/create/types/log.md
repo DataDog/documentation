@@ -23,7 +23,7 @@ Once [log management is enabled][1] for your organization, you can create a logs
 
 To create a [logs monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi-alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -43,7 +43,7 @@ As you define the search query, the graph above the search fields updates.
    * **4 facets**: 5 top values per facet (at most 625 groups)
 4. Configure the alerting grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
-    * **Multi-Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
+    * **Multi Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
 ### Set alert conditions
 
@@ -83,10 +83,10 @@ When a logs monitor is triggered, samples or values can be added to the notifica
 |----------------------------------|--------------------------------------|
 | Ungrouped Simple-Alert Log count | Up to 10 log samples.                |
 | Grouped Simple-Alert Log count   | Up to 10 facet or measure values.    |
-| Grouped Multi-Alert Log count    | Up to 10 log samples.                |
+| Grouped Multi Alert Log count    | Up to 10 log samples.                |
 | Ungrouped Simple-Alert measure   | Up to 10 log samples.                |
 | Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
-| Grouped Multi-Alert Log count    | Up to 10 facet or measure values.    |
+| Grouped Multi Alert Log count    | Up to 10 facet or measure values.    |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
