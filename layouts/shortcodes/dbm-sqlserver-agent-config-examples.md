@@ -118,7 +118,7 @@ instances:
         - 'table:employees'
 ```
 ### Working with hosts through a remote proxy
-If the Agent must connect to a database host through a remote proxy, all telemetry will be tagged with the hostname of the proxy rather than the database instance. Utilize the `reported_hostname` option to set a custom override of the hostname detected by the agent.
+If the Agent must connect to a database host through a remote proxy, all telemetry is tagged with the hostname of the proxy rather than the database instance. Utilize the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
 ```yaml
 init_config:
 instances:
