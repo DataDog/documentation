@@ -248,7 +248,7 @@ The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For ver
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
 **Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). Note that the JSON object **must** be included in single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.|
+A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.
 
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
@@ -256,9 +256,17 @@ A JSON encoded string to configure the sampling rate. Examples: Set the sample r
 Maximum number of spans to sample per second. All processes in an Apache or FPM pool share the same limiter. When unset (0) rate limiting is delegated to the Datadog Agent.
 
 `DD_TRACE_SPANS_LIMIT`
-: **INI**: `datadog.trace.spans_limit`
+: **INI**: `datadog.trace.spans_limit`<br>
 **Default**: `1000`<br>
 The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
+
+`DD_SPAN_SAMPLING_RULES`
+: **INI**: `datadog.span_sampling_rules`<br>
+**Default**: `null`<br>
+A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
+**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
+For more information, see [Ingestion Mechanisms][6].<br>
+
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
@@ -401,7 +409,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][6] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ## Further Reading
@@ -413,6 +421,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
-[6]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
+[9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
