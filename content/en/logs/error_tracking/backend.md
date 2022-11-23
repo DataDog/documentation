@@ -14,11 +14,15 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from backend Datadog SDKs. Whenever an error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
+If you aren’t already collecting Logs with Datadog, follow the Logs Setup Documentation to set up Logs. Ensure that the source tag (specifying language) is correctly configured. Agent-based log collection is recommended.
 
-An essential attribute for log errors is the stack trace in a log's `error.stack`. If you are sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog. 
+For **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes will be automatically tagged and sent to Datadog. 
 
-Your crash reports appear in [**Error Tracking**][1].
+For other languages, The backend language examples below show how to properly configure a error log and attach the required stack trace in the log's `error.stack`.
+
+If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
+
+To configure inline code snippets in issues, use the [in-app enablement here][9]. You may notice that the setup is built around APM; snippets in Error Tracking for Logs do not require APM. The enrichment tags and repository linkage is the same.
 
 ## Setup
 
@@ -273,3 +277,4 @@ end
 [6]: /logs/log_collection/python/?tab=jsonlogformatter
 [7]: /logs/log_collection/ruby/
 [8]: /logs/log_configuration/processors/?tab=ui#remapper
+[9]: https://app.datadoghq.com/source-code/setup/apm
