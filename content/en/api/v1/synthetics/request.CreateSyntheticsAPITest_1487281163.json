@@ -61,16 +61,6 @@
       "proxy": {
         "url": "https://datadoghq.com",
         "headers": {}
-      },
-      "basicAuth": {
-        "accessTokenUrl": "https://datadog-token.com",
-        "audience": "audience",
-        "clientId": "client-id",
-        "clientSecret": "client-secret",
-        "resource": "resource",
-        "scope": "yoyo",
-        "tokenApiAuthentication": "header",
-        "type": "oauth-client"
       }
     }
   },

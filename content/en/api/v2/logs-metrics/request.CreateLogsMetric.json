@@ -4,9 +4,7 @@
     "type": "logs_metrics",
     "attributes": {
       "compute": {
-        "aggregation_type": "distribution",
-        "include_percentiles": true,
-        "path": "@duration"
+        "aggregation_type": "count"
       }
     }
   }
