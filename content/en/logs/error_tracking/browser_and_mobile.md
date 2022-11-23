@@ -29,37 +29,36 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
 
 1. Download the latest version of the [Logs Browser SDK][3].
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
+3. Initialize your SDK, for example, with NPM:
 
-Once you have initalized your SDK, like so for example(with NPM):
-```javascript
-import { datadogLogs } from '@datadog/browser-logs'
+   ```javascript
+   import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.init({
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
-  service: '<MY_SERVICE>',
-  env: '<MY_ENV>'
-  forwardErrorsToLogs: true,
-  sampleRate: 100,
-})
-```
-You **must** add the following snippet near initalization to catch and submit all uncaught exceptions to Datadog.
+   datadogLogs.init({
+     clientToken: '<DATADOG_CLIENT_TOKEN>',
+     site: '<DATADOG_SITE>',
+     service: '<MY_SERVICE>',
+     env: '<MY_ENV>'
+     forwardErrorsToLogs: true,
+     sampleRate: 100,
+   })
+   ```
+   
+4. You must add the following snippet near initialization to catch and submit all uncaught exceptions to Datadog:
 
-```javascript
-window.onerror = function (message, source, lineno, colno, error) {
-    datadogLogs.logger.error(error?.message || '', {
-        error: { stack: error?.stack },
-    });
-};
-```
+   ```javascript
+   window.onerror = function (message, source, lineno, colno, error) {
+       datadogLogs.logger.error(error?.message || '', {
+           error: { stack: error?.stack },
+       });
+   };
+   ```
+5. To log a caught exception yourself, you may optionally use:
 
-
-To log a caught exception yourself, you may optionally use:
-
-```javascript
-const e = new Error('an exception occurred');
-datadogLogs.logger.error(e.message, {'error': {'stack': e.stack}});
-```
+   ```javascript
+   const e = new Error('an exception occurred');
+   datadogLogs.logger.error(e.message, {'error': {'stack': e.stack}});
+   ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /logs/log_collection/javascript/#setup
@@ -73,18 +72,15 @@ If you have not setup the Datadog Android SDK yet, follow the [in-app setup inst
 
 1. Download the latest version of the [Datadog Android SDK for Logs][3].
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
+3. To log a caught exception yourself, you may optionally use:
 
-## Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
-
-```java
-try {
-  doSomething();
-} catch (IOException e) {
-  logger.e("an exception occurred", e);
-}
-```
+   ```java
+   try {
+     doSomething();
+   } catch (IOException e) {
+     logger.e("an exception occurred", e);
+   }
+   ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]:/logs/log_collection/android/#setup
@@ -98,18 +94,15 @@ If you have not setup the Datadog iOS SDK yet, follow the [in-app setup instruct
 
 1. Download the latest version of the [Datadog iOS SDK for Logs][3].
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
+3. To log a caught exception yourself, you may optionally use:
 
-## Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
-
-```java
-do {
-  // ...
-} catch {
-  logger.error("an exception occurred", error)
-}
-```
+   ```java
+   do {
+     // ...
+   } catch {
+     logger.error("an exception occurred", error)
+   }
+   ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /logs/log_collection/ios/#setup

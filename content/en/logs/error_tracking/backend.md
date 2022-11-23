@@ -14,18 +14,17 @@ further_reading:
 
 ## Overview
 
-If you aren’t already collecting Logs with Datadog, follow the Logs Setup Documentation to set up Logs. Ensure that the source tag (specifying language) is correctly configured. Agent-based log collection is recommended.
-
-For **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes will be automatically tagged and sent to Datadog. 
-
-For other languages, The backend language examples below show how to properly configure a error log and attach the required stack trace in the log's `error.stack`.
-
-If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
-
-To configure inline code snippets in issues, use the [in-app enablement here][9]. You may notice that the setup is built around APM; snippets in Error Tracking for Logs do not require APM. The enrichment tags and repository linkage is the same.
+If you aren’t already collecting logs with Datadog, see the [Logs documentation][10] to set up logs. Ensure that the `source` tag (specifying language) is properly configured. Datadog recommends setting up Agent-based log collection.
 
 ## Setup
 
+For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog. 
+
+For backend languages such as **C#**, **.NET**, **Go**, and **NodeJS**, the code examples in each section demonstrate how to properly configure an error log and attach the required stack trace in the log's `error.stack`.
+
+If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
+
+To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in Error Tracking for Logs does not require APM; the enrichment tags and linked repository is the same for both.
 ### C# and .NET
 
 {{< tabs >}}
@@ -33,9 +32,7 @@ To configure inline code snippets in issues, use the [in-app enablement here][9]
 
 If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
 
-### Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
+To log a caught exception yourself, you may optionally use:
 
 ```csharp
 var log = new LoggerConfiguration()
@@ -57,9 +54,7 @@ try {
 
 If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
 
-### Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
+To log a caught exception yourself, you may optionally use:
 
 ```csharp
 private static Logger log = LogManager.GetCurrentClassLogger();
@@ -82,9 +77,7 @@ static void Main(string[] args)
 
 If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
 
-### Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
+To log a caught exception yourself, you may optionally use:
 
 ```csharp
 class Program
@@ -114,9 +107,7 @@ class Program
 
 If you have not setup log collection for Go, see the [Go Log Collection documentation][3].
 
-#### Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
+To log a caught exception yourself, you may optionally use:
 
 ```go
 // for https://github.com/pkg/errors
@@ -159,9 +150,7 @@ If you have not setup log collection for Java, see the [Java Log Collection docu
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-### Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
+To log a caught exception yourself, you may optionally use:
 
 ```java
 Logger logger = LogManager.getLogger("HelloWorld");
@@ -176,9 +165,7 @@ try {
 {{% /tab %}}
 {{% tab "SLF4J" %}}
 
-### Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
+To log a caught exception yourself, you may optionally use:
 
 ```java
 Logger logger = LoggerFactory.getLogger(NameOfTheClass.class);
@@ -199,9 +186,7 @@ try {
 
 If you have not setup log collection for NodeJS, see the [NodeJS Log Collection documentation][5].
 
-#### Log an error
-
-To log an error yourself, along with information about the stack trace, use the following:
+To log a caught exception yourself, you may optionally use:
 
 ```json
 try {
@@ -222,7 +207,7 @@ try {
 
 If you have not setup log collection for Python, see the [Python Log Collection documentation][6]. Ensure your logs are tagged with `source:python`.
 
-#### Log an error
+To log a caught exception yourself, you may optionally use:
 
 ```python
 try:
@@ -237,7 +222,7 @@ except:
 
 If you have not setup log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7]. 
 
-#### Log an error
+To log a caught exception yourself, you may optionally use:
 
 ```ruby
 # Lograge config
@@ -278,3 +263,4 @@ end
 [7]: /logs/log_collection/ruby/
 [8]: /logs/log_configuration/processors/?tab=ui#remapper
 [9]: https://app.datadoghq.com/source-code/setup/apm
+[10]: /logs/log_collection/
