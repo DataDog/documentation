@@ -73,12 +73,12 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 
 By default, all users can view, edit, or delete security rules.
 
-Use granular access controls to limit the roles that may edit a single rule:
+Use granular access controls to limit the [roles][10] that may edit a single rule:
 1. Click on the three dot menu for the rule.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more [roles][10] that may edit the security rule.
+1. Use the drop-down to select one or more roles that may edit the security rule.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
