@@ -107,6 +107,19 @@ if (searchBoxContainer) {
 
     search.start();
 
+    const handleOutsideSearchbarClick = (e) => {
+        let target = e.target;
+        do {
+            if (target === searchBoxContainerContainer) {
+                return;
+            }
+            target = target.parentNode;
+        } while (target);
+        {
+            hitsContainerContainer.classList.add('d-none');
+        }
+    };
+
     if (!searchResultsPage) {
         const handleSearchbarKeydown = (e) => {
             if (e.code === 'Enter') {
@@ -123,4 +136,6 @@ if (searchBoxContainer) {
         document.querySelector('.ais-SearchBox-input').addEventListener('keydown', handleSearchbarKeydown);
         document.querySelector('.ais-SearchBox-submit').addEventListener('click', handleSearchbarSubmitClick);
     }
+
+    document.addEventListener('click', handleOutsideSearchbarClick);
 }
