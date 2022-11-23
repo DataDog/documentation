@@ -17,8 +17,6 @@ Azure Container Apps is a fully managed serverless platform for deploying and sc
 
 If you are using a Dockerfile to build your application, complete the following:
 
-If you are using a Dockerfile to build your application, complete the following:
-
 1. Instrument your application with a [supported Datadog tracing library][2].
 
 2. Use the `COPY` instruction to copy the [Datadog `serverless-init` binary][3] into your Docker image.
