@@ -22,39 +22,48 @@ The [**Application Test Coverage** page][1] uses browser data collected from [RU
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
-You can use the following topics to build a more comprehensive, accurate testing suite:
+You can build a more comprehensive, accurate testing suite by considering the following information presented on the page:
 
-- A list of top visited web pages
+- The top visited web pages
 - The percentage of tested RUM actions
 - The number of tested and total actions
 - The number of browser tests covering actions
 - The number of real user interactions 
 
-## Select a RUM application or view
+## Investigate test coverage for an application or view
 
-Select a RUM application from the **Application** dropdown menu or a view from the **View Name** dropdown menu. Click **All Actions** or **Custom** to filter the data on [custom actions][4]. Datadog recommends using custom actions. By default, custom actions are unique and offer more accurate coverage results compared to generated actions.
+To get started with understanding the completeness of your test coverage:
+
+1. Select a RUM application from the **Application** dropdown menu or a view from the **View Name** dropdown menu. 
+2. Click **Custom** to filter the data on [custom actions][4], which are unique and offer more accurate coverage results compared to generated actions. If you want to include generated actions in the test coverage analysis, select **All Actions**.
+3. Identify gaps in your test coverage by examining the information presented in the following sections of the Test Coverage page:
 
 **Test Coverage Overview** 
-: Displays the percentage of actions being tested, the percentage of actions being tested weighted by the number of real user interactions, along with a list of top views, the count of user sessions, the count of browser tests, and the percentage of actions being tested. 
+: Displays the percentage of actions being tested, the percentage of actions being tested weighted by the number of real user interactions, and a list of top views with their counts of user sessions and browser tests, and the percentage of actions being tested. 
 
 **Untested Actions**
-: Displays the number of untested user actions, the number of total actions collected, along with a list of top actions that real users most interact with, but are not being tested.
+: Displays the number of untested user actions, the number of total actions collected, and a list of top actions that real users most interact with but are _not_ being tested.
 
 **Tested Actions**
-: Displays the number of browser tests covering user actions, the number of real user interactions, along with a list of top actions that real users most interact with, and are being tested. 
+: Displays the number of browser tests covering user actions, the number of real user interactions, and a list of top actions that real users most interact with and _are_ being tested. 
 
 For more information about the data displayed, see [Synthetic Monitoring Metrics][5].
 
-## Manage Synthetic browser tests
+## Gain insights and add tests
 
-In order to improve your testing coverage and better manage your browser tests, use the [**Test Coverage** page][1] to help answer the following questions:
+Use the information on the Test Coverage page to answer the following questions:
 
 - What actions are not being tested in your application?
 - What views are the most popular to your users? 
 - What actions need more browser tests?
 - What percentage of browser tests are covering user actions? 
 
-To add a browser test for a top view or untested action, click **+ Create New Browser Test**. By adding the most popular sections of your application to an existing browser test or creating a browser test, you are alerted when key user journeys in your application are negatively impacted by a code change. 
+If you determine that you need better test coverage, add a browser test directly from the Test Coverage page:
+
+1. Select a top view or untested action in the list.
+2. Click **Create New Browser Test**. 
+
+Add the most popular sections of your application to a new or existing browser test so that you are alerted when key user journeys in your application are negatively impacted by a code change. 
 
 You can also run tests [directly in your CI/CD pipelines][6] to ensure no regressions occur before releasing code in production.  
 
