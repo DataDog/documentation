@@ -76,7 +76,7 @@ instances:
         - 'table:employees'
 ```
 ### Working with hosts through a proxy
-If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry will be tagged with the hostname of the proxy rather than the database instance. Utilize the `reported_hostname` option to set a custom override of the hostname detected by the agent.
+If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry is tagged with the hostname of the proxy rather than the database instance. Utilize the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
 ```yaml
 init_config:
 instances:
