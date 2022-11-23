@@ -12,9 +12,9 @@ further_reading:
 
 RUM lets you capture all events in your browser applications and explore them to troubleshoot slow pages and code errors, or to analyze application usage. All events are available in [RUM Explorer][1] for querying, dashboarding, and alerting.
 
-If your browser application is large, it's likely been built thanks to multiple web development teams. Each team has an area of ownership that they focus on when troubleshooting or usage analysis workflows.
+If your browser application is large, it's likely been built thanks to multiple web development teams. Each team has an area of ownership that they focus on when troubleshooting errors, slowness, or analyzing usage.
 
-This guide describes how to define an application in RUM. In addition, it goes through common use cases in large applications where web development teams may require visibility into the health and usage of their area of ownership.
+This guide describes how to define an application in RUM. In addition, it covers common use cases in large applications where web development teams may require visibility into the health and usage of their area of ownership.
 
 ## Create a RUM application
 
@@ -46,11 +46,11 @@ Once timings are captured, they are available like any auto-collected timing. Yo
 
 ## Track components in web pages
 
-If your browser application leverages UI components that are used across multiple pages in one application and/or across multiple applications, you can track the usage of components across pages, as well as the time they take to render through custom instrumentation.
+If your browser application leverages UI components that are used across multiple pages in one application and/or across multiple applications, you can track the usage of components across pages, as well as the time they take to render, through custom instrumentation.
 
 [Generate a custom action][7] to track the lifecycle of components across pages. Let's imagine the `/myorders` page and the `/search` page both leverage the search box component below.
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-custom-action.gif" alt="Generate a custom action to track the lifecycle of components across pages" style="width:40%;">}}
+[ replace GIF with mp4. alt text="Generate a custom action to track the lifecycle of components across pages"]
 
 You can track the following milestones in the lifecycle of the search component by sending a custom action every time:
 
@@ -58,7 +58,7 @@ You can track the following milestones in the lifecycle of the search component 
 - `search_component_input`: The search component gets input from the user keyboard
 - `search_component_suggestions_display`: The search component displays suggestions 
 
-The custom action will then automatically carry attributes for:
+The custom action then automatically carries attributes for:
 
 - The RUM application it was used in
 - `@view`: The page it was rendered in
@@ -90,7 +90,7 @@ From the RUM Explorer, you can then analyze:
 
 Imagine a web development team owns a set of pages like the example below.
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership.png" alt="Examples of sets of pages a web development could own" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership-1.png" alt="Examples of sets of pages a web development could own" style="width:90%;">}}
 
 Inside your RUM application, create services for each set of pages owned by a team by doing the following:
 
@@ -111,7 +111,7 @@ Get insights into the performance or the adoption of a given team's scope by usi
 
 ### Teams own UI components
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components.png" alt="Components can be tracked using custom actions" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-1.png" alt="Components can be tracked using custom actions" style="width:90%;">}}
 
 Components are tracked using custom actions [mentioned above][10]: 
 
