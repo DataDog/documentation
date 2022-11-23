@@ -13,6 +13,7 @@ disable_toc: true
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Use RUM & Session Replay for Product Analytics{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting Started with Feature Flag data{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
