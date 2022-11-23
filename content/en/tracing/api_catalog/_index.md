@@ -14,52 +14,84 @@ further_reading:
 
 ## Overview
 
-The API Catalog provides a single view and entry point into exploring the performance, reliability, and ownership of all your API Endpoints in one place. Sort the list of endpoints by error rate, latency, or any other grouping that is meaningful to you, to gain insights into which endpoints most need your attention.
+The API Catalog provides a single view and entry point into exploring the performance, reliability, and ownership of all your API Endpoints in one place. It's a central place where your whole company can find constantly up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
 
-Protect your mission-critical API-driven business features from failing by continuously discovering and monitoring the APIs that you expose to your customers, and the ones your services rely on to function.
+Monitor your mission-critical API-driven business features by continuously discovering and tracking the performance of the APIs that you expose to your customers, and the ones your services rely on to function. Standardize performance expectations for APIs and constantly validate these expectations, alerting when performance deviates from them.
 
-API Catalog brings together data from across Datadog to surface API-related metadata and to provide opinionated workflows so you can discover, monitor, and govern your APIs from different sources in one unified view. API Catalog provides:
+This enables your efforts to:
+- Provide high availability and uptime of critical business features.
+- Have fewer regressions and instability issues.
+- Triage incidents quicker.
+- Optimize resources allocation.
+
+API Catalog brings together data from across Datadog provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. API Catalog provides:
 
 - **Automated discoverability** - One inventory for all public, private, and partner APIs, where _endpoints_ are the organizing principle.
 - **Correlation of all API metadata** from different Datadog sources.
-- **Monitoring and governance workflows** for SREs, Ops, and security.
+- **API endpoint metrics** such as Last Seen, Requests, Latency, and Errors, to identify performance issues and track API health.
+- **Monitoring and governance workflows** such as:
+  - Alerting on Endpoints that deviate from defined performance expectations and thresholds.
+  - Resolving incidents faster with API ownership information directly associated with each endpoint, to know who to reach when something goes wrong
 
-## Exploring the list of endpoints
+### Some background terminology
 
-The [API Catalog][1] view shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environments and time frame you select. 
+API
+: A set of protocol and tools that allow two applications to communicate.
+
+API endpoint
+: The URL for a server or a service, often through an HTTP, RESTful API interface, that implements the set of rules defined in the API. APIs operate through responses and requests -- a client makes a request and the API endpoint makes a response.<br /><br/>
+API endpoints in the API Catalog are comprised by the HTTP Method (for example, `GET`), the URL's Path (the structure of the location of the resource, such as `/payment/{shop_id}/purchase`) and the Service this resource serves (for example, `Payments`)<br /><br/>
+The API Catalog in beta supports only HTTP RESTful endpoints. 
+
+Public APIs
+: Publicly exposed API through the internet. An organization's way to expose services and apps to customers. In most cases, public APIs are used by web and mobile apps, but it's becoming more common to have public APIs that expose new revenue streams alongside web app. Customers expect APIs to be a central part of your product offering, and they set up workflows and automation that leverage those APIs.
+
+Private APIs
+: Also called internal APIs. Intended solely for internal use within a company or organization. They’re the most common type of API as they’re quick to develop and don’t need to be as robust as products intended for public consumption
+
+Partner APIs
+: Also called third party APIs. APIs that your app consumes that belong to a different organization (the third party). You leverage those APIs to provide your own service, and you are dependent on them for some features to work. For example, Paypal, Stripe, or other payment APIs, authentication providers including federated ones like Google or Facebook.
+
+## Exploring your endpoints
+
+The [API Catalog][1] view shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environments and time frame you select. You can browse and ask valuable questions by querying on different properties and metrics to get more precise results, using facets and tags for quick filtering.
 
 In the list table, **sort** by any of the columns by clicking a header. For example, click **P99** to see endpoints with the highest 99th percentile for latency.
 
 The table also shows **team ownership** for the API. This information is inherited from the associated service's definition in the [Service Catalog][2]. A service owner owns all of the endpoints that are connected to the service.
 
-To **filter the list** of endpoints or to search for a particular endpoint of interest:
+To **filter the list** of endpoints or to search for a particular endpoint of interest, enter a query in the **Search** field. Search by service, path, or any other primary tag you wish. Or select a combination of facets on the left.
 
-- Enter a query in the **Search** field.
-- Select specific environment or other primary tags in the **Scope Metrics** drop-downs. 
-- Select a combination of facets on the left.
+To **scope the data** shown in the table, specify an environment and timeframe.
 
-You can [define tags](#adding-bulk-tags) to use as facets so you can easily find groups of endpoints you're most interested in.
+You can [define tags](#group-apis-to-express-a-feature-or-business-logic) to use as facets so you can easily find groups of endpoints you're most interested in.
 
 **Note**: The `API Type` facet is based on auto-generated tags and has values of `public` and `unknown` (which usually indicates a private endpoint).
 
-Use the **Group by** selector to group endpoints together by opinionated tags, so you can better navigate a large collection of endpoints in the list. The list group shows aggregated performance data for the endpoints in the group.
 
 ## Investigating endpoint details
 
 Click an endpoint in the list to open a details page that shows performance, governance, and metadata information for the endpoint, collected from various areas of Datadog into one place. Here you can edit the short name and description, and add custom tags. You can also launch deeper investigations of the various types of telemetry using links into other areas of Datadog. 
 
-<!-- For example, click on the monitors section to open a detailed card with more information and a link to monitors for the endpoint. -->
-
 The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings in the details page to suit your investigation by using the time frame selector and other scope drop-downs. 
 
-## Adding bulk tags
 
-In addition to tagging an endpoint in its details page, you can **add tags to multiple endpoints** at once in the API Catalog. Select multiple endpoint check boxes, and click **Edit tags** to provide ownership, importance, or other useful grouping information labels to the selected endpoints. This can help you quickly access groups of endpoints defined by your own criteria, and create assets such as monitors and dashboards from endpoints with specific tags.
+## Exploring endpoints during incidents
+
+When you investigate an incident, getting a higher resolution view through the API endpoints can lead to faster understanding of the root cause. Resolve incidents faster with **API ownership information** -- team, on-call information, communication details -- directly associated with each endpoint, to know who to reach when something goes wrong. 
+
+The ownership information displayed on API Catalog pages is derived from the underlying Service definition supplied to the Service Catalog.
+
+<!-- screen shot tktk -->
+
+## Group APIs to express a feature or business logic
+
+In addition to tagging an endpoint in its details page, you can **group endpoints by adding tags to multiple endpoints at once**. Select multiple endpoint check boxes, and click **Edit tags** to provide business logic, importance, or other useful grouping information labels to the selected endpoints. This can help you quickly view and access groups of endpoints defined by your own criteria, and create assets such as monitors and dashboards for endpoint groups with common ground and expectations.
 
 For example, if you want to create latency alerts for endpoints that are particularly sensitive to performance problems, tag those endpoints with a tag like `Latency sensitive`. Or tag endpoints that handle sensitive data with a tag like `PII` and alert when endpoints with that tag have a `401 Unauthorized` response. Other examples of useful tags:
 
-- Criticality level
-- `experimental`
+- `critical to feature X`
+- `newly added - V2`
 - `contains password`
 - `contains PII`
 - Business logic (for example, `payments` )
@@ -67,27 +99,13 @@ For example, if you want to create latency alerts for endpoints that are particu
 
 When you add a tag, it appears in the list of facets on the left of the catalog. Click a facet to filter the list and add the tag to the Search query field.
 
-## Exploring endpoints during incidents
 
-When you investigate an incident, getting a higher resolution view through the API endpoints can lead to faster understanding of the root cause. Resolve incidents faster with **API ownership information** -- team, code repository, on-call details -- directly associated with each endpoint, to know who to reach when something goes wrong. 
-
-The ownership information displayed on API Catalog pages is derived from the underlying Service definition supplied to the Service Catalog.
-
-<!-- 
-## Creating monitors
-
-I want to get alerted each time an endpoint (or a group of endpoints) with high throughput gets a high error rate, so that I will not get false positive alerts on high error rate with low throughput.
-As a team leader, I want to monitor all the endpoints my team owns in a specific way that fits my team.
-As an SRE, I would like to list the defined Monitors of endpoints I care about, to make sure they are less of a risk in case of an incident.
-As an SRE, I would like to view all endpoints with defined Monitors (alerted), so I can address their endpoint owner so they can fix the alert.
-
-
-choose the type of metric in advance from the catalog (since there would be a lot of not-API-related queries inside the monitors page) and it would be exported together with the defined queries
--->
 ## Setting up
 
+Automatically built on top of APM data, API Catalog can be turned on with no additional setup required. Only APM Only APM instrumented services and supported libraries are discoverable. 
+
 To set up your API Catalog list:
-- [Instrument the services with APM][3]. Only APM instrumented services and supported libraries are discoverable.
+- [Instrument the services][3] with APM. 
 - [Define service ownership information][2] using Service Catalog.
 
 
