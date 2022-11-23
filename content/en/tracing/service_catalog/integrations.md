@@ -17,6 +17,29 @@ further_reading:
 
 When you configure a service account for a [Datadog integration][10], you can incorporate metadata from your integrations into service definitions in the [Service Catalog][9]. You can also use autocomplete and validation features when editing a service definition in an [integrated development environment (IDE)](#ide-integrations).
 
+## PagerDuty integration
+
+You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service.
+
+### Setup
+
+You can connect any service in your [PagerDuty Service Directory][1]. You can map one PagerDuty service for each service in the Service Catalog.
+
+1. If you have not already done so, set up the [Datadog PagerDuty integration][2].
+
+2. Get your PagerDuty API access key as described in their [API Access Key][3] documentation.
+
+3. Follow the [integration configuration instructions][4] to finish configuring it.
+
+4. Update the service definition with the PagerDuty information. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
+
+   ```
+   ...
+   integrations:
+     pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
+   ...
+   ```
+
 ## OpsGenie integration
 
 You can add OpsGenie metadata to a service so that the Service Catalog displays and links to information such as who is on-call for the service.
@@ -43,30 +66,6 @@ You can add OpsGenie metadata to a service so that the Service Catalog displays 
 Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab of a service in the Service Catalog.
 
 {{< img src="tracing/service_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Service Catalog" style="width:85%;" >}}
-
-## PagerDuty integration
-
-You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service.
-
-### Setup
-
-You can connect any service in your [PagerDuty Service Directory][1]. You can map one PagerDuty service for each service in the Service Catalog.
-
-1. If you have not already done so, set up the [Datadog PagerDuty integration][2].
-
-2. Get your PagerDuty API access key as described in their [API Access Key][3] documentation.
-
-3. Follow the [integration configuration instructions][4] to finish configuring it.
-
-4. Update the service definition with the PagerDuty information. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
-
-   ```
-   ...
-   integrations:
-     pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
-   ...
-   ```
-
 ## IDE integrations
 
 Datadog provides a [JSON Schema][6] for service definitions so that when you are editing a service definition in a [supporting IDE][7], features such as autocomplete and validation are provided.
