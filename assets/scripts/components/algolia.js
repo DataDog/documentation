@@ -101,24 +101,12 @@ if (searchBoxContainer) {
         customPagination({
             isNotSearchPage: !searchResultsPage,
             container: document.querySelector('#pagination'),
-            scrollTo: document.querySelector('#pagetitle')
+            scrollTo: document.querySelector('#pagetitle'),
+            padding: 5
         })
     ]);
 
     search.start();
-
-    const handleOutsideSearchbarClick = (e) => {
-        let target = e.target;
-        do {
-            if (target === searchBoxContainerContainer) {
-                return;
-            }
-            target = target.parentNode;
-        } while (target);
-        {
-            hitsContainerContainer.classList.add('d-none');
-        }
-    };
 
     if (!searchResultsPage) {
         const handleSearchbarKeydown = (e) => {
@@ -133,9 +121,20 @@ if (searchBoxContainer) {
             }
         };
 
+        const handleOutsideSearchbarClick = (e) => {
+            let target = e.target;
+            do {
+                if (target === searchBoxContainerContainer) {
+                    return;
+                }
+                target = target.parentNode;
+            } while (target);
+
+            hitsContainerContainer.classList.add('d-none');
+        };
+
         document.querySelector('.ais-SearchBox-input').addEventListener('keydown', handleSearchbarKeydown);
         document.querySelector('.ais-SearchBox-submit').addEventListener('click', handleSearchbarSubmitClick);
+        document.addEventListener('click', handleOutsideSearchbarClick);
     }
-
-    document.addEventListener('click', handleOutsideSearchbarClick);
 }

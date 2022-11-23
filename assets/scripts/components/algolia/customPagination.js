@@ -2,11 +2,11 @@ import connectPagination from 'instantsearch.js/es/connectors/pagination/connect
 
 const renderPagination = (renderOptions) => {
     const {
+        pages,
         isFirstPage,
         isLastPage,
         currentRefinement,
         nbHits,
-        nbPages,
         refine,
         createURL,
         widgetParams
@@ -36,11 +36,24 @@ const renderPagination = (renderOptions) => {
         }
       </li>
 
-      <li>
-        <p>
-          showing ${currentRefinement + 1} of ${nbPages} pages
-        </p>
-      </li>
+      ${pages
+          .map(
+              (page) => `
+            <li class="ais-Pagination-item ${page === currentRefinement ? 'active' : ''}">
+                ${
+                    page === currentRefinement
+                        ? `<p>${page + 1}</p>`
+                        : `<a
+                    href="${createURL(page)}"
+                    data-value="${page}"
+                >
+                    ${page + 1}
+                </a>`
+                }
+            </li>
+            `
+          )
+          .join('')}
 
       <li class="ais-Pagination-item ${isLastPage ? 'ais-Pagination-item--disabled' : ''}">
       ${
