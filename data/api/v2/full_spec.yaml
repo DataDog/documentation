@@ -804,8 +804,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'Timezone code. Can be specified as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -1203,6 +1203,10 @@ components:
       - max
       - avg
       - median
+      - latest
+      - earliest
+      - most_frequent
+      - delta
       example: pc90
       type: string
       x-enum-varnames:
@@ -1218,6 +1222,10 @@ components:
       - MAX
       - AVG
       - MEDIAN
+      - LATEST
+      - EARLIEST
+      - MOST_FREQUENT
+      - DELTA
     CIAppCompute:
       description: A compute rule to compute metrics or timeseries.
       properties:
@@ -1497,8 +1505,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -2743,7 +2751,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified as an offset, for example: `UTC+03:00`.'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -5028,6 +5037,8 @@ components:
       properties:
         aggregation_type:
           $ref: '#/components/schemas/LogsMetricComputeAggregationType'
+        include_percentiles:
+          $ref: '#/components/schemas/LogsMetricComputeIncludePercentiles'
         path:
           description: The path to the value the log-based metric will aggregate on
             (only used if the aggregation type is a "distribution").
@@ -5046,6 +5057,13 @@ components:
       x-enum-varnames:
       - COUNT
       - DISTRIBUTION
+    LogsMetricComputeIncludePercentiles:
+      description: 'Toggle to include or exclude percentile aggregations for distribution
+        metrics.
+
+        Only present when the `aggregation_type` is `distribution`.'
+      example: true
+      type: boolean
     LogsMetricCreateAttributes:
       description: The object describing the Datadog log-based metric to create.
       properties:
@@ -5137,6 +5155,8 @@ components:
       properties:
         aggregation_type:
           $ref: '#/components/schemas/LogsMetricResponseComputeAggregationType'
+        include_percentiles:
+          $ref: '#/components/schemas/LogsMetricComputeIncludePercentiles'
         path:
           description: The path to the value the log-based metric will aggregate on
             (only used if the aggregation type is a "distribution").
@@ -5198,6 +5218,8 @@ components:
     LogsMetricUpdateAttributes:
       description: The log-based metric properties that will be updated.
       properties:
+        compute:
+          $ref: '#/components/schemas/LogsMetricUpdateCompute'
         filter:
           $ref: '#/components/schemas/LogsMetricFilter'
         group_by:
@@ -5205,6 +5227,12 @@ components:
           items:
             $ref: '#/components/schemas/LogsMetricGroupBy'
           type: array
+      type: object
+    LogsMetricUpdateCompute:
+      description: The compute rule to compute the log-based metric.
+      properties:
+        include_percentiles:
+          $ref: '#/components/schemas/LogsMetricComputeIncludePercentiles'
       type: object
     LogsMetricUpdateData:
       description: The new log-based metric properties.
@@ -5281,8 +5309,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -6003,7 +6031,7 @@ components:
           format: date-time
           type: string
         include_percentiles:
-          description: 'Toggle to turn on/off percentile aggregations for distribution
+          description: 'Toggle to include or exclude percentile aggregations for distribution
             metrics.
 
             Only present when the `metric_type` is `distribution`.'
@@ -7318,8 +7346,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -13522,6 +13550,15 @@ paths:
               \     },\n      \"compute\": {\n        \"aggregation_type\": \"count\"\n
               \     }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
           step: there is a valid "logs_metric" in the system
+        logs_metric_percentile:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"attributes\":
+              {\n      \"filter\": {\n        \"query\": \"source:{{ unique }}\"\n
+              \     },\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+              \       \"path\": \"@duration\",\n        \"include_percentiles\": true\n
+              \     }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
+          step: there is a valid "logs_metric_percentile" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteLogsMetric

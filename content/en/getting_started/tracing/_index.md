@@ -27,7 +27,7 @@ If you haven't already, create a [Datadog account][3].
 
 ## Datadog Agent
 
-Before installing the Datadog Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
+Before installing the Datadog Agent, set up a [Vagrant Ubuntu 22.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
 
 ```text
 vagrant init ubuntu/xenial64
@@ -161,7 +161,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [1]: /tracing/#terminology
 [2]: https://docs.datadoghq.com/tracing/setup/
 [3]: https://www.datadoghq.com
-[4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
+[4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
