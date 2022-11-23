@@ -175,7 +175,11 @@
     }
 
     .ais-SearchBox {
-        width: 50%;
+        width: 100%;
+
+        @media screen and (min-width: 992px) {
+            width: 50%;
+        }
     }
 
     .ais-SearchBox-form {
@@ -218,6 +222,7 @@
     .ais-Hits-row {
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
 
         & .ais-Hits-category,
         & .ais-Hits-subcategory {
@@ -241,7 +246,9 @@
         padding: 0;
         margin: 0;
         display: flex;
+        flex-wrap: wrap;
         font-weight: 600;
+        row-gap: 12px;
     }
 
     .ais-Pagination-item a,
