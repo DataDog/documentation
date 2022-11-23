@@ -106,11 +106,11 @@ instances:
     custom_queries:
     - query: SELECT age, salary, hours_worked, name FROM hr.employees;
       columns:
-        - name: sqlserver.custom.employee_age
+        - name: custom.employee_age
           type: gauge
-        - name: sqlserver.custom.employee_salary
+        - name: custom.employee_salary
            type: gauge
-        - name: sqlserver.custom.employee_hours
+        - name: custom.employee_hours
            type: count
         - name: name
            type: tag
