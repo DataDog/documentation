@@ -68,7 +68,7 @@ Your private locations test results display identically to your managed location
     
     This command starts a Docker container and prepares your private location to run tests. Datadog recommends running the container in detached mode with proper restart policy.
 
-    <div class="alert alert-info">You can use another container runtime such as Podman. For more information, see the <a href="https://docs.datadoghq.com/synthetics/private_location?tab=podman#install-your-private-location">Private Locations documentation</a>.</div>
+    <div class="alert alert-info">You can use another container runtime such as Podman. For more information, see the <a href="https://docs.datadoghq.com/synthetics/private_location?tab=podman">Private Locations documentation</a>.</div>
     
 11. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
 
