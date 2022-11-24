@@ -212,6 +212,10 @@ apm_config:
     - name: "http.url"
       pattern: "token/(.*)"
       repl: "?"
+    # Remove trailing "/" character in resource names
+    - name: "resource.name"
+      pattern: "(.*)\/$"
+      repl: "$1"
     # Replace all the occurrences of "foo" in any tag with "bar":
     - name: "*"
       pattern: "foo"
@@ -232,6 +236,11 @@ DD_APM_REPLACE_TAGS=[
         "repl": "?"
       },
       {
+        "name": "resource.name"
+        "pattern": "(.*)\/$"
+        "repl": "$1"
+      },
+      {
         "name": "*",
         "pattern": "foo",
         "repl": "bar"
@@ -246,7 +255,7 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-**Note**: Put this environment variable in the trace-agent container if you are using the recommended [daemonset configuration][1].
+Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1] or using `agents.containers.traceAgent.env` in the if `values.yaml` file you are using [helm chart][2]
 
 ```datadog-agent.yaml
 - name: DD_APM_REPLACE_TAGS
@@ -255,6 +264,11 @@ DD_APM_REPLACE_TAGS=[
               "name": "http.url",
               "pattern": "token/(.*)",
               "repl": "?"
+            },
+            {
+              "name": "resource.name"
+              "pattern": "(.*)\/$"
+              "repl": "$1"
             },
             {
               "name": "*",
@@ -268,12 +282,13 @@ DD_APM_REPLACE_TAGS=[
           ]'
 ```
 
-[1]: /agent/kubernetes/?tab=daemonset
+[1]: /containers/kubernetes/installation/?tab=daemonset
+[2]: /containers/kubernetes/installation/?tab=helm
 {{% /tab %}}
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
 ```
 
 {{% /tab %}}
