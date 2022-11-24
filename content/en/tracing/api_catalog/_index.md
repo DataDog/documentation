@@ -31,26 +31,9 @@ API Catalog brings together data from across Datadog to provide opinionated work
 - **Correlation of all API metadata** from different Datadog sources.
 - **API endpoint metrics** such as Last Seen, Requests, Latency, and Errors, to identify performance issues and track API health.
 - **Alerting** on Endpoints that deviate from defined performance expectations and thresholds.
-- Resolving incidents faster with API ownership information (team, on-call, communication channels, code repo) directly associated with each endpoint, to know who to reach when something goes wrong
+- Resolving incidents faster with API **ownership information** (team, on-call, communication channels) directly associated with each endpoint, to know who to reach when something goes wrong
 
-### Some background terminology
-
-API
-: A set of protocol and tools that allow two applications to communicate.
-
-API endpoint
-: The address of a resource (URL) of a server or a service, that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint responsible for making the API call response.<br /><br/>
-API endpoints in the API Catalog are comprised by the HTTP Method (for example, `GET`), the URL's Path (the structure of the location of the resource, such as `/payment/{shop_id}/purchase`) and the Service this resource serves (for example, `Payments`)<br /><br/>
-The API Catalog in **beta** supports only **HTTP** endpoints. 
-
-Public APIs
-: Customer facing API endpoints that are accessible from the internet.
-
-Private APIs
-: Also called internal APIs. Intended solely for internal use within a company or organization, used mainly for backend services communication . The most common type of APIs.
-
-Partner APIs
-: Also called third party APIs. Endpoints that the organization uses to provide its own services, basically these are another organization’s public endpoints (e.g. Stripe, Google, Facebook).
+<div class="alert alert-info">Not sure what an API or an endpoint is? See <a href="#key-terminology">Key terminology</a> for some background on concepts that are important to understanding what API Catalog does.</div>
 
 ## Exploring your endpoints
 
@@ -61,8 +44,8 @@ In the list table, **sort** by any of the columns by clicking a header. For exam
 The table also shows **team ownership** for the API. This information is inherited from the associated service's definition in the [Service Catalog][2]. A service owner owns all of the endpoints that are connected to the service.
 
 To **filter the list** of endpoints or to search for a particular endpoint of interest, enter a query in the **Search** field. Search by service, path, or any other primary tag you wish. 
-Or select a combination of facets on the left. Facet by the owning **service** or the **team** they belong to.
 
+Or select a combination of facets on the left, filtering by the owning **service** or the **team** they belong to.
 
 To **scope the data** shown in the table, specify an environment, another primary tag (such as datacenter), and a time frame.
 
@@ -124,6 +107,24 @@ To set up your API Catalog list:
 - [Instrument the services][3] with APM. 
 - [Define service ownership information][2] using Service Catalog.
 
+### Key terminology
+
+API
+: A set of protocol and tools that allow two applications to communicate.
+
+API endpoint
+: The address of a resource (URL) of a server or a service, that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint responsible for making the API call response.<br /><br/>
+API endpoints in the API Catalog are comprised by the HTTP Method (for example, `GET`), the URL's Path (the structure of the location of the resource, such as `/payment/{shop_id}/purchase`) and the Service this resource serves (for example, `Payments`)<br /><br/>
+The API Catalog in **beta** supports only **HTTP** endpoints. 
+
+Public APIs
+: Customer facing API endpoints that are accessible from the internet.
+
+Private APIs
+: Also called internal APIs. Intended solely for internal use within a company or organization, used mainly for backend services communication. The most common type of APIs.
+
+Partner APIs
+: Also called third party APIs. Another organization's public endpoints that your organization uses to provide your services (for example, Stripe, Google, Facebook).
 
 ## Further reading
 
