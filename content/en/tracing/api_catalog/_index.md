@@ -66,6 +66,8 @@ For example, you can:
 - View the Error/Hits graph and correlated Response Code graph to identify issues.
 - Navigate to related telemetry like traces and logs.
 
+{{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph, and click through to related traces to investigate." video="true" >}}
+
 The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings in the details page to suit your investigation by using the time frame selector and other scope drop-downs. 
 
 
