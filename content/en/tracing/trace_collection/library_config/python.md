@@ -62,6 +62,14 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` a
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Python process. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `[]`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][5].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+
+
 `DD_TAGS`
 : A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
 
@@ -97,7 +105,7 @@ Override the port that the default tracer submits DogStatsD metrics to.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false`<br>
-Enable [connecting logs and trace injection][5].
+Enable [connecting logs and trace injection][6].
 
 
 
@@ -109,4 +117,5 @@ Enable [connecting logs and trace injection][5].
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [3]: /tracing/guide/setting_primary_tags_to_scope/
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[5]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[5]: /tracing/trace_pipeline/ingestion_mechanisms/
+[6]: /tracing/other_telemetry/connect_logs_and_traces/python/

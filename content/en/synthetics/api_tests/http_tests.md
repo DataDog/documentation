@@ -30,7 +30,7 @@ further_reading:
 
 HTTP tests allow you to send HTTP requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content.
 
-HTTP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
+HTTP tests can run from both [managed](#select-locations) and [private locations][1] depending on your preference for running the test from outside or inside your network. HTTP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][2].
 
 ## Configuration
 
@@ -105,7 +105,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
 3. **Name** your HTTP test.
 
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
 
    {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
 
@@ -117,10 +117,10 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][5], [`xpath`][6] | _String_ <br> _[Regex][7]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][7]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _String_ <br> _[Regex][6]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][6]_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| status code   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Integer_ <br> _[Regex][7]_                                                     |
+| status code   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Integer_ <br> _[Regex][6]_                                                     |
 
 HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
@@ -136,14 +136,16 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 ### Select locations
 
-Select the **Locations** to run your HTTP test from. HTTP tests can run from both [managed][1] and [private locations][2] depending on your preference for running the test from outside or inside your network. 
+Select the **Locations** to run your HTTP test from. HTTP tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network. 
+
+{{% managed-locations %}} 
 
 ### Specify test frequency
 
 HTTP tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your HTTP test.
-* [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
+* [**Within your CI/CD pipelines**][2] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your team.
 
 ### Define alert conditions
@@ -167,9 +169,9 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
-1. [Similar to how you configure monitors][8], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][9] and supports the following [conditional variables][10]:
+2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -186,7 +188,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 4. Click **Create** to save your test configuration and monitor.
 
-For more information, see [Using Synthetic Test Monitors][11].
+For more information, see [Using Synthetic Test Monitors][10].
 
 ## Variables
 
@@ -213,7 +215,7 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][12] in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][11] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -238,7 +240,7 @@ These reasons include the following:
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][13].
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
@@ -251,13 +253,13 @@ These reasons include the following:
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][14] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][14].
+By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
 
-If you are using the [custom role feature][15], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][16] on their accounts.
+Access restriction is available for customers using [custom roles][15] on their accounts.
 
 You can restrict access to an HTTP test based on the roles in your organization. When creating an HTTP test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -267,19 +269,18 @@ You can restrict access to an HTTP test based on the roles in your organization.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/synthetics/#get-all-locations-public-and-private
-[2]: /synthetics/private_locations
-[3]: /synthetics/cicd_integrations
-[4]: /synthetics/search/#search
-[5]: https://restfulapi.net/json-jsonpath/
-[6]: https://www.w3schools.com/xml/xpath_syntax.asp
-[7]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[8]: /monitors/notify/#notify-your-team
-[9]: https://www.markdownguide.org/basic-syntax/
-[10]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[11]: /synthetics/guide/synthetic-test-monitors
-[12]: /synthetics/settings/#global-variables
-[13]: /synthetics/api_tests/errors/#ssl-errors
-[14]: /account_management/rbac/
-[15]: /account_management/rbac#custom-roles
-[16]: /account_management/rbac/#create-a-custom-role
+[1]: /synthetics/private_locations
+[2]: /synthetics/cicd_integrations
+[3]: /synthetics/search/#search
+[4]: https://restfulapi.net/json-jsonpath/
+[5]: https://www.w3schools.com/xml/xpath_syntax.asp
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[7]: /monitors/notify/#notify-your-team
+[8]: https://www.markdownguide.org/basic-syntax/
+[9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[10]: /synthetics/guide/synthetic-test-monitors
+[11]: /synthetics/settings/#global-variables
+[12]: /synthetics/api_tests/errors/#ssl-errors
+[13]: /account_management/rbac/
+[14]: /account_management/rbac#custom-roles
+[15]: /account_management/rbac/#create-a-custom-role
