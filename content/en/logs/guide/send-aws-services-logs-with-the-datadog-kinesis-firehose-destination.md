@@ -87,7 +87,7 @@ If you want to push logs directly to the delivery stream without going through a
 
 ## Search for AWS Kinesis logs in Datadog
 
-Once you have set up an Amazon Kinesis delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
+After you have set up an Amazon Kinesis delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
 
 To populate all logs by ARN:
 
