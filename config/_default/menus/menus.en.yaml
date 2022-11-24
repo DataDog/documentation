@@ -299,45 +299,49 @@ main:
     parent: agent
     weight: 11
     identifier: agent_troubleshooting
+  - name: Container Hostname Detection
+    url: agent/troubleshooting/hostname_containers/
+    parent: agent_troubleshooting
+    weight: 1101
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1101
+    weight: 1102
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1102
+    weight: 1103
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1103
+    weight: 1104
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1104
+    weight: 1105
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1105
+    weight: 1106
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1106
+    weight: 1107
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1107
+    weight: 1108
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1108
+    weight: 1109
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1109
+    weight: 1110
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1110
+    weight: 1111
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/

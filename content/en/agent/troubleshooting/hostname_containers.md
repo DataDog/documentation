@@ -1,40 +1,36 @@
 ---
-title: Hostname detection in containers
+title: Hostname Detection in Containers
 kind: documentation
 ---
 
-Many features in Datadog rely on the Agent to provide an accurate hostname for monitored hosts. While this is simple when the Agent runs directly on a host, the hostname resolution process is different when the Agent runs in a containerized environment.
+Many features in Datadog rely on the Agent to provide an accurate hostname for monitored hosts. While this is straightforward when the Agent runs directly on a host, the hostname resolution process is different when the Agent runs in a containerized environment.
 
-Since version **7.40**, the Agent properly recognizes failed hostname resolution in containerized environments.
-Without a resolved hostname, the Agent will exit with an error shortly after being started.
+Since version **7.40**, the Agent properly recognizes failed hostname resolution in containerized environments. Without a resolved hostname, the Agent exits with an error shortly after it starts.
 
-When it happens, the following `ERROR` message will be printed in the logs:
+When that happens, the following `ERROR` message is printed in the logs:
 ```
 Error while getting hostname, exiting: unable to reliably determine the host name. You can define one in the agent config file or in your hosts file
 ```
 
-Encoutering this error usually means that some part of the Agent configuration is incorrect.
-This page will help you resolve this misconfiguration in different common cases.
+Encountering this error usually means that some part of the Agent configuration is incorrect. Use the following information to resolve various common cases of this misconfiguration.
 
-## Kubernetes
+## Kubernetes hostname errors
 
-On Kubernetes, it usually means the Agent cannot access at least one of:
-* Cloud provider metadata endpoint
+On Kubernetes, a hostname error usually means the Agent cannot access at least one of:
 * Kubelet API
+* Cloud provider metadata endpoint
 * Container runtime API
 
-Some Kubernetes distribution require a dedicated configuration, so the first item to check is to verify that your setup is aligned with our [recommended Kubernetes setup][1].
+Some Kubernetes distributions require a dedicated configuration, so verify that your setup is aligned with our [recommended Kubernetes setup][1].
 
-### Solution 1
+### Accessing the Kubelet API 
 
-Make sure the Agent is able to access the Kubelet API.
-When it's the case, the Agent will print this log:
+Make sure the Agent can access the Kubelet API. When it can, the Agent prints this log:
 ```
 Successful configuration found for Kubelet, using URL: ******
 ```
 
-The Kubernetes RBAC permissions are automatically by our official [Helm chart][2], the [Datadog Operator][3] and our official [manifests][4].
-If you're using a different solution to deploy the Agent, make sure these permissions are present in a `Role` or `ClusterRole` bounded to the Agent service account:
+The Kubernetes RBAC permissions are set automatically by our official [Helm chart][2], the [Datadog Operator][3] and our official [manifests][4]. If you use a different solution to deploy the Agent, make sure the following permissions are present in a `Role` or `ClusterRole` that is bounded to the Agent service account:
 
 ```yaml
 rules:
@@ -49,12 +45,11 @@ rules:
       - get
 ```
 
-The most common error preventing connection to the Kubelet API is the verification of Kubelet TLS certificate.
-In many Kubernetes distribution the Kubelet certificate is either:
+The most common error that prevents connection to the Kubelet API is the verification of Kubelet TLS certificate. In many Kubernetes distributions the Kubelet certificate is either:
 * Not signed by the cluster CA.
-* Does not container a SAN corresponding to the address it's reachable at.
+* Does not contain a SAN corresponding to the address it's reachable at.
 
-This prevents the Agent to connect to the Kubelet API through HTTPS, as, by default, TLS verification is enabled.
+This prevents the Agent from connecting to the Kubelet API through HTTPS, because TLS verification is enabled by default.
 
 You can disable TLS verification by using dedicated parameters or by setting the `DD_KUBELET_TLS_VERIFY` variable for **all containers** in the Agent manifest:
 
@@ -72,7 +67,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+`DatadogAgent` Kubernetes Resource:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -89,7 +84,7 @@ spec:
 {{% /tab %}}
 {{% tab "Manifest" %}}
 
-`DaemonSet` manifest
+`DaemonSet` manifest:
 
 ```yaml
 apiVersion: apps/v1
@@ -109,18 +104,18 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Solution 2
+### Accessing the cloud provider metadata endpoint
 
-If you're running in AWS, GCP or Azure, the Agent can use metadata endpoint to retrieve the hostname.
+If you run in AWS, GCP, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
 
-Accessing the cloud provider metadata endpoint allows to properly match Agent data and cloud integration data.
+Accessing the cloud provider metadata endpoint properly matches Agent data and cloud integration data.
 
-Hitting this issue usually means that access to the metadata endpoint has been restricited.
-For instance, on AWS, through the [hop limit feature][5].
+Encountering this issue usually means that access to the metadata endpoint has been restricted.
+For example, on AWS, this happens through the [hop limit feature][5].
 
-### Solution 3
+### Accessing the container runtime API
 
-This solution should only be necessary if you **explicitly** don't want the Agent to connect to Kubelet API (unlikely) and if you are not running in a supported cloud provider (see Solution 2).
+Use this solution only in the unlikely even that you **explicitly** don't want the Agent to connect to Kubelet API, and if you are not running in a supported cloud provider described above.
 
 In this case you can use the downward API to set `DD_HOSTNAME`:
 
@@ -141,7 +136,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+`DatadogAgent` Kubernetes Resource:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -182,25 +177,28 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## AWS ECS / Docker VM
+## AWS ECS and Docker VM hostname errors
 
-When the Agent runs in Docker on a cloud provider, hitting this error usually means that the Agent cannot access at least one of:
-* Cloud provider metadata endpoint
+When the Agent runs in Docker on a cloud provider, a hostname error usually means that the Agent cannot access at least one of:
 * Container runtime API
+* Cloud provider metadata endpoint
 
-### Solution 1
+### Accessing the container runtime API
 
 Allow the Agent to connect to the Docker socket:
 
 {{< tabs >}}
 {{% tab "AWS ECS on EC2" %}}
 
-Make sure the Docker socket is mounted in your [task definition][6].
+Make sure the Docker socket is mounted in your [task definition][1].
 
+
+[1]: /resources/json/datadog-agent-ecs.json
 {{% /tab %}}
 {{% tab "Docker on VM" %}}
 
 Make sure the Docker socket is mounted in your `docker run` command:
+
 ```
 -v /var/run/docker.sock:/var/run/docker.sock:ro
 ```
@@ -208,31 +206,35 @@ Make sure the Docker socket is mounted in your `docker run` command:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Solution 2
+### Accessing the cloud provider metadata endpoint
 
-If you're running in AWS, GCP or Azure, the Agent can use metadata endpoint to retrieve the hostname.
+If you're running in AWS, GCP, or Azure, the Agent can use metadata endpoint to retrieve the hostname.
 
-Accessing the cloud provider metadata endpoint allows to properly match Agent data and cloud integration data.
+Accessing the cloud provider metadata endpoint properly matches Agent data and cloud integration data.
 
-Hitting this issue usually means that access to the metadata endpoint has been restricited.
-For instance, on AWS, through the [hop limit feature][5].
+Encountering this issue usually means that access to the metadata endpoint has been restricted.
+For example, on AWS, this happens through the [hop limit feature][5].
 
-## CI Environments / sidecar setups
+## Hostname errors in CI environments and sidecar setups
 
-When running in a **CI environment** (e.g. Agent is ephemeral) or as a sidecar without access to
-host information, simply set `DD_HOSTNAME` to a value:
+When you run the Agent in a **CI environment** (so Agent is ephemeral) or as a sidecar without access to
+host information, set `DD_HOSTNAME` to a value:
+
 ```
 -e DD_HOSTNAME=$(hostname)
+```
+
 or
+
+```
 -e DD_HOSTNAME=<my_hardcoded_hostname>
 ```
 
-Finally if this guide did not allow you to fix your Agent setup, reach out to the [Datadog support team][7].
+If the solutions above did fix your Agent setup, reach out to the [Datadog support team][6].
 
 [1]: /containers/kubernetes/distributions
 [2]: https://github.com/DataDog/helm-charts
 [3]: https://github.com/DataDog/datadog-operator
 [4]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/manifests
 [5]: /containers/troubleshooting/duplicate_hosts
-[6]: /resources/json/datadog-agent-ecs.json
-[7]: /help/
+[6]: /help/
