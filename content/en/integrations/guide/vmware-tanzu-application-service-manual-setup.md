@@ -1,20 +1,20 @@
 ---
 title: Pivotal Cloud Foundry Manual Setup Guide
 kind: guide
-description: "Steps for manually setting up the Datadog VMware Tanzu Application Service Integration"
+description: "Steps for manually setting up the Pivotal Cloud Foundry Integration"
 aliases:
   - /integrations/pivotal-platform
 ---
 
 ## Overview
 
-VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, read the [VMware announcement][1] for more information) deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to manually set up monitoring for your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster.
+Pivotal Cloud Foundry (PCF) deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to manually set up monitoring for your PCF application.
 
-There are three main components for the VMware Tanzu Application Service integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Second, the BOSH Release collects metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
+There are three main components for the PCF integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Second, the BOSH Release collects metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
 ## Monitor your applications
 
-Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your VMware Tanzu Application Service application. This is a [supply buildpack][2] for VMware Tanzu Application Service that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
+Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your PCF application. This is a [supply buildpack][2] for PCF that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
 
 ### Pivotal Cloud Foundry < 1.12
 
@@ -74,7 +74,7 @@ If you are a [meta-buildpack][8] user, Datadog's buildpack can be used as a deco
 
 **Note**: Pivotal has deprecated the meta-buildpack in favor of the multi-buildpack.
 
-## Monitor your VMware Tanzu Application Service cluster
+## Monitor your PCF cluster
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
@@ -82,7 +82,7 @@ There are two points of integration with Datadog, each of which achieves a diffe
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
-These integrations are meant for VMware Tanzu Application Service deployment administrators, not end users.
+These integrations are meant for PCF deployment administrators, not end users.
 </div>
 
 ### Prerequisites
@@ -174,7 +174,7 @@ bosh update runtime-config runtime.yml
 bosh update-runtime-config -e <BOSH_ENV> runtime.yml
 ```
 
-#### Redeploy your VMware Tanzu Application Service deployment
+#### Redeploy your PCF deployment
 
 ```text
 # BOSH CLI v1
@@ -196,14 +196,13 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="The detail view for a host in the Datadog host map with the system integration selected and multiple graphs displaying data"  >}}
 
-#### Collect CAPI metadata and 
+#### Collect CAPI metadata and Cluster Agent tags in PCF containers
 
-Add support for CAPI metadata and DCA tags collection in PCF containers.
-Application labels and annotations will be present in the application logs, metrics and traces (under the Infrastructure Tab).
+For Datadog Agent versions `7.40.1` and later, you can collect CAPI metadata and Datadog Cluster Agent (DCA) tags from PCF containers. Application labels and annotations are present in the application logs, metrics, and traces. 
 
-### Install the Datadog Cluster Agent BOSH release
+### Install the Datadog Cluster Agent (DCA) BOSH release
 
-The Datadog Cluster Agent BOSH release is a BOSH package for running the Datadog Cluster Agent on Cloud Foundry.
+The Datadog Cluster Agent BOSH release is a BOSH package for running the DCA on Cloud Foundry.
 
 This package is to be used in conjunction with the [Datadog Agent BOSH Release][18].
 It provides a BOSH link consumed by the Datadog Agent BOSH release to Autodiscover and schedule integrations for your apps, as well as improved tagging for application containers and process discovery. For more information, see the [spec in GitHub][33].
@@ -343,7 +342,7 @@ This dictionary contains a JSONPath object indicating where to find the variable
 
 #### Improve CCCache performance on cache miss
 
-If you're using Datadog Agent version `7.40.0` and above, you can add more flags to increase control over the CCCache behavior:
+For Datadog Agent versions `7.40.1` and later, you can add more flags to increase control over the CCCache behavior and the number of API calls:
 
 - `refresh_on_cache_miss` to control cache miss behavior
 - Split `advanced_tags` into `sidecars_tags` and `isolation_segments_tags`
@@ -354,7 +353,7 @@ Once the two releases are linked, the Datadog Cluster Agent automatically provid
 
 ### Deploy the Datadog Firehose Nozzle
 
-Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing VMware Tanzu Application Service deployment that has a working Loggregator Firehose.
+Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing PCF deployment that has a working Loggregator Firehose.
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -387,7 +386,7 @@ Redeploy to add the user.
 
 #### Add Firehose Nozzle jobs
 
-Configure one or more Nozzle jobs in your main VMware Tanzu Application Service deployment manifest (`cf-manifest.yml`):
+Configure one or more Nozzle jobs in your main PCF deployment manifest (`cf-manifest.yml`):
 
 ```yaml
 jobs:
@@ -455,17 +454,19 @@ bosh -n deploy --recreate
 bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 ```
 
-#### Verify the Firehose Nozzle is collecting
+#### Verify the Firehose Nozzle is collecting data
 
 On the [Metrics explorer][23] page in Datadog, search for metrics beginning with `cloudfoundry.nozzle`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="The Metrics Explorer in Datadog with cloudfoundry.nozzle entered in the search bar"  >}}
 
-#### Disable the application metadata prefix
+#### Control the application metadata prefix
 
-You have the option to disable the application metadata prefix in the Firehose Nozzle app metrics.
+You can enable or disable the application metadata prefix in the Firehose Nozzle app metrics.
 
-[1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20(PCF)%20is%20now%20VMware%20Tanzu%20Application%20Service
+{{< img src="integrations/cloud_foundry/enable_metadata_app_prefix.png" alt="The integration tile settings in Datadog with Enable Metadata App Metrics Prefix unchecked" >}}
+
+
 [2]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
 [3]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [4]: https://github.com/cloudfoundry/multi-buildpack
