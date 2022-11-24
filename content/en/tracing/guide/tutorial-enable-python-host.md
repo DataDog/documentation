@@ -171,7 +171,7 @@ Use `curl` to again send requests to the application:
 
 Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]). The Traces list shows something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:70%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 If you don't see traces, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
