@@ -140,14 +140,14 @@ If your Agent is running in your cluster and you want to autodiscover your conta
     | [confluent_platform][7] | [metrics.yaml][8]  | [conf.yaml.example][9] |
     | [hive][10]              | [metrics.yaml][11] | [conf.yaml.example][12] |
     | [jboss_wildfly][13]     | [metrics.yaml][14] | [conf.yaml.example][15] |
-    | [kafka][29]             | [metrics.yaml][17] | [conf.yaml.example][18] |
+    | [kafka][16]             | [metrics.yaml][17] | [conf.yaml.example][18] |
     | [solr][19]              | [metrics.yaml][20] | [conf.yaml.example][21] |
     | [presto][22]            | [metrics.yaml][23] | [conf.yaml.example][24] |
-    | [tomcat][16]            | [metrics.yaml][25] | [conf.yaml.example][26] |
+    | [tomcat][25]            | [metrics.yaml][26] | [conf.yaml.example][27] |
 
 3. Rename the `conf.yaml.example` file into `conf.yaml`.
 
-4. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic. The configuration files have host parameter values by default, use the [Autodiscovery Template Variables][27] logic instead. In the following Tomcat check example, the `host` parameter value is changed from `localhost` to `%%host%%`:
+4. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic. The configuration files have host parameter values by default, use the [Autodiscovery Template Variables][28] logic instead. In the following Tomcat check example, the `host` parameter value is changed from `localhost` to `%%host%%`:
 
     ```yaml
     init_config:
@@ -185,7 +185,7 @@ If your Agent is running in your cluster and you want to autodiscover your conta
         # (...)
     ```
 
-     **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][28] as `ad_identifiers` if needed.
+     **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][29] as `ad_identifiers` if needed.
 
 6. Mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/<INTEGRATION_NAME>.d/` folder.
 
@@ -214,7 +214,7 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 [13]: /integrations/jboss_wildfly/
 [14]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[16]: /integrations/tomcat/
+[16]: /integrations/kafka/
 [17]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
 [18]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [19]: /integrations/solr/
@@ -223,11 +223,11 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 [22]: /integrations/presto/
 [23]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
 [24]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
-[25]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
-[26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[27]: /agent/faq/template_variables/
-[28]: /agent/guide/ad_identifiers/#short-image-container-identifiers
-[29]: /integrations/kafka/
+[25]: /integrations/tomcat/
+[26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
+[27]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
+[28]: /agent/faq/template_variables/
+[29]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 {{% /tab %}}
 {{% tab "Host Agent" %}}
 

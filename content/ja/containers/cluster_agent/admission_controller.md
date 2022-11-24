@@ -22,7 +22,7 @@ Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します�
 
 ## 要件
 
-- Datadog Cluster Agent v1.7.0+
+- Datadog Cluster Agent v7.39+
 
 ## コンフィギュレーション
 
@@ -128,14 +128,51 @@ Cluster Agent のデプロイに環境変数を追加し、Admission Controller 
 - `kubectl apply -f agent-services.yaml`
 - `kubectl apply -f cluster-agent-deployment.yaml`
 
-### APM および DogStatsD
 
-DogStatsD クライアントと APM トレーサーを自動で構成するには、以下のいずれかの方法で環境変数 `DD_AGENT_HOST` および `DD_ENTITY_ID` を挿入します。
+### APM
+Cluster Agent (バージョン 7.39 以降)では、APM トレーシングライブラリを自動的に挿入するように構成することができます。
 
+Cluster Agent をインストールしたら、次のいずれかを実行します。
 - ラベル `admission.datadoghq.com/enabled: "true"` をポッドに追加する。
 - `mutateUnlabelled` (コンフィギュレーションメソッドによっては `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) を `true` に設定して Cluster Agent の Admission Controller を構成します。
 
+ライブラリ挿入のためにコンテナをオプトインするには、アプリケーションの YAML ファイル内で Pod アノテーションを使用して、言語トレーサーとバージョンを指定します。
+
+
+アノテーションは、次の形式の `key: value` のペアです。
+
+```yaml
+datadoghq.com/<language>-lib.version: <lib-version>
+```
+
+このアノテーションを追加すると、その言語とバージョンのトレーサーライブラリが、コンテナ化されたアプリケーションに挿入されます。
+有効な `<language>` の値は以下の通りです。
+- `java`
+- `js`
+
+例えば、最新の Java トレーサーを挿入するには
+
+```yaml
+annotations:
+    admission.datadoghq.com/java-lib.version: "latest"
+```
+
+**注**: ライブラリのメジャーリリースは、破壊的な変更をもたらす可能性があるため、`latest` を指定する際には注意が必要です。
+
+あまりないシナリオですが、複数の `<language>-lib.version` アノテーションを追加して、1 つのコンテナに複数の言語トレーサーを挿入することができます。
+
+例えば、最新の Java トレーサーと Node トレーサー v3.0.0 を挿入するには
+```yaml
+annotations:
+    admission.datadoghq.com/java-lib.version: "latest"
+    admission.datadoghq.com/js-lib.version: "3.0.0"
+```
+
+`mutateUnlabelled: true` アノテーションを追加すると、Cluster Agent はラベルのないポッドをすべてインターセプトしようとします。
+
 ポッドで環境変数を受信しないようにするには、ラベル `admission.datadoghq.com/enabled: "false"` を追加します。これは `mutateUnlabelled: true` を設定している場合でも機能します。
+
+`mutateUnlabelled` が `false` に設定されている場合、ポッドラベルは `admission.datadoghq.com/enabled: "true"` とします。
 
 利用可能なオプション:
 
@@ -147,6 +184,12 @@ DogStatsD クライアントと APM トレーサーを自動で構成するに�
 | `false`          | ラベルなし                                | ✕        |
 | `false`          | `admission.datadoghq.com/enabled=true`  | 〇       |
 | `false`          | `admission.datadoghq.com/enabled=false` | ✕        |
+
+### DogStatsD
+
+DogStatsD クライアントやライブラリの挿入をサポートしていない他の APM ライブラリを構成するには、以下のいずれかの方法で環境変数 `DD_AGENT_HOST` と `DD_ENTITY_ID` を挿入します。
+- ラベル `admission.datadoghq.com/enabled: "true"` をポッドに追加する。
+- `mutateUnlabelled` (コンフィギュレーションメソッドによっては `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) を `true` に設定して Cluster Agent の Admission Controller を構成します。
 
 
 #### 優先順位
@@ -179,7 +222,7 @@ Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプ
 - Google Kubernetes Engine (GKE) Private Cluster では、[コントロールプレーン用のファイアーウォールルールを追加する][4]必要があります。着信接続を処理する Webhook は、ポート `443` でリクエストを受け取り、ポート `8000` に実装されたサービスに誘導します。デフォルトでは、クラスターのネットワークに `gke-<CLUSTER_NAME>-master` という名前のファイアーウォールルールが存在するはずです。ルールの "ソースフィルター" は、クラスターの "コントロールプレーンのアドレス範囲" と一致します。このファイアーウォールルールを編集して、TCP ポート `8000` へのイングレッションを許可するようにします。
 
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

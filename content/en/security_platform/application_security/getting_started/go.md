@@ -5,15 +5,18 @@ code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
+    - link: "/security_platform/application_security/add-user-info/"
+      tag: "Documentation"
+      text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-go/tree/v1'
       tag: 'GitHub'
       text: 'Go Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Monitoring Rules"
+      text: "OOTB Application Security Management Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Monitoring"
+      text: "Troubleshooting Application Security Management"
 ---
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS. 
@@ -54,7 +57,7 @@ $ docker run -e DD_APPSEC_ENABLED=true [...]
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your container Dockerfile:
+Add the following environment variable value to your application container's Dockerfile:
 
 ```shell
 ENV DD_APPSEC_ENABLED=true
@@ -63,7 +66,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your application's deployment configuration file for APM and add the ASM environment variable:
 
 ```yaml
 spec:
@@ -80,7 +83,7 @@ spec:
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your application's ECS task definition JSON file, by adding this in the environment section:
 
 ```json
 "environment": [

@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Serverless Monitoring
+title: Getting Started with AWS Lambda Serverless Monitoring
 kind: documentation
 
 further_reading:

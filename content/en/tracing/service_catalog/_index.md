@@ -36,6 +36,7 @@ The Service Catalog is useful for:
 - Facilitating the practice of good tagging to optimize cross-telemetry insights.
 - Providing engineering leadership with a high-level view of reliability practices across teams and services.
 - Spotting issues like missing SLOs, monitors, or services without ownership.
+- Proactively identifying services exposed to application attacks.
 
 ## Browse the Service Catalog
 
@@ -43,7 +44,7 @@ On the [Service Catalog page][1], see the list of services in your Datadog organ
 
 The Service Catalog list is sortable by service type, service name, and many of the other columns. You can find missing ownership by sorting by team in the Ownership view and looking for blanks. Or you can sort by urgency in the Reliability view and see services with the most triggered monitors.
 
-Information about the service provided by the service definition or by Datadog products collecting observability data is organized into three views: Ownership, Reliability, and Performance.
+Information about the service provided by the service definition or by Datadog products collecting observability data is organized into views: Ownership, Reliability, Performance, and Security.
 
 ### Ownership view
 
@@ -97,6 +98,16 @@ The **Performance** tab provides several ways to view how your services are perf
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
+### Security view
+The **Security** tab provides several ways to view how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
+
+- Are receiving the most attack attempts.
+- Are targeted by the most attackers.
+- Have the most severe threats, where the services are impacted by the attacks. 
+- Are monitored and protected by [Application Security Management][11]
+
+Click the Settings icon on the right hand corner to hide metric columns from the service list.
+
 ## Investigate a service
 
 Clicking on a service opens a side panel with details including:
@@ -104,6 +115,7 @@ Clicking on a service opens a side panel with details including:
 - **Ownership information** from the service definition such as links to team contacts, source code, and supplemental information like documentation and dashboards.
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
+- **Security information** including timeline and type of attacks, identify of attackers, and security threats impacting your services.
 - **Configuration completeness status** for Datadog products that can collect data for the service.
 - **Service definition** in YAML with a link to the service's source code.
 - An interactive service map displaying services upstream and downstream from this service.
@@ -150,6 +162,27 @@ Add service ownership information such as the team name, Slack channels, and sou
 ## Registering a new service
 You can manage your service ownership information with the Service Catalog even if those services are not emitting any Datadog telemetry (such as APM traces) with the [Service Definition API][7]. Specify the service ownership, on-call information, and custom tags in YAML files to reflect this information in the Service Catalog. Read [Setting Up Service Catalog][8] for more information.
 
+## Role based access and permissions
+
+For general information, see [Role Based Access Control][9] and [Role Permissions][10]. 
+### Read permission
+
+The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
+- Service Catalog list 
+- Discover UI
+- Service Definition endpoint: `/api/v2/services/definition/<service_name>`
+
+The permission is enabled by default in the **Datadog Read Only Role** and **Datadog Standard Role**.
+
+### Write permission
+
+The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features: 
+- Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
+- Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
+- Completing the onboarding process in the Discover Services UI
+
+The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -162,3 +195,6 @@ You can manage your service ownership information with the Service Catalog even 
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
 [7]: /tracing/service_catalog/service_definition_api/
 [8]: /tracing/service_catalog/setup/
+[9]: /account_management/rbac/
+[10]: /account_management/rbac/permissions/
+[11]: /security_platform/application_security/how-appsec-works/

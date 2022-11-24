@@ -163,7 +163,7 @@ if (scope != null) {
 // ...
 ```
 
-これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、.NET カスタムインスツルメンテーションドキュメントの[タグの追加][8]セクションを参照してください。
+これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、.NET カスタムインスツルメンテーションドキュメントの[タグの追加][6]セクションを参照してください。
 
 ### Git のメタデータを収集する
 
@@ -225,10 +225,10 @@ Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
 
 1. ツールのバージョンを取得するには、`dd-trace --version` を実行します。
-2. 同じバージョンの `Datadog.Trace` [NuGet パッケージ][6]をアプリケーションに追加します。
+2. 同じバージョンの `Datadog.Trace` [NuGet パッケージ][7]をアプリケーションに追加します。
 3. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
 
-カスタムインスツルメンテーションのスパンやタグの追加方法については、[.NET カスタムインスツルメンテーションのドキュメント][7]を参照してください。
+カスタムインスツルメンテーションのスパンやタグの追加方法については、[.NET カスタムインスツルメンテーションのドキュメント][8]を参照してください。
 
 ## その他の参考資料
 
@@ -240,6 +240,6 @@ Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、
 [3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
-[6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
-[8]: /ja/tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
+[6]: /ja/tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
+[7]: https://www.nuget.org/packages/Datadog.Trace
+[8]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/

@@ -96,7 +96,7 @@ Learn more about [Custom Metrics Billing][8].
 [5]: /api/latest/metrics/#tag-configuration-cardinality-estimator
 [6]: /metrics/#time-and-space-aggregation
 [7]: /metrics/summary/#configuration-of-multiple-metrics
-[8]: /account_management/billing/custom_metrics/?tab=countrategauge
+[8]: /account_management/billing/custom_metrics/
 [9]: https://app.datadoghq.com/billing/usage
 [10]: /account_management/billing/usage_metrics/
 [11]: /account_management/rbac/permissions/?tab=ui#metrics

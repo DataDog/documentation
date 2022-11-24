@@ -67,7 +67,6 @@ metadata:
               "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
               "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
               "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
-
             }
           ]
         }
@@ -117,7 +116,9 @@ With the following configuration placeholder values:
 | `<NEW_METRIC_NAME>`                      | Transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog.                   |
 
 
-The `metrics` configuration is a list of metrics to retrieve as custom metrics. Include each metric to fetch and the desired metric name in Datadog as key value pairs, for example, `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}`. You can alternatively provide a list of metric names strings, interpreted as regular expressions, to bring the desired metrics with their current names. **Note:** Regular expressions can potentially send a lot of custom metrics.
+The `metrics` configuration is a list of metrics to retrieve as custom metrics. Include each metric to fetch and the desired metric name in Datadog as key value pairs, for example, `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}`. You can alternatively provide a list of metric names strings, interpreted as regular expressions, to bring the desired metrics with their current names. If you want **all** metrics, then use `"*"` rather than `".*"`.
+
+**Note:** Regular expressions can potentially send a lot of custom metrics.
 
 For a full list of available parameters for instances, including `namespace` and `metrics`, see the [sample configuration openmetrics.d/conf.yaml][9].
 
@@ -132,7 +133,7 @@ For a full list of available parameters for instances, including `namespace` and
    {{% tab "Kubernetes (AD v2)" %}}
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
-
+   
    ```yaml
      # (...)
     spec:
@@ -276,7 +277,7 @@ The autodiscovery configuration can be based on container names or kubernetes an
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
 
-`kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
+`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
@@ -290,7 +291,7 @@ kubernetes_annotations:
 
 **Example:**
 
-In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod with the annotation `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
 
 ```yaml
 datadog:
@@ -326,7 +327,7 @@ The Autodiscovery configuration can be based on container names or Kubernetes an
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
 
-`kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
+`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
@@ -337,7 +338,7 @@ The Autodiscovery configuration can be based on container names or Kubernetes an
 
 **Example:**
 
-In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod with the annotation `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
 
 ```yaml
 - name: DD_PROMETHEUS_SCRAPE_ENABLED

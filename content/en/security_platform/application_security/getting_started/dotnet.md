@@ -5,15 +5,18 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
+    - link: "/security_platform/application_security/add-user-info/"
+      tag: "Documentation"
+      text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-dotnet'
       tag: 'GitHub'
       text: '.NET Datadog Library source code'
     - link: "/security_platform/default_rules/#cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Monitoring Rules"
+      text: "OOTB Application Security Management Rules"
     - link: "/security_platform/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Monitoring"
+      text: "Troubleshooting Application Security Management"
 ---
 
 You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate. 

@@ -10,6 +10,9 @@ on:
       - submitted
       - dismissed
 
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
 jobs:
   send_status:
     runs-on: ubuntu-latest

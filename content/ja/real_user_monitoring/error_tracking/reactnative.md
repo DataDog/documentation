@@ -1,5 +1,4 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/crash_reporting.md
 description: React Native プロジェクトにエラー追跡を設定します。
@@ -77,6 +76,14 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 -   iOS ネイティブコード用の dSYM
 -   Android ネイティブコードのコード難読化を有効にしている場合、Proguard マッピングファイル
 
+シンボル化されたファイルを自動的に送信するようにプロジェクトを設定するには、`npx datadog-react-native-wizard` を実行します。
+
+オプションについては、ウィザード[公式ドキュメント][13]を参照してください。
+
+## `datadog-react-native-wizard` の代替となるもの
+
+`datadog-react-native-wizard` を使ってもうまくいかない場合、あるいはリリースごとにシンボル化ファイルを自動的にアップロードしたくない場合は、次のステップに従ってクラッシュレポートをシンボル化してください。
+
 ### iOS ビルドにおける JavaScript ソースマップのアップロード
 
 プロジェクトに `@datadog/datadog-ci` を開発依存としてインストールする必要があります。
@@ -117,8 +124,8 @@ DATADOG_XCODE="$(echo $PACKAGE_MANAGER_BIN) datadog-ci react-native xcode"
 
 このスクリプトは `yarn datadog-ci react-native xcode` コマンドを実行するのに最適な方法を見つけます。
 
-- [fastlane][9] のようなツールや、[Bitrise][10] や [AppCenter][11] のようなサービスを使ってアプリを構築する場合、`yarn` を使用することができます
-- XCode から直接リリースビルドを実行する場合、Mac では `/opt/homebrew/bin/node /opt/homebrew/bin/yarn` を使用する必要があります
+-   [fastlane][9] のようなツールや、[Bitrise][10] や [AppCenter][11] のようなサービスを使ってアプリを構築する場合、`yarn` を使用することができます
+-   XCode から直接リリースビルドを実行する場合、Mac では `/opt/homebrew/bin/node /opt/homebrew/bin/yarn` を使用する必要があります
 
 これは、すべての正しいパラメーターでソースマップをアップロードすることを世話するこのコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
 
@@ -171,8 +178,8 @@ $(echo $PACKAGE_MANAGER_BIN datadog-ci react-native xcode)
 
 このスクリプトは `yarn datadog-ci react-native xcode` コマンドを実行するのに最適な方法を見つけます。
 
-- [fastlane][9] のようなツールや、[Bitrise][10] や [AppCenter][11] のようなサービスを使ってアプリを構築する場合、`yarn` を使用することができます
-- XCode から直接リリースビルドを実行する場合、Mac では `/opt/homebrew/bin/node /opt/homebrew/bin/yarn` を使用する必要があります
+-   [fastlane][9] のようなツールや、[Bitrise][10] や [AppCenter][11] のようなサービスを使ってアプリを構築する場合、`yarn` を使用することができます
+-   XCode から直接リリースビルドを実行する場合、Mac では `/opt/homebrew/bin/node /opt/homebrew/bin/yarn` を使用する必要があります
 
 これは、すべての正しいパラメーターでソースマップをアップロードすることを世話するこのコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
 
@@ -310,18 +317,26 @@ yarn datadog-ci react-native upload --platform android --service $SERVICE --bund
 
 ```groovy
 plugins {
-    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "1.4.0"
+    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "1.5.0"
 }
 
 datadog {
-    site = "US1"
     checkProjectDependencies = "none" // これは、React Native プロジェクトでは、どんな場合でも必要です。
 }
 ```
 
-[site 値][8]は、Datadog SDK の構成にある値と一致させる必要があります。詳しくは、[Datadog Android SDK Gradle プラグイン][6]を参照してください。
+アップロードを動作させるためには、Datadog API キーを指定する必要があります。環境変数 `DATADOG_API_KEY` として指定するか、API キーを含む `datadog-ci.json` ファイルをプロジェクトのルートに作成します。
 
-ビルド後にプラグインを実行するには、API キーを `DD_API_KEY` としてエクスポートし、`(cd android && ./gradlew app:uploadMappingRelease)` を実行します。
+```json
+{
+    "apiKey": "<YOUR_DATADOG_API_KEY>"
+}
+```
+
+また、Datadog のサイト (`datadoghq.eu` など) を環境変数 `DATADOG_SITE` や、`datadog-ci.json` ファイルに `datadogSite` キーとして指定することも可能です。
+詳しくは、[Datadog Android SDK Gradle プラグイン][6]をご覧ください。
+
+ビルド後にプラグインを実行するには、`(cd android && ./gradlew app:uploadMappingRelease)` を実行します。
 
 #### ビルドごとにアップロードを自動化
 
@@ -352,8 +367,8 @@ React Native のクラッシュレポートとエラー追跡の構成を確認�
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [6]: https://github.com/datadog/dd-sdk-android-gradle-plugin
 [7]: https://github.com/cwhenderson20/react-native-crash-tester
-[8]: https://docs.datadoghq.com/ja/getting_started/site/
 [9]: https://fastlane.tools/
 [10]: https://appcenter.ms/
 [11]: https://www.bitrise.io/
 [12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+[13]: https://github.com/DataDog/datadog-react-native-wizard

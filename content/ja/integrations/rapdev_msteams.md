@@ -31,8 +31,8 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  sales_email: sales@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -115,7 +115,7 @@ Microsoft Teams インテグレーションは、Active Directory テナント�
 ## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: datadog-engineering@rapdev.io 
+ - メール: support@rapdev.io 
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222 
 
@@ -123,7 +123,7 @@ Microsoft Teams インテグレーションは、Active Directory テナント�
 
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 
 ---

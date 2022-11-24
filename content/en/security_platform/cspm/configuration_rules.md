@@ -11,7 +11,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 ## Overview
 
-Datadog provides [out-of-the-box (OOTB) detection rules][1] to flag potential misconfigurations and help improve your security posture. OOTB detection rules follow the same [conditional logic][2] as all Datadog Security Platform detection rules.
+Datadog provides [out-of-the-box (OOTB) detection rules][1] to flag potential misconfigurations and help improve your security posture. OOTB detection rules follow the same [conditional logic][2] as all Datadog Security detection rules.
 
 {{< img src="security_platform/cspm/configuration_rules/configuration_rule.png" alt="A configuration rule in Datadog" width="65%">}}
 

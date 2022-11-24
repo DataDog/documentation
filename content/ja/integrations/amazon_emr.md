@@ -38,7 +38,7 @@ Amazon Elastic MapReduce (Amazon EMR) は、膨大な量のデータを迅速か
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`EMR` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EMR` が有効になっていることを確認します。
 2. Amazon EMR のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [EMR ポリシー][4]を参照してください。
 
     | AWS アクセス許可                     | 説明                         |
@@ -85,10 +85,10 @@ AWS Elastic MapReduce インテグレーションには、サービスのチェ�
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-authentication-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_emr
+[5]: https://app.datadoghq.com/integrations/amazon-emr
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

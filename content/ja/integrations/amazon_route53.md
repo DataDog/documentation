@@ -41,7 +41,7 @@ AWS Route 53 は DNS 管理およびトラフィック管理と共に、健全�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Route53` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Route53` が有効になっていることを確認します。
 2. Amazon Route53 のメトリクスを収集するため、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     - `route53:listHealthChecks`: 使用できる健全性チェックを一覧表示します。
@@ -116,10 +116,10 @@ AWS Route 53 インテグレーションには、サービスのチェック機�
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/auth-and-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_route53
+[5]: https://app.datadoghq.com/integrations/amazon-route53
 [6]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-monitor-view-status.html#monitoring-health-checks
 [7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [8]: https://app.datadoghq.com/logs

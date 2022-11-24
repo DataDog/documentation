@@ -31,7 +31,7 @@ integration_title: Neo4j
 integration_version: 2.0.1
 is_public: true
 kind: integration
-manifest_version: 2.0.1
+manifest_version: 2.0.0
 name: neo4j
 oauth: {}
 public_title: Neo4j

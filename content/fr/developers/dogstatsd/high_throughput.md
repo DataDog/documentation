@@ -110,10 +110,6 @@ statsd.gauge('example_metric.gauge', 123, tags: ['environment:dev'])
 statsd.flush(sync: true)
 ```
 
-<div class="alert alert-warning">
-  Par défaut, les instances de client DogStatsD Ruby ne peuvent pas être partagées entre les processus, mais sont thread-safe. De ce fait, le processus parent et chaque processus enfant doivent créer leurs propres instances du client ou la mise en mémoire tampon doit être explicitement désactivée en définissant <code>single_thread</code> sur <code>true</code>. Consultez le <a href="https://github.com/DataDog/dogstatsd-ruby">référentiel dogstatsd-ruby</a> sur GitHub pour en savoir plus.
-</div>
-
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -264,6 +260,17 @@ Pour en savoir plus, consultez le [référentiel C# de DogStatsD][1].
 
 {{< /programming-lang-wrapper >}}
 
+### Exécuter plusieurs pipelines de traitement des métriques pour limiter les pertes de paquets
+
+Si votre serveur DogStatsD utilise UDS et perd un nombre excessif de paquets, configurez le serveur de façon à utiliser plus de ressources CPU pour tenter d'augmenter la vitesse de traitement et de réduire les pertes de paquets.
+
+Vous pouvez également configurer votre serveur DogStatsD si les données de télémétrie client indiquent des pertes de paquets et que le serveur n'utilise pas plus de 2 CPU ou 2 cœurs même lorsqu'ils sont disponibles.
+
+Pour réduire les pertes de paquets :
+
+1. Augmentez la taille de la file d'attente du client en la définissant sur `8192`. Pour en savoir plus, référez-vous à la configuration de la bibliothèque client. Le nombre de paquets perdus devrait alors diminuer, mais votre application risque d'utiliser plus de RAM.
+2. Vous pouvez également activer la fonctionnalité `dogstatsd_pipeline_autoadjust: true` dans la configuration de votre Agent Datadog. L'Agent utilisera plusieurs cœurs pour traiter les métriques custom, ce qui pourrait réduire le nombre de paquets perdus mais augmenter la charge CPU.
+
 ## Buffers kernel des systèmes d'opération
 
 La plupart des systèmes d'exploitation ajoutent des datagrammes UDP et UDS entrants, qui contiennent vos métriques, dans un buffer avec une taille limitée. Une fois cette limite atteinte, les datagrammes comprenant vos métriques sont perdues. Vous pouvez ajuster certaines valeurs afin d'accorder davantage de temps à l'Agent pour le traitement des métriques entrantes :
@@ -337,7 +344,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 Si vous utilisez Kubernetes pour déployer l'Agent et/ou DogStatsD et que vous souhaitez configurer les sysctls comme mentionné ci-dessus, configurez leur valeur au niveau de chaque conteneur. Si les sysctl `net.*` sont dotés d'un espace de nommage, vous pouvez les configurer au niveau des pods. Consultez la section [Utilisation de sysctls dans un cluster Kubernetes][6] de la documentation Kubernetes officielle (en anglais) pour en savoir plus.
 
-### Vérifier la conformité des tailles des paquets
+## Vérifier la conformité des tailles des paquets
 
 Réduisez l'utilisation du processeur en envoyant des paquets de la bonne taille au serveur DogStatsD dans l'Agent Datadog. Les dernières versions des clients DogStatsD officiels optimisent la taille des paquets envoyés afin d'améliorer les performances.
 
@@ -355,7 +362,7 @@ Pour optimiser les performances de l'Agent Datadog, les clients DogStatsD doiven
   <strong>Remarque pour le protocole UDS</strong> : pour optimiser les performances, les paquets UDS doivent être composés de 8 192 octets.
 </div>
 
-### Limiter l'utilisation maximale de la mémoire de l'Agent
+## Limiter l'utilisation maximale de la mémoire de l'Agent
 
 Pour pouvoir traiter l'avalanche de métriques envoyées par les clients DogStatsD, l'Agent a recours à la mémoire. Bien que cette opération ne dure qu'une courte période et que la mémoire soit rapidement rendue au système d'exploitation, ce processus entraîne un pic. Ce phénomène peut s'avérer problématique pour les environnements conteneurisés qui expulsent les pods ou conteneurs en cas de manque de mémoire.
 
@@ -375,7 +382,7 @@ dogstatsd_queue_size: 512
 
 Consultez la section suivante dédiée à la détection des salves pour découvrir comment détecter les salves de métriques de vos applications.
 
-### Activer les statistiques de traitement des métriques et la détection des salves
+## Activer les statistiques de traitement des métriques et la détection des salves
 
 DogStatsD possède un mode statistique vous permettant de visualiser les métriques les plus traitées.
 
@@ -771,6 +778,6 @@ Consultez le référentiel [DataDog/dogstatsd-csharp-client][1] pour en savoir p
 [1]: /fr/agent/
 [2]: /fr/developers/dogstatsd/unix_socket/
 [3]: /fr/developers/dogstatsd/#code
-[4]: /fr/metrics/dogstatsd_metrics_submission/#sample-rates
+[4]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /fr/developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

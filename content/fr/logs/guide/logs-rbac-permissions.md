@@ -110,25 +110,22 @@ Accordez l'autorisation à un ou plusieurs rôles dans la fenêtre d'un pipeline
 
 1. [Récupérez l'ID de rôle][1] du rôle que vous souhaitez attribuer à des pipelines spécifiques.
 2. [Récupérez l'ID d'autorisation][2] pour l'API `logs_write_processors` de votre région.
-3. [Récupérez le ou les ID de pipeline][3] du ou des pipelines pour lesquels vous souhaitez attribuer ce rôle.
-4. Accordez l'autorisation à ce rôle avec l'appel suivant :
+3. Accordez l'autorisation à ce rôle avec l'appel suivant :
 
 ```sh
 curl -X POST \
-        https://app.datadoghq.com/api/v1/role/<RÔLE_UUID>/permission/<AUTORISATION_UUID> \
+        https://app.datadoghq.com/api/v2/roles/<RÔLE_UUID>/permissions \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <VOTRE_CLÉ_API_DATADOG>" \
         -H "DD-APPLICATION-KEY: <VOTRE_CLÉ_APPLICATION_DATADOG>" \
         -d '{
-                "scope": {
-                    "pipelines": [ "<ID_PIPELINE-X>", "<ID_PIPELINE-Y>"]
-                }
+                "id": "<AUTORISATION_UUID>",
+                "type": "permissions"
             }'
 ```
 
 [1]: /fr/api/v2/roles/#list-roles
 [2]: /fr/api/v2/roles/#list-permissions
-[3]: /fr/api/v1/logs-pipelines/#get-all-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -317,26 +314,23 @@ Accordez à ce rôle l'accès à l'index depuis la [page de configuration][1].
 
 * [Récupérez l'ID de rôle][1] du rôle que vous souhaitez attribuer à des pipelines spécifiques.
 * [Récupérez l'ID d'autorisation][2] pour l'API `logs_write_processors` de votre région.
-* [Récupérez l'ID d'index][3] de l'index pour lequel vous souhaitez attribuer ce rôle.
 * Accordez l'autorisation à ce rôle avec l'appel suivant :
 
 ```bash
 curl -X POST \
-        https://app.datadoghq.com/api/v1/role/<RÔLE_UUID>/permission/<AUTORISATION_UUID> \
+        https://app.datadoghq.com/api/v2/roles/<RÔLE_UUID>/permissions \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <VOTRE_CLÉ_API_DATADOG>" \
         -H "DD-APPLICATION-KEY: <VOTRE_CLÉ_APPLICATION_DATADOG>" \
         -d '{
-                "scope": {
-                    "indexes": ["<ID_INDEX-1>",["<ID_INDEX-2>"]
-                }
+                "id": "<AUTORISATION_UUID>",
+                "type": "permissions"
             }'
 ```
 
 
 [1]: /fr/api/v2/roles/#list-roles
 [2]: /fr/api/v2/roles/#list-permissions
-[3]: /fr/api/v1/logs-indexes/#get-all-indexes
 {{% /tab %}}
 {{< /tabs >}}
 

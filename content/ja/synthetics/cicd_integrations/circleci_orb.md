@@ -19,11 +19,11 @@ CircleCI コマンド orb は [datadog-ci][1] をインストールし、`datado
 1. CircleCI プロジェクトに環境変数として Datadog の API キーとアプリケーションキーを追加します。命名規則については、[入力](#inputs)を参照してください。詳しくは、[API とアプリケーションキー][2]を参照してください。
 2. orb を実行しているイメージが、cURL がインストールされた Linux x64 のベースイメージであることを確認します。
 
-ワークフローは、[シンプル](#simple-workflows)または[複雑](#complex-workflows)にすることができます。
+ワークフローは[シンプル](#simple-usage)または[複雑](#complex-usage)にすることができます。
 
-## シンプルなワークフロー
+## シンプルの使用
 
-### 公開 ID を使用したワークフロー例
+### 公開 ID を使用した orb 使用の例
 
 ```
 version: 2.1
@@ -45,7 +45,7 @@ workflows:
       - e2e-tests
 ```
 
-### グローバルコンフィグレーションのオーバーライドを使用したワークフロー例
+### グローバルコンフィグレーションのオーバーライドを使用した orb 使用の例
 
 ```
 version: 2.1
@@ -67,9 +67,9 @@ workflows:
       - e2e-tests
 ```
 
-## 複雑なワークフロー
+## 複雑の使用
 
-### `test_search_query` を使用したワークフロー例
+### `test_search_query` を使用した orb 使用の例
 
 ```
 version: 2.1
@@ -90,7 +90,7 @@ workflows:
     jobs:
       - e2e-tests
 ```
-### [Synthetic テストトンネル][10]を使用したワークフロー例
+### [Synthetic テストトンネル][10]を使用した orb 使用の例
 
 ```
 version: 2.1
@@ -142,7 +142,7 @@ CircleCI パイプラインの `pollingTimeout` のカスタマイズなど、�
 | `test_search_query`       | 文字列       | _なし_                                    | 検索クエリに対応するテストをトリガーします。                                                       |
 | `tunnel`                  | boolean      | `false`                                   | テストトンネルを使用してテストをトリガーします。                                                             |
 | `variables`               | 文字列       | _なし_                                    | テストに変数を注入するための Key-Value ペア。`KEY=VALUE` という形式である必要があります。             |
-| `version`                 | 文字列       | `v1.7.0`                                  | 使用する `datadog-ci` のバージョン。                                                                  |
+| `version`                 | 文字列       | `v1.16.0`                                 | 使用する `datadog-ci` のバージョン。                                                                  |
 
 ## その他の参考資料
 

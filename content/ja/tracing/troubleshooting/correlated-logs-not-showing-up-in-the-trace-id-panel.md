@@ -29,15 +29,15 @@ title: 関連するログがトレース ID パネルに表示されない
 
 ## ホストオプション
 
-`host` オプションの **Log** セクションが空の場合、[Log エクスプローラー][4]に移動し、以下の条件を確認します。
+`host` オプションの **Log** セクションが空の場合、[Log エクスプローラー][2]に移動し、以下の条件を確認します。
 
 1. ログがトレースを出したホストから送信されている。
 2. トレースの時間枠内にそのホストのログがある。
-3. ログのタイムスタンプが正しく設定されている。詳しくは、[ログに期待したタイムスタンプが表示されない][2]をご覧ください。
+3. ログのタイムスタンプが正しく設定されている。詳しくは、[ログに期待したタイムスタンプが表示されない][3]をご覧ください。
 
 ## Trace_id オプション
 
-もし **Log** セクションが `trace_id` オプションに対して空の場合、ログに標準的な `trace_id` 属性があることを確認してください。ログに `trace_id` が含まれていない場合、以下を行うために[トレースとログの相関付け][3]を行ってください。
+もし **Log** セクションが `trace_id` オプションに対して空の場合、ログに標準的な `trace_id` 属性があることを確認してください。ログに `trace_id` が含まれていない場合、以下を行うために[トレースとログの相関付け][4]を行ってください。
 
 1. ログ属性に含まれるトレース ID を抽出します。
 2. この属性を予約された `trace_id` 属性にリマップします。
@@ -51,10 +51,10 @@ title: 関連するログがトレース ID パネルに表示されない
 
    {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="Trace Id セクションがハイライトされた JSON ログの前処理ページ" >}}
 
-   [1]: /tracing/glossary/#trace
-   [2]: /tracing/glossary/#spans
-   [3]: /logs/log_configuration/processors/#remapper
-   [4]: https://app.datadoghq.com/logs/pipelines/remapping
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/logs/log_configuration/processors/#remapper
+[4]: https://app.datadoghq.com/logs/pipelines/remapping
    {{% /tab %}}
    {{% tab "ログインテグレーションあり" %}}
 
@@ -66,8 +66,8 @@ title: 関連するログがトレース ID パネルに表示されない
 
 ログのフォーマットがインテグレーションパイプラインによって認識されていない可能性があります。この場合、パイプラインを複製し、[パーストラブルシューティングガイド][2]に従って、パイプラインがログ形式を受け入れることを確認します。
 
-   [1]: /logs/log_collection/?tab=application#setup
-   [2]: /logs/faq/how-to-investigate-a-log-parsing-issue/
+[1]: /ja/logs/log_collection/?tab=application#setup
+[2]: /ja/logs/faq/how-to-investigate-a-log-parsing-issue/
    {{% /tab %}}
    {{% tab "カスタム" %}}
 
@@ -79,9 +79,9 @@ title: 関連するログがトレース ID パネルに表示されない
 
    2. そして、抽出した属性に[トレースリマッパー][3]を定義して、ログの公式トレース ID にリマップします。
 
-   [1]: /tracing/glossary/#trace
-   [2]: /tracing/glossary/#spans
-   [3]: /logs/log_configuration/processors/#trace-remapper
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/logs/log_configuration/processors/#trace-remapper
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -89,11 +89,11 @@ ID が正しく挿入され、ログにリマップされると、トレース�
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ"  style="width:90%;">}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/glossary/#trace
-[2]: /ja/logs/guide/logs-not-showing-expected-timestamp/
-[3]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[4]: https://app.datadoghq.com/logs
+[2]: https://app.datadoghq.com/logs
+[3]: /ja/logs/guide/logs-not-showing-expected-timestamp/
+[4]: /ja/tracing/other_telemetry/connect_logs_and_traces/

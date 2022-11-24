@@ -2,6 +2,7 @@
 title: Send RUM Custom Actions
 kind: guide
 beta: true
+private: true
 description: Learn how to send custom actions to extend your collection of user interactions.
 aliases:
 - /real_user_monitoring/guide/send-custom-user-actions/

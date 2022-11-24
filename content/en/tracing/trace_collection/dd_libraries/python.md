@@ -159,18 +159,18 @@ Once you've finished setup and are running the tracer with your application, you
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
 ### Upgrading to v1
 
-If you are upgrading to ddtrace v1, review the [upgrade guide][3] and the [release notes][4] in the library documentation for full details.
+If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [release notes][5] in the library documentation for full details.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: https://app.datadoghq.com/apm/docs
-[3]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
-[4]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
-[5]: /tracing/trace_collection/library_config/python/
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: /tracing/trace_collection/library_config/python/
+[4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0

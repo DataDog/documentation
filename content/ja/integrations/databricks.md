@@ -103,20 +103,22 @@ Databricks で Apache Spark クラスターを監視し、システムと Spark 
 dbutils.fs.put("dbfs:/<init-script-folder>/datadog-install-driver-only.sh","""
 #!/bin/bash
 
+date -u +"%Y-%m-%d %H:%M:%S UTC"
 echo "Running on the driver? $DB_IS_DRIVER"
 echo "Driver ip: $DB_DRIVER_IP"
 
-cat <<EOF >> /tmp/start_datadog.sh
+cat <<EOF > /tmp/start_datadog.sh
 #!/bin/bash
 
 if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
-  echo "On the driver. Installing Datadog ..."
+
+  echo "Installing Datadog Agent on the driver..."
 
   # クラスターのホストタグを構成します
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # 最新の Datadog Agent 7 をインストールします
-  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+  DD_INSTALL_ONLY=true DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
   # Datadog Agent がインストールされるのを待ちます
   while [ -z \$datadoginstalled ]; do
@@ -129,7 +131,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
   echo "Datadog Agent is installed"
 
   # datadog.yaml のログを有効にしてドライバーログを収集します
-  echo "logs_enabled: true" >> /etc/datadog-agent/datadog.yaml
+  sed -i '/.*logs_enabled:.*/a logs_enabled: true' /etc/datadog-agent/datadog.yaml
 
   # マスターパラメータが読み込まれるまで待ってから、IP とポートを取得します
   while [ -z \$gotparams ]; do
@@ -158,9 +160,10 @@ logs:
       log_processing_rules:
         - type: multi_line
           name: new_log_start_with_date
-          pattern: \d{2,4}[\-\/]\d{2,4}[\-\/]\d{2,4}.*" > /etc/datadog-agent/conf.d/spark.yaml
+          pattern: \d{2,4}[\-\/]\d{2,4}[\-\/]\d{2,4}.*" > /etc/datadog-agent/conf.d/spark.d/spark.yaml
 
   # Agent を再起動
+  sleep 15
   sudo service datadog-agent restart
 
 fi
@@ -180,27 +183,30 @@ fi
 {{% tab "All nodes" %}}
 ##### ドライバーノードとワーカーノードに Datadog Agent をインストールします
 
-`datadog-install-driver-workers.sh` スクリプトを作成した後、[クラスターコンフィギュレーションページ][1]に init スクリプトパスを追加します。
+ `datadog-install-driver-workers.sh` スクリプトを作成した後、[クラスターコンフィギュレーションページ][1]に init スクリプトパスを追加します。
 
 ```shell script
 %python 
 
 dbutils.fs.put("dbfs:/<init-script-folder>/datadog-install-driver-workers.sh","""
 #!/bin/bash
-cat <<EOF >> /tmp/start_datadog.sh
+cat <<EOF > /tmp/start_datadog.sh
 
 #!/bin/bash
 
-  hostip=$(hostname -I | xargs)
+date -u +"%Y-%m-%d %H:%M:%S UTC"
+echo "Running on the driver? $DB_IS_DRIVER"
+echo "Driver ip: $DB_DRIVER_IP"
 
 if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
 
-  echo "Installing Datadog agent in the driver (master node) ..."
+  echo "Installing Datadog Agent on the driver (master node)."
+
   # ドライバーのホストタグを構成します
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールします
-  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+  DD_INSTALL_ONLY=true DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
   # Datadog Agent がインストールされるのを待ちます
   while [ -z \$datadoginstalled ]; do
@@ -209,10 +215,11 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     fi
     sleep 2
   done
+
   echo "Datadog Agent is installed"
 
   # datadog.yaml のログを有効にしてドライバーログを収集します
-  echo "logs_enabled: true" >> /etc/datadog-agent/datadog.yaml
+  sed -i '/.*logs_enabled:.*/a logs_enabled: true' /etc/datadog-agent/datadog.yaml
 
   while [ -z \$gotparams ]; do
     if [ -e "/tmp/driver-env.sh" ]; then
@@ -221,6 +228,8 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     fi
     sleep 2
   done
+
+  hostip=$(hostname -I | xargs)
 
   # 構造化ストリーミングメトリクスを有効にして Spark インテグレーション用のコンフィギュレーションファイルを記述します
   # 他のオプションを spark.d/conf.yaml.example に含めるように変更します
@@ -238,18 +247,19 @@ logs:
       log_processing_rules:
         - type: multi_line
           name: new_log_start_with_date
-          pattern: \d{2,4}[\-\/]\d{2,4}[\-\/]\d{2,4}.*" > /etc/datadog-agent/conf.d/spark.yaml
+          pattern: \d{2,4}[\-\/]\d{2,4}[\-\/]\d{2,4}.*" > /etc/datadog-agent/conf.d/spark.d/spark.yaml
 else
 
-  # ワーカーのホストタグを構成します
+  # ワーカーのホストタグを構成します 
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:worker"
 
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールします
-  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+  DD_INSTALL_ONLY=true DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
 fi
 
   # Agent を再起動します
+  sleep 15
   sudo service datadog-agent restart
 EOF
 
@@ -274,6 +284,7 @@ chmod a+x /tmp/start_datadog.sh
 dbutils.fs.put("dbfs:/<init-script-folder>/datadog-install-job-driver-mode.sh","""
 #!/bin/bash
 
+date -u +"%Y-%m-%d %H:%M:%S UTC"
 echo "Running on the driver? $DB_IS_DRIVER"
 echo "Driver ip: $DB_DRIVER_IP"
 
@@ -281,13 +292,14 @@ cat <<EOF >> /tmp/start_datadog.sh
 #!/bin/bash
 
 if [ \$DB_IS_DRIVER ]; then
-  echo "On the driver. Installing Datadog ..."
+
+  echo "Installing Datadog Agent on the driver..."
 
   # ドライバーのホストタグを構成します
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールします
-  DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+  DD_INSTALL_ONLY=true DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 
   # Datadog Agent がインストールされるのを待ちます
   while [ -z \$datadoginstalled ]; do
@@ -296,10 +308,11 @@ if [ \$DB_IS_DRIVER ]; then
     fi
     sleep 2
   done
+
   echo "Datadog Agent is installed"  
 
   # datadog.yaml のログを有効にしてドライバーログを収集します
-  echo "logs_enabled: true" >> /etc/datadog-agent/datadog.yaml
+  sed -i '/.*logs_enabled:.*/a logs_enabled: true' /etc/datadog-agent/datadog.yaml
 
   while [ -z \$gotparams ]; do
     if [ -e "/tmp/driver-env.sh" ]; then
@@ -309,14 +322,14 @@ if [ \$DB_IS_DRIVER ]; then
     sleep 2
   done
 
-  current=\$(hostname -I | xargs)
+  hostip=\$(hostname -I | xargs)
 
   # Spark コンフィギュレーションファイルを記述します
   echo "init_config:
 instances:
     - spark_url: http://\$DB_DRIVER_IP:\$DB_DRIVER_PORT
       spark_cluster_mode: spark_driver_mode
-      cluster_name: \$current
+      cluster_name: \$hostip
 logs:
     - type: file
       path: /databricks/driver/logs/*.log
@@ -325,9 +338,10 @@ logs:
       log_processing_rules:
         - type: multi_line
           name: new_log_start_with_date
-          pattern: \d{2,4}[\-\/]\d{2,4}[\-\/]\d{2,4}.*" > /etc/datadog-agent/conf.d/spark.yaml
+          pattern: \d{2,4}[\-\/]\d{2,4}[\-\/]\d{2,4}.*" > /etc/datadog-agent/conf.d/spark.d/spark.yaml
 
   # Agent を再起動
+  sleep 15
   sudo service datadog-agent restart
 
 fi
@@ -366,7 +380,7 @@ Databricks インテグレーションには、イベントは含まれません
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

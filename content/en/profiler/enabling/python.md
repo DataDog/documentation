@@ -101,6 +101,13 @@ prof.start()  # Should be as early as possible, eg before other imports, to ensu
 
 You can configure the profiler using the [environment variables][5].
 
+### Code provenance
+
+The Python profiler supports code provenance reporting, which provides
+insight into the library that is running the code. While this is
+disabled by default, you can turn it on by setting
+`DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
+
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.

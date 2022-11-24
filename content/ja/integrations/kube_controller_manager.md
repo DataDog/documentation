@@ -31,7 +31,7 @@ draft: false
 git_integration_title: kube_controller_manager
 integration_id: kube-controller-manager
 integration_title: Kubernetes Controller Manager
-integration_version: 4.2.0
+integration_version: 4.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

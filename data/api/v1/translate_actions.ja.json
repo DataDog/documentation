@@ -1091,8 +1091,8 @@
     "summary": "SNMP デバイスの 1 時間あたり使用量の取得"
   },
   "GetUsageSummary": {
-    "description": "マルチオーガニゼーションのアカウント全体の使用量を取得します。マルチオーガニゼーション機能を有効にする必要があります。",
-    "summary": "マルチオーガニゼーションのアカウント全体の使用量の取得"
+    "description": "アカウント全体のすべての使用量を取得します。",
+    "summary": "アカウント全体の使用量を取得する"
   },
   "GetUsageSynthetics": {
     "description": "[synthetics チェック](https://docs.datadoghq.com/synthetics/) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",

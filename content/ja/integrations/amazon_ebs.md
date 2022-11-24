@@ -38,10 +38,10 @@ Amazon EBS は、AWS Cloud 内の Amazon EC2 インスタンスと共に使用�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`EBS` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EBS` が有効になっていることを確認します。
 2. [Datadog - AWS EBS インテグレーション][3]をインストールします。
 
-**注**: このインテグレーションは、監視対象の EC2 に接続された EBS ボリュームのメトリクスを収集します。すべての EBS メトリクスを収集するには、[AWS インテグレーションタイル][2]で EC2 にチェックを入れ、[リソース収集を制限する][4]設定で EC2 を監視対象から除外していないことを確認します。
+**注**: このインテグレーションは、監視対象の EC2 に接続された EBS ボリュームのメトリクスを収集します。すべての EBS メトリクスを収集するには、[AWS インテグレーションページ][2]で EC2 にチェックを入れ、[リソース収集を制限する][4]設定で EC2 を監視対象から除外していないことを確認します。
 
 ### ログの収集
 
@@ -86,8 +86,8 @@ AWS EBS インテグレーションには、サービスのチェック機能は
 - [Datadog で Amazon EBS ボリュームを監視][12]
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_ebs
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-ebs
 [4]: https://docs.datadoghq.com/ja/account_management/billing/aws/#aws-resource-exclusion
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

@@ -7,8 +7,8 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev.io
-  sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  sales_email: sales@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
@@ -73,14 +73,14 @@ RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイ�
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- メール: datadog-engineering@rapdev.io
+- メール: support@rapdev.io
 - チャット: [rapdev.io][3]
 - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
 
 [1]: https://docs.datadoghq.com/ja/logs/guide/enrichment-tables
 [2]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#log-message-remapper

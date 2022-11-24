@@ -78,6 +78,8 @@ Monthly data can also be pulled using the tool's public API. For more informatio
 {{< site-region region="us,eu" >}}
 ### Daily usage attribution
 
+<div class="alert alert-warning">Datadog plans to deprecate daily usage attribution reports on February 1, 2023. As an alternative, use the <a href="/api/latest/usage-metering/#get-hourly-usage-attribution">hourly usage attribution API endpoint</a>.</div>
+
 This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
 
 - Clicking on a specific time period expands a view on the right where reports can be downloaded as a TSV file.

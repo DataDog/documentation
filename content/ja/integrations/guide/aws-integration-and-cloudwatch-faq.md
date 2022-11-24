@@ -8,7 +8,7 @@ title: AWS インテグレーションと CloudWatch の FAQ
 
 ### インテグレーションで AWS カスタムメトリクスを収集することは可能ですか？
 
-はい。[AWS インテグレーションタイル][1]の**カスタムメトリクス**のチェックボックスにチェックを入れてください。
+はい。[AWS インテグレーションページ][1]の **Metric Collection** タブで、**Collect Custom Metrics** を有効化します。
 
 ### Datadog が公式にインテグレーションしていないサービスからメトリクスを収集するにはどうすればよいですか？
 
@@ -64,7 +64,7 @@ aws.apigateway.integration_latency.p50
 
 ロールアップでは同様の結果は表示されません。`rollup(sum, 60)` のロールアップコールでは、サーバーはすべてのデータポイントを分ビンでグループ化し、各ビンの合計をデータポイントとして返します。しかし、AWS メトリクスの粒度は 1 分であるため、1 ビンあたり 1 つのデータポイントしかなく、変化がありません。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ja/api/latest/aws-integration/#set-an-aws-tag-filter
 [3]: /ja/integrations/amazon_billing/
 [4]: /ja/integrations/guide/cloud-metric-delay/

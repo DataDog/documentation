@@ -11,6 +11,9 @@ further_reading:
 - link: "/events/guides/recommended_event_tags/"
   tag: "Documentation"
   text: "Best Practices for Tagging Events"
+- link: "https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/"
+  tag: "Blog"
+  text: "Identify and redact sensitive data in Events with Sensitive Data Scanner"
 ---
 
 {{< img src="events/events-overview.png" alt="Events explorer" >}}
@@ -86,6 +89,6 @@ Support for more processors types is under development. For more details, [conta
 [17]: /dashboards/widgets/alert_graph/
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [19]: /getting_started/tagging/unified_service_tagging/
-[20]: /logs/guide/reference-tables/
+[20]: /integrations/guide/reference-tables/
 [21]: /help/
 [22]: /logs/log_configuration/processors/
