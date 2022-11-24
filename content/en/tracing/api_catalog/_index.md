@@ -8,7 +8,7 @@ further_reading:
   text: "Datadog Service Catalog"
 ---
 
-{{< beta-callout url="https://datadoghq.com" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< beta-callout url="https://forms.gle/TgezmEhUPXzebvv27" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   Datadog API Catalog is in beta! Use this form request access. 
 {{< /beta-callout >}} 
 
@@ -18,22 +18,20 @@ further_reading:
 
 The API Catalog provides a single view and entry point into exploring the performance, reliability, and ownership of all your API Endpoints in one place. It's a central place where your whole company can find constantly up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
 
-Monitor your mission-critical API-driven business features by continuously discovering and tracking the performance of the APIs that you expose to your customers, and the ones your services rely on to function. Standardize performance expectations for APIs and constantly validate these expectations, alerting when performance deviates from them.
+Monitor your mission-critical API-driven business features by, standardize APIs performance expectations and constantly validate these expectations, alerting when performance deviates from them.
 
 This enables your efforts to:
-- Provide high availability and uptime of critical business features.
-- Have fewer regressions and instability issues.
+- Provide high availability and uptime of critical APIs and business features that relies on them to function.
+- Have fewer API regressions and instability issues.
 - Triage incidents quicker.
-- Optimize resources allocation.
 
-API Catalog brings together data from across Datadog provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. API Catalog provides:
+API Catalog brings together data from across Datadog to provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. API Catalog provides:
 
 - **Automated discoverability** - One inventory for all public, private, and partner APIs, where _endpoints_ are the organizing principle.
 - **Correlation of all API metadata** from different Datadog sources.
 - **API endpoint metrics** such as Last Seen, Requests, Latency, and Errors, to identify performance issues and track API health.
-- **Monitoring and governance workflows** such as:
-  - Alerting on Endpoints that deviate from defined performance expectations and thresholds.
-  - Resolving incidents faster with API ownership information directly associated with each endpoint, to know who to reach when something goes wrong
+- **Alerting** on Endpoints that deviate from defined performance expectations and thresholds.
+- Resolving incidents faster with API ownership information (team, on-call, communication channels, code repo) directly associated with each endpoint, to know who to reach when something goes wrong
 
 ### Some background terminology
 
@@ -41,18 +39,18 @@ API
 : A set of protocol and tools that allow two applications to communicate.
 
 API endpoint
-: The URL for a server or a service, often through an HTTP, RESTful API interface, that implements the set of rules defined in the API. APIs operate through responses and requests -- a client makes a request and the API endpoint makes a response.<br /><br/>
+: The address of a resource (URL) of a server or a service, that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint responsible for making the API call response.<br /><br/>
 API endpoints in the API Catalog are comprised by the HTTP Method (for example, `GET`), the URL's Path (the structure of the location of the resource, such as `/payment/{shop_id}/purchase`) and the Service this resource serves (for example, `Payments`)<br /><br/>
-The API Catalog in beta supports only HTTP RESTful endpoints. 
+The API Catalog in **beta** supports only **HTTP** endpoints. 
 
 Public APIs
-: Publicly exposed API through the internet. An organization's way to expose services and apps to customers. In most cases, public APIs are used by web and mobile apps, but it's becoming more common to have public APIs that expose new revenue streams alongside web app. Customers expect APIs to be a central part of your product offering, and they set up workflows and automation that leverage those APIs.
+: Customer facing API endpoints that are accessible from the internet.
 
 Private APIs
-: Also called internal APIs. Intended solely for internal use within a company or organization. They’re the most common type of API as they’re quick to develop and don’t need to be as robust as products intended for public consumption
+: Also called internal APIs. Intended solely for internal use within a company or organization, used mainly for backend services communication . The most common type of APIs.
 
 Partner APIs
-: Also called third party APIs. APIs that your app consumes that belong to a different organization (the third party). You leverage those APIs to provide your own service, and you are dependent on them for some features to work. For example, Paypal, Stripe, or other payment APIs, authentication providers including federated ones like Google or Facebook.
+: Also called third party APIs. Endpoints that the organization uses to provide its own services, basically these are another organization’s public endpoints (e.g. Stripe, Google, Facebook).
 
 ## Exploring your endpoints
 
@@ -62,7 +60,9 @@ In the list table, **sort** by any of the columns by clicking a header. For exam
 
 The table also shows **team ownership** for the API. This information is inherited from the associated service's definition in the [Service Catalog][2]. A service owner owns all of the endpoints that are connected to the service.
 
-To **filter the list** of endpoints or to search for a particular endpoint of interest, enter a query in the **Search** field. Search by service, path, or any other primary tag you wish. Or select a combination of facets on the left.
+To **filter the list** of endpoints or to search for a particular endpoint of interest, enter a query in the **Search** field. Search by service, path, or any other primary tag you wish. 
+Or select a combination of facets on the left. Facet by the owning **service** or the **team** they belong to.
+
 
 To **scope the data** shown in the table, specify an environment, another primary tag (such as datacenter), and a time frame.
 
@@ -70,20 +70,18 @@ To **scope the data** shown in the table, specify an environment, another primar
 
 You can [define tags](#group-apis-to-express-a-feature-or-business-logic) to use as facets so you can easily find groups of endpoints you're most interested in.
 
-**Note**: The `API Type` facet is based on auto-generated tags and has values of `public` and `unknown` (which usually indicates a private endpoint).
 
 
 ## Investigating endpoint details
 
 When you're exploring an endpoint, getting a higher resolution view of the API endpoints details is helpful.
 
-Click an endpoint in the list to open a details page that shows performance, governance, and metadata information for the endpoint, collected from various areas of Datadog into one place. Here you can edit the short name and description, and add custom tags. You can also launch deeper investigations of the various types of telemetry using links into other areas of Datadog. 
+Click an endpoint in the list to open a details page that shows performance, ownership, and metadata information for the endpoint, collected from various areas of Datadog into one place. Here you can edit the short name and description, and add custom tags. You can also launch deeper investigations of the various types of telemetry using links into other areas of Datadog. 
 
 For example, you can:
-- Add facets to endpoints by the owning service or the team they belong to. For example, you could add a `web-store` service facet.
 - Look up a specific endpoint by path (for example, `/checkout`) when it shows high error rate and high request count.
-- Navigate to related telemetry like traces and logs.
 - View the Error/Hits graph and correlated Response Code graph to identify issues.
+- Navigate to related telemetry like traces and logs.
 
 The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings in the details page to suit your investigation by using the time frame selector and other scope drop-downs. 
 
