@@ -163,8 +163,54 @@ Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Tra
 
 If you don't see traces, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
+### Examine a trace
+
+In the Traces page, click on a `POST /notes` trace and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
+
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+
+The flame graph for a `POST` trace looks something like this:
+
+{{< img src="tracing/guide/tutorials/tutorial-python-host-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
+
+A `GET /notes` trace looks something like this:
+
+{{< img src="tracing/guide/tutorials/tutorial-python-host-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
+
+
 ## Add custom instrumentation to the Python application
 
+While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
+
+The following steps walk you through adding annotations to the code to trace some sample methods.
+
+1. Open `notes_app/notes_app/notes_helper.py`.
+2. Add the following import:
+   {{< code-block lang="python" >}}
+   from ddtrace import tracer
+   {{< /code-block >}}
+
+3. Inside the `NotesHelper` class, add a tracer wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
+   {{< code-block lang="python" >}}
+class NotesHelper:
+
+    @tracer.wrap(service="notes_helper")
+    def long_running_process(self):
+        time.sleep(.3)
+        logging.info("Hello from the long running process")
+        self.__private_method_1()
+   {{< /code-block >}}
+
+    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case `long_running_process`.
+
+4. Resend some HTTP requests, specifically some `GET` requests.
+5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+
+   {{< img src="tracing/guide/tutorials/tutorial-python-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+   
+   Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
+
+For more information, read [Custom Instrumentation][12].
 ## Add a second application to see distributed traces
 
 ## Add more custom instrumentation
@@ -189,3 +235,4 @@ If you don't see traces, clear any filter in the Traces Search field (sometimes 
 [9]: https://github.com/Datadog/tutorial-apm-python-host
 [10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [11]: https://app.datadoghq.com/apm/traces
+[12]: /tracing/trace_collection/custom_instrumentation/python/
