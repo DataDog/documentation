@@ -283,10 +283,6 @@ def create_note(self, desc, add_date=None):
 If you're not receiving traces as expected, set up debug mode in the `ddtrace` Python package. Read [Enable debug mode][13] to find out more.
 
 
-## Additional `ddtrace` configuration options
-
-There are also a few optional configurations available for tracing with Python. For more information regarding additional configuration options available with the ddtrace Python package, please refer to the information here.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
