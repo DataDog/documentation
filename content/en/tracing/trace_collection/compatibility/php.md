@@ -105,7 +105,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Magento        | 1, 2                 | All supported PHP versions | Generic web tracing             |
 | Neos Flow      | 1.1                  | All supported PHP versions | Generic web tracing             |
 | Phalcon        | 1.3, 3.4             | All supported PHP versions | Generic web tracing             |
-| RoadRunner     | 1.3, 3.4             | All supported PHP versions | Generic web tracing             |
+| RoadRunner     | 2.x                  | All supported PHP versions | Framework-level instrumentation |
 | Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Framework-level instrumentation |
 | Symfony 3      | 3.3, 3.4             | All supported PHP versions | Framework-level instrumentation |
 | Symfony 4      | 4.x                  | All supported PHP versions | Framework-level instrumentation |
