@@ -105,7 +105,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Magento        | 1, 2                 | All supported PHP versions | Generic web tracing             |
 | Neos Flow      | 1.1                  | All supported PHP versions | Generic web tracing             |
 | Phalcon        | 1.3, 3.4             | All supported PHP versions | Generic web tracing             |
-| RoadRunner     | 2.x                  | All supported PHP versions | Framework-level instrumentation |
+| RoadRunner     | 2.x                  | All supported PHP versions | Framework-level instrumentationq |
 | Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Framework-level instrumentation |
 | Symfony 3      | 3.3, 3.4             | All supported PHP versions | Framework-level instrumentation |
 | Symfony 4      | 4.x                  | All supported PHP versions | Framework-level instrumentation |
@@ -135,7 +135,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Module                                                                  | Versions                   | Support Type    |
 |-------------------------------------------------------------------------|----------------------------|-----------------|
 | Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | Fully Supported |
-| Elasticsearch                                                           | 1.x+                       | Fully Supported |
+| Elasticsearch                                                           | 1+                         | Fully Supported |
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB - via [mongo][4] extension                                      | 1.4.x                      | Fully Supported |
