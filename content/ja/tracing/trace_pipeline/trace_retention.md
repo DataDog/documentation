@@ -3,13 +3,13 @@ aliases:
 - /ja/tracing/trace_retention/
 description: 保持フィルターでトレース保持を制御する方法について説明します。
 further_reading:
-- link: /tracing/trace_ingestion/mechanisms
+- link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: ドキュメント
   text: 取り込みのメカニズム
-- link: /tracing/trace_ingestion/ingestion_controls/
+- link: /tracing/trace_pipeline/ingestion_controls/
   tag: ドキュメント
   text: Ingestion Controls
-- link: /tracing/trace_retention/usage_metrics/
+- link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
 kind: documentation
@@ -18,7 +18,7 @@ title: トレースの保持
 
 {{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="保持フィルター" >}}
 
-APM を使用すると、トレースの[取り込み][1]とそのトレースの 15 日間の**保存**の両方を完全にカスタマイズできます。
+APM では、[トレースの取り込みと 15 日間の保持][1]を完全にカスタマイズすることができます。
 
 取り込まれたデータとインデックス化されたデータの量を追跡または監視するには、[使用量メトリクス][2]のドキュメントを参照してください。
 
@@ -26,8 +26,9 @@ APM を使用すると、トレースの[取り込み][1]とそのトレース�
 
 スパンが Datadog に取り込まれた後、アカウントに設定された保持フィルターに従って、一部は 15 日間保持されます。
 
-デフォルトでは、アカウントに対して 2 つの保持フィルターが有効になっています。
+デフォルトでは、アカウントに対していくつかの保持フィルターが有効になっています。
 - `Error Default` 保持フィルターは `status:error` を持つエラースパンをインデックス化します。保持率とクエリは構成することができます。例えば、本番環境のエラーを取得するには、クエリを `status:error, env:production` に設定します。デフォルトでエラーを捕捉したくない場合は、保持フィルターを無効にしてください。
+- Application Security Management を使用している場合、`Application Security` 保持フィルターが有効になります。このフィルタは、アプリケーションセキュリティの影響 (攻撃の試み) があると識別されたトレース内のすべてのスパンの保持を保証します。
 - [インテリジェント保持フィルター](#datadog-intelligent-retention-filter)は、多様なエラートレースや異なるレイテンシー分布のトレースを保持することができます。
 
 また、サービスに追加の[タグベースの保持フィルター](#create-your-own-retention-filter)をいくつでも作成できます。
@@ -64,7 +65,7 @@ Enabled toggle
 
 ### Datadog インテリジェント保持フィルター
 
-インテリジェント保持フィルターは、サービスに対して常にアクティブであり、アプリケーションの健全性を監視するのに役立つトレースの割合を保持します。すべての[サービスエントリスパン][5]は、インテリジェント保持フィルターによって保持されるトレースに対してインデックス化されます。
+インテリジェント保持フィルターは常にサービスに対してアクティブで、アプリケーションの健全性を監視するのに役立つトレースの割合を保持します。
 
 30 日間にわたり、Intelligent Retention は以下を保持します。
 
@@ -102,15 +103,15 @@ Enabled toggle
 - SaaS ソリューションのミッションクリティカルな機能を使用中の最重要顧客。
 - オンラインのデリバリーサービスアプリケーションの特定バージョン。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_ingestion
-[2]: /ja/tracing/trace_retention/usage_metrics
+[1]: /ja/tracing/trace_pipeline/
+[2]: /ja/tracing/trace_pipeline/metrics
 [3]: https://app.datadoghq.com/apm/traces/retention-filters
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[5]: /ja/tracing/visualization/#service-entry-span
+[5]: /ja/tracing/glossary/#service-entry-span
 [6]: /ja/tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
 [7]: /ja/tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
-[8]: /ja/tracing/visualization/#trace-root-span
+[8]: /ja/tracing/glossary/#trace-root-span

@@ -9,9 +9,6 @@ further_reading:
     - link: 'logs/log_configuration/processors'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
-    - link: 'logs/logging_without_limits'
-      tag: 'Documentation'
-      text: 'Control the volume of logs indexed by Datadog'
 ---
 
 ## Overview

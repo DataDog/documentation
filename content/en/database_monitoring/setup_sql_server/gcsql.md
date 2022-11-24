@@ -22,8 +22,6 @@ Complete the following steps to enable Database Monitoring with your database:
 2. [Install the Agent](#install-the-agent)
 3. [Install the Cloud SQL integration](#install-the-cloud-sql-integration)
 
-**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
-
 ## Before you begin
 
 Supported SQL Server versions
@@ -72,7 +70,7 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     provider: MSOLEDBSQL
-    tags:  # optional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
@@ -145,10 +143,9 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # optional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
@@ -251,6 +248,9 @@ instances:
     password: '<PASSWORD>'
     connector: 'odbc'
     driver: 'FreeTDS'
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>' \
@@ -272,6 +272,9 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
@@ -301,6 +304,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"

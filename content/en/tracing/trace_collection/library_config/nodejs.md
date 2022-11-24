@@ -78,6 +78,13 @@ Enable automatic injection of trace IDs in logs for supported logging libraries.
 `DD_TRACE_SAMPLING_RULES` 
 : A JSON array of objects. Each object must have a "sample_rate", and the "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
 
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `undefined`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][3].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**:  `false`<br>
 Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
@@ -102,3 +109,4 @@ For more options including the programmatic configuration API, see the [API docu
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[3]: /tracing/trace_pipeline/ingestion_mechanisms/

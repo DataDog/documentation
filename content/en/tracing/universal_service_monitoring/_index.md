@@ -19,7 +19,7 @@ further_reading:
   text: "Read about the Service Map"
 ---
 
-{{< beta-callout url="http://d-sh.io/universal" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< beta-callout url="#" d-toggle="modal" btn_hidden="true" d_target="#signupModal" custom_class="sign-up-trigger">}}
   Universal Service Monitoring (USM) is in public beta. There is currently no billing impact for enabling and using USM.
 {{< /beta-callout >}}
 
