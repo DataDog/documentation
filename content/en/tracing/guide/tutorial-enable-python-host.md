@@ -2,9 +2,21 @@
 title: Tutorial - Enabling Tracing for a Python Application on the Same Host as Datadog Agent
 kind: guide
 further_reading:
-- link: 
-  tags: 
-  text: 
+- link: /tracing/trace_collection/library_config/python/
+  tags: Documentation
+  text: Additional tracing library configuration options
+- link: /tracing/trace_collection/dd_libraries/python/
+  tags: Documentation
+  text: Detailed tracing library setup instructions
+- link: /tracing/trace_collection/compatibility/python/
+  tags: Documentation
+  text: Supported Python frameworks for automatic instrumentation
+- link: /tracing/trace_collection/custom_instrumentation/python/
+  tags: Documentation
+  text: Manually configuring traces and spans
+- link: https://github.com/DataDog/dd-trace-py
+  tags: GitHub
+  text: Tracing library open source code repository
 ---
 
 ## Overview
@@ -211,14 +223,69 @@ class NotesHelper:
    Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
 
 For more information, read [Custom Instrumentation][12].
+
 ## Add a second application to see distributed traces
+
+Tracing a single application is a great start, but the real value in tracing comes when you can see how requests are flowing through your services. This is called _distributed tracing_. 
+
+The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
+
+1. Build the calendar application by running:
+
+{{< code-block lang="bash" >}}
+DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \ 
+ddtrace-run python -m calendar_app.app
+{{< /code-block >}}
+
+2. Send a POST request with the `add_date` parameter:
+
+`curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
+: `(2, hello_again with date 2022-11-06)`
+
+
+3. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+
+   {{< img src="tracing/guide/tutorials/tutorial-python-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
 ## Add more custom instrumentation
 
-## Explore the Datadog UI
+As previously mentioned, you can add custom instrumentation by using code. Supposed you want to further instrument the calendar service in order to better see the trace. 
+
+1. Open `notes_app/notes_app/notes_logic.py`. 
+2. Inside the `try` block, at about line 28, add the following `with` statement:
+   ```python
+   with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
+   ```
+   Resulting in this:
+   {{< code-block lang="python" >}}
+def create_note(self, desc, add_date=None):
+        if (add_date):
+            if (add_date.lower() == "y"):
+                try:
+                    with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
+                        self.nh.another_process()
+                    note_date = requests.get(f"http://localhost:9090/calendar")
+                    note_date = note_date.text
+                    desc = desc + " with date " + note_date
+                    print(desc)
+                except Exception as e:
+                    print(e)
+                    raise IOError("Cannot reach calendar service.")
+        note = Note(description=desc, id=None)
+        note.id = self.db.create_note(note)
+   {{< /code-block >}}
+3. Restart the service.
+4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
+5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
+   {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
+   Note the new span labeled `notes_helper.another_process`.
+
+If you're not receiving traces as expected, set up debug mode in the `ddtrace` Python package. Read [Enable debug mode][13] to find out more.
+
 
 ## Additional `ddtrace` configuration options
 
+There are also a few optional configurations available for tracing with Python. For more information regarding additional configuration options available with the ddtrace Python package, please refer to the information here.
 
 ## Further reading
 
@@ -236,3 +303,4 @@ For more information, read [Custom Instrumentation][12].
 [10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/python/
+[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
