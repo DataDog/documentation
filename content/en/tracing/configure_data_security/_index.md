@@ -255,7 +255,7 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1] or using `agents.containers.traceAgent.env` in the if `values.yaml` file you are using [helm chart][2]
+Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1], or use `agents.containers.traceAgent.env` in the `values.yaml` file if you are using [helm chart][2].
 
 ```datadog-agent.yaml
 - name: DD_APM_REPLACE_TAGS
