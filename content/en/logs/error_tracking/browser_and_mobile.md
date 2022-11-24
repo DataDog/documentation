@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from browser and mobile Datadog SDKs. Whenever an error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
+Error Tracking processes errors collected from browser and mobile Datadog SDKs. Whenever an error containing a stack trace is collected, Error Tracking processes and groups it under an _issue_, which is a grouping of similar errors. 
 
 An essential attribute for log errors is the stack trace in a log's `error.stack`. If you are sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][6] to remap the stack trace to the correct attribute in Datadog. 
 

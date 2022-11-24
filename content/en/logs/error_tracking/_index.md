@@ -20,7 +20,7 @@ further_reading:
 
 It is critical for your system’s health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. 
 
-Once you have setup logs for **Browser and Mobile** or **Backend** error tracking, the issue list populates with cards.  You can sort by volume or age, and filter by all custom and default facets on your logs.
+Once you have setup logs for **Browser and Mobile** or **Backend** error tracking, the issue list populates with cards. You can sort by volume or age, and filter by all custom and default facets on your logs.
 
 {{< img src="logs/error_tracking/homepage.png" alt="The Error Tracking Explorer for Logs displaying Java issues" style="width:100%;" >}}
 
