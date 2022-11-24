@@ -100,10 +100,11 @@ An example of a workflow with a single step that sends a message to a Slack chan
 
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
-Context variables come in three varieties:
+Context variables come in four varieties:
 - A small collection of standard **workflow variables** are present in all workflows.
 - Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
 - **Trigger variables** are passed into the workflow by the triggering event.
+- **Source object variables** are passed into the workflow by the triggering event.
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
@@ -139,6 +140,15 @@ You can pass trigger variables into a workflow as inputs. Workflows accept a JSO
 {{< img src="workflows/add-trigger-variable.mp4" alt="Adding a trigger variable to a step automatically adds it to the workflow" video="true" >}}
 
 For more information on triggering workflows, see [Trigger a workflow][2].
+
+### Source object variables
+
+The Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow will depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. In case the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
+
+All the variables of the Source object are visible in the Context Variables tab.
+
+{{< img src="workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
+
 
 ## Further reading
 
