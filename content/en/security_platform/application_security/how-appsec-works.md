@@ -80,7 +80,7 @@ IP blocks are saved in the Datadog platform, automatically and securely fetched 
 
 You can block attackers' IPs that are flagged in ASM Security Signals temporarily or permanently with a single click in the Datadog UI.
 
-From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Traces Explorer][14]. Services where ASM is disabled aren't protected.
+From there, all services already protected by ASM block incoming requests performed by the blocked IP, for the specified duration. All blocked traces are tagged with `security_response.block_ip` and displayed in the [Trace Explorer][14]. Services where ASM is disabled aren't protected.
 
 
 {{< img src="/security_platform/application_security/asm-blocking-ui.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
