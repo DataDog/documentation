@@ -57,7 +57,7 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/Datadog/tutorial-apm-python][9]. Clone the git repository by running:
 
 {{< code-block lang="bash" >}}
-git clone https://github.com/DataDog/apm-tutorial-python.git 
+git clone https://github.com/DataDog/apm-tutorial-python.git
 {{< /code-block >}}
 
 Setup, configure, and install Python dependencies for the sample using either Poetry or pip. Run one of the following:
@@ -145,10 +145,8 @@ pip install ddtrace
 
 To start generating and collecting traces, restart the sample application in a slightly different way than previously. Run:
 
-{{< code-block lang="bash" >}}
-DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
- ddtrace-run python -m notes_app.app
-{{< /code-block >}}
+{{< code-block lang="bash" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ ddtrace-run python -m notes_app.app{{< /code-block >}}
 
 That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variable to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
 
@@ -199,19 +197,16 @@ The following steps walk you through adding annotations to the code to trace som
 1. Open `notes_app/notes_app/notes_helper.py`.
 2. Add the following import:
    {{< code-block lang="python" >}}
-   from ddtrace import tracer
-   {{< /code-block >}}
+from ddtrace import tracer{{< /code-block >}}
 
 3. Inside the `NotesHelper` class, add a tracer wrapper called `notes_helper` to better see how the `notes_helper.long_running_process` method works:
-   {{< code-block lang="python" >}}
-class NotesHelper:
+   {{< code-block lang="python" >}}class NotesHelper:
 
     @tracer.wrap(service="notes_helper")
     def long_running_process(self):
         time.sleep(.3)
         logging.info("Hello from the long running process")
-        self.__private_method_1()
-   {{< /code-block >}}
+        self.__private_method_1(){{< /code-block >}}
 
     Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case `long_running_process`.
 
@@ -232,10 +227,10 @@ The sample project includes a second application called `calendar_app` that retu
 
 1. Build the calendar application by running:
 
-{{< code-block lang="bash" >}}
+   {{< code-block lang="bash" >}}
 DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \ 
 ddtrace-run python -m calendar_app.app
-{{< /code-block >}}
+   {{< /code-block >}}
 
 2. Send a POST request with the `add_date` parameter:
 
@@ -253,6 +248,7 @@ As previously mentioned, you can add custom instrumentation by using code. Suppo
 
 1. Open `notes_app/notes_app/notes_logic.py`. 
 2. Inside the `try` block, at about line 28, add the following `with` statement:
+
    ```python
    with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
    ```
@@ -272,8 +268,8 @@ def create_note(self, desc, add_date=None):
                     print(e)
                     raise IOError("Cannot reach calendar service.")
         note = Note(description=desc, id=None)
-        note.id = self.db.create_note(note)
-   {{< /code-block >}}
+        note.id = self.db.create_note(note){{< /code-block >}}
+
 3. Restart the service.
 4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
 5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
