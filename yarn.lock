@@ -4454,6 +4454,7 @@ __metadata:
     serialize-javascript: ^2.1.1
     slugify: ^1.4.6
     tiny-async-pool: ^1.0.4
+    tomlify-j0.4: ^3.0.0
     traverse: 0.6.6
     yaml-lint: ^1.2.4
   languageName: unknown
@@ -11663,6 +11664,13 @@ __metadata:
   version: 1.0.0
   resolution: "toidentifier@npm:1.0.0"
   checksum: 199e6bfca1531d49b3506cff02353d53ec987c9ee10ee272ca6484ed97f1fc10fb77c6c009079ca16d5c5be4a10378178c3cacdb41ce9ec954c3297c74c6053e
+  languageName: node
+  linkType: hard
+
+"tomlify-j0.4@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "tomlify-j0.4@npm:3.0.0"
+  checksum: e24aaf6d614abd24437669ac3bb90185d514f8c0cc9443e36264035b2381afecae1383d55a29551993842b01080ada7ba5bc1b9dab8f479a7057376634da233d
   languageName: node
   linkType: hard
 

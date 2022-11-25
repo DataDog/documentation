@@ -1,22 +1,31 @@
 {{ define "main" }}
   <h1 class="pb-0">{{ .Title }}</h1>
 
-
   {{/* $s := (index .Site.Data.reference "schema.deref") */}}
   {{ $s := .Site.Data.reference.schema }}
   {{ $t := (index .Site.Data.reference "schema.tables") }}
-  {{ range $key, $val := $s.definitions }}
-
 
     <h2>Source</h2>
-    {{ range $source := (index (index $s.definitions "vector::sources::Sources") "oneOf") }}
+    {{/* range $source := first 3 (index (index $s.definitions "vector::sources::Sources") "oneOf") */}}
+    {{ range $source := $t.sources }}
       <div style="padding:10px; border-bottom:1px solid grey">
-        {{ $def_lookup_name := (replace (index (index $source.allOf 0) "$ref") "#/definitions/" "") }}
-        <h3>{{ $source._metadata.logical_name}}</h3>
+        {{/* $def_lookup_name := (replace (index (index $source.allOf 0) "$ref") "#/definitions/" "") */}}
+        <h3>{{ $source._metadata.logical_name }}</h3>
         <h4>{{ $source.description }}</h4>
         {{/* (index $s.definitions $def_lookup_name) */}}
+
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active js-tab-model" id="-model">
+        <ul class="nav nav-tabs border-none response-toggle">
+            <li class="nav-item">
+                <a class="nav-link mr-1 js-model-link active" href="#" data-toggle="tab">{{ i18n "model" }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mr-1 js-example-link" href="#" data-toggle="tab">Vector.toml</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $source._metadata.logical_name | lower }}-request-model">
             <div class="schema-table row">
               {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary">Expand All</p>{{ end }}
               <div class="col-12">
@@ -31,10 +40,76 @@
                     <p class="font-semibold">{{ i18n "description" }}</p>
                   </div>
                 </div>
-                {{ index $t $def_lookup_name | safeHTML }}
+                {{/* (index $t $def_lookup_name).html | safeHTML */}}
+                {{ $source.html | safeHTML }}
               </div>
             </div>
           </div>
+          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $source._metadata.logical_name | lower }}-request-example">
+             <div class="code-snippet-wrapper">
+                <div class="code-snippet">
+
+                  <div class="example-accordion" id="accordion-parent">
+                    <div class="card">
+                      <div class="card-header p-0">
+                        <h5 class="m-0">
+                          <button class="btn btn-link" data-toggle="collapse" data-target="#{{ $source._metadata.logical_name | lower }}-example-simple" aria-expanded="true" aria-controls="collapseOne">
+                            Simple
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="{{ $source._metadata.logical_name | lower }}-example-simple" class="collapse show" data-parent="#accordion-parent">
+                        <div class="card-body p-0 code-snippet">
+                            <div class="code-button-wrapper position-absolute">
+                                <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                            </div>
+                            {{ highlight $source.simple "toml" "" }}
+                            {{/* highlight ($source.simple | jsonify (dict "indent" "  ")) "json" "" */}}
+                            {{/* (index $t $def_lookup_name).simple */}}
+                            {{/* highlight (index $t $def_lookup_name).simple "json" "" */}}
+                            {{/*
+                              {{ $example := (index $source.allOf 1) }}
+                              {{ highlight ($example | jsonify (dict "indent" "  ")) "json" "" }}
+                              {{ range $key, $val := $example.properties }}
+                                {{ $key }} = {{ delimit $val "," }}
+                              {{ end }}
+                            */}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header p-0">
+                        <h5 class="m-0">
+                          <button class="btn btn-link" data-toggle="collapse" data-target="#{{ $source._metadata.logical_name | lower }}-example-advanced" aria-expanded="true" aria-controls="collapseOne">
+                            Advanced
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="{{ $source._metadata.logical_name | lower }}-example-advanced" class="collapse" data-parent="#accordion-parent">
+                        <div class="card-body p-0 code-snippet">
+                            <div class="code-button-wrapper position-absolute">
+                                <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                            </div>
+                            {{ highlight $source.advanced "toml" "" }}
+                            {{/* highlight ($source.advanced | jsonify (dict "indent" "  ")) "json" "" */}}
+                            {{/* (index $t $def_lookup_name).advanced */}}
+                            {{/* highlight (index $t $def_lookup_name).advanced "json" "" */}}
+                            {{/*
+                              {{ $example := (index $source.allOf 1) }}
+                              {{ highlight ($example | jsonify (dict "indent" "  ")) "json" "" }}
+                              {{ range $key, $val := $example.properties }}
+                                {{ $key }} = {{ delimit $val "," }}
+                              {{ end }}
+                            */}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+             </div>
+          </div>
+        </div>
         </div>
       </div>
     {{ end }}
@@ -56,7 +131,5 @@
         </div>
       {{ end }}
     */}}
-
-  {{ end }}
 
 {{ end }}
