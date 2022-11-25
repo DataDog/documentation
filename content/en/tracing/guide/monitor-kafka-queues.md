@@ -81,10 +81,12 @@ Datadog’s Kafka integration works with Kafka version 0.11+, which supports the
 
 {{% tab ".NET" %}}
 
-The [Kafka.NET Client documentation][4] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
+The [Kafka.NET Client documentation][1] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
 
-When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to false in your consuming application. When set to false, the consumer span is created and immediately closed. If you have child spans to trace, follow [this documentation][5] to extract the trace context.
+When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to false in your consuming application. When set to false, the consumer span is created and immediately closed. If you have child spans to trace, follow [this documentation][2] to extract the trace context.
 
+[1]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
+[2]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -100,5 +102,4 @@ If you want to disable tracing for Kafka, you can set `DD_TRACE_KAFKA_ENABLED` t
 [1]: /integrations/kafka
 [2]: https://app.datadoghq.com/data-streams/onboarding
 [3]: /tracing/trace_collection/
-[4]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
-[5]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+
