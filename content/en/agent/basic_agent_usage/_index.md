@@ -38,9 +38,9 @@ On Windows the services are listed as:
 
 | Service               | Description             |
 |-----------------------|-------------------------|
-| DatadogAgent          | “Datadog Agent”         |
-| datadog-trace-agent   | “Datadog Trace Agent”   |
-| datadog-process-agent | "Datadog Process Agent” |
+| DatadogAgent          | "Datadog Agent"         |
+| datadog-trace-agent   | "Datadog Trace Agent"   |
+| datadog-process-agent | "Datadog Process Agent" |
 
 By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 
@@ -51,9 +51,11 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 | 5002 | Serves the GUI server on Windows and OSX.                                                   |
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
+For information on configuring the ports, see [Network Traffic][4].
+
 ### Collector
 
-The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][4].
+The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][5].
 
 ### Forwarder
 
@@ -61,14 +63,15 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 
 ### DogStatsD
 
-In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
+In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][7].
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
-[4]: /developers/custom_checks/write_agent_check/
-[5]: https://github.com/etsy/statsd
-[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /agent/guide/network#configure-ports
+[5]: /developers/custom_checks/write_agent_check/
+[6]: https://github.com/etsy/statsd
+[7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
