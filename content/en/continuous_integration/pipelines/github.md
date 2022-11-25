@@ -23,11 +23,14 @@ further_reading:
 {{< /site-region >}}
 
 ## Compatibility
+- **Supported GitHub versions**:
+  - GitHub.com (SaaS)
+  - GitHub Enterprise Server (GHES) 3.5.0 or newer
+- **Partial pipelines**: View partially retried and downstream pipeline executions
 
-Supported GitHub versions:
-* GitHub.com (SaaS)
-* GitHub Enterprise Server (GHES) 3.5.0 or above
+- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
 
+- **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
 
 ## Configuring the Datadog integration
 
@@ -105,3 +108,4 @@ workflow job and workflow run events. To remove the events:
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
+[10]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#enable-log-collection

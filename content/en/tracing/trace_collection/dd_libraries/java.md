@@ -21,7 +21,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Java Tracer supports all JVMs version 7 and higher on all platforms.
+The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
 For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
@@ -56,6 +56,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
    DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+   
    ```
 
    ```bash
@@ -121,7 +122,7 @@ After the agent is installed, to begin tracing your applications:
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
 
     **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][4] for more information.
@@ -279,3 +280,4 @@ If needed, configure the tracing library to send application performance telemet
 [7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: /tracing/trace_collection/library_config/java/
+[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
