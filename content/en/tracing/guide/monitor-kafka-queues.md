@@ -37,7 +37,7 @@ Datadog APM and distributed tracing gives you expanded visibility into the perfo
 <br>
 {{< img src="tracing/guide/monitor_kafka_queues//kafka_traces.png" alt="A kafka consumer span" >}}
 <br>
-Datadog APM can automatically trace requests to and from Kafka clients. This means you can collect traces without modifying the source code of your producers and consumers.
+Datadog APM can automatically trace requests to and from Kafka clients. This means you can collect traces without modifying your source code. Note that we inject headers in the kafka messages to be able to propagate the context of the trace from the producer to the consumer.
 
 #### Setup
 
@@ -47,6 +47,12 @@ To trace kafka applications, we actually trace the producing and consuming calls
 
 A classic Kafka setup will show a trace with a producer span, and as a child, a consumer span. Any work that would generate a trace in the consumption side will be represented by child spans of the consumer span.
 Each spans contain a set of tags with the `messaging` prefix. Below, the tags you can find on Kafka spans.
+
+<div class="alert alert-info">
+  <div class="alert-info">
+    <div>To get a more global view of Datadog's spans metada, please refer to the <a href="/tracing/trace_collection/tracing_naming_convention">Span Tags Semantics documentation</a></strong>.</div>
+  </div>
+</div>
 
 | Tag                             | Description                                                                                        | Availability         |
 | ------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------- |
@@ -67,11 +73,17 @@ Each spans contain a set of tags with the `messaging` prefix. Below, the tags yo
 
 {{< tabs >}}
 
+{{% tab "Java" %}}
+
+Datadog’s Kafka integration works with Kafka version 0.11+, which supports the Header API. This API is used to inject and extract trace context. If you are running a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the tracer tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you are running a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
+
+{{% /tab %}}
+
 {{% tab ".NET" %}}
 
-Usually, messages are consumed in a loop. Thus, by default, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop.
+The [Kafka.NET Client documentation][4] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
 
-When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once., you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to false in your conssuming application. When set to false, the consumer span is created when a message is consumed and immediately closed. This unfortunately will prevent child spans to be attached to the current trace. If you have child spans to trace, follow [this documentation][4] to extract the trace context.
+When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to false in your consuming application. When set to false, the consumer span is created and immediately closed. If you have child spans to trace, follow [this documentation][5] to extract the trace context.
 
 {{% /tab %}}
 
@@ -88,4 +100,5 @@ If you want to disable tracing for Kafka, you can set `DD_TRACE_KAFKA_ENABLED` t
 [1]: /integrations/kafka
 [2]: https://app.datadoghq.com/data-streams/onboarding
 [3]: /tracing/trace_collection/
-[4]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[4]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
+[5]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
