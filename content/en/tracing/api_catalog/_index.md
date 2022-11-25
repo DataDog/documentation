@@ -16,14 +16,14 @@ further_reading:
 
 ## Overview
 
-The API Catalog provides a single view and entry point for exploring the performance, reliability, and ownership of all your API endpoints in one place. It's a central place where your whole company can constantly find up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
+The API Catalog provides a single view and entry point for exploring the performance, reliability, and ownership of all your API endpoints in one place. It's a central place where your whole company can find up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
 
-Monitor your mission-critical API-driven business features by, standardize APIs performance expectations and constantly validate these expectations, alerting when performance deviates from them.
+Monitor your mission-critical API-driven business features, standardize and validate APIs performance expectations, and alert when performance deviates from them.
 
-The API Catalog enables your development teams to:
+The API Catalog enables your teams to:
 - Provide high availability and uptime of critical APIs and the business features that rely on them to function.
 - Prevent API regressions and instability issues.
-- Quickly identify and triage incidents.
+- Quickly triage incidents.
 
 API Catalog combines data from across Datadog to provide opinionated workflows so you can explore and monitor your APIs from different sources in one unified view. API Catalog provides:
 
@@ -116,7 +116,7 @@ API
 
 API endpoint
 : The address of a resource (URL) of a server or a service that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint responsible for making the API call response.<br /><br/>
-API endpoints in the API Catalog are comprised by the HTTP Method (for example, `GET`), the URL's Path (the structure of the location of the resource, such as `/payment/{shop_id}/purchase`) and the Service this resource serves (for example, `Payments`)<br /><br/>
+The API Catalog displays API endpoints as: the HTTP method (for example, `GET`), the URL path (the structure of the location of the resource, such as `/payment/{shop_id}/purchase`), and the name of the service this resource serves (for example, `Payments`)<br /><br/>
 The API Catalog in **beta** supports only **HTTP** endpoints. 
 
 Public APIs
