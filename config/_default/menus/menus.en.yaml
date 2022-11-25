@@ -2424,21 +2424,38 @@ main:
     url: logs/explorer/saved_views/
     parent: log_explorer
     weight: 509
+  - name: Error Tracking
+    url: logs/error_tracking/
+    parent: log_management
+    identifier: log_management_error_tracking
+    weight: 6
+  - name: Error Tracking Explorer
+    url: logs/error_tracking/explorer
+    parent: log_management_error_tracking
+    weight: 601
+  - name: Track Browser and Mobile Errors
+    url: logs/error_tracking/browser_and_mobile
+    parent: log_management_error_tracking
+    weight: 602
+  - name: Track Backend Errors
+    url: logs/error_tracking/backend
+    parent: log_management_error_tracking
+    weight: 603
   - name: Guides
     url: logs/guide/
     parent: log_management
     identifier: log_guides
-    weight: 6
+    weight: 7
   - name: Data Security
     url: data_security/logs/
     parent: log_management
     identifier: log_security
-    weight: 7
+    weight: 8
   - name: Troubleshooting
     url: logs/troubleshooting
     parent: log_management
     identifier: log_troubleshooting
-    weight: 8
+    weight: 9
   - name: Observability Pipelines
     url: observability_pipelines/
     pre: pipelines
