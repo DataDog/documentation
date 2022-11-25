@@ -126,7 +126,8 @@ Mettez à jour votre conteneur de configuration pour APM en ajoutant l'argument 
 ```shell
 docker run [...] -e DD_APPSEC_ENABLED=true [...] 
 ```
-
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
 
 Ajoutez la valeur de variable d'environnement suivante dans le Dockerfile de votre conteneur :
 
