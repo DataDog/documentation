@@ -316,7 +316,7 @@ Agentless logging (also known as "direct log submission") supports the following
 It does not require modifying your application code, or installing additional dependencies into your application.
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using log4net or NLog, Agentless logging requires an appender (log4net) / logger (NLog) to be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use [agentless logging with our Serilog sink][21] instead.
+  <strong>Note:</strong> If you use log4net or NLog, an appender (log4net) or a logger (NLog) must be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">agentless logging with the Serilog sink</a> instead.
 </div>
 
 
@@ -610,4 +610,3 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [18]: /api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [20]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[21]: /logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink
