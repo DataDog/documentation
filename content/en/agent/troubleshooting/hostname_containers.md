@@ -230,7 +230,7 @@ or
 -e DD_HOSTNAME=<my_hardcoded_hostname>
 ```
 
-**Note:** This does not concern serverless solutions like Fargate.
+**Note:** This does not apply to serverless solutions like Fargate.
 
 If the solutions above did not fix your Agent setup, reach out to the [Datadog support team][6].
 
