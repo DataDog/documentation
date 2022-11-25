@@ -108,14 +108,14 @@ spec:
 
 If you run in AWS, GCP, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
 
-Accessing the cloud provider metadata endpoint properly matches Agent data and cloud integration data.
+Accessing the cloud provider metadata endpoint allows Datadog to properly match Agent data and cloud integration data in the application.
 
 Encountering this issue usually means that access to the metadata endpoint has been restricted.
-For example, on AWS, this happens through the [hop limit feature][5].
+For example, on AWS, this could be due to the [hop limit setting][5].
 
 ### Accessing the container runtime API
 
-Use this solution only in the unlikely even that you **explicitly** don't want the Agent to connect to Kubelet API, and if you are not running in a supported cloud provider described above.
+Use this solution only in the unlikely event that you **explicitly** don't want the Agent to connect to Kubelet API, and if you are not running in a supported cloud provider described above.
 
 In this case you can use the downward API to set `DD_HOSTNAME`:
 
@@ -208,12 +208,12 @@ Make sure the Docker socket is mounted in your `docker run` command:
 
 ### Accessing the cloud provider metadata endpoint
 
-If you're running in AWS, GCP, or Azure, the Agent can use metadata endpoint to retrieve the hostname.
+If you run in AWS, GCP, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
 
-Accessing the cloud provider metadata endpoint properly matches Agent data and cloud integration data.
+Accessing the cloud provider metadata endpoint allows Datadog to properly match Agent data and cloud integration data in the application.
 
 Encountering this issue usually means that access to the metadata endpoint has been restricted.
-For example, on AWS, this happens through the [hop limit feature][5].
+For example, on AWS, this could be due to the [hop limit setting][5].
 
 ## Hostname errors in CI environments and sidecar setups
 
@@ -230,7 +230,9 @@ or
 -e DD_HOSTNAME=<my_hardcoded_hostname>
 ```
 
-If the solutions above did fix your Agent setup, reach out to the [Datadog support team][6].
+**Note:** This does not concern serverless solutions like Fargate.
+
+If the solutions above did not fix your Agent setup, reach out to the [Datadog support team][6].
 
 [1]: /containers/kubernetes/distributions
 [2]: https://github.com/DataDog/helm-charts
