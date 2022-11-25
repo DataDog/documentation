@@ -45,23 +45,23 @@ To trace kafka applications, we actually trace the producing and consuming calls
 
 #### Monitor in the APM UI
 
-A classic Kafka setup will show a trace with a producer span, and as a child, a consumer span. Any work that would generate a trace in the consunption side will be representated by child spans of the consumer span.
+A classic Kafka setup will show a trace with a producer span, and as a child, a consumer span. Any work that would generate a trace in the consumption side will be represented by child spans of the consumer span.
 Each spans contain a set of tags with the `messaging` prefix. Below, the tags you can find on Kafka spans.
 
 | Tag                             | Description                                                                                        | Availability         |
 | ------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------- |
-| messaging.kafka.message_key     |  Message keys in Kafka are used for grouping alike messages to ensure they're processed on the same partition.<br> They differ from messaging.message_id in that they're not unique.                                                          | Best effort             |
-| messaging.kafka.consumer_group  |  Name of the Kafka Consumer Group that is handling the message. Only applies to consumers, not producers. | Best effort             |
-| messaging.kafka.client_id       |  Client Id for the Consumer or Producer that is handling the message. | Best effort             |
-| messaging.kafka.partition       |  Partition the message is sent to.                                    | Best effort             |
-| messaging.kafka.tombstone       |  A boolean that is true if the message is a tombstone.                | Best effort             |
-| messaging.kafka.client_id       |  Client Id for the Consumer or Producer that is handling the message. | Best effort             |
-| messaging.system                |  `Kafka`                                                              | Always present          |
-| messaging.destination           |  The topic the message is sent to.                                    | Best effort             |
-| messaging.destination_kind      |  `Queue`                                                              | Best effort             |
-| messaging.message_id            |  Identifier for the message.                                          | Best effort             |
-| messaging.operation             |  `send`, `receive` or `process`                                       | Best effort             |
-| messaging.consumer_id           |  `{messaging.kafka.consumer_group} - {messaging.kafka.client_id}` if both are present.<br>`messaging.kafka.consumer_group` if not.                             | Best effort             |
+| `messaging.kafka.message_key`     |  Message keys in Kafka are used for grouping alike messages to ensure they're processed on the same partition.<br> They differ from `messaging.message_id` in that they're not unique.                                                          | Best effort             |
+| `messaging.kafka.consumer_group`  |  Name of the Kafka Consumer Group that is handling the message. Only applies to consumers, not producers. | Best effort             |
+| `messaging.kafka.client_id`       |  Client Id for the Consumer or Producer that is handling the message. | Best effort             |
+| `messaging.kafka.partition`       |  Partition the message is sent to.                                    | Best effort             |
+| `messaging.kafka.tombstone`       |  A boolean that is true if the message is a tombstone.                | Best effort             |
+| `messaging.kafka.client_id`       |  Client Id for the Consumer or Producer that is handling the message. | Best effort             |
+| `messaging.system`                |  `Kafka`                                                              | Always present          |
+| `messaging.destination`           |  The topic the message is sent to.                                    | Best effort             |
+| `messaging.destination_kind`      |  `Queue`                                                              | Best effort             |
+| `messaging.message_id`            |  Identifier for the message.                                          | Best effort             |
+| `messaging.operation`             |  `send`, `receive` or `process`                                       | Best effort             |
+| `messaging.consumer_id`           |  `{messaging.kafka.consumer_group} - {messaging.kafka.client_id}` if both are present.<br>`messaging.kafka.consumer_group` if not.                             | Best effort             |
 
 #### Special use cases
 
