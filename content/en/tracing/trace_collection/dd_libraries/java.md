@@ -21,6 +21,8 @@ further_reading:
 ---
 ## Compatibility requirements
 
+The latest Java Tracer supports all JVMs version 8 and higher. For JVM versions below 8, please see [Supported JVM runtimes][10].
+
 For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
 ## Installation and getting started
@@ -277,3 +279,4 @@ If needed, configure the tracing library to send application performance telemet
 [7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: /tracing/trace_collection/library_config/java/
+[10]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
