@@ -3344,7 +3344,7 @@ main:
     weight: 307
   - name: Universal Service Monitoring
     url: universal_service_monitoring/
-    pre: universal-service-monitoring
+    pre: usm
     identifier: usm_parent
     parent: infrastructure_heading
     weight: 230000

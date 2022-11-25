@@ -106,7 +106,7 @@ nav_sections:
         desc: Manage and monitor your telemetry pipelines
       - title: Universal Service Monitoring
         link: universal_service_monitoring/
-        icon: world
+        icon: usm
         desc: Discover, map, and monitor services without changing code
   - nav_section:
     - name: 'Configuration'
