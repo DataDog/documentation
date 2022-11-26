@@ -4,6 +4,10 @@ kind: guide
 description: "Steps for manually setting up the Pivotal Cloud Foundry Integration"
 aliases:
   - /integrations/pivotal-platform
+further_reading:
+  - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
+  tag: "Blog"
+  text: "Monitor applications running on VMware Tanzu Application Service"
 ---
 
 ## Overview
@@ -465,6 +469,10 @@ On the [Metrics explorer][23] page in Datadog, search for metrics beginning with
 You can enable or disable the application metadata prefix in the Firehose Nozzle app metrics.
 
 {{< img src="integrations/cloud_foundry/enable_metadata_app_prefix.png" alt="The integration tile settings in Datadog with Enable Metadata App Metrics Prefix unchecked" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [2]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
