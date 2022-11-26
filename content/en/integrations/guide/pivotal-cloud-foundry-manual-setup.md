@@ -5,7 +5,7 @@ description: "Steps for manually setting up the Pivotal Cloud Foundry Integratio
 aliases:
   - /integrations/pivotal-platform
 further_reading:
-  - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
+- link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
   tag: "Blog"
   text: "Monitor applications running on VMware Tanzu Application Service"
 ---
