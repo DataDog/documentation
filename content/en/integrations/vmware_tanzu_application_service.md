@@ -144,13 +144,13 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [3]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20(PCF)%20is%20now%20VMware%20Tanzu%20Application%20Service.
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[6]: /integrations/guide/vmware-tanzu-application-service-manual-setup
+[6]: /integrations/guide/pivotal-cloud-foundry-manual-setup
 [7]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
 [9]: https://docs.pivotal.io/partners/datadog/installing.html
 [10]: /agent/logs/proxy/
-[11]: /integrations/guide/vmware-tanzu-application-service-manual-setup#monitor-your-applications
+[11]: /integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
 [12]: /tracing/setup/
-[13]: /integrations/guide/vmware-tanzu-application-service-manual-setup#monitor-your-vmware-tanzu-application-service-cluster
+[13]: /integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-pivotal-cloud-foundry-cluster
 [14]: /libraries/
 [24]: /integrations/system/#metrics
 [25]: /integrations/network/#metrics
