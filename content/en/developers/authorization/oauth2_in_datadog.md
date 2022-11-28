@@ -100,7 +100,7 @@ The [PKCE protocol][11] integrates with the authorization code grant flow by com
 [2]: /api/latest/scopes/
 [3]: /developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /developers/integrations/oauth_for_data_integrations
+[5]: /developers/integrations/oauth_for_integrations
 [6]: /developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

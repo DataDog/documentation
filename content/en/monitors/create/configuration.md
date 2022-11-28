@@ -28,7 +28,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 `Simple Alert` mode aggregate over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
 
 `Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
 
 | Group by                       | Simple alert mode | Multi alert mode |
 |-------------------------------------|------------------------|-----------------------|
@@ -61,7 +61,7 @@ The query returns a series of points, but a single value is needed to compare to
 
 ### Evaluation window
 
-A monitor can be evaluated using cumulative time windows or rolling time windows. Cumulative time windows are best suited for questions that require historical context, such as "What's the sum of all the data available up to this point in time?" Rolling time windows are best suited for answering questions that do not require this context, such as "What's the average of the last _N_ data points?" 
+A monitor can be evaluated using cumulative time windows or rolling time windows. Cumulative time windows are best suited for questions that require historical context, such as "What's the sum of all the data available up to this point in time?" Rolling time windows are best suited for answering questions that do not require this context, such as "What's the average of the last _N_ data points?"
 
 The figure below illustrates the difference between cumulative and rolling time windows.
 
@@ -170,7 +170,7 @@ In this case, you should not enable notifications for missing data. This option 
 
 ##### Simple Alert
 
-For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that would change the status from OK. 
+For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that would change the status from OK.
 
 ##### Multi Alert
 
@@ -230,7 +230,7 @@ Some use cases to define a group retention time include:
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: The group retention time option requires a multi-alert monitor that supports the [`On missing data`][5] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
+**Note**: The group retention time option requires a multi alert monitor that supports the [`On missing data`][5] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
 
 #### New group delay
 
@@ -240,7 +240,7 @@ The time (in seconds) to wait before starting alerting, to allow newly created g
 
 For example, if you are using containerized architecture, setting a group delay prevents monitor groups scoped on containers from triggering due to high resource usage or high latency when a new container is created. The delay is applied to every new group (which has not been seen in the last 24 hours) and defaults to `60` seconds.
 
-The option is available with multi-alert mode.
+The option is available with multi alert mode.
 
 #### Evaluation delay
 

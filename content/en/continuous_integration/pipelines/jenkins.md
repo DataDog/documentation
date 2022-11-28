@@ -21,8 +21,24 @@ further_reading:
 
 ## Compatibility
 
-Supported Jenkins versions:
-* Jenkins >= 2.346.1
+- **Supported Jenkins versions**: 
+  - Jenkins >= 2.346.1
+
+- **Manual steps**: View manually triggered pipelines
+
+- **Queue time**: View amount of time pipeline jobs wait in the queue before processing
+
+- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
+
+- **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][11] for Jenkins workers
+
+- **Custom spans**: Configure custom spans
+
+- **Custom pre-defined tags**: Configure [custom tags][12] and metrics at runtime
+
+- **Parameters**: Set custom parameters such as default branch name and Git information
+
+- **Pipeline failure reasons**: Identify pipeline failure reasons
 
 ## Prerequisite
 
@@ -619,3 +635,6 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
+[10]: https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=usingui#enable-job-log-collection
+[11]: https://docs.datadoghq.com/continuous_integration/pipelines/jenkins/?tab=usingui#infrastructure-metric-correlation
+[12]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
