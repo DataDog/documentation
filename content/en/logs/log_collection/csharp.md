@@ -315,6 +315,11 @@ Agentless logging (also known as "direct log submission") supports the following
 
 It does not require modifying your application code, or installing additional dependencies into your application.
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> If you use log4net or NLog, an appender (log4net) or a logger (NLog) must be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">agentless logging with the Serilog sink</a> instead.
+</div>
+
+
 ### Configure the APM library
 
 Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents:
@@ -365,7 +370,7 @@ You can further customize some aspects of Agentless log collection using the fol
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
 : If specified, adds all of the specified tags to all generated spans. If not provided, will use `DD_TAGS` instead.<br>
-**Example**: `layer:api, team:intake` 
+**Example**: `layer:api, team:intake`
 Note that the delimiter is a comma and a whitespace: `, `.
 
 The following configuration values should generally not be modified, but may be set if required.

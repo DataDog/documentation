@@ -51,4 +51,4 @@ Click on an issue to view debugging information, such as the stack trace, user s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/error-tracking
+[1]: https://app.datadoghq.com/rum/error-tracking
