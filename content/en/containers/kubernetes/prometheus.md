@@ -216,7 +216,7 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 ### Configuration
 
-It's recommended to first check which pods and services have the `prometheus.io/scrape=true` annotation before enabling this feature. This can be done with commands like:
+It's recommended to first check which pods and services have the `prometheus.io/scrape=true` annotation before enabling this feature. This can be done with the following commands:
 
 ```shell
 kubectl get pods -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.io/scrape=="true")].metadata.name}' --all-namespaces
@@ -224,7 +224,7 @@ kubectl get pods -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.io/sc
 kubectl get services -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.io/scrape=="true")].metadata.name}' --all-namespaces
 ```
 
-Once the Prometheus Scrape feature is enabled the Datadog Agent will collect custom metrics from these resources. If you do not want to collect the custom metrics from these resources you can remove this annotation or update the autodiscovery rules as described in the [advanced configuration](#advanced-configuration).
+Once the Prometheus Scrape feature is enabled the Datadog Agent collects custom metrics from these resources. If you do not want to collect the custom metrics from these resources you can remove this annotation or update the autodiscovery rules as described in the [advanced configuration section](#advanced-configuration).
 
 #### Basic configuration
 
