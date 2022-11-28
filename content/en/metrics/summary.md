@@ -18,9 +18,14 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
 
-Search your metrics by name or tag using the **Metric** or **Tag** search fields:
+Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tagexplorer2.mp4" alt="Filter by Tag" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="Filter by Tag" video=true style="width:75%;">}}
+
+The tag filtering supports boolean and wildcard syntax such that you can quickly identify: 
+* Metrics are tagged with a particular tag key, team: `team:*`
+* Metrics that are missing a particular tag key, team: `NOT team:*`
+
 
 ## Facet panel
 
