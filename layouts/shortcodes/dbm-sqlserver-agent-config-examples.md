@@ -42,7 +42,7 @@ instances:
 
 ### One agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures](/database_monitoring/architecture/) for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
-In these cases, it is recommended to limit to the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
+In these cases, Datadog recommends limiting the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
 ```yaml
 init_config:
 instances:
@@ -118,7 +118,7 @@ instances:
         - 'table:employees'
 ```
 ### Working with hosts through a remote proxy
-If the Agent must connect to a database host through a remote proxy, all telemetry is tagged with the hostname of the proxy rather than the database instance. Utilize the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
+If the Agent must connect to a database host through a remote proxy, all telemetry is tagged with the hostname of the proxy rather than the database instance. Use the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
 ```yaml
 init_config:
 instances:
