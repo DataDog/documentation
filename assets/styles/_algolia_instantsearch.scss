@@ -107,7 +107,7 @@
     .ais-Hits-item {
         & a {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             justify-content: flex-end;
             padding: 3px 12px 4px 12px;
 
@@ -212,11 +212,29 @@
     }
 
     .ais-Hits-item {
-        margin-bottom: 30px;
-    }
+        margin-bottom: 20px;
 
-    .ais-Hits-item a {
-        border: none;
+        & a {
+            border: none;
+            width: max-content;
+            max-width: 100%;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        & .ais-Hits-content {
+            width: auto;
+        }
+
+        & p {
+            font-size: 1rem;
+        }
+
+        & mark {
+            border-bottom: 1px solid #d6d6d6;
+        }
     }
 
     .ais-Hits-row {
@@ -225,17 +243,23 @@
         flex-wrap: wrap;
 
         & .ais-Hits-category,
-        & .ais-Hits-subcategory {
+        & .ais-Hits-subcategory,
+        & .ais-Hits-title {
             width: max-content;
             min-width: max-content;
+            color: #000000;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 24px;
         }
     }
 
     .ais-Hits-category-spacer {
-        font-size: 12px;
-        display: inline-flex;
-        align-items: center;
         padding: 0 12px;
+        color: #000000;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 22px;
     }
 
     #pagination {
