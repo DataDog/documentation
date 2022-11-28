@@ -1,11 +1,13 @@
 ---
 title: ネットワークパフォーマンスモニタリングガイド
-kind: ガイド
+kind: guide
 private: true
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: ネットワークパフォーマンスモニタリングガイド
 ---
 
 {{< whatsnext desc="" >}}

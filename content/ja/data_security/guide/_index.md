@@ -1,13 +1,15 @@
 ---
 aliases:
 - /ja/security/guide/
-kind: ガイド
+kind: guide
 private: true
 title: セキュリティガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: セキュリティガイド
 ---
 
 

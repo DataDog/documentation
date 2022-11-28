@@ -1,11 +1,13 @@
 ---
-kind: ガイド
+kind: guide
 private: true
 title: 開発者ガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: 開発者ガイド
 ---
 
 {{< whatsnext desc="一般:" >}}

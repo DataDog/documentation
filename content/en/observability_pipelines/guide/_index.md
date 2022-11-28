@@ -9,6 +9,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Observability Pipelines Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}

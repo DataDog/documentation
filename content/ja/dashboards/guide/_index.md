@@ -3,13 +3,15 @@ aliases:
 - /ja/graphing/guide/
 - /ja/faq/treemap-graph-visualization-can-i-use-this-elsewhere/
 disable_toc: true
-kind: ガイド
+kind: guide
 private: true
 title: グラフ作成ガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: グラフ作成ガイド
 ---
 
 {{< whatsnext desc="一般ガイド:" >}}

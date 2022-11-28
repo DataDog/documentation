@@ -16,6 +16,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Events Guides
 ---
 
 An event represents any record of activity noteworthy for engineers (devs, ops, and security). 

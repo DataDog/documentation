@@ -15,6 +15,8 @@ cascade:
     algolia:
         rank: 10
         tags: ["api_latest"]
+        category: API
+        subcategory: API Reference
 ---
 
 {{< h2 >}}API Reference{{< /h2 >}}

@@ -10,6 +10,8 @@ cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: Guide
+        subcategory: Metrics Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}

@@ -1,11 +1,13 @@
 ---
-kind: ガイド
+kind: guide
 private: true
 title: データベースモニタリングガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: データベースモニタリングガイド
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

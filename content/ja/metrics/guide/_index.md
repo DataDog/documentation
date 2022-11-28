@@ -3,13 +3,15 @@ aliases:
 - /ja/metrics/custom_metrics/guide/
 description: メトリクスガイドのインデックス
 disable_sidebar: true
-kind: ガイド
+kind: guide
 private: true
 title: メトリクスガイド
 cascade:
     algolia:
         rank: 20
         tags: ["guide"]
+        category: ガイド
+        subcategory: メトリクスガイド
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}
