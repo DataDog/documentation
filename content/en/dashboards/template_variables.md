@@ -45,7 +45,7 @@ After creating a template variable, Datadog displays the number of sources using
 
 {{< img src="dashboards/template_variables/stats_tv_modal.png" alt="Template variable with several variables set" style="width:90%;">}}
 
-[Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
+[Use the template variables](#usage) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
 ### Logs, APM, and RUM queries
 
