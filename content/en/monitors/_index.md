@@ -79,7 +79,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 [1]: /mobile
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
-[4]: /monitors/create
+[4]: /monitors/configuration
 [5]: /monitors/notify
 [6]: /monitors/notify/downtimes
 [7]: /monitors/manage

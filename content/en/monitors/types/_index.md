@@ -3,9 +3,9 @@ title: Monitor Types
 kind: documentation
 description: "Monitor Types"
 aliases:
-- /monitors/monitor_types/
-- /monitors/create/types/
-- /monitors/create/#monitor-types
+  - /monitors/monitor_types/
+  - /monitors/create/types/
+  - /monitors/create/#monitor-types
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
