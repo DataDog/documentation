@@ -1,4 +1,49 @@
 {{ define "main" }}
+<style>
+  .announcement .main h5 {
+  pointer-events:all;
+  }
+  .main pre {
+    margin:0;
+  }
+  .main h5:before {
+    display: none;
+  }
+  .main .chroma {
+    max-height: 350px;
+    overflow-wrap: break-word;
+    white-space: inherit;
+  }
+
+  .main .code-snippet-wrapper {
+    margin-right: 0;
+  }
+  .code-snippet-wrapper {
+    padding-right: 0 !important;
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  #accordion .btn,
+  .example-accordion .btn,
+  .code-snippet-wrapper button:disabled,
+  .code-snippet-wrapper button[disabled] {
+    font-weight: bold;
+    color: #632ca6;
+  }
+  #accordion .btn.collapsed,
+  .example-accordion .btn.collapsed {
+    color: #666;
+  }
+  #accordion pre,
+  .example-accordion pre {
+    border-bottom: 3px solid rgba(119,0,255,.3);
+  }
+  .code-snippet-wrapper button:disabled,
+  .code-snippet-wrapper button[disabled], {
+    opacity:1;
+  }
+</style>
   <h1 class="pb-0">{{ .Title }}</h1>
 
   {{/* $s := (index .Site.Data.reference "schema.deref") */}}
@@ -10,7 +55,7 @@
     {{ range $source := $t.sources }}
       <div style="padding:10px; border-bottom:1px solid grey">
         {{/* $def_lookup_name := (replace (index (index $source.allOf 0) "$ref") "#/definitions/" "") */}}
-        <h3>{{ $source._metadata.logical_name }}</h3>
+        <h3>{{ $source.metadata.logical_name }}</h3>
         <h4>{{ $source.description }}</h4>
         {{/* (index $s.definitions $def_lookup_name) */}}
 
@@ -25,7 +70,7 @@
         </ul>
 
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $source._metadata.logical_name | lower }}-request-model">
+          <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $source.metadata.logical_name | lower }}-request-model">
             <div class="schema-table row">
               {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary">Expand All</p>{{ end }}
               <div class="col-12">
@@ -45,20 +90,20 @@
               </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $source._metadata.logical_name | lower }}-request-example">
+          <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $source.metadata.logical_name | lower }}-request-example">
              <div class="code-snippet-wrapper">
                 <div class="code-snippet">
 
-                  <div class="example-accordion" id="accordion-parent">
+                  <div class="example-accordion" id="{{ $source.metadata.logical_name | lower }}-accordion-parent">
                     <div class="card">
                       <div class="card-header p-0">
                         <h5 class="m-0">
-                          <button class="btn btn-link" data-toggle="collapse" data-target="#{{ $source._metadata.logical_name | lower }}-example-simple" aria-expanded="true" aria-controls="collapseOne">
+                          <button class="btn btn-link font-bold" data-toggle="collapse" data-target="#{{ $source.metadata.logical_name | lower }}-example-simple" aria-expanded="true" aria-controls="collapseOne">
                             Simple
                           </button>
                         </h5>
                       </div>
-                      <div id="{{ $source._metadata.logical_name | lower }}-example-simple" class="collapse show" data-parent="#accordion-parent">
+                      <div id="{{ $source.metadata.logical_name | lower }}-example-simple" class="collapse show" data-parent="#{{ $source.metadata.logical_name | lower }}-accordion-parent">
                         <div class="card-body p-0 code-snippet">
                             <div class="code-button-wrapper position-absolute">
                                 <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
@@ -80,12 +125,12 @@
                     <div class="card">
                       <div class="card-header p-0">
                         <h5 class="m-0">
-                          <button class="btn btn-link" data-toggle="collapse" data-target="#{{ $source._metadata.logical_name | lower }}-example-advanced" aria-expanded="true" aria-controls="collapseOne">
+                          <button class="btn btn-link collapsed font-bold" data-toggle="collapse" data-target="#{{ $source.metadata.logical_name | lower }}-example-advanced" aria-expanded="true" aria-controls="collapseOne">
                             Advanced
                           </button>
                         </h5>
                       </div>
-                      <div id="{{ $source._metadata.logical_name | lower }}-example-advanced" class="collapse" data-parent="#accordion-parent">
+                      <div id="{{ $source.metadata.logical_name | lower }}-example-advanced" class="collapse" data-parent="#{{ $source.metadata.logical_name | lower }}-accordion-parent">
                         <div class="card-body p-0 code-snippet">
                             <div class="code-button-wrapper position-absolute">
                                 <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>

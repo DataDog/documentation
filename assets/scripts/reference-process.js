@@ -38,6 +38,8 @@ $RefParser.dereference(fileData)
       entries.forEach(([key, value]) => {
           let entryData = {
             //"simple": value.allOf[1],
+            "description": value.description || "",
+            "metadata": value._metadata || {},
             "simple": exampleToml(value.allOf[1]),
             "advanced": exampleToml(value.allOf[1], value.allOf[0]),
             "html": {}

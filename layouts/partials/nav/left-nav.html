@@ -7,7 +7,7 @@
 {{ $ctx := . }}
 {{ $menu := .Site.Menus.main }}
 {{/* Menu identifiers to apply class to */}}
-{{ $excludeAsyc := (slice "api" "dev_tools_metrics_api" "dev_tools_events_api" "integrations_top_level" "tracing api" "watchdog_top_level" "glossary_top_level" "video_top_level" "help_top_level" "other_integrations") }}
+{{ $excludeAsyc := (slice "api" "dev_tools_metrics_api" "dev_tools_events_api" "integrations_top_level" "tracing api" "watchdog_top_level" "glossary_top_level" "video_top_level" "help_top_level" "other_integrations" "observability_pipelines_reference") }}
 
 {{ $path := (printf "%s/" $.Site.Params.branch) }}
 
@@ -97,7 +97,7 @@
                         </div>
                     </a>
                 </li>
-            {{ end }} 
+            {{ end }}
         </ul>
-    {{ end }}   
+    {{ end }}
 {{ end }}
