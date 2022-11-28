@@ -71,7 +71,7 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 
 #### Limit edit access
 
-By default, all users can view, edit, or delete security rules.
+By default, all users have full access to security rules.
 
 Use granular access controls to limit the [roles][10] that may edit a single rule:
 1. Click on the three dot menu for the rule.
