@@ -71,6 +71,8 @@ Professional services
 
 To request access to the private Marketplace repository, email <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. A Marketplace offering requires files and information such as pricing plans. Once you have been granted access, you can review an [example pull request][12] in the Marketplace repository with annotations and best practices.
 
+For more information, see [Develop a Marketplace Offering][].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -87,3 +89,4 @@ To request access to the private Marketplace repository, email <a href="mailto:m
 [10]: https://chat.datadoghq.com/
 [11]: /developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
+[13]: /developers/marketplace/offering
