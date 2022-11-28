@@ -26,8 +26,13 @@ const searchBoxContainer = document.querySelector('#searchbox');
 const hitsContainerContainer = document.querySelector('.hits-container');
 const hitsContainer = document.querySelector('#hits');
 const filtersDocs = `language: ${pageLanguage}`;
+let basePathName = '';
 let numHits = 5;
 let hitComponent = searchbarHits;
+
+if (document.documentElement.dataset.commitRef) {
+    basePathName = `/${document.documentElement.dataset.commitRef}/`;
+}
 
 if (searchResultsPage) {
     numHits = 10;
@@ -113,13 +118,13 @@ if (searchBoxContainer) {
         const handleSearchbarKeydown = (e) => {
             if (e.code === 'Enter') {
                 e.preventDefault();
-                window.location.pathname = 'search';
+                window.location.pathname = `${basePathName}search`;
             }
         };
 
         const handleSearchbarSubmitClick = () => {
             if (document.querySelector('.ais-SearchBox-input').value) {
-                window.location.pathname = 'search';
+                window.location.pathname = `${basePathName}search`;
             }
         };
 
