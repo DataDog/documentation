@@ -31,20 +31,12 @@ This page provides instructions for creating an API integration in the `marketpl
 
 ## Setup
 
-### Prerequisites
-
-- You must have an [API key][10] and [application key][11].
-- You know which [Datadog site][12] you want to use.
-
-An API key is required to submit data to a Datadog API endpoint. An application key is required to query data from Datadog or to create resources within the Datadog site. For more information, see [API and Application Key][11].
-
-Create a connection to Datadog in your company's platform using the API key, application key, and site URL, that allows users to configure and install the integration outside of Datadog.
 
 ## Create an OAuth client
 
 Datadog recommends setting up an [OAuth client][13] to securely authorize third-party application access for your integrations. For more information, see [OAuth for Integrations][14] and [Authorization Endpoints][15].
 
-## Set up a directory and clone the Integrations Extras repository
+## Set up a directory and clone the Marketplace repository
 
 1. Create a `dd` directory:
 
@@ -52,9 +44,9 @@ Datadog recommends setting up an [OAuth client][13] to securely authorize third-
    
    The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
 
-2. Clone the `integrations-extras` repository:
+2. Clone the `marketplace` repository:
 
-   {{< code-block lang="shell" >}}git clone git@github.com:DataDog/integrations-extras.git{{< /code-block >}}
+   {{< code-block lang="shell" >}}git clone git@github.com:DataDog/marketplace.git{{< /code-block >}}
 
 ## Install and configure the Datadog development toolkit
 
@@ -67,8 +59,8 @@ Before you begin, make sure you meet the following prerequisites:
 
 Install and configure the development toolkit:
 
-1. Make sure you're inside the `integrations-extras` directory:
-   {{< code-block lang="shell" >}}cd $HOME/dd/integrations-extras{{< /code-block >}}
+1. Make sure you're inside the `marketplace` directory:
+   {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
 
 2. Set up a Python virtual environment:
    {{< code-block lang="shell" >}}
@@ -82,27 +74,27 @@ Install and configure the development toolkit:
 
    If you are using the Z Shell, you may need to use escaped characters by running `pip3 install datadog-checks-dev\[cli\]`.
 
-4. Set `integrations-extras` as the default working repository:
+4. Set `marketplace` as the default working repository:
    {{< code-block lang="shell" >}}
-   ddev config set integrations-extras $HOME/dd/integrations-extras
-   ddev config set repo integrations-extras{{< /code-block >}}
+   ddev config set marketplace $HOME/dd/marketplace
+   ddev config set repo marketplace{{< /code-block >}}
 
-   If you used a directory other than `$HOME/dd` to clone the `integrations-extras` directory, use the following command to set your working repository:
+   If you used a directory other than `$HOME/dd` to clone the `marketplace` directory, use the following command to set your working repository:
 
    {{< code-block lang="shell" >}}
-   ddev config set integrations-extras <PATH/TO/INTEGRATIONS-EXTRAS>
-   ddev config set repo integrations-extras{{< /code-block >}}
+   ddev config set marketplace <PATH/TO/MARKETPLACE>
+   ddev config set repo marketplace{{< /code-block >}}
 
 ## Populate the integration tile scaffolding
 
-Run the `ddev` command to generate a skeleton of the folders and files needed for your integration. The options you use with the command are different depending on what type of integration you are developing. For a full list of the files created by the `ddev` command, see [Integrations assets][18].
+Run the `ddev` command to generate a skeleton of the folders and files needed for your integration. The options you use with the command are different depending on what type of integration you are developing. For a full list of the files created by the `ddev` command, see [Integrations assets][18]. Since all the code is hosted on the partner's end, only a tile-only listing is required.
 
 ### Create an informational tile only listing
 
 To create the informational tile-only listing's scaffolding:
 
-1. Make sure you're inside the `integrations-extras` directory:
-   {{< code-block lang="shell" >}}cd $HOME/dd/integrations-extras{{< /code-block >}}
+1. Make sure you're inside the `marketplace` directory:
+   {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
 2. Run the `ddev` command with the `-t tile` option
    {{< code-block lang="shell" >}}ddev create -t tile "<Offering Name>"{{< /code-block >}}
 
@@ -179,7 +171,7 @@ Once you have access to the [`marketplace` repository][19], open a pull request 
 
 ## Review process
 
-Once your pull request passes all the checks, reviewers from the `Datadog/agent-integrations` and `Datadog/documentation` teams provide suggestions and feedback on best practices.
+Once your pull request passes all the checks, reviewers from the `Datadog/marketplace-product-management`, `Datadog/marketplace-review`, and `Datadog/documentation` teams provide suggestions and feedback on best practices.
 
 Once you have addressed the feedback and re-requested reviews, these reviewers approve your pull request.
 
@@ -204,9 +196,6 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [7]: /api/latest/incidents/
 [8]: /api/latest/security-monitoring/
 [9]: /developers/#creating-your-own-solution
-[10]: /account_management/api-app-keys/#api-keys
-[11]: /account_management/api-app-keys/#application-keys
-[12]: /getting_started/site
 [13]: /developers/authorization/
 [14]: /developers/integrations/oauth_for_integrations/
 [15]: /developers/authorization/oauth2_endpoints/
