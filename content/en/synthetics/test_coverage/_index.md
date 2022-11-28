@@ -1,7 +1,7 @@
 ---
-title: Application Test Coverage
+title: Test Coverage
 kind: documentation
-description: The Test Coverage page recommends views and actions that need new Synthetic browser tests for fuller test coverage, and compares the number of Synthetic tests to real user behavior.
+description: The Test Coverage page recommends views and actions that need new Synthetic browser tests for fuller test coverage, and compares Synthetic steps to real user behavior.
 aliases:
   - /synthetics/dashboards/testing_coverage
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The [**Application Test Coverage** page][1] uses browser data collected from [RUM][2] and [Synthetic browser test results][3] to provide insights about the overall testing coverage of your RUM application. 
+The [**Test Coverage** page][1] uses browser data collected from [RUM][2] and [Synthetic browser test results][3] to provide insights about the overall testing coverage of your RUM application. 
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
