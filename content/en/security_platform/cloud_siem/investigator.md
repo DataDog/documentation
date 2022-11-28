@@ -10,10 +10,6 @@ further_reading:
   text: "Learn about the Security Signals Explorer"
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
-  The Cloud SIEM Investigator is in beta.
-{{< /beta-callout >}} 
-
 ## Overview
 
 <div class="alert alert-warning">Cloud SIEM Investigator currently only supports AWS CloudTrail logs.</div>
