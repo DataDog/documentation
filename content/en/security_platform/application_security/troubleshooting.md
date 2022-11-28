@@ -1,25 +1,25 @@
 ---
-title: Troubleshooting Application Security Monitoring
+title: Troubleshooting Application Security Management
 kind: documentation
 further_reading:
 - link: "/security_platform/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog Application Security Monitoring"
+  text: "Monitoring Threats with Datadog Application Security Management"
 - link: "/security_platform/application_security/getting_started/"
   tag: "Documentation"
-  text: "Get Started Using Application Security Monitoring to Detect Threats"
+  text: "Get Started Using Application Security Management to Detect Threats"
 - link: "/security_platform/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
 - link: "/security_platform/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Monitoring Works in Datadog"
+  text: "How Application Security Management Works in Datadog"
 ---
 
 
 ## Overview
 
-If you experience unexpected behavior with Datadog Application Security Monitoring (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
+If you experience unexpected behavior with Datadog Application Security Management (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
 ## ASM rate limits
 
@@ -304,15 +304,15 @@ For PHP, to start troubleshooting issues with the Datadog ASM extension, enable 
 The extension's `ini` file is usually found in `/etc/php/<version>/xxx/conf.d/98-ddtrace.ini`, but the location may differ depending on your installation. Look at the beginning of the `phpinfo()` output to identify the directory that is scanned for `.ini` files, if any. In the `.ini` file, set the following configuration options with the following:
 
 ```php
-datadog.appsec.log_level=‘debug’
-datadog.appsec.helper_extra_args=‘--log_level=debug’
-datadog.appsec.helper_log_file=‘/tmp/helper.log’
+datadog.appsec.log_level='debug'
+datadog.appsec.helper_extra_args='--log_level=debug'
+datadog.appsec.helper_log_file='/tmp/helper.log'
 ```
 
 The extension outputs logs to the default `php_error` log file. If there are no logs in the file, add the following to the `.ini` file:
 
 ```php
-datadog.appsec.log_file=’tmp/extension.log’
+datadog.appsec.log_file='tmp/extension.log'
 ```
 
 ### Installation fails to find PHP

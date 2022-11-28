@@ -1,7 +1,7 @@
 ---
 title: Group Widget
 kind: documentation
-description: "Group your widgets together in a Timeboard."
+description: "Group your widgets together in a dashboard widget."
 aliases:
     - /graphing/widgets/group/
 further_reading:

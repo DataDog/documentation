@@ -1,6 +1,7 @@
 {{- $ctx := .context -}}
 {{- $filters := .filters -}}
-{{- $listGroups := .listgroups }}
+{{- $listGroups := .listgroups -}}
+{{- $transformGroupTitle := .transformGroupTitle | default false -}}
 
 {{ with $filters }}
 <div class="controls" data-ref="controls">
@@ -13,15 +14,15 @@
 {{ end }}
 
 <div class="form-group clearfix">
-  <input type="input" data-ref="search" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords"/>
+  <input type="input" data-ref="search" class="form-control grouped-item-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords"/>
 </div>
 
 <div class="list-group">
   <div class="js-empty-results d-none font-semibold"></div>
   {{ range $i, $v := $listGroups }}
   <div class="js-group js-group-{{ $i }}">
-    <div class="js-group-header mb-1 active">
-      <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
+    <div class="js-group-header mb-1 d-flex align-items-center active">
+      <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
         {{ range last 1 $v.Pages }}
           {{ $basename := .Params.integration_id | default .Params.source }}
           {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") }}
@@ -32,15 +33,19 @@
           {{ end }}
         {{ end }}
       </div>
-      <div class="d-inline font-semibold ml-1">
-        <!-- If first word/only word is 3 letters long e.g aws or gcp then lets capitalize -->
-        {{ $words := (split (humanize $v.Key) " ") }}
-        {{ range $index, $word := $words }}
-          {{ if (and (eq $index 0) (eq (len $word) 3)) }}
-            {{ $word | upper }}
-          {{ else }}
-            {{ $word | title }}
+      <div class="font-semibold ml-1 group-header-text">
+        {{ if $transformGroupTitle }}
+          <!-- If first word/only word is 3 letters long e.g aws or gcp then lets capitalize -->
+          {{ $words := (split (humanize $v.Key) " ") }}
+          {{ range $index, $word := $words }}
+            {{ if (and (eq $index 0) (eq (len $word) 3)) }}
+              {{ $word | upper }}
+            {{ else }}
+              {{ $word | title }}
+            {{ end }}
           {{ end }}
+        {{ else }}
+          {{ $v.Key }}
         {{ end }}
       </div>
       <div class="js-group-header__arrow">></div>

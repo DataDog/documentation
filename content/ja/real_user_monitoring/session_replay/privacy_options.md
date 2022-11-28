@@ -26,7 +26,7 @@ title: セッションリプレイのプライバシーオプション
 
 プライバシー設定を有効にするには、JavaScript の構成で `defaultPrivacyLevel` を `mask-user-input`、`mask`、または `allow` に設定します。
 
-{{< code-block lang="javascript" filename="package.json" disable_copy="false" collapsible="true" >}}
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
@@ -37,13 +37,15 @@ datadogRum.init({
     //  env: 'production',
     //  version: '1.0.0',
     sampleRate: 100,
-    premiumSampleRate: 100,
+    sessionReplaySampleRate: 100,
+    trackResources: true,
+    trackLongTasks: true,
     trackInteractions: true,
-    defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow' 
+    defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 
 datadogRum.startSessionReplayRecording();
-{{< /code-block >}}
+```
 
 構成を更新すると、以下のプライバシーオプションで HTML ドキュメントの要素を上書きすることができます。
 
@@ -63,7 +65,7 @@ datadogRum.startSessionReplayRecording();
 
 ### 許可モード
 
-パスワード、メールアドレス、電話番号などの HTML 入力要素や、クレジットカード番号、有効期限、セキュリティコードなどの `autocomplete` 属性を持つ要素を除き、マスクされていない状態で記録されます。
+マスクされていないすべてが記録されます。
 
 {{< img src="real_user_monitoring/session_replay/allow.png" alt="許可モード" style="width:70%;">}}
 
@@ -90,6 +92,12 @@ datadogRum.startSessionReplayRecording();
 カート内の金額がアスタリスクに置き換えられます。
 
 {{< img src="real_user_monitoring/session_replay/example-mask.png" alt="マスクモードによる金額の難読化の例" style="width:70%;">}}
+
+## プライバシーに関する制限
+
+エンドユーザーのプライバシーを保護するため、プライバシー設定に関わらず、以下の HTML 要素は**常にマスクされます**。
+- `password`、`email`、`tel` 型の入力要素
+- クレジットカード番号、有効期限、セキュリティコードなどの `autocomplete` 属性を持つ要素
 
 ## 高度なプライバシーオプション
 
@@ -119,6 +127,6 @@ Datadog は、RUM とセッションリプレイにさらなるプライバシ�
 
 </div>
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

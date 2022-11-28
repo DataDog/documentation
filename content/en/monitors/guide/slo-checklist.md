@@ -63,7 +63,7 @@ _Example: the latency of all user requests should be less than 250 ms 99% of the
 
 1. Select a single monitor,
 2. Select multiple monitors (up to 20), or
-3. Select a single multi-alert monitor and pick specific monitor groups (up to 20) to include in
+3. Select a single multi alert monitor and pick specific monitor groups (up to 20) to include in
    the SLO calculation
 
 If you need to create a new monitor go to the [Monitor create][2] page.

@@ -13,6 +13,9 @@ further_reading:
 - link: profiler/profiler_troubleshooting
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
+- link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
+  tag: GitHub
+  text: Datadog Continuous Profiler で .NET アプリケーションのパフォーマンスを最適化する
 kind: ドキュメント
 title: .NET プロファイラーの有効化
 type: multi-code-lang
@@ -43,7 +46,7 @@ Windows Server バージョン 2012 以降
 対応言語
 : C#、F#、Visual Basic など、.NET ランタイムをターゲットとするあらゆる言語。
 
-## インストール
+## APM に Datadog Agent を構成する
 
 <div class="alert alert-warning">
 <strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば Datadog の .NET トレーサーでプロファイラーを有効にした状態）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
@@ -76,7 +79,7 @@ Windows Server バージョン 2012 以降
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Windows" %}}
 
@@ -86,7 +89,7 @@ Windows Server バージョン 2012 以降
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -116,7 +119,7 @@ Windows Server バージョン 2012 以降
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Internet Information Services (IIS)" %}}
 3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。
@@ -161,7 +164,7 @@ Windows Server バージョン 2012 以降
 5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Windows サービス" %}}
 3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。サービスのプロファイラーを有効にするには、サービスに関連付けられたレジストリキーに `DD_PROFILING_ENABLED` 環境変数を設定することが必要です。プロファイラーが単独で動作している場合 (トレーサーは非アクティブ)、オプションで `DD_SERVICE`、`DD_ENV`、`DD_VERSION` 環境変数を追加することができます。
@@ -219,7 +222,7 @@ Windows Server バージョン 2012 以降
 4. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Windows スタンドアロンアプリケーション" %}}
 3. コンソール、ASP.NET (Core)、Windows Forms、WPF などの非サービスアプリケーションでプロファイラーを構成して有効にするために、必要な環境変数を設定します。スタンドアロンアプリケーションのプロファイラーを有効にするには、`DD_PROFILING_ENABLED` 環境変数を設定する必要があります。プロファイラーが単独で動作している場合 (トレーサーは無効)、オプションで環境変数 `DD_SERVICE`、`DD_ENV`、`DD_VERSION` を設定することが可能です。推奨される方法は、これらを設定しアプリケーションを起動するバッチファイルを作成し、そのバッチファイルを使用してアプリケーションを実行することです。
@@ -279,7 +282,7 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 
 <br>
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 [プロファイラーの概要][4]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 

@@ -152,6 +152,13 @@ For more information, see [Ingestion Mechanisms][11].<br>
 The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRACES_PER_SECOND`). <br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent. <br>
 
+`DD_SPAN_SAMPLING_RULES`
+**Default**: `null`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][1].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans.
@@ -162,9 +169,14 @@ If specified, adds all of the specified tags to all generated spans.
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
+Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.
+
+`DD_TRACE_CLIENT_IP_ENABLED`
+: Enables client IP collection from relevant IP headers.<br>
+Added in version `2.19.0`.<br>
+**Default**: `false`<br>
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -181,7 +193,7 @@ Note that the delimiter is a comma and a space: `, `.
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
 
 `DD_TRACE_SERVICE_MAPPING`
-: Rename services using configuration. Accepts a map of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
+: Rename services using configuration. Accepts a comma-separated list of key-value pairs of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
@@ -287,7 +299,7 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
+[1]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
 [6]: /tracing/trace_collection/compatibility/dotnet-core#integrations

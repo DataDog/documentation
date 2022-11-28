@@ -102,6 +102,7 @@ type: multi-code-lang
      - [サンプリング](#sampling)
          - [アプリケーション側サンプリング](#application-side-sampling)
          - [優先度サンプリング](#priority-sampling)
+         - [シングルスパンサンプリング](#single-span-sampling)
      - [分散型トレーシング](#distributed-tracing)
      - [HTTP リクエストのキューイング](#http-request-queuing)
      - [処理パイプライン](#processing-pipeline)
@@ -176,7 +177,7 @@ macOS での `ddtrace` の使用は、開発ではサポートされています
 
 Microsoft Windows での `ddtrace` の使用は現在サポートされていません。コミュニティの貢献や課題は引き続き受け付けますが、優先順位は低いと判断します。
 
-## インストール
+## APM に Datadog Agent を構成する
 
 Ruby アプリケーションにトレースを追加するには、いくつかの簡単なステップを踏むだけです。
 
@@ -331,7 +332,7 @@ Agent がトレースデータをリッスンするプロトコルやポート�
 
 #### OpenTelemetry の構成
 
-OTLP を使用することで、`ddtrace` を使用せずに OpenTelemetry トレースを Datadog Agent に直接送信することができます。詳しくは、[Datadog Agent による OTLP Trace Ingestion](https://docs.datadoghq.com/tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/)を参照してください。
+OTLP を使用すれば、OpenTelemetry のトレースを直接 Datadog Agent に (`ddtrace`なしで) 送信することができます。詳しくは、[Datadog Agent での OTLP の取り込み](https://docs.datadoghq.com/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent)のドキュメントをご覧ください。
 
 ### アプリケーションと Datadog Agent を接続する
 
@@ -1535,40 +1536,68 @@ run app
 | `headers` | タグとして `rack.request` に追加する HTTP リクエストまたは応答ヘッダーのハッシュ。配列の値を持つ `request` と `response` キーを受け入れます（例: `['Last-Modified']`）。`http.request.headers.*` タグと `http.response.headers.*` タグをそれぞれ追加します。 | `{ response: ['Content-Type', 'X-Request-ID'] }` |
 | `middleware_names` | 最後に実行されたミドルウェアクラスを `rack` スパンのリソース名として使用する場合は、これを有効にします。`rails` インスツルメンテーションと一緒に有効にすると、`rails` が優先されます。該当する場合は `rack` リソース名をアクティブな `rails` コントローラーに設定します。使用するには `application` オプションが必要です。 | `false` |
 | `quantize` | 量子化のオプションを含むハッシュ。`:query` または `:fragment` を含めることができます。 | `{}` |
+| `quantize.base` | URL のベース (スキーム、ホスト、ポート) に関する振る舞いを定義します。`http.url` タグに URL ベースを保持し、`http.base_url` タグを設定しない場合は `:show` を、デフォルトで `http.url` タグから URL ベースを取り除き、パスを残して `http.base_url` を設定する場合は `nil` を指定できます。オプションは `quantize` オプションの中にネストする必要があります。 | `nil` |
 | `quantize.query` | URL 量子化のクエリ部分のオプションを含むハッシュ。`:show` または `:exclude` を含めることができます。以下のオプションを参照してください。オプションは `quantize` オプション内にネストする必要があります。 | `{}` |
-| `quantize.query.show` | 常に表示する値を定義します。デフォルトでは値を表示しません。文字列の配列、またはすべての値を表示するには `:all` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
-| `quantize.query.exclude` | 完全に削除する値を定義します。デフォルトでは何も除外しません。文字列の配列、またはクエリ文字列を完全に削除するには `:all` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
-| `quantize.fragment` | URL フラグメントの動作を定義します。デフォルトではフラグメントを削除します。URL フラグメントを表示するには `:show` を指定できます。オプションは `quantize` オプション内にネストする必要があります。 | `nil` |
+| `quantize.query.show` | 常に表示する値を定義します。文字列の配列、すべての値を表示するには `:all`、値を表示しない場合は `nil` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
+| `quantize.query.exclude` | 完全に削除する値を定義します。文字列の配列、クエリ文字列を完全に削除するには `:all`、何も除外しない場合は `nil` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
+| `quantize.query.obfuscate` | クエリ文字列をクエリする際の振る舞いを定義します。オプションのハッシュ、デフォルトの内部難読化設定を使用するには `:internal` を、難読化を無効にするには `nil` を指定することができます。難読化は文字列単位での操作で、キーバリュー単位での操作ではないことに注意してください。有効にすると、`query.show` はデフォルトで `:all` になります。オプションは `query` オプションの中にネストする必要があります。 | `nil` |
+| `quantize.query.obfuscate.with` | 難読化されたマッチを置換するための文字列を定義します。文字列を指定することができます。オプションは `query.obfuscate` オプションの中にネストする必要があります。 | `'<redacted>'` |
+| `quantize.query.obfuscate.regex` | クエリ文字列を冗長化するための正規表現を定義します。正規表現、またはデフォルトの内部正規表現を使用するには `:internal` を指定することができます。後者では、よく知られている機密データが冗長化されます。マッチした文字列は `query.obfuscate.with` に置き換えられて、完全に冗長化されます。オプションは `query.obfuscate` オプションの中にネストする必要があります。 | `:internal` |
+| `quantize.fragment` | URL フラグメントの動作を定義します。URL フラグメントを表示するには `:show` を、フラグメントを削除するには `nil` を指定できます。オプションは `quantize` オプション内にネストする必要があります。 | `nil` |
 | `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。 有効にするには、`true` に設定します。 | `false` |
 | `web_service_name` | フロントエンドサーバーリクエストのキュースパンのサービス名。（例: `'nginx'`） | `'web-server'` |
+
+非推奨のお知らせ
+- 将来のバージョンでは、`quantize.base` のデフォルトが `:exclude` から `:show` へと変更される予定です。自発的に `:show` に移行することを推奨します。
+- 将来のバージョンでは、`quantize.query.show` のデフォルトが `:all` に変更され、`quantize.query.obfuscate` が `:internal` に変更される予定です。自発的にこれらの将来の値に移行することを推奨します。
 
 **URL 量子化動作の構成**
 
 ```ruby
 Datadog.configure do |c|
-  # デフォルトの動作: すべての値が量子化され、フラグメントが削除されます。
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id&sort_by
-  # http://example.com/path?categories[]=1&categories[]=2 --> http://example.com/path?categories[]
+  # デフォルトの動作: すべての値が量子化され、base は削除され、fragment は削除されます。
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id&sort_by
+  # http://example.com:8080/path?categories[]=1&categories[]=2 --> /path?categories[]
 
-  # 'category_id' と完全に一致するクエリ文字列パラメーターの値を表示します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id=1&sort_by
+  # URL のベース (スキーム、ホスト、ポート) を削除します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id&sort_by#featured
+  c.tracing.instrument :rack, quantize: { base: :exclude }
+
+  # URL のベースを表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id&sort_by#featured
+  c.tracing.instrument :rack, quantize: { base: :show }
+
+  # 'category_id' に正確に一致するクエリ文字列パラメーターの値を表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id=1&sort_by
   c.tracing.instrument :rack, quantize: { query: { show: ['category_id'] } }
 
-  # すべてのクエリ文字列パラメーターのすべての値を表示します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id=1&sort_by=asc
+  # すべてのクエリ文字列パラメーターの値を表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id=1&sort_by=asc
   c.tracing.instrument :rack, quantize: { query: { show: :all } }
 
-  # 'sort_by' に完全に一致するクエリ文字列パラメーターを完全に除外します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id
+  # 'sort_by' に正確にマッチするクエリ文字列パラメーターを完全に除外します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id
   c.tracing.instrument :rack, quantize: { query: { exclude: ['sort_by'] } }
 
   # クエリ文字列を完全に削除します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path
   c.tracing.instrument :rack, quantize: { query: { exclude: :all } }
 
-  # URL フラグメントを表示します
-  # http://example.com/path?category_id=1&sort_by=asc#featured --> http://example.com/path?category_id&sort_by#featured
+  # URL のフラグメントを表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?category_id&sort_by#featured
   c.tracing.instrument :rack, quantize: { fragment: :show }
+
+  # クエリ文字列を難読化し、デフォルトですべての値を表示します
+  # http://example.com/path?password=qwerty&sort_by=asc#featured --> /path?<redacted>&sort_by=asc
+  c.tracing.instrument :rack, quantize: { query: { obfuscate: {} } }
+
+  # 与えられた正規表現を用いてクエリ文字列を難読化し、デフォルトで全ての値を表示します
+  # http://example.com/path?category_id=1&sort_by=asc#featured --> /path?<redacted>&sort_by=asc
+  c.tracing.instrument :rack, quantize: { query: { obfuscate: { regex: /category_id=\d+/ } } }
+
+  # カスタム編集文字列を使用してクエリ文字列を難読化します
+  # http://example.com/path?password=qwerty&sort_by=asc#featured --> /path?REMOVED&sort_by=asc
+  c.tracing.instrument :rack, quantize: { query: { obfuscate: { with: 'REMOVED' } } }
 end
 ```
 
@@ -2054,6 +2083,7 @@ end
 | `tracing.sampler`                                       |                                | `nil`                                                             | 高度な使用方法のみ。カスタムの `Datadog::Tracing::Sampling::Sampler` インスタンスを設定します。指定された場合、トレーサーはこのサンプラーを使用してサンプリングの動作を決定します。詳しくは [アプリケーション側サンプリング](#application-side-sampling) を参照してください。 |
 | `tracing.sampling.default_rate`                         | `DD_TRACE_SAMPLE_RATE`         | `nil`                                                             | トレースのサンプリングレートを `0.0` (0%) と `1.0` (100%) の間で設定します。詳しくは [アプリケーション側サンプリング](#application-side-sampling)を参照してください。                                                                                                  |
 | `tracing.sampling.rate_limit`                           | `DD_TRACE_RATE_LIMIT`          | `100` (毎秒)                                                | サンプリングするトレースの最大数/秒を設定します。トラフィック急増時の取り込み量オーバーを回避するためのレート制限を設定します。                                                                    |
+| `tracing.sampling.span_rules`                           | `DD_SPAN_SAMPLING_RULES`、`ENV_SPAN_SAMPLING_RULES_FILE` | `nil`                                    | [シングルスパンサンプリング](#single-span-sampling)ルールを設定します。これらのルールにより、それぞれのトレースがドロップされた場合でもスパンを保持することができます。                                                                                              |
 | `tracing.report_hostname`                               | `DD_TRACE_REPORT_HOSTNAME`     | `false`                                                           | トレースにホスト名タグを追加します。                                                                                                                                                                                                              |
 | `tracing.test_mode.enabled`                             | `DD_TRACE_TEST_MODE_ENABLED`   | `false`                                                           | テストスイートでトレースを使用するための、テストモードを有効または無効にします。                                                                                                                                                                         |
 | `tracing.test_mode.trace_flush`                         |                                | `nil`                                                             | トレースフラッシュの動作を決定するオブジェクト。                                                                                                                                                                                           |
@@ -2197,6 +2227,12 @@ trace.reject!
 # トレースを保持します
 trace.keep!
 ```
+
+#### シングルスパンサンプリング
+
+トレースレベルのサンプリングルールによってそれぞれのトレースが削除されてもスパンを保持することができるサンプリングルールを構成することができます。
+
+[//]: # (TODO: See <Single Span Sampling documentation URL here> for the full documentation on Single Span Sampling.)
 
 ### 分散型トレーシング
 

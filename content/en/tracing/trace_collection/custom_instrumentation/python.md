@@ -63,7 +63,7 @@ def make_sandwich_request(request):
 API details for the decorator can be found for `ddtrace.Tracer.wrap()` [here][1].
 
 
-[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
+[1]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Context Manager" %}}
 

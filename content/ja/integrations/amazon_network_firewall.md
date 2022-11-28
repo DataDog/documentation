@@ -34,7 +34,7 @@ AWS Network Firewall は、VPC の境界でトラフィックを絞り込むこ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Network Firewall` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Network Firewall` が有効になっていることを確認します。
 
 2. [Datadog - AWS Amazon Network Firewall インテグレーション][3]をインストールします。
 
@@ -79,8 +79,8 @@ AWS Amazon Network Firewall インテグレーションには、サービスチ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-network-firewall
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-network-firewall
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

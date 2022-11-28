@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 500 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 600 built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -59,8 +59,8 @@ nav_sections:
       - title: Log Management
         link: logs/
         icon: log
-        desc: Process, monitor, and archive your ingested logs 
-      - title: Security Platform
+        desc: Process, monitor, and archive your ingested logs
+      - title: Security
         link: security_platform/
         icon: security-platform
         desc: Detect threats and misconfigurations in your applications and infrastructure
@@ -68,6 +68,10 @@ nav_sections:
         link: synthetics/
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Continuous Testing
+        link: continuous_testing/
+        icon: continuous-testing
+        desc: Perform codeless integration and end-to-end testing with CI/CD providers
       - title: RUM & Session Replay
         link: real_user_monitoring/
         icon: rum
@@ -96,6 +100,10 @@ nav_sections:
         link: database_monitoring/
         icon: database-2
         desc: Explore enriched dashboards, query metrics, and query samples
+      - title: Observability Pipelines
+        link: observability_pipelines/
+        icon: pipelines
+        desc: Manage and monitor your telemetry pipelines
   - nav_section:
     - name: 'Configuration'
     - navtiles:

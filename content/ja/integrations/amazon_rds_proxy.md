@@ -36,7 +36,7 @@ Amazon RDS Proxy は、Amazon Relational Database Service (RDS) 用のフルマ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][3]で、メトリクスの収集の `RDS Proxy` にチェックが入っていることを確認します。
+1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `RDS Proxy` が有効になっていることを確認します。
 2. [Datadog - Amazon RDS Proxy インテグレーション][4]をインストールします。
 
 ### ログの収集
@@ -72,8 +72,8 @@ Amazon RDS Proxy インテグレーションには、サービスのチェック
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_rds/
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_rds_proxy
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://app.datadoghq.com/integrations/amazon-rds-proxy
 [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-setup.html#rds-proxy-creating
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#log-collection
 [7]: https://app.datadoghq.com/logs

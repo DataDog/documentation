@@ -20,7 +20,7 @@ further_reading:
   text: "Detect security threats with anomaly detection rules"
 - link: "/security_platform/notifications/variables/"
   tag: "Documentation"
-  text: "Learn more about Security Platform notification variables"
+  text: "Learn more about Security notification variables"
 aliases:
     - /cloud_siem/detection_rules/security_monitoring/
     - /security_platform/detection_rules/cloud_siem/

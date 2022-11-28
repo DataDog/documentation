@@ -37,7 +37,7 @@ version: '1.0'
 
 ### Datadog Agent を使用しない場合のインストール
 
-1. [AWS インテグレーションタイル][4]のメトリクス収集で、`ElastiCache` をオンにします。
+1. [AWS インテグレーションページ][4]で、`Metric Collection` タブの下にある `ElastiCache` が有効になっていることを確認します。
 2. Amazon ElastiCache のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][5]に追加します。詳細については、AWS ウェブサイト上の [ElastiCache ポリシー][6]を参照してください。
 
     | AWS アクセス許可                      | 説明                                                           |
@@ -132,10 +132,10 @@ AWS ElastiCache インテグレーションには、サービスのチェック�
 [1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
 [2]: https://www.coursera.org
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [6]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html
-[7]: https://app.datadoghq.com/account/settings#integrations/amazon_elasticache
+[7]: https://app.datadoghq.com/integrations/amazon-elasticache
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticache/amazon_elasticache_metadata.csv
 [10]: https://docs.datadoghq.com/ja/help/

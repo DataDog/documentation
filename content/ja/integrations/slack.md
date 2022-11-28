@@ -186,7 +186,7 @@ Slack インテグレーションは、Datadog サイトの[インテグレー�
 
 Slack インテグレーションをセットアップしたら、通知メッセージに `@slack` を入力すると、通知の送信先として使用可能なチャンネルがリストされます。
 
-モニターのメッセージテンプレートで `@username` を `< >` で囲み（例: `@slack-SLACK_CHANNEL <@USERNAME>）、Slack 通知内で定義されているユーザーに **@ 通知**します。
+モニターのメッセージテンプレートで `@username` を `< >` で囲み（例: `@slack-SLACK_CHANNEL <@USERNAME>` または `@slack-SLACK_ACCOUNT-SLACK_CHANNEL <@USERNAME>`）、Slack 通知内で定義されているユーザーに **@ 通知**します。
 
 **注**: 通知の際に問題が発生した場合、Slackの表示名の代わりに `username` をお使いください。 `username` は **ユーザー名** 以下の  [Slack account settings][1] にあります。
 

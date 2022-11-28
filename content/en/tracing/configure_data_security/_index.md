@@ -178,12 +178,6 @@ apm_config:
 
 Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, see [Span Tags Semantics][3].
 
-### Configuring a client IP header
-
-Datadog automatically attempts to resolve `http.client_ip` from a number of well known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library looks only in the specified header for the client IP.
-
-If you do not wish to collect the client IP value, set the `DD_TRACE_CLIENT_IP_HEADER_DISABLED` environment variable to `true`. It is `false` by default.
-
 ### Redacting the query in the URL
 
 The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
@@ -218,6 +212,10 @@ apm_config:
     - name: "http.url"
       pattern: "token/(.*)"
       repl: "?"
+    # Remove trailing "/" character in resource names
+    - name: "resource.name"
+      pattern: "(.*)\/$"
+      repl: "$1"
     # Replace all the occurrences of "foo" in any tag with "bar":
     - name: "*"
       pattern: "foo"
@@ -238,6 +236,11 @@ DD_APM_REPLACE_TAGS=[
         "repl": "?"
       },
       {
+        "name": "resource.name"
+        "pattern": "(.*)\/$"
+        "repl": "$1"
+      },
+      {
         "name": "*",
         "pattern": "foo",
         "repl": "bar"
@@ -252,7 +255,7 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-**Note**: Put this environment variable in the trace-agent container if you are using the recommended [daemonset configuration][1].
+Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1], or use `agents.containers.traceAgent.env` in the `values.yaml` file if you are using [helm chart][2].
 
 ```datadog-agent.yaml
 - name: DD_APM_REPLACE_TAGS
@@ -261,6 +264,11 @@ DD_APM_REPLACE_TAGS=[
               "name": "http.url",
               "pattern": "token/(.*)",
               "repl": "?"
+            },
+            {
+              "name": "resource.name"
+              "pattern": "(.*)\/$"
+              "repl": "$1"
             },
             {
               "name": "*",
@@ -274,12 +282,13 @@ DD_APM_REPLACE_TAGS=[
           ]'
 ```
 
-[1]: /agent/kubernetes/?tab=daemonset
+[1]: /containers/kubernetes/installation/?tab=daemonset
+[2]: /containers/kubernetes/installation/?tab=helm
 {{% /tab %}}
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
 ```
 
 {{% /tab %}}
@@ -319,6 +328,25 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
  
 To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable to `false` in your instrumented application.
+
+## PCI compliance for APM
+
+{{< site-region region="us" >}}
+
+<div class="alert alert-warning">
+PCI compliance for APM is only available for new Datadog orgs created in the <a href="/getting_started/site/">US1 site</a>.
+</div>
+
+PCI compliance for APM is available when you create a new Datadog organization. [Audit Trail][1] must be enabled and remain enabled to maintain PCI compliance. Contact [Datadog support][2] to enable PCI-compliant APM.
+
+[1]: /account_management/audit_trail/
+[2]: /help/
+
+{{< /site-region >}}
+
+{{< site-region region="us2,us3,us5,eu,gov" >}}
+PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
+{{< /site-region >}}
 
 [1]: /help/
 [2]: /tracing/glossary/#trace

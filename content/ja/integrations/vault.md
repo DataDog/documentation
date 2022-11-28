@@ -42,7 +42,7 @@ draft: false
 git_integration_title: vault
 integration_id: vault
 integration_title: Vault
-integration_version: 3.3.1
+integration_version: 3.3.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

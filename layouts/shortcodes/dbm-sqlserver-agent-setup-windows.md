@@ -11,7 +11,8 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    tags:  # optional
+    include_ao_metrics: true  # Optional: For AlwaysOn users
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
@@ -38,7 +39,7 @@ The recommended ODBC driver is [Microsoft ODBC Driver][3]. Ensure the driver is 
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][6].

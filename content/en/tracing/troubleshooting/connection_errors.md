@@ -260,7 +260,7 @@ If the configuration is correct, but you’re still seeing connection errors, [c
 [3]: /agent/guide/agent-commands/#agent-information
 [4]: /help/
 [5]: /agent/troubleshooting/send_a_flare/
-[6]: https://app.datadoghq.com/apm/docs
+[6]: https://app.datadoghq.com/apm/service-setup
 [7]: /agent/amazon_ecs/apm/?tab=ec2metadataendpoint
 [8]: /integrations/ecs_fargate/#trace-collection
 [9]: /integrations/eks_fargate/#traces-collection

@@ -1,5 +1,5 @@
 ---
-title: Frameworks and Industry Benchmarks
+title: Findings Reports
 kind: documentation
 further_reading:
 - link: "security_platform/default_rules"

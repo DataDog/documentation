@@ -115,7 +115,7 @@ When you open it, the visualization of the profile looks similar to this:
 
 This is a flame graph. The most important things it shows are how much CPU each method used (since this is a CPU profile) and how each method was called. For example, reading from the second row from the top, you see that `Thread.run()` called `QueuedThreadPool$2.run()` (amongst other things), which called `QueuedThreadPool.runjob(Runnable)`, which called `ReservedTheadExecutor$ReservedThread.run()`, and so on.
 
-Zooming in to one area on the bottom of the flame graph, a tooltip shows that roughly 390ms (0.90%) of CPU time was spent within this `parse()` function:
+Zooming in to one area on the bottom of the flame graph, a tooltip shows that roughly 309ms (0.90%) of CPU time was spent within this `parse()` function:
 
 {{< img src="profiler/intro_to_profiling/flame_graph_parse.png" alt="Flame graph parse() frame">}}
 
@@ -123,7 +123,7 @@ Zooming in to one area on the bottom of the flame graph, a tooltip shows that ro
 
 {{< img src="profiler/intro_to_profiling/flame_graph_length.png" alt="Flame graph String.length() frame">}}
 
-That means 278 milliseconds were spent directly in `parse()`: 390ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
+That means 197 milliseconds were spent directly in `parse()`: 309ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
 
 It's worth calling out that the flame graph _does not_ represent the progression of time. Looking at this part of the profile, `Gson$1.write()` didn't run before `TypeAdapters$16.write()` but it may not have run after it either.
 

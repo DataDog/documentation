@@ -15,13 +15,17 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "dashboards/functions/algorithms/#anomalies"
+  tag: "Documentation"
+  text: Anomalies function
+
 ---
 
 ## Overview
 
-Anomaly detection is an algorithmic feature that identifies when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard to monitor with threshold-based alerting.
+Anomaly detection is an algorithmic feature that identifies when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is suited for metrics with strong trends and recurring patterns that are hard to monitor with threshold-based alerting.
 
-For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic is normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. Because the number increases daily, any threshold would be quickly outdated, whereas anomaly detection can alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
+For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic is normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. Because the number increases daily, any threshold would be outdated, whereas anomaly detection can alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
 ## Monitor creation
 
@@ -29,7 +33,7 @@ To create an [anomaly monitor][1] in Datadog, use the main navigation: *Monitors
 
 ### Define the metric
 
-Any metric currently reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
+Any metric reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
 **Note**: The `anomalies` function uses the past to predict what is expected in the future, so using it on a new metric may yield poor results.
 
 After defining the metric, the anomaly detection monitor provides two preview graphs in the editor:
@@ -51,11 +55,11 @@ Trigger window
 Recovery window
 : How much time is required for the metric to not be considered anomalous so the alert recovers.
 
-#### Advanced options
+### Advanced options
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="advanced options"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds"  style="width:80%;">}}
 
 
 Deviations
@@ -76,7 +80,8 @@ Rollup
 Thresholds
 : The percentage of points that need to be anomalous for alerting, warning, and recovery.
 
-##### Seasonality
+### Seasonality
+<div class="alert alert-info"><strong>Note</strong>: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient. For example, a weekly seasonality requires at least two weeks of data.</div>
 
 Hourly
 : The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
@@ -90,10 +95,7 @@ Weekly
 Monthly
 : The algorithm expects that a given day of the month behaves like past days of the month, for example the first day of the month behaves like past first days of a month. Available for the `agile` algorithm.
 
-**Note**: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
-
-##### Anomaly detection algorithms
-
+### Anomaly detection algorithms
 Basic
 : Use when metrics have no repeating seasonal pattern. Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
@@ -105,34 +107,39 @@ Robust
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
-**Examples:**<br>
+## Examples
 The graphs below illustrate how and when these three algorithms behave differently from one another.
 
-In this example, `basic` successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, `robust` and `agile` both recognize the seasonal pattern and can detect more nuanced anomalies, for example if the metric was to flat-line near its minimum value.
+#### Anomaly detection comparison for hourly seasonality
+In this example, `basic` successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, `robust` and `agile` both recognize the seasonal pattern and can detect more nuanced anomalies, for example if the metric was to flat-line near its minimum value. The trend also shows an hourly pattern, so the hourly seasonality works best in this case.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparison 1"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="anomaly detection algorithm comparison with daily seasonality" style="width:90%;">}}
 
+#### Anomaly detection comparison for weekly seasonality
 In this example, the metric exhibits a sudden level shift. `Agile` adjusts more quickly to the level shift than `robust`. Also, the width of `robust`'s bounds increases to reflect greater uncertainty after the level shift; the width of `agile`'s bounds remains unchanged. `Basic` is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="algorithm comparison 2"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="anomaly detection algorithm comparison with weekly seasonality" style="width:90%;">}}
 
+#### Comparison of algorithm reactions to change
 This example shows how the algorithms react to an hour-long anomaly. `Robust` does not adjust the bounds for the anomaly in this scenario since it reacts more slowly to abrupt changes. The other algorithms start to behave as if the anomaly is the new normal. `Agile` even identifies the metric's return to its original level as an anomaly.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="algorithm comparison 3"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="anomaly detection algorithm comparison with hourly seasonality" style="width:90%;">}}
 
+#### Comparison of algorithm reactions to scale
 The algorithms deal with scale differently. `Basic` and `robust` are scale-insensitive, while `agile` is not. The graphs on the left below show `agile` and `robust` mark the level-shift as being anomalous. On the right, 1000 is added to the same metric, and `agile` no longer calls out the level-shift as being anomalous whereas `robust` continues do so.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" style="width:90%;">}}
 
-This example shows how each algorithm handles a new metric. `Robust` and `agile` won't show any bounds during the first few seasons (weekly). `Basic` starts showing bounds shortly after the metric first appears.
+#### Anomaly detection comparison for new metrics
+This example shows how each algorithm handles a new metric. `Robust` and `agile` does not show any bounds during the first few seasons (weekly). `Basic` starts showing bounds shortly after the metric first appears.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" style="width:90%;">}}
 
-### Advanced alert conditions
+## Advanced alert conditions
 
 For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][8] page. For the metric-specific option full data window, see the [Metric monitor][9] page.
 
-### Notifications
+## Notifications
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][10] page.
 
@@ -218,7 +225,8 @@ A standard configuration of thresholds and threshold window looks like:
 ## Troubleshooting
 
 * [Anomaly Monitor FAQ][15]
-* [Contact Datadog support][16]
+* [Update anomaly monitor timezone][16]
+* [Contact Datadog support][17]
 
 ## Further Reading
 
@@ -239,4 +247,5 @@ A standard configuration of thresholds and threshold window looks like:
 [13]: mailto:billing@datadoghq.com
 [14]: /api/v1/monitors/
 [15]: /monitors/guide/anomaly-monitor/
-[16]: /help/
+[16]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
+[17]: /help/

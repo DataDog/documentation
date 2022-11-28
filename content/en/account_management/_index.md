@@ -28,11 +28,8 @@ You can set your timezone, desktop notifications, and email subscriptions from t
 
 * Daily Digest
 * Weekly Digest
-* Weekly Monitor Report
-* Weekly Pagerduty Report
-* Weekly Nagios Report
 
-If you are unsure if an email digest or report is relevant to you, view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
+If you are unsure if an email digest is relevant to you, view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
 
 ### Organizations
 

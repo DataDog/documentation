@@ -201,8 +201,8 @@ RUM iOS SDK が自動的に取得する[デフォルトの RUM 属性][7]に加�
 
 カスタムグローバル属性を設定するには、`Global.rum.addAttribute(forKey:value:)` を使用します。
 
-* 属性を追加するには、`Global.rum.setAttribute(forKey: "some key", value: "some value")` を使用します。
-* 値を更新するには、`Global.rum.setAttribute(forKey: "some key", value: "some other value")`を使用します。
+* 属性を追加するには、`Global.rum.addAttribute(forKey: "some key", value: "some value")` を使用します。
+* 値を更新するには、`Global.rum.addAttribute(forKey: "some key", value: "some other value")` を使用します。
 * キーを削除するには、`Global.rum.removeAttribute(forKey: "some key")` を使用します。
 
 ### ユーザーセッションの追跡

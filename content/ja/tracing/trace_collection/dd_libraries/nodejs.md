@@ -35,7 +35,7 @@ type: multi-code-lang
 
 ### アプリ内のドキュメントに従ってください (推奨)
 
-Datadog の[クイックスタート手順][5]に従って、最高のエクスペリエンスを実現します。例:
+Datadog の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
 
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
@@ -169,7 +169,6 @@ node --require dd-trace/init app.js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/nodejs
-[2]: /ja/getting_started/tagging/unified_service_tagging/
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /ja/tracing/trace_collection/library_config/nodejs/
-[5]: https://app.datadoghq.com/apm/docs

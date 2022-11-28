@@ -20,7 +20,7 @@ Find below a summary of Datadog data collection, resolution, and retention:
 |APM                 |Trace metrics (unsampled)                     |Datadog Agent + tracing library                                                               |10 seconds           |1 second             |15 months                                                                                   |
 |CI Visibility	     |Test span	                                    |Datadog Agent + tracing library	                                                             |60 seconds           |1 millisecond        |1 month                                                                                     |
 |CI Visibility	     |Flaky test	                                  |CI Visibility Test spans	                                                                     |Data source-dependent|1 millisecond	       |1 month after the test last flaked                                                          |
-|CI Visibility	     |Pipeline span	                                |Webhooks, Datadog Agent + plugin	                                                             |Data source-dependent|1 millisecond	       |1 month                                                                                     |
+|CI Visibility	     |Pipeline span	                                |Webhooks, Datadog Agent + plugin	                                                             |Data source-dependent|1 millisecond	       |15 months                                                                                     |
 |Cloud               |Alibaba                                       |API crawler                                                                                   |10 min ([default][2])|1 min                |15 months                                                                                   |
 |Cloud               |AWS                                           |API crawler                                                                                   |10 min ([default][2])|1 min                |15 months                                                                                   |
 |Cloud               |Azure                                         |API crawler                                                                                   |2 min ([default][2]) |1 min                |15 months                                                                                   |
@@ -52,5 +52,5 @@ Find below a summary of Datadog data collection, resolution, and retention:
 
 [1]: /tracing/guide/trace_sampling_and_storage/?tab=java#trace-storage
 [2]: /integrations/guide/cloud-metric-delay/#faster-metrics
-[3]: /synthetics/cicd_integrations#use-the-api
-[4]: /synthetics/cicd_integrations#use-the-cli
+[3]: /continuous_testing/cicd_integrations#use-the-api
+[4]: /continuous_testing/cicd_integrations#use-the-cli

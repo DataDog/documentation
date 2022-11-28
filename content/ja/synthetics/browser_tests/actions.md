@@ -353,30 +353,28 @@ HTTP リクエストを定義するには、
    * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
-   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
-   AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
 
-   {{% /tab %}}
+   {{< /tabs >}}
 
    {{% tab "クエリパラメーター" %}}
 
    * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-   {{% /tab %}}
+   {{< /tabs >}}
 
    {{% tab "リクエスト本文" %}}
 
    * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-   {{% /tab %}}
+   {{< /tabs >}}
 
    {{% tab "プロキシ" %}}
 
    * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
    * **Proxy Header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
-   {{% /tab %}}
+   {{< /tabs >}}
 
    {{% tab "Privacy" %}}
 
@@ -414,7 +412,7 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 #### 応答から変数を抽出する
 
-オプションで、応答ヘッダーまたは本文をパースすることにより、HTTP リクエストの応答から変数を抽出します。変数の値は、HTTP リクエストステップが実行されるたびに更新されます。
+オプションで、応答ヘッダーまたは本文をパースすることにより、HTTP リクエストの応答から変数を抽出します。変数の値は、HTTP リクエストステップが実行されるたびに更新されます。一度作成すると、この変数はブラウザテストの[次のステップ](#use-variables)で使用することができます。
 
 変数のパースを開始するには、**Extract a variable from response content** をクリックします。
 
@@ -426,7 +424,6 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="応答から抽出された変数" style="width:80%;" >}}
 
-1 つのテストステップにつき最大 10 個の変数を抽出することができます。作成されたこの変数は、ブラウザテストの[次の手順](#use-variables)で使用できます。
 
 ## ステップ順序の管理
 
@@ -450,7 +447,7 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 HTTP リクエストの変数や JavaScript のステップのように、実行時にしか計算されない変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` をフィーチャーした `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に体系的に置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

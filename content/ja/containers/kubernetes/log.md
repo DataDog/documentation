@@ -398,7 +398,7 @@ key-value ストアがテンプレートソースとして有効になってい�
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-以下のポッドアノテーションは、カスタム `password` パラメーターを使用して `redis` コンテナのインテグレーションテンプレートを定義し、すべてのログに正しい `source` および `service` 属性でタグ付けします。
+以下のポッドアノテーションは、カスタム `password` パラメーターを使用して `redis` コンテナのインテグレーションテンプレートを定義し、すべてのログに正しい `source` および `service` 属性でタグ付けします (カスタムタグを含む)。
 
 ```yaml
 apiVersion: v1
@@ -406,7 +406,7 @@ kind: Pod
 metadata:
   name: redis
   annotations:
-    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
+    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis","tags":"env:prod"}]'
   labels:
     name: redis
 spec:
@@ -436,6 +436,7 @@ data:
     logs:
       source: redis
       service: redis
+      tags: env:prod
 ```
 
 マニフェストで `volumeMounts` と `volumes` を定義します。
@@ -465,7 +466,7 @@ data:
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
-etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis"}]'
+etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": "env:prod"}]'
 ```
 
 3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をインテグレーション構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
@@ -484,6 +485,7 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
       logs:
         - source: redis
         - service: redis
+        - tags: env:prod
   ```
 
 **注**: 上記のコンフィギュレーションは、このインテグレーションからのログのみを収集します。すでに Redis インテグレーションから他のデータを収集している場合は、`logs` セクションを既存のコンフィギュレーションに追加できます。
@@ -578,7 +580,13 @@ Agent v6.12+ では、K8s ファイルログ収集方法 (`/var/log/pods` 経由
 
 Kubernetes のログにタグがない場合、ログが送信されるときに Agent の内部タグ付け機が関連するコンテナやポッドのタグをまだ持っていないことが原因である可能性があります。Log Agent がタグ付けの準備ができるまで数秒待つようにするには、環境変数 `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` を使用して、何秒待つかを設定します。デフォルト値は 0 です。
 
-## その他の参考資料
+```yaml
+# ログが送信される前に、Log Agent が内部タガーで関連するコンテナまたはポッドタグをログに追加するのを待つ秒数です。
+# 例えば、Log Agent を 5 秒待つように設定するためには、値に整数を使用します。
+tagger_warmup_duration: 5
+```
+
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

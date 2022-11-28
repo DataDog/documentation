@@ -28,7 +28,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 `Simple Alert` mode aggregate over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
 
 `Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
 
 | Group by                       | Simple alert mode | Multi alert mode |
 |-------------------------------------|------------------------|-----------------------|
@@ -61,11 +61,38 @@ The query returns a series of points, but a single value is needed to compare to
 
 ### Evaluation window
 
-Monitors are evaluated at a certain frequency, looking back at the last `5 minutes`, `15 minutes`, `1 hour`, and more.
+A monitor can be evaluated using cumulative time windows or rolling time windows. Cumulative time windows are best suited for questions that require historical context, such as "What's the sum of all the data available up to this point in time?" Rolling time windows are best suited for answering questions that do not require this context, such as "What's the average of the last _N_ data points?"
+
+The figure below illustrates the difference between cumulative and rolling time windows.
+
+{{< img src="/monitors/create/rolling_vs_expanding.png" alt="Two graphs showing cumulative vs. rolling time windows. Cumulative time windows continue to expand as time goes on. Rolling time windows cover particular moments in time." style="width:100%;">}}
+
+#### Rolling time windows
+
+A rolling time window has a fixed size and moves its starting point over time. Monitors support looking back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom specified time window.
+
+#### Cumulative time windows
+A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
+
+- `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
+- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota](https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota) by using the `current day` time window and letting it start at 2:00pm UTC.
+- `Current month`: Looks back at the current month starting on the first of the month at midnight UTC. This option represents a month-to-date time window and is only available for metric monitors.
+
+{{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
+
+A cumulative time window is reset once its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am, etc.
 
 ### Evaluation frequency
 
 The evaluation frequency defines how often Datadog performs the monitor query. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
+
+Evaluation frequencies depend on the [evaluation window](#evaluation-window) that is being used. A longer window results in lower evaluation frequencies. The table below illustrates how the evaluation frequency is controlled by larger time windows:
+
+| Evaluation Window Ranges        | Evaluation Frequency  |
+|---------------------------------|-----------------------|
+| window < 24 hours               | 1 minute              |
+| 24 hours <= window < 48 hours   | 10 minutes            |
+| window >= 48 hours              | 30 minutes            |
 
 ### Thresholds
 
@@ -141,7 +168,11 @@ If you are monitoring a metric over an auto-scaling group of hosts that stops an
 
 In this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
 
-##### Grouping
+##### Simple Alert
+
+For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that would change the status from OK.
+
+##### Multi Alert
 
 For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 
@@ -199,7 +230,7 @@ Some use cases to define a group retention time include:
 - When you would like to drop the group immediately or shortly after data stops reporting
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
-**Note**: This option is only available for multi-alert monitors and works with the [`On missing data`][5] option mentioned above.
+**Note**: The group retention time option requires a multi alert monitor that supports the [`On missing data`][5] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
 
 #### New group delay
 
@@ -209,7 +240,7 @@ The time (in seconds) to wait before starting alerting, to allow newly created g
 
 For example, if you are using containerized architecture, setting a group delay prevents monitor groups scoped on containers from triggering due to high resource usage or high latency when a new container is created. The delay is applied to every new group (which has not been seen in the last 24 hours) and defaults to `60` seconds.
 
-The option is available with multi-alert mode.
+The option is available with multi alert mode.
 
 #### Evaluation delay
 

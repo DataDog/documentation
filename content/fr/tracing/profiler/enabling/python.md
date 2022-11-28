@@ -80,9 +80,9 @@ prof.start()
 
 ## Avertissements
 
-Lorsque votre processus effectue la duplication via `os.fork`, le profiler est arrêté dans le processus enfant et doit être redémarré. Pour Python 3.7+, sur les plates-formes Unix, un nouveau profileur est automatiquement démarré.
+Lorsque votre processus effectue la duplication via `os.fork`, le profileur est arrêté dans le processus enfant et doit être redémarré. Pour Python 3.7+, un nouveau profileur est automatiquement démarré.
 
-Si vous utilisez une version plus ancienne, ou si vous exécutez une plate-forme non basée sur Unix, vous devez démarrer manuellement un nouveau profiler dans votre processus enfant.
+Si vous utilisez une version plus ancienne de Python, vous devez démarrer manuellement un nouveau profileur dans votre processus enfant.
 
 ```python
 # Pour les utilisateurs ddtrace-un, appeler ce paramètre dans votre processus enfant
@@ -108,7 +108,7 @@ Le guide [Premier pas avec le profileur en continu][6] présente un exemple de s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/setup_overview/
+[1]: /fr/tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings#agent/overview
 [3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
 [4]: https://app.datadoghq.com/profiling

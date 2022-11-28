@@ -59,7 +59,7 @@ tile:
     image_url: images/FF-fix-drifts.png
     media_type: image
   - caption: ポリシー違反の検出と修正
-    image_url: images/FF-inventory.png
+    image_url: images/FF-insights.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support

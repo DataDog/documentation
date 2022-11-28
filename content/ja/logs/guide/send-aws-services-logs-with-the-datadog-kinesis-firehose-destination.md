@@ -21,9 +21,9 @@ AWS サービスからログの収集を開始するには
 2. AWS サービスで[ログを有効にします](#enable-logging-for-your-aws-service) (大部分の AWS サービスは、S3 バケットまたは CloudWatch ログ グループにログインできます)。
 3. 転送する新しいログがあったときに Forwarder Lambda を実行させる[トリガーの設定](#set-up-triggers)をします。トリガーの構成は 2 通りあります。
 
-**注**: AWS us-east-1 リージョンにいる場合は、[Datadog-AWS Private Link][2] を利用してください。
+**注**: AWS `us-east-1` リージョンにいる場合は、[Datadog-AWS Private Link][2] を利用してください。
 
-**注**: Cloudformation は、すべてのリソースに対して KMS:Decrypt を含む IAM ポリシーを作成します。これは、Security ハブのベストプラクティスと一致しないことが知られています。この権限が使用される理由は、Lambda 関数を設定するために KMS で暗号化された S3 バケットからオブジェクトを復号するためで、どの KMS キーが S3 バケットの暗号化に使用されているかは予測できません。インストーラーが正常に終了したら、この権限を安全に削除することができます。
+**注**: Cloudformation は、すべてのリソースに対して KMS:Decrypt を含む IAM ポリシーを作成し、AWS Security Hub のベストプラクティスと一致しません。この権限は、Lambda 関数を設定するために KMS で暗号化された S3 バケットからオブジェクトを復号するために使用され、どの KMS キーが S3 バケットの暗号化に使用されているかは予測できません。インストーラーが正常に終了したら、この権限を安全に削除することができます。
 
 ## トリガーの設定
 
@@ -38,14 +38,14 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
 
 | ソース                          | 場所       |
 | ------------------------------- | ---------------|
-| API ゲートウェイのアクセスログ         | CloudWatch     |
+| `APIKEY` を `AccessKey` ボックスに貼り付けます ([Datadog API 設定ページ][3]から API キーを取得できます)。         | CloudWatch     |
 | API ゲートウェイの実行ログ      | CloudWatch     |
-| アプリケーション ELB アクセスログ     | S3             |
-| クラシック ELB アクセスログ         | S3             |
-| CloudFront のアクセスログ          | S3             |
+| アプリケーション ELB アクセスログ     | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
+| クラシック ELB アクセスログ         | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
+| CloudFront のアクセスログ          | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
 | Lambda ログ                     | CloudWatch     |
-| Redshift ログ                   | S3             |
-| S3 アクセスログ                  | S3             |
+| Redshift ログ                   | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
+| S3 アクセスログ                  | **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。             |
 
 1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
 2. [Datadog と AWS のインテグレーション][3]に使用する IAM ロールのポリシーに、次のアクセス許可があることを確認します。この許可の使用方法については、以下に説明されています。
@@ -74,7 +74,7 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
     | `cloudfront:GetDistributionConfig`                          | CloudFront アクセスログを含む S3 バケットの名前を取得します。             |
     | `cloudfront:ListDistributions`                              | すべての CloudFront ディストリビューションを一覧表示します。|
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | すべてのロードバランサーを一覧表示します。|
-    | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | ELB アクセスログを含む S3 バケットの名前を取得します。|
+   [ロググループインデックスページ][1] の `Subscriptions` をチェックして、新しい Kinesis ストリームがロググループをサブスクライブしているかを確認します。
     | `lambda:List*`                                              | すべての Lambda 関数を一覧表示します。 |
     | `lambda:GetPolicy`                                          | トリガーが解除された際に Lambda ポリシーを取得します。|
     | `redshift:DescribeClusters`                                 | すべての Redshift クラスターを一覧表示します。|
@@ -82,20 +82,20 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
     | `s3:GetBucketLogging`                                       | S3 アクセスログを含む S3 バケットの名前を取得します。|
     | `s3:GetBucketLocation`                                      | S3 アクセスログを含む S3 バケットのリージョンを取得します。|
     | `s3:GetBucketNotification`                                  | 既存の Lambda トリガーコンフィギュレーションを取得します。    |
-    | `s3:ListAllMyBuckets`                                       | すべての S3 バケットを一覧表示します。|
+   {{< partial name="whats-next/whats-next.html" >}}
     | `s3:PutBucketNotification`                                  | S3 バケットのイベントに基づいて Lambda トリガーを追加または削除します。|
     | `logs:PutSubscriptionFilter`                                | CloudWatch ログのイベントに基づいて Lambda トリガーを追加します。|
     | `logs:DeleteSubscriptionFilter`                             | CloudWatch ログのイベントに基づいて Lambda トリガーを削除します。|
     | `logs:DescribeSubscriptionFilters`                          | 特定のロググループのサブスクリプションフィルターを一覧表示します。|
 
-3. [AWS インテグレーションタイル][4]で _Collect Logs _ タブに移動します。
-4. ログを収集する必要がある AWS アカウントを選択し、前のセクションで作成された Lambda の ARN を入力します。
-   {{< img src="logs/aws/AWSLogStep1.png" alt="Lambda を入力" popup="true" style="width:80%;" >}}
-5. ログを収集するサービスを選択し、保存をクリックします。特定のサービスからのログの収集を停止するには、チェックを外します。
-   {{< img src="logs/aws/AWSLogStep2.png" alt="サービスを選択" popup="true" style="width:80%;" >}}
-6. 複数のリージョンにログがある場合は、そのリージョンに追加の Lambda 関数を作成して、タイルに入力する必要があります。
-7. すべての AWS ログの収集を停止するには、各 Lambda ARN の隣にある _x_ を押します。その関数のすべてのトリガーが削除されます。
-8. この初期のセットアップから数分以内に、AWS ログがほぼリアルタイムで Datadog [log explorer ページ][5]に表示されるようになります。
+3. [AWS インテグレーションページ][4]で、ログを収集する AWS アカウントを選択し、**Log Collection** タブをクリックします。
+   {{< img src="logs/aws/aws_log_setup_step1.png" alt="特定の AWS アカウントの AWS インテグレーションページの Log Collection タブに、AWS Services のログを送信する指示と、Forwarder Lambda 関数の ARN を入力して自動的にサブスクライブするテキストボックスが表示されます。" popup="true" style="width:90%;" >}}
+4. 前のセクションで作成した Lambda の ARN を入力し、**Add** をクリックします。
+5. ログを収集するサービスを選択し、**Save** をクリックします。特定のサービスからのログの収集を停止するには、ログソースの選択を解除します。
+   {{< img src="logs/aws/aws_log_setup_step2.png" alt="Included ARNs に 1 つの Lambda 関数が正常に入力され、Log Sources でいくつかのサービスが有効になっている特定の AWS アカウントの AWS インテグレーションページの Log Collection タブ" popup="true" style="width:90%;" >}}
+6. 複数のリージョンにログがある場合は、そのリージョンに追加の Lambda 関数を作成して、このページに入力する必要があります。
+7. すべての AWS ログの収集を停止するには、Lambda にカーソルを合わせ、Delete アイコンをクリックします。その関数のトリガーがすべて削除されます。
+8. この初期のセットアップから数分以内に、AWS ログが Datadog [ログエクスプローラー][5]に表示されるようになります。
 
 ### 手動でトリガーをセットアップする
 
@@ -220,7 +220,7 @@ S3 バケットまたは CloudWatch ログ グループにログを生成する 
 
 | AWS サービス                        | AWS サービス ログを有効にする                                                                    | AWS ログを Datadog に送信する                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][6]                  | [AWS API Gateway ログを有効にする][7]                                                               | [手動][8]ログコレクション                                                 |
+| [API Gateway][6]                  | [AWS API Gateway ログを有効にする][7]                                                               | [手動][8]および[自動](#automatically-set-up-triggers)ログコレクション                                                |
 | [Cloudfront][9]                   | [AWS Cloudfront ログを有効にする][10]                                                                | [手動][11]および[自動](#automatically-set-up-triggers)ログコレクション  |
 | [Cloudtrail][12]                   | [AWS Cloudtrail ログを有効にする][12]                                                                | [手動][13]ログコレクション                                                 |
 | [DynamoDB][14]                     | [AWS DynamoDB ログを有効にする][15]                                                                  | [手動][16]ログコレクション                                                 |
@@ -243,7 +243,7 @@ Lambda 関数から送信されるログからメールや IP アドレスをス
 [1]: /ja/serverless/forwarder/
 [2]: /ja/serverless/forwarder#aws-privatelink-support
 [3]: /ja/integrations/amazon_web_services/
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://app.datadoghq.com/logs
 [6]: /ja/integrations/amazon_api_gateway/
 [7]: /ja/integrations/amazon_api_gateway/#log-collection

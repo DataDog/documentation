@@ -34,7 +34,6 @@
 @import "pages/search";
 @import "pages/404";
 @import "pages/home";
-@import "pages/security_monitoring";
 @import "pages/glossary";
 
 // Components
@@ -59,6 +58,7 @@
 @import 'components/whats-next';
 @import 'components/schema-table';
 @import 'components/tab-toggle';
+@import 'components/grouped-item-listings';
 
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules

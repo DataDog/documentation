@@ -62,7 +62,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 
 * A **session** is a user journey on your web application. It expires after either 15 minutes of inactivity, or 4 hours of continuous activity.
 
-* Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per ten thousand (10,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
+* Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per one thousand (1,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
 ## Continuous Profiler
 

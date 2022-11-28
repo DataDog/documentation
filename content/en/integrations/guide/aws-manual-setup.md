@@ -57,7 +57,7 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 
 1. In the [AWS integration configuration page][1], click **Add AWS Account**, and then select **Manually**.
 2. Select `Role Delegation` for the access type and copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][2].  
-  **Note: Do not close the integration tile or the Datadog site**, as this causes the external ID value to reset.
+  **Note:** The External ID remains available and is not regenerated for 48 hours, unless explicitly changed by a user or another AWS account is added to Datadog during this period. You can return to the **Add New AWS Account** page within that time period to complete the process of adding an account without the External ID changing.
 
 ### AWS IAM policy for Datadog
 Create an IAM policy for the Datadog role in your AWS account with the [necessary permissions](#aws-integration-iam-policy) to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change. 
