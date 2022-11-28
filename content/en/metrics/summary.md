@@ -22,9 +22,9 @@ Search your metrics by metric name or tag using the **Metric** or **Tag** search
 
 {{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="Filter by Tag" video=true style="width:75%;">}}
 
-The tag filtering supports boolean and wildcard syntax such that you can quickly identify: 
-* Metrics are tagged with a particular tag key, team: `team:*`
-* Metrics that are missing a particular tag key, team: `NOT team:*`
+Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
+* Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
+* Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
 
 
 ## Facet panel
