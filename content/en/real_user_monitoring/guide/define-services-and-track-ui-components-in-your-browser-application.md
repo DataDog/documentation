@@ -1,5 +1,5 @@
 ---
-title: Define Applications, Services, And Components For Your RUM-Monitored Web Application
+title: Define Services And Track UI Components In Your Browser Application
 kind: guide
 disable_toc: false
 further_reading:
