@@ -1,10 +1,11 @@
 ---
-title: Create Monitors
+title: Monitor Types
 kind: documentation
-description: "Create monitors"
+description: "Monitor Types"
 aliases:
 - /monitors/monitor_types/
 - /monitors/create/types/
+- /monitors/create/#monitor-types
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -13,22 +14,6 @@ further_reading:
   tag: "Documentation"
   text: "Manage monitors"
 ---
-
-## Overview
-
-To create a monitor in Datadog:
-
-1. Navigate to **Monitors** > **New Monitor**.
-2. Select a [monitor type](#monitor-types) corresponding to the kind of telemetry you want to alert on.
-3. [Configure the monitor][1].
-
-To create a monitor programmatically, see the [Datadog API][2] or [community maintained libraries][3].
-
-## Exporting and importing monitors
-
-You can download a JSON file containing the definition of a monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
-
-[Import a JSON monitor definition][4] into Datadog by selecting *Monitors --> New Monitor --> Import* in the main navigation.
 
 ## Monitor types
 
