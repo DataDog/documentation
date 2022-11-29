@@ -291,7 +291,7 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [6]: /getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer
-[9]: https://github.com/Datadog/tutorial-apm-python-host
+[9]: https://github.com/Datadog/apm-tutorial-python
 [10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/python/
