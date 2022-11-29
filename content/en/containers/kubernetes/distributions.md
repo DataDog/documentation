@@ -109,6 +109,10 @@ datadog:
           fieldPath: spec.nodeName
     hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
     tlsVerify: false # Required as of Agent 7.35. See Notes.
+clusterAgent:
+  env: 
+    - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+      value: true
 ```
 
 {{% /tab %}}
@@ -137,10 +141,9 @@ spec:
     image:
       name: "gcr.io/datadoghq/cluster-agent:latest"
     config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+      env:
+          - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+            value: "true"
 ```
 
 {{% /tab %}}
