@@ -2259,6 +2259,12 @@ main:
     parent: dbm
     identifier: dbm_guides
     weight: 9
+  - name: Universal Service Monitoring
+    url: universal_service_monitoring/
+    pre: usm
+    identifier: usm_parent
+    parent: apm_heading
+    weight: 165000
   - name: Log Management
     url: logs/
     pre: log
@@ -3363,12 +3369,6 @@ main:
     parent: ndm
     identifier: ndm_guide
     weight: 307
-  - name: Universal Service Monitoring
-    url: universal_service_monitoring/
-    pre: usm
-    identifier: usm_parent
-    parent: infrastructure_heading
-    weight: 230000
   - name: Developers
     url: developers/
     pre: dev-code
