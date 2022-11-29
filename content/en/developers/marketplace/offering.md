@@ -75,7 +75,7 @@ For more information about Datadog Agent-based integrations, see:
 
 ### REST API integrations
 
-Use an [API integration][14] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform. This method is ideal for Technology Partners that are SaaS based, and have an existing website for users to log into.
+Use an [API integration][14] to enrich and submit data from your backend, or pull data directly out of Datadog. API integrations work well in building a connector between Datadog and another SaaS platform. This method is ideal for Technology Partners that are SaaS based, and have an existing website for users to log into for authorization purposes.
 
 Since API integrations do not use the Datadog Agent to collect data, you need to create an [informational tile-only listing](#saas-license-or-professional-service-offerings) once your development work is complete.
 
@@ -91,7 +91,7 @@ REST API Integrations send the following types of data to Datadog:
 - [Incidents][10]
 - [Security Events][11]
 
-A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Datadog recommends using [OAuth for an integration][15] to securely authorize third-party application access on a Marketplace tile.
+A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog. Instead of requesting these credentials directly from a user, Datadog recommends using [OAuth][15] to handle authorization and access for API-based integrations.
 
 You can explore examples of existing API integrations in the `integrations-extras` repository such as [Vantage][24].
 
