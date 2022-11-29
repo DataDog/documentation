@@ -13,7 +13,7 @@
 {{ $tags := $page.Params.algolia.tags }}
 {{ $rank := $page.Params.algolia.rank }}
 {{ $permalink := $page.Permalink }}
-{{ $rel_permalink := $page.RelPermalink }}
+{{ $relpermalink := $page.RelPermalink }}
 
 {{/* Get API action data from spec */}}
 {{ $operationId := $endpoint_data.operationId }}
@@ -45,7 +45,7 @@
         "section_header" $section_header
         "content" $section_content
         "type" $type
-        "rel_permalink" $rel_permalink
+        "relpermalink" $relpermalink
         "full_url" $full_url
         "language" $lang
         "tags" $tags
