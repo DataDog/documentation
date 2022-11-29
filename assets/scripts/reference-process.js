@@ -30,7 +30,7 @@ $RefParser.dereference(fileData)
 
       // write schema tables
       //fs.writeFileSync("./data/reference/schema.tables.json", "{\n", 'utf-8');
-      const allData = {"sources":[]};
+      const allData = {"sources":[], "transforms":[], "sinks": []};
 
       const entries = Object.entries(deref['definitions']["vector::sources::Sources"]["oneOf"]);
       const entryLen = entries.length;
@@ -67,6 +67,46 @@ $RefParser.dereference(fileData)
           // }
           allData["sources"].push(entryData)
           i++;
+      });
+
+      const transformEntries = Object.entries(deref['definitions']["vector::transforms::Transforms"]["oneOf"]);
+      //const entryLen = transformEntries.length;
+      transformEntries.forEach(([key, value]) => {
+          let entryData = {
+            "description": value.description || "",
+            "metadata": value._metadata || {},
+            "simple": exampleToml(value.allOf[1]),
+            "advanced": exampleToml(value.allOf[1], value.allOf[0]),
+            "html": {}
+          };
+          table = null;
+          try {
+            table = schemaTable("request", value.allOf[0], true);
+          } catch (e) {
+            console.log(`Couldn't created schematable for ${key} from file ${input}`);
+          }
+          entryData["html"] = table;
+          allData["transforms"].push(entryData)
+      });
+
+      const sinkEntries = Object.entries(deref['definitions']["vector::sinks::Sinks"]["oneOf"]);
+      //const entryLen = sinkEntries.length;
+      sinkEntries.forEach(([key, value]) => {
+          let entryData = {
+            "description": value.description || "",
+            "metadata": value._metadata || {},
+            "simple": exampleToml(value.allOf[1]),
+            "advanced": exampleToml(value.allOf[1], value.allOf[0]),
+            "html": {}
+          };
+          table = null;
+          try {
+            table = schemaTable("request", value.allOf[0], true);
+          } catch (e) {
+            console.log(`Couldn't created schematable for ${key} from file ${input}`);
+          }
+          entryData["html"] = table;
+          allData["sinks"].push(entryData)
       });
       //fs.appendFileSync("./data/reference/schema.tables.json", "}\n", 'utf-8');
 
