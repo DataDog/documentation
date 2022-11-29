@@ -65,7 +65,7 @@ const renderHits = (renderOptions, isFirstRender) => {
     const generateJoinedHits = (hitsArray, category) => {
         const joinedListItems = hitsArray
             .map((item) => {
-                const link = item.relpermalink;
+                const link = item.full_url;
                 const hitData = item._highlightResult;
                 const subcategory = hitData.subcategory.value;
                 const title = hitData.title.value;
