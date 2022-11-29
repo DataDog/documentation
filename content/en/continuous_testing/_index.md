@@ -40,7 +40,7 @@ Instead of having to implement test code, you can build software using [Syntheti
 
 ## Increase efficiency through seamless integrations
 
-Fast-track your application development by testing and troubleshooting in one platform. Use integrations with CI providers such as [GitHub][5], [GitLab][6], [Jenkins][7], [CircleCI][8], and [Azure DevOps][9], and collaboration tools such as Slack or Jira to merge workflows and prevent context switching. 
+Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as Slack or Jira to merge workflows and avoid context switching. 
 
 {{< partial name="continuous_testing/ct-getting-started.html" >}}
 
