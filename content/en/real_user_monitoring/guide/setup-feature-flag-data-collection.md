@@ -78,8 +78,8 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM
 
-```
-//
+```javascript
+datadogRum.addFeatureFlagEvaluation(key, value);
 ```
 
 {{% /tab %}}
@@ -101,8 +101,8 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM
 
-```
-//
+```javascript
+datadogRum.addFeatureFlagEvaluation(key, value);
 ```
 
 {{% /tab %}}
@@ -166,8 +166,18 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
-```html
-asdf
+```javascript
+const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+  inspectors: [
+    {
+      type: "flag-used",
+      name: "dd-inspector",
+      method: (key: string, detail: LDClient.LDEvaluationDetail) => {
+        datadogRum.addFeatureFlagEvaluation(key, detail.value);
+      },
+    },
+  ],
+});
 ```
 
 
@@ -190,8 +200,18 @@ asdf
 
 2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
-```html
-asdf
+```javascript
+const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+  inspectors: [
+    {
+      type: "flag-used",
+      name: "dd-inspector",
+      method: (key: string, detail: LDClient.LDEvaluationDetail) => {
+        datadogRum.addFeatureFlagEvaluation(key, detail.value);
+      },
+    },
+  ],
+});
 ```
 
 {{% /tab %}}
@@ -261,8 +281,24 @@ const client = factory.client();
 
 2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
-```html
-asdf
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {              
+          datadogRum
+              .addFeatureFlagEvaluation(
+                   impressionData.impression.feature,
+                   impressionData.impression.value
+              );
+     },
+  },
+});
+
+const client = factory.client();
 ```
 
 
@@ -285,8 +321,24 @@ asdf
 
 2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
-```html
-asdf
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {              
+          datadogRum
+              .addFeatureFlagEvaluation(
+                   impressionData.impression.feature,
+                   impressionData.impression.value
+              );
+     },
+  },
+});
+
+const client = factory.client();
 ```
 
 {{% /tab %}}
