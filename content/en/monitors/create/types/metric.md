@@ -84,6 +84,8 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
+{{< img src="monitors/monitor_types/metric/new_metric_monitor_threshold.png" alt="define the metric for threshold detection metric monitor" style="width:100%;">}}
+
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
 | Select a metric                   | Yes      | None           | `system.cpu.user` |
@@ -108,6 +110,8 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 
 {{% /tab %}}
 {{% tab "Change" %}}
+
+{{< img src="monitors/monitor_types/metric/new_metric_monitor_change.png" alt="define the metric for change detection metric monitor" style="width:100%;">}}
 
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
