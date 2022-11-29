@@ -1,6 +1,8 @@
 ---
 title: Universal Service Monitoring
 kind: documentation
+aliases: 
+- /tracing/universal_service_monitoring/
 further_reading:
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
   tag: "Blog"
@@ -19,22 +21,24 @@ further_reading:
   text: "Read about the Service Map"
 ---
 
-{{< beta-callout url="#" d-toggle="modal" btn_hidden="true" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Universal Service Monitoring (USM) is in public beta. There is currently no billing impact for enabling and using USM.
-{{< /beta-callout >}}
+## Overview
 
-Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into APM views such as the Services List, Service details, and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.
+Universal Service Monitoring (USM) provides visibility into your service health metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented services into views such as the Service Catalog and Service Map. USM also works with [Deployment Tracking][2], Monitors, Dashboards, and SLOs.
 
-{{< img src="tracing/universal_service_monitoring/service_overview.mp4" alt="Video demonstrating Universal Service Monitoring. An overview of a service is accessed by clicking on a service on the Service Map and selecting View service overview." video="true" >}}
+{{< img src="universal_service_monitoring/usm-demo.mp4" alt="Video demonstrating Universal Service Monitoring. An overview of a service is accessed by clicking on a service on the Service Map and selecting View service overview." video="true" >}}
+
+
+## Setup
 
 ### Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your service be at least version 7.40.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40.
 
-Supported platforms
-: Linux kernel 4.14 and greater<br/>
+Your containerized service must be running on one of the following supported platforms
+: Linux Kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater<br/>
+IIS on Windows 2012 R2 and greater
 
 Supported application-layer protocols
 : HTTP<br/>
@@ -46,10 +50,11 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Datadog Agent 7.40 or higher is installed alongside your service. Installing a tracing library is _not_ required.
-- [Unified Service Tagging][1] tag for `env` has been applied to your deployment. The `service` and `version` tags are optional.
+- Your service is running in a container.
+- Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
+- The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
-**Note**: For non-container single-tenant setups where one service runs on a host, you must apply Unified Service Tags to the host itself. USM does not currently support monitoring multiple services on a single host without containers, nor on a single host where Unified Service Tags are applied using environment variables. 
+
 
 ## Enabling Universal Service Monitoring
 
@@ -253,7 +258,7 @@ services:
 ```
 
 {{% /tab %}}
-{{% tab "Configuration files" %}}
+{{% tab "Configuration files (Linux)" %}}
 
 If you are not using Helm Charts or environment variables, set the following in your `system-probe.yaml` file:
 
@@ -263,7 +268,7 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Environment variables" %}}
+{{% tab "Environment variables (Linux)" %}}
 
 If you configure the `system-probe` with environment variables, as is common with Docker and ECS installations, pass the following environment variable to **both** the `process-agent` and `system-probe`:
 
@@ -272,23 +277,38 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 ```
 
 {{% /tab %}}
+{{% tab "Windows" %}}
+
+**For services running on IIS:**
+
+1. Install the [Datadog Agent][1] (version 6.40 or 7.40 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
+
+2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
+
+   ```yaml
+   service_monitoring_config:
+     enabled: true
+   ```
+[1]: /agent/basic_agent_usage/windows/?tab=commandline
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Automatic service tagging
 
 Universal Service Monitoring automatically detects services running in your infrastructure. If it does not find [unified service tags][1], it assigns them a name based on one of the tags: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
 
-To update the service's name, use [unified service tagging][1].
+To update the service's name, set up [Unified Service Tagging][1].
 
-{{< img src="tracing/universal_service_monitoring/automatic-service-tagging.png" alt="When Datadog automatically detects your services, the tag used for this is shown on the top of the service page" style="width:80%;" >}}
+{{< img src="universal_service_monitoring/automatic-service-tagging.png" alt="When Datadog automatically detects your services, the tag used for this is shown on the top of the service page" style="width:80%;" >}}
 
 ## Exploring your services
 
-After you configure the Agent, wait about five minutes for your service to appear in the APM Services List. Click the service to see the APM service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
+After you configure the Agent, wait about five minutes for your service to appear in the Service Catalog. Click the service to see the service details page. An operation name of `universal.http.server` or `universal.http.client` in the upper left indicates that the service telemetry comes from Universal Service Monitoring.
 
 The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
 
-{{< img src="tracing/universal_service_monitoring/select_service_operation.png" alt="The operation drop-down menu on the Services tab shows the available operation names" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation drop-down menu on the Services tab shows the available operation names" style="width:100%;" >}}
 
 After enabling Universal Service Monitoring, you can:
 
