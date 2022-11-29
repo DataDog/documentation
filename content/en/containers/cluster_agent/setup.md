@@ -21,14 +21,14 @@ further_reading:
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
-To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these steps:
+This page contains instructions for setting up the Datadog Cluster Agent on your Kubernetes cluster.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
 The Cluster Agent is enabled by default since Helm Chart `2.7.0`.
 
-To activate it on older versions or if you use a custom [datadog-values.yaml][1] overriding the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
+To activate it on older versions, or if you use a custom [datadog-values.yaml][1] that overrides the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration. Then, upgrade your Datadog Helm chart:
 
   ```yaml
   clusterAgent:
@@ -38,9 +38,13 @@ To activate it on older versions or if you use a custom [datadog-values.yaml][1]
 
 This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
 
-This also automatically generates a random token in a `Secret` shared between both the Cluster Agent and the Datadog Agent. You can manually set this by specifying a token in the `clusterAgent.token` configuration. You can also manually set this by specifying an existing `Secret` name containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
+This also automatically generates a random token in a `Secret` shared between the Cluster Agent and the Datadog Agent. 
 
-When set manually this token must be 32 alphanumeric characters.
+You can manually set this token by taking one of the following steps: 
+- Specify a token in the `clusterAgent.token` configuration. 
+- Specify an existing `Secret` name containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
+
+When set manually, this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
@@ -57,15 +61,15 @@ spec:
     enabled: true
   ```
 
-The Operator then creates the necessary RBACs, deploys the Cluster Agent and modifies the Agent DaemonSet configuration to use a randomly generated token (to secure communication between Agent and Cluster Agent). You can manually specify this token by setting the `credentials.token` field.
+The Operator then creates the necessary RBACs and deploys the Cluster Agent. The Operator also modifies the Agent DaemonSet configuration to use a randomly generated token (to secure communication between Agent and Cluster Agent). 
 
-When set manually this token must be 32 alphanumeric characters.
+You can manually specify this token by setting the `credentials.token` field. When set manually, this token must be 32 alphanumeric characters.
 
 {{% /tab %}}
-{{% tab "Daemonset" %}}
+{{% tab "DaemonSet" %}}
 
 1. [Set up the Datadog Cluster Agent](#configure-the-datadog-cluster-agent).
-2. [Configure your Agent to communicate with the Datadog Cluster Agent](#configure-the-datadog-agent)
+2. [Configure your Agent to communicate with the Datadog Cluster Agent](#configure-the-datadog-agent).
 
 ## Configure the Datadog Cluster Agent
 
@@ -75,7 +79,7 @@ The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
 1. Review the manifests in the [Datadog Cluster Agent RBAC folder][1]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
 
-2. To configure Cluster Agent RBAC permissions, apply the following manifests. (You may have done this already when setting up the [node Agent daemonset][2].)
+2. To configure Cluster Agent RBAC permissions, apply the following manifests. You may have done this already when setting up the [node Agent DaemonSet][2].
 
   ```shell
   kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac.yaml"
@@ -88,13 +92,15 @@ If you are using Azure Kubernetes Service (AKS), you may require extra permissio
 
 ### Secure Cluster Agent to Agent communication
 
-The Datadog Agent and Cluster Agent require a token to secure their communication. It is recommended that you save this token in a `Secret` that both the Datadog Agent and Cluster Agent can reference in the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN`. This helps to maintain consistency and to avoid the token being readable in the `PodSpec`.
+The Datadog Agent and Cluster Agent require a token to secure their communication. It is recommended that you save this token in a `Secret` that both the Datadog Agent and Cluster Agent can reference in the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN`. This helps to maintain consistency and prevents the token from being readable in the `PodSpec`.
 
-To create this token run this one line command to generate a `Secret` named `datadog-cluster-agent` with a `token` set. Replace the `<TOKEN>` with 32 alphanumeric characters.
+To create this token, use the following command to generate a `Secret` named `datadog-cluster-agent` with a `token` set in the default namespace:
+
   ```shell
   kubectl create secret generic datadog-cluster-agent --from-literal=token='<TOKEN>' --namespace="default"
   ```
-**Note:** This creates a `Secret` in the default namespace. If you are in a custom namespace, update the namespace parameter of the command before running it.
+
+Replace the `<TOKEN>` with 32 alphanumeric characters. If you are in a custom namespace, update the namespace parameter.
 
 The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is already configured to see this `Secret` with the environment variable configuration:
   ```yaml
@@ -204,9 +210,9 @@ After redeploying your `Daemonset` with these configurations in place, the Datad
 
 You can verify your Datadog Agent pods and Cluster Agent pods are running by executing the command:
 
-```shell
+{{< code-block lang="shell" >}}
 kubectl get pods | grep agent
-```
+{{< /code-block >}}
 
 You should see:
 
@@ -246,7 +252,7 @@ To monitor Windows containers, use two installations of the Helm chart in a mixe
 
 Use the following `values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
 
-```yaml
+{{< code-block lang="yaml" >}}
 targetSystem: windows
 existingClusterAgent:
   join: true
@@ -260,7 +266,7 @@ datadog-crds:
 # Disable kube-state-metrics deployment
 datadog:
   kubeStateMetricsEnabled: false
-```
+{{< /code-block >}}
 
 For more information, see [Troubleshooting Windows Container Issues][2].
 
@@ -285,8 +291,6 @@ clusterAgent:
         - cluster_arn: arn:aws:kafka:us-west-2:*************:cluster/gen-kafka/*******-8e12-4fde-a5ce-******-3
           region_name: us-west-2
 {{< /code-block >}}
-
-
 
 ## Further Reading
 
