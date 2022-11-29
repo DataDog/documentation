@@ -142,8 +142,8 @@ spec:
       name: "gcr.io/datadoghq/cluster-agent:latest"
     config:
       env:
-          - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
-            value: "true"
+        - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+          value: "true"
 ```
 
 {{% /tab %}}
