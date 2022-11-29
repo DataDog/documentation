@@ -35,7 +35,7 @@ For general comprehensive tracing setup documentation for Python, see [Tracing P
 
 ## Install the sample Dockerized Python application
 
-The code sample for this tutorial is on GitHub, at `github.com/Datadog/tutorial-apm-python`. To get started, clone the repository:
+The code sample for this tutorial is on GitHub, at [github.com/Datadog/apm-tutorial-python][9]. To get started, clone the repository:
 
 {{< code-block lang="sh" >}}
 git clone https://github.com/DataDog/apm-tutorial-python.git
@@ -120,7 +120,7 @@ Now that you have a working Python application, configure it to enable tracing.
    ddtrace
    ```
 
-2. Within the notes application dockerfile, `docker/containers/exercise/Dockerfile.notes`, change the CMD line that starts the application to use the `ddtrace` package:
+2. Within the notes application Dockerfile, `docker/containers/exercise/Dockerfile.notes`, change the CMD line that starts the application to use the `ddtrace` package:
 
    ```
    # Run the application with Datadog 
@@ -129,7 +129,7 @@ Now that you have a working Python application, configure it to enable tracing.
 
    This automatically instruments the application with Datadog services.
 
-3. Apply Universal Service Tags, which identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. Add the following environment variables in the Dockerfile:
+3. Apply [Universal Service Tags][10], which identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. Add the following environment variables in the Dockerfile:
 
    ```
    ENV DD_SERVICE="notes"
@@ -151,14 +151,14 @@ To check that you've set things up correctly, compare your Dockerfile file with 
 
 Add the Datadog Agent in the services section of your `docker-compose.yaml` file:
 
-1. Add the Agent configuration, and specify your own Datadog API key and site:
+1. Add the Agent configuration, and specify your own [Datadog API key][3] and [site][6]:
    ```yaml
      datadog:
        container_name: dd-agent
        image: "gcr.io/datadoghq/agent:latest"
        environment:
           - DD_API_KEY=<DD_API_KEY>
-          - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appopriate for your org
+          - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org
           - DD_APM_ENABLED=true    # Enable APM
        volumes: 
           - /var/run/docker.sock:/var/run/docker.sock:ro 
@@ -183,7 +183,7 @@ docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
 docker-compose -f docker/containers/solution/docker-compose.yaml up db datadog notes_app
 ```
 
-You can tell the Agent is working by observing continuous output in the terminal, or by opening the Events Explorer in Datadog and seeing the start event for the Agent:
+You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-containers-agent-start-event.png" alt="Agent start event shown in Events Explorer" style="width:100%;" >}}
 
@@ -201,7 +201,7 @@ With the application running, send some curl requests to it:
 `curl -X DELETE 'localhost:8080/notes?id=1'`
 : `Deleted`
 
-Wait a few moments, and go to **APM > Traces** in Datadog, where you can see a list of traces corresponding to your API calls:
+Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-containers-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
@@ -294,17 +294,24 @@ The sample project includes a second application called `calendar_app` that retu
 
 To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/containers/solution/Dockerfile.calendar`.
 
+5. Build the multi-service application by restarting the containers. First, stop all containers if still running:
+   ```
+   docker-compose -f docker/containers/solution/docker-compose.yaml down
+   ```
 
-We have already done this for you within the 'docker/containers/solution' folder, in the docker-compose.yml file, here.
+   Then run the following commands to start them:
+   ```
+   docker-compose -f docker/containers/solution/docker-compose.yaml build
+   docker-compose -f docker/containers/solution/docker-compose.yaml up
+   ```
 
-
-2. Send a POST request with the `add_date` parameter:
+6. Send a POST request with the `add_date` parameter:
 
 `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
 : `(2, hello_again with date 2022-11-06)`
 
 
-3. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
+7. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
@@ -336,7 +343,12 @@ def create_note(self, desc, add_date=None):
         note = Note(description=desc, id=None)
         note.id = self.db.create_note(note){{< /code-block >}}
 
-3. Restart the service.
+3. Rebuild the containers:
+   ```
+   docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
+   docker-compose -f docker/containers/solution/docker-compose.yaml up
+   ```
+
 4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
 5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
    {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
@@ -353,12 +365,10 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [2]: /tracing/trace_collection/dd_libraries/python/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/python/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
 [6]: /getting_started/site/
-[7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer
-[9]: https://github.com/Datadog/tutorial-apm-python-host
-[10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
+[9]: https://github.com/DataDog/apm-tutorial-python
+[10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/python/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
