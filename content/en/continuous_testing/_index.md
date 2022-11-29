@@ -42,6 +42,10 @@ Instead of having to implement test code, you can build software using [Syntheti
 
 Fast-track your application development by testing and troubleshooting in one platform. Use integrations with CI providers such as [GitHub][5], [GitLab][6], [Jenkins][7], [CircleCI][8], and [Azure DevOps][9], and collaboration tools such as Slack or Jira to merge workflows and prevent context switching. 
 
+{{< partial name="continuous_testing/ct-getting-started.html" >}}
+
+</br>
+
 You can use the [Datadog Terraform provider][10] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][11] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][11].
 
 ## Accelerate troubleshooting
