@@ -75,39 +75,13 @@ datadogRum.init({
 
 ### Mobile RUM
 
-{{< tabs >}}
-{{% tab "Android RUM" %}}
+#### Android RUM
 
-```java
-public class SampleApplication extends Application { 
-    @Override 
-    public void onCreate() { 
-        super.onCreate();
-        final Configuration configuration = 
-                new Configuration.Builder(true, true, true, true)
-                        .trackInteractions()
-                        .trackLongTasks(durationThreshold)
-                        .useViewTrackingStrategy(strategy)
-                        .useSite(DatadogSite.US1)
-                        .build();
-            final Credentials credentials = new Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>);
-            Datadog.initialize(this, credentials, configuration, trackingConsent); 
-    }
-}
-```
-{{% /tab %}}
-{{% tab "iOS RUM" %}}
-```swift
-  Datadog.initialize(
-      appContext: .init(),
-      configuration: Datadog.Configuration
-          .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-          .set(version: "1.0.0")
-          .build()
-  )
-```
-{{% /tab %}}
-{{< /tabs >}}
+The version tag is captured automatically from the application’s manifest
+
+#### iOS RUM
+
+The version tag is captured automatically from the application’s app’s `info.plist`
 
 ## Analyze your Deployment Performance in RUM
 
