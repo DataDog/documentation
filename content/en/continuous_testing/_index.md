@@ -68,11 +68,6 @@ Once you have configured some [Synthetic tests][4], see the documentation for yo
 [2]: /synthetics/browser_tests
 [3]: /continuous_testing/settings
 [4]: /synthetics/
-[5]: /continuous_testing/cicd_integrations/github_actions
-[6]: /continuous_testing/cicd_integrations/gitlab
-[7]: /continuous_testing/cicd_integrations/jenkins
-[8]: /continuous_testing/cicd_integrations/circleci_orb
-[9]: /continuous_testing/cicd_integrations/azure_devops_extension
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/
 [11]: /continuous_testing/explorer
 [12]: /synthetics/apm/
