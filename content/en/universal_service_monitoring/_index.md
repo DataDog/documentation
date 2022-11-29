@@ -27,13 +27,16 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 
 {{< img src="universal_service_monitoring/usm-demo.mp4" alt="Video demonstrating Universal Service Monitoring. An overview of a service is accessed by clicking on a service on the Service Map and selecting View service overview." video="true" >}}
 
+
+## Setup
+
 ### Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40/7.40.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40.
 
 Your containerized service must be running on one of the following supported platforms
-: Linux kernel 4.14 and greater<br/>
+: Linux Kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater<br/>
 IIS on Windows 2012 R2 and greater
 
@@ -47,9 +50,9 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 ### Prerequisites
 
-- Your service is running in a container
+- Your service is running in a container.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
-- [Unified Service Tagging][1] tag for `env` has been applied to your deployment. The `service` and `version` tags are optional.
+- The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
 
 
@@ -278,7 +281,7 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.40/7.40 or above) with the network driver component enabled. During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
+1. Install the [Datadog Agent][1] (version 6.40 or 7.40 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -295,7 +298,7 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 
 Universal Service Monitoring automatically detects services running in your infrastructure. If it does not find [unified service tags][1], it assigns them a name based on one of the tags: `app`, `short_image`, `kube_container_name`, `container_name`, `kube_deployment`, `kube_service`.
 
-To update the service's name, use [unified service tagging][1].
+To update the service's name, set up [Unified Service Tagging][1].
 
 {{< img src="universal_service_monitoring/automatic-service-tagging.png" alt="When Datadog automatically detects your services, the tag used for this is shown on the top of the service page" style="width:80%;" >}}
 
