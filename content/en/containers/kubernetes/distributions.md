@@ -112,7 +112,7 @@ datadog:
 clusterAgent:
   env: 
     - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
-      value: true
+      value: "true"
 ```
 
 {{% /tab %}}
