@@ -93,7 +93,7 @@ REST API Integrations send the following types of data to Datadog:
 
 A Datadog API key is required to submit data to a Datadog API endpoint, and an application key is required to query data from Datadog or create resources on the Datadog site. Datadog recommends using [OAuth for an integration][15] to securely authorize third-party application access on a Marketplace tile.
 
-You can explore examples of existing API integrations in the `integrations-extras` repository such as [Vantage][24], [LambdaTest][25], and [Adaptive Shield][26].
+You can explore examples of existing API integrations in the `integrations-extras` repository such as [Vantage][24].
 
 ### Datadog Apps
 
@@ -293,5 +293,3 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [22]: /developers/integrations/check_references/#manifest-file
 [23]: https://datadoghq.com/blog/
 [24]: https://github.com/DataDog/integrations-extras/tree/master/vantage
-[25]: https://github.com/DataDog/integrations-extras/tree/master/lambdatest
-[26]: https://github.com/DataDog/integrations-extras/tree/master/adaptive_shield
