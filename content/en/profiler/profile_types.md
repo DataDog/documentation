@@ -14,14 +14,12 @@ further_reading:
 ---
 
 
-
-
-In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
+In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language and version, the information collected about your profile differs.
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof" >}}
 {{< programming-lang lang="java" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected for [supported Java versions][1]:
 
 
 CPU
@@ -48,46 +46,59 @@ Lock
 Socket I/O
 : The time each method spent reading from and writing to socket I/O.
 
+[1]: /profiler/enabling/java/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected, depending on your [Python version][1] as noted:
 
-
-CPU
-: The time each function spent running on the CPU, including Python and native code.
 
 Wall Time
-: The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
-
-Heap Live Size
-: The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
-
-Allocated Memory
-: The amount of heap memory allocated by each function, including allocations which were subsequently freed - only supported with Python 3.
-
-Allocations
-: The number of heap allocations made by each function, including allocations which were subsequently freed.
-
-Thrown Exceptions
-: The number of caught or uncaught exceptions raised by each function, as well as their type.
+: The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.<br />
+Python >= 2.7
 
 Lock Wait Time
-: The time each function spent waiting for a lock.
+: The time each function spent waiting for a lock.<br />
+Python >= 2.7
 
 Locked Time
-: The time each function spent holding a lock.
+: The time each function spent holding a lock.<br />
+Python >= 2.7
 
 Lock Acquires
-: The number of times each function acquired a lock.
+: The number of times each function acquired a lock.<br />
+Python >= 2.7
 
 Lock Releases
-: The number of times each function released a lock.
+: The number of times each function released a lock.<br />
+Python >= 2.7
 
+CPU
+: The time each function spent running on the CPU, including Python and native code.<br />
+Python >= 2.7 on POSIX platforms
+
+Heap Live Size
+: The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+Python >= 3.5
+
+Allocated Memory
+: The amount of heap memory allocated by each function, including allocations which were subsequently freed.<br />
+Python >= 3.5
+
+Allocations
+: The number of heap allocations made by each function, including allocations which were subsequently freed.<br />
+Python >= 3.5
+
+Thrown Exceptions
+: The number of caught or uncaught exceptions raised by each function, as well as their type.<br />
+Python >= 3.7 on POSIX platforms
+
+
+[1]: /profiler/enabling/python/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected for supported [Go versions][3]:
 
 
 CPU Time
@@ -120,10 +131,11 @@ Goroutines
 
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
+[3]: /profiler/enabling/go#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected for [supported Ruby versions][1]:
 
 CPU
 : The time each function spent running on the CPU, including Ruby and native code.
@@ -131,10 +143,11 @@ CPU
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
+[1]: /profiler/enabling/ruby/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
@@ -142,10 +155,11 @@ Wall Time
 Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
+[1]: /profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected for [supported .NET versions][1]:
 
 Wall Time
 : The elapsed time spent in managed methods. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
@@ -162,10 +176,11 @@ Allocations (beta)
 Lock (beta)
 : The number of times threads are waiting for a lock and for how long.
 
+[1]: /profiler/enabling/dotnet/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected for [supported PHP versions][1]:
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
@@ -173,10 +188,11 @@ Wall Time
 CPU
 : Shows the time each function spent running on the CPU.
 
+[1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="ddprof" >}}
 
-Once enabled, the following profile types are collected:
+Once profiling is enabled, the following profile types are collected for [supported languages and versions][1]:
 
 CPU
 : The time each function spent running on the CPU.
@@ -187,6 +203,7 @@ Allocations
 Allocated memory
 : The amount of heap memory allocated by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked. 
 
+[1]: /profiler/enabling/ddprof/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -195,6 +212,3 @@ Allocated memory
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /tracing/send_traces/#configure-your-environment
-[2]: /tracing/glossary/#services

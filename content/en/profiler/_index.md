@@ -59,7 +59,9 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you've configured your application to send profiles to Datadog, start getting insights into your code performance. By default, profiles are retained for 7 days, and metrics generated from profile data are retained for 1 month.
+After you've configured your application to send profiles to Datadog, start getting insights into your code performance. See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language. 
+
+By default, profiles are retained for 7 days, and metrics generated from profile data are retained for 1 month.
 
 ### Search profiles by tags
 
@@ -92,3 +94,4 @@ Comparing similar profiles from different times, environments, or deployments ca
 [3]: /tracing/
 [4]: /profiler/connect_traces_and_profiles/
 [5]: /profiler/compare_profiles/
+[6]: /profiler/profile_types/

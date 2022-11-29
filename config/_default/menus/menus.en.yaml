@@ -1982,26 +1982,31 @@ main:
     parent: profiler_enabling
     identifier: profiler_enabling_linux
     weight: 108
+  - name: Profile Types
+    url: profiler/profile_types/
+    parent: profiler
+    identifier: profiler_types
+    weight: 2
   - name: Search Profiles
     url: profiler/search_profiles/
     parent: profiler
     identifier: profiler_search_profiles
-    weight: 2
+    weight: 3
   - name: Investigate Slow Traces or Endpoints
     url: profiler/connect_traces_and_profiles/
     parent: profiler
     identifier: profiler_traces_profiles
-    weight: 3
+    weight: 4
   - name: Compare Profiles
     url: profiler/compare_profiles
     parent: profiler
     identifier: profiler_compare
-    weight: 4
+    weight: 5
   - name: Profiler Troubleshooting
     url: profiler/profiler_troubleshooting/
     parent: profiler
     identifier: profiler_profiler_troubleshooting
-    weight: 5
+    weight: 6
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
