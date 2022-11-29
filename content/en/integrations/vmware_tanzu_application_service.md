@@ -121,7 +121,7 @@ cf restage <YOUR_APP>
 
 ### DogStatsD
 
-See [Metric Submission: DogStatsD][5] for more information. There is a list of [DogStatsD libraries][14] compatible with a wide range of applications.
+You can use [DogStatsD][33] to send custom application metrics to Datadog. See [Metric Submission: DogStatsD][5] for more information. There is a list of [DogStatsD libraries][14] compatible with a wide range of applications.
 
 ## Monitor your VMware Tanzu Application Service cluster
 
@@ -160,3 +160,4 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [29]: https://docs.cloudfoundry.org/running/all_metrics.html
 [30]: /profiler/enabling/
 [32]: /integrations/faq/pivotal_architecture
+[33]: /developers/dogstatsd/

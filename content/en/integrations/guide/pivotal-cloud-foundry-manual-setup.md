@@ -18,7 +18,7 @@ There are three main components for the PCF integration with Datadog. First, the
 
 ## Monitor your applications
 
-Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your PCF application. This is a [supply buildpack][2] for PCF that installs a Datadog DogStatsD binary file and Datadog Agent in the container your app is running on.
+Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your PCF application. This is a [supply buildpack][2] for PCF that installs a Datadog DogStatsD binary file and IoT Datadog Agent (which includes the trace agent) in the container your app is running on.
 
 ### Pivotal Cloud Foundry < 1.12
 
