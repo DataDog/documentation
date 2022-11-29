@@ -22,13 +22,13 @@ Feature flag data gives you greater visibility into your user experience and per
 By enriching your RUM data with feature flag data, you can be confident that your feature will successfully launch, and ensure it’s not unintentionally causing a bug or performance regression. With this additional layer of insight, you can now correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
 ## Setup
-Feature Flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring]([1]). You need the Browser RUM SDK version >= 4.25.0.
+Feature Flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-You can start collecting feature flag data for [custom feature flag management solutions]([2]), or using one of our integration partners. 
+You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of our integration partners. 
 
 We currently support integrations with:
-- [LaunchDarkly]([3])
-- [Split]([4])
+- [LaunchDarkly][3]
+- [Split][4]
 
 ### Custom Feature Flag Management
 
@@ -352,7 +352,7 @@ Feature Flags appear in the context of your RUM Sessions, Views, and Errors as a
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Feature Flag list of attributes in RUM Explorer" style="width:75%;">}}
 
 ### Search Feature Flags using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer]([5]) to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards]([6]) and [monitors]([7]). You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
+Search through all the data collected by RUM in the [RUM Explorer][5] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][6] and [monitors][7]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
 
 #### Sessions
 Filtering your Sessions with the `@feature_flags.{flag_name}` attribute, you will find all Sessions in the given time frame where your feature flag was evaluated.
