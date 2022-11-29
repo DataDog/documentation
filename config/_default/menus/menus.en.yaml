@@ -3460,16 +3460,11 @@ main:
     parent: dev_tools
     identifier: dev_tools_marketplace
     weight: 5
-  - name: Create an API Integration
-    url: developers/marketplace/api_integration/
-    parent: marketplace
-    identifier: marketplace_api_integration
-    weight: 501
   - name: Develop A Marketplace Offering
     url: developers/marketplace/offering
     parent: dev_tools_marketplace
     identifier: dev_tools_marketplace_offering
-    weight: 502
+    weight: 501
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
