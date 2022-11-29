@@ -12,6 +12,10 @@ further_reading:
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
 
+{{< beta-callout url="#" btn_hidden="true" >}}
+Feature Flag data collection in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
+{{< /beta-callout >}}
+
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if your change is having an impact on your user experience or causing a negative impact in performance. 
 
@@ -313,28 +317,5 @@ Filtering your Errors with the `@feature_flags.{flag_name}` attribute, you will 
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
-### Feature Flag List
-To view all your active feature flags, you can navigate to the [Feature Flags](/) tab in RUM. Click the **Feature Flags** tab under **UX Monitoring** > **RUM Applications** to access the Feature Flag list and investigate any questions you have about your feature flag’s health and usage.
-
-You can:
-- View feature flags that are having a negative impact on your application’s performance and user experience
-- Investigate performance issues for your feature flags
-- Monitor your feature releases to ensure that your release isn’t unintentionally causing a bug or performance regression. 
-
-### Search and filter
-Search and filter your feature flags by typing in the search bar. You can also use the faceted search, similar to the RUM explorer, to narrow down, broaden, and shift your focus on subsets of feature flags you are interested in.
-
-*Note: The faceted search for feature flags searches by View level attributes.*
-
-### Explore the Feature Flag Analysis Dashboard
-From the feature flag list, you can navigate to a dedicated feature flag analysis dashboard. The Feature Flag analysis dashboard provides an overview of the performance of your feature flag, showing you information about user sessions, changes in your Core Web Vitals, and error rates. 
-
-You can clone this dashboard and customize it to fit your needs.
-
-{img}
-
-### Explore the Feature Flag Analysis Powerpacks
-You can quickly add feature flag analysis tracking to your dashboards using the powerpacks menu on a dashboard and searching for the “Feature Flag Analysis” powerpack. You can then iterate and add any other widget to your dashboards to help your teams release new features safely.
-
-{img}
-
+## Further Reading
+{{< partial name="whats-next/whats-next.html" >}}
