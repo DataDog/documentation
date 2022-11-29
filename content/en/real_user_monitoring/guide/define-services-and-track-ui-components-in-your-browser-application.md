@@ -50,7 +50,7 @@ If your browser application leverages UI components that are used across multipl
 
 [Generate a custom action][7] to track the lifecycle of components across pages. Let's imagine the `/myorders` page and the `/search` page both leverage the search box component below.
 
-[ replace GIF with mp4. alt text="Generate a custom action to track the lifecycle of components across pages"]
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-autofill.jpg" alt="Generate a custom action to track the lifecycle of components across pages" style="width:30%;">}}
 
 You can track the following milestones in the lifecycle of the search component by sending a custom action every time:
 
