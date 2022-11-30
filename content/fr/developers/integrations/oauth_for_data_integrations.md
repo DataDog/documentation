@@ -90,7 +90,7 @@ Pour démarrer le processus de publication dans la [Plateforme de développement
 
    Enregistrez votre ID client, votre secret client et votre `app_uuid` dans un endroit sécurisé.
 
-2. Au moment d'ouvrir une pull request pour une **nouvelle intégration de données** dans `integrations-extras` ou `Marketplace`, utilisez la valeur `app_uuid` du client publié dans le champ `app_uuid` du fichier `manifest.json`. Si les valeurs `app_uuid` ne correspondent pas, cela signifie que votre application n'a pas été correctement publiée. Si vous avez une **intégration de données existante**, il n'est pas nécessaire de mettre à jour `app_uuid`.
+2. Au moment d'ouvrir une pull request pour une **nouvelle intégration** dans `integrations-extras` ou `Marketplace`, utilisez la valeur `app_uuid` du client publié dans le champ `app_uuid` du fichier `manifest.json`. Si les valeurs `app_uuid` ne correspondent pas, cela signifie que votre application n'a pas été correctement publiée. Si vous avez une **intégration existante**, il n'est pas nécessaire de mettre à jour `app_uuid`.
 
 Étant donné que vous ne pouvez pas modifier directement un client OAuth publié, n'utilisez le flux de publication que lorsque tout a été testé et qu'aucun problème n'a été constaté. Pour mettre à jour le client OAuth, vous devrez suivre une nouvelle fois le flux de publication. **Les identifiants du client publié ne seront plus accessibles**.
 
