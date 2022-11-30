@@ -38,7 +38,9 @@ $RefParser.dereference(fileData)
       entries.forEach(([key, value]) => {
           let entryData = {
             //"simple": value.allOf[1],
-            "description": value.description || "",
+            "description1": value.description || "",
+            "description2": value.allOf[0].description || "",
+            "title": value.allOf[0].title || "",
             "metadata": value._metadata || {},
             "simple": exampleToml(value.allOf[1]),
             "advanced": exampleToml(value.allOf[1], value.allOf[0]),
@@ -73,7 +75,9 @@ $RefParser.dereference(fileData)
       //const entryLen = transformEntries.length;
       transformEntries.forEach(([key, value]) => {
           let entryData = {
-            "description": value.description || "",
+            "description1": value.description || "",
+            "description2": value.allOf[0].description || "",
+            "title": value.allOf[0].title || "",
             "metadata": value._metadata || {},
             "simple": exampleToml(value.allOf[1]),
             "advanced": exampleToml(value.allOf[1], value.allOf[0]),
@@ -93,7 +97,9 @@ $RefParser.dereference(fileData)
       //const entryLen = sinkEntries.length;
       sinkEntries.forEach(([key, value]) => {
           let entryData = {
-            "description": value.description || "",
+            "description1": value.description || "",
+            "description2": value.allOf[0].description || "",
+            "title": value.allOf[0].title || "",
             "metadata": value._metadata || {},
             "simple": exampleToml(value.allOf[1]),
             "advanced": exampleToml(value.allOf[1], value.allOf[0]),
