@@ -76,7 +76,7 @@ Le client OAuth est un composant qui permet aux utilisateurs d'autoriser l'appli
 
 ### Publier le client OAuth
 
-Pour publier un client OAuth, vous devez d'abord ouvrir une pull request pour votre intégration de données dans le référentiel GitHub [`integrations-extras`][5] ou [Marketplace][6].
+Pour publier un client OAuth, vous devez d'abord ouvrir une pull request pour votre intégration dans le référentiel GitHub [`integrations-extras`][5] ou [Marketplace][6].
 
 Dans le cadre de votre pull request, ajoutez une section **uninstallation** sous la partie `## Setup` de votre fichier README en y incluant les instructions suivantes (ainsi que toute instruction personnalisée que vous souhaitez ajouter) :
 
