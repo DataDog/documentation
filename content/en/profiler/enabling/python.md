@@ -29,11 +29,11 @@ The following profiling features are available depending on your Python version.
 
 |      Feature         | Supported Python versions          |
 |----------------------|------------------------------------|
-| Wall time profiling  | Python >= 2.7                      |
-| CPU time profiling   | Python >= 2.7 on POSIX platforms   |
-| Exception profiling  | Python >= 3.7 on POSIX platforms   |
-| Lock profiling       | Python >= 2.7                      |
-| Memory profiling     | Python >= 3.5                      |
+| Wall time profiling  | Python 2.7+                      |
+| CPU time profiling   | Python 2.7+ on POSIX platforms   |
+| Exception profiling  | Python 3.7+ on POSIX platforms   |
+| Lock profiling       | Python 2.7+                      |
+| Memory profiling     | Python 3.5+                      |
 
 ## Installation
 

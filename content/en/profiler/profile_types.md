@@ -55,43 +55,43 @@ Once profiling is enabled, the following profile types are collected, depending 
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.<br />
-_Requires: Python >= 2.7_
+_Requires: Python 2.7+_
 
 Lock Wait Time
 : The time each function spent waiting for a lock.<br />
-_Requires: Python >= 2.7_
+_Requires: Python 2.7+_
 
 Locked Time
 : The time each function spent holding a lock.<br />
-_Requires: Python >= 2.7_
+_Requires: Python 2.7+_
 
 Lock Acquires
 : The number of times each function acquired a lock.<br />
-_Requires: Python >= 2.7_
+_Requires: Python 2.7+_
 
 Lock Releases
 : The number of times each function released a lock.<br />
-_Requires: Python >= 2.7_
+_Requires: Python 2.7+_
 
 CPU
 : The time each function spent running on the CPU, including Python and native code.<br />
-_Requires: Python >= 2.7, POSIX platform_
+_Requires: Python 2.7+, POSIX platform_
 
 Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Python >= 3.5_
+_Requires: Python 3.5+_
 
 Allocated Memory
 : The amount of heap memory allocated by each function, including allocations which were subsequently freed.<br />
-_Requires: Python >= 3.5_
+_Requires: Python 3.5+_
 
 Allocations
 : The number of heap allocations made by each function, including allocations which were subsequently freed.<br />
-_Requires: Python >= 3.5_
+_Requires: Python 3.5+_
 
 Thrown Exceptions
 : The number of caught or uncaught exceptions raised by each function, as well as their type.<br />
-_Requires: Python >= 3.7, POSIX platform_
+_Requires: Python 3.7+, POSIX platform_
 
 
 [1]: /profiler/enabling/python/#requirements
