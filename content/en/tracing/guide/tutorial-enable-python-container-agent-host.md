@@ -196,7 +196,13 @@ To check that you've set things up correctly, compare your `docker-compose.yaml`
 
 ## Start the Agent
 
-tktk
+Start the Agent service on the host. The command [depends on the operating system][14], for example:
+
+MacOS
+: `launchctl start com.datadoghq.agent`
+
+Linux
+: `sudo service datadog-agent start`
 
 Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
@@ -207,16 +213,12 @@ Verify that the Agent is running and sending data to Datadog by going to [**Even
 
 ## Launch the containers to see automatic tracing
 
-Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
+Now that the Tracing Library is installed and the Agent is running, restart your application to start receiving traces. Run the following commands:
 
 ```
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db datadog notes_app
 ```
-
-You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
-
-{{< img src="tracing/guide/tutorials/tutorial-python-containers-agent-start-event.png" alt="Agent start event shown in Events Explorer" style="width:100%;" >}}
 
 With the application running, send some curl requests to it:
 
@@ -259,7 +261,7 @@ While automatic instrumentation is convenient, sometimes you want more fine-grai
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
-1. Open `notes_app/notes_app/notes_helper.py`.
+1. Open `notes_app/notes_helper.py`.
 2. Add the following import:
    {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
@@ -300,11 +302,17 @@ The sample project includes a second application called `calendar_app` that retu
    CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
    ```
 
-2. TKTK Add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container so that it sends traces to the correct location. Open `docker/host-and-containers/exercise/docker-compose.yml` and add the following lines to the `calendar_app` section:
+2. Like you did earlier for the notes app, add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container so that it sends traces to the correct location. Open `docker/host-and-containers/exercise/docker-compose.yml` and add the following lines to the `calendar_app` section:
 
    ```yaml
        environment:
-        - DD_AGENT_HOST=datadog
+        - DD_AGENT_HOST=host.docker.internal
+   ```
+   And, if you're using Linux, add the `extra_host` also:
+
+   ```yaml
+       extra_hosts:
+         - "host.docker.internal:host-gateway"
    ```
 
 3. Apply Universal Service Tags, just like we did for the notes app. Add the following environment variables in the `Dockerfile.calendar` file:
@@ -323,7 +331,7 @@ The sample project includes a second application called `calendar_app` that retu
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/host-and-containers/solution/Dockerfile.calendar`.
+To check that you've set things up correctly, compare your setup with the Dockerfile and `docker-config.yaml` files provided in the sample repository's `docker/host-and-containers/solution` directory.
 
 5. Build the multi-service application by restarting the containers. First, stop all containers if still running:
    ```
@@ -364,7 +372,7 @@ def create_note(self, desc, add_date=None):
                 try:
                     with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
                         self.nh.another_process()
-                    note_date = requests.get(f"http://localhost:9090/calendar")
+                    note_date = requests.get(f"https://{CALENDAR_HOST}/calendar")
                     note_date = note_date.text
                     desc = desc + " with date " + note_date
                     print(desc)
@@ -372,7 +380,7 @@ def create_note(self, desc, add_date=None):
                     print(e)
                     raise IOError("Cannot reach calendar service.")
         note = Note(description=desc, id=None)
-        note.id = self.db.create_note(note){{< /code-block >}}
+        return self.db.create_note(note){{< /code-block >}}
 
 3. Rebuild the containers:
    ```
@@ -405,3 +413,4 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [11]: https://app.datadoghq.com/apm/traces
 [12]: /tracing/trace_collection/custom_instrumentation/python/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[14]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
