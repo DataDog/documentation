@@ -140,6 +140,7 @@ List of commands to display the status of the Datadog Agent:
 | Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
 | macOS           | `launchctl list com.datadoghq.agent` *or* through the systray app             |
 | Source          | `sudo service datadog-agent status`                                           |
+| Windows         | See the [Windows Agent documentation][2].                                     |
 
 
 [1]: /agent/
