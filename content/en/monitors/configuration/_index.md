@@ -2,12 +2,15 @@
 title: Configure Monitors
 kind: documentation
 description: Describes the monitor creation page.
-
+aliases:
+  - /monitors/monitor_types/
+  - /monitors/create/types/
+  - /monitors/create/#monitor-types
 ---
 
 ## Overview
 
-Once you’ve chosen a [monitor type][1], start configuring the monitor.
+Once you've chosen a [monitor type][1], start configuring the monitor.
 4 main steps must be completed before saving the monitor :
 
 * **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, etc.
@@ -25,9 +28,9 @@ To learn how to construct the search query, see the individual [monitor types][1
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping defaults to `Multi Alert`.
 
-`Simple Alert` mode aggregate over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+`Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
 
-`Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
 Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
 
 | Group by                       | Simple alert mode | Multi alert mode |
