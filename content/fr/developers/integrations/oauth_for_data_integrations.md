@@ -18,7 +18,7 @@ Pour en savoir plus sur l'implémentation du protocole OAuth par Datadog, consul
 
 OAuth permet aux clients de Datadog d'autoriser facilement des plateformes tierces à accéder à leurs données sans risque, et ce sans avoir à saisir leurs clés d'API ou d'application. Vous pouvez utiliser OAuth avec des intégrations de données existantes, ou le configurer dans le cadre du développement de nouvelles intégrations de données.  
 
-Lors de la création d'une intégration avec OAuth, vous pouvez sélectionner les contextes de données précis auxquels votre application doit accéder. De son côté, le client peut autoriser l'accès aux contextes granulaires que vous avez demandés. Même s'il n'est pas possible de spécifier des contextes facultatifs, tous les contextes demandés par une intégration deviennent accessibles dès lors que le client accorde son autorisation.
+Lors de la création d'une intégration avec OAuth, vous pouvez sélectionner les contextes de données précis auxquels votre application doit accéder. De son côté, le client pourra autoriser l'accès aux contextes granulaires que vous avez demandés. Même s'il n'est pas possible de spécifier des contextes facultatifs, tous les contextes demandés par une intégration deviennent accessibles dès lors que le client accorde son autorisation.
 
 ## Créer une nouvelle intégration de données avec OAuth
 
