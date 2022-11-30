@@ -217,7 +217,7 @@ Now that the Tracing Library is installed and the Agent is running, restart your
 
 ```
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
-docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db datadog notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db notes_app
 ```
 
 With the application running, send some curl requests to it:
@@ -280,7 +280,7 @@ from ddtrace import tracer{{< /code-block >}}
 4. Rebuild the containers by running:
    {{< code-block lang="sh" >}}
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
-docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db datadog notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db notes_app
 {{< /code-block >}}
 4. Resend some HTTP requests, specifically some `GET` requests.
 5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
