@@ -14,7 +14,7 @@ OAuth permet d'autoriser des intégrations tierces à accéder aux données Data
 
 Pour en savoir plus sur l'implémentation du protocole OAuth par Datadog, consultez la [documentation de Datadog relative à OAuth2][1].
 
-## Utiliser OAuth dans une intégration de données
+## Utiliser OAuth dans une intégration
 
 OAuth permet aux clients de Datadog d'autoriser facilement des plateformes tierces à accéder à leurs données sans risque, et ce sans avoir à saisir leurs clés d'API ou d'application. Vous pouvez utiliser OAuth avec des intégrations de données existantes, ou le configurer dans le cadre du développement de nouvelles intégrations de données.  
 
