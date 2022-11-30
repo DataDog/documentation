@@ -359,7 +359,12 @@ To check that you've set things up correctly, compare your setup with the Docker
 As previously mentioned, you can add custom instrumentation by using code. Supposed you want to further instrument the calendar service in order to better see the trace. 
 
 1. Open `notes_app/notes_logic.py`. 
-2. Inside the `try` block, at about line 28, add the following `with` statement:
+2. Add the following import
+
+   ```python
+   from ddtrace import tracer
+   ```
+3. Inside the `try` block, at about line 28, add the following `with` statement:
 
    ```python
    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
@@ -382,14 +387,14 @@ def create_note(self, desc, add_date=None):
         note = Note(description=desc, id=None)
         return self.db.create_note(note){{< /code-block >}}
 
-3. Rebuild the containers:
+4. Rebuild the containers:
    ```
    docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
    docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up
    ```
 
-4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
-5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
+5. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
+6. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
    {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
    Note the new span labeled `notes_helper.another_process`.
 

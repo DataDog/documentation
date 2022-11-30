@@ -247,7 +247,12 @@ ddtrace-run python -m calendar_app.app
 As previously mentioned, you can add custom instrumentation by using code. Supposed you want to further instrument the calendar service in order to better see the trace. 
 
 1. Open `notes_app/notes_logic.py`. 
-2. Inside the `try` block, at about line 28, add the following `with` statement:
+2. Add the following import
+
+   ```python
+   from ddtrace import tracer
+   ```
+3. Inside the `try` block, at about line 28, add the following `with` statement:
 
    ```python
    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
@@ -270,9 +275,9 @@ def create_note(self, desc, add_date=None):
         note = Note(description=desc, id=None)
         note.id = self.db.create_note(note){{< /code-block >}}
 
-3. Restart the service.
-4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
-5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
+4. Restart the service.
+5. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
+6. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
    {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
    Note the new span labeled `notes_helper.another_process`.
 
