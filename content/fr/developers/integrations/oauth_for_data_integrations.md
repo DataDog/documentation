@@ -102,7 +102,7 @@ Le processus pour ajouter un client OAuth à une intégration existante reprend 
 
 ### Si vous avez une intégration existante qui n'est pas connectée à une UI Extension
 
-Suivez les [étapes](#creer-une-nouvelle-intégration-de-données-avec-oauth) ci-dessus et assurez-vous d'ouvrir une pull request pour ajouter de nouvelles instructions de désinstallation à votre carré d'intégration.
+Suivez les [étapes](#creer-une-nouvelle-intégration-avec-oauth) ci-dessus et assurez-vous d'ouvrir une pull request pour ajouter de nouvelles instructions de désinstallation à votre carré d'intégration.
 
 Vous n'avez pas besoin de modifier votre `app_uuid` dans le fichier `manifest.json` si vous avez déjà une intégration de données.
 
