@@ -292,7 +292,7 @@ The sample project includes a second application called `calendar_app` that retu
         - DD_AGENT_HOST=datadog
    ```
 
-   To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/containers/solution/Dockerfile.calendar`.
+   To check that you've set things up correctly, compare your setup with the Dockerfile and `docker-config.yaml` files provided in the sample repository's `docker/containers/solution` directory.
 
 5. Build the multi-service application by restarting the containers. First, stop all containers if still running:
    ```
