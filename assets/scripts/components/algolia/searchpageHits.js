@@ -29,8 +29,8 @@ const renderHits = (renderOptions, isFirstRender) => {
             .map((item) => {
                 const link = item.full_url;
                 const hitData = item._highlightResult;
-                const subcategory = item.subcategory;
                 const title = item.title;
+                const subcategory = item.subcategory ? item.subcategory : title;
                 const sectionHeader = item.section_header ? item.section_header : null;
                 const content = hitData.content.value;
                 const tag = item.tags[0];
@@ -65,15 +65,9 @@ const renderHits = (renderOptions, isFirstRender) => {
                         <a href="${link}" target="_blank" rel="noopener noreferrer">
                             <div class="ais-Hits-row">
                                 <p class="ais-Hits-category">${category}</p>
+                                <span class="ais-Hits-category-spacer">&#187;</span>   
+                                <p class="ais-Hits-subcategory">${subcategory}</p>
                                 <span class="ais-Hits-category-spacer">&#187;</span>
-                                ${
-                                    subcategory
-                                        ? `
-                                    <p class="ais-Hits-subcategory">${subcategory}</p>
-                                    <span class="ais-Hits-category-spacer">&#187;</span>
-                                `
-                                        : ``
-                                }
                                 <p class="ais-Hits-title">${displayTitle}</p>
                             </div>
                             <div class="ais-Hits-row">

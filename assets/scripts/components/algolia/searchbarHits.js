@@ -67,8 +67,8 @@ const renderHits = (renderOptions, isFirstRender) => {
             .map((item) => {
                 const link = item.full_url;
                 const hitData = item._highlightResult;
-                const subcategory = hitData.subcategory.value;
                 const title = hitData.title.value;
+                const subcategory = hitData.subcategory ? hitData.subcategory.value : title;
                 const sectionHeader = hitData.section_header ? hitData.section_header.value : null;
                 const content = hitData.content.value;
 
