@@ -22,7 +22,7 @@ aliases:
 {{< whatsnext desc="Tutorials: Enabling Tracing" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Tracing Guides" >}}
