@@ -106,11 +106,11 @@ Suivez les [étapes](#creer-une-nouvelle-intégration-avec-oauth) ci-dessus et a
 
 Vous n'avez pas besoin de modifier votre `app_uuid` dans le fichier `manifest.json` si vous avez déjà une intégration.
 
-### Si vous avez une intégration de données existante qui est connectée à une UI Extension (utilise le même carré)
+### Si vous avez une intégration existante qui est connectée à une UI Extension (utilise le même carré)
 
 Au lieu de créer une application, accédez à celle qui possède la version publiée de votre UI Extension dans la plateforme de développement et suivez les [étapes] (#creer-un-client-oauth) restantes.
 
-Une fois que vous avez créé le client OAuth de votre intégration de données et que vous êtes prêt à le publier, cliquez sur **Edit** dans votre application et accédez à l'onglet **Publishing** sous **General**. N'oubliez pas également d'ouvrir une pull request pour ajouter de nouvelles instructions de désinstallation à votre carré.
+Une fois que vous avez créé le client OAuth de votre intégration et que vous êtes prêt à le publier, cliquez sur **Edit** dans votre application et accédez à l'onglet **Publishing** sous **General**. N'oubliez pas également d'ouvrir une pull request pour ajouter de nouvelles instructions de désinstallation à votre carré.
 
 **Remarque** : vous n'avez pas besoin de modifier votre `app_uuid` dans le fichier `manifest.json` si vous avez déjà une intégration de données ou une UI Extension.
 
