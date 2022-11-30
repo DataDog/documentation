@@ -3,9 +3,7 @@ title: Configure Monitors
 kind: documentation
 description: Describes the monitor creation page.
 aliases:
-  - /monitors/monitor_types/
-  - /monitors/create/types/
-  - /monitors/create/#monitor-types
+  - /monitors/create/configuration
 ---
 
 ## Overview
