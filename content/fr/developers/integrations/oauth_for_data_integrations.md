@@ -1,8 +1,8 @@
 ---
 dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/oauth_for_data_integrations.md
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/oauth_for_integrations.md
 kind: documentation
-title: OAuth pour les intégrations de données
+title: OAuth pour les intégrations
 ---
 {{< beta-callout btn_hidden="true" >}}
   La plateforme de développement Datadog est encore en version bêta. Si vous n'y avez pas accès, envoyez un e-mail à l'adresse apps@datadoghq.com.
