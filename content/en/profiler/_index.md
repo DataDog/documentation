@@ -59,9 +59,15 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you've configured your application to send profiles to Datadog, start getting insights into your code performance. See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language. 
+After you've configured your application to send profiles to Datadog, start getting insights into your code performance.  
 
 By default, profiles are retained for 7 days, and metrics generated from profile data are retained for 1 month.
+
+### Profile types
+
+See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language.
+
+{{< img src="profiler/profile-types.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
 
 ### Search profiles by tags
 
