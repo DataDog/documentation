@@ -10,8 +10,7 @@ aliases:
 
 ## Overview
 
-Once you've chosen a [monitor type][1], start configuring the monitor.
-4 main steps must be completed before saving the monitor :
+To start configuring the monitor, complete the following:
 
 * **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, etc.
 * **Set alert conditions:** Define alert and warning thresholds , evaluation time frames, and configure advanced alert options.
@@ -254,7 +253,7 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 **Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
 
 
-[1]: /monitors/create/#monitor-types
+[1]: /monitors/types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
 [4]: /monitors/create/configuration#auto-resolve
