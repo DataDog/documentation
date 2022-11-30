@@ -97,6 +97,24 @@ psql -h localhost -U datadog -d postgres -c "select * from pg_stat_statements LI
 
 If you specified a `dbname` other than the default `postgres` in your Agent config, you must run `CREATE EXTENSION pg_stat_statements` in that database.
 
+If you created the extension in your target database and you still see this warning, the extension may have been created in a schema that is not accessible to the `datadog` user. To verify this, run this command to check which schema `pg_stat_statements` was created in:
+
+```bash
+psql -h localhost -U datadog -d postgres -c "select nspname from pg_extension, pg_namespace where extname = 'pg_stat_statements' and pg_extension.extnamespace = pg_namespace.oid;"
+```
+
+Then, run this command to check which schemas are visible to the `datadog` user:
+
+```bash
+psql -h localhost -U datadog -d <your_database> -c "show search_path;"
+```
+
+If you do not see the `pg_stat_statements` schema in the `datadog` user's `search_path`, you need to add it to the `datadog` user. For example:
+
+```sql
+ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+```
+
 ### Certain queries are missing
 
 If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see , follow this guide.
