@@ -228,7 +228,7 @@ While automatic instrumentation is convenient, sometimes you want more fine-grai
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
-1. Open `notes_app/notes_app/notes_helper.py`.
+1. Open `notes_app/notes_helper.py`.
 2. Add the following import:
    {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
@@ -319,11 +319,11 @@ To check that you've set things up correctly, compare your Dockerfile file with 
 
 As previously mentioned, you can add custom instrumentation by using code. Supposed you want to further instrument the calendar service in order to better see the trace. 
 
-1. Open `notes_app/notes_app/notes_logic.py`. 
+1. Open `notes_app/notes_logic.py`. 
 2. Inside the `try` block, at about line 28, add the following `with` statement:
 
    ```python
-   with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
+   with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
    ```
    Resulting in this:
    {{< code-block lang="python" >}}
@@ -331,7 +331,7 @@ def create_note(self, desc, add_date=None):
         if (add_date):
             if (add_date.lower() == "y"):
                 try:
-                    with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
+                    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
                         self.nh.another_process()
                     note_date = requests.get(f"http://localhost:9090/calendar")
                     note_date = note_date.text

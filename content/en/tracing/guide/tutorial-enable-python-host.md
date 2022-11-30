@@ -101,7 +101,7 @@ The sample `notes_app` application is a basic REST API that stores data in an in
 `curl -X GET 'localhost:8080/notes?id=1'`
 : Returns the note with `id` value of `1`: `( 1, hello)`
 
-`curl -X POST 'localhost:8080/notes?desc=otherNote`
+`curl -X POST 'localhost:8080/notes?desc=otherNote'`
 : Adds a note with the description `otherNote` and an ID value of `2`. Returns `( 2, otherNote)`
 
 `curl -X GET 'localhost:8080/notes'`
@@ -194,7 +194,7 @@ While automatic instrumentation is convenient, sometimes you want more fine-grai
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
-1. Open `notes_app/notes_app/notes_helper.py`.
+1. Open `notes_app/notes_helper.py`.
 2. Add the following import:
    {{< code-block lang="python" >}}
 from ddtrace import tracer{{< /code-block >}}
@@ -225,7 +225,7 @@ Tracing a single application is a great start, but the real value in tracing com
 
 The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
-1. Build the calendar application by running:
+1. Start the calendar application by running:
 
    {{< code-block lang="bash" >}}
 DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \ 
@@ -246,11 +246,11 @@ ddtrace-run python -m calendar_app.app
 
 As previously mentioned, you can add custom instrumentation by using code. Supposed you want to further instrument the calendar service in order to better see the trace. 
 
-1. Open `notes_app/notes_app/notes_logic.py`. 
+1. Open `notes_app/notes_logic.py`. 
 2. Inside the `try` block, at about line 28, add the following `with` statement:
 
    ```python
-   with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
+   with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
    ```
    Resulting in this:
    {{< code-block lang="python" >}}
@@ -258,7 +258,7 @@ def create_note(self, desc, add_date=None):
         if (add_date):
             if (add_date.lower() == "y"):
                 try:
-                    with tracer.trace(name="notes_helper", service="notes_helper" resource="another_process") as span:
+                    with tracer.trace(name="notes_helper", service="notes_helper", resource="another_process") as span:
                         self.nh.another_process()
                     note_date = requests.get(f"http://localhost:9090/calendar")
                     note_date = note_date.text
