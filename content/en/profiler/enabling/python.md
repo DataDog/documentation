@@ -25,7 +25,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 The Datadog Profiler requires Python 2.7+ and Agent version [7.20.2][2]+ or
 [6.20.2][3]+.
 
-The following profiling features are available depending on your Python version:
+The following profiling features are available depending on your Python version. For more details, read [Profile Types][7]:
 
 |      Feature         | Supported Python versions          |
 |----------------------|------------------------------------|
@@ -122,3 +122,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [4]: https://app.datadoghq.com/profiling
 [5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
 [6]: /getting_started/profiler/
+[7]: /profiler/profile_types/?code-lang=python
