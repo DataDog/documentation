@@ -179,8 +179,8 @@ To check that you've set things up correctly, compare your `docker-compose.yaml`
 Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
 
 ```
-docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
-docker-compose -f docker/containers/solution/docker-compose.yaml up db datadog notes_app
+docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
+docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog notes_app
 ```
 
 You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
@@ -246,8 +246,8 @@ from ddtrace import tracer{{< /code-block >}}
 
 4. Rebuild the containers by running:
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
-docker-compose -f docker/containers/solution/docker-compose.yaml up db datadog notes_app
+docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
+docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog notes_app
 {{< /code-block >}}
 4. Resend some HTTP requests, specifically some `GET` requests.
 5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
@@ -296,13 +296,13 @@ To check that you've set things up correctly, compare your Dockerfile file with 
 
 5. Build the multi-service application by restarting the containers. First, stop all containers if still running:
    ```
-   docker-compose -f docker/containers/solution/docker-compose.yaml down
+   docker-compose -f docker/containers/exercise/docker-compose.yaml down
    ```
 
    Then run the following commands to start them:
    ```
-   docker-compose -f docker/containers/solution/docker-compose.yaml build
-   docker-compose -f docker/containers/solution/docker-compose.yaml up
+   docker-compose -f docker/containers/exercise/docker-compose.yaml build
+   docker-compose -f docker/containers/exercise/docker-compose.yaml up
    ```
 
 6. Send a POST request with the `add_date` parameter:
@@ -345,8 +345,8 @@ def create_note(self, desc, add_date=None):
 
 3. Rebuild the containers:
    ```
-   docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
-   docker-compose -f docker/containers/solution/docker-compose.yaml up
+   docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
+   docker-compose -f docker/containers/exercise/docker-compose.yaml up
    ```
 
 4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.

@@ -45,13 +45,6 @@ To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE`
 
 If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
 
-Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
-
-{{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
-
-<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
- 
-
 
 ## Install the sample Dockerized Python application
 
@@ -68,13 +61,13 @@ The repository contains a multi-service Python application pre-configured to be 
 1. Build the application's container by running:
 
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
 {{< /code-block >}}
 
 2. Start the container:
 
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml up db notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db notes_app
 {{< /code-block >}}
 
    The application is ready to use when you see the following output in the terminal: 
@@ -119,12 +112,12 @@ After you've seen the application running, stop it so that you can enable tracin
 
 1. Stop the containers:
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml down
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml down
 {{< /code-block >}}
 
 2. Remove the containers:
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/exercise/docker-compose.yaml rm
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml rm
 {{< /code-block >}}
 
 ## Enable tracing
@@ -140,7 +133,7 @@ Now that you have a working Python application, configure it to enable tracing.
    ddtrace
    ```
 
-2. Within the notes application Dockerfile, `docker/containers/exercise/Dockerfile.notes`, change the CMD line that starts the application to use the `ddtrace` package:
+2. Within the notes application Dockerfile, `docker/host-and-containers/exercise/Dockerfile.notes`, change the CMD line that starts the application to use the `ddtrace` package:
 
    ```
    # Run the application with Datadog 
@@ -165,42 +158,60 @@ Now that you have a working Python application, configure it to enable tracing.
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/containers/solution/Dockerfile.notes`.
+To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/host-and-containers/solution/Dockerfile.notes`.
 
-## Add the Agent container
+## Configure the container to send traces to the Agent
 
-Add the Datadog Agent in the services section of your `docker-compose.yaml` file:
+1. Open the compose file for the containers, `docker/host-and-containers/exercise/docker-compose.yaml`.
 
-1. Add the Agent configuration, and specify your own [Datadog API key][3] and [site][6]:
-   ```yaml
-     datadog:
-       container_name: dd-agent
-       image: "gcr.io/datadoghq/agent:latest"
-       environment:
-          - DD_API_KEY=<DD_API_KEY>
-          - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org
-          - DD_APM_ENABLED=true    # Enable APM
-       volumes: 
-          - /var/run/docker.sock:/var/run/docker.sock:ro 
-          - /proc/:/host/proc/:ro
-          - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-   ```
-
-2. To the section for each container with code that you want to monitor, in this case the `notes_app` container, add the environment variable `DD_AGENT_HOST` and specify the hostname of the Agent container:
+2. In the `notes_app` container section, add the environment variable `DD_AGENT_HOST` and specify the hostname of the Agent container:
    ```yaml
        environment:
-        - DD_AGENT_HOST=datadog
+        - DD_AGENT_HOST=host.docker.internal
    ```
 
-To check that you've set things up correctly, compare your `docker-compose.yaml` file with the one provided in the sample repository's solution file, `docker/containers/solution/docker-compose.yaml`.
+3. **On Linux**: Also add an `extra_host` to the compose file to allow communication on Docker's internal network. The `notes-app` section of your compose file should look something like this:
+
+   ```yaml
+     notes_app:
+       container_name: notes
+       restart: always
+       build:
+          context: ../../..
+          dockerfile: docker/host-and-containers/exercise/Dockerfile.notes
+       ports:
+          - "8080:8080"
+       depends_on:
+          - db
+       extra_hosts:                             # Linux only configuration 
+         - "host.docker.internal:host-gateway"  # Linux only configuration
+      environment:
+         - DB_HOST=test_postgres                 # the Postgres container
+         - CALENDAR_HOST=calendar                # the calendar container
+         - DD_AGENT_HOST=host.docker.internal    # the Agent running on the local machine using docker network
+   ```
+
+
+To check that you've set things up correctly, compare your `docker-compose.yaml` file with the one provided in the sample repository's solution file, `docker/host-and-containers/solution/docker-compose.yaml`.
+
+## Start the Agent
+
+tktk
+
+Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+
+{{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
+
+<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
+ 
 
 ## Launch the containers to see automatic tracing
 
 Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
 
 ```
-docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
-docker-compose -f docker/containers/solution/docker-compose.yaml up db datadog notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db datadog notes_app
 ```
 
 You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
@@ -266,8 +277,8 @@ from ddtrace import tracer{{< /code-block >}}
 
 4. Rebuild the containers by running:
    {{< code-block lang="sh" >}}
-docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
-docker-compose -f docker/containers/solution/docker-compose.yaml up db datadog notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
+docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db datadog notes_app
 {{< /code-block >}}
 4. Resend some HTTP requests, specifically some `GET` requests.
 5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
@@ -284,12 +295,12 @@ Tracing a single application is a great start, but the real value in tracing com
 
 The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
-1. Configure the calendar app for tracing by adding `dd_trace` to the startup command in the Dockerfile, like you previously did for the notes app. Open `docker/containers/exercise/Dockerfile.calendar` and update the CMD line like this:
+1. Configure the calendar app for tracing by adding `dd_trace` to the startup command in the Dockerfile, like you previously did for the notes app. Open `docker/host-and-containers/exercise/Dockerfile.calendar` and update the CMD line like this:
    ```
    CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
    ```
 
-2. Add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container so that it sends traces to the correct location. Open `docker/containers/exercise/docker-compose.yml` and add the following lines to the `calendar_app` section:
+2. TKTK Add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container so that it sends traces to the correct location. Open `docker/host-and-containers/exercise/docker-compose.yml` and add the following lines to the `calendar_app` section:
 
    ```yaml
        environment:
@@ -312,17 +323,17 @@ The sample project includes a second application called `calendar_app` that retu
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/containers/solution/Dockerfile.calendar`.
+To check that you've set things up correctly, compare your Dockerfile file with the one provided in the sample repository's solution file, `docker/host-and-containers/solution/Dockerfile.calendar`.
 
 5. Build the multi-service application by restarting the containers. First, stop all containers if still running:
    ```
-   docker-compose -f docker/containers/solution/docker-compose.yaml down
+   docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml down
    ```
 
    Then run the following commands to start them:
    ```
-   docker-compose -f docker/containers/solution/docker-compose.yaml build
-   docker-compose -f docker/containers/solution/docker-compose.yaml up
+   docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build
+   docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up
    ```
 
 6. Send a POST request with the `add_date` parameter:
@@ -365,8 +376,8 @@ def create_note(self, desc, add_date=None):
 
 3. Rebuild the containers:
    ```
-   docker-compose -f docker/containers/solution/docker-compose.yaml build notes_app
-   docker-compose -f docker/containers/solution/docker-compose.yaml up
+   docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build notes_app
+   docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up
    ```
 
 4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
