@@ -44,7 +44,3 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/configuration
-[2]: /api/v1/monitors/
-[3]: /developers/community/libraries/#managing-monitors
-[4]: https://app.datadoghq.com/monitors#create/import

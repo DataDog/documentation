@@ -77,7 +77,7 @@ A rolling time window has a fixed size and moves its starting point over time. M
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
 
 - `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
-- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota](https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota) by using the `current day` time window and letting it start at 2:00pm UTC.
+- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][2] by using the `current day` time window and letting it start at 2:00pm UTC.
 - `Current month`: Looks back at the current month starting on the first of the month at midnight UTC. This option represents a month-to-date time window and is only available for metric monitors.
 
 {{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
@@ -100,7 +100,7 @@ Evaluation frequencies depend on the [evaluation window](#evaluation-window) tha
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][2]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][3]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
 
 | Option                                   | Description                    |
 |------------------------------------------|--------------------------------|
@@ -117,7 +117,8 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
-[2]: /monitors/guide/recovery-thresholds/
+[2]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
+[3]: /monitors/guide/recovery-thresholds/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
