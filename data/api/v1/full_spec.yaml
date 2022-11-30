@@ -7319,12 +7319,61 @@ components:
           description: The container usage by tag(s).
           format: double
           type: number
+        cspm_containers_percentage:
+          description: The percentage of CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_containers_usage:
+          description: The CSPM container usage by tag(s).
+          format: double
+          type: number
+        cspm_hosts_percentage:
+          description: The percentage of CSPM host usage by by tag(s).
+          format: double
+          type: number
+        cspm_hosts_usage:
+          description: The CSPM host usage by tag(s).
+          format: double
+          type: number
         custom_timeseries_percentage:
           description: The percentage of custom metrics usage by tag(s).
           format: double
           type: number
         custom_timeseries_usage:
           description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        cws_containers_percentage:
+          description: The percentage of Cloud Workload Security container usage by
+            tag(s).
+          format: double
+          type: number
+        cws_containers_usage:
+          description: The Cloud Workload Security container usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_percentage:
+          description: The percentage of Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        cws_hosts_usage:
+          description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_percentage:
+          description: The percentage of Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_hosts_usage:
+          description: The Database Monitoring host usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_percentage:
+          description: The percentage of Database Monitoring queries usage by tag(s).
+          format: double
+          type: number
+        dbm_queries_usage:
+          description: The Database Monitoring queries usage by tag(s).
           format: double
           type: number
         estimated_indexed_logs_percentage:
