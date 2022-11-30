@@ -144,6 +144,7 @@ List of commands to display the status of the Datadog Agent:
 
 
 [1]: /agent/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
