@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /guides/forecasts/
 - /monitors/monitor_types/forecasts
+- /monitors/create/types/forecasts/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

@@ -4,6 +4,7 @@ kind: documentation
 description: "Monitor metric values or health status from a specific integration"
 aliases:
 - /monitors/monitor_types/integration
+- /monitors/create/types/integration/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

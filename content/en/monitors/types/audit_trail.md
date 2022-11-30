@@ -2,7 +2,8 @@
 title: Audit Trail Monitor
 kind: documentation
 aliases:
-    - /monitors/create/types/audit_logs/ 
+    - /monitors/create/types/audit_logs/
+    - /monitors/create/types/audit_trail/
 description: "Alert when a specified type of audit trail event is detected or exceeds a threshold."
 further_reading:
 - link: "/account_management/audit_trail/"

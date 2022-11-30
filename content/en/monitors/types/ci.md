@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/
+- /monitors/create/types/ci/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
