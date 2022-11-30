@@ -16,13 +16,13 @@ Pour en savoir plus sur l'implémentation du protocole OAuth par Datadog, consul
 
 ## Utiliser OAuth dans une intégration
 
-OAuth permet aux clients de Datadog d'autoriser facilement des plateformes tierces à accéder à leurs données sans risque, et ce sans avoir à saisir leurs clés d'API ou d'application. Vous pouvez utiliser OAuth avec des intégrations de données existantes, ou le configurer dans le cadre du développement de nouvelles intégrations de données.  
+OAuth permet aux clients de Datadog d'autoriser facilement des plateformes tierces à accéder à leurs données sans risque, et ce sans avoir à saisir leurs clés d'API ou d'application. Vous pouvez utiliser OAuth avec des intégrations existantes, ou le configurer dans le cadre du développement de nouvelles intégrations.  
 
 Lors de la création d'une intégration avec OAuth, vous pouvez sélectionner les contextes de données précis auxquels votre application doit accéder. De son côté, le client pourra autoriser l'accès aux contextes granulaires que vous avez demandés. Même s'il n'est pas possible de spécifier des contextes facultatifs, tous les contextes demandés par une intégration deviennent accessibles dès lors que le client accorde son autorisation.
 
-## Créer une nouvelle intégration de données avec OAuth
+## Créer une nouvelle intégration avec OAuth
 
-Cette section décrit les étapes à suivre pour créer une nouvelle intégration de données et ajouter un carré sur la page [Marketplace][2] ou [Integrations][3]. Si vous partez d'une intégration de données existante ou que vous en créez une nouvelle et que vous souhaitez l'ajouter à un carré existant sur l'une de ces pages, consultez la section [Ajouter OAuth à une offre existante](#ajouter-oauth-a-une-offre-existante).
+Cette section décrit les étapes à suivre pour créer une nouvelle intégration et ajouter un carré sur la page [Marketplace][2] ou [Integrations][3]. Si vous partez d'une intégration existante ou que vous en créez une nouvelle et que vous souhaitez l'ajouter à un carré existant sur l'une de ces pages, consultez la section [Ajouter OAuth à une offre existante](#ajouter-oauth-a-une-offre-existante).
 
 ### Créer une application à partir d'un modèle
 
