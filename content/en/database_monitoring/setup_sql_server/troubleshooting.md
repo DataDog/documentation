@@ -160,11 +160,52 @@ OperationalError: (KeyError('Python string format error in connection string->',
 
 At the moment, the only character known to cause this specific connectivity issue is the `%` character. If you want to use the "%" character in your `sqlserver.yaml`, that is if your Datadog SQL Server user password includes a `%`), you need to escape that character by including a double `%%` in place of each single `%`.
 
+### Data source name not found, and no default driver specified
+
+This is a common error seen when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
+
+For example, if you wanted to use the default odbc driver for the agent (`{ODBC Driver 18 for SQL Server}`), your instance config should contain the following:
+
+```yaml
+  connector: odbc
+```
+
+when the agent starts up and tries to establish a connection to your SQL Server instance, it will look for the `/etc/odbcinst.ini` file to find the path to the driver binaries.
+
+For example, this `/etc/odbcinst.ini` file sets the driver like so:
+
+    ```text
+    $ cat /etc/odbcinst.ini
+    [ODBC Driver 18 for SQL Server]
+    Description=Microsoft ODBC Driver 18 for SQL Server
+    Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
+    UsageCount=1
+    ```
+
+The DSN in the above example is `[ODBC Driver 18 for SQL Server]`, which matches the default driver name the agent is using. If the DSN for your driver does not match the name of driver the agent is using, you will get the `Data source not found` error.
+
+It is possible to set the `dsn` name in your instance config to match what is set in your `/etc/odbcinst.ini` file. For example:
+
+    ```text
+    $ cat /etc/odbcinst.ini
+    [Custom]
+    Description=Microsoft ODBC Driver 18 for SQL Server
+    Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
+    UsageCount=1
+    ```
+
+And then in your instance config, you would set the `dsn` field:
+
+```yaml
+  connector: odbc
+  dsn: "Custom"
+```
+
 ### Connecting to SQL Server on a Linux host
 
 To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
-1. Install the [Microsoft ODBC Driver][10] for your Linux distribution.
+1. Install the [Microsoft ODBC Driver][11] for your Linux distribution.
    If you are unsure of the driver name to use, you can find it enclosed in brackets at the top of `/etc/odbcinst.ini`.
 
     ```text
@@ -199,18 +240,18 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
 ### Picking a SQL Server driver
 
-In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][11] or the [OLE DB driver][12].
+In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][12] or the [OLE DB driver][13].
 
-Depending on which driver you pick, this will influence what you set for the [connector][13] field in your instance config.
+Depending on which driver you pick, this will influence what you set for the [connector][14] field in your instance config.
 
-For example, for the [Microsoft ODBC driver][11]:
+For example, for the [Microsoft ODBC driver][12]:
 
   ```yaml
   connector: odbc
   driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
-For the [OLE DB driver][12]:
+For the [OLE DB driver][13]:
 
   ```yaml
   connector: adodbapi
@@ -221,7 +262,7 @@ These values will be used to map to the `Provider` part of the connection string
 
 So for example, if you set `adoprovider: MSOLEDBSQL`, then the connection string would include `Provider=MSOLEDBSQL`. This should match the name of the driver version you have installed.
 
-In the latest version of the [Microsoft OLE DB driver][12], the driver name was changed from `MSOLEDBSQL` to `MSOLEDBSQL19`, which means this should appear in your instance config like so:
+In the latest version of the [Microsoft OLE DB driver][13], the driver name was changed from `MSOLEDBSQL` to `MSOLEDBSQL19`, which means this should appear in your instance config like so:
 
   ```yaml
   connector: adodbapi
@@ -249,7 +290,8 @@ In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE`
 [7]: https://techcommunity.microsoft.com/t5/sql-server-blog/ole-db-driver-19-0-for-sql-server-released/ba-p/3170362
 [8]: https://learn.microsoft.com/en-us/sql/connect/oledb/release-notes-for-oledb-driver-for-sql-server?view=sql-server-ver16#1863
 [9]: https://community.hostek.com/t/ssl-security-error-for-microsoft-sql-driver/348
-[10]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
-[11]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
-[12]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
-[13]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
+[10]: https://learn.microsoft.com/en-us/sql/integration-services/import-export-data/connect-to-an-odbc-data-source-sql-server-import-and-export-wizard?view=sql-server-ver16
+[11]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
+[12]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
+[13]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
+[14]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
