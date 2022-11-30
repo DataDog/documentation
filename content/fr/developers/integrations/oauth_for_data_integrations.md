@@ -100,7 +100,7 @@ Pour en savoir plus sur le processus de publication d'une intégration, consulte
 
 Le processus pour ajouter un client OAuth à une intégration existante reprend celui décrit ci-dessus, mais avec quelques différences clés.
 
-### Si vous avez une intégration de données existante qui n'est pas connectée à une UI Extension
+### Si vous avez une intégration existante qui n'est pas connectée à une UI Extension
 
 Suivez les [étapes](#creer-une-nouvelle-intégration-de-données-avec-oauth) ci-dessus et assurez-vous d'ouvrir une pull request pour ajouter de nouvelles instructions de désinstallation à votre carré d'intégration.
 
