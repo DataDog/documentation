@@ -61,7 +61,7 @@ The Datadog Firehose Nozzle consumes information from your deployment’s Loggre
 
 ### Buildpack
 
-The Datadog Buildpack installs the lightweight IOT Agent inside the container alongside the application. The Agent is only launched or started if logs collection is enabled through setting `DD_LOGS_ENABLED=TRUE`, used to send application-level logs to Datadog. Otherwise, DogStatsD is launched to send metrics. When the application is running with the Datadog buildpack, you can pass multiple configuration options using environment variables for the application. The variables can come from the application manifest (`manifest.yml`) or the Cloud Foundry(CF) CLI using `cf set-env` command.
+The Datadog Buildpack installs the lightweight [Datadog IoT Agent][10] and Datadog Trace Agent for APM inside the container alongside the application. The Agent is only launched or started if logs collection is enabled through setting `DD_LOGS_ENABLED=TRUE`, used to send application-level logs to Datadog. Otherwise, DogStatsD is launched to send metrics. When the application is running with the Datadog buildpack, you can pass multiple configuration options using environment variables for the application. The variables can come from the application manifest (`manifest.yml`) or the Cloud Foundry(CF) CLI using `cf set-env` command.
 
 #### Metadata Collected
 
@@ -81,3 +81,4 @@ These tags are present in the metrics, traces, and logs collected by the Datadog
 [7]: /containers/docker/
 [8]: /tracing/trace_explorer/
 [9]: /logs/explorer/
+[10]: /agent/iot/
