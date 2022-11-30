@@ -302,19 +302,6 @@ The sample project includes a second application called `calendar_app` that retu
    CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
    ```
 
-2. Like you did earlier for the notes app, add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container so that it sends traces to the correct location. Open `docker/host-and-containers/exercise/docker-compose.yml` and add the following lines to the `calendar_app` section:
-
-   ```yaml
-       environment:
-        - DD_AGENT_HOST=host.docker.internal
-   ```
-   And, if you're using Linux, add the `extra_host` also:
-
-   ```yaml
-       extra_hosts:
-         - "host.docker.internal:host-gateway"
-   ```
-
 3. Apply Universal Service Tags, just like we did for the notes app. Add the following environment variables in the `Dockerfile.calendar` file:
 
    ```
@@ -331,7 +318,21 @@ The sample project includes a second application called `calendar_app` that retu
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-To check that you've set things up correctly, compare your setup with the Dockerfile and `docker-config.yaml` files provided in the sample repository's `docker/host-and-containers/solution` directory.
+2. Like you did earlier for the notes app, add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container so that it sends traces to the correct location. Open `docker/host-and-containers/exercise/docker-compose.yaml` and add the following lines to the `calendar_app` section:
+
+   ```yaml
+       environment:
+        - DD_AGENT_HOST=host.docker.internal
+   ```
+   And, if you're using Linux, add the `extra_host` also:
+
+   ```yaml
+       extra_hosts:
+         - "host.docker.internal:host-gateway"
+   ```
+
+
+   To check that you've set things up correctly, compare your setup with the Dockerfile and `docker-config.yaml` files provided in the sample repository's `docker/host-and-containers/solution` directory.
 
 5. Build the multi-service application by restarting the containers. First, stop all containers if still running:
    ```
