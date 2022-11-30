@@ -11,7 +11,7 @@ jobs:
 
     - name: Set documentation preview
       if: github.event.pull_request.head.repo.fork == false
-      uses: actions/github-script@0.9.0
+      uses: actions/github-script@6.3.3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
