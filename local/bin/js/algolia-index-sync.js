@@ -23,18 +23,15 @@ const getIndexName = () => {
 const updateSettings = (index) => {
     const settings = {
         searchableAttributes: [
-            'title',
-            'section_header',
-            'tags',
-            'category',
-            'subcategory',
-            'type',
+            'unordered(title)',
+            'unordered(section_header)',
+            'unordered(tags)',
             'unordered(content)'
         ],
-        ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
+        ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
         customRanking: ['asc(tags)', 'desc(rank)'],
-        attributesToHighlight: ['title', 'section_header', 'content', 'type', 'tags', 'category', 'subcategory'],
-        attributesForFaceting: ['language', 'tags'],
+        attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
+        attributesForFaceting: ['language', 'searchable(tags)'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
         attributeForDistinct: 'full_url',
@@ -98,7 +95,7 @@ const updateReplicas = (client, indexName) => {
     const replicas = {};
 
     replicas[`${indexName}_api`] = {
-        ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
+        ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
         customRanking: ['desc(rank)']
     };
 
