@@ -18,7 +18,7 @@ There are three main components for the PCF integration with Datadog. First, the
 
 ## Monitor your applications
 
-Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your PCF application. This is a [supply buildpack][2] for PCF that installs the [Datadog IoT Agent][34], Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
+Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your PCF application. This is a [supply buildpack][2] for PCF that installs the Datadog Container Agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
 
 ### Pivotal Cloud Foundry < 1.12
 
@@ -500,6 +500,3 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [30]: /profiler/enabling/
 [32]: /integrations/faq/pivotal_architecture
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
-[34]: /agent/iot/
-
-
