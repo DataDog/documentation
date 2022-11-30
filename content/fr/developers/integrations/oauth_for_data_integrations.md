@@ -112,9 +112,9 @@ Au lieu de créer une application, accédez à celle qui possède la version pub
 
 Une fois que vous avez créé le client OAuth de votre intégration et que vous êtes prêt à le publier, cliquez sur **Edit** dans votre application et accédez à l'onglet **Publishing** sous **General**. N'oubliez pas également d'ouvrir une pull request pour ajouter de nouvelles instructions de désinstallation à votre carré.
 
-**Remarque** : vous n'avez pas besoin de modifier votre `app_uuid` dans le fichier `manifest.json` si vous avez déjà une intégration de données ou une UI Extension.
+**Remarque** : vous n'avez pas besoin de modifier votre `app_uuid` dans le fichier `manifest.json` si vous avez déjà une intégration ou une UI Extension.
 
-### Si vous avez une UI Extension publiée et que vous souhaitez ajouter une intégration de données au même carré
+### Si vous avez une UI Extension publiée et que vous souhaitez ajouter une intégration au même carré
 
 Au lieu de créer une application, accédez à celle qui possède la version publiée de votre UI Extension dans la plateforme de développement et suivez les [étapes] (#creer-un-client-oauth) restantes.
 
@@ -125,7 +125,7 @@ Ouvrez une pull request pour ajouter à votre carré des informations sur votre 
 Documentation, liens et articles supplémentaires utiles :
 
 - [OAuth 2.0 dans Datadog][1]
-- [Simplifier et sécuriser les intégrations de données avec OAuth][11]
+- [Simplifier et sécuriser les intégrations avec OAuth][11]
 
 [1]: https://docs.datadoghq.com/fr/developers/authorization/oauth2_in_datadog/
 [2]: https://app.datadoghq.com/marketplace
