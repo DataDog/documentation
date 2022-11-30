@@ -42,7 +42,7 @@ Le client OAuth est un composant qui permet aux utilisateurs d'autoriser l'appli
 
 1. Accédez à l'onglet **OAuth & Permissions** sous **Features** et cliquez sur **Create OAuth Client**.
 
-   Les clients OAuth créés pour les intégrations de données sont appelés des **clients confidentiels**. Leur rôle est de fournir un ID client et un secret client. Le client créé à cette étape correspond à une version privée du client, dont les identifiants peuvent être utilisés à des fins de tests. Lorsque ce client sera publié, vous recevrez de nouveaux identifiants. **Une fois le client créé, ces identifiants ne seront plus jamais affichés. Par conséquent, assurez-vous de les stocker en lieu sûr.**
+   Les clients OAuth créés pour les intégrations sont appelés des **clients confidentiels**. Leur rôle est de fournir un ID client et un secret client. Le client créé à cette étape correspond à une version privée du client, dont les identifiants peuvent être utilisés à des fins de tests. Lorsque ce client sera publié, vous recevrez de nouveaux identifiants. **Une fois le client créé, ces identifiants ne seront plus jamais affichés. Par conséquent, assurez-vous de les stocker en lieu sûr.**
 
 2. Saisissez les détails de votre client tels que son nom, sa description, les URI de redirection et l'URL d'intégration. 
 3. Configurez les contextes du client OAuth en les recherchant et en cochant leurs cases dans la colonne **Requested**.
