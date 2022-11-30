@@ -20,6 +20,7 @@
 
 // docsearch
 @import 'main_docsearch';
+@import 'algolia_instantsearch';
 
 // global to all pages
 @import 'pages/global';
@@ -31,7 +32,7 @@
 // partial css lives with partial
 
 @import "pages/api";
-@import "pages/search";
+// @import "pages/search";
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";

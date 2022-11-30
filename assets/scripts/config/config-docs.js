@@ -18,7 +18,7 @@ module.exports = {
         loggingHandler: 'http',
         algoliaConfig: {
             index: 'docs_preview',
-            api_index: 'docsearch_docs_preview_api',
+            api_index: 'docs_preview_api',
             appId: 'K8XL4ROVCR',
             apiKey: 'c00312a19630387f86998847cca3b65c'
         },
@@ -30,7 +30,7 @@ module.exports = {
         loggingHandler: 'console',
         algoliaConfig: {
             index: 'docs_preview',
-            api_index: 'docsearch_docs_preview_api',
+            api_index: 'docs_preview_api',
             appId: 'K8XL4ROVCR',
             apiKey: 'c00312a19630387f86998847cca3b65c'
         },
