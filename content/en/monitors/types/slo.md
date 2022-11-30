@@ -2,7 +2,7 @@
 title: SLO Alerts
 kind: documentation
 aliases :
-  - monitors/create/types/slo/
+  - /monitors/create/types/slo/
 ---
 
 ## Overview
