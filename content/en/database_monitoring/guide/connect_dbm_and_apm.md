@@ -157,7 +157,7 @@ pip install psycopg2
 ```
 
 Enable the database monitoring propagation feature by setting the following enviornment variable:
-   `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+   - `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
 
 For the best user experience ensure the following enviornemnts variables are set in your application:
    - `DD_SERVICE=(application name)`
