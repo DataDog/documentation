@@ -909,6 +909,9 @@
             - link: "real_user_monitoring/error_tracking/"
               tag: "Documentation"
               text: "Learn about Error Tracking"
+            - link: "https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/"
+              tag: "Blog"
+              text: "RUM now offers React Native Crash Reporting and Error Tracking"
 
   - repo_name: dd-sdk-flutter
     contents:

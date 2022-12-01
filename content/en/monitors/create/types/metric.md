@@ -84,6 +84,8 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
+{{< img src="monitors/monitor_types/metric/new_metric_monitor_threshold.png" alt="define the metric for threshold detection metric monitor" style="width:100%;">}}
+
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
 | Select a metric                   | Yes      | None           | `system.cpu.user` |
@@ -108,6 +110,8 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 
 {{% /tab %}}
 {{% tab "Change" %}}
+
+{{< img src="monitors/monitor_types/metric/new_metric_monitor_change.png" alt="define the metric for change detection metric monitor" style="width:100%;">}}
 
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -150,7 +154,7 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
 
 Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi-alert to dynamically fill in notifications with useful context.
+Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
 
 ## Set alert conditions
 
@@ -193,6 +197,8 @@ For example, a monitor that evaluates over the last `2h` is split in 12 buckets 
 | case 3 | 1  | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | Yes         |
 | case 4 | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | x  | x  | 1   | 1   | No          |
 
+For more information on the Evaluation Window, see the [Monitor configuration][5] page.
+
 #### Other options
 
 For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][6] page.
@@ -209,6 +215,6 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: /dashboards/querying/#advanced-graphing
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /monitors/notify/?tab=is_alert#tag-variables
-[5]: /monitors/guide/recovery-thresholds/
+[5]: /monitors/create/configuration/?tab=thresholdalert#evaluation-window
 [6]: /monitors/create/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
