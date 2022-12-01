@@ -18,7 +18,7 @@ Generic actions are workflow actions which are not associated with a Datadog int
 
 ## HTTP
 
-Use the HTTP action to make a request to any custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. Please visit the [IP Ranges page][6] for details. 
+Use the HTTP action to make a request to any custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges page][6] for details. 
 
 Begin by specifying the request method and any necessary [authentication][3]. Read the sections below for further information about the available configuration tabs. Optionally, the request can wait on conditions that you specify in the **Conditional wait** section, and retry itself at a given interval if the condition is not satisfied.
 
