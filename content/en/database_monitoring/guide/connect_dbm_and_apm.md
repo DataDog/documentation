@@ -144,6 +144,53 @@ client.query("SELECT 1;")
 
 {{% /tab %}}
 
+{{% tab "Python" %}}
+
+Update your app dependencies to include [dd-trace-py>=1.7.0][1]:
+```
+pip install "ddtrace>=1.7.0"
+```
+
+Install [psycopg2][2] (Note - DBM-APM linking is not currently supported for mysql clients):
+```
+pip install psycopg2
+```
+
+Enable the database monitoring propagation feature by setting the following enviornment variable:
+   `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+
+For the best user experience ensure the following enviornemnts variables are set in your application:
+   `DD_SERVICE=(application name)`
+   `DD_ENV=(application enviornment)`
+   `DD_VERSION=(application version)`
+
+Full example:
+```python
+
+import psycopg2
+
+#TODO: update postgres configurations
+POSTGRES_CONFIG = {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "user": "postgres_user",
+    "password": "postgres_password",
+    "dbname": "postgres_db_name",
+}
+
+# connect to postgres db
+conn = psycopg2.connect(**POSTGRES_CONFIG)
+cursor = conn.cursor()
+# execute sql queries
+cursor.execute("select 'blah'")
+cursor.executemany("select %s", (("foo",), ("bar",)))
+```
+
+[1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
+[2]: https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
