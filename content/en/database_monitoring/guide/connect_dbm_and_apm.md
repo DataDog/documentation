@@ -160,9 +160,9 @@ Enable the database monitoring propagation feature by setting the following envi
    `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
 
 For the best user experience ensure the following enviornemnts variables are set in your application:
-   `DD_SERVICE=(application name)`
-   `DD_ENV=(application enviornment)`
-   `DD_VERSION=(application version)`
+   - `DD_SERVICE=(application name)`
+   - `DD_ENV=(application enviornment)`
+   - `DD_VERSION=(application version)`
 
 Full example:
 ```python
