@@ -6,9 +6,9 @@ description: Troubleshoot Database Monitoring setup for SQL Server
 
 This page details common issues with setting up and using Database Monitoring with SQL Server, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
-## Diagnosing common connection issues
+## Diagnosing common connection issues {#common-connection-issues}
 
-### SQL Server unable to connect 'Login Failed for user'
+### SQL Server unable to connect 'Login Failed for user' {#login-failed-for-user}
 
 There are two ways that the agent can connect to a SQL Server instance:
 
@@ -41,7 +41,7 @@ If the `datadog` user is unable to log into the SQL Server instance, please ensu
 
 Microsoft also provides a helpful doc on troubleshooting these types of errors, which can be [followed here][5].
 
-### SQL Server Unable to connect due to “Invalid connection string attribute”
+### SQL Server Unable to connect due to “Invalid connection string attribute” {#tcp-connection-error}
 
 The following ADO Providers are supported on Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
@@ -78,7 +78,21 @@ To troubleshoot:
 
 If neither step produces meaningful help, or the error code you are seeing is not listed, Datadog recommends to use the `MSOLEDBSQL` driver or the `Microsoft ODBC Driver for SQL Server`. Either of these options will produce more meaningful error messages, which should help troubleshooting why the connection is failing.
 
-### SSL Provider: The certificate chain was issued by an authority that is not trusted
+### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist' {#adaptive-server-unavailable}
+
+This error can sometimes just be the result of not properly setting the `host` field. For the integration, you should the `host` field with the following syntax: `host:server,port`.
+
+For example:
+
+```
+host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com
+```
+Should be set as:
+```
+host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
+```
+
+### SSL Provider: The certificate chain was issued by an authority that is not trusted {#certificate-verify-fail}
 
 This error is common after upgrading to the latest [MSOLEDBSQL][6] driver due to [breaking changes][7] that were introduced. In the latest version of the driver, all connections to the SQL instance are encrypted by default.
 
@@ -127,7 +141,7 @@ If you are using a driver **other than `MSOLEDBSQL` 2019**, this error can be re
       driver: '{ODBC Driver 17 for SQL Server}'
   ```
 
-### SQL Server unable to connect 'SSL Security error (18)'
+### SQL Server unable to connect 'SSL Security error (18)' {#ssl-security-error}
 
 This is a known issue for older versions of the SQL Server ODBC driver. You can check which version of the driver is being used by the agent by looking at the connection string in the error message.
 
@@ -135,22 +149,7 @@ For example, if you see `Provider=SQL Server` in the connection string of the er
 
 This issue is described in more detail in this [Microsoft blog post][9]
 
-
-### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist'
-
-This error can sometimes just be the result of not properly setting the `host` field. For the integration, you should the `host` field with the following syntax: `host:server,port`.
-
-For example:
-
-```
-host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com
-```
-Should be set as:
-```
-host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
-```
-
-### Empty connection string
+### Empty connection string {#empty-connection-string}
 
 Datadog's SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` probably includes some character that causes issues with adodbapi.
 
@@ -160,9 +159,9 @@ OperationalError: (KeyError('Python string format error in connection string->',
 
 At the moment, the only character known to cause this specific connectivity issue is the `%` character. If you want to use the "%" character in your `sqlserver.yaml`, that is if your Datadog SQL Server user password includes a `%`), you need to escape that character by including a double `%%` in place of each single `%`.
 
-## Diagnosing common SQL Server driver issues
+## Diagnosing common SQL Server driver issues {#common-driver-issues}
 
-### Data source name not found, and no default driver specified
+### Data source name not found, and no default driver specified {#data-source-name-not-found}
 
 This is a common error seen on linux when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
 
@@ -203,7 +202,7 @@ In your instance config, you would then set the `dsn` field:
   dsn: "Custom"
 ```
 
-### Provider or driver not found
+### Provider or driver not found {#provider-not-found}
 
 This error message can vary in wording across the different drivers, but typically it looks like the following for `ODBC`:
 
@@ -257,7 +256,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
         password: <PASSWORD>
     ```
 
-### Picking a SQL Server driver
+### Picking a SQL Server driver {#picking-a-driver}
 
 In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][12] or the [OLE DB driver][13].
 
