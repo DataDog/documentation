@@ -255,17 +255,50 @@ In Agent version 7.33 and forward, you can disable the rare sampler in the Agent
 
 The head-based sampling mechanism can be overridden at the tracing library level. For example, if you need to monitor a critical transaction, you can force the associated trace to be kept. On the other hand, for unnecessary or repetitive information like health checks, you can force the trace to be dropped.
 
-- Set `ManualKeep` on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+- Set Manual Keep on a span to indicate that it and all child spans should be ingested. The resulting trace might appear incomplete in the UI if the span in question is not the root span of the trace.
+
+- Set Manual Drop on a span to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
+
+  {{< tabs >}}
+{{% tab "Java" %}}
+
+```java
+// keep
+span.setTag(DDTags.MANUAL_KEEP, true);
+// drop
+span.setTag(DDTags.MANUAL_DROP, true);
 ```
-// in dd-trace-go
+
+{{% /tab %}}
+{{% tab "Python" %}}
+```python
+# keep
+span.set_tag(MANUAL_KEEP_KEY)
+# drop
+span.set_tag(MANUAL_DROP_KEY)
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+```ruby
+# keep
+span.keep!
+# drop
+span.reject!
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+// keep
 span.SetTag(ext.ManualKeep, true)
-```
-- Set ManualDrop to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
-```
+
+// drop
 span.SetTag(ext.ManualDrop, true)
 ```
 
-## Single spans
+### Single spans
 `ingestion_reason: single_span`
 
 If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span.
