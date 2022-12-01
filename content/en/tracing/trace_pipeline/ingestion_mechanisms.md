@@ -298,7 +298,7 @@ span.SetTag(ext.ManualKeep, true)
 span.SetTag(ext.ManualDrop, true)
 ```
 
-### Single spans
+## Single spans
 `ingestion_reason: single_span`
 
 If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span.
