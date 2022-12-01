@@ -166,15 +166,15 @@ At the moment, the only character known to cause this specific connectivity issu
 
 This is a common error seen when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
 
-For example, if you wanted to use the default odbc driver for the agent (`{ODBC Driver 18 for SQL Server}`), your instance config should contain the following:
+For example, if you wanted to use the default ODBC driver for the Agent (`{ODBC Driver 18 for SQL Server}`), your instance config should contain the following:
 
 ```yaml
   connector: odbc
 ```
 
-when the agent starts up and tries to establish a connection to your SQL Server instance, it will look for the `/etc/odbcinst.ini` file to find the path to the driver binaries.
+When the Agent starts and tries to establish a connection to your SQL Server instance, it looks for the `/etc/odbcinst.ini` file to find the path to the driver binaries.
 
-For example, this `/etc/odbcinst.ini` file sets the driver like so:
+For example, this `/etc/odbcinst.ini` file sets the driver:
 
     ```text
     $ cat /etc/odbcinst.ini
@@ -184,7 +184,7 @@ For example, this `/etc/odbcinst.ini` file sets the driver like so:
     UsageCount=1
     ```
 
-The DSN in the above example is `[ODBC Driver 18 for SQL Server]`, which matches the default driver name the agent is using. If the DSN for your driver does not match the name of driver the agent is using, you will get the `Data source not found` error.
+The DSN in the above example is `[ODBC Driver 18 for SQL Server]`, which matches the default driver name the Agent is using. If the DSN for your driver does not match the name of driver the Agent is using, you will get the `Data source not found` error.
 
 It is possible to set the `dsn` name in your instance config to match what is set in your `/etc/odbcinst.ini` file. For example:
 
@@ -196,7 +196,7 @@ It is possible to set the `dsn` name in your instance config to match what is se
     UsageCount=1
     ```
 
-And then in your instance config, you would set the `dsn` field:
+In your instance config, you would then set the `dsn` field:
 
 ```yaml
   connector: odbc
