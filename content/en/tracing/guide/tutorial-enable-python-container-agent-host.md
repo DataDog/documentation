@@ -396,7 +396,7 @@ def create_note(self, desc, add_date=None):
 
 5. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
 6. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-python-container-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
    Note the new span labeled `notes_helper.another_process`.
 
 If you're not receiving traces as expected, set up debug mode in the `ddtrace` Python package. Read [Enable debug mode][13] to find out more.
