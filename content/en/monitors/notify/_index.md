@@ -8,7 +8,7 @@ aliases:
   - /monitors/notifications/
 description: "Send notifications to your teams when monitors trigger alerts"
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/manage/"

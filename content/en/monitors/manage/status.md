@@ -5,7 +5,7 @@ description: "Get an overview of your monitor status over time"
 aliases:
 - /monitors/monitor_status/
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/notify/"
