@@ -18,14 +18,14 @@ Datadog Agent 6+ collects logs from containers. The recommended way to collect l
 
 Once enabled the Datadog Agent container collects the logs emitted from the other application containers on the same respective host as itself. This is limited to the logs emitted to the `stdout` and `stderr` log stream when using the `default` or `json-file` logging driver.
 
-- If your containers are creating log files isolated within *their* containers you will need to perform some [extra steps](#log-file-within-a-container) to ensure the Agent container has visibility to those log files.
-- If your containers are using the `awslogs` [logging driver to send the logs to cloudwatch][9] then those logs will not be visible to the Agent, and you will instead need to use one of the [AWS log collection integrations][10] in order to collect those.
+- If your containers are creating log files isolated within *their* container you need to perform some [extra steps](#log-file-within-a-container) to ensure the Agent container has visibility to those log files.
+- If your containers are using the `awslogs` [logging driver to send the logs to cloudwatch][9] then those logs are not be visible to the Agent, and you instead need to use one of the [AWS log collection integrations][10] in order to collect those.
 
 ## Installation
 
-### ECS Task Definition
+### ECS task definition
 
-To collect all logs written by running applications in your ECS containers, update your Agent's Task Definition from the [original ECS Setup][11] with the environment variables and mounts below.
+To collect all logs from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][11] with the environment variables and mounts below.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -146,14 +146,14 @@ Use [datadog-agent-ecs-win-logs.json][1] as a reference point for the required b
 
 These Task Definitions set the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` to collect logs from every container that the Agent discovers. This can be disabled if you'd like to only collect logs when containers have [Autodiscovery Labels](#autodiscovery-labels) present.
 
-If you have a local file for your Agent's Task Definition you can repeat the steps to [register your updated Task Definition][8]. This will create a new revision for you. You can then reference this updated revision in the Daemon Service for the Datadog Agent.
+If you have a local file for your Agent's Task Definition you can repeat the steps to [register your updated Task Definition][8]. This creates a new revision for you. You can then reference this updated revision in the Daemon Service for the Datadog Agent.
 
 ## Custom log collection
 
 ### Autodiscovery labels
-If the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` is set the Agent will collect logs from all containers by default. When doing so it will set the `service` and `source` tags on the logs to the short image name of the container that emitted those logs. You can provide Docker Labels on your ECS application containers as Autodisocovery labels to customize the log configuration that the Agent will use for *that* container.
+If the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` is set, the Agent collects logs from all containers it discovers by default. These collected logs have the `service` and `source` tags set to the short image name of the respective container. You can provide Docker Labels on your ECS application containers for Autodiscovery to customize the log configuration that the Agent uses for *that* container.
 
-You can consult [the Docker Log Collection setup instructions][12] for information on how to utilize Autodiscovery configurations. For example a log configuration like the following can be used to override the `source` and `service` of the logs collected:
+You can consult [the Docker Log Collection setup instructions][12] for information on how to use Autodiscovery configurations. For example a log configuration like the following can be used to override the `source` and `service` of the logs collected:
 
 ```json
 [{"source": "example-source", "service": "example-service"}]
@@ -179,7 +179,7 @@ You can further customize this by [adding tags to your log configuration][4] or 
 
 ### Log file within a container
 
-Docker with the `default` or `json-file` driver will expose the `stdout` and `stderr` log streams in a format that the Agent can readily find. However, if an application container is creating a log file isolated within its container then the Agent won't natively have visibility to that file. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications when possible, so that you can more automatically set up log collection. Otherwise this can be done by providing Autodiscovery Labels to point towards the desired file path, while also having the Agent container and application container share a directory on the host.
+Docker with the `default` or `json-file` driver exposes the `stdout` and `stderr` log streams in a format that the Agent can readily find. However, if a container is creating a log file isolated within its container then the Agent does not natively have visibility to that file. Datadog recommends using the `stdout` and `stderr` output streams for containerized applications when possible, to more automatically set up log collection. If not possible, this can be done by providing an Autodiscovery log configuration to point towards the desired file path. While also having the Agent container and application container share the directory on the host containing the log file.
 
 The log configuration below can be provided to tell the Agent to [collect this custom log file][3] at the `/var/log/example/app.log` path.
 ```json
