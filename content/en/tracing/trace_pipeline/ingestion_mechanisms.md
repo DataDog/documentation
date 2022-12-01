@@ -298,6 +298,48 @@ span.SetTag(ext.ManualKeep, true)
 span.SetTag(ext.ManualDrop, true)
 ```
 
+{{% /tab %}}
+{{% tab "NodeJS" %}}
+```javascript
+// keep
+span.setTag(MANUAL_KEEP, true)
+// drop
+span.setTag(MANUAL_DROP, true)
+
+```
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+```php
+// keep
+$span->setTag(Tag::MANUAL_KEEP, true);
+//drop
+$span->setTag(Tag::MANUAL_DROP, true);
+```
+
+{{% /tab %}}
+{{% tab "C++" %}}
+```cpp
+// keep
+span->SetTag(datadog::tags::manual_keep, true);
+//drop
+span->SetTag(datadog::tags::manual_drop, true);
+
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+```cs
+// keep
+span.SetTag(Datadog.Trace.Tags.ManualKeep, "true");
+// drop
+span.SetTag(Datadog.Trace.Tags.ManualDrop, "true");
+
+```
+
+{{% /tab %}}
+  {{< /tabs >}}
+
 ## Single spans
 `ingestion_reason: single_span`
 
