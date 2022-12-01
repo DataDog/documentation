@@ -164,7 +164,7 @@ At the moment, the only character known to cause this specific connectivity issu
 
 ### Data source name not found, and no default driver specified
 
-This is a common error seen when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
+This is a common error seen on linux when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
 
 For example, if you wanted to use the default ODBC driver for the Agent (`{ODBC Driver 18 for SQL Server}`), your instance config should contain the following:
 
@@ -202,6 +202,25 @@ In your instance config, you would then set the `dsn` field:
   connector: odbc
   dsn: "Custom"
 ```
+
+### Provider or driver not found
+
+This error message can vary in wording across the different drivers, but typically it looks like the following for `ODBC`:
+
+1. `Can't open lib .* file not found`
+2. `Data source name not found.* and no default driver specified`
+
+And for `MSOLEDBSQL` providers the error message looks like:
+
+  ```text
+  Provider cannot be found. It may not be properly installed.
+  ```
+
+This means that the driver/provider is not properly installed on the host where the agent is running. You should ensure that you have followed all the installation directions for the driver you have chosen to use.
+
+It's possible that the agent is not properly finding the driver. This is more common with ODBC drivers on linux. Please see [this section](#connecting-to-sql-server-on-a-linux-host) for more instructions on how to install the ODBC driver on linux.
+
+For help choosing a driver, please see [this section](#picking-a-sql-server-driver) on how to properly configure your driver with the agent.
 
 ### Connecting to SQL Server on a Linux host
 
