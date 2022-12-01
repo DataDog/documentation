@@ -275,9 +275,8 @@ def create_note(self, desc, add_date=None):
         note = Note(description=desc, id=None)
         note.id = self.db.create_note(note){{< /code-block >}}
 
-4. Restart the service.
-5. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
-6. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
+4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
+5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
    {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
    Note the new span labeled `notes_helper.another_process`.
 

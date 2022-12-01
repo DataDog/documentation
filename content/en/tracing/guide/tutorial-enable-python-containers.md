@@ -185,7 +185,7 @@ docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog n
 
 You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-containers-agent-start-event.png" alt="Agent start event shown in Events Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-agent-start-event.png" alt="Agent start event shown in Events Explorer" style="width:100%;" >}}
 
 With the application running, send some curl requests to it:
 
@@ -203,7 +203,7 @@ With the application running, send some curl requests to it:
 
 Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-containers-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
 If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
@@ -215,11 +215,11 @@ The width of a bar indicates how long it took to complete. A bar at a lower dept
 
 The flame graph for a `POST` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
 
 A `GET /notes` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
 
 
 ## Add custom instrumentation to the Python application
@@ -252,7 +252,7 @@ docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog n
 4. Resend some HTTP requests, specifically some `GET` requests.
 5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-python-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    
    Note the higher level of detail in the stack trace now that the `get_notes` function has custom tracing.
 
@@ -313,7 +313,7 @@ The sample project includes a second application called `calendar_app` that retu
 
 7. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
 
-   {{< img src="tracing/guide/tutorials/tutorial-python-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-python-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
 ## Add more custom instrumentation
 
