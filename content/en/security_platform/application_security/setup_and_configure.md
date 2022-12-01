@@ -234,9 +234,23 @@ Support for query strings is not available for Flask.
 
 ASM automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable and the library only checks the specified header for the client IP.
 
-## Add user information to traces
+## Track authenticated bad actors
 
-To identify bad actors that are generating suspicious security activity, instrument your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions. Read [Tracking User Activity][1] for more information.
+To identify bad actors that are generating suspicious security activity, add user information to traces by instrumenting your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions. Read [Tracking User Activity][1] for more information.
+
+## Exclude specific values from triggering detections
+
+There may be a time when an ASM signal, or a suspicious request, is a false positive. For example, ASM repeatedly detects
+the same suspicious request and a signal is generated, but the signal has been reviewed and is not a threat.
+
+You can set an exclusion filter, which ignore events from a rule, to eliminate these noisy signal patterns and focus on legitimate suspicious requests.
+
+To create an exclusion filter, do one of the following:
+
+- Click on a signal in [ASM Signals][4] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
+- Navigate to [Exclusion Filters Configuration][5] and manually configure a new exclusion filter based on your own filter query.
+
+**Note**: Requests (traces) that match an exclusion filter are not billed.
 
 ## Data security considerations
 
@@ -280,20 +294,6 @@ The following are examples of data that are flagged as sensitive by default:
 * `ssh-rsa`
 
 See [APM Data Security][3] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
-
-## Exclusion filters
-
-There may be a time when an ASM signal, or a suspicious request, is a false positive. For example, ASM repeatedly detects
-the same suspicious request and a signal is generated, but the signal has been reviewed and is not a threat.
-
-You can set an exclusion filter, which ignore events from a rule, to eliminate these noisy signal patterns and focus on legitimate suspicious requests.
-
-To create an exclusion filter, do one of the following:
-
-- Click on a signal in [ASM Signals][4] and click the **Create Exclusion Filter** button in the top left corner. This method automatically generates a filter query for the targeted service.
-- Navigate to [Exclusion Filters Configuration][5] and manually configure a new exclusion filter based on your own filter query.
-
-**Note**: Requests (traces) matching an exclusion filter are not billed.
 
 ## Disabling Application Security Management
 
