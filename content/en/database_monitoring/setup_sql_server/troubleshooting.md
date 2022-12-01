@@ -160,6 +160,8 @@ OperationalError: (KeyError('Python string format error in connection string->',
 
 At the moment, the only character known to cause this specific connectivity issue is the `%` character. If you want to use the "%" character in your `sqlserver.yaml`, that is if your Datadog SQL Server user password includes a `%`), you need to escape that character by including a double `%%` in place of each single `%`.
 
+## Diagnosing common SQL Server driver issues
+
 ### Data source name not found, and no default driver specified
 
 This is a common error seen when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
@@ -236,8 +238,6 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
         password: <PASSWORD>
     ```
 
-## Other common questions
-
 ### Picking a SQL Server driver
 
 In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][12] or the [OLE DB driver][13].
@@ -270,6 +270,8 @@ In the latest version of the [Microsoft OLE DB driver][13], the driver name was 
   ```
 
 It is recommended to stay up to date with the latest available version of the driver you select.
+
+## Other common questions
 
 ### SQL Server user tag is missing on the Query Metrics and Plan Samples
 
