@@ -15,7 +15,8 @@ This guide assumes that you have configured [Datadog Monitoring][1] and are usin
 
 Supported tracers
 : [dd-trace-go][3] >= 1.42.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
-[dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)
+[dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)<br />
+[dd-trace-py][9] >= 1.7.0 (support for [psycopg2][10])
 
 Supported databases
 : postgres, mysql
@@ -156,12 +157,12 @@ Install [psycopg2][2] (Note - DBM-APM linking is not currently supported for mys
 pip install psycopg2
 ```
 
-Enable the database monitoring propagation feature by setting the following enviornment variable:
+Enable the database monitoring propagation feature by setting the following environment variable:
    - `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
 
-For the best user experience ensure the following enviornemnts variables are set in your application:
+For the best user experience ensure the following environment variables are set in your application:
    - `DD_SERVICE=(application name)`
-   - `DD_ENV=(application enviornment)`
+   - `DD_ENV=(application environment)`
    - `DD_VERSION=(application version)`
 
 Full example:
@@ -202,3 +203,5 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 [6]: https://github.com/dataDog/dd-trace-rb
 [7]: https://github.com/brianmario/mysql2
 [8]: https://github.com/ged/ruby-pg
+[9]: https://github.com/dataDog/dd-trace-py
+[10]: https://www.psycopg.org/docs/index.html
