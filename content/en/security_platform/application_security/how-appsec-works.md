@@ -54,6 +54,8 @@ Datadog ASM uses processes already contained in the Agent and APM, so there are 
 
 In the tracing library, Datadog ASM collects all traces that include security data. A default [retention filter][7] ensures the retention of all security-related traces in the Datadog platform.
 
+Data for suspicious requests is kept for 90 days. The underlying trace data is kept for 15 days.
+
 ## Data privacy
 
 There are multiple methods used to avoid your sensitive information being indexed. To take further action, you can set up [custom and static scrubbers][8], and use [exclusion filters][9].
