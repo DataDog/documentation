@@ -23,19 +23,22 @@ const getIndexName = () => {
 const updateSettings = (index) => {
     const settings = {
         searchableAttributes: [
-            'unordered(title)',
-            'unordered(section_header)',
-            'unordered(tags)',
-            'unordered(content)'
+            'unordered(content)',
+            'unordered(title)'
         ],
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
-        customRanking: ['asc(tags)', 'desc(rank)'],
+        customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
         attributeForDistinct: 'full_url',
-        distinct: 1
+        distinct: true,
+        minWordSizefor1Typo: 3,
+        minWordSizefor2Typos: 7,
+        ignorePlurals: true,
+        optionalWords: ['the', 'without'],
+        separatorsToIndex: '_@.#'
     };
 
     return index.setSettings(settings, { forwardToReplicas: true });
