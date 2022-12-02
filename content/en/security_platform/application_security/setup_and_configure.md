@@ -236,7 +236,7 @@ ASM automatically attempts to resolve `http.client_ip` from several well-known h
 
 ## Track authenticated bad actors
 
-To identify bad actors that are generating suspicious security activity, add user information to traces by instrumenting your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions. Read [Tracking User Activity][1] for more information.
+Most critical attacks are usually performed by authenticated users as they can access your most sensitive endpoints. To identify bad actors that are generating suspicious security activity, add user information to traces by instrumenting your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions. Read [Tracking User Activity][1] for more information.
 
 ## Exclude specific values from triggering detections
 
