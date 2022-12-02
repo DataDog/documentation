@@ -4,6 +4,7 @@ kind: documentation
 description: "Check the status of TCP/HTTP endpoints."
 aliases:
 - /monitors/monitor_types/network
+- /monitors/create/types/network/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

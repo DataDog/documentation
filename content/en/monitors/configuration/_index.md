@@ -2,13 +2,13 @@
 title: Configure Monitors
 kind: documentation
 description: Describes the monitor creation page.
-
+aliases:
+  - /monitors/create/configuration
 ---
 
 ## Overview
 
-Once you’ve chosen a [monitor type][1], start configuring the monitor.
-4 main steps must be completed before saving the monitor :
+To start configuring the monitor, complete the following:
 
 * **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, etc.
 * **Set alert conditions:** Define alert and warning thresholds , evaluation time frames, and configure advanced alert options.
@@ -25,9 +25,9 @@ To learn how to construct the search query, see the individual [monitor types][1
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping defaults to `Multi Alert`.
 
-`Simple Alert` mode aggregate over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+`Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
 
-`Multi Alert` mode apply the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
 Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
 
 | Group by                       | Simple alert mode | Multi alert mode |
@@ -75,7 +75,7 @@ A rolling time window has a fixed size and moves its starting point over time. M
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
 
 - `Current hour`: A time window with a maximum of one hour starting at a configurable minute of an hour. For example, monitor amount of calls an HTTP endpoint receives in one hour starting at minute 0.
-- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota](https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota) by using the `current day` time window and letting it start at 2:00pm UTC.
+- `Current day`: A time window with a maximum of 24 hours starting at a configurable hour and minute of a day. For example, monitor a [daily log index quota][2] by using the `current day` time window and letting it start at 2:00pm UTC.
 - `Current month`: Looks back at the current month starting on the first of the month at midnight UTC. This option represents a month-to-date time window and is only available for metric monitors.
 
 {{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
@@ -98,7 +98,7 @@ Evaluation frequencies depend on the [evaluation window](#evaluation-window) tha
 
 Use thresholds to set a numeric value for triggering an alert. Depending on your chosen metric, the editor displays the unit used (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][2]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
+Datadog has two types of notifications (alert and warning). Monitors recover automatically based on the alert or warning threshold but additional conditions can be specified. For additional information on recovery thresholds, see [What are recovery thresholds?][3]. For example, if a monitor alerts when the metric is above `3` and recovery thresholds are not specified, the monitor recovers once the metric value goes back below `3`.
 
 | Option                                   | Description                    |
 |------------------------------------------|--------------------------------|
@@ -115,7 +115,8 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 
 
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
-[2]: /monitors/guide/recovery-thresholds/
+[2]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
+[3]: /monitors/guide/recovery-thresholds/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
@@ -251,7 +252,7 @@ The time (in seconds) to delay evaluation. This should be a non-negative integer
 **Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
 
 
-[1]: /monitors/create/#monitor-types
+[1]: /monitors/types
 [2]: /monitors/notify/variables/?tab=is_alert#tag-variables
 [3]: /monitors/notify/#renotify
 [4]: /monitors/create/configuration#auto-resolve

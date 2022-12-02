@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /guides/composite_monitors
     - /monitors/monitor_types/composite
+    - /monitors/create/types/composite/
 description: "Alert on an expression combining multiple monitors"
 further_reading:
 - link: "/monitors/notify/"

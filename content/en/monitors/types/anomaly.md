@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /guides/anomalies
     - /monitors/monitor_types/anomaly
+    - /monitors/create/types/anomaly/
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
 - link: "/monitors/notify/"

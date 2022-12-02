@@ -7,6 +7,7 @@ aliases:
   - /monitors/monitor_types/trace_search
   - /tracing/guide/resource_monitor/
   - /monitors/monitor_types/apm
+  - /monitors/create/types/apm/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"

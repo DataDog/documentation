@@ -8,7 +8,7 @@ aliases:
   - /monitors/notifications/
 description: "Send notifications to your teams when monitors trigger alerts"
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/manage/"
@@ -180,5 +180,5 @@ Message variables auto-populate with a randomly selected group based on the scop
 [11]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [12]: /account_management/rbac/?tab=datadogapplication
 [13]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[14]: /monitors/create/#monitor-types
+[14]: /monitors/types
 [15]: /monitors/guide/recovery-thresholds/

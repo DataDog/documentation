@@ -2,6 +2,8 @@
 title: Error Tracking Monitor
 kind: documentation
 description: Learn about the Error Tracking monitor type.
+aliases :
+  - /monitors/create/types/error_tracking/
 further_reading:
 - link: "/real_user_monitoring/error_tracking/"
   tag: "Documentation"
