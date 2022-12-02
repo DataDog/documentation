@@ -282,9 +282,9 @@ span.set_tag(MANUAL_DROP_KEY)
 {{% tab "Ruby" %}}
 ```ruby
 # keep
-span.keep!
+trace.keep!
 # drop
-span.reject!
+trace.reject!
 ```
 
 {{% /tab %}}
