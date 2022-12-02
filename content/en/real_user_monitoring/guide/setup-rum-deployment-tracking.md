@@ -178,7 +178,7 @@ The Issues tab, lists differences in errors detected for each the two versions, 
 ### Explore the RUM Deployment Tracking Powerpacks
 You can quickly add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the “Deployment Version Tracking” powerpack. You can then iterate and add any other widget to your dashboards to help your teams release new features safely.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 
 
 {{% /tab %}}
