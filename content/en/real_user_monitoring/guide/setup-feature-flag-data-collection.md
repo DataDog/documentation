@@ -128,6 +128,8 @@ datadogRum.init({
 
 2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
+For more information about initializing LaunchDarkly’s SDK you can check their documentation [here][5]
+
 ```javascript
 const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
   inspectors: [
@@ -166,6 +168,8 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
+For more information about initializing LaunchDarkly’s SDK you can check their documentation [here][5]
+
 ```javascript
 const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
   inspectors: [
@@ -199,6 +203,8 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 ```
 
 2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+
+For more information about initializing LaunchDarkly’s SDK you can check their documentation [here][5]
 
 ```javascript
 const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -238,6 +244,8 @@ datadogRum.init({
 
 2. Initialize Split’s SDK and and create an impression listener reporting feature flags evaluations to Datadog using the following snippet of code
 
+For more information about initializing Split's SDK you can check their documentation [here][6]
+
 ```javascript
 const factory = SplitFactory({
     core: {
@@ -279,7 +287,9 @@ const client = factory.client();
 </script>
 ```
 
-2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+
+For more information about initializing Split's SDK you can check their documentation [here][6]
 
 ```javascript
 const factory = SplitFactory({
@@ -319,7 +329,9 @@ const client = factory.client();
 </script>
 ```
 
-2. Initialize LaunchDarkly’s SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+
+For more information about initializing Split's SDK you can check their documentation [here][6]
 
 ```javascript
 const factory = SplitFactory({
@@ -352,7 +364,7 @@ Feature Flags appear in the context of your RUM Sessions, Views, and Errors as a
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Feature Flag list of attributes in RUM Explorer" style="width:75%;">}}
 
 ### Search Feature Flags using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer][5] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][6] and [monitors][7]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
+Search through all the data collected by RUM in the [RUM Explorer][7] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][8] and [monitors][9]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
 
 #### Sessions
 Filtering your Sessions with the `@feature_flags.{flag_name}` attribute, you will find all Sessions in the given time frame where your feature flag was evaluated.
@@ -376,6 +388,8 @@ Filtering your Errors with the `@feature_flags.{flag_name}` attribute, you will 
 [2]: #custom-feature-flag-management
 [3]: #launchdarkly-integration
 [4]: #split-integration
-[5]: https://app.datadoghq.com/rum/explorer
-[6]: /dashboards/
-[7]: /monitors/create/
+[5]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
+[6]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+[7]: https://app.datadoghq.com/rum/explorer
+[8]: /dashboards/
+[9]: /monitors/create/
