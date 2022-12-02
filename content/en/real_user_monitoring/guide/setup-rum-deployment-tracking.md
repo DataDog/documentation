@@ -92,6 +92,8 @@ The version tag is captured automatically from the application’s app’s `info
 
 An application configured with version tags has a Deployment Tracking section on the Application Overview page. The Deployment Tracking section shows all versions of the application and services that were active during the selected time interval. 
 
+This enables you to adopt modern deployment strategies with peace of mind by letting you quickly roll back release candidates as soon as you spot an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easy to spot problems in your application before they turn into serious issues.
+
 You will see:
 - P75 Loading Time by Version
 - Total User Sessions by Version
@@ -113,8 +115,9 @@ These widgets can be exported to dashboards and monitors.
 
 Click on any version row in the List of Versions table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version will be compared to all previous versions but you can change it to compare any two versions within the past 30 days.
 
-
 Similar to the graphs on the Application Overview page, User Sessions, Core Web Vitals, and Errors graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and leave all other versions in gray for additional context.
+
+As you are monitoring your release, this makes it easy for you to compare the performance of code deployments against existing live code to verify that new code is performing properly and that no new errors have surfaced in between versions. 
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Browser Deployment Tracking Comparison" style="width:75%;">}}
 
@@ -137,6 +140,8 @@ You can quickly add deployment tracking for your RUM services to dashboards usin
 
 An application configured with version tags has a Deployment Tracking section on the Application Overview page. The Deployment Tracking section shows all versions of the application and services that were active during the selected time interval. 
 
+This enables you to adopt modern deployment strategies with peace of mind by letting you quickly roll back release candidates as soon as you spot an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easy to spot problems in your application before they turn into serious issues.
+
 You will see:
 - Average Application Start Time by Version
 - Total User Sessions by Version
@@ -158,6 +163,8 @@ These widgets can be exported to dashboards and monitors.
 Click on any version row in the List of Versions table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version will be compared to all previous versions but you can change it to compare any two versions within the past 30 days.
 
 Similar to the graphs on the Application Overview page, User Sessions, Mobile Vitals, and Errors graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and leave all other versions in gray for additional context.
+
+As you are monitoring your release, this makes it easy for you to compare the performance of code deployments against existing live code to verify that new code is performing properly and that no new errors have surfaced in between versions. 
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison.png" alt="Mobile Deployment Tracking Comparison" style="width:75%;">}}
 
