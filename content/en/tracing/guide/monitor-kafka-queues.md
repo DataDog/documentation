@@ -33,7 +33,7 @@ Visualize the performance of your cluster in real time and correlate the perform
 
 APM's distributed tracing gives you expanded visibility into the performance of your services by measuring request volume and latency. Create graphs and alerts to monitor your APM data, and visualize the activity of a single request in a flame graph, like the one shown below, to better understand the sources of latency and errors.
 
-{{< img src="tracing/guide/monitor_kafka_queues//kafka_trace.png" alt="A Kafka consumer span" >}}
+{{< img src="tracing/guide/monitor_kafka_queues/kafka_trace.png" alt="A Kafka consumer span" >}}
 
 APM can automatically trace requests to and from Kafka clients. This means you can collect traces without modifying your source code. Datadog injects headers in the Kafka messages so as to propagate the context of the trace from the producer to the consumer.
 
