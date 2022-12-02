@@ -4118,7 +4118,7 @@ api:
       operationids:
         - UpdateDashboard
       unstable: []
-      order: 6
+      order: 4
   - name: Get a dashboard
     url: '#get-a-dashboard'
     identifier: dashboards-get-a-dashboard
@@ -4130,7 +4130,7 @@ api:
       operationids:
         - GetDashboard
       unstable: []
-      order: 7
+      order: 2
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
     identifier: dashboards-delete-a-dashboard
@@ -4142,7 +4142,7 @@ api:
       operationids:
         - DeleteDashboard
       unstable: []
-      order: 3
+      order: 5
   - name: Send shared dashboard invitation email
     url: '#send-shared-dashboard-invitation-email'
     identifier: dashboards-send-shared-dashboard-invitation-email
@@ -4154,7 +4154,7 @@ api:
       operationids:
         - SendPublicDashboardInvitation
       unstable: []
-      order: 6
+      order: 11
   - name: Get all invitations for a shared dashboard
     url: '#get-all-invitations-for-a-shared-dashboard'
     identifier: dashboards-get-all-invitations-for-a-shared-dashboard
@@ -4166,7 +4166,7 @@ api:
       operationids:
         - GetPublicDashboardInvitations
       unstable: []
-      order: 5
+      order: 12
   - name: Revoke shared dashboard invitations
     url: '#revoke-shared-dashboard-invitations'
     identifier: dashboards-revoke-shared-dashboard-invitations
@@ -4178,7 +4178,7 @@ api:
       operationids:
         - DeletePublicDashboardInvitation
       unstable: []
-      order: 7
+      order: 14
   - name: Update a shared dashboard
     url: '#update-a-shared-dashboard'
     identifier: dashboards-update-a-shared-dashboard
@@ -4190,7 +4190,7 @@ api:
       operationids:
         - UpdatePublicDashboard
       unstable: []
-      order: 3
+      order: 10
   - name: Get a shared dashboard
     url: '#get-a-shared-dashboard'
     identifier: dashboards-get-a-shared-dashboard
@@ -4202,7 +4202,7 @@ api:
       operationids:
         - GetPublicDashboard
       unstable: []
-      order: 2
+      order: 9
   - name: Revoke a shared dashboard URL
     url: '#revoke-a-shared-dashboard-url'
     identifier: dashboards-revoke-a-shared-dashboard-url
@@ -4214,7 +4214,7 @@ api:
       operationids:
         - DeletePublicDashboard
       unstable: []
-      order: 4
+      order: 13
   - name: Create a shared dashboard
     url: '#create-a-shared-dashboard'
     identifier: dashboards-create-a-shared-dashboard
@@ -4226,7 +4226,7 @@ api:
       operationids:
         - CreatePublicDashboard
       unstable: []
-      order: 1
+      order: 8
   - name: Create a new dashboard
     url: '#create-a-new-dashboard'
     identifier: dashboards-create-a-new-dashboard
@@ -4250,7 +4250,7 @@ api:
       operationids:
         - RestoreDashboards
       unstable: []
-      order: 5
+      order: 7
   - name: Get all dashboards
     url: '#get-all-dashboards'
     identifier: dashboards-get-all-dashboards
@@ -4262,7 +4262,7 @@ api:
       operationids:
         - ListDashboards
       unstable: []
-      order: 2
+      order: 3
   - name: Delete dashboards
     url: '#delete-dashboards'
     identifier: dashboards-delete-dashboards
@@ -4274,7 +4274,7 @@ api:
       operationids:
         - DeleteDashboards
       unstable: []
-      order: 4
+      order: 6
   - name: Downtimes
     url: /api/latest/downtimes/
     identifier: downtimes
