@@ -144,7 +144,7 @@ Use [datadog-agent-ecs-win-logs.json][1] as a reference point for the required b
 {{% /tab %}}
 {{< /tabs >}}
 
-These Task Definitions set the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` to collect logs from every container that the Agent discovers.  Set this environment variable to `false` to only collect logs when containers have [Autodiscovery Labels](#autodiscovery-labels) present.
+These Task Definitions set the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` to collect logs from every container that the Agent discovers. Set this environment variable to `false` to only collect logs when containers have [Autodiscovery Labels](#autodiscovery-labels) present.
 
 If you have a local file for your Agent's Task Definition you can repeat the steps to [register your updated Task Definition][8]. This creates a new revision for you. You can then reference this updated revision in the Daemon Service for the Datadog Agent.
 
