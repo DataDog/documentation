@@ -14,5 +14,5 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Custom metrics guides:" >}}
-    {{< nextlink href="integrations/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
 {{< /whatsnext >}}
