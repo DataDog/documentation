@@ -17,6 +17,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
     tag: "Blog"
     text: "Best practices for securing Kubernetes applications"
+  - link: "https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/"
+    tag: "Blog"
+    text: "Add security context to observability data with Datadog Cloud Security Management"
 ---
 
 ## Overview

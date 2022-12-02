@@ -23,16 +23,20 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 - Summarizes usage at the end of each month.
 - Surfaces the data both in the UI and as a TSV download.
 
-The following usage types are not supported in this tool:
+A number of usage types are not supported in this tool, including:
 
 - Analyzed Logs (Security)
 - Incident Management
+- Network Flows
+- CI Spans
+
+Datadog offers Estimated Usage Attribution values for the following products: 
+
 - Indexed Log Events
 - Ingested Logs
 - Indexed Spans
 - Ingested Spans
-- Network Flows
-- Real User Monitoring
+- Total Real User Monitoring Sessions
 
 ## Getting started
 
@@ -77,6 +81,8 @@ Monthly data can also be pulled using the tool's public API. For more informatio
 
 {{< site-region region="us,eu" >}}
 ### Daily usage attribution
+
+<div class="alert alert-warning">Datadog plans to deprecate daily usage attribution reports on February 1, 2023. As an alternative, use the <a href="/api/latest/usage-metering/#get-hourly-usage-attribution">hourly usage attribution API endpoint</a>.</div>
 
 This section provides daily reports at an hourly granularity to dig into time frames. It also provides a concatenation of all reports during a given month.
 

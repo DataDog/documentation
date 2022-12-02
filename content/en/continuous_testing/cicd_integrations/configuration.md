@@ -70,9 +70,11 @@ To setup your client, Datadog API and application keys need to be configured. Th
     datadog-ci synthetics run-tests --apiKey "<API_KEY>" --appKey "<APPLICATION_KEY>"
     ```
 
-3. Or defined in a global configuration file:
+3. Or defined in a [global configuration file](#global-configuration-file-options):
 
      The global JSON configuration file can specify additional advanced options. Specify the path to this file using the flag `--config` [when launching your tests](#run-tests). If you set the name of your global configuration file to `datadog-ci.json`, that name is the default.
+
+### Global configuration file options
 
 In the global configuration file, you can configure the following options: 
 
@@ -85,11 +87,24 @@ In the global configuration file, you can configure the following options:
 `datadogSite`
 : The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
+`failOnCriticalErrors`
+: A boolean flag that fails the CI job if no tests were triggered, or results couldn't be fetched from Datadog. The default is set to `false`.
+
+`failOnMissingTests`
+: A boolean flag that fails the CI job if at least one test is missing in a run (for example, if it has been removed or deleted). The default is set to `false`.
+
+`failOnTimeout`
+: A boolean flag that fails the CI job if at least one test exceeds the default test timeout. The default is set to `true`.
+
 `files`
 : Glob pattern to detect Synthetic tests config files.
 
 `global`
-: Overrides of Synthetic tests applied to all tests ([see below for descriptions of each field](#configure-tests)).
+: Overrides for Synthetic tests applied to all tests.
+
+`pollingTimeout`
+: **Type**: integer<br>
+The duration in milliseconds after which `datadog-ci` stops polling for test results. The default is 30 minutes. At the CI level, test results completed after this duration are considered failed.
 
 `proxy`
 : The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is the [proxy-agent][2] library.
@@ -111,6 +126,9 @@ For example:
     "appKey": "<DATADOG_APPLICATION_KEY>",
     "datadogSite": "datadoghq.com",
     "files": "{,!(node_modules)/**/}*.synthetics.json",
+    "failOnCriticalErrors": false,
+    "failOnMissingTests": false,
+    "failOnTimeout": true,
     "global": {
         "allowInsecureCertificates": true,
         "basicAuth": { "username": "test", "password": "test" },
@@ -120,9 +138,10 @@ For example:
         "deviceIds": ["laptop_large"],
         "followRedirects": true,
         "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
-            "locations": ["aws:us-west-1"],
+        "locations": ["aws:us-west-1"],
         "retry": { "count": 2, "interval": 300 },
         "executionRule": "blocking",
+        "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
         "variables": { "titleVariable": "new value" },
         "pollingTimeout": 180000
@@ -143,7 +162,7 @@ For example:
 
 ### Configure tests
 
-By default, the client automatically discovers and runs all tests specified in `**/*.synthetics.json` files. This path can be configured in the [global configuration file](#setup-a-client). 
+By default, the client automatically discovers and runs all tests specified in `**/*.synthetics.json` files. This path can be configured in the [global configuration file](#global-configuration-file-options). 
 
 These files have a `tests` key which contains an array of objects with the IDs of the tests to run and any potential test configuration overrides.
 
@@ -166,7 +185,7 @@ For example:
 
 The default configurations used for the tests are the original tests' configurations, which are visible in the UI or by [getting your tests' configurations from the API][4].
 
-However, in the context of your CI deployment, you may decide to override some or all of your test parameters with the overrides below. To define overrides for all of your tests, set the same parameters at the [global configuration file](#setup-a-client) level.
+However, in the context of your CI deployment, you may decide to override some or all of your test parameters with the overrides below. To define overrides for all of your tests, set the same parameters at the [global configuration file](#global-configuration-file-options) level.
 
 `allowInsecureCertificates`
 : **Type**: boolean<br>
@@ -223,6 +242,10 @@ Execution rule of the test that defines the CLI behavior in case of a failing te
 : **Type**: string<br>
 New start URL to provide to the HTTP or browser test.
 
+`startUrlSubstitutionRegex`
+: **Type**: string<br>
+Regex to modify the start URL of the test (browser and HTTP tests only), whether it was given by the original test or by the configuration override `startURL`. If the URL contains variables, this regex is applied after the interpolation of the variables.
+
 `variables`
 : **Type**: object<br>
 Variables to replace in the test. This object should contain the name of the variable to replace as keys and the new value of the variable as values.
@@ -247,9 +270,10 @@ The duration in milliseconds after which `datadog-ci` stops polling for test res
                 "deviceIds": ["laptop_large"],
                 "followRedirects": true,
                 "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
-            "locations": ["aws:us-west-1"],
+                "locations": ["aws:us-west-1"],
                 "retry": { "count": 2, "interval": 300 },
                 "executionRule": "skipped",
+                "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
                 "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
                 "variables": { "titleVariable": "new value" },
                 "pollingTimeout": 180000
@@ -268,67 +292,15 @@ Use the drop-down menu next to **CI Execution** to define the execution rule for
 
 The execution rule associated with the test is the most restrictive one in the configuration file. The options range from most to least restrictive: `skipped`, `non_blocking`, and `blocking`. For example, if your test is configured as `skipped` in the UI but `blocking` in the configuration file, it is `skipped` when your test runs.
 
-#### Starting URL
+#### Customize your start URL
 
-`URL`
-: Test's original starting URL <br>
-**Example**: `https://www.example.org:81/path/to/something?abc=123#target`
+You can override the start URL for your tests through the `startURL` configuration option. For example, assuming your test starting URL is `shopist.io`, and you want to test your staging environment at `staging.shopist.io`, pass the option as `startURL: "staging.shopist.io"`.
 
-`DOMAIN`
-: Test's domain name<br>
-**Example**: `example.org`
-
-`HASH`
-: Test's hash<br>
-**Example**: `#target`
-
-`HOST`
-: Test's host<br>
-**Example**: `www.example.org:81`
-
-`HOSTNAME`
-: Test's hostname<br>
-**Example**: `www.example.org`
-
-`ORIGIN`
-: Test's origin<br>
-**Example**: `https://www.example.org:81`
-
-`PARAMS`
-: Test's query parameters<br>
-**Example**: `?abc=123`
-
-`PATHNAME`
-: Test's URl path<br>
-**Example**: `/path/to/something`
-
-`PORT`
-: Test's host port<br>
-**Example**: `81`
-
-`PROTOCOL`
-: Test's protocol<br>
-**Example**: `https:`
-
-`SUBDOMAIN`
-: Test's sub domain<br>
-**Example**: `www`
-
-Whether you use Synthetic tests to control your CI/CD deployments in production or staging, you can run Synthetic tests against a generated staging URL instead of in production by setting local environment variables in your test's starting URL. 
-
-To trigger an existing Synthetics test on a staging endpoint instead of in production, set the `$SUBDOMAIN` environment variable to `staging-example` and the `$PORT` environment variable to a port used for staging. Your Synthetic tests run against the generated staging URL instead of running in production. 
-
-For example, you can write `https://app.datadoghq.com/synthetics/details/abc-123-zyx?live=1h#test-results` as:
-
-* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
-* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}{{HASH}}`
-* `{{URL}}`
-
-**Note:** If you have environment variables with names corresponding to one of the reserved variables above, your environment variables are ignored and replaced with the corresponding component parsed from your test's `startUrl`. 
+If you want to customize this start URL further (or only part of the URL), you can use the `startUrlSubstitutionRegex` configuration option. The format is `s/your_regex/your_substitution/modifiers` and follows JavaScript regex syntax. For example, `s/(https://www.)(.*)/$1extra-$2/` transforms `https://www.example.com` into `https://www.extra-example.com`.
 
 ### Run tests
 
-You can decide to have the CLI auto-discover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-a-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
+You can decide to have the CLI auto-discover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#global-configuration-file-options)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
 Run tests by executing the CLI:
 

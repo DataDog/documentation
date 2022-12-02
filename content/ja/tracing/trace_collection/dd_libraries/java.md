@@ -266,7 +266,7 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 
 
 [1]: /ja/tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
 [4]: /ja/account_management/billing/apm_tracing_profiler/
 [5]: /ja/profiler/

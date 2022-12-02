@@ -73,13 +73,13 @@ Click on any host to view more details including:
 - [logs][5] (if enabled)
 - [Agent configuration](#agent-configuration) (if enabled)
 
-{{< img src="infrastructure/index/Infra-List.png" alt="Infrastructure list host details" style="width:90%;">}}
+{{< img src="infrastructure/index/infra-list1.png" alt="Infrastructure list host details" style="width:100%;">}}
 
 #### Aliases
 
 Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. The names collected by the Agent are added as aliases for the chosen canonical name. For example, a single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).
 
-{{< img src="infrastructure/index/Infra-List-Alias.png" alt="Host aliases" style="width:90%;">}}
+{{< img src="infrastructure/index/infra-list-alias1.png" alt="Host aliases" style="width:100%;">}}
 
 #### Agent configuration
 

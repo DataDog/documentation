@@ -5,17 +5,17 @@ jobs:
   label:
     runs-on: ubuntu-latest
     steps:
-    - uses: DataDog/labeler@glob-all
+    - uses: actions/labeler@v4
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
     - name: Set documentation preview
       if: github.event.pull_request.head.repo.fork == false
-      uses: actions/github-script@0.9.0
+      uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          github.repos.createStatus({
+          github.rest.repos.createCommitStatus({
             "owner": context.repo.owner,
             "repo": context.repo.repo,
             "sha": context.payload.pull_request.head.sha,

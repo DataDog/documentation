@@ -11,6 +11,9 @@ further_reading:
 - link: "/events/guides/recommended_event_tags/"
   tag: "Documentation"
   text: "Best Practices for Tagging Events"
+- link: "https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/"
+  tag: "Blog"
+  text: "Identify and redact sensitive data in Events with Sensitive Data Scanner"
 ---
 
 {{< img src="events/events-overview.png" alt="Events explorer" >}}

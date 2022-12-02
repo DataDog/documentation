@@ -29,8 +29,9 @@ curl -G \
 Example response:
 
 ```text
-org_id,hour,source_type_name,alert_type,priority,event_object,host_name,device_name,alert_name,user,cnt
-<org_id_integer>, 2018-06-07 17,monitor alert,error,1,<event_object_string>,test.example.eu,"Host name: {{host.name}} Name name: {{name.name}}",<user_email>,1
+hour,host_name,alert_name,user,cnt
+
+2022-10-23 20,example_host_name,"Host name: {{host.name}} Name name: {{name.name}}",<user_email>,67
 ```
 {{< /site-region >}}
 

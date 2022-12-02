@@ -23,11 +23,14 @@ further_reading:
 {{< /site-region >}}
 
 ## Compatibility
+- **Supported GitHub versions**:
+  - GitHub.com (SaaS)
+  - GitHub Enterprise Server (GHES) 3.5.0 or newer
+- **Partial pipelines**: View partially retried and downstream pipeline executions
 
-Supported GitHub versions:
-* GitHub.com (SaaS)
-* GitHub Enterprise Server (GHES) 3.5.0 or above
+- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
 
+- **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
 
 ## Configuring the Datadog integration
 
@@ -67,6 +70,8 @@ To enable logs, follow these steps:
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
 
+Log files larger than 1GiB are truncated.
+
 ### Infrastructure metric correlation
 
 If you are using self-hosted GitHub runners, you can correlate jobs to the host that is running them. To do this, make sure the GitHub runner name
@@ -103,3 +108,4 @@ workflow job and workflow run events. To remove the events:
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
+[10]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#enable-log-collection

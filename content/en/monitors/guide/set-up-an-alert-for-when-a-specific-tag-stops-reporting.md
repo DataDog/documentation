@@ -2,7 +2,7 @@
 title: Set up an alert for when a specific tag stops reporting
 kind: guide
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"

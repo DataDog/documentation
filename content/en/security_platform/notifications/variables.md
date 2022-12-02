@@ -76,6 +76,10 @@ The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, fo
 
 ## Attribute variables
 
+<div class="alert alert-warning">
+HIPAA-enabled Datadog organizations have access to only <a href="#template-variables">template variables</a> for security notifications. Attribute variables are not supported.
+</div>
+
 Use attribute variables to customize signal notifications with specific information about the triggered signal. 
 
 To see a signal’s list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal’s side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.

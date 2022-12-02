@@ -146,7 +146,7 @@ Do not forget to [restart the Agent][1] for the new settings to take effect.
 
 Install Squid on a host that has connectivity to both your internal Agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][2].
 
-To configure Squid, edit the configuration file. This file is usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows. 
+To configure Squid, edit the configuration file. This file is usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows.
 
 Edit your `squid.conf` configuration file so that Squid is able to accept local traffic and forward it to the necessary Datadog intakes:
 
@@ -163,7 +163,7 @@ http_access allow local manager
 
 ##### Start Squid
 
-Start (or restart) Squid so that your new configurations can be applied. 
+Start (or restart) Squid so that your new configurations can be applied.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -233,7 +233,7 @@ Verify that Datadog is able to receive the data from your Agent(s) by checking y
 
 `agent ---> haproxy ---> Datadog`
 
-This is another good option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents. 
+This is another good option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents.
 
 **Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][3] for additional information.
 
@@ -393,12 +393,12 @@ frontend instrumentation_telemetry_data_frontend
     default_backend datadog-instrumentations-telemetry
 
 # This declares the endpoint where your Agents connects for
-# sending appsec events (deprecated).
-frontend appsec-events-frontend
-    bind *:3844
-    mode tcp
+# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
+frontend network_devices_netflow_frontend
+    bind *:3845
+    mode http
     option tcplog
-    default_backend datadog-appsec-events
+    default_backend datadog-network-devices-netflow
 
 # This is the Datadog server. In effect, any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -497,13 +497,13 @@ backend datadog-instrumentations-telemetry
     # Uncomment the following configuration for older HAProxy versions
     # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
-backend datadog-appsec-events # deprecated
+backend datadog-network-devices-netflow
     balance roundrobin
-    mode tcp
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+    # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 ##### HTTPS
@@ -644,12 +644,12 @@ frontend instrumentation_telemetry_data_frontend
     default_backend datadog-instrumentations-telemetry
 
 # This declares the endpoint where your Agents connect for
-# sending appsec events (deprecated).
-frontend appsec-events-frontend
-    bind *:3844 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
-    mode tcp
+# sending Network Devices Monitoring NetFlow flows (for example, the value of "network_devices.netflow.dd_url")
+frontend network_devices_netflow_frontend
+    bind *:3845 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
+    mode http
     option tcplog
-    default_backend datadog-appsec-events
+    default_backend datadog-network-devices-netflow
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -748,13 +748,13 @@ backend datadog-instrumentations-telemetry
     # Uncomment the following configuration for older HAProxy versions
     # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
-backend datadog-appsec-events # deprecated
+backend datadog-network-devices-netflow
     balance roundrobin
-    mode tcp
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+    # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 **Note**: You can use `verify none` instead of `verify required ca-file <PATH_TO_CERTIFICATES>` if you are unable to get the certificates on the proxy host, but be aware that HAProxy will not be able to verify Datadog's intake certificate in that case.
@@ -815,9 +815,11 @@ network_devices:
             logs_dd_url: haproxy.example.com:3842
             # Comment the line below to use encryption between the Agent and HAProxy
             logs_no_ssl: true
-
-appsec_config (deprecated):
-    appsec_dd_url: haproxy.example.com:3844
+    netflow:
+        forwarder:
+            logs_dd_url: haproxy.example.com:3845
+            # Comment the line below to use encryption between the Agent and HAProxy
+            logs_no_ssl: true
 ```
 
 When using encryption between the Agent and HAProxy, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
@@ -991,11 +993,11 @@ stream {
         proxy_ssl on;
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
-    server {    
-        listen 3844; #listen for appsec events (deprecated)
+    server {
+        listen 3845; #listen for network devices netflow
         proxy_ssl_verify on;
         proxy_ssl on;
-        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
+        proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -1019,7 +1021,7 @@ http {
 
     proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
 
-    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE>; 
+    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE>;
     ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>;
 
     server {
@@ -1089,7 +1091,7 @@ stream {
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass ndm-intake.{{< region-param key="dd_site" >}}:443;
-    } 
+    }
     server {
         listen 3842 ssl; #listen for network devices traps
         proxy_ssl_verify on;
@@ -1103,10 +1105,10 @@ stream {
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3844 ssl; #listen for appsec events (deprecated)
+        listen 3845 ssl; #listen for network devices netflow
         proxy_ssl_verify on;
         proxy_ssl on;
-        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
+        proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -1164,9 +1166,11 @@ network_devices:
             logs_dd_url: nginx.example.com:3842
             # Comment the line below to use encryption between the Agent and NGINX
             logs_no_ssl: true
-
-appsec_config (deprecated):
-    appsec_dd_url: haproxy.example.com:3844
+    netflow:
+        forwarder:
+            logs_dd_url: nginx.example.com:3845
+            # Comment the line below to use encryption between the Agent and NGINX
+            logs_no_ssl: true
 
 ```
 

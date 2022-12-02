@@ -28,7 +28,7 @@ You can also build a [custom check][10] to define and send metrics to Datadog fr
 
 ## Setting up an integration
 
-The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12], and to use those, you need to download the [developer toolkit][13]. For more information on installing or managing these integrations, see the [integrations management guide][14].
+The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12]. For more information on installing or managing these integrations, see the [integrations management guide][14].
 
 ### API and application keys
 
@@ -197,7 +197,6 @@ tagging
 [10]: /developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
-[13]: /developers/integrations/new_check_howto/#developer-toolkit
 [14]: /agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings#agent
 [16]: /account_management/api-app-keys/

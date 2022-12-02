@@ -41,7 +41,8 @@ Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
 .NET Core 2.1, 3.1<br/>
 .NET 5<br/>
-.NET 6
+.NET 6<br/>
+.NET 7
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
@@ -102,9 +103,9 @@ To install the .NET Profiler machine-wide:
 
 To install the .NET Profiler per-application:
 
-1. Add the `Datadog.Monitoring.Distribution` [NuGet package][1] to your application.
+1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
-[1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -279,6 +280,7 @@ To install the .NET Profiler per-application:
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    CORECLR_PROFILER_PATH=<System-dependent path>
    DD_PROFILING_ENABLED=1
+   LD_PRELOAD=<APP_DIRECTORY>/datadog/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
    DD_SERVICE=MyService
    DD_ENV=production
    DD_VERSION=1.2.3
@@ -327,8 +329,11 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_TRACE_DEBUG`           | Boolean        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog-APM\logs\`.  |
 | `DD_PROFILING_ENABLED`     | Boolean        | If set to `true`, enables the .NET Profiler. Defaults to `false`.  |
+| `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | If set to `false`, disables the Wall time profiling. Defaults to `true`.  |
 | `DD_PROFILING_CPU_ENABLED` | Boolean        | If set to `false`, disables the CPU profiling. Defaults to `true`.  |
-| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables the Exceptions profiling. Defaults to `false`.  |
+| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables the Exceptions profiling (beta). Defaults to `false`.  |
+| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables the Allocations profiling (beta). Defaults to `false`.  |
+| `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables the Lock Contention profiling (beta). Defaults to `false`.  |
 
 <div class="alert alert-warning">
 <strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.

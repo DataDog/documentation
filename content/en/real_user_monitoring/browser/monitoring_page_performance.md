@@ -106,7 +106,10 @@ DD_RUM.init({
         'https://third-party-analytics-provider.com/endpoint',
 
         // Exclude any URL ending with /comet
-        /\/comet$/
+        /\/comet$/,
+
+        // Exclude any URLs for which the function return true
+        (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
 ```
