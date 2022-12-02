@@ -8,7 +8,7 @@ further_reading:
 - link: "/integrations/kafka"
   tags: "Documentation"
   text: "Kafka integration"
-- link: "/tracing/data_streams/"
+- link: "/data_streams/"
   tags: "Documentation"
   text: "Data Streams Monitoring"
 ---
