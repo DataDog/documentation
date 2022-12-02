@@ -280,8 +280,10 @@ span.set_tag(MANUAL_DROP_KEY)
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
-```ruby
 Force keeping and dropping for Ruby is supported only at the whole trace level, as of Ruby tracing library version 1.0.0.
+
+
+```ruby
 
 # keep
 trace.keep!
