@@ -93,7 +93,7 @@ When a message is not processed completely before consuming the next one, or whe
 
 {{< /tabs >}}
 
-#### Disable tracing for Kafka
+### Disable tracing for Kafka
 
 If you want to disable Kafka tracing on an application, set its `DD_TRACE_KAFKA_ENABLED` setting to `false`.
 
