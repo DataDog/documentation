@@ -3,9 +3,9 @@ title: Datadog Source Code Integration
 kind: guide
 description: "Set up links to a Git repository and inline source code with Datadog."
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/github_apps/"
-  tag: "Integration"
-  text: "GitHub Apps Integration"
+- link: "https://docs.datadoghq.com/integrations/github/"
+  tag: "Documentation"
+  text: "Learn about the GitHub Integration"
 ---
 
 ## Overview
@@ -14,7 +14,7 @@ The source code integration is an integration with Git that enables you to link 
 
 {{< img src="integrations/guide/source_code_integration/link-to-github.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in Github" style="width:90%;">}}
 
-Combined with the GitHub Apps integrations, you can see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
+By setting up the GitHub integration, you can see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
 ## Configuration
 
@@ -30,9 +30,9 @@ To map telemetry data with your source code:
 {{% tab "GitHub" %}}
 
 1. Add `git.commit.sha` and `git.repository_url` tags to your containers, or directly on your telemetry.
-2. Install Datadog's [GitHub Apps integration][1] to display inline source code snippets.
+2. Install Datadog's [GitHub integration][1] to display inline source code snippets.
 
-[1]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[1]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
@@ -97,11 +97,11 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA> git.repository_url:git-prov
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][1] in the [GitHub Apps integration tile][2] in order to link your telemetry to your source code.
+If you are a GitHub SaaS user, install Datadog's [GitHub integration][1] in the [GitHub integration tile][2] in order to link your telemetry to your source code.
 When specifying your permissions in the integration tile, enable Datadog read permissions to Contents.
 
-[1]: https://docs.datadoghq.com/integrations/github_apps/
-[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[1]: https://docs.datadoghq.com/integrations/github/
+[2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
@@ -139,7 +139,7 @@ In [Error Tracking][1] and on APM error spans, you can directly access links to 
 
 ##### Inline source code
 
-If you are a GitHub SaaS user, install Datadog's [GitHub Apps integration][2] to directly inline code snippets from your GitHub repository in your stack traces.
+If you are a GitHub SaaS user, install Datadog's [GitHub integration][2] to directly inline code snippets from your GitHub repository in your stack traces.
 
 When specifying your permissions in the integration tile, enable Datadog read permissions to **Contents**.
 
@@ -167,6 +167,6 @@ In the [Continuous Profiler][4], you can directly access traces in the source re
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/error-tracking
-[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[2]: https://app.datadoghq.com/integrations/github/
 [3]: https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps
 [4]: /profiler/search_profiles/
