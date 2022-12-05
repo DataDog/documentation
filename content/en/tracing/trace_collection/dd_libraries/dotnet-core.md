@@ -199,6 +199,10 @@ For information about the different methods for setting environment variables, s
 
 1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
 
+   <div class="alert alert-warning">
+     <strong>Note:</strong> The only requirement needed is to run the application pool with the <strong>No Managed Code</strong> setting as recommended by <a href='https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/?view=aspnetcore-3.1#create-the-iis-site'> Microsoft</a>.
+   </div>
+
 2. To automatically instrument applications hosted in IIS, completely stop and start IIS by running the following commands as an administrator:
 
    ```cmd
