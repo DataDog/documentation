@@ -21,38 +21,9 @@ Cloud Security Posture Management is not currently available in this site.
 
 Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
-## Overview
-
-CSPM is able to scan and detect misconfigurations across:
-Cloud accounts: AWS, Azure, GCP
-Workloads: Docker, Kubernetes
-
 ## Enable CSPM for your cloud resources
 
-### Agentless onboarding for cloud accounts
-
-Detect misconfigurations in your cloud environment. This section guides you through collecting resource configuration data from cloud providers. Resource configuration collection allows Datadog to assess your environments against Datadog’s out-of-the-box Posture Management cloud configuration detection rules.
-
-Agentless onboarding for cloud accounts leverages the existing Datadog integrations with the cloud providers.
-
-Leverages the existing Datadog integrations with the cloud providers.
-Scans cloud provider APIs to collect resources and their configuration on a weekly basis.
-Onboarding instructions differ per cloud provider:
-
-- AWS
-- Azure
-- GCP
-
-### Enable workload misconfigurations
-
-Evaluate the security posture of your hosts and containers. This section guides you through configuring the Datadog Agent to scan your hosts and containers. Our agent allows Datadog to continuously assess the state of your hosts and containers against Datadog’s out-of-the-box Posture Management Infrastructure Configuration detection rules.
-
-CSPM capabilities come built-in in the Datadog agent.
-Evaluation of configuration rules is done by the agent.
-Onboarding instructions for:
-
-- Docker
-- Kubernetes
+CSPM provides agentless onboarding using existing Datadog integrations with cloud providers such as AWS, Azure, GCP, Docker, and Kubernetes. For details on how to configure CSPM, select your cloud provider and follow the instructions:
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -116,6 +87,8 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 If you haven't already, set up the [Google Cloud Platform integration][1].
 
+**Note**: [Google Cloud billing][2], the [Cloud Monitoring API][3], the [Compute Engine API][4], and the [Cloud Asset API][5] must all be enabled for the projects you wish to monitor.
+
 ### Enable CSPM for CCP
 
 Use one of the following methods to enable CSPM for your GCP projects:
@@ -123,7 +96,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 ### Security Setup & Configuration
 
 1. Navigate to **Security** > **Setup and Configuration**.
-2. Follow the [in-app instructions][2] to activate CSPM for your account.
+2. Follow the [in-app instructions][6] to activate CSPM for your account.
 3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **GCP** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
 
@@ -134,8 +107,11 @@ Use one of the following methods to enable CSPM for your GCP projects:
 3. Click **Update Configuration**.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
-[2]: https://app.datadoghq.com/security/configuration
-
+[2]: https://support.google.com/cloud/answer/6293499?hl=en
+[3]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
+[4]: https://console.cloud.google.com/apis/library/compute.googleapis.com
+[5]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
+[6]: https://app.datadoghq.com/security/configuration
 {{% /tab %}}
 
 {{% tab "Docker" %}}
