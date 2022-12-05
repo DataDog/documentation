@@ -5,7 +5,7 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "Terraform"
   text: "Create and manage service definitions with Terraform"
-- link: "/tracing/service_catalog/service_definition_api/"
+- link: "/api/latest/service-definition/"
   tag: "Documentation"
   text: "Learn about the Service Definition API"
 - link: "/integrations/github"
