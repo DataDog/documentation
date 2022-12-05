@@ -60,7 +60,7 @@
     contents:
 
     - action: integrations
-      branch: alai97/merge-github-and-github-apps-content
+      branch: prod
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
