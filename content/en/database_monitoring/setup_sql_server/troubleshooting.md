@@ -80,14 +80,14 @@ If neither step produces meaningful help, or the error code you are seeing is no
 
 ### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist' {#adaptive-server-unavailable}
 
-This error can sometimes just be the result of not properly setting the `host` field. For the integration, you should the `host` field with the following syntax: `host:server,port`.
+This error can sometimes be the result of not properly setting the `host` field. For the integration, set the `host` field with the following syntax: `host:server,port`.
 
-For example:
+For example, if you've set `host` this way:
 
 ```
 host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com
 ```
-Should be set as:
+You must add the port, and instead set it as the following:
 ```
 host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 ```
@@ -151,19 +151,19 @@ This issue is described in more detail in this [Microsoft blog post][9]
 
 ### Empty connection string {#empty-connection-string}
 
-Datadog's SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` probably includes some character that causes issues with adodbapi.
+Datadog's SQL Server check relies on the `adodbapi` Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` may include some characters that cause issues with `adodbapi`.
 
 ```text
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
 ```
 
-At the moment, the only character known to cause this specific connectivity issue is the `%` character. If you want to use the "%" character in your `sqlserver.yaml`, that is if your Datadog SQL Server user password includes a `%`), you need to escape that character by including a double `%%` in place of each single `%`.
+At the moment, the only character known to cause this specific connectivity issue is the `%` character. If you need to use the `%` character in your `sqlserver.yaml` file, (for example, if your Datadog SQL Server user password includes a `%`), you must escape that character by including a double `%%` in place of each single `%`.
 
 ## Diagnosing common SQL Server driver issues {#common-driver-issues}
 
 ### Data source name not found, and no default driver specified {#data-source-name-not-found}
 
-This is a common error seen on linux when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
+This is a common error seen on Linux when using the default setting for the ODBC driver. This can happen due the [DSN][10], which is set for your driver in the `/etc/odbcinst.ini` file, not matching the name of the driver that is set in your agent config.
 
 For example, if you wanted to use the default ODBC driver for the Agent (`{ODBC Driver 18 for SQL Server}`), your instance config should contain the following:
 
@@ -185,7 +185,7 @@ For example, this `/etc/odbcinst.ini` file sets the driver:
 
 The DSN in the above example is `[ODBC Driver 18 for SQL Server]`, which matches the default driver name the Agent is using. If the DSN for your driver does not match the name of driver the Agent is using, you will get the `Data source not found` error.
 
-It is possible to set the `dsn` name in your instance config to match what is set in your `/etc/odbcinst.ini` file. For example:
+It is possible to set the `dsn` in your instance config to match what is set in your `/etc/odbcinst.ini` file. For example:
 
     ```text
     $ cat /etc/odbcinst.ini
@@ -215,11 +215,11 @@ And for `MSOLEDBSQL` providers the error message looks like:
   Provider cannot be found. It may not be properly installed.
   ```
 
-This means that the driver/provider is not properly installed on the host where the agent is running. You should ensure that you have followed all the installation directions for the driver you have chosen to use.
+This means that the driver or provider is not properly installed on the host where the Agent is running. You should ensure that you have followed all the installation directions for the driver you have chosen to use.
 
-It's possible that the agent is not properly finding the driver. This is more common with ODBC drivers on linux. Please see [this section](#connecting-to-sql-server-on-a-linux-host) for more instructions on how to install the ODBC driver on linux.
+It's possible that the Agent is not finding the driver. This is more common with ODBC drivers on Linux. See the [connecting to SQL Server on a Linux host](#connecting-to-sql-server-on-a-linux-host) section for more instructions on how to install the ODBC driver on Linux.
 
-For help choosing a driver, please see [this section](#picking-a-sql-server-driver) on how to properly configure your driver with the agent.
+For help choosing a driver, see the [picking a SQL Server driver section](#picking-a-sql-server-driver) on how to properly configure your driver with the agent.
 
 ### Connecting to SQL Server on a Linux host
 
@@ -260,7 +260,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
 In order for the agent to connect to the SQL Server instance, you must install either the [Microsoft ODBC driver][12] or the [OLE DB driver][13].
 
-Depending on which driver you pick, this will influence what you set for the [connector][14] field in your instance config.
+The driver you choose, determines what you set for the [connector][14] field in your instance config.
 
 For example, for the [Microsoft ODBC driver][12]:
 
@@ -289,7 +289,7 @@ In the latest version of the [Microsoft OLE DB driver][13], the driver name was 
 
 It is recommended to stay up to date with the latest available version of the driver you select.
 
-## Other common questions
+## Other common issues
 
 ### SQL Server user tag is missing on the Query Metrics and Plan Samples
 
