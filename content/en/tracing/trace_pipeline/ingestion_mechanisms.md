@@ -243,7 +243,7 @@ The rare sampler sends a set of rare spans to Datadog. It catches combinations o
 
 **Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
 
-#### Datadog Agent 7.41.0 and higher
+#### Datadog Agent 6/7.41.0 and higher
 
 By default, the rare sampler is **not enabled**. 
 
@@ -256,11 +256,11 @@ To enable it, update the `apm_config.enable_rare_sampler` setting in the Agent m
 @env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
 
-#### Datadog Agent 7.33 to 7.40.x
+#### Datadog Agent 6/7.33 to 6/7.40.x
 
 By default, the rare sampler is enabled.
 
-Note: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` ** are excluded ** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 7.41.0 or higher.
+Note: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` ** are excluded ** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
 
 To change the default rare sampler settings, update the `apm_config.disable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_DISABLE_RARE_SAMPLER`:
 
