@@ -15,7 +15,7 @@ further_reading:
 
 Custom metrics provide visibility into all facets of your business, from application performance, infrastructure health, to business KPIs. To govern your custom metric volumes, Datadog offers several tools for cost visibility and control after your metrics are ingested, such as [estimated real-time custom metric usage][1], [usage attribution][2], and [Metrics without Limits™][3].
 
-This guide walks you through how you can use Observability Pipelines to govern and control your custom metrics before they are ingested. More specifically, how to do the following: 
+This guide walks you through how to use Observability Pipelines to govern and control your custom metrics before they are ingested. More specifically, how to do the following: 
 - [Drop custom metrics missing specific tags or the metric's namespace](#drop-metrics-missing-specific-tags-or-the-metrics-namespace)
 - [Remove custom metric tags](#remove-custom-metric-tags)
 - [Set up rules to prevent cardinality spikes](#prevent-cardinality-spikes)
@@ -28,9 +28,11 @@ This guide assumes that you have already set up Observability Pipelines, a tool 
 
 ### Problem
 
-It is useful to break down your overall metrics usage with the [Usage Attribution][6] feature, by adding tags like `team` or `application`. This lets you see how many custom metrics a particular team or application is generating. However, custom metrics might be submitted without those crucial tags. This makes it difficult to attribute the metrics back to the specific team, service, or application generating them. To prevent this issue, use Observability Pipelines to drop metrics missing tags that are useful for Usage Attribution. This can be done before the metrics are added to your account's custom metrics usage. 
+It is useful to break down your overall metrics usage with the [Usage Attribution][6] feature, by adding tags like `team` or `application`. This lets you see how many custom metrics a particular team or application is generating. However, custom metrics might be submitted without those crucial tags. This makes it difficult to attribute the metrics back to the specific team, service, or application generating them. 
 
 ### Solution
+
+To prevent that issue, use Observability Pipelines to drop metrics missing tags that are useful for Usage Attribution. This can be done before the metrics are added to your account's custom metrics usage. 
 
 Observability Pipelines has a wide array of functions that can transform your metrics data before it is sent to Datadog. For example, use the `filter` transform to drop metrics that are missing specific tag keys. The following component filters out any metrics that do not have a `team_tag`, ensuring those metrics are dropped in your Observability Pipelines configuration.
 
@@ -169,13 +171,13 @@ transforms:
 
 ### Problem
 
-Your overall volume of custom metrics is dependent on the number of tag value combinations submitted to Datadog. See [Custom Metrics Billing][8] to learn how custom metrics are counted. It is possible for a particular tag key's cardinality to unintentionally spike. For example, the `path` tag usually has 100 unique tag values, but then suddenly spikes to 100,000 unique values. This sudden increase in tag cardinality can cause an increase in your overall custom metrics volumes. It can also potentially cause you to exceed your account allotment for custom metrics. To avoid this situation, you can set up rules in Observability Pipelines to prevent cardinality spikes.
+Your overall volume of custom metrics is dependent on the number of tag value combinations submitted to Datadog. See [Custom Metrics Billing][8] to learn how custom metrics are counted. It is possible for a particular tag key's cardinality to unintentionally spike. For example, the `path` tag usually has 100 unique tag values, but then suddenly spikes to 100,000 unique values. This sudden increase in tag cardinality can cause an increase in your overall custom metrics volumes. It can also potentially cause you to exceed your account allotment for custom metrics. 
 
 ### Solution
 
-To set cardinality limits on tag keys, use Observability Pipelines' [`tag_cardinality_limits` transform][9]. 
+To avoid this situation, you can set up rules in Observability Pipelines to prevent cardinality spikes. 
 
-This transform enables you to set the limit on the tag cardinality. It can drop the metric name entirely or any tag keys that exceeds the tag cardinality limit. You can set the following attributes in the transform:
+Use Observability Pipelines' [`tag_cardinality_limits` transform][9] to set cardinality limits on tag keys. It can drop the metric name entirely or any tag keys that exceeds the tag cardinality limit. You can set the following attributes in the transform:
 
 - `value_limit`: How many distinct values to accept for any given tag key.
 - `limit_exceeded_action`: Controls what should happen when a metric comes in with a tag that would exceed the configured limit on cardinality. You have the option to set it to: 
