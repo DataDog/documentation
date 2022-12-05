@@ -17,7 +17,7 @@
   <input type="input" data-ref="search" class="form-control grouped-item-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords"/>
 </div>
 
-<div class="list-group">
+<div>
   <div class="js-empty-results d-none font-semibold"></div>
   {{ range $i, $v := $listGroups }}
   <div class="js-group js-group-{{ $i }}" id="{{ $v.Key | anchorize }}">
