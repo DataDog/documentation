@@ -20,6 +20,8 @@ further_reading:
 - link: '/continuous_testing/cicd_integrations'
   tag: 'Documentation'
   text: 'Learn about running Synthetic tests in a CI pipeline'
+algolia:
+  tags: ["synthetics"]
 ---
 
 ## Overview
