@@ -49,6 +49,8 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 2. Select **Cloud Security Posture Management Collection** to enable resource collection for CSPM.
 3. Click **Save**.
 
+**Note**: To disable CSPM, turn off the **Collect Resources** toggle for your AWS accounts. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
+
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [3]: https://app.datadoghq.com/security/configuration
@@ -78,6 +80,8 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 2. Under **Resource Collection**, select the **Enable resource collection for Cloud Security Posture Management** checkbox.
 3. Click **Update Configuration**.
 
+**Note**: To disable CSPM, turn off the **CSPM Enabled** toggle for your Azure subscriptions. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
+
 [1]: https://docs.datadoghq.com/integrations/azure
 [2]: https://app.datadoghq.com/security/configuration
 
@@ -105,6 +109,8 @@ Use one of the following methods to enable CSPM for your GCP projects:
 1. On the GCP integration tile, select a GCP project.
 2. Under **Enable resource collection for Cloud Security Posture Management**, select the **Resource collection** checkbox.
 3. Click **Update Configuration**.
+
+**Note**: To disable CSPM, turn off the **CSPM Enabled** toggle for your GCP projects. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
 [2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#metric-collection
@@ -147,11 +153,15 @@ Use one of the following methods to enable CSPM for your GCP projects:
       datadog/agent:latest
     ```
 
+**Note**: To disable CSPM, set `DD_COMPLIANCE_CONFIG_ENABLED` to `false`. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
+
 [1]: https://app.datadoghq.com/security/configuration
 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+
+### Enable CSPM for Kubernetes
 
 1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
 2. Navigate to **Security** > **Setup and Configuration**.
@@ -170,6 +180,8 @@ Use one of the following methods to enable CSPM for your GCP projects:
     ```
 
 5. Restart the Agent.
+
+**Note**: To disable CSPM, set `compliance` > `enabled` to `false`. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://app.datadoghq.com/security/configuration
