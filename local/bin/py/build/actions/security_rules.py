@@ -97,7 +97,7 @@ def security_rules(content, content_dir):
         message_file_name = p.with_suffix('.docs.md')
         if not message_file_name.exists():
             message_file_name = p.with_suffix('.md')
-            if not message_file.exists():
+            if not message_file_name.exists():
                 continue
 
         # delete file or skip if staged
