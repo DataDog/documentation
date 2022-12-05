@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-To collect traces from your running ECS containers, update your Agent's Task Definition from the original ECS Setup as well as your application containers with the instructions below.
+To collect traces from your ECS containers, update your Agent's and your application container's Task Definitions with the instructions below.
 
 This can be done by modifying the previously used [Task Definition file][4] and [registering your updated Task Definition][5]. Alternatively you can edit the Task Definition directly from the Amazon Web UI.
 
@@ -70,7 +70,7 @@ First consult the [setup instructions for installing the Datadog Tracer][2] per 
 
 After this, provide the Tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname that the traces are be sent to. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
 
-### Getting the Private IP Address
+### Get the private IP address
 
 {{< tabs >}}
 {{% tab "EC2 metadata endpoint" %}}
@@ -105,7 +105,7 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 
 Proivde the result of this request to the Tracer through the environment variable `DD_AGENT_HOST` for each application container sending APM traces.
 
-### Setting Tracer Hostname
+### Set Tracer hostname
 
 In cases where variables on your ECS application are set at launch time (Java, .NET, PHP), you **must** set the hostname as an environment variable with `DD_AGENT_HOST` using one of the above methods. If you have a startup script as your entrypoint this can be included in there, otherwise this can be added to the ECS Task Definition's `entryPoint`.
 
