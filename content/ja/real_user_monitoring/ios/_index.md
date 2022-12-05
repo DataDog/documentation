@@ -347,4 +347,4 @@ Datadog の構成で、初期化時に以下のスニペットを追加します
 [10]: https://docs.datadoghq.com/ja/real_user_monitoring/explorer/
 [11]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags/#rum--session-replay
 [12]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/web_view_tracking/
-[13]: https://docs.datadohq.com/real_user_monitoring/error_tracking/ios/
+[13]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/
