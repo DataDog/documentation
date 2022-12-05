@@ -51,7 +51,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
 
 ## New dashboard
 
-To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+To create a dashboard, click **+New Dashboard** on the [Dashboard List][16] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
