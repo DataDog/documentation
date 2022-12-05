@@ -1205,7 +1205,7 @@ main:
     url: monitors/types/service_check/
     parent: monitor_types
     identifier: monitor_types_service_check
-    weight: 217
+    weight: 218
   - name: SLO Alerts
     url: monitors/types/slo/
     parent: monitor_types
