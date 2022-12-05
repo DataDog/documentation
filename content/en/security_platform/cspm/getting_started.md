@@ -39,8 +39,9 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 #### Security Setup & Configuration
 
 1. Navigate to **Security** > **Setup and Configuration**.
-2. Select **Posture Management**.
-3. To enable CSPM for an AWS account, turn on the **Collect Resources** toggle.
+2. Follow the [in-app instructions][3] to activate CSPM for your account.
+3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **AWS** tile.
+4. To enable CSPM for an AWS account, turn on the **Collect Resources** toggle.
 
 #### AWS integration tile
 
@@ -50,6 +51,7 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
+[3]: https://app.datadoghq.com/security/configuration
 
 {{% /tab %}}
 
@@ -85,9 +87,7 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 ### Set up the Datadog GCP integration
 
-If you haven't already, set up the [Google Cloud Platform integration][1].
-
-**Note**: [Google Cloud billing][2], the [Cloud Monitoring API][3], the [Compute Engine API][4], and the [Cloud Asset API][5] must all be enabled for the projects you wish to monitor.
+If you haven't already, set up the [Google Cloud Platform integration][1] and make sure that you have successfully completed the steps for enabling [metric collection][2].
 
 ### Enable CSPM for CCP
 
@@ -96,7 +96,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 ### Security Setup & Configuration
 
 1. Navigate to **Security** > **Setup and Configuration**.
-2. Follow the [in-app instructions][6] to activate CSPM for your account.
+2. Follow the [in-app instructions][3] to activate CSPM for your account.
 3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **GCP** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
 
@@ -107,11 +107,8 @@ Use one of the following methods to enable CSPM for your GCP projects:
 3. Click **Update Configuration**.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
-[2]: https://support.google.com/cloud/answer/6293499?hl=en
-[3]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
-[4]: https://console.cloud.google.com/apis/library/compute.googleapis.com
-[5]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
-[6]: https://app.datadoghq.com/security/configuration
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#metric-collection
+[3]: https://app.datadoghq.com/security/configuration
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -157,7 +154,9 @@ Use one of the following methods to enable CSPM for your GCP projects:
 {{% tab "Kubernetes" %}}
 
 1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
-2. Add the following to the `datadog` section of the `values.yaml` file:
+2. Navigate to **Security** > **Setup and Configuration**.
+3. Follow the [in-app instructions][2] to activate CSPM for your account.
+4. Add the following to the `datadog` section of the `values.yaml` file:
     ```yaml
     # values.yaml file
     datadog:
@@ -170,9 +169,10 @@ Use one of the following methods to enable CSPM for your GCP projects:
           enabled: true
     ```
 
-3. Restart the Agent.
+5. Restart the Agent.
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[2]: https://app.datadoghq.com/security/configuration
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -187,7 +187,7 @@ To view the findings for your cloud resources, go to the [CSPM homepage][1].
 
 CSPM comes with a set of [out-of-the-box detection rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration detection rules are added, they are automatically imported into your account.
 
-To explore the default detection rules:
+To filter the default detection rules by cloud provider:
 
 1. Navigate to **Security** > **Detection Rules**.
 2. Choose one of the following values from the **Tag** facet.
