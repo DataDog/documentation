@@ -58,7 +58,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables by running:
 
     ```sh
-    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    DD_TRACE_AGENT_HOSTNAME=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
     ```
 
    To use Unix domain sockets, specify the entire URL as a single environment variable, `DD_TRACE_AGENT_URL`.
