@@ -260,7 +260,7 @@ To enable it, update the `apm_config.enable_rare_sampler` setting in the Agent m
 
 By default, the rare sampler is enabled.
 
-Note: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` ** are excluded ** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
+Note: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` **are excluded** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 6.41.0/7.41.0 or higher.
 
 To change the default rare sampler settings, update the `apm_config.disable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_DISABLE_RARE_SAMPLER`:
 
