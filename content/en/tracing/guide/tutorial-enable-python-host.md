@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Enabling Tracing for a Python Application on the Same Host as Datadog Agent
+title: Tutorial - Enabling Tracing for a Python Application on the Same Host as the Datadog Agent
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through step by step enabling tracing on a sample Python application that is installed on a host. In this scenario, you install a Datadog Agent on the same host as the application. 
+This tutorial walks you through the steps for enabling tracing on a sample Python application installed on a host. In this scenario, you install a Datadog Agent on the same host as the application. 
 
-For other scenarios, including applications in containers, Agent in a container, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including applications in containers, Agent in a container, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
 
-For general comprehensive tracing setup documentation for Python, see [Tracing Python Applications][2].
+See [Tracing Python Applications][2] for general comprehensive tracing setup documentation for Python.
 
 ### Prerequisites
 
@@ -41,7 +41,7 @@ If you haven't installed a Datadog Agent on your machine, go to [**Integrations 
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 {{< /code-block >}}
 
-To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [the site that you use][6].
+To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
 If you have an Agent already installed on the host, ensure it is at least version 7.28. The minimum version of Datadog Agent required to use `ddtrace` to trace Python applications is documented in the [tracing library developer docs][7].
 
@@ -148,7 +148,7 @@ To start generating and collecting traces, restart the sample application in a s
 {{< code-block lang="bash" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
  ddtrace-run python -m notes_app.app{{< /code-block >}}
 
-That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variable to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
+That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
 
 Use `curl` to again send requests to the application:
 
@@ -208,7 +208,7 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case `long_running_process`.
+    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
 
 4. Resend some HTTP requests, specifically some `GET` requests.
 5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
@@ -221,7 +221,7 @@ For more information, read [Custom Instrumentation][12].
 
 ## Add a second application to see distributed traces
 
-Tracing a single application is a great start, but the real value in tracing comes when you can see how requests are flowing through your services. This is called _distributed tracing_. 
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
 
 The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
@@ -244,7 +244,7 @@ ddtrace-run python -m calendar_app.app
 
 ## Add more custom instrumentation
 
-As previously mentioned, you can add custom instrumentation by using code. Supposed you want to further instrument the calendar service in order to better see the trace. 
+You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
 
 1. Open `notes_app/notes_logic.py`. 
 2. Add the following import
@@ -275,7 +275,7 @@ def create_note(self, desc, add_date=None):
         note = Note(description=desc, id=None)
         note.id = self.db.create_note(note){{< /code-block >}}
 
-4. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
+4. Send more HTTP requests, specifically `POST` requests, with the `add_date` argument.
 5. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
    {{< img src="tracing/guide/tutorials/tutorial-python-host-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
    Note the new span labeled `notes_helper.another_process`.

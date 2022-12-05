@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through step by step enabling tracing on a sample Python application that is installed in a container. In this scenario, the Datadog Agent is also installed in a container. 
+This tutorial walks you through the steps for enabling tracing on a sample Python application installed in a container. In this scenario, the Datadog Agent is also installed in a container. 
 
-For other scenarios, including application and Agent on a host, the application in a container and Agent on a host, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
-For general comprehensive tracing setup documentation for Python, see [Tracing Python Applications][2].
+See [Tracing Python Applications][2] for general comprehensive tracing setup documentation for Python.
 
 ### Prerequisites
 
@@ -166,7 +166,7 @@ Add the Datadog Agent in the services section of your `docker-compose.yaml` file
           - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
    ```
 
-2. To the section for each container with code that you want to monitor, in this case the `notes_app` container, add the environment variable `DD_AGENT_HOST` and specify the hostname of the Agent container:
+2. Add the environment variable `DD_AGENT_HOST` and specify the hostname of the Agent container to the section for each container with code that you want to monitor, in this case, the `notes_app` container:
    ```yaml
        environment:
         - DD_AGENT_HOST=datadog
@@ -209,7 +209,7 @@ If you don't see traces after several minutes, clear any filter in the Traces Se
 
 ### Examine a trace
 
-In the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
 
 The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
 
@@ -242,7 +242,7 @@ from ddtrace import tracer{{< /code-block >}}
         logging.info("Hello from the long running process")
         self.__private_method_1(){{< /code-block >}}
 
-    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case `long_running_process`.
+    Now, the tracer automatically labels the resource with the function name it is wrapped around, in this case, `long_running_process`.
 
 4. Rebuild the containers by running:
    {{< code-block lang="sh" >}}
@@ -260,7 +260,7 @@ For more information, read [Custom Instrumentation][12].
 
 ## Add a second application to see distributed traces
 
-Tracing a single application is a great start, but the real value in tracing comes when you can see how requests are flowing through your services. This is called _distributed tracing_. 
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
 
 The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
@@ -277,7 +277,7 @@ The sample project includes a second application called `calendar_app` that retu
    ENV DD_VERSION="0.1.0"
    ```
 
-4. And again, add Docker labels that correspond to the Universal Service Tags, allowing you to also get Docker metrics once your application is running. 
+4. Again, add Docker labels that correspond to the Universal Service Tags, allowing you to also get Docker metrics once your application runs. 
 
    ```
    LABEL com.datadoghq.tags.service="calendar"
@@ -285,7 +285,7 @@ The sample project includes a second application called `calendar_app` that retu
    LABEL com.datadoghq.tags.version="0.1.0"
    ```
 
-2. Add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container so that it sends traces to the correct location. Open `docker/containers/exercise/docker-compose.yaml` and add the following lines to the `calendar_app` section:
+2. Add the Agent container hostname, `DD_AGENT_HOST`, to the calendar application container to send traces to the correct location. Open `docker/containers/exercise/docker-compose.yaml` and add the following lines to the `calendar_app` section:
 
    ```yaml
        environment:
@@ -294,7 +294,7 @@ The sample project includes a second application called `calendar_app` that retu
 
    To check that you've set things up correctly, compare your setup with the Dockerfile and `docker-config.yaml` files provided in the sample repository's `docker/containers/solution` directory.
 
-5. Build the multi-service application by restarting the containers. First, stop all containers if still running:
+5. Build the multi-service application by restarting the containers. First, stop all running containers:
    ```
    docker-compose -f docker/containers/exercise/docker-compose.yaml down
    ```
@@ -317,7 +317,7 @@ The sample project includes a second application called `calendar_app` that retu
 
 ## Add more custom instrumentation
 
-As previously mentioned, you can add custom instrumentation by using code. Supposed you want to further instrument the calendar service in order to better see the trace. 
+You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
 
 1. Open `notes_app/notes_logic.py`. 
 2. Add the following import
@@ -354,7 +354,7 @@ def create_note(self, desc, add_date=None):
    docker-compose -f docker/containers/exercise/docker-compose.yaml up
    ```
 
-5. Send some more HTTP requests, specifically `POST` requests with the `add_date` argument.
+5. Send some more HTTP requests, specifically `POST` requests, with the `add_date` argument.
 6. In the Trace Explorer, click into one of these new `POST` traces to see a custom trace across multiple services:
    {{< img src="tracing/guide/tutorials/tutorial-python-container-cust-dist.png" alt="A flame graph for a distributed trace with custom instrumentation." style="width:100%;" >}}
    Note the new span labeled `notes_helper.another_process`.
