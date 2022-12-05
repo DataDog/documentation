@@ -156,6 +156,9 @@ If the dashboard was created with the deprecated "read only" setting, the access
 
 If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][14].
 
+**Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][15] to enable this feature. 
+
+
 #### High-density mode
 
 High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets.
@@ -175,8 +178,6 @@ From an individual dashboard, copy, import, or export a dashboard's JSON using t
 | Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
 | Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
-{{< img src="dashboards/copy_dashboard.png" alt="Copy dashboard" style="width:30%;">}}
-
 #### Delete dashboard
 
 Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
@@ -189,7 +190,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ## Dashboard list
 
-Search, view, or create dashboards and lists on the [Dashboard List][15] page.
+Search, view, or create dashboards and lists on the [Dashboard List][16] page.
 
 ### New list
 
@@ -256,7 +257,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][16]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][17]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -288,5 +289,6 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [12]: /events/
 [13]: /account_management/rbac/
 [14]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[15]: https://app.datadoghq.com/dashboard/lists
-[16]: /dashboards/template_variables/#saved-views
+[15]: /help/
+[16]: https://app.datadoghq.com/dashboard/lists
+[17]: /dashboards/template_variables/#saved-views
