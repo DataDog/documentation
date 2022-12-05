@@ -27,8 +27,9 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 #### Simple alert
 `Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+
 #### Multi alert
-`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space. **Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags will be detected by the monitor. 
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space. **Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
 
 If you configure tags or dimensions, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Tag Variables][2] to learn how to reference tag values in the notification message.
 
