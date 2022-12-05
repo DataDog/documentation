@@ -259,90 +259,289 @@ The head-based sampling mechanism can be overridden at the tracing library level
 
 - Set Manual Drop on a span to make sure that **no** child span is ingested. [Error and rare samplers](#error-and-rare-traces) will be ignored in the Agent.
 
-  {{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang lang="java" >}}
+
+Manually keep a trace:
 
 ```java
-// keep
-span.setTag(DDTags.MANUAL_KEEP, true);
-// drop
-span.setTag(DDTags.MANUAL_DROP, true);
+import datadog.trace.api.DDTags;
+import datadog.trace.api.interceptor.MutableSpan;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
+
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
+        // Always keep the trace
+        ddspan.setTag(DDTags.MANUAL_KEEP, true);
+        // method impl follows
+    }
+}
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+Manually drop a trace:
+
+```java
+import datadog.trace.api.DDTags;
+import datadog.trace.api.interceptor.MutableSpan;
+import datadog.trace.api.Trace;
+import io.opentracing.util.GlobalTracer;
+
+public class MyClass {
+    @Trace
+    public static void myMethod() {
+        // grab the active span out of the traced method
+        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
+        // Always Drop the trace
+        ddspan.setTag(DDTags.MANUAL_DROP, true);
+        // method impl follows
+    }
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+Manually keep a trace:
+
 ```python
-# keep
-span.set_tag(MANUAL_KEEP_KEY)
-# drop
-span.set_tag(MANUAL_DROP_KEY)
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+    // Always Keep the Trace
+    span.set_tag(MANUAL_KEEP_KEY)
+    // method impl follows
 ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-Force keeping and dropping for Ruby is supported only at the whole trace level, as of Ruby tracing library version 1.0.0.
+Manually drop a trace:
 
+```python
+from ddtrace import tracer
+from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
+
+@tracer.wrap()
+def handler():
+    span = tracer.current_span()
+    //Always Drop the Trace
+    span.set_tag(MANUAL_DROP_KEY)
+    //method impl follows
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+Manually keep a trace:
 
 ```ruby
+Datadog::Tracing.trace(name, options) do |span|
+  Datadog::Tracing.keep! # Affects the active span
 
-# keep
-trace.keep!
-# drop
-trace.reject!
+  # Method implementation follows
+end
 ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+Manually drop a trace:
 
-```go
-// keep
-span.SetTag(ext.ManualKeep, true)
+```ruby
+Datadog::Tracing.trace(name, options) do |span|
+  Datadog::Tracing.reject! # Affects the active span
 
-// drop
-span.SetTag(ext.ManualDrop, true)
+  # Method implementation follows
+end
 ```
 
-{{% /tab %}}
-{{% tab "NodeJS" %}}
-```javascript
-// keep
-span.setTag(MANUAL_KEEP, true)
-// drop
-span.setTag(MANUAL_DROP, true)
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+Manually keep a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always keep this trace:
+    span.SetTag(ext.ManualKeep, true)
+    //method impl follows
+
+}
+```
+
+Manually drop a trace:
+
+```Go
+package main
+
+import (
+    "log"
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Always drop this trace:
+    span.SetTag(ext.ManualDrop, true)
+    //method impl follows
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Manually keep a trace:
+
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always keep the trace
+span.setTag(tags.MANUAL_KEEP)
+//method impl follows
 
 ```
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-```php
-// keep
-$span->setTag(Tag::MANUAL_KEEP, true);
-//drop
-$span->setTag(Tag::MANUAL_DROP, true);
-```
+Manually drop a trace:
 
-{{% /tab %}}
-{{% tab "C++" %}}
-```cpp
-// keep
-span->SetTag(datadog::tags::manual_keep, true);
-//drop
-span->SetTag(datadog::tags::manual_drop, true);
+```js
+const tracer = require('dd-trace')
+const tags = require('dd-trace/ext/tags')
+
+const span = tracer.startSpan('web.request')
+
+// Always drop the trace
+span.setTag(tags.MANUAL_DROP)
+//method impl follows
 
 ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang=".NET" >}}
+
+Manually keep a trace:
+
 ```cs
-// keep
-span.SetTag(Datadog.Trace.Tags.ManualKeep, "true");
-// drop
-span.SetTag(Datadog.Trace.Tags.ManualDrop, "true");
+using Datadog.Trace;
 
+using(var scope = Tracer.Instance.StartActive(operationName))
+{
+    var span = scope.Span;
+
+    // Always keep this trace
+    span.SetTag(Datadog.Trace.Tags.ManualKeep, "true");
+    //method impl follows
+}
 ```
 
-{{% /tab %}}
-  {{< /tabs >}}
+Manually drop a trace:
+
+```cs
+using Datadog.Trace;
+
+using(var scope = Tracer.Instance.StartActive(operationName))
+{
+    var span = scope.Span;
+
+    // Always drop this trace
+    span.SetTag(Datadog.Trace.Tags.ManualDrop, "true");
+    //method impl follows
+}
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+
+Manually keep a trace:
+
+```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
+
+  if (null !== $span) {
+    // Always keep this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_KEEP, true);
+    //method impl follows
+  }
+?>
+```
+
+Manually drop a trace:
+
+```php
+<?php
+  $tracer = \OpenTracing\GlobalTracer::get();
+  $span = $tracer->getActiveSpan();
+
+  if (null !== $span) {
+    // Always drop this trace
+    $span->setTag(\DDTrace\Tag::MANUAL_DROP, true);
+    //method impl follows
+  }
+?>
+```
+
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
+
+Manually keep a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto span = tracer->StartSpan("operation_name");
+// Always keep this trace
+span->SetTag(datadog::tags::manual_keep, {});
+//method impl follows
+```
+
+Manually drop a trace:
+
+```cpp
+...
+#include <datadog/tags.h>
+...
+
+auto tracer = ...
+auto another_span = tracer->StartSpan("operation_name");
+// Always drop this trace
+
+another_span->SetTag(datadog::tags::manual_drop, {});
+//method impl follows
+```
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+Manual trace keeping should happen before context propagation. If it is kept after context propagation, the system can’t ensure that the entire trace is kept across services. Manual trace keep is set at tracing client location, so the trace can still be dropped by Agent or server location based on sampling rules.
+
 
 ## Single spans
 `ingestion_reason: single_span`
