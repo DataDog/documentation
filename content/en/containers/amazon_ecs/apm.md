@@ -68,14 +68,14 @@ If you have a local file for your Agent's Task Definition you can repeat the ste
 
 First consult the [setup instructions for installing the Datadog Tracer][2] per language. For ECS install the Datadog Tracer into your application's container image.
 
-After this, provide the Tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname that the traces are be sent to. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
+After this, provide the Tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the Tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
 
 ### Get the private IP address
 
 {{< tabs >}}
 {{% tab "EC2 metadata endpoint" %}}
 
-The [Amazon’s EC2 metadata endpoint][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
+The [Amazon’s EC2 metadata endpoint (IMDSv1)][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
 
 {{< code-block lang="curl" >}}
 curl http://169.254.169.254/latest/meta-data/local-ipv4
@@ -103,27 +103,28 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{% /tab %}}
 {{< /tabs >}}
 
-Proivde the result of this request to the Tracer through the environment variable `DD_AGENT_HOST` for each application container sending APM traces.
+Provide the result of this request to the Tracer through the environment variable `DD_AGENT_HOST` for each application container sending APM traces.
 
-### Set Tracer hostname
+### Configure the tracer endpoint
 
-In cases where variables on your ECS application are set at launch time (Java, .NET, PHP), you **must** set the hostname as an environment variable with `DD_AGENT_HOST` using one of the above methods. If you have a startup script as your entrypoint this can be included in there, otherwise this can be added to the ECS Task Definition's `entryPoint`.
+In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the tracer endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entrypoint this can be included in there, otherwise this can be added to the ECS Task Definition's `entryPoint`.
 
-For the other languages (Python, Javascript, Ruby, Go) you can alternatively set the hostname in your application's source code.
+For the other languages (Python, Javascript, Ruby, and Go) you can alternatively set the hostname in your application's source code.
 
 {{< programming-lang-wrapper langs="python,nodeJS,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with:
+Update the Task Definition's `entryPoint` with the following, substitute with your `<Python Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); ddtrace-run python <your application>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Python Startup Command>"
 ]
 ```
+For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used.
 
 #### Code
 ```python
@@ -147,12 +148,12 @@ For more examples of setting the Agent hostname in other languages, see the [cha
 {{< programming-lang lang="nodeJS" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with:
+Update the Task Definition's `entryPoint` with the following, substitute with your `<NodeJS Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); npm start"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <NodeJS Startup Command>"
 ]
 ```
 
@@ -175,12 +176,12 @@ For more examples of setting the Agent hostname in other languages, see the [cha
 {{< programming-lang lang="ruby" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the follwing, substituting your `<Startup Command>`:
+Update the Task Definition's `entryPoint` with the following, substitute with your `<Ruby Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Startup Command>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Ruby Startup Command>"
 ]
 ```
 
@@ -228,7 +229,7 @@ func main() {
 {{< programming-lang lang="java" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following. Updating the values with your necessary argument flags and application `.jar` or `.war` file.
+Update the Task Definition's `entryPoint` with the following. Substitute with your necessary argument flags and application `.jar` or `.war` file.
 
 ```java
 "entryPoint": [
@@ -246,7 +247,7 @@ For more examples of setting the Agent hostname in other languages, see the [cha
 {{< programming-lang lang=".NET" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following. Substituting the `APP_PATH` in if not set:
+Update the Task Definition's `entryPoint` with the following. Substitute with your `APP_PATH` if not set:
 
 ```json
 "entryPoint": [
@@ -267,7 +268,7 @@ Update the Task Definition's `entryPoint` with the following.
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); php-fpm -F"  
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); php-fpm -F"
 ]
 ```
 
@@ -293,15 +294,13 @@ env[DD_ENV] = $DD_ENV
 env[DD_VERSION] = $DD_VERSION
 ```
 
-
-
 [1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
 ##### IMDSv2
-When using IMDSv2 the equivalent `entryPoint` configuration would look like:
+When using IMDSv2 the equivalent `entryPoint` configuration would look like the following. Substitute `<Startup Command>` with the appropriate command based on your language like the examples above.
 
 ```json
 "entryPoint": [
