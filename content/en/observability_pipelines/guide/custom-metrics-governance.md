@@ -61,14 +61,16 @@ transforms:
 
 ### Problem
 
-Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you cannot drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage. To address this issue, you can use Observability Pipelines to do one of the following **before the metric is ingested**:
+Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you cannot drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage. 
+
+**Note**: Removing tags on metrics prior to ingestion impacts the mathematical accuracy of your metrics' queries. Using Metrics without Limits™ allows you to define important tags at any time, without impacting the mathematical accuracy of your metrics' queries.
+
+To address this issue, you can use Observability Pipelines to do one of the following **before the metric is ingested**:
 
 - [Drop one tag](#solution-1-drop-one-tag)
 - [Define an allowlist array of tags to keep](#solution-2-define-an-allowlist-array-of-tags-to-keep)
 - [Define a blocklist array of tags to drop](#solution-3-define-a-blocklist-array-of-tags-to-drop)
 - [Define an allowlist of valid tags in a Reference Table](#solution-4-define-an-allowlist-of-valid-tags-in-a-reference-table)
-
-**Note**: Removing tags on metrics prior to ingestion impacts the mathematical accuracy of your metrics' queries. Using Metrics without Limits™ allows you to define important tags at any time, without impacting the mathematical accuracy of your metrics' queries.
 
 ### Solution 1: Drop one tag
 
