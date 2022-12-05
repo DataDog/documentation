@@ -61,7 +61,7 @@ transforms:
 
 ### Problem
 
-Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you cannot drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage. To address this issue, you can use Observability Pipelines to do one of the following before the metric is ingested:
+Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you cannot drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage. To address this issue, you can use Observability Pipelines to do one of the following **before the metric is ingested**:
 
 - [Drop one tag](#solution-1-drop-one-tag)
 - [Define an allowlist array of tags to keep](#solution-2-define-an-allowlist-array-of-tags-to-keep)
