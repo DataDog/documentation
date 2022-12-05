@@ -280,6 +280,9 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
 
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
+
 ## Troubleshooting
 
 If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][15]
