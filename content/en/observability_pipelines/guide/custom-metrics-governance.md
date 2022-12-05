@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Custom metrics provide visibility into all facets of your business, from application performance, infrastructure health, to business KPIs. In order to govern your custom metric volumes, Datadog offers several tools for cost visibility and control after your metrics are ingested, such as [estimated real-time custom metric usage][1], [usage attribution][2], and [Metrics without Limits™][3].
+Custom metrics provide visibility into all facets of your business, from application performance, infrastructure health, to business KPIs. To govern your custom metric volumes, Datadog offers several tools for cost visibility and control after your metrics are ingested, such as [estimated real-time custom metric usage][1], [usage attribution][2], and [Metrics without Limits™][3].
 
 This guide walks you through how you can use Observability Pipelines to govern and control your custom metrics before they are ingested. More specifically, how to do the following: 
 - [Drop custom metrics missing specific tags or the metric's namespace](#drop-metrics-missing-specific-tags-or-the-metrics-namespace)
@@ -32,7 +32,7 @@ It is useful to break down your overall metrics usage with the [Usage Attributio
 
 ### Solution
 
-Observability Pipelines has a wide array of functions that can transform your metrics data before it is sent to Datadog. For example, you can use the `filter` transform to drop metrics that are missing specific tag keys. The following component filters out any metrics that do not have a `team_tag`, ensuring those metrics are dropped in your Observability Pipelines configuration.
+Observability Pipelines has a wide array of functions that can transform your metrics data before it is sent to Datadog. For example, use the `filter` transform to drop metrics that are missing specific tag keys. The following component filters out any metrics that do not have a `team_tag`, ensuring those metrics are dropped in your Observability Pipelines configuration.
 
 ```yaml
 transforms:
@@ -59,20 +59,20 @@ transforms:
 
 ### Problem
 
-Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you can not drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage. To address this issue, you can use Observability Pipelines to do any of the following before the metric is ingested:
+Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you cannot drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage. To address this issue, you can use Observability Pipelines to do one of the following before the metric is ingested:
 
 - [Drop one tag](#solution-1-drop-one-tag)
 - [Define an allowlist array of tags to keep](#solution-2-define-an-allowlist-array-of-tags-to-keep)
 - [Define a blocklist array of tags to drop](#solution-3-define-a-blocklist-array-of-tags-to-drop)
 - [Define an allowlist of valid tags in a Reference Table](#solution-4-define-an-allowlist-of-valid-tags-in-a-reference-table)
 
-**Note**: Removing tags on metrics prior to ingestion impacts the mathematical accuracy of your metrics' queries, while using Metrics without Limits™ allows you to define important tags at any time, without impacting the mathematical accuracy of your metrics' queries.
+**Note**: Removing tags on metrics prior to ingestion impacts the mathematical accuracy of your metrics' queries. Using Metrics without Limits™ allows you to define important tags at any time, without impacting the mathematical accuracy of your metrics' queries.
 
 ### Solution 1: Drop one tag
 
 To drop specific tags on custom metrics before they get ingested into Datadog, you can use Observability Pipelines' [`remap` transform][7], which comes with a domain-specific language to manipulate metrics. 
 
-For the basic use case of dropping a single metric tag, you can use the `del()` function in VRL. For example, the following component drops the tag, `tag_to_drop`.
+For the basic use case of dropping a single metric tag, you can use the `del()` function in VRL. For example, the following component drops the `tag_to_drop` tag.
 
 ```yaml
 transforms:
@@ -137,7 +137,7 @@ tag_name
 "tag 4"
 ```
 
-To reference it as table, the following configuration must be set for the file `valid_tags.csv`.
+To reference it as a table, the following configuration must be set for the file `valid_tags.csv`.
 
 ```
 enrichment_tables:
@@ -169,7 +169,7 @@ transforms:
 
 ### Problem
 
-Your overall volume of custom metrics is dependent on the number of tag value combinations submitted to Datadog. See [Custom Metrics Billing][8] on count custom metrics are counted. It is possible for a particular tag key's cardinality to unintentionally spike. For example, the `path` tag usually has 100 unique tag values, but then suddenly spikes to 100,000 unique values. This sudden increase in tag cardinality can cause an increase in your overall custom metrics volumes. It can also potentially cause you to exceed your account allotment for custom metrics. To avoid this situation, you can set up rules in Observability Pipelines to prevent cardinality spikes.
+Your overall volume of custom metrics is dependent on the number of tag value combinations submitted to Datadog. See [Custom Metrics Billing][8] to learn how custom metrics are counted. It is possible for a particular tag key's cardinality to unintentionally spike. For example, the `path` tag usually has 100 unique tag values, but then suddenly spikes to 100,000 unique values. This sudden increase in tag cardinality can cause an increase in your overall custom metrics volumes. It can also potentially cause you to exceed your account allotment for custom metrics. To avoid this situation, you can set up rules in Observability Pipelines to prevent cardinality spikes.
 
 ### Solution
 
