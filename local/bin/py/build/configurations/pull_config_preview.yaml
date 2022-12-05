@@ -118,7 +118,7 @@
     contents:
 
     - action: marketplace-integrations
-      branch: master
+      branch: nick/unique_dir_name
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
