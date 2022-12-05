@@ -241,14 +241,33 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 The rare sampler sends a set of rare spans to Datadog. It catches combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status` up to 5 traces per second (per Agent). It ensures visibility on low traffic resources when the head-based sampling rate is low.
 
-In Agent version 7.33 and forward, you can disable the rare sampler in the Agent main configuration file (`datadog.yaml`) or with an environment variable:
+**Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+
+#### Datadog Agent 7.41.0 and higher
+
+By default, the rare sampler is **not enabled**. 
+
+Note: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` will be evaluated under this sampler.
+
+To enable it, update the `apm_config.enable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_ENABLE_RARE_SAMPLER`:
+
+```
+@params apm_config.enable_rare_sampler - boolean - optional - default: false
+@env DD_APM_ENABLE_RARE_SAMPLER - boolean - optional - default: false
+```
+
+#### Datadog Agent 7.33 to 7.40.x
+
+By default, the rare sampler is enabled.
+
+Note: When **enabled**, spans dropped by tracing library rules or custom logic such as `manual.keep` **will be not evaluated** under this sampler. To include these spans in this logic, upgrade to Datadog Agent 7.41.0 or higher.
+
+To change the default rare sampler settings, update the `apm_config.disable_rare_sampler` setting in the Agent main configuration file (`datadog.yaml`) or with the environment variable `DD_APM_DISABLE_RARE_SAMPLER`:
 
 ```
 @params apm_config.disable_rare_sampler - boolean - optional - default: false
 @env DD_APM_DISABLE_RARE_SAMPLER - boolean - optional - default: false
 ```
-
-**Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
 
 ## Force keep and drop
 `ingestion_reason: manual`
