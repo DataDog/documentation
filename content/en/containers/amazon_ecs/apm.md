@@ -105,7 +105,7 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 
 Provide the result of this request to the Tracer through the environment variable `DD_AGENT_HOST` for each application container sending APM traces.
 
-### Configure the tracer endpoint
+### Configure the trace agent endpoint
 
 In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the tracer endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entrypoint this can be included in there, otherwise this can be added to the ECS Task Definition's `entryPoint`.
 
