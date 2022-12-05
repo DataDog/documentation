@@ -14,7 +14,7 @@ The source code integration is an integration with Git that enables you to link 
 
 {{< img src="integrations/guide/source_code_integration/link-to-github.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in Github" style="width:90%;">}}
 
-Combined with the GitHub integrations, you can see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
+By setting up the GitHub integration, you can see inline code snippets in your errors. For more information, see [Inline Source Code](#inline-source-code).
 
 ## Configuration
 

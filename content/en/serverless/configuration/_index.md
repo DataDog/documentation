@@ -8,6 +8,9 @@ further_reading:
   - link: '/serverless/troubleshooting/'
     tag: 'Documentation'
     text: 'Troubleshoot Serverless Monitoring'
+  - link: '/integrations/github'
+    tag: 'Documentation'
+    text: 'Learn about the GitHub integration'
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
@@ -138,7 +141,7 @@ If you are collecting telemetry from your Lambda functions using the [Datadog Fo
 
 Datadog can also enrich the collected telemetry with existing AWS resource tags defined on your Lambda functions with a delay of a few minutes.
 
-- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3]. This feature is meant to enrich your telemetry with **custom** tags. Datadog reserved tags  (`env`, `service`, and `version`) must be set through the corresponding environment variables (`DD_ENV`, `DD_SERVICE`, and `DD_VERSION` respectively). Reserved tags can also be set with the parameters provided by the Datadog integrations with the serverless developer tools. This feature does not work for Lambda functions deployed with container images.
+- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3]. This feature is meant to enrich your telemetry with **custom** tags. Datadog reserved tags (`env`, `service`, and `version`) must be set through the corresponding environment variables (`DD_ENV`, `DD_SERVICE`, and `DD_VERSION` respectively). Reserved tags can also be set with the parameters provided by the Datadog integrations with the serverless developer tools. This feature does not work for Lambda functions deployed with container images.
 
 - If you are collecting telemetry from your Lambda functions using the [Datadog Forwarder Lambda function][4], set the `DdFetchLambdaTags` option to `true` on the CloudFormation stack for your Datadog Forwarder. This option defaults to true since version 3.19.0.
 
@@ -552,7 +555,7 @@ If you are using the Datadog Forwarder, follow these [instructions][31].
 
 ## Send telemetry to multiple Datadog organizations
 
-If you wish to send data to mutliple organizations, you can enable dual shipping using a plaintext API key, AWS Secrets Manager, or AWS KMS.
+If you wish to send data to multiple organizations, you can enable dual shipping using a plaintext API key, AWS Secrets Manager, or AWS KMS.
 
 {{< tabs >}}
 {{% tab "Plaintext API Key" %}}
