@@ -19,7 +19,7 @@ further_reading:
 
 A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor service ownership consistently across every telemetry type. If you want to define a service using additional criteria, customize the service definition that fits your architectural style and register it using this API. You may do this by using the reserved `service` tag: for example, `"service": "service-name"`.
 
-For more details about creating, getting and deleting service definitions, see the [Service Definitions API reference][8].
+For more details about creating, getting, and deleting service definitions, see the [Service Definitions API reference][8].
 
 ## Service Definition Schema (v2)
 
