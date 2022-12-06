@@ -94,6 +94,109 @@ java \
 
 In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is turned off by default because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
 
+## Async Profiler
+
+Async Profiler has been available as a replacement to JFR on Linux since version 1.0.0. 
+Async Profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
+
+### Async Profiler CPU Engine
+
+Since version 1.3.0 the Async Profiler CPU engine has been enabled by default, and it replaces JFR CPU profiling. 
+It is a more accurate profiling engine which produces better profiles.
+Enabling this engine supports much better integration with APM tracing as it records the active span on every CPU sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features.
+
+To enable it on versions before 1.3.0, set:
+
+```
+# before 1.3.0 export DD_PROFILING_ASYNC_ENABLED=true
+export DD_PROFILING_ASYNC_CPU_ENABLED=true
+```
+
+or:
+
+```
+# before 1.3.0 -Ddd.profiling.async.enabled=true
+-Ddd.profiling.async.cpu.enabled=true
+```
+
+In case you want to disable it and revert to JFR, set the values to `false`.
+
+For JMC users, the JFR CPU sample event `jdk.ExecutionSample` is replaced by the `datadog.ExecutionSample` event.
+
+#### perf_events_paranoid
+
+The CPU engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to 3, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using `itimer`. Set `/proc/sys/kernel/perf_event_paranoid` to 2 or lower with the following command:
+
+```
+sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
+```
+
+### Async Profiler Wallclock Engine
+
+The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing.
+The engine samples all threads, on- or off-cpu, with active tracing activity and can be used to diagnose trace or span latency.
+The engine is currently disabled by default, but can be enabled with:
+
+```
+# before 1.3.0 export DD_PROFILING_ASYNC_ENABLED=true
+export DD_PROFILING_ASYNC_WALL_ENABLED=true
+```
+
+or:
+
+```
+# before 1.3.0 -Ddd.profiling.async.enabled=true
+-Ddd.profiling.async.wall.enabled=true
+```
+
+For JMC users, the `datadog.MethodSample` event is emitted for wallclock samples.
+
+The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+
+### Async Profiler Allocation Engine
+
+The allocation profiling engine can be enabled to contextualize allocation profiles, which supports allocation profiles filtered by endpoint.
+It is currently disabled by default but can be enabled with:
+
+```
+# before 1.3.0 export DD_PROFILING_ASYNC_ENABLED=true
+export DD_PROFILING_ASYNC_ALLOC_ENABLED=true
+```
+
+or:
+
+```
+# before 1.3.0 -Ddd.profiling.async.enabled=true
+-Ddd.profiling.async.alloc.enabled=true
+```
+
+For JMC users, the `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB` events replace the `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB` events.
+
+The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+
+### Collecting Native Stack traces
+
+With Async Profiler CPU or Wallclock engines enabled, native stack traces can be collected.
+Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
+Native stack traces are not collected by default because most of the time they do not provide actionable insights and there is walking native stacks creates a risk to application stability.
+To enable native stack trace collection at your own risk, set:
+
+```
+# before 1.3.0 export DD_PROFILING_ASYNC_ENABLED=true
+export DD_PROFILING_ASYNC_CSTACK=dwarf
+```
+
+or:
+
+```
+# before 1.3.0 -Ddd.profiling.async.enabled=true
+-Ddd.profiling.async.cstack=dwarf
+```
+
+In many situations, this setting can be used safely, but there are no guarantees.
+Ensure that you test this setting in a non-production environment before using it in production.
+
+
 ## Configuration
 
 You can configure the profiler using the following environment variables:
