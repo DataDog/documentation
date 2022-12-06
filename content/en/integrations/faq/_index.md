@@ -82,6 +82,10 @@ aliases:
 
 * [How to collect metrics from custom Vertica queries][26]
 
+## VMware Tanzu Application Service
+
+* [VMware Tanzu Application Service architecture][31]
+
 ## VSphere
 
 * [Troubleshooting duplicated hosts with vSphere][27]
@@ -125,3 +129,4 @@ aliases:
 [28]: /integrations/faq/how-to-make-trello-card-using-webhooks/
 [29]: /integrations/faq/collect-custom-windows-performance-counters-over-wmi/
 [30]: /integrations/faq/windows-status-based-check/
+[31]: /integrations/faq/pivotal_architecture/
