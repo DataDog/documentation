@@ -46,7 +46,7 @@ title: メトリクスの概要
 
 {{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル" style="width:75%;">}}
 
-* **Configure Tags**: Metrics without LimitsTM を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
+* **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
 
 {{< img src="metrics/summary/bulkconfig.mp4" alt="一括メトリクスタグコンフィギュレーション" video=true style="width:75%;">}} 
 
@@ -68,7 +68,7 @@ title: メトリクスの概要
 
 ### インデックスされたカスタムメトリクス
 
-インジェストされたカスタムメトリクスとは異なり、インデックスされたカスタムメトリクスは、Datadog プラットフォーム全体でクエリ可能な状態を維持するものを表しています。この数は、パーセンタイル集計の追加や削除、または Metrics without LimitsTM の使用によって影響を受ける可能性があります。詳しくは、[Metrics without LimitsTM][10] のドキュメントを参照してください。<br>
+インジェストされたカスタムメトリクスとは異なり、インデックスされたカスタムメトリクスは、Datadog プラットフォーム全体でクエリ可能な状態を維持するものを表しています。この数は、パーセンタイル集計の追加や削除、または Metrics without Limits™ の使用によって影響を受ける可能性があります。詳しくは、[Metrics without Limits™][10] のドキュメントを参照してください。<br>
 
 ### ホスト
 
