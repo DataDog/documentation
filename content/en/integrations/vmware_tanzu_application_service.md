@@ -19,6 +19,11 @@ dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md']
 doc_link: /integrations/vmware_tanzu_application_service/
 integration_id: "pivotal-platform"
+further_reading:
+- link: "https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/"
+  tag: "Blog"
+  text: "Pivotal Platform Monitoring with Datadog"
+
 ---
 
 ## Overview
@@ -140,6 +145,10 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 Your specific list of metrics may vary based on the PCF version and the deployment. Datadog collects counter and gauge metrics emitted from the [Loggregator v2 API][28]. See [Cloud Foundry Component Metrics][29] for a list of metrics emitted by default.
 
 {{< get-metrics-from-git "cloud_foundry">}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://network.pivotal.io/products/datadog
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
