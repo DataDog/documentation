@@ -23,12 +23,16 @@ To learn how to construct the search query, see the individual [monitor types][1
 
 ### Alert grouping
 
-Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If no group is specified, grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping defaults to `Multi Alert`.
+Alerts are grouped automatically based on your selection of the `group by` step when defining your query. Grouping defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
+#### Simple alert
 `Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
 
-`Multi Alert` mode applies the alert to each source according to your group parameters. You receive **an alert for each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][2] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
+#### Multi alert
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
+**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
+
+If you configure tags or dimensions, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Tag Variables][2] to learn how to reference tag values in the notification message.
 
 | Group by                       | Simple alert mode | Multi alert mode |
 |-------------------------------------|------------------------|-----------------------|

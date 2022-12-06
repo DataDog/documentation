@@ -1151,60 +1151,60 @@ main:
     parent: monitor_types
     identifier: monitor_types_composite
     weight: 207
-  - name: Service Check
-    url: monitors/types/custom_check/
-    parent: monitor_types
-    identifier: monitor_types_custom_check
-    weight: 208
   - name: Error Tracking
     url: monitors/types/error_tracking/
     parent: monitor_types
     identifier: monitor_types_error_tracking
-    weight: 209
+    weight: 208
   - name: Event
     url: monitors/types/event/
     parent: monitor_types
     identifier: monitor_types_event
-    weight: 210
+    weight: 209
   - name: Forecast
     url: monitors/types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
-    weight: 211
+    weight: 210
   - name: Integration
     url: monitors/types/integration/
     parent: monitor_types
     identifier: monitor_types_integration
-    weight: 212
+    weight: 211
   - name: Live Process
     url: monitors/types/process/
     parent: monitor_types
     identifier: monitor_types_process
-    weight: 213
+    weight: 212
   - name: Logs
     url: monitors/types/log/
     parent: monitor_types
     identifier: monitor_types_log
-    weight: 214
+    weight: 213
   - name: Network
     url: monitors/types/network/
     parent: monitor_types
     identifier: monitor_types_network
-    weight: 215
+    weight: 214
   - name: Outlier
     url: monitors/types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
-    weight: 216
+    weight: 215
   - name: Process Check
     url: monitors/types/process_check/
     parent: monitor_types
     identifier: monitor_types_process_check
-    weight: 217
+    weight: 216
   - name: Real User Monitoring
     url: monitors/types/real_user_monitoring/
     parent: monitor_types
     identifier: monitor_types_rum
+    weight: 217
+  - name: Service Check
+    url: monitors/types/service_check/
+    parent: monitor_types
+    identifier: monitor_types_service_check
     weight: 218
   - name: SLO Alerts
     url: monitors/types/slo/
@@ -1836,7 +1836,7 @@ main:
     parent: service_catalog
     identifier: service_catalog_setup
     weight: 901
-  - name: API
+  - name: Registering Services through the API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
@@ -3437,26 +3437,30 @@ main:
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 401
+  - name: Create an API Integration
+    url: developers/integrations/api_integration/
+    parent: dev_tools_integrations
+    weight: 402
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 402
+    weight: 403
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 403
+    weight: 404
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 404
+    weight: 405
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 405
+    weight: 406
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 406
+    weight: 407
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools
