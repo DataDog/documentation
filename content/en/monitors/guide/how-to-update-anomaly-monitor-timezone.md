@@ -2,7 +2,7 @@
 title: How to update an anomaly detection monitor to account for local time zone
 kind: guide
 further_reading:
-- link: "/monitors/create/types/anomaly/"
+- link: "/monitors/types/anomaly/"
   tag: "Documentation"
   text: "Create an anomaly monitor"
 - link: "/monitors/notify/"

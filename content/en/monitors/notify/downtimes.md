@@ -5,7 +5,7 @@ description: "Schedule downtimes for your Datadog monitors to prevent alerts dur
 aliases:
     - /monitors/downtimes/
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/notify/"
