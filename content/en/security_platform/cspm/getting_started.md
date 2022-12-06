@@ -40,7 +40,7 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 
 1. Navigate to **Security** > **Setup and Configuration**.
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **AWS** tile.
+3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **[AWS][4]** tile.
 4. To enable CSPM for an AWS account, turn on the **Collect Resources** toggle.
 
 #### AWS integration tile
@@ -54,6 +54,7 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [3]: https://app.datadoghq.com/security/configuration
+[4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=amazon-web-services
 
 {{% /tab %}}
 
@@ -71,7 +72,7 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 1. Navigate to **Security** > **Setup and Configuration**.
 2. Follow the [in-app instructions][2] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **Azure** tile.
+3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **[Azure][3]** tile.
 4. Enable CSPM for your Azure subscriptions by turning on the **CSPM Enabled** toggle.
 
 #### Azure integration tile
@@ -84,6 +85,7 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 [1]: https://docs.datadoghq.com/integrations/azure
 [2]: https://app.datadoghq.com/security/configuration
+[3]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=azure
 
 {{% /tab %}}
 
@@ -101,7 +103,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 
 1. Navigate to **Security** > **Setup and Configuration**.
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **GCP** tile.
+3. On the **Setup and Configuration** > **Cloud Providers** tab, click the **[GCP][4]** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
 
 ### GCP integration tile
@@ -115,6 +117,8 @@ Use one of the following methods to enable CSPM for your GCP projects:
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
 [2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#metric-collection
 [3]: https://app.datadoghq.com/security/configuration
+[4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=google-cloud-platform
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -123,7 +127,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 
 1. Navigate to **Security** > **Setup and Configuration**.
 2. Follow the [in-app instructions][1] to activate CSPM for your account.
-3. On the **Setup and Configuration** > **Host and containers** tab, click the **Docker** tile.
+3. On the **Setup and Configuration** > **Host and containers** tab, click the **[Docker][2]** tile.
 4. Click **Select API key** to choose the API key you want to use with CSPM.
 5. Run the following command to enable CSPM in your Docker environment:
 
@@ -156,6 +160,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 **Note**: To disable CSPM, set `DD_COMPLIANCE_CONFIG_ENABLED` to `false`. Your previous findings and homepage will still be available in-app, but you will not incur additional billing costs.
 
 [1]: https://app.datadoghq.com/security/configuration
+[2]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=docker
 
 {{% /tab %}}
 
@@ -185,6 +190,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: https://app.datadoghq.com/security/configuration
+[3]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=kubernetes
 
 {{% /tab %}}
 {{< /tabs >}}
