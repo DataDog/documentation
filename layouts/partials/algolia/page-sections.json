@@ -30,7 +30,6 @@
                     "relpermalink" $page.RelPermalink
                     "full_url" $full_url
                     "language" $page.Language.Lang
-                    "tags" $tags
                     "category" $category
                     "subcategory" $subcategory
                     "rank" $rank
