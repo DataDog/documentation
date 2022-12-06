@@ -3,7 +3,7 @@ aliases:
 - /ja/monitors/monitor_status/
 description: 時系列でのモニターステータスの概要を取得
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成
 - link: /monitors/notify/
@@ -129,7 +129,7 @@ Datadog には、作成したモニターへの変更を通知するオプショ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/create/
+[1]: /ja/monitors/
 [2]: /ja/monitors/notify/downtimes/
 [3]: /ja/api/v1/monitors/
 [4]: /ja/dashboards/querying/
