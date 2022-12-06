@@ -287,6 +287,8 @@ index_algolia:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
   tags: ["runner:main"]
+  before_script:
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   stage: post-deploy
   environment: "live"
   timeout: 2h 30m

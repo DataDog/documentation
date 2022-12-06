@@ -68,7 +68,8 @@ type: multi-code-lang
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
-| gRPC                            | `Grpc.Core` 2.3.0+                                            | `Grpc`               |
+| gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
+| HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | 組み込み                                                                                  | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
@@ -76,7 +77,8 @@ type: multi-code-lang
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+                                                                  | `RabbitMQ`           |
+| プロセス                         | `"System.Diagnostics.Process"` 4.0+                                                       | `Process`            |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+、                                                                 | `RabbitMQ`           |
 | Redis (ServiceStack クライアント)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
 | Redis (StackExchange クライアント)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                           | `Sqlite`             |

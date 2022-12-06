@@ -8,6 +8,9 @@ further_reading:
   - link: '/serverless/troubleshooting/'
     tag: 'Documentation'
     text: 'Troubleshoot Serverless Monitoring'
+  - link: '/integrations/github'
+    tag: 'Documentation'
+    text: 'Learn about the GitHub integration'
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
@@ -138,7 +141,7 @@ If you are collecting telemetry from your Lambda functions using the [Datadog Fo
 
 Datadog can also enrich the collected telemetry with existing AWS resource tags defined on your Lambda functions with a delay of a few minutes.
 
-- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3]. This feature is meant to enrich your telemetry with **custom** tags. Datadog reserved tags  (`env`, `service`, and `version`) must be set through the corresponding environment variables (`DD_ENV`, `DD_SERVICE`, and `DD_VERSION` respectively). Reserved tags can also be set with the parameters provided by the Datadog integrations with the serverless developer tools. This feature does not work for Lambda functions deployed with container images.
+- If you are collecting telemetry from your Lambda functions using the [Datadog Lambda extension][2], enable the [Datadog AWS integration][3]. This feature is meant to enrich your telemetry with **custom** tags. Datadog reserved tags (`env`, `service`, and `version`) must be set through the corresponding environment variables (`DD_ENV`, `DD_SERVICE`, and `DD_VERSION` respectively). Reserved tags can also be set with the parameters provided by the Datadog integrations with the serverless developer tools. This feature does not work for Lambda functions deployed with container images.
 
 - If you are collecting telemetry from your Lambda functions using the [Datadog Forwarder Lambda function][4], set the `DdFetchLambdaTags` option to `true` on the CloudFormation stack for your Datadog Forwarder. This option defaults to true since version 3.19.0.
 
@@ -536,7 +539,7 @@ export class ExampleStack extends cdk.Stack {
 3. Optionally, [install a GitHub App][2] to display inline source code snippets
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -552,7 +555,7 @@ If you are using the Datadog Forwarder, follow these [instructions][31].
 
 ## Send telemetry to multiple Datadog organizations
 
-If you wish to send data to mutliple organizations, you can enable dual shipping using a plaintext API key, AWS Secrets Manager, or AWS KMS.
+If you wish to send data to multiple organizations, you can enable dual shipping using a plaintext API key, AWS Secrets Manager, or AWS KMS.
 
 {{< tabs >}}
 {{% tab "Plaintext API Key" %}}
@@ -744,5 +747,3 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
-[40]: https://aws.amazon.com/secrets-manager/
-[41]: https://aws.amazon.com/kms/

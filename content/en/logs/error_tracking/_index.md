@@ -10,6 +10,9 @@ further_reading:
   - link: '/logs/error_tracking/explorer'
     tag: 'Documentation'
     text: 'Learn about the Error Tracking Explorer'
+  - link: "https://www.datadoghq.com/blog/error-tracking-logs/"
+    tag: "Blog"
+    text: "Track and triage errors in your logs with Datadog Error Tracking"
 ---
 
 {{< beta-callout btn_hidden="true" >}}
