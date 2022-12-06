@@ -7,14 +7,14 @@ further_reading:
   text: 'Leverage collaborative screen sharing with Datadog CoScreen'
 ---
 
-{{< img src="coscreen/collab.mp4" alt="Three users share three windows at the same time." width=80% video="true">}}
+{{< img src="coscreen/collab-v2.mp4" alt="Three users share three windows at the same time." width=80% video="true">}}
 
 ## Overview
 [CoScreen][1] is a collaborative meeting tool that allows multiple participants to simultaneously share and interact with any application window on their desktops. It was specifically designed for engineers for use cases such as pair programming, incident management, joint troubleshooting, team standups, and employee onboarding.
 
 ## Setup
 #### Requirements
-CoScreen is a desktop app available for Windows 10 and macOS v10.15 Catalina and higher. 
+CoScreen is a desktop app available for Windows 10 and macOS v10.15 Catalina and higher.
 
 [Download CoScreen][2].
 
@@ -45,7 +45,7 @@ Share and unshare windows by clicking on the tab above each window. You can also
  Multiple users can share multiple windows at the same time. Shared windows have a border around them in a different color assigned to each CoScreen participant.
 
  - **Share all windows on your display**.
- 
+
 Open the window sharing dialog and select the first option, _Entire display_, to share all open windows on this display. While screen sharing is enabled, all windows that you open or drag onto that display are also shared.
 
 Click on the **Share windows** button to open the window sharing dialog.
