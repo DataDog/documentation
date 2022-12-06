@@ -174,7 +174,7 @@ For JMC users, the `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAlloca
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### Collecting Native Stack traces
+### Collecting Native Stack Traces
 
 With Async Profiler CPU or Wallclock engines enabled, native stack traces can be collected.
 Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
@@ -196,9 +196,12 @@ or:
 In many situations, this setting can be used safely, but there are no guarantees.
 Ensure that you test this setting in a non-production environment before using it in production.
 
-### Minimum JDK versions for Async Profiler
+### Async Profiler Minimum JDK Versions
 
-Async Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue](https://bugs.openjdk.org/browse/JDK-8283849) prior to JDK release 17.0.5 (backported to 11.0.17 and 8u352). We therefore do not enable Async Profiler unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use Async Profiler.
+Async Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue](https://bugs.openjdk.org/browse/JDK-8283849) prior to JDK release 17.0.5. 
+This fix was backported to 11.0.17 and 8u352. 
+Async Profiler is not enabled unless the JVM the profiler is deployed into has this fix. 
+Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use Async Profiler.
 
 
 ## Configuration
