@@ -117,6 +117,7 @@ For the other languages (Python, Javascript, Ruby, and Go) you can alternatively
 
 #### Launch time variable
 Update the Task Definition's `entryPoint` with the following, substitute with your `<Python Startup Command>`:
+
 ```json
 "entryPoint": [
   "sh",
@@ -124,9 +125,11 @@ Update the Task Definition's `entryPoint` with the following, substitute with yo
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Python Startup Command>"
 ]
 ```
-For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used.
+For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used. Such as if using [uWSGI][1] or instrumenting your [code manually with `patch_all`][2].
 
 #### Code
+You can alternatively update your code to have the tracer set the hostname explicitly.
+
 ```python
 import requests
 from ddtrace import tracer
@@ -139,10 +142,8 @@ def get_aws_ip():
 tracer.configure(hostname=get_aws_ip())
 ```
 
-For more examples of setting the Agent hostname in other languages, see the [change Agent hostname][1] documentation.
-
-
-[1]: https://docs.datadoghq.com/tracing/setup/python/#change-agent-hostname
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#uwsgi
+[2]: https://ddtrace.readthedocs.io/en/stable/basic_usage.html#patch-all
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodeJS" >}}
@@ -158,6 +159,8 @@ Update the Task Definition's `entryPoint` with the following, substitute with yo
 ```
 
 #### Code
+You can alternatively update your code to have the tracer set the hostname explicitly.
+
 ```javascript
 const tracer = require('dd-trace').init();
 const axios = require('axios');
@@ -168,9 +171,6 @@ const axios = require('axios');
 })();
 ```
 
-For more examples of setting the Agent hostname in other languages, see the [change Agent hostname documentation][1].
-
-[1]: https://docs.datadoghq.com/tracing/setup/nodejs/#change-agent-hostname
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -186,6 +186,8 @@ Update the Task Definition's `entryPoint` with the following, substitute with yo
 ```
 
 #### Code
+You can alternatively update your code to have the tracer set the hostname explicitly.
+
 ```ruby
 require 'ddtrace'
 require 'net/http'
@@ -199,7 +201,20 @@ end
 
 {{< programming-lang lang="go" >}}
 
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substitute with your `<Go Startup Command>`:
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Go Startup Command>"
+]
+```
+
 #### Code
+You can alternatively update your code to have the tracer set the hostname explicitly.
+
 ```go
 package main
 
@@ -229,19 +244,18 @@ func main() {
 {{< programming-lang lang="java" >}}
 
 #### Launch time variable
-Update the Task Definition's `entryPoint` with the following. Substitute with your necessary argument flags and application `.jar` or `.war` file.
+Update the Task Definition's `entryPoint` with the following, substitute with your `<Java Startup Command>`:
 
 ```java
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); java -javaagent:/app/dd-java-agent.jar <APPLICATION_ARG_FLAGS> -jar <APPLICATION_JAR_FILE/WAR_FILE>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Java Startup Command>"
 ]
 ```
+The Java startup command should include your `-javaagent:/path/to/dd-java-agent.jar`, see the [Java tracing docs for adding the tracer to the JVM][1] for further examples.
 
-For more examples of setting the Agent hostname in other languages, see the [change Agent hostname documentation][1].
-
-[1]: https://docs.datadoghq.com/tracing/setup/java/#change-agent-hostname
+[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-tracer-to-the-jvm
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
