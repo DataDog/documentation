@@ -2,6 +2,8 @@
 app_id: ibm-ace
 app_uuid: 81e0df5f-8778-4558-88c3-884dcab5ce89
 assets:
+  dashboards:
+    IBM ACE Overview: assets/dashboards/overview.json
   integration:
     configuration:
       spec: assets/configuration/spec.yaml
@@ -121,7 +123,7 @@ IBM ACE からメトリクスメッセージを消費するためには、[IBM M
     ```
 5. IBM ACE を再起動します。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 IBM ACE チェックは [Datadog Agent][6] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
