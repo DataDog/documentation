@@ -46,7 +46,7 @@ title: メトリクスの概要
 
 {{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル" style="width:75%;">}}
 
-* **Configure Tags**: Metrics without LimitsTM を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
+* **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
 
 {{< img src="metrics/summary/bulkconfig.mp4" alt="一括メトリクスタグコンフィギュレーション" video=true style="width:75%;">}} 
 
