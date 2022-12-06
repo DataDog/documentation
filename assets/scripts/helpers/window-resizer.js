@@ -1,6 +1,6 @@
 // Currently used to dynamically update navbar styles & properties given viewport width
 function userDeviceIsMobile() {
-    return window.innerWidth <= 992;
+    return window.innerWidth < 992;
 }
 
 function isOnScreen(elem) {
