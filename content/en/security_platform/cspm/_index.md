@@ -9,17 +9,11 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-{{< img src="security_platform/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
-
 Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
-By continuously surfacing security weaknesses resulting from misconfigurations across your cloud assets, teams can easily mitigate risks while ensuring compliance with industry standards.
+Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources, such as security groups, storage buckets, load balancers, and databases. By continuously surfacing security weaknesses resulting from misconfigurations, teams can easily mitigate risks while ensuring compliance with industry standards.
 
-Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud assets.
-
-Assess the configuration of your cloud resources, such as security groups, storage buckets, load balancers, and databases against configuration rules. Use the Datadog Agent to review local configuration information from servers, containers, and Kubernetes clusters against Datadog's OOTB Posture Management [Cloud][1] and [Infrastructure][2] detection rules.
-
-View your cloud security posture at a high level with the [Posture Management][3] page. Examine the details of findings and analyze historical configurations with [Findings][4].
+{{< img src="security_platform/cspm/landing_page.png" alt="Cloud Security Posture Management" width="100%">}}
 
 ## Detect misconfigurations across your cloud accounts and workloads
 
@@ -29,31 +23,36 @@ placeholder for screenshot
 
 ## Manage out-of-the-box and custom configuration rules
 
+Use [out-of-the-box detection rules][7] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. [Customize how each rule scans your environment][6] and [create custom configuration rules][8] (GCP only).
+
 placeholder for screenshot
-
-Datadog provides out-of-the-box (OOTB) detection rules to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration. For more information, see the Detection Rules documentation.
-
-Resource configuration collection allows Datadog to assess your environments against Datadog’s out-of-the-box Posture Management cloud configuration detection rules.
-
-Our agent allows Datadog to continuously assess the state of your hosts and containers against Datadog's out-of-the-box Posture Management Infrastructure Configuration detection rules.
-
-Customize how your environment is scanned by each rule
-
 ## Maintain compliance with industry frameworks and benchmarks
 
-Each OOTB detection rule maps to one or more controls within a compliance standard or industry benchmark.
-
-Each OOTB rule maps to one or more controls within a compliance standard or industry benchmark.
+Each detection rule maps to one or more controls and requirements within a compliance standard or industry benchmark, such as the popular CIS compliance benchmarks for Docker and Kubernetes.
 
  Datadog OOTB rules currently map to controls and requirements for the following frameworks and benchmarks:
 
-Continuously monitor compliance posture. Datadog CSPM maps configuration rules to several industry benchmarks and regulatory standards, computing individual scores for each framework. This allows users to understand whether their cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
+Continuously monitor your compliance posture.
 
-## Review and remediate findings
+Datadog CSPM maps configuration rules to several industry benchmarks and regulatory standards, computing individual scores for each framework. This allows users to understand whether their cloud infrastructure is in compliance with aspects of PCI, GDPR, HIPAA, and more.
+
+Our agent allows Datadog to continuously assess the state of your hosts and containers.
+
+Datadog Cloud Security Posture Management (CSPM) uses the following rule types to validate the configuration of your cloud infrastructure:
+
+Cloud configuration: These detection rules analyze the configuration of resources within your cloud environment. For example, the rule Cloudfront distribution is encrypted evaluates an AWS Cloudfront distribution’s configuration for encrypted status. Customization of a cloud configuration query directly is not supported at this time, but you can customize how you environment is scanned for each rule.
+
+Infrastructure configuration: These detection rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the popular CIS compliance benchmarks for Docker and Kubernetes. For example, the rule /etc/default/docker file permissions are set to 644 or more restrictively evaluates Docker file permissions running on a host.
+
+These detection rules work with out-of-the-box integration configurations and map to controls within a compliance framework or industry benchmark. When new default configuration detection rules are added, they are automatically imported into your account.
 
 placeholder for screenshot
 
+## Review and remediate findings
+
 text
+
+placeholder for screenshot
 
 ## Set up notifications
 
@@ -104,3 +103,6 @@ Framework
 [3]: https://app.datadoghq.com/security/compliance/homepage
 [4]: /security_platform/cspm/findings
 [5]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
+[6]: /security_platform/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
+[7]: /security_platform/default_rules/#cat-posture-management-cloud
+[8]: /security_platform/cspm/custom_rules
