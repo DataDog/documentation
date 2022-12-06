@@ -249,7 +249,7 @@ We currently support integrations with:
 
 2. Initialize Split's SDK and and create an impression listener reporting feature flags evaluations to Datadog using the following snippet of code
 
-   For more information about initializing Split's SDK you can check their documentation [here][6]
+   For more information about initializing Split's SDK you can check their documentation [here][6].
 
    ```javascript
    const factory = SplitFactory({
@@ -297,7 +297,7 @@ We currently support integrations with:
 
 2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
-   For more information about initializing Split's SDK you can check their documentation [here][6]
+   For more information about initializing Split's SDK you can check their documentation [here][6].
 
    ```javascript
    const factory = SplitFactory({
@@ -340,7 +340,7 @@ We currently support integrations with:
 
 2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
 
-   For more information about initializing Split's SDK you can check their documentation [here][6]
+   For more information about initializing Split's SDK you can check their documentation [here][6].
 
    ```javascript
    const factory = SplitFactory({
