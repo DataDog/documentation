@@ -99,11 +99,12 @@ In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is turn
 Async Profiler has been available as a replacement to JFR on Linux since version 1.0.0. 
 Async Profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
 
-### Async Profiler CPU Engine
+### Async Profiler CPU engine
 
 Since version 1.3.0 the Async Profiler CPU engine has been enabled by default, and it replaces JFR CPU profiling. 
 It is a more accurate profiling engine which produces better profiles.
-Enabling this engine supports much better integration with APM tracing as it records the active span on every CPU sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features.
+Enabling this engine supports much better integration with APM tracing. 
+The active span is recorded on every CPU sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features.
 
 To enable it on versions before 1.3.0, set:
 
@@ -123,7 +124,7 @@ In case you want to disable it and revert to JFR, set the values to `false`.
 
 For JMC users, the JFR CPU sample event `jdk.ExecutionSample` is replaced by the `datadog.ExecutionSample` event.
 
-#### perf_events_paranoid
+#### Linux settings
 
 The CPU engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to 3, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using `itimer`. Set `/proc/sys/kernel/perf_event_paranoid` to 2 or lower with the following command:
 
@@ -131,11 +132,11 @@ The CPU engine works on most systems, but if the value of `/proc/sys/kernel/perf
 sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
 ```
 
-### Async Profiler Wallclock Engine
+### Async Profiler Wallclock engine
 
 The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing.
 The engine samples all threads, on- or off-cpu, with active tracing activity and can be used to diagnose trace or span latency.
-The engine is currently disabled by default, but can be enabled with:
+The engine is disabled by default, but can be enabled with:
 
 ```
 # before 1.3.0 export DD_PROFILING_ASYNC_ENABLED=true
@@ -156,7 +157,7 @@ The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoi
 ### Async Profiler Allocation Engine
 
 The allocation profiling engine can be enabled to contextualize allocation profiles, which supports allocation profiles filtered by endpoint.
-It is currently disabled by default but can be enabled with:
+It is disabled by default but can be enabled with:
 
 ```
 # before 1.3.0 export DD_PROFILING_ASYNC_ENABLED=true
@@ -174,7 +175,7 @@ For JMC users, the `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAlloca
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### Collecting Native Stack Traces
+### Collecting native stack traces
 
 With Async Profiler CPU or Wallclock engines enabled, native stack traces can be collected.
 Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
