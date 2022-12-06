@@ -2,8 +2,6 @@
 title: Pivotal Cloud Foundry Manual Setup Guide
 kind: guide
 description: "Steps for manually setting up the Pivotal Cloud Foundry Integration"
-aliases:
-  - /integrations/pivotal-platform
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
   tag: "Blog"
@@ -12,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Pivotal Cloud Foundry (PCF) deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to manually set up monitoring for your PCF application.
+Pivotal Cloud Foundry (PCF) deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to manually set up monitoring for your PCF application.
 
 There are three main components for the PCF integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Second, the BOSH Release collects metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
@@ -26,13 +24,13 @@ The Datadog buildpack uses the Pivotal Cloud Foundry [Pushing an App with Multip
 
 For older versions, Pivotal Cloud Foundry provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version in order to use Datadog's buildpack.
 
-1. **Upload the multi-buildpack back-port.** Download the latest multi-buildpack release and upload it to your Pivotal Cloud Foundry environment.
+1. Upload the multi-buildpack back-port. Download the latest multi-buildpack release and upload it to your Pivotal Cloud Foundry environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. **Add a multi-buildpack manifest to your application.** As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Cloud Foundry Buildpack and to your regular buildpack:
+2. Add a multi-buildpack manifest to your application. As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Cloud Foundry Buildpack and to your regular buildpack:
 
     ```yaml
     buildpacks:
@@ -47,9 +45,9 @@ For older versions, Pivotal Cloud Foundry provides a backwards compatible versio
 
       Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
 
-      **Important**: Your regular buildpack should be the last in the manifest to act as a final buildpack. To learn more see [Pivotal Cloud Foundry's How Buildpacks Work][6].
+      **Your regular buildpack should be the last in the manifest to act as a final buildpack**. To learn more, see [Pivotal Cloud Foundry's How Buildpacks Work][6].
 
-3. **Push your application with the multi-buildpack**. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Cloud Foundry for your application:
+3. Push your application with the multi-buildpack. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Cloud Foundry for your application:
 
     ```shell
     cf push <YOUR_APP> -b multi-buildpack
@@ -57,20 +55,20 @@ For older versions, Pivotal Cloud Foundry provides a backwards compatible versio
 
 ### Pivotal Cloud Foundry Platform >= 1.12
 
-1. **Upload the Datadog Pivotal Cloud Foundry Buildpack.** [Download the latest Datadog build pack release][7] and upload it to your Pivotal Cloud Foundry environment.
+1. Upload the Datadog Pivotal Cloud Foundry Buildpack. [Download the latest Datadog build pack release][7] and upload it to your Pivotal Cloud Foundry environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
-2. **Push your application with the Datadog buildpack and your buildpacks.** The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
+2. Push your application with the Datadog buildpack and your buildpacks. The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **Important**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more see [Pivotal Cloud Foundry's How Buildpacks Work][6].
+      **If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack**. To learn more, see [Pivotal Cloud Foundry's How Buildpacks Work][6].
 
 ### Meta-Buildpack **(deprecated)**
 
@@ -167,7 +165,7 @@ The configuration under each check name uses the same format as when configuring
 
 Everything you configure in `runtime.yml` applies to every node. You cannot configure a check for a subset of nodes in your deployment.
 
-To customize configuration for the default checks -- system, network, disk, and NTP -- see the [full list of configuration options][19] for the Datadog Agent BOSH release.
+To customize configuration for the default checks (system, network, disk, and NTP), see the [full list of configuration options][19] for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the BOSH Director
 
@@ -192,7 +190,7 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 #### Verify the Agent is installed everywhere
 
-To check if the Agent installations were successful, filter by `cloudfoundry` on the [Host map][20] in Datadog. The Datadog Agent BOSH release tags each host with `cloudfoundry`. Optionally, group hosts by any tag, such as `bosh_job`, as in the following screenshot:
+To check if the Agent installations were successful, filter by `cloudfoundry` on the [Host Map][20]. The Datadog Agent BOSH release tags each host with `cloudfoundry`. Optionally, group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="The host map in Datadog with cloudfoundry entered in the Filter section and bosh_job in the Group section"  >}}
 
@@ -276,7 +274,8 @@ The JSON object should be a dictionary associating a service name to its Autodis
 ```
 
 For services bound to the application, the `<SERVICE_NAME>` should be the name of the service as it appears in the `cf services` command output. For services running inside the application, the `<SERVICE_NAME>` can be anything.  
-The `variables` key is used only for bound services to resolve template variables inside the configuration template, and must contain the JSON path of the desired value for the `VCAP_SERVICES` environment variable. You can inspect this with command `cf env <APPLICATION_NAME>`.
+
+The `variables` key is used only for bound services to resolve template variables inside the configuration template, and must contain the JSON path of the desired value for the `VCAP_SERVICES` environment variable. You can inspect this with the `cf env <APPLICATION_NAME>` command.
 
 **Note:** The Datadog Cluster Agent is only able to resolve credentials of services directly available in the `VCAP_SERVICES` environment variable for Autodiscovery.
 
@@ -338,7 +337,7 @@ VCAP_SERVICES: '{
 ```
 
 In the example above, the first item `web_server` is a configuration for a service running inside the application.
-There are no `variables`, and it uses the template variables `%%host%%` and `%%port%%` available through Autodiscovery.
+There are no `variables`, and it uses the `%%host%%` and `%%port%%` template variables available through Autodiscovery.
 
 The second item `postgres-service-name` is a configuration for a service bound to the application.
 To resolve the template variables, it uses the `variables` dictionary to define the values used in the instance configuration.
@@ -353,7 +352,7 @@ For Datadog Agent versions `7.40.1` and later, you can add more flags to increas
 
 #### Improved tagging for application containers and process discovery
 
-Once the two releases are linked, the Datadog Cluster Agent automatically provides cluster-level metadata, which the node Agents attach as tags to their corresponding Cloud Foundry application containers.
+Once the two releases are linked, the Datadog Cluster Agent automatically provides cluster-level metadata, which the Node Agents attach as tags to their corresponding Cloud Foundry application containers.
 
 ### Deploy the Datadog Firehose Nozzle
 
@@ -460,7 +459,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 #### Verify the Firehose Nozzle is collecting data
 
-On the [Metrics explorer][23] page in Datadog, search for metrics beginning with `cloudfoundry.nozzle`:
+In the [Metrics Explorer][23], search for metrics beginning with `cloudfoundry.nozzle`.
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="The Metrics Explorer in Datadog with cloudfoundry.nozzle entered in the search bar"  >}}
 

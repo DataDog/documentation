@@ -23,7 +23,9 @@ integration_id: "pivotal-platform"
 
 ## Overview
 
-Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, read the [VMware announcement][3] for more information) deployment can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. For the best experience, use this page to automatically set up monitoring through Tanzu Ops Manager for your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster. For manual setup steps, read the [VMware Tanzu Application Service Manual Setup Guide][6].
+Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, see the [VMware announcement][3] for more information) deployment can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. 
+
+For the best experience, use this page to automatically set up monitoring through Tanzu Ops Manager for your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster. For manual setup steps, see the [VMware Tanzu Application Service Manual Setup Guide][6].
 
 There are three main components for the VMware Tanzu Application Service integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Second, the BOSH Release collects metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
@@ -35,7 +37,7 @@ Use the [VMware Tanzu installation and configuration][7] guide to install the in
 
 #### Metric collection
 
-**Set an API Key in your environment to enable the buildpack**:
+Set an API Key in your environment to enable the buildpack:
 
 ```shell
 # set the environment variable
@@ -84,7 +86,7 @@ The following table describes the parameters above, and how they can be used to 
 | `RUN_AGENT`               | Set to `true` to start the Datadog Agent.                                                                                                  |
 | `DD_LOGS_ENABLED`         | Set to `true` to enable Datadog Agent log collection.                                                                                      |
 | `DD_ENABLE_CHECKS`        | Set to `false` to disable the Agent's system metrics collection through core checks.                                                       |
-| `STD_LOG_COLLECTION_PORT` | Must be used when collecting logs from `stdout`/`stderr`. It redirects the `stdout`/`stderr` stream to the corresponding local port value. |
+| `STD_LOG_COLLECTION_PORT` | Must be used when collecting logs from `stdout` or `stderr`. It redirects the `stdout` or `stderr` stream to the corresponding local port value. |
 | `LOGS_CONFIG`             | Use this option to configure the Agent to listen to a local TCP port and set the value for the `service` and `source` parameters.          |
 
 **Example:**
@@ -102,7 +104,7 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 For Agent version 6.12 or greater, when using a [proxy configuration](/agent/logs/proxy/) with the buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
-If the connection fails to be established and the log collection is not started, an event like the one below is sent to your Datadog event explorer. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
+If the connection fails to establish and log collection does not start, an event like this appears in the [Events Explorer][34]. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established"  >}}
 
@@ -131,7 +133,7 @@ Use the [VMware Tanzu installation and configuration][9] guide to install the in
 
 ### Metrics
 
-The following metrics are sent by the Datadog Firehose Nozzle and are prefixed with `cloudfoundry.nozzle`. The Datadog Agent release sends metrics from any Agent checks you configure in the Director runtime configuration, and [system][24], [network][25], [disk][26], and [NTP][27] metrics by default.
+The following metrics are sent by the Datadog Firehose Nozzle and are prefixed with `cloudfoundry.nozzle`. The Datadog Agent sends metrics from any Agent checks you configure in the Director runtime configuration, and [system][24], [network][25], [disk][26], and [NTP][27] metrics by default.
 
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events), ValueMetrics, and ContainerMetrics; it ignores LogMessages and Errors.
 
@@ -161,3 +163,4 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [30]: /profiler/enabling/
 [32]: /integrations/faq/pivotal_architecture
 [33]: /developers/dogstatsd/
+[34]: /events/explorer/
