@@ -21,7 +21,7 @@ In event-driven pipelines, queuing and streaming technologies such as Kafka are 
 
 Visualize the performance of your cluster in real time and correlate the performance of Kafka with the rest of your applications by using [the Datadog Kafka integration][1]. Datadog also provides a [MSK integration][2].
 
-{{< img src="tracing/guide/monitor_kafka_queues/kafka_dashboard.png" alt="Data Streams Dashboard">}}
+{{< img src="tracing/guide/monitor_kafka_queues/kafka_dashboard.png" alt="Kafka Dashboard">}}
 
 ### Data Stream Monitoring
 
@@ -37,9 +37,11 @@ APM's distributed tracing gives you expanded visibility into the performance of 
 
 APM can automatically trace requests to and from Kafka clients. This means you can collect traces without modifying your source code. Datadog injects headers in the Kafka messages so as to propagate the context of the trace from the producer to the consumer.
 
-## Setup
+Check which Kafka libraries are supported in our [compatibility pages][4].
 
-To trace Kafka applications, Datadog traces the producing and consuming calls within the Kafka SDK. So to monitor Kafka, you just have to setup APM on your services. See [the APM trace collection documentation][4] for guidance on getting started with APM and distributed tracing.
+#### Setup
+
+To trace Kafka applications, Datadog traces the producing and consuming calls within the Kafka SDK. So to monitor Kafka, you just have to setup APM on your services. See [the APM trace collection documentation][5] for guidance on getting started with APM and distributed tracing.
 
 ## Monitor your application in APM
 
@@ -87,8 +89,19 @@ The [Kafka .NET Client documentation][1] states that a typical Kafka consumer ap
 
 When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][2] to extract the trace context.
 
+The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][3]. The trace context propagation api, if you need it, is available since [v2.7.0][4]
+
 [1]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
 [2]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[3]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
+[4]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][1] to enable it
+
+[1]: /tracing/trace_collection/dd_libraries/ruby/#kafka
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -104,4 +117,5 @@ If you want to disable Kafka tracing on an application, set its `DD_TRACE_KAFKA_
 [1]: /integrations/kafka
 [2]: /integrations/amazon_msk/
 [3]: https://app.datadoghq.com/data-streams/onboarding
-[4]: /tracing/trace_collection/
+[4]: /tracing/trace_collection/compatibility/
+[5]: /tracing/trace_collection/
