@@ -403,4 +403,4 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you w
 [6]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 [7]: https://app.datadoghq.com/rum/explorer
 [8]: /dashboards/
-[9]: /monitors/create/
+[9]: /monitors/#create-monitors
