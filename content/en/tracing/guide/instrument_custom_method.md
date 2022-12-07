@@ -79,7 +79,7 @@ public class BackupLedger {
       Tracer tracer = GlobalTracer.get();
       // Note: The scope in the try with resource
       // block below will be automatically closed at the end
-      // of the code block and if you do not use a try with
+      // of the code block. If you do not use a try with
       // resource statement you need to call scope.close().
       try (Scope scope = tracer.buildSpan("BackupLedger.persist").startActive(true)) {
         // Add custom metadata to the span
