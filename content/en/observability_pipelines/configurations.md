@@ -8,9 +8,6 @@ further_reading:
   - link: /observability_pipelines/working_with_data/
     tag: Documentation
     text: Working with data using Observability Pipelines
-  - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-    tag: Documentation
-    text: Datadog Agent as a source for Observability Pipelines
   - link: /observability_pipelines/integrations/integrate_vector_with_datadog/
     tag: Documentation
     text: Configure Datadog Agents to send data to Observability Pipelines
@@ -24,7 +21,7 @@ Observability Pipelines configurations can collect, transform, and route your lo
 
 [Source components][1] define how Observability Pipelines collects or receives data from observability data sources. 
 
-Create a configuration file, for example,`vector.toml`. Then, add the following source example:
+Create a YAML configuration file and add the following source example:
 
 {{< tabs >}}
 {{% tab "YAML" %}}

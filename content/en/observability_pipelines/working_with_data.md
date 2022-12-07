@@ -402,7 +402,7 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 [12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
 [13]: https://vector.dev/docs/reference/vrl/functions/#path-functions
 [14]: https://vector.dev/docs/reference/vrl/#reference
-[15]: /observability_pipelines/vector_configurations
+[15]: /observability_pipelines/configurations/
 [16]: https://vector.dev/docs/reference/configuration/transforms/sample/
 [17]: https://vector.dev/docs/reference/configuration/transforms/reduce/
 [18]: https://vector.dev/docs/reference/configuration/transforms/dedupe/
