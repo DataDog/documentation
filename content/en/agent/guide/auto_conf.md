@@ -53,11 +53,30 @@ The auto configuration logic only supports the default configuration for any int
 
 ## Disabling auto-configuration
 
-To disable the Agent from using the `auto_conf.yaml` configuration you can add the environment variable `DD_IGNORE_AUTOCONF` for the desired integration(s) to disable. The environment variable:
-```
+To disable the Agent from using the `auto_conf.yaml` configuration you can add the environment variable `DD_IGNORE_AUTOCONF` for the desired integration(s) to disable. The following examples would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][38] and [`istio.d/auto_conf.yaml`][22] file and avoid automatically setting up these integrations.
+
+{{< tabs >}}
+{{% tab "DaemonSet" %}}
+To disable auto configuration integration(s) with your DaemonSet:
+
+Add the `DD_IGNORE_AUTOCONF` variable to your Agent manifest:
+```yaml
 DD_IGNORE_AUTOCONF="redisdb istio"
 ```
-would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][38] and [`istio.d/auto_conf.yaml`][22] file and avoid automatically setting up these integrations.
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+To disable auto configuration integration(s) with Helm, add `datadog.ignoreAutoconfig` to your `values.yaml`
+```yaml
+datadog:
+ #List of integration(s) to ignore auto_conf.yaml.
+  ignoreAutoConfig:
+    - redisdb
+    - istio
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Further Reading
 
