@@ -33,7 +33,7 @@ const renderHits = (renderOptions, isFirstRender) => {
                 const subcategory = item.subcategory ? item.subcategory : title;
                 const sectionHeader = item.section_header ? item.section_header : null;
                 const content = hitData.content.value;
-                const tag = item.tags[0];
+                const tag = item.tags ? item.tags[0] : 'docs';
                 let category = 'Documentation';
 
                 switch (tag) {
