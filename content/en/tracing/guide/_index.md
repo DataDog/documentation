@@ -9,7 +9,6 @@ aliases:
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Tracing Guides
 ---

@@ -6,7 +6,6 @@ title: CI Visibility ガイド
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: ガイド
         subcategory: CI Visibility
 ---

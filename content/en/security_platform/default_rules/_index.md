@@ -10,7 +10,6 @@ disable_sidebar: true
 cascade:
     algolia:
         rank: 30
-        tags: ["default_rules"]
         category: Documentation
         subcategory: Security Detection Rules
 ---

@@ -12,7 +12,6 @@ further_reading:
 cascade:
     algolia:
         rank: 70
-        tags: ["getting_started"]
         category: Getting Started
         subcategory: Documentation
 ---

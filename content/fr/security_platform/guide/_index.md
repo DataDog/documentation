@@ -8,7 +8,6 @@ title: Guides sur la plateforme de sécurité
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur la plateforme de sécurité
 ---

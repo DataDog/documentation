@@ -10,7 +10,6 @@ description: Rassembler des données de tous vos systèmes, toutes vos applicati
 cascade:
     algolia:
         rank: 40
-        tags: ["integrations"]
         category: Intégrations
         subcategory: Documentation
 ---

@@ -5,7 +5,6 @@ private: true
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Account Management Guides
 ---

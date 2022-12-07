@@ -6,7 +6,6 @@ title: インテグレーションガイド
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: ガイド
         subcategory: インテグレーションガイド
 ---

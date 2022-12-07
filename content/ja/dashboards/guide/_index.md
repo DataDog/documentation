@@ -9,7 +9,6 @@ title: グラフ作成ガイド
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: ガイド
         subcategory: グラフ作成ガイド
 ---

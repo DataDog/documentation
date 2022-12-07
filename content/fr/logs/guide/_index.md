@@ -6,7 +6,6 @@ title: Guides sur les logs
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur les logs
 ---

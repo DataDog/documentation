@@ -10,7 +10,6 @@ description: すべてのシステム、アプリケーション、およびサ�
 cascade:
     algolia:
         rank: 40
-        tags: ["integrations"]
         category: Integrations
         subcategory: Documentation
 ---

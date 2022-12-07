@@ -13,7 +13,6 @@ further_reading:
       text: 'Manage your permissions with the Permission API'
 algolia:
     rank: 60
-    tags: ["rbac_permissions"]
     category: Documentation
     subcategory: Datadog Role Permissions
 ---

@@ -9,7 +9,6 @@ disable_toc: true
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Metrics Guides
 ---

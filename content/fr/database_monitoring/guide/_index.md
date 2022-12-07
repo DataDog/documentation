@@ -5,7 +5,6 @@ title: Guides d'utilisation de la solution Database Monitoring
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides d'utilisation de la solution Database Monitoring 
 ---

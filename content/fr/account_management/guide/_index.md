@@ -5,7 +5,6 @@ title: Guides sur la gestion de compte
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur la gestion de compte
 ---

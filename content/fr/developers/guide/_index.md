@@ -5,7 +5,6 @@ title: Guides du développeur
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides du développeur
 ---

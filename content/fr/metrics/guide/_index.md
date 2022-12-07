@@ -9,7 +9,6 @@ title: Guides sur les métriques
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur les métriques
 ---

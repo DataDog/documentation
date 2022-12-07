@@ -13,7 +13,6 @@ title: Guides sur les événements
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur les événements
 ---

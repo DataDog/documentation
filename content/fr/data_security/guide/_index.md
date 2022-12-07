@@ -7,7 +7,6 @@ title: Guides sur la sécurité
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur la sécurité
 ---

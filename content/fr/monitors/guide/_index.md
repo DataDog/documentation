@@ -6,7 +6,6 @@ disable_sidebar: true
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur les monitors
 ---

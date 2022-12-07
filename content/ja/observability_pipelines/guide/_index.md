@@ -8,7 +8,6 @@ title: Observability Pipelines ガイド
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: ガイド
         subcategory: Observability Pipelines
 ---

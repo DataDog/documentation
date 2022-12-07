@@ -6,7 +6,6 @@ title: Guides d'intégration
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides d'intégration
 ---

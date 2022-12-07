@@ -13,7 +13,6 @@ kind: documentation
 title: Autorisations des rôles Datadog
 algolia:
     rank: 60
-    tags: ["rbac_permissions"]
     category: Documentation
     subcategory: Autorisations des rôles Datadog
 ---

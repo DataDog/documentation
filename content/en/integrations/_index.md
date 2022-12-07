@@ -10,7 +10,6 @@ description: Gather data from all of your systems, apps, & services
 cascade:
     algolia:
         rank: 40
-        tags: ["integrations"]
         category: Integrations
         subcategory: Documentation
 ---

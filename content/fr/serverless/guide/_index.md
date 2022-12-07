@@ -6,7 +6,6 @@ title: Guides d'utilisation de la surveillance sans serveur
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides d'utilisation de la surveillance sans serveur
 ---

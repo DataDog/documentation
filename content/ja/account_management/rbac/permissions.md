@@ -14,7 +14,6 @@ title: Datadog ロールのアクセス許可
 cascade:
     algolia:
         rank: 60
-        tags: ["rbac_permissions"]
         category: Documentation
         subcategory: Datadog ロールのアクセス許可
 ---

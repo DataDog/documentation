@@ -7,7 +7,6 @@ title: セキュリティガイド
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: ガイド
         subcategory: セキュリティガイド
 ---

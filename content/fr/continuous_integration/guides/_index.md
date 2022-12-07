@@ -6,7 +6,6 @@ title: Guides sur CI Visibility
 cascade:
     algolia:
         rank: 20
-        tags: ["guide"]
         category: Guide
         subcategory: Guides sur CI Visibility
 ---
