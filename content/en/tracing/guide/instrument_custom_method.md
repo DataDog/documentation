@@ -77,7 +77,7 @@ public class BackupLedger {
     for (Transaction transaction : transactions) {
       // Use `GlobalTracer` to trace blocks of inline code
       Tracer tracer = GlobalTracer.get();
-      // Please note that the scope in the try with resource
+      // Note: The scope in the try with resource
       // block below will be automatically closed at the end
       // of the code block and if you do not use a try with
       // resource statement you need to call scope.close().
