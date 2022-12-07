@@ -39,7 +39,8 @@ const updateSettings = (index) => {
         minWordSizefor2Typos: 7,
         ignorePlurals: true,
         optionalWords: ['the', 'without'],
-        separatorsToIndex: '_@.#'
+        separatorsToIndex: '_@.#',
+        // exactOnSingleWordQuery: 'word'
     };
 
     return index.setSettings(settings, { forwardToReplicas: true });

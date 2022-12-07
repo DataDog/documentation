@@ -20,6 +20,7 @@
         {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
             {{ $full_url := print $page.Permalink "#" ($section_header | anchorize) }}
             {{ $object_id := md5 $full_url }}
+            {{ $tags = (slice "docs") }}
             {{
                 $hugo_context.Scratch.Add "algoliaindex" (
                     dict "objectID" $object_id
