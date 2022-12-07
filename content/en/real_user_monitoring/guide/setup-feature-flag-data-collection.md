@@ -249,7 +249,7 @@ We currently support integrations with:
 
 2. Initialize Split's SDK and and create an impression listener reporting feature flags evaluations to Datadog using the following snippet of code
 
-   For more information about initializing Split's SDK you can check their documentation [here][6].
+   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][6].
 
    ```javascript
    const factory = SplitFactory({
@@ -295,9 +295,9 @@ We currently support integrations with:
    </script>
    ```
 
-2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing Split's SDK you can check their documentation [here][6].
+   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][6].
 
    ```javascript
    const factory = SplitFactory({
@@ -338,9 +338,9 @@ We currently support integrations with:
    </script>
    ```
 
-2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing Split's SDK you can check their documentation [here][6].
+   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][6].
 
    ```javascript
    const factory = SplitFactory({
@@ -370,11 +370,11 @@ We currently support integrations with:
 
 ## Analyze your Feature Flag performance in RUM
 
-Feature Flags appear in the context of your RUM Sessions, Views, and Errors as a list. 
+Feature flags appear in the context of your RUM Sessions, Views, and Errors as a list. 
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Feature Flag list of attributes in RUM Explorer" style="width:75%;">}}
 
-### Search Feature Flags using the RUM Explorer
+### Search feature flags using the RUM Explorer
 Search through all the data collected by RUM in the [RUM Explorer][7] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][8] and [monitors][9]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
 
 #### Sessions
