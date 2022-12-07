@@ -184,8 +184,8 @@ L'attribut *file.rights* peut désormais être utilisé en complément de *file.
 | `process.ancestors.args_truncated` | booléen | Indicateur d'arguments tronqués |  |
 | `process.ancestors.argv` | chaîne | Arguments du processus (sous forme de tableau) |  |
 | `process.ancestors.argv0` | chaîne | Premier argument du processus |  |
-| `process.ancestors.cap_effective` | nombre entier | Ensemble de capacités effectives du processus | Constantes des capacités kernel |
-| `process.ancestors.cap_permitted` | nombre entier | Ensemble de capacités autorisées du processus | Constantes des capacités kernel |
+| `process.ancestors.cap_effective` | nombre entier | Ensemble de capacités effectives du processus | Constantes des capacités de kernel |
+| `process.ancestors.cap_permitted` | nombre entier | Ensemble de capacités autorisées du processus | Constantes des capacités de kernel |
 | `process.ancestors.comm` | chaîne | Attribut comm du processus |  |
 | `process.ancestors.container.id` | chaîne | ID du conteneur |  |
 | `process.ancestors.cookie` | nombre entier | Cookie du processus |  |
@@ -1769,7 +1769,7 @@ Ces constantes correspondent aux types de programme eBPF pris en charge.
 | `BPF_PROG_TYPE_LSM` | Toutes |
 | `BPF_PROG_TYPE_SK_LOOKUP` | Toutes |
 
-### `Constantes des modes Chmod`
+### `Constantes de mode Chmod`
 
 Ces constantes correspondent aux modes pris en charge pour l'appel système chmod.
 
@@ -2043,7 +2043,7 @@ Ces constantes correspondent aux constantes d'erreur prises en charge.
 | `EXDEV` | Toutes |
 | `EXFULL` | Toutes |
 
-### `Constantes des fonctionnalités kernel`
+### `Constantes des capacités de kernel`
 
 Ces constantes correspondent aux capacités de kernel Linux prises en charge.
 
@@ -2442,7 +2442,7 @@ Ces constantes correspondent aux constantes SecL génériques prises en charge.
 | `true` | Toutes |
 | `false` | Toutes |
 
-### `Constantes Signal`
+### `Constantes de signal`
 
 Ces constantes correspondent aux signaux pris en charge pour l'appel système kill.
 
