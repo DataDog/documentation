@@ -2,7 +2,7 @@
 title: Monitor Tag Policies
 kind: documentation
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/notify/"

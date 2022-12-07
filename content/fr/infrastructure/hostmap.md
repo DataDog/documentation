@@ -78,10 +78,6 @@ Les hostmaps peuvent également communiquer d'autres métriques facultatives ave
 
 Par défaut, la hostmap ne présente que les hosts qui transmettent la métrique sélectionnée. Ces données peuvent alors être utilisées pour définir une couleur ou une taille pour un seul hexagone de la grille.
 
-Si un host ne transmet pas la métrique sélectionnée, il peut tout de même figurer dans la hostmap : cliquez sur l'icône en forme d'engrenage en haut à droite de la hostmap et activez « Show hosts with no metrics » dans ses paramètres :
-
-{{< img src="infrastructure/hostmap/host_no_metrics.png" alt="Host sans Agent" style="width:50%;">}}
-
 ### Pertinence et signification des données
 
 Les données de la hostmap sont actualisées toutes les minutes environ, sauf si vous interagissez en continu avec la hostmap. La date de la dernière mise à jour des données figure en bas à droite de l'écran.

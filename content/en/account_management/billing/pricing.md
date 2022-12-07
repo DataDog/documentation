@@ -22,7 +22,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 ## APM
 
-* If a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) receives traces from an instrumented application, Datadog counts it as one **APM host**.
+* If an application running on a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) generates traces and submits them to the Datadog SaaS application, Datadog counts that host as one **APM host**.
   * On a high watermark plan (HWMP), the hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.

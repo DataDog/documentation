@@ -394,6 +394,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 {{% /tab %}}
 {{< /tabs >}}
 
+## Agent の構成例
+{{% dbm-sqlserver-agent-config-examples %}}
+
 ## Azure インテグレーションをインストールする
 
 Azure からより包括的なデータベースメトリクスとログを収集するには、[Azure インテグレーション][1]をインストールします。
