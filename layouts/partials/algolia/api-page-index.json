@@ -10,7 +10,7 @@
 
 {{/* Hugo page-level variables */}}
 {{ $type := $page.Type }}
-{{ $tags := $page.Params.algolia.tags }}
+{{ $tags := $page.Params.algolia.tags | default (slice "api_latest") }}
 {{ $rank := $page.Params.algolia.rank }}
 {{ $permalink := $page.Permalink }}
 {{ $relpermalink := $page.RelPermalink }}
