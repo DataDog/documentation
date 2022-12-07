@@ -804,8 +804,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'Timezone code. Can be specified as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -1203,6 +1203,10 @@ components:
       - max
       - avg
       - median
+      - latest
+      - earliest
+      - most_frequent
+      - delta
       example: pc90
       type: string
       x-enum-varnames:
@@ -1218,6 +1222,10 @@ components:
       - MAX
       - AVG
       - MEDIAN
+      - LATEST
+      - EARLIEST
+      - MOST_FREQUENT
+      - DELTA
     CIAppCompute:
       description: A compute rule to compute metrics or timeseries.
       properties:
@@ -1497,8 +1505,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -2743,7 +2751,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified as an offset, for example: `UTC+03:00`.'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -5028,6 +5037,8 @@ components:
       properties:
         aggregation_type:
           $ref: '#/components/schemas/LogsMetricComputeAggregationType'
+        include_percentiles:
+          $ref: '#/components/schemas/LogsMetricComputeIncludePercentiles'
         path:
           description: The path to the value the log-based metric will aggregate on
             (only used if the aggregation type is a "distribution").
@@ -5046,6 +5057,13 @@ components:
       x-enum-varnames:
       - COUNT
       - DISTRIBUTION
+    LogsMetricComputeIncludePercentiles:
+      description: 'Toggle to include or exclude percentile aggregations for distribution
+        metrics.
+
+        Only present when the `aggregation_type` is `distribution`.'
+      example: true
+      type: boolean
     LogsMetricCreateAttributes:
       description: The object describing the Datadog log-based metric to create.
       properties:
@@ -5137,6 +5155,8 @@ components:
       properties:
         aggregation_type:
           $ref: '#/components/schemas/LogsMetricResponseComputeAggregationType'
+        include_percentiles:
+          $ref: '#/components/schemas/LogsMetricComputeIncludePercentiles'
         path:
           description: The path to the value the log-based metric will aggregate on
             (only used if the aggregation type is a "distribution").
@@ -5198,6 +5218,8 @@ components:
     LogsMetricUpdateAttributes:
       description: The log-based metric properties that will be updated.
       properties:
+        compute:
+          $ref: '#/components/schemas/LogsMetricUpdateCompute'
         filter:
           $ref: '#/components/schemas/LogsMetricFilter'
         group_by:
@@ -5205,6 +5227,12 @@ components:
           items:
             $ref: '#/components/schemas/LogsMetricGroupBy'
           type: array
+      type: object
+    LogsMetricUpdateCompute:
+      description: The compute rule to compute the log-based metric.
+      properties:
+        include_percentiles:
+          $ref: '#/components/schemas/LogsMetricComputeIncludePercentiles'
       type: object
     LogsMetricUpdateData:
       description: The new log-based metric properties.
@@ -5281,8 +5309,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -6003,7 +6031,7 @@ components:
           format: date-time
           type: string
         include_percentiles:
-          description: 'Toggle to turn on/off percentile aggregations for distribution
+          description: 'Toggle to include or exclude percentile aggregations for distribution
             metrics.
 
             Only present when the `metric_type` is `distribution`.'
@@ -6921,6 +6949,10 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+        client_token:
+          description: Client token of the RUM application.
+          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          type: string
         created_at:
           description: Timestamp in ms of the creation date.
           example: 1659479836169
@@ -6931,9 +6963,12 @@ components:
           example: john.doe
           type: string
         hash:
-          description: Client token of the RUM application.
-          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          description: Hash of the RUM application. Optional.
           type: string
+        is_active:
+          description: Indicates if the RUM application is active.
+          example: true
+          type: boolean
         name:
           description: Name of the RUM application.
           example: my_rum_application
@@ -6960,6 +6995,7 @@ components:
           type: string
       required:
       - application_id
+      - client_token
       - created_at
       - created_by_handle
       - name
@@ -7011,6 +7047,83 @@ components:
       type: string
       x-enum-varnames:
       - RUM_APPLICATION_CREATE
+    RUMApplicationList:
+      description: RUM application list.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationListAttributes'
+        type:
+          $ref: '#/components/schemas/RUMApplicationListType'
+      required:
+      - attributes
+      - type
+      type: object
+    RUMApplicationListAttributes:
+      description: RUM application list attributes.
+      properties:
+        application_id:
+          description: ID of the RUM application.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        created_at:
+          description: Timestamp in ms of the creation date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        created_by_handle:
+          description: Handle of the creator user.
+          example: john.doe
+          type: string
+        hash:
+          description: Hash of the RUM application. Optional.
+          type: string
+        is_active:
+          description: Indicates if the RUM application is active.
+          example: true
+          type: boolean
+        name:
+          description: Name of the RUM application.
+          example: my_rum_application
+          type: string
+        org_id:
+          description: Org ID of the RUM application.
+          example: 999
+          format: int32
+          maximum: 2147483647
+          type: integer
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+        updated_at:
+          description: Timestamp in ms of the last update date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: Handle of the updater user.
+          example: jane.doe
+          type: string
+      required:
+      - application_id
+      - created_at
+      - created_by_handle
+      - name
+      - org_id
+      - type
+      - updated_at
+      - updated_by_handle
+      type: object
+    RUMApplicationListType:
+      default: rum_application
+      description: RUM application list type.
+      enum:
+      - rum_application
+      example: rum_application
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION
     RUMApplicationResponse:
       description: RUM application response.
       properties:
@@ -7077,7 +7190,7 @@ components:
         data:
           description: RUM applications array response.
           items:
-            $ref: '#/components/schemas/RUMApplication'
+            $ref: '#/components/schemas/RUMApplicationList'
           type: array
       type: object
     RUMBucketResponse:
@@ -7286,8 +7399,10 @@ components:
       properties:
         from:
           default: now-15m
-          description: The minimum time for the requested events; supports date, math,
-            and regular timestamps (in milliseconds).
+          description: The minimum time for the requested events; supports date (in
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date,
+            hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds
+            are optional), math, and regular timestamps (in milliseconds).
           example: now-15m
           type: string
         query:
@@ -7297,8 +7412,10 @@ components:
           type: string
         to:
           default: now
-          description: The maximum time for the requested events; supports date, math,
-            and regular timestamps (in milliseconds).
+          description: The maximum time for the requested events; supports date (in
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date,
+            hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds
+            are optional), math, and regular timestamps (in milliseconds).
           example: now
           type: string
       type: object
@@ -7314,8 +7431,8 @@ components:
           type: integer
         timezone:
           default: UTC
-          description: 'The timezone can be specified both as an offset, for example:
-            "UTC+03:00".'
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
           example: GMT
           type: string
       type: object
@@ -9907,12 +10024,12 @@ components:
       properties:
         region:
           $ref: '#/components/schemas/ServiceDefinitionV2OpsgenieRegion'
-        service-id:
-          description: Opsgenie service id.
-          example: 123e4567-e89b-12d3-a456-426614174000
+        service-url:
+          description: Opsgenie service url.
+          example: https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000
           type: string
       required:
-      - service-id
+      - service-url
       type: object
     ServiceDefinitionV2OpsgenieRegion:
       description: Opsgenie instance region.
@@ -13518,6 +13635,15 @@ paths:
               \     },\n      \"compute\": {\n        \"aggregation_type\": \"count\"\n
               \     }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
           step: there is a valid "logs_metric" in the system
+        logs_metric_percentile:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"attributes\":
+              {\n      \"filter\": {\n        \"query\": \"source:{{ unique }}\"\n
+              \     },\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+              \       \"path\": \"@duration\",\n        \"include_percentiles\": true\n
+              \     }\n    },\n    \"type\": \"logs_metrics\"\n  }\n}"
+          step: there is a valid "logs_metric_percentile" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteLogsMetric
@@ -17368,12 +17494,12 @@ paths:
               \"my-team\",\n  \"docs\": [{\"name\": \"Architecture\",\n            \"provider\":
               \"google drive\",\n            \"url\": \"https://gdrive/mygivedoc\"}],\n
               \ \"extensions\": {\"frogextension\": \"extensionfrogvalue\"},\n  \"integrations\":
-              {\"opsgenie\": {\"region\": \"US\",\n                                \"service-id\":
-              \"123e4567-e89b-12d3-a456-426614174000\"},\n                   \"pagerduty\":
-              \"https://my-org.pagerduty.com/service-directory/PMyService\"},\n  \"links\":
-              [{\"name\": \"Runbook\", \"type\": \"runbook\", \"url\": \"https://my-runbook\"}],\n
-              \ \"repos\": [{\"name\": \"Source Code\",\n             \"provider\":
-              \"GitHub\",\n             \"url\": \"https://github.com/DataDog/given\"}],\n
+              {\"opsgenie\": {\"region\": \"US\",\n                                \"service-url\":
+              \"https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000\"},\n
+              \                  \"pagerduty\": \"https://my-org.pagerduty.com/service-directory/PMyService\"},\n
+              \ \"links\": [{\"name\": \"Runbook\", \"type\": \"runbook\", \"url\":
+              \"https://my-runbook\"}],\n  \"repos\": [{\"name\": \"Source Code\",\n
+              \            \"provider\": \"GitHub\",\n             \"url\": \"https://github.com/DataDog/given\"}],\n
               \ \"schema-version\": \"v2\",\n  \"tags\": [\"this:tag\", \"service:tag\"],\n
               \ \"team\": \"super-team\"\n}"
           step: there is a valid "service_definition" in the system

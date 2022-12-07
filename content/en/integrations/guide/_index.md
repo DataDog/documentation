@@ -21,7 +21,8 @@ private: true
     {{< nextlink href="integrations/guide/source-code-integration" tag=" GitHub Apps" >}}Datadog Source Code Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag=" kafka" >}}Agent failed to retrieve RMIServer stub{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag=" network" >}}Send TCP/UDP host metrics to the Datadog API{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}SNMP commonly used and compatible OIDs{{< /nextlink >}}      
+    {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}SNMP commonly used and compatible OIDs{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/pivotal-cloud-foundry-manual-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry manual setup{{< /nextlink >}}     
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS guides:" >}}
@@ -38,7 +39,7 @@ private: true
 
 {{< whatsnext desc="Azure guides:" >}}
     {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Azure status and count metrics{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Datadog in the Azure Portal{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Managing the Azure Native Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Azure troubleshooting{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}Azure VMs appear in the app without metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Powered-down Azure VMs on the Infrastructure list{{< /nextlink >}}  

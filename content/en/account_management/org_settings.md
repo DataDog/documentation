@@ -30,9 +30,9 @@ To learn about default and custom roles in Datadog, read the [Role Based Access 
 
 #### SAML Group Mappings
 
-When enabled, users logging in with SAML to your Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your Identity Provider and the mappings you've created.
+When enabled, users logging in with SAML to your Datadog account are permanently stripped of their current roles and reassigned to new roles. The SAML assertion passed on from the Identity Provider and the mappings you create determine each user's new roles.
 
-Users who log in with SAML and do not have the values that map to a Datadog role are stripped of all roles and are not allowed to log in.
+Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
 To learn how to create and set mappings, read the [Mapping SAML attributes documentation][5].
 
 ##### SAML settings

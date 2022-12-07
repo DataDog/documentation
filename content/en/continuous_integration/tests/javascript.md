@@ -35,14 +35,13 @@ Supported test frameworks:
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][4] is supported from `dd-trace>=3.3.0`. Only Jest and Mocha are currently supported.
+[Test suite level visibility][4] is supported from `dd-trace>=3.3.0`, only in Agentless mode, and only Jest and Mocha are currently supported.
 
 * Jest >= 24.8.0
   * From `dd-trace>=3.3.0`.
   * Only [`jest-circus`][1] is supported as [`testRunner`][3].
 * Mocha >= 5.2.0
   * From `dd-trace>=3.3.0`.
-
 
 ## Configuring reporting method
 

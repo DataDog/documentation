@@ -50,9 +50,8 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `monitors`                    | 定義すると、Datadog プラグインはデプロイされた関数のモニターを構成します。ご使用の環境で、`DATADOG_API_KEY` および `DATADOG_APP_KEY` を設定する必要があります。モニターの定義方法については、[推奨されるサーバーレスモニターを有効にして構成するには](#to-enable-and-configure-a-recommended-serverless-monitor)を参照してください。 |
 | `captureLambdaPayload`        | Datadog APM のスパンで、Lambda の呼び出しに対する [AWS Lambda のペイロードの入出力をキャプチャ][17]します。デフォルトは `false` です。 |
 | `enableSourceCodeIntegration` | 関数の [Datadog ソースコードインテグレーション][18]を有効にします。デフォルトは `true` です。 |
-| `subscribeToApiGatewayLogs`   | Datadog Forwarder の API Gateway ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
-| `subscribeToHttpApiLogs`      | Datadog Forwarder の HTTP API ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
-| `subscribeToWebsocketLogs`    | Datadog Forwarder の WebSocket ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
+| `subscribeToAccessLogs`   | Datadog Forwarder の API Gateway アクセスロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
+| `subscribeToExecutionLogs`      | Datadog Forwarder の HTTP API と Websocket ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
 | `forwarderArn`                | Lambda または API Gateway のロググループにサブスクライブされる Datadog Forwarder の ARN。 |
 | `addLayers`                   | Datadog Lambda ライブラリをレイヤーとしてインストールするかどうか。デフォルトは `true` です。特定のバージョンの Datadog Lambda ライブラリ ([Python][8] または [Node.js][9]) をインストールできるように Datadog Lambda ライブラリを関数のデプロイパッケージに独自にパッケージ化する場合は、`false` に設定します。 |
 | `addExtension`                | Datadog Lambda 拡張機能をレイヤーとしてインストールするかどうか。デフォルトは `true` です。有効にすると、`apiKey` と `site` を設定する必要があります。 |
@@ -62,6 +61,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `failOnError`                 | このプラグインを設定すると、Datadog カスタムモニターの作成または更新が失敗した場合にエラーが生成されます。これは、デプロイ後に発生しますが、`serverless deploy` の結果が 0 以外の終了コードを返す原因になります（ユーザー CI を失敗にするため）。デフォルトは `false` です。 |
 | `integrationTesting`          | インテグレーションテストを実行するときに `true` に設定します。これにより、Forwarder ARN と追加した Datadog モニターの出力リンクの検証要件がバイパスされます。デフォルトは `false` です。 |
 | `logLevel`                    | ログのレベル。拡張ロギングの場合 `DEBUG` に設定します。 |
+| `skipCloudformationOutputs`   | スタックに Datadog Cloudformation Outputs を追加するのをスキップしたい場合は、`true` に設定します。これは、スタックの作成に失敗する原因となる 200 の出力制限に遭遇している場合に有効です。 |
 
 上記のパラメーターを使用するには、以下の例のように `custom` > `datadog` セクションを `serverless.yml` に追加します。
 

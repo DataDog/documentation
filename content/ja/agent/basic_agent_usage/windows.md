@@ -140,10 +140,8 @@ Agent の実行は、Windows サービスコントロールマネージャーに
 | help            | コマンドのヘルプを表示します。                                                     |
 | hostname        | Agent が使用するホスト名を出力します。                                           |
 | import          | 以前のバージョンの Agent から構成ファイルをインポートして変換します。    |
-| installservice  | サービスコントロールマネージャー内で Agent をインストールします。                           |
 | launch-gui      | Datadog Agent Manager を起動します。                                                |
 | regimport       | レジストリ設定を `datadog.yaml` にインポートします。                                |
-| remove-service  | サービスコントロールマネージャーから Agent を削除します。                              |
 | restart-service | サービスコントロールマネージャー内で Agent を再起動します。                           |
 | run             | Agent を起動します。                                                                |
 | start           | Agent を起動します。(非推奨ですが、受け付けられます。代わりに `run` を使用してください。) |

@@ -24,7 +24,7 @@ Datadog で Cloud Cost Management をセットアップするには、Cost and U
 AWS の [Cost and Usage Report の作成][1]の説明に従い、Datadog Cloud Cost Management で使用するために以下のコンテンツオプションを選択します。
 
 * **Include resource IDs** (リソース ID を含む)
-* **Automatically refresh your Cost & Usage Report** (コストと使用量レポートを自動更新)
+* **"Automatically refresh your Cost & Usage Report when charges are detected for previous months with closed bills." (請求が締め切られた前月の料金が検出されると、コストと使用量レポートが自動的に更新されます。) のチェックボックスをオンにします。**
 
 以下の Delivery オプションを選択します。
 

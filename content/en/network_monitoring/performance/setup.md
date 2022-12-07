@@ -102,7 +102,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 2. Copy the system-probe example configuration:
 
     ```shell
-    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0644 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
@@ -131,6 +131,12 @@ To enable network performance monitoring with the Datadog Agent, use the followi
     ```
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
+{{< site-region region="us,us3,us5,eu" >}}
+
+6. Optionally, install the Azure integration for more visibility into Azure load balancers.
+
+{{< /site-region >}}
 
 ### SELinux-enabled systems
 

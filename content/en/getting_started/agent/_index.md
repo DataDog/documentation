@@ -104,7 +104,7 @@ In the Datadog UI, go to the Agent Installation page for Ubuntu by navigating to
 Example Ubuntu one-line install command:
 
 ```shell
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 Go to the in-app [Agent Installation page][18] for your operating system for the most up-to-date installation instructions.

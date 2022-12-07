@@ -15,11 +15,10 @@ further_reading:
 - link: "/logs/log_configuration/logs_to_metrics/"
   tag: "Documentation"
   text: "Generate metrics from ingested logs"
+- link: "https://www.datadoghq.com/blog/track-customer-experience-with-rum-metrics/"
+  tag: "Blog"
+  text: "Generate RUM-based metrics to track historical trends in customer experience"
 ---
-
-<div class="alert alert-warning">
-Generating custom metrics from RUM events is in beta. Access to this feature is provisioned to customers using Real User Monitoring. Contact <a href="/help">Datadog Support</a> to provide feedback.
-</div>
 
 ## Overview
 
@@ -27,19 +26,19 @@ Real User Monitoring (RUM) allows you to capture events that occur in your brows
 
 RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months.
 
-**Billing Note:** Metrics created from RUM events are billed as [Custom Metrics][5].
+**Billing Note:** Metrics created from RUM events are billed as [Custom Metrics][3].
 
 ## Create a RUM-based custom metric
 
-To create a custom metric from RUM event data, navigate to [**UX Monitoring** > **Generate Metrics**][3] and click **+ New Metric**.
+To create a custom metric from RUM event data, navigate to [**UX Monitoring** > **Generate Metrics**][4] and click **+ New Metric**.
 
 {{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
 
-To create a custom metric from a search query in the [RUM Explorer][4], click the **Export** button and select **Generate new metric** from the dropdown menu.
+To create a custom metric from a search query in the [RUM Explorer][5], click the **Export** button and select **Generate new metric** from the dropdown menu.
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generate a RUM-based custom metric" width="80%" >}}
 
-1. Give your [custom metric][5] a name that does not start with `datadog.estimated_usage`, such as `rum.sessions.count_by_geography`. For more information, see the [naming convention][6].
+1. Give your [custom metric][3] a name that does not start with `datadog.estimated_usage`, such as `rum.sessions.count_by_geography`. For more information, see the [naming convention][6].
 2. Select an event type you want to create a custom metric for, such as `Sessions`. Your options include **Sessions**, **Views**, **Actions**, **Errors**, **Resources**, and **Long Tasks**. For more information, see [Search RUM Events][7].
 3. Create a search query that filters your RUM events using the RUM Explorer's [search syntax][8] such as `@session.type:user`. 
 4. Choose a field to track from the dropdown menu next to **Count**. 
@@ -108,9 +107,9 @@ You can use RUM-based custom metrics for the following actions:
 
 [1]: /real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration
 [2]: https://app.datadoghq.com/rum/explorer
-[3]: https://app.datadoghq.com/rum/generate-metrics
-[4]: /real_user_monitoring/explorer/
-[5]: /metrics/custom_metrics/
+[3]: /metrics/custom_metrics/
+[4]: https://app.datadoghq.com/rum/generate-metrics
+[5]: /real_user_monitoring/explorer/
 [6]: /metrics/custom_metrics/#naming-custom-metrics
 [7]: /real_user_monitoring/explorer/search/#event-types
 [8]: /real_user_monitoring/explorer/search_syntax/

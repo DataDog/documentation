@@ -1,7 +1,7 @@
 ---
 title: Injecting Libraries Using Admission Controller
 kind: documentation
-description: "Inject tracing libraries into applications using Cluster Agent and Admission Controller"
+description: "Inject instrumentation libraries into applications using Cluster Agent and Admission Controller"
 is_beta: true
 ---
 
@@ -9,85 +9,184 @@ is_beta: true
   Tracing library injection using Admission Controller is in beta. 
 {{< /beta-callout >}}
 
-## Install Datadog Agent
-First, configure the Datadog Agent. Our recommended method of installation for Kubernetes environments is via Helm Charts. Learn how to configure the [Datadog Agent in Kubernetes via Helm Charts][3] by reading our documentation.
+## Overview
 
-## Unified Service Tagging
-For your Kubernetes applications that send traces to Datadog Agent, you can configure the Datadog admission controller to inject Java, JavaScript, and Python libraries automatically. To inject the Java and Javascript libraries, use Datadog Cluster Agent v7.39+. To inject the Python library, use Datadog Cluster Agent v7.40+.
+In a Kubernetes environment, there are two ways to instrument your application:
+* Injecting the instrumentation library using the [Admission Controller][1], as described on this page; or
+* [Manually adding the instrumentation library in the application][2].
 
-We highly recommend using our Unified Service Tagging approach to connect your infrastructure, applications and logs to get the maximum value out of Datadog. Learn how to apply [Unified Service Tagging][4] to your services by reading our documentation.
+With the Admission Controller approach, the Agent uses the Kubernetes Admission Controller to intercept requests to the Kubernetes API and mutate new pods to inject the specified instrumentation library.
 
-## Annotate your Pods
-By automating the injection of tracer libraries through the Admission Controller, you don't have to change your application images, helping you get up and running with APM quickly.
+<div class="alert alert-warning">Library injection is applied on new pods only and does not have any impact on running pods.</div>
 
-After you install the [Cluster Agent][1], do one of the following:
-- Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
-- Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
+To learn more about Kubernetes Admission Controller, read [Kubernetes Admission Controllers Reference][3].
 
-To opt-in your container for library injection, use Pod annotations inside your application's YAML file to specify language tracers and versions.
+## Requirements
 
-The annotations are a `key: value` pair in the following format:
+* Kubernetes v1.14+
+* Datadog [Cluster Agent v7.40+][4] with Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
+* Applications in Java, JavaScript, or Python deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
+
+
+## Container registries
+
+Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AWS ECR:
+| Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
+|------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
+| Java       | [gcr.io/datadoghq/dd-lib-java-init][5]   | [hub.docker.com/r/datadog/dd-lib-java-init][6]   | [gallery.ecr.aws/datadog/dd-lib-java-init][7]   |
+| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][8]     | [hub.docker.com/r/datadog/dd-lib-js-init][9]     | [gallery.ecr.aws/datadog/dd-lib-js-init][10]     |
+| Python     | [gcr.io/datadoghq/dd-lib-python-init][11] | [hub.docker.com/r/datadog/dd-lib-python-init][12] | [gallery.ecr.aws/datadog/dd-lib-python-init][13] |
+
+The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `grc.io/datadoghq`.
+
+You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
+
+## Configure instrumentation libraries injection
+
+For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, or Python instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
+
+1. Enable Datadog Admission Controller to mutate your pods.
+2. Annotate your pods to select which instrumentation library to inject.
+3. Tag your pods with Unified Service Tags to tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags.
+4. Apply your new configuration.
+
+<div class="alert alert-info">You do not need to generate a new application image to inject the library. The library injection is taking care of adding the instrumentation library, so no change is required in your application image.</div>
+
+### Step 1 - Enable Datadog Admission Controller to mutate your pods
+
+By default, Datadog Admission controller mutates only pods labeled with a specific label. To enable mutation on your pods, add the label `admission.datadoghq.com/enabled: "true"` to your pod spec.
+
+**Note**: You can configure Datadog Admission Controller to enable injection config without having this pod label by configuring the Cluster Agent with `clusterAgent.admissionController.mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) to `true`.
+
+For more details on how to configure, read [Datadog Admission Controller page][1].
+
+For example:
+
 ```yaml
-    admission.datadoghq.com/<language>-lib.version: <lib-version>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    ...
+...
+template:
+  metadata:
+    labels:
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
+  containers:
+  -  ...
 ```
 
-Adding this annotation results in the injection of the tracer library for that language and version into the containerized application.
-Valid `<language>` values are:
-- `java`
-- `js`
-- `python`
+### Step 2 - Annotate your pods for library injection
 
-For example to inject the Java tracer v0.114.0:
+To select your pods for library injection, annotate them with the following, corresponding to your application language, in your pod spec:
+
+| Language   | Pod annotation                                              |
+|------------|-------------------------------------------------------------|
+| Java       | `admission.datadoghq.com/java-lib.version: "<lib-version>"`   |
+| JavaScript | `admission.datadoghq.com/js-lib.version: "<lib-version>"`     |
+| Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
+
+The available library versions are listed in each container registry.
+
+<div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
+
+For example:
 
 ```yaml
-annotations:
-    admission.datadoghq.com/java-lib.version: "v0.114.0"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    ...
+...
+template:
+  metadata:
+    labels:
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
+    annotations:
+        admission.datadoghq.com/java-lib.version: "v0.114.0" # Enable Java instrumentation (version 0.114.0) injection
+  containers:
+  -  ...
 ```
 
-**Note**: Use caution specifying `latest` as major library releases can introduce breaking changes.
+### Step 3 - Tag your pods with Unified Service Tags
 
-Although it's an uncommon scenario, you can add multiple `<language>-lib.version` annotations to inject multiple language tracers into one container.
+With [Unified Service Tags][14], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
+Set Unified Service tags by using the following labels:
 
-For example to inject the Java tracer v0.114.0, and Node tracer v3.6.0:
 ```yaml
-annotations:
-    admission.datadoghq.com/java-lib.version: "v0.114.0"
-    admission.datadoghq.com/js-lib.version: "v3.6.0"
+...
+    metadata:
+        labels:
+            tags.datadoghq.com/env: "<ENV>"
+            tags.datadoghq.com/service: "<SERVICE>"
+            tags.datadoghq.com/version: "<VERSION>"
+...
 ```
 
-You can also inject the latest version of a tracer library using the following annotation:
+**Note**: It is not necessary to set the _environment variables_ for universal service tagging (`DD_ENV`, `DD_SERVICE`, `DD_VERSION`) in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
+
+For example:
+
 ```yaml
-annotations:
-    admission.datadoghq.com/java-lib.version: "latest"
-    admission.datadoghq.com/js-lib.version: "latest"
-    admission.datadoghq.com/python-lib.version: "latest"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tags.datadoghq.com/env: "prod" # Unified service tag - Deployment Env tag
+    tags.datadoghq.com/service: "my-service" # Unified service tag - Deployment Service tag
+    tags.datadoghq.com/version: "1.1" # Unified service tag - Deployment Version tag
+...
+template:
+  metadata:
+    labels:
+        tags.datadoghq.com/env: "prod" # Unified service tag - Pod Env tag
+        tags.datadoghq.com/service: "my-service" # Unified service tag - Pod Service tag
+        tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
+    annotations:
+        admission.datadoghq.com/java-lib.version: "v0.114.0" # Enable Java instrumentation (version 0.114.0) injection
+  containers:
+  -  ...
 ```
 
-**Note**: Use caution specifying `latest`, as it may raise errors because of major version differences between your newly injected applications and your existing applications that have already been deployed. 
+### Step 4 - Apply the configuration
 
-Adding a `mutateUnlabelled: true` Agent config in the Helm chart causes the Cluster Agent to attempt to intercept every unlabelled pod.
+Your pods are ready to be instrumented when their new configuration is applied.
 
-To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
+<div class="alert alert-warning">The library is injected on new pods only and does not have any impact on running pods.</div>
 
-If `mutateUnlabelled` is set to `false`, the pod label must be set to `admission.datadoghq.com/enabled: "true"`.
+## Check that the library injection was successful
 
-Possible options:
+Library injection leverages the injection of a dedicated `init` container in pods.
+If the injection was successful you can see an `init` container called `datadog-lib-init` in your pod:
 
-| mutateUnlabelled | Pod label                               | Injection |
-|------------------|-----------------------------------------|-----------|
-| `true`           | No label                                | Yes       |
-| `true`           | `admission.datadoghq.com/enabled=true`  | Yes       |
-| `true`           | `admission.datadoghq.com/enabled=false` | No        |
-| `false`          | No label                                | No        |
-| `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
-| `false`          | `admission.datadoghq.com/enabled=false` | No        |
+{{< img src="tracing/trace_collection/datadog-lib-init-container.jpg" alt="Kubernetes environment details page showing init container in the pod.">}}
 
-## Configure the Tracer from a Different Registry
-You may pull the APM library from a different registry using the `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent.
+Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init container listed.
 
-The default value is set to `grc.io/datadoghq`. The supported values are `docker.io/datadog` and `public.ecr.aws/datadog`.
+The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][15]).
 
-[1]: /containers/cluster_agent/setup/?tab=helm
-[2]: /containers/cluster_agent/admission_controller/
-[3]: /containers/kubernetes/installation/?tab=helm
-[4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+## Configuring the library
+
+The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog Library configuration page][16] for your language for more details.
+
+
+
+[1]: /containers/cluster_agent/admission_controller/
+[2]: /tracing/trace_collection/
+[3]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
+[4]: /containers/kubernetes/installation/?tab=helm
+[5]: http://gcr.io/datadoghq/dd-lib-java-init
+[6]: http://hub.docker.com/r/datadog/dd-lib-java-init
+[7]: http://gallery.ecr.aws/datadog/dd-lib-java-init
+[8]: http://gcr.io/datadoghq/dd-lib-js-init
+[9]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[10]: http://gallery.ecr.aws/datadog/dd-lib-js-init
+[11]: http://gcr.io/datadoghq/dd-lib-python-init
+[12]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[13]: http://gallery.ecr.aws/datadog/dd-lib-python-init
+[14]: /getting_started/tagging/unified_service_tagging/
+[15]: https://app.datadoghq.com/apm/traces
+[16]: /tracing/trace_collection/library_config/

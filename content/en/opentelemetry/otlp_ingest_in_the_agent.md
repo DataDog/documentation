@@ -59,17 +59,6 @@ These must be passed to both the core Agent and trace Agent processes. If runnin
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
-<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The use of the <code>experimental:</code> configuration listed below for configuring OTLP receiving in <code>datadog.yaml</code> and the corresponding environment variables <code>DD_OTLP_HTTP_PORT</code> and <code>DD_OTLP_GRPC_PORT</code> is now deprecated and will be removed in Agent version <code>7.37.0</code>.</div>
-
-```yaml
-experimental:
-  otlp:
-    receiver:
-      protocols:
-        grpc:
-        http:
-```
-
 [1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
 {{% /tab %}}
 {{% tab "Docker" %}}

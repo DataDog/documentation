@@ -24,7 +24,7 @@ To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
 
 * **Include resource IDs**
-* **Automatically refresh your Cost & Usage Report**
+* **Check the box for "Automatically refresh your Cost & Usage Report when charges are detected for previous months with closed bills."**
 
 Select the following Delivery options:
 

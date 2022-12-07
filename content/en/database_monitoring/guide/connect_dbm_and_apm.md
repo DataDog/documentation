@@ -14,7 +14,8 @@ This guide assumes that you have configured [Datadog Monitoring][1] and are usin
 ## Before you begin
 
 Supported tracers
-: [dd-trace-go][3] >= 1.42.0 (support for [database/sql][4] and [sqlx][5] packages)
+: [dd-trace-go][3] >= 1.44.0 (support for [database/sql][4] and [sqlx][5] packages)<br />
+[dd-trace-rb][6] >= 1.6.0 (support for [mysql2][7] and [pg][8] gems)
 
 Supported databases
 : postgres, mysql
@@ -30,9 +31,9 @@ Data privacy
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Update your app dependencies to include [dd-trace-go@v1.42.0][1] or greater:
+Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
 ```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.42.0
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
 Update your code to import the `contrib/database/sql` package:
@@ -45,19 +46,19 @@ import (
 ```
 
 Enable the database monitoring propagation feature using one of the following methods:
-1. Env variable: 
-   `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
+1. Env variable:
+   `DD_DBM_PROPAGATION_MODE=full`
 
 2. Using code during the driver registration:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
 3. Using code on `sqltrace.Open`:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
-   
-   db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithSQLCommentInjection(tracer.SQLInjectionModeFull))
+
+   db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
 	   log.Fatal(err)
    }
@@ -94,6 +95,55 @@ func main() {
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 
 {{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+In your Gemfile, install or udpate [dd-trace-rb][1] to version greater than `1.6.0`:
+
+```rb
+source 'https://rubygems.org'
+gem 'ddtrace', '>= 1.6.0'
+
+# Depends on your usage
+gem 'mysql2'
+gem 'pg'
+```
+
+Enable the database monitoring propagation feature using one of the following methods:
+1. Env variable:
+   `DD_DBM_PROPAGATION_MODE=service`
+
+2. Option `comment_propagation` (default: `ENV['DD_DBM_PROPAGATION_MODE']`), for [mysql2][2] or [pg][3]:
+   ```rb
+	Datadog.configure do |c|
+		c.tracing.instrument :mysql2, comment_propagation: 'service'
+		c.tracing.instrument :pg, comment_propagation: 'disabled'
+	end
+   ```
+
+Full example:
+```rb
+require 'mysql2'
+require 'ddtrace'
+
+Datadog.configure do |c|
+	c.service = 'billing-api'
+	c.env = 'production'
+	c.version = '1.3-alpha'
+
+	c.tracing.instrument :mysql2, comment_propagation: ENV['DD_DBM_PROPAGATION_MODE']
+end
+
+client = Mysql2::Client.new(:host => "localhost", :username => "root")
+client.query("SELECT 1;")
+```
+
+[1]: https://github.com/dataDog/dd-trace-rb
+[2]: /tracing/trace_collection/dd_libraries/ruby/#mysql2
+[3]: /tracing/trace_collection/dd_libraries/ruby/#postgres
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -102,3 +152,6 @@ func main() {
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
+[6]: https://github.com/dataDog/dd-trace-rb
+[7]: https://github.com/brianmario/mysql2
+[8]: https://github.com/ged/ruby-pg
