@@ -67,7 +67,28 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
   -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
 - Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add new dimension to threat detection using the same queries and triggers.
 - The delete option is **only** available for custom rules. You cannot delete an out-of-the-box (OOTB) rule as they are native to the platform. To permanently delete a custom rule, click **Delete**. To disable an OOTB rule, click the disable toggle.
-- Click **View generated signals** to pivot to the [Signals Explorer][6] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completeing an audit of rules. 
+- Click **View generated signals** to pivot to the [Signals Explorer][6] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules. 
+
+#### Limit edit access
+
+By default, all users have full access to security rules.
+
+Use granular access controls to limit the [roles][10] that may edit a single rule:
+1. Click on the three dot menu for the rule.
+1. Select **Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the drop-down to select one or more roles that may edit the security rule.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**
+**Note:** To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving. 
+
+To restore general access to a rule with restricted access, follow the steps below:
+1. Click on the three dot menu on the right of the rule.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -82,3 +103,4 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 [7]: /tracing/
 [8]: /agent/
 [9]: https://app.datadoghq.com/security/configuration/rules
+[10]: /account_management/rbac/

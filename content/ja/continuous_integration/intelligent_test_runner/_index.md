@@ -23,8 +23,21 @@ Intelligent Test Runner は、Datadog のテストインパクト分析ソリュ
 
 関連するコードに対してのみテストを実行することで、テストが失敗した場合、それは変更されたコードに関連する正当な失敗である可能性が高くなります。
 
+## ベータ版での制限事項
 
-## セットアップ
+Intelligent Test Runner のベータ版では、一定の制限があります。
+
+- 以下のセクションで必要とされる環境変数の中には、ベータ版の間だけ必要とされるものがあります。
+- Intelligent Test Runner は、Datadog Agent を使用しない場合のみ動作します。このページの構成ステップでは、Datadog ライブラリが Agent を介さずにバックエンドに直接データを送信します。現在 Agent を使用している場合、ホストメトリクスとの相関が失われます。
+- Intelligent Test Runner の現在の実装には、実行すべきテストをスキップする可能性のある既知の制限がありま す。Intelligent Test Runner は、以下を検出できません。
+  - ライブラリの依存関係の変更。
+  - コンパイラーオプションの変更。
+  - 外部サービスの変更。
+  - データ駆動型テストにおけるデータファイルの変更。
+
+Intelligent Test Runner をオーバーライドしてすべてのテストを実行するには、Git のコミットメッセージのどこかに `ITR:NoSkip` (大文字小文字を区別しない) を追加してください。
+
+## Datadog ライブラリのセットアップ
 
 Intelligent Test Runner を設定する前に、特定の言語の [Test Visibility][1] の設定を完了している必要があります。
 
@@ -35,7 +48,7 @@ Intelligent Test Runner を有効にするには、以下の環境変数の設�
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
 : Agentless モードを有効または無効にします。<br/>
 **デフォルト**: `false`<br/>
-**注**: ベータ版期間中のみ必要
+**注**: ベータ版のみ必要
 
 `DD_API_KEY` (必須)
 : テスト結果のアップロードに使用される [Datadog API キー][2]。<br/>
@@ -53,12 +66,12 @@ Intelligent Test Runner を有効にするには、以下の環境変数の設�
 `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (必須)
 : git メタデータのアップロードを有効にするためのフラグ。<br/>
 **デフォルト**: `false`<br/>
-**注**: ベータ版期間中のみ必要
+**注**: ベータ版のみ必要
 
 `DD_CIVISIBILITY_ITR_ENABLED=true` (必須)
 : テストスキップを有効にするためのフラグ。 <br/>
 **デフォルト**: `false`<br/>
-**注**: ベータ版期間中のみ必要
+**注**: ベータ版のみ必要
 
 これらの環境変数を設定した後、通常通りテストを実行します。
 
@@ -66,8 +79,10 @@ Intelligent Test Runner を有効にするには、以下の環境変数の設�
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
 {{< /code-block >}}
 
+**重要**: Intelligent Test Runner は、すべてのテストをスキップすることができます。デフォルトでは、実行するテストがない場合、`jest` は失敗します。`jest` が失敗しないようにするには、`jest` に [`--passWithNoTests`][5] を渡してください。
+
 #### UI アクティベーション
-上記の環境変数の設定に加え、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
+環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][6]ページで Intelligent Test Runner を有効にする必要があります。
 
 #### 互換性
 
@@ -85,7 +100,7 @@ Intelligent Test Runner を有効にするには、`dd-trace` ツールのバー
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
 : Agentless モードを有効または無効にします。<br/>
 **デフォルト**: `false`<br/>
-**注**: ベータ版期間中のみ必要
+**注**: ベータ版のみ必要
 
 `DD_API_KEY` (必須)
 : テスト結果のアップロードに使用される [Datadog API キー][2]。<br/>
@@ -103,9 +118,9 @@ Intelligent Test Runner を有効にするには、`dd-trace` ツールのバー
 `DD_CIVISIBILITY_ITR_ENABLED=true` (必須)
 : Intelligent Test Runner を有効にするためのフラグ。 <br/>
 **デフォルト**: `false`<br/>
-**注**: ベータ版期間中のみ必要
+**注**: ベータ版のみ必要
 
-これらの環境変数の設定後、通常通り [dotnet テスト][6]や [VSTest.Console.exe][7] を使ってテストを実行します。
+これらの環境変数の設定後、通常通り [dotnet テスト][7]や [VSTest.Console.exe][8] を使ってテストを実行します。
 
 {{< tabs >}}
 
@@ -131,7 +146,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 #### UI アクティベーション
 
-上記の環境変数の設定に加え、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
+環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][6]ページで Intelligent Test Runner を有効にする必要があります。
 
 ### Swift
 
@@ -159,7 +174,13 @@ Intelligent Test Runner を有効にするには、`dd-sdk-swift` フレーム�
 
 #### UI アクティベーション
 
-上記の環境変数の設定に加え、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
+環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][6]ページで Intelligent Test Runner を有効にする必要があります。
+
+## CI ジョブのセットアップ
+
+Intelligent Test Runner は、git のメタデータ情報 (コミット履歴) を使って動作します。しかし、CI プロバイダーによっては git shallow clone (`git clone --depth=0`) を使って、過去のコミット情報を一切ダウンロードせずに対象のコミットだけをダウンロードするものがあります。この設定では、Intelligent Test Runner が動作するのに十分な情報が含まれていません。CI で shallow clone を使用している場合は、それを変更する必要があります。
+
+shallow clone に代わる効率的な方法として、partial clone (Git v2.27+ でサポート) があります。これは、現在のコミットと必要な git メタデータを複製し、すべてのファイルの過去のバージョンを取得することはありません: `git clone --filter=blob:none`
 
 ## コンフィギュレーション
 
@@ -176,6 +197,7 @@ Intelligent Test Runner を有効にするには、`dd-sdk-swift` フレーム�
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /ja/getting_started/site/
-[5]: https://app.datadoghq.com/ci/settings/test-service
-[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[5]: https://jestjs.io/docs/cli#--passwithnotests
+[6]: https://app.datadoghq.com/ci/settings/test-service
+[7]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+[8]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options

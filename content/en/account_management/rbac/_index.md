@@ -179,9 +179,15 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 {{< img src="account_management/rbac/role_templates.png" alt="Role Templates dropdown menu with Datadog Billing Admin Role selected" style="width:90%;">}}
 
-## Restrict access to dashboards and monitors
+## Restrict access to individual resources
 
-Once you have RBAC roles set up, you can restrict access to dashboards, monitors, and synthetic tests by user role. For more information, see [Dashboard Permissions][10], [Monitors Permissions][11], and [Synthetics Permissions][12].
+Once you have RBAC roles set up, you can restrict access to individual resources by user role.
+
+The following resources allow granular access control:
+- [Dashboards][10]
+- [Monitors][11]
+- [Security rules][12]
+- [Synthetic tests][13]
 
 ## Further Reading
 
@@ -198,4 +204,5 @@ Once you have RBAC roles set up, you can restrict access to dashboards, monitors
 [9]: /api/latest/roles/#create-role
 [10]: /dashboards/#permissions
 [11]: /monitors/notify/#permissions
-[12]: /synthetics/browser_tests/#permissions
+[12]: /security_platform/detection_rules/#limit-edit-access
+[13]: /synthetics/browser_tests/#permissions
