@@ -578,11 +578,6 @@ main:
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
     weight: 2
-  - name: Datadog Features Available with OpenTelemetry
-    url: opentelemetry/otel_dd_features/
-    identifier: otel_features
-    parent: opentelemetry_top_level
-    weight: 3
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
