@@ -89,7 +89,7 @@ build_preview:
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
-    - yarn run build:preview
+    - build_site
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
     - in-isolation deploy_preview > logs/deploy.txt
@@ -228,7 +228,7 @@ build_live:
     - make clean-examples
     - make dependencies
     - yarn run prebuild
-    - yarn run build:live
+    - build_site
     - in-isolation deploy_live
     - create_artifact
     - create_artifact_ignored
