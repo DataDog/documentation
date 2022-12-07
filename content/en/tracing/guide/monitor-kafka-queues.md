@@ -89,7 +89,7 @@ The [Kafka .NET Client documentation][1] states that a typical Kafka consumer ap
 
 When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][2] to extract the trace context.
 
-The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][3]. The trace context propagation api, if you need it, is available since [v2.7.0][4]
+The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][3]. The trace context propagation API is available since [v2.7.0][4]
 
 [1]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
 [2]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
