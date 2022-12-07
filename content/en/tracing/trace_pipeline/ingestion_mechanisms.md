@@ -339,9 +339,8 @@ def handler():
 Manually keep a trace:
 
 ```ruby
-Datadog::Tracing.trace(name, options) do |span|
-  Datadog::Tracing.keep! # Affects the active span
-
+Datadog::Tracing.trace(name, options) do |span, trace|
+  trace.keep! # Affects the active trace
   # Method implementation follows
 end
 ```
@@ -349,9 +348,8 @@ end
 Manually drop a trace:
 
 ```ruby
-Datadog::Tracing.trace(name, options) do |span|
-  Datadog::Tracing.reject! # Affects the active span
-
+Datadog::Tracing.trace(name, options) do |span, trace|
+  trace.reject! # Affects the active trace
   # Method implementation follows
 end
 ```
