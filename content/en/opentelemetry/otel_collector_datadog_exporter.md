@@ -514,7 +514,14 @@ The host name that OpenTelemetry signals are tagged with is obtained based on th
 5. Fully qualified domain name.
 6. Operating system host name.
 
+## Deployment-based limitations
 
+The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and Gateway. Depending on your deployment method, some components are not available.
+
+| Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
+| --- | --- | --- | --- | --- |
+| as Gateway | | {{< X >}} | {{< X >}} | |
+| as Agent | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 
 ## Further Reading
@@ -532,3 +539,4 @@ The host name that OpenTelemetry signals are tagged with is obtained based on th
 [7]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
+[14]: https://opentelemetry.io/docs/collector/deployment/

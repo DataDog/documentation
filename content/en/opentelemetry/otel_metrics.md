@@ -139,14 +139,7 @@ Datadog provides out-of-the-box dashboards that you can copy and customize. To u
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][12]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][13] you choose to enable.
 
-## Deployment-based limitations
 
-The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and Gateway. Depending on your deployment method, some components are not available.
-
-| Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
-| --- | --- | --- | --- | --- |
-| as Gateway | | {{< X >}} | {{< X >}} | |
-| as Agent | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
 
 ## Further reading
@@ -166,4 +159,4 @@ The OpenTelemetry Collector has [two primary deployment methods][14]: Agent and 
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter/examples
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[14]: https://opentelemetry.io/docs/collector/deployment/
+
