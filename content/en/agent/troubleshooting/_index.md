@@ -5,6 +5,9 @@ aliases:
     - /agent/faq/agent-s-are-no-longer-reporting-data
     - /agent/faq/common-windows-agent-installation-error-1721
 further_reading:
+- link: "/agent/troubleshooting/hostname_containers/"
+  tag: "Documentation"
+  text: "Agent hostname resolution in containers"
 - link: "/agent/troubleshooting/debug_mode/"
   tag: "Documentation"
   text: "Agent Debug Mode"
@@ -29,6 +32,7 @@ If you have not yet installed the Datadog Agent, go [to the dedicated Agent inte
 
 If you think you might be experiencing issues, follow this checklist first:
 
+* Is your Agent container stopping right after starting? It can be a [hostname][11] detection issue.
 * Is your host connected to the internet or able to access it through a proxy?
 * If using a proxy: is your [Agent configured for this proxy][3]?
 * Is the Datadog API key set up in your `datadog.yaml` configuration file [the API key corresponding to your Datadog platform][4]?
@@ -54,3 +58,4 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 [8]: /agent/troubleshooting/debug_mode/
 [9]: /help/
 [10]: /agent/troubleshooting/send_a_flare/
+[11]: /agent/troubleshooting/hostname_containers/

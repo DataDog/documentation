@@ -186,23 +186,16 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 ### Severity and notification
 
-Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1] for each rule case.
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real-time.
+{{% cloud-siem-rule-time-windows %}}
 
-Once a signal is generated, the signal will remain “open” if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
-
-A signal will “close” regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
-
-Additional cases can be added by clicking the **Add Case** button.
+Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "New Value" %}}
@@ -211,9 +204,7 @@ Additional cases can be added by clicking the **Add Case** button.
 
 ### Severity and notification
 
-Set the severity of the Security Signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1] for each rule case.
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Forget value
 
@@ -225,26 +216,22 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 **Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
 
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "Anomaly" %}}
 
 ### Severity and notification
 
-Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1].
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Time windows
 
-Datadog automatically detects the seasonality of the data and will generate a security signal when the data is determined to be anomalous.
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
 
-Once a signal is generated, the signal will remain "open" if the data remains anomalous and the last updated timestamp will be updated for the anomalous duration.
+Once a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
 
-A signal will "close" regardless of whether or not the anomaly is still anomalous once the time exceeds the maximum signal duration. This time is calculated from the first seen timestamp.
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
 
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 
 {{% tab "Impossible Travel" %}}
@@ -253,19 +240,12 @@ The impossible travel detection method does not require setting a rule case.
 
 ### Severity and notification
 
-Select an appropriate severity level for the security signal (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the “Notify” section, configure zero or more [notification targets][1].
+{{% cloud-siem-rule-severity-notification %}}
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases is true. This is a sliding window and evaluates in real-time.
+{{% cloud-siem-rule-time-windows %}}
 
-Once a signal is generated, the signal remains “open” if a case is matched at least once within the `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
-
-A signal closes regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
-
-[1]: /monitors/notify/?tab=is_alert#integrations
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -284,84 +264,7 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ## Say what's happening
 
-The **Rule name** section allows you to configure the rule name that appears in the detection rules list view, as well as the title of the Security Signal.
-
-Use [notification variables][1] and Markdown to customize the notifications sent when a signal is generated. You can reference the tags associated with the signal and the event attributes in the notification. The list of available attributes is in the JSON section of the Overview tab in the signal panel. Use the following syntax to add the attributes to the notification: `{{@attribute}}`. Use the JSON dot notation to access the inner keys of the event attributes, for example, `{{@attribute.inner_key}}`.
-
-This JSON object is an example of event attributes which may be associated with a security signal:
-
-```json
-{
-  "network": {
-    "client": {
-      "ip": "1.2.3.4"
-    }
-  },
-  "usr": {
-    "id": "user@domain.com"
-  },
-  "evt": {
-    "category": "authentication",
-    "outcome": "success"
-  },
-  "used_mfa": "false"
-}
-
-```
-
-You could use the following in the **Say what’s happening** section:
-
-```
-{{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
-```
-
-And this would be rendered as the following:
-
-```
-user@domain.com just logged in without MFA from 1.2.3.4.
-```
-
-You can use if-else logic to see if an attribute exists with the notation:
-
-```
-{{#if @network.client.ip}}The attribute IP attribute exists.{{/if}}
-```
-
-You can use if-else logic to see if an attribute matches a value:
-
-```
-{{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
-```
-
-See [Notification Variables][1] for more information.
-
-Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `security:attack` or `technique:T1110-brute-force`.
-
-**Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
-
-### Template variables
-
-Use [template variables][2] in the notification to inject dynamic context from triggered logs directly into a security signal and its associated notifications.
-
-For example, if a security rule detects when a user logs in from an IP address known to be malicious, the message states which user and IP address triggered a given signal when using the specified template variable.
-
-```text
-The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}} which is a known malicious IP address.
-```
-
-Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation.
-
-```text
-* [Investigate user in the authentication dashboard](https://app.datadoghq.com/example/integration/security-monitoring---authentication-events?tpl_var_username={{@usr.id}})
-```
-
-Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification.
-
-```text
-{{eval "first_seen_epoch-15*60*1000"}}
-```
-
-See [Template Variables][2] for more information.
+{{% cloud-siem-rule-say-whats-happening %}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

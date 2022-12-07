@@ -216,6 +216,16 @@ With Prometheus Autodiscovery, the Datadog Agent is able to detect native Promet
 
 ### Configuration
 
+It's recommended to first check which pods and services have the `prometheus.io/scrape=true` annotation before enabling this feature. This can be done with the following commands:
+
+```shell
+kubectl get pods -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.io/scrape=="true")].metadata.name}' --all-namespaces
+
+kubectl get services -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.io/scrape=="true")].metadata.name}' --all-namespaces
+```
+
+Once the Prometheus Scrape feature is enabled the Datadog Agent collects custom metrics from these resources. If you do not want to collect the custom metrics from these resources you can remove this annotation or update the autodiscovery rules as described in the [advanced configuration section](#advanced-configuration).
+
 #### Basic configuration
 
 {{< tabs >}}
@@ -277,7 +287,7 @@ The autodiscovery configuration can be based on container names or kubernetes an
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
 
-`kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
+`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
@@ -291,7 +301,7 @@ kubernetes_annotations:
 
 **Example:**
 
-In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod with the annotation `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
 
 ```yaml
 datadog:
@@ -327,7 +337,7 @@ The Autodiscovery configuration can be based on container names or Kubernetes an
 
 `kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
 
-`kubernetes_annotations` contains two maps of labels to define the discovery rules: `include` and `exclude`.
+`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
@@ -338,7 +348,7 @@ The Autodiscovery configuration can be based on container names or Kubernetes an
 
 **Example:**
 
-In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod labeled `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+In this example we're defining an advanced configuration targeting a container named `my-app` running in a pod with the annotation `app=my-app`. We're customizing the OpenMetrics check configuration as well, by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
 
 ```yaml
 - name: DD_PROMETHEUS_SCRAPE_ENABLED

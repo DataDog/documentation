@@ -299,45 +299,49 @@ main:
     parent: agent
     weight: 11
     identifier: agent_troubleshooting
+  - name: Container Hostname Detection
+    url: agent/troubleshooting/hostname_containers/
+    parent: agent_troubleshooting
+    weight: 1101
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1101
+    weight: 1102
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1102
+    weight: 1103
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1103
+    weight: 1104
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1104
+    weight: 1105
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1105
+    weight: 1106
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1106
+    weight: 1107
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1107
+    weight: 1108
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1108
+    weight: 1109
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1109
+    weight: 1110
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1110
+    weight: 1111
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
@@ -1102,121 +1106,121 @@ main:
     identifier: alerting
     parent: platform_heading
     weight: 130000
-  - name: Create Monitors
-    url: monitors/create/
-    parent: alerting
-    identifier: monitors_create
-    weight: 1
   - name: Configure Monitors
-    url: monitors/create/configuration/
-    parent: monitors_create
+    url: monitors/configuration/
+    parent: alerting
     identifier: monitor_configuration
-    weight: 101
+    weight: 1
+  - name: Monitor Types
+    url: monitors/types/
+    parent: alerting
+    identifier: monitor_types
+    weight: 2
   - name: Host
-    url: monitors/create/types/host/
-    parent: monitors_create
+    url: monitors/types/host/
+    parent: monitor_types
     identifier: monitor_types_host
-    weight: 102
+    weight: 201
   - name: Metric
-    url: monitors/create/types/metric/
-    parent: monitors_create
+    url: monitors/types/metric/
+    parent: monitor_types
     identifier: monitor_types_metrics
-    weight: 103
+    weight: 202
   - name: Anomaly
-    url: monitors/create/types/anomaly/
-    parent: monitors_create
+    url: monitors/types/anomaly/
+    parent: monitor_types
     identifier: monitor_types_anomaly
-    weight: 104
+    weight: 203
   - name: APM
-    url: monitors/create/types/apm/
-    parent: monitors_create
+    url: monitors/types/apm/
+    parent: monitor_types
     identifier: monitor_types_apm
-    weight: 105
+    weight: 204
   - name: Audit Trail
-    url: monitors/create/types/audit_trail/
-    parent: monitors_create
+    url: monitors/types/audit_trail/
+    parent: monitor_types
     identifier: monitor_types_auditlogs
-    weight: 106
+    weight: 205
   - name: CI
-    url: monitors/create/types/ci/
-    parent: monitors_create
+    url: monitors/types/ci/
+    parent: monitor_types
     identifier: monitor_types_ci
-    weight: 107
+    weight: 206
   - name: Composite
-    url: monitors/create/types/composite/
-    parent: monitors_create
+    url: monitors/types/composite/
+    parent: monitor_types
     identifier: monitor_types_composite
-    weight: 108
-  - name: Service Check
-    url: monitors/create/types/custom_check/
-    parent: monitors_create
-    identifier: monitor_types_custom_check
-    weight: 109
+    weight: 207
   - name: Error Tracking
-    url: monitors/create/types/error_tracking/
-    parent: monitors_create
+    url: monitors/types/error_tracking/
+    parent: monitor_types
     identifier: monitor_types_error_tracking
-    weight: 110
+    weight: 208
   - name: Event
-    url: monitors/create/types/event/
-    parent: monitors_create
+    url: monitors/types/event/
+    parent: monitor_types
     identifier: monitor_types_event
-    weight: 111
+    weight: 209
   - name: Forecast
-    url: monitors/create/types/forecasts/
-    parent: monitors_create
+    url: monitors/types/forecasts/
+    parent: monitor_types
     identifier: monitor_types_forecasts
-    weight: 112
+    weight: 210
   - name: Integration
-    url: monitors/create/types/integration/
-    parent: monitors_create
+    url: monitors/types/integration/
+    parent: monitor_types
     identifier: monitor_types_integration
-    weight: 113
+    weight: 211
   - name: Live Process
-    url: monitors/create/types/process/
-    parent: monitors_create
+    url: monitors/types/process/
+    parent: monitor_types
     identifier: monitor_types_process
-    weight: 114
+    weight: 212
   - name: Logs
-    url: monitors/create/types/log/
-    parent: monitors_create
+    url: monitors/types/log/
+    parent: monitor_types
     identifier: monitor_types_log
-    weight: 115
+    weight: 213
   - name: Network
-    url: monitors/create/types/network/
-    parent: monitors_create
+    url: monitors/types/network/
+    parent: monitor_types
     identifier: monitor_types_network
-    weight: 116
+    weight: 214
   - name: Outlier
-    url: monitors/create/types/outlier/
-    parent: monitors_create
+    url: monitors/types/outlier/
+    parent: monitor_types
     identifier: monitor_types_outlier
-    weight: 117
+    weight: 215
   - name: Process Check
-    url: monitors/create/types/process_check/
-    parent: monitors_create
+    url: monitors/types/process_check/
+    parent: monitor_types
     identifier: monitor_types_process_check
-    weight: 118
+    weight: 216
   - name: Real User Monitoring
-    url: monitors/create/types/real_user_monitoring/
-    parent: monitors_create
+    url: monitors/types/real_user_monitoring/
+    parent: monitor_types
     identifier: monitor_types_rum
-    weight: 119
+    weight: 217
+  - name: Service Check
+    url: monitors/types/service_check/
+    parent: monitor_types
+    identifier: monitor_types_service_check
+    weight: 218
   - name: SLO Alerts
-    url: monitors/create/types/slo/
-    parent: monitors_create
+    url: monitors/types/slo/
+    parent: monitor_types
     identifier: monitor_types_slo
-    weight: 120
+    weight: 219
   - name: Watchdog
-    url: monitors/create/types/watchdog/
-    parent: monitors_create
+    url: monitors/types/watchdog/
+    parent: monitor_types
     identifier: monitor_types_watchdog
-    weight: 121
+    weight: 220
   - name: Notifications
     url: monitors/notify/
     parent: alerting
     identifier: monitors_notify
-    weight: 2
+    weight: 3
   - name: Variables
     url: monitors/notify/variables/
     parent: monitors_notify
@@ -1231,7 +1235,7 @@ main:
     url: monitors/manage/
     parent: alerting
     identifier: monitors_manage
-    weight: 3
+    weight: 4
   - name: Search Monitors
     url: monitors/manage/search/
     parent: monitors_manage
@@ -1249,12 +1253,12 @@ main:
     weight: 303
   - name: Monitor Settings
     url: monitors/settings/
-    weight: 4
+    weight: 5
     parent: alerting
     identifier: monitor_settings
   - name: Service Level Objectives
     url: monitors/service_level_objectives/
-    weight: 5
+    weight: 6
     parent: alerting
     identifier: slos
   - name: Incident Management
@@ -1832,7 +1836,7 @@ main:
     parent: service_catalog
     identifier: service_catalog_setup
     weight: 901
-  - name: API
+  - name: Registering Services through the API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
@@ -2255,6 +2259,12 @@ main:
     parent: dbm
     identifier: dbm_guides
     weight: 9
+  - name: Universal Service Monitoring
+    url: universal_service_monitoring/
+    pre: usm
+    identifier: usm_parent
+    parent: apm_heading
+    weight: 165000
   - name: Log Management
     url: logs/
     pre: log
@@ -2424,21 +2434,38 @@ main:
     url: logs/explorer/saved_views/
     parent: log_explorer
     weight: 509
+  - name: Error Tracking
+    url: logs/error_tracking/
+    parent: log_management
+    identifier: log_management_error_tracking
+    weight: 6
+  - name: Error Tracking Explorer
+    url: logs/error_tracking/explorer
+    parent: log_management_error_tracking
+    weight: 601
+  - name: Track Browser and Mobile Errors
+    url: logs/error_tracking/browser_and_mobile
+    parent: log_management_error_tracking
+    weight: 602
+  - name: Track Backend Errors
+    url: logs/error_tracking/backend
+    parent: log_management_error_tracking
+    weight: 603
   - name: Guides
     url: logs/guide/
     parent: log_management
     identifier: log_guides
-    weight: 6
+    weight: 7
   - name: Data Security
     url: data_security/logs/
     parent: log_management
     identifier: log_security
-    weight: 7
+    weight: 8
   - name: Troubleshooting
     url: logs/troubleshooting
     parent: log_management
     identifier: log_troubleshooting
-    weight: 8
+    weight: 9
   - name: Observability Pipelines
     url: observability_pipelines/
     pre: pipelines
@@ -3410,34 +3437,44 @@ main:
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 401
+  - name: Create an API Integration
+    url: developers/integrations/api_integration/
+    parent: dev_tools_integrations
+    weight: 402
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 402
+    weight: 403
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 403
-  - name: OAuth for Data Integrations
-    url: developers/integrations/oauth_for_data_integrations
-    parent: dev_tools_integrations
     weight: 404
+  - name: OAuth for Integrations
+    url: developers/integrations/oauth_for_integrations
+    parent: dev_tools_integrations
+    weight: 405
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 405
+    weight: 406
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 406
+    weight: 407
   - name: Marketplace
     url: developers/marketplace/
     parent: dev_tools
-    identifier: marketplace
+    identifier: dev_tools_marketplace
     weight: 5
+  - name: Develop A Marketplace Offering
+    url: developers/marketplace/offering
+    parent: dev_tools_marketplace
+    identifier: dev_tools_marketplace_offering
+    weight: 501
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
+    identifier: dev_tools_datadog_apps
     weight: 6
   - name: Service Checks
     url: developers/service_checks/
@@ -4085,7 +4122,7 @@ api:
       operationids:
         - UpdateDashboard
       unstable: []
-      order: 6
+      order: 4
   - name: Get a dashboard
     url: '#get-a-dashboard'
     identifier: dashboards-get-a-dashboard
@@ -4097,7 +4134,7 @@ api:
       operationids:
         - GetDashboard
       unstable: []
-      order: 7
+      order: 2
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
     identifier: dashboards-delete-a-dashboard
@@ -4109,7 +4146,7 @@ api:
       operationids:
         - DeleteDashboard
       unstable: []
-      order: 3
+      order: 5
   - name: Send shared dashboard invitation email
     url: '#send-shared-dashboard-invitation-email'
     identifier: dashboards-send-shared-dashboard-invitation-email
@@ -4121,7 +4158,7 @@ api:
       operationids:
         - SendPublicDashboardInvitation
       unstable: []
-      order: 6
+      order: 11
   - name: Get all invitations for a shared dashboard
     url: '#get-all-invitations-for-a-shared-dashboard'
     identifier: dashboards-get-all-invitations-for-a-shared-dashboard
@@ -4133,7 +4170,7 @@ api:
       operationids:
         - GetPublicDashboardInvitations
       unstable: []
-      order: 5
+      order: 12
   - name: Revoke shared dashboard invitations
     url: '#revoke-shared-dashboard-invitations'
     identifier: dashboards-revoke-shared-dashboard-invitations
@@ -4145,7 +4182,7 @@ api:
       operationids:
         - DeletePublicDashboardInvitation
       unstable: []
-      order: 7
+      order: 14
   - name: Update a shared dashboard
     url: '#update-a-shared-dashboard'
     identifier: dashboards-update-a-shared-dashboard
@@ -4157,7 +4194,7 @@ api:
       operationids:
         - UpdatePublicDashboard
       unstable: []
-      order: 3
+      order: 10
   - name: Get a shared dashboard
     url: '#get-a-shared-dashboard'
     identifier: dashboards-get-a-shared-dashboard
@@ -4169,7 +4206,7 @@ api:
       operationids:
         - GetPublicDashboard
       unstable: []
-      order: 2
+      order: 9
   - name: Revoke a shared dashboard URL
     url: '#revoke-a-shared-dashboard-url'
     identifier: dashboards-revoke-a-shared-dashboard-url
@@ -4181,7 +4218,7 @@ api:
       operationids:
         - DeletePublicDashboard
       unstable: []
-      order: 4
+      order: 13
   - name: Create a shared dashboard
     url: '#create-a-shared-dashboard'
     identifier: dashboards-create-a-shared-dashboard
@@ -4193,7 +4230,7 @@ api:
       operationids:
         - CreatePublicDashboard
       unstable: []
-      order: 1
+      order: 8
   - name: Create a new dashboard
     url: '#create-a-new-dashboard'
     identifier: dashboards-create-a-new-dashboard
@@ -4217,7 +4254,7 @@ api:
       operationids:
         - RestoreDashboards
       unstable: []
-      order: 5
+      order: 7
   - name: Get all dashboards
     url: '#get-all-dashboards'
     identifier: dashboards-get-all-dashboards
@@ -4229,7 +4266,7 @@ api:
       operationids:
         - ListDashboards
       unstable: []
-      order: 2
+      order: 3
   - name: Delete dashboards
     url: '#delete-dashboards'
     identifier: dashboards-delete-dashboards
@@ -4241,7 +4278,7 @@ api:
       operationids:
         - DeleteDashboards
       unstable: []
-      order: 4
+      order: 6
   - name: Downtimes
     url: /api/latest/downtimes/
     identifier: downtimes

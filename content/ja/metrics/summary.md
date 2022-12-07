@@ -18,9 +18,14 @@ title: メトリクスの概要
 
 [メトリクスの概要ページ][1]には、過去 1 時間、1 日、または 1 週間の指定されたタイムフレームで Datadog に報告されたメトリクスのリストが表示されます。
 
-**Metric** または **Tag** 検索フィールドを使用して、名前またはタグでメトリクスを検索します。
+**Metric** または **Tag** 検索フィールドを使用して、メトリクス名またはタグでメトリクスを検索します。
 
-{{< img src="metrics/summary/tagexplorer2.mp4" alt="タグで絞り込み" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="タグ検索バーに NOT team:* が入力されたメトリクスサマリーページ" video=true style="width:75%;">}}
+
+タグフィルターは、ブーリアンやワイルドカードの構文に対応しており、以下を素早く識別することができます。
+* 特定のタグキーでタグ付けされたメトリクス。例: `team`: `team:*`
+* 特定のタグキーがないメトリクス。例: `team`: `NOT team:*`
+
 
 ## ファセットパネル
 

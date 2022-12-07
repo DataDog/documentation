@@ -26,3 +26,12 @@ package.json              @DataDog/corpweb @DataDog/documentation
 
 # Partners
 /content/en/partners/                                   @KateYoak @DataDog/documentation
+
+# Websites
+.github/workflows                                       @DataDog/corpweb
+.gitlab-ci.yml                                          @DataDog/corpweb
+Makefile                                                @DataDog/corpweb
+translate.yaml                                          @DataDog/corpweb
+.translate                                              @DataDog/corpweb
+docker-compose-docs.yml                                 @DataDog/corpweb
+.htmltest.yml                                           @DataDog/corpweb

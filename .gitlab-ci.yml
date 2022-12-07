@@ -33,6 +33,8 @@ before_script:
   - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
+  - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
+
 
 # set policy for the common case
 # yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
@@ -58,7 +60,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
   tags:
     - "runner:main"
   except:
@@ -285,6 +287,8 @@ index_algolia:
     name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
     entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
   tags: ["runner:main"]
+  before_script:
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
   stage: post-deploy
   environment: "live"
   timeout: 2h 30m

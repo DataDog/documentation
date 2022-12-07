@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
-  text: "Service Definition API"
+  text: "Registering Services with the Service Definition API"
 - link: "/tracing/service_catalog/guides/understanding-service-configuration"
   tag: "Guide"
   text: "Understanding Your Service Configuration"

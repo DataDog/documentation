@@ -20,6 +20,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Add security context to observability data with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/security-labs-ruleset-launch/"
+    tag: "Blog"
+    text: "Fix common cloud security risks with the Datadog Security Labs Ruleset"
 ---
 
 ## Overview
