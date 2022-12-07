@@ -266,7 +266,7 @@ Manually keep a trace:
 
 ```java
 import datadog.trace.api.DDTags;
-import datadog.trace.api.interceptor.MutableSpan;
+import io.opentracing.Span;
 import datadog.trace.api.Trace;
 import io.opentracing.util.GlobalTracer;
 
@@ -274,9 +274,9 @@ public class MyClass {
     @Trace
     public static void myMethod() {
         // grab the active span out of the traced method
-        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
+        Span span = GlobalTracer.get().activeSpan();
         // Always keep the trace
-        ddspan.setTag(DDTags.MANUAL_KEEP, true);
+        span.setTag(DDTags.MANUAL_KEEP, true);
         // method impl follows
     }
 }
@@ -286,7 +286,7 @@ Manually drop a trace:
 
 ```java
 import datadog.trace.api.DDTags;
-import datadog.trace.api.interceptor.MutableSpan;
+import io.opentracing.Span;
 import datadog.trace.api.Trace;
 import io.opentracing.util.GlobalTracer;
 
@@ -294,9 +294,9 @@ public class MyClass {
     @Trace
     public static void myMethod() {
         // grab the active span out of the traced method
-        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
+        Span span = GlobalTracer.get().activeSpan();
         // Always Drop the trace
-        ddspan.setTag(DDTags.MANUAL_DROP, true);
+        span.setTag(DDTags.MANUAL_DROP, true);
         // method impl follows
     }
 }
@@ -314,9 +314,9 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-    // Always Keep the Trace
+    # Always Keep the Trace
     span.set_tag(MANUAL_KEEP_KEY)
-    // method impl follows
+    # method impl follows
 ```
 
 Manually drop a trace:
@@ -328,9 +328,9 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-    //Always Drop the Trace
+    # Always Drop the Trace
     span.set_tag(MANUAL_DROP_KEY)
-    //method impl follows
+    # method impl follows
 ```
 
 {{< /programming-lang >}}
