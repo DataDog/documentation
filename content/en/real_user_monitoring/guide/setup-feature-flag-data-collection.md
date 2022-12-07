@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Feature Flag data in RUM
+title: Getting Started with Feature Flag Data in RUM
 kind: guide
 beta: true
 private: true
@@ -17,12 +17,12 @@ Feature Flag data collection in RUM is in private beta. To request access, conta
 {{< /beta-callout >}}
 
 ## Overview
-Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if your change is having an impact on your user experience or causing a negative impact in performance. 
+Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance. 
 
-By enriching your RUM data with feature flag data, you can be confident that your feature will successfully launch, and ensure it's not unintentionally causing a bug or performance regression. With this additional layer of insight, you can now correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
+By enriching your RUM data with feature flag data, you can be confident that your feature will successfully launch without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
 ## Setup
-Feature Flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
+Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
 You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of our integration partners. 
 
@@ -30,7 +30,7 @@ We currently support integrations with:
 - [LaunchDarkly][3]
 - [Split][4]
 
-### Custom Feature Flag Management
+### Custom feature flag management
 
 {{< tabs >}}
 {{% tab "npm" %}}
@@ -76,7 +76,7 @@ We currently support integrations with:
    </script>
    ```
 
-2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM
+2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```javascript
    datadogRum.addFeatureFlagEvaluation(key, value);
@@ -99,7 +99,7 @@ We currently support integrations with:
    </script>
    ```
 
-2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM
+2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```javascript
    datadogRum.addFeatureFlagEvaluation(key, value);
@@ -126,9 +126,9 @@ We currently support integrations with:
    });
    ```
 
-2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code shown below.
 
-   For more information about initializing LaunchDarkly's SDK you can check their documentation [here][5].
+   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][5].
 
    ```javascript
    const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -168,9 +168,9 @@ We currently support integrations with:
    </script>
    ```
 
-2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing LaunchDarkly's SDK you can check their documentation [here][5].
+   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][5].
 
    ```javascript
    const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -205,9 +205,9 @@ We currently support integrations with:
    </script>
    ```
 
-2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the following snippet of code
+2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
 
-   For more information about initializing LaunchDarkly's SDK you can check their documentation [here][5].
+   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][5].
 
    ```javascript
    const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -368,7 +368,7 @@ We currently support integrations with:
 {{< /tabs >}}
 
 
-## Analyze your Feature Flag Performance in RUM
+## Analyze your Feature Flag performance in RUM
 
 Feature Flags appear in the context of your RUM Sessions, Views, and Errors as a list. 
 
@@ -378,17 +378,17 @@ Feature Flags appear in the context of your RUM Sessions, Views, and Errors as a
 Search through all the data collected by RUM in the [RUM Explorer][7] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][8] and [monitors][9]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
 
 #### Sessions
-Filtering your Sessions with the `@feature_flags.{flag_name}` attribute, you will find all Sessions in the given time frame where your feature flag was evaluated.
+Filtering your **Sessions** with the `@feature_flags.{flag_name}` attribute, you will find all sessions in the given time frame where your feature flag was evaluated.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Search Sessions for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
 #### Views
-Filtering your Views with the `@feature_flags.{flag_name}` attribute, you will find the specific Views in the given time frame where your feature flag was evaluated.
+Filtering your **Views** with the `@feature_flags.{flag_name}` attribute, you will find the specific views in the given time frame where your feature flag was evaluated.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
 #### Errors
-Filtering your Errors with the `@feature_flags.{flag_name}` attribute, you will find all the Errors in the given time frame that occurred on the View where your feature flag was evaluated
+Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you will find all the errors in the given time frame that occurred on the View where your feature flag was evaluated
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
