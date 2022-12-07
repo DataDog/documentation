@@ -431,6 +431,20 @@ The following configuration values should generally not be modified, but may be 
 : Sets the time to wait (in seconds) before checking for new logs to send.<br>
 **Default**: `1`
 
+If you are using the `Microsoft.Extensions.Logging` integration, you can filter the logs sent to Datadog using the standard capabilities built-into `ILogger`. Use the key `"Datadog"` to identify the direct-submission provider, and set the minimum log levels for each namespace. For example, adding the following to your `appSettings.json` would prevent sending any logs with a level below `Warning` to Datadog. Introduced in the .NET tracer library v2.20.0.
+
+```json
+{
+  "Logging": {
+    "Datadog": {
+      "LogLevel": {
+        "Microsoft.AspNetCore": "Warning"
+      },
+    }
+  }
+}
+```
+
 ## Agentless logging with Serilog sink
 
 If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][19] to send logs directly to Datadog.

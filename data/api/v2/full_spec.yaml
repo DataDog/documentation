@@ -6949,6 +6949,10 @@ components:
           description: ID of the RUM application.
           example: abcd1234-0000-0000-abcd-1234abcd5678
           type: string
+        client_token:
+          description: Client token of the RUM application.
+          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          type: string
         created_at:
           description: Timestamp in ms of the creation date.
           example: 1659479836169
@@ -6959,9 +6963,12 @@ components:
           example: john.doe
           type: string
         hash:
-          description: Client token of the RUM application.
-          example: abcd1234efgh5678ijkl90abcd1234efgh0
+          description: Hash of the RUM application. Optional.
           type: string
+        is_active:
+          description: Indicates if the RUM application is active.
+          example: true
+          type: boolean
         name:
           description: Name of the RUM application.
           example: my_rum_application
@@ -6988,6 +6995,7 @@ components:
           type: string
       required:
       - application_id
+      - client_token
       - created_at
       - created_by_handle
       - name
@@ -7039,6 +7047,83 @@ components:
       type: string
       x-enum-varnames:
       - RUM_APPLICATION_CREATE
+    RUMApplicationList:
+      description: RUM application list.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RUMApplicationListAttributes'
+        type:
+          $ref: '#/components/schemas/RUMApplicationListType'
+      required:
+      - attributes
+      - type
+      type: object
+    RUMApplicationListAttributes:
+      description: RUM application list attributes.
+      properties:
+        application_id:
+          description: ID of the RUM application.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
+        created_at:
+          description: Timestamp in ms of the creation date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        created_by_handle:
+          description: Handle of the creator user.
+          example: john.doe
+          type: string
+        hash:
+          description: Hash of the RUM application. Optional.
+          type: string
+        is_active:
+          description: Indicates if the RUM application is active.
+          example: true
+          type: boolean
+        name:
+          description: Name of the RUM application.
+          example: my_rum_application
+          type: string
+        org_id:
+          description: Org ID of the RUM application.
+          example: 999
+          format: int32
+          maximum: 2147483647
+          type: integer
+        type:
+          description: Type of the RUM application. Supported values are `browser`,
+            `ios`, `android`, `react-native`, `flutter`.
+          example: browser
+          type: string
+        updated_at:
+          description: Timestamp in ms of the last update date.
+          example: 1659479836169
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: Handle of the updater user.
+          example: jane.doe
+          type: string
+      required:
+      - application_id
+      - created_at
+      - created_by_handle
+      - name
+      - org_id
+      - type
+      - updated_at
+      - updated_by_handle
+      type: object
+    RUMApplicationListType:
+      default: rum_application
+      description: RUM application list type.
+      enum:
+      - rum_application
+      example: rum_application
+      type: string
+      x-enum-varnames:
+      - RUM_APPLICATION
     RUMApplicationResponse:
       description: RUM application response.
       properties:
@@ -7105,7 +7190,7 @@ components:
         data:
           description: RUM applications array response.
           items:
-            $ref: '#/components/schemas/RUMApplication'
+            $ref: '#/components/schemas/RUMApplicationList'
           type: array
       type: object
     RUMBucketResponse:
